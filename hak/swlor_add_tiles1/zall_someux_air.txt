@@ -1,0 +1,254 @@
+Airships! by Some_ux
+http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=167
+
+
+   Airships!
+   some_ux@yahoo.com
+   April 19th, 2004
+
+   version 1.1
+
+   Tested with HotU  version 1.62 (with SOU)
+
+   First of all, I'd like to thank the folks at CODI and DLA. I could not
+   have made this hak without their help.
+
+   The idea of making airships was something that poped up in the
+   community IRC channels, and I decided that given my past experience
+   with ship models (the Caravels and Longships haks) this ought to be
+   fairly straight forward. Boy, was I in for a surprise.
+
+   The basic design did indeed take fairly little effort to make and was
+   done in about 10 hours or so. Slicing and Porting the the model a
+   couple of hours more, an extra week or so to do all the tileset
+   variations and maybe another day for the mini-map icons. I was sitting
+   comfortably and ready to start QA on the thing, I figured 'well,
+   shouldn't take more than a day or two'. By this time, I was fairly
+   familiar with the game engine's shadow casting quirky behavior (having
+   done the previous two tile haks). But I could not have seen what was
+   coming. For all my efforts, I could not make the night-time shadow
+   casting system to work properly. I must've wasted weeks on it, trying
+   hundreds of solutions, dozens of permutations for each, and still the
+   accursed thing wasn't right.
+
+   Why am I bothering you with this ? partly to blow off steam (the
+   regular non-gnome way) and maybe to issue a word of warning for
+   complacent folks out there. Modeling stuff for games can be very
+   frustrating.
+
+   A whole bunch of weeks later (and a little less hair in my scalp) I
+   came to the conclusion that I was right all along and that the problem
+   was probably a Shadow casting issue I had nothing to do with (or do
+   anything about for that matter) since it was most likely a game Engine
+   flaw.
+
+   What's then the moral of this rather tiresome story ? well, Eat more
+   turnips ! no wait, It's that you shouldn't give up. Although I may have
+   wasted weeks with this futile exercise I did learn one importat lesson:
+   life sucks !
+
+
+   Content
+
+   The Tile hak (airships.hak) includes 18 airship tile groups (16
+   models): Three for the rural tileset, Three for the city exterior
+   tileset, Two for the Forest tileset, Three for the Rural Winter
+   tileset, Two for the Desert tileset, Three for the Underdark tileset
+   and Two for the Frozen Wastes tileset. And Each is a 3x1 tile-group.
+
+
+   Installation
+
+
+   - Extract the airships.hak file into your "Hak" folder, inside your NWN
+   directory.
+
+
+   To add the airships into a new module you create, go to Edit > Module
+   Properties, then over to the Custom Content tab. Choose the "airships"
+   hak, and click Add.
+
+
+
+   Airship technical specifications
+
+
+   Size: big.
+
+   Weight: less than you would expect.
+
+   Powersource: unknown, or very unreliable gnome tinkering stuff.
+
+   Armor: wood.
+
+   Boarding technologies: a rope hanging down.
+
+   Flight operation: depends on the capability of your mage to control the
+   weather.
+
+   Range of operation: Till you get sick of turnips or until the ship
+   falls apart.
+
+
+
+   Tile group Notes
+
+
+   The Airship tilegroups include several "Animation Loops" that can be
+   enabled and disabled within the toolset.
+
+
+   The Floating Versions have the Following Animations:
+
+
+   Animation loop 1: Controls the propeller blades' animation. On - for
+   turning, off - for static.
+
+   Animation loop 2: Controls the Hind Steam Exhaust port. On - to make
+   the Exhaust appear, off - to shut down the iris and retract the exhaust
+   apparatus.
+
+   Animation loop 3: Controls the the Steam emitter at the Exhaust port.
+   On - to start the steam animation, off - to stop it. (notice, that if
+   you apply this without animation loop 2 being on, the exhaust apparatus
+   will be extracted to let the steam out, overriding animation loop 2)
+
+
+   The Docked Versions have the Following Animations:
+
+
+   Animation loop 1: Controls the Hind Steam Exhaust port. On - to make
+   the Exhaust appear, off - to shut down the iris and retract the exhaust
+   apparatus.
+
+
+   Both Docked and floating versions have day/night window animations.
+
+
+
+   Editing the tile Hak Pak
+
+
+   Due to the sheer number of variations, I will not explain how to reduce
+   the hak size for each possible permutation, Instead I will attempt to
+   summarize the necessary data in an easily readable format.
+
+   Following then, is a table summarization of each tile group and the
+   files associated with it, that you may need to reduce unneeded files
+   from the hak pak in order to cut down on "hak pak bloat". You can do
+   this by removing the appropriate .mdl .wok and .tga , files listed for
+   each tile-group. (notice that the appropriate .set file entries will
+   also need to be removed, as well as the respective .itp entries)
+
+
+   Tile group model Model Files
+
+    (.mdl & .wok)
+   Minimap Files
+
+    (.tga)
+   .set entry
+   Rural floating above trees smx03_a0x_01 smx3_0x_01 ttr01.set -> Group
+   67, tiles 283 to 285
+   Rural floating above water smx03_a0x_02 smx3_0x_2a ttr01.set -> Group
+   68, tiles 286 to 286
+   Rural docked smx03_a0x_11 smx3_0x_11 ttr01.set -> Group 69, tiles 289
+   to 291
+   City Exterior floating above buildings smx03_a0x_03 smx3_0x_03
+   tcn01.set -> Group 84, tiles 320 to 322
+   City Exterior floating above water smx03_a0x_04 smx3_0x_04 tcn01.set ->
+   Group 85, tiles 323 to 325
+   City Exterior docked smx03_a0x_13 smx3_0x_13 tcn01.set -> Group 86,
+   tiles 326 to 328
+   Forest floating above Pit smx03_a0x_05 smx3_0x_5a ttf01.set -> Group
+   28, tiles 168 to 170
+   Forest docked smx03_a0x_15 smx3_0x_15 ttf01.set -> Group 29, tiles 171
+   to 173
+   Rural Winter floating above trees smx03_a0x_06 smx3_0x_06 tts01.set ->
+   Group 75, tiles 291 to 293
+   Rural Winter floating above water smx03_a0x_02 smx3_0x_2b ttr01.set ->
+   Group 74, tiles 294 to 296
+   Rural Winter docked smx03_a0x_17 smx3_0x_17 tts01.set -> Group 76,
+   tiles 297 to 299
+   Desert floating above chasm smx03_a0x_05 smx3_0x_5b ttd01.set -> Group
+   39, tiles 203 to 205
+   Desert docked smx03_a0x_19 smx3_0x_19 ttd01.set -> Group 40, tiles 206
+   to 208
+   Underdark floating above water smx03_a0x_07 smx3_0x_07 ttu01.set ->
+   Group 34, tiles 303 to 305
+   Underdark floating above chasm smx03_a0x_08 smx3_0x_08 ttu01.set ->
+   Group 35, tiles 306 to 308
+   Underdark docked smx03_a0x_21 smx3_0x_21 ttu01.set -> Group 36, tiles
+   309 to 311
+   Frozen Wastes floating above pit smx03_a0x_09 smx3_0x_09 tti01.set ->
+   Group 16, tiles 74 to 76
+   Frozen Wastes docked smx03_a0x_23 smx3_0x_23 tti01.set -> Group 17,
+   tiles 77 to 79
+
+
+
+
+   Known Issues
+     * Avoid large crowds onboard, this is likely to produce severe
+       path-finding problems. Also the ramp at the back side of the ship
+       will require manual maneuvering (if you wish to get behind it).
+     * There are some shadow casting issues mostly during nighttime,
+       especially if you walk around with a torch or a light spell. There
+       is a way around it, if you turn area lighting to Interior dark you
+       can simulate nighttime dynamic shadow casting (aka moon-shadows),
+       This however will not turn nighttime animations on (the window will
+       not switch to nighttime setting). Unfortunately, there is little to
+       be done about it, (unless BW update this particular bug).
+     * Clipping may occur when moving close to the ropes, side railing,
+       ramp or deck-cabin. Fixing this issue would have hampered
+       path-finding even more, so I had to compromise.
+     * In General, this is a relativly high polygon model, so you should
+       probably not use a 32x32 city exterrior area with 100 airships :)
+
+
+   Credits:
+
+   Here is a list of those who had helped, but by no means a complete
+   list. I apologize if someone was left out.
+
+   ·        Batinthehat
+   ·        ThriKreen
+   ·        Dradjeel
+   ·        Soopaman
+   ·        Jupp
+   ·        Velmar
+   ·        Sneakster
+   ·        Steel_Wind
+   ·        gribo
+   ·        Necronada
+   ·        Zedium
+
+   I would also like to thank again all the members of CODI and DLA for
+   their help, and of course, a special thanks for Bioware for creating
+   the game.
+
+
+   Shameless Self-Promotion
+
+   Check out some of my other NWN custom content on the vault.
+
+   [1]Medieval Non-gunpowder siege artillery - Want to pound your enemy's
+   defenses to dust ? use siege weapons !
+
+   [2]Longships! - Need more ships ?
+
+   [3]Caravels! - Still need more ships ?
+   _________________
+
+   And lastly, if you are to distribute any of the content included in
+   this package, in any form, modified or not, I ask that you include
+   documentation that clearly expresses credit to me where such credit is
+   due.
+
+   Thanks.
+
+References
+
+   1. http://nwvault.ign.com/Files/hakpacks/data/1063310329498.shtml
+   2. http://nwvault.ign.com/Files/hakpacks/data/1068304756466.shtml
+   3. http://nwvault.ign.com/Files/hakpacks/data/1073238553700.shtml

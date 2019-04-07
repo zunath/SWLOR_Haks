@@ -1,0 +1,26 @@
+# Rewritten by CleanModels 3 Version 3.2.2.1 Wed Nov 04 13:11:54 2009
+#MAXWALKMESH  ASCII
+beginwalkmeshgeom ztd01_a11_16
+node aabb plane03_16
+  parent ztd01_a11_16
+  orientation 0 0 0 0
+  wirecolor 0.8789060 0.8789060 0.8789060
+  ambient 0.8750000 0.5585940 0.3398440
+  diffuse 0.8750000 0.5585940 0.3398440
+  specular 0 0 0
+  shininess 1
+  bitmap NULL
+  position 0 0 0
+  verts 4
+    -5 -5 -6
+    5 -5 -6
+    -5 5 -6
+    5 5 -6
+  faces 2
+    2 0 3 1 0 0 0 16
+    1 3 0 1 0 0 0 16
+  aabb     -5 -5 -6 5 5 -6 -1
+    -5 -5 -6 5 5 -6 0
+    -5 -5 -6 5 5 -6 1
+endnode
+endwalkmeshgeom ztd01_a11_16
