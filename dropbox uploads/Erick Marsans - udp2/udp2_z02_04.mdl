@@ -1,0 +1,416 @@
+#Exported from 3ds max by MDL Plug-in Suite 1.0b
+#http://www.bricksbuilder.com/nwn/utils/
+#MAXMODEL ASCII
+# model: udp2_z02_04
+filedependancy udp2 interior final base tiles a - 00.max
+newmodel udp2_z02_04
+setsupermodel udp2_z02_04 NULL
+classification Tile
+setanimationscale 1.0
+#MAXGEOM  ASCII
+beginmodelgeom udp2_z02_04
+node dummy udp2_z02_04
+  parent NULL
+endnode
+node trimesh crown moulding781
+  parent udp2_z02_04
+  position 0 -4.6652 3.85
+  orientation 1 0 0 -1.5708
+  wirecolor 0.878906 0.878906 0.878906
+  ambient 0.588 0.588 0.588
+  diffuse 0.588 0.588 0.588
+  specular 0 0 0
+  shininess 10
+  bitmap udp2_w_vent
+  render 1
+  Shadow 0
+  beaming 0
+  transparencyhint 0
+  tilefade 0
+  rotatetexture 0
+  verts 6
+    5 0.15 -0.134805
+    -5 0.15 -0.134805
+    5 -0.15 0.135195
+    -5 -0.15 0.135195
+    5 0.15 0.135196
+    -5 0.15 0.135195
+  faces 4
+    0 1 5  0  6 1 7  0
+    5 4 0  0  8 9 0  0
+    3 2 4  0  10 2 11  5
+    4 5 3  0  4 5 3  5
+  tverts 12
+    58 -2.03999 1.46567
+    56 -2.03999 1.46567
+    -56 1.54067 -2.09399
+    -54 1.54067 -2.09399
+    -56 1.46567 -2.09399
+    -54 1.46567 -2.09399
+    58 -2.03999 1.46567
+    56 -2.09399 1.46567
+    56 -2.09399 1.46567
+    58 -2.09399 1.46567
+    -54 1.54067 -2.09399
+    -56 1.46567 -2.09399
+endnode
+node trimesh ceiling274
+  parent udp2_z02_04
+  position 0 0 4
+  orientation 0 0 0 0
+  wirecolor 0.890625 0.890625 0.890625
+  ambient 0.588 0.588 0.588
+  diffuse 0.588 0.588 0.588
+  specular 0 0 0
+  shininess 10
+  bitmap udp2_msc_clg
+  render 1
+  Shadow 0
+  beaming 0
+  transparencyhint 0
+  tilefade 0
+  rotatetexture 1
+  verts 25
+    5 -5 0
+    2.5 -5 0
+    0 -5 0
+    -2.5 -5 0
+    -5 -5 0
+    5 -2.5 0
+    2.5 -2.5 0
+    0 -2.5 0
+    -2.5 -2.5 0
+    -5 -2.5 0
+    5 0 0
+    2.5 0 0
+    0 0 0
+    -2.5 0 0
+    -5 0 0
+    5 2.5 0
+    2.5 2.5 0
+    0 2.5 0
+    -2.5 2.5 0
+    -5 2.5 0
+    5 5 0
+    2.5 5 0
+    0 5 0
+    -2.5 5 0
+    -5 5 0
+  faces 32
+    5 0 6  1  5 0 6  0
+    1 6 0  1  1 6 0  0
+    6 1 7  1  6 1 7  0
+    2 7 1  1  2 7 1  0
+    7 2 8  1  7 2 8  0
+    3 8 2  1  3 8 2  0
+    8 3 9  1  8 3 9  0
+    4 9 3  1  4 9 3  0
+    10 5 11  1  10 5 11  0
+    6 11 5  1  6 11 5  0
+    11 6 12  1  11 6 12  0
+    7 12 6  1  7 12 6  0
+    12 7 13  1  12 7 13  0
+    8 13 7  1  8 13 7  0
+    13 8 14  1  13 8 14  0
+    9 14 8  1  9 14 8  0
+    15 10 16  1  15 10 16  0
+    11 16 10  1  11 16 10  0
+    16 11 17  1  16 11 17  0
+    12 17 11  1  12 17 11  0
+    17 12 18  1  17 12 18  0
+    13 18 12  1  13 18 12  0
+    18 13 19  1  18 13 19  0
+    14 19 13  1  14 19 13  0
+    20 15 21  1  20 15 21  0
+    16 21 15  1  16 21 15  0
+    21 16 22  1  21 16 22  0
+    17 22 16  1  17 22 16  0
+    22 17 23  1  22 17 23  0
+    18 23 17  1  18 23 17  0
+    23 18 24  1  23 18 24  0
+    19 24 18  1  19 24 18  0
+  tverts 25
+    0.000999033 0.00099951 0.5
+    0.500499 0.000999391 0.5
+    1 0.000999272 0.5
+    1.4995 0.000999153 0.5
+    1.999 0.000999033 0.5
+    0.000999153 0.5005 0.5
+    0.500499 0.5005 0.5
+    1 0.5005 0.5
+    1.4995 0.500499 0.5
+    1.999 0.500499 0.5
+    0.000999272 1 0.5
+    0.5005 1 0.5
+    1 1 0.5
+    1.4995 1 0.5
+    1.999 1 0.5
+    0.000999391 1.4995 0.5
+    0.5005 1.4995 0.5
+    1 1.4995 0.5
+    1.4995 1.4995 0.5
+    1.999 1.4995 0.5
+    0.00099951 1.999 0.5
+    0.5005 1.999 0.5
+    1 1.999 0.5
+    1.4995 1.999 0.5
+    1.999 1.999 0.5
+endnode
+node trimesh wall568
+  parent udp2_z02_04
+  position 0 -4.7652 4.01
+  orientation 0 0 0 0
+  wirecolor 0.898438 0.898438 0.898438
+  ambient 0 0 0
+  diffuse 0 0 0
+  specular 0 0 0
+  shininess 10
+  bitmap gg_black
+  verts 6
+    5 0.235195 -0.0100003
+    -5 0.235196 -0.0100003
+    -5 -0.234804 0.00999969
+    5 -0.234805 0.00999969
+    5 0.235195 0.00999969
+    -5 0.235196 0.00999969
+  faces 4
+    0 1 5  2  0 1 5  2
+    0 5 4  2  0 5 4  2
+    4 5 2  16  4 5 2  0
+    4 2 3  16  4 2 3  0
+  tverts 6
+    -35 4.95301 0.996491
+    -34 4.95301 0.996491
+    -34 5.00001 0.9995
+    -35 5.00001 0.9995
+    -35 4.95301 0.9995
+    -34 4.95301 0.9995
+endnode
+node trimesh wall body621
+  parent udp2_z02_04
+  position 0 -4.8 2
+  orientation 1 0 0 -1.5708
+  wirecolor 0.0273438 0.0273438 0.0273438
+  ambient 0.588 0.588 0.588
+  diffuse 0.588 0.588 0.588
+  specular 0 0 0
+  shininess 10
+  bitmap udp1-wd-grd1
+  verts 4
+    5 2 0
+    -5 2 0
+    5 -2 0
+    -5 -2 0
+  faces 2
+    2 0 3  1  2 4 5  0
+    1 3 0  1  1 3 0  0
+  tverts 6
+    -26 0.3 0.980006
+    -25 0.3 0.980006
+    -26 0.7 0.980006
+    -25 0.7 0.980006
+    -26 0.3 0.980006
+    -25 0.7 0.980006
+endnode
+node trimesh floor383
+  parent udp2_z02_04
+  position 0 0 0
+  orientation 0 0 0 0
+  wirecolor 0.570313 0.570313 0.570313
+  ambient 0.588 0.588 0.588
+  diffuse 0.588 0.588 0.588
+  specular 0 0 0
+  shininess 10
+  bitmap udp2_flr_cpt1
+  render 1
+  Shadow 0
+  beaming 0
+  transparencyhint 0
+  tilefade 0
+  rotatetexture 1
+  verts 25
+    5 5 0
+    2.5 5 0
+    0 5 0
+    -2.5 5 0
+    -5 5 0
+    5 2.5 0
+    2.5 2.5 0
+    0 2.5 0
+    -2.5 2.5 0
+    -5 2.5 0
+    5 0 0
+    2.5 0 0
+    0 0 0
+    -2.5 0 0
+    -5 0 0
+    5 -2.5 0
+    2.5 -2.5 0
+    0 -2.5 0
+    -2.5 -2.5 0
+    -5 -2.5 0
+    5 -5 0
+    2.5 -5 0
+    0 -5 0
+    -2.5 -5 0
+    -5 -5 0
+  faces 32
+    5 0 6  1  5 0 6  0
+    1 6 0  1  1 6 0  0
+    6 1 7  1  6 1 7  0
+    2 7 1  1  2 7 1  0
+    7 2 8  1  7 2 8  0
+    3 8 2  1  3 8 2  0
+    8 3 9  1  8 3 9  0
+    4 9 3  1  4 9 3  0
+    10 5 11  1  10 5 11  0
+    6 11 5  1  6 11 5  0
+    11 6 12  1  11 6 12  0
+    7 12 6  1  7 12 6  0
+    12 7 13  1  12 7 13  0
+    8 13 7  1  8 13 7  0
+    13 8 14  1  13 8 14  0
+    9 14 8  1  9 14 8  0
+    15 10 16  1  15 10 16  0
+    11 16 10  1  11 16 10  0
+    16 11 17  1  16 11 17  0
+    12 17 11  1  12 17 11  0
+    17 12 18  1  17 12 18  0
+    13 18 12  1  13 18 12  0
+    18 13 19  1  18 13 19  0
+    14 19 13  1  14 19 13  0
+    20 15 21  1  20 15 21  0
+    16 21 15  1  16 21 15  0
+    21 16 22  1  21 16 22  0
+    17 22 16  1  17 22 16  0
+    22 17 23  1  22 17 23  0
+    18 23 17  1  18 23 17  0
+    23 18 24  1  23 18 24  0
+    19 24 18  1  19 24 18  0
+  tverts 25
+    0 0 0.5
+    0.5 0 0.5
+    1 0 0.5
+    1.5 0 0.5
+    2 0 0.5
+    0 0.5 0.5
+    0.5 0.5 0.5
+    1 0.5 0.5
+    1.5 0.5 0.5
+    2 0.5 0.5
+    0 1 0.5
+    0.5 1 0.5
+    1 1 0.5
+    1.5 1 0.5
+    2 1 0.5
+    0 1.5 0.5
+    0.5 1.5 0.5
+    1 1.5 0.5
+    1.5 1.5 0.5
+    2 1.5 0.5
+    0 2 0.5
+    0.5 2 0.5
+    1 2 0.5
+    1.5 2 0.5
+    2 2 0.5
+endnode
+node trimesh wall base1472
+  parent udp2_z02_04
+  position 0 -4.73612 0.122227
+  orientation 1 0 0 -0.785398
+  wirecolor 0.878906 0.878906 0.878906
+  ambient 0.588 0.588 0.588
+  diffuse 0.588 0.588 0.588
+  specular 0 0 0
+  shininess 10
+  bitmap udp2_w_sid2
+  render 1
+  Shadow 0
+  beaming 0
+  transparencyhint 0
+  tilefade 0
+  rotatetexture 0
+  verts 6
+    5 0.119041 -0.0538131
+    -5 0.119042 -0.0538132
+    5 -0.114304 0.0239686
+    -5 -0.114303 0.0239685
+    5 -0.0860199 0.0522529
+    -5 -0.0860187 0.0522528
+  faces 4
+    0 1 5  0  6 1 7  0
+    5 4 0  0  8 9 0  0
+    3 2 4  0  10 2 11  5
+    4 5 3  0  4 5 3  5
+  tverts 12
+    -1.16667 0.427531 0.5031
+    2.16667 0.427531 0.5031
+    2.16667 0.530606 0.505037
+    2.16667 0.505036 0.530606
+    -1.16667 0.494812 0.540831
+    2.16667 0.494811 0.540831
+    -1.16667 0.427531 0.5031
+    2.16667 0.494811 0.540831
+    2.16667 0.494811 0.540831
+    -1.16667 0.494812 0.540831
+    -1.16667 0.530606 0.505036
+    2.16667 0.540831 0.494812
+endnode
+endmodelgeom udp2_z02_04
+
+#MAXANIM ASCII
+newanim animloop01 udp2_z02_04
+  length 0.0333333
+  transtime 0
+  animroot udp2_z02_04
+node dummy udp2_z02_04
+  parent NULL
+endnode
+node trimesh crown moulding781
+  parent udp2_z02_04
+endnode
+node trimesh ceiling274
+  parent udp2_z02_04
+endnode
+node trimesh wall568
+  parent udp2_z02_04
+endnode
+node trimesh wall body621
+  parent udp2_z02_04
+endnode
+node trimesh floor383
+  parent udp2_z02_04
+endnode
+node trimesh wall base1472
+  parent udp2_z02_04
+endnode
+doneanim animloop01 udp2_z02_04
+
+#MAXANIM ASCII
+newanim tiledefault udp2_z02_04
+  length 0
+  transtime 0
+  animroot udp2_z02_04
+node dummy udp2_z02_04
+  parent NULL
+endnode
+node trimesh crown moulding781
+  parent udp2_z02_04
+endnode
+node trimesh ceiling274
+  parent udp2_z02_04
+endnode
+node trimesh wall568
+  parent udp2_z02_04
+endnode
+node trimesh wall body621
+  parent udp2_z02_04
+endnode
+node trimesh floor383
+  parent udp2_z02_04
+endnode
+node trimesh wall base1472
+  parent udp2_z02_04
+endnode
+doneanim tiledefault udp2_z02_04
+donemodel udp2_z02_04
