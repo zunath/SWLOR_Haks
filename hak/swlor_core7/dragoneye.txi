@@ -1,0 +1,13 @@
+# Specify an environment map for static geometry.
+# Dynamic geometry uses the environment map provided on
+# the model.
+#
+# Default is no environment map
+
+envmaptexture dlag__ref01
+
+downsamplemin 0
+downsamplemax 2
+
+alphamean 0.5
+

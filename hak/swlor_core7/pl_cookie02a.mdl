@@ -1,0 +1,122 @@
+# Exported from blender at Tuesday, 2015-12-15 18:26
+#
+filedependancy cookie.blend
+newmodel pl_cookie02a
+setsupermodel pl_cookie02a NULL
+classification CHARACTER
+setanimationscale 1.0
+beginmodelgeom pl_cookie02a
+node dummy pl_cookie02a
+  parent NULL
+endnode
+node trimesh cookie02a_1
+  parent pl_cookie02a
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 1.0 1.0 1.0
+  alpha 1.0
+  ambient 1.0 1.0 1.0
+  diffuse 0.8 0.8 0.8
+  specular 0.5 0.5 0.5
+  shininess 1
+  bitmap pl_cookie02
+  scale 1.0
+  render 1
+  shadow 0
+  transparencyhint 0
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0
+  verts 15
+    0.0 0.0 0.01
+    0.0 0.05 -0.0
+    0.0 0.0393 0.007
+    0.0391 0.0312 -0.0
+    0.0307 0.0245 0.007
+    0.0487 -0.0111 -0.0
+    0.0383 -0.0087 0.007
+    0.0217 -0.045 -0.0
+    0.017 -0.0354 0.007
+    -0.0217 -0.045 -0.0
+    -0.017 -0.0354 0.007
+    -0.0487 -0.0111 -0.0
+    -0.0383 -0.0087 0.007
+    -0.0391 0.0312 -0.0
+    -0.0307 0.0245 0.007
+  faces 26
+    0 4 2  1  0 1 2  0
+    1 2 4  1  3 2 1  0
+    4 3 1  1  1 4 3  0
+    5 9 11  1  5 6 7  0
+    0 6 4  1  0 8 1  0
+    3 4 6  1  4 1 8  0
+    6 5 3  1  8 5 4  0
+    0 8 6  1  0 9 8  0
+    5 6 8  1  5 8 9  0
+    8 7 5  1  9 10 5  0
+    7 9 5  1  10 6 5  0
+    0 10 8  1  0 11 9  0
+    7 8 10  1  10 9 11  0
+    10 9 7  1  11 6 10  0
+    5 11 13  1  5 7 12  0
+    0 12 10  1  0 13 11  0
+    9 10 12  1  6 11 13  0
+    12 11 9  1  13 7 6  0
+    5 13 3  1  5 12 4  0
+    0 14 12  1  0 14 13  0
+    11 12 14  1  7 13 14  0
+    14 13 11  1  14 12 7  0
+    3 13 1  1  4 12 3  0
+    0 2 14  1  0 2 14  0
+    13 14 2  1  12 14 2  0
+    2 1 13  1  2 3 12  0
+  tverts 15
+    0.4921 0.4887 0
+    0.7963 0.7313 0
+    0.4921 0.8778 0
+    0.4921 0.9841 0
+    0.8794 0.7976 0
+    0.975 0.3785 0
+    0.2771 0.0424 0
+    0.0091 0.3785 0
+    0.8714 0.4021 0
+    0.6609 0.1382 0
+    0.707 0.0424 0
+    0.3233 0.1382 0
+    0.1048 0.7976 0
+    0.1128 0.4021 0
+    0.1879 0.7313 0
+endnode
+node dummy cookie02a_ground
+  parent pl_cookie02a
+  position 0.002 0.002 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 1.0 1.0 1.0
+endnode
+node dummy cookie02a_hand
+  parent pl_cookie02a
+  position 0.0 -0.1 0.1
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 1.0 1.0 1.0
+endnode
+node dummy cookie02a_head
+  parent pl_cookie02a
+  position 0.0 0.0 0.15
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 1.0 1.0 1.0
+endnode
+node dummy cookie02a_head_hit
+  parent pl_cookie02a
+  position 0.0 0.0 0.01
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 1.0 1.0 1.0
+endnode
+node dummy cookie02a_impact
+  parent pl_cookie02a
+  position 0.0 0.0 0.007
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 1.0 1.0 1.0
+endnode
+endmodelgeom pl_cookie02a
+
+donemodel pl_cookie02a
