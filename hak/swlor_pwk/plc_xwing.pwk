@@ -1,0 +1,54 @@
+# Exported from NWmax 0.7 at 4/14/2006 11:37:41 PM
+# mdl file
+#
+#NWmax MODEL ASCII
+# model: plc_xwing_pwk
+filedependancy Unknown
+newmodel plc_xwing_pwk
+setsupermodel plc_xwing_pwk NULL
+classification Character
+setanimationscale 12.0
+#NWmax GEOM  ASCII
+beginmodelgeom plc_xwing_pwk
+node dummy plc_xwing_pwk
+  parent NULL
+endnode
+node trimesh Plane01
+  parent plc_xwing_pwk
+  position 0.0828377 -1.10851 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.109804 0.109804 0.694118 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 0
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center 17.3107 0.0 0.0 
+  bitmap NULL
+  verts 9
+    -3.89393 -3.29295 0.0
+    0.0 -4.03802 0.0
+    4.24015 -3.24693 0.0
+    -1.1329 -2.07081 0.0
+    0.0 0.0 0.0
+    0.972919 -2.0478 0.0
+    -0.626705 0.531859 0.0
+    0.0 4.03802 0.0
+    0.627789 0.577876 0.0
+  faces 8
+    3 0 4  1  0 0 0  1
+    1 4 0  1  0 0 0  1
+    4 1 5  1  0 0 0  1
+    2 5 1  1  0 0 0  1
+    6 3 7  1  0 0 0  1
+    4 7 3  1  0 0 0  1
+    7 4 8  1  0 0 0  1
+    5 8 4  1  0 0 0  1
+endnode
+endmodelgeom plc_xwing_pwk
+donemodel plc_xwing_pwk

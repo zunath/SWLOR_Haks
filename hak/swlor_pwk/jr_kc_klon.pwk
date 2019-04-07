@@ -1,0 +1,45 @@
+# Exported from NWmax 0.5-beta at 2004-03-10 15:35:51
+# pwk file
+#
+#NWmaxPWKMESH  ASCII
+node trimesh Plane01
+  parent kc_klon_pwk
+  position 0.0109949 0.000199785 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 1.0 1.0 1.0 
+  multimaterial 20
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+  ambient 0.0 0.0 0.0 
+  diffuse 0.6 0.34 0.16 
+  specular 0.0 0.0 0.0 
+  shininess 11.0
+  selfillumcolor 0.0 0.0 0.0 
+    bitmap NULL
+    verts 4
+     -0.255183 -0.243384 0.0
+     0.231969 -0.243384 0.0
+     -0.255326 0.240951 0.0
+     0.231087 0.240951 0.0
+    faces 2
+     2 0 3  1  0 0 0  1
+     1 3 0  1  0 0 0  1
+endnode

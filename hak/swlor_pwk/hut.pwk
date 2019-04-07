@@ -1,0 +1,30 @@
+#Exported from 3ds max by MDL Plug-in Suite 1.0b
+#http://www.bricksbuilder.com/nwn/utils/
+#MAXMODEL ASCII
+# model: hut
+filedependancy Unknown
+node trimesh PLC_X07_wg
+  parent hut_pwk
+  position 0.00544922 0.211753 0
+  orientation 0 0 0 0
+  wirecolor 0.347656 0.347656 0.347656
+  ambient 0 0 0
+  diffuse 0 0 0
+  specular 0 0 0
+  shininess 0
+  bitmap NULL
+  verts 4
+    -2.75159 -3.33179 0
+    2.48268 -3.38498 0
+    -2.84765 1.19659 0
+    2.46101 1.16394 0
+  faces 2
+    2 0 3  1  0 0 0  7
+    1 3 0  1  0 0 0  7
+endnode
+node dummy X07_pwk_use01
+  parent hut_pwk
+  position 0.809024 1.61692 0
+  orientation 0 0 -1 -3.14159
+  wirecolor 0.347656 0.347656 0.347656
+endnode

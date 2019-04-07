@@ -1,0 +1,94 @@
+# Exported from NWmax 0.7 at 9/4/2005 11:49:05
+# mdl file
+#
+#NWmax MODEL ASCII
+# model: p_sentrygun2a
+filedependancy Unknown
+newmodel p_sentrygun2a
+setsupermodel p_sentrygun2a NULL
+classification Character
+setanimationscale 0.05
+#NWmax GEOM  ASCII
+beginmodelgeom p_sentrygun2a
+node dummy p_sentrygun2a
+  parent NULL
+endnode
+node dummy rootdummy
+  parent p_sentrygun2a
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.894118 0.839216 0.6 
+endnode
+node dummy handconjure
+  parent p_sentrygun2a
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.839216 0.898039 0.65098 
+endnode
+node dummy headconjure
+  parent p_sentrygun2a
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.839216 0.898039 0.65098 
+endnode
+node trimesh Cylinder01
+  parent p_sentrygun2a
+  position 0.0294485 0.121091 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.423529 0.0313726 0.533333 
+  bitmap NULL
+  verts 18
+    0.0 0.0 0.0
+    0.232789 -0.787221 0.0
+    0.511505 -0.00922409 0.0
+    0.77289 1.05037 0.0
+    -0.771956 1.04752 0.0
+    -0.579191 0.0 0.0
+    -0.223776 -0.771956 0.0
+    -0.205848 -1.86601 0.0
+    0.197876 -1.87318 0.0
+    0.232789 -0.787221 0.352187
+    0.511505 -0.00922409 0.352187
+    0.77289 1.05037 0.352187
+    -0.771956 1.04752 0.352187
+    -0.579191 0.0 0.352187
+    -0.223776 -0.771956 0.352187
+    -0.205848 -1.86601 0.352187
+    0.197876 -1.87318 0.352187
+    0.0 0.0 0.352187
+  faces 32
+    0 2 1  1  0 0 0  2
+    0 3 2  1  0 0 0  2
+    0 4 3  1  0 0 0  2
+    0 5 4  1  0 0 0  2
+    0 6 5  1  0 0 0  2
+    0 7 6  1  0 0 0  2
+    0 8 7  1  0 0 0  2
+    0 1 8  1  0 0 0  2
+    1 10 9  8  0 0 0  3
+    1 2 10  8  0 0 0  3
+    2 11 10  8  0 0 0  3
+    2 3 11  8  0 0 0  3
+    3 12 11  8  0 0 0  3
+    3 4 12  8  0 0 0  3
+    4 13 12  8  0 0 0  3
+    4 5 13  8  0 0 0  3
+    5 14 13  8  0 0 0  3
+    5 6 14  8  0 0 0  3
+    6 15 14  8  0 0 0  3
+    6 7 15  8  0 0 0  3
+    7 16 15  8  0 0 0  3
+    7 8 16  8  0 0 0  3
+    8 9 16  8  0 0 0  3
+    8 1 9  8  0 0 0  3
+    17 9 10  1  0 0 0  1
+    17 10 11  1  0 0 0  1
+    17 11 12  1  0 0 0  1
+    17 12 13  1  0 0 0  1
+    17 13 14  1  0 0 0  1
+    17 14 15  1  0 0 0  1
+    17 15 16  1  0 0 0  1
+    17 16 9  1  0 0 0  1
+endnode
+endmodelgeom p_sentrygun2a
+donemodel p_sentrygun2a

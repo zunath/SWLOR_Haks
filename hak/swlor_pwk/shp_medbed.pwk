@@ -1,0 +1,40 @@
+# Exported from NWmax 0.8 b60 at 8/11/2006 11:54:12 PM
+# pwk file
+#
+#NWmax PWKMESH  ASCII
+node dummy H10_pwk_use01
+  parent shp_medbed_pwk
+  position 0.955243 -0.0630252 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.898039 0.603922 0.843137 
+endnode
+node dummy H10_pwk_use02
+  parent shp_medbed_pwk
+  position -0.966201 -0.0630252 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.898039 0.603922 0.843137 
+endnode
+node trimesh NoWalk
+  parent shp_medbed_pwk
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.333333 0.109804 0.694118 
+  bitmap NULL
+  verts 4
+    -0.5 -1.21 0.0
+    0.5 -1.21 0.0
+    -0.5 1.21 0.0
+    0.5 1.21 0.0
+  faces 2
+    2 0 3  1  6 4 7  7
+    1 3 0  1  5 7 4  7
+  tverts 8
+    0.0 0.0 0
+    1.0 0.0 0
+    0.0 0.0 0
+    1.0 0.0 0
+    0.0 0.0 0
+    1.0 0.0 0
+    0.0 1.0 0
+    1.0 1.0 0
+endnode

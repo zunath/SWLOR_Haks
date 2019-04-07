@@ -1,0 +1,67 @@
+#MAXDOOR ASCII
+# model: purp_bar_pwk
+filedependancy PX2_placeables01.max
+node dummy E03_pwk_use01 
+  parent purp_bar
+  position -0.122711 -1.1445 0.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.54902 0.345098 0.882353  
+endnode
+node trimesh PX2_E03_wg 
+  parent purp_bar_pwk
+  position -0.231744 0.226964 0.0
+  orientation  0.0 0.0 -1.0  -1.5708
+  wirecolor 0.52549 0.431373 0.0313726  
+  multimaterial 18 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+    bitmap NULL
+    verts 12
+     -0.607359 -2.34269 0.0
+     0.231503 -2.34269 0.0
+     -0.607359 1.90669 0.0
+     0.231503 1.90669 0.0
+     -0.607359 -2.28816 1.09625
+     0.231503 -2.28816 1.09625
+     -0.607359 1.86283 1.09625
+     0.231503 1.86283 1.09625
+     -0.607359 1.86283 0.0
+     -0.607359 -2.28816 0.0
+     0.231503 1.86283 0.0
+     0.231503 -2.28816 0.0
+    faces 12
+     6 4 7  1  0 0 0  7
+     5 7 4  1  0 0 0  7
+     2 0 4  0  0 0 0  7
+     4 6 2  0  0 0 0  7
+     3 2 6  0  0 0 0  7
+     6 7 3  0  0 0 0  7
+     1 3 7  0  0 0 0  7
+     7 5 1  0  0 0 0  7
+     0 1 5  0  0 0 0  7
+     5 4 0  0  0 0 0  7
+     8 9 10  1  0 0 0  7
+     11 10 9  1  0 0 0  7
+endnode
+node dummy E03_pwk_use02 
+  parent purp_bar_pwk
+  position -0.122711 1.09281 0.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.54902 0.345098 0.882353  
+endnode

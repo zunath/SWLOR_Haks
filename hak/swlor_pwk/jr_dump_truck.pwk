@@ -1,0 +1,25 @@
+# Exported from NWmax 0.4-beta at 12/24/02 7:29:12 PM
+# pwk file
+#
+#NWmaxPWKMESH  ASCII
+node trimesh pwk_plane
+  parent dump_truck_PWK
+  position 0.0505204 0.680515 -0.00593794
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.6 0.6 0.6 
+  ambient 0.0 0.0 0.0 
+  diffuse 0.705882 0.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 11.0
+  selfillumcolor 0.0 0.0 0.0 
+  alpha 1.0
+    bitmap NULL
+    verts 4
+     1.19041 3.80409 -2.81432e-007
+     -1.15322 3.82433 -3.82991e-007
+     1.17004 -3.82468 -6.15787e-007
+     -1.23658 -3.80369 -7.20066e-007
+    faces 2
+     2 0 3  1  0 0 0  7
+     1 3 0  1  0 0 0  7
+endnode

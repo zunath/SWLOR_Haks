@@ -1,0 +1,45 @@
+# Exported from NWmax 0.5-beta at 2004-03-10 15:32:06
+# pwk file
+#
+#NWmaxPWKMESH  ASCII
+node trimesh Plane01
+  parent kc_heli_pwk
+  position 0.0411 0.000199785 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 1.0 1.0 1.0 
+  multimaterial 20
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+  ambient 0.0 0.0 0.0 
+  diffuse 0.6 0.34 0.16 
+  specular 0.0 0.0 0.0 
+  shininess 11.0
+  selfillumcolor 0.0 0.0 0.0 
+    bitmap NULL
+    verts 4
+     -1.61237 -5.15734 0.0
+     1.55573 -5.15734 0.0
+     -1.25665 10.1465 0.0
+     1.2 10.1465 0.0
+    faces 2
+     2 0 3  1  0 0 0  1
+     1 3 0  1  0 0 0  1
+endnode
