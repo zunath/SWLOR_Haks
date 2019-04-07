@@ -1,0 +1,49 @@
+#MAXDOOR ASCII
+# model: PLC_Ealt_pwk 
+filedependancy PlaceableObjects01.max
+node trimesh zlc_l28_wg 
+  parent zlc_l28_pwk 
+  position 0.0 0.0 0.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.52549 0.431373 0.0313726  
+  multimaterial 18 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+    bitmap NULL
+    verts 4
+     -0.999999 -0.981654 0.0
+     0.999999 -0.981654 0.0
+     -1.0 0.538483 0.0
+     0.999999 0.538483 0.0
+    faces 2
+     3 0 1  1  0 0 0  7
+     2 0 3  1  0 0 0  7
+endnode
+node dummy l28_pwk_use01 
+  parent zlc_l28_pwk 
+  position -1.2207e-006 1.05434 0.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.54902 0.345098 0.882353  
+endnode
+node dummy l28_pwk_use02 
+  parent zlc_l28_pwk 
+  position -1.2207e-006 -1.51479 0.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.54902 0.345098 0.882353  
+endnode

@@ -1,0 +1,39 @@
+#MAXDOOR ASCII
+# model: Judgmnt_day_pwk 
+filedependancy PlaceableObjects01.max
+node trimesh Judgmnt_day_wg 
+  parent Judgmnt_day_pwk 
+  position -0.155427 0.0 0.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.52549 0.0235294 0.0235294  
+  ambient 1.0 1.0 1.0  
+  diffuse 1.0 1.0 1.0  
+  specular 0.0 0.0 0.0  
+  shininess 1.0 
+    bitmap PLC_RugDMtlBrk
+    verts 9
+        -1.05 -0.963303 0.0
+        0.138622 -1.134 0.0
+        0.984371 -0.876662 0.0
+        -1.05 0.0 0.0
+        0.138622 0.0 0.0
+        0.984371 0.000726734 0.0
+        -1.05 0.963303 0.0
+        0.138622 1.134 0.0
+        0.984371 0.8754 0.0
+    faces 8
+        3 0 4 1 0 0 0 1
+        1 4 0 1 0 0 0 1
+        4 1 5 1 0 0 0 1
+        2 5 1 1 0 0 0 1
+        6 3 7 1 0 0 0 1
+        4 7 3 1 0 0 0 1
+        7 4 8 1 0 0 0 1
+        5 8 4 1 0 0 0 1
+endnode
+node dummy X02_pwk_use01 
+  parent Judgmnt_day_pwk 
+  position 0.00216713 -0.349336 0.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.694118 0.580392 0.101961  
+endnode

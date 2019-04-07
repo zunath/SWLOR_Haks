@@ -1,0 +1,39 @@
+#MAXDOOR ASCII
+# model: skull_post_pwk 
+filedependancy PlaceableObjects01.max
+node trimesh skull_post_wg 
+  parent skull_post_pwk 
+  position -0.155427 0.0 0.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.52549 0.0235294 0.0235294  
+  ambient 1.0 1.0 1.0  
+  diffuse 1.0 1.0 1.0  
+  specular 0.0 0.0 0.0  
+  shininess 1.0 
+    bitmap PLC_RugDMtlBrk
+    verts 9
+        -0.840184 -1.1148 0.0
+        0.0 -1.45151 0.0
+        0.704938 -1.27194 0.0
+        -1.02886 -0.309517 0.0
+        0.0 0.0 0.0
+        1.19 -0.496419 0.0
+        -0.768494 0.700196 0.0
+        0.0655667 1.1483 0.0
+        0.77199 0.893306 0.0
+    faces 8
+        3 0 4 1 0 0 0 1
+        1 4 0 1 0 0 0 1
+        4 1 5 1 0 0 0 1
+        2 5 1 1 0 0 0 1
+        6 3 7 1 0 0 0 1
+        4 7 3 1 0 0 0 1
+        7 4 8 1 0 0 0 1
+        5 8 4 1 0 0 0 1
+endnode
+node dummy X02_pwk_use01 
+  parent skull_post_pwk 
+  position 0.00216713 -0.349336 0.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.694118 0.580392 0.101961  
+endnode

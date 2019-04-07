@@ -1,0 +1,32 @@
+#Exported from 3ds max by MDL Plug-in Suite 1.0b
+#http://www.bricksbuilder.com/nwn/utils/
+#MAXMODEL ASCII
+# model: st_pott02
+filedependancy Stem_placeables0031.max
+node trimesh Plane28
+  parent st_pott02_pwk
+  position 0 0 0
+  orientation 0 0 0 0
+  wirecolor 0.839844 0.839844 0.839844
+  ambient 0.835938 0.890625 0.597656
+  diffuse 0.835938 0.890625 0.597656
+  specular 0 0 0
+  shininess 1
+  bitmap NULL
+  verts 8
+    0.275262 0.249732 0
+    -0.0087107 0.355328 0
+    -0.268315 0.265978 0
+    0.382889 0.00645121 0
+    -0.374222 0.00249742 0
+    0.263078 -0.263228 0
+    -0.000587841 -0.383039 0
+    -0.272377 -0.275414 0
+  faces 6
+    3 0 1  1  0 0 0  6
+    2 4 1  1  0 0 0  6
+    5 3 6  1  0 0 0  6
+    1 6 3  1  0 0 0  6
+    6 1 7  1  0 0 0  6
+    4 7 1  1  0 0 0  6
+endnode

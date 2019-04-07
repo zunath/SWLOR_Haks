@@ -1,0 +1,25 @@
+# Exported from NWmax 0.8 b53 at 6/28/2006 6:05:17 AM
+# pwk file
+#
+#NWmax PWKMESH  ASCII
+node trimesh PLCChair_PWK
+  parent PLCChair_a01_pwk
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.0 0.0 0.0 
+  bitmap NULL
+  verts 4
+    -0.265478 -0.374715 0.0
+    0.242045 -0.374715 0.0
+    -0.265478 0.161915 0.0
+    0.242045 0.161915 0.0
+  faces 2
+    2 0 3  1  0 0 0  7
+    1 3 0  1  0 0 0  7
+endnode
+node dummy a01_pwk_use01
+  parent PLCChair_PWK
+  position 0.0 -0.525907 0.0
+  orientation -0.494768 -0.366495 -0.787964 -4.06449e-007
+  wirecolor 0.239216 0.52549 0.0235294 
+endnode

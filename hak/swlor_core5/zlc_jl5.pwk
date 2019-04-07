@@ -1,0 +1,33 @@
+#Exported from 3ds max by MDL Plug-in Suite 1.0b
+#http://www.bricksbuilder.com/nwn/utils/
+#MAXMODEL ASCII
+# model: PLC_Ppile
+filedependancy pumpkin pile.max
+node trimesh zlc_jl5_wg
+  parent zlc_jl5_pwk
+  position -0.0326533 0.034729 0
+  orientation 0 0 0 0
+  wirecolor 0.878906 0.878906 0.878906
+  ambient 0.875 0.558594 0.339844
+  diffuse 0.875 0.558594 0.339844
+  specular 0 0 0
+  shininess 1
+  bitmap NULL
+  verts 4
+    0.567814 0.603482 0
+    -0.567814 0.603482 0
+    0.567814 -0.603482 0
+    -0.567814 -0.603482 0
+  faces 2
+    2 0 3  1  6 4 7  0
+    1 3 0  1  5 7 4  0
+  tverts 8
+    0 0 0
+    1 0 0
+    0 0 0
+    1 0 0
+    0 0 0
+    1 0 0
+    0 1 0
+    1 1 0
+endnode

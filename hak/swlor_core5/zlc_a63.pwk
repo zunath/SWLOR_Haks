@@ -1,0 +1,24 @@
+# Exported from Wayland's NWN Maxscript v0.3b at 3/25/03 10:39:26 AM
+# mdl file
+#
+filedependancy Unknown
+node trimesh zlc_a63_wg
+    parent zlc_a63_pwk
+    position -0.0208826 -0.00272865 0.0
+    orientation 1.0 0.0 0.0 0.0
+    scale 1.0
+    verts 4
+        -0.997084 -0.280199 0.0
+        0.985449 -0.269378 0.0
+        -0.997084 0.265924 0.0
+        0.979801 0.279866 0.0
+    faces 2
+        2 0 3 1 0 0 0 1
+        1 3 0 1 0 0 0 1
+endnode
+node dummy a63_pwk_use01
+    parent zlc_a63_pwk
+    position -0.003633 -0.163784 0.0
+    orientation 1.0 0.0 0.0 0.0
+    scale 1.0
+endnode

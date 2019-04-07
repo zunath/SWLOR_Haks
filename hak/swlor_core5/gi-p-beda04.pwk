@@ -1,0 +1,24 @@
+#Exported from 3ds max by MDL Plug-in Suite 1.0b
+#http://www.bricksbuilder.com/nwn/utils/
+#MAXMODEL ASCII
+# model: gi-p-beda04
+filedependancy interior placeables01.max
+node trimesh pwk06
+  parent gi-p-beda04_pwk
+  position 0 0 0
+  orientation 0 0 0 0
+  wirecolor 0.695313 0.695313 0.695313
+  ambient 0.691406 0.578125 0.101563
+  diffuse 0.691406 0.578125 0.101563
+  specular 0 0 0
+  shininess 1
+  bitmap NULL
+  verts 4
+    1.01962 1.67653 0
+    -1.01962 1.67653 0
+    1.01962 -1.67653 0
+    -1.01962 -1.67653 0
+  faces 2
+    2 0 3  1  0 0 0  7
+    1 3 0  1  0 0 0  7
+endnode

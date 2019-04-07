@@ -1,0 +1,35 @@
+#Exported from 3ds max by MDL Plug-in Suite 1.0b
+#http://www.bricksbuilder.com/nwn/utils/
+#MAXMODEL ASCII
+# model: zlc_jda_pot02
+filedependancy zlc_jda_pot02.max
+node trimesh zlc_jda_pot02_pwk
+  parent zlc_jda_pot02_pwk
+  position -0.00144707 -0.0244933 0
+  orientation 0 0 0 0
+  wirecolor 0.839844 0.839844 0.839844
+  ambient 0.835938 0.890625 0.597656
+  diffuse 0.835938 0.890625 0.597656
+  specular 0 0 0
+  shininess 1
+  bitmap NULL
+  verts 9
+    -0.324961 -0.32345 0
+    0 -0.463083 0
+    0.324961 -0.32345 0
+    -0.465247 0 0
+    0 0 0
+    0.465247 0 0
+    -0.324961 0.32345 0
+    0 0.463083 0
+    0.324961 0.32345 0
+  faces 8
+    3 0 4  1  0 0 0  7
+    1 4 0  1  0 0 0  7
+    4 1 5  1  0 0 0  7
+    2 5 1  1  0 0 0  7
+    6 3 7  1  0 0 0  7
+    4 7 3  1  0 0 0  7
+    7 4 8  1  0 0 0  7
+    5 8 4  1  0 0 0  7
+endnode

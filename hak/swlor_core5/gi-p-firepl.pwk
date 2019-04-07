@@ -1,0 +1,24 @@
+#Exported from 3ds max by MDL Plug-in Suite 1.0b
+#http://www.bricksbuilder.com/nwn/utils/
+#MAXMODEL ASCII
+# model: gi-p-firepl
+filedependancy interior placeables02.max
+node trimesh walkm
+  parent gi-p-firepl_pwk
+  position 0.0149947 0.00147164 0
+  orientation 0 0 -1 -3.14159
+  wirecolor 0.113281 0.113281 0.113281
+  ambient 0.109375 0.347656 0.691406
+  diffuse 0.109375 0.347656 0.691406
+  specular 0 0 0
+  shininess 1
+  bitmap NULL
+  verts 4
+    1.75728 0.893179 0
+    -1.75729 0.89318 0
+    1.75728 -0.89318 0
+    -1.75729 -0.893179 0
+  faces 2
+    2 0 3  1  0 0 0  7
+    1 3 0  1  0 0 0  7
+endnode

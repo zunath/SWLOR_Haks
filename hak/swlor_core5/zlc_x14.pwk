@@ -1,0 +1,22 @@
+# MAXDOOR ASCII
+# model: PLC_X14_pwk 
+filedependancy PlaceableObjects01.max
+node trimesh zlc_x14_wg
+    parent zlc_x14_pwk
+    position -0.0109023 -0.0124225 0.0
+    orientation 1.0 0.0 0.0 0.0
+    scale 1.0
+    diffuse 0.8000 0.8000 0.8000
+    ambient 0.2000 0.2000 0.2000
+    specular 0.0000 0.0000 0.0000
+    render 0
+    bitmap NULL
+    verts 4
+        -0.967355 -0.264211 0.0
+        0.967355 -0.264211 0.0
+        -0.967355 0.264211 0.0
+        0.967355 0.264211 0.0
+    faces 2
+        2 0 3 1 0 0 0 1
+        1 3 0 1 0 0 0 1
+endnode

@@ -1,0 +1,28 @@
+#Exported from 3ds max by MDL Plug-in Suite 1.0b
+#http://www.bricksbuilder.com/nwn/utils/
+#MAXMODEL ASCII
+# model: PLC_Mshrm03
+filedependancy Mushroom03.max
+node trimesh zlc_s89_wg
+  parent zlc_s89_pwk
+  position 0 0 0
+  orientation 0 0 0 0
+  wirecolor 0.0351563 0.0351563 0.0351563
+  ambient 0.03125 0.238281 0.539063
+  diffuse 0.03125 0.238281 0.539063
+  specular 0 0 0
+  shininess 1
+  bitmap NULL
+  verts 6
+    -0.820479 0 0
+    -0.313369 -0.542772 0
+    0.313369 -0.542772 0
+    0.722173 0 0
+    0.313369 0.542772 0
+    -0.345528 0.714198 0
+  faces 4
+    2 0 1  0  0 0 0  7
+    3 0 2  0  0 0 0  7
+    3 5 0  0  0 0 0  7
+    3 4 5  0  0 0 0  7
+endnode

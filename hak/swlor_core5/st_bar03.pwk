@@ -1,0 +1,30 @@
+#Exported from 3ds max by MDL Plug-in Suite 1.0b
+#http://www.bricksbuilder.com/nwn/utils/
+#MAXMODEL ASCII
+# model: st_bar03
+filedependancy Unknown
+node trimesh Plane01
+  parent st_bar03_pwk
+  position -0.0187874 -0.0315886 0
+  orientation 0 0 0 0
+  wirecolor 0.335938 0.335938 0.335938
+  ambient 0.886719 0.59375 0.59375
+  diffuse 0.886719 0.59375 0.59375
+  specular 0 0 0
+  shininess 1
+  bitmap NULL
+  verts 7
+    1.67353 1.21009 0
+    -0.875384 -1.21009 0
+    -1.67353 -0.489185 0
+    0.450565 1.21009 0
+    -1.67353 0.03862 0
+    1.67353 -0.15448 0
+    -0.682285 -1.21009 0
+  faces 5
+    3 2 0  1  0 0 0  7
+    1 0 2  1  0 0 0  7
+    4 2 3  1  0 0 0  7
+    5 0 1  1  0 0 0  7
+    6 5 1  1  0 0 0  7
+endnode
