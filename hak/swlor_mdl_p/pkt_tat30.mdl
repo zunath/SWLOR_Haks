@@ -1,0 +1,85 @@
+# Exported from NWmax 0.8 b60 at 14/01/2010 15:54:15
+# mdl file
+#
+#NWmax MODEL ASCII
+# model: pkt_tat30
+#local file: Unknown
+filedependancy Unknown
+newmodel pkt_tat30
+setsupermodel pkt_tat30 NULL
+classification Character
+setanimationscale 1.0
+#NWmax GEOM  ASCII
+beginmodelgeom pkt_tat30
+node dummy pkt_tat30
+  parent NULL
+endnode
+node dummy tat30_impact
+  parent pkt_tat30
+  position 0.0 0.0 0.85
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.603922 0.72549 0.898039 
+endnode
+node dummy tat30_ground
+  parent pkt_tat30
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.603922 0.72549 0.898039 
+endnode
+node dummy tat30_hand
+  parent pkt_tat30
+  position 0.0 0.0 1.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.603922 0.72549 0.898039 
+endnode
+node dummy tat30_head
+  parent pkt_tat30
+  position 0.0 0.0 2.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.603922 0.72549 0.898039 
+endnode
+node dummy tat30_head_hit
+  parent pkt_tat30
+  position 0.0 0.0 1.5
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.603922 0.72549 0.898039 
+endnode
+node trimesh Vent
+  parent pkt_tat30
+  position 0.0 0.00382952 1.8
+  orientation 0.0 0.0 1.0 -1.5708
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 0
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  center 0.00131225 0.0 -0.6175 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 0.0
+  bitmap LTA_trm03
+  verts 4
+    1.58691e-005 -0.3 -0.193675
+    1.0376e-005 -0.3 0.181325
+    1.58691e-005 0.3 -0.193675
+    1.0376e-005 0.3 0.181325
+  faces 2
+    0 1 2  1  0 1 2  1
+    3 2 1  1  3 2 1  1
+  tverts 4
+    0.000560031 5.62668e-005 0
+    0.999555 5.62231e-005 0
+    0.000560075 1.00006 0
+    0.999555 1.00006 0
+endnode
+endmodelgeom pkt_tat30
+donemodel pkt_tat30

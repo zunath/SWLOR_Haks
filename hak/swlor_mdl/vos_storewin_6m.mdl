@@ -1,0 +1,102 @@
+# Exported from NWgMax Plus v6.11.28 at 2017-01-12 15:04:43
+# mdl file
+#
+#NWgMax Plus MODEL ASCII
+# model: vos_storewin_6m
+filedependancy Unknown
+newmodel vos_storewin_6m
+setsupermodel vos_storewin_6m NULL
+classification Character
+setanimationscale 1.0
+#NWgMax Plus GEOM  ASCII
+beginmodelgeom vos_storewin_6m
+node dummy vos_storewin_6m
+  parent NULL
+endnode
+node trimesh storefront
+  parent vos_storewin_6m
+  position 0.0 0.0 2.15
+  orientation -1.0 0.0 0.0 -1.5708
+  wirecolor 0.337255 0.87451 0.776471 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.784314 0.588235 0.392157 
+  ambient 0.588235 0.588235 0.588235 
+  diffuse 0.588235 0.588235 0.588235 
+  specular 0.0 0.0 0.0 
+  shininess 11
+  center 0.0 0.0 0.0 
+  bitmap vos_storewin_m
+  verts 4
+    -2.675 -1.1 0.0
+    2.675 -1.1 0.0
+    -2.675 1.1 0.0
+    2.675 1.1 0.0
+  faces 2
+    2 0 3  1  2 0 3  1
+    1 3 0  1  1 3 0  1
+  tverts 4
+    0.506482 0.50276 0
+    0.994017 0.50276 0
+    0.506482 0.738323 0
+    0.994017 0.738322 0
+endnode
+node trimesh glass_window
+  parent vos_storewin_6m
+  position 0.0 -0.01 2.15
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.337255 0.87451 0.776471 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 0
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 0.27
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 12
+  center 0.0 0.0 0.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 0
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 0.27
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 12
+  center undefined
+  bitmap dgt04_chrome
+  verts 4
+    -2.675 3.93391e-006 -1.1
+    2.675 3.93391e-006 -1.1
+    -2.675 -3.93391e-006 1.1
+    2.675 -3.93391e-006 1.1
+  faces 2
+    2 0 3  1  2 0 3  1
+    1 3 0  1  1 3 0  1
+  tverts 4
+    0.000499547 0.000500083 0
+    0.9995 0.000499517 0
+    0.000499636 0.999501 0
+    0.9995 0.9995 0
+endnode
+endmodelgeom vos_storewin_6m
+donemodel vos_storewin_6m

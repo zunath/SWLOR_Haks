@@ -1,0 +1,696 @@
+#MAXMODEL ASCII
+# model: FX_FLAME01
+filedependancy FX_FLAME01.max
+newmodel FX_FLAME01
+setsupermodel FX_FLAME01 NULL
+classification effect
+setanimationscale 1
+#MAXGEOM  ASCII
+beginmodelgeom FX_FLAME01
+node dummy FX_FLAME01
+  parent NULL
+  #part-number 0
+endnode
+node emitter Flame
+      parent FX_FLAME01
+      wirecolor 0.345098 0.345098 0.345098 
+         update_sel 2
+         update Single
+         render_sel 5
+         render Aligned_to_World_z
+         blend_sel 2
+         Blend Lighten
+         spawnType 0
+         iconSize 100.0
+         xSize 0.0
+         ySize 0.0
+         inherit 1
+         inherit_local 0
+         inheritvel 0
+         inherit_part 0
+         renderorder 0
+         threshold 0.0
+         combinetime 0.0
+         deadspace 0.0
+         colorStart 0.988234997 0.572548985 0.564706028 
+         colorEnd 0.0980392024 0.0274509992 
+         alphaStart 1.0
+         alphaEnd 0.9
+         sizeStart 1.0
+         sizeEnd 1.0
+         sizeStart_y 0.0
+         sizeEnd_y 0.0
+         birthrate 1.0
+         lifeExp -1.0
+         mass 0.0
+         spread 0.0
+         particleRot 0.0
+         velocity 0.0
+         randvel 0.0
+         bounce_co 0.0
+         blurlength 10.0
+         loop 0
+         bounce 0
+         m_isTinted 0
+         Splat 0
+         affectedbyWind false
+         texture fxpa_Dot01
+         twosidedtext 0
+         xgrid 1
+         ygrid 1
+         fps 0
+         frameStart 0
+         frameEnd 0
+         random 0
+         #chunk undefined
+         lightningDelay 0.0
+         lightningRadius 0.0
+         lightningSubDivkey 0
+         lightningScale 0.0
+         blastRadius 0.0
+         blastLength 0.0
+         opacity 0.0
+         p2p 0
+         p2p_type Bezier
+         p2p_sel 1
+         p2p_bezier2 0.0
+         p2p_bezier3 0.0
+         grav 0.0
+         drag 0.0
+         Cone_Angle_Manipulator SubAnim:Cone_Angle_Manipulator
+    endnode
+
+node light AuroraLight01
+  parent FX_FLAME01
+  #part-number 2
+  ambientonly 0
+  shadow 1
+  isdynamic 0
+  affectdynamic 1
+  lightpriority 4
+  fadingLight 1
+  flareradius 30
+  texturenames 1
+    fxpa_flare
+  flaresizes 1
+    3
+  flarepositions 1
+    1
+  flarecolorshifts 1
+    0 0 0
+  position 0 0 0
+  orientation 0 0 0 0
+  radius 7
+  shadowradius 5
+  color 1 0.419607997 0.419607997
+  shadowradius 15
+  verticaldisplacement 2
+endnode
+node emitter REAL_Flame01
+      parent FX_FLAME01
+      wirecolor 0.345098 0.345098 0.345098 
+         update_sel 2
+         update Single
+         render_sel 5
+         render Aligned_to_World_z
+         blend_sel 2
+         Blend Lighten
+         spawnType 0
+         iconSize 100.0
+         xSize 0.0
+         ySize 0.0
+         inherit 1
+         inherit_local 0
+         inheritvel 0
+         inherit_part 0
+         renderorder 0
+         threshold 0.0
+         combinetime 0.0
+         deadspace 0.0
+         colorStart 1 1 1 
+         colorEnd 0.00392156979 0.00392156979 0.00392156979 
+         alphaStart 1.0
+         alphaEnd 0.9
+         sizeStart 1.0
+         sizeEnd 1.0
+         sizeStart_y 0.0
+         sizeEnd_y 0.0
+         birthrate 1.0
+         lifeExp -1.0
+         mass 0.0
+         spread 0.0
+         particleRot 0.0
+         velocity 0.0
+         randvel 0.0
+         bounce_co 0.0
+         blurlength 10.0
+         loop 0
+         bounce 0
+         m_isTinted 0
+         Splat 0
+         affectedbyWind false
+         texture fxpa_Dot01
+         twosidedtext 0
+         xgrid 1
+         ygrid 1
+         fps 0
+         frameStart 0
+         frameEnd 0
+         random 0
+         #chunk undefined
+         lightningDelay 0.0
+         lightningRadius 0.0
+         lightningSubDivkey 0
+         lightningScale 0.0
+         blastRadius 0.0
+         blastLength 0.0
+         opacity 0.0
+         p2p 0
+         p2p_type Bezier
+         p2p_sel 1
+         p2p_bezier2 0.0
+         p2p_bezier3 0.0
+         grav 0.0
+         drag 0.0
+         Cone_Angle_Manipulator SubAnim:Cone_Angle_Manipulator
+    endnode
+
+endmodelgeom FX_FLAME01
+
+#MAXANIM ASCII
+newanim 1 FX_FLAME01
+  length 0.5
+  transtime 0.25
+  animroot FX_FLAME01
+node dummy FX_FLAME01
+  parent NULL
+  #part-number 0
+endnode
+node emitter Flame
+  parent FX_FLAME01
+  #part-number 1
+  colorStartkey 2
+    0 0.992156982 0.768628001 0.690195978
+    0.5 0.992156982 0.768628001 0.690195978
+  colorEndkey 2
+    0 0.988234997 1 0.00392156979
+    0.5 0.988234997 1 0.00392156979
+  alphaStartkey 2
+    0 0.5
+    0.5 0.5
+  birthratekey 2
+    0 0
+    0.5 0
+endnode
+node light AuroraLight01
+  parent FX_FLAME01
+  #part-number 2
+  colorkey 2
+    0 2 2 2
+    0.5 2 2 2
+endnode
+node emitter REAL_Flame01
+  parent FX_FLAME01
+  #part-number 3
+  birthratekey 2
+    0.466666996 6
+    0.5 0
+endnode
+doneanim 1 FX_FLAME01
+
+#MAXANIM ASCII
+newanim 2 FX_FLAME01
+  length 0.5
+  transtime 0.25
+  animroot FX_FLAME01
+node dummy FX_FLAME01
+  parent NULL
+  #part-number 0
+endnode
+node emitter Flame
+  parent FX_FLAME01
+  #part-number 1
+  colorStartkey 2
+    0 0.992156982 0.768628001 0.690195978
+    0.5 0.992156982 0.768628001 0.690195978
+  colorEndkey 2
+    0 0.988234997 1 0.00392156979
+    0.5 0.988234997 1 0.00392156979
+  alphaStartkey 2
+    0 0.5
+    0.5 0.5
+  birthratekey 2
+    0 0
+    0.5 0
+endnode
+node light AuroraLight01
+  parent FX_FLAME01
+  #part-number 2
+  colorkey 2
+    0 0.939999998 0.939999998 0.5
+    0.5 0.939999998 0.939999998 0.5
+endnode
+node emitter REAL_Flame01
+  parent FX_FLAME01
+  #part-number 3
+  birthratekey 2
+    0.466666996 6
+    0.5 0
+endnode
+doneanim 2 FX_FLAME01
+
+#MAXANIM ASCII
+newanim 3 FX_FLAME01
+  length 0.5
+  transtime 0.25
+  animroot FX_FLAME01
+node dummy FX_FLAME01
+  parent NULL
+  #part-number 0
+endnode
+node emitter Flame
+  parent FX_FLAME01
+  #part-number 1
+  colorStartkey 2
+    0 0.992156982 0.768628001 0.690195978
+    0.5 0.992156982 0.768628001 0.690195978
+  colorEndkey 2
+    0 0.988234997 1 0.00392156979
+    0.5 0.988234997 1 0.00392156979
+  alphaStartkey 2
+    0 0.5
+    0.5 0.5
+  birthratekey 2
+    0 0
+    0.5 0
+endnode
+node light AuroraLight01
+  parent FX_FLAME01
+  #part-number 2
+  colorkey 2
+    0 1.89999998 1.89999998 1
+    0.5 1.89999998 1.89999998 1
+endnode
+node emitter REAL_Flame01
+  parent FX_FLAME01
+  #part-number 3
+  birthratekey 2
+    0.466666996 6
+    0.5 0
+endnode
+doneanim 3 FX_FLAME01
+
+#MAXANIM ASCII
+newanim 4 FX_FLAME01
+  length 0.5
+  transtime 0.25
+  animroot FX_FLAME01
+node dummy FX_FLAME01
+  parent NULL
+  #part-number 0
+endnode
+node emitter Flame
+  parent FX_FLAME01
+  #part-number 1
+  colorStartkey 2
+    0 0.858824015 1 0.521569014
+    0.5 0.858824015 1 0.521569014
+  colorEndkey 2
+    0 0.235293999 1 0.0862744972
+    0.5 0.235293999 1 0.0862746984
+  alphaStartkey 2
+    0 1
+    0.5 1
+  alphaEnd 0
+  birthratekey 2
+    0 4
+    0.5 4
+endnode
+node light AuroraLight01
+  parent FX_FLAME01
+  #part-number 2
+  colorkey 2
+    0 0.720000029 0.870000005 0.560000002
+    0.5 0.720000029 0.870000005 0.560000002
+endnode
+node emitter REAL_Flame01
+  parent FX_FLAME01
+  #part-number 3
+endnode
+doneanim 4 FX_FLAME01
+
+#MAXANIM ASCII
+newanim 5 FX_FLAME01
+  length 0.5
+  transtime 0.25
+  animroot FX_FLAME01
+node dummy FX_FLAME01
+  parent NULL
+  #part-number 0
+endnode
+node emitter Flame
+  parent FX_FLAME01
+  #part-number 1
+  colorStartkey 2
+    0 0.858824015 1 0.521569014
+    0.5 0.858824015 1 0.521569014
+  colorEndkey 2
+    0 0.235293999 1 0.0862744972
+    0.5 0.235293999 1 0.0862746984
+  alphaStart 1
+  birthrate 4
+endnode
+node light AuroraLight01
+  parent FX_FLAME01
+  #part-number 2
+  colorkey 2
+    0 1.39999998 1.79999995 1.39999998
+    0.5 1.39999998 1.79999995 1.39999998
+endnode
+node emitter REAL_Flame01
+  parent FX_FLAME01
+  #part-number 3
+endnode
+doneanim 5 FX_FLAME01
+
+#MAXANIM ASCII
+newanim 6 FX_FLAME01
+  length 0.5
+  transtime 0.25
+  animroot FX_FLAME01
+node dummy FX_FLAME01
+  parent NULL
+  #part-number 0
+endnode
+node emitter Flame
+  parent FX_FLAME01
+  #part-number 1
+  colorStartkey 2
+    0 0.792156994 0.950981021 0.992156982
+    0.5 0.792156994 0.950981021 0.992156982
+  colorEndkey 2
+    0 0.0196077991 0.899999976 0.93333298
+    0.5 0.0196077991 0.899999976 0.93333298
+endnode
+node light AuroraLight01
+  parent FX_FLAME01
+  #part-number 2
+  colorkey 2
+    0 0.649999976 0.959999979 0.910000026
+    0.5 0.649999976 0.959999979 0.910000026
+endnode
+node emitter REAL_Flame01
+  parent FX_FLAME01
+  #part-number 3
+endnode
+doneanim 6 FX_FLAME01
+
+#MAXANIM ASCII
+newanim 7 FX_FLAME01
+  length 0.5
+  transtime 0.25
+  animroot FX_FLAME01
+node dummy FX_FLAME01
+  parent NULL
+  #part-number 0
+endnode
+node emitter Flame
+  parent FX_FLAME01
+  #part-number 1
+  colorStartkey 2
+    0 0.792156994 0.950981021 0.992156982
+    0.5 0.792156994 0.950981021 0.992156982
+  colorEndkey 2
+    0 0.0196077991 0.899999976 0.93333298
+    0.5 0.0196077991 0.899999976 0.93333298
+endnode
+node light AuroraLight01
+  parent FX_FLAME01
+  #part-number 2
+  colorkey 2
+    0 1.29999995 1.91999996 1.82000005
+    0.5 1.29999995 1.91999996 1.82000005
+endnode
+node emitter REAL_Flame01
+  parent FX_FLAME01
+  #part-number 3
+endnode
+doneanim 7 FX_FLAME01
+
+#MAXANIM ASCII
+newanim 8 FX_FLAME01
+  length 0.533333004
+  transtime 0.25
+  animroot FX_FLAME01
+node dummy FX_FLAME01
+  parent NULL
+  #part-number 0
+endnode
+node emitter Flame
+  parent FX_FLAME01
+  #part-number 1
+  colorStartkey 2
+    0 0.792156994 0.850980997 0.992156982
+    0.5 0.792156994 0.850980997 0.992156982
+  colorEndkey 2
+    0 0.0196077991 0.168626994 0.93333298
+    0.5 0.0196077991 0.168626994 0.93333298
+endnode
+node light AuroraLight01
+  parent FX_FLAME01
+  #part-number 2
+  colorkey 2
+    0 0.699999988 0.699999988 1.20000005
+    0.5 0.699999988 0.699999988 1.20000005
+endnode
+node emitter REAL_Flame01
+  parent FX_FLAME01
+  #part-number 3
+endnode
+doneanim 8 FX_FLAME01
+
+#MAXANIM ASCII
+newanim 9 FX_FLAME01
+  length 0.533333004
+  transtime 0.25
+  animroot FX_FLAME01
+node dummy FX_FLAME01
+  parent NULL
+  #part-number 0
+endnode
+node emitter Flame
+  parent FX_FLAME01
+  #part-number 1
+  colorStartkey 2
+    0 0.792156994 0.850980997 0.992156982
+    0.5 0.792156994 0.850980997 0.992156982
+  colorEndkey 2
+    0 0.0196077991 0.168626994 0.93333298
+    0.5 0.0196077991 0.168626994 0.93333298
+endnode
+node light AuroraLight01
+  parent FX_FLAME01
+  #part-number 2
+  colorkey 2
+    0 1.39999998 1.39999998 2.4000001
+    0.5 1.39999998 1.39999998 2.4000001
+endnode
+node emitter REAL_Flame01
+  parent FX_FLAME01
+  #part-number 3
+endnode
+doneanim 9 FX_FLAME01
+
+#MAXANIM ASCII
+newanim 10 FX_FLAME01
+  length 0.533333004
+  transtime 0.25
+  animroot FX_FLAME01
+node dummy FX_FLAME01
+  parent NULL
+  #part-number 0
+endnode
+node emitter Flame
+  parent FX_FLAME01
+  #part-number 1
+  colorStartkey 2
+    0 0.992156982 0.572548985 0.44313699
+    0.5 0.992156982 0.572548985 0.44313699
+  colorEndkey 2
+    0 0.0196077991 0.168628007 0.933333993
+    0.5 0.0196077991 0.168628007 0.933333993
+endnode
+node light AuroraLight01
+  parent FX_FLAME01
+  #part-number 2
+  colorkey 2
+    0 0.920000017 0.649999976 0.920000017
+    0.5 0.920000017 0.649999976 0.920000017
+endnode
+node emitter REAL_Flame01
+  parent FX_FLAME01
+  #part-number 3
+endnode
+doneanim 10 FX_FLAME01
+
+#MAXANIM ASCII
+newanim 11 FX_FLAME01
+  length 0.533333004
+  transtime 0.25
+  animroot FX_FLAME01
+node dummy FX_FLAME01
+  parent NULL
+  #part-number 0
+endnode
+node emitter Flame
+  parent FX_FLAME01
+  #part-number 1
+  colorStartkey 2
+    0 0.992156982 0.572548985 0.44313699
+    0.5 0.992156982 0.572548985 0.44313699
+  colorEndkey 2
+    0 0.0196077991 0.168628007 0.933333993
+    0.5 0.0196077991 0.168628007 0.933333993
+endnode
+node light AuroraLight01
+  parent FX_FLAME01
+  #part-number 2
+  colorkey 2
+    0 1.84000003 1.29999995 1.84000003
+    0.5 1.84000003 1.29999995 1.84000003
+endnode
+node emitter REAL_Flame01
+  parent FX_FLAME01
+  #part-number 3
+endnode
+doneanim 11 FX_FLAME01
+
+#MAXANIM ASCII
+newanim 12 FX_FLAME01
+  length 0.533333004
+  transtime 0.25
+  animroot FX_FLAME01
+node dummy FX_FLAME01
+  parent NULL
+  #part-number 0
+endnode
+node emitter Flame
+  parent FX_FLAME01
+  #part-number 1
+  colorStartkey 2
+    0 0.988234997 0.572548985 0.564706028
+    0.5 0.988234997 0.572548985 0.564706028
+  colorEndkey 2
+    0 1 0.0980392024 0.0274509992
+    0.5 1 0.0980392024 0.0274509992
+endnode
+node light AuroraLight01
+  parent FX_FLAME01
+  #part-number 2
+  colorkey 2
+    0 1 0.5 0.5
+    0.5 1 0.5 0.5
+endnode
+node emitter REAL_Flame01
+  parent FX_FLAME01
+  #part-number 3
+endnode
+doneanim 12 FX_FLAME01
+
+#MAXANIM ASCII
+newanim 13 FX_FLAME01
+  length 0.533333004
+  transtime 0.25
+  animroot FX_FLAME01
+node dummy FX_FLAME01
+  parent NULL
+  #part-number 0
+endnode
+node emitter Flame
+  parent FX_FLAME01
+  #part-number 1
+  colorStartkey 2
+    0 0.988234997 0.572548985 0.564706028
+    0.5 0.988234997 0.572548985 0.564706028
+  colorEndkey 2
+    0 1 0.0980392024 0.0274509992
+    0.5 1 0.0980392024 0.0274509992
+endnode
+node light AuroraLight01
+  parent FX_FLAME01
+  #part-number 2
+  colorkey 2
+    0 2 1.20000005 1.20000005
+    0.5 2 1.20000005 1.20000005
+endnode
+node emitter REAL_Flame01
+  parent FX_FLAME01
+  #part-number 3
+endnode
+doneanim 13 FX_FLAME01
+
+#MAXANIM ASCII
+newanim 14 FX_FLAME01
+  length 0.533333004
+  transtime 0.25
+  animroot FX_FLAME01
+node dummy FX_FLAME01
+  parent NULL
+  #part-number 0
+endnode
+node emitter Flame
+  parent FX_FLAME01
+  #part-number 1
+  colorStartkey 2
+    0 0.988234997 0.721569002 0.435294002
+    0.533333004 0.988234997 0.721569002 0.435294002
+  colorEndkey 2
+    0 0.972549021 0.360783994 0.0274509992
+    0.533333004 0.972549021 0.360783994 0.0274509992
+endnode
+node light AuroraLight01
+  parent FX_FLAME01
+  #part-number 2
+  colorkey 2
+    0 1 0.75 0.300000012
+    0.5 1 0.75 0.300000012
+endnode
+node emitter REAL_Flame01
+  parent FX_FLAME01
+  #part-number 3
+endnode
+doneanim 14 FX_FLAME01
+
+#MAXANIM ASCII
+newanim 15 FX_FLAME01
+  length 0.533333004
+  transtime 0.25
+  animroot FX_FLAME01
+node dummy FX_FLAME01
+  parent NULL
+  #part-number 0
+endnode
+node emitter Flame
+  parent FX_FLAME01
+  #part-number 1
+  colorStartkey 2
+    0 0.988234997 0.721569002 0.435294002
+    0.533333004 0.988234997 0.721569002 0.435294002
+  colorEndkey 2
+    0 0.972549021 0.360783994 0.0274509992
+    0.533333004 0.972549021 0.360783994 0.0274509992
+endnode
+node light AuroraLight01
+  parent FX_FLAME01
+  #part-number 2
+  colorkey 2
+    0 1.85000002 1.20000005 0.600000024
+    0.5 1.85000002 1.20000005 0.600000024
+endnode
+node emitter REAL_Flame01
+  parent FX_FLAME01
+  #part-number 3
+endnode
+doneanim 15 FX_FLAME01
+
+donemodel FX_FLAME01

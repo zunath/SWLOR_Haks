@@ -1,0 +1,162 @@
+# Exported from NWmax 0.8 b60 at 07/09/2007 03:35:29
+# mdl file
+#
+#NWmax MODEL ASCII
+# model: NoticeBB1
+#local file: C:\Program Files\Autodesk\3dsMax8\scenes\noticeboard2_11.max
+filedependancy noticeboard2_11.max
+newmodel NoticeBB1
+setsupermodel NoticeBB1 NULL
+classification Character
+setanimationscale 1.0
+#NWmax GEOM  ASCII
+beginmodelgeom NoticeBB1
+node dummy NoticeBB1
+  parent NULL
+endnode
+node trimesh NbBack
+  parent NoticeBB1
+  position -0.0244229 0.0 1.19607
+  orientation 0.0 1.0 0.0 -0.00292288
+  wirecolor 0.894118 0.839216 0.6 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 10.0
+  bitmap jz_notice03
+  verts 4
+    -0.3 -0.01 0.0
+    0.3 -0.01 0.0
+    -0.3 -0.01 0.45
+    0.3 -0.01 0.45
+  faces 2
+    0 1 3  8  0 1 3  5
+    3 2 0  8  3 2 0  5
+  tverts 4
+    0.00185185 0.505045 0
+    0.595453 0.505211 0
+    0.00129677 1.00195 0
+    0.595 1.00454 0
+endnode
+node trimesh NbBas
+  parent NoticeBB1
+  position -0.0244229 0.0 1.19607
+  orientation 0.0 1.0 0.0 -0.00292288
+  wirecolor 0.894118 0.839216 0.6 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 10.0
+  bitmap jz_notice03
+  verts 4
+    -0.3 -0.01 0.0
+    0.3 -0.01 0.0
+    -0.3 0.01 0.0
+    0.3 0.01 0.0
+  faces 2
+    0 2 3  2  1 3 2  2
+    3 1 0  2  2 0 1  2
+  tverts 4
+    0.722426 0.00621131 0
+    0.731346 0.00589052 0
+    0.722516 0.43653 0
+    0.731868 0.435502 0
+endnode
+node trimesh NbDroite
+  parent NoticeBB1
+  position -0.0244229 0.0 1.19607
+  orientation 0.0 1.0 0.0 -0.00292288
+  wirecolor 0.894118 0.839216 0.6 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 10.0
+  bitmap jz_notice03
+  verts 4
+    0.3 -0.01 0.0
+    0.3 0.01 0.0
+    0.3 -0.01 0.45
+    0.3 0.01 0.45
+  faces 2
+    0 1 3  16  0 1 3  4
+    3 2 0  16  3 2 0  4
+  tverts 4
+    0.71997 0.00578769 0
+    0.730456 0.0057877 0
+    0.71963 0.317556 0
+    0.730117 0.316461 0
+endnode
+node trimesh NbFace
+  parent NoticeBB1
+  position -0.0244229 0.0 1.19607
+  orientation 0.0 1.0 0.0 -0.00292288
+  wirecolor 0.894118 0.839216 0.6 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 10.0
+  bitmap jz_notice03
+  verts 4
+    -0.3 0.01 0.0
+    0.3 0.01 0.0
+    -0.3 0.01 0.45
+    0.3 0.01 0.45
+  faces 2
+    1 0 2  32  0 1 3  6
+    2 3 1  32  3 2 0  6
+  tverts 4
+    0.720254 0.435828 0
+    0.722516 0.00323575 0
+    0.99982 0.435135 0
+    1.00012 0.0037362 0
+endnode
+node trimesh NbGauche
+  parent NoticeBB1
+  position -0.0244229 0.0 1.19607
+  orientation 0.0 1.0 0.0 -0.00292288
+  wirecolor 0.894118 0.839216 0.6 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 10.0
+  bitmap jz_notice03
+  verts 4
+    -0.3 -0.01 0.0
+    -0.3 0.01 0.0
+    -0.3 -0.01 0.45
+    -0.3 0.01 0.45
+  faces 2
+    1 0 2  64  0 1 3  3
+    2 3 1  64  3 2 0  3
+  tverts 4
+    0.722942 0.0404421 0
+    0.732092 0.0404421 0
+    0.72261 0.354154 0
+    0.732258 0.354997 0
+endnode
+node trimesh NbTop
+  parent NoticeBB1
+  position -0.0244229 0.0 1.19607
+  orientation 0.0 1.0 0.0 -0.00292288
+  wirecolor 0.894118 0.839216 0.6 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 10.0
+  bitmap jz_notice03
+  verts 4
+    -0.3 -0.01 0.45
+    0.3 -0.01 0.45
+    -0.3 0.01 0.45
+    0.3 0.01 0.45
+  faces 2
+    0 1 3  4  0 1 3  1
+    3 2 0  4  3 2 0  1
+  tverts 4
+    0.720469 0.00522836 0
+    0.730879 0.00522836 0
+    0.720832 0.43251 0
+    0.731242 0.43251 0
+endnode
+endmodelgeom NoticeBB1
+donemodel NoticeBB1

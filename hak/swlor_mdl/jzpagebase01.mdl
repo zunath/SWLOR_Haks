@@ -1,0 +1,42 @@
+# Exported from NWmax 0.8 b60 at 04/09/2007 22:46:07
+# mdl file
+#
+#NWmax MODEL ASCII
+# model: JzPageBase01
+#local file: Unknown
+filedependancy Unknown
+newmodel JzPageBase01
+setsupermodel JzPageBase01 NULL
+classification Character
+setanimationscale 1.0
+#NWmax GEOM  ASCII
+beginmodelgeom JzPageBase01
+node dummy JzPageBase01
+  parent NULL
+endnode
+node trimesh Plane01
+  parent JzPageBase01
+  position 0.0 0.0 0.02
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.52549 0.231373 0.0313726 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 10.0
+  bitmap jz_grdpapers01
+  verts 4
+    -0.5 -0.5 0.0
+    0.5 -0.5 0.0
+    -0.5 0.5 0.0
+    0.5 0.5 0.0
+  faces 2
+    2 0 3  1  2 0 3  1
+    1 3 0  1  1 3 0  1
+  tverts 4
+    0.0 0.0 0
+    1.0 0.0 0
+    0.0 1.0 0
+    1.0 1.0 0
+endnode
+endmodelgeom JzPageBase01
+donemodel JzPageBase01

@@ -1,0 +1,956 @@
+# Exported from NWmax 0.8 b61 at 07/08/2010 12:53:59
+# mdl file
+#
+#NWmax MODEL ASCII
+# model: railline_xing
+#local file: Unknown
+filedependancy Unknown
+newmodel railline_xing
+setsupermodel railline_xing null
+classification character
+#NWmax GEOM  ASCII
+beginmodelgeom railline_xing
+node dummy railline_xing
+  parent NULL
+endnode
+node trimesh railtie92
+  parent railline_xing
+  position -0.01 -0.13 0.0250861
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 0.588 0.588 0.588 
+  Diffuse 0.588 0.588 0.588 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 0.0 0.0 
+  bitmap steam_t_wood2
+  verts 8
+    0.93 -2.07 0.05
+    0.93 2.07 0.05
+    -0.93 2.07 0.05
+    -0.93 -2.07 0.05
+    0.93 -2.07 -0.05
+    0.93 2.07 -0.05
+    -0.93 2.07 -0.05
+    -0.93 -2.07 -0.05
+  faces 10
+    0 1 2  1  0 1 2  0
+    2 3 0  1  2 3 0  0
+    4 5 1  2  0 1 1  4
+    1 0 4  2  1 0 0  4
+    5 6 2  4  1 2 2  3
+    2 1 5  4  2 1 1  3
+    6 7 3  2  2 3 3  5
+    3 2 6  2  3 2 2  5
+    7 4 0  4  3 0 0  2
+    0 3 7  4  0 3 3  2
+  tverts 4
+    -0.0174719 1.17282 0
+    -0.0174725 -0.0759311 0
+    1.03125 -0.0759312 0
+    1.03125 1.17282 0
+endnode
+node trimesh railtie95
+  parent railline_xing
+  position 0.0 4.5 0.0450861
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 0.588 0.588 0.588 
+  Diffuse 0.588 0.588 0.588 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 0.0 0.0 
+  bitmap steam_t_wood2
+  verts 8
+    1.44 0.15 0.05
+    -1.44 0.15 0.05
+    -1.44 -0.15 0.05
+    1.44 -0.15 0.05
+    1.44 0.15 -0.05
+    -1.44 0.15 -0.05
+    -1.44 -0.15 -0.05
+    1.44 -0.15 -0.05
+  faces 10
+    0 1 2  1  0 1 2  0
+    2 3 0  1  2 3 0  0
+    4 5 1  2  4 5 6  4
+    1 0 4  2  6 7 4  4
+    5 6 2  4  8 9 10  3
+    2 1 5  4  10 11 8  3
+    6 7 3  2  12 13 14  5
+    3 2 6  2  14 15 12  5
+    7 4 0  4  16 17 18  2
+    0 3 7  4  18 19 16  2
+  tverts 20
+    -196.329 166.185 0
+    -196.329 164.747 0
+    -196.179 164.747 0
+    -196.179 166.185 0
+    0.540384 166.185 0
+    0.540384 164.747 0
+    0.590384 164.747 0
+    0.590384 166.185 0
+    0.459616 -196.329 0
+    0.459616 -196.179 0
+    0.409616 -196.179 0
+    0.409616 -196.329 0
+    0.459616 164.747 0
+    0.459616 166.185 0
+    0.409616 166.185 0
+    0.409616 164.747 0
+    0.540384 -196.179 0
+    0.540384 -196.329 0
+    0.590384 -196.329 0
+    0.590384 -196.179 0
+endnode
+node trimesh railtie90
+  parent railline_xing
+  position 0.0 -2.5 0.0450861
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 0.588 0.588 0.588 
+  Diffuse 0.588 0.588 0.588 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 0.0 0.0 
+  bitmap steam_t_wood2
+  verts 8
+    1.44 0.15 0.05
+    -1.44 0.15 0.05
+    -1.44 -0.15 0.05
+    1.44 -0.15 0.05
+    1.44 0.15 -0.05
+    -1.44 0.15 -0.05
+    -1.44 -0.15 -0.05
+    1.44 -0.15 -0.05
+  faces 10
+    0 1 2  1  0 1 2  0
+    2 3 0  1  2 3 0  0
+    4 5 1  2  4 5 6  4
+    1 0 4  2  6 7 4  4
+    5 6 2  4  8 9 10  3
+    2 1 5  4  10 11 8  3
+    6 7 3  2  12 13 14  5
+    3 2 6  2  14 15 12  5
+    7 4 0  4  16 17 18  2
+    0 3 7  4  18 19 16  2
+  tverts 20
+    -192.829 166.185 0
+    -192.829 164.747 0
+    -192.679 164.747 0
+    -192.679 166.185 0
+    0.540384 166.185 0
+    0.540384 164.747 0
+    0.590384 164.747 0
+    0.590384 166.185 0
+    0.459616 -192.829 0
+    0.459616 -192.679 0
+    0.409616 -192.679 0
+    0.409616 -192.829 0
+    0.459616 164.747 0
+    0.459616 166.185 0
+    0.409616 166.185 0
+    0.409616 164.747 0
+    0.540384 -192.679 0
+    0.540384 -192.829 0
+    0.590384 -192.829 0
+    0.590384 -192.679 0
+endnode
+node trimesh railtie91
+  parent railline_xing
+  position 0.0 -3.5 0.0450861
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 0.588 0.588 0.588 
+  Diffuse 0.588 0.588 0.588 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 0.0 0.0 
+  bitmap steam_t_wood2
+  verts 8
+    1.44 0.15 0.05
+    -1.44 0.15 0.05
+    -1.44 -0.15 0.05
+    1.44 -0.15 0.05
+    1.44 0.15 -0.05
+    -1.44 0.15 -0.05
+    -1.44 -0.15 -0.05
+    1.44 -0.15 -0.05
+  faces 10
+    0 1 2  1  0 1 2  0
+    2 3 0  1  2 3 0  0
+    4 5 1  2  4 5 6  4
+    1 0 4  2  6 7 4  4
+    5 6 2  4  8 9 10  3
+    2 1 5  4  10 11 8  3
+    6 7 3  2  12 13 14  5
+    3 2 6  2  14 15 12  5
+    7 4 0  4  16 17 18  2
+    0 3 7  4  18 19 16  2
+  tverts 20
+    -192.329 166.185 0
+    -192.329 164.747 0
+    -192.179 164.747 0
+    -192.179 166.185 0
+    0.540384 166.185 0
+    0.540384 164.747 0
+    0.590384 164.747 0
+    0.590384 166.185 0
+    0.459616 -192.329 0
+    0.459616 -192.179 0
+    0.409616 -192.179 0
+    0.409616 -192.329 0
+    0.459616 164.747 0
+    0.459616 166.185 0
+    0.409616 166.185 0
+    0.409616 164.747 0
+    0.540384 -192.179 0
+    0.540384 -192.329 0
+    0.590384 -192.329 0
+    0.590384 -192.179 0
+endnode
+node trimesh railtie94
+  parent railline_xing
+  position 0.0 2.5 0.0450861
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 0.588 0.588 0.588 
+  Diffuse 0.588 0.588 0.588 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 0.0 0.0 
+  bitmap steam_t_wood2
+  verts 8
+    1.44 0.15 0.05
+    -1.44 0.15 0.05
+    -1.44 -0.15 0.05
+    1.44 -0.15 0.05
+    1.44 0.15 -0.05
+    -1.44 0.15 -0.05
+    -1.44 -0.15 -0.05
+    1.44 -0.15 -0.05
+  faces 10
+    0 1 2  1  0 1 2  0
+    2 3 0  1  2 3 0  0
+    4 5 1  2  4 5 6  4
+    1 0 4  2  6 7 4  4
+    5 6 2  4  8 9 10  3
+    2 1 5  4  10 11 8  3
+    6 7 3  2  12 13 14  5
+    3 2 6  2  14 15 12  5
+    7 4 0  4  16 17 18  2
+    0 3 7  4  18 19 16  2
+  tverts 20
+    -195.329 166.185 0
+    -195.329 164.747 0
+    -195.179 164.747 0
+    -195.179 166.185 0
+    0.540384 166.185 0
+    0.540384 164.747 0
+    0.590384 164.747 0
+    0.590384 166.185 0
+    0.459616 -195.329 0
+    0.459616 -195.179 0
+    0.409616 -195.179 0
+    0.409616 -195.329 0
+    0.459616 164.747 0
+    0.459616 166.185 0
+    0.409616 166.185 0
+    0.409616 164.747 0
+    0.540384 -195.179 0
+    0.540384 -195.329 0
+    0.590384 -195.329 0
+    0.590384 -195.179 0
+endnode
+node trimesh railtrack21
+  parent railline_xing
+  position -1.1 0.0 0.0950861
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 0.588 0.588 0.588 
+  Diffuse 0.588 0.588 0.588 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 0.0 0.0 
+  bitmap steam_t_woodp
+  verts 8
+    0.1 5.0 0.1
+    -0.1 5.0 0.1
+    -0.1 -5.0 0.1
+    0.1 -5.0 0.1
+    -0.1 5.0 -0.1
+    -0.1 -5.0 -0.1
+    0.1 -5.0 -0.1
+    0.1 5.0 -0.1
+  faces 6
+    0 1 2  1  0 1 2  0
+    2 3 0  1  2 3 0  0
+    4 5 2  2  4 5 6  3
+    2 1 4  2  6 7 4  3
+    6 7 0  2  8 5 6  2
+    0 3 6  2  6 9 8  2
+  tverts 10
+    0.66909 0.000499547 0
+    0.702908 0.000499547 0
+    0.702909 0.9995 0
+    0.669091 0.9995 0
+    0.000499547 0.000499517 0
+    0.9995 0.000499517 0
+    0.9995 0.999501 0
+    0.000499547 0.999501 0
+    0.000499606 0.000499517 0
+    0.000499606 0.999501 0
+endnode
+node trimesh railtie96
+  parent railline_xing
+  position 0.0 3.5 0.0450861
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 0.588 0.588 0.588 
+  Diffuse 0.588 0.588 0.588 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 0.0 0.0 
+  bitmap steam_t_wood2
+  verts 8
+    1.44 0.15 0.05
+    -1.44 0.15 0.05
+    -1.44 -0.15 0.05
+    1.44 -0.15 0.05
+    1.44 0.15 -0.05
+    -1.44 0.15 -0.05
+    -1.44 -0.15 -0.05
+    1.44 -0.15 -0.05
+  faces 10
+    0 1 2  1  0 1 2  0
+    2 3 0  1  2 3 0  0
+    4 5 1  2  4 5 6  4
+    1 0 4  2  6 7 4  4
+    5 6 2  4  8 9 10  3
+    2 1 5  4  10 11 8  3
+    6 7 3  2  12 13 14  5
+    3 2 6  2  14 15 12  5
+    7 4 0  4  16 17 18  2
+    0 3 7  4  18 19 16  2
+  tverts 20
+    -195.829 166.185 0
+    -195.829 164.747 0
+    -195.679 164.747 0
+    -195.679 166.185 0
+    0.540384 166.185 0
+    0.540384 164.747 0
+    0.590384 164.747 0
+    0.590384 166.185 0
+    0.459616 -195.829 0
+    0.459616 -195.679 0
+    0.409616 -195.679 0
+    0.409616 -195.829 0
+    0.459616 164.747 0
+    0.459616 166.185 0
+    0.409616 166.185 0
+    0.409616 164.747 0
+    0.540384 -195.679 0
+    0.540384 -195.829 0
+    0.590384 -195.829 0
+    0.590384 -195.679 0
+endnode
+node trimesh railtie99
+  parent railline_xing
+  position 0.0 -4.5 0.0450861
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 0.588 0.588 0.588 
+  Diffuse 0.588 0.588 0.588 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 0.0 0.0 
+  bitmap steam_t_wood2
+  verts 8
+    1.44 0.15 0.05
+    -1.44 0.15 0.05
+    -1.44 -0.15 0.05
+    1.44 -0.15 0.05
+    1.44 0.15 -0.05
+    -1.44 0.15 -0.05
+    -1.44 -0.15 -0.05
+    1.44 -0.15 -0.05
+  faces 10
+    0 1 2  1  0 1 2  0
+    2 3 0  1  2 3 0  0
+    4 5 1  2  4 5 6  4
+    1 0 4  2  6 7 4  4
+    5 6 2  4  8 9 10  3
+    2 1 5  4  10 11 8  3
+    6 7 3  2  12 13 14  5
+    3 2 6  2  14 15 12  5
+    7 4 0  4  16 17 18  2
+    0 3 7  4  18 19 16  2
+  tverts 20
+    -191.829 166.185 0
+    -191.829 164.747 0
+    -191.679 164.747 0
+    -191.679 166.185 0
+    0.540384 166.185 0
+    0.540384 164.747 0
+    0.590384 164.747 0
+    0.590384 166.185 0
+    0.459616 -191.829 0
+    0.459616 -191.679 0
+    0.409616 -191.679 0
+    0.409616 -191.829 0
+    0.459616 164.747 0
+    0.459616 166.185 0
+    0.409616 166.185 0
+    0.409616 164.747 0
+    0.540384 -191.679 0
+    0.540384 -191.829 0
+    0.590384 -191.829 0
+    0.590384 -191.679 0
+endnode
+node trimesh railtie101
+  parent railline_xing
+  position 1.47 -0.13 -0.0349139
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 0.588 0.588 0.588 
+  Diffuse 0.588 0.588 0.588 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 0.0 0.0 
+  bitmap steam_t_wood2
+  verts 8
+    0.17 -2.07 0.05
+    0.17 2.07 0.05
+    -0.17 2.07 0.05
+    -0.17 -2.07 0.05
+    0.17 -2.07 -0.05
+    0.17 2.07 -0.05
+    -0.17 2.07 -0.05
+    -0.17 -2.07 -0.05
+  faces 10
+    0 1 2  1  0 1 2  0
+    2 3 0  1  2 3 0  0
+    4 5 1  2  0 1 1  4
+    1 0 4  2  1 0 0  4
+    5 6 2  4  1 2 2  3
+    2 1 5  4  2 1 1  3
+    6 7 3  2  2 3 3  5
+    3 2 6  2  3 2 2  5
+    7 4 0  4  3 0 0  2
+    0 3 7  4  0 3 3  2
+  tverts 4
+    0.579941 2.17282 0
+    0.57994 0.924069 0
+    0.768813 0.924069 0
+    0.768813 2.17282 0
+endnode
+node trimesh railtrack22
+  parent railline_xing
+  position 1.1 0.0 0.0950861
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 0.588 0.588 0.588 
+  Diffuse 0.588 0.588 0.588 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 0.0 0.0 
+  bitmap steam_t_woodp
+  verts 8
+    0.1 5.0 0.1
+    -0.1 5.0 0.1
+    -0.1 -5.0 0.1
+    0.1 -5.0 0.1
+    -0.1 5.0 -0.1
+    -0.1 -5.0 -0.1
+    0.1 -5.0 -0.1
+    0.1 5.0 -0.1
+  faces 6
+    0 1 2  1  0 1 2  0
+    2 3 0  1  2 3 0  0
+    4 5 2  2  4 5 6  3
+    2 1 4  2  6 7 4  3
+    6 7 0  2  8 5 6  2
+    0 3 6  2  6 9 8  2
+  tverts 10
+    0.297091 0.000499606 0
+    0.330909 0.000499606 0
+    0.33091 0.9995 0
+    0.297092 0.9995 0
+    0.000499606 0.000499517 0
+    0.9995 0.000499517 0
+    0.9995 0.999501 0
+    0.000499606 0.999501 0
+    0.000499547 0.000499517 0
+    0.000499547 0.999501 0
+endnode
+node trimesh railtie100
+  parent railline_xing
+  position -1.46 -0.13 -0.0349139
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 0.588 0.588 0.588 
+  Diffuse 0.588 0.588 0.588 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center -0.5 0.0 0.0 
+  bitmap steam_t_wood2
+  verts 8
+    0.16 -2.07 0.05
+    0.16 2.07 0.05
+    -0.17 2.07 0.05
+    -0.17 -2.07 0.05
+    0.16 -2.07 -0.05
+    0.16 2.07 -0.05
+    -0.17 2.07 -0.05
+    -0.17 -2.07 -0.05
+  faces 10
+    0 1 2  1  0 1 2  0
+    2 3 0  1  2 3 0  0
+    4 5 1  2  0 1 1  4
+    1 0 4  2  1 0 0  4
+    5 6 2  4  1 2 2  3
+    2 1 5  4  2 1 1  3
+    6 7 3  2  2 3 3  5
+    3 2 6  2  3 2 2  5
+    7 4 0  4  3 0 0  2
+    0 3 7  4  0 3 3  2
+  tverts 4
+    0.23119 2.17282 0
+    0.23119 0.924069 0
+    0.42006 0.924069 0
+    0.42006 2.17282 0
+endnode
+node trimesh box1537
+  parent railline_xing
+  position 2.29 2.74 2.93
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 0.588 0.588 0.588 
+  Diffuse 0.588 0.588 0.588 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 0.5 -0.5 
+  bitmap steam_t_grey
+  verts 8
+    -0.01 -0.4 0.3
+    -0.01 -0.3 0.4
+    -0.01 0.41 -0.3
+    -0.01 0.31 -0.41
+    0.01 -0.4 0.3
+    0.01 0.31 -0.41
+    0.01 0.41 -0.3
+    0.01 -0.3 0.4
+  faces 12
+    0 1 2  1  0 1 2  1
+    2 3 0  1  2 3 0  1
+    4 5 6  1  3 0 1  0
+    6 7 4  1  1 2 3  0
+    0 3 5  2  3 0 1  4
+    5 4 0  2  1 2 3  4
+    3 2 6  4  3 0 1  3
+    6 5 3  4  1 2 3  3
+    2 1 7  2  3 0 1  5
+    7 6 2  2  1 2 3  5
+    1 0 4  4  3 0 1  2
+    4 7 1  4  1 2 3  2
+  tverts 4
+    1.0 0.0 0
+    1.0 1.0 0
+    0.0 1.0 0
+    0.0 0.0 0
+endnode
+node trimesh box1535
+  parent railline_xing
+  position -2.16 -2.8 2.93
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 0.588 0.588 0.588 
+  Diffuse 0.588 0.588 0.588 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 0.5 -0.5 
+  bitmap steam_t_grey
+  verts 8
+    0.01 0.41 0.3
+    0.01 0.31 0.4
+    0.01 -0.4 -0.3
+    0.01 -0.3 -0.41
+    -0.01 0.41 0.3
+    -0.01 -0.3 -0.41
+    -0.01 -0.4 -0.3
+    -0.01 0.31 0.4
+  faces 12
+    0 1 2  1  0 1 2  1
+    2 3 0  1  2 3 0  1
+    4 5 6  1  3 0 1  0
+    6 7 4  1  1 2 3  0
+    0 3 5  2  3 0 1  4
+    5 4 0  2  1 2 3  4
+    3 2 6  4  3 0 1  3
+    6 5 3  4  1 2 3  3
+    2 1 7  2  3 0 1  5
+    7 6 2  2  1 2 3  5
+    1 0 4  4  3 0 1  2
+    4 7 1  4  1 2 3  2
+  tverts 4
+    1.0 0.0 0
+    1.0 1.0 0
+    0.0 1.0 0
+    0.0 0.0 0
+endnode
+node trimesh box06
+  parent railline_xing
+  position -2.14 -2.8 2.93
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 0.588 0.588 0.588 
+  Diffuse 0.588 0.588 0.588 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 0.5 -0.5 
+  bitmap steam_t_grey
+  verts 8
+    0.01 0.31 -0.41
+    0.01 0.41 -0.3
+    0.01 -0.3 0.4
+    0.01 -0.4 0.3
+    -0.01 0.31 -0.41
+    -0.01 -0.4 0.3
+    -0.01 -0.3 0.4
+    -0.01 0.41 -0.3
+  faces 12
+    0 1 2  1  0 1 2  1
+    2 3 0  1  2 3 0  1
+    4 5 6  1  3 0 1  0
+    6 7 4  1  1 2 3  0
+    0 3 5  2  3 0 1  4
+    5 4 0  2  1 2 3  4
+    3 2 6  4  3 0 1  3
+    6 5 3  4  1 2 3  3
+    2 1 7  2  3 0 1  5
+    7 6 2  2  1 2 3  5
+    1 0 4  4  3 0 1  2
+    4 7 1  4  1 2 3  2
+  tverts 4
+    1.0 0.0 0
+    1.0 1.0 0
+    0.0 1.0 0
+    0.0 0.0 0
+endnode
+node trimesh box1536
+  parent railline_xing
+  position 2.27 2.74 2.93
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 0.588 0.588 0.588 
+  Diffuse 0.588 0.588 0.588 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 0.5 -0.5 
+  bitmap steam_t_grey
+  verts 8
+    -0.01 -0.3 -0.41
+    -0.01 -0.4 -0.3
+    -0.01 0.31 0.4
+    -0.01 0.41 0.3
+    0.01 -0.3 -0.41
+    0.01 0.41 0.3
+    0.01 0.31 0.4
+    0.01 -0.4 -0.3
+  faces 12
+    0 1 2  1  0 1 2  1
+    2 3 0  1  2 3 0  1
+    4 5 6  1  3 0 1  0
+    6 7 4  1  1 2 3  0
+    0 3 5  2  3 0 1  4
+    5 4 0  2  1 2 3  4
+    3 2 6  4  3 0 1  3
+    6 5 3  4  1 2 3  3
+    2 1 7  2  3 0 1  5
+    7 6 2  2  1 2 3  5
+    1 0 4  4  3 0 1  2
+    4 7 1  4  1 2 3  2
+  tverts 4
+    1.0 0.0 0
+    1.0 1.0 0
+    0.0 1.0 0
+    0.0 0.0 0
+endnode
+node trimesh crossingsign
+  parent railline_xing
+  position -2.08 -2.8 1.5
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 0.588 0.588 0.588 
+  Diffuse 0.588 0.588 0.588 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.5 0.5 0.0 
+  bitmap steam_t_wood2
+  verts 8
+    0.06 0.06 1.5
+    -0.05 0.06 1.5
+    -0.05 -0.05 1.5
+    0.06 -0.05 1.5
+    0.06 0.06 -1.5
+    -0.05 0.06 -1.5
+    -0.05 -0.05 -1.5
+    0.06 -0.05 -1.5
+  faces 10
+    0 1 2  1  0 1 2  0
+    2 3 0  1  2 3 0  0
+    4 5 1  2  4 5 6  4
+    1 0 4  2  6 7 4  4
+    5 6 2  4  8 9 10  3
+    2 1 5  4  10 11 8  3
+    6 7 3  2  12 13 14  5
+    3 2 6  2  14 15 12  5
+    7 4 0  4  16 17 18  2
+    0 3 7  4  18 19 16  2
+  tverts 20
+    2.54296 2.85746 0
+    2.59796 2.85746 0
+    2.59796 2.91246 0
+    2.54296 2.91246 0
+    2.54296 0.75 0
+    2.59796 0.75 0
+    2.59796 2.25 0
+    2.54296 2.25 0
+    2.85746 0.75 0
+    2.91246 0.75 0
+    2.91246 2.25 0
+    2.85746 2.25 0
+    0.402041 0.75 0
+    0.457041 0.75 0
+    0.457041 2.25 0
+    0.402041 2.25 0
+    0.087539 0.75 0
+    0.142539 0.75 0
+    0.142539 2.25 0
+    0.087539 2.25 0
+endnode
+node trimesh crossingsign01
+  parent railline_xing
+  position 2.2 2.74 1.5
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 0.588 0.588 0.588 
+  Diffuse 0.588 0.588 0.588 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.5 0.5 0.0 
+  bitmap steam_t_wood2
+  verts 8
+    -0.05 -0.05 1.5
+    0.06 -0.05 1.5
+    0.06 0.06 1.5
+    -0.05 0.06 1.5
+    -0.05 -0.05 -1.5
+    0.06 -0.05 -1.5
+    0.06 0.06 -1.5
+    -0.05 0.06 -1.5
+  faces 10
+    0 1 2  1  0 1 2  0
+    2 3 0  1  2 3 0  0
+    4 5 1  2  4 5 6  4
+    1 0 4  2  6 7 4  4
+    5 6 2  4  8 9 10  3
+    2 1 5  4  10 11 8  3
+    6 7 3  2  12 13 14  5
+    3 2 6  2  14 15 12  5
+    7 4 0  4  16 17 18  2
+    0 3 7  4  18 19 16  2
+  tverts 20
+    -0.542959 -0.857461 0
+    -0.597959 -0.857461 0
+    -0.597959 -0.912461 0
+    -0.542959 -0.912461 0
+    1.54296 -0.25 0
+    1.59796 -0.25 0
+    1.59796 1.25 0
+    1.54296 1.25 0
+    1.85746 -0.25 0
+    1.91246 -0.25 0
+    1.91246 1.25 0
+    1.85746 1.25 0
+    -0.597959 -0.25 0
+    -0.542959 -0.25 0
+    -0.542959 1.25 0
+    -0.597959 1.25 0
+    -0.912461 -0.25 0
+    -0.857461 -0.25 0
+    -0.857461 1.25 0
+    -0.912461 1.25 0
+endnode
+endmodelgeom railline_xing
+donemodel railline_xing

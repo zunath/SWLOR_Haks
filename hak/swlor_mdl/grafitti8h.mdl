@@ -1,0 +1,48 @@
+#Exported from 3ds max by MDL Plug-in Suite 1.0b
+#http://www.bricksbuilder.com/nwn/utils/
+#MAXMODEL ASCII
+# model: NWNModel01
+filedependancy Unknown
+newmodel NWNModel01
+setsupermodel NWNModel01 NULL
+classification Character
+setanimationscale 1.0
+#MAXGEOM  ASCII
+beginmodelgeom NWNModel01
+node dummy NWNModel01
+  parent NULL
+endnode
+node trimesh Object03
+  parent NWNModel01
+  position 0.00130786 -0.00745575 0
+  orientation 0 0 0 0
+  wirecolor 0.601563 0.601563 0.601563
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 10
+  bitmap grafitti8h
+  render 1
+  Shadow 0
+  beaming 0
+  transparencyhint 1
+  tilefade 0
+  rotatetexture 0
+  verts 4
+    1.05 -0.00278071 0.25
+    -1.05 -0.00278052 0.25
+    -1.05 -0.00278052 1.35
+    1.05 -0.00278071 1.35
+  faces 2
+    0 1 2  8  4 1 5  4
+    2 3 0  8  2 3 0  4
+  tverts 6
+    0.000499517 -0.0141501 1.00481
+    0.9995 -0.0141501 -0.00480765
+    0.9995 0.984851 -0.00480765
+    0.000499517 0.984851 1.00481
+    0.000499517 -0.0141501 1.00481
+    0.9995 0.984851 -0.00480765
+endnode
+endmodelgeom NWNModel01
+donemodel NWNModel01

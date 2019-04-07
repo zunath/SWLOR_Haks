@@ -1,0 +1,131 @@
+# Exported from NWmax 0.8 b60 at 15/01/2010 12:36:37
+# mdl file
+#
+#NWmax MODEL ASCII
+# model: pkt_m03x29
+#local file: Unknown
+filedependancy Unknown
+newmodel pkt_m03x29
+setsupermodel pkt_m03x29 NULL
+classification Character
+setanimationscale 1.0
+#NWmax GEOM  ASCII
+beginmodelgeom pkt_m03x29
+node dummy pkt_m03x29
+  parent NULL
+endnode
+node dummy m03x29_impact
+  parent pkt_m03x29
+  position 0.0 0.0 0.85
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.694118 0.101961 0.345098 
+endnode
+node dummy m03x29_ground
+  parent pkt_m03x29
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.694118 0.101961 0.345098 
+endnode
+node dummy m03x29_hand
+  parent pkt_m03x29
+  position 0.0 0.0 1.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.694118 0.101961 0.345098 
+endnode
+node dummy m03x29_head
+  parent pkt_m03x29
+  position 0.0 0.0 2.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.694118 0.101961 0.345098 
+endnode
+node dummy m03x29_head_hit
+  parent pkt_m03x29
+  position 0.0 0.0 1.5
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.694118 0.101961 0.345098 
+endnode
+node trimesh Line177
+  parent pkt_m03x29
+  position -0.138498 0.303362 -0.00470315
+  orientation 0.00132354 -0.00650793 0.999978 -0.386608
+  wirecolor 1.0 1.0 1.0 
+  ambient 0.776471 0.776471 0.776471 
+  diffuse 0.776471 0.776471 0.776471 
+  specular 0.0 0.0 0.0 
+  shininess 0.0
+  bitmap LTS_TrimN01
+  verts 10
+    -1.92797 1.45388 0.0
+    -1.87529 -1.17996 0.0
+    -1.87529 -1.17996 1.5
+    -1.92797 1.45388 1.5
+    0.653196 -2.81294 0.0
+    0.653196 -2.81294 1.5
+    2.33885 0.189639 0.0
+    2.33885 0.189639 1.5
+    0.811223 2.34939 0.0
+    0.811223 2.34939 1.5
+  faces 10
+    0 1 2  1  0 1 2  3
+    0 2 3  1  0 2 3  3
+    1 4 5  1  4 5 6  3
+    1 5 2  1  4 6 7  3
+    4 6 7  1  8 9 10  3
+    4 7 5  1  8 10 11  3
+    6 8 9  1  12 13 14  3
+    6 9 7  1  12 14 15  3
+    8 0 3  1  16 17 18  3
+    8 3 9  1  16 18 19  3
+  tverts 20
+    0.5209 0.0146953 0
+    1.03291 0.0146953 0
+    1.03291 0.488021 0
+    0.5209 0.488021 0
+    1.03291 0.0146953 0
+    1.64706 0.0146953 0
+    1.64706 0.488021 0
+    1.03291 0.488021 0
+    1.64706 0.0146953 0
+    2.39155 0.0146953 0
+    2.39155 0.488021 0
+    1.64706 0.488021 0
+    2.39155 0.0146953 0
+    2.92644 0.0146953 0
+    2.92644 0.488021 0
+    2.39155 0.488021 0
+    -0.00808728 0.0146953 0
+    0.5209 0.0146953 0
+    0.5209 0.488021 0
+    -0.00808728 0.488021 0
+endnode
+node trimesh Mesh167
+  parent pkt_m03x29
+  position -0.138498 0.303362 -0.00470315
+  orientation 0.00132344 -0.00650832 0.999978 -0.386608
+  wirecolor 1.0 1.0 1.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 0.0
+  bitmap LTS_unflr06
+  verts 5
+    -1.87529 -1.17996 1.5
+    0.653196 -2.81294 1.5
+    2.33885 0.189639 1.5
+    0.811223 2.34939 1.5
+    -1.92797 1.45388 1.5
+  faces 3
+    0 1 2  1  0 1 2  1
+    0 2 3  1  0 2 3  1
+    0 3 4  1  4 5 6  1
+  tverts 7
+    0.361284 0.436788 0
+    0.52985 0.327922 0
+    0.642227 0.528094 0
+    0.540386 0.672078 0
+    0.361284 0.436788 0
+    0.540386 0.672078 0
+    0.357773 0.612377 0
+endnode
+endmodelgeom pkt_m03x29
+donemodel pkt_m03x29

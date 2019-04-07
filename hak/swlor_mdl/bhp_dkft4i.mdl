@@ -1,0 +1,130 @@
+#MAXMODEL ASCII
+# model: bhp_dkft4i
+filedependancy bhp_dkft4i.max
+newmodel bhp_dkft4i
+setsupermodel bhp_dkft4i NULL
+classification character
+setanimationscale 0.637499988
+#MAXGEOM  ASCII
+beginmodelgeom bhp_dkft4i
+node dummy bhp_dkft4i
+  parent NULL
+  #part-number 0
+endnode
+node dummy dkft4i_ground
+  parent bhp_dkft4i
+  #part-number 1
+  position 0.00231592008 -0.00445439992 0
+  orientation 0 0 0 0
+endnode
+node dummy dkft4i_hand
+  parent bhp_dkft4i
+  #part-number 2
+  position -0.00254315999 0.452656001 0.167794004
+  orientation 0 0 0 0
+endnode
+node dummy dkft4i_head
+  parent bhp_dkft4i
+  #part-number 3
+  position 0.0116384998 0.000594843004 0.178323001
+  orientation 0 0 0 0
+endnode
+node dummy dkft4i_head_hit
+  parent bhp_dkft4i
+  #part-number 4
+  position -0.00254315999 -0.00690100994 0.168236002
+  orientation 0 0 0 0
+endnode
+node dummy dkft4i_impact
+  parent bhp_dkft4i
+  #part-number 5
+  position -0.00254315999 -0.00701313 0.185788006
+  orientation 0 0 0 0
+endnode
+node trimesh Fence
+  parent bhp_dkft4i
+  #part-number 6
+  ambient 1 1 1
+  diffuse 0.588 0.588 0.588
+  specular 0 0 0
+  shininess 10
+  bitmap bh_plc_dkft_mf
+  verts 16
+    -1.57574999 0.0382310003 0
+    -0.840954006 0.0382310003 0
+    -0.840954006 0.0114618 0.520527005
+    -1.57200003 0.0382310003 0.520527005
+    0.923456013 0.0382310003 0
+    0.923456013 0.0114618 0.520527005
+    1.59466004 0.0382310003 0
+    1.57200003 0.0712547004 0.520527005
+    -0.840954006 0.0114618 0.947224975
+    -1.52091002 0.0837292001 1.01066995
+    0.923456013 0.0114618 0.947224975
+    1.53640997 0.0382310003 0.947224975
+    -0.840954006 0.0382310003 1.28158998
+    -1.42995 0.0837292001 1.24215996
+    0.923456013 0.0382310003 1.24196994
+    1.44691002 0.0382310003 1.20203996
+  tverts 16
+    -0.000491064973 0.500868022 0
+    0.115295999 0.500868022 0
+    0.115295999 0.703777015 0
+    9.9224002e-005 0.703777015 0
+    0.393328011 0.500868022 0
+    0.393328011 0.703777015 0
+    0.499094009 0.500868022 0
+    0.495523989 0.703777015 0
+    0.115295999 0.870110989 0
+    0.00814983994 0.894842029 0
+    0.393328011 0.870110989 0
+    0.489915997 0.870110989 0
+    0.115295999 1.00045002 0
+    0.0284937005 0.952926993 0
+    0.393328011 0.985009015 0
+    0.469922006 0.948687017 0
+  faces 36
+    0 1 2 1 0 1 2 5
+    2 3 0 1 2 3 0 5
+    1 4 5 1 1 4 5 5
+    5 2 1 1 5 2 1 5
+    4 6 7 1 4 6 7 5
+    7 5 4 1 7 5 4 5
+    3 2 8 1 3 2 8 5
+    8 9 3 1 8 9 3 5
+    2 5 10 1 2 5 10 5
+    10 8 2 1 10 8 2 5
+    5 7 11 1 5 7 11 5
+    11 10 5 1 11 10 5 5
+    9 8 12 1 9 8 12 5
+    12 13 9 1 12 13 9 5
+    8 10 14 1 8 10 14 5
+    14 12 8 1 14 12 8 5
+    10 11 15 1 10 11 15 5
+    15 14 10 1 15 14 10 5
+    6 4 5 2 6 4 5 6
+    5 7 6 2 5 7 6 6
+    4 1 2 2 4 1 2 6
+    2 5 4 2 2 5 4 6
+    1 0 3 2 1 0 3 6
+    3 2 1 2 3 2 1 6
+    7 5 10 2 7 5 10 6
+    10 11 7 2 10 11 7 6
+    5 2 8 2 5 2 8 6
+    8 10 5 2 8 10 5 6
+    2 3 9 2 2 3 9 6
+    9 8 2 2 9 8 2 6
+    11 10 14 2 11 10 14 6
+    14 15 11 2 14 15 11 6
+    10 8 12 2 10 8 12 6
+    12 14 10 2 12 14 10 6
+    8 9 13 2 8 9 13 6
+    13 12 8 2 13 12 8 6
+  position 0 0 0
+  orientation 0 0 0 0
+  scale 1
+  alpha 1
+endnode
+endmodelgeom bhp_dkft4i
+
+donemodel bhp_dkft4i

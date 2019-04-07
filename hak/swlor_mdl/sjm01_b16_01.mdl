@@ -1,0 +1,33 @@
+#MAXMODEL ASCII
+# model: sjm01_b16_01
+filedependancy sjm01_b16_01.max
+newmodel sjm01_b16_01
+setsupermodel sjm01_b16_01 NULL
+classification tile
+setanimationscale 1
+#MAXGEOM  ASCII
+beginmodelgeom sjm01_b16_01
+node dummy sjm01_b16_01
+  parent NULL
+  #part-number 0
+endnode
+node light sjm01_b16_01ml1
+  parent sjm01_b16_01
+  #part-number 1
+  ambientonly 0
+  shadow 0
+  isdynamic 0
+  affectdynamic 1
+  lightpriority 3
+  fadingLight 1
+  flareradius 0
+  position 0 -40 5
+  orientation 0 0 0 0
+  radius 14
+  multiplier 1
+  color 0 0 0
+endnode
+endmodelgeom sjm01_b16_01
+
+donemodel sjm01_b16_01
+

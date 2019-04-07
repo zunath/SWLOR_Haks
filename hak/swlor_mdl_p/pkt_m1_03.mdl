@@ -1,0 +1,76 @@
+# Exported from NWmax 0.8 b60 at 14/01/2010 20:21:37
+# mdl file
+#
+#NWmax MODEL ASCII
+# model: pkt_m1_03
+#local file: Unknown
+filedependancy Unknown
+newmodel pkt_m1_03
+setsupermodel pkt_m1_03 NULL
+classification Character
+setanimationscale 1.0
+#NWmax GEOM  ASCII
+beginmodelgeom pkt_m1_03
+node dummy pkt_m1_03
+  parent NULL
+endnode
+node dummy m1_03_impact
+  parent pkt_m1_03
+  position 0.0 0.0 0.85
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.603922 0.72549 0.898039 
+endnode
+node dummy m1_03_ground
+  parent pkt_m1_03
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.603922 0.72549 0.898039 
+endnode
+node dummy m1_03_hand
+  parent pkt_m1_03
+  position 0.0 0.0 1.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.603922 0.72549 0.898039 
+endnode
+node dummy m1_03_head
+  parent pkt_m1_03
+  position 0.0 0.0 2.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.603922 0.72549 0.898039 
+endnode
+node dummy m1_03_head_hit
+  parent pkt_m1_03
+  position 0.0 0.0 1.5
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.603922 0.72549 0.898039 
+endnode
+node trimesh lightsx2
+  parent pkt_m1_03
+  position -0.00105034 0.00176242 1.0006
+  orientation 0.0 0.0 -1.0 -1.5708
+  wirecolor 1.0 1.0 1.0 
+  ambient 0.0 0.0 0.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 0.0
+  bitmap LHR_lit01
+  verts 4
+    -3.05176e-007 0.938391 -0.111038
+    -3.05176e-007 0.938391 0.111038
+    -3.05176e-007 -1.06228 -0.111038
+    -3.05176e-007 -1.06228 0.111038
+  faces 2
+    0 1 2  1  4 5 6  3
+    3 2 1  1  7 6 5  3
+  tverts 8
+    2.00165 0.757692 0
+    2.00165 0.498347 0
+    -0.00556755 0.498346 0
+    -0.00556755 0.757692 0
+    -0.000817001 0.498347 0
+    -0.000817001 0.757692 0
+    2.00165 0.498347 0
+    2.00165 0.757692 0
+endnode
+endmodelgeom pkt_m1_03
+donemodel pkt_m1_03

@@ -1,0 +1,81 @@
+# Exported from NWmax 0.8 b60 at 11/30/2006 2:27:55 PM
+# mdl file
+#
+#NWmax MODEL ASCII
+# model: mdrnfpipe_01
+#local file: Unknown
+filedependancy Unknown
+newmodel mdrnfpipe_01
+setsupermodel mdrnfpipe_01 NULL
+classification Character
+setanimationscale 0.0
+#NWmax GEOM  ASCII
+beginmodelgeom mdrnfpipe_01
+node dummy mdrnfpipe_01
+  parent NULL
+endnode
+node dummy rootdummy
+  parent mdrnfpipe_01
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.894118 0.839216 0.6 
+endnode
+node trimesh Box01
+  parent mdrnfpipe_01
+  position 0.0 0.0 0.0
+  orientation 0.0 0.0 -1.0 -1.5708
+  wirecolor 0.603922 0.843137 0.898039 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 0
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 1
+  center 0.0 0.0 0.5 
+  bitmap mdrnfpipe_01
+  verts 8
+    -0.2475 -5.0 0.0
+    0.2475 -5.0 0.0
+    -0.2475 5.0 0.0
+    0.2475 5.0 0.0
+    -0.2475 -5.0 0.01
+    0.2475 -5.0 0.01
+    -0.2475 5.0 0.01
+    0.2475 5.0 0.01
+  faces 12
+    0 2 3  2  9 11 10  2
+    3 1 0  2  10 8 9  2
+    4 5 7  4  8 9 11  1
+    7 6 4  4  11 10 8  1
+    0 1 5  8  4 5 7  5
+    5 4 0  8  7 6 4  5
+    1 3 7  16  0 1 3  4
+    7 5 1  16  3 2 0  4
+    3 2 6  32  4 5 7  6
+    6 7 3  32  7 6 4  6
+    2 0 4  64  0 1 3  3
+    4 6 2  64  3 2 0  3
+  tverts 12
+    0.0 0.0 0
+    1.0 0.0 0
+    0.0 5.0 0
+    1.0 5.0 0
+    0.0 0.0 0
+    1.0 0.0 0
+    0.0 5.0 0
+    1.0 5.0 0
+    0.0 0.0 0
+    1.0 0.0 0
+    0.0 5.0 0
+    1.0 5.0 0
+endnode
+endmodelgeom mdrnfpipe_01
+donemodel mdrnfpipe_01

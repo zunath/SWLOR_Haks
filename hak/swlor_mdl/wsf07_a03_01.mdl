@@ -1,0 +1,98 @@
+# Rewritten by CleanModels 3 Version 3.1.1 Sat Oct 25 21:48:46 2008
+#MAXMODEL ASCII
+filedependency Unknown
+newmodel wsf07_a03_01
+setsupermodel wsf07_a03_01 null
+setanimationscale 1
+classification TILE
+#MAXGEOM ASCII
+beginmodelgeom wsf07_a03_01
+node dummy wsf07_a03_01
+  parent NULL
+endnode
+node light wsf07_a03_01ml1
+  parent wsf07_a03_01
+  orientation 0 0 0 0
+  wirecolor 0.0351563 0.0351563 0.0351563
+  radius 14
+  multiplier 1
+  color 0 0 0
+  ambientonly 0
+  ndynamictype 0
+  affectdynamic 1
+  shadow 0
+  lightpriority 1
+  lensflares 0
+  fadinglight 0
+  position 0 0 20
+endnode
+node light wsf07_a03_01ml2
+  parent wsf07_a03_01
+  orientation 0 0 0 0
+  wirecolor 0.0351563 0.0351563 0.0351563
+  radius 5
+  multiplier 1
+  color 0.0039216 0.0039216 0.0039216
+  ambientonly 0
+  ndynamictype 0
+  affectdynamic 1
+  shadow 0
+  lightpriority 1
+  lensflares 0
+  fadinglight 0
+  position -2.5 -2.5 17.5
+endnode
+node trimesh rock
+  parent wsf07_a03_01
+  orientation 0 0 0 0
+  wirecolor 0.339844 0.339844 0.339844
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 2
+  bitmap wsf01_mntn
+  render 1
+  beaming 0
+  transparencyhint 0
+  tilefade 0
+  rotatetexture 1
+  position 0 0 10
+  shadow 0
+  verts 4
+    -5 -5 0
+    5 -5 0
+    -5 5 0
+    5 5 0
+  faces 2
+    2 0 3 1 2 0 3 0
+    1 3 0 1 1 3 0 0
+  tverts 4
+    0.0004995 0.0004998 0
+    0.9995 0.0004995 0
+    0.0004998 0.999501 0
+    0.9995 0.9995 0
+endnode
+node aabb wsf07_a03_01_wok
+  parent wsf07_a03_01
+  orientation 0 0 0 0
+  wirecolor 0.527344 0.527344 0.527344
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 2
+  bitmap NULL
+  position 0 0 0
+  verts 4
+    -5 -5 10
+    5 -5 10
+    -5 5 10
+    5 5 10
+  faces 2
+    2 0 3 1 0 0 0 4
+    1 3 0 1 0 0 0 4
+  aabb     -5 -5 10 5 5 10 -1
+    -5 -5 10 5 5 10 0
+    -5 -5 10 5 5 10 1
+endnode
+endmodelgeom wsf07_a03_01
+donemodel wsf07_a03_01

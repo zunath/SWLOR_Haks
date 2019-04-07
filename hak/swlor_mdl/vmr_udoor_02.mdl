@@ -1,0 +1,2308 @@
+#MAXMODEL ASCII
+# model: vmr_udoor_02
+filedependancy vmr_udoor_02.max
+newmodel vmr_udoor_02
+setsupermodel vmr_udoor_02 NULL
+classification door
+setanimationscale 1
+#MAXGEOM  ASCII
+beginmodelgeom vmr_udoor_02
+node dummy vmr_udoor_02
+  parent NULL
+  #part-number 0
+endnode
+node trimesh Cylinder98
+  parent vmr_udoor_02
+  #part-number 1
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 1
+  bitmap vmr01_thron2
+  verts 7
+    0.0769921988 -0.00129883003 -0.562256992
+    -0.0280077998 0.0586463995 2.97588992
+    0.0769921988 -0.00129883003 2.96497989
+    -0.0280077998 0.0586463995 -0.562256992
+    -0.0280077998 -0.0612441003 2.97588992
+    -0.0280077998 -0.0612441003 -0.562256992
+    0.00699219014 -0.00129883003 3.39839005
+  tverts 7
+    0.578347981 0.0443348996 0
+    0.478332013 0.992570996 0
+    0.56783998 0.967805028 0
+    0.497547001 0.043352101 0
+    0.523642004 0.992570996 0
+    0.534466982 0.043352101 0
+    0.537406027 1.06305003 0
+  faces 9
+    0 1 2 1 0 1 2 3
+    0 3 1 1 0 3 1 3
+    3 4 1 1 3 4 1 3
+    3 5 4 1 3 5 4 3
+    5 2 4 1 5 2 4 3
+    5 0 2 1 5 0 2 3
+    6 2 1 2 6 2 1 1
+    6 1 4 2 6 1 4 1
+    6 4 2 2 6 4 2 1
+  position 0.460000008 0.0399999991 -0.501810014
+  orientation 0 0 0 0
+endnode
+node trimesh Cylinder100
+  parent Cylinder98
+  #part-number 2
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 1
+  bitmap vmr01_thron2
+  verts 7
+    0.0783300996 -0.00129883003 -0.562256992
+    -0.0266699996 0.0423237011 2.63013005
+    0.0783300027 -0.00129885005 2.58305001
+    -0.0266699009 0.0423237011 -0.562256992
+    -0.0266699996 -0.0449213982 2.63013005
+    -0.0266699009 -0.0449213982 -0.562256992
+    0.00832998008 -0.00129885005 2.92026997
+  tverts 7
+    0.578347981 0.0443348996 0
+    0.478332013 0.992570996 0
+    0.56783998 0.967805028 0
+    0.497547001 0.043352101 0
+    0.523642004 0.992570996 0
+    0.534466982 0.043352101 0
+    0.537406027 1.06305003 0
+  faces 9
+    0 1 2 1 0 1 2 3
+    0 3 1 1 0 3 1 3
+    3 4 1 1 3 4 1 3
+    3 5 4 1 3 5 4 3
+    5 2 4 1 5 2 4 3
+    5 0 2 1 5 0 2 3
+    6 2 1 2 6 2 1 1
+    6 1 4 2 6 1 4 1
+    6 4 2 2 6 4 2 1
+  position 1.39999998 0 0
+  orientation 0 0 0 0
+endnode
+node trimesh Cylinder101
+  parent Cylinder98
+  #part-number 3
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 1
+  bitmap vmr01_thron2
+  verts 7
+    0.0788280964 -0.00129883003 -0.562256992
+    -0.0261719003 0.0525740013 2.84726
+    0.0788280964 -0.00129883003 2.81697989
+    -0.0261719003 0.0525740013 -0.562256992
+    -0.0261719003 -0.0551716983 2.84726
+    -0.0261719003 -0.0551716983 -0.562256992
+    0.00882812031 -0.00129883003 3.21789002
+  tverts 7
+    0.578347981 0.0443348996 0
+    0.478332013 0.992570996 0
+    0.56783998 0.967805028 0
+    0.497547001 0.043352101 0
+    0.523642004 0.992570996 0
+    0.534466982 0.043352101 0
+    0.537406027 1.06305003 0
+  faces 9
+    0 1 2 1 0 1 2 3
+    0 3 1 1 0 3 1 3
+    3 4 1 1 3 4 1 3
+    3 5 4 1 3 5 4 3
+    5 2 4 1 5 2 4 3
+    5 0 2 1 5 0 2 3
+    6 2 1 2 6 2 1 1
+    6 1 4 2 6 1 4 1
+    6 4 2 2 6 4 2 1
+  position 0.879999995 0 0
+  orientation 0 0 0 0
+endnode
+node trimesh Cylinder102
+  parent Cylinder98
+  #part-number 4
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 1
+  bitmap vmr01_thron2
+  verts 7
+    0.0720508024 -0.00129883003 -0.562256992
+    -0.0329492018 0.0586463995 2.97588992
+    0.0720508024 -0.00129883003 2.96497989
+    -0.0329492018 0.0586463995 -0.562256992
+    -0.0329492018 -0.0612441003 2.97588992
+    -0.0329492018 -0.0612441003 -0.562256992
+    0.00205077999 -0.00129883003 3.39839005
+  tverts 7
+    0.578347981 0.0443348996 0
+    0.478332013 0.992570996 0
+    0.56783998 0.967805028 0
+    0.497547001 0.043352101 0
+    0.523642004 0.992570996 0
+    0.534466982 0.043352101 0
+    0.537406027 1.06305003 0
+  faces 9
+    0 1 2 1 0 1 2 3
+    0 3 1 1 0 3 1 3
+    3 4 1 1 3 4 1 3
+    3 5 4 1 3 5 4 3
+    5 2 4 1 5 2 4 3
+    5 0 2 1 5 0 2 3
+    6 2 1 2 6 2 1 1
+    6 1 4 2 6 1 4 1
+    6 4 2 2 6 4 2 1
+  position 0.419999987 0 0
+  orientation 0 0 0 0
+endnode
+node trimesh Cylinder99
+  parent Cylinder98
+  #part-number 5
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 1
+  bitmap vmr01_thron2
+  verts 7
+    0.0727246031 -0.00129883003 -0.562256992
+    -0.0322755016 0.0271905009 2.30957007
+    0.0727244988 -0.00129883003 2.24542999
+    -0.0322754011 0.0271905009 -0.562256992
+    -0.0322755016 -0.0297880992 2.30957007
+    -0.0322754011 -0.0297880992 -0.562256992
+    0.0027244899 -0.00129883003 2.48432994
+  tverts 7
+    0.578347981 0.0443348996 0
+    0.478332013 0.992570996 0
+    0.56783998 0.967805028 0
+    0.497547001 0.043352101 0
+    0.523642004 0.992570996 0
+    0.534466982 0.043352101 0
+    0.537406027 1.06305003 0
+  faces 9
+    0 1 2 1 0 1 2 3
+    0 3 1 1 0 3 1 3
+    3 4 1 1 3 4 1 3
+    3 5 4 1 3 5 4 3
+    5 2 4 1 5 2 4 3
+    5 0 2 1 5 0 2 3
+    6 2 1 2 6 2 1 1
+    6 1 4 2 6 1 4 1
+    6 4 2 2 6 4 2 1
+  position 1.85000002 0 0
+  orientation 0 0 0 0
+endnode
+node trimesh Cylinder95
+  parent Cylinder98
+  #part-number 6
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 1
+  bitmap vmr01_thron2
+  verts 7
+    0.0734082013 -0.00129883003 -0.562256992
+    -0.0315917991 0.0546183996 2.89055991
+    0.0734082013 -0.00129882002 2.91323996
+    -0.0315917991 0.0546183996 -0.562256992
+    -0.0315917991 -0.0572161004 2.89055991
+    -0.0315917991 -0.0572161004 -0.562256992
+    0.00340822991 -0.00129882002 3.29934001
+  tverts 7
+    0.578347981 0.0443348996 0
+    0.478332013 0.992570996 0
+    0.56783998 0.967805028 0
+    0.497547001 0.043352101 0
+    0.523642004 0.992570996 0
+    0.534466982 0.043352101 0
+    0.537406027 1.06305003 0
+  faces 9
+    0 1 2 1 0 1 2 3
+    0 3 1 1 0 3 1 3
+    3 4 1 1 3 4 1 3
+    3 5 4 1 3 5 4 3
+    5 2 4 1 5 2 4 3
+    5 0 2 1 5 0 2 3
+    6 2 1 2 6 2 1 1
+    6 1 4 2 6 1 4 1
+    6 4 2 2 6 4 2 1
+  position -1.49000001 0 0
+  orientation 0 0 0 0
+endnode
+node trimesh Cylinder96
+  parent Cylinder98
+  #part-number 7
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 1
+  bitmap vmr01_thron2
+  verts 7
+    0.0779784992 -0.00129883003 -0.562256992
+    -0.0270215999 0.0456661992 2.70093012
+    0.0779784024 -0.00129885005 2.7404201
+    -0.0270214994 0.0456661992 -0.562256992
+    -0.0270215999 -0.0482639 2.70093012
+    -0.0270214994 -0.0482637994 -0.562256992
+    0.00797841977 -0.00129885005 3.05344009
+  tverts 7
+    0.578347981 0.0443348996 0
+    0.478332013 0.992570996 0
+    0.56783998 0.967805028 0
+    0.497547001 0.043352101 0
+    0.523642004 0.992570996 0
+    0.534466982 0.043352101 0
+    0.537406027 1.06305003 0
+  faces 9
+    0 1 2 1 0 1 2 3
+    0 3 1 1 0 3 1 3
+    3 4 1 1 3 4 1 3
+    3 5 4 1 3 5 4 3
+    5 2 4 1 5 2 4 3
+    5 0 2 1 5 0 2 3
+    6 2 1 2 6 2 1 1
+    6 1 4 2 6 1 4 1
+    6 4 2 2 6 4 2 1
+  position -2.42000008 0 0
+  orientation 0 0 0 0
+endnode
+node trimesh Cylinder97
+  parent Cylinder98
+  #part-number 8
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 1
+  bitmap vmr01_thron2
+  verts 7
+    0.0784569979 -0.00129883003 -0.562256992
+    -0.0265430994 0.0296183005 2.36100006
+    0.078456901 -0.00129882002 2.41985011
+    -0.0265430007 0.0296183005 -0.562256992
+    -0.0265430994 -0.0322159007 2.36100006
+    -0.0265430007 -0.0322159007 -0.562256992
+    0.00845692027 -0.00129882002 2.60783005
+  tverts 7
+    0.578347981 0.0443348996 0
+    0.478332013 0.992570996 0
+    0.56783998 0.967805028 0
+    0.497547001 0.043352101 0
+    0.523642004 0.992570996 0
+    0.534466982 0.043352101 0
+    0.537406027 1.06305003 0
+  faces 9
+    0 1 2 1 0 1 2 3
+    0 3 1 1 0 3 1 3
+    3 4 1 1 3 4 1 3
+    3 5 4 1 3 5 4 3
+    5 2 4 1 5 2 4 3
+    5 0 2 1 5 0 2 3
+    6 2 1 2 6 2 1 1
+    6 1 4 2 6 1 4 1
+    6 4 2 2 6 4 2 1
+  position -2.88000011 0 0
+  orientation 0 0 0 0
+endnode
+node trimesh Cylinder104
+  parent Cylinder98
+  #part-number 9
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 1
+  bitmap vmr01_thron2
+  verts 7
+    0.0710937008 -0.00129883003 -0.562256992
+    -0.0339062996 0.0546183996 2.89055991
+    0.0710937008 -0.00129881001 2.91323996
+    -0.033906199 0.0546183996 -0.562256992
+    -0.0339062996 -0.0572159998 2.89055991
+    -0.033906199 -0.0572161004 -0.562256992
+    0.00109377003 -0.00129879999 3.29934001
+  tverts 7
+    0.578347981 0.0443348996 0
+    0.478332013 0.992570996 0
+    0.56783998 0.967805028 0
+    0.497547001 0.043352101 0
+    0.523642004 0.992570996 0
+    0.534466982 0.043352101 0
+    0.537406027 1.06305003 0
+  faces 9
+    0 1 2 1 0 1 2 3
+    0 3 1 1 0 3 1 3
+    3 4 1 1 3 4 1 3
+    3 5 4 1 3 5 4 3
+    5 2 4 1 5 2 4 3
+    5 0 2 1 5 0 2 3
+    6 2 1 2 6 2 1 1
+    6 1 4 2 6 1 4 1
+    6 4 2 2 6 4 2 1
+  position -2.01999998 0 0
+  orientation 0 0 0 0
+endnode
+node trimesh Cylinder11
+  parent Cylinder98
+  #part-number 10
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 1
+  bitmap vmr01_thron2
+  verts 7
+    0.0735547021 -0.00129883003 -0.562256992
+    -0.0314452983 0.0589726008 2.98280001
+    0.0735547021 -0.00129883003 2.98841
+    -0.0314452983 0.0589726008 -0.562256992
+    -0.0314452983 -0.0615702011 2.98280001
+    -0.0314452983 -0.0615702011 -0.562256992
+    0.00355467992 -0.00129883003 3.41497993
+  tverts 7
+    0.578347981 0.0443348996 0
+    0.478332013 0.992570996 0
+    0.56783998 0.967805028 0
+    0.497547001 0.043352101 0
+    0.523642004 0.992570996 0
+    0.534466982 0.043352101 0
+    0.537406027 1.06305003 0
+  faces 9
+    0 1 2 1 0 1 2 3
+    0 3 1 1 0 3 1 3
+    3 4 1 1 3 4 1 3
+    3 5 4 1 3 5 4 3
+    5 2 4 1 5 2 4 3
+    5 0 2 1 5 0 2 3
+    6 2 1 2 6 2 1 1
+    6 1 4 2 6 1 4 1
+    6 4 2 2 6 4 2 1
+  position -0.529999971 0 0
+  orientation 0 0 0 0
+endnode
+node trimesh Box1352
+  parent Cylinder98
+  #part-number 11
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 1
+  bitmap vmr01_thron2
+  verts 8
+    -1.06007004 -0.0666496009 -0.00457275007
+    -1.06007004 0.0582805015 -0.00457275007
+    1.07193005 0.0582805015 -0.00457275007
+    1.07193005 -0.0666496009 -0.00457275007
+    -1.06007004 -0.0666496009 0.0962273031
+    1.07193005 -0.0666496009 0.0962273031
+    1.07193005 0.0582805015 0.0962273031
+    -1.06007004 0.0582805015 0.0962273031
+  tverts 14
+    0.740189016 -0.115944996 0
+    0.740189016 -0.115944996 0
+    0.740189016 2.0548799 0
+    0.740189016 2.0548799 0
+    0.807121992 0.213957995 0
+    0.807124019 3.23561001 0
+    0.751866996 3.23561001 0
+    0.751865029 0.213957995 0
+    0.800249994 2.0548799 0
+    0.800248981 -0.115944996 0
+    0.751866996 3.23561001 0
+    0.807124019 3.23561001 0
+    0.807121992 0.213957995 0
+    0.751865029 0.213957995 0
+  faces 12
+    0 1 2 1 0 1 2 2
+    2 3 0 1 2 3 0 2
+    4 5 6 1 4 5 6 1
+    6 7 4 1 6 7 4 1
+    0 3 5 2 0 2 8 5
+    5 4 0 2 8 9 0 5
+    3 2 6 4 5 6 10 4
+    6 5 3 4 6 5 11 4
+    2 1 7 2 2 0 9 6
+    7 6 2 2 9 8 2 6
+    1 0 4 4 7 4 12 3
+    4 7 1 4 4 7 13 3
+  position -0.519999981 0 2.6099999
+  orientation 0 0 0 0
+endnode
+node trimesh Box12
+  parent Cylinder98
+  #part-number 12
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 1
+  bitmap vmr01_thron2
+  verts 8
+    -2.5999999 -0.0666496009 -0.000394286995
+    -2.5999999 0.0582805015 -0.000394286995
+    2.5999999 0.0582805015 -0.000394286995
+    2.5999999 -0.0666496009 -0.000394286995
+    -2.5999999 -0.0666496009 0.100405999
+    2.5999999 -0.0666496009 0.100405999
+    2.5999999 0.0582805015 0.100405999
+    -2.5999999 0.0582805015 0.100405999
+  tverts 14
+    0.781847 -0.115944996 0
+    0.781847 -0.115944996 0
+    0.781847 2.0548799 0
+    0.781847 2.0548799 0
+    0.848779976 0.213957995 0
+    0.848782003 3.23561001 0
+    0.793525994 3.23561001 0
+    0.793524027 0.213957995 0
+    0.841907978 2.0548799 0
+    0.841907978 -0.115944996 0
+    0.793525994 3.23561001 0
+    0.848782003 3.23561001 0
+    0.848779976 0.213957995 0
+    0.793524027 0.213957995 0
+  faces 12
+    0 1 2 1 0 1 2 2
+    2 3 0 1 2 3 0 2
+    4 5 6 1 4 5 6 1
+    6 7 4 1 6 7 4 1
+    0 3 5 2 0 2 8 5
+    5 4 0 2 8 9 0 5
+    3 2 6 4 5 6 10 4
+    6 5 3 4 6 5 11 4
+    2 1 7 2 2 0 9 6
+    7 6 2 2 9 8 2 6
+    1 0 4 4 7 4 12 3
+    4 7 1 4 4 7 13 3
+  position -0.460000008 0 1.02999997
+  orientation 0 0 0 0
+endnode
+node trimesh Cylinder103
+  parent Cylinder98
+  #part-number 13
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 1
+  bitmap vmr01_thron2
+  verts 7
+    0.0733788982 -0.00129883003 -0.562256992
+    -0.0316210985 0.0589726008 2.98280001
+    0.0733788982 -0.00129882002 2.98841
+    -0.0316210985 0.0589726008 -0.562256992
+    -0.0316210985 -0.0615702011 2.98280001
+    -0.0316210985 -0.0615702011 -0.562256992
+    0.0033789 -0.00129882002 3.41497993
+  tverts 7
+    0.578347981 0.0443348996 0
+    0.478332013 0.992570996 0
+    0.56783998 0.967805028 0
+    0.497547001 0.043352101 0
+    0.523642004 0.992570996 0
+    0.534466982 0.043352101 0
+    0.537406027 1.06305003 0
+  faces 9
+    0 1 2 1 0 1 2 3
+    0 3 1 1 0 3 1 3
+    3 4 1 1 3 4 1 3
+    3 5 4 1 3 5 4 3
+    5 2 4 1 5 2 4 3
+    5 0 2 1 5 0 2 3
+    6 2 1 2 6 2 1 1
+    6 1 4 2 6 1 4 1
+    6 4 2 2 6 4 2 1
+  position -1.03999996 0 0
+  orientation 0 0 0 0
+endnode
+node trimesh sam
+  parent vmr_udoor_02
+  #part-number 14
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+  shadow 0
+  bitmap NULL
+  verts 8
+    3.00112009 0.0041609602 0
+    -3.00112009 0.0041609602 0
+    3.00112009 0.0041609602 -2.99998999
+    -3.00112009 0.0041609602 -2.99998999
+    -3.00112009 0.0602157004 0
+    3.00112009 0.0602157004 0
+    3.00112009 0.0602157004 -2.99998999
+    -3.00112009 0.0602157004 -2.99998999
+  faces 4
+    0 1 2 1 0 0 0 18
+    3 2 1 1 0 0 0 18
+    4 5 6 1 0 0 0 18
+    6 7 4 1 0 0 0 18
+  position 0 0 2.68818998
+  orientation 0 0 0 0
+  alpha 0
+  scale 1
+endnode
+node trimesh Box1451
+  parent vmr_udoor_02
+  #part-number 15
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 1
+  shadow 0
+  render 0
+  bitmap vmr01_thron2
+  verts 8
+    -2.5999999 -0.112874001 -0.000394286995
+    -2.5999999 0.104505002 -0.000394286995
+    2.5999999 0.104505002 -0.000394286995
+    2.5999999 -0.112874001 -0.000394286995
+    -2.5999999 -0.112874001 0.100405999
+    2.5999999 -0.112874001 0.100405999
+    2.5999999 0.104505002 0.100405999
+    -2.5999999 0.104505002 0.100405999
+  tverts 14
+    0.820761979 -0.115944996 0
+    0.820761979 -0.115944996 0
+    0.820761979 2.0548799 0
+    0.820761979 2.0548799 0
+    0.887695014 0.213957995 0
+    0.887696981 3.23561001 0
+    0.832440019 3.23561001 0
+    0.832437992 0.213957995 0
+    0.880823016 2.0548799 0
+    0.880823016 -0.115944996 0
+    0.832440019 3.23561001 0
+    0.887696981 3.23561001 0
+    0.887695014 0.213957995 0
+    0.832437992 0.213957995 0
+  faces 12
+    0 1 2 1 0 1 2 2
+    2 3 0 1 2 3 0 2
+    4 5 6 1 4 5 6 1
+    6 7 4 1 6 7 4 1
+    0 3 5 2 0 2 8 5
+    5 4 0 2 8 9 0 5
+    3 2 6 4 5 6 10 4
+    6 5 3 4 6 5 11 4
+    2 1 7 2 2 0 9 6
+    7 6 2 2 9 8 2 6
+    1 0 4 4 7 4 12 3
+    4 7 1 4 4 7 13 3
+  position 0 0.0399999991 -0.304298013
+  orientation 0 0 0 0
+  alpha 1
+  scale 1
+endnode
+node dummy vmr_udoor_02a
+  parent vmr_udoor_02
+  #part-number 16
+  position 0 0 0
+  orientation 0 0 0 0
+endnode
+node emitter fire!08
+  parent vmr_udoor_02
+  #part-number 17
+  p2p 0
+  p2p_sel 1
+  affectedByWind 0
+  m_isTinted 1
+  bounce 0
+  random 0
+  inherit 1
+  inheritvel 0
+  inherit_local 0
+  splat 0
+  inherit_part 0
+  renderorder 0
+  spawntype 0
+  update Explosion
+  render Normal
+  blend Normal
+  texture fxpa_smoke01
+  xgrid 4
+  ygrid 4
+  loop 0
+  deadspace 0
+  twosidedtex 1
+  blastRadius 0.200000003
+  blastLength 1
+  position -0.0154004004 0.0451768003 0.677461982
+  orientation -1 0 0 -1.57079995
+  colorStart 0.474510014 0.439215988 0.36470601
+  colorEnd 0.819607973 0.79607898 0.709803998
+  alphaStart 1
+  alphaEnd 0
+  sizeStart 4
+  sizeEnd 1
+  sizeStart_y 0
+  sizeEnd_y 0
+  frameStart 0
+  frameEnd 24
+  birthrate 30
+  lifeExp 2.5
+  mass 0.0900000036
+  spread 2.96706009
+  particleRot 0.5
+  velocity 2
+  randvel 0.5
+  fps 10
+  xsize 553
+  ysize 99
+  bounce_co 0
+  blurlength 10
+  lightningDelay 0
+  lightningRadius 0
+  lightningScale 0
+  p2p_bezier2 0
+  p2p_bezier3 0
+  combinetime 0
+  drag 0
+  grav 0
+  threshold 0
+endnode
+node emitter ChunkyWood04
+  parent vmr_udoor_02
+  #part-number 18
+  p2p 0
+  p2p_sel 1
+  affectedByWind 0
+  m_isTinted 0
+  bounce 1
+  random 0
+  inherit 1
+  inheritvel 0
+  inherit_local 0
+  splat 0
+  inherit_part 0
+  renderorder 0
+  spawntype 0
+  update Explosion
+  render Normal
+  blend Normal
+  texture fxpa_cloud02
+  chunkName PLC_Chunk_S02
+  xgrid 5
+  ygrid 5
+  loop 0
+  deadspace 0
+  twosidedtex 1
+  blastRadius 0
+  blastLength 0
+  position -0.0154004004 0.0451768003 0.857728004
+  orientation 0 0 0 0
+  colorStart 0.482353002 0.435294002 0.31764701
+  colorEnd 0.584313989 0.533333004 0.407842994
+  alphaStart 1
+  alphaEnd 1
+  sizeStart 0.100000001
+  sizeEnd 0.100000001
+  sizeStart_y 0
+  sizeEnd_y 0
+  frameStart 0
+  frameEnd 24
+  birthrate 2
+  lifeExp 0.75
+  mass 3
+  spread 1.22172999
+  particleRot 2.9000001
+  velocity 8
+  randvel 0.300000012
+  fps 0
+  xsize 300
+  ysize 60
+  bounce_co 0.5
+  blurlength 10
+  lightningDelay 0
+  lightningRadius 0
+  lightningScale 0
+  p2p_bezier2 0
+  p2p_bezier3 0
+  combinetime 0
+  drag 0
+  grav 0
+  threshold 0
+endnode
+node emitter ChunkyWood03
+  parent vmr_udoor_02
+  #part-number 19
+  p2p 0
+  p2p_sel 1
+  affectedByWind 0
+  m_isTinted 0
+  bounce 1
+  random 0
+  inherit 1
+  inheritvel 0
+  inherit_local 0
+  splat 0
+  inherit_part 0
+  renderorder 0
+  spawntype 0
+  update Explosion
+  render Normal
+  blend Normal
+  texture fxpa_cloud02
+  chunkName PLC_Chunk_S01
+  xgrid 5
+  ygrid 5
+  loop 0
+  deadspace 0
+  twosidedtex 0
+  blastRadius 0
+  blastLength 0
+  position -0.0154004004 0.0451768003 0.164835006
+  orientation 0 0 0 0
+  colorStart 1 1 1
+  colorEnd 1 1 1
+  alphaStart 1
+  alphaEnd 1
+  sizeStart 0.100000001
+  sizeEnd 0.100000001
+  sizeStart_y 0
+  sizeEnd_y 0
+  frameStart 0
+  frameEnd 24
+  birthrate 2
+  lifeExp 0.75
+  mass 3
+  spread 1.22172999
+  particleRot 5
+  velocity 8
+  randvel 0.300000012
+  fps 0
+  xsize 312
+  ysize 72
+  bounce_co 0.5
+  blurlength 10
+  lightningDelay 0
+  lightningRadius 0
+  lightningScale 0
+  p2p_bezier2 0
+  p2p_bezier3 0
+  combinetime 0
+  drag 0
+  grav 0
+  threshold 0
+endnode
+node dummy vmr_udoor_02impc
+  parent vmr_udoor_02
+  #part-number 20
+  position 0 0 1.12442994
+  orientation 0 0 0 0
+endnode
+node dummy vmr_udoor_02hhit
+  parent vmr_udoor_02
+  #part-number 21
+  position 0 0 1.96893001
+  orientation 0 0 0 0
+endnode
+node dummy vmr_udoor_02head
+  parent vmr_udoor_02
+  #part-number 22
+  position 0 0 2.30851007
+  orientation 0 0 0 0
+endnode
+node dummy vmr_udoor_02grnd
+  parent vmr_udoor_02
+  #part-number 23
+  position 0 0 -0.146952003
+  orientation 0 0 0 0
+endnode
+endmodelgeom vmr_udoor_02
+
+#MAXANIM ASCII
+newanim opening1 vmr_udoor_02
+  length 0.633333027
+  transtime 0.25
+  animroot vmr_udoor_02
+node dummy vmr_udoor_02
+  parent NULL
+  #part-number 0
+endnode
+node dummy vmr_udoor_02_DWK
+  parent vmr_udoor_02
+  #part-number -1
+endnode
+node dummy 02_DWK_dp_open2_01
+  parent vmr_udoor_02_DWK
+  #part-number 2
+endnode
+node dummy 02_DWK_dp_closed_01
+  parent vmr_udoor_02_DWK
+  #part-number 3
+endnode
+node dummy 02_DWK_dp_open1_01
+  parent vmr_udoor_02_DWK
+  #part-number 4
+endnode
+node dummy 02_DWK_dp_closed_02
+  parent vmr_udoor_02_DWK
+  #part-number 5
+endnode
+node dummy 02_DWK_wg_open1
+  parent vmr_udoor_02_DWK
+  #part-number 6
+endnode
+node dummy 02_DWK_wg_closed
+  parent vmr_udoor_02_DWK
+  #part-number 7
+endnode
+node dummy 02_DWK_wg_open2
+  parent vmr_udoor_02_DWK
+  #part-number 8
+endnode
+node dummy Cylinder98
+  parent vmr_udoor_02
+  #part-number 1
+  positionkey 2
+    0 0.460000008 0.0399999991 -0.501810014
+    0.633333027 0.460000008 0.0399999991 -3.81378007
+endnode
+node dummy Cylinder100
+  parent Cylinder98
+  #part-number 2
+endnode
+node dummy Cylinder101
+  parent Cylinder98
+  #part-number 3
+endnode
+node dummy Cylinder102
+  parent Cylinder98
+  #part-number 4
+endnode
+node dummy Cylinder99
+  parent Cylinder98
+  #part-number 5
+endnode
+node dummy Cylinder95
+  parent Cylinder98
+  #part-number 6
+endnode
+node dummy Cylinder96
+  parent Cylinder98
+  #part-number 7
+endnode
+node dummy Cylinder97
+  parent Cylinder98
+  #part-number 8
+endnode
+node dummy Cylinder104
+  parent Cylinder98
+  #part-number 9
+endnode
+node dummy Cylinder11
+  parent Cylinder98
+  #part-number 10
+endnode
+node dummy Box1352
+  parent Cylinder98
+  #part-number 11
+endnode
+node dummy Box12
+  parent Cylinder98
+  #part-number 12
+endnode
+node dummy Cylinder103
+  parent Cylinder98
+  #part-number 13
+endnode
+node trimesh sam
+  parent vmr_udoor_02
+  #part-number 14
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+  alphakey 2
+    0 0
+    0.633333027 0
+endnode
+node trimesh Box1451
+  parent vmr_udoor_02
+  #part-number 15
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node dummy vmr_udoor_02a
+  parent vmr_udoor_02
+  #part-number 16
+endnode
+node emitter fire!08
+  parent vmr_udoor_02
+  #part-number 17
+endnode
+node emitter ChunkyWood04
+  parent vmr_udoor_02
+  #part-number 18
+endnode
+node emitter ChunkyWood03
+  parent vmr_udoor_02
+  #part-number 19
+endnode
+node dummy vmr_udoor_02impc
+  parent vmr_udoor_02
+  #part-number 20
+endnode
+node dummy vmr_udoor_02hhit
+  parent vmr_udoor_02
+  #part-number 21
+endnode
+node dummy vmr_udoor_02head
+  parent vmr_udoor_02
+  #part-number 22
+endnode
+node dummy vmr_udoor_02grnd
+  parent vmr_udoor_02
+  #part-number 23
+endnode
+doneanim opening1 vmr_udoor_02
+
+#MAXANIM ASCII
+newanim opening2 vmr_udoor_02
+  length 0.633333027
+  transtime 0.25
+  animroot vmr_udoor_02
+node dummy vmr_udoor_02
+  parent NULL
+  #part-number 0
+endnode
+node dummy vmr_udoor_02_DWK
+  parent vmr_udoor_02
+  #part-number -1
+endnode
+node dummy 02_DWK_dp_open2_01
+  parent vmr_udoor_02_DWK
+  #part-number 2
+endnode
+node dummy 02_DWK_dp_closed_01
+  parent vmr_udoor_02_DWK
+  #part-number 3
+endnode
+node dummy 02_DWK_dp_open1_01
+  parent vmr_udoor_02_DWK
+  #part-number 4
+endnode
+node dummy 02_DWK_dp_closed_02
+  parent vmr_udoor_02_DWK
+  #part-number 5
+endnode
+node dummy 02_DWK_wg_open1
+  parent vmr_udoor_02_DWK
+  #part-number 6
+endnode
+node dummy 02_DWK_wg_closed
+  parent vmr_udoor_02_DWK
+  #part-number 7
+endnode
+node dummy 02_DWK_wg_open2
+  parent vmr_udoor_02_DWK
+  #part-number 8
+endnode
+node dummy Cylinder98
+  parent vmr_udoor_02
+  #part-number 1
+  positionkey 2
+    0 0.460000008 0.0399999991 -0.501810014
+    0.633333027 0.460000008 0.0399999991 -3.81378007
+endnode
+node dummy Cylinder100
+  parent Cylinder98
+  #part-number 2
+endnode
+node dummy Cylinder101
+  parent Cylinder98
+  #part-number 3
+endnode
+node dummy Cylinder102
+  parent Cylinder98
+  #part-number 4
+endnode
+node dummy Cylinder99
+  parent Cylinder98
+  #part-number 5
+endnode
+node dummy Cylinder95
+  parent Cylinder98
+  #part-number 6
+endnode
+node dummy Cylinder96
+  parent Cylinder98
+  #part-number 7
+endnode
+node dummy Cylinder97
+  parent Cylinder98
+  #part-number 8
+endnode
+node dummy Cylinder104
+  parent Cylinder98
+  #part-number 9
+endnode
+node dummy Cylinder11
+  parent Cylinder98
+  #part-number 10
+endnode
+node dummy Box1352
+  parent Cylinder98
+  #part-number 11
+endnode
+node dummy Box12
+  parent Cylinder98
+  #part-number 12
+endnode
+node dummy Cylinder103
+  parent Cylinder98
+  #part-number 13
+endnode
+node trimesh sam
+  parent vmr_udoor_02
+  #part-number 14
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+  alphakey 2
+    0 0
+    0.633333027 0
+endnode
+node trimesh Box1451
+  parent vmr_udoor_02
+  #part-number 15
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node dummy vmr_udoor_02a
+  parent vmr_udoor_02
+  #part-number 16
+endnode
+node emitter fire!08
+  parent vmr_udoor_02
+  #part-number 17
+endnode
+node emitter ChunkyWood04
+  parent vmr_udoor_02
+  #part-number 18
+endnode
+node emitter ChunkyWood03
+  parent vmr_udoor_02
+  #part-number 19
+endnode
+node dummy vmr_udoor_02impc
+  parent vmr_udoor_02
+  #part-number 20
+endnode
+node dummy vmr_udoor_02hhit
+  parent vmr_udoor_02
+  #part-number 21
+endnode
+node dummy vmr_udoor_02head
+  parent vmr_udoor_02
+  #part-number 22
+endnode
+node dummy vmr_udoor_02grnd
+  parent vmr_udoor_02
+  #part-number 23
+endnode
+doneanim opening2 vmr_udoor_02
+
+#MAXANIM ASCII
+newanim opened2 vmr_udoor_02
+  length 0.0333333015
+  transtime 0.25
+  animroot vmr_udoor_02
+node dummy vmr_udoor_02
+  parent NULL
+  #part-number 0
+endnode
+node dummy vmr_udoor_02_DWK
+  parent vmr_udoor_02
+  #part-number -1
+endnode
+node dummy 02_DWK_dp_open2_01
+  parent vmr_udoor_02_DWK
+  #part-number 2
+endnode
+node dummy 02_DWK_dp_closed_01
+  parent vmr_udoor_02_DWK
+  #part-number 3
+endnode
+node dummy 02_DWK_dp_open1_01
+  parent vmr_udoor_02_DWK
+  #part-number 4
+endnode
+node dummy 02_DWK_dp_closed_02
+  parent vmr_udoor_02_DWK
+  #part-number 5
+endnode
+node dummy 02_DWK_wg_open1
+  parent vmr_udoor_02_DWK
+  #part-number 6
+endnode
+node dummy 02_DWK_wg_closed
+  parent vmr_udoor_02_DWK
+  #part-number 7
+endnode
+node dummy 02_DWK_wg_open2
+  parent vmr_udoor_02_DWK
+  #part-number 8
+endnode
+node dummy Cylinder98
+  parent vmr_udoor_02
+  #part-number 1
+  positionkey 2
+    0 0.460000008 0.0399999991 -3.81378007
+    0.0333333015 0.460000008 0.0399999991 -3.81378007
+endnode
+node dummy Cylinder100
+  parent Cylinder98
+  #part-number 2
+endnode
+node dummy Cylinder101
+  parent Cylinder98
+  #part-number 3
+endnode
+node dummy Cylinder102
+  parent Cylinder98
+  #part-number 4
+endnode
+node dummy Cylinder99
+  parent Cylinder98
+  #part-number 5
+endnode
+node dummy Cylinder95
+  parent Cylinder98
+  #part-number 6
+endnode
+node dummy Cylinder96
+  parent Cylinder98
+  #part-number 7
+endnode
+node dummy Cylinder97
+  parent Cylinder98
+  #part-number 8
+endnode
+node dummy Cylinder104
+  parent Cylinder98
+  #part-number 9
+endnode
+node dummy Cylinder11
+  parent Cylinder98
+  #part-number 10
+endnode
+node dummy Box1352
+  parent Cylinder98
+  #part-number 11
+endnode
+node dummy Box12
+  parent Cylinder98
+  #part-number 12
+endnode
+node dummy Cylinder103
+  parent Cylinder98
+  #part-number 13
+endnode
+node trimesh sam
+  parent vmr_udoor_02
+  #part-number 14
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+  alphakey 2
+    0 0
+    0.0333333015 0
+endnode
+node trimesh Box1451
+  parent vmr_udoor_02
+  #part-number 15
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node dummy vmr_udoor_02a
+  parent vmr_udoor_02
+  #part-number 16
+endnode
+node emitter fire!08
+  parent vmr_udoor_02
+  #part-number 17
+endnode
+node emitter ChunkyWood04
+  parent vmr_udoor_02
+  #part-number 18
+endnode
+node emitter ChunkyWood03
+  parent vmr_udoor_02
+  #part-number 19
+endnode
+node dummy vmr_udoor_02impc
+  parent vmr_udoor_02
+  #part-number 20
+endnode
+node dummy vmr_udoor_02hhit
+  parent vmr_udoor_02
+  #part-number 21
+endnode
+node dummy vmr_udoor_02head
+  parent vmr_udoor_02
+  #part-number 22
+endnode
+node dummy vmr_udoor_02grnd
+  parent vmr_udoor_02
+  #part-number 23
+endnode
+doneanim opened2 vmr_udoor_02
+
+#MAXANIM ASCII
+newanim opened1 vmr_udoor_02
+  length 0.0333333015
+  transtime 0.25
+  animroot vmr_udoor_02
+node dummy vmr_udoor_02
+  parent NULL
+  #part-number 0
+endnode
+node dummy vmr_udoor_02_DWK
+  parent vmr_udoor_02
+  #part-number -1
+endnode
+node dummy 02_DWK_dp_open2_01
+  parent vmr_udoor_02_DWK
+  #part-number 2
+endnode
+node dummy 02_DWK_dp_closed_01
+  parent vmr_udoor_02_DWK
+  #part-number 3
+endnode
+node dummy 02_DWK_dp_open1_01
+  parent vmr_udoor_02_DWK
+  #part-number 4
+endnode
+node dummy 02_DWK_dp_closed_02
+  parent vmr_udoor_02_DWK
+  #part-number 5
+endnode
+node dummy 02_DWK_wg_open1
+  parent vmr_udoor_02_DWK
+  #part-number 6
+endnode
+node dummy 02_DWK_wg_closed
+  parent vmr_udoor_02_DWK
+  #part-number 7
+endnode
+node dummy 02_DWK_wg_open2
+  parent vmr_udoor_02_DWK
+  #part-number 8
+endnode
+node dummy Cylinder98
+  parent vmr_udoor_02
+  #part-number 1
+  positionkey 2
+    0 0.460000008 0.0399999991 -3.81378007
+    0.0333333015 0.460000008 0.0399999991 -3.81378007
+endnode
+node dummy Cylinder100
+  parent Cylinder98
+  #part-number 2
+endnode
+node dummy Cylinder101
+  parent Cylinder98
+  #part-number 3
+endnode
+node dummy Cylinder102
+  parent Cylinder98
+  #part-number 4
+endnode
+node dummy Cylinder99
+  parent Cylinder98
+  #part-number 5
+endnode
+node dummy Cylinder95
+  parent Cylinder98
+  #part-number 6
+endnode
+node dummy Cylinder96
+  parent Cylinder98
+  #part-number 7
+endnode
+node dummy Cylinder97
+  parent Cylinder98
+  #part-number 8
+endnode
+node dummy Cylinder104
+  parent Cylinder98
+  #part-number 9
+endnode
+node dummy Cylinder11
+  parent Cylinder98
+  #part-number 10
+endnode
+node dummy Box1352
+  parent Cylinder98
+  #part-number 11
+endnode
+node dummy Box12
+  parent Cylinder98
+  #part-number 12
+endnode
+node dummy Cylinder103
+  parent Cylinder98
+  #part-number 13
+endnode
+node trimesh sam
+  parent vmr_udoor_02
+  #part-number 14
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+  alphakey 2
+    0 0
+    0.0333333015 0
+endnode
+node trimesh Box1451
+  parent vmr_udoor_02
+  #part-number 15
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node dummy vmr_udoor_02a
+  parent vmr_udoor_02
+  #part-number 16
+endnode
+node emitter fire!08
+  parent vmr_udoor_02
+  #part-number 17
+endnode
+node emitter ChunkyWood04
+  parent vmr_udoor_02
+  #part-number 18
+endnode
+node emitter ChunkyWood03
+  parent vmr_udoor_02
+  #part-number 19
+endnode
+node dummy vmr_udoor_02impc
+  parent vmr_udoor_02
+  #part-number 20
+endnode
+node dummy vmr_udoor_02hhit
+  parent vmr_udoor_02
+  #part-number 21
+endnode
+node dummy vmr_udoor_02head
+  parent vmr_udoor_02
+  #part-number 22
+endnode
+node dummy vmr_udoor_02grnd
+  parent vmr_udoor_02
+  #part-number 23
+endnode
+doneanim opened1 vmr_udoor_02
+
+#MAXANIM ASCII
+newanim closed vmr_udoor_02
+  length 0.0333333015
+  transtime 0.25
+  animroot vmr_udoor_02
+node dummy vmr_udoor_02
+  parent NULL
+  #part-number 0
+endnode
+node dummy vmr_udoor_02_DWK
+  parent vmr_udoor_02
+  #part-number -1
+endnode
+node dummy 02_DWK_dp_open2_01
+  parent vmr_udoor_02_DWK
+  #part-number 2
+endnode
+node dummy 02_DWK_dp_closed_01
+  parent vmr_udoor_02_DWK
+  #part-number 3
+endnode
+node dummy 02_DWK_dp_open1_01
+  parent vmr_udoor_02_DWK
+  #part-number 4
+endnode
+node dummy 02_DWK_dp_closed_02
+  parent vmr_udoor_02_DWK
+  #part-number 5
+endnode
+node dummy 02_DWK_wg_open1
+  parent vmr_udoor_02_DWK
+  #part-number 6
+endnode
+node dummy 02_DWK_wg_closed
+  parent vmr_udoor_02_DWK
+  #part-number 7
+endnode
+node dummy 02_DWK_wg_open2
+  parent vmr_udoor_02_DWK
+  #part-number 8
+endnode
+node dummy Cylinder98
+  parent vmr_udoor_02
+  #part-number 1
+  positionkey 2
+    0 0.460000008 0.0399999991 -0.501810014
+    0.0333333015 0.460000008 0.0399999991 -0.501810014
+endnode
+node dummy Cylinder100
+  parent Cylinder98
+  #part-number 2
+endnode
+node dummy Cylinder101
+  parent Cylinder98
+  #part-number 3
+endnode
+node dummy Cylinder102
+  parent Cylinder98
+  #part-number 4
+endnode
+node dummy Cylinder99
+  parent Cylinder98
+  #part-number 5
+endnode
+node dummy Cylinder95
+  parent Cylinder98
+  #part-number 6
+endnode
+node dummy Cylinder96
+  parent Cylinder98
+  #part-number 7
+endnode
+node dummy Cylinder97
+  parent Cylinder98
+  #part-number 8
+endnode
+node dummy Cylinder104
+  parent Cylinder98
+  #part-number 9
+endnode
+node dummy Cylinder11
+  parent Cylinder98
+  #part-number 10
+endnode
+node dummy Box1352
+  parent Cylinder98
+  #part-number 11
+endnode
+node dummy Box12
+  parent Cylinder98
+  #part-number 12
+endnode
+node dummy Cylinder103
+  parent Cylinder98
+  #part-number 13
+endnode
+node trimesh sam
+  parent vmr_udoor_02
+  #part-number 14
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+  alphakey 2
+    0 0
+    0.0333333015 0
+endnode
+node trimesh Box1451
+  parent vmr_udoor_02
+  #part-number 15
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node dummy vmr_udoor_02a
+  parent vmr_udoor_02
+  #part-number 16
+endnode
+node emitter fire!08
+  parent vmr_udoor_02
+  #part-number 17
+endnode
+node emitter ChunkyWood04
+  parent vmr_udoor_02
+  #part-number 18
+endnode
+node emitter ChunkyWood03
+  parent vmr_udoor_02
+  #part-number 19
+endnode
+node dummy vmr_udoor_02impc
+  parent vmr_udoor_02
+  #part-number 20
+endnode
+node dummy vmr_udoor_02hhit
+  parent vmr_udoor_02
+  #part-number 21
+endnode
+node dummy vmr_udoor_02head
+  parent vmr_udoor_02
+  #part-number 22
+endnode
+node dummy vmr_udoor_02grnd
+  parent vmr_udoor_02
+  #part-number 23
+endnode
+doneanim closed vmr_udoor_02
+
+#MAXANIM ASCII
+newanim closing1 vmr_udoor_02
+  length 0.300000012
+  transtime 0.25
+  animroot vmr_udoor_02
+node dummy vmr_udoor_02
+  parent NULL
+  #part-number 0
+endnode
+node dummy vmr_udoor_02_DWK
+  parent vmr_udoor_02
+  #part-number -1
+endnode
+node dummy 02_DWK_dp_open2_01
+  parent vmr_udoor_02_DWK
+  #part-number 2
+endnode
+node dummy 02_DWK_dp_closed_01
+  parent vmr_udoor_02_DWK
+  #part-number 3
+endnode
+node dummy 02_DWK_dp_open1_01
+  parent vmr_udoor_02_DWK
+  #part-number 4
+endnode
+node dummy 02_DWK_dp_closed_02
+  parent vmr_udoor_02_DWK
+  #part-number 5
+endnode
+node dummy 02_DWK_wg_open1
+  parent vmr_udoor_02_DWK
+  #part-number 6
+endnode
+node dummy 02_DWK_wg_closed
+  parent vmr_udoor_02_DWK
+  #part-number 7
+endnode
+node dummy 02_DWK_wg_open2
+  parent vmr_udoor_02_DWK
+  #part-number 8
+endnode
+node dummy Cylinder98
+  parent vmr_udoor_02
+  #part-number 1
+  positionkey 3
+    0 0.460000008 0.0399999991 -3.81378007
+    0.233333007 0.460000008 0.0399999991 -0.247194007
+    0.300000012 0.460000008 0.0399999991 -0.528613985
+endnode
+node dummy Cylinder100
+  parent Cylinder98
+  #part-number 2
+endnode
+node dummy Cylinder101
+  parent Cylinder98
+  #part-number 3
+endnode
+node dummy Cylinder102
+  parent Cylinder98
+  #part-number 4
+endnode
+node dummy Cylinder99
+  parent Cylinder98
+  #part-number 5
+endnode
+node dummy Cylinder95
+  parent Cylinder98
+  #part-number 6
+endnode
+node dummy Cylinder96
+  parent Cylinder98
+  #part-number 7
+endnode
+node dummy Cylinder97
+  parent Cylinder98
+  #part-number 8
+endnode
+node dummy Cylinder104
+  parent Cylinder98
+  #part-number 9
+endnode
+node dummy Cylinder11
+  parent Cylinder98
+  #part-number 10
+endnode
+node dummy Box1352
+  parent Cylinder98
+  #part-number 11
+endnode
+node dummy Box12
+  parent Cylinder98
+  #part-number 12
+endnode
+node dummy Cylinder103
+  parent Cylinder98
+  #part-number 13
+endnode
+node trimesh sam
+  parent vmr_udoor_02
+  #part-number 14
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+  alphakey 4
+    0 0
+    0.233333007 0
+    0.266667008 0.25
+    0.300000012 0.25
+endnode
+node trimesh Box1451
+  parent vmr_udoor_02
+  #part-number 15
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node dummy vmr_udoor_02a
+  parent vmr_udoor_02
+  #part-number 16
+endnode
+node emitter fire!08
+  parent vmr_udoor_02
+  #part-number 17
+endnode
+node emitter ChunkyWood04
+  parent vmr_udoor_02
+  #part-number 18
+endnode
+node emitter ChunkyWood03
+  parent vmr_udoor_02
+  #part-number 19
+endnode
+node dummy vmr_udoor_02impc
+  parent vmr_udoor_02
+  #part-number 20
+endnode
+node dummy vmr_udoor_02hhit
+  parent vmr_udoor_02
+  #part-number 21
+endnode
+node dummy vmr_udoor_02head
+  parent vmr_udoor_02
+  #part-number 22
+endnode
+node dummy vmr_udoor_02grnd
+  parent vmr_udoor_02
+  #part-number 23
+endnode
+doneanim closing1 vmr_udoor_02
+
+#MAXANIM ASCII
+newanim closing2 vmr_udoor_02
+  length 0.300000012
+  transtime 0.25
+  animroot vmr_udoor_02
+node dummy vmr_udoor_02
+  parent NULL
+  #part-number 0
+endnode
+node dummy vmr_udoor_02_DWK
+  parent vmr_udoor_02
+  #part-number -1
+endnode
+node dummy 02_DWK_dp_open2_01
+  parent vmr_udoor_02_DWK
+  #part-number 2
+endnode
+node dummy 02_DWK_dp_closed_01
+  parent vmr_udoor_02_DWK
+  #part-number 3
+endnode
+node dummy 02_DWK_dp_open1_01
+  parent vmr_udoor_02_DWK
+  #part-number 4
+endnode
+node dummy 02_DWK_dp_closed_02
+  parent vmr_udoor_02_DWK
+  #part-number 5
+endnode
+node dummy 02_DWK_wg_open1
+  parent vmr_udoor_02_DWK
+  #part-number 6
+endnode
+node dummy 02_DWK_wg_closed
+  parent vmr_udoor_02_DWK
+  #part-number 7
+endnode
+node dummy 02_DWK_wg_open2
+  parent vmr_udoor_02_DWK
+  #part-number 8
+endnode
+node dummy Cylinder98
+  parent vmr_udoor_02
+  #part-number 1
+  positionkey 3
+    0 0.460000008 0.0399999991 -3.81378007
+    0.233333007 0.460000008 0.0399999991 -0.247194007
+    0.300000012 0.460000008 0.0399999991 -0.528613985
+endnode
+node dummy Cylinder100
+  parent Cylinder98
+  #part-number 2
+endnode
+node dummy Cylinder101
+  parent Cylinder98
+  #part-number 3
+endnode
+node dummy Cylinder102
+  parent Cylinder98
+  #part-number 4
+endnode
+node dummy Cylinder99
+  parent Cylinder98
+  #part-number 5
+endnode
+node dummy Cylinder95
+  parent Cylinder98
+  #part-number 6
+endnode
+node dummy Cylinder96
+  parent Cylinder98
+  #part-number 7
+endnode
+node dummy Cylinder97
+  parent Cylinder98
+  #part-number 8
+endnode
+node dummy Cylinder104
+  parent Cylinder98
+  #part-number 9
+endnode
+node dummy Cylinder11
+  parent Cylinder98
+  #part-number 10
+endnode
+node dummy Box1352
+  parent Cylinder98
+  #part-number 11
+endnode
+node dummy Box12
+  parent Cylinder98
+  #part-number 12
+endnode
+node dummy Cylinder103
+  parent Cylinder98
+  #part-number 13
+endnode
+node trimesh sam
+  parent vmr_udoor_02
+  #part-number 14
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+  alphakey 4
+    0 0
+    0.233333007 0
+    0.266667008 0.25
+    0.300000012 0.25
+endnode
+node trimesh Box1451
+  parent vmr_udoor_02
+  #part-number 15
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node dummy vmr_udoor_02a
+  parent vmr_udoor_02
+  #part-number 16
+endnode
+node emitter fire!08
+  parent vmr_udoor_02
+  #part-number 17
+endnode
+node emitter ChunkyWood04
+  parent vmr_udoor_02
+  #part-number 18
+endnode
+node emitter ChunkyWood03
+  parent vmr_udoor_02
+  #part-number 19
+endnode
+node dummy vmr_udoor_02impc
+  parent vmr_udoor_02
+  #part-number 20
+endnode
+node dummy vmr_udoor_02hhit
+  parent vmr_udoor_02
+  #part-number 21
+endnode
+node dummy vmr_udoor_02head
+  parent vmr_udoor_02
+  #part-number 22
+endnode
+node dummy vmr_udoor_02grnd
+  parent vmr_udoor_02
+  #part-number 23
+endnode
+doneanim closing2 vmr_udoor_02
+
+#MAXANIM ASCII
+newanim trans vmr_udoor_02
+  length 0.0333333015
+  transtime 0.25
+  animroot vmr_udoor_02
+node dummy vmr_udoor_02
+  parent NULL
+  #part-number 0
+endnode
+node dummy vmr_udoor_02_DWK
+  parent vmr_udoor_02
+  #part-number -1
+endnode
+node dummy 02_DWK_dp_open2_01
+  parent vmr_udoor_02_DWK
+  #part-number 2
+endnode
+node dummy 02_DWK_dp_closed_01
+  parent vmr_udoor_02_DWK
+  #part-number 3
+endnode
+node dummy 02_DWK_dp_open1_01
+  parent vmr_udoor_02_DWK
+  #part-number 4
+endnode
+node dummy 02_DWK_dp_closed_02
+  parent vmr_udoor_02_DWK
+  #part-number 5
+endnode
+node dummy 02_DWK_wg_open1
+  parent vmr_udoor_02_DWK
+  #part-number 6
+endnode
+node dummy 02_DWK_wg_closed
+  parent vmr_udoor_02_DWK
+  #part-number 7
+endnode
+node dummy 02_DWK_wg_open2
+  parent vmr_udoor_02_DWK
+  #part-number 8
+endnode
+node dummy Cylinder98
+  parent vmr_udoor_02
+  #part-number 1
+  positionkey 1
+    0.0333333015 0.460000008 0.0399999991 -0.528613985
+endnode
+node dummy Cylinder100
+  parent Cylinder98
+  #part-number 2
+endnode
+node dummy Cylinder101
+  parent Cylinder98
+  #part-number 3
+endnode
+node dummy Cylinder102
+  parent Cylinder98
+  #part-number 4
+endnode
+node dummy Cylinder99
+  parent Cylinder98
+  #part-number 5
+endnode
+node dummy Cylinder95
+  parent Cylinder98
+  #part-number 6
+endnode
+node dummy Cylinder96
+  parent Cylinder98
+  #part-number 7
+endnode
+node dummy Cylinder97
+  parent Cylinder98
+  #part-number 8
+endnode
+node dummy Cylinder104
+  parent Cylinder98
+  #part-number 9
+endnode
+node dummy Cylinder11
+  parent Cylinder98
+  #part-number 10
+endnode
+node dummy Box1352
+  parent Cylinder98
+  #part-number 11
+endnode
+node dummy Box12
+  parent Cylinder98
+  #part-number 12
+endnode
+node dummy Cylinder103
+  parent Cylinder98
+  #part-number 13
+endnode
+node trimesh sam
+  parent vmr_udoor_02
+  #part-number 14
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+  alphakey 2
+    0 0.25
+    0.0333333015 0.25
+endnode
+node trimesh Box1451
+  parent vmr_udoor_02
+  #part-number 15
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node dummy vmr_udoor_02a
+  parent vmr_udoor_02
+  #part-number 16
+endnode
+node emitter fire!08
+  parent vmr_udoor_02
+  #part-number 17
+endnode
+node emitter ChunkyWood04
+  parent vmr_udoor_02
+  #part-number 18
+endnode
+node emitter ChunkyWood03
+  parent vmr_udoor_02
+  #part-number 19
+endnode
+node dummy vmr_udoor_02impc
+  parent vmr_udoor_02
+  #part-number 20
+endnode
+node dummy vmr_udoor_02hhit
+  parent vmr_udoor_02
+  #part-number 21
+endnode
+node dummy vmr_udoor_02head
+  parent vmr_udoor_02
+  #part-number 22
+endnode
+node dummy vmr_udoor_02grnd
+  parent vmr_udoor_02
+  #part-number 23
+endnode
+doneanim trans vmr_udoor_02
+
+#MAXANIM ASCII
+newanim die vmr_udoor_02
+  length 0.166666999
+  transtime 0.25
+  animroot vmr_udoor_02
+  event 0.0333333015 detonate
+  event 0.0333333015 detonate
+  event 0.0333333015 detonate
+node dummy vmr_udoor_02
+  parent NULL
+  #part-number 0
+endnode
+node dummy vmr_udoor_02_DWK
+  parent vmr_udoor_02
+  #part-number -1
+endnode
+node dummy 02_DWK_dp_open2_01
+  parent vmr_udoor_02_DWK
+  #part-number 2
+endnode
+node dummy 02_DWK_dp_closed_01
+  parent vmr_udoor_02_DWK
+  #part-number 3
+endnode
+node dummy 02_DWK_dp_open1_01
+  parent vmr_udoor_02_DWK
+  #part-number 4
+endnode
+node dummy 02_DWK_dp_closed_02
+  parent vmr_udoor_02_DWK
+  #part-number 5
+endnode
+node dummy 02_DWK_wg_open1
+  parent vmr_udoor_02_DWK
+  #part-number 6
+endnode
+node dummy 02_DWK_wg_closed
+  parent vmr_udoor_02_DWK
+  #part-number 7
+endnode
+node dummy 02_DWK_wg_open2
+  parent vmr_udoor_02_DWK
+  #part-number 8
+endnode
+node dummy Cylinder98
+  parent vmr_udoor_02
+  #part-number 1
+  positionkey 2
+    0 0.460000008 0.0399999991 -0.528613985
+    0.166666999 0.460000008 0.0399999991 -4.05972004
+endnode
+node dummy Cylinder100
+  parent Cylinder98
+  #part-number 2
+endnode
+node dummy Cylinder101
+  parent Cylinder98
+  #part-number 3
+endnode
+node dummy Cylinder102
+  parent Cylinder98
+  #part-number 4
+endnode
+node dummy Cylinder99
+  parent Cylinder98
+  #part-number 5
+endnode
+node dummy Cylinder95
+  parent Cylinder98
+  #part-number 6
+endnode
+node dummy Cylinder96
+  parent Cylinder98
+  #part-number 7
+endnode
+node dummy Cylinder97
+  parent Cylinder98
+  #part-number 8
+endnode
+node dummy Cylinder104
+  parent Cylinder98
+  #part-number 9
+endnode
+node dummy Cylinder11
+  parent Cylinder98
+  #part-number 10
+endnode
+node dummy Box1352
+  parent Cylinder98
+  #part-number 11
+endnode
+node dummy Box12
+  parent Cylinder98
+  #part-number 12
+endnode
+node dummy Cylinder103
+  parent Cylinder98
+  #part-number 13
+endnode
+node trimesh sam
+  parent vmr_udoor_02
+  #part-number 14
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Box1451
+  parent vmr_udoor_02
+  #part-number 15
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node dummy vmr_udoor_02a
+  parent vmr_udoor_02
+  #part-number 16
+endnode
+node emitter fire!08
+  parent vmr_udoor_02
+  #part-number 17
+endnode
+node emitter ChunkyWood04
+  parent vmr_udoor_02
+  #part-number 18
+endnode
+node emitter ChunkyWood03
+  parent vmr_udoor_02
+  #part-number 19
+endnode
+node dummy vmr_udoor_02impc
+  parent vmr_udoor_02
+  #part-number 20
+endnode
+node dummy vmr_udoor_02hhit
+  parent vmr_udoor_02
+  #part-number 21
+endnode
+node dummy vmr_udoor_02head
+  parent vmr_udoor_02
+  #part-number 22
+endnode
+node dummy vmr_udoor_02grnd
+  parent vmr_udoor_02
+  #part-number 23
+endnode
+doneanim die vmr_udoor_02
+
+#MAXANIM ASCII
+newanim dead vmr_udoor_02
+  length 0.0333333015
+  transtime 0.25
+  animroot vmr_udoor_02
+node dummy vmr_udoor_02
+  parent NULL
+  #part-number 0
+endnode
+node dummy vmr_udoor_02_DWK
+  parent vmr_udoor_02
+  #part-number -1
+endnode
+node dummy 02_DWK_dp_open2_01
+  parent vmr_udoor_02_DWK
+  #part-number 2
+endnode
+node dummy 02_DWK_dp_closed_01
+  parent vmr_udoor_02_DWK
+  #part-number 3
+endnode
+node dummy 02_DWK_dp_open1_01
+  parent vmr_udoor_02_DWK
+  #part-number 4
+endnode
+node dummy 02_DWK_dp_closed_02
+  parent vmr_udoor_02_DWK
+  #part-number 5
+endnode
+node dummy 02_DWK_wg_open1
+  parent vmr_udoor_02_DWK
+  #part-number 6
+endnode
+node dummy 02_DWK_wg_closed
+  parent vmr_udoor_02_DWK
+  #part-number 7
+endnode
+node dummy 02_DWK_wg_open2
+  parent vmr_udoor_02_DWK
+  #part-number 8
+endnode
+node dummy Cylinder98
+  parent vmr_udoor_02
+  #part-number 1
+  positionkey 2
+    0 0.460000008 0.0399999991 -4.05972004
+    0.0333333015 0.460000008 0.0399999991 -4.05972004
+endnode
+node dummy Cylinder100
+  parent Cylinder98
+  #part-number 2
+endnode
+node dummy Cylinder101
+  parent Cylinder98
+  #part-number 3
+endnode
+node dummy Cylinder102
+  parent Cylinder98
+  #part-number 4
+endnode
+node dummy Cylinder99
+  parent Cylinder98
+  #part-number 5
+endnode
+node dummy Cylinder95
+  parent Cylinder98
+  #part-number 6
+endnode
+node dummy Cylinder96
+  parent Cylinder98
+  #part-number 7
+endnode
+node dummy Cylinder97
+  parent Cylinder98
+  #part-number 8
+endnode
+node dummy Cylinder104
+  parent Cylinder98
+  #part-number 9
+endnode
+node dummy Cylinder11
+  parent Cylinder98
+  #part-number 10
+endnode
+node dummy Box1352
+  parent Cylinder98
+  #part-number 11
+endnode
+node dummy Box12
+  parent Cylinder98
+  #part-number 12
+endnode
+node dummy Cylinder103
+  parent Cylinder98
+  #part-number 13
+endnode
+node trimesh sam
+  parent vmr_udoor_02
+  #part-number 14
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Box1451
+  parent vmr_udoor_02
+  #part-number 15
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node dummy vmr_udoor_02a
+  parent vmr_udoor_02
+  #part-number 16
+endnode
+node emitter fire!08
+  parent vmr_udoor_02
+  #part-number 17
+endnode
+node emitter ChunkyWood04
+  parent vmr_udoor_02
+  #part-number 18
+endnode
+node emitter ChunkyWood03
+  parent vmr_udoor_02
+  #part-number 19
+endnode
+node dummy vmr_udoor_02impc
+  parent vmr_udoor_02
+  #part-number 20
+endnode
+node dummy vmr_udoor_02hhit
+  parent vmr_udoor_02
+  #part-number 21
+endnode
+node dummy vmr_udoor_02head
+  parent vmr_udoor_02
+  #part-number 22
+endnode
+node dummy vmr_udoor_02grnd
+  parent vmr_udoor_02
+  #part-number 23
+endnode
+doneanim dead vmr_udoor_02
+
+donemodel vmr_udoor_02
+
+

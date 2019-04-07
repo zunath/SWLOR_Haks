@@ -1,0 +1,62 @@
+#MAXMODEL ASCII
+# model: phod_alienhivemb
+filedependancy phod_alienhivemb.max
+newmodel phod_alienhivemb
+setsupermodel phod_alienhivemb NULL
+classification CHARACTER
+setanimationscale 1
+#MAXGEOM  ASCII
+beginmodelgeom phod_alienhivemb
+node dummy phod_alienhivemb
+  parent NULL
+endnode
+node trimesh Barrier
+  parent phod_alienhivemb
+  shadow 0
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 100
+  bitmap phod_alienmush
+  verts 8
+       2.0530300   -0.1527300    0.0000000
+      -3.1262500   -0.1499220    0.0000000
+      -3.1228700    0.1400590    0.0000000
+       2.0495999    0.1445710    0.0000000
+       2.0530300   -0.1527300    0.3000000
+       2.0495999    0.1445710    0.3000000
+      -3.1228700    0.1400590    0.3000000
+      -3.1262500   -0.1499220    0.3000000
+  tverts 14
+       0.0710492    0.0004995  0
+       0.0710491    0.9995010  0
+      -0.0409355    0.9995010  0
+      -0.0409354    0.0004995  0
+      -0.0408517    0.0004995  0
+       0.0710961    0.0004995  0
+       0.0710961    0.9995010  0
+      -0.0408516    0.9995010  0
+      -0.0295737    0.4500000  0
+       0.0704263    0.4500000  0
+       0.0704263    0.5500000  0
+      -0.0295737    0.5500000  0
+      -0.0402888    0.0004995  0
+      -0.0402888    0.9995010  0
+  faces 12
+    0 1 2  1   0  1  2   0
+    2 3 0  1   2  3  0   0
+    4 5 6  1   4  5  6   0
+    6 7 4  1   6  7  4   0
+    0 3 5  1   8  9 10   0
+    5 4 0  1  10 11  8   0
+    3 2 6  1  12 13  6   0
+    6 5 3  1   6  5 12   0
+    2 1 7  1   2  1  7   0
+    7 6 2  1   7  6 13   0
+    1 0 4  1   1  0  4   0
+    4 7 1  1   4  7  1   0
+  position 0.532884 0.0138989 0
+  orientation 0 0 0 0
+endnode
+endmodelgeom phod_alienhivemb
+donemodel phod_alienhivemb

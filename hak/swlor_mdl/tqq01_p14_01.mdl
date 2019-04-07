@@ -1,0 +1,20 @@
+#MAXMODEL ASCII
+# model: tqq01_P14_01
+filedependancy tqq01_P14_01.max
+newmodel tqq01_P14_01
+setsupermodel tqq01_P14_01 NULL
+classification TILE
+setanimationscale 1
+#MAXGEOM  ASCII
+beginmodelgeom tqq01_P14_01
+node dummy tqq01_P14_01
+  parent NULL
+endnode
+node dummy tqq01_P14_01_D01
+  parent tqq01_P14_01
+  position 4.20641 0.0242969 -8.8501e-06
+  orientation 0 0 1 -1.5708
+endnode
+endmodelgeom tqq01_P14_01
+
+donemodel tqq01_P14_01

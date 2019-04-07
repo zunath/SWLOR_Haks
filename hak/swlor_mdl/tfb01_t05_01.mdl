@@ -1,0 +1,46 @@
+#MAXMODEL ASCII
+# model: tfb01_T05_01
+filedependancy tfb01_T05_01.max
+newmodel tfb01_T05_01
+setsupermodel tfb01_T05_01 NULL
+classification tile
+setanimationscale 1
+#MAXGEOM  ASCII
+beginmodelgeom tfb01_T05_01
+node dummy tfb01_T05_01
+  parent NULL
+  #part-number 0
+endnode
+node light AuroraLight255
+  parent tfb01_T05_01
+  #part-number 1
+  ambientonly 0
+  shadow 0
+  isdynamic 0
+  affectdynamic 1
+  lightpriority 3
+  fadingLight 1
+  flareradius 0
+  position 1.49501002 -0.0860814974 1.30544996
+  orientation 0 0 0 0
+  radius 10
+  color 1 0.337255001 0.337255001
+endnode
+node light tfb01_T05_01ml1
+  parent tfb01_T05_01
+  #part-number 2
+  ambientonly 0
+  shadow 0
+  isdynamic 0
+  affectdynamic 1
+  lightpriority 5
+  fadingLight 1
+  flareradius 0
+  position 0 0 5
+  orientation 0 0 0 0
+  radius 14
+  color 0 0 0
+endnode
+endmodelgeom tfb01_T05_01
+
+donemodel tfb01_T05_01

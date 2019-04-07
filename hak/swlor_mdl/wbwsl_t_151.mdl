@@ -1,0 +1,116 @@
+# Exported from NWmax 0.5-beta at 3/18/2004 8:21:04 PM
+# mdl file
+#
+#NWmaxMODEL ASCII
+# model: wbwsl_t_151
+filedependancy Unknown
+newmodel wbwsl_t_151
+setsupermodel wbwsl_t_151 NULL
+classification Character
+setanimationscale 0.0
+#NWmaxGEOM  ASCII
+beginmodelgeom wbwsl_t_151
+node dummy wbwsl_t_151
+  parent NULL
+endnode
+node dummy rootdummy
+  parent wbwsl_t_151
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.341176 0.878431 0.776471 
+endnode
+node dummy handconjure
+  parent wbwsl_t_151
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.894118 0.721569 0.6 
+endnode
+node dummy headconjure
+  parent wbwsl_t_151
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.894118 0.721569 0.6 
+endnode
+node trimesh Cylinder02
+  parent wbwsl_t_151
+  position -0.00491506 0.189829 -0.255017
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.109804 0.109804 0.694118 
+  ambient 1.0 0.113725 0.113725 
+  diffuse 1.0 0.113725 0.113725 
+  specular 0.0 0.0 0.0 
+  shininess 11.0
+  selfillumcolor 0.0 0.0 0.0 
+    bitmap glowred
+    verts 8
+     0.0 0.0 0.0
+     0.0025 0.0 0.0
+     -0.00125 -0.00216506 0.0
+     -0.00125 0.00216506 0.0
+     0.0025 0.0 -3.0
+     -0.00125 -0.00216506 -3.0
+     -0.00125 0.00216506 -3.0
+     0.0 0.0 -3.0
+    faces 12
+     0 2 1  1  0 2 1  2
+     0 3 2  1  0 3 2  2
+     0 1 3  1  0 1 3  2
+     1 5 4  8  1 5 4  3
+     1 2 5  8  1 2 5  3
+     2 6 5  8  2 6 5  3
+     2 3 6  8  2 3 6  3
+     3 4 6  8  3 4 6  3
+     3 1 4  8  3 1 4  3
+     7 4 5  1  7 4 5  1
+     7 5 6  1  7 5 6  1
+     7 6 4  1  7 6 4  1
+    tverts 8
+     0.3335 0.5 0
+     0.9995 0.5 0
+     0.000499547 0.000499517 0
+     0.000499904 0.999501 0
+     0.9995 0.5 0
+     0.000499547 0.000499517 0
+     0.000499904 0.999501 0
+     0.3335 0.5 0
+endnode
+node trimesh Cylinder01
+  parent wbwsl_t_151
+  position -0.00462624 0.189799 -0.260898
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.6 0.894118 0.839216 
+  ambient 0.0 0.0 0.0 
+  diffuse 0.588 0.588 0.588 
+  specular 0.0 0.0 0.0 
+  shininess 11.0
+  selfillumcolor 0.0 0.0 0.0 
+    bitmap d20_guntex04
+    verts 12
+     0.005 0.0 0.0
+     0.0025 0.00433013 0.0
+     -0.0025 0.00433013 0.0
+     -0.005 0.0 0.0
+     -0.0025 -0.00433013 0.0
+     0.0025 -0.00433013 0.0
+     0.005 0.0 0.05
+     0.0025 0.00433013 0.05
+     -0.0025 0.00433013 0.05
+     -0.005 0.0 0.05
+     -0.0025 -0.00433013 0.05
+     0.0025 -0.00433013 0.05
+    faces 12
+     0 7 6  8  0 0 0  3
+     0 1 7  8  0 0 0  3
+     1 8 7  8  0 0 0  3
+     1 2 8  8  0 0 0  3
+     2 9 8  8  0 0 0  3
+     2 3 9  8  0 0 0  3
+     3 10 9  8  0 0 0  3
+     3 4 10  8  0 0 0  3
+     4 11 10  8  0 0 0  3
+     4 5 11  8  0 0 0  3
+     5 6 11  8  0 0 0  3
+     5 0 6  8  0 0 0  3
+endnode
+endmodelgeom wbwsl_t_151
+donemodel wbwsl_t_151

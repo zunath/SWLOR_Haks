@@ -1,0 +1,2223 @@
+# Exported from Wayland's NWN Maxscript v0.3b at 2/26/2005 12:16:33 PM
+# mdl file
+#
+filedependancy Unknown
+newmodel fffighter2sm
+setsupermodel fffighter2sm NULL
+classification Character
+setanimationscale 1.0
+beginmodelgeom fffighter2sm
+node dummy fffighter2sm
+    parent NULL
+endnode
+node dummy handconjure
+    parent fffighter2sm
+    position 0.837849 -0.796668 1.18292
+    orientation 1.0 0.0 0.0 0.0
+    scale 1.0
+endnode
+node dummy headconjure
+    parent fffighter2sm
+    position -0.843793 -0.798501 1.18278
+    orientation 1.0 0.0 0.0 0.0
+    scale 1.0
+endnode
+node dummy monster0
+    parent fffighter2sm
+    position -0.00922363 -0.945694 1.365
+    orientation 1.0 0.0 0.0 0.0
+    scale 1.0
+endnode
+node dummy monster1
+    parent fffighter2sm
+    position 0.0396592 -0.456136 1.39148
+    orientation 1.0 0.0 0.0 0.0
+    scale 1.0
+endnode
+node dummy rootdummy
+    parent fffighter2sm
+    position 0.0 0.0 0.997551
+    orientation 1.0 0.0 0.0 0.0
+    scale 1.0
+endnode
+node trimesh torso_g
+    parent rootdummy
+    position -5.082e-005 -0.58785 0.192449
+    orientation 1.0 0.0 0.0 0.0
+    scale 1.0
+    render 1
+    shininess 0
+    transparencyhint 1
+    diffuse 1.0 1.0 1.0
+    ambient 1.0 1.0 1.0
+    specular 0.0 0.0 0.0
+    selfillumcolor 0.0 0.0 0.0
+    alpha 1.0
+    bitmap F02_512
+    verts 82
+        0.18315 0.640035 -0.136075
+        0.278437 0.169042 0.0
+        0.000250979 0.162459 -0.116968
+        0.0686071 0.853875 -0.117414
+        0.232007 -0.276012 0.0
+        0.00025094 -0.28111 -0.0516285
+        0.18315 0.61875 0.110187
+        0.0686071 0.832095 0.128848
+        0.182012 0.136373 0.356054
+        0.000250977 0.136373 0.356351
+        0.000250945 -0.231413 0.319572
+        0.151668 -0.231413 0.319572
+        0.214236 0.7227 -0.00463802
+        0.0686071 0.936045 0.0140433
+        0.000250977 -0.432729 0.12375
+        0.149935 -0.468418 0.12375
+        0.000250929 -0.407286 0.247351
+        0.959805 -0.115978 0.022181
+        0.959805 0.254479 0.022181
+        0.91773 0.210276 0.141718
+        0.32576 0.278042 0.12375
+        0.677655 0.210276 -0.0133551
+        0.677655 -0.119691 -0.0133551
+        0.278437 0.169042 0.247203
+        0.700425 -0.119691 0.151123
+        0.700425 0.210276 0.150926
+        0.232007 -0.276012 0.247351
+        0.68805 0.319324 0.0628155
+        0.894465 0.210276 -0.0633105
+        0.894465 -0.119691 -0.0633105
+        0.91773 -0.119691 0.141718
+        0.86328 0.57816 0.0371548
+        0.77517 0.57816 0.0521235
+        0.128997 -0.420948 0.0
+        0.000250929 -0.407286 0.0
+        0.128997 -0.420948 0.247351
+        0.269132 -0.337095 0.12375
+        0.68805 -0.180823 0.0628155
+        0.87219 -0.294674 0.0375705
+        0.76626 -0.294674 0.0518265
+        -0.0681119 0.832095 0.128848
+        -0.0681119 0.936045 0.0140433
+        -0.0681119 0.853875 -0.117414
+        -0.277943 0.169042 0.0
+        -0.182655 0.640035 -0.136075
+        -0.231511 -0.276012 0.0
+        -0.182655 0.61875 0.110187
+        -0.181516 0.136373 0.356054
+        -0.151173 -0.231413 0.319572
+        -0.213741 0.7227 -0.00463802
+        -0.149391 -0.468418 0.12375
+        -0.95931 0.254479 0.022181
+        -0.95931 -0.115978 0.022181
+        -0.917235 0.210276 0.141718
+        -0.325265 0.278042 0.12375
+        -0.67716 0.210276 -0.0133551
+        -0.67716 -0.119691 -0.0133551
+        -0.69993 -0.119691 0.151123
+        -0.277943 0.169042 0.247203
+        -0.69993 0.210276 0.150926
+        -0.231511 -0.276012 0.247351
+        -0.687555 0.319324 0.0628155
+        -0.89397 0.210276 -0.0633105
+        -0.89397 -0.119691 -0.0633105
+        -0.917235 -0.119691 0.141718
+        -0.862785 0.57816 0.0371548
+        -0.774675 0.57816 0.0521235
+        -0.128502 -0.420948 0.0
+        -0.128502 -0.420948 0.247351
+        -0.268636 -0.337095 0.12375
+        -0.687555 -0.180823 0.0628155
+        -0.871695 -0.294674 0.0375705
+        -0.765765 -0.294674 0.0518265
+        -0.0681119 0.853875 -0.117414
+        -0.0681119 0.832095 0.128848
+        -0.0681119 0.832095 0.128848
+        -0.0681119 0.936045 0.0140433
+        -0.0681119 0.832095 0.128848
+        -0.0681119 0.936045 0.0140433
+        -0.0681119 0.853875 -0.117414
+        -0.0681119 0.936045 0.0140433
+        -0.0681119 0.832095 0.128848
+    faces 142
+        0 1 2 1 0 1 2 1
+        2 3 0 1 2 3 0 1
+        1 4 5 1 1 4 5 1
+        5 2 1 1 5 2 1 1
+        6 7 8 1 6 7 8 1
+        9 8 7 1 9 8 7 1
+        8 9 10 1 8 9 10 1
+        10 11 8 1 10 11 8 1
+        12 13 7 1 12 13 7 1
+        14 15 16 1 14 15 16 1
+        17 18 19 1 17 18 19 1
+        12 20 1 1 12 20 1 1
+        4 1 21 1 4 1 21 1
+        21 22 4 1 21 22 4 1
+        23 24 25 1 23 24 25 1
+        24 23 26 1 24 23 26 1
+        25 27 23 1 25 27 23 1
+        22 21 28 1 22 21 28 1
+        28 29 22 1 28 29 22 1
+        25 24 30 1 25 24 30 1
+        30 19 25 1 30 19 25 1
+        19 18 31 1 19 18 31 1
+        21 27 32 1 21 27 32 1
+        28 21 32 1 28 21 32 1
+        25 19 32 1 25 19 32 1
+        5 4 33 1 5 4 33 1
+        33 34 5 1 33 34 5 1
+        11 10 16 1 11 10 16 1
+        16 35 11 1 16 35 11 1
+        4 36 15 1 4 36 15 1
+        26 36 37 1 26 36 37 1
+        29 17 38 1 29 17 38 1
+        22 29 39 1 22 29 39 1
+        30 24 39 1 30 24 39 1
+        24 37 39 1 24 37 39 1
+        12 0 13 1 12 0 13 1
+        0 3 13 1 0 3 13 1
+        7 6 12 1 7 6 12 1
+        35 16 15 1 35 16 15 1
+        17 29 18 1 17 29 18 1
+        29 28 18 1 29 28 18 1
+        19 30 17 1 19 30 17 1
+        1 0 12 1 1 0 12 1
+        12 6 20 1 12 6 20 1
+        6 23 20 1 6 23 20 1
+        23 27 20 1 23 27 20 1
+        27 1 20 1 27 1 20 1
+        21 1 27 1 21 1 27 1
+        18 28 31 1 18 28 31 1
+        28 32 31 1 28 32 31 1
+        32 19 31 1 32 19 31 1
+        27 25 32 1 27 25 32 1
+        36 26 15 1 36 26 15 1
+        26 35 15 1 26 35 15 1
+        33 4 15 1 33 4 15 1
+        24 26 37 1 24 26 37 1
+        36 4 37 1 36 4 37 1
+        4 22 37 1 4 22 37 1
+        17 30 38 1 17 30 38 1
+        30 39 38 1 30 39 38 1
+        39 29 38 1 39 29 38 1
+        37 22 39 1 37 22 39 1
+        6 8 23 1 6 8 23 1
+        26 23 8 1 26 23 8 1
+        8 11 26 1 8 11 26 1
+        35 26 11 1 35 26 11 1
+        33 15 34 1 33 15 34 1
+        15 14 34 1 15 14 34 1
+        40 9 7 1 40 9 7 1
+        13 40 7 1 13 40 7 1
+        41 40 13 1 41 40 13 1
+        42 41 13 1 42 41 13 1
+        3 42 13 1 3 42 13 1
+        2 42 3 1 2 42 3 1
+        43 44 2 1 43 44 2 1
+        73 2 44 1 73 2 44 1
+        45 43 5 1 45 43 5 1
+        2 5 43 1 2 5 43 1
+        74 46 47 1 74 46 47 1
+        47 9 75 1 47 9 75 1
+        9 47 10 1 9 47 10 1
+        48 10 47 1 48 10 47 1
+        76 49 77 1 76 49 77 1
+        50 14 16 1 50 14 16 1
+        51 52 53 1 51 52 53 1
+        54 49 43 1 54 49 43 1
+        43 45 55 1 43 45 55 1
+        56 55 45 1 56 55 45 1
+        57 58 59 1 57 58 59 1
+        58 57 60 1 58 57 60 1
+        61 59 58 1 61 59 58 1
+        55 56 62 1 55 56 62 1
+        63 62 56 1 63 62 56 1
+        57 59 64 1 57 59 64 1
+        53 64 59 1 53 64 59 1
+        51 53 65 1 51 53 65 1
+        61 55 66 1 61 55 66 1
+        55 62 66 1 55 62 66 1
+        53 59 66 1 53 59 66 1
+        45 5 67 1 45 5 67 1
+        34 67 5 1 34 67 5 1
+        10 48 16 1 10 48 16 1
+        68 16 48 1 68 16 48 1
+        69 45 50 1 69 45 50 1
+        69 60 70 1 69 60 70 1
+        52 63 71 1 52 63 71 1
+        63 56 72 1 63 56 72 1
+        57 64 72 1 57 64 72 1
+        70 57 72 1 70 57 72 1
+        44 49 78 1 44 49 78 1
+        79 44 80 1 79 44 80 1
+        46 81 49 1 46 81 49 1
+        16 68 50 1 16 68 50 1
+        63 52 51 1 63 52 51 1
+        62 63 51 1 62 63 51 1
+        64 53 52 1 64 53 52 1
+        44 43 49 1 44 43 49 1
+        46 49 54 1 46 49 54 1
+        58 46 54 1 58 46 54 1
+        61 58 54 1 61 58 54 1
+        43 61 54 1 43 61 54 1
+        43 55 61 1 43 55 61 1
+        62 51 65 1 62 51 65 1
+        66 62 65 1 66 62 65 1
+        53 66 65 1 53 66 65 1
+        59 61 66 1 59 61 66 1
+        60 69 50 1 60 69 50 1
+        68 60 50 1 68 60 50 1
+        45 67 50 1 45 67 50 1
+        60 57 70 1 60 57 70 1
+        45 69 70 1 45 69 70 1
+        56 45 70 1 56 45 70 1
+        64 52 71 1 64 52 71 1
+        72 64 71 1 72 64 71 1
+        63 72 71 1 63 72 71 1
+        56 70 72 1 56 70 72 1
+        47 46 58 1 47 46 58 1
+        58 60 47 1 58 60 47 1
+        48 47 60 1 48 47 60 1
+        60 68 48 1 60 68 48 1
+        50 67 34 1 50 67 34 1
+        14 50 34 1 14 50 34 1
+    tverts 82
+        0.6228 0.2267 0
+        0.6147 0.5296 0
+        0.895 0.5554 0
+        0.8253 0.2458 0
+        0.6474 0.8469 0
+        0.895 0.8606 0
+        0.6228 0.2415 0
+        0.7933 0.09458 0
+        0.7301 0.5733 0
+        0.895 0.5733 0
+        0.895 0.8264 0
+        0.7576 0.8264 0
+        0.5304 0.1617 0
+        0.7683 0.0004995 0
+        0.8945 0.9984 0
+        0.7387 0.9995 0
+        0.8949 0.9161 0
+        0.0004996 0.7468 0
+        0.0004995 0.4918 0
+        0.08005 0.522 0
+        0.5176 0.4373 0
+        0.2446 0.522 0
+        0.2446 0.749 0
+        0.6147 0.5296 0
+        0.2446 0.7493 0
+        0.2446 0.5222 0
+        0.6474 0.8469 0
+        0.3101 0.4378 0
+        0.07816 0.5222 0
+        0.07816 0.7493 0
+        0.08005 0.749 0
+        0.07842 0.2693 0
+        0.2251 0.2693 0
+        0.7543 0.9115 0
+        0.8949 0.9161 0
+        0.7543 0.9115 0
+        0.6035 0.9242 0
+        0.3233 0.8567 0
+        0.08451 0.9292 0
+        0.2226 0.9292 0
+        0.9968 0.09458 0
+        0.9995 0.002856 0
+        0.9648 0.2458 0
+        0.6147 0.5296 0
+        0.6228 0.2267 0
+        0.6474 0.8469 0
+        0.6228 0.2415 0
+        0.7301 0.5733 0
+        0.7576 0.8264 0
+        0.5304 0.1617 0
+        0.7387 0.9995 0
+        0.0004995 0.4918 0
+        0.0004996 0.7468 0
+        0.08005 0.522 0
+        0.5176 0.4373 0
+        0.2446 0.522 0
+        0.2446 0.749 0
+        0.2446 0.7493 0
+        0.6147 0.5296 0
+        0.2446 0.5222 0
+        0.6474 0.8469 0
+        0.3101 0.4378 0
+        0.07816 0.5222 0
+        0.07816 0.7493 0
+        0.08005 0.749 0
+        0.07842 0.2693 0
+        0.2251 0.2693 0
+        0.7543 0.9115 0
+        0.7543 0.9115 0
+        0.6035 0.9242 0
+        0.3233 0.8567 0
+        0.08451 0.9292 0
+        0.2226 0.9292 0
+        0.8253 0.2458 0
+        0.7933 0.09458 0
+        0.7933 0.09458 0
+        0.7683 0.0004995 0
+        0.7933 0.09458 0
+        0.7683 0.0004995 0
+        0.8253 0.2458 0
+        0.7683 0.0004995 0
+        0.7933 0.09458 0
+endnode
+node dummy Impact
+    parent torso_g
+    position -0.0154131 0.768515 -0.0606905
+    orientation 1.0 0.0 0.0 -3.62561e-007
+    scale 1.0
+endnode
+endmodelgeom fffighter2sm
+
+newanim crun fffighter2sm
+    length 0.4
+    transtime 0.25
+    animroot fffighter2sm
+    node dummy fffighter2sm
+        parent NULL
+    endnode
+    node dummy handconjure
+        parent fffighter2sm
+    endnode
+    node dummy headconjure
+        parent fffighter2sm
+    endnode
+    node dummy monster0
+        parent fffighter2sm
+    endnode
+    node dummy monster1
+        parent fffighter2sm
+    endnode
+    node trimesh rootdummy
+        parent fffighter2sm
+    endnode
+    node trimesh torso_g
+        parent rootdummy
+        positionkey
+            0.0 -5.082e-005 -0.58785 0.193579
+            0.4 -5.082e-005 -0.58785 0.193579
+        endlist
+        orientationkey
+            0.0 1.0 0.0 0.0 -1.08768e-006
+            0.4 1.0 0.0 0.0 -1.08768e-006
+        endlist
+    endnode
+    node dummy Impact
+        parent torso_g
+    endnode
+doneanim crun fffighter2sm
+
+
+newanim creadyr fffighter2sm
+    length 0.4
+    transtime 0.25
+    animroot fffighter2sm
+    node dummy fffighter2sm
+        parent NULL
+    endnode
+    node dummy handconjure
+        parent fffighter2sm
+    endnode
+    node dummy headconjure
+        parent fffighter2sm
+    endnode
+    node dummy monster0
+        parent fffighter2sm
+    endnode
+    node dummy monster1
+        parent fffighter2sm
+    endnode
+    node trimesh rootdummy
+        parent fffighter2sm
+    endnode
+    node trimesh torso_g
+        parent rootdummy
+        positionkey
+            0.0 -5.082e-005 -0.58785 0.193579
+            0.4 -5.082e-005 -0.58785 0.193579
+        endlist
+        orientationkey
+            0.0 1.0 0.0 0.0 -1.08768e-006
+            0.4 1.0 0.0 0.0 -1.08768e-006
+        endlist
+    endnode
+    node dummy Impact
+        parent torso_g
+    endnode
+doneanim creadyr fffighter2sm
+
+
+newanim creadyl fffighter2sm
+    length 0.4
+    transtime 0.25
+    animroot fffighter2sm
+    node dummy fffighter2sm
+        parent NULL
+    endnode
+    node dummy handconjure
+        parent fffighter2sm
+    endnode
+    node dummy headconjure
+        parent fffighter2sm
+    endnode
+    node dummy monster0
+        parent fffighter2sm
+    endnode
+    node dummy monster1
+        parent fffighter2sm
+    endnode
+    node trimesh rootdummy
+        parent fffighter2sm
+    endnode
+    node trimesh torso_g
+        parent rootdummy
+        positionkey
+            0.0 -5.082e-005 -0.58785 0.193579
+            0.4 -5.082e-005 -0.58785 0.193579
+        endlist
+        orientationkey
+            0.0 1.0 0.0 0.0 -3.62561e-007
+            0.4 1.0 0.0 0.0 -3.62561e-007
+        endlist
+    endnode
+    node dummy Impact
+        parent torso_g
+    endnode
+doneanim creadyl fffighter2sm
+
+
+newanim cdamager fffighter2sm
+    length 0.666667
+    transtime 0.25
+    animroot fffighter2sm
+    node dummy fffighter2sm
+        parent NULL
+    endnode
+    node dummy handconjure
+        parent fffighter2sm
+    endnode
+    node dummy headconjure
+        parent fffighter2sm
+    endnode
+    node dummy monster0
+        parent fffighter2sm
+    endnode
+    node dummy monster1
+        parent fffighter2sm
+    endnode
+    node trimesh rootdummy
+        parent fffighter2sm
+    endnode
+    node trimesh torso_g
+        parent rootdummy
+        positionkey
+            0.0 -5.082e-005 -0.58785 0.193579
+            0.166667 -5.082e-005 -0.58785 0.193579
+            0.366667 -5.082e-005 -0.58785 0.193579
+            0.5 -5.082e-005 -0.58785 0.193579
+            0.533333 -5.082e-005 -0.58785 0.193579
+            0.633333 -5.082e-005 -0.58785 0.193579
+            0.666667 -5.082e-005 -0.58785 0.193579
+        endlist
+        orientationkey
+            0.0 1.0 0.0 0.0 -1.8128e-006
+            0.166667 -1.65525e-006 1.0 -1.80514e-007 -0.218166
+            0.366667 -1.0 0.0 0.000457351 -3.62561e-007
+            0.5 -3.45876e-006 -1.0 1.82852e-007 -0.10472
+            0.533333 -4.74551e-006 -1.0 1.83441e-007 -0.0763582
+            0.566667 -8.30873e-005 -1.0 2.19271e-007 -0.00436332
+            0.633333 -4.1544e-005 1.0 -1.6227e-007 -0.00872664
+            0.666667 -0.999525 0.0308222 0.000457133 -3.62561e-007
+        endlist
+    endnode
+    node dummy Impact
+        parent torso_g
+    endnode
+doneanim cdamager fffighter2sm
+
+
+newanim cdamagel fffighter2sm
+    length 0.666667
+    transtime 0.25
+    animroot fffighter2sm
+    node dummy fffighter2sm
+        parent NULL
+    endnode
+    node dummy handconjure
+        parent fffighter2sm
+    endnode
+    node dummy headconjure
+        parent fffighter2sm
+    endnode
+    node dummy monster0
+        parent fffighter2sm
+    endnode
+    node dummy monster1
+        parent fffighter2sm
+    endnode
+    node trimesh rootdummy
+        parent fffighter2sm
+    endnode
+    node trimesh torso_g
+        parent rootdummy
+        positionkey
+            0.0 -5.082e-005 -0.58785 0.193579
+            0.166667 -5.082e-005 -0.58785 0.193579
+            0.366667 -5.082e-005 -0.58785 0.193579
+            0.5 -5.082e-005 -0.58785 0.193579
+            0.533333 -5.082e-005 -0.58785 0.193579
+            0.633333 -5.082e-005 -0.58785 0.193579
+            0.666667 -5.082e-005 -0.58785 0.193579
+        endlist
+        orientationkey
+            0.0 1.0 0.0 0.0 -3.62561e-007
+            0.166667 -1.65525e-006 1.0 -1.80514e-007 -0.218166
+            0.366667 -0.999987 -0.00506028 0.000457274 -3.62561e-007
+            0.5 -3.45876e-006 -1.0 1.82852e-007 -0.10472
+            0.533333 -4.74551e-006 -1.0 1.83441e-007 -0.0763582
+            0.566667 -8.30881e-005 -1.0 2.19271e-007 -0.00436332
+            0.633333 -4.1544e-005 1.0 -1.6227e-007 -0.00872664
+            0.666667 -0.999559 0.0296883 0.000457153 -3.62561e-007
+        endlist
+    endnode
+    node dummy Impact
+        parent torso_g
+    endnode
+doneanim cdamagel fffighter2sm
+
+newanim cpause1 fffighter2sm
+    length 0.4
+    transtime 0.25
+    animroot fffighter2sm
+    node dummy fffighter2sm
+        parent NULL
+    endnode
+    node dummy handconjure
+        parent fffighter2sm
+    endnode
+    node dummy headconjure
+        parent fffighter2sm
+    endnode
+    node dummy monster0
+        parent fffighter2sm
+    endnode
+    node dummy monster1
+        parent fffighter2sm
+    endnode
+    node trimesh rootdummy
+        parent fffighter2sm
+    endnode
+    node trimesh torso_g
+        parent rootdummy
+        positionkey
+            0.0 -5.082e-005 -0.58785 0.193579
+            0.4 -5.082e-005 -0.58785 0.193579
+        endlist
+        orientationkey
+            0.0 1.0 2.60829e-007 0.0 -1.08768e-006
+            0.4 1.0 2.60829e-007 0.0 -1.08768e-006
+        endlist
+    endnode
+    node dummy Impact
+        parent torso_g
+    endnode
+doneanim cpause1 fffighter2sm
+
+
+newanim ca1slashl fffighter2sm
+    length 0.666667
+    transtime 0.25
+    animroot fffighter2sm
+    node dummy fffighter2sm
+        parent NULL
+    endnode
+    node dummy handconjure
+        parent fffighter2sm
+    endnode
+    node dummy headconjure
+        parent fffighter2sm
+    endnode
+    node dummy monster0
+        parent fffighter2sm
+    endnode
+    node dummy monster1
+        parent fffighter2sm
+    endnode
+    node trimesh rootdummy
+        parent fffighter2sm
+    endnode
+    node trimesh torso_g
+        parent rootdummy
+        positionkey
+            0.0 -5.082e-005 -0.58785 0.193579
+            0.166667 -5.082e-005 -0.58785 0.193579
+            0.366667 -5.082e-005 -0.58785 0.193579
+            0.5 -5.082e-005 -0.58785 0.193579
+            0.533333 -5.082e-005 -0.58785 0.193579
+            0.633333 -5.082e-005 -0.58785 0.193579
+            0.666667 -5.082e-005 -0.58785 0.193579
+        endlist
+        orientationkey
+            0.0 1.0 0.0 0.0 -3.62561e-007
+            0.166667 -1.65525e-006 1.0 -1.80514e-007 -0.218166
+            0.366667 -0.946009 -0.32414 0.000432717 -3.76973e-007
+            0.5 -3.45876e-006 -1.0 1.82852e-007 -0.10472
+            0.533333 -4.74551e-006 -1.0 1.83441e-007 -0.0763582
+            0.566667 -8.30882e-005 -1.0 2.19271e-007 -0.00436332
+            0.633333 -4.1544e-005 1.0 -1.6227e-007 -0.00872664
+            0.666667 -0.999944 0.0105754 0.000457327 -3.62561e-007
+        endlist
+    endnode
+    node dummy Impact
+        parent torso_g
+    endnode
+doneanim ca1slashl fffighter2sm
+
+
+newanim cdamages fffighter2sm
+    length 0.4
+    transtime 0.25
+    animroot fffighter2sm
+    node dummy fffighter2sm
+        parent NULL
+    endnode
+    node dummy handconjure
+        parent fffighter2sm
+    endnode
+    node dummy headconjure
+        parent fffighter2sm
+    endnode
+    node dummy monster0
+        parent fffighter2sm
+    endnode
+    node dummy monster1
+        parent fffighter2sm
+    endnode
+    node trimesh rootdummy
+        parent fffighter2sm
+    endnode
+    node trimesh torso_g
+        parent rootdummy
+        positionkey
+            0.0 -5.082e-005 -0.58785 0.193579
+            0.4 -5.082e-005 -0.58785 0.193579
+        endlist
+        orientationkey
+            0.0 0.999998 0.00205512 8.88698e-005 -1.86544e-006
+            0.4 0.999998 0.00205512 8.88698e-005 -1.86544e-006
+        endlist
+    endnode
+    node dummy Impact
+        parent torso_g
+    endnode
+doneanim cdamages fffighter2sm
+
+newanim ckdbck fffighter2sm
+    length 1
+    transtime 0.125
+    animroot fffighter2sm
+    node dummy fffighter2sm
+        parent NULL
+    endnode
+    node dummy handconjure
+        parent fffighter2sm
+    endnode
+    node dummy headconjure
+        parent fffighter2sm
+    endnode
+    node dummy monster0
+        parent fffighter2sm
+    endnode
+    node dummy monster1
+        parent fffighter2sm
+    endnode
+    node trimesh rootdummy
+        parent fffighter2sm
+    endnode
+    node trimesh torso_g
+        parent rootdummy
+        positionkey
+            0.0 -5.082e-005 -0.58785 0.193579
+            1 -5.082e-005 -0.58785 0.193579
+        endlist
+        orientationkey
+           0.0 1.0 1.47053e-005 -4.34289e-005 -3.62561e-007
+            1 1.0 1.47053e-005 -4.34289e-005 -3.62561e-007
+        endlist
+    endnode
+    node dummy Impact
+        parent torso_g
+    endnode
+doneanim ckdbck fffighter2sm
+
+newanim cwalk fffighter2sm
+    length 0.4
+    transtime 0.25
+    animroot fffighter2sm
+    node dummy fffighter2sm
+        parent NULL
+    endnode
+    node dummy handconjure
+        parent fffighter2sm
+    endnode
+    node dummy headconjure
+        parent fffighter2sm
+    endnode
+    node dummy monster0
+        parent fffighter2sm
+    endnode
+    node dummy monster1
+        parent fffighter2sm
+    endnode
+    node trimesh rootdummy
+        parent fffighter2sm
+    endnode
+    node trimesh torso_g
+        parent rootdummy
+        positionkey
+            0.0 -5.082e-005 -0.58785 0.193579
+            0.4 -5.082e-005 -0.58785 0.193579
+        endlist
+        orientationkey
+            0.0 1.0 0.0 0.0 -1.08768e-006
+            0.4 1.0 0.0 0.0 -1.08768e-006
+        endlist
+    endnode
+    node dummy Impact
+        parent torso_g
+    endnode
+doneanim cwalk fffighter2sm
+
+
+newanim cclosel fffighter2sm
+    length 0.4
+    transtime 0.25
+    animroot fffighter2sm
+    node dummy fffighter2sm
+        parent NULL
+    endnode
+    node dummy handconjure
+        parent fffighter2sm
+    endnode
+    node dummy headconjure
+        parent fffighter2sm
+    endnode
+    node dummy monster0
+        parent fffighter2sm
+    endnode
+    node dummy monster1
+        parent fffighter2sm
+    endnode
+    node trimesh rootdummy
+        parent fffighter2sm
+    endnode
+    node trimesh torso_g
+        parent rootdummy
+        positionkey
+            0.0 -5.082e-005 -0.58785 0.193579
+            0.4 -5.082e-005 -0.58785 0.193579
+        endlist
+        orientationkey
+            0.0 1.0 0.0 0.0 -1.04521e-006
+            0.4 1.0 0.0 0.0 -1.04521e-006
+        endlist
+    endnode
+    node dummy Impact
+        parent torso_g
+    endnode
+doneanim cclosel fffighter2sm
+
+
+newanim ca1slashr fffighter2sm
+    length 0.666667
+    transtime 0.25
+    animroot fffighter2sm
+    node dummy fffighter2sm
+        parent NULL
+    endnode
+    node dummy handconjure
+        parent fffighter2sm
+    endnode
+    node dummy headconjure
+        parent fffighter2sm
+    endnode
+    node dummy monster0
+        parent fffighter2sm
+    endnode
+    node dummy monster1
+        parent fffighter2sm
+    endnode
+    node trimesh rootdummy
+        parent fffighter2sm
+    endnode
+    node trimesh torso_g
+        parent rootdummy
+        positionkey
+            0.0 -5.082e-005 -0.58785 0.193579
+            0.166667 -5.082e-005 -0.58785 0.193579
+            0.366667 -5.082e-005 -0.58785 0.193579
+            0.5 -5.082e-005 -0.58785 0.193579
+            0.533333 -5.082e-005 -0.58785 0.193579
+            0.633333 -5.082e-005 -0.58785 0.193579
+            0.666667 -5.082e-005 -0.58785 0.193579
+        endlist
+        orientationkey
+            0.0 1.0 0.0 0.0 -1.8128e-006
+            0.166667 -1.65525e-006 1.0 -1.80514e-007 -0.218166
+            0.366667 -1.0 0.0 0.000457351 -3.62561e-007
+            0.5 -3.45876e-006 -1.0 1.82852e-007 -0.10472
+            0.533333 -4.74551e-006 -1.0 1.83441e-007 -0.0763582
+            0.566667 -8.30873e-005 -1.0 2.19271e-007 -0.00436332
+            0.633333 -4.1544e-005 1.0 -1.6227e-007 -0.00872664
+            0.666667 -0.999525 0.0308222 0.000457133 -3.62561e-007
+        endlist
+    endnode
+    node dummy Impact
+        parent torso_g
+    endnode
+doneanim ca1slashr fffighter2sm
+
+
+newanim ca1stab fffighter2sm
+    length 0.666667 
+    transtime 0.25
+    animroot fffighter2sm
+    node dummy fffighter2sm
+        parent NULL
+    endnode
+    node dummy handconjure
+        parent fffighter2sm
+    endnode
+    node dummy headconjure
+        parent fffighter2sm
+    endnode
+    node dummy monster0
+        parent fffighter2sm
+    endnode
+    node dummy monster1
+        parent fffighter2sm
+    endnode
+    node trimesh rootdummy
+        parent fffighter2sm
+    endnode
+    node trimesh torso_g
+        parent rootdummy
+        positionkey
+            0.0 -5.082e-005 -0.58785 0.193579
+            0.166667 -5.082e-005 -0.58785 0.193579
+            0.366667 -5.082e-005 -0.58785 0.193579
+            0.5 -5.082e-005 -0.58785 0.193579
+            0.533333 -5.082e-005 -0.58785 0.193579
+            0.633333 -5.082e-005 -0.58785 0.193579
+            0.666667 -5.082e-005 -0.58785 0.193579
+        endlist
+        orientationkey
+            0.0 1.0 0.0 0.0 -1.8128e-006
+            0.166667 -1.65525e-006 1.0 -1.80514e-007 -0.218166
+            0.366667 -1.0 0.0 0.000457351 -3.62561e-007
+            0.5 -3.45876e-006 -1.0 1.82852e-007 -0.10472
+            0.533333 -4.74551e-006 -1.0 1.83441e-007 -0.0763582
+            0.566667 -8.30873e-005 -1.0 2.19271e-007 -0.00436332
+            0.633333 -4.1544e-005 1.0 -1.6227e-007 -0.00872664
+            0.666667 -0.999525 0.0308222 0.000457133 -3.62561e-007
+        endlist
+    endnode
+    node dummy Impact
+        parent torso_g
+    endnode
+doneanim ca1stab fffighter2sm
+
+
+newanim creach fffighter2sm
+    length 0.666667 
+    transtime 0.25
+    animroot fffighter2sm
+    node dummy fffighter2sm
+        parent NULL
+    endnode
+    node dummy handconjure
+        parent fffighter2sm
+    endnode
+    node dummy headconjure
+        parent fffighter2sm
+    endnode
+    node dummy monster0
+        parent fffighter2sm
+    endnode
+    node dummy monster1
+        parent fffighter2sm
+    endnode
+    node trimesh rootdummy
+        parent fffighter2sm
+    endnode
+    node trimesh torso_g
+        parent rootdummy
+        positionkey
+            0.0 -5.082e-005 -0.58785 0.193579
+            0.166667 -5.082e-005 -0.58785 0.193579
+            0.366667 -5.082e-005 -0.58785 0.193579
+            0.5 -5.082e-005 -0.58785 0.193579
+            0.533333 -5.082e-005 -0.58785 0.193579
+            0.633333 -5.082e-005 -0.58785 0.193579
+            0.666667 -5.082e-005 -0.58785 0.193579
+        endlist
+        orientationkey
+            0.0 1.0 0.0 0.0 -1.8128e-006
+            0.166667 -1.65525e-006 1.0 -1.80514e-007 -0.218166
+            0.366667 -1.0 0.0 0.000457351 -3.62561e-007
+            0.5 -3.45876e-006 -1.0 1.82852e-007 -0.10472
+            0.533333 -4.74551e-006 -1.0 1.83441e-007 -0.0763582
+            0.566667 -8.30873e-005 -1.0 2.19271e-007 -0.00436332
+            0.633333 -4.1544e-005 1.0 -1.6227e-007 -0.00872664
+            0.666667 -0.999525 0.0308222 0.000457133 -3.62561e-007
+        endlist
+    endnode
+    node dummy Impact
+        parent torso_g
+    endnode
+doneanim creach fffighter2sm
+
+
+newanim ccloseh fffighter2sm
+    length 0.4
+    transtime 0.25
+    animroot fffighter2sm
+    node dummy fffighter2sm
+        parent NULL
+    endnode
+    node dummy handconjure
+        parent fffighter2sm
+    endnode
+    node dummy headconjure
+        parent fffighter2sm
+    endnode
+    node dummy monster0
+        parent fffighter2sm
+    endnode
+    node dummy monster1
+        parent fffighter2sm
+    endnode
+    node trimesh rootdummy
+        parent fffighter2sm
+    endnode
+    node trimesh torso_g
+        parent rootdummy
+        positionkey
+            0.0 -5.082e-005 -0.58785 0.193579
+            0.4 -5.082e-005 -0.58785 0.193579
+        endlist
+        orientationkey
+            0.0 0.999967 -0.00178572 -0.00795556 -1.0942e-006
+            0.4 0.999967 -0.00178572 -0.00795556 -1.0942e-006
+        endlist
+    endnode
+    node dummy Impact
+        parent torso_g
+    endnode
+doneanim ccloseh fffighter2sm
+
+
+newanim cparryr fffighter2sm
+    length 0.466667
+    transtime 0.25
+    animroot fffighter2sm
+    node dummy fffighter2sm
+        parent NULL
+    endnode
+    node dummy handconjure
+        parent fffighter2sm
+    endnode
+    node dummy headconjure
+        parent fffighter2sm
+    endnode
+    node dummy monster0
+        parent fffighter2sm
+    endnode
+    node dummy monster1
+        parent fffighter2sm
+    endnode
+    node trimesh rootdummy
+        parent fffighter2sm
+    endnode
+    node trimesh torso_g
+        parent rootdummy
+        positionkey
+            0.0 -5.082e-005 -0.58785 0.193579
+            0.466667 -5.082e-005 -0.58785 0.193579
+        endlist
+        orientationkey
+            0.0 0.0 1.0 0.0 -0.3
+            0.466667 0.0 1.0 0.0 -0.4
+        endlist
+    endnode
+    node dummy Impact
+        parent torso_g
+    endnode
+doneanim cparryr fffighter2sm
+
+
+newanim cparryl fffighter2sm
+    length 0.466667
+    transtime 0.25
+    animroot fffighter2sm
+    node dummy fffighter2sm
+        parent NULL
+    endnode
+    node dummy handconjure
+        parent fffighter2sm
+    endnode
+    node dummy headconjure
+        parent fffighter2sm
+    endnode
+    node dummy monster0
+        parent fffighter2sm
+    endnode
+    node dummy monster1
+        parent fffighter2sm
+    endnode
+    node trimesh rootdummy
+        parent fffighter2sm
+    endnode
+    node trimesh torso_g
+        parent rootdummy
+        positionkey
+            0.0 -5.082e-005 -0.58785 0.193579
+            0.466667 -5.082e-005 -0.58785 0.193579
+        endlist
+        orientationkey
+            0.0 0.0 1.0 0.0 0.3
+            0.466667 0.0 1.0 0.0 0.4
+        endlist
+    endnode
+    node dummy Impact
+        parent torso_g
+    endnode
+doneanim cparryl fffighter2sm
+
+
+newanim cdodgelr fffighter2sm
+    length 0.466667
+    transtime 0.25
+    animroot fffighter2sm
+    node dummy fffighter2sm
+        parent NULL
+    endnode
+    node dummy handconjure
+        parent fffighter2sm
+    endnode
+    node dummy headconjure
+        parent fffighter2sm
+    endnode
+    node dummy monster0
+        parent fffighter2sm
+    endnode
+    node dummy monster1
+        parent fffighter2sm
+    endnode
+    node trimesh rootdummy
+        parent fffighter2sm
+    endnode
+    node trimesh torso_g
+        parent rootdummy
+        positionkey
+            0.0 -5.082e-005 -0.58785 0.193579
+            0.466667 -5.082e-005 -0.58785 0.193579
+        endlist
+        orientationkey
+            0.0 0.0 1.0 0.0 0.3
+            0.466667 0.0 1.0 0.0 0.4
+        endlist
+    endnode
+    node dummy Impact
+        parent torso_g
+    endnode
+doneanim cdodgelr fffighter2sm
+
+
+newanim cdodges fffighter2sm
+    length 0.466667
+    transtime 0.25
+    animroot fffighter2sm
+    node dummy fffighter2sm
+        parent NULL
+    endnode
+    node dummy handconjure
+        parent fffighter2sm
+    endnode
+    node dummy headconjure
+        parent fffighter2sm
+    endnode
+    node dummy monster0
+        parent fffighter2sm
+    endnode
+    node dummy monster1
+        parent fffighter2sm
+    endnode
+    node trimesh rootdummy
+        parent fffighter2sm
+    endnode
+    node trimesh torso_g
+        parent rootdummy
+        positionkey
+            0.0 -5.082e-005 -0.58785 0.193579
+            0.466667 -5.082e-005 -0.58785 0.193579
+        endlist
+        orientationkey
+            0.0 0.0 1.0 0.0 -0.3
+            0.466667 0.0 1.0 0.0 -0.4
+        endlist
+    endnode
+    node dummy Impact
+        parent torso_g
+    endnode
+doneanim cdodges fffighter2sm
+
+
+newanim ckdbckps fffighter2sm
+    length 4.0
+    transtime 0.25
+    animroot fffighter2sm
+    node dummy fffighter2sm
+        parent NULL
+    endnode
+    node dummy handconjure
+        parent fffighter2sm
+    endnode
+    node dummy headconjure
+        parent fffighter2sm
+    endnode
+    node dummy monster0
+        parent fffighter2sm
+    endnode
+    node dummy monster1
+        parent fffighter2sm
+    endnode
+    node trimesh rootdummy
+        parent fffighter2sm
+    endnode
+    node trimesh torso_g
+        parent rootdummy
+        positionkey
+            0.0 -5.082e-005 -0.58785 0.193579
+            0.4 -5.082e-005 -0.58785 0.193579
+            0.8 -5.082e-005 -0.58785 0.193579
+            1.2 -5.082e-005 -0.58785 0.193579
+            1.6 -5.082e-005 -0.58785 0.193579
+            2.0 -5.082e-005 -0.58785 0.193579
+            2.4 -5.082e-005 -0.58785 0.193579
+            2.8 -5.082e-005 -0.58785 0.193579
+            3.2 -5.082e-005 -0.58785 0.193579
+            3.6 -5.082e-005 -0.58785 0.193579
+            4.0 -5.082e-005 -0.58785 0.193579
+        endlist
+        orientationkey
+            0.0 0.5 0.5 0.0 0.0
+            0.4 0.5 0.5 0.0 0.63
+            0.8 0.5 0.5 0.0 1.26
+            1.2 0.5 0.5 0.0 1.88
+            1.6 0.5 0.5 0.0 2.51
+            2.0 0.5 0.5 0.0 3.14
+            2.4 0.5 0.5 0.0 3.77
+            2.8 0.5 0.5 0.0 4.40
+            3.2 0.5 0.5 0.0 5.03
+            3.6 0.5 0.5 0.0 5.65
+            4.0 0.5 0.5 0.0 0.0
+        endlist
+    endnode
+    node dummy Impact
+        parent torso_g
+    endnode
+doneanim ckdbckps fffighter2sm
+
+
+newanim ckdbckdmg fffighter2sm
+    length 0.266667008
+    transtime 0.125
+    animroot fffighter2sm
+    node dummy fffighter2sm
+        parent NULL
+    endnode
+    node dummy handconjure
+        parent fffighter2sm
+    endnode
+    node dummy headconjure
+        parent fffighter2sm
+    endnode
+    node dummy monster0
+        parent fffighter2sm
+    endnode
+    node dummy monster1
+        parent fffighter2sm
+    endnode
+    node trimesh rootdummy
+        parent fffighter2sm
+    endnode
+    node trimesh torso_g
+        parent rootdummy
+        positionkey
+            0.0 -5.082e-005 -0.58785 0.193579
+            0.266667008 -5.082e-005 -0.58785 0.193579
+        endlist
+        orientationkey
+            0.0 1.0 1.47053e-005 -4.34289e-005 -3.62561e-007
+            0.266667008 1.0 1.47053e-005 -4.34289e-005 -3.62561e-007
+        endlist
+    endnode
+    node dummy Impact
+        parent torso_g
+    endnode
+doneanim ckdbckdmg fffighter2sm
+
+
+newanim ckdbckdie fffighter2sm
+    length 1
+    transtime 0.25
+    animroot fffighter2sm
+    node dummy fffighter2sm
+        parent NULL
+    endnode
+    node dummy handconjure
+        parent fffighter2sm
+    endnode
+    node dummy headconjure
+        parent fffighter2sm
+    endnode
+    node dummy monster0
+        parent fffighter2sm
+    endnode
+    node dummy monster1
+        parent fffighter2sm
+    endnode
+    node trimesh rootdummy
+        parent fffighter2sm
+    endnode
+    node trimesh torso_g
+        parent rootdummy
+        positionkey
+            0.0 -5.082e-005 -0.58785 0.193579
+            1 -5.082e-005 -0.58785 0.193579
+        endlist
+        orientationkey
+           0.0 1.0 1.47053e-005 -4.34289e-005 -3.62561e-007
+            1 1.0 1.47053e-005 -4.34289e-005 -3.62561e-007
+        endlist
+    endnode
+    node dummy Impact
+        parent torso_g
+    endnode
+doneanim ckdbckdie fffighter2sm
+
+
+newanim cdead fffighter2sm
+    length 4.0
+    transtime 0.25
+    animroot fffighter2sm
+    node dummy fffighter2sm
+        parent NULL
+    endnode
+    node dummy handconjure
+        parent fffighter2sm
+    endnode
+    node dummy headconjure
+        parent fffighter2sm
+    endnode
+    node dummy monster0
+        parent fffighter2sm
+    endnode
+    node dummy monster1
+        parent fffighter2sm
+    endnode
+    node trimesh rootdummy
+        parent fffighter2sm
+    endnode
+    node trimesh torso_g
+        parent rootdummy
+        positionkey
+            0.0 -5.082e-005 -0.58785 0.193579
+            0.4 -5.082e-005 -0.58785 0.193579
+            0.8 -5.082e-005 -0.58785 0.193579
+            1.2 -5.082e-005 -0.58785 0.193579
+            1.6 -5.082e-005 -0.58785 0.193579
+            2.0 -5.082e-005 -0.58785 0.193579
+            2.4 -5.082e-005 -0.58785 0.193579
+            2.8 -5.082e-005 -0.58785 0.193579
+            3.2 -5.082e-005 -0.58785 0.193579
+            3.6 -5.082e-005 -0.58785 0.193579
+            4.0 -5.082e-005 -0.58785 0.193579
+        endlist
+        orientationkey
+            0.0 1.0 0.0 0.0 0.0
+            0.4 1.0 0.0 0.0 -0.63
+            0.8 1.0 0.0 0.0 -1.26
+            1.2 1.0 0.0 0.0 -1.88
+            1.6 1.0 0.0 0.0 -2.51
+            2.0 1.0 0.0 0.0 -3.14
+            2.4 1.0 0.0 0.0 -3.77
+            2.8 1.0 0.0 0.0 -4.40
+            3.2 1.0 0.0 0.0 -5.03
+            3.6 1.0 0.0 0.0 -5.65
+            4.0 1.0 0.0 0.0 0.0
+        endlist
+    endnode
+    node dummy Impact
+        parent torso_g
+    endnode
+doneanim cdead fffighter2sm
+
+
+newanim cguptokdb fffighter2sm
+    length 1
+    transtime 0.25
+    animroot fffighter2sm
+    node dummy fffighter2sm
+        parent NULL
+    endnode
+    node dummy handconjure
+        parent fffighter2sm
+    endnode
+    node dummy headconjure
+        parent fffighter2sm
+    endnode
+    node dummy monster0
+        parent fffighter2sm
+    endnode
+    node dummy monster1
+        parent fffighter2sm
+    endnode
+    node trimesh rootdummy
+        parent fffighter2sm
+    endnode
+    node trimesh torso_g
+        parent rootdummy
+        positionkey
+            0.0 -5.082e-005 -0.58785 0.193579
+            1. -5.082e-005 -0.58785 0.193579
+        endlist
+        orientationkey
+            0.0 -0.951407 0.120393 0.283425 -5.18629e-006
+            1.0 -0.951407 0.120393 0.283425 -5.18629e-006
+        endlist
+    endnode
+    node dummy Impact
+        parent torso_g
+    endnode
+doneanim cguptokdb fffighter2sm
+
+
+newanim ccwalkf fffighter2sm
+    length 0.166667
+    transtime 0.25
+    animroot fffighter2sm
+    node dummy fffighter2sm
+        parent NULL
+    endnode
+    node dummy handconjure
+        parent fffighter2sm
+    endnode
+    node dummy headconjure
+        parent fffighter2sm
+    endnode
+    node dummy monster0
+        parent fffighter2sm
+    endnode
+    node dummy monster1
+        parent fffighter2sm
+    endnode
+    node trimesh rootdummy
+        parent fffighter2sm
+    endnode
+    node trimesh torso_g
+        parent rootdummy
+        positionkey
+            0.0 -5.082e-005 -0.58785 0.193579
+            0.166667 -5.082e-005 -0.58785 0.193579
+        endlist
+        orientationkey
+            0.0 1.0 0.0 0.0 -0.165806
+            0.166667 -0.999981 0.00610762 0.000266663 -5.41534e-006
+        endlist
+    endnode
+    node dummy Impact
+        parent torso_g
+    endnode
+doneanim ccwalkf fffighter2sm
+
+newanim ccwalkb fffighter2sm
+    length 0.166667
+    transtime 0.25
+    animroot fffighter2sm
+    node dummy fffighter2sm
+        parent NULL
+    endnode
+    node dummy handconjure
+        parent fffighter2sm
+    endnode
+    node dummy headconjure
+        parent fffighter2sm
+    endnode
+    node dummy monster0
+        parent fffighter2sm
+    endnode
+    node dummy monster1
+        parent fffighter2sm
+    endnode
+    node trimesh rootdummy
+        parent fffighter2sm
+    endnode
+    node trimesh torso_g
+        parent rootdummy
+        positionkey
+            0.0 -5.082e-005 -0.58785 0.193579
+            0.166667 -5.082e-005 -0.58785 0.193579
+        endlist
+        orientationkey
+            0.0 1.0 0.0 0.0 -0.165806
+            0.166667 -0.999981 0.00610762 0.000266663 -5.41534e-006
+        endlist
+    endnode
+    node dummy Impact
+        parent torso_g
+    endnode
+doneanim ccwalkb fffighter2sm
+
+newanim cgustandb fffighter2sm
+    length 1.13332999
+    transtime 0.25
+    animroot fffighter2sm
+    node dummy fffighter2sm
+        parent NULL
+    endnode
+    node dummy handconjure
+        parent fffighter2sm
+    endnode
+    node dummy headconjure
+        parent fffighter2sm
+    endnode
+    node dummy monster0
+        parent fffighter2sm
+    endnode
+    node dummy monster1
+        parent fffighter2sm
+    endnode
+    node trimesh rootdummy
+        parent fffighter2sm
+    endnode
+    node trimesh torso_g
+        parent rootdummy
+        positionkey
+            0.0 -5.082e-005 -0.58785 0.193579
+            1.13332999 -5.082e-005 -0.58785 0.193579
+        endlist
+        orientationkey
+            0.0 0.999815 0.000982222 0.019228 -1.63723e-006
+            1.13332999 0.999815 0.000982222 0.019228 -1.63723e-006
+        endlist
+    endnode
+    node dummy Impact
+        parent torso_g
+    endnode
+doneanim cgustandb fffighter2sm
+
+newanim ccwalkl fffighter2sm
+    length 0.466667
+    transtime 0.25
+    animroot fffighter2sm
+    node dummy fffighter2sm
+        parent NULL
+    endnode
+    node dummy handconjure
+        parent fffighter2sm
+    endnode
+    node dummy headconjure
+        parent fffighter2sm
+    endnode
+    node dummy monster0
+        parent fffighter2sm
+    endnode
+    node dummy monster1
+        parent fffighter2sm
+    endnode
+    node trimesh rootdummy
+        parent fffighter2sm
+    endnode
+    node trimesh torso_g
+        parent rootdummy
+        positionkey
+            0.0 -5.082e-005 -0.58785 0.193579
+            0.466667 -5.082e-005 -0.58785 0.193579
+        endlist
+        orientationkey
+            0.0 0.0 1.0 0.0 -0.3
+            0.466667 0.0 1.0 0.0 -0.4
+        endlist
+    endnode
+    node dummy Impact
+        parent torso_g
+    endnode
+doneanim ccwalkl fffighter2sm
+
+
+newanim ccwalkr fffighter2sm
+    length 0.466667
+    transtime 0.25
+    animroot fffighter2sm
+    node dummy fffighter2sm
+        parent NULL
+    endnode
+    node dummy handconjure
+        parent fffighter2sm
+    endnode
+    node dummy headconjure
+        parent fffighter2sm
+    endnode
+    node dummy monster0
+        parent fffighter2sm
+    endnode
+    node dummy monster1
+        parent fffighter2sm
+    endnode
+    node trimesh rootdummy
+        parent fffighter2sm
+    endnode
+    node trimesh torso_g
+        parent rootdummy
+        positionkey
+            0.0 -5.082e-005 -0.58785 0.193579
+            0.466667 -5.082e-005 -0.58785 0.193579
+        endlist
+        orientationkey
+            0.0 0.0 1.0 0.0 0.3
+            0.466667 0.0 1.0 0.0 0.4
+        endlist
+    endnode
+    node dummy Impact
+        parent torso_g
+    endnode
+doneanim ccwalkr fffighter2sm
+
+
+newanim cgetmid fffighter2sm
+    length 1.0
+    transtime 0.25
+    animroot fffighter2sm
+    node dummy fffighter2sm
+        parent NULL
+    endnode
+    node dummy handconjure
+        parent fffighter2sm
+    endnode
+    node dummy headconjure
+        parent fffighter2sm
+    endnode
+    node dummy monster0
+        parent fffighter2sm
+    endnode
+    node dummy monster1
+        parent fffighter2sm
+    endnode
+    node trimesh rootdummy
+        parent fffighter2sm
+	  
+    endnode
+    node trimesh torso_g
+        parent rootdummy
+        positionkey
+            0.0 -5.082e-005 -0.58785 0.193579
+        	0.25 -5.082e-005 -0.58785 0.0
+		0.5 -5.082e-005 -0.58785 -0.2
+		0.75 -5.082e-005 -0.58785 -0.55
+		1.0 -5.082e-005 -0.58785 -0.83
+	  endlist
+        orientationkey
+            0.0 1.0 0.0 0.0 0.0
+            0.25 1.0 0.0 0.0 0.0
+            0.5 1.0 0.0 0.0 0.0
+            0.75 1.0 0.0 0.0 0.0
+            1.0 1.0 0.0 0.0 0.0
+        endlist
+    endnode
+    node dummy Impact
+        parent torso_g
+    endnode
+doneanim cgetmid fffighter2sm
+
+
+newanim chturnl fffighter2sm
+    length 0.466667
+    transtime 0.25
+    animroot fffighter2sm
+    node dummy fffighter2sm
+        parent NULL
+    endnode
+    node dummy handconjure
+        parent fffighter2sm
+    endnode
+    node dummy headconjure
+        parent fffighter2sm
+    endnode
+    node dummy monster0
+        parent fffighter2sm
+    endnode
+    node dummy monster1
+        parent fffighter2sm
+    endnode
+    node trimesh rootdummy
+        parent fffighter2sm
+    endnode
+    node trimesh torso_g
+        parent rootdummy
+        positionkey
+            0.0 -5.082e-005 -0.58785 0.193579
+            0.466667 -5.082e-005 -0.58785 0.193579
+        endlist
+        orientationkey
+            0.0 0.0 1.0 0.0 0.0 
+            0.466667 0.0 1.0 0.0 0.0 
+        endlist
+    endnode
+    node dummy Impact
+        parent torso_g
+    endnode
+doneanim chturnl fffighter2sm
+
+
+newanim chturnr fffighter2sm
+    length 0.466667
+    transtime 0.25
+    animroot fffighter2sm
+    node dummy fffighter2sm
+        parent NULL
+    endnode
+    node dummy handconjure
+        parent fffighter2sm
+    endnode
+    node dummy headconjure
+        parent fffighter2sm
+    endnode
+    node dummy monster0
+        parent fffighter2sm
+    endnode
+    node dummy monster1
+        parent fffighter2sm
+    endnode
+    node trimesh rootdummy
+        parent fffighter2sm
+    endnode
+    node trimesh torso_g
+        parent rootdummy
+        positionkey
+            0.0 -5.082e-005 -0.58785 0.193579
+            0.466667 -5.082e-005 -0.58785 0.193579
+        endlist
+        orientationkey
+            0.0 0.0 1.0 0.0 0.0 
+            0.466667 0.0 1.0 0.0 0.0 
+        endlist
+    endnode
+    node dummy Impact
+        parent torso_g
+    endnode
+doneanim chturnr fffighter2sm
+
+
+newanim ctaunt fffighter2sm
+    length 0.4
+    transtime 0.25
+    animroot fffighter2sm
+    node dummy fffighter2sm
+        parent NULL
+    endnode
+    node dummy handconjure
+        parent fffighter2sm
+    endnode
+    node dummy headconjure
+        parent fffighter2sm
+    endnode
+    node dummy monster0
+        parent fffighter2sm
+    endnode
+    node dummy monster1
+        parent fffighter2sm
+    endnode
+    node trimesh rootdummy
+        parent fffighter2sm
+    endnode
+    node trimesh torso_g
+        parent rootdummy
+        positionkey
+            0.0 -5.082e-005 -0.58785 0.193579
+            0.4 -5.082e-005 -0.58785 0.193579
+        endlist
+        orientationkey
+            0.0 -1.0 -6.69303e-006 -3.04052e-006 -5.39545e-006
+            0.4 -1.0 -6.69303e-006 -3.04052e-006 -5.39545e-006
+        endlist
+    endnode
+    node dummy Impact
+        parent torso_g
+    endnode
+doneanim ctaunt fffighter2sm
+
+
+newanim cconjure1 fffighter2sm
+    length 0.4
+    transtime 0.25
+    animroot fffighter2sm
+    node dummy fffighter2sm
+        parent NULL
+    endnode
+    node dummy handconjure
+        parent fffighter2sm
+    endnode
+    node dummy headconjure
+        parent fffighter2sm
+    endnode
+    node dummy monster0
+        parent fffighter2sm
+    endnode
+    node dummy monster1
+        parent fffighter2sm
+    endnode
+    node trimesh rootdummy
+        parent fffighter2sm
+    endnode
+    node trimesh torso_g
+        parent rootdummy
+        positionkey
+            0.0 -5.082e-005 -0.58785 0.193579
+            0.4 -5.082e-005 -0.58785 0.193579
+        endlist
+        orientationkey
+            0.0 -1.0 3.26622e-006 -5.2887e-006 -5.25012e-006
+            0.4 -1.0 -6.69303e-006 -3.04052e-006 -5.39545e-006
+        endlist
+    endnode
+    node dummy Impact
+        parent torso_g
+    endnode
+doneanim cconjure1 fffighter2sm
+
+
+newanim ccastoutlp fffighter2sm
+    length 0.4
+    transtime 0.25
+    animroot fffighter2sm
+    node dummy fffighter2sm
+        parent NULL
+    endnode
+    node dummy handconjure
+        parent fffighter2sm
+    endnode
+    node dummy headconjure
+        parent fffighter2sm
+    endnode
+    node dummy monster0
+        parent fffighter2sm
+    endnode
+    node dummy monster1
+        parent fffighter2sm
+    endnode
+    node trimesh rootdummy
+        parent fffighter2sm
+    endnode
+    node trimesh torso_g
+        parent rootdummy
+        positionkey
+            0.0 -5.082e-005 -0.58785 0.193579
+            0.4 -5.082e-005 -0.58785 0.193579
+        endlist
+        orientationkey
+            0.0 1.0 2.27116e-007 2.05906e-007 -6.28318
+            0.4 1.0 2.27116e-007 2.05906e-007 -6.28318
+        endlist
+    endnode
+    node dummy Impact
+        parent torso_g
+    endnode
+doneanim ccastoutlp fffighter2sm
+
+
+newanim cappear fffighter2sm
+    length 1.5
+    transtime 0.25
+    animroot fffighter2sm
+    node dummy fffighter2sm
+        parent NULL
+    endnode
+    node dummy handconjure
+        parent fffighter2sm
+    endnode
+    node dummy headconjure
+        parent fffighter2sm
+    endnode
+    node dummy monster0
+        parent fffighter2sm
+    endnode
+    node dummy monster1
+        parent fffighter2sm
+    endnode
+    node trimesh rootdummy
+        parent fffighter2sm
+    endnode
+    node trimesh torso_g
+        parent rootdummy
+        positionkey
+            0.0 0.0392861 -0.58785 20.0
+        	0.25 0.0392861 -0.58785 16.0
+		0.5 0.0392861 -0.58785 12.0
+		0.75 0.0392861 -0.58785 8.0
+		1.0 0.0392861 -0.58785 5.0
+		1.25 0.0392861 -0.58785 1.0
+		1.5 0.0392861 -0.58785 0.0
+        endlist
+        orientationkey
+            0.0 1.0 0.0 0.0 -1.09013e-006
+            0.25 1.0 0.0 0.0 -1.09013e-006
+            0.5 1.0 0.0 0.0 -1.09013e-006
+            0.75 1.0 0.0 0.0 -1.09013e-006
+            1.0 1.0 0.0 0.0 -1.09013e-006
+            1.25 1.0 0.0 0.0 -1.09013e-006
+            1.5 1.0 0.0 0.0 -1.09013e-006
+        endlist
+    endnode
+    node dummy Impact
+        parent torso_g
+    endnode
+doneanim cappear fffighter2sm
+
+newanim cdisappear fffighter2sm
+    length 1.5
+    transtime 0.25
+    animroot fffighter2sm
+    node dummy fffighter2sm
+        parent NULL
+    endnode
+    node dummy handconjure
+        parent fffighter2sm
+    endnode
+    node dummy headconjure
+        parent fffighter2sm
+    endnode
+    node dummy monster0
+        parent fffighter2sm
+    endnode
+    node dummy monster1
+        parent fffighter2sm
+    endnode
+    node trimesh rootdummy
+        parent fffighter2sm
+    endnode
+    node trimesh torso_g
+        parent rootdummy
+       positionkey
+            0.0 0.0392861 -0.58785 0.0
+        	0.25 0.0392861 -0.58785 1.0
+		0.5 0.0392861 -0.58785 5.0
+		0.75 0.0392861 -0.58785 8.0
+		1.0 0.0392861 -0.58785 12.0
+		1.25 0.0392861 -0.58785 16.0
+		1.5 0.0392861 -0.58785 20.0
+        endlist
+        orientationkey
+            0.0 1.0 0.0 0.0 -1.09013e-006
+            0.25 1.0 0.0 0.0 -1.09013e-006
+            0.5 1.0 0.0 0.0 -1.09013e-006
+            0.75 1.0 0.0 0.0 -1.09013e-006
+            1.0 1.0 0.0 0.0 -1.09013e-006
+            1.25 1.0 0.0 0.0 -1.09013e-006
+            1.5 1.0 0.0 0.0 0.0
+        endlist
+    endnode
+    node dummy Impact
+        parent torso_g
+    endnode
+doneanim cdisappear fffighter2sm
+
+
+newanim ccastout fffighter2sm
+    length 0.4
+    transtime 0.25
+    animroot fffighter2sm
+    node dummy fffighter2sm
+        parent NULL
+    endnode
+    node dummy handconjure
+        parent fffighter2sm
+    endnode
+    node dummy headconjure
+        parent fffighter2sm
+    endnode
+    node dummy monster0
+        parent fffighter2sm
+    endnode
+    node dummy monster1
+        parent fffighter2sm
+    endnode
+    node trimesh rootdummy
+        parent fffighter2sm
+    endnode
+    node trimesh torso_g
+        parent rootdummy
+        positionkey
+            0.0 -5.082e-005 -0.58785 0.193579
+            0.4 -5.082e-005 -0.58785 0.193579
+        endlist
+        orientationkey
+            0.0 1.0 0.0 0.0 -1.81035e-006
+            0.4 1.0 0.0 0.0 -1.81035e-006
+        endlist
+    endnode
+    node dummy Impact
+        parent torso_g
+    endnode
+doneanim ccastout fffighter2sm
+
+newanim cgetmidlp fffighter2sm
+    length 0.5
+    transtime 0.25
+    animroot fffighter2sm
+    node dummy fffighter2sm
+        parent NULL
+    endnode
+    node dummy handconjure
+        parent fffighter2sm
+    endnode
+    node dummy headconjure
+        parent fffighter2sm
+    endnode
+    node dummy monster0
+        parent fffighter2sm
+    endnode
+    node dummy monster1
+        parent fffighter2sm
+    endnode
+    node trimesh rootdummy
+        parent fffighter2sm
+    endnode
+    node trimesh torso_g
+        parent rootdummy
+        positionkey
+            0.0 -5.082e-005 -0.58785 -0.83
+            0.5 -5.082e-005 -0.58785 -0.83
+	  endlist
+        orientationkey
+            0.0 1.0 0.0 0.0 0.0
+            0.5 1.0 0.0 0.0 0.0
+        endlist
+    endnode
+    node dummy Impact
+        parent torso_g
+    endnode
+doneanim cgetmidlp fffighter2sm
+
+
+newanim cspasm fffighter2sm
+    length 0.666667
+    transtime 0.25
+    animroot fffighter2sm
+    node dummy fffighter2sm
+        parent NULL
+    endnode
+    node dummy handconjure
+        parent fffighter2sm
+    endnode
+    node dummy headconjure
+        parent fffighter2sm
+    endnode
+    node dummy monster0
+        parent fffighter2sm
+    endnode
+    node dummy monster1
+        parent fffighter2sm
+    endnode
+    node trimesh rootdummy
+        parent fffighter2sm
+    endnode
+    node trimesh torso_g
+        parent rootdummy
+        positionkey
+            0.0 -5.082e-005 -0.58785 0.193579
+        	0.166667 -5.082e-005 -0.58785 0.193579
+		0.366667 -5.082e-005 -0.58785 0.193579
+		0.5 -5.082e-005 -0.58785 0.193579
+		0.533333 -5.082e-005 -0.58785 0.193579
+		0.566667 -5.082e-005 -0.58785 0.193579
+            0.633333 -5.082e-005 -0.58785 0.193579
+		0.666667 -5.082e-005 -0.58785 0.193579
+        endlist
+        orientationkey
+            0.0 1.0 0.0 0.0 -1.8128e-006
+            0.166667 -1.65525e-006 1.0 -1.80514e-007 -0.218166
+            0.366667 -1.0 0.0 0.000457351 -3.62561e-007
+            0.5 -3.45876e-006 -1.0 1.82852e-007 -0.10472
+            0.533333 -4.74551e-006 -1.0 1.83441e-007 -0.0763582
+            0.566667 -8.30873e-005 -1.0 2.19271e-007 -0.00436332
+            0.633333 -4.1544e-005 1.0 -1.6227e-007 -0.00872664
+            0.666667 -0.999525 0.0308222 0.000457133 -3.62561e-007
+        endlist
+    endnode
+    node dummy Impact
+        parent torso_g
+    endnode
+doneanim cspasm fffighter2sm
+
+
+newanim ccturnr fffighter2sm
+    length 0.466667
+    transtime 0.25
+    animroot fffighter2sm
+    node dummy fffighter2sm
+        parent NULL
+    endnode
+    node dummy handconjure
+        parent fffighter2sm
+    endnode
+    node dummy headconjure
+        parent fffighter2sm
+    endnode
+    node dummy monster0
+        parent fffighter2sm
+    endnode
+    node dummy monster1
+        parent fffighter2sm
+    endnode
+    node trimesh rootdummy
+        parent fffighter2sm
+    endnode
+    node trimesh torso_g
+        parent rootdummy
+        positionkey
+            0.0 -5.082e-005 -0.58785 0.193579
+            0.466667 -5.082e-005 -0.58785 0.193579
+        endlist
+        orientationkey
+            0.0 0.0 1.0 0.0 0.3
+            0.466667 0.0 1.0 0.0 0.4
+        endlist
+    endnode
+    node dummy Impact
+        parent torso_g
+    endnode
+doneanim ccturnr fffighter2sm
+
+
+newanim cdisappearlp fffighter2sm
+    length 0.5
+    transtime 0.25
+    animroot fffighter2sm
+    node dummy fffighter2sm
+        parent NULL
+    endnode
+    node dummy handconjure
+        parent fffighter2sm
+    endnode
+    node dummy headconjure
+        parent fffighter2sm
+    endnode
+    node dummy monster0
+        parent fffighter2sm
+    endnode
+    node dummy monster1
+        parent fffighter2sm
+    endnode
+    node trimesh rootdummy
+        parent fffighter2sm
+    endnode
+    node trimesh torso_g
+        parent rootdummy
+        positionkey
+            0.0 0.0392861 -0.58785 20.0
+            0.5 0.0392861 -0.58785 20.0
+        endlist
+        orientationkey
+            0.0 1.0 0.0 0.0 0.0
+	      0.5 1.0 0.0 0.0 0.0
+        endlist
+    endnode
+    node dummy Impact
+        parent torso_g
+    endnode
+doneanim cdisappearlp fffighter2sm
+
+
+newanim off fffighter2sm
+    length 0.5
+    transtime 0.25
+    animroot fffighter2sm
+    node dummy fffighter2sm
+        parent NULL
+    endnode
+    node dummy handconjure
+        parent fffighter2sm
+    endnode
+    node dummy headconjure
+        parent fffighter2sm
+    endnode
+    node dummy monster0
+        parent fffighter2sm
+    endnode
+    node dummy monster1
+        parent fffighter2sm
+    endnode
+    node trimesh rootdummy
+        parent fffighter2sm
+    endnode
+    node trimesh torso_g
+        parent rootdummy
+        positionkey
+            0.0 -5.082e-005 -0.58785 0.193579
+            0.5 -5.082e-005 -0.58785 0.193579
+	  endlist
+        orientationkey
+            0.0 1.0 0.0 0.0 -1.08768e-006
+            0.5 1.0 0.0 0.0 -2.53653e-006
+        endlist
+    endnode
+    node dummy Impact
+        parent torso_g
+    endnode
+doneanim off fffighter2sm
+
+
+newanim on fffighter2sm
+    length 0.5
+    transtime 0.25
+    animroot fffighter2sm
+    node dummy fffighter2sm
+        parent NULL
+    endnode
+    node dummy handconjure
+        parent fffighter2sm
+    endnode
+    node dummy headconjure
+        parent fffighter2sm
+    endnode
+    node dummy monster0
+        parent fffighter2sm
+    endnode
+    node dummy monster1
+        parent fffighter2sm
+    endnode
+    node trimesh rootdummy
+        parent fffighter2sm
+    endnode
+    node trimesh torso_g
+        parent rootdummy
+        positionkey
+            0.0 -5.082e-005 -0.58785 0.193579
+            0.5 -5.082e-005 -0.58785 0.193579
+	  endlist
+        orientationkey
+            0.0 1.0 0.0 0.0 -1.08768e-006
+            0.5 1.0 0.0 0.0 -2.53653e-006
+        endlist
+    endnode
+    node dummy Impact
+        parent torso_g
+    endnode
+doneanim on fffighter2sm
+
+donemodel fffighter2sm

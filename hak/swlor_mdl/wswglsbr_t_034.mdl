@@ -1,0 +1,235 @@
+# Exported from NWmax 0.8 b60 at 10/6/2007 11:37:38 AM
+# mdl file
+#
+#NWmax MODEL ASCII
+# model: wswglsbr_t_034
+#local file: Unknown
+filedependancy Unknown
+newmodel wswglsbr_t_034
+setsupermodel wswglsbr_t_034 NULL
+classification Character
+setanimationscale 1.0
+#NWmax GEOM  ASCII
+beginmodelgeom wswglsbr_t_034
+node dummy wswglsbr_t_034
+  parent NULL
+endnode
+node trimesh g_wswglsbr_t_034
+  parent wswglsbr_t_034
+  position 0.0 0.0446895 0.0057385
+  orientation 1.0 0.0 0.0 -0.453786
+  wirecolor 0.52549 0.52549 0.52549 
+  tilefade 0
+  scale 1.0
+  render 0
+  Shadow 0
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 0.222656 0.03125 0.53125 
+  diffuse 0.222656 0.03125 0.53125 
+  specular 0.0 0.0 0.0 
+  shininess 1
+  center undefined
+  bitmap NULL
+  verts 8
+    -0.02 1.18 -0.02
+    0.02 1.18 -0.02
+    -0.02 1.18 0.02
+    0.02 1.18 0.02
+    -0.02 0.1 -0.02
+    0.02 0.1 -0.02
+    -0.02 0.1 0.02
+    0.02 0.1 0.02
+  faces 12
+    0 2 3  0  0 1 2  1
+    3 1 0  0  3 4 5  1
+    4 5 7  0  6 7 8  0
+    7 6 4  0  9 10 11  0
+    0 1 5  0  12 13 14  4
+    5 4 0  0  15 16 17  4
+    1 3 7  0  18 19 20  3
+    7 5 1  0  21 22 23  3
+    3 2 6  0  24 25 26  5
+    6 7 3  0  27 28 29  5
+    2 0 4  0  30 31 32  2
+    4 6 2  0  33 34 35  2
+  tverts 36
+    1.0 0.0 0
+    1.0 1.0 0
+    0.0 1.0 0
+    0.0 1.0 0
+    0.0 0.0 0
+    1.0 0.0 0
+    0.0 0.0 0
+    1.0 0.0 0
+    1.0 1.0 0
+    1.0 1.0 0
+    0.0 1.0 0
+    0.0 0.0 0
+    0.0 0.0 0
+    1.0 0.0 0
+    1.0 1.0 0
+    1.0 1.0 0
+    0.0 1.0 0
+    0.0 0.0 0
+    0.0 0.0 0
+    1.0 0.0 0
+    1.0 1.0 0
+    1.0 1.0 0
+    0.0 1.0 0
+    0.0 0.0 0
+    0.0 0.0 0
+    1.0 0.0 0
+    1.0 1.0 0
+    1.0 1.0 0
+    0.0 1.0 0
+    0.0 0.0 0
+    0.0 0.0 0
+    1.0 0.0 0
+    1.0 1.0 0
+    1.0 1.0 0
+    0.0 1.0 0
+    0.0 0.0 0
+endnode
+node emitter NWNEmitter02
+  parent wswglsbr_t_034
+  position 0.0 0.637897 -0.283588
+  orientation -0.219466 0.950615 -0.219467 -4.66176
+  wirecolor 0.101961 0.101961 0.101961 
+  update_sel 1
+  update Fountain
+  render_sel 3
+  render Billboard_to_Local_Z
+  blend_sel 3
+  Blend Lighten
+  spawntype_sel 0
+  spawnType 0
+  xSize 0.0
+  ySize 0.0
+  inherit 1
+  inherit_local 0
+  inheritvel 0
+  inherit_part 0
+  renderorder 0
+  threshold 0.0
+  combinetime 0.0
+  deadspace 0.0
+  opacity 1.0
+  colorStart 1.0 1.0 1.0 
+  colorEnd 1.0 1.0 1.0 
+  alphaStart 1.0
+  alphaEnd 1.0
+  sizeStart 0.22
+  sizeEnd 0.22
+  sizeStart_y 1.21
+  sizeEnd_y 1.21
+  birthrate 60
+  lifeExp 0.05
+  mass 0.0
+  spread 0.0
+  particleRot 0.0
+  velocity 0.0
+  randvel 0.0
+  bounce_co 0.0
+  blurlength 8.0
+  loop 0
+  bounce 0
+  m_isTinted 0
+  splat 0
+  affectedByWind false
+  texture lsbr_014
+  twosidedtex 1
+  xgrid 0
+  ygrid 0
+  fps 0
+  framestart 0
+  frameend 0
+  random 0
+  lightningDelay 0.0
+  lightningRadius 0.0
+  lightningSubDiv 0
+  lightningScale 0.0
+  blastRadius 0.0
+  blastLength 0.0
+  p2p 0
+  p2p_type Bezier
+  p2p_sel 1
+  p2p_bezier2 0.0
+  p2p_bezier3 0.0
+  grav 0.0
+  drag 0.0
+endnode
+node emitter NWNEmitter03
+  parent wswglsbr_t_034
+  position 0.0 0.637897 -0.283588
+  orientation 1.0 0.0 0.0 -0.453786
+  wirecolor 0.101961 0.101961 0.101961 
+  update_sel 1
+  update Fountain
+  render_sel 3
+  render Billboard_to_Local_Z
+  blend_sel 3
+  Blend Lighten
+  spawntype_sel 0
+  spawnType 0
+  xSize 0.0
+  ySize 0.0
+  inherit 1
+  inherit_local 0
+  inheritvel 0
+  inherit_part 0
+  renderorder 0
+  threshold 0.0
+  combinetime 0.0
+  deadspace 0.0
+  opacity 1.0
+  colorStart 1.0 1.0 1.0 
+  colorEnd 1.0 1.0 1.0 
+  alphaStart 1.0
+  alphaEnd 1.0
+  sizeStart 0.22
+  sizeEnd 0.22
+  sizeStart_y 1.21
+  sizeEnd_y 1.21
+  birthrate 60
+  lifeExp 0.05
+  mass 0.0
+  spread 0.0
+  particleRot 0.0
+  velocity 0.0
+  randvel 0.0
+  bounce_co 0.0
+  blurlength 8.0
+  loop 0
+  bounce 0
+  m_isTinted 0
+  splat 0
+  affectedByWind false
+  texture lsbr_014
+  twosidedtex 1
+  xgrid 0
+  ygrid 0
+  fps 0
+  framestart 0
+  frameend 0
+  random 0
+  lightningDelay 0.0
+  lightningRadius 0.0
+  lightningSubDiv 0
+  lightningScale 0.0
+  blastRadius 0.0
+  blastLength 0.0
+  p2p 0
+  p2p_type Bezier
+  p2p_sel 1
+  p2p_bezier2 0.0
+  p2p_bezier3 0.0
+  grav 0.0
+  drag 0.0
+endnode
+endmodelgeom wswglsbr_t_034
+donemodel wswglsbr_t_034

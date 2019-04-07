@@ -1,0 +1,107 @@
+# Exported from NWMax Plus v6.11.28 at 2017-01-02 18:48:59
+# mdl file
+#
+#NWMax Plus MODEL  ASCII
+# model: vos_sign_phone
+filedependancy Unknown
+newmodel vos_sign_phone
+setsupermodel vos_sign_phone NULL
+classification Character
+setanimationscale 1.0
+#NWMax Plus GEOM  ASCII
+beginmodelgeom vos_sign_phone
+node dummy vos_sign_phone
+  parent NULL
+endnode
+node trimesh Box01
+  parent vos_sign_phone
+  position 0.0 0.0 2.5
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.101961 0.694118 0.337255 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 0
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 1
+  center 0.0 -10.33 0.0 
+  bitmap motelt
+  verts 8
+    -0.344331 0.0 -0.344331
+    0.344331 0.0 -0.344331
+    -0.344331 0.0 0.344331
+    0.344331 0.0 0.344331
+    -0.344331 -0.206599 -0.344331
+    0.344331 -0.206599 -0.344331
+    -0.344331 -0.206599 0.344331
+    0.344331 -0.206599 0.344331
+  faces 10
+    0 2 3  2  9 11 10  2
+    3 1 0  2  10 8 9  2
+    0 1 5  8  4 5 7  5
+    5 4 0  8  7 6 4  5
+    1 3 7  16  0 1 3  4
+    7 5 1  16  3 2 0  4
+    3 2 6  32  4 5 7  6
+    6 7 3  32  7 6 4  6
+    2 0 4  64  0 1 3  3
+    4 6 2  64  3 2 0  3
+  tverts 12
+    0.0 0.0 0
+    1.0 0.0 0
+    0.0 1.0 0
+    1.0 1.0 0
+    0.0 0.0 0
+    1.0 0.0 0
+    0.0 1.0 0
+    1.0 1.0 0
+    0.0 0.0 0
+    1.0 0.0 0
+    0.0 1.0 0
+    1.0 1.0 0
+endnode
+node trimesh screen
+  parent Box01
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.101961 0.694118 0.337255 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 0
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 1.0 1.0 1.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 1
+  center 0.0 -20.6622 0.0 
+  bitmap pay-phone
+  verts 4
+    -0.34437 -0.206622 -0.34437
+    0.34437 -0.206622 -0.34437
+    -0.34437 -0.206622 0.34437
+    0.34437 -0.206622 0.34437
+  faces 2
+    0 1 3  4  0 1 3  1
+    3 2 0  4  3 2 0  1
+  tverts 4
+    0.0 0.0 0
+    1.0 0.0 0
+    0.0 1.0 0
+    1.0 1.0 0
+endnode
+endmodelgeom vos_sign_phone
+donemodel vos_sign_phone

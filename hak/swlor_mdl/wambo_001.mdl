@@ -1,0 +1,241 @@
+# Exported from NWmax 0.8 b60 at 4/7/2008 7:54:42 PM
+# mdl file
+#
+#NWmax MODEL ASCII
+# model: WAmBo_001
+#local file: Unknown
+filedependancy Unknown
+newmodel WAmBo_001
+setsupermodel WAmBo_001 NULL
+classification Character
+setanimationscale 1.0
+#NWmax GEOM  ASCII
+beginmodelgeom WAmBo_001
+node dummy WAmBo_001
+  parent NULL
+endnode
+node emitter OmenEmitter31
+  parent WAmBo_001
+  position 0.001612 0.10471 0.0
+  orientation 1.0 0.0 0.0 -4.71239
+  wirecolor 1.0 1.0 1.0 
+  update_sel 1
+  update Fountain
+  render_sel 2
+  render Linked
+  blend_sel 1
+  Blend Normal
+  spawntype_sel 0
+  spawnType 1
+  xSize 0.0
+  ySize 0.0
+  inherit 0
+  inherit_local 0
+  inheritvel 0
+  inherit_part 0
+  renderorder 0
+  threshold 0.0
+  combinetime 0.0
+  deadspace 0.0
+  opacity 0.5
+  colorStart 0.992353 0.0 0.0 
+  colorEnd 0.994706 0.0 0.0 
+  alphaStart 0.9
+  alphaEnd 0.0
+  sizeStart 0.04
+  sizeEnd 0.02
+  sizeStart_y 0.0
+  sizeEnd_y 0.0
+  birthrate 4
+  lifeExp 0.18
+  mass 0.0
+  spread 0.0
+  particleRot 0.0
+  velocity 0.0
+  randvel 0.0
+  bounce_co 0.0
+  blurlength 10.0
+  loop 0
+  bounce 0
+  m_isTinted 1
+  splat 0
+  affectedByWind false
+  texture fxpa_white
+  twosidedtex 0
+  xgrid 1
+  ygrid 1
+  fps 0
+  framestart 0
+  frameend 0
+  random 0
+  lightningDelay 0.0
+  lightningRadius 0.0
+  lightningSubDiv 0
+  lightningScale 0.0
+  blastRadius 0.0
+  blastLength 0.0
+  p2p 0
+  p2p_type Bezier
+  p2p_sel 1
+  p2p_bezier2 0.0
+  p2p_bezier3 0.0
+  grav 0.0
+  drag 0.0
+endnode
+endmodelgeom WAmBo_001
+#NWmax ANIM ASCII
+newanim travel01 WAmBo_001
+  length 0.966667
+  transtime 0.0
+  animroot WAmBo_001
+    node dummy WAmBo_001
+        parent NULL
+    endnode
+    node emitter OmenEmitter31
+        parent WAmBo_001
+        birthratekey
+            0.0 4 
+            0.866667 4 
+            0.9 4 
+            0.933333 4 
+            0.966667 4 
+        endlist
+        fpskey
+            0.933333 0 
+            0.966667 0 
+        endlist
+        lifeExpkey
+            0.0 0.18 
+            0.866667 0.25 
+            0.9 0.25 
+            0.933333 0.25 
+            0.966667 0.0 
+        endlist
+    endnode
+doneanim travel01 WAmBo_001
+#NWmax ANIM ASCII
+newanim impact01 WAmBo_001
+  length 0.966667
+  transtime 0.0
+  animroot WAmBo_001
+    node dummy WAmBo_001
+        parent NULL
+    endnode
+    node emitter OmenEmitter31
+        parent WAmBo_001
+        birthratekey
+            0.0 0 
+            0.0333333 0 
+        endlist
+        fpskey
+            0.0 0 
+            0.0333333 0 
+        endlist
+        lifeExpkey
+            0.0 0.0 
+            0.0333333 0.0 
+        endlist
+        velocitykey
+            0.0 0.0 
+            0.0333333 0.0 
+        endlist
+    endnode
+doneanim impact01 WAmBo_001
+donemodel WAmBo_001
+ 0.764706 0.878431 0.988235 
+     alphaStart 0.6
+     alphaEnd 0.0
+     sizeStart 0.02
+     sizeEnd 0.01
+     sizeStart_y 0.0
+     sizeEnd_y 0.0
+     birthrate 4.0
+     lifeExp 0.18
+     mass 0.0
+     spread 0.0
+     particleRot 0.0
+     velocity 0.0
+     randvel 0.0
+     bounce_co 0.0
+     blurlength 10.0
+     loop 0
+     bounce 0
+     m_isTinted 1
+     Splat 0
+     affectedbyWind false
+     texture fxpa_white
+     twosidedtext 0
+     xgrid 1
+     ygrid 1
+     fps 0
+     frameStart 0
+     frameEnd 0
+     random 0
+     #chunk undefined
+     lightningDelay 0.0
+     lightningRadius 0.0
+     lightningSubDivkey 0
+     lightningScale 0.0
+     blastRadius 0.0
+     blastLength 0.0
+     opacity 0.0
+     p2p 0
+     p2p_type Bezier
+     p2p_sel 1
+     p2p_bezier2 0.0
+     p2p_bezier3 0.0
+     grav 0.0
+     drag 0.0
+     Cone_Angle_Manipulator SubAnim:Cone_Angle_Manipulator
+endnode
+endmodelgeom WAmBo_001
+#NWmaxANIM ASCII
+newanim travel01 WAmBo_001
+    length 0.966667
+    transtime 0.0
+    animroot WAmBo_001
+    node dummy WAmBo_001
+        parent NULL
+    endnode
+    node trimesh g_WAmBo_001
+        parent WAmBo_001
+    endnode
+    node emitter OmenEmitter01
+        parent WAmBo_001
+        birthratekey
+            0.0 4.0 
+            0.866667 4.0 
+            0.9 4.0 
+            0.933333 4.0 
+            0.966667 4.0 
+        endlist
+        fpskey
+            0.933333 0 
+            0.966667 0 
+        endlist
+    endnode
+doneanim travel01 WAmBo_001
+#NWmaxANIM ASCII
+newanim impact01 WAmBo_001
+    length 0.966667
+    transtime 0.0
+    animroot WAmBo_001
+    node dummy WAmBo_001
+        parent NULL
+    endnode
+    node trimesh g_WAmBo_001
+        parent WAmBo_001
+    endnode
+    node emitter OmenEmitter01
+        parent WAmBo_001
+        birthratekey
+            0.0 0.0 
+            0.0333333 0.0 
+        endlist
+        velocitykey
+            0.0 0.0 
+            0.0333333 0.0 
+        endlist
+    endnode
+doneanim impact01 WAmBo_001
+donemodel WAmBo_001

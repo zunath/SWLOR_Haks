@@ -1,0 +1,98 @@
+# Exported from NWmax 0.8 b60 at 23/12/2009 18:34:17
+# mdl file
+#
+#NWmax MODEL ASCII
+# model: jvb_app04
+#local file: Unknown
+filedependancy Unknown
+newmodel jvb_app04
+setsupermodel jvb_app04 NULL
+classification Character
+setanimationscale 1.0
+#NWmax GEOM  ASCII
+beginmodelgeom jvb_app04
+node dummy jvb_app04
+  parent NULL
+endnode
+node dummy app04_impact
+  parent jvb_app04
+  position 0.0 0.0 0.85
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.560784 0.878431 0.341176 
+endnode
+node dummy app04_ground
+  parent jvb_app04
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.560784 0.878431 0.341176 
+endnode
+node dummy app04_hand
+  parent jvb_app04
+  position 0.0 0.0 1.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.560784 0.878431 0.341176 
+endnode
+node dummy app04_head
+  parent jvb_app04
+  position 0.0 0.0 2.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.560784 0.878431 0.341176 
+endnode
+node dummy app04_head_hit
+  parent jvb_app04
+  position 0.0 0.0 1.5
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.560784 0.878431 0.341176 
+endnode
+node trimesh Box01
+  parent jvb_app04
+  position 0.0 0.0 0.0
+  orientation 0.0 0.0 -1.0 -1.56886
+  wirecolor 0.603922 0.72549 0.898039 
+  ambient 0.588 0.588 0.588 
+  diffuse 0.588 0.588 0.588 
+  specular 0.0 0.0 0.0 
+  shininess 10.0
+  bitmap jvb_app01
+  verts 8
+    -0.15 -0.2 0.0
+    0.15 -0.2 0.0
+    -0.15 0.2 0.0
+    0.15 0.2 0.0
+    -0.15 -0.2 0.2
+    0.15 -0.2 0.2
+    -0.15 0.2 0.2
+    0.15 0.2 0.2
+  faces 12
+    0 2 3  2  9 11 10  2
+    3 1 0  2  10 8 9  2
+    4 5 7  4  8 9 11  1
+    7 6 4  4  11 10 8  1
+    0 1 5  8  4 5 7  5
+    5 4 0  8  7 6 4  5
+    1 3 7  16  0 1 3  4
+    7 5 1  16  3 2 0  4
+    3 2 6  32  4 5 7  6
+    6 7 3  32  7 6 4  6
+    2 0 4  64  12 13 15  3
+    4 6 2  64  15 14 12  3
+  tverts 16
+    0.00274879 0.426552 0
+    0.283611 0.426552 0
+    0.00274879 0.706198 0
+    0.283611 0.706198 0
+    0.643472 0.708941 0
+    0.973812 0.708941 0
+    0.643472 0.986906 0
+    0.973812 0.986906 0
+    0.645342 0.707071 0
+    0.971942 0.707071 0
+    0.645342 0.985036 0
+    0.971942 0.985036 0
+    0.30303 0.457718 0
+    0.505839 0.457718 0
+    0.30303 0.652076 0
+    0.505839 0.652076 0
+endnode
+endmodelgeom jvb_app04
+donemodel jvb_app04

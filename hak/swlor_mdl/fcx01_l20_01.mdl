@@ -1,0 +1,631 @@
+# Exported from NWmax 0.8 b60 at 18/04/2007 11:00:35
+# mdl file
+#
+#NWmax MODEL ASCII
+# model: fcx01_l20_01
+#local file: Unknown
+filedependancy Unknown
+newmodel fcx01_l20_01
+setsupermodel fcx01_l20_01 NULL
+classification Tile
+#NWmax GEOM  ASCII
+beginmodelgeom fcx01_l20_01
+node dummy fcx01_l20_01
+  parent NULL
+endnode
+node light fcx01_l20_01ml1
+  parent fcx01_l20_01
+  position 3.09868 3.19307 5.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 1.0 1.0 1.0 
+  radius 14.0
+  multiplier 1.0
+  color 0.0 0.0 0.0 
+  ambientonly 0
+  nDynamicType 0
+  affectDynamic 1
+  shadow 0
+  lightpriority 5
+  fadingLight 1
+endnode
+#Tile trimesh node
+node trimesh sol
+  parent fcx01_l20_01
+  position 0.0 0.0 -30.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.329412 0.109804 0.694118 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 0.584314 0.584314 0.584314 
+  Diffuse 0.584314 0.584314 0.584314 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center -0.500015 -0.500015 0.0 
+  bitmap gris3
+  verts 25
+    -5.01 -5.01 0.0
+    -2.5 -5.01 0.0
+    0.0 -5.01 0.0
+    2.5 -5.01 0.0
+    5.0 -5.01 0.0
+    -5.01 -2.5 0.0
+    -2.5 -2.5 0.0
+    0.0 -2.5 0.0
+    2.5 -2.5 0.0
+    5.0 -2.5 0.0
+    -5.01 0.0 0.0
+    -2.5 0.0 0.0
+    0.0 0.0 0.0
+    2.5 0.0 0.0
+    5.0 0.0 0.0
+    -5.01 2.5 0.0
+    -2.5 2.5 0.0
+    0.0 2.5 0.0
+    2.5 2.5 0.0
+    5.0 2.5 0.0
+    -5.01 5.0 0.0
+    -2.5 5.0 0.0
+    0.0 5.0 0.0
+    2.5 5.0 0.0
+    5.0 5.0 0.0
+  faces 32
+    5 0 6  1  15 10 16  1
+    1 6 0  1  11 16 10  1
+    6 1 7  1  16 11 17  1
+    2 7 1  1  12 17 11  1
+    7 2 8  1  17 12 18  1
+    3 8 2  1  13 18 12  1
+    8 3 9  1  18 13 19  1
+    4 9 3  1  14 19 13  1
+    10 5 11  1  20 15 21  1
+    6 11 5  1  16 21 15  1
+    11 6 12  1  21 16 22  1
+    7 12 6  1  17 22 16  1
+    12 7 13  1  22 17 23  1
+    8 13 7  1  18 23 17  1
+    13 8 14  1  23 18 24  1
+    9 14 8  1  19 24 18  1
+    15 10 16  1  25 20 26  1
+    11 16 10  1  21 26 20  1
+    16 11 17  1  26 21 27  1
+    12 17 11  1  22 27 21  1
+    17 12 18  1  27 22 28  1
+    13 18 12  1  23 28 22  1
+    18 13 19  1  28 23 29  1
+    14 19 13  1  24 29 23  1
+    20 15 21  1  30 25 31  1
+    16 21 15  1  26 31 25  1
+    21 16 22  1  31 26 32  1
+    17 22 16  1  27 32 26  1
+    22 17 23  1  32 27 33  1
+    18 23 17  1  28 33 27  1
+    23 18 24  1  33 28 34  1
+    19 24 18  1  29 34 28  1
+  tverts 35
+    0.0 0.0 0
+    0.25 0.0 0
+    0.5 0.0 0
+    0.75 0.0 0
+    1.0 0.0 0
+    0.0 0.0 0
+    0.25 0.0 0
+    0.5 0.0 0
+    0.75 0.0 0
+    1.0 0.0 0
+    0.0 0.0 0
+    0.25 0.0 0
+    0.5 0.0 0
+    0.75 0.0 0
+    1.0 0.0 0
+    0.0 0.25 0
+    0.25 0.25 0
+    0.5 0.25 0
+    0.75 0.25 0
+    1.0 0.25 0
+    0.0 0.5 0
+    0.25 0.5 0
+    0.5 0.5 0
+    0.75 0.5 0
+    1.0 0.5 0
+    0.0 0.75 0
+    0.25 0.75 0
+    0.5 0.75 0
+    0.75 0.75 0
+    1.0 0.75 0
+    0.0 1.0 0
+    0.25 1.0 0
+    0.5 1.0 0
+    0.75 1.0 0
+    1.0 1.0 0
+endnode
+node aabb walk
+  parent fcx01_l20_01
+  position 0.0 0.0 -30.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 1.0 1.0 1.0 
+  multimaterial 20
+    Dirt
+    Obscuring
+    Grass
+    Stone
+    Wood
+    Water
+    Nonwalk
+    Transparent
+    Carpet
+    Metal
+    Puddles
+    Swamp
+    Mud
+    Leaves
+    Lava
+    BottomlessPit
+    DeepWater
+    Door
+    Snow
+    Sand
+  ambient 0.588 0.588 0.588 
+  diffuse 0.0 0.0 0.376471 
+  specular 0.0 0.0 0.0 
+  shininess 10.0
+  bitmap DeepWater
+  verts 4
+    -5.0 5.0 0.0
+    -5.0 -5.0 0.0
+    5.0 5.0 0.0
+    5.0 -5.0 0.0
+  faces 2
+    0 1 2  1  0 1 2  17
+    3 2 1  1  3 2 1  17
+  tverts 4
+    5.99999 -54.0 0
+    5.99999 -57.0 0
+    8.99999 -54.0 0
+    8.99999 -57.0 0
+    aabb         -5.0 -5.0 0.0 5.0 5.0 0.0 -1
+        -5.0 -5.0 0.0 5.0 5.0 0.0 0
+        -5.0 -5.0 0.0 5.0 5.0 0.0 1
+endnode
+node light fcx01_l20_01ml2
+  parent fcx01_l20_01
+  position -2.89935 -2.79208 5.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 1.0 1.0 1.0 
+  radius 14.0
+  multiplier 1.0
+  color 0.0 0.0 0.0 
+  ambientonly 0
+  nDynamicType 0
+  affectDynamic 1
+  shadow 0
+  lightpriority 5
+  fadingLight 1
+endnode
+node dummy fcx01_l20_01a
+  parent fcx01_l20_01
+  position -0.0739942 -0.0390355 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.345098 0.694118 0.101961 
+endnode
+node emitter em_pollution
+  parent fcx01_l20_01a
+  position 2.57399 2.53904 -30.0
+  orientation 1.0 0.0 0.0 -4.76837e-006
+  wirecolor 0.894118 0.647059 0.839216 
+  update_sel 1
+  update Fountain
+  render_sel 1
+  render Normal
+  blend_sel 3
+  Blend Lighten
+  spawntype_sel 0
+  spawnType 0
+  xSize 250.0
+  ySize 200.0
+  inherit 0
+  inherit_local 1
+  inheritvel 0
+  inherit_part 0
+  renderorder 0
+  threshold 0.0
+  combinetime 0.0
+  deadspace 0.0
+  opacity 0.5
+  colorStart 0.745697 0.745697 0.745697 
+  colorEnd 0.729412 0.729412 0.729412 
+  alphaStart 0.4
+  alphaEnd 0.5
+  sizeStart 1.0
+  sizeEnd 6.0
+  sizeStart_y 0.0
+  sizeEnd_y 0.0
+  birthrate 0
+  lifeExp 11.0
+  mass -0.05
+  spread 0.872665
+  particleRot 2.0
+  velocity 0.0
+  randvel 0.2
+  bounce_co 0.0
+  blurlength 10.0
+  loop 0
+  bounce 0
+  m_isTinted 1
+  Splat 0
+  affectedByWind true
+  texture fxpa_smoke01a
+  twosidedtex 1
+  xgrid 4
+  ygrid 4
+  fps 12
+  framestart 10
+  frameend 25
+  random 1
+  lightningDelay 0.0
+  lightningRadius 0.0
+  lightningSubDiv 0
+  lightningScale 0.0
+  blastRadius 0.0
+  blastLength 0.0
+  p2p 0
+  p2p_type Bezier
+  p2p_sel 1
+  p2p_bezier2 0.0
+  p2p_bezier3 0.0
+  grav 0.0
+  Drag 0.0
+endnode
+node emitter em_pollution01
+  parent fcx01_l20_01a
+  position -2.42601 -2.46096 -30.0
+  orientation 1.0 0.0 0.0 -4.76837e-006
+  wirecolor 0.894118 0.647059 0.839216 
+  update_sel 1
+  update Fountain
+  render_sel 1
+  render Normal
+  blend_sel 3
+  Blend Lighten
+  spawntype_sel 0
+  spawnType 0
+  xSize 250.0
+  ySize 200.0
+  inherit 0
+  inherit_local 1
+  inheritvel 0
+  inherit_part 0
+  renderorder 0
+  threshold 0.0
+  combinetime 0.0
+  deadspace 0.0
+  opacity 0.5
+  colorStart 0.745697 0.745697 0.745697 
+  colorEnd 0.729412 0.729412 0.729412 
+  alphaStart 0.4
+  alphaEnd 0.5
+  sizeStart 1.0
+  sizeEnd 6.0
+  sizeStart_y 0.0
+  sizeEnd_y 0.0
+  birthrate 0
+  lifeExp 1.81549
+  mass -0.05
+  spread 0.872665
+  particleRot 5.0
+  velocity 0.0
+  randvel 0.2
+  bounce_co 0.0
+  blurlength 10.0
+  loop 0
+  bounce 0
+  m_isTinted 1
+  Splat 0
+  affectedByWind true
+  texture fxpa_smoke01a
+  twosidedtex 1
+  xgrid 4
+  ygrid 4
+  fps 12
+  framestart 10
+  frameend 25
+  random 1
+  lightningDelay 0.0
+  lightningRadius 0.0
+  lightningSubDiv 0
+  lightningScale 0.0
+  blastRadius 0.0
+  blastLength 0.0
+  p2p 0
+  p2p_type Bezier
+  p2p_sel 1
+  p2p_bezier2 0.0
+  p2p_bezier3 0.0
+  grav 0.0
+  Drag 0.0
+endnode
+node emitter em_pollution02
+  parent fcx01_l20_01a
+  position -1.91122 2.53904 -30.0
+  orientation 0.999834 -0.01822 0.0 -5.0075e-006
+  wirecolor 0.894118 0.647059 0.839216 
+  update_sel 1
+  update Fountain
+  render_sel 1
+  render Normal
+  blend_sel 3
+  Blend Lighten
+  spawntype_sel 0
+  spawnType 0
+  xSize 250.0
+  ySize 200.0
+  inherit 0
+  inherit_local 1
+  inheritvel 0
+  inherit_part 0
+  renderorder 0
+  threshold 0.0
+  combinetime 0.0
+  deadspace 0.0
+  opacity 0.5
+  colorStart 0.745697 0.745697 0.745697 
+  colorEnd 0.729412 0.729412 0.729412 
+  alphaStart 0.4
+  alphaEnd 0.5
+  sizeStart 1.0
+  sizeEnd 6.0
+  sizeStart_y 0.0
+  sizeEnd_y 0.0
+  birthrate 0
+  lifeExp 3.0
+  mass -0.05
+  spread 0.872665
+  particleRot 2.0
+  velocity 0.0
+  randvel 0.2
+  bounce_co 0.0
+  blurlength 10.0
+  loop 0
+  bounce 0
+  m_isTinted 1
+  Splat 0
+  affectedByWind true
+  texture fxpa_smoke01a
+  twosidedtex 1
+  xgrid 4
+  ygrid 4
+  fps 12
+  framestart 10
+  frameend 25
+  random 1
+  lightningDelay 0.0
+  lightningRadius 0.0
+  lightningSubDiv 0
+  lightningScale 0.0
+  blastRadius 0.0
+  blastLength 0.0
+  p2p 0
+  p2p_type Bezier
+  p2p_sel 1
+  p2p_bezier2 0.0
+  p2p_bezier3 0.0
+  grav 0.0
+  Drag 0.0
+endnode
+node emitter em_pollution03
+  parent fcx01_l20_01a
+  position 2.6643 -2.22952 -30.0
+  orientation 0.999834 -0.01822 0.0 -5.0075e-006
+  wirecolor 0.894118 0.647059 0.839216 
+  update_sel 1
+  update Fountain
+  render_sel 1
+  render Normal
+  blend_sel 3
+  Blend Lighten
+  spawntype_sel 0
+  spawnType 0
+  xSize 250.0
+  ySize 200.0
+  inherit 0
+  inherit_local 1
+  inheritvel 0
+  inherit_part 0
+  renderorder 0
+  threshold 0.0
+  combinetime 0.0
+  deadspace 0.0
+  opacity 0.5
+  colorStart 0.745697 0.745697 0.745697 
+  colorEnd 0.729412 0.729412 0.729412 
+  alphaStart 0.4
+  alphaEnd 0.5
+  sizeStart 1.0
+  sizeEnd 6.0
+  sizeStart_y 0.0
+  sizeEnd_y 0.0
+  birthrate 0
+  lifeExp 3.0
+  mass -0.05
+  spread 0.872665
+  particleRot 2.0
+  velocity 0.0
+  randvel 0.2
+  bounce_co 0.0
+  blurlength 10.0
+  loop 0
+  bounce 0
+  m_isTinted 1
+  Splat 0
+  affectedByWind true
+  texture fxpa_smoke01a
+  twosidedtex 1
+  xgrid 4
+  ygrid 4
+  fps 12
+  framestart 10
+  frameend 25
+  random 1
+  lightningDelay 0.0
+  lightningRadius 0.0
+  lightningSubDiv 0
+  lightningScale 0.0
+  blastRadius 0.0
+  blastLength 0.0
+  p2p 0
+  p2p_type Bezier
+  p2p_sel 1
+  p2p_bezier2 0.0
+  p2p_bezier3 0.0
+  grav 0.0
+  Drag 0.0
+endnode
+endmodelgeom fcx01_l20_01
+
+#NWmax ANIM ASCII
+newanim animloop01 fcx01_l20_01
+  length 0.5
+  transtime 0.25
+  animroot fcx01_l20_01
+    node dummy fcx01_l20_01
+        parent NULL
+        positionkey
+            0.5 0.0 0.0 0.0
+        endlist
+        orientationkey
+            0.5 0.0 0.0 0.0 0.0
+        endlist
+    endnode
+    node light fcx01_l20_01ml1
+        parent fcx01_l20_01
+    endnode
+    node trimesh sol
+        parent fcx01_l20_01
+    endnode
+    node aabb walk
+        parent fcx01_l20_01
+    endnode
+    node light fcx01_l20_01ml2
+        parent fcx01_l20_01
+    endnode
+    node dummy fcx01_l20_01a
+        parent fcx01_l20_01
+    endnode
+    node emitter em_pollution
+        parent fcx01_l20_01a
+        positionkey
+            0.0 2.57399 2.53904 -30.0
+            0.233333 -2.42601 2.53904 -30.0
+        endlist
+        orientationkey
+            0.0 0.0 0.0 0.0 -6.28319
+        endlist
+        birthratekey
+            0.0 0 
+            0.233333 2 
+            0.5 2 
+        endlist
+        colorStartkey
+            0.233333 0.631373 0.631373 0.631373 
+        endlist
+        lifeExpkey
+            0.0 11.0 
+            0.233333 11.0 
+        endlist
+        particleRotkey
+            0.0 2.0 
+            0.233333 2.0 
+            0.5 2.0 
+        endlist
+    endnode
+    node emitter em_pollution01
+        parent fcx01_l20_01a
+        positionkey
+            0.0 -2.42601 -2.46096 -30.0
+            0.233333 2.57399 -2.46096 -30.0
+        endlist
+        orientationkey
+            0.0 0.0 0.0 0.0 -6.28319
+        endlist
+        birthratekey
+            0.0 0 
+            0.233333 3 
+            0.5 2 
+        endlist
+        colorStartkey
+            0.233333 0.631373 0.631373 0.631373 
+        endlist
+        lifeExpkey
+            0.233333 2.0 
+        endlist
+    endnode
+    node emitter em_pollution02
+        parent fcx01_l20_01a
+        positionkey
+            0.0 -2.42601 2.53904 -30.0
+            0.233333 -2.42601 2.53904 -30.0
+            0.5 -2.42601 2.53904 -30.0
+        endlist
+        orientationkey
+            0.0 0.0 0.0 0.0 -6.28319
+            0.233333 0.0 0.0 0.0 -6.28319
+            0.5 0.0 0.0 0.0 -6.28319
+        endlist
+        birthratekey
+            0.0 0 
+            0.233333 2 
+            0.5 2 
+        endlist
+        colorStartkey
+            0.233333 0.631373 0.631373 0.631373 
+        endlist
+        lifeExpkey
+            0.0 3.0 
+            0.233333 3.0 
+        endlist
+        particleRotkey
+            0.0 2.0 
+            0.233333 2.0 
+            0.5 2.0 
+        endlist
+    endnode
+    node emitter em_pollution03
+        parent fcx01_l20_01a
+        positionkey
+            0.0 2.14951 -2.22952 -30.0
+            0.233333 2.14951 -2.22952 -30.0
+            0.5 2.14951 -2.22952 -30.0
+        endlist
+        orientationkey
+            0.0 0.0 0.0 0.0 -6.28319
+            0.233333 0.0 0.0 0.0 -6.28319
+            0.5 0.0 0.0 0.0 -6.28319
+        endlist
+        birthratekey
+            0.0 0 
+            0.233333 2 
+            0.5 2 
+        endlist
+        colorStartkey
+            0.233333 0.631373 0.631373 0.631373 
+        endlist
+        lifeExpkey
+            0.0 3.0 
+            0.233333 3.0 
+        endlist
+        particleRotkey
+            0.0 2.0 
+            0.233333 2.0 
+            0.5 2.0 
+        endlist
+    endnode
+doneanim animloop01 fcx01_l20_01
+
+donemodel fcx01_l20_01

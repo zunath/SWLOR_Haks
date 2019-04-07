@@ -1,0 +1,294 @@
+# Exported from NWmax 0.8 b60 at 01/06/2006 22:07:32
+# mdl file
+#
+#NWmax MODEL ASCII
+# model: plc_bar002
+#local file: Unknown
+filedependancy Unknown
+newmodel plc_bar002
+setsupermodel plc_bar002 NULL
+classification character
+#NWmax GEOM  ASCII
+beginmodelgeom plc_bar002
+node dummy plc_bar002
+  parent NULL
+endnode
+node trimesh derriere_etagere
+  parent plc_bar002
+  position 0.0 0.0 0.0
+  orientation 0.0 0.0 -1.0 -3.14159
+  wirecolor 0.0196078 0.521569 0.227451 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 10
+  center undefined
+  bitmap plc_barDT003
+  verts 8
+    0.48 0.3 0.0
+    -0.48 0.3 0.0
+    -0.48 0.3 2.4
+    0.48 0.3 2.4
+    -0.48 -0.3 0.0
+    0.48 -0.3 0.0
+    -0.48 -0.3 2.4
+    0.48 -0.3 2.4
+  faces 12
+    0 1 2  32  0 1 2  6
+    2 3 0  32  2 3 0  6
+    4 1 0  2  4 5 6  2
+    0 5 4  2  6 7 4  2
+    6 7 3  4  8 9 10  1
+    3 2 6  4  10 11 8  1
+    5 0 3  16  12 13 14  4
+    3 7 5  16  14 15 12  4
+    4 5 7  8  16 17 18  5
+    7 6 4  8  18 19 16  5
+    1 4 6  64  20 21 22  3
+    6 2 1  64  22 23 20  3
+  tverts 24
+    0.380943 0.208855 0
+    0.752107 0.208855 0
+    0.752107 0.998985 0
+    0.380943 0.998985 0
+    0.00863054 0.198025 0
+    0.00861257 0.000499606 0
+    0.379763 0.000499547 0
+    0.379781 0.198025 0
+    0.379079 0.19855 0
+    0.00792906 0.19855 0
+    0.00791129 0.00102466 0
+    0.379061 0.00102448 0
+    0.766026 0.208854 0
+    0.998003 0.208854 0
+    0.998003 0.998985 0
+    0.766026 0.998985 0
+    0.000499547 0.208854 0
+    0.371663 0.208854 0
+    0.371664 0.998985 0
+    0.000499904 0.998985 0
+    0.767523 0.20937 0
+    0.9995 0.209369 0
+    0.999501 0.9995 0
+    0.767523 0.9995 0
+endnode
+endmodelgeom plc_bar002
+#NWmax ANIM ASCII
+newanim close plc_bar002
+  length 0.0333333
+  transtime 0.25
+  animroot plc_bar002
+    node dummy plc_bar002
+        parent NULL
+        positionkey
+            0.0 0.0 0.0 0.0
+            0.0333333 0.0 0.0 0.0
+        endlist
+        orientationkey
+            0.0 0.0 0.0 0.0 0.0
+            0.0333333 0.0 0.0 0.0 0.0
+        endlist
+    endnode
+    node trimesh derriere_etagere
+        parent plc_bar002
+    endnode
+    node dummy plc_bar002_pwk
+        parent plc_bar002
+    endnode
+    node trimesh plc_bar002_plane
+        parent plc_bar002_pwk
+    endnode
+doneanim close plc_bar002
+#NWmax ANIM ASCII
+newanim close2open plc_bar002
+  length 0.333333
+  transtime 0.25
+  animroot plc_bar002
+    node dummy plc_bar002
+        parent NULL
+        positionkey
+            0.0 0.0 0.0 0.0
+            0.333333 0.0 0.0 0.0
+        endlist
+        orientationkey
+            0.0 0.0 0.0 0.0 0.0
+            0.333333 0.0 0.0 0.0 0.0
+        endlist
+    endnode
+    node trimesh derriere_etagere
+        parent plc_bar002
+    endnode
+    node dummy plc_bar002_pwk
+        parent plc_bar002
+    endnode
+    node trimesh plc_bar002_plane
+        parent plc_bar002_pwk
+    endnode
+doneanim close2open plc_bar002
+#NWmax ANIM ASCII
+newanim open plc_bar002
+  length 0.0333333
+  transtime 0.25
+  animroot plc_bar002
+    node dummy plc_bar002
+        parent NULL
+        positionkey
+            0.0 0.0 0.0 0.0
+            0.0333333 0.0 0.0 0.0
+        endlist
+        orientationkey
+            0.0 0.0 0.0 0.0 0.0
+            0.0333333 0.0 0.0 0.0 0.0
+        endlist
+    endnode
+    node trimesh derriere_etagere
+        parent plc_bar002
+    endnode
+    node dummy plc_bar002_pwk
+        parent plc_bar002
+    endnode
+    node trimesh plc_bar002_plane
+        parent plc_bar002_pwk
+    endnode
+doneanim open plc_bar002
+#NWmax ANIM ASCII
+newanim open2close plc_bar002
+  length 1.66667
+  transtime 0.25
+  animroot plc_bar002
+    node dummy plc_bar002
+        parent NULL
+        positionkey
+            0.0 0.0 0.0 0.0
+            1.66667 0.0 0.0 0.0
+        endlist
+        orientationkey
+            0.0 0.0 0.0 0.0 0.0
+            1.66667 0.0 0.0 0.0 0.0
+        endlist
+    endnode
+    node trimesh derriere_etagere
+        parent plc_bar002
+    endnode
+    node dummy plc_bar002_pwk
+        parent plc_bar002
+    endnode
+    node trimesh plc_bar002_plane
+        parent plc_bar002_pwk
+    endnode
+doneanim open2close plc_bar002
+#NWmax ANIM ASCII
+newanim damage plc_bar002
+  length 0.0666667
+  transtime 0.25
+  animroot plc_bar002
+    node dummy plc_bar002
+        parent NULL
+        positionkey
+            0.0 0.0 0.0 0.0
+            0.0666667 0.0 0.0 0.0
+        endlist
+        orientationkey
+            0.0 0.0 0.0 0.0 0.0
+            0.0666667 0.0 0.0 0.0 0.0
+        endlist
+    endnode
+    node trimesh derriere_etagere
+        parent plc_bar002
+    endnode
+    node dummy plc_bar002_pwk
+        parent plc_bar002
+    endnode
+    node trimesh plc_bar002_plane
+        parent plc_bar002_pwk
+    endnode
+doneanim damage plc_bar002
+#NWmax ANIM ASCII
+newanim die plc_bar002
+  length 1.66667
+  transtime 0.25
+  animroot plc_bar002
+    node dummy plc_bar002
+        parent NULL
+        positionkey
+            0.0 0.0 0.0 0.0
+            1.66667 0.0 0.0 0.0
+        endlist
+        orientationkey
+            0.0 0.0 0.0 0.0 0.0
+            1.66667 0.0 0.0 0.0 0.0
+        endlist
+    endnode
+    node trimesh derriere_etagere
+        parent plc_bar002
+    endnode
+    node dummy plc_bar002_pwk
+        parent plc_bar002
+    endnode
+    node trimesh plc_bar002_plane
+        parent plc_bar002_pwk
+    endnode
+doneanim die plc_bar002
+#NWmax ANIM ASCII
+newanim dead plc_bar002
+  length 0.0333333
+  transtime 0.25
+  animroot plc_bar002
+    node dummy plc_bar002
+        parent NULL
+        positionkey
+            0.0 0.0 0.0 0.0
+            0.0333333 0.0 0.0 0.0
+        endlist
+        orientationkey
+            0.0 0.0 0.0 0.0 0.0
+            0.0333333 0.0 0.0 0.0 0.0
+        endlist
+    endnode
+    node trimesh derriere_etagere
+        parent plc_bar002
+    endnode
+    node dummy plc_bar002_pwk
+        parent plc_bar002
+    endnode
+    node trimesh plc_bar002_plane
+        parent plc_bar002_pwk
+    endnode
+doneanim dead plc_bar002
+#NWmax ANIM ASCII
+newanim default plc_bar002
+  length 1.66667
+  transtime 0.25
+  animroot plc_bar002
+    node dummy plc_bar002
+        parent NULL
+        positionkey
+            0.0 0.0 0.0 0.0
+            1.66667 0.0 0.0 0.0
+        endlist
+        orientationkey
+            0.0 0.0 0.0 0.0 0.0
+            1.66667 0.0 0.0 0.0 0.0
+        endlist
+    endnode
+    node trimesh derriere_etagere
+        parent plc_bar002
+    endnode
+    node dummy plc_bar002_pwk
+        parent plc_bar002
+    endnode
+    node trimesh plc_bar002_plane
+        parent plc_bar002_pwk
+    endnode
+doneanim default plc_bar002
+donemodel plc_bar002

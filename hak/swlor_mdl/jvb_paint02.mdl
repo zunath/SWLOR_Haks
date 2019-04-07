@@ -1,0 +1,72 @@
+# Exported from NWmax 0.8 b60 at 02/01/2010 20:25:37
+# mdl file
+#
+#NWmax MODEL ASCII
+# model: jvb_paint02
+#local file: Unknown
+filedependancy Unknown
+newmodel jvb_paint02
+setsupermodel jvb_paint02 NULL
+classification Character
+setanimationscale 1.0
+#NWmax GEOM  ASCII
+beginmodelgeom jvb_paint02
+node dummy jvb_paint02
+  parent NULL
+endnode
+node dummy paint02_impact
+  parent jvb_paint02
+  position 0.0 0.0 0.85
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.878431 0.776471 0.341176 
+endnode
+node dummy paint02_ground
+  parent jvb_paint02
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.898039 0.65098 0.843137 
+endnode
+node dummy paint02_hand
+  parent jvb_paint02
+  position 0.0 0.0 1.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.898039 0.65098 0.843137 
+endnode
+node dummy paint02_head
+  parent jvb_paint02
+  position 0.0 0.0 2.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.898039 0.65098 0.843137 
+endnode
+node dummy paint02_head_hit
+  parent jvb_paint02
+  position 0.0 0.0 1.5
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.898039 0.65098 0.843137 
+endnode
+node trimesh paint1
+  parent jvb_paint02
+  position -0.000367522 0.0109049 1.42142
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.776471 0.878431 0.341176 
+  ambient 0.7 0.7 0.7 
+  diffuse 0.7 0.7 0.7 
+  specular 0.1 0.1 0.1 
+  shininess 10.0
+  bitmap jvb_paint02
+  verts 4
+    0.665455 0.00375772 -0.563051
+    0.665748 -0.00144005 0.562728
+    -0.665455 -0.00376186 0.563051
+    -0.665749 0.00143914 -0.562727
+  faces 2
+    1 0 2  1  1 0 2  1
+    2 0 3  1  2 0 3  1
+  tverts 4
+    -0.0261 0.0778 0
+    -0.0261 0.9246 0
+    1.0237 0.9246 0
+    1.0237 0.0778 0
+endnode
+endmodelgeom jvb_paint02
+donemodel jvb_paint02

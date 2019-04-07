@@ -1,0 +1,228 @@
+# Exported from NWmax 0.8 b60 at 07/09/2007 05:06:47
+# mdl file
+#
+#NWmax MODEL ASCII
+# model: NoticeB03Base
+#local file: Unknown
+filedependancy Unknown
+newmodel NoticeB03Base
+setsupermodel NoticeB03Base NULL
+classification Character
+setanimationscale 1.0
+#NWmax GEOM  ASCII
+beginmodelgeom NoticeB03Base
+node dummy NoticeB03Base
+  parent NULL
+endnode
+node trimesh NbBack
+  parent NoticeB03Base
+  position 0.0 0.0 1.19747
+  orientation 0.0 1.0 0.0 -0.111701
+  wirecolor 0.894118 0.839216 0.6 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 1.0 1.0 1.0 
+  shininess 0
+  center 0.0 -1.0 22.5 
+  bitmap jz_notice03
+  verts 4
+    -0.3 -0.01 0.0
+    0.3 -0.01 0.0
+    -0.3 -0.01 0.45
+    0.3 -0.01 0.45
+  faces 2
+    0 1 3  8  0 1 3  5
+    3 2 0  8  3 2 0  5
+  tverts 4
+    0.00169278 0.00856965 0
+    0.642593 0.00740741 0
+    0.00151216 0.501435 0
+    0.64402 0.501926 0
+endnode
+node trimesh NbBas
+  parent NoticeB03Base
+  position 0.0 0.0 1.19747
+  orientation 0.0 1.0 0.0 -0.111701
+  wirecolor 0.894118 0.839216 0.6 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 0.0 0.0 
+  bitmap jz_notice02
+  verts 4
+    -0.3 -0.01 0.0
+    0.3 -0.01 0.0
+    -0.3 0.01 0.0
+    0.3 0.01 0.0
+  faces 2
+    0 2 3  2  1 3 2  2
+    3 1 0  2  2 0 1  2
+  tverts 4
+    0.511111 0.327778 0
+    0.522222 0.327778 0
+    0.511111 1.0 0
+    0.522222 1.00185 0
+endnode
+node trimesh NbDroite
+  parent NoticeB03Base
+  position 0.0 0.0 1.19747
+  orientation 0.0 1.0 0.0 -0.111701
+  wirecolor 0.894118 0.839216 0.6 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 30.0 0.0 22.5 
+  bitmap jz_notice02
+  verts 4
+    0.3 -0.01 0.0
+    0.3 0.01 0.0
+    0.3 -0.01 0.45
+    0.3 0.01 0.45
+  faces 2
+    0 1 3  16  0 1 3  4
+    3 2 0  16  3 2 0  4
+  tverts 4
+    0.518519 0.324074 0
+    0.987037 0.324074 0
+    0.52037 0.338889 0
+    0.988889 0.338889 0
+endnode
+node trimesh NbFace
+  parent NoticeB03Base
+  position 0.0 0.0 1.19747
+  orientation 0.0 1.0 0.0 -0.111701
+  wirecolor 0.894118 0.839216 0.6 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 1.0 22.5 
+  bitmap jz_notice02
+  verts 4
+    -0.3 0.01 0.0
+    0.3 0.01 0.0
+    -0.3 0.01 0.45
+    0.3 0.01 0.45
+  faces 2
+    1 0 2  32  0 1 3  6
+    2 3 1  32  3 2 0  6
+  tverts 4
+    0.521144 0.997213 0
+    0.522492 0.322025 0
+    1.00077 0.997214 0
+    1.00003 0.32261 0
+endnode
+node trimesh NbGauche
+  parent NoticeB03Base
+  position 0.0 0.0 1.19747
+  orientation 0.0 1.0 0.0 -0.111701
+  wirecolor 0.894118 0.839216 0.6 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center -30.0 0.0 22.5 
+  bitmap jz_notice02
+  verts 4
+    -0.3 -0.01 0.0
+    -0.3 0.01 0.0
+    -0.3 -0.01 0.45
+    -0.3 0.01 0.45
+  faces 2
+    1 0 2  64  0 1 3  3
+    2 3 1  64  3 2 0  3
+  tverts 4
+    0.527778 0.325926 0
+    0.987037 0.325926 0
+    0.524074 0.337037 0
+    0.988889 0.337037 0
+endnode
+node trimesh NbTop
+  parent NoticeB03Base
+  position 0.0 0.0 1.19747
+  orientation 0.0 1.0 0.0 -0.111701
+  wirecolor 0.894118 0.839216 0.6 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 0.0 45.0 
+  bitmap jz_notice02
+  verts 4
+    -0.3 -0.01 0.45
+    0.3 -0.01 0.45
+    -0.3 0.01 0.45
+    0.3 0.01 0.45
+  faces 2
+    0 1 3  4  0 1 3  1
+    3 2 0  4  3 2 0  1
+  tverts 4
+    0.524074 0.324074 0
+    0.987037 0.324074 0
+    0.524074 0.338889 0
+    0.987037 0.338889 0
+endnode
+endmodelgeom NoticeB03Base
+donemodel NoticeB03Base

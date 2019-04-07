@@ -1,0 +1,6616 @@
+# Alternative Door Forms
+# gaoneng        August 21, 2006
+# organic mimosa
+#
+#NWmax MODEL ASCII
+# model: gn_door24
+filedependancy leaf2.max
+newmodel gn_door24
+setsupermodel gn_door24 NULL
+classification Door
+#NWmax GEOM  ASCII
+beginmodelgeom gn_door24
+node dummy gn_door24
+  parent NULL
+endnode
+node emitter fire!07
+  parent gn_door24
+  position 0 0.0288672 0.928905
+  orientation 1 0 0 -4.71239
+  wirecolor 1 1 1 
+  update_sel 3
+  update Explosion
+  render_sel 1
+  render Normal
+  blend_sel 1
+  Blend Normal
+  spawnType 0
+  xSize 100.0
+  ySize 99.0
+  inherit 1
+  inherit_local 0
+  inheritvel 0
+  inherit_part 0
+  renderorder 0
+  threshold 0
+  combinetime 0
+  deadspace 0
+  opacity 0.5
+  colorStart 0.47451 0.439216 0.364706 
+  colorEnd 0.819608 0.796079 0.709804 
+  alphaStart 1
+  alphaEnd 0
+  sizeStart 4.0
+  sizeEnd 1
+  sizeStart_y 0
+  sizeEnd_y 0
+  birthrate 10
+  lifeExp 2.5
+  mass 0.09
+  spread 2.96706
+  particleRot 0.5
+  velocity 2.0
+  randvel 0.5
+  bounce_co 0
+  blurlength 10.0
+  loop 0
+  bounce 0
+  m_isTinted 1
+  Splat 0
+  affectedByWind false
+  texture fxpa_smoke01
+  twosidedtex 1
+  xgrid 4
+  ygrid 4
+  fps 10
+  frameStart 0
+  frameEnd 24
+  random 0
+  lightningDelay 0
+  lightningRadius 0
+  lightningSubDiv 0
+  lightningScale 0
+  blastRadius 0.2
+  blastLength 1
+  p2p 0
+  p2p_type Bezier
+  p2p_sel 1
+  p2p_bezier2 0
+  p2p_bezier3 0
+  grav 0
+  Drag 0
+endnode
+node trimesh sam
+  parent gn_door24
+  position -1 0 0
+  orientation 0 0 -1 -1.5708
+  wirecolor 1 1 1 
+  tilefade 0
+  scale 1
+  render 1
+  Shadow 0
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 0
+  transparencyhint 1
+  selfillumcolor 0.0705882 0 1 
+  ambient 0.2 0.2 0.2 
+  Diffuse 0.8 0.8 0.8 
+  Specular 0 0 0 
+  shininess 1
+  center -0.000365257 -100.812 148.5 
+  bitmap NULL
+  verts 8
+    -0.0500037 -0.0100204 0
+    -0.0500037 -2.01002 0
+    -0.0500037 -2.01002 2.97
+    -0.0500037 -0.0100204 2.97
+    0.0499963 -2.00623 0
+    0.0499963 -0.00622909 0
+    0.0499963 -2.00623 2.97
+    0.0499963 -0.00622909 2.97
+  faces 4
+    0 1 2  1  0 1 2  18
+    2 3 0  1  2 3 0  18
+    4 5 6  1  1 0 2  18
+    7 6 5  1  3 2 0  18
+  tverts 4
+    0.000499517 0.000499666 0
+    0.49427 0.000499547 0
+    0.494271 0.876312 0
+    0.000499815 0.876312 0
+endnode
+node dummy GN_Door24grnd
+  parent gn_door24
+  position 0 0 0
+  orientation 1 0 0 0
+  wirecolor 0.894118 0.721569 0.6 
+endnode
+node dummy GN_Door24head
+  parent gn_door24
+  position 0 0 2.50064
+  orientation 1 0 0 0
+  wirecolor 0.894118 0.721569 0.6 
+endnode
+node dummy GN_Door24hhit
+  parent gn_door24
+  position 0 0 2.17507
+  orientation 1 0 0 0
+  wirecolor 0.603922 0.72549 0.898039 
+endnode
+node dummy GN_Door24impc
+  parent gn_door24
+  position 0 0 1.63648
+  orientation 1 0 0 0
+  wirecolor 0.603922 0.72549 0.898039 
+endnode
+node dummy TIN01_B13_03
+  parent gn_door24
+  position 0 0 0
+  orientation 1 0 0 0
+  wirecolor 0.603922 0.72549 0.898039 
+endnode
+node skin Cylinder02
+  parent TIN01_B13_03
+  position -0.935 0 0
+  orientation -1 0 0 0
+  wirecolor 0.345098 0.780392 0.882353 
+  tilefade 0
+  scale 1
+  render 1
+  Shadow 0
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1
+  transparencyhint 0
+  selfillumcolor 0 0 0 
+  Diffuse 1 1 1 
+  Specular 0 0 0 
+  center 40.3801 -13.3694 106.575 
+  ambient 0.588235 0.588235 0.588235 
+  diffuse 0.588235 0.588235 0.588235 
+  specular 0 0 0 
+  shininess 10.0
+  bitmap ttr01_leaf02
+  verts 18
+    0.08 0 0
+    -0.04 0.069282 0
+    -0.04 -0.069282 0
+    0.164543 -0.11668 0.448994
+    0.0469429 -0.0511604 0.466802
+    0.0469429 -0.182199 0.431185
+    0.27923 -0.218297 0.858558
+    0.174006 -0.156116 0.894784
+    0.168293 -0.280478 0.867355
+    0.56298 -0.27986 1.20164
+    0.472036 -0.223048 1.23921
+    0.472036 -0.336671 1.23921
+    0.800768 -0.0751723 1.59126
+    0.719561 -0.0280605 1.59925
+    0.719561 -0.122284 1.59925
+    0.847602 -0.213837 2.1315
+    0.787602 -0.179196 2.1315
+    0.787602 -0.248478 2.1315
+  faces 30
+    0 4 3  8  21 5 22  3
+    0 1 4  8  23 2 5  3
+    1 5 4  8  2 6 5  3
+    1 2 5  8  2 3 6  3
+    2 3 5  8  3 4 6  3
+    2 0 3  8  3 1 4  3
+    3 7 6  8  24 8 25  3
+    3 4 7  8  26 5 8  3
+    4 8 7  8  5 9 8  3
+    4 5 8  8  5 6 9  3
+    5 6 8  8  6 7 9  3
+    5 3 6  8  6 4 7  3
+    6 10 9  8  27 11 28  3
+    6 7 10  8  29 8 11  3
+    7 11 10  8  8 12 11  3
+    7 8 11  8  8 9 12  3
+    8 9 11  8  9 10 12  3
+    8 6 9  8  9 7 10  3
+    9 13 12  8  30 14 31  3
+    9 10 13  8  32 11 14  3
+    10 14 13  8  11 15 14  3
+    10 11 14  8  11 12 15  3
+    11 12 14  8  12 13 15  3
+    11 9 12  8  12 10 13  3
+    12 16 15  8  33 17 34  3
+    12 13 16  8  35 14 17  3
+    13 17 16  8  14 18 17  3
+    13 14 17  8  14 15 18  3
+    14 15 17  8  15 16 18  3
+    14 12 15  8  15 13 16  3
+  tverts 37
+    0.5 0 0
+    0.75 0 0
+    0.0833334 0 0
+    0.416667 0 0
+    0.75 0.1 0
+    0.0833334 0.1 0
+    0.416667 0.1 0
+    0.75 0.2 0
+    0.0833334 0.2 0
+    0.416667 0.2 0
+    0.75 0.3 0
+    0.0833334 0.3 0
+    0.416667 0.3 0
+    0.75 0.4 0
+    0.0833334 0.4 0
+    0.416667 0.4 0
+    0.75 0.5 0
+    0.0833334 0.5 0
+    0.416667 0.5 0
+    0.5 0.5 0
+    -0.25 0 0
+    -0.25 0 0
+    -0.25 0.1 0
+    -0.25 0 0
+    -0.25 0.1 0
+    -0.25 0.2 0
+    -0.25 0.1 0
+    -0.25 0.2 0
+    -0.25 0.3 0
+    -0.25 0.2 0
+    -0.25 0.3 0
+    -0.25 0.4 0
+    -0.25 0.3 0
+    -0.25 0.4 0
+    -0.25 0.5 0
+    -0.25 0.4 0
+    -0.25 0.5 0
+  weights 18
+     Object01 1 
+     Object01 1 
+     Object01 1 
+     Object01 0.401528  Object02 0.598472 
+     Object01 0.527709  Object02 0.472291 
+     Object01 0.599755  Object02 0.400245 
+     Object02 0.5  Object03 0.5 
+     Object02 0.55818  Object03 0.44182 
+     Object02 0.50771  Object03 0.49229 
+     Object03 0.5  Object04 0.5 
+     Object03 0.449237  Object04 0.550763 
+     Object03 0.520038  Object04 0.479962 
+     Object04 0.5  Object05 0.5 
+     Object04 0.532124  Object05 0.467876 
+     Object04 0.56518  Object05 0.43482 
+     Object05 1 
+     Object05 1 
+     Object05 1 
+endnode
+node trimesh Object01
+  parent TIN01_B13_03
+  position -0.937523 0.020141 0
+  orientation -0.92261 -0.385676 0.00665569 -0.303278
+  wirecolor 0.694118 0.580392 0.101961 
+  tilefade 0
+  scale 1
+  render 0
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1
+  transparencyhint 0
+  selfillumcolor 0 0 0 
+  Diffuse 1 1 1 
+  Specular 0 0 0 
+  center 2.5 0 23.3157 
+  ambient 0.588235 0.588235 0.588235 
+  diffuse 0.588235 0.588235 0.588235 
+  specular 0 0 0 
+  shininess 10.0
+  bitmap ttr01_leaf02
+  verts 6
+    0.1 0 0
+    -0.05 0.0866025 0
+    -0.05 -0.0866025 0
+    0.095 0 0.466315
+    -0.0475 0.0822724 0.466315
+    -0.0475 -0.0822724 0.466315
+  faces 6
+    0 4 3  8  6 4 7  3
+    0 1 4  8  8 1 4  3
+    1 5 4  8  1 5 4  3
+    1 2 5  8  1 2 5  3
+    2 3 5  8  2 3 5  3
+    2 0 3  8  2 0 3  3
+  tverts 9
+    0.75 0 0
+    0.0833334 0 0
+    0.416667 0 0
+    0.75 0.0833333 0
+    0.0833334 0.0833333 0
+    0.416667 0.0833333 0
+    -0.25 0 0
+    -0.25 0.0833333 0
+    -0.25 0 0
+endnode
+node trimesh Object02
+  parent Object01
+  position 0 0 0.46631
+  orientation 0.049703 -0.988503 -0.1428 -0.282008
+  wirecolor 0.694118 0.580392 0.101961 
+  tilefade 0
+  scale 1
+  render 0
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1
+  transparencyhint 0
+  selfillumcolor 0 0 0 
+  Diffuse 1 1 1 
+  Specular 0 0 0 
+  center 2.37497 0 23.3195 
+  ambient 0.588235 0.588235 0.588235 
+  diffuse 0.588235 0.588235 0.588235 
+  specular 0 0 0 
+  shininess 10.0
+  bitmap ttr01_leaf02
+  verts 6
+    0.0949999 0 0
+    -0.0475005 0.0822677 -0.000324809
+    -0.0474994 -0.0822671 0.000378534
+    0.0896916 -0.00285028 0.466319
+    -0.0453088 0.0750882 0.466049
+    -0.0453077 -0.080787 0.466715
+  faces 6
+    0 4 3  8  6 4 7  3
+    0 1 4  8  8 1 4  3
+    1 5 4  8  1 5 4  3
+    1 2 5  8  1 2 5  3
+    2 3 5  8  2 3 5  3
+    2 0 3  8  2 0 3  3
+  tverts 9
+    0.75 0.0833333 0
+    0.0833334 0.0833333 0
+    0.416667 0.0833333 0
+    0.75 0.166667 0
+    0.0833334 0.166667 0
+    0.416667 0.166667 0
+    -0.25 0.0833333 0
+    -0.25 0.166667 0
+    -0.25 0.0833333 0
+endnode
+node trimesh Object03
+  parent Object02
+  position -0.000308142 -0.0028497 0.466361
+  orientation 0.316213 -0.875577 0.365204 -0.249226
+  wirecolor 0.694118 0.580392 0.101961 
+  tilefade 0
+  scale 1
+  render 0
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1
+  transparencyhint 0
+  selfillumcolor 0 0 0 
+  Diffuse 1 1 1 
+  Specular 0 0 0 
+  center 2.24998 0 23.3152 
+  ambient 0.588235 0.588235 0.588235 
+  diffuse 0.588235 0.588235 0.588235 
+  specular 0 0 0 
+  shininess 10.0
+  bitmap ttr01_leaf02
+  verts 6
+    0.09 0 0
+    -0.0449996 0.0779377 -0.000337037
+    -0.0450004 -0.0779381 0.000304474
+    0.0852366 -0.00274315 0.466383
+    -0.042263 0.0708642 0.466034
+    -0.0422637 -0.0763518 0.46664
+  faces 6
+    0 4 3  8  6 4 7  3
+    0 1 4  8  8 1 4  3
+    1 5 4  8  1 5 4  3
+    1 2 5  8  1 2 5  3
+    2 3 5  8  2 3 5  3
+    2 0 3  8  2 0 3  3
+  tverts 9
+    0.75 0.166667 0
+    0.0833334 0.166667 0
+    0.416667 0.166667 0
+    0.75 0.25 0
+    0.0833334 0.25 0
+    0.416667 0.25 0
+    -0.25 0.166667 0
+    -0.25 0.25 0
+    -0.25 0.166667 0
+endnode
+node trimesh Object04
+  parent Object03
+  position 0.000236312 -0.00274355 0.466348
+  orientation 0.855393 0.275257 0.43879 -0.608879
+  wirecolor 0.694118 0.580392 0.101961 
+  tilefade 0
+  scale 1
+  render 0
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1
+  transparencyhint 0
+  selfillumcolor 0 0 0 
+  Diffuse 1 1 1 
+  Specular 0 0 0 
+  center 3.63858 2.236 24.164 
+  ambient 0.588235 0.588235 0.588235 
+  diffuse 0.588235 0.588235 0.588235 
+  specular 0 0 0 
+  shininess 10.0
+  bitmap ttr01_leaf02
+  verts 6
+    0.0840438 -0.00124208 0.00469269
+    -0.0430975 0.0728361 0.00293427
+    -0.0409452 -0.0715925 -0.00761305
+    0.115869 0.0465918 0.490894
+    -0.00379321 0.116312 0.489239
+    -0.00176756 -0.0196203 0.479312
+  faces 6
+    0 4 3  8  6 4 7  3
+    0 1 4  8  8 1 4  3
+    1 5 4  8  1 5 4  3
+    1 2 5  8  1 2 5  3
+    2 3 5  8  2 3 5  3
+    2 0 3  8  2 0 3  3
+  tverts 9
+    0.75 0.25 0
+    0.0833334 0.25 0
+    0.416667 0.25 0
+    0.75 0.333333 0
+    0.0833334 0.333333 0
+    0.416667 0.333333 0
+    -0.25 0.25 0
+    -0.25 0.333333 0
+    -0.25 0.25 0
+endnode
+node trimesh Object05
+  parent Object04
+  position 0.0367697 0.0477613 0.486483
+  orientation -0.755952 0.590261 -0.28307 -0.760134
+  wirecolor 0.694118 0.580392 0.101961 
+  tilefade 0
+  scale 1
+  render 0
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1
+  transparencyhint 0
+  selfillumcolor 0 0 0 
+  Diffuse 1 1 1 
+  Specular 0 0 0 
+  center 1.77348 -0.144632 25.3874 
+  ambient 0.588235 0.588235 0.588235 
+  diffuse 0.588235 0.588235 0.588235 
+  specular 0 0 0 
+  shininess 10.0
+  bitmap ttr01_leaf02
+  verts 4
+    0.0759503 0.00289293 0.00851895
+    -0.0354701 0.0660461 -0.00953228
+    -0.0404806 -0.0689387 0.0010097
+    0.0710012 -0.05072 0.517281
+  faces 3
+    0 1 3  8  8 1 4  3
+    1 2 3  8  1 2 5  3
+    2 0 3  8  2 0 3  3
+  tverts 9
+    0.75 0.333333 0
+    0.0833334 0.333333 0
+    0.416667 0.333333 0
+    0.75 0.416667 0
+    0.0833334 0.416667 0
+    0.416667 0.416667 0
+    -0.25 0.333333 0
+    -0.25 0.416667 0
+    -0.25 0.333333 0
+endnode
+node danglymesh Plane08
+  parent Object05
+  position 0.0573785 -0.0497222 0.447418
+  orientation -0.867543 0.196082 -0.457079 -1.64192
+  wirecolor 0.0313726 0.431373 0.52549 
+  period 5.0
+  tightness 5.0
+  displacement 0.05
+  showdispl true
+  displtype 1
+  center 45.6538 36.2355 10.8693 
+  tilefade 0
+  scale 1
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1
+  transparencyhint 0
+  selfillumcolor 0 0 0 
+  Diffuse 1 1 1 
+  Specular 0 0 0 
+  center 45.6538 36.2355 10.8693 
+  ambient 0.588235 0.588235 0.588235 
+  diffuse 0.588235 0.588235 0.588235 
+  specular 0 0 0 
+  shininess 10.0
+  bitmap ttf01_plants
+  verts 4
+    0 0 0
+    0.299542 0.0665473 0.217386
+    0.0306838 0.267186 0.11664
+    0.91308 0.724715 0.205755
+  faces 4
+    0 1 3  1  0 1 3  1
+    3 2 0  1  3 2 0  1
+    1 0 3  0  1 0 3  1
+    3 0 2  0  3 0 2  1
+  tverts 8
+    -0.00504571 0.320855 0
+    0.0426639 -0.00983971 0
+    0.204995 0.504565 0
+    1.01434 0.11153 0
+    -0.00504571 0.320855 0
+    0.0426639 -0.00983971 0
+    0.204995 0.504565 0
+    1.01434 0.11153 0
+  constraints 4
+    0
+    30.0
+    30.0
+    90.0
+endnode
+node danglymesh Plane07
+  parent Plane08
+  position 0 0 0
+  orientation 0.234907 -0.212455 -0.948516 -0.407244
+  wirecolor 0.0313726 0.431373 0.52549 
+  period 5.0
+  tightness 5.0
+  displacement 0.05
+  showdispl true
+  displtype 1
+  center 44.36 35.7141 11.3868 
+  tilefade 0
+  scale 1
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1
+  transparencyhint 0
+  selfillumcolor 0 0 0 
+  Diffuse 1 1 1 
+  Specular 0 0 0 
+  center 44.36 35.7141 11.3868 
+  ambient 0.588235 0.588235 0.588235 
+  diffuse 0.588235 0.588235 0.588235 
+  specular 0 0 0 
+  shininess 10.0
+  bitmap ttf01_plants
+  verts 4
+    0 0 0
+    0.352905 -0.0103662 0.0868259
+    0.0255075 0.274736 0.120165
+    0.887203 0.724648 0.227737
+  faces 4
+    0 1 3  1  0 1 3  1
+    3 2 0  1  3 2 0  1
+    1 0 3  0  1 0 3  1
+    3 0 2  0  3 0 2  1
+  tverts 8
+    -0.00504571 0.320855 0
+    0.0426639 -0.00983971 0
+    0.204995 0.504565 0
+    1.01434 0.11153 0
+    -0.00504571 0.320855 0
+    0.0426639 -0.00983971 0
+    0.204995 0.504565 0
+    1.01434 0.11153 0
+  constraints 4
+    0
+    30.0
+    30.0
+    90.0
+endnode
+node danglymesh Plane06
+  parent Plane07
+  position 0 0 0
+  orientation 0.234907 -0.212456 -0.948515 -0.407243
+  wirecolor 0.0313726 0.431373 0.52549 
+  period 5.0
+  tightness 5.0
+  displacement 0.05
+  showdispl true
+  displtype 1
+  center 43.2648 35.7281 12.1422 
+  tilefade 0
+  scale 1
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1
+  transparencyhint 0
+  selfillumcolor 0 0 0 
+  Diffuse 1 1 1 
+  Specular 0 0 0 
+  center 43.2648 35.7281 12.1422 
+  ambient 0.588235 0.588235 0.588235 
+  diffuse 0.588235 0.588235 0.588235 
+  specular 0 0 0 
+  shininess 10.0
+  bitmap ttf01_plants
+  verts 4
+    0 0 0
+    0.349897 -0.0159979 0.0898828
+    0.0221222 0.282222 0.121806
+    0.8653 0.73056 0.242844
+  faces 4
+    0 1 3  1  0 1 3  1
+    3 2 0  1  3 2 0  1
+    1 0 3  0  1 0 3  1
+    3 0 2  0  3 0 2  1
+  tverts 8
+    -0.00504571 0.320855 0
+    0.0426639 -0.00983971 0
+    0.204995 0.504565 0
+    1.01434 0.11153 0
+    -0.00504571 0.320855 0
+    0.0426639 -0.00983971 0
+    0.204995 0.504565 0
+    1.01434 0.11153 0
+  constraints 4
+    0
+    30.0
+    30.0
+    90.0
+endnode
+node danglymesh Plane05
+  parent Plane06
+  position 0 0 0
+  orientation -0.234905 0.212456 0.948516 -5.87594
+  wirecolor 0.0313726 0.431373 0.52549 
+  period 5.0
+  tightness 5.0
+  displacement 0.05
+  showdispl true
+  displtype 1
+  center 42.4962 35.3475 12.6178 
+  tilefade 0
+  scale 1
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1
+  transparencyhint 0
+  selfillumcolor 0 0 0 
+  Diffuse 1 1 1 
+  Specular 0 0 0 
+  center 42.4962 35.3475 12.6178 
+  ambient 0.588235 0.588235 0.588235 
+  diffuse 0.588235 0.588235 0.588235 
+  specular 0 0 0 
+  shininess 10.0
+  bitmap ttf01_plants
+  verts 4
+    0 0 0
+    0.349055 -0.0207218 0.0940355
+    0.0192321 0.285047 0.121485
+    0.849928 0.727672 0.252357
+  faces 4
+    0 1 3  1  0 1 3  1
+    3 2 0  1  3 2 0  1
+    1 0 3  0  1 0 3  1
+    3 0 2  0  3 0 2  1
+  tverts 8
+    -0.00504571 0.320855 0
+    0.0426639 -0.00983971 0
+    0.204995 0.504565 0
+    1.01434 0.11153 0
+    -0.00504571 0.320855 0
+    0.0426639 -0.00983971 0
+    0.204995 0.504565 0
+    1.01434 0.11153 0
+  constraints 4
+    0
+    30.0
+    30.0
+    90.0
+endnode
+node danglymesh Plane04
+  parent Plane05
+  position 0 0 0
+  orientation -0.234908 0.212456 0.948515 -5.87594
+  wirecolor 0.0313726 0.431373 0.52549 
+  period 5.0
+  tightness 5.0
+  displacement 0.05
+  showdispl true
+  displtype 1
+  center 41.4231 35.5648 13.138 
+  tilefade 0
+  scale 1
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1
+  transparencyhint 0
+  selfillumcolor 0 0 0 
+  Diffuse 1 1 1 
+  Specular 0 0 0 
+  center 41.4231 35.5648 13.138 
+  ambient 0.588235 0.588235 0.588235 
+  diffuse 0.588235 0.588235 0.588235 
+  specular 0 0 0 
+  shininess 10.0
+  bitmap ttf01_plants
+  verts 4
+    0 0 0
+    0.345015 -0.025844 0.0983424
+    0.0170673 0.292313 0.120734
+    0.828466 0.737141 0.26276
+  faces 4
+    0 1 3  1  0 1 3  1
+    3 2 0  1  3 2 0  1
+    1 0 3  0  1 0 3  1
+    3 0 2  0  3 0 2  1
+  tverts 8
+    -0.00504571 0.320855 0
+    0.0426639 -0.00983971 0
+    0.204995 0.504565 0
+    1.01434 0.11153 0
+    -0.00504571 0.320855 0
+    0.0426639 -0.00983971 0
+    0.204995 0.504565 0
+    1.01434 0.11153 0
+  constraints 4
+    0
+    30.0
+    30.0
+    90.0
+endnode
+node danglymesh Plane01
+  parent Plane04
+  position 0 0 0
+  orientation -0.234907 0.212456 0.948515 -5.87594
+  wirecolor 0.0313726 0.431373 0.52549 
+  period 5.0
+  tightness 5.0
+  displacement 0.05
+  showdispl true
+  displtype 1
+  center 40.4812 35.9861 13.4675 
+  tilefade 0
+  scale 1
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1
+  transparencyhint 0
+  selfillumcolor 0 0 0 
+  Diffuse 1 1 1 
+  Specular 0 0 0 
+  center 40.4812 35.9861 13.4675 
+  ambient 0.588235 0.588235 0.588235 
+  diffuse 0.588235 0.588235 0.588235 
+  specular 0 0 0 
+  shininess 10.0
+  bitmap ttf01_plants
+  verts 4
+    0 0 0
+    0.340409 -0.0298502 0.102617
+    0.0161113 0.299178 0.118846
+    0.809628 0.749573 0.269351
+  faces 4
+    0 1 3  1  0 1 3  1
+    3 2 0  1  3 2 0  1
+    1 0 3  0  1 0 3  1
+    3 0 2  0  3 0 2  1
+  tverts 8
+    -0.00504571 0.320855 0
+    0.0426639 -0.00983971 0
+    0.204995 0.504565 0
+    1.01434 0.11153 0
+    -0.00504571 0.320855 0
+    0.0426639 -0.00983971 0
+    0.204995 0.504565 0
+    1.01434 0.11153 0
+  constraints 4
+    0
+    30.0
+    30.0
+    90.0
+endnode
+node danglymesh Plane13
+  parent Plane08
+  position 0 0 0
+  orientation 0.547216 -0.77759 0.309692 -3.14159
+  wirecolor 0.0313726 0.431373 0.52549 
+  period 5.0
+  tightness 5.0
+  displacement 0.05
+  showdispl true
+  displtype 1
+  center -33.3643 -48.348 -4.28568 
+  tilefade 0
+  scale 1
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1
+  transparencyhint 0
+  selfillumcolor 0 0 0 
+  Diffuse 1 1 1 
+  Specular 0 0 0 
+  center -33.3643 -48.348 -4.28568 
+  ambient 0.588235 0.588235 0.588235 
+  diffuse 0.588235 0.588235 0.588235 
+  specular 0 0 0 
+  shininess 10.0
+  bitmap ttf01_plants
+  verts 4
+    0 0 0
+    -0.234933 0.025284 -0.0601624
+    -0.034016 -0.361789 -0.0857138
+    -0.667288 -0.992244 -0.054364
+  faces 4
+    1 0 3  1  1 0 3  1
+    2 3 0  1  2 3 0  1
+    0 1 3  0  0 1 3  1
+    0 3 2  0  0 3 2  1
+  tverts 8
+    -0.00504571 0.320855 0
+    0.0426639 -0.00983971 0
+    0.204995 0.504565 0
+    1.01434 0.11153 0
+    -0.00504571 0.320855 0
+    0.0426639 -0.00983971 0
+    0.204995 0.504565 0
+    1.01434 0.11153 0
+  constraints 4
+    0
+    30.0
+    30.0
+    90.0
+endnode
+node danglymesh Plane12
+  parent Plane13
+  position 0 0 0
+  orientation 0.234907 -0.212457 -0.948515 -0.407244
+  wirecolor 0.0313726 0.431373 0.52549 
+  period 5.0
+  tightness 5.0
+  displacement 0.05
+  showdispl true
+  displtype 1
+  center -33.9848 -48.7424 -4.18975 
+  tilefade 0
+  scale 1
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1
+  transparencyhint 0
+  selfillumcolor 0 0 0 
+  Diffuse 1 1 1 
+  Specular 0 0 0 
+  center -33.9848 -48.7424 -4.18975 
+  ambient 0.588235 0.588235 0.588235 
+  diffuse 0.588235 0.588235 0.588235 
+  specular 0 0 0 
+  shininess 10.0
+  bitmap ttf01_plants
+  verts 4
+    0 0 0
+    -0.236009 0.0230577 -0.0538028
+    -0.0349995 -0.361256 -0.0837951
+    -0.679699 -0.997906 -0.0363322
+  faces 4
+    1 0 3  1  1 0 3  1
+    2 3 0  1  2 3 0  1
+    0 1 3  0  0 1 3  1
+    0 3 2  0  0 3 2  1
+  tverts 8
+    -0.00504571 0.320855 0
+    0.0426639 -0.00983971 0
+    0.204995 0.504565 0
+    1.01434 0.11153 0
+    -0.00504571 0.320855 0
+    0.0426639 -0.00983971 0
+    0.204995 0.504565 0
+    1.01434 0.11153 0
+  constraints 4
+    0
+    30.0
+    30.0
+    90.0
+endnode
+node danglymesh Plane11
+  parent Plane12
+  position 0 0 0
+  orientation -0.234906 0.212455 0.948516 -5.87594
+  wirecolor 0.0313726 0.431373 0.52549 
+  period 5.0
+  tightness 5.0
+  displacement 0.05
+  showdispl true
+  displtype 1
+  center -34.7172 -49.0716 -4.09519 
+  tilefade 0
+  scale 1
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1
+  transparencyhint 0
+  selfillumcolor 0 0 0 
+  Diffuse 1 1 1 
+  Specular 0 0 0 
+  center -34.7172 -49.0716 -4.09519 
+  ambient 0.588235 0.588235 0.588235 
+  diffuse 0.588235 0.588235 0.588235 
+  specular 0 0 0 
+  shininess 10.0
+  bitmap ttf01_plants
+  verts 4
+    0 0 0
+    -0.238197 0.0207179 -0.0478709
+    -0.0360352 -0.36021 -0.0819038
+    -0.694347 -1.00215 -0.01988
+  faces 4
+    1 0 3  1  1 0 3  1
+    2 3 0  1  2 3 0  1
+    0 1 3  0  0 1 3  1
+    0 3 2  0  0 3 2  1
+  tverts 8
+    -0.00504571 0.320855 0
+    0.0426639 -0.00983971 0
+    0.204995 0.504565 0
+    1.01434 0.11153 0
+    -0.00504571 0.320855 0
+    0.0426639 -0.00983971 0
+    0.204995 0.504565 0
+    1.01434 0.11153 0
+  constraints 4
+    0
+    30.0
+    30.0
+    90.0
+endnode
+node danglymesh Plane10
+  parent Plane11
+  position 0 0 0
+  orientation -0.234908 0.212456 0.948515 -5.87594
+  wirecolor 0.0313726 0.431373 0.52549 
+  period 5.0
+  tightness 5.0
+  displacement 0.05
+  showdispl true
+  displtype 1
+  center -35.741 -49.3667 -3.90739 
+  tilefade 0
+  scale 1
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1
+  transparencyhint 0
+  selfillumcolor 0 0 0 
+  Diffuse 1 1 1 
+  Specular 0 0 0 
+  center -35.741 -49.3667 -3.90739 
+  ambient 0.588235 0.588235 0.588235 
+  diffuse 0.588235 0.588235 0.588235 
+  specular 0 0 0 
+  shininess 10.0
+  bitmap ttf01_plants
+  verts 4
+    0 0 0
+    -0.242367 0.0181534 -0.0403819
+    -0.0369188 -0.358455 -0.0791544
+    -0.714824 -1.00549 0.00100672
+  faces 4
+    1 0 3  1  1 0 3  1
+    2 3 0  1  2 3 0  1
+    0 1 3  0  0 1 3  1
+    0 3 2  0  0 3 2  1
+  tverts 8
+    -0.00504571 0.320855 0
+    0.0426639 -0.00983971 0
+    0.204995 0.504565 0
+    1.01434 0.11153 0
+    -0.00504571 0.320855 0
+    0.0426639 -0.00983971 0
+    0.204995 0.504565 0
+    1.01434 0.11153 0
+  constraints 4
+    0
+    30.0
+    30.0
+    90.0
+endnode
+node danglymesh Plane09
+  parent Plane10
+  position 0 0 0
+  orientation -0.234906 0.212456 0.948515 -5.87594
+  wirecolor 0.0313726 0.431373 0.52549 
+  period 5.0
+  tightness 5.0
+  displacement 0.05
+  showdispl true
+  displtype 1
+  center -36.6671 -49.5106 -3.03911 
+  tilefade 0
+  scale 1
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1
+  transparencyhint 0
+  selfillumcolor 0 0 0 
+  Diffuse 1 1 1 
+  Specular 0 0 0 
+  center -36.6671 -49.5106 -3.03911 
+  ambient 0.588235 0.588235 0.588235 
+  diffuse 0.588235 0.588235 0.588235 
+  specular 0 0 0 
+  shininess 10.0
+  bitmap ttf01_plants
+  verts 4
+    0 0 0
+    -0.246888 0.0160647 -0.034903
+    -0.0376083 -0.356419 -0.0769351
+    -0.733346 -1.00628 0.0161529
+  faces 4
+    1 0 3  1  1 0 3  1
+    2 3 0  1  2 3 0  1
+    0 1 3  0  0 1 3  1
+    0 3 2  0  0 3 2  1
+  tverts 8
+    -0.00504571 0.320855 0
+    0.0426639 -0.00983971 0
+    0.204995 0.504565 0
+    1.01434 0.11153 0
+    -0.00504571 0.320855 0
+    0.0426639 -0.00983971 0
+    0.204995 0.504565 0
+    1.01434 0.11153 0
+  constraints 4
+    0
+    30.0
+    30.0
+    90.0
+endnode
+node trimesh Object06
+  parent TIN01_B13_03
+  position -0.93752 0.215716 0
+  orientation 0 0 -1 -0.0143478
+  wirecolor 0.694118 0.580392 0.101961 
+  tilefade 0
+  scale 1
+  render 0
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1
+  transparencyhint 0
+  selfillumcolor 0 0 0 
+  Diffuse 1 1 1 
+  Specular 0 0 0 
+  center 2.5 0 23.3157 
+  ambient 0.588235 0.588235 0.588235 
+  diffuse 0.588235 0.588235 0.588235 
+  specular 0 0 0 
+  shininess 10.0
+  bitmap ttr01_leaf02
+  verts 6
+    0.1 0 0
+    -0.05 0.0866025 0
+    -0.05 -0.0866025 0
+    0.095 0 0.466315
+    -0.0475 0.0822724 0.466315
+    -0.0475 -0.0822724 0.466315
+  faces 6
+    0 4 3  8  6 4 7  3
+    0 1 4  8  8 1 4  3
+    1 5 4  8  1 5 4  3
+    1 2 5  8  1 2 5  3
+    2 3 5  8  2 3 5  3
+    2 0 3  8  2 0 3  3
+  tverts 9
+    0.75 0 0
+    0.0833334 0 0
+    0.416667 0 0
+    0.75 0.0833333 0
+    0.0833334 0.0833333 0
+    0.416667 0.0833333 0
+    -0.25 0 0
+    -0.25 0.0833333 0
+    -0.25 0 0
+endnode
+node trimesh Object07
+  parent Object06
+  position 0 0 0.46631
+  orientation 0.0135122 -0.649501 0.760241 -0.257142
+  wirecolor 0.694118 0.580392 0.101961 
+  tilefade 0
+  scale 1
+  render 0
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1
+  transparencyhint 0
+  selfillumcolor 0 0 0 
+  Diffuse 1 1 1 
+  Specular 0 0 0 
+  center 2.37497 0 23.3195 
+  ambient 0.588235 0.588235 0.588235 
+  diffuse 0.588235 0.588235 0.588235 
+  specular 0 0 0 
+  shininess 10.0
+  bitmap ttr01_leaf02
+  verts 6
+    0.0949999 0 0
+    -0.0475005 0.0822677 -0.000324803
+    -0.0474994 -0.0822671 0.000378524
+    0.0896917 -0.00285027 0.466319
+    -0.0453088 0.0750882 0.466049
+    -0.0453077 -0.0807869 0.466715
+  faces 6
+    0 4 3  8  6 4 7  3
+    0 1 4  8  8 1 4  3
+    1 5 4  8  1 5 4  3
+    1 2 5  8  1 2 5  3
+    2 3 5  8  2 3 5  3
+    2 0 3  8  2 0 3  3
+  tverts 9
+    0.75 0.0833333 0
+    0.0833334 0.0833333 0
+    0.416667 0.0833333 0
+    0.75 0.166667 0
+    0.0833334 0.166667 0
+    0.416667 0.166667 0
+    -0.25 0.0833333 0
+    -0.25 0.166667 0
+    -0.25 0.0833333 0
+endnode
+node trimesh Object08
+  parent Object07
+  position -0.000308182 -0.00284972 0.466361
+  orientation 0.0934099 -0.986291 0.13603 -1.12635
+  wirecolor 0.694118 0.580392 0.101961 
+  tilefade 0
+  scale 1
+  render 0
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1
+  transparencyhint 0
+  selfillumcolor 0 0 0 
+  Diffuse 1 1 1 
+  Specular 0 0 0 
+  center 2.24998 0 23.3152 
+  ambient 0.588235 0.588235 0.588235 
+  diffuse 0.588235 0.588235 0.588235 
+  specular 0 0 0 
+  shininess 10.0
+  bitmap ttr01_leaf02
+  verts 6
+    0.09 0 0
+    -0.0449996 0.0779377 -0.00033704
+    -0.0450004 -0.0779381 0.00030448
+    0.0852366 -0.00274317 0.466383
+    -0.042263 0.0708642 0.466035
+    -0.0422637 -0.0763518 0.46664
+  faces 6
+    0 4 3  8  6 4 7  3
+    0 1 4  8  8 1 4  3
+    1 5 4  8  1 5 4  3
+    1 2 5  8  1 2 5  3
+    2 3 5  8  2 3 5  3
+    2 0 3  8  2 0 3  3
+  tverts 9
+    0.75 0.166667 0
+    0.0833334 0.166667 0
+    0.416667 0.166667 0
+    0.75 0.25 0
+    0.0833334 0.25 0
+    0.416667 0.25 0
+    -0.25 0.166667 0
+    -0.25 0.25 0
+    -0.25 0.166667 0
+endnode
+node trimesh Object09
+  parent Object08
+  position 0.000236135 -0.00274369 0.466348
+  orientation 0.252774 -0.953956 0.16147 -1.26822
+  wirecolor 0.694118 0.580392 0.101961 
+  tilefade 0
+  scale 1
+  render 0
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1
+  transparencyhint 0
+  selfillumcolor 0 0 0 
+  Diffuse 1 1 1 
+  Specular 0 0 0 
+  center 3.63858 2.236 24.1641 
+  ambient 0.588235 0.588235 0.588235 
+  diffuse 0.588235 0.588235 0.588235 
+  specular 0 0 0 
+  shininess 10.0
+  bitmap ttr01_leaf02
+  verts 6
+    0.0840438 -0.00124208 0.00469269
+    -0.0430975 0.0728361 0.00293426
+    -0.0409452 -0.0715925 -0.00761305
+    0.115869 0.0465918 0.490894
+    -0.00379321 0.116313 0.489239
+    -0.00176755 -0.0196204 0.479312
+  faces 6
+    0 4 3  8  6 4 7  3
+    0 1 4  8  8 1 4  3
+    1 5 4  8  1 5 4  3
+    1 2 5  8  1 2 5  3
+    2 3 5  8  2 3 5  3
+    2 0 3  8  2 0 3  3
+  tverts 9
+    0.75 0.25 0
+    0.0833334 0.25 0
+    0.416667 0.25 0
+    0.75 0.333333 0
+    0.0833334 0.333333 0
+    0.416667 0.333333 0
+    -0.25 0.25 0
+    -0.25 0.333333 0
+    -0.25 0.25 0
+endnode
+node trimesh Object10
+  parent Object09
+  position 0.0367695 0.0477614 0.486483
+  orientation 0.140136 -0.989079 0.04567 -4.4997
+  wirecolor 0.694118 0.580392 0.101961 
+  tilefade 0
+  scale 1
+  render 0
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1
+  transparencyhint 0
+  selfillumcolor 0 0 0 
+  Diffuse 1 1 1 
+  Specular 0 0 0 
+  center 1.77348 -0.144631 25.3874 
+  ambient 0.588235 0.588235 0.588235 
+  diffuse 0.588235 0.588235 0.588235 
+  specular 0 0 0 
+  shininess 10.0
+  bitmap ttr01_leaf02
+  verts 4
+    0.0759503 0.00289292 0.00851895
+    -0.0354701 0.0660461 -0.00953229
+    -0.0404806 -0.0689387 0.00100971
+    0.0710012 -0.0507201 0.517281
+  faces 3
+    0 1 3  8  8 1 4  3
+    1 2 3  8  1 2 5  3
+    2 0 3  8  2 0 3  3
+  tverts 9
+    0.75 0.333333 0
+    0.0833334 0.333333 0
+    0.416667 0.333333 0
+    0.75 0.416667 0
+    0.0833334 0.416667 0
+    0.416667 0.416667 0
+    -0.25 0.333333 0
+    -0.25 0.416667 0
+    -0.25 0.333333 0
+endnode
+node danglymesh Plane14
+  parent Object10
+  position 0.0742879 -0.0403898 0.507027
+  orientation -0.867543 0.196082 -0.457079 -1.64192
+  wirecolor 0.0313726 0.431373 0.52549 
+  period 5.0
+  tightness 5.0
+  displacement 0.05
+  showdispl true
+  displtype 1
+  center 32.4168 26.6127 9.8558 
+  tilefade 0
+  scale 1
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1
+  transparencyhint 0
+  selfillumcolor 0 0 0 
+  Diffuse 1 1 1 
+  Specular 0 0 0 
+  center 32.4168 26.6127 9.8558 
+  ambient 0.588235 0.588235 0.588235 
+  diffuse 0.588235 0.588235 0.588235 
+  specular 0 0 0 
+  shininess 10.0
+  bitmap ttf01_plants
+  verts 4
+    0 0 0
+    0.206198 0.0577989 0.197117
+    0.0116605 0.203176 0.127644
+    0.648339 0.532257 0.189043
+  faces 4
+    0 1 3  1  0 1 3  1
+    3 2 0  1  3 2 0  1
+    1 0 3  0  1 0 3  1
+    3 0 2  0  3 0 2  1
+  tverts 8
+    -0.00504571 0.320855 0
+    0.0426639 -0.00983971 0
+    0.204995 0.504565 0
+    1.01434 0.11153 0
+    -0.00504571 0.320855 0
+    0.0426639 -0.00983971 0
+    0.204995 0.504565 0
+    1.01434 0.11153 0
+  constraints 4
+    0
+    30.0
+    30.0
+    90.0
+endnode
+node danglymesh Plane15
+  parent Plane14
+  position 0 0 0
+  orientation 0.234907 -0.212455 -0.948516 -0.407244
+  wirecolor 0.0313726 0.431373 0.52549 
+  period 5.0
+  tightness 5.0
+  displacement 0.05
+  showdispl true
+  displtype 1
+  center 31.4061 26.3281 10.6428 
+  tilefade 0
+  scale 1
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1
+  transparencyhint 0
+  selfillumcolor 0 0 0 
+  Diffuse 1 1 1 
+  Specular 0 0 0 
+  center 31.4061 26.3281 10.6428 
+  ambient 0.588235 0.588235 0.588235 
+  diffuse 0.588235 0.588235 0.588235 
+  specular 0 0 0 
+  shininess 10.0
+  bitmap ttf01_plants
+  verts 4
+    0 0 0
+    0.254232 -0.00733941 0.0631358
+    0.0078727 0.208775 0.131769
+    0.628125 0.533902 0.212857
+  faces 4
+    0 1 3  1  0 1 3  1
+    3 2 0  1  3 2 0  1
+    1 0 3  0  1 0 3  1
+    3 0 2  0  3 0 2  1
+  tverts 8
+    -0.00504571 0.320855 0
+    0.0426639 -0.00983971 0
+    0.204995 0.504565 0
+    1.01434 0.11153 0
+    -0.00504571 0.320855 0
+    0.0426639 -0.00983971 0
+    0.204995 0.504565 0
+    1.01434 0.11153 0
+  constraints 4
+    0
+    30.0
+    30.0
+    90.0
+endnode
+node danglymesh Plane16
+  parent Plane15
+  position 0 0 0
+  orientation 0.234908 -0.212457 -0.948515 -0.407243
+  wirecolor 0.0313726 0.431373 0.52549 
+  period 5.0
+  tightness 5.0
+  displacement 0.05
+  showdispl true
+  displtype 1
+  center 30.5668 26.3944 11.4562 
+  tilefade 0
+  scale 1
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1
+  transparencyhint 0
+  selfillumcolor 0 0 0 
+  Diffuse 1 1 1 
+  Specular 0 0 0 
+  center 30.5668 26.3944 11.4562 
+  ambient 0.588235 0.588235 0.588235 
+  diffuse 0.588235 0.588235 0.588235 
+  specular 0 0 0 
+  shininess 10.0
+  bitmap ttf01_plants
+  verts 4
+    0 0 0
+    0.251825 -0.0111584 0.066397
+    0.00546324 0.214023 0.133748
+    0.611339 0.539047 0.229126
+  faces 4
+    0 1 3  1  0 1 3  1
+    3 2 0  1  3 2 0  1
+    1 0 3  0  1 0 3  1
+    3 0 2  0  3 0 2  1
+  tverts 8
+    -0.00504571 0.320855 0
+    0.0426639 -0.00983971 0
+    0.204995 0.504565 0
+    1.01434 0.11153 0
+    -0.00504571 0.320855 0
+    0.0426639 -0.00983971 0
+    0.204995 0.504565 0
+    1.01434 0.11153 0
+  constraints 4
+    0
+    30.0
+    30.0
+    90.0
+endnode
+node danglymesh Plane17
+  parent Plane16
+  position 0 0 0
+  orientation 0.234906 -0.212456 -0.948516 -0.407244
+  wirecolor 0.0313726 0.431373 0.52549 
+  period 5.0
+  tightness 5.0
+  displacement 0.05
+  showdispl true
+  displtype 1
+  center 29.9928 26.1315 11.9051 
+  tilefade 0
+  scale 1
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1
+  transparencyhint 0
+  selfillumcolor 0 0 0 
+  Diffuse 1 1 1 
+  Specular 0 0 0 
+  center 29.9928 26.1315 11.9051 
+  ambient 0.588235 0.588235 0.588235 
+  diffuse 0.588235 0.588235 0.588235 
+  specular 0 0 0 
+  shininess 10.0
+  bitmap ttf01_plants
+  verts 4
+    0 0 0
+    0.250992 -0.0143526 0.0703985
+    0.00348549 0.215636 0.133355
+    0.59986 0.536982 0.238103
+  faces 4
+    0 1 3  1  0 1 3  1
+    3 2 0  1  3 2 0  1
+    1 0 3  0  1 0 3  1
+    3 0 2  0  3 0 2  1
+  tverts 8
+    -0.00504571 0.320855 0
+    0.0426639 -0.00983971 0
+    0.204995 0.504565 0
+    1.01434 0.11153 0
+    -0.00504571 0.320855 0
+    0.0426639 -0.00983971 0
+    0.204995 0.504565 0
+    1.01434 0.11153 0
+  constraints 4
+    0
+    30.0
+    30.0
+    90.0
+endnode
+node danglymesh Plane18
+  parent Plane17
+  position 0 0 0
+  orientation 0.234908 -0.212455 -0.948515 -0.407244
+  wirecolor 0.0313726 0.431373 0.52549 
+  period 5.0
+  tightness 5.0
+  displacement 0.05
+  showdispl true
+  displtype 1
+  center 29.184 26.3022 12.4111 
+  tilefade 0
+  scale 1
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1
+  transparencyhint 0
+  selfillumcolor 0 0 0 
+  Diffuse 1 1 1 
+  Specular 0 0 0 
+  center 29.184 26.3022 12.4111 
+  ambient 0.588235 0.588235 0.588235 
+  diffuse 0.588235 0.588235 0.588235 
+  specular 0 0 0 
+  shininess 10.0
+  bitmap ttf01_plants
+  verts 4
+    0 0 0
+    0.247863 -0.017867 0.0744308
+    0.00187237 0.220466 0.132656
+    0.583683 0.543911 0.248222
+  faces 4
+    0 1 3  1  0 1 3  1
+    3 2 0  1  3 2 0  1
+    1 0 3  0  1 0 3  1
+    3 0 2  0  3 0 2  1
+  tverts 8
+    -0.00504571 0.320855 0
+    0.0426639 -0.00983971 0
+    0.204995 0.504565 0
+    1.01434 0.11153 0
+    -0.00504571 0.320855 0
+    0.0426639 -0.00983971 0
+    0.204995 0.504565 0
+    1.01434 0.11153 0
+  constraints 4
+    0
+    30.0
+    30.0
+    90.0
+endnode
+node danglymesh Plane19
+  parent Plane18
+  position 0 0 0
+  orientation 0.234907 -0.212456 -0.948515 -0.407243
+  wirecolor 0.0313726 0.431373 0.52549 
+  period 5.0
+  tightness 5.0
+  displacement 0.05
+  showdispl true
+  displtype 1
+  center 28.4764 26.6055 12.7078 
+  tilefade 0
+  scale 1
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1
+  transparencyhint 0
+  selfillumcolor 0 0 0 
+  Diffuse 1 1 1 
+  Specular 0 0 0 
+  center 28.4764 26.6055 12.7078 
+  ambient 0.588235 0.588235 0.588235 
+  diffuse 0.588235 0.588235 0.588235 
+  specular 0 0 0 
+  shininess 10.0
+  bitmap ttf01_plants
+  verts 4
+    0 0 0
+    0.24435 -0.0206216 0.0782631
+    0.0010819 0.225001 0.130744
+    0.569532 0.552732 0.254158
+  faces 4
+    0 1 3  1  0 1 3  1
+    3 2 0  1  3 2 0  1
+    1 0 3  0  1 0 3  1
+    3 0 2  0  3 0 2  1
+  tverts 8
+    -0.00504571 0.320855 0
+    0.0426639 -0.00983971 0
+    0.204995 0.504565 0
+    1.01434 0.11153 0
+    -0.00504571 0.320855 0
+    0.0426639 -0.00983971 0
+    0.204995 0.504565 0
+    1.01434 0.11153 0
+  constraints 4
+    0
+    30.0
+    30.0
+    90.0
+endnode
+node danglymesh Plane20
+  parent Plane14
+  position 0 0 0
+  orientation 0.547216 -0.77759 0.309692 -3.14159
+  wirecolor 0.0313726 0.431373 0.52549 
+  period 5.0
+  tightness 5.0
+  displacement 0.05
+  showdispl true
+  displtype 1
+  center -23.6848 -35.2113 -5.10864 
+  tilefade 0
+  scale 1
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1
+  transparencyhint 0
+  selfillumcolor 0 0 0 
+  Diffuse 1 1 1 
+  Specular 0 0 0 
+  center -23.6848 -35.2113 -5.10864 
+  ambient 0.588235 0.588235 0.588235 
+  diffuse 0.588235 0.588235 0.588235 
+  specular 0 0 0 
+  shininess 10.0
+  bitmap ttf01_plants
+  verts 4
+    0 0 0
+    -0.169261 0.0181545 -0.043671
+    -0.0153607 -0.269854 -0.102173
+    -0.473698 -0.72238 -0.0712077
+  faces 4
+    1 0 3  1  1 0 3  1
+    2 3 0  1  2 3 0  1
+    0 1 3  0  0 1 3  1
+    0 3 2  0  0 3 2  1
+  tverts 8
+    -0.00504571 0.320855 0
+    0.0426639 -0.00983971 0
+    0.204995 0.504565 0
+    1.01434 0.11153 0
+    -0.00504571 0.320855 0
+    0.0426639 -0.00983971 0
+    0.204995 0.504565 0
+    1.01434 0.11153 0
+  constraints 4
+    0
+    30.0
+    30.0
+    90.0
+endnode
+node danglymesh Plane21
+  parent Plane20
+  position 0 0 0
+  orientation -0.234907 0.212458 0.948515 -5.87594
+  wirecolor 0.0313726 0.431373 0.52549 
+  period 5.0
+  tightness 5.0
+  displacement 0.05
+  showdispl true
+  displtype 1
+  center -24.212 -35.3877 -4.978 
+  tilefade 0
+  scale 1
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1
+  transparencyhint 0
+  selfillumcolor 0 0 0 
+  Diffuse 1 1 1 
+  Specular 0 0 0 
+  center -24.212 -35.3877 -4.978 
+  ambient 0.588235 0.588235 0.588235 
+  diffuse 0.588235 0.588235 0.588235 
+  specular 0 0 0 
+  shininess 10.0
+  bitmap ttf01_plants
+  verts 4
+    0 0 0
+    -0.17039 0.0168891 -0.0375329
+    -0.0163136 -0.268866 -0.0995602
+    -0.484242 -0.724643 -0.0510564
+  faces 4
+    1 0 3  1  1 0 3  1
+    2 3 0  1  2 3 0  1
+    0 1 3  0  0 1 3  1
+    0 3 2  0  0 3 2  1
+  tverts 8
+    -0.00504571 0.320855 0
+    0.0426639 -0.00983971 0
+    0.204995 0.504565 0
+    1.01434 0.11153 0
+    -0.00504571 0.320855 0
+    0.0426639 -0.00983971 0
+    0.204995 0.504565 0
+    1.01434 0.11153 0
+  constraints 4
+    0
+    30.0
+    30.0
+    90.0
+endnode
+node danglymesh Plane22
+  parent Plane21
+  position 0 0 0
+  orientation -0.234906 0.212456 0.948516 -5.87594
+  wirecolor 0.0313726 0.431373 0.52549 
+  period 5.0
+  tightness 5.0
+  displacement 0.05
+  showdispl true
+  displtype 1
+  center -24.8197 -35.5216 -4.84723 
+  tilefade 0
+  scale 1
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1
+  transparencyhint 0
+  selfillumcolor 0 0 0 
+  Diffuse 1 1 1 
+  Specular 0 0 0 
+  center -24.8197 -35.5216 -4.84723 
+  ambient 0.588235 0.588235 0.588235 
+  diffuse 0.588235 0.588235 0.588235 
+  specular 0 0 0 
+  shininess 10.0
+  bitmap ttf01_plants
+  verts 4
+    0 0 0
+    -0.172372 0.0155546 -0.0315353
+    -0.0171877 -0.267568 -0.0969447
+    -0.496396 -0.725987 -0.031865
+  faces 4
+    1 0 3  1  1 0 3  1
+    2 3 0  1  2 3 0  1
+    0 1 3  0  0 1 3  1
+    0 3 2  0  0 3 2  1
+  tverts 8
+    -0.00504571 0.320855 0
+    0.0426639 -0.00983971 0
+    0.204995 0.504565 0
+    1.01434 0.11153 0
+    -0.00504571 0.320855 0
+    0.0426639 -0.00983971 0
+    0.204995 0.504565 0
+    1.01434 0.11153 0
+  constraints 4
+    0
+    30.0
+    30.0
+    90.0
+endnode
+node danglymesh Plane23
+  parent Plane22
+  position 0 0 0
+  orientation -0.234908 0.212456 0.948515 -5.87594
+  wirecolor 0.0313726 0.431373 0.52549 
+  period 5.0
+  tightness 5.0
+  displacement 0.05
+  showdispl true
+  displtype 1
+  center -25.6568 -35.6161 -4.67885 
+  tilefade 0
+  scale 1
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1
+  transparencyhint 0
+  selfillumcolor 0 0 0 
+  Diffuse 1 1 1 
+  Specular 0 0 0 
+  center -25.6568 -35.6161 -4.67885 
+  ambient 0.588235 0.588235 0.588235 
+  diffuse 0.588235 0.588235 0.588235 
+  specular 0 0 0 
+  shininess 10.0
+  bitmap ttf01_plants
+  verts 4
+    0 0 0
+    -0.17597 0.0141836 -0.0237354
+    -0.0178994 -0.265838 -0.093577
+    -0.513138 -0.726505 -0.00800218
+  faces 4
+    1 0 3  1  1 0 3  1
+    2 3 0  1  2 3 0  1
+    0 1 3  0  0 1 3  1
+    0 3 2  0  0 3 2  1
+  tverts 8
+    -0.00504571 0.320855 0
+    0.0426639 -0.00983971 0
+    0.204995 0.504565 0
+    1.01434 0.11153 0
+    -0.00504571 0.320855 0
+    0.0426639 -0.00983971 0
+    0.204995 0.504565 0
+    1.01434 0.11153 0
+  constraints 4
+    0
+    30.0
+    30.0
+    90.0
+endnode
+node danglymesh Plane24
+  parent Plane23
+  position 0 0 0
+  orientation -0.234906 0.212457 0.948515 -5.87594
+  wirecolor 0.0313726 0.431373 0.52549 
+  period 5.0
+  tightness 5.0
+  displacement 0.05
+  showdispl true
+  displtype 1
+  center -26.4058 -35.6286 -4.05555 
+  tilefade 0
+  scale 1
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1
+  transparencyhint 0
+  selfillumcolor 0 0 0 
+  Diffuse 1 1 1 
+  Specular 0 0 0 
+  center -26.4058 -35.6286 -4.05555 
+  ambient 0.588235 0.588235 0.588235 
+  diffuse 0.588235 0.588235 0.588235 
+  specular 0 0 0 
+  shininess 10.0
+  bitmap ttf01_plants
+  verts 4
+    0 0 0
+    -0.179778 0.0130846 -0.0177402
+    -0.0183539 -0.264096 -0.0909279
+    -0.528119 -0.725658 0.00981679
+  faces 4
+    1 0 3  1  1 0 3  1
+    2 3 0  1  2 3 0  1
+    0 1 3  0  0 1 3  1
+    0 3 2  0  0 3 2  1
+  tverts 8
+    -0.00504571 0.320855 0
+    0.0426639 -0.00983971 0
+    0.204995 0.504565 0
+    1.01434 0.11153 0
+    -0.00504571 0.320855 0
+    0.0426639 -0.00983971 0
+    0.204995 0.504565 0
+    1.01434 0.11153 0
+  constraints 4
+    0
+    30.0
+    30.0
+    90.0
+endnode
+node trimesh Object11
+  parent TIN01_B13_03
+  position 0.924661 0.0245129 0
+  orientation -0.0611154 0.00455383 0.99812 -2.99312
+  wirecolor 0.694118 0.580392 0.101961 
+  tilefade 0
+  scale 1
+  render 0
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1
+  transparencyhint 0
+  selfillumcolor 0 0 0 
+  Diffuse 1 1 1 
+  Specular 0 0 0 
+  center 2.5 0 23.3158 
+  ambient 0.588235 0.588235 0.588235 
+  diffuse 0.588235 0.588235 0.588235 
+  specular 0 0 0 
+  shininess 10.0
+  bitmap ttr01_leaf02
+  verts 6
+    0.1 0 0
+    -0.05 0.0866025 0
+    -0.05 -0.0866025 0
+    0.095 0 0.466315
+    -0.0475 0.0822724 0.466315
+    -0.0475 -0.0822724 0.466315
+  faces 6
+    0 4 3  8  6 4 7  3
+    0 1 4  8  8 1 4  3
+    1 5 4  8  1 5 4  3
+    1 2 5  8  1 2 5  3
+    2 3 5  8  2 3 5  3
+    2 0 3  8  2 0 3  3
+  tverts 9
+    0.75 0 0
+    0.0833334 0 0
+    0.416667 0 0
+    0.75 0.0833333 0
+    0.0833334 0.0833333 0
+    0.416667 0.0833333 0
+    -0.25 0 0
+    -0.25 0.0833333 0
+    -0.25 0 0
+endnode
+node trimesh Object12
+  parent Object11
+  position 0 0 0.46631
+  orientation 0.308753 0.850144 -0.426529 -5.38468
+  wirecolor 0.694118 0.580392 0.101961 
+  tilefade 0
+  scale 1
+  render 0
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1
+  transparencyhint 0
+  selfillumcolor 0 0 0 
+  Diffuse 1 1 1 
+  Specular 0 0 0 
+  center 2.37497 0 23.3195 
+  ambient 0.588235 0.588235 0.588235 
+  diffuse 0.588235 0.588235 0.588235 
+  specular 0 0 0 
+  shininess 10.0
+  bitmap ttr01_leaf02
+  verts 6
+    0.0949999 0 0
+    -0.0475005 0.0822677 -0.000324801
+    -0.0474994 -0.0822671 0.000378542
+    0.0896916 -0.00285028 0.466319
+    -0.0453088 0.0750882 0.466049
+    -0.0453078 -0.080787 0.466715
+  faces 6
+    0 4 3  8  6 4 7  3
+    0 1 4  8  8 1 4  3
+    1 5 4  8  1 5 4  3
+    1 2 5  8  1 2 5  3
+    2 3 5  8  2 3 5  3
+    2 0 3  8  2 0 3  3
+  tverts 9
+    0.75 0.0833333 0
+    0.0833334 0.0833333 0
+    0.416667 0.0833333 0
+    0.75 0.166667 0
+    0.0833334 0.166667 0
+    0.416667 0.166667 0
+    -0.25 0.0833333 0
+    -0.25 0.166667 0
+    -0.25 0.0833333 0
+endnode
+node trimesh Object13
+  parent Object12
+  position -0.000308449 -0.00284976 0.466361
+  orientation -0.265867 0.901277 -0.342075 -4.87674
+  wirecolor 0.694118 0.580392 0.101961 
+  tilefade 0
+  scale 1
+  render 0
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1
+  transparencyhint 0
+  selfillumcolor 0 0 0 
+  Diffuse 1 1 1 
+  Specular 0 0 0 
+  center 2.24998 0 23.3152 
+  ambient 0.588235 0.588235 0.588235 
+  diffuse 0.588235 0.588235 0.588235 
+  specular 0 0 0 
+  shininess 10.0
+  bitmap ttr01_leaf02
+  verts 6
+    0.09 0 0
+    -0.0449996 0.0779377 -0.000337044
+    -0.0450004 -0.0779381 0.000304473
+    0.0852367 -0.00274316 0.466383
+    -0.042263 0.0708642 0.466034
+    -0.0422637 -0.0763518 0.46664
+  faces 6
+    0 4 3  8  6 4 7  3
+    0 1 4  8  8 1 4  3
+    1 5 4  8  1 5 4  3
+    1 2 5  8  1 2 5  3
+    2 3 5  8  2 3 5  3
+    2 0 3  8  2 0 3  3
+  tverts 9
+    0.75 0.166667 0
+    0.0833334 0.166667 0
+    0.416667 0.166667 0
+    0.75 0.25 0
+    0.0833334 0.25 0
+    0.416667 0.25 0
+    -0.25 0.166667 0
+    -0.25 0.25 0
+    -0.25 0.166667 0
+endnode
+node trimesh Object14
+  parent Object13
+  position 0.000236502 -0.00274349 0.466348
+  orientation 0.212492 -0.925941 0.312217 -4.5322
+  wirecolor 0.694118 0.580392 0.101961 
+  tilefade 0
+  scale 1
+  render 0
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1
+  transparencyhint 0
+  selfillumcolor 0 0 0 
+  Diffuse 1 1 1 
+  Specular 0 0 0 
+  center 3.63858 2.236 24.1641 
+  ambient 0.588235 0.588235 0.588235 
+  diffuse 0.588235 0.588235 0.588235 
+  specular 0 0 0 
+  shininess 10.0
+  bitmap ttr01_leaf02
+  verts 6
+    0.0840437 -0.00124208 0.00469268
+    -0.0430974 0.0728361 0.00293428
+    -0.0409452 -0.0715925 -0.00761305
+    0.115869 0.0465918 0.490894
+    -0.00379326 0.116313 0.489239
+    -0.0017676 -0.0196203 0.479312
+  faces 6
+    0 4 3  8  6 4 7  3
+    0 1 4  8  8 1 4  3
+    1 5 4  8  1 5 4  3
+    1 2 5  8  1 2 5  3
+    2 3 5  8  2 3 5  3
+    2 0 3  8  2 0 3  3
+  tverts 9
+    0.75 0.25 0
+    0.0833334 0.25 0
+    0.416667 0.25 0
+    0.75 0.333333 0
+    0.0833334 0.333333 0
+    0.416667 0.333333 0
+    -0.25 0.25 0
+    -0.25 0.333333 0
+    -0.25 0.25 0
+endnode
+node trimesh Object15
+  parent Object14
+  position 0.0367695 0.0477613 0.486483
+  orientation -0.630222 -0.659228 0.410169 -5.50125
+  wirecolor 0.694118 0.580392 0.101961 
+  tilefade 0
+  scale 1
+  render 0
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1
+  transparencyhint 0
+  selfillumcolor 0 0 0 
+  Diffuse 1 1 1 
+  Specular 0 0 0 
+  center 1.77348 -0.144632 25.3875 
+  ambient 0.588235 0.588235 0.588235 
+  diffuse 0.588235 0.588235 0.588235 
+  specular 0 0 0 
+  shininess 10.0
+  bitmap ttr01_leaf02
+  verts 4
+    0.0759503 0.00289293 0.00851896
+    -0.0354701 0.0660461 -0.0095323
+    -0.0404806 -0.0689387 0.0010097
+    0.0710013 -0.0507201 0.517281
+  faces 3
+    0 1 3  8  8 1 4  3
+    1 2 3  8  1 2 5  3
+    2 0 3  8  2 0 3  3
+  tverts 9
+    0.75 0.333333 0
+    0.0833334 0.333333 0
+    0.416667 0.333333 0
+    0.75 0.416667 0
+    0.0833334 0.416667 0
+    0.416667 0.416667 0
+    -0.25 0.333333 0
+    -0.25 0.416667 0
+    -0.25 0.333333 0
+endnode
+node danglymesh Plane25
+  parent Object15
+  position 0.0742879 -0.0403899 0.507028
+  orientation 0.864389 -0.177165 0.470579 -4.7068
+  wirecolor 0.0313726 0.431373 0.52549 
+  period 5.0
+  tightness 5.0
+  displacement 0.05
+  showdispl true
+  displtype 1
+  center 32.4168 26.6127 9.8558 
+  tilefade 0
+  scale 1
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1
+  transparencyhint 0
+  selfillumcolor 0 0 0 
+  Diffuse 1 1 1 
+  Specular 0 0 0 
+  center 32.4168 26.6127 9.8558 
+  ambient 0.588235 0.588235 0.588235 
+  diffuse 0.588235 0.588235 0.588235 
+  specular 0 0 0 
+  shininess 10.0
+  bitmap ttf01_plants
+  verts 4
+    0 0 0
+    0.206198 0.057799 0.197117
+    0.0116606 0.203176 0.127644
+    0.64834 0.532257 0.189043
+  faces 4
+    0 1 3  1  0 1 3  1
+    3 2 0  1  3 2 0  1
+    1 0 3  0  1 0 3  1
+    3 0 2  0  3 0 2  1
+  tverts 8
+    -0.00504571 0.320855 0
+    0.0426639 -0.00983971 0
+    0.204995 0.504565 0
+    1.01434 0.11153 0
+    -0.00504571 0.320855 0
+    0.0426639 -0.00983971 0
+    0.204995 0.504565 0
+    1.01434 0.11153 0
+  constraints 4
+    0
+    30.0
+    30.0
+    90.0
+endnode
+node danglymesh Plane26
+  parent Plane25
+  position 0 0 0
+  orientation -0.234906 0.212455 0.948516 -5.87594
+  wirecolor 0.0313726 0.431373 0.52549 
+  period 5.0
+  tightness 5.0
+  displacement 0.05
+  showdispl true
+  displtype 1
+  center 31.4061 26.3281 10.6428 
+  tilefade 0
+  scale 1
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1
+  transparencyhint 0
+  selfillumcolor 0 0 0 
+  Diffuse 1 1 1 
+  Specular 0 0 0 
+  center 31.4061 26.3281 10.6428 
+  ambient 0.588235 0.588235 0.588235 
+  diffuse 0.588235 0.588235 0.588235 
+  specular 0 0 0 
+  shininess 10.0
+  bitmap ttf01_plants
+  verts 4
+    0 0 0
+    0.254232 -0.00733936 0.0631359
+    0.00787276 0.208775 0.131769
+    0.628125 0.533902 0.212858
+  faces 4
+    0 1 3  1  0 1 3  1
+    3 2 0  1  3 2 0  1
+    1 0 3  0  1 0 3  1
+    3 0 2  0  3 0 2  1
+  tverts 8
+    -0.00504571 0.320855 0
+    0.0426639 -0.00983971 0
+    0.204995 0.504565 0
+    1.01434 0.11153 0
+    -0.00504571 0.320855 0
+    0.0426639 -0.00983971 0
+    0.204995 0.504565 0
+    1.01434 0.11153 0
+  constraints 4
+    0
+    30.0
+    30.0
+    90.0
+endnode
+node danglymesh Plane27
+  parent Plane26
+  position 0 0 0
+  orientation 0.234908 -0.212457 -0.948515 -0.407243
+  wirecolor 0.0313726 0.431373 0.52549 
+  period 5.0
+  tightness 5.0
+  displacement 0.05
+  showdispl true
+  displtype 1
+  center 30.5668 26.3944 11.4562 
+  tilefade 0
+  scale 1
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1
+  transparencyhint 0
+  selfillumcolor 0 0 0 
+  Diffuse 1 1 1 
+  Specular 0 0 0 
+  center 30.5668 26.3944 11.4562 
+  ambient 0.588235 0.588235 0.588235 
+  diffuse 0.588235 0.588235 0.588235 
+  specular 0 0 0 
+  shininess 10.0
+  bitmap ttf01_plants
+  verts 4
+    0 0 0
+    0.251825 -0.0111584 0.0663971
+    0.00546327 0.214023 0.133748
+    0.61134 0.539047 0.229126
+  faces 4
+    0 1 3  1  0 1 3  1
+    3 2 0  1  3 2 0  1
+    1 0 3  0  1 0 3  1
+    3 0 2  0  3 0 2  1
+  tverts 8
+    -0.00504571 0.320855 0
+    0.0426639 -0.00983971 0
+    0.204995 0.504565 0
+    1.01434 0.11153 0
+    -0.00504571 0.320855 0
+    0.0426639 -0.00983971 0
+    0.204995 0.504565 0
+    1.01434 0.11153 0
+  constraints 4
+    0
+    30.0
+    30.0
+    90.0
+endnode
+node danglymesh Plane28
+  parent Plane27
+  position 0 0 0
+  orientation 0.234905 -0.212456 -0.948516 -0.407244
+  wirecolor 0.0313726 0.431373 0.52549 
+  period 5.0
+  tightness 5.0
+  displacement 0.05
+  showdispl true
+  displtype 1
+  center 29.9928 26.1314 11.9051 
+  tilefade 0
+  scale 1
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1
+  transparencyhint 0
+  selfillumcolor 0 0 0 
+  Diffuse 1 1 1 
+  Specular 0 0 0 
+  center 29.9928 26.1314 11.9051 
+  ambient 0.588235 0.588235 0.588235 
+  diffuse 0.588235 0.588235 0.588235 
+  specular 0 0 0 
+  shininess 10.0
+  bitmap ttf01_plants
+  verts 4
+    0 0 0
+    0.250992 -0.0143526 0.0703986
+    0.00348548 0.215636 0.133355
+    0.59986 0.536981 0.238104
+  faces 4
+    0 1 3  1  0 1 3  1
+    3 2 0  1  3 2 0  1
+    1 0 3  0  1 0 3  1
+    3 0 2  0  3 0 2  1
+  tverts 8
+    -0.00504571 0.320855 0
+    0.0426639 -0.00983971 0
+    0.204995 0.504565 0
+    1.01434 0.11153 0
+    -0.00504571 0.320855 0
+    0.0426639 -0.00983971 0
+    0.204995 0.504565 0
+    1.01434 0.11153 0
+  constraints 4
+    0
+    30.0
+    30.0
+    90.0
+endnode
+node danglymesh Plane29
+  parent Plane28
+  position 0 0 0
+  orientation 0.234908 -0.212456 -0.948515 -0.407244
+  wirecolor 0.0313726 0.431373 0.52549 
+  period 5.0
+  tightness 5.0
+  displacement 0.05
+  showdispl true
+  displtype 1
+  center 29.184 26.3022 12.4111 
+  tilefade 0
+  scale 1
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1
+  transparencyhint 0
+  selfillumcolor 0 0 0 
+  Diffuse 1 1 1 
+  Specular 0 0 0 
+  center 29.184 26.3022 12.4111 
+  ambient 0.588235 0.588235 0.588235 
+  diffuse 0.588235 0.588235 0.588235 
+  specular 0 0 0 
+  shininess 10.0
+  bitmap ttf01_plants
+  verts 4
+    0 0 0
+    0.247863 -0.017867 0.0744309
+    0.00187234 0.220466 0.132655
+    0.583683 0.54391 0.248222
+  faces 4
+    0 1 3  1  0 1 3  1
+    3 2 0  1  3 2 0  1
+    1 0 3  0  1 0 3  1
+    3 0 2  0  3 0 2  1
+  tverts 8
+    -0.00504571 0.320855 0
+    0.0426639 -0.00983971 0
+    0.204995 0.504565 0
+    1.01434 0.11153 0
+    -0.00504571 0.320855 0
+    0.0426639 -0.00983971 0
+    0.204995 0.504565 0
+    1.01434 0.11153 0
+  constraints 4
+    0
+    30.0
+    30.0
+    90.0
+endnode
+node danglymesh Plane30
+  parent Plane29
+  position 0 0 0
+  orientation 0.234907 -0.212456 -0.948515 -0.407243
+  wirecolor 0.0313726 0.431373 0.52549 
+  period 5.0
+  tightness 5.0
+  displacement 0.05
+  showdispl true
+  displtype 1
+  center 28.4764 26.6055 12.7078 
+  tilefade 0
+  scale 1
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1
+  transparencyhint 0
+  selfillumcolor 0 0 0 
+  Diffuse 1 1 1 
+  Specular 0 0 0 
+  center 28.4764 26.6055 12.7078 
+  ambient 0.588235 0.588235 0.588235 
+  diffuse 0.588235 0.588235 0.588235 
+  specular 0 0 0 
+  shininess 10.0
+  bitmap ttf01_plants
+  verts 4
+    0 0 0
+    0.24435 -0.0206217 0.0782632
+    0.00108187 0.225002 0.130744
+    0.569531 0.552732 0.254158
+  faces 4
+    0 1 3  1  0 1 3  1
+    3 2 0  1  3 2 0  1
+    1 0 3  0  1 0 3  1
+    3 0 2  0  3 0 2  1
+  tverts 8
+    -0.00504571 0.320855 0
+    0.0426639 -0.00983971 0
+    0.204995 0.504565 0
+    1.01434 0.11153 0
+    -0.00504571 0.320855 0
+    0.0426639 -0.00983971 0
+    0.204995 0.504565 0
+    1.01434 0.11153 0
+  constraints 4
+    0
+    30.0
+    30.0
+    90.0
+endnode
+node danglymesh Plane31
+  parent Plane25
+  position 0 0 0
+  orientation -0.547216 0.77759 -0.309692 -3.14159
+  wirecolor 0.0313726 0.431373 0.52549 
+  period 5.0
+  tightness 5.0
+  displacement 0.05
+  showdispl true
+  displtype 1
+  center -23.6848 -35.2113 -5.10864 
+  tilefade 0
+  scale 1
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1
+  transparencyhint 0
+  selfillumcolor 0 0 0 
+  Diffuse 1 1 1 
+  Specular 0 0 0 
+  center -23.6848 -35.2113 -5.10864 
+  ambient 0.588235 0.588235 0.588235 
+  diffuse 0.588235 0.588235 0.588235 
+  specular 0 0 0 
+  shininess 10.0
+  bitmap ttf01_plants
+  verts 4
+    0 0 0
+    -0.169261 0.0181544 -0.0436711
+    -0.0153608 -0.269854 -0.102173
+    -0.473698 -0.72238 -0.0712078
+  faces 4
+    1 0 3  1  1 0 3  1
+    2 3 0  1  2 3 0  1
+    0 1 3  0  0 1 3  1
+    0 3 2  0  0 3 2  1
+  tverts 8
+    -0.00504571 0.320855 0
+    0.0426639 -0.00983971 0
+    0.204995 0.504565 0
+    1.01434 0.11153 0
+    -0.00504571 0.320855 0
+    0.0426639 -0.00983971 0
+    0.204995 0.504565 0
+    1.01434 0.11153 0
+  constraints 4
+    0
+    30.0
+    30.0
+    90.0
+endnode
+node danglymesh Plane32
+  parent Plane31
+  position 0 0 0
+  orientation -0.234907 0.212458 0.948515 -5.87594
+  wirecolor 0.0313726 0.431373 0.52549 
+  period 5.0
+  tightness 5.0
+  displacement 0.05
+  showdispl true
+  displtype 1
+  center -24.212 -35.3877 -4.978 
+  tilefade 0
+  scale 1
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1
+  transparencyhint 0
+  selfillumcolor 0 0 0 
+  Diffuse 1 1 1 
+  Specular 0 0 0 
+  center -24.212 -35.3877 -4.978 
+  ambient 0.588235 0.588235 0.588235 
+  diffuse 0.588235 0.588235 0.588235 
+  specular 0 0 0 
+  shininess 10.0
+  bitmap ttf01_plants
+  verts 4
+    0 0 0
+    -0.17039 0.0168891 -0.0375329
+    -0.0163136 -0.268866 -0.0995602
+    -0.484243 -0.724643 -0.0510565
+  faces 4
+    1 0 3  1  1 0 3  1
+    2 3 0  1  2 3 0  1
+    0 1 3  0  0 1 3  1
+    0 3 2  0  0 3 2  1
+  tverts 8
+    -0.00504571 0.320855 0
+    0.0426639 -0.00983971 0
+    0.204995 0.504565 0
+    1.01434 0.11153 0
+    -0.00504571 0.320855 0
+    0.0426639 -0.00983971 0
+    0.204995 0.504565 0
+    1.01434 0.11153 0
+  constraints 4
+    0
+    30.0
+    30.0
+    90.0
+endnode
+node danglymesh Plane33
+  parent Plane32
+  position 0 0 0
+  orientation -0.234906 0.212454 0.948516 -5.87594
+  wirecolor 0.0313726 0.431373 0.52549 
+  period 5.0
+  tightness 5.0
+  displacement 0.05
+  showdispl true
+  displtype 1
+  center -24.8197 -35.5216 -4.84722 
+  tilefade 0
+  scale 1
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1
+  transparencyhint 0
+  selfillumcolor 0 0 0 
+  Diffuse 1 1 1 
+  Specular 0 0 0 
+  center -24.8197 -35.5216 -4.84722 
+  ambient 0.588235 0.588235 0.588235 
+  diffuse 0.588235 0.588235 0.588235 
+  specular 0 0 0 
+  shininess 10.0
+  bitmap ttf01_plants
+  verts 4
+    0 0 0
+    -0.172372 0.0155546 -0.0315354
+    -0.0171876 -0.267568 -0.0969446
+    -0.496396 -0.725987 -0.031865
+  faces 4
+    1 0 3  1  1 0 3  1
+    2 3 0  1  2 3 0  1
+    0 1 3  0  0 1 3  1
+    0 3 2  0  0 3 2  1
+  tverts 8
+    -0.00504571 0.320855 0
+    0.0426639 -0.00983971 0
+    0.204995 0.504565 0
+    1.01434 0.11153 0
+    -0.00504571 0.320855 0
+    0.0426639 -0.00983971 0
+    0.204995 0.504565 0
+    1.01434 0.11153 0
+  constraints 4
+    0
+    30.0
+    30.0
+    90.0
+endnode
+node danglymesh Plane34
+  parent Plane33
+  position 0 0 0
+  orientation -0.234908 0.212455 0.948515 -5.87594
+  wirecolor 0.0313726 0.431373 0.52549 
+  period 5.0
+  tightness 5.0
+  displacement 0.05
+  showdispl true
+  displtype 1
+  center -25.6568 -35.6161 -4.67885 
+  tilefade 0
+  scale 1
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1
+  transparencyhint 0
+  selfillumcolor 0 0 0 
+  Diffuse 1 1 1 
+  Specular 0 0 0 
+  center -25.6568 -35.6161 -4.67885 
+  ambient 0.588235 0.588235 0.588235 
+  diffuse 0.588235 0.588235 0.588235 
+  specular 0 0 0 
+  shininess 10.0
+  bitmap ttf01_plants
+  verts 4
+    0 0 0
+    -0.17597 0.0141836 -0.0237354
+    -0.0178993 -0.265838 -0.093577
+    -0.513138 -0.726505 -0.00800211
+  faces 4
+    1 0 3  1  1 0 3  1
+    2 3 0  1  2 3 0  1
+    0 1 3  0  0 1 3  1
+    0 3 2  0  0 3 2  1
+  tverts 8
+    -0.00504571 0.320855 0
+    0.0426639 -0.00983971 0
+    0.204995 0.504565 0
+    1.01434 0.11153 0
+    -0.00504571 0.320855 0
+    0.0426639 -0.00983971 0
+    0.204995 0.504565 0
+    1.01434 0.11153 0
+  constraints 4
+    0
+    30.0
+    30.0
+    90.0
+endnode
+node danglymesh Plane35
+  parent Plane34
+  position 0 0 0
+  orientation -0.234906 0.212457 0.948515 -5.87594
+  wirecolor 0.0313726 0.431373 0.52549 
+  period 5.0
+  tightness 5.0
+  displacement 0.05
+  showdispl true
+  displtype 1
+  center -26.4058 -35.6286 -4.05554 
+  tilefade 0
+  scale 1
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1
+  transparencyhint 0
+  selfillumcolor 0 0 0 
+  Diffuse 1 1 1 
+  Specular 0 0 0 
+  center -26.4058 -35.6286 -4.05554 
+  ambient 0.588235 0.588235 0.588235 
+  diffuse 0.588235 0.588235 0.588235 
+  specular 0 0 0 
+  shininess 10.0
+  bitmap ttf01_plants
+  verts 4
+    0 0 0
+    -0.179778 0.0130847 -0.0177402
+    -0.0183538 -0.264096 -0.0909279
+    -0.528118 -0.725657 0.00981698
+  faces 4
+    1 0 3  1  1 0 3  1
+    2 3 0  1  2 3 0  1
+    0 1 3  0  0 1 3  1
+    0 3 2  0  0 3 2  1
+  tverts 8
+    -0.00504571 0.320855 0
+    0.0426639 -0.00983971 0
+    0.204995 0.504565 0
+    1.01434 0.11153 0
+    -0.00504571 0.320855 0
+    0.0426639 -0.00983971 0
+    0.204995 0.504565 0
+    1.01434 0.11153 0
+  constraints 4
+    0
+    30.0
+    30.0
+    90.0
+endnode
+node skin Cylinder03
+  parent TIN01_B13_03
+  position -0.935 0.746932 0
+  orientation -1 0 0 0
+  wirecolor 0.345098 0.780392 0.882353 
+  tilefade 0
+  scale 1
+  render 1
+  Shadow 0
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1
+  transparencyhint 0
+  selfillumcolor 0 0 0 
+  Diffuse 1 1 1 
+  Specular 0 0 0 
+  center 56.1273 -58.2752 54.2482 
+  ambient 0.588235 0.588235 0.588235 
+  diffuse 0.588235 0.588235 0.588235 
+  specular 0 0 0 
+  shininess 10.0
+  bitmap ttr01_leaf02
+  verts 18
+    0.08 -0.552975 0
+    -0.04 -0.483693 0
+    -0.04 -0.622257 0
+    0.0516702 -0.526237 0.448994
+    -0.0659297 -0.460718 0.466802
+    -0.0659297 -0.591756 0.431185
+    0.133172 -0.52708 0.863744
+    0.0527189 -0.464899 0.940632
+    0.0360649 -0.589261 0.918101
+    0.50035 -0.608641 0.986609
+    0.503351 -0.551829 1.08496
+    0.503351 -0.665452 1.08496
+    0.7176 -0.639032 0.604209
+    0.718702 -0.59192 0.685802
+    0.718702 -0.686143 0.685802
+    1.18848 -0.670145 0.977725
+    1.13717 -0.635504 1.00884
+    1.13717 -0.704786 1.00884
+  faces 30
+    0 4 3  8  21 5 22  3
+    0 1 4  8  23 2 5  3
+    1 5 4  8  2 6 5  3
+    1 2 5  8  2 3 6  3
+    2 3 5  8  3 4 6  3
+    2 0 3  8  3 1 4  3
+    3 7 6  8  24 8 25  3
+    3 4 7  8  26 5 8  3
+    4 8 7  8  5 9 8  3
+    4 5 8  8  5 6 9  3
+    5 6 8  8  6 7 9  3
+    5 3 6  8  6 4 7  3
+    6 10 9  8  27 11 28  3
+    6 7 10  8  29 8 11  3
+    7 11 10  8  8 12 11  3
+    7 8 11  8  8 9 12  3
+    8 9 11  8  9 10 12  3
+    8 6 9  8  9 7 10  3
+    9 13 12  8  30 14 31  3
+    9 10 13  8  32 11 14  3
+    10 14 13  8  11 15 14  3
+    10 11 14  8  11 12 15  3
+    11 12 14  8  12 13 15  3
+    11 9 12  8  12 10 13  3
+    12 16 15  8  33 17 34  3
+    12 13 16  8  35 14 17  3
+    13 17 16  8  14 18 17  3
+    13 14 17  8  14 15 18  3
+    14 15 17  8  15 16 18  3
+    14 12 15  8  15 13 16  3
+  tverts 37
+    0.5 0 0
+    0.75 0 0
+    0.0833334 0 0
+    0.416667 0 0
+    0.75 0.1 0
+    0.0833334 0.1 0
+    0.416667 0.1 0
+    0.75 0.2 0
+    0.0833334 0.2 0
+    0.416667 0.2 0
+    0.75 0.3 0
+    0.0833334 0.3 0
+    0.416667 0.3 0
+    0.75 0.4 0
+    0.0833334 0.4 0
+    0.416667 0.4 0
+    0.75 0.5 0
+    0.0833334 0.5 0
+    0.416667 0.5 0
+    0.5 0.5 0
+    -0.25 0 0
+    -0.25 0 0
+    -0.25 0.1 0
+    -0.25 0 0
+    -0.25 0.1 0
+    -0.25 0.2 0
+    -0.25 0.1 0
+    -0.25 0.2 0
+    -0.25 0.3 0
+    -0.25 0.2 0
+    -0.25 0.3 0
+    -0.25 0.4 0
+    -0.25 0.3 0
+    -0.25 0.4 0
+    -0.25 0.5 0
+    -0.25 0.4 0
+    -0.25 0.5 0
+  weights 18
+     Object06 1 
+     Object06 1 
+     Object06 1 
+     Object06 0.5  Object07 0.5 
+     Object06 0.550773  Object07 0.449227 
+     Object06 0.538064  Object07 0.461936 
+     Object07 0.507484  Object08 0.492516 
+     Object07 0.537327  Object08 0.462673 
+     Object07 0.445646  Object08 0.554354 
+     Object08 0.5  Object09 0.5 
+     Object08 0.377193  Object09 0.622807 
+     Object08 0.494372  Object09 0.505628 
+     Object09 0.5  Object10 0.5 
+     Object09 0.800484  Object10 0.199516 
+     Object09 0.705374  Object10 0.294626 
+     Object10 1 
+     Object10 1 
+     Object10 1 
+endnode
+node skin Cylinder04
+  parent TIN01_B13_03
+  position 0.907797 -0.503 0
+  orientation 0 0 1 -3.14159
+  wirecolor 0.345098 0.780392 0.882353 
+  tilefade 0
+  scale 1
+  render 1
+  Shadow 0
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1
+  transparencyhint 0
+  selfillumcolor 0 0 0 
+  Diffuse 1 1 1 
+  Specular 0 0 0 
+  center 54.7839 -67.1819 68.4285 
+  ambient 0.588235 0.588235 0.588235 
+  diffuse 0.588235 0.588235 0.588235 
+  specular 0 0 0 
+  shininess 10.0
+  bitmap ttr01_leaf02
+  verts 18
+    0.08 -0.552975 0
+    -0.04 -0.483693 0
+    -0.04 -0.622257 0
+    0.127298 -0.526237 0.448994
+    0.00969801 -0.460718 0.466802
+    0.00969802 -0.591756 0.431185
+    0.395613 -0.653915 0.652012
+    0.375682 -0.591734 0.761498
+    0.348968 -0.716096 0.75305
+    0.741867 -0.774782 0.42359
+    0.744868 -0.717971 0.521944
+    0.744868 -0.831594 0.521944
+    1.06922 -0.835808 0.826439
+    0.996783 -0.788697 0.864011
+    0.996783 -0.88292 0.864011
+    1.13568 -0.74409 1.36264
+    1.07597 -0.709449 1.36857
+    1.07597 -0.778731 1.36857
+  faces 30
+    0 4 3  8  21 5 22  3
+    0 1 4  8  23 2 5  3
+    1 5 4  8  2 6 5  3
+    1 2 5  8  2 3 6  3
+    2 3 5  8  3 4 6  3
+    2 0 3  8  3 1 4  3
+    3 7 6  8  24 8 25  3
+    3 4 7  8  26 5 8  3
+    4 8 7  8  5 9 8  3
+    4 5 8  8  5 6 9  3
+    5 6 8  8  6 7 9  3
+    5 3 6  8  6 4 7  3
+    6 10 9  8  27 11 28  3
+    6 7 10  8  29 8 11  3
+    7 11 10  8  8 12 11  3
+    7 8 11  8  8 9 12  3
+    8 9 11  8  9 10 12  3
+    8 6 9  8  9 7 10  3
+    9 13 12  8  30 14 31  3
+    9 10 13  8  32 11 14  3
+    10 14 13  8  11 15 14  3
+    10 11 14  8  11 12 15  3
+    11 12 14  8  12 13 15  3
+    11 9 12  8  12 10 13  3
+    12 16 15  8  33 17 34  3
+    12 13 16  8  35 14 17  3
+    13 17 16  8  14 18 17  3
+    13 14 17  8  14 15 18  3
+    14 15 17  8  15 16 18  3
+    14 12 15  8  15 13 16  3
+  tverts 37
+    0.5 0 0
+    0.75 0 0
+    0.0833334 0 0
+    0.416667 0 0
+    0.75 0.1 0
+    0.0833334 0.1 0
+    0.416667 0.1 0
+    0.75 0.2 0
+    0.0833334 0.2 0
+    0.416667 0.2 0
+    0.75 0.3 0
+    0.0833334 0.3 0
+    0.416667 0.3 0
+    0.75 0.4 0
+    0.0833334 0.4 0
+    0.416667 0.4 0
+    0.75 0.5 0
+    0.0833334 0.5 0
+    0.416667 0.5 0
+    0.5 0.5 0
+    -0.25 0 0
+    -0.25 0 0
+    -0.25 0.1 0
+    -0.25 0 0
+    -0.25 0.1 0
+    -0.25 0.2 0
+    -0.25 0.1 0
+    -0.25 0.2 0
+    -0.25 0.3 0
+    -0.25 0.2 0
+    -0.25 0.3 0
+    -0.25 0.4 0
+    -0.25 0.3 0
+    -0.25 0.4 0
+    -0.25 0.5 0
+    -0.25 0.4 0
+    -0.25 0.5 0
+  weights 18
+     Object11 1 
+     Object11 1 
+     Object11 1 
+     Object11 0.5  Object12 0.5 
+     Object11 0.534494  Object12 0.465506 
+     Object11 0.477083  Object12 0.522917 
+     Object12 0.5  Object13 0.5 
+     Object12 0.54084  Object13 0.45916 
+     Object12 0.411596  Object13 0.588404 
+     Object13 0.5  Object14 0.5 
+     Object13 0.42002  Object14 0.579981 
+     Object13 0.399652  Object14 0.600348 
+     Object14 0.5  Object15 0.5 
+     Object14 0.576511  Object15 0.423489 
+     Object14 0.665678  Object15 0.334322 
+     Object15 1 
+     Object15 1 
+     Object15 1 
+endnode
+endmodelgeom gn_door24
+
+#NWmax ANIM ASCII
+newanim trans gn_door24
+  length 0.0333333
+  transtime 0
+  animroot gn_door24
+    node dummy gn_door24
+        parent NULL
+    endnode
+    node emitter fire!07
+        parent gn_door24
+    endnode
+    node trimesh sam
+        parent gn_door24
+        alphakey
+            0 0.25 
+            0.0333333 0.25 
+        endlist
+    endnode
+    node dummy GN_Door24_DWK
+        parent gn_door24
+    endnode
+    node dummy 24_DWK_dp_closed_01
+        parent GN_Door24_DWK
+    endnode
+    node dummy 24_DWK_dp_closed_02
+        parent GN_Door24_DWK
+    endnode
+    node dummy 24_DWK_dp_open1_01
+        parent GN_Door24_DWK
+    endnode
+    node dummy 24_DWK_dp_open2_01
+        parent GN_Door24_DWK
+    endnode
+    node dwk 24_DWK_wg_closed
+        parent GN_Door24_DWK
+    endnode
+    node dwk 24_DWK_wg_open1
+        parent GN_Door24_DWK
+    endnode
+    node dwk 24_DWK_wg_open2
+        parent GN_Door24_DWK
+    endnode
+    node dummy GN_Door24grnd
+        parent gn_door24
+    endnode
+    node dummy GN_Door24head
+        parent gn_door24
+    endnode
+    node dummy GN_Door24hhit
+        parent gn_door24
+    endnode
+    node dummy GN_Door24impc
+        parent gn_door24
+    endnode
+    node dummy TIN01_B13_03
+        parent gn_door24
+    endnode
+    node trimesh Object01
+        parent TIN01_B13_03
+    endnode
+    node trimesh Object02
+        parent Object01
+    endnode
+    node trimesh Object03
+        parent Object02
+    endnode
+    node trimesh Object04
+        parent Object03
+    endnode
+    node trimesh Object05
+        parent Object04
+    endnode
+    node danglymesh Plane08
+        parent Object05
+    endnode
+    node danglymesh Plane07
+        parent Plane08
+    endnode
+    node danglymesh Plane06
+        parent Plane07
+    endnode
+    node danglymesh Plane05
+        parent Plane06
+    endnode
+    node danglymesh Plane04
+        parent Plane05
+    endnode
+    node danglymesh Plane01
+        parent Plane04
+    endnode
+    node danglymesh Plane13
+        parent Plane08
+    endnode
+    node danglymesh Plane12
+        parent Plane13
+    endnode
+    node danglymesh Plane11
+        parent Plane12
+    endnode
+    node danglymesh Plane10
+        parent Plane11
+    endnode
+    node danglymesh Plane09
+        parent Plane10
+    endnode
+    node trimesh Object06
+        parent TIN01_B13_03
+    endnode
+    node trimesh Object07
+        parent Object06
+    endnode
+    node trimesh Object08
+        parent Object07
+    endnode
+    node trimesh Object09
+        parent Object08
+    endnode
+    node trimesh Object10
+        parent Object09
+    endnode
+    node danglymesh Plane14
+        parent Object10
+    endnode
+    node danglymesh Plane15
+        parent Plane14
+    endnode
+    node danglymesh Plane16
+        parent Plane15
+    endnode
+    node danglymesh Plane17
+        parent Plane16
+    endnode
+    node danglymesh Plane18
+        parent Plane17
+    endnode
+    node danglymesh Plane19
+        parent Plane18
+    endnode
+    node danglymesh Plane20
+        parent Plane14
+    endnode
+    node danglymesh Plane21
+        parent Plane20
+    endnode
+    node danglymesh Plane22
+        parent Plane21
+    endnode
+    node danglymesh Plane23
+        parent Plane22
+    endnode
+    node danglymesh Plane24
+        parent Plane23
+    endnode
+    node trimesh Object11
+        parent TIN01_B13_03
+    endnode
+    node trimesh Object12
+        parent Object11
+    endnode
+    node trimesh Object13
+        parent Object12
+    endnode
+    node trimesh Object14
+        parent Object13
+    endnode
+    node trimesh Object15
+        parent Object14
+    endnode
+    node danglymesh Plane25
+        parent Object15
+    endnode
+    node danglymesh Plane26
+        parent Plane25
+    endnode
+    node danglymesh Plane27
+        parent Plane26
+    endnode
+    node danglymesh Plane28
+        parent Plane27
+    endnode
+    node danglymesh Plane29
+        parent Plane28
+    endnode
+    node danglymesh Plane30
+        parent Plane29
+    endnode
+    node danglymesh Plane31
+        parent Plane25
+    endnode
+    node danglymesh Plane32
+        parent Plane31
+    endnode
+    node danglymesh Plane33
+        parent Plane32
+    endnode
+    node danglymesh Plane34
+        parent Plane33
+    endnode
+    node danglymesh Plane35
+        parent Plane34
+    endnode
+doneanim trans gn_door24
+
+
+#NWmax ANIM ASCII
+newanim opening1 gn_door24
+  length 0.666667
+  transtime 0.25
+  animroot gn_door24
+    node dummy gn_door24
+        parent NULL
+    endnode
+    node emitter fire!07
+        parent gn_door24
+    endnode
+    node trimesh sam
+        parent gn_door24
+        alphakey
+            0 0 
+            0.666667 0 
+        endlist
+    endnode
+    node dummy GN_Door24_DWK
+        parent gn_door24
+    endnode
+    node dummy 24_DWK_dp_closed_01
+        parent GN_Door24_DWK
+    endnode
+    node dummy 24_DWK_dp_closed_02
+        parent GN_Door24_DWK
+    endnode
+    node dummy 24_DWK_dp_open1_01
+        parent GN_Door24_DWK
+    endnode
+    node dummy 24_DWK_dp_open2_01
+        parent GN_Door24_DWK
+    endnode
+    node dwk 24_DWK_wg_closed
+        parent GN_Door24_DWK
+    endnode
+    node dwk 24_DWK_wg_open1
+        parent GN_Door24_DWK
+    endnode
+    node dwk 24_DWK_wg_open2
+        parent GN_Door24_DWK
+    endnode
+    node dummy GN_Door24grnd
+        parent gn_door24
+    endnode
+    node dummy GN_Door24head
+        parent gn_door24
+    endnode
+    node dummy GN_Door24hhit
+        parent gn_door24
+    endnode
+    node dummy GN_Door24impc
+        parent gn_door24
+    endnode
+    node dummy TIN01_B13_03
+        parent gn_door24
+    endnode
+    node trimesh Object01
+        parent TIN01_B13_03
+        orientationkey
+            0 -0.92261 -0.385676 0.00665569 -0.303278
+            0.666667 -0.999621 0.0266536 0.00688101 0
+        endlist
+    endnode
+    node trimesh Object02
+        parent Object01
+        orientationkey
+            0 0.049703 -0.988503 -0.1428 -0.282008
+            0.633333 0.99661 -0.0711543 0.0413027 -0.363868
+            0.666667 -0.994198 0.107557 -0.000948247 -0.0143082
+        endlist
+    endnode
+    node trimesh Object03
+        parent Object02
+        orientationkey
+            0 0.316213 -0.875577 0.365204 -0.249226
+            0.5 0.845338 0.0907142 0.526474 -0.515615
+            0.666667 0.0469173 -0.255399 -0.965697 -0.0112442
+        endlist
+    endnode
+    node trimesh Object04
+        parent Object03
+        orientationkey
+            0 0.855393 0.275257 0.43879 -0.608879
+            0.333333 0.855001 0.506506 0.111468 -0.702611
+            0.666667 0.764771 -0.600405 0.233749 -0.341882
+        endlist
+    endnode
+    node trimesh Object05
+        parent Object04
+        orientationkey
+            0 -0.755952 0.590261 -0.28307 -0.760134
+            0.166667 -0.492281 0.648744 -0.580337 -0.720682
+            0.666667 -0.480658 -0.318752 -0.816924 -0.75956
+        endlist
+    endnode
+    node danglymesh Plane08
+        parent Object05
+        orientationkey
+            0 -0.867543 0.196082 -0.457079 -1.64192
+            0.666667 -0.929724 0.207112 -0.304496 -1.71795
+        endlist
+    endnode
+    node danglymesh Plane07
+        parent Plane08
+        orientationkey
+            0 0.234907 -0.212455 -0.948516 -0.407244
+            0.333333 -0.583387 -0.752422 -0.305812 -0.143315
+            0.666667 -0.583387 -0.752422 -0.305812 -0.143315
+        endlist
+    endnode
+    node danglymesh Plane06
+        parent Plane07
+        orientationkey
+            0 0.234907 -0.212456 -0.948515 -0.407243
+            0.333333 -0.623305 -0.727567 -0.286595 -0.118889
+            0.666667 0.623303 0.727569 0.286595 -6.1643
+        endlist
+    endnode
+    node danglymesh Plane05
+        parent Plane06
+        orientationkey
+            0 -0.234905 0.212456 0.948516 -5.87594
+            0.333333 -0.497399 -0.677769 -0.541501 -0.0798233
+            0.666667 0.497399 0.677772 0.541498 -6.20336
+        endlist
+    endnode
+    node danglymesh Plane04
+        parent Plane05
+        orientationkey
+            0 -0.234908 0.212456 0.948515 -5.87594
+            0.333333 -0.634652 -0.671973 -0.381667 -0.11879
+            0.666667 0.634651 0.671974 0.381666 -6.1644
+        endlist
+    endnode
+    node danglymesh Plane01
+        parent Plane04
+        orientationkey
+            0 -0.234907 0.212456 0.948515 -5.87594
+            0.333333 -0.651209 -0.642178 -0.404394 -0.113299
+            0.666667 0.651208 0.64218 0.404393 -6.16989
+        endlist
+    endnode
+    node danglymesh Plane13
+        parent Plane08
+        orientationkey
+            0 0.547216 -0.77759 0.309692 -3.14159
+            0.333333 0.641641 -0.665386 0.381522 -3.13381
+            0.666667 0.641641 -0.665386 0.381522 -3.13381
+        endlist
+    endnode
+    node danglymesh Plane12
+        parent Plane13
+        orientationkey
+            0 0.234907 -0.212457 -0.948515 -0.407244
+            0.333333 0.659168 0.684978 0.310326 -6.19164
+            0.666667 0.659167 0.684978 0.31033 -6.19164
+        endlist
+    endnode
+    node danglymesh Plane11
+        parent Plane12
+        orientationkey
+            0 -0.234906 0.212455 0.948516 -5.87594
+            0.333333 0.662459 0.666453 0.342035 -6.19492
+            0.666667 0.662457 0.666454 0.342038 -6.19492
+        endlist
+    endnode
+    node danglymesh Plane10
+        parent Plane11
+        orientationkey
+            0 -0.234908 0.212456 0.948515 -5.87594
+            0.333333 0.684152 0.643951 0.342437 -6.16754
+            0.666667 0.68415 0.643953 0.342437 -6.16754
+        endlist
+    endnode
+    node danglymesh Plane09
+        parent Plane10
+        orientationkey
+            0 -0.234906 0.212456 0.948515 -5.87594
+            0.333333 0.687663 0.620539 0.376895 -6.19184
+            0.666667 0.687662 0.620539 0.376897 -6.19184
+        endlist
+    endnode
+    node trimesh Object06
+        parent TIN01_B13_03
+        orientationkey
+            0 0 0 -1 -0.0143478
+            0.666667 -0.999586 -0.028676 0.00227172 0
+        endlist
+    endnode
+    node trimesh Object07
+        parent Object06
+        orientationkey
+            0 0.0135122 -0.649501 0.760241 -0.257142
+            0.633333 0.81204 0.0929542 0.576151 -0.463992
+            0.666667 0 0 0 0
+        endlist
+    endnode
+    node trimesh Object08
+        parent Object07
+        orientationkey
+            0 0.0934099 -0.986291 0.13603 -1.12635
+            0.5 0.523572 -0.837503 0.156402 -1.01036
+            0.666667 0 0 0 0
+        endlist
+    endnode
+    node trimesh Object09
+        parent Object08
+        orientationkey
+            0 0.252774 -0.953956 0.16147 -1.26822
+            0.333333 0.278394 -0.960154 0.024508 -1.03972
+            0.666667 0.0421462 -0.313091 0.948788 0
+        endlist
+    endnode
+    node trimesh Object10
+        parent Object09
+        orientationkey
+            0 0.140136 -0.989079 0.04567 -4.4997
+            0.166667 -0.0454359 -0.996733 0.0667685 -4.55743
+            0.666667 0.716574 -0.5964 -0.361702 -0.40249
+        endlist
+    endnode
+    node danglymesh Plane14
+        parent Object10
+        orientationkey
+            0 -0.867543 0.196082 -0.457079 -1.64192
+            0.666667 -0.781154 -0.344006 -0.521017 -2.14652
+        endlist
+    endnode
+    node danglymesh Plane15
+        parent Plane14
+        orientationkey
+            0 0.234907 -0.212455 -0.948516 -0.407244
+            0.333333 -0.583387 -0.752422 -0.305811 -0.143315
+            0.666667 0.583387 0.752423 0.30581 -6.13987
+        endlist
+    endnode
+    node danglymesh Plane16
+        parent Plane15
+        orientationkey
+            0 0.234908 -0.212457 -0.948515 -0.407243
+            0.333333 -0.623301 -0.72757 -0.286596 -0.118889
+            0.666667 0.623303 0.727569 0.286597 -6.1643
+        endlist
+    endnode
+    node danglymesh Plane17
+        parent Plane16
+        orientationkey
+            0 0.234906 -0.212456 -0.948516 -0.407244
+            0.333333 -0.497396 -0.677773 -0.541499 -0.0798232
+            0.666667 0.497397 0.677772 0.541499 -6.20336
+        endlist
+    endnode
+    node danglymesh Plane18
+        parent Plane17
+        orientationkey
+            0 0.234908 -0.212455 -0.948515 -0.407244
+            0.333333 -0.634652 -0.671972 -0.381667 -0.11879
+            0.666667 0.634652 0.671972 0.381668 -6.1644
+        endlist
+    endnode
+    node danglymesh Plane19
+        parent Plane18
+        orientationkey
+            0 0.234907 -0.212456 -0.948515 -0.407243
+            0.333333 0.651208 0.642179 0.404395 -6.16989
+            0.666667 0.651208 0.642178 0.404395 -6.16989
+        endlist
+    endnode
+    node danglymesh Plane20
+        parent Plane14
+        orientationkey
+            0 0.547216 -0.77759 0.309692 -3.14159
+            0.333333 0.641641 -0.665385 0.381522 -3.13381
+            0.666667 -0.641641 0.665386 -0.381522 -3.14937
+        endlist
+    endnode
+    node danglymesh Plane21
+        parent Plane20
+        orientationkey
+            0 -0.234907 0.212458 0.948515 -5.87594
+            0.333333 0.659167 0.684979 0.310327 -6.19164
+            0.666667 0.659168 0.684978 0.310326 -6.19164
+        endlist
+    endnode
+    node danglymesh Plane22
+        parent Plane21
+        orientationkey
+            0 -0.234906 0.212456 0.948516 -5.87594
+            0.333333 0.66246 0.666455 0.342031 -6.19492
+            0.666667 0.662459 0.666456 0.34203 -6.19492
+        endlist
+    endnode
+    node danglymesh Plane23
+        parent Plane22
+        orientationkey
+            0 -0.234908 0.212456 0.948515 -5.87594
+            0.333333 0.684151 0.643951 0.342438 -6.16754
+            0.666667 0.684152 0.643952 0.342435 -6.16754
+        endlist
+    endnode
+    node danglymesh Plane24
+        parent Plane23
+        orientationkey
+            0 -0.234906 0.212457 0.948515 -5.87594
+            0.333333 0.687664 0.620539 0.376894 -6.19184
+            0.666667 0.687665 0.620539 0.376893 -6.19184
+        endlist
+    endnode
+    node trimesh Object11
+        parent TIN01_B13_03
+        orientationkey
+            0 -0.0611154 0.00455383 0.99812 -2.99312
+            0.666667 0 0 1 -3.00619
+        endlist
+    endnode
+    node trimesh Object12
+        parent Object11
+        orientationkey
+            0 0.308753 0.850144 -0.426529 -5.38468
+            0.633333 -0.183645 0.834505 -0.519496 -5.5712
+            0.666667 0 0 -1 -6.14219
+        endlist
+    endnode
+    node trimesh Object13
+        parent Object12
+        orientationkey
+            0 -0.265867 0.901277 -0.342075 -4.87674
+            0.333333 -0.297749 0.888806 -0.348381 -4.8847
+            0.5 -0.598262 0.747652 -0.28827 -4.88576
+            0.633333 0.321322 0.5347 -0.781568 -5.2659
+            0.666667 -0.037356 0.402992 -0.914441 -6.09335
+        endlist
+    endnode
+    node trimesh Object14
+        parent Object13
+        orientationkey
+            0 0.212492 -0.925941 0.312217 -4.5322
+            0.333333 0.389955 -0.606322 0.693042 -3.70015
+            0.666667 0.103748 0.0451397 0.993579 -1.43444
+        endlist
+    endnode
+    node trimesh Object15
+        parent Object14
+        orientationkey
+            0 -0.630222 -0.659228 0.410169 -5.50125
+            0.166667 -0.743712 -0.43678 0.506078 -5.31375
+            0.533333 0.779135 0.0950974 0.619601 -1.2062
+            0.666667 0.0550801 0.00517685 0.998469 -1.23673
+        endlist
+    endnode
+    node danglymesh Plane25
+        parent Object15
+        orientationkey
+            0 0.864389 -0.177165 0.470579 -4.7068
+            0.666667 -0.406582 0.274912 -0.871271 -2.32753
+        endlist
+    endnode
+    node danglymesh Plane26
+        parent Plane25
+        orientationkey
+            0 -0.234906 0.212455 0.948516 -5.87594
+            0.333333 -0.583387 -0.752423 -0.30581 -0.143315
+            0.666667 0.583387 0.752422 0.305811 -6.13987
+        endlist
+    endnode
+    node danglymesh Plane27
+        parent Plane26
+        orientationkey
+            0 0.234908 -0.212457 -0.948515 -0.407243
+            0.333333 -0.623303 -0.72757 -0.286594 -0.118889
+            0.666667 0.623303 0.727569 0.286596 -6.1643
+        endlist
+    endnode
+    node danglymesh Plane28
+        parent Plane27
+        orientationkey
+            0 0.234905 -0.212456 -0.948516 -0.407244
+            0.333333 -0.497399 -0.677771 -0.541498 -0.0798234
+            0.666667 0.497399 0.67777 0.541499 -6.20336
+        endlist
+    endnode
+    node danglymesh Plane29
+        parent Plane28
+        orientationkey
+            0 0.234908 -0.212456 -0.948515 -0.407244
+            0.333333 -0.634652 -0.671973 -0.381666 -0.11879
+            0.666667 0.634651 0.671973 0.381668 -6.1644
+        endlist
+    endnode
+    node danglymesh Plane30
+        parent Plane29
+        orientationkey
+            0 0.234907 -0.212456 -0.948515 -0.407243
+            0.333333 -0.651209 -0.642179 -0.404393 -0.113299
+            0.666667 0.651208 0.642179 0.404394 -6.16989
+        endlist
+    endnode
+    node danglymesh Plane31
+        parent Plane25
+        orientationkey
+            0 -0.547216 0.77759 -0.309692 -3.14159
+            0.333333 0.641641 -0.665386 0.381522 -3.13381
+            0.666667 -0.641641 0.665386 -0.381522 -3.14937
+        endlist
+    endnode
+    node danglymesh Plane32
+        parent Plane31
+        orientationkey
+            0 -0.234907 0.212458 0.948515 -5.87594
+            0.333333 0.659168 0.684979 0.310325 -6.19164
+            0.666667 -0.659167 -0.68498 -0.310326 -0.0915497
+        endlist
+    endnode
+    node danglymesh Plane33
+        parent Plane32
+        orientationkey
+            0 -0.234906 0.212454 0.948516 -5.87594
+            0.333333 0.662458 0.666454 0.342034 -6.19492
+            0.666667 -0.662456 -0.666456 -0.342036 -0.0882656
+        endlist
+    endnode
+    node danglymesh Plane34
+        parent Plane33
+        orientationkey
+            0 -0.234908 0.212455 0.948515 -5.87594
+            0.333333 0.684152 0.643951 0.342438 -6.16754
+            0.666667 -0.684151 -0.643951 -0.342439 -0.115647
+        endlist
+    endnode
+    node danglymesh Plane35
+        parent Plane34
+        orientationkey
+            0 -0.234906 0.212457 0.948515 -5.87594
+            0.333333 0.687664 0.620539 0.376894 -6.19184
+            0.666667 -0.687664 -0.620539 -0.376895 -0.0913452
+        endlist
+    endnode
+doneanim opening1 gn_door24
+
+
+#NWmax ANIM ASCII
+newanim opened1 gn_door24
+  length 0.0333333
+  transtime 0
+  animroot gn_door24
+    node dummy gn_door24
+        parent NULL
+    endnode
+    node emitter fire!07
+        parent gn_door24
+    endnode
+    node trimesh sam
+        parent gn_door24
+        alphakey
+            0 0 
+            0.0333333 0 
+        endlist
+    endnode
+    node dummy GN_Door24_DWK
+        parent gn_door24
+    endnode
+    node dummy 24_DWK_dp_closed_01
+        parent GN_Door24_DWK
+    endnode
+    node dummy 24_DWK_dp_closed_02
+        parent GN_Door24_DWK
+    endnode
+    node dummy 24_DWK_dp_open1_01
+        parent GN_Door24_DWK
+    endnode
+    node dummy 24_DWK_dp_open2_01
+        parent GN_Door24_DWK
+    endnode
+    node dwk 24_DWK_wg_closed
+        parent GN_Door24_DWK
+    endnode
+    node dwk 24_DWK_wg_open1
+        parent GN_Door24_DWK
+    endnode
+    node dwk 24_DWK_wg_open2
+        parent GN_Door24_DWK
+    endnode
+    node dummy GN_Door24grnd
+        parent gn_door24
+    endnode
+    node dummy GN_Door24head
+        parent gn_door24
+    endnode
+    node dummy GN_Door24hhit
+        parent gn_door24
+    endnode
+    node dummy GN_Door24impc
+        parent gn_door24
+    endnode
+    node dummy TIN01_B13_03
+        parent gn_door24
+    endnode
+    node trimesh Object01
+        parent TIN01_B13_03
+        orientationkey
+            0 -0.999621 0.0266536 0.00688101 0
+            0.0333333 -0.999621 0.0266536 0.00688101 0
+        endlist
+    endnode
+    node trimesh Object02
+        parent Object01
+        orientationkey
+            0 -0.994198 0.107557 -0.000948247 -0.0143082
+            0.0333333 -0.994198 0.107557 -0.000948247 -0.0143082
+        endlist
+    endnode
+    node trimesh Object03
+        parent Object02
+        orientationkey
+            0 0.0469173 -0.255399 -0.965697 -0.0112442
+            0.0333333 0.0469173 -0.255399 -0.965697 -0.0112442
+        endlist
+    endnode
+    node trimesh Object04
+        parent Object03
+        orientationkey
+            0 0.764771 -0.600405 0.233749 -0.341882
+            0.0333333 0.764772 -0.600405 0.233749 -0.341882
+        endlist
+    endnode
+    node trimesh Object05
+        parent Object04
+        orientationkey
+            0 -0.480659 -0.318752 -0.816924 -0.75956
+            0.0333333 -0.480659 -0.318752 -0.816924 -0.75956
+        endlist
+    endnode
+    node danglymesh Plane08
+        parent Object05
+        orientationkey
+            0 -0.929724 0.207112 -0.304496 -1.71795
+            0.0333333 -0.929724 0.207112 -0.304496 -1.71795
+        endlist
+    endnode
+    node danglymesh Plane07
+        parent Plane08
+        orientationkey
+            0 -0.583387 -0.752422 -0.305812 -0.143315
+            0.0333333 -0.583387 -0.752422 -0.305811 -0.143315
+        endlist
+    endnode
+    node danglymesh Plane06
+        parent Plane07
+        orientationkey
+            0 0.623302 0.72757 0.286595 -6.1643
+            0.0333333 0.623301 0.72757 0.286595 -6.1643
+        endlist
+    endnode
+    node danglymesh Plane05
+        parent Plane06
+        orientationkey
+            0 0.497399 0.677772 0.541498 -6.20336
+            0.0333333 0.497398 0.677773 0.541498 -6.20336
+        endlist
+    endnode
+    node danglymesh Plane04
+        parent Plane05
+        orientationkey
+            0 0.634651 0.671974 0.381666 -6.1644
+            0.0333333 0.63465 0.671975 0.381666 -6.1644
+        endlist
+    endnode
+    node danglymesh Plane01
+        parent Plane04
+        orientationkey
+            0 0.651208 0.64218 0.404393 -6.16989
+            0.0333333 0.651207 0.642181 0.404393 -6.16989
+        endlist
+    endnode
+    node danglymesh Plane13
+        parent Plane08
+        orientationkey
+            0 0.641641 -0.665386 0.381522 -3.13381
+            0.0333333 0.641641 -0.665386 0.381522 -3.13381
+        endlist
+    endnode
+    node danglymesh Plane12
+        parent Plane13
+        orientationkey
+            0 0.659167 0.684978 0.310329 -6.19164
+            0.0333333 0.659167 0.684978 0.310329 -6.19164
+        endlist
+    endnode
+    node danglymesh Plane11
+        parent Plane12
+        orientationkey
+            0 0.662458 0.666453 0.342037 -6.19492
+            0.0333333 0.662458 0.666453 0.342037 -6.19492
+        endlist
+    endnode
+    node danglymesh Plane10
+        parent Plane11
+        orientationkey
+            0 0.684151 0.643952 0.342437 -6.16754
+            0.0333333 0.684151 0.643952 0.342436 -6.16754
+        endlist
+    endnode
+    node danglymesh Plane09
+        parent Plane10
+        orientationkey
+            0 0.687663 0.62054 0.376896 -6.19184
+            0.0333333 0.687661 0.620541 0.376896 -6.19184
+        endlist
+    endnode
+    node trimesh Object06
+        parent TIN01_B13_03
+        orientationkey
+            0 -0.999586 -0.028676 0.00227172 0
+            0.0333333 -0.999586 -0.028676 0.00227172 0
+        endlist
+    endnode
+    node trimesh Object07
+        parent Object06
+        orientationkey
+            0 0 0 0 0
+            0.0333333 0 0 0 0
+        endlist
+    endnode
+    node trimesh Object08
+        parent Object07
+        orientationkey
+            0 0 0 0 0
+            0.0333333 0 0 0 0
+        endlist
+    endnode
+    node trimesh Object09
+        parent Object08
+        orientationkey
+            0 0.133013 -0.310585 0.941193 0
+            0.0333333 0.255566 -0.302963 0.918096 0
+        endlist
+    endnode
+    node trimesh Object10
+        parent Object09
+        orientationkey
+            0 0.716574 -0.5964 -0.361702 -0.40249
+            0.0333333 0.716574 -0.5964 -0.361702 -0.40249
+        endlist
+    endnode
+    node danglymesh Plane14
+        parent Object10
+        orientationkey
+            0 -0.781154 -0.344006 -0.521017 -2.14652
+            0.0333333 -0.781153 -0.344006 -0.521017 -2.14652
+        endlist
+    endnode
+    node danglymesh Plane15
+        parent Plane14
+        orientationkey
+            0 0.583388 0.752422 0.30581 -6.13987
+            0.0333333 0.583388 0.752422 0.305809 -6.13987
+        endlist
+    endnode
+    node danglymesh Plane16
+        parent Plane15
+        orientationkey
+            0 0.623302 0.727569 0.286597 -6.1643
+            0.0333333 0.623302 0.727569 0.286597 -6.1643
+        endlist
+    endnode
+    node danglymesh Plane17
+        parent Plane16
+        orientationkey
+            0 0.497397 0.677771 0.5415 -6.20336
+            0.0333333 0.497398 0.677772 0.541498 -6.20336
+        endlist
+    endnode
+    node danglymesh Plane18
+        parent Plane17
+        orientationkey
+            0 0.634651 0.671973 0.381668 -6.1644
+            0.0333333 0.634651 0.671973 0.381668 -6.1644
+        endlist
+    endnode
+    node danglymesh Plane19
+        parent Plane18
+        orientationkey
+            0 0.651208 0.642178 0.404396 -6.16989
+            0.0333333 0.651208 0.642177 0.404396 -6.16989
+        endlist
+    endnode
+    node danglymesh Plane20
+        parent Plane14
+        orientationkey
+            0 -0.641641 0.665386 -0.381522 -3.14937
+            0.0333333 -0.641641 0.665386 -0.381522 -3.14937
+        endlist
+    endnode
+    node danglymesh Plane21
+        parent Plane20
+        orientationkey
+            0 0.659168 0.684979 0.310325 -6.19164
+            0.0333333 0.659169 0.684977 0.310326 -6.19164
+        endlist
+    endnode
+    node danglymesh Plane22
+        parent Plane21
+        orientationkey
+            0 0.662458 0.666456 0.342031 -6.19492
+            0.0333333 0.662459 0.666456 0.34203 -6.19492
+        endlist
+    endnode
+    node danglymesh Plane23
+        parent Plane22
+        orientationkey
+            0 0.684152 0.643952 0.342436 -6.16754
+            0.0333333 0.684152 0.643952 0.342435 -6.16754
+        endlist
+    endnode
+    node danglymesh Plane24
+        parent Plane23
+        orientationkey
+            0 0.687665 0.620539 0.376893 -6.19184
+            0.0333333 0.687666 0.620539 0.376892 -6.19184
+        endlist
+    endnode
+    node trimesh Object11
+        parent TIN01_B13_03
+        orientationkey
+            0 0 0 1 -3.00619
+            0.0333333 0 0 1 -3.00619
+        endlist
+    endnode
+    node trimesh Object12
+        parent Object11
+        orientationkey
+            0 0 0 -1 -6.14219
+            0.0333333 0 0 -1 -6.14219
+        endlist
+    endnode
+    node trimesh Object13
+        parent Object12
+        orientationkey
+            0 -0.037356 0.402992 -0.914441 -6.09335
+            0.0333333 -0.037356 0.402992 -0.914441 -6.09335
+        endlist
+    endnode
+    node trimesh Object14
+        parent Object13
+        orientationkey
+            0 0.103748 0.0451397 0.993579 -1.43444
+            0.0333333 0.103748 0.0451397 0.993579 -1.43444
+        endlist
+    endnode
+    node trimesh Object15
+        parent Object14
+        orientationkey
+            0 0.0550801 0.00517687 0.998469 -1.23673
+            0.0333333 0.0550801 0.0051769 0.998469 -1.23673
+        endlist
+    endnode
+    node danglymesh Plane25
+        parent Object15
+        orientationkey
+            0 -0.406582 0.274912 -0.871271 -2.32753
+            0.0333333 -0.406582 0.274912 -0.871271 -2.32753
+        endlist
+    endnode
+    node danglymesh Plane26
+        parent Plane25
+        orientationkey
+            0 0.583387 0.752422 0.305811 -6.13987
+            0.0333333 0.583388 0.752422 0.305811 -6.13987
+        endlist
+    endnode
+    node danglymesh Plane27
+        parent Plane26
+        orientationkey
+            0 0.623303 0.727569 0.286596 -6.1643
+            0.0333333 0.623303 0.727569 0.286595 -6.1643
+        endlist
+    endnode
+    node danglymesh Plane28
+        parent Plane27
+        orientationkey
+            0 0.4974 0.67777 0.541499 -6.20336
+            0.0333333 0.497399 0.67777 0.541499 -6.20336
+        endlist
+    endnode
+    node danglymesh Plane29
+        parent Plane28
+        orientationkey
+            0 0.634651 0.671974 0.381668 -6.1644
+            0.0333333 0.63465 0.671974 0.381667 -6.1644
+        endlist
+    endnode
+    node danglymesh Plane30
+        parent Plane29
+        orientationkey
+            0 0.651208 0.642179 0.404394 -6.16989
+            0.0333333 0.651208 0.642179 0.404394 -6.16989
+        endlist
+    endnode
+    node danglymesh Plane31
+        parent Plane25
+        orientationkey
+            0 -0.641641 0.665386 -0.381522 -3.14937
+            0.0333333 -0.641641 0.665386 -0.381522 -3.14937
+        endlist
+    endnode
+    node danglymesh Plane32
+        parent Plane31
+        orientationkey
+            0 -0.659167 -0.684979 -0.310325 -0.0915498
+            0.0333333 -0.659167 -0.684979 -0.310326 -0.0915497
+        endlist
+    endnode
+    node danglymesh Plane33
+        parent Plane32
+        orientationkey
+            0 -0.662457 -0.666456 -0.342035 -0.0882656
+            0.0333333 -0.662458 -0.666455 -0.342035 -0.0882656
+        endlist
+    endnode
+    node danglymesh Plane34
+        parent Plane33
+        orientationkey
+            0 -0.684151 -0.643951 -0.342438 -0.115647
+            0.0333333 -0.684151 -0.643951 -0.342439 -0.115647
+        endlist
+    endnode
+    node danglymesh Plane35
+        parent Plane34
+        orientationkey
+            0 -0.687663 -0.620539 -0.376895 -0.0913453
+            0.0333333 -0.687664 -0.620539 -0.376895 -0.0913452
+        endlist
+    endnode
+doneanim opened1 gn_door24
+
+
+#NWmax ANIM ASCII
+newanim closing1 gn_door24
+  length 0.666667
+  transtime 0.25
+  animroot gn_door24
+    node dummy gn_door24
+        parent NULL
+    endnode
+    node emitter fire!07
+        parent gn_door24
+    endnode
+    node trimesh sam
+        parent gn_door24
+        alphakey
+            0 0 
+            0.666667 0 
+        endlist
+    endnode
+    node dummy GN_Door24_DWK
+        parent gn_door24
+    endnode
+    node dummy 24_DWK_dp_closed_01
+        parent GN_Door24_DWK
+    endnode
+    node dummy 24_DWK_dp_closed_02
+        parent GN_Door24_DWK
+    endnode
+    node dummy 24_DWK_dp_open1_01
+        parent GN_Door24_DWK
+    endnode
+    node dummy 24_DWK_dp_open2_01
+        parent GN_Door24_DWK
+    endnode
+    node dwk 24_DWK_wg_closed
+        parent GN_Door24_DWK
+    endnode
+    node dwk 24_DWK_wg_open1
+        parent GN_Door24_DWK
+    endnode
+    node dwk 24_DWK_wg_open2
+        parent GN_Door24_DWK
+    endnode
+    node dummy GN_Door24grnd
+        parent gn_door24
+    endnode
+    node dummy GN_Door24head
+        parent gn_door24
+    endnode
+    node dummy GN_Door24hhit
+        parent gn_door24
+    endnode
+    node dummy GN_Door24impc
+        parent gn_door24
+    endnode
+    node dummy TIN01_B13_03
+        parent gn_door24
+    endnode
+    node trimesh Object01
+        parent TIN01_B13_03
+        orientationkey
+            0 -0.999621 0.0266536 0.00688101 0
+            0.666667 -0.92261 -0.385676 0.00665569 -0.303278
+        endlist
+    endnode
+    node trimesh Object02
+        parent Object01
+        orientationkey
+            0 -0.994198 0.107557 -0.000948247 -0.0143082
+            0.0333333 0.99661 -0.0711542 0.0413027 -0.363868
+            0.666667 0.0497032 -0.988503 -0.1428 -0.282008
+        endlist
+    endnode
+    node trimesh Object03
+        parent Object02
+        orientationkey
+            0 0.0469173 -0.255399 -0.965697 -0.0112442
+            0.166667 0.845338 0.0907143 0.526474 -0.515615
+            0.666667 0.316213 -0.875577 0.365204 -0.249226
+        endlist
+    endnode
+    node trimesh Object04
+        parent Object03
+        orientationkey
+            0 0.764772 -0.600405 0.233749 -0.341883
+            0.333333 0.855001 0.506506 0.111468 -0.702611
+            0.666667 0.855393 0.275257 0.43879 -0.608879
+        endlist
+    endnode
+    node trimesh Object05
+        parent Object04
+        orientationkey
+            0 -0.480659 -0.318752 -0.816924 -0.75956
+            0.533333 -0.492281 0.648744 -0.580337 -0.720682
+            0.666667 -0.755952 0.590261 -0.28307 -0.760134
+        endlist
+    endnode
+    node danglymesh Plane08
+        parent Object05
+        orientationkey
+            0 -0.929724 0.207112 -0.304496 -1.71795
+            0.666667 -0.867543 0.196082 -0.457079 -1.64192
+        endlist
+    endnode
+    node danglymesh Plane07
+        parent Plane08
+        orientationkey
+            0 -0.583387 -0.752422 -0.305812 -0.143315
+            0.333333 -0.583387 -0.752422 -0.305812 -0.143315
+            0.666667 0.234906 -0.212455 -0.948516 -0.407244
+        endlist
+    endnode
+    node danglymesh Plane06
+        parent Plane07
+        orientationkey
+            0 0.623301 0.727571 0.286595 -6.1643
+            0.333333 -0.623301 -0.727571 -0.286596 -0.118888
+            0.666667 0.234908 -0.212456 -0.948515 -0.407243
+        endlist
+    endnode
+    node danglymesh Plane05
+        parent Plane06
+        orientationkey
+            0 0.497398 0.677772 0.541499 -6.20336
+            0.333333 -0.497398 -0.677771 -0.5415 -0.0798234
+            0.666667 -0.234905 0.212456 0.948516 -5.87594
+        endlist
+    endnode
+    node danglymesh Plane04
+        parent Plane05
+        orientationkey
+            0 0.634649 0.671976 0.381667 -6.1644
+            0.333333 -0.634646 -0.671977 -0.381669 -0.118789
+            0.666667 -0.234908 0.212456 0.948515 -5.87594
+        endlist
+    endnode
+    node danglymesh Plane01
+        parent Plane04
+        orientationkey
+            0 0.651206 0.642181 0.404393 -6.16989
+            0.333333 -0.651204 -0.642182 -0.404395 -0.113298
+            0.666667 -0.234907 0.212456 0.948515 -5.87594
+        endlist
+    endnode
+    node danglymesh Plane13
+        parent Plane08
+        orientationkey
+            0 0.641641 -0.665385 0.381522 -3.13381
+            0.333333 0.641641 -0.665385 0.381523 -3.13381
+            0.666667 0.547216 -0.77759 0.309692 -3.14159
+        endlist
+    endnode
+    node danglymesh Plane12
+        parent Plane13
+        orientationkey
+            0 0.659167 0.684977 0.31033 -6.19164
+            0.333333 0.659168 0.684978 0.310326 -6.19164
+            0.666667 0.234907 -0.212457 -0.948515 -0.407243
+        endlist
+    endnode
+    node danglymesh Plane11
+        parent Plane12
+        orientationkey
+            0 0.662459 0.666453 0.342037 -6.19492
+            0.333333 0.662459 0.666454 0.342034 -6.19492
+            0.666667 -0.234906 0.212455 0.948516 -5.87594
+        endlist
+    endnode
+    node danglymesh Plane10
+        parent Plane11
+        orientationkey
+            0 0.684151 0.643952 0.342436 -6.16754
+            0.333333 0.684152 0.643951 0.342436 -6.16754
+            0.666667 -0.234908 0.212456 0.948515 -5.87594
+        endlist
+    endnode
+    node danglymesh Plane09
+        parent Plane10
+        orientationkey
+            0 0.687663 0.62054 0.376895 -6.19184
+            0.333333 0.687664 0.62054 0.376894 -6.19184
+            0.666667 -0.234906 0.212457 0.948515 -5.87594
+        endlist
+    endnode
+    node trimesh Object06
+        parent TIN01_B13_03
+        orientationkey
+            0 -0.999586 -0.028676 0.00227172 0
+            0.666667 0 0 -1 -0.0143478
+        endlist
+    endnode
+    node trimesh Object07
+        parent Object06
+        orientationkey
+            0 0 0 0 0
+            0.0333333 0.81204 0.0929542 0.576151 -0.463992
+            0.666667 0.0135122 -0.649501 0.760241 -0.257142
+        endlist
+    endnode
+    node trimesh Object08
+        parent Object07
+        orientationkey
+            0 0 0 0 0
+            0.166667 0.523572 -0.837503 0.156402 -1.01036
+            0.666667 0.0934099 -0.986291 0.13603 -1.12635
+        endlist
+    endnode
+    node trimesh Object09
+        parent Object08
+        orientationkey
+            0 0.448603 -0.280068 0.848715 0
+            0.333333 0.278394 -0.960154 0.024508 -1.03972
+            0.666667 0.252774 -0.953956 0.16147 -1.26822
+        endlist
+    endnode
+    node trimesh Object10
+        parent Object09
+        orientationkey
+            0 0.716574 -0.5964 -0.361702 -0.40249
+            0.533333 -0.0454359 -0.996733 0.0667685 -4.55743
+            0.666667 0.140136 -0.989079 0.04567 -4.4997
+        endlist
+    endnode
+    node danglymesh Plane14
+        parent Object10
+        orientationkey
+            0 -0.781153 -0.344006 -0.521017 -2.14652
+            0.666667 -0.867543 0.196082 -0.457079 -1.64192
+        endlist
+    endnode
+    node danglymesh Plane15
+        parent Plane14
+        orientationkey
+            0 0.583387 0.752423 0.30581 -6.13987
+            0.333333 -0.583386 -0.752424 -0.305809 -0.143315
+            0.666667 0.234907 -0.212455 -0.948516 -0.407244
+        endlist
+    endnode
+    node danglymesh Plane16
+        parent Plane15
+        orientationkey
+            0 0.623301 0.72757 0.286597 -6.1643
+            0.333333 -0.623298 -0.727574 -0.286594 -0.118888
+            0.666667 0.234908 -0.212457 -0.948515 -0.407243
+        endlist
+    endnode
+    node danglymesh Plane17
+        parent Plane16
+        orientationkey
+            0 0.497398 0.677772 0.541499 -6.20336
+            0.333333 -0.497397 -0.677775 -0.541495 -0.0798232
+            0.666667 0.234905 -0.212456 -0.948516 -0.407244
+        endlist
+    endnode
+    node danglymesh Plane18
+        parent Plane17
+        orientationkey
+            0 0.634651 0.671973 0.381668 -6.1644
+            0.333333 0.634649 0.671974 0.381669 -6.1644
+            0.666667 0.234908 -0.212455 -0.948515 -0.407244
+        endlist
+    endnode
+    node danglymesh Plane19
+        parent Plane18
+        orientationkey
+            0 0.651208 0.642178 0.404395 -6.16989
+            0.333333 0.651208 0.642178 0.404395 -6.16989
+            0.666667 0.234907 -0.212456 -0.948515 -0.407243
+        endlist
+    endnode
+    node danglymesh Plane20
+        parent Plane14
+        orientationkey
+            0 -0.641641 0.665386 -0.381522 -3.14937
+            0.333333 0.641641 -0.665386 0.381522 -3.13381
+            0.666667 0.547216 -0.77759 0.309692 -3.14159
+        endlist
+    endnode
+    node danglymesh Plane21
+        parent Plane20
+        orientationkey
+            0 0.659168 0.684978 0.310327 -6.19164
+            0.333333 0.659167 0.684979 0.310328 -6.19164
+            0.666667 -0.234907 0.212457 0.948515 -5.87594
+        endlist
+    endnode
+    node danglymesh Plane22
+        parent Plane21
+        orientationkey
+            0 0.662459 0.666456 0.34203 -6.19492
+            0.333333 0.66246 0.666455 0.342031 -6.19492
+            0.666667 -0.234906 0.212455 0.948516 -5.87594
+        endlist
+    endnode
+    node danglymesh Plane23
+        parent Plane22
+        orientationkey
+            0 0.684151 0.643952 0.342436 -6.16754
+            0.333333 0.684151 0.643951 0.342438 -6.16754
+            0.666667 -0.234908 0.212456 0.948515 -5.87594
+        endlist
+    endnode
+    node danglymesh Plane24
+        parent Plane23
+        orientationkey
+            0 0.687665 0.620539 0.376892 -6.19184
+            0.333333 0.687664 0.620541 0.376892 -6.19184
+            0.666667 -0.234905 0.212457 0.948516 -5.87594
+        endlist
+    endnode
+    node trimesh Object11
+        parent TIN01_B13_03
+        orientationkey
+            0 0 0 1 -3.00619
+            0.666667 -0.0611154 0.00455383 0.99812 -2.99312
+        endlist
+    endnode
+    node trimesh Object12
+        parent Object11
+        orientationkey
+            0 0 0 -1 -6.14219
+            0.0333333 -0.183645 0.834505 -0.519496 -5.5712
+            0.666667 0.308753 0.850144 -0.426529 -5.38468
+        endlist
+    endnode
+    node trimesh Object13
+        parent Object12
+        orientationkey
+            0 -0.037356 0.402992 -0.914441 -6.09335
+            0.0333333 0.321323 0.5347 -0.781568 -5.2659
+            0.166667 -0.598262 0.747652 -0.28827 -4.88576
+            0.333333 -0.297749 0.888806 -0.348381 -4.8847
+            0.666667 -0.265867 0.901277 -0.342075 -4.87674
+        endlist
+    endnode
+    node trimesh Object14
+        parent Object13
+        orientationkey
+            0 0.103748 0.0451397 0.993579 -1.43444
+            0.333333 0.389955 -0.606323 0.693042 -3.70015
+            0.666667 0.212492 -0.925941 0.312217 -4.5322
+        endlist
+    endnode
+    node trimesh Object15
+        parent Object14
+        orientationkey
+            0 0.0550802 0.00517696 0.998469 -1.23673
+            0.133333 0.779135 0.0950974 0.619601 -1.2062
+            0.533333 -0.743712 -0.436781 0.506078 -5.31375
+            0.666667 -0.630222 -0.659228 0.410169 -5.50125
+        endlist
+    endnode
+    node danglymesh Plane25
+        parent Object15
+        orientationkey
+            0 -0.406582 0.274912 -0.871271 -2.32753
+            0.666667 0.864389 -0.177165 0.470579 -4.7068
+        endlist
+    endnode
+    node danglymesh Plane26
+        parent Plane25
+        orientationkey
+            0 0.583387 0.752422 0.30581 -6.13987
+            0.333333 -0.583387 -0.752422 -0.30581 -0.143315
+            0.666667 -0.234907 0.212455 0.948516 -5.87594
+        endlist
+    endnode
+    node danglymesh Plane27
+        parent Plane26
+        orientationkey
+            0 0.623303 0.727569 0.286595 -6.1643
+            0.333333 -0.623303 -0.727569 -0.286595 -0.118889
+            0.666667 0.234908 -0.212456 -0.948515 -0.407243
+        endlist
+    endnode
+    node danglymesh Plane28
+        parent Plane27
+        orientationkey
+            0 0.497399 0.677771 0.541499 -6.20336
+            0.333333 -0.497401 -0.677771 -0.541497 -0.0798233
+            0.666667 0.234905 -0.212456 -0.948516 -0.407244
+        endlist
+    endnode
+    node danglymesh Plane29
+        parent Plane28
+        orientationkey
+            0 0.63465 0.671975 0.381667 -6.1644
+            0.333333 -0.634649 -0.671976 -0.381667 -0.11879
+            0.666667 0.234908 -0.212456 -0.948515 -0.407244
+        endlist
+    endnode
+    node danglymesh Plane30
+        parent Plane29
+        orientationkey
+            0 0.651208 0.642179 0.404394 -6.16989
+            0.333333 -0.651209 -0.642179 -0.404393 -0.113299
+            0.666667 0.234907 -0.212456 -0.948515 -0.407243
+        endlist
+    endnode
+    node danglymesh Plane31
+        parent Plane25
+        orientationkey
+            0 -0.641641 0.665385 -0.381522 -3.14937
+            0.333333 0.641641 -0.665385 0.381523 -3.13381
+            0.666667 -0.547216 0.77759 -0.309692 -3.14159
+        endlist
+    endnode
+    node danglymesh Plane32
+        parent Plane31
+        orientationkey
+            0 -0.659166 -0.68498 -0.310326 -0.0915498
+            0.333333 0.659168 0.684979 0.310325 -6.19164
+            0.666667 -0.234907 0.212458 0.948515 -5.87594
+        endlist
+    endnode
+    node danglymesh Plane33
+        parent Plane32
+        orientationkey
+            0 -0.662457 -0.666456 -0.342034 -0.0882656
+            0.333333 0.662458 0.666454 0.342034 -6.19492
+            0.666667 -0.234906 0.212455 0.948516 -5.87594
+        endlist
+    endnode
+    node danglymesh Plane34
+        parent Plane33
+        orientationkey
+            0 -0.684152 -0.643951 -0.342438 -0.115647
+            0.333333 0.684152 0.64395 0.342439 -6.16754
+            0.666667 -0.234908 0.212455 0.948515 -5.87594
+        endlist
+    endnode
+    node danglymesh Plane35
+        parent Plane34
+        orientationkey
+            0 -0.687664 -0.620539 -0.376895 -0.0913454
+            0.333333 0.687665 0.620539 0.376895 -6.19184
+            0.666667 -0.234906 0.212457 0.948515 -5.87594
+        endlist
+    endnode
+doneanim closing1 gn_door24
+
+
+#NWmax ANIM ASCII
+newanim opening2 gn_door24
+  length 0.666667
+  transtime 0.25
+  animroot gn_door24
+    node dummy gn_door24
+        parent NULL
+    endnode
+    node emitter fire!07
+        parent gn_door24
+    endnode
+    node trimesh sam
+        parent gn_door24
+        alphakey
+            0 0 
+            0.666667 0 
+        endlist
+    endnode
+    node dummy GN_Door24_DWK
+        parent gn_door24
+    endnode
+    node dummy 24_DWK_dp_closed_01
+        parent GN_Door24_DWK
+    endnode
+    node dummy 24_DWK_dp_closed_02
+        parent GN_Door24_DWK
+    endnode
+    node dummy 24_DWK_dp_open1_01
+        parent GN_Door24_DWK
+    endnode
+    node dummy 24_DWK_dp_open2_01
+        parent GN_Door24_DWK
+    endnode
+    node dwk 24_DWK_wg_closed
+        parent GN_Door24_DWK
+    endnode
+    node dwk 24_DWK_wg_open1
+        parent GN_Door24_DWK
+    endnode
+    node dwk 24_DWK_wg_open2
+        parent GN_Door24_DWK
+    endnode
+    node dummy GN_Door24grnd
+        parent gn_door24
+    endnode
+    node dummy GN_Door24head
+        parent gn_door24
+    endnode
+    node dummy GN_Door24hhit
+        parent gn_door24
+    endnode
+    node dummy GN_Door24impc
+        parent gn_door24
+    endnode
+    node dummy TIN01_B13_03
+        parent gn_door24
+    endnode
+    node trimesh Object01
+        parent TIN01_B13_03
+        orientationkey
+            0 -0.92261 -0.385676 0.00665569 -0.303278
+            0.666667 -0.999889 0.00893637 0.0118836 0
+        endlist
+    endnode
+    node trimesh Object02
+        parent Object01
+        orientationkey
+            0 0.0497032 -0.988503 -0.1428 -0.282008
+            0.633333 0.99661 -0.0711543 0.0413027 -0.363868
+            0.666667 -0.994198 0.107557 -0.000948244 -0.0143082
+        endlist
+    endnode
+    node trimesh Object03
+        parent Object02
+        orientationkey
+            0 0.316213 -0.875577 0.365204 -0.249226
+            0.5 0.845338 0.0907143 0.526474 -0.515615
+            0.666667 0.0469198 -0.255399 -0.965697 -0.0112442
+        endlist
+    endnode
+    node trimesh Object04
+        parent Object03
+        orientationkey
+            0 0.855393 0.275257 0.43879 -0.608879
+            0.333333 0.855001 0.506506 0.111468 -0.702611
+            0.666667 0.764771 -0.600405 0.233749 -0.341882
+        endlist
+    endnode
+    node trimesh Object05
+        parent Object04
+        orientationkey
+            0 -0.755952 0.590261 -0.28307 -0.760134
+            0.166667 -0.492281 0.648744 -0.580337 -0.720682
+            0.666667 -0.480658 -0.318752 -0.816924 -0.75956
+        endlist
+    endnode
+    node danglymesh Plane08
+        parent Object05
+        orientationkey
+            0 -0.867543 0.196082 -0.457079 -1.64192
+            0.666667 -0.929724 0.207112 -0.304496 -1.71795
+        endlist
+    endnode
+    node danglymesh Plane07
+        parent Plane08
+        orientationkey
+            0 0.234906 -0.212455 -0.948516 -0.407244
+            0.333333 -0.583387 -0.752422 -0.305812 -0.143315
+            0.666667 -0.583387 -0.752423 -0.305811 -0.143315
+        endlist
+    endnode
+    node danglymesh Plane06
+        parent Plane07
+        orientationkey
+            0 0.234907 -0.212456 -0.948515 -0.407243
+            0.333333 -0.623305 -0.727567 -0.286595 -0.118889
+            0.666667 0.623303 0.727569 0.286595 -6.1643
+        endlist
+    endnode
+    node danglymesh Plane05
+        parent Plane06
+        orientationkey
+            0 -0.234905 0.212456 0.948516 -5.87594
+            0.333333 -0.497401 -0.677769 -0.541499 -0.0798233
+            0.666667 0.497398 0.677772 0.541498 -6.20336
+        endlist
+    endnode
+    node danglymesh Plane04
+        parent Plane05
+        orientationkey
+            0 -0.234908 0.212456 0.948515 -5.87594
+            0.333333 -0.634652 -0.671972 -0.381667 -0.11879
+            0.666667 0.63465 0.671974 0.381667 -6.1644
+        endlist
+    endnode
+    node danglymesh Plane01
+        parent Plane04
+        orientationkey
+            0 -0.234907 0.212456 0.948515 -5.87594
+            0.333333 -0.651209 -0.642178 -0.404394 -0.113299
+            0.666667 0.651208 0.64218 0.404393 -6.16989
+        endlist
+    endnode
+    node danglymesh Plane13
+        parent Plane08
+        orientationkey
+            0 0.547216 -0.77759 0.309692 -3.14159
+            0.333333 0.641641 -0.665386 0.381522 -3.13381
+            0.666667 0.641641 -0.665386 0.381522 -3.13381
+        endlist
+    endnode
+    node danglymesh Plane12
+        parent Plane13
+        orientationkey
+            0 0.234907 -0.212457 -0.948515 -0.407243
+            0.333333 0.659169 0.684977 0.310326 -6.19164
+            0.666667 0.659167 0.684978 0.31033 -6.19164
+        endlist
+    endnode
+    node danglymesh Plane11
+        parent Plane12
+        orientationkey
+            0 -0.234906 0.212455 0.948516 -5.87594
+            0.333333 0.662459 0.666453 0.342035 -6.19492
+            0.666667 0.662458 0.666453 0.342037 -6.19492
+        endlist
+    endnode
+    node danglymesh Plane10
+        parent Plane11
+        orientationkey
+            0 -0.234908 0.212456 0.948515 -5.87594
+            0.333333 0.684152 0.643951 0.342437 -6.16754
+            0.666667 0.684151 0.643952 0.342437 -6.16754
+        endlist
+    endnode
+    node danglymesh Plane09
+        parent Plane10
+        orientationkey
+            0 -0.234906 0.212457 0.948515 -5.87594
+            0.333333 0.687664 0.620538 0.376895 -6.19184
+            0.666667 0.687662 0.62054 0.376895 -6.19184
+        endlist
+    endnode
+    node trimesh Object06
+        parent TIN01_B13_03
+        orientationkey
+            0 0 0 -1 -0.0143478
+            0.666667 -0.999586 -0.028676 0.00245738 0
+        endlist
+    endnode
+    node trimesh Object07
+        parent Object06
+        orientationkey
+            0 0.0135124 -0.649501 0.760241 -0.257142
+            0.633333 0.81204 0.0929541 0.576151 -0.463992
+            0.666667 0 0 0 0
+        endlist
+    endnode
+    node trimesh Object08
+        parent Object07
+        orientationkey
+            0 0.0934099 -0.986291 0.13603 -1.12635
+            0.5 0.523572 -0.837503 0.156402 -1.01036
+            0.666667 0 0 0 0
+        endlist
+    endnode
+    node trimesh Object09
+        parent Object08
+        orientationkey
+            0 0.252774 -0.953956 0.16147 -1.26822
+            0.333333 0.278394 -0.960154 0.0245079 -1.03972
+            0.666667 0.0421462 -0.313091 0.948788 0
+        endlist
+    endnode
+    node trimesh Object10
+        parent Object09
+        orientationkey
+            0 0.140136 -0.989079 0.04567 -4.4997
+            0.166667 -0.0454359 -0.996733 0.0667685 -4.55743
+            0.666667 0.716574 -0.5964 -0.361702 -0.40249
+        endlist
+    endnode
+    node danglymesh Plane14
+        parent Object10
+        orientationkey
+            0 -0.867543 0.196082 -0.457079 -1.64192
+            0.666667 -0.781154 -0.344006 -0.521017 -2.14652
+        endlist
+    endnode
+    node danglymesh Plane15
+        parent Plane14
+        orientationkey
+            0 0.234907 -0.212455 -0.948515 -0.407244
+            0.333333 -0.583387 -0.752422 -0.305811 -0.143315
+            0.666667 0.583387 0.752423 0.30581 -6.13987
+        endlist
+    endnode
+    node danglymesh Plane16
+        parent Plane15
+        orientationkey
+            0 0.234908 -0.212457 -0.948515 -0.407243
+            0.333333 -0.623301 -0.727572 -0.286593 -0.118888
+            0.666667 0.623302 0.72757 0.286596 -6.1643
+        endlist
+    endnode
+    node danglymesh Plane17
+        parent Plane16
+        orientationkey
+            0 0.234905 -0.212456 -0.948516 -0.407244
+            0.333333 -0.497397 -0.677773 -0.541498 -0.079823
+            0.666667 0.497398 0.677772 0.541498 -6.20336
+        endlist
+    endnode
+    node danglymesh Plane18
+        parent Plane17
+        orientationkey
+            0 0.234908 -0.212456 -0.948515 -0.407244
+            0.333333 -0.634652 -0.671973 -0.381666 -0.11879
+            0.666667 0.634651 0.671973 0.381668 -6.1644
+        endlist
+    endnode
+    node danglymesh Plane19
+        parent Plane18
+        orientationkey
+            0 0.234907 -0.212456 -0.948515 -0.407243
+            0.333333 0.651208 0.642179 0.404395 -6.16989
+            0.666667 0.651208 0.642179 0.404394 -6.16989
+        endlist
+    endnode
+    node danglymesh Plane20
+        parent Plane14
+        orientationkey
+            0 0.547216 -0.77759 0.309692 -3.14159
+            0.333333 0.641641 -0.665386 0.381522 -3.13381
+            0.666667 -0.641641 0.665386 -0.381522 -3.14937
+        endlist
+    endnode
+    node danglymesh Plane21
+        parent Plane20
+        orientationkey
+            0 -0.234907 0.212457 0.948515 -5.87594
+            0.333333 0.659167 0.684979 0.310327 -6.19164
+            0.666667 0.659169 0.684977 0.310326 -6.19164
+        endlist
+    endnode
+    node danglymesh Plane22
+        parent Plane21
+        orientationkey
+            0 -0.234906 0.212455 0.948516 -5.87594
+            0.333333 0.66246 0.666455 0.342031 -6.19492
+            0.666667 0.662459 0.666455 0.342032 -6.19492
+        endlist
+    endnode
+    node danglymesh Plane23
+        parent Plane22
+        orientationkey
+            0 -0.234908 0.212456 0.948515 -5.87594
+            0.333333 0.684151 0.643951 0.342438 -6.16754
+            0.666667 0.684152 0.643952 0.342436 -6.16754
+        endlist
+    endnode
+    node danglymesh Plane24
+        parent Plane23
+        orientationkey
+            0 -0.234906 0.212457 0.948515 -5.87594
+            0.333333 0.687664 0.620539 0.376894 -6.19184
+            0.666667 0.687665 0.620538 0.376894 -6.19184
+        endlist
+    endnode
+    node trimesh Object11
+        parent TIN01_B13_03
+        orientationkey
+            0 -0.0611154 0.00455383 0.99812 -2.99312
+            0.666667 0 0 1 -3.00619
+        endlist
+    endnode
+    node trimesh Object12
+        parent Object11
+        orientationkey
+            0 0.308753 0.850144 -0.426529 -5.38468
+            0.633333 -0.183645 0.834505 -0.519496 -5.5712
+            0.666667 0 0 -1 -6.14219
+        endlist
+    endnode
+    node trimesh Object13
+        parent Object12
+        orientationkey
+            0 -0.265867 0.901277 -0.342075 -4.87674
+            0.333333 -0.297749 0.888806 -0.348381 -4.8847
+            0.5 -0.598262 0.747652 -0.28827 -4.88576
+            0.633333 0.321323 0.5347 -0.781567 -5.2659
+            0.666667 -0.0373562 0.402992 -0.914441 -6.09335
+        endlist
+    endnode
+    node trimesh Object14
+        parent Object13
+        orientationkey
+            0 0.212492 -0.925941 0.312217 -4.5322
+            0.333333 0.389955 -0.606323 0.693042 -3.70015
+            0.666667 0.103748 0.0451396 0.993579 -1.43444
+        endlist
+    endnode
+    node trimesh Object15
+        parent Object14
+        orientationkey
+            0 -0.630222 -0.659228 0.410169 -5.50125
+            0.166667 -0.743712 -0.436781 0.506078 -5.31375
+            0.533333 0.779135 0.0950975 0.619601 -1.2062
+            0.666667 0.0550801 0.00517692 0.998469 -1.23673
+        endlist
+    endnode
+    node danglymesh Plane25
+        parent Object15
+        orientationkey
+            0 0.864389 -0.177165 0.470579 -4.7068
+            0.666667 -0.406582 0.274913 -0.871271 -2.32753
+        endlist
+    endnode
+    node danglymesh Plane26
+        parent Plane25
+        orientationkey
+            0 -0.234907 0.212455 0.948516 -5.87594
+            0.333333 -0.583388 -0.752422 -0.30581 -0.143315
+            0.666667 0.583387 0.752422 0.305811 -6.13987
+        endlist
+    endnode
+    node danglymesh Plane27
+        parent Plane26
+        orientationkey
+            0 0.234908 -0.212457 -0.948515 -0.407243
+            0.333333 -0.623303 -0.72757 -0.286594 -0.118889
+            0.666667 0.623303 0.727569 0.286595 -6.1643
+        endlist
+    endnode
+    node danglymesh Plane28
+        parent Plane27
+        orientationkey
+            0 0.234905 -0.212455 -0.948516 -0.407244
+            0.333333 -0.497399 -0.677772 -0.541497 -0.0798234
+            0.666667 0.497399 0.67777 0.541499 -6.20336
+        endlist
+    endnode
+    node danglymesh Plane29
+        parent Plane28
+        orientationkey
+            0 0.234908 -0.212456 -0.948515 -0.407244
+            0.333333 -0.634651 -0.671974 -0.381666 -0.11879
+            0.666667 0.634651 0.671973 0.381667 -6.1644
+        endlist
+    endnode
+    node danglymesh Plane30
+        parent Plane29
+        orientationkey
+            0 0.234907 -0.212456 -0.948515 -0.407243
+            0.333333 -0.651208 -0.642179 -0.404394 -0.113299
+            0.666667 0.651208 0.642179 0.404394 -6.16989
+        endlist
+    endnode
+    node danglymesh Plane31
+        parent Plane25
+        orientationkey
+            0 -0.547216 0.77759 -0.309692 -3.14159
+            0.333333 0.641641 -0.665386 0.381522 -3.13381
+            0.666667 -0.641641 0.665386 -0.381522 -3.14937
+        endlist
+    endnode
+    node danglymesh Plane32
+        parent Plane31
+        orientationkey
+            0 -0.234907 0.212458 0.948515 -5.87594
+            0.333333 0.659168 0.684979 0.310324 -6.19164
+            0.666667 -0.659167 -0.68498 -0.310326 -0.0915496
+        endlist
+    endnode
+    node danglymesh Plane33
+        parent Plane32
+        orientationkey
+            0 -0.234906 0.212455 0.948516 -5.87594
+            0.333333 0.662458 0.666455 0.342034 -6.19492
+            0.666667 -0.662458 -0.666455 -0.342034 -0.0882656
+        endlist
+    endnode
+    node danglymesh Plane34
+        parent Plane33
+        orientationkey
+            0 -0.234908 0.212456 0.948515 -5.87594
+            0.333333 0.684152 0.64395 0.342438 -6.16754
+            0.666667 -0.684152 -0.643951 -0.342438 -0.115647
+        endlist
+    endnode
+    node danglymesh Plane35
+        parent Plane34
+        orientationkey
+            0 -0.234906 0.212456 0.948515 -5.87594
+            0.333333 0.687665 0.620539 0.376894 -6.19184
+            0.666667 -0.687664 -0.620539 -0.376895 -0.0913453
+        endlist
+    endnode
+doneanim opening2 gn_door24
+
+
+#NWmax ANIM ASCII
+newanim opened2 gn_door24
+  length 0.0333333
+  transtime 0
+  animroot gn_door24
+    node dummy gn_door24
+        parent NULL
+    endnode
+    node emitter fire!07
+        parent gn_door24
+    endnode
+    node trimesh sam
+        parent gn_door24
+        alphakey
+            0 0 
+            0.0333333 0 
+        endlist
+    endnode
+    node dummy GN_Door24_DWK
+        parent gn_door24
+    endnode
+    node dummy 24_DWK_dp_closed_01
+        parent GN_Door24_DWK
+    endnode
+    node dummy 24_DWK_dp_closed_02
+        parent GN_Door24_DWK
+    endnode
+    node dummy 24_DWK_dp_open1_01
+        parent GN_Door24_DWK
+    endnode
+    node dummy 24_DWK_dp_open2_01
+        parent GN_Door24_DWK
+    endnode
+    node dwk 24_DWK_wg_closed
+        parent GN_Door24_DWK
+    endnode
+    node dwk 24_DWK_wg_open1
+        parent GN_Door24_DWK
+    endnode
+    node dwk 24_DWK_wg_open2
+        parent GN_Door24_DWK
+    endnode
+    node dummy GN_Door24grnd
+        parent gn_door24
+    endnode
+    node dummy GN_Door24head
+        parent gn_door24
+    endnode
+    node dummy GN_Door24hhit
+        parent gn_door24
+    endnode
+    node dummy GN_Door24impc
+        parent gn_door24
+    endnode
+    node dummy TIN01_B13_03
+        parent gn_door24
+    endnode
+    node trimesh Object01
+        parent TIN01_B13_03
+        orientationkey
+            0 -0.999889 0.00893637 0.0118836 0
+            0.0333333 -0.999889 0.00893637 0.0118836 0
+        endlist
+    endnode
+    node trimesh Object02
+        parent Object01
+        orientationkey
+            0 -0.994198 0.107557 -0.000948244 -0.0143082
+            0.0333333 -0.994198 0.107557 -0.000948244 -0.0143082
+        endlist
+    endnode
+    node trimesh Object03
+        parent Object02
+        orientationkey
+            0 0.0469198 -0.255399 -0.965697 -0.0112442
+            0.0333333 0.0469198 -0.255399 -0.965697 -0.0112442
+        endlist
+    endnode
+    node trimesh Object04
+        parent Object03
+        orientationkey
+            0 0.764772 -0.600405 0.233749 -0.341882
+            0.0333333 0.764772 -0.600405 0.233749 -0.341882
+        endlist
+    endnode
+    node trimesh Object05
+        parent Object04
+        orientationkey
+            0 -0.480659 -0.318752 -0.816924 -0.75956
+            0.0333333 -0.480658 -0.318752 -0.816924 -0.75956
+        endlist
+    endnode
+    node danglymesh Plane08
+        parent Object05
+        orientationkey
+            0 -0.929724 0.207112 -0.304496 -1.71795
+            0.0333333 -0.929724 0.207112 -0.304496 -1.71795
+        endlist
+    endnode
+    node danglymesh Plane07
+        parent Plane08
+        orientationkey
+            0 -0.583387 -0.752422 -0.305811 -0.143315
+            0.0333333 -0.583387 -0.752422 -0.305811 -0.143315
+        endlist
+    endnode
+    node danglymesh Plane06
+        parent Plane07
+        orientationkey
+            0 0.623303 0.727569 0.286595 -6.1643
+            0.0333333 0.623302 0.727569 0.286596 -6.1643
+        endlist
+    endnode
+    node danglymesh Plane05
+        parent Plane06
+        orientationkey
+            0 0.497398 0.677772 0.541499 -6.20336
+            0.0333333 0.497397 0.677773 0.541499 -6.20336
+        endlist
+    endnode
+    node danglymesh Plane04
+        parent Plane05
+        orientationkey
+            0 0.63465 0.671974 0.381667 -6.1644
+            0.0333333 0.63465 0.671975 0.381667 -6.1644
+        endlist
+    endnode
+    node danglymesh Plane01
+        parent Plane04
+        orientationkey
+            0 0.651207 0.64218 0.404393 -6.16989
+            0.0333333 0.651206 0.642181 0.404393 -6.16989
+        endlist
+    endnode
+    node danglymesh Plane13
+        parent Plane08
+        orientationkey
+            0 0.641641 -0.665386 0.381522 -3.13381
+            0.0333333 0.641641 -0.665386 0.381522 -3.13381
+        endlist
+    endnode
+    node danglymesh Plane12
+        parent Plane13
+        orientationkey
+            0 0.659168 0.684977 0.31033 -6.19164
+            0.0333333 0.659167 0.684978 0.31033 -6.19164
+        endlist
+    endnode
+    node danglymesh Plane11
+        parent Plane12
+        orientationkey
+            0 0.662458 0.666453 0.342038 -6.19492
+            0.0333333 0.662457 0.666454 0.342037 -6.19492
+        endlist
+    endnode
+    node danglymesh Plane10
+        parent Plane11
+        orientationkey
+            0 0.684151 0.643952 0.342437 -6.16754
+            0.0333333 0.684151 0.643952 0.342437 -6.16754
+        endlist
+    endnode
+    node danglymesh Plane09
+        parent Plane10
+        orientationkey
+            0 0.687663 0.62054 0.376896 -6.19184
+            0.0333333 0.687661 0.620541 0.376896 -6.19184
+        endlist
+    endnode
+    node trimesh Object06
+        parent TIN01_B13_03
+        orientationkey
+            0 -0.999586 -0.028676 0.00245738 0
+            0.0333333 -0.999586 -0.028676 0.00245738 0
+        endlist
+    endnode
+    node trimesh Object07
+        parent Object06
+        orientationkey
+            0 0 0 0 0
+            0.0333333 0 0 0 0
+        endlist
+    endnode
+    node trimesh Object08
+        parent Object07
+        orientationkey
+            0 0 0 0 0
+            0.0333333 0 0 0 0
+        endlist
+    endnode
+    node trimesh Object09
+        parent Object08
+        orientationkey
+            0 0.133013 -0.310585 0.941193 0
+            0.0333333 0.255566 -0.302963 0.918096 0
+        endlist
+    endnode
+    node trimesh Object10
+        parent Object09
+        orientationkey
+            0 0.716574 -0.5964 -0.361702 -0.40249
+            0.0333333 0.716574 -0.5964 -0.361702 -0.40249
+        endlist
+    endnode
+    node danglymesh Plane14
+        parent Object10
+        orientationkey
+            0 -0.781154 -0.344006 -0.521017 -2.14652
+            0.0333333 -0.781154 -0.344006 -0.521017 -2.14652
+        endlist
+    endnode
+    node danglymesh Plane15
+        parent Plane14
+        orientationkey
+            0 0.583387 0.752422 0.30581 -6.13987
+            0.0333333 0.583387 0.752423 0.30581 -6.13987
+        endlist
+    endnode
+    node danglymesh Plane16
+        parent Plane15
+        orientationkey
+            0 0.623301 0.72757 0.286596 -6.1643
+            0.0333333 0.623301 0.72757 0.286596 -6.1643
+        endlist
+    endnode
+    node danglymesh Plane17
+        parent Plane16
+        orientationkey
+            0 0.497398 0.677772 0.541498 -6.20336
+            0.0333333 0.497397 0.677773 0.541498 -6.20336
+        endlist
+    endnode
+    node danglymesh Plane18
+        parent Plane17
+        orientationkey
+            0 0.634652 0.671972 0.381667 -6.1644
+            0.0333333 0.634651 0.671972 0.381669 -6.1644
+        endlist
+    endnode
+    node danglymesh Plane19
+        parent Plane18
+        orientationkey
+            0 0.651208 0.642179 0.404395 -6.16989
+            0.0333333 0.651208 0.642178 0.404395 -6.16989
+        endlist
+    endnode
+    node danglymesh Plane20
+        parent Plane14
+        orientationkey
+            0 -0.641641 0.665386 -0.381522 -3.14937
+            0.0333333 -0.641641 0.665386 -0.381522 -3.14937
+        endlist
+    endnode
+    node danglymesh Plane21
+        parent Plane20
+        orientationkey
+            0 0.659169 0.684977 0.310327 -6.19164
+            0.0333333 0.659169 0.684977 0.310327 -6.19164
+        endlist
+    endnode
+    node danglymesh Plane22
+        parent Plane21
+        orientationkey
+            0 0.662459 0.666456 0.34203 -6.19492
+            0.0333333 0.662459 0.666456 0.34203 -6.19492
+        endlist
+    endnode
+    node danglymesh Plane23
+        parent Plane22
+        orientationkey
+            0 0.684152 0.643952 0.342436 -6.16754
+            0.0333333 0.684152 0.643952 0.342436 -6.16754
+        endlist
+    endnode
+    node danglymesh Plane24
+        parent Plane23
+        orientationkey
+            0 0.687665 0.620538 0.376893 -6.19184
+            0.0333333 0.687666 0.620538 0.376892 -6.19184
+        endlist
+    endnode
+    node trimesh Object11
+        parent TIN01_B13_03
+        orientationkey
+            0 0 0 1 -3.00619
+            0.0333333 0 0 1 -3.00619
+        endlist
+    endnode
+    node trimesh Object12
+        parent Object11
+        orientationkey
+            0 0 0 -1 -6.14219
+            0.0333333 0 0 -1 -6.14219
+        endlist
+    endnode
+    node trimesh Object13
+        parent Object12
+        orientationkey
+            0 -0.0373565 0.402992 -0.914441 -6.09335
+            0.0333333 -0.037357 0.402992 -0.914441 -6.09335
+        endlist
+    endnode
+    node trimesh Object14
+        parent Object13
+        orientationkey
+            0 0.103748 0.0451397 0.993579 -1.43444
+            0.0333333 0.103748 0.0451397 0.993579 -1.43444
+        endlist
+    endnode
+    node trimesh Object15
+        parent Object14
+        orientationkey
+            0 0.0550801 0.00517696 0.998469 -1.23673
+            0.0333333 0.0550803 0.00517702 0.998469 -1.23673
+        endlist
+    endnode
+    node danglymesh Plane25
+        parent Object15
+        orientationkey
+            0 -0.406582 0.274913 -0.871271 -2.32753
+            0.0333333 -0.406582 0.274912 -0.871271 -2.32753
+        endlist
+    endnode
+    node danglymesh Plane26
+        parent Plane25
+        orientationkey
+            0 0.583387 0.752422 0.305811 -6.13987
+            0.0333333 0.583388 0.752422 0.30581 -6.13987
+        endlist
+    endnode
+    node danglymesh Plane27
+        parent Plane26
+        orientationkey
+            0 0.623303 0.727569 0.286595 -6.1643
+            0.0333333 0.623303 0.727569 0.286595 -6.1643
+        endlist
+    endnode
+    node danglymesh Plane28
+        parent Plane27
+        orientationkey
+            0 0.497399 0.67777 0.541499 -6.20336
+            0.0333333 0.497399 0.677771 0.541499 -6.20336
+        endlist
+    endnode
+    node danglymesh Plane29
+        parent Plane28
+        orientationkey
+            0 0.634651 0.671974 0.381668 -6.1644
+            0.0333333 0.63465 0.671974 0.381668 -6.1644
+        endlist
+    endnode
+    node danglymesh Plane30
+        parent Plane29
+        orientationkey
+            0 0.651208 0.642179 0.404394 -6.16989
+            0.0333333 0.651208 0.642179 0.404394 -6.16989
+        endlist
+    endnode
+    node danglymesh Plane31
+        parent Plane25
+        orientationkey
+            0 -0.641641 0.665386 -0.381522 -3.14937
+            0.0333333 -0.641641 0.665386 -0.381522 -3.14937
+        endlist
+    endnode
+    node danglymesh Plane32
+        parent Plane31
+        orientationkey
+            0 -0.659167 -0.68498 -0.310326 -0.0915496
+            0.0333333 -0.659167 -0.684979 -0.310325 -0.0915496
+        endlist
+    endnode
+    node danglymesh Plane33
+        parent Plane32
+        orientationkey
+            0 -0.662457 -0.666456 -0.342034 -0.0882654
+            0.0333333 -0.662457 -0.666456 -0.342034 -0.0882654
+        endlist
+    endnode
+    node danglymesh Plane34
+        parent Plane33
+        orientationkey
+            0 -0.684152 -0.643951 -0.342438 -0.115647
+            0.0333333 -0.684151 -0.643951 -0.342438 -0.115647
+        endlist
+    endnode
+    node danglymesh Plane35
+        parent Plane34
+        orientationkey
+            0 -0.687664 -0.620539 -0.376895 -0.0913451
+            0.0333333 -0.687665 -0.620539 -0.376894 -0.0913452
+        endlist
+    endnode
+doneanim opened2 gn_door24
+
+
+#NWmax ANIM ASCII
+newanim closing2 gn_door24
+  length 0.666667
+  transtime 0.25
+  animroot gn_door24
+    node dummy gn_door24
+        parent NULL
+    endnode
+    node emitter fire!07
+        parent gn_door24
+    endnode
+    node trimesh sam
+        parent gn_door24
+        alphakey
+            0 0 
+            0.666667 0 
+        endlist
+    endnode
+    node dummy GN_Door24_DWK
+        parent gn_door24
+    endnode
+    node dummy 24_DWK_dp_closed_01
+        parent GN_Door24_DWK
+    endnode
+    node dummy 24_DWK_dp_closed_02
+        parent GN_Door24_DWK
+    endnode
+    node dummy 24_DWK_dp_open1_01
+        parent GN_Door24_DWK
+    endnode
+    node dummy 24_DWK_dp_open2_01
+        parent GN_Door24_DWK
+    endnode
+    node dwk 24_DWK_wg_closed
+        parent GN_Door24_DWK
+    endnode
+    node dwk 24_DWK_wg_open1
+        parent GN_Door24_DWK
+    endnode
+    node dwk 24_DWK_wg_open2
+        parent GN_Door24_DWK
+    endnode
+    node dummy GN_Door24grnd
+        parent gn_door24
+    endnode
+    node dummy GN_Door24head
+        parent gn_door24
+    endnode
+    node dummy GN_Door24hhit
+        parent gn_door24
+    endnode
+    node dummy GN_Door24impc
+        parent gn_door24
+    endnode
+    node dummy TIN01_B13_03
+        parent gn_door24
+    endnode
+    node trimesh Object01
+        parent TIN01_B13_03
+        orientationkey
+            0 -0.999889 0.00893637 0.0118836 0
+            0.666667 -0.92261 -0.385676 0.00665569 -0.303278
+        endlist
+    endnode
+    node trimesh Object02
+        parent Object01
+        orientationkey
+            0 -0.994198 0.107557 -0.000948244 -0.0143082
+            0.0333333 0.99661 -0.0711542 0.0413027 -0.363868
+            0.666667 0.049703 -0.988503 -0.1428 -0.282008
+        endlist
+    endnode
+    node trimesh Object03
+        parent Object02
+        orientationkey
+            0 0.0469198 -0.255399 -0.965697 -0.0112442
+            0.166667 0.845338 0.0907143 0.526474 -0.515615
+            0.666667 0.316213 -0.875577 0.365204 -0.249226
+        endlist
+    endnode
+    node trimesh Object04
+        parent Object03
+        orientationkey
+            0 0.764772 -0.600405 0.233749 -0.341883
+            0.333333 0.855001 0.506506 0.111468 -0.702611
+            0.666667 0.855393 0.275257 0.43879 -0.608879
+        endlist
+    endnode
+    node trimesh Object05
+        parent Object04
+        orientationkey
+            0 -0.480658 -0.318752 -0.816924 -0.75956
+            0.533333 -0.492281 0.648744 -0.580337 -0.720682
+            0.666667 -0.755952 0.590261 -0.28307 -0.760134
+        endlist
+    endnode
+    node danglymesh Plane08
+        parent Object05
+        orientationkey
+            0 -0.929724 0.207112 -0.304496 -1.71795
+            0.666667 -0.867543 0.196082 -0.457079 -1.64192
+        endlist
+    endnode
+    node danglymesh Plane07
+        parent Plane08
+        orientationkey
+            0 -0.583387 -0.752422 -0.305811 -0.143315
+            0.333333 -0.583387 -0.752422 -0.305812 -0.143315
+            0.666667 0.234907 -0.212455 -0.948516 -0.407244
+        endlist
+    endnode
+    node danglymesh Plane06
+        parent Plane07
+        orientationkey
+            0 0.623303 0.727569 0.286595 -6.1643
+            0.333333 -0.623304 -0.727568 -0.286595 -0.118889
+            0.666667 0.234908 -0.212456 -0.948515 -0.407243
+        endlist
+    endnode
+    node danglymesh Plane05
+        parent Plane06
+        orientationkey
+            0 0.497398 0.677772 0.541498 -6.20336
+            0.333333 -0.497399 -0.67777 -0.5415 -0.0798234
+            0.666667 -0.234906 0.212456 0.948516 -5.87594
+        endlist
+    endnode
+    node danglymesh Plane04
+        parent Plane05
+        orientationkey
+            0 0.634649 0.671975 0.381667 -6.1644
+            0.333333 -0.634648 -0.671976 -0.381668 -0.11879
+            0.666667 -0.234908 0.212456 0.948515 -5.87594
+        endlist
+    endnode
+    node danglymesh Plane01
+        parent Plane04
+        orientationkey
+            0 0.651206 0.642181 0.404394 -6.16989
+            0.333333 -0.651204 -0.642183 -0.404394 -0.113298
+            0.666667 -0.234907 0.212456 0.948515 -5.87594
+        endlist
+    endnode
+    node danglymesh Plane13
+        parent Plane08
+        orientationkey
+            0 0.641641 -0.665386 0.381522 -3.13381
+            0.333333 0.641641 -0.665385 0.381522 -3.13381
+            0.666667 0.547216 -0.77759 0.309692 -3.14159
+        endlist
+    endnode
+    node danglymesh Plane12
+        parent Plane13
+        orientationkey
+            0 0.659166 0.684978 0.31033 -6.19164
+            0.333333 0.659168 0.684978 0.310326 -6.19164
+            0.666667 0.234907 -0.212458 -0.948515 -0.407243
+        endlist
+    endnode
+    node danglymesh Plane11
+        parent Plane12
+        orientationkey
+            0 0.662457 0.666454 0.342037 -6.19492
+            0.333333 0.662459 0.666454 0.342035 -6.19492
+            0.666667 -0.234906 0.212455 0.948516 -5.87594
+        endlist
+    endnode
+    node danglymesh Plane10
+        parent Plane11
+        orientationkey
+            0 0.684151 0.643952 0.342437 -6.16754
+            0.333333 0.684153 0.643951 0.342436 -6.16754
+            0.666667 -0.234908 0.212456 0.948515 -5.87594
+        endlist
+    endnode
+    node danglymesh Plane09
+        parent Plane10
+        orientationkey
+            0 0.687661 0.620542 0.376896 -6.19184
+            0.333333 0.68766 0.620542 0.376896 -6.19184
+            0.666667 -0.234906 0.212456 0.948515 -5.87594
+        endlist
+    endnode
+    node trimesh Object06
+        parent TIN01_B13_03
+        orientationkey
+            0 -0.999586 -0.028676 0.00245738 0
+            0.666667 0 0 -1 -0.0143478
+        endlist
+    endnode
+    node trimesh Object07
+        parent Object06
+        orientationkey
+            0 0 0 0 0
+            0.0333333 0.81204 0.0929542 0.576151 -0.463992
+            0.666667 0.0135122 -0.649501 0.760241 -0.257142
+        endlist
+    endnode
+    node trimesh Object08
+        parent Object07
+        orientationkey
+            0 0.98259 -0.00200206 -0.185775 0
+            0.166667 0.523572 -0.837503 0.156402 -1.01036
+            0.666667 0.09341 -0.986291 0.13603 -1.12635
+        endlist
+    endnode
+    node trimesh Object09
+        parent Object08
+        orientationkey
+            0 0.448603 -0.280068 0.848715 0
+            0.333333 0.278394 -0.960154 0.024508 -1.03972
+            0.666667 0.252774 -0.953956 0.16147 -1.26822
+        endlist
+    endnode
+    node trimesh Object10
+        parent Object09
+        orientationkey
+            0 0.716575 -0.5964 -0.361702 -0.40249
+            0.533333 -0.0454359 -0.996733 0.0667685 -4.55743
+            0.666667 0.140136 -0.989079 0.04567 -4.4997
+        endlist
+    endnode
+    node danglymesh Plane14
+        parent Object10
+        orientationkey
+            0 -0.781154 -0.344006 -0.521017 -2.14652
+            0.666667 -0.867543 0.196082 -0.457079 -1.64192
+        endlist
+    endnode
+    node danglymesh Plane15
+        parent Plane14
+        orientationkey
+            0 0.583388 0.752422 0.30581 -6.13987
+            0.333333 -0.583387 -0.752423 -0.305808 -0.143315
+            0.666667 0.234907 -0.212455 -0.948515 -0.407244
+        endlist
+    endnode
+    node danglymesh Plane16
+        parent Plane15
+        orientationkey
+            0 0.623301 0.72757 0.286597 -6.1643
+            0.333333 -0.623297 -0.727575 -0.286592 -0.118888
+            0.666667 0.234908 -0.212457 -0.948515 -0.407243
+        endlist
+    endnode
+    node danglymesh Plane17
+        parent Plane16
+        orientationkey
+            0 0.497398 0.677772 0.541499 -6.20336
+            0.333333 -0.497398 -0.677778 -0.541491 -0.0798234
+            0.666667 0.234905 -0.212456 -0.948516 -0.407244
+        endlist
+    endnode
+    node danglymesh Plane18
+        parent Plane17
+        orientationkey
+            0 0.634651 0.671973 0.381668 -6.1644
+            0.333333 0.63465 0.671973 0.38167 -6.1644
+            0.666667 0.234908 -0.212455 -0.948515 -0.407244
+        endlist
+    endnode
+    node danglymesh Plane19
+        parent Plane18
+        orientationkey
+            0 0.651208 0.642178 0.404395 -6.16989
+            0.333333 0.651208 0.642177 0.404396 -6.16989
+            0.666667 0.234907 -0.212456 -0.948515 -0.407243
+        endlist
+    endnode
+    node danglymesh Plane20
+        parent Plane14
+        orientationkey
+            0 -0.641641 0.665386 -0.381522 -3.14937
+            0.333333 0.641641 -0.665386 0.381522 -3.13381
+            0.666667 0.547216 -0.77759 0.309692 -3.14159
+        endlist
+    endnode
+    node danglymesh Plane21
+        parent Plane20
+        orientationkey
+            0 0.659168 0.684978 0.310325 -6.19164
+            0.333333 0.659166 0.68498 0.310327 -6.19164
+            0.666667 -0.234907 0.212457 0.948515 -5.87594
+        endlist
+    endnode
+    node danglymesh Plane22
+        parent Plane21
+        orientationkey
+            0 0.662459 0.666457 0.342029 -6.19492
+            0.333333 0.662459 0.666455 0.342032 -6.19492
+            0.666667 -0.234906 0.212455 0.948516 -5.87594
+        endlist
+    endnode
+    node danglymesh Plane23
+        parent Plane22
+        orientationkey
+            0 0.684152 0.643952 0.342435 -6.16754
+            0.333333 0.684151 0.643952 0.342437 -6.16754
+            0.666667 -0.234908 0.212456 0.948515 -5.87594
+        endlist
+    endnode
+    node danglymesh Plane24
+        parent Plane23
+        orientationkey
+            0 0.687665 0.62054 0.376891 -6.19184
+            0.333333 0.687664 0.62054 0.376893 -6.19184
+            0.666667 -0.234905 0.212457 0.948515 -5.87594
+        endlist
+    endnode
+    node trimesh Object11
+        parent TIN01_B13_03
+        orientationkey
+            0 0 0 1 -3.00619
+            0.666667 -0.0611154 0.00455383 0.99812 -2.99312
+        endlist
+    endnode
+    node trimesh Object12
+        parent Object11
+        orientationkey
+            0 0 0 -1 -6.14219
+            0.0333333 -0.183645 0.834505 -0.519496 -5.5712
+            0.666667 0.308753 0.850144 -0.426529 -5.38468
+        endlist
+    endnode
+    node trimesh Object13
+        parent Object12
+        orientationkey
+            0 -0.037358 0.402992 -0.914441 -6.09335
+            0.0333333 0.321323 0.5347 -0.781568 -5.2659
+            0.166667 -0.598262 0.747652 -0.28827 -4.88576
+            0.333333 -0.297749 0.888806 -0.348381 -4.8847
+            0.666667 -0.265867 0.901277 -0.342075 -4.87674
+        endlist
+    endnode
+    node trimesh Object14
+        parent Object13
+        orientationkey
+            0 0.103748 0.0451397 0.993579 -1.43444
+            0.333333 0.389955 -0.606322 0.693042 -3.70015
+            0.666667 0.212492 -0.925941 0.312217 -4.5322
+        endlist
+    endnode
+    node trimesh Object15
+        parent Object14
+        orientationkey
+            0 0.0550805 0.00517718 0.998469 -1.23673
+            0.133333 0.779135 0.0950975 0.619601 -1.2062
+            0.533333 -0.743712 -0.43678 0.506078 -5.31375
+            0.666667 -0.630222 -0.659228 0.410169 -5.50125
+        endlist
+    endnode
+    node danglymesh Plane25
+        parent Object15
+        orientationkey
+            0 -0.406582 0.274912 -0.871271 -2.32753
+            0.666667 0.864389 -0.177165 0.470579 -4.7068
+        endlist
+    endnode
+    node danglymesh Plane26
+        parent Plane25
+        orientationkey
+            0 0.583387 0.752422 0.30581 -6.13987
+            0.333333 -0.583386 -0.752424 -0.305809 -0.143315
+            0.666667 -0.234907 0.212455 0.948515 -5.87594
+        endlist
+    endnode
+    node danglymesh Plane27
+        parent Plane26
+        orientationkey
+            0 0.623303 0.727569 0.286595 -6.1643
+            0.333333 -0.623302 -0.72757 -0.286594 -0.118889
+            0.666667 0.234908 -0.212456 -0.948515 -0.407243
+        endlist
+    endnode
+    node danglymesh Plane28
+        parent Plane27
+        orientationkey
+            0 0.4974 0.67777 0.541499 -6.20336
+            0.333333 -0.497399 -0.677772 -0.541497 -0.0798234
+            0.666667 0.234905 -0.212455 -0.948516 -0.407244
+        endlist
+    endnode
+    node danglymesh Plane29
+        parent Plane28
+        orientationkey
+            0 0.63465 0.671974 0.381667 -6.1644
+            0.333333 -0.634648 -0.671977 -0.381667 -0.11879
+            0.666667 0.234908 -0.212456 -0.948515 -0.407244
+        endlist
+    endnode
+    node danglymesh Plane30
+        parent Plane29
+        orientationkey
+            0 0.651208 0.642179 0.404394 -6.16989
+            0.333333 -0.651208 -0.642179 -0.404392 -0.113299
+            0.666667 0.234907 -0.212456 -0.948515 -0.407243
+        endlist
+    endnode
+    node danglymesh Plane31
+        parent Plane25
+        orientationkey
+            0 -0.641641 0.665385 -0.381522 -3.14937
+            0.333333 0.641641 -0.665385 0.381523 -3.13381
+            0.666667 -0.547216 0.77759 -0.309692 -3.14159
+        endlist
+    endnode
+    node danglymesh Plane32
+        parent Plane31
+        orientationkey
+            0 -0.659168 -0.684979 -0.310325 -0.0915498
+            0.333333 0.659168 0.684979 0.310324 -6.19164
+            0.666667 -0.234907 0.212458 0.948515 -5.87594
+        endlist
+    endnode
+    node danglymesh Plane33
+        parent Plane32
+        orientationkey
+            0 -0.662458 -0.666455 -0.342034 -0.0882656
+            0.333333 0.662458 0.666455 0.342034 -6.19492
+            0.666667 -0.234906 0.212455 0.948516 -5.87594
+        endlist
+    endnode
+    node danglymesh Plane34
+        parent Plane33
+        orientationkey
+            0 -0.684151 -0.643951 -0.342438 -0.115647
+            0.333333 0.684152 0.643951 0.342438 -6.16754
+            0.666667 -0.234908 0.212456 0.948515 -5.87594
+        endlist
+    endnode
+    node danglymesh Plane35
+        parent Plane34
+        orientationkey
+            0 -0.687664 -0.620539 -0.376895 -0.0913453
+            0.333333 0.687665 0.620539 0.376894 -6.19184
+            0.666667 -0.234905 0.212457 0.948515 -5.87594
+        endlist
+    endnode
+doneanim closing2 gn_door24
+
+
+#NWmax ANIM ASCII
+newanim closed gn_door24
+  length 0.0333333
+  transtime 0
+  animroot gn_door24
+    node dummy gn_door24
+        parent NULL
+    endnode
+    node emitter fire!07
+        parent gn_door24
+    endnode
+    node trimesh sam
+        parent gn_door24
+        alphakey
+            0 0 
+            0.0333333 0 
+        endlist
+    endnode
+    node dummy GN_Door24_DWK
+        parent gn_door24
+    endnode
+    node dummy 24_DWK_dp_closed_01
+        parent GN_Door24_DWK
+    endnode
+    node dummy 24_DWK_dp_closed_02
+        parent GN_Door24_DWK
+    endnode
+    node dummy 24_DWK_dp_open1_01
+        parent GN_Door24_DWK
+    endnode
+    node dummy 24_DWK_dp_open2_01
+        parent GN_Door24_DWK
+    endnode
+    node dwk 24_DWK_wg_closed
+        parent GN_Door24_DWK
+    endnode
+    node dwk 24_DWK_wg_open1
+        parent GN_Door24_DWK
+    endnode
+    node dwk 24_DWK_wg_open2
+        parent GN_Door24_DWK
+    endnode
+    node dummy GN_Door24grnd
+        parent gn_door24
+    endnode
+    node dummy GN_Door24head
+        parent gn_door24
+    endnode
+    node dummy GN_Door24hhit
+        parent gn_door24
+    endnode
+    node dummy GN_Door24impc
+        parent gn_door24
+    endnode
+    node dummy TIN01_B13_03
+        parent gn_door24
+    endnode
+    node trimesh Object01
+        parent TIN01_B13_03
+        orientationkey
+            0 -0.92261 -0.385676 0.00665569 -0.303278
+            0.0333333 -0.92261 -0.385676 0.00665569 -0.303278
+        endlist
+    endnode
+    node trimesh Object02
+        parent Object01
+        orientationkey
+            0 0.049703 -0.988503 -0.1428 -0.282008
+            0.0333333 0.049703 -0.988503 -0.1428 -0.282008
+        endlist
+    endnode
+    node trimesh Object03
+        parent Object02
+        orientationkey
+            0 0.316213 -0.875577 0.365204 -0.249226
+            0.0333333 0.316213 -0.875577 0.365204 -0.249226
+        endlist
+    endnode
+    node trimesh Object04
+        parent Object03
+        orientationkey
+            0 0.855393 0.275257 0.43879 -0.608879
+            0.0333333 0.855393 0.275257 0.43879 -0.608879
+        endlist
+    endnode
+    node trimesh Object05
+        parent Object04
+        orientationkey
+            0 -0.755952 0.590261 -0.28307 -0.760134
+            0.0333333 -0.755952 0.590261 -0.28307 -0.760134
+        endlist
+    endnode
+    node danglymesh Plane08
+        parent Object05
+        orientationkey
+            0 -0.867543 0.196082 -0.457079 -1.64192
+            0.0333333 -0.867543 0.196082 -0.457079 -1.64192
+        endlist
+    endnode
+    node danglymesh Plane07
+        parent Plane08
+        orientationkey
+            0 0.234907 -0.212455 -0.948516 -0.407244
+            0.0333333 0.234907 -0.212455 -0.948515 -0.407244
+        endlist
+    endnode
+    node danglymesh Plane06
+        parent Plane07
+        orientationkey
+            0 0.234908 -0.212456 -0.948515 -0.407243
+            0.0333333 0.234908 -0.212456 -0.948515 -0.407243
+        endlist
+    endnode
+    node danglymesh Plane05
+        parent Plane06
+        orientationkey
+            0 -0.234905 0.212455 0.948516 -5.87594
+            0.0333333 -0.234906 0.212456 0.948516 -5.87594
+        endlist
+    endnode
+    node danglymesh Plane04
+        parent Plane05
+        orientationkey
+            0 -0.234908 0.212456 0.948515 -5.87594
+            0.0333333 -0.234908 0.212455 0.948515 -5.87594
+        endlist
+    endnode
+    node danglymesh Plane01
+        parent Plane04
+        orientationkey
+            0 -0.234908 0.212456 0.948515 -5.87594
+            0.0333333 -0.234907 0.212456 0.948515 -5.87594
+        endlist
+    endnode
+    node danglymesh Plane13
+        parent Plane08
+        orientationkey
+            0 0.547216 -0.77759 0.309692 -3.14159
+            0.0333333 0.547216 -0.77759 0.309692 -3.14159
+        endlist
+    endnode
+    node danglymesh Plane12
+        parent Plane13
+        orientationkey
+            0 0.234907 -0.212458 -0.948515 -0.407243
+            0.0333333 0.234907 -0.212458 -0.948515 -0.407243
+        endlist
+    endnode
+    node danglymesh Plane11
+        parent Plane12
+        orientationkey
+            0 -0.234906 0.212455 0.948516 -5.87594
+            0.0333333 -0.234906 0.212455 0.948516 -5.87594
+        endlist
+    endnode
+    node danglymesh Plane10
+        parent Plane11
+        orientationkey
+            0 -0.234907 0.212456 0.948515 -5.87594
+            0.0333333 -0.234908 0.212456 0.948515 -5.87594
+        endlist
+    endnode
+    node danglymesh Plane09
+        parent Plane10
+        orientationkey
+            0 -0.234906 0.212456 0.948515 -5.87594
+            0.0333333 -0.234906 0.212456 0.948515 -5.87594
+        endlist
+    endnode
+    node trimesh Object06
+        parent TIN01_B13_03
+        orientationkey
+            0 0 0 -1 -0.0143478
+            0.0333333 0 0 -1 -0.0143478
+        endlist
+    endnode
+    node trimesh Object07
+        parent Object06
+        orientationkey
+            0 0.0135124 -0.649501 0.760241 -0.257142
+            0.0333333 0.0135126 -0.649501 0.760241 -0.257142
+        endlist
+    endnode
+    node trimesh Object08
+        parent Object07
+        orientationkey
+            0 0.0934101 -0.986291 0.136031 -1.12635
+            0.0333333 0.0934103 -0.986291 0.136031 -1.12635
+        endlist
+    endnode
+    node trimesh Object09
+        parent Object08
+        orientationkey
+            0 0.252774 -0.953956 0.16147 -1.26822
+            0.0333333 0.252774 -0.953956 0.16147 -1.26822
+        endlist
+    endnode
+    node trimesh Object10
+        parent Object09
+        orientationkey
+            0 0.140136 -0.989079 0.04567 -4.4997
+            0.0333333 0.140136 -0.989079 0.04567 -4.4997
+        endlist
+    endnode
+    node danglymesh Plane14
+        parent Object10
+        orientationkey
+            0 -0.867543 0.196082 -0.457079 -1.64192
+            0.0333333 -0.867543 0.196082 -0.457079 -1.64192
+        endlist
+    endnode
+    node danglymesh Plane15
+        parent Plane14
+        orientationkey
+            0 0.234907 -0.212455 -0.948516 -0.407244
+            0.0333333 0.234907 -0.212455 -0.948516 -0.407244
+        endlist
+    endnode
+    node danglymesh Plane16
+        parent Plane15
+        orientationkey
+            0 0.234908 -0.212457 -0.948515 -0.407243
+            0.0333333 0.234908 -0.212456 -0.948515 -0.407243
+        endlist
+    endnode
+    node danglymesh Plane17
+        parent Plane16
+        orientationkey
+            0 0.234905 -0.212456 -0.948516 -0.407244
+            0.0333333 0.234906 -0.212456 -0.948516 -0.407244
+        endlist
+    endnode
+    node danglymesh Plane18
+        parent Plane17
+        orientationkey
+            0 0.234908 -0.212455 -0.948515 -0.407244
+            0.0333333 0.234908 -0.212456 -0.948515 -0.407244
+        endlist
+    endnode
+    node danglymesh Plane19
+        parent Plane18
+        orientationkey
+            0 0.234907 -0.212455 -0.948515 -0.407243
+            0.0333333 0.234907 -0.212456 -0.948515 -0.407243
+        endlist
+    endnode
+    node danglymesh Plane20
+        parent Plane14
+        orientationkey
+            0 0.547216 -0.77759 0.309692 -3.14159
+            0.0333333 0.547216 -0.77759 0.309692 -3.14159
+        endlist
+    endnode
+    node danglymesh Plane21
+        parent Plane20
+        orientationkey
+            0 -0.234907 0.212457 0.948515 -5.87594
+            0.0333333 -0.234907 0.212458 0.948515 -5.87594
+        endlist
+    endnode
+    node danglymesh Plane22
+        parent Plane21
+        orientationkey
+            0 -0.234906 0.212455 0.948516 -5.87594
+            0.0333333 -0.234906 0.212455 0.948516 -5.87594
+        endlist
+    endnode
+    node danglymesh Plane23
+        parent Plane22
+        orientationkey
+            0 -0.234908 0.212456 0.948515 -5.87594
+            0.0333333 -0.234908 0.212456 0.948515 -5.87594
+        endlist
+    endnode
+    node danglymesh Plane24
+        parent Plane23
+        orientationkey
+            0 -0.234906 0.212457 0.948515 -5.87594
+            0.0333333 -0.234906 0.212457 0.948515 -5.87594
+        endlist
+    endnode
+    node trimesh Object11
+        parent TIN01_B13_03
+        orientationkey
+            0 -0.0611154 0.00455383 0.99812 -2.99312
+            0.0333333 -0.0611154 0.00455383 0.99812 -2.99312
+        endlist
+    endnode
+    node trimesh Object12
+        parent Object11
+        orientationkey
+            0 0.308753 0.850144 -0.426529 -5.38468
+            0.0333333 0.308753 0.850144 -0.426529 -5.38468
+        endlist
+    endnode
+    node trimesh Object13
+        parent Object12
+        orientationkey
+            0 -0.265867 0.901277 -0.342075 -4.87674
+            0.0333333 -0.265867 0.901277 -0.342075 -4.87674
+        endlist
+    endnode
+    node trimesh Object14
+        parent Object13
+        orientationkey
+            0 0.212492 -0.925941 0.312217 -4.5322
+            0.0333333 0.212492 -0.925941 0.312217 -4.5322
+        endlist
+    endnode
+    node trimesh Object15
+        parent Object14
+        orientationkey
+            0 -0.630222 -0.659228 0.410169 -5.50125
+            0.0333333 -0.630222 -0.659228 0.410169 -5.50125
+        endlist
+    endnode
+    node danglymesh Plane25
+        parent Object15
+        orientationkey
+            0 0.864389 -0.177165 0.470579 -4.7068
+            0.0333333 0.864389 -0.177165 0.470579 -4.7068
+        endlist
+    endnode
+    node danglymesh Plane26
+        parent Plane25
+        orientationkey
+            0 -0.234906 0.212455 0.948516 -5.87594
+            0.0333333 -0.234906 0.212455 0.948516 -5.87594
+        endlist
+    endnode
+    node danglymesh Plane27
+        parent Plane26
+        orientationkey
+            0 0.234907 -0.212457 -0.948515 -0.407243
+            0.0333333 0.234907 -0.212457 -0.948515 -0.407243
+        endlist
+    endnode
+    node danglymesh Plane28
+        parent Plane27
+        orientationkey
+            0 0.234904 -0.212456 -0.948516 -0.407244
+            0.0333333 0.234905 -0.212456 -0.948516 -0.407244
+        endlist
+    endnode
+    node danglymesh Plane29
+        parent Plane28
+        orientationkey
+            0 0.234908 -0.212456 -0.948515 -0.407244
+            0.0333333 0.234908 -0.212456 -0.948515 -0.407244
+        endlist
+    endnode
+    node danglymesh Plane30
+        parent Plane29
+        orientationkey
+            0 0.234907 -0.212456 -0.948515 -0.407243
+            0.0333333 0.234907 -0.212456 -0.948515 -0.407243
+        endlist
+    endnode
+    node danglymesh Plane31
+        parent Plane25
+        orientationkey
+            0 -0.547216 0.77759 -0.309692 -3.14159
+            0.0333333 -0.547216 0.77759 -0.309692 -3.14159
+        endlist
+    endnode
+    node danglymesh Plane32
+        parent Plane31
+        orientationkey
+            0 -0.234907 0.212458 0.948515 -5.87594
+            0.0333333 -0.234907 0.212458 0.948515 -5.87594
+        endlist
+    endnode
+    node danglymesh Plane33
+        parent Plane32
+        orientationkey
+            0 -0.234906 0.212455 0.948516 -5.87594
+            0.0333333 -0.234906 0.212455 0.948516 -5.87594
+        endlist
+    endnode
+    node danglymesh Plane34
+        parent Plane33
+        orientationkey
+            0 -0.234908 0.212455 0.948515 -5.87594
+            0.0333333 -0.234908 0.212455 0.948515 -5.87594
+        endlist
+    endnode
+    node danglymesh Plane35
+        parent Plane34
+        orientationkey
+            0 -0.234906 0.212456 0.948515 -5.87594
+            0.0333333 -0.234906 0.212456 0.948515 -5.87594
+        endlist
+    endnode
+doneanim closed gn_door24
+
+
+#NWmax ANIM ASCII
+newanim die gn_door24
+  length 0.666667
+  transtime 0.25
+  animroot gn_door24
+  event 0 detonate
+    node dummy gn_door24
+        parent NULL
+    endnode
+    node emitter fire!07
+        parent gn_door24
+    endnode
+    node trimesh sam
+        parent gn_door24
+        alphakey
+            0 0 
+            0.666667 0 
+        endlist
+    endnode
+    node dummy GN_Door24_DWK
+        parent gn_door24
+    endnode
+    node dummy 24_DWK_dp_closed_01
+        parent GN_Door24_DWK
+    endnode
+    node dummy 24_DWK_dp_closed_02
+        parent GN_Door24_DWK
+    endnode
+    node dummy 24_DWK_dp_open1_01
+        parent GN_Door24_DWK
+    endnode
+    node dummy 24_DWK_dp_open2_01
+        parent GN_Door24_DWK
+    endnode
+    node dwk 24_DWK_wg_closed
+        parent GN_Door24_DWK
+    endnode
+    node dwk 24_DWK_wg_open1
+        parent GN_Door24_DWK
+    endnode
+    node dwk 24_DWK_wg_open2
+        parent GN_Door24_DWK
+    endnode
+    node dummy GN_Door24grnd
+        parent gn_door24
+    endnode
+    node dummy GN_Door24head
+        parent gn_door24
+    endnode
+    node dummy GN_Door24hhit
+        parent gn_door24
+    endnode
+    node dummy GN_Door24impc
+        parent gn_door24
+    endnode
+    node dummy TIN01_B13_03
+        parent gn_door24
+        positionkey
+            0 0 0 0
+            0.666667 0 0 -3.1
+        endlist
+        orientationkey
+            0 1 0 0 0
+            0.666667 0.244431 -0.889577 -0.385884 -0.684503
+        endlist
+    endnode
+    node trimesh Object01
+        parent TIN01_B13_03
+    endnode
+    node trimesh Object02
+        parent Object01
+    endnode
+    node trimesh Object03
+        parent Object02
+    endnode
+    node trimesh Object04
+        parent Object03
+    endnode
+    node trimesh Object05
+        parent Object04
+    endnode
+    node danglymesh Plane08
+        parent Object05
+    endnode
+    node danglymesh Plane07
+        parent Plane08
+    endnode
+    node danglymesh Plane06
+        parent Plane07
+    endnode
+    node danglymesh Plane05
+        parent Plane06
+    endnode
+    node danglymesh Plane04
+        parent Plane05
+    endnode
+    node danglymesh Plane01
+        parent Plane04
+    endnode
+    node danglymesh Plane13
+        parent Plane08
+    endnode
+    node danglymesh Plane12
+        parent Plane13
+    endnode
+    node danglymesh Plane11
+        parent Plane12
+    endnode
+    node danglymesh Plane10
+        parent Plane11
+    endnode
+    node danglymesh Plane09
+        parent Plane10
+    endnode
+    node trimesh Object06
+        parent TIN01_B13_03
+    endnode
+    node trimesh Object07
+        parent Object06
+    endnode
+    node trimesh Object08
+        parent Object07
+    endnode
+    node trimesh Object09
+        parent Object08
+    endnode
+    node trimesh Object10
+        parent Object09
+    endnode
+    node danglymesh Plane14
+        parent Object10
+    endnode
+    node danglymesh Plane15
+        parent Plane14
+    endnode
+    node danglymesh Plane16
+        parent Plane15
+    endnode
+    node danglymesh Plane17
+        parent Plane16
+    endnode
+    node danglymesh Plane18
+        parent Plane17
+    endnode
+    node danglymesh Plane19
+        parent Plane18
+    endnode
+    node danglymesh Plane20
+        parent Plane14
+    endnode
+    node danglymesh Plane21
+        parent Plane20
+    endnode
+    node danglymesh Plane22
+        parent Plane21
+    endnode
+    node danglymesh Plane23
+        parent Plane22
+    endnode
+    node danglymesh Plane24
+        parent Plane23
+    endnode
+    node trimesh Object11
+        parent TIN01_B13_03
+    endnode
+    node trimesh Object12
+        parent Object11
+    endnode
+    node trimesh Object13
+        parent Object12
+    endnode
+    node trimesh Object14
+        parent Object13
+    endnode
+    node trimesh Object15
+        parent Object14
+    endnode
+    node danglymesh Plane25
+        parent Object15
+    endnode
+    node danglymesh Plane26
+        parent Plane25
+    endnode
+    node danglymesh Plane27
+        parent Plane26
+    endnode
+    node danglymesh Plane28
+        parent Plane27
+    endnode
+    node danglymesh Plane29
+        parent Plane28
+    endnode
+    node danglymesh Plane30
+        parent Plane29
+    endnode
+    node danglymesh Plane31
+        parent Plane25
+    endnode
+    node danglymesh Plane32
+        parent Plane31
+    endnode
+    node danglymesh Plane33
+        parent Plane32
+    endnode
+    node danglymesh Plane34
+        parent Plane33
+    endnode
+    node danglymesh Plane35
+        parent Plane34
+    endnode
+doneanim die gn_door24
+
+
+#NWmax ANIM ASCII
+newanim dead gn_door24
+  length 0.0333333
+  transtime 0
+  animroot gn_door24
+    node dummy gn_door24
+        parent NULL
+    endnode
+    node emitter fire!07
+        parent gn_door24
+    endnode
+    node trimesh sam
+        parent gn_door24
+        alphakey
+            0 0 
+            0.0333333 0 
+        endlist
+    endnode
+    node dummy GN_Door24_DWK
+        parent gn_door24
+    endnode
+    node dummy 24_DWK_dp_closed_01
+        parent GN_Door24_DWK
+    endnode
+    node dummy 24_DWK_dp_closed_02
+        parent GN_Door24_DWK
+    endnode
+    node dummy 24_DWK_dp_open1_01
+        parent GN_Door24_DWK
+    endnode
+    node dummy 24_DWK_dp_open2_01
+        parent GN_Door24_DWK
+    endnode
+    node dwk 24_DWK_wg_closed
+        parent GN_Door24_DWK
+    endnode
+    node dwk 24_DWK_wg_open1
+        parent GN_Door24_DWK
+    endnode
+    node dwk 24_DWK_wg_open2
+        parent GN_Door24_DWK
+    endnode
+    node dummy GN_Door24grnd
+        parent gn_door24
+    endnode
+    node dummy GN_Door24head
+        parent gn_door24
+    endnode
+    node dummy GN_Door24hhit
+        parent gn_door24
+    endnode
+    node dummy GN_Door24impc
+        parent gn_door24
+    endnode
+    node dummy TIN01_B13_03
+        parent gn_door24
+        positionkey
+            0 0 0 -3.1
+            0.0333333 0 0 -3.1
+        endlist
+        orientationkey
+            0 0.244431 -0.889577 -0.385884 -0.684503
+            0.0333333 0.244431 -0.889577 -0.385884 -0.684503
+        endlist
+    endnode
+    node trimesh Object01
+        parent TIN01_B13_03
+    endnode
+    node trimesh Object02
+        parent Object01
+    endnode
+    node trimesh Object03
+        parent Object02
+    endnode
+    node trimesh Object04
+        parent Object03
+    endnode
+    node trimesh Object05
+        parent Object04
+    endnode
+    node danglymesh Plane08
+        parent Object05
+    endnode
+    node danglymesh Plane07
+        parent Plane08
+    endnode
+    node danglymesh Plane06
+        parent Plane07
+    endnode
+    node danglymesh Plane05
+        parent Plane06
+    endnode
+    node danglymesh Plane04
+        parent Plane05
+    endnode
+    node danglymesh Plane01
+        parent Plane04
+    endnode
+    node danglymesh Plane13
+        parent Plane08
+    endnode
+    node danglymesh Plane12
+        parent Plane13
+    endnode
+    node danglymesh Plane11
+        parent Plane12
+    endnode
+    node danglymesh Plane10
+        parent Plane11
+    endnode
+    node danglymesh Plane09
+        parent Plane10
+    endnode
+    node trimesh Object06
+        parent TIN01_B13_03
+    endnode
+    node trimesh Object07
+        parent Object06
+    endnode
+    node trimesh Object08
+        parent Object07
+    endnode
+    node trimesh Object09
+        parent Object08
+    endnode
+    node trimesh Object10
+        parent Object09
+    endnode
+    node danglymesh Plane14
+        parent Object10
+    endnode
+    node danglymesh Plane15
+        parent Plane14
+    endnode
+    node danglymesh Plane16
+        parent Plane15
+    endnode
+    node danglymesh Plane17
+        parent Plane16
+    endnode
+    node danglymesh Plane18
+        parent Plane17
+    endnode
+    node danglymesh Plane19
+        parent Plane18
+    endnode
+    node danglymesh Plane20
+        parent Plane14
+    endnode
+    node danglymesh Plane21
+        parent Plane20
+    endnode
+    node danglymesh Plane22
+        parent Plane21
+    endnode
+    node danglymesh Plane23
+        parent Plane22
+    endnode
+    node danglymesh Plane24
+        parent Plane23
+    endnode
+    node trimesh Object11
+        parent TIN01_B13_03
+    endnode
+    node trimesh Object12
+        parent Object11
+    endnode
+    node trimesh Object13
+        parent Object12
+    endnode
+    node trimesh Object14
+        parent Object13
+    endnode
+    node trimesh Object15
+        parent Object14
+    endnode
+    node danglymesh Plane25
+        parent Object15
+    endnode
+    node danglymesh Plane26
+        parent Plane25
+    endnode
+    node danglymesh Plane27
+        parent Plane26
+    endnode
+    node danglymesh Plane28
+        parent Plane27
+    endnode
+    node danglymesh Plane29
+        parent Plane28
+    endnode
+    node danglymesh Plane30
+        parent Plane29
+    endnode
+    node danglymesh Plane31
+        parent Plane25
+    endnode
+    node danglymesh Plane32
+        parent Plane31
+    endnode
+    node danglymesh Plane33
+        parent Plane32
+    endnode
+    node danglymesh Plane34
+        parent Plane33
+    endnode
+    node danglymesh Plane35
+        parent Plane34
+    endnode
+doneanim dead gn_door24
+
+donemodel gn_door24

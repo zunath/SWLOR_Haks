@@ -1,0 +1,90 @@
+# Exported from NWmax 0.8 b60 at 20/12/2009 23:06:23
+# mdl file
+#
+#NWmax MODEL ASCII
+# model: jvb_poster01
+#local file: Unknown
+filedependancy Unknown
+newmodel jvb_poster01
+setsupermodel jvb_poster01 NULL
+classification Character
+setanimationscale 1.0
+#NWmax GEOM  ASCII
+beginmodelgeom jvb_poster01
+node dummy jvb_poster01
+  parent NULL
+endnode
+node dummy poster01_impact
+  parent jvb_poster01
+  position 0.0 0.0 0.85
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.835294 0.603922 0.898039 
+endnode
+node dummy poster01_ground
+  parent jvb_poster01
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.835294 0.603922 0.898039 
+endnode
+node dummy poster01_hand
+  parent jvb_poster01
+  position 0.0 0.0 1.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.835294 0.603922 0.898039 
+endnode
+node dummy poster01_head
+  parent jvb_poster01
+  position 0.0 0.0 2.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.835294 0.603922 0.898039 
+endnode
+node dummy poster01_head_hit
+  parent jvb_poster01
+  position 0.0 0.0 1.5
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.835294 0.603922 0.898039 
+endnode
+node trimesh poster
+  parent jvb_poster01
+  position -0.000168402 -0.00998294 1.17305
+  orientation 0.0 0.0 1.0 -3.14632
+  wirecolor 0.721569 0.607843 0.898039 
+  ambient 0.588 0.588 0.588 
+  diffuse 0.588 0.588 0.588 
+  specular 0.0 0.0 0.0 
+  shininess 10.0
+  bitmap jvb_postr
+  verts 8
+    0.323831 0.00632794 -0.408217
+    -0.313595 -0.00208736 -0.416102
+    -0.323872 -0.000711174 0.408849
+    0.313575 0.00139369 0.416787
+    0.323869 0.00173883 -0.408227
+    -0.313557 -0.00667648 -0.416112
+    -0.323834 -0.00530028 0.40884
+    0.313613 -0.00319543 0.416777
+  faces 12
+    0 1 3  0  0 1 2  1
+    1 2 3  0  1 3 2  1
+    5 6 1  0  1 3 1  1
+    6 2 1  0  3 3 1  1
+    7 3 6  0  2 2 3  1
+    6 3 2  0  3 2 3  1
+    7 4 3  0  2 0 2  1
+    4 0 3  0  0 0 2  1
+    5 1 4  0  1 1 0  1
+    4 1 0  0  0 1 0  1
+    4 7 5  0  4 5 6  1
+    5 7 6  0  6 5 7  1
+  tverts 8
+    0.000149965 -1.00015 0
+    0.99877 -1.00015 0
+    0.000149965 -0.00123 0
+    0.99877 -0.00123 0
+    0.94586 0.1284 0
+    0.94586 0.34952 0
+    0.59381 0.1284 0
+    0.59381 0.34952 0
+endnode
+endmodelgeom jvb_poster01
+donemodel jvb_poster01

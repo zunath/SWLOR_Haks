@@ -1,0 +1,700 @@
+# Exported from NWmax 0.8 b61 at 09/03/2010 15:18:07
+# mdl file
+#
+#NWmax MODEL ASCII
+# model: purp_easel
+#local file: Unknown
+filedependancy Unknown
+newmodel purp_easel
+setsupermodel purp_easel NULL
+classification Character
+setanimationscale 1.0
+#NWmax GEOM  ASCII
+beginmodelgeom purp_easel
+node dummy purp_easel
+  parent NULL
+endnode
+node dummy K03_hand
+  parent purp_easel
+  position 0.00398926 -0.505197 1.57595
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.839216 0.894118 0.6 
+endnode
+node dummy K03_head
+  parent purp_easel
+  position 0.00398926 0.119903 2.62852
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.839216 0.894118 0.6 
+endnode
+node dummy K03_head_hit
+  parent purp_easel
+  position 0.00398926 0.119903 2.14705
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.839216 0.894118 0.6 
+endnode
+node dummy K03_impact
+  parent purp_easel
+  position 0.00398926 -0.174927 0.868134
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.839216 0.894118 0.6 
+endnode
+node dummy K03_ground
+  parent purp_easel
+  position -0.00363281 0.00698791 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.839216 0.894118 0.6 
+endnode
+node emitter ChunkyWood122
+  parent purp_easel
+  position 0.00370824 0.0155743 0.606715
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 1.0 1.0 1.0 
+  update_sel 3
+  update Explosion
+  render_sel 1
+  render Normal
+  blend_sel 1
+  Blend Normal
+  spawntype_sel 0
+  spawnType 0
+  xSize 89.0
+  ySize 40.0
+  inherit 1
+  inherit_local 0
+  inheritvel 0
+  inherit_part 0
+  renderorder 0
+  threshold 0.0
+  combinetime 0.0
+  deadspace 0.0
+  opacity 0.5
+  colorStart 1.0 1.0 1.0 
+  colorEnd 1.0 1.0 1.0 
+  alphaStart 1.0
+  alphaEnd 1.0
+  sizeStart 0.1
+  sizeEnd 0.1
+  sizeStart_y 0.0
+  sizeEnd_y 0.0
+  birthrate 3
+  lifeExp 0.75
+  mass 3.0
+  spread 1.22173
+  particleRot 5.0
+  velocity 8.0
+  randvel 0.3
+  bounce_co 0.5
+  blurlength 10.0
+  loop 0
+  bounce 1
+  m_isTinted 0
+  Splat 0
+  affectedByWind false
+  texture fxpa_cloud02
+  twosidedtex 0
+  xgrid 5
+  ygrid 5
+  fps 0
+  framestart 0
+  frameend 24
+  random 0
+  chunkName PLC_Chunk_W01
+  lightningDelay 0.0
+  lightningRadius 0.0
+  lightningSubDiv 0
+  lightningScale 0.0
+  blastRadius 0.0
+  blastLength 0.0
+  p2p 0
+  p2p_type Bezier
+  p2p_sel 1
+  p2p_bezier2 0.0
+  p2p_bezier3 0.0
+  grav 0.0
+  Drag 0.0
+endnode
+node emitter fire!72
+  parent purp_easel
+  position 0.00370824 0.0155743 0.532671
+  orientation 1.0 0.0 0.0 -4.71239
+  wirecolor 1.0 1.0 1.0 
+  update_sel 3
+  update Explosion
+  render_sel 1
+  render Normal
+  blend_sel 1
+  Blend Normal
+  spawntype_sel 0
+  spawnType 0
+  xSize 100.0
+  ySize 99.0
+  inherit 1
+  inherit_local 0
+  inheritvel 0
+  inherit_part 0
+  renderorder 0
+  threshold 0.0
+  combinetime 0.0
+  deadspace 0.0
+  opacity 0.5
+  colorStart 0.47451 0.454902 0.407843 
+  colorEnd 0.819608 0.803922 0.745098 
+  alphaStart 1.0
+  alphaEnd 0.0
+  sizeStart 4.0
+  sizeEnd 1.0
+  sizeStart_y 0.0
+  sizeEnd_y 0.0
+  birthrate 10
+  lifeExp 2.5
+  mass 0.09
+  spread 2.96706
+  particleRot 0.5
+  velocity 2.0
+  randvel 0.5
+  bounce_co 0.0
+  blurlength 10.0
+  loop 0
+  bounce 0
+  m_isTinted 1
+  Splat 0
+  affectedByWind false
+  texture fxpa_smoke01
+  twosidedtex 1
+  xgrid 4
+  ygrid 4
+  fps 10
+  framestart 0
+  frameend 24
+  random 0
+  lightningDelay 0.0
+  lightningRadius 0.0
+  lightningSubDiv 0
+  lightningScale 0.0
+  blastRadius 0.2
+  blastLength 1.0
+  p2p 0
+  p2p_type Bezier
+  p2p_sel 1
+  p2p_bezier2 0.0
+  p2p_bezier3 0.0
+  grav 0.0
+  Drag 0.0
+endnode
+node trimesh damage35
+  parent purp_easel
+  position 0.00527502 -0.00499146 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 0
+  Shadow 0
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 0.0705882 0.0 1.0 
+  Diffuse 1.0 0.501961 0.643137 
+  Specular 0.0 0.9 0.105882 
+  shininess 24
+  center 0.0 0.0 25.0 
+  bitmap NULL
+  verts 12
+    -0.195415 -0.186216 0.0
+    -0.195415 0.186216 0.0
+    0.195415 0.186216 0.0
+    0.195415 -0.186216 0.0
+    -0.195415 -0.186216 0.5
+    0.195415 -0.186216 0.5
+    0.195415 0.186216 0.5
+    -0.195415 0.186216 0.5
+    0.103944 -0.0990513 0.25
+    -0.103944 -0.0990513 0.25
+    0.103944 0.0990513 0.25
+    -0.103944 0.0990513 0.25
+  faces 20
+    0 1 2  1  0 0 0  2
+    2 3 0  1  0 0 0  2
+    4 5 6  1  0 0 0  1
+    6 7 4  1  0 0 0  1
+    0 3 8  2  0 0 0  5
+    8 9 0  2  0 0 0  5
+    9 8 5  2  0 0 0  5
+    5 4 9  2  0 0 0  5
+    3 2 10  4  0 0 0  4
+    10 8 3  4  0 0 0  4
+    8 10 6  4  0 0 0  4
+    6 5 8  4  0 0 0  4
+    2 1 11  2  0 0 0  6
+    11 10 2  2  0 0 0  6
+    10 11 7  2  0 0 0  6
+    7 6 10  2  0 0 0  6
+    1 0 9  4  0 0 0  3
+    9 11 1  4  0 0 0  3
+    11 9 4  4  0 0 0  3
+    4 7 11  4  0 0 0  3
+endnode
+node trimesh Box1101
+  parent damage35
+  position -0.00215332 0.13676 2.22736
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 1
+  center 0.000148773 -21.1407 -108.526 
+  bitmap d20metal01
+  verts 14
+    -0.0347647 0.0593328 0.0568486
+    -0.0347647 -0.0167659 0.0568486
+    0.0347672 0.0593328 0.0568486
+    0.0347672 -0.0167659 0.0568486
+    0.482114 -0.406048 -2.22736
+    0.482114 -0.482147 -2.22736
+    1.21355e-006 -0.0486752 -0.09977
+    1.22786e-006 0.0274235 -0.09977
+    0.551646 -0.406048 -2.22736
+    0.551646 -0.482147 -2.22736
+    -0.482112 -0.482147 -2.22736
+    -0.482112 -0.406048 -2.22736
+    -0.551643 -0.406048 -2.22736
+    -0.551643 -0.482147 -2.22736
+  faces 20
+    0 1 2  1  0 1 2  1
+    3 2 1  1  2 3 1  1
+    4 5 6  1  4 5 6  5
+    6 7 4  1  6 7 4  5
+    8 4 2  2  8 4 9  4
+    7 2 4  2  7 9 4  4
+    2 7 0  2  9 7 10  4
+    9 8 3  4  11 12 13  6
+    2 3 8  4  14 13 12  6
+    6 9 3  2  6 11 13  3
+    3 1 6  2  13 15 6  3
+    9 6 5  2  11 6 5  3
+    10 11 6  1  16 17 18  5
+    7 6 11  1  19 18 17  5
+    11 12 0  2  17 20 21  4
+    0 7 11  2  21 19 17  4
+    12 13 1  4  22 23 24  6
+    1 0 12  4  24 25 22  6
+    13 10 6  2  23 16 18  3
+    6 1 13  2  18 24 23  3
+  tverts 26
+    0.420812 1.61434 0
+    0.139513 1.60047 0
+    0.0 0.0 0
+    0.0 0.0 0
+    0.10842 0.0110978 0
+    0.213495 0.00478342 0
+    0.212292 0.917842 0
+    0.10863 0.924156 0
+    0.212549 0.0046822 0
+    0.21319 0.987471 0
+    0.107931 0.993887 0
+    0.108236 -0.00163221 0
+    0.213158 0.0046822 0
+    0.108724 0.981157 0
+    0.213799 0.987471 0
+    0.212854 0.987573 0
+    0.324109 0.263839 0
+    0.231267 0.277714 0
+    0.319797 1.05795 0
+    0.231641 1.07183 0
+    0.314107 0.263575 0
+    0.322832 1.2099 0
+    0.333551 0.263575 0
+    0.239403 0.249701 0
+    0.233833 1.19602 0
+    0.342276 1.2099 0
+endnode
+node trimesh Box96
+  parent damage35
+  position -0.00527344 0.658043 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 1
+  center 0.0 -27.4476 102.947 
+  bitmap d20metal05
+  verts 8
+    0.025 -0.573953 2.05895
+    0.025 -0.523953 2.05895
+    -0.025 -0.523953 2.05895
+    -0.025 -0.573953 2.05895
+    0.025 -0.025 0.0
+    0.025 0.025 0.0
+    -0.025 0.025 0.0
+    -0.025 -0.025 0.0
+  faces 10
+    0 1 2  1  0 1 2  1
+    2 3 0  1  3 4 0  1
+    4 5 1  2  5 6 1  5
+    1 0 4  2  1 0 5  5
+    5 6 2  4  6 7 2  4
+    2 1 5  4  2 1 6  4
+    6 7 3  2  8 9 4  6
+    3 2 6  2  4 3 8  6
+    7 4 0  4  9 5 0  3
+    0 3 7  4  0 4 9  3
+  tverts 10
+    0.213868 0.977085 0
+    0.120531 0.96255 0
+    0.208545 0.96255 0
+    0.203482 0.96255 0
+    0.119638 0.977085 0
+    0.21076 0.0321725 0
+    0.117423 0.0176379 0
+    0.211653 0.0176379 0
+    0.20659 0.0176379 0
+    0.122746 0.0321725 0
+endnode
+node trimesh Box97
+  parent damage35
+  position -0.00527344 -0.0499646 1.48583
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 1
+  center 0.0 -2.7571 0.586048 
+  bitmap d20_canvas
+  verts 8
+    0.328247 0.126542 0.595332
+    0.328247 -0.126542 -0.595332
+    -0.328247 -0.126542 -0.595332
+    -0.328247 0.126542 0.595332
+    0.328247 0.0713993 0.607053
+    -0.328247 0.0713993 0.607053
+    -0.328247 -0.181684 -0.583611
+    0.328247 -0.181684 -0.583611
+  faces 12
+    0 1 2  1  0 1 2  2
+    2 3 0  1  2 3 0  2
+    4 5 6  1  3 0 1  1
+    6 7 4  1  1 2 3  1
+    0 3 5  2  4 5 1  5
+    5 4 0  2  1 2 4  5
+    3 2 6  4  3 6 7  4
+    6 5 3  4  7 2 3  4
+    2 1 7  2  3 0 1  6
+    7 6 2  2  1 2 3  6
+    1 0 4  4  3 6 7  3
+    4 7 1  4  7 2 3  3
+  tverts 8
+    0.215591 0.49837 0
+    0.215591 0.514263 0
+    0.126821 0.511847 0
+    0.126821 0.495955 0
+    0.126821 0.508032 0
+    0.215591 0.510447 0
+    0.158358 0.49837 0
+    0.158358 0.514263 0
+endnode
+node trimesh Box95
+  parent damage35
+  position -0.00527344 -0.199125 0.844198
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 1
+  center 0.0 0.0 2.65 
+  bitmap d20metal01
+  verts 8
+    0.482113 -0.0658211 0.0
+    -0.482113 -0.0658211 0.0
+    -0.482113 0.0658211 0.0
+    0.482113 0.0658211 0.0
+    0.482113 -0.0658211 0.053
+    0.482113 0.0658211 0.053
+    -0.482113 0.0658211 0.053
+    -0.482113 -0.0658211 0.053
+  faces 12
+    0 1 2  1  0 1 2  2
+    2 3 0  1  2 3 0  2
+    4 5 6  1  0 3 2  1
+    6 7 4  1  2 1 0  1
+    0 3 5  2  4 5 3  5
+    5 4 0  2  3 0 4  5
+    3 2 6  4  6 7 2  4
+    6 5 3  4  2 3 6  4
+    2 1 7  2  8 9 1  6
+    7 6 2  2  1 2 8  6
+    1 0 4  4  10 11 12  3
+    4 7 1  4  12 13 10  3
+  tverts 14
+    0.341096 0.000499547 0
+    0.341096 0.999501 0
+    0.428393 0.9995 0
+    0.428393 0.000499517 0
+    0.341096 0.0646541 0
+    0.428393 0.0646541 0
+    0.348859 0.000499517 0
+    0.348859 0.9995 0
+    0.428393 0.936699 0
+    0.341096 0.936699 0
+    0.333596 0.999501 0
+    0.333596 0.000499547 0
+    0.431879 0.000499547 0
+    0.431879 0.999501 0
+endnode
+endmodelgeom purp_easel
+
+#NWmax ANIM ASCII
+newanim damage purp_easel
+  length 0.133333
+  transtime 0.0
+  animroot purp_easel
+    node dummy purp_easel
+        parent NULL
+    endnode
+    node dummy K03_hand
+        parent purp_easel
+    endnode
+    node dummy K03_head
+        parent purp_easel
+    endnode
+    node dummy K03_head_hit
+        parent purp_easel
+    endnode
+    node dummy K03_impact
+        parent purp_easel
+    endnode
+    node dummy K03_ground
+        parent purp_easel
+    endnode
+    node emitter ChunkyWood122
+        parent purp_easel
+    endnode
+    node emitter fire!72
+        parent purp_easel
+    endnode
+    node trimesh damage35
+        parent purp_easel
+        positionkey
+            0.0 0.00527502 -0.00499146 0.0
+            0.0333333 0.00527502 -0.00499146 0.0244581
+            0.133333 0.00527502 -0.00499146 0.0
+        endlist
+        orientationkey
+            0.0 0.0 0.0 0.0 0.0
+            0.0333333 0.371336 -0.928463 0.00810258 -0.0469939
+            0.1 -0.59995 0.799969 0.0104722 -0.0436324
+            0.133333 0.0 0.0 0.0 0.0
+        endlist
+    endnode
+    node trimesh Box1101
+        parent damage35
+    endnode
+    node trimesh Box96
+        parent damage35
+    endnode
+    node trimesh Box97
+        parent damage35
+    endnode
+    node trimesh Box95
+        parent damage35
+    endnode
+doneanim damage purp_easel
+
+
+#NWmax ANIM ASCII
+newanim die purp_easel
+  length 0.166667
+  transtime 0.0
+  animroot purp_easel
+  event 0.0333333 detonate
+  event 0.0333333 detonate
+    node dummy purp_easel
+        parent NULL
+    endnode
+    node dummy K03_hand
+        parent purp_easel
+    endnode
+    node dummy K03_head
+        parent purp_easel
+    endnode
+    node dummy K03_head_hit
+        parent purp_easel
+    endnode
+    node dummy K03_impact
+        parent purp_easel
+    endnode
+    node dummy K03_ground
+        parent purp_easel
+    endnode
+    node emitter ChunkyWood122
+        parent purp_easel
+    endnode
+    node emitter fire!72
+        parent purp_easel
+    endnode
+    node trimesh damage35
+        parent purp_easel
+        positionkey
+            0.0 0.00527502 -0.00499146 0.0
+            0.166667 0.00527502 -0.00499146 -3.77999
+        endlist
+    endnode
+    node trimesh Box1101
+        parent damage35
+    endnode
+    node trimesh Box96
+        parent damage35
+    endnode
+    node trimesh Box97
+        parent damage35
+    endnode
+    node trimesh Box95
+        parent damage35
+    endnode
+doneanim die purp_easel
+
+
+#NWmax ANIM ASCII
+newanim dead purp_easel
+  length 0.0333333
+  transtime 0.0
+  animroot purp_easel
+    node dummy purp_easel
+        parent NULL
+    endnode
+    node dummy K03_hand
+        parent purp_easel
+    endnode
+    node dummy K03_head
+        parent purp_easel
+    endnode
+    node dummy K03_head_hit
+        parent purp_easel
+    endnode
+    node dummy K03_impact
+        parent purp_easel
+    endnode
+    node dummy K03_ground
+        parent purp_easel
+    endnode
+    node emitter ChunkyWood122
+        parent purp_easel
+    endnode
+    node emitter fire!72
+        parent purp_easel
+    endnode
+    node trimesh damage35
+        parent purp_easel
+        positionkey
+            0.0 0.00527502 -0.00499146 -3.77999
+            0.0333333 0.00527502 -0.00499146 -3.77999
+        endlist
+    endnode
+    node trimesh Box1101
+        parent damage35
+    endnode
+    node trimesh Box96
+        parent damage35
+    endnode
+    node trimesh Box97
+        parent damage35
+    endnode
+    node trimesh Box95
+        parent damage35
+    endnode
+doneanim dead purp_easel
+
+
+#NWmax ANIM ASCII
+newanim default purp_easel
+  length 0.0
+  transtime 0.25
+  animroot purp_easel
+    node dummy purp_easel
+        parent NULL
+    endnode
+    node dummy K03_hand
+        parent purp_easel
+    endnode
+    node dummy K03_head
+        parent purp_easel
+    endnode
+    node dummy K03_head_hit
+        parent purp_easel
+    endnode
+    node dummy K03_impact
+        parent purp_easel
+    endnode
+    node dummy K03_ground
+        parent purp_easel
+    endnode
+    node emitter ChunkyWood122
+        parent purp_easel
+    endnode
+    node emitter fire!72
+        parent purp_easel
+    endnode
+    node trimesh damage35
+        parent purp_easel
+    endnode
+    node trimesh Box1101
+        parent damage35
+    endnode
+    node trimesh Box96
+        parent damage35
+    endnode
+    node trimesh Box97
+        parent damage35
+    endnode
+    node trimesh Box95
+        parent damage35
+    endnode
+doneanim default purp_easel
+
+donemodel purp_easel

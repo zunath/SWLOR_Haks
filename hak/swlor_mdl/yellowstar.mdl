@@ -1,0 +1,52 @@
+#The Arcane Space Tileset Yellow Star placeable
+#By: Mystic_Nexus
+# mystic_nexus@hotmail.com
+# model: yellowstar
+filedependancy Unknown
+newmodel yellowstar
+setsupermodel yellowstar NULL
+classification character
+setanimationscale 1.0
+#MAXGEOM  ASCII
+beginmodelgeom yellowstar
+node dummy yellowstar
+  parent NULL
+endnode
+node light AuroraLight01
+  parent yellowstar
+  #part-number 3
+  ambientonly 0
+  shadow 0
+  isdynamic 0
+  affectdynamic 1
+  lightpriority 3
+  fadingLight 1
+  flareradius 70
+  texturenames 4
+    fxpa_lensflare
+    fxpa_lensring
+    fxpa_lensring
+    fxpa_lensflare
+  flaresizes 4
+    7
+    0
+    0
+    0
+  flarepositions 4
+    1
+    0.5
+    1.5
+    0.400000006
+  flarecolorshifts 4
+    2 1 0
+    -0.200000003 -0.200000003 -0.200000003
+    -0.100000001 -0.100000001 -0.100000001
+    -0.699999988 -0.699999988 -0.699999988
+  position 0.00962 0.013333 4.70372
+  orientation 0 0 0 0
+  radius 20
+  multiplier 1
+  color 0.611765027 0.996079028 1
+endnode
+endmodelgeom yellowstar
+donemodel yellowstar

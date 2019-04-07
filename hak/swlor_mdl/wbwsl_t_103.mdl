@@ -1,0 +1,106 @@
+# Exported from NWmax 0.8 b60 at 11/04/2007 16:26:46
+# mdl file
+#
+#NWmax MODEL ASCII
+# model: wbwsl_t_103
+#local file: Unknown
+filedependancy Unknown
+newmodel wbwsl_t_103
+setsupermodel wbwsl_t_103 NULL
+classification Character
+setanimationscale 0.0
+#NWmax GEOM  ASCII
+beginmodelgeom wbwsl_t_103
+node dummy wbwsl_t_103
+  parent NULL
+endnode
+node emitter Casings39
+  parent wbwsl_t_103
+  position 0.0329656 0.125639 -0.181569
+  orientation 0.497508 0.613386 0.613387 -4.0649
+  wirecolor 1.0 1.0 1.0 
+  update_sel 3
+  update Explosion
+  render_sel 1
+  render Normal
+  blend_sel 1
+  Blend Normal
+  spawntype_sel 0
+  spawnType 0
+  xSize 89.0
+  ySize 40.0
+  inherit 0
+  inherit_local 0
+  inheritvel 0
+  inherit_part 0
+  renderorder 0
+  threshold 0.0
+  combinetime 0.0
+  deadspace 0.0
+  opacity 0.0
+  colorStart 1.0 1.0 1.0 
+  colorEnd 1.0 1.0 1.0 
+  alphaStart 1.0
+  alphaEnd 1.0
+  sizeStart 0.15
+  sizeEnd 0.15
+  sizeStart_y 0.0
+  sizeEnd_y 0.0
+  birthrate 1
+  lifeExp 5.0
+  mass 1.0
+  spread 0.0174533
+  particleRot 1.0
+  velocity 2.0
+  randvel 0.3
+  bounce_co 0.9
+  blurlength 10.0
+  loop 0
+  bounce 1
+  m_isTinted 1
+  Splat 0
+  affectedByWind false
+  texture fxpa_smoke02
+  twosidedtex 0
+  xgrid 4
+  ygrid 4
+  fps 0
+  framestart 0
+  frameend 16
+  random 0
+  lightningDelay 0.0
+  lightningRadius 0.0
+  lightningSubDiv 0
+  lightningScale 0.0
+  blastRadius 0.0
+  blastLength 0.0
+  p2p 0
+  p2p_type Bezier
+  p2p_sel 1
+  p2p_bezier2 0.0
+  p2p_bezier3 0.0
+  grav 0.0
+  Drag 0.0
+endnode
+endmodelgeom wbwsl_t_103
+
+#NWmax ANIM ASCII
+newanim xbowshot wbwsl_t_103
+  length 1.0
+  transtime 0.25
+  animroot wbwsl_t_103
+  event 0.0 detonate
+  event 0.2 detonate
+  event 0.4 detonate
+  event 0.6 detonate
+  event 0.766667 detonate
+  event 1.0 detonate
+    node dummy wbwsl_t_103
+        parent NULL
+    endnode
+    node emitter Casings39
+        parent wbwsl_t_103
+    endnode
+doneanim xbowshot wbwsl_t_103
+
+donemodel wbwsl_t_103

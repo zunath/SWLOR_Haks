@@ -1,0 +1,193 @@
+#MAXMODEL ASCII
+# model: WAmAr_fxfrost
+filedependancy WAmAr_fxfrost.max
+newmodel WAmAr_fxfrost
+setsupermodel WAmAr_fxfrost NULL
+setanimationscale 1
+#MAXGEOM  ASCII
+beginmodelgeom WAmAr_fxfrost
+node dummy WAmAr_fxfrost
+  parent NULL
+  #part-number 0
+endnode
+node trimesh g_WAmAr_02
+  parent WAmAr_fxfrost
+  #part-number 1
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 1
+  bitmap W_metal_tex
+ endnode
+node emitter Ice
+  parent g_WAmAr_02
+  #part-number 2
+  p2p 0
+  p2p_sel 1
+  affectedByWind 0
+  m_isTinted 0
+  bounce 0
+  random 0
+  inherit 0
+  inheritvel 0
+  inherit_local 0
+  splat 0
+  inherit_part 1
+  renderorder 0
+  spawntype 0
+  update Fountain
+  render Normal
+  blend Lighten
+  texture fxpa_flare
+  xgrid 1
+  ygrid 1
+  loop 0
+  deadspace 0
+  twosidedtex 0
+  blastRadius 0
+  blastLength 0
+  position 0.000238799999 -0.142664 0.00982214976
+  orientation 0 0 0 0
+  colorStart 0.396077991 0.847059011 0.996079028
+  colorEnd 1 1 1
+  alphaStart 1
+  alphaEnd 0.300000012
+  sizeStart 0.200000003
+  sizeEnd 0.100000001
+  sizeStart_y 0
+  sizeEnd_y 0
+  frameStart 0
+  frameEnd 0
+  birthrate 60
+  lifeExp 1
+  mass 0.200000003
+  spread 0.523599029
+  particleRot 0
+  velocity 0.300000012
+  randvel 0.300000012
+  fps 0
+  xsize 3
+  ysize 50
+  bounce_co 0
+  blurlength 10
+  lightningDelay 0
+  lightningRadius 0
+  lightningScale 0
+  p2p_bezier2 0
+  p2p_bezier3 0
+  combinetime 0
+  drag 0
+  grav 0
+  threshold 0
+endnode
+endmodelgeom WAmAr_fxfrost
+
+#MAXANIM ASCII
+newanim travel01 WAmAr_fxfrost
+  length 0.966666996
+  transtime 0
+  animroot WAmAr_fxfrost
+node dummy WAmAr_fxfrost
+  parent NULL
+  #part-number 0
+endnode
+node dummy g_WAmAr_02
+  parent WAmAr_fxfrost
+  #part-number 1
+endnode
+node emitter Ice
+  parent g_WAmAr_02
+  #part-number 2
+  positionkey 2
+    0 0.000238799999 -0.142664 0.00982214976
+    0.966666996 0.000238799999 -0.146318004 0.00982214976
+  orientation 0 0 0 0
+  sizeStartkey 2
+    0 0.200000003
+    0.966666996 0.200000003
+  birthratekey 2
+    0 60
+    0.966666996 60
+  masskey 2
+    0 0.200000003
+    0.966666996 0.200000003
+  spreadkey 2
+    0 0.523598015
+    0.966666996 0.523598015
+  velocitykey 2
+    0 0.300000012
+    0.966666996 0.300000012
+  ysizekey 2
+    0 50
+    0.966666996 50
+endnode
+doneanim travel01 WAmAr_fxfrost
+
+#MAXANIM ASCII
+newanim impact01 WAmAr_fxfrost
+  length 2.29999995
+  transtime 0
+  animroot WAmAr_fxfrost
+node dummy WAmAr_fxfrost
+  parent NULL
+  #part-number 0
+endnode
+node dummy g_WAmAr_02
+  parent WAmAr_fxfrost
+  #part-number 1
+endnode
+node emitter Ice
+  parent g_WAmAr_02
+  #part-number 2
+  positionkey 2
+    0 0.000238799999 -0.145927995 0.00982214976
+    1.26666999 0.000238799999 -0.143345997 0.00982214976
+  orientationkey 3
+    0 0 0 0 0
+    1.26666999 0 0 0 0
+    1.36667001 -1 0 0 -1.57079995
+  sizeStartkey 5
+    0 0.200000003
+    1.33333004 0.200000003
+    1.36667001 0.200000003
+    1.39999998 0.200000003
+    1.60000002 0.400000006
+  birthratekey 7
+    0 60
+    1.26666999 60
+    1.29999995 60
+    1.33333004 70
+    2.23333001 70
+    2.26666999 70
+    2.29999995 0
+  lifeExpkey 4
+    1.23333001 1
+    1.26666999 1
+    1.39999998 1
+    1.60000002 0.300000012
+  masskey 4
+    0 0.200000003
+    1.23333001 0.200000003
+    1.26666999 0.200000003
+    1.36667001 0
+  spreadkey 5
+    0 0.523598015
+    1.23333001 0.523598015
+    1.26666999 0.523598015
+    1.33333004 0.523598015
+    1.36667001 0.523598015
+  velocitykey 5
+    0 0.300000012
+    1.23333001 0.300000012
+    1.26666999 0.300000012
+    1.36667001 1
+    1.60000002 3
+  ysizekey 4
+    0 50
+    1.26666999 50
+    1.29999995 50
+    1.33333004 3
+endnode
+doneanim impact01 WAmAr_fxfrost
+
+donemodel WAmAr_fxfrost

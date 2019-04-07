@@ -1,0 +1,176 @@
+# Exported from NWgMax Plus v6.11.28 at 2017-01-20 10:12:11
+# mdl file
+#
+#NWgMax Plus MODEL ASCII
+# model: vos_elecbox1
+filedependancy Unknown
+newmodel vos_elecbox1
+setsupermodel vos_elecbox1 NULL
+classification Character
+setanimationscale 1.0
+#NWgMax Plus GEOM  ASCII
+beginmodelgeom vos_elecbox1
+node dummy vos_elecbox1
+  parent NULL
+endnode
+node trimesh Box01
+  parent vos_elecbox1
+  position 0.0474074 0.00888889 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.345098 0.780392 0.882353 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 0.588235 0.588235 0.588235 
+  diffuse 0.588235 0.588235 0.588235 
+  specular 0.0 0.0 0.0 
+  shininess 1
+  center 0.0 0.0 75.0 
+  bitmap shpv1_metal03
+  verts 8
+    -0.75 -0.25 0.0
+    0.75 -0.25 0.0
+    -0.75 0.25 0.0
+    0.75 0.25 0.0
+    -0.75 -0.25 1.5
+    0.75 -0.25 1.5
+    -0.75 0.25 1.5
+    0.75 0.25 1.5
+  faces 10
+    0 2 3  2  8 9 10  2
+    3 1 0  2  11 12 13  2
+    4 5 7  4  14 15 16  1
+    7 6 4  4  17 18 19  1
+    1 3 7  16  20 21 22  4
+    7 5 1  16  23 5 1  4
+    3 2 6  32  24 25 26  6
+    6 7 3  32  27 7 3  6
+    2 0 4  64  28 0 29  3
+    4 6 2  64  4 6 2  3
+  tverts 30
+    0.843303 0.9995 0
+    0.302569 0.000499576 0
+    0.843303 0.000499934 0
+    0.000499547 0.000499576 0
+    0.156696 0.9995 0
+    0.302569 0.9995 0
+    0.156696 0.00049989 0
+    0.000499547 0.9995 0
+    0.9995 0.000500262 0
+    0.9995 0.9995 0
+    0.000499547 0.9995 0
+    0.000499547 0.9995 0
+    0.000499636 0.000499547 0
+    0.9995 0.000500262 0
+    0.747277 0.000499576 0
+    0.747277 0.9995 0
+    0.252723 0.9995 0
+    0.252723 0.9995 0
+    0.252723 0.000499622 0
+    0.747277 0.000499576 0
+    0.302569 0.000499576 0
+    0.697431 0.000499576 0
+    0.697431 0.9995 0
+    0.697431 0.9995 0
+    0.000499547 0.000499576 0
+    0.9995 0.000499576 0
+    0.9995 0.9995 0
+    0.9995 0.9995 0
+    0.843303 0.000499934 0
+    0.156696 0.9995 0
+endnode
+node trimesh box_front
+  parent vos_elecbox1
+  position 0.0474074 -0.241111 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.443137 0.52549 0.0235294 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 0
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 0.588235 0.588235 0.588235 
+  diffuse 0.588235 0.588235 0.588235 
+  specular 0.0 0.0 0.0 
+  shininess 1
+  center 0.0 -4.95911e-005 75.0 
+  bitmap shpv1_lckr
+  verts 4
+    -0.75 -4.95911e-007 0.0
+    0.75 -4.95911e-007 0.0
+    -0.75 -4.95911e-007 1.5
+    0.75 -4.95911e-007 1.5
+  faces 2
+    0 1 3  8  4 1 5  5
+    3 2 0  8  3 2 0  5
+  tverts 6
+    0.482759 0.214559 0
+    1.0 0.214559 0
+    0.482759 0.752874 0
+    1.0 0.752874 0
+    0.482759 0.214559 0
+    1.0 0.752874 0
+endnode
+node trimesh signs
+  parent box_front
+  position -0.0259834 -0.0135561 0.591549
+  orientation -1.0 0.0 0.0 -1.5708
+  wirecolor 0.345098 0.780392 0.882353 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 0
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 1
+  center -0.957338 29.9133 0.252618 
+  bitmap vos_warnsigns
+  verts 8
+    -0.1 -0.2 0.0
+    0.1 -0.2 0.0
+    -0.1 0.2 0.0
+    0.1 0.2 0.0
+    -0.309573 0.448267 0.00505236
+    0.290427 0.448267 0.00505236
+    -0.309573 0.798267 0.00505236
+    0.290427 0.798267 0.00505236
+  faces 4
+    2 0 3  1  2 8 9  1
+    1 3 0  1  1 3 0  1
+    6 4 7  1  6 10 11  1
+    5 7 4  1  5 7 4  1
+  tverts 12
+    0.00236812 0.76482 0
+    0.183456 0.76482 0
+    0.00236812 0.999548 0
+    0.183456 0.999548 0
+    0.184405 0.745708 0
+    0.443947 0.745708 0
+    0.184405 0.997587 0
+    0.443947 0.997587 0
+    0.00236812 0.76482 0
+    0.183456 0.999548 0
+    0.184405 0.745708 0
+    0.443947 0.997587 0
+endnode
+endmodelgeom vos_elecbox1
+donemodel vos_elecbox1

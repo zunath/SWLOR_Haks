@@ -1,0 +1,1334 @@
+#MAXMODEL ASCII
+# model: vmr_udoor_06
+filedependancy vmr_udoor_06.max
+newmodel vmr_udoor_06
+setsupermodel vmr_udoor_06 NULL
+classification door
+setanimationscale 1
+#MAXGEOM  ASCII
+beginmodelgeom vmr_udoor_06
+node dummy vmr_udoor_06
+  parent NULL
+  #part-number 0
+endnode
+node trimesh Box1359
+  parent vmr_udoor_06
+  #part-number 1
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 1
+  bitmap vmr01_copper00
+  verts 8
+    0.0299945995 -0.125910997 9.15526982e-007
+    0.0299945995 0.123489 9.15526982e-007
+    1.52998996 0.123489 9.15526982e-007
+    1.52998996 -0.125910997 9.15526982e-007
+    0.0299945995 -0.125910997 5
+    1.52998996 -0.125910997 5
+    1.52998996 0.123489 5
+    0.0299945995 0.123489 5
+  tverts 4
+    1 0 0
+    1 1.53139997 0
+    0 1.53139997 0
+    0 0 0
+  faces 12
+    0 1 2 1 0 1 2 2
+    2 3 0 1 2 3 0 2
+    4 5 6 1 3 0 1 1
+    6 7 4 1 1 2 3 1
+    0 3 5 2 3 0 1 5
+    5 4 0 2 1 2 3 5
+    3 2 6 4 3 0 1 4
+    6 5 3 4 1 2 3 4
+    2 1 7 2 3 0 1 6
+    7 6 2 2 1 2 3 6
+    1 0 4 4 3 0 1 3
+    4 7 1 4 1 2 3 3
+  position -1.50735998 -0.0778307021 0.200000003
+  orientation 0 0 0 0
+endnode
+node trimesh Box20
+  parent vmr_udoor_06
+  #part-number 2
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 1
+  bitmap vmr01_copper00
+  verts 8
+    -1.51001 -0.125910997 9.15526982e-007
+    -1.51001 0.123489 9.15526982e-007
+    -0.0100055002 0.123489 9.15526982e-007
+    -0.0100055002 -0.125910997 9.15526982e-007
+    -1.51001 -0.125910997 5
+    -0.0100055002 -0.125910997 5
+    -0.0100055002 0.123489 5
+    -1.51001 0.123489 5
+  tverts 4
+    1 0 0
+    1 1.52899003 0
+    0 1.52899003 0
+    0 0 0
+  faces 12
+    0 1 2 1 0 1 2 2
+    2 3 0 1 2 3 0 2
+    4 5 6 1 3 0 1 1
+    6 7 4 1 1 2 3 1
+    0 3 5 2 3 0 1 5
+    5 4 0 2 1 2 3 5
+    3 2 6 4 3 0 1 4
+    6 5 3 4 1 2 3 4
+    2 1 7 2 3 0 1 6
+    7 6 2 2 1 2 3 6
+    1 0 4 4 3 0 1 3
+    4 7 1 4 1 2 3 3
+  position 1.53263998 -0.0778307021 0.200000003
+  orientation 0 0 0 0
+endnode
+node trimesh sam
+  parent vmr_udoor_06
+  #part-number 3
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+  shadow 0
+  bitmap NULL
+  verts 8
+    1.5 0.00857189018 3.20257998
+    -1.5 0.00857189018 3.20257998
+    1.5 0.00857189018 0.200001001
+    -1.5 0.00857189018 0.200001001
+    -1.5 0.0359487012 3.20257998
+    1.5 0.0359487012 3.20257998
+    1.5 0.0359487012 0.200001001
+    -1.5 0.0359487012 0.200001001
+  faces 4
+    0 1 2 1 0 0 0 18
+    3 2 1 1 0 0 0 18
+    4 5 6 1 0 0 0 18
+    6 7 4 1 0 0 0 18
+  position 0.0226367004 -0.0778307021 0
+  orientation 0 0 0 0
+  alpha 0
+  scale 1
+endnode
+node emitter ChunkyWood13
+  parent vmr_udoor_06
+  #part-number 4
+  p2p 0
+  p2p_sel 1
+  affectedByWind 0
+  m_isTinted 0
+  bounce 1
+  random 0
+  inherit 1
+  inheritvel 0
+  inherit_local 0
+  splat 0
+  inherit_part 0
+  renderorder 0
+  spawntype 0
+  update Explosion
+  render Normal
+  blend Normal
+  texture fxpa_cloud02
+  chunkName PLC_Chunk_S02
+  xgrid 5
+  ygrid 5
+  loop 0
+  deadspace 0
+  twosidedtex 1
+  blastRadius 0
+  blastLength 0
+  position 0.0257818997 -0.0870554 1.59564996
+  orientation 0 0 -1 -3.14159012
+  colorStart 0.482353002 0.435294002 0.31764701
+  colorEnd 0.584313989 0.533333004 0.407842994
+  alphaStart 1
+  alphaEnd 1
+  sizeStart 0.100000001
+  sizeEnd 0.100000001
+  sizeStart_y 0
+  sizeEnd_y 0
+  frameStart 0
+  frameEnd 24
+  birthrate 2
+  lifeExp 0.75
+  mass 3
+  spread 1.22172999
+  particleRot 2.9000001
+  velocity 8
+  randvel 0.300000012
+  fps 0
+  xsize 162
+  ysize 50
+  bounce_co 0.5
+  blurlength 10
+  lightningDelay 0
+  lightningRadius 0
+  lightningScale 0
+  p2p_bezier2 0
+  p2p_bezier3 0
+  combinetime 0
+  drag 0
+  grav 0
+  threshold 0
+endnode
+node emitter fire!13
+  parent vmr_udoor_06
+  #part-number 5
+  p2p 0
+  p2p_sel 1
+  affectedByWind 0
+  m_isTinted 1
+  bounce 0
+  random 0
+  inherit 1
+  inheritvel 0
+  inherit_local 0
+  splat 0
+  inherit_part 0
+  renderorder 0
+  spawntype 0
+  update Explosion
+  render Normal
+  blend Normal
+  texture fxpa_smoke01
+  xgrid 4
+  ygrid 4
+  loop 0
+  deadspace 0
+  twosidedtex 1
+  blastRadius 0.200000003
+  blastLength 1
+  position 0.0257818997 -0.0870554 1.22649002
+  orientation 0 -0.707106769 -0.707106769 -3.14159012
+  colorStart 0.474510014 0.439215988 0.36470601
+  colorEnd 0.819607973 0.79607898 0.709803998
+  alphaStart 1
+  alphaEnd 0
+  sizeStart 4
+  sizeEnd 1
+  sizeStart_y 0
+  sizeEnd_y 0
+  frameStart 0
+  frameEnd 24
+  birthrate 30
+  lifeExp 2.5
+  mass 0.0900000036
+  spread 2.96706009
+  particleRot 0.5
+  velocity 2
+  randvel 0.5
+  fps 10
+  xsize 190
+  ysize 130
+  bounce_co 0
+  blurlength 10
+  lightningDelay 0
+  lightningRadius 0
+  lightningScale 0
+  p2p_bezier2 0
+  p2p_bezier3 0
+  combinetime 0
+  drag 0
+  grav 0
+  threshold 0
+endnode
+node emitter ChunkyWood14
+  parent vmr_udoor_06
+  #part-number 6
+  p2p 0
+  p2p_sel 1
+  affectedByWind 0
+  m_isTinted 0
+  bounce 1
+  random 0
+  inherit 1
+  inheritvel 0
+  inherit_local 0
+  splat 0
+  inherit_part 0
+  renderorder 0
+  spawntype 0
+  update Explosion
+  render Normal
+  blend Normal
+  texture fxpa_cloud02
+  chunkName PLC_Chunk_S01
+  xgrid 5
+  ygrid 5
+  loop 0
+  deadspace 0
+  twosidedtex 0
+  blastRadius 0
+  blastLength 0
+  position 0.0257818997 -0.0870554 0.935374022
+  orientation 0 0 -1 -3.14159012
+  colorStart 1 1 1
+  colorEnd 1 1 1
+  alphaStart 1
+  alphaEnd 1
+  sizeStart 0.100000001
+  sizeEnd 0.100000001
+  sizeStart_y 0
+  sizeEnd_y 0
+  frameStart 0
+  frameEnd 24
+  birthrate 2
+  lifeExp 0.75
+  mass 3
+  spread 1.22172999
+  particleRot 5
+  velocity 8
+  randvel 0.300000012
+  fps 0
+  xsize 158
+  ysize 72
+  bounce_co 0.5
+  blurlength 10
+  lightningDelay 0
+  lightningRadius 0
+  lightningScale 0
+  p2p_bezier2 0
+  p2p_bezier3 0
+  combinetime 0
+  drag 0
+  grav 0
+  threshold 0
+endnode
+node dummy vmr_udoor_06grnd
+  parent vmr_udoor_06
+  #part-number 7
+  position 6.10352004e-007 0.332168996 0.218575001
+  orientation 0 0 0 0
+endnode
+node dummy vmr_udoor_06hhit
+  parent vmr_udoor_06
+  #part-number 8
+  position 6.10352004e-007 0.332168996 2.33446002
+  orientation 0 0 0 0
+endnode
+node dummy vmr_udoor_06head
+  parent vmr_udoor_06
+  #part-number 9
+  position 6.10352004e-007 0.332168996 2.67404008
+  orientation 0 0 0 0
+endnode
+node dummy vmr_udoor_06impc
+  parent vmr_udoor_06
+  #part-number 10
+  position 6.10352004e-007 0.332168996 1.48995996
+  orientation 0 0 0 0
+endnode
+endmodelgeom vmr_udoor_06
+
+#MAXANIM ASCII
+newanim opening2 vmr_udoor_06
+  length 0.966666996
+  transtime 0.25
+  animroot vmr_udoor_06
+node dummy vmr_udoor_06
+  parent NULL
+  #part-number 0
+endnode
+node dummy vmr_udoor_06_DWK
+  parent vmr_udoor_06
+  #part-number -1
+endnode
+node dummy 06_DWK_dp_open2_02
+  parent vmr_udoor_06_DWK
+  #part-number 2
+endnode
+node dummy 06_DWK_dp_open2_01
+  parent vmr_udoor_06_DWK
+  #part-number 3
+endnode
+node dummy 06_DWK_dp_closed_01
+  parent vmr_udoor_06_DWK
+  #part-number 4
+endnode
+node dummy 06_DWK_dp_closed_02
+  parent vmr_udoor_06_DWK
+  #part-number 5
+endnode
+node dummy 06_DWK_dp_open1_01
+  parent vmr_udoor_06_DWK
+  #part-number 6
+endnode
+node dummy 06_DWK_wg_closed
+  parent vmr_udoor_06_DWK
+  #part-number 7
+endnode
+node dummy 06_DWK_wg_open2
+  parent vmr_udoor_06_DWK
+  #part-number 8
+endnode
+node dummy 06_DWK_wg_open1
+  parent vmr_udoor_06_DWK
+  #part-number 9
+endnode
+node dummy Box1359
+  parent vmr_udoor_06
+  #part-number 1
+  orientationkey 2
+    0 0 0 0 0
+    0.966666996 0 0 -1 -1.50098002
+endnode
+node dummy Box20
+  parent vmr_udoor_06
+  #part-number 2
+  orientationkey 2
+    0 0 0 0 0
+    0.966666996 0 0 1 -1.51844001
+endnode
+node trimesh sam
+  parent vmr_udoor_06
+  #part-number 3
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+  alphakey 2
+    0 0
+    0.966666996 0
+endnode
+node emitter ChunkyWood13
+  parent vmr_udoor_06
+  #part-number 4
+endnode
+node emitter fire!13
+  parent vmr_udoor_06
+  #part-number 5
+endnode
+node emitter ChunkyWood14
+  parent vmr_udoor_06
+  #part-number 6
+endnode
+node dummy vmr_udoor_06grnd
+  parent vmr_udoor_06
+  #part-number 7
+endnode
+node dummy vmr_udoor_06hhit
+  parent vmr_udoor_06
+  #part-number 8
+endnode
+node dummy vmr_udoor_06head
+  parent vmr_udoor_06
+  #part-number 9
+endnode
+node dummy vmr_udoor_06impc
+  parent vmr_udoor_06
+  #part-number 10
+endnode
+doneanim opening2 vmr_udoor_06
+
+#MAXANIM ASCII
+newanim opening1 vmr_udoor_06
+  length 1
+  transtime 0.25
+  animroot vmr_udoor_06
+node dummy vmr_udoor_06
+  parent NULL
+  #part-number 0
+endnode
+node dummy vmr_udoor_06_DWK
+  parent vmr_udoor_06
+  #part-number -1
+endnode
+node dummy 06_DWK_dp_open2_02
+  parent vmr_udoor_06_DWK
+  #part-number 2
+endnode
+node dummy 06_DWK_dp_open2_01
+  parent vmr_udoor_06_DWK
+  #part-number 3
+endnode
+node dummy 06_DWK_dp_closed_01
+  parent vmr_udoor_06_DWK
+  #part-number 4
+endnode
+node dummy 06_DWK_dp_closed_02
+  parent vmr_udoor_06_DWK
+  #part-number 5
+endnode
+node dummy 06_DWK_dp_open1_01
+  parent vmr_udoor_06_DWK
+  #part-number 6
+endnode
+node dummy 06_DWK_wg_closed
+  parent vmr_udoor_06_DWK
+  #part-number 7
+endnode
+node dummy 06_DWK_wg_open2
+  parent vmr_udoor_06_DWK
+  #part-number 8
+endnode
+node dummy 06_DWK_wg_open1
+  parent vmr_udoor_06_DWK
+  #part-number 9
+endnode
+node dummy Box1359
+  parent vmr_udoor_06
+  #part-number 1
+  orientationkey 2
+    0 0 0 0 0
+    1 0 0 1 -1.48353004
+endnode
+node dummy Box20
+  parent vmr_udoor_06
+  #part-number 2
+  orientationkey 2
+    0 0 0 0 0
+    1 0 0 -1 -1.50970995
+endnode
+node trimesh sam
+  parent vmr_udoor_06
+  #part-number 3
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+  alphakey 2
+    0 0
+    1 0
+endnode
+node emitter ChunkyWood13
+  parent vmr_udoor_06
+  #part-number 4
+endnode
+node emitter fire!13
+  parent vmr_udoor_06
+  #part-number 5
+endnode
+node emitter ChunkyWood14
+  parent vmr_udoor_06
+  #part-number 6
+endnode
+node dummy vmr_udoor_06grnd
+  parent vmr_udoor_06
+  #part-number 7
+endnode
+node dummy vmr_udoor_06hhit
+  parent vmr_udoor_06
+  #part-number 8
+endnode
+node dummy vmr_udoor_06head
+  parent vmr_udoor_06
+  #part-number 9
+endnode
+node dummy vmr_udoor_06impc
+  parent vmr_udoor_06
+  #part-number 10
+endnode
+doneanim opening1 vmr_udoor_06
+
+#MAXANIM ASCII
+newanim opened1 vmr_udoor_06
+  length 0.0333333015
+  transtime 0.25
+  animroot vmr_udoor_06
+node dummy vmr_udoor_06
+  parent NULL
+  #part-number 0
+endnode
+node dummy vmr_udoor_06_DWK
+  parent vmr_udoor_06
+  #part-number -1
+endnode
+node dummy 06_DWK_dp_open2_02
+  parent vmr_udoor_06_DWK
+  #part-number 2
+endnode
+node dummy 06_DWK_dp_open2_01
+  parent vmr_udoor_06_DWK
+  #part-number 3
+endnode
+node dummy 06_DWK_dp_closed_01
+  parent vmr_udoor_06_DWK
+  #part-number 4
+endnode
+node dummy 06_DWK_dp_closed_02
+  parent vmr_udoor_06_DWK
+  #part-number 5
+endnode
+node dummy 06_DWK_dp_open1_01
+  parent vmr_udoor_06_DWK
+  #part-number 6
+endnode
+node dummy 06_DWK_wg_closed
+  parent vmr_udoor_06_DWK
+  #part-number 7
+endnode
+node dummy 06_DWK_wg_open2
+  parent vmr_udoor_06_DWK
+  #part-number 8
+endnode
+node dummy 06_DWK_wg_open1
+  parent vmr_udoor_06_DWK
+  #part-number 9
+endnode
+node dummy Box1359
+  parent vmr_udoor_06
+  #part-number 1
+  orientationkey 2
+    0 0 0 1 -1.48353004
+    0.0333333015 0 0 1 -1.48353004
+endnode
+node dummy Box20
+  parent vmr_udoor_06
+  #part-number 2
+  orientationkey 2
+    0 0 0 -1 -1.50970995
+    0.0333333015 0 0 -1 -1.50970995
+endnode
+node trimesh sam
+  parent vmr_udoor_06
+  #part-number 3
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+  alphakey 2
+    0 0
+    0.0333333015 0
+endnode
+node emitter ChunkyWood13
+  parent vmr_udoor_06
+  #part-number 4
+endnode
+node emitter fire!13
+  parent vmr_udoor_06
+  #part-number 5
+endnode
+node emitter ChunkyWood14
+  parent vmr_udoor_06
+  #part-number 6
+endnode
+node dummy vmr_udoor_06grnd
+  parent vmr_udoor_06
+  #part-number 7
+endnode
+node dummy vmr_udoor_06hhit
+  parent vmr_udoor_06
+  #part-number 8
+endnode
+node dummy vmr_udoor_06head
+  parent vmr_udoor_06
+  #part-number 9
+endnode
+node dummy vmr_udoor_06impc
+  parent vmr_udoor_06
+  #part-number 10
+endnode
+doneanim opened1 vmr_udoor_06
+
+#MAXANIM ASCII
+newanim opened2 vmr_udoor_06
+  length 0.0333333015
+  transtime 0.25
+  animroot vmr_udoor_06
+node dummy vmr_udoor_06
+  parent NULL
+  #part-number 0
+endnode
+node dummy vmr_udoor_06_DWK
+  parent vmr_udoor_06
+  #part-number -1
+endnode
+node dummy 06_DWK_dp_open2_02
+  parent vmr_udoor_06_DWK
+  #part-number 2
+endnode
+node dummy 06_DWK_dp_open2_01
+  parent vmr_udoor_06_DWK
+  #part-number 3
+endnode
+node dummy 06_DWK_dp_closed_01
+  parent vmr_udoor_06_DWK
+  #part-number 4
+endnode
+node dummy 06_DWK_dp_closed_02
+  parent vmr_udoor_06_DWK
+  #part-number 5
+endnode
+node dummy 06_DWK_dp_open1_01
+  parent vmr_udoor_06_DWK
+  #part-number 6
+endnode
+node dummy 06_DWK_wg_closed
+  parent vmr_udoor_06_DWK
+  #part-number 7
+endnode
+node dummy 06_DWK_wg_open2
+  parent vmr_udoor_06_DWK
+  #part-number 8
+endnode
+node dummy 06_DWK_wg_open1
+  parent vmr_udoor_06_DWK
+  #part-number 9
+endnode
+node dummy Box1359
+  parent vmr_udoor_06
+  #part-number 1
+  orientationkey 2
+    0 0 0 -1 -1.50098002
+    0.0333333015 0 0 -1 -1.50098002
+endnode
+node dummy Box20
+  parent vmr_udoor_06
+  #part-number 2
+  orientationkey 2
+    0 0 0 1 -1.51844001
+    0.0333333015 0 0 1 -1.51844001
+endnode
+node trimesh sam
+  parent vmr_udoor_06
+  #part-number 3
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+  alphakey 2
+    0 0
+    0.0333333015 0
+endnode
+node emitter ChunkyWood13
+  parent vmr_udoor_06
+  #part-number 4
+endnode
+node emitter fire!13
+  parent vmr_udoor_06
+  #part-number 5
+endnode
+node emitter ChunkyWood14
+  parent vmr_udoor_06
+  #part-number 6
+endnode
+node dummy vmr_udoor_06grnd
+  parent vmr_udoor_06
+  #part-number 7
+endnode
+node dummy vmr_udoor_06hhit
+  parent vmr_udoor_06
+  #part-number 8
+endnode
+node dummy vmr_udoor_06head
+  parent vmr_udoor_06
+  #part-number 9
+endnode
+node dummy vmr_udoor_06impc
+  parent vmr_udoor_06
+  #part-number 10
+endnode
+doneanim opened2 vmr_udoor_06
+
+#MAXANIM ASCII
+newanim closed vmr_udoor_06
+  length 0.0333333015
+  transtime 0.25
+  animroot vmr_udoor_06
+node dummy vmr_udoor_06
+  parent NULL
+  #part-number 0
+endnode
+node dummy vmr_udoor_06_DWK
+  parent vmr_udoor_06
+  #part-number -1
+endnode
+node dummy 06_DWK_dp_open2_02
+  parent vmr_udoor_06_DWK
+  #part-number 2
+endnode
+node dummy 06_DWK_dp_open2_01
+  parent vmr_udoor_06_DWK
+  #part-number 3
+endnode
+node dummy 06_DWK_dp_closed_01
+  parent vmr_udoor_06_DWK
+  #part-number 4
+endnode
+node dummy 06_DWK_dp_closed_02
+  parent vmr_udoor_06_DWK
+  #part-number 5
+endnode
+node dummy 06_DWK_dp_open1_01
+  parent vmr_udoor_06_DWK
+  #part-number 6
+endnode
+node dummy 06_DWK_wg_closed
+  parent vmr_udoor_06_DWK
+  #part-number 7
+endnode
+node dummy 06_DWK_wg_open2
+  parent vmr_udoor_06_DWK
+  #part-number 8
+endnode
+node dummy 06_DWK_wg_open1
+  parent vmr_udoor_06_DWK
+  #part-number 9
+endnode
+node dummy Box1359
+  parent vmr_udoor_06
+  #part-number 1
+  orientationkey 2
+    0 0 0 0 0
+    0.0333333015 0 0 0 0
+endnode
+node dummy Box20
+  parent vmr_udoor_06
+  #part-number 2
+  orientationkey 2
+    0 0 0 0 0
+    0.0333333015 0 0 0 0
+endnode
+node trimesh sam
+  parent vmr_udoor_06
+  #part-number 3
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+  alphakey 2
+    0 0
+    0.0333333015 0
+endnode
+node emitter ChunkyWood13
+  parent vmr_udoor_06
+  #part-number 4
+endnode
+node emitter fire!13
+  parent vmr_udoor_06
+  #part-number 5
+endnode
+node emitter ChunkyWood14
+  parent vmr_udoor_06
+  #part-number 6
+endnode
+node dummy vmr_udoor_06grnd
+  parent vmr_udoor_06
+  #part-number 7
+endnode
+node dummy vmr_udoor_06hhit
+  parent vmr_udoor_06
+  #part-number 8
+endnode
+node dummy vmr_udoor_06head
+  parent vmr_udoor_06
+  #part-number 9
+endnode
+node dummy vmr_udoor_06impc
+  parent vmr_udoor_06
+  #part-number 10
+endnode
+doneanim closed vmr_udoor_06
+
+#MAXANIM ASCII
+newanim closing2 vmr_udoor_06
+  length 0.966666996
+  transtime 0.25
+  animroot vmr_udoor_06
+node dummy vmr_udoor_06
+  parent NULL
+  #part-number 0
+endnode
+node dummy vmr_udoor_06_DWK
+  parent vmr_udoor_06
+  #part-number -1
+endnode
+node dummy 06_DWK_dp_open2_02
+  parent vmr_udoor_06_DWK
+  #part-number 2
+endnode
+node dummy 06_DWK_dp_open2_01
+  parent vmr_udoor_06_DWK
+  #part-number 3
+endnode
+node dummy 06_DWK_dp_closed_01
+  parent vmr_udoor_06_DWK
+  #part-number 4
+endnode
+node dummy 06_DWK_dp_closed_02
+  parent vmr_udoor_06_DWK
+  #part-number 5
+endnode
+node dummy 06_DWK_dp_open1_01
+  parent vmr_udoor_06_DWK
+  #part-number 6
+endnode
+node dummy 06_DWK_wg_closed
+  parent vmr_udoor_06_DWK
+  #part-number 7
+endnode
+node dummy 06_DWK_wg_open2
+  parent vmr_udoor_06_DWK
+  #part-number 8
+endnode
+node dummy 06_DWK_wg_open1
+  parent vmr_udoor_06_DWK
+  #part-number 9
+endnode
+node dummy Box1359
+  parent vmr_udoor_06
+  #part-number 1
+  orientationkey 2
+    0 0 0 -1 -1.50098002
+    0.966666996 0 0 0 0
+endnode
+node dummy Box20
+  parent vmr_udoor_06
+  #part-number 2
+  orientationkey 2
+    0 0 0 1 -1.51844001
+    0.966666996 0 0 0 0
+endnode
+node trimesh sam
+  parent vmr_udoor_06
+  #part-number 3
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+  alphakey 2
+    0 0
+    0.966666996 0
+endnode
+node emitter ChunkyWood13
+  parent vmr_udoor_06
+  #part-number 4
+endnode
+node emitter fire!13
+  parent vmr_udoor_06
+  #part-number 5
+endnode
+node emitter ChunkyWood14
+  parent vmr_udoor_06
+  #part-number 6
+endnode
+node dummy vmr_udoor_06grnd
+  parent vmr_udoor_06
+  #part-number 7
+endnode
+node dummy vmr_udoor_06hhit
+  parent vmr_udoor_06
+  #part-number 8
+endnode
+node dummy vmr_udoor_06head
+  parent vmr_udoor_06
+  #part-number 9
+endnode
+node dummy vmr_udoor_06impc
+  parent vmr_udoor_06
+  #part-number 10
+endnode
+doneanim closing2 vmr_udoor_06
+
+#MAXANIM ASCII
+newanim closing1 vmr_udoor_06
+  length 0.966666996
+  transtime 0.25
+  animroot vmr_udoor_06
+node dummy vmr_udoor_06
+  parent NULL
+  #part-number 0
+endnode
+node dummy vmr_udoor_06_DWK
+  parent vmr_udoor_06
+  #part-number -1
+endnode
+node dummy 06_DWK_dp_open2_02
+  parent vmr_udoor_06_DWK
+  #part-number 2
+endnode
+node dummy 06_DWK_dp_open2_01
+  parent vmr_udoor_06_DWK
+  #part-number 3
+endnode
+node dummy 06_DWK_dp_closed_01
+  parent vmr_udoor_06_DWK
+  #part-number 4
+endnode
+node dummy 06_DWK_dp_closed_02
+  parent vmr_udoor_06_DWK
+  #part-number 5
+endnode
+node dummy 06_DWK_dp_open1_01
+  parent vmr_udoor_06_DWK
+  #part-number 6
+endnode
+node dummy 06_DWK_wg_closed
+  parent vmr_udoor_06_DWK
+  #part-number 7
+endnode
+node dummy 06_DWK_wg_open2
+  parent vmr_udoor_06_DWK
+  #part-number 8
+endnode
+node dummy 06_DWK_wg_open1
+  parent vmr_udoor_06_DWK
+  #part-number 9
+endnode
+node dummy Box1359
+  parent vmr_udoor_06
+  #part-number 1
+  orientationkey 2
+    0 0 0 1 -1.48353004
+    0.966666996 0 0 0 0
+endnode
+node dummy Box20
+  parent vmr_udoor_06
+  #part-number 2
+  orientationkey 2
+    0 0 0 -1 -1.50970995
+    0.966666996 0 0 0 0
+endnode
+node trimesh sam
+  parent vmr_udoor_06
+  #part-number 3
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+  alphakey 2
+    0 0
+    0.966666996 0
+endnode
+node emitter ChunkyWood13
+  parent vmr_udoor_06
+  #part-number 4
+endnode
+node emitter fire!13
+  parent vmr_udoor_06
+  #part-number 5
+endnode
+node emitter ChunkyWood14
+  parent vmr_udoor_06
+  #part-number 6
+endnode
+node dummy vmr_udoor_06grnd
+  parent vmr_udoor_06
+  #part-number 7
+endnode
+node dummy vmr_udoor_06hhit
+  parent vmr_udoor_06
+  #part-number 8
+endnode
+node dummy vmr_udoor_06head
+  parent vmr_udoor_06
+  #part-number 9
+endnode
+node dummy vmr_udoor_06impc
+  parent vmr_udoor_06
+  #part-number 10
+endnode
+doneanim closing1 vmr_udoor_06
+
+#MAXANIM ASCII
+newanim trans vmr_udoor_06
+  length 0.0333333015
+  transtime 0.25
+  animroot vmr_udoor_06
+node dummy vmr_udoor_06
+  parent NULL
+  #part-number 0
+endnode
+node dummy vmr_udoor_06_DWK
+  parent vmr_udoor_06
+  #part-number -1
+endnode
+node dummy 06_DWK_dp_open2_02
+  parent vmr_udoor_06_DWK
+  #part-number 2
+endnode
+node dummy 06_DWK_dp_open2_01
+  parent vmr_udoor_06_DWK
+  #part-number 3
+endnode
+node dummy 06_DWK_dp_closed_01
+  parent vmr_udoor_06_DWK
+  #part-number 4
+endnode
+node dummy 06_DWK_dp_closed_02
+  parent vmr_udoor_06_DWK
+  #part-number 5
+endnode
+node dummy 06_DWK_dp_open1_01
+  parent vmr_udoor_06_DWK
+  #part-number 6
+endnode
+node dummy 06_DWK_wg_closed
+  parent vmr_udoor_06_DWK
+  #part-number 7
+endnode
+node dummy 06_DWK_wg_open2
+  parent vmr_udoor_06_DWK
+  #part-number 8
+endnode
+node dummy 06_DWK_wg_open1
+  parent vmr_udoor_06_DWK
+  #part-number 9
+endnode
+node dummy Box1359
+  parent vmr_udoor_06
+  #part-number 1
+endnode
+node dummy Box20
+  parent vmr_udoor_06
+  #part-number 2
+endnode
+node trimesh sam
+  parent vmr_udoor_06
+  #part-number 3
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+  alphakey 2
+    0 0.25
+    0.0333333015 0.25
+endnode
+node emitter ChunkyWood13
+  parent vmr_udoor_06
+  #part-number 4
+endnode
+node emitter fire!13
+  parent vmr_udoor_06
+  #part-number 5
+endnode
+node emitter ChunkyWood14
+  parent vmr_udoor_06
+  #part-number 6
+endnode
+node dummy vmr_udoor_06grnd
+  parent vmr_udoor_06
+  #part-number 7
+endnode
+node dummy vmr_udoor_06hhit
+  parent vmr_udoor_06
+  #part-number 8
+endnode
+node dummy vmr_udoor_06head
+  parent vmr_udoor_06
+  #part-number 9
+endnode
+node dummy vmr_udoor_06impc
+  parent vmr_udoor_06
+  #part-number 10
+endnode
+doneanim trans vmr_udoor_06
+
+#MAXANIM ASCII
+newanim die vmr_udoor_06
+  length 0.266667008
+  transtime 0.25
+  animroot vmr_udoor_06
+  event 0.0333333015 detonate
+  event 0.0333333015 detonate
+  event 0.0333333015 detonate
+node dummy vmr_udoor_06
+  parent NULL
+  #part-number 0
+endnode
+node dummy vmr_udoor_06_DWK
+  parent vmr_udoor_06
+  #part-number -1
+endnode
+node dummy 06_DWK_dp_open2_02
+  parent vmr_udoor_06_DWK
+  #part-number 2
+endnode
+node dummy 06_DWK_dp_open2_01
+  parent vmr_udoor_06_DWK
+  #part-number 3
+endnode
+node dummy 06_DWK_dp_closed_01
+  parent vmr_udoor_06_DWK
+  #part-number 4
+endnode
+node dummy 06_DWK_dp_closed_02
+  parent vmr_udoor_06_DWK
+  #part-number 5
+endnode
+node dummy 06_DWK_dp_open1_01
+  parent vmr_udoor_06_DWK
+  #part-number 6
+endnode
+node dummy 06_DWK_wg_closed
+  parent vmr_udoor_06_DWK
+  #part-number 7
+endnode
+node dummy 06_DWK_wg_open2
+  parent vmr_udoor_06_DWK
+  #part-number 8
+endnode
+node dummy 06_DWK_wg_open1
+  parent vmr_udoor_06_DWK
+  #part-number 9
+endnode
+node dummy Box1359
+  parent vmr_udoor_06
+  #part-number 1
+  positionkey 2
+    0 -1.50735998 -0.0778307021 0.200000003
+    0.266667008 -1.50735998 -0.0778307021 -6.18673992
+  orientationkey 2
+    0 0 0 0 0
+    0.266667008 0.658907056 -0.00592882046 0.752200961 -0.552492976
+endnode
+node dummy Box20
+  parent vmr_udoor_06
+  #part-number 2
+  positionkey 2
+    0 1.53263998 -0.0778307021 0.200000003
+    0.266667008 1.53263998 -0.0778307021 -6.18673992
+  orientationkey 2
+    0 0 0 0 0
+    0.266667008 0.869743586 0.184869915 -0.457568794 -0.869750023
+endnode
+node trimesh sam
+  parent vmr_udoor_06
+  #part-number 3
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node emitter ChunkyWood13
+  parent vmr_udoor_06
+  #part-number 4
+endnode
+node emitter fire!13
+  parent vmr_udoor_06
+  #part-number 5
+endnode
+node emitter ChunkyWood14
+  parent vmr_udoor_06
+  #part-number 6
+endnode
+node dummy vmr_udoor_06grnd
+  parent vmr_udoor_06
+  #part-number 7
+endnode
+node dummy vmr_udoor_06hhit
+  parent vmr_udoor_06
+  #part-number 8
+endnode
+node dummy vmr_udoor_06head
+  parent vmr_udoor_06
+  #part-number 9
+endnode
+node dummy vmr_udoor_06impc
+  parent vmr_udoor_06
+  #part-number 10
+endnode
+doneanim die vmr_udoor_06
+
+#MAXANIM ASCII
+newanim dead vmr_udoor_06
+  length 0.0333333015
+  transtime 0.25
+  animroot vmr_udoor_06
+node dummy vmr_udoor_06
+  parent NULL
+  #part-number 0
+endnode
+node dummy vmr_udoor_06_DWK
+  parent vmr_udoor_06
+  #part-number -1
+endnode
+node dummy 06_DWK_dp_open2_02
+  parent vmr_udoor_06_DWK
+  #part-number 2
+endnode
+node dummy 06_DWK_dp_open2_01
+  parent vmr_udoor_06_DWK
+  #part-number 3
+endnode
+node dummy 06_DWK_dp_closed_01
+  parent vmr_udoor_06_DWK
+  #part-number 4
+endnode
+node dummy 06_DWK_dp_closed_02
+  parent vmr_udoor_06_DWK
+  #part-number 5
+endnode
+node dummy 06_DWK_dp_open1_01
+  parent vmr_udoor_06_DWK
+  #part-number 6
+endnode
+node dummy 06_DWK_wg_closed
+  parent vmr_udoor_06_DWK
+  #part-number 7
+endnode
+node dummy 06_DWK_wg_open2
+  parent vmr_udoor_06_DWK
+  #part-number 8
+endnode
+node dummy 06_DWK_wg_open1
+  parent vmr_udoor_06_DWK
+  #part-number 9
+endnode
+node dummy Box1359
+  parent vmr_udoor_06
+  #part-number 1
+  positionkey 2
+    0 -1.50735998 -0.0778307021 -6.18673992
+    0.0333333015 -1.50735998 -0.0778307021 -6.18673992
+  orientationkey 2
+    0 0.658907056 -0.00592882046 0.752200961 -0.552492976
+    0.0333333015 0.658907056 -0.00592882046 0.752200961 -0.552492976
+endnode
+node dummy Box20
+  parent vmr_udoor_06
+  #part-number 2
+  positionkey 2
+    0 1.53263998 -0.0778307021 -6.18673992
+    0.0333333015 1.53263998 -0.0778307021 -6.18673992
+  orientationkey 2
+    0 0.869743586 0.184869915 -0.457568794 -0.869750023
+    0.0333333015 0.869743586 0.184869915 -0.457568794 -0.869750023
+endnode
+node trimesh sam
+  parent vmr_udoor_06
+  #part-number 3
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node emitter ChunkyWood13
+  parent vmr_udoor_06
+  #part-number 4
+endnode
+node emitter fire!13
+  parent vmr_udoor_06
+  #part-number 5
+endnode
+node emitter ChunkyWood14
+  parent vmr_udoor_06
+  #part-number 6
+endnode
+node dummy vmr_udoor_06grnd
+  parent vmr_udoor_06
+  #part-number 7
+endnode
+node dummy vmr_udoor_06hhit
+  parent vmr_udoor_06
+  #part-number 8
+endnode
+node dummy vmr_udoor_06head
+  parent vmr_udoor_06
+  #part-number 9
+endnode
+node dummy vmr_udoor_06impc
+  parent vmr_udoor_06
+  #part-number 10
+endnode
+doneanim dead vmr_udoor_06
+
+donemodel vmr_udoor_06
+
+

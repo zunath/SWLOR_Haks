@@ -1,0 +1,147 @@
+# Rewritten by CleanModels 3 Version 3.1.1 Sat Oct 25 21:50:15 2008
+#MAXMODEL ASCII
+filedependency Unknown
+newmodel wsf09_a10_01
+setsupermodel wsf09_a10_01 null
+setanimationscale 1
+classification TILE
+#MAXGEOM ASCII
+beginmodelgeom wsf09_a10_01
+node dummy wsf09_a10_01
+  parent NULL
+endnode
+node aabb rectangle136
+  parent wsf09_a10_01
+  wirecolor 1 1 1
+  bitmap NULL
+  orientation 0 0 0 0
+  position 0 0 0
+  verts 4
+    5 -5 13
+    5 5 13
+    -5 5 13
+    -5 -5 13
+  faces 2
+    0 1 2 1 0 0 0 2
+    3 0 2 1 0 0 0 2
+  aabb     -5 -5 13 5 5 13 -1
+    -5 -5 13 5 5 13 1
+    -5 -5 13 5 5 13 0
+endnode
+node trimesh rectangle132
+  parent wsf09_a10_01
+  position 0 0 13
+  orientation 0 0 0 0
+  wirecolor 1 1 1
+  tilefade 1
+  scale 1
+  render 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1
+  transparencyhint 0
+  selfillumcolor 0 0 0
+  ambient 0 0 0
+  diffuse 0 0 0
+  specular 0 0 0
+  shininess 26
+  center 0 0 0
+  bitmap ttf01_black
+  shadow 0
+  verts 4
+    5 -5 0
+    5 5 0
+    -5 5 0
+    -5 -5 0
+  faces 2
+    0 1 2 1 0 1 2 1
+    3 0 2 1 3 0 2 1
+  tverts 4
+    0.0530786 0.28592 0
+    0.0530786 0.357275 0
+    0.000499576 0.357275 0
+    0.000499576 0.28592 0
+endnode
+node trimesh rectangle149
+  parent wsf09_a10_01
+  position 0 0 3
+  orientation 0 0 0 0
+  wirecolor 1 1 1
+  tilefade 2
+  scale 1
+  render 1
+  shadow 0
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1
+  transparencyhint 0
+  selfillumcolor 0 0 0
+  ambient 0 0 0
+  diffuse 0 0 0
+  specular 0 0 0
+  shininess 26
+  center 0 0 0
+  bitmap ttf01_black
+  verts 4
+    5 -5 0
+    5 5 0
+    -5 5 0
+    -5 -5 0
+  faces 2
+    0 1 2 1 0 1 2 1
+    3 0 2 1 3 0 2 1
+  tverts 4
+    0.0530786 0.28592 0
+    0.0530786 0.357275 0
+    0.000499576 0.357275 0
+    0.000499576 0.28592 0
+endnode
+node trimesh line153
+  parent wsf09_a10_01
+  position 0 0 3
+  orientation 0 0 0 0
+  wirecolor 1 1 1
+  tilefade 4
+  scale 1
+  render 1
+  shadow 0
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1
+  transparencyhint 0
+  selfillumcolor 0 0 0
+  ambient 0 0 0
+  diffuse 0 0 0
+  specular 0 0 0
+  shininess 26
+  center 0 0 500
+  bitmap ttf01_black
+  verts 8
+    -5 -5 0
+    5 -5 0
+    5 -5 10
+    -5 -5 10
+    5 5 0
+    5 5 10
+    -5 5 0
+    -5 5 10
+  faces 8
+    0 1 2 1 0 1 1 3
+    0 2 3 1 0 1 0 3
+    1 4 5 2 1 2 2 3
+    1 5 2 2 1 2 1 3
+    4 6 7 1 2 3 3 3
+    4 7 5 1 2 3 2 3
+    6 0 3 2 3 0 0 3
+    6 3 7 2 3 0 3 3
+  tverts 4
+    0.000499517 0.000499755 0
+    0.9995 0.000499517 0
+    0.999501 0.9995 0
+    0.000499755 0.999501 0
+endnode
+endmodelgeom wsf09_a10_01
+donemodel wsf09_a10_01

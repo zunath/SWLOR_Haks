@@ -1,0 +1,116 @@
+# Exported from NWmax 0.8 b60 at 25/12/2009 18:18:14
+# mdl file
+#
+#NWmax MODEL ASCII
+# model: jhb_mag01
+#local file: Unknown
+filedependancy Unknown
+newmodel jhb_mag01
+setsupermodel jhb_mag01 NULL
+classification Character
+setanimationscale 1.0
+#NWmax GEOM  ASCII
+beginmodelgeom jhb_mag01
+node dummy jhb_mag01
+  parent NULL
+endnode
+node dummy mag01_impact
+  parent jhb_mag01
+  position 0.0 0.0 0.85
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.603922 0.603922 0.898039 
+endnode
+node dummy mag01_ground
+  parent jhb_mag01
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.603922 0.603922 0.898039 
+endnode
+node dummy mag01_hand
+  parent jhb_mag01
+  position 0.0 0.0 1.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.603922 0.603922 0.898039 
+endnode
+node dummy mag01_head
+  parent jhb_mag01
+  position 0.0 0.0 2.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.603922 0.603922 0.898039 
+endnode
+node dummy mag01_head_hit
+  parent jhb_mag01
+  position 0.0 0.0 1.5
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.341176 0.878431 0.776471 
+endnode
+node trimesh mag
+  parent jhb_mag01
+  position 0.0276478 0.00365113 0.0114611
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.882353 0.345098 0.780392 
+  ambient 0.7 0.7 0.7 
+  diffuse 0.7 0.7 0.7 
+  specular 0.1 0.1 0.1 
+  shininess 10.0
+  bitmap jhb_mag01
+  verts 16
+    -0.129317 -0.200649 -0.0103494
+    -0.129096 -0.200744 0.00945956
+    -0.0393953 -0.200341 -0.0108224
+    -0.0290828 -0.190452 0.0188312
+    0.120472 -0.199785 -0.0116641
+    0.120677 -0.189887 0.00813848
+    0.119893 0.199923 -0.0120147
+    0.120113 0.199829 0.00779607
+    -0.0299797 0.199408 -0.0112269
+    -0.029632 0.189272 0.0184975
+    -0.129896 0.19906 -0.0107023
+    -0.129675 0.198965 0.00910845
+    0.13011 0.199868 0.00774359
+    0.130689 -0.199841 0.00809469
+    -0.0296473 0.199264 0.0184893
+    -0.0290678 -0.200445 0.0188404
+  faces 16
+    1 0 2  1  1 0 2  1
+    3 1 2  1  3 1 2  1
+    3 2 4  1  3 2 4  1
+    5 3 4  1  5 3 4  1
+    5 4 6  2  5 4 6  1
+    7 5 6  2  7 5 6  1
+    7 6 8  1  7 6 8  1
+    9 7 8  1  9 7 8  1
+    9 8 10  1  9 8 10  1
+    11 9 10  1  11 9 10  1
+    13 12 14  2  13 12 14  1
+    15 13 14  2  15 13 14  1
+    15 14 11  2  15 14 20  1
+    1 15 11  2  21 15 20  1
+    1 11 10  4  17 16 18  1
+    0 1 10  4  19 17 18  1
+  tverts 22
+    0.548661 2.03341 0
+    0.410748 2.01697 0
+    0.548661 1.79228 0
+    0.410748 1.76919 0
+    0.548661 1.38314 0
+    0.410748 1.364 0
+    0.548661 1.02429 0
+    0.410748 1.01412 0
+    0.548661 0.442304 0
+    0.410748 0.442312 0
+    0.548661 0.0543148 0
+    0.410748 0.0441527 0
+    0.336336 0.990149 0
+    0.336344 -0.00141569 0
+    0.15067 0.987668 0
+    0.150678 -0.00389606 0
+    0.326987 0.00545728 0
+    0.326986 0.997022 0
+    0.000499576 0.000499487 0
+    -0.00321519 0.992064 0
+    0.00978336 0.990146 0
+    0.00979089 -0.00141824 0
+endnode
+endmodelgeom jhb_mag01
+donemodel jhb_mag01

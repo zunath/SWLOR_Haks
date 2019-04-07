@@ -1,0 +1,78 @@
+# Exported from NWmax 0.8 b61 at 22/07/2010 20:42:35
+# mdl file
+#
+#NWmax MODEL ASCII
+# model: wall_wood3_l
+#local file: Unknown
+filedependancy Unknown
+newmodel wall_wood3_l
+setsupermodel wall_wood3_l NULL
+classification Character
+setanimationscale 1.0
+#NWmax GEOM  ASCII
+beginmodelgeom wall_wood3_l
+node dummy wall_wood3_l
+  parent NULL
+endnode
+node trimesh back
+  parent wall_wood3_l
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 1
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.9 0.9 0.9 
+  shininess 0
+  center 0.0 0.0 200.0 
+  bitmap wall_wood3
+  verts 8
+    6.5 0.125 0.0
+    -6.5 0.125 0.0
+    -6.5 0.125 4.0
+    6.5 0.125 4.0
+    -6.5 -0.125 0.0
+    6.5 -0.125 0.0
+    6.5 -0.125 4.0
+    -6.5 -0.125 4.0
+  faces 12
+    0 1 2  1  0 1 2  6
+    2 3 0  1  2 3 0  6
+    4 1 0  2  4 0 5  2
+    0 5 4  2  5 6 4  2
+    4 5 6  1  0 5 7  5
+    6 7 4  1  7 8 0  5
+    1 4 7  4  4 0 9  3
+    7 2 1  4  9 10 4  3
+    5 0 3  4  4 0 11  4
+    3 6 5  4  11 12 4  4
+    7 6 3  2  0 13 6  1
+    3 2 7  2  6 14 0  1
+  tverts 15
+    0.999499 0.000499994 0
+    0.999499 0.999501 0
+    0.000499547 0.9995 0
+    0.000500768 0.000499487 0
+    0.937062 0.000500053 0
+    0.9995 0.9995 0
+    0.937061 0.9995 0
+    0.000499725 0.9995 0
+    0.000500083 0.000500202 0
+    0.9995 0.4445 0
+    0.937064 0.4445 0
+    0.999499 0.4445 0
+    0.937063 0.4445 0
+    0.999501 0.9995 0
+    0.937062 0.000499994 0
+endnode
+endmodelgeom wall_wood3_l
+donemodel wall_wood3_l

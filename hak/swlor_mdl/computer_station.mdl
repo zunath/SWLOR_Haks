@@ -1,0 +1,771 @@
+# Exported from NWmax 0.8 b60 at 21/01/2010 14:51:46
+# mdl file
+#
+#NWmax MODEL ASCII
+# model: computer_station
+#local file: Unknown
+filedependancy Unknown
+newmodel computer_station
+setsupermodel computer_station NULL
+classification Character
+setanimationscale 1.0
+#NWmax GEOM  ASCII
+beginmodelgeom computer_station
+node dummy computer_station
+  parent NULL
+endnode
+node emitter ChunkyWood26
+  parent computer_station
+  position 0.023035 0.00787109 0.676085
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 1.0 1.0 1.0 
+  update_sel 3
+  update Explosion
+  render_sel 1
+  render Normal
+  blend_sel 1
+  Blend Normal
+  spawntype_sel 0
+  spawnType 0
+  xSize 89.0
+  ySize 40.0
+  inherit 1
+  inherit_local 0
+  inheritvel 0
+  inherit_part 0
+  renderorder 0
+  threshold 0.0
+  combinetime 0.0
+  deadspace 0.0
+  opacity 0.0
+  colorStart 1.0 1.0 1.0 
+  colorEnd 1.0 1.0 1.0 
+  alphaStart 1.0
+  alphaEnd 1.0
+  sizeStart 0.1
+  sizeEnd 0.1
+  sizeStart_y 0.0
+  sizeEnd_y 0.0
+  birthrate 3
+  lifeExp 0.75
+  mass 3.0
+  spread 1.22173
+  particleRot 5.0
+  velocity 8.0
+  randvel 0.3
+  bounce_co 0.5
+  blurlength 10.0
+  loop 0
+  bounce 1
+  m_isTinted 0
+  Splat 0
+  affectedByWind false
+  texture fxpa_cloud02
+  twosidedtex 0
+  xgrid 5
+  ygrid 5
+  fps 0
+  framestart 0
+  frameend 24
+  random 0
+  lightningDelay 0.0
+  lightningRadius 0.0
+  lightningSubDiv 0
+  lightningScale 0.0
+  blastRadius 0.0
+  blastLength 0.0
+  p2p 0
+  p2p_type Bezier
+  p2p_sel 1
+  p2p_bezier2 0.0
+  p2p_bezier3 0.0
+  grav 0.0
+  Drag 0.0
+endnode
+node emitter ChunkyWood25
+  parent computer_station
+  position 0.023035 0.00787109 0.782307
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 1.0 1.0 1.0 
+  update_sel 3
+  update Explosion
+  render_sel 1
+  render Normal
+  blend_sel 1
+  Blend Normal
+  spawntype_sel 0
+  spawnType 0
+  xSize 89.0
+  ySize 40.0
+  inherit 1
+  inherit_local 0
+  inheritvel 0
+  inherit_part 0
+  renderorder 0
+  threshold 0.0
+  combinetime 0.0
+  deadspace 0.0
+  opacity 0.0
+  colorStart 0.482353 0.435294 0.317647 
+  colorEnd 0.584314 0.533333 0.407843 
+  alphaStart 1.0
+  alphaEnd 1.0
+  sizeStart 0.1
+  sizeEnd 0.1
+  sizeStart_y 0.0
+  sizeEnd_y 0.0
+  birthrate 3
+  lifeExp 0.75
+  mass 3.0
+  spread 1.22173
+  particleRot 2.9
+  velocity 8.0
+  randvel 0.3
+  bounce_co 0.5
+  blurlength 10.0
+  loop 0
+  bounce 1
+  m_isTinted 0
+  Splat 0
+  affectedByWind false
+  texture fxpa_cloud02
+  twosidedtex 0
+  xgrid 5
+  ygrid 5
+  fps 0
+  framestart 0
+  frameend 24
+  random 0
+  lightningDelay 0.0
+  lightningRadius 0.0
+  lightningSubDiv 0
+  lightningScale 0.0
+  blastRadius 0.0
+  blastLength 0.0
+  p2p 0
+  p2p_type Bezier
+  p2p_sel 1
+  p2p_bezier2 0.0
+  p2p_bezier3 0.0
+  grav 0.0
+  Drag 0.0
+endnode
+node emitter fire!19
+  parent computer_station
+  position 0.023035 0.00787109 0.602042
+  orientation 1.0 0.0 0.0 -4.71239
+  wirecolor 1.0 1.0 1.0 
+  update_sel 3
+  update Explosion
+  render_sel 1
+  render Normal
+  blend_sel 1
+  Blend Normal
+  spawntype_sel 0
+  spawnType 0
+  xSize 100.0
+  ySize 99.0
+  inherit 1
+  inherit_local 0
+  inheritvel 0
+  inherit_part 0
+  renderorder 0
+  threshold 0.0
+  combinetime 0.0
+  deadspace 0.0
+  opacity 0.0
+  colorStart 0.47451 0.439216 0.364706 
+  colorEnd 0.819608 0.796079 0.709804 
+  alphaStart 1.0
+  alphaEnd 0.0
+  sizeStart 4.0
+  sizeEnd 1.0
+  sizeStart_y 0.0
+  sizeEnd_y 0.0
+  birthrate 10
+  lifeExp 2.5
+  mass 0.09
+  spread 2.96706
+  particleRot 0.5
+  velocity 2.0
+  randvel 0.5
+  bounce_co 0.0
+  blurlength 10.0
+  loop 0
+  bounce 0
+  m_isTinted 1
+  Splat 0
+  affectedByWind false
+  texture fxpa_smoke01
+  twosidedtex 0
+  xgrid 4
+  ygrid 4
+  fps 10
+  framestart 0
+  frameend 24
+  random 0
+  lightningDelay 0.0
+  lightningRadius 0.0
+  lightningSubDiv 0
+  lightningScale 0.0
+  blastRadius 0.2
+  blastLength 1.0
+  p2p 0
+  p2p_type Bezier
+  p2p_sel 1
+  p2p_bezier2 0.0
+  p2p_bezier3 0.0
+  grav 0.0
+  Drag 0.0
+endnode
+node dummy computer_hand
+  parent computer_station
+  position 0.00398437 -0.894806 0.934402
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.223529 0.0313726 0.533333 
+endnode
+node dummy computer_head
+  parent computer_station
+  position 0.00398437 0.0108252 1.35708
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.223529 0.0313726 0.533333 
+endnode
+node dummy computer_head_hit
+  parent computer_station
+  position 0.00398437 0.0108252 0.875602
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.223529 0.0313726 0.533333 
+endnode
+node dummy computer_impact
+  parent computer_station
+  position 0.00398437 0.011001 0.706168
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.223529 0.0313726 0.533333 
+endnode
+node dummy computer_ground
+  parent computer_station
+  position -0.00363281 0.0069873 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.223529 0.0313726 0.533333 
+endnode
+node trimesh computer_mesh
+  parent computer_station
+  position 0.0 0.0 0.484792
+  orientation -1.0 0.0 0.0 0.0
+  wirecolor 0.6 0.894118 0.721569 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 11
+  center 0.0 0.0 0.0 
+  bitmap computer01
+  verts 20
+    -1.125 -0.305741 -0.484792
+    -0.375 -0.305741 -0.484792
+    0.375 -0.305741 -0.484792
+    1.125 -0.305741 -0.484792
+    -1.125 -0.305741 0.19107
+    -0.375 -0.305741 0.19107
+    0.375 -0.305741 0.19107
+    1.125 -0.305741 0.19107
+    -0.375 -0.335278 0.286608
+    0.375 -0.335278 0.286608
+    -0.375 0.305741 0.484792
+    0.375 0.305741 0.484792
+    -1.3 0.335278 0.389254
+    -0.375 0.335278 0.389254
+    0.375 0.335278 0.389254
+    1.3 0.335278 0.389254
+    -1.3 0.335278 -0.484792
+    -0.375 0.335278 -0.484792
+    0.375 0.335278 -0.484792
+    1.3 0.335278 -0.484792
+  faces 36
+    0 1 5  8  1 2 3  5
+    5 4 0  8  4 5 6  5
+    2 3 7  8  7 8 9  5
+    7 6 2  8  10 11 0  5
+    8 9 11  4  12 13 15  1
+    11 10 8  4  15 14 12  1
+    4 5 13  4  16 17 18  1
+    13 12 4  4  19 20 21  1
+    6 7 15  4  22 23 24  1
+    15 14 6  4  25 26 27  1
+    0 16 17  2  47 48 49  2
+    17 1 0  2  50 51 52  2
+    1 17 18  2  53 54 55  2
+    18 2 1  2  56 57 58  2
+    2 18 19  2  59 60 61  2
+    19 3 2  2  62 63 64  2
+    3 19 15  16  70 71 72  4
+    15 7 3  16  73 38 30  4
+    19 18 14  32  74 75 76  6
+    14 15 19  32  77 42 34  6
+    18 17 13  32  78 79 80  6
+    13 14 18  32  81 82 33  6
+    17 16 12  32  83 84 85  6
+    12 13 17  32  86 87 32  6
+    16 0 4  64  88 28 89  3
+    4 12 16  64  35 39 31  3
+    13 5 8  0  90 91 92  1
+    8 10 13  0  93 94 95  1
+    5 6 9  0  96 97 98  1
+    9 8 5  0  99 43 36  1
+    6 14 11  0  100 101 102  1
+    11 9 6  0  103 44 37  1
+    14 13 10  0  104 40 105  1
+    10 11 14  0  45 46 41  1
+    1 2 6  8  107 108 109  5
+    6 5 1  8  110 111 106  5
+  tverts 112
+    -0.00739377 0.510436 0
+    -0.0109085 0.510436 0
+    0.536943 0.510436 0
+    0.536943 1.00413 0
+    0.536943 1.00413 0
+    -0.0109085 1.00413 0
+    -0.0109085 0.510436 0
+    -0.00739377 0.510436 0
+    0.540458 0.510436 0
+    0.540458 1.00413 0
+    0.540458 1.00413 0
+    -0.00739377 1.00413 0
+    0.532448 0.0830698 0
+    0.994464 0.0843544 0
+    0.532206 0.468213 0
+    0.994222 0.468213 0
+    0.539267 0.624889 0
+    0.989733 0.624475 0
+    0.989733 0.90851 0
+    0.989733 0.90851 0
+    0.456324 0.908025 0
+    0.539267 0.624889 0
+    0.515557 0.607388 0
+    0.970633 0.607388 0
+    1.07131 0.93039 0
+    1.07131 0.93039 0
+    0.516317 0.93039 0
+    0.515557 0.607388 0
+    0.361162 0.149225 0
+    0.197017 0.149225 0
+    0.213717 0.149225 0
+    0.206595 0.149225 0
+    0.377862 0.149225 0
+    0.197017 0.149225 0
+    0.0161722 0.149225 0
+    0.361162 0.312193 0
+    0.197017 0.312193 0
+    0.213717 0.312193 0
+    0.213717 0.312193 0
+    0.206595 0.35998 0
+    0.377862 0.35998 0
+    0.197017 0.35998 0
+    0.0161722 0.35998 0
+    0.197017 0.33523 0
+    0.206595 0.33523 0
+    0.377862 0.383017 0
+    0.197017 0.383017 0
+    0.558707 0.192399 0
+    0.558707 0.346966 0
+    0.377862 0.346965 0
+    0.377862 0.346965 0
+    0.377862 0.192399 0
+    0.558707 0.192399 0
+    0.377862 0.192399 0
+    0.377862 0.346965 0
+    0.197017 0.346965 0
+    0.197017 0.346965 0
+    0.197017 0.192399 0
+    0.377862 0.192399 0
+    0.197017 0.192399 0
+    0.197017 0.346965 0
+    0.0161722 0.346965 0
+    0.0161722 0.346965 0
+    0.0161722 0.192399 0
+    0.197017 0.192399 0
+    0.197017 0.149225 0
+    0.377862 0.149225 0
+    0.377862 0.312193 0
+    0.377862 0.312193 0
+    0.197017 0.312193 0
+    0.213717 0.149225 0
+    0.368284 0.149225 0
+    0.368284 0.35998 0
+    0.368284 0.35998 0
+    0.0161722 0.149225 0
+    0.197017 0.149225 0
+    0.197017 0.35998 0
+    0.197017 0.35998 0
+    0.197017 0.149225 0
+    0.377862 0.149225 0
+    0.377862 0.35998 0
+    0.377862 0.35998 0
+    0.197017 0.35998 0
+    0.377862 0.149225 0
+    0.558707 0.149225 0
+    0.558707 0.35998 0
+    0.558707 0.35998 0
+    0.377862 0.35998 0
+    0.206595 0.149225 0
+    0.361162 0.312193 0
+    0.206595 0.35998 0
+    0.361162 0.312193 0
+    0.368284 0.33523 0
+    0.368284 0.33523 0
+    0.213717 0.383017 0
+    0.206595 0.35998 0
+    0.197017 0.312193 0
+    0.377862 0.312193 0
+    0.377862 0.33523 0
+    0.377862 0.33523 0
+    0.213717 0.312193 0
+    0.368284 0.35998 0
+    0.361162 0.383017 0
+    0.361162 0.383017 0
+    0.197017 0.35998 0
+    0.377862 0.383017 0
+    -0.00567718 0.512436 0
+    -0.00567718 0.512436 0
+    0.506643 0.512436 0
+    0.506643 0.999223 0
+    0.506643 0.999223 0
+    -0.00567718 0.999223 0
+endnode
+endmodelgeom computer_station
+donemodel computer_station
+0.192399 0
+     0.558707 0.192399 0
+     0.377862 0.192399 0
+     0.377862 0.346965 0
+     0.197017 0.346965 0
+     0.197017 0.346965 0
+     0.197017 0.192399 0
+     0.377862 0.192399 0
+     0.197017 0.192399 0
+     0.197017 0.346965 0
+     0.0161722 0.346965 0
+     0.0161722 0.346965 0
+     0.0161722 0.192399 0
+     0.197017 0.192399 0
+     0.197017 0.149225 0
+     0.377862 0.149225 0
+     0.377862 0.312193 0
+     0.377862 0.312193 0
+     0.197017 0.312193 0
+     0.213717 0.149225 0
+     0.368284 0.149225 0
+     0.368284 0.35998 0
+     0.368284 0.35998 0
+     0.0161722 0.149225 0
+     0.197017 0.149225 0
+     0.197017 0.35998 0
+     0.197017 0.35998 0
+     0.197017 0.149225 0
+     0.377862 0.149225 0
+     0.377862 0.35998 0
+     0.377862 0.35998 0
+     0.197017 0.35998 0
+     0.377862 0.149225 0
+     0.558707 0.149225 0
+     0.558707 0.35998 0
+     0.558707 0.35998 0
+     0.377862 0.35998 0
+     0.206595 0.149225 0
+     0.361162 0.312193 0
+     0.206595 0.35998 0
+     0.361162 0.312193 0
+     0.368284 0.33523 0
+     0.368284 0.33523 0
+     0.213717 0.383017 0
+     0.206595 0.35998 0
+     0.197017 0.312193 0
+     0.377862 0.312193 0
+     0.377862 0.33523 0
+     0.377862 0.33523 0
+     0.213717 0.312193 0
+     0.368284 0.35998 0
+     0.361162 0.383017 0
+     0.361162 0.383017 0
+     0.197017 0.35998 0
+     0.377862 0.383017 0
+     -0.00567718 0.512436 0
+     -0.00567718 0.512436 0
+     0.506643 0.512436 0
+     0.506643 0.999223 0
+     0.506643 0.999223 0
+     -0.00567718 0.999223 0
+endnode
+endmodelgeom computer
+
+#MAXANIM ASCII
+newanim damage computer
+  length 0.100000001
+  transtime 0
+  animroot computer
+node dummy computer
+  parent NULL
+  #part-number 0
+endnode
+node emitter ChunkyWood26
+  parent computer
+  #part-number 1
+endnode
+node emitter ChunkyWood25
+  parent computer
+  #part-number 2
+endnode
+node emitter fire!19
+  parent computer
+  #part-number 3
+endnode
+node dummy computer_mesh
+  parent computer
+  #part-number 4
+  positionkey 3
+    0.0333333015 -3.05176002e-007 -0.0529339984 0.588865995
+    0.0666666999 -3.05176002e-007 -0.0529339984 0.577269018
+    0.100000001 -3.05176002e-007 -0.0529339984 0.579999983
+  orientationkey 3
+    0.0333333015 1 0 0 -0.0174532998
+    0.0666666999 -1 0 0 -0.00872663967
+    0.100000001 0 0 0 0
+endnode
+node dummy computer_pwk
+  parent computer
+  #part-number -1
+endnode
+node dummy computer_wg
+  parent computer_pwk
+  #part-number 13
+endnode
+node dummy computer_pwk_use01
+  parent computer_pwk
+  #part-number 14
+endnode
+node dummy computer_hand
+  parent computer
+  #part-number 12
+endnode
+node dummy computer_head
+  parent computer
+  #part-number 13
+endnode
+node dummy computer_head_hit
+  parent computer
+  #part-number 14
+endnode
+node dummy computer_impact
+  parent computer
+  #part-number 15
+endnode
+node dummy computer_ground
+  parent computer
+  #part-number 16
+endnode
+doneanim damage computer
+
+#MAXANIM ASCII
+newanim die computer
+  length 0.233333007
+  transtime 0
+  animroot computer
+  event 0.133332998 detonate
+  event 0.133332998 detonate
+  event 0.133332998 detonate
+node dummy computer
+  parent NULL
+  #part-number 0
+endnode
+node emitter ChunkyWood26
+  parent computer
+  #part-number 1
+endnode
+node emitter ChunkyWood25
+  parent computer
+  #part-number 2
+endnode
+node emitter fire!19
+  parent computer
+  #part-number 3
+endnode
+node dummy computer_mesh
+  parent computer
+  #part-number 4
+  positionkey 4
+    0.0333333015 -3.05176002e-007 -0.0529339984 0.588865995
+    0.0666666999 -3.05176002e-007 -0.0529339984 0.577269018
+    0.100000001 -3.05176002e-007 -0.0529339984 0.579999983
+    0.233333007 -3.05176002e-007 -0.0529339984 -2.86736989
+  orientationkey 3
+    0.0333333015 1 0 0 -0.0174532998
+    0.0666666999 -1 0 0 -0.00872663967
+    0.100000001 0 0 0 0
+endnode
+node dummy computer_pwk
+  parent computer
+  #part-number -1
+endnode
+node dummy computer_wg
+  parent computer_pwk
+  #part-number 13
+endnode
+node dummy computer_pwk_use01
+  parent computer_pwk
+  #part-number 14
+endnode
+node dummy computer_hand
+  parent computer
+  #part-number 12
+endnode
+node dummy computer_head
+  parent computer
+  #part-number 13
+endnode
+node dummy computer_head_hit
+  parent computer
+  #part-number 14
+endnode
+node dummy computer_impact
+  parent computer
+  #part-number 15
+endnode
+node dummy computer_ground
+  parent computer
+  #part-number 16
+endnode
+doneanim die computer
+
+#MAXANIM ASCII
+newanim dead computer
+  length 0.0333333015
+  transtime 0
+  animroot computer
+node dummy computer
+  parent NULL
+  #part-number 0
+endnode
+node emitter ChunkyWood26
+  parent computer
+  #part-number 1
+endnode
+node emitter ChunkyWood25
+  parent computer
+  #part-number 2
+endnode
+node emitter fire!19
+  parent computer
+  #part-number 3
+endnode
+node dummy computer_mesh
+  parent computer
+  #part-number 4
+  positionkey 2
+    0 -3.05176002e-007 -0.0529339984 -2.86736989
+    0.0333333015 -3.05176002e-007 -0.0529339984 -2.86736989
+endnode
+node dummy computer_pwk
+  parent computer
+  #part-number -1
+endnode
+node dummy computer_wg
+  parent computer_pwk
+  #part-number 13
+endnode
+node dummy computer_pwk_use01
+  parent computer_pwk
+  #part-number 14
+endnode
+node dummy computer_hand
+  parent computer
+  #part-number 12
+endnode
+node dummy computer_head
+  parent computer
+  #part-number 13
+endnode
+node dummy computer_head_hit
+  parent computer
+  #part-number 14
+endnode
+node dummy computer_impact
+  parent computer
+  #part-number 15
+endnode
+node dummy computer_ground
+  parent computer
+  #part-number 16
+endnode
+doneanim dead computer
+
+#MAXANIM ASCII
+newanim default computer
+  length 0
+  transtime 0.25
+  animroot computer
+node dummy computer
+  parent NULL
+  #part-number 0
+endnode
+node emitter ChunkyWood26
+  parent computer
+  #part-number 1
+endnode
+node emitter ChunkyWood25
+  parent computer
+  #part-number 2
+endnode
+node emitter fire!19
+  parent computer
+  #part-number 3
+endnode
+node dummy computer_mesh
+  parent computer
+  #part-number 4
+  position -3.05176002e-007 -0.0529339984 0.579999983
+  orientation 0 0 0 0
+endnode
+node dummy computer_pwk
+  parent computer
+  #part-number -1
+endnode
+node dummy computer_wg
+  parent computer_pwk
+  #part-number 13
+endnode
+node dummy computer_pwk_use01
+  parent computer_pwk
+  #part-number 14
+endnode
+node dummy computer_hand
+  parent computer
+  #part-number 12
+endnode
+node dummy computer_head
+  parent computer
+  #part-number 13
+endnode
+node dummy computer_head_hit
+  parent computer
+  #part-number 14
+endnode
+node dummy computer_impact
+  parent computer
+  #part-number 15
+endnode
+node dummy computer_ground
+  parent computer
+  #part-number 16
+endnode
+doneanim default computer
+
+donemodel computer

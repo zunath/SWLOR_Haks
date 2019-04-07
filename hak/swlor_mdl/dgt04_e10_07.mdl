@@ -1,0 +1,773 @@
+# Exported from blender at Monday, 2018-03-12
+filedependancy mdrn_highrise5_rv.blend
+newmodel dgt04_e10_07
+setsupermodel dgt04_e10_07 null
+classification TILE
+setanimationscale 1.0
+beginmodelgeom dgt04_e10_07
+node dummy dgt04_e10_07
+  parent null
+endnode
+node dummy dgt04_e10_07a
+  parent dgt04_e10_07
+  position  0.00000  0.00000  0.00000
+  orientation  1.00000  0.00000  0.00000  0.00000
+endnode
+node trimesh windows_lit.001
+  parent dgt04_e10_07a
+  position -3.30333 -3.30333  23.00000
+  orientation  1.00000  0.00000  0.00000  0.00000
+  wirecolor  0.03  0.03  0.53
+  ambient  1.00  1.00  1.00
+  diffuse  0.80  0.80  0.80
+  specular  0.00  0.00  0.00
+  bitmap hrise_05_wall_g
+  alpha 1.0
+  shininess 10
+  selfillumcolor  0.80  0.80  0.80
+  render 1
+  shadow 0
+  beaming 0
+  inheritcolor 0
+  transparencyhint 0
+  rotatetexture 0
+  tilefade 0
+  verts 6
+    -1.66667  0.83333 -17.00000
+    -1.66667  0.83333  17.00000
+     0.83333 -1.66667 -17.00000
+     0.83333 -1.66667  17.00000
+     0.83333  0.83333 -17.00000
+     0.83333  0.83333  17.00000
+  faces 4
+    5 2 3  0  0 1 2   0
+    5 0 4  0  3 4 5   0
+    5 4 2  0  0 6 1   0
+    5 1 0  0  3 7 4   0
+  tverts 8
+     0.856  1.000  0
+     1.000 -0.000  0
+     1.000  1.000  0
+     0.145  1.000  0
+     0.000  0.000  0
+     0.145  0.000  0
+     0.856 -0.000  0
+     0.000  1.000  0
+endnode
+node trimesh Object02.003
+  parent dgt04_e10_07
+  position -3.75000 -3.75000  0.20000
+  orientation  1.00000  0.00000  0.00000  0.00000
+  wirecolor  0.03  0.03  0.53
+  ambient  1.00  1.00  1.00
+  diffuse  1.00  1.00  1.00
+  specular  0.00  0.00  0.00
+  bitmap sidewalk10
+  alpha 1.0
+  shininess 10
+  selfillumcolor  0.00  0.00  0.00
+  render 1
+  shadow 1
+  beaming 0
+  inheritcolor 0
+  transparencyhint 0
+  rotatetexture 0
+  tilefade 0
+  verts 4
+    -1.25000  1.25000  0.00000
+    -1.25000 -1.25000  0.00000
+     1.25000  1.25000  0.00000
+     1.25000 -1.25000  0.00000
+  faces 2
+    3 0 1  0  0 1 2   0
+    3 2 0  0  0 3 1   0
+  tverts 4
+     3.000  3.000  0
+     4.000  4.000  0
+     3.000  4.000  0
+     4.000  3.000  0
+endnode
+node trimesh Object05.004
+  parent dgt04_e10_07
+  position -3.12500 -3.12499  2.60000
+  orientation  0.00000  0.00000  1.00000  1.57080
+  wirecolor  0.03  0.03  0.53
+  ambient  1.00  1.00  1.00
+  diffuse  1.00  1.00  1.00
+  specular  0.00  0.00  0.00
+  bitmap hrise_05_wall2
+  alpha 1.0
+  shininess 10
+  selfillumcolor  0.00  0.00  0.00
+  render 1
+  shadow 1
+  beaming 0
+  inheritcolor 0
+  transparencyhint 0
+  rotatetexture 0
+  tilefade 0
+  verts 12
+    -1.87500 -0.62500  2.40000
+    -1.87500 -0.62500 -2.40000
+     0.62500 -0.62500 -2.40000
+     0.62500 -0.62500  2.40000
+     0.62500 -0.62500 -0.00000
+    -1.87500 -0.62500 -0.00000
+     0.62500 -0.62500  2.40000
+     0.62500 -0.62500 -2.40000
+     0.62500  1.87500 -2.40000
+     0.62500  1.87500  2.40000
+     0.62500  1.87500  0.00000
+     0.62500 -0.62500  0.00000
+  faces 8
+     5  2  1  0  0 1 2   0
+     0  4  5  0  3 4 0   0
+    10  7 11  0  4 2 0   0
+     9 11  6  0  5 0 3   0
+     5  4  2  0  0 4 1   0
+     0  3  4  0  3 5 4   0
+    10  8  7  0  4 1 2   0
+     9 10 11  0  5 4 0   0
+  tverts 6
+     0.500  0.500  0
+     0.000  0.000  0
+     0.500  0.000  0
+     0.500  1.000  0
+     0.000  0.500  0
+     0.000  1.000  0
+endnode
+node trimesh Plane01.004
+  parent dgt04_e10_07
+  position -3.87500 -2.75000  40.00000
+  orientation  1.00000  0.00000  0.00000  0.00000
+  wirecolor  0.03  0.03  0.53
+  ambient  1.00  1.00  1.00
+  diffuse  1.00  1.00  1.00
+  specular  0.00  0.00  0.00
+  bitmap hrise_05_wall3
+  alpha 1.0
+  shininess 10
+  selfillumcolor  0.00  0.00  0.00
+  render 1
+  shadow 1
+  beaming 0
+  inheritcolor 0
+  transparencyhint 0
+  rotatetexture 0
+  tilefade 0
+  verts 4
+    -1.12500  0.25000  0.00000
+    -1.12500 -0.25000  0.00000
+     1.37500  0.25000  0.00000
+     0.87499 -0.25000  0.00000
+  faces 2
+    3 0 2  0  0 1 2   0
+    3 1 0  0  0 3 1   0
+  tverts 4
+     0.000  1.000  0
+     0.250  2.000  0
+     0.250  0.750  0
+     0.000  2.000  0
+endnode
+node trimesh Plane01.011
+  parent dgt04_e10_07
+  position -3.87500 -2.75000  40.50000
+  orientation  1.00000  0.00000  0.00000  0.00000
+  wirecolor  0.03  0.03  0.53
+  ambient  1.00  1.00  1.00
+  diffuse  1.00  1.00  1.00
+  specular  0.00  0.00  0.00
+  bitmap hrise_05_wall3
+  alpha 1.0
+  shininess 10
+  selfillumcolor  0.00  0.00  0.00
+  render 1
+  shadow 1
+  beaming 0
+  inheritcolor 0
+  transparencyhint 0
+  rotatetexture 0
+  tilefade 0
+  verts 4
+    -1.12500  0.25000  0.00000
+    -1.12500 -0.25000  0.00000
+     1.37500  0.25000  0.00000
+     0.87499 -0.25000  0.00000
+  faces 2
+    3 0 1  0  0 1 2   0
+    3 2 0  0  0 3 1   0
+  tverts 4
+     0.000 -1.000  0
+     0.250  0.000  0
+     0.000  0.000  0
+     0.250 -1.250  0
+endnode
+node trimesh Plane01.012
+  parent dgt04_e10_07
+  position -2.75000 -3.87500  40.50000
+  orientation  1.00000  0.00000  0.00000  0.00000
+  wirecolor  0.03  0.03  0.53
+  ambient  1.00  1.00  1.00
+  diffuse  1.00  1.00  1.00
+  specular  0.00  0.00  0.00
+  bitmap hrise_05_wall3
+  alpha 1.0
+  shininess 10
+  selfillumcolor  0.00  0.00  0.00
+  render 1
+  shadow 1
+  beaming 0
+  inheritcolor 0
+  transparencyhint 0
+  rotatetexture 0
+  tilefade 0
+  verts 4
+     0.25000  1.37500  0.00000
+     0.25000 -1.12500  0.00000
+    -0.25000 -1.12500  0.00000
+    -0.25001  0.87500  0.00000
+  faces 2
+    3 1 0  0  0 1 2   0
+    3 2 1  0  0 3 1   0
+  tverts 4
+     0.000  0.000  0
+     0.250 -1.000  0
+     0.250  0.250  0
+     0.000 -1.000  0
+endnode
+node trimesh Plane01.013
+  parent dgt04_e10_07
+  position -4.00001 -3.00000  40.25000
+  orientation  1.00000  0.00000  0.00000  0.00000
+  wirecolor  0.03  0.03  0.53
+  ambient  1.00  1.00  1.00
+  diffuse  1.00  1.00  1.00
+  specular  0.00  0.00  0.00
+  bitmap hrise_05_wall3
+  alpha 1.0
+  shininess 10
+  selfillumcolor  0.00  0.00  0.00
+  render 1
+  shadow 1
+  beaming 0
+  inheritcolor 0
+  transparencyhint 0
+  rotatetexture 0
+  tilefade 0
+  verts 4
+    -0.99999 -0.00000 -0.25000
+    -0.99999 -0.00000  0.25000
+     0.99999  0.00000 -0.25000
+     0.99999  0.00000  0.25000
+  faces 2
+    3 0 2  0  0 1 2   0
+    3 1 0  0  0 3 1   0
+  tverts 4
+     1.000  0.750  0
+     2.000  0.500  0
+     1.000  0.500  0
+     2.000  0.750  0
+endnode
+node trimesh Plane01.014
+  parent dgt04_e10_07
+  position -3.00001 -4.00000  40.25000
+  orientation  1.00000  0.00000  0.00000  0.00000
+  wirecolor  0.03  0.03  0.53
+  ambient  1.00  1.00  1.00
+  diffuse  1.00  1.00  1.00
+  specular  0.00  0.00  0.00
+  bitmap hrise_05_wall3
+  alpha 1.0
+  shininess 10
+  selfillumcolor  0.00  0.00  0.00
+  render 1
+  shadow 1
+  beaming 0
+  inheritcolor 0
+  transparencyhint 0
+  rotatetexture 0
+  tilefade 0
+  verts 4
+     0.00001 -1.00000 -0.25000
+     0.00001 -1.00000  0.25000
+    -0.00001  1.00000 -0.25000
+    -0.00001  1.00000  0.25000
+  faces 2
+    3 0 1  0  0 1 2   0
+    3 2 0  0  0 3 1   0
+  tverts 4
+     1.000  0.750  0
+     0.000  0.500  0
+     0.000  0.750  0
+     1.000  0.500  0
+endnode
+node trimesh Plane01.015
+  parent dgt04_e10_07
+  position -2.75000 -3.87500  40.00000
+  orientation  1.00000  0.00000  0.00000  0.00000
+  wirecolor  0.03  0.03  0.53
+  ambient  1.00  1.00  1.00
+  diffuse  1.00  1.00  1.00
+  specular  0.00  0.00  0.00
+  bitmap hrise_05_wall3
+  alpha 1.0
+  shininess 10
+  selfillumcolor  0.00  0.00  0.00
+  render 1
+  shadow 1
+  beaming 0
+  inheritcolor 0
+  transparencyhint 0
+  rotatetexture 0
+  tilefade 0
+  verts 4
+     0.25000  1.37500  0.00000
+     0.25000 -1.12500  0.00000
+    -0.25000 -1.12500  0.00000
+    -0.25001  0.87500  0.00000
+  faces 2
+    3 1 2  0  0 1 2   0
+    3 0 1  0  0 3 1   0
+  tverts 4
+     0.000  1.000  0
+     0.250  0.000  0
+     0.000  0.000  0
+     0.250  1.250  0
+endnode
+node trimesh Plane12.004
+  parent dgt04_e10_07
+  position -3.50000 -3.50000  5.50000
+  orientation  1.00000  0.00000  0.00000  0.00000
+  wirecolor  0.03  0.03  0.53
+  ambient  1.00  1.00  1.00
+  diffuse  1.00  1.00  1.00
+  specular  0.00  0.00  0.00
+  bitmap hrise_05_trim
+  alpha 1.0
+  shininess 10
+  selfillumcolor  0.00  0.00  0.00
+  render 1
+  shadow 1
+  beaming 0
+  inheritcolor 0
+  transparencyhint 0
+  rotatetexture 0
+  tilefade 0
+  verts 12
+     1.00000  1.00000 -0.50000
+     1.00000  1.00000  0.50000
+    -1.50000  1.00000  0.50000
+    -1.50000  0.50000 -0.50000
+    -1.50000  1.00000 -0.50000
+    -1.50000  0.50000  0.50000
+     0.50000 -1.50000 -0.50000
+     1.00000 -1.50000  0.50000
+     0.50000 -1.50000  0.50000
+     1.00000 -1.50000 -0.50000
+     0.50000  0.50000  0.50000
+     0.50000  0.50000 -0.50000
+  faces 12
+    10  2  5  0   0  1  2   0
+    11  9  6  0   3  4  5   0
+    10  6  8  0   6  7  8   0
+    11  5  3  0   9 10 11   0
+    10  7  1  0  12 13 14   0
+    11  4  0  0  15 16 17   0
+    10  1  2  0   0 18  1   0
+    11  0  9  0   3 19  4   0
+    10 11  6  0   6 20  7   0
+    11 10  5  0   9 21 10   0
+    10  8  7  0  12 22 13   0
+    11  3  4  0  15 23 16   0
+  tverts 24
+     0.200  0.500  0
+     1.000  0.000  0
+     1.000  0.500  0
+     3.800  0.000  0
+     3.000  0.500  0
+     3.000  0.000  0
+     3.800  0.500  0
+     3.000  1.000  0
+     3.000  0.500  0
+     0.200  1.000  0
+     1.000  0.500  0
+     1.000  1.000  0
+     3.800  0.500  0
+     3.000  0.000  0
+     4.000  0.000  0
+     0.200  0.000  0
+     1.000  0.500  0
+     0.000  0.500  0
+     0.000  0.000  0
+     4.000  0.500  0
+     3.800  1.000  0
+     0.200  0.500  0
+     3.000  0.500  0
+     1.000  0.000  0
+endnode
+node trimesh Plane17
+  parent dgt04_e10_07
+  position  0.20833  0.20833  40.50000
+  orientation  1.00000  0.00000  0.00000  0.00000
+  wirecolor  0.03  0.03  0.53
+  ambient  1.00  1.00  1.00
+  diffuse  1.00  1.00  1.00
+  specular  0.00  0.00  0.00
+  bitmap hrise_05_roof
+  alpha 1.0
+  shininess 10
+  selfillumcolor  0.00  0.00  0.00
+  render 1
+  shadow 1
+  beaming 0
+  inheritcolor 0
+  transparencyhint 0
+  rotatetexture 0
+  tilefade 0
+  verts 24
+     4.79167 -5.20833  0.00000
+    -5.20833  4.79167  0.00000
+     4.79167  4.79167  0.00000
+    -0.20833 -5.20833  0.00000
+     4.79167 -0.20833  0.00000
+    -0.20833  4.79167  0.00000
+    -5.20833 -0.20833  0.00000
+    -0.20833 -0.20833  0.00000
+    -2.70833 -5.20833  0.00000
+     2.29167 -5.20833  0.00000
+     4.79167  2.29167  0.00000
+     2.29167  4.79167  0.00000
+    -5.20833  2.29167  0.00000
+     4.79167 -2.70833  0.00000
+    -2.70833  4.79167  0.00000
+    -5.20833 -2.70833  0.00000
+    -0.20833  2.29167  0.00000
+    -0.20833 -2.70833  0.00000
+    -2.70833 -0.20833  0.00000
+     2.29167 -0.20833  0.00000
+     2.29167 -2.70833  0.00000
+     2.29167  2.29167  0.00000
+    -2.70833 -2.70833  0.00000
+    -2.70833  2.29167  0.00000
+  faces 30
+    16 14 23  0   0  1  2   0
+    17 18 22  0   3  4  5   0
+    10 11 21  0   6  7  8   0
+    13 19 20  0   9 10 11   0
+    20  7 17  0  11 12  3   0
+     9 17  3  0  13  3 14   0
+     0 20  9  0  15 11 13   0
+    21  5 16  0   8 16  0   0
+    19 16  7  0  10  0 12   0
+     4 21 19  0  17  8 10   0
+    22  6 15  0   5 18 19   0
+     3 22  8  0  14  5 20   0
+    23  1 12  0   2 21 22   0
+    18 12  6  0   4 22 18   0
+     7 23 18  0  12  2  4   0
+    16  5 14  0   0 16  1   0
+    17  7 18  0   3 12  4   0
+    10  2 11  0   6 23  7   0
+    13  4 19  0   9 17 10   0
+    20 19  7  0  11 10 12   0
+     9 20 17  0  13 11  3   0
+     0 13 20  0  15  9 11   0
+    21 11  5  0   8  7 16   0
+    19 21 16  0  10  8  0   0
+     4 10 21  0  17  6  8   0
+    22 18  6  0   5  4 18   0
+     3 17 22  0  14  3  5   0
+    23 14  1  0   2  1 21   0
+    18 23 12  0   4  2 22   0
+     7 16 23  0  12  0  2   0
+  tverts 24
+     1.000  1.500  0
+     0.500  2.000  0
+     0.500  1.500  0
+     1.000  0.500  0
+     0.500  1.000  0
+     0.500  0.500  0
+     2.000  1.500  0
+     1.500  2.000  0
+     1.500  1.500  0
+     2.000  0.500  0
+     1.500  1.000  0
+     1.500  0.500  0
+     1.000  1.000  0
+     1.500  0.000  0
+     1.000  0.000  0
+     2.000  0.000  0
+     1.000  2.000  0
+     2.000  1.000  0
+     0.000  1.000  0
+     0.000  0.500  0
+     0.500  0.000  0
+     0.000  2.000  0
+     0.000  1.500  0
+     2.000  2.000  0
+endnode
+node trimesh windows_fixed.001
+  parent dgt04_e10_07
+  position -3.75000 -2.50000  23.00000
+  orientation  1.00000  0.00000  0.00000  0.00000
+  wirecolor  0.03  0.03  0.53
+  ambient  1.00  1.00  1.00
+  diffuse  1.00  1.00  1.00
+  specular  0.00  0.00  0.00
+  bitmap hrise_05_wall
+  alpha 1.0
+  shininess 10
+  selfillumcolor  0.00  0.00  0.00
+  render 1
+  shadow 1
+  beaming 0
+  inheritcolor 0
+  transparencyhint 0
+  rotatetexture 0
+  tilefade 0
+  verts 10
+    -1.25000 -0.00000 -17.00000
+    -1.25000 -0.00000  17.00000
+     1.25000  0.00000 -17.00000
+     1.25000  0.00000  17.00000
+    -1.25000 -0.00000 -8.50000
+    -1.25000 -0.00000  0.00000
+    -1.25000 -0.00000  8.50000
+     1.25000  0.00000  8.50000
+     1.25000  0.00000  0.00000
+     1.25000  0.00000 -8.50000
+  faces 8
+     3  6  7  0   0  1  2   0
+     9  0  2  0   3  4  5   0
+     8  4  9  0   6  7  3   0
+     7  5  8  0   2  8  6   0
+     3  1  6  0   0  9  1   0
+     9  4  0  0   3  7  4   0
+     8  5  4  0   6  8  7   0
+     7  6  5  0   2  1  8   0
+  tverts 10
+     0.145  1.000  0
+     0.000  0.750  0
+     0.145  0.750  0
+     0.145  0.250  0
+     0.000  0.000  0
+     0.145  0.000  0
+     0.145  0.500  0
+     0.000  0.250  0
+     0.000  0.500  0
+     0.000  1.000  0
+endnode
+node trimesh windows_fixed.004
+  parent dgt04_e10_07
+  position -2.50000 -3.75000  23.00000
+  orientation  1.00000  0.00000  0.00000  0.00000
+  wirecolor  0.03  0.03  0.53
+  ambient  1.00  1.00  1.00
+  diffuse  1.00  1.00  1.00
+  specular  0.00  0.00  0.00
+  bitmap hrise_05_wall
+  alpha 1.0
+  shininess 10
+  selfillumcolor  0.00  0.00  0.00
+  render 1
+  shadow 1
+  beaming 0
+  inheritcolor 0
+  transparencyhint 0
+  rotatetexture 0
+  tilefade 0
+  verts 10
+     0.00000 -1.25000 -17.00000
+     0.00000 -1.25000  17.00000
+    -0.00000  1.25000 -17.00000
+    -0.00000  1.25000  17.00000
+     0.00000 -1.25000 -8.50000
+     0.00000 -1.25000  0.00000
+     0.00000 -1.25000  8.50000
+    -0.00000  1.25000  8.50000
+    -0.00000  1.25000 -0.00000
+    -0.00000  1.25000 -8.50000
+  faces 8
+     9  0  4  0   0  1  2   0
+     3  6  1  0   3  4  5   0
+     7  5  6  0   6  7  4   0
+     8  4  5  0   8  2  7   0
+     9  2  0  0   0  9  1   0
+     3  7  6  0   3  6  4   0
+     7  8  5  0   6  8  7   0
+     8  9  4  0   8  0  2   0
+  tverts 10
+     0.856  0.250  0
+     1.000 -0.000  0
+     1.000  0.250  0
+     0.856  1.000  0
+     1.000  0.750  0
+     1.000  1.000  0
+     0.856  0.750  0
+     1.000  0.500  0
+     0.856  0.500  0
+     0.856 -0.000  0
+endnode
+node aabb wokmesh.001
+  parent dgt04_e10_07
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.03 0.03 0.53
+  ambient 1.0 1.0 1.0
+  diffuse 1.0 1.0 1.0
+  specular 0.0 0.0 0.0
+  shininess 0
+  bitmap NULL
+  verts 9
+     5.00000  5.00000  40.50000
+    -5.00000  5.00000  40.50000
+     5.00000 -5.00000  40.50000
+    -2.35000 -5.00000  40.50000
+    -5.00000 -2.35000  40.50000
+    -2.35000 -2.35000  40.50000
+    -5.00000 -2.50000  40.50000
+    -2.50000 -5.00000  40.50000
+    -2.50000 -2.50000  40.50000
+  faces 8
+    3 5 8  0  0 0 0   7
+    8 5 4  0  0 0 0   7
+    5 0 1  0  0 0 0   4
+    2 5 3  0  0 0 0   4
+    3 8 7  0  0 0 0   7
+    2 0 5  0  0 0 0   4
+    8 4 6  0  0 0 0   7
+    5 1 4  0  0 0 0   4
+  aabb   -5.0 -5.0 40.5 5.0 5.0 40.5 -1
+    -5.0 -5.0 40.5 -2.35 5.0 40.5 -1
+    -5.0 -5.0 40.5 -2.35 -2.35 40.5 -1
+    -5.0 -2.5 40.5 -2.5 -2.35 40.5 6
+    -2.5 -5.0 40.5 -2.35 -2.35 40.5 -1
+    -2.5 -5.0 40.5 -2.35 -2.5 40.5 4
+    -2.5 -5.0 40.5 -2.35 -2.35 40.5 0
+    -5.0 -2.5 40.5 -2.35 5.0 40.5 -1
+    -5.0 -2.5 40.5 -2.35 -2.35 40.5 1
+    -5.0 -2.35 40.5 -2.35 5.0 40.5 7
+    -5.0 -5.0 40.5 5.0 5.0 40.5 -1
+    -5.0 -5.0 40.5 5.0 5.0 40.5 -1
+    -5.0 -2.35 40.5 5.0 5.0 40.5 2
+    -2.35 -5.0 40.5 5.0 -2.35 40.5 3
+    -2.35 -5.0 40.5 5.0 5.0 40.5 5
+endnode
+endmodelgeom dgt04_e10_07
+
+# ANIM ASCII
+newanim tiledefault dgt04_e10_07
+  length 0.04167
+  transtime 0.0
+  animroot dgt04_e10_07
+  node dummy dgt04_e10_07
+    parent null
+  endnode
+  node dummy dgt04_e10_07a
+    parent dgt04_e10_07
+  endnode
+  node trimesh windows_lit.001
+    parent dgt04_e10_07a
+    positionkey 2
+      0.00000 -3.30333 -3.30333  23.00000
+      0.03333 -3.30333 -3.30333  23.00000
+  endnode
+  node trimesh Object02.003
+    parent dgt04_e10_07
+  endnode
+  node trimesh Object05.004
+    parent dgt04_e10_07
+  endnode
+  node trimesh Plane01.004
+    parent dgt04_e10_07
+  endnode
+  node trimesh Plane01.011
+    parent dgt04_e10_07
+  endnode
+  node trimesh Plane01.012
+    parent dgt04_e10_07
+  endnode
+  node trimesh Plane01.013
+    parent dgt04_e10_07
+  endnode
+  node trimesh Plane01.014
+    parent dgt04_e10_07
+  endnode
+  node trimesh Plane01.015
+    parent dgt04_e10_07
+  endnode
+  node trimesh Plane12.004
+    parent dgt04_e10_07
+  endnode
+  node trimesh Plane17
+    parent dgt04_e10_07
+  endnode
+  node trimesh windows_fixed.001
+    parent dgt04_e10_07
+  endnode
+  node trimesh windows_fixed.004
+    parent dgt04_e10_07
+  endnode
+  node aabb wokmesh.001
+    parent dgt04_e10_07
+  endnode
+doneanim tiledefault dgt04_e10_07
+
+newanim animloop01 dgt04_e10_07
+  length 0.04167
+  transtime 0.0
+  animroot dgt04_e10_07
+  node dummy dgt04_e10_07
+    parent null
+  endnode
+  node dummy dgt04_e10_07a
+    parent dgt04_e10_07
+  endnode
+  node trimesh windows_lit.001
+    parent dgt04_e10_07a
+    positionkey 2
+      0.00000 -3.35333 -3.35333  23.00000
+      0.03333 -3.35333 -3.35333  23.00000
+  endnode
+  node trimesh Object02.003
+    parent dgt04_e10_07
+  endnode
+  node trimesh Object05.004
+    parent dgt04_e10_07
+  endnode
+  node trimesh Plane01.004
+    parent dgt04_e10_07
+  endnode
+  node trimesh Plane01.011
+    parent dgt04_e10_07
+  endnode
+  node trimesh Plane01.012
+    parent dgt04_e10_07
+  endnode
+  node trimesh Plane01.013
+    parent dgt04_e10_07
+  endnode
+  node trimesh Plane01.014
+    parent dgt04_e10_07
+  endnode
+  node trimesh Plane01.015
+    parent dgt04_e10_07
+  endnode
+  node trimesh Plane12.004
+    parent dgt04_e10_07
+  endnode
+  node trimesh Plane17
+    parent dgt04_e10_07
+  endnode
+  node trimesh windows_fixed.001
+    parent dgt04_e10_07
+  endnode
+  node trimesh windows_fixed.004
+    parent dgt04_e10_07
+  endnode
+  node aabb wokmesh.001
+    parent dgt04_e10_07
+  endnode
+doneanim animloop01 dgt04_e10_07
+
+donemodel dgt04_e10_07

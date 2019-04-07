@@ -1,0 +1,91 @@
+# Exported from NWgMax Plus v6.11.28 at 2017-01-17 18:11:06
+# mdl file
+#
+#NWgMax Plus MODEL ASCII
+# model: vos_gunrack1
+filedependancy Unknown
+newmodel vos_gunrack1
+setsupermodel vos_gunrack1 NULL
+classification Character
+setanimationscale 1.0
+#NWgMax Plus GEOM  ASCII
+beginmodelgeom vos_gunrack1
+node dummy vos_gunrack1
+  parent NULL
+endnode
+node dummy gunrack1_ground
+  parent vos_gunrack1
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.878431 0.776471 0.341176 
+endnode
+node dummy gunrack1_hand
+  parent vos_gunrack1
+  position 0.0 0.167782 1.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.898039 0.65098 0.843137 
+endnode
+node dummy gunrack1_head
+  parent vos_gunrack1
+  position 0.0 0.167782 2.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.898039 0.65098 0.843137 
+endnode
+node dummy gunrack1_head_hit
+  parent vos_gunrack1
+  position 0.0 0.167782 1.5
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.898039 0.65098 0.843137 
+endnode
+node dummy gunrack1_impact
+  parent vos_gunrack1
+  position 0.0 0.167782 0.85
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.109804 0.584314 0.694118 
+endnode
+node trimesh gunrack
+  parent vos_gunrack1
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.603922 0.721569 0.894118 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 0.321569 0.321569 0.321569 
+  diffuse 0.588235 0.588235 0.588235 
+  specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 -4.95911e-005 150.593 
+  bitmap vos_gunrack_w
+  verts 6
+    -0.75 -4.95911e-007 0.00593201
+    0.75 -4.95911e-007 0.00593201
+    -0.75 -4.95911e-007 1.50593
+    0.75 -4.95911e-007 1.50593
+    -0.75 -4.95911e-007 3.00593
+    0.75 -4.95911e-007 3.00593
+  faces 4
+    2 0 3  1  3 0 4  1
+    1 3 0  1  1 4 0  1
+    4 2 5  1  6 3 7  1
+    3 5 2  1  4 7 3  1
+  tverts 9
+    -0.679756 -0.679756 0
+    0.5 -0.679756 0
+    1.67976 -0.679756 0
+    -0.679756 0.5 0
+    0.5 0.5 0
+    1.67976 0.5 0
+    -0.679756 1.67976 0
+    0.5 1.67976 0
+    1.67976 1.67976 0
+endnode
+endmodelgeom vos_gunrack1
+donemodel vos_gunrack1

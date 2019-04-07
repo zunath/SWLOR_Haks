@@ -1,0 +1,92 @@
+#MAXMODEL ASCII
+# model: bhp_dkft2a
+filedependancy bhp_dkft2a.max
+newmodel bhp_dkft2a
+setsupermodel bhp_dkft2a NULL
+classification character
+setanimationscale 0.637499988
+#MAXGEOM  ASCII
+beginmodelgeom bhp_dkft2a
+node dummy bhp_dkft2a
+  parent NULL
+  #part-number 0
+endnode
+node dummy dkft2a_ground
+  parent bhp_dkft2a
+  #part-number 1
+  position 0.00231592008 -0.00445439992 0
+  orientation 0 0 0 0
+endnode
+node dummy dkft2a_hand
+  parent bhp_dkft2a
+  #part-number 2
+  position -0.00254315999 0.452656001 0.167794004
+  orientation 0 0 0 0
+endnode
+node dummy dkft2a_head
+  parent bhp_dkft2a
+  #part-number 3
+  position 0.0116384998 0.000594843004 0.178323001
+  orientation 0 0 0 0
+endnode
+node dummy dkft2a_head_hit
+  parent bhp_dkft2a
+  #part-number 4
+  position -0.00254315999 -0.00690100994 0.168236002
+  orientation 0 0 0 0
+endnode
+node dummy dkft2a_impact
+  parent bhp_dkft2a
+  #part-number 5
+  position -0.00254315999 -0.00701313 0.185788006
+  orientation 0 0 0 0
+endnode
+node trimesh Box
+  parent bhp_dkft2a
+  #part-number 6
+  ambient 1 1 1
+  diffuse 0.588 0.588 0.588
+  specular 0 0 0
+  shininess 10
+  bitmap bh_plc_dkft_bc
+  verts 8
+    -0.31507799 -0.310321987 0
+    -0.31507799 0.310321987 0
+    0.31507799 0.310321987 0
+    0.31507799 -0.310321987 0
+    -0.31507799 -0.310321987 0.624997973
+    0.31507799 -0.310321987 0.624997973
+    0.31507799 0.310321987 0.624997973
+    -0.31507799 0.310321987 0.624997973
+  tverts 10
+    0.993449986 0.00633373996 0
+    0.993449986 0.493449986 0
+    0.506334007 0.493449986 0
+    0.506334007 0.00633363007 0
+    0.506334007 0.00633359002 0
+    0.993449986 0.00633357 0
+    0.993449986 0.00633363007 0
+    0.993449986 0.00633371016 0
+    0.506332994 0.493449986 0
+    0.506332994 0.00633375021 0
+  faces 12
+    0 1 2 1 0 1 2 2
+    2 3 0 1 2 3 0 2
+    4 5 6 1 2 4 5 1
+    6 7 4 1 5 1 2 1
+    0 3 5 2 3 6 1 5
+    5 4 0 2 1 2 3 5
+    3 2 6 4 7 1 8 4
+    6 5 3 4 8 9 7 4
+    2 1 7 2 3 6 1 6
+    7 6 2 2 1 2 3 6
+    1 0 4 4 7 1 8 3
+    4 7 1 4 8 9 7 3
+  position 0 0 0
+  orientation 0 0 0 0
+  scale 1
+  alpha 1
+endnode
+endmodelgeom bhp_dkft2a
+
+donemodel bhp_dkft2a

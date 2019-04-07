@@ -1,0 +1,52 @@
+# Exported from NWMax Plus v6.11.28 at 2017-01-04 12:17:54
+# mdl file
+#
+#NWMax Plus MODEL  ASCII
+# model: vos_grfiti_02
+filedependancy Unknown
+newmodel vos_grfiti_02
+setsupermodel vos_grfiti_02 NULL
+classification Character
+setanimationscale 1.0
+#NWMax Plus GEOM  ASCII
+beginmodelgeom vos_grfiti_02
+node dummy vos_grfiti_02
+  parent NULL
+endnode
+node trimesh grafitti
+  parent vos_grfiti_02
+  position 0.000157623 0.0 1.64417
+  orientation -1.0 0.0 0.0 -1.5708
+  wirecolor 0.894118 0.6 0.721569 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 0
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 1
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 11
+  center 0.0 0.0 0.0 
+  bitmap vos_grfiti2
+  verts 4
+    -2.95276 -1.37795 0.0
+    2.95276 -1.37795 0.0
+    -2.95276 1.37795 0.0
+    2.95276 1.37795 0.0
+  faces 2
+    2 0 3  1  2 0 3  1
+    1 3 0  1  1 3 0  1
+  tverts 4
+    0.52722 -0.0148786 0
+    0.945675 -0.0110345 0
+    0.556055 0.219032 0
+    0.952117 0.244979 0
+endnode
+endmodelgeom vos_grfiti_02
+donemodel vos_grfiti_02

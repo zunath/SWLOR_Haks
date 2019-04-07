@@ -1,0 +1,218 @@
+# Exported from NWmax 0.7 at 6/18/2004 9:26:39 PM
+# mdl file
+#
+#NWmax MODEL ASCII
+# model: WSpSc_fxholy
+filedependancy Unknown
+newmodel WSpSc_fxholy
+setsupermodel WSpSc_fxholy NULL
+classification Character
+setanimationscale 1.0
+#NWmax GEOM  ASCII
+beginmodelgeom WSpSc_fxholy
+node dummy WSpSc_fxholy
+  parent NULL
+endnode
+node emitter g_WSwGs_V_Holy
+  parent WSpSc_fxholy
+  position 0.0305895 0.0145414 -0.572706
+  orientation -1.0 0.0 0.0 -0.872665
+  wirecolor 1.0 1.0 1.0 
+  update_sel 1
+  update Fountain
+  render_sel 1
+  render Normal
+  blend_sel 3
+  Blend Lighten
+  spawnType 0
+  xSize 1.0
+  ySize 11.0
+  inherit 1
+  inherit_local 0
+  inheritvel 0
+  inherit_part 0
+  renderorder 0
+  threshold 0.0
+  combinetime 0.0
+  deadspace 0.0
+  opacity 0.5
+  colorStart 0.811765 0.72549 0.541176 
+  colorEnd 0.788235 0.596078 0.360784 
+  alphaStart 1.0
+  alphaEnd 0.0
+  sizeStart 0.0
+  sizeEnd 0.5
+  sizeStart_y 0.0
+  sizeEnd_y 0.0
+  birthrate 5
+  lifeExp 2.0
+  mass 0.0
+  spread 0.0
+  particleRot 0.0
+  velocity 0.0
+  randvel 0.0
+  bounce_co 0.0
+  blurlength 10.0
+  loop 0
+  bounce 0
+  m_isTinted 0
+  splat 0
+  affectedByWind false
+  texture fxpa_StarBnW
+  twosidedtex 0
+  xgrid 2
+  ygrid 2
+  fps 0
+  frameStart 0
+  frameEnd 3
+  random 0
+  lightningDelay 0.0
+  lightningRadius 0.0
+  lightningSubDiv 0
+  lightningScale 0.0
+  blastRadius 0.0
+  blastLength 0.0
+  p2p 0
+  p2p_type Bezier
+  p2p_sel 1
+  p2p_bezier2 0.0
+  p2p_bezier3 0.0
+  grav 0.0
+  drag 0.0
+endnode
+node emitter g_WSwGs_V_Holy01
+  parent WSpSc_fxholy
+  position 0.0305895 -0.000875736 -0.722432
+  orientation 1.0 8.28932e-007 1.5487e-007 -0.0872664
+  wirecolor 1.0 1.0 1.0 
+  update_sel 1
+  update Fountain
+  render_sel 1
+  render Normal
+  blend_sel 3
+  Blend Lighten
+  spawnType 0
+  xSize 1.0
+  ySize 12.0
+  inherit 1
+  inherit_local 0
+  inheritvel 0
+  inherit_part 0
+  renderorder 0
+  threshold 0.0
+  combinetime 0.0
+  deadspace 0.0
+  opacity 0.5
+  colorStart 0.811765 0.72549 0.541176 
+  colorEnd 0.788235 0.596078 0.360784 
+  alphaStart 1.0
+  alphaEnd 0.0
+  sizeStart 0.0
+  sizeEnd 0.5
+  sizeStart_y 0.0
+  sizeEnd_y 0.0
+  birthrate 5
+  lifeExp 2.0
+  mass 0.0
+  spread 0.0
+  particleRot 0.0
+  velocity 0.0
+  randvel 0.0
+  bounce_co 0.0
+  blurlength 10.0
+  loop 0
+  bounce 0
+  m_isTinted 0
+  splat 0
+  affectedByWind false
+  texture fxpa_StarBnW
+  twosidedtex 0
+  xgrid 2
+  ygrid 2
+  fps 0
+  frameStart 0
+  frameEnd 3
+  random 0
+  lightningDelay 0.0
+  lightningRadius 0.0
+  lightningSubDiv 0
+  lightningScale 0.0
+  blastRadius 0.0
+  blastLength 0.0
+  p2p 0
+  p2p_type Bezier
+  p2p_sel 1
+  p2p_bezier2 0.0
+  p2p_bezier3 0.0
+  grav 0.0
+  drag 0.0
+endnode
+node emitter g_WSwGs_V_Holy02
+  parent WSpSc_fxholy
+  position 0.0386394 -0.0178503 -0.778767
+  orientation 1.0 0.0 0.0 -1.48353
+  wirecolor 1.0 1.0 1.0 
+  update_sel 1
+  update Fountain
+  render_sel 1
+  render Normal
+  blend_sel 3
+  Blend Lighten
+  spawnType 0
+  xSize 1.0
+  ySize 12.0
+  inherit 1
+  inherit_local 0
+  inheritvel 0
+  inherit_part 0
+  renderorder 0
+  threshold 0.0
+  combinetime 0.0
+  deadspace 0.0
+  opacity 0.5
+  colorStart 0.811765 0.72549 0.541176 
+  colorEnd 0.788235 0.596078 0.360784 
+  alphaStart 1.0
+  alphaEnd 0.0
+  sizeStart 0.0
+  sizeEnd 0.5
+  sizeStart_y 0.0
+  sizeEnd_y 0.0
+  birthrate 5
+  lifeExp 2.0
+  mass 0.0
+  spread 0.0
+  particleRot 0.0
+  velocity 0.0
+  randvel 0.0
+  bounce_co 0.0
+  blurlength 10.0
+  loop 0
+  bounce 0
+  m_isTinted 0
+  splat 0
+  affectedByWind false
+  texture fxpa_StarBnW
+  twosidedtex 0
+  xgrid 2
+  ygrid 2
+  fps 0
+  frameStart 0
+  frameEnd 3
+  random 0
+  lightningDelay 0.0
+  lightningRadius 0.0
+  lightningSubDiv 0
+  lightningScale 0.0
+  blastRadius 0.0
+  blastLength 0.0
+  p2p 0
+  p2p_type Bezier
+  p2p_sel 1
+  p2p_bezier2 0.0
+  p2p_bezier3 0.0
+  grav 0.0
+  drag 0.0
+endnode
+endmodelgeom WSpSc_fxholy
+donemodel WSpSc_fxholy

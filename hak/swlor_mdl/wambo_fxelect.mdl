@@ -1,0 +1,90 @@
+#Exported from 3ds max by MDL Plug-in Suite 1.0b
+#http://www.bricksbuilder.com/nwn/utils/
+#MAXMODEL ASCII
+# model: wambo_fxelect
+filedependancy Unknown
+newmodel wambo_fxelect
+setsupermodel wambo_fxelect NULL
+classification Tile
+setanimationscale 1.0
+#MAXGEOM  ASCII
+beginmodelgeom wambo_fxelect
+node dummy wambo_fxelect
+  parent NULL
+endnode
+node emitter g_WSwGs_V_Sonic
+  parent wambo_fxelect
+  position -0.05225525 0.156997 -0.000151955
+  orientation 1 0 0 -1.5708
+  wirecolor 0.652344 0.652344 0.652344
+    colorStart 1 1 1
+    colorEnd 1 1 1
+    alphaStart 0.7
+    alphaEnd 0.5
+    sizeStart 0.3
+    sizeEnd 0.0
+    sizeStart_y 0
+    sizeEnd_y 0
+    frameStart 0
+    frameEnd 0
+    birthrate 30
+    spawnType 0
+    lifeExp 0.0005
+    mass 0
+    spread 0
+    particleRot 3
+    velocity 0
+    randvel 0
+    fps 0
+    random 0
+    inherit 1
+    inherit_local 0
+    inherit_part 0
+    inheritvel 0
+    xsize 0
+    ysize 0
+    bounce 0
+    bounce_co 0
+    loop 0
+    update Fountain
+    render Normal
+    Blend Lighten
+    update_sel 1
+    render_sel 1
+    blend_sel 3
+    deadspace 0
+    opacity 0.2
+    blurlength 0.2
+    lightningDelay 0
+    lightningRadius 0
+    lightningScale 0
+    blastRadius 0
+    blastLength 0
+    twosidedtex 0
+    p2p 1
+    p2p_sel 1
+    p2p_type Bezier
+    p2p_bezier2 0
+    p2p_bezier3 0
+    combinetime 0
+    drag 0
+    grav 0
+    threshold 0
+    texture wambo_fxelect
+    xgrid 1
+    ygrid 1
+    affectedByWind 0
+    m_isTinted 0
+    renderorder 0
+    Splat 0
+endnode
+node reference OmenRef01
+  parent g_WSwGs_V_Sonic
+  position 0.00944806 0.000151245 0.773449
+  orientation -1 0 0 -1.5708
+  wirecolor 0.242188 0.242188 0.242188
+    refModel fx_ref
+    reattachable 0
+endnode
+endmodelgeom wambo_fxelect
+donemodel wambo_fxelect

@@ -1,0 +1,112 @@
+# Exported from NWmax 0.8 b60 at 25/12/2009 01:30:55
+# mdl file
+#
+#NWmax MODEL ASCII
+# model: jhb_powder01
+#local file: Unknown
+filedependancy Unknown
+newmodel jhb_powder01
+setsupermodel jhb_powder01 NULL
+classification Character
+setanimationscale 1.0
+#NWmax GEOM  ASCII
+beginmodelgeom jhb_powder01
+node dummy jhb_powder01
+  parent NULL
+endnode
+node dummy powder01_impact
+  parent jhb_powder01
+  position 0.0 0.0 0.85
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.839216 0.894118 0.6 
+endnode
+node dummy powder01_ground
+  parent jhb_powder01
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.839216 0.894118 0.6 
+endnode
+node dummy powder01_hand
+  parent jhb_powder01
+  position 0.0 0.0 1.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.839216 0.894118 0.6 
+endnode
+node dummy powder01_head
+  parent jhb_powder01
+  position 0.0 0.0 2.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.839216 0.894118 0.6 
+endnode
+node dummy powder01_head_hit
+  parent jhb_powder01
+  position 0.0 0.0 1.5
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.839216 0.894118 0.6 
+endnode
+node trimesh poudre
+  parent jhb_powder01
+  position 0.0 0.0 0.0312585
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.333333 0.109804 0.694118 
+  ambient 0.7 0.7 0.7 
+  diffuse 0.7 0.7 0.7 
+  specular 0.1 0.1 0.1 
+  shininess 10.0
+  bitmap jhb_powder01
+  verts 16
+    0.187765 -0.309649 -0.0304494
+    0.0137358 -0.363806 -0.0303673
+    0.309641 -0.171189 -0.0306484
+    0.0417242 -0.0747928 0.0657903
+    0.348693 0.00798313 -0.0309113
+    0.0657564 0.0359578 0.0269973
+    0.295905 0.186509 -0.0311725
+    0.160925 0.311524 -0.0313534
+    -0.160925 -0.323741 -0.0304284
+    -0.147953 -0.10328 0.0368585
+    -0.119961 0.186592 0.0654096
+    -0.0137358 0.351589 -0.0314126
+    -0.295905 -0.198726 -0.0306102
+    -0.348693 -0.0202004 -0.0308704
+    -0.309641 0.158972 -0.0311315
+    -0.187769 0.297441 -0.0313343
+  faces 18
+    1 0 2  1  1 0 2  1
+    3 1 2  1  3 1 2  1
+    3 2 4  1  3 2 4  1
+    5 3 4  1  5 3 4  1
+    5 4 6  1  5 4 6  1
+    7 5 6  1  7 5 6  1
+    8 1 3  1  8 1 3  1
+    9 8 3  1  9 8 3  1
+    9 3 5  1  9 3 5  1
+    10 9 5  1  10 9 5  1
+    10 5 7  1  10 5 7  1
+    11 10 7  1  11 10 7  1
+    12 8 9  1  12 8 9  1
+    13 12 9  1  13 12 9  1
+    13 9 10  1  13 9 10  1
+    14 13 10  1  14 13 10  1
+    14 10 11  1  14 10 11  1
+    15 14 11  1  15 14 11  1
+  tverts 16
+    0.0484816 0.5 0
+    0.108973 0.0484807 0
+    0.108972 0.95152 0
+    0.402887 0.488944 0
+    0.27424 1.28206 0
+    0.504173 0.691516 0
+    0.500001 1.40304 0
+    0.72576 1.28206 0
+    0.27424 -0.282055 0
+    0.495827 0.0470886 0
+    0.786396 0.505635 0
+    0.891027 0.95152 0
+    0.499999 -0.403039 0
+    0.72576 -0.282055 0
+    0.891028 0.0484802 0
+    0.951518 0.5 0
+endnode
+endmodelgeom jhb_powder01
+donemodel jhb_powder01

@@ -1,0 +1,416 @@
+# Exported from NWmax 0.8 b60 at 09/09/2007 03:06:12
+# mdl file
+#
+#NWmax MODEL ASCII
+# model: JzMedicPnl01
+#local file: C:\Documents and Settings\Did.REB-III\Bureau\placable a faire\medic panel sf\medic_pnl5.max
+filedependancy medic_pnl5.max
+newmodel JzMedicPnl01
+setsupermodel JzMedicPnl01 NULL
+classification Character
+setanimationscale 1.0
+#NWmax GEOM  ASCII
+beginmodelgeom JzMedicPnl01
+node dummy JzMedicPnl01
+  parent NULL
+endnode
+node dummy Impact
+  parent JzMedicPnl01
+  position 0.0 0.0 1.45
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.580392 0.694118 0.101961 
+endnode
+node trimesh Box04
+  parent JzMedicPnl01
+  position -0.211386 0.03 1.5009
+  orientation 0.57735 0.57735 -0.57735 -4.18879
+  wirecolor 0.564706 0.109804 0.694118 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 0.0 3.0 
+  bitmap jzmedicpnl01
+  verts 8
+    -0.3025 -0.01 0.0
+    0.3025 -0.01 0.0
+    -0.3025 0.01 0.0
+    0.3025 0.01 0.0
+    -0.3025 -0.01 0.06
+    0.3025 -0.01 0.06
+    -0.3025 0.01 0.06
+    0.3025 0.01 0.06
+  faces 12
+    0 2 3  2  9 11 10  2
+    3 1 0  2  10 8 9  2
+    4 5 7  4  8 9 11  1
+    7 6 4  4  11 10 8  1
+    0 1 5  8  4 5 7  5
+    5 4 0  8  7 6 4  5
+    1 3 7  16  0 1 3  4
+    7 5 1  16  3 2 0  4
+    3 2 6  32  4 5 7  6
+    6 7 3  32  7 6 4  6
+    2 0 4  64  0 1 3  3
+    4 6 2  64  3 2 0  3
+  tverts 12
+    0.00925926 0.00925926 0
+    0.775926 0.00925926 0
+    0.00925926 0.111111 0
+    0.775926 0.111111 0
+    0.00925926 0.00925926 0
+    0.775926 0.00925926 0
+    0.00925926 0.111111 0
+    0.775926 0.111111 0
+    0.00925926 0.00925926 0
+    0.775926 0.00925926 0
+    0.00925926 0.111111 0
+    0.775926 0.111111 0
+endnode
+node trimesh Box03
+  parent JzMedicPnl01
+  position 0.21091 0.03 1.5009
+  orientation 0.57735 0.57735 -0.57735 -4.18879
+  wirecolor 0.564706 0.109804 0.694118 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 0.0 3.0 
+  bitmap jzmedicpnl01
+  verts 8
+    -0.3025 -0.01 0.0
+    0.3025 -0.01 0.0
+    -0.3025 0.01 0.0
+    0.3025 0.01 0.0
+    -0.3025 -0.01 0.06
+    0.3025 -0.01 0.06
+    -0.3025 0.01 0.06
+    0.3025 0.01 0.06
+  faces 12
+    0 2 3  2  9 11 10  2
+    3 1 0  2  10 8 9  2
+    4 5 7  4  8 9 11  1
+    7 6 4  4  11 10 8  1
+    0 1 5  8  4 5 7  5
+    5 4 0  8  7 6 4  5
+    1 3 7  16  0 1 3  4
+    7 5 1  16  3 2 0  4
+    3 2 6  32  4 5 7  6
+    6 7 3  32  7 6 4  6
+    2 0 4  64  0 1 3  3
+    4 6 2  64  3 2 0  3
+  tverts 12
+    0.0148148 0.0166667 0
+    0.772222 0.0166667 0
+    0.0148148 0.109259 0
+    0.772222 0.112963 0
+    0.0148148 0.0166667 0
+    0.772222 0.0166667 0
+    0.0148148 0.109259 0
+    0.772222 0.112963 0
+    0.0148148 0.0166667 0
+    0.772222 0.0166667 0
+    0.0148148 0.109259 0
+    0.772222 0.112963 0
+endnode
+node trimesh Box02
+  parent JzMedicPnl01
+  position 0.000195169 0.03 1.19215
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.564706 0.109804 0.694118 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 0.0 3.0 
+  bitmap jzmedicpnl01
+  verts 8
+    -0.220951 0.0 -0.00730417
+    0.220951 0.0 -0.00730417
+    -0.220951 0.0 0.00730417
+    0.220951 0.0 0.00730417
+    -0.220951 -0.06 -0.00730439
+    0.220951 -0.06 -0.00730439
+    -0.220951 -0.06 0.00730396
+    0.220951 -0.06 0.00730396
+  faces 12
+    0 2 3  2  9 11 10  2
+    3 1 0  2  10 8 9  2
+    4 5 7  4  8 9 11  1
+    7 6 4  4  11 10 8  1
+    0 1 5  8  4 5 7  5
+    5 4 0  8  7 6 4  5
+    1 3 7  16  0 1 3  4
+    7 5 1  16  3 2 0  4
+    3 2 6  32  4 5 7  6
+    6 7 3  32  7 6 4  6
+    2 0 4  64  0 1 3  3
+    4 6 2  64  3 2 0  3
+  tverts 12
+    0.0 0.0 0
+    0.772222 0.00185185 0
+    0.0 0.118519 0
+    0.768519 0.111111 0
+    0.0 0.0 0
+    0.764815 0.00555556 0
+    0.0037037 0.114815 0
+    0.761111 0.111111 0
+    0.0 0.0 0
+    0.772222 0.00185185 0
+    0.00185185 0.118519 0
+    0.768519 0.111111 0
+endnode
+node trimesh Box01
+  parent JzMedicPnl01
+  position -0.000309258 0.03 1.81077
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.564706 0.109804 0.694118 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 0.0 3.0 
+  bitmap jzmedicpnl01
+  verts 8
+    -0.221551 0.0 -0.01
+    0.221551 0.0 -0.01
+    -0.221551 0.0 0.01
+    0.221551 0.0 0.01
+    -0.221551 -0.06 -0.0100002
+    0.221551 -0.06 -0.0100002
+    -0.221551 -0.06 0.00999978
+    0.221551 -0.06 0.00999978
+  faces 12
+    0 2 3  2  9 11 10  2
+    3 1 0  2  10 8 9  2
+    4 5 7  4  12 13 15  1
+    7 6 4  4  15 14 12  1
+    0 1 5  8  4 5 7  5
+    5 4 0  8  7 6 4  5
+    1 3 7  16  0 1 3  4
+    7 5 1  16  3 2 0  4
+    3 2 6  32  4 5 7  6
+    6 7 3  32  7 6 4  6
+    2 0 4  64  0 1 3  3
+    4 6 2  64  3 2 0  3
+  tverts 16
+    0.0 0.0 0
+    0.77963 0.0 0
+    0.0 0.111111 0
+    0.777778 0.111111 0
+    -0.00185185 0.0 0
+    0.781482 0.0 0
+    0.0 0.112963 0
+    0.781482 0.111111 0
+    0.0 0.0 0
+    0.781482 0.0 0
+    0.0 0.118519 0
+    0.775926 0.114815 0
+    0.00185188 -0.00370364 0
+    0.783333 -0.00185179 0
+    0.0 0.118519 0
+    0.777778 0.111111 0
+endnode
+node trimesh PnlCadre1
+  parent JzMedicPnl01
+  position 0.0 0.0 1.2
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.721569 0.603922 0.894118 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 0.0 30.0 
+  bitmap jzmedicpnl01
+  verts 8
+    -0.2 -0.025 0.0
+    0.2 -0.025 0.0
+    -0.2 0.025 0.0
+    0.2 0.025 0.0
+    -0.2 -0.025 0.6
+    0.2 -0.025 0.6
+    -0.2 0.025 0.6
+    0.2 0.025 0.6
+  faces 10
+    0 2 3  2  9 11 10  2
+    3 1 0  2  10 8 9  2
+    4 5 7  4  8 9 11  1
+    7 6 4  4  11 10 8  1
+    1 3 7  16  0 1 3  4
+    7 5 1  16  3 2 0  4
+    3 2 6  32  4 5 7  6
+    6 7 3  32  7 6 4  6
+    2 0 4  64  0 1 3  3
+    4 6 2  64  3 2 0  3
+  tverts 12
+    0.0 0.125926 0
+    0.55 0.125926 0
+    0.0 1.0 0
+    0.55 1.0 0
+    0.554664 0.128899 0
+    0.984399 0.128879 0
+    0.554767 0.992185 0
+    0.984403 0.992228 0
+    0.00185185 0.127778 0
+    1.00185 0.127778 0
+    0.0 1.0 0
+    1.0 1.0 0
+endnode
+node trimesh Plane01
+  parent JzMedicPnl01
+  position -0.102472 0.0253028 1.2242
+  orientation 0.57735 0.57735 0.57735 -2.0944
+  wirecolor 0.894118 0.721569 0.6 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 0.0 0.0 
+  bitmap jzmedicpnl01
+  verts 4
+    -0.025 -0.1 0.0
+    0.025 -0.1 0.0
+    -0.025 0.1 0.0
+    0.025 0.1 0.0
+  faces 2
+    2 0 3  1  2 0 3  1
+    1 3 0  1  1 3 0  1
+  tverts 4
+    0.997627 0.00612266 0
+    0.99763 0.114827 0
+    0.772102 0.00580969 0
+    0.771768 0.114851 0
+endnode
+node trimesh PnlFace
+  parent JzMedicPnl01
+  position 0.0 0.0 1.2
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.721569 0.603922 0.894118 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.435294 0.972549 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 -2.5 30.0 
+  bitmap jzmedicpnl01
+  verts 4
+    -0.2 -0.025 0.0
+    0.2 -0.025 0.0
+    -0.2 -0.025 0.6
+    0.2 -0.025 0.6
+  faces 2
+    0 1 3  8  0 1 3  5
+    3 2 0  8  3 2 0  5
+  tverts 4
+    0.00399539 0.128751 0
+    0.550696 0.128879 0
+    0.00394681 0.992451 0
+    0.5507 0.992228 0
+endnode
+node trimesh Plane02
+  parent JzMedicPnl01
+  position 0.100244 -0.0258481 1.2242
+  orientation -0.57735 0.57735 -0.57735 -2.0944
+  wirecolor 0.894118 0.721569 0.6 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 0.0 0.0 
+  bitmap jzmedicpnl01
+  verts 4
+    -0.025 -0.1 0.0
+    0.025 -0.1 0.0
+    -0.025 0.1 0.0
+    0.025 0.1 0.0
+  faces 2
+    2 0 3  1  2 0 3  1
+    1 3 0  1  1 3 0  1
+  tverts 4
+    0.994009 0.00553846 0
+    0.9939 0.112614 0
+    0.7524 0.00528775 0
+    0.752588 0.112784 0
+endnode
+endmodelgeom JzMedicPnl01
+donemodel JzMedicPnl01

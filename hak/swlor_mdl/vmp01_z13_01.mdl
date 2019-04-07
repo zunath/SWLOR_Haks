@@ -1,0 +1,46 @@
+# Rewritten by CleanModels 3 Version 3.5.2d Sun Apr 08 18:25:59 2018
+#MAXMODEL ASCII
+filedependency Unknown
+newmodel vmp01_z13_01
+  classification TILE
+  setsupermodel vmp01_z13_01 NULL
+  setanimationscale 1
+#MAXGEOM ASCII
+beginmodelgeom vmp01_z13_01
+node dummy vmp01_z13_01
+  parent NULL
+endnode
+node trimesh object592
+  parent vmp01_z13_01
+  wirecolor 1 0 0
+  position 0 0 -6
+  ambient 0 0 0
+  diffuse 0 0 0
+  specular 0 0 0
+  shininess 26
+  bitmap black
+  orientation 0 0 0 0
+  verts 4
+    -5 5 0
+    -5 -5 0
+    5 -5 0
+    5 5 0
+  faces 2
+    0 1 2 1 0 1 2 3
+    2 3 0 1 2 3 4 3
+  tverts 5
+    0.0371594 0.892078 0
+    0.0530787 0.85676 0
+    0.0530787 0.928115 0
+    0.0267892 0.928115 0
+    0.0252858 0.91304 0
+endnode
+endmodelgeom vmp01_z13_01
+donemodel vmp01_z13_01
+1  2 3 4   3
+  position 0 0 -6
+  orientation 0 0 0 0
+endnode
+endmodelgeom vmp01_z13_01
+
+donemodel vmp01_z13_01

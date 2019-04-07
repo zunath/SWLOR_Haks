@@ -1,0 +1,17 @@
+#MAXMODEL ASCII
+# model: sjm01_j03_02
+filedependancy sjm01_j03_02.max
+newmodel sjm01_j03_02
+setsupermodel sjm01_j03_02 NULL
+classification tile
+setanimationscale 1
+#MAXGEOM  ASCII
+beginmodelgeom sjm01_j03_02
+node dummy sjm01_j03_02
+  parent NULL
+  #part-number 0
+endnode
+endmodelgeom sjm01_j03_02
+
+donemodel sjm01_j03_02
+

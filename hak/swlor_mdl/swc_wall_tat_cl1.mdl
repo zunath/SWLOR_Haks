@@ -1,0 +1,81 @@
+# Exported from NWmax 0.8 b61 at 5/22/2012 10:21:26 PM
+# mdl file
+#
+#NWmax MODEL ASCII
+# model: swc_wall_tat_cl1
+#local file: C:\Program Files (x86)\Autodesk\3dsMax8\scenes\wall_tatooine_column01.max
+filedependancy wall_tatooine_column01.max
+newmodel swc_wall_tat_cl1
+setsupermodel swc_wall_tat_cl1 NULL
+classification character
+#NWmax GEOM  ASCII
+beginmodelgeom swc_wall_tat_cl1
+node dummy swc_wall_tat_cl1
+  parent NULL
+endnode
+node trimesh Mesh0
+  parent swc_wall_tat_cl1
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.52549 0.231373 0.0313726 
+  ambient 0.588 0.588 0.588 
+  diffuse 0.588 0.588 0.588 
+  specular 0.0 0.0 0.0 
+  shininess 10.0
+  bitmap stco_tato_dtb_a1
+  verts 20
+    2.08855e-006 1.095 0.0
+    -1.095 1.095 0.0
+    2.08855e-006 1.095 4.69947
+    -1.095 1.095 4.69947
+    2.08855e-006 1.095 4.69947
+    -1.095 1.095 4.69947
+    2.08855e-006 0.0 4.69947
+    -1.095 0.0 4.69947
+    2.08855e-006 0.0 4.69947
+    2.08855e-006 0.0 0.0
+    2.08855e-006 1.095 4.69947
+    2.08855e-006 1.095 0.0
+    2.08855e-006 0.0 4.69947
+    -1.095 0.0 4.69947
+    2.08855e-006 0.0 0.0
+    -1.095 0.0 0.0
+    -1.095 0.0 4.69947
+    -1.095 1.095 4.69947
+    -1.095 0.0 0.0
+    -1.095 1.095 0.0
+  faces 10
+    0 1 2  0  0 1 2  1
+    2 1 3  0  2 1 3  1
+    4 5 6  0  4 5 6  1
+    6 5 7  0  6 5 7  1
+    8 9 10  0  8 9 10  1
+    10 9 11  0  10 9 11  1
+    12 13 14  0  12 13 14  1
+    14 13 15  0  14 13 15  1
+    16 17 18  0  16 17 18  1
+    18 17 19  0  18 17 19  1
+  tverts 20
+    6.0 0.0 0
+    4.0 0.0 0
+    6.0 6.99978 0
+    4.0 6.99978 0
+    2.0 7.99978 0
+    2.0 6.99978 0
+    -9.53674e-007 7.99978 0
+    -9.53674e-007 6.99978 0
+    8.0 6.99978 0
+    8.0 0.0 0
+    6.0 6.99978 0
+    6.0 0.0 0
+    0.0 6.99978 0
+    2.0 6.99978 0
+    0.0 -2.38419e-007 0
+    2.0 -2.38419e-007 0
+    2.0 6.99978 0
+    4.0 6.99978 0
+    2.0 -2.38419e-007 0
+    4.0 0.0 0
+endnode
+endmodelgeom swc_wall_tat_cl1
+donemodel swc_wall_tat_cl1

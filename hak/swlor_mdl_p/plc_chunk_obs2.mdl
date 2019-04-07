@@ -1,0 +1,60 @@
+#MAXMODEL ASCII
+# model: plc_chunk_obs2
+filedependancy plc_chunk_obs2.max
+newmodel plc_chunk_obs2
+setsupermodel plc_chunk_obs2 NULL
+classification CHARACTER
+setanimationscale 1
+#MAXGEOM  ASCII
+beginmodelgeom plc_chunk_obs2
+node dummy plc_chunk_obs2
+  parent NULL
+endnode
+node trimesh Box155689
+  parent plc_chunk_obs2
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 1
+  bitmap cccad_obsidian
+  verts 6
+       0.3694750    0.0716760    0.0174196
+       0.5473220   -0.2980960    0.0000000
+      -0.6775580   -0.1447120    0.0000000
+      -0.8298870    0.0716760    0.0607594
+       0.4616090   -0.2980960    0.0348393
+      -0.6293710    0.0716760    0.0000000
+  tverts 15
+       0.3332960    0.7414410  0
+       0.2886210    0.7104780  0
+       0.2991630    0.9904580  0
+       0.3570660    1.0092400  0
+       0.3152110    0.7065970  0
+       0.3570120    0.7675120  0
+       0.3248190    0.9614720  0
+       0.2777140    0.7355830  0
+       0.3313560    0.7964970  0
+       0.2895550    0.7355830  0
+       0.3195150    0.7964970  0
+       0.3359230    0.9547400  0
+       0.3136480    1.0068300  0
+       0.3130440    0.9530460  0
+       0.3333830    0.8667320  0
+  faces 8
+    0 1 2  1   0  1  2   2
+    3 4 0  2   3  4  5   1
+    4 3 2  2   4  3  6   1
+    2 1 4  4   2  1  7   5
+    0 4 1  8   8  9  1   4
+    0 5 3  4  10 11 12   6
+    2 3 5  8  13 14 11   3
+    2 5 0  1   2 11  0   2
+  position -0.0503677 0.091265 0.121167
+  orientation -0.191976 0.4135091 -0.8900312 -2.41359
+  scale 1
+  alpha 1
+  selfillumcolor 0 0 0
+endnode
+endmodelgeom plc_chunk_obs2
+
+donemodel plc_chunk_obs2

@@ -1,0 +1,966 @@
+# Exported from NWmax 0.8 b60 at 04/01/2009 15:52:44
+# mdl file
+#
+#NWmax MODEL ASCII
+# model: bhp_crys1d
+#local file: Unknown
+filedependancy Unknown
+newmodel bhp_crys1d
+setsupermodel bhp_crys1d NULL
+classification Character
+setanimationscale 1.0
+#NWmax GEOM  ASCII
+beginmodelgeom bhp_crys1d
+node dummy bhp_crys1d
+  parent NULL
+endnode
+node dummy crys1d_hand
+  parent bhp_crys1d
+  position -0.0153914 0.0249332 0.934402
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.337255 0.337255 0.337255 
+endnode
+node dummy crys1d_head_hit
+  parent bhp_crys1d
+  position -0.0153914 0.0553178 1.12515
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.337255 0.337255 0.337255 
+endnode
+node dummy crys1d_impact
+  parent bhp_crys1d
+  position -0.0153914 0.0246835 0.647109
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.337255 0.337255 0.337255 
+endnode
+node emitter fire!172
+  parent bhp_crys1d
+  position -0.0718452 -0.0165442 0.501203
+  orientation 1.0 0.0 0.0 -4.71239
+  wirecolor 1.0 1.0 1.0 
+  update_sel 3
+  update Explosion
+  render_sel 1
+  render Normal
+  blend_sel 1
+  Blend Normal
+  spawntype_sel 0
+  spawnType 0
+  xSize 88.0
+  ySize 69.0
+  inherit 1
+  inherit_local 0
+  inheritvel 0
+  inherit_part 0
+  renderorder 0
+  threshold 0.0
+  combinetime 0.0
+  deadspace 0.0
+  opacity 0.5
+  colorStart 0.607843 0.568627 0.486275 
+  colorEnd 0.819608 0.815686 0.796079 
+  alphaStart 1.0
+  alphaEnd 0.0
+  sizeStart 4.0
+  sizeEnd 1.0
+  sizeStart_y 0.0
+  sizeEnd_y 0.0
+  birthrate 5
+  lifeExp 2.5
+  mass 0.09
+  spread 2.96706
+  particleRot 0.5
+  velocity 2.0
+  randvel 0.5
+  bounce_co 0.0
+  blurlength 10.0
+  loop 0
+  bounce 0
+  m_isTinted 1
+  splat 0
+  affectedByWind false
+  texture fxpa_smoke01
+  twosidedtex 1
+  xgrid 4
+  ygrid 4
+  fps 10
+  framestart 0
+  frameend 24
+  random 0
+  lightningDelay 0.0
+  lightningRadius 0.0
+  lightningSubDiv 0
+  lightningScale 0.0
+  blastRadius 0.2
+  blastLength 1.0
+  p2p 0
+  p2p_type Bezier
+  p2p_sel 1
+  p2p_bezier2 0.0
+  p2p_bezier3 0.0
+  grav 0.0
+  drag 0.0
+endnode
+node trimesh damage_crys1d
+  parent bhp_crys1d
+  position -0.0234683 -0.00922485 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 0
+  Shadow 0
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.364706 0.364706 0.364706 
+  ambient 0.0705882 0.0 1.0 
+  diffuse 1.0 0.501961 0.643137 
+  specular 0.0 0.9 0.105882 
+  shininess 24
+  center 0.0 0.0 25.0 
+  bitmap NULL
+  verts 12
+    -0.195415 -0.186216 0.0
+    -0.195415 0.186216 0.0
+    0.195415 0.186216 0.0
+    0.195415 -0.186216 0.0
+    -0.195415 -0.186216 0.5
+    0.195415 -0.186216 0.5
+    0.195415 0.186216 0.5
+    -0.195415 0.186216 0.5
+    0.103944 -0.0990513 0.25
+    -0.103944 -0.0990513 0.25
+    0.103944 0.0990513 0.25
+    -0.103944 0.0990513 0.25
+  faces 20
+    0 1 2  1  0 0 0  2
+    2 3 0  1  0 0 0  2
+    4 5 6  1  0 0 0  1
+    6 7 4  1  0 0 0  1
+    0 3 8  2  0 0 0  5
+    8 9 0  2  0 0 0  5
+    9 8 5  2  0 0 0  5
+    5 4 9  2  0 0 0  5
+    3 2 10  4  0 0 0  4
+    10 8 3  4  0 0 0  4
+    8 10 6  4  0 0 0  4
+    6 5 8  4  0 0 0  4
+    2 1 11  2  0 0 0  6
+    11 10 2  2  0 0 0  6
+    10 11 7  2  0 0 0  6
+    7 6 10  2  0 0 0  6
+    1 0 9  4  0 0 0  3
+    9 11 1  4  0 0 0  3
+    11 9 4  4  0 0 0  3
+    4 7 11  4  0 0 0  3
+endnode
+node emitter R_eye155
+  parent damage_crys1d
+  position 0.094613 -0.0190527 0.394291
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 1.0 1.0 1.0 
+  update_sel 1
+  update Fountain
+  render_sel 5
+  render Aligned_to_World_Z
+  blend_sel 3
+  Blend Lighten
+  spawntype_sel 0
+  spawnType 0
+  xSize 50.0
+  ySize 50.0
+  inherit 1
+  inherit_local 0
+  inheritvel 0
+  inherit_part 0
+  renderorder 1
+  threshold 0.0
+  combinetime 0.0
+  deadspace 0.0
+  opacity 0.5
+  colorStart 0.937255 0.933333 0.992157 
+  colorEnd 0.0 0.0 0.0 
+  alphaStart 0.5
+  alphaEnd 0.5
+  sizeStart 0.2
+  sizeEnd 0.2
+  sizeStart_y 0.0
+  sizeEnd_y 0.0
+  birthrate 0
+  lifeExp 0.0
+  mass 0.0
+  spread 0.0
+  particleRot 0.0
+  velocity 1.0
+  randvel 0.5
+  bounce_co 0.0
+  blurlength 10.0
+  loop 0
+  bounce 0
+  m_isTinted 0
+  splat 0
+  affectedByWind false
+  texture fxpa_Dot01
+  twosidedtex 0
+  xgrid 1
+  ygrid 1
+  fps 0
+  framestart 0
+  frameend 0
+  random 0
+  lightningDelay 0.0
+  lightningRadius 0.0
+  lightningSubDiv 0
+  lightningScale 0.0
+  blastRadius 0.0
+  blastLength 0.0
+  p2p 0
+  p2p_type Bezier
+  p2p_sel 1
+  p2p_bezier2 0.0
+  p2p_bezier3 0.0
+  grav 0.0
+  drag 0.0
+endnode
+node emitter R_eye154
+  parent damage_crys1d
+  position 0.00132073 0.036296 0.227167
+  orientation 0.102601 -0.246439 0.963712 -0.90872
+  wirecolor 1.0 1.0 1.0 
+  update_sel 1
+  update Fountain
+  render_sel 5
+  render Aligned_to_World_Z
+  blend_sel 3
+  Blend Lighten
+  spawntype_sel 0
+  spawnType 0
+  xSize 35.0
+  ySize 35.0
+  inherit 1
+  inherit_local 0
+  inheritvel 0
+  inherit_part 0
+  renderorder 0
+  threshold 0.0
+  combinetime 0.0
+  deadspace 0.0
+  opacity 0.5
+  colorStart 0.937255 0.933333 0.992157 
+  colorEnd 0.0 0.0 0.0 
+  alphaStart 0.0
+  alphaEnd 0.6
+  sizeStart 1.75
+  sizeEnd 1.75
+  sizeStart_y 0.0
+  sizeEnd_y 0.0
+  birthrate 0
+  lifeExp 1.0
+  mass 0.0
+  spread 0.0
+  particleRot 0.0
+  velocity 0.0
+  randvel 0.0
+  bounce_co 0.0
+  blurlength 10.0
+  loop 0
+  bounce 0
+  m_isTinted 0
+  splat 0
+  affectedByWind false
+  texture fxpa_Dot01
+  twosidedtex 0
+  xgrid 1
+  ygrid 1
+  fps 0
+  framestart 0
+  frameend 0
+  random 0
+  lightningDelay 0.0
+  lightningRadius 0.0
+  lightningSubDiv 0
+  lightningScale 0.0
+  blastRadius 0.0
+  blastLength 0.0
+  p2p 0
+  p2p_type Bezier
+  p2p_sel 1
+  p2p_bezier2 0.0
+  p2p_bezier3 0.0
+  grav 0.0
+  drag 0.0
+endnode
+node trimesh Crystal
+  parent damage_crys1d
+  position 0.0185193 0.0344531 -0.00235998
+  orientation 0.0213505 -0.0361077 0.99912 -2.28543
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 0.9
+  transparencyhint 0
+  selfillumcolor 0.364706 0.364706 0.364706
+  ambient 1.0 1.0 1.0
+  diffuse 1.0 1.0 1.0
+  specular 0.0 0.0 0.0 
+  shininess 10
+  center -5.28285 -7.3256 62.3797 
+  bitmap bh_plc_crys_d
+  verts 27
+    0.00585418 0.00677749 1.43079
+    0.234899 -0.217941 1.06901
+    0.234928 0.21548 1.06894
+    -0.240799 0.215438 1.06902
+    -0.152548 -0.137848 -0.141643
+    0.146679 -0.137852 -0.141643
+    -0.240764 -0.217914 1.06908
+    0.14668 0.135394 -0.141644
+    -0.152545 0.135399 -0.141643
+    -0.0788733 -0.388383 0.777103
+    0.141877 -0.475372 0.5721
+    0.141925 -0.195219 0.682396
+    -0.171143 -0.156893 0.584994
+    0.11809 -0.138982 -0.132493
+    0.316624 -0.163334 -0.0706896
+    -0.171127 -0.436986 0.474739
+    0.316622 0.014925 -0.000472877
+    0.118087 0.0392776 -0.0622767
+    -0.343875 0.252228 0.768694
+    -0.134627 0.0649475 0.645399
+    -0.134574 0.32886 0.564657
+    -0.422281 0.301522 0.475347
+    -0.135621 -0.120404 -0.131718
+    0.0472446 -0.103027 -0.0748961
+    -0.422272 0.0376792 0.556085
+    0.0472423 0.0653503 -0.126374
+    -0.135624 0.0479737 -0.183196
+  faces 36
+    0 1 2  1  27 28 29  1
+    2 3 0  1  30 31 32  1
+    4 5 1  2  33 34 35  5
+    1 6 4  2  36 37 38  5
+    5 7 2  4  39 40 41  4
+    2 1 5  4  42 43 5  4
+    7 8 3  2  44 45 46  6
+    3 2 7  2  47 2 7  6
+    8 4 6  4  48 4 49  3
+    6 3 8  4  50 51 8  3
+    0 3 6  1  52 3 53  1
+    6 1 0  1  6 1 0  1
+    9 10 11  1  54 55 56  1
+    11 12 9  1  57 58 59  1
+    13 14 10  2  60 61 62  5
+    10 15 13  2  63 64 65  5
+    14 16 11  4  66 67 68  4
+    11 10 14  4  69 70 14  4
+    16 17 12  2  71 72 73  6
+    12 11 16  2  74 11 16  6
+    17 13 15  4  75 13 76  3
+    15 12 17  4  77 78 17  3
+    9 12 15  1  79 12 80  1
+    15 10 9  1  15 10 9  1
+    18 19 20  1  81 82 83  1
+    20 21 18  1  84 85 86  1
+    22 23 19  2  87 88 89  5
+    19 24 22  2  90 91 92  5
+    23 25 20  4  93 94 95  4
+    20 19 23  4  96 97 23  4
+    25 26 21  2  98 99 100  6
+    21 20 25  2  101 20 25  6
+    26 22 24  4  102 22 103  3
+    24 21 26  4  104 105 26  3
+    18 21 24  1  106 21 107  1
+    24 19 18  1  24 19 18  1
+  tverts 108
+    0.555706 1.26606 0
+    0.773135 0.922633 0
+    0.226838 0.922567 0
+    0.225948 0.922643 0
+    0.561316 -0.226619 0
+    0.43868 -0.226619 0
+    0.321596 0.9227 0
+    0.31061 -0.22662 0
+    0.301927 -0.226619 0
+    0.475276 0.645531 0
+    0.68483 0.450925 0
+    0.315124 0.555627 0
+    0.579395 0.463165 0
+    0.562393 -0.217933 0
+    0.41449 -0.159264 0
+    0.387701 0.358502 0
+    0.149287 -0.0926087 0
+    0.393174 -0.151278 0
+    0.223715 0.808976 0
+    0.42235 0.631194 0
+    0.5776 0.443859 0
+    0.14423 0.359079 0
+    0.544757 -0.217198 0
+    0.471739 -0.163257 0
+    0.149294 0.605309 0
+    0.405005 -0.212125 0
+    0.384919 -0.266065 0
+    0.575974 1.26606 0
+    0.362653 0.922633 0
+    0.774092 0.922567 0
+    0.226838 0.922567 0
+    0.678437 0.922643 0
+    0.444294 1.26606 0
+    0.405338 -0.226619 0
+    0.689389 -0.226619 0
+    0.773135 0.922633 0
+    0.773135 0.922633 0
+    0.321596 0.9227 0
+    0.405338 -0.226619 0
+    0.43868 -0.226619 0
+    0.698068 -0.22662 0
+    0.774092 0.922567 0
+    0.774092 0.922567 0
+    0.362653 0.922633 0
+    0.31061 -0.22662 0
+    0.594659 -0.226619 0
+    0.678437 0.922643 0
+    0.678437 0.922643 0
+    0.301927 -0.226619 0
+    0.637321 0.9227 0
+    0.637321 0.9227 0
+    0.225948 0.922643 0
+    0.424026 1.26606 0
+    0.637321 0.9227 0
+    0.475276 0.200855 0
+    0.68483 0.118278 0
+    0.684876 0.384223 0
+    0.684876 0.384223 0
+    0.387686 0.420605 0
+    0.475276 0.200855 0
+    0.66225 -0.217933 0
+    0.850715 -0.159264 0
+    0.68483 0.450925 0
+    0.68483 0.450925 0
+    0.387701 0.358502 0
+    0.66225 -0.217933 0
+    0.41449 -0.159264 0
+    0.583709 -0.0926087 0
+    0.384223 0.555627 0
+    0.384223 0.555627 0
+    0.118278 0.450925 0
+    0.149287 -0.0926087 0
+    0.337753 -0.151278 0
+    0.612314 0.463165 0
+    0.612314 0.463165 0
+    0.393174 -0.151278 0
+    0.845283 0.358502 0
+    0.845283 0.358502 0
+    0.579395 0.463165 0
+    0.799145 0.645531 0
+    0.845283 0.358502 0
+    0.223715 0.808976 0
+    0.42235 0.631194 0
+    0.4224 0.881722 0
+    0.5776 0.443859 0
+    0.850715 0.359079 0
+    0.776285 0.637548 0
+    0.421406 -0.217198 0
+    0.594998 -0.163257 0
+    0.42235 0.520506 0
+    0.42235 0.520506 0
+    0.149294 0.435722 0
+    0.421406 -0.217198 0
+    0.471739 -0.163257 0
+    0.631577 -0.212125 0
+    0.881722 0.443859 0
+    0.881722 0.443859 0
+    0.631194 0.520506 0
+    0.405005 -0.212125 0
+    0.578596 -0.266065 0
+    0.850715 0.359079 0
+    0.850715 0.359079 0
+    0.384919 -0.266065 0
+    0.394691 0.435722 0
+    0.394691 0.435722 0
+    0.14423 0.359079 0
+    0.191024 0.637548 0
+    0.394691 0.435722 0
+endnode
+node dummy crys1d_ground
+  parent bhp_crys1d
+  position -0.0230135 0.00497986 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.337255 0.337255 0.337255 
+endnode
+node dummy crys1d_head
+  parent bhp_crys1d
+  position -0.0153914 0.0828928 1.41903
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.337255 0.337255 0.337255 
+endnode
+node emitter ChunkyWood287
+  parent bhp_crys1d
+  position -0.0718452 -0.0163123 0.449987
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 1.0 1.0 1.0 
+  update_sel 3
+  update Explosion
+  render_sel 1
+  render Normal
+  blend_sel 1
+  Blend Normal
+  spawntype_sel 0
+  spawnType 0
+  xSize 161.0
+  ySize 123.0
+  inherit 1
+  inherit_local 0
+  inheritvel 0
+  inherit_part 0
+  renderorder 0
+  threshold 0.0
+  combinetime 0.0
+  deadspace 0.0
+  opacity 0.5
+  colorStart 1.0 1.0 1.0 
+  colorEnd 1.0 1.0 1.0 
+  alphaStart 1.0
+  alphaEnd 1.0
+  sizeStart 0.1
+  sizeEnd 0.1
+  sizeStart_y 0.0
+  sizeEnd_y 0.0
+  birthrate 5
+  lifeExp 0.75
+  mass 3.0
+  spread 1.22173
+  particleRot 5.0
+  velocity 8.0
+  randvel 0.3
+  bounce_co 0.5
+  blurlength 10.0
+  loop 0
+  bounce 1
+  m_isTinted 0
+  splat 0
+  affectedByWind false
+  texture fxpa_cloud02
+  twosidedtex 0
+  xgrid 5
+  ygrid 5
+  fps 0
+  framestart 0
+  frameend 24
+  random 0
+  chunkName PX2_GLS
+  lightningDelay 0.0
+  lightningRadius 0.0
+  lightningSubDiv 0
+  lightningScale 0.0
+  blastRadius 0.0
+  blastLength 0.0
+  p2p 0
+  p2p_type Bezier
+  p2p_sel 1
+  p2p_bezier2 0.0
+  p2p_bezier3 0.0
+  grav 0.0
+  drag 0.0
+endnode
+endmodelgeom bhp_crys1d
+#NWmax ANIM ASCII
+newanim damage bhp_crys1d
+  length 0.133333
+  transtime 0.25
+  animroot bhp_crys1d
+    node dummy bhp_crys1d
+        parent NULL
+    endnode
+    node dummy crys1d_hand
+        parent bhp_crys1d
+    endnode
+    node dummy crys1d_head_hit
+        parent bhp_crys1d
+    endnode
+    node dummy crys1d_impact
+        parent bhp_crys1d
+    endnode
+    node emitter fire!172
+        parent bhp_crys1d
+    endnode
+    node trimesh damage_crys1d
+        parent bhp_crys1d
+        positionkey
+            0.0 -0.0234683 -0.00922485 0.0
+            0.0333333 -0.0234683 -0.00922485 0.0244581
+            0.133333 -0.0234683 -0.00922485 0.0
+        endlist
+        orientationkey
+            0.0 0.0 0.0 0.0 0.0
+            0.0333333 0.371336 -0.928463 0.00810258 -0.0469939
+            0.1 -0.59995 0.799969 0.0104722 -0.0436324
+            0.133333 0.0 0.0 0.0 0.0
+        endlist
+    endnode
+    node emitter R_eye155
+        parent damage_crys1d
+    endnode
+    node emitter R_eye154
+        parent damage_crys1d
+    endnode
+    node trimesh Crystal
+        parent damage_crys1d
+    endnode
+    node dummy crys1d_ground
+        parent bhp_crys1d
+    endnode
+    node dummy crys1d_head
+        parent bhp_crys1d
+    endnode
+    node emitter ChunkyWood287
+        parent bhp_crys1d
+    endnode
+doneanim damage bhp_crys1d
+#NWmax ANIM ASCII
+newanim die bhp_crys1d
+  length 0.166667
+  transtime 0.25
+  animroot bhp_crys1d
+  event 0.0333333 detonate
+  event 0.0333333 detonate
+    node dummy bhp_crys1d
+        parent NULL
+    endnode
+    node dummy crys1d_hand
+        parent bhp_crys1d
+    endnode
+    node dummy crys1d_head_hit
+        parent bhp_crys1d
+    endnode
+    node dummy crys1d_impact
+        parent bhp_crys1d
+    endnode
+    node emitter fire!172
+        parent bhp_crys1d
+    endnode
+    node trimesh damage_crys1d
+        parent bhp_crys1d
+        positionkey
+            0.0 -0.0234683 -0.00922485 0.0
+            0.166667 -0.0234683 -0.00922485 -8.23085
+        endlist
+    endnode
+    node emitter R_eye155
+        parent damage_crys1d
+    endnode
+    node emitter R_eye154
+        parent damage_crys1d
+    endnode
+    node trimesh Crystal
+        parent damage_crys1d
+    endnode
+    node dummy crys1d_ground
+        parent bhp_crys1d
+    endnode
+    node dummy crys1d_head
+        parent bhp_crys1d
+    endnode
+    node emitter ChunkyWood287
+        parent bhp_crys1d
+    endnode
+doneanim die bhp_crys1d
+#NWmax ANIM ASCII
+newanim dead bhp_crys1d
+  length 0.0333333
+  transtime 0.25
+  animroot bhp_crys1d
+    node dummy bhp_crys1d
+        parent NULL
+    endnode
+    node dummy crys1d_hand
+        parent bhp_crys1d
+    endnode
+    node dummy crys1d_head_hit
+        parent bhp_crys1d
+    endnode
+    node dummy crys1d_impact
+        parent bhp_crys1d
+    endnode
+    node emitter fire!172
+        parent bhp_crys1d
+    endnode
+    node trimesh damage_crys1d
+        parent bhp_crys1d
+        positionkey
+            0.0 -0.0234683 -0.00922485 -8.23085
+            0.0333333 -0.0234683 -0.00922485 -8.23085
+        endlist
+    endnode
+    node emitter R_eye155
+        parent damage_crys1d
+    endnode
+    node emitter R_eye154
+        parent damage_crys1d
+    endnode
+    node trimesh Crystal
+        parent damage_crys1d
+    endnode
+    node dummy crys1d_ground
+        parent bhp_crys1d
+    endnode
+    node dummy crys1d_head
+        parent bhp_crys1d
+    endnode
+    node emitter ChunkyWood287
+        parent bhp_crys1d
+    endnode
+doneanim dead bhp_crys1d
+#NWmax ANIM ASCII
+newanim default bhp_crys1d
+  length 0.0
+  transtime 0.25
+  animroot bhp_crys1d
+    node dummy bhp_crys1d
+        parent NULL
+    endnode
+    node dummy crys1d_hand
+        parent bhp_crys1d
+    endnode
+    node dummy crys1d_head_hit
+        parent bhp_crys1d
+    endnode
+    node dummy crys1d_impact
+        parent bhp_crys1d
+    endnode
+    node emitter fire!172
+        parent bhp_crys1d
+    endnode
+    node trimesh damage_crys1d
+        parent bhp_crys1d
+    endnode
+    node emitter R_eye155
+        parent damage_crys1d
+    endnode
+    node emitter R_eye154
+        parent damage_crys1d
+    endnode
+    node trimesh Crystal
+        parent damage_crys1d
+    endnode
+    node dummy crys1d_ground
+        parent bhp_crys1d
+    endnode
+    node dummy crys1d_head
+        parent bhp_crys1d
+    endnode
+    node emitter ChunkyWood287
+        parent bhp_crys1d
+    endnode
+doneanim default bhp_crys1d
+#NWmax ANIM ASCII
+newanim on bhp_crys1d
+  length 0.0
+  transtime 0.25
+  animroot bhp_crys1d
+    node dummy bhp_crys1d
+        parent NULL
+    endnode
+    node dummy crys1d_hand
+        parent bhp_crys1d
+    endnode
+    node dummy crys1d_head_hit
+        parent bhp_crys1d
+    endnode
+    node dummy crys1d_impact
+        parent bhp_crys1d
+    endnode
+    node emitter fire!172
+        parent bhp_crys1d
+    endnode
+    node trimesh damage_crys1d
+        parent bhp_crys1d
+    endnode
+    node emitter R_eye155
+        parent damage_crys1d
+    endnode
+    node emitter R_eye154
+        parent damage_crys1d
+    endnode
+    node trimesh Crystal
+        parent damage_crys1d
+    endnode
+    node dummy crys1d_ground
+        parent bhp_crys1d
+    endnode
+    node dummy crys1d_head
+        parent bhp_crys1d
+    endnode
+    node emitter ChunkyWood287
+        parent bhp_crys1d
+    endnode
+doneanim on bhp_crys1d
+#NWmax ANIM ASCII
+newanim on2off bhp_crys1d
+  length 0.833333
+  transtime 0.25
+  animroot bhp_crys1d
+    node dummy bhp_crys1d
+        parent NULL
+    endnode
+    node dummy crys1d_hand
+        parent bhp_crys1d
+    endnode
+    node dummy crys1d_head_hit
+        parent bhp_crys1d
+    endnode
+    node dummy crys1d_impact
+        parent bhp_crys1d
+    endnode
+    node emitter fire!172
+        parent bhp_crys1d
+    endnode
+    node trimesh damage_crys1d
+        parent bhp_crys1d
+    endnode
+    node emitter R_eye155
+        parent damage_crys1d
+        birthratekey
+            0.0 2 
+            0.0333333 0 
+            0.833333 0 
+        endlist
+        lifeExpkey
+            0.0 2.0 
+            0.0333333 0.0 
+            0.833333 0.0 
+        endlist
+    endnode
+    node emitter R_eye154
+        parent damage_crys1d
+        birthratekey
+            0.0 10 
+            0.0333333 0 
+            0.833333 0 
+        endlist
+        lifeExpkey
+            0.0 1.0 
+            0.0333333 1.0 
+            0.833333 1.0 
+        endlist
+    endnode
+    node trimesh Crystal
+        parent damage_crys1d
+    endnode
+    node dummy crys1d_ground
+        parent bhp_crys1d
+    endnode
+    node dummy crys1d_head
+        parent bhp_crys1d
+    endnode
+    node emitter ChunkyWood287
+        parent bhp_crys1d
+    endnode
+doneanim on2off bhp_crys1d
+#NWmax ANIM ASCII
+newanim off bhp_crys1d
+  length 0.0
+  transtime 0.25
+  animroot bhp_crys1d
+    node dummy bhp_crys1d
+        parent NULL
+    endnode
+    node dummy crys1d_hand
+        parent bhp_crys1d
+    endnode
+    node dummy crys1d_head_hit
+        parent bhp_crys1d
+    endnode
+    node dummy crys1d_impact
+        parent bhp_crys1d
+    endnode
+    node emitter fire!172
+        parent bhp_crys1d
+    endnode
+    node trimesh damage_crys1d
+        parent bhp_crys1d
+    endnode
+    node emitter R_eye155
+        parent damage_crys1d
+    endnode
+    node emitter R_eye154
+        parent damage_crys1d
+    endnode
+    node trimesh Crystal
+        parent damage_crys1d
+    endnode
+    node dummy crys1d_ground
+        parent bhp_crys1d
+    endnode
+    node dummy crys1d_head
+        parent bhp_crys1d
+    endnode
+    node emitter ChunkyWood287
+        parent bhp_crys1d
+    endnode
+doneanim off bhp_crys1d
+#NWmax ANIM ASCII
+newanim off2on bhp_crys1d
+  length 0.433333
+  transtime 2.5
+  animroot bhp_crys1d
+    node dummy bhp_crys1d
+        parent NULL
+    endnode
+    node dummy crys1d_hand
+        parent bhp_crys1d
+    endnode
+    node dummy crys1d_head_hit
+        parent bhp_crys1d
+    endnode
+    node dummy crys1d_impact
+        parent bhp_crys1d
+    endnode
+    node emitter fire!172
+        parent bhp_crys1d
+    endnode
+    node trimesh damage_crys1d
+        parent bhp_crys1d
+    endnode
+    node emitter R_eye155
+        parent damage_crys1d
+        birthratekey
+            0.0 0 
+            0.433333 2 
+        endlist
+        lifeExpkey
+            0.0 0.0 
+            0.433333 2.0 
+        endlist
+    endnode
+    node emitter R_eye154
+        parent damage_crys1d
+        birthratekey
+            0.0 0 
+            0.433333 10 
+        endlist
+        lifeExpkey
+            0.0 1.0 
+            0.433333 1.0 
+        endlist
+    endnode
+    node trimesh Crystal
+        parent damage_crys1d
+    endnode
+    node dummy crys1d_ground
+        parent bhp_crys1d
+    endnode
+    node dummy crys1d_head
+        parent bhp_crys1d
+    endnode
+    node emitter ChunkyWood287
+        parent bhp_crys1d
+    endnode
+doneanim off2on bhp_crys1d
+donemodel bhp_crys1d

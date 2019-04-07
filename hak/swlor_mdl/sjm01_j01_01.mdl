@@ -1,0 +1,127 @@
+#MAXMODEL ASCII
+# model: sjm01_j01_01
+filedependancy sjm01_j01_01.max
+newmodel sjm01_j01_01
+setsupermodel sjm01_j01_01 NULL
+classification tile
+setanimationscale 1
+#MAXGEOM  ASCII
+beginmodelgeom sjm01_j01_01
+node dummy sjm01_j01_01
+  parent NULL
+  #part-number 0
+endnode
+node trimesh Mesh400
+  parent sjm01_j01_01
+  #part-number 1
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0.0500000007 0.0500000007 0.0500000007
+  shininess 26
+  bitmap sjm02_Black
+  verts 6
+    4.34000015 5.34000015 0
+    -5.65999985 5.34000015 0
+    -5.65999985 -4.65999985 0
+    4.34000015 0.340000004 0
+    2.83999991 -5.34000015 0
+    5.67000008 -3.17000008 0
+  tverts 6
+    50.5000992 500.5 0
+    0.500122011 500.5 0
+    0.500109971 450.5 0
+    50.5000992 475.498993 0
+    43.0150986 447.089996 0
+    57.1402016 457.975006 0
+  faces 4
+    0 1 2 1 0 1 2 1
+    2 3 0 1 2 3 0 1
+    2 4 5 1 2 4 5 1
+    2 5 3 1 2 5 3 1
+  position 0.660000026 -0.340000004 3
+  orientation 0 0 0 0
+endnode
+node light sjm01_j01_01ml2
+  parent sjm01_j01_01
+  #part-number 2
+  ambientonly 0
+  shadow 0
+  isdynamic 0
+  affectdynamic 1
+  lightpriority 3
+  fadingLight 1
+  flareradius 0
+  position 5.46217012 -4.90411997 5.54208994
+  orientation 0 0 0 0
+  radius 5
+  multiplier 1
+  color 0 0 0
+endnode
+node light sjm01_j01_01ml1
+  parent sjm01_j01_01
+  #part-number 3
+  ambientonly 0
+  shadow 0
+  isdynamic 0
+  affectdynamic 1
+  lightpriority 3
+  fadingLight 1
+  flareradius 0
+  position 0 0 5
+  orientation 0 0 0 0
+  radius 14
+  multiplier 1
+  color 0 0 0
+endnode
+node aabb Object235
+  parent sjm01_j01_01
+  #part-number 4
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+  shadow 0
+  transparencyhint 0
+  bitmap NULL
+  verts 8
+    4.3499999 -5.13000011 -1.58000004
+    5 -5.13000011 -1.42999995
+    5 -4.67000008 -1.42999995
+    5 -4.67000008 1.57000005
+    4.3499999 -5.13000011 1.41999996
+    5 4.86999989 -0.970000029
+    -5 4.86999989 -1.01999998
+    -5 -5.13000011 -1.01999998
+  tverts 6
+    -0.636476994 0.337644994 0
+    -0.634266019 0.860011995 0
+    -0.335141987 0.398286015 0
+    -0.335141987 0.398286015 0
+    -0.636476994 0.337644994 0
+    -0.636476994 0.337644994 0
+  faces 6
+    0 1 2 1 0 1 2 4
+    3 4 2 2 2 0 3 7
+    0 2 4 2 0 2 4 7
+    5 6 3 1 2 0 3 7
+    4 3 6 4 0 2 4 7
+    6 7 4 8 0 4 5 7
+  aabb -5 -5.13000011 -1.58000004 5 4.86999989 1.57000005 -1
+        4.3499999 -5.13000011 -1.58000004 5 -4.67000008 1.57000005 -1
+         4.3499999 -5.13000011 -1.58000004 5 -4.67000008 -1.42999995 0
+         4.3499999 -5.13000011 -1.58000004 5 -4.67000008 1.57000005 -1
+          4.3499999 -5.13000011 -1.58000004 5 -4.67000008 1.41999996 2
+          4.3499999 -5.13000011 -1.42999995 5 -4.67000008 1.57000005 1
+        -5 -5.13000011 -1.01999998 5 4.86999989 1.57000005 -1
+         -5 -5.13000011 -1.01999998 4.3499999 4.86999989 1.41999996 5
+         -5 -5.13000011 -1.01999998 5 4.86999989 1.57000005 -1
+          -5 -5.13000011 -1.01999998 5 4.86999989 1.57000005 4
+          -5 -4.67000008 -1.01999998 5 4.86999989 1.57000005 3
+  position 0 0.129999995 4.01999998
+  orientation 0 0 0 0
+endnode
+endmodelgeom sjm01_j01_01
+
+donemodel sjm01_j01_01
+
+

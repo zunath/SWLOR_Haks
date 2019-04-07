@@ -1,0 +1,2394 @@
+# Exported from NWmax 0.8 b60 at 22/09/2007 05:38:44
+# mdl file
+#
+#NWmax MODEL ASCII
+# model: Jz_billet06k
+#local file: Unknown
+filedependancy Unknown
+newmodel Jz_billet06k
+setsupermodel Jz_billet06k NULL
+classification Character
+setanimationscale 1.0
+#NWmax GEOM  ASCII
+beginmodelgeom Jz_billet06k
+node dummy Jz_billet06k
+  parent NULL
+endnode
+node dummy Group01
+  parent Jz_billet06k
+  position 0.00373377 -0.000268347 0.0273345
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.101961 0.694118 0.580392 
+endnode
+node trimesh Dessous
+  parent Group01
+  position 0.0 0.0 -0.006
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.337255 0.87451 0.337255 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 0.0 0.0 
+  bitmap jz_billets
+  verts 4
+    -0.03315 -0.078 0.0
+    0.03315 -0.078 0.0
+    -0.03315 0.078 0.0
+    0.03315 0.078 0.0
+  faces 2
+    0 2 3  2  1 3 2  2
+    3 1 0  2  2 0 1  2
+  tverts 4
+    0.587587 0.877129 0
+    0.587867 0.753886 0
+    0.878981 0.877223 0
+    0.878795 0.753979 0
+endnode
+node trimesh Devant
+  parent Group01
+  position 0.0 0.0 -0.006
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.337255 0.87451 0.337255 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 7.8 0.6 
+  bitmap jz_billets
+  verts 4
+    -0.03315 0.078 0.0
+    0.03315 0.078 0.0
+    -0.03315 0.078 0.012
+    0.03315 0.078 0.012
+  faces 2
+    1 0 2  32  0 1 3  6
+    2 3 1  32  3 2 0  6
+  tverts 4
+    4.17517e-005 0.507881 0
+    0.324224 0.507815 0
+    8.29856e-005 0.542996 0
+    0.324276 0.542878 0
+endnode
+node trimesh Dos
+  parent Group01
+  position 0.0 0.0 -0.006
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.337255 0.87451 0.337255 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 -7.8 0.6 
+  bitmap jz_billets
+  verts 4
+    -0.03315 -0.078 0.0
+    0.03315 -0.078 0.0
+    -0.03315 -0.078 0.012
+    0.03315 -0.078 0.012
+  faces 2
+    0 1 3  8  0 1 3  5
+    3 2 0  8  3 2 0  5
+  tverts 4
+    0.472849 0.718901 0
+    0.585838 0.718792 0
+    0.472893 0.750031 0
+    0.585792 0.749947 0
+endnode
+node trimesh Droite
+  parent Group01
+  position 0.0 0.0 -0.006
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.337255 0.87451 0.337255 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 3.315 0.0 0.6 
+  bitmap jz_billets
+  verts 4
+    0.03315 -0.078 0.0
+    0.03315 0.078 0.0
+    0.03315 -0.078 0.012
+    0.03315 0.078 0.012
+  faces 2
+    0 1 3  16  0 1 3  4
+    3 2 0  16  3 2 0  4
+  tverts 4
+    0.000104249 0.543022 0
+    0.324195 0.543058 0
+    5.02821e-006 0.507833 0
+    0.324187 0.507839 0
+endnode
+node trimesh face01
+  parent Group01
+  position 0.0 0.0 -0.006
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.337255 0.87451 0.337255 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 0.0 1.2 
+  bitmap jz_billets
+  verts 4
+    -0.03315 -0.078 0.012
+    0.03315 -0.078 0.012
+    -0.03315 0.078 0.012
+    0.03315 0.078 0.012
+  faces 2
+    0 1 3  4  0 1 3  1
+    3 2 0  4  3 2 0  1
+  tverts 4
+    6.08327e-005 0.706982 0
+    0.000182668 0.543037 0
+    0.324233 0.707025 0
+    0.324231 0.542999 0
+endnode
+node trimesh Gauche
+  parent Group01
+  position 0.0 0.0 -0.006
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.337255 0.87451 0.337255 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center -3.315 0.0 0.6 
+  bitmap jz_billets
+  verts 4
+    -0.03315 -0.078 0.0
+    -0.03315 0.078 0.0
+    -0.03315 -0.078 0.012
+    -0.03315 0.078 0.012
+  faces 2
+    1 0 2  64  1 0 2  3
+    2 3 1  64  2 3 1  3
+  tverts 4
+    8.60455e-007 0.542968 0
+    2.26473e-007 0.507813 0
+    0.324216 0.542963 0
+    0.324221 0.507806 0
+endnode
+node dummy Group02
+  parent Jz_billet06k
+  position 0.0729228 -0.000268347 0.0273345
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.560784 0.878431 0.341176 
+endnode
+node trimesh Dessous01
+  parent Group02
+  position 0.0 0.0 -0.006
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.337255 0.87451 0.337255 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 0.0 0.0 
+  bitmap jz_billets
+  verts 4
+    -0.03315 -0.078 0.0
+    0.03315 -0.078 0.0
+    -0.03315 0.078 0.0
+    0.03315 0.078 0.0
+  faces 2
+    0 2 3  2  1 3 2  2
+    3 1 0  2  2 0 1  2
+  tverts 4
+    0.587587 0.877129 0
+    0.587867 0.753886 0
+    0.878981 0.877223 0
+    0.878795 0.753979 0
+endnode
+node trimesh Devant01
+  parent Group02
+  position 0.0 0.0 -0.006
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.337255 0.87451 0.337255 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 7.8 0.6 
+  bitmap jz_billets
+  verts 4
+    -0.03315 0.078 0.0
+    0.03315 0.078 0.0
+    -0.03315 0.078 0.012
+    0.03315 0.078 0.012
+  faces 2
+    1 0 2  32  0 1 3  6
+    2 3 1  32  3 2 0  6
+  tverts 4
+    4.17517e-005 0.507881 0
+    0.324224 0.507815 0
+    8.29856e-005 0.542996 0
+    0.324276 0.542878 0
+endnode
+node trimesh Dos01
+  parent Group02
+  position 0.0 0.0 -0.006
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.337255 0.87451 0.337255 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 -7.8 0.6 
+  bitmap jz_billets
+  verts 4
+    -0.03315 -0.078 0.0
+    0.03315 -0.078 0.0
+    -0.03315 -0.078 0.012
+    0.03315 -0.078 0.012
+  faces 2
+    0 1 3  8  0 1 3  5
+    3 2 0  8  3 2 0  5
+  tverts 4
+    0.472849 0.718901 0
+    0.585838 0.718792 0
+    0.472893 0.750031 0
+    0.585792 0.749947 0
+endnode
+node trimesh Droite01
+  parent Group02
+  position 0.0 0.0 -0.006
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.337255 0.87451 0.337255 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 3.315 0.0 0.6 
+  bitmap jz_billets
+  verts 4
+    0.03315 -0.078 0.0
+    0.03315 0.078 0.0
+    0.03315 -0.078 0.012
+    0.03315 0.078 0.012
+  faces 2
+    0 1 3  16  0 1 3  4
+    3 2 0  16  3 2 0  4
+  tverts 4
+    0.000104249 0.543022 0
+    0.324195 0.543058 0
+    5.02821e-006 0.507833 0
+    0.324187 0.507839 0
+endnode
+node trimesh face02
+  parent Group02
+  position 0.0 0.0 -0.006
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.337255 0.87451 0.337255 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 0.0 1.2 
+  bitmap jz_billets
+  verts 4
+    -0.03315 -0.078 0.012
+    0.03315 -0.078 0.012
+    -0.03315 0.078 0.012
+    0.03315 0.078 0.012
+  faces 2
+    0 1 3  4  0 1 3  1
+    3 2 0  4  3 2 0  1
+  tverts 4
+    6.08327e-005 0.706982 0
+    0.000182668 0.543037 0
+    0.324233 0.707025 0
+    0.324231 0.542999 0
+endnode
+node trimesh Gauche01
+  parent Group02
+  position 0.0 0.0 -0.006
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.337255 0.87451 0.337255 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center -3.315 0.0 0.6 
+  bitmap jz_billets
+  verts 4
+    -0.03315 -0.078 0.0
+    -0.03315 0.078 0.0
+    -0.03315 -0.078 0.012
+    -0.03315 0.078 0.012
+  faces 2
+    1 0 2  64  1 0 2  3
+    2 3 1  64  2 3 1  3
+  tverts 4
+    8.60455e-007 0.542968 0
+    2.26473e-007 0.507813 0
+    0.324216 0.542963 0
+    0.324221 0.507806 0
+endnode
+node dummy Group03
+  parent Jz_billet06k
+  position 0.00525296 -0.00330981 0.0399034
+  orientation 0.0 0.0 -1.0 -0.0455588
+  wirecolor 0.894118 0.721569 0.6 
+endnode
+node trimesh Dessous02
+  parent Group03
+  position 0.0 0.0 -0.006
+  orientation 0.0 0.0 -1.0 0.0
+  wirecolor 0.337255 0.87451 0.337255 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 0.0 0.0 
+  bitmap jz_billets
+  verts 4
+    -0.03315 -0.078 0.0
+    0.03315 -0.078 0.0
+    -0.03315 0.078 0.0
+    0.03315 0.078 0.0
+  faces 2
+    0 2 3  2  1 3 2  2
+    3 1 0  2  2 0 1  2
+  tverts 4
+    0.587587 0.877129 0
+    0.587867 0.753886 0
+    0.878981 0.877223 0
+    0.878795 0.753979 0
+endnode
+node trimesh Devant02
+  parent Group03
+  position 0.0 0.0 -0.006
+  orientation 0.0 0.0 -1.0 0.0
+  wirecolor 0.337255 0.87451 0.337255 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 7.8 0.6 
+  bitmap jz_billets
+  verts 4
+    -0.03315 0.078 0.0
+    0.03315 0.078 0.0
+    -0.03315 0.078 0.012
+    0.03315 0.078 0.012
+  faces 2
+    1 0 2  32  0 1 3  6
+    2 3 1  32  3 2 0  6
+  tverts 4
+    4.17517e-005 0.507881 0
+    0.324224 0.507815 0
+    8.29856e-005 0.542996 0
+    0.324276 0.542878 0
+endnode
+node trimesh Dos02
+  parent Group03
+  position 0.0 0.0 -0.006
+  orientation 0.0 0.0 -1.0 0.0
+  wirecolor 0.337255 0.87451 0.337255 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 -7.8 0.6 
+  bitmap jz_billets
+  verts 4
+    -0.03315 -0.078 0.0
+    0.03315 -0.078 0.0
+    -0.03315 -0.078 0.012
+    0.03315 -0.078 0.012
+  faces 2
+    0 1 3  8  0 1 3  5
+    3 2 0  8  3 2 0  5
+  tverts 4
+    0.472849 0.718901 0
+    0.585838 0.718792 0
+    0.472893 0.750031 0
+    0.585792 0.749947 0
+endnode
+node trimesh Droite02
+  parent Group03
+  position 0.0 0.0 -0.006
+  orientation 0.0 0.0 -1.0 0.0
+  wirecolor 0.337255 0.87451 0.337255 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 3.315 0.0 0.6 
+  bitmap jz_billets
+  verts 4
+    0.03315 -0.078 0.0
+    0.03315 0.078 0.0
+    0.03315 -0.078 0.012
+    0.03315 0.078 0.012
+  faces 2
+    0 1 3  16  0 1 3  4
+    3 2 0  16  3 2 0  4
+  tverts 4
+    0.000104249 0.543022 0
+    0.324195 0.543058 0
+    5.02821e-006 0.507833 0
+    0.324187 0.507839 0
+endnode
+node trimesh face03
+  parent Group03
+  position 0.0 0.0 -0.006
+  orientation 0.0 0.0 -1.0 0.0
+  wirecolor 0.337255 0.87451 0.337255 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 0.0 1.2 
+  bitmap jz_billets
+  verts 4
+    -0.03315 -0.078 0.012
+    0.03315 -0.078 0.012
+    -0.03315 0.078 0.012
+    0.03315 0.078 0.012
+  faces 2
+    0 1 3  4  0 1 3  1
+    3 2 0  4  3 2 0  1
+  tverts 4
+    6.08327e-005 0.706982 0
+    0.000182668 0.543037 0
+    0.324233 0.707025 0
+    0.324231 0.542999 0
+endnode
+node trimesh Gauche02
+  parent Group03
+  position 0.0 0.0 -0.006
+  orientation 0.0 0.0 -1.0 0.0
+  wirecolor 0.337255 0.87451 0.337255 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center -3.315 0.0 0.6 
+  bitmap jz_billets
+  verts 4
+    -0.03315 -0.078 0.0
+    -0.03315 0.078 0.0
+    -0.03315 -0.078 0.012
+    -0.03315 0.078 0.012
+  faces 2
+    1 0 2  64  1 0 2  3
+    2 3 1  64  2 3 1  3
+  tverts 4
+    8.60455e-007 0.542968 0
+    2.26473e-007 0.507813 0
+    0.324216 0.542963 0
+    0.324221 0.507806 0
+endnode
+node dummy Group04
+  parent Jz_billet06k
+  position 0.0741043 -0.000170851 0.0399034
+  orientation 0.0 0.0 -1.0 -0.0455588
+  wirecolor 0.52549 0.0235294 0.0235294 
+endnode
+node trimesh Dessous03
+  parent Group04
+  position 0.0 0.0 -0.006
+  orientation 0.0 0.0 -1.0 0.0
+  wirecolor 0.337255 0.87451 0.337255 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 0.0 0.0 
+  bitmap jz_billets
+  verts 4
+    -0.03315 -0.078 0.0
+    0.03315 -0.078 0.0
+    -0.03315 0.078 0.0
+    0.03315 0.078 0.0
+  faces 2
+    0 2 3  2  1 3 2  2
+    3 1 0  2  2 0 1  2
+  tverts 4
+    0.587587 0.877129 0
+    0.587867 0.753886 0
+    0.878981 0.877223 0
+    0.878795 0.753979 0
+endnode
+node trimesh Devant03
+  parent Group04
+  position 0.0 0.0 -0.006
+  orientation 0.0 0.0 -1.0 0.0
+  wirecolor 0.337255 0.87451 0.337255 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 7.8 0.6 
+  bitmap jz_billets
+  verts 4
+    -0.03315 0.078 0.0
+    0.03315 0.078 0.0
+    -0.03315 0.078 0.012
+    0.03315 0.078 0.012
+  faces 2
+    1 0 2  32  0 1 3  6
+    2 3 1  32  3 2 0  6
+  tverts 4
+    4.17517e-005 0.507881 0
+    0.324224 0.507815 0
+    8.29856e-005 0.542996 0
+    0.324276 0.542878 0
+endnode
+node trimesh Dos03
+  parent Group04
+  position 0.0 0.0 -0.006
+  orientation 0.0 0.0 -1.0 0.0
+  wirecolor 0.337255 0.87451 0.337255 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 -7.8 0.6 
+  bitmap jz_billets
+  verts 4
+    -0.03315 -0.078 0.0
+    0.03315 -0.078 0.0
+    -0.03315 -0.078 0.012
+    0.03315 -0.078 0.012
+  faces 2
+    0 1 3  8  0 1 3  5
+    3 2 0  8  3 2 0  5
+  tverts 4
+    0.472849 0.718901 0
+    0.585838 0.718792 0
+    0.472893 0.750031 0
+    0.585792 0.749947 0
+endnode
+node trimesh Droite03
+  parent Group04
+  position 0.0 0.0 -0.006
+  orientation 0.0 0.0 -1.0 0.0
+  wirecolor 0.337255 0.87451 0.337255 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 3.315 0.0 0.6 
+  bitmap jz_billets
+  verts 4
+    0.03315 -0.078 0.0
+    0.03315 0.078 0.0
+    0.03315 -0.078 0.012
+    0.03315 0.078 0.012
+  faces 2
+    0 1 3  16  0 1 3  4
+    3 2 0  16  3 2 0  4
+  tverts 4
+    0.000104249 0.543022 0
+    0.324195 0.543058 0
+    5.02821e-006 0.507833 0
+    0.324187 0.507839 0
+endnode
+node trimesh face04
+  parent Group04
+  position 0.0 0.0 -0.006
+  orientation 0.0 0.0 -1.0 0.0
+  wirecolor 0.337255 0.87451 0.337255 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 0.0 1.2 
+  bitmap jz_billets
+  verts 4
+    -0.03315 -0.078 0.012
+    0.03315 -0.078 0.012
+    -0.03315 0.078 0.012
+    0.03315 0.078 0.012
+  faces 2
+    0 1 3  4  0 1 3  1
+    3 2 0  4  3 2 0  1
+  tverts 4
+    6.08327e-005 0.706982 0
+    0.000182668 0.543037 0
+    0.324233 0.707025 0
+    0.324231 0.542999 0
+endnode
+node trimesh Gauche03
+  parent Group04
+  position 0.0 0.0 -0.006
+  orientation 0.0 0.0 -1.0 0.0
+  wirecolor 0.337255 0.87451 0.337255 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center -3.315 0.0 0.6 
+  bitmap jz_billets
+  verts 4
+    -0.03315 -0.078 0.0
+    -0.03315 0.078 0.0
+    -0.03315 -0.078 0.012
+    -0.03315 0.078 0.012
+  faces 2
+    1 0 2  64  1 0 2  3
+    2 3 1  64  2 3 1  3
+  tverts 4
+    8.60455e-007 0.542968 0
+    2.26473e-007 0.507813 0
+    0.324216 0.542963 0
+    0.324221 0.507806 0
+endnode
+node dummy Group05
+  parent Jz_billet06k
+  position 0.0740996 -0.00340872 0.0521649
+  orientation 0.0 0.0 1.0 -0.0484328
+  wirecolor 0.878431 0.337255 0.337255 
+endnode
+node trimesh Dessous04
+  parent Group05
+  position 0.0 0.0 -0.006
+  orientation 0.0 0.0 -1.0 0.0
+  wirecolor 0.337255 0.87451 0.337255 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 0.0 0.0 
+  bitmap jz_billets
+  verts 4
+    -0.03315 -0.078 0.0
+    0.03315 -0.078 0.0
+    -0.03315 0.078 0.0
+    0.03315 0.078 0.0
+  faces 2
+    0 2 3  2  1 3 2  2
+    3 1 0  2  2 0 1  2
+  tverts 4
+    0.587587 0.877129 0
+    0.587867 0.753886 0
+    0.878981 0.877223 0
+    0.878795 0.753979 0
+endnode
+node trimesh face05
+  parent Group05
+  position 0.0 0.0 -0.006
+  orientation 0.0 0.0 -1.0 0.0
+  wirecolor 0.337255 0.87451 0.337255 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 0.0 1.2 
+  bitmap jz_billets
+  verts 4
+    -0.03315 -0.078 0.012
+    0.03315 -0.078 0.012
+    -0.03315 0.078 0.012
+    0.03315 0.078 0.012
+  faces 2
+    0 1 3  4  0 1 3  1
+    3 2 0  4  3 2 0  1
+  tverts 4
+    6.08327e-005 0.706982 0
+    0.000182668 0.543037 0
+    0.324233 0.707025 0
+    0.324231 0.542999 0
+endnode
+node trimesh Droite05
+  parent Group05
+  position 0.0 0.0 -0.006
+  orientation 0.0 0.0 -1.0 0.0
+  wirecolor 0.337255 0.87451 0.337255 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 3.315 0.0 0.6 
+  bitmap jz_billets
+  verts 4
+    0.03315 -0.078 0.0
+    0.03315 0.078 0.0
+    0.03315 -0.078 0.012
+    0.03315 0.078 0.012
+  faces 2
+    0 1 3  16  0 1 3  4
+    3 2 0  16  3 2 0  4
+  tverts 4
+    0.000104249 0.543022 0
+    0.324195 0.543058 0
+    5.02821e-006 0.507833 0
+    0.324187 0.507839 0
+endnode
+node trimesh Gauche04
+  parent Group05
+  position 0.0 0.0 -0.006
+  orientation 0.0 0.0 -1.0 0.0
+  wirecolor 0.337255 0.87451 0.337255 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center -3.315 0.0 0.6 
+  bitmap jz_billets
+  verts 4
+    -0.03315 -0.078 0.0
+    -0.03315 0.078 0.0
+    -0.03315 -0.078 0.012
+    -0.03315 0.078 0.012
+  faces 2
+    1 0 2  64  1 0 2  3
+    2 3 1  64  2 3 1  3
+  tverts 4
+    8.60455e-007 0.542968 0
+    2.26473e-007 0.507813 0
+    0.324216 0.542963 0
+    0.324221 0.507806 0
+endnode
+node trimesh Devant04
+  parent Group05
+  position 0.0 0.0 -0.006
+  orientation 0.0 0.0 -1.0 0.0
+  wirecolor 0.337255 0.87451 0.337255 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 7.8 0.6 
+  bitmap jz_billets
+  verts 4
+    -0.03315 0.078 0.0
+    0.03315 0.078 0.0
+    -0.03315 0.078 0.012
+    0.03315 0.078 0.012
+  faces 2
+    1 0 2  32  0 1 3  6
+    2 3 1  32  3 2 0  6
+  tverts 4
+    4.17517e-005 0.507881 0
+    0.324224 0.507815 0
+    8.29856e-005 0.542996 0
+    0.324276 0.542878 0
+endnode
+node trimesh Dos04
+  parent Group05
+  position 0.0 0.0 -0.006
+  orientation 0.0 0.0 -1.0 0.0
+  wirecolor 0.337255 0.87451 0.337255 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 -7.8 0.6 
+  bitmap jz_billets
+  verts 4
+    -0.03315 -0.078 0.0
+    0.03315 -0.078 0.0
+    -0.03315 -0.078 0.012
+    0.03315 -0.078 0.012
+  faces 2
+    0 1 3  8  0 1 3  5
+    3 2 0  8  3 2 0  5
+  tverts 4
+    0.472849 0.718901 0
+    0.585838 0.718792 0
+    0.472893 0.750031 0
+    0.585792 0.749947 0
+endnode
+node dummy Group06
+  parent Jz_billet06k
+  position 0.00525759 -7.19009e-005 0.0521649
+  orientation 0.0 0.0 1.0 -0.0484328
+  wirecolor 0.890196 0.596078 0.596078 
+endnode
+node trimesh Droite04
+  parent Group06
+  position 0.0 0.0 -0.006
+  orientation 0.0 0.0 -1.0 0.0
+  wirecolor 0.337255 0.87451 0.337255 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 3.315 0.0 0.6 
+  bitmap jz_billets
+  verts 4
+    0.03315 -0.078 0.0
+    0.03315 0.078 0.0
+    0.03315 -0.078 0.012
+    0.03315 0.078 0.012
+  faces 2
+    0 1 3  16  0 1 3  4
+    3 2 0  16  3 2 0  4
+  tverts 4
+    0.000104249 0.543022 0
+    0.324195 0.543058 0
+    5.02821e-006 0.507833 0
+    0.324187 0.507839 0
+endnode
+node trimesh Dos05
+  parent Group06
+  position 0.0 0.0 -0.006
+  orientation 0.0 0.0 -1.0 0.0
+  wirecolor 0.337255 0.87451 0.337255 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 -7.8 0.6 
+  bitmap jz_billets
+  verts 4
+    -0.03315 -0.078 0.0
+    0.03315 -0.078 0.0
+    -0.03315 -0.078 0.012
+    0.03315 -0.078 0.012
+  faces 2
+    0 1 3  8  0 1 3  5
+    3 2 0  8  3 2 0  5
+  tverts 4
+    0.472849 0.718901 0
+    0.585838 0.718792 0
+    0.472893 0.750031 0
+    0.585792 0.749947 0
+endnode
+node trimesh Devant05
+  parent Group06
+  position 0.0 0.0 -0.006
+  orientation 0.0 0.0 -1.0 0.0
+  wirecolor 0.337255 0.87451 0.337255 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 7.8 0.6 
+  bitmap jz_billets
+  verts 4
+    -0.03315 0.078 0.0
+    0.03315 0.078 0.0
+    -0.03315 0.078 0.012
+    0.03315 0.078 0.012
+  faces 2
+    1 0 2  32  0 1 3  6
+    2 3 1  32  3 2 0  6
+  tverts 4
+    4.17517e-005 0.507881 0
+    0.324224 0.507815 0
+    8.29856e-005 0.542996 0
+    0.324276 0.542878 0
+endnode
+node trimesh face06
+  parent Group06
+  position 0.0 0.0 -0.006
+  orientation 0.0 0.0 -1.0 0.0
+  wirecolor 0.337255 0.87451 0.337255 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 0.0 1.2 
+  bitmap jz_billets
+  verts 4
+    -0.03315 -0.078 0.012
+    0.03315 -0.078 0.012
+    -0.03315 0.078 0.012
+    0.03315 0.078 0.012
+  faces 2
+    0 1 3  4  0 1 3  1
+    3 2 0  4  3 2 0  1
+  tverts 4
+    6.08327e-005 0.706982 0
+    0.000182668 0.543037 0
+    0.324233 0.707025 0
+    0.324231 0.542999 0
+endnode
+node trimesh Dessous05
+  parent Group06
+  position 0.0 0.0 -0.006
+  orientation 0.0 0.0 -1.0 0.0
+  wirecolor 0.337255 0.87451 0.337255 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 0.0 0.0 
+  bitmap jz_billets
+  verts 4
+    -0.03315 -0.078 0.0
+    0.03315 -0.078 0.0
+    -0.03315 0.078 0.0
+    0.03315 0.078 0.0
+  faces 2
+    0 2 3  2  1 3 2  2
+    3 1 0  2  2 0 1  2
+  tverts 4
+    0.587587 0.877129 0
+    0.587867 0.753886 0
+    0.878981 0.877223 0
+    0.878795 0.753979 0
+endnode
+node trimesh Gauche05
+  parent Group06
+  position 0.0 0.0 -0.006
+  orientation 0.0 0.0 -1.0 0.0
+  wirecolor 0.337255 0.87451 0.337255 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center -3.315 0.0 0.6 
+  bitmap jz_billets
+  verts 4
+    -0.03315 -0.078 0.0
+    -0.03315 0.078 0.0
+    -0.03315 -0.078 0.012
+    -0.03315 0.078 0.012
+  faces 2
+    1 0 2  64  1 0 2  3
+    2 3 1  64  2 3 1  3
+  tverts 4
+    8.60455e-007 0.542968 0
+    2.26473e-007 0.507813 0
+    0.324216 0.542963 0
+    0.324221 0.507806 0
+endnode
+node dummy Group07
+  parent Jz_billet06k
+  position 0.0741365 -0.00124528 0.0649174
+  orientation 0.0 0.0 -1.0 -0.0143655
+  wirecolor 0.65098 0.898039 0.898039 
+endnode
+node trimesh Dessous06
+  parent Group07
+  position 0.0 0.0 -0.006
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.337255 0.87451 0.337255 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 0.0 0.0 
+  bitmap jz_billets
+  verts 4
+    -0.03315 -0.078 0.0
+    0.03315 -0.078 0.0
+    -0.03315 0.078 0.0
+    0.03315 0.078 0.0
+  faces 2
+    0 2 3  2  1 3 2  2
+    3 1 0  2  2 0 1  2
+  tverts 4
+    0.587587 0.877129 0
+    0.587867 0.753886 0
+    0.878981 0.877223 0
+    0.878795 0.753979 0
+endnode
+node trimesh face07
+  parent Group07
+  position 0.0 0.0 -0.006
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.337255 0.87451 0.337255 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 0.0 1.2 
+  bitmap jz_billets
+  verts 4
+    -0.03315 -0.078 0.012
+    0.03315 -0.078 0.012
+    -0.03315 0.078 0.012
+    0.03315 0.078 0.012
+  faces 2
+    0 1 3  4  0 1 3  1
+    3 2 0  4  3 2 0  1
+  tverts 4
+    6.08327e-005 0.706982 0
+    0.000182668 0.543037 0
+    0.324233 0.707025 0
+    0.324231 0.542999 0
+endnode
+node trimesh Droite07
+  parent Group07
+  position 0.0 0.0 -0.006
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.337255 0.87451 0.337255 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 3.315 0.0 0.6 
+  bitmap jz_billets
+  verts 4
+    0.03315 -0.078 0.0
+    0.03315 0.078 0.0
+    0.03315 -0.078 0.012
+    0.03315 0.078 0.012
+  faces 2
+    0 1 3  16  0 1 3  4
+    3 2 0  16  3 2 0  4
+  tverts 4
+    0.000104249 0.543022 0
+    0.324195 0.543058 0
+    5.02821e-006 0.507833 0
+    0.324187 0.507839 0
+endnode
+node trimesh Gauche06
+  parent Group07
+  position 0.0 0.0 -0.006
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.337255 0.87451 0.337255 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center -3.315 0.0 0.6 
+  bitmap jz_billets
+  verts 4
+    -0.03315 -0.078 0.0
+    -0.03315 0.078 0.0
+    -0.03315 -0.078 0.012
+    -0.03315 0.078 0.012
+  faces 2
+    1 0 2  64  1 0 2  3
+    2 3 1  64  2 3 1  3
+  tverts 4
+    8.60455e-007 0.542968 0
+    2.26473e-007 0.507813 0
+    0.324216 0.542963 0
+    0.324221 0.507806 0
+endnode
+node trimesh Devant06
+  parent Group07
+  position 0.0 0.0 -0.006
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.337255 0.87451 0.337255 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 7.8 0.6 
+  bitmap jz_billets
+  verts 4
+    -0.03315 0.078 0.0
+    0.03315 0.078 0.0
+    -0.03315 0.078 0.012
+    0.03315 0.078 0.012
+  faces 2
+    1 0 2  32  0 1 3  6
+    2 3 1  32  3 2 0  6
+  tverts 4
+    4.17517e-005 0.507881 0
+    0.324224 0.507815 0
+    8.29856e-005 0.542996 0
+    0.324276 0.542878 0
+endnode
+node trimesh Dos06
+  parent Group07
+  position 0.0 0.0 -0.006
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.337255 0.87451 0.337255 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 -7.8 0.6 
+  bitmap jz_billets
+  verts 4
+    -0.03315 -0.078 0.0
+    0.03315 -0.078 0.0
+    -0.03315 -0.078 0.012
+    0.03315 -0.078 0.012
+  faces 2
+    0 1 3  8  0 1 3  5
+    3 2 0  8  3 2 0  5
+  tverts 4
+    0.472849 0.718901 0
+    0.585838 0.718792 0
+    0.472893 0.750031 0
+    0.585792 0.749947 0
+endnode
+node dummy Group08
+  parent Jz_billet06k
+  position 0.00522075 -0.00223536 0.0649174
+  orientation 0.0 0.0 -1.0 -0.0143655
+  wirecolor 0.568627 0.109804 0.694118 
+endnode
+node trimesh Droite06
+  parent Group08
+  position 0.0 0.0 -0.006
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.337255 0.87451 0.337255 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 3.315 0.0 0.6 
+  bitmap jz_billets
+  verts 4
+    0.03315 -0.078 0.0
+    0.03315 0.078 0.0
+    0.03315 -0.078 0.012
+    0.03315 0.078 0.012
+  faces 2
+    0 1 3  16  0 1 3  4
+    3 2 0  16  3 2 0  4
+  tverts 4
+    0.000104249 0.543022 0
+    0.324195 0.543058 0
+    5.02821e-006 0.507833 0
+    0.324187 0.507839 0
+endnode
+node trimesh Dos07
+  parent Group08
+  position 0.0 0.0 -0.006
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.337255 0.87451 0.337255 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 -7.8 0.6 
+  bitmap jz_billets
+  verts 4
+    -0.03315 -0.078 0.0
+    0.03315 -0.078 0.0
+    -0.03315 -0.078 0.012
+    0.03315 -0.078 0.012
+  faces 2
+    0 1 3  8  0 1 3  5
+    3 2 0  8  3 2 0  5
+  tverts 4
+    0.472849 0.718901 0
+    0.585838 0.718792 0
+    0.472893 0.750031 0
+    0.585792 0.749947 0
+endnode
+node trimesh Devant07
+  parent Group08
+  position 0.0 0.0 -0.006
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.337255 0.87451 0.337255 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 7.8 0.6 
+  bitmap jz_billets
+  verts 4
+    -0.03315 0.078 0.0
+    0.03315 0.078 0.0
+    -0.03315 0.078 0.012
+    0.03315 0.078 0.012
+  faces 2
+    1 0 2  32  0 1 3  6
+    2 3 1  32  3 2 0  6
+  tverts 4
+    4.17517e-005 0.507881 0
+    0.324224 0.507815 0
+    8.29856e-005 0.542996 0
+    0.324276 0.542878 0
+endnode
+node trimesh face08
+  parent Group08
+  position 0.0 0.0 -0.006
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.337255 0.87451 0.337255 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 0.0 1.2 
+  bitmap jz_billets
+  verts 4
+    -0.03315 -0.078 0.012
+    0.03315 -0.078 0.012
+    -0.03315 0.078 0.012
+    0.03315 0.078 0.012
+  faces 2
+    0 1 3  4  0 1 3  1
+    3 2 0  4  3 2 0  1
+  tverts 4
+    6.08327e-005 0.706982 0
+    0.000182668 0.543037 0
+    0.324233 0.707025 0
+    0.324231 0.542999 0
+endnode
+node trimesh Dessous07
+  parent Group08
+  position 0.0 0.0 -0.006
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.337255 0.87451 0.337255 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 0.0 0.0 
+  bitmap jz_billets
+  verts 4
+    -0.03315 -0.078 0.0
+    0.03315 -0.078 0.0
+    -0.03315 0.078 0.0
+    0.03315 0.078 0.0
+  faces 2
+    0 2 3  2  1 3 2  2
+    3 1 0  2  2 0 1  2
+  tverts 4
+    0.587587 0.877129 0
+    0.587867 0.753886 0
+    0.878981 0.877223 0
+    0.878795 0.753979 0
+endnode
+node trimesh Gauche07
+  parent Group08
+  position 0.0 0.0 -0.006
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.337255 0.87451 0.337255 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center -3.315 0.0 0.6 
+  bitmap jz_billets
+  verts 4
+    -0.03315 -0.078 0.0
+    -0.03315 0.078 0.0
+    -0.03315 -0.078 0.012
+    -0.03315 0.078 0.012
+  faces 2
+    1 0 2  64  1 0 2  3
+    2 3 1  64  2 3 1  3
+  tverts 4
+    8.60455e-007 0.542968 0
+    2.26473e-007 0.507813 0
+    0.324216 0.542963 0
+    0.324221 0.507806 0
+endnode
+node dummy Group09
+  parent Jz_billet06k
+  position 0.0739557 -0.00529968 0.0774148
+  orientation 0.0 0.0 1.0 -0.103471
+  wirecolor 0.345098 0.560784 0.882353 
+endnode
+node trimesh Dessous08
+  parent Group09
+  position 0.0 0.0 -0.006
+  orientation 0.0 0.0 1.0 0.0
+  wirecolor 0.337255 0.87451 0.337255 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 0.0 0.0 
+  bitmap jz_billets
+  verts 4
+    -0.03315 -0.078 0.0
+    0.03315 -0.078 0.0
+    -0.03315 0.078 0.0
+    0.03315 0.078 0.0
+  faces 2
+    0 2 3  2  1 3 2  2
+    3 1 0  2  2 0 1  2
+  tverts 4
+    0.587587 0.877129 0
+    0.587867 0.753886 0
+    0.878981 0.877223 0
+    0.878795 0.753979 0
+endnode
+node trimesh face09
+  parent Group09
+  position 0.0 0.0 -0.006
+  orientation 0.0 0.0 1.0 0.0
+  wirecolor 0.337255 0.87451 0.337255 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 0.0 1.2 
+  bitmap jz_billets
+  verts 4
+    -0.03315 -0.078 0.012
+    0.03315 -0.078 0.012
+    -0.03315 0.078 0.012
+    0.03315 0.078 0.012
+  faces 2
+    0 1 3  4  0 1 3  1
+    3 2 0  4  3 2 0  1
+  tverts 4
+    6.08327e-005 0.706982 0
+    0.000182668 0.543037 0
+    0.324233 0.707025 0
+    0.324231 0.542999 0
+endnode
+node trimesh Droite09
+  parent Group09
+  position 0.0 0.0 -0.006
+  orientation 0.0 0.0 1.0 0.0
+  wirecolor 0.337255 0.87451 0.337255 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 3.315 0.0 0.6 
+  bitmap jz_billets
+  verts 4
+    0.03315 -0.078 0.0
+    0.03315 0.078 0.0
+    0.03315 -0.078 0.012
+    0.03315 0.078 0.012
+  faces 2
+    0 1 3  16  0 1 3  4
+    3 2 0  16  3 2 0  4
+  tverts 4
+    0.000104249 0.543022 0
+    0.324195 0.543058 0
+    5.02821e-006 0.507833 0
+    0.324187 0.507839 0
+endnode
+node trimesh Gauche08
+  parent Group09
+  position 0.0 0.0 -0.006
+  orientation 0.0 0.0 1.0 0.0
+  wirecolor 0.337255 0.87451 0.337255 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center -3.315 0.0 0.6 
+  bitmap jz_billets
+  verts 4
+    -0.03315 -0.078 0.0
+    -0.03315 0.078 0.0
+    -0.03315 -0.078 0.012
+    -0.03315 0.078 0.012
+  faces 2
+    1 0 2  64  1 0 2  3
+    2 3 1  64  2 3 1  3
+  tverts 4
+    8.60455e-007 0.542968 0
+    2.26473e-007 0.507813 0
+    0.324216 0.542963 0
+    0.324221 0.507806 0
+endnode
+node trimesh Devant08
+  parent Group09
+  position 0.0 0.0 -0.006
+  orientation 0.0 0.0 1.0 0.0
+  wirecolor 0.337255 0.87451 0.337255 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 7.8 0.6 
+  bitmap jz_billets
+  verts 4
+    -0.03315 0.078 0.0
+    0.03315 0.078 0.0
+    -0.03315 0.078 0.012
+    0.03315 0.078 0.012
+  faces 2
+    1 0 2  32  0 1 3  6
+    2 3 1  32  3 2 0  6
+  tverts 4
+    4.17517e-005 0.507881 0
+    0.324224 0.507815 0
+    8.29856e-005 0.542996 0
+    0.324276 0.542878 0
+endnode
+node trimesh Dos08
+  parent Group09
+  position 0.0 0.0 -0.006
+  orientation 0.0 0.0 1.0 0.0
+  wirecolor 0.337255 0.87451 0.337255 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 -7.8 0.6 
+  bitmap jz_billets
+  verts 4
+    -0.03315 -0.078 0.0
+    0.03315 -0.078 0.0
+    -0.03315 -0.078 0.012
+    0.03315 -0.078 0.012
+  faces 2
+    0 1 3  8  0 1 3  5
+    3 2 0  8  3 2 0  5
+  tverts 4
+    0.472849 0.718901 0
+    0.585838 0.718792 0
+    0.472893 0.750031 0
+    0.585792 0.749947 0
+endnode
+node dummy Group10
+  parent Jz_billet06k
+  position 0.00540148 0.00181909 0.0774148
+  orientation 0.0 0.0 1.0 -0.103471
+  wirecolor 0.6 0.894118 0.721569 
+endnode
+node trimesh Droite08
+  parent Group10
+  position 0.0 0.0 -0.006
+  orientation 0.0 0.0 1.0 0.0
+  wirecolor 0.337255 0.87451 0.337255 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 3.315 0.0 0.6 
+  bitmap jz_billets
+  verts 4
+    0.03315 -0.078 0.0
+    0.03315 0.078 0.0
+    0.03315 -0.078 0.012
+    0.03315 0.078 0.012
+  faces 2
+    0 1 3  16  0 1 3  4
+    3 2 0  16  3 2 0  4
+  tverts 4
+    0.000104249 0.543022 0
+    0.324195 0.543058 0
+    5.02821e-006 0.507833 0
+    0.324187 0.507839 0
+endnode
+node trimesh Dos09
+  parent Group10
+  position 0.0 0.0 -0.006
+  orientation 0.0 0.0 1.0 0.0
+  wirecolor 0.337255 0.87451 0.337255 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 -7.8 0.6 
+  bitmap jz_billets
+  verts 4
+    -0.03315 -0.078 0.0
+    0.03315 -0.078 0.0
+    -0.03315 -0.078 0.012
+    0.03315 -0.078 0.012
+  faces 2
+    0 1 3  8  0 1 3  5
+    3 2 0  8  3 2 0  5
+  tverts 4
+    0.472849 0.718901 0
+    0.585838 0.718792 0
+    0.472893 0.750031 0
+    0.585792 0.749947 0
+endnode
+node trimesh Devant09
+  parent Group10
+  position 0.0 0.0 -0.006
+  orientation 0.0 0.0 1.0 0.0
+  wirecolor 0.337255 0.87451 0.337255 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 7.8 0.6 
+  bitmap jz_billets
+  verts 4
+    -0.03315 0.078 0.0
+    0.03315 0.078 0.0
+    -0.03315 0.078 0.012
+    0.03315 0.078 0.012
+  faces 2
+    1 0 2  32  0 1 3  6
+    2 3 1  32  3 2 0  6
+  tverts 4
+    4.17517e-005 0.507881 0
+    0.324224 0.507815 0
+    8.29856e-005 0.542996 0
+    0.324276 0.542878 0
+endnode
+node trimesh face10
+  parent Group10
+  position 0.0 0.0 -0.006
+  orientation 0.0 0.0 1.0 0.0
+  wirecolor 0.337255 0.87451 0.337255 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 0.0 1.2 
+  bitmap jz_billets
+  verts 4
+    -0.03315 -0.078 0.012
+    0.03315 -0.078 0.012
+    -0.03315 0.078 0.012
+    0.03315 0.078 0.012
+  faces 2
+    0 1 3  4  0 1 3  1
+    3 2 0  4  3 2 0  1
+  tverts 4
+    6.08327e-005 0.706982 0
+    0.000182668 0.543037 0
+    0.324233 0.707025 0
+    0.324231 0.542999 0
+endnode
+node trimesh Dessous09
+  parent Group10
+  position 0.0 0.0 -0.006
+  orientation 0.0 0.0 1.0 0.0
+  wirecolor 0.337255 0.87451 0.337255 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 0.0 0.0 
+  bitmap jz_billets
+  verts 4
+    -0.03315 -0.078 0.0
+    0.03315 -0.078 0.0
+    -0.03315 0.078 0.0
+    0.03315 0.078 0.0
+  faces 2
+    0 2 3  2  1 3 2  2
+    3 1 0  2  2 0 1  2
+  tverts 4
+    0.587587 0.877129 0
+    0.587867 0.753886 0
+    0.878981 0.877223 0
+    0.878795 0.753979 0
+endnode
+node trimesh Gauche09
+  parent Group10
+  position 0.0 0.0 -0.006
+  orientation 0.0 0.0 1.0 0.0
+  wirecolor 0.337255 0.87451 0.337255 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center -3.315 0.0 0.6 
+  bitmap jz_billets
+  verts 4
+    -0.03315 -0.078 0.0
+    -0.03315 0.078 0.0
+    -0.03315 -0.078 0.012
+    -0.03315 0.078 0.012
+  faces 2
+    1 0 2  64  1 0 2  3
+    2 3 1  64  2 3 1  3
+  tverts 4
+    8.60455e-007 0.542968 0
+    2.26473e-007 0.507813 0
+    0.324216 0.542963 0
+    0.324221 0.507806 0
+endnode
+node dummy Group11
+  parent Jz_billet06k
+  position 0.0381685 -0.00529937 0.0899721
+  orientation 0.0 0.0 1.0 -1.21116
+  wirecolor 0.101961 0.694118 0.101961 
+endnode
+node trimesh Dessous10
+  parent Group11
+  position 0.0 0.0 -0.00599999
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.337255 0.87451 0.337255 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 0.0 0.0 
+  bitmap jz_billets
+  verts 4
+    -0.03315 -0.078 0.0
+    0.03315 -0.078 0.0
+    -0.03315 0.078 0.0
+    0.03315 0.078 0.0
+  faces 2
+    0 2 3  2  1 3 2  2
+    3 1 0  2  2 0 1  2
+  tverts 4
+    0.587587 0.877129 0
+    0.587867 0.753886 0
+    0.878981 0.877223 0
+    0.878795 0.753979 0
+endnode
+node trimesh face11
+  parent Group11
+  position 0.0 0.0 -0.00599999
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.337255 0.87451 0.337255 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 0.0 1.2 
+  bitmap jz_billets
+  verts 4
+    -0.03315 -0.078 0.012
+    0.03315 -0.078 0.012
+    -0.03315 0.078 0.012
+    0.03315 0.078 0.012
+  faces 2
+    0 1 3  4  0 1 3  1
+    3 2 0  4  3 2 0  1
+  tverts 4
+    6.08327e-005 0.706982 0
+    0.000182668 0.543037 0
+    0.324233 0.707025 0
+    0.324231 0.542999 0
+endnode
+node trimesh Droite11
+  parent Group11
+  position 0.0 0.0 -0.00599999
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.337255 0.87451 0.337255 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 3.315 0.0 0.6 
+  bitmap jz_billets
+  verts 4
+    0.03315 -0.078 0.0
+    0.03315 0.078 0.0
+    0.03315 -0.078 0.012
+    0.03315 0.078 0.012
+  faces 2
+    0 1 3  16  0 1 3  4
+    3 2 0  16  3 2 0  4
+  tverts 4
+    0.000104249 0.543022 0
+    0.324195 0.543058 0
+    5.02821e-006 0.507833 0
+    0.324187 0.507839 0
+endnode
+node trimesh Gauche10
+  parent Group11
+  position 0.0 0.0 -0.00599999
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.337255 0.87451 0.337255 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center -3.315 0.0 0.6 
+  bitmap jz_billets
+  verts 4
+    -0.03315 -0.078 0.0
+    -0.03315 0.078 0.0
+    -0.03315 -0.078 0.012
+    -0.03315 0.078 0.012
+  faces 2
+    1 0 2  64  1 0 2  3
+    2 3 1  64  2 3 1  3
+  tverts 4
+    8.60455e-007 0.542968 0
+    2.26473e-007 0.507813 0
+    0.324216 0.542963 0
+    0.324221 0.507806 0
+endnode
+node trimesh Devant10
+  parent Group11
+  position 0.0 0.0 -0.00599999
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.337255 0.87451 0.337255 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 7.8 0.6 
+  bitmap jz_billets
+  verts 4
+    -0.03315 0.078 0.0
+    0.03315 0.078 0.0
+    -0.03315 0.078 0.012
+    0.03315 0.078 0.012
+  faces 2
+    1 0 2  32  0 1 3  6
+    2 3 1  32  3 2 0  6
+  tverts 4
+    4.17517e-005 0.507881 0
+    0.324224 0.507815 0
+    8.29856e-005 0.542996 0
+    0.324276 0.542878 0
+endnode
+node trimesh Dos10
+  parent Group11
+  position 0.0 0.0 -0.00599999
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.337255 0.87451 0.337255 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 -7.8 0.6 
+  bitmap jz_billets
+  verts 4
+    -0.03315 -0.078 0.0
+    0.03315 -0.078 0.0
+    -0.03315 -0.078 0.012
+    0.03315 -0.078 0.012
+  faces 2
+    0 1 3  8  0 1 3  5
+    3 2 0  8  3 2 0  5
+  tverts 4
+    0.472849 0.718901 0
+    0.585838 0.718792 0
+    0.472893 0.750031 0
+    0.585792 0.749947 0
+endnode
+endmodelgeom Jz_billet06k
+donemodel Jz_billet06k

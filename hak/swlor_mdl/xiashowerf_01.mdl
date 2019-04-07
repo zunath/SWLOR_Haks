@@ -1,0 +1,56 @@
+# Exported from NWmax 0.8 b61 at 6/29/2009 1:35:38 PM
+# mdl file
+#
+#NWmax MODEL ASCII
+# model: xiashowerf_01
+#local file: Unknown
+filedependancy Unknown
+newmodel xiashowerf_01
+setsupermodel xiashowerf_01 NULL
+classification Item
+#NWmax GEOM  ASCII
+beginmodelgeom xiashowerf_01
+node dummy xiashowerf_01
+  parent NULL
+endnode
+node trimesh floor
+  parent xiashowerf_01
+  position -0.000182645 0.000758176 0.001
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 0
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 0.0 0.0 
+  bitmap xiashowerfloor
+  verts 4
+    -0.75 -0.75 0.0
+    0.75 -0.75 0.0
+    -0.75 0.75 0.0
+    0.75 0.75 0.0
+  faces 2
+    2 0 3  1  6 4 7  1
+    1 3 0  1  5 7 4  1
+  tverts 8
+    0.0 0.0 0
+    1.0 0.0 0
+    0.0 0.0 0
+    1.0 0.0 0
+    0.0 0.0 0
+    1.0 0.0 0
+    0.0 1.0 0
+    1.0 1.0 0
+endnode
+endmodelgeom xiashowerf_01
+donemodel xiashowerf_01

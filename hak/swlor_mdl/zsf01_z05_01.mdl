@@ -1,0 +1,38 @@
+#MAXMODEL ASCII
+# model: ZSF01_Z05_01
+filedependancy ZSF01_Z05_01.max
+newmodel ZSF01_Z05_01
+setsupermodel ZSF01_Z05_01 NULL
+classification TILE
+setanimationscale 1
+#MAXGEOM  ASCII
+beginmodelgeom ZSF01_Z05_01
+node dummy ZSF01_Z05_01
+  parent NULL
+endnode
+node trimesh Plane35
+  parent ZSF01_Z05_01
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0.05 0.05 0.05
+  shininess 26
+  bitmap ZSF01_Black
+  verts 4
+      -5.0000000    5.0000000    0.0000000
+      -5.0000000   -5.0000000    0.0000000
+       5.0000000    5.0000000    0.0000000
+       5.0000000   -5.0000000    0.0000000
+  tverts 4
+     850.5000000  300.5000000  0
+     850.5000000  250.5000000  0
+     900.5000000  300.5000000  0
+     900.5000000  250.5000000  0
+  faces 2
+    0 1 2  1  0 1 2   1
+    3 2 1  1  3 2 1   1
+  position 0 0 3
+  orientation 0 0 0 0
+endnode
+endmodelgeom ZSF01_Z05_01
+
+donemodel ZSF01_Z05_01

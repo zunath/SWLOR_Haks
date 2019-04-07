@@ -1,0 +1,141 @@
+# Exported from NWmax 0.8 b60 at 01/07/2009 10:57:49
+# mdl file
+#
+#NWmax MODEL ASCII
+# model: wbwsh_b_101
+#local file: Unknown
+filedependancy Unknown
+newmodel wbwsh_b_101
+setsupermodel wbwsh_b_101 NULL
+classification character
+#NWmax GEOM  ASCII
+beginmodelgeom wbwsh_b_101
+node dummy wbwsh_b_101
+  parent NULL
+endnode
+node trimesh Object01
+  parent wbwsh_b_101
+  position -0.00564536 -0.0212013 -0.129087
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.839216 0.894118 0.6 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 0.0 0.0 0.0 
+  Diffuse 0.588 0.588 0.588 
+  Specular 0.0 0.0 0.0 
+  shininess 11
+  center 0.0 0.0 0.0 
+  bitmap gren_barrel
+  verts 9
+    0.0 0.0 0.0
+    0.0838073 0.0 0.0
+    0.0592607 0.0592607 0.0
+    0.0 0.0838073 0.0
+    -0.0592607 0.0592607 0.0
+    -0.0838073 0.0 0.0
+    -0.0592607 -0.0592607 0.0
+    0.0 -0.0838073 0.0
+    0.0592607 -0.0592607 0.0
+  faces 8
+    0 2 1  1  0 0 0  2
+    0 3 2  1  0 0 0  2
+    0 4 3  1  0 0 0  2
+    0 5 4  1  0 0 0  2
+    0 6 5  1  0 0 0  2
+    0 7 6  1  0 0 0  2
+    0 8 7  1  0 0 0  2
+    0 1 8  1  0 0 0  2
+endnode
+node trimesh Cylinder04
+  parent wbwsh_b_101
+  position -0.00564536 -0.0212013 -0.145532
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.839216 0.894118 0.6 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 0.0 0.0 0.0 
+  Diffuse 0.588 0.588 0.588 
+  Specular 0.0 0.0 0.0 
+  shininess 11
+  center 0.0 0.0 2.09518 
+  bitmap gren_barrel
+  verts 17
+    0.0838073 0.0 0.0
+    0.0592607 0.0592607 0.0
+    0.0 0.0838073 0.0
+    -0.0592607 0.0592607 0.0
+    -0.0838073 0.0 0.0
+    -0.0592607 -0.0592607 0.0
+    0.0 -0.0838073 0.0
+    0.0592607 -0.0592607 0.0
+    0.0838073 0.0 0.0419036
+    0.0592607 0.0592607 0.0419036
+    0.0 0.0838073 0.0419036
+    -0.0592607 0.0592607 0.0419036
+    -0.0838073 0.0 0.0419036
+    -0.0592607 -0.0592607 0.0419036
+    0.0 -0.0838073 0.0419036
+    0.0592607 -0.0592607 0.0419036
+    0.0 0.0 0.0419036
+  faces 24
+    0 9 8  8  0 9 8  3
+    0 1 9  8  0 1 9  3
+    1 10 9  8  1 10 9  3
+    1 2 10  8  1 2 10  3
+    2 11 10  8  2 11 10  3
+    2 3 11  8  2 3 11  3
+    3 12 11  8  3 12 11  3
+    3 4 12  8  3 4 12  3
+    4 13 12  8  4 13 12  3
+    4 5 13  8  4 5 13  3
+    5 14 13  8  5 14 13  3
+    5 6 14  8  5 6 14  3
+    6 15 14  8  6 15 14  3
+    6 7 15  8  6 7 15  3
+    7 8 15  8  7 8 15  3
+    7 0 8  8  7 0 8  3
+    16 8 9  1  16 8 9  1
+    16 9 10  1  16 9 10  1
+    16 10 11  1  16 10 11  1
+    16 11 12  1  16 11 12  1
+    16 12 13  1  16 12 13  1
+    16 13 14  1  16 13 14  1
+    16 14 15  1  16 14 15  1
+    16 15 8  1  16 15 8  1
+  tverts 17
+    0.0 0.0 0
+    0.0 0.0 0
+    0.0 0.0 0
+    0.0 0.0 0
+    0.0 0.0 0
+    0.0 0.0 0
+    0.0 0.0 0
+    0.0 0.0 0
+    0.0 0.0 0
+    0.0 0.0 0
+    0.0 0.0 0
+    0.0 0.0 0
+    0.0 0.0 0
+    0.0 0.0 0
+    0.0 0.0 0
+    0.0 0.0 0
+    0.0 0.0 0
+endnode
+endmodelgeom wbwsh_b_101
+donemodel wbwsh_b_101

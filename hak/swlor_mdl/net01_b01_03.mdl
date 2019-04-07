@@ -1,0 +1,256 @@
+# Exported from NWmax 0.8 b60 at 17/06/2009 01:03:45
+# mdl file
+#
+#NWmax MODEL ASCII
+# model: net01_b01_03
+#local file: Unknown
+filedependancy Unknown
+newmodel net01_b01_03
+setsupermodel net01_b01_03 NULL
+classification Tile
+#NWmax GEOM  ASCII
+beginmodelgeom net01_b01_03
+node dummy net01_b01_03
+  parent NULL
+endnode
+node aabb walkmesh
+  parent net01_b01_03
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.0196078 0.0196078 0.0196078 
+  multimaterial 20
+    Dirt
+    Obscuring
+    Grass
+    Stone
+    Wood
+    Water
+    Nonwalk
+    Transparent
+    Carpet
+    Metal
+    Puddles
+    Swamp
+    Mud
+    Leaves
+    Lava
+    BottomlessPit
+    DeepWater
+    Door
+    Snow
+    Sand
+  ambient 0.588 0.588 0.588 
+  diffuse 0.0 0.501961 0.501961 
+  specular 0.0 0.0 0.0 
+  shininess 10.0
+  bitmap Puddles
+  verts 6
+    -5.0 -5.0 4.58
+    5.0 -5.0 4.58
+    -5.0 5.0 0.0
+    5.0 5.0 0.0
+    5.0 -3.0 0.0
+    -5.0 -3.0 0.0
+  faces 4
+    4 3 5  1  0 0 0  11
+    5 3 2  1  0 0 0  11
+    4 5 1  1  0 0 0  2
+    1 5 0  1  0 0 0  2
+    aabb         -5.0 -5.0 0.0 5.0 5.0 4.57993 -1
+        -5.0 -5.0 0.0 5.0 5.0 4.57993 -1
+        -5.0 -5.0 0.0 5.0 -3.0 4.57993 3
+        -5.0 -3.0 0.0 5.0 5.0 0.0 1
+        -5.0 -5.0 0.0 5.0 5.0 4.57993 -1
+        -5.0 -5.0 0.0 5.0 -3.0 4.57993 2
+        -5.0 -3.0 0.0 5.0 5.0 0.0 0
+endnode
+#Tile trimesh node
+node trimesh mesh
+  parent net01_b01_03
+  position -5.0 0.0 0.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.882353 0.882353 0.882353 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 500.0 0.0 229.5 
+  bitmap net_floblu
+  verts 16
+    0.0 -3.02 0.0
+    0.0 -3.02 4.59
+    0.0 -4.19 4.21
+    0.0 -4.92 3.21
+    0.0 -4.92 1.38
+    0.0 -4.19 0.38
+    10.0 -3.02 0.0
+    10.0 -3.02 4.59
+    10.0 -4.19 4.21
+    10.0 -4.92 3.21
+    10.0 -4.92 1.38
+    10.0 -4.19 0.38
+    0.0 -5.0 0.0
+    10.0 -5.0 0.0
+    0.0 5.0 0.0
+    10.0 5.0 0.0
+  faces 12
+    8 1 7  8  17 1 16  65536
+    2 1 8  8  7 1 17  65536
+    9 2 8  8  10 2 9  65536
+    3 2 9  8  3 2 10  65536
+    10 3 9  8  18 3 10  65536
+    4 3 10  8  4 3 18  65536
+    11 4 10  8  19 4 18  65536
+    5 4 11  8  8 4 19  65536
+    6 5 11  8  6 5 11  65536
+    0 5 6  8  0 5 6  65536
+    14 12 15  1  14 20 21  65536
+    13 15 12  1  13 15 12  65536
+  tverts 22
+    0.00178072 0.781633 0
+    0.00178072 0.828005 0
+    0.00178072 -0.00232883 0
+    0.00178072 0.145202 0
+    0.00178072 0.414299 0
+    0.00178072 0.608202 0
+    0.998219 0.781633 0
+    0.00178072 1.00144 0
+    0.00178072 0.561829 0
+    0.998219 -0.00232883 0
+    0.998219 0.1452 0
+    0.998219 0.608202 0
+    0.0 0.0 0
+    1.00095 0.0 0
+    0.0 1.00095 0
+    1.00095 1.00095 0
+    0.998219 0.828005 0
+    0.998219 1.00144 0
+    0.998219 0.414299 0
+    0.998219 0.561829 0
+    0.0 0.0 0
+    1.00095 1.00095 0
+endnode
+#Tile trimesh node
+node trimesh blackedge
+  parent net01_b01_03
+  position -5.0 0.0 0.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.882353 0.882353 0.882353 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 0
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 0.0 0.0 0.0 
+  Diffuse 0.0 0.0 0.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 500.0 -401.0 229.5 
+  bitmap NULL
+  verts 16
+    0.0 -3.02 0.0
+    0.0 -3.02 4.59
+    0.0 -4.19 4.21
+    0.0 -4.92 3.21
+    0.0 -4.92 1.38
+    0.0 -4.19 0.38
+    10.0 -3.02 0.0
+    10.0 -3.02 4.59
+    10.0 -4.19 4.21
+    10.0 -4.92 3.21
+    10.0 -4.92 1.38
+    10.0 -4.19 0.38
+    0.0 -5.0 0.0
+    10.0 -5.0 0.0
+    10.0 -5.0 4.59
+    0.0 -5.0 4.59
+  faces 16
+    6 11 13  0  13 11 14  65536
+    7 14 8  0  1 15 2  65536
+    11 10 13  0  11 9 14  65536
+    8 14 9  0  2 15 5  65536
+    10 9 13  0  9 5 14  65536
+    14 13 9  0  15 14 5  65536
+    14 7 1  0  15 1 3  65536
+    14 1 15  0  15 3 16  65536
+    5 0 12  0  12 0 17  65536
+    15 1 2  0  16 3 4  65536
+    4 5 12  0  10 12 17  65536
+    15 2 3  0  16 4 7  65536
+    3 4 12  0  7 10 17  65536
+    12 15 3  0  17 16 7  65536
+    14 15 13  0  15 16 14  65536
+    13 15 12  0  14 16 17  65536
+  tverts 18
+    0.000500113 0.000499517 0
+    0.999407 0.999501 0
+    0.38199 0.999501 0
+    0.999407 0.000499457 0
+    0.38199 0.000499457 0
+    1.3007 0.999501 0
+    1.55045 0.000499457 0
+    1.3007 0.000499457 0
+    1.3007 0.999501 0
+    0.345646 0.999501 0
+    0.345646 0.000499517 0
+    0.0958956 0.999501 0
+    0.0958957 0.000499517 0
+    0.000500113 0.999501 0
+    0.5 0.5 0
+    0.5 0.5 0
+    0.5 0.5 0
+    0.5 0.5 0
+endnode
+#Tile trimesh node
+node trimesh Ceiling
+  parent net01_b01_03
+  position 0.0 0.0 4.59
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.0196078 0.0196078 0.0196078 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 0
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 0.0 0.0 
+  bitmap net_floblu
+  verts 4
+    -5.0 5.0 0.0
+    5.0 5.0 0.0
+    -5.0 -5.0 0.0
+    5.0 -5.0 0.0
+  faces 2
+    2 0 3  1  2 0 3  65536
+    1 3 0  1  1 3 0  65536
+  tverts 4
+    0.000499487 0.000499696 0
+    0.9995 0.000499457 0
+    0.000499696 0.999501 0
+    0.999501 0.9995 0
+endnode
+endmodelgeom net01_b01_03
+donemodel net01_b01_03

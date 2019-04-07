@@ -1,0 +1,91 @@
+#Exported from 3ds max by MDL Plug-in Suite 1.0b
+#http://www.bricksbuilder.com/nwn/utils/
+#MAXMODEL ASCII
+# model: it_smlmisc_074
+filedependancy Unknown
+newmodel it_smlmisc_074
+setsupermodel it_smlmisc_074 NULL
+classification Character
+setanimationscale 0.0
+#MAXGEOM  ASCII
+beginmodelgeom it_smlmisc_074
+node dummy it_smlmisc_074
+  parent NULL
+endnode
+node dummy impact
+  parent it_smlmisc_074
+  position -0.024499 -0.0477634 -0.0608714
+  orientation 0.015781 0.999847 0.00756697 -1.78945
+  wirecolor 0.835938 0.835938 0.835938
+endnode
+node dummy headconjure
+  parent it_smlmisc_074
+  position -0.0206134 0.0163735 0.0202802
+  orientation 0 0 0 0
+  wirecolor 0.835938 0.835938 0.835938
+endnode
+node dummy handconjure
+  parent it_smlmisc_074
+  position -0.0206134 0 0.0202802
+  orientation 0 0 0 0
+  wirecolor 0.835938 0.835938 0.835938
+endnode
+node dummy rootdummy
+  parent it_smlmisc_074
+  position -0.0206134 0 0.0202802
+  orientation 0 0 0 0
+  wirecolor 0.835938 0.835938 0.835938
+endnode
+node trimesh Marlboropackage
+  parent rootdummy
+  position -0.00551899 0.0820659 -0.0375388
+  orientation -0.999981 0.00436559 0.00436342 -1.57074
+  wirecolor 0.894531 0.894531 0.894531
+  ambient 0.2 0.2 0.2
+  diffuse 0.8 0.8 0.8
+  specular 0 0 0
+  shininess 0
+  bitmap Camel
+  verts 8
+    0.026193 -0.039302 0.129053
+    0.026193 -0.039302 0
+    0.026193 0.039302 0.129053
+    0.026193 0.039302 0
+    -0.012546 0.039302 0.129053
+    -0.012546 0.039302 0
+    -0.012546 -0.039302 0.129053
+    -0.012546 -0.039302 0
+  faces 12
+    0 1 2  1  0 1 2  0
+    1 3 2  1  1 3 2  0
+    4 5 6  1  4 5 6  0
+    5 7 6  1  5 7 6  0
+    6 7 0  1  8 9 10  0
+    7 1 0  1  9 11 10  0
+    2 3 4  1  12 9 13  0
+    3 5 4  1  9 14 13  0
+    1 7 3  1  15 16 2  0
+    7 5 3  1  16 3 2  0
+    6 0 4  1  15 16 2  0
+    0 2 4  1  16 3 2  0
+  tverts 17
+    0.295009 0.007232 0
+    0.295009 0.99281 0
+    0.805916 0.069732 0
+    0.805916 0.965466 0
+    0.291103 0.007232 0
+    0.291103 0.984997 0
+    0.805916 0.073638 0
+    0.809822 0.96156 0
+    0.197353 0.069732 0
+    0.197353 0.96156 0
+    0.294197 0.011138 0
+    0.286384 0.988904 0
+    0.201259 0.069732 0
+    0.290291 0.011138 0
+    0.290291 0.988904 0
+    0.287197 0.069732 0
+    0.287197 0.965466 0
+endnode
+endmodelgeom it_smlmisc_074
+donemodel it_smlmisc_074

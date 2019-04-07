@@ -1,0 +1,470 @@
+#Exported from 3ds max by MDL Plug-in Suite 1.0b
+#http://www.bricksbuilder.com/nwn/utils/
+#MAXMODEL ASCII
+# model: wbwsh_t_133
+filedependancy shotgun_db1.max
+newmodel wbwsh_t_133
+setsupermodel wbwsh_t_133 NULL
+classification Tile
+setanimationscale 1.0
+#MAXGEOM  ASCII
+beginmodelgeom wbwsh_t_133
+node dummy wbwsh_t_133
+  parent NULL
+endnode
+node emitter OmenEmitter01
+  parent wbwsh_t_133
+  position -0.0280736 0.0785929 -0.541458
+  orientation 1 0 0 -3.14159
+  wirecolor 0.550781 0.550781 0.550781
+    colorStart 1 1 1
+    colorEnd 1 0 0
+    alphaStart 1
+    alphaEnd 1
+    sizeStart 0.1
+    sizeEnd 0.07
+    sizeStart_y 0
+    sizeEnd_y 0
+    frameStart 0
+    frameEnd 3
+    birthrate 0
+    spawnType 0
+    lifeExp 3
+    mass 0.3
+    spread 1.0472
+    particleRot 1
+    velocity 1.5
+    randvel 0.5
+    fps 30
+    random 1
+    inherit 0
+    inherit_local 0
+    inherit_part 0
+    inheritvel 0
+    xsize 0
+    ysize 0
+    bounce 1
+    bounce_co 0.2
+    loop 0
+    update Fountain
+    render Normal
+    Blend Lighten
+    update_sel 1
+    render_sel 1
+    blend_sel 3
+    deadspace 0
+    opacity 0.5
+    blurlength 10
+    lightningDelay 0
+    lightningRadius 0
+    lightningScale 0
+    blastRadius 0
+    blastLength 0
+    twosidedtex 0
+    p2p 0
+    p2p_sel 1
+    p2p_type Bezier
+    p2p_bezier2 0
+    p2p_bezier3 0
+    combinetime 0
+    drag 0
+    grav 0
+    threshold 0
+    texture fxpa_StarBnW
+    xgrid 2
+    ygrid 2
+    affectedByWind 1
+    m_isTinted 0
+    renderorder 0
+    Splat 0
+endnode
+node emitter OmenEmitter02
+  parent wbwsh_t_133
+  position 0.0235 0.0785929 -0.541458
+  orientation 1 0 0 -3.14159
+  wirecolor 0.550781 0.550781 0.550781
+    colorStart 1 1 1
+    colorEnd 0.980392 0.462745 0
+    alphaStart 1
+    alphaEnd 1
+    sizeStart 0.1
+    sizeEnd 0.07
+    sizeStart_y 0
+    sizeEnd_y 0
+    frameStart 0
+    frameEnd 3
+    birthrate 0
+    spawnType 0
+    lifeExp 3
+    mass 0.3
+    spread 1.0472
+    particleRot 1
+    velocity 1.5
+    randvel 0.5
+    fps 30
+    random 1
+    inherit 0
+    inherit_local 0
+    inherit_part 0
+    inheritvel 0
+    xsize 0
+    ysize 0
+    bounce 1
+    bounce_co 0.2
+    loop 0
+    update Fountain
+    render Normal
+    Blend Lighten
+    update_sel 1
+    render_sel 1
+    blend_sel 3
+    deadspace 0
+    opacity 0.5
+    blurlength 10
+    lightningDelay 0
+    lightningRadius 0
+    lightningScale 0
+    blastRadius 0
+    blastLength 0
+    twosidedtex 0
+    p2p 0
+    p2p_sel 1
+    p2p_type Bezier
+    p2p_bezier2 0
+    p2p_bezier3 0
+    combinetime 0
+    drag 0
+    grav 0
+    threshold 0
+    texture fxpa_StarBnW
+    xgrid 2
+    ygrid 2
+    affectedByWind 1
+    m_isTinted 0
+    renderorder 0
+    Splat 0
+endnode
+node emitter OmenEmitter03
+  parent wbwsh_t_133
+  position 0.00971378 0.0949564 -0.0244395
+  orientation 1 0 0 -0.558505
+  wirecolor 0.550781 0.550781 0.550781
+    colorStart 1 1 1
+    colorEnd 0.980392 0.462745 0
+    alphaStart 1
+    alphaEnd 1
+    sizeStart 0.1
+    sizeEnd 0.07
+    sizeStart_y 0
+    sizeEnd_y 0
+    frameStart 0
+    frameEnd 3
+    birthrate 0
+    spawnType 0
+    lifeExp 3
+    mass 0.3
+    spread 1.0472
+    particleRot 1
+    velocity 1.5
+    randvel 0.5
+    fps 30
+    random 1
+    inherit 0
+    inherit_local 0
+    inherit_part 0
+    inheritvel 0
+    xsize 0
+    ysize 0
+    bounce 1
+    bounce_co 0.2
+    loop 0
+    update Fountain
+    render Normal
+    Blend Lighten
+    update_sel 1
+    render_sel 1
+    blend_sel 3
+    deadspace 0
+    opacity 0.5
+    blurlength 10
+    lightningDelay 0
+    lightningRadius 0
+    lightningScale 0
+    blastRadius 0
+    blastLength 0
+    twosidedtex 0
+    p2p 0
+    p2p_sel 1
+    p2p_type Bezier
+    p2p_bezier2 0
+    p2p_bezier3 0
+    combinetime 0
+    drag 0
+    grav 0
+    threshold 0
+    texture fxpa_StarBnW
+    xgrid 2
+    ygrid 2
+    affectedByWind 1
+    m_isTinted 0
+    renderorder 0
+    Splat 0
+endnode
+node emitter vCA_self01
+  parent wbwsh_t_133
+  position 0.0232768 0.0806062 -0.569208
+  orientation 1 0 0 -3.14159
+  wirecolor 0.550781 0.550781 0.550781
+    colorStart 0.960784 0.960784 0.960784
+    colorEnd 0.631373 0.631373 0.631373
+    alphaStart 1
+    alphaEnd 0
+    sizeStart 0.2
+    sizeEnd 1
+    sizeStart_y 0
+    sizeEnd_y 0
+    frameStart 0
+    frameEnd 15
+    birthrate 0
+    spawnType 0
+    lifeExp 3
+    mass 0
+    spread 0.523599
+    particleRot 1
+    velocity 1
+    randvel 0.3
+    fps 15
+    random 0
+    inherit 0
+    inherit_local 0
+    inherit_part 0
+    inheritvel 0
+    xsize 0
+    ysize 0
+    bounce 0
+    bounce_co 0
+    loop 0
+    update Fountain
+    render Normal
+    Blend Normal
+    update_sel 1
+    render_sel 1
+    blend_sel 1
+    deadspace 0
+    opacity 0.5
+    blurlength 10
+    lightningDelay 0
+    lightningRadius 0
+    lightningScale 0
+    blastRadius 0
+    blastLength 0
+    twosidedtex 0
+    p2p 0
+    p2p_sel 1
+    p2p_type Bezier
+    p2p_bezier2 0
+    p2p_bezier3 0
+    combinetime 0
+    drag 0
+    grav 0
+    threshold 0
+    texture fxpa_Smoke01
+    xgrid 4
+    ygrid 4
+    affectedByWind 1
+    m_isTinted 0
+    renderorder 0
+    Splat 0
+endnode
+node emitter vCA_self02
+  parent wbwsh_t_133
+  position -0.0282968 0.0806062 -0.569208
+  orientation 1 0 0 -3.14159
+  wirecolor 0.550781 0.550781 0.550781
+    colorStart 1 1 1
+    colorEnd 0.592157 0.592157 0.592157
+    alphaStart 1
+    alphaEnd 0
+    sizeStart 0.2
+    sizeEnd 1
+    sizeStart_y 0
+    sizeEnd_y 0
+    frameStart 0
+    frameEnd 15
+    birthrate 0
+    spawnType 0
+    lifeExp 3
+    mass 0
+    spread 0.523599
+    particleRot 1
+    velocity 1
+    randvel 0.3
+    fps 15
+    random 0
+    inherit 0
+    inherit_local 0
+    inherit_part 0
+    inheritvel 0
+    xsize 0
+    ysize 0
+    bounce 0
+    bounce_co 0
+    loop 0
+    update Fountain
+    render Normal
+    Blend Normal
+    update_sel 1
+    render_sel 1
+    blend_sel 1
+    deadspace 0
+    opacity 0.5
+    blurlength 10
+    lightningDelay 0
+    lightningRadius 0
+    lightningScale 0
+    blastRadius 0
+    blastLength 0
+    twosidedtex 0
+    p2p 0
+    p2p_sel 1
+    p2p_type Bezier
+    p2p_bezier2 0
+    p2p_bezier3 0
+    combinetime 0
+    drag 0
+    grav 0
+    threshold 0
+    texture fxpa_Smoke01
+    xgrid 4
+    ygrid 4
+    affectedByWind 1
+    m_isTinted 0
+    renderorder 0
+    Splat 0
+endnode
+node emitter vCA_self03
+  parent wbwsh_t_133
+  position -0.00800241 0.0824502 -0.038777
+  orientation 1 0 0 -0.549779
+  wirecolor 0.550781 0.550781 0.550781
+    colorStart 1 1 1
+    colorEnd 0.592157 0.592157 0.592157
+    alphaStart 1
+    alphaEnd 0
+    sizeStart 0.2
+    sizeEnd 1
+    sizeStart_y 0
+    sizeEnd_y 0
+    frameStart 0
+    frameEnd 15
+    birthrate 0
+    spawnType 0
+    lifeExp 3
+    mass 0
+    spread 0.523599
+    particleRot 1
+    velocity 1
+    randvel 0.3
+    fps 15
+    random 0
+    inherit 0
+    inherit_local 0
+    inherit_part 0
+    inheritvel 0
+    xsize 0
+    ysize 0
+    bounce 0
+    bounce_co 0
+    loop 0
+    update Fountain
+    render Normal
+    Blend Normal
+    update_sel 1
+    render_sel 1
+    blend_sel 1
+    deadspace 0
+    opacity 0.5
+    blurlength 10
+    lightningDelay 0
+    lightningRadius 0
+    lightningScale 0
+    blastRadius 0
+    blastLength 0
+    twosidedtex 0
+    p2p 0
+    p2p_sel 1
+    p2p_type Bezier
+    p2p_bezier2 0
+    p2p_bezier3 0
+    combinetime 0
+    drag 0
+    grav 0
+    threshold 0
+    texture fxpa_Smoke01
+    xgrid 4
+    ygrid 4
+    affectedByWind 1
+    m_isTinted 0
+    renderorder 0
+    Splat 0
+endnode
+endmodelgeom wbwsh_t_133
+
+#MAXANIM ASCII
+newanim xbowshot wbwsh_t_133
+  length 0.6
+  transtime 0.25
+  animroot wbwsh_t_133
+node dummy wbwsh_t_133
+  parent NULL
+endnode
+node emitter OmenEmitter01
+  parent wbwsh_t_133
+    birthratekey
+      0.2  5
+      0.233333  20
+      0.6  0
+    endlist
+endnode
+node emitter OmenEmitter02
+  parent wbwsh_t_133
+    birthratekey
+      0.2  5
+      0.233333  20
+      0.6  0
+    endlist
+endnode
+node emitter OmenEmitter03
+  parent wbwsh_t_133
+    birthratekey
+      0.2  5
+      0.233333  20
+      0.6  0
+    endlist
+endnode
+node emitter vCA_self01
+  parent wbwsh_t_133
+    birthratekey
+      0.2  5
+      0.266667  40
+      0.6  0
+    endlist
+endnode
+node emitter vCA_self02
+  parent wbwsh_t_133
+    birthratekey
+      0.2  5
+      0.266667  40
+      0.6  0
+    endlist
+endnode
+node emitter vCA_self03
+  parent wbwsh_t_133
+    birthratekey
+      0.2  5
+      0.266667  40
+      0.6  0
+    endlist
+endnode
+doneanim xbowshot wbwsh_t_133
+donemodel wbwsh_t_133

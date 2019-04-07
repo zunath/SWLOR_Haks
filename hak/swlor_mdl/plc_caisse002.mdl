@@ -1,0 +1,282 @@
+# Exported from NWmax 0.8 b60 at 01/06/2006 21:43:06
+# mdl file
+#
+#NWmax MODEL ASCII
+# model: plc_caisse002
+#local file: Unknown
+filedependancy Unknown
+newmodel plc_caisse002
+setsupermodel plc_caisse002 NULL
+classification character
+#NWmax GEOM  ASCII
+beginmodelgeom plc_caisse002
+node dummy plc_caisse002
+  parent NULL
+endnode
+node trimesh Box01
+  parent plc_caisse002
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.882353 0.337255 0.776471 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 0.0 0.0 0.0 
+  diffuse 0.588 0.588 0.588 
+  specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 0.0 100.0 
+  bitmap carremetal02
+  verts 8
+    -1.0 -1.0 0.0
+    1.0 -1.0 0.0
+    -1.0 1.0 0.0
+    1.0 1.0 0.0
+    -1.0 -1.0 2.0
+    1.0 -1.0 2.0
+    -1.0 1.0 2.0
+    1.0 1.0 2.0
+  faces 12
+    0 2 3  2  9 11 10  2
+    3 1 0  2  10 8 9  2
+    4 5 7  4  8 9 11  1
+    7 6 4  4  11 10 8  1
+    0 1 5  8  4 5 7  5
+    5 4 0  8  7 6 4  5
+    1 3 7  16  0 1 3  4
+    7 5 1  16  3 2 0  4
+    3 2 6  32  4 5 7  6
+    6 7 3  32  7 6 4  6
+    2 0 4  64  0 1 3  3
+    4 6 2  64  3 2 0  3
+  tverts 12
+    0.0 0.0 0
+    1.0 0.0 0
+    0.0 1.0 0
+    1.0 1.0 0
+    0.0 0.0 0
+    1.0 0.0 0
+    0.0 1.0 0
+    1.0 1.0 0
+    0.0 0.0 0
+    1.0 0.0 0
+    0.0 1.0 0
+    1.0 1.0 0
+endnode
+endmodelgeom plc_caisse002
+#NWmax ANIM ASCII
+newanim close plc_caisse002
+  length 0.0333333
+  transtime 0.25
+  animroot plc_caisse002
+    node dummy plc_caisse002
+        parent NULL
+        positionkey
+            0.0 0.0 0.0 0.0
+            0.0333333 0.0 0.0 0.0
+        endlist
+        orientationkey
+            0.0 0.0 0.0 0.0 0.0
+            0.0333333 0.0 0.0 0.0 0.0
+        endlist
+    endnode
+    node trimesh Box01
+        parent plc_caisse002
+    endnode
+    node dummy plc_caisse002_pwk
+        parent plc_caisse002
+    endnode
+    node trimesh plc_caisse002_plane
+        parent plc_caisse002_pwk
+    endnode
+doneanim close plc_caisse002
+#NWmax ANIM ASCII
+newanim close2open plc_caisse002
+  length 0.333333
+  transtime 0.25
+  animroot plc_caisse002
+    node dummy plc_caisse002
+        parent NULL
+        positionkey
+            0.0 0.0 0.0 0.0
+            0.333333 0.0 0.0 0.0
+        endlist
+        orientationkey
+            0.0 0.0 0.0 0.0 0.0
+            0.333333 0.0 0.0 0.0 0.0
+        endlist
+    endnode
+    node trimesh Box01
+        parent plc_caisse002
+    endnode
+    node dummy plc_caisse002_pwk
+        parent plc_caisse002
+    endnode
+    node trimesh plc_caisse002_plane
+        parent plc_caisse002_pwk
+    endnode
+doneanim close2open plc_caisse002
+#NWmax ANIM ASCII
+newanim open plc_caisse002
+  length 0.0333333
+  transtime 0.25
+  animroot plc_caisse002
+    node dummy plc_caisse002
+        parent NULL
+        positionkey
+            0.0 0.0 0.0 0.0
+            0.0333333 0.0 0.0 0.0
+        endlist
+        orientationkey
+            0.0 0.0 0.0 0.0 0.0
+            0.0333333 0.0 0.0 0.0 0.0
+        endlist
+    endnode
+    node trimesh Box01
+        parent plc_caisse002
+    endnode
+    node dummy plc_caisse002_pwk
+        parent plc_caisse002
+    endnode
+    node trimesh plc_caisse002_plane
+        parent plc_caisse002_pwk
+    endnode
+doneanim open plc_caisse002
+#NWmax ANIM ASCII
+newanim open2close plc_caisse002
+  length 1.66667
+  transtime 0.25
+  animroot plc_caisse002
+    node dummy plc_caisse002
+        parent NULL
+        positionkey
+            0.0 0.0 0.0 0.0
+            1.66667 0.0 0.0 0.0
+        endlist
+        orientationkey
+            0.0 0.0 0.0 0.0 0.0
+            1.66667 0.0 0.0 0.0 0.0
+        endlist
+    endnode
+    node trimesh Box01
+        parent plc_caisse002
+    endnode
+    node dummy plc_caisse002_pwk
+        parent plc_caisse002
+    endnode
+    node trimesh plc_caisse002_plane
+        parent plc_caisse002_pwk
+    endnode
+doneanim open2close plc_caisse002
+#NWmax ANIM ASCII
+newanim damage plc_caisse002
+  length 0.0666667
+  transtime 0.25
+  animroot plc_caisse002
+    node dummy plc_caisse002
+        parent NULL
+        positionkey
+            0.0 0.0 0.0 0.0
+            0.0666667 0.0 0.0 0.0
+        endlist
+        orientationkey
+            0.0 0.0 0.0 0.0 0.0
+            0.0666667 0.0 0.0 0.0 0.0
+        endlist
+    endnode
+    node trimesh Box01
+        parent plc_caisse002
+    endnode
+    node dummy plc_caisse002_pwk
+        parent plc_caisse002
+    endnode
+    node trimesh plc_caisse002_plane
+        parent plc_caisse002_pwk
+    endnode
+doneanim damage plc_caisse002
+#NWmax ANIM ASCII
+newanim die plc_caisse002
+  length 1.66667
+  transtime 0.25
+  animroot plc_caisse002
+    node dummy plc_caisse002
+        parent NULL
+        positionkey
+            0.0 0.0 0.0 0.0
+            1.66667 0.0 0.0 0.0
+        endlist
+        orientationkey
+            0.0 0.0 0.0 0.0 0.0
+            1.66667 0.0 0.0 0.0 0.0
+        endlist
+    endnode
+    node trimesh Box01
+        parent plc_caisse002
+    endnode
+    node dummy plc_caisse002_pwk
+        parent plc_caisse002
+    endnode
+    node trimesh plc_caisse002_plane
+        parent plc_caisse002_pwk
+    endnode
+doneanim die plc_caisse002
+#NWmax ANIM ASCII
+newanim dead plc_caisse002
+  length 0.0333333
+  transtime 0.25
+  animroot plc_caisse002
+    node dummy plc_caisse002
+        parent NULL
+        positionkey
+            0.0 0.0 0.0 0.0
+            0.0333333 0.0 0.0 0.0
+        endlist
+        orientationkey
+            0.0 0.0 0.0 0.0 0.0
+            0.0333333 0.0 0.0 0.0 0.0
+        endlist
+    endnode
+    node trimesh Box01
+        parent plc_caisse002
+    endnode
+    node dummy plc_caisse002_pwk
+        parent plc_caisse002
+    endnode
+    node trimesh plc_caisse002_plane
+        parent plc_caisse002_pwk
+    endnode
+doneanim dead plc_caisse002
+#NWmax ANIM ASCII
+newanim default plc_caisse002
+  length 1.66667
+  transtime 0.25
+  animroot plc_caisse002
+    node dummy plc_caisse002
+        parent NULL
+        positionkey
+            0.0 0.0 0.0 0.0
+            1.66667 0.0 0.0 0.0
+        endlist
+        orientationkey
+            0.0 0.0 0.0 0.0 0.0
+            1.66667 0.0 0.0 0.0 0.0
+        endlist
+    endnode
+    node trimesh Box01
+        parent plc_caisse002
+    endnode
+    node dummy plc_caisse002_pwk
+        parent plc_caisse002
+    endnode
+    node trimesh plc_caisse002_plane
+        parent plc_caisse002_pwk
+    endnode
+doneanim default plc_caisse002
+donemodel plc_caisse002

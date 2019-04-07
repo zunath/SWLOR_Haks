@@ -1,0 +1,166 @@
+# Rewritten by CleanModels 3 Version 3.5.2d Fri Apr 06 12:05:08 2018
+#MAXMODEL ASCII
+filedependency Unknown
+newmodel vmp01_e11_15
+  classification TILE
+  setsupermodel vmp01_e11_15 NULL
+  setanimationscale 1
+#MAXGEOM ASCII
+beginmodelgeom vmp01_e11_15
+node dummy vmp01_e11_15
+  parent NULL
+endnode
+node light vmp01_e11_15ml1
+  parent vmp01_e11_15
+  position 0 0 23.164
+  nDynamicType 0
+  ambientonly 0
+  shadow 0
+  affectdynamic 1
+  lightpriority 5
+  fadinglight 1
+  flareradius 0
+  orientation 0 0 0 0
+  radius 1400
+  multiplier 1
+  color 0 0 0
+endnode
+node light vmp01_e11_15ml2
+  parent vmp01_e11_15
+  position -2 -2 22.164
+  nDynamicType 0
+  ambientonly 0
+  shadow 0
+  affectdynamic 1
+  lightpriority 5
+  fadinglight 1
+  flareradius 0
+  orientation 0 0 0 0
+  radius 500
+  multiplier 1
+  color 0 0 0
+endnode
+node aabb plane03_15
+  parent vmp01_e11_15
+  position 0 0 0
+  ambient 0.875 0.558594 0.339844
+  diffuse 0.875 0.558594 0.339844
+  specular 0 0 0
+  shininess 1
+  shadow 0
+  transparencyhint 0
+  bitmap NULL
+  orientation 0 0 0 0
+  render 0
+  verts 6
+    -5 5 -6
+    -3.594 -5 -6
+    5 5 -6
+    5 -5 -6
+    -5 -3.133 -6
+    -5 -5 -1.563
+  faces 4
+    0 1 2 1 0 0 0 16
+    3 2 1 1 0 0 0 16
+    4 1 0 1 0 0 0 16
+    5 1 4 2 0 0 0 7
+  aabb     -5 -5 -6 5 5 -1.563 -1
+    -5 -5 -6 -3.594 5 -1.563 -1
+    -5 -5 -6 -3.594 -3.133 -1.563 3
+    -5 -5 -6 -3.594 5 -6 2
+    -5 -5 -6 5 5 -6 -1
+    -5 -5 -6 5 5 -6 0
+    -3.594 -5 -6 5 5 -6 1
+endnode
+node trimesh plane01_15
+  parent vmp01_e11_15
+  wirecolor 1 0 0
+  position 0 0 -6
+  ambient 0 0 0
+  diffuse 0 0 0
+  specular 0 0 0
+  shininess 10
+  bitmap vmp01_black
+  orientation 0 0 0 0
+  verts 4
+    -5 -5 0
+    5 -5 0
+    -5 5 0
+    5 5 0
+  faces 2
+    0 1 2 1 0 1 2 1
+    3 2 1 1 3 2 1 1
+  tverts 4
+    0.5999 0.5 0
+    0.5999 0.25025 0
+    0.7997 0.5 0
+    0.7997 0.25025 0
+endnode
+node trimesh cone04_15
+  parent vmp01_e11_15
+  position -3.07069 -4.21193 15.04
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 10
+  bitmap vmp01_cliff02
+  orientation 0 0 0 0
+  verts 17
+    -1.58531 0.0319259 -1.01704
+    -1.92931 -0.0610741 -0.938037
+    -1.92931 0.703926 -0.040037
+    -1.67131 0.820926 -0.040037
+    -1.92931 -0.788074 -1.93104
+    -1.72631 -0.788074 -2.04004
+    2.78169 1.28193 -0.040037
+    2.00069 -0.788074 -1.96204
+    -1.18731 -0.788074 -1.81304
+    6.07869 -0.788074 -0.040037
+    2.42969 -0.788074 -1.68104
+    -1.92931 0.563926 0.350963
+    -1.92931 -0.788074 3.00696
+    1.11769 -0.788074 2.96796
+    -1.42931 -0.788074 3.24896
+    1.89069 -0.788074 2.45196
+    2.78169 -0.788074 2.56196
+  faces 18
+    0 1 2 1 0 1 2 2
+    2 3 0 1 2 3 0 2
+    4 0 5 1 4 0 5 3
+    0 6 7 1 0 6 7 3
+    7 8 0 1 7 8 0 3
+    6 9 10 1 6 9 10 3
+    6 0 3 1 6 0 3 2
+    3 2 11 1 3 2 11 2
+    12 3 11 1 12 3 11 2
+    13 3 14 1 13 3 14 2
+    15 3 13 1 15 3 13 2
+    15 16 6 1 15 16 6 2
+    6 3 15 1 6 3 15 2
+    5 0 8 1 5 0 8 3
+    7 6 10 1 17 6 10 3
+    9 6 16 1 9 6 16 2
+    14 3 12 1 14 3 12 2
+    1 0 4 1 1 0 4 3
+  tverts 18
+    0.61911 0.79094 0
+    0.58807 0.77703 0
+    0.57985 0.60952 0
+    0.60321 0.60952 0
+    0.59801 0.9591 0
+    0.61682 0.98036 0
+    0.927 0.60952 0
+    0.94415 0.9646 0
+    0.68363 0.93734 0
+    1.21158 0.60952 0
+    0.987477 0.91238 0
+    0.57966 0.53786 0
+    0.59554 0.04791 0
+    0.87196 0.05568 0
+    0.64744 0.00277 0
+    0.931705 0.15164 0
+    1.00013 0.13041 0
+    0.944156 0.9646 0
+endnode
+endmodelgeom vmp01_e11_15
+donemodel vmp01_e11_15

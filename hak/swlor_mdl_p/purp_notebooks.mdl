@@ -1,0 +1,64 @@
+# Exported from NWmax 0.8 b61 at 23/03/2010 21:03:09
+# mdl file
+#
+#NWmax MODEL ASCII
+# model: purp_notebooks
+#local file: Unknown
+filedependancy Unknown
+newmodel purp_notebooks
+setsupermodel purp_notebooks NULL
+classification Character
+setanimationscale 1.0
+#NWmax GEOM  ASCII
+beginmodelgeom purp_notebooks
+node dummy purp_notebooks
+  parent NULL
+endnode
+endmodelgeom purp_notebooks
+
+#NWmax ANIM ASCII
+newanim damage purp_notebooks
+  length 0.133333
+  transtime 0.0
+  animroot purp_notebooks
+    node dummy purp_notebooks
+        parent NULL
+    endnode
+doneanim damage purp_notebooks
+
+
+#NWmax ANIM ASCII
+newanim die purp_notebooks
+  length 0.166667
+  transtime 0.0
+  animroot purp_notebooks
+  event 0.0333333 detonate
+  event 0.0333333 detonate
+    node dummy purp_notebooks
+        parent NULL
+    endnode
+doneanim die purp_notebooks
+
+
+#NWmax ANIM ASCII
+newanim dead purp_notebooks
+  length 0.0333333
+  transtime 0.0
+  animroot purp_notebooks
+    node dummy purp_notebooks
+        parent NULL
+    endnode
+doneanim dead purp_notebooks
+
+
+#NWmax ANIM ASCII
+newanim default purp_notebooks
+  length 0.0
+  transtime 0.25
+  animroot purp_notebooks
+    node dummy purp_notebooks
+        parent NULL
+    endnode
+doneanim default purp_notebooks
+
+donemodel purp_notebooks

@@ -1,0 +1,1076 @@
+# Rewritten by CleanModels 3 Version 3.1.1 Sat Oct 25 22:26:52 2008
+#MAXMODEL ASCII
+filedependency Unknown
+newmodel wsf10_l02_04
+setsupermodel wsf10_l02_04 null
+setanimationscale 1
+classification TILE
+#MAXGEOM ASCII
+beginmodelgeom wsf10_l02_04
+node dummy wsf10_l02_04
+  parent NULL
+endnode
+node trimesh plane17
+  parent wsf10_l02_04
+  position 3.75 3.76 -0.51
+  orientation 0 0 0 0
+  wirecolor 0.0351563 0.0351563 0.0351563
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 1
+  bitmap t_portal01
+  shadow 0
+  verts 8
+    -1.25 -1.26 0.01
+    1.25 -1.26 0.01
+    1.05 -1.06 0.01
+    -1.05 -1.06 0.01
+    -1.25 1.24 0.01
+    -1.05 1.04 0.01
+    1.25 1.24 0.01
+    1.05 1.04 0.01
+  faces 8
+    0 1 2 1 0 1 2 0
+    2 3 0 1 2 3 0 0
+    4 0 3 1 0 1 2 0
+    3 5 4 1 2 3 0 0
+    6 4 5 1 0 1 4 0
+    5 7 6 1 4 3 0 0
+    1 6 7 1 1 0 3 0
+    7 2 1 1 3 4 1 0
+  tverts 5
+    0 1.43453 0
+    0 0.935032 0
+    0.125 0.974992 0
+    0.125 1.39457 0
+    0.125 0.974993 0
+endnode
+node trimesh plane15
+  parent wsf10_l02_04
+  position 3.75 1.25 -0.51
+  orientation 0 0 0 0
+  wirecolor 0.695313 0.695313 0.695313
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 1
+  bitmap t_portal01
+  shadow 0
+  verts 8
+    -1.25 -1.25 0.01
+    1.25 -1.25 0.01
+    1.05 -1.05 0.01
+    -1.05 -1.05 0.01
+    -1.25 1.25 0.01
+    -1.05 1.05 0.01
+    1.25 1.25 0.01
+    1.05 1.05 0.01
+  faces 8
+    0 1 2 1 0 1 2 0
+    2 3 0 1 2 3 0 0
+    4 0 3 1 0 1 2 0
+    3 5 4 1 2 3 0 0
+    6 4 5 1 0 1 4 0
+    5 7 6 1 4 3 0 0
+    1 6 7 1 1 0 3 0
+    7 2 1 1 3 4 1 0
+  tverts 5
+    0 1.43453 0
+    0 0.935032 0
+    0.125 0.974992 0
+    0.125 1.39457 0
+    0.125 0.974993 0
+endnode
+node trimesh plane13
+  parent wsf10_l02_04
+  position 1.25 3.76 -0.51
+  orientation 0 0 0 0
+  wirecolor 0.550781 0.550781 0.550781
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 1
+  bitmap t_portal01
+  shadow 0
+  verts 8
+    -1.25 -1.26 0.01
+    1.25 -1.26 0.01
+    1.05 -1.06 0.01
+    -1.05 -1.06 0.01
+    -1.25 1.24 0.01
+    -1.05 1.04 0.01
+    1.25 1.24 0.01
+    1.05 1.04 0.01
+  faces 8
+    0 1 2 1 0 1 2 0
+    2 3 0 1 2 3 0 0
+    4 0 3 1 0 1 2 0
+    3 5 4 1 2 3 0 0
+    6 4 5 1 0 1 4 0
+    5 7 6 1 4 3 0 0
+    1 6 7 1 1 0 3 0
+    7 2 1 1 3 4 1 0
+  tverts 5
+    0 1.43453 0
+    0 0.935032 0
+    0.125 0.974992 0
+    0.125 1.39457 0
+    0.125 0.974993 0
+endnode
+node trimesh plane11
+  parent wsf10_l02_04
+  position 1.25 1.25 -0.51
+  orientation 0 0 0 0
+  wirecolor 0.425781 0.425781 0.425781
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 1
+  bitmap t_portal01
+  shadow 0
+  verts 8
+    -1.25 -1.25 0.01
+    1.25 -1.25 0.01
+    1.05 -1.05 0.01
+    -1.05 -1.05 0.01
+    -1.25 1.25 0.01
+    -1.05 1.05 0.01
+    1.25 1.25 0.01
+    1.05 1.05 0.01
+  faces 8
+    0 1 2 1 0 1 2 0
+    2 3 0 1 2 3 0 0
+    4 0 3 1 0 1 2 0
+    3 5 4 1 2 3 0 0
+    6 4 5 1 0 1 4 0
+    5 7 6 1 4 3 0 0
+    1 6 7 1 1 0 3 0
+    7 2 1 1 3 4 1 0
+  tverts 5
+    0 1.43453 0
+    0 0.935032 0
+    0.125 0.974992 0
+    0.125 1.39457 0
+    0.125 0.974993 0
+endnode
+node trimesh mesh13
+  parent wsf10_l02_04
+  position 3.75 -3.75 -0.51
+  orientation 0 0 0 0
+  wirecolor 0.105469 0.105469 0.105469
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 1
+  bitmap t_chess01
+  shadow 0
+  verts 4
+    -1.05 1.05 0.01
+    -1.05 -1.05 0.01
+    1.05 -1.05 0.01
+    1.05 1.05 0.01
+  faces 2
+    0 1 2 1 0 1 2 0
+    2 3 0 1 3 4 5 0
+  tverts 6
+    0.000499785 0.999501 0
+    0.000499547 0.000499934 0
+    0.9995 0.000499696 0
+    0.975818 0.000499696 0
+    0.000881851 0.00433117 0
+    0.000499785 0.980177 0
+endnode
+node trimesh plane16
+  parent wsf10_l02_04
+  position 3.75 -3.75 -0.51
+  orientation 0 0 0 0
+  wirecolor 0.105469 0.105469 0.105469
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 1
+  bitmap t_portal01
+  shadow 0
+  verts 8
+    -1.25 -1.25 0.01
+    1.25 -1.25 0.01
+    1.05 -1.05 0.01
+    -1.05 -1.05 0.01
+    -1.25 1.25 0.01
+    -1.05 1.05 0.01
+    1.25 1.25 0.01
+    1.05 1.05 0.01
+  faces 8
+    0 1 2 1 0 1 2 0
+    2 3 0 1 2 3 0 0
+    4 0 3 1 0 1 2 0
+    3 5 4 1 2 3 0 0
+    6 4 5 1 0 1 4 0
+    5 7 6 1 4 3 0 0
+    1 6 7 1 1 0 3 0
+    7 2 1 1 3 4 1 0
+  tverts 5
+    0 1.43453 0
+    0 0.935032 0
+    0.125 0.974992 0
+    0.125 1.39457 0
+    0.125 0.974993 0
+endnode
+node trimesh plane12
+  parent wsf10_l02_04
+  position 1.25 -3.75 -0.51
+  orientation 0 0 0 0
+  wirecolor 0.839844 0.839844 0.839844
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 1
+  bitmap t_portal01
+  shadow 0
+  verts 8
+    -1.25 -1.25 0.01
+    1.25 -1.25 0.01
+    1.05 -1.05 0.01
+    -1.05 -1.05 0.01
+    -1.25 1.25 0.01
+    -1.05 1.05 0.01
+    1.25 1.25 0.01
+    1.05 1.05 0.01
+  faces 8
+    0 1 2 1 0 1 2 0
+    2 3 0 1 2 3 0 0
+    4 0 3 1 0 1 2 0
+    3 5 4 1 2 3 0 0
+    6 4 5 1 0 1 4 0
+    5 7 6 1 4 3 0 0
+    1 6 7 1 1 0 3 0
+    7 2 1 1 3 4 1 0
+  tverts 5
+    0 1.43453 0
+    0 0.935032 0
+    0.125 0.974992 0
+    0.125 1.39457 0
+    0.125 0.974993 0
+endnode
+node trimesh plane10
+  parent wsf10_l02_04
+  position 1.25 -1.25 -0.51
+  orientation 0 0 0 0
+  wirecolor 0.890625 0.890625 0.890625
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 1
+  bitmap t_portal01
+  shadow 0
+  verts 8
+    -1.25 -1.25 0.01
+    1.25 -1.25 0.01
+    1.05 -1.05 0.01
+    -1.05 -1.05 0.01
+    -1.25 1.25 0.01
+    -1.05 1.05 0.01
+    1.25 1.25 0.01
+    1.05 1.05 0.01
+  faces 8
+    0 1 2 1 0 1 2 0
+    2 3 0 1 2 3 0 0
+    4 0 3 1 0 1 2 0
+    3 5 4 1 2 3 0 0
+    6 4 5 1 0 1 4 0
+    5 7 6 1 4 3 0 0
+    1 6 7 1 1 0 3 0
+    7 2 1 1 3 4 1 0
+  tverts 5
+    0 1.43453 0
+    0 0.935032 0
+    0.125 0.974992 0
+    0.125 1.39457 0
+    0.125 0.974993 0
+endnode
+node trimesh plane14
+  parent wsf10_l02_04
+  position 3.75 -1.25 -0.51
+  orientation 0 0 0 0
+  wirecolor 0.605469 0.605469 0.605469
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 1
+  bitmap t_portal01
+  shadow 0
+  verts 8
+    -1.25 -1.25 0.01
+    1.25 -1.25 0.01
+    1.05 -1.05 0.01
+    -1.05 -1.05 0.01
+    -1.25 1.25 0.01
+    -1.05 1.05 0.01
+    1.25 1.25 0.01
+    1.05 1.05 0.01
+  faces 8
+    0 1 2 1 0 1 2 0
+    2 3 0 1 2 3 0 0
+    4 0 3 1 0 1 2 0
+    3 5 4 1 2 3 0 0
+    6 4 5 1 0 1 4 0
+    5 7 6 1 4 3 0 0
+    1 6 7 1 1 0 3 0
+    7 2 1 1 3 4 1 0
+  tverts 5
+    0 1.43453 0
+    0 0.935032 0
+    0.125 0.974992 0
+    0.125 1.39457 0
+    0.125 0.974993 0
+endnode
+node trimesh plane03
+  parent wsf10_l02_04
+  position -3.75 -1.25 -0.51
+  orientation 0 0 0 0
+  wirecolor 0.527344 0.527344 0.527344
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 1
+  bitmap t_portal01
+  shadow 0
+  verts 8
+    -1.25 -1.25 0.01
+    1.25 -1.25 0.01
+    1.05 -1.05 0.01
+    -1.05 -1.05 0.01
+    -1.25 1.25 0.01
+    -1.05 1.05 0.01
+    1.25 1.25 0.01
+    1.05 1.05 0.01
+  faces 8
+    0 1 2 1 0 1 2 0
+    2 3 0 1 2 3 0 0
+    4 0 3 1 0 1 2 0
+    3 5 4 1 2 3 0 0
+    6 4 5 1 0 1 4 0
+    5 7 6 1 4 3 0 0
+    1 6 7 1 1 0 3 0
+    7 2 1 1 3 4 1 0
+  tverts 5
+    0 1.43453 0
+    0 0.935032 0
+    0.125 0.974992 0
+    0.125 1.39457 0
+    0.125 0.974993 0
+endnode
+node trimesh plane06
+  parent wsf10_l02_04
+  position -1.25 -1.25 -0.51
+  orientation 0 0 0 0
+  wirecolor 0.878906 0.878906 0.878906
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 1
+  bitmap t_portal01
+  shadow 0
+  verts 8
+    -1.25 -1.25 0.01
+    1.25 -1.25 0.01
+    1.05 -1.05 0.01
+    -1.05 -1.05 0.01
+    -1.25 1.25 0.01
+    -1.05 1.05 0.01
+    1.25 1.25 0.01
+    1.05 1.05 0.01
+  faces 8
+    0 1 2 1 0 1 2 0
+    2 3 0 1 2 3 0 0
+    4 0 3 1 0 1 2 0
+    3 5 4 1 2 3 0 0
+    6 4 5 1 0 1 4 0
+    5 7 6 1 4 3 0 0
+    1 6 7 1 1 0 3 0
+    7 2 1 1 3 4 1 0
+  tverts 5
+    0 1.43453 0
+    0 0.935032 0
+    0.125 0.974992 0
+    0.125 1.39457 0
+    0.125 0.974993 0
+endnode
+node trimesh plane08
+  parent wsf10_l02_04
+  position -1.25 -3.75 -0.51
+  orientation 0 0 0 0
+  wirecolor 0.550781 0.550781 0.550781
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 1
+  bitmap t_portal01
+  shadow 0
+  verts 8
+    -1.25 -1.25 0.01
+    1.25 -1.25 0.01
+    1.05 -1.05 0.01
+    -1.05 -1.05 0.01
+    -1.25 1.25 0.01
+    -1.05 1.05 0.01
+    1.25 1.25 0.01
+    1.05 1.05 0.01
+  faces 8
+    0 1 2 1 0 1 2 0
+    2 3 0 1 2 3 0 0
+    4 0 3 1 0 1 2 0
+    3 5 4 1 2 3 0 0
+    6 4 5 1 0 1 4 0
+    5 7 6 1 4 3 0 0
+    1 6 7 1 1 0 3 0
+    7 2 1 1 3 4 1 0
+  tverts 5
+    0 1.43453 0
+    0 0.935032 0
+    0.125 0.974992 0
+    0.125 1.39457 0
+    0.125 0.974993 0
+endnode
+node trimesh plane01
+  parent wsf10_l02_04
+  position -3.75 -3.75 -0.51
+  orientation 0 0 0 0
+  wirecolor 0.722656 0.722656 0.722656
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 1
+  bitmap t_portal01
+  shadow 0
+  verts 8
+    -1.25 -1.25 0.01
+    1.25 -1.25 0.01
+    1.05 -1.05 0.01
+    -1.05 -1.05 0.01
+    -1.25 1.25 0.01
+    -1.05 1.05 0.01
+    1.25 1.25 0.01
+    1.05 1.05 0.01
+  faces 8
+    0 1 2 1 0 1 2 0
+    2 3 0 1 2 3 0 0
+    4 0 3 1 0 1 2 0
+    3 5 4 1 2 3 0 0
+    6 4 5 1 0 1 4 0
+    5 7 6 1 4 3 0 0
+    1 6 7 1 1 0 3 0
+    7 2 1 1 3 4 1 0
+  tverts 5
+    0 1.43453 0
+    0 0.935032 0
+    0.125 0.974992 0
+    0.125 1.39457 0
+    0.125 0.974993 0
+endnode
+node trimesh plane04
+  parent wsf10_l02_04
+  position -3.75 1.25 -0.51
+  orientation 0 0 0 0
+  wirecolor 0.425781 0.425781 0.425781
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 1
+  bitmap t_portal01
+  shadow 0
+  verts 8
+    -1.25 -1.25 0.01
+    1.25 -1.25 0.01
+    1.05 -1.05 0.01
+    -1.05 -1.05 0.01
+    -1.25 1.25 0.01
+    -1.05 1.05 0.01
+    1.25 1.25 0.01
+    1.05 1.05 0.01
+  faces 8
+    0 1 2 1 0 1 2 0
+    2 3 0 1 2 3 0 0
+    4 0 3 1 0 1 2 0
+    3 5 4 1 2 3 0 0
+    6 4 5 1 0 1 4 0
+    5 7 6 1 4 3 0 0
+    1 6 7 1 1 0 3 0
+    7 2 1 1 3 4 1 0
+  tverts 5
+    0 1.43453 0
+    0 0.935032 0
+    0.125 0.974992 0
+    0.125 1.39457 0
+    0.125 0.974993 0
+endnode
+node trimesh plane05
+  parent wsf10_l02_04
+  position -3.75 3.76 -0.51
+  orientation 0 0 0 0
+  wirecolor 0.0273438 0.0273438 0.0273438
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 1
+  bitmap t_portal01
+  shadow 0
+  verts 8
+    -1.25 -1.26 0.01
+    1.25 -1.26 0.01
+    1.05 -1.06 0.01
+    -1.05 -1.06 0.01
+    -1.25 1.24 0.01
+    -1.05 1.04 0.01
+    1.25 1.24 0.01
+    1.05 1.04 0.01
+  faces 8
+    0 1 2 1 0 1 2 0
+    2 3 0 1 2 3 0 0
+    4 0 3 1 0 1 2 0
+    3 5 4 1 2 3 0 0
+    6 4 5 1 0 1 4 0
+    5 7 6 1 4 3 0 0
+    1 6 7 1 1 0 3 0
+    7 2 1 1 3 4 1 0
+  tverts 5
+    0 1.43453 0
+    0 0.935032 0
+    0.125 0.974992 0
+    0.125 1.39457 0
+    0.125 0.974993 0
+endnode
+node trimesh plane07
+  parent wsf10_l02_04
+  position -1.25 1.25 -0.51
+  orientation 0 0 0 0
+  wirecolor 0.34375 0.34375 0.34375
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 1
+  bitmap t_portal01
+  shadow 0
+  verts 8
+    -1.25 -1.25 0.01
+    1.25 -1.25 0.01
+    1.05 -1.05 0.01
+    -1.05 -1.05 0.01
+    -1.25 1.25 0.01
+    -1.05 1.05 0.01
+    1.25 1.25 0.01
+    1.05 1.05 0.01
+  faces 8
+    0 1 2 1 0 1 2 0
+    2 3 0 1 2 3 0 0
+    4 0 3 1 0 1 2 0
+    3 5 4 1 2 3 0 0
+    6 4 5 1 0 1 4 0
+    5 7 6 1 4 3 0 0
+    1 6 7 1 1 0 3 0
+    7 2 1 1 3 4 1 0
+  tverts 5
+    0 1.43453 0
+    0 0.935032 0
+    0.125 0.974992 0
+    0.125 1.39457 0
+    0.125 0.974993 0
+endnode
+node trimesh plane09
+  parent wsf10_l02_04
+  position -1.25 3.76 -0.51
+  orientation 0 0 0 0
+  wirecolor 0.898438 0.898438 0.898438
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 1
+  bitmap t_portal01
+  shadow 0
+  verts 8
+    -1.25 -1.26 0.01
+    1.25 -1.26 0.01
+    1.05 -1.06 0.01
+    -1.05 -1.06 0.01
+    -1.25 1.24 0.01
+    -1.05 1.04 0.01
+    1.25 1.24 0.01
+    1.05 1.04 0.01
+  faces 8
+    0 1 2 1 0 1 2 0
+    2 3 0 1 2 3 0 0
+    4 0 3 1 0 1 2 0
+    3 5 4 1 2 3 0 0
+    6 4 5 1 0 1 4 0
+    5 7 6 1 4 3 0 0
+    1 6 7 1 1 0 3 0
+    7 2 1 1 3 4 1 0
+  tverts 5
+    0 1.43453 0
+    0 0.935032 0
+    0.125 0.974992 0
+    0.125 1.39457 0
+    0.125 0.974993 0
+endnode
+node light wsf10_l02_04ml1
+  parent wsf10_l02_04
+  position 0 0 4.5
+  orientation 0 0 0 0
+  wirecolor 0.898438 0.898438 0.898438
+  radius 14
+  multiplier 1
+  color 0 0 0
+  ambientonly 0
+  ndynamictype 0
+  affectdynamic 1
+  shadow 0
+  lightpriority 5
+  lensflares 0
+  fadinglight 1
+endnode
+node aabb plane18
+  parent wsf10_l02_04
+  orientation 0 0 0 0
+  wirecolor 0.34375 0.34375 0.34375
+  ambient 0.2 0.2 0.2
+  diffuse 0.8 0.8 0.8
+  specular 0 0 0
+  shininess 1
+  bitmap NULL
+  position 0 0 0
+  verts 4
+    -5 5 -0.5
+    -5 -5 -0.5
+    5 5 -0.5
+    5 -5 -0.5
+  faces 2
+    0 1 2 1 0 0 0 4
+    3 2 1 1 0 0 0 4
+  aabb     -5 -5 -0.5 5 5 -0.5 -1
+    -5 -5 -0.5 5 5 -0.5 0
+    -5 -5 -0.5 5 5 -0.5 1
+endnode
+node trimesh mesh17
+  parent wsf10_l02_04
+  position 1.25 -3.75 -0.51
+  orientation 0 0 0 0
+  wirecolor 0.0351563 0.0351563 0.0351563
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 1
+  bitmap t_chess01
+  shadow 0
+  verts 4
+    -1.05 1.05 0.01
+    -1.05 -1.05 0.01
+    1.05 -1.05 0.01
+    1.05 1.05 0.01
+  faces 2
+    0 1 2 1 0 1 2 0
+    2 3 0 1 3 4 5 0
+  tverts 6
+    0.999772 0.0535329 0
+    0.999772 1.00088 0
+    0.042442 1.00088 0
+    0.00927115 1.004 0
+    0.996896 1.00017 0
+    0.997278 0.0158479 0
+endnode
+node trimesh mesh18
+  parent wsf10_l02_04
+  position -3.75 -3.75 -0.51
+  orientation 0 0 0 0
+  wirecolor 0.695313 0.695313 0.695313
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 1
+  bitmap t_chess01
+  shadow 0
+  verts 4
+    -1.05 1.05 0.01
+    -1.05 -1.05 0.01
+    1.05 -1.05 0.01
+    1.05 1.05 0.01
+  faces 2
+    0 1 2 1 0 1 2 0
+    2 3 0 1 3 4 5 0
+  tverts 6
+    0.999772 0.0535329 0
+    0.999772 1.00088 0
+    0.042442 1.00088 0
+    0.00927115 1.004 0
+    0.996896 1.00017 0
+    0.997278 0.0158479 0
+endnode
+node trimesh mesh19
+  parent wsf10_l02_04
+  position -1.25 -3.75 -0.51
+  orientation 0 0 0 0
+  wirecolor 0.113281 0.113281 0.113281
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 1
+  bitmap t_chess01
+  shadow 0
+  verts 4
+    -1.05 1.05 0.01
+    -1.05 -1.05 0.01
+    1.05 -1.05 0.01
+    1.05 1.05 0.01
+  faces 2
+    0 1 2 1 0 1 2 0
+    2 3 0 1 3 4 5 0
+  tverts 6
+    0.000499785 0.999501 0
+    0.000499547 0.000499934 0
+    0.9995 0.000499696 0
+    0.975818 0.000499696 0
+    0.000881851 0.00433117 0
+    0.000499785 0.980177 0
+endnode
+node trimesh mesh24
+  parent wsf10_l02_04
+  position 1.25 -1.25 -0.51
+  orientation 0 0 0 0
+  wirecolor 0.777344 0.777344 0.777344
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 1
+  bitmap t_chess01
+  shadow 0
+  verts 4
+    -1.05 1.05 0.01
+    -1.05 -1.05 0.01
+    1.05 -1.05 0.01
+    1.05 1.05 0.01
+  faces 2
+    0 1 2 1 0 1 2 0
+    2 3 0 1 3 4 5 0
+  tverts 6
+    0.000499785 0.999501 0
+    0.000499547 0.000499934 0
+    0.9995 0.000499696 0
+    0.975818 0.000499696 0
+    0.000881851 0.00433117 0
+    0.000499785 0.980177 0
+endnode
+node trimesh mesh25
+  parent wsf10_l02_04
+  position -3.75 -1.25 -0.51
+  orientation 0 0 0 0
+  wirecolor 0.835938 0.835938 0.835938
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 1
+  bitmap t_chess01
+  shadow 0
+  verts 4
+    -1.05 1.05 0.01
+    -1.05 -1.05 0.01
+    1.05 -1.05 0.01
+    1.05 1.05 0.01
+  faces 2
+    0 1 2 1 0 1 2 0
+    2 3 0 1 3 4 5 0
+  tverts 6
+    0.000499785 0.999501 0
+    0.000499547 0.000499934 0
+    0.9995 0.000499696 0
+    0.975818 0.000499696 0
+    0.000881851 0.00433117 0
+    0.000499785 0.980177 0
+endnode
+node trimesh mesh26
+  parent wsf10_l02_04
+  position -1.25 -1.25 -0.51
+  orientation 0 0 0 0
+  wirecolor 0.242188 0.242188 0.242188
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 1
+  bitmap t_chess01
+  shadow 0
+  verts 4
+    -1.05 1.05 0.01
+    -1.05 -1.05 0.01
+    1.05 -1.05 0.01
+    1.05 1.05 0.01
+  faces 2
+    0 1 2 1 0 1 2 0
+    2 3 0 1 3 4 5 0
+  tverts 6
+    0.999772 0.0535329 0
+    0.999772 1.00088 0
+    0.042442 1.00088 0
+    0.00927115 1.004 0
+    0.996896 1.00017 0
+    0.997278 0.0158479 0
+endnode
+node trimesh mesh27
+  parent wsf10_l02_04
+  position 3.75 -1.25 -0.51
+  orientation 0 0 0 0
+  wirecolor 0.105469 0.105469 0.105469
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 1
+  bitmap t_chess01
+  shadow 0
+  verts 4
+    -1.05 1.05 0.01
+    -1.05 -1.05 0.01
+    1.05 -1.05 0.01
+    1.05 1.05 0.01
+  faces 2
+    0 1 2 1 0 1 2 0
+    2 3 0 1 3 4 5 0
+  tverts 6
+    0.999772 0.0535329 0
+    0.999772 1.00088 0
+    0.042442 1.00088 0
+    0.00927115 1.004 0
+    0.996896 1.00017 0
+    0.997278 0.0158479 0
+endnode
+node trimesh mesh28
+  parent wsf10_l02_04
+  position -3.75 3.75 -0.51
+  orientation 0 0 0 0
+  wirecolor 0.878906 0.878906 0.878906
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 1
+  bitmap t_chess01
+  shadow 0
+  verts 4
+    -1.05 1.05 0.01
+    -1.05 -1.05 0.01
+    1.05 -1.05 0.01
+    1.05 1.05 0.01
+  faces 2
+    0 1 2 1 0 1 2 0
+    2 3 0 1 3 4 5 0
+  tverts 6
+    0.000499785 0.999501 0
+    0.000499547 0.000499934 0
+    0.9995 0.000499696 0
+    0.975818 0.000499696 0
+    0.000881851 0.00433117 0
+    0.000499785 0.980177 0
+endnode
+node trimesh mesh29
+  parent wsf10_l02_04
+  position -3.75 1.25 -0.51
+  orientation 0 0 0 0
+  wirecolor 0.34375 0.34375 0.34375
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 1
+  bitmap t_chess01
+  shadow 0
+  verts 4
+    -1.05 1.05 0.01
+    -1.05 -1.05 0.01
+    1.05 -1.05 0.01
+    1.05 1.05 0.01
+  faces 2
+    0 1 2 1 0 1 2 0
+    2 3 0 1 3 4 5 0
+  tverts 6
+    0.999772 0.0535329 0
+    0.999772 1.00088 0
+    0.042442 1.00088 0
+    0.00927115 1.004 0
+    0.996896 1.00017 0
+    0.997278 0.0158479 0
+endnode
+node trimesh mesh30
+  parent wsf10_l02_04
+  position -1.25 1.25 -0.51
+  orientation 0 0 0 0
+  wirecolor 0.0273438 0.0273438 0.0273438
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 1
+  bitmap t_chess01
+  shadow 0
+  verts 4
+    -1.05 1.05 0.01
+    -1.05 -1.05 0.01
+    1.05 -1.05 0.01
+    1.05 1.05 0.01
+  faces 2
+    0 1 2 1 0 1 2 0
+    2 3 0 1 3 4 5 0
+  tverts 6
+    0.000499785 0.999501 0
+    0.000499547 0.000499934 0
+    0.9995 0.000499696 0
+    0.975818 0.000499696 0
+    0.000881851 0.00433117 0
+    0.000499785 0.980177 0
+endnode
+node trimesh mesh31
+  parent wsf10_l02_04
+  position -1.25 3.75 -0.51
+  orientation 0 0 0 0
+  wirecolor 0.527344 0.527344 0.527344
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 1
+  bitmap t_chess01
+  shadow 0
+  verts 4
+    -1.05 1.05 0.01
+    -1.05 -1.05 0.01
+    1.05 -1.05 0.01
+    1.05 1.05 0.01
+  faces 2
+    0 1 2 1 0 1 2 0
+    2 3 0 1 3 4 5 0
+  tverts 6
+    0.999772 0.0535329 0
+    0.999772 1.00088 0
+    0.042442 1.00088 0
+    0.00927115 1.004 0
+    0.996896 1.00017 0
+    0.997278 0.0158479 0
+endnode
+node trimesh mesh32
+  parent wsf10_l02_04
+  position 1.25 3.75 -0.51
+  orientation 0 0 0 0
+  wirecolor 0.113281 0.113281 0.113281
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 1
+  bitmap t_chess01
+  shadow 0
+  verts 4
+    -1.05 1.05 0.01
+    -1.05 -1.05 0.01
+    1.05 -1.05 0.01
+    1.05 1.05 0.01
+  faces 2
+    0 1 2 1 0 1 2 0
+    2 3 0 1 3 4 5 0
+  tverts 6
+    0.000499785 0.999501 0
+    0.000499547 0.000499934 0
+    0.9995 0.000499696 0
+    0.975818 0.000499696 0
+    0.000881851 0.00433117 0
+    0.000499785 0.980177 0
+endnode
+node trimesh mesh33
+  parent wsf10_l02_04
+  position 1.25 1.25 -0.51
+  orientation 0 0 0 0
+  wirecolor 0.878906 0.878906 0.878906
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 1
+  bitmap t_chess01
+  shadow 0
+  verts 4
+    -1.05 1.05 0.01
+    -1.05 -1.05 0.01
+    1.05 -1.05 0.01
+    1.05 1.05 0.01
+  faces 2
+    0 1 2 1 0 1 2 0
+    2 3 0 1 3 4 5 0
+  tverts 6
+    0.999772 0.0535329 0
+    0.999772 1.00088 0
+    0.042442 1.00088 0
+    0.00927115 1.004 0
+    0.996896 1.00017 0
+    0.997278 0.0158479 0
+endnode
+node trimesh mesh34
+  parent wsf10_l02_04
+  position 3.75 1.25 -0.51
+  orientation 0 0 0 0
+  wirecolor 0.722656 0.722656 0.722656
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 1
+  bitmap t_chess01
+  shadow 0
+  verts 4
+    -1.05 1.05 0.01
+    -1.05 -1.05 0.01
+    1.05 -1.05 0.01
+    1.05 1.05 0.01
+  faces 2
+    0 1 2 1 0 1 2 0
+    2 3 0 1 3 4 5 0
+  tverts 6
+    0.000499785 0.999501 0
+    0.000499547 0.000499934 0
+    0.9995 0.000499696 0
+    0.975818 0.000499696 0
+    0.000881851 0.00433117 0
+    0.000499785 0.980177 0
+endnode
+node trimesh mesh35
+  parent wsf10_l02_04
+  position 3.75 3.75 -0.51
+  orientation 0 0 0 0
+  wirecolor 0.722656 0.722656 0.722656
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 1
+  bitmap t_chess01
+  shadow 0
+  verts 4
+    -1.05 1.05 0.01
+    -1.05 -1.05 0.01
+    1.05 -1.05 0.01
+    1.05 1.05 0.01
+  faces 2
+    0 1 2 1 0 1 2 0
+    2 3 0 1 3 4 5 0
+  tverts 6
+    0.999772 0.0535329 0
+    0.999772 1.00088 0
+    0.042442 1.00088 0
+    0.00927115 1.004 0
+    0.996896 1.00017 0
+    0.997278 0.0158479 0
+endnode
+node light wsf10_l02_04ml2
+  parent wsf10_l02_04
+  position 4.84165 3.98367 4.5
+  orientation 0 0 0 0
+  wirecolor 0.898438 0.898438 0.898438
+  radius 14
+  multiplier 1
+  color 0 0 0
+  ambientonly 0
+  ndynamictype 0
+  affectdynamic 1
+  shadow 0
+  lightpriority 5
+  lensflares 0
+  fadinglight 1
+endnode
+endmodelgeom wsf10_l02_04
+donemodel wsf10_l02_04

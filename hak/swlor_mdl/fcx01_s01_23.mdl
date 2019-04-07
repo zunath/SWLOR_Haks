@@ -1,0 +1,308 @@
+# Exported from NWmax 0.8 b60 at 16/04/2007 17:56:20
+# mdl file
+#
+#NWmax MODEL ASCII
+# model: FCX01_S01_23
+#local file: D:\3dsmax7\scenes\all_tiles02.max
+filedependancy all_tiles02.max
+newmodel FCX01_S01_23
+setsupermodel FCX01_S01_23 NULL
+classification Tile
+#NWmax GEOM  ASCII
+beginmodelgeom FCX01_S01_23
+node dummy FCX01_S01_23
+  parent NULL
+endnode
+node light FCX01_S01_23ml1
+  parent FCX01_S01_23
+  position 0.0 0.0 5.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 1.0 0.894118 0.0 
+  radius 14.0
+  multiplier 1.0
+  color 1.0 1.0 1.0 
+  ambientonly 0
+  nDynamicType 0
+  affectDynamic 1
+  shadow 0
+  lightpriority 5
+  fadingLight 0
+endnode
+node light FCX01_S01_23ml2
+  parent FCX01_S01_23
+  position -2.0 -2.0 4.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 1.0 0.894118 0.0 
+  radius 5.0
+  multiplier 1.0
+  color 1.0 1.0 1.0 
+  ambientonly 0
+  nDynamicType 0
+  affectDynamic 1
+  shadow 0
+  lightpriority 5
+  fadingLight 0
+endnode
+node dummy FCX01_S01_23a
+  parent FCX01_S01_23
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.341176 0.878431 0.560784 
+endnode
+#Tile trimesh node
+node trimesh fond_23
+  parent FCX01_S01_23
+  position 0.0 0.0 -30.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.890196 0.592157 0.592157 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 0.588 0.588 0.588 
+  Diffuse 0.588 0.588 0.588 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 0.0 0.0 
+  bitmap gris3
+  verts 6
+    -3.33 -5.0 0.0
+    -5.0 -5.0 0.0
+    -3.33 5.0 0.0
+    5.0 -5.0 0.0
+    -5.0 5.0 0.0
+    5.0 5.0 0.0
+  faces 4
+    0 2 4  1  0 1 2  1
+    4 1 0  1  3 4 5  1
+    2 0 3  1  6 7 8  1
+    3 5 2  1  9 10 11  1
+  tverts 12
+    0.666667 0.6 0
+    0.666667 0.8 0
+    0.636364 0.8 0
+    0.636364 0.8 0
+    0.636364 0.6 0
+    0.666667 0.6 0
+    0.666667 0.8 0
+    0.666667 0.6 0
+    0.818182 0.6 0
+    0.818182 0.6 0
+    0.818182 0.8 0
+    0.666667 0.8 0
+endnode
+#Tile trimesh node
+node trimesh support_23
+  parent FCX01_S01_23
+  position 0.0 0.0 13.32
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.337255 0.337255 0.337255 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 0.588 0.588 0.588 
+  Diffuse 0.588 0.588 0.588 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 0.0 0.0 
+  bitmap imp_modules_id2
+  verts 8
+    -5.0 -5.0 0.0
+    1.48 -5.0 0.0
+    -5.0 1.51 0.0
+    -5.0 1.08 0.0
+    5.0 -5.0 0.0
+    -5.0 5.0 0.0
+    5.0 -4.26 0.0
+    5.0 5.0 0.0
+  faces 6
+    4 3 2  1  0 1 2  1
+    2 6 4  1  3 4 5  1
+    1 0 3  1  6 7 8  1
+    3 4 1  1  9 10 11  1
+    7 6 2  1  12 13 14  1
+    2 5 7  1  15 16 17  1
+  tverts 18
+    0.0196859 2.32937 0
+    -0.671004 3.11497 0
+    -0.718631 3.11492 0
+    -0.718631 3.11492 0
+    -0.0616836 2.32927 0
+    0.0196859 2.32937 0
+    0.0120387 2.6063 0
+    -0.00202987 3.11576 0
+    -0.671004 3.11497 0
+    -0.671004 3.11497 0
+    0.0196859 2.32937 0
+    0.0120387 2.6063 0
+    -1.08057 2.32807 0
+    -0.0616836 2.32927 0
+    -0.718631 3.11492 0
+    -0.718631 3.11492 0
+    -1.10228 3.11447 0
+    -1.08057 2.32807 0
+endnode
+#Tile trimesh node
+node trimesh platform_23
+  parent FCX01_S01_23
+  position 0.0 0.0 14.12
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.54902 0.341176 0.882353 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 0.588 0.588 0.588 
+  Diffuse 0.588 0.588 0.588 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 0.0 0.0 
+  bitmap d_ground03
+  verts 8
+    -5.0 -5.0 0.0
+    -1.92 -5.0 0.0
+    3.29 -5.0 0.0
+    -5.0 -0.55 0.0
+    -5.0 3.29 0.0
+    5.0 -5.0 0.0
+    -5.0 5.0 0.0
+    5.0 5.0 0.0
+  faces 6
+    0 1 3  1  0 1 2  3
+    2 4 3  1  3 4 5  3
+    3 1 2  1  6 7 8  3
+    4 2 5  1  9 10 11  3
+    6 4 5  1  12 13 14  3
+    7 6 5  1  15 16 17  3
+  tverts 18
+    -0.0638594 0.807382 0
+    -0.0636904 1.14651 0
+    -0.553836 0.807626 0
+    -0.0634044 1.72067 0
+    -0.97715 0.807837 0
+    -0.553836 0.807626 0
+    -0.553836 0.807626 0
+    -0.0636904 1.14651 0
+    -0.0634044 1.72067 0
+    -0.97715 0.807837 0
+    -0.0634044 1.72067 0
+    -0.0633106 1.9089 0
+    -1.16538 0.80793 0
+    -0.97715 0.807837 0
+    -0.0633106 1.9089 0
+    -1.16483 1.90945 0
+    -1.16538 0.80793 0
+    -0.0633106 1.9089 0
+endnode
+node aabb walk_23
+  parent FCX01_S01_23
+  position 0.0 0.0 14.12
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.521569 0.431373 0.0313726 
+  multimaterial 20
+    Dirt
+    Obscuring
+    Grass
+    Stone
+    Wood
+    Water
+    Nonwalk
+    Transparent
+    Carpet
+    Metal
+    Puddles
+    Swamp
+    Mud
+    Leaves
+    Lava
+    BottomlessPit
+    DeepWater
+    Door
+    Snow
+    Sand
+  ambient 0.588 0.588 0.588 
+  diffuse 0.5 0.5 0.5 
+  specular 0.0 0.0 0.0 
+  shininess 10.0
+  bitmap Stone
+  verts 9
+    -5.0 -5.0 0.0
+    0.0 -5.0 0.0
+    -5.0 0.0 0.0
+    0.0 0.0 0.0
+    5.0 -5.0 0.0
+    5.0 0.0 0.0
+    -5.0 5.0 0.0
+    0.0 5.0 0.0
+    5.0 5.0 0.0
+  faces 8
+    0 1 3  1  0 1 2  4
+    3 2 0  1  3 4 5  4
+    1 4 5  1  6 7 8  4
+    5 3 1  1  9 10 11  4
+    2 3 7  1  12 13 14  4
+    7 6 2  1  15 16 17  4
+    3 5 8  1  18 19 20  4
+    8 7 3  1  21 22 23  4
+  tverts 24
+    0.666667 0.6 0
+    0.75 0.6 0
+    0.75 0.7 0
+    0.75 0.7 0
+    0.666667 0.7 0
+    0.666667 0.6 0
+    0.75 0.6 0
+    0.833333 0.6 0
+    0.833333 0.7 0
+    0.833333 0.7 0
+    0.75 0.7 0
+    0.75 0.6 0
+    0.666667 0.7 0
+    0.75 0.7 0
+    0.75 0.8 0
+    0.75 0.8 0
+    0.666667 0.8 0
+    0.666667 0.7 0
+    0.75 0.7 0
+    0.833333 0.7 0
+    0.833333 0.8 0
+    0.833333 0.8 0
+    0.75 0.8 0
+    0.75 0.7 0
+    aabb         -5.0 -5.0 0.0 5.0 5.0 0.0 -1
+        -5.0 -5.0 0.0 0.0 5.0 0.0 -1
+        -5.0 -5.0 0.0 0.0 0.0 0.0 -1
+        -5.0 -5.0 0.0 0.0 0.0 0.0 1
+        -5.0 -5.0 0.0 0.0 0.0 0.0 0
+        -5.0 0.0 0.0 0.0 5.0 0.0 -1
+        -5.0 0.0 0.0 0.0 5.0 0.0 5
+        -5.0 0.0 0.0 0.0 5.0 0.0 4
+        0.0 -5.0 0.0 5.0 5.0 0.0 -1
+        0.0 -5.0 0.0 5.0 0.0 0.0 -1
+        0.0 -5.0 0.0 5.0 0.0 0.0 3
+        0.0 -5.0 0.0 5.0 0.0 0.0 2
+        0.0 0.0 0.0 5.0 5.0 0.0 -1
+        0.0 0.0 0.0 5.0 5.0 0.0 7
+        0.0 0.0 0.0 5.0 5.0 0.0 6
+endnode
+endmodelgeom FCX01_S01_23
+donemodel FCX01_S01_23

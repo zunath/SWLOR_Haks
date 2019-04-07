@@ -1,0 +1,69 @@
+# Exported from NWmax 0.8 b60 at 10/26/2008 1:45:32 PM
+# mdl file
+#
+#NWmax MODEL ASCII
+# model: wsf41_d01_02x
+#local file: Unknown
+filedependancy Unknown
+newmodel wsf41_d01_02x
+setsupermodel wsf41_d01_02x null
+classification Tile
+#NWmax GEOM  ASCII
+beginmodelgeom wsf41_d01_02x
+node dummy wsf41_d01_02x
+  parent NULL
+endnode
+#Tile trimesh node
+node trimesh 0011_02
+  parent wsf41_d01_02x
+  position 0.0 0.0 1.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.882353 0.882353 0.882353 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 0
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 0.0 0.0 
+  bitmap wtf_crck1
+  verts 9
+    5.0 5.0 -1.5
+    -5.0 5.0 -1.5
+    5.0 -5.0 1.5
+    -5.0 -5.0 1.5
+    5.0 0.0 0.0
+    0.0 0.0 0.0
+    0.0 -5.0 1.5
+    -5.0 0.0 0.0
+    0.0 5.0 -1.5
+  faces 8
+    4 5 6  1  4 5 6  65536
+    7 5 8  1  7 5 8  65536
+    2 4 6  1  2 4 6  65536
+    5 4 0  1  5 4 0  65536
+    0 8 5  1  0 8 5  65536
+    3 6 5  1  3 6 5  65536
+    5 7 3  1  5 7 3  65536
+    1 7 8  1  1 7 8  65536
+  tverts 9
+    0.000499517 0.000499755 0
+    0.9995 0.000499517 0
+    0.000499755 0.999501 0
+    0.999501 0.9995 0
+    0.000499636 0.5 0
+    0.5 0.5 0
+    0.5 0.9995 0
+    0.9995 0.5 0
+    0.5 0.000499636 0
+endnode
+endmodelgeom wsf41_d01_02x
+donemodel wsf41_d01_02x

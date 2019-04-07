@@ -1,0 +1,72 @@
+# Exported from NWmax 0.8 b60 at 02/01/2010 19:00:18
+# mdl file
+#
+#NWmax MODEL ASCII
+# model: jvb_carpt02
+#local file: Unknown
+filedependancy Unknown
+newmodel jvb_carpt02
+setsupermodel jvb_carpt02 NULL
+classification Character
+setanimationscale 1.0
+#NWmax GEOM  ASCII
+beginmodelgeom jvb_carpt02
+node dummy jvb_carpt02
+  parent NULL
+endnode
+node dummy carpt02_impact
+  parent jvb_carpt02
+  position 0.0 0.0 0.85
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.690196 0.101961 0.101961 
+endnode
+node dummy carpt02_ground
+  parent jvb_carpt02
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.690196 0.101961 0.101961 
+endnode
+node dummy carpt02_hand
+  parent jvb_carpt02
+  position 0.0 0.0 1.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.690196 0.101961 0.101961 
+endnode
+node dummy carpt02_head
+  parent jvb_carpt02
+  position 0.0 0.0 2.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.541176 0.0313726 0.431373 
+endnode
+node dummy carpt02_head_hit
+  parent jvb_carpt02
+  position 0.0 0.0 1.5
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.541176 0.0313726 0.431373 
+endnode
+node trimesh tapis2
+  parent jvb_carpt02
+  position 3.43606e-007 -3.03619e-007 0.0145557
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.337255 0.337255 0.337255 
+  ambient 0.7 0.7 0.7 
+  diffuse 0.7 0.7 0.7 
+  specular 0.1 0.1 0.1 
+  shininess 10.0
+  bitmap jvb_carpt02
+  verts 4
+    1.85879 -3.33572 0.000834444
+    -1.88517 -3.32082 -0.00634611
+    -1.85879 3.33572 -0.000835122
+    1.88517 3.32082 0.00634536
+  faces 2
+    1 0 2  1  1 0 2  1
+    2 0 3  1  2 0 3  1
+  tverts 4
+    -6.41681e-007 1.0 0
+    -1.0 1.0 0
+    -1.0 0.0 0
+    -6.41681e-007 0.0 0
+endnode
+endmodelgeom jvb_carpt02
+donemodel jvb_carpt02

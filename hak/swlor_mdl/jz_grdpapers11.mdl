@@ -1,0 +1,53 @@
+# Exported from NWmax 0.8 b60 at 15/09/2007 23:06:08
+# mdl file
+#
+#NWmax MODEL ASCII
+# model: Jz_grdpapers11
+#local file: Unknown
+filedependancy Unknown
+newmodel Jz_grdpapers11
+setsupermodel Jz_grdpapers11 NULL
+classification Character
+setanimationscale 1.0
+#NWmax GEOM  ASCII
+beginmodelgeom Jz_grdpapers11
+node dummy Jz_grdpapers11
+  parent NULL
+endnode
+node trimesh Plane01
+  parent Jz_grdpapers11
+  position 0.0 0.0 0.02
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.521569 0.231373 0.0313726 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 1
+  center 0.0 0.0 0.0 
+  bitmap Jz_grdpapers11
+  verts 4
+    -0.5 -0.5 0.0
+    0.5 -0.5 0.0
+    -0.5 0.5 0.0
+    0.5 0.5 0.0
+  faces 2
+    2 0 3  1  2 0 3  1
+    1 3 0  1  1 3 0  1
+  tverts 4
+    0.0 0.0 0
+    1.0 0.0 0
+    0.0 1.0 0
+    1.0 1.0 0
+endnode
+endmodelgeom Jz_grdpapers11
+donemodel Jz_grdpapers11

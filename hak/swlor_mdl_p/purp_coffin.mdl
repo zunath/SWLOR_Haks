@@ -1,0 +1,998 @@
+# Exported from NWmax 0.8 b61 at 22/03/2010 18:20:21
+# mdl file
+#
+#NWmax MODEL ASCII
+# model: purp_coffin
+#local file: Unknown
+filedependancy Unknown
+newmodel purp_coffin
+setsupermodel purp_coffin NULL
+classification Character
+setanimationscale 1.0
+#NWmax GEOM  ASCII
+beginmodelgeom purp_coffin
+node dummy purp_coffin
+  parent NULL
+endnode
+node trimesh Box1203
+  parent purp_coffin
+  position -0.0467157 -0.0118924 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 1
+  center 0.0 0.0 22.9354 
+  bitmap Desk
+  verts 16
+    -0.453379 -0.988108 0.0
+    0.453379 -0.988108 0.0
+    0.453379 -0.988108 0.458709
+    -0.453379 -0.988108 0.458709
+    0.453379 0.988108 0.0
+    0.453379 0.988108 0.458709
+    -0.453379 0.988108 0.0
+    -0.453379 0.988108 0.458709
+    0.404803 -0.926351 0.457709
+    -0.404803 -0.926351 0.457709
+    0.404803 0.926351 0.457709
+    -0.404803 0.926351 0.457709
+    -0.404803 -0.926351 0.332709
+    -0.404803 0.926351 0.332709
+    0.404803 -0.926351 0.332709
+    0.404803 0.926351 0.332709
+  faces 24
+    0 1 2  1  0 1 2  5
+    2 3 0  1  2 3 0  5
+    1 4 5  2  4 5 6  4
+    5 2 1  2  6 7 4  4
+    4 6 7  1  8 0 3  6
+    7 5 4  1  3 2 8  6
+    6 0 3  2  5 4 7  3
+    3 7 6  2  7 6 5  3
+    3 2 8  4  9 10 11  4
+    8 9 3  4  11 12 9  4
+    2 5 10  8  13 14 15  4
+    10 8 2  8  15 16 13  4
+    5 7 11  4  17 18 19  4
+    11 10 5  4  19 20 17  4
+    7 3 9  8  21 22 23  4
+    9 11 7  8  23 24 21  4
+    11 9 12  1  25 26 27  4
+    12 13 11  1  27 28 25  4
+    9 8 14  2  29 30 31  4
+    14 12 9  2  31 32 29  4
+    8 10 15  1  26 33 28  4
+    15 14 8  1  28 27 26  4
+    10 11 13  2  30 29 32  4
+    13 15 10  2  32 31 30  4
+  tverts 34
+    0.488017 0.708427 0
+    0.488017 0.255048 0
+    0.258662 0.255049 0
+    0.258662 0.708427 0
+    0.488357 0.743419 0
+    0.488357 -0.244689 0
+    0.259002 -0.244689 0
+    0.259002 0.743419 0
+    0.488017 0.255049 0
+    0.145891 0.833462 0
+    0.145891 0.166538 0
+    0.20889 0.202266 0
+    0.208891 0.797734 0
+    0.372896 -0.384413 0
+    0.372897 1.51939 0
+    0.319379 1.45568 0
+    0.319379 -0.320701 0
+    0.393422 0.166538 0
+    0.393422 0.833462 0
+    0.330423 0.797734 0
+    0.330423 0.202266 0
+    0.0656668 1.51939 0
+    0.0656663 -0.384413 0
+    0.119184 -0.320701 0
+    0.119185 1.45568 0
+    0.462275 -0.0887497 0
+    0.462276 1.60447 0
+    0.308034 1.60447 0
+    0.308033 -0.0887496 0
+    0.294375 0.0809372 0
+    0.294375 0.889363 0
+    0.448617 0.889363 0
+    0.448617 0.0809372 0
+    0.462275 -0.0887496 0
+endnode
+node trimesh Mesh59
+  parent Box1203
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 1
+  center 0.0 0.0 50.3855 
+  bitmap Desk
+  verts 12
+    -0.453379 -0.988108 0.458709
+    0.453379 -0.988108 0.458709
+    0.453379 -0.988108 0.548
+    -0.453379 -0.988108 0.548
+    0.453379 0.988108 0.458709
+    0.453379 0.988108 0.548
+    -0.453379 0.988108 0.458709
+    -0.453379 0.988108 0.548
+    0.368092 -0.874431 0.549
+    -0.368092 -0.874431 0.549
+    0.368092 0.874431 0.549
+    -0.368092 0.874431 0.549
+  faces 18
+    0 1 2  1  0 1 2  5
+    2 3 0  1  2 3 0  5
+    1 4 5  2  4 5 6  4
+    5 2 1  2  6 7 4  4
+    4 6 7  1  1 0 3  6
+    7 5 4  1  3 2 1  6
+    6 0 3  2  5 4 7  3
+    3 7 6  2  7 8 5  3
+    0 6 4  4  4 5 9  4
+    4 1 0  4  9 10 4  4
+    3 2 8  4  11 12 13  1
+    8 9 3  4  13 14 11  1
+    2 5 10  8  15 16 17  1
+    10 8 2  8  17 18 15  1
+    5 7 11  4  19 20 21  1
+    11 10 5  4  21 22 19  1
+    7 3 9  8  23 24 25  1
+    9 11 7  8  25 26 23  1
+  tverts 27
+    0.485025 0.80678 0
+    0.485025 0.353401 0
+    0.44038 0.353401 0
+    0.44038 0.80678 0
+    0.48454 0.743419 0
+    0.48454 -0.244689 0
+    0.439894 -0.244689 0
+    0.439895 0.743419 0
+    0.439894 -0.244688 0
+    0.00891301 -0.244689 0
+    0.0108868 0.743419 0
+    0.205344 0.729189 0
+    0.205344 0.270812 0
+    0.288284 0.313925 0
+    0.288284 0.686075 0
+    0.329137 -0.116667 0
+    0.329137 1.11667 0
+    0.277791 1.04572 0
+    0.277791 -0.0457232 0
+    0.35558 0.270811 0
+    0.35558 0.729188 0
+    0.27264 0.686075 0
+    0.272639 0.313925 0
+    -0.00160789 1.11667 0
+    -0.00160819 -0.116667 0
+    0.0497376 -0.0457231 0
+    0.0497379 1.04572 0
+endnode
+node trimesh Mesh60
+  parent Mesh59
+  position -3.04833e-007 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 0.556863 0.556863 0.623529 
+  Diffuse 0.556863 0.556863 0.623529 
+  Specular 0.0 0.0 0.0 
+  shininess 1
+  center 0.0 0.0 61.8786 
+  bitmap Desk
+  verts 12
+    -0.142247 -0.742932 0.688572
+    0.142247 -0.742932 0.688572
+    0.142247 0.742932 0.688572
+    -0.142247 0.742932 0.688572
+    -0.368092 -0.874431 0.549
+    0.368092 -0.874431 0.549
+    0.325745 -0.817226 0.631
+    -0.325745 -0.817226 0.631
+    0.368092 0.874431 0.549
+    0.325745 0.817226 0.631
+    -0.368092 0.874431 0.549
+    -0.325745 0.817226 0.631
+  faces 18
+    0 1 2  1  0 1 2  1
+    3 0 2  1  3 0 2  1
+    4 5 6  1  4 5 6  1
+    6 7 4  1  6 7 4  1
+    5 8 9  2  8 9 10  1
+    9 6 5  2  10 11 8  1
+    10 4 7  2  12 13 14  1
+    7 11 10  2  14 15 12  1
+    8 10 11  1  16 17 7  1
+    11 9 8  1  7 18 16  1
+    7 6 1  4  7 6 19  1
+    1 0 7  4  19 20 7  1
+    6 9 2  8  11 10 21  1
+    2 1 6  8  21 22 11  1
+    11 7 0  8  15 14 0  1
+    0 3 11  8  0 3 15  1
+    9 11 3  4  18 7 20  1
+    3 2 9  4  20 19 18  1
+  tverts 23
+    0.213769 -0.0457231 0
+    0.385045 -0.0457232 0
+    0.385045 1.04572 0
+    0.213769 1.04572 0
+    0.486066 0.453126 0
+    0.0182157 0.453126 0
+    0.0451275 0.50575 0
+    0.459154 0.50575 0
+    0.277791 -0.0457232 0
+    0.277791 1.04572 0
+    0.224233 1.04572 0
+    0.224233 -0.0457232 0
+    0.0497379 1.04572 0
+    0.0497376 -0.0457231 0
+    0.103296 -0.0457231 0
+    0.103296 1.04572 0
+    0.0182158 0.453125 0
+    0.486066 0.453125 0
+    0.0451276 0.50575 0
+    0.161742 0.542697 0
+    0.34254 0.542697 0
+    0.356981 1.04572 0
+    0.356981 -0.0457232 0
+endnode
+node trimesh Mesh61
+  parent Box1203
+  position -3.04833e-007 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 1
+  center 0.0 0.0 33.2709 
+  bitmap PLC_black00
+  verts 4
+    0.404803 0.926351 0.332709
+    -0.404803 0.926351 0.332709
+    -0.404803 -0.926351 0.332709
+    0.404803 -0.926351 0.332709
+  faces 2
+    0 1 2  1  0 1 2  4
+    2 3 0  1  1 0 3  4
+  tverts 4
+    0.448617 0.889363 0
+    0.448617 0.0809372 0
+    0.448617 0.0809372 0
+    0.448617 0.889363 0
+endnode
+node dummy C02_hand
+  parent purp_coffin
+  position 0.00398437 0.0631725 1.19431
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.894118 0.721569 0.6 
+endnode
+node dummy C02_head
+  parent purp_coffin
+  position 0.00398437 0.579193 1.17314
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.898039 0.603922 0.843137 
+endnode
+node dummy C02_head_hit
+  parent purp_coffin
+  position 0.00398437 0.0108252 0.691658
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.898039 0.603922 0.843137 
+endnode
+node dummy C02_impact
+  parent purp_coffin
+  position 0.00398437 0.011001 0.249374
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.898039 0.603922 0.843137 
+endnode
+node dummy C02_ground
+  parent purp_coffin
+  position -0.00363281 0.0069873 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.898039 0.603922 0.843137 
+endnode
+node emitter ChunkyWood29
+  parent purp_coffin
+  position 0.0138995 0.0288501 0.523842
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 1.0 1.0 1.0 
+  update_sel 3
+  update Explosion
+  render_sel 1
+  render Normal
+  blend_sel 1
+  Blend Normal
+  spawntype_sel 0
+  spawnType 0
+  xSize 89.0
+  ySize 40.0
+  inherit 1
+  inherit_local 0
+  inheritvel 0
+  inherit_part 0
+  renderorder 0
+  threshold 0.0
+  combinetime 0.0
+  deadspace 0.0
+  opacity 0.5
+  colorStart 0.482353 0.435294 0.317647 
+  colorEnd 0.584314 0.533333 0.407843 
+  alphaStart 1.0
+  alphaEnd 1.0
+  sizeStart 0.1
+  sizeEnd 0.1
+  sizeStart_y 0.0
+  sizeEnd_y 0.0
+  birthrate 3
+  lifeExp 0.75
+  mass 3.0
+  spread 1.22173
+  particleRot 2.9
+  velocity 8.0
+  randvel 0.3
+  bounce_co 0.5
+  blurlength 10.0
+  loop 0
+  bounce 1
+  m_isTinted 0
+  Splat 0
+  affectedByWind false
+  texture fxpa_cloud02
+  twosidedtex 1
+  xgrid 5
+  ygrid 5
+  fps 0
+  framestart 0
+  frameend 24
+  random 0
+  chunkName PLC_Chunk_S02
+  lightningDelay 0.0
+  lightningRadius 0.0
+  lightningSubDiv 0
+  lightningScale 0.0
+  blastRadius 0.0
+  blastLength 0.0
+  p2p 0
+  p2p_type Bezier
+  p2p_sel 1
+  p2p_bezier2 0.0
+  p2p_bezier3 0.0
+  grav 0.0
+  Drag 0.0
+endnode
+node emitter ChunkyWood30
+  parent purp_coffin
+  position 0.0138995 0.0288501 0.41762
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 1.0 1.0 1.0 
+  update_sel 3
+  update Explosion
+  render_sel 1
+  render Normal
+  blend_sel 1
+  Blend Normal
+  spawntype_sel 0
+  spawnType 0
+  xSize 89.0
+  ySize 40.0
+  inherit 1
+  inherit_local 0
+  inheritvel 0
+  inherit_part 0
+  renderorder 0
+  threshold 0.0
+  combinetime 0.0
+  deadspace 0.0
+  opacity 0.5
+  colorStart 1.0 1.0 1.0 
+  colorEnd 1.0 1.0 1.0 
+  alphaStart 1.0
+  alphaEnd 1.0
+  sizeStart 0.1
+  sizeEnd 0.1
+  sizeStart_y 0.0
+  sizeEnd_y 0.0
+  birthrate 3
+  lifeExp 0.75
+  mass 3.0
+  spread 1.22173
+  particleRot 5.0
+  velocity 8.0
+  randvel 0.3
+  bounce_co 0.5
+  blurlength 10.0
+  loop 0
+  bounce 1
+  m_isTinted 0
+  Splat 0
+  affectedByWind false
+  texture fxpa_cloud02
+  twosidedtex 0
+  xgrid 5
+  ygrid 5
+  fps 0
+  framestart 0
+  frameend 24
+  random 0
+  chunkName PLC_Chunk_S01
+  lightningDelay 0.0
+  lightningRadius 0.0
+  lightningSubDiv 0
+  lightningScale 0.0
+  blastRadius 0.0
+  blastLength 0.0
+  p2p 0
+  p2p_type Bezier
+  p2p_sel 1
+  p2p_bezier2 0.0
+  p2p_bezier3 0.0
+  grav 0.0
+  Drag 0.0
+endnode
+node emitter fire!21
+  parent purp_coffin
+  position 0.0138995 0.0288501 0.343577
+  orientation 1.0 0.0 0.0 -4.71239
+  wirecolor 1.0 1.0 1.0 
+  update_sel 3
+  update Explosion
+  render_sel 1
+  render Normal
+  blend_sel 1
+  Blend Normal
+  spawntype_sel 0
+  spawnType 0
+  xSize 100.0
+  ySize 99.0
+  inherit 1
+  inherit_local 0
+  inheritvel 0
+  inherit_part 0
+  renderorder 0
+  threshold 0.0
+  combinetime 0.0
+  deadspace 0.0
+  opacity 0.5
+  colorStart 0.47451 0.439216 0.364706 
+  colorEnd 0.819608 0.796079 0.709804 
+  alphaStart 1.0
+  alphaEnd 0.0
+  sizeStart 4.0
+  sizeEnd 1.0
+  sizeStart_y 0.0
+  sizeEnd_y 0.0
+  birthrate 10
+  lifeExp 2.5
+  mass 0.09
+  spread 2.96706
+  particleRot 0.5
+  velocity 2.0
+  randvel 0.5
+  bounce_co 0.0
+  blurlength 10.0
+  loop 0
+  bounce 0
+  m_isTinted 1
+  Splat 0
+  affectedByWind false
+  texture fxpa_smoke01
+  twosidedtex 1
+  xgrid 4
+  ygrid 4
+  fps 10
+  framestart 0
+  frameend 24
+  random 0
+  lightningDelay 0.0
+  lightningRadius 0.0
+  lightningSubDiv 0
+  lightningScale 0.0
+  blastRadius 0.2
+  blastLength 1.0
+  p2p 0
+  p2p_type Bezier
+  p2p_sel 1
+  p2p_bezier2 0.0
+  p2p_bezier3 0.0
+  grav 0.0
+  Drag 0.0
+endnode
+endmodelgeom purp_coffin
+
+#NWmax ANIM ASCII
+newanim open purp_coffin
+  length 0.0333333
+  transtime 0.25
+  animroot purp_coffin
+    node dummy purp_coffin
+        parent NULL
+    endnode
+    node trimesh Box1203
+        parent purp_coffin
+    endnode
+    node trimesh Mesh59
+        parent Box1203
+        positionkey
+            0.0 -0.0868707 0.0 0.0322056
+            0.0333333 -0.0868707 0.0 0.0322056
+        endlist
+        orientationkey
+            0.0 0.0 1.0 0.0 -0.122173
+            0.0333333 0.0 1.0 0.0 -0.122173
+        endlist
+    endnode
+    node trimesh Mesh60
+        parent Mesh59
+    endnode
+    node trimesh Mesh61
+        parent Box1203
+    endnode
+    node dummy C02_hand
+        parent purp_coffin
+    endnode
+    node dummy C02_head
+        parent purp_coffin
+    endnode
+    node dummy C02_head_hit
+        parent purp_coffin
+    endnode
+    node dummy C02_impact
+        parent purp_coffin
+    endnode
+    node dummy C02_ground
+        parent purp_coffin
+    endnode
+    node emitter ChunkyWood29
+        parent purp_coffin
+    endnode
+    node emitter ChunkyWood30
+        parent purp_coffin
+    endnode
+    node emitter fire!21
+        parent purp_coffin
+    endnode
+doneanim open purp_coffin
+
+
+#NWmax ANIM ASCII
+newanim open2close purp_coffin
+  length 0.333333
+  transtime 0.25
+  animroot purp_coffin
+    node dummy purp_coffin
+        parent NULL
+    endnode
+    node trimesh Box1203
+        parent purp_coffin
+    endnode
+    node trimesh Mesh59
+        parent Box1203
+        positionkey
+            0.0 -0.0868707 0.0 0.0322056
+            0.0666667 -0.077265 0.0 0.026838
+            0.133333 -0.0706763 0.0 0.000799314
+            0.166667 -0.0588971 0.0 0.00785184
+            0.2 -0.0471173 0.0 0.0
+            0.333333 0.0 0.0 0.0
+        endlist
+        orientationkey
+            0.0 0.0 1.0 0.0 -0.122173
+            0.0666667 0.0 1.0 0.0 -0.101811
+            0.133333 0.0 0.0 0.0 0.0
+            0.166667 0.0 1.0 0.0 -0.0261799
+            0.2 0.0 0.0 0.0 0.0
+            0.333333 0.0 0.0 0.0 0.0
+        endlist
+    endnode
+    node trimesh Mesh60
+        parent Mesh59
+    endnode
+    node trimesh Mesh61
+        parent Box1203
+    endnode
+    node dummy C02_hand
+        parent purp_coffin
+    endnode
+    node dummy C02_head
+        parent purp_coffin
+    endnode
+    node dummy C02_head_hit
+        parent purp_coffin
+    endnode
+    node dummy C02_impact
+        parent purp_coffin
+    endnode
+    node dummy C02_ground
+        parent purp_coffin
+    endnode
+    node emitter ChunkyWood29
+        parent purp_coffin
+    endnode
+    node emitter ChunkyWood30
+        parent purp_coffin
+    endnode
+    node emitter fire!21
+        parent purp_coffin
+    endnode
+doneanim open2close purp_coffin
+
+
+#NWmax ANIM ASCII
+newanim close purp_coffin
+  length 0.0333333
+  transtime 0.25
+  animroot purp_coffin
+    node dummy purp_coffin
+        parent NULL
+    endnode
+    node trimesh Box1203
+        parent purp_coffin
+        positionkey
+            0.0333333 -0.0467157 -0.0118924 0.0
+        endlist
+        orientationkey
+            0.0333333 0.0 0.0 0.0 0.0
+        endlist
+    endnode
+    node trimesh Mesh59
+        parent Box1203
+        positionkey
+            0.0 0.0 0.0 0.0
+            0.0333333 0.0 0.0 0.0
+        endlist
+        orientationkey
+            0.0 0.0 0.0 0.0 0.0
+            0.0333333 0.0 0.0 0.0 0.0
+        endlist
+    endnode
+    node trimesh Mesh60
+        parent Mesh59
+    endnode
+    node trimesh Mesh61
+        parent Box1203
+    endnode
+    node dummy C02_hand
+        parent purp_coffin
+    endnode
+    node dummy C02_head
+        parent purp_coffin
+    endnode
+    node dummy C02_head_hit
+        parent purp_coffin
+    endnode
+    node dummy C02_impact
+        parent purp_coffin
+    endnode
+    node dummy C02_ground
+        parent purp_coffin
+    endnode
+    node emitter ChunkyWood29
+        parent purp_coffin
+    endnode
+    node emitter ChunkyWood30
+        parent purp_coffin
+    endnode
+    node emitter fire!21
+        parent purp_coffin
+    endnode
+doneanim close purp_coffin
+
+
+#NWmax ANIM ASCII
+newanim close2open purp_coffin
+  length 0.333333
+  transtime 0.25
+  animroot purp_coffin
+    node dummy purp_coffin
+        parent NULL
+    endnode
+    node trimesh Box1203
+        parent purp_coffin
+    endnode
+    node trimesh Mesh59
+        parent Box1203
+        positionkey
+            0.0 0.0 0.0 0.0
+            0.133333 -0.0292352 0.0 0.0
+            0.266667 -0.077265 0.0 0.026838
+            0.333333 -0.0868707 0.0 0.0322056
+        endlist
+        orientationkey
+            0.0 0.0 0.0 0.0 0.0
+            0.133333 0.0 0.0 0.0 0.0
+            0.266667 0.0 1.0 0.0 -0.101811
+            0.333333 0.0 1.0 0.0 -0.122173
+        endlist
+    endnode
+    node trimesh Mesh60
+        parent Mesh59
+    endnode
+    node trimesh Mesh61
+        parent Box1203
+    endnode
+    node dummy C02_hand
+        parent purp_coffin
+    endnode
+    node dummy C02_head
+        parent purp_coffin
+    endnode
+    node dummy C02_head_hit
+        parent purp_coffin
+    endnode
+    node dummy C02_impact
+        parent purp_coffin
+    endnode
+    node dummy C02_ground
+        parent purp_coffin
+    endnode
+    node emitter ChunkyWood29
+        parent purp_coffin
+    endnode
+    node emitter ChunkyWood30
+        parent purp_coffin
+    endnode
+    node emitter fire!21
+        parent purp_coffin
+    endnode
+doneanim close2open purp_coffin
+
+
+#NWmax ANIM ASCII
+newanim damage purp_coffin
+  length 0.0666667
+  transtime 0.0
+  animroot purp_coffin
+    node dummy purp_coffin
+        parent NULL
+    endnode
+    node trimesh Box1203
+        parent purp_coffin
+        positionkey
+            0.0 -0.0467157 -0.0118924 0.0124517
+            0.0333333 -0.0467157 -0.0118924 0.00664434
+            0.0666667 -0.0467157 -0.0118924 0.0
+        endlist
+        orientationkey
+            0.0 0.11321 -0.993571 -0.000975317 -0.0173413
+            0.0333333 0.214259 0.976776 0.000958833 -0.00916293
+            0.0666667 0.0 0.0 0.0 0.0
+        endlist
+    endnode
+    node trimesh Mesh59
+        parent Box1203
+    endnode
+    node trimesh Mesh60
+        parent Mesh59
+    endnode
+    node trimesh Mesh61
+        parent Box1203
+    endnode
+    node dummy C02_hand
+        parent purp_coffin
+    endnode
+    node dummy C02_head
+        parent purp_coffin
+    endnode
+    node dummy C02_head_hit
+        parent purp_coffin
+    endnode
+    node dummy C02_impact
+        parent purp_coffin
+    endnode
+    node dummy C02_ground
+        parent purp_coffin
+    endnode
+    node emitter ChunkyWood29
+        parent purp_coffin
+    endnode
+    node emitter ChunkyWood30
+        parent purp_coffin
+    endnode
+    node emitter fire!21
+        parent purp_coffin
+    endnode
+doneanim damage purp_coffin
+
+
+#NWmax ANIM ASCII
+newanim die purp_coffin
+  length 0.2
+  transtime 0.0
+  animroot purp_coffin
+  event 0.1 detonate
+  event 0.1 detonate
+  event 0.1 detonate
+    node dummy purp_coffin
+        parent NULL
+    endnode
+    node trimesh Box1203
+        parent purp_coffin
+        positionkey
+            0.0 -0.0467157 -0.0118924 0.0124517
+            0.0333333 -0.0467157 -0.0118924 0.00664434
+            0.0666667 -0.0467157 -0.0118924 0.0
+            0.2 -0.0467157 -0.0118924 -4.27642
+        endlist
+        orientationkey
+            0.0 0.11321 -0.993571 -0.000975317 -0.0173413
+            0.0333333 0.214259 0.976776 0.000958833 -0.00916293
+            0.0666667 0.0 0.0 0.0 0.0
+        endlist
+    endnode
+    node trimesh Mesh59
+        parent Box1203
+    endnode
+    node trimesh Mesh60
+        parent Mesh59
+    endnode
+    node trimesh Mesh61
+        parent Box1203
+    endnode
+    node dummy C02_hand
+        parent purp_coffin
+    endnode
+    node dummy C02_head
+        parent purp_coffin
+    endnode
+    node dummy C02_head_hit
+        parent purp_coffin
+    endnode
+    node dummy C02_impact
+        parent purp_coffin
+    endnode
+    node dummy C02_ground
+        parent purp_coffin
+    endnode
+    node emitter ChunkyWood29
+        parent purp_coffin
+    endnode
+    node emitter ChunkyWood30
+        parent purp_coffin
+    endnode
+    node emitter fire!21
+        parent purp_coffin
+    endnode
+doneanim die purp_coffin
+
+
+#NWmax ANIM ASCII
+newanim dead purp_coffin
+  length 0.0333333
+  transtime 0.0
+  animroot purp_coffin
+    node dummy purp_coffin
+        parent NULL
+    endnode
+    node trimesh Box1203
+        parent purp_coffin
+    endnode
+    node trimesh Mesh59
+        parent Box1203
+    endnode
+    node trimesh Mesh60
+        parent Mesh59
+    endnode
+    node trimesh Mesh61
+        parent Box1203
+    endnode
+    node dummy C02_hand
+        parent purp_coffin
+    endnode
+    node dummy C02_head
+        parent purp_coffin
+    endnode
+    node dummy C02_head_hit
+        parent purp_coffin
+    endnode
+    node dummy C02_impact
+        parent purp_coffin
+    endnode
+    node dummy C02_ground
+        parent purp_coffin
+    endnode
+    node emitter ChunkyWood29
+        parent purp_coffin
+    endnode
+    node emitter ChunkyWood30
+        parent purp_coffin
+    endnode
+    node emitter fire!21
+        parent purp_coffin
+    endnode
+doneanim dead purp_coffin
+
+
+#NWmax ANIM ASCII
+newanim default purp_coffin
+  length 0.0
+  transtime 0.25
+  animroot purp_coffin
+    node dummy purp_coffin
+        parent NULL
+    endnode
+    node trimesh Box1203
+        parent purp_coffin
+    endnode
+    node trimesh Mesh59
+        parent Box1203
+    endnode
+    node trimesh Mesh60
+        parent Mesh59
+    endnode
+    node trimesh Mesh61
+        parent Box1203
+    endnode
+    node dummy C02_hand
+        parent purp_coffin
+    endnode
+    node dummy C02_head
+        parent purp_coffin
+    endnode
+    node dummy C02_head_hit
+        parent purp_coffin
+    endnode
+    node dummy C02_impact
+        parent purp_coffin
+    endnode
+    node dummy C02_ground
+        parent purp_coffin
+    endnode
+    node emitter ChunkyWood29
+        parent purp_coffin
+    endnode
+    node emitter ChunkyWood30
+        parent purp_coffin
+    endnode
+    node emitter fire!21
+        parent purp_coffin
+    endnode
+doneanim default purp_coffin
+
+donemodel purp_coffin

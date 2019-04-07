@@ -1,0 +1,178 @@
+#Exported from 3ds max by MDL Plug-in Suite 1.0b
+#http://www.bricksbuilder.com/nwn/utils/
+#MAXMODEL ASCII
+# model: ohof_road03
+filedependancy Unknown
+newmodel ohof_road03
+setsupermodel ohof_road03 NULL
+classification Tile
+setanimationscale 1.0
+#MAXGEOM  ASCII
+beginmodelgeom ohof_road03
+node dummy ohof_road03
+  parent NULL
+endnode
+node trimesh Plane77
+  parent ohof_road03
+  position 0 0 0.02
+  orientation 0 0 0 0
+  wirecolor 0.835938 0.835938 0.835938
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 1
+  bitmap jr_ohof_road02
+  render 1
+  Shadow 1
+  beaming 0
+  transparencyhint 1
+  tilefade 0
+  rotatetexture 0
+  verts 18
+    -1.85 -3.43 0
+    -2 -5 0
+    -0.09 -3.23 0
+    0 -5 0
+    1.9 -3.06 0
+    2 -5 0
+    -1.96 -1.88 0
+    -0.06 -1.81 0
+    2.03 -1.53 0
+    -1.99 3.23 0
+    -1.96 2.12 0
+    0 3.41 0
+    0.2 1.91 0
+    1.99 3.58 0
+    2.22 1.9 0
+    -2 5 0
+    0 5 0
+    2 5 0
+  faces 16
+    0 1 2  1  0 1 2  0
+    3 2 1  1  3 2 1  0
+    2 3 4  1  2 3 4  0
+    5 4 3  1  5 4 3  0
+    6 0 7  1  6 0 7  0
+    2 7 0  1  2 7 0  0
+    7 2 8  1  7 2 8  0
+    4 8 2  1  4 8 2  0
+    9 10 11  1  9 10 11  0
+    12 11 10  1  7 11 10  0
+    11 12 13  1  11 7 12  0
+    14 13 12  1  8 12 7  0
+    15 9 16  1  13 9 14  0
+    11 16 9  1  11 14 9  0
+    16 11 17  1  14 11 15  0
+    13 17 11  1  12 15 11  0
+  tverts 16
+    0.000499636 0.5 0
+    0.000499547 0.000999212 0
+    0.5 0.5 0
+    0.5 0.000999153 0
+    0.9995 0.5 0
+    0.9995 0.000999033 0
+    0.000499696 1 0
+    0.5 1 0
+    0.9995 1 0
+    0.000500083 1.5 0
+    0.000499994 1 0
+    0.5 1.5 0
+    0.9995 1.5 0
+    0.000500143 2 0
+    0.5 2 0
+    0.9995 2 0
+endnode
+node trimesh Plane78
+  parent ohof_road03
+  position 0 0 0.02
+  orientation 0 0 0 0
+  wirecolor 0.5625 0.5625 0.5625
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 1
+  bitmap jr_ohof_road02
+  render 1
+  Shadow 1
+  beaming 0
+  transparencyhint 1
+  tilefade 0
+  rotatetexture 0
+  verts 9
+    -3.23 -1.99 0
+    -1.96 -1.88 0
+    -3.41 0 0
+    -1.96 0.12 0
+    -3.58 1.99 0
+    -1.96 2.12 0
+    -5 -2 0
+    -5 0 0
+    -5 2 0
+  faces 8
+    0 1 2  1  0 1 2  0
+    3 2 1  1  3 2 1  0
+    2 3 4  1  2 3 4  0
+    5 4 3  1  5 4 3  0
+    6 0 7  1  6 0 7  0
+    2 7 0  1  2 7 0  0
+    7 2 8  1  7 2 8  0
+    4 8 2  1  4 8 2  0
+  tverts 9
+    0.000500083 0.5 0
+    0.000499994 0 0
+    0.5 0.5 0
+    0.5 0 0
+    0.9995 0.5 0
+    0.9995 0 0
+    0.000500143 1 0
+    0.5 1 0
+    0.9995 1 0
+endnode
+node trimesh Line147
+  parent ohof_road03
+  position -1.97 0.12 0.02
+  orientation 0 0 0 0
+  wirecolor 0.570313 0.570313 0.570313
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0.05 0.05 0.05
+  shininess 26
+  bitmap jr_ohof_road02
+  render 1
+  Shadow 1
+  beaming 0
+  transparencyhint 1
+  tilefade 0
+  rotatetexture 0
+  verts 9
+    0.0099999 2 0
+    0.0099999 0 0
+    2.01 0 0
+    2.17 1.79 0
+    0.0099999 -2 0
+    1.91 -1.93 0
+    4.01 0 0
+    4.19 1.78 0
+    4 -1.65 0
+  faces 8
+    0 1 2  1  0 1 2  0
+    0 2 3  1  0 2 3  0
+    1 4 5  1  1 4 5  0
+    1 5 2  1  1 5 2  0
+    3 2 6  1  3 2 6  0
+    3 6 7  1  3 6 7  0
+    2 5 8  1  2 5 8  0
+    2 8 6  1  2 8 6  0
+  tverts 9
+    0 0 0
+    0 0.5 0
+    0.5 0.5 0
+    0.5 0 0
+    0 1 0
+    0.5 1 0
+    1 0.5 0
+    1 0 0
+    1 1 0
+endnode
+endmodelgeom ohof_road03
+donemodel ohof_road03

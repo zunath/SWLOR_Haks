@@ -1,0 +1,67 @@
+#MAXMODEL ASCII
+# model: p_blbrd02d
+filedependancy p_blbrd02d.max
+newmodel p_blbrd02d
+setsupermodel p_blbrd02d NULL
+classification CHARACTER
+setanimationscale 1
+#MAXGEOM  ASCII
+beginmodelgeom p_blbrd02d
+node dummy p_blbrd02d
+  parent NULL
+endnode
+node trimesh obj01
+  parent p_blbrd02d
+  ambient 0.588 0.588 0.588
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 11
+  shadow 0
+  bitmap t_bb02
+  verts 4
+      -0.0000011   -7.8848000   -3.8957601
+      -0.0000014   -7.8848000    3.2575300
+       0.0000014    7.8848000   -3.8957601
+       0.0000011    7.8848000    3.2575300
+  tverts 4
+       0.9995000    0.0693521  0
+       0.9995000    0.9995000  0
+       0.0004997    0.0693525  0
+       0.0004998    0.9995000  0
+  faces 2
+    0 1 2  1  0 1 2   1
+    3 2 1  1  3 2 1   1
+  position 0 0 3.89576
+  orientation 0 0 0 0
+  alpha 1
+  scale 1
+  selfillumcolor 0 0 0
+endnode
+node dummy 02d_impact
+  parent p_blbrd02d
+  position 0 0 7.9348
+  orientation 0 0 0 0
+endnode
+node dummy 02d_ground
+  parent p_blbrd02d
+  position 0 0 0
+  orientation 0 0 0 0
+endnode
+node dummy 02d_hand
+  parent p_blbrd02d
+  position 0 0 1
+  orientation 0 0 0 0
+endnode
+node dummy 02d_head
+  parent p_blbrd02d
+  position 0 0 2
+  orientation 0 0 0 0
+endnode
+node dummy 02d_head_hit
+  parent p_blbrd02d
+  position 0 0 1.5
+  orientation 0 0 0 0
+endnode
+endmodelgeom p_blbrd02d
+
+donemodel p_blbrd02d

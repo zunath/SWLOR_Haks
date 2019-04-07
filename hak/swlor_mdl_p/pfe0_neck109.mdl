@@ -1,0 +1,79 @@
+# Exported from NWmax 0.8 b60 at 13/09/2006 01:25:28
+# mdl file
+#
+#NWmax MODEL ASCII
+# model: pfe0_neck109
+#local file: Unknown
+filedependancy Unknown
+newmodel pfe0_neck109
+setsupermodel pfe0_neck109 NULL
+classification Character
+setanimationscale 1.0
+#NWmax GEOM  ASCII
+beginmodelgeom pfe0_neck109
+node dummy pfe0_neck109
+  parent NULL
+endnode
+node trimesh pfe0_neck001g
+  parent pfe0_neck109
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.26 0.26 0.26 
+  shininess 14
+  center 0.0 -0.118495 2.97388 
+  bitmap pfh0_neck001
+  verts 10
+    0.0 0.00288379 -0.0507534
+    -0.0460609 -0.00226571 -0.000992785
+    0.0 0.0454831 0.000456366
+    0.0 -0.047853 0.0048017
+    -0.035697 0.00747918 0.0878394
+    0.0 0.0384764 0.0609055
+    0.0 -0.0364574 0.0753473
+    0.0 0.00431909 0.110231
+    0.0460609 -0.00226572 -0.000992785
+    0.035697 0.0074792 0.0878394
+  faces 16
+    0 1 2  1  0 1 2  1
+    0 3 1  1  0 3 1  1
+    2 4 5  1  2 4 5  1
+    2 1 4  1  2 1 4  1
+    1 6 4  1  1 6 4  1
+    1 3 6  1  1 3 6  1
+    7 5 4  1  7 5 4  1
+    7 4 6  1  7 4 6  1
+    8 0 2  1  8 0 2  1
+    3 0 8  1  3 0 8  1
+    9 2 5  1  9 2 5  1
+    8 2 9  1  8 2 9  1
+    6 8 9  1  6 8 9  1
+    3 8 6  1  3 8 6  1
+    5 7 9  1  5 7 9  1
+    9 7 6  1  9 7 6  1
+  tverts 10
+    0.510302 0.0257169 0
+    0.0103674 0.0870715 0
+    0.509868 0.0960643 0
+    0.509868 0.12303 0
+    0.0339474 0.94166 0
+    0.509868 0.688916 0
+    0.501974 0.809937 0
+    0.5 0.982689 0
+    0.979765 0.0798251 0
+    0.981841 0.940598 0
+endnode
+endmodelgeom pfe0_neck109
+donemodel pfe0_neck109

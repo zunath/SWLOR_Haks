@@ -1,0 +1,72 @@
+# Exported from NWmax 0.8 b60 at 25/12/2009 20:56:22
+# mdl file
+#
+#NWmax MODEL ASCII
+# model: jhb_note01
+#local file: Unknown
+filedependancy Unknown
+newmodel jhb_note01
+setsupermodel jhb_note01 NULL
+classification Character
+setanimationscale 1.0
+#NWmax GEOM  ASCII
+beginmodelgeom jhb_note01
+node dummy jhb_note01
+  parent NULL
+endnode
+node dummy note01_impact
+  parent jhb_note01
+  position 0.0 0.0 0.85
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.52549 0.231373 0.0313726 
+endnode
+node dummy note01_ground
+  parent jhb_note01
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.52549 0.231373 0.0313726 
+endnode
+node dummy note01_hand
+  parent jhb_note01
+  position 0.0 0.0 1.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.52549 0.231373 0.0313726 
+endnode
+node dummy note01_head
+  parent jhb_note01
+  position 0.0 0.0 2.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.52549 0.231373 0.0313726 
+endnode
+node dummy note01_head_hit
+  parent jhb_note01
+  position 0.0 0.0 1.5
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.52549 0.231373 0.0313726 
+endnode
+node trimesh note
+  parent jhb_note01
+  position 0.000132246 0.00031139 0.00331808
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.345098 0.560784 0.882353 
+  ambient 0.7 0.7 0.7 
+  diffuse 0.7 0.7 0.7 
+  specular 0.1 0.1 0.1 
+  shininess 10.0
+  bitmap jhb_note01
+  verts 4
+    0.100325 0.149445 0.000332324
+    0.0995668 -0.149805 0.000604868
+    -0.0995795 0.149803 -0.00060493
+    -0.100325 -0.149444 -0.000332809
+  faces 2
+    1 0 2  1  1 0 2  1
+    3 1 2  1  3 1 2  1
+  tverts 4
+    0.631389 0.000499487 0
+    0.63139 0.9995 0
+    0.248664 0.000499666 0
+    0.248664 0.999501 0
+endnode
+endmodelgeom jhb_note01
+donemodel jhb_note01

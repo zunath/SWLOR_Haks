@@ -1,0 +1,111 @@
+# Exported from NWmax 0.8 b60 at 16/01/2010 02:48:36
+# mdl file
+#
+#NWmax MODEL ASCII
+# model: pkt_m09x06
+#local file: Unknown
+filedependancy Unknown
+newmodel pkt_m09x06
+setsupermodel pkt_m09x06 NULL
+classification Character
+setanimationscale 1.0
+#NWmax GEOM  ASCII
+beginmodelgeom pkt_m09x06
+node dummy pkt_m09x06
+  parent NULL
+endnode
+node dummy m09x06_impact
+  parent pkt_m09x06
+  position 0.0 0.0 0.85
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.603922 0.843137 0.898039 
+endnode
+node dummy m09x06_ground
+  parent pkt_m09x06
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.603922 0.843137 0.898039 
+endnode
+node dummy m09x06_hand
+  parent pkt_m09x06
+  position 0.0 0.0 1.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.603922 0.843137 0.898039 
+endnode
+node dummy m09x06_head
+  parent pkt_m09x06
+  position 0.0 0.0 2.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.603922 0.843137 0.898039 
+endnode
+node dummy m09x06_head_hit
+  parent pkt_m09x06
+  position 0.0 0.0 1.5
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.603922 0.843137 0.898039 
+endnode
+node trimesh Object1787
+  parent pkt_m09x06
+  position -0.00229084 0.0231533 1.62
+  orientation 0.0 0.0 -1.0 -3.14159
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 0
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 1.0 1.0 1.0 
+  ambient 0.1 0.1 0.1 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 0
+  center -0.0532513 0.29053 0.221251 
+  bitmap LSI_lite07
+  verts 8
+    -0.383598 -0.0158447 -0.324165
+    0.382535 -0.0158447 -0.324165
+    -0.383598 -0.0158447 0.32859
+    0.382535 -0.0158447 0.32859
+    -0.393346 0.0216553 -0.333915
+    0.392281 0.0216553 -0.333915
+    -0.393346 0.0216553 0.33834
+    0.392281 0.0216553 0.33834
+  faces 10
+    0 1 2  1  0 1 2  2
+    3 2 1  1  3 2 1  2
+    4 5 1  1  4 5 6  2
+    1 0 4  1  6 7 4  2
+    6 4 0  1  8 9 10  2
+    0 2 6  1  10 11 8  2
+    7 6 2  1  12 13 14  2
+    2 3 7  1  14 15 12  2
+    5 7 3  1  16 17 18  2
+    3 1 5  1  18 19 16  2
+  tverts 20
+    0.985152 0.016931 0
+    0.0148484 0.016931 0
+    0.985152 0.983069 0
+    0.0148484 0.983069 0
+    0.9975 0.0025 0
+    0.0025 0.0025 0
+    0.0148484 0.016931 0
+    0.985152 0.016931 0
+    0.9975 0.9975 0
+    0.9975 0.0025 0
+    0.985152 0.016931 0
+    0.985152 0.983069 0
+    0.0025 0.9975 0
+    0.9975 0.9975 0
+    0.985152 0.983069 0
+    0.0148484 0.983069 0
+    0.0025 0.0025 0
+    0.0025 0.9975 0
+    0.0148484 0.983069 0
+    0.0148484 0.016931 0
+endnode
+endmodelgeom pkt_m09x06
+donemodel pkt_m09x06

@@ -1,0 +1,175 @@
+# Rewritten by CleanModels 3 Version 3.1.1 Sat Oct 25 21:49:34 2008
+#MAXMODEL ASCII
+filedependency Unknown
+newmodel wsf08_w83_01
+setsupermodel wsf08_w83_01 null
+setanimationscale 1
+classification TILE
+#MAXGEOM ASCII
+beginmodelgeom wsf08_w83_01
+node dummy wsf08_w83_01
+  parent NULL
+endnode
+node dummy wsf08_w83_01a
+  parent wsf08_w83_01
+  position 0 0 0
+  orientation 0 0 0 0
+  wirecolor 1 0 0
+endnode
+node trimesh plane165
+  parent wsf08_w83_01a
+  position 0 0 -1
+  orientation 0 0 0 0
+  wirecolor 0.223529 0.223529 0.223529
+  tilefade 0
+  scale 1
+  render 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 1
+  alpha 1
+  transparencyhint 1
+  selfillumcolor 0 0 0
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 1
+  center 0 0 0
+  bitmap wsf01_waterxx
+  shadow 0
+  verts 4
+    -5 5 0
+    -5 -5 0
+    5 5 0
+    5 -5 0
+  faces 2
+    0 1 2 1 0 1 2 65536
+    3 2 1 1 3 2 1 65536
+  tverts 4
+    0.000499755 0.999501 0
+    0.000499517 0.000499755 0
+    0.999501 0.9995 0
+    0.9995 0.000499517 0
+endnode
+node light wsf08_w83_01ml1
+  parent wsf08_w83_01
+  position 0 0 5
+  wirecolor 0.839216 0.839216 0.839216
+  radius 14
+  multiplier 1
+  color 0 0 0
+  ambientonly 0
+  ndynamictype 0
+  affectdynamic 1
+  shadow 0
+  lightpriority 5
+  fadinglight 1
+  orientation 0 0 0 0
+endnode
+node trimesh plane164
+  parent wsf08_w83_01
+  position 0 0 -3.4
+  orientation 0 0 0 0
+  wirecolor 0.223529 0.223529 0.223529
+  tilefade 0
+  scale 1
+  render 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1
+  transparencyhint 0
+  selfillumcolor 0 0 0
+  specular 0.05 0.05 0.05
+  shininess 26
+  center 0 0 0
+  bitmap wsf01_black01
+  ambient 0 0 0
+  diffuse 0 0 0
+  shadow 0
+  verts 9
+    -5 0 0
+    -5 -5 0
+    0 0 0
+    0 -5 0
+    5 0 0
+    5 -5 0
+    -5 5 0
+    0 5 0
+    5 5 0
+  faces 8
+    0 1 2 1 0 1 0 65536
+    3 2 1 1 1 0 1 65536
+    2 3 4 1 0 1 0 65536
+    5 4 3 1 1 0 1 65536
+    6 0 7 1 2 0 2 65536
+    2 7 0 1 0 2 0 65536
+    7 2 8 1 2 0 2 65536
+    4 8 2 1 0 2 0 65536
+  tverts 3
+    0.5 0.05 0
+    0.000499517 0.05 0
+    0.999501 0.05 0
+endnode
+node aabb cm167
+  parent wsf08_w83_01
+  position 0 0 0
+  wirecolor 0.223529 0.223529 0.223529
+  ambient 0.588 0.588 0.588
+  diffuse 0 0 0.752941
+  specular 0 0 0
+  shininess 10
+  orientation 0 0 0 0
+  bitmap NULL
+  verts 9
+    -5 0 -1
+    -5 -5 -1
+    0 0 -1
+    0 -5 -1
+    5 0 -1
+    5 -5 -1
+    -5 5 -1
+    0 5 -1
+    5 5 -1
+  faces 8
+    0 1 2 1 0 0 0 6
+    3 2 1 1 0 0 0 6
+    2 3 4 1 0 0 0 6
+    5 4 3 1 0 0 0 6
+    6 0 7 1 0 0 0 6
+    2 7 0 1 0 0 0 6
+    7 2 8 1 0 0 0 6
+    4 8 2 1 0 0 0 6
+  aabb     -5 -5 -1 5 5 -1 -1
+    -5 -5 -1 0 5 -1 -1
+    -5 -5 -1 0 0 -1 -1
+    -5 -5 -1 0 0 -1 0
+    -5 -5 -1 0 0 -1 1
+    -5 0 -1 0 5 -1 -1
+    -5 0 -1 0 5 -1 4
+    -5 0 -1 0 5 -1 5
+    0 -5 -1 5 5 -1 -1
+    0 -5 -1 5 0 -1 -1
+    0 -5 -1 5 0 -1 2
+    0 -5 -1 5 0 -1 3
+    0 0 -1 5 5 -1 -1
+    0 0 -1 5 5 -1 6
+    0 0 -1 5 5 -1 7
+endnode
+node light wsf08_w83_01ml2
+  parent wsf08_w83_01
+  position 4.01851 2.73171 5
+  wirecolor 0.839216 0.839216 0.839216
+  radius 14
+  multiplier 1
+  color 0 0 0
+  ambientonly 0
+  ndynamictype 0
+  affectdynamic 1
+  shadow 0
+  lightpriority 5
+  fadinglight 1
+  orientation 0 0 0 0
+endnode
+endmodelgeom wsf08_w83_01
+donemodel wsf08_w83_01

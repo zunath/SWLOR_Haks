@@ -1,0 +1,62 @@
+#Exported from 3ds max by MDL Plug-in Suite 1.0b
+#http://www.bricksbuilder.com/nwn/utils/
+#MAXMODEL ASCII
+# model: ohof_road05
+filedependancy Unknown
+newmodel ohof_road05
+setsupermodel ohof_road05 NULL
+classification Tile
+setanimationscale 1.0
+#MAXGEOM  ASCII
+beginmodelgeom ohof_road05
+node dummy ohof_road05
+  parent NULL
+endnode
+node trimesh Plane48
+  parent ohof_road05
+  position 0 0 0.03
+  orientation 0 0 0 0
+  wirecolor 0.34375 0.34375 0.34375
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 1
+  bitmap ohof_road02
+  render 1
+  Shadow 1
+  beaming 0
+  transparencyhint 1
+  tilefade 0
+  rotatetexture 0
+  verts 9
+    -2 2 0
+    -2 0 0
+    0 2 0
+    0 0 0
+    2 2 0
+    2 0 0
+    -2 5 0
+    0 5 0
+    2 5 0
+  faces 8
+    0 1 2  1  0 1 2  0
+    3 2 1  1  3 2 1  0
+    2 3 4  1  2 3 4  0
+    5 4 3  1  5 4 3  0
+    6 0 7  1  6 0 7  0
+    2 7 0  1  2 7 0  0
+    7 2 8  1  7 2 8  0
+    4 8 2  1  4 8 2  0
+  tverts 9
+    0.000499815 0.5999 0
+    0.000499994 0.9995 0
+    0.5 0.5999 0
+    0.5 0.9995 0
+    0.9995 0.5999 0
+    0.999501 0.9995 0
+    0.000499517 0.000499845 0
+    0.5 0.000499696 0
+    0.9995 0.000499517 0
+endnode
+endmodelgeom ohof_road05
+donemodel ohof_road05

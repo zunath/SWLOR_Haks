@@ -1,0 +1,333 @@
+# Exported from NWmax 0.8 b60 at 16/04/2007 17:56:50
+# mdl file
+#
+#NWmax MODEL ASCII
+# model: FCX01_T01_11
+#local file: D:\3dsmax7\scenes\all_tiles02.max
+filedependancy all_tiles02.max
+newmodel FCX01_T01_11
+setsupermodel FCX01_T01_11 NULL
+classification Tile
+#NWmax GEOM  ASCII
+beginmodelgeom FCX01_T01_11
+node dummy FCX01_T01_11
+  parent NULL
+endnode
+node light FCX01_T01_11ml1
+  parent FCX01_T01_11
+  position 0.0 0.0 5.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 1.0 0.894118 0.0 
+  radius 14.0
+  multiplier 1.0
+  color 1.0 1.0 1.0 
+  ambientonly 0
+  nDynamicType 0
+  affectDynamic 1
+  shadow 0
+  lightpriority 5
+  fadingLight 0
+endnode
+node light FCX01_T01_11ml2
+  parent FCX01_T01_11
+  position -2.0 -2.0 4.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 1.0 0.894118 0.0 
+  radius 5.0
+  multiplier 1.0
+  color 1.0 1.0 1.0 
+  ambientonly 0
+  nDynamicType 0
+  affectDynamic 1
+  shadow 0
+  lightpriority 5
+  fadingLight 0
+endnode
+node dummy FCX01_T01_11a
+  parent FCX01_T01_11
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.345098 0.694118 0.101961 
+endnode
+#Tile trimesh node
+node trimesh platform_11
+  parent FCX01_T01_11
+  position 0.0 0.0 14.12
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.54902 0.337255 0.882353 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 0
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 0.0 0.0 
+  bitmap ctown_wal_id8
+  verts 10
+    -5.0 -5.0 0.0
+    -5.0 -1.01 0.0
+    -5.0 -1.87 0.0
+    5.0 -5.0 0.0
+    -5.0 5.0 0.0
+    5.0 1.67 0.0
+    5.0 1.25 0.0
+    5.0 -0.24 0.0
+    5.0 5.0 0.0
+    5.0 4.54 0.0
+  faces 8
+    5 9 4  1  0 1 2  3
+    4 1 5  1  3 4 5  3
+    1 2 6  1  6 7 8  3
+    6 5 1  1  9 10 11  3
+    7 0 3  1  12 13 14  3
+    6 2 0  1  15 16 17  3
+    0 7 6  1  18 19 20  3
+    4 9 8  1  21 22 23  3
+  tverts 24
+    1.40532 1.908 0
+    1.08853 1.90816 0
+    1.03762 0.806812 0
+    1.03762 0.806812 0
+    1.69988 0.806494 0
+    1.40532 1.908 0
+    1.69988 0.806494 0
+    1.7948 0.806475 0
+    1.45073 1.908 0
+    1.45073 1.908 0
+    1.40532 1.908 0
+    1.69988 0.806494 0
+    1.61548 1.90796 0
+    2.13922 0.806408 0
+    2.13956 1.90786 0
+    1.45073 1.908 0
+    1.7948 0.806475 0
+    2.13922 0.806408 0
+    2.13922 0.806408 0
+    1.61548 1.90796 0
+    1.45073 1.908 0
+    1.03762 0.806812 0
+    1.08853 1.90816 0
+    1.03796 1.90818 0
+endnode
+#Tile trimesh node
+node trimesh support_11
+  parent FCX01_T01_11
+  position 0.0 0.0 13.32
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.337255 0.337255 0.337255 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 0.0 0.0 
+  bitmap ctown_build1
+  verts 9
+    -5.0 -5.0 0.0
+    -5.0 -1.51 0.0
+    -5.0 0.01 0.0
+    5.0 -5.0 0.0
+    -5.0 5.0 0.0
+    5.0 4.26 0.0
+    5.0 5.0 0.0
+    5.0 2.52 0.0
+    4.96 5.0 0.0
+  faces 7
+    5 7 0  1  0 1 2  1
+    0 1 5  1  3 4 5  1
+    5 1 2  1  6 7 8  1
+    2 8 6  1  9 10 11  1
+    5 2 6  1  12 13 14  1
+    3 0 7  1  15 16 17  1
+    8 2 4  1  18 19 20  1
+  tverts 21
+    1.20114 2.3306 0
+    1.39259 2.33086 0
+    2.19865 3.11817 0
+    2.19865 3.11817 0
+    1.81458 3.11765 0
+    1.20114 2.3306 0
+    1.20114 2.3306 0
+    1.81458 3.11765 0
+    1.64736 3.11745 0
+    1.64736 3.11745 0
+    1.1199 2.33365 0
+    1.11998 2.33051 0
+    1.20114 2.3306 0
+    1.64736 3.11745 0
+    1.11998 2.33051 0
+    2.22036 2.33198 0
+    2.19865 3.11817 0
+    1.39259 2.33086 0
+    1.1199 2.33365 0
+    1.64736 3.11745 0
+    1.09827 3.11681 0
+endnode
+#Tile trimesh node
+node trimesh fond_11
+  parent FCX01_T01_11
+  position 0.0 0.0 -30.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.890196 0.592157 0.592157 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 0.588 0.588 0.588 
+  Diffuse 0.588 0.588 0.588 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 0.0 0.0 
+  bitmap gris3
+  verts 8
+    -3.33 -5.0 0.0
+    -5.0 -5.0 0.0
+    -5.0 3.18 0.0
+    -3.33 5.0 0.0
+    5.0 -5.0 0.0
+    -5.0 5.0 0.0
+    5.0 5.0 0.0
+    5.0 4.09 0.0
+  faces 6
+    2 3 5  1  0 1 2  1
+    1 3 2  1  3 4 5  1
+    1 0 3  1  6 7 8  1
+    3 0 7  1  9 10 11  1
+    7 6 3  1  12 13 14  1
+    7 0 4  1  15 16 17  1
+  tverts 18
+    0.636314 0.363577 0
+    0.666667 0.4 0
+    0.636314 0.4 0
+    0.636314 0.2 0
+    0.666667 0.4 0
+    0.636314 0.363577 0
+    0.636314 0.2 0
+    0.666667 0.2 0
+    0.666667 0.4 0
+    0.666667 0.4 0
+    0.666667 0.2 0
+    0.818231 0.381878 0
+    0.818231 0.381878 0
+    0.818231 0.4 0
+    0.666667 0.4 0
+    0.818231 0.381878 0
+    0.666667 0.2 0
+    0.818231 0.2 0
+endnode
+node aabb walk_11
+  parent FCX01_T01_11
+  position 0.0 0.0 14.12
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.521569 0.431373 0.0313726 
+  multimaterial 20
+    Dirt
+    Obscuring
+    Grass
+    Stone
+    Wood
+    Water
+    Nonwalk
+    Transparent
+    Carpet
+    Metal
+    Puddles
+    Swamp
+    Mud
+    Leaves
+    Lava
+    BottomlessPit
+    DeepWater
+    Door
+    Snow
+    Sand
+  ambient 0.588 0.588 0.588 
+  diffuse 0.5 0.5 0.5 
+  specular 0.0 0.0 0.0 
+  shininess 10.0
+  bitmap Stone
+  verts 9
+    -5.0 -5.0 0.0
+    0.0 -5.0 0.0
+    -5.0 0.0 0.0
+    0.0 0.0 0.0
+    5.0 -5.0 0.0
+    5.0 0.0 0.0
+    -5.0 5.0 0.0
+    0.0 5.0 0.0
+    5.0 5.0 0.0
+  faces 8
+    2 0 3  1  0 1 2  4
+    1 3 0  1  3 4 5  4
+    3 1 5  1  6 7 8  4
+    4 5 1  1  9 10 11  4
+    6 2 7  1  12 13 14  4
+    3 7 2  1  15 16 17  4
+    7 3 8  1  18 19 20  4
+    5 8 3  1  21 22 23  4
+  tverts 24
+    0.666667 0.3 0
+    0.666667 0.2 0
+    0.75 0.3 0
+    0.75 0.2 0
+    0.75 0.3 0
+    0.666667 0.2 0
+    0.75 0.3 0
+    0.75 0.2 0
+    0.833333 0.3 0
+    0.833333 0.2 0
+    0.833333 0.3 0
+    0.75 0.2 0
+    0.666667 0.4 0
+    0.666667 0.3 0
+    0.75 0.4 0
+    0.75 0.3 0
+    0.75 0.4 0
+    0.666667 0.3 0
+    0.75 0.4 0
+    0.75 0.3 0
+    0.833333 0.4 0
+    0.833333 0.3 0
+    0.833333 0.4 0
+    0.75 0.3 0
+    aabb         -5.0 -5.0 0.0 5.0 5.0 0.0 -1
+        -5.0 -5.0 0.0 0.0 5.0 0.0 -1
+        -5.0 -5.0 0.0 0.0 0.0 0.0 -1
+        -5.0 -5.0 0.0 0.0 0.0 0.0 0
+        -5.0 -5.0 0.0 0.0 0.0 0.0 1
+        -5.0 0.0 0.0 0.0 5.0 0.0 -1
+        -5.0 0.0 0.0 0.0 5.0 0.0 4
+        -5.0 0.0 0.0 0.0 5.0 0.0 5
+        0.0 -5.0 0.0 5.0 5.0 0.0 -1
+        0.0 -5.0 0.0 5.0 0.0 0.0 -1
+        0.0 -5.0 0.0 5.0 0.0 0.0 2
+        0.0 -5.0 0.0 5.0 0.0 0.0 3
+        0.0 0.0 0.0 5.0 5.0 0.0 -1
+        0.0 0.0 0.0 5.0 5.0 0.0 6
+        0.0 0.0 0.0 5.0 5.0 0.0 7
+endnode
+endmodelgeom FCX01_T01_11
+donemodel FCX01_T01_11

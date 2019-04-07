@@ -1,0 +1,42 @@
+# Exported from NWmax 0.8 b60 at 04/09/2007 00:13:16
+# mdl file
+#
+#NWmax MODEL ASCII
+# model: jz_dirtygrdc_m01
+#local file: Unknown
+filedependancy Unknown
+newmodel jz_dirtygrdc_m01
+setsupermodel jz_dirtygrdc_m01 NULL
+classification Character
+setanimationscale 1.0
+#NWmax GEOM  ASCII
+beginmodelgeom jz_dirtygrdc_m01
+node dummy jz_dirtygrdc_m01
+  parent NULL
+endnode
+node trimesh jz_groundmdm01
+  parent jz_dirtygrdc_m01
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.603922 0.843137 0.898039 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 10.0
+  bitmap jz_dirtygrdc_01
+  verts 4
+    -2.5 -2.5 0.0
+    2.5 -2.5 0.0
+    -2.5 2.5 0.0
+    2.5 2.5 0.0
+  faces 2
+    2 0 3  1  2 0 3  1
+    1 3 0  1  1 3 0  1
+  tverts 4
+    0.000499517 0.000499755 0
+    0.9995 0.000499517 0
+    0.000499755 0.999501 0
+    0.999501 0.9995 0
+endnode
+endmodelgeom jz_dirtygrdc_m01
+donemodel jz_dirtygrdc_m01

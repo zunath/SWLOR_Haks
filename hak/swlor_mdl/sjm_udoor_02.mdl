@@ -1,0 +1,3030 @@
+#MAXMODEL ASCII
+# model: sjm_UDoor_02
+filedependancy sjm_UDoor_02.max
+newmodel sjm_UDoor_02
+setsupermodel sjm_UDoor_02 NULL
+classification door
+setanimationscale 1
+#MAXGEOM  ASCII
+beginmodelgeom sjm_UDoor_02
+node dummy sjm_UDoor_02
+  parent NULL
+  #part-number 0
+endnode
+node emitter ChunkyWood09
+  parent sjm_UDoor_02
+  #part-number 1
+  p2p 0
+  p2p_sel 1
+  affectedByWind 0
+  m_isTinted 0
+  bounce 1
+  random 0
+  inherit 1
+  inheritvel 0
+  inherit_local 0
+  splat 0
+  inherit_part 0
+  renderorder 0
+  spawntype 0
+  update Explosion
+  render Normal
+  blend Normal
+  texture fxpa_cloud02
+  chunkName sjm_Chunk_S02
+  xgrid 5
+  ygrid 5
+  loop 0
+  deadspace 0
+  twosidedtex 1
+  blastRadius 0
+  blastLength 0
+  position -0.0744628012 -0.060176 1.41866004
+  orientation 0 0 -1 -3.14159012
+  xsize 494
+  ysize 502
+  threshold 0
+  combinetime 0
+  colorStart 0.482353002 0.435294002 0.31764701
+  colorEnd 0.584313989 0.533333004 0.407842994
+  alphaStart 1
+  alphaEnd 1
+  sizeStart 0.100000001
+  sizeEnd 0.100000001
+  sizeStart_y 0
+  sizeEnd_y 0
+  birthrate 6
+  lifeExp 0.75
+  mass 3
+  spread 1.22172999
+  particleRot 2.9000001
+  velocity 8
+  randvel 0.300000012
+  bounce_co 0.5
+  blurlength 10
+  fps 0
+  frameStart 0
+  frameEnd 24
+  lightningDelay 0
+  lightningRadius 0
+  lightningScale 0
+  p2p_bezier2 0
+  p2p_bezier3 0
+  grav 0
+  drag 0
+endnode
+node emitter fire!11
+  parent sjm_UDoor_02
+  #part-number 2
+  p2p 0
+  p2p_sel 1
+  affectedByWind 0
+  m_isTinted 1
+  bounce 0
+  random 0
+  inherit 1
+  inheritvel 0
+  inherit_local 0
+  splat 0
+  inherit_part 0
+  renderorder 0
+  spawntype 0
+  update Explosion
+  render Normal
+  blend Normal
+  texture fxpa_smoke01
+  xgrid 4
+  ygrid 4
+  loop 0
+  deadspace 0
+  twosidedtex 1
+  blastRadius 0.200000003
+  blastLength 1
+  position -0.0826269984 -0.060176 1.28271997
+  orientation 0 -0.707106769 -0.707106769 -3.14159012
+  xsize 377
+  ysize 333
+  threshold 0
+  combinetime 0
+  colorStart 0.474510014 0.439215988 0.36470601
+  colorEnd 0.819607973 0.79607898 0.709803998
+  alphaStart 1
+  alphaEnd 0
+  sizeStart 4
+  sizeEnd 1
+  sizeStart_y 0
+  sizeEnd_y 0
+  birthrate 35
+  lifeExp 2.5
+  mass 0.0900000036
+  spread 2.96706009
+  particleRot 0.5
+  velocity 2
+  randvel 0.5
+  bounce_co 0
+  blurlength 10
+  fps 10
+  frameStart 0
+  frameEnd 24
+  lightningDelay 0
+  lightningRadius 0
+  lightningScale 0
+  p2p_bezier2 0
+  p2p_bezier3 0
+  grav 0
+  drag 0
+endnode
+node emitter ChunkyWood10
+  parent sjm_UDoor_02
+  #part-number 3
+  p2p 0
+  p2p_sel 1
+  affectedByWind 0
+  m_isTinted 0
+  bounce 1
+  random 0
+  inherit 1
+  inheritvel 0
+  inherit_local 0
+  splat 0
+  inherit_part 0
+  renderorder 0
+  spawntype 0
+  update Explosion
+  render Normal
+  blend Normal
+  texture fxpa_cloud02
+  chunkName sjm_Chunk_S01
+  xgrid 5
+  ygrid 5
+  loop 0
+  deadspace 0
+  twosidedtex 0
+  blastRadius 0
+  blastLength 0
+  position -0.0695021972 -0.060176 0.68474102
+  orientation 0 0 -1 -3.14159012
+  xsize 364
+  ysize 473
+  threshold 0
+  combinetime 0
+  colorStart 1 1 1
+  colorEnd 1 1 1
+  alphaStart 1
+  alphaEnd 1
+  sizeStart 0.100000001
+  sizeEnd 0.100000001
+  sizeStart_y 0
+  sizeEnd_y 0
+  birthrate 6
+  lifeExp 0.75
+  mass 3
+  spread 1.22172999
+  particleRot 5
+  velocity 8
+  randvel 0.300000012
+  bounce_co 0.5
+  blurlength 10
+  fps 0
+  frameStart 0
+  frameEnd 24
+  lightningDelay 0
+  lightningRadius 0
+  lightningScale 0
+  p2p_bezier2 0
+  p2p_bezier3 0
+  grav 0
+  drag 0
+endnode
+node dummy sjm_UDoor_02grnd
+  parent sjm_UDoor_02
+  #part-number 4
+  position -7.8557503e-005 -0.000390814996 0.0547412001
+  orientation 0 0 -1 -1.57079995
+endnode
+node dummy sjm_UDoor_02head
+  parent sjm_UDoor_02
+  #part-number 5
+  position -7.77179011e-005 -0.000390814996 2.54473996
+  orientation 0 0 -1 -1.57079995
+endnode
+node dummy sjm_UDoor_02hhit
+  parent sjm_UDoor_02
+  #part-number 6
+  position -7.77559981e-005 -0.000390814996 2.43176007
+  orientation 0 0 -1 -1.57079995
+endnode
+node dummy sjm_UDoor_02impc
+  parent sjm_UDoor_02
+  #part-number 7
+  position -7.81308991e-005 -0.000390814996 1.31982994
+  orientation 0 0 -1 -1.57079995
+endnode
+node trimesh sam
+  parent sjm_UDoor_02
+  #part-number 8
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+  shadow 0
+  bitmap NULL
+  verts 8
+    -0.0216725003 -1.92605996 0.252999008
+    -0.0216716994 1.41893995 0.252999991
+    -0.0216725003 -1.92605996 -3
+    -0.0216716994 1.41893995 -3
+    0.0123127 1.41893995 0.252999991
+    0.0123119 -1.92605996 0.252999008
+    0.0123119 -1.92605996 -3
+    0.0123127 1.41893995 -3
+  faces 4
+    0 1 2 1 0 0 0 18
+    3 2 1 1 0 0 0 18
+    4 5 6 1 0 0 0 18
+    6 7 4 1 0 0 0 18
+  position -0.060873501 -0.00792989973 3
+  orientation 0 0 -1 -1.57079995
+  scale 1
+  alpha 0
+  selfillumcolor 0 0 1
+endnode
+node trimesh Mesh617
+  parent sjm_UDoor_02
+  #part-number 9
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0.0500000007 0.0500000007 0.0500000007
+  shininess 26
+  bitmap sjm02_Grate
+  verts 7
+    -0.00198415993 0.0290011 0.694999993
+    -0.00198434992 -0.738996983 0.953999996
+    -0.00198453991 -1.53499997 -4.72826002e-007
+    -0.00198415993 0.0290013999 0
+    -0.0019845299 -1.52100003 1.03999996
+    -0.00198415993 0.0290016998 -1.04100001
+    -0.00198453991 -1.54900002 -1.04100001
+  tverts 7
+    6.15221977 7.23212004 0
+    7.18683004 4.16095018 0
+    3.37023997 0.973339975 0
+    3.37023997 7.23212004 0
+    7.53171015 1.02918005 0
+    -0.791221023 7.23212004 0
+    -0.791220009 0.917500019 0
+  faces 10
+    0 1 2 1 0 1 2 2
+    3 0 2 1 3 0 2 2
+    4 2 1 1 4 2 1 2
+    4 1 2 2 4 1 2 1
+    1 0 2 2 1 0 2 1
+    3 2 0 2 3 2 0 1
+    3 5 6 2 3 5 6 1
+    5 3 6 1 5 3 6 2
+    2 6 3 1 2 6 3 2
+    2 3 6 2 2 3 6 1
+  position -1.46981001 -0.00761944987 2.49000001
+  orientation 0 0 -1 -1.57079995
+  scale 1
+  alpha 1
+  selfillumcolor 0 0 0
+endnode
+node trimesh Mesh618
+  parent Mesh617
+  #part-number 10
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0.0500000007 0.0500000007 0.0500000007
+  shininess 26
+  bitmap sjm02_Grate
+  verts 4
+    0.00599608989 -0.697001994 -0.68599999
+    0.00599608989 0.913999021 0.66900003
+    0.00599608989 0.917998016 -0.68599999
+    0.00599608989 -0.697001994 0.66900003
+  tverts 4
+    -6.53171015 0.807901978 0
+    -1.11050999 7.25119019 0
+    -6.53171015 7.26654005 0
+    -1.11050999 0.807905018 0
+  faces 4
+    0 1 2 1 0 1 2 2
+    0 3 1 1 0 3 1 2
+    2 1 0 1 2 1 0 1
+    1 3 0 1 1 3 0 1
+  position -0.0199922007 -0.879997015 -1.78999996
+  orientation 0 0 0 0
+  scale 1
+  alpha 1
+  selfillumcolor 0 0 0
+endnode
+node trimesh Mesh806
+  parent Mesh617
+  #part-number 11
+  ambient 1 1 1
+  diffuse 1 0.780391991 0.705882013
+  specular 0 0 0
+  shininess 1
+  bitmap sjm_pugDMtlBrk
+  verts 6
+    0.0549999997 0.836000979 0.162
+    -0.0490038991 0.836000979 0.162
+    0.0549999997 -0.647001982 0.162
+    -0.0509960987 -0.647001982 0.162
+    -0.0199999996 0.836000979 -0.171000004
+    -0.0219921991 -0.647001982 -0.171000004
+  tverts 8
+    0.74813199 0.0554951988 0
+    0.74813199 0.130054995 0
+    0.0543810986 0.0548631996 0
+    0.0543808006 0.130426005 0
+    0.748130977 0.289384007 0
+    0.0543803014 0.289249986 0
+    0.748130023 0.472162008 0
+    0.054379601 0.47152999 0
+  faces 7
+    0 1 2 1 0 1 2 3
+    3 2 1 1 3 2 1 3
+    1 4 3 1 1 4 3 3
+    5 3 4 1 5 3 4 3
+    4 0 5 1 4 6 5 3
+    2 5 0 1 7 5 6 3
+    5 2 3 2 5 2 3 1
+  position 0.0100077996 -0.799996972 -2.43000007
+  orientation 0 0 0 0
+  scale 1
+  alpha 1
+  selfillumcolor 0 0 0
+endnode
+node trimesh Mesh615
+  parent Mesh617
+  #part-number 12
+  ambient 1 1 1
+  diffuse 1 0.780391991 0.705882013
+  specular 0 0 0
+  shininess 1
+  bitmap sjm_pugDMtlBrk
+  verts 6
+    0.0549999997 0.836000025 0.0920002013
+    -0.0490038991 0.836000025 0.0920002013
+    0.0549999997 -0.647001982 0.0919997022
+    -0.0509960987 -0.647001982 0.0919997022
+    -0.0199999996 0.836000979 -0.111000001
+    -0.0219921991 -0.647001982 -0.111000001
+  tverts 8
+    0.746206999 0.0361947007 0
+    0.746206999 0.116800003 0
+    -0.00379334996 0.0355115011 0
+    -0.00379365007 0.117201 0
+    0.746205986 0.289047003 0
+    -0.00379424007 0.288902998 0
+    0.746205986 0.486645013 0
+    -0.00379495998 0.485962003 0
+  faces 7
+    0 1 2 1 0 1 2 3
+    3 2 1 1 3 2 1 3
+    1 4 3 1 1 4 3 3
+    5 3 4 1 5 3 4 3
+    4 0 5 1 4 6 5 3
+    2 5 0 1 7 5 6 3
+    5 2 3 2 5 2 3 1
+  position 0.0100077996 -0.799996972 -1.10000002
+  orientation 0 0 0 0
+  scale 1
+  alpha 1
+  selfillumcolor 0 0 0
+endnode
+node trimesh Object476
+  parent Mesh617
+  #part-number 13
+  ambient 1 1 1
+  diffuse 1 0.780391991 0.705882013
+  specular 0 0 0
+  shininess 1
+  bitmap sjm_pugDMtlBrk
+  verts 9
+    0.0440039001 0.0220008008 0.0359999985
+    0.0440039001 0.674998999 -0.248999998
+    -0.0330078006 0.0220008008 0.0359999985
+    -0.0330078006 0.674998999 -0.248999998
+    0.00599608989 -0.077003099 -0.0770002007
+    0.00599608989 0.669999003 -0.335000008
+    0.0430077985 -0.893999994 0.136000007
+    -0.0340038985 -0.893999994 0.136000007
+    0.00400390988 -0.893999994 0.0129995998
+  tverts 12
+    0.252240986 0.363929003 0
+    -0.0753035992 0.39726001 0
+    0.252241999 0.272965997 0
+    -0.0753030032 0.239631996 0
+    -0.0753023997 0.0826366991 0
+    0.271908998 0.318446994 0
+    -0.0506811999 0.475757986 0
+    -0.0506801009 0.161134005 0
+    0.703894019 0.377855986 0
+    0.703894973 0.259041995 0
+    0.681308985 0.161137998 0
+    0.703895986 0.0632323995 0
+  faces 13
+    0 1 2 1 0 1 2 3
+    3 2 1 1 3 2 4 3
+    4 5 0 1 5 6 0 3
+    1 0 5 1 1 0 6 3
+    2 3 4 1 2 3 5 3
+    5 4 3 1 7 5 3 3
+    6 0 7 1 8 0 9 3
+    2 7 0 1 2 9 0 3
+    8 4 6 1 10 5 11 3
+    0 6 4 1 0 8 5 3
+    7 2 8 1 9 2 10 3
+    4 8 2 1 5 10 2 3
+    8 6 7 2 10 11 9 1
+  position 0.0100079002 -0.639998019 1
+  orientation 0 0 0 0
+  scale 1
+  alpha 1
+  selfillumcolor 0 0 0
+endnode
+node trimesh Cylinder35
+  parent Mesh617
+  #part-number 14
+  ambient 1 1 1
+  diffuse 1 0.780391991 0.705882013
+  specular 0 0 0
+  shininess 1
+  bitmap sjm_pugDMtlBrk
+  verts 9
+    0.106991999 -0.0979980007 -2.08999991
+    0.0569921993 0.0429968014 1.59200001
+    0.106991999 -0.0979992971 1.671
+    0.0569921993 0.042998001 -2.08999991
+    -0.0440039001 0.0429968014 1.59200001
+    -0.0440039001 0.042998001 -2.08999991
+    -0.0940039009 -0.0979992971 1.671
+    -0.0940039009 -0.0979980007 -2.08999991
+    0.0190038998 -0.0979994982 1.90999997
+  tverts 9
+    2.04310989 0.406069994 0
+    -0.811255991 0.367063999 0
+    -0.872021019 0.40606001 0
+    2.04310989 0.367074996 0
+    -0.811255991 0.28907299 0
+    2.04310989 0.289083987 0
+    -0.872021019 0.250077993 0
+    2.04310989 0.250088006 0
+    -1.19444001 0.33721301 0
+  faces 12
+    0 1 2 1 0 1 2 3
+    0 3 1 1 0 3 1 3
+    3 4 1 1 3 4 1 3
+    3 5 4 1 3 5 4 3
+    5 6 4 1 5 6 4 3
+    5 7 6 1 5 7 6 3
+    8 1 4 2 8 1 4 1
+    8 4 6 2 8 4 6 1
+    7 0 2 2 7 0 2 1
+    8 6 7 2 8 6 7 1
+    2 8 7 2 2 8 7 1
+    2 1 8 2 2 1 8 1
+  position 0.0100077 -1.49000001 -0.400000006
+  orientation 0 0 0 0
+endnode
+node trimesh Object473
+  parent Mesh617
+  #part-number 15
+  ambient 1 1 1
+  diffuse 1 0.780391991 0.705882013
+  specular 0 0 0
+  shininess 1
+  bitmap sjm_pugDMtlBrk
+  verts 12
+    -0.0030078101 0.0829968974 -0.216000006
+    -0.0730077997 0.0429968983 -0.216000006
+    -0.120995998 0.0709996969 0.209000006
+    -0.0030078101 0.138998002 0.209000006
+    -0.0730077997 -0.0370030999 -0.216000006
+    -0.120995998 -0.0650013015 0.209000006
+    -0.0030078101 -0.077003099 -0.216000006
+    -0.0030078101 -0.132999003 0.209000006
+    0.065996103 -0.0370030999 -0.216000006
+    0.115000002 -0.0650013015 0.209000006
+    0.065996103 0.0429968983 -0.216000006
+    0.115000002 0.0709996969 0.209000006
+  tverts 14
+    0.538820028 0.0467128009 0
+    0.612565994 0.0467128009 0
+    0.612565994 0.423034012 0
+    0.538820028 0.423034012 0
+    0.170087993 0.0467128009 0
+    0.243835002 0.0467128009 0
+    0.243835002 0.423034012 0
+    0.170087993 0.423034012 0
+    0.317580998 0.0467128009 0
+    0.317580998 0.423034012 0
+    0.391326994 0.0467128009 0
+    0.391326994 0.423034012 0
+    0.465074003 0.0467128009 0
+    0.465074003 0.423034012 0
+  faces 12
+    0 1 2 1 0 1 2 1
+    2 3 0 2 2 3 0 1
+    1 4 5 4 4 5 6 1
+    5 2 1 4 6 7 4 1
+    4 6 7 1 5 8 9 1
+    7 5 4 2 9 6 5 1
+    6 8 9 2 8 10 11 1
+    9 7 6 4 11 9 8 1
+    8 10 11 1 10 12 13 1
+    11 9 8 1 13 11 10 1
+    10 0 3 4 12 0 3 1
+    3 11 10 8 3 13 12 1
+  position 8.0180198e-006 1.98364e-006 1.13999999
+  orientation 0 0 0 0
+  scale 1
+  alpha 1
+  selfillumcolor 0 0 0
+endnode
+node trimesh Cylinder347
+  parent Mesh617
+  #part-number 16
+  ambient 1 1 1
+  diffuse 1 0.780391991 0.705882013
+  specular 0 0 0
+  shininess 1
+  bitmap sjm_pugDMtlBrk
+  verts 7
+    -0.0030078101 0.138998002 -0.381000012
+    -0.120995998 0.0709996969 -0.381000012
+    -0.0030078101 0.00299650012 -0.219999999
+    -0.120995998 -0.0650013015 -0.381000012
+    -0.0030078101 -0.132999003 -0.381000012
+    0.115000002 -0.0650013015 -0.381000012
+    0.115000002 0.0709996969 -0.381000012
+  tverts 8
+    0.504550993 0.0682855025 0
+    0.536913991 0.0682855025 0
+    0.456007004 0.434855998 0
+    0.342738986 0.0682855025 0
+    0.375101 0.0682855025 0
+    0.407463998 0.0682855025 0
+    0.439826012 0.0682855025 0
+    0.472189009 0.0682855025 0
+  faces 6
+    0 1 2 1 0 1 2 1
+    1 3 2 2 3 4 2 1
+    3 4 2 4 4 5 2 1
+    4 5 2 8 5 6 2 1
+    5 6 2 16 6 7 2 1
+    6 0 2 32 7 0 2 1
+  position 8.0180198e-006 1.67846997e-006 1.73000002
+  orientation 0 0 0 0
+endnode
+node trimesh Mesh803
+  parent Mesh617
+  #part-number 17
+  ambient 1 1 1
+  diffuse 1 0.780391991 0.705882013
+  specular 0 0 0
+  shininess 1
+  bitmap sjm_pugDMtlBrk
+  verts 12
+    -0.0030078101 0.0829980001 -1.71000004
+    -0.0730077997 0.0429968983 1.704
+    -0.0030078101 0.0829968974 1.704
+    -0.0730077997 0.042998001 -1.71000004
+    -0.0730077997 -0.0370030999 1.704
+    -0.0730077997 -0.037002001 -1.71000004
+    -0.0030078101 -0.077003099 1.704
+    -0.0030078101 -0.0770019963 -1.71000004
+    0.065996103 -0.0370030999 1.704
+    0.065996103 -0.037002001 -1.71000004
+    0.065996103 0.0429968983 1.704
+    0.065996103 0.042998001 -1.71000004
+  tverts 14
+    1.90707004 -0.592728019 0
+    -0.795102 -0.519945025 0
+    -0.795102 -0.592737973 0
+    1.90707004 -0.519935012 0
+    1.90707004 -0.956692994 0
+    -0.795100987 -0.88391 0
+    -0.795099974 -0.956703007 0
+    1.90707004 -0.883899987 0
+    -0.795100987 -0.811116993 0
+    1.90707004 -0.81110698 0
+    -0.795100987 -0.738323987 0
+    1.90707004 -0.738313973 0
+    -0.795102 -0.66553098 0
+    1.90707004 -0.665521026 0
+  faces 12
+    0 1 2 1 0 1 2 2
+    0 3 1 1 0 3 1 2
+    3 4 1 1 4 5 6 2
+    3 5 4 1 4 7 5 2
+    5 6 4 1 7 8 5 2
+    5 7 6 1 7 9 8 2
+    7 8 6 1 9 10 8 2
+    7 9 8 1 9 11 10 2
+    9 10 8 1 11 12 10 2
+    9 11 10 1 11 13 12 2
+    11 2 10 1 13 2 12 2
+    11 0 2 1 13 0 2 2
+  position 8.0180198e-006 2.59399008e-006 -0.779999971
+  orientation 0 0 0 0
+  scale 1
+  alpha 1
+  selfillumcolor 0 0 0
+endnode
+node trimesh Line27
+  parent sjm_UDoor_02
+  #part-number 18
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0.0500000007 0.0500000007 0.0500000007
+  shininess 26
+  bitmap sjm02_Grate
+  verts 7
+    -0.00198477996 0.741002977 0.953999996
+    -0.00198495993 2.09515997e-006 0.694999993
+    -0.00198458997 1.56500006 5.24482004e-007
+    -0.00198494992 0.0520043001 0
+    -0.00198458997 1.551 1.03999996
+    -0.00198495993 2.68049007e-006 -1.04100001
+    -0.00198457995 1.57799995 -1.04100001
+  tverts 7
+    7.18684006 -3.16099 0
+    6.15221977 -6.12616014 0
+    3.37023997 0.133154005 0
+    3.37024999 -5.91540003 0
+    7.53171015 0.0773143992 0
+    -0.791218996 -6.12616014 0
+    -0.791220009 0.188994005 0
+  faces 10
+    0 1 2 1 0 1 2 2
+    1 3 2 1 1 3 2 2
+    2 4 0 1 2 4 0 2
+    0 4 2 2 0 4 2 1
+    1 0 2 2 1 0 2 1
+    2 3 1 2 2 3 1 1
+    5 3 6 2 5 3 6 1
+    3 5 6 1 3 5 6 2
+    6 2 3 1 6 2 3 2
+    3 2 6 2 3 2 6 1
+  position 1.84019005 -0.0076182601 2.49000001
+  orientation 0 0 -1 -1.57079995
+  scale 1
+  alpha 1
+  selfillumcolor 0 0 0
+endnode
+node trimesh Rectangle04
+  parent Line27
+  #part-number 19
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0.0500000007 0.0500000007 0.0500000007
+  shininess 26
+  bitmap sjm02_Grate
+  verts 4
+    0.00599608989 -1.39699996 0.668999016
+    0.00599608989 0.232002005 -0.68599999
+    0.00599608989 -1.42499995 -0.68599999
+    0.00599608989 0.232001007 0.66900003
+  tverts 4
+    -1.11050999 -6.15303993 0
+    -6.53171015 0.362320006 0
+    -6.53171015 -6.26656008 0
+    -1.11050999 0.362322986 0
+  faces 4
+    0 1 2 1 0 1 2 2
+    3 1 0 1 3 1 0 2
+    0 2 1 1 0 2 1 1
+    3 0 1 1 3 0 1 1
+  position -0.0199924 1.38999999 -1.78999996
+  orientation 0 0 0 0
+  scale 1
+  alpha 1
+  selfillumcolor 0 0 0
+endnode
+node trimesh Mesh624
+  parent Line27
+  #part-number 20
+  ambient 1 1 1
+  diffuse 1 0.780391991 0.705882013
+  specular 0 0 0
+  shininess 1
+  bitmap sjm_pugDMtlBrk
+  verts 12
+    -0.0730077997 -0.0360020995 -0.216000006
+    -0.0030078101 -0.0760020986 -0.216000006
+    -0.120995998 -0.0640003011 0.209000006
+    -0.0030078101 -0.132002994 0.209000006
+    -0.0730077997 0.0439978987 -0.216000006
+    -0.120995998 0.0720006973 0.209000006
+    -0.0030078101 0.0839978978 -0.216000006
+    -0.0030078101 0.139999002 0.209000006
+    0.065996103 0.0439978987 -0.216000006
+    0.115000002 0.0720006973 0.209000006
+    0.065996103 -0.0360020995 -0.216000006
+    0.115000002 -0.0640003011 0.209000006
+  tverts 14
+    0.624234974 0.0415425003 0
+    0.54895401 0.0415425003 0
+    0.624234974 0.425700009 0
+    0.54895401 0.425700009 0
+    0.247825995 0.0415425003 0
+    0.172544003 0.0415425003 0
+    0.247825995 0.425700009 0
+    0.172544003 0.425700009 0
+    0.323107988 0.0415425003 0
+    0.323107988 0.425700009 0
+    0.398389995 0.0415425003 0
+    0.398389995 0.425700009 0
+    0.473672003 0.0415425003 0
+    0.473672003 0.425700009 0
+  faces 12
+    0 1 2 1 0 1 2 1
+    3 2 1 2 3 2 1 1
+    4 0 5 4 4 5 6 1
+    2 5 0 4 7 6 5 1
+    6 4 7 1 8 4 9 1
+    5 7 4 2 6 9 4 1
+    8 6 9 2 10 8 11 1
+    7 9 6 4 9 11 8 1
+    10 8 11 1 12 10 13 1
+    9 11 8 1 11 13 10 1
+    1 10 3 4 1 12 3 1
+    11 3 10 8 13 3 12 1
+  position 7.22647019e-006 -0.00999801978 1.13999999
+  orientation 0 0 0 0
+  scale 1
+  alpha 1
+  selfillumcolor 0 0 0
+endnode
+node trimesh Mesh625
+  parent Line27
+  #part-number 21
+  ambient 1 1 1
+  diffuse 1 0.780391991 0.705882013
+  specular 0 0 0
+  shininess 1
+  bitmap sjm_pugDMtlBrk
+  verts 7
+    -0.120995998 -0.0640003011 -0.381000012
+    -0.0030078101 -0.132002994 -0.381000012
+    -0.0030078101 0.00399746979 -0.219999999
+    -0.120995998 0.0720006973 -0.381000012
+    -0.0030078101 0.139999002 -0.381000012
+    0.115000002 0.0720006973 -0.381000012
+    0.115000002 -0.0640003011 -0.381000012
+  tverts 8
+    0.531213999 0.0345683992 0
+    0.493158013 0.0345683992 0
+    0.436073005 0.465633988 0
+    0.340932012 0.0345683992 0
+    0.302875996 0.0345683992 0
+    0.378989011 0.0345683992 0
+    0.417044997 0.0345683992 0
+    0.455101997 0.0345683992 0
+  faces 6
+    0 1 2 1 0 1 2 1
+    3 0 2 2 3 4 2 1
+    4 3 2 4 5 3 2 1
+    5 4 2 8 6 5 2 1
+    6 5 2 16 7 6 2 1
+    1 6 2 32 1 7 2 1
+  position 7.22647019e-006 -0.00999831967 1.73000002
+  orientation 0 0 0 0
+endnode
+node trimesh Mesh626
+  parent Line27
+  #part-number 22
+  ambient 1 1 1
+  diffuse 1 0.780391991 0.705882013
+  specular 0 0 0
+  shininess 1
+  bitmap sjm_pugDMtlBrk
+  verts 12
+    -0.0730077997 -0.0360020995 1.704
+    -0.0030078101 -0.0760010034 -1.71000004
+    -0.0030078101 -0.0760020986 1.704
+    -0.0730077997 -0.0360010006 -1.71000004
+    -0.0730077997 0.0439978987 1.704
+    -0.0730077997 0.0439990014 -1.71000004
+    -0.0030078101 0.0839978978 1.704
+    -0.0030078101 0.0839990005 -1.71000004
+    0.065996103 0.0439978987 1.704
+    0.065996103 0.0439990014 -1.71000004
+    0.065996103 -0.0360020995 1.704
+    0.065996103 -0.0360010006 -1.71000004
+  tverts 14
+    -0.795692027 -0.524890006 0
+    1.82010996 -0.595346987 0
+    -0.795691013 -0.595355988 0
+    1.82010996 -0.524879992 0
+    -0.79569 -0.877220988 0
+    1.82010996 -0.947677016 0
+    -0.79569 -0.94768697 0
+    1.82010996 -0.877210975 0
+    -0.795691013 -0.806755006 0
+    1.82010996 -0.806744993 0
+    -0.795691013 -0.736288011 0
+    1.82010996 -0.736279011 0
+    -0.795691013 -0.665822029 0
+    1.82010996 -0.665813029 0
+  faces 12
+    0 1 2 1 0 1 2 2
+    3 1 0 1 3 1 0 2
+    4 3 0 1 4 5 6 2
+    5 3 4 1 7 5 4 2
+    6 5 4 1 8 7 4 2
+    7 5 6 1 9 7 8 2
+    8 7 6 1 10 9 8 2
+    9 7 8 1 11 9 10 2
+    10 9 8 1 12 11 10 2
+    11 9 10 1 13 11 12 2
+    2 11 10 1 2 13 12 2
+    1 11 2 1 1 13 2 2
+  position 7.22647019e-006 -0.00999740977 -0.779999971
+  orientation 0 0 0 0
+  scale 1
+  alpha 1
+  selfillumcolor 0 0 0
+endnode
+node trimesh Mesh621
+  parent Line27
+  #part-number 23
+  ambient 1 1 1
+  diffuse 1 0.780391991 0.705882013
+  specular 0 0 0
+  shininess 1
+  bitmap sjm_pugDMtlBrk
+  verts 6
+    -0.0490038991 -1.347 0.162
+    0.0549999997 -1.347 0.162
+    0.0549999997 0.153999001 0.162
+    -0.0509960987 0.153999001 0.162
+    -0.0199999996 -1.347 -0.171000004
+    -0.0219921991 0.153999001 -0.171000004
+  tverts 8
+    0.868561029 0.117481001 0
+    0.868561029 0.0391203985 0
+    0.139449 0.0384562016 0
+    0.139448002 0.117871001 0
+    0.868560016 0.284931004 0
+    0.139448002 0.284790009 0
+    0.868560016 0.477025002 0
+    0.139447004 0.476361006 0
+  faces 7
+    0 1 2 1 0 1 2 3
+    2 3 0 1 2 3 0 3
+    4 0 3 1 4 0 3 3
+    3 5 4 1 3 5 4 3
+    1 4 5 1 6 4 5 3
+    5 2 1 1 5 7 6 3
+    2 5 3 2 2 5 3 1
+  position 0.0100074997 1.34000003 -2.43000007
+  orientation 0 0 0 0
+  scale 1
+  alpha 1
+  selfillumcolor 0 0 0
+endnode
+node trimesh Mesh619
+  parent Line27
+  #part-number 24
+  ambient 1 1 1
+  diffuse 1 0.780391991 0.705882013
+  specular 0 0 0
+  shininess 1
+  bitmap sjm_pugDMtlBrk
+  verts 6
+    -0.0490038991 -1.347 0.091999501
+    0.0549999997 -1.347 0.091999501
+    0.0549999997 0.153999001 0.0920000002
+    -0.0509960987 0.153999001 0.0920000002
+    -0.0199999996 -1.347 -0.111000001
+    -0.0219921991 0.153999001 -0.111000001
+  tverts 8
+    0.707324028 0.111579001 0
+    0.707324028 0.0337780006 0
+    -0.0165896993 0.0331185013 0
+    -0.0165899992 0.111966997 0
+    0.707323015 0.277835011 0
+    -0.0165906008 0.277696013 0
+    0.707322001 0.468560994 0
+    -0.0165912993 0.467900991 0
+  faces 7
+    0 1 2 1 0 1 2 3
+    2 3 0 1 2 3 0 3
+    4 0 3 1 4 0 3 3
+    3 5 4 1 3 5 4 3
+    1 4 5 1 6 4 5 3
+    5 2 1 1 5 7 6 3
+    2 5 3 2 2 5 3 1
+  position 0.0100074997 1.34000003 -1.10000002
+  orientation 0 0 0 0
+  scale 1
+  alpha 1
+  selfillumcolor 0 0 0
+endnode
+node trimesh Mesh620
+  parent Line27
+  #part-number 25
+  ambient 1 1 1
+  diffuse 1 0.780391991 0.705882013
+  specular 0 0 0
+  shininess 1
+  bitmap sjm_pugDMtlBrk
+  verts 9
+    0.0440039001 -0.705000997 -0.259000003
+    0.0440039001 -0.0350011997 0.0260000005
+    -0.0330078006 -0.0350011997 0.0260000005
+    -0.0330078006 -0.705000997 -0.259000003
+    0.00599608989 -0.697003007 -0.344999999
+    0.00599608989 0.063997902 -0.0870001987
+    0.0430077985 0.880999982 0.126000002
+    -0.0340038985 0.880999982 0.126000002
+    0.00400390988 0.880999982 0.00300009991
+  tverts 12
+    -0.0986744985 0.415392995 0
+    0.271272987 0.377746999 0
+    0.271272987 0.275007993 0
+    -0.0986739025 0.237359002 0
+    -0.0986732021 0.0600396991 0
+    -0.0708646998 0.504052997 0
+    0.293487012 0.326377004 0
+    -0.0708634034 0.148699 0
+    0.781395018 0.393476993 0
+    0.781395018 0.259281009 0
+    0.755886018 0.148702994 0
+    0.781395972 0.0381234996 0
+  faces 13
+    0 1 2 1 0 1 2 3
+    2 3 0 1 2 3 4 3
+    4 5 1 1 5 6 1 3
+    1 0 4 1 1 0 5 3
+    3 2 5 1 3 2 6 3
+    5 4 3 1 6 7 3 3
+    1 6 7 1 1 8 9 3
+    7 2 1 1 9 2 1 3
+    5 8 6 1 6 10 11 3
+    6 1 5 1 8 1 6 3
+    2 7 8 1 2 9 10 3
+    8 5 2 1 10 6 2 3
+    6 8 7 2 11 10 9 1
+  position 0.0100074001 0.700002015 1.00999999
+  orientation 0 0 0 0
+  scale 1
+  alpha 1
+  selfillumcolor 0 0 0
+endnode
+node trimesh Mesh616
+  parent Line27
+  #part-number 26
+  ambient 1 1 1
+  diffuse 1 0.780391991 0.705882013
+  specular 0 0 0
+  shininess 1
+  bitmap sjm_pugDMtlBrk
+  verts 9
+    0.0569921993 -0.106002003 1.59200001
+    0.106991999 0.0350000001 -2.08999991
+    0.106991999 0.0349987 1.671
+    0.0569921993 -0.106000997 -2.08999991
+    -0.0440039001 -0.106002003 1.59200001
+    -0.0440039001 -0.106000997 -2.08999991
+    -0.0940039009 0.0349987 1.671
+    -0.0940039009 0.0350000001 -2.08999991
+    0.0190038998 0.0349985994 1.90999997
+  tverts 9
+    -0.791108012 0.32505399 0
+    1.95675004 0.362603992 0
+    -0.849605978 0.362594008 0
+    1.95675004 0.325064003 0
+    -0.791108012 0.249972999 0
+    1.95675004 0.249982998 0
+    -0.849605978 0.212431997 0
+    1.95675004 0.212441996 0
+    -1.15998995 0.296315998 0
+  faces 12
+    0 1 2 1 0 1 2 3
+    3 1 0 1 3 1 0 3
+    4 3 0 1 4 3 0 3
+    5 3 4 1 5 3 4 3
+    6 5 4 1 6 5 4 3
+    7 5 6 1 7 5 6 3
+    0 8 4 2 0 8 4 1
+    4 8 6 2 4 8 6 1
+    1 7 2 2 1 7 2 1
+    6 8 7 2 6 8 7 1
+    8 2 7 2 8 2 7 1
+    0 2 8 2 0 2 8 1
+  position 0.0100076003 1.60000002 -0.399998993
+  orientation 0 0 0 0
+endnode
+endmodelgeom sjm_UDoor_02
+
+#MAXANIM ASCII
+newanim opening2 sjm_UDoor_02
+  length 0.966666996
+  transtime 0.25
+  animroot sjm_UDoor_02
+node dummy sjm_UDoor_02
+  parent NULL
+  #part-number 0
+endnode
+node emitter ChunkyWood09
+  parent sjm_UDoor_02
+  #part-number 1
+endnode
+node emitter fire!11
+  parent sjm_UDoor_02
+  #part-number 2
+endnode
+node emitter ChunkyWood10
+  parent sjm_UDoor_02
+  #part-number 3
+endnode
+node dummy sjm_UDoor_02grnd
+  parent sjm_UDoor_02
+  #part-number 4
+endnode
+node dummy sjm_UDoor_02head
+  parent sjm_UDoor_02
+  #part-number 5
+endnode
+node dummy sjm_UDoor_02hhit
+  parent sjm_UDoor_02
+  #part-number 6
+endnode
+node dummy sjm_UDoor_02impc
+  parent sjm_UDoor_02
+  #part-number 7
+endnode
+node trimesh sam
+  parent sjm_UDoor_02
+  #part-number 8
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+  alphakey 2
+    0 0
+    0.966666996 0
+endnode
+node trimesh Mesh617
+  parent sjm_UDoor_02
+  #part-number 9
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+  orientationkey 4
+    0 0 0 -1 -1.57079995
+    0.899999976 0 0 -1 -3.01941991
+    0.93333298 1.29905004e-007 0 -1 -2.96706009
+    0.966666996 0 0 -1 -3.01941991
+endnode
+node trimesh Mesh618
+  parent Mesh617
+  #part-number 10
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh806
+  parent Mesh617
+  #part-number 11
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh615
+  parent Mesh617
+  #part-number 12
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Object476
+  parent Mesh617
+  #part-number 13
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Cylinder35
+  parent Mesh617
+  #part-number 14
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Object473
+  parent Mesh617
+  #part-number 15
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Cylinder347
+  parent Mesh617
+  #part-number 16
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh803
+  parent Mesh617
+  #part-number 17
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Line27
+  parent sjm_UDoor_02
+  #part-number 18
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+  orientationkey 3
+    0 0 0 -1 -1.57079995
+    0.93333298 0 0 -1 -0.0182201006
+    0.966666996 0 0 -1 -0.0523604974
+endnode
+node trimesh Rectangle04
+  parent Line27
+  #part-number 19
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh624
+  parent Line27
+  #part-number 20
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh625
+  parent Line27
+  #part-number 21
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh626
+  parent Line27
+  #part-number 22
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh621
+  parent Line27
+  #part-number 23
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh619
+  parent Line27
+  #part-number 24
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh620
+  parent Line27
+  #part-number 25
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh616
+  parent Line27
+  #part-number 26
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+doneanim opening2 sjm_UDoor_02
+
+#MAXANIM ASCII
+newanim opening1 sjm_UDoor_02
+  length 1
+  transtime 0.25
+  animroot sjm_UDoor_02
+node dummy sjm_UDoor_02
+  parent NULL
+  #part-number 0
+endnode
+node emitter ChunkyWood09
+  parent sjm_UDoor_02
+  #part-number 1
+endnode
+node emitter fire!11
+  parent sjm_UDoor_02
+  #part-number 2
+endnode
+node emitter ChunkyWood10
+  parent sjm_UDoor_02
+  #part-number 3
+endnode
+node dummy sjm_UDoor_02grnd
+  parent sjm_UDoor_02
+  #part-number 4
+endnode
+node dummy sjm_UDoor_02head
+  parent sjm_UDoor_02
+  #part-number 5
+endnode
+node dummy sjm_UDoor_02hhit
+  parent sjm_UDoor_02
+  #part-number 6
+endnode
+node dummy sjm_UDoor_02impc
+  parent sjm_UDoor_02
+  #part-number 7
+endnode
+node trimesh sam
+  parent sjm_UDoor_02
+  #part-number 8
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+  alphakey 2
+    0 0
+    1 0
+endnode
+node trimesh Mesh617
+  parent sjm_UDoor_02
+  #part-number 9
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+  orientationkey 4
+    0 1.43898006e-007 -1.43898006e-007 -1 -1.57079995
+    0.93333298 0 0 -1 -0.116518997
+    0.966666996 0 0 -1 -0.174533993
+    1 0 0 -1 -0.122173995
+endnode
+node trimesh Mesh618
+  parent Mesh617
+  #part-number 10
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh806
+  parent Mesh617
+  #part-number 11
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh615
+  parent Mesh617
+  #part-number 12
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Object476
+  parent Mesh617
+  #part-number 13
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Cylinder35
+  parent Mesh617
+  #part-number 14
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Object473
+  parent Mesh617
+  #part-number 15
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Cylinder347
+  parent Mesh617
+  #part-number 16
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh803
+  parent Mesh617
+  #part-number 17
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Line27
+  parent sjm_UDoor_02
+  #part-number 18
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+  orientationkey 3
+    0 0 0 -1 -1.57079995
+    0.966666996 0 0 -1 -3.12336993
+    1 0 0 -1 -3.08923006
+endnode
+node trimesh Rectangle04
+  parent Line27
+  #part-number 19
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh624
+  parent Line27
+  #part-number 20
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh625
+  parent Line27
+  #part-number 21
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh626
+  parent Line27
+  #part-number 22
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh621
+  parent Line27
+  #part-number 23
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh619
+  parent Line27
+  #part-number 24
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh620
+  parent Line27
+  #part-number 25
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh616
+  parent Line27
+  #part-number 26
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+doneanim opening1 sjm_UDoor_02
+
+#MAXANIM ASCII
+newanim closed sjm_UDoor_02
+  length 0.0333333015
+  transtime 0.25
+  animroot sjm_UDoor_02
+node dummy sjm_UDoor_02
+  parent NULL
+  #part-number 0
+endnode
+node emitter ChunkyWood09
+  parent sjm_UDoor_02
+  #part-number 1
+endnode
+node emitter fire!11
+  parent sjm_UDoor_02
+  #part-number 2
+endnode
+node emitter ChunkyWood10
+  parent sjm_UDoor_02
+  #part-number 3
+endnode
+node dummy sjm_UDoor_02grnd
+  parent sjm_UDoor_02
+  #part-number 4
+endnode
+node dummy sjm_UDoor_02head
+  parent sjm_UDoor_02
+  #part-number 5
+endnode
+node dummy sjm_UDoor_02hhit
+  parent sjm_UDoor_02
+  #part-number 6
+endnode
+node dummy sjm_UDoor_02impc
+  parent sjm_UDoor_02
+  #part-number 7
+endnode
+node trimesh sam
+  parent sjm_UDoor_02
+  #part-number 8
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+  alphakey 2
+    0 0
+    0.0333333015 0
+endnode
+node trimesh Mesh617
+  parent sjm_UDoor_02
+  #part-number 9
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+  orientationkey 2
+    0 1.25373003e-006 -1.25374004e-006 -1 -1.57079995
+    0.0333333015 0 0 -1 -1.57079995
+endnode
+node trimesh Mesh618
+  parent Mesh617
+  #part-number 10
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh806
+  parent Mesh617
+  #part-number 11
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh615
+  parent Mesh617
+  #part-number 12
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Object476
+  parent Mesh617
+  #part-number 13
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Cylinder35
+  parent Mesh617
+  #part-number 14
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Object473
+  parent Mesh617
+  #part-number 15
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Cylinder347
+  parent Mesh617
+  #part-number 16
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh803
+  parent Mesh617
+  #part-number 17
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Line27
+  parent sjm_UDoor_02
+  #part-number 18
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+  orientationkey 2
+    0 6.01616023e-007 -6.01618979e-007 -1 -1.57079995
+    0.0333333015 1.20395998e-006 -1.20395998e-006 -1 -1.57079995
+endnode
+node trimesh Rectangle04
+  parent Line27
+  #part-number 19
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh624
+  parent Line27
+  #part-number 20
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh625
+  parent Line27
+  #part-number 21
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh626
+  parent Line27
+  #part-number 22
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh621
+  parent Line27
+  #part-number 23
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh619
+  parent Line27
+  #part-number 24
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh620
+  parent Line27
+  #part-number 25
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh616
+  parent Line27
+  #part-number 26
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+doneanim closed sjm_UDoor_02
+
+#MAXANIM ASCII
+newanim opened2 sjm_UDoor_02
+  length 0.0333333015
+  transtime 0.25
+  animroot sjm_UDoor_02
+node dummy sjm_UDoor_02
+  parent NULL
+  #part-number 0
+endnode
+node emitter ChunkyWood09
+  parent sjm_UDoor_02
+  #part-number 1
+endnode
+node emitter fire!11
+  parent sjm_UDoor_02
+  #part-number 2
+endnode
+node emitter ChunkyWood10
+  parent sjm_UDoor_02
+  #part-number 3
+endnode
+node dummy sjm_UDoor_02grnd
+  parent sjm_UDoor_02
+  #part-number 4
+endnode
+node dummy sjm_UDoor_02head
+  parent sjm_UDoor_02
+  #part-number 5
+endnode
+node dummy sjm_UDoor_02hhit
+  parent sjm_UDoor_02
+  #part-number 6
+endnode
+node dummy sjm_UDoor_02impc
+  parent sjm_UDoor_02
+  #part-number 7
+endnode
+node trimesh sam
+  parent sjm_UDoor_02
+  #part-number 8
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+  alphakey 2
+    0 0
+    0.0333333015 0
+endnode
+node trimesh Mesh617
+  parent sjm_UDoor_02
+  #part-number 9
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+  orientationkey 2
+    0 0 0 -1 -3.01941991
+    0.0333333015 0 0 -1 -3.01941991
+endnode
+node trimesh Mesh618
+  parent Mesh617
+  #part-number 10
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh806
+  parent Mesh617
+  #part-number 11
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh615
+  parent Mesh617
+  #part-number 12
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Object476
+  parent Mesh617
+  #part-number 13
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Cylinder35
+  parent Mesh617
+  #part-number 14
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Object473
+  parent Mesh617
+  #part-number 15
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Cylinder347
+  parent Mesh617
+  #part-number 16
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh803
+  parent Mesh617
+  #part-number 17
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Line27
+  parent sjm_UDoor_02
+  #part-number 18
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+  orientationkey 2
+    0 0 0 -1 -0.052360598
+    0.0333333015 8.04750982e-007 0 -1 -0.052360598
+endnode
+node trimesh Rectangle04
+  parent Line27
+  #part-number 19
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh624
+  parent Line27
+  #part-number 20
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh625
+  parent Line27
+  #part-number 21
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh626
+  parent Line27
+  #part-number 22
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh621
+  parent Line27
+  #part-number 23
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh619
+  parent Line27
+  #part-number 24
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh620
+  parent Line27
+  #part-number 25
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh616
+  parent Line27
+  #part-number 26
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+doneanim opened2 sjm_UDoor_02
+
+#MAXANIM ASCII
+newanim opened1 sjm_UDoor_02
+  length 0.0333333015
+  transtime 0.25
+  animroot sjm_UDoor_02
+node dummy sjm_UDoor_02
+  parent NULL
+  #part-number 0
+endnode
+node emitter ChunkyWood09
+  parent sjm_UDoor_02
+  #part-number 1
+endnode
+node emitter fire!11
+  parent sjm_UDoor_02
+  #part-number 2
+endnode
+node emitter ChunkyWood10
+  parent sjm_UDoor_02
+  #part-number 3
+endnode
+node dummy sjm_UDoor_02grnd
+  parent sjm_UDoor_02
+  #part-number 4
+endnode
+node dummy sjm_UDoor_02head
+  parent sjm_UDoor_02
+  #part-number 5
+endnode
+node dummy sjm_UDoor_02hhit
+  parent sjm_UDoor_02
+  #part-number 6
+endnode
+node dummy sjm_UDoor_02impc
+  parent sjm_UDoor_02
+  #part-number 7
+endnode
+node trimesh sam
+  parent sjm_UDoor_02
+  #part-number 8
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+  alphakey 2
+    0 0
+    0.0333333015 0
+endnode
+node trimesh Mesh617
+  parent sjm_UDoor_02
+  #part-number 9
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+  orientationkey 2
+    0 0 0 -1 -0.122173995
+    0.0333333015 3.44544986e-007 0 -1 -0.122173995
+endnode
+node trimesh Mesh618
+  parent Mesh617
+  #part-number 10
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh806
+  parent Mesh617
+  #part-number 11
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh615
+  parent Mesh617
+  #part-number 12
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Object476
+  parent Mesh617
+  #part-number 13
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Cylinder35
+  parent Mesh617
+  #part-number 14
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Object473
+  parent Mesh617
+  #part-number 15
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Cylinder347
+  parent Mesh617
+  #part-number 16
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh803
+  parent Mesh617
+  #part-number 17
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Line27
+  parent sjm_UDoor_02
+  #part-number 18
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+  orientationkey 2
+    0 0 0 -1 -3.08923006
+    0.0333333015 0 0 -1 -3.08923006
+endnode
+node trimesh Rectangle04
+  parent Line27
+  #part-number 19
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh624
+  parent Line27
+  #part-number 20
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh625
+  parent Line27
+  #part-number 21
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh626
+  parent Line27
+  #part-number 22
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh621
+  parent Line27
+  #part-number 23
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh619
+  parent Line27
+  #part-number 24
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh620
+  parent Line27
+  #part-number 25
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh616
+  parent Line27
+  #part-number 26
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+doneanim opened1 sjm_UDoor_02
+
+#MAXANIM ASCII
+newanim closing2 sjm_UDoor_02
+  length 0.966666996
+  transtime 0.25
+  animroot sjm_UDoor_02
+node dummy sjm_UDoor_02
+  parent NULL
+  #part-number 0
+endnode
+node emitter ChunkyWood09
+  parent sjm_UDoor_02
+  #part-number 1
+endnode
+node emitter fire!11
+  parent sjm_UDoor_02
+  #part-number 2
+endnode
+node emitter ChunkyWood10
+  parent sjm_UDoor_02
+  #part-number 3
+endnode
+node dummy sjm_UDoor_02grnd
+  parent sjm_UDoor_02
+  #part-number 4
+endnode
+node dummy sjm_UDoor_02head
+  parent sjm_UDoor_02
+  #part-number 5
+endnode
+node dummy sjm_UDoor_02hhit
+  parent sjm_UDoor_02
+  #part-number 6
+endnode
+node dummy sjm_UDoor_02impc
+  parent sjm_UDoor_02
+  #part-number 7
+endnode
+node trimesh sam
+  parent sjm_UDoor_02
+  #part-number 8
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+  alphakey 2
+    0 0
+    0.966666996 0
+endnode
+node trimesh Mesh617
+  parent sjm_UDoor_02
+  #part-number 9
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+  orientationkey 3
+    0 0 0 -1 -3.01941991
+    0.93333298 0 0 -1 -1.50465
+    0.966666996 0 0 -1 -1.57079995
+endnode
+node trimesh Mesh618
+  parent Mesh617
+  #part-number 10
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh806
+  parent Mesh617
+  #part-number 11
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh615
+  parent Mesh617
+  #part-number 12
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Object476
+  parent Mesh617
+  #part-number 13
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Cylinder35
+  parent Mesh617
+  #part-number 14
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Object473
+  parent Mesh617
+  #part-number 15
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Cylinder347
+  parent Mesh617
+  #part-number 16
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh803
+  parent Mesh617
+  #part-number 17
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Line27
+  parent sjm_UDoor_02
+  #part-number 18
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+  orientationkey 3
+    0 0 0 -1 -0.0523604974
+    0.93333298 0 0 -1 -1.61436999
+    0.966666996 0 0 -1 -1.57079995
+endnode
+node trimesh Rectangle04
+  parent Line27
+  #part-number 19
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh624
+  parent Line27
+  #part-number 20
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh625
+  parent Line27
+  #part-number 21
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh626
+  parent Line27
+  #part-number 22
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh621
+  parent Line27
+  #part-number 23
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh619
+  parent Line27
+  #part-number 24
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh620
+  parent Line27
+  #part-number 25
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh616
+  parent Line27
+  #part-number 26
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+doneanim closing2 sjm_UDoor_02
+
+#MAXANIM ASCII
+newanim closing1 sjm_UDoor_02
+  length 0.966666996
+  transtime 0.25
+  animroot sjm_UDoor_02
+node dummy sjm_UDoor_02
+  parent NULL
+  #part-number 0
+endnode
+node emitter ChunkyWood09
+  parent sjm_UDoor_02
+  #part-number 1
+endnode
+node emitter fire!11
+  parent sjm_UDoor_02
+  #part-number 2
+endnode
+node emitter ChunkyWood10
+  parent sjm_UDoor_02
+  #part-number 3
+endnode
+node dummy sjm_UDoor_02grnd
+  parent sjm_UDoor_02
+  #part-number 4
+endnode
+node dummy sjm_UDoor_02head
+  parent sjm_UDoor_02
+  #part-number 5
+endnode
+node dummy sjm_UDoor_02hhit
+  parent sjm_UDoor_02
+  #part-number 6
+endnode
+node dummy sjm_UDoor_02impc
+  parent sjm_UDoor_02
+  #part-number 7
+endnode
+node trimesh sam
+  parent sjm_UDoor_02
+  #part-number 8
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+  alphakey 2
+    0 0
+    0.966666996 0
+endnode
+node trimesh Mesh617
+  parent sjm_UDoor_02
+  #part-number 9
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+  orientationkey 3
+    0 0 0 -1 -0.122173995
+    0.93333298 0 0 -1 -1.63694
+    0.966666996 0 0 -1 -1.57079995
+endnode
+node trimesh Mesh618
+  parent Mesh617
+  #part-number 10
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh806
+  parent Mesh617
+  #part-number 11
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh615
+  parent Mesh617
+  #part-number 12
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Object476
+  parent Mesh617
+  #part-number 13
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Cylinder35
+  parent Mesh617
+  #part-number 14
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Object473
+  parent Mesh617
+  #part-number 15
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Cylinder347
+  parent Mesh617
+  #part-number 16
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh803
+  parent Mesh617
+  #part-number 17
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Line27
+  parent sjm_UDoor_02
+  #part-number 18
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+  orientationkey 3
+    0 0 0 -1 -3.08923006
+    0.93333298 0 0 -1 -1.52722001
+    0.966666996 1.59893006e-007 -1.77578002e-007 -1 -1.65795004
+endnode
+node trimesh Rectangle04
+  parent Line27
+  #part-number 19
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh624
+  parent Line27
+  #part-number 20
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh625
+  parent Line27
+  #part-number 21
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh626
+  parent Line27
+  #part-number 22
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh621
+  parent Line27
+  #part-number 23
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh619
+  parent Line27
+  #part-number 24
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh620
+  parent Line27
+  #part-number 25
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh616
+  parent Line27
+  #part-number 26
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+doneanim closing1 sjm_UDoor_02
+
+#MAXANIM ASCII
+newanim trans sjm_UDoor_02
+  length 0.0333333015
+  transtime 0.25
+  animroot sjm_UDoor_02
+node dummy sjm_UDoor_02
+  parent NULL
+  #part-number 0
+endnode
+node emitter ChunkyWood09
+  parent sjm_UDoor_02
+  #part-number 1
+endnode
+node emitter fire!11
+  parent sjm_UDoor_02
+  #part-number 2
+endnode
+node emitter ChunkyWood10
+  parent sjm_UDoor_02
+  #part-number 3
+endnode
+node dummy sjm_UDoor_02grnd
+  parent sjm_UDoor_02
+  #part-number 4
+endnode
+node dummy sjm_UDoor_02head
+  parent sjm_UDoor_02
+  #part-number 5
+endnode
+node dummy sjm_UDoor_02hhit
+  parent sjm_UDoor_02
+  #part-number 6
+endnode
+node dummy sjm_UDoor_02impc
+  parent sjm_UDoor_02
+  #part-number 7
+endnode
+node trimesh sam
+  parent sjm_UDoor_02
+  #part-number 8
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+  alphakey 2
+    0 0.600000024
+    0.0333333015 0.600000024
+endnode
+node trimesh Mesh617
+  parent sjm_UDoor_02
+  #part-number 9
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh618
+  parent Mesh617
+  #part-number 10
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh806
+  parent Mesh617
+  #part-number 11
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh615
+  parent Mesh617
+  #part-number 12
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Object476
+  parent Mesh617
+  #part-number 13
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Cylinder35
+  parent Mesh617
+  #part-number 14
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Object473
+  parent Mesh617
+  #part-number 15
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Cylinder347
+  parent Mesh617
+  #part-number 16
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh803
+  parent Mesh617
+  #part-number 17
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Line27
+  parent sjm_UDoor_02
+  #part-number 18
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Rectangle04
+  parent Line27
+  #part-number 19
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh624
+  parent Line27
+  #part-number 20
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh625
+  parent Line27
+  #part-number 21
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh626
+  parent Line27
+  #part-number 22
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh621
+  parent Line27
+  #part-number 23
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh619
+  parent Line27
+  #part-number 24
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh620
+  parent Line27
+  #part-number 25
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh616
+  parent Line27
+  #part-number 26
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+doneanim trans sjm_UDoor_02
+
+#MAXANIM ASCII
+newanim die sjm_UDoor_02
+  length 0.233333007
+  transtime 0.25
+  animroot sjm_UDoor_02
+  event 0.0333333015 detonate
+  event 0.0333333015 detonate
+  event 0.0333333015 detonate
+node dummy sjm_UDoor_02
+  parent NULL
+  #part-number 0
+endnode
+node emitter ChunkyWood09
+  parent sjm_UDoor_02
+  #part-number 1
+endnode
+node emitter fire!11
+  parent sjm_UDoor_02
+  #part-number 2
+endnode
+node emitter ChunkyWood10
+  parent sjm_UDoor_02
+  #part-number 3
+endnode
+node dummy sjm_UDoor_02grnd
+  parent sjm_UDoor_02
+  #part-number 4
+endnode
+node dummy sjm_UDoor_02head
+  parent sjm_UDoor_02
+  #part-number 5
+endnode
+node dummy sjm_UDoor_02hhit
+  parent sjm_UDoor_02
+  #part-number 6
+endnode
+node dummy sjm_UDoor_02impc
+  parent sjm_UDoor_02
+  #part-number 7
+endnode
+node trimesh sam
+  parent sjm_UDoor_02
+  #part-number 8
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh617
+  parent sjm_UDoor_02
+  #part-number 9
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+  positionkey 2
+    0 -1.46981001 -0.00761944987 2.49000001
+    0.233333007 -1.46981001 -0.00761944987 -2.7416501
+  orientationkey 2
+    0 0 0 -1 -1.57079995
+    0.233333007 0.0114276996 0.0638654977 -0.997893095 -1.25121009
+endnode
+node trimesh Mesh618
+  parent Mesh617
+  #part-number 10
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh806
+  parent Mesh617
+  #part-number 11
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh615
+  parent Mesh617
+  #part-number 12
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Object476
+  parent Mesh617
+  #part-number 13
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Cylinder35
+  parent Mesh617
+  #part-number 14
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Object473
+  parent Mesh617
+  #part-number 15
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Cylinder347
+  parent Mesh617
+  #part-number 16
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh803
+  parent Mesh617
+  #part-number 17
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Line27
+  parent sjm_UDoor_02
+  #part-number 18
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+  positionkey 3
+    0 1.84019005 -0.0076182601 2.49000001
+    0.0333333015 1.84019005 -0.0076182601 2.49000001
+    0.233333007 1.84019005 -0.0076182601 -2.7416501
+  orientationkey 3
+    0 1.59893006e-007 -1.77578002e-007 -1 -1.65795004
+    0.0333333015 0 0 -1 -1.57079995
+    0.233333007 -0.19860296 0.0236455947 -0.979794741 -1.36518002
+endnode
+node trimesh Rectangle04
+  parent Line27
+  #part-number 19
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh624
+  parent Line27
+  #part-number 20
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh625
+  parent Line27
+  #part-number 21
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh626
+  parent Line27
+  #part-number 22
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh621
+  parent Line27
+  #part-number 23
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh619
+  parent Line27
+  #part-number 24
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh620
+  parent Line27
+  #part-number 25
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh616
+  parent Line27
+  #part-number 26
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+doneanim die sjm_UDoor_02
+
+#MAXANIM ASCII
+newanim dead sjm_UDoor_02
+  length 0.0333333015
+  transtime 0.25
+  animroot sjm_UDoor_02
+node dummy sjm_UDoor_02
+  parent NULL
+  #part-number 0
+endnode
+node emitter ChunkyWood09
+  parent sjm_UDoor_02
+  #part-number 1
+endnode
+node emitter fire!11
+  parent sjm_UDoor_02
+  #part-number 2
+endnode
+node emitter ChunkyWood10
+  parent sjm_UDoor_02
+  #part-number 3
+endnode
+node dummy sjm_UDoor_02grnd
+  parent sjm_UDoor_02
+  #part-number 4
+endnode
+node dummy sjm_UDoor_02head
+  parent sjm_UDoor_02
+  #part-number 5
+endnode
+node dummy sjm_UDoor_02hhit
+  parent sjm_UDoor_02
+  #part-number 6
+endnode
+node dummy sjm_UDoor_02impc
+  parent sjm_UDoor_02
+  #part-number 7
+endnode
+node trimesh sam
+  parent sjm_UDoor_02
+  #part-number 8
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh617
+  parent sjm_UDoor_02
+  #part-number 9
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh618
+  parent Mesh617
+  #part-number 10
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh806
+  parent Mesh617
+  #part-number 11
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh615
+  parent Mesh617
+  #part-number 12
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Object476
+  parent Mesh617
+  #part-number 13
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Cylinder35
+  parent Mesh617
+  #part-number 14
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Object473
+  parent Mesh617
+  #part-number 15
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Cylinder347
+  parent Mesh617
+  #part-number 16
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh803
+  parent Mesh617
+  #part-number 17
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Line27
+  parent sjm_UDoor_02
+  #part-number 18
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Rectangle04
+  parent Line27
+  #part-number 19
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh624
+  parent Line27
+  #part-number 20
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh625
+  parent Line27
+  #part-number 21
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh626
+  parent Line27
+  #part-number 22
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh621
+  parent Line27
+  #part-number 23
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh619
+  parent Line27
+  #part-number 24
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh620
+  parent Line27
+  #part-number 25
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh616
+  parent Line27
+  #part-number 26
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+doneanim dead sjm_UDoor_02
+
+donemodel sjm_UDoor_02
+

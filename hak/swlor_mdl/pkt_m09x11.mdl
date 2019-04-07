@@ -1,0 +1,224 @@
+# Exported from NWmax 0.8 b60 at 16/01/2010 13:30:43
+# mdl file
+#
+#NWmax MODEL ASCII
+# model: pkt_m09x11
+#local file: Unknown
+filedependancy Unknown
+newmodel pkt_m09x11
+setsupermodel pkt_m09x11 NULL
+classification Character
+setanimationscale 1.0
+#NWmax GEOM  ASCII
+beginmodelgeom pkt_m09x11
+node dummy pkt_m09x11
+  parent NULL
+endnode
+node dummy m09x11_impact
+  parent pkt_m09x11
+  position 0.0 0.0 0.85
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.239216 0.52549 0.0235294 
+endnode
+node dummy m09x11_ground
+  parent pkt_m09x11
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.239216 0.52549 0.0235294 
+endnode
+node dummy m09x11_hand
+  parent pkt_m09x11
+  position 0.0 0.0 1.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.239216 0.52549 0.0235294 
+endnode
+node dummy m09x11_head
+  parent pkt_m09x11
+  position 0.0 0.0 2.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.239216 0.52549 0.0235294 
+endnode
+node dummy m09x11_head_hit
+  parent pkt_m09x11
+  position 0.0 0.0 1.5
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.239216 0.52549 0.0235294 
+endnode
+node light AuroraDLight01
+  parent pkt_m09x11
+  position 0.00358848 -4.47473 0.287166
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.52549 0.0235294 0.0235294 
+  radius 0.5
+  multiplier 1.0
+  color 1.0 1.0 1.0 
+  ambientonly 0
+  nDynamicType 0
+  affectDynamic 0
+  shadow 0
+  lightpriority 5
+  fadingLight 0
+endnode
+node light AuroraDLight02
+  parent pkt_m09x11
+  position 0.00358848 -3.35047 0.287166
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.52549 0.0235294 0.0235294 
+  radius 0.5
+  multiplier 1.0
+  color 1.0 1.0 1.0 
+  ambientonly 0
+  nDynamicType 0
+  affectDynamic 0
+  shadow 0
+  lightpriority 5
+  fadingLight 0
+endnode
+node light AuroraDLight03
+  parent pkt_m09x11
+  position 0.00358848 -2.22862 0.287166
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.52549 0.0235294 0.0235294 
+  radius 0.5
+  multiplier 1.0
+  color 1.0 1.0 1.0 
+  ambientonly 0
+  nDynamicType 0
+  affectDynamic 0
+  shadow 0
+  lightpriority 5
+  fadingLight 0
+endnode
+node light AuroraDLight04
+  parent pkt_m09x11
+  position 0.00358848 -1.10569 0.287166
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.52549 0.0235294 0.0235294 
+  radius 0.5
+  multiplier 1.0
+  color 1.0 1.0 1.0 
+  ambientonly 0
+  nDynamicType 0
+  affectDynamic 0
+  shadow 0
+  lightpriority 5
+  fadingLight 0
+endnode
+node light AuroraDLight05
+  parent pkt_m09x11
+  position 0.00358848 0.0155236 0.287166
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.52549 0.0235294 0.0235294 
+  radius 0.5
+  multiplier 1.0
+  color 1.0 1.0 1.0 
+  ambientonly 0
+  nDynamicType 0
+  affectDynamic 0
+  shadow 0
+  lightpriority 5
+  fadingLight 0
+endnode
+node light AuroraDLight06
+  parent pkt_m09x11
+  position 0.00358848 1.1257 0.287166
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.52549 0.0235294 0.0235294 
+  radius 0.5
+  multiplier 1.0
+  color 1.0 1.0 1.0 
+  ambientonly 0
+  nDynamicType 0
+  affectDynamic 0
+  shadow 0
+  lightpriority 5
+  fadingLight 0
+endnode
+node light AuroraDLight07
+  parent pkt_m09x11
+  position 0.00358848 2.25618 0.287166
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.52549 0.0235294 0.0235294 
+  radius 0.5
+  multiplier 1.0
+  color 1.0 1.0 1.0 
+  ambientonly 0
+  nDynamicType 0
+  affectDynamic 0
+  shadow 0
+  lightpriority 5
+  fadingLight 0
+endnode
+node light AuroraDLight08
+  parent pkt_m09x11
+  position 0.00358848 3.38088 0.287166
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.52549 0.0235294 0.0235294 
+  radius 0.5
+  multiplier 1.0
+  color 1.0 1.0 1.0 
+  ambientonly 0
+  nDynamicType 0
+  affectDynamic 0
+  shadow 0
+  lightpriority 5
+  fadingLight 0
+endnode
+node light AuroraDLight09
+  parent pkt_m09x11
+  position 0.00358848 4.50535 0.287166
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.52549 0.0235294 0.0235294 
+  radius 0.5
+  multiplier 1.0
+  color 1.0 1.0 1.0 
+  ambientonly 0
+  nDynamicType 0
+  affectDynamic 0
+  shadow 0
+  lightpriority 5
+  fadingLight 0
+endnode
+node trimesh lights
+  parent pkt_m09x11
+  position 0.0 0.0 0.000170667
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 0
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  center 0.0 2.34122 5.00114e-005 
+  ambient 0.0 0.0 0.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 0.0
+  bitmap LSI_lite01
+  verts 4
+    0.18 -4.98322 -3.35249e-007
+    -0.18 5.01665 9.3538e-007
+    -0.18 -4.98322 -3.35249e-007
+    0.18 5.01665 9.3538e-007
+  faces 2
+    0 1 2  1  0 1 2  1
+    3 1 0  1  3 1 0  1
+  tverts 8
+    4.95262 0.243846 0
+    -3.95262 0.756154 0
+    4.95262 0.756151 0
+    -3.95262 0.243849 0
+    4.95262 0.243846 0
+    -3.95262 0.756154 0
+    4.95262 0.756151 0
+    -3.95262 0.243849 0
+endnode
+endmodelgeom pkt_m09x11
+donemodel pkt_m09x11

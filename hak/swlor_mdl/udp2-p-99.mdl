@@ -1,0 +1,16 @@
+#Exported from 3ds max by MDL Plug-in Suite 1.0b
+#http://www.bricksbuilder.com/nwn/utils/
+#MAXMODEL ASCII
+# model: udp2-p-99
+filedependancy udp2 interior placeables02.max
+newmodel udp2-p-99
+setsupermodel udp2-p-99 NULL
+classification Tile
+setanimationscale 1.0
+#MAXGEOM  ASCII
+beginmodelgeom udp2-p-99
+node dummy udp2-p-99
+  parent NULL
+endnode
+endmodelgeom udp2-p-99
+donemodel udp2-p-99

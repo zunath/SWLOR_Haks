@@ -1,0 +1,743 @@
+# Exported from NWgMax Plus v6.11.28 at 2017-01-19 10:42:40
+# mdl file
+#
+#NWgMax Plus MODEL ASCII
+# model: vos_gunwall6
+filedependancy rev_wall.gmax
+newmodel vos_gunwall6
+setsupermodel vos_gunwall6 NULL
+classification Character
+setanimationscale 1.0
+#NWgMax Plus GEOM  ASCII
+beginmodelgeom vos_gunwall6
+node dummy vos_gunwall6
+  parent NULL
+endnode
+node dummy animations
+  parent vos_gunwall6
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.52549 0.0235294 0.0235294 
+endnode
+node trimesh crown
+  parent animations
+  position 0.0 0.0599437 3.85
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.878431 0.878431 0.878431 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 0.588235 0.588235 0.588235 
+  diffuse 0.588235 0.588235 0.588235 
+  specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 0.0 -4.86374e-005 
+  bitmap udp2_w_vent
+  verts 12
+    1.665 -0.135001 -0.15
+    1.665 -0.0899106 -0.15
+    1.665 0.134999 -0.15
+    1.665 0.135001 0.15
+    1.665 0.135 -0.0999005
+    -1.665 0.134999 -0.15
+    -1.665 -5.5074e-007 -0.15
+    -1.665 0.135001 0.15
+    -1.665 0.135 -4.83488e-007
+    -1.665 -0.0270654 -0.15
+    -1.665 -0.135001 -0.15
+    -1.665 0.135 -0.0300725
+  faces 10
+    0 10 9  0  12 28 27  0
+    2 5 11  0  16 21 29  5
+    6 5 1  0  22 20 14  0
+    5 2 1  0  20 15 14  0
+    8 7 4  0  25 24 18  5
+    7 3 4  0  24 17 18  5
+    6 0 9  0  23 12 27  0
+    1 0 6  0  13 12 23  0
+    8 2 11  0  26 16 29  5
+    4 2 8  0  19 16 26  5
+  tverts 30
+    46.0 9.96001 0
+    44.0 9.96001 0
+    -44.0 1.54067 0
+    -42.0 1.54067 0
+    -44.0 1.46567 0
+    -42.0 1.46567 0
+    46.0 9.96001 0
+    44.0 9.90601 0
+    44.0 9.90601 0
+    46.0 9.90601 0
+    -42.0 1.54067 0
+    -44.0 1.46567 0
+    45.666 9.96001 0
+    45.666 9.95099 0
+    45.666 9.95099 0
+    45.666 9.90601 0
+    -43.666 1.46567 0
+    -43.666 1.54067 0
+    -43.666 1.47819 0
+    -43.666 1.47819 0
+    45.0 9.90601 0
+    -43.0 1.46567 0
+    45.0 9.93301 0
+    45.0 9.93301 0
+    -43.0 1.54067 0
+    -43.0 1.50317 0
+    -43.0 1.50317 0
+    45.0 9.93842 0
+    45.0 9.96001 0
+    -43.0 1.49565 0
+endnode
+node trimesh gun_wall
+  parent animations
+  position 0.00468065 -0.18 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.341176 0.878431 0.776471 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 0.588235 0.588235 0.588235 
+  diffuse 0.588235 0.588235 0.588235 
+  specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 0.0 200.246 
+  bitmap vos_gunwall3
+  verts 8
+    -1.665 -0.05 0.0
+    1.665 -0.05 0.0
+    -1.665 0.05 0.0
+    1.665 0.05 0.0
+    -1.665 -0.05 4.00491
+    1.665 -0.05 4.00491
+    -1.665 0.05 4.00491
+    1.665 0.05 4.00491
+  faces 8
+    0 1 5  8  8 9 10  5
+    5 4 0  8  11 12 13  5
+    1 3 7  16  14 15 16  4
+    7 5 1  16  17 5 1  4
+    3 2 6  32  18 19 20  6
+    6 7 3  32  21 7 3  6
+    2 0 4  64  22 0 23  3
+    4 6 2  64  4 6 2  3
+  tverts 24
+    0.999493 0.000499517 0
+    0.000499487 0.000499517 0
+    0.000499487 0.000499517 0
+    0.000499517 0.000499517 0
+    0.999493 0.999501 0
+    0.000499487 0.999501 0
+    0.000499487 0.999501 0
+    0.000499517 0.999501 0
+    0.000499517 0.000499517 0
+    0.9995 0.000499517 0
+    0.9995 0.999501 0
+    0.9995 0.999501 0
+    0.000499517 0.999501 0
+    0.000499517 0.000499517 0
+    0.000499487 0.000499517 0
+    0.999493 0.000499517 0
+    0.999493 0.999501 0
+    0.999493 0.999501 0
+    0.000499517 0.000499517 0
+    0.9995 0.000499517 0
+    0.9995 0.999501 0
+    0.9995 0.999501 0
+    0.000499487 0.000499517 0
+    0.999493 0.999501 0
+endnode
+node trimesh wall_bottm
+  parent animations
+  position 0.0 -0.010058 0.12
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.878431 0.878431 0.878431 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 0
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 0.588235 0.588235 0.588235 
+  diffuse 0.588235 0.588235 0.588235 
+  specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 -1.0 -1.0 
+  bitmap udp2_w_sid2
+  verts 12
+    -1.665 0.0450003 -0.12
+    -1.665 0.0100002 -0.0100003
+    -1.665 -0.0249999 0.0999998
+    -1.665 -0.0649999 0.0999998
+    -1.665 -0.0449997 0.0999997
+    1.665 0.0450001 -0.12
+    1.665 0.0333101 -0.0832601
+    1.665 -0.0250001 0.1
+    1.665 -0.0316801 0.1
+    1.665 0.02162 -0.04652
+    1.665 -0.0383601 0.1
+    1.665 -0.0650003 0.1
+  faces 10
+    2 7 9  0  15 24 27  0
+    3 11 10  0  17 29 28  5
+    6 5 1  0  21 20 13  0
+    5 0 1  0  20 12 13  0
+    8 7 4  0  25 23 19  5
+    7 2 4  0  23 16 19  5
+    6 2 9  0  22 15 27  0
+    1 2 6  0  14 15 22  0
+    8 3 10  0  26 17 28  5
+    4 3 8  0  18 17 26  5
+  tverts 30
+    -1.16667 0.427531 0
+    2.16667 0.427531 0
+    2.16667 0.530606 0
+    2.16667 0.505036 0
+    -1.16667 0.494812 0
+    2.16667 0.494811 0
+    -1.16667 0.427531 0
+    2.16667 0.494811 0
+    2.16667 0.494811 0
+    -1.16667 0.494812 0
+    -1.16667 0.530606 0
+    2.16667 0.540831 0
+    0.5 0.427531 0
+    0.5 0.461171 0
+    0.5 0.461171 0
+    0.5 0.494812 0
+    0.5 0.494812 0
+    0.5 0.530606 0
+    0.5 0.535719 0
+    0.5 0.499924 0
+    -0.610002 0.427531 0
+    -0.610002 0.438767 0
+    -0.610002 0.438767 0
+    -0.610002 0.494812 0
+    -0.610002 0.494812 0
+    -0.610002 0.496519 0
+    1.61 0.539123 0
+    -0.610002 0.450003 0
+    1.61 0.537416 0
+    1.61 0.530606 0
+endnode
+node trimesh wall
+  parent animations
+  position 0.0 -0.075059 2.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.0235294 0.0235294 0.0235294 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 0.588235 0.588235 0.588235 
+  diffuse 0.588235 0.588235 0.588235 
+  specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 -5.00679e-005 0.0 
+  bitmap udp1-wd-grd1
+  verts 7
+    -1.665 -5.00679e-007 0.0
+    -1.66501 6.65188e-006 2.0
+    -1.66499 -7.65324e-006 -2.0
+    1.665 -5.26429e-006 -1.332
+    1.66501 -7.65324e-006 -2.0
+    1.665 -2.87534e-006 -0.664004
+    1.66499 6.65188e-006 2.0
+  faces 5
+    6 5 1  1  6 7 8  0
+    4 0 3  1  9 10 11  0
+    2 0 4  1  2 12 4  0
+    1 5 3  1  13 5 14  0
+    1 3 0  1  1 3 0  0
+  tverts 15
+    0.626184 0.5 0
+    0.626184 0.701909 0
+    0.626183 0.298091 0
+    0.290004 0.365528 0
+    0.290004 0.298091 0
+    0.290004 0.432966 0
+    0.290005 0.701909 0
+    0.290004 0.432966 0
+    0.626184 0.701909 0
+    0.290004 0.298091 0
+    0.626184 0.5 0
+    0.290004 0.365528 0
+    0.626184 0.5 0
+    0.626184 0.701909 0
+    0.290004 0.365528 0
+endnode
+node trimesh wall_top
+  parent animations
+  position 0.0 -0.04006 4.01
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.898039 0.898039 0.898039 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 0
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 0.0 0.0 0.0 
+  diffuse 0.0 0.0 0.0 
+  specular 0.0 0.0 0.0 
+  shininess 1
+  center 0.0 0.0 0.0 
+  bitmap gg_black
+  verts 12
+    -1.665 0.235 -0.00999999
+    -1.665 0.235 0.0
+    -1.665 0.235 0.00999999
+    -1.665 1.62125e-007 0.00999999
+    -1.665 -0.235 0.00999999
+    1.665 0.235 -0.00999999
+    1.665 0.235 -0.00666
+    1.665 0.235 0.00999999
+    1.665 0.15651 0.00999999
+    1.665 0.235 -0.00332
+    1.665 0.0780198 0.00999999
+    1.665 -0.235 0.00999999
+  faces 10
+    9 2 7  2  15 8 13  2
+    10 4 11  16  16 10 17  0
+    6 5 1  2  12 11 7  2
+    5 0 1  2  11 6 7  2
+    8 7 3  16  14 13 9  0
+    7 2 3  16  13 8 9  0
+    9 6 2  2  15 12 8  2
+    6 1 2  2  12 7 8  2
+    10 8 4  16  16 14 10  0
+    8 3 4  16  14 9 10  0
+  tverts 18
+    -29.0 10.953 0
+    -28.0 10.953 0
+    -28.0 11.0 0
+    -29.0 11.0 0
+    -29.0 10.953 0
+    -28.0 10.953 0
+    -28.5 10.953 0
+    -28.5 10.953 0
+    -28.5 10.953 0
+    -28.5 10.9765 0
+    -28.5 11.0 0
+    -28.833 10.953 0
+    -28.833 10.953 0
+    -28.833 10.953 0
+    -28.833 10.9608 0
+    -28.833 10.953 0
+    -28.833 10.9687 0
+    -28.833 11.0 0
+endnode
+node emitter door_explosion
+  parent vos_gunwall6
+  position 0.0 0.0 1.90448
+  orientation 1.0 0.0 0.0 -1.59698
+  wirecolor 0.894118 0.721569 0.6 
+  update_sel 3
+  update Explosion
+  render_sel 1
+  render Normal
+  blend_sel 1
+  Blend Normal
+  spawnType 0
+  xSize 100.0
+  ySize 99.0
+  inherit 1
+  inherit_local 0
+  inheritvel 0
+  inherit_part 0
+  renderorder 0
+  threshold 0.0
+  combinetime 0.0
+  deadspace 0.0
+  opacity 0.5
+  colorStart 0.47451 0.439216 0.364706 
+  colorEnd 0.819608 0.796079 0.709804 
+  alphaStart 1.0
+  alphaEnd 0.0
+  sizeStart 4.0
+  sizeEnd 1.0
+  sizeStart_y 0.0
+  sizeEnd_y 0.0
+  birthrate 10
+  lifeExp 2.5
+  mass 0.09
+  spread 2.96706
+  particleRot 0.5
+  velocity 2.0
+  randvel 0.5
+  bounce_co 0.0
+  blurlength 10.0
+  loop 0
+  bounce 0
+  m_isTinted 1
+  splat 0
+  affectedByWind false
+  texture fxpa_smoke01
+  twosidedtex 0
+  xgrid 4
+  ygrid 4
+  fps 10
+  frameStart 0
+  frameEnd 24
+  random 0
+  lightningDelay 0.0
+  lightningRadius 0.0
+  lightningSubDiv 0
+  lightningScale 0.0
+  blastRadius 0.2
+  blastLength 1.0
+  p2p 0
+  p2p_type Bezier
+  p2p_sel 1
+  p2p_bezier2 0.0
+  p2p_bezier3 0.0
+  grav 0.0
+  drag 0.0
+endnode
+endmodelgeom vos_gunwall6
+#NWgMax Plus ANIM ASCII
+newanim default vos_gunwall6
+  length 0.0
+  transtime 0.25
+  animroot vos_gunwall6
+    node dummy vos_gunwall6
+        parent NULL
+    endnode
+    node dummy animations
+        parent vos_gunwall6
+        orientationkey
+            0.0 0.0 0.0 0.0 0.0
+        endlist
+    endnode
+    node trimesh crown
+        parent animations
+    endnode
+    node trimesh gun_wall
+        parent animations
+    endnode
+    node trimesh wall_bottm
+        parent animations
+    endnode
+    node trimesh wall
+        parent animations
+    endnode
+    node trimesh wall_top
+        parent animations
+    endnode
+    node emitter door_explosion
+        parent vos_gunwall6
+    endnode
+    node dummy vos_gunwall6_pwk
+        parent vos_gunwall6
+    endnode
+    node trimesh pwk
+        parent vos_gunwall6_pwk
+    endnode
+doneanim default vos_gunwall6
+#NWgMax Plus ANIM ASCII
+newanim close vos_gunwall6
+  length 0.0333333
+  transtime 0.25
+  animroot vos_gunwall6
+    node dummy vos_gunwall6
+        parent NULL
+    endnode
+    node dummy animations
+        parent vos_gunwall6
+        orientationkey
+            0.0 0.0 0.0 0.0 0.0
+            0.0333333 0.0 0.0 0.0 0.0
+        endlist
+    endnode
+    node trimesh crown
+        parent animations
+    endnode
+    node trimesh gun_wall
+        parent animations
+    endnode
+    node trimesh wall_bottm
+        parent animations
+    endnode
+    node trimesh wall
+        parent animations
+    endnode
+    node trimesh wall_top
+        parent animations
+    endnode
+    node emitter door_explosion
+        parent vos_gunwall6
+    endnode
+    node dummy vos_gunwall6_pwk
+        parent vos_gunwall6
+    endnode
+    node trimesh pwk
+        parent vos_gunwall6_pwk
+    endnode
+doneanim close vos_gunwall6
+#NWgMax Plus ANIM ASCII
+newanim close2open vos_gunwall6
+  length 0.566667
+  transtime 0.25
+  animroot vos_gunwall6
+    node dummy vos_gunwall6
+        parent NULL
+    endnode
+    node dummy animations
+        parent vos_gunwall6
+        orientationkey
+            0.0 0.0 0.0 0.0 0.0
+            0.566667 0.0 0.0 1.0 -3.14159
+        endlist
+    endnode
+    node trimesh crown
+        parent animations
+    endnode
+    node trimesh gun_wall
+        parent animations
+    endnode
+    node trimesh wall_bottm
+        parent animations
+    endnode
+    node trimesh wall
+        parent animations
+    endnode
+    node trimesh wall_top
+        parent animations
+    endnode
+    node emitter door_explosion
+        parent vos_gunwall6
+    endnode
+    node dummy vos_gunwall6_pwk
+        parent vos_gunwall6
+    endnode
+    node trimesh pwk
+        parent vos_gunwall6_pwk
+    endnode
+doneanim close2open vos_gunwall6
+#NWgMax Plus ANIM ASCII
+newanim open vos_gunwall6
+  length 0.0333333
+  transtime 0.25
+  animroot vos_gunwall6
+    node dummy vos_gunwall6
+        parent NULL
+    endnode
+    node dummy animations
+        parent vos_gunwall6
+        orientationkey
+            0.0 0.0 0.0 1.0 -3.14159
+            0.0333333 0.0 0.0 1.0 -3.14159
+        endlist
+    endnode
+    node trimesh crown
+        parent animations
+    endnode
+    node trimesh gun_wall
+        parent animations
+    endnode
+    node trimesh wall_bottm
+        parent animations
+    endnode
+    node trimesh wall
+        parent animations
+    endnode
+    node trimesh wall_top
+        parent animations
+    endnode
+    node emitter door_explosion
+        parent vos_gunwall6
+    endnode
+    node dummy vos_gunwall6_pwk
+        parent vos_gunwall6
+    endnode
+    node trimesh pwk
+        parent vos_gunwall6_pwk
+    endnode
+doneanim open vos_gunwall6
+#NWgMax Plus ANIM ASCII
+newanim open2close vos_gunwall6
+  length 0.566667
+  transtime 0.25
+  animroot vos_gunwall6
+    node dummy vos_gunwall6
+        parent NULL
+    endnode
+    node dummy animations
+        parent vos_gunwall6
+        orientationkey
+            0.0 0.0 2.09766e-007 1.0 -3.14159
+            0.566667 0.0 0.0 0.0 -6.28319
+        endlist
+    endnode
+    node trimesh crown
+        parent animations
+    endnode
+    node trimesh gun_wall
+        parent animations
+    endnode
+    node trimesh wall_bottm
+        parent animations
+    endnode
+    node trimesh wall
+        parent animations
+    endnode
+    node trimesh wall_top
+        parent animations
+    endnode
+    node emitter door_explosion
+        parent vos_gunwall6
+    endnode
+    node dummy vos_gunwall6_pwk
+        parent vos_gunwall6
+    endnode
+    node trimesh pwk
+        parent vos_gunwall6_pwk
+    endnode
+doneanim open2close vos_gunwall6
+#NWgMax Plus ANIM ASCII
+newanim damage vos_gunwall6
+  length 0.333333
+  transtime 0.25
+  animroot vos_gunwall6
+    node dummy vos_gunwall6
+        parent NULL
+    endnode
+    node dummy animations
+        parent vos_gunwall6
+        positionkey
+            0.0 0.0 0.0 0.0
+            0.166667 0.0 0.2 0.0
+            0.333333 0.0 0.0 0.0
+        endlist
+    endnode
+    node trimesh crown
+        parent animations
+    endnode
+    node trimesh gun_wall
+        parent animations
+    endnode
+    node trimesh wall_bottm
+        parent animations
+    endnode
+    node trimesh wall
+        parent animations
+    endnode
+    node trimesh wall_top
+        parent animations
+    endnode
+    node emitter door_explosion
+        parent vos_gunwall6
+    endnode
+    node dummy vos_gunwall6_pwk
+        parent vos_gunwall6
+    endnode
+    node trimesh pwk
+        parent vos_gunwall6_pwk
+    endnode
+doneanim damage vos_gunwall6
+#NWgMax Plus ANIM ASCII
+newanim die vos_gunwall6
+  length 0.133333
+  transtime 0.25
+  animroot vos_gunwall6
+  event 0.0 detonate
+    node dummy vos_gunwall6
+        parent NULL
+    endnode
+    node dummy animations
+        parent vos_gunwall6
+    endnode
+    node trimesh crown
+        parent animations
+    endnode
+    node trimesh gun_wall
+        parent animations
+    endnode
+    node trimesh wall_bottm
+        parent animations
+    endnode
+    node trimesh wall
+        parent animations
+    endnode
+    node trimesh wall_top
+        parent animations
+    endnode
+    node emitter door_explosion
+        parent vos_gunwall6
+    endnode
+    node dummy vos_gunwall6_pwk
+        parent vos_gunwall6
+    endnode
+    node trimesh pwk
+        parent vos_gunwall6_pwk
+    endnode
+doneanim die vos_gunwall6
+#NWgMax Plus ANIM ASCII
+newanim dead vos_gunwall6
+  length 0.0333333
+  transtime 0.25
+  animroot vos_gunwall6
+    node dummy vos_gunwall6
+        parent NULL
+    endnode
+    node dummy animations
+        parent vos_gunwall6
+        positionkey
+            0.0 0.0 0.0 0.0
+            0.0333333 0.0 0.0 -10.0
+        endlist
+    endnode
+    node trimesh crown
+        parent animations
+    endnode
+    node trimesh gun_wall
+        parent animations
+    endnode
+    node trimesh wall_bottm
+        parent animations
+    endnode
+    node trimesh wall
+        parent animations
+    endnode
+    node trimesh wall_top
+        parent animations
+    endnode
+    node emitter door_explosion
+        parent vos_gunwall6
+    endnode
+    node dummy vos_gunwall6_pwk
+        parent vos_gunwall6
+    endnode
+    node trimesh pwk
+        parent vos_gunwall6_pwk
+    endnode
+doneanim dead vos_gunwall6
+donemodel vos_gunwall6

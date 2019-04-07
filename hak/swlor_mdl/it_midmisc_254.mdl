@@ -1,0 +1,131 @@
+# Exported from NWmax 0.8 b60 at 8/15/2006 10:19:38 AM
+# mdl file
+#
+#NWmax MODEL ASCII
+# model: it_midmisc_129
+#local file: Unknown
+filedependancy Unknown
+newmodel it_midmisc_129
+setsupermodel it_midmisc_129 NULL
+classification Character
+setanimationscale 0.8
+#NWmax GEOM  ASCII
+beginmodelgeom it_midmisc_129
+node dummy it_midmisc_129
+  parent NULL
+endnode
+node trimesh Plane01
+  parent it_midmisc_129
+  position 0.0 0.0 0.001
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.0196078 0.521569 0.439216 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 0.0 0.0 
+  bitmap iit_midmisc_254
+  verts 4
+    -0.125 -0.06 0.0
+    0.125 -0.06 0.0
+    -0.125 0.06 0.0
+    0.125 0.06 0.0
+  faces 2
+    2 0 3  1  6 4 7  1
+    1 3 0  1  5 7 4  1
+  tverts 8
+    0.0 0.3 0
+    1.0 0.3 0
+    0.0 0.3 0
+    1.0 0.3 0
+    0.0 0.3 0
+    1.0 0.3 0
+    0.0 0.72 0
+    1.0 0.72 0
+endnode
+node trimesh Plane02
+  parent it_midmisc_129
+  position 0.04 -0.04 0.003
+  orientation 0.0 0.0 -1.0 -0.349066
+  wirecolor 0.0196078 0.521569 0.439216 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 0.0 0.0 
+  bitmap iit_midmisc_254
+  verts 4
+    -0.125 -0.06 0.0
+    0.125 -0.06 0.0
+    -0.125 0.06 0.0
+    0.125 0.06 0.0
+  faces 2
+    2 0 3  1  6 4 7  1
+    1 3 0  1  5 7 4  1
+  tverts 8
+    0.0 0.3 0
+    1.0 0.3 0
+    0.0 0.3 0
+    1.0 0.3 0
+    0.0 0.3 0
+    1.0 0.3 0
+    0.0 0.72 0
+    1.0 0.72 0
+endnode
+node trimesh Plane03
+  parent it_midmisc_129
+  position -0.01 0.05 0.005
+  orientation 1.83435e-007 0.0 1.0 -0.785398
+  wirecolor 0.0196078 0.521569 0.439216 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 0.0 0.0 
+  bitmap iit_midmisc_254
+  verts 4
+    -0.125 -0.06 0.0
+    0.125 -0.06 0.0
+    -0.125 0.06 0.0
+    0.125 0.06 0.0
+  faces 2
+    2 0 3  1  2 0 3  1
+    1 3 0  1  1 3 0  1
+  tverts 4
+    0.000499526 0.30021 0
+    0.9994 0.30021 0
+    0.000499646 0.719491 0
+    0.9994 0.719491 0
+endnode
+endmodelgeom it_midmisc_129
+donemodel it_midmisc_129

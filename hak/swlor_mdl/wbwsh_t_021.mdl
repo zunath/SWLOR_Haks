@@ -1,0 +1,20 @@
+# Exported from NWmax 0.8 b60 at 07/06/2007 17:04:01
+# mdl file
+#
+# Empty model as placeholder for firearms
+#
+#NWmax MODEL ASCII
+# model: wbwsh_t_011
+#local file: Unknown
+filedependancy Unknown
+newmodel wbwsh_t_011
+setsupermodel wbwsh_t_011 NULL
+classification Character
+setanimationscale 0.0
+#NWmax GEOM  ASCII
+beginmodelgeom wbwsh_t_011
+node dummy wbwsh_t_011
+  parent NULL
+endnode
+endmodelgeom wbwsh_t_011
+donemodel wbwsh_t_011

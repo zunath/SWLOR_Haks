@@ -1,0 +1,77 @@
+# Exported from NWmax 0.8 b61 at 09/03/2011 13:11:14
+# mdl file
+#
+#NWmaxMODEL ASCII
+# model: phod_disp02
+filedependancy Unknown
+newmodel phod_disp02
+setsupermodel phod_disp02 NULL
+classification Character
+setanimationscale 0.0
+#NWmaxGEOM  ASCII
+beginmodelgeom phod_disp02
+node dummy phod_disp02
+  parent NULL
+endnode
+node dummy rootdummy
+  parent phod_disp02
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.0235294 0.52549 0.227451 
+endnode
+node trimesh HoloRubbish
+  parent rootdummy
+  position 0.0 0.0 0.0
+  orientation 0.0 0.0 -1.0 -1.5708
+  wirecolor 1.0 0.0 0.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 0
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center undefined
+  gizmo SubAnim:Gizmo
+  ambient 1 1 1 
+  diffuse 1 1 1 
+  specular 0 0 0 
+  shininess 10.0
+  selfillumcolor 1 1 1 
+  bitmap phod_disp02
+    verts 8
+     -0.01 -1.25 2.55
+     -0.01 -1.25 0.07
+     0.01 -1.25 2.55
+     0.01 -1.25 0.07
+     0.01 1.25 2.55
+     0.01 1.25 0.07
+     -0.01 1.25 2.55
+     -0.01 1.25 0.07
+    faces 12
+     0 1 2  1  0 1 2  65536
+     1 3 2  1  1 3 2  65536
+     2 3 4  1  2 3 4  65536
+     3 5 4  1  3 5 4  65536
+     4 5 6  1  4 5 6  65536
+     5 7 6  1  5 7 6  65536
+     6 7 0  1  6 7 0  65536
+     7 1 0  1  7 1 0  65536
+     6 0 4  1  6 0 4  65536
+     0 2 4  1  0 2 4  65536
+     1 7 3  1  1 7 3  65536
+     7 5 3  1  7 5 3  65536
+    tverts 8
+     1.0 1.0 0
+     1.0 0.0 0
+     1.0 1.0 0
+     1.0 0.0 0
+     0.0 1.0 0
+     0.0 0.0 0
+     0.0 1.0 0
+     0.0 0.0 0
+endnode
+endmodelgeom phod_disp02
+donemodel phod_disp02

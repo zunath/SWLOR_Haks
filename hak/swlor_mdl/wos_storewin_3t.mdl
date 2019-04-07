@@ -1,0 +1,58 @@
+# Exported from NWMax Plus v6.11.28 at 2016-12-16 13:11:23
+# mdl file
+#
+#NWMax Plus MODEL  ASCII
+# model: wos_storewin_3t
+filedependancy Unknown
+newmodel wos_storewin_3t
+setsupermodel wos_storewin_3t NULL
+classification Character
+setanimationscale 1.0
+#NWMax Plus GEOM  ASCII
+beginmodelgeom wos_storewin_3t
+node dummy wos_storewin_3t
+  parent NULL
+endnode
+node trimesh glass_window
+  parent wos_storewin_3t
+  position 0.0 0.0 2.15
+  orientation -1.0 0.0 0.0 -1.5708
+  wirecolor 0.0313726 0.239216 0.541176 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 0
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  center 0.0 0.0 0.0 
+  ambient 0.588235 0.588235 0.588235 
+  diffuse 0.588235 0.588235 0.588235 
+  specular 0.0 0.0 0.0 
+  shininess 10.0
+  bitmap wos_storewin_3t
+  verts 4
+    -1.45 -1.05 0.0
+    1.45 -1.05 0.0
+    -1.45 1.05 0.0
+    1.45 1.05 0.0
+  faces 2
+    2 0 3  1  6 4 7  1
+    1 3 0  1  5 7 4  1
+  tverts 8
+    0.0 0.0 0
+    1.0 0.0 0
+    0.0 0.0 0
+    1.0 0.0 0
+    0.0 0.0 0
+    1.0 0.0 0
+    0.0 1.0 0
+    1.0 1.0 0
+endnode
+endmodelgeom wos_storewin_3t
+donemodel wos_storewin_3t

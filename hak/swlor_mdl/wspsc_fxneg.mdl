@@ -1,0 +1,151 @@
+# Exported from NWmax 0.7 at 6/18/2004 9:28:30 PM
+# mdl file
+#
+#NWmax MODEL ASCII
+# model: WSpSc_fxneg
+filedependancy Unknown
+newmodel WSpSc_fxneg
+setsupermodel WSpSc_fxneg NULL
+classification Character
+setanimationscale 1.0
+#NWmax GEOM  ASCII
+beginmodelgeom WSpSc_fxneg
+node dummy WSpSc_fxneg
+  parent NULL
+endnode
+node emitter g_WSwGs_V_Neg
+  parent WSpSc_fxneg
+  position 0.0 0.00180153 -0.783627
+  orientation 0.377964 -0.654653 -0.654655 -2.41886
+  wirecolor 1.0 1.0 1.0 
+  update_sel 1
+  update Fountain
+  render_sel 1
+  render Normal
+  blend_sel 3
+  Blend Lighten
+  spawnType 0
+  xSize 5.0
+  ySize 17.0
+  inherit 1
+  inherit_local 0
+  inheritvel 0
+  inherit_part 0
+  renderorder 0
+  threshold 0.0
+  combinetime 0.0
+  deadspace 0.0
+  opacity 0.5
+  colorStart 1.0 0.0 0.0 
+  colorEnd 0.466667 0.0 0.0 
+  alphaStart 0.0
+  alphaEnd 1.0
+  sizeStart 0.5
+  sizeEnd 0.0
+  sizeStart_y 0.0
+  sizeEnd_y 0.0
+  birthrate 12
+  lifeExp 1.0
+  mass 0.0
+  spread 2.26893
+  particleRot 0.0
+  velocity 0.0
+  randvel 0.05
+  bounce_co 0.0
+  blurlength 10.0
+  loop 0
+  bounce 0
+  m_isTinted 0
+  splat 0
+  affectedByWind false
+  texture fxpa_Sparks
+  twosidedtex 0
+  xgrid 4
+  ygrid 4
+  fps 0
+  frameStart 0
+  frameEnd 15
+  random 0
+  lightningDelay 0.0
+  lightningRadius 0.0
+  lightningSubDiv 0
+  lightningScale 0.0
+  blastRadius 0.0
+  blastLength 0.0
+  p2p 0
+  p2p_type Bezier
+  p2p_sel 1
+  p2p_bezier2 0.0
+  p2p_bezier3 0.0
+  grav 0.0
+  drag 0.0
+endnode
+node emitter g_WSwGs_V_Neg01
+  parent WSpSc_fxneg
+  position 0.0 -0.00497375 -0.646981
+  orientation 0.992408 -0.0911894 -0.0825229 -1.57766
+  wirecolor 1.0 1.0 1.0 
+  update_sel 1
+  update Fountain
+  render_sel 1
+  render Normal
+  blend_sel 3
+  Blend Lighten
+  spawnType 0
+  xSize 5.0
+  ySize 14.0
+  inherit 1
+  inherit_local 0
+  inheritvel 0
+  inherit_part 0
+  renderorder 0
+  threshold 0.0
+  combinetime 0.0
+  deadspace 0.0
+  opacity 0.5
+  colorStart 1.0 0.0 0.0 
+  colorEnd 0.466667 0.0 0.0 
+  alphaStart 0.0
+  alphaEnd 1.0
+  sizeStart 0.5
+  sizeEnd 0.0
+  sizeStart_y 0.0
+  sizeEnd_y 0.0
+  birthrate 12
+  lifeExp 1.0
+  mass 0.0
+  spread 2.26893
+  particleRot 0.0
+  velocity 0.0
+  randvel 0.05
+  bounce_co 0.0
+  blurlength 10.0
+  loop 0
+  bounce 0
+  m_isTinted 0
+  splat 0
+  affectedByWind false
+  texture fxpa_Sparks
+  twosidedtex 0
+  xgrid 4
+  ygrid 4
+  fps 0
+  frameStart 0
+  frameEnd 15
+  random 0
+  lightningDelay 0.0
+  lightningRadius 0.0
+  lightningSubDiv 0
+  lightningScale 0.0
+  blastRadius 0.0
+  blastLength 0.0
+  p2p 0
+  p2p_type Bezier
+  p2p_sel 1
+  p2p_bezier2 0.0
+  p2p_bezier3 0.0
+  grav 0.0
+  drag 0.0
+endnode
+endmodelgeom WSpSc_fxneg
+donemodel WSpSc_fxneg

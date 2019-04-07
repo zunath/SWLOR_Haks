@@ -1,0 +1,42 @@
+# Exported from NWmax 0.8 b60 at 15/09/2007 23:59:54
+# mdl file
+#
+#NWmax MODEL ASCII
+# model: jz_wllpapers05
+#local file: Unknown
+filedependancy Unknown
+newmodel jz_wllpapers05
+setsupermodel jz_wllpapers05 NULL
+classification Character
+setanimationscale 1.0
+#NWmax GEOM  ASCII
+beginmodelgeom jz_wllpapers05
+node dummy jz_wllpapers05
+  parent NULL
+endnode
+node trimesh Plane01
+  parent jz_wllpapers05
+  position 0.0 0.0 1.5
+  orientation -3.34112e-005 0.707107 0.707107 -3.14153
+  wirecolor 0.882353 0.345098 0.780392 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 10.0
+  bitmap jz_wllpapers05
+  verts 4
+    -0.4 -0.4 0.0
+    0.4 -0.4 0.0
+    -0.4 0.4 0.0
+    0.4 0.4 0.0
+  faces 2
+    2 0 3  1  2 0 3  1
+    1 3 0  1  1 3 0  1
+  tverts 4
+    0.0037037 -0.00185185 0
+    1.0037 -0.00185185 0
+    0.0037037 0.998148 0
+    1.0037 0.998148 0
+endnode
+endmodelgeom jz_wllpapers05
+donemodel jz_wllpapers05

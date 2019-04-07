@@ -1,0 +1,325 @@
+# Exported from NWmax 0.8 b60 at 10/7/2007 11:01:18 PM
+# mdl file
+#
+#NWmax MODEL ASCII
+# model: WAmBo_fxelect
+#local file: Unknown
+filedependancy Unknown
+newmodel WAmBo_fxelect
+setsupermodel WAmBo_fxelect NULL
+classification Character
+setanimationscale 1.0
+#NWmax GEOM  ASCII
+beginmodelgeom WAmBo_fxelect
+node dummy WAmBo_fxelect
+  parent NULL
+endnode
+node trimesh g_WAmAr_03
+  parent WAmBo_fxelect
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 1
+  center undefined
+  bitmap W_metal_tex
+  verts 0
+  faces 0
+endnode
+node emitter g_WSwGs_V_Sonic
+  parent g_WAmAr_03
+  position -0.005096 -0.149949 -0.408633
+  orientation 1.0 0.0 0.0 -1.5708
+  wirecolor 0.65098 0.65098 0.65098 
+  update_sel 1
+  update Fountain
+  render_sel 1
+  render Normal
+  blend_sel 3
+  Blend Lighten
+  spawntype_sel 0
+  spawnType 0
+  xSize 0.0
+  ySize 0.0
+  inherit 1
+  inherit_local 0
+  inheritvel 0
+  inherit_part 0
+  renderorder 0
+  threshold 0.0
+  combinetime 0.0
+  deadspace 0.0
+  opacity 0.2
+  colorStart 1.0 1.0 1.0 
+  colorEnd 1.0 1.0 1.0 
+  alphaStart 0.7
+  alphaEnd 0.5
+  sizeStart 0.3
+  sizeEnd 0.0
+  sizeStart_y 0.0
+  sizeEnd_y 0.0
+  birthrate 30
+  lifeExp 0.0005
+  mass 0.0
+  spread 0.0
+  particleRot 3.0
+  velocity 0.0
+  randvel 0.0
+  bounce_co 0.0
+  blurlength 0.2
+  loop 0
+  bounce 0
+  m_isTinted 0
+  splat 0
+  affectedByWind false
+  texture wambo_fxelect
+  twosidedtex 0
+  xgrid 1
+  ygrid 1
+  fps 0
+  framestart 0
+  frameend 0
+  random 0
+  lightningDelay 0.0
+  lightningRadius 0.0
+  lightningSubDiv 0
+  lightningScale 0.0
+  blastRadius 0.0
+  blastLength 0.0
+  p2p 1
+  p2p_type Bezier
+  p2p_sel 1
+  p2p_bezier2 0.0
+  p2p_bezier3 0.0
+  grav 0.0
+  drag 0.0
+endnode
+node reference OmenRef01
+  parent g_WSwGs_V_Sonic
+  position 0.00944806 0.000151248 0.773449
+  orientation -1.0 0.0 0.0 -1.5708
+  wirecolor 0.341176 0.878431 0.341176 
+  refModel fx_ref
+  reattachable 0
+  Dummy Dummy
+endnode
+node emitter g_WSwGs_V_Sonic01
+  parent g_WAmAr_03
+  position -0.508256 -0.161453 -0.595556
+  orientation 1.0 0.0 0.0 -1.5708
+  wirecolor 0.65098 0.65098 0.65098 
+  update_sel 1
+  update Fountain
+  render_sel 1
+  render Normal
+  blend_sel 3
+  Blend Lighten
+  spawntype_sel 0
+  spawnType 0
+  xSize 0.0
+  ySize 0.0
+  inherit 1
+  inherit_local 0
+  inheritvel 0
+  inherit_part 0
+  renderorder 0
+  threshold 0.0
+  combinetime 0.0
+  deadspace 0.0
+  opacity 0.2
+  colorStart 1.0 1.0 1.0 
+  colorEnd 1.0 1.0 1.0 
+  alphaStart 0.7
+  alphaEnd 0.5
+  sizeStart 0.3
+  sizeEnd 0.0
+  sizeStart_y 0.0
+  sizeEnd_y 0.0
+  birthrate 30
+  lifeExp 0.0005
+  mass 0.0
+  spread 0.0
+  particleRot 3.0
+  velocity 0.0
+  randvel 0.0
+  bounce_co 0.0
+  blurlength 0.2
+  loop 0
+  bounce 0
+  m_isTinted 0
+  splat 0
+  affectedByWind false
+  texture wambo_fxelect
+  twosidedtex 0
+  xgrid 1
+  ygrid 1
+  fps 0
+  framestart 0
+  frameend 0
+  random 0
+  lightningDelay 0.0
+  lightningRadius 0.0
+  lightningSubDiv 0
+  lightningScale 0.0
+  blastRadius 0.0
+  blastLength 0.0
+  p2p 1
+  p2p_type Bezier
+  p2p_sel 1
+  p2p_bezier2 0.0
+  p2p_bezier3 0.0
+  grav 0.0
+  drag 0.0
+endnode
+node reference OmenRef02
+  parent g_WSwGs_V_Sonic01
+  position 0.00944805 0.000151246 0.773449
+  orientation -1.0 0.0 0.0 -1.5708
+  wirecolor 0.341176 0.878431 0.341176 
+  refModel fx_ref
+  reattachable 0
+  Dummy Dummy
+endnode
+endmodelgeom WAmBo_fxelect
+#NWmax ANIM ASCII
+newanim travel01 WAmBo_fxelect
+  length 0.966667
+  transtime 0.0
+  animroot WAmBo_fxelect
+    node dummy WAmBo_fxelect
+        parent NULL
+    endnode
+    node trimesh g_WAmAr_03
+        parent WAmBo_fxelect
+    endnode
+    node emitter g_WSwGs_V_Sonic
+        parent g_WAmAr_03
+    endnode
+    node reference OmenRef01
+        parent g_WSwGs_V_Sonic
+    endnode
+    node emitter g_WSwGs_V_Sonic01
+        parent g_WAmAr_03
+    endnode
+    node reference OmenRef02
+        parent g_WSwGs_V_Sonic01
+    endnode
+doneanim travel01 WAmBo_fxelect
+#NWmax ANIM ASCII
+newanim impact01 WAmBo_fxelect
+  length 2.3
+  transtime 0.0
+  animroot WAmBo_fxelect
+    node dummy WAmBo_fxelect
+        parent NULL
+    endnode
+    node trimesh g_WAmAr_03
+        parent WAmBo_fxelect
+    endnode
+    node emitter g_WSwGs_V_Sonic
+        parent g_WAmAr_03
+    endnode
+    node reference OmenRef01
+        parent g_WSwGs_V_Sonic
+    endnode
+    node emitter g_WSwGs_V_Sonic01
+        parent g_WAmAr_03
+    endnode
+    node reference OmenRef02
+        parent g_WSwGs_V_Sonic01
+    endnode
+doneanim impact01 WAmBo_fxelect
+donemodel WAmBo_fxelect
+ 1
+    1.26666999 1
+    1.39999998 1
+    1.60000002 0.300000012
+  masskey 4
+    0 -0.200000003
+    1.23333001 -0.200000003
+    1.26666999 -0.200000003
+    1.36667001 0
+  spreadkey 5
+    0 0.523598015
+    1.23333001 0.523598015
+    1.26666999 0.523598015
+    1.33333004 0.523598015
+    1.36667001 0.523598015
+  velocitykey 5
+    0 0.300000012
+    1.23333001 0.300000012
+    1.26666999 0.300000012
+    1.36667001 1
+    1.60000002 3
+  ysizekey 4
+    0 50
+    1.26666999 50
+    1.29999995 50
+    1.33333004 3
+endnode
+node emitter Fire2
+  parent g_WAmAr_03
+  #part-number 3
+  positionkey 2
+    0 0.00238799999 -0.153536007 -0.4082214045
+    1.26666999 0.00238799999 -0.150953993 -0.4082214045
+  orientationkey 3
+    0 0 0 0 0
+    1.26666999 0 0 0 0
+    1.36667001 -1 0 0 -1.57079995
+  sizeStartkey 5
+    0 0.200000003
+    1.33333004 0.200000003
+    1.36667001 0.200000003
+    1.39999998 0.200000003
+    1.60000002 0.400000006
+  birthratekey 7
+    0 60
+    1.26666999 60
+    1.29999995 60
+    1.33333004 70
+    2.23333001 70
+    2.26666999 70
+    2.29999995 0
+  lifeExpkey 4
+    1.23333001 1
+    1.26666999 1
+    1.39999998 1
+    1.60000002 0.300000012
+  masskey 4
+    0 -0.200000003
+    1.23333001 -0.200000003
+    1.26666999 -0.200000003
+    1.36667001 0
+  spreadkey 5
+    0 0.523598015
+    1.23333001 0.523598015
+    1.26666999 0.523598015
+    1.33333004 0.523598015
+    1.36667001 0.523598015
+  velocitykey 5
+    0 0.300000012
+    1.23333001 0.300000012
+    1.26666999 0.300000012
+    1.36667001 1
+    1.60000002 3
+  ysizekey 4
+    0 50
+    1.26666999 50
+    1.29999995 50
+    1.33333004 3
+endnode
+doneanim impact01 WAmAr_fxfire
+donemodel WAmAr_fxfire

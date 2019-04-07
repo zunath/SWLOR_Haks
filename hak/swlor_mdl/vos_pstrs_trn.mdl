@@ -1,0 +1,56 @@
+# Exported from NWMax Plus v6.11.28 at 2016-12-23 09:13:18
+# mdl file
+#
+#NWMax Plus MODEL  ASCII
+# model: vos_pstrs_trn
+filedependancy Unknown
+newmodel vos_pstrs_trn
+setsupermodel vos_pstrs_trn NULL
+classification Character
+setanimationscale 1.0
+#NWMax Plus GEOM  ASCII
+beginmodelgeom vos_pstrs_trn
+node dummy vos_pstrs_trn
+  parent NULL
+endnode
+node trimesh Plane01
+  parent vos_pstrs_trn
+  position -0.027481 0.0 1.21832
+  orientation 0.0 0.707107 0.707107 -3.14159
+  wirecolor 0.878431 0.776471 0.341176 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 0
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 1
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 0.0 0.0 
+  bitmap vos_pstrs_trn
+  verts 4
+    -0.4 -0.5 0.0
+    0.4 -0.5 0.0
+    -0.4 0.5 0.0
+    0.4 0.5 0.0
+  faces 2
+    2 0 3  1  6 4 7  1
+    1 3 0  1  5 7 4  1
+  tverts 8
+    0.0 0.0 0
+    1.0 0.0 0
+    0.0 0.0 0
+    1.0 0.0 0
+    0.0 0.0 0
+    1.0 0.0 0
+    0.0 1.0 0
+    1.0 1.0 0
+endnode
+endmodelgeom vos_pstrs_trn
+donemodel vos_pstrs_trn

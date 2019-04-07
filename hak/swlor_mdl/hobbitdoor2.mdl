@@ -1,0 +1,832 @@
+# Exported from NWmax 0.8 b60 at 10/27/2008 9:33:25 AM
+# mdl file
+#
+#NWmax MODEL ASCII
+# model: HobbitDoor2
+#local file: Unknown
+filedependancy Unknown
+newmodel HobbitDoor2
+setsupermodel HobbitDoor2 NULL
+classification Door
+#NWmax GEOM  ASCII
+beginmodelgeom HobbitDoor2
+node dummy HobbitDoor2
+  parent NULL
+endnode
+node dummy HobbitDoorhead
+  parent HobbitDoor2
+  position 0.0 0.0 2.50001
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.0235294 0.52549 0.443137 
+endnode
+node dummy HobbitDoorimpc
+  parent HobbitDoor2
+  position 0.0 0.0 1.12846
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.721569 0.894118 0.6 
+endnode
+node dummy HobbitDoorhhit
+  parent HobbitDoor2
+  position 0.0 0.0 2.07145
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.721569 0.894118 0.6 
+endnode
+node dummy HobbitDoorgrnd
+  parent HobbitDoor2
+  position 0.0 0.0 0.04
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.721569 0.894118 0.6 
+endnode
+node trimesh Door
+  parent HobbitDoor2
+  position -0.70662 -1.7883e-006 0.65325
+  orientation -1.0 0.0 0.0 -1.5708
+  wirecolor 0.109804 0.109804 0.109804 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 0.588 0.588 0.588 
+  Diffuse 0.588 0.588 0.588 
+  Specular 0.9 0.9 0.9 
+  shininess 0
+  center 67.7789 0.000499725 -0.0928102 
+  bitmap wsf01_HobDoor1
+  verts 22
+    0.68 0.0 -0.1
+    0.0 0.0 -0.1
+    0.13 -0.37 -0.1
+    0.47 -0.6 -0.1
+    0.89 -0.6 -0.1
+    1.23 -0.37 -0.1
+    1.36 0.0 -0.1
+    1.23 0.37 -0.1
+    0.89 0.6 -0.1
+    0.47 0.6 -0.1
+    0.13 0.37 -0.1
+    0.0 0.0 0.09
+    0.13 -0.37 0.09
+    0.47 -0.6 0.09
+    0.89 -0.6 0.09
+    1.23 -0.37 0.09
+    1.36 0.0 0.09
+    1.23 0.37 0.09
+    0.89 0.6 0.09
+    0.47 0.6 0.09
+    0.13 0.37 0.09
+    0.68 0.0 0.09
+  faces 40
+    0 2 1  1  0 2 1  0
+    0 3 2  1  0 3 2  0
+    0 4 3  1  0 4 3  0
+    0 5 4  1  0 5 4  0
+    0 6 5  1  0 6 5  0
+    0 7 6  1  0 7 6  0
+    0 8 7  1  0 8 7  0
+    0 9 8  1  0 9 8  0
+    0 10 9  1  0 10 9  0
+    0 1 10  1  0 1 10  0
+    1 12 11  1  22 26 25  0
+    1 2 12  1  22 23 26  0
+    2 13 12  1  34 39 38  0
+    2 3 13  1  34 35 39  0
+    3 14 13  1  35 40 39  0
+    3 4 14  1  35 36 40  0
+    4 15 14  1  36 41 40  0
+    4 5 15  1  36 37 41  0
+    5 16 15  1  28 32 31  0
+    5 6 16  1  28 29 32  0
+    6 17 16  1  29 33 32  0
+    6 7 17  1  29 30 33  0
+    7 18 17  1  42 47 46  0
+    7 8 18  1  42 43 47  0
+    8 19 18  1  43 48 47  0
+    8 9 19  1  43 44 48  0
+    9 20 19  1  44 49 48  0
+    9 10 20  1  44 45 49  0
+    10 11 20  1  24 25 27  0
+    10 1 11  1  24 22 25  0
+    21 11 12  1  21 11 12  0
+    21 12 13  1  21 12 13  0
+    21 13 14  1  21 13 14  0
+    21 14 15  1  21 14 15  0
+    21 15 16  1  21 15 16  0
+    21 16 17  1  21 16 17  0
+    21 17 18  1  21 17 18  0
+    21 18 19  1  21 18 19  0
+    21 19 20  1  21 19 20  0
+    21 20 11  1  21 20 11  0
+  tverts 50
+    0.574222 0.380419 0
+    -0.137595 0.380419 0
+    -0.00165022 -0.0104716 0
+    0.354258 -0.252054 0
+    0.794186 -0.252054 0
+    1.1501 -0.0104716 0
+    1.28604 0.380419 0
+    1.1501 0.771308 0
+    0.794186 1.01289 0
+    0.354258 1.01289 0
+    -0.00165022 0.771308 0
+    -0.165632 0.385511 0
+    -0.0256038 -0.0171207 0
+    0.340995 -0.265961 0
+    0.794138 -0.265961 0
+    1.16074 -0.0171207 0
+    1.30077 0.385511 0
+    1.16074 0.788143 0
+    0.794138 1.03698 0
+    0.340995 1.03698 0
+    -0.0256038 0.788143 0
+    0.567567 0.385511 0
+    0.683613 0.658091 0
+    0.539689 0.658091 0
+    0.827536 0.658091 0
+    0.683613 0.588308 0
+    0.539689 0.588308 0
+    0.827536 0.588308 0
+    0.827536 0.163837 0
+    0.683613 0.163837 0
+    0.539689 0.163837 0
+    0.827536 0.0940543 0
+    0.683613 0.0940543 0
+    0.539689 0.0940543 0
+    0.935877 0.584037 0
+    0.813448 0.584037 0
+    0.662118 0.584037 0
+    0.539689 0.584037 0
+    0.935877 0.514254 0
+    0.813448 0.514254 0
+    0.662118 0.514254 0
+    0.539689 0.514254 0
+    0.935877 0.089783 0
+    0.813448 0.089783 0
+    0.662118 0.089783 0
+    0.539689 0.089783 0
+    0.935877 0.02 0
+    0.813448 0.02 0
+    0.662118 0.02 0
+    0.539689 0.02 0
+endnode
+node trimesh sam
+  parent HobbitDoor2
+  position -0.0222931 -0.0210121 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.894118 0.894118 0.894118 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 0.0
+  transparencyhint 0
+  selfillumcolor 0.0705882 0.0 1.0 
+  ambient 0.2 0.2 0.2 
+  Diffuse 0.8 0.8 0.8 
+  Specular 0.0 0.0 0.0 
+  shininess 1
+  center 0.0 0.0 63.8795 
+  bitmap NULL
+  verts 8
+    0.7 0.02 0.0
+    -0.7 0.02 0.0
+    0.7 -0.02 0.0
+    -0.7 -0.02 0.0
+    0.7 0.02 1.28
+    -0.7 0.02 1.28
+    0.7 -0.02 1.28
+    -0.7 -0.02 1.28
+  faces 12
+    0 2 3  2  0 0 0  1
+    3 1 0  2  0 0 0  1
+    4 5 7  4  0 0 0  0
+    7 6 4  4  0 0 0  0
+    0 1 5  8  0 0 0  4
+    5 4 0  8  0 0 0  4
+    1 3 7  16  0 0 0  3
+    7 5 1  16  0 0 0  3
+    3 2 6  32  0 0 0  5
+    6 7 3  32  0 0 0  5
+    2 0 4  64  0 0 0  2
+    4 6 2  64  0 0 0  2
+endnode
+endmodelgeom HobbitDoor2
+
+#NWmax ANIM ASCII
+newanim opening1 HobbitDoor2
+  length 1.0
+  transtime 0.0
+  animroot HobbitDoor
+    node dummy HobbitDoor2
+        parent NULL
+    endnode
+    node dummy HobbitDoorhead
+        parent HobbitDoor2
+    endnode
+    node dummy HobbitDoorimpc
+        parent HobbitDoor2
+    endnode
+    node dummy HobbitDoorhhit
+        parent HobbitDoor2
+    endnode
+    node dummy HobbitDoorgrnd
+        parent HobbitDoor2
+    endnode
+    node trimesh Door
+        parent HobbitDoor2
+        positionkey
+            0.0 -0.706616 0.0 0.653246
+            1.0 -0.706616 0.0 0.653246
+        endlist
+        orientationkey
+            0.0 -1.0 0.0 0.0 -1.5708
+            1.0 -0.577349 -0.577349 -0.577352 -2.09439
+        endlist
+    endnode
+    node trimesh sam
+        parent HobbitDoor2
+    endnode
+    node dummy HobbitDoor2_DWK
+        parent HobbitDoor2
+    endnode
+    node trimesh 02_DWK_wg_closed
+        parent HobbitDoor2_DWK
+    endnode
+    node trimesh 02_DWK_wg_open2
+        parent HobbitDoor2_DWK
+    endnode
+    node dummy 02_DWK_dp_closed_02
+        parent HobbitDoor2_DWK
+    endnode
+    node dummy 02_DWK_dp_closed_01
+        parent HobbitDoor2_DWK
+    endnode
+    node trimesh 02_DWK_wg_open1
+        parent HobbitDoor2_DWK
+    endnode
+    node dummy 02_DWK_dp_open2_01
+        parent HobbitDoor2_DWK
+    endnode
+    node dummy 02_DWK_dp_open1_01
+        parent HobbitDoor2_DWK
+    endnode
+doneanim opening1 HobbitDoor2
+
+
+#NWmax ANIM ASCII
+newanim closing1 HobbitDoor2
+  length 0.666667
+  transtime 0.0
+  animroot HobbitDoor
+    node dummy HobbitDoor2
+        parent NULL
+    endnode
+    node dummy HobbitDoorhead
+        parent HobbitDoor2
+    endnode
+    node dummy HobbitDoorimpc
+        parent HobbitDoor2
+    endnode
+    node dummy HobbitDoorhhit
+        parent HobbitDoor2
+    endnode
+    node dummy HobbitDoorgrnd
+        parent HobbitDoor2
+    endnode
+    node trimesh Door
+        parent HobbitDoor2
+        positionkey
+            0.0 -0.706616 0.0 0.653246
+            0.666667 -0.706616 0.0 0.653246
+        endlist
+        orientationkey
+            0.0 -0.577349 -0.577349 -0.577353 -2.09439
+            0.666667 -1.0 0.0 0.0 -1.5708
+        endlist
+    endnode
+    node trimesh sam
+        parent HobbitDoor2
+    endnode
+    node dummy HobbitDoor2_DWK
+        parent HobbitDoor2
+    endnode
+    node trimesh 02_DWK_wg_closed
+        parent HobbitDoor2_DWK
+    endnode
+    node trimesh 02_DWK_wg_open2
+        parent HobbitDoor2_DWK
+    endnode
+    node dummy 02_DWK_dp_closed_02
+        parent HobbitDoor2_DWK
+    endnode
+    node dummy 02_DWK_dp_closed_01
+        parent HobbitDoor2_DWK
+    endnode
+    node trimesh 02_DWK_wg_open1
+        parent HobbitDoor2_DWK
+    endnode
+    node dummy 02_DWK_dp_open2_01
+        parent HobbitDoor2_DWK
+    endnode
+    node dummy 02_DWK_dp_open1_01
+        parent HobbitDoor2_DWK
+    endnode
+doneanim closing1 HobbitDoor2
+
+
+#NWmax ANIM ASCII
+newanim opening2 HobbitDoor2
+  length 1.0
+  transtime 0.0
+  animroot HobbitDoor
+    node dummy HobbitDoor2
+        parent NULL
+    endnode
+    node dummy HobbitDoorhead
+        parent HobbitDoor2
+    endnode
+    node dummy HobbitDoorimpc
+        parent HobbitDoor2
+    endnode
+    node dummy HobbitDoorhhit
+        parent HobbitDoor2
+    endnode
+    node dummy HobbitDoorgrnd
+        parent HobbitDoor2
+    endnode
+    node trimesh Door
+        parent HobbitDoor2
+        positionkey
+            0.0 -0.706616 0.0 0.653246
+            1.0 -0.706616 0.0 0.653246
+        endlist
+        orientationkey
+            0.0 -1.0 0.0 0.0 -1.5708
+            1.0 -0.577349 0.577348 0.577354 -2.09439
+        endlist
+    endnode
+    node trimesh sam
+        parent HobbitDoor2
+    endnode
+    node dummy HobbitDoor2_DWK
+        parent HobbitDoor2
+    endnode
+    node trimesh 02_DWK_wg_closed
+        parent HobbitDoor2_DWK
+    endnode
+    node trimesh 02_DWK_wg_open2
+        parent HobbitDoor2_DWK
+    endnode
+    node dummy 02_DWK_dp_closed_02
+        parent HobbitDoor2_DWK
+    endnode
+    node dummy 02_DWK_dp_closed_01
+        parent HobbitDoor2_DWK
+    endnode
+    node trimesh 02_DWK_wg_open1
+        parent HobbitDoor2_DWK
+    endnode
+    node dummy 02_DWK_dp_open2_01
+        parent HobbitDoor2_DWK
+    endnode
+    node dummy 02_DWK_dp_open1_01
+        parent HobbitDoor2_DWK
+    endnode
+doneanim opening2 HobbitDoor2
+
+
+#NWmax ANIM ASCII
+newanim die HobbitDoor2
+  length 0.666667
+  transtime 0.0
+  animroot HobbitDoor
+    node dummy HobbitDoor2
+        parent NULL
+    endnode
+    node dummy HobbitDoorhead
+        parent HobbitDoor2
+    endnode
+    node dummy HobbitDoorimpc
+        parent HobbitDoor2
+    endnode
+    node dummy HobbitDoorhhit
+        parent HobbitDoor2
+    endnode
+    node dummy HobbitDoorgrnd
+        parent HobbitDoor2
+    endnode
+    node trimesh Door
+        parent HobbitDoor2
+        positionkey
+            0.0 -0.706616 0.0 0.653246
+            0.666667 -0.706616 0.0 -0.300004
+        endlist
+        orientationkey
+            0.0 -1.0 0.0 0.0 -1.5708
+            0.666667 -5.83717e-006 -3.13886e-006 1.0 -0.785396
+        endlist
+    endnode
+    node trimesh sam
+        parent HobbitDoor2
+    endnode
+    node dummy HobbitDoor2_DWK
+        parent HobbitDoor2
+    endnode
+    node trimesh 02_DWK_wg_closed
+        parent HobbitDoor2_DWK
+    endnode
+    node trimesh 02_DWK_wg_open2
+        parent HobbitDoor2_DWK
+    endnode
+    node dummy 02_DWK_dp_closed_02
+        parent HobbitDoor2_DWK
+    endnode
+    node dummy 02_DWK_dp_closed_01
+        parent HobbitDoor2_DWK
+    endnode
+    node trimesh 02_DWK_wg_open1
+        parent HobbitDoor2_DWK
+    endnode
+    node dummy 02_DWK_dp_open2_01
+        parent HobbitDoor2_DWK
+    endnode
+    node dummy 02_DWK_dp_open1_01
+        parent HobbitDoor2_DWK
+    endnode
+doneanim die HobbitDoor2
+
+
+#NWmax ANIM ASCII
+newanim closing2 HobbitDoor2
+  length 0.633333
+  transtime 0.0
+  animroot HobbitDoor
+    node dummy HobbitDoor2
+        parent NULL
+    endnode
+    node dummy HobbitDoorhead
+        parent HobbitDoor2
+    endnode
+    node dummy HobbitDoorimpc
+        parent HobbitDoor2
+    endnode
+    node dummy HobbitDoorhhit
+        parent HobbitDoor2
+    endnode
+    node dummy HobbitDoorgrnd
+        parent HobbitDoor2
+    endnode
+    node trimesh Door
+        parent HobbitDoor2
+        positionkey
+            0.0 -0.706616 0.0 0.653246
+            0.633333 -0.706616 0.0 0.653246
+        endlist
+        orientationkey
+            0.0 -0.577351 0.577348 0.577352 -2.0944
+            0.633333 -1.0 0.0 0.0 -1.57081
+        endlist
+    endnode
+    node trimesh sam
+        parent HobbitDoor2
+    endnode
+    node dummy HobbitDoor2_DWK
+        parent HobbitDoor2
+    endnode
+    node trimesh 02_DWK_wg_closed
+        parent HobbitDoor2_DWK
+    endnode
+    node trimesh 02_DWK_wg_open2
+        parent HobbitDoor2_DWK
+    endnode
+    node dummy 02_DWK_dp_closed_02
+        parent HobbitDoor2_DWK
+    endnode
+    node dummy 02_DWK_dp_closed_01
+        parent HobbitDoor2_DWK
+    endnode
+    node trimesh 02_DWK_wg_open1
+        parent HobbitDoor2_DWK
+    endnode
+    node dummy 02_DWK_dp_open2_01
+        parent HobbitDoor2_DWK
+    endnode
+    node dummy 02_DWK_dp_open1_01
+        parent HobbitDoor2_DWK
+    endnode
+doneanim closing2 HobbitDoor2
+
+
+#NWmax ANIM ASCII
+newanim closed HobbitDoor2
+  length 0.0333333
+  transtime 0.0
+  animroot HobbitDoor
+    node dummy HobbitDoor2
+        parent NULL
+    endnode
+    node dummy HobbitDoorhead
+        parent HobbitDoor2
+    endnode
+    node dummy HobbitDoorimpc
+        parent HobbitDoor2
+    endnode
+    node dummy HobbitDoorhhit
+        parent HobbitDoor2
+    endnode
+    node dummy HobbitDoorgrnd
+        parent HobbitDoor2
+    endnode
+    node trimesh Door
+        parent HobbitDoor2
+        positionkey
+            0.0 -0.706616 0.0 0.653246
+            0.0333333 -0.706616 0.0 0.653246
+        endlist
+        orientationkey
+            0.0 -1.0 0.0 0.0 -1.57079
+            0.0333333 -1.0 0.0 0.0 -1.57079
+        endlist
+    endnode
+    node trimesh sam
+        parent HobbitDoor2
+    endnode
+    node dummy HobbitDoor2_DWK
+        parent HobbitDoor2
+    endnode
+    node trimesh 02_DWK_wg_closed
+        parent HobbitDoor2_DWK
+    endnode
+    node trimesh 02_DWK_wg_open2
+        parent HobbitDoor2_DWK
+    endnode
+    node dummy 02_DWK_dp_closed_02
+        parent HobbitDoor2_DWK
+    endnode
+    node dummy 02_DWK_dp_closed_01
+        parent HobbitDoor2_DWK
+    endnode
+    node trimesh 02_DWK_wg_open1
+        parent HobbitDoor2_DWK
+    endnode
+    node dummy 02_DWK_dp_open2_01
+        parent HobbitDoor2_DWK
+    endnode
+    node dummy 02_DWK_dp_open1_01
+        parent HobbitDoor2_DWK
+    endnode
+doneanim closed HobbitDoor2
+
+
+#NWmax ANIM ASCII
+newanim opened2 HobbitDoor2
+  length 0.0333333
+  transtime 0.0
+  animroot HobbitDoor
+    node dummy HobbitDoor2
+        parent NULL
+    endnode
+    node dummy HobbitDoorhead
+        parent HobbitDoor2
+    endnode
+    node dummy HobbitDoorimpc
+        parent HobbitDoor2
+    endnode
+    node dummy HobbitDoorhhit
+        parent HobbitDoor2
+    endnode
+    node dummy HobbitDoorgrnd
+        parent HobbitDoor2
+    endnode
+    node trimesh Door
+        parent HobbitDoor2
+        positionkey
+            0.0 -0.706616 0.0 0.653246
+            0.0333333 -0.706616 0.0 0.653246
+        endlist
+        orientationkey
+            0.0 -0.577347 0.577332 0.577372 -2.09438
+            0.0333333 -0.577347 0.577332 0.577372 -2.09438
+        endlist
+    endnode
+    node trimesh sam
+        parent HobbitDoor2
+    endnode
+    node dummy HobbitDoor2_DWK
+        parent HobbitDoor2
+    endnode
+    node trimesh 02_DWK_wg_closed
+        parent HobbitDoor2_DWK
+    endnode
+    node trimesh 02_DWK_wg_open2
+        parent HobbitDoor2_DWK
+    endnode
+    node dummy 02_DWK_dp_closed_02
+        parent HobbitDoor2_DWK
+    endnode
+    node dummy 02_DWK_dp_closed_01
+        parent HobbitDoor2_DWK
+    endnode
+    node trimesh 02_DWK_wg_open1
+        parent HobbitDoor2_DWK
+    endnode
+    node dummy 02_DWK_dp_open2_01
+        parent HobbitDoor2_DWK
+    endnode
+    node dummy 02_DWK_dp_open1_01
+        parent HobbitDoor2_DWK
+    endnode
+doneanim opened2 HobbitDoor2
+
+
+#NWmax ANIM ASCII
+newanim opened1 HobbitDoor2
+  length 0.0333333
+  transtime 0.0
+  animroot HobbitDoor
+    node dummy HobbitDoor2
+        parent NULL
+    endnode
+    node dummy HobbitDoorhead
+        parent HobbitDoor2
+    endnode
+    node dummy HobbitDoorimpc
+        parent HobbitDoor2
+    endnode
+    node dummy HobbitDoorhhit
+        parent HobbitDoor2
+    endnode
+    node dummy HobbitDoorgrnd
+        parent HobbitDoor2
+    endnode
+    node trimesh Door
+        parent HobbitDoor2
+        positionkey
+            0.0 -0.706616 0.0 0.653246
+            0.0333333 -0.706616 0.0 0.653246
+        endlist
+        orientationkey
+            0.0 -0.577345 0.577343 0.577362 -2.09438
+            0.0333333 -0.577345 0.577344 0.577362 -2.09438
+        endlist
+    endnode
+    node trimesh sam
+        parent HobbitDoor2
+    endnode
+    node dummy HobbitDoor2_DWK
+        parent HobbitDoor2
+    endnode
+    node trimesh 02_DWK_wg_closed
+        parent HobbitDoor2_DWK
+    endnode
+    node trimesh 02_DWK_wg_open2
+        parent HobbitDoor2_DWK
+    endnode
+    node dummy 02_DWK_dp_closed_02
+        parent HobbitDoor2_DWK
+    endnode
+    node dummy 02_DWK_dp_closed_01
+        parent HobbitDoor2_DWK
+    endnode
+    node trimesh 02_DWK_wg_open1
+        parent HobbitDoor2_DWK
+    endnode
+    node dummy 02_DWK_dp_open2_01
+        parent HobbitDoor2_DWK
+    endnode
+    node dummy 02_DWK_dp_open1_01
+        parent HobbitDoor2_DWK
+    endnode
+doneanim opened1 HobbitDoor2
+
+
+#NWmax ANIM ASCII
+newanim trans HobbitDoor2
+  length 0.0333333
+  transtime 0.0
+  animroot HobbitDoor
+    node dummy HobbitDoor2
+        parent NULL
+    endnode
+    node dummy HobbitDoorhead
+        parent HobbitDoor2
+    endnode
+    node dummy HobbitDoorimpc
+        parent HobbitDoor2
+    endnode
+    node dummy HobbitDoorhhit
+        parent HobbitDoor2
+    endnode
+    node dummy HobbitDoorgrnd
+        parent HobbitDoor2
+    endnode
+    node trimesh Door
+        parent HobbitDoor2
+        positionkey
+            0.0 -0.706616 0.0 0.653246
+            0.0333333 -0.706616 0.0 0.653246
+        endlist
+        orientationkey
+            0.0 -0.577345 0.577343 0.577362 -2.09438
+            0.0333333 -0.577345 0.577344 0.577362 -2.09438
+        endlist
+    endnode
+    node trimesh sam
+        parent HobbitDoor2
+    endnode
+    node dummy HobbitDoor2_DWK
+        parent HobbitDoor2
+    endnode
+    node trimesh 02_DWK_wg_closed
+        parent HobbitDoor2_DWK
+    endnode
+    node trimesh 02_DWK_wg_open2
+        parent HobbitDoor2_DWK
+    endnode
+    node dummy 02_DWK_dp_closed_02
+        parent HobbitDoor2_DWK
+    endnode
+    node dummy 02_DWK_dp_closed_01
+        parent HobbitDoor2_DWK
+    endnode
+    node trimesh 02_DWK_wg_open1
+        parent HobbitDoor2_DWK
+    endnode
+    node dummy 02_DWK_dp_open2_01
+        parent HobbitDoor2_DWK
+    endnode
+    node dummy 02_DWK_dp_open1_01
+        parent HobbitDoor2_DWK
+    endnode
+doneanim trans HobbitDoor2
+
+
+#NWmax ANIM ASCII
+newanim dead HobbitDoor2
+  length 0.0333333
+  transtime 0.0
+  animroot HobbitDoor
+    node dummy HobbitDoor2
+        parent NULL
+    endnode
+    node dummy HobbitDoorhead
+        parent HobbitDoor2
+    endnode
+    node dummy HobbitDoorimpc
+        parent HobbitDoor2
+    endnode
+    node dummy HobbitDoorhhit
+        parent HobbitDoor2
+    endnode
+    node dummy HobbitDoorgrnd
+        parent HobbitDoor2
+    endnode
+    node trimesh Door
+        parent HobbitDoor2
+        positionkey
+            0.0 -0.706616 0.0 -0.300004
+            0.0333333 -0.706616 0.0 -0.300004
+        endlist
+        orientationkey
+            0.0 1.68503e-005 -1.25551e-005 1.0 -0.785416
+            0.0333333 1.7401e-005 -1.22798e-005 1.0 -0.785416
+        endlist
+    endnode
+    node trimesh sam
+        parent HobbitDoor2
+    endnode
+    node dummy HobbitDoor2_DWK
+        parent HobbitDoor2
+    endnode
+    node trimesh 02_DWK_wg_closed
+        parent HobbitDoor2_DWK
+    endnode
+    node trimesh 02_DWK_wg_open2
+        parent HobbitDoor2_DWK
+    endnode
+    node dummy 02_DWK_dp_closed_02
+        parent HobbitDoor2_DWK
+    endnode
+    node dummy 02_DWK_dp_closed_01
+        parent HobbitDoor2_DWK
+    endnode
+    node trimesh 02_DWK_wg_open1
+        parent HobbitDoor2_DWK
+    endnode
+    node dummy 02_DWK_dp_open2_01
+        parent HobbitDoor2_DWK
+    endnode
+    node dummy 02_DWK_dp_open1_01
+        parent HobbitDoor2_DWK
+    endnode
+doneanim dead HobbitDoor2
+
+donemodel HobbitDoor2

@@ -1,0 +1,72 @@
+# Exported from NWmax 0.8 b60 at 19/08/2009 12:43:04
+# mdl file
+#
+#NWmax MODEL ASCII
+# model: PKT_debris01
+#local file: Unknown
+filedependancy Unknown
+newmodel PKT_debris01
+setsupermodel PKT_debris01 NULL
+classification Character
+setanimationscale 1.0
+#NWmax GEOM  ASCII
+beginmodelgeom PKT_debris01
+node dummy PKT_debris01
+  parent NULL
+endnode
+node dummy debris01_impact
+  parent PKT_debris01
+  position 0.0 0.0 0.85
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.109804 0.34902 0.694118 
+endnode
+node dummy debris01_ground
+  parent PKT_debris01
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.109804 0.34902 0.694118 
+endnode
+node dummy debris01_hand
+  parent PKT_debris01
+  position 0.0 0.0 1.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.109804 0.34902 0.694118 
+endnode
+node dummy debris01_head
+  parent PKT_debris01
+  position 0.0 0.0 2.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.109804 0.34902 0.694118 
+endnode
+node dummy debris01_head_hit
+  parent PKT_debris01
+  position 0.0 0.0 1.5
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.109804 0.34902 0.694118 
+endnode
+node trimesh Object67
+  parent PKT_debris01
+  position -0.0356482 0.396732 0.0468783
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 1.0 1.0 1.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 0.0
+  bitmap PKT_spdrB01
+  verts 4
+    0.248573 -0.831973 -0.0414743
+    -0.182104 0.0843359 0.0410281
+    -0.149482 -0.830605 -0.0414743
+    0.2494 -0.0318293 -0.0414743
+  faces 2
+    0 1 2  1  0 1 2  1
+    1 0 3  1  1 0 3  1
+  tverts 4
+    0.0818566 0.00882174 0
+    0.217432 0.0872917 0
+    0.0820593 0.0838548 0
+    0.200245 0.00866553 0
+endnode
+endmodelgeom PKT_debris01
+donemodel PKT_debris01

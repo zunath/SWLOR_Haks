@@ -1,0 +1,65 @@
+#MAXMODEL ASCII
+# model: outline
+filedependancy outline NULL.mlk
+newmodel outline
+setsupermodel outline NULL
+classification Character
+setanimationscale 0
+
+#MAXGEOM ASCII
+beginmodelgeom outline
+node dummy outline
+  parent NULL
+endnode
+node dummy rootdummy
+  parent outline
+  position 0 0 0
+  orientation 0 0 0 0
+  wirecolor 1 1 1
+endnode
+node trimesh pPlaneShape1
+  parent rootdummy
+  position 0 0 0
+  orientation 1 0 0 0
+  wirecolor 1 1 1
+  ambient 0.200000 0.200000 0.200000 1.000000
+  diffuse 0.800000 0.800000 0.800000 1.000000
+  specular 0.000000 0.000000 0.000000 1.000000
+  shininess 0.000000
+    bitmap chalk1
+    verts 4
+     -0.919555 -0.525460 0.010296 
+     0.919555 -0.525460 0.010296 
+     0.919555 0.525460 0.010296 
+     -0.919555 0.525460 0.010296 
+    faces 2
+     0 1 2  1  0 1 2  0
+     0 2 3  1  0 2 3  0
+    tverts 4
+     0.104620 -0.039320 0.0 
+     -0.026806 0.928121 0.0 
+     0.859690 1.048551 0.0 
+     0.991117 0.081109 0.0 
+endnode
+node dummy impact
+  parent pPlaneShape1
+  position 0 0 0
+  orientation 0 0 0 0
+  wirecolor 1 1 1
+endnode
+node dummy handconjure
+  parent outline
+  position 0 0 0
+  orientation 0 0 0 0
+  wirecolor 1 1 1
+endnode
+node dummy headconjure
+  parent outline
+  position 0 0 0
+  orientation 0 0 0 0
+  wirecolor 1 1 1
+endnode
+endmodelgeom outline
+
+donemodel outline
+

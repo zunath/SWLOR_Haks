@@ -1,0 +1,413 @@
+# Exported from NWmax 0.5-beta at 1/27/2004 1:52:42 PM
+# mdl file
+#
+#NWmaxMODEL ASCII
+# model: container01_plc
+filedependancy docks2.gmax
+newmodel container01_plc
+setsupermodel container01_plc NULL
+classification Character
+setanimationscale 1.0
+#NWmaxGEOM  ASCII
+beginmodelgeom container01_plc
+node dummy container01_plc
+  parent NULL
+endnode
+node dummy container_plc_hand
+  parent container01_plc
+  position 0.00398926 -0.505195 0.934402
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.333333 0.109804 0.694118 
+endnode
+node dummy container_plc_head
+  parent container01_plc
+  position 0.00398926 -0.437392 1.53491
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.443137 0.52549 0.0235294 
+endnode
+node dummy container_plc_head_hit
+  parent container01_plc
+  position 0.00398926 -0.437392 1.05343
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.835294 0.603922 0.898039 
+endnode
+node dummy container_plc_impact
+  parent container01_plc
+  position 0.00398926 0.632598 1.44739
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.835294 0.603922 0.898039 
+endnode
+node dummy container_plc_ground
+  parent container01_plc
+  position -0.00363281 0.0069873 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.721569 0.894118 0.6 
+endnode
+node trimesh damage28
+  parent container01_plc
+  position 0.000800171 0.00505646 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 1.0 1.0 1.0 
+    tilefade 0
+    scale 1.0
+    render 0
+    Shadow 0
+    beaming 0
+    inheritcolor 0
+    selfillumcolor 0.0 0.0 0.0 
+    rotatetexture 0
+      alpha 1.0
+    transparencyhint 0
+    center 0.0 0.0 25.0 
+    gizmo SubAnim:Gizmo
+  ambient 0.0705882 0.0 1.0 
+  diffuse 1.0 0.501961 0.643137 
+  specular 0.0 0.0 0.0 
+  shininess 25.0
+  selfillumcolor 0.0 0.0 0.0 
+    bitmap NULL
+    verts 12
+     -0.195415 -0.186216 0.0
+     -0.195415 0.186216 0.0
+     0.195415 0.186216 0.0
+     0.195415 -0.186216 0.0
+     -0.195415 -0.186216 0.5
+     0.195415 -0.186216 0.5
+     0.195415 0.186216 0.5
+     -0.195415 0.186216 0.5
+     0.103944 -0.0990513 0.25
+     -0.103944 -0.0990513 0.25
+     0.103944 0.0990513 0.25
+     -0.103944 0.0990513 0.25
+    faces 20
+     0 1 2  1  0 1 2  65536
+     2 3 0  1  0 1 2  65536
+     4 5 6  1  0 1 2  65536
+     6 7 4  1  0 1 2  65536
+     0 3 8  1  0 1 2  65536
+     8 9 0  1  0 1 2  65536
+     9 8 5  1  0 1 2  65536
+     5 4 9  1  0 1 2  65536
+     3 2 10  1  0 1 2  65536
+     10 8 3  1  0 1 2  65536
+     8 10 6  1  0 1 2  65536
+     6 5 8  1  0 1 2  65536
+     2 1 11  1  0 1 2  65536
+     11 10 2  1  0 1 2  65536
+     10 11 7  1  0 1 2  65536
+     7 6 10  1  0 1 2  65536
+     1 0 9  1  0 1 2  65536
+     9 11 1  1  0 1 2  65536
+     11 9 4  1  0 1 2  65536
+     4 7 11  1  0 1 2  65536
+    tverts 3
+     0.0 0.0 0
+     0.0 0.0 0
+     0.0 0.0 0
+endnode
+node trimesh Object01
+  parent damage28
+  position -0.000800171 -6.00506 2.0
+  orientation 0.0 -0.707107 -0.707107 -3.14159
+  wirecolor 0.878431 0.776471 0.341176 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 11.0
+  selfillumcolor 0.0 0.0 0.0 
+    bitmap cargo_container2
+    verts 8
+     -1.75 -2.0 0.0
+     1.75 -2.0 0.0
+     -1.75 2.0 0.0
+     1.75 2.0 0.0
+     -1.75 -2.0 12.0
+     1.75 -2.0 12.0
+     -1.75 2.0 12.0
+     1.75 2.0 12.0
+    faces 4
+     0 2 3  2  8 2 9  2
+     3 1 0  2  3 1 0  2
+     4 5 7  4  10 5 11  1
+     7 6 4  4  7 6 4  1
+    tverts 12
+     0.327207 0.670931 0
+     5.6386e-005 0.67185 0
+     0.327207 0.996182 0
+     5.63134e-005 0.996182 0
+     5.63134e-005 0.67185 0
+     0.327207 0.670931 0
+     5.6386e-005 0.996182 0
+     0.327207 0.996182 0
+     0.327207 0.670931 0
+     5.63134e-005 0.996182 0
+     5.63134e-005 0.67185 0
+     0.327207 0.996182 0
+endnode
+node trimesh Box01
+  parent damage28
+  position -0.000800171 -6.00506 2.0
+  orientation 0.0 -0.707107 -0.707107 -3.14159
+  wirecolor 0.878431 0.776471 0.341176 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 11.0
+  selfillumcolor 0.0 0.0 0.0 
+    bitmap cargo_container
+    verts 8
+     -1.75 -2.0 0.0
+     1.75 -2.0 0.0
+     -1.75 2.0 0.0
+     1.75 2.0 0.0
+     -1.75 -2.0 12.0
+     1.75 -2.0 12.0
+     -1.75 2.0 12.0
+     1.75 2.0 12.0
+    faces 8
+     0 1 5  8  8 9 10  5
+     5 4 0  8  11 12 13  5
+     1 3 7  16  14 15 16  4
+     7 5 1  16  17 5 1  4
+     3 2 6  32  18 19 20  6
+     6 7 3  32  21 7 3  6
+     2 0 4  64  22 0 23  3
+     4 6 2  64  4 6 2  3
+    tverts 24
+     0.995982 0.338024 0
+     0.99665 0.00507357 0
+     0.99665 0.00507357 0
+     0.99665 0.00507348 0
+     -3.0465e-005 0.337101 0
+     -0.00176139 0.00554135 0
+     -0.00176139 0.00554135 0
+     -0.00176139 0.00554126 0
+     0.99665 0.00507348 0
+     0.995982 0.338024 0
+     -3.0465e-005 0.337101 0
+     -3.0465e-005 0.337101 0
+     -0.00176139 0.00554126 0
+     0.99665 0.00507348 0
+     0.99665 0.00507357 0
+     0.995982 0.338024 0
+     -3.0465e-005 0.337101 0
+     -3.0465e-005 0.337101 0
+     0.99665 0.00507348 0
+     0.995982 0.338024 0
+     -3.0465e-005 0.337101 0
+     -3.0465e-005 0.337101 0
+     0.99665 0.00507357 0
+     -3.0465e-005 0.337101 0
+endnode
+node emitter ChunkyWood108
+  parent container01_plc
+  position -0.000766602 0.418231 0.606715
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 1.0 1.0 1.0 
+     update_sel 3
+     update Explosion
+     render_sel 1
+     render Normal
+     blend_sel 1
+     Blend Normal
+     spawnType 0
+     iconSize 100.0
+     xSize 89.0
+     ySize 40.0
+     inherit 1
+     inherit_local 0
+     inheritvel 0
+     inherit_part 0
+     renderorder 0
+     threshold 0.0
+     combinetime 0.0
+     deadspace 0.0
+     colorStart 1.0 1.0 1.0 
+     colorEnd 1.0 1.0 1.0 
+     alphaStart 1.0
+     alphaEnd 1.0
+     sizeStart 0.1
+     sizeEnd 0.1
+     sizeStart_y 0.0
+     sizeEnd_y 0.0
+     birthrate 1.0
+     lifeExp 0.75
+     mass 3.0
+     spread 1.22173
+     particleRot 5.0
+     velocity 8.0
+     randvel 0.3
+     bounce_co 0.5
+     blurlength 10.0
+     loop 0
+     bounce 1
+     m_isTinted 0
+     Splat 0
+     affectedbyWind false
+     texture fxpa_cloud02
+     twosidedtext 0
+     xgrid 5
+     ygrid 5
+     fps 0
+     frameStart 0
+     frameEnd 24
+     random 0
+     #chunk undefined
+     lightningDelay 0.0
+     lightningRadius 0.0
+     lightningSubDivkey 0
+     lightningScale 0.0
+     blastRadius 0.0
+     blastLength 0.0
+     opacity 0.0
+     p2p 0
+     p2p_type Bezier
+     p2p_sel 1
+     p2p_bezier2 0.0
+     p2p_bezier3 0.0
+     grav 0.0
+     drag 0.0
+     Cone_Angle_Manipulator SubAnim:Cone_Angle_Manipulator
+endnode
+node emitter fire!65
+  parent container01_plc
+  position -0.000766602 0.418231 0.532671
+  orientation -1.0 0.0 0.0 -1.5708
+  wirecolor 1.0 1.0 1.0 
+     update_sel 3
+     update Explosion
+     render_sel 1
+     render Normal
+     blend_sel 1
+     Blend Normal
+     spawnType 0
+     iconSize 100.0
+     xSize 100.0
+     ySize 99.0
+     inherit 1
+     inherit_local 0
+     inheritvel 0
+     inherit_part 0
+     renderorder 0
+     threshold 0.0
+     combinetime 0.0
+     deadspace 0.0
+     colorStart 0.47451 0.431373 0.329412 
+     colorEnd 0.819608 0.772549 0.584314 
+     alphaStart 1.0
+     alphaEnd 0.0
+     sizeStart 4.0
+     sizeEnd 1.0
+     sizeStart_y 0.0
+     sizeEnd_y 0.0
+     birthrate 10.0
+     lifeExp 2.5
+     mass 0.09
+     spread 2.96706
+     particleRot 0.5
+     velocity 2.0
+     randvel 0.5
+     bounce_co 0.0
+     blurlength 10.0
+     loop 0
+     bounce 0
+     m_isTinted 1
+     Splat 0
+     affectedbyWind false
+     texture fxpa_smoke01
+     twosidedtext 0
+     xgrid 4
+     ygrid 4
+     fps 10
+     frameStart 0
+     frameEnd 24
+     random 0
+     #chunk undefined
+     lightningDelay 0.0
+     lightningRadius 0.0
+     lightningSubDivkey 0
+     lightningScale 0.0
+     blastRadius 0.2
+     blastLength 1.0
+     opacity 0.0
+     p2p 0
+     p2p_type Bezier
+     p2p_sel 1
+     p2p_bezier2 0.0
+     p2p_bezier3 0.0
+     grav 0.0
+     drag 0.0
+     Cone_Angle_Manipulator SubAnim:Cone_Angle_Manipulator
+endnode
+node emitter ChunkyWood109
+  parent container01_plc
+  position -0.000766602 0.418231 0.712937
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 1.0 1.0 1.0 
+     update_sel 3
+     update Explosion
+     render_sel 1
+     render Normal
+     blend_sel 1
+     Blend Normal
+     spawnType 0
+     iconSize 100.0
+     xSize 89.0
+     ySize 40.0
+     inherit 1
+     inherit_local 0
+     inheritvel 0
+     inherit_part 0
+     renderorder 0
+     threshold 0.0
+     combinetime 0.0
+     deadspace 0.0
+     colorStart 0.482353 0.435294 0.317647 
+     colorEnd 0.584314 0.533333 0.407843 
+     alphaStart 1.0
+     alphaEnd 1.0
+     sizeStart 0.1
+     sizeEnd 0.1
+     sizeStart_y 0.0
+     sizeEnd_y 0.0
+     birthrate 2.0
+     lifeExp 0.75
+     mass 3.0
+     spread 1.22173
+     particleRot 2.9
+     velocity 8.0
+     randvel 0.3
+     bounce_co 0.5
+     blurlength 10.0
+     loop 0
+     bounce 1
+     m_isTinted 0
+     Splat 0
+     affectedbyWind false
+     texture fxpa_cloud02
+     twosidedtext 0
+     xgrid 5
+     ygrid 5
+     fps 0
+     frameStart 0
+     frameEnd 24
+     random 0
+     #chunk undefined
+     lightningDelay 0.0
+     lightningRadius 0.0
+     lightningSubDivkey 0
+     lightningScale 0.0
+     blastRadius 0.0
+     blastLength 0.0
+     opacity 0.0
+     p2p 0
+     p2p_type Bezier
+     p2p_sel 1
+     p2p_bezier2 0.0
+     p2p_bezier3 0.0
+     grav 0.0
+     drag 0.0
+     Cone_Angle_Manipulator SubAnim:Cone_Angle_Manipulator
+endnode
+endmodelgeom container01_plc
+donemodel container01_plc

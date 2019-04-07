@@ -1,0 +1,1080 @@
+#MAXMODEL ASCII
+# model: udp-p-158
+filedependancy udp-p-158.max
+newmodel udp-p-158
+setsupermodel udp-p-158 NULL
+classification CHARACTER
+setanimationscale 1
+#MAXGEOM  ASCII
+beginmodelgeom udp-p-158
+node dummy udp-p-158
+  parent NULL
+endnode
+node trimesh dirt08
+  parent udp-p-158
+  ambient 0.588235 0.588235 0.588235
+  diffuse 0.588235 0.588235 0.588235
+  specular 0 0 0
+  shininess 10
+  bitmap gg-msc-dirt
+  verts 4
+       0.6500000    0.6500000    0.1500000
+      -0.6500000    0.6500000    0.1500000
+      -0.6500000   -0.6500000    0.1500000
+       0.6500000   -0.6500000    0.1500000
+  tverts 4
+       0.0004995    0.0004998  0
+       0.9995000    0.0004995  0
+       0.9995010    0.9995000  0
+       0.0004998    0.9995010  0
+  faces 2
+    0 1 2  1  0 1 2   0
+    2 3 0  1  2 3 0   0
+  position 0 0 0.766963
+  orientation 0 0 0 0
+endnode
+node trimesh plantleaves459
+  parent udp-p-158
+  ambient 0.588235 0.588235 0.588235
+  diffuse 0.588235 0.588235 0.588235
+  specular 0 0 0
+  shininess 10
+  bitmap gg_treefol02
+  verts 4
+       0.5194530   -0.5122390    0.0000000
+       0.5194530    0.5122390    0.0000000
+      -0.5194530   -0.5122390    0.0000000
+      -0.5194530    0.5122390    0.1386710
+  tverts 4
+       0.0000000    1.0000000  0
+       0.0000000    0.0000000  0
+       1.0000000    1.0000000  0
+       1.0000000    0.0000000  0
+  faces 2
+    0 1 2  1  0 1 2   0
+    3 2 1  1  3 2 1   0
+  position 0.316154 -0.213933 1.04567
+  orientation 0 0 0 0
+endnode
+node trimesh plantleaves466
+  parent udp-p-158
+  ambient 0.588235 0.588235 0.588235
+  diffuse 0.588235 0.588235 0.588235
+  specular 0 0 0
+  shininess 10
+  bitmap gg_treefol02
+  verts 4
+       0.5194530   -0.5122390    0.0000000
+       0.5194530    0.5122390    0.0000000
+      -0.5194530   -0.5122390    0.1386710
+      -0.5194530    0.5122390    0.0000000
+  tverts 4
+       0.0000000    1.0000000  0
+       0.0000000    0.0000000  0
+       1.0000000    1.0000000  0
+       1.0000000    0.0000000  0
+  faces 2
+    0 1 2  1  0 1 2   0
+    3 2 1  1  3 2 1   0
+  position 0.254411 0.24591 1.03486
+  orientation 0 0 0 0
+endnode
+node trimesh plantleaves461
+  parent udp-p-158
+  ambient 0.588235 0.588235 0.588235
+  diffuse 0.588235 0.588235 0.588235
+  specular 0 0 0
+  shininess 10
+  bitmap gg_treefol02
+  verts 4
+       0.5194530   -0.5122390    0.1386710
+       0.5194530    0.5122390    0.0000000
+      -0.5194530   -0.5122390    0.0000000
+      -0.5194530    0.5122390    0.0000000
+  tverts 4
+       0.0000000    1.0000000  0
+       0.0000000    0.0000000  0
+       1.0000000    1.0000000  0
+       1.0000000    0.0000000  0
+  faces 2
+    0 1 2  1  0 1 2   0
+    3 2 1  1  3 2 1   0
+  position -0.270906 0.399448 1.05486
+  orientation 0 0 0 0
+endnode
+node trimesh plantleaves465
+  parent udp-p-158
+  ambient 0.588235 0.588235 0.588235
+  diffuse 0.588235 0.588235 0.588235
+  specular 0 0 0
+  shininess 10
+  bitmap gg_treefol02
+  verts 4
+       0.5194530   -0.5122390    0.0000000
+       0.5194530    0.5122390    0.1386710
+      -0.5194530   -0.5122390    0.0000000
+      -0.5194530    0.5122390    0.0000000
+  tverts 4
+       0.0000000    1.0000000  0
+       0.0000000    0.0000000  0
+       1.0000000    1.0000000  0
+       1.0000000    0.0000000  0
+  faces 2
+    0 1 2  1  0 1 2   0
+    3 2 1  1  3 2 1   0
+  position -0.370017 -0.229871 1.03486
+  orientation 0 0 0 0
+endnode
+node trimesh planter02
+  parent udp-p-158
+  ambient 0.588235 0.588235 0.588235
+  diffuse 0.588235 0.588235 0.588235
+  specular 0 0 0
+  shininess 10
+  bitmap gg-conc3
+  verts 20
+       0.7500000    0.7500000    0.2500000
+      -0.7500000    0.7500000    0.2500000
+      -0.6500000    0.6500000    0.2500000
+       0.6500000    0.6500000    0.2500000
+       0.6500000   -0.6500000    0.2500000
+       0.7500000   -0.7500000    0.2500000
+      -0.7500000   -0.7500000    0.2500000
+      -0.6500000   -0.6500000    0.2500000
+       0.6778590    0.6778590    0.0000000
+      -0.6778590    0.6778590    0.0000000
+      -0.6778590   -0.6778590    0.0000000
+       0.6778590   -0.6778590    0.0000000
+      -0.6500000    0.6500000    0.1500000
+       0.6500000    0.6500000    0.1500000
+       0.6500000   -0.6500000    0.1500000
+      -0.6500000   -0.6500000    0.1500000
+       0.7500000    0.7500000   -0.7669630
+      -0.7500000    0.7500000   -0.7669630
+      -0.7500000   -0.7500000   -0.7669630
+       0.7500000   -0.7500000   -0.7669630
+  tverts 25
+       1.1250000    0.9995000  0
+       1.8750000    0.9995000  0
+       1.8750000    0.9995000  0
+       1.1250000    0.9995000  0
+       0.3750000    0.9995000  0
+       0.3750000    0.9995000  0
+       2.6250000    0.9995000  0
+       2.6250000    0.9995000  0
+      -0.3750000    0.9995000  0
+      -0.3750000    0.9995000  0
+       1.1250000    0.7539160  0
+       1.8750000    0.7539160  0
+       2.6250000    0.7539160  0
+      -0.3750000    0.7539160  0
+       0.3750000    0.7539160  0
+       1.8750000    0.9012670  0
+       1.1250000    0.9012670  0
+       0.3750000    0.9012670  0
+       2.6250000    0.9012670  0
+      -0.3750000    0.9012670  0
+       1.1250000    0.0004995  0
+       1.8750000    0.0004995  0
+       2.6250000    0.0004997  0
+      -0.3750000    0.0004997  0
+       0.3750000    0.0004997  0
+  faces 32
+     0  1  2  1   0  1  2   0
+     2  3  0  1   1  0  3   0
+     0  3  4  1   0  3  4   0
+     4  5  0  1   4  5  0   0
+     2  1  6  1   1  2  6   0
+     6  7  2  1   6  7  1   0
+     4  7  6  1   4  8  9   0
+     6  5  4  1   8  4  5   0
+     8  9  1  2  10 11  1   4
+     1  0  8  2   1  0 10   4
+     9 10  6  4  11 12  6   3
+     6  1  9  4   6  1 11   3
+    10 11  5  2  13 14  4   5
+     5  6 10  2   4  8 13   5
+    11  8  0  4  14 10  0   2
+     0  5 11  4   0  4 14   2
+     3  2 12  2   0  1 15   0
+    12 13  3  2  15 16  0   0
+     4  3 13  4   4  0 16   0
+    13 14  4  4  16 17  4   0
+     2  7 15  4   1  6 18   0
+    15 12  2  4  18 15  1   0
+     7  4 14  2   8  4 17   0
+    14 15  7  2  17 19  8   0
+    16 17  9  1  20 21 11   4
+     9  8 16  1  11 10 20   4
+    17 18 10  8  21 22 12   3
+    10  9 17  8  12 11 21   3
+    18 19 11  1  23 24 14   5
+    11 10 18  1  14 13 23   5
+    19 16  8  8  24 20 10   2
+     8 11 19  8  10 14 24   2
+  position 0 0 0.766963
+  orientation 0 0 0 0
+endnode
+node trimesh FLOWERS811
+  parent udp-p-158
+  ambient 0.588235 0.588235 0.588235
+  diffuse 0.588235 0.588235 0.588235
+  specular 0 0 0
+  shininess 10
+  shadow 0
+  transparencyhint 1
+  bitmap gg-flwr1
+  verts 9
+       0.1132530    0.0199704    0.0000000
+       0.0926107    0.1370410    0.0000000
+       0.0000000    0.0000000    0.0569528
+      -0.0206428    0.1170720    0.0000000
+      -0.1132530   -0.0199689    0.0000000
+      -0.1338960    0.0971022    0.0000000
+       0.1338960   -0.0971006    0.0000000
+       0.0206428   -0.1170700    0.0000000
+      -0.0926107   -0.1370400    0.0000000
+  tverts 9
+       0.0000000    0.5000000  0
+       0.0000000    0.0000000  0
+       0.5000000    0.5000000  0
+       0.5000000    0.0000000  0
+       1.0000000    0.5000000  0
+       1.0000000    0.0000000  0
+       0.0000000    1.0000000  0
+       0.5000000    1.0000000  0
+       1.0000000    1.0000000  0
+  faces 8
+    0 1 2  1  0 1 2   0
+    3 2 1  1  3 2 1   0
+    2 3 4  1  2 3 4   0
+    5 4 3  1  5 4 3   0
+    6 0 7  1  6 0 7   0
+    2 7 0  1  2 7 0   0
+    7 2 8  1  7 2 8   0
+    4 8 2  1  4 8 2   0
+  position 0.427561 0.452087 1.08502
+  orientation 0 0 -1 -4.18879
+endnode
+node trimesh FLOWERS810
+  parent udp-p-158
+  ambient 0.588235 0.588235 0.588235
+  diffuse 0.588235 0.588235 0.588235
+  specular 0 0 0
+  shininess 10
+  shadow 0
+  transparencyhint 1
+  bitmap gg-flwr1
+  verts 9
+       0.1132530    0.0199696    0.0000000
+       0.0926107    0.1370410    0.0000000
+       0.0000000    0.0000000    0.0569528
+      -0.0206428    0.1170710    0.0000000
+      -0.1132530   -0.0199696    0.0000000
+      -0.1338960    0.0971014    0.0000000
+       0.1338960   -0.0971014    0.0000000
+       0.0206428   -0.1170710    0.0000000
+      -0.0926107   -0.1370410    0.0000000
+  tverts 9
+       0.0000000    0.5000000  0
+       0.0000000    0.0000000  0
+       0.5000000    0.5000000  0
+       0.5000000    0.0000000  0
+       1.0000000    0.5000000  0
+       1.0000000    0.0000000  0
+       0.0000000    1.0000000  0
+       0.5000000    1.0000000  0
+       1.0000000    1.0000000  0
+  faces 8
+    0 1 2  1  0 1 2   0
+    3 2 1  1  3 2 1   0
+    2 3 4  1  2 3 4   0
+    5 4 3  1  5 4 3   0
+    6 0 7  1  6 0 7   0
+    2 7 0  1  2 7 0   0
+    7 2 8  1  7 2 8   0
+    4 8 2  1  4 8 2   0
+  position 0.427561 0.0411544 1.08502
+  orientation 0 0 0 0
+endnode
+node trimesh FLOWERS788
+  parent udp-p-158
+  ambient 0.588235 0.588235 0.588235
+  diffuse 0.588235 0.588235 0.588235
+  specular 0 0 0
+  shininess 10
+  shadow 0
+  transparencyhint 1
+  bitmap gg-flwr1
+  verts 9
+       0.1132540    0.0199698    0.0000000
+       0.0926109    0.1370410    0.0000000
+       0.0000000    0.0000000    0.0569528
+      -0.0206426    0.1170710    0.0000000
+      -0.1132530   -0.0199695    0.0000000
+      -0.1338960    0.0971015    0.0000000
+       0.1338960   -0.0971013    0.0000000
+       0.0206430   -0.1170710    0.0000000
+      -0.0926105   -0.1370410    0.0000000
+  tverts 9
+       0.0000000    0.5000000  0
+       0.0000000    0.0000000  0
+       0.5000000    0.5000000  0
+       0.5000000    0.0000000  0
+       1.0000000    0.5000000  0
+       1.0000000    0.0000000  0
+       0.0000000    1.0000000  0
+       0.5000000    1.0000000  0
+       1.0000000    1.0000000  0
+  faces 8
+    0 1 2  1  0 1 2   0
+    3 2 1  1  3 2 1   0
+    2 3 4  1  2 3 4   0
+    5 4 3  1  5 4 3   0
+    6 0 7  1  6 0 7   0
+    2 7 0  1  2 7 0   0
+    7 2 8  1  7 2 8   0
+    4 8 2  1  4 8 2   0
+  position 0.427561 -0.402307 1.08502
+  orientation 0 0 -1 -2.26893
+endnode
+node trimesh FLOWERS813
+  parent udp-p-158
+  ambient 0.588235 0.588235 0.588235
+  diffuse 0.588235 0.588235 0.588235
+  specular 0 0 0
+  shininess 10
+  shadow 0
+  transparencyhint 1
+  bitmap gg-flwr1
+  verts 9
+       0.1132540    0.0199695    0.0000000
+       0.0926108    0.1370410    0.0000000
+       0.0000000    0.0000000    0.0569528
+      -0.0206427    0.1170710    0.0000000
+      -0.1132530   -0.0199698    0.0000000
+      -0.1338960    0.0971013    0.0000000
+       0.1338960   -0.0971016    0.0000000
+       0.0206429   -0.1170710    0.0000000
+      -0.0926106   -0.1370410    0.0000000
+  tverts 9
+       0.0000000    0.5000000  0
+       0.0000000    0.0000000  0
+       0.5000000    0.5000000  0
+       0.5000000    0.0000000  0
+       1.0000000    0.5000000  0
+       1.0000000    0.0000000  0
+       0.0000000    1.0000000  0
+       0.5000000    1.0000000  0
+       1.0000000    1.0000000  0
+  faces 8
+    0 1 2  1  0 1 2   0
+    3 2 1  1  3 2 1   0
+    2 3 4  1  2 3 4   0
+    5 4 3  1  5 4 3   0
+    6 0 7  1  6 0 7   0
+    2 7 0  1  2 7 0   0
+    7 2 8  1  7 2 8   0
+    4 8 2  1  4 8 2   0
+  position -0.0105496 0.452087 1.08502
+  orientation 0 0 -1 -4.10152
+endnode
+node trimesh FLOWERS814
+  parent udp-p-158
+  ambient 0.588235 0.588235 0.588235
+  diffuse 0.588235 0.588235 0.588235
+  specular 0 0 0
+  shininess 10
+  shadow 0
+  transparencyhint 1
+  bitmap gg-flwr1
+  verts 9
+       0.1132530    0.0199696    0.0000000
+       0.0926107    0.1370410    0.0000000
+       0.0000000    0.0000000    0.0569528
+      -0.0206428    0.1170710    0.0000000
+      -0.1132530   -0.0199696    0.0000000
+      -0.1338960    0.0971014    0.0000000
+       0.1338960   -0.0971014    0.0000000
+       0.0206428   -0.1170710    0.0000000
+      -0.0926107   -0.1370410    0.0000000
+  tverts 9
+       0.0000000    0.5000000  0
+       0.0000000    0.0000000  0
+       0.5000000    0.5000000  0
+       0.5000000    0.0000000  0
+       1.0000000    0.5000000  0
+       1.0000000    0.0000000  0
+       0.0000000    1.0000000  0
+       0.5000000    1.0000000  0
+       1.0000000    1.0000000  0
+  faces 8
+    0 1 2  1  0 1 2   0
+    3 2 1  1  3 2 1   0
+    2 3 4  1  2 3 4   0
+    5 4 3  1  5 4 3   0
+    6 0 7  1  6 0 7   0
+    2 7 0  1  2 7 0   0
+    7 2 8  1  7 2 8   0
+    4 8 2  1  4 8 2   0
+  position -0.0105496 -0.402307 1.08502
+  orientation 0 0 0 0
+endnode
+node trimesh FLOWERS815
+  parent udp-p-158
+  ambient 0.588235 0.588235 0.588235
+  diffuse 0.588235 0.588235 0.588235
+  specular 0 0 0
+  shininess 10
+  shadow 0
+  transparencyhint 1
+  bitmap gg-flwr1
+  verts 9
+       0.1132530    0.0199694    0.0000000
+       0.0926103    0.1370400    0.0000000
+       0.0000000    0.0000000    0.0569528
+      -0.0206432    0.1170710    0.0000000
+      -0.1132540   -0.0199699    0.0000000
+      -0.1338970    0.0971012    0.0000000
+       0.1338960   -0.0971017    0.0000000
+       0.0206424   -0.1170710    0.0000000
+      -0.0926111   -0.1370410    0.0000000
+  tverts 9
+       0.0000000    0.5000000  0
+       0.0000000    0.0000000  0
+       0.5000000    0.5000000  0
+       0.5000000    0.0000000  0
+       1.0000000    0.5000000  0
+       1.0000000    0.0000000  0
+       0.0000000    1.0000000  0
+       0.5000000    1.0000000  0
+       1.0000000    1.0000000  0
+  faces 8
+    0 1 2  1  0 1 2   0
+    3 2 1  1  3 2 1   0
+    2 3 4  1  2 3 4   0
+    5 4 3  1  5 4 3   0
+    6 0 7  1  6 0 7   0
+    2 7 0  1  2 7 0   0
+    7 2 8  1  7 2 8   0
+    4 8 2  1  4 8 2   0
+  position -0.448665 0.0411545 1.08502
+  orientation 0 0 1 -0.959931
+endnode
+node trimesh FLOWERS816
+  parent udp-p-158
+  ambient 0.588235 0.588235 0.588235
+  diffuse 0.588235 0.588235 0.588235
+  specular 0 0 0
+  shininess 10
+  shadow 0
+  transparencyhint 1
+  bitmap gg-flwr1
+  verts 9
+       0.1132530    0.0199696    0.0000000
+       0.0926107    0.1370410    0.0000000
+       0.0000000    0.0000000    0.0569528
+      -0.0206428    0.1170710    0.0000000
+      -0.1132530   -0.0199696    0.0000000
+      -0.1338960    0.0971014    0.0000000
+       0.1338960   -0.0971014    0.0000000
+       0.0206428   -0.1170710    0.0000000
+      -0.0926107   -0.1370410    0.0000000
+  tverts 9
+       0.0000000    0.5000000  0
+       0.0000000    0.0000000  0
+       0.5000000    0.5000000  0
+       0.5000000    0.0000000  0
+       1.0000000    0.5000000  0
+       1.0000000    0.0000000  0
+       0.0000000    1.0000000  0
+       0.5000000    1.0000000  0
+       1.0000000    1.0000000  0
+  faces 8
+    0 1 2  1  0 1 2   0
+    3 2 1  1  3 2 1   0
+    2 3 4  1  2 3 4   0
+    5 4 3  1  5 4 3   0
+    6 0 7  1  6 0 7   0
+    2 7 0  1  2 7 0   0
+    7 2 8  1  7 2 8   0
+    4 8 2  1  4 8 2   0
+  position -0.448665 0.452087 1.08502
+  orientation 0 0 0 0
+endnode
+node trimesh FLOWERS817
+  parent udp-p-158
+  ambient 0.588235 0.588235 0.588235
+  diffuse 0.588235 0.588235 0.588235
+  specular 0 0 0
+  shininess 10
+  shadow 0
+  transparencyhint 1
+  bitmap gg-flwr1
+  verts 9
+       0.1132540    0.0199698    0.0000000
+       0.0926110    0.1370410    0.0000000
+       0.0000000    0.0000000    0.0569528
+      -0.0206425    0.1170710    0.0000000
+      -0.1132530   -0.0199695    0.0000000
+      -0.1338960    0.0971016    0.0000000
+       0.1338970   -0.0971013    0.0000000
+       0.0206431   -0.1170710    0.0000000
+      -0.0926104   -0.1370410    0.0000000
+  tverts 9
+       0.0000000    0.5000000  0
+       0.0000000    0.0000000  0
+       0.5000000    0.5000000  0
+       0.5000000    0.0000000  0
+       1.0000000    0.5000000  0
+       1.0000000    0.0000000  0
+       0.0000000    1.0000000  0
+       0.5000000    1.0000000  0
+       1.0000000    1.0000000  0
+  faces 8
+    0 1 2  1  0 1 2   0
+    3 2 1  1  3 2 1   0
+    2 3 4  1  2 3 4   0
+    5 4 3  1  5 4 3   0
+    6 0 7  1  6 0 7   0
+    2 7 0  1  2 7 0   0
+    7 2 8  1  7 2 8   0
+    4 8 2  1  4 8 2   0
+  position -0.448665 -0.402307 1.08502
+  orientation 0 0 -1 -1.309
+endnode
+node trimesh FLOWERS812
+  parent udp-p-158
+  ambient 0.588235 0.588235 0.588235
+  diffuse 0.588235 0.588235 0.588235
+  specular 0 0 0
+  shininess 10
+  shadow 0
+  transparencyhint 1
+  bitmap gg-flwr1
+  verts 9
+       0.1132530    0.0199686    0.0000000
+       0.0926107    0.1370400    0.0000000
+       0.0000000    0.0000000    0.0569528
+      -0.0206428    0.1170700    0.0000000
+      -0.1132530   -0.0199707    0.0000000
+      -0.1338960    0.0971003    0.0000000
+       0.1338960   -0.0971025    0.0000000
+       0.0206428   -0.1170720    0.0000000
+      -0.0926107   -0.1370420    0.0000000
+  tverts 9
+       0.0000000    0.5000000  0
+       0.0000000    0.0000000  0
+       0.5000000    0.5000000  0
+       0.5000000    0.0000000  0
+       1.0000000    0.5000000  0
+       1.0000000    0.0000000  0
+       0.0000000    1.0000000  0
+       0.5000000    1.0000000  0
+       1.0000000    1.0000000  0
+  faces 8
+    0 1 2  1  0 1 2   0
+    3 2 1  1  3 2 1   0
+    2 3 4  1  2 3 4   0
+    5 4 3  1  5 4 3   0
+    6 0 7  1  6 0 7   0
+    2 7 0  1  2 7 0   0
+    7 2 8  1  7 2 8   0
+    4 8 2  1  4 8 2   0
+  position -0.0105496 0.0411545 1.13031
+  orientation 0 0 -1 -0.785398
+endnode
+endmodelgeom udp-p-158
+
+#MAXANIM ASCII
+newanim die udp-p-158
+  length 0.166667
+  transtime 0
+  animroot udp-p-158
+  event 0 detonate
+  event 0 detonate
+  event 0 detonate
+  node dummy udp-p-158
+    parent NULL
+  endnode
+  node trimesh FLOWERS812
+    parent udp-p-158
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh plantleaves459
+    parent udp-p-158
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh FLOWERS788
+    parent udp-p-158
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh plantleaves461
+    parent udp-p-158
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh plantleaves465
+    parent udp-p-158
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh plantleaves466
+    parent udp-p-158
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh FLOWERS810
+    parent udp-p-158
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh FLOWERS811
+    parent udp-p-158
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh planter02
+    parent udp-p-158
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh FLOWERS813
+    parent udp-p-158
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh FLOWERS814
+    parent udp-p-158
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh FLOWERS815
+    parent udp-p-158
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh FLOWERS816
+    parent udp-p-158
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh FLOWERS817
+    parent udp-p-158
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh dirt08
+    parent udp-p-158
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh walkm315
+    parent udp-p-158
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+doneanim die udp-p-158
+
+#MAXANIM ASCII
+newanim damage udp-p-158
+  length 0.133333
+  transtime 0
+  animroot udp-p-158
+  node dummy udp-p-158
+    parent NULL
+  endnode
+  node trimesh FLOWERS812
+    parent udp-p-158
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh plantleaves459
+    parent udp-p-158
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh FLOWERS788
+    parent udp-p-158
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh plantleaves461
+    parent udp-p-158
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh plantleaves465
+    parent udp-p-158
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh plantleaves466
+    parent udp-p-158
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh FLOWERS810
+    parent udp-p-158
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh FLOWERS811
+    parent udp-p-158
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh planter02
+    parent udp-p-158
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh FLOWERS813
+    parent udp-p-158
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh FLOWERS814
+    parent udp-p-158
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh FLOWERS815
+    parent udp-p-158
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh FLOWERS816
+    parent udp-p-158
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh FLOWERS817
+    parent udp-p-158
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh dirt08
+    parent udp-p-158
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh walkm315
+    parent udp-p-158
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+doneanim damage udp-p-158
+
+#MAXANIM ASCII
+newanim dead udp-p-158
+  length 0.0333333
+  transtime 0
+  animroot udp-p-158
+  node dummy udp-p-158
+    parent NULL
+  endnode
+  node trimesh FLOWERS812
+    parent udp-p-158
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh plantleaves459
+    parent udp-p-158
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh FLOWERS788
+    parent udp-p-158
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh plantleaves461
+    parent udp-p-158
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh plantleaves465
+    parent udp-p-158
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh plantleaves466
+    parent udp-p-158
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh FLOWERS810
+    parent udp-p-158
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh FLOWERS811
+    parent udp-p-158
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh planter02
+    parent udp-p-158
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh FLOWERS813
+    parent udp-p-158
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh FLOWERS814
+    parent udp-p-158
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh FLOWERS815
+    parent udp-p-158
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh FLOWERS816
+    parent udp-p-158
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh FLOWERS817
+    parent udp-p-158
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh dirt08
+    parent udp-p-158
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh walkm315
+    parent udp-p-158
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+doneanim dead udp-p-158
+
+#MAXANIM ASCII
+newanim default udp-p-158
+  length 0
+  transtime 0.25
+  animroot udp-p-158
+  node dummy udp-p-158
+    parent NULL
+  endnode
+  node trimesh FLOWERS812
+    parent udp-p-158
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh plantleaves459
+    parent udp-p-158
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh FLOWERS788
+    parent udp-p-158
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh plantleaves461
+    parent udp-p-158
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh plantleaves465
+    parent udp-p-158
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh plantleaves466
+    parent udp-p-158
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh FLOWERS810
+    parent udp-p-158
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh FLOWERS811
+    parent udp-p-158
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh planter02
+    parent udp-p-158
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh FLOWERS813
+    parent udp-p-158
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh FLOWERS814
+    parent udp-p-158
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh FLOWERS815
+    parent udp-p-158
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh FLOWERS816
+    parent udp-p-158
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh FLOWERS817
+    parent udp-p-158
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh dirt08
+    parent udp-p-158
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh walkm315
+    parent udp-p-158
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+doneanim default udp-p-158
+
+donemodel udp-p-158

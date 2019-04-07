@@ -1,0 +1,1683 @@
+#MAXMODEL ASCII
+# model: jac_UDoor_01
+filedependancy jac_UDoor_01.max
+newmodel jac_UDoor_01
+setsupermodel jac_UDoor_01 NULL
+classification DOOR
+setanimationscale 1
+#MAXGEOM  ASCII
+beginmodelgeom jac_UDoor_01
+node dummy jac_UDoor_01
+  parent NULL
+endnode
+node trimesh Box112
+  parent jac_UDoor_01
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 1
+  bitmap jac01_barel
+  verts 24
+      -1.9607400   -0.1157700    2.6080401
+      -0.0887624   -0.1119030    2.6415901
+      -0.0891921    0.0980287    2.6415901
+      -1.9611800    0.0941566    2.6080401
+      -1.9607400   -0.1157700   -0.6684930
+      -0.0887623   -0.1119030   -0.6684930
+      -0.8531470   -0.1134800   -0.2414460
+      -0.8531470   -0.1134800    1.8264500
+      -0.0891921    0.0980287   -0.6684930
+      -0.0887624   -0.1119030   -0.2414460
+      -0.0887624   -0.1119030    1.8264500
+      -1.9611800    0.0941566   -0.6684930
+      -0.8531370   -0.1134800    1.6050100
+      -0.8531370   -0.1134800   -0.0199988
+      -0.0891921    0.0980287   -0.2414460
+      -0.0887624   -0.1119030   -0.0199986
+      -0.0887624   -0.1119030    1.6050100
+      -0.0891921    0.0980287    1.8264500
+      -0.8535770    0.0964467   -0.2414460
+      -0.8535770    0.0964467    1.8264500
+      -0.8535770    0.0964467    1.6050100
+      -0.8535770    0.0964467   -0.0199988
+      -0.0891921    0.0980287   -0.0199986
+      -0.0891921    0.0980287    1.6050100
+  tverts 35
+       0.2285040    0.0403292  0
+       0.2285040    0.5984870  0
+       0.1588810    0.5984870  0
+       0.1588810    0.0403293  0
+      -0.3923470    0.0390775  0
+      -0.3923470    0.6006760  0
+      -0.1624920    0.3713590  0
+       1.3354100    0.6006760  0
+       1.3354100    0.0390774  0
+       0.9105850    0.3713590  0
+      -0.3417800    0.5200970  0
+      -0.3417190    0.4151610  0
+      -0.1283190    0.5200970  0
+       1.3128400    0.4151610  0
+       1.3127800    0.5200960  0
+       0.9053300    0.5200960  0
+      -0.2331850    0.8046230  0
+       1.2391100    0.8046220  0
+      -0.2391100    0.8738260  0
+       1.2331899    0.8738250  0
+       0.9105850    0.6006760  0
+       0.7924080    0.3713610  0
+      -0.0443156    0.3713600  0
+      -0.1624920    0.6006760  0
+      -0.1282580    0.4151610  0
+      -0.0443155    0.6006760  0
+       0.7924080    0.6006760  0
+       0.9053910    0.4151610  0
+       0.9105840    0.3713590  0
+      -0.0443157    0.3713600  0
+      -0.0443156    0.6006760  0
+       0.7946390    0.5200960  0
+      -0.0175664    0.4151610  0
+       0.7946990    0.4151610  0
+      -0.0176275    0.5200970  0
+  faces 30
+     0  1  2  1   0  1  2   1
+     2  3  0  1   2  3  0   1
+     4  5  6  2   4  5  6   5
+     1  0  7  2   7  8  9   5
+     5  8  9  1  10 11 12   3
+     2  1 10  4  13 14 15   3
+     3 11  0  2  16 17 18   5
+     4  0 11  2  19 18 17   5
+     1  7 10  2   7  9 20   5
+     7  0 12  2   9  8 21   5
+    12  0  4  2  21  8  4   5
+     4 13 12  2   4 22 21   5
+     6  5  9  2   6  5 23   5
+     4  6 13  2   4  6 22   5
+     9  8 14  1  12 11 24   3
+    13 15 16  2  22 25 26   5
+    10 17  2  4  15 27 13   3
+    13 16 12  2  22 26 21   5
+     8 11 18  2   5  4  6   5
+     3  2 19  2   8  7 28   5
+    19  2 17  2  28  7 20   5
+     3 19 20  2   8 28 21   5
+     3 20 11  2   8 21  4   5
+    21 11 20  2  29  4 21   5
+     8 18 14  2   5  6 23   5
+    18 11 21  2   6  4 29   5
+    22 21 23  2  30 29 26   5
+    23 21 20  2  26 29 21   5
+    16 22 23  1  31 32 33   3
+    16 15 22  1  31 34 32   3
+  position 2 0.02 0.544862
+  orientation 0 0 0 0
+endnode
+node trimesh Box109
+  parent Box112
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0.05 0.05 0.05
+  shininess 26
+  bitmap jac01_metal00
+  verts 14
+       1.0332299   -0.1891310    0.0064545
+       1.0302700    0.1499850    0.0064545
+       0.9412370   -0.1219040    0.0064545
+       0.1768520   -0.1234810    0.0064545
+       0.1781710   -0.1965970    0.0064545
+       0.1781710   -0.1965970   -0.2149930
+       1.0332299   -0.1891310   -0.2149930
+       0.1768620   -0.1234810   -0.2149930
+       0.1752120    0.1425240   -0.2149930
+       0.1764230    0.0864453   -0.2149930
+       0.1764230    0.0864453    0.0064545
+       0.1752120    0.1425240    0.0064545
+       1.0302700    0.1499850   -0.2149930
+       0.9408070    0.0880274    0.0064545
+  tverts 22
+       0.4945280    0.1681680  0
+       0.4945280    0.3712160  0
+       0.5503060    0.2085350  0
+       1.0203201    0.2085360  0
+       1.0203201    0.1681670  0
+       0.4997950    0.4939540  0
+       0.8825540    0.4939540  0
+       0.8825540    0.3869730  0
+       0.4997950    0.3869730  0
+       0.4129800    0.8102490  0
+       0.4475810    0.8102490  0
+       0.4475800    0.7438010  0
+       0.5870210    0.7438010  0
+       0.5553170    0.7438010  0
+       0.5553170    0.8102490  0
+       0.4997950    0.4939540  0
+       0.4997950    0.3869730  0
+       0.5870210    0.8102490  0
+       0.4129800    0.7438010  0
+       1.0203201    0.3712160  0
+       1.0203201    0.3342280  0
+       0.5503070    0.3342290  0
+  faces 16
+     0  1  2  1   0  1  2   1
+     3  4  0  1   3  4  0   1
+     0  4  5  2   5  6  7   5
+     5  6  0  2   7  8  5   5
+     4  3  7  4   9 10 11   4
+     8  9 10  2  12 13 14   4
+    11  1 12  4   6  5  8   6
+    12  8 11  4   8  7  6   6
+     1  0  6  8   5 15  8   3
+     6 12  1  8   8 16  5   3
+    10 11  8  2  14 17 12   4
+     2  3  0  1   2  3  0   1
+     7  5  4  4  11 18  9   4
+    11 10 13  1  19 20 21   1
+     2  1 13  1   2  1 21   1
+    13  1 11  1  21  1 19   1
+  position -1.03 0.00999992 1.82
+  orientation 0 0 0 0
+endnode
+node trimesh Box113
+  parent Box112
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0.05 0.05 0.05
+  shininess 26
+  bitmap jac01_metal00
+  verts 14
+       1.0332299   -0.1891310    0.0000012
+       1.0302700    0.1499850    0.0000012
+       0.9412370   -0.1219040    0.0000012
+       0.1768620   -0.1234810    0.0000012
+       0.1781710   -0.1965970    0.0000012
+       0.1781710   -0.1965970   -0.2214460
+       1.0332299   -0.1891310   -0.2214460
+       0.1768520   -0.1234810   -0.2214460
+       0.1752120    0.1425240   -0.2214460
+       0.1764230    0.0864453   -0.2214460
+       0.1764230    0.0864453    0.0000012
+       0.1752120    0.1425240    0.0000012
+       1.0302700    0.1499850   -0.2214460
+       0.9408070    0.0880274    0.0000012
+  tverts 22
+       0.4945280    0.1681680  0
+       0.4945280    0.3712160  0
+       0.5503060    0.2085350  0
+       1.0203201    0.2085360  0
+       1.0203201    0.1681670  0
+       0.4997950    0.4939540  0
+       0.8825540    0.4939540  0
+       0.8825540    0.3869730  0
+       0.4997950    0.3869730  0
+       0.4129790    0.2561990  0
+       0.4475810    0.2561990  0
+       0.4475790    0.1897510  0
+       0.5870210    0.1897510  0
+       0.5553170    0.1897510  0
+       0.5553170    0.2561990  0
+       0.4997950    0.4939540  0
+       0.4997950    0.3869730  0
+       0.5870210    0.2561990  0
+       0.4129790    0.1897510  0
+       1.0203201    0.3712160  0
+       1.0203201    0.3342280  0
+       0.5503070    0.3342290  0
+  faces 16
+     0  1  2  1   0  1  2   1
+     3  4  0  1   3  4  0   1
+     0  4  5  2   5  6  7   5
+     5  6  0  2   7  8  5   5
+     4  3  7  4   9 10 11   4
+     8  9 10  2  12 13 14   4
+    11  1 12  4   6  5  8   6
+    12  8 11  4   8  7  6   6
+     1  0  6  8   5 15  8   3
+     6 12  1  8   8 16  5   3
+    10 11  8  2  14 17 12   4
+     2  3  0  1   2  3  0   1
+     7  5  4  4  11 18  9   4
+    11 10 13  1  19 20 21   1
+     2  1 13  1   2  1 21   1
+    13  1 11  1  21  1 19   1
+  position -1.03 0.00999992 -0.02
+  orientation 0 0 0 0
+endnode
+node trimesh Box116
+  parent jac_UDoor_01
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 1
+  bitmap jac01_barel
+  verts 24
+       0.0970416   -0.1117140    2.6374700
+       1.9600300   -0.1117140    2.7220700
+       0.0970416    0.0982177    2.6374700
+       1.9600300    0.0982177    2.7220700
+       0.0970416   -0.1117140   -0.6305900
+       1.9600300   -0.1117140   -0.6305910
+       0.8614260   -0.1117140   -0.2414460
+       0.8614260   -0.1117140    1.8264500
+       0.0970416    0.0982177   -0.6305900
+       0.0970416   -0.1117140   -0.2414460
+       0.0970416    0.0982177   -0.2414460
+       1.9600300    0.0982177   -0.6305910
+       0.0970416   -0.1117140    1.8264500
+       0.8614260   -0.1117140    1.6050100
+       0.8614260   -0.1117140   -0.0199989
+       0.0970416    0.0982177    1.8264500
+       0.0970416    0.0982177   -0.0199986
+       0.0970416   -0.1117140   -0.0199986
+       0.0970416   -0.1117140    1.6050100
+       0.8614260    0.0982177   -0.2414460
+       0.8614260    0.0982177    1.8264500
+       0.8614260    0.0982177    1.6050100
+       0.8614260    0.0982177   -0.0199989
+       0.0970416    0.0982177    1.6050100
+  tverts 44
+       0.2274580    0.0376588  0
+       0.2274580    0.5888100  0
+       0.1578350    0.0376588  0
+       0.1578360    0.5888100  0
+       1.3780500    0.5345050  0
+       1.3780500    1.0961000  0
+       1.1839499    0.7638220  0
+      -0.3855970    1.0961000  0
+      -0.3855970    0.5345050  0
+       0.0887434    0.7638210  0
+       0.0264095    0.5000930  0
+       0.0264096    0.5630730  0
+       0.1306500    0.5630720  0
+       0.1327230    0.5000930  0
+       1.2391100    0.8046220  0
+      -0.2331850    0.8046230  0
+      -0.2391100    0.8738260  0
+       1.2331899    0.8738250  0
+       0.0887433    0.5345050  0
+       0.2060270    0.7638190  0
+       1.0666699    0.7638200  0
+       1.1839499    0.5345050  0
+       0.7188410    0.5630720  0
+       0.9735900    0.5630720  0
+       0.1936390    0.5630720  0
+       0.6558530    0.5630720  0
+       1.0666699    0.5345050  0
+       0.2060270    0.5345050  0
+       1.3856000    1.0961000  0
+       1.3856000    0.5345050  0
+       1.1914999    0.7638220  0
+      -0.3780450    0.5345050  0
+      -0.3780450    1.0961000  0
+       0.0962951    0.7638210  0
+       0.0962950    0.5345050  0
+       0.2135790    0.7638190  0
+       1.0742199    0.7638200  0
+       1.1914999    0.5345050  0
+       1.0742199    0.5345050  0
+       0.2135790    0.5345050  0
+       0.9735900    0.5000920  0
+       0.7162300    0.5000930  0
+       0.6587390    0.5000930  0
+       0.1916900    0.5000930  0
+  faces 30
+     0  1  2  1   0  1  2   1
+     3  2  1  1   3  2  1   1
+     4  5  6  2   4  5  6   5
+     1  0  7  2   7  8  9   5
+     8  4  9  1  10 11 12   3
+     9 10  8  1  12 13 10   3
+    11  3  1  2  14 15 16   5
+     1  5 11  2  16 17 14   5
+     7  0 12  2   9  8 18   5
+     1  7 13  2   7  9 19   5
+     1 13  5  2   7 19  5   5
+    14  5 13  2  20  5 19   5
+     4  6  9  2   4  6 21   5
+     6  5 14  2   6  5 20   5
+    15 12  0  4  10 22 23   3
+    16 17 18  1  10 24 25   3
+    17 14 18  2  26 20 27   5
+    18 14 13  2  27 20 19   5
+    11  8 19  2  28 29 30   5
+     2  3 20  2  31 32 33   5
+     2 20 15  2  31 33 34   5
+    20  3 21  2  33 32 35   5
+    21  3 11  2  35 32 28   5
+    11 22 21  2  28 36 35   5
+    19  8 10  2  30 29 37   5
+    11 19 22  2  28 30 36   5
+    22 16 23  2  36 38 39   5
+    22 23 21  2  36 39 35   5
+     0  2 15  4  23 40 41   3
+    18 23 16  1  25 42 43   3
+  position -1.93 0.02 0.544862
+  orientation 0 0 0 0
+endnode
+node trimesh Box108
+  parent Box116
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0.05 0.05 0.05
+  shininess 26
+  bitmap jac01_metal00
+  verts 14
+      -0.4251260    0.1399780    0.0064545
+      -0.4221670   -0.1991430    0.0064545
+      -0.3329580   -0.1317160    0.0064545
+       0.4328920   -0.1916770    0.0064545
+       0.4314270   -0.1317160    0.0064545
+       0.4328920   -0.1916770   -0.2149930
+      -0.4221670   -0.1991430   -0.2149930
+       0.4314270   -0.1317160   -0.2149930
+       0.4314270    0.0782155   -0.2149930
+       0.4299330    0.1474390   -0.2149930
+       0.4314270    0.0782155    0.0064545
+       0.4299330    0.1474390    0.0064545
+      -0.4251260    0.1399780   -0.2149930
+      -0.3329580    0.0782155    0.0064545
+  tverts 22
+       0.4945280    0.3712160  0
+       0.4945280    0.1681680  0
+       0.5503060    0.2085350  0
+       1.0203201    0.1681670  0
+       1.0203201    0.2085360  0
+       0.8825540    0.4939540  0
+       0.4997950    0.4939540  0
+       0.8825540    0.3869730  0
+       0.4997950    0.3869730  0
+       0.4475810    0.8102490  0
+       0.4129800    0.8102490  0
+       0.4475800    0.7438010  0
+       0.5553170    0.7438010  0
+       0.5870210    0.7438010  0
+       0.5553170    0.8102490  0
+       0.4997950    0.4939540  0
+       0.4997950    0.3869730  0
+       0.5870210    0.8102490  0
+       0.4129800    0.7438010  0
+       1.0203201    0.3342280  0
+       1.0203201    0.3712160  0
+       0.5503070    0.3342290  0
+  faces 16
+     0  1  2  1   0  1  2   1
+     3  4  1  1   3  4  1   1
+     3  1  5  2   5  6  7   5
+     6  5  1  2   8  7  6   5
+     4  3  7  4   9 10 11   4
+     8  9 10  2  12 13 14   4
+     0 11 12  4   6  5  8   6
+     9 12 11  4   7  8  5   6
+     1  0  6  8   6 15  8   3
+    12  6  0  8   8 16  6   3
+    11 10  9  2  17 14 13   4
+     4  2  1  1   4  2  1   1
+     5  7  3  4  18 11 10   4
+    10 11 13  1  19 20 21   1
+     0  2 13  1   0  2 21   1
+     0 13 11  1   0 21 20   1
+  position 0.43 0.0199999 1.82
+  orientation 0 0 0 0
+endnode
+node trimesh Box105
+  parent Box116
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0.05 0.05 0.05
+  shininess 26
+  bitmap jac01_metal00
+  verts 14
+      -0.4251260    0.1399780    0.0000012
+      -0.4221670   -0.1991430    0.0000012
+      -0.3329580   -0.1317160    0.0000012
+       0.4328920   -0.1916770    0.0000012
+       0.4314270   -0.1317160    0.0000012
+       0.4328920   -0.1916770   -0.2214460
+      -0.4221670   -0.1991430   -0.2214460
+       0.4314270   -0.1317160   -0.2214460
+       0.4314270    0.0782155   -0.2214460
+       0.4299330    0.1474390   -0.2214460
+       0.4314270    0.0782155    0.0000012
+       0.4299330    0.1474390    0.0000012
+      -0.4251260    0.1399780   -0.2214460
+      -0.3329580    0.0782155    0.0000012
+  tverts 22
+       0.4945280    0.3712160  0
+       0.4945280    0.1681680  0
+       0.5503060    0.2085350  0
+       1.0203201    0.1681670  0
+       1.0203201    0.2085360  0
+       0.8825540    0.4939540  0
+       0.4997950    0.4939540  0
+       0.8825540    0.3869730  0
+       0.4997950    0.3869730  0
+       0.4475810    0.2561990  0
+       0.4129790    0.2561990  0
+       0.4475790    0.1897510  0
+       0.5553170    0.1897510  0
+       0.5870210    0.1897510  0
+       0.5553170    0.2561990  0
+       0.4997950    0.4939540  0
+       0.4997950    0.3869730  0
+       0.5870210    0.2561990  0
+       0.4129790    0.1897510  0
+       1.0203201    0.3342280  0
+       1.0203201    0.3712160  0
+       0.5503070    0.3342290  0
+  faces 16
+     0  1  2  1   0  1  2   1
+     3  4  1  1   3  4  1   1
+     3  1  5  2   5  6  7   5
+     6  5  1  2   8  7  6   5
+     4  3  7  4   9 10 11   4
+     8  9 10  2  12 13 14   4
+     0 11 12  4   6  5  8   6
+     9 12 11  4   7  8  5   6
+     1  0  6  8   6 15  8   3
+    12  6  0  8   8 16  6   3
+    11 10  9  2  17 14 13   4
+     4  2  1  1   4  2  1   1
+     5  7  3  4  18 11 10   4
+    10 11 13  1  19 20 21   1
+     0  2 13  1   0  2 21   1
+     0 13 11  1   0 21 20   1
+  position 0.43 0.0199999 -0.02
+  orientation 0 0 0 0
+endnode
+node trimesh sam
+  parent jac_UDoor_01
+  ambient 0.2 0.2 0.2
+  diffuse 0.8 0.8 0.8
+  specular 0 0 0
+  shininess 1
+  shadow 0
+  bitmap NULL
+  verts 8
+      -2.0643201    0.0004834    1.3579299
+       2.9352000    0.0004834    1.3579299
+      -2.0643201    0.0004834   -2.1603899
+       2.9352000    0.0004834   -2.1603899
+       2.9352000   -0.0628320    1.3579299
+      -2.0643201   -0.0628320    1.3579299
+      -2.0643201   -0.0628320   -2.1603899
+       2.9352000   -0.0628320   -2.1603899
+  faces 4
+    0 1 2  1  0 0 0  18
+    3 2 1  1  0 0 0  18
+    4 5 6  1  0 0 0  18
+    6 7 4  1  0 0 0  18
+  position -0.34 0.04 1.87486
+  orientation 0 0 0 0
+  alpha 0
+  scale 1
+  selfillumcolor 0 0 1
+endnode
+node emitter ChunkyWood07
+  parent jac_UDoor_01
+  p2p 0
+  p2p_sel 1
+  affectedByWind 0
+  m_isTinted 0
+  bounce 1
+  random 0
+  inherit 1
+  inheritvel 0
+  inherit_local 0
+  inherit_part 0
+  splat 0
+  renderorder 0
+  spawntype 0
+  update Explosion
+  render Normal
+  blend Normal
+  texture fxpa_cloud02
+  chunkName PLC_Chunk_W01
+  xgrid 5
+  ygrid 5
+  loop 0
+  deadspace 0
+  twosidedtex 0
+  blastRadius 0
+  blastLength 0
+  position 0.0420874 0.0102191 0.531516
+  orientation 0 0 -1 -1.56207
+  colorStart 1 1 1
+  colorEnd 1 1 1
+  alphaStart 1
+  alphaEnd 1
+  sizeStart 0.1
+  sizeEnd 0.1
+  sizeStart_y 0
+  sizeEnd_y 0
+  frameStart 0
+  frameEnd 24
+  birthrate 6
+  lifeExp 0.75
+  mass 3
+  spread 1.22173
+  particleRot 5
+  velocity 8
+  randvel 0.3
+  fps 0
+  xsize 89
+  ysize 40
+  bounce_co 0.5
+  blurlength 10
+  lightningDelay 0
+  lightningRadius 0
+  lightningScale 0
+  p2p_bezier2 0
+  p2p_bezier3 0
+  combinetime 0
+  drag 0
+  grav 0
+  threshold 0
+endnode
+node emitter fire!10
+  parent jac_UDoor_01
+  p2p 0
+  p2p_sel 1
+  affectedByWind 0
+  m_isTinted 1
+  bounce 0
+  random 0
+  inherit 1
+  inheritvel 0
+  inherit_local 0
+  inherit_part 0
+  splat 0
+  renderorder 0
+  spawntype 0
+  update Explosion
+  render Normal
+  blend Normal
+  texture fxpa_smoke01
+  xgrid 4
+  ygrid 4
+  loop 0
+  deadspace 0
+  twosidedtex 1
+  blastRadius 0.2
+  blastLength 1
+  position 0.0420874 0.0102191 1.12217
+  orientation -0.580709 -0.575663 -0.575664 -2.08936
+  colorStart 0.47451 0.439216 0.364706
+  colorEnd 0.819608 0.796079 0.709804
+  alphaStart 1
+  alphaEnd 0
+  sizeStart 4
+  sizeEnd 1
+  sizeStart_y 0
+  sizeEnd_y 0
+  frameStart 0
+  frameEnd 24
+  birthrate 40
+  lifeExp 2.5
+  mass 0.09
+  spread 2.96706
+  particleRot 0.5
+  velocity 2
+  randvel 0.5
+  fps 10
+  xsize 741
+  ysize 185
+  bounce_co 0
+  blurlength 10
+  lightningDelay 0
+  lightningRadius 0
+  lightningScale 0
+  p2p_bezier2 0
+  p2p_bezier3 0
+  combinetime 0
+  drag 0
+  grav 0
+  threshold 0
+endnode
+node emitter ChunkyWood08
+  parent jac_UDoor_01
+  p2p 0
+  p2p_sel 1
+  affectedByWind 0
+  m_isTinted 0
+  bounce 1
+  random 0
+  inherit 1
+  inheritvel 0
+  inherit_local 0
+  inherit_part 0
+  splat 0
+  renderorder 0
+  spawntype 0
+  update Explosion
+  render Normal
+  blend Normal
+  texture fxpa_cloud02
+  chunkName PLC_Chunk_W02
+  xgrid 5
+  ygrid 5
+  loop 0
+  deadspace 0
+  twosidedtex 0
+  blastRadius 0
+  blastLength 0
+  position 0.0420874 0.0102191 1.61708
+  orientation 0 0 -1 -1.56207
+  colorStart 1 1 1
+  colorEnd 1 1 1
+  alphaStart 1
+  alphaEnd 1
+  sizeStart 0.1
+  sizeEnd 0.1
+  sizeStart_y 0
+  sizeEnd_y 0
+  frameStart 0
+  frameEnd 24
+  birthrate 6
+  lifeExp 0.75
+  mass 3
+  spread 1.22173
+  particleRot 5
+  velocity 8
+  randvel 0.3
+  fps 0
+  xsize 89
+  ysize 40
+  bounce_co 0.5
+  blurlength 10
+  lightningDelay 0
+  lightningRadius 0
+  lightningScale 0
+  p2p_bezier2 0
+  p2p_bezier3 0
+  combinetime 0
+  drag 0
+  grav 0
+  threshold 0
+endnode
+node dummy jac_UDoor_01hhit
+  parent jac_UDoor_01
+  position 0 0 2.4084
+  orientation 0 0 0 0
+endnode
+node dummy jac_UDoor_01impc
+  parent jac_UDoor_01
+  position 0 0 1.54535
+  orientation 0 0 0 0
+endnode
+node dummy jac_UDoor_01head
+  parent jac_UDoor_01
+  position 0 0 3.13162
+  orientation 0 0 0 0
+endnode
+node dummy jac_UDoor_01grnd
+  parent jac_UDoor_01
+  position 0 0 -0.0401001
+  orientation 0 0 0 0
+endnode
+endmodelgeom jac_UDoor_01
+
+#MAXANIM ASCII
+newanim opening2 jac_UDoor_01
+  length 0.8
+  transtime 0.25
+  animroot jac_UDoor_01
+  node dummy jac_UDoor_01
+    parent NULL
+  endnode
+  node dummy Box112
+    parent jac_UDoor_01
+    orientationkey 5
+         0.0333333    0.0000000    0.0000000    0.0000000    0.0000000
+         0.1000000   -0.0000000   -0.0000000   -1.0000000   -0.0523598
+         0.6333330   -0.0000000   -0.0000000    1.0000000   -1.6015699
+         0.7000000   -0.0000000   -0.0000000    1.0000000   -1.5533400
+         0.8000000   -0.0000000   -0.0000000    1.0000000   -1.5533400
+  endnode
+  node dummy Box109
+    parent Box112
+  endnode
+  node dummy Box113
+    parent Box112
+  endnode
+  node dummy Box116
+    parent jac_UDoor_01
+    orientationkey 5
+         0.1000000    0.0000000    0.0000000    0.0000000    0.0000000
+         0.1666670   -0.0000000   -0.0000000    1.0000000   -0.0523599
+         0.7000000   -0.0000000   -0.0000000   -1.0000000   -1.5882499
+         0.7666670   -0.0000000   -0.0000000   -1.0000000   -1.5533400
+         0.8000000   -0.0000000   -0.0000000   -1.0000000   -1.5533400
+  endnode
+  node dummy Box108
+    parent Box116
+  endnode
+  node dummy Box105
+    parent Box116
+  endnode
+  node trimesh sam
+    parent jac_UDoor_01
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+    alphakey 3
+         0.0000000    0.0000000
+         0.7666670    0.0000000
+         0.8000000    0.0000000
+  endnode
+  node dummy jac_UDoor_01_DWK
+    parent jac_UDoor_01
+  endnode
+  node dummy 01_DWK_dp_open2_01
+    parent jac_UDoor_01_DWK
+  endnode
+  node dummy 01_DWK_dp_open1_01
+    parent jac_UDoor_01_DWK
+  endnode
+  node dummy 01_DWK_dp_open1_02
+    parent jac_UDoor_01_DWK
+  endnode
+  node dummy 01_DWK_dp_closed_02
+    parent jac_UDoor_01_DWK
+  endnode
+  node dummy 01_DWK_dp_closed_01
+    parent jac_UDoor_01_DWK
+  endnode
+  node dummy 01_DWK_dp_open2_02
+    parent jac_UDoor_01_DWK
+  endnode
+  node dummy 01_DWK_wg_open1
+    parent jac_UDoor_01_DWK
+  endnode
+  node dummy 01_DWK_wg_open2
+    parent jac_UDoor_01_DWK
+  endnode
+  node dummy 01_DWK_wg_closed
+    parent jac_UDoor_01_DWK
+  endnode
+  node emitter ChunkyWood07
+    parent jac_UDoor_01
+  endnode
+  node emitter fire!10
+    parent jac_UDoor_01
+  endnode
+  node emitter ChunkyWood08
+    parent jac_UDoor_01
+  endnode
+  node dummy jac_UDoor_01hhit
+    parent jac_UDoor_01
+  endnode
+  node dummy jac_UDoor_01impc
+    parent jac_UDoor_01
+  endnode
+  node dummy jac_UDoor_01head
+    parent jac_UDoor_01
+  endnode
+  node dummy jac_UDoor_01grnd
+    parent jac_UDoor_01
+  endnode
+doneanim opening2 jac_UDoor_01
+
+#MAXANIM ASCII
+newanim closing2 jac_UDoor_01
+  length 0.666667
+  transtime 0.25
+  animroot jac_UDoor_01
+  node dummy jac_UDoor_01
+    parent NULL
+  endnode
+  node dummy Box112
+    parent jac_UDoor_01
+    orientationkey 4
+         0.0000000   -0.0000000   -0.0000000    1.0000000   -1.5533400
+         0.0666667   -0.0000000   -0.0000000    1.0000000   -1.6015699
+         0.5000000   -0.0000000   -0.0000000   -1.0000000   -0.0523598
+         0.5666670    0.0000000    0.0000000    0.0000000    0.0000000
+  endnode
+  node dummy Box109
+    parent Box112
+  endnode
+  node dummy Box113
+    parent Box112
+  endnode
+  node dummy Box116
+    parent jac_UDoor_01
+    orientationkey 4
+         0.0000000   -0.0000000   -0.0000000   -1.0000000   -1.5533400
+         0.1333330   -0.0000000   -0.0000000   -1.0000000   -1.5882499
+         0.6000000   -0.0000000   -0.0000000    1.0000000   -0.0523599
+         0.6666670    0.0000000    0.0000000    0.0000000    0.0000000
+  endnode
+  node dummy Box108
+    parent Box116
+  endnode
+  node dummy Box105
+    parent Box116
+  endnode
+  node trimesh sam
+    parent jac_UDoor_01
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+    alpha 0
+  endnode
+  node dummy jac_UDoor_01_DWK
+    parent jac_UDoor_01
+  endnode
+  node dummy 01_DWK_dp_open2_01
+    parent jac_UDoor_01_DWK
+  endnode
+  node dummy 01_DWK_dp_open1_01
+    parent jac_UDoor_01_DWK
+  endnode
+  node dummy 01_DWK_dp_open1_02
+    parent jac_UDoor_01_DWK
+  endnode
+  node dummy 01_DWK_dp_closed_02
+    parent jac_UDoor_01_DWK
+  endnode
+  node dummy 01_DWK_dp_closed_01
+    parent jac_UDoor_01_DWK
+  endnode
+  node dummy 01_DWK_dp_open2_02
+    parent jac_UDoor_01_DWK
+  endnode
+  node dummy 01_DWK_wg_open1
+    parent jac_UDoor_01_DWK
+  endnode
+  node dummy 01_DWK_wg_open2
+    parent jac_UDoor_01_DWK
+  endnode
+  node dummy 01_DWK_wg_closed
+    parent jac_UDoor_01_DWK
+  endnode
+  node emitter ChunkyWood07
+    parent jac_UDoor_01
+  endnode
+  node emitter fire!10
+    parent jac_UDoor_01
+  endnode
+  node emitter ChunkyWood08
+    parent jac_UDoor_01
+  endnode
+  node dummy jac_UDoor_01hhit
+    parent jac_UDoor_01
+  endnode
+  node dummy jac_UDoor_01impc
+    parent jac_UDoor_01
+  endnode
+  node dummy jac_UDoor_01head
+    parent jac_UDoor_01
+  endnode
+  node dummy jac_UDoor_01grnd
+    parent jac_UDoor_01
+  endnode
+doneanim closing2 jac_UDoor_01
+
+#MAXANIM ASCII
+newanim opened2 jac_UDoor_01
+  length 0.0333333
+  transtime 0.25
+  animroot jac_UDoor_01
+  node dummy jac_UDoor_01
+    parent NULL
+  endnode
+  node dummy Box112
+    parent jac_UDoor_01
+    orientationkey 1
+         0.0333333   -0.0000000   -0.0000000    1.0000000   -1.5533400
+  endnode
+  node dummy Box109
+    parent Box112
+  endnode
+  node dummy Box113
+    parent Box112
+  endnode
+  node dummy Box116
+    parent jac_UDoor_01
+    orientationkey 2
+         0.0000000   -0.0000000   -0.0000000   -1.0000000   -1.5533400
+         0.0333333   -0.0000000   -0.0000000   -1.0000000   -1.5533400
+  endnode
+  node dummy Box108
+    parent Box116
+  endnode
+  node dummy Box105
+    parent Box116
+  endnode
+  node trimesh sam
+    parent jac_UDoor_01
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+    alphakey 2
+         0.0000000    0.0000000
+         0.0333333    0.0000000
+  endnode
+  node dummy jac_UDoor_01_DWK
+    parent jac_UDoor_01
+  endnode
+  node dummy 01_DWK_dp_open2_01
+    parent jac_UDoor_01_DWK
+  endnode
+  node dummy 01_DWK_dp_open1_01
+    parent jac_UDoor_01_DWK
+  endnode
+  node dummy 01_DWK_dp_open1_02
+    parent jac_UDoor_01_DWK
+  endnode
+  node dummy 01_DWK_dp_closed_02
+    parent jac_UDoor_01_DWK
+  endnode
+  node dummy 01_DWK_dp_closed_01
+    parent jac_UDoor_01_DWK
+  endnode
+  node dummy 01_DWK_dp_open2_02
+    parent jac_UDoor_01_DWK
+  endnode
+  node dummy 01_DWK_wg_open1
+    parent jac_UDoor_01_DWK
+  endnode
+  node dummy 01_DWK_wg_open2
+    parent jac_UDoor_01_DWK
+  endnode
+  node dummy 01_DWK_wg_closed
+    parent jac_UDoor_01_DWK
+  endnode
+  node emitter ChunkyWood07
+    parent jac_UDoor_01
+  endnode
+  node emitter fire!10
+    parent jac_UDoor_01
+  endnode
+  node emitter ChunkyWood08
+    parent jac_UDoor_01
+  endnode
+  node dummy jac_UDoor_01hhit
+    parent jac_UDoor_01
+  endnode
+  node dummy jac_UDoor_01impc
+    parent jac_UDoor_01
+  endnode
+  node dummy jac_UDoor_01head
+    parent jac_UDoor_01
+  endnode
+  node dummy jac_UDoor_01grnd
+    parent jac_UDoor_01
+  endnode
+doneanim opened2 jac_UDoor_01
+
+#MAXANIM ASCII
+newanim closed jac_UDoor_01
+  length 0.0333333
+  transtime 0.25
+  animroot jac_UDoor_01
+  node dummy jac_UDoor_01
+    parent NULL
+  endnode
+  node dummy Box112
+    parent jac_UDoor_01
+    position 2 0.02 0.544862
+  endnode
+  node dummy Box109
+    parent Box112
+  endnode
+  node dummy Box113
+    parent Box112
+  endnode
+  node dummy Box116
+    parent jac_UDoor_01
+    position -1.93 0.02 0.544862
+  endnode
+  node dummy Box108
+    parent Box116
+  endnode
+  node dummy Box105
+    parent Box116
+  endnode
+  node trimesh sam
+    parent jac_UDoor_01
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+    alphakey 2
+         0.0000000    0.0000000
+         0.0333333    0.0000000
+  endnode
+  node dummy jac_UDoor_01_DWK
+    parent jac_UDoor_01
+  endnode
+  node dummy 01_DWK_dp_open2_01
+    parent jac_UDoor_01_DWK
+  endnode
+  node dummy 01_DWK_dp_open1_01
+    parent jac_UDoor_01_DWK
+  endnode
+  node dummy 01_DWK_dp_open1_02
+    parent jac_UDoor_01_DWK
+  endnode
+  node dummy 01_DWK_dp_closed_02
+    parent jac_UDoor_01_DWK
+  endnode
+  node dummy 01_DWK_dp_closed_01
+    parent jac_UDoor_01_DWK
+  endnode
+  node dummy 01_DWK_dp_open2_02
+    parent jac_UDoor_01_DWK
+  endnode
+  node dummy 01_DWK_wg_open1
+    parent jac_UDoor_01_DWK
+  endnode
+  node dummy 01_DWK_wg_open2
+    parent jac_UDoor_01_DWK
+  endnode
+  node dummy 01_DWK_wg_closed
+    parent jac_UDoor_01_DWK
+  endnode
+  node emitter ChunkyWood07
+    parent jac_UDoor_01
+  endnode
+  node emitter fire!10
+    parent jac_UDoor_01
+  endnode
+  node emitter ChunkyWood08
+    parent jac_UDoor_01
+  endnode
+  node dummy jac_UDoor_01hhit
+    parent jac_UDoor_01
+  endnode
+  node dummy jac_UDoor_01impc
+    parent jac_UDoor_01
+  endnode
+  node dummy jac_UDoor_01head
+    parent jac_UDoor_01
+  endnode
+  node dummy jac_UDoor_01grnd
+    parent jac_UDoor_01
+  endnode
+doneanim closed jac_UDoor_01
+
+#MAXANIM ASCII
+newanim opening1 jac_UDoor_01
+  length 0.733333
+  transtime 0.25
+  animroot jac_UDoor_01
+  node dummy jac_UDoor_01
+    parent NULL
+  endnode
+  node dummy Box112
+    parent jac_UDoor_01
+    orientationkey 4
+         0.0000000    0.0000000    0.0000000    0.0000000    0.0000000
+         0.0666667   -0.0000000   -0.0000000    1.0000000   -0.0523599
+         0.6000000   -0.0000000   -0.0000000   -1.0000000   -1.6015699
+         0.6666670   -0.0000000   -0.0000000   -1.0000000   -1.5533400
+  endnode
+  node dummy Box109
+    parent Box112
+  endnode
+  node dummy Box113
+    parent Box112
+  endnode
+  node dummy Box116
+    parent jac_UDoor_01
+    orientationkey 4
+         0.0666667    0.0000000    0.0000000    0.0000000    0.0000000
+         0.1333330   -0.0000000   -0.0000000   -1.0000000   -0.0523599
+         0.6666670   -0.0000000   -0.0000000    1.0000000   -1.5882499
+         0.7333330   -0.0000000   -0.0000000    1.0000000   -1.5533400
+  endnode
+  node dummy Box108
+    parent Box116
+  endnode
+  node dummy Box105
+    parent Box116
+  endnode
+  node trimesh sam
+    parent jac_UDoor_01
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+    alphakey 2
+         0.0000000    0.0000000
+         0.7333330    0.0000000
+  endnode
+  node dummy jac_UDoor_01_DWK
+    parent jac_UDoor_01
+  endnode
+  node dummy 01_DWK_dp_open2_01
+    parent jac_UDoor_01_DWK
+  endnode
+  node dummy 01_DWK_dp_open1_01
+    parent jac_UDoor_01_DWK
+  endnode
+  node dummy 01_DWK_dp_open1_02
+    parent jac_UDoor_01_DWK
+  endnode
+  node dummy 01_DWK_dp_closed_02
+    parent jac_UDoor_01_DWK
+  endnode
+  node dummy 01_DWK_dp_closed_01
+    parent jac_UDoor_01_DWK
+  endnode
+  node dummy 01_DWK_dp_open2_02
+    parent jac_UDoor_01_DWK
+  endnode
+  node dummy 01_DWK_wg_open1
+    parent jac_UDoor_01_DWK
+  endnode
+  node dummy 01_DWK_wg_open2
+    parent jac_UDoor_01_DWK
+  endnode
+  node dummy 01_DWK_wg_closed
+    parent jac_UDoor_01_DWK
+  endnode
+  node emitter ChunkyWood07
+    parent jac_UDoor_01
+  endnode
+  node emitter fire!10
+    parent jac_UDoor_01
+  endnode
+  node emitter ChunkyWood08
+    parent jac_UDoor_01
+  endnode
+  node dummy jac_UDoor_01hhit
+    parent jac_UDoor_01
+  endnode
+  node dummy jac_UDoor_01impc
+    parent jac_UDoor_01
+  endnode
+  node dummy jac_UDoor_01head
+    parent jac_UDoor_01
+  endnode
+  node dummy jac_UDoor_01grnd
+    parent jac_UDoor_01
+  endnode
+doneanim opening1 jac_UDoor_01
+
+#MAXANIM ASCII
+newanim closing1 jac_UDoor_01
+  length 0.7
+  transtime 0.25
+  animroot jac_UDoor_01
+  node dummy jac_UDoor_01
+    parent NULL
+  endnode
+  node dummy Box112
+    parent jac_UDoor_01
+    orientationkey 5
+         0.0333333   -0.0000000   -0.0000000   -1.0000000   -1.5533400
+         0.1000000   -0.0000000   -0.0000000   -1.0000000   -1.6015699
+         0.5333330   -0.0000000   -0.0000000    1.0000000   -0.0523599
+         0.6000000    0.0000000    0.0000000    0.0000000    0.0000000
+         0.7000000    0.0000000    0.0000000    0.0000000    0.0000000
+  endnode
+  node dummy Box109
+    parent Box112
+  endnode
+  node dummy Box113
+    parent Box112
+  endnode
+  node dummy Box116
+    parent jac_UDoor_01
+    orientationkey 5
+         0.0000000   -0.0000000   -0.0000000    1.0000000   -1.5533400
+         0.0333333   -0.0000000   -0.0000000    1.0000000   -1.5533400
+         0.1666670   -0.0000000   -0.0000000    1.0000000   -1.5882499
+         0.6333330   -0.0000000   -0.0000000   -1.0000000   -0.0523599
+         0.7000000    0.0000000    0.0000000    0.0000000    0.0000000
+  endnode
+  node dummy Box108
+    parent Box116
+  endnode
+  node dummy Box105
+    parent Box116
+  endnode
+  node trimesh sam
+    parent jac_UDoor_01
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+    alphakey 3
+         0.0000000    0.0000000
+         0.0333333    0.0000000
+         0.7000000    0.0000000
+  endnode
+  node dummy jac_UDoor_01_DWK
+    parent jac_UDoor_01
+  endnode
+  node dummy 01_DWK_dp_open2_01
+    parent jac_UDoor_01_DWK
+  endnode
+  node dummy 01_DWK_dp_open1_01
+    parent jac_UDoor_01_DWK
+  endnode
+  node dummy 01_DWK_dp_open1_02
+    parent jac_UDoor_01_DWK
+  endnode
+  node dummy 01_DWK_dp_closed_02
+    parent jac_UDoor_01_DWK
+  endnode
+  node dummy 01_DWK_dp_closed_01
+    parent jac_UDoor_01_DWK
+  endnode
+  node dummy 01_DWK_dp_open2_02
+    parent jac_UDoor_01_DWK
+  endnode
+  node dummy 01_DWK_wg_open1
+    parent jac_UDoor_01_DWK
+  endnode
+  node dummy 01_DWK_wg_open2
+    parent jac_UDoor_01_DWK
+  endnode
+  node dummy 01_DWK_wg_closed
+    parent jac_UDoor_01_DWK
+  endnode
+  node emitter ChunkyWood07
+    parent jac_UDoor_01
+  endnode
+  node emitter fire!10
+    parent jac_UDoor_01
+  endnode
+  node emitter ChunkyWood08
+    parent jac_UDoor_01
+  endnode
+  node dummy jac_UDoor_01hhit
+    parent jac_UDoor_01
+  endnode
+  node dummy jac_UDoor_01impc
+    parent jac_UDoor_01
+  endnode
+  node dummy jac_UDoor_01head
+    parent jac_UDoor_01
+  endnode
+  node dummy jac_UDoor_01grnd
+    parent jac_UDoor_01
+  endnode
+doneanim closing1 jac_UDoor_01
+
+#MAXANIM ASCII
+newanim opened1 jac_UDoor_01
+  length 0.0333333
+  transtime 0.25
+  animroot jac_UDoor_01
+  node dummy jac_UDoor_01
+    parent NULL
+  endnode
+  node dummy Box112
+    parent jac_UDoor_01
+    orientation -0 -0 -1 -1.55334
+  endnode
+  node dummy Box109
+    parent Box112
+  endnode
+  node dummy Box113
+    parent Box112
+  endnode
+  node dummy Box116
+    parent jac_UDoor_01
+    orientation -0 -0 1 -1.55334
+  endnode
+  node dummy Box108
+    parent Box116
+  endnode
+  node dummy Box105
+    parent Box116
+  endnode
+  node trimesh sam
+    parent jac_UDoor_01
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+    alpha 0
+  endnode
+  node dummy jac_UDoor_01_DWK
+    parent jac_UDoor_01
+  endnode
+  node dummy 01_DWK_dp_open2_01
+    parent jac_UDoor_01_DWK
+  endnode
+  node dummy 01_DWK_dp_open1_01
+    parent jac_UDoor_01_DWK
+  endnode
+  node dummy 01_DWK_dp_open1_02
+    parent jac_UDoor_01_DWK
+  endnode
+  node dummy 01_DWK_dp_closed_02
+    parent jac_UDoor_01_DWK
+  endnode
+  node dummy 01_DWK_dp_closed_01
+    parent jac_UDoor_01_DWK
+  endnode
+  node dummy 01_DWK_dp_open2_02
+    parent jac_UDoor_01_DWK
+  endnode
+  node dummy 01_DWK_wg_open1
+    parent jac_UDoor_01_DWK
+  endnode
+  node dummy 01_DWK_wg_open2
+    parent jac_UDoor_01_DWK
+  endnode
+  node dummy 01_DWK_wg_closed
+    parent jac_UDoor_01_DWK
+  endnode
+  node emitter ChunkyWood07
+    parent jac_UDoor_01
+  endnode
+  node emitter fire!10
+    parent jac_UDoor_01
+  endnode
+  node emitter ChunkyWood08
+    parent jac_UDoor_01
+  endnode
+  node dummy jac_UDoor_01hhit
+    parent jac_UDoor_01
+  endnode
+  node dummy jac_UDoor_01impc
+    parent jac_UDoor_01
+  endnode
+  node dummy jac_UDoor_01head
+    parent jac_UDoor_01
+  endnode
+  node dummy jac_UDoor_01grnd
+    parent jac_UDoor_01
+  endnode
+doneanim opened1 jac_UDoor_01
+
+#MAXANIM ASCII
+newanim trans jac_UDoor_01
+  length 0.0333333
+  transtime 0.25
+  animroot jac_UDoor_01
+  node dummy jac_UDoor_01
+    parent NULL
+  endnode
+  node dummy Box112
+    parent jac_UDoor_01
+  endnode
+  node dummy Box109
+    parent Box112
+  endnode
+  node dummy Box113
+    parent Box112
+  endnode
+  node dummy Box116
+    parent jac_UDoor_01
+  endnode
+  node dummy Box108
+    parent Box116
+  endnode
+  node dummy Box105
+    parent Box116
+  endnode
+  node trimesh sam
+    parent jac_UDoor_01
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+    alphakey 2
+         0.0000000    0.2500000
+         0.0333333    0.2500000
+  endnode
+  node dummy jac_UDoor_01_DWK
+    parent jac_UDoor_01
+  endnode
+  node dummy 01_DWK_dp_open2_01
+    parent jac_UDoor_01_DWK
+  endnode
+  node dummy 01_DWK_dp_open1_01
+    parent jac_UDoor_01_DWK
+  endnode
+  node dummy 01_DWK_dp_open1_02
+    parent jac_UDoor_01_DWK
+  endnode
+  node dummy 01_DWK_dp_closed_02
+    parent jac_UDoor_01_DWK
+  endnode
+  node dummy 01_DWK_dp_closed_01
+    parent jac_UDoor_01_DWK
+  endnode
+  node dummy 01_DWK_dp_open2_02
+    parent jac_UDoor_01_DWK
+  endnode
+  node dummy 01_DWK_wg_open1
+    parent jac_UDoor_01_DWK
+  endnode
+  node dummy 01_DWK_wg_open2
+    parent jac_UDoor_01_DWK
+  endnode
+  node dummy 01_DWK_wg_closed
+    parent jac_UDoor_01_DWK
+  endnode
+  node emitter ChunkyWood07
+    parent jac_UDoor_01
+  endnode
+  node emitter fire!10
+    parent jac_UDoor_01
+  endnode
+  node emitter ChunkyWood08
+    parent jac_UDoor_01
+  endnode
+  node dummy jac_UDoor_01hhit
+    parent jac_UDoor_01
+  endnode
+  node dummy jac_UDoor_01impc
+    parent jac_UDoor_01
+  endnode
+  node dummy jac_UDoor_01head
+    parent jac_UDoor_01
+  endnode
+  node dummy jac_UDoor_01grnd
+    parent jac_UDoor_01
+  endnode
+doneanim trans jac_UDoor_01
+
+#MAXANIM ASCII
+newanim die jac_UDoor_01
+  length 0.0333333
+  transtime 0.25
+  animroot jac_UDoor_01
+  event 0.0333333 detonate
+  event 0.0333333 detonate
+  event 0.0333333 detonate
+  node dummy jac_UDoor_01
+    parent NULL
+  endnode
+  node dummy Box112
+    parent jac_UDoor_01
+    positionkey 2
+         0.0000000    2.0000000    0.0200000    0.5448620
+         0.0333333    5.1213002    0.0200000  -10.5532999
+    orientationkey 2
+         0.0000000    0.0000000    0.0000000    0.0000000    0.0000000
+         0.0333333    1.0000000   -0.0000000   -0.0000000   -2.5918100
+  endnode
+  node dummy Box109
+    parent Box112
+  endnode
+  node dummy Box113
+    parent Box112
+  endnode
+  node dummy Box116
+    parent jac_UDoor_01
+    positionkey 2
+         0.0000000   -1.9299999    0.0200000    0.5448620
+         0.0333333   -5.6891899    0.0200000  -10.5532999
+    orientationkey 2
+         0.0000000    0.0000000    0.0000000    0.0000000    0.0000000
+         0.0333333   -1.0000000   -0.0000000   -0.0000000   -2.5743599
+  endnode
+  node dummy Box108
+    parent Box116
+  endnode
+  node dummy Box105
+    parent Box116
+  endnode
+  node trimesh sam
+    parent jac_UDoor_01
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node dummy jac_UDoor_01_DWK
+    parent jac_UDoor_01
+  endnode
+  node dummy 01_DWK_dp_open2_01
+    parent jac_UDoor_01_DWK
+  endnode
+  node dummy 01_DWK_dp_open1_01
+    parent jac_UDoor_01_DWK
+  endnode
+  node dummy 01_DWK_dp_open1_02
+    parent jac_UDoor_01_DWK
+  endnode
+  node dummy 01_DWK_dp_closed_02
+    parent jac_UDoor_01_DWK
+  endnode
+  node dummy 01_DWK_dp_closed_01
+    parent jac_UDoor_01_DWK
+  endnode
+  node dummy 01_DWK_dp_open2_02
+    parent jac_UDoor_01_DWK
+  endnode
+  node dummy 01_DWK_wg_open1
+    parent jac_UDoor_01_DWK
+  endnode
+  node dummy 01_DWK_wg_open2
+    parent jac_UDoor_01_DWK
+  endnode
+  node dummy 01_DWK_wg_closed
+    parent jac_UDoor_01_DWK
+  endnode
+  node emitter ChunkyWood07
+    parent jac_UDoor_01
+  endnode
+  node emitter fire!10
+    parent jac_UDoor_01
+  endnode
+  node emitter ChunkyWood08
+    parent jac_UDoor_01
+  endnode
+  node dummy jac_UDoor_01hhit
+    parent jac_UDoor_01
+  endnode
+  node dummy jac_UDoor_01impc
+    parent jac_UDoor_01
+  endnode
+  node dummy jac_UDoor_01head
+    parent jac_UDoor_01
+  endnode
+  node dummy jac_UDoor_01grnd
+    parent jac_UDoor_01
+  endnode
+doneanim die jac_UDoor_01
+
+#MAXANIM ASCII
+newanim dead jac_UDoor_01
+  length 0.0333333
+  transtime 0.25
+  animroot jac_UDoor_01
+  event 0 detonate
+  event 0 detonate
+  event 0 detonate
+  node dummy jac_UDoor_01
+    parent NULL
+  endnode
+  node dummy Box112
+    parent jac_UDoor_01
+    positionkey 2
+         0.0000000    5.1213002    0.0200000  -10.5532999
+         0.0333333    5.1213002    0.0200000  -10.5532999
+    orientationkey 2
+         0.0000000    1.0000000   -0.0000000   -0.0000000   -2.5918100
+         0.0333333    1.0000000   -0.0000000   -0.0000000   -2.5918100
+  endnode
+  node dummy Box109
+    parent Box112
+  endnode
+  node dummy Box113
+    parent Box112
+  endnode
+  node dummy Box116
+    parent jac_UDoor_01
+    positionkey 2
+         0.0000000   -5.6891899    0.0200000  -10.5532999
+         0.0333333   -5.6891899    0.0200000  -10.5532999
+    orientationkey 2
+         0.0000000   -1.0000000   -0.0000000   -0.0000000   -2.5743599
+         0.0333333   -1.0000000   -0.0000000   -0.0000000   -2.5743599
+  endnode
+  node dummy Box108
+    parent Box116
+  endnode
+  node dummy Box105
+    parent Box116
+  endnode
+  node trimesh sam
+    parent jac_UDoor_01
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node dummy jac_UDoor_01_DWK
+    parent jac_UDoor_01
+  endnode
+  node dummy 01_DWK_dp_open2_01
+    parent jac_UDoor_01_DWK
+  endnode
+  node dummy 01_DWK_dp_open1_01
+    parent jac_UDoor_01_DWK
+  endnode
+  node dummy 01_DWK_dp_open1_02
+    parent jac_UDoor_01_DWK
+  endnode
+  node dummy 01_DWK_dp_closed_02
+    parent jac_UDoor_01_DWK
+  endnode
+  node dummy 01_DWK_dp_closed_01
+    parent jac_UDoor_01_DWK
+  endnode
+  node dummy 01_DWK_dp_open2_02
+    parent jac_UDoor_01_DWK
+  endnode
+  node dummy 01_DWK_wg_open1
+    parent jac_UDoor_01_DWK
+  endnode
+  node dummy 01_DWK_wg_open2
+    parent jac_UDoor_01_DWK
+  endnode
+  node dummy 01_DWK_wg_closed
+    parent jac_UDoor_01_DWK
+  endnode
+  node emitter ChunkyWood07
+    parent jac_UDoor_01
+  endnode
+  node emitter fire!10
+    parent jac_UDoor_01
+  endnode
+  node emitter ChunkyWood08
+    parent jac_UDoor_01
+  endnode
+  node dummy jac_UDoor_01hhit
+    parent jac_UDoor_01
+  endnode
+  node dummy jac_UDoor_01impc
+    parent jac_UDoor_01
+  endnode
+  node dummy jac_UDoor_01head
+    parent jac_UDoor_01
+  endnode
+  node dummy jac_UDoor_01grnd
+    parent jac_UDoor_01
+  endnode
+doneanim dead jac_UDoor_01
+
+donemodel jac_UDoor_01

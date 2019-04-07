@@ -1,0 +1,108 @@
+#Exported from 3ds max by MDL Plug-in Suite 1.0b
+#http://www.bricksbuilder.com/nwn/utils/
+#MAXMODEL ASCII
+# model: udp2-p-31
+filedependancy udp2 interior placeables02.max
+newmodel udp2-p-31
+setsupermodel udp2-p-31 NULL
+classification Tile
+setanimationscale 1.0
+#MAXGEOM  ASCII
+beginmodelgeom udp2-p-31
+node dummy udp2-p-31
+  parent NULL
+endnode
+node trimesh comp sides
+  parent udp2-p-31
+  position 0 0 0
+  orientation 0 0 0 0
+  wirecolor 0.894531 0.894531 0.894531
+  ambient 0.588235 0.588235 0.588235
+  diffuse 0.588235 0.588235 0.588235
+  specular 0 0 0
+  shininess 10
+  bitmap udp2_p_gry2
+  verts 8
+    -0.11 -0.285 0
+    0.11 -0.285 0
+    -0.11 0.285 0
+    0.11 0.285 0
+    -0.11 -0.285 0.57
+    0.11 -0.285 0.57
+    -0.11 0.285 0.57
+    0.11 0.285 0.57
+  faces 8
+    0 2 3  2  8 9 10  1
+    3 1 0  2  11 12 13  1
+    4 5 7  4  14 15 16  0
+    7 6 4  4  17 18 19  0
+    1 3 7  16  20 3 21  3
+    7 5 1  16  7 5 1  3
+    2 0 4  64  22 0 23  2
+    4 6 2  64  4 6 2  2
+  tverts 24
+    6.2 -5.2 -1.7
+    -5.2 -5.2 2.7
+    -5.2 -5.2 -1.7
+    6.2 -5.2 2.7
+    6.2 6.2 -1.7
+    -5.2 6.2 2.7
+    -5.2 6.2 -1.7
+    6.2 6.2 2.7
+    2.7 -5.2 -5.2
+    2.7 6.2 -5.2
+    -1.7 6.2 -5.2
+    -1.7 6.2 -5.2
+    -1.7 -5.2 -5.2
+    2.7 -5.2 -5.2
+    -1.7 -5.2 6.2
+    2.7 -5.2 6.2
+    2.7 6.2 6.2
+    2.7 6.2 6.2
+    -1.7 6.2 6.2
+    -1.7 -5.2 6.2
+    -5.2 -5.2 2.7
+    6.2 6.2 2.7
+    -5.2 -5.2 -1.7
+    6.2 6.2 -1.7
+endnode
+node trimesh comp ends
+  parent udp2-p-31
+  position 0 0 0
+  orientation 0 0 0 0
+  wirecolor 0.894531 0.894531 0.894531
+  ambient 0.588235 0.588235 0.588235
+  diffuse 0.588235 0.588235 0.588235
+  specular 0 0 0
+  shininess 10
+  bitmap udp2_p_pc
+  verts 8
+    -0.11 -0.285 0
+    0.11 -0.285 0
+    -0.11 0.285 0
+    0.11 0.285 0
+    -0.11 -0.285 0.57
+    0.11 -0.285 0.57
+    -0.11 0.285 0.57
+    0.11 0.285 0.57
+  faces 4
+    0 1 5  8  0 1 5  4
+    5 4 0  8  5 4 0  4
+    3 2 6  32  8 9 10  5
+    6 7 3  32  10 11 8  5
+  tverts 12
+    0.000968009 0 0.9995
+    0.380278 0 0.9995
+    0.000968218 0 0.000499487
+    0.380279 0 0.000499576
+    0.000968009 1 0.9995
+    0.380278 1 0.9995
+    0.000968218 1 0.000499427
+    0.380279 1 0.000499517
+    0.900819 0.000499517 1.90575
+    0.505949 0.000499517 0.90675
+    0.505949 0.9995 0.43221
+    0.900819 0.9995 1.43121
+endnode
+endmodelgeom udp2-p-31
+donemodel udp2-p-31

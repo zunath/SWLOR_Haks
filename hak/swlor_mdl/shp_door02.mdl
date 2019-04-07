@@ -1,0 +1,1148 @@
+# Exported from NWmax 0.8 b60 at 7/27/2006 11:06:59 AM
+# mdl file
+#
+#NWmax MODEL ASCII
+# model: shp_Door02
+#local file: Unknown
+filedependancy Unknown
+newmodel shp_Door02
+setsupermodel shp_Door02 NULL
+classification Door
+#NWmax GEOM  ASCII
+beginmodelgeom shp_Door02
+node dummy shp_Door02
+  parent NULL
+endnode
+node dummy shp_Door02grnd
+  parent shp_Door02
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.839216 0.898039 0.65098 
+endnode
+node emitter fire!07
+  parent shp_Door02
+  position -0.00162842 0.0288672 0.928905
+  orientation 1.0 0.0 0.0 -4.71239
+  wirecolor 0.882353 0.882353 0.882353 
+  update_sel 3
+  update Explosion
+  render_sel 1
+  render Normal
+  blend_sel 1
+  Blend Normal
+  spawnType 0
+  xSize 100.0
+  ySize 99.0
+  inherit 1
+  inherit_local 0
+  inheritvel 0
+  inherit_part 0
+  renderorder 0
+  threshold 0.0
+  combinetime 0.0
+  deadspace 0.0
+  opacity 0.5
+  colorStart 0.47451 0.439216 0.364706 
+  colorEnd 0.819608 0.796079 0.709804 
+  alphaStart 1.0
+  alphaEnd 0.0
+  sizeStart 4.0
+  sizeEnd 1.0
+  sizeStart_y 0.0
+  sizeEnd_y 0.0
+  birthrate 10
+  lifeExp 2.5
+  mass 0.09
+  spread 2.96706
+  particleRot 0.5
+  velocity 2.0
+  randvel 0.5
+  bounce_co 0.0
+  blurlength 10.0
+  loop 0
+  bounce 0
+  m_isTinted 1
+  splat 0
+  affectedByWind false
+  texture fxpa_smoke01
+  twosidedtex 1
+  xgrid 4
+  ygrid 4
+  fps 10
+  framestart 0
+  frameend 24
+  random 0
+  lightningDelay 0.0
+  lightningRadius 0.0
+  lightningSubDiv 0
+  lightningScale 0.0
+  blastRadius 0.2
+  blastLength 1.0
+  p2p 0
+  p2p_type Bezier
+  p2p_sel 1
+  p2p_bezier2 0.0
+  p2p_bezier3 0.0
+  grav 0.0
+  drag 0.0
+endnode
+node dummy shp_Door02head
+  parent shp_Door02
+  position 0.0 0.0 2.50064
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.0313726 0.431373 0.52549 
+endnode
+node dummy shp_Door02hhit
+  parent shp_Door02
+  position 0.0 0.0 2.17507
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.0313726 0.431373 0.52549 
+endnode
+node dummy shp_Door02impc
+  parent shp_Door02
+  position 0.0 0.0 1.63648
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.0313726 0.431373 0.52549 
+endnode
+node trimesh sam
+  parent shp_Door02
+  position -1.0 -0.0205192 0.0
+  orientation 0.0 0.0 -1.0 -1.5708
+  wirecolor 0.882353 0.882353 0.882353 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 0
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 0.0
+  transparencyhint 1
+  selfillumcolor 0.0705882 0.0 1.0 
+  ambient 0.2 0.2 0.2 
+  diffuse 0.8 0.8 0.8 
+  specular 0.0 0.0 0.0 
+  shininess 1
+  center 2.23496 -100.812 148.5 
+  bitmap NULL
+  verts 8
+    -0.00620381 -0.0100205 0.0
+    -0.00620381 -2.01002 0.0
+    -0.00620381 -2.01002 2.97
+    -0.00620381 -0.0100205 2.97
+    0.0509031 -2.00623 0.0
+    0.0509031 -0.00622904 0.0
+    0.0509031 -2.00623 2.97
+    0.0509031 -0.00622904 2.97
+  faces 4
+    0 1 2  1  0 1 2  0
+    2 3 0  1  2 3 0  0
+    4 5 6  1  1 0 2  0
+    7 6 5  1  3 2 0  0
+  tverts 4
+    0.000499517 0.000499666 0
+    0.49427 0.000499547 0
+    0.494271 0.876312 0
+    0.000499815 0.876312 0
+endnode
+node trimesh Box21
+  parent shp_Door02
+  position 0.5 0.0 0.0
+  orientation 0.0 0.0 -1.0 -1.5708
+  wirecolor 0.894118 0.894118 0.894118 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 0.0 150.0 
+  bitmap shp01door02
+  verts 8
+    -0.05 -0.5 0.0
+    0.05 -0.5 0.0
+    -0.05 0.5 0.0
+    0.05 0.5 0.0
+    -0.05 -0.5 3.0
+    0.05 -0.5 3.0
+    -0.05 0.5 3.0
+    0.05 0.5 3.0
+  faces 8
+    0 2 3  2  8 9 10  1
+    3 1 0  2  11 12 13  1
+    4 5 7  4  14 15 16  0
+    7 6 4  4  17 18 19  0
+    0 1 5  8  20 1 21  4
+    5 4 0  8  5 4 0  4
+    3 2 6  32  22 2 23  5
+    6 7 3  32  6 7 3  5
+  tverts 24
+    0.48 -0.1 0
+    0.52 -0.1 0
+    0.52 -0.1 0
+    0.48 -0.1 0
+    0.48 1.1 0
+    0.52 1.1 0
+    0.52 1.1 0
+    0.48 1.1 0
+    0.52 0.3 0
+    0.52 0.7 0
+    0.48 0.7 0
+    0.48 0.7 0
+    0.48 0.3 0
+    0.52 0.3 0
+    0.48 0.3 0
+    0.52 0.3 0
+    0.52 0.7 0
+    0.52 0.7 0
+    0.48 0.7 0
+    0.48 0.3 0
+    0.48 -0.1 0
+    0.52 1.1 0
+    0.48 -0.1 0
+    0.52 1.1 0
+endnode
+node trimesh Object16
+  parent Box21
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.894118 0.894118 0.894118 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 10
+  center -5.0 0.0 150.0 
+  bitmap shp01door02
+  verts 4
+    -0.05 -0.5 0.0
+    -0.05 0.5 0.0
+    -0.05 -0.5 3.0
+    -0.05 0.5 3.0
+  faces 2
+    1 0 2  64  4 0 5  2
+    2 3 1  64  2 3 1  2
+  tverts 6
+    -0.0292824 0.000219256 0
+    -0.498482 0.000219256 0
+    -0.0292824 0.964075 0
+    -0.498482 0.964075 0
+    -0.498482 0.000219256 0
+    -0.0292824 0.964075 0
+endnode
+node trimesh Object15
+  parent Box21
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.894118 0.894118 0.894118 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 10
+  center 5.0 0.0 150.0 
+  bitmap shp01door02
+  verts 4
+    0.05 -0.5 0.0
+    0.05 0.5 0.0
+    0.05 -0.5 3.0
+    0.05 0.5 3.0
+  faces 2
+    0 1 3  16  4 1 5  3
+    3 2 0  16  3 2 0  3
+  tverts 6
+    -0.516866 0.000219196 0
+    0.0135336 0.000219196 0
+    -0.516866 0.964075 0
+    0.0135336 0.964075 0
+    -0.516866 0.000219196 0
+    0.0135336 0.964075 0
+endnode
+node trimesh Box65
+  parent shp_Door02
+  position -0.5 0.0 0.0
+  orientation 0.0 0.0 -1.0 -1.5708
+  wirecolor 0.894118 0.894118 0.894118 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 0.0 150.0 
+  bitmap shp01door02
+  verts 8
+    -0.05 -0.5 0.0
+    0.05 -0.5 0.0
+    -0.05 0.5 0.0
+    0.05 0.5 0.0
+    -0.05 -0.5 3.0
+    0.05 -0.5 3.0
+    -0.05 0.5 3.0
+    0.05 0.5 3.0
+  faces 8
+    0 2 3  2  8 9 10  1
+    3 1 0  2  11 12 13  1
+    4 5 7  4  14 15 16  0
+    7 6 4  4  17 18 19  0
+    0 1 5  8  20 1 21  4
+    5 4 0  8  5 4 0  4
+    3 2 6  32  22 2 23  5
+    6 7 3  32  6 7 3  5
+  tverts 24
+    0.48 -0.1 0
+    0.52 -0.1 0
+    0.52 -0.1 0
+    0.48 -0.1 0
+    0.48 1.1 0
+    0.52 1.1 0
+    0.52 1.1 0
+    0.48 1.1 0
+    0.52 0.3 0
+    0.52 0.7 0
+    0.48 0.7 0
+    0.48 0.7 0
+    0.48 0.3 0
+    0.52 0.3 0
+    0.48 0.3 0
+    0.52 0.3 0
+    0.52 0.7 0
+    0.52 0.7 0
+    0.48 0.7 0
+    0.48 0.3 0
+    0.48 -0.1 0
+    0.52 1.1 0
+    0.48 -0.1 0
+    0.52 1.1 0
+endnode
+node trimesh Object17
+  parent Box65
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.894118 0.894118 0.894118 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 10
+  center -5.0 0.0 150.0 
+  bitmap shp01door02
+  verts 4
+    -0.05 -0.5 0.0
+    -0.05 0.5 0.0
+    -0.05 -0.5 3.0
+    -0.05 0.5 3.0
+  faces 2
+    1 0 2  64  4 0 5  2
+    2 3 1  64  2 3 1  2
+  tverts 6
+    -0.0292824 0.000219196 0
+    -0.498482 0.000219196 0
+    -0.0292824 0.964075 0
+    -0.498482 0.964075 0
+    -0.498482 0.000219196 0
+    -0.0292824 0.964075 0
+endnode
+node trimesh Object18
+  parent Box65
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.894118 0.894118 0.894118 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 10
+  center 5.0 0.0 150.0 
+  bitmap shp01door02
+  verts 4
+    0.05 -0.5 0.0
+    0.05 0.5 0.0
+    0.05 -0.5 3.0
+    0.05 0.5 3.0
+  faces 2
+    0 1 3  16  4 1 5  3
+    3 2 0  16  3 2 0  3
+  tverts 6
+    -0.500497 0.000219196 0
+    -0.0312972 0.000219196 0
+    -0.500497 0.964075 0
+    -0.0312972 0.964075 0
+    -0.500497 0.000219196 0
+    -0.0312972 0.964075 0
+endnode
+endmodelgeom shp_Door02
+#NWmax ANIM ASCII
+newanim opening1 shp_Door02
+  length 1.0
+  transtime 0.25
+  animroot shp_Door02
+    node dummy shp_Door02
+        parent NULL
+    endnode
+    node dummy shp_Door02grnd
+        parent shp_Door02
+    endnode
+    node emitter fire!07
+        parent shp_Door02
+    endnode
+    node dummy shp_Door02head
+        parent shp_Door02
+    endnode
+    node dummy shp_Door02hhit
+        parent shp_Door02
+    endnode
+    node dummy shp_Door02impc
+        parent shp_Door02
+    endnode
+    node trimesh sam
+        parent shp_Door02
+        alphakey
+            0.0 0.0 
+            1.0 0.0 
+        endlist
+    endnode
+    node trimesh Box21
+        parent shp_Door02
+        positionkey
+            0.0 0.5 0.0 0.0
+            0.5 1.25 0.0 0.0
+            1.0 1.4 0.0 0.0
+        endlist
+        orientationkey
+            0.0 0.0 0.0 -1.0 -1.5708
+            1.0 0.0 0.0 -1.0 -1.5708
+        endlist
+    endnode
+    node trimesh Object16
+        parent Box21
+    endnode
+    node trimesh Object15
+        parent Box21
+    endnode
+    node trimesh Box65
+        parent shp_Door02
+        positionkey
+            0.0 -0.5 0.0 0.0
+            0.5 -1.25 0.0 0.0
+            1.0 -1.4 0.0 0.0
+        endlist
+        orientationkey
+            0.0 0.0 0.0 -1.0 -1.5708
+            1.0 0.0 0.0 -1.0 -1.5708
+        endlist
+    endnode
+    node trimesh Object17
+        parent Box65
+    endnode
+    node trimesh Object18
+        parent Box65
+    endnode
+    node dummy shp_Door02_DWK
+        parent shp_Door02
+    endnode
+    node trimesh 02_DWK_wg_closed
+        parent shp_Door02_DWK
+    endnode
+    node trimesh 02_DWK_wg_open2
+        parent shp_Door02_DWK
+    endnode
+    node trimesh 02_DWK_wg_open1
+        parent shp_Door02_DWK
+    endnode
+doneanim opening1 shp_Door02
+#NWmax ANIM ASCII
+newanim closing1 shp_Door02
+  length 0.666667
+  transtime 0.25
+  animroot shp_Door02
+    node dummy shp_Door02
+        parent NULL
+    endnode
+    node dummy shp_Door02grnd
+        parent shp_Door02
+    endnode
+    node emitter fire!07
+        parent shp_Door02
+    endnode
+    node dummy shp_Door02head
+        parent shp_Door02
+    endnode
+    node dummy shp_Door02hhit
+        parent shp_Door02
+    endnode
+    node dummy shp_Door02impc
+        parent shp_Door02
+    endnode
+    node trimesh sam
+        parent shp_Door02
+        alphakey
+            0.0 0.0 
+            0.0333333 0.0 
+            0.633333 0.0 
+            0.666667 0.0 
+        endlist
+    endnode
+    node trimesh Box21
+        parent shp_Door02
+        positionkey
+            0.0 1.4 0.0 0.0
+            0.666667 0.5 0.0 0.0
+        endlist
+        orientationkey
+            0.0 0.0 0.0 -1.0 -1.5708
+        endlist
+    endnode
+    node trimesh Object16
+        parent Box21
+    endnode
+    node trimesh Object15
+        parent Box21
+    endnode
+    node trimesh Box65
+        parent shp_Door02
+        positionkey
+            0.0 -1.4 0.0 0.0
+            0.666667 -0.5 0.0 0.0
+        endlist
+        orientationkey
+            0.0 0.0 0.0 -1.0 -1.5708
+        endlist
+    endnode
+    node trimesh Object17
+        parent Box65
+    endnode
+    node trimesh Object18
+        parent Box65
+    endnode
+    node dummy shp_Door02_DWK
+        parent shp_Door02
+    endnode
+    node trimesh 02_DWK_wg_closed
+        parent shp_Door02_DWK
+    endnode
+    node trimesh 02_DWK_wg_open2
+        parent shp_Door02_DWK
+    endnode
+    node trimesh 02_DWK_wg_open1
+        parent shp_Door02_DWK
+    endnode
+doneanim closing1 shp_Door02
+#NWmax ANIM ASCII
+newanim opening2 shp_Door02
+  length 1.0
+  transtime 0.25
+  animroot shp_Door02
+    node dummy shp_Door02
+        parent NULL
+    endnode
+    node dummy shp_Door02grnd
+        parent shp_Door02
+    endnode
+    node emitter fire!07
+        parent shp_Door02
+    endnode
+    node dummy shp_Door02head
+        parent shp_Door02
+    endnode
+    node dummy shp_Door02hhit
+        parent shp_Door02
+    endnode
+    node dummy shp_Door02impc
+        parent shp_Door02
+    endnode
+    node trimesh sam
+        parent shp_Door02
+        alphakey
+            0.0 0.0 
+            1.0 0.0 
+        endlist
+    endnode
+    node trimesh Box21
+        parent shp_Door02
+        positionkey
+            0.0 0.5 0.0 0.0
+            0.5 1.25 0.0 0.0
+            1.0 1.4 0.0 0.0
+        endlist
+        orientationkey
+            0.0 0.0 0.0 -1.0 -1.5708
+            1.0 0.0 0.0 -1.0 -1.5708
+        endlist
+    endnode
+    node trimesh Object16
+        parent Box21
+    endnode
+    node trimesh Object15
+        parent Box21
+    endnode
+    node trimesh Box65
+        parent shp_Door02
+        positionkey
+            0.0 -0.5 0.0 0.0
+            0.5 -1.25 0.0 0.0
+            1.0 -1.4 0.0 0.0
+        endlist
+        orientationkey
+            0.0 0.0 0.0 -1.0 -1.5708
+            1.0 0.0 0.0 -1.0 -1.5708
+        endlist
+    endnode
+    node trimesh Object17
+        parent Box65
+    endnode
+    node trimesh Object18
+        parent Box65
+    endnode
+    node dummy shp_Door02_DWK
+        parent shp_Door02
+    endnode
+    node trimesh 02_DWK_wg_closed
+        parent shp_Door02_DWK
+    endnode
+    node trimesh 02_DWK_wg_open2
+        parent shp_Door02_DWK
+    endnode
+    node trimesh 02_DWK_wg_open1
+        parent shp_Door02_DWK
+    endnode
+doneanim opening2 shp_Door02
+#NWmax ANIM ASCII
+newanim die shp_Door02
+  length 0.666667
+  transtime 0.0
+  animroot shp_Door02
+  event 0.0 detonate
+    node dummy shp_Door02
+        parent NULL
+    endnode
+    node dummy shp_Door02grnd
+        parent shp_Door02
+    endnode
+    node emitter fire!07
+        parent shp_Door02
+    endnode
+    node dummy shp_Door02head
+        parent shp_Door02
+    endnode
+    node dummy shp_Door02hhit
+        parent shp_Door02
+    endnode
+    node dummy shp_Door02impc
+        parent shp_Door02
+    endnode
+    node trimesh sam
+        parent shp_Door02
+        alphakey
+            0.0 0.0 
+        endlist
+    endnode
+    node trimesh Box21
+        parent shp_Door02
+        positionkey
+            0.0 0.5 0.0 0.0
+            0.666667 1.49249 0.0 -3.00255
+        endlist
+        orientationkey
+            0.0 0.0 0.0 -1.0 -1.5708
+            0.233333 -0.114588 -0.114587 -0.986782 -1.5841
+            0.666667 -0.174938 -0.174938 -0.968913 -1.60237
+        endlist
+    endnode
+    node trimesh Object16
+        parent Box21
+    endnode
+    node trimesh Object15
+        parent Box21
+    endnode
+    node trimesh Box65
+        parent shp_Door02
+        positionkey
+            0.0 -0.5 0.0 0.0
+            0.4 -0.92611 0.0 -1.96138
+            0.666667 -1.53518 0.0 -3.02682
+        endlist
+        orientationkey
+            0.0 0.0 0.0 -1.0 -1.5708
+            0.666667 0.137459 0.13746 -0.980923 -1.59006
+        endlist
+    endnode
+    node trimesh Object17
+        parent Box65
+    endnode
+    node trimesh Object18
+        parent Box65
+    endnode
+    node dummy shp_Door02_DWK
+        parent shp_Door02
+    endnode
+    node trimesh 02_DWK_wg_closed
+        parent shp_Door02_DWK
+    endnode
+    node trimesh 02_DWK_wg_open2
+        parent shp_Door02_DWK
+    endnode
+    node trimesh 02_DWK_wg_open1
+        parent shp_Door02_DWK
+    endnode
+doneanim die shp_Door02
+#NWmax ANIM ASCII
+newanim closing2 shp_Door02
+  length 0.666667
+  transtime 0.25
+  animroot shp_Door02
+    node dummy shp_Door02
+        parent NULL
+    endnode
+    node dummy shp_Door02grnd
+        parent shp_Door02
+    endnode
+    node emitter fire!07
+        parent shp_Door02
+    endnode
+    node dummy shp_Door02head
+        parent shp_Door02
+    endnode
+    node dummy shp_Door02hhit
+        parent shp_Door02
+    endnode
+    node dummy shp_Door02impc
+        parent shp_Door02
+    endnode
+    node trimesh sam
+        parent shp_Door02
+        alphakey
+            0.0 0.0 
+            0.0333333 0.0 
+            0.633333 0.0 
+            0.666667 0.0 
+        endlist
+    endnode
+    node trimesh Box21
+        parent shp_Door02
+        positionkey
+            0.0 1.4 0.0 0.0
+            0.666667 0.5 0.0 0.0
+        endlist
+        orientationkey
+            0.0 0.0 0.0 -1.0 -1.5708
+        endlist
+    endnode
+    node trimesh Object16
+        parent Box21
+    endnode
+    node trimesh Object15
+        parent Box21
+    endnode
+    node trimesh Box65
+        parent shp_Door02
+        positionkey
+            0.0 -1.4 0.0 0.0
+            0.666667 -0.5 0.0 0.0
+        endlist
+        orientationkey
+            0.0 0.0 0.0 -1.0 -1.5708
+        endlist
+    endnode
+    node trimesh Object17
+        parent Box65
+    endnode
+    node trimesh Object18
+        parent Box65
+    endnode
+    node dummy shp_Door02_DWK
+        parent shp_Door02
+    endnode
+    node trimesh 02_DWK_wg_closed
+        parent shp_Door02_DWK
+    endnode
+    node trimesh 02_DWK_wg_open2
+        parent shp_Door02_DWK
+    endnode
+    node trimesh 02_DWK_wg_open1
+        parent shp_Door02_DWK
+    endnode
+doneanim closing2 shp_Door02
+#NWmax ANIM ASCII
+newanim closed shp_Door02
+  length 0.0333333
+  transtime 0.25
+  animroot shp_Door02
+    node dummy shp_Door02
+        parent NULL
+    endnode
+    node dummy shp_Door02grnd
+        parent shp_Door02
+    endnode
+    node emitter fire!07
+        parent shp_Door02
+    endnode
+    node dummy shp_Door02head
+        parent shp_Door02
+    endnode
+    node dummy shp_Door02hhit
+        parent shp_Door02
+    endnode
+    node dummy shp_Door02impc
+        parent shp_Door02
+    endnode
+    node trimesh sam
+        parent shp_Door02
+        alphakey
+            0.0 0.0 
+        endlist
+    endnode
+    node trimesh Box21
+        parent shp_Door02
+        positionkey
+            0.0 0.5 0.0 0.0
+            0.0333333 0.5 0.0 0.0
+        endlist
+    endnode
+    node trimesh Object16
+        parent Box21
+    endnode
+    node trimesh Object15
+        parent Box21
+    endnode
+    node trimesh Box65
+        parent shp_Door02
+        positionkey
+            0.0 -0.5 0.0 0.0
+            0.0333333 -0.5 0.0 0.0
+        endlist
+    endnode
+    node trimesh Object17
+        parent Box65
+    endnode
+    node trimesh Object18
+        parent Box65
+    endnode
+    node dummy shp_Door02_DWK
+        parent shp_Door02
+    endnode
+    node trimesh 02_DWK_wg_closed
+        parent shp_Door02_DWK
+    endnode
+    node trimesh 02_DWK_wg_open2
+        parent shp_Door02_DWK
+    endnode
+    node trimesh 02_DWK_wg_open1
+        parent shp_Door02_DWK
+    endnode
+doneanim closed shp_Door02
+#NWmax ANIM ASCII
+newanim opened2 shp_Door02
+  length 0.0333333
+  transtime 0.25
+  animroot shp_Door02
+    node dummy shp_Door02
+        parent NULL
+    endnode
+    node dummy shp_Door02grnd
+        parent shp_Door02
+    endnode
+    node emitter fire!07
+        parent shp_Door02
+    endnode
+    node dummy shp_Door02head
+        parent shp_Door02
+    endnode
+    node dummy shp_Door02hhit
+        parent shp_Door02
+    endnode
+    node dummy shp_Door02impc
+        parent shp_Door02
+    endnode
+    node trimesh sam
+        parent shp_Door02
+        alphakey
+            0.0 0.0 
+            0.0333333 0.0 
+        endlist
+    endnode
+    node trimesh Box21
+        parent shp_Door02
+        positionkey
+            0.0 1.4 0.0 0.0
+        endlist
+    endnode
+    node trimesh Object16
+        parent Box21
+    endnode
+    node trimesh Object15
+        parent Box21
+    endnode
+    node trimesh Box65
+        parent shp_Door02
+        positionkey
+            0.0 -1.4 0.0 0.0
+            0.0333333 -1.4 0.0 0.0
+        endlist
+        orientationkey
+            0.0 0.0 0.0 -1.0 -1.5708
+            0.0333333 0.0 0.0 -1.0 -1.5708
+        endlist
+    endnode
+    node trimesh Object17
+        parent Box65
+    endnode
+    node trimesh Object18
+        parent Box65
+    endnode
+    node dummy shp_Door02_DWK
+        parent shp_Door02
+    endnode
+    node trimesh 02_DWK_wg_closed
+        parent shp_Door02_DWK
+    endnode
+    node trimesh 02_DWK_wg_open2
+        parent shp_Door02_DWK
+    endnode
+    node trimesh 02_DWK_wg_open1
+        parent shp_Door02_DWK
+    endnode
+doneanim opened2 shp_Door02
+#NWmax ANIM ASCII
+newanim opened1 shp_Door02
+  length 0.0333333
+  transtime 0.25
+  animroot shp_Door02
+    node dummy shp_Door02
+        parent NULL
+    endnode
+    node dummy shp_Door02grnd
+        parent shp_Door02
+    endnode
+    node emitter fire!07
+        parent shp_Door02
+    endnode
+    node dummy shp_Door02head
+        parent shp_Door02
+    endnode
+    node dummy shp_Door02hhit
+        parent shp_Door02
+    endnode
+    node dummy shp_Door02impc
+        parent shp_Door02
+    endnode
+    node trimesh sam
+        parent shp_Door02
+        alphakey
+            0.0 0.0 
+            0.0333333 0.0 
+        endlist
+    endnode
+    node trimesh Box21
+        parent shp_Door02
+        positionkey
+            0.0 1.4 0.0 0.0
+        endlist
+    endnode
+    node trimesh Object16
+        parent Box21
+    endnode
+    node trimesh Object15
+        parent Box21
+    endnode
+    node trimesh Box65
+        parent shp_Door02
+        positionkey
+            0.0 -1.4 0.0 0.0
+            0.0333333 -1.4 0.0 0.0
+        endlist
+        orientationkey
+            0.0 0.0 0.0 -1.0 -1.5708
+            0.0333333 0.0 0.0 -1.0 -1.5708
+        endlist
+    endnode
+    node trimesh Object17
+        parent Box65
+    endnode
+    node trimesh Object18
+        parent Box65
+    endnode
+    node dummy shp_Door02_DWK
+        parent shp_Door02
+    endnode
+    node trimesh 02_DWK_wg_closed
+        parent shp_Door02_DWK
+    endnode
+    node trimesh 02_DWK_wg_open2
+        parent shp_Door02_DWK
+    endnode
+    node trimesh 02_DWK_wg_open1
+        parent shp_Door02_DWK
+    endnode
+doneanim opened1 shp_Door02
+#NWmax ANIM ASCII
+newanim trans shp_Door02
+  length 0.0333333
+  transtime 0.25
+  animroot shp_Door02
+    node dummy shp_Door02
+        parent NULL
+    endnode
+    node dummy shp_Door02grnd
+        parent shp_Door02
+    endnode
+    node emitter fire!07
+        parent shp_Door02
+    endnode
+    node dummy shp_Door02head
+        parent shp_Door02
+    endnode
+    node dummy shp_Door02hhit
+        parent shp_Door02
+    endnode
+    node dummy shp_Door02impc
+        parent shp_Door02
+    endnode
+    node trimesh sam
+        parent shp_Door02
+        alphakey
+            0.0 0.25 
+            0.0333333 0.25 
+        endlist
+    endnode
+    node trimesh Box21
+        parent shp_Door02
+    endnode
+    node trimesh Object16
+        parent Box21
+    endnode
+    node trimesh Object15
+        parent Box21
+    endnode
+    node trimesh Box65
+        parent shp_Door02
+    endnode
+    node trimesh Object17
+        parent Box65
+    endnode
+    node trimesh Object18
+        parent Box65
+    endnode
+    node dummy shp_Door02_DWK
+        parent shp_Door02
+    endnode
+    node trimesh 02_DWK_wg_closed
+        parent shp_Door02_DWK
+    endnode
+    node trimesh 02_DWK_wg_open2
+        parent shp_Door02_DWK
+    endnode
+    node trimesh 02_DWK_wg_open1
+        parent shp_Door02_DWK
+    endnode
+doneanim trans shp_Door02
+#NWmax ANIM ASCII
+newanim dead shp_Door02
+  length 0.0333333
+  transtime 0.0
+  animroot shp_Door02
+    node dummy shp_Door02
+        parent NULL
+    endnode
+    node dummy shp_Door02grnd
+        parent shp_Door02
+    endnode
+    node emitter fire!07
+        parent shp_Door02
+    endnode
+    node dummy shp_Door02head
+        parent shp_Door02
+    endnode
+    node dummy shp_Door02hhit
+        parent shp_Door02
+    endnode
+    node dummy shp_Door02impc
+        parent shp_Door02
+    endnode
+    node trimesh sam
+        parent shp_Door02
+    endnode
+    node trimesh Box21
+        parent shp_Door02
+    endnode
+    node trimesh Object16
+        parent Box21
+    endnode
+    node trimesh Object15
+        parent Box21
+    endnode
+    node trimesh Box65
+        parent shp_Door02
+    endnode
+    node trimesh Object17
+        parent Box65
+    endnode
+    node trimesh Object18
+        parent Box65
+    endnode
+    node dummy shp_Door02_DWK
+        parent shp_Door02
+    endnode
+    node trimesh 02_DWK_wg_closed
+        parent shp_Door02_DWK
+    endnode
+    node trimesh 02_DWK_wg_open2
+        parent shp_Door02_DWK
+    endnode
+    node trimesh 02_DWK_wg_open1
+        parent shp_Door02_DWK
+    endnode
+doneanim dead shp_Door02
+donemodel shp_Door02

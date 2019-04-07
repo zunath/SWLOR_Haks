@@ -1,0 +1,406 @@
+#MAXMODEL ASCII
+# model: vdt_eclair
+filedependancy vdt_eclair.max
+newmodel vdt_eclair
+setsupermodel vdt_eclair NULL
+classification EFFECT
+setanimationscale 1
+#MAXGEOM  ASCII
+beginmodelgeom vdt_eclair
+node dummy vdt_eclair
+  parent NULL
+endnode
+node emitter eclair01
+  parent vdt_eclair
+  p2p 1
+  p2p_sel 1
+  affectedByWind 0
+  m_isTinted 0
+  bounce 0
+  random 0
+  inherit 0
+  inheritvel 0
+  inherit_local 0
+  inherit_part 0
+  splat 0
+  renderorder 0
+  spawntype 0
+  update Lightning
+  render Linked
+  blend Lighten
+  texture fxpa_lbolt2l
+  xgrid 1
+  ygrid 1
+  loop 0
+  deadspace 0
+  twosidedtex 1
+  blastRadius 0
+  blastLength 0
+  position 0 0.462276 -0.40791
+  orientation 1 0 0 -3.1416
+  xsize 1.5
+  ysize 1.5
+  threshold 0
+  combinetime 0
+  colorStart 0.494118 0.156863 0.909804
+  colorEnd 0.501961 0.203922 0.870588
+  alphaStart 1
+  alphaEnd 1
+  sizeStart 0.25
+  sizeEnd 0.15
+  sizeStart_y 0.25
+  sizeEnd_y 0.15
+  birthrate 9
+  lifeExp 1
+  mass 0
+  spread 0
+  particleRot 0
+  velocity 0
+  randvel 0
+  bounce_co 0
+  blurlength 1
+  fps 0
+  frameStart 0
+  frameEnd 0
+  lightningDelay 0.1
+  lightningRadius 0.2
+  lightningScale 1
+  p2p_bezier2 0
+  p2p_bezier3 0
+  grav 0
+  drag 0
+endnode
+node reference AuroraRef01
+  parent eclair01
+  refModel fx_ref
+  reattachable 1
+  position -5.60446e-07 -1.98 0
+  orientation 0 0 0 0
+endnode
+node emitter eclair02
+  parent vdt_eclair
+  p2p 1
+  p2p_sel 1
+  affectedByWind 0
+  m_isTinted 0
+  bounce 0
+  random 0
+  inherit 0
+  inheritvel 0
+  inherit_local 0
+  inherit_part 0
+  splat 0
+  renderorder 2
+  spawntype 0
+  update Lightning
+  render Linked
+  blend Lighten
+  texture fxpa_lbolt2l
+  xgrid 1
+  ygrid 1
+  loop 0
+  deadspace 0
+  twosidedtex 0
+  blastRadius 0
+  blastLength 0
+  position -0.044 0.682276 -0.40791
+  orientation 1 0 0 -3.1416
+  xsize 1.5
+  ysize 1.5
+  threshold 0
+  combinetime 0
+  colorStart 0.427451 0.203922 1
+  colorEnd 0.47451 0.215686 1
+  alphaStart 1
+  alphaEnd 1
+  sizeStart 0.15
+  sizeEnd 0.05
+  sizeStart_y 0.15
+  sizeEnd_y 0.05
+  birthrate 9
+  lifeExp 1
+  mass 0
+  spread 0
+  particleRot 0
+  velocity 0
+  randvel 0
+  bounce_co 0
+  blurlength 1
+  fps 0
+  frameStart 0
+  frameEnd 0
+  lightningDelay 0.1
+  lightningRadius 0.2
+  lightningScale 1
+  p2p_bezier2 0
+  p2p_bezier3 0
+  grav 0
+  drag 0
+endnode
+node reference AuroraRef02
+  parent eclair02
+  refModel fx_ref
+  reattachable 1
+  position 0 -2.2 0.88
+  orientation 0 0 0 0
+endnode
+node trimesh eclair02_XYdimension
+  parent eclair02
+  ambient 0.2 0.2 0.2
+  diffuse 0.8 0.8 0.8
+  specular 0 0 0
+  shininess 1
+  bitmap NULL
+  verts 4
+      -0.0256584   -0.0243940    0.0030709
+       0.0183416   -0.0243940    0.0030709
+       0.0183416    0.0196060    0.0030709
+      -0.0256584    0.0196060    0.0030709
+  faces 2
+    0 1 2  1  0 0 0   1
+    3 0 2  1  0 0 0   1
+  position 0 -1.34158e-07 0
+  orientation 1 0 0 -1.5708
+  scale 1
+  alpha 1
+endnode
+node emitter eclair03
+  parent vdt_eclair
+  p2p 1
+  p2p_sel 1
+  affectedByWind 0
+  m_isTinted 0
+  bounce 0
+  random 0
+  inherit 0
+  inheritvel 0
+  inherit_local 1
+  inherit_part 0
+  splat 0
+  renderorder 1
+  spawntype 0
+  update Lightning
+  render Linked
+  blend Lighten
+  texture fxpa_lbolt2l
+  xgrid 1
+  ygrid 1
+  loop 0
+  deadspace 0
+  twosidedtex 0
+  blastRadius 0
+  blastLength 0
+  position 0.044 0.682276 -0.40791
+  orientation 1 0 0 -3.1416
+  xsize 1.5
+  ysize 1.5
+  threshold 0
+  combinetime 0
+  colorStart 0.494118 0.156863 0.909804
+  colorEnd 0.501961 0.203922 0.870588
+  alphaStart 1
+  alphaEnd 1
+  sizeStart 0.15
+  sizeEnd 0.05
+  sizeStart_y 0.15
+  sizeEnd_y 0.05
+  birthrate 9
+  lifeExp 1
+  mass 0
+  spread 0
+  particleRot 0
+  velocity 0
+  randvel 0
+  bounce_co 0
+  blurlength 1
+  fps 0
+  frameStart 0
+  frameEnd 0
+  lightningDelay 0.1
+  lightningRadius 0.2
+  lightningScale 1
+  p2p_bezier2 0
+  p2p_bezier3 0
+  grav 0
+  drag 0
+endnode
+node reference AuroraRef03
+  parent eclair03
+  refModel fx_ref
+  reattachable 1
+  position 0 -2.2 -0.44
+  orientation 0 0 0 0
+endnode
+node trimesh eclair03_XYdimension
+  parent eclair03
+  ambient 0.2 0.2 0.2
+  diffuse 0.8 0.8 0.8
+  specular 0 0 0
+  shininess 1
+  bitmap NULL
+  verts 4
+      -0.0220000   -0.0084859    0.0109597
+       0.0220000   -0.0084859    0.0109597
+       0.0220000    0.0135141    0.0109597
+      -0.0220000    0.0135141    0.0109597
+  faces 2
+    0 1 2  1  0 0 0   1
+    3 0 2  1  0 0 0   1
+  position 0 -1.34158e-07 0
+  orientation 1 0 0 -1.5708
+  scale 1
+  alpha 1
+endnode
+node light AuroraDLight01
+  parent vdt_eclair
+  ambientonly 0
+  shadow 1
+  isdynamic 0
+  affectdynamic 1
+  lightpriority 5
+  fadingLight 0
+  flareradius 0
+  position 0 0.440605 0
+  orientation 0 0 0 0
+  radius 1
+  multiplier 1
+  color 0.494118 0.156863 0.909804
+endnode
+endmodelgeom vdt_eclair
+
+#MAXANIM ASCII
+newanim impact vdt_eclair
+  length 1.66667
+  transtime 0.25
+  animroot vdt_eclair
+  node dummy vdt_eclair
+    parent NULL
+  endnode
+  node emitter eclair01
+    parent vdt_eclair
+  endnode
+  node reference AuroraRef01
+    parent eclair01
+  endnode
+  node emitter eclair02
+    parent vdt_eclair
+  endnode
+  node reference AuroraRef02
+    parent eclair02
+  endnode
+  node trimesh eclair02_XYdimension
+    parent eclair02
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node emitter eclair03
+    parent vdt_eclair
+  endnode
+  node reference AuroraRef03
+    parent eclair03
+  endnode
+  node trimesh eclair03_XYdimension
+    parent eclair03
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node light AuroraDLight01
+    parent vdt_eclair
+  endnode
+doneanim impact vdt_eclair
+
+#MAXANIM ASCII
+newanim duration vdt_eclair
+  length 1.66667
+  transtime 0.25
+  animroot vdt_eclair
+  node dummy vdt_eclair
+    parent NULL
+  endnode
+  node emitter eclair01
+    parent vdt_eclair
+  endnode
+  node reference AuroraRef01
+    parent eclair01
+  endnode
+  node emitter eclair02
+    parent vdt_eclair
+  endnode
+  node reference AuroraRef02
+    parent eclair02
+  endnode
+  node trimesh eclair02_XYdimension
+    parent eclair02
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node emitter eclair03
+    parent vdt_eclair
+  endnode
+  node reference AuroraRef03
+    parent eclair03
+  endnode
+  node trimesh eclair03_XYdimension
+    parent eclair03
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node light AuroraDLight01
+    parent vdt_eclair
+  endnode
+doneanim duration vdt_eclair
+
+#MAXANIM ASCII
+newanim cessation vdt_eclair
+  length 1.66667
+  transtime 0.25
+  animroot vdt_eclair
+  node dummy vdt_eclair
+    parent NULL
+  endnode
+  node emitter eclair01
+    parent vdt_eclair
+  endnode
+  node reference AuroraRef01
+    parent eclair01
+  endnode
+  node emitter eclair02
+    parent vdt_eclair
+  endnode
+  node reference AuroraRef02
+    parent eclair02
+  endnode
+  node trimesh eclair02_XYdimension
+    parent eclair02
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node emitter eclair03
+    parent vdt_eclair
+  endnode
+  node reference AuroraRef03
+    parent eclair03
+  endnode
+  node trimesh eclair03_XYdimension
+    parent eclair03
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node light AuroraDLight01
+    parent vdt_eclair
+  endnode
+doneanim cessation vdt_eclair
+
+donemodel vdt_eclair

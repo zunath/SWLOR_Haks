@@ -1,0 +1,1116 @@
+#MAXMODEL ASCII
+# model: T_Door60 
+filedependancy udp1-doorsonly02.max
+newmodel T_Door60 
+setsupermodel T_Door60 NULL
+classification Door
+#MAXGEOM  ASCII
+beginmodelgeom T_Door60 
+node dummy T_Door60 
+  parent NULL 
+endnode
+node dummy Dummy23 
+  parent T_Door60 
+  position -1.0 0.0 0.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.65098 0.898039 0.898039  
+endnode
+node trimesh manhole_cover01 
+  parent Dummy23 
+  position 1.0 0.0 -0.05
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.878431 0.560784 0.341176  
+  ambient 0.588 0.588 0.588  
+  diffuse 0.588 0.588 0.588  
+  specular 0.0 0.0 0.0  
+  shininess 11.0 
+    bitmap udp1_d_manh
+    verts 26
+     0.0 0.0 0.0
+     0.75 0.0 0.0
+     0.649519 0.375 0.0
+     0.375 0.649519 0.0
+     0.0 0.75 0.0
+     -0.375 0.649519 0.0
+     -0.649519 0.375 0.0
+     -0.75 0.0 0.0
+     -0.649519 -0.375 0.0
+     -0.375 -0.649519 0.0
+     0.0 -0.75 0.0
+     0.375 -0.649519 0.0
+     0.649519 -0.375 0.0
+     0.75 0.0 0.05
+     0.649519 0.375 0.05
+     0.375 0.649519 0.05
+     0.0 0.75 0.05
+     -0.375 0.649519 0.05
+     -0.649519 0.375 0.05
+     -0.75 0.0 0.05
+     -0.649519 -0.375 0.05
+     -0.375 -0.649519 0.05
+     0.0 -0.75 0.05
+     0.375 -0.649519 0.05
+     0.649519 -0.375 0.05
+     0.0 0.0 0.05
+    faces 48
+     0 2 1  1  0 2 1  2
+     0 3 2  1  0 3 2  2
+     0 4 3  1  0 4 3  2
+     0 5 4  1  0 5 4  2
+     0 6 5  1  0 6 5  2
+     0 7 6  1  0 7 6  2
+     0 8 7  1  0 8 7  2
+     0 9 8  1  0 9 8  2
+     0 10 9  1  0 10 9  2
+     0 11 10  1  0 11 10  2
+     0 12 11  1  0 12 11  2
+     0 1 12  1  0 1 12  2
+     1 14 13  8  50 51 52  3
+     1 2 14  8  53 54 55  3
+     2 15 14  8  56 57 27  3
+     2 3 15  8  29 58 59  3
+     3 16 15  8  60 61 30  3
+     3 4 16  8  31 62 63  3
+     4 17 16  8  64 65 32  3
+     4 5 17  8  33 66 67  3
+     5 18 17  8  68 69 34  3
+     5 6 18  8  35 70 71  3
+     6 19 18  8  72 73 36  3
+     6 7 19  8  37 74 75  3
+     7 20 19  8  76 77 38  3
+     7 8 20  8  39 78 79  3
+     8 21 20  8  80 81 40  3
+     8 9 21  8  41 82 83  3
+     9 22 21  8  84 85 42  3
+     9 10 22  8  43 86 87  3
+     10 23 22  8  88 89 44  3
+     10 11 23  8  45 90 91  3
+     11 24 23  8  92 93 46  3
+     11 12 24  8  47 94 95  3
+     12 13 24  8  96 97 48  3
+     12 1 13  8  49 26 28  3
+     25 13 14  1  25 13 14  1
+     25 14 15  1  25 14 15  1
+     25 15 16  1  25 15 16  1
+     25 16 17  1  25 16 17  1
+     25 17 18  1  25 17 18  1
+     25 18 19  1  25 18 19  1
+     25 19 20  1  25 19 20  1
+     25 20 21  1  25 20 21  1
+     25 21 22  1  25 21 22  1
+     25 22 23  1  25 22 23  1
+     25 23 24  1  25 23 24  1
+     25 24 13  1  25 24 13  1
+    tverts 98
+     0.5 0.5 0 
+     0.975305 0.5 0 
+     0.911626 0.742405 0 
+     0.737653 0.919858 0 
+     0.5 0.98481 0 
+     0.262348 0.919858 0 
+     0.0883738 0.742405 0 
+     0.0246949 0.5 0 
+     0.0883737 0.257595 0 
+     0.262347 0.080142 0 
+     0.5 0.0151897 0 
+     0.737653 0.080142 0 
+     0.911626 0.257595 0 
+     0.975305 0.5 0 
+     0.911626 0.742405 0 
+     0.737653 0.919858 0 
+     0.5 0.98481 0 
+     0.262348 0.919858 0 
+     0.0883738 0.742405 0 
+     0.0246949 0.5 0 
+     0.0883737 0.257595 0 
+     0.262347 0.080142 0 
+     0.5 0.0151897 0 
+     0.737653 0.080142 0 
+     0.911626 0.257595 0 
+     0.5 0.5 0 
+     0.5 0.00217432 0 
+     0.6875 0.0271743 0 
+     0.5 0.0271743 0 
+     0.6875 0.00217432 0 
+     0.3125 0.0271743 0 
+     0.3125 0.00217432 0 
+     0.5 0.0271743 0 
+     0.5 0.00217432 0 
+     0.6875 0.0271743 0 
+     0.6875 0.00217432 0 
+     0.3125 0.0271743 0 
+     0.3125 0.00217432 0 
+     0.5 0.0271743 0 
+     0.5 0.00217432 0 
+     0.6875 0.0271743 0 
+     0.6875 0.00217432 0 
+     0.3125 0.0271743 0 
+     0.3125 0.00217432 0 
+     0.5 0.0271743 0 
+     0.5 0.00217432 0 
+     0.6875 0.0271743 0 
+     0.6875 0.00217432 0 
+     0.3125 0.0271743 0 
+     0.3125 0.00217432 0 
+     0.5 0.00217432 0 
+     0.6875 0.0271743 0 
+     0.5 0.0271743 0 
+     0.5 0.00217432 0 
+     0.6875 0.00217432 0 
+     0.6875 0.0271743 0 
+     0.6875 0.00217432 0 
+     0.824759 0.0271743 0 
+     0.824759 0.00217432 0 
+     0.824759 0.0271743 0 
+     0.3125 0.00217432 0 
+     0.5 0.0271743 0 
+     0.5 0.00217432 0 
+     0.5 0.0271743 0 
+     0.5 0.00217432 0 
+     0.6875 0.0271743 0 
+     0.6875 0.00217432 0 
+     0.6875 0.0271743 0 
+     0.6875 0.00217432 0 
+     0.824759 0.0271743 0 
+     0.824759 0.00217432 0 
+     0.824759 0.0271743 0 
+     0.3125 0.00217432 0 
+     0.5 0.0271743 0 
+     0.5 0.00217432 0 
+     0.5 0.0271743 0 
+     0.5 0.00217432 0 
+     0.6875 0.0271743 0 
+     0.6875 0.00217432 0 
+     0.6875 0.0271743 0 
+     0.6875 0.00217432 0 
+     0.824759 0.0271743 0 
+     0.824759 0.00217432 0 
+     0.824759 0.0271743 0 
+     0.3125 0.00217432 0 
+     0.5 0.0271743 0 
+     0.5 0.00217432 0 
+     0.5 0.0271743 0 
+     0.5 0.00217432 0 
+     0.6875 0.0271743 0 
+     0.6875 0.00217432 0 
+     0.6875 0.0271743 0 
+     0.6875 0.00217432 0 
+     0.824759 0.0271743 0 
+     0.824759 0.00217432 0 
+     0.824759 0.0271743 0 
+     0.3125 0.00217432 0 
+     0.5 0.0271743 0 
+endnode
+node dummy T_Door60grnd 
+  parent T_Door60 
+  position 0.0 0.0 0.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.568627 0.109804 0.694118  
+endnode
+node dummy T_Door60impc 
+  parent T_Door60 
+  position 0.0 0.0 1.75
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.721569 0.894118 0.6  
+endnode
+node dummy T_Door60hhit 
+  parent T_Door60 
+  position 0.0 0.0 2.25
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.541176 0.0313726 0.431373  
+endnode
+node dummy T_Door60head 
+  parent T_Door60 
+  position 0.0 0.0 2.5
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.337255 0.337255 0.337255  
+endnode
+node emitter AuraEmitter19 
+  parent T_Door60 
+  position 0.0 0.0 1.5
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.0235294 0.52549 0.0235294  
+    colorStart 0.564706 0.666667 0.564706  
+    colorEnd 0.890196 0.909804 0.886275  
+    alphaStart 1.0 
+    alphaEnd 0.0 
+    sizeStart 4.0 
+    sizeEnd 1.0 
+    sizeStart_y 0.0 
+    sizeEnd_y 0.0 
+    frameStart 0 
+    frameEnd 24 
+    birthrate 10 
+    spawnType 0 
+    lifeExp 2.5 
+    mass 0.09 
+    spread 2.96706 
+    particleRot 0.5 
+    velocity 2.0 
+    randvel 0.5 
+    fps 10 
+    random 0 
+    inherit 1 
+    inherit_local 0 
+    inherit_part 0 
+    inheritvel 0 
+    xSize 100 
+    ySize 99 
+    bounce 0 
+    bounce_co 0.0 
+    loop 0 
+    update Explosion 
+    render Normal 
+    Blend Normal 
+    update_sel 2 
+    render_sel 1 
+    blend_sel 1 
+    deadspace 0.0 
+    opacity 0.5 
+    blurlength 10.0 
+    lightningDelay 0.0 
+    lightningRadius 0.0 
+    lightningScale 0.0 
+    blastRadius 0.2 
+    blastLength 0.0 
+    twosidedtex 1 
+    p2p 0 
+    p2p_sel 1 
+    p2p_type Bezier 
+    p2p_bezier2 0.0 
+    p2p_bezier3 0.0 
+    combinetime 0.0 
+    Drag 0.0 
+    grav 0.0 
+    threshold 0.0 
+    texture fxpa_smoke01 
+    xgrid 4 
+    ygrid 4 
+    affectedByWind false 
+    m_isTinted 1 
+    renderorder 0 
+    Splat 0 
+endnode
+node trimesh sam12 
+  parent T_Door60 
+  position 0.0 0.0 -3.5
+  orientation  -1.0 0.0 0.0  -1.5708
+  wirecolor 0.341176 0.878431 0.560784  
+     danglymesh 0
+     period 1.0
+     tightness 1.0
+     displacement 0.025
+     showdispl true
+     displtype 1
+     Alpha 0.0
+     transparencyhint 0
+     tilefade 0
+     scale 1.0
+     render 1
+     Shadow 0
+     beaming 0
+     inheritcolor 0
+     selfillumcolor 0.0705882 0.0 1.0 
+     rotatetexture 0
+     center 0.0 -112.306 0.386719 
+     gizmo SubAnim:Gizmo
+  ambient 0.588 0.588 0.588  
+  diffuse 0.588 0.588 0.588  
+  specular 0.0 0.0 0.0  
+  shininess 11.0 
+    bitmap NULL
+    verts 37
+     0.0 -0.746119 0.00386719
+     0.0 -0.84712 -0.373073
+     -0.18847 -0.84712 -0.322573
+     -0.32644 -0.84712 -0.184603
+     -0.376941 -0.84712 0.00386722
+     -0.32644 -0.84712 0.192338
+     -0.18847 -0.84712 0.330307
+     0.0 -0.84712 0.380808
+     0.18847 -0.84712 0.330307
+     0.32644 -0.84712 0.192337
+     0.376941 -0.84712 0.00386712
+     0.32644 -0.84712 -0.184603
+     0.18847 -0.84712 -0.322573
+     0.0 -1.12306 -0.649013
+     -0.32644 -1.12306 -0.561544
+     -0.565411 -1.12306 -0.322573
+     -0.65288 -1.12306 0.00386724
+     -0.565411 -1.12306 0.330307
+     -0.32644 -1.12306 0.569278
+     0.0 -1.12306 0.656748
+     0.32644 -1.12306 0.569278
+     0.565411 -1.12306 0.330307
+     0.65288 -1.12306 0.00386707
+     0.565411 -1.12306 -0.322573
+     0.32644 -1.12306 -0.561544
+     0.0 -1.5 -0.750014
+     -0.376941 -1.5 -0.649013
+     -0.65288 -1.5 -0.373073
+     -0.753881 -1.5 0.00386725
+     -0.65288 -1.5 0.380808
+     -0.376941 -1.5 0.656748
+     0.0 -1.5 0.757748
+     0.376941 -1.5 0.656748
+     0.65288 -1.5 0.380808
+     0.753881 -1.5 0.00386706
+     0.65288 -1.5 -0.373074
+     0.376941 -1.5 -0.649013
+    faces 60
+     0 1 2  1  0 0 0  2
+     0 2 3  1  0 0 0  2
+     0 3 4  1  0 0 0  2
+     0 4 5  1  0 0 0  2
+     0 5 6  1  0 0 0  2
+     0 6 7  1  0 0 0  2
+     0 7 8  1  0 0 0  2
+     0 8 9  1  0 0 0  2
+     0 9 10  1  0 0 0  2
+     0 10 11  1  0 0 0  2
+     0 11 12  1  0 0 0  2
+     0 12 1  1  0 0 0  2
+     1 13 14  1  0 0 0  2
+     1 14 2  1  0 0 0  2
+     2 14 15  1  0 0 0  2
+     2 15 3  1  0 0 0  2
+     3 15 16  1  0 0 0  2
+     3 16 4  1  0 0 0  2
+     4 16 17  1  0 0 0  2
+     4 17 5  1  0 0 0  2
+     5 17 18  1  0 0 0  2
+     5 18 6  1  0 0 0  2
+     6 18 19  1  0 0 0  2
+     6 19 7  1  0 0 0  2
+     7 19 20  1  0 0 0  2
+     7 20 8  1  0 0 0  2
+     8 20 21  1  0 0 0  2
+     8 21 9  1  0 0 0  2
+     9 21 22  1  0 0 0  2
+     9 22 10  1  0 0 0  2
+     10 22 23  1  0 0 0  2
+     10 23 11  1  0 0 0  2
+     11 23 24  1  0 0 0  2
+     11 24 12  1  0 0 0  2
+     12 24 13  1  0 0 0  2
+     12 13 1  1  0 0 0  2
+     13 25 26  1  0 0 0  2
+     13 26 14  1  0 0 0  2
+     14 26 27  1  0 0 0  2
+     14 27 15  1  0 0 0  2
+     15 27 28  1  0 0 0  2
+     15 28 16  1  0 0 0  2
+     16 28 29  1  0 0 0  2
+     16 29 17  1  0 0 0  2
+     17 29 30  1  0 0 0  2
+     17 30 18  1  0 0 0  2
+     18 30 31  1  0 0 0  2
+     18 31 19  1  0 0 0  2
+     19 31 32  1  0 0 0  2
+     19 32 20  1  0 0 0  2
+     20 32 33  1  0 0 0  2
+     20 33 21  1  0 0 0  2
+     21 33 34  1  0 0 0  2
+     21 34 22  1  0 0 0  2
+     22 34 35  1  0 0 0  2
+     22 35 23  1  0 0 0  2
+     23 35 36  1  0 0 0  2
+     23 36 24  1  0 0 0  2
+     24 36 25  1  0 0 0  2
+     24 25 13  1  0 0 0  2
+endnode
+endmodelgeom T_Door60 
+
+#MAXANIM ASCII
+newanim opening1 T_Door60 
+ length 0.666667
+ transtime 0.25
+animroot AuraBase01
+node dummy T_Door60 
+  parent NULL 
+endnode
+node dummy Dummy23 
+  parent T_Door60 
+endnode
+node dummy manhole_cover01 
+  parent Dummy23 
+    positionkey 
+      0.0  1.0 0.0 -0.05
+      0.166667  0.813984 0.0705078 -0.0420338
+      0.666667  -0.190312 0.451211 0.000983872
+    endlist 
+    orientationkey 
+      0.0   0.0 0.0 0.0  0.0
+      0.166667   0.0502147 0.817345 0.573956  0.213268
+      0.666667   0.0 0.0 1.0  0.785398
+    endlist 
+endnode
+node dummy T_Door60grnd 
+  parent T_Door60 
+endnode
+node dummy T_Door60impc 
+  parent T_Door60 
+endnode
+node dummy T_Door60hhit 
+  parent T_Door60 
+endnode
+node dummy T_Door60head 
+  parent T_Door60 
+endnode
+node emitter AuraEmitter19 
+  parent T_Door60 
+endnode
+node trimesh sam12 
+  parent T_Door60 
+    positionkey 
+      0.0  0.0 0.0 -3.5
+    endlist 
+    orientationkey 
+      0.0   1.0 0.0 0.0  1.5708
+    endlist 
+    Alphakey
+      0.0   0.0
+    endlist
+    centerkey
+    endlist
+    gizmokey
+    endlist
+endnode
+node dummy T_Door60_DWK 
+  parent T_Door60 
+endnode
+node dummy 60_DWK_dp_open2_01 
+  parent T_Door60_DWK 
+endnode
+node dummy 60_DWK_dp_open1_01 
+  parent T_Door60_DWK 
+endnode
+node dummy 60_DWK_dp_closed_01 
+  parent T_Door60_DWK 
+endnode
+node dummy 60_DWK_dp_closed_02 
+  parent T_Door60_DWK 
+endnode
+doneanim opening1 T_Door60 
+
+#MAXANIM ASCII
+newanim opened1 T_Door60 
+ length 0.0333333
+ transtime 0.25
+animroot AuraBase01
+node dummy T_Door60 
+  parent NULL 
+endnode
+node dummy Dummy23 
+  parent T_Door60 
+endnode
+node dummy manhole_cover01 
+  parent Dummy23 
+    positionkey 
+      0.0  -0.190312 0.451211 0.000983872
+      0.0333333  -0.190312 0.451211 0.000983872
+    endlist 
+    orientationkey 
+      0.0   0.0 0.0 1.0  0.785398
+      0.0333333   0.0 0.0 1.0  0.785398
+    endlist 
+endnode
+node dummy T_Door60grnd 
+  parent T_Door60 
+endnode
+node dummy T_Door60impc 
+  parent T_Door60 
+endnode
+node dummy T_Door60hhit 
+  parent T_Door60 
+endnode
+node dummy T_Door60head 
+  parent T_Door60 
+endnode
+node emitter AuraEmitter19 
+  parent T_Door60 
+endnode
+node trimesh sam12 
+  parent T_Door60 
+    positionkey 
+    endlist 
+    orientationkey 
+    endlist 
+    Alphakey
+    endlist
+    centerkey
+    endlist
+    gizmokey
+    endlist
+endnode
+node dummy T_Door60_DWK 
+  parent T_Door60 
+endnode
+node dummy 60_DWK_dp_open2_01 
+  parent T_Door60_DWK 
+endnode
+node dummy 60_DWK_dp_open1_01 
+  parent T_Door60_DWK 
+endnode
+node dummy 60_DWK_dp_closed_01 
+  parent T_Door60_DWK 
+endnode
+node dummy 60_DWK_dp_closed_02 
+  parent T_Door60_DWK 
+endnode
+doneanim opened1 T_Door60 
+
+#MAXANIM ASCII
+newanim closing1 T_Door60 
+ length 0.666667
+ transtime 0.25
+animroot AuraBase01
+node dummy T_Door60 
+  parent NULL 
+endnode
+node dummy Dummy23 
+  parent T_Door60 
+endnode
+node dummy manhole_cover01 
+  parent Dummy23 
+    positionkey 
+      0.0  -0.190312 0.451211 0.000983872
+      0.566667  0.927656 0.0274219 0.0
+      0.666667  1.0 0.0 -0.05
+    endlist 
+    orientationkey 
+      0.0   0.0 0.0 1.0  0.785398
+      0.566667   0.0 0.0 1.0  0.0477129
+      0.666667   0.0 0.0 0.0  0.0
+    endlist 
+endnode
+node dummy T_Door60grnd 
+  parent T_Door60 
+endnode
+node dummy T_Door60impc 
+  parent T_Door60 
+endnode
+node dummy T_Door60hhit 
+  parent T_Door60 
+endnode
+node dummy T_Door60head 
+  parent T_Door60 
+endnode
+node emitter AuraEmitter19 
+  parent T_Door60 
+endnode
+node trimesh sam12 
+  parent T_Door60 
+    positionkey 
+    endlist 
+    orientationkey 
+    endlist 
+    Alphakey
+    endlist
+    centerkey
+    endlist
+    gizmokey
+    endlist
+endnode
+node dummy T_Door60_DWK 
+  parent T_Door60 
+endnode
+node dummy 60_DWK_dp_open2_01 
+  parent T_Door60_DWK 
+endnode
+node dummy 60_DWK_dp_open1_01 
+  parent T_Door60_DWK 
+endnode
+node dummy 60_DWK_dp_closed_01 
+  parent T_Door60_DWK 
+endnode
+node dummy 60_DWK_dp_closed_02 
+  parent T_Door60_DWK 
+endnode
+doneanim closing1 T_Door60 
+
+#MAXANIM ASCII
+newanim closed T_Door60 
+ length 0.0333333
+ transtime 0.25
+animroot AuraBase01
+node dummy T_Door60 
+  parent NULL 
+endnode
+node dummy Dummy23 
+  parent T_Door60 
+endnode
+node dummy manhole_cover01 
+  parent Dummy23 
+    positionkey 
+      0.0  1.0 0.0 -0.05
+      0.0333333  1.0 0.0 -0.05
+    endlist 
+    orientationkey 
+      0.0   0.0 0.0 0.0  0.0
+      0.0333333   0.0 0.0 0.0  0.0
+    endlist 
+endnode
+node dummy T_Door60grnd 
+  parent T_Door60 
+endnode
+node dummy T_Door60impc 
+  parent T_Door60 
+endnode
+node dummy T_Door60hhit 
+  parent T_Door60 
+endnode
+node dummy T_Door60head 
+  parent T_Door60 
+endnode
+node emitter AuraEmitter19 
+  parent T_Door60 
+endnode
+node trimesh sam12 
+  parent T_Door60 
+    positionkey 
+    endlist 
+    orientationkey 
+    endlist 
+    Alphakey
+    endlist
+    centerkey
+    endlist
+    gizmokey
+    endlist
+endnode
+node dummy T_Door60_DWK 
+  parent T_Door60 
+endnode
+node dummy 60_DWK_dp_open2_01 
+  parent T_Door60_DWK 
+endnode
+node dummy 60_DWK_dp_open1_01 
+  parent T_Door60_DWK 
+endnode
+node dummy 60_DWK_dp_closed_01 
+  parent T_Door60_DWK 
+endnode
+node dummy 60_DWK_dp_closed_02 
+  parent T_Door60_DWK 
+endnode
+doneanim closed T_Door60 
+
+#MAXANIM ASCII
+newanim opening2 T_Door60 
+ length 0.666667
+ transtime 0.25
+animroot AuraBase01
+node dummy T_Door60 
+  parent NULL 
+endnode
+node dummy Dummy23 
+  parent T_Door60 
+endnode
+node dummy manhole_cover01 
+  parent Dummy23 
+    positionkey 
+      0.0  1.0 0.0 -0.05
+      0.133333  0.934453 -0.104453 -0.0448
+      0.333333  0.681953 -0.506797 0.017932
+      0.666667  0.369844 -1.00418 0.0
+    endlist 
+    orientationkey 
+      0.0   0.0 0.0 0.0  0.0
+      0.133333   -0.847842 0.0462143 -0.528232  0.205652
+      0.333333   0.0509549 -0.0137875 -0.998606  0.529211
+      0.666667   0.0 0.0 -1.0  1.0472
+    endlist 
+endnode
+node dummy T_Door60grnd 
+  parent T_Door60 
+endnode
+node dummy T_Door60impc 
+  parent T_Door60 
+endnode
+node dummy T_Door60hhit 
+  parent T_Door60 
+endnode
+node dummy T_Door60head 
+  parent T_Door60 
+endnode
+node emitter AuraEmitter19 
+  parent T_Door60 
+endnode
+node trimesh sam12 
+  parent T_Door60 
+    positionkey 
+    endlist 
+    orientationkey 
+    endlist 
+    Alphakey
+    endlist
+    centerkey
+    endlist
+    gizmokey
+    endlist
+endnode
+node dummy T_Door60_DWK 
+  parent T_Door60 
+endnode
+node dummy 60_DWK_dp_open2_01 
+  parent T_Door60_DWK 
+endnode
+node dummy 60_DWK_dp_open1_01 
+  parent T_Door60_DWK 
+endnode
+node dummy 60_DWK_dp_closed_01 
+  parent T_Door60_DWK 
+endnode
+node dummy 60_DWK_dp_closed_02 
+  parent T_Door60_DWK 
+endnode
+doneanim opening2 T_Door60 
+
+#MAXANIM ASCII
+newanim opened2 T_Door60 
+ length 0.0333333
+ transtime 0.25
+animroot AuraBase01
+node dummy T_Door60 
+  parent NULL 
+endnode
+node dummy Dummy23 
+  parent T_Door60 
+endnode
+node dummy manhole_cover01 
+  parent Dummy23 
+    positionkey 
+      0.0  0.369844 -1.00418 0.0
+      0.0333333  0.369844 -1.00418 0.0
+    endlist 
+    orientationkey 
+      0.0   0.0 0.0 -1.0  1.0472
+      0.0333333   -1.23761e-007 0.0 -1.0  1.0472
+    endlist 
+endnode
+node dummy T_Door60grnd 
+  parent T_Door60 
+endnode
+node dummy T_Door60impc 
+  parent T_Door60 
+endnode
+node dummy T_Door60hhit 
+  parent T_Door60 
+endnode
+node dummy T_Door60head 
+  parent T_Door60 
+endnode
+node emitter AuraEmitter19 
+  parent T_Door60 
+endnode
+node trimesh sam12 
+  parent T_Door60 
+    positionkey 
+    endlist 
+    orientationkey 
+    endlist 
+    Alphakey
+    endlist
+    centerkey
+    endlist
+    gizmokey
+    endlist
+endnode
+node dummy T_Door60_DWK 
+  parent T_Door60 
+endnode
+node dummy 60_DWK_dp_open2_01 
+  parent T_Door60_DWK 
+endnode
+node dummy 60_DWK_dp_open1_01 
+  parent T_Door60_DWK 
+endnode
+node dummy 60_DWK_dp_closed_01 
+  parent T_Door60_DWK 
+endnode
+node dummy 60_DWK_dp_closed_02 
+  parent T_Door60_DWK 
+endnode
+doneanim opened2 T_Door60 
+
+#MAXANIM ASCII
+newanim closing2 T_Door60 
+ length 0.7
+ transtime 0.25
+animroot AuraBase01
+node dummy T_Door60 
+  parent NULL 
+endnode
+node dummy Dummy23 
+  parent T_Door60 
+endnode
+node dummy manhole_cover01 
+  parent Dummy23 
+    positionkey 
+      0.0  0.369844 -1.00418 0.0
+      0.0333333  0.369844 -1.00418 0.0
+      0.566667  0.934453 -0.104453 0.0
+      0.7  1.0 0.0 -0.05
+    endlist 
+    orientationkey 
+      0.0   -1.23761e-007 0.0 -1.0  1.0472
+      0.0333333   -2.55365e-007 -1.48034e-007 -1.0  1.0472
+      0.566667   0.0 0.0 -1.0  0.108909
+      0.7   0.0 0.0 0.0  0.0
+    endlist 
+endnode
+node dummy T_Door60grnd 
+  parent T_Door60 
+endnode
+node dummy T_Door60impc 
+  parent T_Door60 
+endnode
+node dummy T_Door60hhit 
+  parent T_Door60 
+endnode
+node dummy T_Door60head 
+  parent T_Door60 
+endnode
+node emitter AuraEmitter19 
+  parent T_Door60 
+endnode
+node trimesh sam12 
+  parent T_Door60 
+    positionkey 
+    endlist 
+    orientationkey 
+    endlist 
+    Alphakey
+    endlist
+    centerkey
+    endlist
+    gizmokey
+    endlist
+endnode
+node dummy T_Door60_DWK 
+  parent T_Door60 
+endnode
+node dummy 60_DWK_dp_open2_01 
+  parent T_Door60_DWK 
+endnode
+node dummy 60_DWK_dp_open1_01 
+  parent T_Door60_DWK 
+endnode
+node dummy 60_DWK_dp_closed_01 
+  parent T_Door60_DWK 
+endnode
+node dummy 60_DWK_dp_closed_02 
+  parent T_Door60_DWK 
+endnode
+doneanim closing2 T_Door60 
+
+#MAXANIM ASCII
+newanim die T_Door60 
+ length 0.2
+ transtime 0.25
+animroot AuraBase01
+node dummy T_Door60 
+  parent NULL 
+endnode
+node dummy Dummy23 
+  parent T_Door60 
+endnode
+node dummy manhole_cover01 
+  parent Dummy23 
+    positionkey 
+      0.0  1.0 0.0 -0.05
+      0.2  1.0 0.0 -3.39144
+    endlist 
+    orientationkey 
+      0.0   0.0 0.0 0.0  0.0
+      0.2   0.0 0.0 0.0  0.0
+    endlist 
+endnode
+node dummy T_Door60grnd 
+  parent T_Door60 
+endnode
+node dummy T_Door60impc 
+  parent T_Door60 
+endnode
+node dummy T_Door60hhit 
+  parent T_Door60 
+endnode
+node dummy T_Door60head 
+  parent T_Door60 
+endnode
+node emitter AuraEmitter19 
+  parent T_Door60 
+endnode
+event 0.0 detonate
+node trimesh sam12 
+  parent T_Door60 
+    positionkey 
+    endlist 
+    orientationkey 
+    endlist 
+    Alphakey
+    endlist
+    centerkey
+    endlist
+    gizmokey
+    endlist
+endnode
+node dummy T_Door60_DWK 
+  parent T_Door60 
+endnode
+node dummy 60_DWK_dp_open2_01 
+  parent T_Door60_DWK 
+endnode
+node dummy 60_DWK_dp_open1_01 
+  parent T_Door60_DWK 
+endnode
+node dummy 60_DWK_dp_closed_01 
+  parent T_Door60_DWK 
+endnode
+node dummy 60_DWK_dp_closed_02 
+  parent T_Door60_DWK 
+endnode
+doneanim die T_Door60 
+
+#MAXANIM ASCII
+newanim dead T_Door60 
+ length 0.0333333
+ transtime 0.25
+animroot AuraBase01
+node dummy T_Door60 
+  parent NULL 
+endnode
+node dummy Dummy23 
+  parent T_Door60 
+endnode
+node dummy manhole_cover01 
+  parent Dummy23 
+    positionkey 
+      0.0  1.0 0.0 -3.39144
+      0.0333333  1.0 0.0 -3.39144
+    endlist 
+    orientationkey 
+      0.0   0.0 0.0 0.0  0.0
+      0.0333333   0.0 0.0 0.0  0.0
+    endlist 
+endnode
+node dummy T_Door60grnd 
+  parent T_Door60 
+endnode
+node dummy T_Door60impc 
+  parent T_Door60 
+endnode
+node dummy T_Door60hhit 
+  parent T_Door60 
+endnode
+node dummy T_Door60head 
+  parent T_Door60 
+endnode
+node emitter AuraEmitter19 
+  parent T_Door60 
+endnode
+node trimesh sam12 
+  parent T_Door60 
+    positionkey 
+      0.0333333  0.0 0.0 -3.5
+    endlist 
+    orientationkey 
+      0.0333333   1.0 0.0 0.0  1.5708
+    endlist 
+    Alphakey
+      0.0333333   0.0
+    endlist
+    centerkey
+    endlist
+    gizmokey
+    endlist
+endnode
+node dummy T_Door60_DWK 
+  parent T_Door60 
+endnode
+node dummy 60_DWK_dp_open2_01 
+  parent T_Door60_DWK 
+endnode
+node dummy 60_DWK_dp_open1_01 
+  parent T_Door60_DWK 
+endnode
+node dummy 60_DWK_dp_closed_01 
+  parent T_Door60_DWK 
+endnode
+node dummy 60_DWK_dp_closed_02 
+  parent T_Door60_DWK 
+endnode
+doneanim dead T_Door60 
+
+#MAXANIM ASCII
+newanim trans T_Door60 
+ length 0.0333333
+ transtime 0.25
+animroot AuraBase01
+node dummy T_Door60 
+  parent NULL 
+endnode
+node dummy Dummy23 
+  parent T_Door60 
+endnode
+node dummy manhole_cover01 
+  parent Dummy23 
+    positionkey 
+    endlist 
+    orientationkey 
+    endlist 
+endnode
+node dummy T_Door60grnd 
+  parent T_Door60 
+endnode
+node dummy T_Door60impc 
+  parent T_Door60 
+endnode
+node dummy T_Door60hhit 
+  parent T_Door60 
+endnode
+node dummy T_Door60head 
+  parent T_Door60 
+endnode
+node emitter AuraEmitter19 
+  parent T_Door60 
+endnode
+node trimesh sam12 
+  parent T_Door60 
+    positionkey 
+      0.0  0.0 0.0 1.5
+      0.0333333  0.0 0.0 1.5
+    endlist 
+    orientationkey 
+      0.0   1.0 0.0 0.0  1.5708
+      0.0333333   1.0 0.0 0.0  1.5708
+    endlist 
+    Alphakey
+      0.0   0.25
+      0.0333333   0.25
+    endlist
+    centerkey
+    endlist
+    gizmokey
+    endlist
+endnode
+node dummy T_Door60_DWK 
+  parent T_Door60 
+endnode
+node dummy 60_DWK_dp_open2_01 
+  parent T_Door60_DWK 
+endnode
+node dummy 60_DWK_dp_open1_01 
+  parent T_Door60_DWK 
+endnode
+node dummy 60_DWK_dp_closed_01 
+  parent T_Door60_DWK 
+endnode
+node dummy 60_DWK_dp_closed_02 
+  parent T_Door60_DWK 
+endnode
+doneanim trans T_Door60 
+
+donemodel T_Door60 
+

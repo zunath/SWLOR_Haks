@@ -1,0 +1,91 @@
+# Exported from NWgMax Plus v6.11.28 at 2017-01-12 14:22:05
+# mdl file
+#
+#NWgMax Plus MODEL ASCII
+# model: vos_storewin_7l
+filedependancy Unknown
+newmodel vos_storewin_7l
+setsupermodel vos_storewin_7l NULL
+classification Character
+setanimationscale 1.0
+#NWgMax Plus GEOM  ASCII
+beginmodelgeom vos_storewin_7l
+node dummy vos_storewin_7l
+  parent NULL
+endnode
+node trimesh glass_window
+  parent vos_storewin_7l
+  position 0.0 0.0 2.15
+  orientation -1.0 0.0 0.0 -1.5708
+  wirecolor 0.87451 0.337255 0.556863 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 0
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 0.27
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 12
+  center 0.0 0.0 0.0 
+  bitmap dgt04_chrome
+  verts 4
+    -3.4 -1.1 0.0
+    3.4 -1.1 0.0
+    -3.4 1.1 0.0
+    3.4 1.1 0.0
+  faces 2
+    2 0 3  1  6 4 7  1
+    1 3 0  1  5 7 4  1
+  tverts 8
+    0.0 0.0 0
+    1.0 0.0 0
+    0.0 0.0 0
+    1.0 0.0 0
+    0.0 0.0 0
+    1.0 0.0 0
+    0.0 1.0 0
+    1.0 1.0 0
+endnode
+node trimesh storefront
+  parent vos_storewin_7l
+  position 0.0 0.0 2.15
+  orientation -1.0 0.0 0.0 -1.5708
+  wirecolor 0.87451 0.337255 0.556863 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 11
+  center 0.0 0.0 0.0 
+  bitmap vos_storewin_l
+  verts 4
+    -3.4 -1.1 0.0
+    3.4 -1.1 0.0
+    -3.4 1.1 0.0
+    3.4 1.1 0.0
+  faces 2
+    2 0 3  1  2 0 3  1
+    1 3 0  1  1 3 0  1
+  tverts 4
+    0.503168 0.261273 0
+    0.99341 0.261695 0
+    0.503168 0.499957 0
+    0.99341 0.500085 0
+endnode
+endmodelgeom vos_storewin_7l
+donemodel vos_storewin_7l

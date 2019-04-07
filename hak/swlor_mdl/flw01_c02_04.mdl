@@ -1,0 +1,653 @@
+# Rewritten by CleanModels 3.0 Tue Jan 30 23:13:06 2007
+#MAXMODEL ASCII
+filedependency Unknown
+newmodel flw01_c02_04
+setsupermodel flw01_c02_04 null
+setanimationscale 1
+classification TILE
+#MAXGEOM ASCII
+beginmodelgeom flw01_c02_04
+node dummy flw01_c02_04
+  parent NULL
+endnode
+node trimesh c02_04_muro
+  parent flw01_c02_04
+  orientation 0.0 0.0 0.0 0.0
+  wirecolor 0.337255 0.337255 0.337255
+  tilefade 0
+  scale 1.0
+  render 1
+  shadow 0
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center 0.0 -1.52588e-005 200.0
+  ambient 0.588235 0.588235 0.588235
+  diffuse 0.588235 0.588235 0.588235
+  specular 0.0 0.0 0.0
+  shininess 16.0
+  selfillumcolor 0.0 0.0 0.0
+  bitmap muro
+  position 0 0 0
+  verts 10
+    0 -5 0
+    0 -2.5 0
+    0 0 0
+    0 2.5 0
+    0 5 0
+    0 -5 4
+    0 -2.5 4
+    0 0 4
+    0 2.5 4
+    0 5 4
+  faces 8
+    1 0 5 1 1 0 5 65536
+    5 6 1 1 5 6 1 65536
+    2 1 6 1 2 1 6 65536
+    6 7 2 1 6 7 2 65536
+    3 2 7 1 3 2 7 65536
+    7 8 3 1 7 8 3 65536
+    4 3 8 1 4 3 8 65536
+    8 9 4 1 8 9 4 65536
+  tverts 10
+    0.000499547 0.000499606 0
+    0.25025 0.000499576 0
+    0.5 0.000499547 0
+    0.74975 0.000499517 0
+    0.999501 0.000499487 0
+    0.000499547 0.999501 0
+    0.25025 0.999501 0
+    0.5 0.9995 0
+    0.74975 0.9995 0
+    0.999501 0.9995 0
+endnode
+node trimesh c02_04_cielo_up
+  parent flw01_c02_04
+  orientation 0.0 0.0 0.0 0.0
+  wirecolor 0.337255 0.337255 0.337255
+  tilefade 0
+  scale 1.0
+  render 1
+  shadow 0
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center 250.0 0.0 300.0
+  ambient 0.588235 0.588235 0.588235
+  diffuse 0.588235 0.588235 0.588235
+  specular 0.0 0.0 0.0
+  shininess 11.0
+  selfillumcolor 0.0 0.0 0.0
+  bitmap cielino
+  position 0 0 1
+  verts 4
+    0 -5 3
+    5 -5 3
+    0 5 3
+    5 5 3
+  faces 2
+    2 0 3 1 2 0 3 65536
+    1 3 0 1 1 3 0 65536
+  tverts 4
+    0.25 0.000499636 0
+    0.75 0.000499517 0
+    0.25 0.999501 0
+    0.75 0.9995 0
+endnode
+node aabb c02_04_walk
+  parent flw01_c02_04
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.337255 0.337255 0.337255
+  ambient 0.588 0.588 0.588
+  diffuse 0.5 0.5 0.5
+  specular 0.0 0.0 0.0
+  shininess 11.0
+  selfillumcolor 0.0 0.0 0.0
+  bitmap NULL
+  position 0 0 0
+  verts 10
+    -0.94 5.0 0.0
+    -5.0 5.0 0.0
+    -0.94 4.72 0.0
+    -0.94 -4.76 0.0
+    0.0 -5.0 0.0
+    -2.5 -5.0 0.0
+    -5.0 -5.0 0.0
+    -0.94 4.72 3.99
+    -0.94 -4.76 3.99
+    0.0 -5.0 3.99
+  faces 9
+    2 0 1 1 0 0 0 4
+    4 3 5 1 0 0 0 4
+    2 5 3 1 0 0 0 4
+    5 2 6 1 0 0 0 4
+    1 6 2 1 0 0 0 4
+    2 3 8 0 0 0 0 2
+    8 7 2 0 0 0 0 2
+    3 4 9 0 0 0 0 2
+    9 8 3 0 0 0 0 2
+  aabb     -5.0 -5.0 0.0 0.0 5.0 3.99 -1
+    -5.0 -5.0 0.0 0.0 4.72 3.99 -1
+    -2.5 -5.0 0.0 0.0 -4.76 3.99 -1
+    -2.5 -5.0 0.0 0.0 -4.76 0.0 1
+    -0.94 -5.0 0.0 0.0 -4.76 3.99 -1
+    -0.94 -5.0 0.0 0.0 -4.76 3.99 7
+    -0.94 -5.0 0.0 0.0 -4.76 3.99 8
+    -5.0 -5.0 0.0 -0.94 4.72 3.99 -1
+    -5.0 -5.0 0.0 -0.94 4.72 0.0 3
+    -2.5 -5.0 0.0 -0.94 4.72 3.99 -1
+    -2.5 -5.0 0.0 -0.94 4.72 0.0 2
+    -0.94 -4.76 0.0 -0.94 4.72 3.99 5
+    -5.0 -5.0 0.0 -0.94 5.0 3.99 -1
+    -5.0 -5.0 0.0 -0.94 5.0 3.99 -1
+    -0.94 -4.76 0.0 -0.94 4.72 3.99 6
+    -5.0 -5.0 0.0 -0.94 5.0 0.0 4
+    -5.0 4.72 0.0 -0.94 5.0 0.0 0
+endnode
+node light flw01_c02_04ml1
+  parent flw01_c02_04
+  orientation 1.0 0.0 0.0 -1.5708
+  wirecolor 0.694118 0.694118 0.694118
+  radius 1400.0
+  multiplier 1.0
+  color 1.0 1.0 1.0
+  ambientonly 0
+  ndynamictype 0
+  affectdynamic 1
+  shadow 0
+  lightpriority 5
+  fadinglight 0
+  position -5.01 0 2.33
+endnode
+node light flw01_c02_04ml2
+  parent flw01_c02_04
+  orientation 1.0 0.0 0.0 -1.5708
+  wirecolor 0.694118 0.694118 0.694118
+  radius 500.0
+  multiplier 1.0
+  color 1.0 1.0 1.0
+  ambientonly 0
+  ndynamictype 0
+  affectdynamic 1
+  shadow 0
+  lightpriority 5
+  fadinglight 0
+  position -5.04 0 1.12
+endnode
+node trimesh c02_04_tubogrande01
+  parent flw01_c02_04
+  orientation 0.0 0.0 0.0 0.0
+  wirecolor 0.87451 0.87451 0.87451
+  tilefade 0
+  scale 1.0
+  render 1
+  shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center 0.0 0.0 0.0
+  ambient 0.588235 0.588235 0.588235
+  diffuse 0.588235 0.588235 0.588235
+  specular 0.0 0.0 0.0
+  shininess 14.0
+  selfillumcolor 0.0 0.0 0.0
+  bitmap tubo3
+  position -0.3475 0.0 1.5225
+  verts 8
+    0.1775 -3.5 -0.0025
+    -0.0025 -3.5 -0.1825
+    0.0075 -3.5 0.1775
+    -0.1825 -3.5 0.0075
+    0.1775 3.5 -0.0025
+    -0.0025 3.5 -0.1825
+    0.0075 3.5 0.1775
+    -0.1825 3.5 0.0075
+  faces 8
+    0 1 5 1 8 1 5 4
+    5 4 0 1 5 9 8 4
+    1 3 7 1 1 3 7 3
+    7 5 1 1 7 5 1 3
+    3 2 6 1 3 2 6 5
+    6 7 3 1 6 7 3 5
+    2 0 4 1 2 0 4 2
+    4 6 2 1 4 6 2 2
+  tverts 10
+    0.750689 -0.501186 0
+    0.000723429 -0.501186 0
+    0.508143 -0.501186 0
+    0.258112 -0.501186 0
+    0.750689 1.49881 0
+    0.000722231 1.49881 0
+    0.508145 1.49881 0
+    0.258112 1.49881 0
+    -0.249311 -0.501186 0
+    -0.249311 1.49881 0
+endnode
+node trimesh c02_04_tubogrande
+  parent flw01_c02_04
+  orientation 0.0 0.0 0.0 0.0
+  wirecolor 0.709804 0.709804 0.709804
+  tilefade 0
+  scale 1.0
+  render 1
+  shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center 0.0 0.0 0.0
+  ambient 0.588235 0.588235 0.588235
+  diffuse 0.588235 0.588235 0.588235
+  specular 0.0 0.0 0.0
+  shininess 12.0
+  selfillumcolor 0.0 0.0 0.0
+  bitmap tubo4
+  position -0.3475 0.0 1.1325
+  verts 8
+    0.1775 -3.5 -0.0025
+    -0.0025 -3.5 -0.1825
+    0.0075 -3.5 0.1775
+    -0.1825 -3.5 0.0075
+    0.1775 3.5 -0.0025
+    -0.0025 3.5 -0.1825
+    0.0075 3.5 0.1775
+    -0.1825 3.5 0.0075
+  faces 8
+    0 1 5 1 8 1 5 4
+    5 4 0 1 5 9 8 4
+    1 3 7 1 1 3 7 3
+    7 5 1 1 7 5 1 3
+    3 2 6 1 3 2 6 5
+    6 7 3 1 6 7 3 5
+    2 0 4 1 2 0 4 2
+    4 6 2 1 4 6 2 2
+  tverts 10
+    0.750689 -0.500671 0
+    0.000723429 -0.500671 0
+    0.508143 -0.500671 0
+    0.258112 -0.500671 0
+    0.750689 1.49933 0
+    0.000722231 1.49933 0
+    0.508145 1.49933 0
+    0.258112 1.49933 0
+    -0.249311 -0.500671 0
+    -0.249311 1.49933 0
+endnode
+node trimesh c02_04_tubopiccolo
+  parent flw01_c02_04
+  orientation 0.0 0.0 0.0 0.0
+  wirecolor 0.447059 0.447059 0.447059
+  tilefade 0
+  scale 1.0
+  render 1
+  shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center 0.0 0.0 0.0
+  ambient 0.588235 0.588235 0.588235
+  diffuse 0.588235 0.588235 0.588235
+  specular 0.0 0.0 0.0
+  shininess 11.0
+  selfillumcolor 0.0 0.0 0.0
+  bitmap tubo1
+  position -0.24 0.0 0.87
+  verts 8
+    0.05 -3.5 -2.60209e-018
+    -4.33681e-019 -3.5 -0.05
+    -4.33681e-019 -3.5 0.05
+    -0.05 -3.5 -2.60209e-018
+    0.05 3.5 -2.60209e-018
+    -4.33681e-019 3.5 -0.05
+    -4.33681e-019 3.5 0.05
+    -0.05 3.5 -2.60209e-018
+  faces 8
+    0 1 5 1 8 1 5 4
+    5 4 0 1 5 9 8 4
+    1 3 7 1 1 3 7 3
+    7 5 1 1 7 5 1 3
+    3 2 6 1 3 2 6 5
+    6 7 3 1 6 7 3 5
+    2 0 4 1 2 0 4 2
+    4 6 2 1 4 6 2 2
+  tverts 10
+    0.750478 4.80413e-005 0
+    0.000490119 4.80413e-005 0
+    0.499507 4.80413e-005 0
+    0.249525 4.80413e-005 0
+    0.750477 0.99905 0
+    0.000485796 0.99905 0
+    0.499511 0.99905 0
+    0.249526 0.99905 0
+    -0.249522 4.80413e-005 0
+    -0.249523 0.99905 0
+endnode
+node trimesh c02_04_tubopiccolo01
+  parent flw01_c02_04
+  orientation 0.0 0.0 0.0 0.0
+  wirecolor 0.0313726 0.0313726 0.0313726
+  tilefade 0
+  scale 1.0
+  render 1
+  shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center 0.0 0.0 0.0
+  ambient 0.588235 0.588235 0.588235
+  diffuse 0.588235 0.588235 0.588235
+  specular 0.0 0.0 0.0
+  shininess 11.0
+  selfillumcolor 0.0 0.0 0.0
+  bitmap tubo2
+  position -0.24 0.0 0.69
+  verts 8
+    0.05 -3.5 -2.60209e-018
+    -4.33681e-019 -3.5 -0.05
+    -4.33681e-019 -3.5 0.05
+    -0.05 -3.5 -2.60209e-018
+    0.05 3.5 -2.60209e-018
+    -4.33681e-019 3.5 -0.05
+    -4.33681e-019 3.5 0.05
+    -0.05 3.5 -2.60209e-018
+  faces 8
+    0 1 5 1 8 1 5 4
+    5 4 0 1 5 9 8 4
+    1 3 7 1 1 3 7 3
+    7 5 1 1 7 5 1 3
+    3 2 6 1 3 2 6 5
+    6 7 3 1 6 7 3 5
+    2 0 4 1 2 0 4 2
+    4 6 2 1 4 6 2 2
+  tverts 10
+    0.750478 0.000480235 0
+    0.000490278 0.000480235 0
+    0.499507 0.000480235 0
+    0.249525 0.000480235 0
+    0.750477 0.999482 0
+    0.000485955 0.999482 0
+    0.499511 0.999482 0
+    0.249526 0.999482 0
+    -0.249522 0.000480235 0
+    -0.249523 0.999482 0
+endnode
+node trimesh c02_04_tubopiccolo02
+  parent flw01_c02_04
+  orientation 0.0 0.0 0.0 0.0
+  wirecolor 0.686275 0.686275 0.686275
+  tilefade 0
+  scale 1.0
+  render 1
+  shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center 0.0 0.0 0.0
+  ambient 0.588235 0.588235 0.588235
+  diffuse 0.588235 0.588235 0.588235
+  specular 0.0 0.0 0.0
+  shininess 11.0
+  selfillumcolor 0.0 0.0 0.0
+  bitmap tubo5
+  position -0.24 0.0 0.57
+  verts 8
+    0.05 -3.5 -2.60209e-018
+    -4.33681e-019 -3.5 -0.05
+    -4.33681e-019 -3.5 0.05
+    -0.05 -3.5 -2.60209e-018
+    0.05 3.5 -2.60209e-018
+    -4.33681e-019 3.5 -0.05
+    -4.33681e-019 3.5 0.05
+    -0.05 3.5 -2.60209e-018
+  faces 8
+    0 1 5 1 8 1 5 4
+    5 4 0 1 5 9 8 4
+    1 3 7 1 1 3 7 3
+    7 5 1 1 7 5 1 3
+    3 2 6 1 3 2 6 5
+    6 7 3 1 6 7 3 5
+    2 0 4 1 2 0 4 2
+    4 6 2 1 4 6 2 2
+  tverts 10
+    0.750478 -1.55955 0
+    0.000490278 -1.55955 0
+    0.499507 -1.55955 0
+    0.249525 -1.55955 0
+    0.750477 2.5581 0
+    0.000485955 2.5581 0
+    0.499511 2.5581 0
+    0.249526 2.5581 0
+    -0.249522 -1.55955 0
+    -0.249523 2.5581 0
+endnode
+node trimesh box02
+  parent flw01_c02_04
+  orientation 0.0 0.0 0.0 0.0
+  wirecolor 0.337255 0.337255 0.337255
+  tilefade 0
+  scale 1.0
+  render 1
+  shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center 0.0 -3.8147e-006 50.0
+  ambient 0.588235 0.588235 0.588235
+  diffuse 0.588235 0.588235 0.588235
+  specular 0.0 0.0 0.0
+  shininess 16.0
+  selfillumcolor 0.0 0.0 0.0
+  bitmap muro_pilastro
+  position -0.546667 4.1 2.0
+  verts 8
+    -0.273333 0.6 -2.0
+    -0.273333 -0.6 -2.0
+    -0.273333 0.6 2.0
+    -0.273333 -0.6 2.0
+    0.546667 0.6 -2.0
+    0.546667 -0.6 -2.0
+    0.546667 -0.6 2.0
+    0.546667 0.6 2.0
+  faces 6
+    2 0 3 2 3 1 2 65536
+    1 3 0 2 0 2 1 65536
+    3 1 6 16 3 1 2 3
+    5 6 1 16 0 2 1 3
+    0 2 4 64 0 2 1 2
+    7 4 2 64 3 1 2 2
+  tverts 4
+    0.24 0.0 0
+    0.0 0.0 0
+    0.24 1.0 0
+    0.0 1.0 0
+endnode
+node trimesh box01
+  parent flw01_c02_04
+  orientation 0.0 0.0 0.0 0.0
+  wirecolor 0.337255 0.337255 0.337255
+  tilefade 0
+  scale 1.0
+  render 1
+  shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center undefined
+  ambient 0.588235 0.588235 0.588235
+  diffuse 0.588235 0.588235 0.588235
+  specular 0.0 0.0 0.0
+  shininess 16.0
+  selfillumcolor 0.0 0.0 0.0
+  bitmap muro_pilastro
+  position -0.546667 -4.1 2.0
+  verts 8
+    -0.273333 0.6 -2.0
+    -0.273333 -0.6 -2.0
+    -0.273333 0.6 2.0
+    -0.273333 -0.6 2.0
+    0.546667 0.6 -2.0
+    0.546667 -0.6 -2.0
+    0.546667 -0.6 2.0
+    0.546667 0.6 2.0
+  faces 6
+    2 0 3 2 3 1 2 65536
+    1 3 0 2 0 2 1 65536
+    3 1 6 16 3 1 2 3
+    5 6 1 16 0 2 1 3
+    0 2 4 64 0 2 1 2
+    7 4 2 64 3 1 2 2
+  tverts 4
+    0.24 0.0 0
+    0.0 0.0 0
+    0.24 1.0 0
+    0.0 1.0 0
+endnode
+node trimesh tappopiletta01
+  parent flw01_c02_04
+  orientation 0.0 0.0 0.0 0.0
+  wirecolor 0.337255 0.337255 0.337255
+  tilefade 0
+  scale 1.0
+  render 1
+  shadow 0
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center 0.0 -7.62939e-006 250.0
+  ambient 0.588235 0.588235 0.588235
+  diffuse 0.588235 0.588235 0.588235
+  specular 0.0 0.0 0.0
+  shininess 11.0
+  selfillumcolor 0.0 0.0 0.0
+  bitmap cielino
+  position -0.41 4.1 1.5
+  verts 4
+    -0.41 0.6 2.5
+    -0.41 -0.6 2.5
+    0.41 -0.6 2.5
+    0.41 0.6 2.5
+  faces 2
+    3 0 1 0 3 0 1 1
+    3 1 2 0 3 1 2 1
+  tverts 4
+    0.459 0.56 0
+    0.459 0.44 0
+    0.541 0.44 0
+    0.541 0.56 0
+endnode
+node trimesh tappopiletta
+  parent flw01_c02_04
+  orientation 0.0 0.0 0.0 0.0
+  wirecolor 0.337255 0.337255 0.337255
+  tilefade 0
+  scale 1.0
+  render 1
+  shadow 0
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center 0.0 -7.62939e-006 250.0
+  ambient 0.588235 0.588235 0.588235
+  diffuse 0.588235 0.588235 0.588235
+  specular 0.0 0.0 0.0
+  shininess 11.0
+  selfillumcolor 0.0 0.0 0.0
+  bitmap cielino
+  position -0.41 -4.1 1.5
+  verts 4
+    -0.41 0.6 2.5
+    -0.41 -0.6 2.5
+    0.41 -0.6 2.5
+    0.41 0.6 2.5
+  faces 2
+    3 0 1 0 3 0 1 1
+    3 1 2 0 3 1 2 1
+  tverts 4
+    0.459 0.56 0
+    0.459 0.44 0
+    0.541 0.44 0
+    0.541 0.56 0
+endnode
+node trimesh pavimento12
+  parent flw01_c02_04
+  orientation 0.0 0.0 0.0 0.0
+  wirecolor 0.568627 0.109804 0.694118
+  tilefade 0
+  scale 1.0
+  render 1
+  shadow 0
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center undefined
+  ambient 0.588235 0.588235 0.588235
+  diffuse 0.588235 0.588235 0.588235
+  specular 0.0 0.0 0.0
+  shininess 11.0
+  selfillumcolor 0.0 0.0 0.0
+  bitmap pav01_cem01
+  position 0 0 0
+  verts 4
+    -5 -5 0
+    5 -5 0
+    -5 5 0
+    5 5 0
+  faces 2
+    2 0 3 1 2 0 3 1
+    1 3 0 1 1 3 0 1
+  tverts 4
+    0.000499517 0.000499755 0
+    0.9995 0.000499517 0
+    0.000499755 0.999501 0
+    0.999501 0.9995 0
+endnode
+node trimesh soffitto14
+  parent flw01_c02_04
+  orientation 0.0 0.0 0.0 0.0
+  wirecolor 0.776471 0.878431 0.341176
+  ambient 0.588235 0.588235 0.588235
+  diffuse 0.588235 0.588235 0.588235
+  specular 0.0 0.0 0.0
+  shininess 11.0
+  selfillumcolor 0.0 0.0 0.0
+  bitmap cielino
+  position 0 0 4
+  verts 4
+    -5 5 0
+    5 5 0
+    -5 -5 0
+    5 -5 0
+  faces 2
+    2 0 3 1 2 0 3 1
+    1 3 0 1 1 3 0 1
+  tverts 4
+    0.000499517 0.000499755 0
+    0.9995 0.000499517 0
+    0.000499755 0.999501 0
+    0.999501 0.9995 0
+endnode
+endmodelgeom flw01_c02_04
+donemodel flw01_c02_04

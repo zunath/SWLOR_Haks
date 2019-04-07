@@ -1,0 +1,1381 @@
+# Exported from NWmax 0.8 b61 at 23/02/2018 18:30:35
+# mdl file
+#
+#NWmax MODEL ASCII
+# model: vmp_udoor_01
+#local file: Unknown
+filedependancy Unknown
+newmodel vmp_udoor_01
+setsupermodel vmp_udoor_01 NULL
+classification Door
+#NWmax GEOM  ASCII
+beginmodelgeom vmp_udoor_01
+node dummy vmp_udoor_01
+  parent NULL
+endnode
+node trimesh DoorRight
+  parent vmp_udoor_01
+  position 3.0 -0.1 0.0
+  orientation 0.0 0.0 -1.0 -1.5708
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 26
+  center 0.138566 150.0 300.0 
+  bitmap vmp_door01
+  verts 20
+    0.100694 2.99999 -3.0082e-007
+    -0.0986121 2.99999 -3.09532e-007
+    0.100694 3.0 2.5
+    -0.0986121 3.0 2.5
+    -0.0986133 -4.9e-006 0.0
+    -0.0986133 4.9e-006 2.5
+    0.100693 -4.9e-006 0.0
+    -0.0986095 1.0 5.0
+    -0.0986152 3.0 6.0
+    -0.0986131 0.00100018 4.0
+    -0.0986157 2.03 6.0
+    0.101387 9.8e-006 4.0
+    0.100693 0.00100019 4.0
+    -0.0986133 9.8e-006 4.0
+    0.101123 4.9e-006 2.5
+    0.100691 2.03 6.0
+    0.100691 3.0 6.0
+    0.100697 1.0 5.0
+    0.100694 3.0 4.0
+    -0.0986121 3.0 4.0
+  faces 36
+    0 1 2  1  0 1 2  6
+    3 2 1  1  3 2 1  6
+    1 4 3  2  4 5 6  3
+    5 3 4  2  7 6 5  3
+    4 1 6  4  5 4 8  2
+    0 6 1  4  4 5 9  2
+    7 8 9  2  10 11 12  3
+    10 8 7  2  13 11 10  3
+    11 12 9  2  14 15 16  3
+    9 13 11  2  15 14 17  3
+    6 14 4  2  18 19 20  3
+    5 4 14  2  21 20 19  3
+    15 16 8  4  22 23 24  3
+    8 10 15  4  24 25 22  3
+    17 15 10  1  26 22 25  3
+    10 7 17  1  25 27 26  3
+    12 14 2  2  15 28 29  3
+    2 18 12  2  29 30 15  3
+    16 17 12  2  31 32 33  3
+    16 15 17  2  31 34 32  3
+    12 11 14  1  15 14 28  1
+    3 19 2  1  35 36 37  6
+    18 2 19  1  38 37 36  6
+    5 13 9  2  28 14 15  3
+    9 19 5  2  39 30 28  3
+    19 9 8  2  40 12 11  3
+    5 19 3  2  28 30 29  3
+    14 11 5  2  41 42 43  3
+    13 5 11  2  44 43 42  3
+    14 6 0  2  45 5 4  3
+    0 2 14  2  4 46 45  3
+    12 17 9  4  47 26 48  3
+    7 9 17  4  27 48 26  3
+    12 18 16  2  49 50 31  3
+    19 8 18  1  51 52 53  6
+    16 18 8  1  54 53 52  6
+  tverts 55
+    0.0379991 0.0004995 0
+    0.115345 0.0004995 0
+    0.0380015 0.935901 0
+    0.115348 0.935901 0
+    0.999501 0.0004996 0
+    0.39084 0.0004996 0
+    0.9995 0.911523 0
+    0.39084 0.911521 0
+    0.39084 0.0004996 0
+    0.999501 0.0004996 0
+    0.53985 0.254091 0
+    0.0087927 0.492944 0
+    0.663063 0.0544953 0
+    0.342247 0.405645 0
+    0.783863 0.0318202 0
+    0.67159 0.0364182 0
+    0.67159 0.0364182 0
+    0.783863 0.0318202 0
+    0.113371 0.0006821 0
+    0.113356 0.914793 0
+    0.0419711 0.0004995 0
+    0.0419567 0.914611 0
+    0.401791 0.330523 0
+    0.174031 0.330523 0
+    0.174031 0.263115 0
+    0.401791 0.263115 0
+    0.614765 0.330523 0
+    0.614765 0.263115 0
+    0.783863 0.493193 0
+    0.0173181 0.493189 0
+    0.0173183 0.031814 0
+    -0.000858 0.445698 0
+    0.530199 0.206845 0
+    0.653413 0.0072489 0
+    0.332596 0.358399 0
+    0.115348 0.185057 0
+    0.115349 0.727046 0
+    0.0380015 0.185057 0
+    0.038003 0.727046 0
+    0.671589 0.0364173 0
+    0.0087925 0.0542918 0
+    0.113356 0.423858 0
+    0.113348 0.999501 0
+    0.0419567 0.423675 0
+    0.0419481 0.999318 0
+    0.391936 0.923679 0
+    0.9995 0.923601 0
+    0.832182 0.330522 0
+    0.832182 0.263114 0
+    0.653412 0.0072489 0
+    -0.0008581 0.0070454 0
+    0.115349 0.527302 0
+    0.115351 0.999501 0
+    0.038003 0.527302 0
+    0.0380045 0.999501 0
+endnode
+node trimesh sam
+  parent vmp_udoor_01
+  position -0.01 -0.12 5.99
+  orientation 0.0 0.0 -1.0 -1.5708
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 0
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 0.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 1.0 
+  ambient 0.2 0.2 0.2 
+  diffuse 0.8 0.8 0.8 
+  specular 0.0 0.0 0.0 
+  shininess 1
+  center 3.249 -1.0 -299.0 
+  bitmap NULL
+  verts 8
+    0.0166687 -2.96 0.01
+    0.0166705 2.94 0.01
+    0.0166689 -2.96 -5.99
+    0.0166707 2.94 -5.99
+    0.0483111 2.94 0.01
+    0.0483092 -2.96 0.01
+    0.0483095 -2.96 -5.99
+    0.0483113 2.94 -5.99
+  faces 4
+    0 1 2  1  0 0 0  18
+    3 2 1  1  0 0 0  18
+    4 5 6  1  0 0 0  18
+    6 7 4  1  0 0 0  18
+endnode
+node trimesh DoorLeft
+  parent vmp_udoor_01
+  position -3.0 -0.1 0.0
+  orientation 0.0 0.0 -1.0 -1.5708
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 26
+  center 0.0 0.0 0.0 
+  bitmap vmp_door01
+  verts 20
+    -0.0986142 -2.99999 -3.09532e-007
+    0.100692 -2.99999 -3.0082e-007
+    0.100692 -3.0 2.5
+    -0.0986142 -3.0 2.5
+    -0.0986133 4.9e-006 0.0
+    -0.0986133 -4.9e-006 2.5
+    0.100693 4.9e-006 0.0
+    -0.0986142 -3.0 6.0
+    -0.0986168 -1.0 5.0
+    -0.0986132 -0.00100018 4.0
+    -0.0986207 -2.03 6.0
+    0.100693 -0.00100016 4.0
+    0.101387 -9.8e-006 4.0
+    -0.0986133 -9.8e-006 4.0
+    0.101123 -4.9e-006 2.5
+    0.100692 -3.0 6.0
+    0.100686 -2.03 6.0
+    0.100689 -1.0 5.0
+    0.100692 -3.0 4.0
+    -0.0986142 -3.0 4.0
+  faces 36
+    0 1 2  1  0 1 2  6
+    2 3 0  1  2 3 0  6
+    4 0 3  2  4 5 6  3
+    3 5 4  2  6 7 4  3
+    0 4 6  4  5 4 8  2
+    6 1 0  4  4 5 9  2
+    7 8 9  2  10 11 12  3
+    7 10 8  2  10 13 11  3
+    11 12 9  2  14 15 16  3
+    13 9 12  2  15 14 17  3
+    14 6 4  2  18 19 20  3
+    4 5 14  2  20 21 18  3
+    15 16 7  4  22 23 24  3
+    10 7 16  4  25 24 23  3
+    16 17 10  1  23 26 25  3
+    8 10 17  1  27 25 26  3
+    14 11 2  2  28 14 29  3
+    18 2 11  2  30 29 14  3
+    17 15 11  2  31 32 33  3
+    16 15 17  2  34 32 31  3
+    12 11 14  1  15 14 28  1
+    19 3 2  1  35 36 37  6
+    2 18 19  1  37 38 35  6
+    13 5 9  2  39 40 41  3
+    19 9 5  2  42 43 40  3
+    19 5 3  2  42 40 44  3
+    9 19 7  2  12 45 10  3
+    12 14 5  2  46 47 48  3
+    5 13 12  2  48 49 46  3
+    6 14 1  2  4 50 5  3
+    2 1 14  2  51 5 50  3
+    17 11 9  4  26 52 53  3
+    9 8 17  4  53 27 26  3
+    18 11 15  2  54 55 32  3
+    7 19 18  1  56 57 58  6
+    18 15 7  1  58 59 56  6
+  tverts 60
+    0.115345 0.0004995 0
+    0.0379991 0.0004995 0
+    0.0380015 0.935901 0
+    0.115348 0.935901 0
+    0.39084 0.0004996 0
+    0.999501 0.0004996 0
+    0.9995 0.920774 0
+    0.39084 0.920772 0
+    0.39084 0.0004996 0
+    0.999501 0.0004996 0
+    0.0362491 0.477703 0
+    0.572137 0.246096 0
+    0.695351 0.0585774 0
+    0.374534 0.39765 0
+    0.648964 0.0299951 0
+    0.807131 0.481453 0
+    0.694858 0.476855 0
+    0.807131 0.481453 0
+    0.113356 0.914793 0
+    0.113371 0.0006821 0
+    0.0419711 0.0004995 0
+    0.0419567 0.914611 0
+    0.174031 0.330523 0
+    0.401791 0.330523 0
+    0.174031 0.263115 0
+    0.401791 0.263115 0
+    0.614765 0.330523 0
+    0.614765 0.263115 0
+    0.734667 0.488679 0
+    0.0381709 0.47419 0
+    0.0357556 0.0225218 0
+    0.530199 0.206845 0
+    -0.000858 0.445698 0
+    0.653413 0.0072489 0
+    0.332596 0.358399 0
+    0.115349 0.727046 0
+    0.115348 0.185057 0
+    0.0380015 0.185057 0
+    0.038003 0.727046 0
+    0.807132 0.0268884 0
+    0.807131 0.482222 0
+    0.694858 0.0314863 0
+    0.0405866 0.0268822 0
+    0.694857 0.0314855 0
+    0.0405865 0.482218 0
+    0.0410799 0.0583739 0
+    0.113348 0.999501 0
+    0.113356 0.423858 0
+    0.0419567 0.423675 0
+    0.0419481 0.999318 0
+    0.391936 0.90153 0
+    0.9995 0.901451 0
+    0.832182 0.330522 0
+    0.832182 0.263114 0
+    -0.0008581 0.0070454 0
+    0.653412 0.0072489 0
+    0.115351 0.999501 0
+    0.115349 0.527302 0
+    0.038003 0.527302 0
+    0.0380045 0.999501 0
+endnode
+node emitter ChunkyWood09
+  parent vmp_udoor_01
+  position 0.0118835 0.0204318 0.772836
+  orientation 0.0 0.0 -1.0 -3.14159
+  wirecolor 1.0 1.0 1.0 
+  update_sel 3
+  update Explosion
+  render_sel 1
+  render Normal
+  blend_sel 1
+  Blend Normal
+  spawntype_sel 0
+  spawnType 0
+  xSize 241.0
+  ySize 40.0
+  inherit 1
+  inherit_local 0
+  inheritvel 0
+  inherit_part 0
+  renderorder 0
+  threshold 0.0
+  combinetime 0.0
+  deadspace 0.0
+  opacity 0.5
+  colorStart 1.0 1.0 1.0 
+  colorEnd 1.0 1.0 1.0 
+  alphaStart 1.0
+  alphaEnd 1.0
+  sizeStart 0.1
+  sizeEnd 0.1
+  sizeStart_y 0.0
+  sizeEnd_y 0.0
+  birthrate 3
+  lifeExp 0.75
+  mass 3.0
+  spread 1.22173
+  particleRot 5.0
+  velocity 8.0
+  randvel 0.3
+  bounce_co 0.5
+  blurlength 10.0
+  loop 0
+  bounce 1
+  m_isTinted 0
+  splat 0
+  affectedByWind false
+  texture fxpa_cloud02
+  twosidedtex 0
+  xgrid 5
+  ygrid 5
+  fps 0
+  framestart 0
+  frameend 24
+  random 0
+  chunkName PLC_Chunk_S01
+  lightningDelay 0.0
+  lightningRadius 0.0
+  lightningSubDiv 0
+  lightningScale 0.0
+  blastRadius 0.0
+  blastLength 0.0
+  p2p 0
+  p2p_type Bezier
+  p2p_sel 1
+  p2p_bezier2 0.0
+  p2p_bezier3 0.0
+  grav 0.0
+  drag 0.0
+endnode
+node emitter fire!11
+  parent vmp_udoor_01
+  position 0.0118835 0.0204318 1.25725
+  orientation 0.0 -0.707107 -0.707107 -3.14159
+  wirecolor 1.0 1.0 1.0 
+  update_sel 3
+  update Explosion
+  render_sel 1
+  render Normal
+  blend_sel 1
+  Blend Normal
+  spawntype_sel 0
+  spawnType 0
+  xSize 294.0
+  ySize 167.0
+  inherit 1
+  inherit_local 0
+  inheritvel 0
+  inherit_part 0
+  renderorder 0
+  threshold 0.0
+  combinetime 0.0
+  deadspace 0.0
+  opacity 0.5
+  colorStart 0.47451 0.439216 0.364706 
+  colorEnd 0.819608 0.796079 0.709804 
+  alphaStart 1.0
+  alphaEnd 0.0
+  sizeStart 4.0
+  sizeEnd 1.0
+  sizeStart_y 0.0
+  sizeEnd_y 0.0
+  birthrate 10
+  lifeExp 2.5
+  mass 0.09
+  spread 2.96706
+  particleRot 0.5
+  velocity 2.0
+  randvel 0.5
+  bounce_co 0.0
+  blurlength 10.0
+  loop 0
+  bounce 0
+  m_isTinted 1
+  splat 0
+  affectedByWind false
+  texture fxpa_smoke01
+  twosidedtex 1
+  xgrid 4
+  ygrid 4
+  fps 10
+  framestart 0
+  frameend 24
+  random 0
+  lightningDelay 0.0
+  lightningRadius 0.0
+  lightningSubDiv 0
+  lightningScale 0.0
+  blastRadius 0.2
+  blastLength 1.0
+  p2p 0
+  p2p_type Bezier
+  p2p_sel 1
+  p2p_bezier2 0.0
+  p2p_bezier3 0.0
+  grav 0.0
+  drag 0.0
+endnode
+node emitter ChunkyWood10
+  parent vmp_udoor_01
+  position 0.0118835 0.0204318 1.67204
+  orientation 0.0 0.0 -1.0 -3.14159
+  wirecolor 1.0 1.0 1.0 
+  update_sel 3
+  update Explosion
+  render_sel 1
+  render Normal
+  blend_sel 1
+  Blend Normal
+  spawntype_sel 0
+  spawnType 0
+  xSize 266.0
+  ySize 40.0
+  inherit 1
+  inherit_local 0
+  inheritvel 0
+  inherit_part 0
+  renderorder 0
+  threshold 0.0
+  combinetime 0.0
+  deadspace 0.0
+  opacity 0.5
+  colorStart 0.482353 0.435294 0.317647 
+  colorEnd 0.584314 0.533333 0.407843 
+  alphaStart 1.0
+  alphaEnd 1.0
+  sizeStart 0.1
+  sizeEnd 0.1
+  sizeStart_y 0.0
+  sizeEnd_y 0.0
+  birthrate 3
+  lifeExp 0.75
+  mass 3.0
+  spread 1.22173
+  particleRot 2.9
+  velocity 8.0
+  randvel 0.3
+  bounce_co 0.5
+  blurlength 10.0
+  loop 0
+  bounce 1
+  m_isTinted 0
+  splat 0
+  affectedByWind false
+  texture fxpa_cloud02
+  twosidedtex 1
+  xgrid 5
+  ygrid 5
+  fps 0
+  framestart 0
+  frameend 24
+  random 0
+  chunkName PLC_Chunk_M01
+  lightningDelay 0.0
+  lightningRadius 0.0
+  lightningSubDiv 0
+  lightningScale 0.0
+  blastRadius 0.0
+  blastLength 0.0
+  p2p 0
+  p2p_type Bezier
+  p2p_sel 1
+  p2p_bezier2 0.0
+  p2p_bezier3 0.0
+  grav 0.0
+  drag 0.0
+endnode
+node dummy vmp_udoor_01head
+  parent vmp_udoor_01
+  position -1.83105e-006 0.0 3.43892
+  orientation 0.0 0.0 -1.0 -1.5708
+  wirecolor 0.568627 0.109804 0.694118 
+endnode
+node dummy vmp_udoor_01impc
+  parent vmp_udoor_01
+  position -1.83105e-006 0.0 1.5835
+  orientation 0.0 0.0 -1.0 -1.5708
+  wirecolor 0.568627 0.109804 0.694118 
+endnode
+node dummy vmp_udoor_01hhit
+  parent vmp_udoor_01
+  position -1.83105e-006 0.0 2.98709
+  orientation 0.0 0.0 -1.0 -1.5708
+  wirecolor 0.568627 0.109804 0.694118 
+endnode
+node dummy vmp_udoor_01grnd
+  parent vmp_udoor_01
+  position -1.83105e-006 0.0 0.0199988
+  orientation 0.0 0.0 -1.0 -1.5708
+  wirecolor 0.568627 0.109804 0.694118 
+endnode
+endmodelgeom vmp_udoor_01
+#NWmax ANIM ASCII
+newanim opening2 vmp_udoor_01
+  length 0.966667
+  transtime 0.25
+  animroot vmp_udoor_01
+    node dummy vmp_udoor_01
+        parent NULL
+    endnode
+    node trimesh DoorRight
+        parent vmp_udoor_01
+        orientationkey
+            0.0 0.0 0.0 -1.0 -1.5708
+            0.8 0.0 0.0 -1.0 -0.0107295
+            0.866667 0.0 0.0 -1.0 -0.0872666
+            0.966667 0.0 0.0 -1.0 -0.0872666
+        endlist
+    endnode
+    node trimesh sam
+        parent vmp_udoor_01
+        alphakey
+            0.0 0.0 
+            0.966667 0.0 
+        endlist
+    endnode
+    node trimesh DoorLeft
+        parent vmp_udoor_01
+        orientationkey
+            0.0 0.0 0.0 -1.0 -1.5708
+            0.0666667 0.0 0.0 -1.0 -1.5708
+            0.9 0.0 0.0 -1.0 -3.12516
+            0.966667 0.0 0.0 -1.0 -3.05433
+        endlist
+    endnode
+    node emitter ChunkyWood09
+        parent vmp_udoor_01
+    endnode
+    node emitter fire!11
+        parent vmp_udoor_01
+    endnode
+    node emitter ChunkyWood10
+        parent vmp_udoor_01
+    endnode
+    node dummy vmp_udoor_01head
+        parent vmp_udoor_01
+    endnode
+    node dummy vmp_udoor_01impc
+        parent vmp_udoor_01
+    endnode
+    node dummy vmp_udoor_01hhit
+        parent vmp_udoor_01
+    endnode
+    node dummy vmp_udoor_01grnd
+        parent vmp_udoor_01
+    endnode
+    node dummy vmp_udoor_01_DWK
+        parent vmp_udoor_01
+    endnode
+    node dummy 01_DWK_dp_closed_01
+        parent vmp_udoor_01_DWK
+    endnode
+    node dummy 01_DWK_dp_closed_02
+        parent vmp_udoor_01_DWK
+    endnode
+    node dummy 01_DWK_dp_open1_01
+        parent vmp_udoor_01_DWK
+    endnode
+    node dummy 01_DWK_dp_open1_02
+        parent vmp_udoor_01_DWK
+    endnode
+    node dummy 01_DWK_dp_open2_01
+        parent vmp_udoor_01_DWK
+    endnode
+    node dummy 01_DWK_dp_open2_02
+        parent vmp_udoor_01_DWK
+    endnode
+    node trimesh 01_DWK_wg_open2
+        parent vmp_udoor_01_DWK
+    endnode
+    node trimesh 01_DWK_wg_open1
+        parent vmp_udoor_01_DWK
+    endnode
+    node trimesh 01_DWK_wg_closed
+        parent vmp_udoor_01_DWK
+    endnode
+doneanim opening2 vmp_udoor_01
+#NWmax ANIM ASCII
+newanim opening1 vmp_udoor_01
+  length 1.0
+  transtime 0.25
+  animroot vmp_udoor_01
+    node dummy vmp_udoor_01
+        parent NULL
+    endnode
+    node trimesh DoorRight
+        parent vmp_udoor_01
+        orientationkey
+            0.0 0.0 0.0 -1.0 -1.5708
+            0.933333 0.0 0.0 -1.0 -3.12996
+            1.0 0.0 0.0 -1.0 -3.05433
+        endlist
+    endnode
+    node trimesh sam
+        parent vmp_udoor_01
+        alphakey
+            0.0 0.0 
+            1.0 0.0 
+        endlist
+    endnode
+    node trimesh DoorLeft
+        parent vmp_udoor_01
+        orientationkey
+            0.0 0.0 0.0 -1.0 -1.5708
+            0.0666667 2.2096e-007 -2.20961e-007 -1.0 -1.5708
+            0.833333 0.0 0.0 1.0 -0.0581776
+            0.9 0.0 0.0 0.0 0.0
+        endlist
+    endnode
+    node emitter ChunkyWood09
+        parent vmp_udoor_01
+    endnode
+    node emitter fire!11
+        parent vmp_udoor_01
+    endnode
+    node emitter ChunkyWood10
+        parent vmp_udoor_01
+    endnode
+    node dummy vmp_udoor_01head
+        parent vmp_udoor_01
+    endnode
+    node dummy vmp_udoor_01impc
+        parent vmp_udoor_01
+    endnode
+    node dummy vmp_udoor_01hhit
+        parent vmp_udoor_01
+    endnode
+    node dummy vmp_udoor_01grnd
+        parent vmp_udoor_01
+    endnode
+    node dummy vmp_udoor_01_DWK
+        parent vmp_udoor_01
+    endnode
+    node dummy 01_DWK_dp_closed_01
+        parent vmp_udoor_01_DWK
+    endnode
+    node dummy 01_DWK_dp_closed_02
+        parent vmp_udoor_01_DWK
+    endnode
+    node dummy 01_DWK_dp_open1_01
+        parent vmp_udoor_01_DWK
+    endnode
+    node dummy 01_DWK_dp_open1_02
+        parent vmp_udoor_01_DWK
+    endnode
+    node dummy 01_DWK_dp_open2_01
+        parent vmp_udoor_01_DWK
+    endnode
+    node dummy 01_DWK_dp_open2_02
+        parent vmp_udoor_01_DWK
+    endnode
+    node trimesh 01_DWK_wg_open2
+        parent vmp_udoor_01_DWK
+    endnode
+    node trimesh 01_DWK_wg_open1
+        parent vmp_udoor_01_DWK
+    endnode
+    node trimesh 01_DWK_wg_closed
+        parent vmp_udoor_01_DWK
+    endnode
+doneanim opening1 vmp_udoor_01
+#NWmax ANIM ASCII
+newanim closing2 vmp_udoor_01
+  length 0.966667
+  transtime 0.25
+  animroot vmp_udoor_01
+    node dummy vmp_udoor_01
+        parent NULL
+    endnode
+    node trimesh DoorRight
+        parent vmp_udoor_01
+        orientationkey
+            0.0 0.0 0.0 -1.0 -0.0872666
+            0.1 0.0 0.0 -1.0 -0.0872666
+            0.9 0.0 0.0 -1.0 -1.64302
+            0.966667 0.0 0.0 -1.0 -1.5708
+        endlist
+    endnode
+    node trimesh sam
+        parent vmp_udoor_01
+        alphakey
+            0.0 0.0 
+            0.966667 0.0 
+        endlist
+    endnode
+    node trimesh DoorLeft
+        parent vmp_udoor_01
+        orientationkey
+            0.0 0.0 0.0 -1.0 -3.05433
+            0.8 0.0 0.0 -1.0 -1.51038
+            0.866667 0.0 0.0 -1.0 -1.5708
+            0.966667 0.0 0.0 -1.0 -1.5708
+        endlist
+    endnode
+    node emitter ChunkyWood09
+        parent vmp_udoor_01
+    endnode
+    node emitter fire!11
+        parent vmp_udoor_01
+    endnode
+    node emitter ChunkyWood10
+        parent vmp_udoor_01
+    endnode
+    node dummy vmp_udoor_01head
+        parent vmp_udoor_01
+    endnode
+    node dummy vmp_udoor_01impc
+        parent vmp_udoor_01
+    endnode
+    node dummy vmp_udoor_01hhit
+        parent vmp_udoor_01
+    endnode
+    node dummy vmp_udoor_01grnd
+        parent vmp_udoor_01
+    endnode
+    node dummy vmp_udoor_01_DWK
+        parent vmp_udoor_01
+    endnode
+    node dummy 01_DWK_dp_closed_01
+        parent vmp_udoor_01_DWK
+    endnode
+    node dummy 01_DWK_dp_closed_02
+        parent vmp_udoor_01_DWK
+    endnode
+    node dummy 01_DWK_dp_open1_01
+        parent vmp_udoor_01_DWK
+    endnode
+    node dummy 01_DWK_dp_open1_02
+        parent vmp_udoor_01_DWK
+    endnode
+    node dummy 01_DWK_dp_open2_01
+        parent vmp_udoor_01_DWK
+    endnode
+    node dummy 01_DWK_dp_open2_02
+        parent vmp_udoor_01_DWK
+    endnode
+    node trimesh 01_DWK_wg_open2
+        parent vmp_udoor_01_DWK
+    endnode
+    node trimesh 01_DWK_wg_open1
+        parent vmp_udoor_01_DWK
+    endnode
+    node trimesh 01_DWK_wg_closed
+        parent vmp_udoor_01_DWK
+    endnode
+doneanim closing2 vmp_udoor_01
+#NWmax ANIM ASCII
+newanim closing1 vmp_udoor_01
+  length 0.966667
+  transtime 0.25
+  animroot vmp_udoor_01
+    node dummy vmp_udoor_01
+        parent NULL
+    endnode
+    node trimesh DoorRight
+        parent vmp_udoor_01
+        orientationkey
+            0.0666667 0.0 0.0 -1.0 -3.05433
+            0.8 0.0 0.0 -1.0 -1.50615
+            0.866667 0.0 0.0 -1.0 -1.5708
+        endlist
+    endnode
+    node trimesh sam
+        parent vmp_udoor_01
+        alphakey
+            0.0 0.0 
+            0.966667 0.0 
+        endlist
+    endnode
+    node trimesh DoorLeft
+        parent vmp_udoor_01
+        orientationkey
+            0.0 0.0 0.0 0.0 0.0
+            0.866667 0.0 0.0 -1.0 -1.6701
+            0.966667 0.0 0.0 -1.0 -1.5708
+        endlist
+    endnode
+    node emitter ChunkyWood09
+        parent vmp_udoor_01
+    endnode
+    node emitter fire!11
+        parent vmp_udoor_01
+    endnode
+    node emitter ChunkyWood10
+        parent vmp_udoor_01
+    endnode
+    node dummy vmp_udoor_01head
+        parent vmp_udoor_01
+    endnode
+    node dummy vmp_udoor_01impc
+        parent vmp_udoor_01
+    endnode
+    node dummy vmp_udoor_01hhit
+        parent vmp_udoor_01
+    endnode
+    node dummy vmp_udoor_01grnd
+        parent vmp_udoor_01
+    endnode
+    node dummy vmp_udoor_01_DWK
+        parent vmp_udoor_01
+    endnode
+    node dummy 01_DWK_dp_closed_01
+        parent vmp_udoor_01_DWK
+    endnode
+    node dummy 01_DWK_dp_closed_02
+        parent vmp_udoor_01_DWK
+    endnode
+    node dummy 01_DWK_dp_open1_01
+        parent vmp_udoor_01_DWK
+    endnode
+    node dummy 01_DWK_dp_open1_02
+        parent vmp_udoor_01_DWK
+    endnode
+    node dummy 01_DWK_dp_open2_01
+        parent vmp_udoor_01_DWK
+    endnode
+    node dummy 01_DWK_dp_open2_02
+        parent vmp_udoor_01_DWK
+    endnode
+    node trimesh 01_DWK_wg_open2
+        parent vmp_udoor_01_DWK
+    endnode
+    node trimesh 01_DWK_wg_open1
+        parent vmp_udoor_01_DWK
+    endnode
+    node trimesh 01_DWK_wg_closed
+        parent vmp_udoor_01_DWK
+    endnode
+doneanim closing1 vmp_udoor_01
+#NWmax ANIM ASCII
+newanim opened2 vmp_udoor_01
+  length 0.0333333
+  transtime 0.25
+  animroot vmp_udoor_01
+    node dummy vmp_udoor_01
+        parent NULL
+    endnode
+    node trimesh DoorRight
+        parent vmp_udoor_01
+        orientationkey
+            0.0 0.0 0.0 -1.0 -0.0872665
+            0.0333333 9.65321e-007 0.0 -1.0 -0.0872665
+        endlist
+    endnode
+    node trimesh sam
+        parent vmp_udoor_01
+        alphakey
+            0.0 0.0 
+            0.0333333 0.0 
+        endlist
+    endnode
+    node trimesh DoorLeft
+        parent vmp_udoor_01
+        orientationkey
+            0.0 0.0 0.0 -1.0 -3.05433
+            0.0333333 0.0 0.0 -1.0 -3.05433
+        endlist
+    endnode
+    node emitter ChunkyWood09
+        parent vmp_udoor_01
+    endnode
+    node emitter fire!11
+        parent vmp_udoor_01
+    endnode
+    node emitter ChunkyWood10
+        parent vmp_udoor_01
+    endnode
+    node dummy vmp_udoor_01head
+        parent vmp_udoor_01
+    endnode
+    node dummy vmp_udoor_01impc
+        parent vmp_udoor_01
+    endnode
+    node dummy vmp_udoor_01hhit
+        parent vmp_udoor_01
+    endnode
+    node dummy vmp_udoor_01grnd
+        parent vmp_udoor_01
+    endnode
+    node dummy vmp_udoor_01_DWK
+        parent vmp_udoor_01
+    endnode
+    node dummy 01_DWK_dp_closed_01
+        parent vmp_udoor_01_DWK
+    endnode
+    node dummy 01_DWK_dp_closed_02
+        parent vmp_udoor_01_DWK
+    endnode
+    node dummy 01_DWK_dp_open1_01
+        parent vmp_udoor_01_DWK
+    endnode
+    node dummy 01_DWK_dp_open1_02
+        parent vmp_udoor_01_DWK
+    endnode
+    node dummy 01_DWK_dp_open2_01
+        parent vmp_udoor_01_DWK
+    endnode
+    node dummy 01_DWK_dp_open2_02
+        parent vmp_udoor_01_DWK
+    endnode
+    node trimesh 01_DWK_wg_open2
+        parent vmp_udoor_01_DWK
+    endnode
+    node trimesh 01_DWK_wg_open1
+        parent vmp_udoor_01_DWK
+    endnode
+    node trimesh 01_DWK_wg_closed
+        parent vmp_udoor_01_DWK
+    endnode
+doneanim opened2 vmp_udoor_01
+#NWmax ANIM ASCII
+newanim opened1 vmp_udoor_01
+  length 0.0333333
+  transtime 0.25
+  animroot vmp_udoor_01
+    node dummy vmp_udoor_01
+        parent NULL
+    endnode
+    node trimesh DoorRight
+        parent vmp_udoor_01
+    endnode
+    node trimesh sam
+        parent vmp_udoor_01
+        alphakey
+            0.0 0.0 
+            0.0333333 0.0 
+        endlist
+    endnode
+    node trimesh DoorLeft
+        parent vmp_udoor_01
+        orientationkey
+            0.0333333 0.0 0.0 0.0 0.0
+        endlist
+    endnode
+    node emitter ChunkyWood09
+        parent vmp_udoor_01
+    endnode
+    node emitter fire!11
+        parent vmp_udoor_01
+    endnode
+    node emitter ChunkyWood10
+        parent vmp_udoor_01
+    endnode
+    node dummy vmp_udoor_01head
+        parent vmp_udoor_01
+    endnode
+    node dummy vmp_udoor_01impc
+        parent vmp_udoor_01
+    endnode
+    node dummy vmp_udoor_01hhit
+        parent vmp_udoor_01
+    endnode
+    node dummy vmp_udoor_01grnd
+        parent vmp_udoor_01
+    endnode
+    node dummy vmp_udoor_01_DWK
+        parent vmp_udoor_01
+    endnode
+    node dummy 01_DWK_dp_closed_01
+        parent vmp_udoor_01_DWK
+    endnode
+    node dummy 01_DWK_dp_closed_02
+        parent vmp_udoor_01_DWK
+    endnode
+    node dummy 01_DWK_dp_open1_01
+        parent vmp_udoor_01_DWK
+    endnode
+    node dummy 01_DWK_dp_open1_02
+        parent vmp_udoor_01_DWK
+    endnode
+    node dummy 01_DWK_dp_open2_01
+        parent vmp_udoor_01_DWK
+    endnode
+    node dummy 01_DWK_dp_open2_02
+        parent vmp_udoor_01_DWK
+    endnode
+    node trimesh 01_DWK_wg_open2
+        parent vmp_udoor_01_DWK
+    endnode
+    node trimesh 01_DWK_wg_open1
+        parent vmp_udoor_01_DWK
+    endnode
+    node trimesh 01_DWK_wg_closed
+        parent vmp_udoor_01_DWK
+    endnode
+doneanim opened1 vmp_udoor_01
+#NWmax ANIM ASCII
+newanim closed vmp_udoor_01
+  length 0.0333333
+  transtime 0.25
+  animroot vmp_udoor_01
+    node dummy vmp_udoor_01
+        parent NULL
+    endnode
+    node trimesh DoorRight
+        parent vmp_udoor_01
+        orientationkey
+            0.0 0.0 0.0 -1.0 -1.5708
+            0.0333333 2.33563e-007 -2.33725e-007 -1.0 -1.5708
+        endlist
+    endnode
+    node trimesh sam
+        parent vmp_udoor_01
+        alphakey
+            0.0 0.0 
+            0.0333333 0.0 
+        endlist
+    endnode
+    node trimesh DoorLeft
+        parent vmp_udoor_01
+        orientationkey
+            0.0 1.73123e-006 -1.73124e-006 -1.0 -1.5708
+            0.0333333 0.0 0.0 -1.0 -1.5708
+        endlist
+    endnode
+    node emitter ChunkyWood09
+        parent vmp_udoor_01
+    endnode
+    node emitter fire!11
+        parent vmp_udoor_01
+    endnode
+    node emitter ChunkyWood10
+        parent vmp_udoor_01
+    endnode
+    node dummy vmp_udoor_01head
+        parent vmp_udoor_01
+    endnode
+    node dummy vmp_udoor_01impc
+        parent vmp_udoor_01
+    endnode
+    node dummy vmp_udoor_01hhit
+        parent vmp_udoor_01
+    endnode
+    node dummy vmp_udoor_01grnd
+        parent vmp_udoor_01
+    endnode
+    node dummy vmp_udoor_01_DWK
+        parent vmp_udoor_01
+    endnode
+    node dummy 01_DWK_dp_closed_01
+        parent vmp_udoor_01_DWK
+    endnode
+    node dummy 01_DWK_dp_closed_02
+        parent vmp_udoor_01_DWK
+    endnode
+    node dummy 01_DWK_dp_open1_01
+        parent vmp_udoor_01_DWK
+    endnode
+    node dummy 01_DWK_dp_open1_02
+        parent vmp_udoor_01_DWK
+    endnode
+    node dummy 01_DWK_dp_open2_01
+        parent vmp_udoor_01_DWK
+    endnode
+    node dummy 01_DWK_dp_open2_02
+        parent vmp_udoor_01_DWK
+    endnode
+    node trimesh 01_DWK_wg_open2
+        parent vmp_udoor_01_DWK
+    endnode
+    node trimesh 01_DWK_wg_open1
+        parent vmp_udoor_01_DWK
+    endnode
+    node trimesh 01_DWK_wg_closed
+        parent vmp_udoor_01_DWK
+    endnode
+doneanim closed vmp_udoor_01
+#NWmax ANIM ASCII
+newanim trans vmp_udoor_01
+  length 0.0333333
+  transtime 0.25
+  animroot vmp_udoor_01
+    node dummy vmp_udoor_01
+        parent NULL
+    endnode
+    node trimesh DoorRight
+        parent vmp_udoor_01
+    endnode
+    node trimesh sam
+        parent vmp_udoor_01
+        alphakey
+            0.0 0.256148 
+            0.0333333 0.25 
+        endlist
+    endnode
+    node trimesh DoorLeft
+        parent vmp_udoor_01
+    endnode
+    node emitter ChunkyWood09
+        parent vmp_udoor_01
+    endnode
+    node emitter fire!11
+        parent vmp_udoor_01
+    endnode
+    node emitter ChunkyWood10
+        parent vmp_udoor_01
+    endnode
+    node dummy vmp_udoor_01head
+        parent vmp_udoor_01
+    endnode
+    node dummy vmp_udoor_01impc
+        parent vmp_udoor_01
+    endnode
+    node dummy vmp_udoor_01hhit
+        parent vmp_udoor_01
+    endnode
+    node dummy vmp_udoor_01grnd
+        parent vmp_udoor_01
+    endnode
+    node dummy vmp_udoor_01_DWK
+        parent vmp_udoor_01
+    endnode
+    node dummy 01_DWK_dp_closed_01
+        parent vmp_udoor_01_DWK
+    endnode
+    node dummy 01_DWK_dp_closed_02
+        parent vmp_udoor_01_DWK
+    endnode
+    node dummy 01_DWK_dp_open1_01
+        parent vmp_udoor_01_DWK
+    endnode
+    node dummy 01_DWK_dp_open1_02
+        parent vmp_udoor_01_DWK
+    endnode
+    node dummy 01_DWK_dp_open2_01
+        parent vmp_udoor_01_DWK
+    endnode
+    node dummy 01_DWK_dp_open2_02
+        parent vmp_udoor_01_DWK
+    endnode
+    node trimesh 01_DWK_wg_open2
+        parent vmp_udoor_01_DWK
+    endnode
+    node trimesh 01_DWK_wg_open1
+        parent vmp_udoor_01_DWK
+    endnode
+    node trimesh 01_DWK_wg_closed
+        parent vmp_udoor_01_DWK
+    endnode
+doneanim trans vmp_udoor_01
+#NWmax ANIM ASCII
+newanim die vmp_udoor_01
+  length 0.3
+  transtime 0.25
+  animroot vmp_udoor_01
+  event 0.0333333 detonate
+  event 0.0333333 detonate
+  event 0.0333333 detonate
+    node dummy vmp_udoor_01
+        parent NULL
+    endnode
+    node trimesh DoorRight
+        parent vmp_udoor_01
+        positionkey
+            0.0 3.0 -0.1 0.0
+            0.3 3.0 -0.1 -5.7513
+        endlist
+        orientationkey
+            0.0 1.86452e-006 -1.78054e-006 -1.0 -1.5708
+            0.3 0.20477 -0.221015 -0.953531 -2.60174
+        endlist
+    endnode
+    node trimesh sam
+        parent vmp_udoor_01
+    endnode
+    node trimesh DoorLeft
+        parent vmp_udoor_01
+        positionkey
+            0.0 -3.0 -0.1 0.0
+            0.3 -3.0 -0.1 -5.7513
+        endlist
+        orientationkey
+            0.0 0.0 0.0 -1.0 -1.5708
+            0.3 -0.0488818 -0.566116 -0.822875 -1.07279
+        endlist
+    endnode
+    node emitter ChunkyWood09
+        parent vmp_udoor_01
+    endnode
+    node emitter fire!11
+        parent vmp_udoor_01
+    endnode
+    node emitter ChunkyWood10
+        parent vmp_udoor_01
+    endnode
+    node dummy vmp_udoor_01head
+        parent vmp_udoor_01
+    endnode
+    node dummy vmp_udoor_01impc
+        parent vmp_udoor_01
+    endnode
+    node dummy vmp_udoor_01hhit
+        parent vmp_udoor_01
+    endnode
+    node dummy vmp_udoor_01grnd
+        parent vmp_udoor_01
+    endnode
+    node dummy vmp_udoor_01_DWK
+        parent vmp_udoor_01
+    endnode
+    node dummy 01_DWK_dp_closed_01
+        parent vmp_udoor_01_DWK
+    endnode
+    node dummy 01_DWK_dp_closed_02
+        parent vmp_udoor_01_DWK
+    endnode
+    node dummy 01_DWK_dp_open1_01
+        parent vmp_udoor_01_DWK
+    endnode
+    node dummy 01_DWK_dp_open1_02
+        parent vmp_udoor_01_DWK
+    endnode
+    node dummy 01_DWK_dp_open2_01
+        parent vmp_udoor_01_DWK
+    endnode
+    node dummy 01_DWK_dp_open2_02
+        parent vmp_udoor_01_DWK
+    endnode
+    node trimesh 01_DWK_wg_open2
+        parent vmp_udoor_01_DWK
+    endnode
+    node trimesh 01_DWK_wg_open1
+        parent vmp_udoor_01_DWK
+    endnode
+    node trimesh 01_DWK_wg_closed
+        parent vmp_udoor_01_DWK
+    endnode
+doneanim die vmp_udoor_01
+#NWmax ANIM ASCII
+newanim dead vmp_udoor_01
+  length 0.0333333
+  transtime 0.25
+  animroot vmp_udoor_01
+    node dummy vmp_udoor_01
+        parent NULL
+    endnode
+    node trimesh DoorRight
+        parent vmp_udoor_01
+        positionkey
+            0.0 3.0 -0.1 -5.7513
+            0.0333333 3.0 -0.1 -5.7513
+        endlist
+        orientationkey
+            0.0 0.20477 -0.221015 -0.953531 -2.60174
+            0.0333333 0.20477 -0.221015 -0.953531 -2.60174
+        endlist
+    endnode
+    node trimesh sam
+        parent vmp_udoor_01
+    endnode
+    node trimesh DoorLeft
+        parent vmp_udoor_01
+        positionkey
+            0.0 -3.0 -0.1 -5.7513
+            0.0333333 -3.0 -0.1 -5.7513
+        endlist
+        orientationkey
+            0.0 -0.0488818 -0.566116 -0.822875 -1.07279
+            0.0333333 -0.0488818 -0.566116 -0.822875 -1.07279
+        endlist
+    endnode
+    node emitter ChunkyWood09
+        parent vmp_udoor_01
+    endnode
+    node emitter fire!11
+        parent vmp_udoor_01
+    endnode
+    node emitter ChunkyWood10
+        parent vmp_udoor_01
+    endnode
+    node dummy vmp_udoor_01head
+        parent vmp_udoor_01
+    endnode
+    node dummy vmp_udoor_01impc
+        parent vmp_udoor_01
+    endnode
+    node dummy vmp_udoor_01hhit
+        parent vmp_udoor_01
+    endnode
+    node dummy vmp_udoor_01grnd
+        parent vmp_udoor_01
+    endnode
+    node dummy vmp_udoor_01_DWK
+        parent vmp_udoor_01
+    endnode
+    node dummy 01_DWK_dp_closed_01
+        parent vmp_udoor_01_DWK
+    endnode
+    node dummy 01_DWK_dp_closed_02
+        parent vmp_udoor_01_DWK
+    endnode
+    node dummy 01_DWK_dp_open1_01
+        parent vmp_udoor_01_DWK
+    endnode
+    node dummy 01_DWK_dp_open1_02
+        parent vmp_udoor_01_DWK
+    endnode
+    node dummy 01_DWK_dp_open2_01
+        parent vmp_udoor_01_DWK
+    endnode
+    node dummy 01_DWK_dp_open2_02
+        parent vmp_udoor_01_DWK
+    endnode
+    node trimesh 01_DWK_wg_open2
+        parent vmp_udoor_01_DWK
+    endnode
+    node trimesh 01_DWK_wg_open1
+        parent vmp_udoor_01_DWK
+    endnode
+    node trimesh 01_DWK_wg_closed
+        parent vmp_udoor_01_DWK
+    endnode
+doneanim dead vmp_udoor_01
+donemodel vmp_udoor_01

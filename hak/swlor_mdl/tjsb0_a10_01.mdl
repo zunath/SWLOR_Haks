@@ -1,0 +1,135 @@
+# Exported from NWmax 0.8 b60 at 05/10/2006 19.29.16
+# mdl file
+#
+#NWmax MODEL ASCII
+# model: tjsb0_a10_01
+#local file: C:\gmax\Scenes\black sides.gmax
+filedependancy black sides.gmax
+newmodel tjsb0_a10_01
+setsupermodel tjsb0_a10_01 null
+classification Tile
+#NWmax GEOM  ASCII
+beginmodelgeom tjsb0_a10_01
+node dummy tjsb0_a10_01
+  parent NULL
+endnode
+#Tile trimesh node
+node trimesh floor
+  parent tjsb0_a10_01
+  position 0.0 0.0 8.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.0 0.0 0.0 
+  tilefade 1
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 0.0 0.0 0.0 
+  diffuse 0.0 0.0 0.0 
+  specular 0.0 0.0 0.0 
+  shininess 1
+  center 0.0 0.0 -250.0 
+  bitmap black
+  verts 8
+    -5.0 -5.0 0.0
+    5.0 -5.0 0.0
+    -5.0 5.0 0.0
+    5.0 5.0 0.0
+    5.0 5.0 -5.0
+    -5.0 5.0 -5.0
+    5.0 -5.0 -5.0
+    -5.0 -5.0 -5.0
+  faces 10
+    3 2 1  0  0 0 0  65536
+    2 0 1  0  0 0 0  65536
+    4 5 2  0  0 0 0  65536
+    2 3 4  0  0 0 0  65536
+    6 4 3  0  0 0 0  65536
+    3 1 6  0  0 0 0  65536
+    5 7 0  0  0 0 0  65536
+    0 2 5  0  0 0 0  65536
+    7 6 1  0  0 0 0  65536
+    1 0 7  0  0 0 0  65536
+endnode
+node aabb rectangle12
+  parent tjsb0_a10_01
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.694118 0.694118 0.694118 
+  multimaterial 20
+    Dirt
+    Obscuring
+    Grass
+    Stone
+    Wood
+    Water
+    Nonwalk
+    Transparent
+    Carpet
+    Metal
+    Puddles
+    Swamp
+    Mud
+    Leaves
+    Lava
+    BottomlessPit
+    DeepWater
+    Door
+    Snow
+    Sand
+  ambient 0.0 0.0 0.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 10.0
+  bitmap Obscuring
+  verts 4
+    5.0 5.0 6.0
+    -5.0 5.0 6.0
+    -5.0 -5.0 6.0
+    5.0 -5.0 6.0
+  faces 2
+    0 1 2  1  0 0 0  2
+    0 2 3  1  0 0 0  2
+    aabb         -5.0 -5.0 6.0 5.0 5.0 6.0 -1
+        -5.0 -5.0 6.0 5.0 5.0 6.0 0
+        -5.0 -5.0 6.0 5.0 5.0 6.0 1
+endnode
+#Tile trimesh node
+node trimesh margin
+  parent tjsb0_a10_01
+  position 0.0 0.0 3.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.0 0.0 0.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 0.0 0.0 0.0 
+  diffuse 0.0 0.0 0.0 
+  specular 0.0 0.0 0.0 
+  shininess 1
+  center undefined
+  bitmap black
+  verts 4
+    -5.0 -5.0 0.0
+    5.0 -5.0 0.0
+    -5.0 5.0 0.0
+    5.0 5.0 0.0
+  faces 2
+    3 2 1  0  0 0 0  65536
+    2 0 1  0  0 0 0  65536
+endnode
+endmodelgeom tjsb0_a10_01
+donemodel tjsb0_a10_01
+

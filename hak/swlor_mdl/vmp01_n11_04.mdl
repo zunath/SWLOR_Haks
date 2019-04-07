@@ -1,0 +1,726 @@
+# Rewritten by CleanModels 3 Version 3.5.2d Fri Apr 06 16:29:10 2018
+#MAXMODEL ASCII
+filedependency Unknown
+newmodel vmp01_n11_04
+  classification TILE
+  setsupermodel vmp01_n11_04 NULL
+  setanimationscale 1
+#MAXGEOM ASCII
+beginmodelgeom vmp01_n11_04
+node dummy vmp01_n11_04
+  parent NULL
+endnode
+node trimesh palace_04_6
+  parent vmp01_n11_04
+  position 0 3.365 28.31
+  wirecolor 0.15625 0.765625 0.996094
+  bitmap vmp01_building01
+  center undefined
+  shininess 10
+  specular 0 0 0
+  diffuse 1 1 1
+  ambient 1 1 1
+  selfillumcolor 0 0 0
+  transparencyhint 0
+  alpha 1
+  rotatetexture 0
+  inheritcolor 0
+  beaming 0
+  shadow 1
+  render 1
+  scale 1
+  tilefade 0
+  orientation 0 0 0 0
+  verts 6
+    -4.99 -1.635 -8.26
+    -5 -1.635 -8.28
+    -5 -1.665 -8.41
+    -5 -1.665 -8.25
+    -5 -1.635 -8.26
+    -5 -7.925 -7.48
+  faces 4
+    2 0 1 4 3 0 2 1
+    4 0 3 4 6 1 4 1
+    1 0 4 4 2 0 5 1
+    5 3 0 4 7 4 1 1
+  tverts 8
+    0.271966 0.987129 0
+    0.851692 0.731289 0
+    0.271691 0.986503 0
+    0.271966 0.98285 0
+    0.852148 0.73117 0
+    0.271533 0.987131 0
+    0.851691 0.731399 0
+    0.930318 0.689649 0
+endnode
+node trimesh palace_04_5
+  parent vmp01_n11_04
+  position 0 3.267 21.935
+  wirecolor 0.847656 0.308594 0.0078125
+  bitmap vmp01_building01
+  center undefined
+  shininess 10
+  specular 0 0 0
+  diffuse 1 1 1
+  ambient 1 1 1
+  selfillumcolor 0 0 0
+  transparencyhint 0
+  alpha 1
+  rotatetexture 0
+  inheritcolor 0
+  beaming 0
+  shadow 1
+  render 1
+  scale 1
+  tilefade 0
+  orientation 0 0 0 0
+  verts 21
+    3.22 -6.377 -21.955
+    -4.99 -1.537 -1.885
+    2.28 -1.917 -1.885
+    -5 -1.567 -2.035
+    -5 -5.237 -18.725
+    -5 -5.947 -21.955
+    -5 -7.827 -1.105
+    3.39 -8.267 -1.105
+    3.61 -8.267 -1.105
+    3.63 -8.267 -1.105
+    3.65 -8.267 -1.105
+    3.64 -8.267 -1.105
+    3.63 -8.267 -1.095
+    5 -3.887 -15.515
+    5 -5.497 -21.955
+    5 -2.307 -1.685
+    5 -0.527 -1.885
+    5 -6.077 -0.515
+    5 -6.097 -0.525
+    5 -7.577 -1.105
+    5 -7.567 -1.105
+  faces 19
+    4 5 0 4 8 9 0 1
+    0 2 4 4 0 2 8 1
+    2 1 3 4 2 1 7 1
+    3 4 2 4 7 8 2 1
+    13 16 2 4 18 21 4 1
+    2 0 13 4 4 3 18 1
+    6 1 8 4 10 5 12 1
+    7 6 8 4 11 10 12 1
+    9 2 15 4 13 6 20 1
+    9 15 20 4 13 20 26 1
+    20 19 10 4 26 25 15 1
+    9 20 10 4 13 26 15 1
+    8 1 2 4 12 5 6 1
+    2 9 8 4 6 13 12 1
+    11 17 12 4 16 23 17 1
+    13 0 14 4 18 3 19 1
+    15 2 16 4 20 6 22 1
+    11 10 18 4 16 14 24 1
+    17 11 18 4 23 16 24 1
+  tverts 27
+    0.504815 0.39992 0
+    0.271966 0.987129 0
+    0.504767 0.988071 0
+    0.0144491 0.399826 0
+    0.0144005 0.98808 0
+    0.851692 0.731289 0
+    0.819492 0.674584 0
+    0.271966 0.98285 0
+    0.309478 0.495467 0
+    0.30579 0.400758 0
+    0.930318 0.689649 0
+    0.886297 0.612126 0
+    0.885002 0.610174 0
+    0.884936 0.610078 0
+    0.675264 0.550668 0
+    0.884816 0.609808 0
+    0.675106 0.550747 0
+    0.675001 0.5508 0
+    0.0970855 0.58829 0
+    0.0661281 0.400041 0
+    0.811505 0.643968 0
+    0.122648 0.98768 0
+    0.795857 0.660712 0
+    0.698684 0.565169 0
+    0.698588 0.564978 0
+    0.87099 0.601693 0
+    0.870859 0.601786 0
+endnode
+node trimesh palace_04_4
+  parent vmp01_n11_04
+  position 0 2.62 12.085
+  wirecolor 0.988281 0.980469 0.65625
+  bitmap vmp01_building01
+  center undefined
+  shininess 10
+  specular 0 0 0
+  diffuse 1 1 1
+  ambient 1 1 1
+  selfillumcolor 0 0 0
+  transparencyhint 0
+  alpha 1
+  rotatetexture 0
+  inheritcolor 0
+  beaming 0
+  shadow 1
+  render 1
+  scale 1
+  tilefade 0
+  orientation 0 0 0 0
+  verts 13
+    2.2 -2.39 11.085
+    2.18 -2.29 13.035
+    -5 -7.18 8.745
+    -5 -2.01 11.085
+    -5 -6.06 9.255
+    -5 -1.92 13.035
+    -5 -2.01 11.225
+    3.39 -7.62 8.745
+    3.63 -7.62 8.755
+    5 -5.43 9.335
+    5 -0.85 13.035
+    5 -0.92 11.885
+    5 -0.96 11.085
+  faces 12
+    0 3 4 4 0 4 6 1
+    7 8 0 4 9 10 0 1
+    2 7 0 4 3 9 0 1
+    2 0 4 4 3 0 6 1
+    1 5 6 4 1 7 8 1
+    1 6 3 4 1 8 5 1
+    3 0 1 4 5 2 1 1
+    9 12 0 4 11 15 0 1
+    9 0 8 4 11 0 10 1
+    11 0 12 4 13 2 14 1
+    1 0 11 4 1 2 13 1
+    11 10 1 4 13 12 1 1
+  tverts 16
+    0.686417 0.607856 0
+    0.883718 0.342068 0
+    0.884546 0.245068 0
+    0.594361 0.596442 0
+    0.619196 0.646028 0
+    0.631409 0.245068 0
+    0.599757 0.607216 0
+    0.628095 0.342068 0
+    0.631396 0.251771 0
+    0.672776 0.551914 0
+    0.675001 0.5508 0
+    0.698684 0.565169 0
+    1.03719 0.342068 0
+    1.03709 0.284884 0
+    1.03564 0.245068 0
+    0.720184 0.608097 0
+endnode
+node trimesh palace_04_3_2
+  parent vmp01_n11_04
+  position -0.388 2.95967 25.1327
+  wirecolor 0.160156 0.976563 0.894531
+  orientation 0 0 0 0
+  tilefade 0
+  scale 1
+  render 1
+  shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1
+  transparencyhint 0
+  selfillumcolor 0 0 0
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 10
+  center undefined
+  bitmap vmp01_building01
+  verts 12
+    2.568 -2.62967 -0.0126667
+    -3.992 0.960333 0.00733333
+    1.918 0.650333 0.00733333
+    -4.612 -2.25967 -0.0126667
+    -4.612 1.36033 0.00733333
+    -4.612 1.04033 0.00733333
+    -4.612 -0.799667 -0.00266667
+    -4.612 -2.02967 -0.0126667
+    5.388 -1.18967 -0.0126667
+    5.388 2.04033 0.00733333
+    5.388 1.02033 -0.00266667
+    4.638 2.04033 0.00733333
+  faces 10
+    1 4 5 4 0 4 5 1
+    6 1 5 4 6 0 5 1
+    2 1 6 4 1 0 6 1
+    6 7 2 4 6 7 1 1
+    2 7 3 4 1 7 3 1
+    3 0 2 4 3 2 1 1
+    10 0 8 4 10 2 8 1
+    9 11 2 4 9 11 1 1
+    2 0 10 4 1 2 10 1
+    9 2 10 4 9 1 10 1
+  tverts 12
+    0.614426 0.640843 0
+    0.690293 0.597762 0
+    0.677195 0.550137 0
+    0.585002 0.60249 0
+    0.608915 0.650232 0
+    0.606798 0.646005 0
+    0.594607 0.621665 0
+    0.586533 0.605546 0
+    0.723931 0.550472 0
+    0.745285 0.593109 0
+    0.738536 0.579632 0
+    0.735351 0.598084 0
+endnode
+node trimesh palace_04_3_1
+  parent vmp01_n11_04
+  position -0.963 4.308 27.48
+  wirecolor 0.179688 0.546875 0.574219
+  orientation 0 0 0 0
+  tilefade 0
+  scale 1
+  render 1
+  shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1
+  transparencyhint 0
+  selfillumcolor 0 0 0
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 10
+  center undefined
+  bitmap vmp01_building01
+  verts 10
+    -3.417 -0.388 -2.34
+    2.493 -0.698 -2.34
+    -3.377 -0.268 0
+    2.463 -0.578 0
+    -4.037 0.012 -2.34
+    -4.037 0.152 0
+    -4.037 0.132 -0.31
+    4.953 0.692 0
+    5.083 0.692 -1.17
+    5.213 0.692 -2.34
+  faces 8
+    2 5 6 4 0 5 6 1
+    2 6 4 4 0 6 4 1
+    4 0 2 4 4 2 0 1
+    3 2 0 4 1 0 2 1
+    0 1 3 4 2 3 1 1
+    8 1 9 4 8 3 9 1
+    3 1 8 4 1 3 8 1
+    8 7 3 4 8 7 1 1
+  tverts 10
+    0.74615 0.269301 0
+    1.09123 0.26917 0
+    0.73927 0.0928737 0
+    1.07847 0.0927423 0
+    0.6819 0.0928901 0
+    0.68471 0.269319 0
+    0.68479 0.246118 0
+    1.30376 0.26917 0
+    1.30727 0.180892 0
+    1.31077 0.0927423 0
+endnode
+node trimesh palace_04_3
+  parent vmp01_n11_04
+  position 0 0 28.485
+  wirecolor 0.136719 0.15625 0.328125
+  bitmap vmp01_building01
+  center undefined
+  shininess 10
+  specular 0 0 0
+  diffuse 1 1 1
+  ambient 1 1 1
+  selfillumcolor 0 0 0
+  transparencyhint 0
+  alpha 1
+  rotatetexture 0
+  inheritcolor 0
+  beaming 0
+  shadow 1
+  render 1
+  scale 1
+  tilefade 0
+  orientation 0 0 0 0
+  verts 10
+    -4.34 4.04 -1.005
+    1.5 3.73 -1.005
+    2.12 0.81 -0.355
+    -5 4.46 -1.005
+    -5 1.19 -0.355
+    -5 2.01 -0.545
+    5 2.28 -0.355
+    5 3.95 -0.695
+    5 5 -0.905
+    3.99 5 -1.005
+  faces 8
+    0 2 4 4 1 0 4 1
+    4 5 0 4 4 5 1 1
+    0 1 2 4 1 2 0 1
+    3 0 5 4 3 1 5 1
+    6 2 1 4 6 0 2 1
+    1 7 6 4 2 7 6 1
+    1 9 8 4 2 9 8 1
+    8 7 1 4 8 7 2 1
+  tverts 10
+    0.574515 0.916091 0
+    0.60787 0.794756 0
+    0.64007 0.851459 0
+    0.607933 0.786025 0
+    0.520765 0.821437 0
+    0.544219 0.811326 0
+    0.616967 0.940981 0
+    0.65546 0.910459 0
+    0.670468 0.885669 0
+    0.666918 0.867217 0
+endnode
+node trimesh palace_04_2_1
+  parent vmp01_n11_04
+  position 0 0 31.903
+  wirecolor 0.78125 0.101563 0.363281
+  orientation 0 0 0 0
+  tilefade 0
+  scale 1
+  render 1
+  shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1
+  transparencyhint 0
+  selfillumcolor 0 0 0
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 10
+  center undefined
+  bitmap vmp01_building01
+  verts 6
+    1.27 4.83 -1.823
+    -4.47 3.65 -1.303
+    1.59 3.33 -1.303
+    -1.93 5 -1.823
+    -4.03 5 -1.783
+    -3.66 5 -1.793
+  faces 4
+    4 5 2 4 4 5 0 1
+    2 1 4 4 0 1 4 1
+    3 0 2 4 3 2 0 1
+    2 5 3 4 0 5 3 1
+  tverts 6
+    0.574515 0.916091 0
+    0.518783 0.817947 0
+    0.64007 0.851459 0
+    0.620463 0.816932 0
+    0.601319 0.796461 0
+    0.605854 0.802091 0
+endnode
+node trimesh palace_04_2
+  parent vmp01_n11_04
+  position 0 4.002 6.827
+  wirecolor 0.105469 0.699219 0.398438
+  bitmap vmp01_building01
+  center undefined
+  shininess 10
+  specular 0 0 0
+  diffuse 1 1 1
+  ambient 1 1 1
+  selfillumcolor 0 0 0
+  transparencyhint 0
+  alpha 1
+  rotatetexture 0
+  inheritcolor 0
+  beaming 0
+  shadow 1
+  render 1
+  scale 1
+  tilefade 0
+  orientation 0 0 0 0
+  verts 10
+    2.12 -3.192 21.303
+    1.28 0.778 22.343
+    1.27 0.828 23.253
+    -5 -2.812 21.303
+    -5 -1.992 21.523
+    -5 -2.662 21.343
+    -4.03 0.998 22.323
+    -3.02 0.998 22.343
+    -2.77 0.998 22.553
+    -1.93 0.998 23.253
+  faces 8
+    1 5 3 4 0 6 4 1
+    3 0 1 4 4 2 0 1
+    7 1 2 4 8 3 1 1
+    2 8 7 4 1 10 8 1
+    5 1 7 4 6 0 9 1
+    4 5 7 4 5 6 9 1
+    6 4 7 4 7 5 9 1
+    8 2 9 4 10 1 11 1
+  tverts 12
+    0.769481 0.913269 0
+    1.21182 0.283501 0
+    0.785713 0.973606 0
+    1.2141 0.0700997 0
+    0.881387 0.919278 0
+    0.875706 0.907936 0
+    0.880282 0.917114 0
+    0.841654 0.873404 0
+    0.45251 0.0700997 0
+    0.827698 0.880364 0
+    0.49784 0.120404 0
+    0.63884 0.283501 0
+endnode
+node trimesh palace_04_1
+  parent vmp01_n11_04
+  position -3.315 4.141 29.5666
+  wirecolor 0.8125 0.5 0.0195313
+  bitmap vmp01_building01
+  center undefined
+  shininess 10
+  specular 0 0 0
+  diffuse 1 1 1
+  ambient 1 1 1
+  selfillumcolor 0 0 0
+  transparencyhint 0
+  alpha 1
+  rotatetexture 0
+  inheritcolor 0
+  beaming 0
+  shadow 1
+  render 1
+  scale 1
+  tilefade 0
+  orientation 0 0 0 0
+  verts 12
+    5.435 -3.331 -1.43662
+    4.595 0.639 -0.396615
+    4.585 0.689 0.513385
+    4.905 -0.811 1.03338
+    8.315 -1.861 -1.43662
+    8.315 0.859 -0.796615
+    5.035 0.859 -0.396615
+    7.995 0.859 -0.756615
+    4.915 0.859 0.513385
+    5.025 0.859 -0.316615
+    8.185 0.859 1.03338
+    5.355 0.859 0.583385
+  faces 10
+    5 7 0 4 7 10 4 1
+    0 4 5 4 4 6 7 1
+    1 0 7 4 1 4 10 1
+    7 6 1 4 10 8 1 1
+    9 1 6 4 13 5 9 1
+    2 1 9 4 2 5 13 1
+    9 8 2 4 13 11 2 1
+    11 2 8 4 15 3 12 1
+    3 2 11 4 0 3 15 1
+    11 10 3 4 15 14 0 1
+  tverts 16
+    0.574515 0.916091 0
+    0.769481 0.913269 0
+    0.21182 0.283501 0
+    0.64007 0.851459 0
+    0.785713 0.973606 0
+    0.2141 0.0700997 0
+    0.736013 0.9734 0
+    0.717172 0.935781 0
+    0.761899 0.913207 0
+    0.33147 0.0700997 0
+    0.72163 0.933518 0
+    0.29988 0.283501 0
+    0.643997 0.853764 0
+    0.3294 0.0896478 0
+    0.633451 0.950646 0
+    0.644304 0.867689 0
+endnode
+node light vmp01_n11_04ml1
+  parent vmp01_n11_04
+  position 0 0 5
+  orientation 0 0 0 0
+  wirecolor 1 0.898039 0
+  radius 14
+  multiplier 1
+  color 1 1 1
+  ambientonly 0
+  nDynamicType 0
+  affectdynamic 1
+  shadow 0
+  lightpriority 5
+  fadinglight 0
+endnode
+node light vmp01_n11_04ml2
+  parent vmp01_n11_04
+  position -2 -2 4
+  orientation 0 0 0 0
+  wirecolor 1 0.898039 0
+  radius 5
+  multiplier 1
+  color 1 1 1
+  ambientonly 0
+  nDynamicType 0
+  affectdynamic 1
+  shadow 0
+  lightpriority 5
+  fadinglight 0
+endnode
+node trimesh ground_04
+  parent vmp01_n11_04
+  position 0 0 0
+  orientation 0 0 0 0
+  wirecolor 0.337255 0.337255 0.882353
+  tilefade 0
+  scale 1
+  render 1
+  shadow 0
+  beaming 0
+  inheritcolor 0
+  rotatetexture 1
+  alpha 1
+  transparencyhint 0
+  selfillumcolor 0 0 0
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 10
+  center undefined
+  bitmap vmp01_floor01
+  verts 4
+    -5 -5 0
+    5 -5 0
+    -5 5 0
+    5 5 0
+  faces 2
+    2 0 3 1 2 0 3 1
+    1 3 0 1 1 3 0 1
+  tverts 4
+    1.0014 -0.99927 0
+    1.0014 1.00092 0
+    -0.9989 -0.99927 0
+    -0.9989 1.00092 0
+endnode
+node trimesh palace_04
+  parent vmp01_n11_04
+  wirecolor 1 0 0
+  position -0.06 0.29 15.56
+  orientation 0 0 0 0
+  tilefade 0
+  scale 1
+  render 1
+  shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1
+  transparencyhint 0
+  selfillumcolor 0 0 0
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 10
+  center undefined
+  bitmap vmp01_building01
+  verts 18
+    -4.41 3.36 15.04
+    1.65 3.04 15.04
+    -4.94 1.72 12.79
+    -4.94 3.7 15.04
+    -4.94 3.94 14.97
+    -4.94 4.71 13.45
+    -4.94 4.71 15.32
+    -4.94 4.71 14.74
+    3.71 -5.29 5.27
+    5.06 -3.12 5.85
+    5.06 -4.6 5.27
+    -3.97 4.71 13.59
+    -3.97 4.71 14.56
+    4.93 4.71 15.04
+    -3.99 4.71 15.49
+    -3.93 4.71 15.49
+    1.25 4.71 15.58
+    1.33 4.71 15.57
+  faces 12
+    0 3 4 4 0 4 6 1
+    5 2 11 4 7 3 13 1
+    14 6 3 4 16 8 5 1
+    3 0 14 4 5 1 16 1
+    8 10 9 4 10 12 11 1
+    12 0 4 4 14 0 6 1
+    4 7 12 4 6 9 14 1
+    14 0 15 4 16 1 17 1
+    16 1 17 4 18 2 19 1
+    15 0 1 4 17 1 2 1
+    1 16 15 4 2 18 17 1
+    17 1 13 4 19 2 15 1
+  tverts 20
+    0.518783 0.817947 0
+    0.591769 0.623857 0
+    0.680386 0.573536 0
+    0.875706 0.907936 0
+    0.518867 0.806131 0
+    0.586369 0.633058 0
+    0.530869 0.806017 0
+    0.855049 0.866695 0
+    0.593946 0.648187 0
+    0.569624 0.792896 0
+    0.675264 0.550668 0
+    0.698588 0.564978 0
+    0.691479 0.550784 0
+    0.841654 0.873404 0
+    0.601319 0.796461 0
+    0.742115 0.572017 0
+    0.608192 0.641053 0
+    0.609182 0.640557 0
+    0.686898 0.601633 0
+    0.688041 0.60106 0
+endnode
+node aabb walk_04
+  parent vmp01_n11_04
+  position 0 0 0
+  bitmap NULL
+  orientation 0 0 0 0
+  wirecolor 0.341176 0.878431 0.341176
+  ambient 0.588 0.588 0.588
+  diffuse 0.6 0.34 0.16
+  specular 0 0 0
+  shininess 10
+  render 0
+  shadow 0
+  verts 9
+    -5 -5 0
+    0 -5 0
+    3.24 -3.13 0
+    -5 -2.76 0
+    5 -5 0
+    -5 5 0
+    0 5 0
+    5 5 0
+    5 -2.3 0
+  faces 8
+    1 2 3 1 0 0 0 1
+    3 0 1 1 0 0 0 1
+    8 7 6 1 0 0 0 8
+    6 2 8 1 0 0 0 8
+    6 5 3 1 0 0 0 8
+    3 2 6 1 0 0 0 8
+    2 1 4 1 0 0 0 1
+    4 8 2 1 0 0 0 1
+  aabb     -5 -5 0 5 5 0 -1
+    -5 -5 0 3.24 5 0 -1
+    -5 -5 0 3.24 -2.76 0 -1
+    -5 -5 0 0 -2.76 0 1
+    -5 -5 0 3.24 -2.76 0 0
+    -5 -3.13 0 3.24 5 0 -1
+    -5 -2.76 0 0 5 0 4
+    -5 -3.13 0 3.24 5 0 5
+    0 -5 0 5 5 0 -1
+    0 -5 0 5 -2.3 0 -1
+    0 -5 0 5 -3.13 0 6
+    3.24 -5 0 5 -2.3 0 7
+    0 -3.13 0 5 5 0 -1
+    0 -3.13 0 5 5 0 3
+    0 -2.3 0 5 5 0 2
+endnode
+endmodelgeom vmp01_n11_04
+donemodel vmp01_n11_04

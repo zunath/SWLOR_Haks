@@ -1,0 +1,118 @@
+# Exported from NWmax 0.8 b61 at 2017-01-11 13:02:42
+# mdl file
+#
+#NWmax MODEL ASCII
+# model: vos_billb06
+#local file: Unknown
+filedependancy Unknown
+newmodel vos_billb06
+setsupermodel vos_billb06 NULL
+classification Character
+setanimationscale 1.0
+#NWmax GEOM  ASCII
+beginmodelgeom vos_billb06
+node dummy vos_billb06
+  parent NULL
+endnode
+node dummy billb06_ground
+  parent vos_billb06
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.6 0.894118 0.721569 
+endnode
+node dummy billb06_hand
+  parent vos_billb06
+  position 0.0 0.0 1.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.839216 0.894118 0.6 
+endnode
+node dummy billb06_head
+  parent vos_billb06
+  position 0.0 0.0 2.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.839216 0.894118 0.6 
+endnode
+node dummy billb06_head_hit
+  parent vos_billb06
+  position 0.0 0.0 1.5
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.839216 0.894118 0.6 
+endnode
+node dummy billb06_impact
+  parent vos_billb06
+  position 0.0 0.0 0.85
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.898039 0.65098 0.843137 
+endnode
+node trimesh frontside
+  parent vos_billb06
+  position 0.0 -1.31631e-007 3.01138
+  orientation 0.0 -0.707107 -0.707107 -3.14159
+  wirecolor 0.521569 0.0196078 0.0196078 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 0.701961 0.701961 0.701961 
+  diffuse 0.701961 0.701961 0.701961 
+  specular 0.101961 0.101961 0.101961 
+  shininess 10
+  center 0.0 0.0 0.0 
+  bitmap vos_billboards2
+  verts 4
+    -2.13734 -1.20713 0.0
+    2.13734 -1.20713 0.0
+    -2.13734 1.20713 0.0
+    2.13734 1.20713 0.0
+  faces 2
+    2 0 3  1  2 0 3  1
+    1 3 0  1  1 3 0  1
+  tverts 4
+    0.00137397 0.552598 0
+    0.495502 0.552598 0
+    0.00137409 0.775194 0
+    0.495503 0.775194 0
+endnode
+node trimesh backside
+  parent vos_billb06
+  position 0.0 -0.01 3.01138
+  orientation -1.0 0.0 0.0 -1.5708
+  wirecolor 0.329412 0.109804 0.694118 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 0
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 0.701961 0.701961 0.701961 
+  diffuse 0.701961 0.701961 0.701961 
+  specular 0.101961 0.101961 0.101961 
+  shininess 10
+  center 0.0 0.0 0.0 
+  bitmap vos_billboards2
+  verts 4
+    -2.13734 -1.20713 0.0
+    2.13734 -1.20713 0.0
+    -2.13734 1.20713 0.0
+    2.13734 1.20713 0.0
+  faces 2
+    2 0 3  1  2 0 3  1
+    1 3 0  1  1 3 0  1
+  tverts 4
+    0.501484 0.553327 0
+    0.998322 0.553244 0
+    0.501233 0.775817 0
+    0.998986 0.775816 0
+endnode
+endmodelgeom vos_billb06
+donemodel vos_billb06

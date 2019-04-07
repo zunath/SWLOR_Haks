@@ -1,0 +1,50 @@
+# Exported from Gmax MDL Tool 0.1-beta at 11/3/03 12:33:21 AM
+# mdl file
+#
+#GMAXMODEL ASCII
+# model: force_field_wall
+filedependancy Unknown
+newmodel force_field_wall
+setsupermodel force_field_wall NULL
+classification Character
+setanimationscale 1.0
+#GMAXGEOM  ASCII
+beginmodelgeom force_field_wall
+node dummy force_field_wall
+  parent NULL
+endnode
+node trimesh force_field_mesh
+  parent force_field_wall
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  scale 1.0
+  transparencyhint 1
+  wirecolor 1.0 1.0 1.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 0.0
+  selfillumcolor 0.0 0.0 0.0 
+  alpha 0.5
+  bitmap force_field
+    verts 4
+     -5.00189 0.0285501 -1.83105e-006
+     4.9981 0.0285567 4.75602
+     -5.00189 0.02855 4.75602
+     4.9981 0.0285568 -1.83105e-006
+    faces 4
+     1 2 0  2  1 2 0  19
+     3 0 1  1  4 3 5  18
+     2 1 0  1  6 5 3  18
+     0 3 1  2  3 4 5  19
+    tverts 7
+     0.000499517 0.000499666 0
+     0.494271 0.876312 0
+     0.000499815 0.876312 0
+     0.000499517 0.000499666 0
+     0.49427 0.000499547 0
+     0.494271 0.876312 0
+     0.000499815 0.876312 0
+endnode
+endmodelgeom force_field_wall
+donemodel force_field_wall

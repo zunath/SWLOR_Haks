@@ -1,0 +1,340 @@
+# Rewritten by CleanModels 3 Version 3.5.2d Fri Apr 06 16:28:24 2018
+#MAXMODEL ASCII
+filedependency Unknown
+newmodel vmp01_n01_34
+  classification TILE
+  setsupermodel vmp01_n01_34 NULL
+  setanimationscale 1
+#MAXGEOM ASCII
+beginmodelgeom vmp01_n01_34
+node dummy vmp01_n01_34
+  parent NULL
+endnode
+node light vmp01_n01_34ml1
+  parent vmp01_n01_34
+  position 0 0 5
+  orientation 0 0 0 0
+  wirecolor 1 0.898039 0
+  radius 14
+  multiplier 1
+  color 1 1 1
+  ambientonly 0
+  nDynamicType 0
+  affectdynamic 1
+  shadow 0
+  lightpriority 5
+  fadinglight 0
+endnode
+node light vmp01_n01_34ml2
+  parent vmp01_n01_34
+  position -2 -2 4
+  orientation 0 0 0 0
+  wirecolor 1 0.898039 0
+  radius 5
+  multiplier 1
+  color 1 1 1
+  ambientonly 0
+  nDynamicType 0
+  affectdynamic 1
+  shadow 0
+  lightpriority 5
+  fadinglight 0
+endnode
+node trimesh redans_34
+  parent vmp01_n01_34
+  position 1.335 2.895 10.31
+  orientation 0 0 0 0
+  wirecolor 0.537255 0.0313726 0.431373
+  tilefade 0
+  scale 1
+  render 1
+  shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1
+  transparencyhint 0
+  selfillumcolor 0 0 0
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 10
+  center undefined
+  bitmap vmp01_wall02
+  verts 9
+    0.525 -2.525 -10.41
+    0.525 -2.525 -5.27
+    -1.115 -2.105 0
+    -1.115 -2.105 -10.41
+    2.695 2.105 -4.47
+    2.975 2.105 -5.27
+    1.115 2.105 0
+    2.975 2.105 -5.98
+    2.975 2.105 -10.41
+  faces 8
+    1 2 3 1 0 1 2 3
+    0 1 3 1 3 0 2 3
+    5 1 0 1 4 5 6 3
+    0 7 5 1 6 7 4 3
+    4 2 1 1 8 9 5 3
+    1 5 4 1 5 4 8 3
+    6 2 4 1 10 9 8 3
+    7 0 8 1 7 6 11 3
+  tverts 12
+    0.52038 0.621369 0
+    0.787 0.869409 0
+    0.787 0.379383 0
+    0.52038 0.379383 0
+    0.33677 0.660664 0
+    0.55405 0.660664 0
+    0.55405 0.418678 0
+    0.33677 0.626949 0
+    0.33974 0.698115 0
+    0.55422 0.908703 0
+    0.36954 0.908703 0
+    0.33677 0.418678 0
+endnode
+node trimesh top_34
+  parent vmp01_n01_34
+  position -2.955 1.082 10.31
+  orientation 0 0 0 0
+  wirecolor 0.603922 0.603922 0.894118
+  tilefade 0
+  scale 1
+  render 1
+  shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1
+  transparencyhint 0
+  selfillumcolor 0 0 0
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 10
+  center undefined
+  bitmap vmp01_wall02
+  verts 10
+    2.505 0.958 0
+    1.075 -5.522 0
+    1.825 -1.032 0
+    -2.045 -0.062 0
+    -2.045 -2.682 0
+    -2.045 -5.522 0
+    -2.045 2.108 0
+    -2.045 3.918 0
+    0.745 3.918 0
+    4.075 3.918 0
+  faces 6
+    4 1 2 1 0 1 2 4
+    2 3 4 1 2 3 0 4
+    5 1 4 1 4 1 0 4
+    7 0 8 1 5 6 7 4
+    7 6 0 1 5 8 6 4
+    8 0 9 1 7 6 9 4
+  tverts 10
+    0.47605 0.67205 0
+    0.63855 0.80291 0
+    0.38136 0.83427 0
+    0.32519 0.67205 0
+    0.63855 0.67205 0
+    0.097 0.67205 0
+    0.26688 0.86277 0
+    0.097 0.78887 0
+    0.20084 0.67204 0
+    0.097 0.92857 0
+endnode
+node trimesh control_34
+  parent vmp01_n01_34
+  position -2.171 0.287 10.31
+  orientation 0 0 0 0
+  wirecolor 0.776471 0.87451 0.337255
+  tilefade 0
+  scale 1
+  render 1
+  shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 1
+  alpha 1
+  transparencyhint 0
+  selfillumcolor 0 0 0
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 10
+  center undefined
+  bitmap vmp01_wall02
+  verts 23
+    2.391 0.503 -10.41
+    1.041 -0.237 0
+    2.391 0.503 0
+    0.291 -4.727 0
+    4.031 0.083 -10.41
+    1.721 1.753 0
+    -2.829 -5.287 0
+    1.421 -5.287 0
+    1.421 -5.287 -9.62
+    0.861 -5.287 0
+    1.421 -5.287 -10.41
+    -2.829 1.213 0
+    -2.829 0.733 0
+    -2.829 2.483 0
+    -2.829 1.823 0
+    -2.829 2.903 0
+    -2.829 -4.727 0
+    5.091 4.713 -10.41
+    4.621 4.713 -10.41
+    4.161 4.713 0
+    4.621 4.713 0
+    3.291 4.713 0
+    6.481 4.713 -10.41
+  faces 20
+    8 2 7 1 0 1 2 1
+    12 1 11 1 3 4 5 1
+    14 2 13 1 6 7 8 1
+    8 10 0 1 0 9 10 1
+    0 2 8 1 10 1 0 1
+    1 3 2 1 4 11 7 1
+    2 14 11 1 7 6 5 1
+    11 1 2 1 5 4 7 1
+    7 2 3 1 12 7 11 1
+    3 9 7 1 11 13 12 1
+    5 15 13 1 14 15 8 1
+    13 2 5 1 8 7 14 1
+    6 3 16 1 16 11 17 1
+    9 3 6 1 13 11 16 1
+    4 0 18 1 18 19 20 1
+    18 17 4 1 20 21 18 1
+    5 2 20 1 14 7 22 1
+    20 19 5 1 22 23 14 1
+    21 5 19 1 24 14 23 1
+    22 4 17 1 25 18 21 1
+  tverts 26
+    1.3133 0.44735 0
+    0.65096 0.97083 0
+    1.3133 0.97083 0
+    0.29663 0.600163 0
+    0.28296 0.752512 0
+    0.22034 0.595489 0
+    0.12686 0.596215 0
+    0.11406 0.808505 0
+    0.03215 0.583208 0
+    1.3133 0.40436 0
+    0.65096 0.40436 0
+    0.96773 0.753633 0
+    1.0666 0.798442 0
+    1.06383 0.777499 0
+    -0.04816 0.771549 0
+    -0.03209 0.579701 0
+    1.07663 0.643161 0
+    0.97857 0.639959 0
+    0.420772 0.23314 0
+    0.41521 0.214197 0
+    0.358796 0.23996 0
+    0.358796 0.245341 0
+    -0.57733 0.821611 0
+    -0.56252 0.807597 0
+    -0.50003 0.779145 0
+    0.358796 0.261443 0
+endnode
+node trimesh ground_34
+  parent vmp01_n01_34
+  position 0 0 0
+  orientation 0 0 0 0
+  wirecolor 0.694118 0.337255 0.101961
+  tilefade 0
+  scale 1
+  render 1
+  shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1
+  transparencyhint 0
+  selfillumcolor 0 0 0
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 10
+  center undefined
+  bitmap vmp01_floor01
+  verts 4
+    -5 -5 0
+    5 -5 0
+    -5 5 0
+    5 5 0
+  faces 2
+    2 0 3 1 0 1 2 1
+    1 3 0 1 3 2 1 1
+  tverts 4
+    -0.99988 1.99944 0
+    -0.99988 -0.00045 0
+    1.00028 1.99944 0
+    1.00028 -0.00045 0
+endnode
+node aabb walk_34
+  parent vmp01_n01_34
+  position 0 0 0
+  bitmap NULL
+  orientation 0 0 0 0
+  wirecolor 0.54902 0.345098 0.882353
+  ambient 0.588 0.588 0.588
+  diffuse 0.6 0.34 0.16
+  specular 0 0 0
+  shininess 10
+  render 0
+  shadow 0
+  verts 12
+    0.26 0.74 0
+    1.98 0.44 0
+    -5 -5 0
+    -0.64 -5 0
+    1.17 -5 0
+    -5 2.1 0
+    5 -5 0
+    -5 5 0
+    5 5 0
+    5 0.56 0
+    -1.05 5 0
+    4.5 5 0
+  faces 12
+    4 1 0 1 0 0 0 1
+    0 3 4 1 0 0 0 1
+    2 0 5 1 0 0 0 8
+    3 0 2 1 0 0 0 8
+    0 10 7 1 0 0 0 8
+    7 5 0 1 0 0 0 8
+    6 9 1 1 0 0 0 1
+    1 4 6 1 0 0 0 1
+    11 1 9 1 0 0 0 1
+    9 8 11 1 0 0 0 1
+    10 0 1 1 0 0 0 8
+    1 11 10 1 0 0 0 8
+  aabb     -5 -5 0 5 5 0 -1
+    -5 -5 0 1.98 5 0 -1
+    -5 -5 0 1.17 2.1 0 -1
+    -5 -5 0 1.17 0.74 0 -1
+    -5 -5 0 0.26 0.74 0 3
+    -0.64 -5 0 1.17 0.74 0 1
+    -5 -5 0 0.26 2.1 0 2
+    -5 0.44 0 1.98 5 0 -1
+    -5 0.74 0 0.26 5 0 -1
+    -5 0.74 0 0.26 5 0 5
+    -5 0.74 0 0.26 5 0 4
+    -1.05 0.44 0 1.98 5 0 10
+    -1.05 -5 0 5 5 0 -1
+    0.26 -5 0 5 0.74 0 -1
+    1.17 -5 0 5 0.44 0 7
+    0.26 -5 0 5 0.74 0 -1
+    1.98 -5 0 5 0.56 0 6
+    0.26 -5 0 1.98 0.74 0 0
+    -1.05 0.44 0 5 5 0 -1
+    -1.05 0.44 0 4.5 5 0 11
+    1.98 0.44 0 5 5 0 -1
+    1.98 0.44 0 5 5 0 8
+    4.5 0.56 0 5 5 0 9
+endnode
+endmodelgeom vmp01_n01_34
+donemodel vmp01_n01_34

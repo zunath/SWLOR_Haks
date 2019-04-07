@@ -1,0 +1,88 @@
+#Exported from 3ds max by MDL Plug-in Suite 1.0b
+#http://www.bricksbuilder.com/nwn/utils/
+#MAXMODEL ASCII
+# model: plc_plate02
+filedependancy Unknown
+newmodel plc_plate02
+setsupermodel plc_plate02 NULL
+classification Character
+setanimationscale 1.0
+#MAXGEOM  ASCII
+beginmodelgeom plc_plate02
+node dummy plc_plate02
+  parent NULL
+endnode
+node trimesh Cylinder168
+  parent plc_plate02
+  position 0 0 0
+  orientation 0 0 0 0
+  wirecolor 0.527344 0.527344 0.527344
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 10
+  bitmap records
+  verts 20
+    -0.2 0.07 0.003
+    -0.2 -0.07 0.012
+    -0.2 0.07 0.012
+    -0.2 -0.07 0.003
+    -0.13 -0.18 0.012
+    -0.12 -0.18 0.003
+    0 -0.23 0.012
+    0 -0.23 0.006
+    0.13 -0.19 0.012
+    0.14 -0.19 0.006
+    0.22 -0.08 0.012
+    0.22 -0.08 0.006
+    0.22 0.06 0.012
+    0.22 0.06 0.006
+    0.14 0.17 0.012
+    0.14 0.17 0.006
+    0.01 0.21 0.012
+    0.01 0.21 0.003
+    -0.12 0.17 0.012
+    -0.12 0.17 0.003
+  faces 28
+    0 1 2  1  0 1 0  3
+    0 3 1  1  0 1 1  3
+    3 4 1  1  1 2 1  3
+    3 5 4  1  1 2 2  3
+    5 6 4  1  2 3 2  3
+    5 7 6  1  2 3 3  3
+    7 8 6  1  3 4 3  3
+    7 9 8  1  3 4 4  3
+    9 10 8  1  4 5 4  3
+    9 11 10  1  4 5 5  3
+    11 12 10  1  5 6 5  3
+    11 13 12  1  5 6 6  3
+    13 14 12  1  6 7 6  3
+    13 15 14  1  6 7 7  3
+    15 16 14  1  7 8 7  3
+    15 17 16  1  7 8 8  3
+    17 18 16  1  8 9 8  3
+    17 19 18  1  8 9 9  3
+    19 2 18  1  9 0 9  3
+    19 0 2  1  9 0 0  3
+    12 2 1  1  6 0 1  1
+    12 1 4  1  6 1 2  1
+    12 4 6  1  6 2 3  1
+    12 6 8  1  6 3 4  1
+    12 8 10  1  6 4 5  1
+    12 14 16  1  6 7 8  1
+    12 16 18  1  6 8 9  1
+    12 18 2  1  6 9 0  1
+  tverts 10
+    0.97255 0.253623 0
+    0.926777 0.392057 0
+    0.806942 0.477614 0
+    0.658817 0.477614 0
+    0.538982 0.392057 0
+    0.493209 0.253623 0
+    0.538982 0.115189 0
+    0.658817 0.029632 0
+    0.806942 0.029632 0
+    0.926777 0.115189 0
+endnode
+endmodelgeom plc_plate02
+donemodel plc_plate02

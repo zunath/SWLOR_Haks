@@ -1,0 +1,35 @@
+# Exported from NWmax 0.8 b60 at 05/06/2007 16:37:32
+# mdl file
+#
+#NWmax MODEL ASCII
+# model: WBwSh_m_134
+#local file: Unknown
+filedependancy Unknown
+newmodel WBwSh_m_134
+setsupermodel WBwSh_m_134 NULL
+classification Character
+setanimationscale 0.0
+#NWmax GEOM  ASCII
+beginmodelgeom WBwSh_m_134
+node dummy WBwSh_m_134
+  parent NULL
+endnode
+endmodelgeom WBwSh_m_134
+
+#NWmax ANIM ASCII
+newanim throwr WBwSh_m_134
+  length 1.0
+  transtime 0.25
+  animroot WBwSh_m_134
+  event 0.333333 detonate
+    node dummy WBwSh_m_134
+        parent NULL
+        positionkey
+            0.0 0.0 0.0 -2.51312e-006
+            0.333333 0.0 0.0 -2.51312e-006
+            1.0 0.0 0.0 -2.51312e-006
+        endlist
+    endnode
+doneanim throwr WBwSh_m_134
+
+donemodel WBwSh_m_134

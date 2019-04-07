@@ -1,0 +1,666 @@
+# Exported from NWmax 0.8 b60 at 03/01/2010 17:34:06
+# mdl file
+#
+#NWmax MODEL ASCII
+# model: jvb_cigarb01
+#local file: Unknown
+filedependancy Unknown
+newmodel jvb_cigarb01
+setsupermodel jvb_cigarb01 NULL
+classification Character
+setanimationscale 1.0
+#NWmax GEOM  ASCII
+beginmodelgeom jvb_cigarb01
+node dummy jvb_cigarb01
+  parent NULL
+endnode
+node dummy cigarb01_impact
+  parent jvb_cigarb01
+  position 0.0 0.0 0.85
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.0313726 0.239216 0.541176 
+endnode
+node dummy cigarb01_ground
+  parent jvb_cigarb01
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.0313726 0.239216 0.541176 
+endnode
+node dummy cigarb01_hand
+  parent jvb_cigarb01
+  position 0.0 0.0 1.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.0313726 0.239216 0.541176 
+endnode
+node dummy cigarb01_head
+  parent jvb_cigarb01
+  position 0.0 0.0 2.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.0313726 0.239216 0.541176 
+endnode
+node dummy cigarb01_head_hit
+  parent jvb_cigarb01
+  position 0.0 0.0 1.5
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.0313726 0.239216 0.541176 
+endnode
+node trimesh cigar_box
+  parent jvb_cigarb01
+  position 0.000197365 0.000308109 0.0420297
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.341176 0.694118 0.101961 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 0.588 0.588 0.588 
+  Diffuse 0.588 0.588 0.588 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0438499 0.0170002 -0.691175 
+  bitmap jvb_cigarbox
+  verts 23
+    -0.160819 0.108819 0.0317404
+    -0.15414 -0.103188 0.0206629
+    0.154573 -0.103188 0.0338173
+    0.154573 -0.103188 0.0206629
+    -0.15414 -0.103188 0.0338173
+    0.154573 0.103526 0.0338173
+    0.154573 0.103526 0.0206629
+    -0.15414 0.103526 0.0338173
+    -0.15414 0.103526 0.0206629
+    0.160443 -0.108805 0.0324516
+    -0.15958 -0.108131 0.033491
+    0.161253 0.108819 0.0317404
+    0.160035 -0.109484 -0.04599
+    -0.159928 -0.10937 -0.0458902
+    -0.15958 0.108471 -0.0476408
+    0.160013 0.108471 -0.0476408
+    0.160002 0.110641 -0.0454398
+    -0.159569 0.110641 -0.0454398
+    0.162626 -0.10732 0.0304342
+    0.162184 0.108459 -0.0454398
+    -0.161749 0.108459 -0.0454398
+    -0.161749 -0.108119 0.03129
+    -0.159569 -0.110301 0.03129
+  faces 42
+    1 2 3  1  3 4 5  1
+    2 1 4  1  4 3 6  1
+    3 5 6  2  7 8 9  1
+    5 3 2  2  8 7 10  1
+    6 7 8  1  5 6 3  1
+    7 6 5  1  6 5 4  1
+    8 4 1  2  9 10 7  1
+    4 8 7  2  10 9 8  1
+    4 9 2  60  6 11 4  1
+    9 4 10  188  11 6 12  1
+    2 11 5  112  10 13 8  1
+    11 2 9  96  13 10 14  1
+    5 0 7  216  4 12 6  1
+    0 5 11  192  12 4 11  1
+    7 10 4  1160  8 14 10  1
+    10 7 0  5248  14 8 13  1
+    12 13 14  1  15 16 17  1
+    12 14 15  1  15 17 18  1
+    0 11 16  1  26 25 27  1
+    0 16 17  1  26 27 28  1
+    17 16 15  34  30 29 31  1
+    17 15 14  34  30 31 32  1
+    1 3 6  4  35 36 37  1
+    1 6 8  4  35 37 38  1
+    18 9 12  2  51 44 52  1
+    11 9 18  32  67 50 51  1
+    11 18 12  8  68 51 53  1
+    11 12 19  8  68 53 69  1
+    19 12 15  16  70 71 72  1
+    16 19 15  22  75 73 74  1
+    11 19 16  4  78 77 76  1
+    20 17 14  2088  73 75 84  1
+    13 20 14  264  55 70 72  1
+    21 20 13  832  51 69 53  1
+    21 0 20  3584  51 68 69  1
+    10 0 21  5120  49 67 50  1
+    0 17 20  2048  79 76 77  1
+    22 21 13  4160  43 44 52  1
+    10 21 22  4100  40 42 41  1
+    9 10 22  4  21 22 24  1
+    9 22 13  2  25 26 28  1
+    9 13 12  2  25 28 27  1
+  tverts 94
+    0.0105 0.0154 0
+    0.0105 0.00770003 0
+    0.0079 0.00870001 0
+    0.5818 0.5116 0
+    0.9656 0.5931 0
+    0.9656 0.5116 0
+    0.5818 0.5931 0
+    0.5745 0.5376 0
+    0.9996 0.5789 0
+    0.9996 0.5376 0
+    0.5745 0.5789 0
+    0.9713 0.6181 0
+    0.5761 0.6181 0
+    1.0081 0.6153 0
+    0.566 0.6153 0
+    0.9956 0.3633 0
+    0.5419 0.3633 0
+    0.5419 0.6392 0
+    0.9956 0.6392 0
+    0.0005 0.3596 0
+    0.6784 0.3596 0
+    0.6784 0.3586 0
+    0.0005 0.3586 0
+    0.6784 0.3558 0
+    0.0005 0.3558 0
+    0.6784 0.3519 0
+    0.0005 0.3519 0
+    0.6784 0.1814 0
+    0.0005 0.1814 0
+    0.6784 0.1776 0
+    0.0005 0.1776 0
+    0.6784 0.1747 0
+    0.0005 0.1747 0
+    0.6784 0.1737 0
+    0.0005 0.1737 0
+    0.0149 0.987 0
+    0.4528 0.987 0
+    0.4484 0.7038 0
+    0.0105 0.7038 0
+    0.0195 0.1666 0
+    0.0177 0.1666 0
+    0.0146 0.1642 0
+    0.0177 0.1642 0
+    0.0135 0.1608 0
+    0.017 0.1608 0
+    0.0122 0.1608 0
+    0.0135 0.1642 0
+    0.017 0.1666 0
+    0.0219 0.1676 0
+    0.0219 0.1666 0
+    0.0219 0.1642 0
+    0.0219 0.1608 0
+    0.017 0.0131 0
+    0.0219 0.0131 0
+    0.0177 0.0097 0
+    0.0219 0.0097 0
+    0.0195 0.00730002 0
+    0.644 0.1676 0
+    0.644 0.1666 0
+    0.0122 0.0131 0
+    0.0135 0.0131 0
+    0.0135 0.0097 0
+    0.0146 0.0097 0
+    0.017 0.00730002 0
+    0.0177 0.00730002 0
+    0.0219 0.00639999 0
+    0.6464 0.1666 0
+    0.644 0.1642 0
+    0.644 0.1608 0
+    0.644 0.0131 0
+    0.644 0.0097 0
+    0.0219 0.00730002 0
+    0.644 0.00730002 0
+    0.6482 0.0097 0
+    0.6464 0.00730002 0
+    0.6513 0.0097 0
+    0.6524 0.0131 0
+    0.6489 0.0131 0
+    0.6524 0.1608 0
+    0.6489 0.1608 0
+    0.6513 0.1642 0
+    0.6482 0.1642 0
+    0.6482 0.1666 0
+    0.644 0.00639999 0
+    0.6482 0.00730002 0
+    0.6524 0.0097 0
+    0.6537 0.0131 0
+    0.6537 0.1608 0
+    0.6524 0.1642 0
+    0.6489 0.1666 0
+    0.6489 0.00730002 0
+    0.0105 0.9846 0
+    0.0079 0.9913 0
+    0.0105 0.9923 0
+endnode
+node dummy jvb_cigarb01a
+  parent cigar_box
+  position -0.000448024 -0.109297 0.0394373
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.839216 0.894118 0.6 
+endnode
+node trimesh Top
+  parent jvb_cigarb01a
+  position -3.44396e-005 0.109127 -0.0367698
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.341176 0.694118 0.101961 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 0.588 0.588 0.588 
+  Diffuse 0.588 0.588 0.588 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center -0.00444984 0.0 3.93318 
+  bitmap jvb_cigarbox
+  verts 11
+    -0.161252 -0.109242 0.0458898
+    0.160272 -0.110134 0.0458898
+    0.161163 0.109243 0.0458898
+    -0.161252 0.109243 0.0458898
+    -0.160074 0.108801 0.0327738
+    0.161003 0.109361 0.0338456
+    0.160599 -0.109325 0.0333183
+    -0.161252 -0.109242 0.0340295
+    0.159115 -0.111508 0.0353356
+    -0.159203 0.111508 0.0353356
+    0.159115 0.111508 0.0353356
+  faces 18
+    0 1 2  1  124 125 126  1
+    0 2 3  1  124 126 127  1
+    6 4 5  1  65 66 64  1
+    6 7 4  1  65 67 66  1
+    8 7 6  1  92 80 79  1
+    9 5 4  1  101 58 56  1
+    9 10 5  1  101 102 58  1
+    1 0 7  2  110 108 109  1
+    1 7 8  2  110 109 111  1
+    1 8 6  4  112 111 113  1
+    0 3 4  4  120 116 119  1
+    0 4 7  4  120 119 121  1
+    2 5 10  4  108 107 109  1
+    3 2 10  2  110 108 109  1
+    3 10 9  2  110 109 111  1
+    3 9 4  4  112 111 113  1
+    2 1 6  4  120 116 119  1
+    2 6 5  4  120 119 121  1
+  tverts 128
+    0.0076 0.6855 0
+    0.5335 0.6855 0
+    0.5335 0.3659 0
+    0.0076 0.3659 0
+    0.0062 0.6877 0
+    0.0076 0.688 0
+    0.5335 0.688 0
+    0.5348 0.6877 0
+    0.5358 0.6868 0
+    0.5362 0.6855 0
+    0.5362 0.3659 0
+    0.5358 0.3647 0
+    0.0076 0.3634 0
+    0.5335 0.3615 0
+    0.0076 0.3615 0
+    0.5335 0.3634 0
+    0.5358 0.3621 0
+    0.5348 0.3637 0
+    0.5376 0.3637 0
+    0.5382 0.3659 0
+    0.5382 0.6855 0
+    0.5376 0.6877 0
+    0.5358 0.6893 0
+    0.5335 0.6899 0
+    0.0076 0.6899 0
+    0.0052 0.6893 0
+    0.0028 0.688 0
+    0.0049 0.6899 0
+    0.0076 0.6905 0
+    0.5335 0.6905 0
+    0.5362 0.6899 0
+    0.5382 0.688 0
+    0.5389 0.6855 0
+    0.5389 0.3659 0
+    0.5382 0.3634 0
+    0.5362 0.3615 0
+    0.5335 0.3609 0
+    0.0076 0.3609 0
+    0.0062 0.3637 0
+    0.0052 0.3621 0
+    0.0049 0.3615 0
+    0.0035 0.3637 0
+    0.0028 0.3634 0
+    0.0028 0.3659 0
+    0.0021 0.3659 0
+    0.0028 0.6855 0
+    0.0021 0.6855 0
+    0.0035 0.6877 0
+    0.0052 0.6868 0
+    0.0049 0.6855 0
+    0.0049 0.3659 0
+    0.0052 0.3647 0
+    0.0036 0.6861 0
+    0.005 0.6878 0
+    0.0058 0.6861 0
+    0.0069 0.6865 0
+    0.0069 0.6884 0
+    0.5343 0.6865 0
+    0.5343 0.6884 0
+    0.5354 0.6861 0
+    0.5362 0.6878 0
+    0.5362 0.6851 0
+    0.5376 0.6861 0
+    0.5365 0.6838 0
+    0.5343 0.6838 0
+    0.5343 0.3679 0
+    0.0069 0.6838 0
+    0.0069 0.3679 0
+    0.0047 0.3679 0
+    0.005 0.3666 0
+    0.0058 0.3656 0
+    0.0069 0.3652 0
+    0.5343 0.3652 0
+    0.5354 0.3656 0
+    0.0047 0.6838 0
+    0.005 0.6851 0
+    0.5362 0.3666 0
+    0.5376 0.3656 0
+    0.5362 0.3639 0
+    0.5343 0.3633 0
+    0.0069 0.3633 0
+    0.005 0.3639 0
+    0.0036 0.3656 0
+    0.0031 0.3679 0
+    0.0031 0.6838 0
+    0.5381 0.6865 0
+    0.5387 0.6838 0
+    0.5381 0.6838 0
+    0.5381 0.3679 0
+    0.5387 0.3679 0
+    0.5381 0.3652 0
+    0.5365 0.3633 0
+    0.5343 0.3626 0
+    0.0069 0.3626 0
+    0.0047 0.3633 0
+    0.0031 0.3652 0
+    0.0025 0.3679 0
+    0.5365 0.3679 0
+    0.0025 0.6838 0
+    0.0031 0.6865 0
+    0.0047 0.6884 0
+    0.0069 0.6891 0
+    0.5343 0.6891 0
+    0.5365 0.6884 0
+    0.6069 0.111 0
+    0.6076 0.111 0
+    0.6076 0.0919 0
+    0.6069 0.0919 0
+    0.6061 0.111 0
+    0.6061 0.0919 0
+    0.4458 0.111 0
+    0.4458 0.0919 0
+    0.4449 0.111 0
+    0.4449 0.0919 0
+    0.4443 0.111 0
+    0.4443 0.0919 0
+    0.6053 0.111 0
+    0.6065 0.111 0
+    0.6065 0.0919 0
+    0.6053 0.0919 0
+    0.4466 0.111 0
+    0.4466 0.0919 0
+    0.4453 0.111 0
+    0.4453 0.0919 0
+    0.5335 0.6855 0
+    0.00759995 0.6855 0
+    0.00759995 0.3659 0
+    0.5335 0.3659 0
+endnode
+endmodelgeom jvb_cigarb01
+
+#NWmax ANIM ASCII
+newanim close jvb_cigarb01
+  length 0.0333333
+  transtime 0.25
+  animroot jvb_cigarb01
+    node dummy jvb_cigarb01
+        parent NULL
+        positionkey
+            0.0 0.0 0.0 0.0
+            0.0333333 0.0 0.0 0.0
+        endlist
+        orientationkey
+            0.0 0.0 0.0 0.0 0.0
+            0.0333333 0.0 0.0 0.0 0.0
+        endlist
+    endnode
+    node dummy cigarb01_impact
+        parent jvb_cigarb01
+    endnode
+    node dummy cigarb01_ground
+        parent jvb_cigarb01
+    endnode
+    node dummy cigarb01_hand
+        parent jvb_cigarb01
+    endnode
+    node dummy cigarb01_head
+        parent jvb_cigarb01
+    endnode
+    node dummy cigarb01_head_hit
+        parent jvb_cigarb01
+    endnode
+    node trimesh cigar_box
+        parent jvb_cigarb01
+    endnode
+    node dummy jvb_cigarb01a
+        parent cigar_box
+    endnode
+    node trimesh Top
+        parent jvb_cigarb01a
+    endnode
+    node dummy jvb_cigarb01_pwk
+        parent jvb_cigarb01
+    endnode
+    node dummy b01_pwk_use01
+        parent jvb_cigarb01_pwk
+    endnode
+doneanim close jvb_cigarb01
+
+
+#NWmax ANIM ASCII
+newanim close2open jvb_cigarb01
+  length 0.166667
+  transtime 0.25
+  animroot jvb_cigarb01
+    node dummy jvb_cigarb01
+        parent NULL
+        positionkey
+            0.0 0.0 0.0 0.0
+        endlist
+        orientationkey
+            0.0 0.0 0.0 0.0 0.0
+        endlist
+    endnode
+    node dummy cigarb01_impact
+        parent jvb_cigarb01
+    endnode
+    node dummy cigarb01_ground
+        parent jvb_cigarb01
+    endnode
+    node dummy cigarb01_hand
+        parent jvb_cigarb01
+    endnode
+    node dummy cigarb01_head
+        parent jvb_cigarb01
+    endnode
+    node dummy cigarb01_head_hit
+        parent jvb_cigarb01
+    endnode
+    node trimesh cigar_box
+        parent jvb_cigarb01
+    endnode
+    node dummy jvb_cigarb01a
+        parent cigar_box
+        orientationkey
+            0.0 0.0 0.0 0.0 0.0
+            0.166667 -1.0 0.0 0.0 -0.82798
+        endlist
+    endnode
+    node trimesh Top
+        parent jvb_cigarb01a
+    endnode
+    node dummy jvb_cigarb01_pwk
+        parent jvb_cigarb01
+    endnode
+    node dummy b01_pwk_use01
+        parent jvb_cigarb01_pwk
+    endnode
+doneanim close2open jvb_cigarb01
+
+
+#NWmax ANIM ASCII
+newanim open jvb_cigarb01
+  length 0.0333333
+  transtime 0.25
+  animroot jvb_cigarb01
+    node dummy jvb_cigarb01
+        parent NULL
+    endnode
+    node dummy cigarb01_impact
+        parent jvb_cigarb01
+    endnode
+    node dummy cigarb01_ground
+        parent jvb_cigarb01
+    endnode
+    node dummy cigarb01_hand
+        parent jvb_cigarb01
+    endnode
+    node dummy cigarb01_head
+        parent jvb_cigarb01
+    endnode
+    node dummy cigarb01_head_hit
+        parent jvb_cigarb01
+    endnode
+    node trimesh cigar_box
+        parent jvb_cigarb01
+    endnode
+    node dummy jvb_cigarb01a
+        parent cigar_box
+        positionkey
+            0.0 -0.000448024 -0.109297 0.0394373
+            0.0333333 -0.000448024 -0.109297 0.0394373
+        endlist
+        orientationkey
+            0.0 -1.0 0.0 0.0 -0.82798
+            0.0333333 -1.0 0.0 0.0 -0.82798
+        endlist
+    endnode
+    node trimesh Top
+        parent jvb_cigarb01a
+    endnode
+    node dummy jvb_cigarb01_pwk
+        parent jvb_cigarb01
+    endnode
+    node dummy b01_pwk_use01
+        parent jvb_cigarb01_pwk
+    endnode
+doneanim open jvb_cigarb01
+
+
+#NWmax ANIM ASCII
+newanim open2close jvb_cigarb01
+  length 0.166667
+  transtime 0.25
+  animroot jvb_cigarb01
+    node dummy jvb_cigarb01
+        parent NULL
+    endnode
+    node dummy cigarb01_impact
+        parent jvb_cigarb01
+    endnode
+    node dummy cigarb01_ground
+        parent jvb_cigarb01
+    endnode
+    node dummy cigarb01_hand
+        parent jvb_cigarb01
+    endnode
+    node dummy cigarb01_head
+        parent jvb_cigarb01
+    endnode
+    node dummy cigarb01_head_hit
+        parent jvb_cigarb01
+    endnode
+    node trimesh cigar_box
+        parent jvb_cigarb01
+    endnode
+    node dummy jvb_cigarb01a
+        parent cigar_box
+        positionkey
+            0.0 -0.000448024 -0.109297 0.0394373
+        endlist
+        orientationkey
+            0.0 -1.0 0.0 0.0 -0.827979
+            0.166667 0.0 0.0 0.0 0.0
+        endlist
+    endnode
+    node trimesh Top
+        parent jvb_cigarb01a
+    endnode
+    node dummy jvb_cigarb01_pwk
+        parent jvb_cigarb01
+    endnode
+    node dummy b01_pwk_use01
+        parent jvb_cigarb01_pwk
+    endnode
+doneanim open2close jvb_cigarb01
+
+
+#NWmax ANIM ASCII
+newanim default jvb_cigarb01
+  length 0.0333333
+  transtime 0.25
+  animroot jvb_cigarb01
+    node dummy jvb_cigarb01
+        parent NULL
+        positionkey
+            0.0 0.0 0.0 0.0
+            0.0333333 0.0 0.0 0.0
+        endlist
+        orientationkey
+            0.0 0.0 0.0 0.0 0.0
+            0.0333333 0.0 0.0 0.0 0.0
+        endlist
+    endnode
+    node dummy cigarb01_impact
+        parent jvb_cigarb01
+    endnode
+    node dummy cigarb01_ground
+        parent jvb_cigarb01
+    endnode
+    node dummy cigarb01_hand
+        parent jvb_cigarb01
+    endnode
+    node dummy cigarb01_head
+        parent jvb_cigarb01
+    endnode
+    node dummy cigarb01_head_hit
+        parent jvb_cigarb01
+    endnode
+    node trimesh cigar_box
+        parent jvb_cigarb01
+    endnode
+    node dummy jvb_cigarb01a
+        parent cigar_box
+    endnode
+    node trimesh Top
+        parent jvb_cigarb01a
+    endnode
+    node dummy jvb_cigarb01_pwk
+        parent jvb_cigarb01
+    endnode
+    node dummy b01_pwk_use01
+        parent jvb_cigarb01_pwk
+    endnode
+doneanim default jvb_cigarb01
+
+donemodel jvb_cigarb01

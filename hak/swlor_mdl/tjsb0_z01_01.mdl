@@ -1,0 +1,92 @@
+# Exported from NWmax 0.8 b60 at 20/10/2006 20.20.23
+# mdl file
+#
+#NWmax MODEL ASCII
+# model: tjsb0_z01_01
+#local file: Unknown
+filedependancy Unknown
+newmodel tjsb0_z01_01
+setsupermodel tjsb0_z01_01 null
+classification Tile
+#NWmax GEOM  ASCII
+beginmodelgeom tjsb0_z01_01
+node dummy tjsb0_z01_01
+  parent NULL
+endnode
+#Tile trimesh node
+node trimesh margin
+  parent tjsb0_z01_01
+  position -0.01 0.0 3.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.0 0.0 0.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 0.0 0.0 0.0 
+  diffuse 0.0 0.0 0.0 
+  specular 0.0 0.0 0.0 
+  shininess 1
+  center undefined
+  bitmap black
+  verts 4
+    -4.99 -5.0 0.0
+    5.01 -5.0 0.0
+    -4.99 5.0 0.0
+    5.01 5.0 0.0
+  faces 2
+    3 2 1  0  0 0 0  65536
+    2 0 1  0  0 0 0  65536
+endnode
+#Tile trimesh node
+node trimesh floor
+  parent tjsb0_z01_01
+  position -0.01 0.0 8.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.0 0.0 0.0 
+  tilefade 1
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 0.0 0.0 0.0 
+  diffuse 0.0 0.0 0.0 
+  specular 0.0 0.0 0.0 
+  shininess 1
+  center undefined
+  bitmap black
+  verts 8
+    -4.99 -5.0 0.0
+    5.01 -5.0 0.0
+    -4.99 5.0 0.0
+    5.01 5.0 0.0
+    5.01 5.0 -5.0
+    -4.99 5.0 -5.0
+    5.01 -5.0 -5.0
+    -4.99 -5.0 -5.0
+  faces 10
+    3 2 1  0  0 0 0  65536
+    2 0 1  0  0 0 0  65536
+    4 5 2  0  0 0 0  65536
+    2 3 4  0  0 0 0  65536
+    6 4 3  0  0 0 0  65536
+    3 1 6  0  0 0 0  65536
+    5 7 0  0  0 0 0  65536
+    0 2 5  0  0 0 0  65536
+    7 6 1  0  0 0 0  65536
+    1 0 7  0  0 0 0  65536
+endnode
+endmodelgeom tjsb0_z01_01
+donemodel tjsb0_z01_01
+

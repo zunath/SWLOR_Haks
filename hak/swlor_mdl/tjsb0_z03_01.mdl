@@ -1,0 +1,45 @@
+# Rewritten by CleanModels 3.0 Sun Aug 06 20:09:31 2006
+#MAXMODEL ASCII
+filedependency Unknown
+newmodel tjsb0_z03_01
+setsupermodel tjsb0_z03_01 null
+setanimationscale 1
+classification TILE
+#MAXGEOM ASCII
+beginmodelgeom tjsb0_z03_01
+node dummy tjsb0_z03_01
+  parent NULL
+endnode
+node trimesh floor
+  parent tjsb0_z03_01
+  orientation 0.0 0.0 0.0 0.0
+  wirecolor 0.0 0.0 0.0
+  tilefade 0
+  scale 1.0
+  render 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0
+  ambient 0.0 0.0 0.0
+  diffuse 0.0 0.0 0.0
+  specular 0.0 0.0 0.0
+  shininess 1
+  center undefined
+  bitmap black
+  shadow 1
+  position 0 0 -20.78
+  verts 4
+    -5 -5 0
+    -5 5 0
+    5 -5 0
+    5 5 0
+  faces 2
+    2 3 1 0 0 0 0 65536
+    0 2 1 0 0 0 0 65536
+endnode
+endmodelgeom tjsb0_z03_01
+donemodel tjsb0_z03_01
+

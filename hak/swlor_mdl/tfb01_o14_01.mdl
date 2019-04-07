@@ -1,0 +1,22 @@
+#MAXMODEL ASCII
+# model: tfb01_O14_01
+filedependancy tfb01_O14_01.max
+newmodel tfb01_O14_01
+setsupermodel tfb01_O14_01 NULL
+classification tile
+setanimationscale 1
+#MAXGEOM  ASCII
+beginmodelgeom tfb01_O14_01
+node dummy tfb01_O14_01
+  parent NULL
+  #part-number 0
+endnode
+node dummy tfb01_O14_01_D01
+  parent tfb01_O14_01
+  #part-number 1
+  position 4.24896002 0 -8.85010013e-006
+  orientation 0 0 1 -1.57079995
+endnode
+endmodelgeom tfb01_O14_01
+
+donemodel tfb01_O14_01

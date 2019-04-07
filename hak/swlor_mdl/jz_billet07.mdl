@@ -1,0 +1,228 @@
+# Exported from NWmax 0.8 b60 at 22/09/2007 05:40:19
+# mdl file
+#
+#NWmax MODEL ASCII
+# model: Jz_billet07
+#local file: Unknown
+filedependancy Unknown
+newmodel Jz_billet07
+setsupermodel Jz_billet07 NULL
+classification Character
+setanimationscale 1.0
+#NWmax GEOM  ASCII
+beginmodelgeom Jz_billet07
+node dummy Jz_billet07
+  parent NULL
+endnode
+node trimesh Dessous
+  parent Jz_billet07
+  position 0.00373377 -0.000268348 0.000542971
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.337255 0.87451 0.337255 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 0.0 0.0 
+  bitmap jz_billets
+  verts 4
+    -0.03315 -0.078 0.0
+    0.03315 -0.078 0.0
+    -0.03315 0.078 0.0
+    0.03315 0.078 0.0
+  faces 2
+    0 2 3  2  1 3 2  2
+    3 1 0  2  2 0 1  2
+  tverts 4
+    0.587587 0.877129 0
+    0.587867 0.753886 0
+    0.878981 0.877223 0
+    0.878795 0.753979 0
+endnode
+node trimesh Devant
+  parent Jz_billet07
+  position 0.00373377 -0.000268348 0.000542971
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.337255 0.87451 0.337255 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 7.8 0.6 
+  bitmap jz_billets
+  verts 4
+    -0.03315 0.078 0.0
+    0.03315 0.078 0.0
+    -0.03315 0.078 0.012
+    0.03315 0.078 0.012
+  faces 2
+    1 0 2  32  0 1 3  6
+    2 3 1  32  3 2 0  6
+  tverts 4
+    0.328139 0.507822 0
+    0.648424 0.507823 0
+    0.328163 0.539071 0
+    0.648393 0.539067 0
+endnode
+node trimesh Dos
+  parent Jz_billet07
+  position 0.00373377 -0.000268348 0.000542971
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.337255 0.87451 0.337255 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 -7.8 0.6 
+  bitmap jz_billets
+  verts 4
+    -0.03315 -0.078 0.0
+    0.03315 -0.078 0.0
+    -0.03315 -0.078 0.012
+    0.03315 -0.078 0.012
+  faces 2
+    0 1 3  8  0 1 3  5
+    3 2 0  8  3 2 0  5
+  tverts 4
+    0.328437 0.507711 0
+    0.648464 0.507805 0
+    0.328472 0.539261 0
+    0.648416 0.539039 0
+endnode
+node trimesh Droite
+  parent Jz_billet07
+  position 0.00373377 -0.000268348 0.000542971
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.337255 0.87451 0.337255 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 3.315 0.0 0.6 
+  bitmap jz_billets
+  verts 4
+    0.03315 -0.078 0.0
+    0.03315 0.078 0.0
+    0.03315 -0.078 0.012
+    0.03315 0.078 0.012
+  faces 2
+    0 1 3  16  0 1 3  4
+    3 2 0  16  3 2 0  4
+  tverts 4
+    0.328162 0.542953 0
+    0.648451 0.543058 0
+    0.328127 0.507806 0
+    0.648444 0.508252 0
+endnode
+node trimesh face01
+  parent Jz_billet07
+  position 0.00373377 -0.000268348 0.000542971
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.337255 0.87451 0.337255 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 0.0 1.2 
+  bitmap jz_billets
+  verts 4
+    -0.03315 -0.078 0.012
+    0.03315 -0.078 0.012
+    -0.03315 0.078 0.012
+    0.03315 0.078 0.012
+  faces 2
+    0 1 3  4  0 1 3  1
+    3 2 0  4  3 2 0  1
+  tverts 4
+    0.328113 0.707134 0
+    0.328241 0.543151 0
+    0.648501 0.707072 0
+    0.648331 0.543355 0
+endnode
+node trimesh Gauche
+  parent Jz_billet07
+  position 0.00373377 -0.000268348 0.000542971
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.337255 0.87451 0.337255 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center -3.315 0.0 0.6 
+  bitmap jz_billets
+  verts 4
+    -0.03315 -0.078 0.0
+    -0.03315 0.078 0.0
+    -0.03315 -0.078 0.012
+    -0.03315 0.078 0.012
+  faces 2
+    1 0 2  64  1 0 2  3
+    2 3 1  64  2 3 1  3
+  tverts 4
+    0.328188 0.542946 0
+    0.328148 0.507847 0
+    0.648415 0.542953 0
+    0.648404 0.507879 0
+endnode
+endmodelgeom Jz_billet07
+donemodel Jz_billet07

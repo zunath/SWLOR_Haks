@@ -1,0 +1,282 @@
+# Exported from NWmax 0.8 b60 at 22/12/2007 16:07:29
+# mdl file
+#
+#NWmax MODEL ASCII
+# model: FCI01_S01_13
+#local file: D:\3dsmax7\scenes\launching_bay_sliced.max
+filedependancy launching_bay_sliced.max
+newmodel FCI01_S01_13
+setsupermodel FCI01_S01_13 NULL
+classification Tile
+#NWmax GEOM  ASCII
+beginmodelgeom FCI01_S01_13
+node dummy FCI01_S01_13
+  parent NULL
+endnode
+node light FCI01_S01_13ml1
+  parent FCI01_S01_13
+  position 0.0 0.0 5.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 1.0 0.898039 0.0 
+  radius 14.0
+  multiplier 1.0
+  color 1.0 1.0 1.0 
+  ambientonly 0
+  nDynamicType 0
+  affectDynamic 1
+  shadow 0
+  lightpriority 5
+  fadingLight 0
+endnode
+node light FCI01_S01_13ml2
+  parent FCI01_S01_13
+  position -2.0 -2.0 4.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 1.0 0.898039 0.0 
+  radius 5.0
+  multiplier 1.0
+  color 1.0 1.0 1.0 
+  ambientonly 0
+  nDynamicType 0
+  affectDynamic 1
+  shadow 0
+  lightpriority 5
+  fadingLight 0
+endnode
+node dummy FCI01_S01_13a
+  parent FCI01_S01_13
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.603922 0.603922 0.898039 
+endnode
+#Tile trimesh node
+node trimesh sol_13
+  parent FCI01_S01_13
+  position 0.0 0.0 0.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.337255 0.337255 0.337255 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 0
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center undefined
+  bitmap l_b_ground
+  verts 4
+    -5.0 -5.0 0.0
+    5.0 -5.0 0.0
+    -5.0 5.0 0.0
+    5.0 5.0 0.0
+  faces 2
+    0 1 3  1  0 1 2  1
+    3 2 0  1  3 4 5  1
+  tverts 6
+    0.758412 0.76008 0
+    1.23921 0.76008 0
+    1.23921 1.24014 0
+    1.23921 1.24014 0
+    0.758412 1.24014 0
+    0.758412 0.76008 0
+endnode
+#Tile trimesh node
+node trimesh roof_13
+  parent FCI01_S01_13
+  position 0.0 0.0 14.99
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.878431 0.341176 0.560784 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 0
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 10
+  center undefined
+  bitmap jud_wall01
+  verts 11
+    -5.0 -5.0 0.0
+    2.25 -5.0 0.0
+    -5.0 -4.74 0.0
+    -5.0 2.69 0.0
+    5.0 -5.0 0.0
+    -5.0 5.0 0.0
+    5.0 -1.21 0.0
+    5.0 5.0 0.0
+    4.5 5.0 0.0
+    -2.0 5.0 0.0
+    4.67 5.0 0.0
+  faces 9
+    4 1 6  1  0 1 2  1
+    8 10 0  1  3 4 5  1
+    0 2 8  1  6 7 8  1
+    0 10 7  1  9 10 11  1
+    1 0 7  1  12 13 14  1
+    6 1 7  1  15 16 17  1
+    9 3 5  1  18 19 20  1
+    8 2 3  1  21 22 23  1
+    3 9 8  1  24 25 26  1
+  tverts 27
+    2.41634 1.59976 0
+    2.1872 1.59976 0
+    2.41634 1.90316 0
+    2.37467 2.39964 0
+    2.38856 2.39964 0
+    1.58312 1.59976 0
+    1.58312 1.59976 0
+    1.58312 1.62027 0
+    2.37467 2.39964 0
+    1.58312 1.59976 0
+    2.38856 2.39964 0
+    2.41634 2.39964 0
+    2.1872 1.59976 0
+    1.58312 1.59976 0
+    2.41634 2.39964 0
+    2.41634 1.90316 0
+    2.1872 1.59976 0
+    2.41634 2.39964 0
+    1.83308 2.39964 0
+    1.58312 2.21505 0
+    1.58312 2.39964 0
+    2.37467 2.39964 0
+    1.58312 1.62027 0
+    1.58312 2.21505 0
+    1.58312 2.21505 0
+    1.83308 2.39964 0
+    2.37467 2.39964 0
+endnode
+node aabb walk_13
+  parent FCI01_S01_13
+  position 0.0 6.10352e-007 5e-007
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.580392 0.694118 0.101961 
+  multimaterial 20
+    Dirt
+    Obscuring
+    Grass
+    Stone
+    Wood
+    Water
+    Nonwalk
+    Transparent
+    Carpet
+    Metal
+    Puddles
+    Swamp
+    Mud
+    Leaves
+    Lava
+    BottomlessPit
+    DeepWater
+    Door
+    Snow
+    Sand
+  ambient 0.588 0.588 0.588 
+  diffuse 0.0 0.0 0.0 
+  specular 0.0 0.0 0.0 
+  shininess 10.0
+  bitmap Metal
+  verts 12
+    0.98 0.29 0.0
+    1.84 0.29 0.0
+    -5.0 -5.0 0.0
+    0.98 -5.0 0.0
+    1.84 -5.0 0.0
+    -5.0 0.29 0.0
+    5.0 0.29 0.0
+    5.0 -5.0 0.0
+    -5.0 5.0 0.0
+    5.0 5.0 0.0
+    0.98 5.0 0.0
+    1.84 5.0 0.0
+  faces 12
+    1 0 3  1  0 1 2  10
+    3 4 1  1  3 4 5  10
+    1 4 7  1  6 7 8  10
+    7 6 1  1  9 10 11  10
+    2 0 5  1  12 13 14  10
+    3 0 2  1  15 16 17  10
+    10 8 5  1  18 19 20  10
+    5 0 10  1  21 22 23  10
+    0 1 11  1  24 25 26  10
+    11 10 0  1  27 28 29  10
+    11 1 6  1  30 31 32  10
+    6 9 11  1  33 34 35  10
+  tverts 36
+    0.5 0.625 0
+    0.4 0.625 0
+    0.4 0.592429 0
+    0.4 0.592429 0
+    0.5 0.592429 0
+    0.5 0.625 0
+    0.5 0.625 0
+    0.5 0.592429 0
+    0.592122 0.592429 0
+    0.592122 0.592429 0
+    0.6 0.625 0
+    0.5 0.625 0
+    0.30361 0.592429 0
+    0.4 0.625 0
+    0.323103 0.625 0
+    0.4 0.592429 0
+    0.4 0.625 0
+    0.30361 0.592429 0
+    0.4 0.650725 0
+    0.323103 0.650725 0
+    0.323103 0.625 0
+    0.323103 0.625 0
+    0.4 0.625 0
+    0.4 0.650725 0
+    0.4 0.625 0
+    0.5 0.625 0
+    0.5 0.650725 0
+    0.5 0.650725 0
+    0.4 0.650725 0
+    0.4 0.625 0
+    0.5 0.650725 0
+    0.5 0.625 0
+    0.6 0.625 0
+    0.6 0.625 0
+    0.6 0.650725 0
+    0.5 0.650725 0
+    aabb         -5.0 -5.0 -5e-007 5.0 5.0 -5e-007 -1
+        -5.0 -5.0 -5e-007 0.98 5.0 -5e-007 -1
+        -5.0 -5.0 -5e-007 0.98 0.289999 -5e-007 -1
+        -5.0 -5.0 -5e-007 0.98 0.289999 -5e-007 4
+        -5.0 -5.0 -5e-007 0.98 0.289999 -5e-007 5
+        -5.0 0.289999 -5e-007 0.98 5.0 -5e-007 -1
+        -5.0 0.289999 -5e-007 0.98 5.0 -5e-007 6
+        -5.0 0.289999 -5e-007 0.98 5.0 -5e-007 7
+        0.98 -5.0 -5e-007 5.0 5.0 -5e-007 -1
+        0.98 -5.0 -5e-007 5.0 0.289999 -5e-007 -1
+        0.98 -5.0 -5e-007 5.0 0.289999 -5e-007 -1
+        0.98 -5.0 -5e-007 1.84 0.289999 -5e-007 1
+        1.84 -5.0 -5e-007 5.0 0.289999 -5e-007 2
+        0.98 -5.0 -5e-007 5.0 0.289999 -5e-007 -1
+        0.98 -5.0 -5e-007 1.84 0.289999 -5e-007 0
+        1.84 -5.0 -5e-007 5.0 0.289999 -5e-007 3
+        0.98 0.289999 -5e-007 5.0 5.0 -5e-007 -1
+        0.98 0.289999 -5e-007 5.0 5.0 -5e-007 -1
+        0.98 0.289999 -5e-007 1.84 5.0 -5e-007 8
+        1.84 0.289999 -5e-007 5.0 5.0 -5e-007 10
+        0.98 0.289999 -5e-007 5.0 5.0 -5e-007 -1
+        0.98 0.289999 -5e-007 1.84 5.0 -5e-007 9
+        1.84 0.289999 -5e-007 5.0 5.0 -5e-007 11
+endnode
+endmodelgeom FCI01_S01_13
+donemodel FCI01_S01_13

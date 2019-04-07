@@ -1,0 +1,1477 @@
+# Exported from NWmax 0.7 at 8/9/2004 5:30:35 PM
+# mdl file
+#
+#NWmax MODEL ASCII
+# model: JAC01_T50_01
+filedependancy Unknown
+newmodel JAC01_T50_01
+setsupermodel JAC01_T50_01 NULL
+classification Tile
+#NWmax GEOM  ASCII
+beginmodelgeom JAC01_T50_01
+node dummy JAC01_T50_01
+  parent NULL
+endnode
+#Tile trimesh node
+node trimesh Geom102
+  parent JAC01_T50_01
+  position -0.4 2.9 20.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 0
+  beaming 1
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center 58.5 -386.5 0.0 
+  ambient 0.0 0.0 0.0 
+  diffuse 0.0 0.0 0.0 
+  specular 0.0 0.0 0.0 
+  shininess 29.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap jac01_black
+  verts 9
+    -3.93 -0.66 0.0
+    -3.72 -0.91 0.0
+    -3.72 -0.61 0.0
+    -0.87 -6.97 0.0
+    -1.18 -6.73 0.0
+    -1.01 -7.12 0.0
+    5.1 -4.36 0.0
+    4.49 -4.53 0.0
+    4.97 -4.92 0.0
+  faces 3
+    0 1 2  1  0 1 2  1
+    3 4 5  1  3 4 5  1
+    6 7 8  1  6 7 8  1
+  tverts 9
+    0.000499576 0.991951 0
+    0.0243903 0.953878 0
+    0.024141 0.999501 0
+    0.339487 0.0247812 0
+    0.304524 0.0605829 0
+    0.323478 0.000499547 0
+    0.9995 0.424593 0
+    0.931625 0.398145 0
+    0.98451 0.33866 0
+endnode
+node light JAC01_T50_01ml1
+  parent JAC01_T50_01
+  position 0.0 0.0 7.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 1.0 1.0 1.0 
+  radius 1400.0
+  multiplier 1.0
+  color 0.0 0.0 0.0 
+  ambientonly 0
+  nDynamicType 0
+  affectDynamic 1
+  shadow 0
+  lightpriority 5
+  fadingLight 0
+endnode
+#Tile trimesh node
+node trimesh Object420
+  parent JAC01_T50_01
+  position 0.65 0.35 4.2
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 13.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap jac01_rock04
+  verts 15
+    4.2 4.2 4.2
+    3.0 3.0 3.0
+    4.2 4.2 3.0
+    1.8 1.8 1.8
+    3.0 3.0 1.8
+    0.6 0.6 0.6
+    1.8 1.8 0.6
+    -0.6 -0.6 -0.6
+    0.6 0.6 -0.6
+    -1.8 -1.8 -1.8
+    -0.6 -0.6 -1.8
+    -3.0 -3.0 -3.0
+    -1.8 -1.8 -3.0
+    -4.2 -4.2 -4.2
+    -3.0 -3.0 -4.2
+  faces 7
+    0 1 2  1  0 1 2  65536
+    1 3 4  1  1 3 4  65536
+    3 5 6  1  3 5 6  65536
+    5 7 8  1  5 7 8  65536
+    7 9 10  1  7 9 10  65536
+    9 11 12  1  9 11 12  65536
+    11 13 14  1  11 13 14  65536
+  tverts 15
+    -2.20525 0.957251 0
+    -1.51603 0.949697 0
+    -1.98332 0.630927 0
+    -0.826813 0.942143 0
+    -1.29411 0.623373 0
+    -0.137596 0.93459 0
+    -0.604887 0.615819 0
+    0.551622 0.927036 0
+    0.0843304 0.608266 0
+    1.24084 0.919482 0
+    0.773548 0.600712 0
+    1.93006 0.911929 0
+    1.46277 0.593158 0
+    2.61928 0.904375 0
+    2.15198 0.585605 0
+endnode
+#Tile trimesh node
+node trimesh Object430
+  parent JAC01_T50_01
+  position 0.35 0.65 4.2
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 13.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap jac01_rock04
+  verts 15
+    4.2 4.2 4.2
+    4.2 4.2 3.0
+    3.0 3.0 3.0
+    3.0 3.0 1.8
+    1.8 1.8 1.8
+    1.8 1.8 0.6
+    0.6 0.6 0.6
+    0.6 0.6 -0.6
+    -0.6 -0.6 -0.6
+    -0.6 -0.6 -1.8
+    -1.8 -1.8 -1.8
+    -1.8 -1.8 -3.0
+    -3.0 -3.0 -3.0
+    -3.0 -3.0 -4.2
+    -4.2 -4.2 -4.2
+  faces 7
+    0 1 2  1  0 1 2  65536
+    2 3 4  1  2 3 4  65536
+    4 5 6  1  4 5 6  65536
+    6 7 8  1  6 7 8  65536
+    8 9 10  1  8 9 10  65536
+    10 11 12  1  10 11 12  65536
+    12 13 14  1  12 13 14  65536
+  tverts 15
+    -2.19739 0.932862 0
+    -1.97381 0.606779 0
+    -1.50731 0.926735 0
+    -1.28373 0.600652 0
+    -0.817219 0.920608 0
+    -0.593639 0.594524 0
+    -0.127133 0.914481 0
+    0.0964477 0.588397 0
+    0.562954 0.908353 0
+    0.786534 0.58227 0
+    1.25304 0.902226 0
+    1.47662 0.576142 0
+    1.94313 0.896099 0
+    2.16671 0.570015 0
+    2.63321 0.889971 0
+endnode
+#Tile trimesh node
+node trimesh Object840
+  parent JAC01_T50_01
+  position 0.47 0.47 4.2
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center -4.0 -4.0 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 13.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap jac01_rock04
+  verts 32
+    4.24 3.94 4.2
+    3.94 4.24 4.2
+    2.74 3.04 3.0
+    3.04 2.74 3.0
+    3.18 2.88 3.0
+    4.38 4.08 4.2
+    4.08 4.38 4.2
+    2.88 3.18 3.0
+    1.54 1.84 1.8
+    1.84 1.54 1.8
+    1.98 1.68 1.8
+    1.68 1.98 1.8
+    0.34 0.64 0.6
+    0.64 0.34 0.6
+    0.78 0.48 0.6
+    0.48 0.78 0.6
+    -0.86 -0.56 -0.6
+    -0.56 -0.86 -0.6
+    -0.42 -0.72 -0.6
+    -0.72 -0.42 -0.6
+    -2.06 -1.76 -1.8
+    -1.76 -2.06 -1.8
+    -1.62 -1.92 -1.8
+    -1.92 -1.62 -1.8
+    -3.26 -2.96 -3.0
+    -2.96 -3.26 -3.0
+    -2.82 -3.12 -3.0
+    -3.12 -2.82 -3.0
+    -4.46 -4.16 -4.2
+    -4.16 -4.46 -4.2
+    -4.02 -4.32 -4.2
+    -4.32 -4.02 -4.2
+  faces 44
+    0 1 2  1  0 1 2  65536
+    2 3 0  1  2 3 0  65536
+    0 3 4  1  4 5 6  65536
+    4 5 0  1  6 7 4  65536
+    1 0 5  1  1 0 8  65536
+    5 6 1  1  8 9 1  65536
+    2 1 6  1  10 11 12  65536
+    6 7 2  1  12 13 10  65536
+    3 2 8  1  3 2 14  65536
+    8 9 3  1  14 15 3  65536
+    3 9 10  1  5 16 17  65536
+    10 4 3  1  17 6 5  65536
+    8 2 7  1  18 10 13  65536
+    7 11 8  1  13 19 18  65536
+    9 8 12  1  15 14 20  65536
+    12 13 9  1  20 21 15  65536
+    9 13 14  1  16 22 23  65536
+    14 10 9  1  23 17 16  65536
+    12 8 11  1  24 18 19  65536
+    11 15 12  1  19 25 24  65536
+    13 12 16  1  21 20 26  65536
+    16 17 13  1  26 27 21  65536
+    13 17 18  1  22 28 29  65536
+    18 14 13  1  29 23 22  65536
+    16 12 15  1  30 24 25  65536
+    15 19 16  1  25 31 30  65536
+    17 16 20  1  27 26 32  65536
+    20 21 17  1  32 33 27  65536
+    17 21 22  1  28 34 35  65536
+    22 18 17  1  35 29 28  65536
+    20 16 19  1  36 30 31  65536
+    19 23 20  1  31 37 36  65536
+    21 20 24  1  33 32 38  65536
+    24 25 21  1  38 39 33  65536
+    21 25 26  1  34 40 41  65536
+    26 22 21  1  41 35 34  65536
+    24 20 23  1  42 36 37  65536
+    23 27 24  1  37 43 42  65536
+    25 24 28  1  39 38 44  65536
+    28 29 25  1  44 45 39  65536
+    25 29 30  1  40 46 47  65536
+    30 26 25  1  47 41 40  65536
+    28 24 27  1  48 42 43  65536
+    27 31 28  1  43 49 48  65536
+  tverts 50
+    -1.86662 0.570711 0
+    -1.86662 0.429289 0
+    -1.18377 0.429289 0
+    -1.18377 0.570711 0
+    2.86662 0.113283 0
+    2.18377 0.23044 0
+    2.23044 0.183774 0
+    2.91328 0.0666163 0
+    -1.91328 0.570711 0
+    -1.91328 0.429289 0
+    -1.18377 0.23044 0
+    -1.86662 0.113283 0
+    -1.91328 0.0666163 0
+    -1.23044 0.183774 0
+    -0.500931 0.429289 0
+    -0.500931 0.570711 0
+    1.50093 0.347597 0
+    1.5476 0.300931 0
+    -0.500931 0.347597 0
+    -0.547597 0.300931 0
+    0.181912 0.429289 0
+    0.181912 0.570711 0
+    0.818088 0.464755 0
+    0.864755 0.418088 0
+    0.181912 0.464755 0
+    0.135245 0.418088 0
+    0.864755 0.429289 0
+    0.864755 0.570711 0
+    0.135245 0.581912 0
+    0.181912 0.535245 0
+    0.864755 0.581912 0
+    0.818088 0.535245 0
+    1.5476 0.429289 0
+    1.5476 0.570711 0
+    -0.547597 0.699069 0
+    -0.500931 0.652403 0
+    1.5476 0.699069 0
+    1.50093 0.652403 0
+    2.23044 0.429289 0
+    2.23044 0.570711 0
+    -1.23044 0.816226 0
+    -1.18377 0.76956 0
+    2.23044 0.816226 0
+    2.18377 0.76956 0
+    2.91328 0.429289 0
+    2.91328 0.570711 0
+    -1.91328 0.933384 0
+    -1.86662 0.886717 0
+    2.91328 0.933384 0
+    2.86662 0.886717 0
+endnode
+#Tile trimesh node
+node trimesh Object1102
+  parent JAC01_T50_01
+  position 4.33 3.35 6.6
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center -0.500301 -7.02673e-005 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 13.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap jac01_rock04
+  verts 4
+    0.669997 -7.61673e-007 -0.6
+    0.669997 -7.61673e-007 0.6
+    -0.680003 -6.43674e-007 0.6
+    -0.680003 -6.43674e-007 -0.6
+  faces 2
+    0 1 2  1  0 1 2  65536
+    2 3 0  1  2 3 0  65536
+  tverts 4
+    2.16667 0.866666 0
+    2.16667 0.466667 0
+    2.61667 0.466666 0
+    2.61667 0.866666 0
+endnode
+#Tile trimesh node
+node trimesh Object1106
+  parent JAC01_T50_01
+  position 3.35 4.33 6.6
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center 0.000219596 -0.499599 0.0499992 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 13.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap jac01_rock04
+  verts 4
+    2.13696e-006 -0.679996 -0.6
+    2.13696e-006 -0.679996 0.601
+    2.25497e-006 0.670004 0.601
+    2.25497e-006 0.670004 -0.6
+  faces 2
+    0 1 2  1  0 1 2  65536
+    2 3 0  1  2 3 0  65536
+  tverts 4
+    -1.61667 0.866667 0
+    -1.61667 0.466333 0
+    -1.16667 0.466333 0
+    -1.16667 0.866667 0
+endnode
+#Tile trimesh node
+node trimesh Object1152
+  parent JAC01_T50_01
+  position 4.33 3.95 7.2
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center -0.500301 0.000402451 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 13.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap jac01_rock04
+  verts 4
+    0.669997 -0.599996 0.0
+    0.669997 0.600004 0.0
+    0.519997 0.600004 0.0
+    -0.680003 -0.599996 0.0
+  faces 2
+    0 1 2  1  0 1 2  65536
+    2 3 0  1  2 3 0  65536
+  tverts 4
+    2.16667 0.883333 0
+    2.16667 0.483333 0
+    2.21667 0.483333 0
+    2.61667 0.883333 0
+endnode
+#Tile trimesh node
+node trimesh Object1156
+  parent JAC01_T50_01
+  position 3.95 4.33 7.2
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center -0.000301361 -0.499599 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 13.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap jac01_rock04
+  verts 4
+    0.599997 0.520004 0.0
+    0.599997 0.670004 0.0
+    -0.600003 0.670004 0.0
+    -0.600003 -0.679996 0.0
+  faces 2
+    0 1 2  1  0 1 2  65536
+    2 3 0  1  2 3 0  65536
+  tverts 4
+    -1.21667 0.483333 0
+    -1.16667 0.483333 0
+    -1.16667 0.883333 0
+    -1.61667 0.883334 0
+endnode
+#Tile trimesh node
+node trimesh Object1202
+  parent JAC01_T50_01
+  position 3.73 2.15 5.4
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center -0.5 -0.000436801 9.91821e-005 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 13.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap jac01_rock04
+  verts 4
+    1.27 -4.32692e-006 -0.599999
+    1.27 -4.32692e-006 0.600001
+    -1.28 -4.10392e-006 0.600001
+    -1.28 -4.10392e-006 -0.599999
+  faces 2
+    0 1 2  1  0 1 2  65536
+    2 3 0  1  2 3 0  65536
+  tverts 4
+    2.16667 0.866666 0
+    2.16667 0.466667 0
+    3.01667 0.466666 0
+    3.01667 0.866666 0
+endnode
+#Tile trimesh node
+node trimesh Object1206
+  parent JAC01_T50_01
+  position 2.15 3.73 5.4
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center 0.00024984 -0.5 0.0501003 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 13.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap jac01_rock04
+  verts 4
+    2.5395e-006 -1.28 -0.599999
+    2.5395e-006 -1.28 0.601001
+    2.76249e-006 1.27 0.601001
+    2.76249e-006 1.27 -0.599999
+  faces 2
+    0 1 2  1  0 1 2  65536
+    2 3 0  1  2 3 0  65536
+  tverts 4
+    -2.01667 0.866667 0
+    -2.01667 0.466333 0
+    -1.16667 0.466333 0
+    -1.16667 0.866667 0
+endnode
+#Tile trimesh node
+node trimesh Object1252
+  parent JAC01_T50_01
+  position 3.73 2.75 6.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center -0.5 0.000402451 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 13.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap jac01_rock04
+  verts 4
+    1.27 -0.599996 0.0
+    1.27 0.600004 0.0
+    -0.0800009 0.600004 0.0
+    -1.28 -0.599996 0.0
+  faces 2
+    0 1 2  1  0 1 2  65536
+    2 3 0  1  2 3 0  65536
+  tverts 4
+    2.16667 0.883333 0
+    2.16667 0.483333 0
+    2.61667 0.483333 0
+    3.01667 0.883333 0
+endnode
+#Tile trimesh node
+node trimesh Object1256
+  parent JAC01_T50_01
+  position 2.75 3.73 6.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center 0.000402451 -0.5 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 13.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap jac01_rock04
+  verts 4
+    0.600004 -0.0800019 0.0
+    0.600004 1.27 0.0
+    -0.599996 1.27 0.0
+    -0.599996 -1.28 0.0
+  faces 2
+    0 1 2  1  0 1 2  65536
+    2 3 0  1  2 3 0  65536
+  tverts 4
+    -1.61667 0.483333 0
+    -1.16667 0.483333 0
+    -1.16667 0.883333 0
+    -2.01667 0.883334 0
+endnode
+#Tile trimesh node
+node trimesh Object1302
+  parent JAC01_T50_01
+  position 3.13 0.95 4.2
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center -0.5 -6.86683e-005 0.0503006 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 13.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap jac01_rock04
+  verts 4
+    1.87 -8.50186e-007 -0.599997
+    1.87 -8.50186e-007 0.601003
+    -1.88 -5.2318e-007 0.601003
+    -1.88 -5.2318e-007 -0.599997
+  faces 2
+    0 1 2  1  0 1 2  65536
+    2 3 0  1  2 3 0  65536
+  tverts 4
+    2.16667 0.866667 0
+    2.16667 0.466333 0
+    3.41667 0.466333 0
+    3.41667 0.866666 0
+endnode
+#Tile trimesh node
+node trimesh Object1306
+  parent JAC01_T50_01
+  position 0.95 3.13 4.2
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center 4.10099e-005 -0.5 0.0496006 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 13.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap jac01_rock04
+  verts 4
+    2.46093e-007 -1.88 -0.600004
+    2.46093e-007 -1.88 0.600996
+    5.74104e-007 1.87 0.600996
+    5.74104e-007 1.87 -0.600004
+  faces 2
+    0 1 2  1  0 1 2  65536
+    2 3 0  1  2 3 0  65536
+  tverts 4
+    -2.41667 0.866667 0
+    -2.41667 0.466333 0
+    -1.16667 0.466333 0
+    -1.16667 0.866667 0
+endnode
+#Tile trimesh node
+node trimesh Object1352
+  parent JAC01_T50_01
+  position 3.13 1.55 4.8
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center -0.5 -0.000350952 0.0181898 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 13.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap jac01_rock04
+  verts 4
+    1.87 -0.600004 0.000182203
+    1.87 0.599996 0.000182203
+    -0.680003 0.599997 0.000182203
+    -1.88 -0.600003 0.000182203
+  faces 2
+    0 1 2  1  0 1 2  65536
+    2 3 0  1  2 3 0  65536
+  tverts 4
+    2.16667 0.883333 0
+    2.16667 0.483333 0
+    3.01667 0.483333 0
+    3.41667 0.883333 0
+endnode
+#Tile trimesh node
+node trimesh Object1356
+  parent JAC01_T50_01
+  position 1.55 3.13 4.8
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center 4.76837e-005 -0.5 0.0135512 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 13.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap jac01_rock04
+  verts 4
+    0.6 -0.680001 0.000135817
+    0.600001 1.87 0.000135817
+    -0.599999 1.87 0.000135817
+    -0.6 -1.88 0.000135817
+  faces 2
+    0 1 2  1  0 1 2  65536
+    2 3 0  1  2 3 0  65536
+  tverts 4
+    -2.01667 0.483334 0
+    -1.16667 0.483333 0
+    -1.16667 0.883333 0
+    -2.41667 0.883334 0
+endnode
+#Tile trimesh node
+node trimesh Object1402
+  parent JAC01_T50_01
+  position 2.53 -0.25 3.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center -0.5 -5.59036e-005 0.0504017 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 13.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap jac01_rock04
+  verts 4
+    2.47 -7.75531e-007 -0.599996
+    2.47 -7.75531e-007 0.601004
+    -2.48 -3.4254e-007 0.601004
+    -2.48 -3.4254e-007 -0.599996
+  faces 2
+    0 1 2  1  0 1 2  65536
+    2 3 0  1  2 3 0  65536
+  tverts 4
+    2.16667 0.866667 0
+    2.16667 0.466333 0
+    3.81667 0.466333 0
+    3.81667 0.866666 0
+endnode
+#Tile trimesh node
+node trimesh Object1406
+  parent JAC01_T50_01
+  position -0.25 2.53 3.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center 1.90977e-005 -0.5 0.0496979 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 13.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap jac01_rock04
+  verts 4
+    0.0 -2.48 -0.600003
+    0.0 -2.48 0.600997
+    3.81954e-007 2.47 0.600997
+    3.81954e-007 2.47 -0.600003
+  faces 2
+    0 1 2  1  0 1 2  65536
+    2 3 0  1  2 3 0  65536
+  tverts 4
+    -2.81667 0.866667 0
+    -2.81667 0.466333 0
+    -1.16667 0.466333 0
+    -1.16667 0.866667 0
+endnode
+#Tile trimesh node
+node trimesh Object1452
+  parent JAC01_T50_01
+  position 2.53 0.35 3.6
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center -0.5 0.0 0.0363189 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 13.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap jac01_rock04
+  verts 4
+    2.47 -0.6 0.000363189
+    2.47 0.6 0.000363189
+    -1.28 0.6 0.000363189
+    -2.48 -0.599999 0.000363189
+  faces 2
+    0 1 2  1  0 1 2  65536
+    2 3 0  1  2 3 0  65536
+  tverts 4
+    2.16667 0.883333 0
+    2.16667 0.483333 0
+    3.41667 0.483333 0
+    3.81667 0.883332 0
+endnode
+#Tile trimesh node
+node trimesh Object1456
+  parent JAC01_T50_01
+  position 0.35 2.53 3.6
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center 4.76837e-005 -0.5 0.0257293 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 13.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap jac01_rock04
+  verts 4
+    0.6 -1.28 0.000257293
+    0.600001 2.47 0.000257293
+    -0.599999 2.47 0.000257293
+    -0.6 -2.48 0.000257293
+  faces 2
+    0 1 2  1  0 1 2  65536
+    2 3 0  1  2 3 0  65536
+  tverts 4
+    -2.41667 0.483334 0
+    -1.16667 0.483333 0
+    -1.16667 0.883333 0
+    -2.81667 0.883334 0
+endnode
+#Tile trimesh node
+node trimesh Object1502
+  parent JAC01_T50_01
+  position 1.93 -1.45 1.8
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center -0.5 -0.00051334 0.0504017 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 13.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap jac01_rock04
+  verts 4
+    3.07 -5.40242e-006 -0.599996
+    3.07 -5.40242e-006 0.601004
+    -3.08 -4.86437e-006 0.601004
+    -3.08 -4.86437e-006 -0.599996
+  faces 2
+    0 1 2  1  0 1 2  65536
+    2 3 0  1  2 3 0  65536
+  tverts 4
+    2.16667 0.867 0
+    2.16667 0.466666 0
+    4.21667 0.466666 0
+    4.21667 0.867 0
+endnode
+#Tile trimesh node
+node trimesh Object1506
+  parent JAC01_T50_01
+  position -1.45 1.93 1.8
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center -7.26618e-005 -0.5 0.0498009 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 13.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap jac01_rock04
+  verts 4
+    -9.95621e-007 -3.08 -0.600002
+    -9.95621e-007 -3.08 0.600998
+    -4.57615e-007 3.07 0.600998
+    -4.57615e-007 3.07 -0.600002
+  faces 2
+    0 1 2  1  0 1 2  65536
+    2 3 0  1  2 3 0  65536
+  tverts 4
+    -3.21667 0.867 0
+    -3.21667 0.466667 0
+    -1.16667 0.466667 0
+    -1.16667 0.867 0
+endnode
+#Tile trimesh node
+node trimesh Object1552
+  parent JAC01_T50_01
+  position 1.93 -0.85 2.4
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center -0.5 -4.76837e-005 0.0363473 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 13.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap jac01_rock04
+  verts 4
+    3.07 -0.600001 0.000363626
+    3.07 0.599999 0.000363626
+    -1.88 0.6 0.000363626
+    -3.08 -0.6 0.000363626
+  faces 2
+    0 1 2  1  0 1 2  65536
+    2 3 0  1  2 3 0  65536
+  tverts 4
+    2.16667 0.883333 0
+    2.16667 0.483333 0
+    3.81667 0.483332 0
+    4.21667 0.883332 0
+endnode
+#Tile trimesh node
+node trimesh Object1556
+  parent JAC01_T50_01
+  position -0.85 1.93 2.4
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center 0.0 -0.5 0.0248117 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 13.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap jac01_rock04
+  verts 4
+    0.6 -1.88 0.00024827
+    0.6 3.07 0.00024827
+    -0.6 3.07 0.00024827
+    -0.6 -3.08 0.00024827
+  faces 2
+    0 1 2  1  0 1 2  65536
+    2 3 0  1  2 3 0  65536
+  tverts 4
+    -2.81667 0.483334 0
+    -1.16667 0.483333 0
+    -1.16667 0.883333 0
+    -3.21667 0.883334 0
+endnode
+#Tile trimesh node
+node trimesh Object1602
+  parent JAC01_T50_01
+  position 1.33 -2.65 0.6
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center -0.5 -0.000388596 0.0499992 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 13.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap jac01_rock04
+  verts 4
+    3.67 -4.20697e-006 -0.6
+    3.67 -4.20697e-006 0.601
+    -3.68 -3.56495e-006 0.601
+    -3.68 -3.56495e-006 -0.6
+  faces 2
+    0 1 2  1  0 1 2  65536
+    2 3 0  1  2 3 0  65536
+  tverts 4
+    2.16667 0.866667 0
+    2.16667 0.466333 0
+    4.61667 0.466333 0
+    4.61667 0.866666 0
+endnode
+#Tile trimesh node
+node trimesh Object1606
+  parent JAC01_T50_01
+  position -2.65 1.33 0.6
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center -0.00038293 -0.5 0.0620022 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 13.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap jac01_rock04
+  verts 4
+    -4.15079e-006 -3.68 -0.59976
+    -4.15079e-006 -3.68 0.601
+    -3.50781e-006 3.67 0.601
+    -3.50781e-006 3.67 -0.59976
+  faces 2
+    0 1 2  1  0 1 2  65536
+    2 3 0  1  2 3 0  65536
+  tverts 4
+    -3.61667 0.86692 0
+    -3.61667 0.466667 0
+    -1.16667 0.466667 0
+    -1.16667 0.86692 0
+endnode
+#Tile trimesh node
+node trimesh Object1652
+  parent JAC01_T50_01
+  position 1.33 -2.05 1.2
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center -0.5 4.76837e-005 0.0363315 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 13.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap jac01_rock04
+  verts 4
+    3.67 -0.6 0.000363391
+    3.67 0.6 0.000363391
+    -2.48 0.600001 0.000363391
+    -3.68 -0.599999 0.000363391
+  faces 2
+    0 1 2  1  0 1 2  65536
+    2 3 0  1  2 3 0  65536
+  tverts 4
+    2.16667 0.883333 0
+    2.16667 0.483333 0
+    4.21667 0.483332 0
+    4.61667 0.883332 0
+endnode
+#Tile trimesh node
+node trimesh Object1656
+  parent JAC01_T50_01
+  position -2.05 1.33 1.2
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center -9.91821e-005 -0.5 0.0240635 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 13.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap jac01_rock04
+  verts 4
+    0.599999 -2.48 0.000240711
+    0.599999 3.67 0.000240711
+    -0.600001 3.67 0.000240711
+    -0.600001 -3.68 0.000240711
+  faces 2
+    0 1 2  1  0 1 2  65536
+    2 3 0  1  2 3 0  65536
+  tverts 4
+    -3.21667 0.483334 0
+    -1.16667 0.483333 0
+    -1.16667 0.883333 0
+    -3.61667 0.883334 0
+endnode
+#Tile trimesh node
+node trimesh Plane1207
+  parent JAC01_T50_01
+  position 0.0 0.0 0.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 0
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 1
+  alpha 1.0
+  transparencyhint 0
+  center 0.0 0.0164948 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 13.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap jac01_floor01
+  verts 21
+    5.0 -3.85 0.0
+    5.0 -2.65 0.0
+    -2.35 -2.65 0.0
+    -3.55 -3.85 0.0
+    -2.65 -2.35 0.0
+    -2.65 5.0 0.0
+    -3.85 5.0 0.0
+    -3.85 -3.55 0.0
+    -3.99 5.0 0.0
+    -3.99 -3.69 0.0
+    -5.0 5.00033 0.0
+    -5.0 0.0 0.0
+    -5.0 -2.5 0.0
+    5.0 -5.0 0.0
+    5.0 -3.99 0.0
+    -3.69 -3.99 0.0
+    2.5 -5.0 0.0
+    -5.0 -5.0 0.0
+    -2.5 -5.0 0.0
+    0.0 -5.0 0.0
+    -5.0 2.5 0.0
+  faces 19
+    0 1 2  1  0 1 2  65536
+    2 3 0  1  2 3 0  65536
+    4 5 6  1  4 5 6  65536
+    6 7 4  1  6 7 4  65536
+    7 6 8  1  7 6 8  65536
+    8 9 7  1  8 9 7  65536
+    9 8 10  1  9 8 10  65536
+    11 12 9  1  11 12 9  65536
+    13 14 15  1  13 14 15  65536
+    15 16 13  1  15 16 13  65536
+    17 15 9  1  17 15 9  65536
+    17 18 15  1  17 18 15  65536
+    17 9 12  1  17 9 12  65536
+    14 0 3  1  14 0 3  65536
+    3 15 14  1  3 15 14  65536
+    15 18 19  1  15 18 19  65536
+    15 19 16  1  15 19 16  65536
+    20 11 9  1  20 11 9  65536
+    10 20 9  1  10 20 9  65536
+  tverts 21
+    -0.5 1.27003 0
+    -0.5 1.03003 0
+    0.97 1.03003 0
+    1.21 1.27003 0
+    1.03 0.970033 0
+    1.03 -0.499967 0
+    1.27 -0.499967 0
+    1.27 1.21003 0
+    1.298 -0.499967 0
+    1.298 1.23803 0
+    1.5 -0.500033 0
+    1.5 0.500033 0
+    1.5 1.00003 0
+    -0.5 1.50003 0
+    -0.5 1.29803 0
+    1.238 1.29803 0
+    0.0 1.50003 0
+    1.5 1.50003 0
+    1.0 1.50003 0
+    0.5 1.50003 0
+    1.5 0.0 0
+endnode
+node aabb Shape1500
+  parent JAC01_T50_01
+  position 0.0 0.0 4.2
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 1.0 1.0 1.0 
+  multimaterial 20
+    Dirt
+    Obscuring
+    Grass
+    Stone
+    Wood
+    Water
+    Nonwalk
+    Transparent
+    Carpet
+    Metal
+    Puddles
+    Swamp
+    Mud
+    Leaves
+    Lava
+    BottomlessPit
+    DeepWater
+    Door
+    Snow
+    Sand
+  ambient 0.0 0.0 0.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 11.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap Obscuring
+  verts 22
+    -2.65 -2.35 -4.2
+    -2.65 -2.35 -3.0
+    -2.65 5.0 -3.0
+    -2.65 5.0 -4.2
+    5.0 -2.65 -4.2
+    5.0 -2.65 -3.0
+    -2.35 -2.65 -3.0
+    -2.35 -2.65 -4.2
+    -5.0 -5.0 -4.2
+    -3.69 -3.99 -4.2
+    -3.99 -3.69 -4.2
+    -3.69 -5.0 -4.2
+    -5.0 -3.69 -4.2
+    5.0 5.0 4.2
+    4.55 5.0 4.2
+    4.55 4.85 4.2
+    4.85 4.55 4.2
+    -3.99 5.0 -4.2
+    -5.0 5.0 -4.2
+    5.0 -5.0 -4.2
+    5.0 -3.99 -4.2
+    5.0 4.55 4.2
+  faces 28
+    0 1 2  1  0 0 0  2
+    2 3 0  1  0 0 0  2
+    4 5 6  1  0 0 0  2
+    6 7 4  1  0 0 0  2
+    8 9 10  2  0 0 0  14
+    8 11 9  2  0 0 0  14
+    8 10 12  2  0 0 0  14
+    13 14 15  1  0 0 0  4
+    15 1 6  2  0 0 0  2
+    6 16 15  2  0 0 0  2
+    1 0 7  4  0 0 0  2
+    7 6 1  4  0 0 0  2
+    0 3 17  2  0 0 0  14
+    17 10 0  2  0 0 0  14
+    10 17 18  2  0 0 0  14
+    18 12 10  2  0 0 0  14
+    19 20 9  2  0 0 0  14
+    9 11 19  2  0 0 0  14
+    0 10 9  2  0 0 0  7
+    9 7 0  2  0 0 0  7
+    5 21 16  8  0 0 0  2
+    16 6 5  8  0 0 0  2
+    13 15 16  1  0 0 0  4
+    1 15 14  8  0 0 0  2
+    14 2 1  8  0 0 0  2
+    20 4 7  2  0 0 0  14
+    7 9 20  2  0 0 0  14
+    13 16 21  1  0 0 0  4
+    aabb         -5.0 -5.0 -4.2 5.0 5.0 4.2 -1
+        -5.0 -5.0 -4.2 5.0 5.0 -3.0 -1
+        -5.0 -5.0 -4.2 -2.65 5.0 -4.2 -1
+        -5.0 -5.0 -4.2 -2.65 -2.35 -4.2 -1
+        -5.0 -5.0 -4.2 -3.69 -3.69 -4.2 -1
+        -5.0 -5.0 -4.2 -3.99 -3.69 -4.2 6
+        -5.0 -5.0 -4.2 -3.69 -3.69 -4.2 -1
+        -5.0 -5.0 -4.2 -3.69 -3.69 -4.2 4
+        -5.0 -5.0 -4.2 -3.69 -3.99 -4.2 5
+        -3.99 -3.99 -4.2 -2.65 -2.35 -4.2 18
+        -5.0 -3.69 -4.2 -2.65 5.0 -4.2 -1
+        -5.0 -3.69 -4.2 -2.65 5.0 -4.2 -1
+        -5.0 -3.69 -4.2 -3.99 5.0 -4.2 15
+        -3.99 -3.69 -4.2 -2.65 5.0 -4.2 13
+        -5.0 -3.69 -4.2 -3.99 5.0 -4.2 14
+        -3.99 -5.0 -4.2 5.0 5.0 -3.0 -1
+        -3.69 -5.0 -4.2 5.0 -2.35 -3.0 -1
+        -3.69 -3.99 -4.2 -2.35 -2.35 -3.0 -1
+        -3.69 -3.99 -4.2 -2.35 -2.35 -4.2 19
+        -2.65 -2.65 -4.2 -2.35 -2.35 -3.0 -1
+        -2.65 -2.65 -4.2 -2.35 -2.35 -3.0 10
+        -2.65 -2.65 -4.2 -2.35 -2.35 -3.0 11
+        -3.69 -5.0 -4.2 5.0 -3.99 -4.2 17
+        -3.99 -2.35 -4.2 -2.65 5.0 -3.0 -1
+        -2.65 -2.35 -4.2 -2.65 5.0 -3.0 0
+        -3.99 -2.35 -4.2 -2.65 5.0 -3.0 -1
+        -3.99 -2.35 -4.2 -2.65 5.0 -4.2 12
+        -2.65 -2.35 -4.2 -2.65 5.0 -3.0 1
+        -3.69 -5.0 -4.2 5.0 5.0 4.2 -1
+        -3.69 -5.0 -4.2 5.0 4.85 4.2 -1
+        -3.69 -5.0 -4.2 5.0 -2.65 -3.0 -1
+        -3.69 -3.99 -4.2 5.0 -2.65 -3.0 -1
+        -3.69 -3.99 -4.2 5.0 -2.65 -4.2 26
+        -2.35 -2.65 -4.2 5.0 -2.65 -3.0 3
+        -3.69 -5.0 -4.2 5.0 -2.65 -3.0 -1
+        -3.69 -5.0 -4.2 5.0 -3.99 -4.2 16
+        -2.35 -3.99 -4.2 5.0 -2.65 -3.0 -1
+        -2.35 -3.99 -4.2 5.0 -2.65 -4.2 25
+        -2.35 -2.65 -4.2 5.0 -2.65 -3.0 2
+        -2.65 -2.65 -3.0 5.0 4.85 4.2 -1
+        -2.65 -2.65 -3.0 4.55 4.85 4.2 8
+        -2.35 -2.65 -3.0 5.0 4.55 4.2 21
+        -2.65 -2.65 -3.0 5.0 5.0 4.2 -1
+        -2.65 -2.65 -3.0 4.85 5.0 4.2 -1
+        -2.35 -2.65 -3.0 4.85 4.85 4.2 9
+        -2.65 -2.35 -3.0 4.55 5.0 4.2 -1
+        -2.65 -2.35 -3.0 4.55 5.0 4.2 23
+        -2.65 -2.35 -3.0 4.55 5.0 4.2 24
+        4.55 -2.65 -3.0 5.0 5.0 4.2 -1
+        4.85 -2.65 -3.0 5.0 4.55 4.2 20
+        4.55 4.55 4.2 5.0 5.0 4.2 -1
+        4.55 4.55 4.2 5.0 5.0 4.2 -1
+        4.55 4.85 4.2 5.0 5.0 4.2 7
+        4.55 4.55 4.2 5.0 5.0 4.2 22
+        4.85 4.55 4.2 5.0 5.0 4.2 27
+endnode
+endmodelgeom JAC01_T50_01
+donemodel JAC01_T50_01
+

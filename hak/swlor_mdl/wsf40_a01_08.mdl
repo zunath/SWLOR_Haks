@@ -1,0 +1,67 @@
+# Rewritten by CleanModels 3 Version 3.1.1 Sun Oct 26 02:18:19 2008
+#MAXMODEL ASCII
+filedependency Unknown
+newmodel wsf40_a01_08
+setsupermodel wsf40_a01_08 null
+setanimationscale 1
+classification TILE
+#MAXGEOM ASCII
+beginmodelgeom wsf40_a01_08
+node dummy wsf40_a01_08
+  parent NULL
+endnode
+node trimesh 00lore21_08
+  parent wsf40_a01_08
+  position 0 0 -0.5
+  orientation 0 0 0 0
+  wirecolor 0.878431 0.878431 0.878431
+  tilefade 0
+  scale 1
+  render 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1
+  transparencyhint 0
+  selfillumcolor 0 0 0
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 10
+  center 0 0 0
+  bitmap wtf_cdirt0
+  shadow 0
+  verts 4
+    -5 -5 0
+    5 -5 0
+    -5 5 0
+    5 5 0
+  faces 2
+    3 2 0 1 3 2 0 65536
+    0 1 3 1 0 1 3 65536
+  tverts 4
+    0 0 0
+    1 0 0
+    0 1 0
+    1 1 0
+endnode
+node aabb 00lorewmesh08_08
+  parent wsf40_a01_08
+  position 0 0 0
+  wirecolor 0.878431 0.878431 0.878431
+  bitmap NULL
+  orientation 0 0 0 0
+  verts 4
+    -5 -5 -0.5
+    5 -5 -0.5
+    -5 5 -0.5
+    5 5 -0.5
+  faces 2
+    3 2 0 1 0 0 0 4
+    0 1 3 1 0 0 0 4
+  aabb     -5 -5 -0.5 5 5 -0.5 -1
+    -5 -5 -0.5 5 5 -0.5 0
+    -5 -5 -0.5 5 5 -0.5 1
+endnode
+endmodelgeom wsf40_a01_08
+donemodel wsf40_a01_08

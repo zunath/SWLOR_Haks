@@ -1,0 +1,15 @@
+#MAXMODEL ASCII
+# model: tqq01_Q04_02
+filedependancy tqq01_Q04_02.max
+newmodel tqq01_Q04_02
+setsupermodel tqq01_Q04_02 NULL
+classification TILE
+setanimationscale 1
+#MAXGEOM  ASCII
+beginmodelgeom tqq01_Q04_02
+node dummy tqq01_Q04_02
+  parent NULL
+endnode
+endmodelgeom tqq01_Q04_02
+
+donemodel tqq01_Q04_02

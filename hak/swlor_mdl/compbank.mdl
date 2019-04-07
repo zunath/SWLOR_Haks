@@ -1,0 +1,490 @@
+#Exported from 3ds max by MDL Plug-in Suite 1.0b
+#http://www.bricksbuilder.com/nwn/utils/
+#MAXMODEL ASCII
+# model: compbank
+filedependancy TechPanel.max
+newmodel compbank
+setsupermodel compbank NULL
+classification Character
+setanimationscale 1.0
+#MAXGEOM  ASCII
+beginmodelgeom compbank
+node dummy compbank
+  parent NULL
+endnode
+node dummy X99_hand
+  parent compbank
+  position 0.00398437 -0.505195 1.14341
+  orientation 0 0 0 0
+  wirecolor 0.527344 0.527344 0.527344
+endnode
+node dummy X99_head
+  parent compbank
+  position 0.00398437 0.369441 3.26208
+  orientation 0 0 0 0
+  wirecolor 0.527344 0.527344 0.527344
+endnode
+node dummy X99_head_hit
+  parent compbank
+  position 0.00398437 0.369441 2.78061
+  orientation 0 0 0 0
+  wirecolor 0.527344 0.527344 0.527344
+endnode
+node dummy X99_impact
+  parent compbank
+  position 0.00398437 0.011001 0.506353
+  orientation 0 0 0 0
+  wirecolor 0.527344 0.527344 0.527344
+endnode
+node dummy X99_ground
+  parent compbank
+  position -0.00363281 0.0069873 0
+  orientation 0 0 0 0
+  wirecolor 0.527344 0.527344 0.527344
+endnode
+node emitter ChunkyWood178
+  parent compbank
+  position 0.0272229 0.0291345 1.15776
+  orientation 0 0 0 0
+  wirecolor 0.527344 0.527344 0.527344
+    colorStart 0.482353 0.435294 0.317647
+    colorEnd 0.584314 0.533333 0.407843
+    alphaStart 1
+    alphaEnd 1
+    sizeStart 0.1
+    sizeEnd 0.1
+    sizeStart_y 0
+    sizeEnd_y 0
+    frameStart 0
+    frameEnd 24
+    birthrate 2
+    spawnType 0
+    lifeExp 0.75
+    mass 3
+    spread 1.22173
+    particleRot 2.9
+    velocity 8
+    randvel 0.3
+    fps 0
+    random 0
+    inherit 1
+    inherit_local 0
+    inherit_part 0
+    inheritvel 0
+    xsize 89
+    ysize 40
+    bounce 1
+    bounce_co 0.5
+    loop 0
+    update Explosion
+    render Normal
+    Blend Normal
+    update_sel 2
+    render_sel 1
+    blend_sel 1
+    deadspace 0
+    opacity 0.5
+    blurlength 10
+    lightningDelay 0
+    lightningRadius 0
+    lightningScale 0
+    blastRadius 0
+    blastLength 0
+    twosidedtex 1
+    p2p 0
+    p2p_sel 1
+    p2p_type Bezier
+    p2p_bezier2 0
+    p2p_bezier3 0
+    combinetime 0
+    drag 0
+    grav 0
+    threshold 0
+    texture fxpa_cloud02
+    xgrid 5
+    ygrid 5
+    affectedByWind 0
+    m_isTinted 0
+    renderorder 0
+    Splat 0
+    chunkName PLC_Chunk_S01
+endnode
+node emitter ChunkyWood179
+  parent compbank
+  position 0.0272229 0.0301184 1.05154
+  orientation 0 0 0 0
+  wirecolor 0.0351563 0.0351563 0.0351563
+    colorStart 1 1 1
+    colorEnd 1 1 1
+    alphaStart 1
+    alphaEnd 1
+    sizeStart 0.1
+    sizeEnd 0.1
+    sizeStart_y 0
+    sizeEnd_y 0
+    frameStart 0
+    frameEnd 24
+    birthrate 2
+    spawnType 0
+    lifeExp 0.75
+    mass 3
+    spread 1.22173
+    particleRot 5
+    velocity 8
+    randvel 0.3
+    fps 0
+    random 0
+    inherit 1
+    inherit_local 0
+    inherit_part 0
+    inheritvel 0
+    xsize 89
+    ysize 40
+    bounce 1
+    bounce_co 0.5
+    loop 0
+    update Explosion
+    render Normal
+    Blend Normal
+    update_sel 2
+    render_sel 1
+    blend_sel 1
+    deadspace 0
+    opacity 0.5
+    blurlength 10
+    lightningDelay 0
+    lightningRadius 0
+    lightningScale 0
+    blastRadius 0
+    blastLength 0
+    twosidedtex 0
+    p2p 0
+    p2p_sel 1
+    p2p_type Bezier
+    p2p_bezier2 0
+    p2p_bezier3 0
+    combinetime 0
+    drag 0
+    grav 0
+    threshold 0
+    texture fxpa_cloud02
+    xgrid 5
+    ygrid 5
+    affectedByWind 0
+    m_isTinted 0
+    renderorder 0
+    Splat 0
+    chunkName PLC_Chunk_S02
+endnode
+node emitter fire!111
+  parent compbank
+  position 0.0272229 0.0291345 0.977492
+  orientation -1 0 0 -1.5708
+  wirecolor 0.0351563 0.0351563 0.0351563
+    colorStart 0.443137 0.423529 0.372549
+    colorEnd 0.72549 0.705882 0.631373
+    alphaStart 1
+    alphaEnd 0
+    sizeStart 4
+    sizeEnd 1
+    sizeStart_y 0
+    sizeEnd_y 0
+    frameStart 0
+    frameEnd 24
+    birthrate 10
+    spawnType 0
+    lifeExp 2.5
+    mass 0.09
+    spread 2.96706
+    particleRot 0.5
+    velocity 2
+    randvel 0.5
+    fps 10
+    random 0
+    inherit 1
+    inherit_local 0
+    inherit_part 0
+    inheritvel 0
+    xsize 100
+    ysize 99
+    bounce 0
+    bounce_co 0
+    loop 0
+    update Explosion
+    render Normal
+    Blend Normal
+    update_sel 2
+    render_sel 1
+    blend_sel 1
+    deadspace 0
+    opacity 0.5
+    blurlength 10
+    lightningDelay 0
+    lightningRadius 0
+    lightningScale 0
+    blastRadius 0.2
+    blastLength 1
+    twosidedtex 1
+    p2p 0
+    p2p_sel 1
+    p2p_type Bezier
+    p2p_bezier2 0
+    p2p_bezier3 0
+    combinetime 0
+    drag 0
+    grav 0
+    threshold 0
+    texture fxpa_smoke01
+    xgrid 4
+    ygrid 4
+    affectedByWind 0
+    m_isTinted 1
+    renderorder 0
+    Splat 0
+endnode
+node trimesh damage69
+  parent compbank
+  position 0.0287878 0.00856934 0
+  orientation 0 0 0 0
+  wirecolor 0.0351563 0.0351563 0.0351563
+  ambient 0.0705882 0 1
+  diffuse 1 0.501961 0.643137
+  specular 0 0 0
+  shininess 24
+  bitmap NULL
+  render 0
+  Shadow 1
+  beaming 0
+  transparencyhint 0
+  tilefade 0
+  rotatetexture 0
+  verts 12
+    -0.195415 -0.186216 0
+    -0.195415 0.186216 0
+    0.195415 0.186216 0
+    0.195415 -0.186216 0
+    -0.195415 -0.186216 0.5
+    0.195415 -0.186216 0.5
+    0.195415 0.186216 0.5
+    -0.195415 0.186216 0.5
+    0.103944 -0.0990513 0.25
+    -0.103944 -0.0990513 0.25
+    0.103944 0.0990513 0.25
+    -0.103944 0.0990513 0.25
+  faces 20
+    0 1 2  1  0 0 0  0
+    2 3 0  1  0 0 0  0
+    4 5 6  1  0 0 0  0
+    6 7 4  1  0 0 0  0
+    0 3 8  1  0 0 0  0
+    8 9 0  1  0 0 0  0
+    9 8 5  1  0 0 0  0
+    5 4 9  1  0 0 0  0
+    3 2 10  1  0 0 0  0
+    10 8 3  1  0 0 0  0
+    8 10 6  1  0 0 0  0
+    6 5 8  1  0 0 0  0
+    2 1 11  1  0 0 0  0
+    11 10 2  1  0 0 0  0
+    10 11 7  1  0 0 0  0
+    7 6 10  1  0 0 0  0
+    1 0 9  1  0 0 0  0
+    9 11 1  1  0 0 0  0
+    11 9 4  1  0 0 0  0
+    4 7 11  1  0 0 0  0
+  tverts 1
+    0 0 0
+endnode
+endmodelgeom compbank
+
+#MAXANIM ASCII
+newanim damage compbank
+  length 0.133333
+  transtime 0
+  animroot compbank
+node dummy compbank
+  parent NULL
+endnode
+node dummy X99_hand
+  parent compbank
+endnode
+node dummy X99_head
+  parent compbank
+endnode
+node dummy X99_head_hit
+  parent compbank
+endnode
+node dummy X99_impact
+  parent compbank
+endnode
+node dummy X99_ground
+  parent compbank
+endnode
+node emitter ChunkyWood178
+  parent compbank
+endnode
+node emitter ChunkyWood179
+  parent compbank
+endnode
+node emitter fire!111
+  parent compbank
+endnode
+node trimesh damage69
+  parent compbank
+    positionkey
+      0  0.0287878 0.00856934 0
+      0.0333333  0.0287878 0.00856934 0.0244581
+      0.133333  0.0287878 0.00856934 0
+    endlist
+    orientationkey
+      0  0 0 0 0
+      0.0333333  -0.371336 0.928463 -0.00810258 0.0469942
+      0.1  0.599949 -0.79997 -0.0104721 0.0436326
+      0.133333  0 0 0 0
+    endlist
+endnode
+node trimesh PLC_X99_wg
+  parent compbank
+endnode
+doneanim damage compbank
+
+#MAXANIM ASCII
+newanim die compbank
+  length 0.166667
+  transtime 0
+  animroot compbank
+node dummy compbank
+  parent NULL
+endnode
+node dummy X99_hand
+  parent compbank
+endnode
+node dummy X99_head
+  parent compbank
+endnode
+node dummy X99_head_hit
+  parent compbank
+endnode
+node dummy X99_impact
+  parent compbank
+endnode
+node dummy X99_ground
+  parent compbank
+endnode
+node emitter ChunkyWood178
+  parent compbank
+endnode
+node emitter ChunkyWood179
+  parent compbank
+endnode
+node emitter fire!111
+  parent compbank
+endnode
+node trimesh damage69
+  parent compbank
+    positionkey
+      0  0.0287878 0.00856934 0
+      0.166667  0.0287878 0.00856934 -6.95145
+    endlist
+    orientationkey
+      0  0 0 0 0
+    endlist
+endnode
+node trimesh PLC_X99_wg
+  parent compbank
+endnode
+event 0  detonate
+event 0  detonate
+event 0  detonate
+doneanim die compbank
+
+#MAXANIM ASCII
+newanim dead compbank
+  length 0.0333333
+  transtime 0
+  animroot compbank
+node dummy compbank
+  parent NULL
+endnode
+node dummy X99_hand
+  parent compbank
+endnode
+node dummy X99_head
+  parent compbank
+endnode
+node dummy X99_head_hit
+  parent compbank
+endnode
+node dummy X99_impact
+  parent compbank
+endnode
+node dummy X99_ground
+  parent compbank
+endnode
+node emitter ChunkyWood178
+  parent compbank
+endnode
+node emitter ChunkyWood179
+  parent compbank
+endnode
+node emitter fire!111
+  parent compbank
+endnode
+node trimesh damage69
+  parent compbank
+    positionkey
+      0  0.0287878 0.00856934 -6.95145
+      0.0333333  0.0287878 0.00856934 -6.95145
+    endlist
+endnode
+node trimesh PLC_X99_wg
+  parent compbank
+endnode
+doneanim dead compbank
+
+#MAXANIM ASCII
+newanim default compbank
+  length 0
+  transtime 0.25
+  animroot compbank
+node dummy compbank
+  parent NULL
+endnode
+node dummy X99_hand
+  parent compbank
+endnode
+node dummy X99_head
+  parent compbank
+endnode
+node dummy X99_head_hit
+  parent compbank
+endnode
+node dummy X99_impact
+  parent compbank
+endnode
+node dummy X99_ground
+  parent compbank
+endnode
+node emitter ChunkyWood178
+  parent compbank
+endnode
+node emitter ChunkyWood179
+  parent compbank
+endnode
+node emitter fire!111
+  parent compbank
+endnode
+node trimesh damage69
+  parent compbank
+    positionkey
+      0  0.0287878 0.00856934 0
+    endlist
+    orientationkey
+      0  0 0 0 0
+    endlist
+endnode
+node trimesh PLC_X99_wg
+  parent compbank
+endnode
+doneanim default compbank
+donemodel compbank

@@ -1,0 +1,23 @@
+# Exported from NWmax 0.8 b60 at 10/26/2008 1:41:51 PM
+# mdl file
+#
+#NWmax MODEL ASCII
+# model: wsf03_k02_01x
+#local file: Unknown
+filedependancy Unknown
+newmodel wsf03_k02_01x
+setsupermodel wsf03_k02_01x null
+classification Tile
+#NWmax GEOM  ASCII
+beginmodelgeom wsf03_k02_01x
+node dummy wsf03_k02_01x
+  parent NULL
+endnode
+node dummy wsf03_k02_01xa
+  parent wsf03_k02_01x
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.894118 0.839216 0.6 
+endnode
+endmodelgeom wsf03_k02_01x
+donemodel wsf03_k02_01x

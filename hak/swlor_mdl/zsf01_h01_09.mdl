@@ -1,0 +1,2795 @@
+# exported from nwmax 0.8 b61 at 13/06/2010 18:35:50
+# mdl file
+#
+#nwmax model ascii
+# model: zsf01_h01_09
+#local file: unknown
+filedependancy unknown
+newmodel zsf01_h01_09
+setsupermodel zsf01_h01_09 null
+classification tile
+#nwmax geom  ascii
+beginmodelgeom zsf01_h01_09
+node dummy zsf01_h01_09
+  parent null
+endnode
+node aabb line146
+  parent zsf01_h01_09
+  position 0.0 -6.10352e-007 1.5
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 1.0 1.0 1.0 
+  multimaterial 20
+    dirt
+    obscuring
+    grass
+    stone
+    wood
+    water
+    nonwalk
+    transparent
+    carpet
+    metal
+    puddles
+    swamp
+    mud
+    leaves
+    lava
+    bottomlesspit
+    deepwater
+    door
+    snow
+    sand
+  ambient 0.0 0.0 0.0 
+  diffuse 0.5 0.5 0.5 
+  specular 0.0 0.0 0.0 
+  shininess 10.0
+  bitmap stone
+  verts 18
+    3.2 4.0 -1.5
+    5.0 -5.0 -1.5
+    5.0 4.0 -1.5
+    -3.33 -0.65 -1.5
+    -4.37 -1.58 -1.5
+    -4.0 -5.0 -1.5
+    5.0 4.0 1.5
+    -4.37 -1.58 1.5
+    -3.33 -0.65 1.5
+    -3.2 5.0 1.5
+    -3.2 5.0 -1.5
+    3.2 4.0 1.5
+    5.0 5.0 1.5
+    -5.0 -5.0 1.5
+    -4.0 -5.0 1.5
+    -5.0 5.0 1.5
+    3.2 5.0 1.5
+    3.2 5.0 -1.5
+  faces 22
+    0 1 2  1  0 0 0  4
+    3 4 5  1  0 0 0  4
+    0 2 6  1  0 0 0  7
+    4 7 5  1  0 0 0  7
+    4 3 8  1  0 0 0  7
+    9 8 3  1  0 0 0  7
+    3 10 9  1  0 0 0  7
+    11 6 12  1  0 0 0  7
+    7 13 14  1  0 0 0  7
+    7 8 15  1  0 0 0  7
+    8 9 15  1  0 0 0  7
+    16 11 12  1  0 0 0  7
+    11 0 6  1  0 0 0  7
+    3 0 10  1  0 0 0  4
+    7 4 8  1  0 0 0  7
+    3 5 1  1  0 0 0  4
+    13 7 15  1  0 0 0  7
+    7 14 5  1  0 0 0  7
+    16 17 0  1  0 0 0  7
+    0 11 16  1  0 0 0  7
+    17 10 0  2  0 0 0  4
+    3 1 0  1  0 0 0  4
+    aabb         -5.0 -5.0 -1.5 5.0 5.0 1.5 -1
+        -5.0 -5.0 -1.5 5.0 5.0 1.5 -1
+        -5.0 -5.0 -1.5 -3.2 5.0 1.5 -1
+        -5.0 -5.0 -1.5 -3.33 -0.65 1.5 -1
+        -5.0 -5.0 -1.5 -4.0 -1.58 1.5 -1
+        -4.37 -5.0 -1.5 -4.0 -1.58 1.5 17
+        -5.0 -5.0 1.5 -4.0 -1.58 1.5 8
+        -4.37 -5.0 -1.5 -3.33 -0.65 1.5 -1
+        -4.37 -5.0 -1.5 -4.0 -1.58 1.5 3
+        -4.37 -5.0 -1.5 -3.33 -0.65 -1.5 1
+        -5.0 -5.0 -1.5 -3.2 5.0 1.5 -1
+        -5.0 -5.0 -1.5 -3.33 5.0 1.5 -1
+        -4.37 -1.58 -1.5 -3.33 -0.65 1.5 -1
+        -4.37 -1.58 -1.5 -3.33 -0.65 1.5 4
+        -4.37 -1.58 -1.5 -3.33 -0.65 1.5 14
+        -5.0 -5.0 1.5 -4.37 5.0 1.5 16
+        -5.0 -1.58 1.5 -3.2 5.0 1.5 -1
+        -5.0 -1.58 1.5 -3.33 5.0 1.5 9
+        -5.0 -0.65 1.5 -3.2 5.0 1.5 10
+        -4.0 -5.0 -1.5 5.0 5.0 1.5 -1
+        -4.0 -5.0 -1.5 5.0 -0.65 -1.5 15
+        -3.33 -0.65 -1.5 3.2 5.0 1.5 -1
+        -3.33 -0.65 -1.5 -3.2 5.0 1.5 -1
+        -3.33 -0.65 -1.5 -3.2 5.0 1.5 5
+        -3.33 -0.65 -1.5 -3.2 5.0 1.5 6
+        -3.33 -0.65 -1.5 3.2 5.0 -1.5 13
+        -3.33 -5.0 -1.5 5.0 5.0 1.5 -1
+        -3.33 -5.0 -1.5 5.0 4.0 -1.5 -1
+        -3.33 -5.0 -1.5 5.0 4.0 -1.5 21
+        3.2 -5.0 -1.5 5.0 4.0 -1.5 0
+        -3.2 4.0 -1.5 5.0 5.0 1.5 -1
+        -3.2 4.0 -1.5 5.0 5.0 1.5 -1
+        -3.2 4.0 -1.5 3.2 5.0 -1.5 20
+        3.2 4.0 -1.5 5.0 5.0 1.5 -1
+        3.2 4.0 -1.5 3.2 5.0 1.5 18
+        3.2 4.0 -1.5 5.0 4.0 1.5 2
+        3.2 4.0 -1.5 5.0 5.0 1.5 -1
+        3.2 4.0 -1.5 5.0 5.0 1.5 -1
+        3.2 4.0 -1.5 3.2 5.0 1.5 19
+        3.2 4.0 -1.5 5.0 4.0 1.5 12
+        3.2 4.0 1.5 5.0 5.0 1.5 -1
+        3.2 4.0 1.5 5.0 5.0 1.5 11
+        3.2 4.0 1.5 5.0 5.0 1.5 7
+endnode
+node light zsf01_h01_09ml1
+  parent zsf01_h01_09
+  position 0.0 0.0 5.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 1.0 1.0 1.0 
+  radius 14.0
+  multiplier 1.0
+  color 0.0 0.0 0.0 
+  ambientonly 0
+  ndynamictype 0
+  affectdynamic 1
+  shadow 0
+  lightpriority 3
+  fadinglight 1
+endnode
+node light zsf01_h01_09ml2
+  parent zsf01_h01_09
+  position 3.82498 0.885128 2.5
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 1.0 1.0 1.0 
+  radius 5.0
+  multiplier 1.0
+  color 0.0 0.0 0.0 
+  ambientonly 0
+  ndynamictype 0
+  affectdynamic 1
+  shadow 0
+  lightpriority 3
+  fadinglight 1
+endnode
+#tile trimesh node
+node trimesh mesh2659
+  parent zsf01_h01_09
+  position 2.5 -2.5 0.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.05 0.05 0.05 
+  shininess 26
+  center 0.0 0.0 0.0 
+  bitmap zsf01_floor2trim
+  verts 8
+    0.0 0.0 0.0
+    2.5 0.0 0.0
+    2.5 2.5 0.0
+    0.0 2.5 0.0
+    -2.5 -2.5 0.0
+    0.0 -2.5 0.0
+    -2.5 0.0 0.0
+    2.5 -2.5 0.0
+  faces 7
+    0 1 2  1  0 1 2  1
+    2 3 0  1  2 3 0  1
+    4 5 0  1  4 5 0  1
+    0 6 4  1  0 6 4  1
+    0 7 1  1  0 7 1  1
+    7 0 5  1  7 0 5  1
+    0 3 6  1  8 9 10  1
+  tverts 11
+    1.71211 0.00624686 0
+    1.69374 -0.491733 0
+    1.19374 -0.491736 0
+    1.19374 0.00826454 0
+    1.21211 -0.493753 0
+    1.71211 -0.493753 0
+    1.21211 0.00624698 0
+    2.21211 -0.493753 0
+    0.587144 -0.262311 0
+    0.936231 0.163936 0
+    0.22918 0.153364 0
+endnode
+#tile trimesh node
+node trimesh box2517
+  parent zsf01_h01_09
+  position -3.32 3.8 1.02
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  shadow 0
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.05 0.05 0.05 
+  shininess 26
+  center 0.0 0.0 -0.5 
+  bitmap zsf01_bridge
+  verts 8
+    0.0 0.4 1.01
+    0.0 -0.41 1.01
+    0.0 0.4 -1.02
+    0.0 -0.41 -1.02
+    0.0 -1.16 1.01
+    0.0 -1.16 -1.02
+    0.0 1.16 1.01
+    0.0 1.16 -1.02
+  faces 6
+    0 1 2  1  0 1 2  5
+    3 2 1  1  3 2 1  5
+    1 4 3  1  1 4 3  5
+    5 3 4  1  5 3 4  5
+    6 0 7  1  1 4 3  5
+    2 7 0  1  5 3 4  5
+  tverts 6
+    0.931078 0.999501 0
+    0.504737 0.999501 0
+    0.931078 0.000499457 0
+    0.504737 0.000499457 0
+    0.924854 0.999501 0
+    0.924854 0.000499457 0
+endnode
+#tile trimesh node
+node trimesh box2515
+  parent zsf01_h01_09
+  position -3.88 0.75 1.02
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  shadow 0
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.05 0.05 0.05 
+  shininess 26
+  center -0.5 0.5 -0.5 
+  bitmap zsf01_bridge
+  verts 14
+    0.56 0.98 1.01
+    0.56 0.09 1.01
+    0.56 0.09 -1.02
+    0.56 0.98 -1.02
+    0.56 1.89 1.01
+    0.56 1.89 -1.02
+    0.56 -0.75 1.01
+    0.56 -0.75 -1.02
+    0.39 -1.35 1.01
+    0.39 -1.35 -1.02
+    -0.03 -1.75 1.01
+    -0.03 -1.75 -1.02
+    -0.57 -1.88 1.01
+    -0.57 -1.88 -1.02
+  faces 24
+    0 1 2  1  0 1 2  5
+    2 3 0  1  2 3 0  5
+    4 0 3  1  4 0 3  5
+    3 5 4  1  3 5 4  5
+    1 6 7  1  4 0 3  5
+    7 2 1  1  3 5 4  5
+    1 0 2  2  1 0 2  5
+    3 2 0  2  3 2 0  5
+    0 4 3  2  0 4 3  5
+    5 3 4  2  5 3 4  5
+    6 1 7  2  0 4 3  5
+    2 7 1  2  5 3 4  5
+    8 9 7  1  6 7 8  5
+    7 6 8  1  8 9 6  5
+    9 8 6  2  7 6 10  5
+    6 7 9  2  10 11 7  5
+    10 11 9  1  0 3 12  5
+    9 8 10  1  12 13 0  5
+    11 10 8  2  3 0 13  5
+    8 9 11  2  13 12 3  5
+    12 13 11  1  14 15 3  5
+    11 10 12  1  3 0 14  5
+    13 12 10  2  16 17 0  5
+    10 11 13  2  0 3 16  5
+  tverts 18
+    0.504737 0.999501 0
+    0.931078 0.999501 0
+    0.931078 0.000499457 0
+    0.504737 0.000499457 0
+    0.924854 0.999501 0
+    0.924854 0.000499457 0
+    0.757136 0.999501 0
+    0.757136 0.000499457 0
+    0.504275 0.000499457 0
+    0.504275 0.999501 0
+    0.505198 0.999501 0
+    0.505198 0.000499457 0
+    0.753906 0.000499457 0
+    0.753906 0.999501 0
+    0.72288 0.999501 0
+    0.72288 0.000499457 0
+    0.744678 0.000499457 0
+    0.744678 0.999501 0
+endnode
+#tile trimesh node
+node trimesh mesh524
+  parent zsf01_h01_09
+  position -4.45 -0.86 1.5
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.05 0.05 0.05 
+  shininess 26
+  center 0.5 0.0 0.0 
+  bitmap zsf01_rock3
+  verts 11
+    0.01 0.41 -0.25
+    0.0 0.16 -1.5
+    0.01 0.51 -0.9
+    0.0 -0.86 1.5
+    0.0 -0.86 0.0
+    0.0 -0.59 0.67
+    0.0 -0.86 -1.5
+    0.0 -0.19 0.4
+    0.0 -0.59 0.97
+    0.0 -0.19 1.25
+    0.0 0.86 1.5
+  faces 9
+    0 1 2  1  0 1 2  1
+    3 4 5  2  3 4 5  1
+    4 6 1  2  6 7 8  1
+    1 0 4  4  8 0 6  1
+    7 4 0  8  9 4 10  1
+    3 5 8  2  3 5 11  1
+    7 5 4  2  9 5 4  1
+    9 10 3  2  12 13 3  1
+    8 9 3  2  11 12 3  1
+  tverts 14
+    8.19161 0.430526 0
+    8.1505 -0.0090754 0
+    8.11137 0.201408 0
+    7.9722 0.000869989 0
+    7.9722 0.430748 0
+    8.03983 0.238754 0
+    7.97409 0.43049 0
+    7.9722 -0.0090754 0
+    8.18972 -0.0090754 0
+    8.14047 0.316279 0
+    8.19014 0.431024 0
+    8.03983 0.152807 0
+    8.13978 0.0730168 0
+    8.19015 0.00118143 0
+endnode
+#tile trimesh node
+node trimesh box2514
+  parent zsf01_h01_09
+  position -3.73 1.78 2.73
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.05 0.05 0.05 
+  shininess 26
+  center 0.5 -0.5 0.500001 
+  bitmap zsf01_rock3
+  verts 15
+    0.73 3.22 -0.26
+    0.33 3.22 0.02
+    0.73 0.72 -0.26
+    0.33 0.72 0.02
+    -0.72 3.22 0.27
+    -0.72 0.72 0.27
+    0.33 -1.78 0.02
+    0.73 -1.78 -0.26
+    -0.72 -1.78 0.27
+    0.19 -2.31 0.02
+    0.53 -2.51 -0.26
+    -0.19 -2.69 0.02
+    0.01 -3.03 -0.26
+    -0.72 -2.83 0.02
+    -0.72 -3.23 -0.26
+  faces 17
+    0 1 2  1  0 1 2  1
+    3 2 1  1  3 2 1  1
+    1 4 3  2  1 4 3  1
+    5 3 4  2  5 3 4  1
+    3 6 2  1  3 6 2  1
+    7 2 6  1  7 2 6  1
+    5 8 3  2  5 8 3  1
+    6 3 8  2  6 3 8  1
+    9 10 7  2  9 10 11  1
+    7 6 9  4  11 12 9  1
+    8 9 6  8  13 9 12  1
+    11 12 10  1  14 15 10  1
+    10 9 11  1  10 9 14  1
+    8 11 9  16  13 14 9  1
+    13 14 12  2  16 17 15  1
+    12 11 13  4  15 14 16  1
+    8 13 11  32  13 16 14  1
+  tverts 18
+    1.35714 -0.928572 0
+    1.47143 -0.928572 0
+    1.35714 -0.214286 0
+    1.47143 -0.214286 0
+    1.77143 -0.928572 0
+    1.77143 -0.214286 0
+    1.47143 0.5 0
+    1.35714 0.5 0
+    1.77143 0.5 0
+    0.447643 0.444295 0
+    0.349087 0.50159 0
+    0.293 0.293518 0
+    0.407 0.293518 0
+    0.707 0.293517 0
+    0.556126 0.552819 0
+    0.498794 0.651353 0
+    0.707 0.592767 0
+    0.707 0.706482 0
+endnode
+#tile trimesh node
+node trimesh mesh2675
+  parent zsf01_h01_09
+  position 0.0 2.5 0.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.05 0.05 0.05 
+  shininess 26
+  center 0.0 0.0 0.0 
+  bitmap zsf01_floor
+  verts 7
+    2.26 2.5 0.0
+    0.0 2.5 0.0
+    2.26 2.12 0.0
+    -2.26 2.5 0.0
+    -2.26 -0.38 0.0
+    0.0 -0.38 0.0
+    -2.26 -2.5 0.0
+  faces 5
+    0 1 2  1  0 1 2  1
+    1 3 4  1  1 3 4  1
+    4 5 1  1  4 5 1  1
+    5 4 6  1  5 4 6  1
+    2 1 5  1  2 1 5  1
+  tverts 7
+    0.9525 -0.482229 0
+    0.5 -0.48223 0
+    0.953106 -0.41365 0
+    0.0475001 -0.482229 0
+    0.0475 0.0177706 0
+    0.5 0.0177702 0
+    0.0952381 0.307937 0
+endnode
+#tile trimesh node
+node trimesh plane33
+  parent zsf01_h01_09
+  position -3.32 -3.75 0.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 0.4 0.4 0.4 
+  diffuse 0.4 0.4 0.4 
+  specular 0.02 0.02 0.02 
+  shininess 26
+  center -0.5 0.0 0.0 
+  bitmap zsf01_rock3
+  verts 5
+    -0.88 -0.77 0.0
+    0.87 -1.25 0.0
+    0.77 1.25 0.0
+    -0.88 0.3 0.0
+    -0.88 -1.25 0.0
+  faces 3
+    0 1 2  1  0 1 2  1
+    2 3 0  1  2 3 0  1
+    1 0 4  1  1 0 4  1
+  tverts 5
+    -0.4195 -0.403623 0
+    -0.0907502 -0.499999 0
+    -0.0907501 1.07288e-006 0
+    -0.4195 -0.190069 0
+    -0.4195 -0.499999 0
+endnode
+#tile trimesh node
+node trimesh mesh526
+  parent zsf01_h01_09
+  position 1.22 -1.23 0.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.05 0.05 0.05 
+  shininess 26
+  center 0.5 -4.5 0.0 
+  bitmap zsf01_stonegld
+  verts 9
+    -1.22 1.23 0.0
+    -1.22 -1.27 0.0
+    1.28 1.23 0.0
+    1.28 3.68 0.0
+    3.78 1.23 0.0
+    3.78 3.68 0.0
+    -3.77 -1.27 0.0
+    -3.67 -3.77 0.0
+    -1.22 -3.77 0.0
+  faces 7
+    0 1 2  1  0 1 2  1
+    0 2 3  1  0 2 3  1
+    2 4 5  1  4 5 6  1
+    5 3 2  1  6 7 4  1
+    6 1 0  1  8 1 0  1
+    7 8 1  1  9 10 11  1
+    1 6 7  1  11 12 9  1
+  tverts 13
+    0.578266 0.588 0
+    0.22918 0.153364 0
+    0.936231 0.163936 0
+    1.27816 0.588 0
+    0.261141 0.085 0
+    -0.238859 0.085 0
+    -0.238861 0.588 0
+    0.261139 0.588 0
+    -0.136123 0.588 0
+    -0.240877 0.588 0
+    -0.240877 0.085 0
+    0.259123 0.085 0
+    0.259123 0.588 0
+endnode
+#tile trimesh node
+node trimesh mesh2653
+  parent zsf01_h01_09
+  position -4.72 0.0 3.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.05 0.05 0.05 
+  shininess 26
+  center -0.499999 0.0 0.0 
+  bitmap zsf01_black
+  verts 8
+    0.27 2.5 0.0
+    -0.28 5.0 0.0
+    0.27 0.0 0.0
+    -0.28 -5.0 0.0
+    0.27 5.0 0.0
+    0.27 -1.72 0.0
+    0.22 -5.0 0.0
+    0.22 -3.45 0.0
+  faces 6
+    0 1 2  1  0 1 2  1
+    2 1 3  1  2 1 3  1
+    4 1 0  1  4 1 0  1
+    5 2 3  1  5 2 3  1
+    6 7 3  1  6 7 3  1
+    7 5 3  1  7 5 3  1
+  tverts 8
+    -196.75 488.0 0
+    -199.5 500.5 0
+    -196.75 475.5 0
+    -199.5 450.5 0
+    -196.75 500.5 0
+    -196.75 466.927 0
+    -197.0 450.5 0
+    -197.0 458.248 0
+endnode
+#tile trimesh node
+node trimesh mesh2670
+  parent zsf01_h01_09
+  position -3.73 1.78 2.32
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.05 0.05 0.05 
+  shininess 26
+  center 0.5 -0.5 0.0 
+  bitmap zsf01_trim
+  verts 12
+    0.73 3.22 -0.15
+    0.73 3.22 0.15
+    0.73 0.72 -0.15
+    0.73 0.72 0.15
+    0.73 -1.78 0.15
+    0.73 -1.78 -0.15
+    0.53 -2.51 0.15
+    0.53 -2.51 -0.15
+    0.01 -3.03 0.15
+    0.01 -3.03 -0.15
+    -0.72 -3.23 0.15
+    -0.72 -3.23 -0.15
+  faces 10
+    0 1 2  1  0 1 2  1
+    3 2 1  1  3 2 1  1
+    3 4 2  1  3 4 2  1
+    5 2 4  1  5 2 4  1
+    6 7 5  2  6 7 8  1
+    5 4 6  2  8 9 6  1
+    8 9 7  1  6 7 10  1
+    7 6 8  1  10 11 6  1
+    10 11 9  2  6 7 12  1
+    9 8 10  2  12 13 6  1
+  tverts 14
+    1.06227 0.00729811 0
+    1.06227 0.0930124 0
+    0.347985 0.00729829 0
+    0.347985 0.0930126 0
+    -0.366301 0.0930128 0
+    -0.366301 0.00729847 0
+    0.214286 0.1 0
+    0.214286 0.0 0
+    0.452972 0.0 0
+    0.452972 0.1 0
+    0.426541 0.0 0
+    0.426541 0.1 0
+    0.0795496 0.0 0
+    0.0795497 0.1 0
+endnode
+#tile trimesh node
+node trimesh mesh2660
+  parent zsf01_h01_09
+  position -4.34 -3.36 3.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.05 0.05 0.05 
+  shininess 26
+  center -1.0 0.0 0.0 
+  bitmap zsf01_stonegld
+  verts 7
+    0.03 0.78 0.0
+    -0.16 -0.09 0.0
+    0.14 -0.09 0.0
+    -0.11 1.64 0.0
+    0.14 -1.16 0.0
+    0.14 -1.64 0.0
+    -0.16 -1.64 0.0
+  faces 5
+    0 1 2  1  0 1 2  1
+    0 3 1  1  0 3 1  1
+    4 2 1  1  4 2 1  1
+    5 4 6  1  5 6 7  1
+    6 4 1  1  7 6 8  1
+  tverts 9
+    43.0258 -1.94138 0
+    43.0808 -1.69343 0
+    42.9936 -1.69343 0
+    43.0665 -2.18934 0
+    42.9936 -1.38835 0
+    0.87901 1.56886 0
+    0.87901 1.43118 0
+    0.966153 1.56886 0
+    0.966153 1.1261 0
+endnode
+#tile trimesh node
+node trimesh mesh2671
+  parent zsf01_h01_09
+  position -4.48 1.78 1.58
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.05 0.05 0.05 
+  shininess 26
+  center 75.5 -0.5 -49.5 
+  bitmap zsf01_stonegld
+  verts 30
+    0.48 3.22 -0.33
+    1.08 3.22 0.32
+    0.48 0.72 -0.33
+    1.08 0.72 0.32
+    0.73 -1.78 -1.58
+    0.73 0.72 -1.58
+    0.38 -1.78 -0.98
+    0.38 0.72 -0.98
+    1.08 -1.78 0.32
+    0.48 -1.78 -0.33
+    0.73 3.22 -1.58
+    0.38 3.22 -0.98
+    1.48 3.22 0.59
+    1.48 0.72 0.59
+    1.48 -1.78 0.59
+    0.33 -1.95 -0.98
+    0.64 -2.13 -1.58
+    0.94 -2.31 0.32
+    0.42 -2.0 -0.33
+    1.28 -2.51 0.59
+    0.2 -2.09 -0.98
+    0.38 -2.39 -1.58
+    0.56 -2.69 0.32
+    0.25 -2.17 -0.33
+    0.76 -3.03 0.59
+    0.04 -2.13 -0.98
+    0.03 -2.48 -1.58
+    0.03 -2.83 0.32
+    0.04 -2.23 -0.33
+    0.03 -3.23 0.59
+  faces 40
+    0 1 2  1  0 1 2  1
+    3 2 1  1  3 2 1  1
+    4 5 6  1  4 5 6  1
+    7 6 5  1  7 6 5  1
+    3 8 2  1  3 8 2  1
+    9 2 8  1  9 2 8  1
+    5 10 7  1  5 10 7  1
+    11 7 10  1  11 7 10  1
+    7 2 6  2  7 2 6  1
+    9 6 2  2  9 6 2  1
+    11 0 7  2  11 0 7  1
+    2 7 0  2  2 7 0  1
+    1 12 3  2  1 12 3  1
+    13 3 12  2  13 3 12  1
+    13 14 3  2  13 14 3  1
+    8 3 14  2  8 3 14  1
+    15 16 4  2  15 16 17  1
+    4 6 15  4  17 18 15  1
+    17 18 9  4  19 20 21  1
+    9 8 17  8  21 22 19  1
+    18 15 6  8  20 15 18  1
+    6 9 18  16  18 21 20  1
+    19 17 8  16  23 19 22  1
+    8 14 19  4  22 24 23  1
+    20 21 16  1  25 26 16  1
+    16 15 20  16  16 15 25  1
+    22 23 18  1  27 28 20  1
+    18 17 22  1  20 19 27  1
+    23 20 15  32  28 25 15  1
+    15 18 23  64  15 20 28  1
+    24 22 17  2  29 27 19  1
+    17 19 24  2  19 23 29  1
+    25 26 21  2  30 31 26  1
+    21 20 25  4  26 25 30  1
+    27 28 23  2  32 33 28  1
+    23 22 27  4  28 27 32  1
+    28 25 20  8  33 30 25  1
+    20 23 28  128  25 28 33  1
+    29 27 22  8  34 32 27  1
+    22 24 29  16  27 29 34  1
+  tverts 35
+    0.875981 -0.8 0
+    1.13216 -0.8 0
+    0.875981 -0.0857143 0
+    1.13216 -0.0857143 0
+    1.24616 0.628571 0
+    1.24616 -0.0857143 0
+    1.07473 0.628571 0
+    1.07473 -0.0857143 0
+    1.13216 0.628571 0
+    0.875981 0.628571 0
+    1.24616 -0.8 0
+    1.07473 -0.8 0
+    1.24845 -0.8 0
+    1.24845 -0.0857142 0
+    1.24845 0.628571 0
+    1.04942 0.415379 0
+    1.24751 0.487738 0
+    1.24864 0.621927 0
+    1.0495 0.48697 0
+    1.1364 0.477292 0
+    0.876809 0.444755 0
+    0.876826 0.626246 0
+    1.13732 0.686901 0
+    1.24726 0.500543 0
+    1.24811 0.794756 0
+    1.04923 0.344242 0
+    1.24679 0.35313 0
+    1.13615 0.266481 0
+    0.876812 0.262856 0
+    1.24646 0.205818 0
+    1.04907 0.272969 0
+    1.24614 0.218472 0
+    1.13592 0.0556449 0
+    0.876832 0.0820598 0
+    1.24577 -0.0890451 0
+endnode
+#tile trimesh node
+node trimesh line19
+  parent zsf01_h01_09
+  position 0.31 0.59 0.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 0.4 0.4 0.4 
+  diffuse 0.4 0.4 0.4 
+  specular 0.02 0.02 0.02 
+  shininess 26
+  center 0.500015 -0.499985 0.0 
+  bitmap zsf01_rock3
+  verts 16
+    2.39 3.56 0.0
+    1.95 4.03 0.0
+    2.19 1.86 0.0
+    4.69 1.86 0.0
+    4.69 3.61 0.0
+    4.14 3.36 0.0
+    3.09 3.36 0.0
+    -0.31 1.53 0.0
+    -0.31 -0.59 0.0
+    -3.03 -1.92 0.0
+    -2.86 -3.09 0.0
+    -2.57 -0.59 0.0
+    -4.1 -2.65 0.0
+    -4.51 -4.04 0.0
+    -4.62 -3.17 0.0
+    -4.68 -2.77 0.0
+  faces 14
+    0 1 2  1  0 1 2  1
+    3 4 5  1  3 4 5  1
+    2 3 5  1  2 3 5  1
+    2 5 6  1  2 5 6  1
+    0 2 6  1  0 2 6  1
+    7 8 2  1  7 8 2  1
+    2 1 7  1  2 1 7  1
+    9 10 8  1  9 10 8  1
+    8 7 11  1  8 7 11  1
+    11 9 8  1  11 9 8  1
+    12 13 10  1  12 13 10  1
+    10 9 12  1  10 9 12  1
+    13 12 14  1  13 12 14  1
+    14 12 15  1  14 12 15  1
+  tverts 16
+    0.976494 1.21395 0
+    0.889734 1.30713 0
+    0.937333 0.872684 0
+    1.43733 0.872684 0
+    1.43733 1.22193 0
+    1.32733 1.17254 0
+    1.11733 1.17254 0
+    0.437134 0.807136 0
+    0.437333 0.382935 0
+    -0.107446 0.117626 0
+    -0.0729168 -0.117065 0
+    -0.0152663 0.382935 0
+    -0.321047 -0.0291906 0
+    -0.401667 -0.307135 0
+    -0.4242 -0.133566 0
+    -0.437334 -0.0534906 0
+endnode
+#tile trimesh node
+node trimesh mesh503
+  parent zsf01_h01_09
+  position 4.15 3.99 1.5
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.05 0.05 0.05 
+  shininess 26
+  center 0.5 0.5 0.0 
+  bitmap zsf01_floor2trim
+  verts 21
+    -0.02 -0.04 -0.65
+    0.3 -0.09 -0.41
+    0.1 -0.2 0.0
+    -0.35 -0.04 -0.33
+    -0.35 -0.2 0.0
+    -0.75 -0.04 -0.09
+    -0.75 -0.07 0.0
+    0.3 -0.09 -0.62
+    0.3 -0.04 -1.5
+    0.85 0.04 -0.65
+    0.85 0.04 0.0
+    0.29 -0.09 0.42
+    0.85 0.04 0.65
+    0.85 0.21 1.5
+    0.3 -0.04 1.5
+    -0.02 -0.04 0.65
+    -0.35 -0.04 0.32
+    -0.75 -0.04 0.08
+    -0.84 0.08 -0.01
+    0.3 -0.09 0.65
+    0.85 0.21 -1.5
+  faces 26
+    0 1 2  1  0 1 2  1
+    3 0 2  1  3 0 2  1
+    4 5 3  1  4 5 3  1
+    5 4 6  1  5 4 6  1
+    7 8 9  1  7 8 9  1
+    3 2 4  1  3 2 4  1
+    7 9 10  1  7 9 10  1
+    10 11 2  1  10 11 2  1
+    12 13 14  1  12 13 14  1
+    15 16 2  1  15 16 2  1
+    16 17 4  1  16 17 4  1
+    18 6 17  1  18 6 17  1
+    14 15 19  1  14 15 19  1
+    2 16 4  1  2 16 4  1
+    19 11 10  1  19 11 10  1
+    20 9 8  2  20 9 8  1
+    12 19 10  1  12 19 10  1
+    14 19 12  1  14 19 12  1
+    0 7 1  1  0 7 1  1
+    0 8 7  1  0 8 7  1
+    1 7 10  1  1 7 10  1
+    1 10 2  1  1 10 2  1
+    19 15 11  1  19 15 11  1
+    11 15 2  1  11 15 2  1
+    4 17 6  1  4 17 6  1
+    5 6 18  1  5 6 18  1
+  tverts 21
+    0.794388 0.320612 0
+    0.784931 0.199661 0
+    0.941649 0.161959 0
+    0.954521 0.323373 0
+    1.06032 0.274578 0
+    1.10499 0.355574 0
+    1.10774 0.319577 0
+    0.855615 0.252089 0
+    1.09323 0.418758 0
+    0.961291 0.133821 0
+    0.769186 -0.00170176 0
+    0.786291 0.206019 0
+    0.961556 0.134636 0
+    1.18098 0.313449 0
+    1.09379 0.419216 0
+    0.79593 0.323073 0
+    0.953909 0.32379 0
+    1.10515 0.356721 0
+    1.12392 0.334928 0
+    0.856636 0.254006 0
+    1.18025 0.313195 0
+endnode
+#tile trimesh node
+node trimesh line17
+  parent zsf01_h01_09
+  position 4.73 4.22 3.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.05 0.05 0.05 
+  shininess 26
+  center -0.499999 0.499999 0.0 
+  bitmap zsf01_stonegld
+  verts 4
+    -0.28 0.28 0.0
+    -0.28 -0.27 0.0
+    0.27 -0.02 0.0
+    0.27 0.28 0.0
+  faces 2
+    0 1 2  1  0 1 2  1
+    3 0 2  1  3 0 2  1
+  tverts 4
+    0.978515 0.269175 0
+    0.978515 0.111176 0
+    1.13566 0.181747 0
+    1.13566 0.268889 0
+endnode
+#tile trimesh node
+node trimesh mesh2665
+  parent zsf01_h01_09
+  position 3.73 4.47 1.5
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.05 0.05 0.05 
+  shininess 26
+  center -0.5 0.499998 0.0 
+  bitmap zsf01_rock3
+  verts 17
+    -0.73 0.53 0.97
+    -0.33 -0.52 1.27
+    -0.33 0.53 1.25
+    -0.73 0.01 0.97
+    0.72 0.03 1.5
+    0.72 0.53 1.5
+    0.4 -0.52 0.65
+    0.72 -0.52 1.5
+    -0.33 -0.52 -1.5
+    -0.42 -0.4 -0.01
+    -0.73 0.01 -1.5
+    0.07 -0.52 0.32
+    -0.33 -0.52 0.08
+    -0.33 -0.52 -0.09
+    0.4 -0.52 -0.65
+    0.07 -0.52 -0.33
+    0.72 -0.52 -1.5
+  faces 16
+    0 1 2  1  0 1 2  1
+    1 0 3  2  1 0 3  1
+    2 4 5  2  2 4 5  1
+    4 2 1  4  4 2 1  1
+    1 6 7  8  6 7 8  1
+    3 8 9  1  9 10 11  1
+    8 3 10  4  10 9 12  1
+    1 11 6  8  6 13 7  1
+    1 7 4  16  1 14 4  1
+    9 12 1  32  11 15 6  1
+    3 9 1  64  9 11 6  1
+    9 8 13  32  11 10 16  1
+    11 1 12  8  13 6 15  1
+    14 15 8  2  17 18 10  1
+    16 14 8  2  19 17 10  1
+    15 13 8  2  18 16 10  1
+  tverts 20
+    0.292858 0.664286 0
+    0.407142 0.363623 0
+    0.407144 0.664286 0
+    0.292856 0.516511 0
+    0.707143 0.521429 0
+    0.707144 0.664287 0
+    0.478841 0.859984 0
+    0.697816 0.675652 0
+    0.779469 0.928725 0
+    0.341736 0.815726 0
+    0.516685 0.0343229 0
+    0.463644 0.490383 0
+    0.376122 0.0783201 0
+    0.606323 0.578518 0
+    0.707143 0.335714 0
+    0.495108 0.505068 0
+    0.497346 0.456247 0
+    0.715771 0.287809 0
+    0.615219 0.384406 0
+    0.820284 0.0347736 0
+endnode
+#tile trimesh node
+node trimesh mesh2676
+  parent zsf01_h01_09
+  position -0.35 1.41 0.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.05 0.05 0.05 
+  shininess 26
+  center 0.0 0.0 0.0 
+  bitmap zsf01_trim
+  verts 21
+    -1.91 3.59 0.0
+    -3.4 3.59 0.0
+    -3.4 1.09 0.0
+    -1.91 0.71 0.0
+    -3.4 -1.41 0.0
+    -1.91 -1.41 0.0
+    -3.49 -1.76 0.0
+    -2.37 -2.74 0.0
+    -3.75 -2.02 0.0
+    -3.44 -3.47 0.0
+    -4.1 -3.13 0.0
+    -4.02 -3.59 0.0
+    -4.1 -2.11 0.0
+    2.61 3.21 0.0
+    3.35 3.07 0.0
+    3.35 3.21 0.0
+    3.05 2.74 0.0
+    3.75 2.54 0.0
+    2.61 3.59 0.0
+    4.1 3.21 0.0
+    4.1 3.59 0.0
+  faces 17
+    0 1 2  1  0 1 2  1
+    2 3 0  1  2 3 0  4
+    3 2 4  1  3 2 4  4
+    4 5 3  1  4 5 3  1
+    5 4 6  1  6 7 8  1
+    6 7 5  1  8 9 6  1
+    7 6 8  1  10 11 12  1
+    8 9 7  1  12 13 10  1
+    10 11 9  1  14 15 16  1
+    10 9 8  1  14 16 17  1
+    10 8 12  1  14 17 18  1
+    13 14 15  1  19 20 21  1
+    14 13 16  1  20 19 22  1
+    16 17 14  1  22 23 20  1
+    18 13 15  1  24 19 25  1
+    18 15 19  1  24 25 26  1
+    18 19 20  1  24 26 27  1
+  tverts 28
+    0.631519 0.0 0
+    0.631519 0.47 0
+    1.18116 0.47 0
+    1.3001 0.0 0
+    1.80679 0.47 0
+    1.80679 0.0 0
+    1.45027 0.00811 0
+    1.57492 0.477289 0
+    1.6814 0.468783 0
+    1.86388 0.00811 0
+    1.79251 0.0052715 0
+    1.69235 0.475271 0
+    1.58165 0.475271 0
+    1.42877 0.0052715 0
+    1.60436 0.132841 0
+    1.58975 -0.0174089 0
+    1.45151 0.0 0
+    1.5139 0.47 0
+    1.64491 0.47 0
+    0.627286 0.47 0
+    0.658663 0.255416 0
+    0.614366 0.246187 0
+    0.726954 0.471126 0
+    0.863536 0.471362 0
+    0.704085 0.47 0
+    0.627286 0.246187 0
+    0.627286 0.0187343 0
+    0.704085 0.0187342 0
+endnode
+#tile trimesh node
+node trimesh mesh2662
+  parent zsf01_h01_09
+  position 3.55 4.81 1.08
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.05 0.05 0.05 
+  shininess 26
+  center 0.0 0.0 0.499996 
+  bitmap zsf01_stonegld
+  verts 11
+    0.45 0.19 0.17
+    -0.15 -0.19 0.82
+    -0.15 0.19 0.82
+    0.55 -0.19 -0.48
+    0.55 0.19 -0.48
+    0.2 -0.19 -1.08
+    -0.55 -0.19 -1.08
+    0.2 0.19 -1.08
+    -0.55 0.19 1.09
+    -0.55 -0.19 1.09
+    0.45 -0.19 0.17
+  faces 12
+    0 1 2  1  0 1 2  1
+    3 0 4  2  3 0 4  1
+    3 5 6  4  5 6 7  1
+    5 4 7  1  8 4 9  1
+    8 2 9  2  10 2 11  1
+    3 4 5  1  3 4 8  1
+    9 1 6  4  12 13 7  1
+    9 2 1  2  11 2 1  1
+    1 0 10  1  1 0 14  1
+    1 10 6  4  13 15 7  1
+    10 3 6  4  15 5 7  1
+    10 0 3  2  14 0 3  1
+  tverts 16
+    1.0887 0.664553 0
+    0.849895 0.527921 0
+    0.848718 0.662725 0
+    0.898577 0.411007 0
+    0.900804 0.666192 0
+    0.766486 0.342281 0
+    0.866183 0.162688 0
+    1.08047 0.162315 0
+    0.752363 0.359381 0
+    0.755052 0.667539 0
+    0.755098 0.661909 0
+    0.756044 0.553558 0
+    1.08161 0.813715 0
+    0.967172 0.73238 0
+    1.08699 0.468866 0
+    0.795398 0.537245 0
+endnode
+#tile trimesh node
+node trimesh mesh2664
+  parent zsf01_h01_09
+  position 3.0 4.74 1.23
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.05 0.05 0.05 
+  shininess 26
+  center 0.0 0.0 0.5 
+  bitmap zsf01_trim
+  verts 6
+    0.0 -0.12 0.94
+    0.0 -0.26 1.24
+    0.0 0.26 1.24
+    0.0 0.26 0.94
+    0.0 -0.12 -1.23
+    0.0 -0.26 -1.23
+  faces 4
+    0 1 2  1  0 1 2  1
+    2 3 0  1  2 3 0  1
+    4 5 1  1  4 5 6  1
+    1 0 4  1  6 7 4  1
+  tverts 8
+    1.63985 0.0 0
+    1.626 0.1 0
+    1.81264 0.1 0
+    1.79879 0.0 0
+    2.83457 0.0 0
+    2.83457 0.1 0
+    1.30992 0.1 0
+    1.30992 0.0 0
+endnode
+#tile trimesh node
+node trimesh mesh2663
+  parent zsf01_h01_09
+  position 3.32 4.54 1.02
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  shadow 0
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.05 0.05 0.05 
+  shininess 26
+  center -1.0 0.0 -0.5 
+  bitmap zsf01_bridge
+  verts 5
+    -0.01 -0.38 1.01
+    -0.01 -0.46 -1.02
+    -0.01 0.23 -1.02
+    -0.01 0.46 1.01
+    -0.01 0.46 -1.02
+  faces 6
+    0 1 2  1  0 1 2  5
+    3 0 4  1  3 4 1  5
+    2 4 0  1  5 1 4  5
+    1 1 0  2  2 1 0  5
+    0 3 4  2  4 3 1  5
+    4 1 0  2  1 5 4  5
+  tverts 6
+    0.931078 0.999501 0
+    0.504737 0.000499457 0
+    0.931078 0.000499457 0
+    0.504737 0.999501 0
+    0.924854 0.999501 0
+    0.924854 0.000499457 0
+endnode
+#tile trimesh node
+node trimesh object1262
+  parent zsf01_h01_09
+  position 4.73 4.75 3.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.05 0.05 0.05 
+  shininess 26
+  center -0.499999 0.0 0.0 
+  bitmap zsf01_black
+  verts 4
+    -0.28 -0.25 0.0
+    0.27 -0.25 0.0
+    0.27 0.25 0.0
+    -0.28 0.25 0.0
+  faces 2
+    0 1 2  1  0 1 2  4
+    3 0 2  1  3 0 2  4
+  tverts 4
+    -152.25 498.0 0
+    -149.5 498.0 0
+    -149.5 500.5 0
+    -152.25 500.5 0
+endnode
+#tile trimesh node
+node trimesh mesh2657
+  parent zsf01_h01_09
+  position -4.11 -4.23 1.5
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.05 0.05 0.05 
+  shininess 26
+  center -0.5 0.5 0.0 
+  bitmap zsf01_floor2trim
+  verts 15
+    0.08 -0.77 0.0
+    -0.08 0.03 -0.65
+    0.08 -0.09 0.0
+    0.08 -0.77 -0.65
+    -0.09 -0.77 -1.5
+    -0.09 -0.29 -1.5
+    -0.08 0.37 -0.33
+    0.08 0.36 0.0
+    -0.08 0.78 -0.09
+    -0.09 0.03 0.65
+    -0.09 -0.77 1.5
+    0.08 -0.77 0.65
+    -0.09 -0.29 1.5
+    -0.09 0.37 0.32
+    -0.09 0.78 0.08
+  faces 15
+    0 1 2  1  0 1 2  1
+    3 4 5  1  3 4 5  1
+    1 6 2  1  1 6 2  1
+    7 6 8  1  7 6 8  1
+    5 1 3  1  5 1 3  1
+    2 6 7  1  2 6 7  1
+    3 1 0  1  3 1 0  1
+    9 0 2  1  9 0 2  1
+    10 11 12  1  10 11 12  1
+    13 9 2  1  13 9 2  1
+    8 14 7  1  8 14 7  1
+    13 7 14  1  13 7 14  1
+    9 12 11  1  9 12 11  1
+    13 2 7  1  13 2 7  1
+    9 11 0  1  9 11 0  1
+  tverts 15
+    0.769186 -0.00170176 0
+    0.794388 0.320612 0
+    0.941649 0.161959 0
+    0.961291 0.133821 0
+    1.18025 0.313195 0
+    1.09323 0.418758 0
+    0.954521 0.323373 0
+    1.06032 0.274578 0
+    1.12392 0.334928 0
+    0.79593 0.323073 0
+    1.18098 0.313449 0
+    0.961556 0.134636 0
+    1.09379 0.419216 0
+    0.953909 0.32379 0
+    1.10515 0.356721 0
+endnode
+#tile trimesh node
+node trimesh object1261
+  parent zsf01_h01_09
+  position -4.32 -3.12 1.5
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.05 0.05 0.05 
+  shininess 26
+  center 0.0 0.0 0.0 
+  bitmap zsf01_florrck
+  verts 17
+    0.13 -0.74 -0.33
+    0.13 -1.08 -0.65
+    0.12 -0.33 -1.5
+    0.13 -0.33 -0.09
+    0.12 -1.4 -1.5
+    0.12 -1.08 0.65
+    0.12 -0.74 0.32
+    0.12 -0.33 1.5
+    0.12 -0.33 0.08
+    0.12 -1.4 1.5
+    0.01 0.54 0.0
+    -0.05 0.94 -1.5
+    -0.13 1.4 -1.5
+    -0.13 1.4 0.0
+    0.01 0.54 1.5
+    0.01 0.54 -1.5
+    -0.13 1.4 1.5
+  faces 16
+    0 1 2  1  0 1 2  1
+    3 0 2  2  3 0 2  1
+    1 4 2  4  1 4 2  1
+    5 6 7  1  5 6 7  1
+    6 8 7  1  6 8 7  1
+    9 5 7  1  9 5 7  1
+    10 11 12  1  10 11 12  1
+    12 13 10  2  12 13 10  1
+    10 14 7  4  14 15 16  1
+    3 2 15  8  17 18 19  1
+    3 10 8  16  17 10 20  1
+    13 16 14  2  21 22 15  1
+    14 10 13  2  15 14 21  1
+    10 15 11  32  10 19 11  1
+    10 3 15  64  10 17 19  1
+    7 8 10  4  16 23 14  1
+  tverts 24
+    8.12454 0.314292 0
+    8.26373 0.22485 0
+    8.01155 -0.0090754 0
+    8.01155 0.380589 0
+    8.40723 -0.0090754 0
+    8.26373 0.234796 0
+    8.12454 0.324238 0
+    8.01155 0.000869989 0
+    8.01155 0.390534 0
+    8.40723 0.000869989 0
+    8.19161 0.430526 0
+    8.08951 -0.0090754 0
+    7.9725 -0.0090754 0
+    7.97439 0.430562 0
+    8.19014 0.431024 0
+    8.19015 0.00118143 0
+    7.9722 0.000869989 0
+    7.97399 0.406873 0
+    7.9722 -0.0090754 0
+    8.18972 -0.0090754 0
+    7.97409 0.43049 0
+    7.97336 0.431301 0
+    7.97336 0.00149287 0
+    7.9722 0.407904 0
+endnode
+#tile trimesh node
+node trimesh frame_toparch_right
+  parent zsf01_h01_09
+  position -0.38 4.94 5.29
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 10
+  center undefined
+  bitmap tic01_jailflr01
+  verts 0
+  faces 0
+endnode
+#tile trimesh node
+node trimesh frame_toparch_left02
+  parent zsf01_h01_09
+  position 0.47 4.94 5.29
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 1
+  center undefined
+  bitmap tic01_jailflr01
+  verts 0
+  faces 0
+endnode
+#tile trimesh node
+node trimesh frame_toparch_right02
+  parent zsf01_h01_09
+  position -0.38 4.94 5.29
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 1
+  center undefined
+  bitmap tic01_jailflr01
+  verts 0
+  faces 0
+endnode
+#tile trimesh node
+node trimesh frame_toparch_left
+  parent zsf01_h01_09
+  position 0.47 4.94 5.29
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 10
+  center undefined
+  bitmap tic01_jailflr01
+  verts 0
+  faces 0
+endnode
+#tile trimesh node
+node trimesh plane03
+  parent zsf01_h01_09
+  position -0.05 -0.15 3.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 1
+  scale 1.0
+  render 1
+  shadow 0
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 1
+  center -45.0 389.0 195.0 
+  bitmap zsf01_rock3
+  verts 8
+    0.55 5.15 2.1
+    1.55 5.15 1.8
+    0.53 2.65 2.1
+    1.53 2.65 1.8
+    -0.45 5.15 2.1
+    -2.45 2.64 2.1
+    -1.45 5.15 1.8
+    -2.45 2.63 1.8
+  faces 6
+    0 1 2  1  0 1 2  1
+    3 2 1  1  3 2 1  1
+    4 0 5  1  4 0 5  1
+    2 5 0  1  2 5 0  1
+    6 4 7  1  6 4 7  1
+    5 7 4  1  5 7 4  1
+  tverts 8
+    0.6665 1.999 0
+    0.999501 1.999 0
+    0.6665 0.996044 0
+    0.9995 0.996044 0
+    0.3335 1.999 0
+    0.3335 0.996044 0
+    0.000500351 1.999 0
+    0.000499934 0.996044 0
+endnode
+#tile trimesh node
+node trimesh frame_toparch_left
+  parent zsf01_h01_09
+  position -4.94 0.47 5.29
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 10
+  center undefined
+  bitmap tic01_jailflr01
+  verts 0
+  faces 0
+endnode
+#tile trimesh node
+node trimesh frame_toparch_right02
+  parent zsf01_h01_09
+  position -4.94 -0.38 5.29
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 1
+  center undefined
+  bitmap tic01_jailflr01
+  verts 0
+  faces 0
+endnode
+#tile trimesh node
+node trimesh frame_toparch_left02
+  parent zsf01_h01_09
+  position -4.94 0.47 5.29
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 1
+  center undefined
+  bitmap tic01_jailflr01
+  verts 0
+  faces 0
+endnode
+#tile trimesh node
+node trimesh frame_toparch_right
+  parent zsf01_h01_09
+  position -4.94 -0.38 5.29
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 10
+  center undefined
+  bitmap tic01_jailflr01
+  verts 0
+  faces 0
+endnode
+#tile trimesh node
+node trimesh ceilling04
+  parent zsf01_h01_09
+  position 5.2 -0.96 5.17
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 1
+  scale 1.0
+  render 1
+  shadow 0
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 1
+  center -356.0 261.5 140.5 
+  bitmap zsf01_stonfloor
+  verts 5
+    -0.2 3.81 0.0
+    -0.2 1.42 2.83
+    -1.46 3.81 -0.02
+    -2.92 2.64 1.36
+    -6.92 2.63 1.37
+  faces 3
+    0 1 2  1  0 1 2  1
+    2 1 3  1  2 1 3  1
+    3 1 4  1  3 1 4  1
+  tverts 5
+    1.17097 -0.365295 0
+    1.17097 0.547169 0
+    1.6482 -0.365295 0
+    2.2056 0.0825773 0
+    3.73274 0.0852292 0
+endnode
+#tile trimesh node
+node trimesh ceilling02
+  parent zsf01_h01_09
+  position 0.01 -0.96 5.17
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 1
+  scale 1.0
+  render 1
+  shadow 0
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 1
+  center -166.5 -69.0 140.5 
+  bitmap zsf01_stonfloor
+  verts 5
+    -1.68 2.67 1.37
+    -0.47 -4.05 2.83
+    -1.7 -1.33 1.36
+    -2.86 -2.79 -0.02
+    -2.86 -4.05 0.0
+  faces 3
+    0 1 2  1  0 1 2  1
+    2 1 3  1  2 1 3  1
+    3 1 4  1  3 1 4  1
+  tverts 5
+    0.0737565 0.448206 0
+    2.63553 0.910143 0
+    1.60089 0.44055 0
+    2.1583 -0.00231957 0
+    2.63553 -0.00231957 0
+endnode
+#tile trimesh node
+node trimesh ceilling01
+  parent zsf01_h01_09
+  position 0.0 -0.01 5.17
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 1
+  scale 1.0
+  render 1
+  shadow 0
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 0.980392 0.980392 0.980392 
+  specular 0.0 0.0 0.0 
+  shininess 1
+  center 166.0 -164.0 210.0 
+  bitmap zsf01_rock3
+  verts 4
+    -1.68 1.71 1.37
+    5.0 0.47 2.83
+    -0.46 -4.99 2.83
+    5.0 -4.99 2.83
+  faces 2
+    0 1 2  1  0 1 2  1
+    3 2 1  1  3 2 1  1
+  tverts 4
+    1.999 1.999 0
+    1.62922 0.000999093 0
+    0.000999451 1.6341 0
+    0.000999033 0.00099951 0
+endnode
+#tile trimesh node
+node trimesh ceilling03
+  parent zsf01_h01_09
+  position 0.0 0.68 0.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 1
+  scale 1.0
+  render 1
+  shadow 0
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 1
+  center 437.5 192.0 409.0 
+  bitmap zsf01_stonegld
+  verts 8
+    5.0 1.67 4.55
+    3.75 2.17 5.15
+    3.75 1.67 4.55
+    4.98 2.13 5.18
+    5.0 1.82 4.55
+    3.75 2.07 4.55
+    5.0 1.82 3.0
+    3.75 1.82 3.0
+  faces 6
+    0 1 2  1  0 1 2  1
+    1 0 3  1  1 0 3  1
+    4 2 5  2  4 5 6  1
+    2 4 0  2  5 4 7  1
+    6 5 7  1  8 9 10  1
+    5 6 4  1  9 8 11  1
+  tverts 12
+    0.836249 -0.095484 0
+    0.89988 0.0635926 0
+    0.836249 0.0635926 0
+    0.895114 -0.0931858 0
+    0.144662 -0.095484 0
+    0.163751 0.0635926 0
+    0.112847 0.0635926 0
+    0.163751 -0.095484 0
+    1.09548 0.00505912 0
+    0.936407 0.711787 0
+    0.936407 0.00505912 0
+    1.09548 0.711787 0
+endnode
+#tile trimesh node
+node trimesh plane01
+  parent zsf01_h01_09
+  position 0.0 0.68 0.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 1
+  scale 1.0
+  render 1
+  shadow 0
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 1
+  center 312.5 192.0 407.0 
+  bitmap zsf01_stonegld
+  verts 6
+    3.75 1.82 3.0
+    2.5 2.07 4.1
+    2.5 1.82 2.99
+    3.75 2.07 4.55
+    3.75 1.67 4.55
+    3.75 2.17 5.15
+  faces 4
+    0 1 2  1  0 1 2  1
+    1 0 3  2  1 0 3  1
+    1 3 4  4  4 5 6  1
+    1 4 5  8  7 8 9  1
+  tverts 10
+    0.936407 0.00505912 0
+    0.777331 0.506608 0
+    0.777331 0.000499606 0
+    0.936407 0.711787 0
+    0.112846 0.222669 0
+    0.112847 0.0635926 0
+    0.163751 0.0635926 0
+    0.887154 0.222669 0
+    0.836249 0.0635926 0
+    0.89988 0.0635926 0
+endnode
+#tile trimesh node
+node trimesh plane02
+  parent zsf01_h01_09
+  position 0.0 0.68 0.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 1
+  scale 1.0
+  render 1
+  shadow 0
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 1
+  center 62.5 158.0 532.0 
+  bitmap zsf01_stonegld
+  verts 7
+    3.75 2.17 5.15
+    1.48 1.82 4.8
+    2.5 2.07 4.1
+    2.29 1.0 6.54
+    -2.5 1.81 5.1
+    -1.71 0.99 6.54
+    0.48 1.82 5.1
+  faces 5
+    0 1 2  1  0 1 2  1
+    1 0 3  1  1 0 3  1
+    4 3 5  2  1 0 3  1
+    3 6 1  2  0 4 2  1
+    3 4 6  2  0 5 4  1
+  tverts 6
+    1.0 0.0 0
+    0.0 -1.0 0
+    0.0 0.0 0
+    1.0 -1.0 0
+    0.0 -0.361894 0
+    0.0 -0.632421 0
+endnode
+#tile trimesh node
+node trimesh plane02
+  parent zsf01_h01_09
+  position 0.04 -0.01 3.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 1
+  scale 1.0
+  render 1
+  shadow 0
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 0.980392 0.980392 0.980392 
+  specular 0.0 0.0 0.0 
+  shininess 1
+  center -230.0 -62.0 232.0 
+  bitmap zsf01_stonegld
+  verts 7
+    -2.79 -2.49 1.1
+    -2.54 -1.51 1.8
+    -2.89 -3.74 2.15
+    -1.72 -2.28 3.54
+    -1.71 1.72 3.54
+    -2.54 2.5 2.1
+    -2.54 -0.51 2.1
+  faces 5
+    0 1 2  1  0 1 2  1
+    3 2 1  1  3 2 1  1
+    4 3 5  1  3 2 1  1
+    1 6 3  1  0 4 2  1
+    6 5 3  1  4 5 2  1
+  tverts 6
+    0.0 1.0 0
+    0.0 0.0 0
+    1.0 1.0 0
+    1.0 0.0 0
+    0.0 0.638106 0
+    0.0 0.367579 0
+endnode
+#tile trimesh node
+node trimesh mesh01
+  parent zsf01_h01_09
+  position -3.68 -0.17 3.24
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 1
+  scale 1.0
+  render 1
+  shadow 0
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 0.980392 0.980392 0.980392 
+  specular 0.0 0.0 0.0 
+  shininess 1
+  center 122.5 -111.5 -14.5 
+  bitmap zsf01_trim
+  verts 8
+    1.27 -4.85 -0.09
+    1.18 -4.85 -0.25
+    1.27 -4.85 -0.2
+    1.27 2.62 -0.2
+    1.27 2.62 -0.09
+    1.2 2.62 -0.04
+    1.2 -4.85 -0.04
+    1.18 2.62 -0.25
+  faces 8
+    0 1 2  1  0 1 2  3
+    3 2 1  1  3 4 5  3
+    4 5 6  2  6 7 8  3
+    6 0 4  2  8 9 6  3
+    7 3 1  2  10 3 5  3
+    6 1 0  1  11 1 0  3
+    3 4 2  1  12 13 14  3
+    0 2 4  1  15 14 13  3
+  tverts 16
+    5.99382 0.0761643 0
+    4.42117 4.99576e-005 0
+    5.99382 0.0238357 0
+    5.99386 -0.0303932 0
+    5.99382 0.0675487 0
+    4.42117 0.0675487 0
+    -0.993893 -0.0303932 0
+    0.350916 -0.0303932 0
+    0.350955 0.0675487 0
+    -0.993824 0.0675487 0
+    4.42121 -0.0303932 0
+    4.64904 0.09995 0
+    6.51966 0.0238357 0
+    6.51966 0.0761643 0
+    1.62257 0.0238357 0
+    1.62257 0.0761643 0
+endnode
+#tile trimesh node
+node trimesh plane01
+  parent zsf01_h01_09
+  position 0.1 -0.01 3.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 1
+  scale 1.0
+  render 1
+  shadow 0
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 0.980392 0.980392 0.980392 
+  specular 0.0 0.0 0.0 
+  shininess 1
+  center -270.0 -311.5 107.0 
+  bitmap zsf01_stonegld
+  verts 6
+    -2.6 -2.49 -0.01
+    -2.85 -2.49 1.1
+    -2.6 -3.74 0.0
+    -2.85 -3.74 1.55
+    -2.45 -3.74 1.55
+    -2.95 -3.74 2.15
+  faces 4
+    0 1 2  1  0 1 2  1
+    3 2 1  1  3 2 1  1
+    4 3 1  1  4 5 6  1
+    5 4 1  1  7 8 9  1
+  tverts 10
+    0.219032 0.000499547 0
+    0.219032 0.506608 0
+    0.0599555 0.00505909 0
+    0.0599555 0.711787 0
+    0.940044 0.839886 0
+    0.940044 0.890791 0
+    0.780968 0.890791 0
+    0.0599555 0.903517 0
+    0.0599555 0.839886 0
+    0.219032 0.890791 0
+endnode
+#tile trimesh node
+node trimesh mesh04
+  parent zsf01_h01_09
+  position -1.05 -4.41 8.5
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 1
+  scale 1.0
+  render 1
+  shadow 0
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 0.980392 0.980392 0.980392 
+  specular 0.0 0.0 0.0 
+  shininess 1
+  center -0.5 4.0 -219.0 
+  bitmap zsf01_rock3
+  verts 8
+    1.81 0.19 -0.48
+    1.81 -0.21 -0.48
+    -1.34 0.19 -3.93
+    -1.35 -0.11 -3.93
+    -1.8 0.49 -3.35
+    0.63 0.49 -0.45
+    0.63 -0.41 -0.45
+    -1.82 -0.41 -3.35
+  faces 6
+    0 1 2  1  0 1 2  3
+    3 2 1  1  2 3 0  3
+    2 4 5  2  0 1 2  3
+    5 0 2  2  0 1 2  3
+    1 6 7  2  0 1 2  3
+    7 3 1  2  2 3 0  3
+  tverts 4
+    0.0 0.0 0
+    0.5 0.0 0
+    0.5 1.0 0
+    0.0 1.0 0
+endnode
+#tile trimesh node
+node trimesh mesh03
+  parent zsf01_h01_09
+  position 4.3 1.13 8.5
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 1
+  scale 1.0
+  render 1
+  shadow 0
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 0.980392 0.980392 0.980392 
+  specular 0.0 0.0 0.0 
+  shininess 1
+  center 4.0 1.0 -218.0 
+  bitmap zsf01_rock3
+  verts 8
+    0.19 -1.81 -0.48
+    -0.21 -1.81 -0.48
+    0.19 1.29 -3.91
+    -0.11 1.3 -3.91
+    0.49 1.81 -3.35
+    0.49 -0.63 -0.45
+    -0.41 -0.63 -0.45
+    -0.41 1.83 -3.35
+  faces 6
+    0 1 2  1  0 1 2  3
+    3 2 1  1  2 3 0  3
+    2 4 5  2  0 1 2  3
+    5 0 2  2  0 1 2  3
+    1 6 7  2  0 1 2  3
+    7 3 1  2  2 3 0  3
+  tverts 4
+    0.0 0.0 0
+    0.5 0.0 0
+    0.5 1.0 0
+    0.0 1.0 0
+endnode
+#tile trimesh node
+node trimesh plane02
+  parent zsf01_h01_09
+  position 0.17 -0.03 3.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 1
+  scale 1.0
+  render 1
+  shadow 0
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 1
+  center -392.0 51.5 195.0 
+  bitmap zsf01_rock3
+  verts 8
+    -5.17 0.53 2.1
+    -5.17 1.53 1.8
+    -2.67 2.52 2.1
+    -2.67 2.52 1.8
+    -5.17 -0.47 2.1
+    -2.67 -0.49 2.1
+    -5.17 -1.47 1.8
+    -2.67 -1.49 1.8
+  faces 6
+    0 1 2  1  0 1 2  1
+    3 2 1  1  3 2 1  1
+    4 0 5  1  4 0 5  1
+    2 5 0  1  2 5 0  1
+    6 4 7  1  6 4 7  1
+    5 7 4  1  5 7 4  1
+  tverts 8
+    0.6665 1.999 0
+    0.999501 1.999 0
+    0.6665 0.996044 0
+    0.9995 0.996044 0
+    0.3335 1.999 0
+    0.3335 0.996044 0
+    0.000500351 1.999 0
+    0.000499934 0.996044 0
+endnode
+#tile trimesh node
+node trimesh ceilling05
+  parent zsf01_h01_09
+  position 0.13 4.17 4.47
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 1
+  scale 1.0
+  render 1
+  shadow 0
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 1
+  center -360.0 -419.0 -34.0 
+  bitmap zsf01_florrck
+  verts 10
+    -4.57 -2.69 0.33
+    -4.57 -3.69 0.63
+    -4.52 -5.69 0.33
+    -4.57 -4.69 0.63
+    -4.52 -1.69 -0.37
+    -4.52 -6.69 -0.37
+    -4.52 -1.69 -1.27
+    -4.52 -6.69 -1.27
+    -2.63 -1.69 -1.31
+    -2.63 -6.69 -1.31
+  faces 8
+    0 1 2  1  0 1 2  1
+    3 2 1  1  3 2 1  1
+    4 0 5  1  4 0 5  1
+    2 5 0  1  2 5 0  1
+    6 4 7  1  6 4 7  1
+    5 7 4  1  5 7 4  1
+    8 6 9  1  8 9 10  1
+    7 9 6  1  11 10 9  1
+  tverts 12
+    1.83573 1.15032 0
+    1.03653 1.28843 0
+    -0.561871 1.15032 0
+    0.237326 1.28843 0
+    2.63493 0.828064 0
+    -1.36107 0.828064 0
+    2.63493 0.413732 0
+    -1.36107 0.413732 0
+    2.63493 0.418685 0
+    2.63493 1.00879 0
+    -1.36108 0.418685 0
+    -1.36107 1.00854 0
+endnode
+#tile trimesh node
+node trimesh plane01
+  parent zsf01_h01_09
+  position 0.17 -0.03 3.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 1
+  scale 1.0
+  render 1
+  shadow 0
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 0.898039 0.898039 0.898039 
+  diffuse 0.898039 0.898039 0.898039 
+  specular 0.0 0.0 0.0 
+  shininess 1
+  center -392.0 2.0 89.5 
+  bitmap zsf01_rock3
+  verts 12
+    -5.17 2.53 1.1
+    -5.17 2.53 -0.01
+    -2.67 2.51 1.1
+    -2.67 2.51 -0.01
+    -5.17 1.53 1.8
+    -2.67 2.52 1.8
+    -5.17 -2.47 1.1
+    -5.17 -1.47 1.8
+    -2.92 -2.47 1.1
+    -2.67 -1.49 1.8
+    -5.17 -2.47 -0.01
+    -2.67 -2.49 -0.01
+  faces 8
+    0 1 2  1  0 1 2  1
+    3 2 1  1  3 2 1  1
+    4 0 5  1  4 0 5  1
+    2 5 0  1  2 5 0  1
+    6 7 8  1  6 7 2  1
+    9 8 7  1  8 2 7  1
+    10 6 11  1  9 6 3  1
+    8 11 6  1  2 3 6  1
+  tverts 10
+    1.504 0.431667 0
+    1.504 0.801667 0
+    0.5 0.431667 0
+    0.5 0.801667 0
+    1.504 0.198334 0
+    0.531999 0.198333 0
+    1.50422 0.431667 0
+    1.50389 0.198334 0
+    0.5 0.198333 0
+    1.50389 0.801667 0
+endnode
+#tile trimesh node
+node trimesh plane04
+  parent zsf01_h01_09
+  position -0.05 -0.15 3.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 1
+  scale 1.0
+  render 1
+  shadow 0
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 0.898039 0.898039 0.898039 
+  diffuse 0.898039 0.898039 0.898039 
+  specular 0.0 0.0 0.0 
+  shininess 1
+  center 4.0 388.0 89.5 
+  bitmap zsf01_rock3
+  verts 12
+    2.55 5.15 1.1
+    2.55 5.15 -0.01
+    2.55 2.9 1.1
+    2.53 2.61 -0.01
+    1.55 5.15 1.8
+    1.53 2.65 1.8
+    -2.45 5.15 1.1
+    -1.45 5.15 1.8
+    -2.47 2.65 1.1
+    -2.45 2.63 1.8
+    -2.45 5.15 -0.01
+    -2.47 2.65 -0.01
+  faces 8
+    0 1 2  1  0 1 2  1
+    3 2 1  1  3 2 1  1
+    4 0 5  1  4 0 5  1
+    2 5 0  1  2 5 0  1
+    6 7 8  1  6 7 2  1
+    9 8 7  1  8 2 7  1
+    10 6 11  1  9 6 3  1
+    8 11 6  1  2 3 6  1
+  tverts 10
+    1.504 0.431667 0
+    1.504 0.801667 0
+    0.5 0.431667 0
+    0.5 0.801667 0
+    1.504 0.198334 0
+    0.531999 0.198333 0
+    1.50422 0.431667 0
+    1.50389 0.198334 0
+    0.5 0.198333 0
+    1.50389 0.801667 0
+endnode
+#tile trimesh node
+node trimesh ceilling03
+  parent zsf01_h01_09
+  position 0.0 -0.01 5.17
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 1
+  scale 1.0
+  render 1
+  shadow 0
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 1
+  center -260.0 -436.5 -108.5 
+  bitmap zsf01_stonegld
+  verts 8
+    -2.35 -3.74 -0.62
+    -2.85 -3.74 -0.02
+    -2.35 -4.99 -0.62
+    -2.85 -4.99 0.0
+    -2.75 -3.74 -0.62
+    -2.5 -4.99 -0.62
+    -2.5 -3.74 -2.17
+    -2.5 -4.99 -2.17
+  faces 6
+    0 1 2  1  0 1 2  1
+    3 2 1  1  3 2 1  1
+    4 0 5  1  4 5 6  1
+    2 5 0  1  7 6 5  1
+    6 4 7  1  8 9 10  1
+    5 7 4  1  11 10 9  1
+  tverts 12
+    0.0599555 0.839886 0
+    0.0599555 0.903517 0
+    -0.099121 0.839886 0
+    -0.099121 0.903517 0
+    0.940044 0.890791 0
+    0.940044 0.839886 0
+    1.09912 0.858976 0
+    1.09912 0.839886 0
+    0.0599555 0.00505909 0
+    0.0599555 0.711787 0
+    -0.0991211 0.00505909 0
+    -0.0991211 0.711787 0
+endnode
+#tile trimesh node
+node trimesh ceilling07
+  parent zsf01_h01_09
+  position 1.18 4.17 4.47
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 1
+  scale 1.0
+  render 1
+  shadow 0
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 1
+  center -454.5 -419.0 -31.5 
+  bitmap zsf01_floor2trim
+  verts 8
+    -4.57 -2.69 0.64
+    -4.57 -3.69 0.63
+    -4.52 -5.69 0.33
+    -4.57 -4.69 0.63
+    -4.52 -1.69 0.07
+    -4.52 -6.69 -0.37
+    -4.52 -1.69 -1.27
+    -4.52 -6.69 -1.27
+  faces 6
+    0 1 2  1  0 1 2  1
+    3 2 1  1  3 2 1  1
+    4 0 5  1  4 0 5  1
+    2 5 0  1  2 5 0  1
+    6 4 7  1  6 4 7  1
+    5 7 4  1  5 7 4  1
+  tverts 8
+    0.987891 -0.163301 0
+    0.986044 0.2363 0
+    0.911043 1.0355 0
+    0.986043 0.6359 0
+    0.845645 -0.562901 0
+    0.736043 1.4351 0
+    0.511044 -0.562901 0
+    0.511043 1.4351 0
+endnode
+#tile trimesh node
+node trimesh rectangle32cq03
+  parent zsf01_h01_09
+  position 3.75 7.5 3.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 1
+  scale 1.0
+  render 1
+  shadow 0
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 1
+  center 1.0 -375.0 -100.5 
+  bitmap zsf01_rock3
+  verts 5
+    1.25 -5.0 0.0
+    -1.25 -5.0 0.0
+    -1.25 -3.2 0.0
+    1.27 -2.5 -2.01
+    -1.25 -2.5 0.0
+  faces 3
+    0 1 2  1  0 1 2  1
+    3 0 2  1  3 0 2  1
+    3 2 4  1  3 2 4  1
+  tverts 5
+    0.00820795 0.000499696 0
+    0.9995 0.000499457 0
+    0.9995 0.71978 0
+    0.000499517 0.9995 0
+    0.999501 0.9995 0
+endnode
+#tile trimesh node
+node trimesh rectangle32cq04
+  parent zsf01_h01_09
+  position -3.75 7.5 3.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 1
+  scale 1.0
+  render 1
+  shadow 0
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 1
+  center 1.0 -375.0 -100.0 
+  bitmap zsf01_stonfloor
+  verts 5
+    1.25 -5.0 0.0
+    -1.25 -5.0 0.0
+    -1.25 -4.94 0.0
+    1.27 -2.5 -0.01
+    -1.25 -2.5 -2.0
+  faces 3
+    0 1 2  1  0 1 2  1
+    3 0 2  1  3 0 2  1
+    3 2 4  1  3 2 4  1
+  tverts 5
+    0.00820795 0.000499696 0
+    0.9995 0.000499457 0
+    0.9995 0.71978 0
+    0.000499517 0.9995 0
+    0.999501 0.9995 0
+endnode
+#tile trimesh node
+node trimesh rectangle32cq01
+  parent zsf01_h01_09
+  position -3.75 0.0 3.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 1
+  scale 1.0
+  render 1
+  shadow 0
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 1
+  center 1.0 -375.0 -100.0 
+  bitmap zsf01_stonfloor
+  verts 5
+    1.25 -5.0 0.0
+    -1.25 -5.0 -2.0
+    -1.25 -2.57 0.0
+    1.27 -2.5 -0.01
+    -1.25 -2.5 0.0
+  faces 3
+    0 1 2  1  0 1 2  1
+    3 0 2  1  3 0 2  1
+    3 2 4  1  3 2 4  1
+  tverts 5
+    0.00820795 0.000499696 0
+    0.9995 0.000499457 0
+    0.9995 0.71978 0
+    0.000499517 0.9995 0
+    0.999501 0.9995 0
+endnode
+endmodelgeom zsf01_h01_09
+donemodel zsf01_h01_09

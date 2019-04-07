@@ -1,0 +1,69 @@
+# Exported from NWmax 0.8 b61 at 16/08/2009 22:31:28
+# mdl file
+#
+#NWmax MODEL ASCII
+# model: twl01_z19
+#local file: Unknown
+filedependancy Unknown
+newmodel twl01_z19
+setsupermodel twl01_z19 NULL
+classification Tile
+#NWmax GEOM  ASCII
+beginmodelgeom twl01_z19
+node dummy twl01_z19
+  parent NULL
+endnode
+#Tile trimesh node
+node trimesh ground_cobb
+  parent twl01_z19
+  position 0.0 0.0 0.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.109804 0.34902 0.694118 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 0
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 1
+  center 0.0 0.0 125.0 
+  bitmap twl01_cobble01
+  verts 9
+    -5.0 -5.0 1.25
+    -5.0 0.0 1.25
+    0.0 -5.0 1.25
+    0.0 0.0 1.25
+    -5.0 5.0 1.25
+    5.0 5.0 1.25
+    5.0 -5.0 1.25
+    5.0 0.0 1.25
+    0.0 5.0 1.25
+  faces 8
+    2 1 0  1  2 1 0  2
+    2 3 1  1  2 3 1  2
+    7 5 3  1  7 5 3  1
+    3 2 6  1  3 2 6  1
+    3 6 7  1  3 6 7  1
+    5 8 3  1  5 8 3  1
+    1 3 4  1  1 3 4  1
+    4 3 8  1  4 3 8  1
+  tverts 9
+    0.00138246 0.000294282 0
+    0.545477 0.838127 0
+    0.839215 -0.543801 0
+    1.38331 0.294032 0
+    1.08957 1.67596 0
+    2.76524 0.587769 0
+    1.67705 -1.0879 0
+    2.22114 -0.250063 0
+    1.9274 1.13186 0
+endnode
+endmodelgeom twl01_z19
+donemodel twl01_z19

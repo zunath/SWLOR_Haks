@@ -1,0 +1,733 @@
+#Exported from 3ds max by MDL Plug-in Suite 1.0b
+#http://www.bricksbuilder.com/nwn/utils/
+#MAXMODEL ASCII
+# model: dataterm2
+filedependancy Unknown
+newmodel dataterm2
+setsupermodel dataterm2 NULL
+classification Character
+setanimationscale 1.0
+#MAXGEOM  ASCII
+beginmodelgeom dataterm2
+node dummy dataterm2
+  parent NULL
+endnode
+node dummy D05_hand
+  parent dataterm2
+  position 0.00398437 -0.727571 1.08599
+  orientation 0 0 0 0
+  wirecolor 0.105469 0.105469 0.105469
+endnode
+node dummy D05_head
+  parent dataterm2
+  position 0.00398437 0.0108252 2.1763
+  orientation 0 0 0 0
+  wirecolor 0.105469 0.105469 0.105469
+endnode
+node dummy D05_head_hit
+  parent dataterm2
+  position 0.00398437 0.0108252 1.69482
+  orientation 0 0 0 0
+  wirecolor 0.105469 0.105469 0.105469
+endnode
+node dummy D05_impact
+  parent dataterm2
+  position 0.00398437 0.011001 1.12508
+  orientation 0 0 0 0
+  wirecolor 0.105469 0.105469 0.105469
+endnode
+node dummy D05_ground
+  parent dataterm2
+  position -0.00363281 0.0069873 0
+  orientation 0 0 0 0
+  wirecolor 0.105469 0.105469 0.105469
+endnode
+node emitter ChunkyWood171
+  parent dataterm2
+  position 0.0603101 0.00627747 1.00265
+  orientation 0 0 0 0
+  wirecolor 0.105469 0.105469 0.105469
+    colorStart 0.482353 0.435294 0.317647
+    colorEnd 0.584314 0.533333 0.407843
+    alphaStart 1
+    alphaEnd 1
+    sizeStart 0.1
+    sizeEnd 0.1
+    sizeStart_y 0
+    sizeEnd_y 0
+    frameStart 0
+    frameEnd 24
+    birthrate 3
+    spawnType 0
+    lifeExp 0.75
+    mass 3
+    spread 1.22173
+    particleRot 2.9
+    velocity 8
+    randvel 0.3
+    fps 0
+    random 0
+    inherit 1
+    inherit_local 0
+    inherit_part 0
+    inheritvel 0
+    xsize 89
+    ysize 40
+    bounce 1
+    bounce_co 0.5
+    loop 0
+    update Explosion
+    render Normal
+    Blend Normal
+    update_sel 2
+    render_sel 1
+    blend_sel 1
+    deadspace 0
+    opacity 0.5
+    blurlength 10
+    lightningDelay 0
+    lightningRadius 0
+    lightningScale 0
+    blastRadius 0
+    blastLength 0
+    twosidedtex 1
+    p2p 0
+    p2p_sel 1
+    p2p_type Bezier
+    p2p_bezier2 0
+    p2p_bezier3 0
+    combinetime 0
+    drag 0
+    grav 0
+    threshold 0
+    texture fxpa_cloud02
+    xgrid 5
+    ygrid 5
+    affectedByWind 0
+    m_isTinted 0
+    renderorder 0
+    Splat 0
+    chunkName PLC_Chunk_W02
+endnode
+node emitter fire!107
+  parent dataterm2
+  position 0.0603101 0.00627747 0.822382
+  orientation -1 0 0 -1.5708
+  wirecolor 0.105469 0.105469 0.105469
+    colorStart 0.47451 0.423529 0.298039
+    colorEnd 0.745098 0.713726 0.596078
+    alphaStart 1
+    alphaEnd 0
+    sizeStart 4
+    sizeEnd 1
+    sizeStart_y 0
+    sizeEnd_y 0
+    frameStart 0
+    frameEnd 24
+    birthrate 10
+    spawnType 0
+    lifeExp 2.5
+    mass 0.09
+    spread 2.96706
+    particleRot 0.5
+    velocity 2
+    randvel 0.5
+    fps 10
+    random 0
+    inherit 1
+    inherit_local 0
+    inherit_part 0
+    inheritvel 0
+    xsize 100
+    ysize 99
+    bounce 0
+    bounce_co 0
+    loop 0
+    update Explosion
+    render Normal
+    Blend Normal
+    update_sel 2
+    render_sel 1
+    blend_sel 1
+    deadspace 0
+    opacity 0.5
+    blurlength 10
+    lightningDelay 0
+    lightningRadius 0
+    lightningScale 0
+    blastRadius 0.2
+    blastLength 1
+    twosidedtex 1
+    p2p 0
+    p2p_sel 1
+    p2p_type Bezier
+    p2p_bezier2 0
+    p2p_bezier3 0
+    combinetime 0
+    drag 0
+    grav 0
+    threshold 0
+    texture fxpa_smoke01
+    xgrid 4
+    ygrid 4
+    affectedByWind 0
+    m_isTinted 1
+    renderorder 0
+    Splat 0
+endnode
+node emitter ChunkyWood170
+  parent dataterm2
+  position 0.0603101 0.00726135 0.896426
+  orientation 0 0 0 0
+  wirecolor 0.105469 0.105469 0.105469
+    colorStart 1 1 1
+    colorEnd 1 1 1
+    alphaStart 1
+    alphaEnd 1
+    sizeStart 0.1
+    sizeEnd 0.1
+    sizeStart_y 0
+    sizeEnd_y 0
+    frameStart 0
+    frameEnd 24
+    birthrate 3
+    spawnType 0
+    lifeExp 0.75
+    mass 3
+    spread 1.22173
+    particleRot 5
+    velocity 8
+    randvel 0.3
+    fps 0
+    random 0
+    inherit 1
+    inherit_local 0
+    inherit_part 0
+    inheritvel 0
+    xsize 89
+    ysize 40
+    bounce 1
+    bounce_co 0.5
+    loop 0
+    update Explosion
+    render Normal
+    Blend Normal
+    update_sel 2
+    render_sel 1
+    blend_sel 1
+    deadspace 0
+    opacity 0.5
+    blurlength 10
+    lightningDelay 0
+    lightningRadius 0
+    lightningScale 0
+    blastRadius 0
+    blastLength 0
+    twosidedtex 0
+    p2p 0
+    p2p_sel 1
+    p2p_type Bezier
+    p2p_bezier2 0
+    p2p_bezier3 0
+    combinetime 0
+    drag 0
+    grav 0
+    threshold 0
+    texture fxpa_cloud02
+    xgrid 5
+    ygrid 5
+    affectedByWind 0
+    m_isTinted 0
+    renderorder 0
+    Splat 0
+    chunkName PLC_Chunk_W01
+endnode
+node trimesh damage65
+  parent dataterm2
+  position 0.0618774 -0.0142877 0
+  orientation 0 0 0 0
+  wirecolor 0.105469 0.105469 0.105469
+  ambient 0.0705882 0 1
+  diffuse 1 0.501961 0.643137
+  specular 0 0 0
+  shininess 24
+  bitmap NULL
+  render 0
+  Shadow 0
+  beaming 0
+  transparencyhint 0
+  tilefade 0
+  rotatetexture 0
+  verts 12
+    -0.195415 -0.186216 0
+    -0.195415 0.186216 0
+    0.195415 0.186216 0
+    0.195415 -0.186216 0
+    -0.195415 -0.186216 0.5
+    0.195415 -0.186216 0.5
+    0.195415 0.186216 0.5
+    -0.195415 0.186216 0.5
+    0.103944 -0.0990513 0.25
+    -0.103944 -0.0990513 0.25
+    0.103944 0.0990513 0.25
+    -0.103944 0.0990513 0.25
+  faces 20
+    0 1 2  1  0 0 0  0
+    2 3 0  1  0 0 0  0
+    4 5 6  1  0 0 0  0
+    6 7 4  1  0 0 0  0
+    0 3 8  1  0 0 0  0
+    8 9 0  1  0 0 0  0
+    9 8 5  1  0 0 0  0
+    5 4 9  1  0 0 0  0
+    3 2 10  1  0 0 0  0
+    10 8 3  1  0 0 0  0
+    8 10 6  1  0 0 0  0
+    6 5 8  1  0 0 0  0
+    2 1 11  1  0 0 0  0
+    11 10 2  1  0 0 0  0
+    10 11 7  1  0 0 0  0
+    7 6 10  1  0 0 0  0
+    1 0 9  1  0 0 0  0
+    9 11 1  1  0 0 0  0
+    11 9 4  1  0 0 0  0
+    4 7 11  1  0 0 0  0
+  tverts 1
+    0 0 0
+endnode
+node trimesh Box01
+  parent damage65
+  position -0.648966 -0.0857141 -0.160795
+  orientation 0.577351 -0.577351 0.577349 -2.0944
+  wirecolor 0.882813 0.882813 0.882813
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 1 1 1
+  shininess 26
+  bitmap dataterm2
+
+  verts 8
+    0.430752 -1.98024 0.819715
+    0.430752 -0.178164 0.819715
+    -0.582753 -1.98024 0.819715
+    -0.582752 -0.178164 0.819715
+    -0.582753 -1.98024 -0.196515
+    -0.582752 -0.178164 -0.196515
+    0.430752 -1.98024 -0.196515
+    0.430752 -0.178164 -0.196515
+  faces 12
+    0 1 2  1  0 1 2  0
+    1 3 2  1  1 3 2  0
+    2 3 4  1  4 5 6  0
+    3 5 4  1  5 7 6  0
+    4 5 6  1  8 9 10  0
+    5 7 6  1  9 11 10  0
+    6 7 0  1  12 13 14  0
+    7 1 0  1  13 15 14  0
+    6 0 4  1  16 17 18  0
+    0 2 4  1  17 19 18  0
+    1 7 3  1  20 21 22  0
+    7 5 3  1  21 23 22  0
+  tverts 24
+    0.0532615 0.947106 0
+    0.0532615 0.0561852 0
+    0.473553 0.947106 0
+    0.473553 0.0561852 0
+    0.497729 0.697042 0
+    0.497729 0.081322 0
+    0.918076 0.697042 0
+    0.918076 0.081322 0
+    0.500574 0.689593 0
+    0.500574 0.0838853 0
+    0.931213 0.689593 0
+    0.931213 0.0838853 0
+    0.497614 0.694915 0
+    0.497614 0.0878422 0
+    0.927793 0.694915 0
+    0.927793 0.0878422 0
+    0.773802 0.69598 0
+    0.773802 0.515729 0
+    0.920369 0.69598 0
+    0.920369 0.515729 0
+    0.504586 0.191223 0
+    0.504586 0.0749139 0
+    0.644846 0.191223 0
+    0.644846 0.0749139 0
+endnode
+endmodelgeom dataterm2
+
+#MAXANIM ASCII
+newanim on dataterm2
+  length 0.0333333
+  transtime 0
+  animroot dataterm2
+node dummy dataterm2
+  parent NULL
+endnode
+node dummy D05_hand
+  parent dataterm2
+endnode
+node dummy D05_head
+  parent dataterm2
+endnode
+node dummy D05_head_hit
+  parent dataterm2
+endnode
+node dummy D05_impact
+  parent dataterm2
+endnode
+node dummy D05_ground
+  parent dataterm2
+endnode
+node emitter ChunkyWood171
+  parent dataterm2
+endnode
+node emitter fire!107
+  parent dataterm2
+endnode
+node emitter ChunkyWood170
+  parent dataterm2
+endnode
+node trimesh damage65
+  parent dataterm2
+endnode
+node trimesh Box01
+  parent damage65
+endnode
+node trimesh Plane02
+  parent damage65
+endnode
+doneanim on dataterm2
+
+#MAXANIM ASCII
+newanim off dataterm2
+  length 0.0333333
+  transtime 0
+  animroot dataterm2
+node dummy dataterm2
+  parent NULL
+endnode
+node dummy D05_hand
+  parent dataterm2
+endnode
+node dummy D05_head
+  parent dataterm2
+endnode
+node dummy D05_head_hit
+  parent dataterm2
+endnode
+node dummy D05_impact
+  parent dataterm2
+endnode
+node dummy D05_ground
+  parent dataterm2
+endnode
+node emitter ChunkyWood171
+  parent dataterm2
+endnode
+node emitter fire!107
+  parent dataterm2
+endnode
+node emitter ChunkyWood170
+  parent dataterm2
+endnode
+node trimesh damage65
+  parent dataterm2
+endnode
+node trimesh Box01
+  parent damage65
+endnode
+node trimesh Plane02
+  parent damage65
+endnode
+doneanim off dataterm2
+
+#MAXANIM ASCII
+newanim on2off dataterm2
+  length 0.633333
+  transtime 0.25
+  animroot dataterm2
+node dummy dataterm2
+  parent NULL
+endnode
+node dummy D05_hand
+  parent dataterm2
+endnode
+node dummy D05_head
+  parent dataterm2
+endnode
+node dummy D05_head_hit
+  parent dataterm2
+endnode
+node dummy D05_impact
+  parent dataterm2
+endnode
+node dummy D05_ground
+  parent dataterm2
+endnode
+node emitter ChunkyWood171
+  parent dataterm2
+endnode
+node emitter fire!107
+  parent dataterm2
+endnode
+node emitter ChunkyWood170
+  parent dataterm2
+endnode
+node trimesh damage65
+  parent dataterm2
+endnode
+node trimesh Box01
+  parent damage65
+endnode
+node trimesh Plane02
+  parent damage65
+endnode
+doneanim on2off dataterm2
+
+#MAXANIM ASCII
+newanim off2on dataterm2
+  length 0.633333
+  transtime 0.25
+  animroot dataterm2
+node dummy dataterm2
+  parent NULL
+endnode
+node dummy D05_hand
+  parent dataterm2
+endnode
+node dummy D05_head
+  parent dataterm2
+endnode
+node dummy D05_head_hit
+  parent dataterm2
+endnode
+node dummy D05_impact
+  parent dataterm2
+endnode
+node dummy D05_ground
+  parent dataterm2
+endnode
+node emitter ChunkyWood171
+  parent dataterm2
+endnode
+node emitter fire!107
+  parent dataterm2
+endnode
+node emitter ChunkyWood170
+  parent dataterm2
+endnode
+node trimesh damage65
+  parent dataterm2
+endnode
+node trimesh Box01
+  parent damage65
+endnode
+node trimesh Plane02
+  parent damage65
+endnode
+doneanim off2on dataterm2
+
+#MAXANIM ASCII
+newanim damage dataterm2
+  length 0.133333
+  transtime 0
+  animroot dataterm2
+node dummy dataterm2
+  parent NULL
+endnode
+node dummy D05_hand
+  parent dataterm2
+endnode
+node dummy D05_head
+  parent dataterm2
+endnode
+node dummy D05_head_hit
+  parent dataterm2
+endnode
+node dummy D05_impact
+  parent dataterm2
+endnode
+node dummy D05_ground
+  parent dataterm2
+endnode
+node emitter ChunkyWood171
+  parent dataterm2
+endnode
+node emitter fire!107
+  parent dataterm2
+endnode
+node emitter ChunkyWood170
+  parent dataterm2
+endnode
+node trimesh damage65
+  parent dataterm2
+    positionkey
+      0  0.0618774 -0.0142877 0
+      0.0333333  0.0618774 -0.0142877 0.0244581
+      0.133333  0.0618774 -0.0142877 0
+    endlist
+    orientationkey
+      0  0 0 0 0
+      0.0333333  -0.371336 0.928463 -0.00810258 0.0469942
+      0.1  0.599949 -0.799969 -0.0104721 0.0436326
+      0.133333  0 0 0 0
+    endlist
+endnode
+node trimesh Box01
+  parent damage65
+endnode
+node trimesh Plane02
+  parent damage65
+endnode
+doneanim damage dataterm2
+
+#MAXANIM ASCII
+newanim dead dataterm2
+  length 0.0333333
+  transtime 0
+  animroot dataterm2
+node dummy dataterm2
+  parent NULL
+endnode
+node dummy D05_hand
+  parent dataterm2
+endnode
+node dummy D05_head
+  parent dataterm2
+endnode
+node dummy D05_head_hit
+  parent dataterm2
+endnode
+node dummy D05_impact
+  parent dataterm2
+endnode
+node dummy D05_ground
+  parent dataterm2
+endnode
+node emitter ChunkyWood171
+  parent dataterm2
+endnode
+node emitter fire!107
+  parent dataterm2
+endnode
+node emitter ChunkyWood170
+  parent dataterm2
+endnode
+node trimesh damage65
+  parent dataterm2
+    positionkey
+      0  0.0618774 -0.0142877 -6.95145
+      0.0333333  0.0618774 -0.0142877 -6.95145
+    endlist
+endnode
+node trimesh Box01
+  parent damage65
+endnode
+node trimesh Plane02
+  parent damage65
+endnode
+doneanim dead dataterm2
+
+#MAXANIM ASCII
+newanim die dataterm2
+  length 0.166667
+  transtime 0.25
+  animroot dataterm2
+node dummy dataterm2
+  parent NULL
+endnode
+node dummy D05_hand
+  parent dataterm2
+endnode
+node dummy D05_head
+  parent dataterm2
+endnode
+node dummy D05_head_hit
+  parent dataterm2
+endnode
+node dummy D05_impact
+  parent dataterm2
+endnode
+node dummy D05_ground
+  parent dataterm2
+endnode
+node emitter ChunkyWood171
+  parent dataterm2
+endnode
+node emitter fire!107
+  parent dataterm2
+endnode
+node emitter ChunkyWood170
+  parent dataterm2
+endnode
+node trimesh damage65
+  parent dataterm2
+    positionkey
+      0  0.0618774 -0.0142877 0
+      0.166667  0.0618774 -0.0142877 -6.95145
+    endlist
+    orientationkey
+      0  0 0 0 0
+    endlist
+endnode
+node trimesh Box01
+  parent damage65
+endnode
+node trimesh Plane02
+  parent damage65
+endnode
+event 0  detonate
+event 0  detonate
+event 0  detonate
+doneanim die dataterm2
+
+#MAXANIM ASCII
+newanim default dataterm2
+  length 0
+  transtime 0.25
+  animroot dataterm2
+node dummy dataterm2
+  parent NULL
+endnode
+node dummy D05_hand
+  parent dataterm2
+endnode
+node dummy D05_head
+  parent dataterm2
+endnode
+node dummy D05_head_hit
+  parent dataterm2
+endnode
+node dummy D05_impact
+  parent dataterm2
+endnode
+node dummy D05_ground
+  parent dataterm2
+endnode
+node emitter ChunkyWood171
+  parent dataterm2
+endnode
+node emitter fire!107
+  parent dataterm2
+endnode
+node emitter ChunkyWood170
+  parent dataterm2
+endnode
+node trimesh damage65
+  parent dataterm2
+    positionkey
+      0  0.0618774 -0.0142877 0
+    endlist
+    orientationkey
+      0  0 0 0 0
+    endlist
+endnode
+node trimesh Box01
+  parent damage65
+endnode
+node trimesh Plane02
+  parent damage65
+endnode
+doneanim default dataterm2
+donemodel dataterm2

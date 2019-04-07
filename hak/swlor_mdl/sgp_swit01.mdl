@@ -1,0 +1,119 @@
+# Exported from NWmax 0.8 b60 at 21/09/2009 22:23:33
+# mdl file
+#
+#NWmax MODEL ASCII
+# model: sgp_swit01
+#local file: Unknown
+filedependancy Unknown
+newmodel sgp_swit01
+setsupermodel sgp_swit01 NULL
+classification Character
+setanimationscale 1.0
+#NWmax GEOM  ASCII
+beginmodelgeom sgp_swit01
+node dummy sgp_swit01
+  parent NULL
+endnode
+node dummy swit01_impact
+  parent sgp_swit01
+  position 0.0 0.0 0.85
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.694118 0.109804 0.584314 
+endnode
+node dummy swit01_ground
+  parent sgp_swit01
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.694118 0.109804 0.584314 
+endnode
+node dummy swit01_hand
+  parent sgp_swit01
+  position 0.0 0.0 1.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.694118 0.109804 0.584314 
+endnode
+node dummy swit01_head
+  parent sgp_swit01
+  position 0.0 0.0 2.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.694118 0.109804 0.584314 
+endnode
+node dummy swit01_head_hit
+  parent sgp_swit01
+  position 0.0 0.0 1.5
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.694118 0.109804 0.584314 
+endnode
+node trimesh Object01
+  parent sgp_swit01
+  position 0.0 -0.0332347 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.52549 0.0235294 0.0235294 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  center -1.03249 -0.338386 113.992 
+  ambient 0.588 0.588 0.588 
+  diffuse 0.588 0.588 0.588 
+  specular 0.0 0.0 0.0 
+  shininess 10.0
+  bitmap sgp_tex167
+  verts 8
+    0.0919427 0.0328319 1.32039
+    0.0839384 -0.0395997 1.30468
+    0.0839384 -0.0395997 0.975162
+    0.0919427 0.0328319 0.959451
+    -0.112593 0.0328319 0.959451
+    -0.104588 -0.0395997 0.975162
+    -0.104588 -0.0395997 1.30468
+    -0.112593 0.0328319 1.32039
+  faces 12
+    0 1 2  1  0 1 2  1
+    0 2 3  1  0 2 3  1
+    1 0 7  2  8 9 10  1
+    3 2 5  2  12 13 14  1
+    3 5 4  2  12 14 15  1
+    7 0 3  4  16 17 18  1
+    7 3 4  4  16 18 19  1
+    1 7 6  2  8 10 11  1
+    2 1 6  4  20 21 22  1
+    2 6 5  4  20 22 23  1
+    4 5 6  1  4 5 6  1
+    4 6 7  1  4 6 7  1
+  tverts 24
+    0.0266006 0.661568 0
+    0.153046 0.634141 0
+    0.153046 0.0589038 0
+    0.0266006 0.0314766 0
+    0.0266006 0.0314766 0
+    0.153046 0.0589036 0
+    0.153046 0.634141 0
+    0.0266006 0.661568 0
+    0.153046 0.517239 0
+    0.0266006 0.531212 0
+    0.0266006 0.174152 0
+    0.153046 0.188125 0
+    0.0266006 0.531212 0
+    0.153046 0.517239 0
+    0.153046 0.188125 0
+    0.0266006 0.174152 0
+    0.414051 0.539073 0
+    0.170381 0.539073 0
+    0.170381 0.969069 0
+    0.414051 0.969069 0
+    0.43431 0.0298758 0
+    0.43431 0.975776 0
+    0.975493 0.975776 0
+    0.975493 0.0298755 0
+endnode
+endmodelgeom sgp_swit01
+donemodel sgp_swit01

@@ -1,0 +1,295 @@
+# Exported from NWmax 0.8 b60 at 11/30/2006 2:55:06 PM
+# mdl file
+#
+#NWmax MODEL ASCII
+# model: shp_elev01
+#local file: Unknown
+filedependancy Unknown
+newmodel shp_elev01
+setsupermodel shp_elev01 NULL
+classification Character
+setanimationscale 1.0
+#NWmax GEOM  ASCII
+beginmodelgeom shp_elev01
+node dummy shp_elev01
+  parent NULL
+endnode
+node trimesh Elevator_Terminal
+  parent shp_elev01
+  position -0.19 0.07 0.95
+  orientation 0.0 -0.707107 0.707107 -3.14159
+  wirecolor 0.447059 0.447059 0.447059 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.05 0.05 0.05 
+  shininess 11
+  center -20.35 -40.7 8.11655 
+  bitmap shp_elev
+  verts 40
+    -0.356568 -0.654696 0.148
+    -0.348731 -0.683628 0.148
+    -0.32815 -0.704209 0.148
+    -0.299218 -0.712046 0.148
+    -0.111363 -0.712046 0.148
+    -0.0824298 -0.704209 0.148
+    -0.061849 -0.683628 0.148
+    -0.0540127 -0.654696 0.148
+    -0.0540126 -0.171336 0.148
+    -0.0618489 -0.142403 0.148
+    -0.0824297 -0.121822 0.148
+    -0.111363 -0.113986 0.148
+    -0.299217 -0.113986 0.148
+    -0.32815 -0.121822 0.148
+    -0.348731 -0.142403 0.148
+    -0.356568 -0.171336 0.148
+    -0.339938 -0.638885 0.162331
+    -0.332964 -0.665925 0.162331
+    -0.314645 -0.685159 0.162331
+    -0.288893 -0.692483 0.162331
+    -0.121688 -0.692483 0.162331
+    -0.0959351 -0.685159 0.162331
+    -0.0776166 -0.665925 0.162331
+    -0.0706417 -0.638885 0.162331
+    -0.0706417 -0.187147 0.162331
+    -0.0776166 -0.160106 0.162331
+    -0.095935 -0.140872 0.162331
+    -0.121688 -0.133548 0.162331
+    -0.288893 -0.133548 0.162331
+    -0.314645 -0.140872 0.162331
+    -0.332963 -0.160106 0.162331
+    -0.339938 -0.187147 0.162331
+    0.0 0.0 0.148
+    -0.407 0.0 0.148
+    0.0 -0.814 0.148
+    -0.407 -0.814 0.148
+    -0.407 0.0 0.0
+    -0.407 -0.814 0.0
+    0.0 -0.814 0.0
+    0.0 0.0 0.0
+  faces 58
+    0 1 17  1  0 1 17  2
+    0 17 16  1  0 17 16  2
+    1 2 18  1  1 2 18  2
+    1 18 17  1  1 18 17  2
+    2 3 19  1  2 3 19  2
+    2 19 18  1  2 19 18  2
+    3 4 20  1  3 4 20  2
+    3 20 19  1  3 20 19  2
+    4 5 21  1  4 5 21  2
+    4 21 20  1  4 21 20  2
+    5 6 22  1  5 6 22  2
+    5 22 21  1  5 22 21  2
+    6 7 23  1  6 7 23  2
+    6 23 22  1  6 23 22  2
+    7 8 24  1  7 8 24  2
+    7 24 23  1  7 24 23  2
+    8 9 25  1  8 9 25  2
+    8 25 24  1  8 25 24  2
+    9 10 26  1  9 10 26  2
+    9 26 25  1  9 26 25  2
+    10 11 27  1  10 11 27  2
+    10 27 26  1  10 27 26  2
+    11 12 28  1  11 12 28  2
+    11 28 27  1  11 28 27  2
+    12 13 29  1  12 13 29  2
+    12 29 28  1  12 29 28  2
+    13 14 30  1  13 14 30  2
+    13 30 29  1  13 30 29  2
+    14 15 31  1  14 15 31  2
+    14 31 30  1  14 31 30  2
+    15 0 16  1  15 0 16  2
+    15 16 31  1  15 16 31  2
+    21 22 23  1  21 22 23  0
+    20 21 23  1  20 21 23  0
+    20 23 24  1  20 23 24  0
+    19 20 24  1  19 20 24  0
+    18 19 24  1  18 19 24  0
+    17 18 24  1  17 18 24  0
+    16 17 24  1  16 17 24  0
+    31 16 24  1  31 16 24  0
+    31 24 25  1  31 24 25  0
+    31 25 26  1  31 25 26  0
+    31 26 27  1  31 26 27  0
+    31 27 28  1  31 27 28  0
+    31 28 29  1  31 28 29  0
+    30 31 29  1  30 31 29  0
+    34 32 35  2  34 32 35  0
+    33 35 32  2  33 35 32  0
+    35 33 37  16  37 36 39  3
+    36 37 33  16  38 39 36  3
+    34 35 38  32  40 41 42  5
+    37 38 35  32  43 42 41  5
+    33 32 36  8  45 44 47  4
+    39 36 32  8  46 47 44  4
+    32 34 39  64  48 49 50  2
+    38 39 34  64  51 50 49  2
+    36 39 37  4  53 52 55  1
+    38 37 39  4  54 55 52  1
+  tverts 56
+    0.438106 0.80399 0
+    0.428488 0.839499 0
+    0.40323 0.864757 0
+    0.367721 0.874375 0
+    0.137172 0.874375 0
+    0.101664 0.864757 0
+    0.0764053 0.839499 0
+    0.066788 0.80399 0
+    0.0667879 0.210776 0
+    0.0764052 0.175267 0
+    0.101663 0.150009 0
+    0.137172 0.140391 0
+    0.367721 0.140391 0
+    0.40323 0.150009 0
+    0.428488 0.175267 0
+    0.438106 0.210776 0
+    0.417697 0.784586 0
+    0.409137 0.817772 0
+    0.386655 0.841378 0
+    0.35505 0.850366 0
+    0.149844 0.850366 0
+    0.118238 0.841378 0
+    0.0957565 0.817772 0
+    0.0871964 0.784586 0
+    0.0871963 0.23018 0
+    0.0957564 0.196994 0
+    0.118238 0.173388 0
+    0.149844 0.1644 0
+    0.35505 0.1644 0
+    0.386655 0.173388 0
+    0.409137 0.196994 0
+    0.417697 0.23018 0
+    0.000499576 0.000499696 0
+    0.5 0.000499487 0
+    0.000499725 0.9995 0
+    0.5 0.9995 0
+    0.501883 0.000499457 0
+    0.501883 0.9995 0
+    0.683519 0.000499427 0
+    0.683519 0.9995 0
+    0.501883 1.00116 0
+    0.501883 0.501663 0
+    0.683519 1.00116 0
+    0.683519 0.501663 0
+    0.501883 1.00116 0
+    0.501883 0.501663 0
+    0.683519 1.00116 0
+    0.683519 0.501663 0
+    0.501883 0.000499576 0
+    0.501883 0.9995 0
+    0.683519 0.000499576 0
+    0.683519 0.9995 0
+    0.501085 0.000499636 0
+    1.00059 0.000499427 0
+    0.501085 0.9995 0
+    1.00059 0.9995 0
+endnode
+endmodelgeom shp_elev01
+#NWmax ANIM ASCII
+newanim damage shp_elev01
+  length 1.16667
+  transtime 0.0
+  animroot shp_elev01
+    node dummy shp_elev01
+        parent NULL
+    endnode
+    node dummy shp_elev01_pwk
+        parent shp_elev01
+    endnode
+    node dummy X01_pwk_use02
+        parent shp_elev01_pwk
+    endnode
+    node dummy X01_pwk_use01
+        parent shp_elev01_pwk
+    endnode
+    node pwk NoWalk
+        parent shp_elev01_pwk
+    endnode
+    node trimesh Elevator_Terminal
+        parent shp_elev01
+    endnode
+doneanim damage shp_elev01
+#NWmax ANIM ASCII
+newanim die shp_elev01
+  length 0.166667
+  transtime 0.0
+  animroot shp_elev01
+  event 0.0333333 detonate
+  event 0.0333333 detonate
+    node dummy shp_elev01
+        parent NULL
+    endnode
+    node dummy shp_elev01_pwk
+        parent shp_elev01
+    endnode
+    node dummy X01_pwk_use02
+        parent shp_elev01_pwk
+    endnode
+    node dummy X01_pwk_use01
+        parent shp_elev01_pwk
+    endnode
+    node pwk NoWalk
+        parent shp_elev01_pwk
+    endnode
+    node trimesh Elevator_Terminal
+        parent shp_elev01
+    endnode
+doneanim die shp_elev01
+#NWmax ANIM ASCII
+newanim dead shp_elev01
+  length 0.0333333
+  transtime 0.0
+  animroot shp_elev01
+    node dummy shp_elev01
+        parent NULL
+    endnode
+    node dummy shp_elev01_pwk
+        parent shp_elev01
+    endnode
+    node dummy X01_pwk_use02
+        parent shp_elev01_pwk
+    endnode
+    node dummy X01_pwk_use01
+        parent shp_elev01_pwk
+    endnode
+    node pwk NoWalk
+        parent shp_elev01_pwk
+    endnode
+    node trimesh Elevator_Terminal
+        parent shp_elev01
+    endnode
+doneanim dead shp_elev01
+#NWmax ANIM ASCII
+newanim default shp_elev01
+  length 0.0
+  transtime 0.25
+  animroot shp_elev01
+    node dummy shp_elev01
+        parent NULL
+    endnode
+    node dummy shp_elev01_pwk
+        parent shp_elev01
+    endnode
+    node dummy X01_pwk_use02
+        parent shp_elev01_pwk
+    endnode
+    node dummy X01_pwk_use01
+        parent shp_elev01_pwk
+    endnode
+    node pwk NoWalk
+        parent shp_elev01_pwk
+    endnode
+    node trimesh Elevator_Terminal
+        parent shp_elev01
+    endnode
+doneanim default shp_elev01
+donemodel shp_elev01

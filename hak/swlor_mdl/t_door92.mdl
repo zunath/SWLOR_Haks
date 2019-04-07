@@ -1,0 +1,1089 @@
+#MAXMODEL ASCII
+# model: t_door92 
+filedependancy greenhouse base tiles01.max
+newmodel t_door92 
+setsupermodel t_door92 NULL
+classification Door
+#MAXGEOM  ASCII
+beginmodelgeom t_door92 
+node dummy t_door92 
+  parent NULL 
+endnode
+node dummy Dummy03 
+  parent t_door92 
+  position -1.2763 0.0 0.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.65098 0.898039 0.898039  
+endnode
+node trimesh doorframe 
+  parent Dummy03 
+  position 1.20292 0.0 1.8735
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.345098 0.345098 0.882353  
+  ambient 0.0 0.0 0.0  
+  diffuse 0.0 0.0 0.0  
+  specular 0.0 0.0 0.0  
+  shininess 11.0 
+    bitmap gg_black
+    verts 72
+     -1.05544 -0.0749998 -0.00158386
+     1.20292 -0.0750002 -0.00158386
+     1.20292 -0.0750002 -1.61797
+     -1.05544 -0.0749998 -1.61797
+     -1.05544 0.0750002 -0.00158386
+     1.20292 0.0749998 -0.00158386
+     1.20292 0.0749998 -1.61797
+     -1.05544 0.0750002 -1.61797
+     -1.00897 -0.0749998 -1.56797
+     1.15644 -0.0750002 -1.56797
+     1.15644 -0.0750002 -0.0515839
+     -1.00897 -0.0749998 -0.0515837
+     -1.00897 0.0750002 -1.56797
+     1.15644 0.0749998 -1.56797
+     1.15644 0.0749998 -0.0515839
+     -1.00897 0.0750002 -0.0515837
+     1.01567 0.0 0.795644
+     1.05263 0.039765 -0.00158386
+     1.05263 -0.0397652 -0.00158386
+     0.978715 -0.0397652 -0.00158386
+     0.978715 0.039765 -0.00158386
+     0.742486 0.0 0.904416
+     0.779446 0.0397651 -0.00158386
+     0.779446 -0.0397652 -0.00158386
+     0.705526 -0.0397652 -0.00158386
+     0.705526 0.0397651 -0.00158386
+     0.469297 0.0 1.23976
+     0.506257 0.0397651 -0.00158386
+     0.506257 -0.0397651 -0.00158386
+     0.432338 -0.0397651 -0.00158386
+     0.432338 0.0397651 -0.00158386
+     0.196108 0.0 1.61797
+     0.233068 0.0397652 -0.00158386
+     0.233068 -0.0397651 -0.00158386
+     0.159149 -0.0397651 -0.00158386
+     0.159149 0.0397652 -0.00158386
+     -0.0770804 1.27677e-007 1.61797
+     -0.0401207 0.0397652 -0.00158386
+     -0.0401207 -0.0397651 -0.00158386
+     -0.11404 -0.039765 -0.00158386
+     -0.11404 0.0397652 -0.00158386
+     -0.350269 1.54622e-007 1.23976
+     -0.31331 0.0397652 -0.00158386
+     -0.31331 -0.039765 -0.00158386
+     -0.387229 -0.039765 -0.00158386
+     -0.387229 0.0397653 -0.00158386
+     -0.623458 1.81567e-007 0.904416
+     -0.586498 0.0397653 -0.00158386
+     -0.586498 -0.039765 -0.00158386
+     -0.660418 -0.039765 -0.00158386
+     -0.660418 0.0397653 -0.00158386
+     -0.896647 2.13281e-007 0.795644
+     -0.859687 0.0397653 -0.00158386
+     -0.859687 -0.0397649 -0.00158386
+     -0.933607 -0.0397649 -0.00158386
+     -0.933607 0.0397653 -0.00158386
+     -0.839194 -0.0162442 -0.375739
+     -1.20292 -0.0499998 -0.462365
+     -0.839194 -0.0162442 -0.267698
+     -1.20292 -0.0499998 -0.175091
+     -0.839194 0.0161804 -0.375739
+     -1.20292 0.0500002 -0.462365
+     -0.839194 0.0161804 -0.267698
+     -1.20292 0.0500002 -0.175091
+     -0.839194 -0.0162442 -1.38029
+     -1.20292 -0.0499999 -1.46691
+     -0.839194 -0.0162442 -1.27225
+     -1.20292 -0.0499999 -1.17964
+     -0.839194 0.0161804 -1.38029
+     -1.20292 0.0500001 -1.46691
+     -0.839194 0.0161804 -1.27225
+     -1.20292 0.0500001 -1.17964
+    faces 88
+     0 1 5  1  16 17 18  3
+     0 5 4  1  19 20 21  3
+     1 2 6  4  22 23 24  3
+     1 6 5  4  25 26 27  3
+     2 3 7  2  28 29 30  3
+     2 7 6  2  31 32 33  3
+     3 0 4  4  34 35 36  3
+     3 4 7  4  37 38 39  3
+     8 9 13  1  40 41 42  3
+     8 13 12  1  43 44 45  3
+     9 10 14  4  46 47 48  3
+     9 14 13  4  49 50 51  3
+     10 11 15  2  52 53 54  3
+     10 15 14  2  55 56 57  3
+     11 8 12  4  58 59 60  3
+     11 12 15  4  61 62 63  3
+     11 0 8  16  64 65 66  2
+     3 8 0  16  67 68 69  2
+     11 1 0  16  70 71 0  2
+     10 1 11  16  72 73 11  2
+     10 2 1  16  74 75 1  2
+     9 2 10  16  76 77 10  2
+     9 3 2  16  78 79 2  2
+     8 3 9  16  8 3 9  2
+     15 12 4  16  80 81 82  1
+     7 4 12  16  83 84 85  1
+     15 4 5  16  86 4 87  1
+     14 15 5  16  88 15 89  1
+     14 5 6  16  90 5 91  1
+     13 14 6  16  92 14 93  1
+     13 6 7  16  94 6 95  1
+     12 13 7  16  12 13 7  1
+     17 16 18  4  102 101 103  1
+     18 16 19  2  98 104 105  1
+     19 16 20  16  99 106 107  1
+     20 16 17  32  100 96 97  1
+     22 21 23  4  114 113 115  1
+     23 21 24  2  110 116 117  1
+     24 21 25  16  111 118 119  1
+     25 21 22  32  112 108 109  1
+     27 26 28  4  126 125 127  1
+     28 26 29  2  122 128 129  1
+     29 26 30  16  123 130 131  1
+     30 26 27  32  124 120 121  1
+     32 31 33  4  138 137 139  1
+     33 31 34  2  134 140 141  1
+     34 31 35  16  135 142 143  1
+     35 31 32  32  136 132 133  1
+     37 36 38  4  150 149 151  1
+     38 36 39  2  146 152 153  1
+     39 36 40  16  147 154 155  1
+     40 36 37  32  148 144 145  1
+     42 41 43  4  162 161 163  1
+     43 41 44  2  158 164 165  1
+     44 41 45  16  159 166 167  1
+     45 41 42  32  160 156 157  1
+     47 46 48  4  174 173 175  1
+     48 46 49  2  170 176 177  1
+     49 46 50  16  171 178 179  1
+     50 46 47  32  172 168 169  1
+     52 51 53  4  186 185 187  1
+     53 51 54  2  182 188 189  1
+     54 51 55  16  183 190 191  1
+     55 51 52  32  184 180 181  1
+     56 58 59  2  192 194 195  2
+     59 57 56  2  195 193 192  2
+     60 61 63  4  196 197 199  1
+     63 62 60  4  199 198 196  1
+     56 57 61  8  192 193 197  5
+     61 60 56  8  197 196 192  5
+     57 59 63  16  193 195 199  4
+     63 61 57  16  199 197 193  4
+     59 58 62  32  195 194 198  6
+     62 63 59  32  198 199 195  6
+     58 56 60  64  194 192 196  3
+     60 62 58  64  196 198 194  3
+     64 66 67  2  200 202 203  2
+     67 65 64  2  203 201 200  2
+     68 69 71  4  204 205 207  1
+     71 70 68  4  207 206 204  1
+     64 65 69  8  200 201 205  5
+     69 68 64  8  205 204 200  5
+     65 67 71  16  201 203 207  4
+     71 69 65  16  207 205 201  4
+     67 66 70  32  203 202 206  6
+     70 71 67  32  206 207 203  6
+     66 64 68  64  202 200 204  3
+     68 70 66  64  204 206 202  3
+    tverts 208
+     0.000499547 0.9995 0 
+     0.9995 0.9995 0 
+     0.9995 0.000499904 0 
+     0.000499725 0.000499547 0 
+     0.9995 0.9995 0 
+     0.000499725 0.9995 0 
+     0.000499547 0.000499904 0 
+     0.9995 0.000499547 0 
+     0.021057 0.0314019 0 
+     0.978943 0.0314021 0 
+     0.978943 0.968598 0 
+     0.0210569 0.968598 0 
+     0.978943 0.0314019 0 
+     0.0210569 0.0314021 0 
+     0.021057 0.968598 0 
+     0.978943 0.968598 0 
+     0.000499547 0.000499487 0 
+     0.9995 0.000499487 0 
+     0.9995 0.999501 0 
+     0.000499547 0.000499487 0 
+     0.9995 0.999501 0 
+     0.000499547 0.999501 0 
+     0.000499547 0.000499487 0 
+     0.9995 0.000499487 0 
+     0.9995 0.999501 0 
+     0.000499547 0.000499487 0 
+     0.9995 0.999501 0 
+     0.000499547 0.999501 0 
+     0.000499547 0.000499487 0 
+     0.9995 0.000499487 0 
+     0.9995 0.999501 0 
+     0.000499547 0.000499487 0 
+     0.9995 0.999501 0 
+     0.000499547 0.999501 0 
+     0.000499547 0.000499487 0 
+     0.9995 0.000499487 0 
+     0.9995 0.999501 0 
+     0.000499547 0.000499487 0 
+     0.9995 0.999501 0 
+     0.000499547 0.999501 0 
+     0.021057 0.000499487 0 
+     0.978943 0.000499487 0 
+     0.978943 0.999501 0 
+     0.021057 0.000499487 0 
+     0.978943 0.999501 0 
+     0.021057 0.999501 0 
+     0.0314021 0.000499487 0 
+     0.968598 0.000499487 0 
+     0.968598 0.999501 0 
+     0.0314021 0.000499487 0 
+     0.968598 0.999501 0 
+     0.0314021 0.999501 0 
+     0.021057 0.000499487 0 
+     0.978943 0.000499487 0 
+     0.978943 0.999501 0 
+     0.021057 0.000499487 0 
+     0.978943 0.999501 0 
+     0.021057 0.999501 0 
+     0.0314021 0.000499487 0 
+     0.968598 0.000499487 0 
+     0.968598 0.999501 0 
+     0.0314021 0.000499487 0 
+     0.968598 0.999501 0 
+     0.0314021 0.999501 0 
+     0.0210569 0.968598 0 
+     0.000499547 0.9995 0 
+     0.021057 0.0314019 0 
+     0.000499725 0.000499547 0 
+     0.021057 0.0314019 0 
+     0.000499547 0.9995 0 
+     0.0210569 0.968598 0 
+     0.9995 0.9995 0 
+     0.978943 0.968598 0 
+     0.9995 0.9995 0 
+     0.978943 0.968598 0 
+     0.9995 0.000499904 0 
+     0.978943 0.0314021 0 
+     0.9995 0.000499904 0 
+     0.978943 0.0314021 0 
+     0.000499725 0.000499547 0 
+     0.978943 0.968598 0 
+     0.978943 0.0314019 0 
+     0.9995 0.9995 0 
+     0.9995 0.000499547 0 
+     0.9995 0.9995 0 
+     0.978943 0.0314019 0 
+     0.978943 0.968598 0 
+     0.000499725 0.9995 0 
+     0.021057 0.968598 0 
+     0.000499725 0.9995 0 
+     0.021057 0.968598 0 
+     0.000499547 0.000499904 0 
+     0.0210569 0.0314021 0 
+     0.000499547 0.000499904 0 
+     0.0210569 0.0314021 0 
+     0.9995 0.000499547 0 
+     0.5 0.530303 0 
+     0.516193 0.422349 0 
+     0.483807 0.422349 0 
+     0.483807 0.422349 0 
+     0.483807 0.422349 0 
+     0.5 0.530303 0 
+     0.483807 0.422349 0 
+     0.516193 0.422349 0 
+     0.5 0.530303 0 
+     0.516193 0.422349 0 
+     0.5 0.530303 0 
+     0.516193 0.422349 0 
+     0.5 0.530303 0 
+     0.516193 0.422349 0 
+     0.483807 0.422349 0 
+     0.483807 0.422349 0 
+     0.483807 0.422349 0 
+     0.5 0.530303 0 
+     0.483807 0.422349 0 
+     0.516193 0.422349 0 
+     0.5 0.530303 0 
+     0.516193 0.422349 0 
+     0.5 0.530303 0 
+     0.516193 0.422349 0 
+     0.5 0.530303 0 
+     0.516193 0.422349 0 
+     0.483807 0.422349 0 
+     0.483807 0.422349 0 
+     0.483807 0.422349 0 
+     0.5 0.530303 0 
+     0.483807 0.422349 0 
+     0.516193 0.422349 0 
+     0.5 0.530303 0 
+     0.516193 0.422349 0 
+     0.5 0.530303 0 
+     0.516193 0.422349 0 
+     0.5 0.530303 0 
+     0.516193 0.422349 0 
+     0.483807 0.422349 0 
+     0.483807 0.422349 0 
+     0.483807 0.422349 0 
+     0.5 0.530303 0 
+     0.483807 0.422349 0 
+     0.516193 0.422349 0 
+     0.5 0.530303 0 
+     0.516193 0.422349 0 
+     0.5 0.530303 0 
+     0.516193 0.422349 0 
+     0.5 0.530303 0 
+     0.516193 0.422349 0 
+     0.483807 0.422349 0 
+     0.483807 0.422349 0 
+     0.483807 0.422349 0 
+     0.5 0.530303 0 
+     0.483807 0.422349 0 
+     0.516193 0.422349 0 
+     0.5 0.530303 0 
+     0.516193 0.422349 0 
+     0.5 0.530303 0 
+     0.516193 0.422349 0 
+     0.5 0.530303 0 
+     0.516193 0.422349 0 
+     0.483807 0.422349 0 
+     0.483807 0.422349 0 
+     0.483807 0.422349 0 
+     0.5 0.530303 0 
+     0.483807 0.422349 0 
+     0.516193 0.422349 0 
+     0.5 0.530303 0 
+     0.516193 0.422349 0 
+     0.5 0.530303 0 
+     0.516193 0.422349 0 
+     0.5 0.530303 0 
+     0.516193 0.422349 0 
+     0.483807 0.422349 0 
+     0.483807 0.422349 0 
+     0.483807 0.422349 0 
+     0.5 0.530303 0 
+     0.483807 0.422349 0 
+     0.516193 0.422349 0 
+     0.5 0.530303 0 
+     0.516193 0.422349 0 
+     0.5 0.530303 0 
+     0.516193 0.422349 0 
+     0.5 0.530303 0 
+     0.516193 0.422349 0 
+     0.483807 0.422349 0 
+     0.483807 0.422349 0 
+     0.483807 0.422349 0 
+     0.5 0.530303 0 
+     0.483807 0.422349 0 
+     0.516193 0.422349 0 
+     0.5 0.530303 0 
+     0.516193 0.422349 0 
+     0.5 0.530303 0 
+     0.516193 0.422349 0 
+     -18.1861 -14.3637 0 
+     18.1861 -14.3637 0 
+     -18.1861 14.3637 0 
+     18.1861 14.3637 0 
+     -18.1861 -14.3637 0 
+     18.1861 -14.3637 0 
+     -18.1861 14.3637 0 
+     18.1861 14.3637 0 
+     -18.1861 -14.3637 0 
+     18.1861 -14.3637 0 
+     -18.1861 14.3637 0 
+     18.1861 14.3637 0 
+     -18.1861 -14.3637 0 
+     18.1861 -14.3637 0 
+     -18.1861 14.3637 0 
+     18.1861 14.3637 0 
+endnode
+node trimesh fencebody87 
+  parent doorframe 
+  position -0.301939 0.0 -0.652482
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.878431 0.776471 0.341176  
+  ambient 0.588 0.588 0.588  
+  diffuse 0.588 0.588 0.588  
+  specular 0.0 0.0 0.0  
+  shininess 11.0 
+    bitmap gg-msc-fence
+    verts 8
+     -0.861851 0.01 -1.11337
+     -0.861851 -0.00999999 -1.11337
+     1.46793 0.01 -1.11337
+     1.46793 -0.00999999 -1.11337
+     -0.861851 0.01 0.608379
+     -0.861851 -0.00999999 0.608379
+     1.46793 0.01 0.608379
+     1.46793 -0.00999999 0.608379
+    faces 4
+     1 3 7  16  8 3 9  4
+     7 5 1  16  7 5 1  4
+     2 0 4  64  10 0 11  3
+     4 6 2  64  4 6 2  3
+    tverts 12
+     1.999 0.0170487 0 
+     0.000999033 0.0170487 0 
+     0.000999033 0.0170487 0 
+     1.999 0.0170487 0 
+     1.999 0.793537 0 
+     0.000999033 0.793537 0 
+     0.000999033 0.793537 0 
+     1.999 0.793537 0 
+     0.000999033 0.0170487 0 
+     1.999 0.793537 0 
+     0.000999033 0.0170487 0 
+     1.999 0.793537 0 
+endnode
+node dummy t_door92head 
+  parent t_door92 
+  position 0.0 0.0 2.5
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.423529 0.0313726 0.533333  
+endnode
+node dummy t_door92hhit 
+  parent t_door92 
+  position 0.0 0.0 2.25
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.52549 0.0235294 0.0235294  
+endnode
+node dummy t_door92impc 
+  parent t_door92 
+  position 0.0 0.0 1.75
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.560784 0.878431 0.341176  
+endnode
+node dummy t_door92grnd 
+  parent t_door92 
+  position 0.0 0.0 0.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.839216 0.894118 0.6  
+endnode
+endmodelgeom t_door92 
+
+#MAXANIM ASCII
+newanim opening1 t_door92 
+ length 0.666667
+ transtime 0.25
+animroot AuraBase01
+node dummy t_door92 
+  parent NULL 
+endnode
+node dummy Dummy03 
+  parent t_door92 
+    positionkey 
+      0.0  -1.2763 0.0 0.0
+    endlist 
+    orientationkey 
+      0.0   0.0 0.0 0.0  0.0
+      0.666667   0.0 0.0 1.0  1.5708
+    endlist 
+endnode
+node dummy doorframe 
+  parent Dummy03 
+endnode
+node dummy fencebody87 
+  parent doorframe 
+endnode
+node dummy t_door92head 
+  parent t_door92 
+endnode
+node dummy t_door92hhit 
+  parent t_door92 
+endnode
+node dummy t_door92impc 
+  parent t_door92 
+endnode
+node dummy t_door92grnd 
+  parent t_door92 
+endnode
+node dummy t_door92_DWK 
+  parent t_door92 
+endnode
+node dummy 72_DWK_wg_open1 
+  parent t_door92_DWK 
+endnode
+node dummy 72_DWK_wg_closed 
+  parent t_door92_DWK 
+endnode
+node dummy 72_DWK_wg_open2 
+  parent t_door92_DWK 
+endnode
+node dummy 72_DWK_dp_open1_01 
+  parent t_door92_DWK 
+endnode
+node dummy 72_DWK_dp_open2_01 
+  parent t_door92_DWK 
+endnode
+node dummy 72_DWK_dp_closed_01 
+  parent t_door92_DWK 
+endnode
+node dummy 72_DWK_dp_closed_02 
+  parent t_door92_DWK 
+endnode
+doneanim opening1 t_door92 
+
+#MAXANIM ASCII
+newanim opened1 t_door92 
+ length 0.0333333
+ transtime 0.25
+animroot AuraBase01
+node dummy t_door92 
+  parent NULL 
+endnode
+node dummy Dummy03 
+  parent t_door92 
+    positionkey 
+      0.0  -1.2763 0.0 0.0
+      0.0333333  -1.2763 0.0 0.0
+    endlist 
+    orientationkey 
+      0.0   0.0 0.0 1.0  1.5708
+      0.0333333   0.0 0.0 1.0  1.5708
+    endlist 
+endnode
+node dummy doorframe 
+  parent Dummy03 
+endnode
+node dummy fencebody87 
+  parent doorframe 
+endnode
+node dummy t_door92head 
+  parent t_door92 
+endnode
+node dummy t_door92hhit 
+  parent t_door92 
+endnode
+node dummy t_door92impc 
+  parent t_door92 
+endnode
+node dummy t_door92grnd 
+  parent t_door92 
+endnode
+node dummy t_door92_DWK 
+  parent t_door92 
+endnode
+node dummy 72_DWK_wg_open1 
+  parent t_door92_DWK 
+endnode
+node dummy 72_DWK_wg_closed 
+  parent t_door92_DWK 
+endnode
+node dummy 72_DWK_wg_open2 
+  parent t_door92_DWK 
+endnode
+node dummy 72_DWK_dp_open1_01 
+  parent t_door92_DWK 
+endnode
+node dummy 72_DWK_dp_open2_01 
+  parent t_door92_DWK 
+endnode
+node dummy 72_DWK_dp_closed_01 
+  parent t_door92_DWK 
+endnode
+node dummy 72_DWK_dp_closed_02 
+  parent t_door92_DWK 
+endnode
+doneanim opened1 t_door92 
+
+#MAXANIM ASCII
+newanim closing1 t_door92 
+ length 0.666667
+ transtime 0.25
+animroot AuraBase01
+node dummy t_door92 
+  parent NULL 
+endnode
+node dummy Dummy03 
+  parent t_door92 
+    positionkey 
+      0.0  -1.2763 0.0 0.0
+    endlist 
+    orientationkey 
+      0.0   0.0 0.0 1.0  1.5708
+      0.666667   0.0 0.0 0.0  1.51963e-007
+    endlist 
+endnode
+node dummy doorframe 
+  parent Dummy03 
+endnode
+node dummy fencebody87 
+  parent doorframe 
+endnode
+node dummy t_door92head 
+  parent t_door92 
+endnode
+node dummy t_door92hhit 
+  parent t_door92 
+endnode
+node dummy t_door92impc 
+  parent t_door92 
+endnode
+node dummy t_door92grnd 
+  parent t_door92 
+endnode
+node dummy t_door92_DWK 
+  parent t_door92 
+endnode
+node dummy 72_DWK_wg_open1 
+  parent t_door92_DWK 
+endnode
+node dummy 72_DWK_wg_closed 
+  parent t_door92_DWK 
+endnode
+node dummy 72_DWK_wg_open2 
+  parent t_door92_DWK 
+endnode
+node dummy 72_DWK_dp_open1_01 
+  parent t_door92_DWK 
+endnode
+node dummy 72_DWK_dp_open2_01 
+  parent t_door92_DWK 
+endnode
+node dummy 72_DWK_dp_closed_01 
+  parent t_door92_DWK 
+endnode
+node dummy 72_DWK_dp_closed_02 
+  parent t_door92_DWK 
+endnode
+doneanim closing1 t_door92 
+
+#MAXANIM ASCII
+newanim closed t_door92 
+ length 0.0333333
+ transtime 0.25
+animroot AuraBase01
+node dummy t_door92 
+  parent NULL 
+endnode
+node dummy Dummy03 
+  parent t_door92 
+    positionkey 
+      0.0  -1.2763 0.0 0.0
+      0.0333333  -1.2763 0.0 0.0
+    endlist 
+    orientationkey 
+      0.0   0.0 0.0 0.0  0.0
+      0.0333333   0.0 0.0 0.0  0.0
+    endlist 
+endnode
+node dummy doorframe 
+  parent Dummy03 
+endnode
+node dummy fencebody87 
+  parent doorframe 
+endnode
+node dummy t_door92head 
+  parent t_door92 
+endnode
+node dummy t_door92hhit 
+  parent t_door92 
+endnode
+node dummy t_door92impc 
+  parent t_door92 
+endnode
+node dummy t_door92grnd 
+  parent t_door92 
+endnode
+node dummy t_door92_DWK 
+  parent t_door92 
+endnode
+node dummy 72_DWK_wg_open1 
+  parent t_door92_DWK 
+endnode
+node dummy 72_DWK_wg_closed 
+  parent t_door92_DWK 
+endnode
+node dummy 72_DWK_wg_open2 
+  parent t_door92_DWK 
+endnode
+node dummy 72_DWK_dp_open1_01 
+  parent t_door92_DWK 
+endnode
+node dummy 72_DWK_dp_open2_01 
+  parent t_door92_DWK 
+endnode
+node dummy 72_DWK_dp_closed_01 
+  parent t_door92_DWK 
+endnode
+node dummy 72_DWK_dp_closed_02 
+  parent t_door92_DWK 
+endnode
+doneanim closed t_door92 
+
+#MAXANIM ASCII
+newanim opening2 t_door92 
+ length 0.666667
+ transtime 0.25
+animroot AuraBase01
+node dummy t_door92 
+  parent NULL 
+endnode
+node dummy Dummy03 
+  parent t_door92 
+    positionkey 
+      0.0  -1.2763 0.0 0.0
+    endlist 
+    orientationkey 
+      0.0   0.0 0.0 0.0  0.0
+      0.666667   0.0 0.0 -1.0  1.5708
+    endlist 
+endnode
+node dummy doorframe 
+  parent Dummy03 
+endnode
+node dummy fencebody87 
+  parent doorframe 
+endnode
+node dummy t_door92head 
+  parent t_door92 
+endnode
+node dummy t_door92hhit 
+  parent t_door92 
+endnode
+node dummy t_door92impc 
+  parent t_door92 
+endnode
+node dummy t_door92grnd 
+  parent t_door92 
+endnode
+node dummy t_door92_DWK 
+  parent t_door92 
+endnode
+node dummy 72_DWK_wg_open1 
+  parent t_door92_DWK 
+endnode
+node dummy 72_DWK_wg_closed 
+  parent t_door92_DWK 
+endnode
+node dummy 72_DWK_wg_open2 
+  parent t_door92_DWK 
+endnode
+node dummy 72_DWK_dp_open1_01 
+  parent t_door92_DWK 
+endnode
+node dummy 72_DWK_dp_open2_01 
+  parent t_door92_DWK 
+endnode
+node dummy 72_DWK_dp_closed_01 
+  parent t_door92_DWK 
+endnode
+node dummy 72_DWK_dp_closed_02 
+  parent t_door92_DWK 
+endnode
+doneanim opening2 t_door92 
+
+#MAXANIM ASCII
+newanim opened2 t_door92 
+ length 0.0333333
+ transtime 0.25
+animroot AuraBase01
+node dummy t_door92 
+  parent NULL 
+endnode
+node dummy Dummy03 
+  parent t_door92 
+    positionkey 
+      0.0  -1.2763 0.0 0.0
+      0.0333333  -1.2763 0.0 0.0
+    endlist 
+    orientationkey 
+      0.0   0.0 0.0 -1.0  1.5708
+      0.0333333   0.0 0.0 -1.0  1.5708
+    endlist 
+endnode
+node dummy doorframe 
+  parent Dummy03 
+endnode
+node dummy fencebody87 
+  parent doorframe 
+endnode
+node dummy t_door92head 
+  parent t_door92 
+endnode
+node dummy t_door92hhit 
+  parent t_door92 
+endnode
+node dummy t_door92impc 
+  parent t_door92 
+endnode
+node dummy t_door92grnd 
+  parent t_door92 
+endnode
+node dummy t_door92_DWK 
+  parent t_door92 
+endnode
+node dummy 72_DWK_wg_open1 
+  parent t_door92_DWK 
+endnode
+node dummy 72_DWK_wg_closed 
+  parent t_door92_DWK 
+endnode
+node dummy 72_DWK_wg_open2 
+  parent t_door92_DWK 
+endnode
+node dummy 72_DWK_dp_open1_01 
+  parent t_door92_DWK 
+endnode
+node dummy 72_DWK_dp_open2_01 
+  parent t_door92_DWK 
+endnode
+node dummy 72_DWK_dp_closed_01 
+  parent t_door92_DWK 
+endnode
+node dummy 72_DWK_dp_closed_02 
+  parent t_door92_DWK 
+endnode
+doneanim opened2 t_door92 
+
+#MAXANIM ASCII
+newanim closing2 t_door92 
+ length 0.7
+ transtime 0.25
+animroot AuraBase01
+node dummy t_door92 
+  parent NULL 
+endnode
+node dummy Dummy03 
+  parent t_door92 
+    positionkey 
+      0.0  -1.2763 0.0 0.0
+      0.0333333  -1.2763 0.0 0.0
+      0.7  -1.2763 0.0 0.0
+    endlist 
+    orientationkey 
+      0.0   0.0 0.0 -1.0  1.5708
+      0.0333333   0.0 0.0 -1.0  1.5708
+      0.7   0.0 0.0 0.0  0.0
+    endlist 
+endnode
+node dummy doorframe 
+  parent Dummy03 
+endnode
+node dummy fencebody87 
+  parent doorframe 
+endnode
+node dummy t_door92head 
+  parent t_door92 
+endnode
+node dummy t_door92hhit 
+  parent t_door92 
+endnode
+node dummy t_door92impc 
+  parent t_door92 
+endnode
+node dummy t_door92grnd 
+  parent t_door92 
+endnode
+node dummy t_door92_DWK 
+  parent t_door92 
+endnode
+node dummy 72_DWK_wg_open1 
+  parent t_door92_DWK 
+endnode
+node dummy 72_DWK_wg_closed 
+  parent t_door92_DWK 
+endnode
+node dummy 72_DWK_wg_open2 
+  parent t_door92_DWK 
+endnode
+node dummy 72_DWK_dp_open1_01 
+  parent t_door92_DWK 
+endnode
+node dummy 72_DWK_dp_open2_01 
+  parent t_door92_DWK 
+endnode
+node dummy 72_DWK_dp_closed_01 
+  parent t_door92_DWK 
+endnode
+node dummy 72_DWK_dp_closed_02 
+  parent t_door92_DWK 
+endnode
+doneanim closing2 t_door92 
+
+#MAXANIM ASCII
+newanim die t_door92 
+ length 0.2
+ transtime 0.25
+animroot AuraBase01
+node dummy t_door92 
+  parent NULL 
+endnode
+node dummy Dummy03 
+  parent t_door92 
+    positionkey 
+      0.0  -1.2763 0.0 0.0
+      0.2  -1.2763 1.52588e-007 -3.36644
+    endlist 
+    orientationkey 
+      0.0   0.0 0.0 0.0  1.57699e-007
+    endlist 
+endnode
+node dummy doorframe 
+  parent Dummy03 
+endnode
+node dummy fencebody87 
+  parent doorframe 
+endnode
+node dummy t_door92head 
+  parent t_door92 
+endnode
+node dummy t_door92hhit 
+  parent t_door92 
+endnode
+node dummy t_door92impc 
+  parent t_door92 
+endnode
+node dummy t_door92grnd 
+  parent t_door92 
+endnode
+node dummy t_door92_DWK 
+  parent t_door92 
+endnode
+node dummy 72_DWK_wg_open1 
+  parent t_door92_DWK 
+endnode
+node dummy 72_DWK_wg_closed 
+  parent t_door92_DWK 
+endnode
+node dummy 72_DWK_wg_open2 
+  parent t_door92_DWK 
+endnode
+node dummy 72_DWK_dp_open1_01 
+  parent t_door92_DWK 
+endnode
+node dummy 72_DWK_dp_open2_01 
+  parent t_door92_DWK 
+endnode
+node dummy 72_DWK_dp_closed_01 
+  parent t_door92_DWK 
+endnode
+node dummy 72_DWK_dp_closed_02 
+  parent t_door92_DWK 
+endnode
+doneanim die t_door92 
+
+#MAXANIM ASCII
+newanim dead t_door92 
+ length 0.0333333
+ transtime 0.25
+animroot AuraBase01
+node dummy t_door92 
+  parent NULL 
+endnode
+node dummy Dummy03 
+  parent t_door92 
+    positionkey 
+      0.0  -1.2763 1.52588e-007 -3.36644
+      0.0333333  -1.2763 1.52588e-007 -3.36644
+    endlist 
+    orientationkey 
+      0.0   0.0 0.0 0.0  1.57699e-007
+      0.0333333   0.0 0.0 0.0  1.57699e-007
+    endlist 
+endnode
+node dummy doorframe 
+  parent Dummy03 
+endnode
+node dummy fencebody87 
+  parent doorframe 
+endnode
+node dummy t_door92head 
+  parent t_door92 
+endnode
+node dummy t_door92hhit 
+  parent t_door92 
+endnode
+node dummy t_door92impc 
+  parent t_door92 
+endnode
+node dummy t_door92grnd 
+  parent t_door92 
+endnode
+node dummy t_door92_DWK 
+  parent t_door92 
+endnode
+node dummy 72_DWK_wg_open1 
+  parent t_door92_DWK 
+endnode
+node dummy 72_DWK_wg_closed 
+  parent t_door92_DWK 
+endnode
+node dummy 72_DWK_wg_open2 
+  parent t_door92_DWK 
+endnode
+node dummy 72_DWK_dp_open1_01 
+  parent t_door92_DWK 
+endnode
+node dummy 72_DWK_dp_open2_01 
+  parent t_door92_DWK 
+endnode
+node dummy 72_DWK_dp_closed_01 
+  parent t_door92_DWK 
+endnode
+node dummy 72_DWK_dp_closed_02 
+  parent t_door92_DWK 
+endnode
+doneanim dead t_door92 
+
+#MAXANIM ASCII
+newanim trans t_door92 
+ length 0.0333333
+ transtime 0.25
+animroot AuraBase01
+node dummy t_door92 
+  parent NULL 
+endnode
+node dummy Dummy03 
+  parent t_door92 
+    positionkey 
+    endlist 
+    orientationkey 
+    endlist 
+endnode
+node dummy doorframe 
+  parent Dummy03 
+endnode
+node dummy fencebody87 
+  parent doorframe 
+endnode
+node dummy t_door92head 
+  parent t_door92 
+endnode
+node dummy t_door92hhit 
+  parent t_door92 
+endnode
+node dummy t_door92impc 
+  parent t_door92 
+endnode
+node dummy t_door92grnd 
+  parent t_door92 
+endnode
+node dummy t_door92_DWK 
+  parent t_door92 
+endnode
+node dummy 72_DWK_wg_open1 
+  parent t_door92_DWK 
+endnode
+node dummy 72_DWK_wg_closed 
+  parent t_door92_DWK 
+endnode
+node dummy 72_DWK_wg_open2 
+  parent t_door92_DWK 
+endnode
+node dummy 72_DWK_dp_open1_01 
+  parent t_door92_DWK 
+endnode
+node dummy 72_DWK_dp_open2_01 
+  parent t_door92_DWK 
+endnode
+node dummy 72_DWK_dp_closed_01 
+  parent t_door92_DWK 
+endnode
+node dummy 72_DWK_dp_closed_02 
+  parent t_door92_DWK 
+endnode
+doneanim trans t_door92 
+
+donemodel t_door92 
+

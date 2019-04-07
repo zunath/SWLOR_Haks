@@ -1,0 +1,498 @@
+#MAXMODEL ASCII
+# model: vac01_spvar02 
+filedependancy vac01_spvar02_NEW_beams.max
+newmodel vac01_spvar02 
+setsupermodel vac01_spvar02 NULL
+classification Tile
+#MAXGEOM  ASCII
+beginmodelgeom vac01_spvar02 
+node dummy vac01_spvar02 
+  parent NULL 
+endnode
+node trimesh BASElayer 
+  parent vac01_spvar02 
+  position 0.0 0.0 -18.1
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.341176 0.878431 0.776471  
+  ambient 1.0 1.0 1.0  
+  diffuse 1.0 1.0 1.0  
+  specular 0.0 0.0 0.0  
+  shininess 11.0 
+    bitmap layer1
+    verts 41
+     -5.0 -5.0 0.0
+     -2.5 -5.0 0.0
+     0.0 -5.0 0.0
+     2.5 -5.0 0.0
+     5.0 -5.0 0.0
+     -5.0 -2.5 0.0
+     -2.5 -2.5 0.05
+     0.0 -2.5 0.05
+     2.5 -2.5 0.05
+     5.0 -2.5 0.0
+     -5.0 0.0 0.0
+     -2.5 0.0 0.05
+     0.0 0.0 0.05
+     2.5 0.0 0.05
+     5.0 0.0 0.0
+     -5.0 2.5 0.0
+     -2.5 2.5 0.05
+     0.0 2.5 0.05
+     2.5 2.5 0.05
+     5.0 2.5 0.0
+     -5.0 5.0 0.0
+     -2.5 5.0 0.0
+     0.0 5.0 0.0
+     2.5 5.0 0.0
+     5.0 5.0 0.0
+     -5.0 -5.0 0.05
+     -2.5 -5.0 0.05
+     0.0 -5.0 0.05
+     2.5 -5.0 0.05
+     5.0 -5.0 0.05
+     -5.0 -2.5 0.05
+     5.0 -2.5 0.05
+     -5.0 0.0 0.05
+     5.0 0.0 0.05
+     -5.0 2.5 0.05
+     5.0 2.5 0.05
+     -5.0 5.0 0.05
+     -2.5 5.0 0.05
+     0.0 5.0 0.05
+     2.5 5.0 0.05
+     5.0 5.0 0.05
+    faces 64
+     30 25 6  1  30 25 6  1
+     26 6 25  1  26 6 25  1
+     6 26 7  1  6 26 7  1
+     27 7 26  1  27 7 26  1
+     7 27 8  1  7 27 8  1
+     28 8 27  1  28 8 27  1
+     8 28 31  1  8 28 31  1
+     29 31 28  1  29 31 28  1
+     32 30 11  1  32 30 11  1
+     6 11 30  1  6 11 30  1
+     11 6 12  1  11 6 12  1
+     7 12 6  1  7 12 6  1
+     12 7 13  1  12 7 13  1
+     8 13 7  1  8 13 7  1
+     13 8 33  1  13 8 33  1
+     31 33 8  1  31 33 8  1
+     34 32 16  1  34 32 16  1
+     11 16 32  1  11 16 32  1
+     16 11 17  1  16 11 17  1
+     12 17 11  1  12 17 11  1
+     17 12 18  1  17 12 18  1
+     13 18 12  1  13 18 12  1
+     18 13 35  1  18 13 35  1
+     33 35 13  1  33 35 13  1
+     36 34 37  1  36 34 37  1
+     16 37 34  1  16 37 34  1
+     37 16 38  1  37 16 38  1
+     17 38 16  1  17 38 16  1
+     38 17 39  1  38 17 39  1
+     18 39 17  1  18 39 17  1
+     39 18 40  1  39 18 40  1
+     35 40 18  1  35 40 18  1
+     5 0 25  0  5 0 25  1
+     25 30 5  0  25 30 5  1
+     0 1 26  0  0 1 26  1
+     26 25 0  0  26 25 0  1
+     1 2 27  0  1 2 27  1
+     27 26 1  0  27 26 1  1
+     2 3 28  0  2 3 28  1
+     28 27 2  0  28 27 2  1
+     4 9 31  0  4 9 31  1
+     31 29 4  0  31 29 4  1
+     3 4 29  0  3 4 29  1
+     29 28 3  0  29 28 3  1
+     10 5 30  0  10 5 30  1
+     30 32 10  0  30 32 10  1
+     9 14 33  0  9 14 33  1
+     33 31 9  0  33 31 9  1
+     15 10 32  0  15 10 32  1
+     32 34 15  0  32 34 15  1
+     14 19 35  0  14 19 35  1
+     35 33 14  0  35 33 14  1
+     20 15 34  0  20 15 34  1
+     34 36 20  0  34 36 20  1
+     21 20 36  0  21 20 36  1
+     36 37 21  0  36 37 21  1
+     22 21 37  0  22 21 37  1
+     37 38 22  0  37 38 22  1
+     23 22 38  0  23 22 38  1
+     38 39 23  0  38 39 23  1
+     24 23 39  0  24 23 39  1
+     39 40 24  0  39 40 24  1
+     19 24 40  0  19 24 40  1
+     40 35 19  0  40 35 19  1
+    tverts 41
+     0.000999033 0.00099951 0 
+     0.500499 0.000999391 0 
+     1.0 0.000999272 0 
+     1.4995 0.000999153 0 
+     1.999 0.000999033 0 
+     0.000999153 0.5005 0 
+     0.500499 0.5005 0 
+     1.0 0.5005 0 
+     1.4995 0.500499 0 
+     1.999 0.500499 0 
+     0.000999272 1.0 0 
+     0.5005 1.0 0 
+     1.0 1.0 0 
+     1.4995 1.0 0 
+     1.999 1.0 0 
+     0.000999391 1.4995 0 
+     0.5005 1.4995 0 
+     1.0 1.4995 0 
+     1.4995 1.4995 0 
+     1.999 1.4995 0 
+     0.00099951 1.999 0 
+     0.5005 1.999 0 
+     1.0 1.999 0 
+     1.4995 1.999 0 
+     1.999 1.999 0 
+     0.000999033 0.00099951 0 
+     0.500499 0.000999391 0 
+     1.0 0.000999272 0 
+     1.4995 0.000999153 0 
+     1.999 0.000999033 0 
+     0.000999153 0.5005 0 
+     1.999 0.500499 0 
+     0.000999272 1.0 0 
+     1.999 1.0 0 
+     0.000999391 1.4995 0 
+     1.999 1.4995 0 
+     0.00099951 1.999 0 
+     0.5005 1.999 0 
+     1.0 1.999 0 
+     1.4995 1.999 0 
+     1.999 1.999 0 
+endnode
+node trimesh Plane01 
+  parent vac01_spvar02 
+  position 4.9 -0.25 26.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.0235294 0.52549 0.0235294  
+     danglymesh 0
+     period 1.0
+     tightness 1.0
+     displacement 0.025
+     showdispl true
+     displtype 1
+     Alpha 1.0
+     transparencyhint 0
+     tilefade 0
+     scale 1.0
+     render 0
+     Shadow 0
+     beaming 1
+     inheritcolor 0
+     selfillumcolor 0.0 0.0 0.0 
+     rotatetexture 0
+     center -4.53738 0.0 0.0 
+     gizmo SubAnim:Gizmo
+    bitmap NULL
+    verts 4
+     -0.13 -0.13 0.0
+     0.03 -0.02 0.0
+     -0.13 0.12 0.0
+     0.03 0.09 0.0
+    faces 2
+     2 0 3  1  0 0 0  1
+     1 3 0  1  0 0 0  1
+endnode
+node trimesh Plane02 
+  parent vac01_spvar02 
+  position 5.0 0.5 27.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.0235294 0.52549 0.0235294  
+     danglymesh 0
+     period 1.0
+     tightness 1.0
+     displacement 0.025
+     showdispl true
+     displtype 1
+     Alpha 1.0
+     transparencyhint 0
+     tilefade 0
+     scale 1.0
+     render 0
+     Shadow 0
+     beaming 1
+     inheritcolor 0
+     selfillumcolor 0.0 0.0 0.0 
+     rotatetexture 0
+     center 5.01064 -9.49744 0.0 
+     gizmo SubAnim:Gizmo
+    bitmap NULL
+    verts 4
+     -0.13 -0.13 0.0
+     0.23 -0.31 0.0
+     -0.13 0.12 0.0
+     0.12 0.12 0.0
+    faces 2
+     2 0 3  1  0 0 0  1
+     1 3 0  1  0 0 0  1
+endnode
+node trimesh Plane03 
+  parent vac01_spvar02 
+  position 4.95 -1.0 28.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.0235294 0.52549 0.0235294  
+     danglymesh 0
+     period 1.0
+     tightness 1.0
+     displacement 0.025
+     showdispl true
+     displtype 1
+     Alpha 1.0
+     transparencyhint 0
+     tilefade 0
+     scale 1.0
+     render 0
+     Shadow 0
+     beaming 1
+     inheritcolor 0
+     selfillumcolor 0.603922 0.603922 0.603922 
+     rotatetexture 0
+     center -0.341931 0.0333843 0.0 
+     gizmo SubAnim:Gizmo
+    bitmap NULL
+    verts 4
+     -0.08 -0.06 0.0
+     0.11 -0.11 0.0
+     -0.12 0.12 0.0
+     0.07 0.05 0.0
+    faces 2
+     2 0 3  1  0 0 0  1
+     1 3 0  1  0 0 0  1
+endnode
+node trimesh Plane04 
+  parent vac01_spvar02 
+  position 4.9 0.0 26.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.0235294 0.52549 0.0235294  
+     danglymesh 0
+     period 1.0
+     tightness 1.0
+     displacement 0.025
+     showdispl true
+     displtype 1
+     Alpha 1.0
+     transparencyhint 0
+     tilefade 0
+     scale 1.0
+     render 0
+     Shadow 0
+     beaming 1
+     inheritcolor 0
+     selfillumcolor 0.0 0.0 0.0 
+     rotatetexture 0
+     center 0.0 0.0 0.0 
+     gizmo SubAnim:Gizmo
+    bitmap NULL
+    verts 4
+     -0.13 -0.13 0.0
+     0.02 -0.02 0.0
+     -0.1 0.09 0.0
+     0.12 0.12 0.0
+    faces 2
+     2 0 3  1  0 0 0  1
+     1 3 0  1  0 0 0  1
+endnode
+node trimesh Plane05 
+  parent vac01_spvar02 
+  position 4.7 -1.5 28.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.0235294 0.52549 0.0235294  
+     danglymesh 0
+     period 1.0
+     tightness 1.0
+     displacement 0.025
+     showdispl true
+     displtype 1
+     Alpha 1.0
+     transparencyhint 0
+     tilefade 0
+     scale 1.0
+     render 0
+     Shadow 0
+     beaming 1
+     inheritcolor 0
+     selfillumcolor 0.0 0.0 0.0 
+     rotatetexture 0
+     center 0.0 0.0 0.0 
+     gizmo SubAnim:Gizmo
+    bitmap NULL
+    verts 4
+     -0.13 -0.13 0.0
+     0.02 -0.02 0.0
+     -0.1 0.09 0.0
+     0.12 0.12 0.0
+    faces 2
+     2 0 3  1  0 0 0  1
+     1 3 0  1  0 0 0  1
+endnode
+node trimesh Plane06 
+  parent vac01_spvar02 
+  position 4.75 1.2 29.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.0235294 0.52549 0.0235294  
+     danglymesh 0
+     period 1.0
+     tightness 1.0
+     displacement 0.025
+     showdispl true
+     displtype 1
+     Alpha 1.0
+     transparencyhint 0
+     tilefade 0
+     scale 1.0
+     render 0
+     Shadow 0
+     beaming 1
+     inheritcolor 0
+     selfillumcolor 0.603922 0.603922 0.603922 
+     rotatetexture 0
+     center -0.341931 0.0333843 0.0 
+     gizmo SubAnim:Gizmo
+    bitmap NULL
+    verts 4
+     -0.08 -0.06 0.0
+     0.11 -0.11 0.0
+     -0.12 0.12 0.0
+     0.07 0.05 0.0
+    faces 2
+     2 0 3  1  0 0 0  1
+     1 3 0  1  0 0 0  1
+endnode
+node trimesh layer01 
+  parent vac01_spvar02 
+  position 0.0 0.0 -1.5
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.580392 0.694118 0.101961  
+  ambient 1.0 1.0 1.0  
+  diffuse 1.0 1.0 1.0  
+  specular 0.0 0.0 0.0  
+  shininess 11.0 
+    bitmap layer3
+    verts 4
+     -5.0 -5.0 0.0
+     5.0 -5.0 0.0
+     -5.0 5.0 0.0
+     5.0 5.0 0.0
+    faces 2
+     2 0 3  1  2 0 3  1
+     1 3 0  1  1 3 0  1
+    tverts 4
+     0.000499517 0.000499755 0 
+     0.9995 0.000499517 0 
+     0.000499755 0.999501 0 
+     0.999501 0.9995 0 
+endnode
+node trimesh layer02 
+  parent vac01_spvar02 
+  position 0.0 0.0 1.5
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.580392 0.694118 0.101961  
+  ambient 1.0 1.0 1.0  
+  diffuse 1.0 1.0 1.0  
+  specular 0.0 0.0 0.0  
+  shininess 11.0 
+    bitmap layer4
+    verts 4
+     -5.0 -5.0 0.0
+     5.0 -5.0 0.0
+     -5.0 5.0 0.0
+     5.0 5.0 0.0
+    faces 2
+     2 0 3  1  2 0 3  1
+     1 3 0  1  1 3 0  1
+    tverts 4
+     0.000499517 0.000499755 0 
+     0.9995 0.000499517 0 
+     0.000499755 0.999501 0 
+     0.999501 0.9995 0 
+endnode
+node trimesh layer03 
+  parent vac01_spvar02 
+  position 0.0 0.0 2.1
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.580392 0.694118 0.101961  
+  ambient 1.0 1.0 1.0  
+  diffuse 1.0 1.0 1.0  
+  specular 0.0 0.0 0.0  
+  shininess 11.0 
+    bitmap layer2
+    verts 4
+     -5.0 -5.0 0.0
+     5.0 -5.0 0.0
+     -5.0 5.0 0.0
+     5.0 5.0 0.0
+    faces 2
+     2 0 3  1  2 0 3  1
+     1 3 0  1  1 3 0  1
+    tverts 4
+     0.000499517 0.000499755 0 
+     0.9995 0.000499517 0 
+     0.000499755 0.999501 0 
+     0.999501 0.9995 0 
+endnode
+node light vac01_spvar02ml1 
+  parent vac01_spvar02 
+  position -2.55379 -2.44485 0.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 1.0 0.898039 0.0  
+  radius 5.0 
+  multiplier 1.0
+  color 1.0 1.0 1.0  
+  ambientonly 0 
+  nDynamicType 1 
+  affectDynamic 1 
+  shadow 0 
+  lightpriority 3 
+  lensflares 0
+  fadingLight 0
+endnode
+node light vac01_spvar02ml2 
+  parent vac01_spvar02 
+  position 0.1 -0.25 4.5
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 1.0 0.898039 0.0  
+  radius 5.0 
+  multiplier 1.0
+  color 1.0 1.0 1.0  
+  ambientonly 0 
+  nDynamicType 1 
+  affectDynamic 1 
+  shadow 0 
+  lightpriority 3 
+  lensflares 0
+  fadingLight 0
+endnode
+node dummy vac01_spvar02_WOK 
+  parent vac01_spvar02 
+endnode
+node aabb Plane07 
+  parent vac01_spvar02 
+  position 0.0 0.0 3.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.835294 0.603922 0.898039  
+    bitmap NULL
+    verts 4
+     -5.0 -5.0 0.0
+     5.0 -5.0 0.0
+     -5.0 5.0 0.0
+     5.0 5.0 0.0
+    faces 2
+     2 0 3  1  0 0 0  3
+     1 3 0  1  0 0 0  3
+aabb    -5.00 -5.00  0.00   5.00  5.00  0.00  -1
+    -5.00 -5.00  0.00   5.00  5.00  0.00  1
+    -5.00 -5.00  0.00   5.00  5.00  0.00  0
+endnode
+endmodelgeom vac01_spvar02 
+
+donemodel vac01_spvar02 
+

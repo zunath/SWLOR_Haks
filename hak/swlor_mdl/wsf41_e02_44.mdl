@@ -1,0 +1,2601 @@
+# Rewritten by CleanModels 3 Version 3.1.1 Sun Oct 26 03:01:24 2008
+#MAXMODEL ASCII
+filedependency Unknown
+newmodel wsf41_e02_44
+setsupermodel wsf41_e02_44 null
+setanimationscale 1
+classification TILE
+#MAXGEOM ASCII
+beginmodelgeom wsf41_e02_44
+node dummy wsf41_e02_44
+  parent NULL
+endnode
+node dummy wsf41_e02_44a
+  parent wsf41_e02_44
+  position 0 0 0
+  orientation 0 0 0 0
+  wirecolor 1 0 0
+endnode
+node dummy cm3_repair_1
+  parent wsf41_e02_44a
+  position 0 0 0
+  orientation 0.707107 -0.707107 0 -3.14159
+  wirecolor 0.345098 0.345098 0.882353
+endnode
+node dummy cm3_repair_02
+  position 0 -2.8597e-007 -0.5
+  wirecolor 0.345098 0.345098 0.882353
+  parent cm3_repair_1
+  orientation 0 0 0 0
+endnode
+node trimesh water_fx03_01
+  parent cm3_repair_02
+  position 0 -3.43209e-007 -0.0319299
+  orientation 0.707107 -0.707107 0 -3.14159
+  wirecolor 0.337255 0.337255 0.337255
+  tilefade 0
+  scale 1
+  render 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 1
+  alpha 1
+  transparencyhint 1
+  selfillumcolor 0 0 0
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 1
+  center 0 0 0
+  bitmap wsf01_waterxx
+  shadow 0
+  verts 94
+    5 -5 -1.53
+    5 5 1.47
+    -5 -5 -1.53
+    -5 5 -1.53
+    5 1.01 0.97
+    1.01 5 0.97
+    0 0 -0.95
+    -5 0 -1.53
+    0 -5 -1.53
+    2.51 2.51 1.29
+    -0.01 2.51 -0.09
+    2.51 1 0.09
+    -2.51 -2.51 -1.53
+    0.01 -2.51 -1.53
+    -2.51 0.01 -1.53
+    5 -2.5 -1.53
+    2.51 -2.51 -1.53
+    5 2.5 1.47
+    2.5 5 1.47
+    -2 5 -1.53
+    -2.51 2.51 -1.53
+    -5 2.5 -1.53
+    -5 -2.5 -1.53
+    -2.5 -5 -1.53
+    2.5 -5 -1.53
+    2 2.51 1
+    1.25 2 0.04
+    2.51 2 0.47
+    -1.25 -2.51 -1.53
+    -1.25 -1.25 -1.53
+    -2.51 -1.25 -1.53
+    3.76 -2 -1.53
+    2.51 -2 -1.53
+    3.76 -2.51 -1.53
+    3.76 3.76 1.47
+    2.5 3.76 1.47
+    3.76 2.5 1.53
+    -1.26 3.76 -0.49
+    -2.51 3.76 -1.53
+    -1.26 2.51 -0.64
+    -3.76 1.26 -1.53
+    -2.51 1.26 -1.53
+    -3.76 2.51 -1.53
+    -3.76 -3.76 -1.53
+    -2.5 -3.76 -1.53
+    -3.76 -2.5 -1.53
+    1.26 -3.76 -1.53
+    2.51 -3.76 -1.53
+    1.26 -2.51 -1.53
+    3.76 2 1.22
+    3.76 1 0.83
+    2 3.76 1.22
+    -0.01 3.76 0.23
+    -0.01 1.26 -0.57
+    1.26 1 -0.37
+    -3.76 -1.26 -1.53
+    -3.76 0.01 -1.53
+    -1.26 -3.76 -1.53
+    0.01 -3.76 -1.53
+    0.01 -1.26 -1.53
+    -1.26 0.01 -1.17
+    5 -3.75 -1.53
+    3.76 -3.76 -1.53
+    5 -2 -1.53
+    1.26 -1.25 -1.53
+    5 2 1.22
+    5 3.75 1.47
+    3.75 5 1.47
+    2 5 1.22
+    -1.26 1.26 -1.05
+    -1 5 -0.03
+    -3.75 5 -1.53
+    -3.76 3.76 -1.53
+    -5 3.75 -1.53
+    -5 1.25 -1.53
+    -5 -1.25 -1.53
+    -5 -3.75 -1.53
+    -3.75 -5 -1.53
+    -1.25 -5 -1.53
+    1.25 -5 -1.53
+    3.75 -5 -1.53
+    3.14 -2 -1.53
+    4.38 -0.89 -0.59
+    3.76 -1.39 -0.59
+    4.38 -2 -1.53
+    1.88 -1.25 -0.75
+    1.26 -0.63 -0.84
+    1.88 -1.5 -1.53
+    3.14 -1.23 -1.03
+    2.51 -1.25 -1.03
+    4.38 1 0.96
+    3.14 1 0.54
+    1.88 1 -0.11
+    5 -1 -0.03
+  faces 153
+    25 26 27 1 0 1 2 0
+    28 29 30 1 3 4 5 0
+    31 81 33 1 6 7 8 0
+    34 35 36 1 9 10 11 0
+    37 38 39 1 12 13 14 0
+    40 41 42 1 15 16 17 0
+    43 44 45 1 18 19 20 0
+    46 47 48 1 21 22 23 0
+    49 27 50 1 24 2 25 0
+    51 52 25 1 26 27 0 0
+    26 53 54 1 1 28 29 0
+    55 30 56 1 30 5 31 0
+    57 58 28 1 32 33 3 0
+    29 59 60 1 4 34 35 0
+    61 33 62 1 36 8 37 0
+    82 83 84 1 38 39 40 0
+    85 86 87 1 41 42 43 0
+    65 36 49 1 44 11 24 0
+    66 67 34 1 45 46 9 0
+    35 68 51 1 10 47 26 0
+    53 39 69 1 28 14 48 0
+    52 70 37 1 27 49 12 0
+    38 71 72 1 13 50 51 0
+    73 42 72 1 52 17 51 0
+    74 56 40 1 53 31 15 0
+    41 60 69 1 16 35 48 0
+    75 45 55 1 54 20 30 0
+    76 77 43 1 55 56 18 0
+    44 78 57 1 19 57 32 0
+    59 48 64 1 34 23 58 0
+    58 79 46 1 33 59 21 0
+    47 80 62 1 22 60 37 0
+    9 25 27 1 61 0 2 0
+    25 10 26 1 0 62 1 0
+    27 26 11 1 2 1 63 0
+    12 28 30 1 64 3 5 0
+    28 13 29 1 3 65 4 0
+    30 29 14 1 5 4 66 0
+    15 31 33 1 67 6 8 0
+    88 89 81 1 68 69 7 0
+    33 32 16 1 8 70 71 0
+    17 34 36 1 72 9 11 0
+    34 18 35 1 9 73 10 0
+    36 35 9 1 11 10 61 0
+    10 37 39 1 62 12 14 0
+    37 19 38 1 12 74 13 0
+    39 38 20 1 14 13 75 0
+    21 40 42 1 76 15 17 0
+    40 14 41 1 15 66 16 0
+    42 41 20 1 17 16 75 0
+    22 43 45 1 77 18 20 0
+    43 23 44 1 18 78 19 0
+    45 44 12 1 20 19 64 0
+    13 46 48 1 65 21 23 0
+    46 24 47 1 21 79 22 0
+    48 47 16 1 23 22 71 0
+    90 49 50 1 80 24 25 0
+    49 9 27 1 24 61 2 0
+    91 27 11 1 81 2 63 0
+    9 51 25 1 61 26 0 0
+    51 5 52 1 26 82 27 0
+    25 52 10 1 0 27 62 0
+    92 26 54 1 83 1 29 0
+    26 10 53 1 1 62 28 0
+    54 53 6 1 29 28 84 0
+    7 55 56 1 85 30 31 0
+    55 12 30 1 30 64 5 0
+    56 30 14 1 31 5 66 0
+    12 57 28 1 64 32 3 0
+    57 8 58 1 32 86 33 0
+    28 58 13 1 3 33 65 0
+    14 29 60 1 66 4 35 0
+    29 13 59 1 4 65 34 0
+    60 59 6 1 35 34 84 0
+    0 61 62 1 87 36 37 0
+    61 15 33 1 36 67 8 0
+    62 33 16 1 37 8 71 0
+    15 63 84 1 67 88 40 0
+    93 90 82 1 89 80 38 0
+    83 91 88 1 39 81 68 0
+    16 32 87 1 71 70 43 0
+    89 92 85 1 69 83 41 0
+    64 86 6 1 58 42 84 0
+    4 65 49 1 90 44 24 0
+    65 17 36 1 44 72 11 0
+    49 36 9 1 24 11 61 0
+    17 66 34 1 72 45 9 0
+    66 1 67 1 45 91 46 0
+    34 67 18 1 9 46 73 0
+    9 35 51 1 61 10 26 0
+    35 18 68 1 10 73 47 0
+    51 68 5 1 26 47 82 0
+    6 53 69 1 84 28 48 0
+    53 10 39 1 28 62 14 0
+    69 39 20 1 48 14 75 0
+    10 52 37 1 62 27 12 0
+    52 5 70 1 27 82 49 0
+    37 70 19 1 12 49 74 0
+    20 38 72 1 75 13 51 0
+    38 19 71 1 13 74 50 0
+    72 71 3 1 51 50 92 0
+    3 73 72 1 92 52 51 0
+    73 21 42 1 52 76 17 0
+    72 42 20 1 51 17 75 0
+    21 74 40 1 76 53 15 0
+    74 7 56 1 53 85 31 0
+    40 56 14 1 15 31 66 0
+    20 41 69 1 75 16 48 0
+    41 14 60 1 16 66 35 0
+    69 60 6 1 48 35 84 0
+    7 75 55 1 85 54 30 0
+    75 22 45 1 54 77 20 0
+    55 45 12 1 30 20 64 0
+    22 76 43 1 77 55 18 0
+    76 2 77 1 55 93 56 0
+    43 77 23 1 18 56 78 0
+    12 44 57 1 64 19 32 0
+    44 23 78 1 19 78 57 0
+    57 78 8 1 32 57 86 0
+    6 59 64 1 84 34 58 0
+    59 13 48 1 34 65 23 0
+    64 48 16 1 58 23 71 0
+    13 58 46 1 65 33 21 0
+    58 8 79 1 33 86 59 0
+    46 79 24 1 21 59 79 0
+    16 47 62 1 71 22 37 0
+    47 24 80 1 22 79 60 0
+    62 80 0 1 37 60 87 0
+    81 32 33 1 7 70 8 0
+    63 82 84 1 88 38 40 0
+    82 50 83 1 38 25 39 0
+    84 83 31 1 40 39 6 0
+    32 85 87 1 70 41 43 0
+    85 54 86 1 41 29 42 0
+    87 86 64 1 43 42 58 0
+    31 88 81 1 6 68 7 0
+    88 11 89 1 68 63 69 0
+    81 89 32 1 7 69 70 0
+    4 49 90 1 90 24 80 0
+    50 27 91 1 25 2 81 0
+    11 26 92 1 63 1 83 0
+    15 84 31 1 67 40 6 0
+    63 93 82 1 88 89 38 0
+    93 4 90 1 89 90 80 0
+    82 90 50 1 38 80 25 0
+    31 83 88 1 6 39 68 0
+    83 50 91 1 39 25 81 0
+    88 91 11 1 68 81 63 0
+    16 87 64 1 71 43 58 0
+    32 89 85 1 70 69 41 0
+    89 11 92 1 69 63 83 0
+    85 92 54 1 41 83 29 0
+    86 54 6 1 42 29 84 0
+  tverts 94
+    0.750993 0.375119 0
+    0.624881 0.375119 0
+    0.624881 0.249007 0
+    0.249007 0.624882 0
+    0.375119 0.624881 0
+    0.375119 0.750993 0
+    0.374491 0.124123 0
+    0.374179 0.186557 0
+    0.248995 0.12412 0
+    0.875256 0.124744 0
+    0.875871 0.250247 0
+    0.749753 0.124129 0
+    0.875877 0.625509 0
+    0.875881 0.751005 0
+    0.750999 0.626124 0
+    0.625509 0.875877 0
+    0.626124 0.750999 0
+    0.751006 0.87588 0
+    0.124744 0.875256 0
+    0.124129 0.749754 0
+    0.250247 0.875871 0
+    0.124123 0.374491 0
+    0.12412 0.248995 0
+    0.249001 0.373876 0
+    0.62549 0.124117 0
+    0.498757 0.12412 0
+    0.875883 0.37451 0
+    0.87588 0.501242 0
+    0.625497 0.500627 0
+    0.499373 0.374504 0
+    0.37451 0.875884 0
+    0.501243 0.87588 0
+    0.124117 0.62549 0
+    0.12412 0.498758 0
+    0.374504 0.499373 0
+    0.500628 0.625496 0
+    0.125375 0.000499725 0
+    0.124132 0.124132 0
+    0.436939 0.0619975 0
+    0.436621 0.124121 0
+    0.374496 0.0619991 0
+    0.43662 0.311749 0
+    0.436927 0.374493 0
+    0.374179 0.311741 0
+    0.624875 0.000499606 0
+    0.874625 0.000499547 0
+    0.9995 0.125375 0
+    0.9995 0.375125 0
+    0.625519 0.625518 0
+    0.999501 0.624875 0
+    0.999501 0.874625 0
+    0.875868 0.875867 0
+    0.874626 0.9995 0
+    0.624876 0.9995 0
+    0.375125 0.999501 0
+    0.125375 0.999501 0
+    0.000499725 0.874626 0
+    0.000499666 0.624876 0
+    0.374482 0.374482 0
+    0.000499606 0.375125 0
+    0.000499547 0.125375 0
+    0.750999 0.249001 0
+    0.750999 0.501249 0
+    0.498751 0.249001 0
+    0.249001 0.750999 0
+    0.249001 0.498751 0
+    0.501249 0.750999 0
+    0.25025 0.000499696 0
+    0.436613 0.186557 0
+    0.436315 0.249 0
+    0.373876 0.249001 0
+    0.249001 0.249001 0
+    0.74975 0.000499577 0
+    0.9995 0.25025 0
+    0.999501 0.74975 0
+    0.750999 0.750999 0
+    0.749751 0.9995 0
+    0.25025 0.999501 0
+    0.000499696 0.749751 0
+    0.000499577 0.25025 0
+    0.499071 0.0619974 0
+    0.498753 0.186554 0
+    0.999501 0.5 0
+    0.499057 0.311752 0
+    0.5 0.5 0
+    0.5 0.999501 0
+    0.000499636 0.5 0
+    0.000499517 0.000499755 0
+    0.375125 0.000499666 0
+    0.437562 0.000499651 0
+    0.5 0.000499636 0
+    0.9995 0.000499517 0
+    0.999501 0.9995 0
+    0.000499755 0.999501 0
+endnode
+node emitter waterfall013
+  parent wsf41_e02_44a
+  position -0.133816 0.918042 0.0063337
+  orientation 0 0 -1 -3.10669
+  wirecolor 0.0313726 0.0313726 0.0313726
+  update_sel 1
+  update Fountain
+  render_sel 1
+  render Normal
+  blend_sel 3
+  blend Lighten
+  spawntype_sel 0
+  spawntype 0
+  xsize 0
+  ysize 0
+  inherit 1
+  inherit_local 0
+  inheritvel 0
+  inherit_part 0
+  renderorder 0
+  threshold 0
+  combinetime 0
+  deadspace 0
+  opacity 0.5
+  colorStart 1 1 1
+  colorEnd 1 1 1
+  alphaStart 0.4
+  alphaEnd 0.33
+  sizeStart 0.6
+  sizeEnd 4
+  sizeStart_y 0
+  sizeEnd_y 0
+  birthrate 8
+  lifeExp 1.6
+  mass 0.4
+  spread 1.0472
+  particleRot 0.3
+  velocity 1.8
+  randvel 0.05
+  bounce_co 0.9
+  blurlength 10
+  loop 0
+  bounce 1
+  m_isTinted 0
+  splat 0
+  affectedByWind false
+  texture fxpa_splash
+  twosidedtex 0
+  xgrid 1
+  ygrid 1
+  fps 0
+  frameStart 6
+  frameEnd 33
+  random 0
+  lightningDelay 0
+  lightningRadius 0
+  lightningSubDiv 0
+  lightningScale 0
+  blastRadius 0
+  blastLength 0
+  p2p 0
+  p2p_type Bezier
+  p2p_sel 1
+  p2p_bezier2 0
+  p2p_bezier3 0
+  grav 0
+  drag 0
+endnode
+node emitter waterfall012
+  parent wsf41_e02_44a
+  position 2.57174 -1.56658 -0.612823
+  orientation 0 0 -1 -3.10669
+  wirecolor 0.0313726 0.0313726 0.0313726
+  update_sel 1
+  update Fountain
+  render_sel 1
+  render Normal
+  blend_sel 3
+  blend Lighten
+  spawntype_sel 0
+  spawntype 0
+  xsize 0
+  ysize 0
+  inherit 1
+  inherit_local 0
+  inheritvel 0
+  inherit_part 0
+  renderorder 0
+  threshold 0
+  combinetime 0
+  deadspace 0
+  opacity 0.5
+  colorStart 1 1 1
+  colorEnd 1 1 1
+  alphaStart 0.4
+  alphaEnd 0.33
+  sizeStart 0.6
+  sizeEnd 4
+  sizeStart_y 0
+  sizeEnd_y 0
+  birthrate 8
+  lifeExp 1.6
+  mass 0.4
+  spread 1.0472
+  particleRot 0.3
+  velocity 1.8
+  randvel 0.05
+  bounce_co 0.9
+  blurlength 10
+  loop 0
+  bounce 1
+  m_isTinted 0
+  splat 0
+  affectedByWind false
+  texture fxpa_splash
+  twosidedtex 0
+  xgrid 1
+  ygrid 1
+  fps 0
+  frameStart 6
+  frameEnd 33
+  random 0
+  lightningDelay 0
+  lightningRadius 0
+  lightningSubDiv 0
+  lightningScale 0
+  blastRadius 0
+  blastLength 0
+  p2p 0
+  p2p_type Bezier
+  p2p_sel 1
+  p2p_bezier2 0
+  p2p_bezier3 0
+  grav 0
+  drag 0
+endnode
+node emitter waterfall011
+  parent wsf41_e02_44a
+  position -0.529701 -1.28065 -0.920562
+  orientation -0.147753 0.00934428 -0.98898 -3.11021
+  wirecolor 0.0313726 0.0313726 0.0313726
+  update_sel 1
+  update Fountain
+  render_sel 1
+  render Normal
+  blend_sel 3
+  blend Lighten
+  spawntype_sel 0
+  spawntype 0
+  xsize 0
+  ysize 0
+  inherit 1
+  inherit_local 0
+  inheritvel 0
+  inherit_part 0
+  renderorder 0
+  threshold 0
+  combinetime 0
+  deadspace 0
+  opacity 0.5
+  colorStart 1 1 1
+  colorEnd 1 1 1
+  alphaStart 0.4
+  alphaEnd 0.33
+  sizeStart 0.6
+  sizeEnd 4
+  sizeStart_y 0
+  sizeEnd_y 0
+  birthrate 8
+  lifeExp 1.6
+  mass 0.4
+  spread 1.0472
+  particleRot 0.3
+  velocity 1.8
+  randvel 0.05
+  bounce_co 0.9
+  blurlength 10
+  loop 0
+  bounce 1
+  m_isTinted 0
+  splat 0
+  affectedByWind false
+  texture fxpa_splash
+  twosidedtex 0
+  xgrid 1
+  ygrid 1
+  fps 0
+  frameStart 0
+  frameEnd 64
+  random 0
+  lightningDelay 0
+  lightningRadius 0
+  lightningSubDiv 0
+  lightningScale 0
+  blastRadius 0
+  blastLength 0
+  p2p 0
+  p2p_type Bezier
+  p2p_sel 1
+  p2p_bezier2 0
+  p2p_bezier3 0
+  grav 0
+  drag 0
+endnode
+node emitter waterfall07
+  parent wsf41_e02_44a
+  position 0.570446 -0.239361 -0.368396
+  orientation 0 0 -1 -3.10669
+  wirecolor 0.0313726 0.0313726 0.0313726
+  update_sel 1
+  update Fountain
+  render_sel 1
+  render Normal
+  blend_sel 3
+  blend Lighten
+  spawntype_sel 0
+  spawntype 0
+  xsize 0
+  ysize 0
+  inherit 1
+  inherit_local 0
+  inheritvel 0
+  inherit_part 0
+  renderorder 0
+  threshold 0
+  combinetime 0
+  deadspace 0
+  opacity 0.5
+  colorStart 1 1 1
+  colorEnd 1 1 1
+  alphaStart 0.4
+  alphaEnd 0.33
+  sizeStart 0.6
+  sizeEnd 4
+  sizeStart_y 0
+  sizeEnd_y 0
+  birthrate 8
+  lifeExp 1.6
+  mass 0.4
+  spread 1.0472
+  particleRot 0.3
+  velocity 1.8
+  randvel 0.05
+  bounce_co 0.9
+  blurlength 10
+  loop 0
+  bounce 1
+  m_isTinted 0
+  splat 0
+  affectedByWind false
+  texture fxpa_splash
+  twosidedtex 0
+  xgrid 1
+  ygrid 1
+  fps 0
+  frameStart 6
+  frameEnd 33
+  random 0
+  lightningDelay 0
+  lightningRadius 0
+  lightningSubDiv 0
+  lightningScale 0
+  blastRadius 0
+  blastLength 0
+  p2p 0
+  p2p_type Bezier
+  p2p_sel 1
+  p2p_bezier2 0
+  p2p_bezier3 0
+  grav 0
+  drag 0
+endnode
+node emitter waterfall06
+  parent wsf41_e02_44a
+  position 2.898 0.399969 0.625206
+  orientation 0 0 -1 -3.10669
+  wirecolor 0.0313726 0.0313726 0.0313726
+  update_sel 1
+  update Fountain
+  render_sel 1
+  render Normal
+  blend_sel 3
+  blend Lighten
+  spawntype_sel 0
+  spawntype 0
+  xsize 0
+  ysize 0
+  inherit 1
+  inherit_local 0
+  inheritvel 0
+  inherit_part 0
+  renderorder 0
+  threshold 0
+  combinetime 0
+  deadspace 0
+  opacity 0.5
+  colorStart 1 1 1
+  colorEnd 1 1 1
+  alphaStart 0.4
+  alphaEnd 0.33
+  sizeStart 0.6
+  sizeEnd 4
+  sizeStart_y 0
+  sizeEnd_y 0
+  birthrate 8
+  lifeExp 1.6
+  mass 0.4
+  spread 1.0472
+  particleRot 0.3
+  velocity 1.8
+  randvel 0.05
+  bounce_co 0.9
+  blurlength 10
+  loop 0
+  bounce 1
+  m_isTinted 0
+  splat 0
+  affectedByWind false
+  texture fxpa_splash
+  twosidedtex 0
+  xgrid 1
+  ygrid 1
+  fps 0
+  frameStart 0
+  frameEnd 64
+  random 0
+  lightningDelay 0
+  lightningRadius 0
+  lightningSubDiv 0
+  lightningScale 0
+  blastRadius 0
+  blastLength 0
+  p2p 0
+  p2p_type Bezier
+  p2p_sel 1
+  p2p_bezier2 0
+  p2p_bezier3 0
+  grav 0
+  drag 0
+endnode
+node emitter waterfall05
+  parent wsf41_e02_44a
+  position 0.685668 2.65316 0.920291
+  orientation 0 0 -1 -3.10669
+  wirecolor 0.0313726 0.0313726 0.0313726
+  update_sel 1
+  update Fountain
+  render_sel 1
+  render Normal
+  blend_sel 3
+  blend Lighten
+  spawntype_sel 0
+  spawntype 0
+  xsize 0
+  ysize 0
+  inherit 1
+  inherit_local 0
+  inheritvel 0
+  inherit_part 0
+  renderorder 0
+  threshold 0
+  combinetime 0
+  deadspace 0
+  opacity 0.5
+  colorStart 1 1 1
+  colorEnd 1 1 1
+  alphaStart 0.4
+  alphaEnd 0.33
+  sizeStart 0.6
+  sizeEnd 4
+  sizeStart_y 0
+  sizeEnd_y 0
+  birthrate 8
+  lifeExp 1.6
+  mass 0.4
+  spread 1.0472
+  particleRot 0.3
+  velocity 1.8
+  randvel 0.05
+  bounce_co 0.9
+  blurlength 10
+  loop 0
+  bounce 1
+  m_isTinted 0
+  splat 0
+  affectedByWind false
+  texture fxpa_splash
+  twosidedtex 0
+  xgrid 1
+  ygrid 1
+  fps 0
+  frameStart 0
+  frameEnd 64
+  random 0
+  lightningDelay 0
+  lightningRadius 0
+  lightningSubDiv 0
+  lightningScale 0
+  blastRadius 0
+  blastLength 0
+  p2p 0
+  p2p_type Bezier
+  p2p_sel 1
+  p2p_bezier2 0
+  p2p_bezier3 0
+  grav 0
+  drag 0
+endnode
+node emitter waterfall04
+  parent wsf41_e02_44a
+  position 4.37785 -2.249 -0.981252
+  orientation 0 0 -1 -3.10669
+  wirecolor 0.0313726 0.0313726 0.0313726
+  update_sel 1
+  update Fountain
+  render_sel 1
+  render Normal
+  blend_sel 3
+  blend Lighten
+  spawntype_sel 0
+  spawntype 0
+  xsize 0
+  ysize 0
+  inherit 1
+  inherit_local 0
+  inheritvel 0
+  inherit_part 0
+  renderorder 0
+  threshold 0
+  combinetime 0
+  deadspace 0
+  opacity 0.5
+  colorStart 1 1 1
+  colorEnd 1 1 1
+  alphaStart 0.4
+  alphaEnd 0.33
+  sizeStart 0.6
+  sizeEnd 4
+  sizeStart_y 0
+  sizeEnd_y 0
+  birthrate 8
+  lifeExp 1.6
+  mass 0.4
+  spread 1.0472
+  particleRot 0.3
+  velocity 1.8
+  randvel 0.05
+  bounce_co 0.9
+  blurlength 10
+  loop 0
+  bounce 1
+  m_isTinted 0
+  splat 0
+  affectedByWind false
+  texture fxpa_splash
+  twosidedtex 0
+  xgrid 1
+  ygrid 1
+  fps 0
+  frameStart 0
+  frameEnd 64
+  random 0
+  lightningDelay 0
+  lightningRadius 0
+  lightningSubDiv 0
+  lightningScale 0
+  blastRadius 0
+  blastLength 0
+  p2p 0
+  p2p_type Bezier
+  p2p_sel 1
+  p2p_bezier2 0
+  p2p_bezier3 0
+  grav 0
+  drag 0
+endnode
+node emitter waterfall03
+  parent wsf41_e02_44a
+  position 1.23471 -1.56708 -0.966587
+  orientation -0.147753 0.00934428 -0.98898 -3.11021
+  wirecolor 0.0313726 0.0313726 0.0313726
+  update_sel 1
+  update Fountain
+  render_sel 1
+  render Normal
+  blend_sel 3
+  blend Lighten
+  spawntype_sel 0
+  spawntype 0
+  xsize 0
+  ysize 0
+  inherit 1
+  inherit_local 0
+  inheritvel 0
+  inherit_part 0
+  renderorder 0
+  threshold 0
+  combinetime 0
+  deadspace 0
+  opacity 0.5
+  colorStart 1 1 1
+  colorEnd 1 1 1
+  alphaStart 0.4
+  alphaEnd 0.33
+  sizeStart 0.6
+  sizeEnd 4
+  sizeStart_y 0
+  sizeEnd_y 0
+  birthrate 8
+  lifeExp 1.6
+  mass 0.4
+  spread 1.0472
+  particleRot 0.3
+  velocity 1.8
+  randvel 0.05
+  bounce_co 0.9
+  blurlength 10
+  loop 0
+  bounce 1
+  m_isTinted 0
+  splat 0
+  affectedByWind false
+  texture fxpa_splash
+  twosidedtex 0
+  xgrid 1
+  ygrid 1
+  fps 0
+  frameStart 0
+  frameEnd 64
+  random 0
+  lightningDelay 0
+  lightningRadius 0
+  lightningSubDiv 0
+  lightningScale 0
+  blastRadius 0
+  blastLength 0
+  p2p 0
+  p2p_type Bezier
+  p2p_sel 1
+  p2p_bezier2 0
+  p2p_bezier3 0
+  grav 0
+  drag 0
+endnode
+node emitter waterfall02
+  parent wsf41_e02_44a
+  position -2.60531 3.84553 -0.993338
+  orientation 0 0 -1 -3.10669
+  wirecolor 0.0313726 0.0313726 0.0313726
+  update_sel 1
+  update Fountain
+  render_sel 1
+  render Normal
+  blend_sel 3
+  blend Lighten
+  spawntype_sel 0
+  spawntype 0
+  xsize 0
+  ysize 0
+  inherit 1
+  inherit_local 0
+  inheritvel 0
+  inherit_part 0
+  renderorder 0
+  threshold 0
+  combinetime 0
+  deadspace 0
+  opacity 0.5
+  colorStart 1 1 1
+  colorEnd 1 1 1
+  alphaStart 0.4
+  alphaEnd 0.33
+  sizeStart 0.6
+  sizeEnd 4
+  sizeStart_y 0
+  sizeEnd_y 0
+  birthrate 8
+  lifeExp 1.6
+  mass 0.4
+  spread 1.0472
+  particleRot 0.3
+  velocity 1.8
+  randvel 0.05
+  bounce_co 0.9
+  blurlength 10
+  loop 0
+  bounce 1
+  m_isTinted 0
+  splat 0
+  affectedByWind false
+  texture fxpa_splash
+  twosidedtex 0
+  xgrid 1
+  ygrid 1
+  fps 0
+  frameStart 0
+  frameEnd 64
+  random 0
+  lightningDelay 0
+  lightningRadius 0
+  lightningSubDiv 0
+  lightningScale 0
+  blastRadius 0
+  blastLength 0
+  p2p 0
+  p2p_type Bezier
+  p2p_sel 1
+  p2p_bezier2 0
+  p2p_bezier3 0
+  grav 0
+  drag 0
+endnode
+node emitter waterfall01
+  parent wsf41_e02_44a
+  position -2.63406 1.50222 -0.993338
+  orientation 0 0 -1 -3.10669
+  wirecolor 0.0313726 0.0313726 0.0313726
+  update_sel 1
+  update Fountain
+  render_sel 1
+  render Normal
+  blend_sel 3
+  blend Lighten
+  spawntype_sel 0
+  spawntype 0
+  xsize 0
+  ysize 0
+  inherit 1
+  inherit_local 0
+  inheritvel 0
+  inherit_part 0
+  renderorder 0
+  threshold 0
+  combinetime 0
+  deadspace 0
+  opacity 0.5
+  colorStart 1 1 1
+  colorEnd 1 1 1
+  alphaStart 0.4
+  alphaEnd 0.33
+  sizeStart 0.6
+  sizeEnd 4
+  sizeStart_y 0
+  sizeEnd_y 0
+  birthrate 8
+  lifeExp 1.6
+  mass 0.4
+  spread 1.0472
+  particleRot 0.3
+  velocity 1.8
+  randvel 0.05
+  bounce_co 0.9
+  blurlength 10
+  loop 0
+  bounce 1
+  m_isTinted 0
+  splat 0
+  affectedByWind false
+  texture fxpa_splash
+  twosidedtex 0
+  xgrid 1
+  ygrid 1
+  fps 0
+  frameStart 6
+  frameEnd 33
+  random 0
+  lightningDelay 0
+  lightningRadius 0
+  lightningSubDiv 0
+  lightningScale 0
+  blastRadius 0
+  blastLength 0
+  p2p 0
+  p2p_type Bezier
+  p2p_sel 1
+  p2p_bezier2 0
+  p2p_bezier3 0
+  grav 0
+  drag 0
+endnode
+node light wsf41_e02_44ml1
+  parent wsf41_e02_44
+  position 0 0 5
+  wirecolor 0.878431 0.878431 0.878431
+  radius 1400
+  multiplier 1
+  color 0 0 0
+  ambientonly 0
+  ndynamictype 0
+  affectdynamic 1
+  shadow 0
+  lightpriority 5
+  fadinglight 1
+  orientation 0 0 0 0
+endnode
+node light wsf41_e02_44ml2
+  parent wsf41_e02_44
+  position 2 2 4
+  wirecolor 0.878431 0.878431 0.878431
+  radius 500
+  multiplier 1
+  color 0 0 0
+  ambientonly 0
+  ndynamictype 0
+  affectdynamic 1
+  shadow 0
+  lightpriority 5
+  fadinglight 1
+  orientation 0 0 0 0
+endnode
+node trimesh dirt03_01_02_01
+  parent wsf41_e02_44
+  position 0 0 -0.5
+  orientation 0 0 0 0
+  wirecolor 0.894118 0.894118 0.894118
+  tilefade 0
+  scale 1
+  render 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 1
+  alpha 1
+  transparencyhint 1
+  selfillumcolor 0 0 0
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 10
+  center 0 0 0
+  bitmap wtf_3_grnd2
+  shadow 0
+  verts 25
+    5 5 1.5
+    -5 5 -1.5
+    5 -5 -1.5
+    -5 -5 -1.5
+    1 5 1.5
+    -5 0 -1.5
+    0 0 0
+    1 -5 -1.5
+    5 1 1.5
+    -1.5 2.51 -1.5
+    -1.5 -0.01 -1.5
+    0.01 2.51 0.75
+    2.51 -2.51 -1.5
+    2.51 0.01 0.75
+    1 -2.51 -1.5
+    2.5 5 1.5
+    2.51 2.51 1.5
+    -1.49 5 -1.5
+    -5 2.5 -1.5
+    -5 -2.5 -1.5
+    -1.5 -2.51 -1.5
+    -1.49 -5 -1.5
+    2.5 -5 -1.5
+    5 -1.49 -1.5
+    5 2.5 1.5
+  faces 32
+    9 10 11 1 0 1 2 65536
+    12 13 14 1 3 4 5 65536
+    15 11 16 1 6 2 7 65536
+    17 18 9 1 8 9 0 65536
+    10 19 20 1 1 10 11 65536
+    21 14 20 1 12 5 11 65536
+    22 23 12 1 13 14 3 65536
+    13 24 16 1 4 15 7 65536
+    4 9 11 1 16 0 2 65536
+    9 5 10 1 0 17 1 65536
+    11 10 6 1 2 1 18 65536
+    7 12 14 1 19 3 5 65536
+    12 8 13 1 3 20 4 65536
+    14 13 6 1 5 4 18 65536
+    0 15 16 1 21 6 7 65536
+    15 4 11 1 6 16 2 65536
+    16 11 6 1 7 2 18 65536
+    4 17 9 1 16 8 0 65536
+    17 1 18 1 8 22 9 65536
+    9 18 5 1 0 9 17 65536
+    6 10 20 1 18 1 11 65536
+    10 5 19 1 1 17 10 65536
+    20 19 3 1 11 10 23 65536
+    3 21 20 1 23 12 11 65536
+    21 7 14 1 12 19 5 65536
+    20 14 6 1 11 5 18 65536
+    7 22 12 1 19 13 3 65536
+    22 2 23 1 13 24 14 65536
+    12 23 8 1 3 14 20 65536
+    6 13 16 1 18 4 7 65536
+    13 8 24 1 4 20 15 65536
+    16 24 0 1 7 15 21 65536
+  tverts 25
+    0.750999 0.249001 0
+    0.750999 0.501249 0
+    0.498751 0.249001 0
+    0.249001 0.750999 0
+    0.249001 0.498751 0
+    0.501249 0.750999 0
+    0.25025 0.000499696 0
+    0.249001 0.249001 0
+    0.74975 0.000499577 0
+    0.9995 0.25025 0
+    0.999501 0.74975 0
+    0.750999 0.750999 0
+    0.749751 0.9995 0
+    0.25025 0.999501 0
+    0.000499696 0.749751 0
+    0.000499577 0.25025 0
+    0.5 0.000499636 0
+    0.999501 0.5 0
+    0.5 0.5 0
+    0.5 0.999501 0
+    0.000499636 0.5 0
+    0.000499517 0.000499755 0
+    0.9995 0.000499517 0
+    0.999501 0.9995 0
+    0.000499755 0.999501 0
+endnode
+node trimesh sphere02_01
+  parent wsf41_e02_44
+  position 2.56 2.59 0.42
+  orientation 0 0 0 0
+  wirecolor 0.341176 0.341176 0.341176
+  tilefade 0
+  scale 1
+  render 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1
+  transparencyhint 0
+  selfillumcolor 0 0 0
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 10
+  center 0 0 0
+  bitmap wtf_cliifedstr
+  shadow 0
+  verts 59
+    0.85 0.49 1.4
+    0.27 -0.75 1.26
+    0.72 -0.51 1.26
+    1.41 -0.15 1.26
+    1.64 0.27 1.26
+    1.65 0.71 1.14
+    1.88 1.1 1.03
+    1.67 1.27 1.15
+    1.5 1.4 1.22
+    1.3 1.44 1.18
+    0.83 1.39 1.21
+    0.35 1.15 1.22
+    -0.14 0.63 1.26
+    -0.53 0.2 1.26
+    -0.38 -0.2 1.26
+    -0.14 -0.39 1.26
+    -0.11 -0.63 1.26
+    -0.77 -1.77 0.64
+    0.19 -1.6 0.64
+    1.1 -1.29 0.64
+    1.65 -0.7 0.64
+    2.41 0.14 0.64
+    2.27 0.84 0.64
+    1.59 1.57 0.64
+    0.79 2.13 0.64
+    0.15 2.27 0.64
+    -0.75 1.82 0.64
+    -1.27 1.33 0.64
+    -1.46 0.54 0.64
+    -1.64 -0.32 0.64
+    -2.09 -1 0.64
+    -1.76 -1.53 0.64
+    -1.35 -1.92 0.64
+    -0.83 -2.2 -0.29
+    0.33 -2.05 -0.3
+    1.46 -1.53 -0.3
+    2.44 -0.75 -0.3
+    2.42 2.2 -0.3
+    -1.32 1.72 -0.3
+    -1.78 0.73 -0.3
+    -1.88 -0.35 -0.29
+    -2.44 -1.29 -0.29
+    -2.28 -2.01 -0.29
+    -1.69 -2.38 -0.29
+    0.13 -2.23 -1.38
+    1.3 -2.4 -1.4
+    -2.28 1.26 -1.4
+    -1.73 0.13 -1.38
+    -2 -0.93 -1.38
+    -1.25 -1.57 -1.38
+    -0.89 -2.26 -1.38
+    1.04 2.41 0.26
+    2.08 2.41 -0.3
+    -0.64 2.41 -0.18
+    0.24 2.41 0.48
+    -0.7 2.41 -0.3
+    2.44 0.15 0.6
+    2.44 2.17 -0.3
+    2.44 0.93 0.45
+  faces 95
+    0 1 2 1 0 1 2 1
+    0 2 3 1 0 2 3 1
+    0 3 4 1 0 3 4 1
+    0 4 5 1 0 4 5 1
+    0 5 6 1 0 5 6 1
+    0 6 7 1 0 6 7 1
+    0 7 8 1 0 7 8 1
+    0 8 9 1 0 8 9 1
+    0 9 10 1 0 9 10 1
+    0 10 11 1 0 10 11 1
+    0 11 12 1 0 11 12 1
+    0 12 13 1 0 12 13 1
+    0 13 14 1 0 13 14 1
+    0 14 15 1 0 14 15 1
+    0 15 16 1 0 15 16 1
+    0 16 1 1 0 16 1 1
+    18 2 1 1 18 2 1 1
+    1 17 18 1 1 17 18 1
+    19 3 2 1 19 3 2 1
+    2 18 19 1 2 18 19 1
+    20 4 3 1 20 4 3 1
+    3 19 20 1 3 19 20 1
+    21 5 4 1 21 5 4 1
+    4 20 21 1 4 20 21 1
+    22 6 5 1 22 6 5 1
+    5 21 22 1 5 21 22 1
+    23 7 6 1 23 7 6 1
+    6 22 23 1 6 22 23 1
+    24 8 7 1 24 8 7 1
+    7 23 24 1 7 23 24 1
+    25 9 8 1 25 9 8 1
+    8 24 25 1 8 24 25 1
+    26 10 9 1 26 10 9 1
+    9 25 26 1 9 25 26 1
+    27 11 10 1 27 11 10 1
+    10 26 27 1 10 26 27 1
+    28 12 11 1 28 12 11 1
+    11 27 28 1 11 27 28 1
+    29 13 12 1 29 13 12 1
+    12 28 29 1 12 28 29 1
+    30 14 13 1 30 14 13 1
+    13 29 30 1 13 29 30 1
+    31 15 14 1 31 15 14 1
+    14 30 31 1 14 30 31 1
+    32 16 15 1 32 16 15 1
+    15 31 32 1 15 31 32 1
+    17 1 16 1 17 1 16 1
+    16 32 17 1 16 32 17 1
+    34 18 17 1 34 18 17 1
+    17 33 34 1 17 33 34 1
+    35 19 18 1 35 19 18 1
+    18 34 35 1 18 34 35 1
+    36 20 19 1 36 20 19 1
+    19 35 36 1 19 35 36 1
+    56 58 22 1 56 59 22 1
+    22 21 56 1 22 21 56 1
+    51 54 25 1 51 54 25 1
+    25 24 51 1 25 24 51 1
+    53 55 38 1 53 55 38 1
+    26 53 38 1 26 53 38 1
+    26 38 27 1 26 38 27 1
+    39 28 27 1 39 28 27 1
+    27 38 39 1 27 38 39 1
+    40 29 28 1 40 29 28 1
+    28 39 40 1 28 39 40 1
+    41 30 29 1 41 30 29 1
+    29 40 41 1 29 40 41 1
+    42 31 30 1 42 31 30 1
+    30 41 42 1 30 41 42 1
+    43 32 31 1 43 32 31 1
+    31 42 43 1 31 42 43 1
+    33 17 32 1 33 17 32 1
+    32 43 33 1 32 43 33 1
+    45 34 33 1 45 34 33 1
+    33 44 45 1 33 44 45 1
+    47 40 39 1 47 40 39 1
+    39 46 47 1 39 46 47 1
+    48 41 40 1 48 41 40 1
+    40 47 48 1 40 47 48 1
+    49 42 41 1 49 42 41 1
+    41 48 49 1 41 48 49 1
+    50 43 42 1 50 43 42 1
+    42 49 50 1 42 49 50 1
+    44 33 43 1 44 33 43 1
+    43 50 44 1 43 50 44 1
+    23 37 52 1 23 37 52 1
+    24 23 52 1 24 23 52 1
+    51 24 52 1 51 24 52 1
+    53 26 25 1 53 26 25 1
+    25 54 53 1 25 54 53 1
+    21 20 36 1 21 20 57 1
+    56 21 36 1 56 21 57 1
+    23 22 58 1 23 22 59 1
+    37 23 58 1 37 23 59 1
+    57 37 58 1 58 37 59 1
+  tverts 60
+    0.404742 0.454086 0
+    0.495286 0.664597 0
+    0.424713 0.62406 0
+    0.318446 0.562396 0
+    0.281774 0.491888 0
+    0.280289 0.416579 0
+    0.24487 0.349803 0
+    0.278561 0.321021 0
+    0.304244 0.299911 0
+    0.336049 0.293311 0
+    0.408917 0.301188 0
+    0.482898 0.341333 0
+    0.558982 0.42947 0
+    0.620281 0.503526 0
+    0.595886 0.571555 0
+    0.558857 0.603871 0
+    0.554822 0.644211 0
+    0.65685 0.836913 0
+    0.50756 0.808962 0
+    0.36623 0.75536 0
+    0.281407 0.656087 0
+    0.163527 0.513797 0
+    0.184066 0.393549 0
+    0.290171 0.270251 0
+    0.414077 0.175137 0
+    0.514098 0.150866 0
+    0.654488 0.228287 0
+    0.734392 0.311781 0
+    0.76447 0.444593 0
+    0.791751 0.591743 0
+    0.861811 0.707132 0
+    0.810451 0.796889 0
+    0.747972 0.862111 0
+    0.666133 0.909804 0
+    0.48633 0.884295 0
+    0.310642 0.796825 0
+    0.158194 0.66477 0
+    0.161839 0.163 0
+    0.742242 0.24425 0
+    0.813472 0.41288 0
+    0.828951 0.596812 0
+    0.916528 0.755903 0
+    0.891045 0.878074 0
+    0.800442 0.940565 0
+    0.516674 0.91572 0
+    0.335013 0.944504 0
+    0.892502 0.323192 0
+    0.80597 0.515204 0
+    0.848237 0.694477 0
+    0.731494 0.804012 0
+    0.675006 0.920335 0
+    0.376437 0.127825 0
+    0.213724 0.127825 0
+    0.636321 0.127825 0
+    0.500428 0.127825 0
+    0.646231 0.127825 0
+    0.158097 0.512241 0
+    0.158097 0.664643 0
+    0.158096 0.168568 0
+    0.158096 0.379086 0
+endnode
+node trimesh sphere02_02_01
+  parent wsf41_e02_44
+  position -0.87 2.44 -0.69
+  orientation 0 0 0 0
+  wirecolor 0.603922 0.603922 0.603922
+  tilefade 0
+  scale 1
+  render 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1
+  transparencyhint 0
+  selfillumcolor 0 0 0
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 10
+  center 0.000495911 -0.00050354 0
+  bitmap wtf_cliifedstr
+  shadow 0
+  verts 19
+    -1.13 2.56 -1.81
+    -0.64 0.46 -0.1
+    -1.71 0.84 -1.82
+    1.19 1.29 1.82
+    -1.33 1.59 0.27
+    1.33 0.52 0.15
+    1 -1.03 0.31
+    -0.13 2.56 0.19
+    -0.13 -0.61 0.8
+    -0.74 -0.9 0.2
+    -0.95 1.98 0.67
+    1.87 2.56 1.19
+    2.3 -0.11 1.63
+    0.65 0.96 0.38
+    -0.63 2.56 -0.81
+    -2.31 0.2 -1.81
+    1.2 -0.49 0.54
+    -0.56 -2.55 -1.81
+    -2.08 -1.37 -1.39
+  faces 23
+    7 10 3 1 0 1 2 1
+    9 8 1 1 3 4 5 1
+    11 7 3 1 6 0 2 1
+    4 2 1 1 7 8 5 1
+    6 8 9 1 9 4 3 1
+    11 3 12 1 6 2 10 1
+    10 13 3 1 1 11 2 1
+    14 10 7 1 12 13 14 1
+    0 2 4 1 15 8 7 1
+    3 13 5 1 2 11 16 1
+    13 8 5 1 11 17 16 1
+    6 16 8 1 18 19 17 1
+    6 9 15 1 9 3 20 1
+    9 1 2 1 3 5 8 1
+    14 4 10 1 21 22 23 1
+    4 13 10 1 24 11 1 1
+    3 5 12 1 2 16 10 1
+    4 1 13 1 24 25 11 1
+    1 8 13 1 25 17 11 1
+    14 0 4 1 21 26 22 1
+    15 9 2 1 20 3 8 1
+    18 17 6 1 27 28 9 1
+    15 18 6 1 20 27 9 1
+  tverts 29
+    0.547838 0.9995 0
+    0.628928 0.915782 0
+    0.292315 0.7764 0
+    0.333591 1.84569 0
+    0.375475 1.95903 0
+    0.608738 1.92129 0
+    0.000499815 0.999501 0
+    0.837001 1.69779 0
+    0.685499 0.980654 0
+    0.103732 1.72391 0
+    0.000499636 0.494494 0
+    0.4702 0.659239 0
+    0.9995 0.273826 0
+    0.915782 0.703592 0
+    0.9995 0.564096 0
+    0.9995 0.983557 0
+    0.349786 0.396636 0
+    0.530974 0.375475 0
+    0.533144 0.103732 0
+    0.333365 0.144133 0
+    0.555761 0.983557 0
+    0.315328 1.27383 0
+    0.201397 1.69779 0
+    0.371072 1.70359 0
+    0.798603 0.837001 0
+    0.544091 0.608738 0
+    0.178493 0.983557 0
+    0.313309 1.08771 0
+    0.000499547 0.983557 0
+endnode
+node trimesh sphere03_01
+  parent wsf41_e02_44
+  position 2.53 -0.83 -0.75
+  orientation 0 0 0 0
+  wirecolor 0.0313726 0.0313726 0.0313726
+  tilefade 0
+  scale 1
+  render 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1
+  transparencyhint 0
+  selfillumcolor 0 0 0
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 10
+  center 0.00050354 0.000999451 0
+  bitmap wtf_cliifedstr
+  shadow 0
+  verts 23
+    -2.18 0.84 -0.93
+    2.47 -1.17 -1.75
+    0.54 -0.16 1.48
+    0.92 -1.23 -1.76
+    -1.22 0.94 1.73
+    1.37 0.76 1.17
+    1.67 -1.09 0.71
+    -1.53 1.83 1.75
+    -0.51 0.55 1.61
+    -1.96 -0.12 -0.31
+    2.47 -0.17 0.25
+    -0.62 -0.11 1.61
+    -0.83 -0.26 1.22
+    2.06 -0.47 0.73
+    2.47 1.83 1.25
+    -0.03 1.83 1.25
+    0.79 0.11 1.53
+    2.47 -0.67 -0.75
+    0.27 -1.82 -1.75
+    -1.76 0.61 -0.03
+    -1.64 1.43 1.05
+    -2.48 -0.08 -1.75
+    -1.29 -1.59 -1.33
+  faces 30
+    13 10 5 1 0 1 2 1
+    8 7 20 1 3 4 5 1
+    11 12 2 1 6 7 8 1
+    10 14 5 1 1 9 2 1
+    3 6 2 1 10 11 8 1
+    11 9 12 1 6 12 7 1
+    5 14 15 1 2 9 13 1
+    16 13 5 1 14 0 2 1
+    13 17 10 1 15 16 17 1
+    3 1 6 1 10 18 11 1
+    16 5 8 1 14 2 3 1
+    11 16 8 1 19 14 3 1
+    19 9 11 1 20 21 19 1
+    11 4 19 1 19 22 20 1
+    11 8 4 1 19 3 22 1
+    12 9 18 1 7 12 23 1
+    2 12 3 1 8 7 10 1
+    6 17 13 1 24 25 26 1
+    16 6 13 1 14 27 0 1
+    8 15 7 1 3 13 4 1
+    8 5 15 1 3 2 13 1
+    2 6 16 1 28 27 14 1
+    11 2 16 1 19 28 14 1
+    1 17 6 1 29 25 24 1
+    12 18 3 1 7 23 10 1
+    4 0 19 1 22 30 20 1
+    4 20 0 1 22 5 30 1
+    8 20 4 1 31 32 33 1
+    21 22 18 1 34 35 36 1
+    18 9 21 1 23 12 37 1
+  tverts 38
+    0.628928 0.915782 0
+    0.547838 0.9995 0
+    0.292315 0.7764 0
+    0.349786 0.396636 0
+    0.000499547 0.191491 0
+    0.108957 0.168373 0
+    0.375475 1.95903 0
+    0.333591 1.84569 0
+    0.608738 1.92129 0
+    0.000499815 0.999501 0
+    0.685499 0.980654 0
+    0.837001 1.69779 0
+    0.103732 1.72391 0
+    0.000499636 0.494494 0
+    0.4702 0.659239 0
+    0.915782 0.703592 0
+    0.9995 0.273826 0
+    0.9995 0.564096 0
+    0.9995 0.983557 0
+    0.530974 0.375475 0
+    0.333365 0.144133 0
+    0.533144 0.103732 0
+    0.243055 0.253214 0
+    0.555761 0.983557 0
+    0.201397 1.69779 0
+    0.315328 1.27383 0
+    0.371072 1.70359 0
+    0.798603 0.837001 0
+    0.544091 0.608738 0
+    0.178493 0.983557 0
+    0.270421 0.0592917 0
+    0.603364 0.959029 0
+    0.831627 0.915489 0
+    0.746786 0.993862 0
+    0.522088 0.000499547 0
+    0.937431 0.239613 0
+    0.999501 0.555761 0
+    0.000499547 0.983557 0
+endnode
+node aabb wmesh_01
+  parent wsf41_e02_44
+  wirecolor 0.776471 0.776471 0.776471
+  bitmap NULL
+  orientation 0 0 0 0
+  position 0 0 0
+  verts 121
+    5 5 1.00166
+    4 5 1.00166
+    3 5 1.00166
+    2 5 1.00166
+    1 5 1.00166
+    0 5 -1.99834
+    -1 5 -1.99834
+    -2 5 -1.99834
+    -3 5 -1.99834
+    -4 5 -1.99834
+    -5 5 -1.99834
+    5 4 1.00166
+    4 4 1.64166
+    3 4 1.53166
+    2 4 1.23166
+    1 4 1.00166
+    0 4 -1.99834
+    -1 4 -1.99834
+    -2 4 -1.99834
+    -3 4 -1.99834
+    -4 4 -1.99834
+    -5 4 -1.99834
+    5 3 1.00166
+    4 3 1.74166
+    3 3 1.84166
+    2 3 1.50166
+    1 3 1.00166
+    0 3 -1.99834
+    -1 3 -1.99834
+    -2 3 -1.99834
+    -3 3 -1.99834
+    -4 3 -1.99834
+    -5 3 -1.99834
+    5 2 1.00166
+    4 2 1.18166
+    3 2 1.68166
+    2 1.93 1.55166
+    1 2 1.00166
+    0 2 -1.99834
+    -1 2 -1.99834
+    -2 2 -1.99834
+    -3 2 -1.99834
+    -4 2 -1.99834
+    -5 2 -1.99834
+    5 1 1.00166
+    4 1 1.00166
+    3 1 1.00166
+    2 1 1.00166
+    1 1 1.00166
+    0 1 -1.99834
+    -1 1 -1.99834
+    -2 1 -1.99834
+    -3 1 -1.99834
+    -4 1 -1.99834
+    -5 1 -1.99834
+    5 0 -1.99834
+    4 0 -1.99834
+    3 0 -1.99834
+    2 0 -1.99834
+    1 0 -1.99834
+    0 0 -1.99834
+    -1 0 -1.99834
+    -2 0 -1.99834
+    -3 0 -1.99834
+    -4 0 -1.99834
+    -5 0 -1.99834
+    5 -1 -1.99834
+    4 -1 -1.99834
+    3 -1 -1.99834
+    2 -1 -1.99834
+    1 -1 -1.99834
+    0 -1 -1.99834
+    -1 -1 -1.99834
+    -2 -1 -1.99834
+    -3 -1 -1.99834
+    -4 -1 -1.99834
+    -5 -1 -1.99834
+    5 -2 -1.99834
+    4 -2 -1.99834
+    3 -2 -1.99834
+    2 -2 -1.99834
+    1 -2 -1.99834
+    0 -2 -1.99834
+    -1 -2 -1.99834
+    -2 -2 -1.99834
+    -3 -2 -1.99834
+    -4 -2 -1.99834
+    -5 -2 -1.99834
+    5 -3 -1.99834
+    4 -3 -1.99834
+    3 -3 -1.99834
+    2 -3 -1.99834
+    1 -3 -1.99834
+    0 -3 -1.99834
+    -1 -3 -1.99834
+    -2 -3 -1.99834
+    -3 -3 -1.99834
+    -4 -3 -1.99834
+    -5 -3 -1.99834
+    5 -4 -1.99834
+    4 -4 -1.99834
+    3 -4 -1.99834
+    2 -4 -1.99834
+    1 -4 -1.99834
+    0 -4 -1.99834
+    -1 -4 -1.99834
+    -2 -4 -1.99834
+    -3 -4 -1.99834
+    -4 -4 -1.99834
+    -5 -4 -1.99834
+    5 -5 -1.99834
+    4 -5 -1.99834
+    3 -5 -1.99834
+    2 -5 -1.99834
+    1 -5 -1.99834
+    0 -5 -1.99834
+    -1 -5 -1.99834
+    -2 -5 -1.99834
+    -3 -5 -1.99834
+    -4 -5 -1.99834
+    -5 -5 -1.99834
+  faces 200
+    0 1 12 1 0 0 0 6
+    12 11 0 2 0 0 0 6
+    1 2 13 1 0 0 0 6
+    13 12 1 1 0 0 0 6
+    2 3 14 2 0 0 0 6
+    14 13 2 4 0 0 0 6
+    3 4 15 1 0 0 0 7
+    15 14 3 8 0 0 0 7
+    4 5 16 2 0 0 0 7
+    16 15 4 2 0 0 0 7
+    5 6 17 1 0 0 0 7
+    17 16 5 1 0 0 0 7
+    6 7 18 1 0 0 0 7
+    18 17 6 1 0 0 0 7
+    7 8 19 1 0 0 0 7
+    19 18 7 1 0 0 0 7
+    8 9 20 1 0 0 0 6
+    20 19 8 1 0 0 0 6
+    9 10 21 1 0 0 0 6
+    21 20 9 1 0 0 0 6
+    11 12 23 2 0 0 0 6
+    23 22 11 2 0 0 0 6
+    12 13 24 8 0 0 0 6
+    24 23 12 4 0 0 0 6
+    13 14 25 16 0 0 0 6
+    25 24 13 16 0 0 0 6
+    14 15 26 32 0 0 0 7
+    26 25 14 16 0 0 0 7
+    15 16 27 2 0 0 0 7
+    27 26 15 2 0 0 0 7
+    16 17 28 1 0 0 0 7
+    28 27 16 1 0 0 0 7
+    17 18 29 1 0 0 0 7
+    29 28 17 1 0 0 0 7
+    18 19 30 1 0 0 0 7
+    30 29 18 1 0 0 0 7
+    19 20 31 1 0 0 0 6
+    31 30 19 1 0 0 0 6
+    20 21 32 1 0 0 0 6
+    32 31 20 1 0 0 0 6
+    22 23 34 1 0 0 0 6
+    34 33 22 4 0 0 0 6
+    23 24 35 32 0 0 0 6
+    35 34 23 1 0 0 0 6
+    24 25 36 1 0 0 0 6
+    36 35 24 2 0 0 0 6
+    25 26 37 4 0 0 0 7
+    37 36 25 4 0 0 0 7
+    26 27 38 2 0 0 0 7
+    38 37 26 2 0 0 0 7
+    27 28 39 1 0 0 0 7
+    39 38 27 1 0 0 0 7
+    28 29 40 1 0 0 0 7
+    40 39 28 1 0 0 0 7
+    29 30 41 1 0 0 0 7
+    41 40 29 1 0 0 0 7
+    30 31 42 1 0 0 0 6
+    42 41 30 1 0 0 0 6
+    31 32 43 1 0 0 0 6
+    43 42 31 1 0 0 0 6
+    33 34 45 2 0 0 0 7
+    45 44 33 1 0 0 0 7
+    34 35 46 1 0 0 0 7
+    46 45 34 8 0 0 0 7
+    35 36 47 16 0 0 0 7
+    47 46 35 16 0 0 0 7
+    36 37 48 4 0 0 0 7
+    48 47 36 16 0 0 0 7
+    37 38 49 2 0 0 0 7
+    49 48 37 2 0 0 0 7
+    38 39 50 1 0 0 0 7
+    50 49 38 1 0 0 0 7
+    39 40 51 1 0 0 0 7
+    51 50 39 1 0 0 0 7
+    40 41 52 1 0 0 0 7
+    52 51 40 1 0 0 0 7
+    41 42 53 1 0 0 0 6
+    53 52 41 1 0 0 0 6
+    42 43 54 1 0 0 0 6
+    54 53 42 1 0 0 0 6
+    44 45 56 32 0 0 0 7
+    56 55 44 32 0 0 0 7
+    45 46 57 32 0 0 0 7
+    57 56 45 32 0 0 0 7
+    46 47 58 32 0 0 0 7
+    58 57 46 32 0 0 0 7
+    47 48 59 32 0 0 0 7
+    59 58 47 32 0 0 0 7
+    48 49 60 2 0 0 0 7
+    60 59 48 32 0 0 0 7
+    49 50 61 1 0 0 0 7
+    61 60 49 1 0 0 0 7
+    50 51 62 1 0 0 0 7
+    62 61 50 1 0 0 0 7
+    51 52 63 1 0 0 0 7
+    63 62 51 1 0 0 0 7
+    52 53 64 1 0 0 0 6
+    64 63 52 1 0 0 0 6
+    53 54 65 1 0 0 0 6
+    65 64 53 1 0 0 0 6
+    55 56 67 1 0 0 0 7
+    67 66 55 1 0 0 0 7
+    56 57 68 1 0 0 0 7
+    68 67 56 1 0 0 0 7
+    57 58 69 1 0 0 0 7
+    69 68 57 1 0 0 0 7
+    58 59 70 1 0 0 0 7
+    70 69 58 1 0 0 0 7
+    59 60 71 1 0 0 0 7
+    71 70 59 1 0 0 0 7
+    60 61 72 1 0 0 0 7
+    72 71 60 1 0 0 0 7
+    61 62 73 1 0 0 0 7
+    73 72 61 1 0 0 0 7
+    62 63 74 1 0 0 0 7
+    74 73 62 1 0 0 0 7
+    63 64 75 1 0 0 0 6
+    75 74 63 1 0 0 0 6
+    64 65 76 1 0 0 0 6
+    76 75 64 1 0 0 0 6
+    66 67 78 1 0 0 0 7
+    78 77 66 1 0 0 0 7
+    67 68 79 1 0 0 0 7
+    79 78 67 1 0 0 0 7
+    68 69 80 1 0 0 0 7
+    80 79 68 1 0 0 0 7
+    69 70 81 1 0 0 0 7
+    81 80 69 1 0 0 0 7
+    70 71 82 1 0 0 0 7
+    82 81 70 1 0 0 0 7
+    71 72 83 1 0 0 0 7
+    83 82 71 1 0 0 0 7
+    72 73 84 1 0 0 0 7
+    84 83 72 1 0 0 0 7
+    73 74 85 1 0 0 0 7
+    85 84 73 1 0 0 0 7
+    74 75 86 1 0 0 0 6
+    86 85 74 1 0 0 0 6
+    75 76 87 1 0 0 0 6
+    87 86 75 1 0 0 0 6
+    77 78 89 1 0 0 0 7
+    89 88 77 1 0 0 0 7
+    78 79 90 1 0 0 0 7
+    90 89 78 1 0 0 0 7
+    79 80 91 1 0 0 0 7
+    91 90 79 1 0 0 0 7
+    80 81 92 1 0 0 0 7
+    92 91 80 1 0 0 0 7
+    81 82 93 1 0 0 0 7
+    93 92 81 1 0 0 0 7
+    82 83 94 1 0 0 0 7
+    94 93 82 1 0 0 0 7
+    83 84 95 1 0 0 0 7
+    95 94 83 1 0 0 0 7
+    84 85 96 1 0 0 0 7
+    96 95 84 1 0 0 0 7
+    85 86 97 1 0 0 0 6
+    97 96 85 1 0 0 0 6
+    86 87 98 1 0 0 0 6
+    98 97 86 1 0 0 0 6
+    88 89 100 1 0 0 0 6
+    100 99 88 1 0 0 0 6
+    89 90 101 1 0 0 0 6
+    101 100 89 1 0 0 0 6
+    90 91 102 1 0 0 0 6
+    102 101 90 1 0 0 0 6
+    91 92 103 1 0 0 0 6
+    103 102 91 1 0 0 0 6
+    92 93 104 1 0 0 0 6
+    104 103 92 1 0 0 0 6
+    93 94 105 1 0 0 0 6
+    105 104 93 1 0 0 0 6
+    94 95 106 1 0 0 0 6
+    106 105 94 1 0 0 0 6
+    95 96 107 1 0 0 0 6
+    107 106 95 1 0 0 0 6
+    96 97 108 1 0 0 0 6
+    108 107 96 1 0 0 0 6
+    97 98 109 1 0 0 0 6
+    109 108 97 1 0 0 0 6
+    99 100 111 1 0 0 0 6
+    111 110 99 1 0 0 0 6
+    100 101 112 1 0 0 0 6
+    112 111 100 1 0 0 0 6
+    101 102 113 1 0 0 0 6
+    113 112 101 1 0 0 0 6
+    102 103 114 1 0 0 0 6
+    114 113 102 1 0 0 0 6
+    103 104 115 1 0 0 0 6
+    115 114 103 1 0 0 0 6
+    104 105 116 1 0 0 0 6
+    116 115 104 1 0 0 0 6
+    105 106 117 1 0 0 0 6
+    117 116 105 1 0 0 0 6
+    106 107 118 1 0 0 0 6
+    118 117 106 1 0 0 0 6
+    107 108 119 1 0 0 0 6
+    119 118 107 1 0 0 0 6
+    108 109 120 1 0 0 0 6
+    120 119 108 1 0 0 0 6
+  aabb     -5 -5 -1.99834 5 5 1.84166 -1
+    -5 -5 -1.99834 0 5 -1.99834 -1
+    -5 -5 -1.99834 0 0 -1.99834 -1
+    -5 -5 -1.99834 -2 0 -1.99834 -1
+    -5 -5 -1.99834 -2 -2 -1.99834 -1
+    -5 -5 -1.99834 -4 -2 -1.99834 -1
+    -5 -5 -1.99834 -4 -4 -1.99834 -1
+    -5 -5 -1.99834 -4 -4 -1.99834 198
+    -5 -5 -1.99834 -4 -4 -1.99834 199
+    -5 -4 -1.99834 -4 -2 -1.99834 -1
+    -5 -4 -1.99834 -4 -3 -1.99834 -1
+    -5 -4 -1.99834 -4 -3 -1.99834 178
+    -5 -4 -1.99834 -4 -3 -1.99834 179
+    -5 -3 -1.99834 -4 -2 -1.99834 159
+    -4 -5 -1.99834 -2 -2 -1.99834 -1
+    -4 -5 -1.99834 -2 -4 -1.99834 -1
+    -4 -5 -1.99834 -3 -4 -1.99834 -1
+    -4 -5 -1.99834 -3 -4 -1.99834 196
+    -4 -5 -1.99834 -3 -4 -1.99834 197
+    -3 -5 -1.99834 -2 -4 -1.99834 194
+    -4 -4 -1.99834 -2 -2 -1.99834 -1
+    -4 -4 -1.99834 -3 -2 -1.99834 -1
+    -4 -4 -1.99834 -3 -3 -1.99834 -1
+    -4 -4 -1.99834 -3 -3 -1.99834 176
+    -4 -4 -1.99834 -3 -3 -1.99834 177
+    -4 -3 -1.99834 -3 -2 -1.99834 157
+    -3 -4 -1.99834 -2 -3 -1.99834 174
+    -5 -3 -1.99834 -2 0 -1.99834 -1
+    -5 -3 -1.99834 -4 0 -1.99834 -1
+    -5 -3 -1.99834 -4 -1 -1.99834 -1
+    -5 -3 -1.99834 -4 -2 -1.99834 158
+    -5 -2 -1.99834 -4 -1 -1.99834 -1
+    -5 -2 -1.99834 -4 -1 -1.99834 138
+    -5 -2 -1.99834 -4 -1 -1.99834 139
+    -5 -1 -1.99834 -4 0 -1.99834 -1
+    -5 -1 -1.99834 -4 0 -1.99834 118
+    -5 -1 -1.99834 -4 0 -1.99834 119
+    -4 -3 -1.99834 -2 0 -1.99834 -1
+    -4 -3 -1.99834 -2 -1 -1.99834 -1
+    -4 -3 -1.99834 -3 -1 -1.99834 -1
+    -4 -3 -1.99834 -3 -2 -1.99834 156
+    -4 -2 -1.99834 -3 -1 -1.99834 -1
+    -4 -2 -1.99834 -3 -1 -1.99834 136
+    -4 -2 -1.99834 -3 -1 -1.99834 137
+    -3 -3 -1.99834 -2 -1 -1.99834 -1
+    -3 -3 -1.99834 -2 -2 -1.99834 154
+    -3 -2 -1.99834 -2 -1 -1.99834 134
+    -4 -1 -1.99834 -2 0 -1.99834 -1
+    -4 -1 -1.99834 -3 0 -1.99834 -1
+    -4 -1 -1.99834 -3 0 -1.99834 116
+    -4 -1 -1.99834 -3 0 -1.99834 117
+    -3 -1 -1.99834 -2 0 -1.99834 114
+    -3 -5 -1.99834 0 0 -1.99834 -1
+    -3 -5 -1.99834 0 -2 -1.99834 -1
+    -3 -5 -1.99834 -1 -2 -1.99834 -1
+    -3 -5 -1.99834 -1 -4 -1.99834 -1
+    -3 -5 -1.99834 -2 -4 -1.99834 195
+    -2 -5 -1.99834 -1 -4 -1.99834 -1
+    -2 -5 -1.99834 -1 -4 -1.99834 192
+    -2 -5 -1.99834 -1 -4 -1.99834 193
+    -3 -4 -1.99834 -1 -2 -1.99834 -1
+    -3 -4 -1.99834 -2 -2 -1.99834 -1
+    -3 -4 -1.99834 -2 -3 -1.99834 175
+    -3 -3 -1.99834 -2 -2 -1.99834 155
+    -2 -4 -1.99834 -1 -2 -1.99834 -1
+    -2 -4 -1.99834 -1 -3 -1.99834 -1
+    -2 -4 -1.99834 -1 -3 -1.99834 172
+    -2 -4 -1.99834 -1 -3 -1.99834 173
+    -2 -3 -1.99834 -1 -2 -1.99834 153
+    -1 -5 -1.99834 0 -2 -1.99834 -1
+    -1 -5 -1.99834 0 -4 -1.99834 -1
+    -1 -5 -1.99834 0 -4 -1.99834 190
+    -1 -5 -1.99834 0 -4 -1.99834 191
+    -1 -4 -1.99834 0 -2 -1.99834 -1
+    -1 -4 -1.99834 0 -3 -1.99834 -1
+    -1 -4 -1.99834 0 -3 -1.99834 170
+    -1 -4 -1.99834 0 -3 -1.99834 171
+    -1 -3 -1.99834 0 -2 -1.99834 151
+    -3 -3 -1.99834 0 0 -1.99834 -1
+    -3 -3 -1.99834 -1 0 -1.99834 -1
+    -3 -3 -1.99834 -1 -1 -1.99834 -1
+    -3 -2 -1.99834 -2 -1 -1.99834 135
+    -2 -3 -1.99834 -1 -1 -1.99834 -1
+    -2 -3 -1.99834 -1 -2 -1.99834 152
+    -2 -2 -1.99834 -1 -1 -1.99834 -1
+    -2 -2 -1.99834 -1 -1 -1.99834 132
+    -2 -2 -1.99834 -1 -1 -1.99834 133
+    -3 -1 -1.99834 -1 0 -1.99834 -1
+    -3 -1 -1.99834 -2 0 -1.99834 115
+    -2 -1 -1.99834 -1 0 -1.99834 -1
+    -2 -1 -1.99834 -1 0 -1.99834 112
+    -2 -1 -1.99834 -1 0 -1.99834 113
+    -1 -3 -1.99834 0 0 -1.99834 -1
+    -1 -3 -1.99834 0 -1 -1.99834 -1
+    -1 -3 -1.99834 0 -2 -1.99834 150
+    -1 -2 -1.99834 0 -1 -1.99834 -1
+    -1 -2 -1.99834 0 -1 -1.99834 130
+    -1 -2 -1.99834 0 -1 -1.99834 131
+    -1 -1 -1.99834 0 0 -1.99834 -1
+    -1 -1 -1.99834 0 0 -1.99834 110
+    -1 -1 -1.99834 0 0 -1.99834 111
+    -5 0 -1.99834 0 5 -1.99834 -1
+    -5 0 -1.99834 -2 5 -1.99834 -1
+    -5 0 -1.99834 -2 3 -1.99834 -1
+    -5 0 -1.99834 -4 3 -1.99834 -1
+    -5 0 -1.99834 -4 1 -1.99834 -1
+    -5 0 -1.99834 -4 1 -1.99834 98
+    -5 0 -1.99834 -4 1 -1.99834 99
+    -5 1 -1.99834 -4 3 -1.99834 -1
+    -5 1 -1.99834 -4 2 -1.99834 -1
+    -5 1 -1.99834 -4 2 -1.99834 78
+    -5 1 -1.99834 -4 2 -1.99834 79
+    -5 2 -1.99834 -4 3 -1.99834 59
+    -4 0 -1.99834 -2 3 -1.99834 -1
+    -4 0 -1.99834 -2 1 -1.99834 -1
+    -4 0 -1.99834 -3 1 -1.99834 -1
+    -4 0 -1.99834 -3 1 -1.99834 96
+    -4 0 -1.99834 -3 1 -1.99834 97
+    -3 0 -1.99834 -2 1 -1.99834 94
+    -4 1 -1.99834 -2 3 -1.99834 -1
+    -4 1 -1.99834 -3 3 -1.99834 -1
+    -4 1 -1.99834 -3 2 -1.99834 -1
+    -4 1 -1.99834 -3 2 -1.99834 76
+    -4 1 -1.99834 -3 2 -1.99834 77
+    -4 2 -1.99834 -3 3 -1.99834 57
+    -3 1 -1.99834 -2 2 -1.99834 74
+    -5 2 -1.99834 -2 5 -1.99834 -1
+    -5 2 -1.99834 -4 5 -1.99834 -1
+    -5 2 -1.99834 -4 4 -1.99834 -1
+    -5 2 -1.99834 -4 3 -1.99834 58
+    -5 3 -1.99834 -4 4 -1.99834 -1
+    -5 3 -1.99834 -4 4 -1.99834 38
+    -5 3 -1.99834 -4 4 -1.99834 39
+    -5 4 -1.99834 -4 5 -1.99834 -1
+    -5 4 -1.99834 -4 5 -1.99834 18
+    -5 4 -1.99834 -4 5 -1.99834 19
+    -4 2 -1.99834 -2 5 -1.99834 -1
+    -4 2 -1.99834 -2 4 -1.99834 -1
+    -4 2 -1.99834 -3 4 -1.99834 -1
+    -4 2 -1.99834 -3 3 -1.99834 56
+    -4 3 -1.99834 -3 4 -1.99834 -1
+    -4 3 -1.99834 -3 4 -1.99834 36
+    -4 3 -1.99834 -3 4 -1.99834 37
+    -3 2 -1.99834 -2 4 -1.99834 -1
+    -3 2 -1.99834 -2 3 -1.99834 54
+    -3 3 -1.99834 -2 4 -1.99834 34
+    -4 4 -1.99834 -2 5 -1.99834 -1
+    -4 4 -1.99834 -3 5 -1.99834 -1
+    -4 4 -1.99834 -3 5 -1.99834 16
+    -4 4 -1.99834 -3 5 -1.99834 17
+    -3 4 -1.99834 -2 5 -1.99834 14
+    -3 0 -1.99834 0 5 -1.99834 -1
+    -3 0 -1.99834 0 3 -1.99834 -1
+    -3 0 -1.99834 -1 3 -1.99834 -1
+    -3 0 -1.99834 -1 1 -1.99834 -1
+    -3 0 -1.99834 -2 1 -1.99834 95
+    -2 0 -1.99834 -1 1 -1.99834 -1
+    -2 0 -1.99834 -1 1 -1.99834 92
+    -2 0 -1.99834 -1 1 -1.99834 93
+    -3 1 -1.99834 -1 3 -1.99834 -1
+    -3 1 -1.99834 -2 3 -1.99834 -1
+    -3 1 -1.99834 -2 2 -1.99834 75
+    -3 2 -1.99834 -2 3 -1.99834 55
+    -2 1 -1.99834 -1 3 -1.99834 -1
+    -2 1 -1.99834 -1 2 -1.99834 -1
+    -2 1 -1.99834 -1 2 -1.99834 72
+    -2 1 -1.99834 -1 2 -1.99834 73
+    -2 2 -1.99834 -1 3 -1.99834 53
+    -1 0 -1.99834 0 3 -1.99834 -1
+    -1 0 -1.99834 0 1 -1.99834 -1
+    -1 0 -1.99834 0 1 -1.99834 90
+    -1 0 -1.99834 0 1 -1.99834 91
+    -1 1 -1.99834 0 3 -1.99834 -1
+    -1 1 -1.99834 0 2 -1.99834 -1
+    -1 1 -1.99834 0 2 -1.99834 70
+    -1 1 -1.99834 0 2 -1.99834 71
+    -1 2 -1.99834 0 3 -1.99834 51
+    -3 2 -1.99834 0 5 -1.99834 -1
+    -3 2 -1.99834 -1 5 -1.99834 -1
+    -3 2 -1.99834 -1 4 -1.99834 -1
+    -3 3 -1.99834 -2 4 -1.99834 35
+    -2 2 -1.99834 -1 4 -1.99834 -1
+    -2 2 -1.99834 -1 3 -1.99834 52
+    -2 3 -1.99834 -1 4 -1.99834 -1
+    -2 3 -1.99834 -1 4 -1.99834 32
+    -2 3 -1.99834 -1 4 -1.99834 33
+    -3 4 -1.99834 -1 5 -1.99834 -1
+    -3 4 -1.99834 -2 5 -1.99834 15
+    -2 4 -1.99834 -1 5 -1.99834 -1
+    -2 4 -1.99834 -1 5 -1.99834 12
+    -2 4 -1.99834 -1 5 -1.99834 13
+    -1 2 -1.99834 0 5 -1.99834 -1
+    -1 2 -1.99834 0 4 -1.99834 -1
+    -1 2 -1.99834 0 3 -1.99834 50
+    -1 3 -1.99834 0 4 -1.99834 -1
+    -1 3 -1.99834 0 4 -1.99834 30
+    -1 3 -1.99834 0 4 -1.99834 31
+    -1 4 -1.99834 0 5 -1.99834 -1
+    -1 4 -1.99834 0 5 -1.99834 10
+    -1 4 -1.99834 0 5 -1.99834 11
+    0 -5 -1.99834 5 5 1.84166 -1
+    0 -5 -1.99834 5 0 -1.99834 -1
+    0 -5 -1.99834 3 0 -1.99834 -1
+    0 -5 -1.99834 3 -2 -1.99834 -1
+    0 -5 -1.99834 1 -2 -1.99834 -1
+    0 -5 -1.99834 1 -4 -1.99834 -1
+    0 -5 -1.99834 1 -4 -1.99834 188
+    0 -5 -1.99834 1 -4 -1.99834 189
+    0 -4 -1.99834 1 -2 -1.99834 -1
+    0 -4 -1.99834 1 -3 -1.99834 -1
+    0 -4 -1.99834 1 -3 -1.99834 168
+    0 -4 -1.99834 1 -3 -1.99834 169
+    0 -3 -1.99834 1 -2 -1.99834 149
+    1 -5 -1.99834 3 -2 -1.99834 -1
+    1 -5 -1.99834 3 -4 -1.99834 -1
+    1 -5 -1.99834 2 -4 -1.99834 -1
+    1 -5 -1.99834 2 -4 -1.99834 186
+    1 -5 -1.99834 2 -4 -1.99834 187
+    2 -5 -1.99834 3 -4 -1.99834 184
+    1 -4 -1.99834 3 -2 -1.99834 -1
+    1 -4 -1.99834 2 -2 -1.99834 -1
+    1 -4 -1.99834 2 -3 -1.99834 -1
+    1 -4 -1.99834 2 -3 -1.99834 166
+    1 -4 -1.99834 2 -3 -1.99834 167
+    1 -3 -1.99834 2 -2 -1.99834 147
+    2 -4 -1.99834 3 -3 -1.99834 164
+    0 -3 -1.99834 3 0 -1.99834 -1
+    0 -3 -1.99834 1 0 -1.99834 -1
+    0 -3 -1.99834 1 -1 -1.99834 -1
+    0 -3 -1.99834 1 -2 -1.99834 148
+    0 -2 -1.99834 1 -1 -1.99834 -1
+    0 -2 -1.99834 1 -1 -1.99834 128
+    0 -2 -1.99834 1 -1 -1.99834 129
+    0 -1 -1.99834 1 0 -1.99834 -1
+    0 -1 -1.99834 1 0 -1.99834 108
+    0 -1 -1.99834 1 0 -1.99834 109
+    1 -3 -1.99834 3 0 -1.99834 -1
+    1 -3 -1.99834 3 -1 -1.99834 -1
+    1 -3 -1.99834 2 -1 -1.99834 -1
+    1 -3 -1.99834 2 -2 -1.99834 146
+    1 -2 -1.99834 2 -1 -1.99834 -1
+    1 -2 -1.99834 2 -1 -1.99834 126
+    1 -2 -1.99834 2 -1 -1.99834 127
+    2 -3 -1.99834 3 -1 -1.99834 -1
+    2 -3 -1.99834 3 -2 -1.99834 144
+    2 -2 -1.99834 3 -1 -1.99834 124
+    1 -1 -1.99834 3 0 -1.99834 -1
+    1 -1 -1.99834 2 0 -1.99834 -1
+    1 -1 -1.99834 2 0 -1.99834 106
+    1 -1 -1.99834 2 0 -1.99834 107
+    2 -1 -1.99834 3 0 -1.99834 104
+    2 -5 -1.99834 5 0 -1.99834 -1
+    2 -5 -1.99834 5 -2 -1.99834 -1
+    2 -5 -1.99834 4 -2 -1.99834 -1
+    2 -5 -1.99834 4 -4 -1.99834 -1
+    2 -5 -1.99834 3 -4 -1.99834 185
+    3 -5 -1.99834 4 -4 -1.99834 -1
+    3 -5 -1.99834 4 -4 -1.99834 182
+    3 -5 -1.99834 4 -4 -1.99834 183
+    2 -4 -1.99834 4 -2 -1.99834 -1
+    2 -4 -1.99834 3 -2 -1.99834 -1
+    2 -4 -1.99834 3 -3 -1.99834 165
+    2 -3 -1.99834 3 -2 -1.99834 145
+    3 -4 -1.99834 4 -2 -1.99834 -1
+    3 -4 -1.99834 4 -3 -1.99834 -1
+    3 -4 -1.99834 4 -3 -1.99834 162
+    3 -4 -1.99834 4 -3 -1.99834 163
+    3 -3 -1.99834 4 -2 -1.99834 143
+    4 -5 -1.99834 5 -2 -1.99834 -1
+    4 -5 -1.99834 5 -4 -1.99834 -1
+    4 -5 -1.99834 5 -4 -1.99834 180
+    4 -5 -1.99834 5 -4 -1.99834 181
+    4 -4 -1.99834 5 -2 -1.99834 -1
+    4 -4 -1.99834 5 -3 -1.99834 -1
+    4 -4 -1.99834 5 -3 -1.99834 160
+    4 -4 -1.99834 5 -3 -1.99834 161
+    4 -3 -1.99834 5 -2 -1.99834 141
+    2 -3 -1.99834 5 0 -1.99834 -1
+    2 -3 -1.99834 4 0 -1.99834 -1
+    2 -3 -1.99834 4 -1 -1.99834 -1
+    2 -2 -1.99834 3 -1 -1.99834 125
+    3 -3 -1.99834 4 -1 -1.99834 -1
+    3 -3 -1.99834 4 -2 -1.99834 142
+    3 -2 -1.99834 4 -1 -1.99834 -1
+    3 -2 -1.99834 4 -1 -1.99834 122
+    3 -2 -1.99834 4 -1 -1.99834 123
+    2 -1 -1.99834 4 0 -1.99834 -1
+    2 -1 -1.99834 3 0 -1.99834 105
+    3 -1 -1.99834 4 0 -1.99834 -1
+    3 -1 -1.99834 4 0 -1.99834 102
+    3 -1 -1.99834 4 0 -1.99834 103
+    4 -3 -1.99834 5 0 -1.99834 -1
+    4 -3 -1.99834 5 -1 -1.99834 -1
+    4 -3 -1.99834 5 -2 -1.99834 140
+    4 -2 -1.99834 5 -1 -1.99834 -1
+    4 -2 -1.99834 5 -1 -1.99834 120
+    4 -2 -1.99834 5 -1 -1.99834 121
+    4 -1 -1.99834 5 0 -1.99834 -1
+    4 -1 -1.99834 5 0 -1.99834 100
+    4 -1 -1.99834 5 0 -1.99834 101
+    0 0 -1.99834 5 5 1.84166 -1
+    0 0 -1.99834 3 5 1.84166 -1
+    0 0 -1.99834 3 3 1.68166 -1
+    0 0 -1.99834 3 3 1.00166 -1
+    0 0 -1.99834 1 3 1.00166 -1
+    0 0 -1.99834 1 1 1.00166 -1
+    0 0 -1.99834 1 1 1.00166 88
+    0 0 -1.99834 1 1 1.00166 89
+    0 1 -1.99834 1 3 1.00166 -1
+    0 1 -1.99834 1 2 1.00166 68
+    0 1 -1.99834 1 3 1.00166 -1
+    0 1 -1.99834 1 2 1.00166 69
+    0 2 -1.99834 1 3 1.00166 49
+    1 0 -1.99834 3 1 1.00166 -1
+    1 0 -1.99834 2 1 1.00166 87
+    1 0 -1.99834 3 1 1.00166 -1
+    1 0 -1.99834 2 1 1.00166 86
+    2 0 -1.99834 3 1 1.00166 84
+    1 1 1.00166 3 3 1.68166 -1
+    1 1 1.00166 2 3 1.55166 -1
+    1 1 1.00166 2 2 1.55166 -1
+    1 1 1.00166 2 2 1.55166 66
+    1 1 1.00166 2 1.93 1.55166 67
+    1 1.93 1.00166 2 3 1.55166 47
+    2 1 1.00166 3 2 1.68166 64
+    0 1.93 -1.99834 3 5 1.84166 -1
+    0 2 -1.99834 1 5 1.00166 -1
+    0 2 -1.99834 1 4 1.00166 -1
+    0 2 -1.99834 1 4 1.00166 -1
+    0 2 -1.99834 1 3 1.00166 48
+    0 3 -1.99834 1 4 1.00166 28
+    0 3 -1.99834 1 4 1.00166 29
+    0 4 -1.99834 1 5 1.00166 -1
+    0 4 -1.99834 1 5 1.00166 8
+    0 4 -1.99834 1 5 1.00166 9
+    1 1.93 1.00166 3 5 1.84166 -1
+    1 1.93 1.00166 3 4 1.84166 -1
+    1 1.93 1.00166 3 3 1.84166 -1
+    1 2 1.00166 2 3 1.50166 46
+    2 1.93 1.50166 3 3 1.84166 44
+    1 3 1.00166 3 4 1.53166 -1
+    1 3 1.00166 2 4 1.50166 -1
+    1 3 1.00166 2 4 1.23166 26
+    1 3 1.00166 2 4 1.50166 27
+    2 3 1.23166 3 4 1.53166 24
+    1 4 1.00166 3 5 1.23166 -1
+    1 4 1.00166 2 5 1.23166 -1
+    1 4 1.00166 2 5 1.00166 6
+    1 4 1.00166 2 5 1.23166 7
+    2 4 1.00166 3 5 1.23166 4
+    2 0 -1.99834 5 5 1.84166 -1
+    2 0 -1.99834 5 3 1.84166 -1
+    2 0 -1.99834 5 1 1.00166 -1
+    2 0 -1.99834 4 1 1.00166 -1
+    2 0 -1.99834 4 1 1.00166 -1
+    2 0 -1.99834 3 1 1.00166 85
+    3 0 -1.99834 4 1 1.00166 83
+    3 0 -1.99834 4 1 1.00166 82
+    4 0 -1.99834 5 1 1.00166 -1
+    4 0 -1.99834 5 1 1.00166 81
+    4 0 -1.99834 5 1 1.00166 80
+    2 1 1.00166 5 3 1.84166 -1
+    2 1 1.00166 4 3 1.84166 -1
+    2 1 1.00166 3 3 1.84166 -1
+    2 1 1.00166 3 2 1.68166 65
+    2 1.93 1.55166 3 3 1.84166 45
+    3 1 1.00166 4 3 1.74166 -1
+    3 1 1.00166 4 2 1.68166 -1
+    3 1 1.00166 4 2 1.68166 62
+    3 1 1.00166 4 2 1.18166 63
+    3 2 1.18166 4 3 1.74166 43
+    4 1 1.00166 5 3 1.18166 -1
+    4 1 1.00166 5 2 1.18166 -1
+    4 1 1.00166 5 2 1.18166 60
+    4 1 1.00166 5 2 1.00166 61
+    4 2 1.00166 5 3 1.18166 41
+    2 2 1.00166 5 5 1.84166 -1
+    2 2 1.00166 4 5 1.84166 -1
+    2 2 1.50166 4 4 1.84166 -1
+    2 3 1.50166 3 4 1.84166 25
+    3 2 1.53166 4 4 1.84166 -1
+    3 2 1.68166 4 3 1.84166 42
+    3 3 1.53166 4 4 1.84166 -1
+    3 3 1.53166 4 4 1.84166 22
+    3 3 1.64166 4 4 1.84166 23
+    2 4 1.00166 4 5 1.64166 -1
+    2 4 1.00166 3 5 1.53166 5
+    3 4 1.00166 4 5 1.64166 -1
+    3 4 1.00166 4 5 1.53166 2
+    3 4 1.00166 4 5 1.64166 3
+    4 2 1.00166 5 5 1.74166 -1
+    4 2 1.00166 5 4 1.74166 -1
+    4 2 1.00166 5 3 1.74166 40
+    4 3 1.00166 5 4 1.74166 -1
+    4 3 1.00166 5 4 1.74166 20
+    4 3 1.00166 5 4 1.74166 21
+    4 4 1.00166 5 5 1.64166 -1
+    4 4 1.00166 5 5 1.64166 0
+    4 4 1.00166 5 5 1.64166 1
+endnode
+endmodelgeom wsf41_e02_44
+
+#MAXANIM ASCII
+newanim animloop01 wsf41_e02_44
+  length 0
+  transtime 0.25
+  animroot wsf41_e02_44
+  node dummy wsf41_e02_44
+    parent NULL
+  endnode
+  node dummy wsf41_e02_44a
+    parent wsf41_e02_44
+  endnode
+  node dummy cm3_repair_1
+    parent wsf41_e02_44a
+  endnode
+  node dummy cm3_repair_02
+    parent cm3_repair_1
+  endnode
+  node dummy water_fx03_01
+    parent cm3_repair_02
+  endnode
+  node emitter waterfall013
+    parent wsf41_e02_44a
+    birthratekey
+      0 8
+    endlist
+  endnode
+  node emitter waterfall012
+    parent wsf41_e02_44a
+    birthratekey
+      0 8
+    endlist
+  endnode
+  node emitter waterfall011
+    parent wsf41_e02_44a
+    birthratekey
+      0 8
+    endlist
+  endnode
+  node emitter waterfall07
+    parent wsf41_e02_44a
+    birthratekey
+      0 8
+    endlist
+  endnode
+  node emitter waterfall06
+    parent wsf41_e02_44a
+    birthratekey
+      0 8
+    endlist
+  endnode
+  node emitter waterfall05
+    parent wsf41_e02_44a
+    birthratekey
+      0 8
+    endlist
+  endnode
+  node emitter waterfall04
+    parent wsf41_e02_44a
+    birthratekey
+      0 8
+    endlist
+  endnode
+  node emitter waterfall03
+    parent wsf41_e02_44a
+    birthratekey
+      0 8
+    endlist
+  endnode
+  node emitter waterfall02
+    parent wsf41_e02_44a
+    birthratekey
+      0 8
+    endlist
+  endnode
+  node emitter waterfall01
+    parent wsf41_e02_44a
+    birthratekey
+      0 8
+    endlist
+  endnode
+  node light wsf41_e02_44ml1
+    parent wsf41_e02_44
+  endnode
+  node light wsf41_e02_44ml2
+    parent wsf41_e02_44
+  endnode
+  node dummy dirt03_01_02_01
+    parent wsf41_e02_44
+  endnode
+  node dummy sphere02_01
+    parent wsf41_e02_44
+  endnode
+  node dummy sphere02_02_01
+    parent wsf41_e02_44
+  endnode
+  node dummy sphere03_01
+    parent wsf41_e02_44
+  endnode
+  node dummy wmesh_01
+    parent wsf41_e02_44
+  endnode
+doneanim animloop01 wsf41_e02_44
+
+#MAXANIM ASCII
+newanim tiledefault wsf41_e02_44
+  length 0
+  transtime 0.25
+  animroot wsf41_e02_44
+  node dummy wsf41_e02_44
+    parent NULL
+  endnode
+  node dummy wsf41_e02_44a
+    parent wsf41_e02_44
+  endnode
+  node dummy cm3_repair_1
+    parent wsf41_e02_44a
+  endnode
+  node dummy cm3_repair_02
+    parent cm3_repair_1
+  endnode
+  node dummy water_fx03_01
+    parent cm3_repair_02
+  endnode
+  node emitter waterfall013
+    parent wsf41_e02_44a
+    birthratekey
+      0 0
+    endlist
+  endnode
+  node emitter waterfall012
+    parent wsf41_e02_44a
+    birthratekey
+      0 0
+    endlist
+  endnode
+  node emitter waterfall011
+    parent wsf41_e02_44a
+    birthratekey
+      0 0
+    endlist
+  endnode
+  node emitter waterfall07
+    parent wsf41_e02_44a
+    birthratekey
+      0 0
+    endlist
+  endnode
+  node emitter waterfall06
+    parent wsf41_e02_44a
+    birthratekey
+      0 0
+    endlist
+  endnode
+  node emitter waterfall05
+    parent wsf41_e02_44a
+    birthratekey
+      0 0
+    endlist
+  endnode
+  node emitter waterfall04
+    parent wsf41_e02_44a
+    birthratekey
+      0 0
+    endlist
+  endnode
+  node emitter waterfall03
+    parent wsf41_e02_44a
+    birthratekey
+      0 0
+    endlist
+  endnode
+  node emitter waterfall02
+    parent wsf41_e02_44a
+    birthratekey
+      0 0
+    endlist
+  endnode
+  node emitter waterfall01
+    parent wsf41_e02_44a
+    birthratekey
+      0 0
+    endlist
+  endnode
+  node light wsf41_e02_44ml1
+    parent wsf41_e02_44
+  endnode
+  node light wsf41_e02_44ml2
+    parent wsf41_e02_44
+  endnode
+  node dummy dirt03_01_02_01
+    parent wsf41_e02_44
+  endnode
+  node dummy sphere02_01
+    parent wsf41_e02_44
+  endnode
+  node dummy sphere02_02_01
+    parent wsf41_e02_44
+  endnode
+  node dummy sphere03_01
+    parent wsf41_e02_44
+  endnode
+  node dummy wmesh_01
+    parent wsf41_e02_44
+  endnode
+doneanim tiledefault wsf41_e02_44
+donemodel wsf41_e02_44
