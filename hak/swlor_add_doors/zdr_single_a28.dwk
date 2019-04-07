@@ -1,0 +1,122 @@
+#Exported from 3ds max by MDL Plug-in Suite 1.0b
+#http://www.bricksbuilder.com/nwn/utils/
+#MAXMODEL ASCII
+# model: TDK_LOK01_09
+filedependancy jan10.max
+node dummy 28_DWK_dp_closed_01
+  parent zdr_single_a28_DWK
+  position -0.824902 0.00354473 1.69625
+  orientation 0 0 0 0
+  wirecolor 0.605469 0.605469 0.605469
+endnode
+node dummy 28_DWK_dp_open1_01
+  parent zdr_single_a28_DWK
+  position 0.943995 -1.65455 1.69625
+  orientation 0 0 0 0
+  wirecolor 0.605469 0.605469 0.605469
+endnode
+node dummy 28_DWK_dp_open2_01
+  parent zdr_single_a28_DWK
+  position 0.97647 1.86512 1.69625
+  orientation 0 0 0 0
+  wirecolor 0.605469 0.605469 0.605469
+endnode
+node trimesh 28_DWK_wg_closed
+  parent zdr_single_a28_DWK
+  position -0.0264261 -0.00680305 0
+  orientation 0 0 1 -1.5708
+  wirecolor 0.722656 0.722656 0.722656
+  ambient 0.71875 0.890625 0.597656
+  diffuse 0.71875 0.890625 0.597656
+  specular 0 0 0
+  shininess 1
+  bitmap NULL
+  verts 8
+    0.248705 1.26342 0
+    -0.248705 1.26342 0
+    0.248705 -1.26342 0
+    -0.248705 -1.26342 0
+    0.248705 1.26342 3.02272
+    -0.248705 1.26342 3.02272
+    0.248705 -1.26342 3.02272
+    -0.248705 -1.26342 3.02272
+  faces 12
+    0 2 3  2  0 0 0  1
+    3 1 0  2  0 0 0  1
+    4 5 7  4  0 0 0  0
+    7 6 4  4  0 0 0  0
+    0 1 5  8  0 0 0  4
+    5 4 0  8  0 0 0  4
+    1 3 7  16  0 0 0  3
+    7 5 1  16  0 0 0  3
+    3 2 6  32  0 0 0  5
+    6 7 3  32  0 0 0  5
+    2 0 4  64  0 0 0  2
+    4 6 2  64  0 0 0  2
+endnode
+node trimesh 28_DWK_wg_open1
+  parent zdr_single_a28_DWK
+  position 0.950085 -1.02885 0
+  orientation 0 0 0 0
+  wirecolor 0.722656 0.722656 0.722656
+  ambient 0.71875 0.890625 0.597656
+  diffuse 0.71875 0.890625 0.597656
+  specular 0 0 0
+  shininess 1
+  bitmap NULL
+  verts 8
+    0.25 1 0
+    -0.25 1 0
+    0.25 -1 0
+    -0.25 -1 0
+    0.25 1 3.02272
+    -0.25 1 3.02272
+    0.25 -1 3.02272
+    -0.25 -1 3.02272
+  faces 12
+    0 2 3  2  0 0 0  1
+    3 1 0  2  0 0 0  1
+    4 5 7  4  0 0 0  0
+    7 6 4  4  0 0 0  0
+    0 1 5  8  0 0 0  4
+    5 4 0  8  0 0 0  4
+    1 3 7  16  0 0 0  3
+    7 5 1  16  0 0 0  3
+    3 2 6  32  0 0 0  5
+    6 7 3  32  0 0 0  5
+    2 0 4  64  0 0 0  2
+    4 6 2  64  0 0 0  2
+endnode
+node trimesh 28_DWK_wg_open2
+  parent zdr_single_a28_DWK
+  position 0.950086 0.985578 0
+  orientation 0 0 0 0
+  wirecolor 0.722656 0.722656 0.722656
+  ambient 0.71875 0.890625 0.597656
+  diffuse 0.71875 0.890625 0.597656
+  specular 0 0 0
+  shininess 1
+  bitmap NULL
+  verts 8
+    0.25 1 0
+    -0.25 1 0
+    0.25 -1 0
+    -0.25 -1 0
+    0.25 1 3.02272
+    -0.25 1 3.02272
+    0.25 -1 3.02272
+    -0.25 -1 3.02272
+  faces 12
+    0 2 3  2  0 0 0  1
+    3 1 0  2  0 0 0  1
+    4 5 7  4  0 0 0  0
+    7 6 4  4  0 0 0  0
+    0 1 5  8  0 0 0  4
+    5 4 0  8  0 0 0  4
+    1 3 7  16  0 0 0  3
+    7 5 1  16  0 0 0  3
+    3 2 6  32  0 0 0  5
+    6 7 3  32  0 0 0  5
+    2 0 4  64  0 0 0  2
+    4 6 2  64  0 0 0  2
+endnode
