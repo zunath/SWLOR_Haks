@@ -1,0 +1,212 @@
+#MAXMODEL ASCII
+# model: phod_fxb2ylw
+filedependancy phod_fxb2ylw.max
+newmodel phod_fxb2ylw
+setsupermodel phod_fxb2ylw NULL
+classification CHARACTER
+setanimationscale 1
+#MAXGEOM  ASCII
+beginmodelgeom phod_fxb2ylw
+node dummy phod_fxb2ylw
+  parent NULL
+endnode
+node emitter OmenEmitter06
+  parent phod_fxb2ylw
+  position -0.0268297 -0.217939 1.5113
+  orientation 0 0 -1 -3.14334
+  wirecolor 0.347656 0.347656 0.347656
+    colorStart 1 1 0
+    colorEnd 1 1 0
+    alphaStart 0.3
+    alphaEnd 0
+    sizeStart 0.2
+    sizeEnd 0.1
+    sizeStart_y 0
+    sizeEnd_y 0
+    frameStart 0
+    frameEnd 0
+    birthrate 100
+    spawnType 0
+    lifeExp 0.999999
+    mass 0
+    spread 1.0472
+    particleRot 0
+    velocity 0
+    randvel 0.5
+    fps 0
+    random 0
+    inherit 1
+    inherit_local 0
+    inherit_part 0
+    inheritvel 1
+    xsize 300
+    ysize 300
+    bounce 1
+    bounce_co 1
+    loop 0
+    update Fountain
+    render Normal
+    Blend Lighten
+    update_sel 1
+    render_sel 1
+    blend_sel 3
+    deadspace 0
+    opacity 0.5
+    blurlength 10
+    lightningDelay 0
+    lightningRadius 0
+    lightningScale 0
+    blastRadius 0
+    blastLength 0
+    twosidedtex 0
+    p2p 0
+    p2p_sel 1
+    p2p_type Bezier
+    p2p_bezier2 0
+    p2p_bezier3 0
+    combinetime 0
+    drag 0
+    grav 0
+    threshold 0
+    texture fxpa_symbl_003
+    xgrid 1
+    ygrid 1
+    affectedByWind 0
+    m_isTinted 0
+    renderorder 0
+    Splat 0
+endnode
+node emitter OmenEmitter04
+  parent phod_fxb2ylw
+  position -0.0268297 -0.217939 0.918005
+  orientation 0 0 -1 -3.14334
+  wirecolor 0.347656 0.347656 0.347656
+    colorStart 1 1 0
+    colorEnd 1 1 0
+    alphaStart 0.3
+    alphaEnd 0
+    sizeStart 0.2
+    sizeEnd 0.1
+    sizeStart_y 0
+    sizeEnd_y 0
+    frameStart 0
+    frameEnd 0
+    birthrate 100
+    spawnType 0
+    lifeExp 0.999999
+    mass 0
+    spread 1.0472
+    particleRot 0
+    velocity 0
+    randvel 0.5
+    fps 0
+    random 0
+    inherit 1
+    inherit_local 0
+    inherit_part 0
+    inheritvel 1
+    xsize 300
+    ysize 300
+    bounce 1
+    bounce_co 1
+    loop 0
+    update Fountain
+    render Normal
+    Blend Lighten
+    update_sel 1
+    render_sel 1
+    blend_sel 3
+    deadspace 0
+    opacity 0.5
+    blurlength 10
+    lightningDelay 0
+    lightningRadius 0
+    lightningScale 0
+    blastRadius 0
+    blastLength 0
+    twosidedtex 0
+    p2p 0
+    p2p_sel 2
+    p2p_type Gravity
+    p2p_bezier2 0
+    p2p_bezier3 0
+    combinetime 0
+    drag 0
+    grav 0
+    threshold 0
+    texture fxpa_symbl_003
+    xgrid 1
+    ygrid 1
+    affectedByWind 1
+    m_isTinted 0
+    renderorder 0
+    Splat 0
+endnode
+node emitter OmenEmitter07
+  parent phod_fxb2ylw
+  position -0.0268295 0.533359 0.414877
+  orientation 0 0 -1 -3.14334
+  wirecolor 0.347656 0.347656 0.347656
+    colorStart 1 1 0
+    colorEnd 1 1 0
+    alphaStart 0.3
+    alphaEnd 0
+    sizeStart 0.2
+    sizeEnd 0.1
+    sizeStart_y 0
+    sizeEnd_y 0
+    frameStart 0
+    frameEnd 0
+    birthrate 100
+    spawnType 0
+    lifeExp 0.999999
+    mass 0
+    spread 1.0472
+    particleRot 0
+    velocity 0
+    randvel 0.5
+    fps 0
+    random 0
+    inherit 1
+    inherit_local 0
+    inherit_part 0
+    inheritvel 1
+    xsize 300
+    ysize 300
+    bounce 1
+    bounce_co 1
+    loop 0
+    update Fountain
+    render Normal
+    Blend Lighten
+    update_sel 1
+    render_sel 1
+    blend_sel 3
+    deadspace 0
+    opacity 0.5
+    blurlength 10
+    lightningDelay 0
+    lightningRadius 0
+    lightningScale 0
+    blastRadius 0
+    blastLength 0
+    twosidedtex 0
+    p2p 0
+    p2p_sel 2
+    p2p_type Gravity
+    p2p_bezier2 0
+    p2p_bezier3 0
+    combinetime 0
+    drag 0
+    grav 0
+    threshold 0
+    texture fxpa_symbl_003
+    xgrid 1
+    ygrid 1
+    affectedByWind 1
+    m_isTinted 0
+    renderorder 0
+    Splat 0
+endnode
+endmodelgeom phod_fxb2ylw
+donemodel phod_fxb2ylw

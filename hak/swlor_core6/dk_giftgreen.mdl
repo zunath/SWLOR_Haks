@@ -1,0 +1,62 @@
+#Exported from 3ds max by MDL Plug-in Suite 1.0b
+#http://www.bricksbuilder.com/nwn/utils/
+#MAXMODEL ASCII
+# model: dk_giftgreen
+filedependancy gifts.max
+newmodel dk_giftgreen
+setsupermodel dk_giftgreen NULL
+classification Character
+setanimationscale 1.0
+#MAXGEOM  ASCII
+beginmodelgeom dk_giftgreen
+node dummy dk_giftgreen
+  parent NULL
+endnode
+node trimesh Box02
+  parent dk_giftgreen
+  position 0.246105 -0.00309096 0.350994
+  orientation -0.0291726 0.999495 -0.0125679 -1.60735
+  wirecolor 0.113281 0.113281 0.113281
+  ambient 0.588235 0.588235 0.588235
+  diffuse 0.588235 0.588235 0.588235
+  specular 0 0 0
+  shininess 10
+  bitmap rappings3
+  verts 8
+    0.292292 0.389722 0
+    -0.292291 0.389722 0
+    0.292291 -0.389722 0
+    -0.292292 -0.389722 0
+    0.292292 0.389722 0.389722
+    -0.292291 0.389722 0.389722
+    0.292291 -0.389722 0.389722
+    -0.292292 -0.389722 0.389722
+  faces 12
+    0 2 3  2  9 11 10  1
+    3 1 0  2  10 8 9  1
+    4 5 7  4  8 9 11  0
+    7 6 4  4  11 10 8  0
+    0 1 5  8  4 5 7  4
+    5 4 0  8  7 6 4  4
+    1 3 7  16  0 1 3  3
+    7 5 1  16  3 2 0  3
+    3 2 6  32  4 5 7  5
+    6 7 3  32  7 6 4  5
+    2 0 4  64  0 1 3  2
+    4 6 2  64  3 2 0  2
+  tverts 12
+    0 0 0
+    1 0 0
+    0 1 0
+    1 1 0
+    0 0 0
+    1 0 0
+    0 1 0
+    1 1 0
+    0 0 0
+    1 0 0
+    0 1 0
+    1 1 0
+endnode
+endmodelgeom dk_giftgreen
+donemodel dk_giftgreen

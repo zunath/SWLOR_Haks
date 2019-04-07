@@ -1,0 +1,90 @@
+# Rewritten by CleanModels 3 Version 3.2.2.1 Sat Jan 03 18:30:09 2009
+# NOCOMPILE
+#MAXMODEL ASCII
+filedependency Unknown
+newmodel epic_fleetfoot
+setsupermodel epic_fleetfoot null
+setanimationscale 1
+classification EFFECT
+#MAXGEOM ASCII
+beginmodelgeom epic_fleetfoot
+node dummy epic_fleetfoot
+  parent NULL
+endnode
+node emitter glow
+  parent epic_fleetfoot
+  wirecolor 0.6509800 0.8980390 0.8980390
+  update_sel 1
+  update Fountain
+  render_sel 7
+  render Motion_Blur
+  blend_sel 3
+  blend Lighten
+  spawntype 0
+  xsize 0
+  ysize 0
+  inherit 0
+  inherit_local 0
+  inheritvel 0
+  inherit_part 0
+  renderorder 0
+  threshold 0
+  combinetime 0
+  deadspace 0
+  opacity 0.5000000
+  colorStart 0.7294120 0 1
+  colorEnd 0 1 0.5176470
+  alphaStart 1
+  alphaEnd 1
+  sizeStart 0.3000000
+  sizeEnd 0.3000000
+  sizeStart_y 0
+  sizeEnd_y 0
+  birthrate 50
+  lifeExp 2
+  mass 0
+  spread 6.2831900
+  particleRot 0
+  velocity 4
+  randvel 3
+  bounce_co 0
+  blurlength 10
+  loop 0
+  bounce 0
+  m_isTinted 0
+  splat 0
+  affectedByWind false
+  texture fxpa_flare
+  twosidedtex 0
+  xgrid 1
+  ygrid 1
+  fps 1
+  frameStart 0
+  frameEnd 0
+  random 0
+  lightningDelay 0
+  lightningRadius 0
+  lightningSubDiv 0
+  lightningScale 0
+  blastRadius 0
+  blastLength 0
+  p2p 1
+  p2p_type Gravity
+  p2p_sel 2
+  p2p_bezier2 0
+  p2p_bezier3 0
+  grav 6
+  drag 0.5000000
+  orientation 0 0 0 0
+  position 0 0.0859375 0
+endnode
+node reference glow_grav_ref
+  parent glow
+  orientation 1 0 0 -3.1415927
+  wirecolor 0.8980390 0.6509800 0.8431370
+  refModel fx_ref
+  reattachable 1
+  position 0 0 0
+endnode
+endmodelgeom epic_fleetfoot
+donemodel epic_fleetfoot

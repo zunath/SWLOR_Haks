@@ -1,0 +1,198 @@
+#MAXMODEL ASCII
+# model: WPlTr_fxglpur
+filedependancy WPlTr_fxglpur.max
+newmodel WPlTr_fxglpur
+setsupermodel WPlTr_fxglpur NULL
+setanimationscale 1
+#MAXGEOM  ASCII
+beginmodelgeom WPlTr_fxglpur
+node dummy WPlTr_fxglpur
+  parent NULL
+  #part-number 0
+endnode
+node emitter g_WSwGs_V_Holy
+  parent WPlTr_fxglpur
+  #part-number 1
+  p2p 0
+  p2p_sel 1
+  affectedByWind 0
+  m_isTinted 0
+  bounce 0
+  random 0
+  inherit 1
+  inheritvel 0
+  inherit_local 0
+  splat 0
+  inherit_part 0
+  renderorder 0
+  spawntype 0
+  update Fountain
+  render Normal
+  blend Normal
+  texture fxpa_starbnw_a
+  xgrid 2
+  ygrid 2
+  loop 0
+  deadspace 0
+  twosidedtex 0
+  blastRadius 0
+  blastLength 0
+  position 0 0.957095981 0.00653237989
+  orientation 0 0 0 0
+  xsize 1
+  ysize 40
+  threshold 0
+  combinetime 0
+  colorStart 0.5412 0.0 0.6392
+  colorEnd 0.3333 0.0 0.3961
+  alphaStart 1
+  alphaEnd 0
+  sizeStart 0
+  sizeEnd 0.5
+  sizeStart_y 0
+  sizeEnd_y 0
+  birthrate 24
+  lifeExp 2
+  mass 0
+  spread 0
+  particleRot 0
+  velocity 0
+  randvel 0
+  bounce_co 0
+  blurlength 10
+  fps 0
+  frameStart 0
+  frameEnd 3
+  lightningDelay 0
+  lightningRadius 0
+  lightningScale 0
+  p2p_bezier2 0
+  p2p_bezier3 0
+  grav 0
+  drag 0
+endnode
+node emitter g_WSwGs_V_Holy01
+  parent WPlTr_fxglpur
+  #part-number 2
+  p2p 0
+  p2p_sel 1
+  affectedByWind 0
+  m_isTinted 0
+  bounce 0
+  random 0
+  inherit 1
+  inheritvel 0
+  inherit_local 0
+  splat 0
+  inherit_part 0
+  renderorder 0
+  spawntype 0
+  update Fountain
+  render Normal
+  blend Normal
+  texture fxpa_starbnw_a
+  xgrid 2
+  ygrid 2
+  loop 0
+  deadspace 0
+  twosidedtex 0
+  blastRadius 0
+  blastLength 0
+  position 0 0.957095981 0.0950665027
+  orientation 0 0 0 0
+  xsize 1
+  ysize 40
+  threshold 0
+  combinetime 0
+  colorStart 0.5412 0.0 0.6392
+  colorEnd 0.3333 0.0 0.3961
+  alphaStart 1
+  alphaEnd 0
+  sizeStart 0
+  sizeEnd 0.5
+  sizeStart_y 0
+  sizeEnd_y 0
+  birthrate 24
+  lifeExp 2
+  mass 0
+  spread 0
+  particleRot 0
+  velocity 0
+  randvel 0
+  bounce_co 0
+  blurlength 10
+  fps 0
+  frameStart 0
+  frameEnd 3
+  lightningDelay 0
+  lightningRadius 0
+  lightningScale 0
+  p2p_bezier2 0
+  p2p_bezier3 0
+  grav 0
+  drag 0
+endnode
+node emitter g_WSwGs_V_Holy02
+  parent WPlTr_fxglpur
+  #part-number 3
+  p2p 0
+  p2p_sel 1
+  affectedByWind 0
+  m_isTinted 0
+  bounce 0
+  random 0
+  inherit 1
+  inheritvel 0
+  inherit_local 0
+  splat 0
+  inherit_part 0
+  renderorder 0
+  spawntype 0
+  update Fountain
+  render Normal
+  blend Normal
+  texture fxpa_starbnw_a
+  xgrid 2
+  ygrid 2
+  loop 0
+  deadspace 0
+  twosidedtex 0
+  blastRadius 0
+  blastLength 0
+  position 0 0.957095981 -0.100831002
+  orientation 0 0 0 0
+  xsize 1
+  ysize 40
+  threshold 0
+  combinetime 0
+  colorStart 0.5412 0.0 0.6392
+  colorEnd 0.3333 0.0 0.3961
+  alphaStart 1
+  alphaEnd 0
+  sizeStart 0
+  sizeEnd 0.5
+  sizeStart_y 0
+  sizeEnd_y 0
+  birthrate 24
+  lifeExp 2
+  mass 0
+  spread 0
+  particleRot 0
+  velocity 0
+  randvel 0
+  bounce_co 0
+  blurlength 10
+  fps 0
+  frameStart 0
+  frameEnd 3
+  lightningDelay 0
+  lightningRadius 0
+  lightningScale 0
+  p2p_bezier2 0
+  p2p_bezier3 0
+  grav 0
+  drag 0
+endnode
+endmodelgeom WPlTr_fxglpur
+
+donemodel WPlTr_fxglpur

@@ -1,0 +1,153 @@
+#MAXMODEL ASCII
+# model: wxswfa_fxshred
+filedependancy wxswfa_fxshred.max
+newmodel wxswfa_fxshred
+setsupermodel wxswfa_fxshred null
+setanimationscale 1
+#MAXGEOM  ASCII
+beginmodelgeom wxswfa_fxshred
+node dummy wxswfa_fxshred
+  parent NULL
+  #part-number 0
+endnode
+node emitter g_wxswfa_v_elec_b
+  parent wxswfa_fxshred
+  #part-number 1
+  p2p 1
+  p2p_sel 1
+  affectedByWind 0
+  m_isTinted 0
+  bounce 0
+  random 0
+  inherit 1
+  inheritvel 0
+  inherit_local 0
+  splat 0
+  inherit_part 0
+  renderorder 0
+  spawntype 0
+  update Fountain
+  render Linked
+  blend Lighten
+  texture fxpa_lightning_r
+  xgrid 2
+  ygrid 2
+  loop 0
+  deadspace 0
+  twosidedtex 0
+  blastRadius 0
+  blastLength 0
+  position 0 0.632876992 -0.0517053008
+  orientation 0 -1 0 -1.57079995
+  colorStart 1 1 1
+  colorEnd 1.0 0.25 0.25
+  alphaStart 1
+  alphaEnd 0
+  sizeStart 0.0500000007
+  sizeEnd 0.275000006
+  sizeStart_y 0
+  sizeEnd_y 0
+  frameStart 0
+  frameEnd 3
+  birthrate 20
+  lifeExp 1
+  mass 0
+  spread 0
+  particleRot 0
+  velocity 0
+  randvel 0
+  fps 12
+  xsize 7
+  ysize 100
+  bounce_co 0
+  blurlength 10
+  lightningDelay 0.0500000007
+  lightningRadius 0.0500000007
+  lightningScale 0.5
+  p2p_bezier2 0
+  p2p_bezier3 0
+  combinetime 10
+  drag 0.200000003
+  grav 0
+  threshold 0
+endnode
+node reference g_wxswfa_v_elec_b_ref
+  parent g_wxswfa_v_elec_b
+  #part-number 2
+  refModel fx_ref
+  reattachable 1
+  position 0 0.260165989 -0.0070706401
+  orientation 0 0 0 0
+endnode
+node emitter g_wxswfa_v_elec
+  parent wxswfa_fxshred
+  #part-number 3
+  p2p 0
+  p2p_sel 1
+  affectedByWind 0
+  m_isTinted 0
+  bounce 0
+  random 0
+  inherit 1
+  inheritvel 0
+  inherit_local 0
+  splat 0
+  inherit_part 0
+  renderorder 0
+  spawntype 0
+  update Lightning
+  render Linked
+  blend Lighten
+  texture fxpa_lightning_r
+  xgrid 2
+  ygrid 2
+  loop 0
+  deadspace 0
+  twosidedtex 0
+  blastRadius 0
+  blastLength 0
+  position 0 0.0977364033 -0.0403021984
+  orientation 1 -5.35779975e-007 0 -1.57079995
+  colorStart 1 1 1
+  colorEnd 1.0 0.25 0.25  
+  alphaStart 0.75
+  alphaEnd 0.5
+  sizeStart 0.100000001
+  sizeEnd 0.075000003
+  sizeStart_y 0
+  sizeEnd_y 0
+  frameStart 0
+  frameEnd 0
+  birthrate 5
+  lifeExp 1
+  mass 0
+  spread 0
+  particleRot 200
+  velocity 0
+  randvel 0
+  fps 0
+  xsize 1
+  ysize 10
+  bounce_co 0
+  blurlength 10
+  lightningDelay 0.0900000036
+  lightningRadius 0.0450000018
+  lightningScale 0
+  p2p_bezier2 0
+  p2p_bezier3 0
+  combinetime 0
+  drag 0
+  grav 0
+  threshold 0
+endnode
+node reference g_wxswfa_v_elec_ref
+  parent g_wxswfa_v_elec
+  #part-number 4
+  refModel fx_ref
+  reattachable 1
+  position -0.00832378957 -0.00986764021 0.632588983
+  orientation -1 3.31644003e-007 -2.13432003e-007 -3.14159012
+endnode
+endmodelgeom wxswfa_fxshred
+
+donemodel wxswfa_fxshred

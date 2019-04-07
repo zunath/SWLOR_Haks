@@ -1,0 +1,1339 @@
+#MAXMODEL ASCII
+# model: dlp_pipe_11 
+filedependancy sewer_plc_door_7.max
+newmodel dlp_pipe_11 
+setsupermodel dlp_pipe_11 NULL
+classification Character
+setanimationscale 1.0
+#MAXGEOM  ASCII
+beginmodelgeom dlp_pipe_11 
+node dummy dlp_pipe_11 
+  parent NULL 
+endnode
+node trimesh Object10 
+  parent dlp_pipe_11 
+  position 0.0 0.0 3.15685
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.878431 0.337255 0.337255  
+  ambient 1.0 1.0 1.0  
+  diffuse 1.0 1.0 1.0  
+  specular 0.0 0.0 0.0  
+  shininess 11.0 
+    bitmap ttr01_black00
+    verts 5
+     0.15 0.0 0.4
+     0.0463525 -0.142658 0.4
+     -0.121353 -0.0881678 0.4
+     -0.121353 0.0881678 0.4
+     0.0463526 0.142658 0.4
+    faces 3
+     2 1 0  32  2 1 0  1
+     3 2 0  32  3 2 0  1
+     4 3 0  32  4 3 0  1
+    tverts 5
+     0.999501 0.5 0 
+     0.617916 0.999501 0 
+     0.000499517 0.808708 0 
+     0.000499576 0.191292 0 
+     0.617916 0.000499576 0 
+endnode
+node trimesh Line10 
+  parent dlp_pipe_11 
+  position 0.0 0.0 3.15685
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.878431 0.337255 0.337255  
+  ambient 1.0 1.0 1.0  
+  diffuse 1.0 1.0 1.0  
+  specular 0.0 0.0 0.0  
+  shininess 11.0 
+    bitmap tds01_metal03
+    verts 5
+     0.15 0.0 -0.6
+     0.0463526 -0.142658 -0.6
+     -0.121353 -0.0881678 -0.6
+     -0.121353 0.0881678 -0.6
+     0.0463526 0.142658 -0.6
+    faces 3
+     1 2 0  32  1 2 0  1
+     2 3 0  32  2 3 0  1
+     3 4 0  32  3 4 0  1
+    tverts 5
+     0.411686 0.639997 0 
+     0.300881 0.779198 0 
+     0.121595 0.726028 0 
+     0.121595 0.553967 0 
+     0.300881 0.500797 0 
+endnode
+node trimesh Object457 
+  parent dlp_pipe_11 
+  position 0.0 0.0 3.15685
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.878431 0.337255 0.337255  
+  ambient 1.0 1.0 1.0  
+  diffuse 1.0 1.0 1.0  
+  specular 0.0 0.0 0.0  
+  shininess 11.0 
+    bitmap tds01_npipe1
+    verts 10
+     0.15 0.0 -0.6
+     0.0463526 -0.142658 -0.6
+     -0.121353 -0.0881678 -0.6
+     -0.121353 0.0881678 -0.6
+     0.0463526 0.142658 -0.6
+     0.15 0.0 0.4
+     0.0463525 -0.142658 0.4
+     -0.121353 -0.0881678 0.4
+     -0.121353 0.0881678 0.4
+     0.0463526 0.142658 0.4
+    faces 10
+     0 5 6  1  0 5 6  1
+     6 1 0  1  6 1 0  1
+     1 6 7  1  1 6 7  1
+     7 2 1  1  7 2 1  1
+     2 7 8  1  2 7 8  1
+     8 3 2  1  8 3 2  1
+     3 8 9  1  3 8 10  1
+     9 4 3  1  11 12 3  1
+     4 9 5  1  4 9 5  1
+     5 0 4  1  5 0 4  1
+    tverts 13
+     0.75 0.380984 0 
+     0.53515 0.380984 0 
+     0.341715 0.380984 0 
+     0.158285 0.380984 0 
+     0.96485 0.380984 0 
+     0.75 0.936539 0 
+     0.53515 0.936539 0 
+     0.341715 0.936539 0 
+     0.158285 0.936539 0 
+     0.96485 0.936539 0 
+     -0.0351499 0.936539 0 
+     -0.0351499 0.936539 0 
+     -0.0351496 0.380984 0 
+endnode
+node emitter emit_water02 
+  parent dlp_pipe_11 
+  position 0.0 0.0 2.53172
+  orientation  -0.57735 0.57735 -0.57735  -2.0944
+  wirecolor 0.52549 0.231373 0.0313726  
+    colorStart 0.556863 0.556863 0.415686  
+    colorEnd 0.741176 0.741176 0.619608  
+    alphaStart 0.8 
+    alphaEnd 0.4 
+    sizeStart 0.3 
+    sizeEnd 0.8 
+    sizeStart_y 0.0 
+    sizeEnd_y 0.0 
+    frameStart 0 
+    frameEnd 0 
+    birthrate 50 
+    spawnType 0 
+    lifeExp 1.5 
+    mass 0.4 
+    spread 0.174533 
+    particleRot 0.0 
+    velocity 0.0 
+    randvel 0.2 
+    fps 0 
+    random 0 
+    inherit 1 
+    inherit_local 0 
+    inherit_part 0 
+    inheritvel 0 
+    xSize 10 
+    ySize 10 
+    bounce 0 
+    bounce_co 20.0 
+    loop 0 
+    update Fountain 
+    render Normal 
+    Blend Lighten 
+    update_sel 1 
+    render_sel 1 
+    blend_sel 3 
+    deadspace 0.0 
+    opacity 0.5 
+    blurlength 10.0 
+    lightningDelay 0.0 
+    lightningRadius 0.0 
+    lightningScale 0.0 
+    blastRadius 0.0 
+    blastLength 0.0 
+    twosidedtex 0 
+    p2p 0 
+    p2p_sel 1 
+    p2p_type Bezier 
+    p2p_bezier2 0.0 
+    p2p_bezier3 0.0 
+    combinetime 0.0 
+    Drag 0.0 
+    grav 0.0 
+    threshold 0.0 
+    texture Fxpa_splash 
+    xgrid 1 
+    ygrid 1 
+    affectedByWind true 
+    m_isTinted 1 
+    renderorder 0 
+    Splat 0 
+endnode
+endmodelgeom dlp_pipe_11 
+
+#MAXANIM ASCII
+newanim default dlp_pipe_11 
+ length 0.0333333
+ transtime 0.25
+animroot dlp_pipe_10
+node dummy dlp_pipe_11 
+  parent NULL 
+endnode
+node dummy Object10 
+  parent dlp_pipe_11 
+endnode
+node dummy Line10 
+  parent dlp_pipe_11 
+endnode
+node dummy Object457 
+  parent dlp_pipe_11 
+endnode
+node emitter emit_water02 
+  parent dlp_pipe_11 
+    positionkey 
+      0.0  0.0 0.0 2.53172
+      0.0333333  0.0 0.0 2.53172
+    endlist 
+    orientationkey 
+      0.0   0.57735 -0.57735 0.57735  2.0944
+      0.0333333   0.57735 -0.57735 0.57735  2.0944
+    endlist 
+    colorStartkey
+      0.0   0.556863 0.556863 0.415686
+      0.0333333   0.556863 0.556863 0.415686
+    endlist
+    colorEndkey
+      0.0   0.741176 0.741176 0.619608
+      0.0333333   0.741176 0.741176 0.619608
+    endlist
+    alphaStartkey
+      0.0   0.8
+      0.0333333   0.8
+    endlist
+    alphaEndkey
+      0.0   0.4
+      0.0333333   0.4
+    endlist
+    sizeStartkey
+      0.0   0.3
+      0.0333333   0.3
+    endlist
+    sizeEndkey
+      0.0   0.8
+      0.0333333   0.8
+    endlist
+    sizeStart_ykey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    sizeEnd_ykey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    lockAxeskey
+      0.0   1.0
+      0.0333333   1.0
+    endlist
+    frameStartkey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    frameEndkey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    birthratekey
+      0.0   50.0
+      0.0333333   50.0
+    endlist
+    spawnTypekey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    lifeExpkey
+      0.0   1.5
+      0.0333333   1.5
+    endlist
+    masskey
+      0.0   0.4
+      0.0333333   0.4
+    endlist
+    spreadkey
+      0.0   0.174533
+      0.0333333   0.174533
+    endlist
+    particleRotkey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    velocitykey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    randvelkey
+      0.0   0.2
+      0.0333333   0.2
+    endlist
+    fpskey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    randomkey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    inheritkey
+      0.0   1.0
+      0.0333333   1.0
+    endlist
+    inherit_localkey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    inherit_partkey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    inheritvelkey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    xSizekey
+      0.0   10.0
+      0.0333333   10.0
+    endlist
+    ySizekey
+      0.0   10.0
+      0.0333333   10.0
+    endlist
+    bouncekey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    bounce_cokey
+      0.0   20.0
+      0.0333333   20.0
+    endlist
+    loopkey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    chunkykey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    opacitykey
+      0.0   0.5
+      0.0333333   0.5
+    endlist
+    blurlengthkey
+      0.0   10.0
+      0.0333333   10.0
+    endlist
+    lightningDelaykey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    lightningRadiuskey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    lightningSubDivkey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    lightningScalekey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    blastRadiuskey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    blastLengthkey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    twosidedtexkey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    p2pkey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    p2p_bezier2key
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    p2p_bezier3key
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    combinetimekey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    Dragkey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    gravkey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    thresholdkey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    xgridkey
+      0.0   1.0
+      0.0333333   1.0
+    endlist
+    ygridkey
+      0.0   1.0
+      0.0333333   1.0
+    endlist
+    affectedByWindkey
+      0.0   1.0
+      0.0333333   1.0
+    endlist
+    m_isTintedkey
+      0.0   1.0
+      0.0333333   1.0
+    endlist
+    renderorderkey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    Splatkey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+endnode
+doneanim default dlp_pipe_11 
+
+#MAXANIM ASCII
+newanim on dlp_pipe_11 
+ length 0.233333
+ transtime 0.25
+animroot dlp_pipe_10
+node dummy dlp_pipe_11 
+  parent NULL 
+endnode
+node dummy Object10 
+  parent dlp_pipe_11 
+endnode
+node dummy Line10 
+  parent dlp_pipe_11 
+endnode
+node dummy Object457 
+  parent dlp_pipe_11 
+endnode
+node emitter emit_water02 
+  parent dlp_pipe_11 
+    positionkey 
+      0.0  0.0 0.0 2.53172
+      0.233333  0.0 0.0 2.53172
+    endlist 
+    orientationkey 
+      0.0   0.57735 -0.57735 0.57735  2.0944
+      0.233333   0.57735 -0.57735 0.57735  2.0944
+    endlist 
+    colorStartkey
+      0.0   0.556863 0.556863 0.415686
+      0.233333   0.556863 0.556863 0.415686
+    endlist
+    colorEndkey
+      0.0   0.741176 0.741176 0.619608
+      0.233333   0.741176 0.741176 0.619608
+    endlist
+    alphaStartkey
+      0.0   0.8
+      0.233333   0.8
+    endlist
+    alphaEndkey
+      0.0   0.4
+      0.233333   0.4
+    endlist
+    sizeStartkey
+      0.0   0.3
+      0.233333   0.3
+    endlist
+    sizeEndkey
+      0.0   0.8
+      0.233333   0.8
+    endlist
+    sizeStart_ykey
+      0.0   0.0
+      0.233333   0.0
+    endlist
+    sizeEnd_ykey
+      0.0   0.0
+      0.233333   0.0
+    endlist
+    lockAxeskey
+      0.0   1.0
+      0.233333   1.0
+    endlist
+    frameStartkey
+      0.0   0.0
+      0.233333   0.0
+    endlist
+    frameEndkey
+      0.0   0.0
+      0.233333   0.0
+    endlist
+    birthratekey
+      0.0   50.0
+      0.233333   20.0
+    endlist
+    spawnTypekey
+      0.0   0.0
+      0.233333   0.0
+    endlist
+    lifeExpkey
+      0.0   1.5
+      0.233333   1.5
+    endlist
+    masskey
+      0.0   0.4
+      0.233333   0.3
+    endlist
+    spreadkey
+      0.0   0.174533
+      0.233333   0.174533
+    endlist
+    particleRotkey
+      0.0   0.0
+      0.233333   0.0
+    endlist
+    velocitykey
+      0.0   0.0
+      0.233333   0.0
+    endlist
+    randvelkey
+      0.0   0.2
+      0.233333   0.1
+    endlist
+    fpskey
+      0.0   0.0
+      0.233333   0.0
+    endlist
+    randomkey
+      0.0   0.0
+      0.233333   0.0
+    endlist
+    inheritkey
+      0.0   1.0
+      0.233333   1.0
+    endlist
+    inherit_localkey
+      0.0   0.0
+      0.233333   0.0
+    endlist
+    inherit_partkey
+      0.0   0.0
+      0.233333   0.0
+    endlist
+    inheritvelkey
+      0.0   0.0
+      0.233333   0.0
+    endlist
+    xSizekey
+      0.0   10.0
+      0.233333   10.0
+    endlist
+    ySizekey
+      0.0   10.0
+      0.233333   10.0
+    endlist
+    bouncekey
+      0.0   0.0
+      0.233333   0.0
+    endlist
+    bounce_cokey
+      0.0   20.0
+      0.233333   20.0
+    endlist
+    loopkey
+      0.0   0.0
+      0.233333   0.0
+    endlist
+    chunkykey
+      0.0   0.0
+      0.233333   0.0
+    endlist
+    opacitykey
+      0.0   0.5
+      0.233333   0.5
+    endlist
+    blurlengthkey
+      0.0   10.0
+      0.233333   10.0
+    endlist
+    lightningDelaykey
+      0.0   0.0
+      0.233333   0.0
+    endlist
+    lightningRadiuskey
+      0.0   0.0
+      0.233333   0.0
+    endlist
+    lightningSubDivkey
+      0.0   0.0
+      0.233333   0.0
+    endlist
+    lightningScalekey
+      0.0   0.0
+      0.233333   0.0
+    endlist
+    blastRadiuskey
+      0.0   0.0
+      0.233333   0.0
+    endlist
+    blastLengthkey
+      0.0   0.0
+      0.233333   0.0
+    endlist
+    twosidedtexkey
+      0.0   0.0
+      0.233333   0.0
+    endlist
+    p2pkey
+      0.0   0.0
+      0.233333   0.0
+    endlist
+    p2p_bezier2key
+      0.0   0.0
+      0.233333   0.0
+    endlist
+    p2p_bezier3key
+      0.0   0.0
+      0.233333   0.0
+    endlist
+    combinetimekey
+      0.0   0.0
+      0.233333   0.0
+    endlist
+    Dragkey
+      0.0   0.0
+      0.233333   0.0
+    endlist
+    gravkey
+      0.0   0.0
+      0.233333   0.0
+    endlist
+    thresholdkey
+      0.0   0.0
+      0.233333   0.0
+    endlist
+    xgridkey
+      0.0   1.0
+      0.233333   1.0
+    endlist
+    ygridkey
+      0.0   1.0
+      0.233333   1.0
+    endlist
+    affectedByWindkey
+      0.0   1.0
+      0.233333   1.0
+    endlist
+    m_isTintedkey
+      0.0   1.0
+      0.233333   1.0
+    endlist
+    renderorderkey
+      0.0   0.0
+      0.233333   0.0
+    endlist
+    Splatkey
+      0.0   0.0
+      0.233333   0.0
+    endlist
+endnode
+doneanim on dlp_pipe_11 
+
+#MAXANIM ASCII
+newanim on2off dlp_pipe_11 
+ length 0.666667
+ transtime 0.25
+animroot dlp_pipe_10
+node dummy dlp_pipe_11 
+  parent NULL 
+endnode
+node dummy Object10 
+  parent dlp_pipe_11 
+endnode
+node dummy Line10 
+  parent dlp_pipe_11 
+endnode
+node dummy Object457 
+  parent dlp_pipe_11 
+endnode
+node emitter emit_water02 
+  parent dlp_pipe_11 
+    positionkey 
+      0.0  0.0 0.0 2.53172
+      0.666667  0.0 0.0 2.53172
+    endlist 
+    orientationkey 
+      0.0   0.57735 -0.57735 0.57735  2.0944
+      0.666667   0.57735 -0.57735 0.57735  2.0944
+    endlist 
+    colorStartkey
+      0.0   0.556863 0.556863 0.415686
+      0.666667   0.556863 0.556863 0.415686
+    endlist
+    colorEndkey
+      0.0   0.741176 0.741176 0.619608
+      0.666667   0.741176 0.741176 0.619608
+    endlist
+    alphaStartkey
+      0.0   0.8
+      0.666667   0.8
+    endlist
+    alphaEndkey
+      0.0   0.4
+      0.666667   0.4
+    endlist
+    sizeStartkey
+      0.0   0.3
+      0.666667   0.3
+    endlist
+    sizeEndkey
+      0.0   0.8
+      0.666667   0.8
+    endlist
+    sizeStart_ykey
+      0.0   0.0
+      0.666667   0.0
+    endlist
+    sizeEnd_ykey
+      0.0   0.0
+      0.666667   0.0
+    endlist
+    lockAxeskey
+      0.0   1.0
+      0.666667   1.0
+    endlist
+    frameStartkey
+      0.0   0.0
+      0.666667   0.0
+    endlist
+    frameEndkey
+      0.0   0.0
+      0.666667   0.0
+    endlist
+    birthratekey
+      0.0   50.0
+      0.666667   0.0
+    endlist
+    spawnTypekey
+      0.0   0.0
+      0.666667   0.0
+    endlist
+    lifeExpkey
+      0.0   1.5
+      0.666667   1.5
+    endlist
+    masskey
+      0.0   0.4
+      0.666667   0.4
+    endlist
+    spreadkey
+      0.0   0.174533
+      0.666667   0.174533
+    endlist
+    particleRotkey
+      0.0   0.0
+      0.666667   0.0
+    endlist
+    velocitykey
+      0.0   0.0
+      0.666667   0.0
+    endlist
+    randvelkey
+      0.0   0.2
+      0.666667   0.2
+    endlist
+    fpskey
+      0.0   0.0
+      0.666667   0.0
+    endlist
+    randomkey
+      0.0   0.0
+      0.666667   0.0
+    endlist
+    inheritkey
+      0.0   1.0
+      0.666667   1.0
+    endlist
+    inherit_localkey
+      0.0   0.0
+      0.666667   0.0
+    endlist
+    inherit_partkey
+      0.0   0.0
+      0.666667   0.0
+    endlist
+    inheritvelkey
+      0.0   0.0
+      0.666667   0.0
+    endlist
+    xSizekey
+      0.0   10.0
+      0.666667   10.0
+    endlist
+    ySizekey
+      0.0   10.0
+      0.666667   10.0
+    endlist
+    bouncekey
+      0.0   0.0
+      0.666667   0.0
+    endlist
+    bounce_cokey
+      0.0   20.0
+      0.666667   20.0
+    endlist
+    loopkey
+      0.0   0.0
+      0.666667   0.0
+    endlist
+    chunkykey
+      0.0   0.0
+      0.666667   0.0
+    endlist
+    opacitykey
+      0.0   0.5
+      0.666667   0.5
+    endlist
+    blurlengthkey
+      0.0   10.0
+      0.666667   10.0
+    endlist
+    lightningDelaykey
+      0.0   0.0
+      0.666667   0.0
+    endlist
+    lightningRadiuskey
+      0.0   0.0
+      0.666667   0.0
+    endlist
+    lightningSubDivkey
+      0.0   0.0
+      0.666667   0.0
+    endlist
+    lightningScalekey
+      0.0   0.0
+      0.666667   0.0
+    endlist
+    blastRadiuskey
+      0.0   0.0
+      0.666667   0.0
+    endlist
+    blastLengthkey
+      0.0   0.0
+      0.666667   0.0
+    endlist
+    twosidedtexkey
+      0.0   0.0
+      0.666667   0.0
+    endlist
+    p2pkey
+      0.0   0.0
+      0.666667   0.0
+    endlist
+    p2p_bezier2key
+      0.0   0.0
+      0.666667   0.0
+    endlist
+    p2p_bezier3key
+      0.0   0.0
+      0.666667   0.0
+    endlist
+    combinetimekey
+      0.0   0.0
+      0.666667   0.0
+    endlist
+    Dragkey
+      0.0   0.0
+      0.666667   0.0
+    endlist
+    gravkey
+      0.0   0.0
+      0.666667   0.0
+    endlist
+    thresholdkey
+      0.0   0.0
+      0.666667   0.0
+    endlist
+    xgridkey
+      0.0   1.0
+      0.666667   1.0
+    endlist
+    ygridkey
+      0.0   1.0
+      0.666667   1.0
+    endlist
+    affectedByWindkey
+      0.0   1.0
+      0.666667   1.0
+    endlist
+    m_isTintedkey
+      0.0   1.0
+      0.666667   1.0
+    endlist
+    renderorderkey
+      0.0   0.0
+      0.666667   0.0
+    endlist
+    Splatkey
+      0.0   0.0
+      0.666667   0.0
+    endlist
+endnode
+doneanim on2off dlp_pipe_11 
+
+#MAXANIM ASCII
+newanim off dlp_pipe_11 
+ length 0.0333333
+ transtime 0.25
+animroot dlp_pipe_10
+node dummy dlp_pipe_11 
+  parent NULL 
+endnode
+node dummy Object10 
+  parent dlp_pipe_11 
+endnode
+node dummy Line10 
+  parent dlp_pipe_11 
+endnode
+node dummy Object457 
+  parent dlp_pipe_11 
+endnode
+node emitter emit_water02 
+  parent dlp_pipe_11 
+    positionkey 
+      0.0  0.0 0.0 2.53172
+      0.0333333  0.0 0.0 2.53172
+    endlist 
+    orientationkey 
+      0.0   0.57735 -0.57735 0.57735  2.0944
+      0.0333333   0.57735 -0.57735 0.57735  2.0944
+    endlist 
+    colorStartkey
+      0.0   0.556863 0.556863 0.415686
+      0.0333333   0.556863 0.556863 0.415686
+    endlist
+    colorEndkey
+      0.0   0.741176 0.741176 0.619608
+      0.0333333   0.741176 0.741176 0.619608
+    endlist
+    alphaStartkey
+      0.0   0.8
+      0.0333333   0.8
+    endlist
+    alphaEndkey
+      0.0   0.4
+      0.0333333   0.4
+    endlist
+    sizeStartkey
+      0.0   0.3
+      0.0333333   0.3
+    endlist
+    sizeEndkey
+      0.0   0.8
+      0.0333333   0.8
+    endlist
+    sizeStart_ykey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    sizeEnd_ykey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    lockAxeskey
+      0.0   1.0
+      0.0333333   1.0
+    endlist
+    frameStartkey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    frameEndkey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    birthratekey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    spawnTypekey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    lifeExpkey
+      0.0   1.5
+      0.0333333   1.5
+    endlist
+    masskey
+      0.0   0.4
+      0.0333333   0.4
+    endlist
+    spreadkey
+      0.0   0.174533
+      0.0333333   0.174533
+    endlist
+    particleRotkey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    velocitykey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    randvelkey
+      0.0   0.2
+      0.0333333   0.2
+    endlist
+    fpskey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    randomkey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    inheritkey
+      0.0   1.0
+      0.0333333   1.0
+    endlist
+    inherit_localkey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    inherit_partkey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    inheritvelkey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    xSizekey
+      0.0   10.0
+      0.0333333   10.0
+    endlist
+    ySizekey
+      0.0   10.0
+      0.0333333   10.0
+    endlist
+    bouncekey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    bounce_cokey
+      0.0   20.0
+      0.0333333   20.0
+    endlist
+    loopkey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    chunkykey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    opacitykey
+      0.0   0.5
+      0.0333333   0.5
+    endlist
+    blurlengthkey
+      0.0   10.0
+      0.0333333   10.0
+    endlist
+    lightningDelaykey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    lightningRadiuskey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    lightningSubDivkey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    lightningScalekey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    blastRadiuskey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    blastLengthkey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    twosidedtexkey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    p2pkey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    p2p_bezier2key
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    p2p_bezier3key
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    combinetimekey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    Dragkey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    gravkey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    thresholdkey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    xgridkey
+      0.0   1.0
+      0.0333333   1.0
+    endlist
+    ygridkey
+      0.0   1.0
+      0.0333333   1.0
+    endlist
+    affectedByWindkey
+      0.0   1.0
+      0.0333333   1.0
+    endlist
+    m_isTintedkey
+      0.0   1.0
+      0.0333333   1.0
+    endlist
+    renderorderkey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    Splatkey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+endnode
+doneanim off dlp_pipe_11 
+
+#MAXANIM ASCII
+newanim off2on dlp_pipe_11 
+ length 0.666667
+ transtime 0.25
+animroot dlp_pipe_10
+node dummy dlp_pipe_11 
+  parent NULL 
+endnode
+node dummy Object10 
+  parent dlp_pipe_11 
+endnode
+node dummy Line10 
+  parent dlp_pipe_11 
+endnode
+node dummy Object457 
+  parent dlp_pipe_11 
+endnode
+node emitter emit_water02 
+  parent dlp_pipe_11 
+    positionkey 
+      0.0  0.0 0.0 2.53172
+    endlist 
+    orientationkey 
+      0.0   0.57735 -0.57735 0.57735  2.0944
+    endlist 
+    colorStartkey
+      0.0   0.556863 0.556863 0.415686
+    endlist
+    colorEndkey
+      0.0   0.741176 0.741176 0.619608
+    endlist
+    alphaStartkey
+      0.0   0.8
+    endlist
+    alphaEndkey
+      0.0   0.4
+    endlist
+    sizeStartkey
+      0.0   0.3
+    endlist
+    sizeEndkey
+      0.0   0.8
+    endlist
+    sizeStart_ykey
+      0.0   0.0
+    endlist
+    sizeEnd_ykey
+      0.0   0.0
+    endlist
+    lockAxeskey
+      0.0   1.0
+    endlist
+    frameStartkey
+      0.0   0.0
+    endlist
+    frameEndkey
+      0.0   0.0
+    endlist
+    birthratekey
+      0.0   0.0
+      0.666667   50.0
+    endlist
+    spawnTypekey
+      0.0   0.0
+    endlist
+    lifeExpkey
+      0.0   1.5
+    endlist
+    masskey
+      0.0   0.4
+    endlist
+    spreadkey
+      0.0   0.174533
+    endlist
+    particleRotkey
+      0.0   0.0
+    endlist
+    velocitykey
+      0.0   0.0
+    endlist
+    randvelkey
+      0.0   0.2
+    endlist
+    fpskey
+      0.0   0.0
+    endlist
+    randomkey
+      0.0   0.0
+    endlist
+    inheritkey
+      0.0   1.0
+    endlist
+    inherit_localkey
+      0.0   0.0
+    endlist
+    inherit_partkey
+      0.0   0.0
+    endlist
+    inheritvelkey
+      0.0   0.0
+    endlist
+    xSizekey
+      0.0   10.0
+    endlist
+    ySizekey
+      0.0   10.0
+    endlist
+    bouncekey
+      0.0   0.0
+    endlist
+    bounce_cokey
+      0.0   20.0
+    endlist
+    loopkey
+      0.0   0.0
+    endlist
+    chunkykey
+      0.0   0.0
+    endlist
+    opacitykey
+      0.0   0.5
+    endlist
+    blurlengthkey
+      0.0   10.0
+    endlist
+    lightningDelaykey
+      0.0   0.0
+    endlist
+    lightningRadiuskey
+      0.0   0.0
+    endlist
+    lightningSubDivkey
+      0.0   0.0
+    endlist
+    lightningScalekey
+      0.0   0.0
+    endlist
+    blastRadiuskey
+      0.0   0.0
+    endlist
+    blastLengthkey
+      0.0   0.0
+    endlist
+    twosidedtexkey
+      0.0   0.0
+    endlist
+    p2pkey
+      0.0   0.0
+    endlist
+    p2p_bezier2key
+      0.0   0.0
+    endlist
+    p2p_bezier3key
+      0.0   0.0
+    endlist
+    combinetimekey
+      0.0   0.0
+    endlist
+    Dragkey
+      0.0   0.0
+    endlist
+    gravkey
+      0.0   0.0
+    endlist
+    thresholdkey
+      0.0   0.0
+    endlist
+    xgridkey
+      0.0   1.0
+    endlist
+    ygridkey
+      0.0   1.0
+    endlist
+    affectedByWindkey
+      0.0   1.0
+    endlist
+    m_isTintedkey
+      0.0   1.0
+    endlist
+    renderorderkey
+      0.0   0.0
+    endlist
+    Splatkey
+      0.0   0.0
+    endlist
+endnode
+doneanim off2on dlp_pipe_11 
+
+donemodel dlp_pipe_11 
+

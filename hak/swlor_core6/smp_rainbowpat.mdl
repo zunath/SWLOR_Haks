@@ -1,0 +1,819 @@
+# Rewritten by CleanModels 3 Version 3.2.2.1 Sat Jan 03 17:22:53 2009
+# NOCOMPILE
+#MAXMODEL ASCII
+filedependency Unknown
+newmodel smp_rainbowpat
+setsupermodel smp_rainbowpat null
+setanimationscale 1
+classification EFFECT
+#MAXGEOM ASCII
+beginmodelgeom smp_rainbowpat
+node dummy smp_rainbowpat
+  parent NULL
+endnode
+node emitter red
+  parent smp_rainbowpat
+  wirecolor 0.0235294 0.5254900 0.4431370
+  update_sel 1
+  update Fountain
+  render_sel 1
+  render Normal
+  blend_sel 3
+  blend Lighten
+  spawntype 0
+  xsize 609.6000000
+  ysize 609.6000000
+  inherit 0
+  inherit_local 1
+  inheritvel 0
+  inherit_part 0
+  renderorder 0
+  threshold 0
+  combinetime 0
+  deadspace 0.2094400
+  opacity 0.5000000
+  colorStart 1 0 0
+  colorEnd 1 1 1
+  alphaStart 1
+  alphaEnd 1
+  sizeStart 0.2500000
+  sizeEnd 0.3000000
+  sizeStart_y 0
+  sizeEnd_y 0
+  birthrate 75
+  lifeExp 2
+  mass 0
+  spread 6.2831900
+  particleRot 0
+  velocity 0
+  randvel 2
+  bounce_co 0
+  blurlength 10
+  loop 0
+  bounce 0
+  m_isTinted 0
+  splat 0
+  affectedByWind false
+  texture fxpa_flare
+  twosidedtex 0
+  xgrid 1
+  ygrid 1
+  fps 1
+  frameStart 0
+  frameEnd 0
+  random 0
+  lightningDelay 0
+  lightningRadius 0
+  lightningSubDiv 0
+  lightningScale 0
+  blastRadius 0
+  blastLength 0
+  p2p 1
+  p2p_type Gravity
+  p2p_sel 2
+  p2p_bezier2 0
+  p2p_bezier3 0
+  grav 30
+  drag 1
+  orientation 0 0 0 0
+  position 0 0 3.4921875
+endnode
+node reference auroraref01
+  parent red
+  orientation 1 0 0 -3.1415927
+  wirecolor 0.7764710 0.8784310 0.3411760
+  refModel fx_ref
+  reattachable 1
+  position 0 0 0
+endnode
+node emitter blue
+  parent smp_rainbowpat
+  orientation 0.2254590 -0.9473340 -0.2274350 -1.6335900
+  wirecolor 0.0235294 0.5254900 0.4431370
+  update_sel 1
+  update Fountain
+  render_sel 1
+  render Normal
+  blend_sel 3
+  blend Lighten
+  spawntype 0
+  xsize 609.6000000
+  ysize 609.6000000
+  inherit 0
+  inherit_local 1
+  inheritvel 0
+  inherit_part 0
+  renderorder 0
+  threshold 0
+  combinetime 0
+  deadspace 0.2094400
+  opacity 0.5000000
+  colorStart 0 0.0470588 1
+  colorEnd 1 1 1
+  alphaStart 1
+  alphaEnd 1
+  sizeStart 0.2500000
+  sizeEnd 0.3000000
+  sizeStart_y 0
+  sizeEnd_y 0
+  birthrate 75
+  lifeExp 2
+  mass 0
+  spread 6.2831900
+  particleRot 0
+  velocity 0
+  randvel 2
+  bounce_co 0
+  blurlength 10
+  loop 0
+  bounce 0
+  m_isTinted 0
+  splat 0
+  affectedByWind false
+  texture fxpa_flare
+  twosidedtex 0
+  xgrid 1
+  ygrid 1
+  fps 1
+  frameStart 0
+  frameEnd 0
+  random 0
+  lightningDelay 0
+  lightningRadius 0
+  lightningSubDiv 0
+  lightningScale 0
+  blastRadius 0
+  blastLength 0
+  p2p 1
+  p2p_type Gravity
+  p2p_sel 2
+  p2p_bezier2 0
+  p2p_bezier3 0
+  grav 30
+  drag 1
+  position 0 0 3.4921875
+endnode
+node reference auroraref02
+  parent blue
+  orientation 1 0 0 -3.1415927
+  wirecolor 0.7764710 0.8784310 0.3411760
+  refModel fx_ref
+  reattachable 1
+  position 0 0 0
+endnode
+node emitter teal
+  parent smp_rainbowpat
+  orientation 0.4390160 0.7839200 0.4390160 -1.8118800
+  wirecolor 0.0235294 0.5254900 0.4431370
+  update_sel 1
+  update Fountain
+  render_sel 1
+  render Normal
+  blend_sel 3
+  blend Lighten
+  spawntype 0
+  xsize 609.6000000
+  ysize 609.6000000
+  inherit 0
+  inherit_local 1
+  inheritvel 0
+  inherit_part 0
+  renderorder 0
+  threshold 0
+  combinetime 0
+  deadspace 0.2094400
+  opacity 0.5000000
+  colorStart 0 1 0.9176470
+  colorEnd 1 1 1
+  alphaStart 1
+  alphaEnd 1
+  sizeStart 0.2500000
+  sizeEnd 0.3000000
+  sizeStart_y 0
+  sizeEnd_y 0
+  birthrate 75
+  lifeExp 2
+  mass 0
+  spread 6.2831900
+  particleRot 0
+  velocity 0
+  randvel 2
+  bounce_co 0
+  blurlength 10
+  loop 0
+  bounce 0
+  m_isTinted 0
+  splat 0
+  affectedByWind false
+  texture fxpa_flare
+  twosidedtex 0
+  xgrid 1
+  ygrid 1
+  fps 1
+  frameStart 0
+  frameEnd 0
+  random 0
+  lightningDelay 0
+  lightningRadius 0
+  lightningSubDiv 0
+  lightningScale 0
+  blastRadius 0
+  blastLength 0
+  p2p 1
+  p2p_type Gravity
+  p2p_sel 2
+  p2p_bezier2 0
+  p2p_bezier3 0
+  grav 30
+  drag 1
+  position 0 0 3.4921875
+endnode
+node reference auroraref03
+  parent teal
+  orientation 1 0 0 -3.1415927
+  wirecolor 0.7764710 0.8784310 0.3411760
+  refModel fx_ref
+  reattachable 1
+  position 0 0 0
+endnode
+node emitter green
+  parent smp_rainbowpat
+  orientation 1 0 0 -1.4660800
+  wirecolor 0.0235294 0.5254900 0.4431370
+  update_sel 1
+  update Fountain
+  render_sel 1
+  render Normal
+  blend_sel 3
+  blend Lighten
+  spawntype 0
+  xsize 609.6000000
+  ysize 609.6000000
+  inherit 0
+  inherit_local 1
+  inheritvel 0
+  inherit_part 0
+  renderorder 0
+  threshold 0
+  combinetime 0
+  deadspace 0.2094400
+  opacity 0.5000000
+  colorStart 0.1647060 1 0
+  colorEnd 1 1 1
+  alphaStart 1
+  alphaEnd 1
+  sizeStart 0.2500000
+  sizeEnd 0.3000000
+  sizeStart_y 0
+  sizeEnd_y 0
+  birthrate 75
+  lifeExp 2
+  mass 0
+  spread 6.2831900
+  particleRot 0
+  velocity 0
+  randvel 2
+  bounce_co 0
+  blurlength 10
+  loop 0
+  bounce 0
+  m_isTinted 0
+  splat 0
+  affectedByWind false
+  texture fxpa_flare
+  twosidedtex 0
+  xgrid 1
+  ygrid 1
+  fps 1
+  frameStart 0
+  frameEnd 0
+  random 0
+  lightningDelay 0
+  lightningRadius 0
+  lightningSubDiv 0
+  lightningScale 0
+  blastRadius 0
+  blastLength 0
+  p2p 1
+  p2p_type Gravity
+  p2p_sel 2
+  p2p_bezier2 0
+  p2p_bezier3 0
+  grav 30
+  drag 1
+  position 0 0 3.4921875
+endnode
+node reference auroraref04
+  parent green
+  orientation -1 0 0 -3.1415927
+  wirecolor 0.7764710 0.8784310 0.3411760
+  refModel fx_ref
+  reattachable 1
+  position 0 0 0
+endnode
+node emitter yellow
+  parent smp_rainbowpat
+  orientation 0.9599070 0.1004570 0.2617010 -2.4355200
+  wirecolor 0.0235294 0.5254900 0.4431370
+  update_sel 1
+  update Fountain
+  render_sel 1
+  render Normal
+  blend_sel 3
+  blend Lighten
+  spawntype 0
+  xsize 609.6000000
+  ysize 609.6000000
+  inherit 0
+  inherit_local 1
+  inheritvel 0
+  inherit_part 0
+  renderorder 0
+  threshold 0
+  combinetime 0
+  deadspace 0.2094400
+  opacity 0.5000000
+  colorStart 1 0.9647060 0
+  colorEnd 1 1 1
+  alphaStart 1
+  alphaEnd 1
+  sizeStart 0.2500000
+  sizeEnd 0.3000000
+  sizeStart_y 0
+  sizeEnd_y 0
+  birthrate 75
+  lifeExp 2
+  mass 0
+  spread 6.2831900
+  particleRot 0
+  velocity 0
+  randvel 2
+  bounce_co 0
+  blurlength 10
+  loop 0
+  bounce 0
+  m_isTinted 0
+  splat 0
+  affectedByWind false
+  texture fxpa_flare
+  twosidedtex 0
+  xgrid 1
+  ygrid 1
+  fps 1
+  frameStart 0
+  frameEnd 0
+  random 0
+  lightningDelay 0
+  lightningRadius 0
+  lightningSubDiv 0
+  lightningScale 0
+  blastRadius 0
+  blastLength 0
+  p2p 1
+  p2p_type Gravity
+  p2p_sel 2
+  p2p_bezier2 0
+  p2p_bezier3 0
+  grav 30
+  drag 1
+  position 0 0 3.4921875
+endnode
+node reference auroraref05
+  parent yellow
+  orientation -1 0 0 -3.1415927
+  wirecolor 0.7764710 0.8784310 0.3411760
+  refModel fx_ref
+  reattachable 1
+  position 0 0 0
+endnode
+node emitter purple
+  parent smp_rainbowpat
+  orientation 1 0 0 -4.0404400
+  wirecolor 0.0235294 0.5254900 0.4431370
+  update_sel 1
+  update Fountain
+  render_sel 1
+  render Normal
+  blend_sel 3
+  blend Lighten
+  spawntype 0
+  xsize 609.6000000
+  ysize 609.6000000
+  inherit 0
+  inherit_local 1
+  inheritvel 0
+  inherit_part 0
+  renderorder 0
+  threshold 0
+  combinetime 0
+  deadspace 0.2094400
+  opacity 0.5000000
+  colorStart 1 0 0.8470590
+  colorEnd 1 1 1
+  alphaStart 1
+  alphaEnd 1
+  sizeStart 0.2500000
+  sizeEnd 0.1500000
+  sizeStart_y 0
+  sizeEnd_y 0
+  birthrate 75
+  lifeExp 2
+  mass 0
+  spread 6.2831900
+  particleRot 0
+  velocity 0
+  randvel 2
+  bounce_co 0
+  blurlength 10
+  loop 0
+  bounce 0
+  m_isTinted 0
+  splat 0
+  affectedByWind false
+  texture fxpa_flare
+  twosidedtex 0
+  xgrid 1
+  ygrid 1
+  fps 1
+  frameStart 0
+  frameEnd 0
+  random 0
+  lightningDelay 0
+  lightningRadius 0
+  lightningSubDiv 0
+  lightningScale 0
+  blastRadius 0
+  blastLength 0
+  p2p 1
+  p2p_type Gravity
+  p2p_sel 2
+  p2p_bezier2 0
+  p2p_bezier3 0
+  grav 30
+  drag 1
+  position 0 0 3.4921875
+endnode
+node reference auroraref06
+  parent purple
+  orientation -1 0 0 -3.1415927
+  wirecolor 0.7764710 0.8784310 0.3411760
+  refModel fx_ref
+  reattachable 1
+  position 0 0 0
+endnode
+endmodelgeom smp_rainbowpat
+
+#MAXANIM ASCII
+newanim cessation smp_rainbowpat
+  length 3.66667
+  transtime 0.25
+  animroot smp_rainbowpat
+  node dummy smp_rainbowpat
+    parent NULL
+  endnode
+  node emitter red
+    parent smp_rainbowpat
+    orientationkey
+      0 -1 0 0 -3.1415900
+      3.6666700 -1 0 0 -3.1415900
+    endlist
+    birthratekey
+      0 75
+      1.3333300 0
+    endlist
+  endnode
+  node reference auroraref01
+    parent red
+    orientationkey
+      0 1 0 0 -3.1415900
+      3.6666700 1 0 0 -3.1415900
+    endlist
+  endnode
+  node emitter blue
+    parent smp_rainbowpat
+    orientationkey
+      0 -0.6940000 -0.1680750 0.7000820 -2.8114000
+      3.6666700 -0.6940000 -0.1680750 0.7000820 -2.8114000
+    endlist
+    birthratekey
+      0 75
+      1.3333300 0
+    endlist
+  endnode
+  node reference auroraref02
+    parent blue
+    orientationkey
+      0 1 0 0 -3.1415900
+      3.6666700 1 0 0 -3.1415900
+    endlist
+  endnode
+  node emitter teal
+    parent smp_rainbowpat
+    orientationkey
+      0 -0.6574350 0.3681810 -0.6574350 -2.4360300
+      3.6666700 -0.6574350 0.3681810 -0.6574350 -2.4360300
+    endlist
+    birthratekey
+      0 75
+      1.3333300 0
+    endlist
+  endnode
+  node reference auroraref03
+    parent teal
+    orientationkey
+      0 1 0 0 -3.1415900
+      3.6666700 1 0 0 -3.1415900
+    endlist
+  endnode
+  node emitter green
+    parent smp_rainbowpat
+    orientationkey
+      0 -1 0 0 -1.6755200
+      3.6666700 -1 0 0 -1.6755200
+    endlist
+    birthratekey
+      0 75
+      1.3333300 0
+    endlist
+  endnode
+  node reference auroraref04
+    parent green
+    orientationkey
+      0 -1 0 0 -3.1415900
+      3.6666700 -1 0 0 -3.1415900
+    endlist
+  endnode
+  node emitter yellow
+    parent smp_rainbowpat
+    orientationkey
+      0 -0.7958710 0.5652510 -0.2169790 -0.8988060
+      3.6666700 -0.7958710 0.5652510 -0.2169790 -0.8988060
+    endlist
+    birthratekey
+      0 75
+      1.3333300 0
+    endlist
+  endnode
+  node reference auroraref05
+    parent yellow
+    orientationkey
+      0 -1 0 0 -3.1415900
+      3.6666700 -1 0 0 -3.1415900
+    endlist
+  endnode
+  node emitter purple
+    parent smp_rainbowpat
+    orientationkey
+      0 1 0 0 -0.8988450
+      3.6666700 1 0 0 -0.8988450
+    endlist
+    birthratekey
+      0 75
+      1.3333300 0
+    endlist
+  endnode
+  node reference auroraref06
+    parent purple
+    orientationkey
+      0 -1 0 0 -3.1415900
+      3.6666700 -1 0 0 -3.1415900
+    endlist
+  endnode
+doneanim cessation smp_rainbowpat
+
+#MAXANIM ASCII
+newanim duration smp_rainbowpat
+  length 0.333333
+  transtime 0.25
+  animroot smp_rainbowpat
+  node dummy smp_rainbowpat
+    parent NULL
+  endnode
+  node emitter red
+    parent smp_rainbowpat
+    orientationkey
+      0 -1 0 0 -3.1415900
+      0.3333330 -1 0 0 -3.1415900
+    endlist
+    birthratekey
+      0 75
+      0.3333330 75
+    endlist
+  endnode
+  node reference auroraref01
+    parent red
+    orientationkey
+      0 1 0 0 -3.1415900
+      0.3333330 1 0 0 -3.1415900
+    endlist
+  endnode
+  node emitter blue
+    parent smp_rainbowpat
+    orientationkey
+      0 -0.6940000 -0.1680750 0.7000820 -2.8114000
+      0.3333330 -0.6940000 -0.1680750 0.7000820 -2.8114000
+    endlist
+    birthratekey
+      0 75
+      0.3333330 75
+    endlist
+  endnode
+  node reference auroraref02
+    parent blue
+    orientationkey
+      0 1 0 0 -3.1415900
+      0.3333330 1 0 0 -3.1415900
+    endlist
+  endnode
+  node emitter teal
+    parent smp_rainbowpat
+    orientationkey
+      0 -0.6574350 0.3681810 -0.6574350 -2.4360300
+      0.3333330 -0.6574350 0.3681810 -0.6574350 -2.4360300
+    endlist
+    birthratekey
+      0 75
+      0.3333330 75
+    endlist
+  endnode
+  node reference auroraref03
+    parent teal
+    orientationkey
+      0 1 0 0 -3.1415900
+      0.3333330 1 0 0 -3.1415900
+    endlist
+  endnode
+  node emitter green
+    parent smp_rainbowpat
+    orientationkey
+      0 -1 0 0 -1.6755200
+      0.3333330 -1 0 0 -1.6755200
+    endlist
+    birthratekey
+      0 75
+      0.3333330 75
+    endlist
+  endnode
+  node reference auroraref04
+    parent green
+    orientationkey
+      0 -1 0 0 -3.1415900
+      0.3333330 -1 0 0 -3.1415900
+    endlist
+  endnode
+  node emitter yellow
+    parent smp_rainbowpat
+    orientationkey
+      0 -0.7958710 0.5652510 -0.2169790 -0.8988060
+      0.3333330 -0.7958710 0.5652510 -0.2169790 -0.8988060
+    endlist
+    birthratekey
+      0 75
+      0.3333330 75
+    endlist
+  endnode
+  node reference auroraref05
+    parent yellow
+    orientationkey
+      0 -1 0 0 -3.1415900
+      0.3333330 -1 0 0 -3.1415900
+    endlist
+  endnode
+  node emitter purple
+    parent smp_rainbowpat
+    orientationkey
+      0 1 0 0 -0.8988450
+      0.3333330 1 0 0 -0.8988450
+    endlist
+    birthratekey
+      0 75
+      0.3333330 75
+    endlist
+  endnode
+  node reference auroraref06
+    parent purple
+    orientationkey
+      0 -1 0 0 -3.1415900
+      0.3333330 -1 0 0 -3.1415900
+    endlist
+  endnode
+doneanim duration smp_rainbowpat
+
+#MAXANIM ASCII
+newanim impact smp_rainbowpat
+  length 1
+  transtime 0.25
+  animroot smp_rainbowpat
+  node dummy smp_rainbowpat
+    parent NULL
+  endnode
+  node emitter red
+    parent smp_rainbowpat
+    orientationkey
+      0 -1 0 0 -3.1415900
+      1 -1 0 0 -3.1415900
+    endlist
+    birthratekey
+      0 0
+      1 75
+    endlist
+  endnode
+  node reference auroraref01
+    parent red
+    orientationkey
+      0 1 0 0 -3.1415900
+      1 1 0 0 -3.1415900
+    endlist
+  endnode
+  node emitter blue
+    parent smp_rainbowpat
+    orientationkey
+      0 -0.6940000 -0.1680750 0.7000820 -2.8114000
+      1 -0.6940000 -0.1680750 0.7000820 -2.8114000
+    endlist
+    birthratekey
+      0 0
+      1 75
+    endlist
+  endnode
+  node reference auroraref02
+    parent blue
+    orientationkey
+      0 1 0 0 -3.1415900
+      1 1 0 0 -3.1415900
+    endlist
+  endnode
+  node emitter teal
+    parent smp_rainbowpat
+    orientationkey
+      0 -0.6574350 0.3681810 -0.6574350 -2.4360300
+      1 -0.6574350 0.3681810 -0.6574350 -2.4360300
+    endlist
+    birthratekey
+      0 0
+      1 75
+    endlist
+  endnode
+  node reference auroraref03
+    parent teal
+    orientationkey
+      0 1 0 0 -3.1415900
+      1 1 0 0 -3.1415900
+    endlist
+  endnode
+  node emitter green
+    parent smp_rainbowpat
+    orientationkey
+      0 -1 0 0 -1.6755200
+      1 -1 0 0 -1.6755200
+    endlist
+    birthratekey
+      0 0
+      1 75
+    endlist
+  endnode
+  node reference auroraref04
+    parent green
+    orientationkey
+      0 -1 0 0 -3.1415900
+      1 -1 0 0 -3.1415900
+    endlist
+  endnode
+  node emitter yellow
+    parent smp_rainbowpat
+    orientationkey
+      0 -0.7958710 0.5652510 -0.2169790 -0.8988060
+      1 -0.7958710 0.5652510 -0.2169790 -0.8988060
+    endlist
+    birthratekey
+      0 0
+      1 75
+    endlist
+  endnode
+  node reference auroraref05
+    parent yellow
+    orientationkey
+      0 -1 0 0 -3.1415900
+      1 -1 0 0 -3.1415900
+    endlist
+  endnode
+  node emitter purple
+    parent smp_rainbowpat
+    orientationkey
+      0 1 0 0 -0.8988450
+      1 1 0 0 -0.8988450
+    endlist
+    birthratekey
+      0 0
+      1 75
+    endlist
+  endnode
+  node reference auroraref06
+    parent purple
+    orientationkey
+      0 -1 0 0 -3.1415900
+      1 -1 0 0 -3.1415900
+    endlist
+  endnode
+doneanim impact smp_rainbowpat
+donemodel smp_rainbowpat

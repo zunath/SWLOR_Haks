@@ -1,0 +1,526 @@
+#MAXMODEL ASCII
+# model: dlp_grate_02 
+filedependancy sewer_plc_door_7.max
+newmodel dlp_grate_02 
+setsupermodel dlp_grate_02 NULL
+classification Item
+#MAXGEOM  ASCII
+beginmodelgeom dlp_grate_02 
+node dummy dlp_grate_02 
+  parent NULL 
+endnode
+node trimesh Object01 
+  parent dlp_grate_02 
+  position 0.0 0.0 2.8
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.52549 0.431373 0.0313726  
+     danglymesh 0
+     period 1.0
+     tightness 1.0
+     displacement 0.025
+     showdispl true
+     displtype 1
+     Alpha 1.0
+     transparencyhint 0
+     tilefade 0
+     scale 1.0
+     render 1
+     Shadow 0
+     beaming 0
+     inheritcolor 0
+     selfillumcolor 0.0 0.0 0.0 
+     rotatetexture 0
+     center 0.0 0.0 -5.0 
+     gizmo SubAnim:Gizmo
+  ambient 1.0 1.0 1.0  
+  diffuse 1.0 1.0 1.0  
+  specular 0.0 0.0 0.0  
+  shininess 11.0 
+    bitmap tds01_grate02
+    verts 4
+     -0.214406 -0.214406 -0.05
+     -0.214406 0.214406 -0.05
+     0.214406 0.214406 -0.05
+     0.214406 -0.214406 -0.05
+    faces 2
+     0 1 2  2  0 1 2  2
+     2 3 0  2  2 3 0  2
+    tverts 4
+     0.251015 0.254707 0 
+     0.251015 0.756368 0 
+     0.743448 0.756368 0 
+     0.743448 0.254707 0 
+endnode
+node trimesh beam 
+  parent dlp_grate_02 
+  position 0.0 0.0 2.8
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.423529 0.0313726 0.533333  
+     danglymesh 0
+     period 1.0
+     tightness 1.0
+     displacement 0.025
+     showdispl true
+     displtype 1
+     Alpha 1.0
+     transparencyhint 0
+     tilefade 0
+     scale 1.0
+     render 1
+     Shadow 0
+     beaming 1
+     inheritcolor 0
+     selfillumcolor 0.0 0.0 0.0 
+     rotatetexture 0
+     center -2.57336 3.09967 0.0 
+     gizmo SubAnim:Gizmo
+    bitmap NULL
+    verts 3
+     -0.116488 -0.0823608 0.0
+     0.0650207 -0.0823608 0.0
+     0.0650207 0.144354 0.0
+    faces 1
+     1 2 0  1  0 0 0  1
+endnode
+node trimesh Object02 
+  parent dlp_grate_02 
+  position 0.0 0.0 2.8
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.52549 0.431373 0.0313726  
+     danglymesh 0
+     period 1.0
+     tightness 1.0
+     displacement 0.025
+     showdispl true
+     displtype 1
+     Alpha 1.0
+     transparencyhint 0
+     tilefade 0
+     scale 1.0
+     render 1
+     Shadow 0
+     beaming 0
+     inheritcolor 0
+     selfillumcolor 0.0 0.0 0.0 
+     rotatetexture 0
+     center 0.0 0.0 20.0 
+     gizmo SubAnim:Gizmo
+  ambient 1.0 1.0 1.0  
+  diffuse 1.0 1.0 1.0  
+  specular 0.0 0.0 0.0  
+  shininess 11.0 
+    bitmap ttr01_black00
+    verts 4
+     -0.3 -0.3 0.2
+     0.3 -0.3 0.2
+     -0.3 0.3 0.2
+     0.3 0.3 0.2
+    faces 2
+     0 1 3  4  0 1 3  1
+     3 2 0  4  3 2 0  1
+    tverts 4
+     0.000499517 0.000499755 0 
+     0.9995 0.000499517 0 
+     0.000499755 0.999501 0 
+     0.999501 0.9995 0 
+endnode
+node trimesh Box07 
+  parent dlp_grate_02 
+  position 0.0 0.0 2.8
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.52549 0.431373 0.0313726  
+     danglymesh 0
+     period 1.0
+     tightness 1.0
+     displacement 0.025
+     showdispl true
+     displtype 1
+     Alpha 1.0
+     transparencyhint 0
+     tilefade 0
+     scale 1.0
+     render 1
+     Shadow 0
+     beaming 0
+     inheritcolor 0
+     selfillumcolor 0.0 0.0 0.0 
+     rotatetexture 0
+     center 0.0 0.0 7.5 
+     gizmo SubAnim:Gizmo
+  ambient 1.0 1.0 1.0  
+  diffuse 1.0 1.0 1.0  
+  specular 0.0 0.0 0.0  
+  shininess 11.0 
+    bitmap dls10_sewpipe
+    verts 12
+     -0.3 -0.3 0.0
+     0.3 -0.3 0.0
+     -0.3 0.3 0.0
+     0.3 0.3 0.0
+     -0.3 -0.3 0.2
+     0.3 -0.3 0.2
+     -0.3 0.3 0.2
+     0.3 0.3 0.2
+     -0.214406 -0.214406 -0.05
+     -0.214406 0.214406 -0.05
+     0.214406 0.214406 -0.05
+     0.214406 -0.214406 -0.05
+    faces 16
+     0 1 5  8  12 13 14  5
+     5 4 0  8  15 16 17  5
+     1 3 7  16  18 19 20  4
+     7 5 1  16  21 5 22  4
+     3 2 6  32  23 24 25  6
+     6 7 3  32  26 7 27  6
+     2 0 4  64  28 29 30  3
+     4 6 2  64  4 6 31  3
+     0 2 9  0  32 33 34  2
+     9 8 0  0  35 36 37  2
+     2 3 10  0  38 39 40  2
+     10 9 2  0  41 9 2  2
+     3 1 11  0  42 43 44  2
+     11 10 3  0  45 10 3  2
+     1 0 8  0  46 0 47  2
+     8 11 1  0  8 11 1  2
+    tverts 48
+     0.733799 0.4 0 
+     0.533799 0.4 0 
+     0.733799 0.6 0 
+     0.533799 0.6 0 
+     0.6 0.220889 0 
+     0.4 0.220889 0 
+     0.4 0.220889 0 
+     0.533799 0.220889 0 
+     0.705268 0.428531 0 
+     0.705268 0.571469 0 
+     0.56233 0.571469 0 
+     0.56233 0.428531 0 
+     0.266201 0.154222 0 
+     0.466201 0.154222 0 
+     0.466201 0.220889 0 
+     0.466201 0.220889 0 
+     0.266201 0.220889 0 
+     0.266201 0.154222 0 
+     0.4 0.154222 0 
+     0.6 0.154222 0 
+     0.6 0.220889 0 
+     0.6 0.220889 0 
+     0.4 0.154222 0 
+     0.533799 0.154222 0 
+     0.733799 0.154222 0 
+     0.733799 0.220889 0 
+     0.733799 0.220889 0 
+     0.533799 0.154222 0 
+     0.4 0.154222 0 
+     0.6 0.154222 0 
+     0.6 0.220889 0 
+     0.4 0.154222 0 
+     0.733799 0.4 0 
+     0.733799 0.6 0 
+     0.705268 0.571469 0 
+     0.705268 0.571469 0 
+     0.705268 0.428531 0 
+     0.733799 0.4 0 
+     0.733799 0.6 0 
+     0.533799 0.6 0 
+     0.56233 0.571469 0 
+     0.56233 0.571469 0 
+     0.533799 0.6 0 
+     0.533799 0.4 0 
+     0.56233 0.428531 0 
+     0.56233 0.428531 0 
+     0.533799 0.4 0 
+     0.705268 0.428531 0 
+endnode
+node trimesh Cylinder04 
+  parent dlp_grate_02 
+  position 0.00763428 0.00151123 -0.6
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.6 0.894118 0.721569  
+     danglymesh 0
+     period 1.0
+     tightness 1.0
+     displacement 0.025
+     showdispl true
+     displtype 1
+     Alpha 0.25
+     transparencyhint 0
+     tilefade 0
+     scale 1.0
+     render 1
+     Shadow 0
+     beaming 0
+     inheritcolor 0
+     selfillumcolor 0.752941 0.760784 0.662745 
+     rotatetexture 0
+     center 1.94331 0.0 175.0 
+     gizmo SubAnim:Gizmo
+    bitmap NULL
+    verts 20
+     0.203506 0.0 0.0
+     0.0628869 0.193546 0.0
+     -0.16464 0.119618 0.0
+     -0.16464 -0.119618 0.0
+     0.0628869 -0.193546 0.0
+     0.101753 0.0 3.5
+     0.0314434 0.0967729 3.5
+     -0.08232 0.059809 3.5
+     -0.08232 -0.059809 3.5
+     0.0314435 -0.0967729 3.5
+     0.203506 0.0 0.0
+     0.0628869 0.193546 0.0
+     -0.16464 0.119618 0.0
+     -0.16464 -0.119618 0.0
+     0.0628869 -0.193546 0.0
+     0.101753 0.0 3.5
+     0.0314434 0.0967729 3.5
+     -0.08232 0.059809 3.5
+     -0.08232 -0.059809 3.5
+     0.0314435 -0.0967729 3.5
+    faces 20
+     6 0 5  8  0 0 0  3
+     1 0 6  8  0 0 0  3
+     7 1 6  8  0 0 0  3
+     2 1 7  8  0 0 0  3
+     8 2 7  8  0 0 0  3
+     3 2 8  8  0 0 0  3
+     9 3 8  8  0 0 0  3
+     4 3 9  8  0 0 0  3
+     5 4 9  8  0 0 0  3
+     0 4 5  8  0 0 0  3
+     10 16 15  8  0 0 0  3
+     10 11 16  8  0 0 0  3
+     11 17 16  8  0 0 0  3
+     11 12 17  8  0 0 0  3
+     12 18 17  8  0 0 0  3
+     12 13 18  8  0 0 0  3
+     13 19 18  8  0 0 0  3
+     13 14 19  8  0 0 0  3
+     14 15 19  8  0 0 0  3
+     14 10 15  8  0 0 0  3
+endnode
+node light light 
+  parent dlp_grate_02 
+  position 0.0 0.0 0.5
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 1.0 0.898039 0.0  
+  radius 1.0 
+  multiplier 1.5
+  color 0.850981 0.850981 0.74902  
+  ambientonly 0 
+  nDynamicType 1 
+  affectDynamic 1 
+  shadow 1 
+  lightpriority 2 
+  lensflares 0
+  fadingLight 1
+endnode
+endmodelgeom dlp_grate_02 
+
+#MAXANIM ASCII
+newanim default dlp_grate_02 
+ length 0.0333333
+ transtime 0.25
+animroot dlp_grate_02
+node dummy dlp_grate_02 
+  parent NULL 
+endnode
+node trimesh Object01 
+  parent dlp_grate_02 
+    centerkey
+    endlist
+    gizmokey
+    endlist
+endnode
+node trimesh beam 
+  parent dlp_grate_02 
+    centerkey
+    endlist
+    gizmokey
+    endlist
+endnode
+node trimesh Object02 
+  parent dlp_grate_02 
+    centerkey
+    endlist
+    gizmokey
+    endlist
+endnode
+node trimesh Box07 
+  parent dlp_grate_02 
+    centerkey
+    endlist
+    gizmokey
+    endlist
+endnode
+node trimesh Cylinder04 
+  parent dlp_grate_02 
+    positionkey 
+      0.0  0.00763428 0.00151123 -0.6
+      0.0333333  0.00763428 0.00151123 -0.6
+    endlist 
+    orientationkey 
+      0.0   0.0 0.0 0.0  0.0
+      0.0333333   0.0 0.0 0.0  0.0
+    endlist 
+    centerkey
+    endlist
+    gizmokey
+    endlist
+endnode
+node light light 
+  parent dlp_grate_02 
+    positionkey 
+      0.0  0.0 0.0 0.5
+      0.0333333  0.0 0.0 0.5
+    endlist 
+    orientationkey 
+      0.0   0.0 0.0 0.0  0.0
+      0.0333333   0.0 0.0 0.0  0.0
+    endlist 
+    endlist
+    radiuskey
+    0.0   1.0
+    0.0333333   1.0
+    endlist
+endnode
+doneanim default dlp_grate_02 
+
+#MAXANIM ASCII
+newanim on dlp_grate_02 
+ length 0.0333333
+ transtime 0.25
+animroot dlp_grate_02
+node dummy dlp_grate_02 
+  parent NULL 
+endnode
+node trimesh Object01 
+  parent dlp_grate_02 
+    centerkey
+    endlist
+    gizmokey
+    endlist
+endnode
+node trimesh beam 
+  parent dlp_grate_02 
+    centerkey
+    endlist
+    gizmokey
+    endlist
+endnode
+node trimesh Object02 
+  parent dlp_grate_02 
+    centerkey
+    endlist
+    gizmokey
+    endlist
+endnode
+node trimesh Box07 
+  parent dlp_grate_02 
+    centerkey
+    endlist
+    gizmokey
+    endlist
+endnode
+node trimesh Cylinder04 
+  parent dlp_grate_02 
+    positionkey 
+      0.0  0.00763428 0.00151123 -0.6
+      0.0333333  0.00763428 0.00151123 -0.6
+    endlist 
+    orientationkey 
+      0.0   0.0 0.0 0.0  0.0
+      0.0333333   0.0 0.0 0.0  0.0
+    endlist 
+    centerkey
+    endlist
+    gizmokey
+    endlist
+endnode
+node light light 
+  parent dlp_grate_02 
+    positionkey 
+      0.0  0.0 0.0 0.5
+      0.0333333  0.0 0.0 0.5
+    endlist 
+    orientationkey 
+      0.0   0.0 0.0 0.0  0.0
+      0.0333333   0.0 0.0 0.0  0.0
+    endlist 
+    endlist
+    radiuskey
+    0.0   1.0
+    0.0333333   1.0
+    endlist
+endnode
+doneanim on dlp_grate_02 
+
+#MAXANIM ASCII
+newanim off dlp_grate_02 
+ length 0.0333333
+ transtime 0.25
+animroot dlp_grate_02
+node dummy dlp_grate_02 
+  parent NULL 
+endnode
+node trimesh Object01 
+  parent dlp_grate_02 
+    centerkey
+    endlist
+    gizmokey
+    endlist
+endnode
+node trimesh beam 
+  parent dlp_grate_02 
+    centerkey
+    endlist
+    gizmokey
+    endlist
+endnode
+node trimesh Object02 
+  parent dlp_grate_02 
+    centerkey
+    endlist
+    gizmokey
+    endlist
+endnode
+node trimesh Box07 
+  parent dlp_grate_02 
+    centerkey
+    endlist
+    gizmokey
+    endlist
+endnode
+node trimesh Cylinder04 
+  parent dlp_grate_02 
+    positionkey 
+      0.0  0.00763428 0.00151123 -4.0
+      0.0333333  0.00763428 0.00151123 -4.0
+    endlist 
+    orientationkey 
+      0.0   0.0 0.0 0.0  0.0
+      0.0333333   0.0 0.0 0.0  0.0
+    endlist 
+    centerkey
+    endlist
+    gizmokey
+    endlist
+endnode
+node light light 
+  parent dlp_grate_02 
+    positionkey 
+      0.0  0.0 0.0 0.5
+    endlist 
+    orientationkey 
+      0.0   0.0 0.0 0.0  0.0
+    endlist 
+    endlist
+    radiuskey
+    0.0   0.0
+    0.0333333   0.0
+    endlist
+endnode
+doneanim off dlp_grate_02 
+
+donemodel dlp_grate_02 
+

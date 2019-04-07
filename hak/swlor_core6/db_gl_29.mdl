@@ -1,0 +1,183 @@
+# Exported from NWmax 0.8 b61 at 23/02/2010 16:08:07
+# mdl file
+#
+#NWmax MODEL ASCII
+# model: db_gl_29
+#local file: Unknown
+filedependancy Unknown
+newmodel db_gl_29
+setsupermodel db_gl_29 null
+classification Character
+setanimationscale 0.0
+#NWmax GEOM  ASCII
+beginmodelgeom db_gl_29
+node dummy db_gl_29
+  parent NULL
+endnode
+node dummy rootdummy
+  parent db_gl_29
+  position 0.0 -0.35 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.0313726 0.0313726 0.533333 
+endnode
+node trimesh plane02
+  parent rootdummy
+  position 0.0 0.0 0.87
+  orientation 0.0 0.0 -1.0 -1.5708
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 2
+  center 0.0 0.0 84.3542 
+  bitmap db_gl_32
+  verts 8
+    -0.01 -0.556681 1.64201
+    -0.01 -0.556681 0.0450746
+    0.01 -0.556681 1.64201
+    0.01 -0.556681 0.0450746
+    0.01 0.556681 1.64201
+    0.01 0.556681 0.0450746
+    -0.01 0.556681 1.64201
+    -0.01 0.556681 0.0450746
+  faces 12
+    0 1 2  1  0 1 2  0
+    1 3 2  1  1 3 0  0
+    2 3 4  1  0 1 4  0
+    3 5 4  1  1 5 4  0
+    4 5 6  1  4 5 6  0
+    5 7 6  1  5 7 4  0
+    6 7 0  1  4 5 0  0
+    7 1 0  1  5 1 0  0
+    6 0 4  1  4 0 6  0
+    0 2 4  1  0 2 4  0
+    1 7 3  1  1 5 3  0
+    7 5 3  1  5 7 1  0
+  tverts 8
+    0.699973 0.999734 0
+    0.699937 0.000366284 0
+    0.700074 0.999752 0
+    0.700024 0.000346231 0
+    0.0 1.0 0
+    0.000102988 0.000205975 0
+    0.0 1.0 0
+    0.000102988 0.000205975 0
+endnode
+node trimesh plane01
+  parent rootdummy
+  position -0.973875 -0.289609 0.87
+  orientation 0.0 0.0 -1.0 -2.18166
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 2
+  center 0.0 0.0 84.3542 
+  bitmap db_gl_32
+  verts 8
+    -0.01 -0.556681 1.64201
+    -0.01 -0.556681 0.0450746
+    0.01 -0.556681 1.64201
+    0.01 -0.556681 0.0450746
+    0.01 0.556681 1.64201
+    0.01 0.556681 0.0450746
+    -0.01 0.556681 1.64201
+    -0.01 0.556681 0.0450746
+  faces 12
+    0 1 2  1  0 1 2  0
+    1 3 2  1  1 3 0  0
+    2 3 4  1  0 1 4  0
+    3 5 4  1  1 5 4  0
+    4 5 6  1  4 5 6  0
+    5 7 6  1  5 7 4  0
+    6 7 0  1  4 5 0  0
+    7 1 0  1  5 1 0  0
+    6 0 4  1  4 0 6  0
+    0 2 4  1  0 2 4  0
+    1 7 3  1  1 5 3  0
+    7 5 3  1  5 7 1  0
+  tverts 8
+    0.699973 0.999734 0
+    0.699937 0.000366284 0
+    0.700074 0.999752 0
+    0.700024 0.000346231 0
+    0.0 1.0 0
+    0.000102988 0.000205975 0
+    0.0 1.0 0
+    0.000102988 0.000205975 0
+endnode
+node trimesh plane03
+  parent rootdummy
+  position 0.985331 -0.299029 0.87
+  orientation 0.000872663 -0.00167637 -0.999998 -0.959933
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 2
+  center 0.0 0.0 84.3542 
+  bitmap db_gl_32
+  verts 8
+    -0.01 -0.556681 1.64201
+    -0.01 -0.556681 0.0450746
+    0.01 -0.556681 1.64201
+    0.01 -0.556681 0.0450746
+    0.01 0.556681 1.64201
+    0.01 0.556681 0.0450746
+    -0.01 0.556681 1.64201
+    -0.01 0.556681 0.0450746
+  faces 12
+    0 1 2  1  0 1 2  0
+    1 3 2  1  1 3 0  0
+    2 3 4  1  0 1 4  0
+    3 5 4  1  1 5 4  0
+    4 5 6  1  4 5 6  0
+    5 7 6  1  5 7 4  0
+    6 7 0  1  4 5 0  0
+    7 1 0  1  5 1 0  0
+    6 0 4  1  4 0 6  0
+    0 2 4  1  0 2 4  0
+    1 7 3  1  1 5 3  0
+    7 5 3  1  5 7 1  0
+  tverts 8
+    0.699973 0.999734 0
+    0.699937 0.000366284 0
+    0.700074 0.999752 0
+    0.700024 0.000346231 0
+    0.0 1.0 0
+    0.000102988 0.000205975 0
+    0.0 1.0 0
+    0.000102988 0.000205975 0
+endnode
+endmodelgeom db_gl_29
+donemodel db_gl_29

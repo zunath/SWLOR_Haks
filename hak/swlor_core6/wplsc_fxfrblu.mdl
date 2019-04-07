@@ -1,0 +1,198 @@
+#MAXMODEL ASCII
+# model: WPlSc_fxfrblu
+filedependancy WPlSc_fxfrblu.max
+newmodel WPlSc_fxfrblu
+setsupermodel WPlSc_fxfrblu NULL
+setanimationscale 1
+#MAXGEOM  ASCII
+beginmodelgeom WPlSc_fxfrblu
+node dummy WPlSc_fxfrblu
+  parent NULL
+  #part-number 0
+endnode
+node emitter g_WSwGs_V_Fire
+  parent WPlSc_fxfrblu
+  #part-number 1
+  p2p 0
+  p2p_sel 1
+  affectedByWind 0
+  m_isTinted 0
+  bounce 0
+  random 0
+  inherit 1
+  inheritvel 0
+  inherit_local 0
+  splat 0
+  inherit_part 0
+  renderorder 0
+  spawntype 0
+  update Fountain
+  render Normal
+  blend Lighten
+  texture fxpa_flame99_blu
+  xgrid 4
+  ygrid 4
+  loop 0
+  deadspace 0
+  twosidedtex 0
+  blastRadius 0
+  blastLength 0
+  position 0 1.11333001 -0.505559981
+  orientation 0.171087921 -0.970287502 0.171087921 -1.60095
+  colorStart 0.9647 0.9647 0.9647
+  colorEnd 0.3922 0.5882 0.8863
+  alphaStart 0.400000006
+  alphaEnd 0
+  sizeStart 0
+  sizeEnd 0.75
+  sizeStart_y 0
+  sizeEnd_y 0
+  frameStart 0
+  frameEnd 15
+  birthrate 24
+  lifeExp 2
+  mass 0
+  spread 0.174532995
+  particleRot 0
+  velocity 0
+  randvel 0
+  fps 16
+  xsize 42
+  ysize 12
+  bounce_co 0
+  blurlength 10
+  lightningDelay 0
+  lightningRadius 0
+  lightningScale 0
+  p2p_bezier2 0
+  p2p_bezier3 0
+  combinetime 0
+  drag 0
+  grav 0
+  threshold 0
+endnode
+node emitter g_WSwGs_V_Fire01
+  parent WPlSc_fxfrblu
+  #part-number 2
+  p2p 0
+  p2p_sel 1
+  affectedByWind 0
+  m_isTinted 0
+  bounce 0
+  random 0
+  inherit 1
+  inheritvel 0
+  inherit_local 0
+  splat 0
+  inherit_part 0
+  renderorder 0
+  spawntype 0
+  update Fountain
+  render Normal
+  blend Lighten
+  texture fxpa_flame99_blu
+  xgrid 4
+  ygrid 4
+  loop 0
+  deadspace 0
+  twosidedtex 0
+  blastRadius 0
+  blastLength 0
+  position 0 1.19703996 -0.161207005
+  orientation 0 -1 0 -1.57079995
+  colorStart 0.9647 0.9647 0.9647
+  colorEnd 0.3922 0.5882 0.8863
+  alphaStart 0.400000006
+  alphaEnd 0
+  sizeStart 0
+  sizeEnd 0.75
+  sizeStart_y 0
+  sizeEnd_y 0
+  frameStart 0
+  frameEnd 15
+  birthrate 24
+  lifeExp 2
+  mass 0
+  spread 0.174532995
+  particleRot 0
+  velocity 0
+  randvel 0
+  fps 16
+  xsize 46
+  ysize 26
+  bounce_co 0
+  blurlength 10
+  lightningDelay 0
+  lightningRadius 0
+  lightningScale 0
+  p2p_bezier2 0
+  p2p_bezier3 0
+  combinetime 0
+  drag 0
+  grav 0
+  threshold 0
+endnode
+node emitter g_WSwGs_V_Fire_b
+  parent WPlSc_fxfrblu
+  #part-number 3
+  p2p 0
+  p2p_sel 1
+  affectedByWind 0
+  m_isTinted 0
+  bounce 0
+  random 0
+  inherit 0
+  inheritvel 0
+  inherit_local 0
+  splat 0
+  inherit_part 0
+  renderorder 0
+  spawntype 0
+  update Fountain
+  render Normal
+  blend Lighten
+  texture fxpa_flare
+  xgrid 1
+  ygrid 1
+  loop 0
+  deadspace 0
+  twosidedtex 0
+  blastRadius 0
+  blastLength 0
+  position 0 1.16014004 -0.306342989
+  orientation 0.0868265554 0.992432535 -0.0868265554 -1.57839
+  colorStart 0.992156982 1 0.764706016
+  colorEnd 0.925490022 0.713725984 0.380391985
+  alphaStart 0.5
+  alphaEnd 0.25
+  sizeStart 0.0599999987
+  sizeEnd 0.0399999991
+  sizeStart_y 0
+  sizeEnd_y 0
+  frameStart 0
+  frameEnd 0
+  birthrate 10
+  lifeExp 0.5
+  mass -1
+  spread 0.174532995
+  particleRot 2
+  velocity 0
+  randvel 0.5
+  fps 0
+  xsize 76
+  ysize 22
+  bounce_co 0
+  blurlength 10
+  lightningDelay 0
+  lightningRadius 0
+  lightningScale 0
+  p2p_bezier2 0
+  p2p_bezier3 0
+  combinetime 0
+  drag 0
+  grav 0
+  threshold 0
+endnode
+endmodelgeom WPlSc_fxfrblu
+
+donemodel WPlSc_fxfrblu
