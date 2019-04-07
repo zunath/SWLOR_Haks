@@ -1,0 +1,54 @@
+# Exported from NWMax Plus for gMax v4.08.23 at 03.12.2013 05:52:10
+# pwk file
+#
+#NWMax Plus PWKMESH  ASCII
+node trimesh pwk_mesh
+  parent dl_box_blk_800_pwk
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 1.0 1.0 1.0 
+  multimaterial 30
+    Dirt
+    Obscuring
+    Grass
+    Stone
+    Wood
+    Water
+    Nonwalk
+    Transparent
+    Carpet
+    Metal
+    Puddles
+    Swamp
+    Mud
+    Leaves
+    Lava
+    BottomlessPit
+    DeepWater
+    Door
+    Snow
+    Sand
+    BareBones
+    StoneBridge
+    Temp1
+    Temp2
+    Temp3
+    Temp4
+    Temp5
+    Temp6
+    Temp7
+    Trigger
+  ambient 0.0 0.0 0.0 
+  diffuse 0.705882 0.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 10.0
+  bitmap Nonwalk
+  verts 4
+    -2.6 2.6 0.0
+    -2.6 -2.6 0.0
+    2.6 2.6 0.0
+    2.6 -2.6 0.0
+  faces 2
+    0 1 2  1  0 0 0  7
+    3 2 1  1  0 0 0  7
+endnode

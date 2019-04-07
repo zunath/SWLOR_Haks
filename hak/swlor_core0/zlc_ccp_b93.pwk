@@ -1,0 +1,25 @@
+# Exported from NWmax 0.8 b60 at 6/30/2008 12:26:21 PM
+# pwk file
+#
+#NWmax PWKMESH  ASCII
+node trimesh zlc_ccp_b93_wg
+  parent zlc_ccp_b93_pwk
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.521569 0.431373 0.0313726 
+  bitmap NULL
+  verts 4
+    -2.1875 -1.48802 0.0
+    2.8125 -1.48802 0.0
+    -2.1875 1.74717 0.0
+    2.8125 1.74717 0.0
+  faces 2
+    2 0 3  1  0 0 0  7
+    1 3 0  1  0 0 0  7
+endnode
+node dummy A07_pwk_use01
+  parent zlc_ccp_b93_pwk
+  position -0.0925002 -3.09138 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.560784 0.878431 0.341176 
+endnode

@@ -1,0 +1,42 @@
+# Exported from NWmax 0.8 b60 at 05/01/2009 23:16:02
+# pwk file
+#
+#NWmax PWKMESH  ASCII
+node dummy crys8f_pwk_use01
+  parent bhp_crys8f_pwk
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.337255 0.337255 0.337255 
+endnode
+node dummy crys8f_pwk_use02
+  parent bhp_crys8f_pwk
+  position 0.43338 4.4394 2.23718
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.337255 0.337255 0.337255 
+endnode
+node trimesh bhp_crys8f_wg
+  parent bhp_crys8f_pwk
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.337255 0.337255 0.337255 
+  bitmap NULL
+  verts 9
+    -3.08438 -2.32097 0.0
+    0.711415 -3.0803 0.0
+    1.67675 -1.80828 0.0
+    -3.37191 0.0 0.0
+    0.0 0.0 0.0
+    3.33811 0.0 0.0
+    -2.21186 2.4008 0.0
+    0.722484 3.15869 0.0
+    3.24456 1.50318 0.0
+  faces 8
+    3 0 4  1  0 0 0  7
+    1 4 0  1  0 0 0  7
+    4 1 5  1  0 0 0  7
+    2 5 1  1  0 0 0  7
+    6 3 7  1  0 0 0  7
+    4 7 3  1  0 0 0  7
+    7 4 8  1  0 0 0  7
+    5 8 4  1  0 0 0  7
+endnode
