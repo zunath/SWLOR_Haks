@@ -1,0 +1,56 @@
+# Exported from NWmax v2.01.25 at 9/29/2012 1:07:29 PM
+# pwk file
+#
+#NWmax PWKMESH  ASCII
+node dummy dye_pwk_use01
+  parent _pwk
+  position 0.0 -1.49599 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.109804 0.584314 0.694118 
+endnode
+node trimesh plc_tbldye_wg
+  parent _pwk
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.521569 0.431373 0.0313726 
+  multimaterial 20
+    Dirt
+    Obscuring
+    Grass
+    Stone
+    Wood
+    Water
+    Nonwalk
+    Transparent
+    Carpet
+    Metal
+    Puddles
+    Swamp
+    Mud
+    Leaves
+    Lava
+    BottomlessPit
+    DeepWater
+    Door
+    Snow
+    Sand
+  ambient 0.588 0.588 0.588 
+  diffuse 0.705882 0.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 10.0
+  bitmap Nonwalk
+  verts 4
+    -0.888995 -0.941908 0.0
+    0.990287 -0.941908 0.0
+    -0.888995 0.965824 0.0
+    0.990287 0.965824 0.0
+  faces 2
+    2 0 3  1  0 0 0  7
+    1 3 0  1  0 0 0  7
+endnode
+node dummy dye_pwk_use02
+  parent _pwk
+  position 0.0 1.68634 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.721569 0.607843 0.898039 
+endnode
