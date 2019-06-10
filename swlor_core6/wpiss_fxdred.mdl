@@ -1,0 +1,76 @@
+#MAXMODEL ASCII
+# model: WPISs_fxdred
+filedependancy WPISs_fxdred.max
+newmodel WPISs_fxdred
+setsupermodel WPISs_fxdred NULL
+setanimationscale 1
+#MAXGEOM  ASCII
+beginmodelgeom WPISs_fxdred
+node dummy WPISs_fxdred
+  parent NULL
+  #part-number 0
+endnode
+node emitter g_WSwGs_V_Acid_b
+  parent WPISs_fxdred
+  #part-number 2
+  p2p 0
+  p2p_sel 1
+  affectedByWind 0
+  m_isTinted 0
+  bounce 1
+  random 0
+  inherit 0
+  inheritvel 0
+  inherit_local 0
+  splat 0
+  inherit_part 0
+  renderorder 0
+  spawntype 0
+  update Fountain
+  render Normal
+  blend Lighten
+  texture fxpa_flare
+  xgrid 1
+  ygrid 1
+  loop 0
+  deadspace 0
+  twosidedtex 0
+  blastRadius 0
+  blastLength 0
+  position 0 0.960053027 0.00653239014
+  orientation 0 0 0 0
+  colorStart 1.0 0.0 0.0
+  colorEnd 0.8 0.0 0.0
+  alphaStart 1
+  alphaEnd 1
+  sizeStart 0.100000001
+  sizeEnd 0.100000001
+  sizeStart_y 0
+  sizeEnd_y 0
+  frameStart 0
+  frameEnd 0
+  birthrate 2
+  lifeExp 2
+  mass 1.5
+  spread 0
+  particleRot 0
+  velocity 0
+  randvel 0
+  fps 0
+  xsize 2
+  ysize 40
+  bounce_co 0.200000003
+  blurlength 10
+  lightningDelay 0
+  lightningRadius 0
+  lightningScale 0
+  p2p_bezier2 0
+  p2p_bezier3 0
+  combinetime 0
+  drag 0
+  grav 0
+  threshold 0
+endnode
+endmodelgeom WPISs_fxdred
+
+donemodel WPISs_fxdred

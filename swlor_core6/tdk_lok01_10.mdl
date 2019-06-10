@@ -1,0 +1,71 @@
+#Exported from 3ds max by MDL Plug-in Suite 1.0b
+#http://www.bricksbuilder.com/nwn/utils/
+#MAXMODEL ASCII
+# model: TDK_LOK01_10
+filedependancy jan4.max
+newmodel TDK_LOK01_10
+setsupermodel TDK_LOK01_10 NULL
+classification Door
+setanimationscale 1.0
+#MAXGEOM  ASCII
+beginmodelgeom TDK_LOK01_10
+node dummy TDK_LOK01_10
+  parent NULL
+endnode
+node trimesh sam
+  parent TDK_LOK01_10
+  position 0 4.15 0
+  orientation 0 0 0 0
+  wirecolor 0.777344 0.777344 0.777344
+  ambient 0.2 0.2 0.2
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 0
+  alpha 0
+  selfillumcolor 0 0 1
+  bitmap NULL
+  verts 4
+    3.60594 4.12808 0
+    -3.60594 4.12808 0
+    3.60594 -4.12808 0
+    -3.60594 -4.12808 0
+  faces 2
+    2 0 3  1  0 0 0  0
+    1 3 0  1  0 0 0  0
+endnode
+endmodelgeom TDK_LOK01_10
+
+#MAXANIM ASCII
+newanim default TDK_LOK01_10
+  length 0.0333333
+  transtime 0
+  animroot TDK_LOK01_10
+node dummy TDK_LOK01_10
+  parent NULL
+endnode
+node trimesh sam
+  parent TDK_LOK01_10
+    alphakey
+      0  0
+      0.0333333  0
+    endlist
+endnode
+doneanim default TDK_LOK01_10
+
+#MAXANIM ASCII
+newanim trans TDK_LOK01_10
+  length 0.0333333
+  transtime 0
+  animroot TDK_LOK01_10
+node dummy TDK_LOK01_10
+  parent NULL
+endnode
+node trimesh sam
+  parent TDK_LOK01_10
+    alphakey
+      0  0.3
+      0.0333333  0.3
+    endlist
+endnode
+doneanim trans TDK_LOK01_10
+donemodel TDK_LOK01_10

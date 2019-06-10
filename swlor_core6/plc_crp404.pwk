@@ -1,0 +1,68 @@
+# Exported from NWmax 0.7 at 10/4/2004 7:41:01 PM
+# pwk file
+#
+#NWmax PWKMESH  ASCII
+node trimesh PLC_CRP404_wg
+  parent PLC_CRP404_pwk
+  position -0.01951 -0.01951 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.776471 0.776471 0.776471 
+  multimaterial 20
+    Dirt
+    Obscuring
+    Grass
+    Stone
+    Wood
+    Water
+    Nonwalk
+    Transparent
+    Carpet
+    Metal
+    Puddles
+    Swamp
+    Mud
+    Leaves
+    Lava
+    BottomlessPit
+    DeepWater
+    Door
+    Snow
+    Sand
+  ambient 0.0 0.0 0.0 
+  diffuse 0.6 0.34 0.16 
+  specular 0.0 0.0 0.0 
+  shininess 11.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap Dirt
+  verts 9
+    0.0 0.0 0.0
+    -1.37035 0.752033 0.0
+    -0.764627 1.54993 0.0
+    0.684347 1.4546 0.0
+    1.51852 0.73039 0.0
+    1.45694 -0.820731 0.0
+    0.847739 -1.57371 0.0
+    -0.836288 -1.53239 0.0
+    -1.61932 -0.761933 0.0
+  faces 8
+    0 2 1  1  0 0 0  7
+    0 3 2  1  0 0 0  7
+    0 4 3  1  0 0 0  7
+    0 5 4  1  0 0 0  7
+    0 6 5  1  0 0 0  7
+    0 7 6  1  0 0 0  7
+    0 8 7  1  0 0 0  7
+    0 1 8  1  0 0 0  7
+endnode
+node dummy 404_pwk_use02
+  parent PLC_CRP404_pwk
+  position -0.0656436 2.41256 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.341176 0.878431 0.341176 
+endnode
+node dummy 404_pwk_use01
+  parent PLC_CRP404_pwk
+  position -0.026624 -2.44543 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.341176 0.878431 0.341176 
+endnode

@@ -1,0 +1,768 @@
+#MAXMODEL ASCII
+# model: dlp_grate_01 
+filedependancy sewer_plc_door_7.max
+newmodel dlp_grate_01 
+setsupermodel dlp_grate_01 NULL
+classification Item
+#MAXGEOM  ASCII
+beginmodelgeom dlp_grate_01 
+node dummy dlp_grate_01 
+  parent NULL 
+endnode
+node emitter _VTcopy_steam_03 
+  parent dlp_grate_01 
+  position 0.0 0.0 0.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.890196 0.596078 0.596078  
+    colorStart 0.560784 0.54902 0.427451  
+    colorEnd 0.0 0.0 0.0  
+    alphaStart 0.0 
+    alphaEnd 0.4 
+    sizeStart 0.5 
+    sizeEnd 2.0 
+    sizeStart_y 0.0 
+    sizeEnd_y 0.0 
+    frameStart 0 
+    frameEnd 24 
+    birthrate -9 
+    spawnType 0 
+    lifeExp 2.0 
+    mass -0.04 
+    spread 0.349066 
+    particleRot 0.0 
+    velocity 1.0 
+    randvel 0.5 
+    fps 15 
+    random 0 
+    inherit 1 
+    inherit_local 0 
+    inherit_part 0 
+    inheritvel 0 
+    xSize 80 
+    ySize 80 
+    bounce 0 
+    bounce_co 0.0 
+    loop 0 
+    update Fountain 
+    render Normal 
+    Blend Lighten 
+    update_sel 1 
+    render_sel 1 
+    blend_sel 3 
+    deadspace 0.0 
+    opacity 0.5 
+    blurlength 1.0 
+    lightningDelay 0.0 
+    lightningRadius 0.0 
+    lightningScale 0.0 
+    blastRadius 0.0 
+    blastLength 0.0 
+    twosidedtex 0 
+    p2p 0 
+    p2p_sel 1 
+    p2p_type Bezier 
+    p2p_bezier2 0.0 
+    p2p_bezier3 0.0 
+    combinetime 0.0 
+    Drag 0.0 
+    grav 0.0 
+    threshold 0.0 
+    texture fxpa_Smoke01a 
+    xgrid 4 
+    ygrid 4 
+    affectedByWind false 
+    m_isTinted 0 
+    renderorder 0 
+    Splat 0 
+endnode
+node trimesh Box05 
+  parent dlp_grate_01 
+  position 0.0 0.0 -0.02
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.345098 0.694118 0.101961  
+  ambient 1.0 1.0 1.0  
+  diffuse 1.0 1.0 1.0  
+  specular 0.0 0.0 0.0  
+  shininess 11.0 
+    bitmap tds01_grate02
+    verts 4
+     -0.32 -0.32 0.03
+     0.32 -0.32 0.03
+     -0.32 0.32 0.03
+     0.32 0.32 0.03
+    faces 2
+     0 1 3  4  0 1 3  1
+     3 2 0  4  3 2 0  1
+    tverts 4
+     0.254707 0.251015 0 
+     0.756368 0.254707 0 
+     0.252861 0.758213 0 
+     0.756368 0.758213 0 
+endnode
+node trimesh crate_sides 
+  parent dlp_grate_01 
+  position 0.0 0.0 -0.02
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.345098 0.694118 0.101961  
+  ambient 1.0 1.0 1.0  
+  diffuse 1.0 1.0 1.0  
+  specular 0.0 0.0 0.0  
+  shininess 11.0 
+    bitmap dls10_sewpipe
+    verts 8
+     -0.32 -0.32 0.0
+     0.32 -0.32 0.0
+     -0.32 0.32 0.0
+     0.32 0.32 0.0
+     -0.32 -0.32 0.03
+     0.32 -0.32 0.03
+     -0.32 0.32 0.03
+     0.32 0.32 0.03
+    faces 8
+     0 1 5  8  8 9 10  5
+     5 4 0  8  11 12 13  5
+     1 3 7  16  14 15 16  4
+     7 5 1  16  17 5 1  4
+     3 2 6  32  18 19 20  6
+     6 7 3  32  21 7 3  6
+     2 0 4  64  22 0 23  3
+     4 6 2  64  4 6 2  3
+    tverts 24
+     0.9995 0.494071 0 
+     0.000499547 0.494071 0 
+     0.000499547 0.494071 0 
+     0.000499517 0.494071 0 
+     0.9995 0.505929 0 
+     0.000499547 0.505929 0 
+     0.000499547 0.505929 0 
+     0.000499517 0.505929 0 
+     0.000499517 0.494071 0 
+     0.9995 0.494071 0 
+     0.9995 0.505929 0 
+     0.9995 0.505929 0 
+     0.000499517 0.505929 0 
+     0.000499517 0.494071 0 
+     0.000499547 0.494071 0 
+     0.9995 0.494071 0 
+     0.9995 0.505929 0 
+     0.9995 0.505929 0 
+     0.000499517 0.494071 0 
+     0.9995 0.494071 0 
+     0.9995 0.505929 0 
+     0.9995 0.505929 0 
+     0.000499547 0.494071 0 
+     0.9995 0.505929 0 
+endnode
+endmodelgeom dlp_grate_01 
+
+#MAXANIM ASCII
+newanim default dlp_grate_01 
+ length 0.0333333
+ transtime 0.25
+animroot dlp_crate01
+node dummy dlp_grate_01 
+  parent NULL 
+endnode
+node emitter _VTcopy_steam_03 
+  parent dlp_grate_01 
+    positionkey 
+      0.0  0.0 0.0 0.0
+      0.0333333  0.0 0.0 0.0
+    endlist 
+    orientationkey 
+      0.0   0.0 0.0 0.0  0.0
+      0.0333333   0.0 0.0 0.0  0.0
+    endlist 
+    colorStartkey
+      0.0   0.560784 0.54902 0.427451
+      0.0333333   0.560784 0.54902 0.427451
+    endlist
+    colorEndkey
+      0.0   0.0 0.0 0.0
+      0.0333333   0.0 0.0 0.0
+    endlist
+    alphaStartkey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    alphaEndkey
+      0.0   0.4
+      0.0333333   0.4
+    endlist
+    sizeStartkey
+      0.0   0.5
+      0.0333333   0.5
+    endlist
+    sizeEndkey
+      0.0   2.0
+      0.0333333   2.0
+    endlist
+    sizeStart_ykey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    sizeEnd_ykey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    lockAxeskey
+      0.0   1.0
+      0.0333333   1.0
+    endlist
+    frameStartkey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    frameEndkey
+      0.0   24.0
+      0.0333333   24.0
+    endlist
+    birthratekey
+      0.0   -9.0
+      0.0333333   -9.0
+    endlist
+    spawnTypekey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    lifeExpkey
+      0.0   2.0
+      0.0333333   2.0
+    endlist
+    masskey
+      0.0   -0.04
+      0.0333333   -0.04
+    endlist
+    spreadkey
+      0.0   0.349066
+      0.0333333   0.349066
+    endlist
+    particleRotkey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    velocitykey
+      0.0   1.0
+      0.0333333   1.0
+    endlist
+    randvelkey
+      0.0   0.5
+      0.0333333   0.5
+    endlist
+    fpskey
+      0.0   15.0
+      0.0333333   15.0
+    endlist
+    randomkey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    inheritkey
+      0.0   1.0
+      0.0333333   1.0
+    endlist
+    inherit_localkey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    inherit_partkey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    inheritvelkey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    xSizekey
+      0.0   80.0
+      0.0333333   80.0
+    endlist
+    ySizekey
+      0.0   80.0
+      0.0333333   80.0
+    endlist
+    bouncekey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    bounce_cokey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    loopkey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    chunkykey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    opacitykey
+      0.0   0.5
+      0.0333333   0.5
+    endlist
+    blurlengthkey
+      0.0   1.0
+      0.0333333   1.0
+    endlist
+    lightningDelaykey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    lightningRadiuskey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    lightningSubDivkey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    lightningScalekey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    blastRadiuskey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    blastLengthkey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    twosidedtexkey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    p2pkey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    p2p_bezier2key
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    p2p_bezier3key
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    combinetimekey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    Dragkey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    gravkey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    thresholdkey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    xgridkey
+      0.0   4.0
+      0.0333333   4.0
+    endlist
+    ygridkey
+      0.0   4.0
+      0.0333333   4.0
+    endlist
+    affectedByWindkey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    m_isTintedkey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    renderorderkey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    Splatkey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+endnode
+node dummy Box05 
+  parent dlp_grate_01 
+endnode
+node dummy crate_sides 
+  parent dlp_grate_01 
+endnode
+doneanim default dlp_grate_01 
+
+#MAXANIM ASCII
+newanim on dlp_grate_01 
+ length 0.733333
+ transtime 0.25
+animroot dlp_crate01
+node dummy dlp_grate_01 
+  parent NULL 
+endnode
+node emitter _VTcopy_steam_03 
+  parent dlp_grate_01 
+    positionkey 
+    endlist 
+    orientationkey 
+    endlist 
+    colorStartkey
+    endlist
+    colorEndkey
+    endlist
+    alphaStartkey
+    endlist
+    alphaEndkey
+    endlist
+    sizeStartkey
+    endlist
+    sizeEndkey
+    endlist
+    sizeStart_ykey
+    endlist
+    sizeEnd_ykey
+    endlist
+    lockAxeskey
+    endlist
+    frameStartkey
+    endlist
+    frameEndkey
+    endlist
+    birthratekey
+      0.0   10.0
+      0.733333   10.0
+    endlist
+    spawnTypekey
+    endlist
+    lifeExpkey
+    endlist
+    masskey
+    endlist
+    spreadkey
+    endlist
+    particleRotkey
+    endlist
+    velocitykey
+    endlist
+    randvelkey
+    endlist
+    fpskey
+    endlist
+    randomkey
+    endlist
+    inheritkey
+    endlist
+    inherit_localkey
+    endlist
+    inherit_partkey
+    endlist
+    inheritvelkey
+    endlist
+    xSizekey
+    endlist
+    ySizekey
+    endlist
+    bouncekey
+    endlist
+    bounce_cokey
+    endlist
+    loopkey
+    endlist
+    chunkykey
+    endlist
+    opacitykey
+    endlist
+    blurlengthkey
+    endlist
+    lightningDelaykey
+    endlist
+    lightningRadiuskey
+    endlist
+    lightningSubDivkey
+    endlist
+    lightningScalekey
+    endlist
+    blastRadiuskey
+    endlist
+    blastLengthkey
+    endlist
+    twosidedtexkey
+    endlist
+    p2pkey
+    endlist
+    p2p_bezier2key
+    endlist
+    p2p_bezier3key
+    endlist
+    combinetimekey
+    endlist
+    Dragkey
+    endlist
+    gravkey
+    endlist
+    thresholdkey
+    endlist
+    xgridkey
+    endlist
+    ygridkey
+    endlist
+    affectedByWindkey
+    endlist
+    m_isTintedkey
+    endlist
+    renderorderkey
+    endlist
+    Splatkey
+    endlist
+endnode
+node dummy Box05 
+  parent dlp_grate_01 
+endnode
+node dummy crate_sides 
+  parent dlp_grate_01 
+endnode
+doneanim on dlp_grate_01 
+
+#MAXANIM ASCII
+newanim off dlp_grate_01 
+ length 0.0333333
+ transtime 0.25
+animroot dlp_grate_01
+node dummy dlp_grate_01 
+  parent NULL 
+endnode
+node emitter _VTcopy_steam_03 
+  parent dlp_grate_01 
+    positionkey 
+      0.0  0.0 0.0 0.0
+      0.0333333  0.0 0.0 0.0
+    endlist 
+    orientationkey 
+      0.0   0.0 0.0 0.0  0.0
+      0.0333333   0.0 0.0 0.0  0.0
+    endlist 
+    colorStartkey
+      0.0   0.560784 0.54902 0.427451
+      0.0333333   0.560784 0.54902 0.427451
+    endlist
+    colorEndkey
+      0.0   0.0 0.0 0.0
+      0.0333333   0.0 0.0 0.0
+    endlist
+    alphaStartkey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    alphaEndkey
+      0.0   0.4
+      0.0333333   0.4
+    endlist
+    sizeStartkey
+      0.0   0.5
+      0.0333333   0.5
+    endlist
+    sizeEndkey
+      0.0   2.0
+      0.0333333   2.0
+    endlist
+    sizeStart_ykey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    sizeEnd_ykey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    lockAxeskey
+      0.0   1.0
+      0.0333333   1.0
+    endlist
+    frameStartkey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    frameEndkey
+      0.0   24.0
+      0.0333333   24.0
+    endlist
+    birthratekey
+      0.0   -9.0
+      0.0333333   -9.0
+    endlist
+    spawnTypekey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    lifeExpkey
+      0.0   2.0
+      0.0333333   2.0
+    endlist
+    masskey
+      0.0   -0.04
+      0.0333333   -0.04
+    endlist
+    spreadkey
+      0.0   0.349066
+      0.0333333   0.349066
+    endlist
+    particleRotkey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    velocitykey
+      0.0   1.0
+      0.0333333   1.0
+    endlist
+    randvelkey
+      0.0   0.5
+      0.0333333   0.5
+    endlist
+    fpskey
+      0.0   15.0
+      0.0333333   15.0
+    endlist
+    randomkey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    inheritkey
+      0.0   1.0
+      0.0333333   1.0
+    endlist
+    inherit_localkey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    inherit_partkey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    inheritvelkey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    xSizekey
+      0.0   80.0
+      0.0333333   80.0
+    endlist
+    ySizekey
+      0.0   80.0
+      0.0333333   80.0
+    endlist
+    bouncekey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    bounce_cokey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    loopkey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    chunkykey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    opacitykey
+      0.0   0.5
+      0.0333333   0.5
+    endlist
+    blurlengthkey
+      0.0   1.0
+      0.0333333   1.0
+    endlist
+    lightningDelaykey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    lightningRadiuskey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    lightningSubDivkey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    lightningScalekey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    blastRadiuskey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    blastLengthkey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    twosidedtexkey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    p2pkey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    p2p_bezier2key
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    p2p_bezier3key
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    combinetimekey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    Dragkey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    gravkey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    thresholdkey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    xgridkey
+      0.0   4.0
+      0.0333333   4.0
+    endlist
+    ygridkey
+      0.0   4.0
+      0.0333333   4.0
+    endlist
+    affectedByWindkey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    m_isTintedkey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    renderorderkey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+    Splatkey
+      0.0   0.0
+      0.0333333   0.0
+    endlist
+endnode
+node dummy Box05 
+  parent dlp_grate_01 
+endnode
+node dummy crate_sides 
+  parent dlp_grate_01 
+endnode
+doneanim off dlp_grate_01 
+
+donemodel dlp_grate_01 
+

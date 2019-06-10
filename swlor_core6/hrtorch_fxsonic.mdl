@@ -1,0 +1,283 @@
+# Exported from NWmax 0.8 b60 at 10/8/2011 6:00:43 PM
+# mdl file
+#
+#NWmax MODEL ASCII
+# model: hrtorch_fxsonic
+#local file: Unknown
+filedependancy Unknown
+newmodel hrtorch_fxsonic
+setsupermodel hrtorch_fxsonic NULL
+classification Effect
+#NWmax GEOM  ASCII
+beginmodelgeom hrtorch_fxsonic
+node dummy hrtorch_fxsonic
+  parent NULL
+endnode
+node emitter sound02
+  parent hrtorch_fxsonic
+  position 0.0 0.279796 0.0
+  orientation -0.0484593 -0.671574 -0.739351 -3.05361
+  wirecolor 1.0 1.0 1.0 
+  update_sel 1
+  update Fountain
+  render_sel 5
+  render Aligned_to_World_Z
+  blend_sel 3
+  Blend Lighten
+  spawntype_sel 0
+  spawnType 0
+  xSize 0.0
+  ySize 0.0
+  inherit 0
+  inherit_local 0
+  inheritvel 0
+  inherit_part 0
+  renderorder 0
+  threshold 0.0
+  combinetime 0.0
+  deadspace 0.0
+  opacity 0.5
+  colorStart 1.0 1.0 1.0 
+  colorEnd 0.862745 0.141176 0.0 
+  alphaStart 1.0
+  alphaEnd 0.0
+  sizeStart 0.200003
+  sizeEnd 0.499998
+  sizeStart_y 0.0
+  sizeEnd_y 0.0
+  birthrate 10
+  lifeExp 1.0
+  mass -0.1
+  spread 0.0
+  particleRot 0.0
+  velocity 0.8
+  randvel 0.0
+  bounce_co 0.2
+  blurlength 10.0
+  loop 0
+  bounce 0
+  m_isTinted 0
+  splat 0
+  affectedByWind false
+  texture fxpa_ring02
+  twosidedtex 0
+  xgrid 1
+  ygrid 1
+  fps 0
+  framestart 0
+  frameend 0
+  random 0
+  lightningDelay 0.0
+  lightningRadius 0.0
+  lightningSubDiv 0
+  lightningScale 0.0
+  blastRadius 0.0
+  blastLength 0.0
+  p2p 0
+  p2p_type Bezier
+  p2p_sel 1
+  p2p_bezier2 0.0
+  p2p_bezier3 0.0
+  grav 0.0
+  drag 0.0
+endnode
+node emitter OmenEmitter01
+  parent hrtorch_fxsonic
+  position 0.0 0.280187 0.00466667
+  orientation 1.0 0.0 0.0 -1.54462
+  wirecolor 1.0 1.0 1.0 
+  update_sel 1
+  update Fountain
+  render_sel 5
+  render Aligned_to_World_Z
+  blend_sel 3
+  Blend Lighten
+  spawntype_sel 0
+  spawnType -1
+  xSize 13.0
+  ySize 20.0
+  inherit 0
+  inherit_local 1
+  inheritvel 0
+  inherit_part 0
+  renderorder 0
+  threshold 0.0
+  combinetime 0.0
+  deadspace 0.0
+  opacity 0.5
+  colorStart 0.494118 0.862745 1.0 
+  colorEnd 0.729412 0.92549 1.0 
+  alphaStart 1.0
+  alphaEnd 0.0
+  sizeStart 0.1
+  sizeEnd 0.3
+  sizeStart_y 0.0
+  sizeEnd_y 0.0
+  birthrate 4
+  lifeExp 2.5
+  mass -0.02
+  spread 0.0
+  particleRot 0.0
+  velocity 0.8
+  randvel 0.1
+  bounce_co 0.0
+  blurlength 10.0
+  loop 0
+  bounce 0
+  m_isTinted 0
+  splat 0
+  affectedByWind false
+  texture Fxpa_song
+  twosidedtex 0
+  xgrid 2
+  ygrid 2
+  fps 0
+  framestart 0
+  frameend 3
+  random 1
+  lightningDelay 0.0
+  lightningRadius 0.0
+  lightningSubDiv 0
+  lightningScale 0.0
+  blastRadius 0.0
+  blastLength 0.0
+  p2p 0
+  p2p_type Bezier
+  p2p_sel 1
+  p2p_bezier2 0.0
+  p2p_bezier3 0.0
+  grav 0.0
+  drag 0.0
+endnode
+node emitter OmenEmitter02
+  parent hrtorch_fxsonic
+  position 0.0 0.280187 0.014752
+  orientation 1.0 0.0 0.0 -1.54462
+  wirecolor 1.0 1.0 1.0 
+  update_sel 1
+  update Fountain
+  render_sel 5
+  render Aligned_to_World_Z
+  blend_sel 3
+  Blend Lighten
+  spawntype_sel 0
+  spawnType -1
+  xSize 13.0
+  ySize 20.0
+  inherit 0
+  inherit_local 1
+  inheritvel 0
+  inherit_part 0
+  renderorder 0
+  threshold 0.0
+  combinetime 0.0
+  deadspace 0.0
+  opacity 0.5
+  colorStart 0.494118 0.862745 1.0 
+  colorEnd 0.729412 0.92549 1.0 
+  alphaStart 1.0
+  alphaEnd 0.0
+  sizeStart 0.1
+  sizeEnd 0.3
+  sizeStart_y 0.0
+  sizeEnd_y 0.0
+  birthrate 7
+  lifeExp 2.5
+  mass -0.02
+  spread 0.00872665
+  particleRot 0.0
+  velocity 0.8
+  randvel 0.0
+  bounce_co 0.0
+  blurlength 0.0
+  loop 0
+  bounce 0
+  m_isTinted 0
+  splat 0
+  affectedByWind false
+  texture Fxpa_song
+  twosidedtex 0
+  xgrid 2
+  ygrid 2
+  fps 0
+  framestart 0
+  frameend 3
+  random 1
+  lightningDelay 0.0
+  lightningRadius 0.0
+  lightningSubDiv 0
+  lightningScale 0.0
+  blastRadius 0.0
+  blastLength 0.0
+  p2p 0
+  p2p_type Bezier
+  p2p_sel 1
+  p2p_bezier2 0.0
+  p2p_bezier3 0.0
+  grav 0.0
+  drag 0.0
+endnode
+endmodelgeom hrtorch_fxsonic
+#NWmax ANIM ASCII
+newanim impact hrtorch_fxsonic
+  length 3.3
+  transtime 0.25
+  animroot hrtorch_fxsonic
+  event 0.0 detonate
+  event 0.166667 detonate
+  event 0.766667 detonate
+  event 1.33333 detonate
+  event 1.93333 detonate
+    node dummy hrtorch_fxsonic
+        parent NULL
+    endnode
+    node emitter sound02
+        parent hrtorch_fxsonic
+        birthratekey
+            0.0 10 
+            0.333333 10 
+            0.366667 25 
+            0.4 25 
+            2.26667 25 
+            2.3 25 
+            2.33333 10 
+        endlist
+    endnode
+    node emitter OmenEmitter01
+        parent hrtorch_fxsonic
+        birthratekey
+            0.0 4 
+            0.3 4 
+            0.633333 4 
+            0.933333 4 
+            1.1 4 
+            1.13333 6 
+            1.16667 4 
+            1.36667 4 
+            1.4 6 
+            1.43333 4 
+            1.6 4 
+            1.93333 4 
+            2.26667 0 
+        endlist
+    endnode
+    node emitter OmenEmitter02
+        parent hrtorch_fxsonic
+        birthratekey
+            0.0 7 
+            0.3 7 
+            0.633333 7 
+            0.933333 7 
+            1.1 7 
+            1.13333 9 
+            1.16667 7 
+            1.36667 7 
+            1.4 9 
+            1.43333 7 
+            1.6 7 
+            1.93333 7 
+            2.26667 3 
+        endlist
+    endnode
+doneanim impact hrtorch_fxsonic
+donemodel hrtorch_fxsonic

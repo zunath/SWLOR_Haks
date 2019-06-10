@@ -1,0 +1,929 @@
+# Rewritten by CleanModels 3 Version 3.2.2.1 Sat Jan 03 18:30:50 2009
+# NOCOMPILE
+filedependency Unknown
+newmodel zep_vwt_tecyan01
+setsupermodel zep_vwt_tecyan01 null
+setanimationscale 1
+classification EFFECT
+#MAXGEOM ASCII
+beginmodelgeom zep_vwt_tecyan01
+node dummy zep_vwt_tecyan01
+  parent NULL
+endnode
+node dummy dummy00
+  parent zep_vwt_tecyan01
+  position 0 0 0
+endnode
+node dummy dummy01
+  parent dummy00
+  position 0 0 -0.0653780
+  orientation 0 -1 0 -3.1415927
+endnode
+node emitter omenemitter01
+  parent dummy01
+  p2p 1
+  p2p_sel 0
+  affectedByWind 0
+  m_isTinted 0
+  bounce 0
+  random 0
+  inherit 0
+  inheritvel 0
+  inherit_local 0
+  splat 0
+  inherit_part 0
+  renderorder 0
+  spawntype 0
+  update Fountain
+  render Linked
+  blend Normal
+  texture fxpa_white
+  xgrid 1
+  ygrid 1
+  loop 0
+  deadspace 0
+  twosidedtex 0
+  blastRadius 0
+  blastLength 0
+  position 0 0 -0.1220440
+  orientation -1 0 0 -3.7349999
+  colorStart 0.317647 0.635294 0.933333
+  colorEnd 1 1 1
+  alphaStart 0.9500000
+  alphaEnd 0.9500000
+  sizeStart 0.1600000
+  sizeEnd 0.0100000
+  sizeStart_y 0
+  sizeEnd_y 0
+  frameStart 0
+  frameEnd 0
+  birthrate 0
+  lifeExp 1
+  mass 0.1000000
+  spread 0
+  particleRot 0
+  velocity 1
+  randvel 0
+  fps 0
+  xsize 0
+  ysize 0
+  bounce_co 0
+  blurlength 10
+  lightningDelay 0
+  lightningRadius 0
+  lightningScale 0
+  p2p_bezier2 0
+  p2p_bezier3 0
+  combinetime 0
+  drag 0.8000000
+  grav 3
+  threshold 0
+endnode
+node reference omenref01
+  parent omenemitter01
+  refModel fx_ref
+  reattachable 0
+  position 0.0008052 0.5338240 0.7914260
+  orientation -1 0 0 -2.5481801
+endnode
+node dummy dummy02
+  parent dummy00
+  position 0 0 -0.0653780
+  orientation -0.0637514 -0.9116872 -0.4059091 -3.0848401
+endnode
+node emitter omenemitter02
+  parent dummy02
+  p2p 1
+  p2p_sel 0
+  affectedByWind 0
+  m_isTinted 0
+  bounce 0
+  random 0
+  inherit 0
+  inheritvel 0
+  inherit_local 0
+  splat 0
+  inherit_part 0
+  renderorder 0
+  spawntype 0
+  update Fountain
+  render Linked
+  blend Normal
+  texture fxpa_white
+  xgrid 1
+  ygrid 1
+  loop 0
+  deadspace 0
+  twosidedtex 0
+  blastRadius 0
+  blastLength 0
+  position 0 0.0354196 -0.1558780
+  orientation -1 0 0 -3.6651900
+  colorStart 0.317647 0.635294 0.933333
+  colorEnd 1 1 1
+  alphaStart 0.9500000
+  alphaEnd 0.9500000
+  sizeStart 0.1500000
+  sizeEnd 0
+  sizeStart_y 0
+  sizeEnd_y 0
+  frameStart 0
+  frameEnd 0
+  birthrate 0
+  lifeExp 0.8000000
+  mass 0
+  spread 0
+  particleRot 0
+  velocity 2
+  randvel 0
+  fps 0
+  xsize 0
+  ysize 0
+  bounce_co 0
+  blurlength 10
+  lightningDelay 0
+  lightningRadius 0
+  lightningScale 0
+  p2p_bezier2 0
+  p2p_bezier3 0
+  combinetime 0
+  drag 1
+  grav 1
+  threshold 0
+endnode
+node reference omenref02
+  parent omenemitter02
+  refModel fx_ref
+  reattachable 0
+  position -0.0000001 0.6708050 1.0298600
+  orientation -1 0 0 -2.6878099
+endnode
+node emitter omenemitter03
+  parent dummy00
+  p2p 1
+  p2p_sel 0
+  affectedByWind 0
+  m_isTinted 0
+  bounce 0
+  random 0
+  inherit 0
+  inheritvel 0
+  inherit_local 0
+  splat 0
+  inherit_part 0
+  renderorder 0
+  spawntype 0
+  update Fountain
+  render Linked
+  blend Normal
+  texture fxpa_white
+  xgrid 1
+  ygrid 1
+  loop 0
+  deadspace 0
+  twosidedtex 0
+  blastRadius 0
+  blastLength 0
+  position 0 0.0000242 0.0700662
+  orientation -0.4836918 -0.4073648 -0.7746587 -1.8628600
+  colorStart 0.317647 0.635294 0.933333
+  colorEnd 1 1 1
+  alphaStart 0.9500000
+  alphaEnd 0.9500000
+  sizeStart 0.1500000
+  sizeEnd 0
+  sizeStart_y 0
+  sizeEnd_y 0
+  frameStart 0
+  frameEnd 0
+  birthrate 0
+  lifeExp 0.8000000
+  mass 0
+  spread 0
+  particleRot 0
+  velocity 2
+  randvel 0
+  fps 0
+  xsize 0
+  ysize 0
+  bounce_co 0
+  blurlength 10
+  lightningDelay 0
+  lightningRadius 0
+  lightningScale 0
+  p2p_bezier2 0
+  p2p_bezier3 0
+  combinetime 0
+  drag 1
+  grav 1
+  threshold 0
+endnode
+node reference omenref03
+  parent omenemitter03
+  refModel fx_ref
+  reattachable 0
+  position -0.0000001 0.6708050 1.0298600
+  orientation -1 0 0 -2.6878099
+endnode
+node dummy dummy03
+  parent dummy00
+  position 0 0 -0.0653780
+  orientation -0.1936861 -0.9112213 0.3635401 -3.2958300
+endnode
+node emitter omenemitter04
+  parent dummy03
+  p2p 1
+  p2p_sel 0
+  affectedByWind 0
+  m_isTinted 0
+  bounce 0
+  random 0
+  inherit 0
+  inheritvel 0
+  inherit_local 0
+  splat 0
+  inherit_part 0
+  renderorder 0
+  spawntype 0
+  update Fountain
+  render Linked
+  blend Normal
+  texture fxpa_white
+  xgrid 1
+  ygrid 1
+  loop 0
+  deadspace 0
+  twosidedtex 0
+  blastRadius 0
+  blastLength 0
+  position 0 -0.0158906 -0.1612790
+  orientation -1 0 0 -3.6651900
+  colorStart 0.317647 0.635294 0.933333
+  colorEnd 1 1 1
+  alphaStart 0.9500000
+  alphaEnd 0.9500000
+  sizeStart 0.1500000
+  sizeEnd 0
+  sizeStart_y 0
+  sizeEnd_y 0
+  frameStart 0
+  frameEnd 0
+  birthrate 0
+  lifeExp 0.8000000
+  mass 0
+  spread 0
+  particleRot 0
+  velocity 2
+  randvel 0
+  fps 0
+  xsize 0
+  ysize 0
+  bounce_co 0
+  blurlength 10
+  lightningDelay 0
+  lightningRadius 0
+  lightningScale 0
+  p2p_bezier2 0
+  p2p_bezier3 0
+  combinetime 0
+  drag 1
+  grav 1
+  threshold 0
+endnode
+node reference omenref04
+  parent omenemitter04
+  refModel fx_ref
+  reattachable 0
+  position -0.0000001 0.6708050 1.0298600
+  orientation -1 0 0 -2.6878099
+endnode
+node dummy dummy04
+  parent dummy00
+  position -0.0422176 -0.0091217 -0.0653780
+  orientation 0.5976621 -0.7446712 0.2970940 -2.6734500
+endnode
+node emitter omenemitter05
+  parent dummy04
+  p2p 1
+  p2p_sel 0
+  affectedByWind 0
+  m_isTinted 0
+  bounce 0
+  random 0
+  inherit 0
+  inheritvel 0
+  inherit_local 0
+  splat 0
+  inherit_part 0
+  renderorder 0
+  spawntype 0
+  update Fountain
+  render Linked
+  blend Normal
+  texture fxpa_white
+  xgrid 1
+  ygrid 1
+  loop 0
+  deadspace 0
+  twosidedtex 0
+  blastRadius 0
+  blastLength 0
+  position 0 -0.0192080 -0.1647750
+  orientation -1 0 0 -3.6651900
+  colorStart 0.317647 0.635294 0.933333
+  colorEnd 1 1 1
+  alphaStart 0.9500000
+  alphaEnd 0.9500000
+  sizeStart 0.1500000
+  sizeEnd 0
+  sizeStart_y 0
+  sizeEnd_y 0
+  frameStart 0
+  frameEnd 0
+  birthrate 0
+  lifeExp 0.8000000
+  mass 0
+  spread 0
+  particleRot 0
+  velocity 2
+  randvel 0
+  fps 0
+  xsize 0
+  ysize 0
+  bounce_co 0
+  blurlength 10
+  lightningDelay 0
+  lightningRadius 0
+  lightningScale 0
+  p2p_bezier2 0
+  p2p_bezier3 0
+  combinetime 0
+  drag 1
+  grav 1
+  threshold 0
+endnode
+node reference omenref05
+  parent omenemitter05
+  refModel fx_ref
+  reattachable 0
+  position -0.0000001 0.6708050 1.0298600
+  orientation -1 0 0 -2.6878099
+endnode
+node dummy dummy06
+  parent dummy00
+  position 0 0 0
+  orientation 0.5976620 -0.7446710 0.2970940 0.4700000
+  wirecolor 0.8352940 0.6039220 0.8980390
+endnode
+node emitter omenemitter07
+  parent dummy06
+  position 0 -0.0192080 -0.1647750
+  orientation -1 0 0 -3.6651900
+  wirecolor 0.1098040 0.1098040 0.6941180
+  colorStart 0.317647 0.635294 0.933333
+  colorEnd 1 1 1
+  alphaStart 0.9500000
+  alphaEnd 0.9500000
+  sizeStart 0.1500000
+  sizeEnd 0
+  sizeStart_y 0
+  sizeEnd_y 0
+  frameStart 0
+  frameEnd 0
+  birthrate 0
+  spawntype 0
+  lifeExp 1.3000000
+  mass 0.1000000
+  spread 0
+  particleRot 0
+  velocity 1
+  randvel 0
+  fps 0
+  random 0
+  inherit 0
+  inherit_local 0
+  inherit_part 0
+  inheritvel 0
+  xsize 0
+  ysize 0
+  bounce 0
+  bounce_co 0
+  loop 0
+  update Fountain
+  render Linked
+  blend Normal
+  update_sel 1
+  render_sel 2
+  blend_sel 1
+  deadspace 0
+  opacity 0.5000000
+  blurlength 10
+  lightningDelay 0
+  lightningRadius 0
+  lightningScale 0
+  blastRadius 0
+  blastLength 0
+  twosidedtex 0
+  p2p 1
+  p2p_sel 2
+  p2p_type Gravity
+  p2p_bezier2 0
+  p2p_bezier3 0
+  combinetime 0
+  drag 0.8000000
+  grav -2
+  threshold 0
+  texture fxpa_white
+  xgrid 1
+  ygrid 1
+  affectedByWind false
+  m_isTinted 0
+  renderorder 0
+  splat 0
+endnode
+node reference omenref07
+  parent omenemitter07
+  position -0.0000001 0.6708050 1.0298600
+  orientation -1 0 0 -0.4878100
+  wirecolor 0.8784310 0.3372550 0.3372550
+  refModel fx_ref
+  reattachable 0
+endnode
+node dummy dummy07
+  parent dummy00
+  position 0 0 0
+  orientation -0.1936860 -0.9112210 0.3635400 -0.2958300
+  wirecolor 0.8352940 0.6039220 0.8980390
+endnode
+node emitter omenemitter08
+  parent dummy07
+  position 0 -0.0192080 -0.1647750
+  orientation -1 0 0 -3.6651900
+  wirecolor 0.1098040 0.1098040 0.6941180
+  colorStart 0.317647 0.635294 0.933333
+  colorEnd 1 1 1
+  alphaStart 0.9500000
+  alphaEnd 0.9500000
+  sizeStart 0.1500000
+  sizeEnd 0
+  sizeStart_y 0
+  sizeEnd_y 0
+  frameStart 0
+  frameEnd 0
+  birthrate 0
+  spawntype 0
+  lifeExp 1.3000000
+  mass 0.1000000
+  spread 0
+  particleRot 0
+  velocity 1
+  randvel 0
+  fps 0
+  random 0
+  inherit 0
+  inherit_local 0
+  inherit_part 0
+  inheritvel 0
+  xsize 0
+  ysize 0
+  bounce 0
+  bounce_co 0
+  loop 0
+  update Fountain
+  render Linked
+  blend Normal
+  update_sel 1
+  render_sel 2
+  blend_sel 1
+  deadspace 0
+  opacity 0.5000000
+  blurlength 10
+  lightningDelay 0
+  lightningRadius 0
+  lightningScale 0
+  blastRadius 0
+  blastLength 0
+  twosidedtex 0
+  p2p 1
+  p2p_sel 2
+  p2p_type Gravity
+  p2p_bezier2 0
+  p2p_bezier3 0
+  combinetime 0
+  drag 0.8000000
+  grav -3
+  threshold 0
+  texture fxpa_white
+  xgrid 1
+  ygrid 1
+  affectedByWind false
+  m_isTinted 0
+  renderorder 0
+  splat 0
+endnode
+node reference omenref08
+  parent omenemitter08
+  position -0.0000001 0.6708050 1.0298600
+  orientation -1 0 0 -2.6878100
+  wirecolor 0.8784310 0.3372550 0.3372550
+  refModel fx_ref
+  reattachable 0
+endnode
+endmodelgeom zep_vwt_tecyan01
+
+#MAXANIM ASCII
+newanim pause1 zep_vwt_tecyan01
+  length 0.966667
+  transtime 0.25
+  animroot zep_vwt_tecyan01
+  node dummy zep_vwt_tecyan01
+    parent NULL
+  endnode
+  node dummy dummy00
+    parent zep_vwt_tecyan01
+  endnode
+  node dummy dummy01
+    parent dummy00
+    orientationkey
+      0 0 -1 0 -3.1415901
+      0.2333330 0.7071068 -0.7071068 0 -3.1415901
+      0.4666670 1 0 0 -3.1415901
+      0.7000000 0.7071068 0.7071068 0 -3.1415901
+      0.9666670 0 1 0 -3.1415901
+    endlist
+  endnode
+  node emitter omenemitter01
+    parent dummy01
+    alphastartkey
+      0 0.9500000
+      0.9666670 0.9500000
+    endlist
+    alphaendkey
+      0 0.9500000
+      0.9666670 0.9500000
+    endlist
+    birthratekey
+      0 15
+      0.9666670 15
+    endlist
+  endnode
+  node reference omenref01
+    parent omenemitter01
+  endnode
+  node emitter omenemitter06
+    parent dummy01
+    orientationkey
+      0 1 0 0 1.5708000
+      0.3000000 0.5773500 -0.5773500 -0.5773500 2.0944000
+      0.6333330 0 -0.7071070 -0.7071070 3.1415900
+      0.9333330 -0.5773500 -0.5773500 -0.5773500 4.1887900
+    endlist
+    birthratekey
+      0 50
+      0.9666670 50
+    endlist
+  endnode
+  node reference omenref06
+    parent omenemitter06
+  endnode
+  node dummy dummy02
+    parent dummy00
+    orientationkey
+      0 -0.0637514 -0.9116872 -0.4059091 -3.0848401
+      0.2333330 0.6297442 -0.7244372 -0.2803801 -2.5175800
+      0.4666670 0.9970833 -0.0697228 0.0310426 -2.3060000
+      0.7000000 0.7154016 0.6218897 0.3185179 -2.6013601
+      0.9666670 0.0637514 0.9116872 0.4059091 -3.1983499
+    endlist
+  endnode
+  node emitter omenemitter02
+    parent dummy02
+    alphaendkey
+      0 0.9500000
+      0.9666670 0.9500000
+    endlist
+    birthratekey
+      0 15
+      0.9666670 15
+    endlist
+  endnode
+  node reference omenref02
+    parent omenemitter02
+  endnode
+  node emitter omenemitter03
+    parent dummy00
+    orientationkey
+      0 -0.3442130 -0.4694459 -0.8131039 -2.0663600
+      0.2333330 -0.7421346 -0.2392939 -0.6260787 -1.5739800
+      0.5000000 -0.3442130 -0.4694459 -0.8131039 -2.0663600
+      0.7333330 -0.7421346 -0.2392939 -0.6260787 -1.5739800
+      0.9666670 -0.3442130 -0.4694459 -0.8131039 -2.0663600
+    endlist
+    alphaendkey
+      0 0.9500000
+      0.9666670 0.9500000
+    endlist
+    birthratekey
+      0 15
+      0.9666670 15
+    endlist
+  endnode
+  node reference omenref03
+    parent omenemitter03
+  endnode
+  node dummy dummy03
+    parent dummy00
+    orientationkey
+      0 -0.1936861 -0.9112213 0.3635401 -3.2958300
+      0.2333330 0.5322190 -0.8195469 0.2123340 -3.7736101
+      0.4666670 0.9747996 -0.2072009 -0.0826647 -3.8834000
+      0.7000000 0.7953311 0.5164940 -0.3173050 -3.5480199
+      0.9666670 0.1936861 0.9112213 -0.3635401 -2.9873500
+    endlist
+  endnode
+  node emitter omenemitter04
+    parent dummy03
+    alphaendkey
+      0 0.9500000
+      0.9666670 0.9500000
+    endlist
+    birthratekey
+      0 15
+      0.9666670 15
+    endlist
+  endnode
+  node reference omenref04
+    parent omenemitter04
+  endnode
+  node dummy dummy04
+    parent dummy00
+    orientationkey
+      0 0.5976621 -0.7446712 0.2970940 -2.6734500
+      0.2333330 0.9240412 -0.1011990 0.3686551 -3.2223001
+      0.4666670 0.7566493 0.6072752 0.2422781 -3.7279401
+      0.7000000 0.1087640 0.9931201 -0.0433926 -3.8960700
+      0.9666670 -0.5976621 0.7446712 -0.2970940 -3.6097400
+    endlist
+  endnode
+  node emitter omenemitter05
+    parent dummy04
+    alphaendkey
+      0 0.9500000
+      0.9666670 0.9500000
+    endlist
+    birthratekey
+      0 15
+      0.9666670 15
+    endlist
+  endnode
+  node reference omenref05
+    parent omenemitter05
+  endnode
+  node dummy dummy06
+    parent dummy00
+    orientationkey
+      0 0.5976620 -0.7446710 0.2970940 2.6734500
+      0.2333330 0.9240410 -0.1011990 0.3686550 3.2223000
+      0.4666670 0.7566490 0.6072750 0.2422780 3.7279400
+      0.7000000 0.1087640 0.9931200 -0.0433926 3.8960700
+      0.9666670 -0.5976620 0.7446710 -0.2970940 3.6097400
+    endlist
+  endnode
+  node emitter omenemitter07
+    parent dummy06
+    alphaendkey
+      0 0.9500000
+      0.9666670 0.9500000
+    endlist
+    birthratekey
+      0 15
+      0.9666670 15
+    endlist
+  endnode
+  node reference omenref07
+    parent omenemitter07
+  endnode
+  node dummy dummy07
+    parent dummy00
+    orientationkey
+      0 0.1936860 0.9112210 -0.3635400 2.9873500
+      0.2333330 0.7953310 0.5164940 -0.3173050 3.5480200
+      0.4666670 0.9748000 -0.2072010 -0.0826647 3.8834000
+      0.7000000 0.5322190 -0.8195470 0.2123340 3.7736100
+      0.9666670 -0.1936860 -0.9112210 0.3635400 3.2958300
+    endlist
+  endnode
+  node emitter omenemitter08
+    parent dummy07
+    alphaendkey
+      0 0.9500000
+      0.9666670 0.9500000
+    endlist
+    birthratekey
+      0 15
+      0.9666670 15
+    endlist
+  endnode
+  node reference omenref08
+    parent omenemitter08
+  endnode
+doneanim pause1 zep_vwt_tecyan01
+
+#MAXANIM ASCII
+newanim cpause1 zep_vwt_tecyan01
+  length 0.966667
+  transtime 0.25
+  animroot zep_vwt_tecyan01
+  node dummy zep_vwt_tecyan01
+    parent NULL
+  endnode
+  node dummy dummy00
+    parent zep_vwt_tecyan01
+  endnode
+  node dummy dummy01
+    parent dummy00
+    orientationkey
+      0 0 -1 0 -3.1415901
+      0.2333330 0.7071068 -0.7071068 0 -3.1415901
+      0.4666670 1 0 0 -3.1415901
+      0.7000000 0.7071068 0.7071068 0 -3.1415901
+      0.9666670 0 1 0 -3.1415901
+    endlist
+  endnode
+  node emitter omenemitter01
+    parent dummy01
+    alphastartkey
+      0 0.9500000
+      0.9666670 0.9500000
+    endlist
+    alphaendkey
+      0 0.9500000
+      0.9666670 0.9500000
+    endlist
+    birthratekey
+      0 15
+      0.9666670 15
+    endlist
+  endnode
+  node reference omenref01
+    parent omenemitter01
+  endnode
+  node emitter omenemitter06
+    parent dummy01
+    orientationkey
+      0 1 0 0 1.5708000
+      0.3000000 0.5773500 -0.5773500 -0.5773500 2.0944000
+      0.6333330 0 -0.7071070 -0.7071070 3.1415900
+      0.9333330 -0.5773500 -0.5773500 -0.5773500 4.1887900
+    endlist
+    birthratekey
+      0 50
+      0.9666670 50
+    endlist
+  endnode
+  node reference omenref06
+    parent omenemitter06
+  endnode
+  node dummy dummy02
+    parent dummy00
+    orientationkey
+      0 -0.0637514 -0.9116872 -0.4059091 -3.0848401
+      0.2333330 0.6297442 -0.7244372 -0.2803801 -2.5175800
+      0.4666670 0.9970833 -0.0697228 0.0310426 -2.3060000
+      0.7000000 0.7154016 0.6218897 0.3185179 -2.6013601
+      0.9666670 0.0637514 0.9116872 0.4059091 -3.1983499
+    endlist
+  endnode
+  node emitter omenemitter02
+    parent dummy02
+    alphaendkey
+      0 0.9500000
+      0.9666670 0.9500000
+    endlist
+    birthratekey
+      0 15
+      0.9666670 15
+    endlist
+  endnode
+  node reference omenref02
+    parent omenemitter02
+  endnode
+  node emitter omenemitter03
+    parent dummy00
+    orientationkey
+      0 -0.3442130 -0.4694459 -0.8131039 -2.0663600
+      0.2333330 -0.7421346 -0.2392939 -0.6260787 -1.5739800
+      0.5000000 -0.3442130 -0.4694459 -0.8131039 -2.0663600
+      0.7333330 -0.7421346 -0.2392939 -0.6260787 -1.5739800
+      0.9666670 -0.3442130 -0.4694459 -0.8131039 -2.0663600
+    endlist
+    alphaendkey
+      0 0.9500000
+      0.9666670 0.9500000
+    endlist
+    birthratekey
+      0 15
+      0.9666670 15
+    endlist
+  endnode
+  node reference omenref03
+    parent omenemitter03
+  endnode
+  node dummy dummy03
+    parent dummy00
+    orientationkey
+      0 -0.1936861 -0.9112213 0.3635401 -3.2958300
+      0.2333330 0.5322190 -0.8195469 0.2123340 -3.7736101
+      0.4666670 0.9747996 -0.2072009 -0.0826647 -3.8834000
+      0.7000000 0.7953311 0.5164940 -0.3173050 -3.5480199
+      0.9666670 0.1936861 0.9112213 -0.3635401 -2.9873500
+    endlist
+  endnode
+  node emitter omenemitter04
+    parent dummy03
+    alphaendkey
+      0 0.9500000
+      0.9666670 0.9500000
+    endlist
+    birthratekey
+      0 15
+      0.9666670 15
+    endlist
+  endnode
+  node reference omenref04
+    parent omenemitter04
+  endnode
+  node dummy dummy04
+    parent dummy00
+    orientationkey
+      0 0.5976621 -0.7446712 0.2970940 -2.6734500
+      0.2333330 0.9240412 -0.1011990 0.3686551 -3.2223001
+      0.4666670 0.7566493 0.6072752 0.2422781 -3.7279401
+      0.7000000 0.1087640 0.9931201 -0.0433926 -3.8960700
+      0.9666670 -0.5976621 0.7446712 -0.2970940 -3.6097400
+    endlist
+  endnode
+  node emitter omenemitter05
+    parent dummy04
+    alphaendkey
+      0 0.9500000
+      0.9666670 0.9500000
+    endlist
+    birthratekey
+      0 15
+      0.9666670 15
+    endlist
+  endnode
+  node reference omenref05
+    parent omenemitter05
+  endnode
+  node dummy dummy06
+    parent dummy00
+    orientationkey
+      0 0.5976620 -0.7446710 0.2970940 2.6734500
+      0.2333330 0.9240410 -0.1011990 0.3686550 3.2223000
+      0.4666670 0.7566490 0.6072750 0.2422780 3.7279400
+      0.7000000 0.1087640 0.9931200 -0.0433926 3.8960700
+      0.9666670 -0.5976620 0.7446710 -0.2970940 3.6097400
+    endlist
+  endnode
+  node emitter omenemitter07
+    parent dummy06
+    alphaendkey
+      0 0.9500000
+      0.9666670 0.9500000
+    endlist
+    birthratekey
+      0 15
+      0.9666670 15
+    endlist
+  endnode
+  node reference omenref07
+    parent omenemitter07
+  endnode
+  node dummy dummy07
+    parent dummy00
+    orientationkey
+      0 0.1936860 0.9112210 -0.3635400 2.9873500
+      0.2333330 0.7953310 0.5164940 -0.3173050 3.5480200
+      0.4666670 0.9748000 -0.2072010 -0.0826647 3.8834000
+      0.7000000 0.5322190 -0.8195470 0.2123340 3.7736100
+      0.9666670 -0.1936860 -0.9112210 0.3635400 3.2958300
+    endlist
+  endnode
+  node emitter omenemitter08
+    parent dummy07
+    alphaendkey
+      0 0.9500000
+      0.9666670 0.9500000
+    endlist
+    birthratekey
+      0 15
+      0.9666670 15
+    endlist
+  endnode
+  node reference omenref08
+    parent omenemitter08
+  endnode
+doneanim cpause1 zep_vwt_tecyan01
+donemodel zep_vwt_tecyan01

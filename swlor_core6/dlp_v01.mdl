@@ -1,0 +1,2733 @@
+#MAXMODEL ASCII
+# model: DLP_V01 
+filedependancy chest.max
+newmodel DLP_V01 
+setsupermodel DLP_V01 NULL
+classification Character
+setanimationscale 1.0
+#MAXGEOM  ASCII
+beginmodelgeom DLP_V01 
+node dummy DLP_V01 
+  parent NULL 
+endnode
+node dummy V01_impact 
+  parent DLP_V01 
+  position 0.0 0.0 0.85
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.0313726 0.431373 0.52549  
+endnode
+node dummy V01_ground 
+  parent DLP_V01 
+  position 0.0 0.0 0.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.0313726 0.431373 0.52549  
+endnode
+node dummy V01_hand 
+  parent DLP_V01 
+  position 0.0 0.0 1.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.0313726 0.431373 0.52549  
+endnode
+node dummy V01_head 
+  parent DLP_V01 
+  position 0.0 0.0 2.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.0313726 0.431373 0.52549  
+endnode
+node dummy V01_head_hit 
+  parent DLP_V01 
+  position 0.0 0.0 1.5
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.0313726 0.431373 0.52549  
+endnode
+node dummy anim_box 
+  parent DLP_V01 
+  position 0.0 0.0 0.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.603922 0.603922 0.898039  
+endnode
+node trimesh Box01 
+  parent anim_box 
+  position -0.0221402 -0.0295203 0.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.333333 0.109804 0.694118  
+  ambient 1.0 1.0 1.0  
+  diffuse 1.0 1.0 1.0  
+  specular 0.0 0.0 0.0  
+  shininess 11.0 
+    bitmap ttr01_crate01
+    verts 8
+     -0.53 -0.33 0.6
+     0.53 -0.33 0.6
+     0.53 0.33 0.6
+     -0.53 0.33 0.6
+     -0.53 -0.33 0.3
+     0.53 -0.33 0.3
+     0.53 0.33 0.3
+     -0.53 0.33 0.3
+    faces 10
+     4 5 6  4  4 5 6  1
+     6 7 4  4  6 7 4  1
+     0 1 5  0  0 1 8  1
+     5 4 0  0  8 9 0  1
+     1 2 6  0  10 2 11  1
+     6 5 1  0  11 12 10  1
+     2 3 7  0  13 3 14  1
+     7 6 2  0  14 15 13  1
+     3 0 4  0  16 17 18  1
+     4 7 3  0  18 19 16  1
+    tverts 20
+     0.5 0.87229 0 
+     0.000499547 0.87229 0 
+     0.131836 0.87229 0 
+     0.000499547 0.87229 0 
+     0.000499487 0.635462 0 
+     0.5 0.635462 0 
+     0.5 0.87229 0 
+     0.000499547 0.87229 0 
+     0.000499547 0.635462 0 
+     0.5 0.635462 0 
+     0.368664 0.87229 0 
+     0.131836 0.635462 0 
+     0.368664 0.635462 0 
+     0.5 0.87229 0 
+     0.000499547 0.635462 0 
+     0.5 0.635462 0 
+     0.368664 0.87229 0 
+     0.131836 0.87229 0 
+     0.131836 0.635462 0 
+     0.368664 0.635462 0 
+endnode
+node dummy animdummy 
+  parent anim_box 
+  position 0.00369004 0.0 0.638376
+  orientation  -1.0 0.0 0.0  -1.5708
+  wirecolor 0.6 0.894118 0.721569  
+endnode
+node trimesh Object03 
+  parent animdummy 
+  position -0.0258303 -0.00337639 0.0295203
+  orientation  1.0 0.0 0.0  -1.5708
+  wirecolor 0.333333 0.109804 0.694118  
+  ambient 1.0 1.0 1.0  
+  diffuse 1.0 1.0 1.0  
+  specular 0.0 0.0 0.0  
+  shininess 11.0 
+    bitmap ttr01_crate01
+    verts 8
+     -0.6 -0.4 -0.035
+     0.6 -0.4 -0.035
+     -0.6 0.4 -0.035
+     0.6 0.4 -0.035
+     -0.6 -0.4 0.035
+     0.6 -0.4 0.035
+     -0.6 0.4 0.035
+     0.6 0.4 0.035
+    faces 12
+     7 6 5  0  8 9 10  1
+     4 5 6  0  11 12 13  1
+     6 7 3  0  14 15 16  1
+     3 2 6  0  17 18 19  1
+     7 5 1  0  20 21 22  1
+     1 3 7  0  23 24 7  1
+     5 4 0  0  25 26 27  1
+     0 1 5  0  28 29 5  1
+     4 6 2  0  30 6 31  1
+     2 0 4  0  32 33 4  1
+     1 0 2  1  34 0 35  2
+     2 3 1  1  2 3 1  2
+    tverts 36
+     0.5 0.5 0 
+     0.000499666 0.5 0 
+     0.5 0.999501 0 
+     0.000499591 0.9995 0 
+     0.5 0.997371 0 
+     0.5 0.997371 0 
+     0.000499591 0.997371 0 
+     0.5 0.997371 0 
+     0.5 0.9995 0 
+     0.000499666 0.999501 0 
+     0.5 0.5 0 
+     0.000499591 0.5 0 
+     0.5 0.5 0 
+     0.000499666 0.999501 0 
+     0.5 0.997371 0 
+     0.000499591 0.997371 0 
+     0.000499591 0.942683 0 
+     0.000499591 0.942683 0 
+     0.5 0.942683 0 
+     0.5 0.997371 0 
+     0.5 0.997371 0 
+     0.000499591 0.997371 0 
+     0.000499591 0.942683 0 
+     0.000499591 0.942683 0 
+     0.5 0.942683 0 
+     0.5 0.997371 0 
+     0.000499591 0.997371 0 
+     0.000499591 0.942683 0 
+     0.000499591 0.942683 0 
+     0.5 0.942683 0 
+     0.5 0.997371 0 
+     0.000499591 0.942683 0 
+     0.000499591 0.942683 0 
+     0.5 0.942683 0 
+     0.000499666 0.5 0 
+     0.5 0.999501 0 
+endnode
+node trimesh Object01 
+  parent anim_box 
+  position -0.0221402 -0.0295203 0.3
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.333333 0.109804 0.694118  
+     danglymesh 0
+     period 1.0
+     tightness 1.0
+     displacement 0.025
+     showdispl true
+     displtype 1
+     Alpha 1.0
+     transparencyhint 0
+     tilefade 0
+     scale 1.0
+     render 1
+     Shadow 1
+     beaming 0
+     inheritcolor 0
+     selfillumcolor 0.0 0.0 0.0 
+     rotatetexture 0
+     center 0.0 0.0 0.0 
+     gizmo SubAnim:Gizmo
+  ambient 1.0 1.0 1.0  
+  diffuse 1.0 1.0 1.0  
+  specular 0.0 0.0 0.0  
+  shininess 11.0 
+    bitmap ttr01_crate01
+    verts 12
+     -0.6 -0.4 -0.3
+     0.6 -0.4 -0.3
+     -0.6 0.4 -0.3
+     0.6 0.4 -0.3
+     -0.6 -0.4 0.3
+     0.6 -0.4 0.3
+     -0.6 0.4 0.3
+     0.6 0.4 0.3
+     -0.53 -0.33 0.3
+     0.53 -0.33 0.3
+     0.53 0.33 0.3
+     -0.53 0.33 0.3
+    faces 16
+     4 5 9  0  12 13 14  1
+     9 8 4  0  15 16 17  1
+     5 7 10  0  18 19 20  1
+     10 9 5  0  21 9 22  1
+     7 6 11  0  23 24 25  1
+     11 10 7  0  26 10 27  1
+     6 4 8  0  28 29 30  1
+     8 11 6  0  8 11 31  1
+     2 0 6  0  32 33 34  3
+     0 4 6  0  35 36 37  3
+     0 1 4  0  0 38 39  5
+     1 5 4  0  40 41 4  5
+     1 3 5  0  1 42 43  4
+     3 7 5  0  44 45 5  4
+     3 2 7  0  3 46 47  6
+     2 6 7  0  2 6 7  6
+    tverts 48
+     0.00209546 0.504126 0 
+     0.00209546 0.504126 0 
+     0.501596 0.504126 0 
+     0.00209546 0.504126 0 
+     0.00209546 1.00363 0 
+     0.00209546 1.00363 0 
+     0.501596 1.00363 0 
+     0.00209546 1.00363 0 
+     0.031233 0.547832 0 
+     0.472458 0.547832 0 
+     0.470613 0.956228 0 
+     0.0312331 0.95992 0 
+     0.00209546 0.504126 0 
+     0.501596 0.504126 0 
+     0.472458 0.547832 0 
+     0.472458 0.547832 0 
+     0.031233 0.547832 0 
+     0.00209546 0.504126 0 
+     0.501596 0.504126 0 
+     0.501596 1.00363 0 
+     0.472458 0.95992 0 
+     0.472458 0.95992 0 
+     0.501596 0.504126 0 
+     0.49975 0.999935 0 
+     0.000249833 0.999935 0 
+     0.0293874 0.956229 0 
+     0.0293874 0.956229 0 
+     0.49975 0.999935 0 
+     0.00209553 1.00363 0 
+     0.00209546 0.504126 0 
+     0.031233 0.547832 0 
+     0.00209553 1.00363 0 
+     0.00209546 0.504126 0 
+     0.501596 0.504126 0 
+     0.00209546 1.00363 0 
+     0.501596 0.504126 0 
+     0.501596 1.00363 0 
+     0.00209546 1.00363 0 
+     0.501596 0.504126 0 
+     0.00209546 1.00363 0 
+     0.501596 0.504126 0 
+     0.501596 1.00363 0 
+     0.501596 0.504126 0 
+     0.00209546 1.00363 0 
+     0.501596 0.504126 0 
+     0.501596 1.00363 0 
+     0.501596 0.504126 0 
+     0.00209546 1.00363 0 
+endnode
+node emitter emit_bumm 
+  parent DLP_V01 
+  position 0.0 0.0 0.254
+  orientation  -1.0 0.0 0.0  -3.14267
+  wirecolor 0.839216 0.898039 0.65098  
+    colorStart 0.827451 0.82353 0.780392  
+    colorEnd 0.584314 0.564706 0.505882  
+    alphaStart 1.0 
+    alphaEnd 0.0 
+    sizeStart 5.0 
+    sizeEnd 1.0 
+    sizeStart_y 0.0 
+    sizeEnd_y 0.0 
+    frameStart 0 
+    frameEnd 15 
+    birthrate 3 
+    spawnType 0 
+    lifeExp 2.0 
+    mass 1.0 
+    spread 1.5708 
+    particleRot 0.5 
+    velocity 0.1 
+    randvel 0.1 
+    fps 10 
+    random 0 
+    inherit 1 
+    inherit_local 0 
+    inherit_part 0 
+    inheritvel 0 
+    xSize 80 
+    ySize 80 
+    bounce 0 
+    bounce_co 0.0 
+    loop 0 
+    update Explosion 
+    render Normal 
+    Blend Normal 
+    update_sel 2 
+    render_sel 1 
+    blend_sel 1 
+    deadspace 0.0 
+    opacity 0.5 
+    blurlength 10.0 
+    lightningDelay 0.0 
+    lightningRadius 0.0 
+    lightningScale 0.0 
+    blastRadius 0.6 
+    blastLength 0.2 
+    twosidedtex 1 
+    p2p 0 
+    p2p_sel 1 
+    p2p_type Bezier 
+    p2p_bezier2 0.0 
+    p2p_bezier3 0.0 
+    combinetime 0.0 
+    Drag 0.0 
+    grav 0.0 
+    threshold 0.0 
+    texture fxpa_smoke01 
+    xgrid 4 
+    ygrid 4 
+    affectedByWind true 
+    m_isTinted 1 
+    renderorder 0 
+    Splat 0 
+endnode
+node emitter emit_chunky 
+  parent DLP_V01 
+  position 0.0 0.0 0.7
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.839216 0.898039 0.65098  
+    colorStart 0.827451 0.82353 0.780392  
+    colorEnd 0.584314 0.564706 0.505882  
+    alphaStart 1.0 
+    alphaEnd 0.0 
+    sizeStart 3.0 
+    sizeEnd 1.0 
+    sizeStart_y 0.0 
+    sizeEnd_y 0.0 
+    frameStart 0 
+    frameEnd 15 
+    birthrate 3 
+    spawnType 0 
+    lifeExp 1.5 
+    mass 1.0 
+    spread 3.14159 
+    particleRot 0.3 
+    velocity 0.5 
+    randvel 0.5 
+    fps 10 
+    random 0 
+    inherit 1 
+    inherit_local 0 
+    inherit_part 0 
+    inheritvel 0 
+    xSize 200 
+    ySize 200 
+    bounce 0 
+    bounce_co 1.0 
+    loop 0 
+    update Explosion 
+    render Normal 
+    Blend Normal 
+    update_sel 2 
+    render_sel 1 
+    blend_sel 1 
+    deadspace 0.0 
+    chunkName PLC_Chunk_W01 
+    opacity 0.5 
+    blurlength 10.0 
+    lightningDelay 0.0 
+    lightningRadius 0.0 
+    lightningScale 0.0 
+    blastRadius 1.5 
+    blastLength 0.3 
+    twosidedtex 1 
+    p2p 0 
+    p2p_sel 1 
+    p2p_type Bezier 
+    p2p_bezier2 0.0 
+    p2p_bezier3 0.0 
+    combinetime 0.0 
+    Drag 0.0 
+    grav 0.0 
+    threshold 0.0 
+    texture fxpa_smoke01 
+    xgrid 4 
+    ygrid 4 
+    affectedByWind false 
+    m_isTinted 1 
+    renderorder 0 
+    Splat 0 
+endnode
+endmodelgeom DLP_V01 
+
+#MAXANIM ASCII
+newanim close DLP_V01 
+ length 0.0333333
+ transtime 0.25
+animroot DLP_V01
+node dummy DLP_V01 
+  parent NULL 
+endnode
+node dummy DLP_V01_pwk 
+  parent DLP_V01 
+endnode
+node dummy V01_pwk_use01 
+  parent DLP_V01_pwk 
+endnode
+node dummy dlp_v01_wg 
+  parent DLP_V01_pwk 
+endnode
+node dummy V01_pwk_use02 
+  parent DLP_V01_pwk 
+endnode
+node dummy V01_pwk_use03 
+  parent DLP_V01_pwk 
+endnode
+node dummy V01_impact 
+  parent DLP_V01 
+endnode
+node dummy V01_ground 
+  parent DLP_V01 
+endnode
+node dummy V01_hand 
+  parent DLP_V01 
+endnode
+node dummy V01_head 
+  parent DLP_V01 
+endnode
+node dummy V01_head_hit 
+  parent DLP_V01 
+endnode
+node dummy anim_box 
+  parent DLP_V01 
+    positionkey 
+      0.0  0.0 0.0 0.0
+    endlist 
+    orientationkey 
+      0.0   0.0 0.0 0.0  0.0
+    endlist 
+endnode
+node dummy Box01 
+  parent anim_box 
+endnode
+node dummy animdummy 
+  parent anim_box 
+    positionkey 
+      0.0  0.00369004 0.0 0.638376
+      0.0333333  0.00369004 0.0 0.638376
+    endlist 
+    orientationkey 
+      0.0   1.0 0.0 0.0  1.5708
+      0.0333333   1.0 0.0 0.0  1.5708
+    endlist 
+endnode
+node dummy Object03 
+  parent animdummy 
+endnode
+node trimesh Object01 
+  parent anim_box 
+    centerkey
+    endlist
+    gizmokey
+    endlist
+endnode
+node emitter emit_bumm 
+  parent DLP_V01 
+    positionkey 
+      0.0  0.0 0.0 0.254
+    endlist 
+    orientationkey 
+      0.0   1.0 0.0 0.0  3.14267
+    endlist 
+    colorStartkey
+      0.0   0.827451 0.82353 0.780392
+    endlist
+    colorEndkey
+      0.0   0.584314 0.564706 0.505882
+    endlist
+    alphaStartkey
+      0.0   1.0
+    endlist
+    alphaEndkey
+      0.0   0.0
+    endlist
+    sizeStartkey
+      0.0   5.0
+    endlist
+    sizeEndkey
+      0.0   1.0
+    endlist
+    sizeStart_ykey
+      0.0   0.0
+    endlist
+    sizeEnd_ykey
+      0.0   0.0
+    endlist
+    lockAxeskey
+      0.0   1.0
+    endlist
+    frameStartkey
+      0.0   0.0
+    endlist
+    frameEndkey
+      0.0   15.0
+    endlist
+    birthratekey
+      0.0   3.0
+    endlist
+    spawnTypekey
+      0.0   0.0
+    endlist
+    lifeExpkey
+      0.0   2.0
+    endlist
+    masskey
+      0.0   1.0
+    endlist
+    spreadkey
+      0.0   1.5708
+    endlist
+    particleRotkey
+      0.0   0.5
+    endlist
+    velocitykey
+      0.0   0.1
+    endlist
+    randvelkey
+      0.0   0.1
+    endlist
+    fpskey
+      0.0   10.0
+    endlist
+    randomkey
+      0.0   0.0
+    endlist
+    inheritkey
+      0.0   1.0
+    endlist
+    inherit_localkey
+      0.0   0.0
+    endlist
+    inherit_partkey
+      0.0   0.0
+    endlist
+    inheritvelkey
+      0.0   0.0
+    endlist
+    xSizekey
+      0.0   80.0
+    endlist
+    ySizekey
+      0.0   80.0
+    endlist
+    bouncekey
+      0.0   0.0
+    endlist
+    bounce_cokey
+      0.0   0.0
+    endlist
+    loopkey
+      0.0   0.0
+    endlist
+    chunkykey
+      0.0   0.0
+    endlist
+    opacitykey
+      0.0   0.5
+    endlist
+    blurlengthkey
+      0.0   10.0
+    endlist
+    lightningDelaykey
+      0.0   0.0
+    endlist
+    lightningRadiuskey
+      0.0   0.0
+    endlist
+    lightningSubDivkey
+      0.0   0.0
+    endlist
+    lightningScalekey
+      0.0   0.0
+    endlist
+    blastRadiuskey
+      0.0   0.6
+    endlist
+    blastLengthkey
+      0.0   0.2
+    endlist
+    twosidedtexkey
+      0.0   1.0
+    endlist
+    p2pkey
+      0.0   0.0
+    endlist
+    p2p_bezier2key
+      0.0   0.0
+    endlist
+    p2p_bezier3key
+      0.0   0.0
+    endlist
+    combinetimekey
+      0.0   0.0
+    endlist
+    Dragkey
+      0.0   0.0
+    endlist
+    gravkey
+      0.0   0.0
+    endlist
+    thresholdkey
+      0.0   0.0
+    endlist
+    xgridkey
+      0.0   4.0
+    endlist
+    ygridkey
+      0.0   4.0
+    endlist
+    affectedByWindkey
+    endlist
+    m_isTintedkey
+      0.0   1.0
+    endlist
+    renderorderkey
+      0.0   0.0
+    endlist
+    Splatkey
+      0.0   0.0
+    endlist
+endnode
+node emitter emit_chunky 
+  parent DLP_V01 
+    positionkey 
+      0.0  0.0 0.0 0.7
+    endlist 
+    orientationkey 
+      0.0   0.0 0.0 0.0  0.0
+    endlist 
+    colorStartkey
+      0.0   0.827451 0.82353 0.780392
+    endlist
+    colorEndkey
+      0.0   0.584314 0.564706 0.505882
+    endlist
+    alphaStartkey
+      0.0   1.0
+    endlist
+    alphaEndkey
+      0.0   0.0
+    endlist
+    sizeStartkey
+      0.0   3.0
+    endlist
+    sizeEndkey
+      0.0   1.0
+    endlist
+    sizeStart_ykey
+      0.0   0.0
+    endlist
+    sizeEnd_ykey
+      0.0   0.0
+    endlist
+    lockAxeskey
+      0.0   1.0
+    endlist
+    frameStartkey
+      0.0   0.0
+    endlist
+    frameEndkey
+      0.0   15.0
+    endlist
+    birthratekey
+      0.0   3.0
+    endlist
+    spawnTypekey
+      0.0   0.0
+    endlist
+    lifeExpkey
+      0.0   1.5
+    endlist
+    masskey
+      0.0   1.0
+    endlist
+    spreadkey
+      0.0   3.14159
+    endlist
+    particleRotkey
+      0.0   0.3
+    endlist
+    velocitykey
+      0.0   0.5
+    endlist
+    randvelkey
+      0.0   0.5
+    endlist
+    fpskey
+      0.0   10.0
+    endlist
+    randomkey
+      0.0   0.0
+    endlist
+    inheritkey
+      0.0   1.0
+    endlist
+    inherit_localkey
+      0.0   0.0
+    endlist
+    inherit_partkey
+      0.0   0.0
+    endlist
+    inheritvelkey
+      0.0   0.0
+    endlist
+    xSizekey
+      0.0   200.0
+    endlist
+    ySizekey
+      0.0   200.0
+    endlist
+    bouncekey
+      0.0   0.0
+    endlist
+    bounce_cokey
+      0.0   1.0
+    endlist
+    loopkey
+      0.0   0.0
+    endlist
+    chunkykey
+      0.0   1.0
+    endlist
+    opacitykey
+      0.0   0.5
+    endlist
+    blurlengthkey
+      0.0   10.0
+    endlist
+    lightningDelaykey
+      0.0   0.0
+    endlist
+    lightningRadiuskey
+      0.0   0.0
+    endlist
+    lightningSubDivkey
+      0.0   0.0
+    endlist
+    lightningScalekey
+      0.0   0.0
+    endlist
+    blastRadiuskey
+      0.0   1.5
+    endlist
+    blastLengthkey
+      0.0   0.3
+    endlist
+    twosidedtexkey
+      0.0   1.0
+    endlist
+    p2pkey
+      0.0   0.0
+    endlist
+    p2p_bezier2key
+      0.0   0.0
+    endlist
+    p2p_bezier3key
+      0.0   0.0
+    endlist
+    combinetimekey
+      0.0   0.0
+    endlist
+    Dragkey
+      0.0   0.0
+    endlist
+    gravkey
+      0.0   0.0
+    endlist
+    thresholdkey
+      0.0   0.0
+    endlist
+    xgridkey
+      0.0   4.0
+    endlist
+    ygridkey
+      0.0   4.0
+    endlist
+    affectedByWindkey
+    endlist
+    m_isTintedkey
+      0.0   1.0
+    endlist
+    renderorderkey
+      0.0   0.0
+    endlist
+    Splatkey
+      0.0   0.0
+    endlist
+endnode
+doneanim close DLP_V01 
+
+#MAXANIM ASCII
+newanim close2open DLP_V01 
+ length 0.933333
+ transtime 0.25
+animroot DLP_V01
+node dummy DLP_V01 
+  parent NULL 
+endnode
+node dummy DLP_V01_pwk 
+  parent DLP_V01 
+endnode
+node dummy V01_pwk_use01 
+  parent DLP_V01_pwk 
+endnode
+node dummy dlp_v01_wg 
+  parent DLP_V01_pwk 
+endnode
+node dummy V01_pwk_use02 
+  parent DLP_V01_pwk 
+endnode
+node dummy V01_pwk_use03 
+  parent DLP_V01_pwk 
+endnode
+node dummy V01_impact 
+  parent DLP_V01 
+endnode
+node dummy V01_ground 
+  parent DLP_V01 
+endnode
+node dummy V01_hand 
+  parent DLP_V01 
+endnode
+node dummy V01_head 
+  parent DLP_V01 
+endnode
+node dummy V01_head_hit 
+  parent DLP_V01 
+endnode
+node dummy anim_box 
+  parent DLP_V01 
+    positionkey 
+    endlist 
+    orientationkey 
+    endlist 
+endnode
+node dummy Box01 
+  parent anim_box 
+endnode
+node dummy animdummy 
+  parent anim_box 
+    positionkey 
+      0.0  0.00369004 0.0 0.638376
+      0.433333  0.0481482 0.324237 0.638376
+      0.933333  0.0543141 0.477424 0.349166
+    endlist 
+    orientationkey 
+      0.0   1.0 0.0 0.0  1.5708
+      0.433333   1.0 0.0 0.0  0.899013
+      0.933333   1.0 1.46796e-007 -1.46796e-007  0.257745
+    endlist 
+endnode
+node dummy Object03 
+  parent animdummy 
+endnode
+node trimesh Object01 
+  parent anim_box 
+    centerkey
+    endlist
+    gizmokey
+    endlist
+endnode
+node emitter emit_bumm 
+  parent DLP_V01 
+    positionkey 
+    endlist 
+    orientationkey 
+    endlist 
+    colorStartkey
+    endlist
+    colorEndkey
+    endlist
+    alphaStartkey
+    endlist
+    alphaEndkey
+    endlist
+    sizeStartkey
+    endlist
+    sizeEndkey
+    endlist
+    sizeStart_ykey
+    endlist
+    sizeEnd_ykey
+    endlist
+    lockAxeskey
+    endlist
+    frameStartkey
+    endlist
+    frameEndkey
+    endlist
+    birthratekey
+    endlist
+    spawnTypekey
+    endlist
+    lifeExpkey
+    endlist
+    masskey
+    endlist
+    spreadkey
+    endlist
+    particleRotkey
+    endlist
+    velocitykey
+    endlist
+    randvelkey
+    endlist
+    fpskey
+    endlist
+    randomkey
+    endlist
+    inheritkey
+    endlist
+    inherit_localkey
+    endlist
+    inherit_partkey
+    endlist
+    inheritvelkey
+    endlist
+    xSizekey
+    endlist
+    ySizekey
+    endlist
+    bouncekey
+    endlist
+    bounce_cokey
+    endlist
+    loopkey
+    endlist
+    chunkykey
+    endlist
+    opacitykey
+    endlist
+    blurlengthkey
+    endlist
+    lightningDelaykey
+    endlist
+    lightningRadiuskey
+    endlist
+    lightningSubDivkey
+    endlist
+    lightningScalekey
+    endlist
+    blastRadiuskey
+    endlist
+    blastLengthkey
+    endlist
+    twosidedtexkey
+    endlist
+    p2pkey
+    endlist
+    p2p_bezier2key
+    endlist
+    p2p_bezier3key
+    endlist
+    combinetimekey
+    endlist
+    Dragkey
+    endlist
+    gravkey
+    endlist
+    thresholdkey
+    endlist
+    xgridkey
+    endlist
+    ygridkey
+    endlist
+    affectedByWindkey
+    endlist
+    m_isTintedkey
+    endlist
+    renderorderkey
+    endlist
+    Splatkey
+    endlist
+endnode
+node emitter emit_chunky 
+  parent DLP_V01 
+    positionkey 
+    endlist 
+    orientationkey 
+    endlist 
+    colorStartkey
+    endlist
+    colorEndkey
+    endlist
+    alphaStartkey
+    endlist
+    alphaEndkey
+    endlist
+    sizeStartkey
+    endlist
+    sizeEndkey
+    endlist
+    sizeStart_ykey
+    endlist
+    sizeEnd_ykey
+    endlist
+    lockAxeskey
+    endlist
+    frameStartkey
+    endlist
+    frameEndkey
+    endlist
+    birthratekey
+    endlist
+    spawnTypekey
+    endlist
+    lifeExpkey
+    endlist
+    masskey
+    endlist
+    spreadkey
+    endlist
+    particleRotkey
+    endlist
+    velocitykey
+    endlist
+    randvelkey
+    endlist
+    fpskey
+    endlist
+    randomkey
+    endlist
+    inheritkey
+    endlist
+    inherit_localkey
+    endlist
+    inherit_partkey
+    endlist
+    inheritvelkey
+    endlist
+    xSizekey
+    endlist
+    ySizekey
+    endlist
+    bouncekey
+    endlist
+    bounce_cokey
+    endlist
+    loopkey
+    endlist
+    chunkykey
+    endlist
+    opacitykey
+    endlist
+    blurlengthkey
+    endlist
+    lightningDelaykey
+    endlist
+    lightningRadiuskey
+    endlist
+    lightningSubDivkey
+    endlist
+    lightningScalekey
+    endlist
+    blastRadiuskey
+    endlist
+    blastLengthkey
+    endlist
+    twosidedtexkey
+    endlist
+    p2pkey
+    endlist
+    p2p_bezier2key
+    endlist
+    p2p_bezier3key
+    endlist
+    combinetimekey
+    endlist
+    Dragkey
+    endlist
+    gravkey
+    endlist
+    thresholdkey
+    endlist
+    xgridkey
+    endlist
+    ygridkey
+    endlist
+    affectedByWindkey
+    endlist
+    m_isTintedkey
+    endlist
+    renderorderkey
+    endlist
+    Splatkey
+    endlist
+endnode
+doneanim close2open DLP_V01 
+
+#MAXANIM ASCII
+newanim open DLP_V01 
+ length 0.0333333
+ transtime 0.25
+animroot DLP_V01
+node dummy DLP_V01 
+  parent NULL 
+endnode
+node dummy DLP_V01_pwk 
+  parent DLP_V01 
+endnode
+node dummy V01_pwk_use01 
+  parent DLP_V01_pwk 
+endnode
+node dummy dlp_v01_wg 
+  parent DLP_V01_pwk 
+endnode
+node dummy V01_pwk_use02 
+  parent DLP_V01_pwk 
+endnode
+node dummy V01_pwk_use03 
+  parent DLP_V01_pwk 
+endnode
+node dummy V01_impact 
+  parent DLP_V01 
+endnode
+node dummy V01_ground 
+  parent DLP_V01 
+endnode
+node dummy V01_hand 
+  parent DLP_V01 
+endnode
+node dummy V01_head 
+  parent DLP_V01 
+endnode
+node dummy V01_head_hit 
+  parent DLP_V01 
+endnode
+node dummy anim_box 
+  parent DLP_V01 
+    positionkey 
+    endlist 
+    orientationkey 
+    endlist 
+endnode
+node dummy Box01 
+  parent anim_box 
+endnode
+node dummy animdummy 
+  parent anim_box 
+    positionkey 
+      0.0  0.0543141 0.477424 0.349166
+      0.0333333  0.0543141 0.477424 0.349166
+    endlist 
+    orientationkey 
+      0.0   1.0 1.46796e-007 -1.46796e-007  0.257745
+      0.0333333   1.0 1.46796e-007 -1.46796e-007  0.257745
+    endlist 
+endnode
+node dummy Object03 
+  parent animdummy 
+endnode
+node trimesh Object01 
+  parent anim_box 
+    centerkey
+    endlist
+    gizmokey
+    endlist
+endnode
+node emitter emit_bumm 
+  parent DLP_V01 
+    positionkey 
+    endlist 
+    orientationkey 
+    endlist 
+    colorStartkey
+    endlist
+    colorEndkey
+    endlist
+    alphaStartkey
+    endlist
+    alphaEndkey
+    endlist
+    sizeStartkey
+    endlist
+    sizeEndkey
+    endlist
+    sizeStart_ykey
+    endlist
+    sizeEnd_ykey
+    endlist
+    lockAxeskey
+    endlist
+    frameStartkey
+    endlist
+    frameEndkey
+    endlist
+    birthratekey
+    endlist
+    spawnTypekey
+    endlist
+    lifeExpkey
+    endlist
+    masskey
+    endlist
+    spreadkey
+    endlist
+    particleRotkey
+    endlist
+    velocitykey
+    endlist
+    randvelkey
+    endlist
+    fpskey
+    endlist
+    randomkey
+    endlist
+    inheritkey
+    endlist
+    inherit_localkey
+    endlist
+    inherit_partkey
+    endlist
+    inheritvelkey
+    endlist
+    xSizekey
+    endlist
+    ySizekey
+    endlist
+    bouncekey
+    endlist
+    bounce_cokey
+    endlist
+    loopkey
+    endlist
+    chunkykey
+    endlist
+    opacitykey
+    endlist
+    blurlengthkey
+    endlist
+    lightningDelaykey
+    endlist
+    lightningRadiuskey
+    endlist
+    lightningSubDivkey
+    endlist
+    lightningScalekey
+    endlist
+    blastRadiuskey
+    endlist
+    blastLengthkey
+    endlist
+    twosidedtexkey
+    endlist
+    p2pkey
+    endlist
+    p2p_bezier2key
+    endlist
+    p2p_bezier3key
+    endlist
+    combinetimekey
+    endlist
+    Dragkey
+    endlist
+    gravkey
+    endlist
+    thresholdkey
+    endlist
+    xgridkey
+    endlist
+    ygridkey
+    endlist
+    affectedByWindkey
+    endlist
+    m_isTintedkey
+    endlist
+    renderorderkey
+    endlist
+    Splatkey
+    endlist
+endnode
+node emitter emit_chunky 
+  parent DLP_V01 
+    positionkey 
+    endlist 
+    orientationkey 
+    endlist 
+    colorStartkey
+    endlist
+    colorEndkey
+    endlist
+    alphaStartkey
+    endlist
+    alphaEndkey
+    endlist
+    sizeStartkey
+    endlist
+    sizeEndkey
+    endlist
+    sizeStart_ykey
+    endlist
+    sizeEnd_ykey
+    endlist
+    lockAxeskey
+    endlist
+    frameStartkey
+    endlist
+    frameEndkey
+    endlist
+    birthratekey
+    endlist
+    spawnTypekey
+    endlist
+    lifeExpkey
+    endlist
+    masskey
+    endlist
+    spreadkey
+    endlist
+    particleRotkey
+    endlist
+    velocitykey
+    endlist
+    randvelkey
+    endlist
+    fpskey
+    endlist
+    randomkey
+    endlist
+    inheritkey
+    endlist
+    inherit_localkey
+    endlist
+    inherit_partkey
+    endlist
+    inheritvelkey
+    endlist
+    xSizekey
+    endlist
+    ySizekey
+    endlist
+    bouncekey
+    endlist
+    bounce_cokey
+    endlist
+    loopkey
+    endlist
+    chunkykey
+    endlist
+    opacitykey
+    endlist
+    blurlengthkey
+    endlist
+    lightningDelaykey
+    endlist
+    lightningRadiuskey
+    endlist
+    lightningSubDivkey
+    endlist
+    lightningScalekey
+    endlist
+    blastRadiuskey
+    endlist
+    blastLengthkey
+    endlist
+    twosidedtexkey
+    endlist
+    p2pkey
+    endlist
+    p2p_bezier2key
+    endlist
+    p2p_bezier3key
+    endlist
+    combinetimekey
+    endlist
+    Dragkey
+    endlist
+    gravkey
+    endlist
+    thresholdkey
+    endlist
+    xgridkey
+    endlist
+    ygridkey
+    endlist
+    affectedByWindkey
+    endlist
+    m_isTintedkey
+    endlist
+    renderorderkey
+    endlist
+    Splatkey
+    endlist
+endnode
+doneanim open DLP_V01 
+
+#MAXANIM ASCII
+newanim open2close DLP_V01 
+ length 1.0
+ transtime 0.25
+animroot DLP_V01
+node dummy DLP_V01 
+  parent NULL 
+endnode
+node dummy DLP_V01_pwk 
+  parent DLP_V01 
+endnode
+node dummy V01_pwk_use01 
+  parent DLP_V01_pwk 
+endnode
+node dummy dlp_v01_wg 
+  parent DLP_V01_pwk 
+endnode
+node dummy V01_pwk_use02 
+  parent DLP_V01_pwk 
+endnode
+node dummy V01_pwk_use03 
+  parent DLP_V01_pwk 
+endnode
+node dummy V01_impact 
+  parent DLP_V01 
+endnode
+node dummy V01_ground 
+  parent DLP_V01 
+endnode
+node dummy V01_hand 
+  parent DLP_V01 
+endnode
+node dummy V01_head 
+  parent DLP_V01 
+endnode
+node dummy V01_head_hit 
+  parent DLP_V01 
+endnode
+node dummy anim_box 
+  parent DLP_V01 
+    positionkey 
+    endlist 
+    orientationkey 
+    endlist 
+endnode
+node dummy Box01 
+  parent anim_box 
+endnode
+node dummy animdummy 
+  parent anim_box 
+    positionkey 
+      0.0  0.0543141 0.477424 0.349166
+      0.5  0.0481482 0.324237 0.638376
+      1.0  0.00369004 0.0 0.638376
+    endlist 
+    orientationkey 
+      0.0   1.0 1.46796e-007 -1.46796e-007  0.257745
+      0.5   1.0 0.0 0.0  0.899013
+      1.0   1.0 0.0 0.0  1.5708
+    endlist 
+endnode
+node dummy Object03 
+  parent animdummy 
+endnode
+node trimesh Object01 
+  parent anim_box 
+    centerkey
+    endlist
+    gizmokey
+    endlist
+endnode
+node emitter emit_bumm 
+  parent DLP_V01 
+    positionkey 
+    endlist 
+    orientationkey 
+    endlist 
+    colorStartkey
+    endlist
+    colorEndkey
+    endlist
+    alphaStartkey
+    endlist
+    alphaEndkey
+    endlist
+    sizeStartkey
+    endlist
+    sizeEndkey
+    endlist
+    sizeStart_ykey
+    endlist
+    sizeEnd_ykey
+    endlist
+    lockAxeskey
+    endlist
+    frameStartkey
+    endlist
+    frameEndkey
+    endlist
+    birthratekey
+    endlist
+    spawnTypekey
+    endlist
+    lifeExpkey
+    endlist
+    masskey
+    endlist
+    spreadkey
+    endlist
+    particleRotkey
+    endlist
+    velocitykey
+    endlist
+    randvelkey
+    endlist
+    fpskey
+    endlist
+    randomkey
+    endlist
+    inheritkey
+    endlist
+    inherit_localkey
+    endlist
+    inherit_partkey
+    endlist
+    inheritvelkey
+    endlist
+    xSizekey
+    endlist
+    ySizekey
+    endlist
+    bouncekey
+    endlist
+    bounce_cokey
+    endlist
+    loopkey
+    endlist
+    chunkykey
+    endlist
+    opacitykey
+    endlist
+    blurlengthkey
+    endlist
+    lightningDelaykey
+    endlist
+    lightningRadiuskey
+    endlist
+    lightningSubDivkey
+    endlist
+    lightningScalekey
+    endlist
+    blastRadiuskey
+    endlist
+    blastLengthkey
+    endlist
+    twosidedtexkey
+    endlist
+    p2pkey
+    endlist
+    p2p_bezier2key
+    endlist
+    p2p_bezier3key
+    endlist
+    combinetimekey
+    endlist
+    Dragkey
+    endlist
+    gravkey
+    endlist
+    thresholdkey
+    endlist
+    xgridkey
+    endlist
+    ygridkey
+    endlist
+    affectedByWindkey
+    endlist
+    m_isTintedkey
+    endlist
+    renderorderkey
+    endlist
+    Splatkey
+    endlist
+endnode
+node emitter emit_chunky 
+  parent DLP_V01 
+    positionkey 
+    endlist 
+    orientationkey 
+    endlist 
+    colorStartkey
+    endlist
+    colorEndkey
+    endlist
+    alphaStartkey
+    endlist
+    alphaEndkey
+    endlist
+    sizeStartkey
+    endlist
+    sizeEndkey
+    endlist
+    sizeStart_ykey
+    endlist
+    sizeEnd_ykey
+    endlist
+    lockAxeskey
+    endlist
+    frameStartkey
+    endlist
+    frameEndkey
+    endlist
+    birthratekey
+    endlist
+    spawnTypekey
+    endlist
+    lifeExpkey
+    endlist
+    masskey
+    endlist
+    spreadkey
+    endlist
+    particleRotkey
+    endlist
+    velocitykey
+    endlist
+    randvelkey
+    endlist
+    fpskey
+    endlist
+    randomkey
+    endlist
+    inheritkey
+    endlist
+    inherit_localkey
+    endlist
+    inherit_partkey
+    endlist
+    inheritvelkey
+    endlist
+    xSizekey
+    endlist
+    ySizekey
+    endlist
+    bouncekey
+    endlist
+    bounce_cokey
+    endlist
+    loopkey
+    endlist
+    chunkykey
+    endlist
+    opacitykey
+    endlist
+    blurlengthkey
+    endlist
+    lightningDelaykey
+    endlist
+    lightningRadiuskey
+    endlist
+    lightningSubDivkey
+    endlist
+    lightningScalekey
+    endlist
+    blastRadiuskey
+    endlist
+    blastLengthkey
+    endlist
+    twosidedtexkey
+    endlist
+    p2pkey
+    endlist
+    p2p_bezier2key
+    endlist
+    p2p_bezier3key
+    endlist
+    combinetimekey
+    endlist
+    Dragkey
+    endlist
+    gravkey
+    endlist
+    thresholdkey
+    endlist
+    xgridkey
+    endlist
+    ygridkey
+    endlist
+    affectedByWindkey
+    endlist
+    m_isTintedkey
+    endlist
+    renderorderkey
+    endlist
+    Splatkey
+    endlist
+endnode
+doneanim open2close DLP_V01 
+
+#MAXANIM ASCII
+newanim damage DLP_V01 
+ length 0.133333
+ transtime 0.25
+animroot DLP_V01
+node dummy DLP_V01 
+  parent NULL 
+endnode
+node dummy DLP_V01_pwk 
+  parent DLP_V01 
+endnode
+node dummy V01_pwk_use01 
+  parent DLP_V01_pwk 
+endnode
+node dummy dlp_v01_wg 
+  parent DLP_V01_pwk 
+endnode
+node dummy V01_pwk_use02 
+  parent DLP_V01_pwk 
+endnode
+node dummy V01_pwk_use03 
+  parent DLP_V01_pwk 
+endnode
+node dummy V01_impact 
+  parent DLP_V01 
+endnode
+node dummy V01_ground 
+  parent DLP_V01 
+endnode
+node dummy V01_hand 
+  parent DLP_V01 
+endnode
+node dummy V01_head 
+  parent DLP_V01 
+endnode
+node dummy V01_head_hit 
+  parent DLP_V01 
+endnode
+node dummy anim_box 
+  parent DLP_V01 
+    positionkey 
+      0.0  0.0 0.0 0.0
+      0.0666667  -0.05 0.05 -0.05
+      0.133333  0.0 0.0 0.0
+    endlist 
+    orientationkey 
+      0.0   0.0 0.0 0.0  0.0
+    endlist 
+endnode
+node dummy Box01 
+  parent anim_box 
+endnode
+node dummy animdummy 
+  parent anim_box 
+    positionkey 
+      0.0  0.00369004 0.0 0.638376
+      0.133333  0.00369004 0.0 0.638376
+    endlist 
+    orientationkey 
+      0.0   1.0 0.0 0.0  1.5708
+      0.133333   1.0 0.0 0.0  1.5708
+    endlist 
+endnode
+node dummy Object03 
+  parent animdummy 
+endnode
+node trimesh Object01 
+  parent anim_box 
+    centerkey
+    endlist
+    gizmokey
+    endlist
+endnode
+node emitter emit_bumm 
+  parent DLP_V01 
+    positionkey 
+    endlist 
+    orientationkey 
+    endlist 
+    colorStartkey
+    endlist
+    colorEndkey
+    endlist
+    alphaStartkey
+    endlist
+    alphaEndkey
+    endlist
+    sizeStartkey
+    endlist
+    sizeEndkey
+    endlist
+    sizeStart_ykey
+    endlist
+    sizeEnd_ykey
+    endlist
+    lockAxeskey
+    endlist
+    frameStartkey
+    endlist
+    frameEndkey
+    endlist
+    birthratekey
+    endlist
+    spawnTypekey
+    endlist
+    lifeExpkey
+    endlist
+    masskey
+    endlist
+    spreadkey
+    endlist
+    particleRotkey
+    endlist
+    velocitykey
+    endlist
+    randvelkey
+    endlist
+    fpskey
+    endlist
+    randomkey
+    endlist
+    inheritkey
+    endlist
+    inherit_localkey
+    endlist
+    inherit_partkey
+    endlist
+    inheritvelkey
+    endlist
+    xSizekey
+    endlist
+    ySizekey
+    endlist
+    bouncekey
+    endlist
+    bounce_cokey
+    endlist
+    loopkey
+    endlist
+    chunkykey
+    endlist
+    opacitykey
+    endlist
+    blurlengthkey
+    endlist
+    lightningDelaykey
+    endlist
+    lightningRadiuskey
+    endlist
+    lightningSubDivkey
+    endlist
+    lightningScalekey
+    endlist
+    blastRadiuskey
+    endlist
+    blastLengthkey
+    endlist
+    twosidedtexkey
+    endlist
+    p2pkey
+    endlist
+    p2p_bezier2key
+    endlist
+    p2p_bezier3key
+    endlist
+    combinetimekey
+    endlist
+    Dragkey
+    endlist
+    gravkey
+    endlist
+    thresholdkey
+    endlist
+    xgridkey
+    endlist
+    ygridkey
+    endlist
+    affectedByWindkey
+    endlist
+    m_isTintedkey
+    endlist
+    renderorderkey
+    endlist
+    Splatkey
+    endlist
+endnode
+node emitter emit_chunky 
+  parent DLP_V01 
+    positionkey 
+      0.133333  0.0 0.0 0.7
+    endlist 
+    orientationkey 
+      0.133333   0.0 0.0 0.0  0.0
+    endlist 
+    colorStartkey
+      0.133333   0.827451 0.82353 0.780392
+    endlist
+    colorEndkey
+      0.133333   0.584314 0.564706 0.505882
+    endlist
+    alphaStartkey
+      0.133333   1.0
+    endlist
+    alphaEndkey
+      0.133333   0.0
+    endlist
+    sizeStartkey
+      0.133333   3.0
+    endlist
+    sizeEndkey
+      0.133333   1.0
+    endlist
+    sizeStart_ykey
+      0.133333   0.0
+    endlist
+    sizeEnd_ykey
+      0.133333   0.0
+    endlist
+    lockAxeskey
+      0.133333   1.0
+    endlist
+    frameStartkey
+      0.133333   0.0
+    endlist
+    frameEndkey
+      0.133333   15.0
+    endlist
+    birthratekey
+      0.133333   3.0
+    endlist
+    spawnTypekey
+      0.133333   0.0
+    endlist
+    lifeExpkey
+      0.133333   1.5
+    endlist
+    masskey
+      0.133333   1.0
+    endlist
+    spreadkey
+      0.133333   3.14159
+    endlist
+    particleRotkey
+      0.133333   0.3
+    endlist
+    velocitykey
+      0.133333   0.5
+    endlist
+    randvelkey
+      0.133333   0.5
+    endlist
+    fpskey
+      0.133333   10.0
+    endlist
+    randomkey
+      0.133333   0.0
+    endlist
+    inheritkey
+      0.133333   1.0
+    endlist
+    inherit_localkey
+      0.133333   0.0
+    endlist
+    inherit_partkey
+      0.133333   0.0
+    endlist
+    inheritvelkey
+      0.133333   0.0
+    endlist
+    xSizekey
+      0.133333   200.0
+    endlist
+    ySizekey
+      0.133333   200.0
+    endlist
+    bouncekey
+      0.133333   0.0
+    endlist
+    bounce_cokey
+      0.133333   1.0
+    endlist
+    loopkey
+      0.133333   0.0
+    endlist
+    chunkykey
+      0.133333   1.0
+    endlist
+    opacitykey
+      0.133333   0.5
+    endlist
+    blurlengthkey
+      0.133333   10.0
+    endlist
+    lightningDelaykey
+      0.133333   0.0
+    endlist
+    lightningRadiuskey
+      0.133333   0.0
+    endlist
+    lightningSubDivkey
+      0.133333   0.0
+    endlist
+    lightningScalekey
+      0.133333   0.0
+    endlist
+    blastRadiuskey
+      0.133333   1.5
+    endlist
+    blastLengthkey
+      0.133333   0.3
+    endlist
+    twosidedtexkey
+      0.133333   1.0
+    endlist
+    p2pkey
+      0.133333   0.0
+    endlist
+    p2p_bezier2key
+      0.133333   0.0
+    endlist
+    p2p_bezier3key
+      0.133333   0.0
+    endlist
+    combinetimekey
+      0.133333   0.0
+    endlist
+    Dragkey
+      0.133333   0.0
+    endlist
+    gravkey
+      0.133333   0.0
+    endlist
+    thresholdkey
+      0.133333   0.0
+    endlist
+    xgridkey
+      0.133333   4.0
+    endlist
+    ygridkey
+      0.133333   4.0
+    endlist
+    affectedByWindkey
+    endlist
+    m_isTintedkey
+      0.133333   1.0
+    endlist
+    renderorderkey
+      0.133333   0.0
+    endlist
+    Splatkey
+      0.133333   0.0
+    endlist
+endnode
+doneanim damage DLP_V01 
+
+#MAXANIM ASCII
+newanim die DLP_V01 
+ length 0.1
+ transtime 0.25
+animroot DLP_V01
+node dummy DLP_V01 
+  parent NULL 
+endnode
+node dummy DLP_V01_pwk 
+  parent DLP_V01 
+endnode
+node dummy V01_pwk_use01 
+  parent DLP_V01_pwk 
+endnode
+node dummy dlp_v01_wg 
+  parent DLP_V01_pwk 
+endnode
+node dummy V01_pwk_use02 
+  parent DLP_V01_pwk 
+endnode
+node dummy V01_pwk_use03 
+  parent DLP_V01_pwk 
+endnode
+node dummy V01_impact 
+  parent DLP_V01 
+endnode
+node dummy V01_ground 
+  parent DLP_V01 
+endnode
+node dummy V01_hand 
+  parent DLP_V01 
+endnode
+node dummy V01_head 
+  parent DLP_V01 
+endnode
+node dummy V01_head_hit 
+  parent DLP_V01 
+endnode
+node dummy anim_box 
+  parent DLP_V01 
+    positionkey 
+      0.1  0.0 0.0 0.0
+    endlist 
+    orientationkey 
+      0.1   0.0 0.0 0.0  0.0
+    endlist 
+endnode
+node dummy Box01 
+  parent anim_box 
+endnode
+node dummy animdummy 
+  parent anim_box 
+    positionkey 
+    endlist 
+    orientationkey 
+    endlist 
+endnode
+node dummy Object03 
+  parent animdummy 
+endnode
+node trimesh Object01 
+  parent anim_box 
+    centerkey
+    endlist
+    gizmokey
+    endlist
+endnode
+node emitter emit_bumm 
+  parent DLP_V01 
+    positionkey 
+    endlist 
+    orientationkey 
+    endlist 
+    colorStartkey
+    endlist
+    colorEndkey
+    endlist
+    alphaStartkey
+    endlist
+    alphaEndkey
+    endlist
+    sizeStartkey
+    endlist
+    sizeEndkey
+    endlist
+    sizeStart_ykey
+    endlist
+    sizeEnd_ykey
+    endlist
+    lockAxeskey
+    endlist
+    frameStartkey
+    endlist
+    frameEndkey
+    endlist
+    birthratekey
+    endlist
+    spawnTypekey
+    endlist
+    lifeExpkey
+    endlist
+    masskey
+    endlist
+    spreadkey
+    endlist
+    particleRotkey
+    endlist
+    velocitykey
+    endlist
+    randvelkey
+    endlist
+    fpskey
+    endlist
+    randomkey
+    endlist
+    inheritkey
+    endlist
+    inherit_localkey
+    endlist
+    inherit_partkey
+    endlist
+    inheritvelkey
+    endlist
+    xSizekey
+    endlist
+    ySizekey
+    endlist
+    bouncekey
+    endlist
+    bounce_cokey
+    endlist
+    loopkey
+    endlist
+    chunkykey
+    endlist
+    opacitykey
+    endlist
+    blurlengthkey
+    endlist
+    lightningDelaykey
+    endlist
+    lightningRadiuskey
+    endlist
+    lightningSubDivkey
+    endlist
+    lightningScalekey
+    endlist
+    blastRadiuskey
+    endlist
+    blastLengthkey
+    endlist
+    twosidedtexkey
+    endlist
+    p2pkey
+    endlist
+    p2p_bezier2key
+    endlist
+    p2p_bezier3key
+    endlist
+    combinetimekey
+    endlist
+    Dragkey
+    endlist
+    gravkey
+    endlist
+    thresholdkey
+    endlist
+    xgridkey
+    endlist
+    ygridkey
+    endlist
+    affectedByWindkey
+    endlist
+    m_isTintedkey
+    endlist
+    renderorderkey
+    endlist
+    Splatkey
+    endlist
+endnode
+event 0.0 detonate
+event 0.0666667 detonate
+node emitter emit_chunky 
+  parent DLP_V01 
+    positionkey 
+      0.1  0.0 0.0 0.7
+    endlist 
+    orientationkey 
+      0.1   0.0 0.0 0.0  0.0
+    endlist 
+    colorStartkey
+      0.1   0.827451 0.82353 0.780392
+    endlist
+    colorEndkey
+      0.1   0.584314 0.564706 0.505882
+    endlist
+    alphaStartkey
+      0.1   1.0
+    endlist
+    alphaEndkey
+      0.1   0.0
+    endlist
+    sizeStartkey
+      0.1   3.0
+    endlist
+    sizeEndkey
+      0.1   1.0
+    endlist
+    sizeStart_ykey
+      0.1   0.0
+    endlist
+    sizeEnd_ykey
+      0.1   0.0
+    endlist
+    lockAxeskey
+      0.1   1.0
+    endlist
+    frameStartkey
+      0.1   0.0
+    endlist
+    frameEndkey
+      0.1   15.0
+    endlist
+    birthratekey
+      0.1   3.0
+    endlist
+    spawnTypekey
+      0.1   0.0
+    endlist
+    lifeExpkey
+      0.1   1.5
+    endlist
+    masskey
+      0.1   1.0
+    endlist
+    spreadkey
+      0.0333333   1.5708
+      0.1   3.14159
+    endlist
+    particleRotkey
+      0.1   0.3
+    endlist
+    velocitykey
+      0.1   0.5
+    endlist
+    randvelkey
+      0.1   0.5
+    endlist
+    fpskey
+      0.1   10.0
+    endlist
+    randomkey
+      0.1   0.0
+    endlist
+    inheritkey
+      0.1   1.0
+    endlist
+    inherit_localkey
+      0.1   0.0
+    endlist
+    inherit_partkey
+      0.1   0.0
+    endlist
+    inheritvelkey
+      0.1   0.0
+    endlist
+    xSizekey
+      0.1   200.0
+    endlist
+    ySizekey
+      0.1   200.0
+    endlist
+    bouncekey
+      0.1   0.0
+    endlist
+    bounce_cokey
+      0.1   1.0
+    endlist
+    loopkey
+      0.1   0.0
+    endlist
+    chunkykey
+      0.1   1.0
+    endlist
+    opacitykey
+      0.1   0.5
+    endlist
+    blurlengthkey
+      0.1   10.0
+    endlist
+    lightningDelaykey
+      0.1   0.0
+    endlist
+    lightningRadiuskey
+      0.1   0.0
+    endlist
+    lightningSubDivkey
+      0.1   0.0
+    endlist
+    lightningScalekey
+      0.1   0.0
+    endlist
+    blastRadiuskey
+      0.0333333   3.0
+      0.1   1.5
+    endlist
+    blastLengthkey
+      0.1   0.3
+    endlist
+    twosidedtexkey
+      0.1   1.0
+    endlist
+    p2pkey
+      0.1   0.0
+    endlist
+    p2p_bezier2key
+      0.1   0.0
+    endlist
+    p2p_bezier3key
+      0.1   0.0
+    endlist
+    combinetimekey
+      0.1   0.0
+    endlist
+    Dragkey
+      0.1   0.0
+    endlist
+    gravkey
+      0.1   0.0
+    endlist
+    thresholdkey
+      0.1   0.0
+    endlist
+    xgridkey
+      0.1   4.0
+    endlist
+    ygridkey
+      0.1   4.0
+    endlist
+    affectedByWindkey
+    endlist
+    m_isTintedkey
+      0.1   1.0
+    endlist
+    renderorderkey
+      0.1   0.0
+    endlist
+    Splatkey
+      0.1   0.0
+    endlist
+endnode
+event 0.0333333 detonate
+doneanim die DLP_V01 
+
+#MAXANIM ASCII
+newanim dead DLP_V01 
+ length 0.0333333
+ transtime 0.25
+animroot DLP_V01
+node dummy DLP_V01 
+  parent NULL 
+endnode
+node dummy DLP_V01_pwk 
+  parent DLP_V01 
+endnode
+node dummy V01_pwk_use01 
+  parent DLP_V01_pwk 
+endnode
+node dummy dlp_v01_wg 
+  parent DLP_V01_pwk 
+endnode
+node dummy V01_pwk_use02 
+  parent DLP_V01_pwk 
+endnode
+node dummy V01_pwk_use03 
+  parent DLP_V01_pwk 
+endnode
+node dummy V01_impact 
+  parent DLP_V01 
+endnode
+node dummy V01_ground 
+  parent DLP_V01 
+endnode
+node dummy V01_hand 
+  parent DLP_V01 
+endnode
+node dummy V01_head 
+  parent DLP_V01 
+endnode
+node dummy V01_head_hit 
+  parent DLP_V01 
+endnode
+node dummy anim_box 
+  parent DLP_V01 
+    positionkey 
+      0.0  0.0 0.0 -10.0
+      0.0333333  0.0 0.0 -10.0
+    endlist 
+    orientationkey 
+      0.0   0.0 0.0 0.0  0.0
+      0.0333333   0.0 0.0 0.0  0.0
+    endlist 
+endnode
+node dummy Box01 
+  parent anim_box 
+endnode
+node dummy animdummy 
+  parent anim_box 
+    positionkey 
+      0.0  0.00369004 0.0 -10.0
+      0.0333333  0.00369004 0.0 -10.0
+    endlist 
+    orientationkey 
+      0.0   1.0 0.0 0.0  1.5708
+      0.0333333   1.0 0.0 0.0  1.5708
+    endlist 
+endnode
+node dummy Object03 
+  parent animdummy 
+endnode
+node trimesh Object01 
+  parent anim_box 
+    centerkey
+    endlist
+    gizmokey
+    endlist
+endnode
+node emitter emit_bumm 
+  parent DLP_V01 
+    positionkey 
+    endlist 
+    orientationkey 
+    endlist 
+    colorStartkey
+    endlist
+    colorEndkey
+    endlist
+    alphaStartkey
+    endlist
+    alphaEndkey
+    endlist
+    sizeStartkey
+    endlist
+    sizeEndkey
+    endlist
+    sizeStart_ykey
+    endlist
+    sizeEnd_ykey
+    endlist
+    lockAxeskey
+    endlist
+    frameStartkey
+    endlist
+    frameEndkey
+    endlist
+    birthratekey
+    endlist
+    spawnTypekey
+    endlist
+    lifeExpkey
+    endlist
+    masskey
+    endlist
+    spreadkey
+    endlist
+    particleRotkey
+    endlist
+    velocitykey
+    endlist
+    randvelkey
+    endlist
+    fpskey
+    endlist
+    randomkey
+    endlist
+    inheritkey
+    endlist
+    inherit_localkey
+    endlist
+    inherit_partkey
+    endlist
+    inheritvelkey
+    endlist
+    xSizekey
+    endlist
+    ySizekey
+    endlist
+    bouncekey
+    endlist
+    bounce_cokey
+    endlist
+    loopkey
+    endlist
+    chunkykey
+    endlist
+    opacitykey
+    endlist
+    blurlengthkey
+    endlist
+    lightningDelaykey
+    endlist
+    lightningRadiuskey
+    endlist
+    lightningSubDivkey
+    endlist
+    lightningScalekey
+    endlist
+    blastRadiuskey
+    endlist
+    blastLengthkey
+    endlist
+    twosidedtexkey
+    endlist
+    p2pkey
+    endlist
+    p2p_bezier2key
+    endlist
+    p2p_bezier3key
+    endlist
+    combinetimekey
+    endlist
+    Dragkey
+    endlist
+    gravkey
+    endlist
+    thresholdkey
+    endlist
+    xgridkey
+    endlist
+    ygridkey
+    endlist
+    affectedByWindkey
+    endlist
+    m_isTintedkey
+    endlist
+    renderorderkey
+    endlist
+    Splatkey
+    endlist
+endnode
+node emitter emit_chunky 
+  parent DLP_V01 
+    positionkey 
+    endlist 
+    orientationkey 
+    endlist 
+    colorStartkey
+    endlist
+    colorEndkey
+    endlist
+    alphaStartkey
+    endlist
+    alphaEndkey
+    endlist
+    sizeStartkey
+    endlist
+    sizeEndkey
+    endlist
+    sizeStart_ykey
+    endlist
+    sizeEnd_ykey
+    endlist
+    lockAxeskey
+    endlist
+    frameStartkey
+    endlist
+    frameEndkey
+    endlist
+    birthratekey
+    endlist
+    spawnTypekey
+    endlist
+    lifeExpkey
+    endlist
+    masskey
+    endlist
+    spreadkey
+    endlist
+    particleRotkey
+    endlist
+    velocitykey
+    endlist
+    randvelkey
+    endlist
+    fpskey
+    endlist
+    randomkey
+    endlist
+    inheritkey
+    endlist
+    inherit_localkey
+    endlist
+    inherit_partkey
+    endlist
+    inheritvelkey
+    endlist
+    xSizekey
+    endlist
+    ySizekey
+    endlist
+    bouncekey
+    endlist
+    bounce_cokey
+    endlist
+    loopkey
+    endlist
+    chunkykey
+    endlist
+    opacitykey
+    endlist
+    blurlengthkey
+    endlist
+    lightningDelaykey
+    endlist
+    lightningRadiuskey
+    endlist
+    lightningSubDivkey
+    endlist
+    lightningScalekey
+    endlist
+    blastRadiuskey
+    endlist
+    blastLengthkey
+    endlist
+    twosidedtexkey
+    endlist
+    p2pkey
+    endlist
+    p2p_bezier2key
+    endlist
+    p2p_bezier3key
+    endlist
+    combinetimekey
+    endlist
+    Dragkey
+    endlist
+    gravkey
+    endlist
+    thresholdkey
+    endlist
+    xgridkey
+    endlist
+    ygridkey
+    endlist
+    affectedByWindkey
+    endlist
+    m_isTintedkey
+    endlist
+    renderorderkey
+    endlist
+    Splatkey
+    endlist
+endnode
+doneanim dead DLP_V01 
+
+donemodel DLP_V01 
+

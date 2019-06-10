@@ -1,0 +1,137 @@
+#MAXMODEL ASCII
+# model: wspkk_fxdrpur
+filedependancy wspkk_fxdrpur.max
+newmodel wspkk_fxdrpur
+setsupermodel wspkk_fxdrpur null
+setanimationscale 1
+#MAXGEOM  ASCII
+beginmodelgeom wspkk_fxdrpur
+node dummy wspkk_fxdrpur
+  parent NULL
+  #part-number 0
+endnode
+node emitter g_wswgs_v_acid_b
+  parent wspkk_fxdrpur
+  #part-number 1
+  p2p 0
+  p2p_sel 1
+  affectedByWind 0
+  m_isTinted 0
+  bounce 0
+  random 0
+  inherit 0
+  inheritvel 0
+  inherit_local 0
+  splat 0
+  inherit_part 0
+  renderorder 0
+  spawntype 0
+  update Fountain
+  render Normal
+  blend Normal
+  texture fxpa_flare_a
+  xgrid 1
+  ygrid 1
+  loop 0
+  deadspace 0
+  twosidedtex 0
+  blastRadius 0
+  blastLength 0
+  position 0 0.300208986 -0.0388274007
+  orientation 1 0 0 -0.52708298
+  colorStart 0.5412 0.0 0.6392
+  colorEnd 0.3333 0.0 0.3961
+  alphaStart 1
+  alphaEnd 1
+  sizeStart 0.100000001
+  sizeEnd 0.100000001
+  sizeStart_y 0
+  sizeEnd_y 0
+  frameStart 0
+  frameEnd 0
+  birthrate 2
+  lifeExp 2
+  mass 1.5
+  spread 0
+  particleRot 0
+  velocity 0
+  randvel 0
+  fps 0
+  xsize 2
+  ysize 50
+  bounce_co 0
+  blurlength 10
+  lightningDelay 0
+  lightningRadius 0
+  lightningScale 0
+  p2p_bezier2 7.21376005e+022
+  p2p_bezier3 6.69087007e+031
+  combinetime 0
+  drag 0
+  grav 0
+  threshold 0
+endnode
+node emitter g_wswgs_v_acid
+  parent wspkk_fxdrpur
+  #part-number 2
+  p2p 0
+  p2p_sel 1
+  affectedByWind 0
+  m_isTinted 0
+  bounce 0
+  random 0
+  inherit 1
+  inheritvel 0
+  inherit_local 0
+  splat 0
+  inherit_part 0
+  renderorder 0
+  spawntype 0
+  update Fountain
+  render Normal
+  blend Normal
+  texture fxpa_flare_a
+  xgrid 1
+  ygrid 1
+  loop 0
+  deadspace 0
+  twosidedtex 0
+  blastRadius 0
+  blastLength 0
+  position 0 0.354831994 -0.0940165967
+  orientation 1 0 0 -0.52708298
+  colorStart 0.5412 0.0 0.6392
+  colorEnd 0.3333 0.0 0.3961
+  alphaStart 1
+  alphaEnd 0
+  sizeStart 0
+  sizeEnd 0.400000006
+  sizeStart_y 0
+  sizeEnd_y 0
+  frameStart 0
+  frameEnd 0
+  birthrate 22
+  lifeExp 1
+  mass 0
+  spread 2.26892996
+  particleRot 0
+  velocity 0
+  randvel 0.0500000007
+  fps 0
+  xsize 3
+  ysize 50
+  bounce_co 0
+  blurlength 10
+  lightningDelay 0
+  lightningRadius 0
+  lightningScale 0
+  p2p_bezier2 0
+  p2p_bezier3 0
+  combinetime 0
+  drag 0
+  grav 0
+  threshold 0
+endnode
+endmodelgeom wspkk_fxdrpur
+
+donemodel wspkk_fxdrpur

@@ -1,0 +1,18 @@
+#MAXDOOR ASCII
+# model: dlp_pipe_10_PWK 
+filedependancy sewer_plc_door_7.max
+node trimesh PWK 
+  parent dlp_pipe_10_PWK 
+  position 0.0 0.0 0.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.552941 0.027451 0.227451  
+    bitmap NULL
+    verts 4
+     -0.15 -0.51 0.0
+     0.17 -0.51 0.0
+     -0.15 0.51 0.0
+     0.17 0.51 0.0
+    faces 2
+     2 0 3  1  0 0 0  1
+     1 3 0  1  0 0 0  1
+endnode

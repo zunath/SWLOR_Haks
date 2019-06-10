@@ -1,0 +1,58 @@
+# Exported from NWmax 0.8 b60 at 19/08/2009 13:47:52
+# pwk file
+#
+#NWmax PWKMESH  ASCII
+node trimesh PWK
+  parent phod_tablimpet_pwk
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.541176 0.0313726 0.431373 
+  bitmap NULL
+  verts 9
+    -0.553441 -0.556007 0.0
+    0.0 -0.745478 0.0
+    0.56857 -0.556007 0.0
+    -0.790362 0.0 0.0
+    0.0 0.0 0.0
+    0.770939 0.0 0.0
+    -0.558377 0.566255 0.0
+    0.0 0.75555 0.0
+    0.538955 0.551447 0.0
+  faces 8
+    3 0 4  1  9 6 10  7
+    1 4 0  1  7 10 6  7
+    4 1 5  1  10 7 11  7
+    2 5 1  1  8 11 7  7
+    6 3 7  1  12 9 13  7
+    4 7 3  1  10 13 9  7
+    7 4 8  1  13 10 14  7
+    5 8 4  1  11 14 10  7
+  tverts 15
+    0.0 0.0 0
+    0.5 0.0 0
+    1.0 0.0 0
+    0.0 0.0 0
+    0.5 0.0 0
+    1.0 0.0 0
+    0.0 0.0 0
+    0.5 0.0 0
+    1.0 0.0 0
+    0.0 0.5 0
+    0.5 0.5 0
+    1.0 0.5 0
+    0.0 1.0 0
+    0.5 1.0 0
+    1.0 1.0 0
+endnode
+node dummy ab2_pwk_use01
+  parent phod_tablimpet_pwk
+  position -0.908034 -0.0318622 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.603922 0.603922 0.898039 
+endnode
+node dummy ab2_pwk_use02
+  parent phod_tablimpet_pwk
+  position 0.888612 -0.00926392 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.603922 0.603922 0.898039 
+endnode

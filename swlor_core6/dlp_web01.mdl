@@ -1,0 +1,148 @@
+#MAXMODEL ASCII
+# model: dlp_web01 
+filedependancy sewer_plc_door_7.max
+newmodel dlp_web01 
+setsupermodel dlp_web01 NULL
+classification Item
+#MAXGEOM  ASCII
+beginmodelgeom dlp_web01 
+node dummy dlp_web01 
+  parent NULL 
+endnode
+node danglymesh Plane02 
+  parent dlp_web01 
+  position 0.0 -1.52929e-007 2.725
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.878431 0.341176 0.560784  
+     danglymesh 1
+     period 1.0
+     tightness 1.0
+     displacement 0.1
+     showdispl true
+     displtype 1
+     Alpha 1.0
+     transparencyhint 0
+     tilefade 0
+     scale 1.0
+     render 1
+     Shadow 0
+     beaming 0
+     inheritcolor 0
+     selfillumcolor 0.0 0.0 0.0 
+     rotatetexture 0
+     center 0.0 -3.48342 -4.10167 
+     gizmo SubAnim:Gizmo
+  ambient 1.0 1.0 1.0  
+  diffuse 1.0 1.0 1.0  
+  specular 0.0 0.0 0.0  
+  shininess 11.0 
+    bitmap ttf01_webs
+    verts 12
+     -0.4 0.0 -0.325
+     0.0 -0.0430755 -0.407033
+     0.38907 0.0 -0.289767
+     -0.4 0.0 0.325
+     0.0 -0.0696685 0.325
+     0.4 0.0 0.325
+     -0.4 0.0 -0.325
+     0.0 -0.0430755 -0.407033
+     0.38907 0.0 -0.289767
+     -0.4 0.0 0.325
+     0.0 -0.0696685 0.325
+     0.4 0.0 0.325
+    faces 8
+     0 3 4  1  0 3 4  1
+     4 1 0  1  4 1 0  1
+     1 4 5  1  1 4 5  1
+     5 2 1  1  5 2 1  1
+     9 6 10  1  9 6 10  1
+     7 10 6  1  7 10 6  1
+     10 7 11  1  10 7 11  1
+     8 11 7  1  8 11 7  1
+    tverts 12
+     0.0561462 -0.984582 0 
+     0.273852 -0.984582 0 
+     0.394863 -0.984582 0 
+     0.0561462 -0.645585 0 
+     0.273852 -0.648676 0 
+     0.394863 -0.645585 0 
+     0.0561462 -0.984582 0 
+     0.273852 -0.984582 0 
+     0.394863 -0.984582 0 
+     0.0561462 -0.645585 0 
+     0.273852 -0.648676 0 
+     0.394863 -0.645585 0 
+  colors 12
+     0.670588 0.670588 0.670588
+     0.6 0.6 0.6
+     0.670588 0.670588 0.670588
+     1.0 1.0 1.0
+     1.0 1.0 1.0
+     1.0 1.0 1.0
+     0.670588 0.670588 0.670588
+     0.6 0.6 0.6
+     0.670588 0.670588 0.670588
+     1.0 1.0 1.0
+     1.0 1.0 1.0
+     1.0 1.0 1.0
+    constraints 12
+    171.0
+    153.0
+    171.0
+    0.0
+    0.0
+    0.0
+    171.0
+    153.0
+    171.0
+    0.0
+    0.0
+    0.0
+endnode
+node trimesh pickbox 
+  parent dlp_web01 
+  position 0.00424072 0.0 0.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.52549 0.431373 0.0313726  
+     danglymesh 0
+     period 1.0
+     tightness 1.0
+     displacement 0.025
+     showdispl true
+     displtype 1
+     Alpha 1.0
+     transparencyhint 0
+     tilefade 0
+     scale 1.0
+     render 0
+     Shadow 0
+     beaming 0
+     inheritcolor 0
+     selfillumcolor 0.0 0.0 0.0 
+     rotatetexture 0
+     center 0.0 -4.64195 133.549 
+     gizmo SubAnim:Gizmo
+    bitmap NULL
+    verts 8
+     -0.3 -0.0969748 0.0
+     0.3 -0.0969748 0.0
+     -0.3 0.00413582 0.0
+     0.3 0.00413582 0.0
+     -0.3 -0.0969748 2.67097
+     0.3 -0.0969748 2.67097
+     -0.3 0.00413582 2.67097
+     0.3 0.00413582 2.67097
+    faces 8
+     0 1 5  8  0 0 0  5
+     5 4 0  8  0 0 0  5
+     1 3 7  16  0 0 0  4
+     7 5 1  16  0 0 0  4
+     3 2 6  32  0 0 0  6
+     6 7 3  32  0 0 0  6
+     2 0 4  64  0 0 0  3
+     4 6 2  64  0 0 0  3
+endnode
+endmodelgeom dlp_web01 
+
+donemodel dlp_web01 
+
