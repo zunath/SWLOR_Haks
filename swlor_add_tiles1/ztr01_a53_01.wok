@@ -1,0 +1,50 @@
+# Rewritten by CleanModels 3 Version 3.2.2.1 Fri Dec 05 23:38:26 2008
+#MAXWALKMESH  ASCII
+beginwalkmeshgeom ztr01_a53_01
+node aabb plane354
+  parent ztr01_a53_01
+  ambient 0.6015630 0.6015630 0.8945310
+  diffuse 0.6015630 0.6015630 0.8945310
+  specular 0 0 0
+  shininess 1
+  shadow 0
+  transparencyhint 0
+  bitmap NULL
+  orientation 0 0 0 0
+  position 0 0 0
+  verts 9
+    -5 0 0
+    -5 -5 0
+    0 0 0
+    0 -5 0
+    5 0 0
+    5 -5 0
+    -5 5 0
+    0 5 0
+    5 5 0
+  faces 8
+    0 1 2 1 0 0 0 14
+    3 2 1 1 0 0 0 14
+    2 3 4 1 0 0 0 14
+    5 4 3 1 0 0 0 14
+    6 0 7 1 0 0 0 3
+    2 7 0 1 0 0 0 3
+    7 2 8 1 0 0 0 14
+    4 8 2 1 0 0 0 14
+  aabb     -5 -5 0 5 5 0 -1
+    -5 -5 0 0 5 0 -1
+    -5 -5 0 0 0 0 -1
+    -5 -5 0 0 0 0 0
+    -5 -5 0 0 0 0 1
+    -5 0 0 0 5 0 -1
+    -5 0 0 0 5 0 4
+    -5 0 0 0 5 0 5
+    0 -5 0 5 5 0 -1
+    0 -5 0 5 0 0 -1
+    0 -5 0 5 0 0 2
+    0 -5 0 5 0 0 3
+    0 0 0 5 5 0 -1
+    0 0 0 5 5 0 6
+    0 0 0 5 5 0 7
+endnode
+endwalkmeshgeom ztr01_a53_01
