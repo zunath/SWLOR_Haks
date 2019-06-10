@@ -1,0 +1,30 @@
+# automatically generated PWK
+node dummy nw2totem1_cry_pwk_use01
+  parent nw2totem1_cry_pwk
+  position 0.1171875 1.1406250 0.0000000
+  orientation 0.0000000 0.0000000 -1.0000000 -3.1406250
+  wirecolor 0.7187500 0.7187500 0.7187500
+endnode
+node dummy nw2totem1_cry_pwk_use02
+  parent nw2totem1_cry_pwk
+  position 0.1171875 -1.0859375 0.0000000
+  orientation 0.0000000 0.0000000 -1.0000000 -3.1406250
+  wirecolor 0.7187500 0.7187500 0.7187500
+endnode
+node trimesh pwk_convexhull
+  parent nw2totem1_cry_pwk
+  position 0.3593750 -0.2265625 0.0000000
+  orientation 0.0000000 0.0000000 -1.0000000 -4.7109375
+  bitmap white
+  ambient 0.6015625 0.8906250 0.7187500
+  diffuse 0.6015625 0.8906250 0.7187500
+  verts 4
+    -0.6718750 -0.8046875 0
+    0.1562500 -0.8046875 0
+    0.1562500 0.1093750 0
+    -0.6718750 0.1093750 0
+  faces 2
+    1 3 0  0  0 0 0  0
+    1 2 3  0  0 0 0  0
+endnode
+

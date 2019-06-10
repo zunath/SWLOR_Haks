@@ -1,0 +1,18 @@
+#MAXDOOR ASCII
+# model: aenea_myt_n_01_v 
+filedependancy mythallar_placeable_06.max
+node trimesh Line01 
+  parent aenea_myt_n_01_v 
+  position 0.0 0.0 0.0
+  orientation  0.0 0.0 0.0 0.0
+  wirecolor 0.109804 0.109804 0.694118  
+    bitmap NULL
+  verts 4
+    -0.75 -0.375 0.0
+    0.75 -0.375 0.0
+    -0.75 0.375 0.0
+    0.75 0.375 0.0
+  faces 2
+    2 0 3  1  0 0 0  1
+    1 3 0  1  0 0 0  1
+endnode

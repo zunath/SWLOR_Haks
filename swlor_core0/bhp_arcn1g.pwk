@@ -1,0 +1,42 @@
+# Exported from NWmax 0.8 b60 at 13/01/2009 15:28:51
+# pwk file
+#
+#NWmax PWKMESH  ASCII
+node dummy arcn1g_pwk_use01
+  parent bhp_arcn1g_pwk
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.337255 0.337255 0.337255 
+endnode
+node dummy arcn1g_pwk_use02
+  parent bhp_arcn1g_pwk
+  position 0.0 0.246605 0.231287
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.337255 0.337255 0.337255 
+endnode
+node trimesh PWK
+  parent bhp_arcn1g_pwk
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.337255 0.337255 0.337255 
+  bitmap NULL
+  verts 9
+    -0.0604595 -0.057833 0.0
+    0.0 -0.082033 0.0
+    0.0625395 -0.049977 0.0
+    -0.0800525 0.0 0.0
+    0.0 0.0 0.0
+    0.0775235 0.0 0.0
+    -0.0645535 0.051367 0.0
+    0.0 0.0832645 0.0
+    0.067028 0.0488885 0.0
+  faces 8
+    3 0 4  1  0 0 0  7
+    1 4 0  1  0 0 0  7
+    4 1 5  1  0 0 0  7
+    2 5 1  1  0 0 0  7
+    6 3 7  1  0 0 0  7
+    4 7 3  1  0 0 0  7
+    7 4 8  1  0 0 0  7
+    5 8 4  1  0 0 0  7
+endnode

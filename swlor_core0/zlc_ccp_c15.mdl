@@ -1,0 +1,477 @@
+# Exported from NWmax 0.8 b61 at 2/17/2018 1:19:40 PM
+# mdl file
+#
+#NWmax MODEL ASCII
+# model: zlc_ccp_c15
+#local file: Unknown
+filedependancy Unknown
+newmodel zlc_ccp_c15
+setsupermodel zlc_ccp_c15 plc_x0_chb
+classification Character
+setanimationscale 2.5
+#NWmax GEOM  ASCII
+beginmodelgeom zlc_ccp_c15
+node dummy zlc_ccp_c15
+  parent NULL
+endnode
+node dummy damage28
+  parent zlc_ccp_c15
+  position 0.0 0.301 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.6 0.894118 0.721569 
+endnode
+node dummy x0_chb_hand
+  parent zlc_ccp_c15
+  position -0.008 1.21 2.336
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.6 0.894118 0.721569 
+endnode
+node dummy x0_chb_head
+  parent zlc_ccp_c15
+  position -0.008 -0.786 3.302
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.839216 0.894118 0.6 
+endnode
+node dummy x0_chb_head_hit
+  parent zlc_ccp_c15
+  position -0.008 -0.786 2.099
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.839216 0.894118 0.6 
+endnode
+node dummy x0_chb_impact
+  parent zlc_ccp_c15
+  position -0.008 -0.668 2.398
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.839216 0.894118 0.6 
+endnode
+node dummy x0_chb_ground
+  parent zlc_ccp_c15
+  position 0.011 -0.07 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.898039 0.65098 0.843137 
+endnode
+node emitter chunkywood108
+  parent zlc_ccp_c15
+  position 0.004 0.053 1.517
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 1.0 1.0 1.0 
+  update_sel 3
+  update Explosion
+  render_sel 1
+  render Normal
+  blend_sel 1
+  Blend Normal
+  spawntype_sel 0
+  spawnType 0
+  xSize 89.0
+  ySize 40.0
+  inherit 0
+  inherit_local 1
+  inheritvel 0
+  inherit_part 0
+  renderorder 0
+  threshold 0.0
+  combinetime 0.0
+  deadspace 0.0
+  opacity 0.5
+  colorStart 1.0 1.0 1.0 
+  colorEnd 1.0 1.0 1.0 
+  alphaStart 1.0
+  alphaEnd 1.0
+  sizeStart 0.1
+  sizeEnd 0.1
+  sizeStart_y 0.0
+  sizeEnd_y 0.0
+  birthrate 10
+  lifeExp 0.75
+  mass 3.0
+  spread 1.22173
+  particleRot 5.0
+  velocity 8.0
+  randvel 0.3
+  bounce_co 0.5
+  blurlength 10.0
+  loop 0
+  bounce 1
+  m_isTinted 0
+  splat 0
+  affectedByWind false
+  texture fxpa_cloud02
+  twosidedtex 0
+  xgrid 5
+  ygrid 5
+  fps 0
+  framestart 0
+  frameend 24
+  random 0
+  chunkName plc_chunk_s01
+  lightningDelay 0.0
+  lightningRadius 0.0
+  lightningSubDiv 0
+  lightningScale 0.0
+  blastRadius 0.0
+  blastLength 0.0
+  p2p 0
+  p2p_type Bezier
+  p2p_sel 1
+  p2p_bezier2 0.0
+  p2p_bezier3 0.0
+  grav 0.0
+  drag 0.0
+endnode
+node emitter fire!65
+  parent zlc_ccp_c15
+  position 0.004 0.053 1.332
+  orientation 1.0 0.0 0.0 -1.5708
+  wirecolor 1.0 1.0 1.0 
+  update_sel 3
+  update Explosion
+  render_sel 1
+  render Normal
+  blend_sel 1
+  Blend Normal
+  spawntype_sel 0
+  spawnType 0
+  xSize 100.0
+  ySize 99.0
+  inherit 0
+  inherit_local 1
+  inheritvel 0
+  inherit_part 0
+  renderorder 0
+  threshold 0.0
+  combinetime 0.0
+  deadspace 0.0
+  opacity 0.5
+  colorStart 0.47451 0.431373 0.329412 
+  colorEnd 0.819608 0.772549 0.584314 
+  alphaStart 1.0
+  alphaEnd 0.0
+  sizeStart 4.0
+  sizeEnd 1.0
+  sizeStart_y 0.0
+  sizeEnd_y 0.0
+  birthrate 10
+  lifeExp 2.5
+  mass 0.09
+  spread 2.96706
+  particleRot 0.5
+  velocity 2.0
+  randvel 0.5
+  bounce_co 0.0
+  blurlength 10.0
+  loop 0
+  bounce 0
+  m_isTinted 1
+  splat 0
+  affectedByWind false
+  texture fxpa_smoke01
+  twosidedtex 1
+  xgrid 4
+  ygrid 4
+  fps 10
+  framestart 0
+  frameend 24
+  random 0
+  lightningDelay 0.0
+  lightningRadius 0.0
+  lightningSubDiv 0
+  lightningScale 0.0
+  blastRadius 0.2
+  blastLength 1.0
+  p2p 0
+  p2p_type Bezier
+  p2p_sel 1
+  p2p_bezier2 0.0
+  p2p_bezier3 0.0
+  grav 0.0
+  drag 0.0
+endnode
+node emitter chunkywood109
+  parent zlc_ccp_c15
+  position 0.004 0.053 1.782
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 1.0 1.0 1.0 
+  update_sel 3
+  update Explosion
+  render_sel 1
+  render Normal
+  blend_sel 1
+  Blend Normal
+  spawntype_sel 0
+  spawnType 0
+  xSize 89.0
+  ySize 40.0
+  inherit 0
+  inherit_local 1
+  inheritvel 0
+  inherit_part 0
+  renderorder 0
+  threshold 0.0
+  combinetime 0.0
+  deadspace 0.0
+  opacity 0.5
+  colorStart 0.482353 0.435294 0.317647 
+  colorEnd 0.584314 0.533333 0.407843 
+  alphaStart 1.0
+  alphaEnd 1.0
+  sizeStart 0.1
+  sizeEnd 0.1
+  sizeStart_y 0.0
+  sizeEnd_y 0.0
+  birthrate 10
+  lifeExp 0.75
+  mass 3.0
+  spread 1.22173
+  particleRot 2.9
+  velocity 8.0
+  randvel 0.3
+  bounce_co 0.5
+  blurlength 10.0
+  loop 0
+  bounce 1
+  m_isTinted 0
+  splat 0
+  affectedByWind false
+  texture fxpa_cloud02
+  twosidedtex 1
+  xgrid 5
+  ygrid 5
+  fps 0
+  framestart 0
+  frameend 24
+  random 0
+  chunkName plc_chunk_s02
+  lightningDelay 0.0
+  lightningRadius 0.0
+  lightningSubDiv 0
+  lightningScale 0.0
+  blastRadius 0.0
+  blastLength 0.0
+  p2p 0
+  p2p_type Bezier
+  p2p_sel 1
+  p2p_bezier2 0.0
+  p2p_bezier3 0.0
+  grav 0.0
+  drag 0.0
+endnode
+node trimesh box6776
+  parent zlc_ccp_c15
+  position -0.00474988 0.585 1.751
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 1
+  center -0.949997 -1.1 0.0500031 
+  bitmap tic01_furnat01
+  verts 10
+    -1.289 0.511 1.638
+    -1.297 -0.00899978 1.638
+    0.0 0.0 1.763
+    0.00800009 0.52 1.763
+    1.29 -0.0270002 1.638
+    1.298 0.494 1.638
+    -1.29 0.0260002 -1.762
+    -1.298 -0.494 -1.762
+    1.31 -0.498 -1.762
+    1.317 0.0219998 -1.762
+  faces 14
+    0 1 2  1  0 1 2  0
+    2 3 0  1  2 3 0  0
+    3 2 4  1  3 2 1  0
+    4 5 3  1  1 0 3  0
+    6 7 1  1  4 5 6  0
+    1 0 6  1  6 7 4  0
+    7 8 2  1  8 9 10  0
+    2 1 7  1  10 11 8  0
+    4 2 8  1  12 10 9  0
+    8 9 5  1  4 5 6  0
+    5 4 8  1  6 7 4  0
+    3 5 9  1  10 11 8  0
+    9 6 0  1  8 9 12  0
+    0 3 9  1  12 10 8  0
+  tverts 13
+    0.25 0.661133 0
+    0.25 0.844727 0
+    0.5 0.844727 0
+    0.5 0.661133 0
+    0.436523 1.00977 0
+    0.25293 1.00977 0
+    0.25293 0.495117 0
+    0.436523 0.495117 0
+    0.249023 0.0 0
+    0.499023 0.0 0
+    0.374023 0.458008 0
+    0.249023 0.388672 0
+    0.499023 0.374023 0
+endnode
+node trimesh box6777
+  parent zlc_ccp_c15
+  position -1.00675 -0.253 -0.011
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 1
+  center 26.05 -0.299995 112.5 
+  bitmap tic01_furnat01
+  verts 8
+    0.223 -1.301 1.875
+    0.227 1.307 1.875
+    -0.297 -1.293 2.25
+    -0.279 1.294 2.25
+    0.223 -1.301 0.0
+    0.227 1.307 0.0
+    -0.748 -1.298 0.0
+    -0.73 1.288 0.0
+  faces 10
+    0 1 2  1  0 1 2  0
+    3 2 1  1  3 2 1  0
+    4 5 0  1  4 5 0  0
+    1 0 5  1  1 0 5  0
+    6 4 2  1  6 4 7  0
+    0 2 4  1  0 7 4  0
+    7 6 3  1  8 9 10  0
+    2 3 6  1  11 10 9  0
+    5 7 1  1  5 12 1  0
+    3 1 7  1  13 1 12  0
+  tverts 14
+    0.5 0.216797 0
+    0.25 0.216797 0
+    0.5 0.347656 0
+    0.25 0.347656 0
+    0.5 0.0 0
+    0.25 0.0 0
+    0.298831 0.0 0
+    0.296875 0.25293 0
+    1.0 0.0009766 0
+    0.5 0.0009766 0
+    1.0 0.5 0
+    0.5 0.5 0
+    0.419922 0.0 0
+    0.421875 0.25293 0
+endnode
+node trimesh box6778
+  parent zlc_ccp_c15
+  position 1.05925 -0.263 -0.011
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 1
+  center -19.1 -0.549995 112.5 
+  bitmap tic01_furnat01
+  verts 8
+    -0.279 1.294 1.875
+    -0.296 -1.293 1.875
+    0.224 -1.301 2.25
+    0.227 1.307 2.25
+    -0.279 1.294 0.0
+    -0.296 -1.293 0.0
+    0.674 -1.295 0.0
+    0.678 1.312 0.0
+  faces 10
+    0 1 2  1  0 1 2  0
+    2 3 0  1  2 3 0  0
+    4 5 1  1  4 5 1  0
+    1 0 4  1  1 0 4  0
+    5 6 2  1  5 6 7  0
+    2 1 5  1  7 1 5  0
+    6 7 3  1  8 9 10  0
+    3 2 6  1  10 11 8  0
+    7 4 0  1  12 4 0  0
+    0 3 7  1  0 13 12  0
+  tverts 14
+    0.25 0.216797 0
+    0.5 0.216797 0
+    0.5 0.347656 0
+    0.25 0.347656 0
+    0.25 0.0 0
+    0.5 0.0 0
+    0.298831 0.0 0
+    0.296875 0.25293 0
+    0.5 0.0009766 0
+    1.0 0.0009766 0
+    1.0 0.5 0
+    0.5 0.5 0
+    0.419922 0.0 0
+    0.421875 0.25293 0
+endnode
+node trimesh box6779
+  parent zlc_ccp_c15
+  position 0.0312499 -0.663 1.464
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 1
+  center 3.45 -17.05 -35.0 
+  bitmap tic01_furnat01
+  verts 6
+    0.737 0.959 0.0
+    -0.809 0.961 0.0
+    0.749 -0.608 0.0
+    -0.818 -0.62 0.0
+    0.749 -0.608 -0.7
+    -0.818 -0.62 -0.7
+  faces 4
+    0 1 2  1  0 1 2  0
+    3 2 1  1  3 2 1  0
+    2 3 4  1  2 3 4  0
+    5 4 3  1  5 4 3  0
+  tverts 6
+    0.5 0.5 0
+    0.25 0.5 0
+    0.5 0.125977 0
+    0.25 0.125977 0
+    0.5 0.0039063 0
+    0.25 0.0039063 0
+endnode
+endmodelgeom zlc_ccp_c15
+donemodel zlc_ccp_c15
