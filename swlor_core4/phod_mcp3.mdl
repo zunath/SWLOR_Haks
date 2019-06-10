@@ -1,0 +1,99 @@
+# Exported from NWmax 0.8 b60 at 24/03/2008 15:08:11
+# mdl file
+#
+#NWmax MODEL ASCII
+# model: phod_mcp3
+#local file: Unknown
+filedependancy Unknown
+newmodel phod_mcp3
+setsupermodel phod_mcp3 NULL
+classification Character
+setanimationscale 2.0
+#NWmax GEOM  ASCII
+beginmodelgeom phod_mcp3
+node dummy phod_mcp3
+  parent NULL
+endnode
+node trimesh Box27
+  parent phod_mcp3
+  position 0.363572 1.1856 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.576471 0.576471 0.576471 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 10
+  center 0.0 0.0 395.5 
+  bitmap phod_mcpt3
+  verts 8
+    0.95 10.12 0.0
+    -0.95 10.12 0.0
+    0.95 -10.12 0.0
+    -0.95 -10.12 0.0
+    0.95 10.12 7.91
+    -0.95 10.12 7.91
+    0.95 -10.12 7.91
+    -0.95 -10.12 7.91
+  faces 12
+    0 2 3  1  8 9 10  1
+    3 1 0  1  11 12 13  1
+    4 5 7  1  14 15 16  0
+    7 6 4  1  17 18 19  0
+    0 1 5  1  20 21 22  4
+    5 4 0  1  23 24 25  4
+    1 3 7  1  26 27 28  3
+    7 5 1  1  29 5 1  3
+    3 2 6  1  30 31 32  5
+    6 7 3  1  33 7 3  5
+    2 0 4  1  34 0 35  2
+    4 6 2  1  4 6 2  2
+  tverts 36
+    3.025 -0.4875 0
+    -2.025 -0.4875 0
+    -2.025 -0.4875 0
+    0.262499 -0.4875 0
+    3.025 1.4875 0
+    -2.025 1.4875 0
+    -2.025 1.4875 0
+    0.262499 1.4875 0
+    0.737501 -2.025 0
+    0.737499 3.025 0
+    0.262499 3.025 0
+    0.262499 3.025 0
+    0.262501 -2.025 0
+    0.737501 -2.025 0
+    0.262499 -2.025 0
+    0.737499 -2.025 0
+    0.737501 3.025 0
+    0.737501 3.025 0
+    0.262501 3.025 0
+    0.262499 -2.025 0
+    0.262499 -0.4875 0
+    0.737499 -0.4875 0
+    0.737499 1.4875 0
+    0.737499 1.4875 0
+    0.262499 1.4875 0
+    0.262499 -0.4875 0
+    -2.025 -0.4875 0
+    3.025 -0.4875 0
+    3.025 1.4875 0
+    3.025 1.4875 0
+    0.262499 -0.4875 0
+    0.737499 -0.4875 0
+    0.737499 1.4875 0
+    0.737499 1.4875 0
+    -2.025 -0.4875 0
+    3.025 1.4875 0
+endnode
+endmodelgeom phod_mcp3
+donemodel phod_mcp3
