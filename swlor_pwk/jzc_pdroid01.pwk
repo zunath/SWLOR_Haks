@@ -1,0 +1,34 @@
+# Exported from NWmax 0.8 b60 at 21/01/2010 13:57:09
+# pwk file
+#
+#NWmax PWKMESH  ASCII
+node dummy d01_pwk_use01
+  parent jzc_pdroid01_pwk
+  position -0.480683 0.0204187 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.694118 0.101961 0.345098 
+endnode
+node trimesh PWK
+  parent jzc_pdroid01_pwk
+  position 0.00805149 -0.00767612 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.54902 0.345098 0.882353 
+  bitmap NULL
+  verts 4
+    -0.285731 -0.391797 0.0
+    0.285731 -0.391797 0.0
+    -0.285731 0.391797 0.0
+    0.285731 0.391797 0.0
+  faces 2
+    2 0 3  1  6 4 7  7
+    1 3 0  1  5 7 4  7
+  tverts 8
+    0.0 0.0 0
+    1.0 0.0 0
+    0.0 0.0 0
+    1.0 0.0 0
+    0.0 0.0 0
+    1.0 0.0 0
+    0.0 1.0 0
+    1.0 1.0 0
+endnode

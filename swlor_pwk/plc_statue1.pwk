@@ -1,0 +1,19 @@
+# Exported from NWmax 0.8 c00 at 9/28/2018 6:48:38 PM
+# pwk file
+#
+#NWmax PWKMESH  ASCII
+node trimesh pwk
+  parent PLC_Statue1_pwk
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 1.0 1.0 1.0 
+  bitmap NULL
+  verts 4
+    -0.66048 -0.893302 -0.00997099
+    -0.66048 0.779795 -0.00997099
+    0.547257 0.779795 -0.00997099
+    0.547257 -0.893302 -0.00997099
+  faces 2
+    0 1 2  1  0 0 0  7
+    2 3 0  1  0 0 0  7
+endnode

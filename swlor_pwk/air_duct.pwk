@@ -1,0 +1,38 @@
+# Exported from Gmax MDL Tool 0.1-beta at 10/28/03 1:30:04 PM
+# pwk file
+#
+#GMAXPWKMESH  ASCII
+node trimesh air_duct_pwk
+  parent air_duct_PWK
+  position -0.0257428 -0.00028698 0.0
+  orientation 1.0 0.0 0.0 0.0
+  scale 1.0
+  wirecolor 0.694118 0.580392 0.101961 
+  ambient 0.0 0.0 0.0 
+  diffuse 0.705882 0.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 11.0
+  selfillumcolor 0.0 0.0 0.0 
+  alpha 1.0
+    bitmap NULL
+    verts 10
+     -0.911043 -1.05044 0.0
+     -0.0366793 -1.05044 0.0
+     -1.82209 0.198057 0.0
+     -0.911043 0.198057 0.0
+     -0.0366793 0.198057 0.0
+     1.87968 0.198057 0.0
+     -1.82209 1.06072 0.0
+     -0.911043 1.06072 0.0
+     0.0 1.06072 0.0
+     1.87968 1.06072 0.0
+    faces 8
+     3 0 4  1  0 0 0  1
+     1 4 0  1  0 0 0  1
+     6 2 7  1  0 0 0  1
+     3 7 2  1  0 0 0  1
+     7 3 8  1  0 0 0  1
+     4 8 3  1  0 0 0  1
+     8 4 9  1  0 0 0  1
+     5 9 4  1  0 0 0  1
+endnode

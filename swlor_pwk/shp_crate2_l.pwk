@@ -1,0 +1,25 @@
+# Exported from NWmax 0.8 b60 at 7/31/2006 11:31:03 AM
+# pwk file
+#
+#NWmax PWKMESH  ASCII
+node trimesh shp_crate2_wg
+  parent shp_crate2_l_pwk
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.521569 0.431373 0.0313726 
+  bitmap NULL
+  verts 4
+    -0.375 -0.375 0.0
+    0.621748 -0.375 0.0
+    -0.375 0.628156 0.0
+    0.621748 0.628156 0.0
+  faces 2
+    2 0 3  1  0 0 0  7
+    1 3 0  1  0 0 0  7
+endnode
+node dummy A05_pwk_use01
+  parent shp_crate2_l_pwk
+  position -0.0370001 -1.01713 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.52549 0.0235294 0.0235294 
+endnode

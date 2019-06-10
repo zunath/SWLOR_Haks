@@ -1,0 +1,23 @@
+# Exported from NWmax 0.8 c00 at 9/30/2018 11:18:15 PM
+# pwk file
+#
+#NWmax PWKMESH  ASCII
+node trimesh pwk
+  parent swc_wall_cor_cl2_pwk
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.101961 0.694118 0.337255 
+  bitmap NULL
+  verts 6
+    1.02654 -1.03558 0.00872532
+    -1.02654 -1.03558 0.00872532
+    -1.02654 0.0 0.00872532
+    1.02654 0.0 0.00872532
+    1.02654 1.03558 0.00872532
+    -1.02654 1.03558 0.00872532
+  faces 4
+    2 3 4  1  0 0 0  7
+    2 4 5  1  0 0 0  7
+    3 2 1  1  0 0 0  7
+    3 1 0  1  0 0 0  7
+endnode

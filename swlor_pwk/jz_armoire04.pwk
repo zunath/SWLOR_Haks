@@ -1,0 +1,36 @@
+# Exported from NWmax 0.8 b60 at 23/11/2007 20:04:00
+# pwk file
+#
+#NWmax PWKMESH  ASCII
+node dummy t01_pwk_use01
+  parent jz_armoire01_pwk
+  position 0.0 0.609435 0.977344
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.694118 0.109804 0.584314 
+endnode
+node trimesh PWK
+  parent jz_armoire01_pwk
+  position 0.00785436 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.537255 0.0313726 0.431373 
+  bitmap NULL
+  verts 9
+    -0.72266 -0.380904 0.0
+    0.0 -0.389419 0.0
+    0.72836 -0.382146 0.0
+    -0.731513 0.0 0.0
+    0.0 0.0 0.0
+    0.735632 0.0 0.0
+    -0.840596 0.393663 0.0
+    0.0 0.393663 0.0
+    0.850668 0.397299 0.0
+  faces 8
+    3 0 4  1  0 0 0  7
+    1 4 0  1  0 0 0  7
+    4 1 5  1  0 0 0  7
+    2 5 1  1  0 0 0  7
+    6 3 7  1  0 0 0  7
+    4 7 3  1  0 0 0  7
+    7 4 8  1  0 0 0  7
+    5 8 4  1  0 0 0  7
+endnode

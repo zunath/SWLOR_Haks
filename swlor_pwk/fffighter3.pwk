@@ -1,0 +1,33 @@
+# Exported from Wayland's NWN Maxscript v0.3b at 10/27/2004 11:54:52 PM
+# pwk file
+#
+node trimesh fight
+    parent fffighter3_pwk
+    position 0.0 0.0 0.0
+    orientation 1.0 0.0 0.0 0.0
+    scale 1.0
+    diffuse 0.8000 0.8000 0.8000
+    ambient 0.2000 0.2000 0.2000
+    specular 0.0000 0.0000 0.0000
+    render 0
+    bitmap NULL
+    verts 9
+        -5.27085 -7.41491 0.0
+        0.0 -6.64939 0.0
+        4.88929 -7.52748 0.0
+        -5.86519 -3.81089 0.0
+        0.0 0.0 0.0
+        5.73234 -3.35859 0.0
+        -5.86519 -2.10564 0.0
+        0.0 1.7153 0.0
+        5.86519 -2.09639 0.0
+    faces 8
+        3 0 4 1 0 0 0 1
+        1 4 0 1 0 0 0 1
+        4 1 5 1 0 0 0 1
+        2 5 1 1 0 0 0 1
+        6 3 7 1 0 0 0 1
+        4 7 3 1 0 0 0 1
+        7 4 8 1 0 0 0 1
+        5 8 4 1 0 0 0 1
+endnode

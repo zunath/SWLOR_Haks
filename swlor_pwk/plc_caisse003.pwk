@@ -1,0 +1,28 @@
+# Exported from NWmax 0.8 b60 at 20/07/2009 21:59:59
+# pwk file
+#
+#NWmax PWKMESH  ASCII
+node trimesh Plane01
+  parent plc_caisse003_pwk
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.882353 0.345098 0.780392 
+  bitmap NULL
+  verts 4
+    -0.6 -0.6 0.0
+    0.6 -0.6 0.0
+    -0.6 0.6 0.0
+    0.6 0.6 0.0
+  faces 2
+    2 0 3  1  6 4 7  7
+    1 3 0  1  5 7 4  7
+  tverts 8
+    0.0 0.0 0
+    1.0 0.0 0
+    0.0 0.0 0
+    1.0 0.0 0
+    0.0 0.0 0
+    1.0 0.0 0
+    0.0 1.0 0
+    1.0 1.0 0
+endnode

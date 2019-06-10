@@ -1,0 +1,65 @@
+# Exported from NWmax 0.8 b60 at 04/01/2008 21:22:14
+# pwk file
+#
+#NWmax PWKMESH  ASCII
+node dummy 001_pwk_use01
+  parent jz_spacest001_pwk
+  position -0.0293253 -10.7868 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.690196 0.101961 0.101961 
+endnode
+node trimesh pwk
+  parent jz_spacest001_pwk
+  position 0.181817 -0.148718 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.333333 0.109804 0.694118 
+  tilefade 0
+  scale 1.0
+  render 0
+  Shadow 0
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  center -15.1595 26.9116 0.0 
+  bitmap NULL
+  verts 9
+    -7.83927 -7.60581 0.0
+    0.0 -9.90627 0.0
+    7.38272 -7.37576 0.0
+    -10.2931 0.0 0.0
+    0.0 0.0 0.0
+    9.98991 0.0 0.0
+    -7.60923 7.91399 0.0
+    0.0 10.4445 0.0
+    7.4594 7.91399 0.0
+  faces 8
+    3 0 4  1  9 6 10  7
+    1 4 0  1  7 10 6  7
+    4 1 5  1  10 7 11  7
+    2 5 1  1  8 11 7  7
+    6 3 7  1  12 9 13  7
+    4 7 3  1  10 13 9  7
+    7 4 8  1  13 10 14  7
+    5 8 4  1  11 14 10  7
+  tverts 15
+    0.0 0.0 0
+    0.5 0.0 0
+    1.0 0.0 0
+    0.0 0.0 0
+    0.5 0.0 0
+    1.0 0.0 0
+    0.0 0.0 0
+    0.5 0.0 0
+    1.0 0.0 0
+    0.0 0.5 0
+    0.5 0.5 0
+    1.0 0.5 0
+    0.0 1.0 0
+    0.5 1.0 0
+    1.0 1.0 0
+endnode

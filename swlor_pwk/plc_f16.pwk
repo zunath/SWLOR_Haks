@@ -1,0 +1,33 @@
+#Exported from 3ds max by MDL Plug-in Suite 1.0b
+#http://www.bricksbuilder.com/nwn/utils/
+#MAXMODEL ASCII
+# model: plc_f16
+filedependancy f16_f.max
+node trimesh F16_PWK
+  parent plc_f16_pwk
+  position 0 -0.854273 0
+  orientation 0 0 0 0
+  wirecolor 0.226563 0.226563 0.226563
+  ambient 0.222656 0.03125 0.53125
+  diffuse 0.222656 0.03125 0.53125
+  specular 0 0 0
+  shininess 1
+  bitmap NULL
+  verts 4
+    5.18509 10.0834 0
+    -5.18509 10.0834 0
+    2.8967 -10.0834 0
+    -2.8967 -10.0834 0
+  faces 2
+    2 0 3  1  6 4 7  7
+    1 3 0  1  5 7 4  7
+  tverts 8
+    0 0 0
+    1 0 0
+    0 0 0
+    1 0 0
+    0 0 0
+    1 0 0
+    0 1 0
+    1 1 0
+endnode
