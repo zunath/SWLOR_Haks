@@ -1,0 +1,52 @@
+# Exported from NWmax 0.5-beta at 2/20/2004 9:40:46 AM
+# pwk file
+#
+#NWmaxPWKMESH  ASCII
+node dummy k12_pwk_use02
+  parent zlc_k12_pwk
+  position -1.95599 -3.34564 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.345098 0.780392 0.882353 
+endnode
+node trimesh zlc_k12_wg
+  parent zlc_k12_pwk
+  position 0.0247845 -0.463313 0.0
+  orientation 0.0 -1.0 1.26759e-006 -3.14159
+  wirecolor 0.694118 0.694118 0.694118 
+  multimaterial 20
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+  bitmap NULL
+  verts 4
+    1.23 2.36 0.0
+    -1.12 2.36 0.0
+    1.23 -3.14 0.0
+    -1.12 -3.14 0.0
+  faces 2
+    0 2 3  1  0 0 0  0
+    3 1 0  1  0 0 0  0
+endnode
+node dummy k12_pwk_use01
+  parent zlc_k12_pwk
+  position 1.86454 -3.40849 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.345098 0.694118 0.101961 
+endnode

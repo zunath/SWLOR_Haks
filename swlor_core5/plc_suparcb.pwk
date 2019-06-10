@@ -1,0 +1,40 @@
+#Exported from 3ds max by MDL Plug-in Suite 1.0b
+#http://www.bricksbuilder.com/nwn/utils/
+#MAXMODEL ASCII
+# model: plc_suparcb
+filedependancy Supportarch02 textured.max
+node trimesh plc_suparchbpwk
+  parent plc_suparcb_pwk
+  position 0 0 0
+  orientation 0 0 0 0
+  wirecolor 0.554688 0.554688 0.554688
+  ambient 0.550781 0.0273438 0.226563
+  diffuse 0.550781 0.0273438 0.226563
+  specular 0 0 0
+  shininess 1
+  bitmap NULL
+  verts 12
+    0.581113 0.598935 0
+    0.191977 0.661323 0
+    -0.25019 0.664443 0
+    -0.645565 0.580219 0
+    0.677815 0.222468 0
+    -0.667817 -0.173788 0
+    -0.698595 0.219349 0
+    0.627904 -0.213268 0
+    0.518725 -0.542944 0
+    0.191976 -0.661481 0
+    -0.231474 -0.602213 0
+    -0.595655 -0.468078 0
+  faces 10
+    4 0 5  1  0 0 0  0
+    1 5 0  1  0 0 0  0
+    2 5 1  1  0 0 0  0
+    5 2 6  1  0 0 0  0
+    3 6 2  1  0 0 0  0
+    7 4 5  1  0 0 0  0
+    8 7 9  1  0 0 0  0
+    5 9 7  1  0 0 0  0
+    9 5 10  1  0 0 0  0
+    10 5 11  1  0 0 0  0
+endnode

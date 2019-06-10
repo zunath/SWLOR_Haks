@@ -1,0 +1,24 @@
+#Exported from 3ds max by MDL Plug-in Suite 1.0b
+#http://www.bricksbuilder.com/nwn/utils/
+#MAXMODEL ASCII
+# model: PLC_cannon1
+filedependancy Cannon.max
+node trimesh zlc_s67_wg
+  parent zlc_s67_pwk
+  position 0 0.468061 0
+  orientation 0 0 0 0
+  wirecolor 0.839844 0.839844 0.839844
+  ambient 0.835938 0.890625 0.597656
+  diffuse 0.835938 0.890625 0.597656
+  specular 0 0 0
+  shininess 1
+  bitmap NULL
+  verts 4
+    0.474234 1.61165 0
+    -0.474234 1.61165 0
+    0.474234 -0.768349 0
+    -0.474234 -0.768348 0
+  faces 2
+    2 0 3  1  0 0 0  0
+    1 3 0  1  0 0 0  0
+endnode

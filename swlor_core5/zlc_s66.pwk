@@ -1,0 +1,40 @@
+#Exported from 3ds max by MDL Plug-in Suite 1.0b
+#http://www.bricksbuilder.com/nwn/utils/
+#MAXMODEL ASCII
+# model: PLC_guillo
+filedependancy Guillotine.max
+node trimesh zlc_s66_wg
+  parent zlc_s66_pwk
+  position 0 0 0
+  orientation 0 0 0 0
+  wirecolor 0.691406 0.691406 0.691406
+  ambient 0.6875 0.101563 0.101563
+  diffuse 0.6875 0.101563 0.101563
+  specular 0 0 0
+  shininess 1
+  bitmap NULL
+  verts 12
+    0.65 0.3 0
+    0.515667 0.3 0
+    -0.515667 0.3 0
+    -0.65 0.3 0
+    0.515667 0.0999999 0
+    -0.515667 0.1 0
+    0.65 -0.3 0
+    0.515667 -0.1 0
+    -0.515667 -0.0999999 0
+    -0.65 -0.3 0
+    0.515667 -0.3 0
+    -0.515667 -0.3 0
+  faces 10
+    1 4 0  1  0 0 0  0
+    5 2 3  1  0 0 0  0
+    6 0 7  1  0 0 0  0
+    4 7 0  1  0 0 0  0
+    7 4 8  1  0 0 0  0
+    5 8 4  1  0 0 0  0
+    8 5 9  1  0 0 0  0
+    3 9 5  1  0 0 0  0
+    7 10 6  1  0 0 0  0
+    11 8 9  1  0 0 0  0
+endnode

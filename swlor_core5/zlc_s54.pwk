@@ -1,0 +1,32 @@
+#Exported from 3ds max by MDL Plug-in Suite 1.0b
+#http://www.bricksbuilder.com/nwn/utils/
+#MAXMODEL ASCII
+# model: PLC_drum1
+filedependancy Drum02.max
+node trimesh zlc_s54_wg
+  parent zlc_s54_pwk
+  position 0 0 0
+  orientation 0 0 0 0
+  wirecolor 0.0273438 0.0273438 0.0273438
+  ambient 0.0234375 0.523438 0.441406
+  diffuse 0.0234375 0.523438 0.441406
+  specular 0 0 0
+  shininess 1
+  bitmap NULL
+  verts 8
+    0 -0.4 0
+    -0.4 0 0
+    -0.282843 -0.282843 0
+    0.282843 -0.282843 0
+    0.4 0 0
+    0.282843 0.282843 0
+    0 0.4 0
+    -0.282843 0.282843 0
+  faces 6
+    2 0 7  1  0 0 0  1
+    4 5 3  1  0 0 0  1
+    5 6 3  1  0 0 0  1
+    6 0 3  1  0 0 0  1
+    7 0 6  1  0 0 0  1
+    1 2 7  1  0 0 0  1
+endnode

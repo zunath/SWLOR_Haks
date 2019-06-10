@@ -1,0 +1,45 @@
+# Exported from NWmax 0.7 at 12/5/2004 12:36:05 AM
+# pwk file
+#
+#NWmax PWKMESH  ASCII
+node trimesh NoWalk
+  parent dhd_PWK
+  position -0.5602 0.98341 -0.0398886
+  orientation 0.0 0.0 -1.0 -0.226893
+  wirecolor 0.721569 0.603922 0.894118 
+  multimaterial 20
+    Dirt
+    Obscuring
+    Grass
+    Stone
+    Wood
+    Water
+    Nonwalk
+    Transparent
+    Carpet
+    Metal
+    Puddles
+    Swamp
+    Mud
+    Leaves
+    Lava
+    BottomlessPit
+    DeepWater
+    Door
+    Snow
+    Sand
+  ambient 0.0 0.0 0.0 
+  diffuse 0.705882 0.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 11.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap Nonwalk
+  verts 4
+    1.67 -0.89 0.0
+    -0.93 1.21 0.0
+    -0.93 -0.89 0.0
+    1.67 1.21 0.0
+  faces 2
+    0 1 2  1  0 0 0  7
+    0 3 1  1  0 0 0  7
+endnode

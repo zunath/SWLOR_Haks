@@ -1,0 +1,52 @@
+# Exported from NWmax 0.5-beta at 2/20/2004 12:42:50 PM
+# pwk file
+#
+#NWmaxPWKMESH  ASCII
+node trimesh zlc_w19_wg
+  parent zlc_w19_pwk
+  position -0.194676 -0.394817 0.0
+  orientation 0.0 0.0 1.0 -1.5708
+  wirecolor 0.835294 0.835294 0.835294 
+  multimaterial 20
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+  bitmap NULL
+  verts 4
+    0.97137 1.02406 0.0
+    -0.97137 1.02406 0.0
+    0.97137 -1.02406 0.0
+    -0.97137 -1.02406 0.0
+  faces 2
+    2 0 3  1  0 0 0  0
+    1 3 0  1  0 0 0  0
+endnode
+node dummy w19_pwk_use02
+  parent zlc_w19_pwk
+  position -0.00100983 -1.39924 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.839216 0.894118 0.6 
+endnode
+node dummy w19_pwk_use01
+  parent zlc_w19_pwk
+  position -0.00100983 1.25035 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.839216 0.894118 0.6 
+endnode

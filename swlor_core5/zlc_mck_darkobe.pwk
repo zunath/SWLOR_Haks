@@ -1,0 +1,31 @@
+# Exported from NWmax 0.8 b60 at 6/11/2006 9:32:57 PM
+# pwk file
+#
+#NWmax PWKMESH  ASCII
+node dummy zlc_mck_darkobe_pwk_use01
+  parent ZLC_MCK_darkobe_pwk
+  position 0.0 1.29273 0.209075
+  orientation 0.0 -1.0 0.0 -1.5708
+  wirecolor 0.345098 0.560784 0.882353 
+endnode
+node dummy zlc_mck_darkobe_pwk_use02
+  parent ZLC_MCK_darkobe_pwk
+  position 0.0 1.29273 0.209075
+  orientation 0.0 -1.0 0.0 -1.5708
+  wirecolor 0.345098 0.560784 0.882353 
+endnode
+node trimesh pwk
+  parent ZLC_MCK_darkobe_pwk
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.890196 0.596078 0.596078 
+  bitmap NULL
+  verts 4
+    -1.06026 -0.97601 0.0
+    1.06026 -0.97601 0.0
+    -0.706872 1.16356 0.0
+    0.706872 1.16356 0.0
+  faces 2
+    0 2 3  1  0 0 0  7
+    3 1 0  1  0 0 0  7
+endnode

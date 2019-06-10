@@ -1,0 +1,48 @@
+# Exported from NWmax 0.4-beta at 12/4/2003 10:12:57 AM
+# pwk file
+#
+#NWmaxPWKMESH  ASCII
+node trimesh ori_s08_wg
+  parent ori_s08_pwk
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.223529 0.0313726 0.533333 
+  multimaterial 18
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+  ambient 0.0 0.0 0.0 
+  diffuse 0.705882 0.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 11.0
+  selfillumcolor 0.0 0.0 0.0 
+  alpha 1.0
+    bitmap NULL
+    verts 6
+     -2.42451 -0.498607 0.0
+     2.76257 -0.4298 0.0
+     -3.51221 0.375063 0.0
+     3.69573 0.476711 0.0
+     3.6885 0.283573 0.0
+     -3.4947 0.193816 0.0
+    faces 4
+     5 0 3  1  0 0 0  7
+     4 3 0  1  0 0 0  7
+     1 4 0  1  0 0 0  7
+     2 5 3  1  0 0 0  7
+endnode

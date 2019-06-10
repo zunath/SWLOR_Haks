@@ -1,0 +1,24 @@
+#Exported from 3ds max by MDL Plug-in Suite 1.0b
+#http://www.bricksbuilder.com/nwn/utils/
+#MAXMODEL ASCII
+# model: gi-p-plant09
+filedependancy interior placeables02.max
+node trimesh walkm313
+  parent gi-p-plant09_pwk
+  position 0 0 0
+  orientation 0 0 0 0
+  wirecolor 0.695313 0.695313 0.695313
+  ambient 0.691406 0.34375 0.101563
+  diffuse 0.691406 0.34375 0.101563
+  specular 0 0 0
+  shininess 1
+  bitmap NULL
+  verts 4
+    0.75 0.75 0
+    -0.75 0.75 0
+    0.75 -0.75 0
+    -0.75 -0.75 0
+  faces 2
+    2 0 3  1  0 0 0  7
+    1 3 0  1  0 0 0  7
+endnode

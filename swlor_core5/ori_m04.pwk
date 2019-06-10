@@ -1,0 +1,52 @@
+# Exported from NWmax 0.5-beta at 2/20/2004 1:09:06 AM
+# pwk file
+#
+#NWmaxPWKMESH  ASCII
+node trimesh ori_m04_wg
+  parent ori_m04_pwk
+  position -0.011012 -0.0732176 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.603922 0.603922 0.603922 
+  multimaterial 20
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+  bitmap NULL
+  verts 4
+    -1.28 -1.68 0.0
+    1.27 -1.68 0.0
+    -1.28 1.67 0.0
+    1.27 1.67 0.0
+  faces 2
+    2 0 3  1  0 0 0  0
+    1 3 0  1  0 0 0  0
+endnode
+node dummy m04_pwk_use02
+  parent ori_m04_pwk
+  position -1.64643 -0.207957 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.345098 0.780392 0.882353 
+endnode
+node dummy m04_pwk_use01
+  parent ori_m04_pwk
+  position 1.625 -0.186665 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.345098 0.780392 0.882353 
+endnode

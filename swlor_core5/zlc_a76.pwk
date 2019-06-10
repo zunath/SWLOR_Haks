@@ -1,0 +1,52 @@
+# Exported from NWmax 0.5-beta at 2/20/2004 1:27:42 PM
+# pwk file
+#
+#NWmaxPWKMESH  ASCII
+node dummy a76_pwk_use01
+  parent zlc_a76_pwk
+  position 0.000432894 -1.37491 0.0
+  orientation 0.0 0.0 -1.0 -3.14159
+  wirecolor 0.341176 0.878431 0.341176 
+endnode
+node dummy a76_pwk_use02
+  parent zlc_a76_pwk
+  position 0.000432704 0.793827 0.0
+  orientation 0.0 0.0 -1.0 -3.14159
+  wirecolor 0.341176 0.878431 0.341176 
+endnode
+node trimesh zlc_a76_wg
+  parent zlc_a76_pwk
+  position -0.000577031 -0.295943 0.0
+  orientation 0.0 0.0 -1.0 -3.14159
+  wirecolor 0.87451 0.87451 0.87451 
+  multimaterial 20
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+  bitmap NULL
+  verts 4
+    1.2 0.75 0.0
+    -1.2 0.75 0.0
+    1.2 -0.75 0.0
+    -1.2 -0.75 0.0
+  faces 2
+    2 0 3  1  0 0 0  0
+    1 3 0  1  0 0 0  0
+endnode

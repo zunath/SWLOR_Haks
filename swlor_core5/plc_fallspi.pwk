@@ -1,0 +1,36 @@
+#Exported from 3ds max by MDL Plug-in Suite 1.0b
+#http://www.bricksbuilder.com/nwn/utils/
+#MAXMODEL ASCII
+# model: plc_fallspi
+filedependancy Fallenhighspire.max
+node trimesh plc_fallspipwk
+  parent plc_fallspi_pwk
+  position 0 0 0
+  orientation 0 0 0 0
+  wirecolor 0.542969 0.542969 0.542969
+  ambient 0.539063 0.03125 0.429688
+  diffuse 0.539063 0.03125 0.429688
+  specular 0 0 0
+  shininess 1
+  bitmap NULL
+  verts 10
+    2.69666 0.514627 0
+    -2.28902 0.77273 0
+    2.69666 0 0
+    -4.03756 0 0
+    2.69366 -0.498521 0
+    -2.28906 -0.802742 0
+    -1.7111 0.571813 0
+    -2.36821 -0.370251 0
+    -1.70285 -0.551592 0
+    -2.38959 0.393793 0
+  faces 8
+    7 8 2  1  0 0 0  0
+    7 0 6  1  0 0 0  0
+    2 0 7  1  0 0 0  0
+    4 2 8  1  0 0 0  0
+    7 5 8  1  0 0 0  0
+    3 6 9  1  0 0 0  0
+    7 6 3  1  0 0 0  0
+    1 9 6  1  0 0 0  0
+endnode

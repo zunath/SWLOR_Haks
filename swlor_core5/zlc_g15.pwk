@@ -1,0 +1,22 @@
+#MAXDOOR ASCII
+# model: dDrsrU2_PWK 
+filedependancy dDrsrU1.max
+node trimesh zlc_g15_wg 
+  parent zlc_g15_pwk 
+  position -0.375994 -0.160007 0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.721569 0.607843 0.898039  
+  ambient 0.0 0.0 0.0  
+  diffuse 0.784314 0.784314 0.784314  
+  specular 0.0 0.0 0.0  
+  shininess 21.0 
+    bitmap NULL
+    verts 4
+     1.67 -0.89 0.0
+     -0.93 1.21 0.0
+     -0.93 -0.89 0.0
+     1.67 1.21 0.0
+    faces 2
+     0 1 2  1  0 0 0  1
+     0 3 1  1  0 0 0  1
+endnode

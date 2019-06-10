@@ -1,0 +1,27 @@
+#MAXDOOR ASCII
+# model: TentA_PWK 
+filedependancy TentASML_v2.max
+node trimesh zlc_b07_wg 
+  parent zlc_b07_pwk 
+  position -0.0323054 1.07142 0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.345098 0.694118 0.101961  
+  ambient 0.0 0.0 0.0  
+  diffuse 1.0 1.0 1.0  
+  specular 0.0 0.0 0.0  
+  shininess 21.0 
+    bitmap fwood1
+    verts 4
+     0.88 -1.1 -0.00308174
+     -0.83 1.09 -0.00308174
+     -0.83 -1.1 -0.00308174
+     0.88 1.09 -0.00308174
+    faces 2
+     0 1 2  1  0 1 2  1
+     3 1 0  1  3 1 0  1
+    tverts 4
+     0.619929 0.639425 0 
+     0.60905 0.643384 0 
+     0.606663 0.644253 0 
+     0.596637 0.647902 0 
+endnode

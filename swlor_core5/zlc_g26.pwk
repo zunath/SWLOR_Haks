@@ -1,0 +1,27 @@
+#MAXDOOR ASCII
+# model: dStlB1_PWK 
+filedependancy dDrsrU2.max
+node trimesh zlc_g26_wg 
+  parent zlc_g26_pwk 
+  position 0.0340057 -0.237507 0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.694118 0.109804 0.584314  
+  ambient 0.0 0.0 0.0  
+  diffuse 1.0 1.0 1.0  
+  specular 0.0 0.0 0.0  
+  shininess 11.0 
+    bitmap wood
+    verts 4
+     -0.095 -0.325 0.0
+     -0.045 0.8 0.0
+     -0.52 0.055 0.0
+     0.44 0.155 0.0
+    faces 2
+     0 1 2  0  0 1 2  1
+     0 3 1  0  0 3 1  1
+    tverts 4
+     0.0990268 0.563469 0 
+     1.4175 0.563469 0 
+     1.59938 0.563469 0 
+     1.79097 0.563469 0 
+endnode

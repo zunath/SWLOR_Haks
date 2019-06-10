@@ -1,0 +1,22 @@
+#MAXDOOR ASCII
+# model: wdBoom_PWK 
+filedependancy wDebrisBoom.max
+node trimesh zlc_s06_wg 
+  parent zlc_s06_pwk 
+  position -0.00653387 -0.00000748097 0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.0235294 0.52549 0.227451  
+  ambient 0.7 0.7 0.7  
+  diffuse 0.7 0.7 0.7  
+  specular 0.0 0.0 0.0  
+  shininess 51.0 
+    bitmap NULL
+    verts 4
+     0.2 -4.9 0.0
+     -0.2 4.9 0.0
+     -0.2 -4.9 0.0
+     0.2 4.9 0.0
+    faces 2
+     0 1 2  1  0 0 0  1
+     0 3 1  1  0 0 0  1
+endnode

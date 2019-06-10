@@ -1,0 +1,30 @@
+#MAXDOOR ASCII
+# model: wdRudderW_PWK 
+filedependancy wDebrisRudderWeathered.max
+node trimesh zlc_s26_wg 
+  parent zlc_s26_pwk 
+  position 0.193466 -0.300007 0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.898039 0.65098 0.843137  
+  ambient 0.7 0.7 0.7  
+  diffuse 0.7 0.7 0.7  
+  specular 0.0 0.0 0.0  
+  shininess 51.0 
+    bitmap NULL
+    verts 8
+     0.5 -0.2 0.0
+     -1.0 -2.35 0.0
+     0.1 -2.1 0.0
+     -1.15 -1.35 0.0
+     0.25 0.35 0.0
+     -0.35 2.3 0.0
+     0.75 2.95 0.0
+     0.3 2.9 0.0
+    faces 6
+     0 1 2  1  0 0 0  1
+     0 3 1  1  0 0 0  1
+     4 3 0  1  0 0 0  1
+     3 4 5  1  0 0 0  1
+     6 5 4  1  0 0 0  1
+     7 5 6  1  0 0 0  1
+endnode

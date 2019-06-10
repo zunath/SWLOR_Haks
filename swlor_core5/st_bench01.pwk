@@ -1,0 +1,25 @@
+# Exported from NWmax 0.8 b53 at 7/17/2006 2:23:26 PM
+# pwk file
+#
+#NWmax PWKMESH  ASCII
+node trimesh Plane27
+  parent st_bench01_pwk
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.576471 0.576471 0.576471 
+  bitmap NULL
+  verts 4
+    1.0 -0.36 0.0
+    1.01 0.25 0.0
+    -0.93 -0.37 0.0
+    -0.93 0.27 0.0
+  faces 2
+    2 0 3  1  0 0 0  7
+    1 3 0  1  0 0 0  7
+endnode
+node dummy a01_pwk_use01
+  parent Plane27
+  position 0.0 0.668918 0.0
+  orientation -0.494768 -0.366495 -0.787964 -4.06449e-007
+  wirecolor 0.345098 0.780392 0.882353 
+endnode

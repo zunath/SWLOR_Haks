@@ -1,0 +1,24 @@
+#Exported from 3ds max by MDL Plug-in Suite 1.0b
+#http://www.bricksbuilder.com/nwn/utils/
+#MAXMODEL ASCII
+# model: spb_pine01
+filedependancy spb_pine_tut02.max
+node trimesh zlc_pn1_wg
+  parent zlc_pn1_pwk
+  position 0 0 0
+  orientation 0 0 0 0
+  wirecolor 0.0351563 0.0351563 0.0351563
+  ambient 0.03125 0.429688 0.523438
+  diffuse 0.03125 0.429688 0.523438
+  specular 0 0 0
+  shininess 1
+  bitmap NULL
+  verts 4
+    0.871602 1.02838 0
+    -1.19163 1.02838 0
+    0.871602 -1.14072 0
+    -1.19163 -1.14072 0
+  faces 2
+    2 0 3  1  0 0 0  0
+    1 3 0  1  0 0 0  0
+endnode

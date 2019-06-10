@@ -1,0 +1,62 @@
+#Exported from 3ds max by MDL Plug-in Suite 1.0b
+#http://www.bricksbuilder.com/nwn/utils/
+#MAXMODEL ASCII
+# model: PLC_cage2
+filedependancy Cage_small.max
+node trimesh PLC_H05_wg
+  parent PLC_cage2_pwk
+  position 0 0 0
+  orientation 0 0 0 0
+  wirecolor 0.226563 0.226563 0.226563
+  ambient 0 0 0
+  diffuse 0 0 0
+  specular 0 0 0
+  shininess 0
+  bitmap NULL
+  verts 16
+    -0.747034 -0.747035 0
+    0.747034 -0.747035 0
+    -0.747034 0.758861 0
+    0.747034 0.758861 0
+    0.606824 0.758861 0
+    0.441562 -0.448226 0
+    0.606824 -0.747035 0
+    -0.603566 0.758861 0
+    -0.439829 0.462819 0
+    -0.603566 -0.739547 0
+    0.747034 -0.618108 0
+    -0.440996 -0.450038 0
+    -0.74024 -0.618108 0
+    0.740506 0.631797 0
+    0.444018 0.463869 0
+    -0.746407 0.631798 0
+  faces 16
+    5 13 14  1  0 0 0  7
+    1 10 5  1  0 0 0  7
+    11 9 5  1  0 0 0  7
+    14 4 8  1  0 0 0  7
+    8 12 11  1  0 0 0  7
+    5 6 1  1  0 0 0  7
+    5 9 6  1  0 0 0  7
+    11 12 9  1  0 0 0  7
+    12 0 9  1  0 0 0  7
+    2 15 8  1  0 0 0  7
+    8 7 2  1  0 0 0  7
+    14 13 4  1  0 0 0  7
+    13 3 4  1  0 0 0  7
+    8 4 7  1  0 0 0  7
+    10 13 5  1  0 0 0  7
+    15 12 8  1  0 0 0  7
+endnode
+node dummy H05_pwk_use01
+  parent PLC_cage2_pwk
+  position 0 1.14279 0
+  orientation 0 0 0 0
+  wirecolor 0.226563 0.226563 0.226563
+endnode
+node dummy H05_pwk_use02
+  parent PLC_cage2_pwk
+  position 0 -1.14789 0
+  orientation 0 0 0 0
+  wirecolor 0.226563 0.226563 0.226563
+endnode
