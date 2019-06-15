@@ -1,0 +1,23 @@
+# Exported from blender at Thursday, 2018-03-15
+node aabb walk-mesh.001
+  parent dgt04_d15_01_pwk
+  position 0.0 0.0 0.0
+  orientation 0.0 1.0 0.0 0.0
+  wirecolor 1.0 1.0 1.0
+  ambient 1.0 1.0 1.0
+  diffuse 1.0 1.0 1.0
+  specular 0.0 0.0 0.0
+  shininess 0
+  bitmap NULL
+  verts 4
+    -5.00000 -5.00000  0.00000
+     5.00000 -5.00000  0.00000
+    -5.00000  5.00000  0.00000
+     5.00000  5.00000  0.00000
+  faces 2
+    2 0 3  0  0 0 0   3
+    3 0 1  0  0 0 0   3
+  aabb   -5.0 -5.0 0.0 5.0 5.0 0.0 -1
+    -5.0 -5.0 0.0 5.0 5.0 0.0 0
+    -5.0 -5.0 0.0 5.0 5.0 0.0 1
+endnode

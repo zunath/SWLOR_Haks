@@ -1,0 +1,23 @@
+# Exported from blender at Friday, 2018-02-16
+node aabb wokmesh.003
+  parent dgt04_d34_01_pwk
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.03 0.03 0.53
+  ambient 1.0 1.0 1.0
+  diffuse 1.0 1.0 1.0
+  specular 0.0 0.0 0.0
+  shininess 0
+  bitmap NULL
+  verts 4
+    -5.00000 -5.00000  0.00000
+     5.00000 -5.00000  0.00000
+    -5.00000  5.00000  0.00000
+     5.00000  5.00000  0.00000
+  faces 2
+    2 0 3  0  0 0 0   4
+    3 0 1  0  0 0 0   4
+  aabb   -5.0 -5.0 0.0 5.0 5.0 0.0 -1
+    -5.0 -5.0 0.0 5.0 5.0 0.0 0
+    -5.0 -5.0 0.0 5.0 5.0 0.0 1
+endnode
