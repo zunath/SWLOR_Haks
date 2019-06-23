@@ -1,0 +1,621 @@
+# Exported from NWMax Plus v6.11.28 at 4/5/2019 1:55:16 PM
+# mdl file
+#
+#NWMax Plus MODEL  ASCII
+# model: swprug_02
+filedependancy hut2.max
+newmodel swprug_02
+setsupermodel swprug_02 NULL
+classification Character
+setanimationscale 1.0
+#NWMax Plus GEOM  ASCII
+beginmodelgeom swprug_02
+node dummy swprug_02
+  parent NULL
+endnode
+node dummy c06_head
+  parent swprug_02
+  position 0.0 0.0 0.964856
+  orientation -0.57735 0.57735 0.57735 -2.0944
+  wirecolor 0.839216 0.894118 0.6 
+endnode
+node dummy c06_head_hit
+  parent swprug_02
+  position 0.0 0.0125 0.525904
+  orientation -0.57735 0.57735 0.57735 -2.0944
+  wirecolor 0.839216 0.894118 0.6 
+endnode
+node emitter c06_dust
+  parent swprug_02
+  position 0.0 -0.0181677 0.396442
+  orientation 1.0 0.0 0.0 -4.71239
+  wirecolor 0.87451 0.776471 0.337255 
+  update_sel 3
+  update Explosion
+  render_sel 1
+  render Normal
+  blend_sel 1
+  Blend Normal
+  spawnType 0
+  xSize 100.0
+  ySize 99.0
+  inherit 1
+  inherit_local 0
+  inheritvel 0
+  inherit_part 0
+  renderorder 0
+  threshold 0.0
+  combinetime 0.0
+  deadspace 0.0
+  opacity 0.5
+  colorStart 0.439216 0.384314 0.239216 
+  colorEnd 0.639216 0.603922 0.482353 
+  alphaStart 1.0
+  alphaEnd 0.0
+  sizeStart 4.0
+  sizeEnd 1.0
+  sizeStart_y 0.0
+  sizeEnd_y 0.0
+  birthrate 10
+  lifeExp 2.5
+  mass 0.09
+  spread 2.96706
+  particleRot 0.5
+  velocity 2.0
+  randvel 0.5
+  bounce_co 0.0
+  blurlength 10.0
+  loop 0
+  bounce 0
+  m_isTinted 0
+  Splat 0
+  affectedByWind false
+  texture fxpa_smoke01
+  twosidedtex 1
+  xgrid 4
+  ygrid 4
+  fps 10
+  frameStart 0
+  frameEnd 24
+  random 0
+  lightningDelay 0.0
+  lightningRadius 0.0
+  lightningSubDiv 0
+  lightningScale 0.0
+  blastRadius 0.2
+  blastLength 1.0
+  p2p 0
+  p2p_type Bezier
+  p2p_sel 1
+  p2p_bezier2 0.0
+  p2p_bezier3 0.0
+  grav 0.0
+  Drag 0.0
+endnode
+node dummy c06_ground
+  parent swprug_02
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.898039 0.65098 0.843137 
+endnode
+node dummy c06_hand
+  parent swprug_02
+  position 0.0 -0.5 0.864856
+  orientation -0.57735 0.57735 0.57735 -2.0944
+  wirecolor 0.898039 0.65098 0.843137 
+endnode
+node emitter c06_chunkywood2
+  parent swprug_02
+  position 0.00624439 -0.0175785 0.414694
+  orientation 1.0 0.0 0.0 -5.93412
+  wirecolor 0.101961 0.694118 0.101961 
+  update_sel 3
+  update Explosion
+  render_sel 1
+  render Normal
+  blend_sel 1
+  Blend Normal
+  spawnType 0
+  xSize 89.0
+  ySize 55.0
+  inherit 1
+  inherit_local 0
+  inheritvel 0
+  inherit_part 0
+  renderorder 0
+  threshold 0.0
+  combinetime 0.0
+  deadspace 0.0
+  opacity 0.5
+  colorStart 1.0 1.0 1.0 
+  colorEnd 1.0 1.0 1.0 
+  alphaStart 1.0
+  alphaEnd 1.0
+  sizeStart 0.1
+  sizeEnd 0.1
+  sizeStart_y 0.0
+  sizeEnd_y 0.0
+  birthrate 2
+  lifeExp 0.75
+  mass 3.0
+  spread 1.22173
+  particleRot 5.0
+  velocity 8.0
+  randvel 0.3
+  bounce_co 0.5
+  blurlength 10.0
+  loop 0
+  bounce 1
+  m_isTinted 0
+  Splat 0
+  affectedByWind false
+  texture fxpa_cloud02
+  twosidedtex 0
+  xgrid 5
+  ygrid 5
+  fps 0
+  frameStart 0
+  frameEnd 24
+  random 0
+  chunkName PLC_Chunk_s01
+  lightningDelay 0.0
+  lightningRadius 0.0
+  lightningSubDiv 0
+  lightningScale 0.0
+  blastRadius 0.0
+  blastLength 0.0
+  p2p 0
+  p2p_type Bezier
+  p2p_sel 1
+  p2p_bezier2 0.0
+  p2p_bezier3 0.0
+  grav 0.0
+  Drag 0.0
+endnode
+node emitter c06_chunkywood1
+  parent swprug_02
+  position 0.00624439 -0.0165034 0.414694
+  orientation 1.0 0.0 0.0 -4.76837e-006
+  wirecolor 0.521569 0.0156863 0.0156863 
+  update_sel 3
+  update Explosion
+  render_sel 1
+  render Normal
+  blend_sel 1
+  Blend Normal
+  spawnType 0
+  xSize 89.0
+  ySize 55.0
+  inherit 1
+  inherit_local 0
+  inheritvel 0
+  inherit_part 0
+  renderorder 0
+  threshold 0.0
+  combinetime 0.0
+  deadspace 0.0
+  opacity 0.5
+  colorStart 0.482353 0.431373 0.313726 
+  colorEnd 0.584314 0.529412 0.403922 
+  alphaStart 1.0
+  alphaEnd 1.0
+  sizeStart 0.1
+  sizeEnd 0.1
+  sizeStart_y 0.0
+  sizeEnd_y 0.0
+  birthrate 2
+  lifeExp 0.75
+  mass 3.0
+  spread 1.22173
+  particleRot 2.9
+  velocity 8.0
+  randvel 0.3
+  bounce_co 0.5
+  blurlength 10.0
+  loop 0
+  bounce 1
+  m_isTinted 0
+  Splat 0
+  affectedByWind false
+  texture fxpa_cloud01
+  twosidedtex 1
+  xgrid 5
+  ygrid 5
+  fps 0
+  frameStart 0
+  frameEnd 24
+  random 0
+  chunkName PLC_Chunk_s02
+  lightningDelay 0.0
+  lightningRadius 0.0
+  lightningSubDiv 0
+  lightningScale 0.0
+  blastRadius 0.0
+  blastLength 0.0
+  p2p 0
+  p2p_type Bezier
+  p2p_sel 1
+  p2p_bezier2 0.0
+  p2p_bezier3 0.0
+  grav 0.0
+  Drag 0.0
+endnode
+node dummy c06_impact
+  parent swprug_02
+  position 0.0 0.00664187 0.513196
+  orientation -0.57735 0.57735 0.57735 -2.0944
+  wirecolor 0.109804 0.34902 0.694118 
+endnode
+node dummy anim_base
+  parent swprug_02
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.109804 0.34902 0.694118 
+endnode
+node trimesh 0_0_0
+  parent anim_base
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.8 0.8 0.8 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 0
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfIllumColor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  shininess 1
+  center 4.342 4.6825 1.79648 
+  bitmap canopy_veg_d
+  verts 32
+    -0.724244 -2.0968 0.0179648
+    -0.724582 -2.09569 0.0179648
+    -2.19204 -2.14694 0.0179649
+    0.743234 -2.05036 0.0179648
+    0.74305 -2.05134 0.0179648
+    2.21106 -2.14609 0.0179647
+    2.21106 2.13042 0.0179647
+    2.21069 2.12888 0.0179647
+    0.743234 2.15826 0.0179648
+    0.742896 2.157 0.0179648
+    -0.724582 2.15826 0.0179648
+    0.743128 0.777048 0.0179648
+    2.13738 0.776768 0.0179647
+    2.27905 -0.68494 0.0179647
+    -0.724398 2.15686 0.0179648
+    -2.10795 2.24059 0.0179649
+    -2.10728 2.23876 0.0179649
+    -2.12198 0.776907 0.0179649
+    -0.724552 0.777187 0.0179648
+    -0.724476 -0.68494 0.0179648
+    -2.12061 -0.684799 0.0179649
+    0.743204 -0.685082 0.0179648
+    2.21038 -2.14665 0.0179647
+    -2.12219 0.778445 0.0179649
+    -0.724582 0.778445 0.0179648
+    -0.724582 -0.683821 0.0179648
+    -2.12067 -0.683821 0.0179649
+    -2.1924 -2.14609 0.0179649
+    0.743234 -0.683821 0.0179648
+    0.743234 0.778445 0.0179648
+    2.13743 0.778445 0.0179647
+    2.27924 -0.683821 0.0179647
+  faces 46
+    2 0 1  0  17 20 21  1
+    3 1 0  0  19 21 20  1
+    0 4 3  0  20 22 19  1
+    5 3 4  0  18 19 22  1
+    8 6 7  0  23 24 25  1
+    7 9 8  0  25 26 23  1
+    10 8 9  0  9 23 26  1
+    11 9 7  0  10 26 25  1
+    7 12 11  0  25 11 10  1
+    11 12 13  0  10 11 12  1
+    9 14 10  0  26 13 9  1
+    15 10 14  0  14 9 13  1
+    14 16 15  0  13 15 14  1
+    17 16 14  0  16 15 13  1
+    18 14 9  0  0 13 26  1
+    14 18 17  0  13 0 16  1
+    9 11 18  0  26 10 0  1
+    17 18 19  0  16 0 1  1
+    19 20 17  0  1 7 16  1
+    2 20 19  0  17 7 1  1
+    19 0 2  0  1 20 17  1
+    18 11 21  0  0 10 8  1
+    21 19 18  0  8 1 0  1
+    0 19 21  0  20 1 8  1
+    13 21 11  0  12 8 10  1
+    21 4 0  0  8 22 20  1
+    4 21 13  0  22 8 12  1
+    13 22 4  0  12 2 22  1
+    10 15 23  0  27 28 29  1
+    23 24 10  0  30 31 32  1
+    8 10 24  0  33 34 35  1
+    25 24 23  0  36 37 38  1
+    23 26 25  0  39 40 41  1
+    25 26 27  0  42 43 44  1
+    27 1 25  0  45 46 47  1
+    28 25 1  0  48 49 50  1
+    24 25 28  0  51 52 53  1
+    1 3 28  0  54 55 56  1
+    24 29 8  0  57 58 59  1
+    28 29 24  0  60 61 62  1
+    6 8 29  0  3 63 64  1
+    29 30 6  0  65 4 3  1
+    31 30 29  0  5 4 66  1
+    29 28 31  0  67 68 5  1
+    31 28 3  0  5 69 70  1
+    3 5 31  0  71 6 5  1
+  tverts 72
+    0.498779 1.74902 0
+    0.498779 1.50073 0
+    0.00282097 1.25391 0
+    0.00283623 1.99734 0
+    0.00283623 1.74902 0
+    0.00283623 1.50073 0
+    0.00283623 1.25391 0
+    0.74707 1.50073 0
+    0.250244 1.50073 0
+    0.498779 1.99984 0
+    0.250244 1.74902 0
+    0.00282097 1.74902 0
+    0.00282097 1.50073 0
+    0.498779 1.99734 0
+    0.74707 1.99984 0
+    0.74707 1.99734 0
+    0.74707 1.74902 0
+    0.74707 1.25391 0
+    0.00282097 1.25098 0
+    0.250244 1.25098 0
+    0.498779 1.25391 0
+    0.498779 1.25098 0
+    0.250244 1.25391 0
+    0.250244 1.99984 0
+    0.00282097 1.99984 0
+    0.00282097 1.99734 0
+    0.250244 1.99734 0
+    0.498779 1.99734 0
+    0.74707 1.99734 0
+    0.74707 1.74902 0
+    0.74707 1.74902 0
+    0.498779 1.74902 0
+    0.498779 1.99734 0
+    0.250244 1.99734 0
+    0.498779 1.99734 0
+    0.498779 1.74902 0
+    0.498779 1.50073 0
+    0.498779 1.74902 0
+    0.74707 1.74902 0
+    0.74707 1.74902 0
+    0.74707 1.50073 0
+    0.498779 1.50073 0
+    0.498779 1.50073 0
+    0.74707 1.50073 0
+    0.74707 1.25391 0
+    0.74707 1.25391 0
+    0.498779 1.25391 0
+    0.498779 1.50073 0
+    0.250244 1.50073 0
+    0.498779 1.50073 0
+    0.498779 1.25391 0
+    0.498779 1.74902 0
+    0.498779 1.50073 0
+    0.250244 1.50073 0
+    0.498779 1.25391 0
+    0.250244 1.25391 0
+    0.250244 1.50073 0
+    0.498779 1.74902 0
+    0.250244 1.74902 0
+    0.250244 1.99734 0
+    0.250244 1.50073 0
+    0.250244 1.74902 0
+    0.498779 1.74902 0
+    0.250244 1.99734 0
+    0.250244 1.74902 0
+    0.250244 1.74902 0
+    0.250244 1.74902 0
+    0.250244 1.74902 0
+    0.250244 1.50073 0
+    0.250244 1.50073 0
+    0.250244 1.25391 0
+    0.250244 1.25391 0
+endnode
+endmodelgeom swprug_02
+
+#NWMax Plus ANIM  ASCII
+newanim default swprug_02
+  length 0.0333333
+  transtime 0.25
+  animroot swprug_02
+    node dummy swprug_02
+        parent NULL
+    endnode
+    node dummy c06_head
+        parent swprug_02
+    endnode
+    node dummy c06_head_hit
+        parent swprug_02
+    endnode
+    node emitter c06_dust
+        parent swprug_02
+    endnode
+    node dummy c06_ground
+        parent swprug_02
+    endnode
+    node dummy c06_hand
+        parent swprug_02
+    endnode
+    node emitter c06_chunkywood2
+        parent swprug_02
+    endnode
+    node emitter c06_chunkywood1
+        parent swprug_02
+    endnode
+    node dummy c06_impact
+        parent swprug_02
+    endnode
+    node dummy anim_base
+        parent swprug_02
+        positionkey
+            0.0 0.0 0.0 0.0
+        endlist
+        orientationkey
+            0.0 0.0 0.0 0.0 0.0
+        endlist
+    endnode
+    node trimesh 0_0_0
+        parent anim_base
+    endnode
+doneanim default swprug_02
+
+
+#NWMax Plus ANIM  ASCII
+newanim damage swprug_02
+  length 0.166667
+  transtime 0.5
+  animroot swprug_02
+    node dummy swprug_02
+        parent NULL
+    endnode
+    node dummy c06_head
+        parent swprug_02
+    endnode
+    node dummy c06_head_hit
+        parent swprug_02
+    endnode
+    node emitter c06_dust
+        parent swprug_02
+    endnode
+    node dummy c06_ground
+        parent swprug_02
+    endnode
+    node dummy c06_hand
+        parent swprug_02
+    endnode
+    node emitter c06_chunkywood2
+        parent swprug_02
+    endnode
+    node emitter c06_chunkywood1
+        parent swprug_02
+    endnode
+    node dummy c06_impact
+        parent swprug_02
+    endnode
+    node dummy anim_base
+        parent swprug_02
+        positionkey
+            0.0 0.0 0.0 0.0
+            0.166667 0.0 0.0 0.0
+        endlist
+        orientationkey
+            0.0 0.0 0.0 0.0 0.0
+            0.0333333 1.0 0.0 0.0 -0.0872665
+            0.0666667 0.905547 -0.423842 -0.0185053 -0.0963553
+            0.1 -0.729803 -0.679594 -0.0744277 -0.0597794
+            0.133333 -0.669715 0.736176 -0.0976017 -0.0654932
+            0.166667 0.0 0.0 0.0 0.0
+        endlist
+    endnode
+    node trimesh 0_0_0
+        parent anim_base
+    endnode
+doneanim damage swprug_02
+
+
+#NWMax Plus ANIM  ASCII
+newanim die swprug_02
+  length 0.1
+  transtime 0.05
+  animroot swprug_02
+  event 0.0 detonate
+    node dummy swprug_02
+        parent NULL
+    endnode
+    node dummy c06_head
+        parent swprug_02
+    endnode
+    node dummy c06_head_hit
+        parent swprug_02
+    endnode
+    node emitter c06_dust
+        parent swprug_02
+    endnode
+    node dummy c06_ground
+        parent swprug_02
+    endnode
+    node dummy c06_hand
+        parent swprug_02
+    endnode
+    node emitter c06_chunkywood2
+        parent swprug_02
+    endnode
+    node emitter c06_chunkywood1
+        parent swprug_02
+    endnode
+    node dummy c06_impact
+        parent swprug_02
+    endnode
+    node dummy anim_base
+        parent swprug_02
+        positionkey
+            0.0 0.0 0.0 -2.0
+            0.1 0.0 0.0 -3.0
+        endlist
+    endnode
+    node trimesh 0_0_0
+        parent anim_base
+    endnode
+doneanim die swprug_02
+
+
+#NWMax Plus ANIM  ASCII
+newanim dead swprug_02
+  length 0.0333333
+  transtime 0.25
+  animroot swprug_02
+    node dummy swprug_02
+        parent NULL
+    endnode
+    node dummy c06_head
+        parent swprug_02
+    endnode
+    node dummy c06_head_hit
+        parent swprug_02
+    endnode
+    node emitter c06_dust
+        parent swprug_02
+    endnode
+    node dummy c06_ground
+        parent swprug_02
+    endnode
+    node dummy c06_hand
+        parent swprug_02
+    endnode
+    node emitter c06_chunkywood2
+        parent swprug_02
+    endnode
+    node emitter c06_chunkywood1
+        parent swprug_02
+    endnode
+    node dummy c06_impact
+        parent swprug_02
+    endnode
+    node dummy anim_base
+        parent swprug_02
+        positionkey
+            0.0 0.0 0.0 -4.0
+        endlist
+    endnode
+    node trimesh 0_0_0
+        parent anim_base
+    endnode
+doneanim dead swprug_02
+
+donemodel swprug_02
