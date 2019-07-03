@@ -2,19 +2,19 @@
 # mdl file
 #
 #NWmax MODEL ASCII
-# model: pfd0_robe050
+# model: pfd0_robe045
 filedependancy Unknown
-newmodel pfd0_robe050
-setsupermodel pfd0_robe050 pfd0
+newmodel pfd0_robe045
+setsupermodel pfd0_robe045 pfd0
 classification Character
 setanimationscale 1.0
 #NWmax GEOM  ASCII
-beginmodelgeom pfd0_robe050
-node dummy pfd0_robe050
+beginmodelgeom pfd0_robe045
+node dummy pfd0_robe045
   parent NULL
 endnode
 node trimesh rootdummy
-  parent pfd0_robe050
+  parent pfd0_robe045
   position -0.0000418 0.0320685 1.2072000
   orientation 1.0 0.0 0.0 0.0
   wirecolor 1.0 1.0 1.0 
@@ -2426,5 +2426,5 @@ node skin saia
      torso_g 1.0 
      torso_g 1.0 
 endnode
-endmodelgeom pfd0_robe050
-donemodel pfd0_robe050
+endmodelgeom pfd0_robe045
+donemodel pfd0_robe045

@@ -1,17 +1,17 @@
 # Exported from Wayland's NWN Maxscript v0.3b at 10/10/07 1:56:04 AM
 # mdl file
 #
-filedependancy pfh0_robe202.max
-newmodel pfd0_robe202
-setsupermodel pfd0_robe202 pfd0
+filedependancy pfh0_robe012.max
+newmodel pfd0_robe012
+setsupermodel pfd0_robe012 pfd0
 classification Character
 setanimationscale 1.0
-beginmodelgeom pfd0_robe202
-node dummy pfd0_robe202
+beginmodelgeom pfd0_robe012
+node dummy pfd0_robe012
     parent NULL
 endnode
 node trimesh rootdummy
-    parent pfd0_robe202
+    parent pfd0_robe012
   position 0.0000000 -0.0390635 1.1803473
     orientation 1.0 0.0 0.0 0.0
     scale 1.0
@@ -437,7 +437,7 @@ node trimesh torso_g
         0.0 -13.6957 0
 endnode
 node skin Surcoat
-    parent pfd0_robe202
+    parent pfd0_robe012
   position 0.0000000 0.0365999 1.2297978
     orientation 1.0 0.0 0.0 0.0
     scale 1.0
@@ -446,7 +446,7 @@ node skin Surcoat
     ambient 1.0 1.0 1.0
     specular 0.0 0.0 0.0
     selfillumcolor 0.0 0.0 0.0
-    bitmap pfd0_robe202
+    bitmap pfd0_robe012
     alpha 1.0
     verts 159
     -0.0021978 -0.1662168 -0.0275328
@@ -1409,5 +1409,5 @@ node skin Surcoat
         torso_g 0.0 torso_g 0.0 torso_g 0.0 torso_g 1.0 
         torso_g 0.0 torso_g 0.0 torso_g 0.0 torso_g 1.0 
 endnode
-endmodelgeom pfd0_robe202
-donemodel pfd0_robe202
+endmodelgeom pfd0_robe012
+donemodel pfd0_robe012
