@@ -2,20 +2,20 @@
 # mdl file
 #
 #NWmax MODEL ASCII
-# model: pmd0_robe051
-filedependancy pmd0_robe126.max
-newmodel pmd0_robe051
-setsupermodel pmd0_robe051 pmd0
+# model: pmd0_robe178
+filedependancy pmd0_robe178.max
+newmodel pmd0_robe178
+setsupermodel pmd0_robe178 pmd0
 classification Character
 setanimationscale 1.0
 #NWmax GEOM  ASCII
-beginmodelgeom pmd0_robe051
-node dummy pmd0_robe051
+beginmodelgeom pmd0_robe178
+node dummy pmd0_robe178
   parent NULL
 endnode
 node trimesh rootdummy
-  parent pmd0_robe051
-  position -0.0000418 0.0320685 1.2072000
+  parent pmd0_robe178
+  position -4.17942e-005 0.0320685 1.2072
   orientation 1.0 0.0 0.0 0.0
   wirecolor 1.0 1.0 1.0 
   tilefade 0
@@ -60,7 +60,7 @@ node trimesh rootdummy
 endnode
 node trimesh pelvis_g
   parent rootdummy
-  position 0.0035603 0.0103383 0.0002061
+  position 0.00356029 0.0103383 0.000206146
   orientation 1.0 0.0 0.0 0.0
   wirecolor 1.0 1.0 1.0 
   tilefade 0
@@ -268,7 +268,7 @@ node trimesh pelvis_g
 endnode
 node trimesh lthigh_g
   parent pelvis_g
-  position -0.0938292 -0.0234426 -0.1386550
+  position -0.0938292 -0.0234426 -0.138655
   orientation 0.0 -1.0 0.0 -0.00812287
   wirecolor 1.0 1.0 1.0 
   tilefade 0
@@ -365,7 +365,7 @@ node trimesh lthigh_g
 endnode
 node trimesh lshin_g
   parent lthigh_g
-  position 0.0341462 -0.0157328 -0.3041920
+  position 0.0341462 -0.0157328 -0.304192
   orientation 0.0 -1.0 0.0 -0.000804003
   wirecolor 1.0 1.0 1.0 
   tilefade 0
@@ -451,7 +451,7 @@ node trimesh lshin_g
 endnode
 node trimesh lfoot_g
   parent lshin_g
-  position 0.0245605 -0.0614263 -0.2819960
+  position 0.0245605 -0.0614263 -0.281996
   orientation -9.52972e-005 -0.00261635 0.999997 -0.128474
   wirecolor 0.839216 0.839216 0.839216 
   tilefade 0
@@ -520,7 +520,7 @@ node trimesh lfoot_g
 endnode
 node trimesh rthigh_g
   parent pelvis_g
-  position 0.0938300 -0.0234426 -0.1386550
+  position 0.09383 -0.0234426 -0.138655
   orientation 0.625039 0.780593 0.00107807 -0.00436433
   wirecolor 1.0 1.0 1.0 
   tilefade 0
@@ -617,7 +617,7 @@ node trimesh rthigh_g
 endnode
 node trimesh rshin_g
   parent rthigh_g
-  position -0.0343927 -0.0160090 -0.3042170
+  position -0.0343927 -0.016009 -0.304217
   orientation -0.0285153 0.999593 0.00109035 -0.0010436
   wirecolor 1.0 1.0 1.0 
   tilefade 0
@@ -703,7 +703,7 @@ node trimesh rshin_g
 endnode
 node trimesh rfoot_g
   parent rshin_g
-  position -0.0249115 -0.0615969 -0.2820250
+  position -0.0249115 -0.0615969 -0.282025
   orientation 0.000483195 -0.00659569 0.999978 -0.128685
   wirecolor 0.839216 0.839216 0.839216 
   tilefade 0
@@ -848,7 +848,7 @@ node trimesh rfoot_g
 endnode
 node trimesh torso_g
   parent rootdummy
-  position 0.0004052 0.0103383 0.0002060
+  position 0.000405169 0.0103383 0.000205994
   orientation 1.0 0.0 0.0 0.0
   wirecolor 1.0 1.0 1.0 
   tilefade 0
@@ -1032,7 +1032,7 @@ node trimesh torso_g
 endnode
 node trimesh rbicep_g
   parent torso_g
-  position 0.2170910 -0.0834648 0.3114870
+  position 0.217091 -0.0834648 0.311487
   orientation 1.0 0.0 0.0 0.0
   wirecolor 1.0 1.0 1.0 
   tilefade 0
@@ -1150,7 +1150,7 @@ node trimesh rbicep_g
 endnode
 node trimesh rforearm_g
   parent rbicep_g
-  position 0.0406888 0.0234063 -0.2680050
+  position 0.0406888 0.0234063 -0.268005
   orientation 1.0 0.0 0.0 0.0
   wirecolor 1.0 1.0 1.0 
   tilefade 0
@@ -1247,7 +1247,7 @@ node trimesh rforearm_g
 endnode
 node trimesh lbicep_g
   parent torso_g
-  position -0.2170850 -0.0834649 0.3114870
+  position -0.217085 -0.0834649 0.311487
   orientation 1.0 0.0 0.0 0.0
   wirecolor 1.0 1.0 1.0 
   tilefade 0
@@ -1365,7 +1365,7 @@ node trimesh lbicep_g
 endnode
 node trimesh lforearm_g
   parent lbicep_g
-  position -0.0406937 0.0234063 -0.2680050
+  position -0.0406937 0.0234063 -0.268005
   orientation 1.0 0.0 0.0 0.0
   wirecolor 1.0 1.0 1.0 
   tilefade 0
@@ -1462,7 +1462,7 @@ node trimesh lforearm_g
 endnode
 node trimesh belt
   parent torso_g
-  position 0.0034371 -0.0445287 -0.0068657
+  position 0.0034371 -0.0445287 -0.00686569
   orientation 1.0 0.0 0.0 0.0
   wirecolor 0.776471 0.878431 0.341176 
   ambient 1.0 1.0 1.0 
@@ -1555,7 +1555,7 @@ node trimesh belt
 endnode
 node trimesh beltnode
   parent belt
-  position -0.0036421 0.1764670 0.0002440
+  position -0.0036421 0.176467 0.000243988
   orientation -1.0 0.0 0.0 -1.5708
   wirecolor 0.54902 0.345098 0.882353 
   ambient 1.0 1.0 1.0 
@@ -1594,7 +1594,7 @@ node trimesh beltnode
 endnode
 node skin saia
   parent rootdummy
-  position 0.0046004 -0.0008244 -1.2072000
+  position 0.0046004 -0.000824413 -1.2072
   orientation 1.0 0.0 0.0 0.0
   wirecolor 0.337255 0.87451 0.776471 
   alpha 1.0
@@ -2260,5 +2260,5 @@ node skin saia
      torso_g 1.0 
      torso_g 1.0 
 endnode
-endmodelgeom pmd0_robe051
-donemodel pmd0_robe051
+endmodelgeom pmd0_robe178
+donemodel pmd0_robe178
