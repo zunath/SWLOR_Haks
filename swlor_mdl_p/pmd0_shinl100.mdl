@@ -1,18 +1,15 @@
 #MAXMODEL ASCII
 # model: pmd0_shinl100
-filedependancy pmh0_shinl151 NULL.mlk
+filedependancy pmh0_shinl100.max
 newmodel pmd0_shinl100
 setsupermodel pmd0_shinl100 NULL
-classification Character
+classification CHARACTER
 setanimationscale 0
-
-#MAXGEOM ASCII
+#MAXGEOM  ASCII
 beginmodelgeom pmd0_shinl100
 node dummy pmd0_shinl100
   parent NULL
 endnode
-
 endmodelgeom pmd0_shinl100
 
 donemodel pmd0_shinl100
-
