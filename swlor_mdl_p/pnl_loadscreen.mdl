@@ -1,0 +1,60 @@
+# Exported from blender Monday, 2019-01-14
+filedependancy unknown
+newmodel pnl_loadscreen
+setsupermodel pnl_loadscreen null
+classification CHARACTER
+setanimationscale 0.25
+beginmodelgeom pnl_loadscreen
+node dummy pnl_loadscreen
+  parent null
+endnode
+node trimesh plane57
+  parent pnl_loadscreen
+  position  0.00000  0.00000  0.00000
+  orientation  10.00000  0.00000  0.00000  0.00000
+  wirecolor 1.00 1.00 1.00
+  ambient 0.10 0.10 0.10
+  diffuse 1.00 1.00 1.00
+  specular 0.05 0.05 0.05
+  bitmap gui_replace01
+  shininess 26
+  verts 4
+    -9.60000  5.40000  0.00000
+    -9.60000 -5.40000  0.00000
+     9.60000  5.40000  0.00000
+     9.60000 -5.40000  0.00000
+  tverts 4
+     0.000  1.000  0
+    -0.000  0.000  0
+     1.000  1.000  0
+     1.000  0.000  0
+  faces 2
+    0 1 2  1  0 1 2  0
+    3 2 1  1  3 2 1  0
+endnode
+node trimesh plane58
+  parent pnl_loadscreen
+  position  0.00000  0.00000 -0.10000
+  orientation  0.00000  0.00000  0.00000  0.00000
+  wirecolor 1.00 1.00 1.00
+  ambient 0.06 0.16 0.18
+  diffuse 1.00 1.00 1.00
+  specular 0.05 0.05 0.05
+  bitmap gui_boxes_ingame
+  shininess 26
+  verts 4
+    -10.24000  7.68000  0.00000
+    -10.24000 -7.68000  0.00000
+     10.24000  7.68000  0.00000
+     10.24000 -7.68000  0.00000
+  tverts 4
+     0.129  0.938  0
+     0.129  0.000  0
+     0.137  0.938  0
+     0.137  0.000  0
+  faces 2
+    0 1 2  1  0 1 2  0
+    3 2 1  1  3 2 1  0
+endnode
+endmodelgeom pnl_loadscreen
+donemodel pnl_loadscreen
