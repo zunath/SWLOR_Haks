@@ -2,20 +2,20 @@
 # mdl file
 #
 #NWmax MODEL ASCII
-# model: pfv3_robe001
+# model: pfv3_robe024
 #local file: Unknown
 filedependancy Unknown
-newmodel pfv3_robe001
-setsupermodel pfv3_robe001 pfv3
+newmodel pfv3_robe024
+setsupermodel pfv3_robe024 pfv3
 classification Character
 setanimationscale 1.0
 #NWmax GEOM  ASCII
-beginmodelgeom pfv3_robe001
-node dummy pfv3_robe001
+beginmodelgeom pfv3_robe024
+node dummy pfv3_robe024
   parent NULL
 endnode
 node trimesh rootdummy
-  parent pfv3_robe001
+  parent pfv3_robe024
   position 0.000249158 -0.0325529 1.19227
   orientation 1.0 0.0 0.0 0.0
   wirecolor 1.0 1.0 1.0 
@@ -78,7 +78,7 @@ node trimesh pelvis_g
   Specular 0.0 0.0 0.0 
   shininess 10
   center -0.103401 -3.60118 -11.7276 
-  bitmap pfh0_robe001
+  bitmap pfh0_robe024
   verts 43
     -0.0690656 0.0679429 0.00132351
     -0.10856 0.00316485 -0.000204067
@@ -259,7 +259,7 @@ node trimesh lthigh_g
   Specular 0.0 0.0 0.0 
   shininess 10
   center -0.751975 0.185545 -19.6241 
-  bitmap pfh0_robe001
+  bitmap pfh0_robe024
   verts 27
     0.0169522 -0.00657552 -0.465055
     0.0740181 -0.00537643 -0.463719
@@ -406,7 +406,7 @@ node trimesh rthigh_g
   Specular 0.0 0.0 0.0 
   shininess 10
   center 0.751975 0.185545 -19.6241 
-  bitmap pfh0_robe001
+  bitmap pfh0_robe024
   verts 27
     -0.0169522 -0.00657559 -0.465055
     -0.0740181 -0.0053765 -0.463719
@@ -770,7 +770,7 @@ node trimesh neck_g
   Specular 0.0 0.0 0.0 
   shininess 0
   center 0.0 -0.148115 3.82219 
-  bitmap pfh0_robe001
+  bitmap pfh0_robe024
   verts 10
     0.0 0.00360474 -0.0534262
     -0.0575762 -0.00283214 -0.00104657
@@ -812,7 +812,7 @@ node trimesh neck_g
     0.685104 0.249039 0
 endnode
 node skin dress_skin
-  parent pfv3_robe001
+  parent pfv3_robe024
   position 0.0 -0.021857 1.19173
   orientation 1.0 0.0 0.0 0.0
   wirecolor 0.87451 0.337255 0.556863 
@@ -821,7 +821,7 @@ node skin dress_skin
   diffuse 1.0 1.0 1.0 
   specular 0.0 0.0 0.0 
   shininess 10.0
-  bitmap pfh0_robe001
+  bitmap pfh0_robe024
   verts 217
     0.0 0.117395 0.170605
     -0.0823678 0.0675719 0.00801254
@@ -1773,5 +1773,5 @@ node skin dress_skin
      pelvis_g 0.5  torso_g 0.5 
      pelvis_g 1.0 
 endnode
-endmodelgeom pfv3_robe001
-donemodel pfv3_robe001
+endmodelgeom pfv3_robe024
+donemodel pfv3_robe024

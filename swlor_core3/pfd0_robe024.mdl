@@ -1,17 +1,17 @@
 #MAXMODEL ASCII
-# model: pfd0_robe001
-filedependancy pfd0_robe001.max
-newmodel pfd0_robe001
-setsupermodel pfd0_robe001 pfd0
+# model: pfd0_robe024
+filedependancy pfd0_robe024.max
+newmodel pfd0_robe024
+setsupermodel pfd0_robe024 pfd0
 classification CHARACTER
 setanimationscale 1
 #MAXGEOM  ASCII
-beginmodelgeom pfd0_robe001
-node dummy pfd0_robe001
+beginmodelgeom pfd0_robe024
+node dummy pfd0_robe024
   parent NULL
 endnode
 node trimesh rootdummy
-  parent pfd0_robe001
+  parent pfd0_robe024
   ambient 0.223529 0.235294 0.219608
   diffuse 0.639216 0.682353 0.627451
   specular 0 0 0
@@ -53,7 +53,7 @@ node trimesh pelvis_g
   diffuse 1 1 1
   specular 0 0 0
   shininess 10
-  bitmap pfh0_robe001
+  bitmap pfh0_robe024
   verts 43
       -0.0801161    0.0747372    0.0009794
       -0.1259300    0.0034813   -0.0001510
@@ -597,7 +597,7 @@ node trimesh neck_g
   diffuse 1 1 1
   specular 0 0 0
   shininess 0
-  bitmap pfh0_robe001
+  bitmap pfh0_robe024
   verts 10
        0.0000000    0.0036047   -0.0534262
       -0.0575762   -0.0028321   -0.0010466
@@ -643,12 +643,12 @@ node trimesh neck_g
   orientation 0 0 0 0
 endnode
 node skin dress_skin
-  parent pfd0_robe001
+  parent pfd0_robe024
   ambient 1 1 1
   diffuse 1 1 1
   specular 0 0 0
   shininess 10
-  bitmap pfh0_robe001
+  bitmap pfh0_robe024
   verts 183
        0.0000000    0.1408740    0.1688990
       -0.0347182    0.0928053    0.0064798
@@ -1529,6 +1529,6 @@ node skin dress_skin
   alpha 1
   orientation 0 0 0 0
 endnode
-endmodelgeom pfd0_robe001
+endmodelgeom pfd0_robe024
 
-donemodel pfd0_robe001
+donemodel pfd0_robe024
