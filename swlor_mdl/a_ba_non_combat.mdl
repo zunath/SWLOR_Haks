@@ -32691,4 +32691,610 @@ newanim custom12start a_ba_non_combat
   endnode
 doneanim custom12start a_ba_non_combat
 
+newanim disappear2 a_ba_non_combat
+  length 2.0
+  transtime 0.3
+  animroot rootdummy
+  node dummy a_ba_non_combat
+    parent null
+  endnode
+  node dummy headconjure
+    parent a_ba_non_combat
+  endnode
+  node dummy handconjure
+    parent a_ba_non_combat
+  endnode
+  node dummy rootdummy
+    parent a_ba_non_combat
+    orientationkey 6
+       0.000 -0.60194 -0.36234 -0.71160  0.31723
+       0.167 -0.61690 -0.36970 -0.69481  0.31490
+       0.800 -0.61690 -0.36970 -0.69481  0.31490
+       0.900 -0.85036 -0.29437 -0.43615  0.47347
+       1.700 -0.89738 -0.30845 -0.31553  0.47383
+       2.000 -0.76430 -0.43944 -0.47196  0.30162
+    endlist
+  endnode
+  node trimesh torso_g
+    parent rootdummy
+    orientationkey 7
+       0.000 -0.88269  0.40740 -0.23428  0.24446
+       0.167  0.46538  0.65118  0.59949  0.15943
+       0.500  0.40491  0.82782 -0.38828  0.15314
+       0.800  0.30493  0.27791  0.91093  0.28451
+       0.900  0.30493  0.27791  0.91093  0.28451
+       1.700  0.46538  0.65118  0.59949  0.15943
+       2.000  0.46538  0.65118  0.59949  0.15943
+    endlist
+  endnode
+  node trimesh rbicep_g
+    parent torso_g
+    orientationkey 5
+       0.000  0.23533 -0.90974  0.34204  0.27664
+       0.167  0.17068 -0.47554  0.86298  0.27106
+       0.800  0.17068 -0.47554  0.86298  0.27106
+       1.700  0.17068 -0.47554  0.86298  0.27106
+       2.000  0.17068 -0.47554  0.86298  0.27106
+    endlist
+  endnode
+  node trimesh rforearm_g
+    parent rbicep_g
+    orientationkey 5
+       0.000  0.98762  0.11189  0.10998  1.38055
+       0.167  0.99507  0.07384  0.06615  1.53654
+       0.800  0.99507  0.07384  0.06615  1.53654
+       1.700  0.99507  0.07384  0.06615  1.53654
+       2.000  0.99507  0.07384  0.06615  1.53654
+    endlist
+  endnode
+  node trimesh rhand_g
+    parent rforearm_g
+  endnode
+  node dummy rhand
+    parent rhand_g
+    orientationkey 3
+       0.167  0.00000  1.00000  0.00000  0.00000
+       0.800  0.00000  1.00000  0.00000  0.00000
+       0.900 -0.00000  0.00000 -0.00000  0.00000
+    endlist
+  endnode
+  node trimesh rshould_g
+    parent rbicep_g
+    orientationkey 4
+       0.000  0.00000 -0.00000 -0.00000  0.00000
+       0.167  0.00000 -0.00000 -0.00000  0.00000
+       0.800  0.00000  0.00000  0.00000  0.00000
+       2.000  0.00000  1.00000  0.00000  0.00000
+    endlist
+  endnode
+  node trimesh neck_g
+    parent torso_g
+    orientationkey 5
+       0.000  0.01243  0.04126  0.99907  0.18337
+       0.167  0.03583  0.05707  0.99773  0.17014
+       0.800  0.03583  0.05707  0.99773  0.17014
+       0.900  0.03582  0.05707  0.99773  0.17014
+       2.000  0.76929  0.53281  0.35258  0.06237
+    endlist
+  endnode
+  node trimesh head_g
+    parent neck_g
+    orientationkey 6
+       0.000  0.94438 -0.06509  0.32234  0.40185
+       0.167  0.99997 -0.00649 -0.00528  0.19052
+       0.800  0.99997 -0.00649 -0.00528  0.19052
+       0.900  0.99997 -0.00649 -0.00528  0.19052
+       1.700  0.99997 -0.00649 -0.00528  0.19052
+       2.000  0.99997 -0.00649 -0.00528  0.19052
+    endlist
+  endnode
+  node dummy Impact
+    parent torso_g
+    orientationkey 3
+       0.167  0.57735  0.57735  0.57735  2.09440
+       0.800  0.57735  0.57735  0.57735  2.09440
+       0.900  0.57735  0.57735  0.57735  2.09440
+    endlist
+  endnode
+  node trimesh lbicep_g
+    parent torso_g
+    orientationkey 5
+       0.000  0.61765  0.76426  0.18550  0.24186
+       0.167  0.98323  0.13174 -0.12613  0.13824
+       0.800  0.98323  0.13174 -0.12613  0.13824
+       1.700  0.98323  0.13174 -0.12613  0.13824
+       2.000  0.98323  0.13174 -0.12613  0.13824
+    endlist
+  endnode
+  node trimesh lforearm_g
+    parent lbicep_g
+    orientationkey 5
+       0.000  0.98146 -0.18309 -0.05674  1.53230
+       0.167  0.98780 -0.14348 -0.06053  1.59704
+       0.800  0.98780 -0.14348 -0.06053  1.59705
+       1.700  0.98780 -0.14348 -0.06053  1.59705
+       2.000  0.98780 -0.14348 -0.06053  1.59704
+    endlist
+  endnode
+  node trimesh lhand_g
+    parent lforearm_g
+  endnode
+  node dummy lhand
+    parent lhand_g
+    orientationkey 3
+       0.167 -0.00000  0.00000 -0.00000  0.00000
+       0.800 -0.00000  0.00000 -0.00000  0.00000
+       0.900 -0.00000  0.00000 -0.00000  0.00000
+    endlist
+  endnode
+  node dummy lforearm
+    parent lforearm_g
+    orientationkey 3
+       0.167 -0.00008  1.00003  0.00005  0.06981
+       0.800 -0.00003  1.00003  0.00005  0.06981
+       0.900 -0.00003  1.00003  0.00005  0.06981
+    endlist
+  endnode
+  node trimesh lshould_g
+    parent lbicep_g
+    orientationkey 4
+       0.000  0.00000  1.00000  0.00000  0.00000
+       0.167  0.00000  1.00000  0.00000  0.00000
+       0.800  0.00000  1.00000  0.00000  0.00000
+       2.000 -0.00000  0.00000 -0.00000  0.00000
+    endlist
+  endnode
+  node trimesh pelvis_g
+    parent rootdummy
+    orientationkey 6
+       0.000  0.84634  0.45737 -0.27307  0.09216
+       0.167  0.94025  0.32817 -0.09071  0.33295
+       0.800  0.94025  0.32817 -0.09071  0.33295
+       0.900  0.94025  0.32817 -0.09071  0.33295
+       1.700  0.94025  0.32817 -0.09071  0.33295
+       2.000  0.94025  0.32817 -0.09071  0.33295
+    endlist
+  endnode
+  node trimesh lthigh_g
+    parent pelvis_g
+    orientationkey 6
+       0.000  0.95036  0.28311  0.12908  1.10958
+       0.167  0.91749  0.24231  0.31542  0.67708
+       0.800  0.91749  0.24231  0.31542  0.67708
+       0.900  0.93326  0.22876  0.27693  0.75877
+       1.700  0.91749  0.24231  0.31542  0.67708
+       2.000  0.91749  0.24231  0.31542  0.67708
+    endlist
+  endnode
+  node trimesh lshin_g
+    parent lthigh_g
+    orientationkey 6
+       0.000 -0.99932  0.02726 -0.02498  0.98332
+       0.167 -0.99897  0.04359  0.01224  0.90394
+       0.800 -0.99897  0.04359  0.01224  0.90394
+       0.900 -0.99919  0.04009  0.00315  1.05202
+       1.700 -0.99877  0.03372  0.03626  0.68669
+       2.000 -0.99897  0.04359  0.01224  0.90395
+    endlist
+  endnode
+  node trimesh lfoot_g
+    parent lshin_g
+    orientationkey 6
+       0.000  0.15274 -0.98633  0.06175  0.14169
+       0.167  0.79339 -0.60863  0.01032  0.29713
+       0.800  0.79339 -0.60863  0.01032  0.29713
+       0.900  0.79339 -0.60863  0.01032  0.29714
+       1.700  0.79339 -0.60863  0.01031  0.29714
+       2.000  0.79339 -0.60863  0.01032  0.29713
+    endlist
+  endnode
+  node trimesh rthigh_g
+    parent pelvis_g
+    orientationkey 6
+       0.000  0.08399 -0.50067 -0.86156  0.76285
+       0.167  0.90766  0.24438 -0.34121  0.59785
+       0.800  0.90766  0.24438 -0.34121  0.59785
+       0.900  0.92484  0.26376 -0.27405  0.78366
+       1.700  0.92252  0.24909 -0.29479  0.70690
+       2.000  0.90766  0.24438 -0.34121  0.59785
+    endlist
+  endnode
+  node trimesh rshin_g
+    parent rthigh_g
+    orientationkey 6
+       0.000 -1.00000  0.00000  0.00000  0.73745
+       0.167 -0.90145 -0.04031  0.43100  0.71720
+       0.800 -0.90145 -0.04031  0.43100  0.71720
+       0.900 -0.94937 -0.11703  0.29156  1.03741
+       1.700 -0.90145 -0.04031  0.43100  0.71720
+       2.000 -0.90145 -0.04031  0.43100  0.71720
+    endlist
+  endnode
+  node trimesh rfoot_g
+    parent rshin_g
+    orientationkey 6
+       0.000  0.71130  0.69840 -0.07937  0.71121
+       0.167  0.45344  0.53751  0.71099  0.10165
+       0.800  0.45344  0.53751  0.71099  0.10165
+       0.900  0.45343  0.53751  0.71099  0.10165
+       1.700  0.45343  0.53751  0.71100  0.10165
+       2.000  0.45342  0.53751  0.71099  0.10165
+    endlist
+  endnode
+  node dummy tail
+    parent pelvis_g
+  endnode
+doneanim disappear2 a_ba_non_combat
+
+newanim appear2 a_ba_non_combat
+  length 2.0
+  transtime 0.3
+  animroot rootdummy
+  node dummy a_ba_non_combat
+    parent null
+  endnode
+  node dummy headconjure
+    parent a_ba_non_combat
+  endnode
+  node dummy handconjure
+    parent a_ba_non_combat
+  endnode
+  node dummy rootdummy
+    parent a_ba_non_combat
+    orientationkey 5
+       0.000 -0.76430 -0.43944 -0.47196  0.30162
+       1.200 -0.76429 -0.43944 -0.47196  0.30164
+       1.667 -0.76430 -0.43944 -0.47196  0.30163
+       1.800 -0.76429 -0.43944 -0.47196  0.30163
+       2.000 -0.60194 -0.36234 -0.71160  0.31723
+    endlist
+  endnode
+  node trimesh torso_g
+    parent rootdummy
+    orientationkey 5
+       0.000  0.46538  0.65118  0.59949  0.15943
+       1.200  0.46537  0.65118  0.59949  0.15943
+       1.667  0.46537  0.65118  0.59949  0.15943
+       1.800  0.46537  0.65119  0.59950  0.15943
+       2.000 -0.88269  0.40740 -0.23428  0.24446
+    endlist
+  endnode
+  node trimesh rbicep_g
+    parent torso_g
+    orientationkey 4
+       0.000  0.17068 -0.47554  0.86298  0.27106
+       1.667  0.17068 -0.47554  0.86298  0.27106
+       1.800  0.17068 -0.47554  0.86298  0.27106
+       2.000  0.23533 -0.90974  0.34204  0.27664
+    endlist
+  endnode
+  node trimesh rforearm_g
+    parent rbicep_g
+    orientationkey 4
+       0.000  0.99507  0.07384  0.06615  1.53654
+       1.667  0.99507  0.07384  0.06615  1.53654
+       1.800  0.99507  0.07384  0.06615  1.53654
+       2.000  0.99467  0.08789  0.05383  1.65590
+    endlist
+  endnode
+  node trimesh rhand_g
+    parent rforearm_g
+  endnode
+  node dummy rhand
+    parent rhand_g
+    orientationkey 2
+       1.200  1.00011  0.00000 -0.00001  0.03158
+       2.000  1.00008  0.00001  0.00001  0.04188
+    endlist
+  endnode
+  node trimesh rshould_g
+    parent rbicep_g
+    orientationkey 4
+       0.000 -0.00000 -0.00000 -0.00000  0.00000
+       1.667 -0.00000  0.00000 -0.00000  0.00000
+       1.800  0.00000  1.00000  0.00000  0.00000
+       2.000 -0.00000 -0.00000 -0.00000  0.00000
+    endlist
+  endnode
+  node trimesh neck_g
+    parent torso_g
+    orientationkey 5
+       0.000  0.76929  0.53281  0.35259  0.06237
+       1.200  0.76928  0.53281  0.35259  0.06237
+       1.667  0.76930  0.53285  0.35261  0.06236
+       1.800  0.76934  0.53281  0.35259  0.06237
+       2.000  0.01243  0.04126  0.99907  0.18337
+    endlist
+  endnode
+  node trimesh head_g
+    parent neck_g
+    orientationkey 5
+       0.000  0.99997 -0.00649 -0.00528  0.19052
+       1.200  0.99997 -0.00649 -0.00528  0.19052
+       1.667  0.99997 -0.00649 -0.00528  0.19052
+       1.800  0.99997 -0.00649 -0.00528  0.19052
+       2.000  0.94438 -0.06509  0.32234  0.40185
+    endlist
+  endnode
+  node dummy Impact
+    parent torso_g
+    orientationkey 1
+       1.200  0.57735  0.57735  0.57735  2.09440
+    endlist
+  endnode
+  node trimesh lbicep_g
+    parent torso_g
+    orientationkey 4
+       0.000  0.98323  0.13174 -0.12613  0.13824
+       1.667  0.98323  0.13174 -0.12613  0.13824
+       1.800  0.98323  0.13174 -0.12613  0.13824
+       2.000  0.61765  0.76426  0.18550  0.24186
+    endlist
+  endnode
+  node trimesh lforearm_g
+    parent lbicep_g
+    orientationkey 4
+       0.000  0.98780 -0.14348 -0.06053  1.59704
+       1.667  0.98780 -0.14348 -0.06053  1.59704
+       1.800  0.98780 -0.14348 -0.06053  1.59705
+       2.000  0.99066 -0.11413 -0.07462  1.72389
+    endlist
+  endnode
+  node trimesh lhand_g
+    parent lforearm_g
+  endnode
+  node dummy lhand
+    parent lhand_g
+    orientationkey 2
+       1.200 -0.00007  0.99979  0.00003  0.01266
+       2.000  0.00005  1.00052 -0.00001  0.01677
+    endlist
+  endnode
+  node dummy lforearm
+    parent lforearm_g
+    orientationkey 1
+       1.200 -0.00003  1.00003  0.00005  0.06981
+    endlist
+  endnode
+  node trimesh lshould_g
+    parent lbicep_g
+    orientationkey 4
+       0.000 -0.00000  0.00000 -0.00000  0.00000
+       1.667  0.00000  1.00000  0.00000  0.00000
+       1.800 -0.00000  0.00000  0.00000  0.00000
+       2.000 -0.00000  0.00000  0.00000  0.00000
+    endlist
+  endnode
+  node trimesh pelvis_g
+    parent rootdummy
+    orientationkey 5
+       0.000  0.94025  0.32817 -0.09071  0.33295
+       1.200  0.94025  0.32817 -0.09071  0.33295
+       1.667  0.94025  0.32817 -0.09071  0.33295
+       1.800  0.94025  0.32817 -0.09071  0.33295
+       2.000  0.84634  0.45737 -0.27306  0.09216
+    endlist
+  endnode
+  node trimesh lthigh_g
+    parent pelvis_g
+    orientationkey 5
+       0.000  0.91749  0.24231  0.31542  0.67708
+       1.200  0.93960  0.21303  0.26789  0.79144
+       1.667  0.91749  0.24231  0.31542  0.67708
+       1.800  0.91749  0.24231  0.31542  0.67708
+       2.000  0.94940  0.28518  0.13157  1.09248
+    endlist
+  endnode
+  node trimesh lshin_g
+    parent lthigh_g
+    orientationkey 5
+       0.000 -0.99897  0.04359  0.01224  0.90395
+       1.200 -0.99897  0.04359  0.01224  0.90395
+       1.667 -0.99897  0.04359  0.01224  0.90395
+       1.800 -0.99897  0.04359  0.01224  0.90394
+       2.000 -0.99932  0.02726 -0.02498  0.98331
+    endlist
+  endnode
+  node trimesh lfoot_g
+    parent lshin_g
+    orientationkey 5
+       0.000  0.79339 -0.60863  0.01032  0.29713
+       1.200  0.79339 -0.60863  0.01032  0.29713
+       1.667  0.79339 -0.60863  0.01032  0.29714
+       1.800  0.79338 -0.60863  0.01032  0.29714
+       2.000  0.15274 -0.98634  0.06176  0.14169
+    endlist
+  endnode
+  node trimesh rthigh_g
+    parent pelvis_g
+    orientationkey 6
+       0.000  0.90766  0.24438 -0.34121  0.59785
+       1.200  0.92884  0.24680 -0.27631  0.75741
+       1.667  0.90766  0.24438 -0.34121  0.59785
+       1.800  0.90766  0.24438 -0.34121  0.59785
+       1.900  0.75362 -0.01735 -0.65708  0.72641
+       2.000  0.63015  0.03907 -0.77549  1.05364
+    endlist
+  endnode
+  node trimesh rshin_g
+    parent rthigh_g
+    orientationkey 5
+       0.000 -0.90145 -0.04031  0.43100  0.71720
+       1.200 -0.93556 -0.07109  0.34594  0.87499
+       1.667 -0.90145 -0.04031  0.43100  0.71720
+       1.800 -0.90145 -0.04031  0.43100  0.71720
+       2.000 -0.91123 -0.40873  0.05098  1.08773
+    endlist
+  endnode
+  node trimesh rfoot_g
+    parent rshin_g
+    orientationkey 5
+       0.000  0.45344  0.53751  0.71099  0.10165
+       1.200  0.45344  0.53751  0.71099  0.10165
+       1.667  0.45344  0.53751  0.71099  0.10165
+       1.800  0.45344  0.53751  0.71099  0.10165
+       2.000  0.77177  0.62068 -0.13832  0.55165
+    endlist
+  endnode
+  node dummy tail
+    parent pelvis_g
+  endnode
+doneanim appear2 a_ba_non_combat
+
+newanim disappear2lp a_ba_non_combat
+  length 0.033
+  transtime 0.5
+  animroot a_ba_non_combat
+  node dummy a_ba_non_combat
+    parent null
+  endnode
+  node dummy headconjure
+    parent a_ba_non_combat
+  endnode
+  node dummy handconjure
+    parent a_ba_non_combat
+  endnode
+  node dummy rootdummy
+    parent a_ba_non_combat
+    orientationkey 2
+       0.000 -0.76430 -0.43944 -0.47196  0.30162
+       0.033 -0.76430 -0.43944 -0.47196  0.30162
+    endlist
+  endnode
+  node trimesh torso_g
+    parent rootdummy
+    orientationkey 2
+       0.000  0.46538  0.65118  0.59949  0.15943
+       0.033  0.46538  0.65118  0.59949  0.15943
+    endlist
+  endnode
+  node trimesh rbicep_g
+    parent torso_g
+    orientationkey 2
+       0.000  0.17068 -0.47554  0.86298  0.27106
+       0.033  0.17068 -0.47554  0.86298  0.27106
+    endlist
+  endnode
+  node trimesh rforearm_g
+    parent rbicep_g
+    orientationkey 2
+       0.000  0.99507  0.07384  0.06615  1.53654
+       0.033  0.99507  0.07384  0.06615  1.53654
+    endlist
+  endnode
+  node trimesh rhand_g
+    parent rforearm_g
+  endnode
+  node dummy rhand
+    parent rhand_g
+  endnode
+  node trimesh rshould_g
+    parent rbicep_g
+    orientationkey 2
+       0.000 -0.00000 -0.00000 -0.00000  0.00000
+       0.033 -0.00000 -0.00000 -0.00000  0.00000
+    endlist
+  endnode
+  node trimesh neck_g
+    parent torso_g
+    orientationkey 2
+       0.000  0.76929  0.53281  0.35259  0.06237
+       0.033  0.76929  0.53281  0.35259  0.06237
+    endlist
+  endnode
+  node trimesh head_g
+    parent neck_g
+    orientationkey 2
+       0.000  0.99997 -0.00649 -0.00528  0.19052
+       0.033  0.99997 -0.00649 -0.00528  0.19052
+    endlist
+  endnode
+  node dummy Impact
+    parent torso_g
+  endnode
+  node trimesh lbicep_g
+    parent torso_g
+    orientationkey 2
+       0.000  0.98323  0.13174 -0.12613  0.13824
+       0.033  0.98323  0.13174 -0.12613  0.13824
+    endlist
+  endnode
+  node trimesh lforearm_g
+    parent lbicep_g
+    orientationkey 2
+       0.000  0.98780 -0.14348 -0.06053  1.59704
+       0.033  0.98780 -0.14348 -0.06053  1.59704
+    endlist
+  endnode
+  node trimesh lhand_g
+    parent lforearm_g
+  endnode
+  node dummy lhand
+    parent lhand_g
+  endnode
+  node dummy lforearm
+    parent lforearm_g
+  endnode
+  node trimesh lshould_g
+    parent lbicep_g
+    orientationkey 2
+       0.000 -0.00000 -0.00000 -0.00000  0.00000
+       0.033 -0.00000 -0.00000 -0.00000  0.00000
+    endlist
+  endnode
+  node trimesh pelvis_g
+    parent rootdummy
+    orientationkey 2
+       0.000  0.94025  0.32817 -0.09071  0.33295
+       0.033  0.94025  0.32817 -0.09071  0.33295
+    endlist
+  endnode
+  node trimesh lthigh_g
+    parent pelvis_g
+    orientationkey 2
+       0.000  0.91749  0.24231  0.31542  0.67708
+       0.033  0.91749  0.24231  0.31542  0.67708
+    endlist
+  endnode
+  node trimesh lshin_g
+    parent lthigh_g
+    orientationkey 2
+       0.000 -0.99897  0.04359  0.01224  0.90395
+       0.033 -0.99897  0.04359  0.01224  0.90395
+    endlist
+  endnode
+  node trimesh lfoot_g
+    parent lshin_g
+    orientationkey 2
+       0.000  0.79339 -0.60863  0.01032  0.29713
+       0.033  0.79339 -0.60863  0.01032  0.29713
+    endlist
+  endnode
+  node trimesh rthigh_g
+    parent pelvis_g
+    orientationkey 2
+       0.000  0.90766  0.24438 -0.34121  0.59785
+       0.033  0.90766  0.24438 -0.34121  0.59785
+    endlist
+  endnode
+  node trimesh rshin_g
+    parent rthigh_g
+    orientationkey 2
+       0.000 -0.90145 -0.04031  0.43100  0.71720
+       0.033 -0.90145 -0.04031  0.43100  0.71720
+    endlist
+  endnode
+  node trimesh rfoot_g
+    parent rshin_g
+    orientationkey 2
+       0.000  0.45344  0.53751  0.71099  0.10165
+       0.033  0.45344  0.53751  0.71099  0.10165
+    endlist
+  endnode
+  node dummy tail
+    parent pelvis_g
+  endnode
+doneanim disappear2lp a_ba_non_combat
+
+
 donemodel a_ba_non_combat
