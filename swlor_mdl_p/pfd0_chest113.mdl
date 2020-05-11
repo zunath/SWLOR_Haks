@@ -2,7 +2,7 @@
 # model: pfd0_chest113
 filedependancy pfh0_chest113.max
 newmodel pfd0_chest113
-setsupermodel pfd0_chest113 null
+setsupermodel pfd0_chest113 NULL
 classification CHARACTER
 setanimationscale 1
 #MAXGEOM  ASCII
@@ -269,6 +269,11 @@ node danglymesh pfd0_chest113g
   orientation 0 0 0 0
   alpha 1
   scale 1
+endnode
+node dummy Impact
+  parent pfd0_chest113g
+  position 0.0011788 0.1044288 0.1067101
+  orientation 0 0 0 0
 endnode
 endmodelgeom pfd0_chest113
 
