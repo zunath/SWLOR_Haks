@@ -1,0 +1,64 @@
+#MAXMODEL ASCII
+# model: plushwall_f2
+filedependancy plushwall_f2.max
+newmodel plushwall_f2
+setsupermodel plushwall_f2 NULL
+classification CHARACTER
+setanimationscale 1
+#MAXGEOM  ASCII
+beginmodelgeom plushwall_f2
+node dummy plushwall_f2
+  parent NULL
+endnode
+node trimesh Box27
+  parent plushwall_f2
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 10
+  bitmap pw_f2
+  verts 8
+       0.4758270    5.0587902    0.0000000
+       0.4758260   -5.0587902    0.0000000
+      -0.4758270   -5.0587902    0.0000000
+      -0.4758260    5.0587902    0.0000000
+       0.4758270    5.0587902    3.9568701
+      -0.4758260    5.0587902    3.9568701
+      -0.4758270   -5.0587902    3.9568701
+       0.4758260   -5.0587902    3.9568701
+  tverts 16
+       0.7375010   -2.0250001  0
+       0.7374990    3.0250001  0
+       0.2624990    3.0250001  0
+       0.2625010   -2.0250001  0
+       0.2624990   -2.0250001  0
+       0.7374990   -2.0250001  0
+       0.7375010    3.0250001  0
+       0.2625010    3.0250001  0
+       0.2624990   -0.4875000  0
+       0.7374990   -0.4875000  0
+       0.7374990    1.4875000  0
+       0.2624990    1.4875000  0
+      -2.0250001   -0.4875000  0
+       3.0250001   -0.4875000  0
+       3.0250001    1.4875000  0
+      -2.0250001    1.4875000  0
+  faces 12
+    0 1 2  1   0  1  2   1
+    2 3 0  1   2  3  0   1
+    4 5 6  1   4  5  6   0
+    6 7 4  1   6  7  4   0
+    0 3 5  1   8  9 10   4
+    5 4 0  1  10 11  8   4
+    3 2 6  1  12 13 14   3
+    6 5 3  1  14 15 12   3
+    2 1 7  1   8  9 10   5
+    7 6 2  1  10 11  8   5
+    1 0 4  1  12 13 14   2
+    4 7 1  1  14 15 12   2
+  position 0.181786 0.592802 0
+  orientation 0 0 0 0
+endnode
+endmodelgeom plushwall_f2
+
+donemodel plushwall_f2

@@ -1,0 +1,66 @@
+#MAXMODEL ASCII
+# model: pnl_compass
+filedependancy pnl_compass.max
+newmodel pnl_compass
+setsupermodel pnl_compass NULL
+setanimationscale 1
+#MAXGEOM  ASCII
+beginmodelgeom pnl_compass
+node dummy pnl_compass
+  parent NULL
+endnode
+node dummy compass
+  parent pnl_compass
+  position 9999.4 0.35 0
+  orientation 0 0 0 0
+endnode
+node trimesh Plane30
+  parent pnl_compass
+  ambient 0.1 0.1 0.1
+  diffuse 1 1 1
+  specular 0.045 0.045 0.045
+  shininess 26
+  bitmap PNL_PARTY_BAR
+  verts 4
+      -0.4000000    0.3750000    0.0000000
+      -0.4000000   -0.3750000    0.0000000
+       0.4000000    0.3750000    0.0000000
+       0.4000000   -0.3750000    0.0000000
+  tverts 4
+       0.0153846    0.5740740  0
+       0.0153845    0.2654320  0
+       0.6307690    0.5740740  0
+       0.6307690    0.2654320  0
+  faces 2
+    0 1 2  1  0 1 2   1
+    3 2 1  1  3 2 1   1
+  position 9999.4 0.375 -1
+  orientation 0 0 0 0
+endnode
+endmodelgeom pnl_compass
+
+#MAXANIM ASCII
+newanim default pnl_compass
+  length 3.33333
+  transtime 0
+  animroot pnl_compass
+  node dummy pnl_compass
+    parent NULL
+  endnode
+  node dummy compass
+    parent pnl_compass
+    orientationkey 7
+         0.0000000    0.0000000    0.0000000    0.0000000    0.0000000
+         0.6000000    0.8204174   -0.5717196    0.0072038   -0.0212715
+         1.1333300    0.5750021   -0.8180071    0.0153969   -0.0212685
+         1.7333300   -0.8685408    0.2382210    0.4346119   -0.0141574
+         2.4666700    0.9872863    0.1274600   -0.0949718   -0.0264222
+         3.0333300   -0.2215879    0.8687767   -0.4428609   -0.0387250
+         3.3333299    0.0000000    0.0000000    0.0000000    0.0000000
+  endnode
+  node dummy Plane30
+    parent pnl_compass
+  endnode
+doneanim default pnl_compass
+
+donemodel pnl_compass

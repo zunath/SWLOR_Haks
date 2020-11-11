@@ -10,31 +10,6 @@ beginmodelgeom PLC_tie1
 node dummy PLC_tie1
   parent NULL
 endnode
-node dummy tie1_impact
-  parent PLC_tie1
-  position 0 0 0.85
-  orientation 0 0 0 0
-endnode
-node dummy tie1_ground
-  parent PLC_tie1
-  position 0 0 0
-  orientation 0 0 0 0
-endnode
-node dummy tie1_hand
-  parent PLC_tie1
-  position 0 0 1
-  orientation 0 0 0 0
-endnode
-node dummy tie1_head
-  parent PLC_tie1
-  position 0 0 2
-  orientation 0 0 0 0
-endnode
-node dummy tie1_head_hit
-  parent PLC_tie1
-  position 0 0 1.5
-  orientation 0 0 0 0
-endnode
 node trimesh cylinder03
   parent PLC_tie1
   ambient 0.588235 0.588235 0.588235
@@ -786,8 +761,6 @@ node trimesh cylinder03
     275 250 248  1  60 59 55   0
   position 0.00105044 0.0479556 3.79981
   orientation 1 0 0 -1.5708
-  scale 1
-  alpha 1
 endnode
 node trimesh sphere01
   parent PLC_tie1
@@ -1954,8 +1927,6 @@ node trimesh sphere01
     345 176 173  1   91  86  90   0
   position 0.00105044 0.0479556 3.79981
   orientation 1 0 0 -1.5708
-  scale 1
-  alpha 1
 endnode
 endmodelgeom PLC_tie1
 

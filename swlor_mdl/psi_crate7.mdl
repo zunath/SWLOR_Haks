@@ -1,0 +1,84 @@
+#MAXMODEL ASCII
+# model: psi_crate7
+filedependancy psi_crate7.max
+newmodel psi_crate7
+setsupermodel psi_crate7 NULL
+classification CHARACTER
+setanimationscale 0
+#MAXGEOM  ASCII
+beginmodelgeom psi_crate7
+node dummy psi_crate7
+  parent NULL
+endnode
+node dummy rootdummy
+  parent psi_crate7
+  position 0 0 0
+  orientation 0 0 0 0
+endnode
+node dummy crate7_hand
+  parent psi_crate7
+  position 0 0 0.980529
+  orientation 0 0 0 0
+endnode
+node dummy crate7_head
+  parent psi_crate7
+  position 0 0 1.00302
+  orientation 0 0 0 0
+endnode
+node dummy crate7_impact
+  parent psi_crate7
+  position 0 0 0.814206
+  orientation 0 0 0 0
+endnode
+node trimesh crate02
+  parent psi_crate7
+  ambient 0.588 0.588 0.588
+  diffuse 0.588 0.588 0.588
+  specular 0 0 0
+  shininess 10
+  bitmap crate02
+  verts 8
+       0.4834740   -0.4834740    1.6439400
+      -0.4834740   -0.4834740    1.6439400
+      -0.4834740   -0.4834740    0.0007013
+       0.4834740   -0.4834740    0.0007013
+       0.4834740    0.4834740    1.6439400
+       0.4834740    0.4834740    0.0007013
+      -0.4834740    0.4834740    1.6439400
+      -0.4834740    0.4834740    0.0007013
+  tverts 16
+       0.0127567    0.4862670  0
+       0.0127567    0.0104630  0
+       0.9827570    0.0104630  0
+       0.9827570    0.4862670  0
+       0.0127566    0.4862660  0
+       0.0127566    0.0104630  0
+       0.9827570    0.0104631  0
+       0.9827570    0.4862660  0
+       0.4874020    0.9857470  0
+       0.0150575    0.9857470  0
+       0.0150575    0.5114240  0
+       0.4874020    0.5114240  0
+       0.0140678    0.9847580  0
+       0.0140678    0.5124140  0
+       0.4883910    0.5124140  0
+       0.4883910    0.9847580  0
+  faces 12
+    0 1 2  1   0  1  2   1
+    3 0 2  1   3  0  2   1
+    4 0 3  2   4  5  6   1
+    5 4 3  2   7  4  6   1
+    6 4 5  1   1  0  3   1
+    7 6 5  1   2  1  3   1
+    1 6 7  2   5  4  7   1
+    2 1 7  2   6  5  7   1
+    4 6 1  4   8  9 10   1
+    0 4 1  4  11  8 10   1
+    3 2 7  4  12 13 14   1
+    5 3 7  4  15 12 14   1
+  position 0 0 0
+  orientation 0 0 0 0
+endnode
+endmodelgeom psi_crate7
+
+donemodel psi_crate7

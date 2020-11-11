@@ -1,0 +1,64 @@
+#MAXMODEL ASCII
+# model: pfo0_neck101
+filedependancy pfo0_neck101.max
+newmodel pfo0_neck101
+setsupermodel pfo0_neck101 NULL
+classification CHARACTER
+setanimationscale 1
+#MAXGEOM  ASCII
+beginmodelgeom pfo0_neck101
+node dummy pfo0_neck101
+  parent NULL
+endnode
+node trimesh pfo0_neck101g
+  parent pfo0_neck101
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0.26 0.26 0.26
+  shininess 14
+  bitmap pfo0_neck101
+  verts 10
+       0.0000000    0.0051191   -0.0737265
+      -0.0961519   -0.0040214   -0.0014421
+       0.0000000    0.0807327    0.0006624
+       0.0000000   -0.0849387    0.0069745
+      -0.0657345    0.0132756    0.1466968
+       0.0000000    0.0682949    0.1075724
+       0.0000000   -0.0568227    0.1285511
+       0.0000000    0.0076666    0.1792234
+       0.0961519   -0.0040214   -0.0014421
+       0.0657345    0.0132756    0.1466968
+  tverts 10
+       0.5103020    0.0257170  0
+       0.0103670    0.0870720  0
+       0.5098680    0.0960640  0
+       0.5098680    0.1230300  0
+       0.0339470    0.9416600  0
+       0.5098680    0.6889160  0
+       0.5019740    0.8099370  0
+       0.5000000    0.9826890  0
+       0.9797650    0.0798250  0
+       0.9818410    0.9405980  0
+  faces 16
+    0 1 2  1  0 1 2   1
+    0 3 1  1  0 3 1   1
+    2 4 5  1  2 4 5   1
+    2 1 4  1  2 1 4   1
+    1 6 4  1  1 6 4   1
+    1 3 6  1  1 3 6   1
+    7 5 4  1  7 5 4   1
+    7 4 6  1  7 4 6   1
+    8 0 2  1  8 0 2   1
+    3 0 8  1  3 0 8   1
+    9 2 5  1  9 2 5   1
+    8 2 9  1  8 2 9   1
+    6 8 9  1  6 8 9   1
+    3 8 6  1  3 8 6   1
+    5 7 9  1  5 7 9   1
+    9 7 6  1  9 7 6   1
+  position 0 0 0
+  orientation 0 0 0 0
+endnode
+endmodelgeom pfo0_neck101
+
+donemodel pfo0_neck101

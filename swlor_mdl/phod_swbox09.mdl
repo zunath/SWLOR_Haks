@@ -1,0 +1,83 @@
+#MAXMODEL ASCII
+# model: phod_swbox09
+filedependancy phod_swbox09.max
+newmodel phod_swbox09
+setsupermodel phod_swbox09 NULL
+classification CHARACTER
+setanimationscale 1.9125
+#MAXGEOM  ASCII
+beginmodelgeom phod_swbox09
+node dummy phod_swbox09
+  parent NULL
+endnode
+node dummy swbox09_ground
+  parent phod_swbox09
+  position 0.00694776 -0.0133632 0
+  orientation 0 0 0 0
+endnode
+node dummy swbox09_hand
+  parent phod_swbox09
+  position -0.00762948 1.35797 0.503382
+  orientation 0 0 0 0
+endnode
+node dummy swbox09_head
+  parent phod_swbox09
+  position 0.0349155 0.00178453 0.534969
+  orientation 0 0 0 0
+endnode
+node dummy swbox09_head_hit
+  parent phod_swbox09
+  position -0.00762948 -0.020703 0.504708
+  orientation 0 0 0 0
+endnode
+node dummy swbox09_impact
+  parent phod_swbox09
+  position -0.00762948 -0.0210394 0.557364
+  orientation 0 0 0 0
+endnode
+node trimesh Box
+  parent phod_swbox09
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 1 1 1
+  shininess 10
+  bitmap phod_swbox09
+  verts 8
+      -0.9452340   -0.9309660    0.0000000
+      -0.9452340    0.9309660    0.0000000
+       0.9452340    0.9309660    0.0000000
+       0.9452340   -0.9309660    0.0000000
+      -0.9452340   -0.9309660    1.8749900
+       0.9452340   -0.9309660    1.8749900
+       0.9452340    0.9309660    1.8749900
+      -0.9452340    0.9309660    1.8749900
+  tverts 10
+       0.4903480    0.0049045  0
+       0.4903480    0.4920210  0
+       0.0032325    0.4920210  0
+       0.0032325    0.0049044  0
+       0.0032325    0.0049043  0
+       0.4903480    0.0049043  0
+       0.4903480    0.0049044  0
+       0.4903480    0.0049044  0
+       0.0032315    0.4920210  0
+       0.0032315    0.0049045  0
+  faces 12
+    0 1 2  1  0 1 2   2
+    2 3 0  1  2 3 0   2
+    4 5 6  1  2 4 5   1
+    6 7 4  1  5 1 2   1
+    0 3 5  2  3 6 1   5
+    5 4 0  2  1 2 3   5
+    3 2 6  4  7 1 8   4
+    6 5 3  4  8 9 7   4
+    2 1 7  2  3 6 1   6
+    7 6 2  2  1 2 3   6
+    1 0 4  4  7 1 8   3
+    4 7 1  4  8 9 7   3
+  position 0 0 0
+  orientation 0 0 0 0
+endnode
+endmodelgeom phod_swbox09
+
+donemodel phod_swbox09

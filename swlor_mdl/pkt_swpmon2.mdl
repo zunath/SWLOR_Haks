@@ -270,6 +270,8 @@ node trimesh SwpMon01
     47 32 34  1   98 100  99   3
   position 0.25 0 0
   orientation 0 1 0 -0.436332
+  scale 1
+  alpha 1
 endnode
 node trimesh SwpScreen01
   parent PKT_SwpMon2
@@ -277,6 +279,7 @@ node trimesh SwpScreen01
   diffuse 1 1 1
   specular 0 0 0
   shininess 0
+  shadow 0
   bitmap PKT_SwScrn01
   verts 4
       -0.0030795    0.4260590   -0.3205650
@@ -293,6 +296,8 @@ node trimesh SwpScreen01
     2 3 0  1  2 3 0   3
   position -0.44 -4.14848e-07 0.57
   orientation 0 1 0 -0.436332
+  scale 1
+  alpha 1
 endnode
 endmodelgeom PKT_SwpMon2
 

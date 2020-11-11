@@ -1,0 +1,670 @@
+#MAXMODEL ASCII
+# model: purp_chair
+filedependancy purp_chair.max
+newmodel purp_chair
+setsupermodel purp_chair NULL
+classification CHARACTER
+setanimationscale 1
+#MAXGEOM  ASCII
+beginmodelgeom purp_chair
+node dummy purp_chair
+  parent NULL
+endnode
+node dummy x0_ch2_hand
+  parent purp_chair
+  position -0.00398433 0.505195 0.934402
+  orientation 0 0 0 0
+endnode
+node dummy x0_ch2_head
+  parent purp_chair
+  position -0.00398437 -0.0108252 1.04677
+  orientation 0 0 0 0
+endnode
+node dummy x0_ch2_head_hit
+  parent purp_chair
+  position -0.00398437 -0.0108252 0.565293
+  orientation 0 0 0 0
+endnode
+node dummy x0_ch2_impact
+  parent purp_chair
+  position -0.00398437 -0.011001 0.5372
+  orientation 0 0 0 0
+endnode
+node dummy x0_ch2_ground
+  parent purp_chair
+  position 0.00363281 -0.0069873 0
+  orientation 0 0 0 0
+endnode
+node emitter ChunkyWood188
+  parent purp_chair
+  p2p 0
+  p2p_sel 1
+  affectedByWind 0
+  m_isTinted 0
+  bounce 1
+  random 0
+  inherit 0
+  inheritvel 0
+  inherit_local 1
+  inherit_part 0
+  splat 0
+  renderorder 0
+  spawntype 0
+  update Explosion
+  render Normal
+  blend Normal
+  texture fxpa_cloud02
+  chunkName PLC_Chunk_W01
+  xgrid 5
+  ygrid 5
+  loop 0
+  deadspace 0
+  twosidedtex 1
+  blastRadius 0
+  blastLength 0
+  position -0.0272229 -0.0298361 0.615493
+  orientation 0 0 0 0
+  colorStart 0.482353 0.435294 0.317647
+  colorEnd 0.584314 0.533333 0.407843
+  alphaStart 1
+  alphaEnd 1
+  sizeStart 0.1
+  sizeEnd 0.1
+  sizeStart_y 0
+  sizeEnd_y 0
+  frameStart 0
+  frameEnd 24
+  birthrate 10
+  lifeExp 0.75
+  mass 3
+  spread 1.22173
+  particleRot 2.9
+  velocity 8
+  randvel 0.3
+  fps 0
+  xsize 89
+  ysize 40
+  bounce_co 0.5
+  blurlength 10
+  lightningDelay 0
+  lightningRadius 0
+  lightningScale 0
+  p2p_bezier2 0
+  p2p_bezier3 0
+  combinetime 0
+  drag 0
+  grav 0
+  threshold 0
+endnode
+node emitter ChunkyWood189
+  parent purp_chair
+  p2p 0
+  p2p_sel 1
+  affectedByWind 0
+  m_isTinted 0
+  bounce 1
+  random 0
+  inherit 0
+  inheritvel 0
+  inherit_local 1
+  inherit_part 0
+  splat 0
+  renderorder 0
+  spawntype 0
+  update Explosion
+  render Normal
+  blend Normal
+  texture fxpa_cloud02
+  chunkName PLC_Chunk_W02
+  xgrid 5
+  ygrid 5
+  loop 0
+  deadspace 0
+  twosidedtex 0
+  blastRadius 0
+  blastLength 0
+  position -0.0272229 -0.03082 0.509271
+  orientation 0 0 0 0
+  colorStart 1 1 1
+  colorEnd 1 1 1
+  alphaStart 1
+  alphaEnd 1
+  sizeStart 0.1
+  sizeEnd 0.1
+  sizeStart_y 0
+  sizeEnd_y 0
+  frameStart 0
+  frameEnd 24
+  birthrate 10
+  lifeExp 0.75
+  mass 3
+  spread 1.22173
+  particleRot 5
+  velocity 8
+  randvel 0.3
+  fps 0
+  xsize 89
+  ysize 40
+  bounce_co 0.5
+  blurlength 10
+  lightningDelay 0
+  lightningRadius 0
+  lightningScale 0
+  p2p_bezier2 0
+  p2p_bezier3 0
+  combinetime 0
+  drag 0
+  grav 0
+  threshold 0
+endnode
+node emitter fire!116
+  parent purp_chair
+  p2p 0
+  p2p_sel 1
+  affectedByWind 0
+  m_isTinted 1
+  bounce 0
+  random 0
+  inherit 0
+  inheritvel 0
+  inherit_local 1
+  inherit_part 0
+  splat 0
+  renderorder 0
+  spawntype 0
+  update Explosion
+  render Normal
+  blend Normal
+  texture fxpa_smoke01
+  xgrid 4
+  ygrid 4
+  loop 0
+  deadspace 0
+  twosidedtex 1
+  blastRadius 0.2
+  blastLength 1
+  position -0.0272229 -0.0298361 0.435227
+  orientation 1 0 0 -1.5708
+  colorStart 0.443137 0.388235 0.239216
+  colorEnd 0.639216 0.607843 0.482353
+  alphaStart 1
+  alphaEnd 0
+  sizeStart 4
+  sizeEnd 1
+  sizeStart_y 0
+  sizeEnd_y 0
+  frameStart 0
+  frameEnd 24
+  birthrate 10
+  lifeExp 2.5
+  mass 0.09
+  spread 2.96706
+  particleRot 0.5
+  velocity 2
+  randvel 0.5
+  fps 10
+  xsize 100
+  ysize 99
+  bounce_co 0
+  blurlength 10
+  lightningDelay 0
+  lightningRadius 0
+  lightningScale 0
+  p2p_bezier2 0
+  p2p_bezier3 0
+  combinetime 0
+  drag 0
+  grav 0
+  threshold 0
+endnode
+node trimesh Object681
+  parent purp_chair
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 1
+  bitmap d20conc3
+  verts 22
+       0.0100000    0.0200000   -0.0300000
+       0.4800000   -0.0100001   -0.0300000
+       0.4400000   -0.6400000   -0.0300000
+      -0.0300001   -0.6100000   -0.0300000
+      -0.1400000    0.1200000    0.6500000
+      -0.1400000    0.0400000    0.6500000
+       0.6300000    0.0699999    0.6500000
+       0.6300000    0.0000000    0.6500000
+       0.5000000   -0.6500000    0.0300000
+      -0.1000000   -0.6100000    0.0300000
+      -0.0600000    0.0200000    0.0300000
+       0.5400000   -0.0100001    0.0300000
+      -0.0500000    0.0900000   -0.4700000
+      -0.1400000    0.0900000   -0.4700000
+      -0.1000000   -0.6700000   -0.4700000
+      -0.1800000   -0.6700000   -0.4700000
+      -0.0700000   -0.0600000    0.0300000
+       0.5400000   -0.0900002    0.0300000
+      -0.0600000    0.0100000    0.2800000
+      -0.0500000    0.0900000    0.2800000
+       0.5400000    0.0499999    0.2800000
+       0.5400000   -0.0300001    0.2800000
+  tverts 40
+       0.0248152    0.0840376  0
+       0.0248153    0.4435730  0
+       0.3519740    0.4435730  0
+       0.3519740    0.0840375  0
+       0.2014550    0.4619910  0
+       0.2683510    0.4619910  0
+       0.2014550    1.0258100  0
+       0.2683510    1.0258100  0
+       0.3492450   -0.5891900  0
+       0.1040090   -0.5891900  0
+       0.0694245   -0.5432060  0
+       0.3838300   -0.5432060  0
+       0.3541010   -0.9079060  0
+       0.3900560   -0.9079060  0
+       0.0720224    0.4730820  0
+       0.3863760    0.4730820  0
+       0.4178120    0.1189530  0
+       0.0405869    0.1189530  0
+       0.1108960    0.5241760  0
+       0.0720224    0.5241760  0
+       0.3863760    0.5241760  0
+       0.0652727    0.0333337  0
+       0.3519740    0.0333337  0
+       0.0652728    0.4942770  0
+       0.3519740    0.4942770  0
+       0.0503133    0.5241760  0
+       0.0891873    0.5241760  0
+       0.0884789    0.7155810  0
+       0.0496049    0.7155810  0
+       0.3814120   -0.3709410  0
+       0.0718429   -0.3709410  0
+       0.0694244   -0.5432060  0
+       0.0885726    0.9454750  0
+       0.0496986    0.9454750  0
+       0.3915610   -0.1009930  0
+       0.0616931   -0.1009930  0
+       0.0891874    0.5241760  0
+       0.0503134    0.5241760  0
+       0.0496987    0.9454750  0
+       0.0885727    0.9454750  0
+  faces 35
+     0  1  2  1   0  1  2   0
+     2  3  0  1   2  3  0   0
+     4  5  6  1   4  5  6   0
+     7  6  5  1   7  6  5   0
+     3  2  8  1   8  9 10   0
+     8  9  3  1  10 11  8   0
+     1  0 10  1   9  8 11   0
+    10 11  1  1  11 10  9   0
+    10  0 12  1  11  8 12   0
+    12 13 10  1  12 13 11   0
+     0  3 14  1  14 15 16   0
+    14 12  0  1  16 17 14   0
+     3  9 15  1   8 11 13   0
+    15 14  3  1  13 12  8   0
+    16 10 13  1  18 19 17   0
+    13 15  9  1  17 16 20   0
+    16  9 17  1  21 22 23   0
+     8 17  9  1  24 23 22   0
+    10 16 18  1  25 26 27   0
+    18 19 10  1  27 28 25   0
+    11 10 19  1  10 11 29   0
+    19 20 11  1  29 30 10   0
+    16 17 21  1  11 31 30   0
+    21 18 16  1  30 29 11   0
+     9 16 13  1  20 18 17   0
+    19 18  5  1  28 27 32   0
+     5  4 19  1  32 33 28   0
+    20 19  4  1  30 29 34   0
+     4  6 20  1  34 35 30   0
+    18 21  7  1  29 30 35   0
+     7  5 18  1  35 34 29   0
+    17 11 20  1  36 37 28   0
+    20 21 17  1  28 27 36   0
+    21 20  6  1  27 28 38   0
+     6  7 21  1  38 39 27   0
+  position 0.205569 -0.498969 0.44
+  orientation 0 0 -1 -3.14855
+endnode
+node trimesh Box1539
+  parent purp_chair
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 1
+  bitmap d20conc3
+  verts 9
+      -0.0500000   -0.2200000   -0.0300000
+      -0.0100000    0.4100000   -0.0300000
+       0.0500000    0.4700000   -0.4700000
+       0.0100000   -0.2900000   -0.4700000
+       0.0500000    0.4100000    0.0300000
+       0.1400000    0.4600000   -0.4700000
+       0.0500000    0.3300000    0.0300000
+       0.0100000   -0.2300000    0.0300000
+       0.0900000   -0.2900000   -0.4700000
+  tverts 12
+       0.3863760    0.4730820  0
+       0.0720224    0.4730820  0
+       0.0405869    0.1189530  0
+       0.4178120    0.1189530  0
+       0.1040090   -0.5891900  0
+       0.0694245   -0.5432060  0
+       0.0631987   -0.9079060  0
+       0.0991530   -0.9079060  0
+       0.1108960    0.5241760  0
+       0.3863760    0.5241760  0
+       0.0405870    0.1189530  0
+       0.0720225    0.5241760  0
+  faces 9
+    0 1 2  1   0  1  2   0
+    2 3 0  1   2  3  0   0
+    1 4 5  1   4  5  6   0
+    5 2 1  1   6  7  4   0
+    6 7 8  1   8  9  3   0
+    8 5 4  1   3 10 11   0
+    7 0 3  1   5  4  7   0
+    3 8 7  1   7  6  5   0
+    4 6 8  1  11  8  3   0
+  position -0.287343 -0.08239 0.44
+  orientation 0 0 -1 -3.14855
+endnode
+endmodelgeom purp_chair
+
+#MAXANIM ASCII
+newanim damage purp_chair
+  length 0.133333
+  transtime 0
+  animroot purp_chair
+  node dummy purp_chair
+    parent NULL
+  endnode
+  node dummy x0_ch2_hand
+    parent purp_chair
+  endnode
+  node dummy x0_ch2_head
+    parent purp_chair
+  endnode
+  node dummy x0_ch2_head_hit
+    parent purp_chair
+  endnode
+  node dummy x0_ch2_impact
+    parent purp_chair
+  endnode
+  node dummy x0_ch2_ground
+    parent purp_chair
+  endnode
+  node emitter ChunkyWood188
+    parent purp_chair
+  endnode
+  node emitter ChunkyWood189
+    parent purp_chair
+  endnode
+  node trimesh damage74
+    parent purp_chair
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+    positionkey 3
+         0.0000000   -0.0287878   -0.0092709    0.0000000
+         0.0333333   -0.0287878   -0.0092709    0.0244581
+         0.1333330   -0.0287878   -0.0092709    0.0000000
+    orientationkey 4
+         0.0000000    0.0000000    0.0000000    0.0000000    0.0000000
+         0.0333333   -0.3713361    0.9284632    0.0081026   -0.0469942
+         0.1000000    0.5999489   -0.7999698    0.0104721   -0.0436326
+         0.1333330    0.0000000    0.0000000    0.0000000    0.0000000
+  endnode
+  node emitter fire!116
+    parent purp_chair
+  endnode
+  node trimesh Object681
+    parent purp_chair
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh Box1539
+    parent purp_chair
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh PLC_X02_wg
+    parent purp_chair
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+doneanim damage purp_chair
+
+#MAXANIM ASCII
+newanim die purp_chair
+  length 0.166667
+  transtime 0
+  animroot purp_chair
+  event 0 detonate
+  event 0 detonate
+  event 0 detonate
+  node dummy purp_chair
+    parent NULL
+  endnode
+  node dummy x0_ch2_hand
+    parent purp_chair
+  endnode
+  node dummy x0_ch2_head
+    parent purp_chair
+  endnode
+  node dummy x0_ch2_head_hit
+    parent purp_chair
+  endnode
+  node dummy x0_ch2_impact
+    parent purp_chair
+  endnode
+  node dummy x0_ch2_ground
+    parent purp_chair
+  endnode
+  node emitter ChunkyWood188
+    parent purp_chair
+  endnode
+  node emitter ChunkyWood189
+    parent purp_chair
+  endnode
+  node trimesh damage74
+    parent purp_chair
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+    positionkey 2
+         0.0000000   -0.0287878   -0.0092709    0.0000000
+         0.1666670   -0.0287878   -0.0092709   -6.9514499
+    orientation 0 0 0 0
+  endnode
+  node emitter fire!116
+    parent purp_chair
+  endnode
+  node trimesh Object681
+    parent purp_chair
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+    positionkey 3
+         0.0000000    0.2055690   -0.4989700    0.4400000
+         0.0333333    0.2055690   -0.4989700   -3.8828700
+         0.1666670    0.2055690   -0.4989700   -3.8828700
+    orientationkey 2
+         0.0000000    0.0000000    0.0000000    1.0000000   -3.1346300
+         0.0333333    0.0000000    0.0000000    1.0000000   -3.1346300
+  endnode
+  node trimesh Box1539
+    parent purp_chair
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+    positionkey 3
+         0.0000000   -0.2873430   -0.0823901    0.4400000
+         0.0333333   -0.2873430   -0.0823901   -3.8828700
+         0.1666670   -0.2873430   -0.0823901   -3.8828700
+    orientationkey 2
+         0.0000000    0.0000000    0.0000000    1.0000000   -3.1346300
+         0.0333333    0.0000000    0.0000000    1.0000000   -3.1346300
+  endnode
+  node trimesh PLC_X02_wg
+    parent purp_chair
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+doneanim die purp_chair
+
+#MAXANIM ASCII
+newanim dead purp_chair
+  length 0.0333333
+  transtime 0
+  animroot purp_chair
+  node dummy purp_chair
+    parent NULL
+  endnode
+  node dummy x0_ch2_hand
+    parent purp_chair
+  endnode
+  node dummy x0_ch2_head
+    parent purp_chair
+  endnode
+  node dummy x0_ch2_head_hit
+    parent purp_chair
+  endnode
+  node dummy x0_ch2_impact
+    parent purp_chair
+  endnode
+  node dummy x0_ch2_ground
+    parent purp_chair
+  endnode
+  node emitter ChunkyWood188
+    parent purp_chair
+  endnode
+  node emitter ChunkyWood189
+    parent purp_chair
+  endnode
+  node trimesh damage74
+    parent purp_chair
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+    positionkey 2
+         0.0000000   -0.0287878   -0.0092709   -6.9514499
+         0.0333333   -0.0287878   -0.0092709   -6.9514499
+  endnode
+  node emitter fire!116
+    parent purp_chair
+  endnode
+  node trimesh Object681
+    parent purp_chair
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+    positionkey 2
+         0.0000000    0.2055690   -0.4989700   -3.8828700
+         0.0333333    0.2055690   -0.4989700   -3.8828700
+    orientationkey 2
+         0.0000000    0.0000000    0.0000000    1.0000000   -3.1346300
+         0.0333333    0.0000000    0.0000000    1.0000000   -3.1346300
+  endnode
+  node trimesh Box1539
+    parent purp_chair
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+    positionkey 2
+         0.0000000   -0.2873430   -0.0823901   -3.8828700
+         0.0333333   -0.2873430   -0.0823901   -3.8828700
+    orientationkey 2
+         0.0000000    0.0000000    0.0000000    1.0000000   -3.1346300
+         0.0333333    0.0000000    0.0000000    1.0000000   -3.1346300
+  endnode
+  node trimesh PLC_X02_wg
+    parent purp_chair
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+doneanim dead purp_chair
+
+#MAXANIM ASCII
+newanim default purp_chair
+  length 0
+  transtime 0.25
+  animroot purp_chair
+  node dummy purp_chair
+    parent NULL
+  endnode
+  node dummy x0_ch2_hand
+    parent purp_chair
+  endnode
+  node dummy x0_ch2_head
+    parent purp_chair
+  endnode
+  node dummy x0_ch2_head_hit
+    parent purp_chair
+  endnode
+  node dummy x0_ch2_impact
+    parent purp_chair
+  endnode
+  node dummy x0_ch2_ground
+    parent purp_chair
+  endnode
+  node emitter ChunkyWood188
+    parent purp_chair
+  endnode
+  node emitter ChunkyWood189
+    parent purp_chair
+  endnode
+  node trimesh damage74
+    parent purp_chair
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+    position -0.0287878 -0.00927093 0
+    orientation 0 0 0 0
+  endnode
+  node emitter fire!116
+    parent purp_chair
+  endnode
+  node trimesh Object681
+    parent purp_chair
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh Box1539
+    parent purp_chair
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh PLC_X02_wg
+    parent purp_chair
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+doneanim default purp_chair
+
+donemodel purp_chair

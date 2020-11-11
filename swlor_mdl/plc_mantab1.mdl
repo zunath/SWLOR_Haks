@@ -15,7 +15,7 @@ node trimesh Box40
   ambient 1 1 1
   diffuse 1 1 1
   specular 0 0 0
-  shininess 0
+  shininess 1
   shadow 0
   bitmap PLC_ManTab1
   verts 52
@@ -179,6 +179,7 @@ node trimesh Box40
      1 47 51  2  30 29 26   6
   position 0 0 0.38
   orientation 0 0 0 0
+  scale 1
   alpha 1
 endnode
 node trimesh Mesh43
@@ -186,7 +187,7 @@ node trimesh Mesh43
   ambient 1 1 1
   diffuse 1 1 1
   specular 0 0 0
-  shininess 0
+  shininess 1
   shadow 0
   bitmap PLC_ManTab1
   verts 68
@@ -422,6 +423,7 @@ node trimesh Mesh43
     62 36 66  1  27  2 28   3
   position -0.02 0 0.31
   orientation 0 0 0 0
+  scale 1
   alpha 1
 endnode
 node dummy lookathook

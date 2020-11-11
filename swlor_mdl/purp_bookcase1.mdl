@@ -1,0 +1,900 @@
+#MAXMODEL ASCII
+# model: purp_bookcase1
+filedependancy purp_bookcase1.max
+newmodel purp_bookcase1
+setsupermodel purp_bookcase1 NULL
+classification CHARACTER
+setanimationscale 1
+#MAXGEOM  ASCII
+beginmodelgeom purp_bookcase1
+node dummy purp_bookcase1
+  parent NULL
+endnode
+node dummy Dummy01
+  parent purp_bookcase1
+  position 0 0 0
+  orientation 0 0 0 0
+endnode
+node trimesh Mesh37
+  parent Dummy01
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 1
+  bitmap MetalTable2
+  verts 8
+      -0.9397160   -0.1520250    0.0091640
+      -0.9385130   -0.1520860   -0.0485382
+       0.8911020   -0.3315760    0.0475093
+       0.8923040   -0.3316360   -0.0101929
+       0.9385130    0.1520860    0.0485381
+       0.9397160    0.1520260   -0.0091641
+      -0.8923040    0.3316370    0.0101927
+      -0.8911020    0.3315760   -0.0475095
+  tverts 12
+       1.4108900    1.3322700  0
+       1.4108900    1.2745600  0
+      -0.4108910    1.3322700  0
+      -0.4108910    1.2745600  0
+       0.2453530    1.6046600  0
+       0.2453520   -0.6046630  0
+       0.7546470    1.6046600  0
+       0.7546470   -0.6046630  0
+       0.7546470   -0.6046630  0
+       0.2453520   -0.6046630  0
+       0.2453530    1.6046600  0
+       0.7546470    1.6046600  0
+  faces 10
+    0 1 2   1   0  1  2   7
+    3 2 1   2   3  2  1   7
+    4 5 6   1   2  3  0   7
+    7 6 5   2   1  0  3   7
+    0 2 6   4   4  5  6   7
+    6 2 4   4   6  5  7   7
+    3 5 4   8   5  7  8   7
+    4 2 3  16   7  5  9   7
+    7 1 0   8   6  4 10   7
+    0 6 7  16   4  6 11   7
+  position -0.0536277 0.00940236 2.28784
+  orientation 0.010973 -0.209378 -0.9777732 -0.0999545
+endnode
+node trimesh Mesh01
+  parent Dummy01
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 1
+  bitmap MetalTable2
+  verts 8
+      -0.0743321   -0.3240080    1.2257299
+       0.0054249   -0.3302110    1.2263200
+      -0.0342863    0.1936390    1.2546901
+       0.0454707    0.1874360    1.2552800
+       0.0342864   -0.1936380   -1.2546901
+       0.0743322    0.3240080   -1.2257299
+      -0.0454706   -0.1874350   -1.2552800
+      -0.0054248    0.3302110   -1.2263200
+  tverts 14
+       0.2453520   -0.6046630  0
+       0.2453520   -0.7007210  0
+       0.7546470   -0.6046630  0
+       0.7546470   -0.7007210  0
+       0.2698150   -0.3325010  0
+       0.7301840   -0.3325010  0
+       0.7301840    1.3325000  0
+       0.2698160    1.3325000  0
+      -0.4108910    1.5072700  0
+      -0.4108910   -0.5000000  0
+      -0.4900990   -0.5000000  0
+      -0.4900990    1.5000000  0
+       0.7301840    1.6620400  0
+       0.2698160    1.6620400  0
+  faces 10
+    0 1 2  1   0  1  2   7
+    3 2 1  1   3  2  1   7
+    4 5 3  2   4  5  6   7
+    3 1 4  2   6  7  4   7
+    0 6 4  4   8  9 10   7
+    4 1 0  4  10 11  8   7
+    2 5 7  4   8 10  9   7
+    3 5 2  4  11 10  8   7
+    2 7 0  2  12  5 13   7
+    6 0 7  2   4 13  5   7
+  position 0.906373 0.00534783 1.24024
+  orientation 0.5792841 -0.09917402 -0.8090701 -0.09565521
+endnode
+node trimesh Box01
+  parent Dummy01
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 1
+  bitmap ModernBooks
+  verts 20
+      -0.9425770   -0.1207540    0.9747420
+      -0.9344770   -0.1042500    0.3909540
+       0.9067110   -0.2519090    1.0115200
+       0.9120290   -0.2350260    0.4127530
+       0.9261740    0.0648013    1.0153100
+       0.9342780    0.0813755    0.4220070
+      -0.9203270    0.1956470    0.9839950
+      -0.9122280    0.2121520    0.4002080
+      -0.9230920   -0.0810498   -0.4296520
+      -0.9149670   -0.0644924   -1.0153100
+       0.9122020   -0.2107460   -0.4078570
+       0.9203270   -0.1941880   -0.9935130
+       0.9344510    0.1056560   -0.3986030
+       0.9425770    0.1222130   -0.9842590
+      -0.9008430    0.2353520   -0.4203980
+      -0.8927170    0.2519090   -1.0060500
+      -0.9296130   -0.0943383    0.0403764
+       0.9168930   -0.2251150    0.0621750
+       0.9391420    0.0912869    0.0714290
+      -0.9073640    0.2220630    0.0496301
+  tverts 44
+       1.1100100    0.9955350  0
+       1.1100100    0.7537540  0
+      -0.1100090    0.9955350  0
+      -0.1100090    0.7537540  0
+       1.8948801    0.9952890  0
+       1.8948801    0.7905400  0
+       0.6748610    0.9952890  0
+       0.6748610    0.7905400  0
+       1.5332700    0.9952890  0
+       1.5332700    0.7905400  0
+       0.3132490    0.9952890  0
+       0.3132490    0.7905400  0
+      -0.6073450    0.9969250  0
+      -0.6040700    0.7547930  0
+       0.6126740    0.9969250  0
+       0.6159480    0.7547930  0
+       1.1100100    0.9969250  0
+       1.1132801    0.7547930  0
+      -0.1100090    0.9969250  0
+      -0.1067340    0.7547930  0
+      -0.1100090    0.9954310  0
+      -0.1100090    0.7544250  0
+       1.1100100    0.9954310  0
+       1.1100100    0.7544250  0
+       0.9442310    0.9930150  0
+       0.9442310    0.7544250  0
+      -0.2757880    0.9930150  0
+      -0.2757880    0.7544250  0
+       1.1100100    0.9955350  0
+      -0.1100090    0.9955350  0
+       1.1100100    0.7537540  0
+       1.8948801    0.7905400  0
+       1.8948801    0.9952890  0
+      -0.6040700    0.7547930  0
+      -0.6073450    0.9969250  0
+      -0.1100090    0.7544250  0
+      -0.1100090    0.9954310  0
+      -0.1100090    0.7537540  0
+       0.6748610    0.9952890  0
+       0.6748610    0.7905400  0
+       0.6126740    0.9969250  0
+       0.6159480    0.7547930  0
+       1.1100100    0.9954310  0
+       1.1100100    0.7544250  0
+  faces 34
+     0  1  2   1   0  1  2   7
+     3  2  1   2   3  2  1   7
+     4  5  6   1   0  1  2   7
+     7  6  5   2   3  2  1   7
+     8  9 10   1   4  5  6   7
+    11 10  9   1   7  6  5   7
+    12 13 14   1   8  9 10   7
+    15 14 13   1  11 10  9   7
+    16  8 17   4  12 13 14   7
+    10 17  8   2  15 14 13   7
+    18 12 19   4  16 17 18   7
+    14 19 12   1  19 18 17   7
+     1 16  3   4  20 21 22   7
+    17  3 16   4  23 22 21   7
+     5 18  7   2  24 25 26   7
+    19  7 18   2  27 26 25   7
+     0  2  4   4   2  0 28   7
+     4  6  0   8   0  2 29   7
+     6  7  1  16   0  1 30   7
+     1  0  6  16   1  0 28   7
+    14 15  9  16   4  5 31   7
+     9  8 14  16   5  4 32   7
+    19 14  8  16  12 13 33   7
+     8 16 19  16  13 12 34   7
+     7 19 16  16  20 21 35   7
+    16  1  7  16  21 20 36   7
+     5  4  2  16   3  2 29   7
+     2  3  5   8   2  3 37   7
+    13 12 10   8   7  6 38   7
+    10 11 13   8   6  7 39   7
+    12 18 17  16  15 14 40   7
+    17 10 12  16  14 15 41   7
+    18  5  3  32  23 22 42   7
+     3 17 18  32  22 23 43   7
+  position -0.0232195 -0.026869 1.2681
+  orientation 0.3727669 -0.166923 -0.9127878 -0.0770955
+endnode
+node trimesh Mesh26
+  parent Dummy01
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 1
+  bitmap MetalTable2
+  verts 8
+      -0.0123292    0.2822340   -1.2381901
+      -0.0702767   -0.2344650   -1.2462000
+      -0.0671724   -0.2733220    1.2384300
+      -0.0092250    0.2433780    1.2464300
+       0.0123292   -0.2822340    1.2381901
+       0.0092249   -0.2433780   -1.2464300
+       0.0671724    0.2733210   -1.2384300
+       0.0702767    0.2344650    1.2462000
+  tverts 14
+       0.7301840   -0.3325010  0
+       0.2698160   -0.3325010  0
+       0.2698160    1.3325000  0
+       0.7301850    1.3325000  0
+       1.4108900    1.4945900  0
+       1.4901000   -0.5000000  0
+       1.4108900   -0.5000000  0
+       1.4901000    1.5000000  0
+       0.2453530    1.7007200  0
+       0.2453530    1.6046600  0
+       0.7546470    1.6046600  0
+       0.7546480    1.7007200  0
+       0.7301840    1.3994800  0
+       0.2698160    1.3994800  0
+  faces 10
+    0 1 2  1   0  1  2   7
+    2 3 0  1   2  3  0   7
+    4 1 5  2   4  5  6   7
+    2 1 4  2   7  5  4   7
+    6 0 7  2   6  5  4   7
+    0 3 7  2   5  7  4   7
+    2 4 7  4   8  9 10   7
+    7 3 2  4  10 11  8   7
+    6 7 5  1   0 12  1   7
+    4 5 7  1  13  1 12   7
+  position -0.964341 -0.0134429 1.24221
+  orientation 0.1379209 0.01881089 -0.9902646 -0.112755
+endnode
+node trimesh Mesh25
+  parent Dummy01
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 1
+  bitmap MetalTable2
+  verts 8
+      -0.9493520   -0.1851880    0.0269010
+      -0.9482830   -0.1853060   -0.0499284
+       0.9177700   -0.3002030    0.0514363
+       0.9188390   -0.3003210   -0.0253930
+       0.9482830    0.1848200    0.0511168
+       0.9493520    0.1847020   -0.0257125
+      -0.8879080    0.3003200    0.0253930
+      -0.8868390    0.3002020   -0.0514363
+  tverts 13
+       1.4108900   -0.2315530  0
+       1.4108900   -0.3083890  0
+      -0.4108910   -0.2315520  0
+      -0.4108910   -0.3083890  0
+       1.4108900   -0.3083900  0
+       0.2453530    1.6046600  0
+       0.2453520   -0.6046630  0
+       0.8593270   -0.6046630  0
+       0.8593270    1.6046600  0
+       0.2453530    1.6046600  0
+       0.8593270    1.6046600  0
+       0.8593270   -0.6046630  0
+       0.2453520   -0.6046630  0
+  faces 10
+    0 1 2  1   0  1  2   7
+    3 2 1  1   3  2  1   7
+    4 5 6  1   2  3  0   7
+    7 6 5  1   4  0  3   7
+    0 2 4  2   5  6  7   5
+    4 6 0  4   7  8  5   5
+    7 1 0  8   8  5  9   5
+    0 6 7  8   5  8 10   5
+    3 5 4  8   6  7 11   5
+    4 2 3  8   7  6 12   5
+  position -0.0243558 0.00995533 0.230007
+  orientation -0.01703719 -0.2168219 -0.9760625 -0.06436379
+endnode
+node emitter ChunkyWood04
+  parent purp_bookcase1
+  p2p 0
+  p2p_sel 1
+  affectedByWind 0
+  m_isTinted 0
+  bounce 1
+  random 0
+  inherit 1
+  inheritvel 0
+  inherit_local 0
+  inherit_part 0
+  splat 0
+  renderorder 0
+  spawntype 0
+  update Explosion
+  render Normal
+  blend Normal
+  texture fxpa_cloud02
+  chunkName PLC_Chunk_W02
+  xgrid 5
+  ygrid 5
+  loop 0
+  deadspace 0
+  twosidedtex 1
+  blastRadius 0
+  blastLength 0
+  position 0.00110352 -0.0149606 1.32824
+  orientation 0 0 0 0
+  colorStart 0.482353 0.435294 0.317647
+  colorEnd 0.584314 0.533333 0.407843
+  alphaStart 1
+  alphaEnd 1
+  sizeStart 0.1
+  sizeEnd 0.1
+  sizeStart_y 0
+  sizeEnd_y 0
+  frameStart 0
+  frameEnd 24
+  birthrate 3
+  lifeExp 0.75
+  mass 3
+  spread 1.22173
+  particleRot 2.9
+  velocity 8
+  randvel 0.3
+  fps 0
+  xsize 89
+  ysize 40
+  bounce_co 0.5
+  blurlength 10
+  lightningDelay 0
+  lightningRadius 0
+  lightningScale 0
+  p2p_bezier2 0
+  p2p_bezier3 0
+  combinetime 0
+  drag 0
+  grav 0
+  threshold 0
+endnode
+node emitter fire!08
+  parent purp_bookcase1
+  p2p 0
+  p2p_sel 1
+  affectedByWind 0
+  m_isTinted 1
+  bounce 0
+  random 0
+  inherit 1
+  inheritvel 0
+  inherit_local 0
+  inherit_part 0
+  splat 0
+  renderorder 0
+  spawntype 0
+  update Explosion
+  render Normal
+  blend Normal
+  texture fxpa_smoke01
+  xgrid 4
+  ygrid 4
+  loop 0
+  deadspace 0
+  twosidedtex 1
+  blastRadius 0.2
+  blastLength 1
+  position 0.00110352 -0.0149606 1.14798
+  orientation -1 0 0 -1.5708
+  colorStart 0.47451 0.439216 0.364706
+  colorEnd 0.819608 0.796079 0.709804
+  alphaStart 1
+  alphaEnd 0
+  sizeStart 4
+  sizeEnd 1
+  sizeStart_y 0
+  sizeEnd_y 0
+  frameStart 0
+  frameEnd 24
+  birthrate 10
+  lifeExp 2.5
+  mass 0.09
+  spread 2.96706
+  particleRot 0.5
+  velocity 2
+  randvel 0.5
+  fps 10
+  xsize 100
+  ysize 99
+  bounce_co 0
+  blurlength 10
+  lightningDelay 0
+  lightningRadius 0
+  lightningScale 0
+  p2p_bezier2 0
+  p2p_bezier3 0
+  combinetime 0
+  drag 0
+  grav 0
+  threshold 0
+endnode
+node emitter ChunkyWood03
+  parent purp_bookcase1
+  p2p 0
+  p2p_sel 1
+  affectedByWind 0
+  m_isTinted 0
+  bounce 1
+  random 0
+  inherit 1
+  inheritvel 0
+  inherit_local 0
+  inherit_part 0
+  splat 0
+  renderorder 0
+  spawntype 0
+  update Explosion
+  render Normal
+  blend Normal
+  texture fxpa_cloud02
+  chunkName PLC_Chunk_W01
+  xgrid 5
+  ygrid 5
+  loop 0
+  deadspace 0
+  twosidedtex 0
+  blastRadius 0
+  blastLength 0
+  position 0.00110352 -0.0149606 1.22202
+  orientation 0 0 0 0
+  colorStart 1 1 1
+  colorEnd 1 1 1
+  alphaStart 1
+  alphaEnd 1
+  sizeStart 0.1
+  sizeEnd 0.1
+  sizeStart_y 0
+  sizeEnd_y 0
+  frameStart 0
+  frameEnd 24
+  birthrate 3
+  lifeExp 0.75
+  mass 3
+  spread 1.22173
+  particleRot 5
+  velocity 8
+  randvel 0.3
+  fps 0
+  xsize 89
+  ysize 40
+  bounce_co 0.5
+  blurlength 10
+  lightningDelay 0
+  lightningRadius 0
+  lightningScale 0
+  p2p_bezier2 0
+  p2p_bezier3 0
+  combinetime 0
+  drag 0
+  grav 0
+  threshold 0
+endnode
+node dummy A02_hand
+  parent purp_bookcase1
+  position 0.00398926 -0.735385 0.934402
+  orientation 0 0 0 0
+endnode
+node dummy A02_head
+  parent purp_bookcase1
+  position 0.00398926 0.0108258 2.82981
+  orientation 0 0 0 0
+endnode
+node dummy A02_head_hit
+  parent purp_bookcase1
+  position 0.00398926 0.0108258 2.31867
+  orientation 0 0 0 0
+endnode
+node dummy A02_impact
+  parent purp_bookcase1
+  position 0.00398926 0.0109998 0.868134
+  orientation 0 0 0 0
+endnode
+node dummy A02_ground
+  parent purp_bookcase1
+  position -0.00363281 0.00698791 0
+  orientation 0 0 0 0
+endnode
+endmodelgeom purp_bookcase1
+
+#MAXANIM ASCII
+newanim die purp_bookcase1
+  length 0.333333
+  transtime 0
+  animroot purp_bookcase1
+  event 0.133333 detonate
+  event 0.133333 detonate
+  event 0.133333 detonate
+  node dummy purp_bookcase1
+    parent NULL
+  endnode
+  node dummy Dummy01
+    parent purp_bookcase1
+    positionkey 2
+         0.1000000    0.0000000    0.0000000    0.0000000
+         0.3333330   -0.4185640    0.0000000   -4.1383700
+    orientationkey 5
+         0.0000000    0.0000000    0.0000000    0.0000000    0.0000000
+         0.0333333    0.0000000    0.0000000   -1.0000000   -0.1047200
+         0.0666667    0.0000000    0.0000000    0.0000000    0.0000000
+         0.1000000    0.0000000    0.0000000    0.0000000    0.0000000
+         0.3333330   -0.7735661   -0.5214241    0.3601561   -0.4113340
+  endnode
+  node dummy Mesh37
+    parent Dummy01
+    positionkey 5
+         0.0000000   -0.0536277    0.0094024    2.2878399
+         0.0333333   -0.0219033   -0.0828653    2.2878399
+         0.1000000   -0.0536277    0.0094024    2.2878399
+         0.1666670   -0.0536277    0.0094024    2.2878399
+         0.3000000    1.4842000    0.8774660    2.4621899
+    orientationkey 5
+         0.0000000    0.0109730   -0.2093780   -0.9777732   -0.0999545
+         0.0333333   -0.0109730    0.2093780    0.9777732   -0.0249886
+         0.1000000    0.0109730   -0.2093780   -0.9777732   -0.0999545
+         0.1666670    0.0109730   -0.2093780   -0.9777732   -0.0999545
+         0.3000000    0.1425360    0.8808851   -0.4513590   -0.9160452
+  endnode
+  node dummy Mesh01
+    parent Dummy01
+    positionkey 4
+         0.0000000    0.9063730    0.0053478    1.2402400
+         0.0333333    0.9063730   -0.0521846    1.2402400
+         0.1000000    0.9063730    0.0053478    1.2402400
+         0.1666670    0.9063730    0.0053478    1.2402400
+    orientationkey 5
+         0.0000000    0.5792841   -0.0991740   -0.8090701   -0.0956552
+         0.0333333   -0.5792841    0.0991740    0.8090701   -0.0239138
+         0.1000000    0.5792841   -0.0991740   -0.8090701   -0.0956552
+         0.1666670    0.5792841   -0.0991740   -0.8090701   -0.0956552
+         0.3000000    0.3228748    0.8057246   -0.4965477   -0.6888140
+  endnode
+  node dummy Box01
+    parent Dummy01
+    positionkey 5
+         0.0000000   -0.0232195   -0.0268690    1.2681000
+         0.0333333   -0.0232195   -0.0307567    1.2681000
+         0.1000000   -0.0232195   -0.0268690    1.2681000
+         0.1666670   -0.0232195   -0.0268690    1.2681000
+         0.3000000   -1.2656300    0.0469426    0.8980140
+    orientationkey 5
+         0.0000000    0.3727669   -0.1669230   -0.9127878   -0.0770955
+         0.0333333   -0.3727669    0.1669230    0.9127877   -0.0192739
+         0.1000000    0.3727669   -0.1669230   -0.9127878   -0.0770955
+         0.1666670    0.3727669   -0.1669230   -0.9127878   -0.0770955
+         0.3000000    0.1641030   -0.8434241    0.5115721   -1.3768800
+  endnode
+  node dummy Mesh26
+    parent Dummy01
+    positionkey 4
+         0.0000000   -0.9643410   -0.0134429    1.2422100
+         0.0333333   -0.9643410    0.0602573    1.2422100
+         0.1000000   -0.9643410   -0.0134429    1.2422100
+         0.1666670   -0.9643410   -0.0134429    1.2422100
+    orientationkey 5
+         0.0000000    0.1379209    0.0188109   -0.9902646   -0.1127550
+         0.0333333   -0.1379209   -0.0188109    0.9902646   -0.0281888
+         0.1000000    0.1379209    0.0188109   -0.9902646   -0.1127550
+         0.1666670    0.1379209    0.0188109   -0.9902646   -0.1127550
+         0.3000000    0.0897640   -0.8668149   -0.4904839   -1.1074001
+  endnode
+  node dummy Mesh25
+    parent Dummy01
+    positionkey 5
+         0.0000000   -0.0243558    0.0099553    0.2300070
+         0.0333333   -0.0031946    0.0099553    0.2493420
+         0.1000000   -0.0243558    0.0099553    0.2300070
+         0.1666670   -0.0243558    0.0099553    0.2300070
+         0.3000000    0.0192304    0.0582673    0.2439150
+    orientationkey 5
+         0.0000000   -0.0170372   -0.2168219   -0.9760625   -0.0643638
+         0.0333333    0.0170372    0.2168219    0.9760625   -0.0160909
+         0.1000000   -0.0170372   -0.2168219   -0.9760625   -0.0643638
+         0.1666670   -0.0170372   -0.2168219   -0.9760625   -0.0643638
+         0.3000000   -0.8540776   -0.2707659   -0.4441139   -0.1660440
+  endnode
+  node dummy purp_bookcase1_pwk
+    parent purp_bookcase1
+  endnode
+  node dummy purp_bookcase1_wg
+    parent purp_bookcase1_pwk
+  endnode
+  node dummy A02_pwk_use01
+    parent purp_bookcase1_pwk
+  endnode
+  node dummy A02_pwk_use02
+    parent purp_bookcase1_pwk
+  endnode
+  node emitter ChunkyWood04
+    parent purp_bookcase1
+  endnode
+  node emitter fire!08
+    parent purp_bookcase1
+  endnode
+  node emitter ChunkyWood03
+    parent purp_bookcase1
+  endnode
+  node dummy A02_hand
+    parent purp_bookcase1
+  endnode
+  node dummy A02_head
+    parent purp_bookcase1
+  endnode
+  node dummy A02_head_hit
+    parent purp_bookcase1
+  endnode
+  node dummy A02_impact
+    parent purp_bookcase1
+  endnode
+  node dummy A02_ground
+    parent purp_bookcase1
+  endnode
+doneanim die purp_bookcase1
+
+#MAXANIM ASCII
+newanim dead purp_bookcase1
+  length 0.0333333
+  transtime 0
+  animroot purp_bookcase1
+  node dummy purp_bookcase1
+    parent NULL
+  endnode
+  node dummy Dummy01
+    parent purp_bookcase1
+    position -0.418564 0 -4.13837
+    orientation -0.7735661 -0.5214241 0.3601561 -0.411334
+  endnode
+  node dummy Mesh37
+    parent Dummy01
+  endnode
+  node dummy Mesh01
+    parent Dummy01
+  endnode
+  node dummy Box01
+    parent Dummy01
+  endnode
+  node dummy Mesh26
+    parent Dummy01
+  endnode
+  node dummy Mesh25
+    parent Dummy01
+  endnode
+  node dummy purp_bookcase1_pwk
+    parent purp_bookcase1
+  endnode
+  node dummy purp_bookcase1_wg
+    parent purp_bookcase1_pwk
+  endnode
+  node dummy A02_pwk_use01
+    parent purp_bookcase1_pwk
+  endnode
+  node dummy A02_pwk_use02
+    parent purp_bookcase1_pwk
+  endnode
+  node emitter ChunkyWood04
+    parent purp_bookcase1
+  endnode
+  node emitter fire!08
+    parent purp_bookcase1
+  endnode
+  node emitter ChunkyWood03
+    parent purp_bookcase1
+  endnode
+  node dummy A02_hand
+    parent purp_bookcase1
+  endnode
+  node dummy A02_head
+    parent purp_bookcase1
+  endnode
+  node dummy A02_head_hit
+    parent purp_bookcase1
+  endnode
+  node dummy A02_impact
+    parent purp_bookcase1
+  endnode
+  node dummy A02_ground
+    parent purp_bookcase1
+  endnode
+doneanim dead purp_bookcase1
+
+#MAXANIM ASCII
+newanim damage purp_bookcase1
+  length 0.1
+  transtime 0
+  animroot purp_bookcase1
+  node dummy purp_bookcase1
+    parent NULL
+  endnode
+  node dummy Dummy01
+    parent purp_bookcase1
+    positionkey 1
+         0.1000000    0.0000000    0.0000000    0.0000000
+    orientationkey 4
+         0.0000000    0.0000000    0.0000000    0.0000000    0.0000000
+         0.0333333    0.0000000    0.0000000   -1.0000000   -0.1047200
+         0.0666667    0.0000000    0.0000000    0.0000000    0.0000000
+         0.1000000    0.0000000    0.0000000    0.0000000    0.0000000
+  endnode
+  node dummy Mesh37
+    parent Dummy01
+    positionkey 3
+         0.0000000   -0.0536277    0.0094024    2.2878399
+         0.0333333   -0.0219033   -0.0828653    2.2878399
+         0.1000000   -0.0536277    0.0094024    2.2878399
+    orientationkey 3
+         0.0000000    0.0109730   -0.2093780   -0.9777732   -0.0999545
+         0.0333333   -0.0109730    0.2093780    0.9777732   -0.0249886
+         0.1000000    0.0109730   -0.2093780   -0.9777732   -0.0999545
+  endnode
+  node dummy Mesh01
+    parent Dummy01
+    positionkey 3
+         0.0000000    0.9063730    0.0053478    1.2402400
+         0.0333333    0.9063730   -0.0521846    1.2402400
+         0.1000000    0.9063730    0.0053478    1.2402400
+    orientationkey 3
+         0.0000000    0.5792841   -0.0991740   -0.8090701   -0.0956552
+         0.0333333   -0.5792841    0.0991740    0.8090701   -0.0239138
+         0.1000000    0.5792841   -0.0991740   -0.8090701   -0.0956552
+  endnode
+  node dummy Box01
+    parent Dummy01
+    positionkey 3
+         0.0000000   -0.0232195   -0.0268690    1.2681000
+         0.0333333   -0.0232195   -0.0307567    1.2681000
+         0.1000000   -0.0232195   -0.0268690    1.2681000
+    orientationkey 3
+         0.0000000    0.3727669   -0.1669230   -0.9127878   -0.0770955
+         0.0333333   -0.3727669    0.1669230    0.9127877   -0.0192739
+         0.1000000    0.3727669   -0.1669230   -0.9127878   -0.0770955
+  endnode
+  node dummy Mesh26
+    parent Dummy01
+    positionkey 3
+         0.0000000   -0.9643410   -0.0134429    1.2422100
+         0.0333333   -0.9643410    0.0602573    1.2422100
+         0.1000000   -0.9643410   -0.0134429    1.2422100
+    orientationkey 3
+         0.0000000    0.1379209    0.0188109   -0.9902646   -0.1127550
+         0.0333333   -0.1379209   -0.0188109    0.9902646   -0.0281888
+         0.1000000    0.1379209    0.0188109   -0.9902646   -0.1127550
+  endnode
+  node dummy Mesh25
+    parent Dummy01
+    positionkey 3
+         0.0000000   -0.0243558    0.0099553    0.2300070
+         0.0333333   -0.0031946    0.0099553    0.2493420
+         0.1000000   -0.0243558    0.0099553    0.2300070
+    orientationkey 3
+         0.0000000   -0.0170372   -0.2168219   -0.9760625   -0.0643638
+         0.0333333    0.0170372    0.2168219    0.9760625   -0.0160909
+         0.1000000   -0.0170372   -0.2168219   -0.9760625   -0.0643638
+  endnode
+  node dummy purp_bookcase1_pwk
+    parent purp_bookcase1
+  endnode
+  node dummy purp_bookcase1_wg
+    parent purp_bookcase1_pwk
+  endnode
+  node dummy A02_pwk_use01
+    parent purp_bookcase1_pwk
+  endnode
+  node dummy A02_pwk_use02
+    parent purp_bookcase1_pwk
+  endnode
+  node emitter ChunkyWood04
+    parent purp_bookcase1
+  endnode
+  node emitter fire!08
+    parent purp_bookcase1
+  endnode
+  node emitter ChunkyWood03
+    parent purp_bookcase1
+  endnode
+  node dummy A02_hand
+    parent purp_bookcase1
+  endnode
+  node dummy A02_head
+    parent purp_bookcase1
+  endnode
+  node dummy A02_head_hit
+    parent purp_bookcase1
+  endnode
+  node dummy A02_impact
+    parent purp_bookcase1
+  endnode
+  node dummy A02_ground
+    parent purp_bookcase1
+  endnode
+doneanim damage purp_bookcase1
+
+#MAXANIM ASCII
+newanim default purp_bookcase1
+  length 0
+  transtime 0.25
+  animroot purp_bookcase1
+  node dummy purp_bookcase1
+    parent NULL
+  endnode
+  node dummy Dummy01
+    parent purp_bookcase1
+  endnode
+  node dummy Mesh37
+    parent Dummy01
+    position -0.0536277 0.00940236 2.28784
+    orientation 0.010973 -0.209378 -0.9777732 -0.0999545
+  endnode
+  node dummy Mesh01
+    parent Dummy01
+    position 0.906373 0.00534783 1.24024
+    orientation 0.5792841 -0.09917402 -0.8090701 -0.09565521
+  endnode
+  node dummy Box01
+    parent Dummy01
+    position -0.0232195 -0.026869 1.2681
+    orientation 0.3727669 -0.166923 -0.9127878 -0.0770955
+  endnode
+  node dummy Mesh26
+    parent Dummy01
+    position -0.964341 -0.0134429 1.24221
+    orientation 0.1379209 0.01881089 -0.9902646 -0.112755
+  endnode
+  node dummy Mesh25
+    parent Dummy01
+    position -0.0243558 0.00995533 0.230007
+    orientation -0.01703719 -0.2168219 -0.9760625 -0.06436379
+  endnode
+  node dummy purp_bookcase1_pwk
+    parent purp_bookcase1
+  endnode
+  node dummy purp_bookcase1_wg
+    parent purp_bookcase1_pwk
+  endnode
+  node dummy A02_pwk_use01
+    parent purp_bookcase1_pwk
+  endnode
+  node dummy A02_pwk_use02
+    parent purp_bookcase1_pwk
+  endnode
+  node emitter ChunkyWood04
+    parent purp_bookcase1
+  endnode
+  node emitter fire!08
+    parent purp_bookcase1
+  endnode
+  node emitter ChunkyWood03
+    parent purp_bookcase1
+  endnode
+  node dummy A02_hand
+    parent purp_bookcase1
+  endnode
+  node dummy A02_head
+    parent purp_bookcase1
+  endnode
+  node dummy A02_head_hit
+    parent purp_bookcase1
+  endnode
+  node dummy A02_impact
+    parent purp_bookcase1
+  endnode
+  node dummy A02_ground
+    parent purp_bookcase1
+  endnode
+doneanim default purp_bookcase1
+
+donemodel purp_bookcase1
