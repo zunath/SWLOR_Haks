@@ -2,7 +2,7 @@
 ; comment, contacts and bugs reports to Jlenlc@wanadoo.fr
 
 [GENERAL]
-Name=TTD01
+Name=ttd01
 Type=SET
 Version=V1.0
 Interior=0
@@ -13,7 +13,7 @@ DisplayName=-1
 UnlocalizedName=[SW] Tatooine
 Border=Desert
 Default=Desert
-Floor=Desert
+floor=Desert
 
 [GRASS]
 Grass=1
@@ -1462,7 +1462,7 @@ AnimLoop2=1
 AnimLoop3=1
 Doors=1
 Sounds=0
-PathNode=F
+PathNode=f
 Orientation=0
 VisibilityNode=A
 VisibilityOrientation=0
@@ -4360,7 +4360,7 @@ AnimLoop2=1
 AnimLoop3=1
 Doors=1
 Sounds=0
-PathNode=F
+PathNode=f
 Orientation=0
 VisibilityNode=A
 VisibilityOrientation=0
@@ -4891,7 +4891,7 @@ AnimLoop2=1
 AnimLoop3=1
 Doors=0
 Sounds=0
-PathNode=F
+PathNode=f
 Orientation=90
 VisibilityNode=A
 VisibilityOrientation=0
@@ -4949,7 +4949,7 @@ AnimLoop2=1
 AnimLoop3=1
 Doors=0
 Sounds=0
-PathNode=F
+PathNode=f
 Orientation=90
 VisibilityNode=A
 VisibilityOrientation=0
@@ -7069,7 +7069,7 @@ Orientation=0
 ImageMap2D=mipd10_l08
 
 [TILE230]
-Model=TTD02_a01_01
+Model=ttd02_a01_01
 WalkMesh=msb01
 TopLeft=Desert
 TopLeftHeight=1
@@ -7099,7 +7099,7 @@ VisibilityOrientation=0
 ImageMap2D=MITR01_A01
 
 [TILE231]
-Model=TTD02_a01_03
+Model=ttd02_a01_03
 WalkMesh=msb01
 TopLeft=Desert
 TopLeftHeight=1
@@ -7129,7 +7129,7 @@ VisibilityOrientation=0
 ImageMap2D=MITR01_A01
 
 [TILE232]
-Model=TTD02_a02_01
+Model=ttd02_a02_01
 WalkMesh=msb01
 TopLeft=Desert
 TopLeftHeight=0
@@ -7159,7 +7159,7 @@ VisibilityOrientation=0
 ImageMap2D=MITR01_A02
 
 [TILE233]
-Model=TTD02_a02_02
+Model=ttd02_a02_02
 WalkMesh=msb01
 TopLeft=Desert
 TopLeftHeight=0
@@ -7189,7 +7189,7 @@ VisibilityOrientation=0
 ImageMap2D=MITR01_A02
 
 [TILE234]
-Model=TTD02_a03_01
+Model=ttd02_a03_01
 WalkMesh=msb01
 TopLeft=Desert
 TopLeftHeight=0
@@ -7219,7 +7219,7 @@ VisibilityOrientation=0
 ImageMap2D=MITR01_A031
 
 [TILE235]
-Model=TTD02_a04_01
+Model=ttd02_a04_01
 WalkMesh=msb01
 TopLeft=Desert
 TopLeftHeight=1
@@ -7249,7 +7249,7 @@ VisibilityOrientation=270
 ImageMap2D=MITR01_A04
 
 [TILE236]
-Model=TTD02_a03_02
+Model=ttd02_a03_02
 WalkMesh=msb01
 TopLeft=Desert
 TopLeftHeight=0
@@ -7279,7 +7279,7 @@ VisibilityOrientation=0
 ImageMap2D=MITR01_A032
 
 [TILE237]
-Model=TTD02_a04_02
+Model=ttd02_a04_02
 WalkMesh=msb01
 TopLeft=Desert
 TopLeftHeight=1
@@ -7309,7 +7309,7 @@ VisibilityOrientation=270
 ImageMap2D=MITR01_A04
 
 [TILE238]
-Model=TTD02_a04_03
+Model=ttd02_a04_03
 WalkMesh=msb01
 TopLeft=Desert
 TopLeftHeight=1
@@ -7339,7 +7339,7 @@ VisibilityOrientation=270
 ImageMap2D=MITR01_A04
 
 [TILE239]
-Model=TTD02_g07_01
+Model=ttd02_g07_01
 WalkMesh=msb01
 TopLeft=Desert
 TopLeftHeight=0
@@ -7362,14 +7362,14 @@ AnimLoop2=1
 AnimLoop3=1
 Doors=0
 Sounds=0
-PathNode=F
+PathNode=f
 Orientation=0
 VisibilityNode=A
 VisibilityOrientation=0
 ImageMap2D=MITR01_H07
 
 [TILE240]
-Model=TTD02_g08_01
+Model=ttd02_g08_01
 WalkMesh=msb01
 TopLeft=Desert
 TopLeftHeight=0
@@ -7399,7 +7399,7 @@ VisibilityOrientation=0
 ImageMap2D=MITR01_H08
 
 [TILE241]
-Model=TTD02_g06_01
+Model=ttd02_g06_01
 WalkMesh=msb01
 TopLeft=Desert
 TopLeftHeight=0
@@ -7429,7 +7429,7 @@ VisibilityOrientation=0
 ImageMap2D=MITR01_H09
 
 [TILE242]
-Model=TTD02_h17_01
+Model=ttd02_h17_01
 WalkMesh=msb01
 TopLeft=Desert
 TopLeftHeight=0
@@ -7452,14 +7452,14 @@ AnimLoop2=1
 AnimLoop3=1
 Doors=0
 Sounds=0
-PathNode=F
+PathNode=f
 Orientation=0
 VisibilityNode=A
 VisibilityOrientation=0
 ImageMap2D=MITR01_H17
 
 [TILE243]
-Model=TTD02_r10_01
+Model=ttd02_r10_01
 WalkMesh=msb01
 TopLeft=Desert
 TopLeftHeight=1
@@ -7498,7 +7498,7 @@ Z=-0.44
 Orientation=0.0
 
 [TILE244]
-Model=TTD02_F02_01
+Model=ttd02_f02_01
 WalkMesh=msb01
 TopLeft=Desert
 TopLeftHeight=0
@@ -7525,10 +7525,10 @@ PathNode=C
 Orientation=0
 VisibilityNode=A
 VisibilityOrientation=0
-ImageMap2D=MITR01_F02
+ImageMap2D=MITR01_f02
 
 [TILE245]
-Model=TTD02_F04_01
+Model=ttd02_f04_01
 WalkMesh=msb01
 TopLeft=Desert
 TopLeftHeight=1
@@ -7555,10 +7555,10 @@ PathNode=B
 Orientation=270
 VisibilityNode=A
 VisibilityOrientation=270
-ImageMap2D=MITR01_F04
+ImageMap2D=MITR01_f04
 
 [TILE246]
-Model=TTD02_F02_02
+Model=ttd02_f02_02
 WalkMesh=msb01
 TopLeft=Desert
 TopLeftHeight=0
@@ -7585,10 +7585,10 @@ PathNode=C
 Orientation=0
 VisibilityNode=A
 VisibilityOrientation=0
-ImageMap2D=MITR01_F02
+ImageMap2D=MITR01_f02
 
 [TILE247]
-Model=TTD02_F03_01
+Model=ttd02_f03_01
 WalkMesh=msb01
 TopLeft=Desert
 TopLeftHeight=1
@@ -7615,10 +7615,10 @@ PathNode=O
 Orientation=0
 VisibilityNode=A
 VisibilityOrientation=0
-ImageMap2D=MITR01_F03
+ImageMap2D=MITR01_f03
 
 [TILE248]
-Model=TTD02_F01_01
+Model=ttd02_f01_01
 WalkMesh=msb01
 TopLeft=Desert
 TopLeftHeight=1
@@ -7645,10 +7645,10 @@ PathNode=B
 Orientation=0
 VisibilityNode=A
 VisibilityOrientation=0
-ImageMap2D=MITR01_F01
+ImageMap2D=MITR01_f01
 
 [TILE249]
-Model=TTD02_F02_03
+Model=ttd02_f02_03
 WalkMesh=msb01
 TopLeft=Desert
 TopLeftHeight=0
@@ -7675,10 +7675,10 @@ PathNode=C
 Orientation=0
 VisibilityNode=A
 VisibilityOrientation=0
-ImageMap2D=MITR01_F10
+ImageMap2D=MITR01_f10
 
 [TILE250]
-Model=TTD02_F02_04
+Model=ttd02_f02_04
 WalkMesh=msb01
 TopLeft=Desert
 TopLeftHeight=0
@@ -7705,10 +7705,10 @@ PathNode=C
 Orientation=0
 VisibilityNode=A
 VisibilityOrientation=0
-ImageMap2D=MITR01_F11
+ImageMap2D=MITR01_f11
 
 [TILE251]
-Model=TTD02_F05_01
+Model=ttd02_f05_01
 WalkMesh=msb01
 TopLeft=Desert
 TopLeftHeight=0
@@ -7735,10 +7735,10 @@ PathNode=C
 Orientation=0
 VisibilityNode=A
 VisibilityOrientation=0
-ImageMap2D=MITR01_F08
+ImageMap2D=MITR01_f08
 
 [TILE252]
-Model=TTD02_F05_02
+Model=ttd02_f05_02
 WalkMesh=msb01
 TopLeft=Desert
 TopLeftHeight=1
@@ -7765,10 +7765,10 @@ PathNode=C
 Orientation=0
 VisibilityNode=A
 VisibilityOrientation=0
-ImageMap2D=MITR01_F05
+ImageMap2D=MITR01_f05
 
 [TILE253]
-Model=TTD02_F06_01
+Model=ttd02_f06_01
 WalkMesh=msb01
 TopLeft=Desert
 TopLeftHeight=0
@@ -7795,10 +7795,10 @@ PathNode=B
 Orientation=270
 VisibilityNode=A
 VisibilityOrientation=270
-ImageMap2D=MITR01_F06
+ImageMap2D=MITR01_f06
 
 [TILE254]
-Model=TTD02_F06_02
+Model=ttd02_f06_02
 WalkMesh=msb01
 TopLeft=Desert
 TopLeftHeight=0
@@ -7825,10 +7825,10 @@ PathNode=B
 Orientation=270
 VisibilityNode=A
 VisibilityOrientation=270
-ImageMap2D=MITR01_F06
+ImageMap2D=MITR01_f06
 
 [TILE255]
-Model=TTD02_F07_01
+Model=ttd02_f07_01
 WalkMesh=msb01
 TopLeft=Desert
 TopLeftHeight=0
@@ -7855,10 +7855,10 @@ PathNode=C
 Orientation=0
 VisibilityNode=A
 VisibilityOrientation=0
-ImageMap2D=MITR01_F07
+ImageMap2D=MITR01_f07
 
 [TILE256]
-Model=TTD02_F08_01
+Model=ttd02_f08_01
 WalkMesh=msb01
 TopLeft=Desert
 TopLeftHeight=0
@@ -7885,10 +7885,10 @@ PathNode=B
 Orientation=270
 VisibilityNode=A
 VisibilityOrientation=270
-ImageMap2D=MITR01_F14
+ImageMap2D=MITR01_f14
 
 [TILE257]
-Model=TTD02_F08_02
+Model=ttd02_f08_02
 WalkMesh=msb01
 TopLeft=Desert
 TopLeftHeight=0
@@ -7915,10 +7915,10 @@ PathNode=B
 Orientation=270
 VisibilityNode=A
 VisibilityOrientation=270
-ImageMap2D=MITR01_F14
+ImageMap2D=MITR01_f14
 
 [TILE258]
-Model=TTD02_F08_03
+Model=ttd02_f08_03
 WalkMesh=msb01
 TopLeft=Desert
 TopLeftHeight=0
@@ -7945,10 +7945,10 @@ PathNode=B
 Orientation=270
 VisibilityNode=A
 VisibilityOrientation=270
-ImageMap2D=MITR01_F13
+ImageMap2D=MITR01_f13
 
 [TILE259]
-Model=TTD02_F08_04
+Model=ttd02_f08_04
 WalkMesh=msb01
 TopLeft=Desert
 TopLeftHeight=0
@@ -7975,10 +7975,10 @@ PathNode=B
 Orientation=270
 VisibilityNode=A
 VisibilityOrientation=270
-ImageMap2D=MITR01_F13
+ImageMap2D=MITR01_f13
 
 [TILE260]
-Model=TTD02_F03_02
+Model=ttd02_f03_02
 WalkMesh=msb01
 TopLeft=Desert
 TopLeftHeight=0
@@ -8008,7 +8008,7 @@ VisibilityOrientation=0
 ImageMap2D=MITR01_f15
 
 [TILE261]
-Model=TTD02_F04_05
+Model=ttd02_f04_05
 WalkMesh=msb01
 TopLeft=Desert
 TopLeftHeight=1
@@ -8035,7 +8035,7 @@ PathNode=B
 Orientation=270
 VisibilityNode=A
 VisibilityOrientation=270
-ImageMap2D=MITR01_F04
+ImageMap2D=MITR01_f04
 
 [TILE262]
 Model=ttd01_obi00
