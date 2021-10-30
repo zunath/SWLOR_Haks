@@ -1,0 +1,17 @@
+// Shaders
+customshaderVS vslit_sm_nm
+customshaderFS fslit_hair_nm
+
+// Renderhints
+renderhint NormalAndSpecMapped
+
+// Textures
+
+texture1 pfh0_head065_n
+texture2 pfh0_head065_s
+texture3 pfh0_head065_a
+
+// Parameters
+parameter float fAlphaThreshold 0.3
+parameter float fAlphaNearBias 100 
+parameter float fAlphaFarBias 500
