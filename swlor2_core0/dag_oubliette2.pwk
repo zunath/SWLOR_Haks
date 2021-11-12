@@ -1,0 +1,43 @@
+# Exported from NWmax 0.8 b50 at 1/9/2006 11:39:40 PM
+# pwk file
+#
+#NWmax PWKMESH  ASCII
+node trimesh NoWalk
+  parent dag_oubliette2_pwk
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.52549 0.231373 0.0313726 
+  ambient 0.0 0.0 0.0 
+  diffuse 0.00784314 0.00784314 0.00784314 
+  specular 0.0 0.0 0.0 
+  shininess 20.0
+  bitmap black
+  verts 8
+    0.579828 -0.59397 0.0
+    -0.579828 -0.59397 0.0
+    0.0 -0.84 0.0
+    0.82 0.0 0.0
+    -0.82 0.0 0.0
+    0.579828 0.59397 0.0
+    -0.579828 0.59397 0.0
+    0.0 0.84 0.0
+  faces 6
+    0 1 2  0  0 0 0  7
+    3 1 0  0  0 0 0  7
+    3 4 1  0  0 0 0  7
+    5 4 3  0  0 0 0  7
+    5 6 4  0  0 0 0  7
+    5 7 6  0  0 0 0  7
+endnode
+node dummy oub_pwk_use01
+  parent dag_oubliette2_pwk
+  position -0.00141243 0.667623 0.159263
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.776471 0.878431 0.341176 
+endnode
+node dummy oub_pwk_use02
+  parent dag_oubliette2_pwk
+  position -0.00141249 -0.687464 0.159263
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.776471 0.878431 0.341176 
+endnode

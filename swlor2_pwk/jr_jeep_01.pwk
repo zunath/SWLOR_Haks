@@ -1,0 +1,107 @@
+#MAXMODEL ASCII
+# model: jeep_01
+filedependancy jeep_01 NULL.mlk
+newmodel jeep_01
+setsupermodel jeep_01 NULL
+classification Character
+setanimationscale 0
+
+#MAXGEOM ASCII
+beginmodelgeom jeep_01
+node dummy jeep_01
+  parent NULL
+endnode
+node dummy rootdummy
+  parent jeep_01
+  position 0 0 0
+  orientation 0 0 0 0
+  wirecolor 1 1 1
+endnode
+node trimesh Box01
+  parent rootdummy
+  position 0 0 0
+  orientation 1 0 0 0
+  wirecolor 1 1 1
+  ambient 0.300000 0.300000 0.300000 1.000000
+  diffuse 1.000000 1.000000 1.000000 1.000000
+  specular 0.000000 0.000000 0.000000 1.000000
+  shininess 0.000000
+    bitmap NULL
+    verts 20
+     1.346554 -2.115005 0.437500 
+     1.346554 -2.113995 -0.000505 
+     1.346554 3.509995 0.437500 
+     1.346554 3.511005 -0.000505 
+     1.346554 3.509995 0.437500 
+     1.346554 3.511005 -0.000505 
+     -1.296304 3.509995 0.437500 
+     -1.296304 3.511005 -0.000505 
+     -1.296304 3.509995 0.437500 
+     -1.296304 3.511005 -0.000505 
+     -1.296304 -2.115005 0.437500 
+     -1.296304 -2.113995 -0.000505 
+     -1.296304 -2.115005 0.437500 
+     -1.296304 -2.113995 -0.000505 
+     1.346554 -2.115005 0.437500 
+     1.346554 -2.113995 -0.000505 
+     1.346554 -2.115005 0.437500 
+     1.346554 3.509995 0.437500 
+     1.346554 -2.113995 -0.000505 
+     1.346554 3.511005 -0.000505 
+    faces 12
+     0 1 2  1  0 1 2  0
+     1 3 2  1  1 3 2  0
+     4 5 6  1  4 5 6  0
+     5 7 6  1  5 7 6  0
+     8 9 10  1  8 9 10  0
+     9 11 10  1  9 11 10  0
+     12 13 14  1  12 13 14  0
+     13 15 14  1  13 15 14  0
+     12 16 6  1  12 16 6  0
+     16 17 6  1  16 17 6  0
+     18 13 19  1  18 13 19  0
+     13 7 19  1  13 7 19  0
+    tverts 20
+     0.000000 0.000000 0.0 
+     0.000000 1.000000 0.0 
+     1.000000 0.000000 0.0 
+     1.000000 1.000000 0.0 
+     0.000000 0.000000 0.0 
+     0.000000 1.000000 0.0 
+     1.000000 0.000000 0.0 
+     1.000000 1.000000 0.0 
+     0.000000 0.000000 0.0 
+     0.000000 1.000000 0.0 
+     1.000000 0.000000 0.0 
+     1.000000 1.000000 0.0 
+     0.000000 0.000000 0.0 
+     0.000000 1.000000 0.0 
+     1.000000 0.000000 0.0 
+     1.000000 1.000000 0.0 
+     0.000000 1.000000 0.0 
+     1.000000 1.000000 0.0 
+     0.000000 0.000000 0.0 
+     1.000000 0.000000 0.0 
+endnode
+node dummy impact
+  parent Box01
+  position 0 0 0
+  orientation 0 0 0 0
+  wirecolor 1 1 1
+endnode
+node dummy handconjure
+  parent jeep_01
+  position 0 0 0
+  orientation 0 0 0 0
+  wirecolor 1 1 1
+endnode
+node dummy headconjure
+  parent jeep_01
+  position 0 0 0
+  orientation 0 0 0 0
+  wirecolor 1 1 1
+endnode
+endmodelgeom jeep_01
+
+donemodel jeep_01
+

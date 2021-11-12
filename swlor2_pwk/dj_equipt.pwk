@@ -1,0 +1,30 @@
+#Exported from 3ds max by MDL Plug-in Suite 1.0b
+#http://www.bricksbuilder.com/nwn/utils/
+#MAXMODEL ASCII
+# model: dj_equipt
+filedependancy Unknown
+node trimesh Plane01
+  parent dj_equipt_pwk
+  position -1.79906 1.86472 0
+  orientation 0 0 0 0
+  wirecolor 0.878906 0.878906 0.878906
+  ambient 0.34375 0.558594 0.878906
+  diffuse 0.34375 0.558594 0.878906
+  specular 0 0 0
+  shininess 1
+  bitmap NULL
+  verts 4
+    2.18178 -1.2755 0
+    1.09089 -1.2755 0
+    2.18178 -2.551 0
+    1.09089 -2.551 0
+  faces 2
+    2 0 3  0  0 0 0  7
+    1 3 0  0  0 0 0  7
+endnode
+node dummy X07_pwk_use01
+  parent dj_equipt_pwk
+  position 0.809024 0.745804 0.0436516
+  orientation 0 0 -1 -3.14159
+  wirecolor 0.878906 0.878906 0.878906
+endnode

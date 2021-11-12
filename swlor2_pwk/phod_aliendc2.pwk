@@ -1,0 +1,47 @@
+#MAXDOOR ASCII
+# model: phod_aliendc2_pwk 
+filedependancy PX2_placeables01.max
+node trimesh phod_aliendc2_wg 
+  parent phod_aliendc2_pwk 
+  position -0.04 0.01 0.0
+  orientation  0.0 0.0 -1.0  -3.14159
+  wirecolor 0.52549 0.431373 0.0313726  
+  multimaterial 18 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+    bitmap NULL
+    verts 6
+     -0.273257 -0.274983 0.0
+     0.263569 -0.274983 0.0
+     -0.698995 0.519483 0.0
+     0.263569 0.519483 0.0
+     -0.273257 0.12471 0.0
+     -0.641282 0.310548 0.0
+    faces 4
+     4 0 3  1  0 0 0  7
+     1 3 0  1  0 0 0  7
+     5 4 3  1  0 0 0  7
+     2 5 3  1  0 0 0  7
+endnode
+node dummy aliendc2_pwk_use01 
+  parent phod_aliendc2_pwk 
+  position -3.71106e-007 -1.13892 0.0
+  orientation  0.0 0.0 -1.0  -3.14159
+  wirecolor 0.54902 0.345098 0.882353  
+endnode

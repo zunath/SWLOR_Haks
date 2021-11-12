@@ -1,0 +1,24 @@
+#MAXDOOR ASCII
+# model: vpl_portal01_PWK 
+filedependancy vpl_portal01.max
+node trimesh zlc_vv2_wg 
+  parent zlc_vv2_pwk 
+  position -0.8 0.0 0.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.52549 0.0235294 0.0235294  
+    bitmap NULL
+    verts 8
+     -0.15 -0.15 0.0
+     0.15 -0.15 0.0
+     -0.15 0.15 0.0
+     0.15 0.15 0.0
+     1.45 -0.15 0.0
+     1.75 -0.15 0.0
+     1.45 0.15 0.0
+     1.75 0.15 0.0
+    faces 4
+     2 0 3  1  0 0 0  1
+     1 3 0  1  0 0 0  1
+     6 4 7  1  0 0 0  1
+     5 7 4  1  0 0 0  1
+endnode

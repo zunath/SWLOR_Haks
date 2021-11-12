@@ -1,0 +1,23 @@
+# Exported from Wayland's NWN Maxscript v0.3b
+# mdl file
+#
+node trimesh plane01
+    parent phod_animst_wolf_pwk
+    diffuse 0.8000 0.8000 0.8000
+    ambient 0.2000 0.2000 0.2000
+    specular 0.0000 0.0000 0.0000
+    render 0
+    bitmap NULL
+    verts 6
+        -2.66173 -0.0340842 0.0
+        -1.3015 -2.74537 0.0
+        1.36383 -2.77294 0.0
+        2.71488 -0.0616566 0.0
+        1.32707 2.72315 0.0
+        -1.38421 2.76911 0.0
+    faces 4
+        4 5 0 0 0 0 0 1
+        1 2 3 0 0 0 0 1
+        0 1 3 0 0 0 0 1
+        4 0 3 0 0 0 0 1
+endnode

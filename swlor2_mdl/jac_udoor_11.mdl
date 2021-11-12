@@ -1,0 +1,1025 @@
+#MAXMODEL ASCII
+# model: TTR_UDOOR_09
+filedependancy TTR_UDOOR_09.max
+newmodel TTR_UDOOR_09
+setsupermodel TTR_UDOOR_09 NULL
+classification DOOR
+setanimationscale 1
+#MAXGEOM  ASCII
+beginmodelgeom TTR_UDOOR_09
+node dummy TTR_UDOOR_09
+  parent NULL
+endnode
+node dummy TTR_UDOOR_09grnd
+  parent TTR_UDOOR_09
+  position 0 0 0
+  orientation 0 0 0 0
+endnode
+node emitter fire!07
+  parent TTR_UDOOR_09
+  p2p 0
+  p2p_sel 1
+  affectedByWind 0
+  m_isTinted 1
+  bounce 0
+  random 0
+  inherit 1
+  inheritvel 0
+  inherit_local 0
+  inherit_part 0
+  splat 0
+  renderorder 0
+  spawntype 0
+  update Explosion
+  render Normal
+  blend Normal
+  texture fxpa_smoke01
+  xgrid 4
+  ygrid 4
+  loop 0
+  deadspace 0
+  twosidedtex 1
+  blastRadius 0.2
+  blastLength 1
+  position -0.00162842 0.0288672 0.928905
+  orientation -1 0 0 -1.5708
+  colorStart 0.47451 0.439216 0.364706
+  colorEnd 0.819608 0.796079 0.709804
+  alphaStart 1
+  alphaEnd 0
+  sizeStart 4
+  sizeEnd 1
+  sizeStart_y 0
+  sizeEnd_y 0
+  frameStart 0
+  frameEnd 24
+  birthrate 10
+  lifeExp 2.5
+  mass 0.09
+  spread 2.96706
+  particleRot 0.5
+  velocity 2
+  randvel 0.5
+  fps 10
+  xsize 100
+  ysize 99
+  bounce_co 0
+  blurlength 10
+  lightningDelay 0
+  lightningRadius 0
+  lightningScale 0
+  p2p_bezier2 0
+  p2p_bezier3 0
+  combinetime 0
+  drag 0
+  grav 0
+  threshold 0
+endnode
+node dummy TTR_UDoor_09head
+  parent TTR_UDOOR_09
+  position 0 0 2.50064
+  orientation 0 0 0 0
+endnode
+node dummy TTR_UDoor09hhit
+  parent TTR_UDOOR_09
+  position 0 0 2.17507
+  orientation 0 0 0 0
+endnode
+node dummy TTR_UDoor09impc
+  parent TTR_UDOOR_09
+  position 0 0 1.63648
+  orientation 0 0 0 0
+endnode
+node dummy TIN01_B13_03
+  parent TTR_UDOOR_09
+  position -0.999999 0 0
+  orientation 0 0 -1 -1.5708
+endnode
+node trimesh Door
+  parent TIN01_B13_03
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 10
+  bitmap ttr01_door01
+  verts 18
+      -0.0729958   -0.4999990    2.8499999
+       0.0970936   -0.4999990    2.8499999
+       0.0970902   -0.1499990    2.5000000
+      -0.0729997   -0.1499990    2.5000000
+       0.0970906   -0.0062294    2.0000000
+      -0.0730000   -0.0062287    2.0000000
+       0.0970800   -1.5000000    2.8499999
+       0.0970786   -1.8500000    2.5000000
+       0.0970780   -2.0000000    2.0000000
+      -0.0729931   -0.9999990    3.0000000
+       0.0970769   -0.9999990    3.0000000
+      -0.0729900   -1.5000000    2.8499999
+      -0.0729914   -1.8500000    2.5000000
+      -0.0729919   -2.0000000    2.0000000
+      -0.0729920   -2.0000000    0.0000000
+       0.0970780   -2.0000000    0.0000000
+      -0.0729939    0.0000000    0.0000000
+       0.0970955    0.0000000    0.0000000
+  tverts 44
+       0.5355630    0.9184840  0
+       0.4505180    0.9184840  0
+       0.4505200    0.8091090  0
+       0.5355650    0.8091090  0
+       0.4505200    0.6528590  0
+       0.5355650    0.6528590  0
+       0.2475180    0.9184840  0
+       0.0725177    0.8091090  0
+       0.0006327    0.6528590  0
+       0.9274820    0.8091090  0
+       0.7524820    0.9184840  0
+       0.9993670    0.6528590  0
+       0.2524820    0.9184840  0
+       0.0774819    0.8091090  0
+       0.0024820    0.6528590  0
+       0.4505180    0.2475180  0
+       0.5355630    0.2475180  0
+       0.5355620    0.4975180  0
+       0.4505270    0.4975180  0
+       0.5355600    0.7475180  0
+       0.4505250    0.7475180  0
+       0.4644400    0.9184840  0
+       0.4644390    0.8091090  0
+       0.5494740    0.8091090  0
+       0.5494750    0.9184840  0
+       0.4644390    0.6528590  0
+       0.5494740    0.6528590  0
+       0.4644390    0.0278588  0
+       0.5494740    0.0278588  0
+       0.5355620    0.0278589  0
+       0.4505170    0.0278587  0
+       0.5494830   -0.0024821  0
+       0.5494740    0.9975180  0
+       0.4644380   -0.0024821  0
+       0.4644390    0.9975180  0
+       0.5024820    0.9653590  0
+       0.0024819    0.0278588  0
+       1.0024800    0.0278587  0
+       0.9975180    0.6528590  0
+       0.7475180    0.9184840  0
+       0.4975180    0.9653590  0
+      -0.0024821    0.0278589  0
+       0.9975180    0.0278588  0
+       0.9225180    0.8091090  0
+  faces 32
+     0  1  2  1   0  1  2   0
+     2  3  0  1   2  3  0   0
+     4  5  3  1   4  5  3   0
+     3  2  4  1   3  2  4   0
+     0  3  5  1   6  7  8   0
+     2  1  4  1   9 10 11   0
+     6  7  8  1  12 13 14   0
+     1  0  9  1  15 16 17   0
+     1  9 10  1  15 17 18   0
+    10 11  6  1  18 19 20   0
+    10  9 11  1  18 17 19   0
+    11 12  7  1  21 22 23   0
+     7  6 11  1  23 24 21   0
+    12 13  8  1  22 25 26   0
+     8  7 12  1  26 23 22   0
+    13 14 15  1  25 27 28   0
+    15  8 13  1  28 26 25   0
+    16  5 17  1  29  5 30   0
+    17  5  4  1  30  5  4   0
+    17 15 16  1  31 32 33   0
+    16 15 14  1  33 32 34   0
+     8  4  6  1  14 11 12   0
+     4  1  6  1  11 10 12   0
+     1 10  6  1  10 35 12   0
+     8 15  4  1  14 36 11   0
+     4 15 17  1  11 36 37   0
+     5 13  0  1   8 38  6   0
+    13 11  0  1  38 39  6   0
+     0 11  9  1   6 39 40   0
+     5 16 13  1   8 41 38   0
+    13 16 14  1  38 41 42   0
+    13 12 11  1  38 43 39   0
+  position 0 0 0
+  orientation 0 0 0 0
+endnode
+node trimesh sam
+  parent TTR_UDOOR_09
+  ambient 0.2 0.2 0.2
+  diffuse 0.8 0.8 0.8
+  specular 0 0 0
+  shininess 1
+  shadow 0
+  transparencyhint 1
+  bitmap NULL
+  verts 24
+      -0.0062038   -0.0100158    2.0000000
+      -0.0062077   -2.0000000    2.0000000
+      -0.0062006   -1.8518900    2.5000000
+      -0.0062039   -0.1518960    2.5000000
+       0.0508923   -2.0000000    2.0000000
+       0.0509031   -0.0062243    2.0000000
+       0.0509063   -1.8481100    2.5000000
+       0.0509030   -0.1481040    2.5000000
+       0.0508923   -2.0000000    0.0000000
+       0.0508942   -1.5000000    0.0000000
+       0.0508962   -1.0000000    0.0000000
+       0.0508981   -0.5000000    0.0000000
+       0.0509001    0.0000000    0.0000000
+       0.0508942   -1.5000000    2.8499999
+       0.0508962   -1.0000000    3.0000000
+       0.0508981   -0.5000000    2.8499999
+      -0.0062077   -2.0000000    0.0000000
+      -0.0062058   -1.5000000    0.0000000
+      -0.0062038   -1.0000000    0.0000000
+      -0.0062019   -0.5000000    0.0000000
+      -0.0061999    0.0000000    0.0000000
+      -0.0062058   -1.5000000    2.8499999
+      -0.0062038   -1.0000000    3.0000000
+      -0.0062019   -0.5000000    2.8499999
+  tverts 6
+       0.0004995    0.0004997  0
+       0.4942700    0.0004995  0
+       0.4942710    0.8763120  0
+       0.0004998    0.8763120  0
+       0.5000000    0.5000000  0
+       0.5000000    0.5000000  0
+  faces 20
+     0  1  2  1  0 1 2   0
+     2  3  0  1  2 3 0   0
+     4  5  6  1  1 0 2   0
+     7  6  5  1  3 2 0   0
+     4  8  5  2  1 4 0   0
+     8  9  5  2  4 5 0   0
+     9 10  5  2  4 5 0   0
+    10 11  5  2  4 5 0   0
+    11 12  5  2  4 5 0   0
+     7 13  6  2  3 4 2   0
+    14 13  7  1  4 5 3   0
+    15 14  7  4  4 5 3   0
+     1  0 16  1  1 0 4   0
+    16  0 17  1  4 0 5   0
+    17  0 18  1  4 0 5   0
+    18  0 19  1  4 0 5   0
+    19  0 20  1  4 0 5   0
+     2 21  3  2  2 4 3   0
+    21 22  3  1  4 5 3   0
+    22 23  3  1  4 5 3   0
+  position -1 0 0
+  orientation 0 0 -1 -1.5708
+  alpha 0
+endnode
+endmodelgeom TTR_UDOOR_09
+
+#MAXANIM ASCII
+newanim opening1 TTR_UDOOR_09
+  length 1
+  transtime 0.25
+  animroot TTR_UDOOR_09
+  node dummy TTR_UDOOR_09
+    parent NULL
+  endnode
+  node dummy TTR_UDOOR_09grnd
+    parent TTR_UDOOR_09
+  endnode
+  node emitter fire!07
+    parent TTR_UDOOR_09
+  endnode
+  node dummy TTR_UDoor_09head
+    parent TTR_UDOOR_09
+  endnode
+  node dummy TTR_UDoor09hhit
+    parent TTR_UDOOR_09
+  endnode
+  node dummy TTR_UDoor09impc
+    parent TTR_UDOOR_09
+  endnode
+  node dummy TIN01_B13_03
+    parent TTR_UDOOR_09
+    positionkey 3
+         0.0000000   -0.9999990    0.0000000    0.0000000
+         0.0333333   -0.9999990    0.0000000    0.0000000
+         1.0000000   -0.9999990    0.0000000    0.0000000
+    orientationkey 10
+         0.0000000   -0.0000000   -0.0000000   -1.0000000   -1.5707999
+         0.0333333   -0.0000000   -0.0000000   -1.0000000   -1.5707999
+         0.3333330   -0.0000000   -0.0000000   -1.0000000   -1.5707999
+         0.4333330   -0.0000000   -0.0000000   -1.0000000   -1.4729900
+         0.5333330   -0.0000000   -0.0000000   -1.0000000   -1.4380800
+         0.7333330   -0.0000000   -0.0000000   -1.0000000   -0.5836580
+         0.7666670   -0.0000000   -0.0000000   -1.0000000   -0.5152470
+         0.8666670   -0.0000000   -0.0000000   -1.0000000   -0.3100140
+         0.9333330   -0.0000000   -0.0000000   -1.0000000   -0.2618000
+         1.0000000   -0.0000000   -0.0000000   -1.0000000   -0.2356200
+  endnode
+  node trimesh Door
+    parent TIN01_B13_03
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh sam
+    parent TTR_UDOOR_09
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+    alphakey 2
+         0.0000000    0.0000000
+         1.0000000    0.0000000
+  endnode
+  node trimesh 01_DWK_wg_closed
+    parent TTR_UDOOR_09
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh 01_DWK_wg_open1
+    parent TTR_UDOOR_09
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh 01_DWK_wg_open2
+    parent TTR_UDOOR_09
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+doneanim opening1 TTR_UDOOR_09
+
+#MAXANIM ASCII
+newanim closing1 TTR_UDOOR_09
+  length 0.666667
+  transtime 0.25
+  animroot TTR_UDOOR_09
+  node dummy TTR_UDOOR_09
+    parent NULL
+  endnode
+  node dummy TTR_UDOOR_09grnd
+    parent TTR_UDOOR_09
+  endnode
+  node emitter fire!07
+    parent TTR_UDOOR_09
+  endnode
+  node dummy TTR_UDoor_09head
+    parent TTR_UDOOR_09
+  endnode
+  node dummy TTR_UDoor09hhit
+    parent TTR_UDOOR_09
+  endnode
+  node dummy TTR_UDoor09impc
+    parent TTR_UDOOR_09
+  endnode
+  node dummy TIN01_B13_03
+    parent TTR_UDOOR_09
+    positionkey 3
+         0.0000000   -0.9999990    0.0000000    0.0000000
+         0.0333333   -0.9999990    0.0000000    0.0000000
+         0.6666670   -0.9999990    0.0000000    0.0000000
+    orientationkey 11
+         0.0000000   -0.0000000   -0.0000000   -1.0000000   -0.2356200
+         0.0333333   -0.0000000   -0.0000000   -1.0000000   -0.2356200
+         0.1000000   -0.0000000   -0.0000000   -1.0000000   -0.2781950
+         0.1666670   -0.0000000   -0.0000000   -1.0000000   -0.3065780
+         0.3000000   -0.0000000   -0.0000000   -1.0000000   -0.5041640
+         0.3666670   -0.0000000   -0.0000000   -1.0000000   -0.6029570
+         0.5000000   -0.0000000   -0.0000000   -1.0000000   -1.5012800
+         0.5666670   -0.0000000   -0.0000000   -1.0000000   -1.5707999
+         0.6000000   -0.0000000   -0.0000000   -1.0000000   -1.5707999
+         0.6333330   -0.0000000   -0.0000000   -1.0000000   -1.5707999
+         0.6666670   -0.0000000   -0.0000000   -1.0000000   -1.5707999
+  endnode
+  node trimesh Door
+    parent TIN01_B13_03
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh sam
+    parent TTR_UDOOR_09
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+    alphakey 4
+         0.0000000    0.0000000
+         0.0333333    0.0000000
+         0.6333330    0.0000000
+         0.6666670    0.0000000
+  endnode
+  node trimesh 01_DWK_wg_closed
+    parent TTR_UDOOR_09
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh 01_DWK_wg_open1
+    parent TTR_UDOOR_09
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh 01_DWK_wg_open2
+    parent TTR_UDOOR_09
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+doneanim closing1 TTR_UDOOR_09
+
+#MAXANIM ASCII
+newanim opening2 TTR_UDOOR_09
+  length 1
+  transtime 0.25
+  animroot TTR_UDOOR_09
+  node dummy TTR_UDOOR_09
+    parent NULL
+  endnode
+  node dummy TTR_UDOOR_09grnd
+    parent TTR_UDOOR_09
+  endnode
+  node emitter fire!07
+    parent TTR_UDOOR_09
+  endnode
+  node dummy TTR_UDoor_09head
+    parent TTR_UDOOR_09
+  endnode
+  node dummy TTR_UDoor09hhit
+    parent TTR_UDOOR_09
+  endnode
+  node dummy TTR_UDoor09impc
+    parent TTR_UDOOR_09
+  endnode
+  node dummy TIN01_B13_03
+    parent TTR_UDOOR_09
+    positionkey 2
+         0.0000000   -0.9999990    0.0000000    0.0000000
+         1.0000000   -0.9999990    0.0000000    0.0000000
+    orientationkey 9
+         0.0000000   -0.0000000   -0.0000000   -1.0000000   -1.5707999
+         0.3333330   -0.0000000   -0.0000000   -1.0000000   -1.5707999
+         0.4333330   -0.0000000   -0.0000000   -1.0000000   -1.6686000
+         0.5333330   -0.0000000   -0.0000000   -1.0000000   -1.7035100
+         0.7333330   -0.0000000   -0.0000000   -1.0000000   -2.5579400
+         0.7666670   -0.0000000   -0.0000000   -1.0000000   -2.6263499
+         0.8666670   -0.0000000   -0.0000000   -1.0000000   -2.8315699
+         0.9333330   -0.0000000   -0.0000000   -1.0000000   -2.8797901
+         1.0000000   -0.0000000   -0.0000000   -1.0000000   -2.9059701
+  endnode
+  node trimesh Door
+    parent TIN01_B13_03
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh sam
+    parent TTR_UDOOR_09
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+    alphakey 2
+         0.0000000    0.0000000
+         1.0000000    0.0000000
+  endnode
+  node trimesh 01_DWK_wg_closed
+    parent TTR_UDOOR_09
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh 01_DWK_wg_open1
+    parent TTR_UDOOR_09
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh 01_DWK_wg_open2
+    parent TTR_UDOOR_09
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+doneanim opening2 TTR_UDOOR_09
+
+#MAXANIM ASCII
+newanim die TTR_UDOOR_09
+  length 0.666667
+  transtime 0
+  animroot TTR_UDOOR_09
+  event 0 detonate
+  node dummy TTR_UDOOR_09
+    parent NULL
+  endnode
+  node dummy TTR_UDOOR_09grnd
+    parent TTR_UDOOR_09
+  endnode
+  node emitter fire!07
+    parent TTR_UDOOR_09
+  endnode
+  node dummy TTR_UDoor_09head
+    parent TTR_UDOOR_09
+  endnode
+  node dummy TTR_UDoor09hhit
+    parent TTR_UDOOR_09
+  endnode
+  node dummy TTR_UDoor09impc
+    parent TTR_UDOOR_09
+  endnode
+  node dummy TIN01_B13_03
+    parent TTR_UDOOR_09
+    positionkey 5
+         0.0000000   -0.9999990    0.0000000    0.0000000
+         0.1000000   -0.8954490    0.0000000   -0.5701520
+         0.1333330   -0.8954490    0.0000000   -0.8191100
+         0.3666670   -0.7211990    0.0000000   -0.9010470
+         0.6666670    0.2628830    1.0864800   -2.8331101
+    orientationkey 6
+         0.0000000   -0.0000000   -0.0000000   -1.0000000   -1.5707999
+         0.1000000   -0.0700964   -0.0906631   -0.9934117   -1.4399298
+         0.1333330   -0.0700962   -0.0906634   -0.9934116   -1.4399298
+         0.2666670   -0.0711772    0.0235461   -0.9971858   -1.4857000
+         0.3333330   -0.1055410    0.0251409   -0.9940971   -1.5139900
+         0.6666670   -0.3263892    0.3624912   -0.8729663   -1.6017399
+  endnode
+  node trimesh Door
+    parent TIN01_B13_03
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh sam
+    parent TTR_UDOOR_09
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+    alpha 0
+  endnode
+  node trimesh 01_DWK_wg_closed
+    parent TTR_UDOOR_09
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh 01_DWK_wg_open1
+    parent TTR_UDOOR_09
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh 01_DWK_wg_open2
+    parent TTR_UDOOR_09
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+doneanim die TTR_UDOOR_09
+
+#MAXANIM ASCII
+newanim closing2 TTR_UDOOR_09
+  length 0.633333
+  transtime 0.25
+  animroot TTR_UDOOR_09
+  node dummy TTR_UDOOR_09
+    parent NULL
+  endnode
+  node dummy TTR_UDOOR_09grnd
+    parent TTR_UDOOR_09
+  endnode
+  node emitter fire!07
+    parent TTR_UDOOR_09
+  endnode
+  node dummy TTR_UDoor_09head
+    parent TTR_UDOOR_09
+  endnode
+  node dummy TTR_UDoor09hhit
+    parent TTR_UDOOR_09
+  endnode
+  node dummy TTR_UDoor09impc
+    parent TTR_UDOOR_09
+  endnode
+  node dummy TIN01_B13_03
+    parent TTR_UDOOR_09
+    positionkey 2
+         0.0000000   -0.9999990    0.0000000    0.0000000
+         0.0333333   -0.9999990    0.0000000    0.0000000
+    orientationkey 10
+         0.0000000   -0.0000000   -0.0000000   -1.0000000   -2.9059701
+         0.0333333   -0.0000000   -0.0000000   -1.0000000   -2.9059701
+         0.1000000   -0.0000000   -0.0000000   -1.0000000   -2.8634000
+         0.1666670   -0.0000000   -0.0000000   -1.0000000   -2.8350101
+         0.3000000   -0.0000000   -0.0000000   -1.0000000   -2.6374400
+         0.3666670   -0.0000000   -0.0000000   -1.0000000   -2.5386300
+         0.5000000   -0.0000000   -0.0000000   -1.0000000   -1.6403100
+         0.5666670   -0.0000000   -0.0000000   -1.0000000   -1.5707999
+         0.6000000   -0.0000000   -0.0000000   -1.0000000   -1.5707999
+         0.6333330   -0.0000000   -0.0000000   -1.0000000   -1.5707999
+  endnode
+  node trimesh Door
+    parent TIN01_B13_03
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh sam
+    parent TTR_UDOOR_09
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+    alphakey 3
+         0.0000000    0.0000000
+         0.0333333    0.0000000
+         0.6333330    0.0000000
+  endnode
+  node trimesh 01_DWK_wg_closed
+    parent TTR_UDOOR_09
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh 01_DWK_wg_open1
+    parent TTR_UDOOR_09
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh 01_DWK_wg_open2
+    parent TTR_UDOOR_09
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+doneanim closing2 TTR_UDOOR_09
+
+#MAXANIM ASCII
+newanim closed TTR_UDOOR_09
+  length 0.0333333
+  transtime 0.25
+  animroot TTR_UDOOR_09
+  node dummy TTR_UDOOR_09
+    parent NULL
+  endnode
+  node dummy TTR_UDOOR_09grnd
+    parent TTR_UDOOR_09
+  endnode
+  node emitter fire!07
+    parent TTR_UDOOR_09
+  endnode
+  node dummy TTR_UDoor_09head
+    parent TTR_UDOOR_09
+  endnode
+  node dummy TTR_UDoor09hhit
+    parent TTR_UDOOR_09
+  endnode
+  node dummy TTR_UDoor09impc
+    parent TTR_UDOOR_09
+  endnode
+  node dummy TIN01_B13_03
+    parent TTR_UDOOR_09
+    positionkey 2
+         0.0000000   -0.9999990    0.0000000    0.0000000
+         0.0333333   -0.9999990    0.0000000    0.0000000
+    orientationkey 2
+         0.0000000   -0.0000000   -0.0000000   -1.0000000   -1.5707999
+         0.0333333   -0.0000000   -0.0000000   -1.0000000   -1.5707999
+  endnode
+  node trimesh Door
+    parent TIN01_B13_03
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh sam
+    parent TTR_UDOOR_09
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+    alpha 0
+  endnode
+  node trimesh 01_DWK_wg_closed
+    parent TTR_UDOOR_09
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh 01_DWK_wg_open1
+    parent TTR_UDOOR_09
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh 01_DWK_wg_open2
+    parent TTR_UDOOR_09
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+doneanim closed TTR_UDOOR_09
+
+#MAXANIM ASCII
+newanim opened2 TTR_UDOOR_09
+  length 0.0333333
+  transtime 0.25
+  animroot TTR_UDOOR_09
+  node dummy TTR_UDOOR_09
+    parent NULL
+  endnode
+  node dummy TTR_UDOOR_09grnd
+    parent TTR_UDOOR_09
+  endnode
+  node emitter fire!07
+    parent TTR_UDOOR_09
+  endnode
+  node dummy TTR_UDoor_09head
+    parent TTR_UDOOR_09
+  endnode
+  node dummy TTR_UDoor09hhit
+    parent TTR_UDOOR_09
+  endnode
+  node dummy TTR_UDoor09impc
+    parent TTR_UDOOR_09
+  endnode
+  node dummy TIN01_B13_03
+    parent TTR_UDOOR_09
+    positionkey 2
+         0.0000000   -0.9999990    0.0000000    0.0000000
+         0.0333333   -0.9999990    0.0000000    0.0000000
+    orientationkey 2
+         0.0000000   -0.0000000   -0.0000000   -1.0000000   -2.9059701
+         0.0333333   -0.0000000   -0.0000000   -1.0000000   -2.9059701
+  endnode
+  node trimesh Door
+    parent TIN01_B13_03
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh sam
+    parent TTR_UDOOR_09
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+    alphakey 2
+         0.0000000    0.0000000
+         0.0333333    0.0000000
+  endnode
+  node trimesh 01_DWK_wg_closed
+    parent TTR_UDOOR_09
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh 01_DWK_wg_open1
+    parent TTR_UDOOR_09
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh 01_DWK_wg_open2
+    parent TTR_UDOOR_09
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+doneanim opened2 TTR_UDOOR_09
+
+#MAXANIM ASCII
+newanim opened1 TTR_UDOOR_09
+  length 0.0333333
+  transtime 0.25
+  animroot TTR_UDOOR_09
+  node dummy TTR_UDOOR_09
+    parent NULL
+  endnode
+  node dummy TTR_UDOOR_09grnd
+    parent TTR_UDOOR_09
+  endnode
+  node emitter fire!07
+    parent TTR_UDOOR_09
+  endnode
+  node dummy TTR_UDoor_09head
+    parent TTR_UDOOR_09
+  endnode
+  node dummy TTR_UDoor09hhit
+    parent TTR_UDOOR_09
+  endnode
+  node dummy TTR_UDoor09impc
+    parent TTR_UDOOR_09
+  endnode
+  node dummy TIN01_B13_03
+    parent TTR_UDOOR_09
+    positionkey 2
+         0.0000000   -0.9999990    0.0000000    0.0000000
+         0.0333333   -0.9999990    0.0000000    0.0000000
+    orientationkey 2
+         0.0000000   -0.0000000   -0.0000000   -1.0000000   -0.2356200
+         0.0333333   -0.0000000   -0.0000000   -1.0000000   -0.2356200
+  endnode
+  node trimesh Door
+    parent TIN01_B13_03
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh sam
+    parent TTR_UDOOR_09
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+    alphakey 2
+         0.0000000    0.0000000
+         0.0333333    0.0000000
+  endnode
+  node trimesh 01_DWK_wg_closed
+    parent TTR_UDOOR_09
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh 01_DWK_wg_open1
+    parent TTR_UDOOR_09
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh 01_DWK_wg_open2
+    parent TTR_UDOOR_09
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+doneanim opened1 TTR_UDOOR_09
+
+#MAXANIM ASCII
+newanim trans TTR_UDOOR_09
+  length 0.0333333
+  transtime 0.25
+  animroot TTR_UDOOR_09
+  node dummy TTR_UDOOR_09
+    parent NULL
+  endnode
+  node dummy TTR_UDOOR_09grnd
+    parent TTR_UDOOR_09
+  endnode
+  node emitter fire!07
+    parent TTR_UDOOR_09
+  endnode
+  node dummy TTR_UDoor_09head
+    parent TTR_UDOOR_09
+  endnode
+  node dummy TTR_UDoor09hhit
+    parent TTR_UDOOR_09
+  endnode
+  node dummy TTR_UDoor09impc
+    parent TTR_UDOOR_09
+  endnode
+  node dummy TIN01_B13_03
+    parent TTR_UDOOR_09
+  endnode
+  node trimesh Door
+    parent TIN01_B13_03
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh sam
+    parent TTR_UDOOR_09
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+    alphakey 2
+         0.0000000    0.2500000
+         0.0333333    0.2500000
+  endnode
+  node trimesh 01_DWK_wg_closed
+    parent TTR_UDOOR_09
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh 01_DWK_wg_open1
+    parent TTR_UDOOR_09
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh 01_DWK_wg_open2
+    parent TTR_UDOOR_09
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+doneanim trans TTR_UDOOR_09
+
+#MAXANIM ASCII
+newanim dead TTR_UDOOR_09
+  length 0.0333333
+  transtime 0
+  animroot TTR_UDOOR_09
+  node dummy TTR_UDOOR_09
+    parent NULL
+  endnode
+  node dummy TTR_UDOOR_09grnd
+    parent TTR_UDOOR_09
+  endnode
+  node emitter fire!07
+    parent TTR_UDOOR_09
+  endnode
+  node dummy TTR_UDoor_09head
+    parent TTR_UDOOR_09
+  endnode
+  node dummy TTR_UDoor09hhit
+    parent TTR_UDOOR_09
+  endnode
+  node dummy TTR_UDoor09impc
+    parent TTR_UDOOR_09
+  endnode
+  node dummy TIN01_B13_03
+    parent TTR_UDOOR_09
+    positionkey 2
+         0.0000000    0.2628830    1.0864800   -2.8331101
+         0.0333333    0.2628830    1.0864800   -2.8331101
+    orientationkey 2
+         0.0000000   -0.3263892    0.3624912   -0.8729663   -1.6017399
+         0.0333333   -0.3263889    0.3624908   -0.8729666   -1.6017400
+  endnode
+  node trimesh Door
+    parent TIN01_B13_03
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh sam
+    parent TTR_UDOOR_09
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh 01_DWK_wg_closed
+    parent TTR_UDOOR_09
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh 01_DWK_wg_open1
+    parent TTR_UDOOR_09
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node trimesh 01_DWK_wg_open2
+    parent TTR_UDOOR_09
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+doneanim dead TTR_UDOOR_09
+
+donemodel TTR_UDOOR_09

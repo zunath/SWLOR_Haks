@@ -1,0 +1,1525 @@
+#MAXMODEL ASCII
+# model: t1doorc5
+filedependancy t1doorc5.max
+newmodel t1doorc5
+setsupermodel t1doorc5 NULL
+classification door
+setanimationscale 1
+#MAXGEOM  ASCII
+beginmodelgeom t1doorc5
+node dummy t1doorc5
+  parent NULL
+  #part-number 0
+endnode
+node dummy TIN01_B13_05
+  parent t1doorc5
+  #part-number 1
+  position -1 0 -2.44141006e-006
+  orientation 0 0 -1 -1.57079995
+endnode
+node trimesh Box07
+  parent TIN01_B13_05
+  #part-number 2
+  ambient 0.992156982 0.992156982 0.992156982
+  diffuse 0.992156982 0.992156982 0.992156982
+  specular 0.0496077985 0.0496077985 0.0496077985
+  shininess 26
+  bitmap DR_e1
+  verts 8
+    -1 -0.100000001 0
+    -1 0.100000001 0
+    1 0.100000001 0
+    1 -0.100000001 0
+    -1 -0.100000001 2.99000001
+    1 -0.100000001 2.99000001
+    1 0.100000001 2.99000001
+    -1 0.100000001 2.99000001
+  tverts 14
+    0.000499517017 0.000499606016 0
+    0.000499517017 0.000499606016 0
+    0.494269997 0.000499486981 0
+    0.494269997 0.000499486981 0
+    0.000499785005 0.825587988 0
+    0.49427101 0.825586975 0
+    0.49427101 0.869066 0
+    0.000499785005 0.869066 0
+    0.442957997 0.000499486981 0
+    0.49427101 0.873897016 0
+    0.442957997 0.873897016 0
+    0.0478647985 0.000499606016 0
+    0.0478651002 0.873897016 0
+    0.000499785005 0.873897016 0
+  faces 12
+    0 1 2 1 0 1 2 2
+    2 3 0 1 2 3 0 2
+    4 5 6 1 4 5 6 1
+    6 7 4 1 6 7 4 1
+    0 3 5 2 0 2 6 5
+    5 4 0 2 6 7 0 5
+    3 2 6 4 8 2 9 4
+    6 5 3 4 9 10 8 4
+    2 1 7 2 2 0 7 6
+    7 6 2 2 7 6 2 6
+    1 0 4 4 0 11 12 3
+    4 7 1 4 12 13 0 3
+  position 0 -1 2.44141006e-006
+  orientation 0 0 1 -1.57079995
+endnode
+node trimesh Box48
+  parent Box07
+  #part-number 3
+  ambient 0.992156982 0.992156982 0.992156982
+  diffuse 0.992156982 0.992156982 0.992156982
+  specular 0.0496077985 0.0496077985 0.0496077985
+  shininess 26
+  bitmap DR_b1
+  verts 8
+    -0.0414873995 0.0259568002 0
+    -0.0414873995 -0.0548827983 0
+    0.0414873995 -0.0548827983 0
+    0.0414873995 0.0259568002 0
+    0.0414873995 0.0259568002 -0.147018
+    -0.0414873995 0.0259568002 -0.147018
+    0.0414873995 -0.0548827983 -0.147018
+    -0.0414873995 -0.0548827983 -0.147018
+  tverts 4
+    0.0590372011 0.827463984 0
+    0.0590372011 0.64812398 0
+    0.210747004 0.64812398 0
+    0.210747004 0.827463984 0
+  faces 10
+    0 1 2 1 0 1 2 1
+    2 3 0 1 2 3 0 1
+    0 3 4 2 0 3 2 5
+    4 5 0 2 2 1 0 5
+    3 2 6 4 0 3 2 4
+    6 4 3 4 2 1 0 4
+    2 1 7 2 0 3 2 6
+    7 6 2 2 2 1 0 6
+    1 0 5 4 0 3 2 3
+    5 7 1 4 2 1 0 3
+  position 0.416094005 0.154882997 1.57730997
+  orientation 0 0 0 0
+endnode
+node trimesh Torus02
+  parent Box07
+  #part-number 4
+  ambient 0.992156982 0.992156982 0.992156982
+  diffuse 0.992156982 0.992156982 0.992156982
+  specular 0.0496077985 0.0496077985 0.0496077985
+  shininess 26
+  bitmap DR_e1
+  verts 18
+    0.164017007 0.094695203 -0.038379401
+    0 0.255594999 -0.000156249997
+    0.221351996 0.127796993 -0.000156249997
+    0 0.189390004 -0.038379401
+    0.164017007 0.094695203 0.0380669013
+    0 0.189390004 0.0380669013
+    0.164017007 -0.094695203 -0.038379401
+    0.221351996 -0.127796993 -0.000156249997
+    0.164017007 -0.094695203 0.0380669013
+    0 -0.189390004 -0.038379401
+    0 -0.255594999 -0.000156249997
+    0 -0.189390004 0.0380669013
+    -0.164017007 -0.0946950987 -0.038379401
+    -0.221351996 -0.127796993 -0.000156249997
+    -0.164017007 -0.0946950987 0.0380669013
+    -0.164017007 0.094695203 -0.038379401
+    -0.221351996 0.127796993 -0.000156249997
+    -0.164017007 0.094695203 0.0380669013
+  tverts 28
+    0.944595993 0.225834996 0
+    0.89645499 0.427913994 0
+    0.897563994 0.226656005 0
+    0.943488002 0.427092999 0
+    0.896912992 0.226668 0
+    0.895803988 0.427926004 0
+    0.943944991 0.225847006 0
+    0.942835987 0.42710501 0
+    0.943459988 0.425493985 0
+    0.896426976 0.42631501 0
+    0.942807972 0.425505012 0
+    0.895775974 0.426326007 0
+    0.944567978 0.224235997 0
+    0.89753598 0.225057006 0
+    0.896884978 0.225068003 0
+    0.943916976 0.224246994 0
+    0.943431973 0.423895001 0
+    0.896399021 0.424715996 0
+    0.895748019 0.424726993 0
+    0.942780018 0.423905998 0
+    0.944540977 0.222636998 0
+    0.897508025 0.223458007 0
+    0.896857023 0.223469004 0
+    0.943889022 0.222647995 0
+    0.943404019 0.422295988 0
+    0.89637202 0.423117012 0
+    0.895720005 0.423128009 0
+    0.942752004 0.422307014 0
+  faces 34
+    0 1 2 1 0 1 2 1
+    3 1 0 1 3 1 0 1
+    4 3 0 1 4 3 0 1
+    5 3 4 1 5 3 4 1
+    2 5 4 1 6 5 4 1
+    1 5 2 1 7 5 6 1
+    6 2 7 1 8 2 9 1
+    0 2 6 1 0 2 8 1
+    7 4 8 1 10 4 11 1
+    2 4 7 1 6 4 10 1
+    9 7 10 1 12 9 13 1
+    6 7 9 1 8 9 12 1
+    11 6 9 1 14 8 12 1
+    8 6 11 1 11 8 14 1
+    10 8 11 1 15 11 14 1
+    7 8 10 1 10 11 15 1
+    12 10 13 1 16 13 17 1
+    9 10 12 1 12 13 16 1
+    14 9 12 1 18 12 16 1
+    11 9 14 1 14 12 18 1
+    13 11 14 1 19 14 18 1
+    10 11 13 1 15 14 19 1
+    15 13 16 1 20 17 21 1
+    12 13 15 1 16 17 20 1
+    17 12 15 1 22 16 20 1
+    14 12 17 1 18 16 22 1
+    16 14 17 1 23 18 22 1
+    13 14 16 1 19 18 23 1
+    3 16 1 1 24 21 25 1
+    15 16 3 1 20 21 24 1
+    5 15 3 1 26 20 24 1
+    17 15 5 1 22 20 26 1
+    1 17 5 1 27 22 26 1
+    16 17 1 1 23 22 27 1
+  position 0.419705003 0.140351996 1.31313002
+  orientation -0.577350259 0.577350259 -0.577350259 -2.09439993
+endnode
+node trimesh Torus01
+  parent Box07
+  #part-number 5
+  ambient 0.992156982 0.992156982 0.992156982
+  diffuse 0.992156982 0.992156982 0.992156982
+  specular 0.0496077985 0.0496077985 0.0496077985
+  shininess 26
+  bitmap DR_e1
+  verts 18
+    0 0.255594999 0
+    0.164017007 0.094695203 0.0382231995
+    0.221351996 0.127796993 0
+    0 0.189390004 0.0382231995
+    0.164017007 0.094695203 -0.0382231995
+    0 0.189390004 -0.0382231995
+    0.164017007 -0.094695203 0.0382231995
+    0.221351996 -0.127796993 0
+    0.164017007 -0.094695203 -0.0382231995
+    0 -0.189390004 0.0382231995
+    0 -0.255594999 0
+    0 -0.189390004 -0.0382231995
+    -0.164017007 -0.0946950987 0.0382231995
+    -0.221351996 -0.127796993 0
+    -0.164017007 -0.0946950987 -0.0382231995
+    -0.164017007 0.094695203 0.0382231995
+    -0.221351996 0.127796993 0
+    -0.164017007 0.094695203 -0.0382231995
+  tverts 28
+    0.89645499 0.427913994 0
+    0.944595993 0.225834996 0
+    0.897563994 0.226656005 0
+    0.943488002 0.427092999 0
+    0.896912992 0.226668 0
+    0.895803988 0.427926004 0
+    0.943944991 0.225847006 0
+    0.942835987 0.42710501 0
+    0.943459988 0.425493985 0
+    0.896426976 0.42631501 0
+    0.942807972 0.425505012 0
+    0.895775974 0.426326007 0
+    0.944567978 0.224235997 0
+    0.89753598 0.225057006 0
+    0.896884978 0.225068003 0
+    0.943916976 0.224246994 0
+    0.943431973 0.423895001 0
+    0.896399021 0.424715996 0
+    0.895748019 0.424726993 0
+    0.942780018 0.423905998 0
+    0.944540977 0.222636998 0
+    0.897508025 0.223458007 0
+    0.896857023 0.223469004 0
+    0.943889022 0.222647995 0
+    0.943404019 0.422295988 0
+    0.89637202 0.423117012 0
+    0.895720005 0.423128009 0
+    0.942752004 0.422307014 0
+  faces 34
+    0 1 2 1 0 1 2 1
+    0 3 1 1 0 3 1 1
+    3 4 1 1 3 4 1 1
+    3 5 4 1 3 5 4 1
+    5 2 4 1 5 6 4 1
+    5 0 2 1 5 7 6 1
+    2 6 7 1 2 8 9 1
+    2 1 6 1 2 1 8 1
+    4 7 8 1 4 10 11 1
+    4 2 7 1 4 6 10 1
+    7 9 10 1 9 12 13 1
+    7 6 9 1 9 8 12 1
+    6 11 9 1 8 14 12 1
+    6 8 11 1 8 11 14 1
+    8 10 11 1 11 15 14 1
+    8 7 10 1 11 10 15 1
+    10 12 13 1 13 16 17 1
+    10 9 12 1 13 12 16 1
+    9 14 12 1 12 18 16 1
+    9 11 14 1 12 14 18 1
+    11 13 14 1 14 19 18 1
+    11 10 13 1 14 15 19 1
+    13 15 16 1 17 20 21 1
+    13 12 15 1 17 16 20 1
+    12 17 15 1 16 22 20 1
+    12 14 17 1 16 18 22 1
+    14 16 17 1 18 23 22 1
+    14 13 16 1 18 19 23 1
+    16 3 0 1 21 24 25 1
+    16 15 3 1 21 20 24 1
+    15 5 3 1 20 26 24 1
+    15 17 5 1 20 22 26 1
+    17 0 5 1 22 27 26 1
+    17 16 0 1 22 23 27 1
+  position 0.419705003 -0.140507996 1.31313002
+  orientation -0.577350259 0.577350259 -0.577350259 -2.09439993
+endnode
+node trimesh Box08
+  parent Box07
+  #part-number 6
+  ambient 0.992156982 0.992156982 0.992156982
+  diffuse 0.992156982 0.992156982 0.992156982
+  specular 0.0496077985 0.0496077985 0.0496077985
+  shininess 26
+  bitmap DR_b1
+  verts 8
+    -0.0414873995 0.0259764995 0
+    -0.0414873995 -0.0548629984 0
+    0.0414873995 0.0259764995 0
+    0.0414873995 -0.0548629984 0
+    0.0414873995 -0.0548629984 -0.147018
+    -0.0414873995 -0.0548629984 -0.147018
+    0.0414873995 0.0259764995 -0.147018
+    -0.0414873995 0.0259764995 -0.147018
+  tverts 4
+    0.0590372011 0.64812398 0
+    0.0590372011 0.827463984 0
+    0.210747004 0.64812398 0
+    0.210747004 0.827463984 0
+  faces 10
+    0 1 2 1 0 1 2 1
+    3 2 1 1 3 2 1 1
+    3 1 4 2 3 1 2 5
+    5 4 1 2 0 2 1 5
+    2 3 6 4 3 1 2 4
+    4 6 3 4 0 2 1 4
+    0 2 7 2 3 1 2 6
+    6 7 2 2 0 2 1 6
+    1 0 5 4 3 1 2 3
+    7 5 0 4 0 2 1 3
+  position 0.416094005 -0.125976995 1.57730997
+  orientation 0 0 0 0
+endnode
+node trimesh sam
+  parent t1doorc5
+  #part-number 7
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+  shadow 0
+  transparencyhint 1
+  bitmap NULL
+  verts 8
+    -0.00317644002 -0.00622909982 -1.83104999e-006
+    -0.00317644002 -2.00623012 -1.83104999e-006
+    -0.00317644002 -2.00623012 2.97000003
+    -0.00317644002 -0.00622909982 2.97000003
+    0.0340012982 -2.00623012 -1.83104999e-006
+    0.0340012982 -0.00622909982 -1.83104999e-006
+    0.0340012982 -2.00623012 2.97000003
+    0.0340012982 -0.00622909982 2.97000003
+  tverts 4
+    0.000499517017 0.000499666028 0
+    0.494269997 0.000499546994 0
+    0.49427101 0.876312017 0
+    0.000499814982 0.876312017 0
+  faces 4
+    0 1 2 1 0 1 2 18
+    2 3 0 1 2 3 0 18
+    4 5 6 1 1 0 2 18
+    7 6 5 1 3 2 0 18
+  position -1 -0.00794433989 0
+  orientation 0 0 -1 -1.57079995
+  alpha 0
+  scale 1
+  setfillumcolor 0.0705882013 0 1
+endnode
+node emitter fire!11
+  parent t1doorc5
+  #part-number 8
+  p2p 0
+  p2p_sel 1
+  affectedByWind 0
+  m_isTinted 1
+  bounce 0
+  random 0
+  inherit 1
+  inheritvel 0
+  inherit_local 0
+  splat 0
+  inherit_part 0
+  renderorder 0
+  spawntype 0
+  update Explosion
+  render Normal
+  blend Normal
+  texture fxpa_smoke01
+  xgrid 4
+  ygrid 4
+  loop 0
+  deadspace 0
+  twosidedtex 1
+  blastRadius 0.200000003
+  blastLength 1
+  position -0.00162841997 0.0249237008 0.92890501
+  orientation -1 0 0 -1.57079995
+  colorStart 0.474510014 0.439215988 0.36470601
+  colorEnd 0.819607973 0.79607898 0.709803998
+  alphaStart 1
+  alphaEnd 0
+  sizeStart 4
+  sizeEnd 1
+  sizeStart_y 0
+  sizeEnd_y 0
+  frameStart 0
+  frameEnd 24
+  birthrate 10
+  lifeExp 2.5
+  mass 0.0900000036
+  spread 2.96706009
+  particleRot 0.5
+  velocity 2
+  randvel 0.5
+  fps 10
+  xsize 100
+  ysize 99
+  bounce_co 0
+  blurlength 10
+  lightningDelay 0
+  lightningRadius 0
+  lightningScale 0
+  p2p_bezier2 0
+  p2p_bezier3 0
+  combinetime 0
+  drag 0
+  grav 0
+  threshold 0
+endnode
+node dummy t1doorc5head
+  parent t1doorc5
+  #part-number 9
+  position 0 0 2.50063992
+  orientation 0 0 0 0
+endnode
+node dummy t1doorc5hhit
+  parent t1doorc5
+  #part-number 10
+  position 0 0 2.17507005
+  orientation 0 0 0 0
+endnode
+node dummy t1doorc5impc
+  parent t1doorc5
+  #part-number 11
+  position 0 0 1.63647997
+  orientation 0 0 0 0
+endnode
+node dummy t1doorc5grnd
+  parent t1doorc5
+  #part-number 12
+  position 0 0 0
+  orientation 0 0 0 0
+endnode
+endmodelgeom t1doorc5
+
+#MAXANIM ASCII
+newanim opening1 t1doorc5
+  length 1
+  transtime 0.25
+  animroot t1doorc5
+node dummy t1doorc5
+  parent NULL
+  #part-number 0
+endnode
+node dummy TIN01_B13_05
+  parent t1doorc5
+  #part-number 1
+  positionkey 3
+    0 -1 0 -2.44141006e-006
+    0.0333333015 -1 0 -2.44141006e-006
+    1 -1 0 -2.44141006e-006
+  orientationkey 10
+    0 0 0 -1 -1.57079995
+    0.0333333015 0 0 -1 -1.57079995
+    0.333332986 0 0 -1 -1.57079995
+    0.433333009 0 0 -1 -1.47299004
+    0.533333004 0 0 -1 -1.43807995
+    0.733332992 0 0 -1 -0.58365798
+    0.766667008 0 0 -1 -0.515246928
+    0.866666973 0 0 -1 -0.310014009
+    0.93333298 0 0 -1 -0.261799991
+    1 0 3.08388991e-007 -1 -0.235620022
+endnode
+node dummy Box07
+  parent TIN01_B13_05
+  #part-number 2
+endnode
+node dummy Box48
+  parent Box07
+  #part-number 3
+endnode
+node dummy Torus02
+  parent Box07
+  #part-number 4
+endnode
+node dummy Torus01
+  parent Box07
+  #part-number 5
+endnode
+node dummy Box08
+  parent Box07
+  #part-number 6
+endnode
+node dummy t1doorc5_DWK
+  parent t1doorc5
+  #part-number -1
+endnode
+node dummy 05_DWK_wg_closed
+  parent t1doorc5_DWK
+  #part-number 8
+endnode
+node dummy 05_DWK_wg_open1
+  parent t1doorc5_DWK
+  #part-number 9
+endnode
+node dummy 05_DWK_dp_closed_01
+  parent t1doorc5_DWK
+  #part-number 10
+endnode
+node dummy 05_DWK_dp_closed_02
+  parent t1doorc5_DWK
+  #part-number 11
+endnode
+node dummy 05_DWK_wg_open2
+  parent t1doorc5_DWK
+  #part-number 12
+endnode
+node dummy 05_DWK_dp_open1_01
+  parent t1doorc5_DWK
+  #part-number 13
+endnode
+node dummy 05_DWK_dp_open2_01
+  parent t1doorc5_DWK
+  #part-number 14
+endnode
+node trimesh sam
+  parent t1doorc5
+  #part-number 7
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+  alphakey 2
+    0 0
+    1 0
+endnode
+node emitter fire!11
+  parent t1doorc5
+  #part-number 8
+endnode
+node dummy t1doorc5head
+  parent t1doorc5
+  #part-number 9
+endnode
+node dummy t1doorc5hhit
+  parent t1doorc5
+  #part-number 10
+endnode
+node dummy t1doorc5impc
+  parent t1doorc5
+  #part-number 11
+endnode
+node dummy t1doorc5grnd
+  parent t1doorc5
+  #part-number 12
+endnode
+doneanim opening1 t1doorc5
+
+#MAXANIM ASCII
+newanim closing1 t1doorc5
+  length 0.666666985
+  transtime 0.25
+  animroot t1doorc5
+node dummy t1doorc5
+  parent NULL
+  #part-number 0
+endnode
+node dummy TIN01_B13_05
+  parent t1doorc5
+  #part-number 1
+  positionkey 3
+    0 -1 0 -2.44141006e-006
+    0.0333333015 -1 0 -2.44141006e-006
+    0.666666985 -1 0 -2.44141006e-006
+  orientationkey 11
+    0 0 3.08388991e-007 -1 -0.235620022
+    0.0333333015 0 3.08388991e-007 -1 -0.235620022
+    0.100000001 0 2.62030994e-007 -1 -0.278194994
+    0.166666999 0 2.43910989e-007 -1 -0.30657804
+    0.300000012 0 1.46320005e-007 -1 -0.50416398
+    0.366667002 0 0 -1 -0.602956951
+    0.5 0 0 -1 -1.50127995
+    0.56666702 0 0 -1 -1.57079995
+    0.600000024 0 0 -1 -1.57079995
+    0.633333027 0 0 -1 -1.57079995
+    0.666666985 0 0 -1 -1.57079995
+endnode
+node dummy Box07
+  parent TIN01_B13_05
+  #part-number 2
+endnode
+node dummy Box48
+  parent Box07
+  #part-number 3
+endnode
+node dummy Torus02
+  parent Box07
+  #part-number 4
+endnode
+node dummy Torus01
+  parent Box07
+  #part-number 5
+endnode
+node dummy Box08
+  parent Box07
+  #part-number 6
+endnode
+node dummy t1doorc5_DWK
+  parent t1doorc5
+  #part-number -1
+endnode
+node dummy 05_DWK_wg_closed
+  parent t1doorc5_DWK
+  #part-number 8
+endnode
+node dummy 05_DWK_wg_open1
+  parent t1doorc5_DWK
+  #part-number 9
+endnode
+node dummy 05_DWK_dp_closed_01
+  parent t1doorc5_DWK
+  #part-number 10
+endnode
+node dummy 05_DWK_dp_closed_02
+  parent t1doorc5_DWK
+  #part-number 11
+endnode
+node dummy 05_DWK_wg_open2
+  parent t1doorc5_DWK
+  #part-number 12
+endnode
+node dummy 05_DWK_dp_open1_01
+  parent t1doorc5_DWK
+  #part-number 13
+endnode
+node dummy 05_DWK_dp_open2_01
+  parent t1doorc5_DWK
+  #part-number 14
+endnode
+node trimesh sam
+  parent t1doorc5
+  #part-number 7
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+  alphakey 4
+    0 0
+    0.0333333015 0
+    0.633333027 0
+    0.666666985 0
+endnode
+node emitter fire!11
+  parent t1doorc5
+  #part-number 8
+endnode
+node dummy t1doorc5head
+  parent t1doorc5
+  #part-number 9
+endnode
+node dummy t1doorc5hhit
+  parent t1doorc5
+  #part-number 10
+endnode
+node dummy t1doorc5impc
+  parent t1doorc5
+  #part-number 11
+endnode
+node dummy t1doorc5grnd
+  parent t1doorc5
+  #part-number 12
+endnode
+doneanim closing1 t1doorc5
+
+#MAXANIM ASCII
+newanim opening2 t1doorc5
+  length 1
+  transtime 0.25
+  animroot t1doorc5
+node dummy t1doorc5
+  parent NULL
+  #part-number 0
+endnode
+node dummy TIN01_B13_05
+  parent t1doorc5
+  #part-number 1
+  positionkey 3
+    0 -1 0 -2.44141006e-006
+    0.0333333015 -1 0 -2.44141006e-006
+    1 -1 0 -2.44141006e-006
+  orientationkey 10
+    0 0 0 -1 -1.57079995
+    0.0333333015 0 0 -1 -1.57079995
+    0.333332986 0 0 -1 -1.57079995
+    0.433333009 0 0 -1 -1.66859996
+    0.533333004 0 0 -1 -1.70351005
+    0.733332992 0 0 -1 -2.55794001
+    0.766667008 0 0 -1 -2.62634993
+    0.866666973 0 0 -1 -2.83156991
+    0.93333298 0 0 -1 -2.87979007
+    1 0 0 -1 -2.9059701
+endnode
+node dummy Box07
+  parent TIN01_B13_05
+  #part-number 2
+endnode
+node dummy Box48
+  parent Box07
+  #part-number 3
+endnode
+node dummy Torus02
+  parent Box07
+  #part-number 4
+endnode
+node dummy Torus01
+  parent Box07
+  #part-number 5
+endnode
+node dummy Box08
+  parent Box07
+  #part-number 6
+endnode
+node dummy t1doorc5_DWK
+  parent t1doorc5
+  #part-number -1
+endnode
+node dummy 05_DWK_wg_closed
+  parent t1doorc5_DWK
+  #part-number 8
+endnode
+node dummy 05_DWK_wg_open1
+  parent t1doorc5_DWK
+  #part-number 9
+endnode
+node dummy 05_DWK_dp_closed_01
+  parent t1doorc5_DWK
+  #part-number 10
+endnode
+node dummy 05_DWK_dp_closed_02
+  parent t1doorc5_DWK
+  #part-number 11
+endnode
+node dummy 05_DWK_wg_open2
+  parent t1doorc5_DWK
+  #part-number 12
+endnode
+node dummy 05_DWK_dp_open1_01
+  parent t1doorc5_DWK
+  #part-number 13
+endnode
+node dummy 05_DWK_dp_open2_01
+  parent t1doorc5_DWK
+  #part-number 14
+endnode
+node trimesh sam
+  parent t1doorc5
+  #part-number 7
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+  alphakey 2
+    0 0
+    1 0
+endnode
+node emitter fire!11
+  parent t1doorc5
+  #part-number 8
+endnode
+node dummy t1doorc5head
+  parent t1doorc5
+  #part-number 9
+endnode
+node dummy t1doorc5hhit
+  parent t1doorc5
+  #part-number 10
+endnode
+node dummy t1doorc5impc
+  parent t1doorc5
+  #part-number 11
+endnode
+node dummy t1doorc5grnd
+  parent t1doorc5
+  #part-number 12
+endnode
+doneanim opening2 t1doorc5
+
+#MAXANIM ASCII
+newanim die t1doorc5
+  length 0.666666985
+  transtime 0.25
+  animroot t1doorc5
+  event 0.0333333015 detonate
+node dummy t1doorc5
+  parent NULL
+  #part-number 0
+endnode
+node dummy TIN01_B13_05
+  parent t1doorc5
+  #part-number 1
+  positionkey 5
+    0 -1 0 -2.44141006e-006
+    0.100000001 -0.895448983 0 -0.570151985
+    0.133332998 -0.895448983 0 -0.819109976
+    0.366667002 -0.721198976 0 -0.901046991
+    0.666666985 0.262883008 1.08645999 -2.83311009
+  orientationkey 6
+    0 0 0 -1 -1.57079995
+    0.100000001 -0.070096381 -0.090663068 -0.99341166 -1.43992996
+    0.133332998 -0.070096381 -0.090663068 -0.99341166 -1.43992996
+    0.266667008 -0.0711771771 0.0235459898 -0.997185767 -1.48570001
+    0.333332986 -0.105541013 0.0251409039 -0.994097114 -1.51399004
+    0.666666985 -0.326389164 0.36249119 -0.872966349 -1.60174
+endnode
+node dummy Box07
+  parent TIN01_B13_05
+  #part-number 2
+endnode
+node dummy Box48
+  parent Box07
+  #part-number 3
+endnode
+node dummy Torus02
+  parent Box07
+  #part-number 4
+endnode
+node dummy Torus01
+  parent Box07
+  #part-number 5
+endnode
+node dummy Box08
+  parent Box07
+  #part-number 6
+endnode
+node dummy t1doorc5_DWK
+  parent t1doorc5
+  #part-number -1
+endnode
+node dummy 05_DWK_wg_closed
+  parent t1doorc5_DWK
+  #part-number 8
+endnode
+node dummy 05_DWK_wg_open1
+  parent t1doorc5_DWK
+  #part-number 9
+endnode
+node dummy 05_DWK_dp_closed_01
+  parent t1doorc5_DWK
+  #part-number 10
+endnode
+node dummy 05_DWK_dp_closed_02
+  parent t1doorc5_DWK
+  #part-number 11
+endnode
+node dummy 05_DWK_wg_open2
+  parent t1doorc5_DWK
+  #part-number 12
+endnode
+node dummy 05_DWK_dp_open1_01
+  parent t1doorc5_DWK
+  #part-number 13
+endnode
+node dummy 05_DWK_dp_open2_01
+  parent t1doorc5_DWK
+  #part-number 14
+endnode
+node trimesh sam
+  parent t1doorc5
+  #part-number 7
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+  alpha 0
+endnode
+node emitter fire!11
+  parent t1doorc5
+  #part-number 8
+endnode
+node dummy t1doorc5head
+  parent t1doorc5
+  #part-number 9
+endnode
+node dummy t1doorc5hhit
+  parent t1doorc5
+  #part-number 10
+endnode
+node dummy t1doorc5impc
+  parent t1doorc5
+  #part-number 11
+endnode
+node dummy t1doorc5grnd
+  parent t1doorc5
+  #part-number 12
+endnode
+doneanim die t1doorc5
+
+#MAXANIM ASCII
+newanim closing2 t1doorc5
+  length 0.633333027
+  transtime 0.25
+  animroot t1doorc5
+node dummy t1doorc5
+  parent NULL
+  #part-number 0
+endnode
+node dummy TIN01_B13_05
+  parent t1doorc5
+  #part-number 1
+  positionkey 2
+    0 -1 0 -2.44141006e-006
+    0.0333333015 -1 0 -2.44141006e-006
+  orientationkey 10
+    0 0 0 -1 -2.9059701
+    0.0333333015 0 0 -1 -2.9059701
+    0.100000001 0 0 -1 -2.86339998
+    0.166666999 0 0 -1 -2.83501005
+    0.300000012 0 0 -1 -2.63743997
+    0.366667002 0 0 -1 -2.53863001
+    0.5 0 0 -1 -1.64031005
+    0.56666702 0 0 -1 -1.57079995
+    0.600000024 0 0 -1 -1.57079995
+    0.633333027 0 0 -1 -1.57079995
+endnode
+node dummy Box07
+  parent TIN01_B13_05
+  #part-number 2
+endnode
+node dummy Box48
+  parent Box07
+  #part-number 3
+endnode
+node dummy Torus02
+  parent Box07
+  #part-number 4
+endnode
+node dummy Torus01
+  parent Box07
+  #part-number 5
+endnode
+node dummy Box08
+  parent Box07
+  #part-number 6
+endnode
+node dummy t1doorc5_DWK
+  parent t1doorc5
+  #part-number -1
+endnode
+node dummy 05_DWK_wg_closed
+  parent t1doorc5_DWK
+  #part-number 8
+endnode
+node dummy 05_DWK_wg_open1
+  parent t1doorc5_DWK
+  #part-number 9
+endnode
+node dummy 05_DWK_dp_closed_01
+  parent t1doorc5_DWK
+  #part-number 10
+endnode
+node dummy 05_DWK_dp_closed_02
+  parent t1doorc5_DWK
+  #part-number 11
+endnode
+node dummy 05_DWK_wg_open2
+  parent t1doorc5_DWK
+  #part-number 12
+endnode
+node dummy 05_DWK_dp_open1_01
+  parent t1doorc5_DWK
+  #part-number 13
+endnode
+node dummy 05_DWK_dp_open2_01
+  parent t1doorc5_DWK
+  #part-number 14
+endnode
+node trimesh sam
+  parent t1doorc5
+  #part-number 7
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+  alphakey 3
+    0 0
+    0.0333333015 0
+    0.633333027 0
+endnode
+node emitter fire!11
+  parent t1doorc5
+  #part-number 8
+endnode
+node dummy t1doorc5head
+  parent t1doorc5
+  #part-number 9
+endnode
+node dummy t1doorc5hhit
+  parent t1doorc5
+  #part-number 10
+endnode
+node dummy t1doorc5impc
+  parent t1doorc5
+  #part-number 11
+endnode
+node dummy t1doorc5grnd
+  parent t1doorc5
+  #part-number 12
+endnode
+doneanim closing2 t1doorc5
+
+#MAXANIM ASCII
+newanim closed t1doorc5
+  length 0.0333333015
+  transtime 0.25
+  animroot t1doorc5
+node dummy t1doorc5
+  parent NULL
+  #part-number 0
+endnode
+node dummy TIN01_B13_05
+  parent t1doorc5
+  #part-number 1
+  positionkey 2
+    0 -1 0 -2.44141006e-006
+    0.0333333015 -1 0 -2.44141006e-006
+  orientationkey 2
+    0 0 0 -1 -1.57079995
+    0.0333333015 0 0 -1 -1.57079995
+endnode
+node dummy Box07
+  parent TIN01_B13_05
+  #part-number 2
+endnode
+node dummy Box48
+  parent Box07
+  #part-number 3
+endnode
+node dummy Torus02
+  parent Box07
+  #part-number 4
+endnode
+node dummy Torus01
+  parent Box07
+  #part-number 5
+endnode
+node dummy Box08
+  parent Box07
+  #part-number 6
+endnode
+node dummy t1doorc5_DWK
+  parent t1doorc5
+  #part-number -1
+endnode
+node dummy 05_DWK_wg_closed
+  parent t1doorc5_DWK
+  #part-number 8
+endnode
+node dummy 05_DWK_wg_open1
+  parent t1doorc5_DWK
+  #part-number 9
+endnode
+node dummy 05_DWK_dp_closed_01
+  parent t1doorc5_DWK
+  #part-number 10
+endnode
+node dummy 05_DWK_dp_closed_02
+  parent t1doorc5_DWK
+  #part-number 11
+endnode
+node dummy 05_DWK_wg_open2
+  parent t1doorc5_DWK
+  #part-number 12
+endnode
+node dummy 05_DWK_dp_open1_01
+  parent t1doorc5_DWK
+  #part-number 13
+endnode
+node dummy 05_DWK_dp_open2_01
+  parent t1doorc5_DWK
+  #part-number 14
+endnode
+node trimesh sam
+  parent t1doorc5
+  #part-number 7
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+  alpha 0
+endnode
+node emitter fire!11
+  parent t1doorc5
+  #part-number 8
+endnode
+node dummy t1doorc5head
+  parent t1doorc5
+  #part-number 9
+endnode
+node dummy t1doorc5hhit
+  parent t1doorc5
+  #part-number 10
+endnode
+node dummy t1doorc5impc
+  parent t1doorc5
+  #part-number 11
+endnode
+node dummy t1doorc5grnd
+  parent t1doorc5
+  #part-number 12
+endnode
+doneanim closed t1doorc5
+
+#MAXANIM ASCII
+newanim opened2 t1doorc5
+  length 0.0333333015
+  transtime 0.25
+  animroot t1doorc5
+node dummy t1doorc5
+  parent NULL
+  #part-number 0
+endnode
+node dummy TIN01_B13_05
+  parent t1doorc5
+  #part-number 1
+  positionkey 2
+    0 -1 0 -2.44141006e-006
+    0.0333333015 -1 0 -2.44141006e-006
+  orientationkey 2
+    0 0 0 -1 -2.9059701
+    0.0333333015 0 0 -1 -2.9059701
+endnode
+node dummy Box07
+  parent TIN01_B13_05
+  #part-number 2
+endnode
+node dummy Box48
+  parent Box07
+  #part-number 3
+endnode
+node dummy Torus02
+  parent Box07
+  #part-number 4
+endnode
+node dummy Torus01
+  parent Box07
+  #part-number 5
+endnode
+node dummy Box08
+  parent Box07
+  #part-number 6
+endnode
+node dummy t1doorc5_DWK
+  parent t1doorc5
+  #part-number -1
+endnode
+node dummy 05_DWK_wg_closed
+  parent t1doorc5_DWK
+  #part-number 8
+endnode
+node dummy 05_DWK_wg_open1
+  parent t1doorc5_DWK
+  #part-number 9
+endnode
+node dummy 05_DWK_dp_closed_01
+  parent t1doorc5_DWK
+  #part-number 10
+endnode
+node dummy 05_DWK_dp_closed_02
+  parent t1doorc5_DWK
+  #part-number 11
+endnode
+node dummy 05_DWK_wg_open2
+  parent t1doorc5_DWK
+  #part-number 12
+endnode
+node dummy 05_DWK_dp_open1_01
+  parent t1doorc5_DWK
+  #part-number 13
+endnode
+node dummy 05_DWK_dp_open2_01
+  parent t1doorc5_DWK
+  #part-number 14
+endnode
+node trimesh sam
+  parent t1doorc5
+  #part-number 7
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+  alphakey 2
+    0 0
+    0.0333333015 0
+endnode
+node emitter fire!11
+  parent t1doorc5
+  #part-number 8
+endnode
+node dummy t1doorc5head
+  parent t1doorc5
+  #part-number 9
+endnode
+node dummy t1doorc5hhit
+  parent t1doorc5
+  #part-number 10
+endnode
+node dummy t1doorc5impc
+  parent t1doorc5
+  #part-number 11
+endnode
+node dummy t1doorc5grnd
+  parent t1doorc5
+  #part-number 12
+endnode
+doneanim opened2 t1doorc5
+
+#MAXANIM ASCII
+newanim opened1 t1doorc5
+  length 0.0333333015
+  transtime 0.25
+  animroot t1doorc5
+node dummy t1doorc5
+  parent NULL
+  #part-number 0
+endnode
+node dummy TIN01_B13_05
+  parent t1doorc5
+  #part-number 1
+  positionkey 2
+    0 -1 0 -2.44141006e-006
+    0.0333333015 -1 0 -2.44141006e-006
+  orientationkey 2
+    0 0 3.08388991e-007 -1 -0.235620022
+    0.0333333015 0 3.08388991e-007 -1 -0.235620022
+endnode
+node dummy Box07
+  parent TIN01_B13_05
+  #part-number 2
+endnode
+node dummy Box48
+  parent Box07
+  #part-number 3
+endnode
+node dummy Torus02
+  parent Box07
+  #part-number 4
+endnode
+node dummy Torus01
+  parent Box07
+  #part-number 5
+endnode
+node dummy Box08
+  parent Box07
+  #part-number 6
+endnode
+node dummy t1doorc5_DWK
+  parent t1doorc5
+  #part-number -1
+endnode
+node dummy 05_DWK_wg_closed
+  parent t1doorc5_DWK
+  #part-number 8
+endnode
+node dummy 05_DWK_wg_open1
+  parent t1doorc5_DWK
+  #part-number 9
+endnode
+node dummy 05_DWK_dp_closed_01
+  parent t1doorc5_DWK
+  #part-number 10
+endnode
+node dummy 05_DWK_dp_closed_02
+  parent t1doorc5_DWK
+  #part-number 11
+endnode
+node dummy 05_DWK_wg_open2
+  parent t1doorc5_DWK
+  #part-number 12
+endnode
+node dummy 05_DWK_dp_open1_01
+  parent t1doorc5_DWK
+  #part-number 13
+endnode
+node dummy 05_DWK_dp_open2_01
+  parent t1doorc5_DWK
+  #part-number 14
+endnode
+node trimesh sam
+  parent t1doorc5
+  #part-number 7
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+  alphakey 2
+    0 0
+    0.0333333015 0
+endnode
+node emitter fire!11
+  parent t1doorc5
+  #part-number 8
+endnode
+node dummy t1doorc5head
+  parent t1doorc5
+  #part-number 9
+endnode
+node dummy t1doorc5hhit
+  parent t1doorc5
+  #part-number 10
+endnode
+node dummy t1doorc5impc
+  parent t1doorc5
+  #part-number 11
+endnode
+node dummy t1doorc5grnd
+  parent t1doorc5
+  #part-number 12
+endnode
+doneanim opened1 t1doorc5
+
+#MAXANIM ASCII
+newanim trans t1doorc5
+  length 0.0333333015
+  transtime 0.25
+  animroot t1doorc5
+node dummy t1doorc5
+  parent NULL
+  #part-number 0
+endnode
+node dummy TIN01_B13_05
+  parent t1doorc5
+  #part-number 1
+endnode
+node dummy Box07
+  parent TIN01_B13_05
+  #part-number 2
+endnode
+node dummy Box48
+  parent Box07
+  #part-number 3
+endnode
+node dummy Torus02
+  parent Box07
+  #part-number 4
+endnode
+node dummy Torus01
+  parent Box07
+  #part-number 5
+endnode
+node dummy Box08
+  parent Box07
+  #part-number 6
+endnode
+node dummy t1doorc5_DWK
+  parent t1doorc5
+  #part-number -1
+endnode
+node dummy 05_DWK_wg_closed
+  parent t1doorc5_DWK
+  #part-number 8
+endnode
+node dummy 05_DWK_wg_open1
+  parent t1doorc5_DWK
+  #part-number 9
+endnode
+node dummy 05_DWK_dp_closed_01
+  parent t1doorc5_DWK
+  #part-number 10
+endnode
+node dummy 05_DWK_dp_closed_02
+  parent t1doorc5_DWK
+  #part-number 11
+endnode
+node dummy 05_DWK_wg_open2
+  parent t1doorc5_DWK
+  #part-number 12
+endnode
+node dummy 05_DWK_dp_open1_01
+  parent t1doorc5_DWK
+  #part-number 13
+endnode
+node dummy 05_DWK_dp_open2_01
+  parent t1doorc5_DWK
+  #part-number 14
+endnode
+node trimesh sam
+  parent t1doorc5
+  #part-number 7
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+  alphakey 2
+    0 0.25
+    0.0333333015 0.25
+endnode
+node emitter fire!11
+  parent t1doorc5
+  #part-number 8
+endnode
+node dummy t1doorc5head
+  parent t1doorc5
+  #part-number 9
+endnode
+node dummy t1doorc5hhit
+  parent t1doorc5
+  #part-number 10
+endnode
+node dummy t1doorc5impc
+  parent t1doorc5
+  #part-number 11
+endnode
+node dummy t1doorc5grnd
+  parent t1doorc5
+  #part-number 12
+endnode
+doneanim trans t1doorc5
+
+#MAXANIM ASCII
+newanim dead t1doorc5
+  length 0.0333333015
+  transtime 0.25
+  animroot t1doorc5
+node dummy t1doorc5
+  parent NULL
+  #part-number 0
+endnode
+node dummy TIN01_B13_05
+  parent t1doorc5
+  #part-number 1
+  positionkey 2
+    0 0.262883008 1.08645999 -2.83311009
+    0.0333333015 0.262883008 1.08645999 -2.83311009
+  orientationkey 2
+    0 -0.326389164 0.36249119 -0.872966349 -1.60174
+    0.0333333015 -0.326389164 0.36249119 -0.872966349 -1.60174
+endnode
+node dummy Box07
+  parent TIN01_B13_05
+  #part-number 2
+endnode
+node dummy Box48
+  parent Box07
+  #part-number 3
+endnode
+node dummy Torus02
+  parent Box07
+  #part-number 4
+endnode
+node dummy Torus01
+  parent Box07
+  #part-number 5
+endnode
+node dummy Box08
+  parent Box07
+  #part-number 6
+endnode
+node dummy t1doorc5_DWK
+  parent t1doorc5
+  #part-number -1
+endnode
+node dummy 05_DWK_wg_closed
+  parent t1doorc5_DWK
+  #part-number 8
+endnode
+node dummy 05_DWK_wg_open1
+  parent t1doorc5_DWK
+  #part-number 9
+endnode
+node dummy 05_DWK_dp_closed_01
+  parent t1doorc5_DWK
+  #part-number 10
+endnode
+node dummy 05_DWK_dp_closed_02
+  parent t1doorc5_DWK
+  #part-number 11
+endnode
+node dummy 05_DWK_wg_open2
+  parent t1doorc5_DWK
+  #part-number 12
+endnode
+node dummy 05_DWK_dp_open1_01
+  parent t1doorc5_DWK
+  #part-number 13
+endnode
+node dummy 05_DWK_dp_open2_01
+  parent t1doorc5_DWK
+  #part-number 14
+endnode
+node trimesh sam
+  parent t1doorc5
+  #part-number 7
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node emitter fire!11
+  parent t1doorc5
+  #part-number 8
+endnode
+node dummy t1doorc5head
+  parent t1doorc5
+  #part-number 9
+endnode
+node dummy t1doorc5hhit
+  parent t1doorc5
+  #part-number 10
+endnode
+node dummy t1doorc5impc
+  parent t1doorc5
+  #part-number 11
+endnode
+node dummy t1doorc5grnd
+  parent t1doorc5
+  #part-number 12
+endnode
+doneanim dead t1doorc5
+
+donemodel t1doorc5
+

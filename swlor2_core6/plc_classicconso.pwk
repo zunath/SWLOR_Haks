@@ -1,0 +1,41 @@
+# Exported from NWmax 0.8 b61 at 10-11-2013 18:29:04
+# pwk file
+#
+#NWmax PWKMESH  ASCII
+node dummy 001_pwk_use01
+  parent PLC_ClassicConso_pwk
+  position 1.31738 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.341176 0.882353 0.776471 
+endnode
+node trimesh pwk
+  parent PLC_ClassicConso_pwk
+  position -0.025573 -0.018519 0.0
+  orientation 0.0 0.0 -1.0 -1.5708
+  wirecolor 0.8 0.8 0.8 
+  ambient 1.0 1.0 1.0 
+  diffuse 0.6212 0.70592 0.26984 
+  specular 0.0 0.0 0.0 
+  shininess 0.0
+  bitmap wire_198225086
+  verts 6
+    -0.647875 1.11931 0.0
+    -1.30309 -0.0456605 0.0
+    0.6716 1.10734 0.0
+    -0.628854 -1.19687 0.0
+    1.35107 -0.0375052 0.0
+    0.685141 -1.19672 0.0
+  faces 4
+    0 1 2  1  0 0 0  7
+    3 2 1  1  0 0 0  7
+    2 3 4  1  0 0 0  7
+    5 4 3  1  0 0 0  7
+  tverts 1
+    0.5 0.0 0
+endnode
+node dummy 001_pwk_use02
+  parent PLC_ClassicConso_pwk
+  position -1.3991 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.337255 0.337255 0.337255 
+endnode

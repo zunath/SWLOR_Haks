@@ -1,0 +1,47 @@
+#Exported from 3ds max by MDL Plug-in Suite 1.0b
+#http://www.bricksbuilder.com/nwn/utils/
+#MAXMODEL ASCII
+# model: PLC_16L
+filedependancy jan11.max
+node trimesh zlc_16l_wg
+  parent zlc_16l_pwk
+  position -0.01951 -0.01951 0
+  orientation 0 0 0 0
+  wirecolor 0.777344 0.777344 0.777344
+  ambient 0.773438 0.875 0.339844
+  diffuse 0.773438 0.875 0.339844
+  specular 0 0 0
+  shininess 1
+  bitmap NULL
+  verts 9
+    0 0 0
+    -2.25212 0 0
+    -1.59249 1.59249 0
+    0 2.25212 0
+    1.59249 1.59249 0
+    2.25212 0 0
+    1.59249 -1.59249 0
+    0 -2.25212 0
+    -1.59249 -1.59249 0
+  faces 8
+    0 2 1  1  0 0 0  1
+    0 3 2  1  0 0 0  1
+    0 4 3  1  0 0 0  1
+    0 5 4  1  0 0 0  1
+    0 6 5  1  0 0 0  1
+    0 7 6  1  0 0 0  1
+    0 8 7  1  0 0 0  1
+    0 1 8  1  0 0 0  1
+endnode
+node dummy 16l_pwk_use02
+  parent zlc_16l_pwk
+  position -0.0656436 2.41256 0
+  orientation 0 0 0 0
+  wirecolor 0.777344 0.777344 0.777344
+endnode
+node dummy 16l_pwk_use01
+  parent zlc_16l_pwk
+  position -0.026624 -2.44543 0
+  orientation 0 0 0 0
+  wirecolor 0.777344 0.777344 0.777344
+endnode

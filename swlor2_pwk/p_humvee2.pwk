@@ -1,0 +1,80 @@
+# Exported from NWmax 0.7 at 8/4/2005 13:21:06
+# mdl file
+#
+#NWmax MODEL ASCII
+# model: c_humveea
+filedependancy Unknown
+newmodel c_humveea
+setsupermodel c_humveea NULL
+classification Character
+setanimationscale 0.0
+#NWmax GEOM  ASCII
+beginmodelgeom c_humveea
+node dummy c_humveea
+  parent NULL
+endnode
+node dummy rootdummy
+  parent c_humveea
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.898039 0.603922 0.843137 
+endnode
+node dummy handconjure
+  parent c_humveea
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.6 0.894118 0.6 
+endnode
+node dummy headconjure
+  parent c_humveea
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.882353 0.345098 0.780392 
+endnode
+node trimesh Box01
+  parent c_humveea
+  position -0.052532 0.181109 0.0
+  orientation 0.0 0.0 1.0 -3.14159
+  wirecolor 0.839216 0.894118 0.647059 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center 0.987 0.0 11.5058 
+  ambient 0.0 0.0 0.0 
+  diffuse 0.0 0.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 1.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap Box01
+  verts 8
+    -1.57652 -2.53129 0.0
+    1.59626 -2.53129 0.0
+    -1.45392 2.53129 0.0
+    1.45392 2.53129 0.0
+    -1.57652 -2.53129 0.230117
+    1.59626 -2.53129 0.230117
+    -1.45392 2.53129 0.230117
+    1.45392 2.53129 0.230117
+  faces 12
+    0 2 3  2  0 0 0  2
+    3 1 0  2  0 0 0  2
+    4 5 7  4  0 0 0  1
+    7 6 4  4  0 0 0  1
+    0 1 5  8  0 0 0  5
+    5 4 0  8  0 0 0  5
+    1 3 7  16  0 0 0  4
+    7 5 1  16  0 0 0  4
+    3 2 6  32  0 0 0  6
+    6 7 3  32  0 0 0  6
+    2 0 4  64  0 0 0  3
+    4 6 2  64  0 0 0  3
+endnode
+endmodelgeom c_humveea
+donemodel c_humveea

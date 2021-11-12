@@ -1,0 +1,261 @@
+CEP Tileset Pack - CEP 2.2
+
+
+NOTES
+----------------------------------------------------------------------------------------------------------------------
+  The hak is completely self-contained. Some tilesets had tiles, doors, load
+  screens, or other features removed to avoid conflicts with CTP or other haks.
+  A full list of tiles and tilesets included can be found at the end of this
+  document. Where it could be found, documentation for each tileset has also
+  been included in the cep2_add_tiles1.hak and cep2_add_doors.hak files. To
+  view the included documentation, open the haks in NWN Explorer and browse to
+  'Information Files'.
+  
+  All resources have been renamed to avoid any conflicts. Padding has been
+  added before all custom tiles in each SET file. CEP tiles are all in the
+  range 500-1999.
+  
+  Due to tileset merging, you may find unexpected terrain showing up in the
+  toolset. An example of this is you may see Desert or Organic walls showing
+  up at Water/Wall interfaces in the Mines tileset. This was done to keep the
+  number of terrain types low and to allow various terrain types to be used
+  together on the same map.
+  
+  Normally, the solution would be to use the Eraser tool repeatedly, but this
+  can be aggravating as it changes tiles randomly. Instead, after you paint
+  terrain, press the Escape key so you are no longer painting terrain, and
+  then hold down Shift while right-clicking on the individual tile you wish to
+  change. This will flip through all eligible tiles in sequence, without
+  randomness. In addition, this works perfectly with crossers, while Eraser
+  does not.
+
+  A huge credit must be given to OldMansBeard for his CleanModels tool. All
+  tileset models were run through it, in addition to many being cleaned up
+  by hand.
+
+
+CHANGE HISTORY
+----------------------------------------------------------------------------------------------------------------------
+  CEP 2.2 - Initial Release
+    All tilesets have been cleaned up and merged by Acaos and updated to NWN 1.69.
+
+  CEP 2.2.1 - Patch Release
+    [ZDE01] rebuilt minimap icons
+    [ZDM01] broke out some terrain types to make painting terrain easier
+    [ZDM01] fixed Portal and Chessboard features
+    [ZIN01] broke out some terrain types to make categorization cleaner
+    [ZIN01] added Portal and Chessboard features for all floor terrains
+    [ZTD01] added two Castle terrains
+    [ZTD01] added two Building terrains (inspired by Pasilli's from
+            http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=3897
+            but entirely original by Acaos using none of his models or
+            textures)
+    [ZTD01] added Cobble feature
+    [ZTD01] rebuilt minimap icons
+    [ZTF01] fixed broken Small Tower textures
+    [ZTF01] fixed broken Ruin Wall textures
+    [ZTF01] fixed broken Giant/Hollow tree
+    [ZTF01] rebuilt minimap icons
+    [ZTR01] fixed broken walkmesh on ztr01_f08_04
+    [ZTR01] added two Castle terrains
+    [ZTR01] added Cobble feature
+    [ZTR01] rebuilt minimap icons
+    [ZTS01] fixed broken walkmesh on zts01_f08_04
+    [ZTS01] added two Castle terrains
+    [ZTS01] added Cobble feature
+    [ZTS01] rebuilt minimap icons
+
+  CEP 2.3 - Known Bugs and Planned Enhancements
+    [CRAP]  add cep2_crp_tiles.hak which will add backwards-compatible CRAP
+            tilesets using CEP fixes, similar to cep2_ext_tiles.hak
+
+    [ZTF01] BUG: ztf01_b2[1-6]_01 will not place - suspect toolset issue
+
+    [DOOR]  CRAP doors
+
+    [ALL]   Caravels (http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=527)
+    [ALL]   Carracks (http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=4208)
+    [ALL]   Galleons (http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=3830)
+    [ALL]   Longships (http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=1783)
+    [ZCN01] City Bridges (http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=7250)
+    [ZCN01] Drawbridge (http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=3744)
+    [ZCN01] Arena by Helvene (http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=6682)
+    [ZDM01] Tracks by Helvene (http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=6615)
+    [ZIN01] Extra Bedrooms by Helvene (http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=6481)
+    [ZIN01] Usable Beds by BRolanda (http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=3210)
+    [ZTD01] Floating Islands by Yumi-Chan (http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=3433)
+    [ZTI01] Frozen Tower by Gribo (http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=3994)
+    [ZTF01] Suspended City by Helvene (http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=7685)
+    [ZTR01] Ruin Wall by Racerblue (http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=6785)
+    [ZTR01] Rural Towers by MGSkaggs (http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=1833)
+    [ZTR01] Smithy by Yumi-Chan (http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=2760)
+    [ZTR01] Tunnels by Firehazurd (http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=3148)
+    [ZTR01] Rural Sewer Entrance by Helvene (http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=6482)
+    [ZTS01] Smithy by Yumi-Chan (http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=3364)
+    [ZTS01] Tunnels by Firehazurd (http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=3148)
+
+    [ZCN01] Pit terrain
+    [ZDE01] ZDE05 blood reskin (zlc_cfw_blood)
+    [ZDE01] EvilCastle terrain
+    [ZDM01] organic/desert/cave transition tiles
+    [ZIC01] activate remaining usable bed bedrooms
+    [ZIN01] add customizeable interior similar to Gestalt's
+    [ZTD01] allow oases to go over raise/lower with rural waterfalls
+    [ZTD01] allow streams to go over raise/lower with waterfalls
+    [ZTD01] Lava terrain
+    [ZTD01] Shallow terrain
+    [ZTF01] cliff/trees/water combination tiles
+    [ZTF01] Gentle Hill terrain (requires vertical rescale)
+    [ZTR01] forest cliffs, cliff/trees/water combination tiles
+    [ZTR01] Marsh terrain
+    [ZTR01] Shallow terrain
+    [ZTR01] City Wall tiles (can't be standard due to city using height 4)
+    [ZTS01] forest cliffs, cliff/trees/water combination tiles
+    [ZTS01] Rural High Bridge, Rural Tree Cliffs, Rural Waterfalls
+    [ZTS01] forest cliffs, cliff/trees/water combination tiles
+    [ZTS01] ice floes (possibly from ice mines)
+    [ZTS01] Cobble tile
+    [ZTU01] EvilCastle terrain
+    [ZTU01] Lava terrain
+    [ZTU01] Vile terrain
+    [ZTU01] Shallow terrain
+
+    [ZKM01] CRAP mountain tileset
+    [ZKW01] CRAP swamp tileset
+
+
+HAKS
+----------------------------------------------------------------------------------------------------------------------
+  The CEP tileset pack is distributed as several haks:
+    cep2_add_tiles*.hak
+      These provide separately named extended versions of several Bioware
+      tilesets. These will be prefixed in your tileset list with [CEP] and
+      will be found at the end of the list. Using this hak will not affect any
+      Bioware tileset or any other tileset hak.
+  
+    cep2_add_doors.hak
+      This provides a collection of generic doors. It is optional and may be
+      used on its own or with the CEP tilesets. It is not required to use the
+      CEP tilesets.
+  
+    cep2_ext_tiles.hak
+      This overrides the Bioware tilesets, extending them with the CEP
+      enhancements. Adding this hak to your module will add all the extensions
+      from the CEP tilesets to the base Bioware tilesets. You will see the
+      tileset names followed by an * in the tileset list when this hak is
+      active. This hak must be used in conjunction with all cep2_add_tiles haks.
+  
+      Using this hak is optional; if you add the cep2_add_tiles haks to your
+      module but do not use cep2_ext_tiles, you will still have access to all
+      CEP tileset enhancements using the [CEP] tilesets.
+
+
+DOORS
+----------------------------------------------------------------------------------------------------------------------
+  All tileset-specific doors have been added as generic doors. Although they
+  may not fit in a generic door doorway, they can be moved after they are
+  placed using the Adjust Location tool. This allows some interesting building
+  opportunities using them in conjunction with placeables, or even by
+  themselves (for example, the Drow Dome Door).
+
+  Alternative Door Forms by Gaoneng (http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=7608)
+  CTP Generic Doors 1.5 (http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=6376)
+  NWN2 Doors by thegeorge (http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=7595)
+
+
+
+TILESETS
+----------------------------------------------------------------------------------------------------------------------
+  [CEP] City Exterior (ZCN)
+    Airships by Some_ux (http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=167)
+    Misc Tiles by Gribo (http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=5815)
+  
+  [CEP] Crypt (ZDC)
+    Diagonal Walls by Stephen Nispel (http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=863)
+  
+  [CEP] Castle Interior (ZIC)
+    Castle Interior Expanded by Tiggs (http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=7501)
+    Castle Interior Windows by Gaoneng (http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=6283)
+    Castle Interior Windows by Stephen Nispel (http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=4909)
+    Dais by Sithen (http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=5724)
+    LOK Tileset Addon #7 by Danmar (http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=1592)
+    Maze by Helvene (http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=6812)
+    Maze reskin - Marble by Acaos
+    Round Castle Tiles by YellowLab (http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=2505)
+    Stone Room Bat by Sarchasm (http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=6382)
+    Tower Interior by Veldin (http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=3123)
+    Usable Beds by BRolanda (http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=3210)
+  
+  [CEP] Drow Interior (ZID)
+    Maze by Helvene (http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=6812)
+  
+  [CEP] City Interior (ZIN)
+    City Interior Windows by Gaoneng (http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=6480)
+    Wooden Elven Interior by Helvene (http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=6662)
+    Workshop by Helvene (http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=6556)
+  
+  [CEP] Desert (ZTD)
+    Airships by Some_ux (http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=167)
+    Desert Streams and Oasis by Helvene (http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=6587)
+    Desert w/Dunes by Veldin (http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=853)
+    Gentle Dunes retexture by Acaos
+  
+  [CEP] Dungeon (ZDE)
+    Dungeon Raise/Lower by Acropole (http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=6635)
+    Dungeon reskin - Ice by Acaos [ZDE04]
+    Dungeon reskin - Pit by Acaos [ZDE09]
+    Dungeon reskin - Sewer by Acaos [ZDE03]
+    Dungeon reskin - Water by Acaos [ZDE02]
+    Maze by Helvene (http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=6812)
+  
+  [CEP] Forest (ZTF)
+    Airships by Some_ux (http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=167)
+    Archer Towers by Helvene (http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=6782)
+    Forest Stairs/Edge Fix by Na (http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=754)
+    Forest Barracks by stickgirl (http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=3646)
+    Forest Expansion by Helvene (http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=6653)
+    Forest Log/Suspension Bridges by Jacoby (source unknown)
+    Forest Water by Yumi-Chan (http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=3430)
+    Foret des Ombres by Acropole (http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=1176)
+    Full Forest Hills by Kert_Wettian (http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=4508)
+    LOK Dungeon Entrance, House, Marsh, Tower by Danmar (http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=1596)
+    Forest Groups 1 by Gribo (http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=5815)
+    Forest Groups 2 by Gribo (http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=4493)
+    Raised Forest/Stone bridges by Kelsys of Greenshore (http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=4745)
+    Ruin Wall by Racerblue (http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=6785)
+    Rural Stream/Water by Jackal_GB (http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=4592)
+    Smithy by Yumi-Chan/Jackal_GB (http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=2760)
+    TB Forest/Giant Tree/Houses/Shrine by Tom_Banjo (http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=6683)
+  
+  [CEP] Ice (ZTI)
+    Airships by Some_ux (http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=167)
+  
+  [CEP] Mines (ZDM)
+    Desert Mines by Stilgar (http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=847) [ZDM04]
+    Ice Caverns by Helvene (http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=6651) [ZDM03]
+    Lava Caverns by Gestalt (http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=1228) [ZDM02]
+    Pit Caverns by Gestalt (http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=1228) [ZDM01]
+    Organic Mines by Stilgar (http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=2214) [ZDM05]
+  
+  [CEP] Rural (ZTR)
+    Airships by Some_ux (http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=167)
+    Archer Towers by Helvene (http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=6782)
+    CFR Hills by Thallion Stelani/Vilance d'Asari (http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=486)
+    Gentle Hills by Wayland (http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=7221)
+    Misc Tiles by Gribo (http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=5815)
+    Rural Forest Transition by Danmar (http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=1593)
+    Rural High Bridge by Lucifer Church (http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=2528)
+    Rural Towers by Veldin (http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=3127)
+    Rural Tree Cliffs by Lucifer Church (http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=1175)
+    Rural Waterfalls by Lucifer Church (http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=2532)
+  
+  [CEP] Underdark (ZTU)
+    Airships by Some_ux (http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=167)
+    Ruins by Helvene (http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=6905
+  
+  [CEP] Winter (ZTS)
+    Airships by Some_ux (http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=167)
+    Archer Towers by Helvene (http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=6782)
+    CFR Hills by Thallion Stelani/Vilance d'Asari (http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=3357)
+    Gentle Hills by Wayland (http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=7221)
+

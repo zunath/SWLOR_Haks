@@ -1,0 +1,49 @@
+#MAXDOOR ASCII
+# model: zlc_09l_pwk 
+filedependancy PlaceableObjects01.max
+node trimesh zlc_09l_wg 
+  parent zlc_09l_pwk 
+  position 0.0 0.0 0.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.52549 0.431373 0.0313726  
+  multimaterial 18 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+    bitmap NULL
+    verts 4
+     -0.543618 -0.286003 0.0
+     0.543618 -0.286003 0.0
+     -0.543618 0.262018 0.0
+     0.543618 0.262018 0.0
+    faces 2
+     2 0 3  1  0 0 0  7
+     1 3 0  1  0 0 0  7
+endnode
+node dummy 09L_pwk_use01
+  parent zlc_09l_pwk
+  position 0 -0.264065 0.5
+  orientation 0 0 0 0
+  wirecolor 0.527344 0.527344 0.527344
+endnode
+node dummy 09L_pwk_use02
+  parent zlc_09l_pwk
+  position 0 -0.264065 1.25
+  orientation 0 0 0 0
+  wirecolor 0.527344 0.527344 0.527344
+endnode

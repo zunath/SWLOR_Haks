@@ -1,0 +1,27 @@
+#MAXDOOR ASCII
+# model: dBrlB2_PWK 
+filedependancy dBrlB2.max
+node trimesh zlc_g02_wg 
+  parent zlc_g02_pwk 
+  position -0.00349434 0.0174925 0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.54902 0.345098 0.882353  
+  ambient 0.0 0.0 0.0  
+  diffuse 0.784314 0.784314 0.784314  
+  specular 0.0 0.0 0.0  
+  shininess 21.0 
+    bitmap wddr2
+    verts 4
+     -0.39 0.35 0.0
+     -0.39 -0.385 0.0
+     0.385 -0.385 0.0
+     0.385 0.35 0.0
+    faces 2
+     0 1 2  1  0 1 2  1
+     3 0 2  1  3 0 2  1
+    tverts 4
+     0.936823 0.95985 0 
+     0.93 0.95985 0 
+     0.93 0.98985 0 
+     0.936817 0.98985 0 
+endnode

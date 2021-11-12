@@ -1,0 +1,26 @@
+#Exported from 3ds max by MDL Plug-in Suite 1.0b
+#http://www.bricksbuilder.com/nwn/utils/
+#MAXMODEL ASCII
+# model: st_stone01
+filedependancy Stem_placeables0031.max
+node trimesh Plane04
+  parent st_stone01_pwk
+  position 0 0 0
+  orientation 0 0 0 0
+  wirecolor 0.527344 0.527344 0.527344
+  ambient 0.523438 0.0234375 0.0234375
+  diffuse 0.523438 0.0234375 0.0234375
+  specular 0 0 0
+  shininess 1
+  bitmap NULL
+  verts 5
+    -0.618344 1.07864 0
+    -1.08245 0.0429772 0
+    0.677883 0.656428 0
+    -0.246572 -1.03072 0
+    0.631851 -0.778939 0
+  faces 3
+    2 0 4  0  0 0 0  6
+    1 3 0  0  0 0 0  6
+    4 0 3  0  0 0 0  6
+endnode

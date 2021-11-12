@@ -1,0 +1,30 @@
+#MAXDOOR ASCII
+# model: dDr1B1_PWK 
+filedependancy dChrU3.max
+node trimesh zlc_g11_wg 
+  parent zlc_g11_pwk 
+  position -0.205994 1.15999 0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.52549 0.231373 0.0313726  
+  ambient 0.0 0.0 0.0  
+  diffuse 0.784314 0.784314 0.784314  
+  specular 0.0 0.0 0.0  
+  shininess 21.0 
+    bitmap NULL
+    verts 8
+     1.2 -1.56 0.0
+     0.82 -1.47 0.0
+     1.17 -1.82 0.0
+     -0.8 -0.03 0.0
+     0.76 -0.04 0.0
+     0.8 -1.87 0.0
+     0.74 -2.29 0.0
+     -0.8 -2.29 0.0
+    faces 6
+     0 1 2  1  0 0 0  1
+     3 1 4  1  0 0 0  1
+     3 2 1  1  0 0 0  1
+     2 3 5  1  0 0 0  1
+     5 3 6  1  0 0 0  1
+     6 3 7  1  0 0 0  1
+endnode

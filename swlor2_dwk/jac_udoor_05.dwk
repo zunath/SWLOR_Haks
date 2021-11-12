@@ -1,0 +1,46 @@
+#MAXDOOR ASCII
+# model: jac_UDoor_05_DWK 
+filedependancy jac01.max
+node dummy 05_DWK_dp_closed_01 
+  parent jac_UDoor_05_DWK 
+  position 0.0355501 -1.25203 0.0
+  orientation  0.0 0.0 -1.0  -1.5708
+  wirecolor 0.690196 0.101961 0.101961  
+endnode
+node dummy 05_DWK_dp_closed_01 
+  parent jac_UDoor_05_DWK 
+  position 0.0355501 -0.874427 0.0
+  orientation  0.0 0.0 -1.0  -1.5708
+  wirecolor 0.690196 0.101961 0.101961  
+endnode
+node trimesh 05_DWK_wg_closed 
+  parent jac_UDoor_05_DWK 
+  position -0.238486 -1.97324 3.04557
+  orientation  0.0 0.0 -1.0  -1.5708
+  wirecolor 0.878431 0.776471 0.341176  
+    bitmap NULL
+    verts 8
+     1.78246 -4.43309 -0.169551
+     1.78246 4.43309 -0.169551
+     1.78246 4.43309 -3.04557
+     1.78246 -4.43309 -3.04557
+     2.04039 -4.43309 -0.169551
+     2.04039 4.43309 -0.169551
+     2.04039 4.43309 -3.04557
+     2.04039 -4.43309 -3.04557
+    faces 12
+     0 1 2  16  0 0 0  4
+     2 3 0  16  0 0 0  4
+     4 5 1  16  0 0 0  4
+     1 0 4  16  0 0 0  4
+     5 6 2  16  0 0 0  4
+     2 1 5  16  0 0 0  4
+     6 7 3  16  0 0 0  4
+     3 2 6  16  0 0 0  4
+     7 4 0  16  0 0 0  4
+     0 3 7  16  0 0 0  4
+     7 6 5  16  0 0 0  4
+     5 4 7  16  0 0 0  4
+endnode
+
+

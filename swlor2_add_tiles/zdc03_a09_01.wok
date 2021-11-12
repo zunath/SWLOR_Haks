@@ -1,0 +1,24 @@
+# Rewritten by CleanModels 3 Version 3.5.1 Sat Aug 31 13:57:04 2013
+#MAXWALKMESH  ASCII
+beginwalkmeshgeom zdc03_a09_01
+node aabb rectangle12
+  parent zdc03_a09_01
+  position 0 0 0
+  orientation 0 0 0 0
+  wirecolor 0.694118 0.694118 0.694118
+  bitmap NULL
+  render 0
+  shadow 0
+  verts 4
+    -5 -5 0
+    5 -5 0
+    5 5 0
+    -5 5 0
+  faces 2
+    0 1 2 1 0 0 0 4
+    3 0 2 1 0 0 0 4
+  aabb     -5 -5 0 5 5 0 -1
+    -5 -5 0 5 5 0 1
+    -5 -5 0 5 5 0 0
+endnode
+endwalkmeshgeom zdc03_a09_01

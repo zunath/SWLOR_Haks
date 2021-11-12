@@ -1,0 +1,173 @@
+#MAXDOOR ASCII
+# model: vmp_UDoor_04_DWK 
+filedependancy vmp01.max
+node trimesh 04_DWK_wg_closed 
+  parent vmp_UDoor_04_DWK 
+  position 0.0 -0.0165381 0.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.839216 0.898039 0.65098  
+  multimaterial 18 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+    bitmap NULL
+    verts 8
+     -1.44477 -0.164141 0.0
+     1.44602 -0.164141 0.0
+     -1.44477 0.148984 0.0
+     1.44602 0.148984 0.0
+     -1.44477 -0.164141 3.0
+     1.44602 -0.164141 3.0
+     -1.44477 0.148984 3.0
+     1.44602 0.148984 3.0
+    faces 12
+     0 2 3  2  0 0 0  7
+     3 1 0  2  0 0 0  7
+     4 5 7  4  0 0 0  7
+     7 6 4  4  0 0 0  7
+     0 1 5  8  0 0 0  7
+     5 4 0  8  0 0 0  7
+     1 3 7  16  0 0 0  7
+     7 5 1  16  0 0 0  7
+     3 2 6  32  0 0 0  7
+     6 7 3  32  0 0 0  7
+     2 0 4  64  0 0 0  7
+     4 6 2  64  0 0 0  7
+endnode
+node trimesh 04_DWK_wg_open1 
+  parent vmp_UDoor_04_DWK 
+  position -0.2 -0.0165381 0.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.839216 0.898039 0.65098  
+  multimaterial 18 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+    bitmap NULL
+    verts 8
+     -1.44246 -0.164141 0.0
+     -1.3182 -0.164141 0.0
+     -1.44246 0.148984 0.0
+     -1.3182 0.148984 0.0
+     -1.44246 -0.164141 3.0
+     -1.3182 -0.164141 3.0
+     -1.44246 0.148984 3.0
+     -1.3182 0.148984 3.0
+    faces 12
+     0 2 3  2  0 0 0  7
+     3 1 0  2  0 0 0  7
+     4 5 7  4  0 0 0  7
+     7 6 4  4  0 0 0  7
+     0 1 5  8  0 0 0  7
+     5 4 0  8  0 0 0  7
+     1 3 7  16  0 0 0  7
+     7 5 1  16  0 0 0  7
+     3 2 6  32  0 0 0  7
+     6 7 3  32  0 0 0  7
+     2 0 4  64  0 0 0  7
+     4 6 2  64  0 0 0  7
+endnode
+node trimesh 04_DWK_wg_open2 
+  parent vmp_UDoor_04_DWK 
+  position 2.99 -0.0165381 0.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.839216 0.898039 0.65098  
+  multimaterial 18 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+      NULL 
+    bitmap NULL
+    verts 8
+     -1.44445 -0.164141 0.0
+     -1.3202 -0.164141 0.0
+     -1.44445 0.148984 0.0
+     -1.3202 0.148984 0.0
+     -1.44445 -0.164141 3.0
+     -1.3202 -0.164141 3.0
+     -1.44445 0.148984 3.0
+     -1.3202 0.148984 3.0
+    faces 12
+     0 2 3  2  0 0 0  7
+     3 1 0  2  0 0 0  7
+     4 5 7  4  0 0 0  7
+     7 6 4  4  0 0 0  7
+     0 1 5  8  0 0 0  7
+     5 4 0  8  0 0 0  7
+     1 3 7  16  0 0 0  7
+     7 5 1  16  0 0 0  7
+     3 2 6  32  0 0 0  7
+     6 7 3  32  0 0 0  7
+     2 0 4  64  0 0 0  7
+     4 6 2  64  0 0 0  7
+endnode
+node dummy 04_DWK_dp_closed_01 
+  parent vmp_UDoor_04_DWK 
+  position 0.0 0.473789 0.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.694118 0.101961 0.345098  
+endnode
+node dummy 04_DWK_dp_open1_01 
+  parent vmp_UDoor_04_DWK 
+  position 0.0671094 -0.451582 0.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.694118 0.101961 0.345098  
+endnode
+node dummy 04_DWK_dp_closed_02 
+  parent vmp_UDoor_04_DWK 
+  position 0.0 -0.451582 0.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.694118 0.101961 0.345098  
+endnode
+node dummy 04_DWK_dp_open2_01 
+  parent vmp_UDoor_04_DWK 
+  position 0.0671094 0.473789 0.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.694118 0.101961 0.345098  
+endnode
+
+

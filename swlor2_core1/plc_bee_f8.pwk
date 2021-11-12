@@ -1,0 +1,25 @@
+# Exported from NWmax 0.8 b61 at 6/18/2012 11:57:39 PM
+# pwk file
+#
+#NWmax PWKMESH  ASCII
+node trimesh NoWalk
+  parent fistrk14_pwk
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.341176 0.556863 0.882353 
+  bitmap NULL
+  verts 4
+    1.27566 -0.481379 0.0
+    -0.777228 3.22826 0.0
+    -2.14488 0.398074 0.0
+    1.91784 3.04188 0.0
+  faces 2
+    0 1 2  0  0 0 0  7
+    0 3 1  0  0 0 0  7
+endnode
+node dummy tbd_pwk_use01
+  parent fistrk14_pwk
+  position -0.4716 -0.243537 0.159263
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.541176 0.0313726 0.431373 
+endnode

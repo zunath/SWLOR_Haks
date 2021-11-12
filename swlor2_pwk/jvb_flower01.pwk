@@ -1,0 +1,45 @@
+# Exported from NWmax 0.8 b60 at 04/01/2010 01:47:15
+# pwk file
+#
+#NWmax PWKMESH  ASCII
+node trimesh PWK
+  parent jvb_flower01_pwk
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.541176 0.0313726 0.431373 
+  bitmap NULL
+  verts 6
+    -0.159101 -0.10367 0.0
+    0.0 -0.164462 0.0
+    0.155959 -0.111834 0.0
+    -0.142771 0.112892 0.0
+    0.0 0.178135 0.0
+    0.147794 0.118335 0.0
+  faces 4
+    3 0 4  1  12 9 13  7
+    1 4 0  1  10 13 9  7
+    4 1 5  1  13 10 14  7
+    2 5 1  1  11 14 10  7
+  tverts 15
+    0.0 0.0 0
+    0.5 0.0 0
+    1.0 0.0 0
+    0.0 0.0 0
+    0.5 0.0 0
+    1.0 0.0 0
+    0.0 0.0 0
+    0.5 0.0 0
+    1.0 0.0 0
+    0.0 0.5 0
+    0.5 0.5 0
+    1.0 0.5 0
+    0.0 1.0 0
+    0.5 1.0 0
+    1.0 1.0 0
+endnode
+node dummy r01_pwk_use01
+  parent jvb_flower01_pwk
+  position 0.0 0.417766 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.878431 0.341176 0.560784 
+endnode

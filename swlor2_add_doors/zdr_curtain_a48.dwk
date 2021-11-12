@@ -1,0 +1,190 @@
+# Exported from NWmax 0.8 b47 at 27/10/2005 14:06:32
+# dwk file
+#
+#NWmax DWKMESH  ASCII
+node dummy 48_DWK_dp_closed_01
+  parent zdr_curtain_a48_DWK
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.65098 0.898039 0.898039 
+endnode
+node dummy 48_DWK_dp_closed_02
+  parent zdr_curtain_a48_DWK
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.603922 0.603922 0.898039 
+endnode
+node dummy 48_DWK_dp_open1_01
+  parent zdr_curtain_a48_DWK
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.603922 0.603922 0.898039 
+endnode
+node dummy 48_DWK_dp_open2_01
+  parent zdr_curtain_a48_DWK
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.603922 0.603922 0.898039 
+endnode
+node trimesh 48_DWK_wg_closed
+  parent zdr_curtain_a48_DWK
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.537255 0.0313726 0.431373 
+  multimaterial 20
+    Dirt
+    Obscuring
+    Grass
+    Stone
+    Wood
+    Water
+    Nonwalk
+    transparent
+    Carpet
+    Metal
+    Puddles
+    Swamp
+    Mud
+    Leaves
+    Lava
+    BottomlessPit
+    DeepWater
+    Door
+    Snow
+    Sand
+  ambient 0.0 0.0 0.0 
+  diffuse 0.705882 0.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 10.0
+  bitmap Nonwalk
+  verts 8
+    -1.0 -0.2 0.0
+    1.0 -0.2 0.0
+    -1.0 0.2 0.0
+    1.0 0.2 0.0
+    -1.0 -0.2 3.0
+    1.0 -0.2 3.0
+    -1.0 0.2 3.0
+    1.0 0.2 3.0
+  faces 12
+    0 2 3  2  0 0 0  7
+    3 1 0  2  0 0 0  7
+    4 5 7  4  0 0 0  7
+    7 6 4  4  0 0 0  7
+    0 1 5  8  0 0 0  7
+    5 4 0  8  0 0 0  7
+    1 3 7  16  0 0 0  7
+    7 5 1  16  0 0 0  7
+    3 2 6  32  0 0 0  7
+    6 7 3  32  0 0 0  7
+    2 0 4  64  0 0 0  7
+    4 6 2  64  0 0 0  7
+endnode
+node trimesh 48_DWK_wg_open2
+  parent zdr_curtain_a48_DWK
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.537255 0.0313726 0.431373 
+  multimaterial 20
+    Dirt
+    Obscuring
+    Grass
+    Stone
+    Wood
+    Water
+    Nonwalk
+    transparent
+    Carpet
+    Metal
+    Puddles
+    Swamp
+    Mud
+    Leaves
+    Lava
+    BottomlessPit
+    DeepWater
+    Door
+    Snow
+    Sand
+  ambient 0.0 0.0 0.0 
+  diffuse 0.705882 0.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 10.0
+  bitmap Nonwalk
+  verts 8
+    0.85 -0.2 0.0
+    1.0 -0.2 0.0
+    0.85 0.2 0.0
+    1.0 0.2 0.0
+    0.85 -0.2 3.0
+    1.0 -0.2 3.0
+    0.85 0.2 3.0
+    1.0 0.2 3.0
+  faces 12
+    0 2 3  2  0 0 0  7
+    3 1 0  2  0 0 0  7
+    4 5 7  4  0 0 0  7
+    7 6 4  4  0 0 0  7
+    0 1 5  8  0 0 0  7
+    5 4 0  8  0 0 0  7
+    1 3 7  16  0 0 0  7
+    7 5 1  16  0 0 0  7
+    3 2 6  32  0 0 0  7
+    6 7 3  32  0 0 0  7
+    2 0 4  64  0 0 0  7
+    4 6 2  64  0 0 0  7
+endnode
+node trimesh 48_DWK_wg_open1
+  parent zdr_curtain_a48_DWK
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.537255 0.0313726 0.431373 
+  multimaterial 20
+    Dirt
+    Obscuring
+    Grass
+    Stone
+    Wood
+    Water
+    Nonwalk
+    transparent
+    Carpet
+    Metal
+    Puddles
+    Swamp
+    Mud
+    Leaves
+    Lava
+    BottomlessPit
+    DeepWater
+    Door
+    Snow
+    Sand
+  ambient 0.0 0.0 0.0 
+  diffuse 0.705882 0.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 10.0
+  bitmap Nonwalk
+  verts 8
+    0.85 -0.2 0.0
+    1.0 -0.2 0.0
+    0.85 0.2 0.0
+    1.0 0.2 0.0
+    0.85 -0.2 3.0
+    1.0 -0.2 3.0
+    0.85 0.2 3.0
+    1.0 0.2 3.0
+  faces 12
+    0 2 3  2  0 0 0  7
+    3 1 0  2  0 0 0  7
+    4 5 7  4  0 0 0  7
+    7 6 4  4  0 0 0  7
+    0 1 5  8  0 0 0  7
+    5 4 0  8  0 0 0  7
+    1 3 7  16  0 0 0  7
+    7 5 1  16  0 0 0  7
+    3 2 6  32  0 0 0  7
+    6 7 3  32  0 0 0  7
+    2 0 4  64  0 0 0  7
+    4 6 2  64  0 0 0  7
+endnode

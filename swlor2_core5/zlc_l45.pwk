@@ -1,0 +1,57 @@
+# Exported from NWmax 0.5-beta at 2/13/2004 8:37:52 PM
+# pwk file
+#
+#NWmaxPWKMESH  ASCII
+node trimesh zlc_l45_wg
+  parent zlc_l45_pwk
+  position 0.02 0.05 5e-007
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.521569 0.431373 0.0313726 
+  multimaterial 20
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+  ambient 0.0 0.0 0.0 
+  diffuse 0.705882 0.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 11.0
+  selfillumcolor 0.0 0.0 0.0 
+    bitmap NULL
+    verts 4
+     -0.88 -0.07 -5e-007
+     0.88 -0.07 -5e-007
+     -0.88 0.07 -5e-007
+     0.88 0.07 -5e-007
+    faces 2
+     2 0 3  1  0 0 0  7
+     1 3 0  1  0 0 0  7
+endnode
+node dummy l45_pwk_use01
+  parent zlc_l45_pwk
+  position -0.00325344 -0.449253 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.109804 0.109804 0.694118 
+endnode
+node dummy l45_pwk_use02
+  parent zlc_l45_pwk
+  position -0.00333481 0.421814 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.0235294 0.52549 0.227451 
+endnode

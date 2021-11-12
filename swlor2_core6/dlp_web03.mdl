@@ -1,0 +1,97 @@
+#MAXMODEL ASCII
+# model: dlp_web03 
+filedependancy sewer_plc_door_7.max
+newmodel dlp_web03 
+setsupermodel dlp_web03 NULL
+classification Item
+#MAXGEOM  ASCII
+beginmodelgeom dlp_web03 
+node dummy dlp_web03 
+  parent NULL 
+endnode
+node danglymesh web01 
+  parent dlp_web03 
+  position 0.0258303 0.0 1.98393
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.0235294 0.52549 0.0235294  
+     danglymesh 1
+     period 0.9
+     tightness 1.4
+     displacement 0.2
+     showdispl true
+     displtype 1
+     Alpha 1.0
+     transparencyhint 0
+     tilefade 0
+     scale 1.0
+     render 1
+     Shadow 0
+     beaming 0
+     inheritcolor 0
+     selfillumcolor 0.0 0.0 0.0 
+     rotatetexture 0
+     center 0.0 -30.0 0.0 
+     gizmo SubAnim:Gizmo
+  ambient 1.0 1.0 1.0  
+  diffuse 1.0 1.0 1.0  
+  specular 0.0 0.0 0.0  
+  shininess 11.0 
+    bitmap ttf01_webs
+    verts 10
+     -2.0 0.0 -2.0
+     2.0 0.0 -2.0
+     -2.0 0.0 2.0
+     2.0 0.0 2.0
+     0.0 -0.3 0.0
+     -2.0 0.0 -2.0
+     2.0 0.0 -2.0
+     -2.0 0.0 2.0
+     2.0 0.0 2.0
+     0.0 -0.3 0.0
+    faces 8
+     2 0 4  1  2 0 4  1
+     0 1 4  1  0 1 4  1
+     1 3 4  1  1 3 4  1
+     3 2 4  1  3 2 4  1
+     5 7 9  1  5 7 9  1
+     7 8 9  1  7 8 9  1
+     8 6 9  1  8 6 9  1
+     6 5 9  1  6 5 9  1
+    tverts 10
+     0.00419095 0.437931 0 
+     0.527001 0.43793 0 
+     0.000499785 0.9995 0 
+     0.527001 0.9995 0 
+     0.265596 0.718715 0 
+     0.00419095 0.437931 0 
+     0.527001 0.43793 0 
+     0.000499785 0.9995 0 
+     0.527001 0.9995 0 
+     0.265596 0.718715 0 
+  colors 10
+     1.0 1.0 1.0
+     1.0 1.0 1.0
+     1.0 1.0 1.0
+     1.0 1.0 1.0
+     0.580392 0.580392 0.580392
+     1.0 1.0 1.0
+     1.0 1.0 1.0
+     1.0 1.0 1.0
+     1.0 1.0 1.0
+     0.580392 0.580392 0.580392
+    constraints 10
+    0.0
+    0.0
+    0.0
+    0.0
+    148.0
+    0.0
+    0.0
+    0.0
+    0.0
+    148.0
+endnode
+endmodelgeom dlp_web03 
+
+donemodel dlp_web03 
+

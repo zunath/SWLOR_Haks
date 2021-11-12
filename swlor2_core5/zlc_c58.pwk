@@ -1,0 +1,28 @@
+#Exported from 3ds max by MDL Plug-in Suite 1.0b
+#http://www.bricksbuilder.com/nwn/utils/
+#MAXMODEL ASCII
+# model: plc_shpbct
+filedependancy Bucket1.max
+node trimesh zlc_c58_wg
+  parent zlc_c58_pwk
+  position 0 0 0
+  orientation 0 0 0 0
+  wirecolor 0.878906 0.878906 0.878906
+  ambient 0.875 0.339844 0.558594
+  diffuse 0.875 0.339844 0.558594
+  specular 0 0 0
+  shininess 1
+  bitmap NULL
+  verts 6
+    -0.277378 0 0
+    -0.138689 0.240216 0
+    0.138689 0.240216 0
+    0.277378 0 0
+    0.138689 -0.240216 0
+    -0.138689 -0.240216 0
+  faces 4
+    4 3 2  1  0 0 0  1
+    2 1 0  1  0 0 0  1
+    4 2 0  1  0 0 0  1
+    5 4 0  1  0 0 0  1
+endnode

@@ -1,0 +1,77 @@
+# Exported from NWmax 0.5-beta at 2/20/2004 4:41:25 PM
+# pwk file
+#
+#NWmaxPWKMESH  ASCII
+node dummy a51_pwk_use01
+  parent zlc_a51_pwk
+  position -0.00100983 1.29399 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.6 0.894118 0.721569 
+endnode
+node trimesh zlc_a51_wg
+  parent zlc_a51_pwk
+  position 0.120896 0.0625629 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.337255 0.337255 0.337255 
+  multimaterial 20
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+  bitmap NULL
+  verts 15
+    -0.770896 -0.902563 0.0
+    -0.130896 -1.13256 0.0
+    0.509104 -0.912563 0.0
+    -1.0909 -0.552563 0.0
+    -0.130896 -0.442563 0.0
+    0.839104 -0.522563 0.0
+    -1.1909 -0.0625629 0.0
+    -0.130896 -0.0625629 0.0
+    0.979104 -0.0625629 0.0
+    -1.0709 0.427437 0.0
+    -0.130896 0.327437 0.0
+    0.829104 0.437437 0.0
+    -0.750896 0.787437 0.0
+    -0.130896 0.997437 0.0
+    0.549104 0.787437 0.0
+  faces 16
+    3 0 4  1  0 0 0  0
+    1 4 0  1  0 0 0  0
+    4 1 5  1  0 0 0  0
+    2 5 1  1  0 0 0  0
+    6 3 7  1  0 0 0  0
+    4 7 3  1  0 0 0  0
+    7 4 8  1  0 0 0  0
+    5 8 4  1  0 0 0  0
+    9 6 10  1  0 0 0  0
+    7 10 6  1  0 0 0  0
+    10 7 11  1  0 0 0  0
+    8 11 7  1  0 0 0  0
+    12 9 13  1  0 0 0  0
+    10 13 9  1  0 0 0  0
+    13 10 14  1  0 0 0  0
+    11 14 10  1  0 0 0  0
+endnode
+node dummy a51_pwk_use02
+  parent zlc_a51_pwk
+  position -0.00100983 -1.32446 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.6 0.894118 0.721569 
+endnode

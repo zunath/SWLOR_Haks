@@ -1,0 +1,30 @@
+#Exported from 3ds max by MDL Plug-in Suite 1.0b
+#http://www.bricksbuilder.com/nwn/utils/
+#MAXMODEL ASCII
+# model: PLC_ShpWhl
+filedependancy Ship's Wheel.max
+node dummy c61_pwk_use01
+  parent zlc_c61_pwk
+  position 0 -0.15 0
+  orientation 0 0 0 0
+  wirecolor 0.105469 0.105469 0.105469
+endnode
+node trimesh zlc_c61_wg
+  parent zlc_c61_pwk
+  position 0 0 0
+  orientation 0 0 0 0
+  wirecolor 0.34375 0.34375 0.34375
+  ambient 0.339844 0.875 0.773438
+  diffuse 0.339844 0.875 0.773438
+  specular 0 0 0
+  shininess 1
+  bitmap NULL
+  verts 4
+    0.347682 0.45 0
+    -0.347682 0.45 0
+    0.5565 -0.1 0
+    -0.5565 -0.0999999 0
+  faces 2
+    2 0 3  1  0 0 0  7
+    1 3 0  1  0 0 0  7
+endnode

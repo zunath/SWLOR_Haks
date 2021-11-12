@@ -1,0 +1,41 @@
+# Exported from NWmax 0.8 b60 at 14/12/2007 00:25:57
+# pwk file
+#
+#NWmax PWKMESH  ASCII
+node trimesh pwk
+  parent crate_s2_pwk
+  position -0.00109231 0.0117884 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.580392 0.694118 0.101961 
+  tilefade 0
+  scale 1.0
+  render 0
+  Shadow 0
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  center 0.0 0.0 0.0 
+  bitmap NULL
+  verts 4
+    -0.0946822 -0.314068 0.0
+    0.0946822 -0.314068 0.0
+    -0.0946822 0.314068 0.0
+    0.0946822 0.314068 0.0
+  faces 2
+    2 0 3  1  6 4 7  7
+    1 3 0  1  5 7 4  7
+  tverts 8
+    0.0 0.0 0
+    1.0 0.0 0
+    0.0 0.0 0
+    1.0 0.0 0
+    0.0 0.0 0
+    1.0 0.0 0
+    0.0 1.0 0
+    1.0 1.0 0
+endnode

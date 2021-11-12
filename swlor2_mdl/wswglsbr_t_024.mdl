@@ -1,0 +1,15 @@
+#MAXMODEL ASCII
+# model: wswglsbr_t_023
+filedependancy wswglsbr_t_023.max
+newmodel wswglsbr_t_023
+setsupermodel wswglsbr_t_023 NULL
+classification CHARACTER
+setanimationscale 1
+#MAXGEOM  ASCII
+beginmodelgeom wswglsbr_t_023
+node dummy wswglsbr_t_023
+  parent NULL
+endnode
+endmodelgeom wswglsbr_t_023
+
+donemodel wswglsbr_t_023

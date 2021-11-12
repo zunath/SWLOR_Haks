@@ -1,0 +1,33 @@
+# Exported from 3ds max by MDL Plugin Suite 1.1b3
+# http://rockbottom.vtex.net
+#MAXMODEL ASCII
+# model: spb_fence03
+filedependancy spb_fence03.max
+node trimesh Plane01
+  parent spb_fence03_pwk
+  position -0.0254631 -0.00954902 0
+  orientation 0 0 0 0
+  wirecolor 0.113281 0.113281 0.113281
+  ambient 0.109375 0.347656 0.691406
+  diffuse 0.109375 0.347656 0.691406
+  specular 0 0 0
+  shininess 1
+  bitmap NULL
+  verts 4
+    -1.35596 -0.0795753 0
+    1.35596 -0.0795753 0
+    -1.35596 0.0795753 0
+    1.35596 0.0795753 0
+  faces 2
+    2 0 3  1  6 4 7  0
+    1 3 0  1  5 7 4  0
+  tverts 8
+    0 0 0
+    1 0 0
+    0 0 0
+    1 0 0
+    0 0 0
+    1 0 0
+    0 1 0
+    1 1 0
+endnode

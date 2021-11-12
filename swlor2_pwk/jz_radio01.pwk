@@ -1,0 +1,41 @@
+# Exported from NWmax 0.8 b60 at 22/11/2007 16:53:29
+# pwk file
+#
+#NWmax PWKMESH  ASCII
+node trimesh pwk
+  parent jz_radio_pwk
+  position -0.00233716 -0.00616858 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.341176 0.878431 0.560784 
+  tilefade 0
+  scale 1.0
+  render 0
+  Shadow 0
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  Diffuse 1.0 1.0 1.0 
+  Specular 0.0 0.0 0.0 
+  center 0.0 0.0 0.0 
+  bitmap NULL
+  verts 4
+    -0.141762 -0.203065 0.0
+    0.141762 -0.203065 0.0
+    -0.141762 0.203065 0.0
+    0.141762 0.203065 0.0
+  faces 2
+    2 0 3  1  6 4 7  7
+    1 3 0  1  5 7 4  7
+  tverts 8
+    0.0 0.0 0
+    1.0 0.0 0
+    0.0 0.0 0
+    1.0 0.0 0
+    0.0 0.0 0
+    1.0 0.0 0
+    0.0 1.0 0
+    1.0 1.0 0
+endnode

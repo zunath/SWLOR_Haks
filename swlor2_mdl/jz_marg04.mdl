@@ -1,0 +1,165 @@
+#MAXMODEL ASCII
+# model: zlc_51t
+filedependancy zlc_51t.max
+newmodel zlc_51t
+setsupermodel zlc_51t NULL
+classification TILE
+setanimationscale 1
+#MAXGEOM  ASCII
+beginmodelgeom zlc_51t
+node dummy zlc_51t
+  parent NULL
+endnode
+node trimesh Plane01
+  parent zlc_51t
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 10
+  shadow 0
+  transparencyhint 1
+  bitmap jz_marg04
+  verts 4
+       0.6027630   -1.0005000   -0.0808914
+       0.9998350    0.6067940   -0.0548454
+      -0.9998350   -0.6067940    0.0548454
+      -0.6027630    1.0005000    0.0808914
+  tverts 4
+       0.0000000    1.0000000  0
+       0.0000000    0.0000000  0
+       1.0000000    1.0000000  0
+       1.0000000    0.0000000  0
+  faces 2
+    0 1 2  1  0 1 2   0
+    3 2 1  1  3 2 1   0
+  position 0.816874 -0.440026 0.178007
+  orientation 0 0 0 0
+endnode
+node trimesh Plane02
+  parent zlc_51t
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 10
+  shadow 0
+  transparencyhint 1
+  bitmap jz_marg04
+  verts 4
+      -0.5112870   -1.0508100   -0.0725467
+       1.0523800   -0.5062370   -0.0842280
+      -1.0523800    0.5062370    0.0842281
+       0.5112870    1.0508100    0.0725467
+  tverts 4
+       0.0000000    1.0000000  0
+       0.0000000    0.0000000  0
+       1.0000000    1.0000000  0
+       1.0000000    0.0000000  0
+  faces 2
+    0 1 2  1  0 1 2   0
+    3 2 1  1  3 2 1   0
+  position -0.359645 -0.965571 0.218007
+  orientation 0 0 0 0
+endnode
+node trimesh Plane03
+  parent zlc_51t
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 10
+  shadow 0
+  transparencyhint 1
+  bitmap jz_marg04
+  verts 4
+      -0.1348450    1.1630100   -0.0104804
+      -1.1599100   -0.1336990    0.0872778
+       1.1599100    0.1336990   -0.0872778
+       0.1348440   -1.1630100    0.0104804
+  tverts 4
+       0.0000000    1.0000000  0
+       0.0000000    0.0000000  0
+       1.0000000    1.0000000  0
+       1.0000000    0.0000000  0
+  faces 2
+    0 1 2  1  0 1 2   0
+    3 2 1  1  3 2 1   0
+  position 0.808839 0.859017 0.218007
+  orientation 0 0 0 0
+endnode
+node trimesh Plane04
+  parent zlc_51t
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 10
+  shadow 0
+  transparencyhint 1
+  bitmap jz_marg04
+  verts 4
+       1.0253100    0.5651310   -0.0157465
+      -0.5644480    1.0214400   -0.0946189
+       0.5644480   -1.0214400    0.0946189
+      -1.0253100   -0.5651310    0.0157465
+  tverts 4
+       0.0000000    1.0000000  0
+       0.0000000    0.0000000  0
+       1.0000000    1.0000000  0
+       1.0000000    0.0000000  0
+  faces 2
+    0 1 2  1  0 1 2   0
+    3 2 1  1  3 2 1   0
+  position -0.536314 0.927384 0.178007
+  orientation 0 0 0 0
+endnode
+node trimesh Plane05
+  parent zlc_51t
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 10
+  shadow 0
+  transparencyhint 1
+  bitmap jz_marg04
+  verts 4
+      -1.1542900   -0.1817170   -0.0740019
+       0.1814050   -1.1566600    0.0106756
+      -0.1814050    1.1566600   -0.0106756
+       1.1542900    0.1817170    0.0740019
+  tverts 4
+       0.0000000    1.0000000  0
+       0.0000000    0.0000000  0
+       1.0000000    1.0000000  0
+       1.0000000    0.0000000  0
+  faces 2
+    0 1 2  1  0 1 2   0
+    3 2 1  1  3 2 1   0
+  position -1.03884 -0.451766 0.238007
+  orientation 0 0 0 0
+endnode
+node trimesh Plane06
+  parent zlc_51t
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 10
+  shadow 0
+  transparencyhint 1
+  bitmap jz_marg04
+  verts 4
+      -0.3018840    1.1303101   -0.0463767
+      -1.1312500   -0.3018740    0.0063342
+       1.1312500    0.3018740   -0.0063343
+       0.3018840   -1.1303101    0.0463767
+  tverts 4
+       0.0000000    1.0000000  0
+       0.0000000    0.0000000  0
+       1.0000000    1.0000000  0
+       1.0000000    0.0000000  0
+  faces 2
+    0 1 2  1  0 1 2   0
+    3 2 1  1  3 2 1   0
+  position -0.0853108 -0.098971 0.238007
+  orientation 0 0 0 0
+endnode
+endmodelgeom zlc_51t
+
+donemodel zlc_51t

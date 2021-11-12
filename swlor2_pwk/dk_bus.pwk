@@ -1,0 +1,43 @@
+# Exported from NWmax 0.8 b60 at 8/7/2007 9:13:01 AM
+# mdl file
+#
+#NWmax MODEL ASCII
+# model: dk_bus_pwk
+#local file: Unknown
+filedependancy Unknown
+newmodel dk_bus_pwk
+setsupermodel dk_bus_pwk NULL
+classification WalkMesh
+#NWmax GEOM  ASCII
+beginmodelgeom dk_bus_pwk
+node dummy dk_bus_pwk
+  parent NULL
+endnode
+node trimesh Plane01
+  parent dk_bus_pwk
+  position 0.0646651 -1.01641 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.239216 0.52549 0.0235294 
+  bitmap NULL
+  verts 9
+    -1.29754 -4.48579 0.0
+    0.0 -4.48579 0.0
+    1.29754 -4.48579 0.0
+    -1.29754 0.0 0.0
+    0.0 0.0 0.0
+    1.29754 0.0 0.0
+    -1.29754 4.48579 0.0
+    0.0 4.48579 0.0
+    1.29754 4.48579 0.0
+  faces 8
+    3 0 4  1  0 0 0  1
+    1 4 0  1  0 0 0  1
+    4 1 5  1  0 0 0  1
+    2 5 1  1  0 0 0  1
+    6 3 7  1  0 0 0  1
+    4 7 3  1  0 0 0  1
+    7 4 8  1  0 0 0  1
+    5 8 4  1  0 0 0  1
+endnode
+endmodelgeom dk_bus_pwk
+donemodel dk_bus_pwk

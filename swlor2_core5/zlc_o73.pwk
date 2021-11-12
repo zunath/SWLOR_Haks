@@ -1,0 +1,18 @@
+#MAXDOOR ASCII
+# model: v_pillar_001_pwk 
+filedependancy cc_int_placeables2.max
+node trimesh zlc_o73_wg 
+  parent zlc_o73_pwk 
+  position 0.0 0.0 0.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.552941 0.027451 0.227451  
+    bitmap NULL
+    verts 4
+     0.316901 -0.742496 0.0
+     0.780028 0.305495 0.0
+     -0.780028 -0.305495 0.0
+     -0.316901 0.742496 0.0
+    faces 2
+     2 0 3  1  0 0 0  1
+     1 3 0  1  0 0 0  1
+endnode

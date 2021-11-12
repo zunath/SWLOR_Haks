@@ -1,0 +1,65 @@
+# Exported from NWmax 0.6 at 9/15/2004 11:34:33 PM
+# pwk file
+#
+#NWmax PWKMESH  ASCII
+node trimesh xlc_m17_wg
+  parent xlc_m17_pwk
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.6 0.6 0.6 
+  multimaterial 20
+    Dirt
+    Obscuring
+    Grass
+    Stone
+    Wood
+    Water
+    Nonwalk
+    Transparent
+    Carpet
+    Metal
+    Puddles
+    Swamp
+    Mud
+    Leaves
+    Lava
+    BottomlessPit
+    DeepWater
+    Door
+    Snow
+    Sand
+  bitmap NULL
+  verts 10
+    1.08563 -0.588486 0.0
+    0.453395 -1.7913 0.0
+    -0.507166 -1.80013 0.0
+    -1.06451 -0.549407 0.0
+    -1.15375 0.0572692 0.0
+    -0.708148 0.453509 0.0
+    -0.00377808 0.60187 0.0
+    0.570316 0.532757 0.0
+    1.18434 0.106942 0.0
+    -0.00377815 -0.181164 0.0
+  faces 9
+    9 3 2  0  0 0 0  7
+    9 2 1  0  0 0 0  7
+    9 0 8  0  0 0 0  7
+    9 1 0  0  0 0 0  7
+    8 7 9  0  0 0 0  7
+    9 7 6  0  0 0 0  7
+    6 5 9  0  0 0 0  7
+    5 4 9  0  0 0 0  7
+    4 3 9  0  0 0 0  7
+endnode
+node dummy m17_pwk_use02
+  parent xlc_m17_pwk
+  position 0.012 0.24071 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.52549 0.231373 0.0313726 
+endnode
+node dummy m17_pwk_use01
+  parent xlc_m17_pwk
+  position -0.006 -1.35843 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.52549 0.231373 0.0313726 
+endnode
