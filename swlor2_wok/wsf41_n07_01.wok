@@ -1,0 +1,42 @@
+# Rewritten by CleanModels 3 Version 3.1.1 Sun Oct 26 03:05:01 2008
+#MAXWALKMESH  ASCII
+beginwalkmeshgeom wsf41_n07_01
+node aabb walkmesh
+  parent wsf41_n07_01
+  position 0 0 0
+  orientation 0 0 0 0
+  wirecolor 0.226563 0.226563 0.226563
+  ambient 0.109375 0.582031 0.691406
+  diffuse 0.109375 0.582031 0.691406
+  specular 0 0 0
+  shininess 1
+  bitmap NULL
+  verts 8
+    5 5 7
+    3.1 5 7
+    -1 5 -2
+    -5 5 -2
+    5 -5 4
+    3.1 -5 4
+    -0.136101 -5 -2
+    -5 -5 -2
+  faces 6
+    4 0 5 1 0 0 0 4
+    1 5 0 1 0 0 0 4
+    5 1 6 2 0 0 0 7
+    2 6 1 2 0 0 0 7
+    6 2 7 1 0 0 0 7
+    3 7 2 1 0 0 0 7
+  aabb     -5 -5 -2 5 5 7 -1
+    -5 -5 -2 3.1 5 7 -1
+    -5 -5 -2 -0.136101 5 -2 4
+    -5 -5 -2 3.1 5 7 -1
+    -5 -5 -2 -1 5 -2 5
+    -1 -5 -2 3.1 5 7 3
+    -0.136101 -5 -2 5 5 7 -1
+    -0.136101 -5 -2 5 5 7 -1
+    -0.136101 -5 -2 3.1 5 7 2
+    3.1 -5 4 5 5 7 0
+    3.1 -5 4 5 5 7 1
+endnode
+endwalkmeshgeom wsf41_n07_01
