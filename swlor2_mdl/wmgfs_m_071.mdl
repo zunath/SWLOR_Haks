@@ -1,4 +1,4 @@
-# Exported from NeverBlender 2.8.33 - Monday, 2021-12-20
+# Exported from NeverBlender 2.8.33 - Tuesday, 2021-12-21
 filedependancy LIGHTSABERS.blend
 newmodel wmgfs_m_071
 setsupermodel wmgfs_m_071 null
@@ -7,11 +7,6 @@ setanimationscale 1.0
 beginmodelgeom wmgfs_m_071
 node dummy wmgfs_m_071
   parent null
-endnode
-node dummy rootdummy
-  parent wmgfs_m_071
-  position  0.00000  0.00000  0.00000
-  orientation  0.00000  1.00000  0.00000  0.00000
 endnode
 node trimesh umbrella
   parent wmgfs_m_071
@@ -22,7 +17,7 @@ node trimesh umbrella
   diffuse 1.00 1.00 1.00
   specular 0.00 0.00 0.00
   selfillumcolor 0.00 0.00 0.00
-  bitmap wmgfs_m_071
+  bitmap umbrellasab
   shininess 1
   render 1
   shadow 0
@@ -1728,7 +1723,7 @@ node trimesh 2
   diffuse 1.00 1.00 1.00
   specular 0.00 0.00 0.00
   selfillumcolor 0.00 0.00 0.00
-  bitmap models/weapons2/saber_plasma/saber_kouru_diff
+  bitmap umbrellasab
   shininess 1
   render 1
   shadow 0
@@ -2393,7 +2388,7 @@ node trimesh 3
   diffuse 1.00 1.00 1.00
   specular 0.00 0.00 0.00
   selfillumcolor 0.00 0.00 0.00
-  bitmap models/weapons2/saber_plasma/saber_kouru_diff
+  bitmap umbrellasab
   shininess 1
   render 1
   shadow 0
@@ -4156,7 +4151,7 @@ node trimesh 4
   diffuse 1.00 1.00 1.00
   specular 0.00 0.00 0.00
   selfillumcolor 0.00 0.00 0.00
-  bitmap models/weapons2/saber_plasma/saber_kouru_diff
+  bitmap umbrellasab
   shininess 1
   render 1
   shadow 0
@@ -6469,7 +6464,7 @@ node trimesh 5
   diffuse 1.00 1.00 1.00
   specular 0.00 0.00 0.00
   selfillumcolor 0.00 0.00 0.00
-  bitmap models/weapons2/saber_plasma/saber_kouru_diff
+  bitmap umbrellasab
   shininess 1
   render 1
   shadow 0
@@ -8222,7 +8217,7 @@ node trimesh 6
   diffuse 1.00 1.00 1.00
   specular 0.00 0.00 0.00
   selfillumcolor 0.00 0.00 0.00
-  bitmap models/weapons2/saber_plasma/saber_kouru_diff
+  bitmap umbrellasab
   shininess 1
   render 1
   shadow 0
@@ -9975,7 +9970,7 @@ node trimesh 7
   diffuse 1.00 1.00 1.00
   specular 0.00 0.00 0.00
   selfillumcolor 0.00 0.00 0.00
-  bitmap models/weapons2/saber_plasma/saber_kouru_diff
+  bitmap umbrellasab
   shininess 1
   render 1
   shadow 0
