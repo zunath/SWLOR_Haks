@@ -1,0 +1,61 @@
+# Exported from NeverBlender 2.8.33 - Friday, 2022-01-07
+filedependancy LIGHTSABERS.blend
+newmodel wswglsbr_t_041
+setsupermodel wswglsbr_t_041 null
+classification CHARACTER
+setanimationscale 1.0
+beginmodelgeom wswglsbr_t_041
+node dummy wswglsbr_t_041
+  parent null
+endnode
+node emitter nwnemitter41a
+  parent wswglsbr_t_041
+  position  0.04403  0.07195 -0.00028
+  orientation  1.00000  0.00000  0.00000  1.57080
+  xsize 0.00
+  ysize 0.00
+  update Fountain
+  render Billboard_to_Local_Z
+  blend Lighten
+  spawntype 0
+  renderorder 0
+  birthrate 60
+  lifeexp 0.05
+  mass 0.00
+  velocity 0.00
+  randvel 0.00
+  particlerot 0.00
+  spread 0.00
+  splat 0
+  affectedbywind 0
+  colorstart 1.00 1.00 1.00
+  colorend 1.00 1.00 1.00
+  alphastart 1.00
+  alphaend 1.00
+  sizestart 0.22
+  sizeend 0.22
+  sizestart_y 0.60
+  sizeend_y 0.60
+  bounce 0
+  bounce_co 0.00
+  blurlength 8.00
+  deadspace 0.00
+  texture lsbr_018
+  twosidedtex 1
+  m_istinted 0
+  xgrid 0
+  ygrid 0
+  fps 0
+  framestart 0
+  frameend 0
+  random 0
+  p2p 0
+  blastradius 0.00
+  blastlength 0.00
+  inherit 1
+  inheritvel 0
+  inherit_local 0
+  inherit_part 0
+endnode
+endmodelgeom wswglsbr_t_041
+donemodel wswglsbr_t_041

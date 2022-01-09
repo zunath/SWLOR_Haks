@@ -1,15 +1,15 @@
-# Exported from NeverBlender 2.8.33 - Friday, 2022-01-07
+# Exported from NeverBlender 2.8.33 - Thursday, 2022-01-06
 filedependancy LIGHTSABERS.blend
-newmodel wswglsbr_b_231
-setsupermodel wswglsbr_b_231 null
+newmodel wswglsbr_b_232
+setsupermodel wswglsbr_b_232 null
 classification CHARACTER
 setanimationscale 1.0
-beginmodelgeom wswglsbr_b_231
-node dummy wswglsbr_b_231
+beginmodelgeom wswglsbr_b_232
+node dummy wswglsbr_b_232
   parent null
 endnode
 node trimesh ventsaber
-  parent wswglsbr_b_231
+  parent wswglsbr_b_232
   position  0.00000  0.00000  0.00000
   orientation  0.00000  1.00000  0.00000  0.00000
   wirecolor 1.00 1.00 1.00
@@ -17,7 +17,7 @@ node trimesh ventsaber
   diffuse 1.00 1.00 1.00
   specular 0.00 0.00 0.00
   selfillumcolor 0.00 0.00 0.00
-  bitmap wswglsbr_b_231
+  bitmap wswglsbr_b_232
   shininess 1
   render 1
   shadow 0
@@ -5789,5 +5789,5 @@ node trimesh ventsaber
     2144 2142 2143 1  1475 1473 1474 0
     2143 2141 2144 1  1474 1472 1475 0
 endnode
-endmodelgeom wswglsbr_b_231
-donemodel wswglsbr_b_231
+endmodelgeom wswglsbr_b_232
+donemodel wswglsbr_b_232
