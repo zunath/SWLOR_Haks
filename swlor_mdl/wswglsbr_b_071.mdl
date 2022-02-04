@@ -1,17 +1,17 @@
 #MAXMODEL ASCII
-# model: wswglsbr_b_071
-filedependancy wswglsbr_b_071.max
-newmodel wswglsbr_b_071
-setsupermodel wswglsbr_b_071 NULL
+# model: wswlsbr_b_071
+filedependancy wswlsbr_b_071.max
+newmodel wswlsbr_b_071
+setsupermodel wswlsbr_b_071 NULL
 classification CHARACTER
 setanimationscale 1
 #MAXGEOM  ASCII
-beginmodelgeom wswglsbr_b_071
-node dummy wswglsbr_b_071
+beginmodelgeom wswlsbr_b_071
+node dummy wswlsbr_b_071
   parent NULL
 endnode
-node trimesh g_wswglsbr_b_071
-  parent wswglsbr_b_071
+node trimesh g_wswlsbr_b_071
+  parent wswlsbr_b_071
   ambient 0.588 0.588 0.588
   diffuse 0.588 0.588 0.588
   specular 0 0 0
@@ -1482,7 +1482,7 @@ node trimesh g_wswglsbr_b_071
   orientation 1 0 0 -1.55851
 endnode
 node trimesh w_saber4
-  parent g_wswglsbr_b_071
+  parent g_wswlsbr_b_071
   ambient 0.588 0.588 0.588
   diffuse 0.588 0.588 0.588
   specular 0 0 0
@@ -1712,7 +1712,7 @@ node trimesh w_saber4
   orientation 0 0 0 0
 endnode
 node trimesh w_saber1
-  parent g_wswglsbr_b_071
+  parent g_wswlsbr_b_071
   ambient 0.588 0.588 0.588
   diffuse 0.588 0.588 0.588
   specular 0 0 0
@@ -1859,7 +1859,7 @@ node trimesh w_saber1
   orientation 0 0 0 0
 endnode
 node trimesh w_saber2
-  parent g_wswglsbr_b_071
+  parent g_wswlsbr_b_071
   ambient 0.588 0.588 0.588
   diffuse 0.588 0.588 0.588
   specular 0 0 0
@@ -2006,7 +2006,7 @@ node trimesh w_saber2
   orientation 0 0 0 0
 endnode
 node trimesh w_saber3
-  parent g_wswglsbr_b_071
+  parent g_wswlsbr_b_071
   ambient 0.588 0.588 0.588
   diffuse 0.588 0.588 0.588
   specular 0 0 0
@@ -3280,6 +3280,6 @@ node trimesh w_saber3
   position 0 0 0
   orientation 0 0 0 0
 endnode
-endmodelgeom wswglsbr_b_071
+endmodelgeom wswlsbr_b_071
 
-donemodel wswglsbr_b_071
+donemodel wswlsbr_b_071
