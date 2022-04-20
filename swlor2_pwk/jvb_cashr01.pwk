@@ -1,0 +1,45 @@
+# Exported from NWmax 0.8 b60 at 03/01/2010 01:08:32
+# pwk file
+#
+#NWmax PWKMESH  ASCII
+node trimesh PWK
+  parent jvb_cashr01_pwk
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.541176 0.0313726 0.431373 
+  bitmap NULL
+  verts 6
+    -0.314936 -0.195389 0.0
+    0.0 -0.195389 0.0
+    0.315076 -0.195389 0.0
+    -0.314936 0.21025 0.0
+    0.0 0.21025 0.0
+    0.315076 0.21025 0.0
+  faces 4
+    3 0 4  1  12 9 13  7
+    1 4 0  1  10 13 9  7
+    4 1 5  1  13 10 14  7
+    2 5 1  1  11 14 10  7
+  tverts 15
+    0.0 0.0 0
+    0.5 0.0 0
+    1.0 0.0 0
+    0.0 0.0 0
+    0.5 0.0 0
+    1.0 0.0 0
+    0.0 0.0 0
+    0.5 0.0 0
+    1.0 0.0 0
+    0.0 0.5 0
+    0.5 0.5 0
+    1.0 0.5 0
+    0.0 1.0 0
+    0.5 1.0 0
+    1.0 1.0 0
+endnode
+node dummy r01_pwk_use01
+  parent jvb_cashr01_pwk
+  position 0.0 0.376422 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.0313726 0.239216 0.541176 
+endnode

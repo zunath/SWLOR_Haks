@@ -1,0 +1,31 @@
+# Exported from NWmax 0.8 b60 at 7/31/2006 11:01:47 PM
+# pwk file
+#
+#NWmax PWKMESH  ASCII
+node trimesh shp_bunks_wg
+  parent shp_bunks_pwk
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.521569 0.431373 0.0313726 
+  bitmap NULL
+  verts 4
+    -0.486434 -1.31721 0.0
+    0.895902 -1.31721 0.0
+    -0.486434 1.40738 0.0
+    0.895902 1.40738 0.0
+  faces 2
+    2 0 3  1  0 0 0  7
+    1 3 0  1  0 0 0  7
+endnode
+node dummy a01_pwk_use02
+  parent shp_bunks_pwk
+  position 1.40598 0.00194 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.894118 0.721569 0.6 
+endnode
+node dummy a01_pwk_use01
+  parent shp_bunks_pwk
+  position -1.04914 0.00194 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.894118 0.721569 0.6 
+endnode

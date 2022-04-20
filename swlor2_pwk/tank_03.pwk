@@ -1,0 +1,107 @@
+#MAXMODEL ASCII
+# model: tank_03
+filedependancy tank_03 NULL.mlk
+newmodel tank_03
+setsupermodel tank_03 NULL
+classification Character
+setanimationscale 0
+
+#MAXGEOM ASCII
+beginmodelgeom tank_03
+node dummy tank_03
+  parent NULL
+endnode
+node dummy rootdummy
+  parent tank_03
+  position 0 0 0
+  orientation 0 0 0 0
+  wirecolor 1 1 1
+endnode
+node trimesh Box01
+  parent rootdummy
+  position 0 0 0
+  orientation 1 0 0 0
+  wirecolor 1 1 1
+  ambient 0.300000 0.300000 0.300000 1.000000
+  diffuse 1.000000 1.000000 1.000000 1.000000
+  specular 0.000000 0.000000 0.000000 1.000000
+  shininess 0.000000
+    bitmap NULL
+    verts 20
+     -2.041667 -3.804762 1.019642 
+     -2.041667 -3.833333 -0.076786 
+     2.041667 -3.804762 1.019642 
+     2.041667 -3.833333 -0.076786 
+     2.041667 -3.804762 1.019642 
+     2.041667 -3.833333 -0.076786 
+     2.041667 3.320238 1.019642 
+     2.041667 3.291667 -0.076786 
+     2.041667 3.320238 1.019642 
+     2.041667 3.291667 -0.076786 
+     -2.041667 3.320238 1.019642 
+     -2.041667 3.291667 -0.076786 
+     -2.041667 3.320238 1.019642 
+     -2.041667 3.291667 -0.076786 
+     -2.041667 -3.804762 1.019642 
+     -2.041667 -3.833333 -0.076786 
+     -2.041667 -3.804762 1.019642 
+     2.041667 -3.804762 1.019642 
+     -2.041667 -3.833333 -0.076786 
+     2.041667 -3.833333 -0.076786 
+    faces 12
+     0 1 2  1  0 1 2  0
+     1 3 2  1  1 3 2  0
+     4 5 6  1  4 5 6  0
+     5 7 6  1  5 7 6  0
+     8 9 10  1  8 9 10  0
+     9 11 10  1  9 11 10  0
+     12 13 14  1  12 13 14  0
+     13 15 14  1  13 15 14  0
+     12 16 6  1  12 16 6  0
+     16 17 6  1  16 17 6  0
+     18 13 19  1  18 13 19  0
+     13 7 19  1  13 7 19  0
+    tverts 20
+     0.000000 1.000000 0.0 
+     0.000000 0.000000 0.0 
+     1.000000 1.000000 0.0 
+     1.000000 0.000000 0.0 
+     0.000000 1.000000 0.0 
+     0.000000 0.000000 0.0 
+     1.000000 1.000000 0.0 
+     1.000000 0.000000 0.0 
+     0.000000 1.000000 0.0 
+     0.000000 0.000000 0.0 
+     1.000000 1.000000 0.0 
+     1.000000 0.000000 0.0 
+     0.000000 1.000000 0.0 
+     0.000000 0.000000 0.0 
+     1.000000 1.000000 0.0 
+     1.000000 0.000000 0.0 
+     0.000000 0.000000 0.0 
+     1.000000 0.000000 0.0 
+     0.000000 1.000000 0.0 
+     1.000000 1.000000 0.0 
+endnode
+node dummy impact
+  parent Box01
+  position 0 0 0
+  orientation 0 0 0 0
+  wirecolor 1 1 1
+endnode
+node dummy handconjure
+  parent tank_03
+  position 0 0 0
+  orientation 0 0 0 0
+  wirecolor 1 1 1
+endnode
+node dummy headconjure
+  parent tank_03
+  position 0 0 0
+  orientation 0 0 0 0
+  wirecolor 1 1 1
+endnode
+endmodelgeom tank_03
+
+donemodel tank_03
+

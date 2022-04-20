@@ -1,0 +1,48 @@
+#Exported from 3ds max by MDL Plug-in Suite 1.0b
+#http://www.bricksbuilder.com/nwn/utils/
+#MAXMODEL ASCII
+# model: play4
+filedependancy Unknown
+node trimesh PLC_X07_wg
+  parent damage69_pwk
+  position -1.20761 3.74852 0
+  orientation 0 0 0 0
+  wirecolor 0.0273438 0.0273438 0.0273438
+  ambient 0.875 0.773438 0.339844
+  diffuse 0.875 0.773438 0.339844
+  specular 0 0 0
+  shininess 1
+  bitmap NULL
+  verts 12
+    4.58439 -1.3349 0
+    1.167 -1.3349 0
+    -1.83395 -1.39276 0
+    4.58427 -2.62347 0
+    1.167 -2.81786 0
+    -1.88913 -2.33283 0
+    4.68321 -2.9733 0
+    1.167 -3.16769 0
+    -1.79019 -2.68266 0
+    4.73158 -6.04893 0
+    1.167 -6.04893 0
+    -1.74181 -5.95192 0
+  faces 12
+    3 0 4  1  0 0 0  7
+    1 4 0  1  0 0 0  7
+    4 1 5  1  0 0 0  7
+    2 5 1  1  0 0 0  7
+    6 3 7  1  0 0 0  7
+    4 7 3  1  0 0 0  7
+    7 4 8  1  0 0 0  7
+    5 8 4  1  0 0 0  7
+    9 6 10  1  0 0 0  7
+    7 10 6  1  0 0 0  7
+    10 7 11  1  0 0 0  7
+    8 11 7  1  0 0 0  7
+endnode
+node dummy X07_pwk_use01
+  parent play4_pwk
+  position 0.809024 1.61692 0
+  orientation 0 0 -1 -3.14159
+  wirecolor 0.527344 0.527344 0.527344
+endnode

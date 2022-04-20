@@ -1,0 +1,22 @@
+# Exported from Wayland's NWN Maxscript v0.3b at 10/27/2004 11:29:56 PM
+# pwk file
+#
+node trimesh hover
+    parent ffhovercraft_pwk
+    position 0.0 0.0 0.0
+    orientation 1.0 0.0 0.0 0.0
+    scale 1.0
+    diffuse 0.8000 0.8000 0.8000
+    ambient 0.2000 0.2000 0.2000
+    specular 0.0000 0.0000 0.0000
+    render 0
+    bitmap NULL
+    verts 4
+        -0.99934 -3.0411 0.0
+        2.03735 -3.06999 0.0
+        -0.941442 2.73467 0.0
+        2.22862 2.74076 0.0
+    faces 2
+        2 0 3 1 0 0 0 1
+        1 3 0 1 0 0 0 1
+endnode

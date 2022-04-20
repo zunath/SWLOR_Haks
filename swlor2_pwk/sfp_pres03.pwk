@@ -1,0 +1,70 @@
+# Exported from NWmax 0.8 b60 at 05/08/2009 11:40:11
+# pwk file
+#
+#NWmax PWKMESH  ASCII
+node trimesh PWK
+  parent sfp_pres03_pwk
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.541176 0.0313726 0.431373 
+  bitmap NULL
+  verts 9
+    -0.331423 -0.322598 0.0
+    0.0 -0.451162 0.0
+    0.316646 -0.338181 0.0
+    -0.448809 0.0 0.0
+    0.0 0.0 0.0
+    0.437521 0.0 0.0
+    -0.335319 0.332333 0.0
+    0.0 0.433658 0.0
+    0.347813 0.324541 0.0
+  faces 8
+    3 0 4  1  9 6 10  7
+    1 4 0  1  7 10 6  7
+    4 1 5  1  10 7 11  7
+    2 5 1  1  8 11 7  7
+    6 3 7  1  12 9 13  7
+    4 7 3  1  10 13 9  7
+    7 4 8  1  13 10 14  7
+    5 8 4  1  11 14 10  7
+  tverts 15
+    0.0 0.0 0
+    0.5 0.0 0
+    1.0 0.0 0
+    0.0 0.0 0
+    0.5 0.0 0
+    1.0 0.0 0
+    0.0 0.0 0
+    0.5 0.0 0
+    1.0 0.0 0
+    0.0 0.5 0
+    0.5 0.5 0
+    1.0 0.5 0
+    0.0 1.0 0
+    0.5 1.0 0
+    1.0 1.0 0
+endnode
+node dummy s03_pwk_use01
+  parent sfp_pres03_pwk
+  position 0.0 -0.581792 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.882353 0.345098 0.780392 
+endnode
+node dummy s03_pwk_use02
+  parent sfp_pres03_pwk
+  position -0.58029 0.00767868 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.882353 0.345098 0.780392 
+endnode
+node dummy s03_pwk_use03
+  parent sfp_pres03_pwk
+  position 0.00469482 0.54969 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.882353 0.345098 0.780392 
+endnode
+node dummy s03_pwk_use04
+  parent sfp_pres03_pwk
+  position 0.569797 0.00409225 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.882353 0.345098 0.780392 
+endnode
