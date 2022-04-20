@@ -1,0 +1,80 @@
+#Exported from 3ds max by MDL Plug-in Suite 1.0b
+#http://www.bricksbuilder.com/nwn/utils/
+#MAXMODEL ASCII
+# model: zdr_crp_lok01_02
+filedependancy jan4.max
+node dummy 02_DWK_dp_closed1_01
+  parent zdr_crp_lok01_02_DWK
+  position -0.824902 0.00354473 1.69625
+  orientation 0 0 0 0
+  wirecolor 0.605469 0.605469 0.605469
+endnode
+node dummy 02_DWK_dp_open1_01
+  parent zdr_crp_lok01_02_DWK
+  position 0.943995 -1.65455 1.69625
+  orientation 0 0 0 0
+  wirecolor 0.605469 0.605469 0.605469
+endnode
+node dummy 02_DWK_dp_open2_01
+  parent zdr_crp_lok01_02_DWK
+  position 0.97647 1.86512 1.69625
+  orientation 0 0 0 0
+  wirecolor 0.605469 0.605469 0.605469
+endnode
+node trimesh 02_DWK_wg_closed
+  parent zdr_crp_lok01_02_DWK
+  position -0.0370172 0.0382333 0
+  orientation 0 0 0 0
+  wirecolor 0.605469 0.605469 0.605469
+  ambient 0.601563 0.601563 0.894531
+  diffuse 0.601563 0.601563 0.894531
+  specular 0 0 0
+  shininess 1
+  bitmap null
+  verts 4
+    1 0.7525 0
+    -1 0.7525 0
+    1 -0.7525 0
+    -1 -0.7525 0
+  faces 2
+    2 0 3  1  0 0 0  0
+    1 3 0  1  0 0 0  0
+endnode
+node trimesh 02_DWK_wg_open1
+  parent zdr_crp_lok01_02_DWK
+  position 0.9565 -0.715113 0
+  orientation 0 0 -1 -1.5708
+  wirecolor 0.605469 0.605469 0.605469
+  ambient 0.601563 0.601563 0.894531
+  diffuse 0.601563 0.601563 0.894531
+  specular 0 0 0
+  shininess 1
+  bitmap null
+  verts 4
+    1 0.25 0
+    -1 0.25 0
+    1 -0.25 0
+    -1 -0.25 0
+  faces 2
+    2 0 3  1  0 0 0  0
+    1 3 0  1  0 0 0  0
+endnode
+node trimesh 02_DWK_wg_open2
+  parent zdr_crp_lok01_02_DWK
+  position 0.944959 0.768842 0
+  orientation 0 0 -1 -1.5708
+  wirecolor 0.605469 0.605469 0.605469
+  ambient 0.601563 0.601563 0.894531
+  diffuse 0.601563 0.601563 0.894531
+  specular 0 0 0
+  shininess 1
+  bitmap null
+  verts 4
+    1 0.25 0
+    -1 0.25 0
+    1 -0.25 0
+    -1 -0.25 0
+  faces 2
+    2 0 3  1  0 0 0  0
+    1 3 0  1  0 0 0  0
+endnode
