@@ -1,0 +1,53 @@
+Rural Forest Transition by Danmar
+http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=1593
+
+
+LOK Tileset Addon - Rural To Forest Transition
+--------------------------------------------
+
+Pretty simple really.  Adds a small handful of tiles and the appropriate
+changes to the rural tileset data files to allow you to transition into a
+Forest area properly.
+
+Although properly may not be the right word.  :)
+
+Only a very limited selection of forest tiles is available in this hak.
+Essentially you can place some trees and use a road to cross between the two
+terrains as well.
+
+That's it.  For a full scale forest set you can just transition into the
+forest.
+
+After all its just for transitions between rural and forest areas, not a large
+combo tileset.
+
+Contents:
+
+9 custom tiles for the transitions 1 custom texture for the transitions
+modified .set and itp file to add the base 4xforest tiles, the base
+4xforest+road tiles, and the transition tiles as Forest terrain.  modified
+edge.2da file for basic edge tiling.
+
+
+Some caveats:
+
+The transitions do NOT match up with anything other Grass.  No trees, streams,
+walls, etc and so on. 
+
+Yes the road tile that cross from Grass into Forest has to look like that.  The
+grass and forest roads use a different texture and that was the quickest
+solution and least hak heavy to blend the crossover.
+
+THe dark smudge you'll see at times where my transition tiles meet up with the
+forest tiles is an artifact of the OC forest floor texture.  You can see this
+smudge line all over the OC tiles as well and since I'm using the OC texture
+obviously it carries through to my tiles.
+
+The corner piece tiles are left empty on purpose.  If you want to spruce them
+up use placeables.
+
+This is being released AS IS!
+
+Feel free to create a mondo true Rural Forest combo using these transition
+tiles if you wish, just include my name in the credits.
+

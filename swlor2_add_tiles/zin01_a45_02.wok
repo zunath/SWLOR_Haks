@@ -1,0 +1,26 @@
+# Rewritten by CleanModels 3 Version 3.2.2.1 Tue Nov 03 13:10:51 2009
+#MAXWALKMESH  ASCII
+beginwalkmeshgeom zin01_a45_02
+node aabb w_box540
+  parent zin01_a45_02
+  orientation 0 0 0 0
+  wirecolor 0.6901960 0.1019610 0.1019610
+  ambient 0.5880000 0.5880000 0.5880000
+  diffuse 0.5880000 0.5880000 0.5880000
+  specular 0 0 0
+  shininess 11
+  bitmap NULL
+  position 0 0 0
+  verts 4
+    -5 -5 0
+    5 -5 0
+    -5 5 0
+    5 5 0
+  faces 2
+    0 1 3 4 0 0 0 4
+    3 2 0 4 0 0 0 4
+  aabb     -5 -5 0 5 5 0 -1
+    -5 -5 0 5 5 0 1
+    -5 -5 0 5 5 0 0
+endnode
+endwalkmeshgeom zin01_a45_02

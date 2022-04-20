@@ -1,0 +1,106 @@
+# Rewritten by CleanModels 3 Version 3.5.1 Sat Aug 31 13:57:04 2013
+#MAXMODEL ASCII
+filedependency Unknown
+newmodel zdc03_a10_01
+  classification TILE
+  setsupermodel zdc03_a10_01 NULL
+  setanimationscale 1
+#MAXGEOM ASCII
+beginmodelgeom zdc03_a10_01
+node dummy zdc03_a10_01
+  parent NULL
+endnode
+node trimesh floor
+  parent zdc03_a10_01
+  position 0 0 8
+  orientation 0 0 0 0
+  wirecolor 0 0 0
+  tilefade 0
+  scale 1
+  render 1
+  shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1
+  transparencyhint 0
+  selfillumcolor 0 0 0
+  ambient 0 0 0
+  diffuse 0 0 0
+  specular 0 0 0
+  shininess 1
+  center 0 0 -250
+  bitmap black
+  verts 8
+    -5 -5 0
+    5 -5 0
+    -5 5 0
+    5 5 0
+    5 5 -5
+    -5 5 -5
+    5 -5 -5
+    -5 -5 -5
+  faces 10
+    3 2 1 0 0 0 0 65536
+    2 0 1 0 0 0 0 65536
+    4 5 2 0 0 0 0 65536
+    2 3 4 0 0 0 0 65536
+    6 4 3 0 0 0 0 65536
+    3 1 6 0 0 0 0 65536
+    5 7 0 0 0 0 0 65536
+    0 2 5 0 0 0 0 65536
+    7 6 1 0 0 0 0 65536
+    1 0 7 0 0 0 0 65536
+endnode
+node aabb rectangle12
+  parent zdc03_a10_01
+  position 0 0 0
+  orientation 0 0 0 0
+  wirecolor 0.694118 0.694118 0.694118
+  bitmap NULL
+  render 0
+  shadow 0
+  verts 4
+    5 5 6
+    -5 5 6
+    -5 -5 6
+    5 -5 6
+  faces 2
+    0 1 2 1 0 0 0 2
+    0 2 3 1 0 0 0 2
+  aabb     -5 -5 6 5 5 6 -1
+    -5 -5 6 5 5 6 0
+    -5 -5 6 5 5 6 1
+endnode
+node trimesh margin
+  parent zdc03_a10_01
+  position 0 0 3
+  orientation 0 0 0 0
+  wirecolor 0 0 0
+  tilefade 0
+  scale 1
+  render 1
+  shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1
+  transparencyhint 0
+  selfillumcolor 0 0 0
+  ambient 0 0 0
+  diffuse 0 0 0
+  specular 0 0 0
+  shininess 1
+  center 0 0 0
+  bitmap black
+  verts 4
+    -5 -5 0
+    5 -5 0
+    -5 5 0
+    5 5 0
+  faces 2
+    3 2 1 0 0 0 0 65536
+    2 0 1 0 0 0 0 65536
+endnode
+endmodelgeom zdc03_a10_01
+donemodel zdc03_a10_01

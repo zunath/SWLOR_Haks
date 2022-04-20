@@ -1,0 +1,49 @@
+# Rewritten by CleanModels 3 Version 3.2.2.1 Tue Nov 03 18:08:54 2009
+#MAXWALKMESH  ASCII
+beginwalkmeshgeom zcn02_o31_01
+node aabb wokmesh
+  parent zcn02_o31_01
+  scale 1
+  diffuse 0.8000000 0.8000000 0.8000000
+  ambient 0.2000000 0.2000000 0.2000000
+  specular 0 0 0
+  render 0
+  bitmap NULL
+  orientation 0 0 0 0
+  position 0 0 0
+  verts 9
+    -5 0 0
+    -5 -5 0
+    0 0 0
+    0 -5 0
+    5 0 0
+    5 -5 0
+    -5 5 0
+    0 5 0
+    5 5 0
+  faces 8
+    0 1 2 1 0 0 0 4
+    3 2 1 1 0 0 0 4
+    2 3 4 1 0 0 0 4
+    5 4 3 1 0 0 0 4
+    6 0 7 1 0 0 0 4
+    2 7 0 1 0 0 0 4
+    7 2 8 1 0 0 0 4
+    4 8 2 1 0 0 0 4
+  aabb     -5 -5 0 5 5 0 -1
+    -5 -5 0 0 5 0 -1
+    -5 -5 0 0 0 0 -1
+    -5 -5 0 0 0 0 0
+    -5 -5 0 0 0 0 1
+    -5 0 0 0 5 0 -1
+    -5 0 0 0 5 0 4
+    -5 0 0 0 5 0 5
+    0 -5 0 5 5 0 -1
+    0 -5 0 5 0 0 -1
+    0 -5 0 5 0 0 2
+    0 -5 0 5 0 0 3
+    0 0 0 5 5 0 -1
+    0 0 0 5 5 0 6
+    0 0 0 5 5 0 7
+endnode
+endwalkmeshgeom zcn02_o31_01

@@ -1,0 +1,72 @@
+Round Tiles for Castle Tileset v1.4 by YellowLab
+http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=2505
+
+
+Have you ever noticed that traveling through the vast castles of NWN you encounter square room 
+after square room after, well you get the idea.  Velmar gave us a tower interior that broke 
+that mold and this is merely an extension of that - round tiles for the castle tile set.  
+Now you can create that tower in your castle and you are no longer hampered by square dining rooms.  
+This hak pak includes twelve new tiles (and their map images) to add these circular beauties to 
+your own humble abode.  The tiles include a standard tile, an empty tile, stairs up and stairs 
+down for each of the three major floor sets (rich, library, and stone).  These have been designed 
+as a feature set and as such no corridors can enter them.
+
+All tiles use standard Bioware textures.  This is an add-on to the standard castle tileset and 
+includes a modified .set and .itp file.
+
+Instructions:
+Unzip, add yl_roundcastle.hak file to your NWN/hak directory.  Open up the Aurora Toolset, 
+add the yl_roundcastle hak to your custom content (under the edit menu -> module properties -> custom content tab).  
+If you would like to use Pasilli.s new .set file, which allow for doors, you can either put the 
+yl_roundcast_ADD hak into your NWN/hak directory, add this one to your module (edit menu -> module properties -> custom content tab) 
+with a higher priority.  Or you can extract the .set file and recombine it into the original 
+yl_roundcastle.hak file, overwriting the existing file.
+
+Issues:
+There aren't many and they are small, but bug me.  If anyone has any hints on how to fix them please 
+let me know.
+1) The map image colors for the stone and rich tiles are slightly off.  Your map may have a slight 
+checkerboard appearance to it.
+
+VERSION 1.4 ADDS CLEANER MINIMAP IMAGES - THANKS RICK BURTON!
+
+2) The staircases up / down do contain a doorway, but interesting and unintentional things happen 
+if a door is placed there. You can see the door open into space.  So, I took out that ability as 
+cool as it was.  In order to use the doorways you will need to either place a peaceable door in 
+the doorway (they should fit, and they open in rather than out) or use a trigger on the staircase.  
+No biggy, but extra work on your part - sorry.
+
+NOW WITH DOORS! Thanks Pasilli.
+
+3) I found one interesting shadow issue that I can't figure out.  Sometimes when you are on the top 
+of a staircase, your shadow will project through the doorway and be super big on the other side.  
+It seems to only happen in a very small area on the staircase.  But I have also gotten it to happen 
+midway up the staircase as well.  But I did notice that the original tiles have some shadow problems 
+as well.
+
+Please feel free to use / distribute these new tiles and post comments or issues here on this site.  
+But please give credit where it is due.  As such - here is mine:  
+A huge thanks goes out to Danmar who lead me on the path to fixing my walkmesh issues.  
+Velmar was also a great help in getting started with his tutorials as well as giving us some 
+great tower tiles.  
+Also, thanks to all for all the wonderful modding tools on the vault and elsewhere.  
+They have definitely made this job easier.
+
+YL
+
+Revision History:
+Version 1.0 - October 26, 2003 initial release
+Version 1.1 - October 27, 2003 fixed issue where there were two stone tiles and no empty stone tiles
+Version 1.2 - November 2, 2003 fixed edge issue with empty rich tile.  
+                               added Pasilli.s changed .set file which allows for doors.
+Version 1.3 - November 8, 2003 fixed visibility of mini-map images to be correct. Thanks to Pogo Mudder for catching this.  
+                               If you are using Pasilli.s add-on hak YOU MUST USE THE ONE INCLUDED WITH THIS DOWNLOAD 
+                               (the old one won.t work - trust me).
+Version 1.4 - January 16, 2004 fixed texture alignment issues with Rich Tiles  
+                               fixed texture alignment issue with standard Bio Rich Corner Tile
+                               A picture is included showing the issue and the fix
+                               added cleaner mini-map icons.
+                               Rick Burton supplied me with the cleaner icons and alerted me to the texture
+                               alignment issues.  THANKS RICK!
+                   
+
