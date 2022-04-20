@@ -1,0 +1,2244 @@
+#MAXMODEL ASCII
+# model: ffshuttle3
+filedependancy ffshuttle3.max
+newmodel ffshuttle3
+setsupermodel ffshuttle3 NULL
+classification CHARACTER
+setanimationscale 6
+#MAXGEOM  ASCII
+beginmodelgeom ffshuttle3
+node dummy ffshuttle3
+  parent NULL
+endnode
+node dummy handconjure
+  parent ffshuttle3
+  position 2.67652 -4.73221 7.02654
+  orientation 0 0 0 0
+endnode
+node dummy headconjure
+  parent ffshuttle3
+  position -2.53158 -4.7431 7.0257
+  orientation 0 0 0 0
+endnode
+node dummy monster0
+  parent ffshuttle3
+  position -0.0547884 -7.17498 8.1081
+  orientation 0 0 0 0
+endnode
+node dummy monster1
+  parent ffshuttle3
+  position 0.235576 -2.70945 8.26542
+  orientation 0 0 0 0
+endnode
+node dummy rootdummy
+  parent ffshuttle3
+  position 0 0 5.92546
+  orientation 0 0 0 0
+endnode
+node trimesh torso_g
+  parent rootdummy
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 1
+  transparencyhint 1
+  bitmap S02_512
+  verts 54
+       0.5784700    5.9237199   -0.6560760
+       1.1049700    2.7246799   -0.5553250
+      -1.1047601    2.7246799   -0.5553250
+      -0.5786360    5.9237199   -0.6560760
+       1.3372400   -1.5121100   -0.3593050
+      -1.3370500   -1.5121000   -0.3593050
+      -0.0000092   -3.6224501   -0.1013630
+      -3.3382299   -3.7028100    0.7195920
+      -3.2167001   -3.7028100    0.0673518
+      -2.0209701   -3.6596799    1.5150400
+      -0.0000092   -3.6146100    1.8508300
+      -0.5786340    6.5412002   -0.3048110
+       0.5784720    6.5412002   -0.3048110
+      -1.7355500    5.1749401    0.1547190
+      -1.5779500    5.1141701   -0.2493370
+       0.5943440    5.0298700    1.3047100
+      -0.6002040    5.0357499    1.3111700
+      -1.1047601    2.0582099    2.0836899
+       1.1049700    2.0582099    2.0836899
+      -0.7501680   -0.5623790    2.3757601
+       0.7484040   -0.5623840    2.3757601
+       1.3372400   -1.6446199    2.0640900
+      -1.3370500   -1.6446000    2.0640900
+      -0.8007240    6.0648599    0.5122000
+       0.8105580    6.0668402    0.5153360
+      -1.4456400    3.5617001    1.3817400
+      -1.8625700    2.4502599    1.6191200
+      -1.9253100   -0.5788420    1.6383300
+      -1.7020299    3.8733699    0.7580100
+      -2.2875400    2.4149799    0.9746100
+      -2.3816400    0.4908400    0.8509200
+      -3.7557499   -1.6783100    0.8317140
+      -3.1873000   -1.6349900    1.2529600
+      -2.4031999    2.4149799    0.1596980
+      -2.4816101    0.4949560    0.1951960
+      -3.7537899   -1.6742001    0.4492780
+      -1.8625700    2.5267100   -0.3034390
+       3.3382101   -3.7028301    0.7195920
+       3.2166800   -3.7028301    0.0673518
+       2.0209601   -3.6597099    1.5150400
+       1.7355700    5.1749201    0.1547190
+       1.5777700    5.1141500   -0.2493370
+       1.4544801    3.5636301    1.3848799
+       1.8625900    2.4502399    1.6191200
+       1.9253100   -0.5788520    1.6383300
+       2.2875700    2.4149599    0.9746100
+       1.6971600    3.8674600    0.7515420
+       2.3816400    0.4908280    0.8509200
+       3.7557399   -1.6783400    0.8317140
+       3.1872799   -1.6350100    1.2529600
+       2.4032199    2.4149599    0.1596980
+       2.4816101    0.4949440    0.1951960
+       3.7537701   -1.6742200    0.4492780
+       1.8625900    2.5266900   -0.3034390
+  tverts 81
+       0.9950000    0.0885800  0
+       0.9924000    0.5168000  0
+       0.8562000    0.5168000  0
+       0.8670000    0.0885800  0
+       0.9917000    0.8330000  0
+       0.8535000    0.8330000  0
+       0.9995000    0.9921000  0
+       0.3470000    0.0950700  0
+       0.3968000    0.2698000  0
+       0.3305000    0.2511000  0
+       0.5227000    0.2289000  0
+       0.5816000    0.1400000  0
+       0.2074000    0.1025000  0
+       0.1781000    0.0184000  0
+       0.2860000    0.0004995  0
+       0.3144000    0.0818900  0
+       0.2367000    0.2187000  0
+       0.3025000    0.1909000  0
+       0.0546700    0.2877000  0
+       0.2198000    0.2877000  0
+       0.2932000    0.5271000  0
+       0.0004996    0.5271000  0
+       0.0112700    0.5269000  0
+       0.2920000    0.5269000  0
+       0.2279000    0.7447000  0
+       0.0726300    0.7447000  0
+       0.0165100    0.8408000  0
+       0.2920000    0.8408000  0
+       0.1439000    0.9952000  0
+       0.0813500    0.1028000  0
+       0.2065000    0.1028000  0
+       0.2357000    0.2183000  0
+       0.0483100    0.2183000  0
+       0.0310800    0.2140000  0
+       0.2510000    0.2140000  0
+       0.3611000    0.4492000  0
+       0.4044000    0.5362000  0
+       0.3781000    0.8019000  0
+       0.3088000    0.9992000  0
+       0.4429000    0.2599000  0
+       0.4437000    0.4773000  0
+       0.3716000    0.4861000  0
+       0.3564000    0.3360000  0
+       0.5683000    0.4268000  0
+       0.5686000    0.5363000  0
+       0.4112000    0.5363000  0
+       0.4580000    0.4451000  0
+       0.5567000    0.8021000  0
+       0.3852000    0.8021000  0
+       0.5869000    0.8479000  0
+       0.5854000    0.9994000  0
+       0.3091000    0.9994000  0
+       0.4222000    0.8479000  0
+       0.4278000    0.8479000  0
+       0.6659000    0.0975400  0
+       0.6661000    0.1809000  0
+       0.5737000    0.4255000  0
+       0.5754000    0.2220000  0
+       0.6682000    0.5353000  0
+       0.5757000    0.5355000  0
+       0.6567000    0.8018000  0
+       0.5581000    0.8022000  0
+       0.6876000    0.8476000  0
+       0.6876000    0.9995000  0
+       0.5910000    0.9995000  0
+       0.5926000    0.8480000  0
+       0.8549000    0.0885800  0
+       0.8441000    0.5168000  0
+       0.7743000    0.5225000  0
+       0.7908000    0.1708000  0
+       0.8414000    0.8330000  0
+       0.7409000    0.8015000  0
+       0.9874000    0.9921000  0
+       0.7892000    0.9992000  0
+       0.7016000    0.8474000  0
+       0.6716000    0.5338000  0
+       0.6718000    0.1855000  0
+       0.7841000    0.1713000  0
+       0.7684000    0.5230000  0
+       0.6604000    0.8020000  0
+       0.4213000    0.8477000  0
+  faces 104
+     0  1  2   1   0  1  2   1
+     2  3  0   1   2  3  0   1
+     1  4  5   1   1  4  5   1
+     5  2  1   1   5  2  1   1
+     6  5  4   1   6  5  4   1
+     6  7  8   2   7  8  9   1
+     9  7  6   2  10  8  7   1
+    10  9  6   2  11 10  7   1
+    11 12  0   2  12 13 14   1
+     0  3 11   2  14 15 12   1
+    13 11  3   2  16 12 15   1
+     3 14 13   2  15 17 16   1
+    15 16 17   1  18 19 20   1
+    17 18 15   1  20 21 18   1
+    18 17 19   1  22 23 24   1
+    19 20 18   1  24 25 22   1
+    21 22 10   1  26 27 28   1
+    12 11 23   4  29 30 31   1
+    23 24 12   4  31 32 29   1
+    24 23 16   1  33 34 19   1
+    16 15 24   1  19 18 33   1
+    22 21 20   1  27 26 25   1
+    20 19 22   1  25 24 27   1
+    17 22 19   1  20 27 24   1
+    16 25 26   1  19 35 36   1
+    26 17 16   1  36 20 19   1
+    17 26 27   1  20 36 37   1
+    27 22 17   1  37 27 20   1
+    22 27  9   1  27 37 38   1
+     9 10 22   1  38 28 27   1
+    23 28 25   2  39 40 41   1
+    25 16 23   8  41 42 39   1
+    28 29 26   4  43 44 45   1
+    26 25 28  16  45 46 43   1
+    29 30 27   4  44 47 48   1
+    27 26 29   4  48 45 44   1
+    31  7  9   4  49 50 51   1
+     9 32 31   4  51 52 49   1
+    27 30 31   4  48 47 49   1
+    31 32 27   4  49 53 48   1
+    11 13 28   1  54 55 56   1
+    28 23 11  32  56 57 54   1
+    13 33 29   8  55 58 59   1
+    29 28 13  64  59 56 55   1
+    33 34 30   8  58 60 61   1
+    30 29 33   8  61 59 58   1
+    35  8  7   8  62 63 64   1
+     7 31 35   8  64 65 62   1
+    30 34 35   8  61 60 62   1
+    35 31 30   8  62 65 61   1
+     3  2 36   4  66 67 68   1
+    36 14  3   4  68 69 66   1
+     2  5 34   2  67 70 71   1
+    34 36  2   4  71 68 67   1
+     5  6  8   4  70 72 73   1
+     8 34  5  16  73 71 70   1
+     8 35 34   1  73 74 71   1
+    33 13 14  16  75 76 77   1
+    14 36 33   1  77 78 75   1
+    34 33 36  32  79 75 78   1
+     9 27 32   1  38 37 80   1
+    37  6 38   2   8  7  9   1
+    37 39  6   2   8 10  7   1
+    39 10  6   2  10 11  7   1
+    12 40  0   8  12 16 15   1
+    41  0 40   8  17 15 16   1
+    21 18 20   2  27 20 24   1
+    42 15 43   4  35 19 36   1
+    18 43 15   4  20 36 19   1
+    43 18 44   4  36 20 37   1
+    21 44 18   4  27 37 20   1
+    44 21 39   4  37 27 38   1
+    10 39 21   8  28 38 27   1
+    45 46 43   1  44 43 45   1
+    42 43 46   1  46 45 43   1
+    47 45 44   1  47 44 48   1
+    43 44 45   1  45 48 44   1
+    37 48 39   1  50 49 51   1
+    49 39 48   1  52 51 49   1
+    47 44 48   1  47 48 49   1
+    49 48 44   1  53 49 48   1
+    40 12 46  16  55 54 56   1
+    24 46 12  32  57 56 54   1
+    50 40 45   4  58 55 59   1
+    46 45 40   2  56 59 55   1
+    51 50 47   4  60 58 61   1
+    45 47 50   4  59 61 58   1
+    38 52 37   4  63 62 64   1
+    48 37 52   4  65 64 62   1
+    51 47 52   4  60 61 62   1
+    48 52 47   4  65 62 61   1
+     1  0 53  16  67 66 68   1
+    41 53  0  16  69 68 66   1
+     4  1 51   2  70 67 71   1
+    53 51  1  16  68 71 67   1
+     6  4 38   8  72 70 73   1
+    51 38  4  32  71 73 70   1
+    52 38 51   1  74 73 71   1
+    40 50 41   1  76 75 77   1
+    53 41 50   2  78 77 75   1
+    50 51 53   8  75 79 78   1
+    44 39 49   4  37 38 80   1
+    46 24 42   8  40 39 41   1
+    15 42 24   2  42 41 39   1
+  position 0.000765366 -4.61152 1.16684
+  orientation 0 0 0 0
+  scale 1
+  alpha 1
+endnode
+node dummy Impact
+  parent torso_g
+  position -0.0926214 5.68467 -0.281663
+  orientation 0 0 0 0
+endnode
+endmodelgeom ffshuttle3
+
+#MAXANIM ASCII
+newanim crun ffshuttle3
+  length 0.4
+  transtime 0.25
+  animroot ffshuttle3
+  node dummy ffshuttle3
+    parent NULL
+  endnode
+  node dummy handconjure
+    parent ffshuttle3
+  endnode
+  node dummy headconjure
+    parent ffshuttle3
+  endnode
+  node dummy monster0
+    parent ffshuttle3
+  endnode
+  node dummy monster1
+    parent ffshuttle3
+  endnode
+  node dummy rootdummy
+    parent ffshuttle3
+  endnode
+  node trimesh torso_g
+    parent rootdummy
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+    positionkey 2
+         0.0000000   -0.0003019   -3.4918301    1.1498600
+         0.4000000   -0.0003019   -3.4918301    1.1498600
+    orientationkey 2
+         0.0000000    0.0000000    0.0000000    0.0000000    0.0000000
+         0.4000000    0.0000000    0.0000000    0.0000000    0.0000000
+  endnode
+  node dummy Impact
+    parent torso_g
+  endnode
+doneanim crun ffshuttle3
+
+#MAXANIM ASCII
+newanim creadyr ffshuttle3
+  length 0.4
+  transtime 0.25
+  animroot ffshuttle3
+  node dummy ffshuttle3
+    parent NULL
+  endnode
+  node dummy handconjure
+    parent ffshuttle3
+  endnode
+  node dummy headconjure
+    parent ffshuttle3
+  endnode
+  node dummy monster0
+    parent ffshuttle3
+  endnode
+  node dummy monster1
+    parent ffshuttle3
+  endnode
+  node dummy rootdummy
+    parent ffshuttle3
+  endnode
+  node trimesh torso_g
+    parent rootdummy
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+    positionkey 2
+         0.0000000   -0.0003019   -3.4918301    1.1498600
+         0.4000000   -0.0003019   -3.4918301    1.1498600
+    orientationkey 2
+         0.0000000    0.0000000    0.0000000    0.0000000    0.0000000
+         0.4000000    0.0000000    0.0000000    0.0000000    0.0000000
+  endnode
+  node dummy Impact
+    parent torso_g
+  endnode
+doneanim creadyr ffshuttle3
+
+#MAXANIM ASCII
+newanim creadyl ffshuttle3
+  length 0.4
+  transtime 0.25
+  animroot ffshuttle3
+  node dummy ffshuttle3
+    parent NULL
+  endnode
+  node dummy handconjure
+    parent ffshuttle3
+  endnode
+  node dummy headconjure
+    parent ffshuttle3
+  endnode
+  node dummy monster0
+    parent ffshuttle3
+  endnode
+  node dummy monster1
+    parent ffshuttle3
+  endnode
+  node dummy rootdummy
+    parent ffshuttle3
+  endnode
+  node trimesh torso_g
+    parent rootdummy
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+    positionkey 2
+         0.0000000   -0.0003019   -3.4918301    1.1498600
+         0.4000000   -0.0003019   -3.4918301    1.1498600
+    orientationkey 2
+         0.0000000    0.0000000    0.0000000    0.0000000    0.0000000
+         0.4000000    0.0000000    0.0000000    0.0000000    0.0000000
+  endnode
+  node dummy Impact
+    parent torso_g
+  endnode
+doneanim creadyl ffshuttle3
+
+#MAXANIM ASCII
+newanim cdamager ffshuttle3
+  length 0.666667
+  transtime 0.25
+  animroot ffshuttle3
+  node dummy ffshuttle3
+    parent NULL
+  endnode
+  node dummy handconjure
+    parent ffshuttle3
+  endnode
+  node dummy headconjure
+    parent ffshuttle3
+  endnode
+  node dummy monster0
+    parent ffshuttle3
+  endnode
+  node dummy monster1
+    parent ffshuttle3
+  endnode
+  node dummy rootdummy
+    parent ffshuttle3
+  endnode
+  node trimesh torso_g
+    parent rootdummy
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+    positionkey 7
+         0.0000000   -0.0003019   -3.4918301    1.1498600
+         0.1666670   -0.0003019   -3.4918301    1.1498600
+         0.3666670   -0.0003019   -3.4918301    1.1498600
+         0.5000000   -0.0003019   -3.4918301    1.1498600
+         0.5333330   -0.0003019   -3.4918301    1.1498600
+         0.6333330   -0.0003019   -3.4918301    1.1498600
+         0.6666670   -0.0003019   -3.4918301    1.1498600
+    orientationkey 8
+         0.0000000    0.0000000    0.0000000    0.0000000    0.0000000
+         0.1666670   -0.0000017    1.0000000   -0.0000002   -0.2181660
+         0.3666670    0.0000000    0.0000000    0.0000000    0.0000000
+         0.5000000   -0.0000035   -1.0000000    0.0000002   -0.1047200
+         0.5333330   -0.0000047   -1.0000000    0.0000002   -0.0763582
+         0.5666670   -0.0000831   -1.0000000    0.0000002   -0.0043633
+         0.6333330   -0.0000415    1.0000000   -0.0000002   -0.0087266
+         0.6666670    0.0000000    0.0000000    0.0000000    0.0000000
+  endnode
+  node dummy Impact
+    parent torso_g
+  endnode
+doneanim cdamager ffshuttle3
+
+#MAXANIM ASCII
+newanim cdamagel ffshuttle3
+  length 0.666667
+  transtime 0.25
+  animroot ffshuttle3
+  node dummy ffshuttle3
+    parent NULL
+  endnode
+  node dummy handconjure
+    parent ffshuttle3
+  endnode
+  node dummy headconjure
+    parent ffshuttle3
+  endnode
+  node dummy monster0
+    parent ffshuttle3
+  endnode
+  node dummy monster1
+    parent ffshuttle3
+  endnode
+  node dummy rootdummy
+    parent ffshuttle3
+  endnode
+  node trimesh torso_g
+    parent rootdummy
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+    positionkey 7
+         0.0000000   -0.0003019   -3.4918301    1.1498600
+         0.1666670   -0.0003019   -3.4918301    1.1498600
+         0.3666670   -0.0003019   -3.4918301    1.1498600
+         0.5000000   -0.0003019   -3.4918301    1.1498600
+         0.5333330   -0.0003019   -3.4918301    1.1498600
+         0.6333330   -0.0003019   -3.4918301    1.1498600
+         0.6666670   -0.0003019   -3.4918301    1.1498600
+    orientationkey 8
+         0.0000000    0.0000000    0.0000000    0.0000000    0.0000000
+         0.1666670   -0.0000017    1.0000000   -0.0000002   -0.2181660
+         0.3666670    0.0000000    0.0000000    0.0000000    0.0000000
+         0.5000000   -0.0000035   -1.0000000    0.0000002   -0.1047200
+         0.5333330   -0.0000047   -1.0000000    0.0000002   -0.0763582
+         0.5666670   -0.0000831   -1.0000000    0.0000002   -0.0043633
+         0.6333330   -0.0000415    1.0000000   -0.0000002   -0.0087266
+         0.6666670    0.0000000    0.0000000    0.0000000    0.0000000
+  endnode
+  node dummy Impact
+    parent torso_g
+  endnode
+doneanim cdamagel ffshuttle3
+
+#MAXANIM ASCII
+newanim cpause1 ffshuttle3
+  length 0.4
+  transtime 0.25
+  animroot ffshuttle3
+  node dummy ffshuttle3
+    parent NULL
+  endnode
+  node dummy handconjure
+    parent ffshuttle3
+  endnode
+  node dummy headconjure
+    parent ffshuttle3
+  endnode
+  node dummy monster0
+    parent ffshuttle3
+  endnode
+  node dummy monster1
+    parent ffshuttle3
+  endnode
+  node dummy rootdummy
+    parent ffshuttle3
+  endnode
+  node trimesh torso_g
+    parent rootdummy
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+    positionkey 2
+         0.0000000   -0.0003019   -3.4918301    1.1498600
+         0.4000000   -0.0003019   -3.4918301    1.1498600
+    orientationkey 2
+         0.0000000    0.0000000    0.0000000    0.0000000    0.0000000
+         0.4000000    0.0000000    0.0000000    0.0000000    0.0000000
+  endnode
+  node dummy Impact
+    parent torso_g
+  endnode
+doneanim cpause1 ffshuttle3
+
+#MAXANIM ASCII
+newanim ca1slashl ffshuttle3
+  length 0.666667
+  transtime 0.25
+  animroot ffshuttle3
+  node dummy ffshuttle3
+    parent NULL
+  endnode
+  node dummy handconjure
+    parent ffshuttle3
+  endnode
+  node dummy headconjure
+    parent ffshuttle3
+  endnode
+  node dummy monster0
+    parent ffshuttle3
+  endnode
+  node dummy monster1
+    parent ffshuttle3
+  endnode
+  node dummy rootdummy
+    parent ffshuttle3
+  endnode
+  node trimesh torso_g
+    parent rootdummy
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+    positionkey 7
+         0.0000000   -0.0003019   -3.4918301    1.1498600
+         0.1666670   -0.0003019   -3.4918301    1.1498600
+         0.3666670   -0.0003019   -3.4918301    1.1498600
+         0.5000000   -0.0003019   -3.4918301    1.1498600
+         0.5333330   -0.0003019   -3.4918301    1.1498600
+         0.6333330   -0.0003019   -3.4918301    1.1498600
+         0.6666670   -0.0003019   -3.4918301    1.1498600
+    orientationkey 8
+         0.0000000    0.0000000    0.0000000    0.0000000    0.0000000
+         0.1666670   -0.0000017    1.0000000   -0.0000002   -0.2181660
+         0.3666670    0.0000000    0.0000000    0.0000000    0.0000000
+         0.5000000   -0.0000035   -1.0000000    0.0000002   -0.1047200
+         0.5333330   -0.0000047   -1.0000000    0.0000002   -0.0763582
+         0.5666670   -0.0000831   -1.0000000    0.0000002   -0.0043633
+         0.6333330   -0.0000415    1.0000000   -0.0000002   -0.0087266
+         0.6666670    0.0000000    0.0000000    0.0000000    0.0000000
+  endnode
+  node dummy Impact
+    parent torso_g
+  endnode
+doneanim ca1slashl ffshuttle3
+
+#MAXANIM ASCII
+newanim cdamages ffshuttle3
+  length 0.4
+  transtime 0.25
+  animroot ffshuttle3
+  node dummy ffshuttle3
+    parent NULL
+  endnode
+  node dummy handconjure
+    parent ffshuttle3
+  endnode
+  node dummy headconjure
+    parent ffshuttle3
+  endnode
+  node dummy monster0
+    parent ffshuttle3
+  endnode
+  node dummy monster1
+    parent ffshuttle3
+  endnode
+  node dummy rootdummy
+    parent ffshuttle3
+  endnode
+  node trimesh torso_g
+    parent rootdummy
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+    positionkey 2
+         0.0000000   -0.0003019   -3.4918301    1.1498600
+         0.4000000   -0.0003019   -3.4918301    1.1498600
+    orientationkey 2
+         0.0000000    0.0000000    0.0000000    0.0000000    0.0000000
+         0.4000000    0.0000000    0.0000000    0.0000000    0.0000000
+  endnode
+  node dummy Impact
+    parent torso_g
+  endnode
+doneanim cdamages ffshuttle3
+
+#MAXANIM ASCII
+newanim ckdbck ffshuttle3
+  length 1
+  transtime 0.125
+  animroot ffshuttle3
+  node dummy ffshuttle3
+    parent NULL
+  endnode
+  node dummy handconjure
+    parent ffshuttle3
+  endnode
+  node dummy headconjure
+    parent ffshuttle3
+  endnode
+  node dummy monster0
+    parent ffshuttle3
+  endnode
+  node dummy monster1
+    parent ffshuttle3
+  endnode
+  node dummy rootdummy
+    parent ffshuttle3
+  endnode
+  node trimesh torso_g
+    parent rootdummy
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+    positionkey 2
+         0.0000000   -0.0003019   -3.4918301    1.1498600
+         1.0000000   -0.0003019   -3.4918301    1.1498600
+    orientationkey 2
+         0.0000000    0.0000000    0.0000000    0.0000000    0.0000000
+         1.0000000    0.0000000    0.0000000    0.0000000    0.0000000
+  endnode
+  node dummy Impact
+    parent torso_g
+  endnode
+doneanim ckdbck ffshuttle3
+
+#MAXANIM ASCII
+newanim cwalk ffshuttle3
+  length 0.4
+  transtime 0.25
+  animroot ffshuttle3
+  node dummy ffshuttle3
+    parent NULL
+  endnode
+  node dummy handconjure
+    parent ffshuttle3
+  endnode
+  node dummy headconjure
+    parent ffshuttle3
+  endnode
+  node dummy monster0
+    parent ffshuttle3
+  endnode
+  node dummy monster1
+    parent ffshuttle3
+  endnode
+  node dummy rootdummy
+    parent ffshuttle3
+  endnode
+  node trimesh torso_g
+    parent rootdummy
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+    positionkey 2
+         0.0000000   -0.0003019   -3.4918301    1.1498600
+         0.4000000   -0.0003019   -3.4918301    1.1498600
+    orientationkey 2
+         0.0000000    0.0000000    0.0000000    0.0000000    0.0000000
+         0.4000000    0.0000000    0.0000000    0.0000000    0.0000000
+  endnode
+  node dummy Impact
+    parent torso_g
+  endnode
+doneanim cwalk ffshuttle3
+
+#MAXANIM ASCII
+newanim cclosel ffshuttle3
+  length 0.4
+  transtime 0.25
+  animroot ffshuttle3
+  node dummy ffshuttle3
+    parent NULL
+  endnode
+  node dummy handconjure
+    parent ffshuttle3
+  endnode
+  node dummy headconjure
+    parent ffshuttle3
+  endnode
+  node dummy monster0
+    parent ffshuttle3
+  endnode
+  node dummy monster1
+    parent ffshuttle3
+  endnode
+  node dummy rootdummy
+    parent ffshuttle3
+  endnode
+  node trimesh torso_g
+    parent rootdummy
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+    positionkey 2
+         0.0000000   -0.0003019   -3.4918301    1.1498600
+         0.4000000   -0.0003019   -3.4918301    1.1498600
+    orientationkey 2
+         0.0000000    0.0000000    0.0000000    0.0000000    0.0000000
+         0.4000000    0.0000000    0.0000000    0.0000000    0.0000000
+  endnode
+  node dummy Impact
+    parent torso_g
+  endnode
+doneanim cclosel ffshuttle3
+
+#MAXANIM ASCII
+newanim ca1slashr ffshuttle3
+  length 0.666667
+  transtime 0.25
+  animroot ffshuttle3
+  node dummy ffshuttle3
+    parent NULL
+  endnode
+  node dummy handconjure
+    parent ffshuttle3
+  endnode
+  node dummy headconjure
+    parent ffshuttle3
+  endnode
+  node dummy monster0
+    parent ffshuttle3
+  endnode
+  node dummy monster1
+    parent ffshuttle3
+  endnode
+  node dummy rootdummy
+    parent ffshuttle3
+  endnode
+  node trimesh torso_g
+    parent rootdummy
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+    positionkey 7
+         0.0000000   -0.0003019   -3.4918301    1.1498600
+         0.1666670   -0.0003019   -3.4918301    1.1498600
+         0.3666670   -0.0003019   -3.4918301    1.1498600
+         0.5000000   -0.0003019   -3.4918301    1.1498600
+         0.5333330   -0.0003019   -3.4918301    1.1498600
+         0.6333330   -0.0003019   -3.4918301    1.1498600
+         0.6666670   -0.0003019   -3.4918301    1.1498600
+    orientationkey 8
+         0.0000000    0.0000000    0.0000000    0.0000000    0.0000000
+         0.1666670   -0.0000017    1.0000000   -0.0000002   -0.2181660
+         0.3666670    0.0000000    0.0000000    0.0000000    0.0000000
+         0.5000000   -0.0000035   -1.0000000    0.0000002   -0.1047200
+         0.5333330   -0.0000047   -1.0000000    0.0000002   -0.0763582
+         0.5666670   -0.0000831   -1.0000000    0.0000002   -0.0043633
+         0.6333330   -0.0000415    1.0000000   -0.0000002   -0.0087266
+         0.6666670    0.0000000    0.0000000    0.0000000    0.0000000
+  endnode
+  node dummy Impact
+    parent torso_g
+  endnode
+doneanim ca1slashr ffshuttle3
+
+#MAXANIM ASCII
+newanim ca1stab ffshuttle3
+  length 0.666667
+  transtime 0.25
+  animroot ffshuttle3
+  node dummy ffshuttle3
+    parent NULL
+  endnode
+  node dummy handconjure
+    parent ffshuttle3
+  endnode
+  node dummy headconjure
+    parent ffshuttle3
+  endnode
+  node dummy monster0
+    parent ffshuttle3
+  endnode
+  node dummy monster1
+    parent ffshuttle3
+  endnode
+  node dummy rootdummy
+    parent ffshuttle3
+  endnode
+  node trimesh torso_g
+    parent rootdummy
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+    positionkey 7
+         0.0000000   -0.0003019   -3.4918301    1.1498600
+         0.1666670   -0.0003019   -3.4918301    1.1498600
+         0.3666670   -0.0003019   -3.4918301    1.1498600
+         0.5000000   -0.0003019   -3.4918301    1.1498600
+         0.5333330   -0.0003019   -3.4918301    1.1498600
+         0.6333330   -0.0003019   -3.4918301    1.1498600
+         0.6666670   -0.0003019   -3.4918301    1.1498600
+    orientationkey 8
+         0.0000000    0.0000000    0.0000000    0.0000000    0.0000000
+         0.1666670   -0.0000017    1.0000000   -0.0000002   -0.2181660
+         0.3666670    0.0000000    0.0000000    0.0000000    0.0000000
+         0.5000000   -0.0000035   -1.0000000    0.0000002   -0.1047200
+         0.5333330   -0.0000047   -1.0000000    0.0000002   -0.0763582
+         0.5666670   -0.0000831   -1.0000000    0.0000002   -0.0043633
+         0.6333330   -0.0000415    1.0000000   -0.0000002   -0.0087266
+         0.6666670    0.0000000    0.0000000    0.0000000    0.0000000
+  endnode
+  node dummy Impact
+    parent torso_g
+  endnode
+doneanim ca1stab ffshuttle3
+
+#MAXANIM ASCII
+newanim creach ffshuttle3
+  length 0.666667
+  transtime 0.25
+  animroot ffshuttle3
+  node dummy ffshuttle3
+    parent NULL
+  endnode
+  node dummy handconjure
+    parent ffshuttle3
+  endnode
+  node dummy headconjure
+    parent ffshuttle3
+  endnode
+  node dummy monster0
+    parent ffshuttle3
+  endnode
+  node dummy monster1
+    parent ffshuttle3
+  endnode
+  node dummy rootdummy
+    parent ffshuttle3
+  endnode
+  node trimesh torso_g
+    parent rootdummy
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+    positionkey 7
+         0.0000000   -0.0003019   -3.4918301    1.1498600
+         0.1666670   -0.0003019   -3.4918301    1.1498600
+         0.3666670   -0.0003019   -3.4918301    1.1498600
+         0.5000000   -0.0003019   -3.4918301    1.1498600
+         0.5333330   -0.0003019   -3.4918301    1.1498600
+         0.6333330   -0.0003019   -3.4918301    1.1498600
+         0.6666670   -0.0003019   -3.4918301    1.1498600
+    orientationkey 8
+         0.0000000    0.0000000    0.0000000    0.0000000    0.0000000
+         0.1666670   -0.0000017    1.0000000   -0.0000002   -0.2181660
+         0.3666670    0.0000000    0.0000000    0.0000000    0.0000000
+         0.5000000   -0.0000035   -1.0000000    0.0000002   -0.1047200
+         0.5333330   -0.0000047   -1.0000000    0.0000002   -0.0763582
+         0.5666670   -0.0000831   -1.0000000    0.0000002   -0.0043633
+         0.6333330   -0.0000415    1.0000000   -0.0000002   -0.0087266
+         0.6666670    0.0000000    0.0000000    0.0000000    0.0000000
+  endnode
+  node dummy Impact
+    parent torso_g
+  endnode
+doneanim creach ffshuttle3
+
+#MAXANIM ASCII
+newanim ccloseh ffshuttle3
+  length 0.4
+  transtime 0.25
+  animroot ffshuttle3
+  node dummy ffshuttle3
+    parent NULL
+  endnode
+  node dummy handconjure
+    parent ffshuttle3
+  endnode
+  node dummy headconjure
+    parent ffshuttle3
+  endnode
+  node dummy monster0
+    parent ffshuttle3
+  endnode
+  node dummy monster1
+    parent ffshuttle3
+  endnode
+  node dummy rootdummy
+    parent ffshuttle3
+  endnode
+  node trimesh torso_g
+    parent rootdummy
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+    positionkey 2
+         0.0000000   -0.0003019   -3.4918301    1.1498600
+         0.4000000   -0.0003019   -3.4918301    1.1498600
+    orientationkey 2
+         0.0000000    0.0000000    0.0000000    0.0000000    0.0000000
+         0.4000000    0.0000000    0.0000000    0.0000000    0.0000000
+  endnode
+  node dummy Impact
+    parent torso_g
+  endnode
+doneanim ccloseh ffshuttle3
+
+#MAXANIM ASCII
+newanim cparryr ffshuttle3
+  length 0.466667
+  transtime 0.25
+  animroot ffshuttle3
+  node dummy ffshuttle3
+    parent NULL
+  endnode
+  node dummy handconjure
+    parent ffshuttle3
+  endnode
+  node dummy headconjure
+    parent ffshuttle3
+  endnode
+  node dummy monster0
+    parent ffshuttle3
+  endnode
+  node dummy monster1
+    parent ffshuttle3
+  endnode
+  node dummy rootdummy
+    parent ffshuttle3
+  endnode
+  node trimesh torso_g
+    parent rootdummy
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+    positionkey 2
+         0.0000000   -0.0003019   -3.4918301    1.1498600
+         0.4666670   -0.0003019   -3.4918301    1.1498600
+    orientationkey 2
+         0.0000000    0.0000000    1.0000000    0.0000000   -0.3000000
+         0.4666670    0.0000000    1.0000000    0.0000000   -0.4000000
+  endnode
+  node dummy Impact
+    parent torso_g
+  endnode
+doneanim cparryr ffshuttle3
+
+#MAXANIM ASCII
+newanim cparryl ffshuttle3
+  length 0.466667
+  transtime 0.25
+  animroot ffshuttle3
+  node dummy ffshuttle3
+    parent NULL
+  endnode
+  node dummy handconjure
+    parent ffshuttle3
+  endnode
+  node dummy headconjure
+    parent ffshuttle3
+  endnode
+  node dummy monster0
+    parent ffshuttle3
+  endnode
+  node dummy monster1
+    parent ffshuttle3
+  endnode
+  node dummy rootdummy
+    parent ffshuttle3
+  endnode
+  node trimesh torso_g
+    parent rootdummy
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+    positionkey 2
+         0.0000000   -0.0003019   -3.4918301    1.1498600
+         0.4666670   -0.0003019   -3.4918301    1.1498600
+    orientationkey 2
+         0.0000000    0.0000000   -1.0000000    0.0000000   -0.3000000
+         0.4666670    0.0000000   -1.0000000    0.0000000   -0.4000000
+  endnode
+  node dummy Impact
+    parent torso_g
+  endnode
+doneanim cparryl ffshuttle3
+
+#MAXANIM ASCII
+newanim cdodgelr ffshuttle3
+  length 0.466667
+  transtime 0.25
+  animroot ffshuttle3
+  node dummy ffshuttle3
+    parent NULL
+  endnode
+  node dummy handconjure
+    parent ffshuttle3
+  endnode
+  node dummy headconjure
+    parent ffshuttle3
+  endnode
+  node dummy monster0
+    parent ffshuttle3
+  endnode
+  node dummy monster1
+    parent ffshuttle3
+  endnode
+  node dummy rootdummy
+    parent ffshuttle3
+  endnode
+  node trimesh torso_g
+    parent rootdummy
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+    positionkey 2
+         0.0000000   -0.0003019   -3.4918301    1.1498600
+         0.4666670   -0.0003019   -3.4918301    1.1498600
+    orientationkey 2
+         0.0000000    0.0000000   -1.0000000    0.0000000   -0.3000000
+         0.4666670    0.0000000   -1.0000000    0.0000000   -0.4000000
+  endnode
+  node dummy Impact
+    parent torso_g
+  endnode
+doneanim cdodgelr ffshuttle3
+
+#MAXANIM ASCII
+newanim cdodges ffshuttle3
+  length 0.466667
+  transtime 0.25
+  animroot ffshuttle3
+  node dummy ffshuttle3
+    parent NULL
+  endnode
+  node dummy handconjure
+    parent ffshuttle3
+  endnode
+  node dummy headconjure
+    parent ffshuttle3
+  endnode
+  node dummy monster0
+    parent ffshuttle3
+  endnode
+  node dummy monster1
+    parent ffshuttle3
+  endnode
+  node dummy rootdummy
+    parent ffshuttle3
+  endnode
+  node trimesh torso_g
+    parent rootdummy
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+    positionkey 2
+         0.0000000   -0.0003019   -3.4918301    1.1498600
+         0.4666670   -0.0003019   -3.4918301    1.1498600
+    orientationkey 2
+         0.0000000    0.0000000    1.0000000    0.0000000   -0.3000000
+         0.4666670    0.0000000    1.0000000    0.0000000   -0.4000000
+  endnode
+  node dummy Impact
+    parent torso_g
+  endnode
+doneanim cdodges ffshuttle3
+
+#MAXANIM ASCII
+newanim ckdbckps ffshuttle3
+  length 12
+  transtime 0.25
+  animroot ffshuttle3
+  node dummy ffshuttle3
+    parent NULL
+  endnode
+  node dummy handconjure
+    parent ffshuttle3
+  endnode
+  node dummy headconjure
+    parent ffshuttle3
+  endnode
+  node dummy monster0
+    parent ffshuttle3
+  endnode
+  node dummy monster1
+    parent ffshuttle3
+  endnode
+  node dummy rootdummy
+    parent ffshuttle3
+  endnode
+  node trimesh torso_g
+    parent rootdummy
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+    positionkey 11
+         0.0000000   -0.0003049   -3.5271001    1.1614701
+         1.2000000   -0.0003049   -3.5271001    1.1614701
+         2.4000001   -0.0003049   -3.5271001    1.1614701
+         3.5999999   -0.0003049   -3.5271001    1.1614701
+         4.8000002   -0.0003049   -3.5271001    1.1614701
+         6.0000000   -0.0003049   -3.5271001    1.1614701
+         7.1999998   -0.0003049   -3.5271001    1.1614701
+         8.3999996   -0.0003049   -3.5271001    1.1614701
+         9.6000004   -0.0003049   -3.5271001    1.1614701
+        10.8000002   -0.0003049   -3.5271001    1.1614701
+        12.0000000   -0.0003049   -3.5271001    1.1614701
+    orientationkey 11
+         0.0000000    0.0000000    0.0000000    0.0000000    0.0000000
+         1.2000000   -0.7071068   -0.7071068    0.0000000   -0.4529160
+         2.4000001   -0.7071068   -0.7071068    0.0000000   -0.9520390
+         3.5999999   -0.7071068   -0.7071068    0.0000000   -1.5384800
+         4.8000002   -0.7071068   -0.7071068    0.0000000   -2.2759099
+         6.0000000   -0.7071068   -0.7071068    0.0000000   -3.1393399
+         7.1999998   -0.7071068   -0.7071068    0.0000000   -4.0031700
+         8.3999996   -0.7071068   -0.7071068    0.0000000   -4.7413602
+         9.6000004   -0.7071068   -0.7071068    0.0000000   -5.3369699
+        10.8000002   -0.7071068   -0.7071068    0.0000000   -5.8278999
+        12.0000000    0.0000000    0.0000000    0.0000000    0.0000000
+  endnode
+  node dummy Impact
+    parent torso_g
+  endnode
+doneanim ckdbckps ffshuttle3
+
+#MAXANIM ASCII
+newanim ckdbckdmg ffshuttle3
+  length 0.266667
+  transtime 0.125
+  animroot ffshuttle3
+  node dummy ffshuttle3
+    parent NULL
+  endnode
+  node dummy handconjure
+    parent ffshuttle3
+  endnode
+  node dummy headconjure
+    parent ffshuttle3
+  endnode
+  node dummy monster0
+    parent ffshuttle3
+  endnode
+  node dummy monster1
+    parent ffshuttle3
+  endnode
+  node dummy rootdummy
+    parent ffshuttle3
+  endnode
+  node trimesh torso_g
+    parent rootdummy
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+    positionkey 2
+         0.0000000   -0.0003019   -3.4918301    1.1498600
+         0.2666670   -0.0003019   -3.4918301    1.1498600
+    orientationkey 2
+         0.0000000    0.0000000    0.0000000    0.0000000    0.0000000
+         0.2666670    0.0000000    0.0000000    0.0000000    0.0000000
+  endnode
+  node dummy Impact
+    parent torso_g
+  endnode
+doneanim ckdbckdmg ffshuttle3
+
+#MAXANIM ASCII
+newanim ckdbckdie ffshuttle3
+  length 1
+  transtime 0.25
+  animroot ffshuttle3
+  node dummy ffshuttle3
+    parent NULL
+  endnode
+  node dummy handconjure
+    parent ffshuttle3
+  endnode
+  node dummy headconjure
+    parent ffshuttle3
+  endnode
+  node dummy monster0
+    parent ffshuttle3
+  endnode
+  node dummy monster1
+    parent ffshuttle3
+  endnode
+  node dummy rootdummy
+    parent ffshuttle3
+  endnode
+  node trimesh torso_g
+    parent rootdummy
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+    positionkey 2
+         0.0000000   -0.0003019   -3.4918301    1.1498600
+         1.0000000   -0.0003019   -3.4918301    1.1498600
+    orientationkey 2
+         0.0000000    0.0000000    0.0000000    0.0000000    0.0000000
+         1.0000000    0.0000000    0.0000000    0.0000000    0.0000000
+  endnode
+  node dummy Impact
+    parent torso_g
+  endnode
+doneanim ckdbckdie ffshuttle3
+
+#MAXANIM ASCII
+newanim cdead ffshuttle3
+  length 12
+  transtime 0.25
+  animroot ffshuttle3
+  node dummy ffshuttle3
+    parent NULL
+  endnode
+  node dummy handconjure
+    parent ffshuttle3
+  endnode
+  node dummy headconjure
+    parent ffshuttle3
+  endnode
+  node dummy monster0
+    parent ffshuttle3
+  endnode
+  node dummy monster1
+    parent ffshuttle3
+  endnode
+  node dummy rootdummy
+    parent ffshuttle3
+  endnode
+  node trimesh torso_g
+    parent rootdummy
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+    positionkey 11
+         0.0000000   -0.0003049   -3.5271001    1.1614701
+         1.2000000   -0.0003049   -3.5271001    1.1614701
+         2.4000001   -0.0003049   -3.5271001    1.1614701
+         3.5999999   -0.0003049   -3.5271001    1.1614701
+         4.8000002   -0.0003049   -3.5271001    1.1614701
+         6.0000000   -0.0003049   -3.5271001    1.1614701
+         7.1999998   -0.0003049   -3.5271001    1.1614701
+         8.3999996   -0.0003049   -3.5271001    1.1614701
+         9.6000004   -0.0003049   -3.5271001    1.1614701
+        10.8000002   -0.0003049   -3.5271001    1.1614701
+        12.0000000   -0.0003049   -3.5271001    1.1614701
+    orientationkey 11
+         0.0000000    0.0000000    0.0000000    0.0000000    0.0000000
+         1.2000000   -1.0000000    0.0000000    0.0000000   -5.6531901
+         2.4000001   -1.0000000    0.0000000    0.0000000   -5.0231900
+         3.5999999   -1.0000000    0.0000000    0.0000000   -4.4031901
+         4.8000002   -1.0000000    0.0000000    0.0000000   -3.7731900
+         6.0000000   -1.0000000    0.0000000    0.0000000   -3.1431799
+         7.1999998   -1.0000000    0.0000000    0.0000000   -2.5131800
+         8.3999996   -1.0000000    0.0000000    0.0000000   -1.8831900
+         9.6000004   -1.0000000    0.0000000    0.0000000   -1.2531900
+        10.8000002   -1.0000000    0.0000000    0.0000000   -0.6331850
+        12.0000000    0.0000000    0.0000000    0.0000000    0.0000000
+  endnode
+  node dummy Impact
+    parent torso_g
+  endnode
+doneanim cdead ffshuttle3
+
+#MAXANIM ASCII
+newanim cguptokdb ffshuttle3
+  length 1
+  transtime 0.25
+  animroot ffshuttle3
+  node dummy ffshuttle3
+    parent NULL
+  endnode
+  node dummy handconjure
+    parent ffshuttle3
+  endnode
+  node dummy headconjure
+    parent ffshuttle3
+  endnode
+  node dummy monster0
+    parent ffshuttle3
+  endnode
+  node dummy monster1
+    parent ffshuttle3
+  endnode
+  node dummy rootdummy
+    parent ffshuttle3
+  endnode
+  node trimesh torso_g
+    parent rootdummy
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+    positionkey 2
+         0.0000000   -0.0003019   -3.4918301    1.1498600
+         1.0000000   -0.0003019   -3.4918301    1.1498600
+    orientationkey 2
+         0.0000000    0.0000000    0.0000000    0.0000000    0.0000000
+         1.0000000    0.0000000    0.0000000    0.0000000    0.0000000
+  endnode
+  node dummy Impact
+    parent torso_g
+  endnode
+doneanim cguptokdb ffshuttle3
+
+#MAXANIM ASCII
+newanim ccwalkf ffshuttle3
+  length 0.166667
+  transtime 0.25
+  animroot ffshuttle3
+  node dummy ffshuttle3
+    parent NULL
+  endnode
+  node dummy handconjure
+    parent ffshuttle3
+  endnode
+  node dummy headconjure
+    parent ffshuttle3
+  endnode
+  node dummy monster0
+    parent ffshuttle3
+  endnode
+  node dummy monster1
+    parent ffshuttle3
+  endnode
+  node dummy rootdummy
+    parent ffshuttle3
+  endnode
+  node trimesh torso_g
+    parent rootdummy
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+    positionkey 2
+         0.0000000   -0.0003019   -3.4918301    1.1498600
+         0.1666670   -0.0003019   -3.4918301    1.1498600
+    orientationkey 2
+         0.0000000    1.0000000    0.0000000    0.0000000   -0.1658050
+         0.1666670    0.0000000    0.0000000    0.0000000    0.0000000
+  endnode
+  node dummy Impact
+    parent torso_g
+  endnode
+doneanim ccwalkf ffshuttle3
+
+#MAXANIM ASCII
+newanim ccwalkb ffshuttle3
+  length 0.166667
+  transtime 0.25
+  animroot ffshuttle3
+  node dummy ffshuttle3
+    parent NULL
+  endnode
+  node dummy handconjure
+    parent ffshuttle3
+  endnode
+  node dummy headconjure
+    parent ffshuttle3
+  endnode
+  node dummy monster0
+    parent ffshuttle3
+  endnode
+  node dummy monster1
+    parent ffshuttle3
+  endnode
+  node dummy rootdummy
+    parent ffshuttle3
+  endnode
+  node trimesh torso_g
+    parent rootdummy
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+    positionkey 2
+         0.0000000   -0.0003019   -3.4918301    1.1498600
+         0.1666670   -0.0003019   -3.4918301    1.1498600
+    orientationkey 2
+         0.0000000    1.0000000    0.0000000    0.0000000   -0.1658050
+         0.1666670    0.0000000    0.0000000    0.0000000    0.0000000
+  endnode
+  node dummy Impact
+    parent torso_g
+  endnode
+doneanim ccwalkb ffshuttle3
+
+#MAXANIM ASCII
+newanim cgustandb ffshuttle3
+  length 1.13333
+  transtime 0.25
+  animroot ffshuttle3
+  node dummy ffshuttle3
+    parent NULL
+  endnode
+  node dummy handconjure
+    parent ffshuttle3
+  endnode
+  node dummy headconjure
+    parent ffshuttle3
+  endnode
+  node dummy monster0
+    parent ffshuttle3
+  endnode
+  node dummy monster1
+    parent ffshuttle3
+  endnode
+  node dummy rootdummy
+    parent ffshuttle3
+  endnode
+  node trimesh torso_g
+    parent rootdummy
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+    positionkey 2
+         0.0000000   -0.0003019   -3.4918301    1.1498600
+         1.1333300   -0.0003019   -3.4918301    1.1498600
+    orientationkey 2
+         0.0000000    0.0000000    0.0000000    0.0000000    0.0000000
+         1.1333300    0.0000000    0.0000000    0.0000000    0.0000000
+  endnode
+  node dummy Impact
+    parent torso_g
+  endnode
+doneanim cgustandb ffshuttle3
+
+#MAXANIM ASCII
+newanim ccwalkl ffshuttle3
+  length 0.466667
+  transtime 0.25
+  animroot ffshuttle3
+  node dummy ffshuttle3
+    parent NULL
+  endnode
+  node dummy handconjure
+    parent ffshuttle3
+  endnode
+  node dummy headconjure
+    parent ffshuttle3
+  endnode
+  node dummy monster0
+    parent ffshuttle3
+  endnode
+  node dummy monster1
+    parent ffshuttle3
+  endnode
+  node dummy rootdummy
+    parent ffshuttle3
+  endnode
+  node trimesh torso_g
+    parent rootdummy
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+    positionkey 2
+         0.0000000   -0.0003019   -3.4918301    1.1498600
+         0.4666670   -0.0003019   -3.4918301    1.1498600
+    orientationkey 2
+         0.0000000    0.0000000    1.0000000    0.0000000   -0.2999950
+         0.4666670    0.0000000    1.0000000    0.0000000   -0.3999950
+  endnode
+  node dummy Impact
+    parent torso_g
+  endnode
+doneanim ccwalkl ffshuttle3
+
+#MAXANIM ASCII
+newanim ccwalkr ffshuttle3
+  length 0.466667
+  transtime 0.25
+  animroot ffshuttle3
+  node dummy ffshuttle3
+    parent NULL
+  endnode
+  node dummy handconjure
+    parent ffshuttle3
+  endnode
+  node dummy headconjure
+    parent ffshuttle3
+  endnode
+  node dummy monster0
+    parent ffshuttle3
+  endnode
+  node dummy monster1
+    parent ffshuttle3
+  endnode
+  node dummy rootdummy
+    parent ffshuttle3
+  endnode
+  node trimesh torso_g
+    parent rootdummy
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+    positionkey 2
+         0.0000000   -0.0003019   -3.4918301    1.1498600
+         0.4666670   -0.0003019   -3.4918301    1.1498600
+    orientationkey 2
+         0.0000000    0.0000000   -1.0000000    0.0000000   -0.3000050
+         0.4666670    0.0000000   -1.0000000    0.0000000   -0.4000050
+  endnode
+  node dummy Impact
+    parent torso_g
+  endnode
+doneanim ccwalkr ffshuttle3
+
+#MAXANIM ASCII
+newanim cgetmid ffshuttle3
+  length 3
+  transtime 0.25
+  animroot ffshuttle3
+  node dummy ffshuttle3
+    parent NULL
+  endnode
+  node dummy handconjure
+    parent ffshuttle3
+  endnode
+  node dummy headconjure
+    parent ffshuttle3
+  endnode
+  node dummy monster0
+    parent ffshuttle3
+  endnode
+  node dummy monster1
+    parent ffshuttle3
+  endnode
+  node dummy rootdummy
+    parent ffshuttle3
+  endnode
+  node trimesh torso_g
+    parent rootdummy
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+    positionkey 5
+         0.0000000   -0.0003049   -3.5271001    1.1614701
+         0.7666670   -0.0003049   -3.5271001    0.0000000
+         1.5000000   -0.0003049   -3.5271001   -1.2000000
+         2.2666700   -0.0003049   -3.5271001   -3.2400000
+         3.0000000   -0.0003049   -3.5271001   -5.2199998
+    orientationkey 5
+         0.0000000    0.0000000    0.0000000    0.0000000    0.0000000
+         0.7666670    0.0000000    0.0000000    0.0000000    0.0000000
+         1.5000000    0.0000000    0.0000000    0.0000000    0.0000000
+         2.2666700    0.0000000    0.0000000    0.0000000    0.0000000
+         3.0000000    0.0000000    0.0000000    0.0000000    0.0000000
+  endnode
+  node dummy Impact
+    parent torso_g
+  endnode
+doneanim cgetmid ffshuttle3
+
+#MAXANIM ASCII
+newanim chturnl ffshuttle3
+  length 0.466667
+  transtime 0.25
+  animroot ffshuttle3
+  node dummy ffshuttle3
+    parent NULL
+  endnode
+  node dummy handconjure
+    parent ffshuttle3
+  endnode
+  node dummy headconjure
+    parent ffshuttle3
+  endnode
+  node dummy monster0
+    parent ffshuttle3
+  endnode
+  node dummy monster1
+    parent ffshuttle3
+  endnode
+  node dummy rootdummy
+    parent ffshuttle3
+  endnode
+  node trimesh torso_g
+    parent rootdummy
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+    positionkey 2
+         0.0000000   -0.0003019   -3.4918301    1.1498600
+         0.4666670   -0.0003019   -3.4918301    1.1498600
+    orientationkey 2
+         0.0000000    0.0000000    0.0000000    0.0000000    0.0000000
+         0.4666670    0.0000000    0.0000000    0.0000000    0.0000000
+  endnode
+  node dummy Impact
+    parent torso_g
+  endnode
+doneanim chturnl ffshuttle3
+
+#MAXANIM ASCII
+newanim chturnr ffshuttle3
+  length 0.466667
+  transtime 0.25
+  animroot ffshuttle3
+  node dummy ffshuttle3
+    parent NULL
+  endnode
+  node dummy handconjure
+    parent ffshuttle3
+  endnode
+  node dummy headconjure
+    parent ffshuttle3
+  endnode
+  node dummy monster0
+    parent ffshuttle3
+  endnode
+  node dummy monster1
+    parent ffshuttle3
+  endnode
+  node dummy rootdummy
+    parent ffshuttle3
+  endnode
+  node trimesh torso_g
+    parent rootdummy
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+    positionkey 2
+         0.0000000   -0.0003019   -3.4918301    1.1498600
+         0.4666670   -0.0003019   -3.4918301    1.1498600
+    orientationkey 2
+         0.0000000    0.0000000    0.0000000    0.0000000    0.0000000
+         0.4666670    0.0000000    0.0000000    0.0000000    0.0000000
+  endnode
+  node dummy Impact
+    parent torso_g
+  endnode
+doneanim chturnr ffshuttle3
+
+#MAXANIM ASCII
+newanim ctaunt ffshuttle3
+  length 0.4
+  transtime 0.25
+  animroot ffshuttle3
+  node dummy ffshuttle3
+    parent NULL
+  endnode
+  node dummy handconjure
+    parent ffshuttle3
+  endnode
+  node dummy headconjure
+    parent ffshuttle3
+  endnode
+  node dummy monster0
+    parent ffshuttle3
+  endnode
+  node dummy monster1
+    parent ffshuttle3
+  endnode
+  node dummy rootdummy
+    parent ffshuttle3
+  endnode
+  node trimesh torso_g
+    parent rootdummy
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+    positionkey 2
+         0.0000000   -0.0003019   -3.4918301    1.1498600
+         0.4000000   -0.0003019   -3.4918301    1.1498600
+    orientationkey 2
+         0.0000000    0.0000000    0.0000000    0.0000000    0.0000000
+         0.4000000    0.0000000    0.0000000    0.0000000    0.0000000
+  endnode
+  node dummy Impact
+    parent torso_g
+  endnode
+doneanim ctaunt ffshuttle3
+
+#MAXANIM ASCII
+newanim cconjure1 ffshuttle3
+  length 0.4
+  transtime 0.25
+  animroot ffshuttle3
+  node dummy ffshuttle3
+    parent NULL
+  endnode
+  node dummy handconjure
+    parent ffshuttle3
+  endnode
+  node dummy headconjure
+    parent ffshuttle3
+  endnode
+  node dummy monster0
+    parent ffshuttle3
+  endnode
+  node dummy monster1
+    parent ffshuttle3
+  endnode
+  node dummy rootdummy
+    parent ffshuttle3
+  endnode
+  node trimesh torso_g
+    parent rootdummy
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+    positionkey 2
+         0.0000000   -0.0003019   -3.4918301    1.1498600
+         0.4000000   -0.0003019   -3.4918301    1.1498600
+    orientationkey 2
+         0.0000000    0.0000000    0.0000000    0.0000000    0.0000000
+         0.4000000    0.0000000    0.0000000    0.0000000    0.0000000
+  endnode
+  node dummy Impact
+    parent torso_g
+  endnode
+doneanim cconjure1 ffshuttle3
+
+#MAXANIM ASCII
+newanim ccastoutlp ffshuttle3
+  length 0.4
+  transtime 0.25
+  animroot ffshuttle3
+  node dummy ffshuttle3
+    parent NULL
+  endnode
+  node dummy handconjure
+    parent ffshuttle3
+  endnode
+  node dummy headconjure
+    parent ffshuttle3
+  endnode
+  node dummy monster0
+    parent ffshuttle3
+  endnode
+  node dummy monster1
+    parent ffshuttle3
+  endnode
+  node dummy rootdummy
+    parent ffshuttle3
+  endnode
+  node trimesh torso_g
+    parent rootdummy
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+    positionkey 2
+         0.0000000   -0.0003019   -3.4918301    1.1498600
+         0.4000000   -0.0003019   -3.4918301    1.1498600
+    orientationkey 2
+         0.0000000    0.0000000    0.0000000    0.0000000    0.0000000
+         0.4000000    0.0000000    0.0000000    0.0000000    0.0000000
+  endnode
+  node dummy Impact
+    parent torso_g
+  endnode
+doneanim ccastoutlp ffshuttle3
+
+#MAXANIM ASCII
+newanim cappear ffshuttle3
+  length 4.5
+  transtime 0.25
+  animroot ffshuttle3
+  node dummy ffshuttle3
+    parent NULL
+  endnode
+  node dummy handconjure
+    parent ffshuttle3
+  endnode
+  node dummy headconjure
+    parent ffshuttle3
+  endnode
+  node dummy monster0
+    parent ffshuttle3
+  endnode
+  node dummy monster1
+    parent ffshuttle3
+  endnode
+  node dummy rootdummy
+    parent ffshuttle3
+  endnode
+  node trimesh torso_g
+    parent rootdummy
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+    positionkey 7
+         0.0000000    0.2357170   -3.5271001  120.0000000
+         0.7666670    0.2357170   -3.5271001   96.0000000
+         1.5000000    0.2357170   -3.5271001   72.0000000
+         2.2666700    0.2357170   -3.5271001   48.0000000
+         3.0000000    0.2357170   -3.5271001   30.0000000
+         3.7666700    0.2357170   -3.5271001    6.0000000
+         4.5000000    0.2357170   -3.5271001    0.0000000
+    orientationkey 7
+         0.0000000    0.0000000    0.0000000    0.0000000    0.0000000
+         0.7666670    0.0000000    0.0000000    0.0000000    0.0000000
+         1.5000000    0.0000000    0.0000000    0.0000000    0.0000000
+         2.2666700    0.0000000    0.0000000    0.0000000    0.0000000
+         3.0000000    0.0000000    0.0000000    0.0000000    0.0000000
+         3.7666700    0.0000000    0.0000000    0.0000000    0.0000000
+         4.5000000    0.0000000    0.0000000    0.0000000    0.0000000
+  endnode
+  node dummy Impact
+    parent torso_g
+  endnode
+doneanim cappear ffshuttle3
+
+#MAXANIM ASCII
+newanim cdisappear ffshuttle3
+  length 4.5
+  transtime 0.25
+  animroot ffshuttle3
+  node dummy ffshuttle3
+    parent NULL
+  endnode
+  node dummy handconjure
+    parent ffshuttle3
+  endnode
+  node dummy headconjure
+    parent ffshuttle3
+  endnode
+  node dummy monster0
+    parent ffshuttle3
+  endnode
+  node dummy monster1
+    parent ffshuttle3
+  endnode
+  node dummy rootdummy
+    parent ffshuttle3
+  endnode
+  node trimesh torso_g
+    parent rootdummy
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+    positionkey 7
+         0.0000000    0.2357170   -3.5271001    0.0000000
+         0.7666670    0.2357170   -3.5271001    6.0000000
+         1.5000000    0.2357170   -3.5271001   30.0000000
+         2.2666700    0.2357170   -3.5271001   48.0000000
+         3.0000000    0.2357170   -3.5271001   72.0000000
+         3.7666700    0.2357170   -3.5271001   96.0000000
+         4.5000000    0.2357170   -3.5271001  120.0000000
+    orientationkey 7
+         0.0000000    0.0000000    0.0000000    0.0000000    0.0000000
+         0.7666670    0.0000000    0.0000000    0.0000000    0.0000000
+         1.5000000    0.0000000    0.0000000    0.0000000    0.0000000
+         2.2666700    0.0000000    0.0000000    0.0000000    0.0000000
+         3.0000000    0.0000000    0.0000000    0.0000000    0.0000000
+         3.7666700    0.0000000    0.0000000    0.0000000    0.0000000
+         4.5000000    0.0000000    0.0000000    0.0000000    0.0000000
+  endnode
+  node dummy Impact
+    parent torso_g
+  endnode
+doneanim cdisappear ffshuttle3
+
+#MAXANIM ASCII
+newanim ccastout ffshuttle3
+  length 0.4
+  transtime 0.25
+  animroot ffshuttle3
+  node dummy ffshuttle3
+    parent NULL
+  endnode
+  node dummy handconjure
+    parent ffshuttle3
+  endnode
+  node dummy headconjure
+    parent ffshuttle3
+  endnode
+  node dummy monster0
+    parent ffshuttle3
+  endnode
+  node dummy monster1
+    parent ffshuttle3
+  endnode
+  node dummy rootdummy
+    parent ffshuttle3
+  endnode
+  node trimesh torso_g
+    parent rootdummy
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+    positionkey 2
+         0.0000000   -0.0003019   -3.4918301    1.1498600
+         0.4000000   -0.0003019   -3.4918301    1.1498600
+    orientationkey 2
+         0.0000000    0.0000000    0.0000000    0.0000000    0.0000000
+         0.4000000    0.0000000    0.0000000    0.0000000    0.0000000
+  endnode
+  node dummy Impact
+    parent torso_g
+  endnode
+doneanim ccastout ffshuttle3
+
+#MAXANIM ASCII
+newanim cgetmidlp ffshuttle3
+  length 0.5
+  transtime 0.25
+  animroot ffshuttle3
+  node dummy ffshuttle3
+    parent NULL
+  endnode
+  node dummy handconjure
+    parent ffshuttle3
+  endnode
+  node dummy headconjure
+    parent ffshuttle3
+  endnode
+  node dummy monster0
+    parent ffshuttle3
+  endnode
+  node dummy monster1
+    parent ffshuttle3
+  endnode
+  node dummy rootdummy
+    parent ffshuttle3
+  endnode
+  node trimesh torso_g
+    parent rootdummy
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+    positionkey 2
+         0.0000000   -0.0003019   -3.4918301   -5.2272000
+         0.5000000   -0.0003019   -3.4918301   -5.2272000
+    orientationkey 2
+         0.0000000    0.0000000    0.0000000    0.0000000    0.0000000
+         0.5000000    0.0000000    0.0000000    0.0000000    0.0000000
+  endnode
+  node dummy Impact
+    parent torso_g
+  endnode
+doneanim cgetmidlp ffshuttle3
+
+#MAXANIM ASCII
+newanim cspasm ffshuttle3
+  length 0.666667
+  transtime 0.25
+  animroot ffshuttle3
+  node dummy ffshuttle3
+    parent NULL
+  endnode
+  node dummy handconjure
+    parent ffshuttle3
+  endnode
+  node dummy headconjure
+    parent ffshuttle3
+  endnode
+  node dummy monster0
+    parent ffshuttle3
+  endnode
+  node dummy monster1
+    parent ffshuttle3
+  endnode
+  node dummy rootdummy
+    parent ffshuttle3
+  endnode
+  node trimesh torso_g
+    parent rootdummy
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+    positionkey 8
+         0.0000000   -0.0003019   -3.4918301    1.1498600
+         0.1666670   -0.0003019   -3.4918301    1.1498600
+         0.3666670   -0.0003019   -3.4918301    1.1498600
+         0.5000000   -0.0003019   -3.4918301    1.1498600
+         0.5333330   -0.0003019   -3.4918301    1.1498600
+         0.5666670   -0.0003019   -3.4918301    1.1498600
+         0.6333330   -0.0003019   -3.4918301    1.1498600
+         0.6666670   -0.0003019   -3.4918301    1.1498600
+    orientationkey 8
+         0.0000000    0.0000000    0.0000000    0.0000000    0.0000000
+         0.1666670   -0.0000017    1.0000000   -0.0000002   -0.2181660
+         0.3666670    0.0000000    0.0000000    0.0000000    0.0000000
+         0.5000000   -0.0000035   -1.0000000    0.0000002   -0.1047200
+         0.5333330   -0.0000047   -1.0000000    0.0000002   -0.0763582
+         0.5666670   -0.0000831   -1.0000000    0.0000002   -0.0043633
+         0.6333330   -0.0000415    1.0000000   -0.0000002   -0.0087266
+         0.6666670    0.0000000    0.0000000    0.0000000    0.0000000
+  endnode
+  node dummy Impact
+    parent torso_g
+  endnode
+doneanim cspasm ffshuttle3
+
+#MAXANIM ASCII
+newanim ccturnr ffshuttle3
+  length 0.466667
+  transtime 0.25
+  animroot ffshuttle3
+  node dummy ffshuttle3
+    parent NULL
+  endnode
+  node dummy handconjure
+    parent ffshuttle3
+  endnode
+  node dummy headconjure
+    parent ffshuttle3
+  endnode
+  node dummy monster0
+    parent ffshuttle3
+  endnode
+  node dummy monster1
+    parent ffshuttle3
+  endnode
+  node dummy rootdummy
+    parent ffshuttle3
+  endnode
+  node trimesh torso_g
+    parent rootdummy
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+    positionkey 2
+         0.0000000   -0.0003019   -3.4918301    1.1498600
+         0.4666670   -0.0003019   -3.4918301    1.1498600
+    orientationkey 2
+         0.0000000    0.0000000   -1.0000000    0.0000000   -0.3000000
+         0.4666670    0.0000000   -1.0000000    0.0000000   -0.4000000
+  endnode
+  node dummy Impact
+    parent torso_g
+  endnode
+doneanim ccturnr ffshuttle3
+
+#MAXANIM ASCII
+newanim cdisappearlp ffshuttle3
+  length 0.5
+  transtime 0.25
+  animroot ffshuttle3
+  node dummy ffshuttle3
+    parent NULL
+  endnode
+  node dummy handconjure
+    parent ffshuttle3
+  endnode
+  node dummy headconjure
+    parent ffshuttle3
+  endnode
+  node dummy monster0
+    parent ffshuttle3
+  endnode
+  node dummy monster1
+    parent ffshuttle3
+  endnode
+  node dummy rootdummy
+    parent ffshuttle3
+  endnode
+  node trimesh torso_g
+    parent rootdummy
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+    positionkey 2
+         0.0000000    0.2333600   -3.4918301  118.8000031
+         0.5000000    0.2333600   -3.4918301  118.8000031
+    orientationkey 2
+         0.0000000    0.0000000    0.0000000    0.0000000    0.0000000
+         0.5000000    0.0000000    0.0000000    0.0000000    0.0000000
+  endnode
+  node dummy Impact
+    parent torso_g
+  endnode
+doneanim cdisappearlp ffshuttle3
+
+#MAXANIM ASCII
+newanim off ffshuttle3
+  length 0.5
+  transtime 0.25
+  animroot ffshuttle3
+  node dummy ffshuttle3
+    parent NULL
+  endnode
+  node dummy handconjure
+    parent ffshuttle3
+  endnode
+  node dummy headconjure
+    parent ffshuttle3
+  endnode
+  node dummy monster0
+    parent ffshuttle3
+  endnode
+  node dummy monster1
+    parent ffshuttle3
+  endnode
+  node dummy rootdummy
+    parent ffshuttle3
+  endnode
+  node trimesh torso_g
+    parent rootdummy
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+    positionkey 2
+         0.0000000   -0.0003019   -3.4918301    1.1498600
+         0.5000000   -0.0003019   -3.4918301    1.1498600
+    orientationkey 2
+         0.0000000    0.0000000    0.0000000    0.0000000    0.0000000
+         0.5000000    0.0000000    0.0000000    0.0000000    0.0000000
+  endnode
+  node dummy Impact
+    parent torso_g
+  endnode
+doneanim off ffshuttle3
+
+#MAXANIM ASCII
+newanim on ffshuttle3
+  length 0.5
+  transtime 0.25
+  animroot ffshuttle3
+  node dummy ffshuttle3
+    parent NULL
+  endnode
+  node dummy handconjure
+    parent ffshuttle3
+  endnode
+  node dummy headconjure
+    parent ffshuttle3
+  endnode
+  node dummy monster0
+    parent ffshuttle3
+  endnode
+  node dummy monster1
+    parent ffshuttle3
+  endnode
+  node dummy rootdummy
+    parent ffshuttle3
+  endnode
+  node trimesh torso_g
+    parent rootdummy
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+    positionkey 2
+         0.0000000   -0.0003019   -3.4918301    1.1498600
+         0.5000000   -0.0003019   -3.4918301    1.1498600
+    orientationkey 2
+         0.0000000    0.0000000    0.0000000    0.0000000    0.0000000
+         0.5000000    0.0000000    0.0000000    0.0000000    0.0000000
+  endnode
+  node dummy Impact
+    parent torso_g
+  endnode
+doneanim on ffshuttle3
+
+donemodel ffshuttle3
