@@ -1,0 +1,23 @@
+# Exported from blender at Tuesday, 2018-03-06
+node aabb wokmesh.012
+  parent dgt05_b07_04_pwk
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.03 0.03 0.53
+  ambient 1.0 1.0 1.0
+  diffuse 1.0 1.0 1.0
+  specular 0.0 0.0 0.0
+  shininess 0
+  bitmap NULL
+  verts 4
+    -5.06283  5.00000 -10.00000
+    -5.06283 -5.00000 -10.00000
+     5.00000  5.00000 -10.00000
+     5.00000 -5.00000 -10.00000
+  faces 2
+    3 0 1  0  0 0 0   7
+    3 2 0  0  0 0 0   7
+  aabb   -5.06283 -5.0 -10.0 5.0 5.0 -10.0 -1
+    -5.06283 -5.0 -10.0 5.0 5.0 -10.0 0
+    -5.06283 -5.0 -10.0 5.0 5.0 -10.0 1
+endnode
