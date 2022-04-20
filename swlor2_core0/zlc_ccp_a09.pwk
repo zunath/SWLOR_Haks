@@ -1,0 +1,43 @@
+#Exported from 3ds max by MDL Plug-in Suite 1.0b
+#http://www.bricksbuilder.com/nwn/utils/
+#MAXMODEL ASCII
+# model: zlc_ccp_a09
+filedependancy plc_dwarf.max
+node trimesh PWK
+  parent zlc_ccp_a09_pwk
+  position 0 0 0
+  orientation 0 0 0 0
+  wirecolor 0.0273438 0.0273438 0.0273438
+  ambient 0.34375 0.34375 0.878906
+  diffuse 0.34375 0.34375 0.878906
+  specular 0 0 0
+  shininess 1
+  bitmap NULL
+  verts 13
+    0 0 0
+    -1.35 0 0
+    -1.16913 0.675 0
+    -0.675 1.16913 0
+    0 1.35 0
+    0.675 1.16913 0
+    1.16913 0.675 0
+    1.35 0 0
+    1.16913 -0.675 0
+    0.675 -1.16913 0
+    0 -1.35 0
+    -0.675 -1.16913 0
+    -1.16913 -0.675 0
+  faces 12
+    0 2 1  1  0 0 0  1
+    0 3 2  1  0 0 0  1
+    0 4 3  1  0 0 0  1
+    0 5 4  1  0 0 0  1
+    0 6 5  1  0 0 0  1
+    0 7 6  1  0 0 0  1
+    0 8 7  1  0 0 0  1
+    0 9 8  1  0 0 0  1
+    0 10 9  1  0 0 0  1
+    0 11 10  1  0 0 0  1
+    0 12 11  1  0 0 0  1
+    0 1 12  1  0 0 0  1
+endnode

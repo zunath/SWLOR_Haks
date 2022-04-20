@@ -1,0 +1,35 @@
+# Exported from NWmax 0.8 b50 at 1/4/2006 10:57:48 PM
+# pwk file
+#
+#NWmax PWKMESH  ASCII
+node trimesh NoWalk
+  parent postbed_pwk
+  position -2.09967 -0.564867 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.721569 0.894118 0.6 
+  ambient 0.0 0.0 0.0 
+  diffuse 0.784314 0.784314 0.784314 
+  specular 0.0 0.0 0.0 
+  shininess 20.0
+  bitmap black
+  verts 4
+    4.0 -1.23 0.0
+    0.35 2.4 0.0
+    0.35 -1.23 0.0
+    4.0 2.4 0.0
+  faces 2
+    0 1 2  0  0 0 0  7
+    0 3 1  0  0 0 0  7
+endnode
+node dummy blg_pwk_use01
+  parent postbed_pwk
+  position 0.0295397 1.92062 0.159263
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.776471 0.878431 0.341176 
+endnode
+node dummy blg_pwk_use02
+  parent postbed_pwk
+  position 0.0295397 -1.85415 0.159263
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.776471 0.878431 0.341176 
+endnode

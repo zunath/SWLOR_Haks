@@ -1,0 +1,36 @@
+# Exported from Wayland's NWN Maxscript v0.3 at 12/11/2002 11:56:51 AM
+# pwk file
+#
+node trimesh nw2stool3_wg
+    parent nw2stool3_pwk
+    position 0.00583705 -0.266594 0.0
+    orientation 1.0 0.0 0.0 0.0
+    scale 1.0
+    diffuse 0.8000 0.8000 0.8000
+    ambient 0.2000 0.2000 0.2000
+    specular 0.0000 0.0000 0.0000
+    render 0
+    bitmap NULL
+    verts 8
+        -0.865769 0.828736 0.0
+        -0.905805 -0.308274 0.0
+        -0.473421 -0.324288 0.0
+        -0.473421 -0.18016 0.0
+        0.49544 -0.188167 0.0
+        0.471419 -0.316281 0.0
+        0.871775 -0.332295 0.0
+        0.879782 0.820729 0.0
+    faces 6
+        4 5 6 1 0 0 0 1
+        4 6 7 1 0 0 0 1
+        4 7 0 1 0 0 0 1
+        3 4 0 1 0 0 0 1
+        3 0 1 1 0 0 0 1
+        3 1 2 1 0 0 0 1
+endnode
+node dummy e27_pwk_use01
+    parent nw2stool3_pwk
+  position 0 -0.768726 0
+    orientation 1.0 0.0 0.0 0.0
+    scale 1.0
+endnode
