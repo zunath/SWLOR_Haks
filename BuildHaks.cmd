@@ -1,1 +1,0 @@
-NWN.FinalFantasy.CLI.exe -k
