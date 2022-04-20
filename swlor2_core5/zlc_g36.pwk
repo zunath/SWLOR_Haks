@@ -1,0 +1,22 @@
+#MAXDOOR ASCII
+# model: dBrsB2_PWK 
+filedependancy dBrsB1.max
+node trimesh zlc_g36_wg 
+  parent zlc_g36_pwk 
+  position 0.154006 -0.500007 0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.839216 0.898039 0.65098  
+  ambient 0.7 0.7 0.7  
+  diffuse 0.7 0.7 0.7  
+  specular 0.0 0.0 0.0  
+  shininess 51.0 
+    bitmap NULL
+    verts 4
+     0.84 1.49 0.0
+     -0.78 1.76 0.0
+     0.35 -0.76 0.0
+     -1.16 -0.48 0.0
+    faces 2
+     0 1 2  1  0 0 0  1
+     1 3 2  1  0 0 0  1
+endnode

@@ -1,0 +1,1069 @@
+#MAXMODEL ASCII
+# model: PLC_CRP407
+filedependancy PLC_CRP407.max
+newmodel PLC_CRP407
+setsupermodel PLC_CRP407 NULL
+classification character
+setanimationscale 1
+#MAXGEOM  ASCII
+beginmodelgeom PLC_CRP407
+node dummy PLC_CRP407
+  parent NULL
+  #part-number 0
+endnode
+node dummy x45_hand
+  parent PLC_CRP407
+  #part-number 1
+  position 0.00398926018 -0.505196989 0.584698975
+  orientation 0 0 0 0
+endnode
+node dummy x45_head
+  parent PLC_CRP407
+  #part-number 2
+  position 0.00398926018 0.0108257998 0.562325001
+  orientation 0 0 0 0
+endnode
+node dummy x45_head_hit
+  parent PLC_CRP407
+  #part-number 3
+  position 0.00398926018 0.0108257998 0.0808466971
+  orientation 0 0 0 0
+endnode
+node dummy x45_impact
+  parent PLC_CRP407
+  #part-number 4
+  position 0.00398926018 0.0109997997 0.0531891994
+  orientation 0 0 0 0
+endnode
+node dummy x45_ground
+  parent PLC_CRP407
+  #part-number 5
+  position -0.00363280997 0.00698790979 0
+  orientation 0 0 0 0
+endnode
+node emitter fire!148
+  parent PLC_CRP407
+  #part-number 6
+  p2p 0
+  p2p_sel 1
+  affectedByWind 0
+  m_isTinted 1
+  bounce 0
+  random 0
+  inherit 1
+  inheritvel 0
+  inherit_local 0
+  splat 0
+  inherit_part 0
+  renderorder 0
+  spawntype 0
+  update Explosion
+  render Normal
+  blend Normal
+  texture fxpa_smoke01
+  xgrid 4
+  ygrid 4
+  loop 0
+  deadspace 0
+  twosidedtex 1
+  blastRadius 0.200000003
+  blastLength 1
+  position -0.0117718996 0.0335895009 0.106916003
+  orientation -1 0 0 -1.57079995
+  colorStart 0.474510014 0.439215988 0.36470601
+  colorEnd 0.819607973 0.79607898 0.709803998
+  alphaStart 1
+  alphaEnd 0
+  sizeStart 4
+  sizeEnd 1
+  sizeStart_y 0
+  sizeEnd_y 0
+  frameStart 0
+  frameEnd 24
+  birthrate 10
+  lifeExp 2.5
+  mass 0.0900000036
+  spread 2.96706009
+  particleRot 0.5
+  velocity 2
+  randvel 0.5
+  fps 10
+  xsize 100
+  ysize 99
+  bounce_co 0
+  blurlength 10
+  lightningDelay 0
+  lightningRadius 0
+  lightningScale 0
+  p2p_bezier2 0
+  p2p_bezier3 0
+  combinetime 0
+  drag 0
+  grav 0
+  threshold 0
+endnode
+node emitter ChunkyWood243
+  parent PLC_CRP407
+  #part-number 7
+  p2p 0
+  p2p_sel 1
+  affectedByWind 0
+  m_isTinted 0
+  bounce 1
+  random 0
+  inherit 1
+  inheritvel 0
+  inherit_local 0
+  splat 0
+  inherit_part 0
+  renderorder 0
+  spawntype 0
+  update Explosion
+  render Normal
+  blend Normal
+  texture fxpa_cloud02
+  chunkName PLC_Chunk_W01
+  xgrid 5
+  ygrid 5
+  loop 0
+  deadspace 0
+  twosidedtex 0
+  blastRadius 0
+  blastLength 0
+  position -0.0117718996 0.0335895009 0.18096
+  orientation 0 0 0 0
+  colorStart 1 1 1
+  colorEnd 1 1 1
+  alphaStart 1
+  alphaEnd 1
+  sizeStart 0.100000001
+  sizeEnd 0.100000001
+  sizeStart_y 0
+  sizeEnd_y 0
+  frameStart 0
+  frameEnd 24
+  birthrate 3
+  lifeExp 0.75
+  mass 3
+  spread 1.22172999
+  particleRot 5
+  velocity 8
+  randvel 0.300000012
+  fps 0
+  xsize 89
+  ysize 40
+  bounce_co 0.5
+  blurlength 10
+  lightningDelay 0
+  lightningRadius 0
+  lightningScale 0
+  p2p_bezier2 0
+  p2p_bezier3 0
+  combinetime 0
+  drag 0
+  grav 0
+  threshold 0
+endnode
+node trimesh damage98
+  parent PLC_CRP407
+  #part-number 8
+  ambient 0.0705882013 0 1
+  diffuse 1 0.501960993 0.643136978
+  specular 0 0 0
+  shininess 24
+  shadow 0
+  render 0
+  bitmap NULL
+  verts 12
+    -0.195415005 -0.186215997 0
+    -0.195415005 0.186215997 0
+    0.195415005 0.186215997 0
+    0.195415005 -0.186215997 0
+    -0.195415005 -0.186215997 0.5
+    0.195415005 -0.186215997 0.5
+    0.195415005 0.186215997 0.5
+    -0.195415005 0.186215997 0.5
+    0.103944004 -0.0990512967 0.25
+    -0.103944004 -0.0990512967 0.25
+    0.103944004 0.0990512967 0.25
+    -0.103944004 0.0990512967 0.25
+  tverts 3
+    0 0 0
+    0 0 0
+    0 0 0
+  faces 20
+    0 1 2 1 0 1 2 0
+    2 3 0 1 0 1 2 0
+    4 5 6 1 0 1 2 0
+    6 7 4 1 0 1 2 0
+    0 3 8 2 0 1 2 0
+    8 9 0 2 0 1 2 0
+    9 8 5 2 0 1 2 0
+    5 4 9 2 0 1 2 0
+    3 2 10 4 0 1 2 0
+    10 8 3 4 0 1 2 0
+    8 10 6 4 0 1 2 0
+    6 5 8 4 0 1 2 0
+    2 1 11 2 0 1 2 0
+    11 10 2 2 0 1 2 0
+    10 11 7 2 0 1 2 0
+    7 6 10 2 0 1 2 0
+    1 0 9 4 0 1 2 0
+    9 11 1 4 0 1 2 0
+    11 9 4 4 0 1 2 0
+    4 7 11 4 0 1 2 0
+  position 0.0379858017 0.0130292 0
+  orientation 0 0 0 0
+endnode
+node trimesh Box132
+  parent damage98
+  #part-number 9
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 0
+  bitmap PLC_CRP407
+  verts 16
+    -0.75 -0.800000012 0
+    0.75 -0.800000012 0
+    0.75 -0.800000012 0.0381339006
+    -0.75 -0.800000012 0.0381339006
+    0.75 0.800000012 0
+    0.75 0.800000012 0.0381339006
+    -0.75 0.800000012 0
+    -0.75 0.800000012 0.0381339006
+    0.652173996 -0.695652008 0.0391338989
+    -0.652173996 -0.695652008 0.0391338989
+    0.652173996 0.695652008 0.0391338989
+    -0.652173996 0.695652008 0.0391338989
+    0.652173996 -0.695652008 0.00999999978
+    -0.652173996 -0.695652008 0.00999999978
+    0.652173996 0.695652008 0.00999999978
+    -0.652173996 0.695652008 0.00999999978
+  tverts 40
+    0.48745501 0.989751995 0
+    0.487457007 0.522265971 0
+    0.499989003 0.522266984 0
+    0.49998799 0.989751995 0
+    0.00234711007 0.982909977 0
+    0.50099802 0.982913971 0
+    0.50099802 0.995446026 0
+    0.00234698993 0.995441973 0
+    0.00298761996 0.985966027 0
+    0.00298934989 0.518481016 0
+    0.0155218001 0.518481016 0
+    0.0155200996 0.985966027 0
+    0.00357610011 0.509634972 0
+    0.502227008 0.509639025 0
+    0.502227008 0.522171021 0
+    0.00357604004 0.522167027 0
+    0.500325978 0.505553007 0
+    0.500325978 0.998510003 0
+    0.467804998 0.966359973 0
+    0.467804998 0.537702024 0
+    0.00167498004 0.99850899 0
+    0.0341956988 0.966359973 0
+    0.00167501997 0.505553007 0
+    0.0341957994 0.537702024 0
+    0.480812997 0.558227003 0
+    0.480811 0.964735985 0
+    0.471237004 0.964735985 0
+    0.471237987 0.558227003 0
+    0.474783987 0.97665602 0
+    0.0411744006 0.97665298 0
+    0.0411744006 0.967078984 0
+    0.474783987 0.967082024 0
+    0.0329521 0.550656021 0
+    0.0329505987 0.957165003 0
+    0.0233759992 0.957165003 0
+    0.0233775005 0.550656021 0
+    0.468647003 0.535363972 0
+    0.0350378007 0.535360992 0
+    0.0350380018 0.525786996 0
+    0.468647003 0.525789976 0
+  faces 24
+    0 1 2 1 0 1 2 0
+    2 3 0 1 2 3 0 0
+    1 4 5 2 4 5 6 0
+    5 2 1 2 6 7 4 0
+    4 6 7 1 8 9 10 0
+    7 5 4 1 10 11 8 0
+    6 0 3 2 12 13 14 0
+    3 7 6 2 14 15 12 0
+    3 2 8 4 16 17 18 0
+    8 9 3 4 18 19 16 0
+    2 5 10 4 17 20 21 0
+    10 8 2 4 21 18 17 0
+    5 7 11 4 20 22 23 0
+    11 10 5 4 23 21 20 0
+    7 3 9 4 22 16 19 0
+    9 11 7 4 19 23 22 0
+    9 8 12 1 24 25 26 0
+    12 13 9 1 26 27 24 0
+    8 10 14 2 28 29 30 0
+    14 12 8 2 30 31 28 0
+    10 11 15 1 32 33 34 0
+    15 14 10 1 34 35 32 0
+    11 9 13 2 36 37 38 0
+    13 15 11 2 38 39 36 0
+  position -0.0603005998 -0.0854599997 0
+  orientation 0 0 0 0
+endnode
+node trimesh Box133
+  parent damage98
+  #part-number 10
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 0
+  bitmap PLC_CRP407
+  verts 8
+    -0.699999988 -1.55419004 0
+    -0.699999988 -0.00419411017 0
+    0.699999988 -0.00419411017 0
+    0.699999988 -1.55419004 0
+    -0.699999988 -1.55419004 0.0379999988
+    0.699999988 -1.55419004 0.0379999988
+    0.699999988 -0.00419411017 0.0379999988
+    -0.699999988 -0.00419411017 0.0379999988
+  tverts 16
+    0.0357242003 0.536727011 0
+    0.462911993 0.536727011 0
+    0.462911993 0.962668002 0
+    0.0357242003 0.962668002 0
+    0.466143012 0.534570992 0
+    0.466143012 0.961584985 0
+    0.0367854014 0.961584985 0
+    0.0378713012 0.536747992 0
+    0.473342001 0.536754012 0
+    0.473342001 0.962677002 0
+    0.462868989 0.974237978 0
+    0.0356941 0.974237978 0
+    0.0252212994 0.962677002 0
+    0.0252214 0.536754012 0
+    0.0356942005 0.525192976 0
+    0.462868989 0.525192976 0
+  faces 12
+    0 1 2 1 0 1 2 0
+    2 3 0 1 2 3 0 0
+    4 5 6 1 4 5 6 0
+    6 7 4 1 6 7 4 0
+    0 3 5 2 8 9 5 0
+    5 4 0 2 5 4 8 0
+    3 2 6 4 10 11 6 0
+    6 5 3 4 6 5 10 0
+    2 1 7 2 12 13 7 0
+    7 6 2 2 7 6 12 0
+    1 0 4 4 14 15 4 0
+    4 7 1 4 4 7 14 0
+  position -0.0603005998 0.718734026 0.0381339006
+  orientation 0 0 0 0
+endnode
+node trimesh Mesh92
+  parent damage98
+  #part-number 15
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 1
+  bitmap PLC_black00
+  verts 4
+    -0.652481973 -0.695347011 -0.012751
+    0.651071012 -0.696538985 0.0327544995
+    0.651071012 0.694288015 0.0691744983
+    -0.652481973 0.695479989 0.0236690007
+  tverts 3
+    0 0 0
+    0 0 0
+    0 0 0
+  faces 2
+    0 1 2 1 0 1 2 0
+    2 3 0 1 0 1 2 0
+  position -0.0605802014 -0.0856691003 -0.0082233604
+  orientation 0.599948883 -0.799969792 -0.010472198 -0.0436323956
+endnode
+endmodelgeom PLC_CRP407
+
+#MAXANIM ASCII
+newanim open PLC_CRP407
+  length 0.0333333015
+  transtime 0.25
+  animroot PLC_CRP407
+node dummy PLC_CRP407
+  parent NULL
+  #part-number 0
+endnode
+node dummy x45_hand
+  parent PLC_CRP407
+  #part-number 1
+endnode
+node dummy x45_head
+  parent PLC_CRP407
+  #part-number 2
+endnode
+node dummy x45_head_hit
+  parent PLC_CRP407
+  #part-number 3
+endnode
+node dummy x45_impact
+  parent PLC_CRP407
+  #part-number 4
+endnode
+node dummy x45_ground
+  parent PLC_CRP407
+  #part-number 5
+endnode
+node emitter fire!148
+  parent PLC_CRP407
+  #part-number 6
+endnode
+node emitter ChunkyWood243
+  parent PLC_CRP407
+  #part-number 7
+endnode
+node trimesh damage98
+  parent PLC_CRP407
+  #part-number 8
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Box132
+  parent damage98
+  #part-number 9
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Box133
+  parent damage98
+  #part-number 10
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+  orientationkey 2
+    0 1 0 0 -1.35263002
+    0.0333333015 1 0 0 -1.35263002
+endnode
+node trimesh Mesh92
+  parent damage98
+  #part-number 15
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+doneanim open PLC_CRP407
+
+#MAXANIM ASCII
+newanim open2close PLC_CRP407
+  length 0.633333027
+  transtime 0.25
+  animroot PLC_CRP407
+node dummy PLC_CRP407
+  parent NULL
+  #part-number 0
+endnode
+node dummy x45_hand
+  parent PLC_CRP407
+  #part-number 1
+endnode
+node dummy x45_head
+  parent PLC_CRP407
+  #part-number 2
+endnode
+node dummy x45_head_hit
+  parent PLC_CRP407
+  #part-number 3
+endnode
+node dummy x45_impact
+  parent PLC_CRP407
+  #part-number 4
+endnode
+node dummy x45_ground
+  parent PLC_CRP407
+  #part-number 5
+endnode
+node emitter fire!148
+  parent PLC_CRP407
+  #part-number 6
+endnode
+node emitter ChunkyWood243
+  parent PLC_CRP407
+  #part-number 7
+endnode
+node trimesh damage98
+  parent PLC_CRP407
+  #part-number 8
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Box132
+  parent damage98
+  #part-number 9
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Box133
+  parent damage98
+  #part-number 10
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+  orientationkey 4
+    0 1 0 0 -1.35263002
+    0.5 0 0 0 0
+    0.56666702 1 0 0 -0.0349069014
+    0.633333027 0 0 0 0
+endnode
+node trimesh Mesh92
+  parent damage98
+  #part-number 15
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+doneanim open2close PLC_CRP407
+
+#MAXANIM ASCII
+newanim close PLC_CRP407
+  length 0.0333333015
+  transtime 0.25
+  animroot PLC_CRP407
+node dummy PLC_CRP407
+  parent NULL
+  #part-number 0
+endnode
+node dummy x45_hand
+  parent PLC_CRP407
+  #part-number 1
+endnode
+node dummy x45_head
+  parent PLC_CRP407
+  #part-number 2
+endnode
+node dummy x45_head_hit
+  parent PLC_CRP407
+  #part-number 3
+endnode
+node dummy x45_impact
+  parent PLC_CRP407
+  #part-number 4
+endnode
+node dummy x45_ground
+  parent PLC_CRP407
+  #part-number 5
+endnode
+node emitter fire!148
+  parent PLC_CRP407
+  #part-number 6
+endnode
+node emitter ChunkyWood243
+  parent PLC_CRP407
+  #part-number 7
+endnode
+node trimesh damage98
+  parent PLC_CRP407
+  #part-number 8
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+  position 0.0379858017 0.0130292 0
+  orientation 0 0 0 0
+endnode
+node trimesh Box132
+  parent damage98
+  #part-number 9
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Box133
+  parent damage98
+  #part-number 10
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+  orientationkey 2
+    0 0 0 0 0
+    0.0333333015 0 0 0 0
+endnode
+node trimesh Mesh92
+  parent damage98
+  #part-number 15
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+doneanim close PLC_CRP407
+
+#MAXANIM ASCII
+newanim close2open PLC_CRP407
+  length 0.633333027
+  transtime 0.25
+  animroot PLC_CRP407
+node dummy PLC_CRP407
+  parent NULL
+  #part-number 0
+endnode
+node dummy x45_hand
+  parent PLC_CRP407
+  #part-number 1
+endnode
+node dummy x45_head
+  parent PLC_CRP407
+  #part-number 2
+endnode
+node dummy x45_head_hit
+  parent PLC_CRP407
+  #part-number 3
+endnode
+node dummy x45_impact
+  parent PLC_CRP407
+  #part-number 4
+endnode
+node dummy x45_ground
+  parent PLC_CRP407
+  #part-number 5
+endnode
+node emitter fire!148
+  parent PLC_CRP407
+  #part-number 6
+endnode
+node emitter ChunkyWood243
+  parent PLC_CRP407
+  #part-number 7
+endnode
+node trimesh damage98
+  parent PLC_CRP407
+  #part-number 8
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Box132
+  parent damage98
+  #part-number 9
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Box133
+  parent damage98
+  #part-number 10
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+  orientationkey 3
+    0 0 0 0 0
+    0.466666996 1 0 0 -1.21737003
+    0.633333027 1 0 0 -1.35263002
+endnode
+node trimesh Mesh92
+  parent damage98
+  #part-number 15
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+doneanim close2open PLC_CRP407
+
+#MAXANIM ASCII
+newanim use PLC_CRP407
+  length 0.0333333015
+  transtime 1.25
+  animroot PLC_CRP407
+node dummy PLC_CRP407
+  parent NULL
+  #part-number 0
+endnode
+node dummy x45_hand
+  parent PLC_CRP407
+  #part-number 1
+endnode
+node dummy x45_head
+  parent PLC_CRP407
+  #part-number 2
+endnode
+node dummy x45_head_hit
+  parent PLC_CRP407
+  #part-number 3
+endnode
+node dummy x45_impact
+  parent PLC_CRP407
+  #part-number 4
+endnode
+node dummy x45_ground
+  parent PLC_CRP407
+  #part-number 5
+endnode
+node emitter fire!148
+  parent PLC_CRP407
+  #part-number 6
+endnode
+node emitter ChunkyWood243
+  parent PLC_CRP407
+  #part-number 7
+endnode
+node trimesh damage98
+  parent PLC_CRP407
+  #part-number 8
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Box132
+  parent damage98
+  #part-number 9
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Box133
+  parent damage98
+  #part-number 10
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+  orientationkey 2
+    0 1 0 0 -1.35263002
+    0.0333333015 1 0 0 -1.35263002
+endnode
+node trimesh Mesh92
+  parent damage98
+  #part-number 15
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+doneanim use PLC_CRP407
+
+#MAXANIM ASCII
+newanim damage PLC_CRP407
+  length 0.133332998
+  transtime 0.25
+  animroot PLC_CRP407
+node dummy PLC_CRP407
+  parent NULL
+  #part-number 0
+endnode
+node dummy x45_hand
+  parent PLC_CRP407
+  #part-number 1
+endnode
+node dummy x45_head
+  parent PLC_CRP407
+  #part-number 2
+endnode
+node dummy x45_head_hit
+  parent PLC_CRP407
+  #part-number 3
+endnode
+node dummy x45_impact
+  parent PLC_CRP407
+  #part-number 4
+endnode
+node dummy x45_ground
+  parent PLC_CRP407
+  #part-number 5
+endnode
+node emitter fire!148
+  parent PLC_CRP407
+  #part-number 6
+endnode
+node emitter ChunkyWood243
+  parent PLC_CRP407
+  #part-number 7
+endnode
+node trimesh damage98
+  parent PLC_CRP407
+  #part-number 8
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+  positionkey 3
+    0 0.0379858017 0.0130292 0
+    0.0333333015 0.0379858017 0.0130292 0.0244580992
+    0.133332998 0.0379858017 0.0130292 0
+  orientationkey 4
+    0 0 0 0 0
+    0.0333333015 0.371336102 -0.928463161 0.00810258184 -0.0469942018
+    0.100000001 -0.5999493 0.799969435 0.0104721067 -0.0436326005
+    0.133332998 0 0 0 0
+endnode
+node trimesh Box132
+  parent damage98
+  #part-number 9
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Box133
+  parent damage98
+  #part-number 10
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh92
+  parent damage98
+  #part-number 15
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+doneanim damage PLC_CRP407
+
+#MAXANIM ASCII
+newanim die PLC_CRP407
+  length 0.0333333015
+  transtime 0.25
+  animroot PLC_CRP407
+  event 0 detonate
+  event 0 detonate
+node dummy PLC_CRP407
+  parent NULL
+  #part-number 0
+endnode
+node dummy x45_hand
+  parent PLC_CRP407
+  #part-number 1
+endnode
+node dummy x45_head
+  parent PLC_CRP407
+  #part-number 2
+endnode
+node dummy x45_head_hit
+  parent PLC_CRP407
+  #part-number 3
+endnode
+node dummy x45_impact
+  parent PLC_CRP407
+  #part-number 4
+endnode
+node dummy x45_ground
+  parent PLC_CRP407
+  #part-number 5
+endnode
+node emitter fire!148
+  parent PLC_CRP407
+  #part-number 6
+endnode
+node emitter ChunkyWood243
+  parent PLC_CRP407
+  #part-number 7
+endnode
+node trimesh damage98
+  parent PLC_CRP407
+  #part-number 8
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+  positionkey 2
+    0 0.0379858017 0.0130292 0
+    0.0333333015 0.0379858017 0.0130292 -6.95144987
+  orientation 0 0 0 0
+endnode
+node trimesh Box132
+  parent damage98
+  #part-number 9
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Box133
+  parent damage98
+  #part-number 10
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh92
+  parent damage98
+  #part-number 15
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+doneanim die PLC_CRP407
+
+#MAXANIM ASCII
+newanim dead PLC_CRP407
+  length 0.0333333015
+  transtime 0.25
+  animroot PLC_CRP407
+  event 0 detonate
+  event 0 detonate
+node dummy PLC_CRP407
+  parent NULL
+  #part-number 0
+endnode
+node dummy x45_hand
+  parent PLC_CRP407
+  #part-number 1
+endnode
+node dummy x45_head
+  parent PLC_CRP407
+  #part-number 2
+endnode
+node dummy x45_head_hit
+  parent PLC_CRP407
+  #part-number 3
+endnode
+node dummy x45_impact
+  parent PLC_CRP407
+  #part-number 4
+endnode
+node dummy x45_ground
+  parent PLC_CRP407
+  #part-number 5
+endnode
+node emitter fire!148
+  parent PLC_CRP407
+  #part-number 6
+endnode
+node emitter ChunkyWood243
+  parent PLC_CRP407
+  #part-number 7
+endnode
+node trimesh damage98
+  parent PLC_CRP407
+  #part-number 8
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+  positionkey 2
+    0 0.0379858017 0.0130292 -6.95144987
+    0.0333333015 0.0379858017 0.0130292 -6.95144987
+endnode
+node trimesh Box132
+  parent damage98
+  #part-number 9
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Box133
+  parent damage98
+  #part-number 10
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Mesh92
+  parent damage98
+  #part-number 15
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+doneanim dead PLC_CRP407
+
+#MAXANIM ASCII
+newanim default PLC_CRP407
+  length 0
+  transtime 0.25
+  animroot PLC_CRP407
+node dummy PLC_CRP407
+  parent NULL
+  #part-number 0
+endnode
+node dummy x45_hand
+  parent PLC_CRP407
+  #part-number 1
+endnode
+node dummy x45_head
+  parent PLC_CRP407
+  #part-number 2
+endnode
+node dummy x45_head_hit
+  parent PLC_CRP407
+  #part-number 3
+endnode
+node dummy x45_impact
+  parent PLC_CRP407
+  #part-number 4
+endnode
+node dummy x45_ground
+  parent PLC_CRP407
+  #part-number 5
+endnode
+node emitter fire!148
+  parent PLC_CRP407
+  #part-number 6
+endnode
+node emitter ChunkyWood243
+  parent PLC_CRP407
+  #part-number 7
+endnode
+node trimesh damage98
+  parent PLC_CRP407
+  #part-number 8
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+  position 0.0379858017 0.0130292 0
+  orientation 0 0 0 0
+endnode
+node trimesh Box132
+  parent damage98
+  #part-number 9
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+node trimesh Box133
+  parent damage98
+  #part-number 10
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+  orientation 0 0 0 0
+endnode
+node trimesh Mesh92
+  parent damage98
+  #part-number 15
+  ambient 0.200000003 0.200000003 0.200000003
+  diffuse 0.800000012 0.800000012 0.800000012
+  specular 0 0 0
+  shininess 1
+endnode
+doneanim default PLC_CRP407
+
+donemodel PLC_CRP407

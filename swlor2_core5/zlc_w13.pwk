@@ -1,0 +1,36 @@
+#Exported from 3ds max by MDL Plug-in Suite 1.0b
+#http://www.bricksbuilder.com/nwn/utils/
+#MAXMODEL ASCII
+# model: statue_dwarf1
+filedependancy bardeharp.max
+node trimesh zlc_w13_wg
+  parent zlc_w13_pwk
+  position 0.000753288 0.00193669 0
+  orientation 0 0 0 0
+  wirecolor 0.0351563 0.0351563 0.0351563
+  ambient 0.03125 0.03125 0.53125
+  diffuse 0.03125 0.03125 0.53125
+  specular 0 0 0
+  shininess 1
+  bitmap NULL
+  verts 4
+    0.656041 0.398555 0
+    -0.656041 0.398555 0
+    0.656041 -0.398555 0
+    -0.656041 -0.398555 0
+  faces 2
+    2 0 3  1  0 0 0  0
+    1 3 0  1  0 0 0  0
+endnode
+node dummy w13_pwk_use02 
+  parent zlc_w13_pwk 
+  position -0.00100983 -0.814796 0.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.694118 0.580392 0.101961  
+endnode
+node dummy w13_pwk_use01 
+  parent zlc_w13_pwk 
+  position -0.00100983 0.776829 0.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.694118 0.580392 0.101961  
+endnode

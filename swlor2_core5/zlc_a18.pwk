@@ -1,0 +1,40 @@
+#MAXDOOR ASCII
+# model: PLC_Sm_tent_pwk
+filedependancy PlaceableObjects01.max
+node trimesh zlc_a18_wg
+    parent zlc_a18_pwk
+    position 0 0 0
+    diffuse 0.784314 0.784314 0.784314
+    ambient 0.784314 0.784314 0.784314
+    specular 0.784314 0.784314 0.784314
+    shininess 0.0
+    bitmap NULL
+    verts 8
+        1.38941 1.3983 0.000186855
+        1.96861 0.0 0.000186855
+        1.38941 -1.3983 0.000186855
+        -0.00889244 1.9775 0.000186855
+        -1.4072 1.3983 0.000186855
+        -1.98639 0.0 0.000186855
+        -0.00889244 -1.9775 0.000186855
+        -1.4072 -1.3983 0.000186855
+    faces 6
+        0 1 2 0 0 0 0 1
+        3 0 2 0 0 0 0 1
+        4 3 2 0 0 0 0 1
+        5 4 2 0 0 0 0 1
+        5 2 6 0 0 0 0 1
+        6 7 5 0 0 0 0 1
+endnode
+node dummy a18_pwk_use01
+  parent zlc_a18_pwk
+  position 0.0 2.2 0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.345098 0.694118 0.101961 
+endnode
+node dummy a18_pwk_use02
+  parent zlc_a18_pwk
+  position 0 -2.2 0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.345098 0.694118 0.101961 
+endnode

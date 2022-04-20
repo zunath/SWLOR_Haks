@@ -1,0 +1,40 @@
+# Exported from Wayland's NWN Maxscript v0.3 at 12/11/2002 12:08:37 PM
+# pwk file
+#
+node trimesh zlc_e23_wg
+    parent zlc_e23_pwk
+    position -0.0178096 -0.132011 0.0
+    orientation 1.0 0.0 0.0 0.0
+    scale 1.0
+    diffuse 0.8000 0.8000 0.8000
+    ambient 0.2000 0.2000 0.2000
+    specular 0.0000 0.0000 0.0000
+    render 0
+    bitmap NULL
+    verts 10
+        -1.48787 -0.608742 0.0
+        -0.51561 -0.214073 0.0
+        0.496158 -0.206981 0.0
+        1.49302 -0.59034 0.0
+        1.85466 -0.185055 0.0
+        2.0342 0.251276 0.0
+        0.678747 0.79033 0.0
+        -0.714194 0.775602 0.0
+        -2.04688 0.229218 0.0
+        -1.88637 -0.249918 0.0
+    faces 8
+        4 5 6 1 0 0 0 1
+        3 4 6 1 0 0 0 1
+        2 3 6 1 0 0 0 1
+        2 6 7 1 0 0 0 1
+        1 2 7 1 0 0 0 1
+        1 7 8 1 0 0 0 1
+        0 1 8 1 0 0 0 1
+        9 0 8 1 0 0 0 1
+endnode
+node dummy e23_pwk_use01
+    parent zlc_e23_pwk
+  position 0 -0.834475 0
+    orientation 1.0 0.0 0.0 0.0
+    scale 1.0
+endnode

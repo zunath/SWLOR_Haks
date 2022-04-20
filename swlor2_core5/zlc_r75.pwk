@@ -1,0 +1,26 @@
+# Exported from Wayland's NWN Maxscript 0.3b-p1.2 at 10/18/2003 10:59:10 PM
+# pwk file
+#
+node trimesh zlc_r75_wg
+    parent zlc_r75_pwk
+    position 0.671665 0.00357647 0.0
+    orientation 1.0 0.0 0.0 0.0
+    scale 1.0
+    diffuse 0.8000 0.8000 0.8000
+    ambient 0.2000 0.2000 0.2000
+    specular 0.0000 0.0000 0.0000
+    render 0
+    bitmap NULL
+    verts 6
+        -1.62319 -0.908212 0.0
+        0.0968949 -0.908212 0.0
+        1.62319 -0.603057 0.0
+        -1.62319 0.908212 0.0
+        0.0968949 0.908212 0.0
+        1.62183 0.583908 0.0
+    faces 4
+        3 0 4 1 0 0 0 1
+        1 4 0 1 0 0 0 1
+        4 1 5 1 0 0 0 1
+        2 5 1 1 0 0 0 1
+endnode

@@ -1,0 +1,22 @@
+#MAXDOOR ASCII
+# model: wdMMast1_PWK 
+filedependancy wDebrisMainMast.max
+node trimesh zlc_s09_wg 
+  parent zlc_s09_pwk 
+  position -0.00653387 -0.300007 0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.337255 0.337255 0.337255  
+  ambient 0.7 0.7 0.7  
+  diffuse 0.7 0.7 0.7  
+  specular 0.0 0.0 0.0  
+  shininess 51.0 
+    bitmap NULL
+    verts 4
+     0.3 -3.9 0.0
+     -0.3 4.5 0.0
+     -0.3 -3.9 0.0
+     0.3 4.5 0.0
+    faces 2
+     0 1 2  1  0 0 0  1
+     0 3 1  1  0 0 0  1
+endnode

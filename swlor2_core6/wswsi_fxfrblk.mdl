@@ -1,0 +1,137 @@
+#MAXMODEL ASCII
+# model: wswsi_fxfrblk
+filedependancy wswsi_fxfrblk.max
+newmodel wswsi_fxfrblk
+setsupermodel wswsi_fxfrblk null
+setanimationscale 1
+#MAXGEOM  ASCII
+beginmodelgeom wswsi_fxfrblk
+node dummy wswsi_fxfrblk
+  parent NULL
+  #part-number 0
+endnode
+node emitter g_wswgs_v_fire
+  parent wswsi_fxfrblk
+  #part-number 1
+  p2p 0
+  p2p_sel 1
+  affectedByWind 0
+  m_isTinted 0
+  bounce 0
+  random 0
+  inherit 1
+  inheritvel 0
+  inherit_local 0
+  splat 0
+  inherit_part 0
+  renderorder 0
+  spawntype 0
+  update Fountain
+  render Normal
+  blend Normal
+  texture fxpa_flame99_blk
+  xgrid 4
+  ygrid 4
+  loop 0
+  deadspace 0
+  twosidedtex 0
+  blastRadius 0
+  blastLength 0
+  position 0 0.28639999 0.00468927994
+  orientation 0 -1 0 -1.57079995
+  colorStart 0.9647 0.9647 0.9647
+  colorEnd 0.0 0.0 0.0
+  alphaStart 0.600000024
+  alphaEnd 0
+  sizeStart 0
+  sizeEnd 0.5
+  sizeStart_y 0
+  sizeEnd_y 0
+  frameStart 0
+  frameEnd 15
+  birthrate 20
+  lifeExp 1.75
+  mass 0
+  spread 0.174532995
+  particleRot 0
+  velocity 0
+  randvel 0
+  fps 16
+  xsize 6
+  ysize 32
+  bounce_co 0
+  blurlength 10
+  lightningDelay 0
+  lightningRadius 0
+  lightningScale 0
+  p2p_bezier2 0
+  p2p_bezier3 0
+  combinetime 0
+  drag 0
+  grav 0
+  threshold 0
+endnode
+node emitter g_wswgs_v_fire_b
+  parent wswsi_fxfrblk
+  #part-number 2
+  p2p 0
+  p2p_sel 1
+  affectedByWind 0
+  m_isTinted 0
+  bounce 0
+  random 0
+  inherit 0
+  inheritvel 0
+  inherit_local 0
+  splat 0
+  inherit_part 0
+  renderorder 0
+  spawntype 0
+  update Fountain
+  render Normal
+  blend Normal
+  texture fxpa_flare_a
+  xgrid 1
+  ygrid 1
+  loop 0
+  deadspace 0
+  twosidedtex 0
+  blastRadius 0
+  blastLength 0
+  position 0 0.291777998 0.00468927016
+  orientation 0 0 0 0
+  colorStart 0.9647 0.9647 0.9647
+  colorEnd 0.0 0.0 0.0
+  alphaStart 0.5
+  alphaEnd 0.25
+  sizeStart 0.0500000007
+  sizeEnd 0.0399999991
+  sizeStart_y 0
+  sizeEnd_y 0
+  frameStart 0
+  frameEnd 0
+  birthrate 5
+  lifeExp 0.5
+  mass -1
+  spread 0.174532995
+  particleRot 2
+  velocity 0
+  randvel 0.5
+  fps 0
+  xsize 3
+  ysize 30
+  bounce_co 0
+  blurlength 10
+  lightningDelay 0
+  lightningRadius 0
+  lightningScale 0
+  p2p_bezier2 0
+  p2p_bezier3 0
+  combinetime 0
+  drag 0
+  grav 0
+  threshold 0
+endnode
+endmodelgeom wswsi_fxfrblk
+
+donemodel wswsi_fxfrblk

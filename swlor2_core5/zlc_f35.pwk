@@ -1,0 +1,65 @@
+# Exported from NWmax 0.5-beta at 2/20/2004 1:39:56 AM
+# pwk file
+#
+#NWmaxPWKMESH  ASCII
+node dummy f35_pwk_use01
+  parent zlc_f35_pwk
+  position -0.00100983 1.31053 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.0235294 0.52549 0.443137 
+endnode
+node dummy f35_pwk_use02
+  parent zlc_f35_pwk
+  position -0.00100983 -1.23494 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.239216 0.52549 0.0235294 
+endnode
+node trimesh zlc_f35_wg
+  parent zlc_f35_pwk
+  position -0.00170413 0.00382505 5e-007
+  orientation 0.0 0.0 -1.0 -0.750492
+  wirecolor 0.521569 0.431373 0.0313726 
+  multimaterial 20
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+  ambient 0.0 0.0 0.0 
+  diffuse 0.705882 0.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 11.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap NULL
+  verts 8
+    -0.64 -0.69 0.0
+    0.71 -0.65 0.0
+    -0.7 0.65 0.0
+    0.65 0.66 0.0
+    0.06 -1.68 0.0
+    -1.69 -0.03 0.0
+    1.67 0.08 0.0
+    -0.08 1.71 0.0
+  faces 6
+    2 0 3  1  0 0 0  7
+    1 3 0  1  0 0 0  7
+    1 0 4  0  0 0 0  1
+    2 5 0  0  0 0 0  1
+    3 7 2  0  0 0 0  1
+    3 1 6  0  0 0 0  1
+endnode

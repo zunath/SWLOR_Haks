@@ -1,0 +1,38 @@
+#MAXDOOR ASCII
+# model: dlp_rubble_004_pwk 
+filedependancy sewer_plc_door_7.max
+node dummy 004_pwk_use01 
+  parent dlp_rubble_004_pwk 
+  position 0.97727 0.0 0.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.721569 0.894118 0.6  
+endnode
+node dummy 004_pwk_use02 
+  parent dlp_rubble_004_pwk 
+  position -0.716299 0.0430131 0.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.721569 0.894118 0.6  
+endnode
+node trimesh PWK 
+  parent dlp_rubble_004_pwk 
+  position 0.100283 0.00398773 0.188157
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.552941 0.027451 0.227451  
+    bitmap NULL
+    verts 8
+     0.787729 0.0219623 -0.188157
+     -0.437471 0.530951 -0.188157
+     -0.398723 -0.503174 -0.188157
+     0.301043 0.804776 -0.188157
+     -0.739382 0.229355 -0.188157
+     -0.665342 -0.18543 -0.188157
+     0.00976006 -0.636884 -0.188157
+     0.42993 -0.473135 -0.188157
+    faces 6
+     0 3 1  1  0 0 0  2
+     0 1 4  1  0 0 0  2
+     4 5 2  1  0 0 0  2
+     4 2 6  1  0 0 0  2
+     4 6 7  1  0 0 0  2
+     4 7 0  1  0 0 0  2
+endnode

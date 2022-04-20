@@ -1,0 +1,24 @@
+#MAXDOOR ASCII
+# model: dChrB2_PWK 
+filedependancy dChrB2.max
+node trimesh zlc_g06_wg 
+  parent zlc_g06_pwk 
+  position 0.289006 -0.0300075 0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.0235294 0.52549 0.0235294  
+  ambient 0.0 0.0 0.0  
+  diffuse 0.784314 0.784314 0.784314  
+  specular 0.0 0.0 0.0  
+  shininess 21.0 
+    bitmap NULL
+    verts 5
+     -0.95 -0.08 0.0
+     0.36 0.83 0.0
+     -0.2 0.73 0.0
+     -0.4 -0.77 0.0
+     0.35 -0.75 0.0
+    faces 3
+     0 1 2  1  0 0 0  1
+     3 1 0  1  0 0 0  1
+     4 1 3  1  0 0 0  1
+endnode

@@ -1,0 +1,40 @@
+#Exported from 3ds max by MDL Plug-in Suite 1.0b
+#http://www.bricksbuilder.com/nwn/utils/
+#MAXMODEL ASCII
+# model: zlc_mgs_scd1
+filedependancy ChickenDinner.max
+node trimesh Plane01
+  parent zlc_mgs_scd1_pwk
+  position -0.00277525 0.00564495 0
+  orientation 0 0 0 0
+  wirecolor 0.722656 0.722656 0.722656
+  ambient 0.71875 0.605469 0.894531
+  diffuse 0.71875 0.605469 0.894531
+  specular 0 0 0
+  shininess 1
+  bitmap NULL
+  verts 10
+    -0.271423 -0.153628 0
+    0.271423 -0.153628 0
+    -0.271423 -0.0768138 0
+    -0.135711 -0.0768138 0
+    -0.135711 0 0
+    -0.271423 0.0384069 0
+    -0.135711 0.0768138 0
+    0.101783 -0.0288052 0
+    -0.271423 0.153628 0
+    0.271423 0.153628 0
+  faces 12
+    2 0 3  1  0 0 0  0
+    1 3 0  1  0 0 0  0
+    3 1 7  1  0 0 0  0
+    5 2 4  1  0 0 0  0
+    3 4 2  1  0 0 0  0
+    4 3 7  1  0 0 0  0
+    9 7 1  1  0 0 0  0
+    4 6 5  1  0 0 0  0
+    6 4 9  1  0 0 0  0
+    7 9 4  1  0 0 0  0
+    8 5 9  1  0 0 0  0
+    6 9 5  1  0 0 0  0
+endnode

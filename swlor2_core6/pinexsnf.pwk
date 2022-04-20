@@ -1,0 +1,33 @@
+#Exported from 3ds max by MDL Plug-in Suite 1.0b
+#http://www.bricksbuilder.com/nwn/utils/
+#MAXMODEL ASCII
+# model: ba_firtree08
+filedependancy pinetreedeluxegreennf.max
+node trimesh plane08
+  parent ba_firtree08_pwk
+  position 0.408686 -0.0567591 0.00199229
+  orientation 0 0 0 0
+  wirecolor 0.894531 0.894531 0.894531
+  ambient 0.890625 0.597656 0.71875
+  diffuse 0.890625 0.597656 0.71875
+  specular 0 0 0
+  shininess 1
+  bitmap NULL
+  verts 8
+    0.129682 0.206661 0
+    -0.111477 0.279223 0
+    -0.193662 0.169306 0
+    0.129186 0.0467722 0
+    0.129857 -0.00217419 0
+    -0.262877 0.0691067 0
+    0.128182 -0.05707 0
+    -0.112167 -0.137084 0
+  faces 7
+    3 0 4  1  0 0 0  0
+    1 4 0  1  0 0 0  0
+    4 1 5  1  0 0 0  0
+    2 5 1  1  0 0 0  0
+    4 6 3  1  0 0 0  0
+    6 4 7  1  0 0 0  0
+    5 7 4  1  0 0 0  0
+endnode

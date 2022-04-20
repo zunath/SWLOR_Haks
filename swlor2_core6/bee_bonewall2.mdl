@@ -1,0 +1,66 @@
+#MAXMODEL ASCII
+# model: bee_bonewall2
+filedependancy bee_bonewall2.max
+newmodel bee_bonewall2
+setsupermodel bee_bonewall2 NULL
+classification CHARACTER
+setanimationscale 1
+#MAXGEOM  ASCII
+beginmodelgeom bee_bonewall2
+node dummy bee_bonewall2
+  parent NULL
+endnode
+node trimesh Box27
+  parent bee_bonewall2
+  ambient 0.992156982 0.992156982 0.992156982
+  diffuse 0.992156982 0.992156982 0.992156982
+  specular 0 0 0
+  shininess 10
+  bitmap bonewall02
+  verts 8
+    0.950001001 10.1000004 0
+    0.949998975 -10.1000004 0
+    -0.950001001 -10.1000004 0
+    -0.949998975 10.1000004 0
+    0.950001001 10.1000004 7.9000001
+    -0.949998975 10.1000004 7.9000001
+    -0.950001001 -10.1000004 7.9000001
+    0.949998975 -10.1000004 7.9000001
+  tverts 16
+    0.737501025 -2.0250001 0
+    0.737498999 3.0250001 0
+    0.262499005 3.0250001 0
+    0.262501001 -2.0250001 0
+    0.262499005 -2.0250001 0
+    0.737498999 -2.0250001 0
+    0.737501025 3.0250001 0
+    0.262501001 3.0250001 0
+    0.262499005 -0.487500012 0
+    0.737498999 -0.487500012 0
+    0.737498999 1.48749995 0
+    0.262499005 1.48749995 0
+    -2.0250001 -0.487500012 0
+    3.0250001 -0.487500012 0
+    3.0250001 1.48749995 0
+    -2.0250001 1.48749995 0
+  faces 12
+    0 1 2 1 0 1 2 1
+    2 3 0 1 2 3 0 1
+    4 5 6 1 4 5 6 0
+    6 7 4 1 6 7 4 0
+    0 3 5 1 8 9 10 4
+    5 4 0 1 10 11 8 4
+    3 2 6 1 12 13 14 3
+    6 5 3 1 14 15 12 3
+    2 1 7 1 8 9 10 5
+    7 6 2 1 10 11 8 5
+    1 0 4 1 12 13 14 2
+    4 7 1 1 14 15 12 2
+  position 0.362940013 1.18353999 0
+  orientation 0 0 0 0
+  scale 1
+  alpha 1
+endnode
+endmodelgeom bee_bonewall2
+
+donemodel bee_bonewall2

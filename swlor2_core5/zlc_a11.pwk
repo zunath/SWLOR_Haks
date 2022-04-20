@@ -1,0 +1,51 @@
+# Exported from NWmax 0.5-beta at 2/13/2004 7:41:44 PM
+# pwk file
+#
+#NWmaxPWKMESH  ASCII
+node trimesh zlc_a11_wg
+  parent zlc_a11_pwk
+  position -0.149998 0.1 5e-007
+  orientation 0.0 0.0 1.0 -1.5708
+  wirecolor 0.521569 0.0196078 0.0196078 
+  multimaterial 20
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+  ambient 0.0 0.0 0.0 
+  diffuse 0.705882 0.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 11.0
+  selfillumcolor 0.0 0.0 0.0 
+    bitmap NULL
+    verts 4
+     -0.12 -2.43 0.0
+     0.12 -2.43 0.0
+     -0.12 2.43 0.0
+     0.12 2.43 0.0
+    faces 2
+     2 0 3  1  0 0 0  7
+     1 3 0  1  0 0 0  7
+endnode
+node dummy a11_pwk_use01
+  parent zlc_a11_pwk
+  position 0.00216713 -0.349336 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.101961 0.694118 0.580392 
+endnode

@@ -1,0 +1,22 @@
+#MAXDOOR ASCII
+# model: dlp_rubble_002_pwk 
+filedependancy sewer_plc_door_7.max
+node trimesh Plane04 
+  parent dlp_rubble_002_pwk 
+  position -0.00202637 -0.00637501 0.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.54902 0.345098 0.882353  
+    bitmap NULL
+    verts 6
+     -0.24853 -0.151379 0.0
+     0.240396 -0.176114 0.0
+     -0.210288 0.0772058 0.0
+     0.153435 0.137067 0.0
+     0.240396 -0.0608532 0.0
+     -0.123477 0.181129 0.0
+    faces 4
+     1 4 0  1  0 0 0  1
+     2 0 3  1  0 0 0  1
+     3 0 4  1  0 0 0  1
+     2 3 5  0  0 0 0  1
+endnode

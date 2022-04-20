@@ -1,0 +1,36 @@
+#Exported from 3ds max by MDL Plug-in Suite 1.0b
+#http://www.bricksbuilder.com/nwn/utils/
+#MAXMODEL ASCII
+# model: PLC_X10
+filedependancy PLC_X10bis.max
+node dummy x10_pwk_use01
+  parent zlc_x10_pwk
+  position 0 0 0
+  orientation 0 0 -1 -3.14159
+  wirecolor 0.722656 0.722656 0.722656
+endnode
+node trimesh zlc_x10_wg
+  parent zlc_x10_pwk
+  position 0 0.167958 0
+  orientation 0 0 0 0
+  wirecolor 0.34375 0.34375 0.34375
+  ambient 0.339844 0.875 0.339844
+  diffuse 0.339844 0.875 0.339844
+  specular 0 0 0
+  shininess 1
+  bitmap NULL
+  verts 4
+    0.492711 0.496631 0
+    -0.492711 0.496631 0
+    0.492711 -0.496631 0
+    -0.492711 -0.496631 0
+  faces 2
+    2 0 3  1  0 0 0  0
+    1 3 0  1  0 0 0  0
+endnode
+node dummy x10_pwk_use01
+  parent zlc_x10_pwk
+  position 0 -0.48637 0
+  orientation 0 0 0 0
+  wirecolor 0.0273438 0.0273438 0.0273438
+endnode

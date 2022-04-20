@@ -1,0 +1,34 @@
+#Exported from 3ds max by MDL Plug-in Suite 1.0b
+#http://www.bricksbuilder.com/nwn/utils/
+#MAXMODEL ASCII
+# model: PLC_Log
+filedependancy Fallen Log.max
+node dummy s75_pwk_use01
+  parent zlc_s75_pwk
+  position 0.00216713 -0.349336 0
+  orientation 0 0 0 0
+  wirecolor 0.0273438 0.0273438 0.0273438
+endnode
+node trimesh zlc_s75_wg
+  parent zlc_s75_pwk
+  position 0 0 0
+  orientation 0 0 0 0
+  wirecolor 0.339844 0.339844 0.339844
+  ambient 0.335938 0.335938 0.335938
+  diffuse 0.335938 0.335938 0.335938
+  specular 0 0 0
+  shininess 1
+  bitmap NULL
+  verts 6
+    1.52433 0.375 0
+    -0.55781 0.357143 0
+    -1.80153 0.51 0
+    1.52433 -0.375 0
+    -0.55781 -0.357143 0
+    -1.80153 -0.51 0
+  faces 4
+    3 0 4  1  0 0 0  7
+    1 4 0  1  0 0 0  7
+    4 1 5  1  0 0 0  7
+    2 5 1  1  0 0 0  7
+endnode

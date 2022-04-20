@@ -1,0 +1,26 @@
+#Exported from 3ds max by MDL Plug-in Suite 1.0b
+#http://www.bricksbuilder.com/nwn/utils/
+#MAXMODEL ASCII
+# model: plc_hispire
+filedependancy HighspireTestrender.max
+node trimesh plc_hispirepwk
+  parent plc_hispire_pwk
+  position 0.00394009 -0.000611133 0.00263398
+  orientation 0 0 0 0
+  wirecolor 0.605469 0.605469 0.605469
+  ambient 0.601563 0.601563 0.894531
+  diffuse 0.601563 0.601563 0.894531
+  specular 0 0 0
+  shininess 1
+  bitmap NULL
+  verts 5
+    0.44208 0.334693 0
+    -0.190998 0.542047 0
+    0.441149 -0.317531 0
+    -0.173344 -0.515372 0
+    -0.565949 -0.00178332 0
+  faces 3
+    2 0 3  1  0 0 0  0
+    1 3 0  1  0 0 0  0
+    3 1 4  1  0 0 0  0
+endnode

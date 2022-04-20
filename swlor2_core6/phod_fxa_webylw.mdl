@@ -1,0 +1,408 @@
+#MAXMODEL ASCII
+# model: phod_fxa_webylw
+filedependancy phod_fxa_webylw.max
+newmodel phod_fxa_webylw
+setsupermodel phod_fxa_webylw NULL
+classification CHARACTER
+setanimationscale 1
+#MAXGEOM  ASCII
+beginmodelgeom phod_fxa_webylw
+node dummy phod_fxa_webylw
+  parent NULL
+endnode
+node emitter lightshaft_purple08
+  parent phod_fxa_webylw
+  p2p 0
+  p2p_sel 1
+  affectedByWind 0
+  m_isTinted 0
+  bounce 0
+  random 0
+  inherit 1
+  inheritvel 0
+  inherit_local 0
+  inherit_part 0
+  splat 0
+  renderorder 0
+  spawntype 0
+  update Fountain
+  render Aligned_to_World_Z
+  blend Lighten
+  texture fxpa_web
+  xgrid 0
+  ygrid 0
+  loop 0
+  deadspace 0
+  twosidedtex 0
+  blastRadius 0
+  blastLength 0
+  position 0 0 3.38396
+  orientation 0 0 0 0
+  colorStart 1 1 0
+  colorEnd 1 1 0
+  alphaStart 0.2
+  alphaEnd 0.1
+  sizeStart 7
+  sizeEnd 7
+  sizeStart_y 0
+  sizeEnd_y 0
+  frameStart 0
+  frameEnd 0
+  birthrate 4
+  lifeExp 5
+  mass 0
+  spread 0
+  particleRot 1.65
+  velocity 0
+  randvel 0
+  fps 0
+  xsize 0
+  ysize 0
+  bounce_co 0
+  blurlength 10
+  lightningDelay 0
+  lightningRadius 0
+  lightningScale 0
+  p2p_bezier2 0
+  p2p_bezier3 0
+  combinetime 0
+  drag 0
+  grav 0
+  threshold 0
+endnode
+node dummy V01_ground
+  parent phod_fxa_webylw
+  position -0.00363281 0.0303528 0
+  orientation 0 0 0 0
+endnode
+node trimesh Rectangle132
+  parent phod_fxa_webylw
+  ambient 0.2 0.2 0.2
+  diffuse 0.8 0.8 0.8
+  specular 0 0 0
+  shininess 1
+  shadow 0
+  render 0
+  bitmap NULL
+  verts 8
+      -0.3000000   -0.3000000    3.7501800
+       0.3000000   -0.3000000    3.7501800
+       0.3000000    0.3000000    3.7501800
+      -0.3000000    0.3000000    3.7501800
+      -0.3000000   -0.3000000    0.0000000
+       0.3000000   -0.3000000    0.0000000
+       0.3000000    0.3000000    0.0000000
+      -0.3000000    0.3000000    0.0000000
+  faces 10
+    0 1 2  1        0       0       0   1
+    3 0 2  1        0       0       0   1
+    4 5 1  2        0       0       0   1
+    1 0 4  2        0       0       0   1
+    5 6 2  4        0       0       0   1
+    2 1 5  4        0       0       0   1
+    7 4 0  4        0       0       0   1
+    0 3 7  4        0       0       0   1
+    6 7 3  2        0       0       0   1
+    3 2 6  2        0       0       0   1
+  position 0.010625 0.049379 0
+  orientation 0 0 0 0
+  alpha 1
+  scale 1
+  selfillumcolor 0 0 0
+endnode
+node dummy V01_hand
+  parent phod_fxa_webylw
+  position 0.00398437 -0.48183 0.934402
+  orientation 0 0 0 0
+endnode
+node dummy V01_head
+  parent phod_fxa_webylw
+  position 0.00398437 0.0341907 2.1763
+  orientation 0 0 0 0
+endnode
+node dummy V01_head_hit
+  parent phod_fxa_webylw
+  position 0.00398437 0.0341907 1.69482
+  orientation 0 0 0 0
+endnode
+node dummy V01_impact
+  parent phod_fxa_webylw
+  position 0.00398437 0.0343665 0.868134
+  orientation 0 0 0 0
+endnode
+node emitter lightBase_purple23
+  parent phod_fxa_webylw
+  p2p 0
+  p2p_sel 1
+  affectedByWind 0
+  m_isTinted 0
+  bounce 0
+  random 0
+  inherit 1
+  inheritvel 0
+  inherit_local 0
+  inherit_part 0
+  splat 0
+  renderorder 0
+  spawntype 0
+  update Fountain
+  render Billboard_to_World_Z
+  blend Lighten
+  texture fxpa_web
+  xgrid 0
+  ygrid 0
+  loop 0
+  deadspace 0
+  twosidedtex 0
+  blastRadius 0
+  blastLength 0
+  position 8.82024e-007 0.0233645 0.0353268
+  orientation 0 0 0 0
+  colorStart 0 0 0
+  colorEnd 0.1 0.1 0
+  alphaStart 1
+  alphaEnd 1
+  sizeStart 3
+  sizeEnd 3
+  sizeStart_y 0
+  sizeEnd_y 0
+  frameStart 0
+  frameEnd 0
+  birthrate 5
+  lifeExp 2
+  mass 0
+  spread 0
+  particleRot 0.1
+  velocity 0
+  randvel 0
+  fps 0
+  xsize 0
+  ysize 0
+  bounce_co 0
+  blurlength 10
+  lightningDelay 0
+  lightningRadius 0
+  lightningScale 0
+  p2p_bezier2 0
+  p2p_bezier3 0
+  combinetime 0
+  drag 0
+  grav 0
+  threshold 0
+endnode
+endmodelgeom phod_fxa_webylw
+
+#MAXANIM ASCII
+newanim off2on phod_fxa_webylw
+  length 8.33333
+  transtime 0
+  animroot phod_fxa_webylw
+  node dummy phod_fxa_webylw
+    parent NULL
+  endnode
+  node emitter lightshaft_purple08
+    parent phod_fxa_webylw
+    birthratekey 3
+         0.0000000    0.0000000
+         0.0333333    4.0000000
+         8.3333302    4.0000000
+  endnode
+  node dummy V01_ground
+    parent phod_fxa_webylw
+  endnode
+  node dummy phod_fxa_webylw_pwk
+    parent phod_fxa_webylw
+  endnode
+  node dummy V01_pwk_use01
+    parent phod_fxa_webylw_pwk
+  endnode
+  node trimesh Rectangle132
+    parent phod_fxa_webylw
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node dummy V01_hand
+    parent phod_fxa_webylw
+  endnode
+  node dummy V01_head
+    parent phod_fxa_webylw
+  endnode
+  node dummy V01_head_hit
+    parent phod_fxa_webylw
+  endnode
+  node dummy V01_impact
+    parent phod_fxa_webylw
+  endnode
+  node emitter lightBase_purple23
+    parent phod_fxa_webylw
+    alphaEndkey 2
+         4.0000000    0.0000000
+         8.3333302    1.0000000
+    birthratekey 4
+         0.0000000    0.0000000
+         3.9666700    0.0000000
+         4.0000000    2.0000000
+         8.3333302    5.0000000
+  endnode
+doneanim off2on phod_fxa_webylw
+
+#MAXANIM ASCII
+newanim on2off phod_fxa_webylw
+  length 8.23333
+  transtime 0
+  animroot phod_fxa_webylw
+  node dummy phod_fxa_webylw
+    parent NULL
+  endnode
+  node emitter lightshaft_purple08
+    parent phod_fxa_webylw
+    birthratekey 2
+         0.0000000    0.0000000
+         8.2333298    0.0000000
+  endnode
+  node dummy V01_ground
+    parent phod_fxa_webylw
+  endnode
+  node dummy phod_fxa_webylw_pwk
+    parent phod_fxa_webylw
+  endnode
+  node dummy V01_pwk_use01
+    parent phod_fxa_webylw_pwk
+  endnode
+  node trimesh Rectangle132
+    parent phod_fxa_webylw
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node dummy V01_hand
+    parent phod_fxa_webylw
+  endnode
+  node dummy V01_head
+    parent phod_fxa_webylw
+  endnode
+  node dummy V01_head_hit
+    parent phod_fxa_webylw
+  endnode
+  node dummy V01_impact
+    parent phod_fxa_webylw
+  endnode
+  node emitter lightBase_purple23
+    parent phod_fxa_webylw
+    alphaEndkey 2
+         2.9333301    1.0000000
+         8.2333298    0.0000000
+    birthratekey 2
+         0.0000000    5.0000000
+         8.2333298    0.0000000
+  endnode
+doneanim on2off phod_fxa_webylw
+
+#MAXANIM ASCII
+newanim off phod_fxa_webylw
+  length 0.0333333
+  transtime 0
+  animroot phod_fxa_webylw
+  node dummy phod_fxa_webylw
+    parent NULL
+  endnode
+  node emitter lightshaft_purple08
+    parent phod_fxa_webylw
+    birthratekey 2
+         0.0000000    0.0000000
+         0.0333333    0.0000000
+  endnode
+  node dummy V01_ground
+    parent phod_fxa_webylw
+  endnode
+  node dummy phod_fxa_webylw_pwk
+    parent phod_fxa_webylw
+  endnode
+  node dummy V01_pwk_use01
+    parent phod_fxa_webylw_pwk
+  endnode
+  node trimesh Rectangle132
+    parent phod_fxa_webylw
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node dummy V01_hand
+    parent phod_fxa_webylw
+  endnode
+  node dummy V01_head
+    parent phod_fxa_webylw
+  endnode
+  node dummy V01_head_hit
+    parent phod_fxa_webylw
+  endnode
+  node dummy V01_impact
+    parent phod_fxa_webylw
+  endnode
+  node emitter lightBase_purple23
+    parent phod_fxa_webylw
+    alphaEndkey 2
+         0.0000000    0.0000000
+         0.0333333    0.0000000
+    birthratekey 2
+         0.0000000    0.0000000
+         0.0333333    0.0000000
+  endnode
+doneanim off phod_fxa_webylw
+
+#MAXANIM ASCII
+newanim on phod_fxa_webylw
+  length 0.0333333
+  transtime 0
+  animroot phod_fxa_webylw
+  node dummy phod_fxa_webylw
+    parent NULL
+  endnode
+  node emitter lightshaft_purple08
+    parent phod_fxa_webylw
+    birthratekey 2
+         0.0000000    4.0000000
+         0.0333333    4.0000000
+  endnode
+  node dummy V01_ground
+    parent phod_fxa_webylw
+  endnode
+  node dummy phod_fxa_webylw_pwk
+    parent phod_fxa_webylw
+  endnode
+  node dummy V01_pwk_use01
+    parent phod_fxa_webylw_pwk
+  endnode
+  node trimesh Rectangle132
+    parent phod_fxa_webylw
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node dummy V01_hand
+    parent phod_fxa_webylw
+  endnode
+  node dummy V01_head
+    parent phod_fxa_webylw
+  endnode
+  node dummy V01_head_hit
+    parent phod_fxa_webylw
+  endnode
+  node dummy V01_impact
+    parent phod_fxa_webylw
+  endnode
+  node emitter lightBase_purple23
+    parent phod_fxa_webylw
+    alphaEnd 1
+    birthratekey 2
+         0.0000000    5.0000000
+         0.0333333    5.0000000
+  endnode
+doneanim on phod_fxa_webylw
+
+donemodel phod_fxa_webylw

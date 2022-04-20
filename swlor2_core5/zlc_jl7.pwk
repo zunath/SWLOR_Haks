@@ -1,0 +1,41 @@
+#Exported from 3ds max by MDL Plug-in Suite 1.0b
+#http://www.bricksbuilder.com/nwn/utils/
+#MAXMODEL ASCII
+# model: PLC_Psign
+filedependancy pumpkin sign.max
+node trimesh zlc_jl7_wg
+  parent zlc_jl7_pwk
+  position -0.126591 -0.021339 0
+  orientation 0 0 0 0
+  wirecolor 0.34375 0.34375 0.34375
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 1
+  bitmap PLC_RugDMtlBrk
+  verts 4
+    -0.459123 -0.328824 0
+    0.719544 -0.340617 0
+    -0.455039 0.246387 0
+    0.721738 0.24783 0
+  faces 2
+    2 0 3  1  2 0 3  7
+    1 3 0  1  1 3 0  7
+  tverts 4
+    0.0910094 -0.0757278 0
+    1.09101 -0.141458 0
+    0.113774 0.8505 0
+    1.08566 0.858542 0
+endnode
+node dummy jl7_pwk_use02
+  parent zlc_jl7_pwk
+  position -0.228674 0.566466 0
+  orientation 0 0 0 0
+  wirecolor 0.34375 0.34375 0.34375
+endnode
+node dummy jl7_pwk_use01
+  parent zlc_jl7_pwk
+  position -0.215156 -0.658104 0
+  orientation 0 0 0 0
+  wirecolor 0.34375 0.34375 0.34375
+endnode

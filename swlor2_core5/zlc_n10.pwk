@@ -1,0 +1,36 @@
+#Exported from 3ds max by MDL Plug-in Suite 1.0b
+#http://www.bricksbuilder.com/nwn/utils/
+#MAXMODEL ASCII
+# model: dk_tablebrazier
+filedependancy Unknown
+node trimesh zlc_n10_wg
+  parent zlc_n10_pwk
+  position 0 0 0
+  orientation 0 0 0 0
+  wirecolor 0.695313 0.695313 0.695313
+  ambient 0 0 0
+  diffuse 0 0 0
+  specular 0 0 0
+  shininess 0
+  bitmap NULL
+  verts 4
+    -0.4 -0.4 0
+    0.4 -0.4 0
+    -0.4 0.4 0
+    0.4 0.4 0
+  faces 2
+    2 0 3  1  0 0 0  7
+    1 3 0  1  0 0 0  7
+endnode
+node dummy n10_pwk_use02
+  parent zlc_n10_pwk
+  position -0.909873 0.00871826 0
+  orientation 0 0 0 0
+  wirecolor 0.695313 0.695313 0.695313
+endnode
+node dummy n10_pwk_use01
+  parent zlc_n10_pwk
+  position 0.913641 0.00871826 0
+  orientation 0 0 0 0
+  wirecolor 0.695313 0.695313 0.695313
+endnode

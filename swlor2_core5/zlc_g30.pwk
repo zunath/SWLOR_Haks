@@ -1,0 +1,22 @@
+#MAXDOOR ASCII
+# model: dTbl2U1_PWK 
+filedependancy dTbl2B1.max
+node trimesh zlc_g30_wg 
+  parent zlc_g30_pwk 
+  position -0.0209943 -0.0850075 0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.341176 0.878431 0.776471  
+  ambient 0.0 0.0 0.0  
+  diffuse 0.784314 0.784314 0.784314  
+  specular 0.0 0.0 0.0  
+  shininess 21.0 
+    bitmap NULL
+    verts 4
+     1.15 -0.47 0.0
+     -1.12 0.64 0.0
+     -1.12 -0.47 0.0
+     1.15 0.64 0.0
+    faces 2
+     0 1 2  0  0 0 0  1
+     0 3 1  0  0 0 0  1
+endnode

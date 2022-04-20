@@ -1,0 +1,36 @@
+# Exported from NWmax 0.8 b60
+# pwk file
+#
+#NWmax PWKMESH  ASCII
+node dummy quihex_pwk_use01
+  parent phod_quihex_pwk
+  position -0.00836838 0.263697 0.978353
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.768628 0.345098 0.882353 
+endnode
+node trimesh PWK
+  parent phod_quihex_pwk
+  position 0.0 0.0 5e-007
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.894118 0.721569 0.6 
+  bitmap NULL
+  verts 9
+    -0.918981 -0.74684 -5e-007
+    0.00651975 -1.13418 -5e-007
+    0.822975 -0.800181 -5e-007
+    -1.11278 -0.00209503 -5e-007
+    0.00651975 -0.00209503 -5e-007
+    1.1563 -0.00209503 -5e-007
+    -0.790936 0.853586 -5e-007
+    0.00651975 1.14494 -5e-007
+    0.855205 0.821528 -5e-007
+  faces 8
+    3 0 4  1  0 0 0  7
+    1 4 0  1  0 0 0  7
+    4 1 5  1  0 0 0  7
+    2 5 1  1  0 0 0  7
+    6 3 7  1  0 0 0  7
+    4 7 3  1  0 0 0  7
+    7 4 8  1  0 0 0  7
+    5 8 4  1  0 0 0  7
+endnode

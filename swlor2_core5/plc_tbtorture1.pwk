@@ -1,0 +1,51 @@
+# Exported from NWmax 0.5-beta at 2/2/2004 12:40:23 PM
+# pwk file
+#
+#NWmaxPWKMESH  ASCII
+node trimesh PLC_M06_wg
+  parent PLC_M06_pwk
+  position 0.000852361 -0.045362 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.521569 0.431373 0.0313726 
+  multimaterial 20
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+    NULL
+  ambient 0.0 0.0 0.0 
+  diffuse 0.705882 0.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 11.0
+  selfillumcolor 0.0 0.0 0.0 
+    bitmap NULL
+    verts 4
+     -0.92125 -0.720237 0.0
+     0.917908 -0.720238 0.0
+     -0.921249 0.912452 0.0
+     0.91791 0.912452 0.0
+    faces 2
+     2 0 3  1  0 0 0  7
+     3 0 1  1  0 0 0  7
+endnode
+node dummy M06_pwk_use01
+  parent PLC_M06_pwk
+  position 0.0369852 -1.12913 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.694118 0.345098 0.101961 
+endnode

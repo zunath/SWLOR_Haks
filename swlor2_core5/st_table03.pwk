@@ -1,0 +1,28 @@
+#Exported from 3ds max by MDL Plug-in Suite 1.0b
+#http://www.bricksbuilder.com/nwn/utils/
+#MAXMODEL ASCII
+# model: st_table03
+filedependancy table03.max
+node trimesh Plane01
+  parent st_table03_pwk
+  position -0.0291711 -0.0579322 0
+  orientation 0 0 0 0
+  wirecolor 0.605469 0.605469 0.605469
+  ambient 0.601563 0.839844 0.894531
+  diffuse 0.601563 0.839844 0.894531
+  specular 0 0 0
+  shininess 1
+  bitmap NULL
+  verts 6
+    1.19847 -0.395838 0
+    0.0369524 -1.15815 0
+    -0.704855 -0.681142 0
+    -1.19847 -0.363734 0
+    -0.787065 1.15815 0
+    0.818163 1.15815 0
+  faces 4
+    0 5 2  1  0 0 0  7
+    1 0 2  1  0 0 0  7
+    4 3 2  1  0 0 0  7
+    4 2 5  1  0 0 0  7
+endnode

@@ -1,0 +1,38 @@
+# Exported from NWmax 0.6 at 9/15/2004 11:23:44 PM
+# pwk file
+#
+#NWmax PWKMESH  ASCII
+node dummy m02_pwk_use01
+  parent xlc_m02_pwk
+  position -0.006 -0.583478 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.345098 0.780392 0.882353 
+endnode
+node dummy m02_pwk_use02
+  parent xlc_m02_pwk
+  position 0.012 0.601794 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.345098 0.780392 0.882353 
+endnode
+node trimesh xlc_m02_wg
+  parent xlc_m02_pwk
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.345098 0.345098 0.345098 
+  bitmap NULL
+  verts 7
+    0.430526 -0.6526 0.0
+    -0.447903 -0.85 0.0
+    -0.951272 0.0185589 0.0
+    -0.457773 0.709458 0.0
+    0.430526 0.867378 0.0
+    0.953635 -0.0110513 0.0
+    -0.00375381 -0.00118119 0.0
+  faces 6
+    6 2 1  0  0 0 0  7
+    1 0 6  0  0 0 0  7
+    6 0 5  0  0 0 0  7
+    5 4 6  0  0 0 0  7
+    6 4 3  0  0 0 0  7
+    3 2 6  0  0 0 0  7
+endnode

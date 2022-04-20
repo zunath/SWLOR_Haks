@@ -1,0 +1,234 @@
+# Rewritten by CleanModels 3 Version 3.2.2.1 Sat Jan 03 17:06:36 2009
+# NOCOMPILE
+#MAXMODEL ASCII
+filedependency Unknown
+newmodel vdr_enerfield_w
+setsupermodel vdr_enerfield_w null
+setanimationscale 1
+classification EFFECT
+#MAXGEOM ASCII
+beginmodelgeom vdr_enerfield_w
+node dummy vdr_enerfield_w
+  parent NULL
+endnode
+node light auroralight01
+  parent vdr_enerfield_w
+  wirecolor 0.6941180 0.1098040 0.5843140
+  radius 2
+  multiplier 5
+  color 1 1 1
+  ambientonly 1
+  ndynamictype 1
+  affectdynamic 1
+  shadow 1
+  lightpriority 2
+  fadinglight 1
+  orientation 0 0 0 0
+  position 0 0 3
+endnode
+node dummy dummy01
+  parent vdr_enerfield_w
+  wirecolor 0.8392160 0.8941180 0.6000000
+  orientation 0 0 0 0
+  position 0 0 0
+endnode
+node emitter auroraemitter02
+  parent dummy01
+  wirecolor 0.1098040 0.1098040 0.6941180
+  update_sel 1
+  update Fountain
+  render_sel 7
+  render Motion_Blur
+  blend_sel 2
+  blend Lighten
+  spawntype 0
+  iconSize 100
+  xsize 50
+  ysize 50
+  inherit 0
+  inherit_local 1
+  inheritvel 0
+  inherit_part 0
+  renderorder 2
+  threshold 0
+  combinetime 0
+  deadspace 0
+  opacity 0.5000000
+  colorStart 0.2039220 0.2039220 0.2039220
+  colorEnd 1 1 1
+  alphaStart 1
+  alphaEnd 0
+  sizeStart 0.2000000
+  sizeEnd 0.1000000
+  sizeStart_y 0
+  sizeEnd_y 0
+  birthrate 100
+  lifeExp 8
+  mass -1.5000000
+  spread 0.4363320
+  particleRot 0
+  velocity 6
+  randvel 0
+  bounce_co 0
+  blurlength 40
+  loop 0
+  bounce 0
+  m_isTinted 0
+  splat 0
+  affectedByWind false
+  texture fxpa_dot01
+  twosidedtex 0
+  xgrid 1
+  ygrid 1
+  fps 1
+  frameStart 0
+  frameEnd 0
+  random 0
+  chunky 0
+  lightningDelay 0
+  lightningRadius 0
+  lightningSubDiv 0
+  lightningScale 0
+  blastRadius 0
+  blastLength 0
+  p2p 1
+  p2p_type Gravity
+  p2p_sel 2
+  p2p_bezier2 0
+  p2p_bezier3 0
+  grav 2
+  drag 0
+  orientation 0 0 0 0
+  position -2 0 -0.2187500
+endnode
+node reference auroraref01
+  parent auroraemitter02
+  orientation 1 0 0 -3.1415927
+  wirecolor 0.6941180 0.5803920 0.1019610
+  refModel fx_ref
+  reattachable 1
+  position 2 0 -3.2343750
+endnode
+endmodelgeom vdr_enerfield_w
+
+#MAXANIM ASCII
+newanim cessation vdr_enerfield_w
+  length 9
+  transtime 0.25
+  event 2.83333 detonate
+  animroot vdr_enerfield_w
+  node dummy vdr_enerfield_w
+    parent NULL
+  endnode
+  node light auroralight01
+    parent vdr_enerfield_w
+  endnode
+  node dummy dummy01
+    parent vdr_enerfield_w
+    orientationkey
+      0 0 0 1 -6.2831800
+      9 0 0 1 -6.2831800
+    endlist
+  endnode
+  node emitter auroraemitter02
+    parent dummy01
+    orientationkey
+      0 -1 0 0 -3.1415900
+      9 -1 0 0 -3.1415900
+    endlist
+    birthratekey
+      0 0
+      9 0
+    endlist
+  endnode
+  node reference auroraref01
+    parent auroraemitter02
+    orientationkey
+      0 1 0 0 -3.1415900
+      9 1 0 0 -3.1415900
+    endlist
+  endnode
+doneanim cessation vdr_enerfield_w
+
+#MAXANIM ASCII
+newanim duration vdr_enerfield_w
+  length 0.266667
+  transtime 0.25
+  animroot vdr_enerfield_w
+  node dummy vdr_enerfield_w
+    parent NULL
+  endnode
+  node light auroralight01
+    parent vdr_enerfield_w
+  endnode
+  node dummy dummy01
+    parent vdr_enerfield_w
+    orientationkey
+      0 0 0 0 0
+      0.0666667 0 0 -1 -1.5708000
+      0.1333330 0 0 -1 -3.1415900
+      0.2000000 0 0 -1 -4.7123900
+      0.2666670 0 0 1 -6.2831800
+    endlist
+  endnode
+  node emitter auroraemitter02
+    parent dummy01
+    orientationkey
+      0 -1 0 0 -3.1415900
+      0.2666670 -1 0 0 -3.1415900
+    endlist
+    birthratekey
+      0 100
+      0.2666670 100
+    endlist
+  endnode
+  node reference auroraref01
+    parent auroraemitter02
+    orientationkey
+      0 1 0 0 -3.1415900
+      0.2666670 1 0 0 -3.1415900
+    endlist
+  endnode
+doneanim duration vdr_enerfield_w
+
+#MAXANIM ASCII
+newanim impact vdr_enerfield_w
+  length 0.266667
+  transtime 0.25
+  animroot vdr_enerfield_w
+  node dummy vdr_enerfield_w
+    parent NULL
+  endnode
+  node light auroralight01
+    parent vdr_enerfield_w
+  endnode
+  node dummy dummy01
+    parent vdr_enerfield_w
+    orientationkey
+      0 0 0 0 0
+      0.0666667 0 0 -1 -1.5708000
+      0.1333330 0 0 -1 -3.1415900
+      0.2000000 0 0 -1 -4.7123900
+      0.2666670 0 0 1 -6.2831800
+    endlist
+  endnode
+  node emitter auroraemitter02
+    parent dummy01
+    orientationkey
+      0 -1 0 0 -3.1415900
+      0.2666670 -1 0 0 -3.1415900
+    endlist
+    birthratekey
+      0 100
+      0.2666670 100
+    endlist
+  endnode
+  node reference auroraref01
+    parent auroraemitter02
+    orientationkey
+      0 1 0 0 -3.1415900
+      0.2666670 1 0 0 -3.1415900
+    endlist
+  endnode
+doneanim impact vdr_enerfield_w
+donemodel vdr_enerfield_w

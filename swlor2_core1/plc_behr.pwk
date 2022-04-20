@@ -1,0 +1,34 @@
+# Exported from NWmax v2.01.25 at 4/2/2011 4:08:25 PM
+# pwk file
+#
+#NWmax PWKMESH  ASCII
+node trimesh PWK
+  parent plc_behr_pwk
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.541176 0.0313726 0.431373 
+  bitmap NULL
+  verts 4
+    -1.17876 -1.21922 0.0
+    1.17876 -1.21922 0.0
+    -1.17876 1.21922 0.0
+    1.17876 1.21922 0.0
+  faces 2
+    2 0 3  1  6 4 7  7
+    1 3 0  1  5 7 4  7
+  tverts 8
+    0.0 0.0 0
+    1.0 0.0 0
+    0.0 0.0 0
+    1.0 0.0 0
+    0.0 0.0 0
+    1.0 0.0 0
+    0.0 1.0 0
+    1.0 1.0 0
+endnode
+node dummy ehr_pwk_use01
+  parent plc_behr_pwk
+  position 0.0 2.76279 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.839216 0.898039 0.65098 
+endnode

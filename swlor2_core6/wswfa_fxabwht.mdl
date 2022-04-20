@@ -1,0 +1,76 @@
+#MAXMODEL ASCII
+# model: wswfa_fxabwht
+filedependancy wswfa_fxabwht.max
+newmodel wswfa_fxabwht
+setsupermodel wswfa_fxabwht null
+setanimationscale 1
+#MAXGEOM  ASCII
+beginmodelgeom wswfa_fxabwht
+node dummy wswfa_fxabwht
+  parent NULL
+  #part-number 0
+endnode
+node emitter g_wswgs_v_neg
+  parent wswfa_fxabwht
+  #part-number 1
+  p2p 0
+  p2p_sel 1
+  affectedByWind 0
+  m_isTinted 0
+  bounce 0
+  random 0
+  inherit 1
+  inheritvel 0
+  inherit_local 0
+  splat 0
+  inherit_part 0
+  renderorder 0
+  spawntype 0
+  update Fountain
+  render Normal
+  blend Lighten
+  texture fxpa_sparks
+  xgrid 4
+  ygrid 4
+  loop 0
+  deadspace 0
+  twosidedtex 0
+  blastRadius 0
+  blastLength 0
+  position 0 0.637878001 0.132930994
+  orientation -1 0 0 -0.523599029
+  colorStart 1.0 1.0 1.0
+  colorEnd 0.45 0.45 0.45
+  alphaStart 0
+  alphaEnd 1
+  sizeStart 0.699999988
+  sizeEnd 0
+  sizeStart_y 0
+  sizeEnd_y 0
+  frameStart 0
+  frameEnd 15
+  birthrate 50
+  lifeExp 1
+  mass 0
+  spread 2.26892996
+  particleRot 0
+  velocity 0
+  randvel 0.0500000007
+  fps 0
+  xsize 2
+  ysize 60
+  bounce_co 0
+  blurlength 10
+  lightningDelay 0
+  lightningRadius 0
+  lightningScale 0
+  p2p_bezier2 0
+  p2p_bezier3 0
+  combinetime 0
+  drag 0
+  grav 0
+  threshold 0
+endnode
+endmodelgeom wswfa_fxabwht
+
+donemodel wswfa_fxabwht

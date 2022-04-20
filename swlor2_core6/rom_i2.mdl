@@ -1,0 +1,84 @@
+# Exported from NWmax 0.5-beta at 4/15/2004 6:44:07 PM
+# mdl file
+#
+#NWmaxMODEL ASCII
+# model: rom_i2
+filedependancy Unknown
+newmodel rom_i2
+setsupermodel rom_i2 NULL
+classification Character
+setanimationscale 1.0
+#NWmaxGEOM  ASCII
+beginmodelgeom rom_i2
+node dummy rom_i2
+  parent NULL
+endnode
+node trimesh Node0
+  parent rom_i2
+  position -0.0890989 0.0800897 -0.191144
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center 8.01165 -16.3585 34.3166 
+  gizmo SubAnim:Gizmo
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 2.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap grs_flowers-10
+  verts 16
+    -0.353488 0.304818 0.4709
+    -0.360773 -0.508844 0.335536
+    0.443467 -0.516049 0.472999
+    0.463534 0.319484 0.338815
+    0.662826 -0.476521 0.319917
+    0.286346 0.041905 0.213332
+    -0.226079 -0.330211 0.32157
+    0.152554 -0.868467 0.215913
+    0.021254 -0.099711 0.356656
+    0.657824 -0.172384 0.25007
+    0.72966 0.456813 0.358308
+    0.077015 0.541296 0.252652
+    -0.451859 -0.349871 0.319917
+    0.18098 -0.249786 0.213332
+    0.082058 0.375726 0.32157
+    -0.569427 0.282724 0.215913
+  faces 8
+    0 1 2  0  0 1 2  1
+    0 2 3  1  0 2 3  1
+    4 5 6  2  4 5 6  1
+    4 6 7  3  4 6 7  1
+    8 9 10  4  8 9 10  1
+    8 10 11  5  8 10 11  1
+    12 13 14  6  12 13 14  1
+    12 14 15  7  12 14 15  1
+  tverts 16
+    0.029297 0.486328 0
+    0.00293 -0.004883 0
+    0.572266 -0.044922 0
+    0.573242 0.477539 0
+    0.029297 0.486328 0
+    0.00293 -0.004883 0
+    0.572266 -0.044922 0
+    0.573242 0.477539 0
+    0.029297 0.486328 0
+    0.00293 -0.004883 0
+    0.572266 -0.044922 0
+    0.573242 0.477539 0
+    0.029297 0.486328 0
+    0.00293 -0.004883 0
+    0.572266 -0.044922 0
+    0.573242 0.477539 0
+endnode
+endmodelgeom rom_i2
+donemodel rom_i2

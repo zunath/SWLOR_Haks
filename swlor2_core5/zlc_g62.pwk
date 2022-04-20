@@ -1,0 +1,29 @@
+node trimesh zlc_g62_wg
+  parent zlc_g62_pwk
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.521569 0.431373 0.0313726 
+  bitmap white
+  ambient 0.6015625 0.8906250 0.7187500
+  diffuse 0.6015625 0.8906250 0.7187500
+  verts 4
+    -3.0000000 -3.0000000 0
+     3.0000000 -3.0000000 0
+    -3.0000000  3.5000000 0
+     3.0000000  3.5000000 0
+  faces 2
+    2 0 3  1  0 0 0  7
+    1 3 0  1  0 0 0  7
+endnode
+node dummy g62_pwk_use02
+  parent zlc_g62_pwk
+  position 0 -2.0100000 0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.878431 0.560784 0.341176 
+endnode
+node dummy g62_pwk_use01
+  parent zlc_g62_pwk
+  position 0 2.6200000 0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.878431 0.560784 0.341176 
+endnode

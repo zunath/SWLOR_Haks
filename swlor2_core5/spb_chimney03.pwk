@@ -1,0 +1,33 @@
+# Exported from 3ds max by MDL Plugin Suite 1.1b3
+# http://rockbottom.vtex.net
+#MAXMODEL ASCII
+# model: spb_chimney03
+filedependancy spb_chimney03.max
+node trimesh Plane01
+  parent spb_chimney03_pwk
+  position 0.0230582 -0.00384307 0
+  orientation 0 0 0 0
+  wirecolor 0.527344 0.527344 0.527344
+  ambient 0.523438 0.0234375 0.0234375
+  diffuse 0.523438 0.0234375 0.0234375
+  specular 0 0 0
+  shininess 1
+  bitmap NULL
+  verts 4
+    -0.476537 -0.87237 0
+    0.476537 -0.87237 0
+    -0.476537 0.87237 0
+    0.476537 0.87237 0
+  faces 2
+    2 0 3  1  6 4 7  0
+    1 3 0  1  5 7 4  0
+  tverts 8
+    0 0 0
+    1 0 0
+    0 0 0
+    1 0 0
+    0 0 0
+    1 0 0
+    0 1 0
+    1 1 0
+endnode
