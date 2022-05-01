@@ -11,7 +11,7 @@
 7     656        EnhancementAlignmentGroup        IPRP_ALIGNGRP      0      2                 ****           5480         1084          
 8     657        EnhancementRacialGroup           racialtypes        0      2                 ****           5480         1081          
 9     658        EnhancementSpecificAlignment     IPRP_ALIGNMENT     0      2                 ****           5480         1083          
-10    16860079   AttackPenalty                    ****               0      20                ****           5481         16860080          
+10    16860079   AttackPenalty                    ****               0      20                ****           5481         16860080      
 11    661        WeightReduction                  ****               0      10                ****           5482         1442          
 12    662        BonusFeats                       IPRP_FEATS         ****   0                 ****           5483         1445          
 13    663        SingleBonusSpellOfLevel          Classes            0      13                ****           5484         1444          
@@ -57,10 +57,10 @@
 53    733        SpellImmunity_Specific           ****               0      16                ****           5514         1447          
 54    730        SpellSchool_Immunity             IPRP_SPELLSHL      0      0                 ****           5517         1448          
 55    1492       ThievesTools                     ****               0      25                ****           5518         ****          
-56    16860081        AttackBonus                      ****               0      2                 ****           16860082         16860083          
-57    16860084        AttackBonusAlignmentGroup        IPRP_ALIGNGRP      0      2                 ****           16860085         16860086          
-58    16860087        AttackBonusRacialGroup           racialtypes        0      2                 ****           16860085         16860088          
-59    16860089        AttackBonusSpecificAlignment     IPRP_ALIGNMENT     0      2                 ****           16860085         16860090          
+56    16860081   AttackBonus                      ****               0      2                 ****           16860082     16860083      
+57    16860084   AttackBonusAlignmentGroup        IPRP_ALIGNGRP      0      2                 ****           16860085     16860086      
+58    16860087   AttackBonusRacialGroup           racialtypes        0      2                 ****           16860085     16860088      
+59    16860089   AttackBonusSpecificAlignment     IPRP_ALIGNMENT     0      2                 ****           16860085     16860090      
 60    736        ToHitPenalty                     ****               0      20                ****           5521         1458          
 61    739        UnlimitedAmmo                    IPRP_AMMOTYPE      0      14                ****           5522         1452          
 62    715        UseLimitationAlignmentGroup      IPRP_ALIGNGRP      0      0                 ****           5523         1435          
@@ -116,7 +116,7 @@
 112   16860052   ForceAttack                      ****               0      45                ****           16860053     16860052      
 113   16860065   ModuleBonus                      ****               0      45                ****           16860065     16860065      
 114   16860066   StarshipBonus                    iprp_enhancesta    0      45                ****           16860066     16860066      
-115   ****       ****                             ****               ****   ****              ****           ****         ****          
+115   16860136   CPBonus                          iprp_crafttype     0      45                ****           16860136     16860136      
 116   ****       ****                             ****               ****   ****              ****           ****         ****          
 117   16857278   Evasion                          ****               0      41                ****           16857278     16857278      
 118   16859825   RecastReduction                  ****               0      42                ****           16859825     16859825      
