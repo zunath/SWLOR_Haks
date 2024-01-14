@@ -1,0 +1,246 @@
+# NeverBlender 4.0.0|Blender 4.0.2|2023-12-26
+filedependancy Starforge Deck G.blend
+newmodel krsfdg_876
+setsupermodel krsfdg_876 null
+classification TILE
+setanimationscale 1.0
+beginmodelgeom krsfdg_876
+node dummy krsfdg_876
+  parent null
+endnode
+node aabb 876_wok
+  parent krsfdg_876
+  position  0.00000  0.00000  50.97469
+  orientation  0.00000  1.00000  0.00000  0.00000
+  verts 4
+     5.00000  5.00000  0.00000
+     5.00000 -5.00000  0.00000
+    -5.00000  5.00000  0.00000
+    -5.00000 -5.00000  0.00000
+  faces 2
+    0 2 3 0  0 0 0 7
+    3 1 0 0  0 0 0 7
+  aabb -5.00000 -5.00000  0.00000   5.00000  5.00000  0.00000  -1
+       -5.00000 -5.00000  0.00000   5.00000  5.00000  0.00000   0
+       -5.00000 -5.00000  0.00000   5.00000  5.00000  0.00000   1
+endnode
+node trimesh Pit.876
+  parent krsfdg_876
+  position  0.00000  0.00000  0.00000
+  orientation  0.00000  1.00000  0.00000  0.00000
+  wirecolor 1.00 1.00 1.00
+  shininess 1
+  ambient 0.00 0.00 0.00
+  diffuse 0.00 0.00 0.00
+  specular 0.00 0.00 0.00
+  selfillumcolor 0.00 0.00 0.00
+  render 1
+  shadow 0
+  tilefade 0
+  rotatetexture 0
+  verts 4
+    -5.00000 -5.00000  0.00000
+    -5.00000  5.00000  0.00000
+     5.00000  5.00000  0.00000
+     5.00000 -5.00000  0.00000
+  tverts 4
+     0.0163  0.1826  0
+     0.0149  0.1836  0
+     0.0149  0.1826  0
+     0.0163  0.1836  0
+  faces 2
+    3 1 0 1  0 1 2 0
+    3 2 1 2  0 3 1 0
+endnode
+node trimesh Trim02.413
+  parent krsfdg_876
+  position  0.00000  0.00000  0.00000
+  orientation  0.00000  1.00000  0.00000  0.00000
+  wirecolor 1.00 1.00 1.00
+  bitmap lsf_trim02
+  texture1 null
+  texture2 null
+  shininess 0
+  ambient 1.00 1.00 1.00
+  diffuse 1.00 1.00 1.00
+  specular 0.00 0.00 0.00
+  selfillumcolor 0.00 0.00 0.00
+  render 1
+  shadow 0
+  tilefade 0
+  rotatetexture 0
+  verts 11
+    -5.00000 -2.15411  57.05092
+    -5.00000 -2.15408  56.36573
+    -5.00000 -2.15408  56.36573
+    -5.00000 -2.15408  56.32887
+    -4.69372 -5.00000  56.32887
+    -4.69372 -5.00000  56.86975
+    -4.92621 -3.02078  56.32887
+    -4.92621 -3.02081  57.05092
+    -4.92621 -3.02081  57.05092
+    -4.92621 -3.02078  56.32887
+    -4.92621 -3.02078  56.32887
+  tverts 7
+    -2.9241  0.7789  0
+    -2.5282  0.8870  0
+    -2.9241  0.8870  0
+    -2.3549  0.8797  0
+    -2.5282  0.7426  0
+    -2.3549  0.7426  0
+    -2.3549  0.8870  0
+  faces 5
+     5  6  4 1  0 1 2 0
+     1  8  0 1  3 4 5 0
+     2  3 10 1  3 6 1 0
+     5  7  6 1  0 4 1 0
+     1  9  8 1  3 1 4 0
+endnode
+node trimesh grate01.237
+  parent krsfdg_876
+  position  0.00000  0.00000  0.00000
+  orientation  0.00000  1.00000  0.00000  0.00000
+  wirecolor 1.00 1.00 1.00
+  bitmap lsf_grate01
+  texture1 null
+  texture2 null
+  shininess 0
+  ambient 1.00 1.00 1.00
+  diffuse 1.00 1.00 1.00
+  specular 0.00 0.00 0.00
+  selfillumcolor 0.00 0.00 0.00
+  render 1
+  shadow 0
+  tilefade 0
+  rotatetexture 0
+  verts 10
+    -5.00000 -3.06158  57.04719
+    -5.00000 -5.00000  56.86975
+    -5.00000 -3.06158  57.04719
+    -5.00000 -3.02081  57.05092
+    -5.00000 -2.15411  57.05092
+    -5.00000 -3.02081  57.05092
+    -4.69372 -5.00000  56.86975
+    -4.92621 -3.02081  57.05092
+    -4.92621 -3.02081  57.05092
+    -4.92621 -3.02081  57.05092
+  tverts 6
+     2.7900  2.1511  0
+     2.8275  2.4059  0
+     2.7990  2.1458  0
+     2.7900  2.1458  0
+     2.7900  2.0319  0
+     2.7900  2.4059  0
+  faces 4
+     2  6  7 1  0 1 2 0
+     5  0  8 1  3 0 2 0
+     3  9  4 1  3 2 4 0
+     2  1  6 1  0 5 1 0
+endnode
+node light krsfdg_876ml1
+  parent krsfdg_876
+  position  0.00000  0.00000  87.59106
+  orientation  0.00000  1.00000  0.00000  0.00000
+  ambientonly 0
+  ndynamictype 1
+  affectdynamic 1
+  shadow 1
+  lightpriority 5
+  fadingLight 1
+  radius 14.0
+  multiplier 1.0
+  color 0.00 0.00 0.00
+endnode
+node light krsfdg_876ml2
+  parent krsfdg_876
+  position  2.23000 -2.23000  84.59106
+  orientation  0.00000  1.00000  0.00000  0.00000
+  ambientonly 0
+  ndynamictype 1
+  affectdynamic 1
+  shadow 1
+  lightpriority 5
+  fadingLight 1
+  radius 14.0
+  multiplier 1.0
+  color 0.00 0.00 0.00
+endnode
+node dummy krsfdg_876sl1
+  parent krsfdg_876
+  position  3.00000 -3.00000  138.05040
+  orientation  0.00000  1.00000  0.00000  0.00000
+endnode
+node dummy krsfdg_876sl2
+  parent krsfdg_876
+  position  3.00000  3.00000  138.05040
+  orientation  0.00000  1.00000  0.00000  0.00000
+endnode
+node trimesh wall10.438
+  parent krsfdg_876
+  position  0.00000  0.00000  0.00000
+  orientation  0.00000  1.00000  0.00000  0.00000
+  wirecolor 1.00 1.00 1.00
+  bitmap lsf_wall10
+  texture1 null
+  texture2 null
+  shininess 0
+  ambient 1.00 1.00 1.00
+  diffuse 1.00 1.00 1.00
+  specular 0.00 0.00 0.00
+  selfillumcolor 0.00 0.00 0.00
+  render 1
+  shadow 0
+  tilefade 0
+  rotatetexture 0
+  verts 3
+    -5.00000 -0.97464  74.87241
+    -5.00000 -5.00000  72.92412
+    -4.59464 -5.00000  72.92412
+  tverts 3
+    -1.5960  1.8202  0
+    -0.7909  1.8202  0
+    -1.5960  1.9013  0
+  faces 1
+    1 0 2 1  0 1 2 0
+endnode
+node trimesh wall12.211
+  parent krsfdg_876
+  position  0.00000  0.00000  0.00000
+  orientation  0.00000  1.00000  0.00000  0.00000
+  wirecolor 1.00 1.00 1.00
+  bitmap lsf_wall12
+  texture1 null
+  texture2 null
+  shininess 0
+  ambient 1.00 1.00 1.00
+  diffuse 1.00 1.00 1.00
+  specular 0.00 0.00 0.00
+  selfillumcolor 0.00 0.00 0.00
+  render 1
+  shadow 0
+  tilefade 0
+  rotatetexture 0
+  verts 8
+    -5.00000 -2.15408  56.32887
+    -5.00000 -3.02078  56.32887
+    -5.00000 -3.02078  56.32887
+    -5.00000 -3.06155  56.32887
+    -5.00000 -5.00000  56.32887
+    -4.92621 -3.02078  56.32887
+    -4.92621 -3.02078  56.32887
+    -4.69372 -5.00000  56.32887
+  tverts 6
+    -3.3172  1.8622  0
+    -3.7505  1.8622  0
+    -3.7505  1.8803  0
+    -3.7709  1.8622  0
+    -4.7401  1.9373  0
+    -4.7401  1.8622  0
+  faces 4
+    0 2 5 1  0 1 2 0
+    3 6 1 1  3 2 1 0
+    3 7 6 1  3 4 2 0
+    3 4 7 1  3 5 4 0
+endnode
+endmodelgeom krsfdg_876
+donemodel krsfdg_876
