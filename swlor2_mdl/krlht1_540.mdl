@@ -1,0 +1,94 @@
+# NeverBlender 4.0.0|Blender 4.0.2|2023-12-26
+filedependancy Lehon.blend
+newmodel krlht1_540
+setsupermodel krlht1_540 null
+classification TILE
+setanimationscale 1.0
+beginmodelgeom krlht1_540
+node dummy krlht1_540
+  parent null
+endnode
+node aabb 540_wok
+  parent krlht1_540
+  position  0.00000  0.00000  0.00000
+  orientation  0.00000  1.00000  0.00000  0.00000
+  verts 3
+    -5.00000 -4.46550  11.87547
+    -5.00000 -5.00000  12.33289
+    -3.96375 -5.00000  12.44402
+  tverts 3
+     2.3802  0.4996  0
+     2.4695  0.4083  0
+     2.6954  0.4115  0
+  faces 1
+    0 1 2 0  0 1 2 7
+  aabb -5.00000 -5.00000  11.87547  -3.96375 -4.46550  12.44402   0
+endnode
+node trimesh Grass_03a.144
+  parent krlht1_540
+  position  0.00000  0.00000  0.00000
+  orientation  0.00000  1.00000  0.00000  0.00000
+  wirecolor 1.00 1.00 1.00
+  bitmap lun_grss02
+  texture1 null
+  texture2 null
+  shininess 0
+  ambient 1.00 1.00 1.00
+  diffuse 1.00 1.00 1.00
+  specular 0.00 0.00 0.00
+  selfillumcolor 0.00 0.00 0.00
+  render 1
+  shadow 1
+  tilefade 0
+  rotatetexture 0
+  verts 3
+    -5.00000 -4.46550  11.86464
+    -5.00000 -5.00000  12.32206
+    -3.96375 -5.00000  12.43319
+  tverts 3
+     2.3802  0.4996  0
+     2.4695  0.4083  0
+     2.6954  0.4115  0
+  faces 1
+    0 1 2 1  0 1 2 0
+endnode
+node light krlht1_540ml1
+  parent krlht1_540
+  position  0.00000  0.00000  30.60693
+  orientation  0.00000  1.00000  0.00000  0.00000
+  ambientonly 0
+  ndynamictype 1
+  affectdynamic 1
+  shadow 1
+  lightpriority 5
+  fadingLight 1
+  radius 14.0
+  multiplier 1.0
+  color 0.00 0.00 0.00
+endnode
+node light krlht1_540ml2
+  parent krlht1_540
+  position  2.23000 -2.23000  27.60693
+  orientation  0.00000  1.00000  0.00000  0.00000
+  ambientonly 0
+  ndynamictype 1
+  affectdynamic 1
+  shadow 1
+  lightpriority 5
+  fadingLight 1
+  radius 14.0
+  multiplier 1.0
+  color 0.00 0.00 0.00
+endnode
+node dummy krlht1_540sl1
+  parent krlht1_540
+  position  3.00000 -3.00000  75.48077
+  orientation  0.00000  1.00000  0.00000  0.00000
+endnode
+node dummy krlht1_540sl2
+  parent krlht1_540
+  position  3.00000  3.00000  75.48077
+  orientation  0.00000  1.00000  0.00000  0.00000
+endnode
+endmodelgeom krlht1_540
+donemodel krlht1_540

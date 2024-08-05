@@ -1,0 +1,179 @@
+# NeverBlender 4.0.0|Blender 4.0.2|2023-12-26
+filedependancy Lehon.blend
+newmodel krlht1_549
+setsupermodel krlht1_549 null
+classification TILE
+setanimationscale 1.0
+beginmodelgeom krlht1_549
+node dummy krlht1_549
+  parent null
+endnode
+node aabb 549_wok
+  parent krlht1_549
+  position  0.00000  0.00000  0.00000
+  orientation  0.00000  1.00000  0.00000  0.00000
+  verts 7
+     0.93109 -5.00000  0.71075
+     1.44681 -5.00000  0.73491
+     5.00000 -5.00000  0.91414
+     5.00000 -0.66638  0.71075
+     5.00000 -2.02057  0.83634
+     5.00000 -3.11890  0.86032
+     2.29973 -2.06244  0.71075
+  tverts 7
+    -1.3017  3.6571  0
+    -0.9865  3.7313  0
+    -1.2159  3.3093  0
+    -1.0190  3.2888  0
+    -1.3308  3.3213  0
+    -1.4725  3.3360  0
+    -0.9818  3.7955  0
+  faces 5
+    6 1 5 0  0 1 2 6
+    1 2 5 0  1 3 2 6
+    6 4 3 0  0 4 5 7
+    5 4 6 0  2 4 0 6
+    6 0 1 0  0 6 1 6
+  aabb  0.93109 -5.00000  0.71075   5.00000 -0.66638  0.91414  -1
+        0.93109 -5.00000  0.71075   5.00000 -2.06244  0.91414  -1
+        0.93109 -5.00000  0.71075   2.29973 -2.06244  0.73491   4
+        1.44681 -5.00000  0.71075   5.00000 -2.06244  0.91414  -1
+        1.44681 -5.00000  0.71075   5.00000 -2.06244  0.86032   0
+        1.44681 -5.00000  0.73491   5.00000 -3.11890  0.91414   1
+        2.29973 -3.11890  0.71075   5.00000 -0.66638  0.86032  -1
+        2.29973 -3.11890  0.71075   5.00000 -2.02057  0.86032   3
+        2.29973 -2.06244  0.71075   5.00000 -0.66638  0.83634   2
+endnode
+node trimesh ShinySand.028
+  parent krlht1_549
+  position  0.00000  0.00000  0.00000
+  orientation  0.00000  1.00000  0.00000  0.00000
+  wirecolor 1.00 1.00 1.00
+  bitmap lun_sand05
+  texture1 null
+  texture2 null
+  shininess 0
+  ambient 1.00 1.00 1.00
+  diffuse 1.00 1.00 1.00
+  specular 0.00 0.00 0.00
+  selfillumcolor 0.00 0.00 0.00
+  render 1
+  shadow 1
+  tilefade 0
+  rotatetexture 0
+  verts 7
+     0.93109 -5.00000  0.69992
+     1.44681 -5.00000  0.72408
+     5.00000 -5.00000  0.90331
+     2.29973 -2.06244  0.69992
+     5.00000 -2.02057  0.82551
+     5.00000 -0.66638  0.69992
+     5.00000 -3.11890  0.84949
+  tverts 7
+    -1.3017  3.6571  0
+    -0.9865  3.7313  0
+    -1.2159  3.3093  0
+    -1.0190  3.2888  0
+    -1.3308  3.3213  0
+    -1.4725  3.3360  0
+    -0.9818  3.7955  0
+  faces 5
+    3 1 6 1  0 1 2 0
+    1 2 6 1  1 3 2 0
+    3 4 5 1  0 4 5 0
+    6 4 3 1  2 4 0 0
+    3 0 1 1  0 6 1 0
+endnode
+node trimesh Shore.032
+  parent krlht1_549
+  position  0.00000  0.00000  0.00000
+  orientation  0.00000  1.00000  0.00000  0.00000
+  wirecolor 1.00 1.00 1.00
+  bitmap lun_sand02
+  texture1 null
+  texture2 null
+  shininess 0
+  ambient 1.00 1.00 1.00
+  diffuse 1.00 1.00 1.00
+  specular 0.00 0.00 0.00
+  selfillumcolor 0.00 0.00 0.00
+  render 1
+  shadow 1
+  tilefade 0
+  rotatetexture 0
+  verts 11
+    -0.00750 -5.00000  0.72007
+     1.44445 -5.00000  0.82875
+     0.93109 -5.00000  0.80310
+     0.86710 -5.00000  0.79404
+     5.00000 -5.00000  1.01694
+     2.29973 -2.06244  0.80310
+     2.28813 -0.08893  0.67134
+     5.00000  0.34480  0.74318
+     5.00000 -2.01767  0.93699
+     5.00000 -3.11113  0.96244
+     5.00000 -0.66072  0.81009
+  tverts 11
+     0.9120  0.2242  0
+     0.7768  0.0867  0
+     0.8363  0.2516  0
+     0.9765  0.0603  0
+     0.7750  0.0603  0
+     0.7664  0.0603  0
+     0.7757  0.0603  0
+     0.9856  0.1980  0
+     0.8783  0.0609  0
+     0.6300  0.0616  0
+     0.7021  0.0616  0
+  faces 10
+     9  1  4 1   0  1  2 0
+     5  1  9 1   3  1  0 0
+     6  0  3 1   3  4  5 0
+     5  3  2 1   3  5  6 0
+     5  8 10 1   3  7  8 0
+    10  6  5 1   8  9  3 0
+     9  8  5 1   0  7  3 0
+     5  2  1 1   3  6  1 0
+     5  6  3 1   3  3  5 0
+    10  7  6 1   8 10  9 0
+endnode
+node light krlht1_549ml1
+  parent krlht1_549
+  position  0.00000  0.00000  30.60693
+  orientation  0.00000  1.00000  0.00000  0.00000
+  ambientonly 0
+  ndynamictype 1
+  affectdynamic 1
+  shadow 1
+  lightpriority 5
+  fadingLight 1
+  radius 14.0
+  multiplier 1.0
+  color 0.00 0.00 0.00
+endnode
+node light krlht1_549ml2
+  parent krlht1_549
+  position  2.23000 -2.23000  27.60693
+  orientation  0.00000  1.00000  0.00000  0.00000
+  ambientonly 0
+  ndynamictype 1
+  affectdynamic 1
+  shadow 1
+  lightpriority 5
+  fadingLight 1
+  radius 14.0
+  multiplier 1.0
+  color 0.00 0.00 0.00
+endnode
+node dummy krlht1_549sl1
+  parent krlht1_549
+  position  3.00000 -3.00000  75.48077
+  orientation  0.00000  1.00000  0.00000  0.00000
+endnode
+node dummy krlht1_549sl2
+  parent krlht1_549
+  position  3.00000  3.00000  75.48077
+  orientation  0.00000  1.00000  0.00000  0.00000
+endnode
+endmodelgeom krlht1_549
+donemodel krlht1_549

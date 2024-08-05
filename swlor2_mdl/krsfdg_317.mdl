@@ -1,0 +1,94 @@
+# NeverBlender 4.0.0|Blender 4.0.2|2023-12-26
+filedependancy Starforge Deck G.blend
+newmodel krsfdg_317
+setsupermodel krsfdg_317 null
+classification TILE
+setanimationscale 1.0
+beginmodelgeom krsfdg_317
+node dummy krsfdg_317
+  parent null
+endnode
+node aabb 317_wok
+  parent krsfdg_317
+  position  0.00000  0.00000  50.97469
+  orientation  0.00000  1.00000  0.00000  0.00000
+  verts 4
+     5.00000  5.00000  0.00000
+     5.00000 -5.00000  0.00000
+    -5.00000  5.00000  0.00000
+    -5.00000 -5.00000  0.00000
+  faces 2
+    0 2 3 0  0 0 0 7
+    3 1 0 0  0 0 0 7
+  aabb -5.00000 -5.00000  0.00000   5.00000  5.00000  0.00000  -1
+       -5.00000 -5.00000  0.00000   5.00000  5.00000  0.00000   0
+       -5.00000 -5.00000  0.00000   5.00000  5.00000  0.00000   1
+endnode
+node trimesh Pit.317
+  parent krsfdg_317
+  position  0.00000  0.00000  0.00000
+  orientation  0.00000  1.00000  0.00000  0.00000
+  wirecolor 1.00 1.00 1.00
+  shininess 1
+  ambient 0.00 0.00 0.00
+  diffuse 0.00 0.00 0.00
+  specular 0.00 0.00 0.00
+  selfillumcolor 0.00 0.00 0.00
+  render 1
+  shadow 0
+  tilefade 0
+  rotatetexture 0
+  verts 4
+    -5.00000 -5.00000  0.00000
+    -5.00000  5.00000  0.00000
+     5.00000  5.00000  0.00000
+     5.00000 -5.00000  0.00000
+  tverts 4
+     0.0394  0.1650  0
+     0.0380  0.1660  0
+     0.0380  0.1650  0
+     0.0394  0.1660  0
+  faces 2
+    3 1 0 1  0 1 2 0
+    3 2 1 2  0 3 1 0
+endnode
+node light krsfdg_317ml1
+  parent krsfdg_317
+  position  0.00000  0.00000  87.59106
+  orientation  0.00000  1.00000  0.00000  0.00000
+  ambientonly 0
+  ndynamictype 1
+  affectdynamic 1
+  shadow 1
+  lightpriority 5
+  fadingLight 1
+  radius 14.0
+  multiplier 1.0
+  color 0.00 0.00 0.00
+endnode
+node light krsfdg_317ml2
+  parent krsfdg_317
+  position  2.23000 -2.23000  84.59106
+  orientation  0.00000  1.00000  0.00000  0.00000
+  ambientonly 0
+  ndynamictype 1
+  affectdynamic 1
+  shadow 1
+  lightpriority 5
+  fadingLight 1
+  radius 14.0
+  multiplier 1.0
+  color 0.00 0.00 0.00
+endnode
+node dummy krsfdg_317sl1
+  parent krsfdg_317
+  position  3.00000 -3.00000  138.05040
+  orientation  0.00000  1.00000  0.00000  0.00000
+endnode
+node dummy krsfdg_317sl2
+  parent krsfdg_317
+  position  3.00000  3.00000  138.05040
+  orientation  0.00000  1.00000  0.00000  0.00000
+endnode
+endmodelgeom krsfdg_317
+donemodel krsfdg_317

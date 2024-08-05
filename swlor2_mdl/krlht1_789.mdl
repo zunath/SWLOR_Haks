@@ -1,0 +1,122 @@
+# NeverBlender 4.0.0|Blender 4.0.2|2023-12-26
+filedependancy Lehon.blend
+newmodel krlht1_789
+setsupermodel krlht1_789 null
+classification TILE
+setanimationscale 1.0
+beginmodelgeom krlht1_789
+node dummy krlht1_789
+  parent null
+endnode
+node aabb 789_wok
+  parent krlht1_789
+  position  0.00000  0.00000  0.00000
+  orientation  0.00000  1.00000  0.00000  0.00000
+  verts 6
+     4.77747 -5.00000  9.77902
+     5.00000 -5.00000  9.67521
+    -5.00000 -5.00000  11.97040
+    -5.00000 -4.92606  11.88573
+     5.00000 -4.57884  9.24684
+     5.00000 -4.87035  9.58067
+  tverts 8
+     36.3307  0.2010  0
+     36.3307  0.2198  0
+     34.1579 -0.2672  0
+    -33.1084  33.4305  0
+    -33.1579  33.4017  0
+    -33.1084  33.4017  0
+     34.1084 -0.3112  0
+     34.1084 -0.3854  0
+  faces 4
+    3 2 0 0  0 1 2 2
+    5 0 1 0  3 4 5 2
+    5 4 0 0  6 7 2 2
+    4 3 0 0  7 0 2 2
+  aabb -5.00000 -5.00000  9.24684   5.00000 -4.57884  11.97040  -1
+        4.77747 -5.00000  9.24684   5.00000 -4.57884  9.77902  -1
+        4.77747 -5.00000  9.24684   5.00000 -4.57884  9.77902   2
+        4.77747 -5.00000  9.58067   5.00000 -4.87035  9.77902   1
+       -5.00000 -5.00000  9.24684   5.00000 -4.57884  11.97040  -1
+       -5.00000 -5.00000  9.24684   5.00000 -4.57884  11.88573   3
+       -5.00000 -5.00000  9.77902   4.77747 -4.92606  11.97040   0
+endnode
+node trimesh Inland03a.246
+  parent krlht1_789
+  position  0.00000  0.00000  0.00000
+  orientation  0.00000  1.00000  0.00000  0.00000
+  wirecolor 1.00 1.00 1.00
+  bitmap lun_rock01
+  texture1 null
+  texture2 null
+  shininess 0
+  ambient 1.00 1.00 1.00
+  diffuse 1.00 1.00 1.00
+  specular 0.00 0.00 0.00
+  selfillumcolor 0.00 0.00 0.00
+  render 1
+  shadow 1
+  tilefade 0
+  rotatetexture 0
+  verts 6
+    -5.00000 -5.00000  11.97040
+    -5.00000 -4.92606  11.88573
+     4.77747 -5.00000  9.77902
+     5.00000 -5.00000  9.67521
+     5.00000 -4.57884  9.24684
+     5.00000 -4.87035  9.58067
+  tverts 8
+     36.3307  0.2010  0
+     36.3307  0.2198  0
+     34.1579 -0.2672  0
+    -33.1084  33.4305  0
+    -33.1579  33.4017  0
+    -33.1084  33.4017  0
+     34.1084 -0.3112  0
+     34.1084 -0.3854  0
+  faces 4
+    1 0 2 1  0 1 2 0
+    5 2 3 1  3 4 5 0
+    5 4 2 1  6 7 2 0
+    4 1 2 1  7 0 2 0
+endnode
+node light krlht1_789ml1
+  parent krlht1_789
+  position  0.00000  0.00000  30.60693
+  orientation  0.00000  1.00000  0.00000  0.00000
+  ambientonly 0
+  ndynamictype 1
+  affectdynamic 1
+  shadow 1
+  lightpriority 5
+  fadingLight 1
+  radius 14.0
+  multiplier 1.0
+  color 0.00 0.00 0.00
+endnode
+node light krlht1_789ml2
+  parent krlht1_789
+  position  2.23000 -2.23000  27.60693
+  orientation  0.00000  1.00000  0.00000  0.00000
+  ambientonly 0
+  ndynamictype 1
+  affectdynamic 1
+  shadow 1
+  lightpriority 5
+  fadingLight 1
+  radius 14.0
+  multiplier 1.0
+  color 0.00 0.00 0.00
+endnode
+node dummy krlht1_789sl1
+  parent krlht1_789
+  position  3.00000 -3.00000  75.48077
+  orientation  0.00000  1.00000  0.00000  0.00000
+endnode
+node dummy krlht1_789sl2
+  parent krlht1_789
+  position  3.00000  3.00000  75.48077
+  orientation  0.00000  1.00000  0.00000  0.00000
+endnode
+endmodelgeom krlht1_789
+donemodel krlht1_789

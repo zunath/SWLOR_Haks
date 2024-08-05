@@ -1,0 +1,94 @@
+# NeverBlender 4.0.0|Blender 4.0.2|2023-12-26
+filedependancy Lehon.blend
+newmodel krlht1_678
+setsupermodel krlht1_678 null
+classification TILE
+setanimationscale 1.0
+beginmodelgeom krlht1_678
+node dummy krlht1_678
+  parent null
+endnode
+node aabb 678_wok
+  parent krlht1_678
+  position  0.00000  0.00000  0.00000
+  orientation  0.00000  1.00000  0.00000  0.00000
+  verts 3
+     5.00000 -5.00000  6.81223
+     4.64847 -5.00000  6.74763
+     5.00000 -4.93085  6.81102
+  tverts 3
+    -2.8093 -0.3331  0
+    -2.8972 -0.3504  0
+    -2.8093 -0.3504  0
+  faces 1
+    2 1 0 0  0 1 2 2
+  aabb  4.64847 -5.00000  6.74763   5.00000 -4.93085  6.81223   0
+endnode
+node trimesh Cliff01a.202
+  parent krlht1_678
+  position  0.00000  0.00000  0.00000
+  orientation  0.00000  1.00000  0.00000  0.00000
+  wirecolor 1.00 1.00 1.00
+  bitmap lun_rock05
+  texture1 null
+  texture2 null
+  shininess 0
+  ambient 1.00 1.00 1.00
+  diffuse 1.00 1.00 1.00
+  specular 0.00 0.00 0.00
+  selfillumcolor 0.00 0.00 0.00
+  render 1
+  shadow 1
+  tilefade 0
+  rotatetexture 0
+  verts 3
+     4.64847 -5.00000  6.74763
+     5.00000 -5.00000  6.81223
+     5.00000 -4.93085  6.81102
+  tverts 3
+    -2.8093 -0.3331  0
+    -2.8972 -0.3504  0
+    -2.8093 -0.3504  0
+  faces 1
+    2 0 1 1  0 1 2 0
+endnode
+node light krlht1_678ml1
+  parent krlht1_678
+  position  0.00000  0.00000  30.60693
+  orientation  0.00000  1.00000  0.00000  0.00000
+  ambientonly 0
+  ndynamictype 1
+  affectdynamic 1
+  shadow 1
+  lightpriority 5
+  fadingLight 1
+  radius 14.0
+  multiplier 1.0
+  color 0.00 0.00 0.00
+endnode
+node light krlht1_678ml2
+  parent krlht1_678
+  position  2.23000 -2.23000  27.60693
+  orientation  0.00000  1.00000  0.00000  0.00000
+  ambientonly 0
+  ndynamictype 1
+  affectdynamic 1
+  shadow 1
+  lightpriority 5
+  fadingLight 1
+  radius 14.0
+  multiplier 1.0
+  color 0.00 0.00 0.00
+endnode
+node dummy krlht1_678sl1
+  parent krlht1_678
+  position  3.00000 -3.00000  75.48077
+  orientation  0.00000  1.00000  0.00000  0.00000
+endnode
+node dummy krlht1_678sl2
+  parent krlht1_678
+  position  3.00000  3.00000  75.48077
+  orientation  0.00000  1.00000  0.00000  0.00000
+endnode
+endmodelgeom krlht1_678
+donemodel krlht1_678
