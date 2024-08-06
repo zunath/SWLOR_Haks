@@ -1,0 +1,87 @@
+# NeverBlender 4.0.0|Blender 4.0.2|2023-12-28
+filedependancy sfx_sun.blend
+newmodel sfx_sungen
+setsupermodel sfx_sungen null
+classification CHARACTER
+setanimationscale 1.0
+beginmodelgeom sfx_sungen
+node dummy sfx_sungen
+  parent null
+endnode
+node dummy sfx_sungen_raise
+  parent sfx_sungen
+  position  124.90361 -76.38550  65.79959
+  orientation  0.00000  1.00000  0.00000  0.00000
+endnode
+node emitter core
+  parent sfx_sungen_raise
+  position  0.00800  1.18000 -2.50000
+  orientation -1.00000 -0.00000 -0.00000  1.57080
+  xsize 0.00
+  ysize 0.00
+  update Fountain
+  render Normal
+  blend Lighten
+  spawntype 0
+  renderorder 0
+  birthrate 80
+  lifeexp 20.00
+  mass 0.00
+  velocity 0.80
+  randvel 0.10
+  particlerot 0.00
+  spread 6.11
+  splat 0
+  affectedbywind 0
+  colorstart 1.00 0.44 0.00
+  colorend 1.00 1.00 1.00
+  alphastart 0.90
+  alphaend 0.00
+  sizestart 10.00
+  sizeend 50.00
+  sizestart_y 0.00
+  sizeend_y 0.00
+  bounce 0
+  bounce_co 0.00
+  blurlength 200.00
+  deadspace 0.00
+  texture fxpa_flare
+  twosidedtex 0
+  m_istinted 0
+  xgrid 1
+  ygrid 1
+  fps 0
+  framestart 0
+  frameend 0
+  random 0
+  p2p 0
+  blastradius 0.00
+  blastlength 0.00
+  inherit 1
+  inheritvel 0
+  inherit_local 1
+  inherit_part 0
+endnode
+endmodelgeom sfx_sungen
+
+# ANIM ASCII
+newanim default sfx_sungen
+  length 1.067
+  transtime 0.0
+  animroot sfx_sungen
+  node dummy sfx_sungen
+    parent null
+  endnode
+  node dummy sfx_sungen_raise
+    parent sfx_sungen
+  endnode
+  node emitter core
+    parent sfx_sungen_raise
+    spreadkey 2
+       0.000 6.11
+       1.067 6.11
+    endlist
+  endnode
+doneanim default sfx_sungen
+
+donemodel sfx_sungen
