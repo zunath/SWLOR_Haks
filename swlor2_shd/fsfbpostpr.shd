@@ -172,6 +172,46 @@ vec4 CalculateTelegraphStrengthTotal(vec3 pixelPos)
     finalColor.rgb = mix(finalColor.rgb, GetTelegraphColor(data.colorType), strength);
     finalColor.a = max(finalColor.a, strength);
 
+	data = UnpackData(scriptableInt9);
+    strength = CalculateTelegraphColour(pixelPos, data.shapeType, scriptableVec17, scriptableVec18);
+    finalColor.rgb = mix(finalColor.rgb, GetTelegraphColor(data.colorType), strength);
+    finalColor.a = max(finalColor.a, strength);
+
+	data = UnpackData(scriptableInt10);
+    strength = CalculateTelegraphColour(pixelPos, data.shapeType, scriptableVec19, scriptableVec20);
+    finalColor.rgb = mix(finalColor.rgb, GetTelegraphColor(data.colorType), strength);
+    finalColor.a = max(finalColor.a, strength);
+
+	data = UnpackData(scriptableInt11);
+    strength = CalculateTelegraphColour(pixelPos, data.shapeType, scriptableVec21, scriptableVec22);
+    finalColor.rgb = mix(finalColor.rgb, GetTelegraphColor(data.colorType), strength);
+    finalColor.a = max(finalColor.a, strength);
+
+	data = UnpackData(scriptableInt12);
+    strength = CalculateTelegraphColour(pixelPos, data.shapeType, scriptableVec23, scriptableVec24);
+    finalColor.rgb = mix(finalColor.rgb, GetTelegraphColor(data.colorType), strength);
+    finalColor.a = max(finalColor.a, strength);
+
+	data = UnpackData(scriptableInt13);
+    strength = CalculateTelegraphColour(pixelPos, data.shapeType, scriptableVec25, scriptableVec26);
+    finalColor.rgb = mix(finalColor.rgb, GetTelegraphColor(data.colorType), strength);
+    finalColor.a = max(finalColor.a, strength);
+
+	data = UnpackData(scriptableInt14);
+    strength = CalculateTelegraphColour(pixelPos, data.shapeType, scriptableVec27, scriptableVec28);
+    finalColor.rgb = mix(finalColor.rgb, GetTelegraphColor(data.colorType), strength);
+    finalColor.a = max(finalColor.a, strength);
+
+	data = UnpackData(scriptableInt15);
+    strength = CalculateTelegraphColour(pixelPos, data.shapeType, scriptableVec29, scriptableVec30);
+    finalColor.rgb = mix(finalColor.rgb, GetTelegraphColor(data.colorType), strength);
+    finalColor.a = max(finalColor.a, strength);
+
+	data = UnpackData(scriptableInt16);
+    strength = CalculateTelegraphColour(pixelPos, data.shapeType, scriptableVec31, scriptableVec32);
+    finalColor.rgb = mix(finalColor.rgb, GetTelegraphColor(data.colorType), strength);
+    finalColor.a = max(finalColor.a, strength);
+
     return finalColor;
 }
 
