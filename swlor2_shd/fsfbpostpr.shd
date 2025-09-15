@@ -1,0 +1,188 @@
+#define SHADER_TYPE 2
+
+const int TELEGRAPH_SHAPE_NONE = 0;
+const int TELEGRAPH_SHAPE_SPHERE = 1;
+const int TELEGRAPH_SHAPE_CONE = 2;
+const int TELEGRAPH_SHAPE_LINE = 3;
+
+const int COLOR_HOSTILE = 0;
+const int COLOR_SELF = 1;
+const int COLOR_FRIENDLY = 2;
+const int COLOR_ENEMY_BENEFICIAL = 3;
+
+#include "inc_target"
+#include "inc_postpr"
+#include "inc_scriptable"
+
+vec3 GetTelegraphColor(int colorType)
+{
+    if (colorType == COLOR_HOSTILE) return vec3(1.0, 0.0, 0.0); // Red
+    if (colorType == COLOR_SELF) return vec3(0.0, 0.0, 1.0); // Blue
+    if (colorType == COLOR_FRIENDLY) return vec3(0.0, 1.0, 0.0); // Green
+    if (colorType == COLOR_ENEMY_BENEFICIAL) return vec3(0.66, 0.66, 0.66); // Gray
+    return vec3(1.0, 1.0, 1.0); // Default White
+}
+
+struct ShapeColorData 
+{
+    int shapeType;
+    int colorType;
+};
+
+ShapeColorData UnpackData(int packedData)
+{
+    ShapeColorData result;
+    result.shapeType = (packedData >> 8) & 0xFF; // Extract shape type (top 8 bits)
+    result.colorType = packedData & 0xFF; // Extract color type (bottom 8 bits)
+    return result;
+}
+
+float CalculateLineFraction(vec2 origin, float rotation, float lineLength, vec2 point)
+{
+    float rads = radians(rotation + 90.0);
+    vec2 direction = vec2(cos(rads), sin(rads));
+    vec2 originToPoint = point - origin;
+    vec2 projectedPoint = origin + direction * dot(originToPoint, direction);
+    return length(projectedPoint - origin) / lineLength;
+}
+
+vec2 Rotate(vec2 pos, float angle)
+{ 
+    float radian = radians(-angle);
+    float s = sin(radian);
+    float c = cos(radian);
+    return vec2(c * pos.x - s * pos.y, s * pos.x + c * pos.y);
+}
+
+float GetThrobStrength(float base, float speed)
+{
+    return base + (1.0 + sin(float(worldtimerTimeOfDay) / speed)) * 0.5 * (1.0 - base);
+}
+
+float CalculateTelegraphColour(vec3 pixelPos, int shapeType, vec4 data1, vec4 data2)
+{
+    const float borderWidth = 0.025;
+    const float strengthEmpty = 0.25;
+    const float strengthFull = 0.75;
+    const float strengthBorder = strengthFull;
+    float strengthThrob = GetThrobStrength(strengthBorder, 300.0);
+
+    int currentTime = scriptableInt16;
+
+    vec3 origin = data1.xyz;
+    float rotation = data1.w;  
+    float startTime = data2.x;
+    float endTime = data2.y;
+    float sizeX = data2.z;
+    float sizeY = data2.w;
+
+    float interp = min(1.0, (currentTime - startTime) / (endTime - startTime));  
+    float sizeXCurrent = mix(0.0, sizeX, interp); 
+    float sizeYCurrent = mix(0.0, sizeY, interp);
+
+    vec3 originToPixel = pixelPos - origin;
+    float originToPixelDist = length(originToPixel);
+
+    float strength = 0.0;
+
+    if (shapeType == TELEGRAPH_SHAPE_SPHERE)
+    {   
+        float distToSphere = originToPixelDist;
+        float outerStrength = distToSphere > sizeX ? 0.0 : strengthEmpty;
+        float outerBorderStrength = distToSphere > sizeX || distToSphere < sizeX - borderWidth ? 0.0 : strengthThrob;
+        float innerStrength = distToSphere > sizeXCurrent ? 0.0 : strengthFull;
+        strength = max(outerStrength, max(outerBorderStrength, innerStrength));
+    }
+    else if (shapeType == TELEGRAPH_SHAPE_CONE)
+    {
+        const float sin30Degrees = 0.50000019433;
+        const float cos30Degrees = 0.86602529158;
+        float distToCone = distanceToCone(vec3(Rotate(originToPixel.xy, rotation+90.0), originToPixel.z), vec2(sin30Degrees, cos30Degrees), sizeX);
+        float distStrength = CalculateLineFraction(origin.xy, rotation+90.0, sizeX, pixelPos.xy) >= interp ? strengthEmpty : strengthFull;
+        strength = distToCone > 0.0 ? 0.0 : (distToCone > -borderWidth ? strengthThrob : distStrength);
+    }
+    else if (shapeType == TELEGRAPH_SHAPE_LINE)
+	{
+		vec2 direction = vec2(cos(radians(rotation)), sin(radians(rotation))); // Ensure correct facing
+		vec2 startPos = origin.xy; 
+		vec2 endPos = startPos + direction * sizeX; // Extend the line from origin
+
+		// Project point onto the line
+		vec2 originToPixel = pixelPos.xy - startPos;
+		float projection = dot(originToPixel, direction);
+		vec2 projectedPoint = startPos + direction * projection;
+
+		float distAlongLine = projection;
+		float distFromCenter = length(pixelPos.xy - projectedPoint);
+
+		float withinLength = (distAlongLine >= 0.0 && distAlongLine <= sizeX) ? 1.0 : 0.0;
+		float withinWidth = (distFromCenter <= sizeY * 0.5) ? 1.0 : 0.0;
+		float borderEffect = (distFromCenter > sizeY * 0.5 - borderWidth) ? strengthThrob : strengthFull;
+
+		strength = withinLength * withinWidth * borderEffect;
+	}
+
+    return strength;
+}
+
+vec4 CalculateTelegraphStrengthTotal(vec3 pixelPos)
+{
+    vec4 finalColor = vec4(0.0);
+
+    float strength;
+	ShapeColorData data;
+	
+	data = UnpackData(scriptableInt1);
+    strength = CalculateTelegraphColour(pixelPos, data.shapeType, scriptableVec1, scriptableVec2);
+    finalColor.rgb = mix(finalColor.rgb, GetTelegraphColor(data.colorType), strength);
+    finalColor.a = max(finalColor.a, strength);
+
+	data = UnpackData(scriptableInt2);
+    strength = CalculateTelegraphColour(pixelPos, data.shapeType, scriptableVec3, scriptableVec4);
+    finalColor.rgb = mix(finalColor.rgb, GetTelegraphColor(data.colorType), strength);
+    finalColor.a = max(finalColor.a, strength);
+
+	data = UnpackData(scriptableInt3);
+    strength = CalculateTelegraphColour(pixelPos, data.shapeType, scriptableVec5, scriptableVec6);
+    finalColor.rgb = mix(finalColor.rgb, GetTelegraphColor(data.colorType), strength);
+    finalColor.a = max(finalColor.a, strength);
+
+	data = UnpackData(scriptableInt4);
+    strength = CalculateTelegraphColour(pixelPos, data.shapeType, scriptableVec7, scriptableVec8);
+    finalColor.rgb = mix(finalColor.rgb, GetTelegraphColor(data.colorType), strength);
+    finalColor.a = max(finalColor.a, strength);
+
+	data = UnpackData(scriptableInt5);
+    strength = CalculateTelegraphColour(pixelPos, data.shapeType, scriptableVec9, scriptableVec10);
+    finalColor.rgb = mix(finalColor.rgb, GetTelegraphColor(data.colorType), strength);
+    finalColor.a = max(finalColor.a, strength);
+
+	data = UnpackData(scriptableInt6);
+    strength = CalculateTelegraphColour(pixelPos, data.shapeType, scriptableVec11, scriptableVec12);
+    finalColor.rgb = mix(finalColor.rgb, GetTelegraphColor(data.colorType), strength);
+    finalColor.a = max(finalColor.a, strength);
+
+	data = UnpackData(scriptableInt7);
+    strength = CalculateTelegraphColour(pixelPos, data.shapeType, scriptableVec13, scriptableVec14);
+    finalColor.rgb = mix(finalColor.rgb, GetTelegraphColor(data.colorType), strength);
+    finalColor.a = max(finalColor.a, strength);
+
+	data = UnpackData(scriptableInt8);
+    strength = CalculateTelegraphColour(pixelPos, data.shapeType, scriptableVec15, scriptableVec16);
+    finalColor.rgb = mix(finalColor.rgb, GetTelegraphColor(data.colorType), strength);
+    finalColor.a = max(finalColor.a, strength);
+
+    return finalColor;
+}
+
+void main()
+{
+    vec3 pixelPos = (m_view_inv * vec4(GetViewPositionFromDepth(vVertexTexCoords, GetDepth(vVertexTexCoords)), 1.0)).xyz;
+    vec4 telegraphEffect = CalculateTelegraphStrengthTotal(pixelPos);
+
+    gl_FragColor = FS_PostProcess();
+
+    // Apply telegraph color blending
+    gl_FragColor.rgb = mix(gl_FragColor.rgb, telegraphEffect.rgb, telegraphEffect.a);
+    gl_FragColor.a = 1.0;
+}
