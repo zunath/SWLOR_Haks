@@ -1,0 +1,85 @@
+# NeverBlender 4.1.0|Blender 4.0.2|2025-09-12
+filedependancy Help.blend
+newmodel ASWTOR_100
+setsupermodel ASWTOR_100 null
+classification CHARACTER
+setanimationscale 1.0
+beginmodelgeom ASWTOR_100
+node dummy ASWTOR_100
+  parent null
+endnode
+node dummy OR_100_ground
+  parent ASWTOR_100
+  position  0.00000  0.00000  0.00000
+  orientation  0.00000  1.00000  0.00000  0.00000
+endnode
+node dummy OR_100_hand
+  parent ASWTOR_100
+  position  0.00000  5.00000  0.03000
+  orientation  0.00000  1.00000  0.00000  0.00000
+endnode
+node dummy OR_100_head_hit
+  parent ASWTOR_100
+  position  0.00000  0.00000  0.10000
+  orientation  0.00000  1.00000  0.00000  0.00000
+endnode
+node dummy OR_100_impact
+  parent ASWTOR_100
+  position  0.00000  0.00000  0.03000
+  orientation  0.00000  1.00000  0.00000  0.00000
+endnode
+node trimesh Plane.016
+  parent ASWTOR_100
+  position  0.00000  0.00000  0.00000
+  orientation  0.00000  1.00000  0.00000  0.00000
+  wirecolor 1.00 1.00 1.00
+  bitmap ASWTOR_078
+  shininess 1
+  ambient 1.00 1.00 1.00
+  diffuse 1.00 1.00 1.00
+  specular 0.00 0.00 0.00
+  selfillumcolor 0.00 0.00 0.00
+  render 1
+  shadow 0
+  tilefade 0
+  verts 9
+    -5.00000 -5.00000  0.02000
+     5.00000 -5.00000  0.02000
+    -5.00000  5.00000  0.02000
+     5.00000  5.00000  0.02000
+    -5.00000  0.00000  0.02000
+     5.00000  0.00000  0.02000
+     0.00000 -5.00000  0.02000
+     0.00000  5.00000  0.02000
+     0.00000  0.00000  0.02000
+  tverts 4
+     0.0078  0.9998  0
+     0.3038  0.6955  0
+     0.3038  0.9998  0
+     0.0078  0.6955  0
+  faces 8
+    5 7 8 1  0 1 2 0
+    1 8 6 1  3 2 1 0
+    6 4 0 1  1 0 3 0
+    8 2 4 1  2 3 0 0
+    5 3 7 2  0 3 1 0
+    1 5 8 2  3 0 2 0
+    6 8 4 2  1 2 0 0
+    8 7 2 2  2 1 3 0
+endnode
+endmodelgeom ASWTOR_100
+donemodel ASWTOR_100
+.00000  0.00000  1.00000
+     0.00000  0.00000  1.00000
+  faces 8
+    5 7 8 1  0 1 2 0
+    1 8 6 1  3 2 1 0
+    6 4 0 1  1 0 3 0
+    8 2 4 1  2 3 0 0
+    5 3 7 1  0 3 1 0
+    1 5 8 1  3 0 2 0
+    6 8 4 1  1 2 0 0
+    8 7 2 1  2 1 3 0
+endnode
+endmodelgeom ASWTOR_100
+donemodel ASWTOR_100

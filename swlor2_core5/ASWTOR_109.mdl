@@ -1,0 +1,81 @@
+# NeverBlender 4.1.0|Blender 4.0.2|2025-11-07
+filedependancy Help.blend
+newmodel ASWTOR_109
+setsupermodel ASWTOR_109 null
+classification CHARACTER
+setanimationscale 1.0
+beginmodelgeom ASWTOR_109
+node dummy ASWTOR_109
+  parent null
+endnode
+node dummy OR_109_ground
+  parent ASWTOR_109
+  position  0.00000  0.00000  0.00000
+  orientation  0.00000  1.00000  0.00000  0.00000
+endnode
+node dummy OR_109_hand
+  parent ASWTOR_109
+  position  0.00000  10.00000  0.03000
+  orientation  0.00000  1.00000  0.00000  0.00000
+endnode
+node dummy OR_109_head_hit
+  parent ASWTOR_109
+  position  0.00000  0.00000  0.10000
+  orientation  0.00000  1.00000  0.00000  0.00000
+endnode
+node dummy OR_109_impact
+  parent ASWTOR_109
+  position  0.00000  0.00000  0.03000
+  orientation  0.00000  1.00000  0.00000  0.00000
+endnode
+node trimesh Plane.021
+  parent ASWTOR_109
+  position  0.00000  0.00000  0.00000
+  orientation  0.00000  1.00000  0.00000  0.00000
+  wirecolor 1.00 1.00 1.00
+  bitmap ASWTOR_125
+  shininess 1
+  ambient 1.00 1.00 1.00
+  diffuse 1.00 1.00 1.00
+  specular 0.00 0.00 0.00
+  selfillumcolor 0.00 0.00 0.00
+  render 1
+  shadow 0
+  tilefade 0
+  verts 9
+    -10.00000  10.00000  0.02000
+    -10.00000 -10.00000  0.02000
+    -10.00000  0.00000  0.02000
+     0.00000 -10.00000  0.02000
+     10.00000 -10.00000  0.02000
+     10.00000  0.00000  0.02000
+     0.00000  0.00000  0.02000
+     0.00000  10.00000  0.02000
+     10.00000  10.00000  0.02000
+  tverts 4
+     1.0000  0.0066  0
+     0.0000  0.9987  0
+     0.0000  0.0066  0
+     1.0000  0.9987  0
+  normals 9
+     0.00000  0.00000  1.00000
+     0.00000  0.00000  1.00000
+     0.00000  0.00000  1.00000
+     0.00000  0.00000  1.00000
+     0.00000  0.00000  1.00000
+     0.00000  0.00000  1.00000
+     0.00000  0.00000  1.00000
+     0.00000  0.00000  1.00000
+     0.00000  0.00000  1.00000
+  faces 8
+    6 0 2 1  0 1 2 0
+    3 2 1 1  0 1 2 0
+    4 6 3 1  0 1 2 0
+    5 7 6 1  0 1 2 0
+    6 7 0 1  0 3 1 0
+    3 6 2 1  0 3 1 0
+    4 5 6 1  0 3 1 0
+    5 8 7 1  0 3 1 0
+endnode
+endmodelgeom ASWTOR_109
+donemodel ASWTOR_109
