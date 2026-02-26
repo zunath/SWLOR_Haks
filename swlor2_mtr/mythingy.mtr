@@ -1,0 +1,20 @@
+customshaderVS vslit_nm  
+#customshaderFS fslit_nm
+customshaderFS fsFlowmap
+
+renderhint NormalTangents
+ 
+// Textures 
+texture0 mythingy
+texture1 null
+texture2 null
+texture3 null
+texture4 null
+texture5 mythingy_i
+texture6 flow_south
+
+
+##override the flow speed of the shader here
+parameter float fSlideSpeed 0.15
+transparency 1
+parameter float fMixingTime 15.0
