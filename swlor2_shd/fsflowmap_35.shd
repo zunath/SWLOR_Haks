@@ -1,0 +1,289 @@
+//=============================================================================
+//
+// fsFlowmap.shd
+// 
+// Takes the RG channels of a normal map or custom flow map and uses them
+// as xy flow offsets to a base flow vector. R > 0.5 is right. G > 0.5 is up.
+//
+// Supply your RG flow map in texture6 of the associated mtr file.
+// Use customshadervs vslitc_sm_nm
+// And customshaderfs fsFlowmap
+// on top of your material file
+//
+// This version has special features for preview .35
+// including offering transparency to dynamic objects
+//
+//=============================================================================
+
+#define SHADER_TYPE 2
+
+#define FOG 1
+#define KEYHOLING 0
+#define LIGHTING 1
+
+#define NORMAL_MAP 1
+#define SPECULAR_MAP 0
+#define ROUGHNESS_MAP 0
+#define HEIGHT_MAP 1
+#define SELF_ILLUMINATION_MAP 0
+#define ENVIRONMENT_MAP 0
+
+#define FLOWMAP_SHADER 1
+
+//added for preview .35 and above
+#define FORCE_ALLOW_DISCARD 1
+
+#include "inc_standard"
+
+//remove world timer for preview .35 and above
+#if ((BUILD_VERSION == 8193) && (BUILD_REVISION < 35)) || (BUILD_VERSION < 8193)
+	uniform int worldtimerTimeOfDay;
+#endif
+
+
+
+
+uniform sampler2D texUnit6;
+uniform float fSlideSpeed;
+
+//----------------------------------------------
+//            BEGIN CUSTOM VARIABLES
+//----------------------------------------------
+
+//Use this to mix in your flow map with the base slide speed
+//Most flow maps are very high saturation which can cause a problem with this mixing method
+//Suggested values in the thousandths when used with a base speed above
+float fFlowMapMod = 1.0;
+
+//Use this to change the mixing time between the two sliding phases
+//Short times will appear to flash. Long times may appear to blur.
+float fMixingTime = 5.0;
+
+//Use this to force an alpha threshold for preview version 8193.35 or above
+//A value of 0.0 with the new late-sorted transparency flag works best
+float fAlphaMinThreshold = 0.0;
+
+//----------------------------------------------
+//              END CUSTOM VARIABLES
+//----------------------------------------------
+
+//special for preview .35 and above
+#if ((BUILD_VERSION == 8193) && (BUILD_REVISION >= 35)) || (BUILD_VERSION > 8193)
+	void md_AlphaDiscard(float fAlpha) {
+		if (fAlpha <= fAlphaMinThreshold) discard;
+	}
+#endif
+
+void SetupFlowmapShaderInputs()
+{
+	#if LIGHTING == 1
+		FragmentColor.a *= materialFrontDiffuse.a;
+	#endif
+
+	#if NO_TEXTURE == 1 || ENVIRONMENT_MAP == 1
+		#if ((BUILD_VERSION == 8193) && (BUILD_REVISION >= 35)) || (BUILD_VERSION > 8193)
+			md_AlphaDiscard(FragmentColor.a);
+		#else
+			AlphaDiscard(FragmentColor.a);
+		#endif
+	#endif
+
+	#if POSITION_VIEW == 1
+		#if VERTEX_NORMAL == 1
+			// We need to normalize due to interpolation etc.
+			vSurfaceNormal = normalize(gl_FrontFacing ? vVertexNormal : -vVertexNormal);
+			vFragmentNormal = vSurfaceNormal;
+		#endif
+		
+		// Used for both specular light, height and environment map.
+		#if HEIGHT_MAP == 1 || (ENVIRONMENT_MAP == 1 && FRAGMENT_NORMAL == 1) || LIGHTING == 1 || SPECULAR_LIGHT == 1
+			SetupViewToSurfaceNormal();
+		#endif
+		
+	#endif
+
+	#if NO_TEXTURE != 1
+
+		vec4 MainTextureColor;
+			
+		vTexCoords = vVertexTexCoords.xy;
+		
+		//mod for flowmap shader
+		//get just the decimal portion of the tick
+		float fTick = worldtimerTimeOfDay/1000.0;
+		
+		vec2 vFlowMap = fFlowMapMod * texture2D(texUnit6, vTexCoords).rg * 2.0 - 1.0;
+
+        // Use two cycles, offset by a half so we can blend between them
+        float t1 = fTick / fMixingTime;
+        float t2 = t1 + 0.5*fMixingTime;
+        float cycleTime1 = t1 - floor(t1);
+        float cycleTime2 = t2 - floor(t2);
+        vec2 flowDirection1 = vFlowMap * cycleTime1;
+        vec2 flowDirection2 = vFlowMap * cycleTime2;
+				
+        vec2 uv1 = vTexCoords - fSlideSpeed*flowDirection1;
+        vec2 uv2 = vTexCoords - fSlideSpeed*flowDirection2;
+		
+		float fMixFactor = abs(cycleTime1 - 0.5) * 2.0;
+        //end mod for flowmap shader
+		
+		
+		// Setup tangent space basis.
+		#if NORMAL_MAP == 1 || HEIGHT_MAP == 1
+
+			if(
+			#if HEIGHT_MAP == 1
+				texture4Bound != 0 || 
+			#endif
+			#if NORMAL_MAP == 1
+				texture1Bound != 0 ||
+			#endif
+				false // allows adding the || operator in the above checks.
+				)
+			{
+				mat3 mTSB = SetupTSB();
+				
+				#if HEIGHT_MAP == 1
+					if(texture4Bound != 0)
+					{
+						//mod for flowmap shader
+						DisplaceTextureCoords(uv1, texUnit4, mTSB);
+						DisplaceTextureCoords(uv2, texUnit4, mTSB);
+						//end mod for flowmap shader
+					}
+				#endif
+
+				//mod for flowmap shader
+				#if NORMAL_MAP == 1 && LIGHTING == 1
+					if(texture1Bound != 0)
+					{
+						vec3 n1 = vec3(0.0);
+						vec3 n2 = vec3(0.0);
+						
+						n1.xy = texture2D(texUnit1, uv1).rg * 2.0 - 1.0;
+						n1.z = sqrt(max(1.0 - dot(n1.xy, n1.xy),0.0));
+						n1.xy = transpose(mat2(m_texture)) * n1.xy;
+						n1 = mTSB * n1;
+
+						n2.xy = texture2D(texUnit1, uv2).rg * 2.0 - 1.0;
+						n2.z = sqrt(max(1.0 - dot(n2.xy, n2.xy),0.0));
+						n2.xy = transpose(mat2(m_texture)) * n2.xy;
+						n2 = mTSB * n2;
+						
+						vFragmentNormal = mix(n1, n2, fMixFactor);
+
+					}
+				#endif
+				//end mod for flowmap shader
+			}
+		#endif
+		
+		// Check for compatibility alone as texture0Bound is not set for certain elements.
+		if(texture0Bound == 0)
+		{ 
+			#if ENVIRONMENT_MAP == 1
+				MainTextureColor.rgb = vec3(0.666667, 0.666667, 0.666667);
+				fEnvMapLevel = 1.0;	
+			#else
+				MainTextureColor = COLOR_WHITE;
+			#endif
+		}
+		else
+		{
+			//mod for flowmap shader
+			vec4 color1 = texture2D(texUnit0, uv1);
+			vec4 color2 = texture2D(texUnit0, uv2);
+			
+			MainTextureColor = mix( color1, color2, fMixFactor);
+			//end mod for flowmap shader
+		
+			#if ENVIRONMENT_MAP == 1
+
+				fEnvMapLevel = 1.0-MainTextureColor.a;
+
+				#if FRAGMENT_LIGHTING == 1 && LIGHTING == 1
+					MainTextureColor.rgb = mix(MainTextureColor.rgb, vec3(0.666667, 0.666667, 0.666667), fEnvMapLevel);									
+				#endif
+
+			#endif
+			
+			MainTextureColor = ApplyColorSpace(MainTextureColor);
+		}
+				
+		// Only do this for vertex lighting - otherwise we apply environment maps as specular light instead.
+		#if ENVIRONMENT_MAP == 1
+				
+			#if SPECULAR_LIGHT != 1
+			
+				vec3 vTexEnvironment;
+				// If not normal mapped, we can use the coordinates from the vertex shader instead.
+				#if FRAGMENT_NORMAL != 1
+					if(envMapCube == 1)
+					{
+						vTexEnvironment = SampleEnvironmentMapCube(vVertexTexCoordsEnvironmentCube, 0.0);
+					}
+					else
+					{
+						vTexEnvironment = SampleEnvironmentMap(vVertexTexCoordsEnvironment, 0.0);
+					}
+				#else
+					if(envMapCube == 1)
+					{
+						vTexEnvironment = SampleEnvironmentMapCube(CalculateEnvironmentTexCoordsCube(vFragmentNormal), 0.0);
+					}
+					else
+					{
+						vTexEnvironment = SampleEnvironmentMap(CalculateEnvironmentTexCoords(vFragmentNormal), 0.0);
+					}
+				#endif 
+			
+				MainTextureColor.rgb = mix(MainTextureColor.rgb, vTexEnvironment.rgb, fEnvMapLevel);
+
+			#endif
+
+			FragmentColor.rgb *= MainTextureColor.rgb;
+		
+		#else
+
+			FragmentColor *= MainTextureColor;
+
+			#if ((BUILD_VERSION == 8193) && (BUILD_REVISION >= 35)) || (BUILD_VERSION > 8193)
+				md_AlphaDiscard(FragmentColor.a);
+			#else
+				AlphaDiscard(FragmentColor.a);
+			#endif
+
+		#endif
+
+	#endif
+
+	#if LIGHTING == 1
+
+		#if HEIGHT_MAP == 1
+			if(texture4Bound!=0)
+			{
+				SetupOcclusionFromTexture(vTexCoords, texUnit4);
+			}
+			else
+			{
+				SetupOcclusionBase();
+			}
+		#endif 
+
+		#if (FRAGMENT_LIGHTING == 1 || NORMAL_MAP == 1) && SPECULAR_LIGHT == 1
+		
+			SetupSpecularity(FragmentColor.rgb * materialFrontDiffuse.rgb);
+				
+		#endif
+
+	#endif
+}
+
+void main ()
+{
+    FragmentColor = vec4(1.0);	
+ 	SetupFlowmapShaderInputs();
+    ApplyStandardShader();
+    gl_FragColor = FragmentColor;
+}
