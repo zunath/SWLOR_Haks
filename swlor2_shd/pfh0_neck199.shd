@@ -17,21 +17,16 @@
 
 #include "inc_standard"
 
+
 void main ()
 {
     FragmentColor = vec4(1.0);
-    SetupStandardShaderInputs();
-
-    // Read cutout alpha from the PLT itself.
-    float fAlphaFromTexture = texture2D(texUnit0, vTexCoords.xy).a;
-
-    if (fAlphaFromTexture < 0.20)
+	SetupStandardShaderInputs();
+    float fAlphaFromTexture = texture2D(texUnit1, vTexCoords.xy).a;
+    if (fAlphaFromTexture < 0.2)
     {
         discard;
     }
-
     ApplyStandardShader();
-
-    // Hard cutout: surviving pixels render fully opaque.
-    gl_FragColor = vec4(FragmentColor.rgb, 1.0);
+    gl_FragColor = vec4(FragmentColor.rgb, fAlphaFromTexture);
 }
