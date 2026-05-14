@@ -1,299 +1,648 @@
 2DA V2.0
 
-      Name       Label                                Cost   
-0     ****       ****                                 ****   
-1   ****   ****   ****   ****
-2     ****       ****                                 0
-3   ****   ****   ****   ****
-4   ****   ****   ****   ****
-5   ****   ****   ****   ****
-6   ****   ****   ****   ****
-7   ****   ****   ****   ****
-8   ****   ****   ****   ****
-9   ****   ****   ****   ****
-10   ****   ****   ****   ****
-11   ****   ****   ****   ****
-12   ****   ****   ****   ****
-13   ****   ****   ****   ****
-14   ****   ****   ****   ****
-15   ****   ****   ****   ****
-16   ****   ****   ****   ****
-17   ****   ****   ****   ****
-18   ****   ****   ****   ****
-19   ****   ****   ****   ****
-20    16872238   ForceLeap                            0      
-21   ****   ****   ****   ****
-22   ****   ****   ****   ****
-23   ****   ****   ****   ****
-24   ****   ****   ****   ****
-25   ****   ****   ****   ****
-26   ****   ****   ****   ****
-27   ****   ****   ****   ****
-28   ****   ****   ****   ****
-29   ****   ****   ****   ****
-30   ****   ****   ****   ****
-31   ****   ****   ****   ****
-32   ****   ****   ****   ****
-33   ****   ****   ****   ****
-34   ****   ****   ****   ****
-35   ****   ****   ****   ****
-36   ****   ****   ****   ****
-37   ****   ****   ****   ****
-38   ****   ****   ****   ****
-39   ****   ****   ****   ****
-40   ****   ****   ****   ****
-41   ****   ****   ****   ****
-42   ****   ****   ****   ****
-43   ****   ****   ****   ****
-44   ****   ****   ****   ****
-45   ****   ****   ****   ****
-46   ****   ****   ****   ****
-47   ****   ****   ****   ****
-48   ****   ****   ****   ****
-49   ****   ****   ****   ****
-50   ****   ****   ****   ****
-51   ****   ****   ****   ****
-52   ****   ****   ****   ****
-53   ****   ****   ****   ****
-54   ****   ****   ****   ****
-55   ****   ****   ****   ****
-56   ****   ****   ****   ****
-57   ****   ****   ****   ****
-58   ****   ****   ****   ****
-59   ****   ****   ****   ****
-60   ****   ****   ****   ****
-61   ****   ****   ****   ****
-62   ****   ****   ****   ****
-63   ****   ****   ****   ****
-64   ****   ****   ****   ****
-65   ****   ****   ****   ****
-66   ****   ****   ****   ****
-67   ****   ****   ****   ****
-68   ****   ****   ****   ****
-69   ****   ****   ****   ****
-70   ****   ****   ****   ****
-71   ****   ****   ****   ****
-72   ****   ****   ****   ****
-73   ****   ****   ****   ****
-74   ****   ****   ****   ****
-75   ****   ****   ****   ****
-76   ****   ****   ****   ****
-77   ****   ****   ****   ****
-78   ****   ****   ****   ****
-79   ****   ****   ****   ****
-80   ****   ****   ****   ****
-81   ****   ****   ****   ****
-82   ****   ****   ****   ****
-83   ****   ****   ****   ****
-84   ****   ****   ****   ****
-85   ****   ****   ****   ****
-86   ****   ****   ****   ****
-87   ****   ****   ****   ****
-88   ****   ****   ****   ****
-89   ****   ****   ****   ****
-90   ****   ****   ****   ****
-91   ****   ****   ****   ****
-92   ****   ****   ****   ****
-93   ****   ****   ****   ****
-94   ****   ****   ****   ****
-95    16872313   ForcePush                            0      
-96    ****   ****   ****
-97    ****   ****   ****
-98    ****   ****   ****
-99    16872317   ComprehendSpeech                     0      
-100   ****   ****   ****
-101   16872319   MindTrick                            0      
-102   ****   ****   ****   ****
-103   ****   ****   ****   ****
-104   ****   ****   ****   ****
-105   ****   ****   ****   ****
-106   ****   ****   ****   ****
-107   ****   ****   ****   ****
-108   ****   ****   ****   ****
-109   ****   ****   ****   ****
-110   ****   ****   ****   ****
-111   ****   ****   ****   ****
-112   ****   ****   ****   ****
-113   ****   ****   ****   ****
-114   ****   ****   ****   ****
-115   16859881   Resuscitation                        0      
-116   16872334   Starships                            0      
-117   16872335   DefensiveModules                     0      
-118   16872336   OffensiveModules                     0      
-119   16872337   EnergyManagement                     0      
-120   16872338   MiningModules                        0      
-121   16872339   StarshipMining                       0      
-122   ****   ****   ****
-123   ****   ****   ****
-124   16872342   MedKit                               0      
-125   16859882   TreatmentKit                         0      
-126   16859883   Shielding                            0      
-127   16872345   WeaponBlueprints                  0      
-128   ****       ****                  0      
-129   ****       ****                    0      
-130   ****       ****                     0      
-131   16859935   CityManagement                       0      
-132   16872350   ArmorBlueprints                      0      
-133   16872351   AccessoryBlueprints                  0      
-134   16859936   Upkeep                               0      
-135   ****   ****   ****   ****
-136   16859948   RapidSynthesisSmithery               0      
-137   16859949   CarefulSynthesisSmithery             0      
-138   16859950   BasicTouchSmithery                   0      
-139   16859951   StandardTouchSmithery                0      
-140   16859952   PreciseTouchSmithery                 0      
-141   16859953   MastersMendSmithery                  0      
-142   16859954   SteadyHandSmithery                   0      
-143   16859955   MuscleMemorySmithery                 0      
-144   16859956   VenerationSmithery                   0      
-145   16859957   WasteNotSmithery                     0      
-146   16859958   RapidSynthesisFabrication            0      
-147   16859959   CarefulSynthesisFabrication          0      
-148   16859960   BasicTouchFabrication                0      
-149   16872367   FurnitureBlueprints                  0      
-150   16872368   StructureBlueprints                  0      
-151   ****   ****   ****   ****
-152   16872369   StarshipBlueprints                   0      
-153   16859961   StandardTouchFabrication             0      
-154   16859962   PreciseTouchFabrication              0      
-155   16859963   MastersMendFabrication               0      
-156   16859964   SteadyHandFabrication                0      
-157   16872375   Harvesting                           0      
-158   16872376   Refining                             0      
-159   16872377   RefineryManagement                   0      
-160   16872378   Scavenging                           0      
-161   16872379   HardLook                             0      
-162   ****   ****   ****
-163   ****   ****   ****
-164   16872382   ForceBody                            0      
-165   16872383   DrainLife                            0      
-166   16872384   ForceLightning                       0      
-167   ****   ****   ****
-168   ****   ****   ****   ****
-169   16872387   BactaRecovery                        0      
-170   ****   ****   ****
-171   ****   ****   ****
-172   16872390   Provoke                              0      
-173   ****   ****   ****   ****
-174   ****   ****   ****   ****
-175   ****   ****   ****   ****
-176   16872394   ForceDrain                           0      
-177   16859965   MuscleMemoryFabrication              0      
-178   16859966   VenerationFabrication                0      
-179   16859967   WasteNotFabrication                  0      
-180   ****   ****   ****   ****
-181   16872214   TreasureHunter                       0      
-182   16872215   CreditFinder                         0      
-183   16860000   RapidSynthesisCooking                0      
-184   16860001   CarefulSynthesisCooking              0      
-185   16860002   BasicTouchCooking                    0      
-186   16860003   StandardTouchCooking                 0      
-187   16860004   PreciseTouchCooking                  0      
-188   16860005   MastersMendCooking                   0      
-189   16860006   SteadyHandCooking                    0      
-190   16860007   MuscleMemoryCooking                  0      
-191   16860008   VenerationCooking                    0      
-192   16860009   WasteNotCookinng                     0      
-193   16872200   CookingRecipes                       0      
-194   16860040   RapidSynthesisEngineering            0      
-195   16860041   CarefulSynthesisEngineerinng         0      
-196   16860042   BasicTouchEngineering                0      
-197   16860043   StandardTouchEngineering             0      
-198   16860044   PreciseTouchEngineering              0      
-199   16860045   MastersMendEngineering               0      
-200   16860046   SteadyHandEngineering                0      
-201   16860047   MuscleMemoryEngineering              0      
-202   16860048   VenerationEngineering                0      
-203   16860049   WasteNotEngineering                  0      
-204   16872468   FragGrenade                          0      
-205   16872469   ConcussionGrenade                    0      
-206   ****   ****   ****
-207   16872471   IonGrenade                           0      
-208   ****   ****   ****
-209   16872473   AdhesiveGrenade                      0      
-210    ****   ****   ****
-211   ****   ****   ****
-212   ****   ****   ****
-213   ****   ****   ****
-214   ****   ****   ****
-215   16872479   Flamethrower                         0      
-216   16872480   WristRocket                          0      
-217   16872481   DeflectorShield                      0      
-218   ****   ****   ****
-219   16860091   GuildRelations                       0      
-220   16860092   SmitheryEquipment                    0      
-221   16860093   EngineeringEquipment                 0      
-222   16860094   FabricationEquipment                 0      
-223   16860095   AgricultureEquipment                 0      
-224   16860194   EnhancementBlueprints                0      
-225   ****   ****                0
-226   ****   ****                0
-227   ****   ****   ****
-228   ****   ****   ****
-229   16860197   Benevolence                          0      
-230   ****   ****   ****
-231   16860199   ForceSpark                           0      
-232   16860200   CreepingTerror                       0      
-233   16860201   ForceRage                            0      
-234   16860266   DroidEquipmentBlueprints             0      
-235   ****   ****   ****
-236   ****   ****   ****
-237   ****   ****   ****   ****
-238   ****   ****   ****   ****
-239   ****   ****   ****   ****
-240   ****   ****   ****   ****
-241   ****   ****   ****   ****
-242   ****   ****   ****   ****
-243   ****   ****   ****
-244   ****   ****   ****   ****
-245   ****       ****                                 ****   
-246   ****       ****                                 ****   
-247   ****       ****                                 ****   
-248   ****       ****                                 ****   
-249   ****       ****                                 ****   
-250   ****       ****                                 ****   
-251   ****       ****                                 ****   
-252   ****       ****                                 ****   
-253   ****       ****                                 ****   
-254   ****       ****                                 ****   
-255   ****       ****                                 ****   
-256   ****       ****                                 ****   
-257   16860321   FishingRods                          0      
-258   16860226   ShoutRange                           0      
-259   ****   ****   ****   ****
-260   16860331   Infusion                             0      
-261   ****   ****   ****   ****
-262   ****   ****   ****   ****
-263   16860334   Programming                          0      
-264   16860335   DroidAssembly                        0      
-265   16860442   Reward                               0      
-266   16860443   Stabling                             0      
-267   ****       ****                                 ****   
-268   16860444   Snarl                                0      
-269   16860445   Growl                                0      
-270   16860446   SoothePet                            0      
-271   16860447   ReviveBeast                          0      
-272   16860448   DNAManipulation                      0      
-273   16860449   IncubationProcessing                 0      
-274   16860450   ErraticGenius                        0      
-275   ****   ****   ****
-276   ****   ****   ****
-277   ****   ****   ****
-278   16860453   Bite                                 0      
-279   ****   ****   ****
-280   ****   ****   ****
-281   ****   ****   ****
-282   16860457   Anger                                0      
-283   16860458   FocusAttention                       0      
-284   16860459   Claw                                 0      
-285   16860460   BolsterAttack                        0      
-286   16860461   Hasten                               0      
-287   16860462   PoisonBreath                         0      
-288   16860463   IceBreath                            0      
-289   16860464   EnduranceLink                        0      
-290   16860465   EvasiveManeuver                      0      
-291   16860466   Assault                              0      
-292   16860467   Sniff                                0      
-293   16860468   ForceTouch                           0      
-294   16860469   Innervate                            0      
-295   16860470   ForceLink                            0      
+      Name       Label                                Cost
+0     ****       ****                                 ****
+1     16780260   AlphaRhythm                          0
+2     ****       Antitoxin                            0
+3     16780266   ApexBite                             0
+4     16780271   AuraOfCourage                        0
+5     16780273   BastionOfLight                       0
+6     ****       BeaconTargeting                      0
+7     ****       BlasterBeacon                        0
+8     ****       BlastRadius                          0
+9     ****       BodyguardsResolve                    0
+10    ****       BolsterResolve                       0
+11    ****       BreakMorale                          0
+12    ****       CapacitorRig                         0
+13    16780298   CircleOfHarmony                      0
+14    16860333   Clarity                              0
+15    ****       CleanseOrder                         0
+16    16780311   ClusterGrenade                       0
+17    ****       Coagulant                            0
+18    16780317   CollapseWill                         0
+19    ****       CommandRadius                        0
+20    16872238   ForceLeap                            0
+21    ****       CoordinatedStrike                    0
+22    ****       CrushingSlam                         0
+23    ****       CryoSprayer                          0
+24    ****       DampeningField                       0
+25    16780343   DecisiveCommand                      0
+26    16780348   DevouringStrike                      0
+27    ****       DistractingFeint                     0
+28    16780356   DominateWeakMind                     0
+29    16780358   EclipseOfResolve                     0
+30    16780360   EmergencyBunker                      0
+31    16780362   EmergencyCocktail                    0
+32    ****       EmergencySealant                     0
+33    16780366   EmergencyTriage                      0
+34    ****       EvasiveChallenge                     0
+35    16780375   ExecutePrey                          0
+36    16780377   ExposePrey                           0
+37    ****       FieldPharmacist                      0
+38    ****       FlashGrenade                         0
+39    ****       FocusStim                            0
+40    16780392   ForceBondedBeast                     0
+41    16780394   ForceChoke                           0
+42    ****       ForceGrip                            0
+43    16780405   ForceIntercept                       0
+44    16780411   ForceMaelstrom                       0
+45    16780413   ForceMend                            0
+46    16780420   ForceSanctuary                       0
+47    ****       FractureFocus                        0
+48    ****       GadgetHarness                        0
+49    16780435   GroupDeflector                       0
+50    ****       GuardedBite                          0
+51    ****       GuardianWard                         0
+52    ****       GuardingRoar                         0
+53    ****       HardlightScreen                      0
+54    16780463   HoldTheLine                          0
+55    16780465   HungerOfTheDark                      0
+56    ****       HuntersFocus                         0
+57    ****       IncendiaryField                      0
+58    ****       Intercept                            0
+59    ****       IronHide                             0
+60    16780493   KillzoneBeacon                       0
+61    ****       KoltoMist                            0
+62    ****       LastGuardian                         0
+63    16780499   LastStandOfTheLight                  0
+64    ****       MaintenancePulse                     0
+65    ****       MarkTarget                           0
+66    ****       MedicalInjectorRig                   0
+67    ****       MindfulHide                          0
+68    ****       MindShroud                           0
+69    16780519   NightmareField                       0
+70    16780521   OverloadBarrage                      0
+71    ****       Pacify                               0
+72    16780529   PackRecovery                         0
+73    ****       PackRhythm                           0
+74    ****       PainSuppressant                      0
+75    ****       Pounce                               0
+76    ****       PowerCell                            0
+77    16780548   PredatorRush                         0
+78    ****       PredatorsMark                        0
+79    ****       PressTheAttack                       0
+80    16780558   PrimalOverrun                        0
+81    ****       PsychicCry                           0
+82    16780566   PurifyingWave                        0
+83    ****       QuickRecovery                        0
+84    ****       RailDart                             0
+85    ****       Rampage                              0
+86    16780576   RampartHide                          0
+87    16780578   ReflectiveBarrier                    0
+88    ****       RemoteCharge                         0
+89    ****       RendingClaw                          0
+90    ****       Renewal                              0
+91    ****       SaberRend                            0
+92    ****       ShockBeacon                          0
+93    ****       SonicBurst                           0
+94    ****       SoothingGuard                        0
+95    16872313   ForcePush                            0
+96    ****       BurstOfSpeed                         0
+97    16872315   ThrowLightsaber                      0
+98    16872316   ForceStun                            0
+99    16872317   ComprehendSpeech                     0
+100   16872318   BattleInsight                        0
+101   16872319   MindTrick                            0
+102   16780621   ThermalDetonator                     0
+103   ****       TriageProtocol                       0
+104   16780627   UnbreakableBeast                     0
+105   16780629   UntouchableInstinct                  0
+106   ****       VenomousHide                         0
+107   ****       WardingHowl                          0
+108   ****       WeakenResolve                        0
+109   ****       WeaponJam                            0
+110   ****       RallyingStandard                     0
+111   ****       CoordinatedFocus                     0
+112   ****       ChargeOrder                          0
+113   ****       WatchfulPresence                     0
+114   ****       SteadyFormation                      0
+115   16859881   Resuscitation                        0
+116   16872334   Starships                            0
+117   16872335   DefensiveModules                     0
+118   16872336   OffensiveModules                     0
+119   16872337   EnergyManagement                     0
+120   16872338   MiningModules                        0
+121   16872339   StarshipMining                       0
+122   16872340   RangedHealing                        0
+123   16872341   FrugalMedic                          0
+124   16872342   MedKit                               0
+125   16859882   TreatmentKit                         0
+126   16859883   Shielding                            0
+127   16872345   WeaponBlueprints                     0
+128   ****       FieldRecovery                        0
+129   ****       ****                                 ****
+130   ****       ****                                 ****
+131   16859935   CityManagement                       0
+132   16872350   ArmorBlueprints                      0
+133   16872351   AccessoryBlueprints                  0
+134   16859936   Upkeep                               0
+135   ****       ****                                 ****
+136   16859948   RapidSynthesisSmithery               0
+137   16859949   CarefulSynthesisSmithery             0
+138   16859950   BasicTouchSmithery                   0
+139   16859951   StandardTouchSmithery                0
+140   16859952   PreciseTouchSmithery                 0
+141   16859953   MastersMendSmithery                  0
+142   16859954   SteadyHandSmithery                   0
+143   16859955   MuscleMemorySmithery                 0
+144   16859956   VenerationSmithery                   0
+145   16859957   WasteNotSmithery                     0
+146   16859958   RapidSynthesisFabrication            0
+147   16859959   CarefulSynthesisFabrication          0
+148   16859960   BasicTouchFabrication                0
+149   16872367   FurnitureBlueprints                  0
+150   16872368   StructureBlueprints                  0
+151   ****       ****                                 ****
+152   16872369   StarshipBlueprints                   0
+153   16859961   StandardTouchFabrication             0
+154   16859962   PreciseTouchFabrication              0
+155   16859963   MastersMendFabrication               0
+156   16859964   SteadyHandFabrication                0
+157   16872375   Harvesting                           0
+158   16872376   Refining                             0
+159   16872377   RefineryManagement                   0
+160   16872378   Scavenging                           0
+161   16872379   HardLook                             0
+162   16858155   ForceHeal                            0
+163   16872381   ForceBurst                           0
+164   16872382   ForceBody                            0
+165   16872394   ForceDrain                           0
+166   16872384   ForceLightning                       0
+167   16872385   ForceMind                            0
+168   ****       ****                                 ****
+169   16872387   KoltoRecovery                        0
+170   16872388   StasisField                          0
+171   16872389   CombatEnhancement                    0
+172   16872390   Provoke                              0
+173   ****       ****                                 ****
+174   ****       ****                                 ****
+175   ****       ****                                 ****
+176   ****       ****                                 ****
+177   16859965   MuscleMemoryFabrication              0
+178   16859966   VenerationFabrication                0
+179   16859967   WasteNotFabrication                  0
+180   ****       ****                                 ****
+181   16872214   TreasureHunter                       0
+182   16872215   CreditFinder                         0
+183   16860000   RapidSynthesisCooking                0
+184   16860001   CarefulSynthesisCooking              0
+185   16860002   BasicTouchCooking                    0
+186   16860003   StandardTouchCooking                 0
+187   16860004   PreciseTouchCooking                  0
+188   16860005   MastersMendCooking                   0
+189   16860006   SteadyHandCooking                    0
+190   16860007   MuscleMemoryCooking                  0
+191   16860008   VenerationCooking                    0
+192   16860009   WasteNotCooking                      0
+193   16872200   CookingRecipes                       0
+194   16860040   RapidSynthesisEngineering            0
+195   16860041   CarefulSynthesisEngineering          0
+196   16860042   BasicTouchEngineering                0
+197   16860043   StandardTouchEngineering             0
+198   16860044   PreciseTouchEngineering              0
+199   16860045   MastersMendEngineering               0
+200   16860046   SteadyHandEngineering                0
+201   16860047   MuscleMemoryEngineering              0
+202   16860048   VenerationEngineering                0
+203   16860049   WasteNotEngineering                  0
+204   16872468   FragGrenade                          0
+205   16872469   ConcussionGrenade                    0
+206   16872470   FlashbangGrenade                     0
+207   16872471   IonGrenade                           0
+208   16872472   KoltoGrenade                         0
+209   16872473   AdhesiveGrenade                      0
+210   ****       ****                                 ****
+211   16872475   KoltoBomb                            0
+212   16872476   IncendiaryBomb                       0
+213   16872477   GasBomb                              0
+214   16872478   StealthGenerator                     0
+215   16872479   Flamethrower                         0
+216   16872480   WristRocket                          0
+217   16872481   DeflectorShield                      0
+218   16872482   DemolitionExpert                     0
+219   16860091   GuildRelations                       0
+220   16860092   SmitheryEquipment                    0
+221   16860093   EngineeringEquipment                 0
+222   16860094   FabricationEquipment                 0
+223   16860095   AgricultureEquipment                 0
+224   16860194   EnhancementBlueprints                0
+225   ****       ****                                 ****
+226   ****       ****                                 ****
+227   16860195   Premonition                          0
+228   16860196   Disturbance                          0
+229   16860197   Benevolence                          0
+230   16860198   ForceValor                           0
+231   16860199   ForceSpark                           0
+232   16860200   CreepingTerror                       0
+233   16860201   ForceRage                            0
+234   16860266   DroidEquipmentBlueprints             0
+235   16858510   ThrowRock                            0
+236   ****       ****                                 ****
+237   ****       ****                                 ****
+238   ****       ****                                 ****
+239   ****       ****                                 ****
+240   ****       ****                                 ****
+241   ****       ****                                 ****
+242   ****       ****                                 ****
+243   16860294   ForceInspiration                     0
+244   ****       ****                                 ****
+245   16860297   RousingShout                         0
+246   16860298   Dedication                           0
+247   ****       SoldiersSpeed                        0
+248   ****       SoldiersStrike                       0
+249   16860301   Charge                               0
+250   ****       SoldiersPrecision                    0
+251   16860303   ShockingShout                        0
+252   16860304   Rejuvenation                         0
+253   16860305   FrenziedShout                        0
+254   ****       IncubationManagement                 0
+255   16872489   IntuitivePiloting                    0
+256   ****       ScientificNetworking                 0
+257   16860321   FishingRods                          0
+258   16860226   ShoutRange                           0
+259   ****       ****                                 ****
+260   16860331   Infusion                             0
+261   ****       ****                                 ****
+262   ****       ****                                 ****
+263   16860408   Tame                                 0
+264   16860335   DroidAssembly                        0
+265   16860442   Reward                               0
+266   16860443   Stabling                             0
+267   ****       BeastSpeed                           0
+268   16860444   Snarl                                0
+269   16860445   Growl                                0
+270   16860446   SoothePet                            0
+271   16860447   ReviveBeast                          0
+272   16860448   DNAManipulation                      0
+273   16860449   IncubationProcessing                 0
+274   16860450   ErraticGenius                        0
+275   16860435   DiseasedTouch                        0
+276   16860451   Clip                                 0
+277   16860452   SpinningClaw                         0
+278   16860453   Bite                                 0
+279   16860454   FlameBreath                          0
+280   16860455   ShockingSlash                        0
+281   16860456   BolsterArmor                         0
+282   16860457   Anger                                0
+283   16860458   FocusAttention                       0
+284   16860459   Claw                                 0
+285   16860460   BolsterAttack                        0
+286   16860461   Hasten                               0
+287   16860462   PoisonBreath                         0
+288   16860463   IceBreath                            0
+289   16860464   EnduranceLink                        0
+290   16860465   EvasiveManeuver                      0
+291   16860466   Assault                              0
+292   16860467   Sniff                                0
+293   16860468   ForceTouch                           0
+294   16860469   Innervate                            0
+295   16860470   ForceLink                            0
+296   ****       BeastBloodFrenzy                    0
+297   16777463   Research                             0
+298   ****       AdrenalStim                          0
+299   ****       ResearchProjects                     0
+300   ****       LightGuardianDeflectivePresence     0
+301   16858966   AbsoluteDefense                      0
+302   16858968   AdamantineGuard                      0
+303   ****       AdaptivePrecisionStrike              0
+304   ****       AfflictionMastery                    0
+305   ****       AimedShot                            0
+306   ****       AmbushTactics                        0
+307   16858976   AngerStrike                          0
+308   16858978   ArcStrike                            0
+309   ****       AssassinsFocus                       0
+310   ****       ****                                 ****
+311   ****       BalancedAttunement                   0
+312   ****       BallisticMastery                     0
+313   ****       BasicSynthesis                       0
+314   ****       ****                                 ****
+315   16859013   BastionStance                        0
+316   ****       BerserkerStance                      0
+317   ****       BindingCross                         0
+318   ****       BladeBlitz                           0
+319   ****       BladeVortex                          0
+320   16859500   BlazingSpikes                        0
+321   ****       BleedersEye                          0
+322   ****       BloodFrenzy                          0
+323   16859502   Bloodlust                            0
+324   16779007   BloodWeapon                          0
+325   ****       BombardiersRhythm                    0
+326   16860252   BombardierStance                     0
+327   16860267   Bonecrusher                          0
+328   16872346   BreachRound                          0
+329   16872348   BreachStrike                         0
+330   16777635   BreakerReversal                      0
+331   ****       BreakPosture                         0
+332   16777893   BrutalAssault                        0
+333   ****       BrutalEfficiency                     0
+334   ****       CalculatedStrikes                    0
+335   16778326   CalmingStance                        0
+336   ****       ****                                 ****
+337   16778368   Carve                                0
+338   16778370   CascadeFailure                       0
+339   ****       Centering                            0
+340   ****       CenterlineGuard                      0
+341   ****       CheapShot                            0
+342   ****       ClusterPouch                         0
+343   16778383   ClusterStorm                         0
+344   ****       CobraReflexes                        0
+345   16778385   CobraStance                          0
+346   ****       ConcussiveToss                       0
+347   16778391   ConduitFlare                         0
+348   16778393   ConduitStance                        0
+349   ****       ConduitTraining                      0
+350   ****       ContainmentNet                       0
+351   16778395   CoveringClaws                        0
+352   16778397   CoveringStrike                       0
+353   ****       CrimsonFury                          0
+354   16778399   CripplingDefense                     0
+355   ****       CripplingPrecision                   0
+356   ****       CriticalWard                         0
+357   ****       ****                                 ****
+358   16778560   CrusherStance                        0
+359   16778562   CrushingBlow                         0
+360   16860269   CrushingMastery                      0
+361   16778564   CurrentOverload                      0
+362   ****       CycloneMastery                       0
+363   16778566   CycloneStance                        0
+364   ****       DeadCenter                           0
+365   ****       DeadeyeMastery                       0
+366   ****       DeadeyeReload                        0
+367   16778568   DeadeyeStance                        0
+368   16778570   DeadlyPrecision                      0
+369   16778572   DeadMansHand                         0
+370   16778574   DebilitatingStance                   0
+371   16778576   Decoy                                0
+372   ****       DeepWound                            0
+373   ****       DefensiveHarmony                     0
+374   ****       DefensiveStance                      0
+375   ****       DeflectionCounter                    0
+376   ****       DeflectionMastery                    0
+377   ****       DeflectionRiposte                    0
+378   ****       DeflectionTraining                   0
+379   ****       DeflectivePresence                   0
+380   ****       DisablingStrike                      0
+381   ****       DisarmingShot                        0
+382   ****       DisruptionExpert                     0
+383   16778593   DisruptionField                      0
+384   16778603   DuelistsChallenge                    0
+385   ****       DuelistsDistance                     0
+386   16778605   DuelistStance                        0
+387   16778607   Earthshatter                         0
+388   16778609   EdgeOfDarkness                       0
+389   ****       EdgeRhythm                           0
+390   ****       ****                                 ****
+391   ****       EnergizedForms                       0
+392   ****       EnfeeblingStrike                     0
+393   ****       ErosionStrike                        0
+394   16778617   EssenceHunter                        0
+395   ****       EssenceTap                           0
+396   ****       EvasiveCombat                        0
+397   ****       EvasiveReload                        0
+398   ****       Executioner                          0
+399   16777704   ExploitWeakness                      0
+400   16778628   ExposeWeakPoint                      0
+401   ****       FanTheHammer                         0
+402   ****       FeintingCut                          0
+403   16778639   FerocityStance                       0
+404   ****       FieldSedatives                       0
+405   16778641   FinalForm                            0
+406   16778643   FinishingToss                        0
+407   16778645   FireburstToss                        0
+408   ****       Flanking                             0
+409   16778647   FlankingBarrage                      0
+410   16778649   FlankingStance                       0
+411   16778651   Flash                                0
+412   ****       FlashToss                            0
+413   ****       FlowingDefense                       0
+414   ****       FlowingFootwork                      0
+415   ****       FlowOfTheMaelstrom                   0
+416   ****       FocusedArc                           0
+417   16778663   FocusedStance                        0
+418   16778665   Forcebane                            0
+419   16778667   ForceCapacitor                       0
+420   16778669   ForceGyre                            0
+421   16778671   ForceLens                            0
+422   ****       ForceMomentum                        0
+423   16778673   ForceNullification                   0
+424   ****       ForcePiercing                        0
+425   16778675   ForceSuppression                     0
+426   ****       ForceWarding                         0
+427   ****       FortifiedPosition                    0
+428   ****       FortressStrike                       0
+429   16778681   FractureStrike                       0
+430   ****       GroundQuake                          0
+431   ****       GuardCounter                         0
+432   ****       GuardedChannel                       0
+433   ****       GuardedFlow                          0
+434   16778699   GuardianMaster                       0
+435   ****       GuardianReflexes                     0
+436   16778701   GuardiansChallenge                   0
+437   16778703   GuardiansInfluence                   0
+438   ****       GuardiansReaping                     0
+439   16778705   GuardiansResolve                     0
+440   ****       GuardiansRiposte                     0
+441   16778707   GuardingStep                         0
+442   ****       GuardTraining                        0
+443   16778709   GunfighterStance                     0
+444   16778711   GunslingerFocus                      0
+445   16778716   HamperingBarrage                     0
+446   ****       Hamstring                            0
+447   16778724   Headshot                             0
+448   ****       HeavyHands                           0
+449   ****       HighNoon                             0
+450   ****       ImpenetrableGrip                     0
+451   16778726   ImpenetrableGuard                    0
+452   16778728   ImprovedAttentiveness                0
+453   16778730   Incapacitate                         0
+454   16778732   InfiniteConduit                      0
+455   ****       InterruptingShot                     0
+456   ****       InterruptionStrike                   0
+457   16778742   Invincible                           0
+458   16778744   IronElbows                           0
+459   16778746   IronWallStance                       0
+460   16778748   KillZone                             0
+461   ****       KitingInstinct                       0
+462   ****       LastStand                            0
+463   16778750   LastWord                             0
+464   ****       LateralStrike                        0
+465   16778752   LegSlash                             0
+466   16778757   LifeSiphon                           0
+467   16778759   LineBreaker                          0
+468   16778761   LowShot                              0
+469   ****       MaelstromArc                         0
+470   16778767   MarkedForDeath                       0
+471   ****       MarkedTempo                          0
+472   16778769   MarkingToss                          0
+473   ****       ****                                 ****
+474   ****       MirrorStep                           0
+475   ****       MobileFootwork                       0
+476   ****       Momentum                             0
+477   ****       ****                                 ****
+478   16778771   NerveStrike                          0
+479   16778773   NeuralShock                          0
+480   ****       NeurotoxinMastery                    0
+481   16778775   NeutralizingShot                     0
+482   ****       ****                                 ****
+483   16778777   OneShot                              0
+484   16777655   Opportunist                          0
+485   ****       OpportunistsFlow                     0
+486   ****       Overcharge                           0
+487   16778779   Overwatch                            0
+488   ****       OverwhelmingDefense                  0
+489   16778781   OverwhelmingStrike                   0
+490   16778783   PacificationField                    0
+491   ****       PatientSentinel                      0
+492   16778785   PerceptiveStance                     0
+493   ****       PerfectBalance                       0
+494   ****       PerfectFootwork                      0
+495   16778787   PerfectThrow                         0
+496   ****       PiercingRound                        0
+497   ****       PinningFire                          0
+498   ****       PinningToss                          0
+499   16778808   PointBlankBurst                      0
+500   ****       ****                                 ****
+501   ****       ****                                 ****
+502   ****       ****                                 ****
+503   ****       PrecisionArc                         0
+504   ****       PrecisionStrikes                     0
+505   ****       PunishingAngle                       0
+506   16778810   PunishingStrike                      0
+507   16857240   Purify                               0
+508   16778818   RainOfSteel                          0
+509   16778820   Rampart                              0
+510   ****       ****                                 ****
+511   ****       ReactiveDeflection                   0
+512   ****       RedirectingGuard                     0
+513   ****       ReloadTempo                          0
+514   ****       RendingStrike                        0
+515   ****       RestorationStrike                    0
+516   ****       RetaliatoryFlow                      0
+517   ****       ReturningGrip                        0
+518   16778826   ReversalCut                          0
+519   ****       RibBreaker                           0
+520   16778834   RicochetShot                         0
+521   ****       RicochetToss                         0
+522   16778843   RippleSlash                          0
+523   16778845   SaberCyclone                         0
+524   16780207   SaberStorm                           0
+525   16778847   SacrificialBlade                     0
+526   16778849   SapVitality                          0
+527   16778853   SaturationToss                       0
+528   16778855   SavageCleave                         0
+529   ****       SavageReflexes                       0
+530   ****       ScopeCalibration                     0
+531   16777669   SecondWind                           0
+532   16778858   SentinelGuard                        0
+533   16778860   SentinelStance                       0
+534   16778862   SerpentsEclipse                      0
+535   ****       SeverFocus                           0
+536   16778868   SeveringToss                         0
+537   ****       ShadowStrike                         0
+538   16778874   ShelterCircle                        0
+539   ****       ShieldTraining                       0
+540   16778879   ShieldWall                           0
+541   ****       ShrapnelCasing                       0
+542   ****       SideAssault                          0
+543   ****       SkirmishersNerve                     0
+544   16778887   SkirmisherStance                     0
+545   16778889   SkullRattle                          0
+546   ****       ****                                 ****
+547   16778894   SmokeRound                           0
+548   ****       SnapRoll                             0
+549   16778900   SniperStance                         0
+550   ****       SoftTarget                           0
+551   ****       SoulAmplification                    0
+552   16778902   SoulAscension                        0
+553   ****       SoulBarrier                          0
+554   16778904   SoulBurst                            0
+555   16778906   SoulDevourer                         0
+556   ****       SoulReaping                          0
+557   16778908   SoulSacrifice                        0
+558   16778910   SoulStorm                            0
+559   ****       SoulStrike                           0
+560   ****       SpinningDeflection                   0
+561   ****       SplitGuardStrike                     0
+562   16778924   SpotterStance                        0
+563   ****       SpreadingVenom                       0
+564   ****       StaffParry                           0
+565   ****       ****                                 ****
+566   16778926   StasisVolley                         0
+567   ****       StaticPalm                           0
+568   ****       SteadyAim                            0
+569   ****       ****                                 ****
+570   ****       ****                                 ****
+571   16778934   StormRelease                         0
+572   16778939   SuppressiveLine                      0
+573   16778941   SurgeStrike                          0
+574   16778943   SweepingAdvance                      0
+575   16778945   SweepingFlank                        0
+576   16778947   SweepingGuard                        0
+577   16778949   SystemicShutdown                     0
+578   ****       ****                                 ****
+579   16778955   TauntingDeflection                   0
+580   16778957   TempestBloom                         0
+581   ****       TempestFocus                         0
+582   16778959   TempestRelease                       0
+583   16778961   TempestStance                        0
+584   16780243   ThunderousChallenge                  0
+585   16778963   TotalForceDenial                     0
+586   ****       ToxicCoating                         0
+587   16778969   ToxicRush                            0
+588   ****       ToxicTempo                           0
+589   ****       TranqCone                            0
+590   ****       ****                                 ****
+591   ****       ****                                 ****
+592   16778977   TwinFangFlurry                       0
+593   16778979   TwinGuardStance                      0
+594   16778981   TwinIntercept                        0
+595   ****       Unbreakable                          0
+596   ****       UnbreakableWill                      0
+597   16778983   UnmovingCenter                       0
+598   ****       VampiricFury                         0
+599   ****       ****                                 ****
+600   ****       VenomRhythm                          0
+601   16778985   VenomSplash                          0
+602   ****       VersatileStrike                      0
+603   ****       VeteranTracker                       0
+604   16778993   VitalStrike                          0
+605   ****       VolatilePayload                      0
+606   ****       ****                                 ****
+607   16778995   WhirlingGuard                        0
+608   ****       WhirlwindAssault                     0
+609   16779001   Worldbreaker                         0
+610   16872233   Backstab                             0
+611   16872266   CircleSlash                          0
+612   16872312   CripplingShot                        0
+613   16872261   CrossCut                             0
+614   16872294   DoubleShot                           0
+615   16872267   DoubleStrike                         0
+616   16872299   ExplosiveToss                        0
+617   16872226   HackingBlade                         0
+618   16872260   LegSweep                             0
+619   16872300   PiercingToss                         0
+620   16777896   QuickDraw                            0
+621   16872227   RiotBlade                            0
+622   16860277   ShieldBash                           0
+623   16872282   Slam                                 0
+624   16872283   SpinningWhirl                        0
+625   16872277   StrikingCobra                        0
+626   16872311   TranquilizerShot                     0
+627   ****       Bloodseeker                          0
+628   16872474   SmokeBomb                            0
+629   ****       ****                                 ****
+630   ****       ****                                 ****
+631   ****       ****                                 ****
+632   ****       ****                                 ****
+633   ****       ****                                 ****
+634   ****       ****                                 ****
+635   ****       ****                                 ****
+636   ****       ****                                 ****
+637   ****       ****                                 ****
+638   ****       ****                                 ****
+639   ****       ****                                 ****
+640   16872284   RapidShot                            0
+641   16860286   Bulwark                              0
+642   16860332   Alacrity                             0
+643   16860254   CrushingStyle                        0
+644   ****       FlurryStyle                          0
