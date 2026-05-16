@@ -75851,7 +75851,7 @@
     },
     {
       "id": 3058,
-      "text": "Nearby allies gain temporary HP and take 10% less force damage for 20 seconds."
+      "text": "Nearby allies gain temporary HP equal to 10% of maximum HP plus WIL scaling and take 10% less force damage for 20 seconds."
     },
     {
       "id": 3059,
@@ -76067,11 +76067,11 @@
     },
     {
       "id": 3112,
-      "text": "Hobble up to 2 targets for 6 seconds and applies force damage over time for 18 seconds."
+      "text": "Hobble up to 2 targets for 6 seconds and applies force damage over time equal to 12 force DMG plus WIL scaling over 18 seconds."
     },
     {
       "id": 3113,
-      "text": "Hobble nearby enemies for 6 seconds and applies force damage over time for 18 seconds."
+      "text": "Hobble nearby enemies for 6 seconds and applies force damage over time equal to 12 force DMG plus WIL scaling over 18 seconds."
     },
     {
       "id": 3114,
@@ -76151,7 +76151,7 @@
     },
     {
       "id": 3133,
-      "text": "Deals force DMG to one target. If the target is below 35% HP, damage is increased by 40%."
+      "text": "Deals 12 force DMG plus WIL scaling to one target. If the target is below 35% HP, damage is increased by 40%."
     },
     {
       "id": 3134,
@@ -76287,7 +76287,7 @@
     },
     {
       "id": 3167,
-      "text": "Attempts to inflict Flash, reducing physical and Force ability Accuracy by 8% for 20 seconds in a 4m blast. Consumes explosives."
+      "text": "Attempts to inflict Flash, reducing physical and Force ability hit chance by 8% for 20 seconds in a 4m blast. Consumes explosives."
     },
     {
       "id": 3168,
@@ -76295,7 +76295,7 @@
     },
     {
       "id": 3169,
-      "text": "Attempts to inflict Flash, reducing physical and Force ability Accuracy by 14% for 20 seconds in a 4m blast. Consumes explosives."
+      "text": "Attempts to inflict Flash, reducing physical and Force ability hit chance by 14% for 20 seconds in a 4m blast. Consumes explosives."
     },
     {
       "id": 3170,
@@ -76335,7 +76335,7 @@
     },
     {
       "id": 3179,
-      "text": "Daze one target for 3 seconds and apply force damage over time for 12 seconds."
+      "text": "Daze one target for 3 seconds and applies force damage over time equal to 12 force DMG plus WIL scaling over 12 seconds."
     },
     {
       "id": 3180,
@@ -76391,11 +76391,11 @@
     },
     {
       "id": 3193,
-      "text": "Deals 14 electrical force DMG plus WIL scaling to up to 3 targets."
+      "text": "Deals 14 force DMG plus WIL scaling to up to 3 targets with an electrical visual."
     },
     {
       "id": 3194,
-      "text": "Deals 24 electrical force DMG plus WIL scaling to up to 4 targets."
+      "text": "Deals 24 force DMG plus WIL scaling to up to 4 targets with an electrical visual."
     },
     {
       "id": 3195,
@@ -76403,7 +76403,7 @@
     },
     {
       "id": 3196,
-      "text": "Deals force DMG to nearby enemies and pulls them slightly toward you."
+      "text": "Deals 10 force DMG plus WIL scaling to nearby enemies and pulls them slightly toward you."
     },
     {
       "id": 3197,
@@ -76843,7 +76843,7 @@
     },
     {
       "id": 3306,
-      "text": "Unleashes a flamethrower burst, wrist rocket, and sonic burst against hostile targets near your primary target."
+      "text": "Unleashes three attacks at your primary target\u0027s location: 18 fire DMG in a 5m burst plus Burn for 12 seconds, 20 fire DMG to the primary target plus 3-second knockdown, and 18 sonic DMG in a 5m burst that interrupts activation and reduces Accuracy by 10% for 12 seconds."
     },
     {
       "id": 3307,
@@ -77215,7 +77215,7 @@
     },
     {
       "id": 3399,
-      "text": "Deals sonic DMG to nearby hostile targets and interrupt activation."
+      "text": "Deals 10 sonic DMG to nearby hostile targets and interrupts activation."
     },
     {
       "id": 3400,
@@ -77223,7 +77223,7 @@
     },
     {
       "id": 3401,
-      "text": "Deals sonic DMG to nearby hostile targets and interrupt activation and reduce Accuracy."
+      "text": "Deals 14 sonic DMG to nearby hostile targets, interrupts activation, and reduces Accuracy by 6% for 12 seconds."
     },
     {
       "id": 3402,
@@ -78340,6 +78340,10 @@
     {
       "id": 3680,
       "text": "Whirlwind Assault"
+    },
+    {
+      "id": 3681,
+      "text": "Deals 18 sonic DMG to nearby hostile targets, interrupts activation, and reduces Accuracy by 10% for 12 seconds."
     }
   ]
 }
