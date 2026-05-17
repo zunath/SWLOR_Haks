@@ -13799,7 +13799,7 @@
     },
     {
       "id": 3449,
-      "text": "Nearby party members gain +3% physical and Force ability hit chance. SOC scaling can raise this to +4%."
+      "text": "Nearby party members gain physical and Force ability hit chance based on your Rallying Standard rank. SOC scaling can raise the current rank's bonus."
     },
     {
       "id": 3450,
@@ -78691,7 +78691,7 @@
     },
     {
       "id": 3768,
-      "text": "Nearby party members gain +10% movement speed and +30 Mobility resistance. SOC scaling can raise these to +12% and +40."
+      "text": "Nearby party members gain movement speed and Mobility resistance based on your Charge Order rank. SOC scaling can raise the current rank's bonuses."
     },
     {
       "id": 3769,
@@ -78707,7 +78707,7 @@
     },
     {
       "id": 3772,
-      "text": "Nearby party members gain +3% critical hit chance. SOC scaling can raise this to +4%."
+      "text": "Nearby party members gain critical hit chance, and higher ranks add critical damage, based on your Coordinated Focus rank. SOC scaling can raise the current rank's bonuses."
     },
     {
       "id": 3773,
@@ -78735,7 +78735,7 @@
     },
     {
       "id": 3779,
-      "text": "Nearby party members restore 1 STM every 4 seconds. SOC scaling can raise this to 2 STM per tick."
+      "text": "Nearby party members restore STM every 4 seconds based on your Field Recovery rank. SOC scaling can raise the current rank's recovery."
     },
     {
       "id": 3780,
@@ -78847,7 +78847,7 @@
     },
     {
       "id": 3807,
-      "text": "Nearby party members gain +3% evasion chance and +30 Mind and Mobility resistance. SOC scaling can raise these to +4% and +40."
+      "text": "Nearby party members gain evasion chance plus Mind and Mobility resistance based on your Steady Formation rank. SOC scaling can raise the current rank's bonuses."
     },
     {
       "id": 3808,
@@ -78867,7 +78867,7 @@
     },
     {
       "id": 3812,
-      "text": "Nearby party members take 4% less physical and Force damage. SOC scaling can raise this to 5%."
+      "text": "Nearby party members take less physical and Force damage based on your Watchful Presence rank. SOC scaling can raise the current rank's reduction."
     },
     {
       "id": 3813,
@@ -78884,6 +78884,10 @@
     {
       "id": 3816,
       "text": "For 20 seconds, nearby party members gain +24% damage, +10% physical and Force ability hit chance, +10% critical hit chance, and restore 1 STM every 3 seconds. SOC scaling can raise the bonuses to +30%, +12%, and +12%."
+    },
+    {
+      "id": 3817,
+      "text": "All enemies in the selected area are afflicted with Smoke Bomb, reducing Accuracy by 20% for 12 seconds."
     }
   ]
 }
