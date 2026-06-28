@@ -1,0 +1,31 @@
+# Exported from NWmax 0.8 b60 at 03.07.2012 18:04:44
+# pwk file
+#
+#NWmax PWKMESH  ASCII
+node dummy evchpine02_pwk_use01
+  parent plc_evchpine02_pwk
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.568627 0.109804 0.694118 
+endnode
+node dummy evchpine02_pwk_use02
+  parent plc_evchpine02_pwk
+  position -0.894983 -0.00694809 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.0235294 0.52549 0.0235294 
+endnode
+node trimesh plc_evchpine02_wg
+  parent plc_evchpine02_pwk
+  position 0.000645728 -0.0343652 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.6 0.6 0.6 
+  bitmap NULL
+  verts 4
+    -0.29856 -0.32302 0.0
+    0.413792 -0.280978 0.0
+    -0.271995 0.569658 0.0
+    0.510922 0.40502 0.0
+  faces 2
+    2 0 3  1  0 0 0  7
+    3 0 1  1  0 0 0  7
+endnode

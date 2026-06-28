@@ -1,0 +1,45 @@
+#MAXDOOR ASCII
+# model: zlc_fky_b33_pwk 
+filedependancy PlaceableObjects01.max
+node trimesh zlc_fky_b33_wg 
+  parent zlc_fky_b33_pwk 
+  position 0.0 -0.0139905 0.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.0313726 0.0313726 0.533333  
+    bitmap NULL
+    verts 4
+     -0.970874 -0.970874 0.0
+     0.970874 -0.970874 0.0
+     -0.970874 0.970874 0.0
+     0.970874 0.970874 0.0
+    faces 2
+     2 0 3  1  0 0 0  1
+     1 3 0  1  0 0 0  1
+endnode
+node dummy C05_pwk_use01 
+  parent zlc_fky_b33_pwk 
+  position 0.105719 1.7065 0.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.878431 0.341176 0.560784  
+endnode
+node dummy C05_pwk_use02 
+  parent zlc_fky_b33_pwk 
+  position 0.105719 -1.62972 0.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.878431 0.341176 0.560784  
+endnode
+node trimesh zlc_fky_b33_wg 
+  parent zlc_fky_b33_pwk 
+  position 0.05 0.0919104 0.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.52549 0.431373 0.0313726  
+    bitmap NULL
+    verts 4
+     -0.995738 -0.979887 0.0
+     0.895565 -0.979887 0.0
+     -0.995738 0.828113 0.0
+     0.895565 0.828113 0.0
+    faces 2
+     2 0 3  1  0 0 0  1
+     1 3 0  1  0 0 0  1
+endnode

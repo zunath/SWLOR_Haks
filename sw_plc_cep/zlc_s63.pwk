@@ -1,0 +1,24 @@
+#Exported from 3ds max by MDL Plug-in Suite 1.0b
+#http://www.bricksbuilder.com/nwn/utils/
+#MAXMODEL ASCII
+# model: PLC_SignSvg1
+filedependancy Orc Sign.max
+node trimesh zlc_s63_wg
+  parent zlc_s63_pwk
+  position 0 0 0
+  orientation 0 0 -1 -3.14159
+  wirecolor 0.347656 0.347656 0.347656
+  ambient 0.34375 0.691406 0.101563
+  diffuse 0.34375 0.691406 0.101563
+  specular 0 0 0
+  shininess 1
+  bitmap NULL
+  verts 4
+    0.49 0.09 0
+    -0.49 0.09 0
+    0.49 -0.13 0
+    -0.49 -0.13 0
+  faces 2
+    2 0 3  1  0 0 0  0
+    1 3 0  1  0 0 0  0
+endnode

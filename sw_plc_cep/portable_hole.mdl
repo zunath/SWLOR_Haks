@@ -1,0 +1,179 @@
+#Exported from 3ds max by MDL Plug-in Suite 1.0b
+#http://www.bricksbuilder.com/nwn/utils/
+#MAXMODEL ASCII
+# model: portable_hole
+filedependancy Unknown
+newmodel portable_hole
+setsupermodel portable_hole NULL
+classification Character
+setanimationscale 1.0
+#MAXGEOM  ASCII
+beginmodelgeom portable_hole
+node dummy portable_hole
+  parent NULL
+endnode
+node emitter fire!16
+  parent portable_hole
+  position 0.00845276 -0.0205957 0.39126
+  orientation -1 0 0 -1.5708
+  wirecolor 0.242188 0.242188 0.242188
+    colorStart 0.47451 0.439216 0.364706
+    colorEnd 0.819608 0.796079 0.709804
+    alphaStart 1
+    alphaEnd 0
+    sizeStart 4
+    sizeEnd 1
+    sizeStart_y 0
+    sizeEnd_y 0
+    frameStart 0
+    frameEnd 24
+    birthrate 10
+    spawnType 0
+    lifeExp 2.5
+    mass 0.09
+    spread 2.96706
+    particleRot 0.5
+    velocity 2
+    randvel 0.5
+    fps 10
+    random 0
+    inherit 1
+    inherit_local 0
+    inherit_part 0
+    inheritvel 0
+    xsize 100
+    ysize 99
+    bounce 0
+    bounce_co 0
+    loop 0
+    update Explosion
+    render Normal
+    Blend Normal
+    update_sel 2
+    render_sel 1
+    blend_sel 1
+    deadspace 0
+    opacity 0.5
+    blurlength 10
+    lightningDelay 0
+    lightningRadius 0
+    lightningScale 0
+    blastRadius 0.2
+    blastLength 1
+    twosidedtex 1
+    p2p 0
+    p2p_sel 1
+    p2p_type Bezier
+    p2p_bezier2 0
+    p2p_bezier3 0
+    combinetime 0
+    drag 0
+    grav 0
+    threshold 0
+    texture fxpa_smoke01
+    xgrid 4
+    ygrid 4
+    affectedByWind 0
+    m_isTinted 1
+    renderorder 0
+    Splat 0
+endnode
+node dummy A10_hand
+  parent portable_hole
+  position 0.00398437 -0.745332 0.39116
+  orientation 0 0 0 0
+  wirecolor 0.242188 0.242188 0.242188
+endnode
+node dummy A10_head
+  parent portable_hole
+  position 0.00398437 0.0108252 1.17765
+  orientation 0 0 0 0
+  wirecolor 0.242188 0.242188 0.242188
+endnode
+node dummy A10_head_hit
+  parent portable_hole
+  position 0.00398437 0.0108252 0.696168
+  orientation 0 0 0 0
+  wirecolor 0.242188 0.242188 0.242188
+endnode
+node dummy A10_impact
+  parent portable_hole
+  position 0.00398437 0.011001 0.324892
+  orientation 0 0 0 0
+  wirecolor 0.242188 0.242188 0.242188
+endnode
+node dummy A10_ground
+  parent portable_hole
+  position -0.00363281 0.0069873 0
+  orientation 0 0 0 0
+  wirecolor 0.242188 0.242188 0.242188
+endnode
+node trimesh Circle01
+  parent portable_hole
+  position -0.0154248 0.279776 1.44615
+  orientation -1 0 0 -1.5652
+  wirecolor 0.527344 0.527344 0.527344
+  ambient 0.588235 0.588235 0.588235
+  diffuse 0.588235 0.588235 0.588235
+  specular 0 0 0
+  shininess 10
+  bitmap hole
+  verts 28
+    -0.868338 0 0
+    -0.845383 -0.198966 0
+    -0.780004 -0.381684 0
+    -0.677438 -0.542919 0
+    -0.542919 -0.677438 0
+    -0.381684 -0.780004 0
+    -0.198966 -0.845383 0
+    0 -0.868338 0
+    0.198966 -0.845383 0
+    0.381684 -0.780004 0
+    0.542919 -0.677438 0
+    0.677438 -0.542919 0
+    0.780004 -0.381684 0
+    0.845383 -0.198966 0
+    0.868338 0 0
+    0.845383 0.198966 0
+    0.780004 0.381684 0
+    0.677438 0.542919 0
+    0.542919 0.677438 0
+    0.381684 0.780004 0
+    0.198966 0.845383 0
+    0 0.868338 0
+    -0.198966 0.845383 0
+    -0.381684 0.780004 0
+    -0.542919 0.677438 0
+    -0.677438 0.542919 0
+    -0.780004 0.381684 0
+    -0.845383 0.198966 0
+  faces 26
+    20 21 22  1  0 0 0  0
+    19 20 22  1  0 0 0  0
+    19 22 23  1  0 0 0  0
+    19 23 24  1  0 0 0  0
+    18 19 24  1  0 0 0  0
+    17 18 24  1  0 0 0  0
+    17 24 25  1  0 0 0  0
+    17 25 26  1  0 0 0  0
+    17 26 27  1  0 0 0  0
+    17 27 0  1  0 0 0  0
+    17 0 1  1  0 0 0  0
+    17 1 2  1  0 0 0  0
+    17 2 3  1  0 0 0  0
+    17 3 4  1  0 0 0  0
+    17 4 5  1  0 0 0  0
+    17 5 6  1  0 0 0  0
+    17 6 7  1  0 0 0  0
+    17 7 8  1  0 0 0  0
+    17 8 9  1  0 0 0  0
+    17 9 10  1  0 0 0  0
+    17 10 11  1  0 0 0  0
+    17 11 12  1  0 0 0  0
+    17 12 13  1  0 0 0  0
+    17 13 14  1  0 0 0  0
+    17 14 15  1  0 0 0  0
+    17 15 16  1  0 0 0  0
+endnode
+endmodelgeom portable_hole
+donemodel portable_hole

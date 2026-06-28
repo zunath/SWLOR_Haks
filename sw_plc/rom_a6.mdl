@@ -1,0 +1,84 @@
+# Exported from NWmax 0.5-beta at 4/15/2004 7:25:24 PM
+# mdl file
+#
+#NWmaxMODEL ASCII
+# model: rom_a6
+filedependancy Unknown
+newmodel rom_a6
+setsupermodel rom_a6 NULL
+classification Character
+setanimationscale 0.81
+#NWmaxGEOM  ASCII
+beginmodelgeom rom_a6
+node dummy rom_a6
+  parent NULL
+endnode
+node trimesh Node0
+  parent rom_a6
+  position -0.0925089 0.0 -0.114089
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center undefined
+  gizmo SubAnim:Gizmo
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 2.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap grs_flowers-11
+  verts 16
+    -0.275155 0.379407 0.381429
+    -0.281055 -0.279659 0.271784
+    0.370379 -0.285496 0.383129
+    0.386633 0.391287 0.27444
+    0.54806 -0.253477 0.259133
+    0.243111 0.166448 0.172799
+    -0.171953 -0.134967 0.260472
+    0.134739 -0.570954 0.17489
+    0.0283864 0.0517387 0.288891
+    0.544008 -0.00712719 0.202557
+    0.602195 0.502523 0.290229
+    0.0735529 0.570954 0.204648
+    -0.354835 -0.150891 0.259133
+    0.157765 -0.069822 0.172799
+    0.0776377 0.436842 0.260472
+    -0.450065 0.361511 0.17489
+  faces 8
+    0 1 2  0  0 1 2  1
+    0 2 3  1  0 2 3  1
+    4 5 6  2  4 5 6  1
+    4 6 7  3  4 6 7  1
+    8 9 10  4  8 9 10  1
+    8 10 11  5  8 10 11  1
+    12 13 14  6  12 13 14  1
+    12 14 15  7  12 14 15  1
+  tverts 16
+    0.519531 0.999023 0
+    0.426758 0.463867 0
+    0.984375 0.351563 0
+    1.02148 1.01172 0
+    0.43457 0.462891 0
+    0.512695 1.00488 0
+    1.03711 1.00684 0
+    1.02637 0.336914 0
+    0.515625 1.00391 0
+    0.426758 0.454102 0
+    1.02441 0.34668 0
+    1.04199 1.00684 0
+    0.382813 0.527344 0
+    0.332031 -0.006836 0
+    0.969727 -0.044922 0
+    0.962891 0.291992 0
+endnode
+endmodelgeom rom_a6
+donemodel rom_a6

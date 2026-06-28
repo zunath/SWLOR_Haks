@@ -1,0 +1,76 @@
+# Exported from NWMax Plus v6.11.28 at 10/15/2018 2:23:23 AM
+# pwk file
+#
+#NWMax Plus PWKMESH  ASCII
+node trimesh pwk
+  parent swc_prison01_pwk
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.894118 0.721569 0.6 
+  multimaterial 30
+    Dirt
+    Obscuring
+    Grass
+    Stone
+    Wood
+    Water
+    Nonwalk
+    Transparent
+    Carpet
+    Metal
+    Puddles
+    Swamp
+    Mud
+    Leaves
+    Lava
+    BottomlessPit
+    DeepWater
+    Door
+    Snow
+    Sand
+    BareBones
+    StoneBridge
+    Temp1
+    Temp2
+    Temp3
+    Temp4
+    Temp5
+    Temp6
+    Temp7
+    Trigger
+  ambient 0.588 0.588 0.588 
+  diffuse 0.705882 0.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 10.0
+  bitmap Nonwalk
+  verts 15
+    30.9557 22.203 0.0453768
+    -30.9111 22.203 0.0453768
+    30.9557 -22.252 0.0453749
+    3.8325 -22.2544 0.0453749
+    -3.8325 -22.2544 0.0453749
+    -30.9111 -22.252 0.0453749
+    4.17042 -26.5545 0.0453747
+    8.96395 -26.5545 0.0453747
+    8.96352 -22.252 0.0453893
+    4.17293 -22.2544 0.0452744
+    -4.17352 -22.2544 0.04546
+    -4.17345 -26.5531 0.0453747
+    -8.97719 -26.5531 0.0453747
+    -8.94721 -22.252 0.0460698
+    8.96395 -23.9736 0.0453748
+  faces 13
+    0 2 8  2  0 0 0  7
+    8 14 7  2  0 0 0  7
+    7 6 9  2  0 0 0  7
+    8 7 9  2  0 0 0  7
+    9 3 4  2  0 0 0  7
+    9 4 10  2  0 0 0  7
+    10 11 12  2  0 0 0  7
+    10 12 13  2  0 0 0  7
+    9 10 13  2  0 0 0  7
+    8 9 13  2  0 0 0  7
+    0 8 13  2  0 0 0  7
+    0 13 5  2  0 0 0  7
+    0 5 1  2  0 0 0  7
+endnode

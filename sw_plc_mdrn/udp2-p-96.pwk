@@ -1,0 +1,24 @@
+#Exported from 3ds max by MDL Plug-in Suite 1.0b
+#http://www.bricksbuilder.com/nwn/utils/
+#MAXMODEL ASCII
+# model: udp2-p-96
+filedependancy udp2 interior placeables02.max
+node trimesh walkm562
+  parent udp2-p-96_pwk
+  position -0.00521938 0.00468508 0
+  orientation 0 0 0 0
+  wirecolor 0.601563 0.601563 0.601563
+  ambient 1 0.427451 0.427451
+  diffuse 1 0.427451 0.427451
+  specular 0 0 0
+  shininess 10
+  bitmap NULL
+  verts 4
+    0.662557 0.0536343 0
+    -0.662558 0.0536344 0
+    0.662557 -0.0536369 0
+    -0.662558 -0.0536368 0
+  faces 2
+    2 0 3  1  0 0 0  7
+    1 3 0  1  0 0 0  7
+endnode

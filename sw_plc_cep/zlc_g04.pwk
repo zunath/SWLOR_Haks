@@ -1,0 +1,27 @@
+#MAXDOOR ASCII
+# model: dBrlB4_PWK 
+filedependancy dBrlB4.max
+node trimesh zlc_g04_wg 
+  parent zlc_g04_pwk 
+  position -0.0134943 0.0249925 0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.552941 0.027451 0.227451  
+  ambient 0.0 0.0 0.0  
+  diffuse 0.784314 0.784314 0.784314  
+  specular 0.0 0.0 0.0  
+  shininess 21.0 
+    bitmap wddr2
+    verts 4
+     0.38 -0.42 0.0
+     -0.365 0.37 0.0
+     -0.365 -0.42 0.0
+     0.38 0.37 0.0
+    faces 2
+     0 1 2  1  0 1 2  1
+     0 3 1  1  0 3 1  1
+    tverts 4
+     0.93 0.98985 0 
+     0.936823 0.95985 0 
+     0.93 0.95985 0 
+     0.936817 0.98985 0 
+endnode

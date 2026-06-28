@@ -1,0 +1,24 @@
+#Exported from 3ds max by MDL Plug-in Suite 1.0b
+#http://www.bricksbuilder.com/nwn/utils/
+#MAXMODEL ASCII
+# model: gi-p-clock
+filedependancy interior placeables04.max
+node trimesh walkm
+  parent gi-p-clock_pwk
+  position 0.00216308 -0.00159134 0
+  orientation 0 0 -1 -3.14159
+  wirecolor 0.527344 0.527344 0.527344
+  ambient 0.523438 0.429688 0.03125
+  diffuse 0.523438 0.429688 0.03125
+  specular 0 0 0
+  shininess 1
+  bitmap NULL
+  verts 4
+    0.379657 0.318672 0
+    -0.379659 0.318672 0
+    0.379657 -0.318671 0
+    -0.37966 -0.318671 0
+  faces 2
+    2 0 3  1  0 0 0  7
+    1 3 0  1  0 0 0  7
+endnode

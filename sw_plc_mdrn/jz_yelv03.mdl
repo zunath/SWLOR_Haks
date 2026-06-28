@@ -1,0 +1,995 @@
+#MAXMODEL ASCII
+# model: zlc_50t
+filedependancy zlc_50t.max
+newmodel zlc_50t
+setsupermodel zlc_50t NULL
+classification TILE
+setanimationscale 1
+#MAXGEOM  ASCII
+beginmodelgeom zlc_50t
+node dummy zlc_50t
+  parent NULL
+endnode
+node trimesh Line50
+  parent zlc_50t
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 10
+  bitmap jz_yelv03
+  verts 3
+       0.2582430    0.0304182    0.0023827
+      -0.1534840    0.1641610    0.0773554
+      -0.0573759   -0.1771080   -0.0741615
+  tverts 3
+      -0.2550650    0.1085060  0
+       1.2812300    0.0878752  0
+       0.5274890    1.2058700  0
+  faces 1
+    0 1 2  1  0 1 2   0
+  position -0.0861811 -1.34374 0.306576
+  orientation 0 0 0 0
+endnode
+node trimesh Line88
+  parent zlc_50t
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 10
+  bitmap jz_yelv03
+  verts 3
+      -0.0745907    0.2906740   -0.0015585
+      -0.1794050   -0.2037090    0.0393872
+       0.2257120   -0.0356519   -0.0356052
+  tverts 3
+      -0.2550650    0.1085060  0
+       1.2812300    0.0878752  0
+       0.5274890    1.2058700  0
+  faces 1
+    0 1 2  1  0 1 2   0
+  position 0.40168 -1.01435 0.284092
+  orientation 0 0 0 0
+endnode
+node trimesh Line89
+  parent zlc_50t
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 10
+  bitmap jz_yelv03
+  verts 3
+       0.2338770    0.0982094   -0.0346687
+      -0.1923010    0.1293140    0.0324821
+      -0.0021412   -0.1972580   -0.0033995
+  tverts 3
+      -0.2550650    0.1085060  0
+       1.2812300    0.0878752  0
+       0.5274890    1.2058700  0
+  faces 1
+    0 1 2  1  0 1 2   0
+  position -0.0809752 -0.860446 0.306576
+  orientation 0 0 0 0
+endnode
+node trimesh Line90
+  parent zlc_50t
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 10
+  bitmap jz_yelv03
+  verts 3
+      -0.0039222    0.1913930    0.0006351
+      -0.1422980   -0.1005430    0.0160442
+       0.1360650   -0.0548715   -0.0154913
+  tverts 3
+      -0.2550650    0.1085060  0
+       1.2812300    0.0878752  0
+       0.5274890    1.2058700  0
+  faces 1
+    0 1 2  1  0 1 2   0
+  position -0.178021 -0.661772 0.306576
+  orientation 0 0 0 0
+endnode
+node trimesh Line91
+  parent zlc_50t
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 10
+  bitmap jz_yelv03
+  verts 3
+      -0.0219485   -0.3195830    0.0073163
+       0.2482070    0.1477680    0.0482518
+      -0.2149420    0.1104270   -0.0507938
+  tverts 3
+      -0.2550650    0.1085060  0
+       1.2812300    0.0878752  0
+       0.5274890    1.2058700  0
+  faces 1
+    0 1 2  1  0 1 2   0
+  position -0.330454 -0.941627 0.284092
+  orientation 0 0 0 0
+endnode
+node trimesh Line92
+  parent zlc_50t
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 10
+  bitmap jz_yelv03
+  verts 3
+      -0.2199490    0.0105516    0.0051252
+       0.1046490   -0.1709130    0.0191545
+       0.0732420    0.1515560   -0.0218908
+  tverts 3
+      -0.2550650    0.1085060  0
+       1.2812300    0.0878752  0
+       0.5274890    1.2058700  0
+  faces 1
+    0 1 2  1  0 1 2   0
+  position 0.360115 -0.431641 0.225684
+  orientation 0 0 0 0
+endnode
+node trimesh Line93
+  parent zlc_50t
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 10
+  bitmap jz_yelv03
+  verts 3
+      -0.1399620   -0.2872930   -0.0232778
+       0.2831370    0.0389946    0.0638985
+      -0.1558090    0.1869900   -0.0416253
+  tverts 3
+      -0.2550650    0.1085060  0
+       1.2812300    0.0878752  0
+       0.5274890    1.2058700  0
+  faces 1
+    0 1 2  1  0 1 2   0
+  position 0.380687 -0.224933 0.225684
+  orientation 0 0 0 0
+endnode
+node trimesh Line94
+  parent zlc_50t
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 10
+  bitmap jz_yelv03
+  verts 3
+       0.2668510    0.0293436    0.0024600
+      -0.1571470    0.1707040    0.0798637
+      -0.0606473   -0.1823880   -0.0765662
+  tverts 3
+      -0.2550650    0.1085060  0
+       1.2812300    0.0878752  0
+       0.5274890    1.2058700  0
+  faces 1
+    0 1 2  1  0 1 2   0
+  position 0.156062 0.056399 0.306576
+  orientation 0 0 0 0
+endnode
+node trimesh Line95
+  parent zlc_50t
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 10
+  bitmap jz_yelv03
+  verts 3
+      -0.0650147    0.3116700    0.0361103
+      -0.2000590   -0.2124570    0.0246703
+       0.2375710   -0.0438035   -0.0511452
+  tverts 3
+      -0.2550650    0.1085060  0
+       1.2812300    0.0878752  0
+       0.5274890    1.2058700  0
+  faces 1
+    0 1 2  1  0 1 2   0
+  position 1.25951 -0.975578 0.339267
+  orientation 0 0 0 0
+endnode
+node trimesh Line96
+  parent zlc_50t
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 10
+  bitmap jz_yelv03
+  verts 3
+       0.0938007   -0.3063690    0.0029360
+       0.1651840    0.2222590    0.0953174
+      -0.2273600    0.0305186   -0.0913818
+  tverts 3
+      -0.2550650    0.1085060  0
+       1.2812300    0.0878752  0
+       0.5274890    1.2058700  0
+  faces 1
+    0 1 2  1  0 1 2   0
+  position 0.220791 1.59389 0.306576
+  orientation 0 0 0 0
+endnode
+node trimesh Line97
+  parent zlc_50t
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 10
+  bitmap jz_yelv03
+  verts 3
+      -0.2489110    0.1395110    0.0494777
+       0.0245171   -0.2635430    0.0026629
+       0.1706700    0.1378460   -0.0409701
+  tverts 3
+      -0.2550650    0.1085060  0
+       1.2812300    0.0878752  0
+       0.5274890    1.2058700  0
+  faces 1
+    0 1 2  1  0 1 2   0
+  position -0.0262061 -0.27162 0.225684
+  orientation 0 0 0 0
+endnode
+node trimesh Line98
+  parent zlc_50t
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 10
+  bitmap jz_yelv03
+  verts 3
+      -0.1991800   -0.1702820   -0.0051239
+       0.2301380   -0.0641470    0.0175917
+      -0.0602122    0.1923970   -0.0124589
+  tverts 3
+      -0.2550650    0.1085060  0
+       1.2812300    0.0878752  0
+       0.5274890    1.2058700  0
+  faces 1
+    0 1 2  1  0 1 2   0
+  position 0.213041 -0.21935 0.316783
+  orientation 0 0 0 0
+endnode
+node trimesh Line99
+  parent zlc_50t
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 10
+  bitmap jz_yelv03
+  verts 3
+      -0.1480180   -0.1650770   -0.0026887
+       0.1987170   -0.0268835    0.0293813
+      -0.0706315    0.1535160   -0.0253732
+  tverts 3
+      -0.2550650    0.1085060  0
+       1.2812300    0.0878752  0
+       0.5274890    1.2058700  0
+  faces 1
+    0 1 2  1  0 1 2   0
+  position 0.28328 0.397071 0.316783
+  orientation 0 0 0 0
+endnode
+node trimesh Line100
+  parent zlc_50t
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 10
+  bitmap jz_yelv03
+  verts 3
+       0.1975990    0.2522200    0.0029360
+      -0.2767950    0.0083092    0.0953174
+       0.1050550   -0.2039290   -0.0913818
+  tverts 3
+      -0.2550650    0.1085060  0
+       1.2812300    0.0878752  0
+       0.5274890    1.2058700  0
+  faces 1
+    0 1 2  1  0 1 2   0
+  position -0.164004 0.162107 0.306576
+  orientation 0 0 0 0
+endnode
+node trimesh Line101
+  parent zlc_50t
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 10
+  bitmap jz_yelv03
+  verts 3
+       0.0767434   -0.2929420    0.0027749
+       0.1645780    0.2035070    0.0900878
+      -0.2135270    0.0376042   -0.0863681
+  tverts 3
+      -0.2550650    0.1085060  0
+       1.2812300    0.0878752  0
+       0.5274890    1.2058700  0
+  faces 1
+    0 1 2  1  0 1 2   0
+  position -0.703491 -1.27686 0.306576
+  orientation 0 0 0 0
+endnode
+node trimesh Line102
+  parent zlc_50t
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 10
+  bitmap jz_yelv03
+  verts 3
+       0.2693270    0.0968192   -0.0225639
+      -0.2071630    0.1536910    0.0481322
+      -0.0158206   -0.2189640   -0.0274429
+  tverts 3
+      -0.2550650    0.1085060  0
+       1.2812300    0.0878752  0
+       0.5274890    1.2058700  0
+  faces 1
+    0 1 2  1  0 1 2   0
+  position -1.44151 -0.192914 0.306576
+  orientation 0 0 0 0
+endnode
+node trimesh Line103
+  parent zlc_50t
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 10
+  bitmap jz_yelv03
+  verts 3
+      -0.1892430   -0.0868479   -0.0102709
+       0.1613800   -0.0991189    0.0209602
+      -0.0036689    0.1601970   -0.0116046
+  tverts 3
+      -0.2550650    0.1085060  0
+       1.2812300    0.0878752  0
+       0.5274890    1.2058700  0
+  faces 1
+    0 1 2  1  0 1 2   0
+  position -0.46513 -0.0113311 0.284092
+  orientation 0 0 0 0
+endnode
+node trimesh Line104
+  parent zlc_50t
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 10
+  bitmap jz_yelv03
+  verts 3
+       0.2519660    0.0205096   -0.0046118
+      -0.1436390    0.1801880    0.0175044
+      -0.0616972   -0.1843830   -0.0127756
+  tverts 3
+      -0.2550650    0.1085060  0
+       1.2812300    0.0878752  0
+       0.5274890    1.2058700  0
+  faces 1
+    0 1 2  1  0 1 2   0
+  position -1.47585 -0.697147 0.284092
+  orientation 0 0 0 0
+endnode
+node trimesh Line105
+  parent zlc_50t
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 10
+  bitmap jz_yelv03
+  verts 3
+       0.0557469    0.2780490    0.0242996
+      -0.2400790   -0.1001710   -0.0018612
+       0.1810580   -0.1226150   -0.0171591
+  tverts 3
+      -0.2550650    0.1085060  0
+       1.2812300    0.0878752  0
+       0.5274890    1.2058700  0
+  faces 1
+    0 1 2  1  0 1 2   0
+  position -0.733331 -0.540596 0.306576
+  orientation 0 0 0 0
+endnode
+node trimesh Line106
+  parent zlc_50t
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 10
+  bitmap jz_yelv03
+  verts 3
+      -0.2333710    0.1542830   -0.0054312
+       0.0027574   -0.2531570    0.0362177
+       0.1789250    0.1166470   -0.0296307
+  tverts 3
+      -0.2550650    0.1085060  0
+       1.2812300    0.0878752  0
+       0.5274890    1.2058700  0
+  faces 1
+    0 1 2  1  0 1 2   0
+  position -0.598894 -0.787214 0.316783
+  orientation 0 0 0 0
+endnode
+node trimesh Line107
+  parent zlc_50t
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 10
+  bitmap jz_yelv03
+  verts 3
+      -0.0129170   -0.3200760    0.0072901
+       0.2484280    0.1538740    0.0194086
+      -0.2221730    0.1051030   -0.0238120
+  tverts 3
+      -0.2550650    0.1085060  0
+       1.2812300    0.0878752  0
+       0.5274890    1.2058700  0
+  faces 1
+    0 1 2  1  0 1 2   0
+  position -0.922629 -0.245869 0.225684
+  orientation 0 0 0 0
+endnode
+node trimesh Line108
+  parent zlc_50t
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 10
+  bitmap jz_yelv03
+  verts 3
+       0.1168890   -0.2542150    0.0025639
+       0.1170540    0.2116080    0.0832375
+      -0.2003260    0.0000000   -0.0798007
+  tverts 3
+      -0.2550650    0.1085060  0
+       1.2812300    0.0878752  0
+       0.5274890    1.2058700  0
+  faces 1
+    0 1 2  1  0 1 2   0
+  position -0.67204 0.420378 0.306576
+  orientation 0 0 0 0
+endnode
+node trimesh Line109
+  parent zlc_50t
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 10
+  bitmap jz_yelv03
+  verts 3
+       0.2697380   -0.1729210    0.0029360
+      -0.0178431    0.2763450    0.0953174
+      -0.1931080   -0.1238270   -0.0913818
+  tverts 3
+      -0.2550650    0.1085060  0
+       1.2812300    0.0878752  0
+       0.5274890    1.2058700  0
+  faces 1
+    0 1 2  1  0 1 2   0
+  position -1.18171 0.987772 0.306576
+  orientation 0 0 0 0
+endnode
+node trimesh Line110
+  parent zlc_50t
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 10
+  bitmap jz_yelv03
+  verts 3
+      -0.2792110    0.1557020   -0.0216121
+       0.0230185   -0.2887440    0.0432107
+       0.1956380    0.1488090   -0.0235828
+  tverts 3
+      -0.2550650    0.1085060  0
+       1.2812300    0.0878752  0
+       0.5274890    1.2058700  0
+  faces 1
+    0 1 2  1  0 1 2   0
+  position -0.345039 0.530644 0.225684
+  orientation 0 0 0 0
+endnode
+node trimesh Line111
+  parent zlc_50t
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 10
+  bitmap jz_yelv03
+  verts 3
+       0.2419560    0.0606582   -0.0196379
+      -0.1683170    0.1530350    0.0235101
+      -0.0308445   -0.1902260   -0.0067029
+  tverts 3
+      -0.2550650    0.1085060  0
+       1.2812300    0.0878752  0
+       0.5274890    1.2058700  0
+  faces 1
+    0 1 2  1  0 1 2   0
+  position -1.01883 0.575934 0.306576
+  orientation 0 0 0 0
+endnode
+node trimesh Line112
+  parent zlc_50t
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 10
+  bitmap jz_yelv03
+  verts 3
+       0.0092163    0.2557990    0.0052264
+      -0.1975140   -0.1238690    0.0200391
+       0.1774600   -0.0831585   -0.0227965
+  tverts 3
+      -0.2550650    0.1085060  0
+       1.2812300    0.0878752  0
+       0.5274890    1.2058700  0
+  faces 1
+    0 1 2  1  0 1 2   0
+  position -1.53616 0.340153 0.306576
+  orientation 0 0 0 0
+endnode
+node trimesh Line113
+  parent zlc_50t
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 10
+  bitmap jz_yelv03
+  verts 3
+      -0.2172880    0.0962137   -0.0022754
+       0.0380200   -0.2127430    0.0218084
+       0.1334550    0.1240330   -0.0186159
+  tverts 3
+      -0.2550650    0.1085060  0
+       1.2812300    0.0878752  0
+       0.5274890    1.2058700  0
+  faces 1
+    0 1 2  1  0 1 2   0
+  position -0.880935 0.143071 0.316783
+  orientation 0 0 0 0
+endnode
+node trimesh Line114
+  parent zlc_50t
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 10
+  bitmap jz_yelv03
+  verts 3
+       0.0315784   -0.2427310    0.0022430
+       0.1527710    0.1463450    0.0728185
+      -0.1673630    0.0519861   -0.0698119
+  tverts 3
+      -0.2550650    0.1085060  0
+       1.2812300    0.0878752  0
+       0.5274890    1.2058700  0
+  faces 1
+    0 1 2  1  0 1 2   0
+  position -0.703543 1.39948 0.306576
+  orientation 0 0 0 0
+endnode
+node trimesh Line115
+  parent zlc_50t
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 10
+  bitmap jz_yelv03
+  verts 3
+      -0.2518640    0.1980520    0.0029360
+      -0.0088075   -0.2767800    0.0953174
+       0.2041180    0.1046880   -0.0913818
+  tverts 3
+      -0.2550650    0.1085060  0
+       1.2812300    0.0878752  0
+       0.5274890    1.2058700  0
+  faces 1
+    0 1 2  1  0 1 2   0
+  position 0.29208 0.777183 0.284092
+  orientation 0 0 0 0
+endnode
+node trimesh Line116
+  parent zlc_50t
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 10
+  bitmap jz_yelv03
+  verts 3
+      -0.2993280    0.1142940    0.0029360
+       0.0738094   -0.2669030    0.0953174
+       0.1638060    0.1605970   -0.0913818
+  tverts 3
+      -0.2550650    0.1085060  0
+       1.2812300    0.0878752  0
+       0.5274890    1.2058700  0
+  faces 1
+    0 1 2  1  0 1 2   0
+  position -0.107094 0.835417 0.284092
+  orientation 0 0 0 0
+endnode
+node trimesh Line117
+  parent zlc_50t
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 10
+  bitmap jz_yelv03
+  verts 3
+      -0.0715214   -0.2726150    0.0141692
+       0.2414480    0.0868722    0.0261427
+      -0.1700690    0.1308200   -0.0354570
+  tverts 3
+      -0.2550650    0.1085060  0
+       1.2812300    0.0878752  0
+       0.5274890    1.2058700  0
+  faces 1
+    0 1 2  1  0 1 2   0
+  position -0.0844613 0.54568 0.284092
+  orientation 0 0 0 0
+endnode
+node trimesh Line118
+  parent zlc_50t
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 10
+  bitmap jz_yelv03
+  verts 3
+       0.0480934    0.2686120    0.0025005
+      -0.2116050   -0.1041500    0.0811799
+       0.1603940   -0.1115560   -0.0778280
+  tverts 3
+      -0.2550650    0.1085060  0
+       1.2812300    0.0878752  0
+       0.5274890    1.2058700  0
+  faces 1
+    0 1 2  1  0 1 2   0
+  position 0.823968 1.40759 0.306576
+  orientation 0 0 0 0
+endnode
+node trimesh Line119
+  parent zlc_50t
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 10
+  bitmap jz_yelv03
+  verts 3
+      -0.1531830   -0.2487690   -0.0017375
+       0.2641120    0.0119492    0.0375125
+      -0.1277430    0.1823080   -0.0337136
+  tverts 3
+      -0.2550650    0.1085060  0
+       1.2812300    0.0878752  0
+       0.5274890    1.2058700  0
+  faces 1
+    0 1 2  1  0 1 2   0
+  position 0.258159 1.03539 0.284092
+  orientation 0 0 0 0
+endnode
+node trimesh Line120
+  parent zlc_50t
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 10
+  bitmap jz_yelv03
+  verts 3
+       0.1488440   -0.1647570    0.0020346
+       0.0384158    0.1880160    0.0660530
+      -0.1516720   -0.0476095   -0.0633258
+  tverts 3
+      -0.2550650    0.1085060  0
+       1.2812300    0.0878752  0
+       0.5274890    1.2058700  0
+  faces 1
+    0 1 2  1  0 1 2   0
+  position -0.0742915 1.01322 0.306576
+  orientation 0 0 0 0
+endnode
+node trimesh Line121
+  parent zlc_50t
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 10
+  bitmap jz_yelv03
+  verts 3
+       0.2817840    0.1031870    0.0027498
+      -0.2161960    0.1432640    0.0892714
+      -0.0170657   -0.2141690   -0.0855855
+  tverts 3
+      -0.2550650    0.1085060  0
+       1.2812300    0.0878752  0
+       0.5274890    1.2058700  0
+  faces 1
+    0 1 2  1  0 1 2   0
+  position -0.430347 0.985096 0.306576
+  orientation 0 0 0 0
+endnode
+node trimesh Line122
+  parent zlc_50t
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 10
+  bitmap jz_yelv03
+  verts 3
+       0.2339680   -0.0715370    0.0022419
+      -0.0700824    0.1995020    0.0727836
+      -0.1164570   -0.1308480   -0.0697784
+  tverts 3
+      -0.2550650    0.1085060  0
+       1.2812300    0.0878752  0
+       0.5274890    1.2058700  0
+  faces 1
+    0 1 2  1  0 1 2   0
+  position 0.559806 -0.709511 0.306576
+  orientation 0 0 0 0
+endnode
+node trimesh Line123
+  parent zlc_50t
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 10
+  bitmap jz_yelv03
+  verts 3
+       0.2774530    0.0013537    0.0025424
+      -0.1430970    0.1924240    0.0825401
+      -0.0820262   -0.1809220   -0.0791321
+  tverts 3
+      -0.2550650    0.1085060  0
+       1.2812300    0.0878752  0
+       0.5274890    1.2058700  0
+  faces 1
+    0 1 2  1  0 1 2   0
+  position -0.285664 -0.260466 0.306576
+  orientation 0 0 0 0
+endnode
+node trimesh Line124
+  parent zlc_50t
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 10
+  bitmap jz_yelv03
+  verts 3
+      -0.0326737    0.3187360    0.0029360
+      -0.2051110   -0.1860490    0.0953174
+       0.2171400   -0.0739848   -0.0913818
+  tverts 3
+      -0.2550650    0.1085060  0
+       1.2812300    0.0878752  0
+       0.5274890    1.2058700  0
+  faces 1
+    0 1 2  1  0 1 2   0
+  position 0.824294 -0.0550763 0.284092
+  orientation 0 0 0 0
+endnode
+node trimesh Line125
+  parent zlc_50t
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 10
+  bitmap jz_yelv03
+  verts 3
+       0.0580723   -0.3126950   -0.0389680
+       0.2094100    0.2022060    0.0320981
+      -0.2409120    0.0541824    0.0003032
+  tverts 3
+      -0.2550650    0.1085060  0
+       1.2812300    0.0878752  0
+       0.5274890    1.2058700  0
+  faces 1
+    0 1 2  1  0 1 2   0
+  position 0.940852 -0.558256 0.306576
+  orientation 0 0 0 0
+endnode
+node trimesh Line126
+  parent zlc_50t
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 10
+  bitmap jz_yelv03
+  verts 3
+       0.0370158    0.2174570    0.0020213
+      -0.1703230   -0.0856508    0.0656215
+       0.1304220   -0.0890626   -0.0629121
+  tverts 3
+      -0.2550650    0.1085060  0
+       1.2812300    0.0878752  0
+       0.5274890    1.2058700  0
+  faces 1
+    0 1 2  1  0 1 2   0
+  position 0.971639 -0.347359 0.306576
+  orientation 0 0 0 0
+endnode
+node trimesh Line127
+  parent zlc_50t
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 10
+  bitmap jz_yelv03
+  verts 3
+      -0.2887480    0.1352910    0.0314641
+       0.0461548   -0.2891760    0.0041702
+       0.1814280    0.1650860   -0.0283691
+  tverts 3
+      -0.2550650    0.1085060  0
+       1.2812300    0.0878752  0
+       0.5274890    1.2058700  0
+  faces 1
+    0 1 2  1  0 1 2   0
+  position 1.48879 -0.0830065 0.225684
+  orientation 0 0 0 0
+endnode
+node trimesh Line128
+  parent zlc_50t
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 10
+  bitmap jz_yelv03
+  verts 3
+       0.1677130   -0.2423730    0.0027008
+       0.0827717    0.2409160    0.0876824
+      -0.2078090   -0.0366935   -0.0840621
+  tverts 3
+      -0.2550650    0.1085060  0
+       1.2812300    0.0878752  0
+       0.5274890    1.2058700  0
+  faces 1
+    0 1 2  1  0 1 2   0
+  position 0.704455 0.312808 0.306576
+  orientation 0 0 0 0
+endnode
+node trimesh Line129
+  parent zlc_50t
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 10
+  bitmap jz_yelv03
+  verts 3
+      -0.1834420    0.2624580   -0.0115635
+      -0.1051650   -0.2714260    0.0322221
+       0.2409740    0.0495923   -0.0211263
+  tverts 3
+      -0.2550650    0.1085060  0
+       1.2812300    0.0878752  0
+       0.5274890    1.2058700  0
+  faces 1
+    0 1 2  1  0 1 2   0
+  position 1.39693 0.65588 0.284092
+  orientation 0 0 0 0
+endnode
+node trimesh Line130
+  parent zlc_50t
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 10
+  bitmap jz_yelv03
+  verts 3
+      -0.2043730    0.1508980    0.0023279
+      -0.0003188   -0.2195640    0.0755753
+       0.1592470    0.0878788   -0.0724548
+  tverts 3
+      -0.2550650    0.1085060  0
+       1.2812300    0.0878752  0
+       0.5274890    1.2058700  0
+  faces 1
+    0 1 2  1  0 1 2   0
+  position 0.724009 0.665146 0.284092
+  orientation 0 0 0 0
+endnode
+node trimesh Line131
+  parent zlc_50t
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 10
+  bitmap jz_yelv03
+  verts 3
+      -0.1296660   -0.2453040    0.0008753
+       0.2503040    0.0277308    0.0299225
+      -0.1331260    0.1648620   -0.0286511
+  tverts 3
+      -0.2550650    0.1085060  0
+       1.2812300    0.0878752  0
+       0.5274890    1.2058700  0
+  faces 1
+    0 1 2  1  0 1 2   0
+  position 0.543319 0.520294 0.316783
+  orientation 0 0 0 0
+endnode
+node trimesh Line132
+  parent zlc_50t
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 10
+  bitmap jz_yelv03
+  verts 3
+       0.0817237    0.1764200    0.0229881
+      -0.1755680   -0.0313130    0.0147523
+       0.1005530   -0.1079390   -0.0316687
+  tverts 3
+      -0.2550650    0.1085060  0
+       1.2812300    0.0878752  0
+       0.5274890    1.2058700  0
+  faces 1
+    0 1 2  1  0 1 2   0
+  position 1.05494 0.479385 0.306576
+  orientation 0 0 0 0
+endnode
+node trimesh Line133
+  parent zlc_50t
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 10
+  bitmap jz_yelv03
+  verts 3
+      -0.1941660   -0.1887260    0.0390832
+       0.2438630   -0.0411509    0.0369283
+      -0.0769413    0.1852460   -0.0649155
+  tverts 3
+      -0.2550650    0.1085060  0
+       1.2812300    0.0878752  0
+       0.5274890    1.2058700  0
+  faces 1
+    0 1 2  1  0 1 2   0
+  position 1.35765 1.11729 0.284092
+  orientation 0 0 0 0
+endnode
+node trimesh Line134
+  parent zlc_50t
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 10
+  bitmap jz_yelv03
+  verts 3
+       0.1432330   -0.2866090    0.0029360
+       0.1261040    0.2465410    0.0953174
+      -0.2292740   -0.0075479   -0.0913818
+  tverts 3
+      -0.2550650    0.1085060  0
+       1.2812300    0.0878752  0
+       0.5274890    1.2058700  0
+  faces 1
+    0 1 2  1  0 1 2   0
+  position 0.847407 1.06366 0.306576
+  orientation 0 0 0 0
+endnode
+node trimesh Line135
+  parent zlc_50t
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 10
+  bitmap jz_yelv03
+  verts 3
+       0.3193870    0.0255333    0.0029360
+      -0.1814120    0.2092230    0.0953174
+      -0.0788251   -0.2154310   -0.0913818
+  tverts 3
+      -0.2550650    0.1085060  0
+       1.2812300    0.0878752  0
+       0.5274890    1.2058700  0
+  faces 1
+    0 1 2  1  0 1 2   0
+  position 0.440574 0.773571 0.306576
+  orientation 0 0 0 0
+endnode
+endmodelgeom zlc_50t
+
+donemodel zlc_50t

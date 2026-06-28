@@ -1,0 +1,54 @@
+# Exported from NWmax 0.7 at 4/14/2006 11:45:57 PM
+# mdl file
+#
+#NWmax MODEL ASCII
+# model: PLC_corvette_pwk
+filedependancy Unknown
+newmodel PLC_corvette_pwk
+setsupermodel PLC_corvette_pwk NULL
+classification Character
+setanimationscale 12.0
+#NWmax GEOM  ASCII
+beginmodelgeom PLC_corvette_pwk
+node dummy PLC_corvette_pwk
+  parent NULL
+endnode
+node trimesh Plane01
+  parent PLC_corvette_pwk
+  position -0.0372991 -20.9515 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.423529 0.0313726 0.533333 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 0
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center 0.0 0.0 0.0 
+  bitmap NULL
+  verts 9
+    -11.7309 -37.885 0.0
+    0.0 -37.885 0.0
+    11.7309 -37.885 0.0
+    -11.7309 0.0 0.0
+    0.0 0.0 0.0
+    11.7309 0.0 0.0
+    -11.7309 37.885 0.0
+    0.0 37.885 0.0
+    11.7309 37.885 0.0
+  faces 8
+    3 0 4  1  0 0 0  1
+    1 4 0  1  0 0 0  1
+    4 1 5  1  0 0 0  1
+    2 5 1  1  0 0 0  1
+    6 3 7  1  0 0 0  1
+    4 7 3  1  0 0 0  1
+    7 4 8  1  0 0 0  1
+    5 8 4  1  0 0 0  1
+endnode
+endmodelgeom PLC_corvette_pwk
+donemodel PLC_corvette_pwk

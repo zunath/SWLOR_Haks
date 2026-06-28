@@ -1,0 +1,83 @@
+# Exported from NWmax 0.7 at 3/23/2005 5:22:28 PM
+# mdl file
+#
+#NWmax MODEL ASCII
+# model: ffmarket_pwk
+filedependancy Unknown
+newmodel ffmarket_pwk
+setsupermodel ffmarket_pwk NULL
+classification Character
+setanimationscale 1.0
+#NWmax GEOM  ASCII
+beginmodelgeom ffmarket_pwk
+node dummy ffmarket_pwk
+  parent NULL
+endnode
+node trimesh Plane01
+  parent ffmarket_pwk
+  position 0.052132 1.22709 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.345098 0.780392 0.882353 
+  bitmap NULL
+  verts 25
+    -4.94 -5.88 0.0
+    -2.47 -7.35 0.0
+    0.0 -7.53 0.0
+    2.47 -7.25 0.0
+    4.94 -5.88 0.0
+    -6.99 -2.94 0.0
+    -2.47 -2.94 0.0
+    0.0 -2.94 0.0
+    2.47 -2.94 0.0
+    7.17 -2.94 0.0
+    -7.64 0.0 0.0
+    -2.47 0.0 0.0
+    0.0 0.0 0.0
+    2.47 0.0 0.0
+    7.92 0.0 0.0
+    -5.74 4.96 0.0
+    -0.6 3.12 0.0
+    0.0 2.94 0.0
+    0.97 2.93 0.0
+    5.85 4.89 0.0
+    -1.38 7.69 0.0
+    -1.16 7.83 0.0
+    -1.77 12.98 0.0
+    -1.0 12.85 0.0
+    -0.21 7.96 0.0
+  faces 32
+    5 0 6  1  0 0 0  1
+    1 6 0  1  0 0 0  1
+    6 1 7  1  0 0 0  1
+    2 7 1  1  0 0 0  1
+    7 2 8  1  0 0 0  1
+    3 8 2  1  0 0 0  1
+    8 3 9  1  0 0 0  1
+    4 9 3  1  0 0 0  1
+    10 5 11  1  0 0 0  1
+    6 11 5  1  0 0 0  1
+    11 6 12  1  0 0 0  1
+    7 12 6  1  0 0 0  1
+    12 7 13  1  0 0 0  1
+    8 13 7  1  0 0 0  1
+    13 8 14  1  0 0 0  1
+    9 14 8  1  0 0 0  1
+    15 10 16  1  0 0 0  1
+    11 16 10  1  0 0 0  1
+    16 11 17  1  0 0 0  1
+    12 17 11  1  0 0 0  1
+    17 12 18  1  0 0 0  1
+    13 18 12  1  0 0 0  1
+    18 13 19  1  0 0 0  1
+    14 19 13  1  0 0 0  1
+    20 15 21  1  0 0 0  1
+    16 21 15  1  0 0 0  1
+    21 16 22  1  0 0 0  1
+    17 22 16  1  0 0 0  1
+    22 17 23  1  0 0 0  1
+    18 23 17  1  0 0 0  1
+    23 18 24  1  0 0 0  1
+    19 24 18  1  0 0 0  1
+endnode
+endmodelgeom ffmarket_pwk
+donemodel ffmarket_pwk

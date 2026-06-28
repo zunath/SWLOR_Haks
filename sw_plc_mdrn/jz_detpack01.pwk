@@ -1,0 +1,34 @@
+# Exported from NWmax 0.8 b60 at 29/06/2009 10:50:25
+# pwk file
+#
+#NWmax PWKMESH  ASCII
+node trimesh pwk
+  parent jz_detpack01_pwk
+  position 0.0042698 -0.00128614 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.52549 0.231373 0.0313726 
+  bitmap NULL
+  verts 4
+    -0.0806318 -0.115623 0.0
+    0.0806318 -0.115623 0.0
+    -0.0806318 0.115623 0.0
+    0.0806318 0.115623 0.0
+  faces 2
+    2 0 3  1  6 4 7  7
+    1 3 0  1  5 7 4  7
+  tverts 8
+    0.0 0.0 0
+    1.0 0.0 0
+    0.0 0.0 0
+    1.0 0.0 0
+    0.0 0.0 0
+    1.0 0.0 0
+    0.0 1.0 0
+    1.0 1.0 0
+endnode
+node dummy pwk_use01
+  parent jz_detpack01_pwk
+  position -0.00637968 0.175395 0.0670504
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.898039 0.65098 0.843137 
+endnode

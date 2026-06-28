@@ -1,0 +1,643 @@
+# Exported from NWmax 0.8 b60 at 20.03.2016 20:38:50
+# mdl file
+#
+#NWmax MODEL ASCII
+# model: plc_nat30
+#local file: Unknown
+filedependancy Unknown
+newmodel plc_nat30
+setsupermodel plc_nat30 NULL
+classification Character
+setanimationscale 1.0
+#NWmax GEOM  ASCII
+beginmodelgeom plc_nat30
+node dummy plc_nat30
+  parent NULL
+endnode
+node dummy nat30_hand
+  parent plc_nat30
+  position 1.0 0.0 1.36
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.223529 0.0313726 0.533333 
+endnode
+node dummy nat30_head
+  parent plc_nat30
+  position 0.0 0.0 1.57
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.223529 0.0313726 0.533333 
+endnode
+node dummy nat30_head_hit
+  parent plc_nat30
+  position 0.0 0.0 0.5
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.223529 0.0313726 0.533333 
+endnode
+node dummy nat30_impact
+  parent plc_nat30
+  position 0.0 0.0 0.07
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.223529 0.0313726 0.533333 
+endnode
+node dummy nat30_ground
+  parent plc_nat30
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.603922 0.843137 0.898039 
+endnode
+node trimesh damage04
+  parent plc_nat30
+  position 0.0147516 0.0543283 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 0
+  Shadow 0
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 0.0705882 0.0 1.0 
+  diffuse 1.0 0.501961 0.643137 
+  specular 0.0 0.9 0.105882 
+  shininess 24
+  center 0.0 0.0 8.1433 
+  bitmap NULL
+  verts 12
+    -0.0651466 -0.0618892 0.0
+    -0.0651466 0.0618892 0.0
+    0.0651466 0.0618892 0.0
+    0.0651466 -0.0618892 0.0
+    -0.0651466 -0.0618892 0.162866
+    0.0651466 -0.0618892 0.162866
+    0.0651466 0.0618892 0.162866
+    -0.0651466 0.0618892 0.162866
+    0.0325733 -0.0325733 0.0814332
+    -0.0325733 -0.0325733 0.0814332
+    0.0325733 0.0325733 0.0814332
+    -0.0325733 0.0325733 0.0814332
+  faces 20
+    0 1 2  1  0 0 0  2
+    2 3 0  1  0 0 0  2
+    4 5 6  1  0 0 0  1
+    6 7 4  1  0 0 0  1
+    0 3 8  2  0 0 0  5
+    8 9 0  2  0 0 0  5
+    9 8 5  2  0 0 0  5
+    5 4 9  2  0 0 0  5
+    3 2 10  4  0 0 0  4
+    10 8 3  4  0 0 0  4
+    8 10 6  4  0 0 0  4
+    6 5 8  4  0 0 0  4
+    2 1 11  2  0 0 0  6
+    11 10 2  2  0 0 0  6
+    10 11 7  2  0 0 0  6
+    7 6 10  2  0 0 0  6
+    1 0 9  4  0 0 0  3
+    9 11 1  4  0 0 0  3
+    11 9 4  4  0 0 0  3
+    4 7 11  4  0 0 0  3
+endnode
+node trimesh vines01
+  parent damage04
+  position -0.0147516 -0.0543283 1.21
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.6 0.894118 0.839216 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 0
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 1
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 1
+  center -2.12815 0.40276 0.0 
+  bitmap plc_nvines05
+  verts 29
+    0.0918091 -0.00983669 -0.727273
+    -0.209849 -0.0918091 -0.902597
+    -0.222965 -0.127877 -1.21429
+    0.150829 -0.121319 -1.21429
+    -0.557413 -0.0688571 -0.902597
+    -0.550855 -0.0786935 -1.21429
+    0.154108 -0.0295101 0.993506
+    -0.173782 -0.0295101 0.974026
+    -0.206571 -0.0557413 -0.149351
+    0.114762 0.0590202 -0.149351
+    -0.59348 -0.101646 1.07143
+    -0.563971 -0.0918091 -0.149351
+    0.495177 -0.045156 -0.935065
+    0.18696 -0.159918 -0.935065
+    0.183681 -0.117292 -1.21429
+    0.547639 -0.0845026 -1.21429
+    -0.150767 -0.0418771 -0.935065
+    -0.147488 -0.00908812 -1.21429
+    0.550918 -0.0648294 1.07143
+    0.21647 -0.100897 1.07143
+    0.190239 -0.186149 -0.175325
+    0.501734 -0.0582716 -0.175325
+    -0.190114 0.0597688 0.948052
+    -0.154045 -0.015646 -0.175325
+    0.550918 0.0696052 1.2013
+    0.21647 0.0335376 1.19481
+    -0.190114 0.194204 0.935065
+    -0.173782 0.0655779 1.11688
+    -0.59348 -0.00983682 1.21429
+  faces 30
+    2 3 0  1  2 3 0  1
+    0 1 2  1  0 1 2  1
+    5 2 1  1  5 2 1  1
+    1 4 5  1  1 4 5  1
+    8 9 6  1  8 9 6  1
+    6 7 8  1  6 7 8  1
+    11 8 7  1  11 8 7  1
+    7 10 11  1  7 10 11  1
+    8 11 4  1  8 11 4  1
+    4 1 8  1  4 1 8  1
+    9 8 1  1  9 8 1  1
+    1 0 9  1  1 0 9  1
+    14 15 12  1  14 15 12  1
+    12 13 14  2  12 13 14  1
+    17 14 13  4  17 14 13  1
+    13 16 17  4  13 16 17  1
+    20 21 18  2  20 21 18  1
+    18 19 20  2  18 19 20  1
+    23 20 19  4  23 20 19  1
+    19 22 23  4  19 22 23  1
+    20 23 16  4  20 23 16  1
+    16 13 20  4  16 13 20  1
+    21 20 13  2  21 20 13  1
+    13 12 21  2  13 12 21  1
+    19 18 24  1  19 18 24  1
+    24 25 19  1  24 25 19  1
+    22 19 25  1  22 19 25  1
+    25 26 22  1  25 26 22  1
+    10 7 27  2  10 7 27  1
+    27 28 10  2  27 28 10  1
+  tverts 29
+    0.843684 0.18806 0
+    0.429204 0.124516 0
+    0.429092 0.000904083 0
+    0.843692 0.000904083 0
+    0.005 0.124516 0
+    0.005 0.000904083 0
+    0.975188 0.996373 0
+    0.440918 0.95676 0
+    0.429248 0.525332 0
+    0.843688 0.525332 0
+    0.005 0.91674 0
+    0.005 0.525332 0
+    0.99 0.12328 0
+    0.607816 0.12328 0
+    0.607812 0.00229597 0
+    0.99 0.00229597 0
+    0.224012 0.12328 0
+    0.22404 0.00229597 0
+    0.99 0.930072 0
+    0.607852 0.930072 0
+    0.60782 0.471912 0
+    0.99 0.471912 0
+    0.223464 0.930072 0
+    0.223964 0.471912 0
+    0.99 0.995 0
+    0.607852 0.995 0
+    0.223464 0.995 0
+    0.429484 0.995 0
+    0.005 0.995 0
+endnode
+node emitter ChunkyWood62
+  parent plc_nat30
+  position 0.0131848 0.0144894 0.06
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 1.0 1.0 1.0 
+  update_sel 3
+  update Explosion
+  render_sel 1
+  render Normal
+  blend_sel 1
+  Blend Normal
+  spawntype_sel 0
+  spawnType 0
+  xSize 89.0
+  ySize 40.0
+  inherit 1
+  inherit_local 0
+  inheritvel 0
+  inherit_part 0
+  renderorder 0
+  threshold 0.0
+  combinetime 0.0
+  deadspace 0.0
+  opacity 0.5
+  colorStart 1.0 1.0 1.0 
+  colorEnd 1.0 1.0 1.0 
+  alphaStart 1.0
+  alphaEnd 1.0
+  sizeStart 0.1
+  sizeEnd 0.1
+  sizeStart_y 0.0
+  sizeEnd_y 0.0
+  birthrate 3
+  lifeExp 0.75
+  mass 3.0
+  spread 1.22173
+  particleRot 5.0
+  velocity 8.0
+  randvel 0.3
+  bounce_co 0.5
+  blurlength 10.0
+  loop 0
+  bounce 1
+  m_isTinted 0
+  splat 0
+  affectedByWind false
+  texture fxpa_cloud02
+  twosidedtex 0
+  xgrid 5
+  ygrid 5
+  fps 0
+  framestart 0
+  frameend 24
+  random 0
+  chunkName PLC_Chunk_S01
+  lightningDelay 0.0
+  lightningRadius 0.0
+  lightningSubDiv 0
+  lightningScale 0.0
+  blastRadius 0.0
+  blastLength 0.0
+  p2p 0
+  p2p_type Bezier
+  p2p_sel 1
+  p2p_bezier2 0.0
+  p2p_bezier3 0.0
+  grav 0.0
+  drag 0.0
+endnode
+node emitter ChunkyWood63
+  parent plc_nat30
+  position 0.0131848 0.0144894 0.07
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 1.0 1.0 1.0 
+  update_sel 3
+  update Explosion
+  render_sel 1
+  render Normal
+  blend_sel 1
+  Blend Normal
+  spawntype_sel 0
+  spawnType 0
+  xSize 89.0
+  ySize 40.0
+  inherit 1
+  inherit_local 0
+  inheritvel 0
+  inherit_part 0
+  renderorder 0
+  threshold 0.0
+  combinetime 0.0
+  deadspace 0.0
+  opacity 0.5
+  colorStart 0.701961 0.67451 0.603922 
+  colorEnd 0.854902 0.847059 0.82353 
+  alphaStart 1.0
+  alphaEnd 1.0
+  sizeStart 0.1
+  sizeEnd 0.1
+  sizeStart_y 0.0
+  sizeEnd_y 0.0
+  birthrate 3
+  lifeExp 0.75
+  mass 3.0
+  spread 1.22173
+  particleRot 2.9
+  velocity 8.0
+  randvel 0.3
+  bounce_co 0.5
+  blurlength 10.0
+  loop 0
+  bounce 1
+  m_isTinted 0
+  splat 0
+  affectedByWind false
+  texture fxpa_cloud02
+  twosidedtex 1
+  xgrid 5
+  ygrid 5
+  fps 0
+  framestart 0
+  frameend 24
+  random 0
+  chunkName PLC_Chunk_S02
+  lightningDelay 0.0
+  lightningRadius 0.0
+  lightningSubDiv 0
+  lightningScale 0.0
+  blastRadius 0.0
+  blastLength 0.0
+  p2p 0
+  p2p_type Bezier
+  p2p_sel 1
+  p2p_bezier2 0.0
+  p2p_bezier3 0.0
+  grav 0.0
+  drag 0.0
+endnode
+node emitter fire!38
+  parent plc_nat30
+  position 0.0131848 0.0144894 0.05
+  orientation 1.0 0.0 0.0 -4.71239
+  wirecolor 1.0 1.0 1.0 
+  update_sel 3
+  update Explosion
+  render_sel 1
+  render Normal
+  blend_sel 1
+  Blend Normal
+  spawntype_sel 0
+  spawnType 0
+  xSize 100.0
+  ySize 99.0
+  inherit 1
+  inherit_local 0
+  inheritvel 0
+  inherit_part 0
+  renderorder 0
+  threshold 0.0
+  combinetime 0.0
+  deadspace 0.0
+  opacity 0.5
+  colorStart 0.607843 0.568627 0.486275 
+  colorEnd 0.819608 0.815686 0.796079 
+  alphaStart 1.0
+  alphaEnd 0.0
+  sizeStart 4.0
+  sizeEnd 1.0
+  sizeStart_y 0.0
+  sizeEnd_y 0.0
+  birthrate 10
+  lifeExp 2.5
+  mass 0.09
+  spread 2.96706
+  particleRot 0.5
+  velocity 2.0
+  randvel 0.5
+  bounce_co 0.0
+  blurlength 10.0
+  loop 0
+  bounce 0
+  m_isTinted 1
+  splat 0
+  affectedByWind false
+  texture fxpa_smoke01
+  twosidedtex 1
+  xgrid 4
+  ygrid 4
+  fps 10
+  framestart 0
+  frameend 24
+  random 0
+  lightningDelay 0.0
+  lightningRadius 0.0
+  lightningSubDiv 0
+  lightningScale 0.0
+  blastRadius 0.2
+  blastLength 1.0
+  p2p 0
+  p2p_type Bezier
+  p2p_sel 1
+  p2p_bezier2 0.0
+  p2p_bezier3 0.0
+  grav 0.0
+  drag 0.0
+endnode
+endmodelgeom plc_nat30
+#NWmax ANIM ASCII
+newanim damage plc_nat30
+  length 0.133333
+  transtime 0.0
+  animroot plc_nat30
+    node dummy plc_nat30
+        parent NULL
+    endnode
+    node dummy nat30_hand
+        parent plc_nat30
+    endnode
+    node dummy nat30_head
+        parent plc_nat30
+    endnode
+    node dummy nat30_head_hit
+        parent plc_nat30
+    endnode
+    node dummy nat30_impact
+        parent plc_nat30
+    endnode
+    node dummy nat30_ground
+        parent plc_nat30
+    endnode
+    node trimesh damage04
+        parent plc_nat30
+        positionkey
+            0.0 0.0147516 0.0543283 0.0
+            0.0333333 0.0147516 0.0543283 0.0244581
+            0.133333 0.0147516 0.0543283 0.0
+        endlist
+        orientationkey
+            0.0 0.0 0.0 0.0 0.0
+            0.0333333 0.371336 -0.928463 0.0081026 -0.0469939
+            0.1 -0.59995 0.799969 0.0104722 -0.0436324
+            0.133333 0.0 0.0 0.0 0.0
+        endlist
+    endnode
+    node trimesh vines01
+        parent damage04
+    endnode
+    node emitter ChunkyWood62
+        parent plc_nat30
+    endnode
+    node emitter ChunkyWood63
+        parent plc_nat30
+    endnode
+    node emitter fire!38
+        parent plc_nat30
+    endnode
+    node dummy plc_nat30_pwk
+        parent plc_nat30
+    endnode
+    node dummy 030_pwk_use01
+        parent plc_nat30_pwk
+    endnode
+    node dummy 030_pwk_use02
+        parent plc_nat30_pwk
+    endnode
+doneanim damage plc_nat30
+#NWmax ANIM ASCII
+newanim die plc_nat30
+  length 0.166667
+  transtime 0.0
+  animroot plc_nat30
+  event 0.0333333 detonate
+  event 0.0333333 detonate
+  event 0.0333333 detonate
+    node dummy plc_nat30
+        parent NULL
+    endnode
+    node dummy nat30_hand
+        parent plc_nat30
+    endnode
+    node dummy nat30_head
+        parent plc_nat30
+    endnode
+    node dummy nat30_head_hit
+        parent plc_nat30
+    endnode
+    node dummy nat30_impact
+        parent plc_nat30
+    endnode
+    node dummy nat30_ground
+        parent plc_nat30
+    endnode
+    node trimesh damage04
+        parent plc_nat30
+        positionkey
+            0.0 0.0147516 0.0543283 0.0
+            0.1 0.0147516 0.0543283 0.0
+            0.166667 0.0147516 0.0543283 -15.0
+        endlist
+        orientationkey
+            0.0 0.0 0.0 0.0 0.0
+            0.1 0.0 0.0 0.0 0.0
+            0.166667 0.0 0.0 0.0 0.0
+        endlist
+    endnode
+    node trimesh vines01
+        parent damage04
+    endnode
+    node emitter ChunkyWood62
+        parent plc_nat30
+    endnode
+    node emitter ChunkyWood63
+        parent plc_nat30
+    endnode
+    node emitter fire!38
+        parent plc_nat30
+    endnode
+    node dummy plc_nat30_pwk
+        parent plc_nat30
+    endnode
+    node dummy 030_pwk_use01
+        parent plc_nat30_pwk
+    endnode
+    node dummy 030_pwk_use02
+        parent plc_nat30_pwk
+    endnode
+doneanim die plc_nat30
+#NWmax ANIM ASCII
+newanim dead plc_nat30
+  length 0.0333333
+  transtime 0.0
+  animroot plc_nat30
+    node dummy plc_nat30
+        parent NULL
+    endnode
+    node dummy nat30_hand
+        parent plc_nat30
+    endnode
+    node dummy nat30_head
+        parent plc_nat30
+    endnode
+    node dummy nat30_head_hit
+        parent plc_nat30
+    endnode
+    node dummy nat30_impact
+        parent plc_nat30
+    endnode
+    node dummy nat30_ground
+        parent plc_nat30
+    endnode
+    node trimesh damage04
+        parent plc_nat30
+        positionkey
+            0.0 0.0147516 0.0543283 -15.0
+            0.0333333 0.0147516 0.0543283 -15.0
+        endlist
+    endnode
+    node trimesh vines01
+        parent damage04
+    endnode
+    node emitter ChunkyWood62
+        parent plc_nat30
+    endnode
+    node emitter ChunkyWood63
+        parent plc_nat30
+    endnode
+    node emitter fire!38
+        parent plc_nat30
+    endnode
+    node dummy plc_nat30_pwk
+        parent plc_nat30
+    endnode
+    node dummy 030_pwk_use01
+        parent plc_nat30_pwk
+    endnode
+    node dummy 030_pwk_use02
+        parent plc_nat30_pwk
+    endnode
+doneanim dead plc_nat30
+#NWmax ANIM ASCII
+newanim default plc_nat30
+  length 0.0
+  transtime 0.25
+  animroot plc_nat30
+    node dummy plc_nat30
+        parent NULL
+    endnode
+    node dummy nat30_hand
+        parent plc_nat30
+    endnode
+    node dummy nat30_head
+        parent plc_nat30
+    endnode
+    node dummy nat30_head_hit
+        parent plc_nat30
+    endnode
+    node dummy nat30_impact
+        parent plc_nat30
+    endnode
+    node dummy nat30_ground
+        parent plc_nat30
+    endnode
+    node trimesh damage04
+        parent plc_nat30
+    endnode
+    node trimesh vines01
+        parent damage04
+    endnode
+    node emitter ChunkyWood62
+        parent plc_nat30
+    endnode
+    node emitter ChunkyWood63
+        parent plc_nat30
+    endnode
+    node emitter fire!38
+        parent plc_nat30
+    endnode
+    node dummy plc_nat30_pwk
+        parent plc_nat30
+    endnode
+    node dummy 030_pwk_use01
+        parent plc_nat30_pwk
+    endnode
+    node dummy 030_pwk_use02
+        parent plc_nat30_pwk
+    endnode
+doneanim default plc_nat30
+donemodel plc_nat30

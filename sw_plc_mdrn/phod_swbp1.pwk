@@ -1,0 +1,25 @@
+# Exported from Wayland's NWN Maxscript v0.3b at 9/24/2008 4:44:12 PM
+# mdl file
+#
+node trimesh plane01
+    parent phod_swbp1_pwk
+    diffuse 0.8000 0.8000 0.8000
+    ambient 0.2000 0.2000 0.2000
+    specular 0.0000 0.0000 0.0000
+    render 0
+    bitmap NULL
+    verts 7
+        -2.3244 -1.07469 0.0
+        -0.289468 -2.35873 0.0
+        1.52771 -1.62285 0.0
+        2.84929 0.156781 0.0
+        1.88063 1.26811 0.0
+        -0.477192 2.3494 0.0
+        -2.27935 0.502194 0.0
+    faces 5
+        2 3 4 0 0 0 0 1
+        2 4 5 0 0 0 0 1
+        2 5 6 0 0 0 0 1
+        6 0 1 0 0 0 0 1
+        2 6 1 0 0 0 0 1
+endnode

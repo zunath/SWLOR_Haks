@@ -1,0 +1,28 @@
+# Exported from NWmax 0.7 at 9/4/2005 11:50:41
+# pwk file
+#
+#NWmax PWKMESH  ASCII
+node dummy p_sentrygun2a
+  parent NULL
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.52549 0.431373 0.0313726 
+endnode
+node dummy rootdummy
+  parent p_sentrygun2a
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.776471 0.878431 0.341176 
+endnode
+node dummy handconjure
+  parent p_sentrygun2a
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.776471 0.878431 0.341176 
+endnode
+node dummy headconjure
+  parent p_sentrygun2a
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.776471 0.878431 0.341176 
+endnode

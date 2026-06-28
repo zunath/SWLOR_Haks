@@ -1,0 +1,763 @@
+# Exported from NWmax 0.5-beta at 5/2/2004 10:14:26 AM
+# mdl file
+#
+#NWmaxMODEL ASCII
+# model: rom_plank
+filedependancy rom_plank.gmax
+newmodel rom_plank
+setsupermodel rom_plank NULL
+classification Character
+setanimationscale 1.331
+#NWmaxGEOM  ASCII
+beginmodelgeom rom_plank
+node dummy rom_plank
+  parent NULL
+endnode
+node trimesh smshfrn22
+  parent rom_plank
+  position 0.165056 -0.0963703 0.0806016
+  orientation -0.0880194 -0.0911465 0.99194 -1.61379
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center undefined
+  gizmo SubAnim:Gizmo
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 1.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap ttd01_detail0
+  verts 16
+    0.0381346 0.0330964 -0.011645
+    -0.0330625 0.00616173 -0.011645
+    0.00300142 -0.00696447 0.011645
+    0.0381346 0.0330964 0.011645
+    0.0482475 -0.0439848 -0.011645
+    0.0482475 -0.0439848 0.011645
+    -0.0172816 -0.0465584 -0.011645
+    -0.0850486 -0.0571254 -0.011645
+    -0.0545307 -0.0682333 0.011645
+    -0.0172816 -0.0465584 0.011645
+    -0.0195163 -0.125018 -0.011645
+    -0.0195163 -0.125018 0.011645
+    0.0654091 0.108314 -0.011645
+    -0.0170774 0.0913601 -0.011645
+    0.0244759 0.0762363 0.011645
+    0.0654091 0.108314 0.011645
+  faces 14
+    0 1 2  1  0 1 2  0
+    2 3 0  2  2 3 0  0
+    1 4 5  2  1 4 5  0
+    5 2 1  4  5 2 1  0
+    6 7 8  1  6 7 8  0
+    8 9 6  2  8 9 6  0
+    7 10 11  2  7 10 11  0
+    11 8 7  4  11 8 7  0
+    12 13 14  1  12 13 14  0
+    14 15 12  2  14 15 12  0
+    13 0 3  4  16 0 3  0
+    3 14 13  8  3 17 16  0
+    4 6 9  8  18 6 9  0
+    9 5 4  8  9 19 18  0
+  tverts 20
+    0.0741139 0.132223 0
+    0.0741138 0.264308 0
+    0.0121689 0.264308 0
+    0.0121689 0.132223 0
+    0.0741137 0.419798 0
+    0.0121688 0.419798 0
+    0.0827739 0.200171 0
+    0.0829293 0.289111 0
+    0.0203626 0.289111 0
+    0.0205181 0.200171 0
+    0.0829293 0.429675 0
+    0.0203626 0.429675 0
+    0.201684 0.0639997 0
+    0.201684 0.181408 0
+    0.139739 0.181408 0
+    0.139739 0.0639997 0
+    0.0741139 0.0368287 0
+    0.0121689 0.0368287 0
+    0.0826184 0.0257477 0
+    0.0206735 0.0257477 0
+endnode
+node trimesh smshfrn12
+  parent rom_plank
+  position 0.169937 0.0850082 0.0586514
+  orientation 0.108672 0.112533 0.987688 -1.61808
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center undefined
+  gizmo SubAnim:Gizmo
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 1.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap ttd01_crvn02rf
+  verts 14
+    -0.169873 -0.124153 0.011645
+    0.122577 -0.124153 0.011645
+    0.0429069 -0.0827684 0.011645
+    0.0977462 -0.0496612 0.011645
+    0.169873 -0.0248306 0.011645
+    0.0659714 -0.00551791 0.011645
+    0.0768047 0.0800097 0.011645
+    0.122577 0.124153 0.011645
+    -0.169873 0.124153 0.011645
+    0.104354 0.0441433 0.011645
+    -0.169873 -0.124153 -0.011645
+    0.122577 -0.124153 -0.011645
+    0.122577 0.124153 -0.011645
+    -0.169873 0.124153 -0.011645
+  faces 14
+    0 1 2  1  0 1 2  0
+    3 4 5  1  3 4 5  0
+    6 7 8  1  6 7 8  0
+    3 0 2  1  3 0 2  0
+    0 5 8  1  0 5 8  0
+    3 5 0  1  3 5 0  0
+    9 8 5  1  9 8 5  0
+    6 8 9  1  6 8 9  0
+    10 11 1  2  10 11 1  0
+    1 0 10  2  1 0 10  0
+    12 13 8  2  12 13 8  0
+    8 7 12  2  8 7 12  0
+    13 10 0  4  14 15 0  0
+    0 8 13  4  0 8 14  0
+  tverts 16
+    0.935532 0.0629255 0
+    0.936261 0.841166 0
+    0.82586 0.629257 0
+    0.737821 0.775085 0
+    0.671791 0.966883 0
+    0.620435 0.690591 0
+    0.393001 0.719397 0
+    0.275903 0.841166 0
+    0.275153 0.0629255 0
+    0.488377 0.792658 0
+    0.998558 0.0633874 0
+    0.998557 0.841218 0
+    0.214245 0.841218 0
+    0.214245 0.0633873 0
+    0.273652 0.0 0
+    0.934075 0.0 0
+endnode
+node trimesh smshfrn09
+  parent rom_plank
+  position 0.108319 -0.224482 0.0568576
+  orientation -0.0616013 -0.0913278 0.993914 -1.96042
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center undefined
+  gizmo SubAnim:Gizmo
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 1.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap ttd01_crvn02rf
+  verts 14
+    -0.119919 0.0441433 0.011645
+    -0.139231 -0.00551791 0.011645
+    -0.0840522 -0.0248306 0.011645
+    -0.144749 -0.0496612 0.011645
+    -0.172339 -0.0827685 0.011645
+    -0.120015 -0.124153 0.011645
+    0.172339 -0.124153 0.011645
+    0.172339 0.124153 0.011645
+    -0.120014 0.124153 0.011645
+    -0.147508 0.0800097 0.011645
+    0.172339 -0.124153 -0.011645
+    0.172339 0.124153 -0.011645
+    -0.120014 0.124153 -0.011645
+    -0.120015 -0.124153 -0.011645
+  faces 14
+    0 1 2  1  0 1 2  0
+    3 4 5  1  3 4 5  0
+    6 7 8  1  6 7 8  0
+    6 8 9  1  6 8 9  0
+    6 9 0  1  6 9 0  0
+    6 0 2  1  6 0 2  0
+    5 6 2  1  5 6 2  0
+    3 5 2  1  3 5 2  0
+    10 11 7  2  10 11 7  0
+    7 6 10  2  7 6 10  0
+    11 12 8  4  12 13 8  0
+    8 7 11  4  8 7 12  0
+    13 10 6  4  14 15 6  0
+    6 5 13  4  6 5 14  0
+  tverts 16
+    0.490015 0.135746 0
+    0.622099 0.0843797 0
+    0.673465 0.23114 0
+    0.736924 0.068846 0
+    0.82699 -0.00921879 0
+    0.936632 0.138823 0
+    0.937635 0.914177 0
+    0.277898 0.912348 0
+    0.277898 0.134772 0
+    0.39462 0.0623657 0
+    0.937634 0.975012 0
+    0.277212 0.975012 0
+    0.21664 0.91163 0
+    0.21664 0.134054 0
+    0.998576 0.137632 0
+    0.999581 0.915207 0
+endnode
+node trimesh smshfrn40
+  parent rom_plank
+  position -0.144686 -0.0327723 0.0253556
+  orientation 0.0 0.0 -1.0 -0.619592
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center undefined
+  gizmo SubAnim:Gizmo
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 1.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap ttd01_crvn02rf
+  verts 14
+    -0.169873 -0.124153 0.011645
+    0.122577 -0.124153 0.011645
+    0.0429069 -0.0827684 0.011645
+    0.0977462 -0.0496612 0.011645
+    0.169873 -0.0248306 0.011645
+    0.0659715 -0.00551792 0.011645
+    0.0768047 0.0800097 0.011645
+    0.122577 0.124153 0.011645
+    -0.169873 0.124153 0.011645
+    0.104354 0.0441433 0.011645
+    -0.169873 -0.124153 -0.011645
+    0.122577 -0.124153 -0.011645
+    0.122577 0.124153 -0.011645
+    -0.169873 0.124153 -0.011645
+  faces 14
+    0 1 2  1  0 1 2  0
+    3 4 5  1  3 4 5  0
+    6 7 8  1  6 7 8  0
+    3 0 2  1  3 0 2  0
+    0 5 8  1  0 5 8  0
+    3 5 0  1  3 5 0  0
+    9 8 5  1  9 8 5  0
+    6 8 9  1  6 8 9  0
+    10 11 1  2  10 11 1  0
+    1 0 10  2  1 0 10  0
+    12 13 8  2  12 13 8  0
+    8 7 12  2  8 7 12  0
+    13 10 0  4  14 15 0  0
+    0 8 13  4  0 8 14  0
+  tverts 16
+    0.935532 0.0629255 0
+    0.936261 0.841166 0
+    0.82586 0.629257 0
+    0.737821 0.775085 0
+    0.671791 0.966883 0
+    0.620435 0.690591 0
+    0.393001 0.719397 0
+    0.275903 0.841166 0
+    0.275153 0.0629255 0
+    0.488377 0.792658 0
+    0.998558 0.0633874 0
+    0.998557 0.841218 0
+    0.214245 0.841218 0
+    0.214245 0.0633873 0
+    0.273652 0.0 0
+    0.934075 0.0 0
+endnode
+node trimesh smshfrn24
+  parent rom_plank
+  position 0.166559 -0.0175985 0.08456
+  orientation 0.108672 0.112533 0.987688 -1.61808
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center undefined
+  gizmo SubAnim:Gizmo
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 1.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap ttd01_detail0
+  verts 16
+    0.016187 -0.124153 -0.011645
+    -0.0362332 -0.0827684 -0.011645
+    -0.0634829 -0.0827684 0.011645
+    0.016187 -0.124153 0.011645
+    -0.00864361 -0.0496612 -0.011645
+    0.0520533 -0.0248306 -0.011645
+    0.0634829 -0.0248306 0.011645
+    -0.00864361 -0.0496612 0.011645
+    -0.00312572 -0.00551791 -0.011645
+    -0.0404179 -0.0055179 0.011645
+    -0.0114025 0.0800097 -0.011645
+    0.016187 0.124153 -0.011645
+    0.016187 0.124153 0.011645
+    -0.0295852 0.0800097 0.011645
+    0.0320016 0.0441433 -0.011645
+    -0.00203534 0.0441433 0.011645
+  faces 14
+    0 1 2  1  0 1 2  0
+    2 3 0  2  2 3 0  0
+    4 5 6  1  4 5 6  0
+    6 7 4  2  6 7 4  0
+    5 8 9  2  8 9 10  0
+    9 6 5  4  10 11 8  0
+    10 11 12  1  12 13 14  0
+    12 13 10  2  14 15 12  0
+    1 4 7  4  16 17 18  0
+    7 2 1  8  18 19 16  0
+    8 14 15  1  20 21 22  0
+    15 9 8  8  22 23 20  0
+    14 10 13  4  21 12 15  0
+    13 15 14  16  15 22 21  0
+  tverts 24
+    0.188051 0.142892 0
+    0.206723 0.30605 0
+    0.142426 0.366342 0
+    0.141987 0.148164 0
+    0.00836219 0.320244 0
+    0.00836219 0.170996 0
+    0.0656301 0.142892 0
+    0.0656301 0.320244 0
+    0.0249265 0.260389 0
+    0.0242676 0.124711 0
+    0.0810896 0.0327362 0
+    0.0823302 0.288214 0
+    0.086418 0.304876 0
+    0.086418 0.422284 0
+    0.024473 0.422284 0
+    0.024473 0.304876 0
+    0.13744 0.132646 0
+    0.138395 0.0469133 0
+    0.198552 0.0411925 0
+    0.201458 0.194356 0
+    0.086418 0.0773968 0
+    0.086418 0.209481 0
+    0.024473 0.209481 0
+    0.024473 0.0773968 0
+endnode
+node trimesh smshfrn02
+  parent rom_plank
+  position 0.205621 -0.000794563 0.0253556
+  orientation 0.0 0.0 1.0 -0.349066
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center undefined
+  gizmo SubAnim:Gizmo
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 1.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap ttd01_crvn02rf
+  verts 14
+    -0.119919 0.0441433 0.011645
+    -0.139231 -0.0055179 0.011645
+    -0.0840522 -0.0248306 0.011645
+    -0.144749 -0.0496612 0.011645
+    -0.172339 -0.0827684 0.011645
+    -0.120015 -0.124153 0.011645
+    0.172339 -0.124153 0.011645
+    0.172339 0.124153 0.011645
+    -0.120014 0.124153 0.011645
+    -0.147508 0.0800097 0.011645
+    0.172339 -0.124153 -0.011645
+    0.172339 0.124153 -0.011645
+    -0.120014 0.124153 -0.011645
+    -0.120015 -0.124153 -0.011645
+  faces 14
+    0 1 2  1  0 1 2  0
+    3 4 5  1  3 4 5  0
+    6 7 8  1  6 7 8  0
+    6 8 9  1  6 8 9  0
+    6 9 0  1  6 9 0  0
+    6 0 2  1  6 0 2  0
+    5 6 2  1  5 6 2  0
+    3 5 2  1  3 5 2  0
+    10 11 7  2  10 11 7  0
+    7 6 10  2  7 6 10  0
+    11 12 8  4  12 13 8  0
+    8 7 11  4  8 7 12  0
+    13 10 6  4  14 15 6  0
+    6 5 13  4  6 5 14  0
+  tverts 16
+    0.490015 0.135746 0
+    0.622099 0.0843797 0
+    0.673465 0.23114 0
+    0.736924 0.068846 0
+    0.82699 -0.00921879 0
+    0.936632 0.138823 0
+    0.937635 0.914177 0
+    0.277898 0.912348 0
+    0.277898 0.134772 0
+    0.39462 0.0623657 0
+    0.937634 0.975012 0
+    0.277212 0.975012 0
+    0.21664 0.91163 0
+    0.21664 0.134054 0
+    0.998576 0.137632 0
+    0.999581 0.915207 0
+endnode
+node trimesh smshfrn17
+  parent rom_plank
+  position 0.0699082 0.0487242 0.0253556
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center undefined
+  gizmo SubAnim:Gizmo
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 1.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap ttd01_detail0
+  verts 16
+    0.0381345 0.0330964 -0.011645
+    -0.0330624 0.00616172 -0.011645
+    0.00300142 -0.00696447 0.011645
+    0.0381345 0.0330964 0.011645
+    0.0482475 -0.0439848 -0.011645
+    0.0482475 -0.0439848 0.011645
+    -0.0172816 -0.0465584 -0.011645
+    -0.0850485 -0.0571254 -0.011645
+    -0.0545307 -0.0682332 0.011645
+    -0.0172816 -0.0465584 0.011645
+    -0.0195163 -0.125018 -0.011645
+    -0.0195163 -0.125018 0.011645
+    0.0654091 0.108314 -0.011645
+    -0.0170774 0.0913601 -0.011645
+    0.0244759 0.0762362 0.011645
+    0.0654091 0.108314 0.011645
+  faces 14
+    0 1 2  1  0 1 2  0
+    2 3 0  2  2 3 0  0
+    1 4 5  2  1 4 5  0
+    5 2 1  4  5 2 1  0
+    6 7 8  1  6 7 8  0
+    8 9 6  2  8 9 6  0
+    7 10 11  2  7 10 11  0
+    11 8 7  4  11 8 7  0
+    12 13 14  1  12 13 14  0
+    14 15 12  2  14 15 12  0
+    13 0 3  4  16 0 3  0
+    3 14 13  8  3 17 16  0
+    4 6 9  8  18 6 9  0
+    9 5 4  8  9 19 18  0
+  tverts 20
+    0.0741139 0.132223 0
+    0.0741138 0.264308 0
+    0.0121689 0.264308 0
+    0.0121689 0.132223 0
+    0.0741137 0.419798 0
+    0.0121688 0.419798 0
+    0.0827739 0.200171 0
+    0.0829293 0.289111 0
+    0.0203626 0.289111 0
+    0.0205181 0.200171 0
+    0.0829293 0.429675 0
+    0.0203626 0.429675 0
+    0.201684 0.0639997 0
+    0.201684 0.181408 0
+    0.139739 0.181408 0
+    0.139739 0.0639997 0
+    0.0741139 0.0368287 0
+    0.0121689 0.0368287 0
+    0.0826184 0.0257477 0
+    0.0206735 0.0257477 0
+endnode
+node trimesh smshfrn16
+  parent rom_plank
+  position -0.0590325 0.0283241 0.0253556
+  orientation 0.0 0.0 -1.0 -0.619592
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center undefined
+  gizmo SubAnim:Gizmo
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 1.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap ttd01_detail0
+  verts 16
+    0.016187 -0.124153 -0.011645
+    -0.0362332 -0.0827684 -0.011645
+    -0.0634829 -0.0827684 0.011645
+    0.016187 -0.124153 0.011645
+    -0.00864362 -0.0496612 -0.011645
+    0.0520533 -0.0248306 -0.011645
+    0.0634829 -0.0248306 0.011645
+    -0.00864362 -0.0496612 0.011645
+    -0.00312572 -0.00551791 -0.011645
+    -0.040418 -0.0055179 0.011645
+    -0.0114025 0.0800097 -0.011645
+    0.016187 0.124153 -0.011645
+    0.016187 0.124153 0.011645
+    -0.0295853 0.0800097 0.011645
+    0.0320016 0.0441433 -0.011645
+    -0.00203533 0.0441433 0.011645
+  faces 14
+    0 1 2  1  0 1 2  0
+    2 3 0  2  2 3 0  0
+    4 5 6  1  4 5 6  0
+    6 7 4  2  6 7 4  0
+    5 8 9  2  8 9 10  0
+    9 6 5  4  10 11 8  0
+    10 11 12  1  12 13 14  0
+    12 13 10  2  14 15 12  0
+    1 4 7  4  16 17 18  0
+    7 2 1  8  18 19 16  0
+    8 14 15  1  20 21 22  0
+    15 9 8  8  22 23 20  0
+    14 10 13  4  21 12 15  0
+    13 15 14  16  15 22 21  0
+  tverts 24
+    0.188051 0.142892 0
+    0.206723 0.30605 0
+    0.142426 0.366342 0
+    0.141987 0.148164 0
+    0.00836219 0.320244 0
+    0.00836219 0.170996 0
+    0.0656301 0.142892 0
+    0.0656301 0.320244 0
+    0.0249265 0.260389 0
+    0.0242676 0.124711 0
+    0.0810896 0.0327362 0
+    0.0823302 0.288214 0
+    0.086418 0.304876 0
+    0.086418 0.422284 0
+    0.024473 0.422284 0
+    0.024473 0.304876 0
+    0.13744 0.132646 0
+    0.138395 0.0469133 0
+    0.198552 0.0411925 0
+    0.201458 0.194356 0
+    0.086418 0.0773968 0
+    0.086418 0.209481 0
+    0.024473 0.209481 0
+    0.024473 0.0773968 0
+endnode
+endmodelgeom rom_plank
+#NWmaxANIM ASCII
+newanim damage rom_plank
+    length 0.133333
+    transtime 0.0
+    animroot rom_plank
+    node dummy rom_plank
+        parent NULL
+    endnode
+    node dummy ignore_NGon01
+        parent rom_plank
+    endnode
+    node trimesh smshfrn22
+        parent rom_plank
+    endnode
+    node trimesh smshfrn12
+        parent rom_plank
+    endnode
+    node trimesh smshfrn09
+        parent rom_plank
+    endnode
+    node trimesh smshfrn40
+        parent rom_plank
+    endnode
+    node trimesh smshfrn24
+        parent rom_plank
+    endnode
+    node trimesh smshfrn02
+        parent rom_plank
+    endnode
+    node trimesh smshfrn17
+        parent rom_plank
+    endnode
+    node trimesh smshfrn16
+        parent rom_plank
+    endnode
+doneanim damage rom_plank
+#NWmaxANIM ASCII
+newanim die rom_plank
+    length 0.166667
+    transtime 0.0
+    animroot rom_plank
+    event 0.0 detonate
+    event 0.0 detonate
+    node dummy rom_plank
+        parent NULL
+    endnode
+    node dummy ignore_NGon01
+        parent rom_plank
+    endnode
+    node trimesh smshfrn22
+        parent rom_plank
+    endnode
+    node trimesh smshfrn12
+        parent rom_plank
+    endnode
+    node trimesh smshfrn09
+        parent rom_plank
+    endnode
+    node trimesh smshfrn40
+        parent rom_plank
+    endnode
+    node trimesh smshfrn24
+        parent rom_plank
+    endnode
+    node trimesh smshfrn02
+        parent rom_plank
+    endnode
+    node trimesh smshfrn17
+        parent rom_plank
+    endnode
+    node trimesh smshfrn16
+        parent rom_plank
+    endnode
+doneanim die rom_plank
+#NWmaxANIM ASCII
+newanim dead rom_plank
+    length 0.0333333
+    transtime 0.0
+    animroot rom_plank
+    node dummy rom_plank
+        parent NULL
+    endnode
+    node dummy ignore_NGon01
+        parent rom_plank
+    endnode
+    node trimesh smshfrn22
+        parent rom_plank
+    endnode
+    node trimesh smshfrn12
+        parent rom_plank
+    endnode
+    node trimesh smshfrn09
+        parent rom_plank
+    endnode
+    node trimesh smshfrn40
+        parent rom_plank
+    endnode
+    node trimesh smshfrn24
+        parent rom_plank
+    endnode
+    node trimesh smshfrn02
+        parent rom_plank
+    endnode
+    node trimesh smshfrn17
+        parent rom_plank
+    endnode
+    node trimesh smshfrn16
+        parent rom_plank
+    endnode
+doneanim dead rom_plank
+#NWmaxANIM ASCII
+newanim default rom_plank
+    length 0.0
+    transtime 0.25
+    animroot rom_plank
+    node dummy rom_plank
+        parent NULL
+    endnode
+    node dummy ignore_NGon01
+        parent rom_plank
+    endnode
+    node trimesh smshfrn22
+        parent rom_plank
+    endnode
+    node trimesh smshfrn12
+        parent rom_plank
+    endnode
+    node trimesh smshfrn09
+        parent rom_plank
+    endnode
+    node trimesh smshfrn40
+        parent rom_plank
+    endnode
+    node trimesh smshfrn24
+        parent rom_plank
+    endnode
+    node trimesh smshfrn02
+        parent rom_plank
+    endnode
+    node trimesh smshfrn17
+        parent rom_plank
+    endnode
+    node trimesh smshfrn16
+        parent rom_plank
+    endnode
+doneanim default rom_plank
+donemodel rom_plank

@@ -1,0 +1,54 @@
+OldTimeRadio's Aiships
+<><><><><><><><><><><>
+
+In a nutshell:
+==============
+All this may seem very complex when you see it.  But all it really is, at heart, is creating a placeable at a waypoint, activating the placeable, then deactivating the placeable.  When the placeable is created, the airship is hovering high in the air.  When the placeable is activated, the airship lands and then automatically goes into it's "on" state, which is hovering just above the ground.  When the placeable is deactivated, it takes off and flies away- with the script destroying the placeable a few seconds after the takeoff animation is initiated so as to made it fade out as it flies off.  While you may not have seen anything like it before, it's far from revolutionary: It does the same things that any activatable placeable will.  This one just happens to give the illusion of movement during that process.
+
+For bonus points, the first airship (plc_otrair1.mdl) has an extra crewmember which waves as the craft decends.  He disappears on landing and the script which creats it (otr_airship_land) creates an NPC who looks the same at the bottom of the ladder.  Again, trickery.
+
+This system involves:
+=====================
+2 waypoints (one for the ship to land at, one for the NPC to appear at)
+- First with tag of "otr_airship_land"
+- Second with tag of "otr_airship_npc"
+1 lever (to create the airship and start the landing animation)
+1 NPC (resref & tag "salvadore", to be a merchant or whatever)
+1 Conversation (named "otr_airship_npc", which will initiate the ship leaving, attached to "salvadore")
+2 scripts (otr_airship_land, otr_airship_tkof, which cause the airship to land and takeoff, respectively)
+
+Waypoint Notes:
+Waypoint placement is important.  Waypoints needs to be pointing at the location from which the summoning will occur.  This ensures that the facing of the ship is such that the merchant who disembarks, disembarks from a side closest to the summoner.
+
+Timing Notes for "Salvadore":
+It takes about 9 seconds from when the airship is activated until it reaches a spot where the NPC should be created, giving the player the impression that the NPC has "disembarked" from the landing airship.  See "otr_airship_land" script.  In this case the script looks for a resref named "salvadore", which is the name of the merchant who hops off the ship.  His appearance is "Human, Male 02"
+
+Texture notes:
+All textures required by the airship start with otrairsh* with the exception of plc_bc_shipfs3.dds which is the texture for the airship's gondola.
+
+Placeable notes:
+Make sure the initial state of the placeable is DEACTIVATED!  I have Plot, Useable, Static all UNCHECKED.  This guy never needs any of those, although you could possibly set it to PLOT if you think there's going to be some kind of damage, say area effect, indirectly affecting it.  If you set this model to usable the game may crash!  
+
+Script notes:
+CreateObject creates the object based on its RESREF, not tag or name.  Don't forget that!
+
+Lighting:
+If you have number of dynamic lights set really low, when the placeable appears, the lighting for the area may appear to change quite a bit.  Up your dynamic lights- there's no reason to have that particular setting set low, anyway.
+
+Thanks & Credits:
+=================
+Thank you to The George who converted so many of the NWN 2 models over to NWN and uploaded them to the NWVault.  I used the hull from one of these ships as my base.  Also, przemyslaw kuca who uploaded the fantasy airship at Turbosquid (FREE) which I used as a base to build off the gasbag and airframe.  I wound up remodeling and retexturing bits of it but I'm grateful for a good design to build off of.  It can be found here:
+http://www.turbosquid.com/FullPreview/Index.cfm/ID/206354
+
+Texturewise, it's mostly NWN textures or textures that came from the model on Turbosquid.  I'm sure I'm forgetting something but I know the metal I did for the propeller came from here, at DeviantArt:
+http://wojtar-stock.deviantart.com/art/metal-texture-5-60838049
+
+Speaking of the propeller, I made a replacement one from this wonderful prop tutorial on YouTube:
+http://www.youtube.com/watch?v=5Qv-jRK3IW0
+
+Thank you to everyone who ever answered a question on the BioWare forums or ponied up some unknown info to help the community keep rolling forward.  And a BIG thanks to The Spirited Lass for cobbling this entry into the other entries for this month's Custom Content Challenge.
+
+Contact me:
+===========
+OldTimeRadioNWN (at) gmail.com
+Got an idea?  Want to thank me?  Want to curse me out?  Go for it!

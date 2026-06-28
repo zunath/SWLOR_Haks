@@ -1,0 +1,22 @@
+# Exported from Wayland's NWN Maxscript v0.3b at 10/27/2004 11:34:53 PM
+# pwk file
+#
+node trimesh shuttle
+    parent ffshuttle3_pwk
+    position 0.0 0.0 0.0
+    orientation 1.0 0.0 0.0 0.0
+    scale 1.0
+    diffuse 0.8000 0.8000 0.8000
+    ambient 0.2000 0.2000 0.2000
+    specular 0.0000 0.0000 0.0000
+    render 0
+    bitmap NULL
+    verts 4
+        -4.03699 -8.54243 0.0
+        4.02239 -8.67548 0.0
+        -2.65636 2.03655 0.0
+        2.56199 1.97387 0.0
+    faces 2
+        2 0 3 1 0 0 0 1
+        1 3 0 1 0 0 0 1
+endnode

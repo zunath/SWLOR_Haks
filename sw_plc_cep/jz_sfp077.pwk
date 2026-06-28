@@ -1,0 +1,34 @@
+# Exported from NWmax 0.8 b60 at 03/01/2008 14:37:51
+# pwk file
+#
+#NWmax PWKMESH  ASCII
+node trimesh pwk
+  parent jz_sfp077_pwk
+  position 0.0158964 -0.00340038 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.603922 0.72549 0.898039 
+  bitmap NULL
+  verts 4
+    -0.0958312 -0.0958311 0.0
+    0.0958312 -0.0958311 0.0
+    -0.0958312 0.0958311 0.0
+    0.0958312 0.0958311 0.0
+  faces 2
+    2 0 3  1  6 4 7  7
+    1 3 0  1  5 7 4  7
+  tverts 8
+    0.0 0.0 0
+    1.0 0.0 0
+    0.0 0.0 0
+    1.0 0.0 0
+    0.0 0.0 0
+    1.0 0.0 0
+    0.0 1.0 0
+    1.0 1.0 0
+endnode
+node dummy 077_pwk_use01
+  parent jz_sfp077_pwk
+  position 0.0 0.802234 1.43787
+  orientation -0.57735 0.57735 0.57735 -2.0944
+  wirecolor 0.878431 0.341176 0.560784 
+endnode

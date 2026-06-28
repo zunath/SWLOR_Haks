@@ -1,0 +1,395 @@
+#MAXMODEL ASCII
+# model: phod_fx_star2t
+filedependancy phod_fx_star2t.max
+newmodel phod_fx_star2t
+setsupermodel phod_fx_star2t NULL
+classification Character
+setanimationscale 1.0
+#MAXGEOM  ASCII
+beginmodelgeom phod_fx_star2t
+node dummy phod_fx_star2t
+  parent NULL
+endnode
+node dummy fx_star2t_hand
+  parent phod_fx_star2t
+  position 0 -0.503937 0.944882
+  orientation 0 0 0 0
+  wirecolor 0.777344 0.777344 0.777344
+endnode
+node dummy fx_star2t_head
+  parent phod_fx_star2t
+  position 0 0 1.25197
+  orientation 0 0 0 0
+  wirecolor 0.777344 0.777344 0.777344
+endnode
+node dummy fx_star2t_head_hit
+  parent phod_fx_star2t
+  position 0 0 1.59449
+  orientation 0 0 0 0
+  wirecolor 0.777344 0.777344 0.777344
+endnode
+node dummy fx_star2t_impact
+  parent phod_fx_star2t
+  position 0 0 0.866142
+  orientation 0 0 0 0
+  wirecolor 0.777344 0.777344 0.777344
+endnode
+node dummy fx_star2t_ground
+  parent phod_fx_star2t
+  position -0.00363281 0.00698791 0
+  orientation 0 0 0 0
+  wirecolor 0.777344 0.777344 0.777344
+endnode
+node emitter OmenEmitter01
+  parent phod_fx_star2t
+  position 0 0 0.258799
+  orientation 0 0 0 0
+  wirecolor 0.601563 0.601563 0.601563
+    colorStart 0 1 1
+    colorEnd 0 1 1
+    alphaStart 1
+    alphaEnd 0.6
+    sizeStart 0.1
+    sizeEnd 0.02
+    sizeStart_y 0
+    sizeEnd_y 0
+    frameStart 0
+    frameEnd 0
+    birthrate 170
+    spawnType 0
+    lifeExp 2.25
+    mass 0
+    spread 6.28319
+    particleRot 0
+    velocity 1.0
+    randvel 0.2
+    fps 0
+    random 0
+    inherit 0
+    inherit_local 1
+    inherit_part 0
+    inheritvel 0
+    xsize 50
+    ysize 50
+    bounce 0
+    bounce_co 0
+    loop 0
+    update Fountain
+    render Motion_Blur
+    Blend Lighten
+    update_sel 1
+    render_sel 7
+    blend_sel 3
+    deadspace 0.175
+    opacity 0.5
+    blurlength 10
+    lightningDelay 0
+    lightningRadius 0
+    lightningScale 0
+    blastRadius 0
+    blastLength 0
+    twosidedtex 1
+    p2p 0
+    p2p_sel 2
+    p2p_type Gravity
+    p2p_bezier2 0
+    p2p_bezier3 0
+    combinetime 0
+    drag 0.4
+    grav 5
+    threshold 0
+    texture fxpa_lensflare
+    xgrid 1
+    ygrid 1
+    affectedByWind 0
+    m_isTinted 0
+    renderorder 0
+    Splat 0
+endnode
+node light AuroraLight01
+  parent phod_fx_star2t
+  position 0 0 0.317854
+  orientation 0 0 0 0
+  wirecolor 0.601563 0.601563 0.601563
+    radius 4
+    multiplier 1.5
+    color 0 1 1
+    ambientOnly 1
+    nDynamicType 1
+    affectDynamic 1
+    shadow 0
+    lightpriority 3
+    lensflares 0
+    fadingLight 0
+endnode
+endmodelgeom phod_fx_star2t
+
+#MAXANIM ASCII
+newanim on phod_fx_star2t
+  length 0.966667
+  transtime 0
+  animroot phod_fx_star2t
+node dummy phod_fx_star2t
+  parent NULL
+endnode
+node dummy fx_star2t_hand
+  parent phod_fx_star2t
+endnode
+node dummy fx_star2t_head
+  parent phod_fx_star2t
+endnode
+node dummy fx_star2t_head_hit
+  parent phod_fx_star2t
+endnode
+node dummy fx_star2t_impact
+  parent phod_fx_star2t
+endnode
+node dummy fx_star2t_ground
+  parent phod_fx_star2t
+endnode
+node emitter ChunkyWood118
+  parent phod_fx_star2t
+endnode
+node emitter ChunkyWood119
+  parent phod_fx_star2t
+endnode
+node emitter fire!70
+  parent phod_fx_star2t
+endnode
+node trimesh damage33
+  parent phod_fx_star2t
+endnode
+node trimesh phod_fx_star2t
+  parent damage33
+endnode
+node emitter OmenEmitter01
+  parent phod_fx_star2t
+    orientationkey
+      0  0 0 0 0
+      0.5  0 -1 0 3.15905
+      0.966667  0 0 0 6.28319
+    endlist
+    birthratekey
+      0  170
+      0.966667  170
+    endlist
+endnode
+node light AuroraLight01
+  parent phod_fx_star2t
+    radiuskey
+      0  4
+      0.966667  4
+    endlist
+endnode
+node emitter shell
+  parent phod_fx_star2t
+    birthratekey
+      0  20
+      0.966667  20
+    endlist
+endnode
+node trimesh pwk_crysgrn
+  parent phod_fx_star2t
+endnode
+doneanim on phod_fx_star2t
+
+#MAXANIM ASCII
+newanim off phod_fx_star2t
+  length 0.0333333
+  transtime 0
+  animroot phod_fx_star2t
+node dummy phod_fx_star2t
+  parent NULL
+endnode
+node dummy fx_star2t_hand
+  parent phod_fx_star2t
+endnode
+node dummy fx_star2t_head
+  parent phod_fx_star2t
+endnode
+node dummy fx_star2t_head_hit
+  parent phod_fx_star2t
+endnode
+node dummy fx_star2t_impact
+  parent phod_fx_star2t
+endnode
+node dummy fx_star2t_ground
+  parent phod_fx_star2t
+endnode
+node emitter ChunkyWood118
+  parent phod_fx_star2t
+endnode
+node emitter ChunkyWood119
+  parent phod_fx_star2t
+endnode
+node emitter fire!70
+  parent phod_fx_star2t
+endnode
+node trimesh damage33
+  parent phod_fx_star2t
+endnode
+node trimesh phod_fx_star2t
+  parent damage33
+endnode
+node emitter OmenEmitter01
+  parent phod_fx_star2t
+    birthratekey
+      0  0
+      0.0333333  0
+    endlist
+endnode
+node light AuroraLight01
+  parent phod_fx_star2t
+    radiuskey
+      0  0
+      0.0333333  0
+    endlist
+endnode
+node emitter shell
+  parent phod_fx_star2t
+    birthratekey
+      0  0
+      0.0333333  0
+    endlist
+endnode
+node trimesh pwk_crysgrn
+  parent phod_fx_star2t
+endnode
+doneanim off phod_fx_star2t
+
+#MAXANIM ASCII
+newanim on2off phod_fx_star2t
+  length 0.0333333
+  transtime 0
+  animroot phod_fx_star2t
+node dummy phod_fx_star2t
+  parent NULL
+endnode
+node dummy fx_star2t_hand
+  parent phod_fx_star2t
+endnode
+node dummy fx_star2t_head
+  parent phod_fx_star2t
+endnode
+node dummy fx_star2t_head_hit
+  parent phod_fx_star2t
+endnode
+node dummy fx_star2t_impact
+  parent phod_fx_star2t
+endnode
+node dummy fx_star2t_ground
+  parent phod_fx_star2t
+endnode
+node emitter ChunkyWood118
+  parent phod_fx_star2t
+endnode
+node emitter ChunkyWood119
+  parent phod_fx_star2t
+endnode
+node emitter fire!70
+  parent phod_fx_star2t
+endnode
+node trimesh damage33
+  parent phod_fx_star2t
+    positionkey
+      0  0 0 0
+      0.0333333  0 0 0
+    endlist
+    orientationkey
+      0  0 0 0 0
+      0.0333333  0 0 0 0
+    endlist
+endnode
+node trimesh phod_fx_star2t
+  parent damage33
+endnode
+node emitter OmenEmitter01
+  parent phod_fx_star2t
+    birthratekey
+      0  150
+      0.0333333  0
+    endlist
+endnode
+node light AuroraLight01
+  parent phod_fx_star2t
+    radiuskey
+      0  4
+      0.0333333  0
+    endlist
+endnode
+node emitter shell
+  parent phod_fx_star2t
+    birthratekey
+      0  20
+      0.0333333  0
+    endlist
+endnode
+node trimesh pwk_crysgrn
+  parent phod_fx_star2t
+endnode
+doneanim on2off phod_fx_star2t
+
+#MAXANIM ASCII
+newanim off2on phod_fx_star2t
+  length 0.0333333
+  transtime 0
+  animroot phod_fx_star2t
+node dummy phod_fx_star2t
+  parent NULL
+endnode
+node dummy fx_star2t_hand
+  parent phod_fx_star2t
+endnode
+node dummy fx_star2t_head
+  parent phod_fx_star2t
+endnode
+node dummy fx_star2t_head_hit
+  parent phod_fx_star2t
+endnode
+node dummy fx_star2t_impact
+  parent phod_fx_star2t
+endnode
+node dummy fx_star2t_ground
+  parent phod_fx_star2t
+endnode
+node emitter ChunkyWood118
+  parent phod_fx_star2t
+endnode
+node emitter ChunkyWood119
+  parent phod_fx_star2t
+endnode
+node emitter fire!70
+  parent phod_fx_star2t
+endnode
+node trimesh damage33
+  parent phod_fx_star2t
+endnode
+node trimesh phod_fx_star2t
+  parent damage33
+endnode
+node emitter OmenEmitter01
+  parent phod_fx_star2t
+    birthratekey
+      0  0
+      0.0333333  150
+    endlist
+endnode
+node light AuroraLight01
+  parent phod_fx_star2t
+    radiuskey
+      0  0
+      0.0333333  6
+    endlist
+endnode
+node emitter shell
+  parent phod_fx_star2t
+    birthratekey
+      0  0
+      0.0333333  20
+    endlist
+endnode
+node trimesh pwk_crysgrn
+  parent phod_fx_star2t
+endnode
+doneanim off2on phod_fx_star2t
+donemodel phod_fx_star2t

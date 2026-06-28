@@ -1,0 +1,42 @@
+# Exported from NWmax 0.8 b60 at 19/03/2009 19:50:26
+# pwk file
+#
+#NWmax PWKMESH  ASCII
+node dummy dkft7b_pwk_use01
+  parent bhp_dkft7b_pwk
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.337255 0.337255 0.337255 
+endnode
+node dummy dkft7b_pwk_use02
+  parent bhp_dkft7b_pwk
+  position 0.0 -2.72426 0.881492
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.337255 0.337255 0.337255 
+endnode
+node trimesh PWK
+  parent bhp_dkft7b_pwk
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.337255 0.337255 0.337255 
+  bitmap NULL
+  verts 9
+    -1.63802 -1.62764 0.0
+    3.09193e-005 -2.27869 0.0
+    1.1964 -2.49644 0.0
+    -2.29307 0.0 0.0
+    3.09193e-005 0.0 0.0
+    2.29227 0.0 0.0
+    -1.63802 1.62764 0.0
+    3.09193e-005 2.27869 0.0
+    1.63724 1.62764 0.0
+  faces 8
+    3 0 4  1  0 0 0  7
+    1 4 0  1  0 0 0  7
+    4 1 5  1  0 0 0  7
+    2 5 1  1  0 0 0  7
+    6 3 7  1  0 0 0  7
+    4 7 3  1  0 0 0  7
+    7 4 8  1  0 0 0  7
+    5 8 4  1  0 0 0  7
+endnode

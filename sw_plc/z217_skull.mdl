@@ -1,0 +1,613 @@
+# Exported from NWgMax Plus v5.01.12 at 31-03-2014 20:45:21
+# mdl file
+#
+#NWgMax Plus MODEL ASCII
+# model: z217_skull
+filedependancy skel_com4.gmax
+newmodel z217_skull
+setsupermodel z217_skull NULL
+classification Character
+setanimationscale 1.0
+#NWgMax Plus GEOM  ASCII
+beginmodelgeom z217_skull
+node dummy z217_skull
+  parent NULL
+endnode
+node dummy z217_skull_pwk
+  parent z217_skull
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.443137 0.52549 0.0235294 
+endnode
+node dummy ile_pwk_use01
+  parent z217_skull_pwk
+  position 0.0 -0.392167 0.185248
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.560784 0.878431 0.341176 
+endnode
+node dummy _skull_impact
+  parent z217_skull
+  position 0.0 0.0 0.147176
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.0313726 0.239216 0.541176 
+endnode
+node dummy _skull_ground
+  parent z217_skull
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.0313726 0.239216 0.541176 
+endnode
+node dummy _skull_hand
+  parent z217_skull
+  position 0.0 0.0 0.152774
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.0313726 0.239216 0.541176 
+endnode
+node dummy _skull_head
+  parent z217_skull
+  position 0.0 0.0 0.21896
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.0313726 0.239216 0.541176 
+endnode
+node dummy _skull_head_hit
+  parent z217_skull
+  position 0.0 0.0 0.228408
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.0313726 0.239216 0.541176 
+endnode
+node trimesh skull
+  parent z217_skull
+  position -0.00352432 -0.007208 0.102994
+  orientation 0.00110131 -0.126199 -0.992004 -3.15891
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.05 0.05 0.05 
+  shininess 26
+  center -1.00136e-005 4.76837e-007 4.76837e-007 
+  bitmap c_ske_com_head
+  verts 36
+    -0.0637753 0.0685953 0.0583787
+    0.0 0.110804 0.0131656
+    -0.0510473 0.105396 0.0144805
+    -0.0671567 -0.0110792 0.0891139
+    -0.0654515 -0.0897289 0.0528719
+    0.0 -0.0972612 0.0734099
+    -0.0703354 0.0716333 -0.00819835
+    -0.0834548 0.0253057 -0.0117936
+    -0.0951857 -0.0784307 -0.0164706
+    0.0 -0.123719 -0.00434472
+    0.0 -0.0077302 0.105387
+    -0.0956505 0.000349755 0.0423399
+    0.0 0.0812899 0.0797049
+    0.0 -0.0955166 -0.0763769
+    -0.0248358 0.098901 -0.105387
+    -0.0685482 -0.0076982 -0.0819944
+    -0.0347717 0.0965206 -0.0775638
+    -0.0735883 0.0775328 -0.0654832
+    0.0 0.106774 -0.0125846
+    0.0 0.123719 -0.0398208
+    -0.0518561 -0.0619531 -0.0832898
+    0.0 0.00181177 -0.0603962
+    0.0 0.114555 -0.10366
+    0.0637753 0.0685953 0.0583787
+    0.0510473 0.105396 0.0144805
+    0.0671566 -0.0110793 0.0891139
+    0.0654514 -0.0897289 0.0528719
+    0.0834546 0.0253056 -0.0117936
+    0.0703353 0.0716332 -0.00819825
+    0.0951855 -0.0784307 -0.0164706
+    0.0956503 0.000349655 0.0423399
+    0.0248358 0.0989009 -0.105387
+    0.0347716 0.0965206 -0.0775637
+    0.068548 -0.00769824 -0.0819944
+    0.0735883 0.0822541 -0.0654832
+    0.051856 -0.0619531 -0.0832898
+  faces 68
+    0 1 2  1  12 20 25  1
+    3 4 5  1  0 1 2  1
+    0 6 7  1  12 23 3  1
+    4 8 9  1  1 4 5  1
+    10 3 5  1  6 0 2  1
+    3 0 11  1  0 12 7  1
+    10 12 3  1  6 8 0  1
+    13 9 8  1  9 5 4  1
+    5 4 9  1  2 1 5  1
+    14 15 16  1  17 16 26  1
+    17 18 16  1  24 19 26  1
+    2 1 18  1  25 20 19  1
+    18 19 16  1  19 21 26  1
+    7 6 17  1  3 23 24  1
+    0 2 6  1  12 25 23  1
+    6 2 18  1  23 25 19  1
+    17 6 18  1  24 23 19  1
+    0 12 1  1  12 8 20  1
+    12 0 3  1  8 12 0  1
+    13 8 20  1  9 4 10  1
+    7 17 15  1  3 24 16  1
+    20 15 21  1  10 16 11  1
+    21 13 20  1  11 9 10  1
+    16 19 22  1  26 21 22  1
+    8 4 11  1  4 1 7  1
+    0 7 11  1  12 3 7  1
+    15 8 7  1  16 4 3  1
+    8 15 20  1  4 16 10  1
+    14 16 22  1  17 26 22  1
+    15 17 16  1  16 24 26  1
+    11 7 8  1  7 3 4  1
+    3 11 4  1  0 7 1  1
+    23 24 1  1  12 25 20  2
+    25 5 26  1  0 2 1  2
+    23 27 28  1  12 3 23  2
+    26 9 29  1  1 5 4  2
+    10 5 25  1  6 2 0  2
+    25 30 23  1  0 7 12  2
+    10 25 12  1  6 0 8  2
+    13 29 9  1  9 4 5  2
+    5 9 26  1  2 5 1  2
+    31 32 33  1  17 26 16  2
+    28 34 18  1  23 24 19  2
+    24 18 1  1  25 19 20  2
+    18 32 19  1  19 26 21  2
+    27 34 28  1  3 24 23  2
+    23 28 24  1  12 23 25  2
+    28 18 24  1  23 19 25  2
+    34 32 18  1  24 26 19  2
+    23 1 12  1  12 20 8  2
+    12 25 23  1  8 0 12  2
+    13 35 29  1  9 10 4  2
+    27 33 34  1  3 16 24  2
+    35 21 33  1  10 11 16  2
+    21 35 13  1  11 10 9  2
+    32 22 19  1  26 22 21  2
+    29 30 26  1  4 7 1  2
+    23 30 27  1  12 7 3  2
+    35 33 29  1  10 16 4  2
+    27 29 33  1  3 4 16  2
+    31 22 32  1  17 22 26  2
+    33 32 34  1  16 26 24  2
+    30 29 27  1  7 4 3  2
+    25 26 30  1  0 1 7  2
+    22 31 33  1  15 18 14  2
+    21 22 33  1  13 15 14  2
+    22 15 14  1  15 14 18  2
+    21 15 22  1  13 14 15  2
+  tverts 27
+    0.148351 0.894457 0
+    0.518553 0.855127 0
+    0.251759 0.988912 0
+    0.362144 0.564072 0
+    0.486963 0.557492 0
+    0.665169 0.89286 0
+    0.0659095 0.944358 0
+    0.375519 0.662502 0
+    0.00640146 0.827839 0
+    0.673328 0.386081 0
+    0.589028 0.292235 0
+    0.640033 0.242411 0
+    0.171808 0.79296 0
+    0.104656 -0.123297 0
+    0.573402 0.184364 0
+    0.00875366 0.184465 0
+    0.570099 0.185435 0
+    0.0689507 0.268402 0
+    0.0715799 0.257727 0
+    0.0074756 0.62013 0
+    0.00836767 0.677705 0
+    0.00524786 0.493614 0
+    0.00748239 0.301874 0
+    0.199408 0.635599 0
+    0.237347 0.485518 0
+    0.1554 0.702294 0
+    0.0964808 0.394751 0
+endnode
+node emitter fire
+  parent z217_skull
+  position 0.0 0.0 0.105
+  orientation 1.0 0.0 0.0 -4.71239
+  wirecolor 1.0 1.0 1.0 
+  update_sel 3
+  update Explosion
+  render_sel 1
+  render Normal
+  blend_sel 1
+  Blend Normal
+  spawnType 0
+  xSize 50.0
+  ySize 50.0
+  inherit 1
+  inherit_local 0
+  inheritvel 0
+  inherit_part 0
+  renderorder 0
+  threshold 0.0
+  combinetime 0.0
+  deadspace 0.0
+  opacity 0.5
+  colorStart 0.47451 0.439216 0.364706 
+  colorEnd 0.819608 0.796079 0.709804 
+  alphaStart 1.0
+  alphaEnd 0.0
+  sizeStart 1.0
+  sizeEnd 2.0
+  sizeStart_y 0.0
+  sizeEnd_y 0.0
+  birthrate 10
+  lifeExp 1.0
+  mass -0.02
+  spread 3.12414
+  particleRot 0.5
+  velocity 0.3
+  randvel 0.1
+  bounce_co 0.0
+  blurlength 10.0
+  loop 0
+  bounce 0
+  m_isTinted 1
+  splat 0
+  affectedByWind true
+  texture fxpa_smoke01
+  twosidedtex 1
+  xgrid 4
+  ygrid 4
+  fps 10
+  frameStart 0
+  frameEnd 24
+  random 0
+  lightningDelay 0.0
+  lightningRadius 0.0
+  lightningSubDiv 0
+  lightningScale 0.0
+  blastRadius 0.2
+  blastLength 0.3
+  p2p 0
+  p2p_type Bezier
+  p2p_sel 1
+  p2p_bezier2 0.0
+  p2p_bezier3 0.0
+  grav 0.0
+  drag 0.0
+endnode
+endmodelgeom z217_skull
+#NWgMax Plus ANIM ASCII
+newanim close2open z217_skull
+  length 0.333333
+  transtime 0.25
+  animroot z217_skull
+    node dummy z217_skull
+        parent NULL
+    endnode
+    node dummy z217_skull_pwk
+        parent z217_skull
+    endnode
+    node pwk PWK
+        parent z217_skull_pwk
+    endnode
+    node dummy ile_pwk_use01
+        parent z217_skull_pwk
+    endnode
+    node dummy _skull_impact
+        parent z217_skull
+    endnode
+    node dummy _skull_ground
+        parent z217_skull
+    endnode
+    node dummy _skull_hand
+        parent z217_skull
+    endnode
+    node dummy _skull_head
+        parent z217_skull
+    endnode
+    node dummy _skull_head_hit
+        parent z217_skull
+    endnode
+    node trimesh skull
+        parent z217_skull
+        positionkey
+            0.0 -0.00352432 -0.007208 0.102994
+            0.333333 -0.00301437 0.0435035 0.129352
+        endlist
+        orientationkey
+            0.0 0.00110131 -0.126199 -0.992004 -3.15891
+            0.333333 -0.00132756 -0.394744 -0.91879 -3.15884
+        endlist
+    endnode
+    node emitter fire
+        parent z217_skull
+    endnode
+doneanim close2open z217_skull
+#NWgMax Plus ANIM ASCII
+newanim close z217_skull
+  length 0.0
+  transtime 0.25
+  animroot z217_skull
+    node dummy z217_skull
+        parent NULL
+    endnode
+    node dummy z217_skull_pwk
+        parent z217_skull
+    endnode
+    node pwk PWK
+        parent z217_skull_pwk
+    endnode
+    node dummy ile_pwk_use01
+        parent z217_skull_pwk
+    endnode
+    node dummy _skull_impact
+        parent z217_skull
+    endnode
+    node dummy _skull_ground
+        parent z217_skull
+    endnode
+    node dummy _skull_hand
+        parent z217_skull
+    endnode
+    node dummy _skull_head
+        parent z217_skull
+    endnode
+    node dummy _skull_head_hit
+        parent z217_skull
+    endnode
+    node trimesh skull
+        parent z217_skull
+        orientationkey
+            0.0 0.00110131 -0.126199 -0.992004 -3.15891
+        endlist
+    endnode
+    node emitter fire
+        parent z217_skull
+    endnode
+doneanim close z217_skull
+#NWgMax Plus ANIM ASCII
+newanim open z217_skull
+  length 0.0
+  transtime 0.25
+  animroot z217_skull
+    node dummy z217_skull
+        parent NULL
+    endnode
+    node dummy z217_skull_pwk
+        parent z217_skull
+    endnode
+    node pwk PWK
+        parent z217_skull_pwk
+    endnode
+    node dummy ile_pwk_use01
+        parent z217_skull_pwk
+    endnode
+    node dummy _skull_impact
+        parent z217_skull
+    endnode
+    node dummy _skull_ground
+        parent z217_skull
+    endnode
+    node dummy _skull_hand
+        parent z217_skull
+    endnode
+    node dummy _skull_head
+        parent z217_skull
+    endnode
+    node dummy _skull_head_hit
+        parent z217_skull
+    endnode
+    node trimesh skull
+        parent z217_skull
+        positionkey
+            0.0 -0.00301437 0.0435035 0.129352
+        endlist
+        orientationkey
+            0.0 -0.00132756 -0.394744 -0.91879 -3.15884
+        endlist
+    endnode
+    node emitter fire
+        parent z217_skull
+    endnode
+doneanim open z217_skull
+#NWgMax Plus ANIM ASCII
+newanim open2close z217_skull
+  length 0.333333
+  transtime 0.25
+  animroot z217_skull
+    node dummy z217_skull
+        parent NULL
+    endnode
+    node dummy z217_skull_pwk
+        parent z217_skull
+    endnode
+    node pwk PWK
+        parent z217_skull_pwk
+    endnode
+    node dummy ile_pwk_use01
+        parent z217_skull_pwk
+    endnode
+    node dummy _skull_impact
+        parent z217_skull
+    endnode
+    node dummy _skull_ground
+        parent z217_skull
+    endnode
+    node dummy _skull_hand
+        parent z217_skull
+    endnode
+    node dummy _skull_head
+        parent z217_skull
+    endnode
+    node dummy _skull_head_hit
+        parent z217_skull
+    endnode
+    node trimesh skull
+        parent z217_skull
+        positionkey
+            0.0 -0.00301437 0.0435035 0.129352
+            0.333333 -0.00352432 -0.007208 0.102994
+        endlist
+        orientationkey
+            0.0 -0.00132756 -0.394744 -0.91879 -3.15884
+            0.333333 0.00110131 -0.126199 -0.992004 -3.15891
+        endlist
+    endnode
+    node emitter fire
+        parent z217_skull
+    endnode
+doneanim open2close z217_skull
+#NWgMax Plus ANIM ASCII
+newanim damage z217_skull
+  length 0.133333
+  transtime 0.25
+  animroot z217_skull
+    node dummy z217_skull
+        parent NULL
+    endnode
+    node dummy z217_skull_pwk
+        parent z217_skull
+    endnode
+    node pwk PWK
+        parent z217_skull_pwk
+    endnode
+    node dummy ile_pwk_use01
+        parent z217_skull_pwk
+    endnode
+    node dummy _skull_impact
+        parent z217_skull
+    endnode
+    node dummy _skull_ground
+        parent z217_skull
+    endnode
+    node dummy _skull_hand
+        parent z217_skull
+    endnode
+    node dummy _skull_head
+        parent z217_skull
+    endnode
+    node dummy _skull_head_hit
+        parent z217_skull
+    endnode
+    node trimesh skull
+        parent z217_skull
+        positionkey
+            0.0 -0.00352432 -0.007208 0.102994
+            0.0333333 -0.00352432 -0.007208 0.12308
+            0.0666667 -0.00352432 -0.007208 0.133
+            0.1 -0.00352432 -0.007208 0.12308
+            0.133333 -0.00352432 -0.007208 0.102994
+        endlist
+        orientationkey
+            0.0 0.00110131 -0.126199 -0.992004 -3.15891
+            0.0666667 0.000380654 -0.207912 -0.978148 -3.15903
+            0.133333 0.00110131 -0.126199 -0.992004 -3.15891
+        endlist
+    endnode
+    node emitter fire
+        parent z217_skull
+    endnode
+doneanim damage z217_skull
+#NWgMax Plus ANIM ASCII
+newanim die z217_skull
+  length 0.666667
+  transtime 0.25
+  animroot z217_skull
+  event 0.0333333 detonate
+    node dummy z217_skull
+        parent NULL
+    endnode
+    node dummy z217_skull_pwk
+        parent z217_skull
+    endnode
+    node pwk PWK
+        parent z217_skull_pwk
+    endnode
+    node dummy ile_pwk_use01
+        parent z217_skull_pwk
+    endnode
+    node dummy _skull_impact
+        parent z217_skull
+    endnode
+    node dummy _skull_ground
+        parent z217_skull
+    endnode
+    node dummy _skull_hand
+        parent z217_skull
+    endnode
+    node dummy _skull_head
+        parent z217_skull
+    endnode
+    node dummy _skull_head_hit
+        parent z217_skull
+    endnode
+    node trimesh skull
+        parent z217_skull
+        positionkey
+            0.0 -0.00352432 -0.007208 0.102994
+            0.0333333 -0.00352432 -0.007208 0.12308
+            0.0666667 -0.00352432 -0.007208 0.133
+            0.1 -0.00352432 0.0132659 -4.92201
+            0.666667 -0.00352432 0.0132659 -4.92201
+        endlist
+        orientationkey
+            0.0 0.00110131 -0.126199 -0.992004 -3.15891
+            0.0666667 0.000380654 -0.207912 -0.978148 -3.15903
+            0.1 0.00110131 -0.126199 -0.992004 -3.15891
+        endlist
+    endnode
+    node emitter fire
+        parent z217_skull
+    endnode
+doneanim die z217_skull
+#NWgMax Plus ANIM ASCII
+newanim dead z217_skull
+  length 0.0333333
+  transtime 0.25
+  animroot z217_skull
+    node dummy z217_skull
+        parent NULL
+    endnode
+    node dummy z217_skull_pwk
+        parent z217_skull
+    endnode
+    node pwk PWK
+        parent z217_skull_pwk
+    endnode
+    node dummy ile_pwk_use01
+        parent z217_skull_pwk
+    endnode
+    node dummy _skull_impact
+        parent z217_skull
+    endnode
+    node dummy _skull_ground
+        parent z217_skull
+    endnode
+    node dummy _skull_hand
+        parent z217_skull
+    endnode
+    node dummy _skull_head
+        parent z217_skull
+    endnode
+    node dummy _skull_head_hit
+        parent z217_skull
+    endnode
+    node trimesh skull
+        parent z217_skull
+        positionkey
+            0.0 -0.00352432 0.0132659 -4.92201
+            0.0333333 -0.00352432 0.0132659 -4.92201
+        endlist
+        orientationkey
+            0.0 0.00110131 -0.126199 -0.992004 -3.15891
+            0.0333333 0.00110131 -0.126199 -0.992004 -3.15891
+        endlist
+    endnode
+    node emitter fire
+        parent z217_skull
+    endnode
+doneanim dead z217_skull
+donemodel z217_skull

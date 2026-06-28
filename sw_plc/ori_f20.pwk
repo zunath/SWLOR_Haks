@@ -1,0 +1,33 @@
+# Exported from 3ds max by MDL Plugin Suite 1.1b3
+# http://rockbottom.vtex.net
+#MAXMODEL ASCII
+# model: ori_f20
+filedependancy new pla.max
+node trimesh ori_f20_wg
+  parent ori_f20_pwk
+  position 0.00152774 -0.0324808 0
+  orientation 0 0 0 0
+  wirecolor 0.695313 0.695313 0.695313
+  ambient 0.691406 0.101563 0.34375
+  diffuse 0.691406 0.101563 0.34375
+  specular 0 0 0
+  shininess 1
+  bitmap NULL
+  verts 4
+    -0.170128 -0.0861407 0
+    0.170128 -0.0861407 0
+    -0.170128 0.0861407 0
+    0.170128 0.0861407 0
+  faces 2
+    2 0 3  1  6 4 7  0
+    1 3 0  1  5 7 4  0
+  tverts 8
+    0 0 0
+    1 0 0
+    0 0 0
+    1 0 0
+    0 0 0
+    1 0 0
+    0 1 0
+    1 1 0
+endnode

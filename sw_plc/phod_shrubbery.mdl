@@ -1,0 +1,3819 @@
+# Exported from NWmax 0.7 at 9/6/2004 12:40:56 PM
+# mdl file
+#
+#NWmax MODEL ASCII
+# model: phod_shrubbery
+filedependancy Unknown
+newmodel phod_shrubbery
+setsupermodel phod_shrubbery NULL
+classification Character
+#NWmax GEOM  ASCII
+beginmodelgeom phod_shrubbery
+node dummy phod_shrubbery
+  parent NULL
+endnode
+node danglymesh lowershrub06
+  parent phod_shrubbery
+  position -2.8593 4.27705 0.680396
+  orientation 0.311612 -0.0184179 -0.950031 -0.777277
+  wirecolor 0.894118 0.721569 0.6 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center 11.0 0.0 -24.0 
+  period 7.0
+  tightness 6.0
+  displacement 0.3
+  showdispl true
+  displtype 1
+  center 11.0 0.0 -24.0 
+  ambient 1 1 1 
+  diffuse 1 1 1 
+  specular 0.0 0.0 0.0 
+  shininess 13.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap phod_shrubbery
+  verts 11
+    1.14 0.0 -0.49
+    0.5 0.41 -0.15
+    0.35 1.09 -0.4
+    -0.19 0.55 -0.12
+    -0.92 0.67 -0.43
+    -0.66 0.06 -0.19
+    -0.92 -0.67 -0.55
+    -0.15 -0.62 -0.26
+    0.35 -1.09 -0.58
+    0.57 -0.27 -0.23
+    0.0 0.0 0.1
+  faces 10
+    10 0 1  1  10 0 1  1
+    10 1 2  1  10 1 2  1
+    10 2 3  1  10 2 3  1
+    10 3 4  1  10 3 4  1
+    10 4 5  1  10 4 5  1
+    10 5 6  1  10 5 6  1
+    10 6 7  1  10 6 7  1
+    10 7 8  1  10 7 8  1
+    10 8 9  1  10 8 9  1
+    10 9 0  1  10 9 0  1
+  tverts 11
+    0.686261 0.788431 0
+    0.4491 0.804629 0
+    0.308301 0.997189 0
+    0.222567 0.775109 0
+    -0.0010466 0.702975 0
+    0.174676 0.549113 0
+    0.17441 0.313969 0
+    0.376392 0.439516 0
+    0.59848 0.36881 0
+    0.550816 0.594621 0
+    0.349565 0.638734 0
+  constraints 11
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    0.0
+endnode
+node danglymesh lowershrub07
+  parent phod_shrubbery
+  position -1.65914 3.26892 0.949142
+  orientation 0.281244 -0.122304 -0.951811 -0.78634
+  wirecolor 0.894118 0.721569 0.6 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center -8.0 -2.5 -23.0 
+  period 7.0
+  tightness 6.0
+  displacement 0.3
+  showdispl true
+  displtype 1
+  center -8.0 -2.5 -23.0 
+  ambient 1 1 1 
+  diffuse 1 1 1 
+  specular 0.0 0.0 0.0 
+  shininess 13.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap phod_shrubbery
+  verts 11
+    -0.18 -1.09 -0.56
+    0.33 -0.54 -0.21
+    1.0 -0.46 -0.49
+    0.56 0.13 -0.15
+    0.76 0.86 -0.42
+    0.14 0.66 -0.15
+    -0.57 1.04 -0.44
+    -0.61 0.25 -0.21
+    -1.16 -0.17 -0.53
+    -0.36 -0.51 -0.25
+    0.01 -0.01 0.1
+  faces 10
+    10 0 1  1  10 0 1  1
+    10 1 2  1  10 1 2  1
+    10 2 3  1  10 2 3  1
+    10 3 4  1  10 3 4  1
+    10 4 5  1  10 4 5  1
+    10 5 6  1  10 5 6  1
+    10 6 7  1  10 6 7  1
+    10 7 8  1  10 7 8  1
+    10 8 9  1  10 8 9  1
+    10 9 0  1  10 9 0  1
+  tverts 11
+    0.686261 0.788431 0
+    0.4491 0.804629 0
+    0.308301 0.997189 0
+    0.222567 0.775109 0
+    -0.0010466 0.702975 0
+    0.174676 0.549113 0
+    0.17441 0.313969 0
+    0.376392 0.439516 0
+    0.59848 0.36881 0
+    0.550816 0.594621 0
+    0.349565 0.638734 0
+  constraints 11
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    0.0
+endnode
+node danglymesh lowershrub08
+  parent phod_shrubbery
+  position -3.48992 2.98178 0.949142
+  orientation 0.11825 0.0168677 -0.992841 -1.93779
+  wirecolor 0.894118 0.721569 0.6 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center -8.0 -2.5 -23.0 
+  period 7.0
+  tightness 6.0
+  displacement 0.3
+  showdispl true
+  displtype 1
+  center -8.0 -2.5 -23.0 
+  ambient 1 1 1 
+  diffuse 1 1 1 
+  specular 0.0 0.0 0.0 
+  shininess 13.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap phod_shrubbery
+  verts 11
+    -0.18 -1.09 -0.56
+    0.33 -0.54 -0.21
+    1.0 -0.46 -0.49
+    0.56 0.13 -0.15
+    0.76 0.86 -0.42
+    0.14 0.66 -0.15
+    -0.57 1.04 -0.44
+    -0.61 0.25 -0.21
+    -1.16 -0.17 -0.53
+    -0.36 -0.51 -0.25
+    0.01 -0.01 0.1
+  faces 10
+    10 0 1  1  10 0 1  1
+    10 1 2  1  10 1 2  1
+    10 2 3  1  10 2 3  1
+    10 3 4  1  10 3 4  1
+    10 4 5  1  10 4 5  1
+    10 5 6  1  10 5 6  1
+    10 6 7  1  10 6 7  1
+    10 7 8  1  10 7 8  1
+    10 8 9  1  10 8 9  1
+    10 9 0  1  10 9 0  1
+  tverts 11
+    0.686261 0.788431 0
+    0.4491 0.804629 0
+    0.308301 0.997189 0
+    0.222567 0.775109 0
+    -0.0010466 0.702975 0
+    0.174676 0.549113 0
+    0.17441 0.313969 0
+    0.376392 0.439516 0
+    0.59848 0.36881 0
+    0.550816 0.594621 0
+    0.349565 0.638734 0
+  constraints 11
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    0.0
+endnode
+node danglymesh lowershrub09
+  parent phod_shrubbery
+  position -1.34647 1.75073 0.949142
+  orientation 0.0586323 -0.00860576 -0.998243 -2.07587
+  wirecolor 0.894118 0.721569 0.6 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center -8.0 -2.5 -23.0 
+  period 7.0
+  tightness 6.0
+  displacement 0.3
+  showdispl true
+  displtype 1
+  center -8.0 -2.5 -23.0 
+  ambient 1 1 1 
+  diffuse 1 1 1 
+  specular 0.0 0.0 0.0 
+  shininess 13.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap phod_shrubbery
+  verts 11
+    -0.18 -1.09 -0.56
+    0.33 -0.54 -0.21
+    1.0 -0.46 -0.49
+    0.56 0.13 -0.15
+    0.76 0.86 -0.42
+    0.14 0.66 -0.15
+    -0.57 1.04 -0.44
+    -0.61 0.25 -0.21
+    -1.16 -0.17 -0.53
+    -0.36 -0.51 -0.25
+    0.01 -0.01 0.1
+  faces 10
+    10 0 1  1  10 0 1  1
+    10 1 2  1  10 1 2  1
+    10 2 3  1  10 2 3  1
+    10 3 4  1  10 3 4  1
+    10 4 5  1  10 4 5  1
+    10 5 6  1  10 5 6  1
+    10 6 7  1  10 6 7  1
+    10 7 8  1  10 7 8  1
+    10 8 9  1  10 8 9  1
+    10 9 0  1  10 9 0  1
+  tverts 11
+    0.686261 0.788431 0
+    0.4491 0.804629 0
+    0.308301 0.997189 0
+    0.222567 0.775109 0
+    -0.0010466 0.702975 0
+    0.174676 0.549113 0
+    0.17441 0.313969 0
+    0.376392 0.439516 0
+    0.59848 0.36881 0
+    0.550816 0.594621 0
+    0.349565 0.638734 0
+  constraints 11
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    0.0
+endnode
+node danglymesh lowershrub10
+  parent phod_shrubbery
+  position -3.0629 1.55239 0.949142
+  orientation 0.221695 -0.0981577 -0.970163 -0.836321
+  wirecolor 0.894118 0.721569 0.6 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center -8.0 -2.5 -23.0 
+  period 7.0
+  tightness 6.0
+  displacement 0.3
+  showdispl true
+  displtype 1
+  center -8.0 -2.5 -23.0 
+  ambient 1 1 1 
+  diffuse 1 1 1 
+  specular 0.0 0.0 0.0 
+  shininess 13.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap phod_shrubbery
+  verts 11
+    -0.18 -1.09 -0.56
+    0.33 -0.54 -0.21
+    1.0 -0.46 -0.49
+    0.56 0.13 -0.15
+    0.76 0.86 -0.42
+    0.14 0.66 -0.15
+    -0.57 1.04 -0.44
+    -0.61 0.25 -0.21
+    -1.16 -0.17 -0.53
+    -0.36 -0.51 -0.25
+    0.01 -0.01 0.1
+  faces 10
+    10 0 1  1  10 0 1  1
+    10 1 2  1  10 1 2  1
+    10 2 3  1  10 2 3  1
+    10 3 4  1  10 3 4  1
+    10 4 5  1  10 4 5  1
+    10 5 6  1  10 5 6  1
+    10 6 7  1  10 6 7  1
+    10 7 8  1  10 7 8  1
+    10 8 9  1  10 8 9  1
+    10 9 0  1  10 9 0  1
+  tverts 11
+    0.686261 0.788431 0
+    0.4491 0.804629 0
+    0.308301 0.997189 0
+    0.222567 0.775109 0
+    -0.0010466 0.702975 0
+    0.174676 0.549113 0
+    0.17441 0.313969 0
+    0.376392 0.439516 0
+    0.59848 0.36881 0
+    0.550816 0.594621 0
+    0.349565 0.638734 0
+  constraints 11
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    0.0
+endnode
+node danglymesh lowershrub11
+  parent phod_shrubbery
+  position 4.25767 -1.27487 0.680396
+  orientation 0.0896136 -0.33667 0.937349 -1.25261
+  wirecolor 0.894118 0.721569 0.6 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center 12.5 2.5 -25.0 
+  period 7.0
+  tightness 6.0
+  displacement 0.3
+  showdispl true
+  displtype 1
+  center 12.5 2.5 -25.0 
+  ambient 1 1 1 
+  diffuse 1 1 1 
+  specular 0.0 0.0 0.0 
+  shininess 13.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap phod_shrubbery
+  verts 11
+    1.17 0.03 -0.58
+    0.52 0.42 -0.2
+    0.38 1.12 -0.49
+    -0.19 0.55 -0.15
+    -0.91 0.68 -0.47
+    -0.66 0.06 -0.19
+    -0.92 -0.67 -0.55
+    -0.15 -0.62 -0.26
+    0.36 -1.07 -0.62
+    0.58 -0.26 -0.27
+    0.0 0.0 0.12
+  faces 10
+    10 0 1  1  10 0 1  1
+    10 1 2  1  10 1 2  1
+    10 2 3  1  10 2 3  1
+    10 3 4  1  10 3 4  1
+    10 4 5  1  10 4 5  1
+    10 5 6  1  10 5 6  1
+    10 6 7  1  10 6 7  1
+    10 7 8  1  10 7 8  1
+    10 8 9  1  10 8 9  1
+    10 9 0  1  10 9 0  1
+  tverts 11
+    0.686261 0.788431 0
+    0.4491 0.804629 0
+    0.308301 0.997189 0
+    0.222567 0.775109 0
+    -0.0010466 0.702975 0
+    0.174676 0.549113 0
+    0.17441 0.313969 0
+    0.376392 0.439516 0
+    0.59848 0.36881 0
+    0.550816 0.594621 0
+    0.349565 0.638734 0
+  constraints 11
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    0.0
+endnode
+node danglymesh lowershrub12
+  parent phod_shrubbery
+  position 3.09258 -2.41372 0.680396
+  orientation -0.0931371 0.135329 -0.986413 -2.38148
+  wirecolor 0.894118 0.721569 0.6 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center 9.5 0.999996 -25.5 
+  period 7.0
+  tightness 6.0
+  displacement 0.3
+  showdispl true
+  displtype 1
+  center 9.5 0.999996 -25.5 
+  ambient 1 1 1 
+  diffuse 1 1 1 
+  specular 0.0 0.0 0.0 
+  shininess 13.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap phod_shrubbery
+  verts 11
+    1.14 0.0 -0.51
+    0.5 0.41 -0.16
+    0.34 1.1 -0.46
+    -0.2 0.55 -0.16
+    -0.95 0.69 -0.53
+    -0.67 0.07 -0.24
+    -0.95 -0.66 -0.63
+    -0.16 -0.61 -0.28
+    0.34 -1.08 -0.62
+    0.57 -0.27 -0.24
+    0.0 0.0 0.12
+  faces 10
+    10 0 1  1  10 0 1  1
+    10 1 2  1  10 1 2  1
+    10 2 3  1  10 2 3  1
+    10 3 4  1  10 3 4  1
+    10 4 5  1  10 4 5  1
+    10 5 6  1  10 5 6  1
+    10 6 7  1  10 6 7  1
+    10 7 8  1  10 7 8  1
+    10 8 9  1  10 8 9  1
+    10 9 0  1  10 9 0  1
+  tverts 11
+    0.686261 0.788431 0
+    0.4491 0.804629 0
+    0.308301 0.997189 0
+    0.222567 0.775109 0
+    -0.0010466 0.702975 0
+    0.174676 0.549113 0
+    0.17441 0.313969 0
+    0.376392 0.439516 0
+    0.59848 0.36881 0
+    0.550816 0.594621 0
+    0.349565 0.638734 0
+  constraints 11
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    0.0
+endnode
+node danglymesh lowershrub13
+  parent phod_shrubbery
+  position 2.04577 -2.08701 0.680396
+  orientation -0.347311 -0.232114 0.908569 -0.690787
+  wirecolor 0.894118 0.721569 0.6 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center 11.0 0.0 -24.0 
+  period 7.0
+  tightness 6.0
+  displacement 0.3
+  showdispl true
+  displtype 1
+  center 11.0 0.0 -24.0 
+  ambient 1 1 1 
+  diffuse 1 1 1 
+  specular 0.0 0.0 0.0 
+  shininess 13.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap phod_shrubbery
+  verts 11
+    1.14 0.0 -0.49
+    0.5 0.41 -0.15
+    0.35 1.09 -0.4
+    -0.19 0.55 -0.12
+    -0.92 0.67 -0.43
+    -0.66 0.06 -0.19
+    -0.92 -0.67 -0.55
+    -0.15 -0.62 -0.26
+    0.35 -1.09 -0.58
+    0.57 -0.27 -0.23
+    0.0 0.0 0.1
+  faces 10
+    10 0 1  1  10 0 1  1
+    10 1 2  1  10 1 2  1
+    10 2 3  1  10 2 3  1
+    10 3 4  1  10 3 4  1
+    10 4 5  1  10 4 5  1
+    10 5 6  1  10 5 6  1
+    10 6 7  1  10 6 7  1
+    10 7 8  1  10 7 8  1
+    10 8 9  1  10 8 9  1
+    10 9 0  1  10 9 0  1
+  tverts 11
+    0.686261 0.788431 0
+    0.4491 0.804629 0
+    0.308301 0.997189 0
+    0.222567 0.775109 0
+    -0.0010466 0.702975 0
+    0.174676 0.549113 0
+    0.17441 0.313969 0
+    0.376392 0.439516 0
+    0.59848 0.36881 0
+    0.550816 0.594621 0
+    0.349565 0.638734 0
+  constraints 11
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    0.0
+endnode
+node danglymesh lowershrub14
+  parent phod_shrubbery
+  position 0.658552 -2.34363 0.933587
+  orientation -0.000899592 0.108365 0.994111 -1.51847
+  wirecolor 0.894118 0.721569 0.6 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center 11.0 0.0 -24.0 
+  period 7.0
+  tightness 6.0
+  displacement 0.3
+  showdispl true
+  displtype 1
+  center 11.0 0.0 -24.0 
+  ambient 1 1 1 
+  diffuse 1 1 1 
+  specular 0.0 0.0 0.0 
+  shininess 13.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap phod_shrubbery
+  verts 11
+    1.14 0.0 -0.49
+    0.5 0.41 -0.15
+    0.35 1.09 -0.4
+    -0.19 0.55 -0.12
+    -0.92 0.67 -0.43
+    -0.66 0.06 -0.19
+    -0.92 -0.67 -0.55
+    -0.15 -0.62 -0.26
+    0.35 -1.09 -0.58
+    0.57 -0.27 -0.23
+    0.0 0.0 0.1
+  faces 10
+    10 0 1  1  10 0 1  1
+    10 1 2  1  10 1 2  1
+    10 2 3  1  10 2 3  1
+    10 3 4  1  10 3 4  1
+    10 4 5  1  10 4 5  1
+    10 5 6  1  10 5 6  1
+    10 6 7  1  10 6 7  1
+    10 7 8  1  10 7 8  1
+    10 8 9  1  10 8 9  1
+    10 9 0  1  10 9 0  1
+  tverts 11
+    0.686261 0.788431 0
+    0.4491 0.804629 0
+    0.308301 0.997189 0
+    0.222567 0.775109 0
+    -0.0010466 0.702975 0
+    0.174676 0.549113 0
+    0.17441 0.313969 0
+    0.376392 0.439516 0
+    0.59848 0.36881 0
+    0.550816 0.594621 0
+    0.349565 0.638734 0
+  constraints 11
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    0.0
+endnode
+node danglymesh lowershrub15
+  parent phod_shrubbery
+  position 0.821624 -3.88796 0.606906
+  orientation -0.0246988 0.170824 -0.984992 -3.34445
+  wirecolor 0.894118 0.721569 0.6 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center 11.0 0.0 -24.0 
+  period 7.0
+  tightness 6.0
+  displacement 0.3
+  showdispl true
+  displtype 1
+  center 11.0 0.0 -24.0 
+  ambient 1 1 1 
+  diffuse 1 1 1 
+  specular 0.0 0.0 0.0 
+  shininess 13.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap phod_shrubbery
+  verts 11
+    1.14 0.0 -0.49
+    0.5 0.41 -0.15
+    0.35 1.09 -0.4
+    -0.19 0.55 -0.12
+    -0.92 0.67 -0.43
+    -0.66 0.06 -0.19
+    -0.92 -0.67 -0.55
+    -0.15 -0.62 -0.26
+    0.35 -1.09 -0.58
+    0.57 -0.27 -0.23
+    0.0 0.0 0.1
+  faces 10
+    10 0 1  1  10 0 1  1
+    10 1 2  1  10 1 2  1
+    10 2 3  1  10 2 3  1
+    10 3 4  1  10 3 4  1
+    10 4 5  1  10 4 5  1
+    10 5 6  1  10 5 6  1
+    10 6 7  1  10 6 7  1
+    10 7 8  1  10 7 8  1
+    10 8 9  1  10 8 9  1
+    10 9 0  1  10 9 0  1
+  tverts 11
+    0.686261 0.788431 0
+    0.4491 0.804629 0
+    0.308301 0.997189 0
+    0.222567 0.775109 0
+    -0.0010466 0.702975 0
+    0.174676 0.549113 0
+    0.17441 0.313969 0
+    0.376392 0.439516 0
+    0.59848 0.36881 0
+    0.550816 0.594621 0
+    0.349565 0.638734 0
+  constraints 11
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    0.0
+endnode
+node danglymesh lowershrub16
+  parent phod_shrubbery
+  position 3.42655 -0.396697 0.680396
+  orientation -0.0117622 -0.0193555 -0.999743 -2.87027
+  wirecolor 0.894118 0.721569 0.6 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center 11.0 0.0 -24.0 
+  period 7.0
+  tightness 6.0
+  displacement 0.3
+  showdispl true
+  displtype 1
+  center 11.0 0.0 -24.0 
+  ambient 1 1 1 
+  diffuse 1 1 1 
+  specular 0.0 0.0 0.0 
+  shininess 13.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap phod_shrubbery
+  verts 11
+    1.14 0.0 -0.49
+    0.5 0.41 -0.15
+    0.35 1.09 -0.4
+    -0.19 0.55 -0.12
+    -0.92 0.67 -0.43
+    -0.66 0.06 -0.19
+    -0.92 -0.67 -0.55
+    -0.15 -0.62 -0.26
+    0.35 -1.09 -0.58
+    0.57 -0.27 -0.23
+    0.0 0.0 0.1
+  faces 10
+    10 0 1  1  10 0 1  1
+    10 1 2  1  10 1 2  1
+    10 2 3  1  10 2 3  1
+    10 3 4  1  10 3 4  1
+    10 4 5  1  10 4 5  1
+    10 5 6  1  10 5 6  1
+    10 6 7  1  10 6 7  1
+    10 7 8  1  10 7 8  1
+    10 8 9  1  10 8 9  1
+    10 9 0  1  10 9 0  1
+  tverts 11
+    0.686261 0.788431 0
+    0.4491 0.804629 0
+    0.308301 0.997189 0
+    0.222567 0.775109 0
+    -0.0010466 0.702975 0
+    0.174676 0.549113 0
+    0.17441 0.313969 0
+    0.376392 0.439516 0
+    0.59848 0.36881 0
+    0.550816 0.594621 0
+    0.349565 0.638734 0
+  constraints 11
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    0.0
+endnode
+node danglymesh lowershrub17
+  parent phod_shrubbery
+  position 2.54291 1.22633 0.780099
+  orientation 0.0117923 -0.0367038 -0.999257 -3.01295
+  wirecolor 0.894118 0.721569 0.6 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center 11.0 0.0 -24.0 
+  period 7.0
+  tightness 6.0
+  displacement 0.3
+  showdispl true
+  displtype 1
+  center 11.0 0.0 -24.0 
+  ambient 1 1 1 
+  diffuse 1 1 1 
+  specular 0.0 0.0 0.0 
+  shininess 13.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap phod_shrubbery
+  verts 11
+    1.14 0.0 -0.49
+    0.5 0.41 -0.15
+    0.35 1.09 -0.4
+    -0.19 0.55 -0.12
+    -0.92 0.67 -0.43
+    -0.66 0.06 -0.19
+    -0.92 -0.67 -0.55
+    -0.15 -0.62 -0.26
+    0.35 -1.09 -0.58
+    0.57 -0.27 -0.23
+    0.0 0.0 0.1
+  faces 10
+    10 0 1  1  10 0 1  1
+    10 1 2  1  10 1 2  1
+    10 2 3  1  10 2 3  1
+    10 3 4  1  10 3 4  1
+    10 4 5  1  10 4 5  1
+    10 5 6  1  10 5 6  1
+    10 6 7  1  10 6 7  1
+    10 7 8  1  10 7 8  1
+    10 8 9  1  10 8 9  1
+    10 9 0  1  10 9 0  1
+  tverts 11
+    0.686261 0.788431 0
+    0.4491 0.804629 0
+    0.308301 0.997189 0
+    0.222567 0.775109 0
+    -0.0010466 0.702975 0
+    0.174676 0.549113 0
+    0.17441 0.313969 0
+    0.376392 0.439516 0
+    0.59848 0.36881 0
+    0.550816 0.594621 0
+    0.349565 0.638734 0
+  constraints 11
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    0.0
+endnode
+node danglymesh lowershrub18
+  parent phod_shrubbery
+  position 2.4049 -0.989003 0.869542
+  orientation 0.000805851 -0.00683113 -0.999976 -3.87534
+  wirecolor 0.894118 0.721569 0.6 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center 11.0 0.0 -24.0 
+  period 7.0
+  tightness 6.0
+  displacement 0.3
+  showdispl true
+  displtype 1
+  center 11.0 0.0 -24.0 
+  ambient 1 1 1 
+  diffuse 1 1 1 
+  specular 0.0 0.0 0.0 
+  shininess 13.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap phod_shrubbery
+  verts 11
+    1.14 0.0 -0.49
+    0.5 0.41 -0.15
+    0.35 1.09 -0.4
+    -0.19 0.55 -0.12
+    -0.92 0.67 -0.43
+    -0.66 0.06 -0.19
+    -0.92 -0.67 -0.55
+    -0.15 -0.62 -0.26
+    0.35 -1.09 -0.58
+    0.57 -0.27 -0.23
+    0.0 0.0 0.1
+  faces 10
+    10 0 1  1  10 0 1  1
+    10 1 2  1  10 1 2  1
+    10 2 3  1  10 2 3  1
+    10 3 4  1  10 3 4  1
+    10 4 5  1  10 4 5  1
+    10 5 6  1  10 5 6  1
+    10 6 7  1  10 6 7  1
+    10 7 8  1  10 7 8  1
+    10 8 9  1  10 8 9  1
+    10 9 0  1  10 9 0  1
+  tverts 11
+    0.686261 0.788431 0
+    0.4491 0.804629 0
+    0.308301 0.997189 0
+    0.222567 0.775109 0
+    -0.0010466 0.702975 0
+    0.174676 0.549113 0
+    0.17441 0.313969 0
+    0.376392 0.439516 0
+    0.59848 0.36881 0
+    0.550816 0.594621 0
+    0.349565 0.638734 0
+  constraints 11
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    0.0
+endnode
+node danglymesh lowershrub19
+  parent phod_shrubbery
+  position 1.27594 0.101499 0.871234
+  orientation 0.000805851 -0.00683113 -0.999976 -3.87534
+  wirecolor 0.894118 0.721569 0.6 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center 11.0 0.0 -24.0 
+  period 7.0
+  tightness 6.0
+  displacement 0.3
+  showdispl true
+  displtype 1
+  center 11.0 0.0 -24.0 
+  ambient 1 1 1 
+  diffuse 1 1 1 
+  specular 0.0 0.0 0.0 
+  shininess 13.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap phod_shrubbery
+  verts 11
+    1.14 0.0 -0.49
+    0.5 0.41 -0.15
+    0.35 1.09 -0.4
+    -0.19 0.55 -0.12
+    -0.92 0.67 -0.43
+    -0.66 0.06 -0.19
+    -0.92 -0.67 -0.55
+    -0.15 -0.62 -0.26
+    0.35 -1.09 -0.58
+    0.57 -0.27 -0.23
+    0.0 0.0 0.1
+  faces 10
+    10 0 1  1  10 0 1  1
+    10 1 2  1  10 1 2  1
+    10 2 3  1  10 2 3  1
+    10 3 4  1  10 3 4  1
+    10 4 5  1  10 4 5  1
+    10 5 6  1  10 5 6  1
+    10 6 7  1  10 6 7  1
+    10 7 8  1  10 7 8  1
+    10 8 9  1  10 8 9  1
+    10 9 0  1  10 9 0  1
+  tverts 11
+    0.686261 0.788431 0
+    0.4491 0.804629 0
+    0.308301 0.997189 0
+    0.222567 0.775109 0
+    -0.0010466 0.702975 0
+    0.174676 0.549113 0
+    0.17441 0.313969 0
+    0.376392 0.439516 0
+    0.59848 0.36881 0
+    0.550816 0.594621 0
+    0.349565 0.638734 0
+  constraints 11
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    0.0
+endnode
+node danglymesh lowershrub20
+  parent phod_shrubbery
+  position -0.400751 -3.16642 0.680396
+  orientation 0.000805851 -0.00683113 -0.999976 -3.87534
+  wirecolor 0.894118 0.721569 0.6 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center 11.0 -0.499996 -28.0 
+  period 7.0
+  tightness 6.0
+  displacement 0.3
+  showdispl true
+  displtype 1
+  center 11.0 -0.499996 -28.0 
+  ambient 1 1 1 
+  diffuse 1 1 1 
+  specular 0.0 0.0 0.0 
+  shininess 13.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap phod_shrubbery
+  verts 11
+    1.14 0.0 -0.57
+    0.5 0.4 -0.17
+    0.35 1.08 -0.46
+    -0.19 0.55 -0.14
+    -0.92 0.67 -0.5
+    -0.66 0.06 -0.22
+    -0.92 -0.67 -0.64
+    -0.15 -0.62 -0.31
+    0.35 -1.09 -0.68
+    0.57 -0.27 -0.27
+    0.0 0.0 0.12
+  faces 10
+    10 0 1  1  10 0 1  1
+    10 1 2  1  10 1 2  1
+    10 2 3  1  10 2 3  1
+    10 3 4  1  10 3 4  1
+    10 4 5  1  10 4 5  1
+    10 5 6  1  10 5 6  1
+    10 6 7  1  10 6 7  1
+    10 7 8  1  10 7 8  1
+    10 8 9  1  10 8 9  1
+    10 9 0  1  10 9 0  1
+  tverts 11
+    0.686261 0.788431 0
+    0.4491 0.804629 0
+    0.308301 0.997189 0
+    0.222567 0.775109 0
+    -0.0010466 0.702975 0
+    0.174676 0.549113 0
+    0.17441 0.313969 0
+    0.376392 0.439516 0
+    0.59848 0.36881 0
+    0.550816 0.594621 0
+    0.349565 0.638734 0
+  constraints 11
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    169.0
+    0.0
+endnode
+node danglymesh middleshrub06
+  parent phod_shrubbery
+  position -3.12834 2.95011 1.09579
+  orientation 0.0 0.0 1.0 -1.63188
+  wirecolor 0.894118 0.721569 0.6 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center -11.5 2.5 -20.5 
+  period 7.0
+  tightness 5.0
+  displacement 0.3
+  showdispl true
+  displtype 1
+  center -11.5 2.5 -20.5 
+  ambient 1 1 1 
+  diffuse 1 1 1 
+  specular 0.0 0.0 0.0 
+  shininess 13.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap phod_shrubbery
+  verts 11
+    -1.22 -0.19 -0.54
+    -0.74 -0.47 -0.02
+    -0.49 -1.03 -0.47
+    0.15 -0.75 -0.12
+    0.99 -0.79 -0.5
+    0.72 -0.12 -0.18
+    0.97 0.78 -0.51
+    0.28 0.78 -0.53
+    -0.37 1.08 -0.66
+    -0.64 0.44 -0.04
+    0.0 0.0 0.25
+  faces 10
+    10 0 1  1  10 0 1  1
+    10 1 2  1  10 1 2  1
+    10 2 3  1  10 2 3  1
+    10 3 4  1  10 3 4  1
+    10 4 5  1  10 4 5  1
+    10 5 6  1  10 5 6  1
+    10 6 7  1  10 6 7  1
+    10 7 8  1  10 7 8  1
+    10 8 9  1  10 8 9  1
+    10 9 0  1  10 9 0  1
+  tverts 11
+    0.680109 0.784764 0
+    0.45129 0.801656 0
+    0.310522 0.98542 0
+    0.228928 0.779452 0
+    0.00189493 0.702104 0
+    0.182049 0.55605 0
+    0.17905 0.318027 0
+    0.374784 0.444446 0
+    0.598996 0.372414 0
+    0.536869 0.598527 0
+    0.348098 0.656537 0
+  constraints 11
+    161.0
+    161.0
+    161.0
+    161.0
+    161.0
+    161.0
+    161.0
+    161.0
+    161.0
+    161.0
+    233.0
+endnode
+node danglymesh middleshrub07
+  parent phod_shrubbery
+  position -1.77479 2.35115 1.37736
+  orientation 0.0 0.0 -1.0 -3.75246
+  wirecolor 0.894118 0.721569 0.6 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center -11.5 2.5 -20.5 
+  period 7.0
+  tightness 5.0
+  displacement 0.3
+  showdispl true
+  displtype 1
+  center -11.5 2.5 -20.5 
+  ambient 1 1 1 
+  diffuse 1 1 1 
+  specular 0.0 0.0 0.0 
+  shininess 13.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap phod_shrubbery
+  verts 11
+    -1.22 -0.19 -0.54
+    -0.74 -0.47 -0.02
+    -0.49 -1.03 -0.47
+    0.15 -0.75 -0.12
+    0.99 -0.79 -0.5
+    0.72 -0.12 -0.18
+    0.97 0.78 -0.51
+    0.28 0.78 -0.53
+    -0.37 1.08 -0.66
+    -0.64 0.44 -0.04
+    0.0 0.0 0.25
+  faces 10
+    10 0 1  1  10 0 1  1
+    10 1 2  1  10 1 2  1
+    10 2 3  1  10 2 3  1
+    10 3 4  1  10 3 4  1
+    10 4 5  1  10 4 5  1
+    10 5 6  1  10 5 6  1
+    10 6 7  1  10 6 7  1
+    10 7 8  1  10 7 8  1
+    10 8 9  1  10 8 9  1
+    10 9 0  1  10 9 0  1
+  tverts 11
+    0.680109 0.784764 0
+    0.45129 0.801656 0
+    0.310522 0.98542 0
+    0.228928 0.779452 0
+    0.00189493 0.702104 0
+    0.182049 0.55605 0
+    0.17905 0.318027 0
+    0.374784 0.444446 0
+    0.598996 0.372414 0
+    0.536869 0.598527 0
+    0.348098 0.656537 0
+  constraints 11
+    161.0
+    161.0
+    161.0
+    161.0
+    161.0
+    161.0
+    161.0
+    161.0
+    161.0
+    161.0
+    233.0
+endnode
+node danglymesh middleshrub08
+  parent phod_shrubbery
+  position -2.95806 1.96817 1.37331
+  orientation 0.0 0.0 -1.0 -2.53073
+  wirecolor 0.894118 0.721569 0.6 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center -11.5 2.5 -20.5 
+  period 7.0
+  tightness 5.0
+  displacement 0.3
+  showdispl true
+  displtype 1
+  center -11.5 2.5 -20.5 
+  ambient 1 1 1 
+  diffuse 1 1 1 
+  specular 0.0 0.0 0.0 
+  shininess 13.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap phod_shrubbery
+  verts 11
+    -1.22 -0.19 -0.54
+    -0.74 -0.47 -0.02
+    -0.49 -1.03 -0.47
+    0.15 -0.75 -0.12
+    0.99 -0.79 -0.5
+    0.72 -0.12 -0.18
+    0.97 0.78 -0.51
+    0.28 0.78 -0.53
+    -0.37 1.08 -0.66
+    -0.64 0.44 -0.04
+    0.0 0.0 0.25
+  faces 10
+    10 0 1  1  10 0 1  1
+    10 1 2  1  10 1 2  1
+    10 2 3  1  10 2 3  1
+    10 3 4  1  10 3 4  1
+    10 4 5  1  10 4 5  1
+    10 5 6  1  10 5 6  1
+    10 6 7  1  10 6 7  1
+    10 7 8  1  10 7 8  1
+    10 8 9  1  10 8 9  1
+    10 9 0  1  10 9 0  1
+  tverts 11
+    0.680109 0.784764 0
+    0.45129 0.801656 0
+    0.310522 0.98542 0
+    0.228928 0.779452 0
+    0.00189493 0.702104 0
+    0.182049 0.55605 0
+    0.17905 0.318027 0
+    0.374784 0.444446 0
+    0.598996 0.372414 0
+    0.536869 0.598527 0
+    0.348098 0.656537 0
+  constraints 11
+    161.0
+    161.0
+    161.0
+    161.0
+    161.0
+    161.0
+    161.0
+    161.0
+    161.0
+    161.0
+    233.0
+endnode
+node danglymesh middleshrub09
+  parent phod_shrubbery
+  position -2.77878 4.01611 1.29783
+  orientation 0.00784407 -0.038095 -0.999243 -2.23521
+  wirecolor 0.894118 0.721569 0.6 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center -11.5 2.5 -20.5 
+  period 7.0
+  tightness 5.0
+  displacement 0.3
+  showdispl true
+  displtype 1
+  center -11.5 2.5 -20.5 
+  ambient 1 1 1 
+  diffuse 1 1 1 
+  specular 0.0 0.0 0.0 
+  shininess 13.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap phod_shrubbery
+  verts 11
+    -1.22 -0.19 -0.54
+    -0.74 -0.47 -0.02
+    -0.49 -1.03 -0.47
+    0.15 -0.75 -0.12
+    0.99 -0.79 -0.5
+    0.72 -0.12 -0.18
+    0.97 0.78 -0.51
+    0.28 0.78 -0.53
+    -0.37 1.08 -0.66
+    -0.64 0.44 -0.04
+    0.0 0.0 0.25
+  faces 10
+    10 0 1  1  10 0 1  1
+    10 1 2  1  10 1 2  1
+    10 2 3  1  10 2 3  1
+    10 3 4  1  10 3 4  1
+    10 4 5  1  10 4 5  1
+    10 5 6  1  10 5 6  1
+    10 6 7  1  10 6 7  1
+    10 7 8  1  10 7 8  1
+    10 8 9  1  10 8 9  1
+    10 9 0  1  10 9 0  1
+  tverts 11
+    0.680109 0.784764 0
+    0.45129 0.801656 0
+    0.310522 0.98542 0
+    0.228928 0.779452 0
+    0.00189493 0.702104 0
+    0.182049 0.55605 0
+    0.17905 0.318027 0
+    0.374784 0.444446 0
+    0.598996 0.372414 0
+    0.536869 0.598527 0
+    0.348098 0.656537 0
+  constraints 11
+    161.0
+    161.0
+    161.0
+    161.0
+    161.0
+    161.0
+    161.0
+    161.0
+    161.0
+    161.0
+    233.0
+endnode
+node danglymesh middleshrub10
+  parent phod_shrubbery
+  position 3.46087 -1.75036 0.854992
+  orientation -0.16768 0.141136 -0.975686 -2.05179
+  wirecolor 0.894118 0.721569 0.6 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center 4.5 3.5 -20.5 
+  period 7.0
+  tightness 5.0
+  displacement 0.3
+  showdispl true
+  displtype 1
+  center 4.5 3.5 -20.5 
+  ambient 1 1 1 
+  diffuse 1 1 1 
+  specular 0.0 0.0 0.0 
+  shininess 13.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap phod_shrubbery
+  verts 11
+    1.18 0.35 -0.54
+    0.68 0.56 -0.02
+    0.35 1.09 -0.47
+    -0.25 0.72 -0.12
+    -1.09 0.66 -0.5
+    -0.73 0.03 -0.18
+    -0.86 -0.9 -0.51
+    -0.18 -0.81 -0.53
+    0.51 -1.02 -0.66
+    0.7 -0.35 -0.04
+    0.0 0.0 0.25
+  faces 10
+    10 0 1  1  10 0 1  1
+    10 1 2  1  10 1 2  1
+    10 2 3  1  10 2 3  1
+    10 3 4  1  10 3 4  1
+    10 4 5  1  10 4 5  1
+    10 5 6  1  10 5 6  1
+    10 6 7  1  10 6 7  1
+    10 7 8  1  10 7 8  1
+    10 8 9  1  10 8 9  1
+    10 9 0  1  10 9 0  1
+  tverts 11
+    0.680109 0.784764 0
+    0.45129 0.801656 0
+    0.310522 0.98542 0
+    0.228928 0.779452 0
+    0.00189493 0.702104 0
+    0.182049 0.55605 0
+    0.17905 0.318027 0
+    0.374784 0.444446 0
+    0.598996 0.372414 0
+    0.536869 0.598527 0
+    0.348098 0.656537 0
+  constraints 11
+    161.0
+    161.0
+    161.0
+    161.0
+    161.0
+    161.0
+    161.0
+    161.0
+    161.0
+    161.0
+    233.0
+endnode
+node danglymesh middleshrub11
+  parent phod_shrubbery
+  position 2.47093 0.391726 1.09579
+  orientation -0.102978 0.103465 -0.989288 -1.44258
+  wirecolor 0.894118 0.721569 0.6 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center 4.5 3.5 -20.5 
+  period 7.0
+  tightness 5.0
+  displacement 0.3
+  showdispl true
+  displtype 1
+  center 4.5 3.5 -20.5 
+  ambient 1 1 1 
+  diffuse 1 1 1 
+  specular 0.0 0.0 0.0 
+  shininess 13.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap phod_shrubbery
+  verts 11
+    1.18 0.35 -0.54
+    0.68 0.56 -0.02
+    0.35 1.09 -0.47
+    -0.25 0.72 -0.12
+    -1.09 0.66 -0.5
+    -0.73 0.03 -0.18
+    -0.86 -0.9 -0.51
+    -0.18 -0.81 -0.53
+    0.51 -1.02 -0.66
+    0.7 -0.35 -0.04
+    0.0 0.0 0.25
+  faces 10
+    10 0 1  1  10 0 1  1
+    10 1 2  1  10 1 2  1
+    10 2 3  1  10 2 3  1
+    10 3 4  1  10 3 4  1
+    10 4 5  1  10 4 5  1
+    10 5 6  1  10 5 6  1
+    10 6 7  1  10 6 7  1
+    10 7 8  1  10 7 8  1
+    10 8 9  1  10 8 9  1
+    10 9 0  1  10 9 0  1
+  tverts 11
+    0.680109 0.784764 0
+    0.45129 0.801656 0
+    0.310522 0.98542 0
+    0.228928 0.779452 0
+    0.00189493 0.702104 0
+    0.182049 0.55605 0
+    0.17905 0.318027 0
+    0.374784 0.444446 0
+    0.598996 0.372414 0
+    0.536869 0.598527 0
+    0.348098 0.656537 0
+  constraints 11
+    161.0
+    161.0
+    161.0
+    161.0
+    161.0
+    161.0
+    161.0
+    161.0
+    161.0
+    161.0
+    233.0
+endnode
+node danglymesh middleshrub12
+  parent phod_shrubbery
+  position 1.27682 -1.12577 1.11491
+  orientation -0.099044 -0.0203877 0.994874 -1.17367
+  wirecolor 0.894118 0.721569 0.6 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center 5.5 2.0 -28.0 
+  period 7.0
+  tightness 5.0
+  displacement 0.3
+  showdispl true
+  displtype 1
+  center 5.5 2.0 -28.0 
+  ambient 1 1 1 
+  diffuse 1 1 1 
+  specular 0.0 0.0 0.0 
+  shininess 13.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap phod_shrubbery
+  verts 11
+    1.19 0.34 -0.72
+    0.68 0.56 -0.03
+    0.36 1.08 -0.6
+    -0.24 0.72 -0.13
+    -1.08 0.65 -0.61
+    -0.72 0.03 -0.21
+    -0.85 -0.91 -0.66
+    -0.16 -0.82 -0.7
+    0.53 -1.04 -0.89
+    0.7 -0.35 -0.08
+    -0.01 0.01 0.33
+  faces 10
+    10 0 1  1  10 0 1  1
+    10 1 2  1  10 1 2  1
+    10 2 3  1  10 2 3  1
+    10 3 4  1  10 3 4  1
+    10 4 5  1  10 4 5  1
+    10 5 6  1  10 5 6  1
+    10 6 7  1  10 6 7  1
+    10 7 8  1  10 7 8  1
+    10 8 9  1  10 8 9  1
+    10 9 0  1  10 9 0  1
+  tverts 11
+    0.680109 0.784764 0
+    0.45129 0.801656 0
+    0.310522 0.98542 0
+    0.228928 0.779452 0
+    0.00189493 0.702104 0
+    0.182049 0.55605 0
+    0.17905 0.318027 0
+    0.374784 0.444446 0
+    0.598996 0.372414 0
+    0.536869 0.598527 0
+    0.348098 0.656537 0
+  constraints 11
+    161.0
+    161.0
+    161.0
+    161.0
+    161.0
+    161.0
+    161.0
+    161.0
+    161.0
+    161.0
+    233.0
+endnode
+node danglymesh middleshrub13
+  parent phod_shrubbery
+  position 0.231937 -3.11749 1.24337
+  orientation -0.0744524 0.0389012 0.996466 -1.20284
+  wirecolor 0.894118 0.721569 0.6 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center 4.5 3.5 -20.5 
+  period 7.0
+  tightness 5.0
+  displacement 0.3
+  showdispl true
+  displtype 1
+  center 4.5 3.5 -20.5 
+  ambient 1 1 1 
+  diffuse 1 1 1 
+  specular 0.0 0.0 0.0 
+  shininess 13.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap phod_shrubbery
+  verts 11
+    1.18 0.35 -0.54
+    0.68 0.56 -0.02
+    0.35 1.09 -0.47
+    -0.25 0.72 -0.12
+    -1.09 0.66 -0.5
+    -0.73 0.03 -0.18
+    -0.86 -0.9 -0.51
+    -0.18 -0.81 -0.53
+    0.51 -1.02 -0.66
+    0.7 -0.35 -0.04
+    0.0 0.0 0.25
+  faces 10
+    10 0 1  1  10 0 1  1
+    10 1 2  1  10 1 2  1
+    10 2 3  1  10 2 3  1
+    10 3 4  1  10 3 4  1
+    10 4 5  1  10 4 5  1
+    10 5 6  1  10 5 6  1
+    10 6 7  1  10 6 7  1
+    10 7 8  1  10 7 8  1
+    10 8 9  1  10 8 9  1
+    10 9 0  1  10 9 0  1
+  tverts 11
+    0.680109 0.784764 0
+    0.45129 0.801656 0
+    0.310522 0.98542 0
+    0.228928 0.779452 0
+    0.00189493 0.702104 0
+    0.182049 0.55605 0
+    0.17905 0.318027 0
+    0.374784 0.444446 0
+    0.598996 0.372414 0
+    0.536869 0.598527 0
+    0.348098 0.656537 0
+  constraints 11
+    161.0
+    161.0
+    161.0
+    161.0
+    161.0
+    161.0
+    161.0
+    161.0
+    161.0
+    161.0
+    233.0
+endnode
+node danglymesh Plane20
+  parent phod_shrubbery
+  position 0.325541 2.97645 0.626205
+  orientation 0.235092 -0.231025 0.944118 -1.61084
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 0
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center 0.0 0.000152588 -14.415 
+  period 9.0
+  tightness 5.0
+  displacement 0.05
+  showdispl true
+  displtype 1
+  center 0.0 0.000152588 -14.415 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 5.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap plc_trans
+  verts 18
+    -0.5 -0.46 -0.07
+    -0.5 -0.88 -0.28
+    0.5 -0.46 -0.07
+    0.5 -0.88 -0.28
+    -0.5 0.0 0.0
+    0.5 0.0 0.0
+    -0.5 0.46 -0.07
+    0.5 0.46 -0.07
+    -0.5 0.88 -0.28
+    0.5 0.88 -0.28
+    -0.5 -0.49 -0.08
+    -0.5 -0.02 -0.01
+    0.5 -0.02 -0.01
+    0.5 -0.49 -0.08
+    -0.5 0.44 -0.08
+    0.5 0.44 -0.08
+    -0.5 0.86 -0.29
+    0.5 0.86 -0.29
+  faces 14
+    0 1 2  1  0 1 2  1
+    3 2 1  1  3 2 1  1
+    4 0 5  1  4 0 5  1
+    2 5 0  1  2 5 0  1
+    6 4 7  1  6 4 7  1
+    5 7 4  1  5 7 4  1
+    8 6 9  1  8 6 9  1
+    7 9 6  1  7 9 6  1
+    10 11 12  1  0 4 5  1
+    12 13 10  1  5 2 0  1
+    11 14 15  1  4 6 7  1
+    15 12 11  1  7 5 4  1
+    14 16 17  1  6 8 9  1
+    17 15 14  1  9 7 6  1
+  tverts 10
+    0.764241 0.600879 0
+    0.764241 0.723604 0
+    1.00059 0.600879 0
+    1.00059 0.723604 0
+    0.764241 0.478154 0
+    1.00059 0.478154 0
+    0.764241 0.355429 0
+    1.00059 0.355429 0
+    0.764241 0.232704 0
+    1.00059 0.232704 0
+  constraints 18
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+endnode
+node danglymesh Plane451
+  parent phod_shrubbery
+  position 1.04132 2.3897 0.626205
+  orientation 0.833237 -0.177032 0.523809 -0.396758
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 0
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center -1.3119 -0.279449 -23.4351 
+  period 9.0
+  tightness 5.0
+  displacement 0.05
+  showdispl true
+  displtype 1
+  center -1.3119 -0.279449 -23.4351 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 5.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap plc_trans
+  verts 20
+    -0.5 -0.45 -0.13
+    -0.5 -0.76 -0.47
+    0.5 -0.45 -0.13
+    0.5 -0.76 -0.47
+    -0.5 0.0 0.0
+    0.5 0.0 0.0
+    -0.5 0.45 -0.13
+    0.5 0.45 -0.13
+    -0.5 0.76 -0.47
+    0.5 0.76 -0.47
+    -0.53 -0.77 -0.47
+    -0.53 -0.45 -0.13
+    0.47 -0.45 -0.13
+    0.47 -0.77 -0.47
+    -0.53 -0.01 0.0
+    -0.53 0.44 -0.13
+    0.47 0.44 -0.13
+    0.47 -0.01 0.0
+    -0.53 0.75 -0.47
+    0.47 0.75 -0.47
+  faces 14
+    0 1 2  1  0 1 2  1
+    3 2 1  1  3 2 1  1
+    4 0 5  1  4 0 5  1
+    2 5 0  1  2 5 0  1
+    6 4 7  1  6 4 7  1
+    5 7 4  1  5 7 4  1
+    8 6 9  1  8 6 9  1
+    7 9 6  1  7 9 6  1
+    10 11 12  1  1 0 2  1
+    12 13 10  1  2 3 1  1
+    14 15 16  1  4 6 7  1
+    16 17 14  1  7 5 4  1
+    15 18 19  1  6 8 9  1
+    19 16 15  1  9 7 6  1
+  tverts 10
+    0.764241 0.600879 0
+    0.764241 0.723604 0
+    1.00059 0.600879 0
+    1.00059 0.723604 0
+    0.764241 0.478154 0
+    1.00059 0.478154 0
+    0.764241 0.355429 0
+    1.00059 0.355429 0
+    0.764241 0.232704 0
+    1.00059 0.232704 0
+  constraints 20
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+endnode
+node danglymesh Plane452
+  parent phod_shrubbery
+  position 0.630877 2.65409 0.909867
+  orientation 0.0890591 -0.255561 0.962682 -0.897651
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 0
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 1
+  center -0.4764 -0.382 -34.6859 
+  period 9.0
+  tightness 5.0
+  displacement 0.0500002
+  showdispl true
+  displtype 1
+  center -0.4764 -0.382 -34.6859 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 5.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap plc_trans
+  verts 20
+    -0.5 -0.65 -0.18
+    -0.5 -1.1 -0.68
+    0.5 -0.65 -0.18
+    0.5 -1.1 -0.68
+    -0.5 0.0 0.0
+    0.5 0.0 0.0
+    -0.5 0.65 -0.18
+    0.5 0.65 -0.18
+    -0.5 1.1 -0.68
+    0.5 1.1 -0.68
+    -0.51 -1.11 -0.69
+    -0.51 -0.65 -0.2
+    0.49 -0.65 -0.2
+    0.49 -1.11 -0.69
+    -0.51 -0.01 -0.02
+    -0.51 0.64 -0.2
+    0.49 0.64 -0.2
+    0.49 -0.01 -0.02
+    -0.51 1.09 -0.69
+    0.49 1.09 -0.69
+  faces 14
+    0 1 2  1  0 1 2  1
+    3 2 1  1  3 2 1  1
+    4 0 5  1  4 0 5  1
+    2 5 0  1  2 5 0  1
+    6 4 7  1  6 4 7  1
+    5 7 4  1  5 7 4  1
+    8 6 9  1  8 6 9  1
+    7 9 6  1  7 9 6  1
+    10 11 12  1  1 0 2  1
+    12 13 10  1  2 3 1  1
+    14 15 16  1  4 6 7  1
+    16 17 14  1  7 5 4  1
+    15 18 19  1  6 8 9  1
+    19 16 15  1  9 7 6  1
+  tverts 10
+    0.764241 0.600879 0
+    0.764241 0.723604 0
+    1.00059 0.600879 0
+    1.00059 0.723604 0
+    0.764241 0.478154 0
+    1.00059 0.478154 0
+    0.764241 0.355429 0
+    1.00059 0.355429 0
+    0.764241 0.232704 0
+    1.00059 0.232704 0
+  constraints 20
+    23.3835
+    23.3835
+    23.3835
+    23.3835
+    23.3835
+    23.3835
+    23.3835
+    23.3835
+    23.3835
+    23.3835
+    23.3835
+    23.3835
+    23.3835
+    23.3835
+    23.3835
+    23.3835
+    23.3835
+    23.3835
+    23.3835
+    23.3835
+endnode
+node danglymesh Plane453
+  parent phod_shrubbery
+  position 1.41728 3.48057 0.626205
+  orientation 0.0732867 0.160851 -0.984254 -2.50494
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 0
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center -1.3119 -0.279449 -23.4351 
+  period 9.0
+  tightness 5.0
+  displacement 0.05
+  showdispl true
+  displtype 1
+  center -1.3119 -0.279449 -23.4351 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 5.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap plc_trans
+  verts 20
+    -0.5 -0.45 -0.13
+    -0.5 -0.76 -0.47
+    0.5 -0.45 -0.13
+    0.5 -0.76 -0.47
+    -0.5 0.0 0.0
+    0.5 0.0 0.0
+    -0.5 0.45 -0.13
+    0.5 0.45 -0.13
+    -0.5 0.76 -0.47
+    0.5 0.76 -0.47
+    -0.53 -0.77 -0.47
+    -0.53 -0.45 -0.13
+    0.47 -0.45 -0.13
+    0.47 -0.77 -0.47
+    -0.53 -0.01 0.0
+    -0.53 0.44 -0.13
+    0.47 0.44 -0.13
+    0.47 -0.01 0.0
+    -0.53 0.75 -0.47
+    0.47 0.75 -0.47
+  faces 14
+    0 1 2  1  0 1 2  1
+    3 2 1  1  3 2 1  1
+    4 0 5  1  4 0 5  1
+    2 5 0  1  2 5 0  1
+    6 4 7  1  6 4 7  1
+    5 7 4  1  5 7 4  1
+    8 6 9  1  8 6 9  1
+    7 9 6  1  7 9 6  1
+    10 11 12  1  1 0 2  1
+    12 13 10  1  2 3 1  1
+    14 15 16  1  4 6 7  1
+    16 17 14  1  7 5 4  1
+    15 18 19  1  6 8 9  1
+    19 16 15  1  9 7 6  1
+  tverts 10
+    0.764241 0.600879 0
+    0.764241 0.723604 0
+    1.00059 0.600879 0
+    1.00059 0.723604 0
+    0.764241 0.478154 0
+    1.00059 0.478154 0
+    0.764241 0.355429 0
+    1.00059 0.355429 0
+    0.764241 0.232704 0
+    1.00059 0.232704 0
+  constraints 20
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+endnode
+node danglymesh Plane454
+  parent phod_shrubbery
+  position 1.81802 2.6463 0.626205
+  orientation 0.343706 0.223206 -0.912165 -1.23739
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 0
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center 0.0 0.000152588 -14.415 
+  period 9.0
+  tightness 5.0
+  displacement 0.05
+  showdispl true
+  displtype 1
+  center 0.0 0.000152588 -14.415 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 5.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap plc_trans
+  verts 18
+    -0.5 -0.46 -0.07
+    -0.5 -0.88 -0.28
+    0.5 -0.46 -0.07
+    0.5 -0.88 -0.28
+    -0.5 0.0 0.0
+    0.5 0.0 0.0
+    -0.5 0.46 -0.07
+    0.5 0.46 -0.07
+    -0.5 0.88 -0.28
+    0.5 0.88 -0.28
+    -0.5 -0.49 -0.08
+    -0.5 -0.02 -0.01
+    0.5 -0.02 -0.01
+    0.5 -0.49 -0.08
+    -0.5 0.44 -0.08
+    0.5 0.44 -0.08
+    -0.5 0.86 -0.29
+    0.5 0.86 -0.29
+  faces 14
+    0 1 2  1  0 1 2  1
+    3 2 1  1  3 2 1  1
+    4 0 5  1  4 0 5  1
+    2 5 0  1  2 5 0  1
+    6 4 7  1  6 4 7  1
+    5 7 4  1  5 7 4  1
+    8 6 9  1  8 6 9  1
+    7 9 6  1  7 9 6  1
+    10 11 12  1  0 4 5  1
+    12 13 10  1  5 2 0  1
+    11 14 15  1  4 6 7  1
+    15 12 11  1  7 5 4  1
+    14 16 17  1  6 8 9  1
+    17 15 14  1  9 7 6  1
+  tverts 10
+    0.764241 0.600879 0
+    0.764241 0.723604 0
+    1.00059 0.600879 0
+    1.00059 0.723604 0
+    0.764241 0.478154 0
+    1.00059 0.478154 0
+    0.764241 0.355429 0
+    1.00059 0.355429 0
+    0.764241 0.232704 0
+    1.00059 0.232704 0
+  constraints 18
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+endnode
+node danglymesh Plane455
+  parent phod_shrubbery
+  position 1.67753 3.06749 1.16536
+  orientation 0.200797 0.194807 -0.960068 -1.84765
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 0
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center -0.4764 -0.382 -34.6859 
+  period 9.0
+  tightness 5.0
+  displacement 0.05
+  showdispl true
+  displtype 1
+  center -0.4764 -0.382 -34.6859 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 5.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap plc_trans
+  verts 20
+    -0.5 -0.65 -0.18
+    -0.5 -1.1 -0.68
+    0.5 -0.65 -0.18
+    0.5 -1.1 -0.68
+    -0.5 0.0 0.0
+    0.5 0.0 0.0
+    -0.5 0.65 -0.18
+    0.5 0.65 -0.18
+    -0.5 1.1 -0.68
+    0.5 1.1 -0.68
+    -0.51 -1.11 -0.69
+    -0.51 -0.65 -0.2
+    0.49 -0.65 -0.2
+    0.49 -1.11 -0.69
+    -0.51 -0.01 -0.02
+    -0.51 0.64 -0.2
+    0.49 0.64 -0.2
+    0.49 -0.01 -0.02
+    -0.51 1.09 -0.69
+    0.49 1.09 -0.69
+  faces 14
+    0 1 2  1  0 1 2  1
+    3 2 1  1  3 2 1  1
+    4 0 5  1  4 0 5  1
+    2 5 0  1  2 5 0  1
+    6 4 7  1  6 4 7  1
+    5 7 4  1  5 7 4  1
+    8 6 9  1  8 6 9  1
+    7 9 6  1  7 9 6  1
+    10 11 12  1  1 0 2  1
+    12 13 10  1  2 3 1  1
+    14 15 16  1  4 6 7  1
+    16 17 14  1  7 5 4  1
+    15 18 19  1  6 8 9  1
+    19 16 15  1  9 7 6  1
+  tverts 10
+    0.764241 0.600879 0
+    0.764241 0.723604 0
+    1.00059 0.600879 0
+    1.00059 0.723604 0
+    0.764241 0.478154 0
+    1.00059 0.478154 0
+    0.764241 0.355429 0
+    1.00059 0.355429 0
+    0.764241 0.232704 0
+    1.00059 0.232704 0
+  constraints 20
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    0.0
+    0.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    0.0
+    0.0
+endnode
+node danglymesh Plane456
+  parent phod_shrubbery
+  position 0.241535 3.31143 0.626205
+  orientation 0.0873132 -0.177013 0.980328 -2.03409
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 0
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center -1.3119 -0.279449 -23.4351 
+  period 9.0
+  tightness 5.0
+  displacement 0.05
+  showdispl true
+  displtype 1
+  center -1.3119 -0.279449 -23.4351 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 5.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap plc_trans
+  verts 20
+    -0.5 -0.45 -0.13
+    -0.5 -0.76 -0.47
+    0.5 -0.45 -0.13
+    0.5 -0.76 -0.47
+    -0.5 0.0 0.0
+    0.5 0.0 0.0
+    -0.5 0.45 -0.13
+    0.5 0.45 -0.13
+    -0.5 0.76 -0.47
+    0.5 0.76 -0.47
+    -0.53 -0.77 -0.47
+    -0.53 -0.45 -0.13
+    0.47 -0.45 -0.13
+    0.47 -0.77 -0.47
+    -0.53 -0.01 0.0
+    -0.53 0.44 -0.13
+    0.47 0.44 -0.13
+    0.47 -0.01 0.0
+    -0.53 0.75 -0.47
+    0.47 0.75 -0.47
+  faces 14
+    0 1 2  1  0 1 2  1
+    3 2 1  1  3 2 1  1
+    4 0 5  1  4 0 5  1
+    2 5 0  1  2 5 0  1
+    6 4 7  1  6 4 7  1
+    5 7 4  1  5 7 4  1
+    8 6 9  1  8 6 9  1
+    7 9 6  1  7 9 6  1
+    10 11 12  1  1 0 2  1
+    12 13 10  1  2 3 1  1
+    14 15 16  1  4 6 7  1
+    16 17 14  1  7 5 4  1
+    15 18 19  1  6 8 9  1
+    19 16 15  1  9 7 6  1
+  tverts 10
+    0.764241 0.600879 0
+    0.764241 0.723604 0
+    1.00059 0.600879 0
+    1.00059 0.723604 0
+    0.764241 0.478154 0
+    1.00059 0.478154 0
+    0.764241 0.355429 0
+    1.00059 0.355429 0
+    0.764241 0.232704 0
+    1.00059 0.232704 0
+  constraints 20
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+endnode
+node danglymesh Plane457
+  parent phod_shrubbery
+  position 0.97915 3.87045 0.626205
+  orientation 0.0260222 0.237605 -0.971013 -2.9297
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 0
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center 0.0 0.000152588 -14.415 
+  period 9.0
+  tightness 5.0
+  displacement 0.05
+  showdispl true
+  displtype 1
+  center 0.0 0.000152588 -14.415 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 5.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap plc_trans
+  verts 18
+    -0.5 -0.46 -0.07
+    -0.5 -0.88 -0.28
+    0.5 -0.46 -0.07
+    0.5 -0.88 -0.28
+    -0.5 0.0 0.0
+    0.5 0.0 0.0
+    -0.5 0.46 -0.07
+    0.5 0.46 -0.07
+    -0.5 0.88 -0.28
+    0.5 0.88 -0.28
+    -0.5 -0.49 -0.08
+    -0.5 -0.02 -0.01
+    0.5 -0.02 -0.01
+    0.5 -0.49 -0.08
+    -0.5 0.44 -0.08
+    0.5 0.44 -0.08
+    -0.5 0.86 -0.29
+    0.5 0.86 -0.29
+  faces 14
+    0 1 2  1  0 1 2  1
+    3 2 1  1  3 2 1  1
+    4 0 5  1  4 0 5  1
+    2 5 0  1  2 5 0  1
+    6 4 7  1  6 4 7  1
+    5 7 4  1  5 7 4  1
+    8 6 9  1  8 6 9  1
+    7 9 6  1  7 9 6  1
+    10 11 12  1  0 4 5  1
+    12 13 10  1  5 2 0  1
+    11 14 15  1  4 6 7  1
+    15 12 11  1  7 5 4  1
+    14 16 17  1  6 8 9  1
+    17 15 14  1  9 7 6  1
+  tverts 10
+    0.764241 0.600879 0
+    0.764241 0.723604 0
+    1.00059 0.600879 0
+    1.00059 0.723604 0
+    0.764241 0.478154 0
+    1.00059 0.478154 0
+    0.764241 0.355429 0
+    1.00059 0.355429 0
+    0.764241 0.232704 0
+    1.00059 0.232704 0
+  constraints 18
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+endnode
+node danglymesh Plane458
+  parent phod_shrubbery
+  position 0.594424 3.64881 1.05464
+  orientation -0.0194672 0.170723 -0.985127 -3.57126
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 0
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center -0.4764 -0.382 -34.6859 
+  period 9.0
+  tightness 5.0
+  displacement 0.05
+  showdispl true
+  displtype 1
+  center -0.4764 -0.382 -34.6859 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 5.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap plc_trans
+  verts 20
+    -0.5 -0.65 -0.18
+    -0.5 -1.1 -0.68
+    0.5 -0.65 -0.18
+    0.5 -1.1 -0.68
+    -0.5 0.0 0.0
+    0.5 0.0 0.0
+    -0.5 0.65 -0.18
+    0.5 0.65 -0.18
+    -0.5 1.1 -0.68
+    0.5 1.1 -0.68
+    -0.51 -1.11 -0.69
+    -0.51 -0.65 -0.2
+    0.49 -0.65 -0.2
+    0.49 -1.11 -0.69
+    -0.51 -0.01 -0.02
+    -0.51 0.64 -0.2
+    0.49 0.64 -0.2
+    0.49 -0.01 -0.02
+    -0.51 1.09 -0.69
+    0.49 1.09 -0.69
+  faces 14
+    0 1 2  1  0 1 2  1
+    3 2 1  1  3 2 1  1
+    4 0 5  1  4 0 5  1
+    2 5 0  1  2 5 0  1
+    6 4 7  1  6 4 7  1
+    5 7 4  1  5 7 4  1
+    8 6 9  1  8 6 9  1
+    7 9 6  1  7 9 6  1
+    10 11 12  1  1 0 2  1
+    12 13 10  1  2 3 1  1
+    14 15 16  1  4 6 7  1
+    16 17 14  1  7 5 4  1
+    15 18 19  1  6 8 9  1
+    19 16 15  1  9 7 6  1
+  tverts 10
+    0.764241 0.600879 0
+    0.764241 0.723604 0
+    1.00059 0.600879 0
+    1.00059 0.723604 0
+    0.764241 0.478154 0
+    1.00059 0.478154 0
+    0.764241 0.355429 0
+    1.00059 0.355429 0
+    0.764241 0.232704 0
+    1.00059 0.232704 0
+  constraints 20
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+    1.0
+endnode
+#Tile trimesh node
+node trimesh shrubwood02
+  parent phod_shrubbery
+  position -2.39 2.94 -0.01
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.694118 0.109804 0.584314 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center -13.8983 -15.6761 93.603 
+  ambient 1 1 1 
+  diffuse 1 1 1 
+  specular 0.0 0.0 0.0 
+  shininess 13.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap plc_rugdmtlbrk
+  verts 29
+    -0.00302398 6.86646e-005 0.005
+    0.124151 6.86646e-005 0.005
+    -0.0666113 0.110206 0.005
+    -0.0666113 -0.110068 0.005
+    0.0692764 -0.00314379 0.209376
+    -0.0397306 0.0597915 0.209376
+    -0.0397306 -0.066079 0.209376
+    -0.0033949 -0.00314379 0.290198
+    0.099306 0.0488683 0.236377
+    -0.00970138 0.111804 0.236377
+    0.295937 0.899768 1.86706
+    0.111671 -0.0765726 0.247495
+    0.0026636 -0.139508 0.247495
+    0.340769 -1.21329 0.510443
+    -0.114627 0.0597915 0.243048
+    -0.114627 -0.066079 0.243048
+    -0.55093 0.0542179 1.35743
+    0.304779 0.50082 0.805724
+    0.241724 0.537225 0.805724
+    -0.658022 0.0865953 0.805724
+    -0.658022 0.0129699 0.805724
+    0.336756 -0.568929 0.79085
+    0.379236 -0.561378 0.786429
+    0.231204 0.443745 0.805724
+    0.231456 0.51917 0.805724
+    0.359832 -0.547587 0.844675
+    0.380055 -0.556756 0.800942
+    -0.56302 0.0470949 0.805724
+    -0.633835 0.0156698 0.805724
+  faces 54
+    0 2 1  1  0 2 1  2
+    0 3 2  1  0 3 2  2
+    0 1 3  1  0 1 3  2
+    1 5 4  8  1 5 4  3
+    1 2 5  8  1 2 5  3
+    2 6 5  8  2 6 5  3
+    2 3 6  8  2 3 6  3
+    3 4 6  8  3 4 6  3
+    3 1 4  8  3 1 4  3
+    10 17 18  1  10 17 18  1
+    16 19 20  1  16 19 20  1
+    13 21 22  1  13 21 22  1
+    4 5 9  0  4 5 9  1
+    9 8 4  0  9 8 4  1
+    7 4 8  0  7 4 8  1
+    17 10 23  0  17 10 23  1
+    24 23 10  0  24 23 10  1
+    10 18 24  0  10 18 24  1
+    6 4 11  0  6 4 11  1
+    11 12 6  0  11 12 6  1
+    7 6 12  0  7 6 12  1
+    21 13 25  0  21 13 25  1
+    26 25 13  0  26 25 13  1
+    13 22 26  0  13 22 26  1
+    5 6 15  0  5 6 15  1
+    15 14 5  0  15 14 5  1
+    7 5 14  0  7 5 14  1
+    19 16 27  0  19 16 27  1
+    28 27 16  0  28 27 16  1
+    16 20 28  0  16 20 28  1
+    18 17 9  1  18 17 9  1
+    17 8 9  1  17 8 9  1
+    20 19 15  1  20 19 15  1
+    19 14 15  1  19 14 15  1
+    22 21 11  1  22 21 11  1
+    21 12 11  1  21 12 11  1
+    8 17 23  0  8 17 23  1
+    8 23 7  0  8 23 7  1
+    24 7 23  0  24 7 23  1
+    5 7 24  0  5 7 24  1
+    24 18 5  0  24 18 5  1
+    18 9 5  0  18 9 5  1
+    12 21 25  0  12 21 25  1
+    12 25 7  0  12 25 7  1
+    26 7 25  0  26 7 25  1
+    4 7 26  0  4 7 26  1
+    26 22 4  0  26 22 4  1
+    22 11 4  0  22 11 4  1
+    14 19 27  0  14 19 27  1
+    14 27 7  0  14 27 7  1
+    28 7 27  0  28 7 27  1
+    6 7 28  0  6 7 28  1
+    28 20 6  0  28 20 6  1
+    20 15 6  0  20 15 6  1
+  tverts 29
+    0.502321 0.605927 0
+    0.593502 0.605927 0
+    0.45673 0.673173 0
+    0.45673 0.538681 0
+    0.554158 0.603966 0
+    0.476003 0.642392 0
+    0.476003 0.565539 0
+    0.502055 0.603966 0
+    0.575689 0.635723 0
+    0.497533 0.674149 0
+    1.06359 0.656669 0
+    0.584554 0.559132 0
+    0.506399 0.520706 0
+    1.11746 0.583464 0
+    0.422304 0.642392 0
+    0.422304 0.565539 0
+    -0.114422 0.587989 0
+    0.745261 0.642415 0
+    0.700051 0.664642 0
+    0.0699535 0.620148 0
+    0.0699535 0.571352 0
+    0.741523 0.527733 0
+    0.787573 0.550375 0
+    0.692509 0.607566 0
+    0.69269 0.653618 0
+    0.727627 0.591726 0
+    0.778359 0.564232 0
+    0.14389 0.593969 0
+    0.0887778 0.573142 0
+endnode
+#Tile trimesh node
+node trimesh shrubwood03
+  parent phod_shrubbery
+  position 2.16 0.07 -0.01
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.694118 0.109804 0.584314 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center -60.1683 -139.113 62.9169 
+  ambient 1 1 1 
+  diffuse 1 1 1 
+  specular 0.0 0.0 0.0 
+  shininess 13.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap plc_rugdmtlbrk
+  verts 29
+    0.00179814 -0.00531074 0.005
+    -0.0437773 -0.124039 0.005
+    0.127407 0.0145836 0.005
+    -0.0782359 0.0935228 0.005
+    -0.027111 -0.0716577 0.209376
+    0.0707086 0.00755507 0.209376
+    -0.0468015 0.052663 0.209376
+    -0.00106801 -0.00381322 0.290198
+    0.0106847 -0.118332 0.236377
+    0.108505 -0.0391191 0.236377
+    -0.503575 -1.28779 1.50397
+    -0.110856 -0.0849219 0.247495
+    -0.130547 0.0393994 0.247495
+    -1.43093 -3.15003 1.14182
+    0.0975491 0.0774769 0.243048
+    -0.019961 0.122585 0.243048
+    0.0792291 0.0453045 1.35743
+    -0.0772673 -1.04464 0.805724
+    -0.020683 -0.998814 0.805724
+    0.227565 0.341387 0.805724
+    0.15883 0.367772 0.805724
+    -0.520179 -1.08884 -0.245632
+    -0.589582 -1.10964 -0.231949
+    -0.104184 -0.955493 0.805724
+    -0.0338591 -0.982758 0.805724
+    -0.537801 -1.08685 -0.141165
+    -0.585705 -1.10658 -0.206493
+    0.156643 0.266851 0.805724
+    0.152683 0.344223 0.805724
+  faces 54
+    0 2 1  1  0 2 1  2
+    0 3 2  1  0 3 2  2
+    0 1 3  1  0 1 3  2
+    1 5 4  8  1 5 4  3
+    1 2 5  8  1 2 5  3
+    2 6 5  8  2 6 5  3
+    2 3 6  8  2 3 6  3
+    3 4 6  8  3 4 6  3
+    3 1 4  8  3 1 4  3
+    10 17 18  1  10 17 18  1
+    16 19 20  1  16 19 20  1
+    13 21 22  1  13 21 22  1
+    4 5 9  0  4 5 9  1
+    9 8 4  0  9 8 4  1
+    7 4 8  0  7 4 8  1
+    17 10 23  0  17 10 23  1
+    24 23 10  0  24 23 10  1
+    10 18 24  0  10 18 24  1
+    6 4 11  0  6 4 11  1
+    11 12 6  0  11 12 6  1
+    7 6 12  0  7 6 12  1
+    21 13 25  0  21 13 25  1
+    26 25 13  0  26 25 13  1
+    13 22 26  0  13 22 26  1
+    5 6 15  0  5 6 15  1
+    15 14 5  0  15 14 5  1
+    7 5 14  0  7 5 14  1
+    19 16 27  0  19 16 27  1
+    28 27 16  0  28 27 16  1
+    16 20 28  0  16 20 28  1
+    18 17 9  1  18 17 9  1
+    17 8 9  1  17 8 9  1
+    20 19 15  1  20 19 15  1
+    19 14 15  1  19 14 15  1
+    22 21 11  1  22 21 11  1
+    21 12 11  1  21 12 11  1
+    8 17 23  0  8 17 23  1
+    8 23 7  0  8 23 7  1
+    24 7 23  0  24 7 23  1
+    5 7 24  0  5 7 24  1
+    24 18 5  0  24 18 5  1
+    18 9 5  0  18 9 5  1
+    12 21 25  0  12 21 25  1
+    12 25 7  0  12 25 7  1
+    26 7 25  0  26 7 25  1
+    4 7 26  0  4 7 26  1
+    26 22 4  0  26 22 4  1
+    22 11 4  0  22 11 4  1
+    14 19 27  0  14 19 27  1
+    14 27 7  0  14 27 7  1
+    28 7 27  0  28 7 27  1
+    6 7 28  0  6 7 28  1
+    28 20 6  0  28 20 6  1
+    20 15 6  0  20 15 6  1
+  tverts 29
+    0.502321 0.605927 0
+    0.593502 0.605927 0
+    0.45673 0.673173 0
+    0.45673 0.538681 0
+    0.554158 0.603966 0
+    0.476003 0.642392 0
+    0.476003 0.565539 0
+    0.502055 0.603966 0
+    0.575689 0.635723 0
+    0.497533 0.674149 0
+    1.06359 0.656669 0
+    0.584554 0.559132 0
+    0.506399 0.520706 0
+    1.11746 0.583464 0
+    0.422304 0.642392 0
+    0.422304 0.565539 0
+    -0.114422 0.587989 0
+    0.745261 0.642415 0
+    0.700051 0.664642 0
+    0.0699535 0.620148 0
+    0.0699535 0.571352 0
+    0.741523 0.527733 0
+    0.787573 0.550375 0
+    0.692509 0.607566 0
+    0.69269 0.653618 0
+    0.727627 0.591726 0
+    0.778359 0.564232 0
+    0.14389 0.593969 0
+    0.0887778 0.573142 0
+endnode
+node danglymesh topshrub00
+  parent phod_shrubbery
+  position -2.54849 3.5708 1.91082
+  orientation 0.0572878 -0.121405 -0.990948 -2.732
+  wirecolor 0.894118 0.721569 0.6 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center 1.5 1.0 -6.5 
+  period 10.0
+  tightness 5.0
+  displacement 0.3
+  showdispl true
+  displtype 1
+  center 1.5 1.0 -6.5 
+  ambient 1 1 1 
+  diffuse 1 1 1 
+  specular 0.0 0.0 0.0 
+  shininess 13.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap phod_shrubbery
+  verts 11
+    0.47 0.14 -0.17
+    0.27 0.22 0.0
+    0.14 0.43 -0.15
+    -0.1 0.29 -0.04
+    -0.44 0.26 -0.18
+    -0.29 0.01 -0.07
+    -0.35 -0.36 -0.18
+    -0.07 -0.32 -0.19
+    0.2 -0.41 -0.22
+    0.28 -0.14 -0.01
+    0.0 0.0 0.09
+  faces 10
+    10 0 1  1  10 0 1  1
+    10 1 2  1  10 1 2  1
+    10 2 3  1  10 2 3  1
+    10 3 4  1  10 3 4  1
+    10 4 5  1  10 4 5  1
+    10 5 6  1  10 5 6  1
+    10 6 7  1  10 6 7  1
+    10 7 8  1  10 7 8  1
+    10 8 9  1  10 8 9  1
+    10 9 0  1  10 9 0  1
+  tverts 11
+    1.01446 0.863416 0
+    0.880763 0.893685 0
+    0.813416 1.01207 0
+    0.743669 0.891041 0
+    0.607115 0.866427 0
+    0.704859 0.764211 0
+    0.683018 0.627137 0
+    0.80974 0.6846 0
+    0.934238 0.624348 0
+    0.921657 0.760781 0
+    0.810813 0.805407 0
+  constraints 11
+    159.0
+    159.0
+    159.0
+    159.0
+    159.0
+    159.0
+    159.0
+    159.0
+    159.0
+    159.0
+    223.0
+endnode
+node danglymesh topshrub01
+  parent phod_shrubbery
+  position -3.03041 2.62969 1.91082
+  orientation 0.0945657 0.13375 -0.986493 -2.73882
+  wirecolor 0.894118 0.721569 0.6 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center 1.5 1.0 -6.5 
+  period 10.0
+  tightness 5.0
+  displacement 0.3
+  showdispl true
+  displtype 1
+  center 1.5 1.0 -6.5 
+  ambient 1 1 1 
+  diffuse 1 1 1 
+  specular 0.0 0.0 0.0 
+  shininess 13.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap phod_shrubbery
+  verts 11
+    0.47 0.14 -0.17
+    0.27 0.22 0.0
+    0.14 0.43 -0.15
+    -0.1 0.29 -0.04
+    -0.44 0.26 -0.18
+    -0.29 0.01 -0.07
+    -0.35 -0.36 -0.18
+    -0.07 -0.32 -0.19
+    0.2 -0.41 -0.22
+    0.28 -0.14 -0.01
+    0.0 0.0 0.09
+  faces 10
+    10 0 1  1  10 0 1  1
+    10 1 2  1  10 1 2  1
+    10 2 3  1  10 2 3  1
+    10 3 4  1  10 3 4  1
+    10 4 5  1  10 4 5  1
+    10 5 6  1  10 5 6  1
+    10 6 7  1  10 6 7  1
+    10 7 8  1  10 7 8  1
+    10 8 9  1  10 8 9  1
+    10 9 0  1  10 9 0  1
+  tverts 11
+    1.01446 0.863416 0
+    0.880763 0.893685 0
+    0.813416 1.01207 0
+    0.743669 0.891041 0
+    0.607115 0.866427 0
+    0.704859 0.764211 0
+    0.683018 0.627137 0
+    0.80974 0.6846 0
+    0.934238 0.624348 0
+    0.921657 0.760781 0
+    0.810813 0.805407 0
+  constraints 11
+    159.0
+    159.0
+    159.0
+    159.0
+    159.0
+    159.0
+    159.0
+    159.0
+    159.0
+    159.0
+    223.0
+endnode
+node danglymesh upershrub07
+  parent phod_shrubbery
+  position -3.2201 3.58231 1.62824
+  orientation -0.0192917 0.087621 0.995967 -1.49956
+  wirecolor 0.894118 0.721569 0.6 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center 4.0 3.0 -12.5 
+  period 10.0
+  tightness 5.0
+  displacement 0.3
+  showdispl true
+  displtype 1
+  center 4.0 3.0 -12.5 
+  ambient 1 1 1 
+  diffuse 1 1 1 
+  specular 0.0 0.0 0.0 
+  shininess 13.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap phod_shrubbery
+  verts 11
+    1.07 0.32 -0.34
+    0.62 0.51 -0.01
+    0.32 0.99 -0.3
+    -0.22 0.66 -0.07
+    -0.99 0.6 -0.32
+    -0.66 0.03 -0.11
+    -0.78 -0.82 -0.32
+    -0.16 -0.74 -0.33
+    0.46 -0.93 -0.41
+    0.63 -0.32 -0.03
+    0.0 0.0 0.16
+  faces 10
+    10 0 1  1  10 0 1  1
+    10 1 2  1  10 1 2  1
+    10 2 3  1  10 2 3  1
+    10 3 4  1  10 3 4  1
+    10 4 5  1  10 4 5  1
+    10 5 6  1  10 5 6  1
+    10 6 7  1  10 6 7  1
+    10 7 8  1  10 7 8  1
+    10 8 9  1  10 8 9  1
+    10 9 0  1  10 9 0  1
+  tverts 11
+    0.997956 0.413377 0
+    0.810816 0.414216 0
+    0.686072 0.552102 0
+    0.628871 0.370183 0
+    0.454136 0.297026 0
+    0.614619 0.189668 0
+    0.626011 0.00051541 0
+    0.777935 0.114549 0
+    0.961677 0.0710299 0
+    0.904594 0.249157 0
+    0.743668 0.275884 0
+  constraints 11
+    159.0
+    159.0
+    159.0
+    159.0
+    159.0
+    159.0
+    159.0
+    159.0
+    159.0
+    159.0
+    223.0
+endnode
+node danglymesh upershrub08
+  parent phod_shrubbery
+  position -2.17011 3.26422 1.73587
+  orientation -0.0480877 -0.00305325 -0.998838 -2.75749
+  wirecolor 0.894118 0.721569 0.6 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center 4.0 3.0 -12.5 
+  period 10.0
+  tightness 5.0
+  displacement 0.3
+  showdispl true
+  displtype 1
+  center 4.0 3.0 -12.5 
+  ambient 1 1 1 
+  diffuse 1 1 1 
+  specular 0.0 0.0 0.0 
+  shininess 13.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap phod_shrubbery
+  verts 11
+    1.07 0.32 -0.34
+    0.62 0.51 -0.01
+    0.32 0.99 -0.3
+    -0.22 0.66 -0.07
+    -0.99 0.6 -0.32
+    -0.66 0.03 -0.11
+    -0.78 -0.82 -0.32
+    -0.16 -0.74 -0.33
+    0.46 -0.93 -0.41
+    0.63 -0.32 -0.03
+    0.0 0.0 0.16
+  faces 10
+    10 0 1  1  10 0 1  1
+    10 1 2  1  10 1 2  1
+    10 2 3  1  10 2 3  1
+    10 3 4  1  10 3 4  1
+    10 4 5  1  10 4 5  1
+    10 5 6  1  10 5 6  1
+    10 6 7  1  10 6 7  1
+    10 7 8  1  10 7 8  1
+    10 8 9  1  10 8 9  1
+    10 9 0  1  10 9 0  1
+  tverts 11
+    0.997956 0.413377 0
+    0.810816 0.414216 0
+    0.686072 0.552102 0
+    0.628871 0.370183 0
+    0.454136 0.297026 0
+    0.614619 0.189668 0
+    0.626011 0.00051541 0
+    0.777935 0.114549 0
+    0.961677 0.0710299 0
+    0.904594 0.249157 0
+    0.743668 0.275884 0
+  constraints 11
+    159.0
+    159.0
+    159.0
+    159.0
+    159.0
+    159.0
+    159.0
+    159.0
+    159.0
+    159.0
+    223.0
+endnode
+node danglymesh upershrub09
+  parent phod_shrubbery
+  position -2.90844 2.81702 1.78261
+  orientation 0.0730094 0.0401629 -0.996522 -2.76284
+  wirecolor 0.894118 0.721569 0.6 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center 4.0 3.0 -12.5 
+  period 10.0
+  tightness 5.0
+  displacement 0.3
+  showdispl true
+  displtype 1
+  center 4.0 3.0 -12.5 
+  ambient 1 1 1 
+  diffuse 1 1 1 
+  specular 0.0 0.0 0.0 
+  shininess 13.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap phod_shrubbery
+  verts 11
+    1.07 0.32 -0.34
+    0.62 0.51 -0.01
+    0.32 0.99 -0.3
+    -0.22 0.66 -0.07
+    -0.99 0.6 -0.32
+    -0.66 0.03 -0.11
+    -0.78 -0.82 -0.32
+    -0.16 -0.74 -0.33
+    0.46 -0.93 -0.41
+    0.63 -0.32 -0.03
+    0.0 0.0 0.16
+  faces 10
+    10 0 1  1  10 0 1  1
+    10 1 2  1  10 1 2  1
+    10 2 3  1  10 2 3  1
+    10 3 4  1  10 3 4  1
+    10 4 5  1  10 4 5  1
+    10 5 6  1  10 5 6  1
+    10 6 7  1  10 6 7  1
+    10 7 8  1  10 7 8  1
+    10 8 9  1  10 8 9  1
+    10 9 0  1  10 9 0  1
+  tverts 11
+    0.997956 0.413377 0
+    0.810816 0.414216 0
+    0.686072 0.552102 0
+    0.628871 0.370183 0
+    0.454136 0.297026 0
+    0.614619 0.189668 0
+    0.626011 0.00051541 0
+    0.777935 0.114549 0
+    0.961677 0.0710299 0
+    0.904594 0.249157 0
+    0.743668 0.275884 0
+  constraints 11
+    159.0
+    159.0
+    159.0
+    159.0
+    159.0
+    159.0
+    159.0
+    159.0
+    159.0
+    159.0
+    223.0
+endnode
+node danglymesh upershrub10
+  parent phod_shrubbery
+  position 2.04408 -0.0829301 1.6683
+  orientation 0.0 0.0 -1.0 -3.90081
+  wirecolor 0.894118 0.721569 0.6 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center 4.0 3.0 -18.0 
+  period 10.0
+  tightness 5.0
+  displacement 0.3
+  showdispl true
+  displtype 1
+  center 4.0 3.0 -18.0 
+  ambient 1 1 1 
+  diffuse 1 1 1 
+  specular 0.0 0.0 0.0 
+  shininess 13.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap phod_shrubbery
+  verts 11
+    1.07 0.32 -0.48
+    0.62 0.51 -0.02
+    0.32 0.99 -0.42
+    -0.22 0.66 -0.1
+    -0.99 0.6 -0.44
+    -0.66 0.03 -0.16
+    -0.78 -0.82 -0.45
+    -0.16 -0.74 -0.47
+    0.46 -0.93 -0.58
+    0.63 -0.32 -0.04
+    0.0 0.0 0.22
+  faces 10
+    10 0 1  1  10 0 1  1
+    10 1 2  1  10 1 2  1
+    10 2 3  1  10 2 3  1
+    10 3 4  1  10 3 4  1
+    10 4 5  1  10 4 5  1
+    10 5 6  1  10 5 6  1
+    10 6 7  1  10 6 7  1
+    10 7 8  1  10 7 8  1
+    10 8 9  1  10 8 9  1
+    10 9 0  1  10 9 0  1
+  tverts 11
+    0.997956 0.413377 0
+    0.810816 0.414216 0
+    0.686072 0.552102 0
+    0.628871 0.370183 0
+    0.454136 0.297026 0
+    0.614619 0.189668 0
+    0.626011 0.00051541 0
+    0.777935 0.114549 0
+    0.961677 0.0710299 0
+    0.904594 0.249157 0
+    0.743668 0.275884 0
+  constraints 11
+    136.0
+    134.0
+    134.0
+    136.0
+    136.0
+    136.0
+    133.0
+    133.0
+    136.0
+    136.0
+    198.0
+endnode
+node danglymesh upershrub11
+  parent phod_shrubbery
+  position 3.09044 -0.956961 1.46798
+  orientation 0.1004 0.145276 -0.984284 -1.29769
+  wirecolor 0.894118 0.721569 0.6 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center 4.0 3.0 -12.5 
+  period 10.0
+  tightness 5.0
+  displacement 0.3
+  showdispl true
+  displtype 1
+  center 4.0 3.0 -12.5 
+  ambient 1 1 1 
+  diffuse 1 1 1 
+  specular 0.0 0.0 0.0 
+  shininess 13.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap phod_shrubbery
+  verts 11
+    1.07 0.32 -0.34
+    0.62 0.51 -0.01
+    0.32 0.99 -0.3
+    -0.22 0.66 -0.07
+    -0.99 0.6 -0.32
+    -0.66 0.03 -0.11
+    -0.78 -0.82 -0.32
+    -0.16 -0.74 -0.33
+    0.46 -0.93 -0.41
+    0.63 -0.32 -0.03
+    0.0 0.0 0.16
+  faces 10
+    10 0 1  1  10 0 1  1
+    10 1 2  1  10 1 2  1
+    10 2 3  1  10 2 3  1
+    10 3 4  1  10 3 4  1
+    10 4 5  1  10 4 5  1
+    10 5 6  1  10 5 6  1
+    10 6 7  1  10 6 7  1
+    10 7 8  1  10 7 8  1
+    10 8 9  1  10 8 9  1
+    10 9 0  1  10 9 0  1
+  tverts 11
+    0.997956 0.413377 0
+    0.810816 0.414216 0
+    0.686072 0.552102 0
+    0.628871 0.370183 0
+    0.454136 0.297026 0
+    0.614619 0.189668 0
+    0.626011 0.00051541 0
+    0.777935 0.114549 0
+    0.961677 0.0710299 0
+    0.904594 0.249157 0
+    0.743668 0.275884 0
+  constraints 11
+    136.0
+    134.0
+    134.0
+    136.0
+    136.0
+    136.0
+    133.0
+    133.0
+    136.0
+    136.0
+    198.0
+endnode
+node danglymesh upershrub12
+  parent phod_shrubbery
+  position 0.241724 -3.29888 1.7963
+  orientation -0.377283 0.481866 -0.790862 -0.583538
+  wirecolor 0.894118 0.721569 0.6 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center 2.5 2.5 -15.0 
+  period 10.0
+  tightness 5.0
+  displacement 0.3
+  showdispl true
+  displtype 1
+  center 2.5 2.5 -15.0 
+  ambient 1 1 1 
+  diffuse 1 1 1 
+  specular 0.0 0.0 0.0 
+  shininess 13.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap phod_shrubbery
+  verts 11
+    1.08 0.32 -0.32
+    0.64 0.52 0.05
+    0.32 0.99 -0.31
+    -0.23 0.66 -0.08
+    -1.03 0.58 -0.44
+    -0.69 0.01 -0.19
+    -0.83 -0.84 -0.47
+    -0.2 -0.75 -0.44
+    0.43 -0.94 -0.5
+    0.64 -0.31 0.01
+    0.01 0.01 0.2
+  faces 10
+    10 0 1  1  10 0 1  1
+    10 1 2  1  10 1 2  1
+    10 2 3  1  10 2 3  1
+    10 3 4  1  10 3 4  1
+    10 4 5  1  10 4 5  1
+    10 5 6  1  10 5 6  1
+    10 6 7  1  10 6 7  1
+    10 7 8  1  10 7 8  1
+    10 8 9  1  10 8 9  1
+    10 9 0  1  10 9 0  1
+  tverts 11
+    0.997956 0.413377 0
+    0.810816 0.414216 0
+    0.686072 0.552102 0
+    0.628871 0.370183 0
+    0.454136 0.297026 0
+    0.614619 0.189668 0
+    0.626011 0.00051541 0
+    0.777935 0.114549 0
+    0.961677 0.0710299 0
+    0.904594 0.249157 0
+    0.743668 0.275884 0
+  constraints 11
+    136.0
+    134.0
+    134.0
+    136.0
+    136.0
+    136.0
+    133.0
+    133.0
+    136.0
+    136.0
+    198.0
+endnode
+node danglymesh upershrub13
+  parent phod_shrubbery
+  position 0.742673 -2.38158 1.62384
+  orientation -0.117543 -0.163636 -0.979493 -4.15753
+  wirecolor 0.894118 0.721569 0.6 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center 2.5 2.0 -15.5 
+  period 10.0
+  tightness 5.0
+  displacement 0.3
+  showdispl true
+  displtype 1
+  center 2.5 2.0 -15.5 
+  ambient 1 1 1 
+  diffuse 1 1 1 
+  specular 0.0 0.0 0.0 
+  shininess 13.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap phod_shrubbery
+  verts 11
+    1.08 0.32 -0.32
+    0.64 0.52 0.05
+    0.32 0.99 -0.31
+    -0.23 0.66 -0.08
+    -1.03 0.58 -0.45
+    -0.69 0.01 -0.19
+    -0.84 -0.84 -0.49
+    -0.2 -0.76 -0.46
+    0.43 -0.95 -0.51
+    0.64 -0.31 0.01
+    0.01 0.01 0.2
+  faces 10
+    10 0 1  1  10 0 1  1
+    10 1 2  1  10 1 2  1
+    10 2 3  1  10 2 3  1
+    10 3 4  1  10 3 4  1
+    10 4 5  1  10 4 5  1
+    10 5 6  1  10 5 6  1
+    10 6 7  1  10 6 7  1
+    10 7 8  1  10 7 8  1
+    10 8 9  1  10 8 9  1
+    10 9 0  1  10 9 0  1
+  tverts 11
+    0.997956 0.413377 0
+    0.810816 0.414216 0
+    0.686072 0.552102 0
+    0.628871 0.370183 0
+    0.454136 0.297026 0
+    0.614619 0.189668 0
+    0.626011 0.00051541 0
+    0.777935 0.114549 0
+    0.961677 0.0710299 0
+    0.904594 0.249157 0
+    0.743668 0.275884 0
+  constraints 11
+    136.0
+    134.0
+    134.0
+    136.0
+    136.0
+    136.0
+    133.0
+    133.0
+    136.0
+    136.0
+    198.0
+endnode
+node danglymesh upershrub14
+  parent phod_shrubbery
+  position 2.10782 -1.13798 1.61274
+  orientation 0.176153 0.429048 0.885939 -0.395589
+  wirecolor 0.894118 0.721569 0.6 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center 3.0 -2.5 -25.0 
+  period 10.0
+  tightness 5.0
+  displacement 0.3
+  showdispl true
+  displtype 1
+  center 3.0 -2.5 -25.0 
+  ambient 1 1 1 
+  diffuse 1 1 1 
+  specular 0.0 0.0 0.0 
+  shininess 13.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap phod_shrubbery
+  verts 11
+    1.07 0.32 -0.35
+    0.64 0.56 0.12
+    0.33 1.01 -0.23
+    -0.21 0.68 -0.01
+    -1.01 0.55 -0.44
+    -0.68 -0.01 -0.21
+    -0.85 -0.96 -0.68
+    -0.22 -0.85 -0.63
+    0.4 -1.06 -0.73
+    0.63 -0.33 -0.04
+    0.01 0.03 0.23
+  faces 10
+    10 0 1  1  10 0 1  1
+    10 1 2  1  10 1 2  1
+    10 2 3  1  10 2 3  1
+    10 3 4  1  10 3 4  1
+    10 4 5  1  10 4 5  1
+    10 5 6  1  10 5 6  1
+    10 6 7  1  10 6 7  1
+    10 7 8  1  10 7 8  1
+    10 8 9  1  10 8 9  1
+    10 9 0  1  10 9 0  1
+  tverts 11
+    0.997956 0.413377 0
+    0.810816 0.414216 0
+    0.686072 0.552102 0
+    0.628871 0.370183 0
+    0.454136 0.297026 0
+    0.614619 0.189668 0
+    0.626011 0.00051541 0
+    0.777935 0.114549 0
+    0.961677 0.0710299 0
+    0.904594 0.249157 0
+    0.743668 0.275884 0
+  constraints 11
+    136.0
+    134.0
+    134.0
+    136.0
+    136.0
+    136.0
+    133.0
+    133.0
+    136.0
+    136.0
+    198.0
+endnode
+node danglymesh upershrub15
+  parent phod_shrubbery
+  position 0.945584 -2.17054 1.74595
+  orientation -0.00704681 -0.130344 -0.991444 -2.86162
+  wirecolor 0.894118 0.721569 0.6 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center 1.5 1.0 -5.0 
+  period 10.0
+  tightness 5.0
+  displacement 0.3
+  showdispl true
+  displtype 1
+  center 1.5 1.0 -5.0 
+  ambient 1 1 1 
+  diffuse 1 1 1 
+  specular 0.0 0.0 0.0 
+  shininess 13.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap phod_shrubbery
+  verts 11
+    0.42 0.12 -0.13
+    0.24 0.2 -0.01
+    0.13 0.38 -0.12
+    -0.09 0.26 -0.03
+    -0.39 0.23 -0.12
+    -0.26 0.01 -0.04
+    -0.3 -0.32 -0.12
+    -0.06 -0.29 -0.13
+    0.18 -0.36 -0.16
+    0.25 -0.12 -0.01
+    0.0 0.0 0.06
+  faces 10
+    10 0 1  1  10 0 1  1
+    10 1 2  1  10 1 2  1
+    10 2 3  1  10 2 3  1
+    10 3 4  1  10 3 4  1
+    10 4 5  1  10 4 5  1
+    10 5 6  1  10 5 6  1
+    10 6 7  1  10 6 7  1
+    10 7 8  1  10 7 8  1
+    10 8 9  1  10 8 9  1
+    10 9 0  1  10 9 0  1
+  tverts 11
+    0.248559 0.92942 0
+    0.16109 0.937468 0
+    0.108403 1.00704 0
+    0.0742149 0.924322 0
+    -0.0104804 0.897263 0
+    0.0601667 0.8405 0
+    0.0577555 0.75159 0
+    0.133457 0.798695 0
+    0.217591 0.770829 0
+    0.198187 0.856454 0
+    0.124034 0.875534 0
+  constraints 11
+    136.0
+    134.0
+    134.0
+    136.0
+    136.0
+    136.0
+    133.0
+    133.0
+    136.0
+    136.0
+    198.0
+endnode
+node danglymesh upershrub16
+  parent phod_shrubbery
+  position 1.73386 -0.0337599 1.77827
+  orientation -0.116409 0.118851 0.986065 -1.77964
+  wirecolor 0.894118 0.721569 0.6 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center 1.5 1.0 -5.0 
+  period 10.0
+  tightness 5.0
+  displacement 0.3
+  showdispl true
+  displtype 1
+  center 1.5 1.0 -5.0 
+  ambient 1 1 1 
+  diffuse 1 1 1 
+  specular 0.0 0.0 0.0 
+  shininess 13.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap phod_shrubbery
+  verts 11
+    0.42 0.12 -0.13
+    0.24 0.2 -0.01
+    0.13 0.38 -0.12
+    -0.09 0.26 -0.03
+    -0.39 0.23 -0.12
+    -0.26 0.01 -0.04
+    -0.3 -0.32 -0.12
+    -0.06 -0.29 -0.13
+    0.18 -0.36 -0.16
+    0.25 -0.12 -0.01
+    0.0 0.0 0.06
+  faces 10
+    10 0 1  1  10 0 1  1
+    10 1 2  1  10 1 2  1
+    10 2 3  1  10 2 3  1
+    10 3 4  1  10 3 4  1
+    10 4 5  1  10 4 5  1
+    10 5 6  1  10 5 6  1
+    10 6 7  1  10 6 7  1
+    10 7 8  1  10 7 8  1
+    10 8 9  1  10 8 9  1
+    10 9 0  1  10 9 0  1
+  tverts 11
+    0.248559 0.92942 0
+    0.16109 0.937468 0
+    0.108403 1.00704 0
+    0.0742149 0.924322 0
+    -0.0104804 0.897263 0
+    0.0601667 0.8405 0
+    0.0577555 0.75159 0
+    0.133457 0.798695 0
+    0.217591 0.770829 0
+    0.198187 0.856454 0
+    0.124034 0.875534 0
+  constraints 11
+    136.0
+    134.0
+    134.0
+    136.0
+    136.0
+    136.0
+    133.0
+    133.0
+    136.0
+    136.0
+    198.0
+endnode
+endmodelgeom phod_shrubbery
+donemodel phod_shrubbery
+
+
+
+

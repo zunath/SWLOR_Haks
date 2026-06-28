@@ -1,0 +1,32 @@
+#Exported from 3ds max by MDL Plug-in Suite 1.0b
+#http://www.bricksbuilder.com/nwn/utils/
+#MAXMODEL ASCII
+# model: plc_rubble2
+filedependancy Rubble2.max
+node trimesh Plane02
+  parent plc_rubble2_pwk
+  position -4.29457 -2.59488 0
+  orientation 0 0 0 0
+  wirecolor 0.242188 0.242188 0.242188
+  ambient 0.238281 0.523438 0.0234375
+  diffuse 0.238281 0.523438 0.0234375
+  specular 0 0 0
+  shininess 1
+  bitmap NULL
+  verts 8
+    6.60091 4.53165 0
+    1.79021 4.53165 0
+    -5.53278 4.53165 0
+    6.60091 0 0
+    1.79021 0.385742 0
+    -5.53278 0.385742 0
+    6.60091 -4.53165 0
+    1.79021 -4.53165 0
+  faces 6
+    3 0 4  1  0 0 0  0
+    1 4 0  1  0 0 0  0
+    4 1 5  1  0 0 0  0
+    2 5 1  1  0 0 0  0
+    6 3 7  1  0 0 0  0
+    4 7 3  1  0 0 0  0
+endnode
