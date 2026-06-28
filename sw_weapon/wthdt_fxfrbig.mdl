@@ -1,0 +1,176 @@
+#MAXMODEL ASCII
+# model: WThDt_fxfrbig
+filedependancy WThDt_fxfrbig.max
+newmodel WThDt_fxfrbig
+setsupermodel WThDt_fxfrbig NULL
+setanimationscale 1
+#MAXGEOM  ASCII
+beginmodelgeom WThDt_fxfrbig
+node dummy WThDt_fxfrbig
+  parent NULL
+  #part-number 0
+endnode
+node trimesh g_WThDt_03
+  parent WThDt_fxfrbig
+  #part-number 1
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 1
+  bitmap W_metal_tex
+  verts 11
+    -0.000170144995 -0.161828995 0.0405678004
+    0.054512199 -0.100657001 0.00229020999
+    -0.000170148996 0.142167002 0.00221481989
+    -0.000170144995 -0.161828995 -0.0359873995
+    -0.0548525006 -0.100657001 0.00229020999
+    -0.00920271035 0.0542277992 0.0184691995
+    0.0190315004 0.0542277992 0.00223371992
+    -0.0091983797 0.0542277992 -0.0140648
+    -0.00601714989 -0.337143987 0.0133058997
+    0.0128055997 -0.337143987 0.00248226011
+    -0.00601426 -0.337143987 -0.00838341005
+  tverts 15
+    0.152448997 0.792185009 0
+    0.191710994 0.815186024 0
+    0.230967 0.949075997 0
+    0.0346634015 0.815186024 0
+    0.0739253014 0.792185009 0
+    0.0739189982 0.949075997 0
+    0.113187 0.815186024 0
+    0.399715006 0.464693993 0
+    0.286240011 0.464693993 0
+    0.351139009 0.464693993 0
+    0.464493006 0.464693993 0
+    0.399715006 0.286619008 0
+    0.464491993 0.286619008 0
+    0.351139992 0.286619008 0
+    0.286238998 0.286619008 0
+  faces 14
+    0 1 2 1 0 1 2 2
+    1 3 2 1 3 4 5 2
+    2 4 0 2 5 6 0 1
+    2 3 4 2 5 4 6 1
+    3 1 4 4 4 3 6 3
+    0 4 1 4 0 6 1 3
+    5 6 7 1 7 8 9 2
+    6 8 9 2 10 11 12 3
+    6 5 8 2 10 7 11 3
+    5 10 8 2 7 13 11 3
+    5 7 10 2 7 9 13 3
+    7 9 10 2 9 14 13 3
+    7 6 9 2 9 8 14 3
+    8 10 9 1 11 13 14 1
+  position 0.000178832997 0.137288004 -0.00234709005
+  orientation 0 0 0 0
+endnode
+node emitter Fire05
+  parent g_WThDt_03
+  #part-number 2
+  p2p 0
+  p2p_sel 1
+  affectedByWind 0
+  m_isTinted 0
+  bounce 0
+  random 0
+  inherit 0
+  inheritvel 0
+  inherit_local 0
+  splat 0
+  inherit_part 0
+  renderorder 0
+  spawntype 0
+  update Fountain
+  render Normal
+  blend Lighten
+  texture fxpa_flare
+  xgrid 1
+  ygrid 1
+  loop 0
+  deadspace 0
+  twosidedtex 0
+  blastRadius 0
+  blastLength 0
+  position -0.00717895012 -0.134124994 0.00982214045
+  orientation 0 0 0 0
+  colorStart 0.92156899 0.572548985 0.0196077991
+  colorEnd 0.92156899 0.670588017 0
+  alphaStart 1
+  alphaEnd 0.300000012
+  sizeStart 0.200000003
+  sizeEnd 0.100000001
+  sizeStart_y 0
+  sizeEnd_y 0
+  frameStart 0
+  frameEnd 0
+  birthrate 60
+  lifeExp 0.600000024
+  mass -0.100000001
+  spread 6.28318977
+  particleRot 0
+  velocity 0.300000012
+  randvel 0.300000012
+  fps 0
+  xsize 0
+  ysize 0
+  bounce_co 0
+  blurlength 10
+  lightningDelay 0
+  lightningRadius 0
+  lightningScale 0
+  p2p_bezier2 0
+  p2p_bezier3 0
+  combinetime 0
+  drag 0
+  grav 0
+  threshold 0
+endnode
+endmodelgeom WThDt_fxfrbig
+
+#MAXANIM ASCII
+newanim travel01 WThDt_fxfrbig
+  length 0.966666996
+  transtime 0
+  animroot WThDt_fxfrbig
+node dummy WThDt_fxfrbig
+  parent NULL
+  #part-number 0
+endnode
+node dummy g_WThDt_03
+  parent WThDt_fxfrbig
+  #part-number 1
+endnode
+node emitter Fire05
+  parent g_WThDt_03
+  #part-number 2
+  birthratekey 2
+    0 60
+    0.966666996 60
+endnode
+doneanim travel01 WThDt_fxfrbig
+
+#MAXANIM ASCII
+newanim impact01 WThDt_fxfrbig
+  length 2.29999995
+  transtime 0
+  animroot WThDt_fxfrbig
+node dummy WThDt_fxfrbig
+  parent NULL
+  #part-number 0
+endnode
+node dummy g_WThDt_03
+  parent WThDt_fxfrbig
+  #part-number 1
+endnode
+node emitter Fire05
+  parent g_WThDt_03
+  #part-number 2
+  birthratekey 4
+    0 60
+    1.76666999 60
+    1.79999995 60
+    2.29999995 0
+endnode
+doneanim impact01 WThDt_fxfrbig
+
+donemodel WThDt_fxfrbig

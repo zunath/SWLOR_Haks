@@ -1,0 +1,198 @@
+#MAXMODEL ASCII
+# model: WBlFh_fxdrorg
+filedependancy WBlFh_fxdrorg.max
+newmodel WBlFh_fxdrorg
+setsupermodel WBlFh_fxdrorg NULL
+setanimationscale 1
+#MAXGEOM  ASCII
+beginmodelgeom WBlFh_fxdrorg
+node dummy WBlFh_fxdrorg
+  parent NULL
+  #part-number 0
+endnode
+node emitter g_WSwGs_V_Acid
+  parent WBlFh_fxdrorg
+  #part-number 1
+  p2p 0
+  p2p_sel 1
+  affectedByWind 0
+  m_isTinted 0
+  bounce 0
+  random 0
+  inherit 1
+  inheritvel 0
+  inherit_local 0
+  splat 0
+  inherit_part 0
+  renderorder 0
+  spawntype 0
+  update Fountain
+  render Normal
+  blend Lighten
+  texture fxpa_flare
+  xgrid 1
+  ygrid 1
+  loop 0
+  deadspace 0
+  twosidedtex 0
+  blastRadius 0
+  blastLength 0
+  position 0 0.0620636009 3.43034008e-005
+  orientation 0 -1 0 -1.57079995
+  colorStart 1.0 0.6863 0.0
+  colorEnd 0.8 0.54902 0.0
+  alphaStart 1
+  alphaEnd 0
+  sizeStart 0
+  sizeEnd 0.5
+  sizeStart_y 0
+  sizeEnd_y 0
+  frameStart 0
+  frameEnd 0
+  birthrate 6
+  lifeExp 1
+  mass 0
+  spread 2.26892996
+  particleRot 0
+  velocity 0
+  randvel 0.0599999987
+  fps 0
+  xsize 26
+  ysize 35
+  bounce_co 0
+  blurlength 10
+  lightningDelay 0
+  lightningRadius 0
+  lightningScale 0
+  p2p_bezier2 0
+  p2p_bezier3 0
+  combinetime 0
+  drag 0
+  grav 0
+  threshold 0
+endnode
+node emitter g_WSwGs_V_Acid01
+  parent WBlFh_fxdrorg
+  #part-number 2
+  p2p 0
+  p2p_sel 1
+  affectedByWind 0
+  m_isTinted 0
+  bounce 0
+  random 0
+  inherit 1
+  inheritvel 0
+  inherit_local 0
+  splat 0
+  inherit_part 0
+  renderorder 0
+  spawntype 0
+  update Fountain
+  render Normal
+  blend Lighten
+  texture fxpa_flare
+  xgrid 1
+  ygrid 1
+  loop 0
+  deadspace 0
+  twosidedtex 0
+  blastRadius 0
+  blastLength 0
+  position 0 0.0648626983 3.43036008e-005
+  orientation 0 0 0 0
+  colorStart 1.0 0.6863 0.0
+  colorEnd 0.8 0.54902 0.0
+  alphaStart 1
+  alphaEnd 0
+  sizeStart 0
+  sizeEnd 0.5
+  sizeStart_y 0
+  sizeEnd_y 0
+  frameStart 0
+  frameEnd 0
+  birthrate 6
+  lifeExp 1
+  mass 0
+  spread 2.26892996
+  particleRot 0
+  velocity 0
+  randvel 0.0500000007
+  fps 0
+  xsize 20
+  ysize 32
+  bounce_co 0
+  blurlength 10
+  lightningDelay 0
+  lightningRadius 0
+  lightningScale 0
+  p2p_bezier2 0
+  p2p_bezier3 0
+  combinetime 0
+  drag 0
+  grav 0
+  threshold 0
+endnode
+node emitter g_WSwGs_V_Acid_b
+  parent WBlFh_fxdrorg
+  #part-number 3
+  p2p 0
+  p2p_sel 1
+  affectedByWind 0
+  m_isTinted 0
+  bounce 1
+  random 0
+  inherit 0
+  inheritvel 0
+  inherit_local 0
+  splat 0
+  inherit_part 0
+  renderorder 0
+  spawntype 0
+  update Fountain
+  render Normal
+  blend Lighten
+  texture fxpa_flare
+  xgrid 1
+  ygrid 1
+  loop 0
+  deadspace 0
+  twosidedtex 0
+  blastRadius 0
+  blastLength 0
+  position 0 0.067873098 3.43083993e-005
+  orientation 0 -1 0 -1.57079995
+  colorStart 1.0 0.6863 0.0
+  colorEnd 0.8 0.54902 0.0
+  alphaStart 1
+  alphaEnd 1
+  sizeStart 0.075000003
+  sizeEnd 0.075000003
+  sizeStart_y 0
+  sizeEnd_y 0
+  frameStart 0
+  frameEnd 0
+  birthrate 2
+  lifeExp 2
+  mass 1.5
+  spread 0
+  particleRot 0
+  velocity 0
+  randvel 0
+  fps 0
+  xsize 20
+  ysize 32
+  bounce_co 0.200000003
+  blurlength 10
+  lightningDelay 0
+  lightningRadius 0
+  lightningScale 0
+  p2p_bezier2 0
+  p2p_bezier3 0
+  combinetime 0
+  drag 0
+  grav 0
+  threshold 0
+endnode
+endmodelgeom WBlFh_fxdrorg
+
+donemodel WBlFh_fxdrorg

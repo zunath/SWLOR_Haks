@@ -1,0 +1,64 @@
+# Exported from Wayland's NWN Maxscript v0.3b at 1/28/2003 1:59:09 PM
+# mdl file
+#
+filedependancy Unknown
+newmodel doa_book
+setsupermodel doa_book NULL
+classification Character
+setanimationscale 1.0
+beginmodelgeom doa_book
+node dummy doa_book
+    parent NULL
+endnode
+node trimesh Box9701
+    parent doa_book
+    position 0.0 0.0 0.0001
+    orientation 1.0 0.0 0.0 0.0
+    scale 1.0
+    shininess 1.000000
+    shadow 0
+    render 1
+    diffuse 1.0 1.0 1.0
+    ambient 1.0 1.0 1.0
+    specular 0.0 0.0 0.0
+    selfillumcolor 0.0 0.0 0.0
+    alpha 1.0
+    bitmap TIC01_books01
+    verts 8
+        0.293104 -0.0632184 0.103448
+        0.00574713 0.333334 0.103448
+        -0.310345 0.0977012 0.103448
+        -0.0287356 -0.293104 0.103448
+        0.304598 -0.0804598 0.00574713
+        0.0172414 0.310345 0.00574713
+        -0.298851 0.0804598 0.00574713
+        -0.0114943 -0.310345 0.00574713
+    faces 10
+        0 1 2 1 0 1 2 1
+        2 3 0 1 2 3 0 1
+        4 5 1 1 4 5 6 5
+        1 0 4 1 6 7 4 5
+        5 6 2 1 5 8 9 4
+        2 1 5 1 9 6 5 4
+        6 7 3 1 8 10 11 6
+        3 2 6 1 11 9 8 6
+        7 4 0 1 12 4 7 3
+        0 3 7 1 7 13 12 3
+    tverts 14
+        0.25 0.75 0
+        0.25 0.5 0
+        0.5 0.5 0
+        0.5 0.75 0
+        0.25 0.127202 0
+        0.5 0.127202 0
+        0.5 0.186634 0
+        0.25 0.186634 0
+        0.75 0.127202 0
+        0.75 0.186634 0
+        1.0 0.127202 0
+        1.0 0.186634 0
+        0.0 0.127202 0
+        0.0 0.186634 0
+endnode
+endmodelgeom doa_book
+donemodel doa_book

@@ -1,0 +1,15 @@
+#MAXMODEL ASCII
+# model: wdbqs_m_011
+filedependancy wdbqs_m_011.max
+newmodel wdbqs_m_011
+setsupermodel wdbqs_m_011 NULL
+classification CHARACTER
+setanimationscale 1
+#MAXGEOM  ASCII
+beginmodelgeom wdbqs_m_011
+node dummy wdbqs_m_011
+  parent NULL
+endnode
+endmodelgeom wdbqs_m_011
+
+donemodel wdbqs_m_011

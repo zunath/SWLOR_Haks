@@ -1,0 +1,76 @@
+#MAXMODEL ASCII
+# model: wspkk_fxfrbig
+filedependancy wspkk_fxfrbig.max
+newmodel wspkk_fxfrbig
+setsupermodel wspkk_fxfrbig null
+setanimationscale 1
+#MAXGEOM  ASCII
+beginmodelgeom wspkk_fxfrbig
+node dummy wspkk_fxfrbig
+  parent NULL
+  #part-number 0
+endnode
+node emitter g_wswgs_v_holy
+  parent wspkk_fxfrbig
+  #part-number 1
+  p2p 0
+  p2p_sel 1
+  affectedByWind 0
+  m_isTinted 0
+  bounce 0
+  random 0
+  inherit 1
+  inheritvel 0
+  inherit_local 0
+  splat 0
+  inherit_part 0
+  renderorder 0
+  spawntype 0
+  update Fountain
+  render Normal
+  blend Lighten
+  texture fxpa_flame04
+  xgrid 2
+  ygrid 2
+  loop 0
+  deadspace 0
+  twosidedtex 0
+  blastRadius 0
+  blastLength 0
+  position 0 0.360287994 -0.0951009989
+  orientation 1 0 0 -0.506579995
+  colorStart 0.811765015 0.725489974 0.541176021
+  colorEnd 0.788235009 0.596077979 0.360783994
+  alphaStart 1
+  alphaEnd 0
+  sizeStart 0
+  sizeEnd 0.5
+  sizeStart_y 0
+  sizeEnd_y 0
+  frameStart 0
+  frameEnd 3
+  birthrate 24
+  lifeExp 2
+  mass 0
+  spread 0
+  particleRot 0
+  velocity 0
+  randvel 0
+  fps 0
+  xsize 1
+  ysize 50
+  bounce_co 0
+  blurlength 10
+  lightningDelay 0
+  lightningRadius 0
+  lightningScale 0
+  p2p_bezier2 7.21376005e+022
+  p2p_bezier3 6.69087007e+031
+  combinetime 0
+  drag 0
+  grav 0
+  threshold 0
+endnode
+endmodelgeom wspkk_fxfrbig
+
+donemodel wspkk_fxfrbig

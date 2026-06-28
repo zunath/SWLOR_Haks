@@ -1,0 +1,137 @@
+#MAXMODEL ASCII
+# model: WBlHl_fxfog
+filedependancy WBlHl_fxfog.max
+newmodel WBlHl_fxfog
+setsupermodel WBlHl_fxfog NULL
+setanimationscale 1
+#MAXGEOM  ASCII
+beginmodelgeom WBlHl_fxfog
+node dummy WBlHl_fxfog
+  parent NULL
+  #part-number 0
+endnode
+node emitter g_WSwGs_V_Acid
+  parent WBlHl_fxfog
+  #part-number 1
+  p2p 0
+  p2p_sel 1
+  affectedByWind 0
+  m_isTinted 0
+  bounce 0
+  random 0
+  inherit 1
+  inheritvel 0
+  inherit_local 0
+  splat 0
+  inherit_part 0
+  renderorder 0
+  spawntype 0
+  update Fountain
+  render Normal
+  blend Lighten
+  texture fxpa_flare
+  xgrid 1
+  ygrid 1
+  loop 0
+  deadspace 0
+  twosidedtex 0
+  blastRadius 0
+  blastLength 0
+  position 0 0.335159004 0.00633420004
+  orientation 0.577350259 -0.577350259 0.577350259 -2.09439993
+  colorStart 0.5 0.5 0.5
+  colorEnd 0.0 0.5 0.0
+  alphaStart 0.2
+  alphaEnd 0.0
+  sizeStart 0
+  sizeEnd 0.5
+  sizeStart_y 0
+  sizeEnd_y 0
+  frameStart 0
+  frameEnd 0
+  birthrate 6
+  lifeExp 2
+  mass 0
+  spread 2.26892996
+  particleRot 0
+  velocity 0
+  randvel 0.0500000007
+  fps 0
+  xsize 14
+  ysize 20
+  bounce_co 0
+  blurlength 10
+  lightningDelay 0
+  lightningRadius 0
+  lightningScale 0
+  p2p_bezier2 0
+  p2p_bezier3 0
+  combinetime 0
+  drag 0
+  grav 0
+  threshold 0
+endnode
+node emitter g_WSwGs_V_Acid01
+  parent WBlHl_fxfog
+  #part-number 2
+  p2p 0
+  p2p_sel 1
+  affectedByWind 0
+  m_isTinted 0
+  bounce 0
+  random 0
+  inherit 1
+  inheritvel 0
+  inherit_local 0
+  splat 0
+  inherit_part 0
+  renderorder 0
+  spawntype 0
+  update Fountain
+  render Normal
+  blend Lighten
+  texture fxpa_flare
+  xgrid 1
+  ygrid 1
+  loop 0
+  deadspace 0
+  twosidedtex 0
+  blastRadius 0
+  blastLength 0
+  position 0 0.335159004 -3.08115996e-005
+  orientation 1 0 0 -1.57079995
+  colorStart 0.5 0.5 0.5
+  colorEnd 0.0 0.5 0.0
+  alphaStart 0.2
+  alphaEnd 0.0
+  sizeStart 0
+  sizeEnd 0.5
+  sizeStart_y 0
+  sizeEnd_y 0
+  frameStart 0
+  frameEnd 0
+  birthrate 6
+  lifeExp 2
+  mass 0
+  spread 2.26892996
+  particleRot 0
+  velocity 0
+  randvel 0.0500000007
+  fps 0
+  xsize 14
+  ysize 20
+  bounce_co 0
+  blurlength 10
+  lightningDelay 0
+  lightningRadius 0
+  lightningScale 0
+  p2p_bezier2 0
+  p2p_bezier3 0
+  combinetime 0
+  drag 0
+  grav 0
+  threshold 0
+endnode
+endmodelgeom WBlHl_fxfog
+
+donemodel WBlHl_fxfog

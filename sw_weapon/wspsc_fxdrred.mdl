@@ -1,0 +1,198 @@
+#MAXMODEL ASCII
+# model: WSpSc_fxdrred
+filedependancy WSpSc_fxdrred.max
+newmodel WSpSc_fxdrred
+setsupermodel WSpSc_fxdrred NULL
+setanimationscale 1
+#MAXGEOM  ASCII
+beginmodelgeom WSpSc_fxdrred
+node dummy WSpSc_fxdrred
+  parent NULL
+  #part-number 0
+endnode
+node emitter g_WSwGs_V_Acid_b
+  parent WSpSc_fxdrred
+  #part-number 1
+  p2p 0
+  p2p_sel 1
+  affectedByWind 0
+  m_isTinted 0
+  bounce 1
+  random 0
+  inherit 0
+  inheritvel 0
+  inherit_local 0
+  splat 0
+  inherit_part 0
+  renderorder 0
+  spawntype 0
+  update Fountain
+  render Normal
+  blend Lighten
+  texture fxpa_flare
+  xgrid 1
+  ygrid 1
+  loop 0
+  deadspace 0
+  twosidedtex 0
+  blastRadius 0
+  blastLength 0
+  position 0 0.390715003 0.0243533999
+  orientation 0 0 0 0
+  colorStart 0.9137 0.0 0.0
+  colorEnd 0.45 0.0 0.0
+  alphaStart 1
+  alphaEnd 1
+  sizeStart 0.100000001
+  sizeEnd 0.100000001
+  sizeStart_y 0
+  sizeEnd_y 0
+  frameStart 0
+  frameEnd 0
+  birthrate 1
+  lifeExp 2
+  mass 1.5
+  spread 0
+  particleRot 0
+  velocity 0
+  randvel 0
+  fps 0
+  xsize 2
+  ysize 24
+  bounce_co 0.0599999987
+  blurlength 10
+  lightningDelay 0
+  lightningRadius 0
+  lightningScale 0
+  p2p_bezier2 0
+  p2p_bezier3 0
+  combinetime 0
+  drag 0
+  grav 0
+  threshold 0
+endnode
+node emitter g_WSwGs_V_Acid
+  parent WSpSc_fxdrred
+  #part-number 2
+  p2p 0
+  p2p_sel 1
+  affectedByWind 0
+  m_isTinted 0
+  bounce 0
+  random 0
+  inherit 1
+  inheritvel 0
+  inherit_local 0
+  splat 0
+  inherit_part 0
+  renderorder 0
+  spawntype 0
+  update Fountain
+  render Normal
+  blend Lighten
+  texture fxpa_flare
+  xgrid 1
+  ygrid 1
+  loop 0
+  deadspace 0
+  twosidedtex 0
+  blastRadius 0
+  blastLength 0
+  position 0 0.351217002 0.0490375012
+  orientation -0.250562012 -0.935113013 -0.250564009 -1.63783002
+  colorStart 0.9137 0.0 0.0
+  colorEnd 0.45 0.0 0.0
+  alphaStart 1
+  alphaEnd 0
+  sizeStart 0
+  sizeEnd 0.400000006
+  sizeStart_y 0
+  sizeEnd_y 0
+  frameStart 0
+  frameEnd 0
+  birthrate 8
+  lifeExp 1
+  mass 0
+  spread 2.26892996
+  particleRot 0
+  velocity 0
+  randvel 0.0500000007
+  fps 0
+  xsize 3
+  ysize 19
+  bounce_co 0
+  blurlength 10
+  lightningDelay 0
+  lightningRadius 0
+  lightningScale 0
+  p2p_bezier2 0
+  p2p_bezier3 0
+  combinetime 0
+  drag 0
+  grav 0
+  threshold 0
+endnode
+node emitter g_WSwGs_V_Acid01
+  parent WSpSc_fxdrred
+  #part-number 3
+  p2p 0
+  p2p_sel 1
+  affectedByWind 0
+  m_isTinted 0
+  bounce 0
+  random 0
+  inherit 1
+  inheritvel 0
+  inherit_local 0
+  splat 0
+  inherit_part 0
+  renderorder 0
+  spawntype 0
+  update Fountain
+  render Normal
+  blend Lighten
+  texture fxpa_flare
+  xgrid 1
+  ygrid 1
+  loop 0
+  deadspace 0
+  twosidedtex 0
+  blastRadius 0
+  blastLength 0
+  position 0 0.463508993 0.0324007012
+  orientation 0.447213918 -0.77459687 0.447212905 -1.82348001
+  colorStart 0.9137 0.0 0.0
+  colorEnd 0.45 0.0 0.0
+  alphaStart 1
+  alphaEnd 0
+  sizeStart 0
+  sizeEnd 0.400000006
+  sizeStart_y 0
+  sizeEnd_y 0
+  frameStart 0
+  frameEnd 0
+  birthrate 8
+  lifeExp 1
+  mass 0
+  spread 2.26892996
+  particleRot 0
+  velocity 0
+  randvel 0.0500000007
+  fps 0
+  xsize 3
+  ysize 15
+  bounce_co 0
+  blurlength 10
+  lightningDelay 0
+  lightningRadius 0
+  lightningScale 0
+  p2p_bezier2 0
+  p2p_bezier3 0
+  combinetime 0
+  drag 0
+  grav 0
+  threshold 0
+endnode
+endmodelgeom WSpSc_fxdrred
+
+donemodel WSpSc_fxdrred
