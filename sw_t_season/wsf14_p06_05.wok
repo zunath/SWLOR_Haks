@@ -1,0 +1,22 @@
+# Rewritten by CleanModels 3 Version 3.1.1 Sun Oct 26 01:41:35 2008
+#MAXWALKMESH  ASCII
+beginwalkmeshgeom wsf14_p06_05
+node aabb wmesh_05
+  parent wsf14_p06_05
+  position 0 0 0
+  wirecolor 0.835294 0.835294 0.835294
+  bitmap NULL
+  orientation 0 0 0 0
+  verts 4
+    -5 -5 9.49
+    5 -5 9.49
+    -5 5 9.49
+    5 5 9.49
+  faces 2
+    3 0 1 1 0 0 0 7
+    2 0 3 1 0 0 0 7
+  aabb     -5 -5 9.49 5 5 9.49 -1
+    -5 -5 9.49 5 5 9.49 1
+    -5 -5 9.49 5 5 9.49 0
+endnode
+endwalkmeshgeom wsf14_p06_05
