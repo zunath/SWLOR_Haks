@@ -1,0 +1,27 @@
+# Rewritten by CleanModels 3 Version 3.2.2.1 Fri Dec 05 23:06:47 2008
+#MAXWALKMESH  ASCII
+beginwalkmeshgeom zde01_w17_21
+node aabb plan13
+  parent zde01_w17_21
+  ambient 0.5880000 0.5880000 0.5880000
+  diffuse 0.7529410 0 0
+  specular 0 0 0
+  shininess 10
+  shadow 0
+  transparencyhint 0
+  bitmap NULL
+  orientation 0 0 0 0
+  position 0 0 0
+  verts 4
+    5 -5 -1
+    5 5 2
+    -5 5 -1
+    -5 -5 2
+  faces 2
+    0 1 2 1 0 0 0 15
+    0 2 3 1 0 0 0 15
+  aabb     -5 -5 -1 5 5 2 -1
+    -5 -5 -1 5 5 2 1
+    -5 -5 -1 5 5 2 0
+endnode
+endwalkmeshgeom zde01_w17_21

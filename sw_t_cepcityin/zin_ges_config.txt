@@ -1,0 +1,80 @@
+                    Gestalt's Customisable Home Interiors
+                            by John "Gestalt" Bye
+
+   Neverwinter Nights' City Interior tileset has a bug in it which makes
+   most of the 2x2 home interior groups look exactly the same. Rather than
+   simply fix this bug to make all of the tile groups look as BioWare had
+   intended them to, I decided to change the way those tiles work
+   entirely. You can now place upper and lower floor home tiles as a
+   terrain type, mixing and matching them as you please.
+   Your home interiors must still be 2x2 tiles in size, but you are no
+   longer limited to a handful of preset interior layouts. Eight different
+   upper floors are possible, and a vast variety of lower floors. Create a
+   single storey house interior with no staircase, make an extended study
+   with an extra set of bookcases, or make a cellar kitchen with a
+   staircase but no door. It's like a visit from the Changing Rooms team,
+   but without the pastel paints and gaudy wall hangings!
+
+                  How To Use The Tileset In Your Own Module
+
+   1 - Select Module Properties from the Edit menu in the toolset. Click
+   on the Custom Content tab at the far right and then use the drop down
+   list at the bottom of that page to select the hak pack "gestalthomes".
+   Once you've selected it, click on the Add button next to the list.
+   2 - Click OK, and a warning message will pop up telling you that "you
+   are about to change the list of Hak Files used by this module". Click
+   Yes to continue, and a "Build Module" window should pop up with
+   (hopefully) the message "no errors found" in the results box.
+   3 - Click Done. Congratulations - you have now added the Gestalt Homes
+   hak pack to your module!
+   4 - Create a new 2x2 area and select Home Interior from the list of
+   tilesets. To make a lower floor for your home, simply select the new
+   "Home - Lower" option from the terrain list and click in the middle of
+   your area. A 2x2 home should appear. Because the tiles for each corner
+   of the room are picked randomly, you may find that you don't have a
+   door or you have multiple staircases or some other odd combination of
+   tiles. To fix this, simply select erase and click on the tile you want
+   to change, and keep clicking until a tile you like appears.
+   5 - To make an upper floor for your home, DO NOT use the "Home - Upper"
+   terrain type. Doing this will make a completely random 2x2 set of upper
+   floor tiles, and as most of the tiles have bits which overhang the tile
+   edges this will end up looking very odd. Instead, select one of the two
+   "Upper Floor Bedroom" tile groups. This will place your choice of 2x1
+   master bedroom (one stretches the full length of the tile group, the
+   other has a small storage room at one end of it) and create two random
+   upper floor tiles to the side of the bedroom. You may find that there
+   is a second bedroom where the staircase should be and vice versa. If
+   this happens, simply select Erase and click on those tiles until you
+   get the ones you want. DO NOT erase the master bedroom or the toolset
+   will replace it with two random upper floor tiles!
+
+                                     FAQ
+
+   Why can't I make bigger homes?
+   The original Home tile groups were all 2x2, so there aren't any flat
+   wall sections for the Home terrain types, only corners. Because of this
+   it's impossible to create a room which is any size other than 2x2
+   without making some entirely new tiles. I may do this in the future if
+   there's enough demand, but for now you will have to limit your home
+   interiors to 2x2.
+
+                                   Credits
+
+   Zoligato's [1]NWN Viewer was used to extract the necessary files from
+   Neverwinter Nights and then repackage my modified versions as a hak
+   pack.
+   The NWN Model Compiler by [2]Torlack was used to decompile BioWare's
+   cave tiles and recompile the edited versions.
+   Chanteur's [3]ITP Tool was used to edit the ITP file to get the new
+   terrain types and tile groups working in the editor.
+   Windows Wordpad was used to edit the SET file.
+
+            feedback, suggestions and bug reports can be sent to
+                          [4]john-bye@ntlworld.com
+
+References
+
+   1. http://nwvault.ign.com/Files/other/data/1026158289673.shtml
+   2. http://www.torlack.com/
+   3. http://nwvault.ign.com/Files/other/data/1029208648677.shtml
+   4. mailto:john-bye@ntlworld.com

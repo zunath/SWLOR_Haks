@@ -1,0 +1,126 @@
+Usable Beds v2.1 by Brolanda
+http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=3210
+
+
+Usable Beds!
+Dead tired from all your adventures?
+Sleep on a nice cozy bed!
+This hakpak modifies the default tiles that have beds,
+making all of them usable.
+
+v2.1 Update: Fixed left side of Bordello bed, thank you Aeryn-!
+Walking around on the beds, found and fixed the headboards that you could walk in to;
+And the three castle bed footboards that you could walk through.
+
+v2.0 Update: Fixed the beds with the big fluffy pillows and
+the bunkbed tiles are done.
+I ran into walkmesh issues with the bunkbeds;
+the bottom bunks work fine, the top bunks do not work for characters.
+However, the top bunks work great with hmmm83's Sleeping Placeables.
+
+
+NOTE: For Toolset Play, see the NOTE ON BUNKBEDS... towards the bottom of this README.
+  
+
+Module Play:
+        To try it out, there is a "tiny" mod.
+        Put the hak file "UsableBeds.hak" in your hak directory.
+        Put the mod file "UsableBeds.mod" in your modules directory.
+        And start NWN.
+        Use "A Bed" on the left side of the bed,
+                near the head of the bed (to the north).
+
+
+Toolset Play:
+        Put the hak file "UsableBeds.hak" in your hak directory.
+        Put the mod file "UsableBeds.mod" in your mod directory.
+                Note: The mod file is not necessary,
+                        but it does show how I get it to work.
+        Basically,
+                The hakpak modifies and replaces all the default tiles that have beds.
+                The only thing modified is the walkmeshes involving the beds,
+                  (and the pillows on 5 of the beds that were too fluffy for the sleepers).
+
+        Choose "Castle Interior" or "City Interior" for the Area.
+        In "Module Properties" choose the Hak File "UsableBeds"
+        Then use the Paint Terrain Feature to paint a tile with a bed.
+        Put a waypoint "on" the bed, near the head of the bed,
+                pointing to the head of the bed.
+        Put one or more "invisible objects", found in Placeable Miscellaneous, on the bed.
+        Make the "invisible object" Usable and edit its OnUsed script to something like:
+
+void main()
+{
+   object oPC;
+   object oBED;
+   oPC = GetLastUsedBy();
+   oBED = GetNearestObjectByTag("WP_BED");
+
+   AssignCommand(oPC, JumpToLocation(GetLocation(oBED)));
+   AssignCommand(oPC, ActionDoCommand(SetFacing(GetFacing(oBED))));
+   AssignCommand(oPC, ActionPlayAnimation(ANIMATION_LOOPING_DEAD_FRONT, 1.0f, 10.0f));
+}
+
+        And that's it.
+
+        Note: If you use the above script, you should be able to
+                use the same script for all beds if you tag all the bed waypoints
+                as "WP_BED".
+
+
+THE TILES WORKING:
+        Castle Interior Areas
+            Features: Bedroom
+            Groups: Bedroom 1, Bedroom 2
+        City Interior Areas
+            Features: Livingroom
+            Groups: Bordello, Home Upper 1, Home Upper 2, Home Upper 3,
+                    Livingroom 1, Livingroom 2, Barracks,
+                    Slum Home 1, Slum Home 2.
+
+NOTES ON BUNKBEDS AND BORDELLO:
+        BUNKBEDS - The dual walkmesh to get the bunkbeds to work,
+                gives an effect like stacking placeable crates, but in reverse.
+                You need to select the object being placed on the bottom bunk and
+                place it correctly the first time (or delete it and try again).
+                Moving it after letting go of it will move it up to the top bunk.
+                Like the crates, you can select the object from the left side-bar and
+                rotate it with the rotation controls on the bottom-bar
+                and you can change its properties.
+        BORDELLO - A character sleeping in the bordello still buries their face in the pillow.
+                From what I can tell Sleeping Characters lay horizontally regardless of the walkmesh,
+                and I did not come up with a solution to this pillow, except to get rid of it,
+                but I did not have the heart to, so I didn't. :)
+                If you want to get rid of it, and you know about 3d model 'nodes',
+                    the model for the bordello is 'tin01_s15_01.mdl' in the hakpak,
+                    the pillow is the node Cylinder50, and this node can just be deleted in a text editor,
+                    and it will work (I have done it with no problems).
+
+
+
+Lots of people to thank!
+
+For tools:
+Bioware for the game, toolset, hakpak editor, and the pre-modified default tiles.
+Zoligato for the "Bif Unpacker" for extracting the tile model.
+Torlack for the "NWN Model Compiler" for converting the model to ascii.
+Wayland for the "NWN Maxscript" for import/export to GMax.
+Discreet for GMax for the 3d-modeling.
+hmmm83 for the Sleeping Placeables that tried out the beds alot :)
+
+For tutorials and instructions:
+MR X for the "Tutorial: Creating Custom Tiles" for how to use MAX and working with walkmeshes.
+Jayson of Hypercubed for "Duplicating a NWN tileset" instructions for information on the tileset files.
+scooterpb for the "MDL Plug-in Suite" tutorial for helping to understand the roll-outs.
+
+And so many more of you for helping me learn along the way.
+        From reading things posted at NWVault, NWNBuilders, and Bioware,
+                I have learned alot that helped me put this together.
+
+Thanks again,
+Bry
+
+questions or problems?
+brolanda@yahoo.com
+
+

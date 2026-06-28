@@ -1,0 +1,113 @@
+Caverns by Gestalt
+http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=1228
+
+
+                           Gestalt Caverns tileset
+                            by John "Gestalt" Bye
+
+   This is an expansion to BioWare's standard Mines & Caverns tileset,
+   adding two new terrain types - lava and pit. All of the textures used
+   are standard BioWare ones, and only the necessary tiles have been
+   modified, keeping the file size nice and low.
+   I've also included three new flame placeables. These are identical to
+   the standard BioWare ones, except that they no longer cast any light
+   and the scorch marks have been removed from under them, making them
+   suitable for placing on lava surfaces.
+   Finally there's a demo module showing the tileset in action, with flame
+   placeables, sound effects and lighting set up as described in the
+   "Adding Atmosphere" section of this readme file. Just load this up in
+   Neverwinter Nights as normal and run around to get a feel for the
+   tileset.
+
+                  How To Use The Tileset In Your Own Module
+
+   1 - Open up your module and select Module Properties from the Edit
+   menu. Click on the Custom Content tab at the far right and then use the
+   drop down list at the bottom of that page to select the hak pack
+   "gestaltcaves". Once you've selected it, click on the Add button next
+   to the list.
+   2 - Click OK, and a warning message will pop up telling you that "you
+   are about to change the list of Hak Files used by this module". Click
+   Yes to continue, and a "Build Module" window should pop up with
+   (hopefully) the message "no errors found" in the results box.
+   3 - Click Done. Congratulations - you have now added the Gestalt Caves
+   hak pack to your module!
+   4 - Create a new area and select Mines & Caverns from the list of
+   tilesets. To make sure that everything is working properly, place some
+   "Pit" and "Lava" terrain in this new area and see what happens.
+
+                              Adding Atmosphere
+
+   Lighting - To get the most out of the tileset, make your cave areas
+   fairly dark and then set the light separately for individual tiles. A
+   mixture of the first four colours of the bottom row of the tile
+   lighting palette should give you that authentic lava glow for magma
+   areas, while the blues are good for watery areas and browns tend to
+   work well for pits. Use your imagination though, and feel free to
+   experiment with different colour schemes.
+   Placeables - The new flame placeables included in the hak pack are
+   designed to be placed on the surface of the lava to make it look more
+   intimidating. First select one of the standard flames in the Visual
+   Effects section of the placeables palette and right click on it, then
+   select Edit Copy. Click on the Appearance Type drop down list and
+   scroll down, and you should see three new models - Flame Large NL,
+   Flame Medium NL and Flame Small NL. Choose whichever one you want, give
+   your new placeable an easily recognisable name (say, "Large Flame") and
+   then click on OK. Do the same for the other two flame models. Now when
+   you click on the Custom tab just above the Placeables list and open up
+   the Visual Effects section, you should see the three new flame
+   placeables, just waiting to spice up your lava.
+   Sounds - To complete the effect, make sure to use plenty of sounds. Go
+   to the Paint Sounds palette (just to the right of the placeables one)
+   and open up the list of Nature sound effects. There are several Lava
+   sounds there, and the Pool, Pillar, Fire and Bursts ones in particular
+   are good for getting the right ambience for a magma area. Water Pool
+   Small and Stream Cave Tunnel are good choices for water pools. Rock
+   Crumble Large and Small and Wind Gust Cave (found in the Weather
+   section) are effective at making players feel even more precarious as
+   they walk through Pit areas. The sounds should be placed on the surface
+   of the liquid (or on top of rocks in the pit tiles), and usually it's a
+   good idea to increase the Cutoff Distance of the sound so that it's
+   audible over a wider area. This can be done from the Positioning tab of
+   the Sound Properties window for your sound effects. To save time, you
+   can Edit Copy the standard Lava sounds and create your own version with
+   the range and height you want (20.0 and 0.0 generally works quite
+   well).
+
+                                     FAQ
+
+   Why does your hak pack foul up all my placeables?!?
+   The GestaltCaves hak pack includes a placeables.2da file, which may
+   cause problems if you're using multiple hak packs in your module. If
+   you don't want to use my new flame placeables, you can remove this from
+   the pack or simply move my pack to the bottom of the Custom Content
+   list. If you do want to use my flames, just copy and paste the three
+   entries from the bottom of my placeables.2da file and add them to the
+   bottom of your own and everything should work fine. If you still have
+   problems, you can e-mail me at the address below.
+   Why can't I place water, lava and pit terrain tiles next to each other?
+   Unfortunately this would require the creation of several new tiles from
+   scratch, which is beyond the scope of this hak pack. You can use all
+   three terrain types within the same area, but you'll need to keep them
+   separated from each other with wall or floor sections.
+
+                                   Credits
+
+   Zoligato's [1]NWN Viewer was used to extract the necessary files from
+   Neverwinter Nights and then repackage my modified versions as a hak
+   pack.
+   The NWN Model Compiler by [2]Torlack was used to decompile BioWare's
+   cave tiles and recompile the edited versions.
+   Chanteur's [3]ITP Tool was used to edit the ITP file to get the new
+   terrain types and tile groups working in the editor.
+   Windows Wordpad was used to edit all of the tiles. No, seriously.
+
+            feedback, suggestions and bug reports can be sent to
+                          [4]john-bye@ntlworld.com
+
+References
+
+   1. http://nwvault.ign.com/Files/other/data/1026158289673.shtml
+   2. http://www.torlack.com/
+   3. http://nwvault.ign.com/Files/other/data/1029208648677.shtml
+   4. mailto:john-bye@ntlworld.com
