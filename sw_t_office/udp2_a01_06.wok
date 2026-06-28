@@ -1,0 +1,27 @@
+#Exported from 3ds max by MDL Plug-in Suite 1.0b
+#http://www.bricksbuilder.com/nwn/utils/
+#MAXMODEL ASCII
+beginwalkmeshgeom udp2_a01_06
+node aabb walkm
+  parent udp2_a01_06
+  position 0 0 -0.25
+  orientation 0 0 0 0
+  wirecolor 0.347656 0.347656 0.347656
+  ambient 0.34375 0.691406 0.101563
+  diffuse 0.34375 0.691406 0.101563
+  specular 0 0 0
+  shininess 1
+  bitmap NULL
+  verts 4
+    5 5.00001 0.25
+    -5 5.00001 0.25
+    5 -4.99999 0.25
+    -5 -4.99999 0.25
+  faces 2
+    2 0 3  1  6 4 7  5
+    1 3 0  1  5 7 4  5
+  aabb     -5.00 -5.00 0.25   5.00 5.00 0.25   -1
+     -5.00 -5.00 0.25   5.00 5.00 0.25   1
+     -5.00 -5.00 0.25   5.00 5.00 0.25   0
+endnode
+endwalkmeshgeom udp2_a01_06

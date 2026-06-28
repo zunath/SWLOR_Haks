@@ -1,0 +1,28 @@
+# Rewritten by CleanModels 3 Version 3.5.2d Fri Apr 06 11:43:43 2018
+#MAXWALKMESH  ASCII
+beginwalkmeshgeom vmp01_a10_01
+node aabb rectangle136
+  parent vmp01_a10_01
+  position 0 0 0
+  ambient 0.2 0.2 0.2
+  diffuse 0.8 0.8 0.8
+  specular 0 0 0
+  shininess 1
+  shadow 0
+  transparencyhint 0
+  bitmap NULL
+  orientation 0 0 0 0
+  render 0
+  verts 4
+    5 -5 13
+    5 5 13
+    -5 5 13
+    -5 -5 13
+  faces 2
+    0 1 2 1 0 0 0 2
+    3 0 2 1 0 0 0 2
+  aabb     -5 -5 13 5 5 13 -1
+    -5 -5 13 5 5 13 1
+    -5 -5 13 5 5 13 0
+endnode
+endwalkmeshgeom vmp01_a10_01

@@ -1,0 +1,23 @@
+# Exported from blender at Thursday, 2018-03-15
+node aabb c01_01_wm
+  parent dgt04_c01_01_pwk
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 1.0 1.0 1.0
+  ambient 1.0 1.0 1.0
+  diffuse 1.0 1.0 1.0
+  specular 0.0 0.0 0.0
+  shininess 0
+  bitmap NULL
+  verts 4
+    -5.00000 -5.00000  0.00000
+     5.00000 -5.00000  0.00000
+    -5.00000  5.00000  0.00000
+     5.00000  5.00000  0.00000
+  faces 2
+    2 0 3  0  0 0 0   4
+    3 0 1  0  0 0 0   4
+  aabb   -5.0 -5.0 0.0 5.0 5.0 0.0 -1
+    -5.0 -5.0 0.0 5.0 5.0 0.0 0
+    -5.0 -5.0 0.0 5.0 5.0 0.0 1
+endnode
