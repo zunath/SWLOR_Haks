@@ -1,0 +1,90 @@
+# Exported from NWMax Plus v5.06.01 at 11/03/2015 03:35:54
+# wok file
+#
+#NWMax Plus WALKMESH  ASCII
+beginwalkmeshgeom sjm01_f03_01
+node aabb Mesh1303
+  parent sjm01_f03_01
+  position 0.0 -9.76562e-006 1.5
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 1.0 1.0 1.0 
+  multimaterial 30
+    Dirt
+    Obscuring
+    Grass
+    Stone
+    Wood
+    Water
+    Nonwalk
+    Transparent
+    Carpet
+    Metal
+    Puddles
+    Swamp
+    Mud
+    Leaves
+    Lava
+    BottomlessPit
+    DeepWater
+    Door
+    Snow
+    Sand
+    BareBones
+    StoneBridge
+    Temp1
+    Temp2
+    Temp3
+    Temp4
+    Temp5
+    Temp6
+    Temp7
+    Trigger
+  ambient 0.588 0.588 0.588 
+  diffuse 0.5 0.5 0.5 
+  specular 0.0 0.0 0.0 
+  shininess 10.0
+  bitmap Stone
+  verts 10
+    2.95 2.95 -1.5
+    -5.0 5.0 -1.5
+    5.0 -5.0 -1.5
+    5.0 2.95 -1.5
+    2.95 5.0 -1.5
+    -5.0 -5.0 -1.5
+    5.0 2.95 1.5
+    2.95 2.95 1.5
+    2.95 5.0 1.5
+    5.0 5.0 1.5
+  faces 10
+    0 1 2  1  0 0 0  4
+    2 3 0  1  0 0 0  4
+    1 0 4  1  0 0 0  4
+    5 2 1  1  0 0 0  4
+    6 7 0  1  0 0 0  7
+    0 3 6  1  0 0 0  7
+    7 8 4  1  0 0 0  7
+    4 0 7  1  0 0 0  7
+    7 6 9  1  0 0 0  7
+    8 7 9  1  0 0 0  7
+    aabb         -5.0 -5.0 -1.5 5.0 5.0 1.5 -1
+        -5.0 -5.0 -1.5 5.0 5.0 -1.5 -1
+        -5.0 -5.0 -1.5 5.0 5.0 -1.5 3
+        -5.0 -5.0 -1.5 5.0 5.0 -1.5 -1
+        -5.0 2.95 -1.5 2.95 5.0 -1.5 2
+        -5.0 -5.0 -1.5 5.0 5.0 -1.5 0
+        2.95 -5.0 -1.5 5.0 5.0 1.5 -1
+        2.95 -5.0 -1.5 5.0 2.95 1.5 -1
+        2.95 -5.0 -1.5 5.0 2.95 -1.5 1
+        2.95 2.95 -1.5 5.0 2.95 1.5 -1
+        2.95 2.95 -1.5 5.0 2.95 1.5 5
+        2.95 2.95 -1.5 5.0 2.95 1.5 4
+        2.95 2.95 -1.5 5.0 5.0 1.5 -1
+        2.95 2.95 -1.5 2.95 5.0 1.5 -1
+        2.95 2.95 -1.5 2.95 5.0 1.5 7
+        2.95 2.95 -1.5 2.95 5.0 1.5 6
+        2.95 2.95 1.5 5.0 5.0 1.5 -1
+        2.95 2.95 1.5 5.0 5.0 1.5 9
+        2.95 2.95 1.5 5.0 5.0 1.5 8
+endnode
+endwalkmeshgeom sjm01_f03_01
+
