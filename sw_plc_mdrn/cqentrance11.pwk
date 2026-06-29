@@ -1,0 +1,44 @@
+# Exported from NWmax 0.8 b61 at 05/06/2010 19:31:39
+# pwk file
+#
+#NWmax PWKMESH  ASCII
+node trimesh PWK
+  parent cqentrance11_pwk
+  position -10.133 0.785084 0.0
+  orientation 0.0 0.0 1.0 -4.71239
+  wirecolor 0.537255 0.0313726 0.431373 
+  multimaterial 20
+    Dirt
+    Obscuring
+    Grass
+    Stone
+    Wood
+    Water
+    Nonwalk
+    Transparent
+    Carpet
+    Metal
+    Puddles
+    Swamp
+    Mud
+    Leaves
+    Lava
+    BottomlessPit
+    DeepWater
+    Door
+    Snow
+    Sand
+  ambient 0.0 0.0 0.0 
+  diffuse 0.705882 0.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 10.0
+  bitmap Nonwalk
+  verts 4
+    4.24248 -10.8223 0.0
+    -5.86226 -6.02303 0.0
+    -6.00826 -10.6395 0.0
+    4.29106 -6.24966 0.0
+  faces 2
+    1 2 3  1  0 0 0  7
+    3 2 0  1  0 0 0  7
+endnode

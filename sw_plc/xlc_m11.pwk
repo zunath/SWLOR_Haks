@@ -1,0 +1,45 @@
+#Exported from 3ds max by MDL Plug-in Suite 1.0b
+#http://www.bricksbuilder.com/nwn/utils/
+#MAXMODEL ASCII
+# model: XLC_M11
+filedependancy mono11.max
+node trimesh xlc_m11_wg
+  parent xlc_m11_pwk
+  position 0 0 0
+  orientation 0 0 0 0
+  wirecolor 0.691406 0.691406 0.691406
+  ambient 0.6875 0.101563 0.101563
+  diffuse 0.6875 0.101563 0.101563
+  specular 0 0 0
+  shininess 1
+  bitmap NULL
+  verts 8
+    0.00274765 0.00232877 0
+    0.775486 -1.3886 0
+    -0.741891 -1.4167 0
+    -1.43033 -0.967106 0
+    -1.61298 0.114727 0
+    -0.76999 1.35111 0
+    0.663088 1.40731 0
+    1.59037 0.00232863 0
+  faces 7
+    6 0 7  0  0 0 0  0
+    7 0 1  0  0 0 0  0
+    1 0 2  0  0 0 0  0
+    2 0 3  0  0 0 0  0
+    3 0 4  0  0 0 0  0
+    4 0 5  0  0 0 0  0
+    5 0 6  0  0 0 0  0
+endnode
+node dummy m11_pwk_use02
+  parent xlc_m11_pwk
+  position 0.012 1 0.0
+  orientation 0 0 0 0
+  wirecolor 0.894118 0.721569 0.6 
+endnode
+node dummy m11_pwk_use01
+  parent xlc_m11_pwk
+  position -0.006 -1 0.0
+  orientation 0 0 0 0
+  wirecolor 0.894118 0.721569 0.6 
+endnode

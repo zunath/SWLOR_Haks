@@ -1,0 +1,66 @@
+# Exported from Wayland's NWN Maxscript v0.3b at 1/29/2003 12:35:40 PM
+# mdl file
+#
+filedependancy Unknown
+newmodel doa_healkit
+setsupermodel doa_healkit NULL
+classification Character
+setanimationscale 1.0
+beginmodelgeom doa_healkit
+node dummy doa_healkit
+    parent NULL
+endnode
+node trimesh healkit
+    parent doa_healkit
+    position 0.0 0.0 0.130335
+    orientation 1.0 0.0 0.0 0.0
+    scale 1.0
+    shininess 1.000000
+    shadow 0
+    render 1
+    diffuse 1.0 1.0 1.0
+    ambient 1.0 1.0 1.0
+    specular 0.0 0.0 0.0
+    selfillumcolor 0.0 0.0 0.0
+    alpha 1.0
+    bitmap doa_healkit
+    verts 8
+        0.146893 -0.175141 0.039548
+        0.231638 0.0508475 0.039548
+        0.039548 0.124294 0.039548
+        -0.0451977 -0.101695 0.039548
+        0.152542 -0.186441 -0.141243
+        0.242938 0.0564972 -0.141243
+        0.0338983 0.135593 -0.141243
+        -0.0564972 -0.107345 -0.141243
+    faces 10
+        0 1 2 1 0 1 2 1
+        2 3 0 1 2 3 0 1
+        4 5 1 1 4 5 6 5
+        1 0 4 1 6 7 4 5
+        5 6 2 1 8 9 10 4
+        2 1 5 1 10 11 8 4
+        6 7 3 1 12 13 14 6
+        3 2 6 1 14 15 12 6
+        7 4 0 1 9 8 11 3
+        0 3 7 1 11 10 9 3
+    tverts 16
+        0.341402 0.18959 0
+        0.500174 0.18959 0
+        0.500174 0.001486 0
+        0.341402 0.001486 0
+        0.176968 0.194449 0
+        0.404815 0.194449 0
+        0.403164 0.508458 0
+        0.175317 0.508458 0
+        0.407355 0.194402 0
+        0.179237 0.194402 0
+        0.177586 0.510828 0
+        0.405705 0.510828 0
+        0.175201 0.197311 0
+        0.410942 0.197311 0
+        0.414431 0.508905 0
+        0.174009 0.508905 0
+endnode
+endmodelgeom doa_healkit
+donemodel doa_healkit

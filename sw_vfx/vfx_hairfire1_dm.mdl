@@ -1,0 +1,100 @@
+# Exported from NWmax 0.8 b60 at 8/29/2011 11:50:03 PM
+# mdl file
+#
+#NWmax MODEL ASCII
+# model: vfx_hairfire1_dm
+#local file: C:\Program Files\gmax\Scenes\bak_head_align_dwarf_male.gmax
+filedependancy bak_head_align_dwarf_male.gmax
+newmodel vfx_hairfire1_dm
+setsupermodel vfx_hairfire1_dm NULL
+classification Effect
+#NWmax GEOM  ASCII
+beginmodelgeom vfx_hairfire1_dm
+node dummy vfx_hairfire1_dm
+  parent NULL
+endnode
+node emitter Flame02
+  parent vfx_hairfire1_dm
+  position -0.00372036 -0.0647377 -0.164434
+  orientation -1.0 0.0 0.0 -1.1047e-006
+  wirecolor 1.0 1.0 1.0 
+  update_sel 1
+  update Fountain
+  render_sel 1
+  render Normal
+  blend_sel 3
+  Blend Lighten
+  spawntype_sel 0
+  spawnType 0
+  xSize 12.0
+  ySize 12.0
+  inherit 1
+  inherit_local 0
+  inheritvel 0
+  inherit_part 0
+  renderorder 0
+  threshold 0.0
+  combinetime 0.0
+  deadspace 0.0
+  opacity 0.5
+  colorStart 1.0 0.647059 0.294118 
+  colorEnd 1.0 0.647059 0.294118 
+  alphaStart 0.6
+  alphaEnd 0.0
+  sizeStart 0.5
+  sizeEnd 0.7
+  sizeStart_y 0.0
+  sizeEnd_y 0.0
+  birthrate 4
+  lifeExp 2.0
+  mass 0.0
+  spread 0.174533
+  particleRot 0.0
+  velocity 0.15
+  randvel 0.1
+  bounce_co 0.0
+  blurlength 10.0
+  loop 0
+  bounce 0
+  m_isTinted 0
+  splat 0
+  affectedByWind true
+  texture fxpa_Flame00
+  twosidedtex 0
+  xgrid 4
+  ygrid 4
+  fps 16
+  framestart 0
+  frameend 15
+  random 0
+  lightningDelay 0.0
+  lightningRadius 0.0
+  lightningSubDiv 0
+  lightningScale 0.0
+  blastRadius 0.0
+  blastLength 0.0
+  p2p 0
+  p2p_type Bezier
+  p2p_sel 1
+  p2p_bezier2 0.0
+  p2p_bezier3 0.0
+  grav 0.0
+  drag 0.0
+endnode
+node light fxHeadLight_orange
+  parent vfx_hairfire1_dm
+  position 8.99587e-005 0.0497433 0.227409
+  orientation -1.0 0.0 0.0 -1.56815
+  wirecolor 1.0 1.0 1.0 
+  radius 5.0
+  multiplier 1.0
+  color 1.0 0.564706 0.0 
+  ambientonly 0
+  nDynamicType 1
+  affectDynamic 1
+  shadow 0
+  lightpriority 3
+  fadingLight 1
+endnode
+endmodelgeom vfx_hairfire1_dm
+donemodel vfx_hairfire1_dm

@@ -1,0 +1,349 @@
+===============================================================================
+CITY INTERIOR WINDOWS release a
+===============================================================================
+
+gaoneng                                    January 16, 2006
+http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=6480
+
+===============================================================================
+
+
+
+===============================================================================
+ TABLE OF CONTENT
+===============================================================================
+ 
+ Quick Installation
+ For Players
+ For Builders
+ Content
+ Redistribution
+ To Do's
+ Acknowledgements
+ Version History
+ Contact
+
+
+
+===============================================================================
+ QUICK INSTALLATION
+===============================================================================
+
+There are three files included in this archive. Simply unrar everything to a
+temporary folder and drop the following files into the appropriate folder in
+your NWN directory. This is typically located at C:\Program Files\NWN\
+
+    gao_tinwindows.hak                        -> to the \hak folder
+
+    DEMO - Castle Interior Windows.mod        -> to the \modules folder
+
+    city interior windows readme.txt          -> you're reading it now :)
+
+Once these files are in the correct location, you should be able to see
+"DEMO - City Interior Windows" as an available and playable module when you
+launch the game and go under Custom Modules.
+
+
+
+===============================================================================
+ FOR PLAYERS
+===============================================================================
+
+If you are reading this, it probably means City Interior Windows is a required
+resource for a module you are playing. Simply follow the installation guide
+above and you are ready to play.
+
+The DEMO module is optional and not required, although there are a couple of
+puzzles inside if you are really bored and looking for things to do. :)
+
+You can also skip the rest of this readme.
+
+
+
+===============================================================================
+ FOR BUILDERS
+===============================================================================
+
+Simply follow the installation guide above and these additional instructions
+below to gain access to the City Interior Windows content.
+
+Open up your module, go to Edit -> Module Properties -> Custom Content and add
+
+    gao_tinwindows
+
+to your custom content list. As the order is not important in this case, you
+can put this hak anywhere even if you have other haks in your list.
+
+Click OK to rebuild.
+
+Once your module is successfully rebuilt, you should see several new entries in
+your tile palette when you paint a City Interior area.
+
+If you want to add City Interior Windows to an existing module with (or
+without) City Interior areas created using the default palette (a.k.a "I've
+been working on my module for months, can I add this now?"), you can safely do
+so, provided there are no other City Interior modifications in your module. As
+a general precautionary measure, you should always backup your module before
+modifying the custom content list. City Interior Windows is an add-on and an
+expansion, and apart from the palette and information files required to add in
+the new tiles, none of the standard resources are modified or overriden, so
+your old areas will not be affected.
+
+You should only be concerned if you are attempting to use City Interior Windows
+in conjunction with other City Interior tileset modifications not made by me.
+In that case, you will need to consolidate your own set, itp, and 2da to avoid
+any resource conflicts.
+
+
+
+===============================================================================
+ CONTENT
+===============================================================================
+
+City Interior Windows adds 178 new custom tiles to Bioware's City Interior
+tileset.
+
+Once you have correctly installed City Interior Windows into your module, you
+should see the following new entries in your tileset palette when using the
+City Interior tileset.
+
+    [ Terrain/Crosser ]
+    Window
+    Home
+
+    [ Groups ]
+    Livingroom 2 with Window 1x2
+    Livingroom 1 with Window 1x2
+    Kitchen Room 2 with Window 1x2
+    Kitchen Room 1 with Window 1x2
+    Inn Room 2 with Window 1x2
+
+    [ Features ]
+    Vista Sea
+    Vista Rural Winter
+    Vista Rural
+    Vista Desert
+    Vista City Ground Level
+    Porthole 3
+    Porthole 2
+    Porthole 1
+    Home Window
+    Home Corner Stairs 3
+    Home Corner Stairs 2
+    Home Corner Stairs 1
+    Home Corner Exit 2
+    Home Corner Exit 1
+
+Following are descriptions of what these new features do.
+
+
+[ window ]
+Window is a new crosser you can use to punch actual holes in the walls to
+create real windows. This crosser will work on all terrains and crossers.
+
+Each terrain has a unique window design of its own. And unlike the rest of the
+terrain types, windows for the Home terrain, the Corridor crosser, and the
+Doorway crosser, are designed to fit back-to-back. You can make use of this
+property to create non-trespassable internal windows and partition walls that
+allow direct line of sight for vision, spells and range attacks.
+
+
+[ home ]
+Home is a simple new terrain derived from the 2x2 Interiors. Paint it like you
+would any other normal terrain.
+
+
+[ vistas ]
+This is the new scenery control system for City Interior Windows. These special
+features allow you to replace the default urbanscape with views of your choice.
+
+    Vista Rural                rural hills with animated waterfalls
+    Vista Rural Winter         rural winter hills with animated waterfalls
+    Vista Desert               desert dunes
+    Vista Sea                  ocean with animated waters *
+    Vista City Ground Level    lower level view of default urbanscape **
+
+To reset back to the default view, simply remove the window and repaint a new
+one.
+
+ * If your toolset/game crashes when you attempt to view this, then your system
+   does not support Shiny Water. You must disable this option in your Advanced
+   Video Settings in the in-game control panel.
+** The default view shows more of the sky, and is more suitable for upper
+   level interiors.
+
+Note that all interior areas are Always Night by default. This prevents the
+Day/Night cycling from happening. If you want these views to cycle between day
+and night, make sure you change the Day/Night Cycle setting in the Visual tab
+under Area Properties to Cycle Day and Night. Note also that the default
+daytime lighting for all those interior presets are very dark. You will need to
+change the Sun color or turn on Main Light 1 for all tiles during the day.
+
+
+[ diagonal walls and corridors]
+If you start painting new City Interior terrains, you will notice the corners
+are no longer always 90 degrees straight corners. You will sometimes get
+diagonal 45 degrees walls instead. These new tiles are designed to let you
+create irregularly shaped interiors.
+
+This feature is available for some corridor tiles as well, so now you can have
+corridors that cut across an area diagonally.
+
+
+[ furniture-free tiles ]
+You will also notice many of the tiles now have furniture-free variants. These
+new tiles are designed to let you create spacious uncluttered interiors.
+
+
+[ sleepable beds ]
+Beds in the windowed groups are walkable, so you can actually sleep on them.
+Refer to the demonstration module for a sample setup if you are not sure how
+they can be used. If you need sleepable beds for the rest of the standard
+groups and features, there already are plenty such packages on the vault. They
+should be fully compatible with City Interior Windows if they are override
+based, i.e. if they are designed to replace the existing standard groups.
+
+
+[ other features ]
+The rest of the features should be quite intuitive.
+
+
+In case you do not already know, there is a very easy way for you to cycle
+through the available models for a particular tile systematically. First, make
+sure you are in Terrain Selection mode (which you should be if you are painting
+tiles). Press the Escape key on your keyboard to clear the paintbrush. Now move
+your mouse pointer over to the tile you want to change. Then press and hold the
+Shift key on your keyboard and right-click on the tile to start cycling through
+the tiles systematically. Unlike the random Eraser tool, this method allows you
+to control the rotation and exact model for any tile directly. So you can use
+this method to gain access to all the new diagonal walls and furniture-free
+tiles (and the default tiles of course) easily. Try it.
+
+
+
+===============================================================================
+ REDISTRIBUTION
+===============================================================================
+
+[ for pw/module builders ]
+If you want to redistribute the content of City Interior Windows as part of
+your PW/module-specific hak, you may freely do so, as long as proper credits
+are given. That means, the following information
+
+    City Interior Windows
+    gaoneng
+    http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=6480
+
+must be displayed conspicuously somewhere in your documentation and download
+page. These are the project's full title, my community profile name, and the
+url to my download site. The url can be embedded into the project's title as a
+hyperlink if you want it to.
+
+
+[ for combo-packers ]
+If you want to redistribute the content of City Interior Windows as part of a
+generic combo-pack, wholesale, modified or expanded, you may freely do so as
+long as you adhere to these guidelines.
+
++ you give proper credits, as described in the section for PW/Module Builders
+  above
++ you wait at least two months after the initial release date of this project
+  before publishing your combo-pack
++ you include this entire readme, complete and unabridged, in your download
+
+
+If you need places to advertise your project, feel free to do so on the message
+board. And please vote if you like this package. :)
+
+
+
+===============================================================================
+ TO DO'S
+===============================================================================
+
+There are not much left to do.
+
+[ broken shadows ]
+There are some minor shadow issues with some of the tiles. These are only
+apparent when you walk close to them with a dynamic light source, such as a
+Torch. These are not game-breaking, but are merely minor aesthetic issues. I am
+fully aware of what went wrong with them, and I will fix these as soon as I get
+the chance to.
+
+[ more diagonal walls ]
+Thinking of making a few more diagonal-on-both-sides walls, and maybe implement
+support for all doorways/corridor permutation. If you like this feature, do
+post a comment on the message board. I'll feel more inclined to make things if
+I know there are people who want them. :)
+
+[ reposition main light 2 ]
+Many of the windowed tiles have their main light 2's positioned right outside
+of the windows. Initially, this was intended to simulate natural lights
+streaming in from the exterior. However, I have noticed that these tilelights
+do not cast shadows on their own geometries, which result in really odd shadow-
+casting patterns. Considering relocating these lights back to their original
+positions in the interior. Any thoughts on this welcomed as well.
+
+[ redo sea view ]
+There's something odd about the ocean view that is causing a black triangle to
+appear in the middle of the view. Not really sure what is causing it.
+Considering redoing that particular skybox.
+
+And as I mentioned on the vault, if there are additional features you wish to
+see, or if you discover any other bugs, do leave a message on the board.
+
+
+
+===============================================================================
+ ACKNOWLEDGEMENTS
+===============================================================================
+
+Bioware
+http://nwn.bioware.com/
+Tileset base models are from the standard resource pool, with all extra
+modifications made by me of course. Textures for skyboxes are derived from
+printed screenshots of standard tilesets. Minimaps are modified from default
+textures.
+
+ThallionStelani and Michael Darkangel
+http://nwvault.ign.com/files/hakpacks/data/1072675799655.shtml
+The skyboxes for rural and desert views feature slopes from Michael Darkangel's
+rework of ThallionStelani's Hills and Homes. Look closer if you have not
+notice. :)
+
+
+
+===============================================================================
+ VERSION HISTORY
+===============================================================================
+
+January 16, 2006    release a
+first release (almost final)
+
+
+
+===============================================================================
+ CONTACT
+===============================================================================
+
+While I've thoroughly tested every single tile I made, I can only conclude that
+these tiles work as intended on my machine. If you encounter any odd issue,
+please submit a bug report with as much details as possible.
+
+All general feedback, bug reports, ideas and suggestions can posted on the
+message board directly at
+
+    http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=6480
+
+If for some reasons you cannot post on the vault, you may send me a Private
+Message on Bioware forums. My account name is
+
+    gaoneng
+
+Private and confidential agendas can be mailed to me at
+
+    gaoneng [at] yahoo [dot] com
+
+
+
+erick d

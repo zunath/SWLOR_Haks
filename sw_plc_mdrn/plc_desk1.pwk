@@ -1,0 +1,46 @@
+# Exported from NWmax 0.7 at 9/4/2005 12:34:52
+# mdl file
+#
+#NWmax MODEL ASCII
+# model: PLC_desk1a
+filedependancy Unknown
+newmodel PLC_desk1a
+setsupermodel PLC_desk1a NULL
+classification Character
+setanimationscale 1.0
+#NWmax GEOM  ASCII
+beginmodelgeom PLC_desk1a
+node dummy PLC_desk1a
+  parent NULL
+endnode
+node trimesh Box01
+  parent PLC_desk1a
+  position -0.00303184 0.039562 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.552941 0.027451 0.227451 
+  bitmap NULL
+  verts 8
+    -1.61569 -0.435693 0.0
+    1.61569 -0.435693 0.0
+    -1.61569 0.435693 0.0
+    1.61569 0.435693 0.0
+    -1.61569 -0.435693 0.0907693
+    1.61569 -0.435693 0.0907693
+    -1.61569 0.435693 0.0907693
+    1.61569 0.435693 0.0907693
+  faces 12
+    0 2 3  2  0 0 0  2
+    3 1 0  2  0 0 0  2
+    4 5 7  4  0 0 0  1
+    7 6 4  4  0 0 0  1
+    0 1 5  8  0 0 0  5
+    5 4 0  8  0 0 0  5
+    1 3 7  16  0 0 0  4
+    7 5 1  16  0 0 0  4
+    3 2 6  32  0 0 0  6
+    6 7 3  32  0 0 0  6
+    2 0 4  64  0 0 0  3
+    4 6 2  64  0 0 0  3
+endnode
+endmodelgeom PLC_desk1a
+donemodel PLC_desk1a

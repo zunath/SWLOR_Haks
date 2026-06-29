@@ -1,0 +1,32 @@
+#Exported from 3ds max by MDL Plug-in Suite 1.0b
+#http://www.bricksbuilder.com/nwn/utils/
+#MAXMODEL ASCII
+# model: udp-p-110
+filedependancy udp interior placeables06.max
+node trimesh walkm
+  parent udp-p-110_pwk
+  position 0.703463 -0.62711 0
+  orientation 0 0 0 0
+  wirecolor 0.527344 0.527344 0.527344
+  ambient 0.523438 0.429688 0.03125
+  diffuse 0.523438 0.429688 0.03125
+  specular 0 0 0
+  shininess 1
+  bitmap NULL
+  verts 8
+    2.2618 2.1156 0
+    -1.95732 2.1156 0
+    -2.2618 2.1156 0
+    2.2618 1.82341 0
+    -1.95732 1.82341 0
+    -2.2618 1.82341 0
+    -1.95732 -2.1156 0
+    -2.2618 -2.1156 0
+  faces 6
+    3 0 4  1  0 0 0  7
+    1 4 0  1  0 0 0  7
+    4 1 5  1  0 0 0  7
+    2 5 1  1  0 0 0  7
+    6 4 7  1  0 0 0  7
+    5 7 4  1  0 0 0  7
+endnode

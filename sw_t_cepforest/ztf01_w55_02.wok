@@ -1,0 +1,27 @@
+# Rewritten by CleanModels 3 Version 3.2.2.1 Fri Dec 05 23:37:04 2008
+#MAXWALKMESH  ASCII
+beginwalkmeshgeom ztf01_w55_02
+node aabb rectangle139
+  parent ztf01_w55_02
+  ambient 0 0 0
+  diffuse 0 0 0
+  specular 0 0 0
+  shininess 26
+  shadow 0
+  transparencyhint 0
+  bitmap NULL
+  orientation 0 0 0 0
+  position 0 0 0
+  verts 4
+    5 -5 -6
+    5 5 -6
+    -5 5 -6
+    -5 -5 -6
+  faces 2
+    0 1 2 1 0 0 0 16
+    3 0 2 1 0 0 0 16
+  aabb     -5 -5 -6 5 5 -6 -1
+    -5 -5 -6 5 5 -6 1
+    -5 -5 -6 5 5 -6 0
+endnode
+endwalkmeshgeom ztf01_w55_02

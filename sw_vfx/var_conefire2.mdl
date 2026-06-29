@@ -1,0 +1,194 @@
+# Exported from NeverBlender 2.8.35 - Thursday, 2022-02-17
+filedependancy unknown
+newmodel var_conefire2
+setsupermodel var_conefire2 null
+classification EFFECT
+setanimationscale 1.0
+beginmodelgeom var_conefire2
+node dummy var_conefire2
+  parent null
+endnode
+node emitter OmenEmitter03
+  parent var_conefire2
+  position -0.60067  0.17843  0.24956
+  orientation -0.33722 -0.76960 -0.54222  1.68624
+  xsize 0.00
+  ysize 0.00
+  update Fountain
+  render Normal
+  blend Lighten
+  spawntype 0
+  renderorder 0
+  birthrate 80
+  lifeexp 0.70
+  mass 0.00
+  velocity 16.00
+  randvel 0.50
+  particlerot 0.00
+  spread 0.70
+  splat 0
+  affectedbywind 0
+  colorstart 0.91 0.66 0.00
+  colorend 0.91 0.47 0.00
+  alphastart 1.00
+  alphaend 0.00
+  sizestart 0.70
+  sizeend 5.00
+  sizestart_y 0.00
+  sizeend_y 0.00
+  bounce 0
+  bounce_co 0.00
+  blurlength 10.00
+  deadspace 0.00
+  texture fxpra_fire01l
+  twosidedtex 0
+  m_istinted 0
+  xgrid 2
+  ygrid 2
+  fps 16
+  framestart 0
+  frameend 3
+  random 0
+  p2p 0
+  blastradius 0.00
+  blastlength 0.00
+  inherit 0
+  inheritvel 0
+  inherit_local 0
+  inherit_part 0
+endnode
+node emitter OmenEmitter01
+  parent var_conefire2
+  position -0.69796  0.31293  0.28533
+  orientation -0.47491 -0.60392 -0.64012  1.85064
+  xsize 0.00
+  ysize 0.00
+  update Fountain
+  render Normal
+  blend Lighten
+  spawntype 0
+  renderorder 0
+  birthrate 60
+  lifeexp 0.70
+  mass 0.00
+  velocity 16.00
+  randvel 0.50
+  particlerot 5.00
+  spread 0.35
+  splat 0
+  affectedbywind 0
+  colorstart 0.91 0.58 0.00
+  colorend 0.91 0.47 0.00
+  alphastart 0.50
+  alphaend 0.00
+  sizestart 0.50
+  sizeend 6.00
+  sizestart_y 0.00
+  sizeend_y 0.00
+  bounce 0
+  bounce_co 0.00
+  blurlength 10.00
+  deadspace 0.00
+  texture fxpra_fire01l
+  twosidedtex 0
+  m_istinted 0
+  xgrid 2
+  ygrid 2
+  fps 16
+  framestart 0
+  frameend 3
+  random 0
+  p2p 0
+  blastradius 0.00
+  blastlength 0.00
+  inherit 0
+  inheritvel 0
+  inherit_local 0
+  inherit_part 0
+endnode
+node emitter OmenEmitter02
+  parent var_conefire2
+  position -0.69472  0.31506  0.28584
+  orientation -0.17753 -0.89406 -0.41126  1.59133
+  xsize 0.00
+  ysize 0.00
+  update Fountain
+  render Normal
+  blend Lighten
+  spawntype 0
+  renderorder 0
+  birthrate 60
+  lifeexp 0.70
+  mass 0.00
+  velocity 16.00
+  randvel 0.50
+  particlerot -5.00
+  spread 0.35
+  splat 0
+  affectedbywind 0
+  colorstart 0.91 0.62 0.00
+  colorend 0.91 0.47 0.00
+  alphastart 0.50
+  alphaend 0.00
+  sizestart 0.50
+  sizeend 6.00
+  sizestart_y 0.00
+  sizeend_y 0.00
+  bounce 0
+  bounce_co 0.00
+  blurlength 10.00
+  deadspace 0.00
+  texture fxpra_fire01l
+  twosidedtex 0
+  m_istinted 0
+  xgrid 2
+  ygrid 2
+  fps 16
+  framestart 0
+  frameend 3
+  random 0
+  p2p 0
+  blastradius 0.00
+  blastlength 0.00
+  inherit 0
+  inheritvel 0
+  inherit_local 0
+  inherit_part 0
+endnode
+endmodelgeom var_conefire2
+
+# ANIM ASCII
+newanim impact var_conefire2
+  length 1.967
+  transtime 0.25
+  animroot var_conefire2
+  node dummy var_conefire2
+    parent null
+  endnode
+  node emitter OmenEmitter03
+    parent var_conefire2
+    birthratekey 3
+       0.000 80
+       1.300 80
+       1.333 0
+    endlist
+  endnode
+  node emitter OmenEmitter01
+    parent var_conefire2
+    birthratekey 3
+       0.000 60
+       1.300 60
+       1.333 0
+    endlist
+  endnode
+  node emitter OmenEmitter02
+    parent var_conefire2
+    birthratekey 3
+       0.000 60
+       1.300 60
+       1.333 0
+    endlist
+  endnode
+doneanim impact var_conefire2
+
+donemodel var_conefire2

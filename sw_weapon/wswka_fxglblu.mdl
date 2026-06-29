@@ -1,0 +1,137 @@
+#MAXMODEL ASCII
+# model: WSwKa_fxglblu
+filedependancy WSwKa_fxglblu.max
+newmodel WSwKa_fxglblu
+setsupermodel WSwKa_fxglblu NULL
+setanimationscale 1
+#MAXGEOM  ASCII
+beginmodelgeom WSwKa_fxglblu
+node dummy WSwKa_fxglblu
+  parent NULL
+  #part-number 0
+endnode
+node emitter g_WSwGs_V_Holy
+  parent WSwKa_fxglblu
+  #part-number 1
+  p2p 0
+  p2p_sel 1
+  affectedByWind 0
+  m_isTinted 0
+  bounce 0
+  random 0
+  inherit 1
+  inheritvel 0
+  inherit_local 0
+  splat 0
+  inherit_part 0
+  renderorder 0
+  spawntype 0
+  update Fountain
+  render Normal
+  blend Lighten
+  texture fxpa_StarBnW
+  xgrid 2
+  ygrid 2
+  loop 0
+  deadspace 0
+  twosidedtex 0
+  blastRadius 0
+  blastLength 0
+  position 0 0.260589004 0.00771147013
+  orientation -0.0261675008 -0.999314964 -0.0261690002 -1.57147992
+  colorStart 0.0 0.0 1.0
+  colorEnd 0.0 0.0 0.8
+  alphaStart 1
+  alphaEnd 0
+  sizeStart 0
+  sizeEnd 0.5
+  sizeStart_y 0
+  sizeEnd_y 0
+  frameStart 0
+  frameEnd 3
+  birthrate 22
+  lifeExp 2
+  mass 0
+  spread 0
+  particleRot 0
+  velocity 0
+  randvel 0
+  fps 0
+  xsize 4
+  ysize 34
+  bounce_co 0
+  blurlength 10
+  lightningDelay 0
+  lightningRadius 0
+  lightningScale 0
+  p2p_bezier2 0
+  p2p_bezier3 0
+  combinetime 0
+  drag 0
+  grav 0
+  threshold 0
+endnode
+node emitter g_WSwGs_V_Holy01
+  parent WSwKa_fxglblu
+  #part-number 2
+  p2p 0
+  p2p_sel 1
+  affectedByWind 0
+  m_isTinted 0
+  bounce 0
+  random 0
+  inherit 1
+  inheritvel 0
+  inherit_local 0
+  splat 0
+  inherit_part 0
+  renderorder 0
+  spawntype 0
+  update Fountain
+  render Normal
+  blend Lighten
+  texture fxpa_StarBnW
+  xgrid 2
+  ygrid 2
+  loop 0
+  deadspace 0
+  twosidedtex 0
+  blastRadius 0
+  blastLength 0
+  position 0 0.577380002 0.0392124988
+  orientation -0.0739052892 -0.99452287 -0.073906891 -1.57629001
+  colorStart 0.0 0.0 1.0
+  colorEnd 0.0 0.0 0.8
+  alphaStart 1
+  alphaEnd 0
+  sizeStart 0
+  sizeEnd 0.5
+  sizeStart_y 0
+  sizeEnd_y 0
+  frameStart 0
+  frameEnd 3
+  birthrate 22
+  lifeExp 2
+  mass 0
+  spread 0
+  particleRot 0
+  velocity 0
+  randvel 0
+  fps 0
+  xsize 4
+  ysize 34
+  bounce_co 0
+  blurlength 10
+  lightningDelay 0
+  lightningRadius 0
+  lightningScale 0
+  p2p_bezier2 0
+  p2p_bezier3 0
+  combinetime 0
+  drag 0
+  grav 0
+  threshold 0
+endnode
+endmodelgeom WSwKa_fxglblu
+
+donemodel WSwKa_fxglblu

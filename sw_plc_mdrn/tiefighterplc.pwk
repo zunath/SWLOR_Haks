@@ -1,0 +1,62 @@
+# Exported from NWmax 0.7 at 8/6/2006 11:10:19 AM
+# pwk file
+#
+#NWmax PWKMESH  ASCII
+node dummy tiefighterplc_pwk
+  parent NULL
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.560784 0.878431 0.341176 
+endnode
+node trimesh Plane01
+  parent tiefighterplc_pwk
+  position 0.0642361 -0.591117 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.521569 0.431373 0.0313726 
+  multimaterial 20
+    Dirt
+    Obscuring
+    Grass
+    Stone
+    Wood
+    Water
+    Nonwalk
+    Transparent
+    Carpet
+    Metal
+    Puddles
+    Swamp
+    Mud
+    Leaves
+    Lava
+    BottomlessPit
+    DeepWater
+    Door
+    Snow
+    Sand
+  ambient 0.0 0.0 0.0 
+  diffuse 0.6 0.34 0.16 
+  specular 0.0 0.0 0.0 
+  shininess 11.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap Dirt
+  verts 9
+    -2.87417 -1.62417 0.0
+    0.0226478 -0.525059 0.0
+    2.78344 -1.83411 0.0
+    -2.91501 0.0 0.0
+    0.0 0.0 0.0
+    2.91501 0.0 0.0
+    -2.84372 2.41876 0.0
+    -0.0658058 1.87515 0.0
+    2.78102 2.63206 0.0
+  faces 8
+    3 0 4  1  0 0 0  7
+    1 4 0  1  0 0 0  7
+    4 1 5  1  0 0 0  7
+    2 5 1  1  0 0 0  7
+    6 3 7  1  0 0 0  7
+    4 7 3  1  0 0 0  7
+    7 4 8  1  0 0 0  7
+    5 8 4  1  0 0 0  7
+endnode

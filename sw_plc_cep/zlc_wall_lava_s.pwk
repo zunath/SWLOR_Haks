@@ -1,0 +1,22 @@
+# Exported from Wayland's NWN Maxscript v0.3b at 11/19/2005 8:21:38 AM
+# pwk file
+#
+node trimesh wall_pwk
+    parent zlc_wall_lava_s_pwk
+    position 0.0 0.0 0.0
+    orientation 1.0 0.0 0.0 0.0
+    scale 1.0
+    diffuse 1 1 1
+    ambient 1 1 1
+    specular 0.0000 0.0000 0.0000
+    render 0
+    bitmap NULL
+    verts 4
+        -3.07479 -0.257479 0.0
+        3.07479 -0.257479 0.0
+        -3.07479 0.257479 0.0
+        3.07479 0.257479 0.0
+    faces 2
+        2 0 3 1 0 0 0 1
+        1 3 0 1 0 0 0 1
+endnode

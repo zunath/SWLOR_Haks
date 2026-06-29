@@ -1,0 +1,137 @@
+#MAXMODEL ASCII
+# model: wblpl_fxfrblu
+filedependancy wblpl_fxfrblu.max
+newmodel wblpl_fxfrblu
+setsupermodel wblpl_fxfrblu null
+setanimationscale 1
+#MAXGEOM  ASCII
+beginmodelgeom wblpl_fxfrblu
+node dummy wblpl_fxfrblu
+  parent NULL
+  #part-number 0
+endnode
+node emitter g_wswgs_v_fire
+  parent wblpl_fxfrblu
+  #part-number 1
+  p2p 0
+  p2p_sel 1
+  affectedByWind 0
+  m_isTinted 0
+  bounce 0
+  random 0
+  inherit 1
+  inheritvel 0
+  inherit_local 0
+  splat 0
+  inherit_part 0
+  renderorder 0
+  spawntype 0
+  update Fountain
+  render Normal
+  blend Lighten
+  texture fxpa_flame99_blu
+  xgrid 4
+  ygrid 4
+  loop 0
+  deadspace 0
+  twosidedtex 0
+  blastRadius 0
+  blastLength 0
+  position 0 0.296573013 0
+  orientation 0 -1 0 -1.57079995
+  colorStart 0.9647 0.9647 0.9647
+  colorEnd 0.3922 0.5882 0.8863
+  alphaStart 0.600000024
+  alphaEnd 0
+  sizeStart 0
+  sizeEnd 0.75
+  sizeStart_y 0
+  sizeEnd_y 0
+  frameStart 0
+  frameEnd 15
+  birthrate 10
+  lifeExp 2
+  mass 0
+  spread 0.174532995
+  particleRot 0
+  velocity 0
+  randvel 0
+  fps 16
+  xsize 20
+  ysize 14
+  bounce_co 0
+  blurlength 10
+  lightningDelay 0
+  lightningRadius 0
+  lightningScale 0
+  p2p_bezier2 0
+  p2p_bezier3 0
+  combinetime 0
+  drag 0
+  grav 0
+  threshold 0
+endnode
+node emitter g_wswgs_v_fire01
+  parent wblpl_fxfrblu
+  #part-number 2
+  p2p 0
+  p2p_sel 1
+  affectedByWind 0
+  m_isTinted 0
+  bounce 0
+  random 0
+  inherit 1
+  inheritvel 0
+  inherit_local 0
+  splat 0
+  inherit_part 0
+  renderorder 0
+  spawntype 0
+  update Fountain
+  render Normal
+  blend Lighten
+  texture fxpa_flame99_blu
+  xgrid 4
+  ygrid 4
+  loop 0
+  deadspace 0
+  twosidedtex 0
+  blastRadius 0
+  blastLength 0
+  position 0 0.300568998 0
+  orientation 1 0 0 -1.57079995
+  colorStart 0.9647 0.9647 0.9647
+  colorEnd 0.3922 0.5882 0.8863
+  alphaStart 0.600000024
+  alphaEnd 0
+  sizeStart 0
+  sizeEnd 0.75
+  sizeStart_y 0
+  sizeEnd_y 0
+  frameStart 0
+  frameEnd 15
+  birthrate 10
+  lifeExp 2
+  mass 0
+  spread 0.174532995
+  particleRot 0
+  velocity 0
+  randvel 0
+  fps 16
+  xsize 14
+  ysize 20
+  bounce_co 0
+  blurlength 10
+  lightningDelay 0
+  lightningRadius 0
+  lightningScale 0
+  p2p_bezier2 0
+  p2p_bezier3 0
+  combinetime 0
+  drag 0
+  grav 0
+  threshold 0
+endnode
+endmodelgeom wblpl_fxfrblu
+
+donemodel wblpl_fxfrblu

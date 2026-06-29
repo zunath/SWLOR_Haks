@@ -1,0 +1,53 @@
+# Exported from NWmax 0.8 b61 at 1/16/2018 8:44:29 PM
+# mdl file
+#
+#NWmax MODEL ASCII
+# model: ad_watpud18
+#local file: Unknown
+filedependancy Unknown
+newmodel ad_watpud18
+setsupermodel ad_watpud18 NULL
+classification Character
+setanimationscale 1.0
+#NWmax GEOM  ASCII
+beginmodelgeom ad_watpud18
+node dummy ad_watpud18
+  parent NULL
+endnode
+node trimesh Plane01
+  parent ad_watpud18
+  position 0.0 0.0 0.02
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 0
+  beaming 0
+  inheritcolor 0
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  selfillumcolor 0.0 0.0 0.0 
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 1
+  center 0.0 0.0 0.0 
+  bitmap ad_watpud18
+  verts 4
+    -1.0 1.0 0.0
+    -1.0 -1.0 0.0
+    1.0 1.0 0.0
+    1.0 -1.0 0.0
+  faces 2
+    0 1 2  1  0 1 2  1
+    3 2 1  1  3 2 1  1
+  tverts 4
+    0.0 1.0 0
+    0.0 0.0 0
+    1.0 1.0 0
+    1.0 0.0 0
+endnode
+endmodelgeom ad_watpud18
+donemodel ad_watpud18

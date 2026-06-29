@@ -1,0 +1,28 @@
+# Exported from NWmax 0.8 b60 at 04.07.2012 13:12:02
+# pwk file
+#
+#NWmax PWKMESH  ASCII
+node trimesh evcrpine02_nwlk
+  parent evcrpine02_pwk
+  position -0.434183 0.0643235 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.65098 0.898039 0.898039 
+  bitmap NULL
+  verts 4
+    -2.85466 -0.424709 0.0
+    4.69561 -0.482426 0.0
+    -2.85466 0.282451 0.0
+    4.69561 0.482426 0.0
+  faces 2
+    2 0 3  1  6 4 7  7
+    1 3 0  1  5 7 4  7
+  tverts 8
+    0.0 0.0 0
+    1.0 0.0 0
+    0.0 0.0 0
+    1.0 0.0 0
+    0.0 0.0 0
+    1.0 0.0 0
+    0.0 1.0 0
+    1.0 1.0 0
+endnode

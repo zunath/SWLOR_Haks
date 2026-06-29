@@ -1,0 +1,311 @@
+#MAXMODEL ASCII
+# model: phod_fx_fury07
+filedependancy phod_fx_fury07.max
+newmodel phod_fx_fury07
+setsupermodel phod_fx_fury07 NULL
+classification CHARACTER
+setanimationscale 1
+#MAXGEOM  ASCII
+beginmodelgeom phod_fx_fury07
+node dummy phod_fx_fury07
+  parent NULL
+endnode
+node emitter OmenEmitter 259
+  parent phod_fx_fury07
+  p2p 0
+  p2p_sel 1
+  affectedByWind 0
+  m_isTinted 0
+  bounce 0
+  random 0
+  inherit 0
+  inheritvel 0
+  inherit_local 0
+  inherit_part 1
+  splat 0
+  renderorder 0
+  spawntype 0
+  update Fountain
+  render Normal
+  blend Lighten
+  texture fxpa_phod02w
+  xgrid 2
+  ygrid 2
+  loop 0
+  deadspace 0
+  twosidedtex 0
+  blastRadius 0
+  blastLength 0
+  position 0 0 1.5
+  orientation 0.3765649 0.2958359 0.8778838 -0.284523
+  colorStart 0 0 1
+  colorEnd 1 0 0
+  alphaStart 1
+  alphaEnd 0
+  sizeStart 0
+  sizeEnd 2
+  sizeStart_y 0
+  sizeEnd_y 0
+  frameStart 0
+  frameEnd 3
+  birthrate 10
+  lifeExp 2
+  mass 0
+  spread 0
+  particleRot 200
+  velocity 0
+  randvel 0
+  fps 0
+  xsize 0
+  ysize 0
+  bounce_co 0
+  blurlength 10
+  lightningDelay 0
+  lightningRadius 0
+  lightningScale 0
+  p2p_bezier2 0
+  p2p_bezier3 0
+  combinetime 0
+  drag 0
+  grav 0
+  threshold 0
+endnode
+node dummy U03_ground
+  parent phod_fx_fury07
+  position -0.00363281 0.0069873 0
+  orientation 0 0 0 0
+endnode
+node dummy U03_impact
+  parent phod_fx_fury07
+  position 0.00398437 0.011001 0.239308
+  orientation 0 0 0 0
+endnode
+node trimesh Rectangle124
+  parent phod_fx_fury07
+  ambient 0.2 0.2 0.2
+  diffuse 0.8 0.8 0.8
+  specular 0 0 0
+  shininess 1
+  shadow 0
+  render 0
+  bitmap NULL
+  verts 8
+      -0.3000000   -0.3000000    0.7529180
+       0.3000000   -0.3000000    0.7529180
+       0.3000000    0.3000000    0.7529180
+      -0.3000000    0.3000000    0.7529180
+      -0.3000000   -0.3000000    0.0000000
+       0.3000000   -0.3000000    0.0000000
+       0.3000000    0.3000000    0.0000000
+      -0.3000000    0.3000000    0.0000000
+  faces 10
+    0 1 2  1           0          0          0   1
+    3 0 2  1           0          0          0   1
+    4 5 1  2           0          0          0   1
+    1 0 4  2           0          0          0   1
+    5 6 2  4           0          0          0   1
+    2 1 5  4           0          0          0   1
+    7 4 0  4           0          0          0   1
+    0 3 7  4           0          0          0   1
+    6 7 3  2           0          0          0   1
+    3 2 6  2           0          0          0   1
+  position 0 0.0279346 0
+  orientation 0 0 0 0
+  alpha 1
+  scale 1
+  selfillumcolor 0 0 0
+endnode
+node dummy U03_head_hit
+  parent phod_fx_fury07
+  position 0.00398437 0.0108252 0.622732
+  orientation 0 0 0 0
+endnode
+node dummy U03_hand
+  parent phod_fx_fury07
+  position 0.00398437 -0.505195 0.934402
+  orientation 0 0 0 0
+endnode
+node dummy U03_head
+  parent phod_fx_fury07
+  position 0.00398437 0.0108252 1.10421
+  orientation 0 0 0 0
+endnode
+endmodelgeom phod_fx_fury07
+
+#MAXANIM ASCII
+newanim on phod_fx_fury07
+  length 0.0333333
+  transtime 0
+  animroot phod_fx_fury07
+  node dummy phod_fx_fury07
+    parent NULL
+  endnode
+  node emitter OmenEmitter259
+    parent phod_fx_fury07
+    birthratekey 2
+         0.0000000   20.0000000
+         0.0333333   20.0000000
+  endnode
+  node dummy phod_fx_fury07_pwk
+    parent phod_fx_fury07
+  endnode
+  node dummy U03_pwk_use01
+    parent phod_fx_fury07_pwk
+  endnode
+  node dummy U03_ground
+    parent phod_fx_fury07
+  endnode
+  node dummy U03_impact
+    parent phod_fx_fury07
+  endnode
+  node trimesh Rectangle124
+    parent phod_fx_fury07
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node dummy U03_head_hit
+    parent phod_fx_fury07
+  endnode
+  node dummy U03_hand
+    parent phod_fx_fury07
+  endnode
+  node dummy U03_head
+    parent phod_fx_fury07
+  endnode
+doneanim on phod_fx_fury07
+
+#MAXANIM ASCII
+newanim off phod_fx_fury07
+  length 0.0333333
+  transtime 0
+  animroot phod_fx_fury07
+  node dummy phod_fx_fury07
+    parent NULL
+  endnode
+  node emitter OmenEmitter259
+    parent phod_fx_fury07
+    birthratekey 2
+         0.0000000    0.0000000
+         0.0333333    0.0000000
+  endnode
+  node dummy phod_fx_fury07_pwk
+    parent phod_fx_fury07
+  endnode
+  node dummy U03_pwk_use01
+    parent phod_fx_fury07_pwk
+  endnode
+  node dummy U03_ground
+    parent phod_fx_fury07
+  endnode
+  node dummy U03_impact
+    parent phod_fx_fury07
+  endnode
+  node trimesh Rectangle124
+    parent phod_fx_fury07
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node dummy U03_head_hit
+    parent phod_fx_fury07
+  endnode
+  node dummy U03_hand
+    parent phod_fx_fury07
+  endnode
+  node dummy U03_head
+    parent phod_fx_fury07
+  endnode
+doneanim off phod_fx_fury07
+
+#MAXANIM ASCII
+newanim on2off phod_fx_fury07
+  length 0.0333333
+  transtime 0
+  animroot phod_fx_fury07
+  node dummy phod_fx_fury07
+    parent NULL
+  endnode
+  node emitter OmenEmitter259
+    parent phod_fx_fury07
+    birthratekey 2
+         0.0000000   20.0000000
+         0.0333333    0.0000000
+  endnode
+  node dummy phod_fx_fury07_pwk
+    parent phod_fx_fury07
+  endnode
+  node dummy U03_pwk_use01
+    parent phod_fx_fury07_pwk
+  endnode
+  node dummy U03_ground
+    parent phod_fx_fury07
+  endnode
+  node dummy U03_impact
+    parent phod_fx_fury07
+  endnode
+  node trimesh Rectangle124
+    parent phod_fx_fury07
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node dummy U03_head_hit
+    parent phod_fx_fury07
+  endnode
+  node dummy U03_hand
+    parent phod_fx_fury07
+  endnode
+  node dummy U03_head
+    parent phod_fx_fury07
+  endnode
+doneanim on2off phod_fx_fury07
+
+#MAXANIM ASCII
+newanim off2on phod_fx_fury07
+  length 0.0333333
+  transtime 0
+  animroot phod_fx_fury07
+  node dummy phod_fx_fury07
+    parent NULL
+  endnode
+  node emitter OmenEmitter259
+    parent phod_fx_fury07
+    birthratekey 2
+         0.0000000    0.0000000
+         0.0333333   20.0000000
+  endnode
+  node dummy phod_fx_fury07_pwk
+    parent phod_fx_fury07
+  endnode
+  node dummy U03_pwk_use01
+    parent phod_fx_fury07_pwk
+  endnode
+  node dummy U03_ground
+    parent phod_fx_fury07
+  endnode
+  node dummy U03_impact
+    parent phod_fx_fury07
+  endnode
+  node trimesh Rectangle124
+    parent phod_fx_fury07
+    ambient 0.2 0.2 0.2
+    diffuse 0.8 0.8 0.8
+    specular 0 0 0
+    shininess 1
+  endnode
+  node dummy U03_head_hit
+    parent phod_fx_fury07
+  endnode
+  node dummy U03_hand
+    parent phod_fx_fury07
+  endnode
+  node dummy U03_head
+    parent phod_fx_fury07
+  endnode
+doneanim off2on phod_fx_fury07
+
+donemodel phod_fx_fury07

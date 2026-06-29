@@ -1,0 +1,30 @@
+#Exported from 3ds max by MDL Plug-in Suite 1.0b
+#http://www.bricksbuilder.com/nwn/utils/
+#MAXMODEL ASCII
+# model: skeeball
+filedependancy Unknown
+node trimesh PLC_X07_wg
+  parent skeeball_pwk
+  position 0.00544922 0.211753 0
+  orientation 0 0 0 0
+  wirecolor 0.554688 0.554688 0.554688
+  ambient 0 0 0
+  diffuse 0 0 0
+  specular 0 0 0
+  shininess 0
+  bitmap NULL
+  verts 4
+    -0.358398 -1.2992 0
+    0.555686 -1.27764 0
+    -0.352568 1.30944 0
+    0.543463 1.31665 0
+  faces 2
+    2 0 3  1  0 0 0  7
+    1 3 0  1  0 0 0  7
+endnode
+node dummy X07_pwk_use01
+  parent skeeball_pwk
+  position 0.562643 1.24411 0.0250727
+  orientation 0 0 -1 -3.14159
+  wirecolor 0.554688 0.554688 0.554688
+endnode

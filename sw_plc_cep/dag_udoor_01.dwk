@@ -1,0 +1,202 @@
+# Exported from NWmax 0.8 b50 at 9/29/2005 8:24:47 PM
+# dwk file
+#
+#NWmax DWKMESH  ASCII
+node dummy 01_DWK_dp_closed_01
+  parent DAG_UDoor_01_DWK
+  position -0.881352 0.347784 0.0200041
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.239216 0.52549 0.0235294 
+endnode
+node dummy 01_DWK_dp_closed_02
+  parent DAG_UDoor_01_DWK
+  position -0.881352 -0.341635 0.0200041
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.239216 0.52549 0.0235294 
+endnode
+node dummy 01_DWK_dp_open1_01
+  parent DAG_UDoor_01_DWK
+  position 1.11418 1.77983 0.0200041
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.239216 0.52549 0.0235294 
+endnode
+node dummy 01_DWK_dp_open1_02
+  parent DAG_UDoor_01_DWK
+  position 1.05552 1.70902 0.0200041
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.239216 0.52549 0.0235294 
+endnode
+node dummy 01_DWK_dp_open2_01
+  parent DAG_UDoor_01_DWK
+  position 0.986581 -1.68622 0.0200041
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.239216 0.52549 0.0235294 
+endnode
+node dummy 01_DWK_dp_open2_02
+  parent DAG_UDoor_01_DWK
+  position 1.03206 -1.75405 0.0200041
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.239216 0.52549 0.0235294 
+endnode
+node trimesh 01_DWK_wg_closed
+  parent DAG_UDoor_01_DWK
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.721569 0.894118 0.6 
+  multimaterial 20
+    Dirt
+    Obscuring
+    Grass
+    Stone
+    Wood
+    Water
+    Nonwalk
+    Transparent
+    Carpet
+    Metal
+    Puddles
+    Swamp
+    Mud
+    Leaves
+    Lava
+    BottomlessPit
+    DeepWater
+    Door
+    Snow
+    Sand
+  ambient 0.0 0.0 0.0 
+  diffuse 0.705882 0.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 10.0
+  bitmap Nonwalk
+  verts 8
+    -1.0 -0.2 3.0
+    -1.0 0.2 0.0
+    -1.0 -0.2 0.0
+    -1.0 0.2 3.0
+    1.0 -0.2 3.0
+    1.0 -0.2 0.0
+    1.0 0.2 0.0
+    1.0 0.2 3.0
+  faces 12
+    0 1 2  0  0 0 0  7
+    0 3 1  0  0 0 0  7
+    4 2 5  0  0 0 0  7
+    4 0 2  0  0 0 0  7
+    6 4 5  0  0 0 0  7
+    6 7 4  0  0 0 0  7
+    3 6 1  0  0 0 0  7
+    3 7 6  0  0 0 0  7
+    1 5 2  0  0 0 0  7
+    1 6 5  0  0 0 0  7
+    4 3 0  0  0 0 0  7
+    4 7 3  0  0 0 0  7
+endnode
+node trimesh 01_DWK_wg_open1
+  parent DAG_UDoor_01_DWK
+  position 0.888777 0.844661 0.0
+  orientation 0.0 0.0 1.0 -1.65806
+  wirecolor 0.721569 0.894118 0.6 
+  multimaterial 20
+    Dirt
+    Obscuring
+    Grass
+    Stone
+    Wood
+    Water
+    Nonwalk
+    Transparent
+    Carpet
+    Metal
+    Puddles
+    Swamp
+    Mud
+    Leaves
+    Lava
+    BottomlessPit
+    DeepWater
+    Door
+    Snow
+    Sand
+  ambient 0.0 0.0 0.0 
+  diffuse 0.705882 0.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 10.0
+  bitmap Nonwalk
+  verts 8
+    -1.0 -0.2 3.0
+    -1.0 0.2 0.0
+    -1.0 -0.2 0.0
+    -1.0 0.2 3.0
+    1.0 -0.2 3.0
+    1.0 -0.2 0.0
+    1.0 0.2 0.0
+    1.0 0.2 3.0
+  faces 12
+    0 1 2  0  0 0 0  7
+    0 3 1  0  0 0 0  7
+    4 2 5  0  0 0 0  7
+    4 0 2  0  0 0 0  7
+    6 4 5  0  0 0 0  7
+    6 7 4  0  0 0 0  7
+    3 6 1  0  0 0 0  7
+    3 7 6  0  0 0 0  7
+    1 5 2  0  0 0 0  7
+    1 6 5  0  0 0 0  7
+    4 3 0  0  0 0 0  7
+    4 7 3  0  0 0 0  7
+endnode
+node trimesh 01_DWK_wg_open2
+  parent DAG_UDoor_01_DWK
+  position 0.861859 -0.820439 0.0
+  orientation 0.0 0.0 -1.0 -1.63188
+  wirecolor 0.721569 0.894118 0.6 
+  multimaterial 20
+    Dirt
+    Obscuring
+    Grass
+    Stone
+    Wood
+    Water
+    Nonwalk
+    Transparent
+    Carpet
+    Metal
+    Puddles
+    Swamp
+    Mud
+    Leaves
+    Lava
+    BottomlessPit
+    DeepWater
+    Door
+    Snow
+    Sand
+  ambient 0.0 0.0 0.0 
+  diffuse 0.705882 0.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 10.0
+  bitmap Nonwalk
+  verts 8
+    -1.0 -0.2 3.0
+    -1.0 0.2 0.0
+    -1.0 -0.2 0.0
+    -1.0 0.2 3.0
+    1.0 -0.2 3.0
+    1.0 -0.2 0.0
+    1.0 0.2 0.0
+    1.0 0.2 3.0
+  faces 12
+    0 1 2  0  0 0 0  7
+    0 3 1  0  0 0 0  7
+    4 2 5  0  0 0 0  7
+    4 0 2  0  0 0 0  7
+    6 4 5  0  0 0 0  7
+    6 7 4  0  0 0 0  7
+    3 6 1  0  0 0 0  7
+    3 7 6  0  0 0 0  7
+    1 5 2  0  0 0 0  7
+    1 6 5  0  0 0 0  7
+    4 3 0  0  0 0 0  7
+    4 7 3  0  0 0 0  7
+endnode

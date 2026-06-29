@@ -1,0 +1,30 @@
+#Exported from 3ds max by MDL Plug-in Suite 1.0b
+#http://www.bricksbuilder.com/nwn/utils/
+#MAXMODEL ASCII
+# model: LATH_SCRYORB
+filedependancy LATH_SCRYORB.max
+node trimesh LATH_SCRYORB_pwk
+  parent LATH_SCRYORB_pwk
+  position 0 0 0
+  orientation 0 0 0 0
+  wirecolor 0.00390625 0.00390625 0.00390625
+  ambient 0 0 0
+  diffuse 0 0 0
+  specular 0 0 0
+  shininess 1
+  bitmap NULL
+  render 0
+  Shadow 0
+  beaming 0
+  transparencyhint 0
+  tilefade 0
+  rotatetexture 0
+  verts 4
+    0.7 0.7 0
+    -0.7 0.7 0
+    0.7 -0.7 0
+    -0.7 -0.7 0
+  faces 2
+    2 0 3  1  0 0 0  0
+    1 3 0  1  0 0 0  0
+endnode

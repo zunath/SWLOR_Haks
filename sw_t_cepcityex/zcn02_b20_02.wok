@@ -1,0 +1,27 @@
+# Rewritten by CleanModels 3 Version 3.2.2.1 Tue Nov 03 18:01:49 2009
+#MAXWALKMESH  ASCII
+beginwalkmeshgeom zcn02_b20_02
+node aabb plane429
+  parent zcn02_b20_02
+  ambient 0.2000000 0.2000000 0.2000000
+  diffuse 0.8000000 0.8000000 0.8000000
+  specular 0 0 0
+  shininess 1
+  shadow 0
+  transparencyhint 0
+  bitmap NULL
+  orientation 0 0 0 0
+  position 0 0 0
+  verts 4
+    -5 5 -3.5000000
+    -5 -5 -3.5000000
+    5 5 -3.5000000
+    5 -5 -3.5000000
+  faces 2
+    0 1 2 1 0 0 0 17
+    3 2 1 1 0 0 0 17
+  aabb     -5 -5 -3.5000000 5 5 -3.5000000 -1
+    -5 -5 -3.5000000 5 5 -3.5000000 0
+    -5 -5 -3.5000000 5 5 -3.5000000 1
+endnode
+endwalkmeshgeom zcn02_b20_02

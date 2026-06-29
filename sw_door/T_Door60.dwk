@@ -1,0 +1,27 @@
+#MAXDOOR ASCII
+# model: T_Door60_DWK 
+filedependancy udp1-doorsonly02.max
+node dummy 60_DWK_dp_open2_01 
+  parent T_Door60_DWK 
+  position -0.924269 -0.950494 0.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.423529 0.0313726 0.533333  
+endnode
+node dummy 60_DWK_dp_open1_01 
+  parent T_Door60_DWK 
+  position -0.961836 0.928439 0.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.341176 0.878431 0.560784  
+endnode
+node dummy 60_DWK_dp_closed_01 
+  parent T_Door60_DWK 
+  position 0.713138 0.100578 0.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.52549 0.431373 0.0313726  
+endnode
+node dummy 60_DWK_dp_closed_02 
+  parent T_Door60_DWK 
+  position 0.702044 -0.110862 0.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.101961 0.694118 0.345098  
+endnode

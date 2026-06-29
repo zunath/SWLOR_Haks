@@ -1,0 +1,27 @@
+# Rewritten by CleanModels 3 Version 3.2.2.1 Thu Dec 18 11:39:33 2008
+#MAXWALKMESH  ASCII
+beginwalkmeshgeom zkw01_a05_01
+node aabb wlk
+  parent zkw01_a05_01
+  ambient 0.2000000 0.2000000 0.2000000
+  diffuse 0.8000000 0.8000000 0.8000000
+  specular 0 0 0
+  shininess 1
+  shadow 0
+  transparencyhint 0
+  bitmap NULL
+  orientation 0 0 0 0
+  position 0 0 0
+  verts 4
+    -5 5 -0.4921875
+    -5 -5 -0.4921875
+    5 5 -0.4921875
+    5 -5 -0.4921875
+  faces 2
+    0 1 2 1 0 0 0 6
+    3 2 1 1 0 0 0 6
+  aabb     -5 -5 -0.4921875 5 5 -0.4921875 -1
+    -5 -5 -0.4921875 5 5 -0.4921875 0
+    -5 -5 -0.4921875 5 5 -0.4921875 1
+endnode
+endwalkmeshgeom zkw01_a05_01

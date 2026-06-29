@@ -1,0 +1,320 @@
+#Exported from 3ds max by MDL Plug-in Suite 1.0b
+#http://www.bricksbuilder.com/nwn/utils/
+#MAXMODEL ASCII
+# model: vim_lok_afk
+filedependancy newafk.max
+newmodel vim_lok_afk
+setsupermodel vim_lok_afk NULL
+classification Effect
+setanimationscale 1.0
+#MAXGEOM  ASCII
+beginmodelgeom vim_lok_afk
+node dummy vim_lok_afk
+  parent NULL
+endnode
+node dummy Dummy01
+  parent vim_lok_afk
+  position 0 -0.00071072 0
+  orientation 0 0 0 0
+  wirecolor 0.0273438 0.0273438 0.0273438
+endnode
+node emitter NWNEmitter01
+  parent Dummy01
+  position 0.000150644 -0.395682 0
+  orientation 0 0 0 0
+  wirecolor 0.695313 0.695313 0.695313
+    colorStart 1 1 1
+    colorEnd 1 1 1
+    alphaStart 1
+    alphaEnd 0
+    sizeStart 0.01
+    sizeEnd 0.4
+    sizeStart_y 0
+    sizeEnd_y 0
+    frameStart 0
+    frameEnd 15
+    birthrate 3
+    spawnType 0
+    lifeExp 4
+    mass 0.16
+    spread 0.523599
+    particleRot 0
+    velocity 0.1
+    randvel 0.05
+    fps 1
+    random 0
+    inherit 0
+    inherit_local 0
+    inherit_part 0
+    inheritvel 0
+    xsize 0
+    ysize 0
+    bounce 1
+    bounce_co 0
+    loop 0
+    update Fountain
+    render Normal
+    Blend Lighten
+    update_sel 1
+    render_sel 1
+    blend_sel 3
+    deadspace 0
+    opacity 0.5
+    blurlength 1
+    lightningDelay 0
+    lightningRadius 0
+    lightningScale 0
+    blastRadius 0
+    blastLength 0
+    twosidedtex 1
+    p2p 0
+    p2p_sel 1
+    p2p_type Bezier
+    p2p_bezier2 0
+    p2p_bezier3 0
+    combinetime 0
+    drag 0
+    grav 0
+    threshold 0
+    texture fxpa_lokafk
+    xgrid 1
+    ygrid 1
+    affectedByWind 1
+    m_isTinted 0
+    renderorder 0
+    Splat 0
+endnode
+node emitter NWNEmitter02
+  parent Dummy01
+  position 0.000150644 -0.395682 0
+  orientation 0 0 0 0
+  wirecolor 0.695313 0.695313 0.695313
+    colorStart 0.988235 1 0.133333
+    colorEnd 0.705882 0.698039 0.494118
+    alphaStart 1
+    alphaEnd 0
+    sizeStart 0.05
+    sizeEnd 0.1
+    sizeStart_y 0
+    sizeEnd_y 0
+    frameStart 0
+    frameEnd 0
+    birthrate 30
+    spawnType 0
+    lifeExp 2.98792
+    mass 0.1
+    spread 0
+    particleRot 0
+    velocity 0
+    randvel 0
+    fps 1
+    random 0
+    inherit 0
+    inherit_local 0
+    inherit_part 0
+    inheritvel 0
+    xsize 0
+    ysize 0
+    bounce 1
+    bounce_co 0
+    loop 0
+    update Fountain
+    render Normal
+    Blend Lighten
+    update_sel 1
+    render_sel 1
+    blend_sel 3
+    deadspace 0
+    opacity 0.5
+    blurlength 1
+    lightningDelay 0
+    lightningRadius 0
+    lightningScale 0
+    blastRadius 0
+    blastLength 0
+    twosidedtex 0
+    p2p 0
+    p2p_sel 1
+    p2p_type Bezier
+    p2p_bezier2 0
+    p2p_bezier3 0
+    combinetime 0
+    drag 0
+    grav 0
+    threshold 0
+    texture fxpa_dot02
+    xgrid 1
+    ygrid 1
+    affectedByWind 1
+    m_isTinted 0
+    renderorder 0
+    Splat 0
+endnode
+node emitter NWNEmitter03
+  parent Dummy01
+  position 0.000150644 0.402605 0
+  orientation 0 0 0 0
+  wirecolor 0.695313 0.695313 0.695313
+    colorStart 0.988235 1 0.133333
+    colorEnd 0.705882 0.698039 0.494118
+    alphaStart 1
+    alphaEnd 0
+    sizeStart 0.05
+    sizeEnd 0.1
+    sizeStart_y 0
+    sizeEnd_y 0
+    frameStart 0
+    frameEnd 0
+    birthrate 30
+    spawnType 0
+    lifeExp 2.98792
+    mass 0.1
+    spread 0
+    particleRot 0
+    velocity 0
+    randvel 0
+    fps 1
+    random 0
+    inherit 0
+    inherit_local 0
+    inherit_part 0
+    inheritvel 0
+    xsize 0
+    ysize 0
+    bounce 1
+    bounce_co 0
+    loop 0
+    update Fountain
+    render Normal
+    Blend Lighten
+    update_sel 1
+    render_sel 1
+    blend_sel 3
+    deadspace 0
+    opacity 0.5
+    blurlength 1
+    lightningDelay 0
+    lightningRadius 0
+    lightningScale 0
+    blastRadius 0
+    blastLength 0
+    twosidedtex 0
+    p2p 0
+    p2p_sel 1
+    p2p_type Bezier
+    p2p_bezier2 0
+    p2p_bezier3 0
+    combinetime 0
+    drag 0
+    grav 0
+    threshold 0
+    texture fxpa_dot02
+    xgrid 1
+    ygrid 1
+    affectedByWind 1
+    m_isTinted 0
+    renderorder 0
+    Splat 0
+endnode
+node emitter NWNEmitter04
+  parent Dummy01
+  position 0.000150644 0.402605 0
+  orientation 0 0 0 0
+  wirecolor 0.695313 0.695313 0.695313
+    colorStart 1 1 1
+    colorEnd 1 1 1
+    alphaStart 1
+    alphaEnd 0
+    sizeStart 0.01
+    sizeEnd 0.4
+    sizeStart_y 0
+    sizeEnd_y 0
+    frameStart 0
+    frameEnd 15
+    birthrate 3
+    spawnType 0
+    lifeExp 4
+    mass 0.16
+    spread 0.523599
+    particleRot 0
+    velocity 0.1
+    randvel 0.05
+    fps 1
+    random 0
+    inherit 0
+    inherit_local 0
+    inherit_part 0
+    inheritvel 0
+    xsize 0
+    ysize 0
+    bounce 1
+    bounce_co 0
+    loop 0
+    update Fountain
+    render Normal
+    Blend Lighten
+    update_sel 1
+    render_sel 1
+    blend_sel 3
+    deadspace 0
+    opacity 0.5
+    blurlength 1
+    lightningDelay 0
+    lightningRadius 0
+    lightningScale 0
+    blastRadius 0
+    blastLength 0
+    twosidedtex 1
+    p2p 0
+    p2p_sel 1
+    p2p_type Bezier
+    p2p_bezier2 0
+    p2p_bezier3 0
+    combinetime 0
+    drag 0
+    grav 0
+    threshold 0
+    texture fxpa_lokafk
+    xgrid 1
+    ygrid 1
+    affectedByWind 1
+    m_isTinted 0
+    renderorder 0
+    Splat 0
+endnode
+endmodelgeom vim_lok_afk
+
+#MAXANIM ASCII
+newanim default vim_lok_afk
+  length 1.96667
+  transtime 0.25
+  animroot vim_lok_afk
+node dummy vim_lok_afk
+  parent NULL
+endnode
+node dummy Dummy01
+  parent vim_lok_afk
+    orientationkey
+      0  0 0 0 0
+      0.3  0 0 1 0.958452
+      0.633333  0 0 1 2.02303
+      0.966667  0 0 1 3.08761
+      1.3  0 0 1 4.15219
+      1.63333  0 0 -1 1.06641
+      1.96667  -0.000155896 0 -1 0.00183362
+    endlist
+endnode
+node emitter NWNEmitter01
+  parent Dummy01
+endnode
+node emitter NWNEmitter02
+  parent Dummy01
+endnode
+node emitter NWNEmitter03
+  parent Dummy01
+endnode
+node emitter NWNEmitter04
+  parent Dummy01
+endnode
+doneanim default vim_lok_afk
+donemodel vim_lok_afk

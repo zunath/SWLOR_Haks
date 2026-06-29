@@ -1,0 +1,46 @@
+# Exported from NWmax 0.7 at 9/4/2005 13:15:23
+# mdl file
+#
+#NWmax MODEL ASCII
+# model: PLC_PwrConda
+filedependancy Unknown
+newmodel PLC_PwrConda
+setsupermodel PLC_PwrConda NULL
+classification Character
+setanimationscale 1.0
+#NWmax GEOM  ASCII
+beginmodelgeom PLC_PwrConda
+node dummy PLC_PwrConda
+  parent NULL
+endnode
+node trimesh Box01
+  parent PLC_PwrConda
+  position 0.00723063 -0.0218855 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.0235294 0.52549 0.227451 
+  bitmap NULL
+  verts 8
+    -0.632711 -0.126542 0.0
+    0.632711 -0.126542 0.0
+    -0.632711 0.126542 0.0
+    0.632711 0.126542 0.0
+    -0.632711 -0.126542 0.0949067
+    0.632711 -0.126542 0.0949067
+    -0.632711 0.126542 0.0949067
+    0.632711 0.126542 0.0949067
+  faces 12
+    0 2 3  2  0 0 0  2
+    3 1 0  2  0 0 0  2
+    4 5 7  4  0 0 0  1
+    7 6 4  4  0 0 0  1
+    0 1 5  8  0 0 0  5
+    5 4 0  8  0 0 0  5
+    1 3 7  16  0 0 0  4
+    7 5 1  16  0 0 0  4
+    3 2 6  32  0 0 0  6
+    6 7 3  32  0 0 0  6
+    2 0 4  64  0 0 0  3
+    4 6 2  64  0 0 0  3
+endnode
+endmodelgeom PLC_PwrConda
+donemodel PLC_PwrConda

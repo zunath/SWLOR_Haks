@@ -1,0 +1,36 @@
+#MAXDOOR ASCII
+# model: DLP_V01_pwk 
+filedependancy chest.max
+node dummy V01_pwk_use01 
+  parent DLP_V01_pwk 
+  position 0.0139566 -0.773154 0.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.776471 0.878431 0.341176  
+endnode
+node trimesh dlp_v01_wg 
+  parent DLP_V01_pwk 
+  position -0.0221402 -0.0295203 0.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.333333 0.109804 0.694118  
+    bitmap NULL
+    verts 4
+     -0.6 -0.4 -4.57764e-007
+     0.6 -0.4 -4.57764e-007
+     -0.6 0.4 -4.57764e-007
+     0.6 0.4 -4.57764e-007
+    faces 2
+     3 2 1  0  0 0 0  1
+     0 1 2  0  0 0 0  1
+endnode
+node dummy V01_pwk_use02 
+  parent DLP_V01_pwk 
+  position 0.811712 -0.0082959 0.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.776471 0.878431 0.341176  
+endnode
+node dummy V01_pwk_use03 
+  parent DLP_V01_pwk 
+  position -0.847495 0.00190044 0.0
+  orientation  0.0 0.0 0.0  0.0
+  wirecolor 0.776471 0.878431 0.341176  
+endnode

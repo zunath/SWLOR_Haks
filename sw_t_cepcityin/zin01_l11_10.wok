@@ -1,0 +1,27 @@
+# Rewritten by CleanModels 3 Version 3.2.2.1 Fri Dec 05 23:23:48 2008
+#MAXWALKMESH  ASCII
+beginwalkmeshgeom zin01_l11_10
+node aabb line287
+  parent zin01_l11_10
+  ambient 0.5880000 0.5880000 0.5880000
+  diffuse 0.6000000 0.3400000 0.1600000
+  specular 0 0 0
+  shininess 10
+  shadow 0
+  transparencyhint 0
+  bitmap NULL
+  orientation 0 0 0 0
+  position 0 0 0
+  verts 4
+    -5 -5 0
+    5 -5 0
+    5 5 0
+    -5 5 0
+  faces 2
+    0 1 2 1 0 0 0 5
+    3 0 2 1 0 0 0 5
+  aabb     -5 -5 0 5 5 0 -1
+    -5 -5 0 5 5 0 1
+    -5 -5 0 5 5 0 0
+endnode
+endwalkmeshgeom zin01_l11_10

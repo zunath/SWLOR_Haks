@@ -1,0 +1,170 @@
+#MAXMODEL ASCII
+# model: Jz_billet03
+filedependancy Jz_billet03.max
+newmodel Jz_billet03
+setsupermodel Jz_billet03 NULL
+classification CHARACTER
+setanimationscale 1
+#MAXGEOM  ASCII
+beginmodelgeom Jz_billet03
+node dummy Jz_billet03
+  parent NULL
+endnode
+node dummy Group01
+  parent Jz_billet03
+  position 0.00373377 -0.000268346 0.00638588
+  orientation 0 0 0 0
+endnode
+node trimesh Dessous
+  parent Group01
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 10
+  bitmap jz_billets
+  verts 4
+      -0.0331500   -0.0780000    0.0000000
+      -0.0331500    0.0780000    0.0000000
+       0.0331500    0.0780000    0.0000000
+       0.0331500   -0.0780000    0.0000000
+  tverts 4
+       0.5878670    0.7538860  0
+       0.8787950    0.7539790  0
+       0.8789810    0.8772230  0
+       0.5875870    0.8771290  0
+  faces 2
+    0 1 2  1  0 1 2   2
+    2 3 0  1  2 3 0   2
+  position 0 0 -0.006
+  orientation 0 0 0 0
+  scale 1
+  alpha 1
+endnode
+node trimesh Devant
+  parent Group01
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 10
+  bitmap jz_billets
+  verts 4
+       0.0331500    0.0780000    0.0000000
+      -0.0331500    0.0780000    0.0000000
+      -0.0331500    0.0780000    0.0120000
+       0.0331500    0.0780000    0.0120000
+  tverts 4
+       0.0000418    0.5078810  0
+       0.3242240    0.5078150  0
+       0.3242760    0.5428780  0
+       0.0000830    0.5429960  0
+  faces 2
+    0 1 2  1  0 1 2   6
+    2 3 0  1  2 3 0   6
+  position 0 0 -0.006
+  orientation 0 0 0 0
+  scale 1
+  alpha 1
+endnode
+node trimesh Dos
+  parent Group01
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 10
+  bitmap jz_billets
+  verts 4
+      -0.0331500   -0.0780000    0.0000000
+       0.0331500   -0.0780000    0.0000000
+       0.0331500   -0.0780000    0.0120000
+      -0.0331500   -0.0780000    0.0120000
+  tverts 4
+       0.4728490    0.7189010  0
+       0.5858380    0.7187920  0
+       0.5857920    0.7499470  0
+       0.4728930    0.7500310  0
+  faces 2
+    0 1 2  1  0 1 2   5
+    2 3 0  1  2 3 0   5
+  position 0 0 -0.006
+  orientation 0 0 0 0
+  scale 1
+  alpha 1
+endnode
+node trimesh Droite
+  parent Group01
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 10
+  bitmap jz_billets
+  verts 4
+       0.0331500   -0.0780000    0.0000000
+       0.0331500    0.0780000    0.0000000
+       0.0331500    0.0780000    0.0120000
+       0.0331500   -0.0780000    0.0120000
+  tverts 4
+       0.2968750    0.7187500  0
+       0.5859380    0.7187500  0
+       0.5859370    0.7539060  0
+       0.2968750    0.7539060  0
+  faces 2
+    0 1 2  1  0 1 2   4
+    2 3 0  1  2 3 0   4
+  position 0 0 -0.006
+  orientation 0 0 0 0
+  scale 1
+  alpha 1
+endnode
+node trimesh face01
+  parent Group01
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 10
+  bitmap jz_billets
+  verts 4
+      -0.0331500   -0.0780000    0.0120000
+       0.0331500   -0.0780000    0.0120000
+       0.0331500    0.0780000    0.0120000
+      -0.0331500    0.0780000    0.0120000
+  tverts 4
+       0.2968700    0.9999900  0
+       0.2969150    0.8789330  0
+       0.5859300    0.8789610  0
+       0.5859390    1.0000100  0
+  faces 2
+    0 1 2  1  0 1 2   1
+    2 3 0  1  2 3 0   1
+  position 0 0 -0.006
+  orientation 0 0 0 0
+  scale 1
+  alpha 1
+endnode
+node trimesh Gauche
+  parent Group01
+  ambient 1 1 1
+  diffuse 1 1 1
+  specular 0 0 0
+  shininess 10
+  bitmap jz_billets
+  verts 4
+      -0.0331500    0.0780000    0.0000000
+      -0.0331500   -0.0780000    0.0000000
+      -0.0331500   -0.0780000    0.0120000
+      -0.0331500    0.0780000    0.0120000
+  tverts 4
+       0.2968400    0.7189250  0
+       0.5859700    0.7188410  0
+       0.5859920    0.7502390  0
+       0.2968620    0.7506580  0
+  faces 2
+    0 1 2  1  0 1 2   3
+    2 3 0  1  2 3 0   3
+  position 0 0 -0.006
+  orientation 0 0 0 0
+  scale 1
+  alpha 1
+endnode
+endmodelgeom Jz_billet03
+
+donemodel Jz_billet03

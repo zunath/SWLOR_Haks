@@ -1,0 +1,221 @@
+# Alternative Door Forms
+# gaoneng        August 21, 2006
+# centre-part dark oak
+#
+#NWmax DWKMESH  ASCII
+node dummy 36_DWK_dp_closed_01
+  parent zdr_double_a36_DWK
+  position 0 1.5 0
+  orientation 1 0 0 0
+  wirecolor 0.52549 0.431373 0.0313726 
+endnode
+node dummy 36_DWK_dp_closed_02
+  parent zdr_double_a36_DWK
+  position 0 -1.5 0
+  orientation 1 0 0 0
+  wirecolor 0.894118 0.721569 0.6 
+endnode
+node dummy 36_DWK_dp_open1_01
+  parent zdr_double_a36_DWK
+  position 0 0.75 0
+  orientation 1 0 0 0
+  wirecolor 0.52549 0.431373 0.0313726 
+endnode
+node dummy 36_DWK_dp_open2_01
+  parent zdr_double_a36_DWK
+  position 0 -0.75 0
+  orientation 1 0 0 0
+  wirecolor 0.52549 0.431373 0.0313726 
+endnode
+node trimesh 36_DWK_wg_closed
+  parent zdr_double_a36_DWK
+  position 0 0 0
+  orientation 1 0 0 0
+  wirecolor 0.101961 0.694118 0.101961 
+  multimaterial 20
+    dirt
+    obscuring
+    grass
+    stone
+    wood
+    water
+    nonwalk
+    transparent
+    carpet
+    metal
+    puddles
+    swamp
+    mud
+    leaves
+    lava
+    bottomlesspit
+    deepwater
+    door
+    snow
+    sand
+  ambient 0.588 0.588 0.588 
+  diffuse 0.705882 0 1 
+  specular 0 0 0 
+  shininess 10.0
+  bitmap nonwalk
+  verts 8
+    -1 -0.125 0
+    1 -0.125 0
+    -1 0.125 0
+    1 0.125 0
+    -1 -0.125 3.0
+    1 -0.125 3.0
+    -1 0.125 3.0
+    1 0.125 3.0
+  faces 10
+    4 5 7  0  0 0 0  7
+    7 6 4  0  0 0 0  7
+    0 1 5  0  0 0 0  7
+    5 4 0  0  0 0 0  7
+    1 3 7  0  0 0 0  7
+    7 5 1  0  0 0 0  7
+    3 2 6  0  0 0 0  7
+    6 7 3  0  0 0 0  7
+    2 0 4  0  0 0 0  7
+    4 6 2  0  0 0 0  7
+endnode
+node trimesh 36_DWK_wg_open1
+  parent zdr_double_a36_DWK
+  position 0 0 0
+  orientation 1 0 0 0
+  wirecolor 0.101961 0.694118 0.101961 
+  multimaterial 20
+    dirt
+    obscuring
+    grass
+    stone
+    wood
+    water
+    nonwalk
+    transparent
+    carpet
+    metal
+    puddles
+    swamp
+    mud
+    leaves
+    lava
+    bottomlesspit
+    deepwater
+    door
+    snow
+    sand
+  ambient 0.588 0.588 0.588 
+  diffuse 0.705882 0 1 
+  specular 0 0 0 
+  shininess 10.0
+  bitmap nonwalk
+  verts 16
+    0.85 0 0
+    1 0 0
+    0.765 1.06 0
+    0.9 1.06 0
+    0.85 0 3.0
+    1 0 3.0
+    0.765 1.06 3.0
+    0.9 1.06 3.0
+    -1 0 0
+    -0.85 0 0
+    -0.9 1.06 0
+    -0.765 1.06 0
+    -1 0 3.0
+    -0.85 0 3.0
+    -0.9 1.06 3.0
+    -0.765 1.06 3.0
+  faces 20
+    4 5 7  0  0 0 0  7
+    7 6 4  0  0 0 0  7
+    0 1 5  0  0 0 0  7
+    5 4 0  0  0 0 0  7
+    1 3 7  0  0 0 0  7
+    7 5 1  0  0 0 0  7
+    3 2 6  0  0 0 0  7
+    6 7 3  0  0 0 0  7
+    2 0 4  0  0 0 0  7
+    4 6 2  0  0 0 0  7
+    12 13 15  0  0 0 0  7
+    15 14 12  0  0 0 0  7
+    8 9 13  0  0 0 0  7
+    13 12 8  0  0 0 0  7
+    9 11 15  0  0 0 0  7
+    15 13 9  0  0 0 0  7
+    11 10 14  0  0 0 0  7
+    14 15 11  0  0 0 0  7
+    10 8 12  0  0 0 0  7
+    12 14 10  0  0 0 0  7
+endnode
+node trimesh 36_DWK_wg_open2
+  parent zdr_double_a36_DWK
+  position 0 0 0
+  orientation 0 0 -1 -3.14159
+  wirecolor 0.101961 0.694118 0.101961 
+  multimaterial 20
+    dirt
+    obscuring
+    grass
+    stone
+    wood
+    water
+    nonwalk
+    transparent
+    carpet
+    metal
+    puddles
+    swamp
+    mud
+    leaves
+    lava
+    bottomlesspit
+    deepwater
+    door
+    snow
+    sand
+  ambient 0.588 0.588 0.588 
+  diffuse 0.705882 0 1 
+  specular 0 0 0 
+  shininess 10.0
+  bitmap nonwalk
+  verts 16
+    0.85 0 0
+    1 0 0
+    0.765 1.06 0
+    0.9 1.06 0
+    0.85 0 3.0
+    1 0 3.0
+    0.765 1.06 3.0
+    0.9 1.06 3.0
+    -1 0 0
+    -0.85 0 0
+    -0.9 1.06 0
+    -0.765 1.06 0
+    -1 0 3.0
+    -0.85 0 3.0
+    -0.9 1.06 3.0
+    -0.765 1.06 3.0
+  faces 20
+    4 5 7  0  0 0 0  7
+    7 6 4  0  0 0 0  7
+    0 1 5  0  0 0 0  7
+    5 4 0  0  0 0 0  7
+    1 3 7  0  0 0 0  7
+    7 5 1  0  0 0 0  7
+    3 2 6  0  0 0 0  7
+    6 7 3  0  0 0 0  7
+    2 0 4  0  0 0 0  7
+    4 6 2  0  0 0 0  7
+    12 13 15  0  0 0 0  7
+    15 14 12  0  0 0 0  7
+    8 9 13  0  0 0 0  7
+    13 12 8  0  0 0 0  7
+    9 11 15  0  0 0 0  7
+    15 13 9  0  0 0 0  7
+    11 10 14  0  0 0 0  7
+    14 15 11  0  0 0 0  7
+    10 8 12  0  0 0 0  7
+    12 14 10  0  0 0 0  7
+endnode

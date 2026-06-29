@@ -1,0 +1,76 @@
+#MAXMODEL ASCII
+# model: WSwKa_fxfog
+filedependancy WSwKa_fxfog.max
+newmodel WSwKa_fxfog
+setsupermodel WSwKa_fxfog NULL
+setanimationscale 1
+#MAXGEOM  ASCII
+beginmodelgeom WSwKa_fxfog
+node dummy WSwKa_fxfog
+  parent NULL
+  #part-number 0
+endnode
+node emitter g_WSwGs_V_Acid
+  parent WSwKa_fxfog
+  #part-number 1
+  p2p 0
+  p2p_sel 1
+  affectedByWind 0
+  m_isTinted 0
+  bounce 0
+  random 0
+  inherit 1
+  inheritvel 0
+  inherit_local 0
+  splat 0
+  inherit_part 0
+  renderorder 0
+  spawntype 0
+  update Fountain
+  render Normal
+  blend Lighten
+  texture fxpa_flare
+  xgrid 1
+  ygrid 1
+  loop 0
+  deadspace 0
+  twosidedtex 0
+  blastRadius 0
+  blastLength 0
+  position 0 0.404419005 0.0219288003
+  orientation -1 0 0 -0.0872664973
+  colorStart 0.5 0.5 0.5
+  colorEnd 0.0 0.5 0.0
+  alphaStart 0.2
+  alphaEnd 0.0
+  sizeStart 0
+  sizeEnd 0.400000006
+  sizeStart_y 0
+  sizeEnd_y 0
+  frameStart 0
+  frameEnd 0
+  birthrate 25
+  lifeExp 1.5
+  mass 0
+  spread 2.26892996
+  particleRot 0
+  velocity 0
+  randvel 0.0500000007
+  fps 0
+  xsize 6
+  ysize 62
+  bounce_co 0
+  blurlength 10
+  lightningDelay 0
+  lightningRadius 0
+  lightningScale 0
+  p2p_bezier2 0
+  p2p_bezier3 0
+  combinetime 0
+  drag 0
+  grav 0
+  threshold 0
+endnode
+endmodelgeom WSwKa_fxfog
+
+donemodel WSwKa_fxfog

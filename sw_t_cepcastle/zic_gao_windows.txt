@@ -1,0 +1,270 @@
+===============================================================================
+CASTLE INTERIOR WINDOWS release d
+===============================================================================
+
+gaoneng                         last updated April 30, 2006
+http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=6283
+
+===============================================================================
+
+
+
+===============================================================================
+ TABLE OF CONTENT
+===============================================================================
+ 
+ Quick Installation
+ For Players
+ For Builders
+ Content
+ Redistribution
+ Version History
+ Contact
+
+
+
+===============================================================================
+ QUICK INSTALLATION
+===============================================================================
+
+There are several files included in this download. Simply unrar this archive to
+a temporary folder and drop the following files into the appropriate folder in
+your NWN directory. This is typically located at C:\Program Files\NWN\
+
+gao_ticwindows.hak                  \
+gao_winplc.hak                       > to the \hak folder
+gao_winplccep.hak                   /
+
+DEMO - Castle Interior Windows.mod   > to the \modules folder
+
+Once these files are in the correct location, you should be able to see
+"DEMO - Castle Interior Windows" as an available and playable module when you
+launch the game and go under Custom Modules.
+
+
+
+===============================================================================
+ FOR PLAYERS
+===============================================================================
+
+If you are reading this, it probably means Castle Interior Windows is a
+required resource for a module you are playing. Simply follow the installation
+guide above and you're good to go. The DEMO module is optional and not
+required, although there are some fun stuff inside, including a random maze
+generator, that you might want to check out if you're really bored. :)
+
+
+
+===============================================================================
+ FOR BUILDERS
+===============================================================================
+
+Simply follow the installation guide above and these additional instructions
+below to gain access to the Castle Interior Windows content.
+
+Open up your module, go to Edit -> Module Properties -> Custom Content and add
+the appropriate haks to your custom content list.
+
+If you want the tileset add-ons, add gao_ticwindows to the list.
+If you want the extra placeables, add gao_winplc to the list.
+If you want both, add both.
+
+If you want to use these placeables in conjuction with CEP, you'll also need to
+add gao_winplccep to the list. Make sure it is right on top of the list above
+the CEP haks as well the gao_winplc hak. (This is only compatible with CEP 1.52
+and below.)
+
+If you want to use these placeables in conjuction with other placeable haks,
+you'll need to consolidate your own placeables.2da and add that to your own
+hak. For assistance on this matter, refer to the Custom Content forum at
+Bioware's website.
+
+Click OK to rebuild. If you've added gao_ticwindows, you should now see several
+extra entries on your Castle Interior tileset palette. If you've added
+gao_winplc, you should now see several extra entries prefixed with a "-" sign
+in your placeables appearance drop-down when you edit any placeable's
+properties.
+
+
+
+===============================================================================
+ CONTENT
+===============================================================================
+
+Castle Interior Windows adds some 90 over custom tiles to the standard Castle
+Interior tileset, as well as a few just-for-fun accesssory type placeables.
+
+
+==================
+gao_ticwindows.hak
+==================
+
+This hak contains all the models, walkmeshes, 2da, set and itp required for the
+Castle Interior Windows tileset add-on. Following is the list of features this
+hak adds to the Castle Interior tileset.
+
+[ Terrain ]
+Window (crosser)
+
+[ Feature ]
+Library Corner Window
+Bedroom with Window
+Jail Room with Window
+Stone Arrow Loops
+
+[ Group ]
+Turret Interior (1x2)
+Bedroom 1x2 with Window
+
+The Window crosser punches holes in walls to create windows. It is useable in
+conjuction with any combination of Library, Prison, Rich, Stone, Corridor and
+Doorway tiles. It does not work on Storage tiles. For most tiles, Main Light 2
+is situated behind the window to simulate natural lighting. For some tiles
+with additional windows, Main Light 1 is also relocated outside.
+
+The day/night cycling of these exterior views are in-sync with your module's 
+dawn/dusk hour settings (accessible from Module Properties -> Advanced), and
+the animation is automatic IF AND ONLY IF "CYCLE DAY AND NIGHT" IS ENABLED. By
+default, interior tilesets are set to "Always Dark," which prevents day/night
+cycling from happening. To change this setting, go to Area Properties -> Visual
+-> Customize Environment and select the "Cycle Day and Dark" radio button.
+
+The beds in the Bedrooms are walkable - meaning you can sleep on them. Refer to
+the DEMO for a sample script on setting up a bed for use if you don't already
+know how.
+
+Additionally, some tiles in the original tileset do not have any furniture-free
+variant - so, several extra furniture-tiles have been added for the Rich, Stone
+and Library terrains. Doesn't cover everything, only the really distracting
+ones. After all, this isn't the main focus of Castle Interior Windows. ;)
+
+
+==============
+gao_winplc.hak
+==============
+
+This hak contains the optional accessory placeables models, walkmeshes,
+textures and placeables.2da. These are not required for Castle Interior Windows
+to function.
+
+[ Placeables ]
+Label                                 Model
+"- Curtain, Full"                     GLC_T01
+"- Curtain, Drawn Left"               GLC_T02
+"- Curtain, Drawn Right"              GLC_T03
+"- Grill, Oriental"                   GLC_T10
+"- Grill, Crosses"                    GLC_T11
+"- Grill, Industrial"                 GLC_T12
+"- Grill, Rose"                       GLC_T13
+"- Grill, Morning Glory"              GLC_T14
+"- Grill, Lilies"                     GLC_T15
+"- Grill, Tulips"                     GLC_T16
+"- Stained Glass, Rose"               GLC_T20
+"- Stained Glass, Morning Glory"      GLC_T21
+"- Stained Glass, Lilies"             GLC_T22
+"- Stained Glass, Tulips"             GLC_T23
+"- Mirror, Rose"                      GLC_T20
+"- Mirror, Morning Glory"             GLC_T21
+"- Mirror, Lilies"                    GLC_T22
+"- Mirror, Tulips"                    GLC_T23
+"- Skybox, Winter Clear"              GLC_T30
+"- Skybox, Desert Clear"              GLC_T31
+"- Skybox, Grass Storm"               GLC_T32
+
+Because of the "-" prefix, you should see these entries right on top of your
+placeable appearance drop-down.
+
+The Skyboxes placeables should only be used when you want the exterior view to
+be something else. The Activate state is day, Deactivate is night, and the dusk
+and dawn skies are embedded in the On2Off and Off2On animations - e.g when you
+command a skybox to ActionPlayAnimation ANIMATION_PLACEABLE_DEACTIVATE, it will
+go from day to dusk to night, if it's not already in the night state. The
+animation takes 20 seconds. These are rather high in poly count and really 
+should be used only if you have good reason to not use the built-in Grass Clear
+skybox.
+
+The curtains and stained glass placeables have translucent see-through meshes.
+While these are nice to look at, they are royal pain in the ass to make and get
+right. You may occasionally experience undesired filtering of objects when they
+move behind these placeables at certain camera angles. DO NOT report this issue
+to me. It's an engine limitation and as far as I know, there are no reliable
+workarounds. You just have to live with it.
+
+
+=================
+gao_winplccep.hak
+=================
+
+This hak should be used if you are using only CEP 1.52 and the placeables that
+come with Castle Interior Windows, and nothing else. Extremely unlikely, but
+this compatibility hak has to be included as a standard practice. This contains
+a CEP 1.52 compatible placeables.2da only - you will still need to attach
+gao_winplc.hak below this hak to get the actual content.
+
+
+
+===============================================================================
+ REDISTRIBUTION
+===============================================================================
+
+If you want to redistribute the content of Castle Interior Windows as part of a
+combo-pak or a module-specific hak, you may freely do so, but please give
+credit where credit is due. That means - my profile name "gaoneng", this
+package's title "Castle Interior Windows" and the url of the hosting site
+"http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=6283" must be displayed
+conspicuously somewhere in your documentation and download page.
+
+Additionally, for combo-paks, I ask that you include this entire readme file in
+your download so any queries and feedback regarding Castle Interior Windows can
+be forwarded to me directly.
+
+And if you want to be really nice, you can register a vote and post a comment
+on the message board so I know where Castle Interior Windows is going.
+
+
+
+===============================================================================
+ VERSION HISTORY
+===============================================================================
+
+release d    April 30, 2006
++ updated placeables.2da in gao_winplc.hak for 1.67 compatibility. CEP is not
+  currently compatible with 1.67, and so gao_winplccep.hak is not updated for
+  now
+
+release c    November 1, 2005
+final and complete (and hopefully bugfree) release, with
++ implemented support for all terrain permutations
++ fixed walkmeshes to prevent walking into the window frames
++ fixed window frames so they look larger and don't reveal illusion-breaking
+  gaps when viewed from the side. The walls are also slightly thicker now
++ lowered polygon counts on most tiles
++ new groups and features after gathering feedback from community
++ miscellaneous accessory placeables
+and some other little things. Basically this is the first complete release that
+is fully functional and without obvious defects
+
+release b    October 14, 2005
+implemented day/night animation
+
+release a    October 12, 2005
+beta demo release with limited tiles
+
+
+
+===============================================================================
+ CONTACT
+===============================================================================
+
+While I've thoroughly tested every single tile I made, I can only conclude that
+these tiles work as intended on my machine. If you encounter any odd issue,
+like fly-in-the-sky bad walkmesh or out-of-sync day/night animations, or if you
+discover any terrain permutation where the Window crosser does not work on, 
+please do submit a bug report with as much details as possible.
+
+All feedback can posted on the message board directly or forwarded to me via
+email at http://nwvault.ign.com/View.php?view=Hakpaks.Detail&id=6283
+
+
+
+gaoneng

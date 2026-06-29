@@ -1,0 +1,222 @@
+#MAXMODEL ASCII
+# model: wblnn_fxshgrn
+filedependancy wblnn_fxshgrn.max
+newmodel wblnn_fxshgrn
+setsupermodel wblnn_fxshgrn null
+setanimationscale 1
+#MAXGEOM  ASCII
+beginmodelgeom wblnn_fxshgrn
+node dummy wblnn_fxshgrn
+  parent NULL
+  #part-number 0
+endnode
+node emitter g_wswgs_v_elec_b01
+  parent wblnn_fxshgrn
+  #part-number 1
+  p2p 1
+  p2p_sel 1
+  affectedByWind 0
+  m_isTinted 0
+  bounce 0
+  random 0
+  inherit 1
+  inheritvel 0
+  inherit_local 0
+  splat 0
+  inherit_part 0
+  renderorder 0
+  spawntype 0
+  update Fountain
+  render Linked
+  blend Lighten
+  texture fxpa_lightning_g
+  xgrid 2
+  ygrid 2
+  loop 0
+  deadspace 0
+  twosidedtex 0
+  blastRadius 0
+  blastLength 0
+  position 0 0.198126003 -0.00185821997
+  orientation 0 -1 0 -3.14159012
+  colorStart 1 1 1
+  colorEnd 0.25 1.0 0.25
+  alphaStart 1
+  alphaEnd 0
+  sizeStart 0
+  sizeEnd 0.300000012
+  sizeStart_y 0
+  sizeEnd_y 0
+  frameStart 0
+  frameEnd 3
+  birthrate 20
+  lifeExp 1
+  mass 0
+  spread 0
+  particleRot 0
+  velocity 0
+  randvel 0
+  fps 12
+  xsize 20
+  ysize 25
+  bounce_co 0
+  blurlength 10
+  lightningDelay 0.0500000007
+  lightningRadius 0.0500000007
+  lightningScale 0.5
+  p2p_bezier2 0
+  p2p_bezier3 0
+  combinetime 10
+  drag 0.200000003
+  grav 0
+  threshold 0
+endnode
+node reference g_wswgs_v_elec_b_ref01
+  parent g_wswgs_v_elec_b01
+  #part-number 2
+  refModel fx_ref
+  reattachable 1
+  position 0 0 0
+  orientation 0 1 0 -1.57079995
+endnode
+node emitter g_wswgs_v_elec
+  parent wblnn_fxshgrn
+  #part-number 3
+  p2p 0
+  p2p_sel 1
+  affectedByWind 0
+  m_isTinted 0
+  bounce 0
+  random 0
+  inherit 1
+  inheritvel 0
+  inherit_local 0
+  splat 0
+  inherit_part 0
+  renderorder 0
+  spawntype 0
+  update Lightning
+  render Linked
+  blend Lighten
+  texture fxpa_lightning_g
+  xgrid 2
+  ygrid 2
+  loop 0
+  deadspace 0
+  twosidedtex 0
+  blastRadius 0
+  blastLength 0
+  position 0 0.0515030995 3.43036991e-005
+  orientation 1 -5.37643018e-007 0 -1.57079995
+  colorStart 1 1 1
+  colorEnd 0.25 1.0 0.25  
+  alphaStart 0.75
+  alphaEnd 0.5
+  sizeStart 0.100000001
+  sizeEnd 0.075000003
+  sizeStart_y 0
+  sizeEnd_y 0
+  frameStart 0
+  frameEnd 0
+  birthrate 5
+  lifeExp 1
+  mass 0
+  spread 0
+  particleRot 200
+  velocity 0
+  randvel 0
+  fps 0
+  xsize 6
+  ysize 6
+  bounce_co 0
+  blurlength 10
+  lightningDelay 0.0900000036
+  lightningRadius 0.0500000007
+  lightningScale 0
+  p2p_bezier2 0
+  p2p_bezier3 0
+  combinetime 0
+  drag 0
+  grav 0
+  threshold 0
+endnode
+node reference g_wswgs_v_elec_ref
+  parent g_wswgs_v_elec
+  #part-number 4
+  refModel fx_ref
+  reattachable 1
+  position -0.00832367968 -0.00485116011 0.285526007
+  orientation -1 3.31644003e-007 -2.13432003e-007 -3.14159012
+endnode
+node emitter g_wswgs_v_elec_b
+  parent wblnn_fxshgrn
+  #part-number 5
+  p2p 1
+  p2p_sel 1
+  affectedByWind 0
+  m_isTinted 0
+  bounce 0
+  random 0
+  inherit 1
+  inheritvel 0
+  inherit_local 0
+  splat 0
+  inherit_part 0
+  renderorder 0
+  spawntype 0
+  update Fountain
+  render Linked
+  blend Lighten
+  texture fxpa_lightning_g
+  xgrid 2
+  ygrid 2
+  loop 0
+  deadspace 0
+  twosidedtex 0
+  blastRadius 0
+  blastLength 0
+  position 0 0.189317003 -0.00185823999
+  orientation 0 -1 0 -1.57079995
+  colorStart 1 1 1
+  colorEnd 0.25 1.0 0.25
+  alphaStart 1
+  alphaEnd 0
+  sizeStart 0
+  sizeEnd 0.300000012
+  sizeStart_y 0
+  sizeEnd_y 0
+  frameStart 0
+  frameEnd 3
+  birthrate 20
+  lifeExp 1
+  mass 0
+  spread 0
+  particleRot 0
+  velocity 0
+  randvel 0
+  fps 12
+  xsize 20
+  ysize 25
+  bounce_co 0
+  blurlength 10
+  lightningDelay 0.0500000007
+  lightningRadius 0.0500000007
+  lightningScale 0.5
+  p2p_bezier2 0
+  p2p_bezier3 0
+  combinetime 10
+  drag 0.200000003
+  grav 0
+  threshold 0
+endnode
+node reference g_wswgs_v_elec_b_ref
+  parent g_wswgs_v_elec_b
+  #part-number 6
+  refModel fx_ref
+  reattachable 1
+  position 0 0 0
+  orientation 0 1 0 -1.57079995
+endnode
+endmodelgeom wblnn_fxshgrn
+
+donemodel wblnn_fxshgrn

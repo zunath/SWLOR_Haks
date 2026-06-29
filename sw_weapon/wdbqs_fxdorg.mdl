@@ -1,0 +1,137 @@
+#MAXMODEL ASCII
+# model: WDbQs_fxdorg
+filedependancy WDbQs_fxdorg.max
+newmodel WDbQs_fxdorg
+setsupermodel WDbQs_fxdorg NULL
+setanimationscale 1
+#MAXGEOM  ASCII
+beginmodelgeom WDbQs_fxdorg
+node dummy WDbQs_fxdorg
+  parent NULL
+  #part-number 0
+endnode
+node emitter g_WSwGs_V_Acid_b
+  parent WDbQs_fxdorg
+  #part-number 1
+  p2p 0
+  p2p_sel 1
+  affectedByWind 0
+  m_isTinted 0
+  bounce 1
+  random 0
+  inherit 0
+  inheritvel 0
+  inherit_local 0
+  splat 0
+  inherit_part 0
+  renderorder 0
+  spawntype 0
+  update Fountain
+  render Normal
+  blend Lighten
+  texture fxpa_flare
+  xgrid 1
+  ygrid 1
+  loop 0
+  deadspace 0
+  twosidedtex 0
+  blastRadius 0
+  blastLength 0
+  position 0 1.30270004 3.42798012e-005
+  orientation 0 -1 0 -1.57079995
+  colorStart 1.0 0.6863 0.0
+  colorEnd 0.8 0.54902 0.0
+  alphaStart 1
+  alphaEnd 1
+  sizeStart 0.075000003
+  sizeEnd 0.075000003
+  sizeStart_y 0
+  sizeEnd_y 0
+  frameStart 0
+  frameEnd 0
+  birthrate 2
+  lifeExp 2
+  mass 1.5
+  spread 0
+  particleRot 0
+  velocity 0
+  randvel 0
+  fps 0
+  xsize 5
+  ysize 20
+  bounce_co 0.200000003
+  blurlength 10
+  lightningDelay 0
+  lightningRadius 0
+  lightningScale 0
+  p2p_bezier2 0
+  p2p_bezier3 0
+  combinetime 0
+  drag 0
+  grav 0
+  threshold 0
+endnode
+node emitter g_WSwGs_V_Acid_b01
+  parent WDbQs_fxdorg
+  #part-number 3
+  p2p 0
+  p2p_sel 1
+  affectedByWind 0
+  m_isTinted 0
+  bounce 1
+  random 0
+  inherit 0
+  inheritvel 0
+  inherit_local 0
+  splat 0
+  inherit_part 0
+  renderorder 0
+  spawntype 0
+  update Fountain
+  render Normal
+  blend Lighten
+  texture fxpa_flare
+  xgrid 1
+  ygrid 1
+  loop 0
+  deadspace 0
+  twosidedtex 0
+  blastRadius 0
+  blastLength 0
+  position 0 -0.706641972 3.42798012e-005
+  orientation 0 -1 0 -1.57079995
+  colorStart 1.0 0.6863 0.0
+  colorEnd 0.8 0.54902 0.0
+  alphaStart 1
+  alphaEnd 1
+  sizeStart 0.075000003
+  sizeEnd 0.075000003
+  sizeStart_y 0
+  sizeEnd_y 0
+  frameStart 0
+  frameEnd 0
+  birthrate 2
+  lifeExp 2
+  mass 1.5
+  spread 0
+  particleRot 0
+  velocity 0
+  randvel 0
+  fps 0
+  xsize 5
+  ysize 20
+  bounce_co 0.200000003
+  blurlength 10
+  lightningDelay 0
+  lightningRadius 0
+  lightningScale 0
+  p2p_bezier2 0
+  p2p_bezier3 0
+  combinetime 0
+  drag 0
+  grav 0
+  threshold 0
+endnode
+endmodelgeom WDbQs_fxdorg
+
+donemodel WDbQs_fxdorg

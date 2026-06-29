@@ -1,0 +1,456 @@
+# Exported from blender at Sunday, 2016-01-24 12:55
+filedependancy unknown
+newmodel plc_arcirc_02rst
+setsupermodel plc_arcirc_02rst null
+classification CHARACTER
+setanimationscale 1.0
+beginmodelgeom plc_arcirc_02rst
+node dummy plc_arcirc_02rst
+  parent null
+endnode
+node trimesh box01
+  parent plc_arcirc_02rst
+  ambient 0.2 0.2 0.2
+  diffuse 0.8 0.8 0.8
+  specular 0 0 0
+  shininess 1
+  shadow 0
+  render 0
+  bitmap null
+  verts 8
+      -0.50000 -0.50000 -0.50000
+      -0.50000  0.50000 -0.50000
+       0.50000  0.50000 -0.50000
+       0.50000 -0.50000 -0.50000
+      -0.50000 -0.50000  0.50000
+       0.50000 -0.50000  0.50000
+       0.50000  0.50000  0.50000
+      -0.50000  0.50000  0.50000
+  faces 12
+    0 1 2  1  0 0 0  2
+    2 3 0  1  0 0 0  2
+    4 5 6  1  0 0 0  1
+    6 7 4  1  0 0 0  1
+    0 3 5  2  0 0 0  5
+    5 4 0  2  0 0 0  5
+    3 2 6  4  0 0 0  4
+    6 5 3  4  0 0 0  4
+    2 1 7  2  0 0 0  6
+    7 6 2  2  0 0 0  6
+    1 0 4  4  0 0 0  3
+    4 7 1  4  0 0 0  3
+  position 0.00 0.00 1.00
+  orientation 0 0 0 0
+  alpha 1
+  scale 1
+  selfillumcolor 0 0 0
+endnode
+node dummy arcirc_02rst_hand
+  parent plc_arcirc_02rst
+  position 0.10 0.00 1.00
+  orientation 0 0 0 0
+endnode
+node dummy arcirc_02rst_head
+  parent plc_arcirc_02rst
+  position 0.10 0.00 1.50
+  orientation 0 0 0 0
+endnode
+node dummy arcirc_02rst_head_hit
+  parent plc_arcirc_02rst
+  position 0.10 0.00 1.55
+  orientation 0 0 0 0
+endnode
+node dummy arcirc_02rst_impact
+  parent plc_arcirc_02rst
+  position 0.00 0.00 1.00
+  orientation 0 0 0 0
+endnode
+node dummy arcirc_02rst_ground
+  parent plc_arcirc_02rst
+  position 0.00 0.00 0.00
+  orientation 0 0 0 0
+endnode
+node emitter em_circle01
+  parent plc_arcirc_02rst
+  position  0.00  0.00  1.00
+  orientation  1.00000  0.00000  0.00000  0.78538
+  wirecolor 0.0 0.0 0.0
+  p2p 0
+  p2p_sel 1
+  affectedByWind 0
+  m_isTinted 0
+  bounce 0
+  random 0
+  inherit 1
+  inheritvel 0
+  inherit_local 0
+  inherit_part 0
+  splat 0
+  renderorder 0
+  spawntype 0
+  update Single
+  render Billboard_to_Local_Z
+  blend Lighten
+  texture plc_arcirc_02r
+  xgrid 1
+  ygrid 1
+  loop 0
+  deadspace 0
+  twosidedtex 1
+  blastRadius 0
+  blastLength 0
+  colorStart 1 1 1
+  colorEnd 1 1 1
+  alphaStart 1
+  alphaEnd 1
+  sizeStart 2.0
+  sizeEnd 10.0
+  sizeStart_y 0
+  sizeEnd_y 0
+  frameStart 0
+  frameEnd 0
+  birthrate 1
+  lifeExp -1
+  mass 0
+  spread 0
+  particleRot 0.09
+  velocity 0
+  randvel 0
+  fps 0
+  xsize 0
+  ysize 0
+  bounce_co 0
+  blurlength 10
+  lightningDelay 0
+  lightningRadius 0
+  lightningScale 0
+  p2p_bezier2 0
+  p2p_bezier3 0
+  combinetime 0
+  drag 0
+  grav 0
+  threshold 0
+endnode
+endmodelgeom plc_arcirc_02rst
+
+# ANIM ASCII
+newanim default plc_arcirc_02rst
+  length 0.0
+  transtime 0.0
+  animroot plc_arcirc_02rst
+  node dummy plc_arcirc_02rst
+    parent null
+  endnode
+  node trimesh box01
+    parent plc_arcirc_02rst
+  endnode
+  node dummy arcirc_02rst_hand
+    parent plc_arcirc_02rst
+  endnode
+  node dummy arcirc_02rst_head
+    parent plc_arcirc_02rst
+  endnode
+  node dummy arcirc_02rst_head_hit
+    parent plc_arcirc_02rst
+  endnode
+  node dummy arcirc_02rst_impact
+    parent plc_arcirc_02rst
+  endnode
+  node dummy arcirc_02rst_ground
+    parent plc_arcirc_02rst
+  endnode
+  node emitter em_circle01
+    parent plc_arcirc_02rst
+    alphaStartkey 1
+      0.00000 1.00000
+    alphaEndkey 1
+      0.00000 1.00000
+    sizeStartkey 1
+      0.00000 2.00000
+    sizeEndkey 1
+      0.00000 2.00000
+    birthratekey 1
+      0.00000 1.00000
+  endnode
+doneanim default plc_arcirc_02rst
+
+# ANIM ASCII
+newanim on plc_arcirc_02rst
+  length 1.0
+  transtime 0.0
+  animroot plc_arcirc_02rst
+  node dummy plc_arcirc_02rst
+    parent null
+  endnode
+  node trimesh box01
+    parent plc_arcirc_02rst
+  endnode
+  node dummy arcirc_02rst_hand
+    parent plc_arcirc_02rst
+  endnode
+  node dummy arcirc_02rst_head
+    parent plc_arcirc_02rst
+  endnode
+  node dummy arcirc_02rst_head_hit
+    parent plc_arcirc_02rst
+  endnode
+  node dummy arcirc_02rst_impact
+    parent plc_arcirc_02rst
+  endnode
+  node dummy arcirc_02rst_ground
+    parent plc_arcirc_02rst
+  endnode
+  node emitter em_circle01
+    parent plc_arcirc_02rst
+    alphaStartkey 5
+      0.00000 1.00000
+      0.03333 1.00000
+      0.43333 0.80000
+      0.96667 1.00000
+      1.00000 1.00000
+    alphaEndkey 5
+      0.00000 1.00000
+      0.03333 1.00000
+      0.43333 0.80000
+      0.96667 1.00000
+      1.00000 1.00000
+    sizeStartkey 2
+      0.00000 2.00000
+      1.00000 2.00000
+    sizeEndkey 2
+      0.00000 2.00000
+      1.00000 2.00000
+    birthratekey 2
+      0.00000 1.00000
+      1.00000 1.00000
+  endnode
+doneanim on plc_arcirc_02rst
+
+# ANIM ASCII
+newanim off plc_arcirc_02rst
+  length 0.0
+  transtime 0.0
+  animroot plc_arcirc_02rst
+  node dummy plc_arcirc_02rst
+    parent null
+  endnode
+  node trimesh box01
+    parent plc_arcirc_02rst
+  endnode
+  node dummy arcirc_02rst_hand
+    parent plc_arcirc_02rst
+  endnode
+  node dummy arcirc_02rst_head
+    parent plc_arcirc_02rst
+  endnode
+  node dummy arcirc_02rst_head_hit
+    parent plc_arcirc_02rst
+  endnode
+  node dummy arcirc_02rst_impact
+    parent plc_arcirc_02rst
+  endnode
+  node dummy arcirc_02rst_ground
+    parent plc_arcirc_02rst
+  endnode
+  node emitter em_circle01
+    parent plc_arcirc_02rst
+    alphaStartkey 1
+      0.00000 0.10000
+    alphaEndkey 1
+      0.00000 0.10000
+    sizeStartkey 1
+      0.00000 0.10000
+    sizeEndkey 1
+      0.00000 0.10000
+    birthratekey 1
+      0.00000 0.00000
+  endnode
+doneanim off plc_arcirc_02rst
+
+# ANIM ASCII
+newanim on2off plc_arcirc_02rst
+  length 1.0
+  transtime 0.25
+  animroot plc_arcirc_02rst
+  node dummy plc_arcirc_02rst
+    parent null
+  endnode
+  node trimesh box01
+    parent plc_arcirc_02rst
+  endnode
+  node dummy arcirc_02rst_hand
+    parent plc_arcirc_02rst
+  endnode
+  node dummy arcirc_02rst_head
+    parent plc_arcirc_02rst
+  endnode
+  node dummy arcirc_02rst_head_hit
+    parent plc_arcirc_02rst
+  endnode
+  node dummy arcirc_02rst_impact
+    parent plc_arcirc_02rst
+  endnode
+  node dummy arcirc_02rst_ground
+    parent plc_arcirc_02rst
+  endnode
+  node emitter em_circle01
+    parent plc_arcirc_02rst
+    alphaStartkey 2
+      0.00000 1.00000
+      1.00000 0.20000
+    alphaEndkey 2
+      0.00000 1.00000
+      1.00000 0.20000
+    sizeStartkey 2
+      0.00000 2.00000
+      1.00000 0.10000
+    sizeEndkey 2
+      0.00000 2.00000
+      1.00000 0.10000
+    birthratekey 2
+      0.00000 1.00000
+      1.00000 1.00000
+  endnode
+doneanim on2off plc_arcirc_02rst
+
+# ANIM ASCII
+newanim off2on plc_arcirc_02rst
+  length 1.0
+  transtime 0.25
+  animroot plc_arcirc_02rst
+  node dummy plc_arcirc_02rst
+    parent null
+  endnode
+  node trimesh box01
+    parent plc_arcirc_02rst
+  endnode
+  node dummy arcirc_02rst_hand
+    parent plc_arcirc_02rst
+  endnode
+  node dummy arcirc_02rst_head
+    parent plc_arcirc_02rst
+  endnode
+  node dummy arcirc_02rst_head_hit
+    parent plc_arcirc_02rst
+  endnode
+  node dummy arcirc_02rst_impact
+    parent plc_arcirc_02rst
+  endnode
+  node dummy arcirc_02rst_ground
+    parent plc_arcirc_02rst
+  endnode
+  node emitter em_circle01
+    parent plc_arcirc_02rst
+    alphaStartkey 2
+      0.00000 0.20000
+      1.00000 1.00000
+    alphaEndkey 2
+      0.00000 0.20000
+      1.00000 1.00000
+    sizeStartkey 2
+      0.00000 0.10000
+      1.00000 2.00000
+    sizeEndkey 2
+      0.00000 0.10000
+      1.00000 2.00000
+    birthratekey 2
+      0.00000 1.00000
+      1.00000 1.00000
+  endnode
+doneanim off2on plc_arcirc_02rst
+
+# ANIM ASCII
+newanim die plc_arcirc_02rst
+  length 0.66667
+  transtime 0.25
+  animroot plc_arcirc_02rst
+  node dummy plc_arcirc_02rst
+    parent null
+  endnode
+  node trimesh box01
+    parent plc_arcirc_02rst
+  endnode
+  node dummy arcirc_02rst_hand
+    parent plc_arcirc_02rst
+  endnode
+  node dummy arcirc_02rst_head
+    parent plc_arcirc_02rst
+  endnode
+  node dummy arcirc_02rst_head_hit
+    parent plc_arcirc_02rst
+  endnode
+  node dummy arcirc_02rst_impact
+    parent plc_arcirc_02rst
+  endnode
+  node dummy arcirc_02rst_ground
+    parent plc_arcirc_02rst
+  endnode
+  node emitter em_circle01
+    parent plc_arcirc_02rst
+    alphaStartkey 6
+      0.00000 1.00000
+      0.11000 0.40000
+      0.22000 0.80000
+      0.33000 0.20000
+      0.44000 0.40000
+      0.66667 0.00000
+    alphaEndkey 6
+      0.00000 1.00000
+      0.11000 0.40000
+      0.22000 0.80000
+      0.33000 0.20000
+      0.44000 0.40000
+      0.66667 0.00000
+    sizeStartkey 3
+      0.00000 10.00000
+      0.44000 10.00000
+      0.66667  0.10000
+    sizeEndkey 3
+      0.00000 10.00000
+      0.44000 10.00000
+      0.66667  0.10000
+  endnode
+doneanim die plc_arcirc_02rst
+
+# ANIM ASCII
+newanim dead plc_arcirc_02rst
+  length 0.0
+  transtime 0.0
+  animroot plc_arcirc_02rst
+  node dummy plc_arcirc_02rst
+    parent null
+  endnode
+  node trimesh box01
+    parent plc_arcirc_02rst
+  endnode
+  node dummy arcirc_02rst_hand
+    parent plc_arcirc_02rst
+  endnode
+  node dummy arcirc_02rst_head
+    parent plc_arcirc_02rst
+  endnode
+  node dummy arcirc_02rst_head_hit
+    parent plc_arcirc_02rst
+  endnode
+  node dummy arcirc_02rst_impact
+    parent plc_arcirc_02rst
+  endnode
+  node dummy arcirc_02rst_ground
+    parent plc_arcirc_02rst
+  endnode
+  node emitter em_circle01
+    parent plc_arcirc_02rst
+    alphaStartkey 1
+      0.00000 0.00000
+    alphaEndkey 1
+      0.00000 0.00000
+    sizeStartkey 1
+      0.00000 0.50000
+    sizeEndkey 1
+      0.00000 0.50000
+    birthratekey 1
+      0.00000 0.00000
+  endnode
+doneanim dead plc_arcirc_02rst
+
+donemodel plc_arcirc_02rst

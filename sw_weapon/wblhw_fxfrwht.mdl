@@ -1,0 +1,137 @@
+#MAXMODEL ASCII
+# model: WBlHw_fxfrwht
+filedependancy WBlHw_fxfrwht.max
+newmodel WBlHw_fxfrwht
+setsupermodel WBlHw_fxfrwht NULL
+setanimationscale 1
+#MAXGEOM  ASCII
+beginmodelgeom WBlHw_fxfrwht
+node dummy WBlHw_fxfrwht
+  parent NULL
+  #part-number 0
+endnode
+node emitter g_WSwGs_V_Fire
+  parent WBlHw_fxfrwht
+  #part-number 1
+  p2p 0
+  p2p_sel 1
+  affectedByWind 0
+  m_isTinted 0
+  bounce 0
+  random 0
+  inherit 1
+  inheritvel 0
+  inherit_local 0
+  splat 0
+  inherit_part 0
+  renderorder 0
+  spawntype 0
+  update Fountain
+  render Normal
+  blend Lighten
+  texture fxpa_flame99_wht
+  xgrid 4
+  ygrid 4
+  loop 0
+  deadspace 0
+  twosidedtex 0
+  blastRadius 0
+  blastLength 0
+  position 0 0.430115998 3.01552009e-005
+  orientation 0 -1 0 -1.57079995
+  colorStart 0.9647 0.9647 0.9647
+  colorEnd 0.8863 0.8863 0.8863
+  alphaStart 0.600000024
+  alphaEnd 0
+  sizeStart 0
+  sizeEnd 0.75
+  sizeStart_y 0
+  sizeEnd_y 0
+  frameStart 0
+  frameEnd 15
+  birthrate 10
+  lifeExp 2
+  mass 0
+  spread 0.174532995
+  particleRot 0
+  velocity 0
+  randvel 0
+  fps 16
+  xsize 35
+  ysize 20
+  bounce_co 0
+  blurlength 10
+  lightningDelay 0
+  lightningRadius 0
+  lightningScale 0
+  p2p_bezier2 0
+  p2p_bezier3 0
+  combinetime 0
+  drag 0
+  grav 0
+  threshold 0
+endnode
+node emitter g_WSwGs_V_Fire01
+  parent WBlHw_fxfrwht
+  #part-number 2
+  p2p 0
+  p2p_sel 1
+  affectedByWind 0
+  m_isTinted 0
+  bounce 0
+  random 0
+  inherit 1
+  inheritvel 0
+  inherit_local 0
+  splat 0
+  inherit_part 0
+  renderorder 0
+  spawntype 0
+  update Fountain
+  render Normal
+  blend Lighten
+  texture fxpa_flame99_wht
+  xgrid 4
+  ygrid 4
+  loop 0
+  deadspace 0
+  twosidedtex 0
+  blastRadius 0
+  blastLength 0
+  position 0 0.430992007 3.01552009e-005
+  orientation 1 -5.42268026e-007 0 -1.57079995
+  colorStart 0.9647 0.9647 0.9647
+  colorEnd 0.8863 0.8863 0.8863
+  alphaStart 0.600000024
+  alphaEnd 0
+  sizeStart 0
+  sizeEnd 0.75
+  sizeStart_y 0
+  sizeEnd_y 0
+  frameStart 0
+  frameEnd 15
+  birthrate 10
+  lifeExp 2
+  mass 0
+  spread 0.174532995
+  particleRot 0
+  velocity 0
+  randvel 0
+  fps 16
+  xsize 20
+  ysize 35
+  bounce_co 0
+  blurlength 10
+  lightningDelay 0
+  lightningRadius 0
+  lightningScale 0
+  p2p_bezier2 0
+  p2p_bezier3 0
+  combinetime 0
+  drag 0
+  grav 0
+  threshold 0
+endnode
+endmodelgeom WBlHw_fxfrwht
+
+donemodel WBlHw_fxfrwht

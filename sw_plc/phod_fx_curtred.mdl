@@ -1,0 +1,344 @@
+#Exported from 3ds max by MDL Plug-in Suite 1.0b
+#http://www.bricksbuilder.com/nwn/utils/
+#MAXMODEL ASCII
+# model: phod_fx_curtred
+filedependancy Unknown
+newmodel phod_fx_curtred
+setsupermodel phod_fx_curtred NULL
+classification Character
+setanimationscale 1.0
+#MAXGEOM  ASCII
+beginmodelgeom phod_fx_curtred
+node dummy phod_fx_curtred
+  parent NULL
+endnode
+node dummy a71_hand
+  parent phod_fx_curtred
+  position 0.00398437 -0.505195 0.934402
+  orientation 0 0 0 0
+  wirecolor 0.554688 0.554688 0.554688
+endnode
+node emitter OmenEmitter240
+  parent phod_fx_curtred
+  position -0.0218791 -0.0130566 0.112567
+  orientation 0 0 1 -0.516453
+  wirecolor 0.554688 0.554688 0.554688
+    colorStart 1 0 0
+    colorEnd 1 0 0
+    alphaStart 0.8
+    alphaEnd 0.2
+    sizeStart 0.2
+    sizeEnd 1.5
+    sizeStart_y 0
+    sizeEnd_y 0
+    frameStart 0
+    frameEnd 0
+    birthrate 50
+    spawnType 0
+    lifeExp 2.6
+    mass 1.4
+    spread 0
+    particleRot 0
+    velocity 0
+    randvel 0
+    fps 0
+    random 0
+    inherit 1
+    inherit_local 1
+    inherit_part 0
+    inheritvel 0
+    xsize 2
+    ysize 300
+    bounce 0
+    bounce_co 0
+    loop 0
+    update Fountain
+    render Motion_Blur
+    Blend Lighten
+    update_sel 1
+    render_sel 7
+    blend_sel 3
+    deadspace 0
+    opacity 0.5
+    blurlength 10
+    lightningDelay 0
+    lightningRadius 0
+    lightningScale 0
+    blastRadius 0
+    blastLength 0
+    twosidedtex 0
+    p2p 0
+    p2p_sel 1
+    p2p_type Bezier
+    p2p_bezier2 0
+    p2p_bezier3 0
+    combinetime 0
+    drag 0
+    grav 0
+    threshold 0
+    texture fxpa_ringwave
+    xgrid 1
+    ygrid 1
+    affectedByWind 0
+    m_isTinted 0
+    renderorder 0
+    Splat 0
+endnode
+node dummy a71_ground
+  parent phod_fx_curtred
+  position -0.00363281 0.0069873 0
+  orientation 0 0 0 0
+  wirecolor 0.554688 0.554688 0.554688
+endnode
+node dummy a71_head
+  parent phod_fx_curtred
+  position 0.00398437 0.0108252 0.88389
+  orientation 0 0 0 0
+  wirecolor 0.554688 0.554688 0.554688
+endnode
+node dummy a71_head_hit
+  parent phod_fx_curtred
+  position 0.00398437 0.0108252 0.402412
+  orientation 0 0 0 0
+  wirecolor 0.554688 0.554688 0.554688
+endnode
+node dummy a71_impact
+  parent phod_fx_curtred
+  position 0.00398437 0.011001 0.247026
+  orientation 0 0 0 0
+  wirecolor 0.554688 0.554688 0.554688
+endnode
+node trimesh Rectangle121
+  parent phod_fx_curtred
+  position -0.0305606 -0.00637451 0
+  orientation 0 0 0 0
+  wirecolor 0.601563 0.601563 0.601563
+  ambient 0.2 0.2 0.2
+  diffuse 0.8 0.8 0.8
+  specular 0 0 0
+  shininess 1
+  bitmap NULL
+  render 0
+  Shadow 0
+  beaming 0
+  transparencyhint 0
+  tilefade 0
+  rotatetexture 0
+  verts 8
+    -0.3 -0.3 0.952548
+    0.3 -0.3 0.952548
+    0.3 0.3 0.952548
+    -0.3 0.3 0.952548
+    -0.3 -0.3 0
+    0.3 -0.3 0
+    0.3 0.3 0
+    -0.3 0.3 0
+  faces 10
+    0 1 2  1  0 0 0  0
+    3 0 2  1  0 0 0  0
+    4 5 1  1  0 0 0  0
+    1 0 4  1  0 0 0  0
+    5 6 2  1  0 0 0  0
+    2 1 5  1  0 0 0  0
+    7 4 0  1  0 0 0  0
+    0 3 7  1  0 0 0  0
+    6 7 3  1  0 0 0  0
+    3 2 6  1  0 0 0  0
+  tverts 1
+    0 0 0
+endnode
+node trimesh Plane25
+  parent phod_fx_curtred
+  position -0.0066448 -0.0024186 0.02
+  orientation 0 0 0 0
+  wirecolor 0.339844 0.339844 0.339844
+  ambient 0 0 0
+  diffuse 0 0 0
+  specular 0 0 0
+  shininess 1
+  selfillumcolor 1 1 1
+  bitmap PLC_Trans
+  render 1
+  Shadow 0
+  beaming 0
+  transparencyhint 1
+  tilefade 0
+  rotatetexture 0
+  verts 4
+    -0.233315 0.287378 0
+    -0.233315 -0.287378 0
+    0.233315 0.287378 0
+    0.233315 -0.287378 0
+  faces 2
+    0 1 2  1  0 1 2  0
+    3 2 1  1  3 2 1  0
+  tverts 4
+    0.37856 0.220422 0
+    0.37856 0.0188535 0
+    0.748498 0.220422 0
+    0.748498 0.0188535 0
+endnode
+endmodelgeom phod_fx_curtred
+
+#MAXANIM ASCII
+newanim on phod_fx_curtred
+  length 0.0333333
+  transtime 0
+  animroot phod_fx_curtred
+node dummy phod_fx_curtred
+  parent NULL
+endnode
+node dummy a71_hand
+  parent phod_fx_curtred
+endnode
+node emitter OmenEmitter240
+  parent phod_fx_curtred
+    xsize 2
+    ysize 300
+    birthratekey
+      0  50
+      0.0333333  47
+    endlist
+endnode
+node dummy a71_ground
+  parent phod_fx_curtred
+endnode
+node dummy a71_head
+  parent phod_fx_curtred
+endnode
+node dummy a71_head_hit
+  parent phod_fx_curtred
+endnode
+node dummy a71_impact
+  parent phod_fx_curtred
+endnode
+node trimesh Rectangle121
+  parent phod_fx_curtred
+endnode
+node trimesh Plane25
+  parent phod_fx_curtred
+endnode
+doneanim on phod_fx_curtred
+
+#MAXANIM ASCII
+newanim off2on phod_fx_curtred
+  length 0.0333333
+  transtime 0
+  animroot phod_fx_curtred
+node dummy phod_fx_curtred
+  parent NULL
+endnode
+node dummy a71_hand
+  parent phod_fx_curtred
+endnode
+node emitter OmenEmitter240
+  parent phod_fx_curtred
+    xsizekey
+      0  -28
+      0.0333333  2
+    endlist
+    ysizekey
+      0  270
+      0.0333333  300
+    endlist
+    birthratekey
+      0  40
+      0.0333333  50
+    endlist
+endnode
+node dummy a71_ground
+  parent phod_fx_curtred
+endnode
+node dummy a71_head
+  parent phod_fx_curtred
+endnode
+node dummy a71_head_hit
+  parent phod_fx_curtred
+endnode
+node dummy a71_impact
+  parent phod_fx_curtred
+endnode
+node trimesh Rectangle121
+  parent phod_fx_curtred
+endnode
+node trimesh Plane25
+  parent phod_fx_curtred
+endnode
+doneanim off2on phod_fx_curtred
+
+#MAXANIM ASCII
+newanim on2off phod_fx_curtred
+  length 0.0333333
+  transtime 0
+  animroot phod_fx_curtred
+node dummy phod_fx_curtred
+  parent NULL
+endnode
+node dummy a71_hand
+  parent phod_fx_curtred
+endnode
+node emitter OmenEmitter240
+  parent phod_fx_curtred
+    birthratekey
+      0  47
+      0.0333333  40
+    endlist
+endnode
+node dummy a71_ground
+  parent phod_fx_curtred
+endnode
+node dummy a71_head
+  parent phod_fx_curtred
+endnode
+node dummy a71_head_hit
+  parent phod_fx_curtred
+endnode
+node dummy a71_impact
+  parent phod_fx_curtred
+endnode
+node trimesh Rectangle121
+  parent phod_fx_curtred
+endnode
+node trimesh Plane25
+  parent phod_fx_curtred
+endnode
+doneanim on2off phod_fx_curtred
+
+#MAXANIM ASCII
+newanim off phod_fx_curtred
+  length 0.0333333
+  transtime 0
+  animroot phod_fx_curtred
+node dummy phod_fx_curtred
+  parent NULL
+endnode
+node dummy a71_hand
+  parent phod_fx_curtred
+endnode
+node emitter OmenEmitter240
+  parent phod_fx_curtred
+    birthratekey
+      0  40
+      0.0333333  40
+    endlist
+endnode
+node dummy a71_ground
+  parent phod_fx_curtred
+endnode
+node dummy a71_head
+  parent phod_fx_curtred
+endnode
+node dummy a71_head_hit
+  parent phod_fx_curtred
+endnode
+node dummy a71_impact
+  parent phod_fx_curtred
+endnode
+node trimesh Rectangle121
+  parent phod_fx_curtred
+endnode
+node trimesh Plane25
+  parent phod_fx_curtred
+endnode
+doneanim off phod_fx_curtred
+donemodel phod_fx_curtred

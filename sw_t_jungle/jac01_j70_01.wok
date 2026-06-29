@@ -1,0 +1,50 @@
+# Exported from NWmax 0.7 at 9/6/2004 12:40:56 PM
+# wok file
+#
+#NWmax WALKMESH  ASCII
+beginwalkmeshgeom jac01_j70_01
+node aabb Plane452
+  parent jac01_j70_01
+  position 0.0 0.0 5e-007
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 1.0 1.0 1.0 
+  multimaterial 20
+    Dirt
+    Obscuring
+    Grass
+    Stone
+    Wood
+    Water
+    Nonwalk
+    Transparent
+    Carpet
+    Metal
+    Puddles
+    Swamp
+    Mud
+    Leaves
+    Lava
+    BottomlessPit
+    DeepWater
+    Door
+    Snow
+    Sand
+  ambient 0.0 0.0 0.0 
+  diffuse 0.0 0.752941 0.0 
+  specular 0.0 0.0 0.0 
+  shininess 11.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap Leaves
+  verts 4
+    -5.0 -5.0 0.0
+    5.0 -5.0 0.0
+    5.0 5.0 0.0
+    -5.0 5.0 0.0
+  faces 2
+    0 1 2  1  0 0 0  14
+    0 2 3  1  0 0 0  14
+    aabb         -5.0 -5.0 0.0 5.0 5.0 0.0 -1
+        -5.0 -5.0 0.0 5.0 5.0 0.0 1
+        -5.0 -5.0 0.0 5.0 5.0 0.0 0
+endnode
+endwalkmeshgeom jac01_j70_01

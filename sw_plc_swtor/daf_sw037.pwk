@@ -1,0 +1,24 @@
+node trimesh 037_wg
+  parent daf_sw037_pwk
+  position  0.00000  0.00000  0.00000
+  orientation  0.00000  1.00000  0.00000  0.00000
+  wirecolor 1.00 1.00 1.00
+  verts 4
+     0.09094  0.07766  0.00000
+    -0.08774  0.07766  0.00000
+    -0.08774 -0.08383  0.00000
+     0.09094 -0.08383  0.00000
+  faces 2
+    1 3 0 1  0 0 0 0
+    1 2 3 2  0 0 0 0
+endnode
+node dummy p37_pwk_use01
+  parent daf_sw037_pwk
+  position  0.00000 -0.58000  0.00000
+  orientation  0.00000  1.00000  0.00000  0.00000
+endnode
+node dummy p37_pwk_use02
+  parent daf_sw037_pwk
+  position  0.00000  0.58000  0.00000
+  orientation  0.00000  1.00000  0.00000  0.00000
+endnode

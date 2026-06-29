@@ -1,0 +1,31 @@
+#Exported from 3ds max by MDL Plug-in Suite 1.0b
+#http://www.bricksbuilder.com/nwn/utils/
+#MAXMODEL ASCII
+# model: st_shelf01
+filedependancy Unknown
+node trimesh Plane02
+  parent st_shelf01_pwk
+  position 0.0440456 -0.000897739 0
+  orientation 0 0 -1 -3.14159
+  wirecolor 0.722656 0.722656 0.722656
+  ambient 0.03125 0.238281 0.539063
+  diffuse 0.03125 0.238281 0.539063
+  specular 0 0 0
+  shininess 1
+  bitmap NULL
+  verts 7
+    -2.03788 -0.725629 0
+    2.11086 -0.0879639 0
+    0.0568574 -0.699371 0
+    -2.03788 0.16795 0
+    1.784 0.756275 0
+    -0.0234204 -0.306613 0
+    -0.0290374 0.236139 0
+  faces 6
+    6 3 0  1  0 0 0  7
+    2 5 0  1  0 0 0  7
+    2 1 5  1  0 0 0  7
+    1 4 5  1  0 0 0  7
+    6 5 4  1  0 0 0  7
+    5 6 0  1  0 0 0  7
+endnode

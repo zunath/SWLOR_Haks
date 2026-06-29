@@ -1,0 +1,25 @@
+# Exported from NWmax 0.8 b53 at 3/12/2006 3:38:00 PM
+# pwk file
+#
+#NWmax PWKMESH  ASCII
+node trimesh zlc_o51_wg
+  parent zlc_o51_pwk
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.521569 0.0156863 0.0156863 
+  bitmap NULL
+  verts 4
+    -0.671358 -1.77525 0.0
+    0.852314 -1.77525 0.0
+    -0.671358 1.77525 0.0
+    0.852314 1.77525 0.0
+  faces 2
+    2 0 3  1  0 0 0  7
+    1 3 0  1  0 0 0  7
+endnode
+node dummy o51_pwk_use01
+  parent zlc_o51_pwk
+  position -0.620277 0.636155 0.688494
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.882353 0.345098 0.780392 
+endnode

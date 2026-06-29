@@ -1,0 +1,67 @@
+# Exported from NWmax 0.5-beta at 4/14/2004 11:44:53 PM
+# mdl file
+#
+#NWmaxMODEL ASCII
+# model: tds10_i10
+filedependancy Unknown
+newmodel tds10_i10
+setsupermodel tds10_i10 NULL
+classification Character
+setanimationscale 0.8
+#NWmaxGEOM  ASCII
+beginmodelgeom tds10_i10
+node dummy tds10_i10
+  parent NULL
+endnode
+node trimesh Node0
+  parent tds10_i10
+  position -0.871424 -0.24563 0.235415
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 1.0 1.0 1.0 
+  tilefade 0
+  scale 1.0
+  render 1
+  Shadow 1
+  beaming 0
+  inheritcolor 0
+  selfillumcolor 0.0 0.0 0.0 
+  rotatetexture 0
+  alpha 1.0
+  transparencyhint 0
+  center undefined
+  gizmo SubAnim:Gizmo
+  ambient 1.0 1.0 1.0 
+  diffuse 1.0 1.0 1.0 
+  specular 0.0 0.0 0.0 
+  shininess 2.0
+  selfillumcolor 0.0 0.0 0.0 
+  bitmap grs_ivy-01
+  verts 8
+    0.626293 0.374216 -0.059073
+    0.0 0.0 -0.171728
+    1.21309 -0.14191 -0.145693
+    0.212638 0.438158 -0.153223
+    0.66283 0.756019 -0.160426
+    1.12655 0.595743 -0.140622
+    1.83121 0.57987 -0.171931
+    2.18907 0.075162 -0.171728
+  faces 7
+    0 1 2  0  0 1 2  1
+    3 1 0  1  3 1 0  1
+    4 3 0  2  4 3 0  1
+    0 5 4  3  0 5 4  1
+    2 5 0  4  2 5 0  1
+    2 6 5  5  2 6 5  1
+    2 7 6  6  2 7 6  1
+  tverts 8
+    0.5 0.25 0
+    0.5 0.5 0
+    0.25 0.25 0
+    0.580078 0.339844 0
+    0.75 0.000977 0
+    0.5 0.000977 0
+    0.25 0.000977 0
+    0.000977 0.000977 0
+endnode
+endmodelgeom tds10_i10
+donemodel tds10_i10
