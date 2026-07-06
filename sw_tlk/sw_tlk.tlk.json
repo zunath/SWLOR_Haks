@@ -6499,7 +6499,7 @@
     },
     {
       "id": 1624,
-      "text": "Instantly deals weapon DMG + 15 to your target."
+      "text": "On your next hit, deal weapon DMG + 10."
     },
     {
       "id": 1625,
@@ -6507,7 +6507,7 @@
     },
     {
       "id": 1626,
-      "text": "Instantly deals weapon DMG + 45 to your target."
+      "text": "On your next hit, deal weapon DMG + 20."
     },
     {
       "id": 1627,
@@ -6563,7 +6563,7 @@
     },
     {
       "id": 1640,
-      "text": "Strike all enemies in front for weapon DMG + 25."
+      "text": "Deal weapon DMG + 10 in a 5m radius around you."
     },
     {
       "id": 1641,
@@ -6659,7 +6659,7 @@
     },
     {
       "id": 1664,
-      "text": "Channel for up to 6s. Allies within 5m gain +15% Physical Defense, you gain +25% Enmity for 1 minute."
+      "text": "Channel for up to 30 seconds. While channeling you and any allies within 5m gain 20% damage reduction."
     },
     {
       "id": 1665,
@@ -16827,7 +16827,7 @@
     },
     {
       "id": 4206,
-      "text": "Grants +8 Mind Resistance rating, +8 Trauma Resistance rating, and +8 Mobility Resistance rating."
+      "text": "Grants +15 Mind Resistance rating, +15 Trauma Resistance rating, and +15 Mobility Resistance rating."
     },
     {
       "id": 4207,
@@ -16835,7 +16835,7 @@
     },
     {
       "id": 4208,
-      "text": "Restore 4 STM when your shield deflects an attack."
+      "text": "Restore 4 STM when your shield deflects an attack. This can only trigger once every 6 seconds."
     },
     {
       "id": 4209,
@@ -16843,7 +16843,7 @@
     },
     {
       "id": 4210,
-      "text": "Auto-attacks have 10% chance to deal +8 DMG."
+      "text": "Auto-attacks have a 15% chance to deal +10 DMG."
     },
     {
       "id": 4211,
@@ -16895,7 +16895,7 @@
     },
     {
       "id": 4223,
-      "text": "Savage Cleave deals +20 DMG to enemies within 5m and restores 2 STM per secondary target hit, up to 8 STM."
+      "text": "Deal weapon DMG + 20 in a 5m radius around you and restores 2 STM per secondary target hit."
     },
     {
       "id": 4224,
@@ -17075,7 +17075,7 @@
     },
     {
       "id": 4268,
-      "text": "Strikes in a line for weapon DMG + 24. Enemies hit generate +20% Enmity toward you for 12 seconds."
+      "text": "Strike all enemies within 3m for weapon DMG + 25. Enemies hit generate +25% Enmity toward you for 30 seconds."
     },
     {
       "id": 4269,
@@ -17083,7 +17083,7 @@
     },
     {
       "id": 4270,
-      "text": "Channel briefly. You gain +30% Physical Defense and nearby allies gain +10% Physical Defense for 30 seconds."
+      "text": "Channel for up to 30 seconds. While channeling you and any allies within 5m gain 35% damage reduction."
     },
     {
       "id": 4271,
@@ -17091,7 +17091,7 @@
     },
     {
       "id": 4272,
-      "text": "Strikes in a line for weapon DMG + 36. Enemies hit generate +25% Enmity toward you for 12 seconds."
+      "text": "Strike all enemies within 3m for weapon DMG + 30. Enemies hit generate +25% Enmity toward you for 30 seconds."
     },
     {
       "id": 4273,
@@ -17099,7 +17099,7 @@
     },
     {
       "id": 4274,
-      "text": "Bashes your current target for weapon DMG + 38 and inflicts Dazed for 8 seconds."
+      "text": "On your next hit, deal weapon DMG and an additional instance of damage equal to 10% of your Physical Defense."
     },
     {
       "id": 4275,
@@ -20959,11 +20959,11 @@
     },
     {
       "id": 5239,
-      "text": "When you successfully deflect an attack with a shield, gain +3% Evasion and +3% Enmity for 30 seconds."
+      "text": "When you deflect an attack with a shield, reduce the active cooldown of Shield Bash by 2 seconds."
     },
     {
       "id": 5240,
-      "text": "When reduced below 25% HP, gain +40% Physical Defense for 30 seconds. Once per 5min."
+      "text": "When reduced below 25% HP, gain 40% Physical Defense for 30 seconds. Once per 5 minutes."
     },
     {
       "id": 5241,
@@ -21135,7 +21135,7 @@
     },
     {
       "id": 5283,
-      "text": "Deals weapon DMG + 32. Inflicts Exposed which reduces Defense by 25% for 30 seconds."
+      "text": "Deals weapon DMG + 32. Inflicts Exposed which reduces Defense by 15% for 30 seconds."
     },
     {
       "id": 5284,
@@ -21147,19 +21147,19 @@
     },
     {
       "id": 5286,
-      "text": "Bashes your current attack target for 12 DMG and inflicts Dazed for 30 seconds. Requires an active attack target."
+      "text": "On your next hit, deal weapon DMG and an additional instance of damage equal to 4% of your Physical Defense."
     },
     {
       "id": 5287,
-      "text": "Bashes your current attack target for 24 DMG and inflicts Dazed for 30 seconds. Requires an active attack target."
+      "text": "On your next hit, deal weapon DMG and an additional instance of damage equal to 6% of your Physical Defense."
     },
     {
       "id": 5288,
-      "text": "Bashes your current attack target for 36 DMG, inflicts Stunned for 30 seconds, and inflicts Dazed for 30 seconds. Requires an active attack target."
+      "text": "On your next hit, deal weapon DMG and an additional instance of damage equal to 8% of your Physical Defense."
     },
     {
       "id": 5289,
-      "text": "Instantly deals weapon DMG + 30 to your target. Riot Blade also deals +12 DMG to enemies within 5m."
+      "text": "On your next hit, deal weapon DMG + 15."
     },
     {
       "id": 5290,
@@ -87219,11 +87219,11 @@
     },
     {
       "id": 192542,
-      "text": "Grants +10 Shield Deflection and +4% Physical Defense while a shield is equipped."
+      "text": "Grants +15 Shield Deflection and +8% Physical Defense while a shield is equipped."
     },
     {
       "id": 192543,
-      "text": "Strike in a line for weapon DMG + 20. Enemies hit generate +25% Enmity toward you for 30 seconds."
+      "text": "Strike all enemies within 3m for weapon DMG + 15. Enemies hit generate +25% Enmity toward you for 30 seconds."
     },
     {
       "id": 192544,
