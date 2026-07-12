@@ -19299,7 +19299,7 @@
     },
     {
       "id": 4824,
-      "text": "Target ally becomes your ward for 45 seconds. They gain +15% Defense, +15% Force Defense, and +15% Guard, and 50% of their incoming damage is shared to you while within 8m. Only one ward or guard link may protect a target."
+      "text": "Glacial Corrosion"
     },
     {
       "id": 4825,
@@ -19516,10 +19516,6 @@
     {
       "id": 4878,
       "text": "When Bleed expires on a target, your next thrown ability within 18 seconds costs 3 less STM."
-    },
-    {
-      "id": 4879,
-      "text": "Deals weapon DMG + 45 to a single target. Sundered targets take +30 DMG and suffer Sunder for 45 seconds."
     },
     {
       "id": 4880,
@@ -87988,6 +87984,802 @@
     {
       "id": 192552,
       "text": "Protective Presence"
+    },
+    {
+      "id": 192553,
+      "text": "Mimicry"
+    },
+    {
+      "id": 192554,
+      "text": "Toxic Spit"
+    },
+    {
+      "id": 192555,
+      "text": "Deals 10 poison DMG plus PER scaling to a single target. Inflicts Poison for 30 seconds."
+    },
+    {
+      "id": 192556,
+      "text": "Frost Spit"
+    },
+    {
+      "id": 192557,
+      "text": "Deals 10 ice DMG plus PER scaling to a single target. Inflicts Freezing for 6 seconds."
+    },
+    {
+      "id": 192558,
+      "text": "Raking Claws"
+    },
+    {
+      "id": 192559,
+      "text": "Deals 10 physical DMG plus AGI scaling to a single target. Inflicts Hamstring for 12 seconds."
+    },
+    {
+      "id": 192560,
+      "text": "Sonic Shriek"
+    },
+    {
+      "id": 192561,
+      "text": "Deals 13 sonic DMG plus WIL scaling to an 8m cone. Inflicts Disoriented for 12 seconds."
+    },
+    {
+      "id": 192562,
+      "text": "Tail Sweep"
+    },
+    {
+      "id": 192563,
+      "text": "Deals 13 physical DMG plus MGT scaling to a 4.5m radius. Inflicts Dazed for 4 seconds."
+    },
+    {
+      "id": 192564,
+      "text": "Static Web"
+    },
+    {
+      "id": 192565,
+      "text": "Deals 13 electrical DMG plus PER scaling to a 4.5m radius. Inflicts Shock for 10 seconds."
+    },
+    {
+      "id": 192566,
+      "text": "Goring Charge"
+    },
+    {
+      "id": 192567,
+      "text": "Deals 20 physical DMG plus MGT scaling to an 8m line. Inflicts Bleed for 10 seconds."
+    },
+    {
+      "id": 192568,
+      "text": "Toxic Cloud"
+    },
+    {
+      "id": 192569,
+      "text": "Deals 20 poison DMG plus PER scaling to a 4.5m radius. Inflicts Toxin for 15 seconds."
+    },
+    {
+      "id": 192570,
+      "text": "Scorching Breath"
+    },
+    {
+      "id": 192571,
+      "text": "Deals 28 fire DMG plus MGT scaling to an 8m cone. Inflicts Burn for 18 seconds."
+    },
+    {
+      "id": 192572,
+      "text": "Terrifying Bellow"
+    },
+    {
+      "id": 192573,
+      "text": "Inflicts Terrified on a 6m radius for 18 seconds."
+    },
+    {
+      "id": 192574,
+      "text": "Combat Analyzer"
+    },
+    {
+      "id": 192575,
+      "text": "Grants a combat analyzer capable of recording enemy creature techniques. Unlocks technique learning and the Techniques window. Provides 2 technique slots and lets you replicate Mimicry 1-14 techniques."
+    },
+    {
+      "id": 192576,
+      "text": "Technique Potency"
+    },
+    {
+      "id": 192577,
+      "text": "Improves the potency of your equipped techniques. (Rank 1)"
+    },
+    {
+      "id": 192578,
+      "text": "Analyzer Memory"
+    },
+    {
+      "id": 192579,
+      "text": "Expands your combat analyzer's memory, granting 1 additional technique slot."
+    },
+    {
+      "id": 192580,
+      "text": "Pattern Recognition"
+    },
+    {
+      "id": 192581,
+      "text": "Sharpens your ability to recognize enemy combat patterns, improving your technique learn chance by 10%."
+    },
+    {
+      "id": 192582,
+      "text": "Apex Collapse"
+    },
+    {
+      "id": 192583,
+      "text": "Deals 28 physical DMG plus MGT scaling to an 8m line. Inflicts Hemorrhage for 14 seconds."
+    },
+    {
+      "id": 192584,
+      "text": "Arc Pulse"
+    },
+    {
+      "id": 192585,
+      "text": "Deals 20 electrical DMG plus PER scaling to a 4.5m radius. Inflicts Shock for 12 seconds."
+    },
+    {
+      "id": 192586,
+      "text": "Barbed Volley"
+    },
+    {
+      "id": 192587,
+      "text": "Deals 13 physical DMG plus PER scaling to an 8m cone. Inflicts Bleed for 12 seconds."
+    },
+    {
+      "id": 192588,
+      "text": "Blood Frenzy Flurry"
+    },
+    {
+      "id": 192589,
+      "text": "Deals 20 physical DMG plus AGI scaling to a 5m cone. Inflicts Bleed for 12 seconds."
+    },
+    {
+      "id": 192590,
+      "text": "Bonecrusher Bite"
+    },
+    {
+      "id": 192591,
+      "text": "While equipped, your attacks have a 15% chance to inflict Sunder."
+    },
+    {
+      "id": 192592,
+      "text": "Brace Breaker"
+    },
+    {
+      "id": 192593,
+      "text": "Deals 24 physical DMG plus VIT scaling to a single target. Inflicts Dazed for 6 seconds."
+    },
+    {
+      "id": 192594,
+      "text": "Brutal Bash"
+    },
+    {
+      "id": 192595,
+      "text": "Deals 16 physical DMG plus MGT scaling to a single target. Inflicts Knockdown for 3 seconds."
+    },
+    {
+      "id": 192596,
+      "text": "Capacitor Surge"
+    },
+    {
+      "id": 192597,
+      "text": "Deals 13 electrical DMG plus PER scaling to a 4m radius. Inflicts Shock for 9 seconds."
+    },
+    {
+      "id": 192598,
+      "text": "Chitin Guard"
+    },
+    {
+      "id": 192599,
+      "text": "While equipped, plates you in chitin: +15% Physical Defense, +10% Force Defense, +25 Trauma Resistance, +15 Fire Resistance, and +15 Poison Resistance."
+    },
+    {
+      "id": 192600,
+      "text": "Concussive Challenge"
+    },
+    {
+      "id": 192601,
+      "text": "Deals 13 sonic DMG plus SOC scaling to a 6m radius. Inflicts Dazed for 6 seconds."
+    },
+    {
+      "id": 192602,
+      "text": "Crippling Talons"
+    },
+    {
+      "id": 192603,
+      "text": "While equipped, increases your Accuracy by 3%."
+    },
+    {
+      "id": 192604,
+      "text": "Crossfire Drill"
+    },
+    {
+      "id": 192605,
+      "text": "Deals 28 physical DMG plus AGI scaling to a 5m cone. Inflicts Suppression for 8 seconds."
+    },
+    {
+      "id": 192606,
+      "text": "Cryo Bile"
+    },
+    {
+      "id": 192607,
+      "text": "Deals 28 ice DMG plus PER scaling to an 8m cone. Inflicts Freezing for 12 seconds."
+    },
+    {
+      "id": 192608,
+      "text": "Dark Shock"
+    },
+    {
+      "id": 192609,
+      "text": "Deals 20 force DMG plus WIL scaling to a 4.5m radius. Inflicts Force Suppression for 12 seconds."
+    },
+    {
+      "id": 192610,
+      "text": "Disorienting Screech"
+    },
+    {
+      "id": 192611,
+      "text": "Deals 20 sonic DMG plus WIL scaling to a 9m radius. Inflicts Disoriented for 24 seconds."
+    },
+    {
+      "id": 192612,
+      "text": "Dread Wave"
+    },
+    {
+      "id": 192613,
+      "text": "Deals 20 sonic DMG plus WIL scaling to a 6m radius. Inflicts Terrified for 12 seconds."
+    },
+    {
+      "id": 192614,
+      "text": "Essence Scar"
+    },
+    {
+      "id": 192615,
+      "text": "While equipped, increases your Force Attack by 4%."
+    },
+    {
+      "id": 192616,
+      "text": "Final Eclipse"
+    },
+    {
+      "id": 192617,
+      "text": "Deals 28 force DMG plus MGT scaling to an 8m line. Inflicts Force Disruption for 14 seconds."
+    },
+    {
+      "id": 192618,
+      "text": "Final Line"
+    },
+    {
+      "id": 192619,
+      "text": "Deals 28 physical DMG plus MGT scaling to an 8m line. Inflicts Exposed for 14 seconds."
+    },
+    {
+      "id": 192620,
+      "text": "Final Mandate"
+    },
+    {
+      "id": 192621,
+      "text": "Deals 28 sonic DMG plus MGT scaling to an 8m line. Inflicts Suppression for 14 seconds."
+    },
+    {
+      "id": 192622,
+      "text": "Final Suppression"
+    },
+    {
+      "id": 192623,
+      "text": "Deals 28 electrical DMG plus MGT scaling to an 8m line. Inflicts Stunned for 3 seconds."
+    },
+    {
+      "id": 192624,
+      "text": "Finishing Drive"
+    },
+    {
+      "id": 192625,
+      "text": "Deals 28 physical DMG plus AGI scaling to an 8m line. Inflicts Hemorrhage for 14 seconds."
+    },
+    {
+      "id": 192626,
+      "text": "Force Rend"
+    },
+    {
+      "id": 192627,
+      "text": "While equipped, increases your Force Attack by 3%."
+    },
+    {
+      "id": 192628,
+      "text": "Force Sunder"
+    },
+    {
+      "id": 192629,
+      "text": "While equipped, increases your Force Attack by 4%."
+    },
+    {
+      "id": 192630,
+      "text": "Glacial Slime"
+    },
+    {
+      "id": 192631,
+      "text": "While equipped, your attacks have a 20% chance to inflict Sunder."
+    },
+    {
+      "id": 192632,
+      "text": "Grenade Burst"
+    },
+    {
+      "id": 192633,
+      "text": "Deals 20 fire DMG plus PER scaling to a 4.5m radius. Inflicts Burn for 12 seconds."
+    },
+    {
+      "id": 192634,
+      "text": "Hoarfrost Glob"
+    },
+    {
+      "id": 192635,
+      "text": "While equipped, your attacks have a 20% chance to inflict Freezing."
+    },
+    {
+      "id": 192636,
+      "text": "Holdfast Slam"
+    },
+    {
+      "id": 192637,
+      "text": "Deals 32 physical DMG plus VIT scaling to a single target. Inflicts Sunder for 12 seconds."
+    },
+    {
+      "id": 192638,
+      "text": "Inferno Blast"
+    },
+    {
+      "id": 192639,
+      "text": "Deals 28 fire DMG plus MGT scaling to a 10m cone. Inflicts Burn for 24 seconds."
+    },
+    {
+      "id": 192640,
+      "text": "Inner Circle Bind"
+    },
+    {
+      "id": 192641,
+      "text": "Deals 32 electrical DMG plus SOC scaling to a single target. Inflicts Weapon Jam for 12 seconds."
+    },
+    {
+      "id": 192642,
+      "text": "Inner Circle Pounce"
+    },
+    {
+      "id": 192643,
+      "text": "Deals 32 physical DMG plus SOC scaling to a single target. Inflicts Exposed for 12 seconds."
+    },
+    {
+      "id": 192644,
+      "text": "Inner Circle Surge"
+    },
+    {
+      "id": 192645,
+      "text": "Deals 32 electrical DMG plus SOC scaling to a single target. Inflicts Exposed for 12 seconds."
+    },
+    {
+      "id": 192646,
+      "text": "Inner Circle Volley"
+    },
+    {
+      "id": 192647,
+      "text": "Deals 32 sonic DMG plus SOC scaling to a single target. Inflicts Disoriented for 12 seconds."
+    },
+    {
+      "id": 192648,
+      "text": "Inner Ring Flurry"
+    },
+    {
+      "id": 192649,
+      "text": "Deals 32 physical DMG plus AGI scaling to a single target. Inflicts Exposed for 12 seconds."
+    },
+    {
+      "id": 192650,
+      "text": "Inner Void"
+    },
+    {
+      "id": 192651,
+      "text": "Deals 32 force DMG plus WIL scaling to a single target. Inflicts Weakened for 12 seconds."
+    },
+    {
+      "id": 192652,
+      "text": "Ion Burst"
+    },
+    {
+      "id": 192653,
+      "text": "Deals 13 electrical DMG plus PER scaling to an 8m cone. Inflicts Disoriented for 12 seconds."
+    },
+    {
+      "id": 192654,
+      "text": "Iron Carapace"
+    },
+    {
+      "id": 192655,
+      "text": "While equipped, hardens your body: +15% Physical Defense, +10% Force Defense, +25 Trauma Resistance, +15 Fire Resistance, and +15 Poison Resistance."
+    },
+    {
+      "id": 192656,
+      "text": "Last Bastion"
+    },
+    {
+      "id": 192657,
+      "text": "Deals 28 physical DMG plus VIT scaling to an 8m line. Inflicts Knockdown for 3 seconds."
+    },
+    {
+      "id": 192658,
+      "text": "Lockstep Crush"
+    },
+    {
+      "id": 192659,
+      "text": "Deals 28 physical DMG plus AGI scaling to a 5m cone. Inflicts Knockdown for 3 seconds."
+    },
+    {
+      "id": 192660,
+      "text": "Mauling Bite"
+    },
+    {
+      "id": 192661,
+      "text": "While equipped, your attacks have a 20% chance to inflict Bleed."
+    },
+    {
+      "id": 192662,
+      "text": "Merciless Angle"
+    },
+    {
+      "id": 192663,
+      "text": "Deals 28 physical DMG plus SOC scaling to a 5m cone. Inflicts Hemorrhage for 8 seconds."
+    },
+    {
+      "id": 192664,
+      "text": "Mind Spike"
+    },
+    {
+      "id": 192665,
+      "text": "While equipped, increases your Force Attack by 3%."
+    },
+    {
+      "id": 192666,
+      "text": "Null Shock"
+    },
+    {
+      "id": 192667,
+      "text": "Deals 20 force DMG plus WIL scaling to a 4.5m radius. Inflicts Force Suppression for 12 seconds."
+    },
+    {
+      "id": 192668,
+      "text": "Opening Cut"
+    },
+    {
+      "id": 192669,
+      "text": "While equipped, your attacks have a 20% chance to inflict Bleed."
+    },
+    {
+      "id": 192670,
+      "text": "Overload Shot"
+    },
+    {
+      "id": 192671,
+      "text": "While equipped, your attacks have a 20% chance to inflict Shock."
+    },
+    {
+      "id": 192672,
+      "text": "Pack Harrier"
+    },
+    {
+      "id": 192673,
+      "text": "Deals 24 physical DMG plus SOC scaling to a single target. Inflicts Hobble for 6 seconds."
+    },
+    {
+      "id": 192674,
+      "text": "Permafrost Rupture"
+    },
+    {
+      "id": 192675,
+      "text": "Deals 20 ice DMG plus MGT scaling to a 5.5m radius. Inflicts Freezing for 8 seconds."
+    },
+    {
+      "id": 192676,
+      "text": "Piercing Quills"
+    },
+    {
+      "id": 192677,
+      "text": "Deals 13 physical DMG plus PER scaling to an 8m cone. Inflicts Bleed for 18 seconds."
+    },
+    {
+      "id": 192678,
+      "text": "Pouncing Strike"
+    },
+    {
+      "id": 192679,
+      "text": "Deals 16 physical DMG plus MGT scaling to a single target. Inflicts Knockdown for 3 seconds."
+    },
+    {
+      "id": 192680,
+      "text": "Precision Shot"
+    },
+    {
+      "id": 192681,
+      "text": "While equipped, increases your Critical Rate by 3%."
+    },
+    {
+      "id": 192682,
+      "text": "Pressure Lock"
+    },
+    {
+      "id": 192683,
+      "text": "Deals 28 electrical DMG plus MGT scaling to a 5m cone. Inflicts Immobilized for 8 seconds."
+    },
+    {
+      "id": 192684,
+      "text": "Rally Breaker"
+    },
+    {
+      "id": 192685,
+      "text": "Deals 24 sonic DMG plus SOC scaling to a single target. Inflicts Marked for 6 seconds."
+    },
+    {
+      "id": 192686,
+      "text": "Rangefinder Shot"
+    },
+    {
+      "id": 192687,
+      "text": "While equipped, increases your Accuracy by 3%."
+    },
+    {
+      "id": 192688,
+      "text": "Rending Bite"
+    },
+    {
+      "id": 192689,
+      "text": "While equipped, your attacks have a 20% chance to inflict Bleed."
+    },
+    {
+      "id": 192690,
+      "text": "Rending Carve"
+    },
+    {
+      "id": 192691,
+      "text": "While equipped, your attacks have a 15% chance to inflict Hemorrhage."
+    },
+    {
+      "id": 192692,
+      "text": "Rime Pounce"
+    },
+    {
+      "id": 192693,
+      "text": "While equipped, your attacks have a 20% chance to inflict Bleed."
+    },
+    {
+      "id": 192694,
+      "text": "Rupturing Quake"
+    },
+    {
+      "id": 192695,
+      "text": "Deals 28 physical DMG plus MGT scaling to a 9m radius. Inflicts Knockdown for 3 seconds."
+    },
+    {
+      "id": 192696,
+      "text": "Savage Roar"
+    },
+    {
+      "id": 192697,
+      "text": "Inflicts Weakened on a 6m radius for 14 seconds."
+    },
+    {
+      "id": 192698,
+      "text": "Seismic Slam"
+    },
+    {
+      "id": 192699,
+      "text": "Deals 20 physical DMG plus MGT scaling to a 6m radius. Inflicts Knockdown for 3 seconds."
+    },
+    {
+      "id": 192700,
+      "text": "Serrated Slash"
+    },
+    {
+      "id": 192701,
+      "text": "While equipped, your attacks have a 15% chance to inflict Hemorrhage."
+    },
+    {
+      "id": 192702,
+      "text": "Shrapnel Burst"
+    },
+    {
+      "id": 192703,
+      "text": "Deals 20 physical DMG plus PER scaling to an 8m cone. Inflicts Sunder for 12 seconds."
+    },
+    {
+      "id": 192704,
+      "text": "Signal Snare"
+    },
+    {
+      "id": 192705,
+      "text": "Deals 24 sonic DMG plus SOC scaling to a single target. Inflicts Disoriented for 6 seconds."
+    },
+    {
+      "id": 192706,
+      "text": "Snap Rush"
+    },
+    {
+      "id": 192707,
+      "text": "Deals 28 physical DMG plus AGI scaling to a 5m cone. Inflicts Bleed for 8 seconds."
+    },
+    {
+      "id": 192708,
+      "text": "Static Burst"
+    },
+    {
+      "id": 192709,
+      "text": "Deals 20 electrical DMG plus PER scaling to a 4.5m radius. Inflicts Shock for 12 seconds."
+    },
+    {
+      "id": 192710,
+      "text": "Stim Canister"
+    },
+    {
+      "id": 192711,
+      "text": "Deals 20 poison DMG plus MGT scaling to a 4m radius. Inflicts Poison for 10 seconds."
+    },
+    {
+      "id": 192712,
+      "text": "Suppressing Shot"
+    },
+    {
+      "id": 192713,
+      "text": "Deals 13 physical DMG plus PER scaling to a 10m line. Inflicts Dazed for 4 seconds."
+    },
+    {
+      "id": 192714,
+      "text": "Sustain Burn"
+    },
+    {
+      "id": 192715,
+      "text": "Deals 28 poison DMG plus MGT scaling to a 5m cone. Inflicts Weakened for 8 seconds."
+    },
+    {
+      "id": 192716,
+      "text": "Tactical Mark"
+    },
+    {
+      "id": 192717,
+      "text": "While equipped, increases your Attack by 3%."
+    },
+    {
+      "id": 192718,
+      "text": "Target Lock"
+    },
+    {
+      "id": 192719,
+      "text": "While equipped, increases your Accuracy by 3%."
+    },
+    {
+      "id": 192720,
+      "text": "Venom Spray"
+    },
+    {
+      "id": 192721,
+      "text": "Deals 13 poison DMG plus PER scaling to an 8m cone. Inflicts Poison for 12 seconds."
+    },
+    {
+      "id": 192722,
+      "text": "Warden Clamp"
+    },
+    {
+      "id": 192723,
+      "text": "Deals 28 sonic DMG plus MGT scaling to a 5.5m radius. Inflicts Dazed for 6 seconds."
+    },
+    {
+      "id": 192724,
+      "text": "Warden Mark"
+    },
+    {
+      "id": 192725,
+      "text": "Deals 28 electrical DMG plus SOC scaling to a 5.5m radius. Inflicts Marked for 10 seconds."
+    },
+    {
+      "id": 192726,
+      "text": "Warden Maul"
+    },
+    {
+      "id": 192727,
+      "text": "Deals 28 physical DMG plus MGT scaling to a 5.5m radius. Inflicts Knockdown for 3 seconds."
+    },
+    {
+      "id": 192728,
+      "text": "Warden Order"
+    },
+    {
+      "id": 192729,
+      "text": "Deals 28 sonic DMG plus SOC scaling to a 5.5m radius. Inflicts Disoriented for 10 seconds."
+    },
+    {
+      "id": 192730,
+      "text": "Warden Rend"
+    },
+    {
+      "id": 192731,
+      "text": "Deals 28 force DMG plus MGT scaling to a 5.5m radius. Inflicts Terrified for 10 seconds."
+    },
+    {
+      "id": 192732,
+      "text": "Warden Sweep"
+    },
+    {
+      "id": 192733,
+      "text": "Deals 28 physical DMG plus MGT scaling to a 5.5m radius. Inflicts Sunder for 10 seconds."
+    },
+    {
+      "id": 192734,
+      "text": "Warden Wall"
+    },
+    {
+      "id": 192735,
+      "text": "Deals 28 sonic DMG plus VIT scaling to a 5.5m radius. Inflicts Dazed for 6 seconds."
+    },
+    {
+      "id": 192736,
+      "text": "Will Fracture"
+    },
+    {
+      "id": 192737,
+      "text": "Deals 28 force DMG plus WIL scaling to a 5m cone. Inflicts Foggy Mind for 8 seconds."
+    },
+    {
+      "id": 192738,
+      "text": "Overclocked Analyzer"
+    },
+    {
+      "id": 192739,
+      "text": "Overclocks the combat analyzer, granting 2 additional technique slots and an activated ability that briefly boosts your equipped techniques' potency and on-hit effect chance."
+    },
+    {
+      "id": 192740,
+      "text": "Force Edge"
+    },
+    {
+      "id": 192741,
+      "text": "Force Scar"
+    },
+    {
+      "id": 192742,
+      "text": "Keen Sight"
+    },
+    {
+      "id": 192743,
+      "text": "Lethal Aim"
+    },
+    {
+      "id": 192744,
+      "text": "Overcharged Strikes"
+    },
+    {
+      "id": 192745,
+      "text": "Overload"
+    },
+    {
+      "id": 192746,
+      "text": "Rending Instinct"
+    },
+    {
+      "id": 192747,
+      "text": "Rimed Strikes"
+    },
+    {
+      "id": 192748,
+      "text": "Serrated Instinct"
+    },
+    {
+      "id": 192749,
+      "text": "Technique Resonance"
+    },
+    {
+      "id": 192750,
+      "text": "Battle Focus"
+    },
+    {
+      "id": 192751,
+      "text": "Bonebreaker Instinct"
     }
   ]
 }
