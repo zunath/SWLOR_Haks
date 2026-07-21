@@ -12355,15 +12355,15 @@
     },
     {
       "id": 3088,
-      "text": "The beast's next attack deals +10 physical DMG and attempts to inflict Bleed."
+      "text": "The beast's next attack deals +10 physical DMG and attempts to inflict Bleed for 12 seconds."
     },
     {
       "id": 3089,
-      "text": "The beast's next attack deals +18 physical DMG and attempts to inflict Bleed."
+      "text": "The beast's next attack deals +18 physical DMG and attempts to inflict Bleed for 12 seconds."
     },
     {
       "id": 3090,
-      "text": "The beast's next attack deals +28 physical DMG and attempts to inflict Bleed."
+      "text": "The beast's next attack deals +28 physical DMG and attempts to inflict Bleed for 12 seconds."
     },
     {
       "id": 3091,
@@ -13463,7 +13463,7 @@
     },
     {
       "id": 3365,
-      "text": "Arms a visible charge at your target location that detonates after 3 seconds in a 5m sphere for 30 fire DMG plus PER scaling."
+      "text": "Arms a visible charge at your target location that detonates after 3 seconds in a 5m-radius blast for 30 fire DMG plus PER scaling."
     },
     {
       "id": 3366,
@@ -15411,7 +15411,7 @@
     },
     {
       "id": 3852,
-      "text": "Fires a focused ion beam from a wrist projector in an 8m line, dealing 12 electrical DMG plus PER scaling to hostile targets in the line."
+      "text": "Fires a focused ion beam from a wrist projector in an 8m x 2.5m line, dealing 12 electrical DMG plus PER scaling to hostile targets in the line."
     },
     {
       "id": 3853,
@@ -15419,7 +15419,7 @@
     },
     {
       "id": 3854,
-      "text": "Fires a focused ion beam from a wrist projector in an 8m line, dealing 22 electrical DMG plus PER scaling to hostile targets in the line."
+      "text": "Fires a focused ion beam from a wrist projector in an 8m x 2.5m line, dealing 22 electrical DMG plus PER scaling to hostile targets in the line."
     },
     {
       "id": 3855,
@@ -15427,7 +15427,7 @@
     },
     {
       "id": 3856,
-      "text": "Fires a focused ion beam from a wrist projector in an 8m line, dealing 32 electrical DMG plus PER scaling to hostile targets in the line."
+      "text": "Fires a focused ion beam from a wrist projector in an 8m x 2.5m line, dealing 32 electrical DMG plus PER scaling to hostile targets in the line."
     },
     {
       "id": 3857,
@@ -15435,7 +15435,7 @@
     },
     {
       "id": 3858,
-      "text": "Fires a focused lance of radiant Force energy in an 8m line, dealing 12 force DMG plus WIL scaling to hostile targets in the line."
+      "text": "Fires a focused lance of radiant Force energy in an 8m x 2.5m line, dealing 12 force DMG plus WIL scaling to hostile targets in the line."
     },
     {
       "id": 3859,
@@ -15443,7 +15443,7 @@
     },
     {
       "id": 3860,
-      "text": "Fires a focused lance of radiant Force energy in an 8m line, dealing 22 force DMG plus WIL scaling to hostile targets in the line."
+      "text": "Fires a focused lance of radiant Force energy in an 8m x 2.5m line, dealing 22 force DMG plus WIL scaling to hostile targets in the line."
     },
     {
       "id": 3861,
@@ -15451,7 +15451,7 @@
     },
     {
       "id": 3862,
-      "text": "Fires a focused lance of radiant Force energy in an 8m line, dealing 32 force DMG plus WIL scaling to hostile targets in the line."
+      "text": "Fires a focused lance of radiant Force energy in an 8m x 2.5m line, dealing 32 force DMG plus WIL scaling to hostile targets in the line."
     },
     {
       "id": 3863,
@@ -15463,15 +15463,15 @@
     },
     {
       "id": 3865,
-      "text": "Hurls your equipped weapon with the Force up to 15m, dealing weapon DMG + 10 physical DMG plus WIL/PER scaling to one target."
+      "text": "Hurls your equipped weapon with the Force through a 15m x 2.5m line, dealing weapon DMG + 10 physical DMG plus WIL/PER scaling to one target in the line."
     },
     {
       "id": 3866,
-      "text": "Hurls your equipped weapon with the Force up to 15m, dealing weapon DMG + 20 physical DMG plus WIL/PER scaling to the selected target and one additional enemy along the path."
+      "text": "Hurls your equipped weapon with the Force through a 15m x 2.5m line, dealing weapon DMG + 20 physical DMG plus WIL/PER scaling to the selected target and one additional enemy in the line."
     },
     {
       "id": 3867,
-      "text": "Hurls your equipped weapon with the Force up to 15m, dealing weapon DMG + 30 physical DMG plus WIL/PER scaling to the selected target and up to two additional enemies along the path."
+      "text": "Hurls your equipped weapon with the Force through a 15m x 2.5m line, dealing weapon DMG + 30 physical DMG plus WIL/PER scaling to the selected target and up to two additional enemies in the line."
     },
     {
       "id": 3868,
@@ -15611,7 +15611,7 @@
     },
     {
       "id": 3902,
-      "text": "Throws three adjacent grenades around the target point, each dealing 18 fire DMG plus PER scaling in a 2m blast. Overlapping blasts can hit the same enemy. Consumes explosives."
+      "text": "Throws three adjacent grenades within 3m of the target point. Each grenade deals 18 fire DMG plus PER scaling in a 2m blast, and overlapping blasts can hit the same enemy. Consumes explosives."
     },
     {
       "id": 3903,
@@ -15735,15 +15735,15 @@
     },
     {
       "id": 3933,
-      "text": "Deals 16 fire DMG plus PER scaling to hostile targets in a cone."
+      "text": "Deals 16 fire DMG plus PER scaling to hostile targets in a 6m x 5m cone."
     },
     {
       "id": 3934,
-      "text": "Deals 28 fire DMG plus PER scaling to hostile targets in a cone and attempts to inflict Burn."
+      "text": "Deals 28 fire DMG plus PER scaling to hostile targets in a 6m x 5m cone and attempts to inflict Burn for 12 seconds."
     },
     {
       "id": 3935,
-      "text": "Deals 42 fire DMG plus PER scaling to hostile targets in a cone and attempts to inflict Burn."
+      "text": "Deals 42 fire DMG plus PER scaling to hostile targets in a 6m x 5m cone and attempts to inflict Burn for 12 seconds."
     },
     {
       "id": 3936,
@@ -15851,11 +15851,11 @@
     },
     {
       "id": 3962,
-      "text": "Deals 32 fire DMG plus PER scaling to enemies in a 3m blast and attempts to inflict Bleed. Consumes explosives."
+      "text": "Deals 32 fire DMG plus PER scaling to enemies in a 3m blast and attempts to inflict Bleed for 12 seconds. Consumes explosives."
     },
     {
       "id": 3963,
-      "text": "Deals 48 fire DMG plus PER scaling to enemies in a 3m blast and attempts to inflict Bleed. Consumes explosives."
+      "text": "Deals 48 fire DMG plus PER scaling to enemies in a 3m blast and attempts to inflict Bleed for 12 seconds. Consumes explosives."
     },
     {
       "id": 3964,
@@ -15939,11 +15939,11 @@
     },
     {
       "id": 3984,
-      "text": "Deals 34 electrical DMG plus PER scaling in a 3m blast. Deals 60% bonus damage to droids and inflicts Shock. Consumes explosives."
+      "text": "Deals 34 electrical DMG plus PER scaling in a 3m blast. Deals 60% bonus damage to droids and inflicts Shock for 12 seconds. Consumes explosives."
     },
     {
       "id": 3985,
-      "text": "Iron Guard counterattacks and guard pulses deal +15 DMG to enemies within 5m and generate Enmity equal to the guarded hit's incoming damage."
+      "text": "Whenever you Guard a hostile hit, release a pulse that deals 15 physical DMG to the attacker and all other enemies within 5 meters. Each affected enemy generates Enmity toward you equal to the guarded hit's incoming damage."
     },
     {
       "id": 3986,
@@ -16015,15 +16015,15 @@
     },
     {
       "id": 4003,
-      "text": "The beast breathes poison at hostile targets in a cone, dealing 10 poison DMG plus MGT scaling and attempting to inflict Poison."
+      "text": "The beast breathes poison at hostile targets in a 6m x 5m cone, dealing 10 poison DMG plus MGT scaling and attempting to inflict Poison for 12 seconds."
     },
     {
       "id": 4004,
-      "text": "The beast breathes poison at hostile targets in a cone, dealing 14 poison DMG plus MGT scaling and attempting to inflict Poison."
+      "text": "The beast breathes poison at hostile targets in a 6m x 5m cone, dealing 14 poison DMG plus MGT scaling and attempting to inflict Poison for 12 seconds."
     },
     {
       "id": 4005,
-      "text": "The beast breathes poison at hostile targets in a cone, dealing 18 poison DMG plus MGT scaling and attempting to inflict Poison."
+      "text": "The beast breathes poison at hostile targets in a 6m x 5m cone, dealing 18 poison DMG plus MGT scaling and attempting to inflict Poison for 12 seconds."
     },
     {
       "id": 4006,
@@ -16043,11 +16043,11 @@
     },
     {
       "id": 4010,
-      "text": "Fires a dart that deals 18 physical DMG plus PER scaling and attempts to inflict Bleed."
+      "text": "Fires a dart that deals 18 physical DMG plus PER scaling and attempts to inflict Bleed for 12 seconds."
     },
     {
       "id": 4011,
-      "text": "Fires a dart that deals 34 physical DMG plus PER scaling and attempts to inflict Bleed."
+      "text": "Fires a dart that deals 34 physical DMG plus PER scaling and attempts to inflict Bleed for 12 seconds."
     },
     {
       "id": 4012,
@@ -16071,7 +16071,7 @@
     },
     {
       "id": 4017,
-      "text": "Arms a visible charge at your target location that detonates after 3 seconds in a 5m sphere for 30 fire DMG plus PER scaling."
+      "text": "Arms a visible charge at your target location that detonates after 3 seconds in a 5m-radius blast for 30 fire DMG plus PER scaling."
     },
     {
       "id": 4018,
@@ -16387,7 +16387,7 @@
     },
     {
       "id": 4096,
-      "text": "Med Kit, Kolto Mist, Emergency Triage, and Infusion healing is increased by 10%."
+      "text": "All direct, area, and periodic healing caused by your abilities is increased by 5%."
     },
     {
       "id": 4097,
@@ -17075,7 +17075,7 @@
     },
     {
       "id": 4268,
-      "text": "Strike all enemies within 3m for weapon DMG + 25. Enemies hit generate +25% Enmity toward you for 30 seconds."
+      "text": "Strike all enemies within 5m for weapon DMG + 25. Enemies hit generate +25% Enmity toward you for 30 seconds."
     },
     {
       "id": 4269,
@@ -17091,7 +17091,7 @@
     },
     {
       "id": 4272,
-      "text": "Strike all enemies within 3m for weapon DMG + 30. Enemies hit generate +25% Enmity toward you for 30 seconds."
+      "text": "Strike all enemies within 5m for weapon DMG + 30. Enemies hit generate +25% Enmity toward you for 30 seconds."
     },
     {
       "id": 4273,
@@ -17607,7 +17607,7 @@
     },
     {
       "id": 4401,
-      "text": "Deals weapon DMG + 25 in a 5m sphere. Enemies suffer Foggy Mind, Force Disruption, and -20% Ability Accuracy for 45 seconds."
+      "text": "Deals weapon DMG + 25 to enemies within 5m of you. Enemies hit suffer Foggy Mind, Force Disruption, and -20% Ability Accuracy for 45 seconds."
     },
     {
       "id": 4402,
@@ -18335,7 +18335,7 @@
     },
     {
       "id": 4583,
-      "text": "Deals weapon DMG + 12 in a line and ignores 10% Defense."
+      "text": "Deals weapon DMG + 12 in a 20m x 3m line and ignores 10% Defense."
     },
     {
       "id": 4584,
@@ -18359,7 +18359,7 @@
     },
     {
       "id": 4589,
-      "text": "Deals weapon DMG + 24 in a line and ignores 15% Defense."
+      "text": "Deals weapon DMG + 24 in a 20m x 3m line and ignores 15% Defense."
     },
     {
       "id": 4590,
@@ -18371,7 +18371,7 @@
     },
     {
       "id": 4592,
-      "text": "Deals weapon DMG + 36 in a line and ignores 20% Defense."
+      "text": "Deals weapon DMG + 36 in a 20m x 3m line and ignores 20% Defense."
     },
     {
       "id": 4593,
@@ -19518,6 +19518,10 @@
       "text": "When Bleed expires on a target, your next thrown ability within 18 seconds costs 3 less STM."
     },
     {
+      "id": 4879,
+      "text": "Back Attack"
+    },
+    {
       "id": 4880,
       "text": "After using a hostile Lightsaber ability, gain +6 Attack Deflection for 12 seconds and restore 2 FP when you deflect."
     },
@@ -19791,7 +19795,7 @@
     },
     {
       "id": 4948,
-      "text": "For 30 seconds, you gain +20 Guard and deal 8 DMG back to attackers whenever you guard a hit. Your current Guarded target automatically receives the same effect if they are within 5 meters."
+      "text": "For 30 seconds, you gain +20 Guard. Whenever you guard a hit, deal 8 physical DMG to that attacker. Your current Guarded target automatically receives the same effect if they are within 5 meters when activated."
     },
     {
       "id": 4949,
@@ -20235,7 +20239,7 @@
     },
     {
       "id": 5059,
-      "text": "Enemies in the area take weapon DMG + 16 and suffer Force Disruption for 30 seconds."
+      "text": "Deals weapon DMG + 16 to enemies within 5m of you and inflicts Force Disruption for 30 seconds."
     },
     {
       "id": 5060,
@@ -20243,7 +20247,7 @@
     },
     {
       "id": 5061,
-      "text": "Enemies in the area take weapon DMG + 30 and suffer Force Disruption for 30 seconds."
+      "text": "Deals weapon DMG + 30 to enemies within 5m of you and inflicts Force Disruption for 30 seconds."
     },
     {
       "id": 5062,
@@ -20251,15 +20255,15 @@
     },
     {
       "id": 5063,
-      "text": "Deals weapon DMG + 8. Costs 2 additional STM to grant +6% Evasion for 30 seconds."
+      "text": "Deals weapon DMG + 8 and grants +6% Evasion for 30 seconds."
     },
     {
       "id": 5064,
-      "text": "Deals weapon DMG + 18. Costs 2 additional STM to grant +8% Evasion for 30 seconds."
+      "text": "Deals weapon DMG + 18 and grants +8% Evasion for 30 seconds."
     },
     {
       "id": 5065,
-      "text": "Deals weapon DMG + 16 in a cone and inflicts Hamstring for 30 seconds."
+      "text": "Deals weapon DMG + 16 in a 5m x 5m cone and inflicts Hamstring for 30 seconds."
     },
     {
       "id": 5066,
@@ -20267,15 +20271,15 @@
     },
     {
       "id": 5067,
-      "text": "Deals weapon DMG + 28. Costs 2 additional STM to grant +10% Evasion for 30 seconds."
+      "text": "Deals weapon DMG + 28 and grants +10% Evasion for 30 seconds."
     },
     {
       "id": 5068,
-      "text": "Deals weapon DMG + 30 in a cone and inflicts Hamstring for 30 seconds."
+      "text": "Deals weapon DMG + 30 in a 5m x 5m cone and inflicts Hamstring for 30 seconds."
     },
     {
       "id": 5069,
-      "text": "Deals weapon DMG + 38. Costs 2 additional STM to grant +12% Evasion for 30 seconds."
+      "text": "Deals weapon DMG + 38 and grants +12% Evasion for 30 seconds."
     },
     {
       "id": 5070,
@@ -20367,7 +20371,7 @@
     },
     {
       "id": 5092,
-      "text": "Deals weapon DMG + 25 in a 5m sphere. Enemies hit suffer Dazed and Hamstring for 30 seconds."
+      "text": "Deals weapon DMG + 25 to enemies within 5m of you. Enemies hit suffer Dazed and Hamstring for 30 seconds."
     },
     {
       "id": 5093,
@@ -20395,7 +20399,7 @@
     },
     {
       "id": 5099,
-      "text": "Deals weapon DMG + 8 in a line and inflicts Disoriented for 30 seconds."
+      "text": "Deals weapon DMG + 8 in an 8m x 2.5m line and inflicts Disoriented for 30 seconds."
     },
     {
       "id": 5100,
@@ -20403,7 +20407,7 @@
     },
     {
       "id": 5101,
-      "text": "Deals weapon DMG + 18 in a line and inflicts Disoriented for 30 seconds."
+      "text": "Deals weapon DMG + 18 in an 8m x 3m line and inflicts Disoriented for 30 seconds."
     },
     {
       "id": 5102,
@@ -20411,7 +20415,7 @@
     },
     {
       "id": 5103,
-      "text": "Deals weapon DMG + 28 in a line and inflicts Disoriented for 30 seconds."
+      "text": "Deals weapon DMG + 28 in an 8m x 3m line and inflicts Disoriented for 30 seconds."
     },
     {
       "id": 5104,
@@ -20427,7 +20431,7 @@
     },
     {
       "id": 5107,
-      "text": "Deals weapon DMG + 38 in a line and inflicts Disoriented for 30 seconds."
+      "text": "Deals weapon DMG + 38 in an 8m x 3m line and inflicts Disoriented for 30 seconds."
     },
     {
       "id": 5108,
@@ -20479,7 +20483,7 @@
     },
     {
       "id": 5120,
-      "text": "Deals weapon DMG + 16 in a line. Targets hit by multiple Suppression stacks are Disoriented for 30 seconds."
+      "text": "Deals weapon DMG + 16 in a 20m x 3m line. Targets hit by multiple Suppression stacks are Disoriented for 30 seconds."
     },
     {
       "id": 5121,
@@ -20491,7 +20495,7 @@
     },
     {
       "id": 5123,
-      "text": "Deals weapon DMG + 30 in a line. Targets hit by multiple Suppression stacks are Disoriented for 30 seconds."
+      "text": "Deals weapon DMG + 30 in a 20m x 3m line. Targets hit by multiple Suppression stacks are Disoriented for 30 seconds."
     },
     {
       "id": 5124,
@@ -20587,7 +20591,7 @@
     },
     {
       "id": 5147,
-      "text": "After spending 8 or more STM on an ability, gain +10% Evasion for 30 seconds."
+      "text": "After using a Spear ability, gain +10% Evasion for 30 seconds."
     },
     {
       "id": 5148,
@@ -20663,7 +20667,7 @@
     },
     {
       "id": 5166,
-      "text": "Using a Staff Sentinel ability grants +25% Evasion and +20% Defense for 30 seconds. This can trigger once every 20 seconds."
+      "text": "Using a Staff Sentinel ability grants +25% Evasion and +20% Defense for 30 seconds. This can trigger once every 60 seconds."
     },
     {
       "id": 5167,
@@ -20743,19 +20747,19 @@
     },
     {
       "id": 5186,
-      "text": "Deals weapon DMG + 16 in a cone. If you deflected an attack in the last 30 seconds, restores 4 FP."
+      "text": "Deals weapon DMG + 16 in a 5m x 5m cone. If you deflected an attack in the last 30 seconds, restore 4 FP."
     },
     {
       "id": 5187,
-      "text": "Deals weapon DMG + 30 in a cone. If you deflected an attack in the last 30 seconds, restores 8 FP."
+      "text": "Deals weapon DMG + 30 in a 5m x 5m cone. If you deflected an attack in the last 30 seconds, restore 8 FP."
     },
     {
       "id": 5188,
-      "text": "Your next attack deals weapon DMG + 8. If you guarded an attack within the last 30 seconds, this deals weapon DMG + 16 instead."
+      "text": "Queue your next auto attack to deal weapon DMG + 8. If you guarded an attack within the last 30 seconds, it deals weapon DMG + 16 instead."
     },
     {
       "id": 5189,
-      "text": "Your next attack deals weapon DMG + 18. If you guarded an attack within the last 30 seconds, this deals weapon DMG + 30 instead."
+      "text": "Queue your next auto attack to deal weapon DMG + 18. If you guarded an attack within the last 30 seconds, it deals weapon DMG + 30 instead."
     },
     {
       "id": 5190,
@@ -20807,11 +20811,11 @@
     },
     {
       "id": 5202,
-      "text": "When you guard an attack, your next Katar attack within 30 seconds gains +10% critical chance and deals +10 DMG."
+      "text": "When you guard an attack, your next attack within 30 seconds gains +10% critical chance and deals +10 DMG."
     },
     {
       "id": 5203,
-      "text": "After you guard a hit, your next Katar attack within 30 seconds deals +8 DMG."
+      "text": "After you guard a hit, your next attack within 30 seconds deals +8 DMG and generates +40 Enmity."
     },
     {
       "id": 5204,
@@ -20959,7 +20963,7 @@
     },
     {
       "id": 5240,
-      "text": "When reduced below 25% HP, gain 40% Physical Defense for 30 seconds. Once per 10 minutes."
+      "text": "When reduced below 25% HP, gain 40% Physical Defense for 30 seconds. Once per 3 minutes."
     },
     {
       "id": 5241,
@@ -21035,7 +21039,7 @@
     },
     {
       "id": 5259,
-      "text": "Goads the selected target and all other enemies within range into attacking you.\nEnmity generated increases by 1% per VIT."
+      "text": "Goads the selected target and all other enemies within 8m of it into attacking you. Enmity generated increases by 1% per VIT."
     },
     {
       "id": 5260,
@@ -21139,7 +21143,7 @@
     },
     {
       "id": 5285,
-      "text": "Reduces your enmity by 60%, removes movement slow, and increases Evasion by 12% for 30 seconds."
+      "text": "Reduces your enmity by 60%, removes negative movement-speed effects, and increases Evasion by 12% for 30 seconds."
     },
     {
       "id": 5286,
@@ -21167,7 +21171,7 @@
     },
     {
       "id": 5292,
-      "text": "The beast breathes ice at hostile targets in a cone, dealing 10 ice DMG plus MGT scaling and slowing affected enemies for 30 seconds."
+      "text": "The beast breathes ice at hostile targets in a 6m x 5m cone, dealing 10 ice DMG plus MGT scaling and slowing affected enemies for 4 seconds."
     },
     {
       "id": 5293,
@@ -21175,7 +21179,7 @@
     },
     {
       "id": 5294,
-      "text": "The beast breathes ice at hostile targets in a cone, dealing 14 ice DMG plus MGT scaling and slowing affected enemies for 30 seconds."
+      "text": "The beast breathes ice at hostile targets in a 6m x 5m cone, dealing 14 ice DMG plus MGT scaling and slowing affected enemies for 5 seconds."
     },
     {
       "id": 5295,
@@ -21183,11 +21187,11 @@
     },
     {
       "id": 5296,
-      "text": "Deals 14 electrical DMG plus PER scaling in a 3m blast and knocks down for 30 seconds. Affects up to 5 targets. Consumes explosives."
+      "text": "Deals 14 electrical DMG plus PER scaling in a 3m blast and knocks down for 3 seconds. Affects up to 5 targets. Consumes explosives."
     },
     {
       "id": 5297,
-      "text": "The beast breathes ice at hostile targets in a cone, dealing 18 ice DMG plus MGT scaling and immobilizing affected enemies for 10 seconds."
+      "text": "The beast breathes ice at hostile targets in a 6m x 5m cone, dealing 18 ice DMG plus MGT scaling and immobilizing affected enemies for 10 seconds."
     },
     {
       "id": 5298,
@@ -21199,7 +21203,7 @@
     },
     {
       "id": 5300,
-      "text": "Deploys a 30-second healing mist cloud at a target location up to 15m away. Allies within 3m heal for 1% of maximum HP plus WIL scaling every 3 seconds. Consumes medical supplies."
+      "text": "Deploys a 30-second healing mist cloud at a target location up to 15m away. Allies within 8m heal for 1% of maximum HP plus WIL scaling every 3 seconds. Consumes medical supplies."
     },
     {
       "id": 5301,
@@ -21243,7 +21247,7 @@
     },
     {
       "id": 5311,
-      "text": "Deals 12 force DMG to up to 2 targets in an 8m cone, knocks down for 30 seconds, and slows movement for 30 seconds."
+      "text": "Deals 12 force DMG to up to 2 targets in an 8m x 5m cone, knocks them down for 6 seconds, and slows their movement for 12 seconds."
     },
     {
       "id": 5312,
@@ -21283,11 +21287,11 @@
     },
     {
       "id": 5321,
-      "text": "Deploys a 30-second healing mist cloud at a target location up to 15m away. Allies within 3m heal for 2% of maximum HP plus WIL scaling every 3 seconds. Consumes medical supplies."
+      "text": "Deploys a 30-second healing mist cloud at a target location up to 15m away. Allies within 8m heal for 2% of maximum HP plus WIL scaling every 3 seconds. Consumes medical supplies."
     },
     {
       "id": 5322,
-      "text": "Deals 28 electrical DMG plus PER scaling in a 3m blast and knocks down for 30 seconds. Affects up to 5 targets. Consumes explosives."
+      "text": "Deals 28 electrical DMG plus PER scaling in a 3m blast and knocks down for 3 seconds. Affects up to 5 targets. Consumes explosives."
     },
     {
       "id": 5323,
@@ -21303,7 +21307,7 @@
     },
     {
       "id": 5326,
-      "text": "Deals 18 force DMG to up to 3 targets in a 10m cone, knocks down for 30 seconds, and slows movement for 30 seconds."
+      "text": "Deals 18 force DMG to up to 3 targets in a 10m x 5m cone, knocks them down for 6 seconds, and slows their movement for 12 seconds."
     },
     {
       "id": 5327,
@@ -21331,7 +21335,7 @@
     },
     {
       "id": 5333,
-      "text": "Deploys a visible fire field for 30 seconds. Enemies inside take 8 fire DMG plus PER scaling every 3 seconds."
+      "text": "Deploys a visible 5m-radius fire field at the target location for 30 seconds. Enemies inside take 8 fire DMG plus PER scaling every 3 seconds."
     },
     {
       "id": 5334,
@@ -21367,11 +21371,11 @@
     },
     {
       "id": 5342,
-      "text": "Deploys a visible fire field for 30 seconds. Enemies inside take 12 fire DMG plus PER scaling every 3 seconds."
+      "text": "Deploys a visible 5m-radius fire field at the target location for 30 seconds. Enemies inside take 12 fire DMG plus PER scaling every 3 seconds."
     },
     {
       "id": 5343,
-      "text": "Arms a visible charge that detonates after 3 seconds in a 5m sphere for 42 fire DMG plus PER scaling and knocks down for 10 seconds."
+      "text": "Arms a visible charge at your target location that detonates after 3 seconds in a 5m-radius blast for 42 fire DMG plus PER scaling and inflicts Knockdown for 6 seconds."
     },
     {
       "id": 5344,
@@ -21403,7 +21407,7 @@
     },
     {
       "id": 5351,
-      "text": "Deploys a visible fire field for 30 seconds. Enemies inside take 16 fire DMG plus PER scaling every 3 seconds."
+      "text": "Deploys a visible 5m-radius fire field at the target location for 30 seconds. Enemies inside take 16 fire DMG plus PER scaling every 3 seconds."
     },
     {
       "id": 5352,
@@ -21535,7 +21539,7 @@
     },
     {
       "id": 5384,
-      "text": "Deals 25 ice DMG plus PER scaling to hostile targets in a cone and slows movement for 30 seconds."
+      "text": "Deals 25 ice DMG plus PER scaling to hostile targets in a 6m x 5m cone and slows their movement for 30 seconds."
     },
     {
       "id": 5385,
@@ -21583,7 +21587,7 @@
     },
     {
       "id": 5396,
-      "text": "Deals 8 force DMG to one target in a 5m cone, knocks down for 30 seconds, and slows movement for 30 seconds."
+      "text": "Deals 8 force DMG to one target in a 5m x 5m cone, knocks it down for 6 seconds, and slows its movement for 12 seconds."
     },
     {
       "id": 5397,
@@ -21607,7 +21611,7 @@
     },
     {
       "id": 5402,
-      "text": "Hurls your equipped weapon with the Force up to 15m, dealing weapon DMG + 30 physical DMG\nplus WIL/PER scaling to the selected target and up to two additional enemies along the path."
+      "text": "Hurls your equipped weapon with the Force through a 15m x 2.5m line, dealing weapon DMG + 30 physical DMG plus WIL/PER scaling to the selected target and up to two additional enemies in the line."
     },
     {
       "id": 5403,
@@ -21695,7 +21699,7 @@
     },
     {
       "id": 5424,
-      "text": "Deals weapon DMG + 25 in a 5m sphere. Enemies hit suffer Dazed and Hamstring for 30 seconds."
+      "text": "Deals weapon DMG + 25 to enemies within 5m of you. Enemies hit suffer Dazed and Hamstring for 30 seconds."
     },
     {
       "id": 5425,
@@ -23699,7 +23703,7 @@
     },
     {
       "id": 5925,
-      "text": "Your first attack in combat restores 15 STM. Once every 1 minute."
+      "text": "Your first attack in combat restores 15 STM. This can trigger once every 60 seconds."
     },
     {
       "id": 5926,
@@ -23951,7 +23955,7 @@
     },
     {
       "id": 5988,
-      "text": "Your next attack deals weapon DMG + 28. If you guarded an attack within the last 30 seconds, this deals weapon DMG + 45 instead and inflicts Dazed for 15 seconds."
+      "text": "Queue your next auto attack to deal weapon DMG + 28. If you guarded an attack within the last 30 seconds, it deals weapon DMG + 45 instead and inflicts Dazed for 15 seconds."
     },
     {
       "id": 5989,
@@ -23971,7 +23975,7 @@
     },
     {
       "id": 5993,
-      "text": "Deals weapon DMG + 18 to enemies within 5m and knocks down already Dazed targets for 15 seconds."
+      "text": "Deals weapon DMG + 18 to enemies within 5m and knocks down already Dazed targets for 6 seconds."
     },
     {
       "id": 5994,
@@ -23979,7 +23983,7 @@
     },
     {
       "id": 5995,
-      "text": "Deals weapon DMG + 30 to enemies within 5m and knocks down already Dazed targets for 15 seconds."
+      "text": "Deals weapon DMG + 30 to enemies within 5m and knocks down already Dazed targets for 6 seconds."
     },
     {
       "id": 5996,
@@ -23987,19 +23991,19 @@
     },
     {
       "id": 5997,
-      "text": "Deals weapon DMG + 35 to enemies within 5m. Enemies affected by control effects take +40 DMG and are Dazed for 30 seconds."
+      "text": "Deals weapon DMG + 35 to enemies within 5m of you. Enemies affected by control effects take +40 DMG and are Dazed for 30 seconds."
     },
     {
       "id": 5998,
-      "text": "Deals weapon DMG + 12 and inflicts Knockdown for 15 seconds."
+      "text": "Deals weapon DMG + 12 and inflicts Knockdown for 6 seconds."
     },
     {
       "id": 5999,
-      "text": "Deals weapon DMG + 24 and inflicts Knockdown for 15 seconds."
+      "text": "Deals weapon DMG + 24 and inflicts Knockdown for 6 seconds."
     },
     {
       "id": 6000,
-      "text": "Deals weapon DMG + 36 and inflicts Knockdown for 15 seconds."
+      "text": "Deals weapon DMG + 36 and inflicts Knockdown for 6 seconds."
     },
     {
       "id": 6001,
@@ -24031,7 +24035,7 @@
     },
     {
       "id": 6008,
-      "text": "Deals weapon DMG + 7 in a small area and inflicts Burn for 30 seconds."
+      "text": "Deals weapon DMG + 7 to enemies in a 5m-radius area at the target location and inflicts Burn for 30 seconds."
     },
     {
       "id": 6009,
@@ -24039,15 +24043,15 @@
     },
     {
       "id": 6010,
-      "text": "Deals weapon DMG + 15 in a small area and inflicts Burn for 30 seconds."
+      "text": "Deals weapon DMG + 15 to enemies in a 5m-radius area at the target location and inflicts Burn for 30 seconds."
     },
     {
       "id": 6011,
-      "text": "Deals weapon DMG + 16 in a 5m sphere and inflicts Dazed for 15 seconds."
+      "text": "Deals weapon DMG + 16 to enemies within 5m of you and inflicts Dazed for 15 seconds."
     },
     {
       "id": 6012,
-      "text": "Deals weapon DMG + 24 in a small area and inflicts Burn for 30 seconds."
+      "text": "Deals weapon DMG + 24 to enemies in a 5m-radius area at the target location and inflicts Burn for 30 seconds."
     },
     {
       "id": 6013,
@@ -24055,7 +24059,7 @@
     },
     {
       "id": 6014,
-      "text": "Deals weapon DMG + 30 in a 5m sphere and inflicts Dazed for 15 seconds."
+      "text": "Deals weapon DMG + 30 to enemies within 5m of you and inflicts Dazed for 15 seconds."
     },
     {
       "id": 6015,
@@ -24063,11 +24067,11 @@
     },
     {
       "id": 6016,
-      "text": "Deals weapon DMG + 32 in a small area and inflicts Burn for 30 seconds."
+      "text": "Deals weapon DMG + 32 to enemies in a 5m-radius area at the target location and inflicts Burn for 30 seconds."
     },
     {
       "id": 6017,
-      "text": "Deals weapon DMG + 20 to enemies within 5m. For 45 seconds, thrown area abilities leave fragmentation zones that deal 8 physical DMG every 6 seconds."
+      "text": "Deals weapon DMG + 20 to enemies within 5m of you. For 45 seconds, thrown area abilities leave fragmentation zones that deal 8 physical DMG every 6 seconds."
     },
     {
       "id": 6018,
@@ -24075,7 +24079,7 @@
     },
     {
       "id": 6019,
-      "text": "Fires a dart that deals 48 physical DMG plus PER scaling and attempts to inflict Bleed."
+      "text": "Fires a dart that deals 48 physical DMG plus PER scaling and attempts to inflict Bleed for 12 seconds."
     },
     {
       "id": 6020,
@@ -24083,7 +24087,7 @@
     },
     {
       "id": 6021,
-      "text": "Spending at least 5 FP on a hostile combat ability increases your Force Attack by 3% for 30 seconds, stacking up to 15%."
+      "text": "Spending at least 5 FP on a hostile combat ability increases your Force Attack by 3% for 30 seconds, stacking up to 9%."
     },
     {
       "id": 6022,
@@ -24107,7 +24111,7 @@
     },
     {
       "id": 6027,
-      "text": "Landing an auto-attack on a target afflicted by your Sunder restores 2 FP."
+      "text": "Landing an auto-attack on any Sundered target restores 2 FP."
     },
     {
       "id": 6028,
@@ -24171,7 +24175,7 @@
     },
     {
       "id": 6043,
-      "text": "Deals weapon DMG + 8 to all enemies within 3m. If at least one enemy is inflicted with Sunder, spread Sunder to one other enemy in melee range."
+      "text": "Deals weapon DMG + 8 to enemies within 3m of you. If at least one struck enemy already has Sunder, spreads Sunder from that enemy to one other enemy in melee range for 30 seconds."
     },
     {
       "id": 6044,
@@ -24203,7 +24207,7 @@
     },
     {
       "id": 6051,
-      "text": "Deals weapon DMG + 12 to all enemies within 3m. If at least one enemy is inflicted with Sunder, spread Sunder to one other enemy in melee range."
+      "text": "Deals weapon DMG + 12 to enemies within 3m of you. If at least one struck enemy already has Sunder, spreads Sunder from that enemy to one other enemy in melee range for 30 seconds."
     },
     {
       "id": 6052,
@@ -24219,7 +24223,7 @@
     },
     {
       "id": 6055,
-      "text": "Deals weapon DMG + 16 to all enemies within 3m. If at least one enemy is inflicted with Sunder, spread Sunder to one other enemy in melee range."
+      "text": "Deals weapon DMG + 16 to enemies within 3m of you. If at least one struck enemy already has Sunder, spreads Sunder from that enemy to one other enemy in melee range for 30 seconds."
     },
     {
       "id": 6056,
@@ -24235,7 +24239,7 @@
     },
     {
       "id": 6059,
-      "text": "Inflicts Knockdown on all targets within 6m for 6 seconds, dealing 25 Force DMG and inflicting Sunder. Targets already inflicted with Sunder take an additional 15 Force DMG."
+      "text": "Inflicts Knockdown on enemies within 6m of you for 6 seconds, dealing 25 Force DMG and inflicting Sunder. Enemies that already had Sunder when struck take an additional 15 Force DMG."
     },
     {
       "id": 6060,
@@ -24303,7 +24307,7 @@
     },
     {
       "id": 6076,
-      "text": "Deals weapon DMG + 12 to enemies in a line. For each struck enemy that damaged you within the last 30 seconds, gain + 20% Enmity toward it for 30 seconds."
+      "text": "Deals weapon DMG + 12 to enemies in an 8m x 3m line. For each struck enemy that damaged you within the last 30 seconds, gain +20% Enmity toward it for 30 seconds."
     },
     {
       "id": 6077,
@@ -24311,7 +24315,7 @@
     },
     {
       "id": 6078,
-      "text": "Deals weapon DMG + 24 to enemies in a line. For each struck enemy that damaged you within the last 30 seconds, gain + 30% Enmity toward it for 30 seconds."
+      "text": "Deals weapon DMG + 24 to enemies in an 8m x 3m line. For each struck enemy that damaged you within the last 30 seconds, gain +30% Enmity toward it for 30 seconds."
     },
     {
       "id": 6079,
@@ -24327,26 +24331,378 @@
     },
     {
       "id": 6082,
-      "text": "Cultivation"
+      "text": "Melee weapon attacks from behind a target deal +3% damage."
     },
     {
       "id": 6083,
-      "text": "Crop harvest yield is increased."
+      "text": "Slicing"
     },
     {
       "id": 6084,
-      "text": "Horticulture"
+      "text": "Can open tier 1 lockboxes."
     },
     {
       "id": 6085,
-      "text": "Crops grow more quickly."
+      "text": "Silent Stride"
     },
     {
       "id": 6086,
-      "text": "Botany"
+      "text": "While stealthed, increases Movement Speed by 30% and reduces STM drain by 20%, from 2 STM every 6 seconds to 2 STM every 7.5 seconds. Stealth still prevents running at full speed."
     },
     {
       "id": 6087,
+      "text": "Poisoncraft"
+    },
+    {
+      "id": 6088,
+      "text": "Can craft tier 1 weapon poisons."
+    },
+    {
+      "id": 6089,
+      "text": "Trapcraft"
+    },
+    {
+      "id": 6090,
+      "text": "Can craft, place, detect, and disarm tier 1 traps."
+    },
+    {
+      "id": 6091,
+      "text": "Venom Expertise"
+    },
+    {
+      "id": 6092,
+      "text": "Venom from weapon poisons you apply deals 10% more damage."
+    },
+    {
+      "id": 6093,
+      "text": "Trap Management"
+    },
+    {
+      "id": 6094,
+      "text": "Increases maximum concurrent traps to 2."
+    },
+    {
+      "id": 6095,
+      "text": "Lasting Coatings"
+    },
+    {
+      "id": 6096,
+      "text": "Weapon poison coatings you apply gain 50% more charges, increasing from 20 to 30 charges."
+    },
+    {
+      "id": 6097,
+      "text": "Master Saboteur"
+    },
+    {
+      "id": 6098,
+      "text": "Can craft, place, detect, and disarm tier 5 traps. Your trap damage and weapon-poison Venom damage increase by 10%."
+    },
+    {
+      "id": 6099,
+      "text": "Alertness"
+    },
+    {
+      "id": 6100,
+      "text": "Increases Detection by 10, improving your chance to notice stealthed creatures."
+    },
+    {
+      "id": 6101,
+      "text": "Stealth I"
+    },
+    {
+      "id": 6102,
+      "text": "Enter stealth, increasing Stealth by 5 while active. Drains 2 STM every 6 seconds, breaks on hostile action, and can only be entered while out of combat."
+    },
+    {
+      "id": 6103,
+      "text": "Stealth II"
+    },
+    {
+      "id": 6104,
+      "text": "Enter stealth, increasing Stealth by 10 while active. Drains 2 STM every 6 seconds, breaks on hostile action, and can only be entered while out of combat."
+    },
+    {
+      "id": 6105,
+      "text": "Stealth III"
+    },
+    {
+      "id": 6106,
+      "text": "Enter stealth, increasing Stealth by 15 while active. Drains 2 STM every 6 seconds, breaks on hostile action, and can only be entered while out of combat."
+    },
+    {
+      "id": 6107,
+      "text": "Stealth IV"
+    },
+    {
+      "id": 6108,
+      "text": "Enter stealth, increasing Stealth by 20 while active. Drains 2 STM every 6 seconds, breaks on hostile action, and can only be entered while out of combat."
+    },
+    {
+      "id": 6109,
+      "text": "Tactical Escape I"
+    },
+    {
+      "id": 6110,
+      "text": "Reduces your enmity by 35% and increases Evasion by 8% for 30 seconds."
+    },
+    {
+      "id": 6111,
+      "text": "Tactical Escape II"
+    },
+    {
+      "id": 6112,
+      "text": "Reduces your enmity by 60%, removes negative movement-speed effects, and increases Evasion by 12% for 30 seconds."
+    },
+    {
+      "id": 6113,
+      "text": "Shadow Step I"
+    },
+    {
+      "id": 6114,
+      "text": "Dash behind one hostile target within 5m and increase Evasion by 10% for 30 seconds. Does not grant invisibility."
+    },
+    {
+      "id": 6115,
+      "text": "Shadow Step II"
+    },
+    {
+      "id": 6116,
+      "text": "Dash behind one hostile target within 5m, remove negative movement-speed effects, and increase Evasion by 15% for 30 seconds."
+    },
+    {
+      "id": 6117,
+      "text": "Ghost Protocol"
+    },
+    {
+      "id": 6118,
+      "text": "Reduces your enmity by 80%, enters stealth for up to 30 seconds, and causes your next back attack within 30 seconds to critically hit and inflict Exposed, reducing Defense by 20% for 30 seconds."
+    },
+    {
+      "id": 6119,
+      "text": "Razor Trap I"
+    },
+    {
+      "id": 6120,
+      "text": "Places a visible trap that arms after 3 seconds. When triggered, enemies within its 3m blast take 14 physical DMG plus PER scaling and Bleed for 30 seconds."
+    },
+    {
+      "id": 6121,
+      "text": "Razor Trap II"
+    },
+    {
+      "id": 6122,
+      "text": "Places a visible trap that arms after 3 seconds. When triggered, enemies within its 3m blast take 30 physical DMG plus PER scaling and Bleed for 30 seconds."
+    },
+    {
+      "id": 6123,
+      "text": "Shock Trap"
+    },
+    {
+      "id": 6124,
+      "text": "Places a visible trap that arms after 3 seconds. When triggered, enemies within its 3m blast take 22 electrical DMG plus PER scaling and suffer Shock for 30 seconds."
+    },
+    {
+      "id": 6125,
+      "text": "Espionage"
+    },
+    {
+      "id": 6126,
+      "text": "Stealth"
+    },
+    {
+      "id": 6127,
+      "text": "Detection"
+    },
+    {
+      "id": 6128,
+      "text": "Trap Bonus"
+    },
+    {
+      "id": 6129,
+      "text": "Disarm"
+    },
+    {
+      "id": 6130,
+      "text": "Poison Bonus"
+    },
+    {
+      "id": 6131,
+      "text": "Lockpicking"
+    },
+    {
+      "id": 6132,
+      "text": "Improves your ability to remain unnoticed while stealthed."
+    },
+    {
+      "id": 6133,
+      "text": "Improves your ability to notice stealthed creatures."
+    },
+    {
+      "id": 6134,
+      "text": "Increases the effect strength of traps you place."
+    },
+    {
+      "id": 6135,
+      "text": "Improves your ability to disarm hostile traps."
+    },
+    {
+      "id": 6136,
+      "text": "Increases the potency of weapon poisons you apply."
+    },
+    {
+      "id": 6137,
+      "text": "Improves your ability to slice locks, terminals, and lockboxes."
+    },
+    {
+      "id": 6138,
+      "text": "False Identities"
+    },
+    {
+      "id": 6139,
+      "text": "Increases the number of disguises you may keep on file to 2."
+    },
+    {
+      "id": 6140,
+      "text": "Cover Story"
+    },
+    {
+      "id": 6141,
+      "text": "Reduces the delay between disguise activations by 40%."
+    },
+    {
+      "id": 6142,
+      "text": "Deals weapon DMG + 16 to enemies within 5m of you and inflicts Force Disruption for 30 seconds."
+    },
+    {
+      "id": 6143,
+      "text": "Deals weapon DMG + 30 to enemies within 5m of you and inflicts Force Disruption for 30 seconds."
+    },
+    {
+      "id": 6144,
+      "text": "Deals weapon DMG + 8 and grants +6% Evasion for 30 seconds."
+    },
+    {
+      "id": 6145,
+      "text": "Deals weapon DMG + 18 and grants +8% Evasion for 30 seconds."
+    },
+    {
+      "id": 6146,
+      "text": "Deals weapon DMG + 28 and grants +10% Evasion for 30 seconds."
+    },
+    {
+      "id": 6147,
+      "text": "Deals weapon DMG + 38 and grants +12% Evasion for 30 seconds."
+    },
+    {
+      "id": 6148,
+      "text": "After using a Spear ability, gain +10% Evasion for 30 seconds."
+    },
+    {
+      "id": 6149,
+      "text": "Deals weapon DMG + 16 in a 5m x 5m cone and inflicts Hamstring for 30 seconds."
+    },
+    {
+      "id": 6150,
+      "text": "Deals weapon DMG + 30 in a 5m x 5m cone and inflicts Hamstring for 30 seconds."
+    },
+    {
+      "id": 6151,
+      "text": "Deals weapon DMG + 16 in a 5m x 5m cone. If you deflected an attack in the last 30 seconds, restore 4 FP."
+    },
+    {
+      "id": 6152,
+      "text": "Deals weapon DMG + 30 in a 5m x 5m cone. If you deflected an attack in the last 30 seconds, restore 8 FP."
+    },
+    {
+      "id": 6153,
+      "text": "Deals weapon DMG + 35 to enemies within 5m of you. Enemies affected by control effects take +40 DMG and are Dazed for 30 seconds."
+    },
+    {
+      "id": 6154,
+      "text": "Deals weapon DMG + 8 in an 8m x 2.5m line and inflicts Disoriented for 30 seconds."
+    },
+    {
+      "id": 6155,
+      "text": "Deals weapon DMG + 18 in an 8m x 3m line and inflicts Disoriented for 30 seconds."
+    },
+    {
+      "id": 6156,
+      "text": "Deals weapon DMG + 28 in an 8m x 3m line and inflicts Disoriented for 30 seconds."
+    },
+    {
+      "id": 6157,
+      "text": "Deals weapon DMG + 38 in an 8m x 3m line and inflicts Disoriented for 30 seconds."
+    },
+    {
+      "id": 6158,
+      "text": "Deals weapon DMG + 16 in a 20m x 3m line. Targets hit by multiple Suppression stacks are Disoriented for 30 seconds."
+    },
+    {
+      "id": 6159,
+      "text": "Deals weapon DMG + 30 in a 20m x 3m line. Targets hit by multiple Suppression stacks are Disoriented for 30 seconds."
+    },
+    {
+      "id": 6160,
+      "text": "Deals weapon DMG + 12 in a 20m x 3m line and ignores 10% Defense."
+    },
+    {
+      "id": 6161,
+      "text": "Deals weapon DMG + 24 in a 20m x 3m line and ignores 15% Defense."
+    },
+    {
+      "id": 6162,
+      "text": "Deals weapon DMG + 36 in a 20m x 3m line and ignores 20% Defense."
+    },
+    {
+      "id": 6163,
+      "text": "Deals weapon DMG + 7 to enemies in a 5m-radius area at the target location and inflicts Burn for 30 seconds."
+    },
+    {
+      "id": 6164,
+      "text": "Deals weapon DMG + 15 to enemies in a 5m-radius area at the target location and inflicts Burn for 30 seconds."
+    },
+    {
+      "id": 6165,
+      "text": "Deals weapon DMG + 24 to enemies in a 5m-radius area at the target location and inflicts Burn for 30 seconds."
+    },
+    {
+      "id": 6166,
+      "text": "Deals weapon DMG + 32 to enemies in a 5m-radius area at the target location and inflicts Burn for 30 seconds."
+    },
+    {
+      "id": 6167,
+      "text": "Deals weapon DMG + 20 to enemies within 5m of you. For 45 seconds, thrown area abilities leave fragmentation zones that deal 8 physical DMG every 6 seconds."
+    },
+    {
+      "id": 6168,
+      "text": "Evasive Footwork"
+    },
+    {
+      "id": 6169,
+      "text": "While active, all outgoing damage is increased by 10%. Using any hostile combat ability costs 2 additional STM and grants +8% Evasion for 30 seconds."
+    },
+    {
+      "id": 6170,
+      "text": "Cultivation"
+    },
+    {
+      "id": 6171,
+      "text": "Crop harvest yield is increased."
+    },
+    {
+      "id": 6172,
+      "text": "Horticulture"
+    },
+    {
+      "id": 6173,
+      "text": "Crops grow more quickly."
+    },
+    {
+      "id": 6174,
+      "text": "Botany"
+    },
+    {
+      "id": 6175,
       "text": "The chance of harvesting pristine produce is increased."
     },
     {
@@ -63415,7 +63771,7 @@
     },
     {
       "id": 80783,
-      "text": "Base Attack Bonus Up"
+      "text": "Accuracy Up"
     },
     {
       "id": 80784,
@@ -63843,47 +64199,47 @@
     },
     {
       "id": 80891,
-      "text": "There are no classes in SWLOR. Instead, your character progresses by leveling up individual skills. Simply use a skill to increase its rank. Backgrounds are designed to give you a temporary bonus and a permanent bonus. Temporary bonuses will eventually be phased out in favor of something better once you've played for a little while. Permanent bonuses, by contrast, give you a unique upgrade you won't find anywhere else in the game.\n\nJedi Padawan (Guardian)\n\nTemporary Bonus: Basic Lightsaber\nPermanent Bonus: +2 Base Attack Bonus when equipped with lightsabers"
+      "text": "There are no classes in SWLOR. Instead, your character progresses by leveling up individual skills. Simply use a skill to increase its rank. Backgrounds are designed to give you a temporary bonus and a permanent bonus. Temporary bonuses will eventually be phased out in favor of something better once you've played for a little while. Permanent bonuses, by contrast, give you a unique upgrade you won't find anywhere else in the game.\n\nJedi Padawan (Guardian)\n\nTemporary Bonus: Basic Lightsaber\nPermanent Bonus: +2 Accuracy when equipped with lightsabers"
     },
     {
       "id": 80892,
-      "text": "There are no classes in SWLOR. Instead, your character progresses by leveling up individual skills. Simply use a skill to increase its rank. Backgrounds are designed to give you a temporary bonus and a permanent bonus. Temporary bonuses will eventually be phased out in favor of something better once you've played for a little while. Permanent bonuses, by contrast, give you a unique upgrade you won't find anywhere else in the game.\n\nJedi Padawan (Sentinel)\n\nTemporary Bonus: Basic Saberstaff\nPermanent Bonus: +2 Base Attack Bonus when equipped with saberstaffs"
+      "text": "There are no classes in SWLOR. Instead, your character progresses by leveling up individual skills. Simply use a skill to increase its rank. Backgrounds are designed to give you a temporary bonus and a permanent bonus. Temporary bonuses will eventually be phased out in favor of something better once you've played for a little while. Permanent bonuses, by contrast, give you a unique upgrade you won't find anywhere else in the game.\n\nJedi Padawan (Sentinel)\n\nTemporary Bonus: Basic Saberstaff\nPermanent Bonus: +2 Accuracy when equipped with saberstaffs"
     },
     {
       "id": 80893,
-      "text": "There are no classes in SWLOR. Instead, your character progresses by leveling up individual skills. Simply use a skill to increase its rank. Backgrounds are designed to give you a temporary bonus and a permanent bonus. Temporary bonuses will eventually be phased out in favor of something better once you've played for a little while. Permanent bonuses, by contrast, give you a unique upgrade you won't find anywhere else in the game.\n\nSith Apprentice (Warrior)\n\nTemporary Bonus: Basic Lightsaber\nPermanent Bonus: +2 Base Attack Bonus when equipped with lightsabers"
+      "text": "There are no classes in SWLOR. Instead, your character progresses by leveling up individual skills. Simply use a skill to increase its rank. Backgrounds are designed to give you a temporary bonus and a permanent bonus. Temporary bonuses will eventually be phased out in favor of something better once you've played for a little while. Permanent bonuses, by contrast, give you a unique upgrade you won't find anywhere else in the game.\n\nSith Apprentice (Warrior)\n\nTemporary Bonus: Basic Lightsaber\nPermanent Bonus: +2 Accuracy when equipped with lightsabers"
     },
     {
       "id": 80894,
-      "text": "There are no classes in SWLOR. Instead, your character progresses by leveling up individual skills. Simply use a skill to increase its rank. Backgrounds are designed to give you a temporary bonus and a permanent bonus. Temporary bonuses will eventually be phased out in favor of something better once you've played for a little while. Permanent bonuses, by contrast, give you a unique upgrade you won't find anywhere else in the game.\n\nSith Apprentice (Assassin)\n\nTemporary Bonus: Basic Saberstaff\nPermanent Bonus: +2 Base Attack Bonus when equipped with saberstaffs"
+      "text": "There are no classes in SWLOR. Instead, your character progresses by leveling up individual skills. Simply use a skill to increase its rank. Backgrounds are designed to give you a temporary bonus and a permanent bonus. Temporary bonuses will eventually be phased out in favor of something better once you've played for a little while. Permanent bonuses, by contrast, give you a unique upgrade you won't find anywhere else in the game.\n\nSith Apprentice (Assassin)\n\nTemporary Bonus: Basic Saberstaff\nPermanent Bonus: +2 Accuracy when equipped with saberstaffs"
     },
     {
       "id": 80895,
-      "text": "There are no classes in SWLOR. Instead, your character progresses by leveling up individual skills. Simply use a skill to increase its rank. Backgrounds are designed to give you a temporary bonus and a permanent bonus. Temporary bonuses will eventually be phased out in favor of something better once you've played for a little while. Permanent bonuses, by contrast, give you a unique upgrade you won't find anywhere else in the game.\n\nSmuggler\n\nTemporary Bonus: Basic Blaster Pistol & Ammo\nPermanent Bonus: +2 Base Attack Bonus when equipped with blaster pistols"
+      "text": "There are no classes in SWLOR. Instead, your character progresses by leveling up individual skills. Simply use a skill to increase its rank. Backgrounds are designed to give you a temporary bonus and a permanent bonus. Temporary bonuses will eventually be phased out in favor of something better once you've played for a little while. Permanent bonuses, by contrast, give you a unique upgrade you won't find anywhere else in the game.\n\nSmuggler\n\nTemporary Bonus: Basic Blaster Pistol & Ammo\nPermanent Bonus: +2 Accuracy when equipped with blaster pistols"
     },
     {
       "id": 80896,
-      "text": "There are no classes in SWLOR. Instead, your character progresses by leveling up individual skills. Simply use a skill to increase its rank. Backgrounds are designed to give you a temporary bonus and a permanent bonus. Temporary bonuses will eventually be phased out in favor of something better once you've played for a little while. Permanent bonuses, by contrast, give you a unique upgrade you won't find anywhere else in the game.\n\nSharpshooter\n\nTemporary Bonus: Basic Blaster Rifle & Ammo\nPermanent Bonus: +2 Base Attack Bonus when equipped with blaster rifles"
+      "text": "There are no classes in SWLOR. Instead, your character progresses by leveling up individual skills. Simply use a skill to increase its rank. Backgrounds are designed to give you a temporary bonus and a permanent bonus. Temporary bonuses will eventually be phased out in favor of something better once you've played for a little while. Permanent bonuses, by contrast, give you a unique upgrade you won't find anywhere else in the game.\n\nSharpshooter\n\nTemporary Bonus: Basic Blaster Rifle & Ammo\nPermanent Bonus: +2 Accuracy when equipped with blaster rifles"
     },
     {
       "id": 80897,
-      "text": "There are no classes in SWLOR. Instead, your character progresses by leveling up individual skills. Simply use a skill to increase its rank. Backgrounds are designed to give you a temporary bonus and a permanent bonus. Temporary bonuses will eventually be phased out in favor of something better once you've played for a little while. Permanent bonuses, by contrast, give you a unique upgrade you won't find anywhere else in the game.\n\nTeräs Käsi\n\nTemporary Bonus: Basic Power Glove\nPermanent Bonus: +2 Base Attack Bonus when unarmed or equipped with a martial arts weapon"
+      "text": "There are no classes in SWLOR. Instead, your character progresses by leveling up individual skills. Simply use a skill to increase its rank. Backgrounds are designed to give you a temporary bonus and a permanent bonus. Temporary bonuses will eventually be phased out in favor of something better once you've played for a little while. Permanent bonuses, by contrast, give you a unique upgrade you won't find anywhere else in the game.\n\nTeräs Käsi\n\nTemporary Bonus: Basic Power Glove\nPermanent Bonus: +2 Accuracy when unarmed or equipped with a martial arts weapon"
     },
     {
       "id": 80898,
-      "text": "There are no classes in SWLOR. Instead, your character progresses by leveling up individual skills. Simply use a skill to increase its rank. Backgrounds are designed to give you a temporary bonus and a permanent bonus. Temporary bonuses will eventually be phased out in favor of something better once you've played for a little while. Permanent bonuses, by contrast, give you a unique upgrade you won't find anywhere else in the game.\n\nSecurity Officer\n\nTemporary Bonus: Basic Baton\nPermanent Bonus: +2 Base Attack Bonus when equipped with a baton."
+      "text": "There are no classes in SWLOR. Instead, your character progresses by leveling up individual skills. Simply use a skill to increase its rank. Backgrounds are designed to give you a temporary bonus and a permanent bonus. Temporary bonuses will eventually be phased out in favor of something better once you've played for a little while. Permanent bonuses, by contrast, give you a unique upgrade you won't find anywhere else in the game.\n\nSecurity Officer\n\nTemporary Bonus: Basic Baton\nPermanent Bonus: +2 Accuracy when equipped with a baton."
     },
     {
       "id": 80899,
-      "text": "There are no classes in SWLOR. Instead, your character progresses by leveling up individual skills. Simply use a skill to increase its rank. Backgrounds are designed to give you a temporary bonus and a permanent bonus. Temporary bonuses will eventually be phased out in favor of something better once you've played for a little while. Permanent bonuses, by contrast, give you a unique upgrade you won't find anywhere else in the game.\n\nBerserker\n\nTemporary Bonus: Basic Twin Vibroblade\nPermanent Bonus: +2 Base Attack Bonus when equipped with twin vibroblades."
+      "text": "There are no classes in SWLOR. Instead, your character progresses by leveling up individual skills. Simply use a skill to increase its rank. Backgrounds are designed to give you a temporary bonus and a permanent bonus. Temporary bonuses will eventually be phased out in favor of something better once you've played for a little while. Permanent bonuses, by contrast, give you a unique upgrade you won't find anywhere else in the game.\n\nBerserker\n\nTemporary Bonus: Basic Twin Vibroblade\nPermanent Bonus: +2 Accuracy when equipped with twin vibroblades."
     },
     {
       "id": 80900,
-      "text": "There are no classes in SWLOR. Instead, your character progresses by leveling up individual skills. Simply use a skill to increase its rank. Backgrounds are designed to give you a temporary bonus and a permanent bonus. Temporary bonuses will eventually be phased out in favor of something better once you've played for a little while. Permanent bonuses, by contrast, give you a unique upgrade you won't find anywhere else in the game.\n\nDuelist\n\nTemporary Bonus: Basic Vibroknife\nPermanent Bonus: +2 Base Attack Bonus when equipped with a vibroknife."
+      "text": "There are no classes in SWLOR. Instead, your character progresses by leveling up individual skills. Simply use a skill to increase its rank. Backgrounds are designed to give you a temporary bonus and a permanent bonus. Temporary bonuses will eventually be phased out in favor of something better once you've played for a little while. Permanent bonuses, by contrast, give you a unique upgrade you won't find anywhere else in the game.\n\nDuelist\n\nTemporary Bonus: Basic Vibroknife\nPermanent Bonus: +2 Accuracy when equipped with a vibroknife."
     },
     {
       "id": 80901,
-      "text": "There are no classes in SWLOR. Instead, your character progresses by leveling up individual skills. Simply use a skill to increase its rank. Backgrounds are designed to give you a temporary bonus and a permanent bonus. Temporary bonuses will eventually be phased out in favor of something better once you've played for a little while. Permanent bonuses, by contrast, give you a unique upgrade you won't find anywhere else in the game.\n\nSoldier\n\nTemporary Bonus: Basic Heavy Vibroblade\nPermanent Bonus: +2 Base Attack Bonus when equipped with a heavy vibroblade."
+      "text": "There are no classes in SWLOR. Instead, your character progresses by leveling up individual skills. Simply use a skill to increase its rank. Backgrounds are designed to give you a temporary bonus and a permanent bonus. Temporary bonuses will eventually be phased out in favor of something better once you've played for a little while. Permanent bonuses, by contrast, give you a unique upgrade you won't find anywhere else in the game.\n\nSoldier\n\nTemporary Bonus: Basic Heavy Vibroblade\nPermanent Bonus: +2 Accuracy when equipped with a heavy vibroblade."
     },
     {
       "id": 80902,
@@ -64363,31 +64719,31 @@
     },
     {
       "id": 81021,
-      "text": "Strength Up"
+      "text": "Might Up"
     },
     {
       "id": 81022,
-      "text": "Dexterity Up"
+      "text": "Perception Up"
     },
     {
       "id": 81023,
-      "text": "Constitution Up"
+      "text": "Vitality Up"
     },
     {
       "id": 81024,
-      "text": "Wisdom Up"
+      "text": "Willpower Up"
     },
     {
       "id": 81025,
-      "text": "Intelligence Up"
+      "text": "Agility Up"
     },
     {
       "id": 81026,
-      "text": "Charisma Up"
+      "text": "Social Up"
     },
     {
       "id": 81027,
-      "text": "Attack Bonus Up"
+      "text": "Accuracy Up"
     },
     {
       "id": 81028,
@@ -64439,7 +64795,7 @@
     },
     {
       "id": 81040,
-      "text": "There are no classes in SWLOR. Instead, your character progresses by leveling up individual skills. Simply use a skill to increase its rank. Backgrounds are designed to give you a temporary bonus and a permanent bonus. Temporary bonuses will eventually be phased out in favor of something better once you've played for a little while. Permanent bonuses, by contrast, give you a unique upgrade you won't find anywhere else in the game.\n\nMandalorian\n\nTemporary Bonus: Mandalorian Armor\nPermanent Bonus: +1 Base Attack Bonus when equipped with blaster rifles and you learn the Mandoa language."
+      "text": "There are no classes in SWLOR. Instead, your character progresses by leveling up individual skills. Simply use a skill to increase its rank. Backgrounds are designed to give you a temporary bonus and a permanent bonus. Temporary bonuses will eventually be phased out in favor of something better once you've played for a little while. Permanent bonuses, by contrast, give you a unique upgrade you won't find anywhere else in the game.\n\nMandalorian\n\nTemporary Bonus: Mandalorian Armor\nPermanent Bonus: +1 Accuracy when equipped with blaster rifles and you learn the Mando'a language."
     },
     {
       "id": 81041,
@@ -65543,7 +65899,7 @@
     },
     {
       "id": 81316,
-      "text": "Standard characters do not have access to force powers but they are capable of purchasing higher tier perks and other abilities which force sensitive characters do not have access to."
+      "text": "Standard characters cannot train the Force skill or use Force powers, lightsabers, or saberstaffs. They can train Devices and access Standard-only Devices and Espionage perks."
     },
     {
       "id": 81317,
@@ -65555,7 +65911,7 @@
     },
     {
       "id": 81319,
-      "text": "Force Sensitive characters have the ability to purchase and use a variety of force powers and lightsabers. They are unable to reach the highest tiers of other non-force perks."
+      "text": "Force Sensitive characters can train the Force skill and access Force powers, lightsaber perks, and saberstaff perks. They cannot train Devices or access Standard-only Devices and Espionage perks."
     },
     {
       "id": 81320,
@@ -66687,7 +67043,7 @@
     },
     {
       "id": 81602,
-      "text": "Deploys a shield bunker for 45 seconds. Allies inside gain 60 temporary HP plus 8% of each target's maximum HP and take 15% less ranged physical damage."
+      "text": "Deploys a 4m-radius shield bunker at the target location for 45 seconds. Allies inside gain 60 temporary HP plus 8% of each target's maximum HP and take 15% less ranged physical damage."
     },
     {
       "id": 81603,
@@ -71983,7 +72339,7 @@
     },
     {
       "id": 82926,
-      "text": "Goads the selected target and all other enemies within range into attacking you. Enmity generated increases by 1% per VIT."
+      "text": "Goads the selected target and all other enemies within 8m of it into attacking you. Enmity generated increases by 1% per VIT."
     },
     {
       "id": 82927,
@@ -87971,7 +88327,7 @@
     },
     {
       "id": 192543,
-      "text": "Strike all enemies within 3m for weapon DMG + 15. Enemies hit generate +25% Enmity toward you for 30 seconds."
+      "text": "Strike all enemies within 5m for weapon DMG + 15. Enemies hit generate +25% Enmity toward you for 30 seconds."
     },
     {
       "id": 192544,
@@ -88019,7 +88375,7 @@
     },
     {
       "id": 192555,
-      "text": "Deals 10 poison DMG plus PER scaling to a single target. Inflicts Poison for 30 seconds."
+      "text": "Deals 12 poison DMG plus PER scaling to a single target. Inflicts Poison for 30 seconds."
     },
     {
       "id": 192556,
@@ -88027,7 +88383,7 @@
     },
     {
       "id": 192557,
-      "text": "Deals 10 ice DMG plus PER scaling to a single target. Inflicts Freezing for 6 seconds."
+      "text": "Strikes a single target, inflicting Hamstring for 30 seconds. Deals no direct damage."
     },
     {
       "id": 192558,
@@ -88035,7 +88391,7 @@
     },
     {
       "id": 192559,
-      "text": "Deals 10 physical DMG plus AGI scaling to a single target. Inflicts Hamstring for 12 seconds."
+      "text": "Deals 12 physical DMG plus AGI scaling to a single target. Inflicts Hamstring for 30 seconds."
     },
     {
       "id": 192560,
@@ -88043,7 +88399,7 @@
     },
     {
       "id": 192561,
-      "text": "Deals 13 sonic DMG plus WIL scaling to an 8m cone. Inflicts Disoriented for 12 seconds."
+      "text": "Deals 18 sonic DMG plus WIL scaling in an 8m x 5m cone. Inflicts Disoriented for 30 seconds."
     },
     {
       "id": 192562,
@@ -88051,7 +88407,7 @@
     },
     {
       "id": 192563,
-      "text": "Deals 13 physical DMG plus MGT scaling to a 4.5m radius. Inflicts Dazed for 4 seconds."
+      "text": "Deals 18 physical DMG plus MGT scaling to enemies within 4.5m of you. Inflicts Dazed for 15 seconds."
     },
     {
       "id": 192564,
@@ -88059,7 +88415,7 @@
     },
     {
       "id": 192565,
-      "text": "Deals 13 electrical DMG plus PER scaling to a 4.5m radius. Inflicts Shock for 10 seconds."
+      "text": "Inflicts Shock on enemies within 4.5m of you for 30 seconds. Deals no direct damage."
     },
     {
       "id": 192566,
@@ -88067,7 +88423,7 @@
     },
     {
       "id": 192567,
-      "text": "Deals 20 physical DMG plus MGT scaling to an 8m line. Inflicts Bleed for 10 seconds."
+      "text": "Deals 28 physical DMG plus MGT scaling in an 8m x 2.5m line. Inflicts Bleed for 30 seconds."
     },
     {
       "id": 192568,
@@ -88075,7 +88431,7 @@
     },
     {
       "id": 192569,
-      "text": "Deals 20 poison DMG plus PER scaling to a 4.5m radius. Inflicts Toxin for 15 seconds."
+      "text": "Deals 28 poison DMG plus PER scaling to enemies in a 4.5m-radius area at the target location. Inflicts Toxin for 30 seconds."
     },
     {
       "id": 192570,
@@ -88083,7 +88439,7 @@
     },
     {
       "id": 192571,
-      "text": "Deals 28 fire DMG plus MGT scaling to an 8m cone. Inflicts Burn for 18 seconds."
+      "text": "Deals 40 fire DMG plus MGT scaling in an 8m x 5m cone. Inflicts Burn and Weakened for 30 seconds."
     },
     {
       "id": 192572,
@@ -88091,7 +88447,7 @@
     },
     {
       "id": 192573,
-      "text": "Inflicts Terrified on a 6m radius for 18 seconds."
+      "text": "Inflicts Dazed on enemies within 6m of you for 15 seconds and interrupts their current actions. Deals no direct damage."
     },
     {
       "id": 192574,
@@ -88099,7 +88455,7 @@
     },
     {
       "id": 192575,
-      "text": "Grants a combat analyzer capable of recording enemy creature techniques. Unlocks technique learning and the Techniques window. Provides 2 technique slots and lets you replicate Mimicry 1-14 techniques."
+      "text": "Grants a combat analyzer capable of recording enemy creature techniques. Unlocks technique learning and the Techniques window. Provides 2 technique slots."
     },
     {
       "id": 192576,
@@ -88115,7 +88471,7 @@
     },
     {
       "id": 192579,
-      "text": "Expands your combat analyzer's memory, granting 1 additional technique slot."
+      "text": "Expands your combat analyzer's memory, granting 2 additional technique slots."
     },
     {
       "id": 192580,
@@ -88131,7 +88487,7 @@
     },
     {
       "id": 192583,
-      "text": "Deals 28 physical DMG plus MGT scaling to an 8m line. Inflicts Hemorrhage for 14 seconds."
+      "text": "While active, grants +25% Attack and +15% Critical Rate at the cost of -20% Physical Defense and -20% Force Defense."
     },
     {
       "id": 192584,
@@ -88139,7 +88495,7 @@
     },
     {
       "id": 192585,
-      "text": "Deals 20 electrical DMG plus PER scaling to a 4.5m radius. Inflicts Shock for 12 seconds."
+      "text": "Inflicts Shock on enemies within 4.5m of you for 30 seconds. Deals no direct damage."
     },
     {
       "id": 192586,
@@ -88147,7 +88503,7 @@
     },
     {
       "id": 192587,
-      "text": "Deals 13 physical DMG plus PER scaling to an 8m cone. Inflicts Bleed for 12 seconds."
+      "text": "Deals 18 physical DMG plus PER scaling in an 8m x 5m cone. Inflicts Bleed for 30 seconds."
     },
     {
       "id": 192588,
@@ -88155,7 +88511,7 @@
     },
     {
       "id": 192589,
-      "text": "Deals 20 physical DMG plus AGI scaling to a 5m cone. Inflicts Bleed for 12 seconds."
+      "text": "Deals 28 physical DMG plus AGI scaling in a 5m x 5m cone. Inflicts Bleed for 30 seconds."
     },
     {
       "id": 192590,
@@ -88163,7 +88519,7 @@
     },
     {
       "id": 192591,
-      "text": "Your attacks have an 18% chance to inflict Sunder."
+      "text": "Your attacks have a 9% chance to inflict Sunder."
     },
     {
       "id": 192592,
@@ -88171,7 +88527,7 @@
     },
     {
       "id": 192593,
-      "text": "Deals 24 physical DMG plus VIT scaling to a single target. Inflicts Dazed for 6 seconds."
+      "text": "Strikes a single target, inflicting Dazed for 15 seconds. Deals no direct damage."
     },
     {
       "id": 192594,
@@ -88179,7 +88535,7 @@
     },
     {
       "id": 192595,
-      "text": "Deals 16 physical DMG plus MGT scaling to a single target. Inflicts Knockdown for 3 seconds."
+      "text": "Deals 22 physical DMG plus MGT scaling to a single target. Inflicts Knockdown for 6 seconds."
     },
     {
       "id": 192596,
@@ -88187,7 +88543,7 @@
     },
     {
       "id": 192597,
-      "text": "Deals 13 electrical DMG plus PER scaling to a 4m radius. Inflicts Shock for 9 seconds."
+      "text": "Inflicts Shock on enemies within 4m of you for 30 seconds. Deals no direct damage."
     },
     {
       "id": 192598,
@@ -88203,7 +88559,7 @@
     },
     {
       "id": 192601,
-      "text": "Deals 13 sonic DMG plus SOC scaling to a 6m radius. Inflicts Dazed for 6 seconds."
+      "text": "Inflicts Dazed on enemies within 6m of you for 15 seconds. Deals no direct damage."
     },
     {
       "id": 192602,
@@ -88211,7 +88567,7 @@
     },
     {
       "id": 192603,
-      "text": "Your attacks have a 12% chance to inflict Hemorrhage."
+      "text": "Your attacks have a 6% chance to inflict Hemorrhage."
     },
     {
       "id": 192604,
@@ -88219,7 +88575,7 @@
     },
     {
       "id": 192605,
-      "text": "Deals 28 physical DMG plus AGI scaling to a 5m cone. Inflicts Suppression for 8 seconds."
+      "text": "Inflicts Suppression on enemies in a 5m x 5m cone for 30 seconds. Deals no direct damage."
     },
     {
       "id": 192606,
@@ -88227,7 +88583,7 @@
     },
     {
       "id": 192607,
-      "text": "Deals 28 ice DMG plus PER scaling to an 8m cone. Inflicts Freezing for 12 seconds."
+      "text": "Inflicts Freezing and Immobilized on enemies in an 8m x 5m cone for 6 seconds and generates 100 additional Enmity per target. Deals no direct damage."
     },
     {
       "id": 192608,
@@ -88235,7 +88591,7 @@
     },
     {
       "id": 192609,
-      "text": "Deals 20 force DMG plus WIL scaling to a 4.5m radius. Inflicts Force Suppression for 12 seconds."
+      "text": "Inflicts Force Suppression on enemies within 4.5m of you for 30 seconds. Deals no direct damage."
     },
     {
       "id": 192610,
@@ -88243,7 +88599,7 @@
     },
     {
       "id": 192611,
-      "text": "Deals 20 sonic DMG plus WIL scaling to a 9m radius. Inflicts Disoriented for 24 seconds."
+      "text": "Inflicts Disoriented on enemies within 9m of you for 30 seconds and reduces their Accuracy by 10%. Deals no direct damage."
     },
     {
       "id": 192612,
@@ -88251,7 +88607,7 @@
     },
     {
       "id": 192613,
-      "text": "Deals 20 sonic DMG plus WIL scaling to a 6m radius. Inflicts Terrified for 12 seconds."
+      "text": "Deals 28 sonic DMG plus WIL scaling to enemies within 6m of you. Inflicts Weakened for 30 seconds."
     },
     {
       "id": 192614,
@@ -88267,7 +88623,7 @@
     },
     {
       "id": 192617,
-      "text": "Deals 28 force DMG plus MGT scaling to an 8m line. Inflicts Force Disruption for 14 seconds."
+      "text": "Deals 40 force DMG plus MGT scaling in an 8m x 2.5m line, increased by 40% against Weakened targets. Inflicts Force Disruption for 30 seconds and restores 5 FP to you per hit."
     },
     {
       "id": 192618,
@@ -88275,7 +88631,7 @@
     },
     {
       "id": 192619,
-      "text": "Deals 28 physical DMG plus MGT scaling to an 8m line. Inflicts Exposed for 14 seconds."
+      "text": "Deals 40 physical DMG plus MGT scaling in an 8m x 2.5m line. Inflicts Exposed for 30 seconds and deals up to +35% DMG based on the target's missing health."
     },
     {
       "id": 192620,
@@ -88283,7 +88639,7 @@
     },
     {
       "id": 192621,
-      "text": "Deals 28 sonic DMG plus MGT scaling to an 8m line. Inflicts Suppression for 14 seconds."
+      "text": "Issues a command that grants you and allies within 8m of you +15% Attack and +10% Accuracy for 30 seconds."
     },
     {
       "id": 192622,
@@ -88291,7 +88647,7 @@
     },
     {
       "id": 192623,
-      "text": "Deals 28 electrical DMG plus MGT scaling to an 8m line. Inflicts Stunned for 3 seconds."
+      "text": "Inflicts Stunned on enemies in an 8m x 2.5m line for 6 seconds. Deals no direct damage."
     },
     {
       "id": 192624,
@@ -88299,7 +88655,7 @@
     },
     {
       "id": 192625,
-      "text": "Deals 28 physical DMG plus AGI scaling to an 8m line. Inflicts Hemorrhage for 14 seconds."
+      "text": "Builds momentum, granting +8% technique damage per stack (up to 3 stacks). Momentum lasts 30 seconds."
     },
     {
       "id": 192626,
@@ -88315,7 +88671,7 @@
     },
     {
       "id": 192629,
-      "text": "Your attacks have a 24% chance to inflict Sunder."
+      "text": "Your attacks have a 12% chance to inflict Sunder."
     },
     {
       "id": 192630,
@@ -88331,7 +88687,7 @@
     },
     {
       "id": 192633,
-      "text": "Deals 20 fire DMG plus PER scaling to a 4.5m radius. Inflicts Burn for 12 seconds."
+      "text": "Deals 28 fire DMG plus PER scaling to enemies within 4.5m of you. Inflicts Burn for 30 seconds."
     },
     {
       "id": 192634,
@@ -88347,7 +88703,7 @@
     },
     {
       "id": 192637,
-      "text": "Deals 32 physical DMG plus VIT scaling to a single target. Inflicts Sunder for 12 seconds."
+      "text": "Strikes a single target, inflicting Sunder and Exposed for 30 seconds, generating 100 additional enmity. Deals no direct damage."
     },
     {
       "id": 192638,
@@ -88355,7 +88711,7 @@
     },
     {
       "id": 192639,
-      "text": "Deals 28 fire DMG plus MGT scaling to a 10m cone. Inflicts Burn for 24 seconds."
+      "text": "Deals 40 fire DMG plus MGT scaling in a 10m x 7m cone, increased by 50% against targets already suffering Burn. Inflicts Burn for 30 seconds."
     },
     {
       "id": 192640,
@@ -88363,7 +88719,7 @@
     },
     {
       "id": 192641,
-      "text": "Deals 32 electrical DMG plus SOC scaling to a single target. Inflicts Weapon Jam for 12 seconds."
+      "text": "Strikes a single target, inflicting Weapon Jam and Immobilized for 15 seconds, interrupting their current action. Deals no direct damage."
     },
     {
       "id": 192642,
@@ -88371,7 +88727,7 @@
     },
     {
       "id": 192643,
-      "text": "Deals 32 physical DMG plus SOC scaling to a single target. Inflicts Exposed for 12 seconds."
+      "text": "Deals 48 physical DMG plus SOC scaling to a single target. Inflicts Exposed for 30 seconds, with +25% critical chance."
     },
     {
       "id": 192644,
@@ -88379,7 +88735,7 @@
     },
     {
       "id": 192645,
-      "text": "Deals 32 electrical DMG plus SOC scaling to a single target. Inflicts Exposed for 12 seconds."
+      "text": "Deals 48 electrical DMG plus SOC scaling to a single target, increased by 50% if it is suffering Shock. Inflicts Exposed for 30 seconds, then arcs to up to 3 enemies within 6m of the target for 16 electrical DMG plus SOC scaling and Shock for 30 seconds each."
     },
     {
       "id": 192646,
@@ -88387,7 +88743,7 @@
     },
     {
       "id": 192647,
-      "text": "Deals 32 sonic DMG plus SOC scaling to a single target. Inflicts Disoriented for 12 seconds."
+      "text": "Deals 48 sonic DMG plus SOC scaling to a single target, increased by 50% if it is Dazed or Disoriented. Inflicts Disoriented for 30 seconds."
     },
     {
       "id": 192648,
@@ -88395,7 +88751,7 @@
     },
     {
       "id": 192649,
-      "text": "Deals 32 physical DMG plus AGI scaling to a single target. Inflicts Exposed for 12 seconds."
+      "text": "Strikes a single target, inflicting Bleed for 30 seconds and restoring 4 STM to you. Deals no direct damage."
     },
     {
       "id": 192650,
@@ -88403,7 +88759,7 @@
     },
     {
       "id": 192651,
-      "text": "Deals 32 force DMG plus WIL scaling to a single target. Inflicts Weakened for 12 seconds."
+      "text": "Deals 48 force DMG plus WIL scaling to a single target. Inflicts Weakened for 30 seconds, restoring 5 FP to you per hit."
     },
     {
       "id": 192652,
@@ -88411,7 +88767,7 @@
     },
     {
       "id": 192653,
-      "text": "Deals 13 electrical DMG plus PER scaling to an 8m cone. Inflicts Disoriented for 12 seconds."
+      "text": "Inflicts Disoriented on enemies in an 8m x 5m cone for 30 seconds. Deals no direct damage."
     },
     {
       "id": 192654,
@@ -88427,7 +88783,7 @@
     },
     {
       "id": 192657,
-      "text": "Deals 28 physical DMG plus VIT scaling to an 8m line. Inflicts Knockdown for 3 seconds."
+      "text": "Anchors a defensive line, granting allies within 8m of you a shield that absorbs 30 damage for 30 seconds; enemies within 8m generate +25% Enmity toward you for 30 seconds. Deals no direct damage."
     },
     {
       "id": 192658,
@@ -88435,7 +88791,7 @@
     },
     {
       "id": 192659,
-      "text": "Deals 28 physical DMG plus AGI scaling to a 5m cone. Inflicts Knockdown for 3 seconds."
+      "text": "Deals 40 physical DMG plus AGI scaling in a 5m x 5m cone. Inflicts Knockdown for 6 seconds and Sunder for 30 seconds."
     },
     {
       "id": 192660,
@@ -88443,7 +88799,7 @@
     },
     {
       "id": 192661,
-      "text": "Your attacks have an 18% chance to inflict Bleed."
+      "text": "Your attacks have a 9% chance to inflict Bleed."
     },
     {
       "id": 192662,
@@ -88451,7 +88807,7 @@
     },
     {
       "id": 192663,
-      "text": "Deals 28 physical DMG plus SOC scaling to a 5m cone. Inflicts Hemorrhage for 8 seconds."
+      "text": "Deals 40 physical DMG plus SOC scaling in a 5m x 5m cone, increased by 50% against targets already suffering Bleed or Hemorrhage. Afflicted targets consume those effects to take another 40 physical DMG plus SOC scaling; other targets instead gain Hemorrhage for 30 seconds."
     },
     {
       "id": 192664,
@@ -88467,7 +88823,7 @@
     },
     {
       "id": 192667,
-      "text": "Deals 20 force DMG plus WIL scaling to a 4.5m radius. Inflicts Force Suppression for 12 seconds."
+      "text": "Inflicts Force Suppression for 30 seconds and drains 10 FP and 10 STM from enemies in a 4.5m-radius area at the target location. Deals no direct damage."
     },
     {
       "id": 192668,
@@ -88475,7 +88831,7 @@
     },
     {
       "id": 192669,
-      "text": "Your attacks have a 24% chance to inflict Bleed."
+      "text": "Your attacks have a 12% chance to inflict Bleed."
     },
     {
       "id": 192670,
@@ -88491,7 +88847,7 @@
     },
     {
       "id": 192673,
-      "text": "Deals 24 physical DMG plus SOC scaling to a single target. Inflicts Hobble for 6 seconds."
+      "text": "Strikes a single target, inflicting Hobble for 30 seconds. Deals no direct damage."
     },
     {
       "id": 192674,
@@ -88499,7 +88855,7 @@
     },
     {
       "id": 192675,
-      "text": "Deals 20 ice DMG plus MGT scaling to a 5.5m radius. Inflicts Freezing for 8 seconds."
+      "text": "Inflicts Freezing on enemies within 5.5m of you for 6 seconds. Deals no direct damage."
     },
     {
       "id": 192676,
@@ -88507,7 +88863,7 @@
     },
     {
       "id": 192677,
-      "text": "Deals 13 physical DMG plus PER scaling to an 8m cone. Inflicts Bleed for 18 seconds."
+      "text": "Launches quills in an 8m x 5m cone, inflicting Sunder and reducing struck enemies' Physical and Force Defense by 15% for 30 seconds. Deals no direct damage."
     },
     {
       "id": 192678,
@@ -88515,7 +88871,7 @@
     },
     {
       "id": 192679,
-      "text": "Deals 16 physical DMG plus MGT scaling to a single target. Inflicts Knockdown for 3 seconds."
+      "text": "Deals 22 physical DMG plus MGT scaling to a single target. Inflicts Knockdown for 6 seconds."
     },
     {
       "id": 192680,
@@ -88531,7 +88887,7 @@
     },
     {
       "id": 192683,
-      "text": "Deals 28 electrical DMG plus MGT scaling to a 5m cone. Inflicts Immobilized for 8 seconds."
+      "text": "Inflicts Immobilized on enemies in a 5m x 5m cone for 15 seconds. Deals no direct damage."
     },
     {
       "id": 192684,
@@ -88539,7 +88895,7 @@
     },
     {
       "id": 192685,
-      "text": "Deals 24 sonic DMG plus SOC scaling to a single target. Inflicts Marked for 6 seconds."
+      "text": "Strikes a single target, inflicting Marked for 30 seconds. Deals no direct damage."
     },
     {
       "id": 192686,
@@ -88555,7 +88911,7 @@
     },
     {
       "id": 192689,
-      "text": "Your attacks have a 12% chance to inflict Bleed."
+      "text": "Your attacks have a 6% chance to inflict Bleed."
     },
     {
       "id": 192690,
@@ -88563,7 +88919,7 @@
     },
     {
       "id": 192691,
-      "text": "Your attacks have an 18% chance to inflict Hemorrhage."
+      "text": "Your attacks have a 9% chance to inflict Hemorrhage."
     },
     {
       "id": 192692,
@@ -88579,7 +88935,7 @@
     },
     {
       "id": 192695,
-      "text": "Deals 28 physical DMG plus MGT scaling to a 9m radius. Inflicts Knockdown for 3 seconds."
+      "text": "Deals 40 physical DMG plus MGT scaling to enemies within 9m of you. Inflicts Knockdown for 6 seconds and Sunder for 30 seconds."
     },
     {
       "id": 192696,
@@ -88587,7 +88943,7 @@
     },
     {
       "id": 192697,
-      "text": "Inflicts Weakened on a 6m radius for 14 seconds."
+      "text": "Inflicts Weakened on enemies within 6m of you for 30 seconds. Deals no direct damage."
     },
     {
       "id": 192698,
@@ -88595,7 +88951,7 @@
     },
     {
       "id": 192699,
-      "text": "Deals 20 physical DMG plus MGT scaling to a 6m radius. Inflicts Knockdown for 3 seconds."
+      "text": "Deals 28 physical DMG plus MGT scaling to enemies within 6m of you and knocks them down for 6 seconds."
     },
     {
       "id": 192700,
@@ -88603,7 +88959,7 @@
     },
     {
       "id": 192701,
-      "text": "Your attacks have a 20% chance to inflict Bleed."
+      "text": "Your attacks have a 10% chance to inflict Bleed."
     },
     {
       "id": 192702,
@@ -88611,7 +88967,7 @@
     },
     {
       "id": 192703,
-      "text": "Deals 20 physical DMG plus PER scaling to an 8m cone. Inflicts Sunder for 12 seconds."
+      "text": "Deals 28 physical DMG plus PER scaling in an 8m x 5m cone. Inflicts Sunder for 30 seconds."
     },
     {
       "id": 192704,
@@ -88619,7 +88975,7 @@
     },
     {
       "id": 192705,
-      "text": "Deals 24 sonic DMG plus SOC scaling to a single target. Inflicts Disoriented for 6 seconds."
+      "text": "Strikes a single target, inflicting Disoriented for 30 seconds. Deals no direct damage."
     },
     {
       "id": 192706,
@@ -88627,7 +88983,7 @@
     },
     {
       "id": 192707,
-      "text": "Deals 28 physical DMG plus AGI scaling to a 5m cone. Inflicts Bleed for 8 seconds."
+      "text": "A burst of speed that restores 6 STM and grants +15% Haste for 15 seconds."
     },
     {
       "id": 192708,
@@ -88635,7 +88991,7 @@
     },
     {
       "id": 192709,
-      "text": "Deals 20 electrical DMG plus PER scaling to a 4.5m radius. Inflicts Shock for 12 seconds."
+      "text": "Deals 28 electrical DMG plus PER scaling to enemies within 4.5m of you and inflicts Shock for 30 seconds. It then arcs to up to 2 nearby enemies, dealing 10 electrical DMG plus PER scaling and inflicting Shock for 30 seconds on each."
     },
     {
       "id": 192710,
@@ -88643,7 +88999,7 @@
     },
     {
       "id": 192711,
-      "text": "Deals 20 poison DMG plus MGT scaling to a 4m radius. Inflicts Poison for 10 seconds."
+      "text": "Deploys a stim canister that grants you and allies within 4m of you +10% Attack and +10% Haste for 30 seconds."
     },
     {
       "id": 192712,
@@ -88651,7 +89007,7 @@
     },
     {
       "id": 192713,
-      "text": "Deals 13 physical DMG plus PER scaling to a 10m line. Inflicts Dazed for 4 seconds."
+      "text": "Inflicts Dazed on enemies in a 10m x 2.5m line for 15 seconds. Deals no direct damage."
     },
     {
       "id": 192714,
@@ -88659,7 +89015,7 @@
     },
     {
       "id": 192715,
-      "text": "Deals 28 poison DMG plus MGT scaling to a 5m cone. Inflicts Weakened for 8 seconds."
+      "text": "While active, your attacks inflict Poison for 30 seconds, dealing poison damage every 6 seconds."
     },
     {
       "id": 192716,
@@ -88683,7 +89039,7 @@
     },
     {
       "id": 192721,
-      "text": "Deals 13 poison DMG plus PER scaling to an 8m cone. Inflicts Poison for 12 seconds."
+      "text": "Deals 18 poison DMG plus PER scaling in an 8m x 5m cone. Inflicts Poison for 30 seconds."
     },
     {
       "id": 192722,
@@ -88691,7 +89047,7 @@
     },
     {
       "id": 192723,
-      "text": "Deals 28 sonic DMG plus MGT scaling to a 5.5m radius. Inflicts Dazed for 6 seconds."
+      "text": "Inflicts Dazed on enemies within 5.5m of you for 15 seconds and generates 75 additional Enmity per target. Deals no direct damage."
     },
     {
       "id": 192724,
@@ -88699,7 +89055,7 @@
     },
     {
       "id": 192725,
-      "text": "Deals 28 electrical DMG plus SOC scaling to a 5.5m radius. Inflicts Marked for 10 seconds."
+      "text": "Inflicts Marked on enemies within 5.5m of you for 30 seconds and generates 75 additional Enmity per target. Deals no direct damage."
     },
     {
       "id": 192726,
@@ -88707,7 +89063,7 @@
     },
     {
       "id": 192727,
-      "text": "Deals 28 physical DMG plus MGT scaling to a 5.5m radius. Inflicts Knockdown for 3 seconds."
+      "text": "Knocks down enemies within 5.5m of you for 6 seconds, pulls them to you, and generates 100 additional Enmity per target. Deals no direct damage."
     },
     {
       "id": 192728,
@@ -88715,7 +89071,7 @@
     },
     {
       "id": 192729,
-      "text": "Deals 28 sonic DMG plus SOC scaling to a 5.5m radius. Inflicts Disoriented for 10 seconds."
+      "text": "Sounds a restorative order, healing you and allies within 5.5m of you for 15% of maximum HP."
     },
     {
       "id": 192730,
@@ -88723,7 +89079,7 @@
     },
     {
       "id": 192731,
-      "text": "Deals 28 force DMG plus MGT scaling to a 5.5m radius. Inflicts Terrified for 10 seconds."
+      "text": "Inflicts Weakened on enemies within 5.5m of you for 30 seconds, restores 4 FP to you per hit, and generates 75 additional Enmity per target. Deals no direct damage."
     },
     {
       "id": 192732,
@@ -88731,7 +89087,7 @@
     },
     {
       "id": 192733,
-      "text": "Deals 28 physical DMG plus MGT scaling to a 5.5m radius. Inflicts Sunder for 10 seconds."
+      "text": "Takes a retaliatory guard for 30 seconds, reflecting 20% of physical damage dealt to you back at the attacker."
     },
     {
       "id": 192734,
@@ -88739,7 +89095,7 @@
     },
     {
       "id": 192735,
-      "text": "Deals 28 sonic DMG plus VIT scaling to a 5.5m radius. Inflicts Dazed for 6 seconds."
+      "text": "While active, you and allies within 10m gain +20% Defense and +20% Force Defense."
     },
     {
       "id": 192736,
@@ -88747,7 +89103,7 @@
     },
     {
       "id": 192737,
-      "text": "Deals 28 force DMG plus WIL scaling to a 5m cone. Inflicts Foggy Mind for 8 seconds."
+      "text": "Inflicts Foggy Mind on enemies in a 5m x 5m cone for 30 seconds and restores 4 FP to you per hit. Deals no direct damage."
     },
     {
       "id": 192738,
@@ -88759,7 +89115,7 @@
     },
     {
       "id": 192740,
-      "text": "Force Edge"
+      "text": "Finishing Drive Momentum"
     },
     {
       "id": 192741,
@@ -88795,7 +89151,7 @@
     },
     {
       "id": 192749,
-      "text": "Technique Resonance"
+      "text": "Warden Wall Aura"
     },
     {
       "id": 192750,
