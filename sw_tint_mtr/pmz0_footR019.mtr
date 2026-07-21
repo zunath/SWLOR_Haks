@@ -1,0 +1,14 @@
+customshaderVS vslit_sm_nm
+renderhint NormalAndSpecMapped
+// Textures
+texture1 pmz0_footR019_n
+texture2 null
+texture3 null
+texture4 null
+texture5 null
+customshaderFS fs_plt_tinter
+texture0 plt_white
+texture7 pfz0_footl019
+texture10 plt_palette
+parameter float tintMapWidth 311.0
+parameter float tintMapHeight 311.0
