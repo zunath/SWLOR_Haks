@@ -1,0 +1,16 @@
+// Shaders
+customshaderVS vslit_sm_nm
+renderhint NormalAndSpecMapped
+
+textures
+texture1 pmh0_neck199_n
+texture2 f_brahmin_s
+transparency 1
+twosided 1
+customshaderFS fs_plt_tinter
+texture0 plt_white
+texture7 pfh0_neck199
+texture10 plt_palette
+parameter float tintMapWidth 1024.0
+parameter float tintMapHeight 1024.0
+parameter float useTexture1Alpha 1.0

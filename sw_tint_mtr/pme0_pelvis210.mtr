@@ -1,0 +1,15 @@
+customshaderVS vslit_sm_nm
+renderhint NormalAndSpecMapped
+
+// Textures
+texture1 pme0_chest211_N
+texture2 pme0_chest211_S
+texture3 null
+texture4 null
+texture5 null
+customshaderFS fs_plt_tinter
+texture0 plt_white
+texture7 pfe0_pelvis210
+texture10 plt_palette
+parameter float tintMapWidth 768.0
+parameter float tintMapHeight 768.0
