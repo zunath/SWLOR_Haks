@@ -76,6 +76,22 @@ TINT_ROW_PARAMETER_LINES = tuple(
     f"parameter float {uniform_name} {(base_row + 0.5) / PALETTE_TEXTURE_HEIGHT:.6f}"
     for uniform_name, base_row in TINT_ROW_PARAMETERS
 )
+TINT_COLOR_PARAMETERS = (
+    "tintSkin",
+    "tintHair",
+    "tintMetal1",
+    "tintMetal2",
+    "tintCloth1",
+    "tintCloth2",
+    "tintLeath1",
+    "tintLeath2",
+    "tintTat1",
+    "tintTat2",
+)
+TINT_COLOR_PARAMETER_LINES = tuple(
+    f"parameter float {uniform_name} 0.0 0.0 0.0 0.0"
+    for uniform_name in TINT_COLOR_PARAMETERS
+)
 TEXTURE1_ALPHA_SHADERS = {"fs_plt_hair", "pfh0_neck199", "pmh0_neck199"}
 TEXTURE1_ALPHA_MATERIALS = {"pfh0_neck199", "pmh0_head248", "pmh0_neck199"}
 TEXTURE9_ALPHA_MATERIALS = {
@@ -869,10 +885,15 @@ def update_mtr(
     tint_row_parameter_pattern = "|".join(
         re.escape(uniform_name) for uniform_name, _ in TINT_ROW_PARAMETERS
     )
+    tint_color_parameter_pattern = "|".join(
+        re.escape(uniform_name) for uniform_name in TINT_COLOR_PARAMETERS
+    )
     replaced = re.compile(
         r"^\s*(?:customshaderFS|texture0|texture7|texture9|texture10|"
         r"parameter\s+float\s+(?:tintMapWidth|tintMapHeight|useTexture1Alpha|useTexture9Alpha|"
         + tint_row_parameter_pattern
+        + "|"
+        + tint_color_parameter_pattern
         + r"))\b",
         re.IGNORECASE,
     )
@@ -893,6 +914,7 @@ def update_mtr(
             f"parameter float tintMapHeight {float(height):.1f}",
         )
         + TINT_ROW_PARAMETER_LINES
+        + TINT_COLOR_PARAMETER_LINES
     )
     if uses_texture1_alpha:
         lines.append("parameter float useTexture1Alpha 1.0")
@@ -924,7 +946,10 @@ def is_generated_pair(model: str, texture: str, width: int, height: int, dds_pat
         and f"texture7 {texture}" in mtr
         and f"parameter float tintmapwidth {float(width):.1f}" in mtr
         and f"parameter float tintmapheight {float(height):.1f}" in mtr
-        and all(line.lower() in mtr for line in TINT_ROW_PARAMETER_LINES)
+        and all(
+            line.lower() in mtr
+            for line in TINT_ROW_PARAMETER_LINES + TINT_COLOR_PARAMETER_LINES
+        )
     )
 
 
@@ -1410,7 +1435,7 @@ def audit() -> None:
                 "texture10 plt_palette",
                 f"parameter float tintmapwidth {float(width):.1f}",
                 f"parameter float tintmapheight {float(height):.1f}",
-            ) + tuple(line.lower() for line in TINT_ROW_PARAMETER_LINES)
+            ) + tuple(line.lower() for line in TINT_ROW_PARAMETER_LINES + TINT_COLOR_PARAMETER_LINES)
             for line in required:
                 if line not in mtr:
                     errors.append(f"{model}: MTR missing '{line}'")
@@ -1440,7 +1465,7 @@ def audit() -> None:
             "texture10 plt_palette",
             f"parameter float tintmapwidth {float(entry['width']):.1f}",
             f"parameter float tintmapheight {float(entry['height']):.1f}",
-        ) + tuple(line.lower() for line in TINT_ROW_PARAMETER_LINES)
+        ) + tuple(line.lower() for line in TINT_ROW_PARAMETER_LINES + TINT_COLOR_PARAMETER_LINES)
         for line in required:
             if line not in mtr:
                 errors.append(f"{alias}: scoped MTR missing '{line}'")
@@ -1485,6 +1510,7 @@ def audit() -> None:
             "uniform sampler2D texUnit9",
             "uniform sampler2D texUnit10",
             "uniform float rowSkin",
+            "uniform vec4 tintSkin",
             "float paletteU = (g * 255.0 + 0.5) / 256.0",
             "float outputAlpha = materialFrontDiffuse.a",
         ):

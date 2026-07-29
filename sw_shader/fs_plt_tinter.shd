@@ -64,6 +64,19 @@ uniform float rowLeath2 = 0.687988;
 uniform float rowTat1   = 0.687988;
 uniform float rowTat2   = 0.687988;
 
+// Optional direct RGB overrides. Alpha 0 retains the original NWN palette row;
+// alpha 1 uses the color picker's RGB value, modulated by the packed shade.
+uniform vec4 tintSkin   = vec4(0.0);
+uniform vec4 tintHair   = vec4(0.0);
+uniform vec4 tintMetal1 = vec4(0.0);
+uniform vec4 tintMetal2 = vec4(0.0);
+uniform vec4 tintCloth1 = vec4(0.0);
+uniform vec4 tintCloth2 = vec4(0.0);
+uniform vec4 tintLeath1 = vec4(0.0);
+uniform vec4 tintLeath2 = vec4(0.0);
+uniform vec4 tintTat1   = vec4(0.0);
+uniform vec4 tintTat2   = vec4(0.0);
+
 // anisotropy: specular highlight stretch along tangent. 0.0 = isotropic.
 // Positive = along tangent (hair strand direction), negative = along bitangent.
 uniform float anisotropy;
@@ -212,21 +225,24 @@ void main ()
     float layer = floor(clamp(encodedLayer, 0.0, 0.9999) * 10.0);
 
     float v = rowSkin;
-    if      (layer > 8.5) v = rowTat2;
-    else if (layer > 7.5) v = rowTat1;
-    else if (layer > 6.5) v = rowLeath2;
-    else if (layer > 5.5) v = rowLeath1;
-    else if (layer > 4.5) v = rowCloth2;
-    else if (layer > 3.5) v = rowCloth1;
-    else if (layer > 2.5) v = rowMetal2;
-    else if (layer > 1.5) v = rowMetal1;
-    else if (layer > 0.5) v = rowHair;
+    vec4 customTint = tintSkin;
+    if      (layer > 8.5) { v = rowTat2;   customTint = tintTat2; }
+    else if (layer > 7.5) { v = rowTat1;   customTint = tintTat1; }
+    else if (layer > 6.5) { v = rowLeath2; customTint = tintLeath2; }
+    else if (layer > 5.5) { v = rowLeath1; customTint = tintLeath1; }
+    else if (layer > 4.5) { v = rowCloth2; customTint = tintCloth2; }
+    else if (layer > 3.5) { v = rowCloth1; customTint = tintCloth1; }
+    else if (layer > 2.5) { v = rowMetal2; customTint = tintMetal2; }
+    else if (layer > 1.5) { v = rowMetal1; customTint = tintMetal1; }
+    else if (layer > 0.5) { v = rowHair;   customTint = tintHair; }
 
     // Bias -10 forces mip level 0. The tintmap-derived UVs have chaotic
     // screen-space derivatives, so without this the GPU picks the smallest
     // mip (the whole-atlas average: a flat muddy color on every pixel).
     float paletteU = (g * 255.0 + 0.5) / 256.0;
-    vec3 vTint = texture2D(texUnit10, vec2(paletteU, v), -10.0).rgb;
+    vec3 vTint = customTint.a > 0.5
+        ? customTint.rgb * g
+        : texture2D(texUnit10, vec2(paletteU, v), -10.0).rgb;
 
     // Setup must see white so SetupSpecularity() derives SpecularColor the
     // same way fs_plt_hair did (FragmentColor was 1.0 there). The tint is
