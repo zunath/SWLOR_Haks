@@ -914,8 +914,10 @@ def update_mtr(
         # explicit tangent-producing render hint, the game can recover through
         # the shader's normal fallback, but the stock Toolset may construct the
         # mesh without the attributes required by vslit_sm_nm and report model
-        # or shader errors while previewing creatures.
-        lines.append("renderhint NormalAndSpecMapped")
+        # or shader errors while previewing creatures. NormalTangents requests
+        # those attributes without making the engine probe for normal/specular
+        # maps that the original PLT-only material did not provide.
+        lines.append("renderhint NormalTangents")
 
     lines.extend(
         (

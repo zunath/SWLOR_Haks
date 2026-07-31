@@ -6,9 +6,10 @@
 // original PLT resref is retained so every existing model can opt in without
 // renaming its bitmap nodes.
 //
-// REQUIRES in the MTR: renderhint NormalAndSpecMapped (tangent data), and
-// the parameters: tintMapWidth, tintMapHeight, anisotropy, AnisoIntensity,
-// and Roughness (if no roughness map is bound).
+// REQUIRES in the MTR: a tangent-producing renderhint plus the
+// tintMapWidth/tintMapHeight parameters. NormalTangents is sufficient when
+// the legacy material has no normal/specular maps; authored mapped materials
+// may retain NormalAndSpecMapped.
 //
 // PACKED TINT MAP (texUnit7, original PLT resref):
 //   R = shade/grey value
