@@ -251,9 +251,9 @@ void main ()
 
     SetupStandardShaderInputs();
 
-    // Fallback for meshes without tangent data (missing renderhint): a
-    // degenerate tangent basis collapses the perturbed normal to zero.
-    // Restore the plain surface normal; correct meshes are unaffected.
+    // Fallback for legacy meshes whose generated tangent data is degenerate:
+    // a collapsed tangent basis reduces the perturbed normal to zero. Restore
+    // the plain surface normal; correct meshes are unaffected.
     if (dot(vFragmentNormal, vFragmentNormal) < 0.25 ||
         !(vFragmentNormal.x == vFragmentNormal.x))
     {

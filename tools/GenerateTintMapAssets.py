@@ -357,6 +357,12 @@ def replace_model_materials(path: Path, replacements: dict[str, str]) -> bool:
     data = path.read_bytes()
     is_binary = len(data) >= 4 and struct.unpack_from("<I", data, 0)[0] == 0
     if not is_binary:
+        # Decode the bytes directly rather than using Path.read_text(). Python's
+        # universal-newline handling otherwise rewrites LF-only legacy models as
+        # CRLF on Windows. The stock Toolset accepts both forms, but changing
+        # every line in a model makes the generated patch needlessly invasive
+        # and prevents a byte-level audit from proving that only material
+        # references changed.
         text = data.decode("ascii", errors="strict")
         changed = False
 
@@ -375,7 +381,7 @@ def replace_model_materials(path: Path, replacements: dict[str, str]) -> bool:
             text,
         )
         if changed:
-            path.write_text(updated, encoding="ascii", newline="")
+            path.write_bytes(updated.encode("ascii"))
         return changed
 
     updated = bytearray(data)
@@ -903,6 +909,13 @@ def update_mtr(
 
     if not any(re.match(r"^\s*customshaderVS\b", line, re.IGNORECASE) for line in lines):
         lines.append("customshaderVS vslit_sm_nm")
+    if not any(re.match(r"^\s*renderhint\b", line, re.IGNORECASE) for line in lines):
+        # The tint fragment shader consumes the tangent basis. Without an
+        # explicit tangent-producing render hint, the game can recover through
+        # the shader's normal fallback, but the stock Toolset may construct the
+        # mesh without the attributes required by vslit_sm_nm and report model
+        # or shader errors while previewing creatures.
+        lines.append("renderhint NormalAndSpecMapped")
 
     lines.extend(
         (
@@ -1352,6 +1365,56 @@ def check_tga_header(path: Path, width: int, height: int) -> str | None:
     return None
 
 
+def check_tint_mtr_structure(path: Path) -> list[str]:
+    lines = path.read_text(encoding="utf-8-sig").splitlines()
+    directives: dict[tuple[str, ...], list[str]] = {}
+    for line in lines:
+        key = mtr_directive_key(line)
+        if key is not None:
+            directives.setdefault(key, []).append(line.strip())
+
+    errors: list[str] = []
+    singleton_keys = (
+        ("customshadervs",),
+        ("customshaderfs",),
+        ("renderhint",),
+        ("texture0",),
+        ("texture7",),
+        ("texture10",),
+        ("parameter", "float", "tintmapwidth"),
+        ("parameter", "float", "tintmapheight"),
+    ) + tuple(
+        ("parameter", "float", uniform_name.lower())
+        for uniform_name, _ in TINT_ROW_PARAMETERS
+    ) + tuple(
+        ("parameter", "float", uniform_name.lower())
+        for uniform_name in TINT_COLOR_PARAMETERS
+    )
+    for key in singleton_keys:
+        count = len(directives.get(key, []))
+        if count != 1:
+            errors.append(f"directive {' '.join(key)} occurs {count} times")
+
+    render_hints = directives.get(("renderhint",), [])
+    if render_hints and render_hints[0].lower() not in {
+        "renderhint normalandspecmapped",
+        "renderhint normaltangents",
+    }:
+        errors.append(f"unsupported tint render hint '{render_hints[0]}'")
+
+    vertex_shaders = directives.get(("customshadervs",), [])
+    if vertex_shaders:
+        tokens = vertex_shaders[0].split()
+        if len(tokens) != 2 or len(tokens[1]) > 16 or not tokens[1].isascii():
+            errors.append(f"invalid custom vertex shader directive '{vertex_shaders[0]}'")
+
+    fragment_shaders = directives.get(("customshaderfs",), [])
+    if fragment_shaders and fragment_shaders[0].lower() != "customshaderfs fs_plt_tinter":
+        errors.append(f"unexpected tint fragment shader '{fragment_shaders[0]}'")
+
+    return errors
+
+
 def audit() -> None:
     entries = load_source_manifest()
     errors: list[str] = []
@@ -1425,11 +1488,16 @@ def audit() -> None:
         if not material_path.exists():
             errors.append(f"{model}: missing MTR")
         else:
+            errors.extend(
+                f"{model}: {error}"
+                for error in check_tint_mtr_structure(material_path)
+            )
             mtr = material_path.read_text(encoding="utf-8-sig").lower()
             texture = str(entry.get("texture") or model)
             required = (
                 "customshadervs ",
                 "customshaderfs fs_plt_tinter",
+                "renderhint ",
                 "texture0 plt_white",
                 f"texture7 {texture}",
                 "texture10 plt_palette",
@@ -1455,11 +1523,16 @@ def audit() -> None:
         if not material_path.exists():
             errors.append(f"{alias}: missing scoped MTR for '{source}'")
             continue
+        errors.extend(
+            f"{alias}: {error}"
+            for error in check_tint_mtr_structure(material_path)
+        )
         mtr = material_path.read_text(encoding="utf-8-sig").lower()
         texture = str(entry.get("texture") or source)
         required = (
             "customshadervs ",
             "customshaderfs fs_plt_tinter",
+            "renderhint ",
             "texture0 plt_white",
             f"texture7 {texture}",
             "texture10 plt_palette",
