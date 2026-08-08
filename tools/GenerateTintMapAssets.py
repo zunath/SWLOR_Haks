@@ -326,15 +326,19 @@ def read_binary_model_material_fields(
         texture = read_resref(texture_offset, 64)
         material_offset = mesh + MESH_MATERIAL_NAME_OFFSET
         material = read_resref(material_offset, 64)
-        if texture and texture != "null":
-            materials.append(
-                (
-                    texture_offset,
-                    texture,
-                    material_offset,
-                    material if material and material != "null" else None,
-                )
+        # Segmented body-part models conventionally leave bitmap NULL and let the
+        # engine bind the same-resref PLT selected for that part. Treat the model
+        # resref as the logical surface in that case so conversion keeps the PLT
+        # and writes the generated MTR into the otherwise-empty material slot.
+        logical_texture = texture if texture and texture != "null" else path.stem.lower()
+        materials.append(
+            (
+                texture_offset,
+                logical_texture,
+                material_offset,
+                material if material and material != "null" else None,
             )
+        )
 
     return materials
 
@@ -353,6 +357,8 @@ def read_model_materials(path: Path) -> list[str]:
             )
             if match.group(1).lower() != "null"
         }
+        if re.search(r"(?im)^\s*(?:bitmap|texture0)\s+null(?:\s|$)", text):
+            materials.add(path.stem.lower())
         return sorted(materials)
 
     return sorted(
@@ -386,14 +392,13 @@ def read_model_material_bindings(path: Path) -> list[tuple[str, str | None]]:
         if texture_match is None:
             continue
         texture = texture_match.group(1).lower()
-        if texture == "null":
-            continue
+        logical_texture = texture if texture != "null" else path.stem.lower()
         material_match = re.search(
             r"(?im)^\s*materialname\s+([^\s#]+)",
             node,
         )
         material = material_match.group(1).lower() if material_match else None
-        bindings.append((texture, material if material != "null" else None))
+        bindings.append((logical_texture, material if material != "null" else None))
     return bindings
 
 
@@ -447,7 +452,8 @@ def synchronize_model_material_bindings(path: Path, bindings: dict[str, str]) ->
             )
             if texture_match is None:
                 return node
-            source = texture_match.group("texture").lower()
+            texture = texture_match.group("texture").lower()
+            source = texture if texture != "null" else path.stem.lower()
             target = normalized.get(source)
             if target is None:
                 return node
