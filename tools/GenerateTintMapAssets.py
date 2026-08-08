@@ -1588,9 +1588,14 @@ def audit() -> None:
             "uniform vec4 tintSkin",
             "float paletteU = (g * 255.0 + 0.5) / 256.0",
             "float outputAlpha = materialFrontDiffuse.a",
+            "SetupStandardShaderInputs();",
+            "ApplyStandardShader();",
         ):
             if token not in shader:
                 errors.append(f"tint fragment shader missing '{token}'")
+        for token in ("computeAnisoSpecular", "fSpecularity = 0.0"):
+            if token in shader:
+                errors.append(f"tint fragment shader must not override standard material rendering with '{token}'")
 
     expected_outputs = {packed_dds_path(model, entry).resolve() for model, entry in entries.items()}
     actual_outputs = {

@@ -78,144 +78,6 @@ uniform vec4 tintLeath2 = vec4(0.0);
 uniform vec4 tintTat1   = vec4(0.0);
 uniform vec4 tintTat2   = vec4(0.0);
 
-// anisotropy: specular highlight stretch along tangent. 0.0 = isotropic.
-// Positive = along tangent (hair strand direction), negative = along bitangent.
-uniform float anisotropy;
-// AnisoIntensity: overall anisotropic specular intensity. Range 0.0 - 1.0.
-// Set via MTR: "parameter float AnisoIntensity <value>"
-// Defaults to 0.2 when not set in MTR.
-uniform float AnisoIntensity;
-//-----------------------------------------------------------------------------
-// Anisotropic GGX helpers (from fslit_aniso_nm.shd)
-//-----------------------------------------------------------------------------
-
-#ifndef saturate
-#define saturate(val) clamp((val), 0.0, 1.0)
-#endif
-
-// Normalized anisotropic GGX / Trowbridge-Reitz  [McAuley 2015]
-float aniso_getGGX(in float tDotH, in float bDotH, in float nDotH,
-                   in float alphaT, in float alphaB)
-{
-    float a2 = alphaT * alphaB;
-    vec3  v  = vec3(tDotH / alphaT, bDotH / alphaB, nDotH);
-    float d  = dot(v, v);
-    // Clamp the denominator to prevent division-by-near-zero firefly spikes
-    // when the half-vector nearly aligns with the anisotropic axes.
-    return 1.0 / max(a2 * d * d, 1e-6);
-}
-// Height-correlated Smith masking-shadowing for anisotropic GGX
-float aniso_getSmithVisibility(in float tDotE, in float bDotE, in float nDotE,
-                               in float tDotL, in float bDotL, in float nDotL,
-                               in float alphaT, in float alphaB)
-{
-    float smithE = nDotL * sqrt(alphaT * tDotE * tDotE + alphaB * bDotE * bDotE + nDotE * nDotE);
-    float smithL = nDotE * sqrt(alphaT * tDotL * tDotL + alphaB * bDotL * bDotL + nDotL * nDotL);
-    return 0.5 / max(smithE + smithL, 1e-5);
-}
-
-//-----------------------------------------------------------------------------
-// computeAnisoSpecular()
-//
-// Accumulates anisotropic GGX specular over all active lights.
-// Uses globals set by inc_standard / inc_common before main() calls this.
-//
-//   tangent, bitangent  - from the rebuilt TSB (mTSB_aniso[0], [1])
-//
-// Returns accumulated specular RGB (caller multiplies by SpecularColor).
-//-----------------------------------------------------------------------------
-vec3 computeAnisoSpecular(in vec3 tangent, in vec3 bitangent)
-{
-    vec3  normal   = vFragmentNormal;
-    vec3  position = vPosView;
-
-    float roughnessT = fRoughness * (1.0 + anisotropy);
-    float roughnessB = fRoughness * (1.0 - anisotropy);
-    float alphaT     = max(roughnessT * roughnessT, 1e-5);
-    float alphaB     = max(roughnessB * roughnessB, 1e-5);
-
-    // vViewToSurface_n points from eye toward surface; flip for "toEye".
-    vec3  toEye = -vViewToSurface_n;
-    float nDotE = saturate(dot(normal, toEye));
-    float tDotE = dot(tangent,   toEye);
-    float bDotE = dot(bitangent, toEye);
-
-    vec3 specAcc = vec3(0.0);
-
-    // --- Static / baked directional light ---
-    // vStaticLightDirOut is declared in inc_lighting only under
-    // FRAGMENT_LIGHTING == 0 && NORMAL_MAP == 1.
-    // VertexStaticLighting is declared only under FRAGMENT_NORMAL == 1.
-    // Mirror those guards exactly to avoid undefined variable errors.
-    #if FRAGMENT_LIGHTING == 0 && NORMAL_MAP == 1
-    if (dot(vStaticLightDirOut, vStaticLightDirOut) > 0.0)
-    {
-        vec3  toLight = normalize(vStaticLightDirOut);
-        float nDotL   = dot(normal, toLight);
-        if (nDotL > 0.0)
-        {
-            vec3  halfVec = normalize(toEye + toLight);
-            float tDotH   = dot(tangent,   halfVec);
-            float bDotH   = dot(bitangent, halfVec);
-            float nDotH   = saturate(dot(normal, halfVec));
-            float tDotL   = dot(tangent,   toLight);
-            float bDotL   = dot(bitangent, toLight);
-
-            float d = aniso_getGGX(tDotH, bDotH, nDotH, alphaT, alphaB);
-            float g = aniso_getSmithVisibility(tDotE, bDotE, nDotE,
-                                               tDotL, bDotL, nDotL,
-                                               alphaT, alphaB);
-            #if FRAGMENT_NORMAL == 1
-            specAcc += saturate(nDotL) * (d * g) * VertexStaticLighting.rgb;
-            #endif
-        }
-    }
-    #endif
-
-    // --- Dynamic lights ---
-    for (int i = 0; i < numLights; i++)
-    {
-        vec3  lightOffset = lightPosition[i].xyz - position;
-        float dist_sq     = dot(lightOffset, lightOffset);
-
-        #if GAMMA_CORRECTION == 1
-        float fLightRange = abs(lightColor[i].a);
-        if (fLightRange < dist_sq) continue;
-        // Negative .a flags ambient-only lights in the new path - skip them.
-        if (lightColor[i].a < 0.0) continue;
-        float fLightFalloff2 = dist_sq / fLightRange;
-        float attenuation    = (1.0 - fLightFalloff2) /
-        (lightMaxIntensityInv + lightFalloffFactor * fLightFalloff2);
-        vec3 lightRGB = lightColor[i].rgb;
-        #else
-        // Skip ambient-only lights
-        if (dot(abs(lightAmbient[i].rgb), vec3(1.0)) != 0.0) continue;
-        float attenuation = 1.0 / (1.0 + lightQuadraticAtten[i] * dist_sq);
-        vec3  lightRGB    = lightDiffuse[i].rgb;
-        #endif
-
-        vec3  toLight = normalize(lightOffset);
-        float nDotL   = dot(normal, toLight);
-        if (nDotL <= 0.0) continue;
-
-        vec3  halfVec = normalize(toEye + toLight);
-        float tDotH   = dot(tangent,   halfVec);
-        float bDotH   = dot(bitangent, halfVec);
-        float nDotH   = saturate(dot(normal, halfVec));
-        float tDotL   = dot(tangent,   toLight);
-        float bDotL   = dot(bitangent, toLight);
-
-        float d = aniso_getGGX(tDotH, bDotH, nDotH, alphaT, alphaB);
-        float g = aniso_getSmithVisibility(tDotE, bDotE, nDotE,
-                                           tDotL, bDotL, nDotL,
-                                           alphaT, alphaB);
-
-        specAcc += attenuation * saturate(nDotL) * (d * g) * lightRGB;
-    }
-
-    return specAcc;
-}
-
 void main ()
 {
     vec2 tintMapSize = max(vec2(tintMapWidth, tintMapHeight), vec2(1.0));
@@ -261,14 +123,6 @@ void main ()
         vFragmentNormal = normalize(vSurfaceNormal);
     }
 
-    // Rebuild TSB to pass T and B explicitly to our aniso function.
-    mat3 mTSB_aniso = SetupTSB();
-
-    // Zero fSpecularity so ComputeLighting() inside ApplyStandardShader()
-    // contributes no isotropic specular. fRoughness and SpecularColor stay
-    // intact for the aniso pass below.
-    fSpecularity = 0.0;
-
     // Linearize before lighting; ApplyStandardShader() reverts at the end.
     FragmentColor = vec4(ApplyColorSpace(vTint), 1.0);
 
@@ -288,16 +142,11 @@ void main ()
             discard;
     }
 
-    // Standard diffuse + ambient + fog + keyholing (isotropic specular zeroed).
+    // Use the engine's standard material path so authored normal, specular,
+    // roughness, self-illumination, and environment textures retain their
+    // original behavior. Applying a separate default anisotropic pass here
+    // makes ordinary PLT-only body parts look glossy and washes out the packed
+    // tint-map detail.
     ApplyStandardShader();
-
-    // Anisotropic GGX specular added on top.
-    // AnisoIntensity follows the MTR > 0.0 convention: 0.0 means "not set",
-    // which we treat as the 1.0 default so omitting it gives full intensity.
-    float fAnisoIntensity = (AnisoIntensity < 0.01) ? 0.2 : AnisoIntensity;
-    vec3 anisoSpec = computeAnisoSpecular(mTSB_aniso[0], mTSB_aniso[1]);
-    // Clamp the specular contribution to guard against any remaining spikes
-    // that could cause bright white flickering pixels.
-    anisoSpec = min(anisoSpec, vec3(1.0));
-    gl_FragColor = vec4(FragmentColor.rgb + SpecularColor * anisoSpec * fAnisoIntensity, outputAlpha);
+    gl_FragColor = vec4(FragmentColor.rgb, outputAlpha);
 }
