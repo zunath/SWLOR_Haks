@@ -19,11 +19,12 @@
 // a nearest texel center using the MTR-provided dimensions, preventing a
 // filtered seam from selecting the wrong dye layer.
 //
-// PALETTE ATLAS (texUnit10, plt_palette.tga, 256x1024, mipmap 0):
+// PALETTE ATLAS (texUnit10, plt_palette.tga, 256x2048, mipmap 0):
 //   U = (grey byte + 0.5) / 256, centered within the palette texel
-//   V = (palette*176 + row + 0.5) / 1024, precomputed by script:
+//   V = (palette base + row + 0.5) / 2048, precomputed by script:
 //     skin rows 0-175, hair 176-351, metal1 352-527,
-//     metal2 528-703, cloth/leather/tattoo (shared) 704-879
+//     metal2 528-703, cloth 704-879, leather 880-1055,
+//     tattoo 1056-1231
 //
 // texture0 must still be bound (white placeholder) so the engine does
 // not auto-assign; the white multiply is an identity op.
@@ -54,16 +55,16 @@ uniform float useTexture1Alpha;
 uniform float useTexture9Alpha;
 
 // Per-layer palette V coordinate (defaults = row 0 of each palette).
-uniform float rowSkin   = 0.000488;
-uniform float rowHair   = 0.172363;
-uniform float rowMetal1 = 0.344238;
-uniform float rowMetal2 = 0.516113;
-uniform float rowCloth1 = 0.687988;
-uniform float rowCloth2 = 0.687988;
-uniform float rowLeath1 = 0.687988;
-uniform float rowLeath2 = 0.687988;
-uniform float rowTat1   = 0.687988;
-uniform float rowTat2   = 0.687988;
+uniform float rowSkin   = 0.000244;
+uniform float rowHair   = 0.086182;
+uniform float rowMetal1 = 0.172119;
+uniform float rowMetal2 = 0.258057;
+uniform float rowCloth1 = 0.343994;
+uniform float rowCloth2 = 0.343994;
+uniform float rowLeath1 = 0.429932;
+uniform float rowLeath2 = 0.429932;
+uniform float rowTat1   = 0.515869;
+uniform float rowTat2   = 0.515869;
 
 // Optional direct RGB overrides. Alpha 0 retains the original NWN palette row;
 // alpha 1 uses the color picker's RGB value, modulated by the packed shade.

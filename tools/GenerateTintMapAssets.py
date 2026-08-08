@@ -59,7 +59,7 @@ LAYER_NAMES = (
     "Tattoo1",
     "Tattoo2",
 )
-PALETTE_TEXTURE_HEIGHT = 1024
+PALETTE_TEXTURE_HEIGHT = 2048
 TINT_ROW_PARAMETERS = (
     ("rowSkin", 0),
     ("rowHair", 176),
@@ -67,10 +67,10 @@ TINT_ROW_PARAMETERS = (
     ("rowMetal2", 528),
     ("rowCloth1", 704),
     ("rowCloth2", 704),
-    ("rowLeath1", 704),
-    ("rowLeath2", 704),
-    ("rowTat1", 704),
-    ("rowTat2", 704),
+    ("rowLeath1", 880),
+    ("rowLeath2", 880),
+    ("rowTat1", 1056),
+    ("rowTat2", 1056),
 )
 TINT_ROW_PARAMETER_LINES = tuple(
     f"parameter float {uniform_name} {(base_row + 0.5) / PALETTE_TEXTURE_HEIGHT:.6f}"
@@ -1675,7 +1675,7 @@ def audit() -> None:
 
     if not WHITE_TEXTURE.exists() or WHITE_TEXTURE.read_bytes() != white_texture_bytes():
         errors.append("plt_white.tga is missing or invalid")
-    palette_error = check_tga_header(PALETTE_TEXTURE, 256, 1024)
+    palette_error = check_tga_header(PALETTE_TEXTURE, 256, PALETTE_TEXTURE_HEIGHT)
     if palette_error:
         errors.append(f"plt_palette.tga: {palette_error}")
     if not PALETTE_TXI.exists() or "mipmap 0" not in PALETTE_TXI.read_text(encoding="utf-8").lower():
