@@ -35,6 +35,7 @@ node trimesh rootdummy
   shininess 14
   center 0.0 5.06639e-006 0.0 
   bitmap pfh0_neck001
+  materialname pfh0_neck001
   verts 8
     -0.0226925 0.0194507 -0.0194507
     0.0226925 0.0194507 -0.0194507
@@ -79,6 +80,7 @@ node trimesh pelvis_g
   shininess 1
   center -0.0610495 -5.07755 -11.7273 
   bitmap pmh0_footl001
+  materialname pmh0_footl001
   verts 61
     -0.167471 0.00787315 -0.186845
     -0.00103387 -0.119656 -0.137285
@@ -368,6 +370,7 @@ node trimesh rthigh_g
   shininess 26
   center 3.59824 0.78085 -21.2702 
   bitmap pfh0_legr099
+  materialname pfh0_legr099
   verts 38
     -0.0354053 0.0776414 -0.0704579
     0.0695301 -0.0390853 -0.0299784
@@ -654,6 +657,7 @@ node trimesh rshin_g
   shininess 26
   center 0.0246453 -0.1488 -19.0447 
   bitmap pfh0_shinr099
+  materialname pfh0_shinr099
   verts 26
     -0.0127999 0.0583763 -0.0183496
     0.0273223 0.000187701 0.00186665
@@ -1039,6 +1043,7 @@ node trimesh lthigh_g
   shininess 26
   center -3.59824 0.78085 -21.2702 
   bitmap pfh0_legl099
+  materialname pfh0_legl099
   verts 38
     0.0354053 0.0776414 -0.0704579
     -0.0695301 -0.0390853 -0.0299784
@@ -1248,6 +1253,7 @@ node trimesh lshin_g
   shininess 26
   center -0.0246453 -0.1488 -19.0447 
   bitmap pfh0_shinl099
+  materialname pfh0_shinl099
   verts 26
     0.0127999 0.0583763 -0.0183496
     -0.0273223 0.000187701 0.00186665
@@ -1601,6 +1607,7 @@ node trimesh torso_g
   shininess 26
   center 0.0 0.5303 17.7809 
   bitmap pfh0_chest099
+  materialname pfh0_chest099
   verts 105
     0.0 -0.0563936 0.406552
     0.0 -0.0659751 0.00217538
@@ -2136,6 +2143,7 @@ node trimesh rbicep_g
   shininess 1
   center 2.57274 -2.19419 -14.3649 
   bitmap pfh0_bicepr099
+  materialname pfh0_bicepr099
   verts 28
     0.0263215 -0.00517792 -0.334838
     0.0455665 -0.0305695 -0.113929
@@ -2878,6 +2886,7 @@ node trimesh rhand_g
   shininess 1
   center 0.83501 0.802975 -5.52552 
   bitmap pmh0_handl003
+  materialname pmh0_handl003
   verts 10
     -0.00314253 0.0247717 -0.119053
     -0.0101907 -0.0373019 -0.101506
@@ -3614,6 +3623,7 @@ node trimesh lbicep_g
   shininess 1
   center -2.57274 -2.19419 -14.3649 
   bitmap pmh0_bicepl001
+  materialname pmh0_bicepl001
   verts 28
     -0.0263215 -0.00517792 -0.334838
     -0.0455665 -0.0305695 -0.113929
@@ -4207,6 +4217,7 @@ node trimesh lhand_g
   shininess 1
   center -0.83501 0.802975 -5.52552 
   bitmap pmh0_handl003
+  materialname pmh0_handl003
   verts 10
     0.00314253 0.0247717 -0.119053
     0.0101907 -0.0373019 -0.101506

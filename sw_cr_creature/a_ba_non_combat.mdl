@@ -51,6 +51,7 @@ node trimesh torso_g
   shininess 1
   lightmapped 100
   bitmap pmh0_chest001
+  materialname pmh0_chest001
   verts 37
        0.1570800   -0.1691300    0.2377300
        0.1664000   -0.1596400    0.4063400
@@ -224,6 +225,7 @@ node trimesh rbicep_g
   shininess 1
   lightmapped 111
   bitmap pmh0_bicepl001
+  materialname pmh0_bicepl001
   verts 21
        0.1023000    0.0143800   -0.0006700
        0.0085700    0.0706000   -0.0122600
@@ -331,6 +333,7 @@ node trimesh rforearm_g
   shininess 26
   lightmapped 95
   bitmap pmh0_forel001
+  materialname pmh0_forel001
   verts 16
       -0.0043900   -0.0456300    0.0239500
        0.0395000    0.0058200    0.0040100
@@ -417,6 +420,7 @@ node trimesh rhand_g
   shininess 1
   lightmapped 95
   bitmap pmh0_handl003
+  materialname pmh0_handl003
   verts 10
       -0.0246200    0.0313400   -0.0055100
       -0.0363600    0.0642600   -0.1150500
@@ -562,6 +566,7 @@ node trimesh lbicep_g
   shininess 1
   lightmapped 111
   bitmap pmh0_bicepl001
+  materialname pmh0_bicepl001
   verts 21
       -0.0085700    0.0706000   -0.0122600
       -0.1023000    0.0143800   -0.0006700
@@ -669,6 +674,7 @@ node trimesh lforearm_g
   shininess 26
   lightmapped 179
   bitmap pmh0_forel001
+  materialname pmh0_forel001
   verts 16
       -0.0395000    0.0058200    0.0040100
        0.0043900   -0.0456300    0.0239500
@@ -821,6 +827,7 @@ node trimesh lhand_g
   shininess 1
   lightmapped 179
   bitmap pmh0_handl003
+  materialname pmh0_handl003
   verts 10
        0.0363600    0.0642600   -0.1150500
        0.0246200    0.0313400   -0.0055100
@@ -966,6 +973,7 @@ node trimesh neck_g
   shininess 26
   lightmapped 111
   bitmap pmh0_neck001
+  materialname pmh0_neck001
   verts 10
        0.0816500    0.0055100    0.0003100
       -0.0002200   -0.0152000   -0.0707600
@@ -1335,6 +1343,7 @@ node trimesh pelvis_g
   shininess 1
   lightmapped 100
   bitmap pmh0_pelvis001
+  materialname pmh0_pelvis001
   verts 44
        0.0806800    0.0732800   -0.1770800
        0.1045400    0.0405700   -0.2394800
@@ -1540,6 +1549,7 @@ node trimesh lthigh_g
   shininess 1
   lightmapped 179
   bitmap pmh0_legl001
+  materialname pmh0_legl001
   verts 16
       -0.0001500    0.0367100    0.0664400
       -0.0376400   -0.0180300    0.0666900
@@ -1626,6 +1636,7 @@ node trimesh lshin_g
   shininess 1
   lightmapped 179
   bitmap pmh0_shinl001
+  materialname pmh0_shinl001
   verts 18
       -0.0613000   -0.0100800   -0.0003600
       -0.0161500   -0.0085000    0.0421000
@@ -1722,6 +1733,7 @@ node trimesh lfoot_g
   shininess 1
   lightmapped 179
   bitmap pmh0_footl001
+  materialname pmh0_footl001
   verts 11
       -0.0424200   -0.0012300   -0.0008300
       -0.0679000    0.0068500   -0.1361800
@@ -1790,6 +1802,7 @@ node trimesh rthigh_g
   shininess 1
   lightmapped 179
   bitmap pmh0_legl001
+  materialname pmh0_legl001
   verts 16
        0.0376400   -0.0180300    0.0666900
        0.0001500    0.0367100    0.0664400
@@ -1876,6 +1889,7 @@ node trimesh rshin_g
   shininess 1
   lightmapped 179
   bitmap pmh0_shinl001
+  materialname pmh0_shinl001
   verts 18
        0.0161500   -0.0085000    0.0421000
        0.0613000   -0.0100800   -0.0003600
@@ -1972,6 +1986,7 @@ node trimesh rfoot_g
   shininess 1
   lightmapped 179
   bitmap pmh0_footl001
+  materialname pmh0_footl001
   verts 11
        0.0679000    0.0068500   -0.1361800
        0.0424200   -0.0012300   -0.0008300

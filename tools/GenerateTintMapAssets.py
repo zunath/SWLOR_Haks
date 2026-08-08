@@ -105,6 +105,7 @@ LIGHT_HEADER_SIZE = 92
 EMITTER_HEADER_SIZE = 212
 REFERENCE_HEADER_SIZE = 68
 MESH_TEXTURE0_OFFSET = 120
+MESH_MATERIAL_NAME_OFFSET = 312
 
 
 def require_repository_root() -> None:
@@ -269,7 +270,10 @@ def find_table_referenced_resrefs() -> set[str]:
     return _TABLE_REFERENCED_RESREFS
 
 
-def read_binary_model_material_fields(path: Path, data: bytes) -> list[tuple[int, str]]:
+def read_binary_model_material_fields(
+    path: Path,
+    data: bytes,
+) -> list[tuple[int, str, int, str | None]]:
     def read_uint32(offset: int) -> int:
         if offset < 0 or offset + 4 > len(data):
             raise ValueError(f"{path}: truncated uint32 at 0x{offset:x}")
@@ -287,7 +291,7 @@ def read_binary_model_material_fields(path: Path, data: bytes) -> list[tuple[int
 
     pending = [read_uint32(FILE_HEADER_SIZE + 72)]
     visited: set[int] = set()
-    materials: list[tuple[int, str]] = []
+    materials: list[tuple[int, str, int, str | None]] = []
     while pending:
         pointer = pending.pop()
         if pointer in visited:
@@ -318,10 +322,19 @@ def read_binary_model_material_fields(path: Path, data: bytes) -> list[tuple[int
             mesh += EMITTER_HEADER_SIZE
         if content & 0x10:
             mesh += REFERENCE_HEADER_SIZE
-        material_offset = mesh + MESH_TEXTURE0_OFFSET
+        texture_offset = mesh + MESH_TEXTURE0_OFFSET
+        texture = read_resref(texture_offset, 64)
+        material_offset = mesh + MESH_MATERIAL_NAME_OFFSET
         material = read_resref(material_offset, 64)
-        if material and material != "null":
-            materials.append((material_offset, material))
+        if texture and texture != "null":
+            materials.append(
+                (
+                    texture_offset,
+                    texture,
+                    material_offset,
+                    material if material and material != "null" else None,
+                )
+            )
 
     return materials
 
@@ -342,14 +355,72 @@ def read_model_materials(path: Path) -> list[str]:
         }
         return sorted(materials)
 
-    return sorted({material for _, material in read_binary_model_material_fields(path, data)})
+    return sorted(
+        {
+            texture
+            for _, texture, _, _ in read_binary_model_material_fields(path, data)
+        }
+    )
 
 
-def replace_model_materials(path: Path, replacements: dict[str, str]) -> bool:
+def read_model_material_bindings(path: Path) -> list[tuple[str, str | None]]:
+    data = path.read_bytes()
+    is_binary = len(data) >= 4 and struct.unpack_from("<I", data, 0)[0] == 0
+    if is_binary:
+        return [
+            (texture, material)
+            for _, texture, _, material in read_binary_model_material_fields(path, data)
+        ]
+
+    text = data.decode("ascii", errors="strict")
+    bindings: list[tuple[str, str | None]] = []
+    for node_match in re.finditer(
+        r"(?ims)^\s*node\s+[^\r\n]+\r?\n.*?^\s*endnode\b[^\r\n]*(?:\r?\n|$)",
+        text,
+    ):
+        node = node_match.group(0)
+        texture_match = re.search(
+            r"(?im)^\s*(?:bitmap|texture0)\s+([^\s#]+)",
+            node,
+        )
+        if texture_match is None:
+            continue
+        texture = texture_match.group(1).lower()
+        if texture == "null":
+            continue
+        material_match = re.search(
+            r"(?im)^\s*materialname\s+([^\s#]+)",
+            node,
+        )
+        material = material_match.group(1).lower() if material_match else None
+        bindings.append((texture, material if material != "null" else None))
+    return bindings
+
+
+def pending_model_material_bindings(
+    path: Path,
+    desired: dict[str, str],
+) -> dict[str, str]:
+    pending: dict[str, str] = {}
+    try:
+        bindings = read_model_material_bindings(path)
+    except (UnicodeDecodeError, ValueError):
+        # Match the conservative discovery fallback used above. A handful of
+        # legacy robe helpers carry malformed or nonstandard compiled headers;
+        # their raw candidate strings keep source masks alive, but they cannot
+        # be rewritten safely without a trustworthy mesh boundary.
+        return pending
+    for texture, material in bindings:
+        target = desired.get(texture)
+        if target is not None and material != target:
+            pending[texture] = target
+    return pending
+
+
+def synchronize_model_material_bindings(path: Path, bindings: dict[str, str]) -> bool:
     normalized = {
         source.lower(): target.lower()
-        for source, target in replacements.items()
-        if source.lower() != target.lower()
+        for source, target in bindings.items()
     }
     if not normalized:
         return False
@@ -366,18 +437,45 @@ def replace_model_materials(path: Path, replacements: dict[str, str]) -> bool:
         text = data.decode("ascii", errors="strict")
         changed = False
 
-        def replace(match: re.Match[str]) -> str:
+        def synchronize_node(match: re.Match[str]) -> str:
             nonlocal changed
-            source = match.group(2).lower()
+            node = match.group(0)
+            texture_match = re.search(
+                r"(?im)^(?P<indent>\s*)(?:bitmap|texture0)\s+"
+                r"(?P<texture>[^\s#]+)[^\r\n]*(?P<newline>\r?\n|$)",
+                node,
+            )
+            if texture_match is None:
+                return node
+            source = texture_match.group("texture").lower()
             target = normalized.get(source)
             if target is None:
-                return match.group(0)
+                return node
+
+            material_match = re.search(
+                r"(?im)^(?P<prefix>\s*materialname\s+)(?P<material>[^\s#]+)",
+                node,
+            )
+            if material_match is not None:
+                if material_match.group("material").lower() == target:
+                    return node
+                changed = True
+                return (
+                    node[: material_match.start("material")]
+                    + target
+                    + node[material_match.end("material") :]
+                )
+
+            newline = texture_match.group("newline") or "\n"
+            material_line = (
+                f"{texture_match.group('indent')}materialname {target}{newline}"
+            )
             changed = True
-            return f"{match.group(1)}{target}"
+            return node[: texture_match.end()] + material_line + node[texture_match.end() :]
 
         updated = re.sub(
-            r"(?im)^(\s*(?:bitmap|texture0)\s+)([^\s#]+)",
-            replace,
+            r"(?ims)^\s*node\s+[^\r\n]+\r?\n.*?^\s*endnode\b[^\r\n]*(?:\r?\n|$)",
+            synchronize_node,
             text,
         )
         if changed:
@@ -386,14 +484,14 @@ def replace_model_materials(path: Path, replacements: dict[str, str]) -> bool:
 
     updated = bytearray(data)
     changed = False
-    for offset, source in read_binary_model_material_fields(path, data):
+    for _, source, material_offset, material in read_binary_model_material_fields(path, data):
         target = normalized.get(source)
-        if target is None:
+        if target is None or material == target:
             continue
         encoded = target.encode("ascii")
         if len(encoded) > 16:
             raise ValueError(f"{path}: generated material resref is too long: {target}")
-        updated[offset : offset + 64] = encoded.ljust(64, b"\0")
+        updated[material_offset : material_offset + 64] = encoded.ljust(64, b"\0")
         changed = True
 
     if changed:
@@ -517,7 +615,7 @@ def build_model_material_plan(
         scopes_by_source.setdefault(source, set()).add(str(record["scope"]))
 
     rows: set[tuple[str, str, tuple[int, ...]]] = set()
-    replacements: dict[Path, dict[str, str]] = {}
+    desired_bindings: dict[Path, dict[str, str]] = {}
     active_aliases: dict[str, str] = {}
     for record in records.values():
         model = str(record["model"])
@@ -537,18 +635,25 @@ def build_model_material_plan(
                     f"Generated material alias '{material}' collides for '{existing_source}' and '{source}'"
                 )
             active_aliases[material] = source
+
+        if path is not None:
             current_materials = record["current"]
             assert isinstance(current_materials, set)
             for current in current_materials:
-                if current != material:
-                    replacements.setdefault(path, {})[str(current)] = material
+                desired_bindings.setdefault(path, {})[str(current)] = material
 
         layers = tuple(int(layer) for layer in entries[source]["layers"])
         rows.add((model, material, layers))
 
+    pending_bindings = {
+        path: pending
+        for path, desired in desired_bindings.items()
+        if (pending := pending_model_material_bindings(path, desired))
+    }
+
     return (
         [(model, material, list(layers)) for model, material, layers in sorted(rows)],
-        replacements,
+        pending_bindings,
         active_aliases,
     )
 
@@ -1137,14 +1242,14 @@ def deduplicate_assets(entries: dict[str, dict[str, object]]) -> None:
 def synchronize_model_material_aliases(
     entries: dict[str, dict[str, object]],
 ) -> tuple[int, dict[str, str]]:
-    _, replacements, planned_aliases = build_model_material_plan(entries)
+    _, pending_bindings, planned_aliases = build_model_material_plan(entries)
     changed_models = 0
-    for path, path_replacements in sorted(replacements.items(), key=lambda value: str(value[0])):
+    for path, path_bindings in sorted(pending_bindings.items(), key=lambda value: str(value[0])):
         try:
-            if replace_model_materials(path, path_replacements):
+            if synchronize_model_material_bindings(path, path_bindings):
                 changed_models += 1
         except (UnicodeDecodeError, ValueError) as exc:
-            raise RuntimeError(f"Cannot isolate tint materials in {path}: {exc}") from exc
+            raise RuntimeError(f"Cannot bind tint materials in {path}: {exc}") from exc
 
     aliases_by_source: dict[str, list[str]] = {source: [] for source in entries}
     for alias, source in planned_aliases.items():
@@ -1156,10 +1261,10 @@ def synchronize_model_material_aliases(
         else:
             entry.pop("aliases", None)
 
-    _, remaining_replacements, active_aliases = build_model_material_plan(entries)
-    if remaining_replacements:
-        examples = [str(path) for path in list(remaining_replacements)[:10]]
-        raise RuntimeError(f"Tint material aliases did not synchronize for: {examples}")
+    _, remaining_bindings, active_aliases = build_model_material_plan(entries)
+    if remaining_bindings:
+        examples = [str(path) for path in list(remaining_bindings)[:10]]
+        raise RuntimeError(f"Tint material bindings did not synchronize for: {examples}")
 
     aliases_by_source = {source: [] for source in entries}
     for alias, source in active_aliases.items():
@@ -1424,22 +1529,22 @@ def audit() -> None:
         errors.append("tint source manifest is empty")
 
     model_material_rows: list[tuple[str, str, list[int]]] = []
-    pending_model_replacements: dict[Path, dict[str, str]] = {}
+    pending_model_bindings: dict[Path, dict[str, str]] = {}
     active_aliases: dict[str, str] = {}
     if entries:
-        model_material_rows, pending_model_replacements, active_aliases = build_model_material_plan(entries)
+        model_material_rows, pending_model_bindings, active_aliases = build_model_material_plan(entries)
         manifest_aliases = build_alias_source_lookup(entries)
         if manifest_aliases != active_aliases:
             errors.append(
                 "tint source manifest aliases do not exactly match the scoped materials used by active models"
             )
-        if pending_model_replacements:
+        if pending_model_bindings:
             examples = ", ".join(
                 str(path.relative_to(REPOSITORY_ROOT))
-                for path in list(pending_model_replacements)[:10]
+                for path in list(pending_model_bindings)[:10]
             )
             errors.append(
-                f"{len(pending_model_replacements)} models do not isolate shared tint materials: {examples}"
+                f"{len(pending_model_bindings)} models do not bind their generated tint materials: {examples}"
             )
 
     _, remaining_material_plts = find_tint_material_plts()
