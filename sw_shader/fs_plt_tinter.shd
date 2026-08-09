@@ -69,7 +69,9 @@ uniform float rowTat1   = 0.515869;
 uniform float rowTat2   = 0.515869;
 
 // Optional direct RGB overrides. Alpha 0 retains the original NWN palette row;
-// alpha 1 uses the color picker's RGB value, modulated by the packed shade.
+// alpha 1 uses the color picker's RGB value, modulated by the packed shade. A
+// direct RGB tint is fully diffuse so it cannot inherit the hidden preset row's
+// environment mask and turn chrome/grey.
 uniform vec4 tintSkin   = vec4(0.0);
 uniform vec4 tintHair   = vec4(0.0);
 uniform vec4 tintMetal1 = vec4(0.0);
@@ -130,8 +132,9 @@ void main ()
     // texture0 is deliberately the opaque white placeholder, so the standard
     // setup cannot discover the PLT palette's environment-map coverage itself.
     // Reapply the same inc_standard path with the atlas alpha after normal-map
-    // setup. Custom RGB replaces only the palette RGB and keeps this coverage.
-    fEnvMapLevel = 1.0 - paletteColor.a;
+    // setup for presets. A custom RGB is independent of the hidden preset row,
+    // including its environment mask.
+    fEnvMapLevel = customTint.a > 0.5 ? 0.0 : 1.0 - paletteColor.a;
     vec3 surfaceColor = ApplyColorSpace(vTint);
 
     #if FRAGMENT_LIGHTING == 1 && LIGHTING == 1
