@@ -3,15 +3,15 @@
 // fs_plt_tinter.shd
 //
 // Replaces a 3D model PLT with one compact ATI2/BC5 texture. The
-// original PLT resref is retained so every existing model can opt in without
-// renaming its bitmap nodes.
+// packed mask uses a content-addressed internal resref so it cannot resolve to
+// an unrelated legacy diffuse texture with the original PLT's name.
 //
 // REQUIRES in the MTR: a tangent-producing renderhint plus the
 // tintMapWidth/tintMapHeight parameters. NormalTangents is sufficient when
 // the legacy material has no normal/specular maps; authored mapped materials
 // may retain NormalAndSpecMapped.
 //
-// PACKED TINT MAP (texUnit7, original PLT resref):
+// PACKED TINT MAP (texUnit7, internal tm_* resref):
 //   R = shade/grey value
 //   G = layer id encoded at the center of one of ten equal bins
 //

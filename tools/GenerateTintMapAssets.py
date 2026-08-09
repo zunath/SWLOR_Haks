@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 """Convert 3D model PLTs to compact, shader-driven BC5 tint maps.
 
-The packed DDS keeps the PLT shade in red and its layer id in green.  It uses
-the original PLT resref. The generated tintmap.2da is the authoritative
+The packed DDS keeps the PLT shade in red and its layer id in green. It uses a
+content-addressed internal resref so the shader mask cannot collide with a
+legacy diffuse texture that shares the original PLT resref. The generated
+tintmap.2da is the authoritative
 model/material/layer catalog consumed by the game server and appearance
 editor; material names are read from the binary MDLs rather than inferred
 from model names. Palette-driven inventory icons remain PLTs because the NWN
@@ -700,6 +702,12 @@ def tint_directory(model: str) -> Path:
     return TINT_DIRECTORIES[int.from_bytes(digest[:4], "little") % len(TINT_DIRECTORIES)]
 
 
+def tint_texture_resref(source_hash: str, width: int, height: int) -> str:
+    """Return a stable, collision-resistant NWN resref for one packed tint mask."""
+    digest = hashlib.sha256(f"{source_hash}:{width}x{height}".encode("ascii")).hexdigest()
+    return f"tm_{digest[:13]}"
+
+
 def packed_dds_path(model: str, entry: dict[str, object] | None = None) -> Path:
     if entry is not None and entry.get("output"):
         return REPOSITORY_ROOT / str(entry["output"])
@@ -1144,16 +1152,17 @@ def generate() -> None:
         layers = [int(value) for value in np.unique(layer)]
         relative_source = source_path.relative_to(REPOSITORY_ROOT).as_posix()
 
-        dds_path = packed_dds_path(model)
+        texture = tint_texture_resref(source_hash, width, height)
+        dds_path = tint_directory(texture) / f"{texture}.dds"
         dds_path.parent.mkdir(exist_ok=True)
         existing_entry = entries.get(model)
         source_changed = (
             existing_entry is None
             or str(existing_entry.get("sourceSha256", "")) != source_hash
         )
-        if source_changed or not is_generated_pair(model, model, width, height, dds_path):
+        if source_changed or not is_generated_pair(model, texture, width, height, dds_path):
             write_packed_dds(dds_path, width, height, shade, layer)
-            update_mtr(mtr_path(model), model, model, width, height)
+            update_mtr(mtr_path(model), model, texture, width, height)
         entries[model] = {
             "model": model,
             "material": model,
@@ -1165,7 +1174,7 @@ def generate() -> None:
             "sourceSha256": source_hash,
             "layerSha256": hashlib.sha256(layer.tobytes()).hexdigest(),
             "output": dds_path.relative_to(REPOSITORY_ROOT).as_posix(),
-            "texture": model,
+            "texture": texture,
         }
 
         if number == 1 or number % 100 == 0 or number == total:
@@ -1216,8 +1225,13 @@ def deduplicate_assets(entries: dict[str, dict[str, object]]) -> None:
     for group_entries in groups.values():
         group_entries.sort(key=lambda value: str(value["model"]))
         canonical = str(group_entries[0]["model"])
+        texture = tint_texture_resref(
+            str(group_entries[0]["sourceSha256"]),
+            int(group_entries[0]["width"]),
+            int(group_entries[0]["height"]),
+        )
         current_path = packed_dds_path(canonical, group_entries[0])
-        target_path = tint_directory(canonical) / f"{canonical}.dds"
+        target_path = tint_directory(texture) / f"{texture}.dds"
         target_path.parent.mkdir(exist_ok=True)
         if current_path.resolve() != target_path.resolve():
             if not current_path.exists():
@@ -1228,12 +1242,12 @@ def deduplicate_assets(entries: dict[str, dict[str, object]]) -> None:
         relative_output = target_path.relative_to(REPOSITORY_ROOT).as_posix()
         for entry in group_entries:
             model = str(entry["model"])
-            entry["texture"] = canonical
+            entry["texture"] = texture
             entry["output"] = relative_output
             update_mtr(
                 mtr_path(model),
                 model,
-                canonical,
+                texture,
                 int(entry["width"]),
                 int(entry["height"]),
             )
@@ -1531,6 +1545,7 @@ def check_tint_mtr_structure(path: Path) -> list[str]:
 def audit() -> None:
     entries = load_source_manifest()
     errors: list[str] = []
+    texture_sources: dict[str, set[tuple[str, int, int]]] = {}
     if not entries:
         errors.append("tint source manifest is empty")
 
@@ -1578,6 +1593,18 @@ def audit() -> None:
 
         width = int(entry["width"])
         height = int(entry["height"])
+        texture = str(entry.get("texture") or model)
+        expected_texture = tint_texture_resref(str(entry["sourceSha256"]), width, height)
+        if texture != expected_texture:
+            errors.append(
+                f"{model}: packed tint texture '{texture}' must use internal resref "
+                f"'{expected_texture}'"
+            )
+        if len(texture) > 16 or not texture.isascii():
+            errors.append(f"{model}: invalid packed tint texture resref '{texture}'")
+        texture_sources.setdefault(texture, set()).add(
+            (str(entry["sourceSha256"]), width, height)
+        )
         dds_path = packed_dds_path(model, entry)
         if not any(directory.resolve() in dds_path.resolve().parents for directory in TINT_DIRECTORIES):
             errors.append(f"{model}: packed DDS is outside tint HAK directories")
@@ -1606,7 +1633,6 @@ def audit() -> None:
                 for error in check_tint_mtr_structure(material_path)
             )
             mtr = material_path.read_text(encoding="utf-8-sig").lower()
-            texture = str(entry.get("texture") or model)
             required = (
                 "customshadervs ",
                 "customshaderfs fs_plt_tinter",
@@ -1626,6 +1652,28 @@ def audit() -> None:
                 alpha_texture = TEXTURE9_ALPHA_MATERIALS[model]
                 if f"texture9 {alpha_texture}" not in mtr or "parameter float usetexture9alpha 1.0" not in mtr:
                     errors.append(f"{model}: MTR lost required dedicated alpha-map compatibility")
+
+    for texture, sources in texture_sources.items():
+        if len(sources) > 1:
+            errors.append(
+                f"{texture}: internal tint resref aliases {len(sources)} different source masks"
+            )
+
+    internal_textures = set(texture_sources)
+    tint_roots = {directory.resolve() for directory in TINT_DIRECTORIES}
+    for directory in hak_directories():
+        if directory.resolve() in tint_roots:
+            continue
+        for path in directory.iterdir():
+            if (
+                path.is_file()
+                and path.suffix.lower() in {".dds", ".tga", ".plt"}
+                and path.stem.lower() in internal_textures
+            ):
+                errors.append(
+                    f"{path.stem.lower()}: internal tint resref collides with "
+                    f"{path.relative_to(REPOSITORY_ROOT).as_posix()}"
+                )
 
     for alias, source in sorted(active_aliases.items()):
         if len(alias) > 16 or not alias.isascii():
