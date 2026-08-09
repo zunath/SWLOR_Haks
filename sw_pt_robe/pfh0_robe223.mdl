@@ -23,6 +23,7 @@ node trimesh pelvis_g
   shininess 10
   render 0
   bitmap Black
+  materialname pfh0_robe223
   verts 43
       -0.0690656    0.0679429    0.0013269
       -0.1085600    0.0031648   -0.0002006
@@ -225,6 +226,7 @@ node trimesh lthigh_g
   shininess 10
   render 0
   bitmap Black
+  materialname pfh0_robe223
   verts 16
       -0.0001475    0.0635938    0.0725761
       -0.0170703   -0.0427519    0.0657452
@@ -317,6 +319,7 @@ node trimesh Blocker_L
   shininess 10
   render 0
   bitmap Black
+  materialname pfh0_robe223
   verts 13
       -0.0402858    0.0874163    0.1049420
       -0.0397226    0.0866239    0.2352010
@@ -372,6 +375,7 @@ node trimesh rthigh_g
   shininess 10
   render 0
   bitmap Black
+  materialname pfh0_robe223
   verts 16
        0.0170703   -0.0427519    0.0657452
        0.0001475    0.0635938    0.0725761
@@ -464,6 +468,7 @@ node trimesh Blocker_R
   shininess 10
   render 0
   bitmap Black
+  materialname pfh0_robe223
   verts 13
        0.0951156    0.0895507   -0.1323430
        0.0402858    0.0874163    0.1049410
@@ -519,6 +524,7 @@ node trimesh torso_g
   shininess 10
   render 0
   bitmap Black
+  materialname pfh0_robe223
   verts 47
        0.0000000    0.0862542    0.1702180
       -0.0681394    0.0662433    0.0060197
@@ -728,7 +734,7 @@ node skin Box02
   specular 0 0 0
   shininess 10
   bitmap pmh0_robe223
-  materialname pmh0_robe223
+  materialname pfh0_robe223
   verts 42
       -0.0180438   -0.1142600    0.7114450
       -0.0144655   -0.1069710    0.6126980
@@ -924,7 +930,7 @@ node skin Box01
   specular 0 0 0
   shininess 10
   bitmap pmh0_robe223
-  materialname pmh0_robe223
+  materialname pfh0_robe223
   verts 85
       -0.1363760    0.0937156    0.6295950
       -0.1132020    0.1141940    0.7995270
@@ -1397,7 +1403,7 @@ node skin Pouch
   specular 0 0 0
   shininess 10
   bitmap pmh0_robe223
-  materialname pmh0_robe223
+  materialname pfh0_robe223
   verts 22
       -0.1663330    0.0220828    1.0094800
       -0.1823710    0.0520905    1.0306100
@@ -1531,7 +1537,7 @@ node skin Sash
   specular 0 0 0
   shininess 10
   bitmap pmh0_robe223
-  materialname pmh0_robe223
+  materialname pfh0_robe223
   verts 65
        0.0028449    0.0545573    1.1450599
        0.0028449    0.1029090    1.1629000

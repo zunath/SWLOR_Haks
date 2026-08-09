@@ -263,6 +263,7 @@ node trimesh rbicep_g
   shininess 1
   center 2.36112 1.4214 -13.0319 
   bitmap Male01_bice
+  materialname pmh0_robe186
   verts 21
     0.102048 0.0143833 0.00397354
     0.0279634 0.0906766 -0.0110021
@@ -380,6 +381,7 @@ node trimesh rforearm_g
   shininess 26
   center 0.909173 1.40219 -14.0811 
   bitmap Male01_fore
+  materialname pmh0_robe186
   verts 16
     -0.00295808 -0.0472223 0.0208793
     0.0527982 0.00672314 -0.0125654
@@ -476,7 +478,7 @@ node trimesh rhand_g
   shininess 0
   center 0.64645 1.60715 -9.02372 
   bitmap pmh0_robe116
-  materialname pmh0_robe116
+  materialname pmh0_robe186
   verts 79
     -0.005201 -0.030446 -0.000812488
     -0.013626 -0.026883 -0.00191649
@@ -846,6 +848,7 @@ node trimesh lbicep_g
   shininess 1
   center -2.47408 1.4214 -13.0242 
   bitmap Male01_bice
+  materialname pmh0_robe186
   verts 21
     -0.0281164 0.0906766 -0.0106046
     -0.101981 0.0143833 0.00541966
@@ -963,6 +966,7 @@ node trimesh lforearm_g
   shininess 26
   center -1.07841 1.30365 -14.0837 
   bitmap Male01_fore
+  materialname pmh0_robe186
   verts 16
     -0.0530031 0.00659316 -0.0117449
     0.00335134 -0.0470953 0.0211054
@@ -1059,7 +1063,7 @@ node trimesh lhand_g
   shininess 0
   center -0.64645 1.60715 -9.02372 
   bitmap pmh0_robe116
-  materialname pmh0_robe116
+  materialname pmh0_robe186
   verts 79
     0.005201 -0.030446 -0.000812491
     0.013626 -0.026883 -0.00191649
@@ -1429,7 +1433,7 @@ node trimesh pelvis_g
   shininess 1
   center 0.0423498 2.06844 -17.4118 
   bitmap pmh0_robe116
-  materialname pmh0_robe116
+  materialname pmh0_robe186
   verts 44
     0.0780834 0.0941825 -0.169925
     0.0693057 0.0760963 -0.242485

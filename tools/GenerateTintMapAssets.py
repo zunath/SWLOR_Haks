@@ -100,11 +100,11 @@ TEXTURE9_ALPHA_MATERIALS = {
     "pfh0_head232": "pfh0_head232_a",
     "pmh0_head231": "pmh0_head231_a",
 }
-# This Togruta head ships a dedicated 512px PLT even though its compiled mesh
-# carries the stale pmh0_head038 bitmap reference. Aurora's modular-part path
-# selects the same-name PLT; preserving the embedded reference instead paints
-# the head with an unrelated 256px human texture.
-SAME_NAME_PART_MATERIALS = {"pmh0_head220"}
+# Aurora's modular body-part path selects a same-name PLT when one exists even
+# when the compiled mesh carries a stale or placeholder bitmap. Treating only
+# the embedded name as authoritative discarded live armor masks such as the
+# pmh0_leg[lr]243 pair (whose meshes say ``spodnie``).
+MODULAR_PART_DIRECTORY_PREFIX = "sw_pt_"
 
 FILE_HEADER_SIZE = 12
 NODE_HEADER_SIZE = 112
@@ -561,7 +561,7 @@ def find_model_tint_material_references(
         current_materials = read_model_materials(path)
         same_name_material = path.stem.lower()
         if (
-            same_name_material in SAME_NAME_PART_MATERIALS
+            path.parent.name.lower().startswith(MODULAR_PART_DIRECTORY_PREFIX)
             and same_name_material in materials
         ):
             return {

@@ -30,7 +30,7 @@ node trimesh rootdummy
   shininess 17
   selfillumcolor 0 0 0
   bitmap pfh0_n_ro_25a500
-  materialname pfh0_n_ro_25a500
+  materialname pfh0_robe116
   orientation 0 0 0 0
   verts 8
     -0.0226925 0.0194507 -0.0194507
@@ -67,6 +67,7 @@ node skin cloak_inner
   shininess 15
   selfillumcolor 0 0 0
   bitmap test
+  materialname pfh0_robe116
   verts 81
     -0.282097 -0.692761 -0.115232
     -0.24811 -0.690138 -0.0218899
@@ -487,6 +488,7 @@ node skin cloak_outer
   shininess 15
   selfillumcolor 0 0 0
   bitmap test
+  materialname pfh0_robe116
   verts 81
     -0.282097 -0.692761 -0.115232
     -0.248111 -0.690138 -0.0218899
@@ -915,6 +917,7 @@ node trimesh torso_g
   selfillumcolor 0 0 0
   orientation 0 0 0 0
   bitmap black
+  materialname pfh0_robe116
   diffuse 0 0 0
   verts 25
     0.320392 -0.204394 -0.0877512
@@ -1190,6 +1193,7 @@ node trimesh pelvis_g
   selfillumcolor 0 0 0
   orientation 0 0 0 0
   bitmap black
+  materialname pfh0_robe116
   diffuse 0 0 0
   verts 8
     0.332009 -0.200208 -0.257907
@@ -1234,6 +1238,7 @@ node trimesh lthigh_g
   selfillumcolor 0 0 0
   orientation 0 0 0 0
   bitmap black
+  materialname pfh0_robe116
   diffuse 0 0 0
   verts 8
     0.241678 -0.164016 -0.524074
@@ -1278,6 +1283,7 @@ node trimesh lshin_g
   selfillumcolor 0 0 0
   orientation 0 0 0 0
   bitmap black
+  materialname pfh0_robe116
   diffuse 0 0 0
   verts 8
     0.193839 -0.158515 -0.288925
@@ -1322,6 +1328,7 @@ node trimesh rthigh_g
   selfillumcolor 0 0 0
   orientation 0 0 0 0
   bitmap black
+  materialname pfh0_robe116
   diffuse 0 0 0
   verts 8
     0.254513 -0.163819 -0.52476
@@ -1366,6 +1373,7 @@ node trimesh rshin_g
   selfillumcolor 0 0 0
   orientation 0 0 0 0
   bitmap black
+  materialname pfh0_robe116
   diffuse 0 0 0
   verts 8
     0.252629 -0.164786 -0.288912

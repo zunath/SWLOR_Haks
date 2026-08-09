@@ -66,6 +66,7 @@ node trimesh torso_g
   shininess 10
   render 0
   bitmap pmh0_robe065
+  materialname pmh0_robe201
   verts 121
        0.2377720   -0.0165389    0.4290970
        0.1700930   -0.0054555    0.4316440
@@ -525,7 +526,7 @@ node trimesh rbicep_g
   shininess 1
   render 0
   bitmap pmh0_b_ro_a1aadd
-  materialname pmh0_b_ro_a1aadd
+  materialname pmh0_robe201
   verts 21
       -0.0006288    0.0902609   -0.0056534
        0.0557871    0.0085897    0.0660285
@@ -635,7 +636,7 @@ node trimesh rforearm_g
   shininess 26
   render 0
   bitmap pmh0_f_ro_e36034
-  materialname pmh0_f_ro_e36034
+  materialname pmh0_robe201
   verts 16
        0.0549891    0.0046513    0.0225238
       -0.0067467    0.0028272    0.0324933
@@ -724,6 +725,7 @@ node trimesh rhand_g
   shininess 96
   render 0
   bitmap Material
+  materialname pmh0_robe201
   verts 113
       -0.0486062    0.0536609   -0.0370978
       -0.0335604    0.0348559    0.0021760
@@ -1092,7 +1094,7 @@ node trimesh lbicep_g
   shininess 1
   render 0
   bitmap pmh0_b_ro_a1aadd
-  materialname pmh0_b_ro_a1aadd
+  materialname pmh0_robe201
   verts 21
       -0.0001318    0.0902602   -0.0056973
       -0.0781424    0.0060517    0.0456908
@@ -1202,7 +1204,7 @@ node trimesh lforearm_g
   shininess 26
   render 0
   bitmap pmh0_f_ro_e36034
-  materialname pmh0_f_ro_e36034
+  materialname pmh0_robe201
   verts 16
       -0.0550260    0.0027186    0.0227486
        0.0142701   -0.0462883    0.0185839
@@ -1291,6 +1293,7 @@ node trimesh lhand_g
   shininess 96
   render 0
   bitmap Material
+  materialname pmh0_robe201
   verts 113
        0.0463542    0.0510258   -0.0422350
        0.0334109    0.0790834   -0.0418008
@@ -1674,7 +1677,7 @@ node trimesh pelvis_g
   shininess 1
   render 0
   bitmap pmh0_p_ro_6c9e96
-  materialname pmh0_p_ro_6c9e96
+  materialname pmh0_robe201
   verts 41
        0.0830607    0.0732839   -0.1770800
        0.1076240    0.0405713   -0.2394800
@@ -1874,7 +1877,7 @@ node trimesh lthigh_g
   shininess 1
   render 0
   bitmap pmh0_l_ro_1e570f
-  materialname pmh0_l_ro_1e570f
+  materialname pmh0_robe201
   verts 16
        0.0074104    0.0367120    0.0663992
       -0.0360334   -0.0180320    0.0682236
@@ -1963,6 +1966,7 @@ node trimesh lshin_g
   shininess 96
   render 0
   bitmap Material
+  materialname pmh0_robe201
   verts 42
       -0.0081852   -0.0213659    0.0528901
       -0.0560313   -0.0957025    0.0254724
@@ -2112,6 +2116,7 @@ node trimesh lfoot_g
   shininess 96
   render 0
   bitmap Material
+  materialname pmh0_robe201
   verts 58
       -0.0745816    0.1755600   -0.1401160
       -0.0612922    0.2431500   -0.1148480
@@ -2364,7 +2369,7 @@ node trimesh rthigh_g
   shininess 1
   render 0
   bitmap pmh0_l_ro_1e570f
-  materialname pmh0_l_ro_1e570f
+  materialname pmh0_robe201
   verts 16
       -0.0076863    0.0367120    0.0663678
       -0.0572555   -0.0215001    0.0715312
@@ -2453,6 +2458,7 @@ node trimesh rshin_g
   shininess 96
   render 0
   bitmap Material
+  materialname pmh0_robe201
   verts 42
        0.0096717   -0.0213451    0.0528188
        0.0050151   -0.1191900    0.0189186
@@ -2603,6 +2609,7 @@ node trimesh rfoot_g
   shininess 96
   render 0
   bitmap Material
+  materialname pmh0_robe201
   verts 58
        0.0744388    0.1749310   -0.1409760
        0.0602272    0.2369730   -0.1410420

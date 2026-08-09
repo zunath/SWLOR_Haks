@@ -19,6 +19,7 @@ node trimesh rootdummy
   shadow 0
   render 0
   bitmap rootdummy
+  materialname pmh0_robe206
   verts 8
        0.0224282   -0.0195059   -0.0190152
        0.0224282   -0.0195059    0.0190152
@@ -54,6 +55,7 @@ node trimesh pelvis_g
   shininess 33
   render 0
   bitmap pelvis_g
+  materialname pmh0_robe206
   verts 41
        0.0806821    0.0732839   -0.1770800
        0.1045420    0.0405713   -0.2394800
@@ -252,6 +254,7 @@ node trimesh lthigh_g
   shininess 33
   render 0
   bitmap lthigh_g
+  materialname pmh0_robe206
   verts 16
       -0.0228731    0.0594388    0.0664437
       -0.0682448   -0.0254144    0.0666914
@@ -339,6 +342,7 @@ node trimesh lshin_g
   shininess 33
   render 0
   bitmap lshin_g
+  materialname pmh0_robe206
   verts 16
       -0.0378990    0.0000005   -0.4909140
       -0.1289250   -0.2045430   -0.4285490
@@ -415,6 +419,7 @@ node trimesh lfoot_g
   shininess 8
   render 0
   bitmap lfoot_g
+  materialname pmh0_robe206
   verts 4
       -0.0415806   -0.0066047   -0.0008256
        0.0138551   -0.0454345    0.0009426
@@ -450,6 +455,7 @@ node trimesh rthigh_g
   shininess 33
   render 0
   bitmap rthigh_g
+  materialname pmh0_robe206
   verts 16
        0.0682447   -0.0254144    0.0666910
        0.0228731    0.0594388    0.0664434
@@ -537,6 +543,7 @@ node trimesh rshin_g
   shininess 33
   render 0
   bitmap rshin_g
+  materialname pmh0_robe206
   verts 16
        0.0358584    0.0000000   -0.4909140
        0.1268840    0.2045440   -0.4285490
@@ -613,6 +620,7 @@ node trimesh rfoot_g
   shininess 8
   render 0
   bitmap rfoot_g
+  materialname pmh0_robe206
   verts 4
       -0.0075940   -0.0468336    0.0009429
        0.0424198   -0.0012321   -0.0008254
@@ -648,6 +656,7 @@ node trimesh torso_g
   shininess 33
   render 0
   bitmap torso_g
+  materialname pmh0_robe206
   verts 37
        0.1570750   -0.1691320    0.2377340
        0.1663970   -0.1596430    0.4063420
@@ -822,6 +831,7 @@ node trimesh rbicep_g
   shininess 33
   render 0
   bitmap rbicep_g
+  materialname pmh0_robe206
   verts 21
        0.1204940    0.0168273   -0.0006746
        0.0085715    0.0826017   -0.0122633
@@ -930,6 +940,7 @@ node trimesh rforearm_g
   shininess 33
   render 0
   bitmap rforearm_g
+  materialname pmh0_robe206
   verts 16
        0.0286006   -0.0212833    0.0239523
        0.0786373    0.0045074    0.0040060
@@ -1017,6 +1028,7 @@ node trimesh lbicep_g
   shininess 33
   render 0
   bitmap lbicep_g
+  materialname pmh0_robe206
   verts 21
       -0.0085716    0.0826022   -0.0122633
       -0.1204940    0.0168277   -0.0006750
@@ -1125,6 +1137,7 @@ node trimesh lforearm_g
   shininess 33
   render 0
   bitmap lforearm_g
+  materialname pmh0_robe206
   verts 16
       -0.0786370    0.0045086    0.0040052
       -0.0286004   -0.0212823    0.0239514
@@ -1211,7 +1224,7 @@ node trimesh belt
   specular 0 0 0
   shininess 14
   bitmap pmh0_robe128
-  materialname pmh0_robe128
+  materialname pmh0_robe206
   verts 24
       -0.0032458    0.1866440    0.0239429
        0.1241290    0.1460190    0.0395444
@@ -1303,7 +1316,7 @@ node trimesh beltnode
   specular 0 0 0
   shininess 14
   bitmap pmh0_robe128
-  materialname pmh0_robe128
+  materialname pmh0_robe206
   verts 6
        0.0000000    0.0236256    0.0331232
        0.0000000    0.0517709   -0.0019738
@@ -1341,7 +1354,7 @@ node skin saia
   specular 0 0 0
   shininess 14
   bitmap pmh0_robe128
-  materialname pmh0_robe128
+  materialname pmh0_robe206
   verts 129
        0.2426910   -0.0346185    0.8214280
        0.2039540    0.0598105    0.8814830
