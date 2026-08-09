@@ -100,6 +100,11 @@ TEXTURE9_ALPHA_MATERIALS = {
     "pfh0_head232": "pfh0_head232_a",
     "pmh0_head231": "pmh0_head231_a",
 }
+# This Togruta head ships a dedicated 512px PLT even though its compiled mesh
+# carries the stale pmh0_head038 bitmap reference. Aurora's modular-part path
+# selects the same-name PLT; preserving the embedded reference instead paints
+# the head with an unrelated 256px human texture.
+SAME_NAME_PART_MATERIALS = {"pmh0_head220"}
 
 FILE_HEADER_SIZE = 12
 NODE_HEADER_SIZE = 112
@@ -553,9 +558,19 @@ def find_model_tint_material_references(
     alias_sources: dict[str, str],
 ) -> dict[str, str]:
     try:
+        current_materials = read_model_materials(path)
+        same_name_material = path.stem.lower()
+        if (
+            same_name_material in SAME_NAME_PART_MATERIALS
+            and same_name_material in materials
+        ):
+            return {
+                current: same_name_material
+                for current in current_materials
+            }
         return {
             material: alias_sources.get(material, material)
-            for material in read_model_materials(path)
+            for material in current_materials
             if material in materials or material in alias_sources
         }
     except (UnicodeDecodeError, ValueError):
