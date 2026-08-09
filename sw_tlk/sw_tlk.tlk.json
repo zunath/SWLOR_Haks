@@ -88567,7 +88567,7 @@
     },
     {
       "id": 192609,
-      "text": "Inflicts Force Suppression on enemies within 4.5m of you for 30 seconds. Deals no direct damage."
+      "text": "Makes separate WIL-based Mimicry hit checks against enemies within 4.5m of you. On a hit, inflicts Force Suppression for 30 seconds, reducing Attack by 10% and Force Attack by an additional 15% (25% total). Deals no direct damage."
     },
     {
       "id": 192610,
@@ -88599,7 +88599,7 @@
     },
     {
       "id": 192617,
-      "text": "Deals 40 force DMG plus MGT scaling in an 8m x 2.5m line, increased by 40% against Weakened targets. Inflicts Force Disruption for 30 seconds and restores 5 FP to you per hit."
+      "text": "Uses Mimicry rank and MGT for its hit check. Deals 40 Force DMG plus MGT scaling in an 8m x 2.5m line, increased by 40% against Weakened targets. Force is the damage type; this remains a Mimicry ability. Inflicts Force Disruption for 30 seconds and restores 5 FP to you per hit."
     },
     {
       "id": 192618,
@@ -88607,7 +88607,7 @@
     },
     {
       "id": 192619,
-      "text": "Deals 40 physical DMG plus MGT scaling in an 8m x 2.5m line. Inflicts Exposed for 30 seconds and deals up to +35% DMG based on the target's missing health."
+      "text": "Uses Mimicry rank and MGT for its hit check. Deals 40 physical DMG plus MGT scaling in an 8m x 2.5m line and inflicts Exposed for 30 seconds. After the normal damage roll, each hit gains +0% damage at full HP, scaling smoothly up to +35% as that target nears defeat."
     },
     {
       "id": 192620,
@@ -88791,7 +88791,7 @@
     },
     {
       "id": 192665,
-      "text": "Increases your Accuracy by 6%."
+      "text": "While equipped, increases your Accuracy rating by 6%. This affects attacks and ability hit checks, including Force and Mimicry, but does not add 6 percentage points directly to hit chance."
     },
     {
       "id": 192666,
@@ -88799,7 +88799,7 @@
     },
     {
       "id": 192667,
-      "text": "Inflicts Force Suppression for 30 seconds and drains 10 FP and 10 STM from enemies in a 4.5m-radius area at the target location. Deals no direct damage."
+      "text": "Makes separate WIL-based Mimicry hit checks against enemies in a 4.5m-radius area at the target location. On a hit, inflicts Force Suppression for 30 seconds, reducing Attack by 10% and Force Attack by an additional 15% (25% total), and drains 10 FP and 10 STM. Deals no direct damage."
     },
     {
       "id": 192668,
@@ -88879,7 +88879,7 @@
     },
     {
       "id": 192687,
-      "text": "Increases your Accuracy by 8%."
+      "text": "While equipped, increases your Accuracy rating by 8%. This affects attacks and ability hit checks, including Force and Mimicry, but does not add 8 percentage points directly to hit chance."
     },
     {
       "id": 192688,
