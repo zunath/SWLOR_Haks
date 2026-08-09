@@ -1477,7 +1477,12 @@ def decode_dds_layers(path: Path, width: int, height: int) -> np.ndarray:
     return image.reshape(blocks_high * 4, blocks_wide * 4)[:height, :width]
 
 
-def check_tga_header(path: Path, width: int, height: int) -> str | None:
+def check_tga_header(
+    path: Path,
+    width: int,
+    height: int,
+    bits_per_pixel: int = 24,
+) -> str | None:
     if not path.exists():
         return "missing TGA"
     raw = path.read_bytes()
@@ -1485,8 +1490,8 @@ def check_tga_header(path: Path, width: int, height: int) -> str | None:
         return "truncated TGA"
     image_type = raw[2]
     actual_width, actual_height = struct.unpack_from("<HH", raw, 12)
-    if image_type not in (2, 10) or raw[1] != 0 or raw[16] != 24:
-        return "TGA must be 24-bit true-color without a color map"
+    if image_type not in (2, 10) or raw[1] != 0 or raw[16] != bits_per_pixel:
+        return f"TGA must be {bits_per_pixel}-bit true-color without a color map"
     if (actual_width, actual_height) != (width, height):
         return f"TGA dimensions {(actual_width, actual_height)} != {(width, height)}"
     return None
@@ -1729,7 +1734,12 @@ def audit() -> None:
 
     if not WHITE_TEXTURE.exists() or WHITE_TEXTURE.read_bytes() != white_texture_bytes():
         errors.append("plt_white.tga is missing or invalid")
-    palette_error = check_tga_header(PALETTE_TEXTURE, 256, PALETTE_TEXTURE_HEIGHT)
+    palette_error = check_tga_header(
+        PALETTE_TEXTURE,
+        256,
+        PALETTE_TEXTURE_HEIGHT,
+        bits_per_pixel=32,
+    )
     if palette_error:
         errors.append(f"plt_palette.tga: {palette_error}")
     if not PALETTE_TXI.exists() or "mipmap 0" not in PALETTE_TXI.read_text(encoding="utf-8").lower():
@@ -1746,6 +1756,7 @@ def audit() -> None:
             "uniform float rowSkin",
             "uniform vec4 tintSkin",
             "float paletteU = (g * 255.0 + 0.5) / 256.0",
+            "fEnvMapLevel = 1.0 - paletteColor.a",
             "float outputAlpha = materialFrontDiffuse.a",
             "SetupStandardShaderInputs();",
             "ApplyStandardShader();",

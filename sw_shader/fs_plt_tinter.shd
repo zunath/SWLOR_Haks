@@ -19,12 +19,14 @@
 // a nearest texel center using the MTR-provided dimensions, preventing a
 // filtered seam from selecting the wrong dye layer.
 //
-// PALETTE ATLAS (texUnit10, plt_palette.tga, 256x2048, mipmap 0):
+// PALETTE ATLAS (texUnit10, plt_palette.tga, 256x2048 RGBA, mipmap 0):
 //   U = (grey byte + 0.5) / 256, centered within the palette texel
 //   V = (palette base + row + 0.5) / 2048, precomputed by script:
 //     skin rows 0-175, hair 176-351, metal1 352-527,
 //     metal2 528-703, cloth 704-879, leather 880-1055,
 //     tattoo 1056-1231
+//   A = the legacy palette's diffuse/environment-map coverage. This is not
+//       cutout opacity; zero means the environment map replaces the diffuse.
 //
 // texture0 must still be bound (white placeholder) so the engine does
 // not auto-assign; the white multiply is an identity op.
@@ -104,9 +106,10 @@ void main ()
     // screen-space derivatives, so without this the GPU picks the smallest
     // mip (the whole-atlas average: a flat muddy color on every pixel).
     float paletteU = (g * 255.0 + 0.5) / 256.0;
+    vec4 paletteColor = texture2D(texUnit10, vec2(paletteU, v), -10.0);
     vec3 vTint = customTint.a > 0.5
         ? customTint.rgb * g
-        : texture2D(texUnit10, vec2(paletteU, v), -10.0).rgb;
+        : paletteColor.rgb;
 
     // Setup must see white so SetupSpecularity() derives SpecularColor the
     // same way fs_plt_hair did (FragmentColor was 1.0 there). The tint is
@@ -124,8 +127,40 @@ void main ()
         vFragmentNormal = normalize(vSurfaceNormal);
     }
 
+    // texture0 is deliberately the opaque white placeholder, so the standard
+    // setup cannot discover the PLT palette's environment-map coverage itself.
+    // Reapply the same inc_standard path with the atlas alpha after normal-map
+    // setup. Custom RGB replaces only the palette RGB and keeps this coverage.
+    fEnvMapLevel = 1.0 - paletteColor.a;
+    vec3 surfaceColor = ApplyColorSpace(vTint);
+
+    #if FRAGMENT_LIGHTING == 1 && LIGHTING == 1
+        surfaceColor = mix(
+            surfaceColor,
+            vec3(0.666667, 0.666667, 0.666667),
+            fEnvMapLevel);
+    #endif
+
+    #if ENVIRONMENT_MAP == 1 && SPECULAR_LIGHT != 1
+        vec3 environmentColor;
+        #if FRAGMENT_NORMAL != 1
+            if(envMapCube == 1)
+                environmentColor = SampleEnvironmentMapCube(vVertexTexCoordsEnvironmentCube, 0.0);
+            else
+                environmentColor = SampleEnvironmentMap(vVertexTexCoordsEnvironment, 0.0);
+        #else
+            if(envMapCube == 1)
+                environmentColor = SampleEnvironmentMapCube(
+                    CalculateEnvironmentTexCoordsCube(vFragmentNormal), 0.0);
+            else
+                environmentColor = SampleEnvironmentMap(
+                    CalculateEnvironmentTexCoords(vFragmentNormal), 0.0);
+        #endif
+        surfaceColor = mix(surfaceColor, environmentColor, fEnvMapLevel);
+    #endif
+
     // Linearize before lighting; ApplyStandardShader() reverts at the end.
-    FragmentColor = vec4(ApplyColorSpace(vTint), 1.0);
+    FragmentColor = vec4(surfaceColor, 1.0);
 
     // A small number of legacy hair/fur materials encoded cutout opacity in
     // their normal-map alpha channel. Preserve it only when the MTR opts in.
