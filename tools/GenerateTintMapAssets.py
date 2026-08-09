@@ -39,6 +39,9 @@ WHITE_TEXTURE = REPOSITORY_ROOT / "sw_item" / "plt_white.tga"
 PALETTE_TEXTURE = REPOSITORY_ROOT / "sw_item" / "plt_palette.tga"
 PALETTE_TXI = REPOSITORY_ROOT / "sw_item" / "plt_palette.txi"
 TINT_SHADER = REPOSITORY_ROOT / "sw_shader" / "fs_plt_tinter.shd"
+TINT_MAPPED_SHADER = REPOSITORY_ROOT / "sw_shader" / "fs_plt_tinter_nm.shd"
+TINT_FRAGMENT_SHADER = "fs_plt_tinter"
+TINT_MAPPED_FRAGMENT_SHADER = "fs_plt_tinter_nm"
 _MTR_PATHS_BY_RESREF: dict[str, Path] | None = None
 _SOURCE_MTR_PATHS_BY_RESREF: dict[str, list[Path]] | None = None
 _BC4_LAYER_CANDIDATES: tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray] | None = None
@@ -1046,6 +1049,30 @@ def merge_mtr_lines(preferred: list[str], fallback: list[str]) -> list[str]:
     return merged
 
 
+def uses_mapped_shader(lines: list[str]) -> bool:
+    """Whether an authored/generated material still carries real mapped inputs.
+
+    The first tint-map generator put ``vslit_sm_nm`` plus ``NormalTangents`` on
+    every PLT-only body part. Those two generated defaults cannot be used as
+    evidence here: doing so permanently keeps plain legacy PLTs on NWN's
+    normal-mapped, per-pixel lighting path. Real mapped materials retain either
+    a map texture, the authored NormalAndSpecMapped hint, or a non-default
+    normal-mapped vertex shader.
+    """
+    for line in lines:
+        stripped = line.strip()
+        if not stripped or stripped.startswith("//"):
+            continue
+        if re.match(r"^texture[1-5]\b", stripped, re.IGNORECASE):
+            return True
+        if re.match(r"^renderhint\s+NormalAndSpecMapped\b", stripped, re.IGNORECASE):
+            return True
+        vertex_match = re.match(r"^customshaderVS\s+(\S+)", stripped, re.IGNORECASE)
+        if vertex_match and vertex_match.group(1).lower() not in {"vslit_sm", "vslit_sm_nm"}:
+            return True
+    return False
+
+
 def update_mtr(
     path: Path,
     material: str,
@@ -1067,6 +1094,7 @@ def update_mtr(
         if generated_source.exists():
             source_lines = generated_source.read_text(encoding="utf-8-sig").splitlines()
     original_lines = merge_mtr_lines(source_lines, generated_lines)
+    mapped_shader = uses_mapped_shader(original_lines)
     original_fragment_shaders = {
         line.split(maxsplit=1)[1].strip().lower()
         for line in original_lines
@@ -1096,21 +1124,25 @@ def update_mtr(
     if texture9_alpha:
         lines = [line for line in lines if not re.match(r"^\s*texture3\b", line, re.IGNORECASE)]
 
+    if not mapped_shader:
+        # Remove the old generator defaults that incorrectly promoted every
+        # plain PLT body part to the normal-mapped/per-pixel-lighting path.
+        lines = [
+            line
+            for line in lines
+            if not re.match(r"^\s*customshaderVS\s+vslit_sm_nm\s*$", line, re.IGNORECASE)
+            and not re.match(r"^\s*renderhint\s+NormalTangents\s*$", line, re.IGNORECASE)
+        ]
+
     if not any(re.match(r"^\s*customshaderVS\b", line, re.IGNORECASE) for line in lines):
-        lines.append("customshaderVS vslit_sm_nm")
-    if not any(re.match(r"^\s*renderhint\b", line, re.IGNORECASE) for line in lines):
-        # The tint fragment shader consumes the tangent basis. Without an
-        # explicit tangent-producing render hint, the game can recover through
-        # the shader's normal fallback, but the stock Toolset may construct the
-        # mesh without the attributes required by vslit_sm_nm and report model
-        # or shader errors while previewing creatures. NormalTangents requests
-        # those attributes without making the engine probe for normal/specular
-        # maps that the original PLT-only material did not provide.
+        lines.append("customshaderVS vslit_sm_nm" if mapped_shader else "customshaderVS vslit_sm")
+    if mapped_shader and not any(re.match(r"^\s*renderhint\b", line, re.IGNORECASE) for line in lines):
         lines.append("renderhint NormalTangents")
 
     lines.extend(
         (
-            "customshaderFS fs_plt_tinter",
+            "customshaderFS "
+            + (TINT_MAPPED_FRAGMENT_SHADER if mapped_shader else TINT_FRAGMENT_SHADER),
             "texture0 plt_white",
             f"texture7 {texture}",
             "texture10 plt_palette",
@@ -1579,7 +1611,6 @@ def check_tint_mtr_structure(path: Path) -> list[str]:
     singleton_keys = (
         ("customshadervs",),
         ("customshaderfs",),
-        ("renderhint",),
         ("texture0",),
         ("texture7",),
         ("texture10",),
@@ -1597,6 +1628,9 @@ def check_tint_mtr_structure(path: Path) -> list[str]:
         if count != 1:
             errors.append(f"directive {' '.join(key)} occurs {count} times")
 
+    if len(directives.get(("renderhint",), [])) > 1:
+        errors.append("directive renderhint occurs more than once")
+
     render_hints = directives.get(("renderhint",), [])
     if render_hints and render_hints[0].lower() not in {
         "renderhint normalandspecmapped",
@@ -1611,8 +1645,19 @@ def check_tint_mtr_structure(path: Path) -> list[str]:
             errors.append(f"invalid custom vertex shader directive '{vertex_shaders[0]}'")
 
     fragment_shaders = directives.get(("customshaderfs",), [])
-    if fragment_shaders and fragment_shaders[0].lower() != "customshaderfs fs_plt_tinter":
+    if fragment_shaders and fragment_shaders[0].lower() not in {
+        f"customshaderfs {TINT_FRAGMENT_SHADER}",
+        f"customshaderfs {TINT_MAPPED_FRAGMENT_SHADER}",
+    }:
         errors.append(f"unexpected tint fragment shader '{fragment_shaders[0]}'")
+
+    mapped_shader = uses_mapped_shader(lines)
+    if fragment_shaders:
+        fragment_shader = fragment_shaders[0].split(maxsplit=1)[1].lower()
+        if mapped_shader and fragment_shader != TINT_MAPPED_FRAGMENT_SHADER:
+            errors.append("mapped tint material does not use the mapped tint shader")
+        elif not mapped_shader and fragment_shader != TINT_FRAGMENT_SHADER:
+            errors.append("PLT-only tint material incorrectly uses the mapped tint shader")
 
     return errors
 
@@ -1717,10 +1762,13 @@ def audit() -> None:
                 for error in check_tint_mtr_structure(material_path)
             )
             mtr = material_path.read_text(encoding="utf-8-sig").lower()
+            fragment_shader = (
+                TINT_MAPPED_FRAGMENT_SHADER if uses_mapped_shader(mtr.splitlines())
+                else TINT_FRAGMENT_SHADER
+            )
             required = (
                 "customshadervs ",
-                "customshaderfs fs_plt_tinter",
-                "renderhint ",
+                f"customshaderfs {fragment_shader}",
                 "texture0 plt_white",
                 f"texture7 {texture}",
                 "texture10 plt_palette",
@@ -1774,10 +1822,13 @@ def audit() -> None:
         )
         mtr = material_path.read_text(encoding="utf-8-sig").lower()
         texture = str(entry.get("texture") or source)
+        fragment_shader = (
+            TINT_MAPPED_FRAGMENT_SHADER if uses_mapped_shader(mtr.splitlines())
+            else TINT_FRAGMENT_SHADER
+        )
         required = (
             "customshadervs ",
-            "customshaderfs fs_plt_tinter",
-            "renderhint ",
+            f"customshaderfs {fragment_shader}",
             "texture0 plt_white",
             f"texture7 {texture}",
             "texture10 plt_palette",
@@ -1823,12 +1874,15 @@ def audit() -> None:
         errors.append(f"plt_palette.tga: {palette_error}")
     if not PALETTE_TXI.exists() or "mipmap 0" not in PALETTE_TXI.read_text(encoding="utf-8").lower():
         errors.append("plt_palette.txi must disable mipmaps")
-    if not TINT_SHADER.exists():
-        errors.append("missing tint fragment shader")
-    else:
-        shader = TINT_SHADER.read_text(encoding="utf-8")
+    for shader_path, mapped_shader in (
+        (TINT_SHADER, False),
+        (TINT_MAPPED_SHADER, True),
+    ):
+        if not shader_path.exists():
+            errors.append(f"missing tint fragment shader {shader_path.name}")
+            continue
+        shader = shader_path.read_text(encoding="utf-8")
         for token in (
-            "#define SELF_ILLUMINATION_MAP 1",
             "uniform sampler2D texUnit7",
             "uniform sampler2D texUnit9",
             "uniform sampler2D texUnit10",
@@ -1841,10 +1895,22 @@ def audit() -> None:
             "ApplyStandardShader();",
         ):
             if token not in shader:
-                errors.append(f"tint fragment shader missing '{token}'")
+                errors.append(f"{shader_path.name} missing '{token}'")
+        expected_map_value = "1" if mapped_shader else "0"
+        for macro in (
+            "NORMAL_MAP",
+            "SPECULAR_MAP",
+            "ROUGHNESS_MAP",
+            "SELF_ILLUMINATION_MAP",
+        ):
+            token = f"#define {macro} {expected_map_value}"
+            if token not in shader:
+                errors.append(f"{shader_path.name} missing '{token}'")
         for token in ("computeAnisoSpecular", "fSpecularity = 0.0"):
             if token in shader:
-                errors.append(f"tint fragment shader must not override standard material rendering with '{token}'")
+                errors.append(
+                    f"{shader_path.name} must not override standard material rendering with '{token}'"
+                )
 
     expected_outputs = {packed_dds_path(model, entry).resolve() for model, entry in entries.items()}
     actual_outputs = {
