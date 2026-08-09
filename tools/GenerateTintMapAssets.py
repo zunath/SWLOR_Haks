@@ -44,6 +44,7 @@ _SOURCE_MTR_PATHS_BY_RESREF: dict[str, list[Path]] | None = None
 _BC4_LAYER_CANDIDATES: tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray] | None = None
 _EXACT_LAYER_ENCODINGS: dict[tuple[int, ...], tuple[int, int, np.ndarray]] = {}
 _ACTIVE_MODELS: dict[str, Path] | None = None
+_ACTIVE_RENDER_SURFACES: set[str] | None = None
 _TABLE_REFERENCED_RESREFS: set[str] | None = None
 _HAK_DIRECTORIES: tuple[Path, ...] | None = None
 
@@ -254,6 +255,24 @@ def find_active_models() -> dict[str, Path]:
 
     _ACTIVE_MODELS = models
     return _ACTIVE_MODELS
+
+
+def find_active_render_surfaces() -> set[str]:
+    """Return texture/material resrefs that can render without a tint fallback."""
+    global _ACTIVE_RENDER_SURFACES
+    if _ACTIVE_RENDER_SURFACES is not None:
+        return _ACTIVE_RENDER_SURFACES
+
+    surfaces: set[str] = set()
+    generated_mtr_directory = OUTPUT_MTR_DIRECTORY.resolve()
+    for directory in hak_directories():
+        for suffix in ("*.dds", "*.tga", "*.plt"):
+            surfaces.update(path.stem.lower() for path in directory.glob(suffix))
+        if directory.resolve() != generated_mtr_directory:
+            surfaces.update(path.stem.lower() for path in directory.glob("*.mtr"))
+
+    _ACTIVE_RENDER_SURFACES = surfaces
+    return _ACTIVE_RENDER_SURFACES
 
 
 def find_table_referenced_resrefs() -> set[str]:
@@ -558,16 +577,30 @@ def find_model_tint_material_references(
     alias_sources: dict[str, str],
 ) -> dict[str, str]:
     try:
-        current_materials = read_model_materials(path)
+        current_bindings = read_model_material_bindings(path)
         same_name_material = path.stem.lower()
         if (
             path.parent.name.lower().startswith(MODULAR_PART_DIRECTORY_PREFIX)
             and same_name_material in materials
         ):
-            return {
-                current: same_name_material
-                for current in current_materials
-            }
+            render_surfaces = find_active_render_surfaces()
+            references: dict[str, str] = {}
+            for texture, current_material in current_bindings:
+                if current_material in materials or current_material in alias_sources:
+                    references[texture] = alias_sources.get(
+                        current_material,
+                        current_material,
+                    )
+                elif current_material is None and texture not in render_surfaces:
+                    # Aurora's segmented-body loader falls back to the part's
+                    # same-resref PLT when an embedded bitmap is a stale export
+                    # label. Do not apply that fallback when the bitmap resolves
+                    # to a real authored DDS/TGA/PLT/MTR: doing so replaces valid
+                    # equipment textures with the tint mask.
+                    references[texture] = same_name_material
+            return references
+
+        current_materials = {texture for texture, _ in current_bindings}
         return {
             material: alias_sources.get(material, material)
             for material in current_materials
@@ -587,6 +620,28 @@ def find_model_tint_material_references(
             if value[:-1].decode("ascii").lower() in materials
             or value[:-1].decode("ascii").lower() in alias_sources
         }
+
+
+def find_generated_materials_shadowing_authored_surfaces(
+    entries: dict[str, dict[str, object]],
+) -> list[tuple[str, str, str]]:
+    generated_materials = set(entries) | set(build_alias_source_lookup(entries))
+    render_surfaces = find_active_render_surfaces()
+    shadowed: list[tuple[str, str, str]] = []
+    for model, path in sorted(find_active_models().items()):
+        if not path.parent.name.lower().startswith(MODULAR_PART_DIRECTORY_PREFIX):
+            continue
+        try:
+            for texture, material in read_model_material_bindings(path):
+                if (
+                    material in generated_materials
+                    and texture in render_surfaces
+                    and texture != material
+                ):
+                    shadowed.append((model, texture, material))
+        except (UnicodeDecodeError, ValueError):
+            continue
+    return shadowed
 
 
 def build_model_material_plan(
@@ -1586,6 +1641,15 @@ def audit() -> None:
             )
             errors.append(
                 f"{len(pending_model_bindings)} models do not bind their generated tint materials: {examples}"
+            )
+        shadowed_surfaces = find_generated_materials_shadowing_authored_surfaces(entries)
+        if shadowed_surfaces:
+            examples = ", ".join(
+                f"{model}:{texture}->{material}"
+                for model, texture, material in shadowed_surfaces[:10]
+            )
+            errors.append(
+                f"{len(shadowed_surfaces)} generated tint bindings replace authored model surfaces: {examples}"
             )
 
     _, remaining_material_plts = find_tint_material_plts()
