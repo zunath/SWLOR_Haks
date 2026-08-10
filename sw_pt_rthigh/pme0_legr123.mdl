@@ -13,6 +13,7 @@ node dummy pme0_legr123
   parent NULL
 endnode
 node trimesh pme0_legr123g
+  materialname pmh0_legr123
   parent pme0_legr123
   position 0.0000000 0.0000000 0.0000000
   orientation 0 0 0 0
