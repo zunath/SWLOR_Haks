@@ -275,8 +275,16 @@ def find_active_render_surfaces() -> set[str]:
     surfaces: set[str] = set()
     generated_mtr_directory = OUTPUT_MTR_DIRECTORY.resolve()
     for directory in hak_directories():
-        for suffix in ("*.dds", "*.tga", "*.plt"):
+        for suffix in ("*.dds", "*.tga"):
             surfaces.update(path.stem.lower() for path in directory.glob(suffix))
+        # Material PLTs are generator inputs, not authored surfaces that remain
+        # available at runtime. Counting them here prevents the generator from
+        # binding the MTR that replaces the PLT before deleting the source.
+        surfaces.update(
+            path.stem.lower()
+            for path in directory.glob("*.plt")
+            if not is_tint_material_plt(path)
+        )
         if directory.resolve() != generated_mtr_directory:
             surfaces.update(path.stem.lower() for path in directory.glob("*.mtr"))
 
@@ -1392,9 +1400,21 @@ def load_source_manifest() -> dict[str, dict[str, object]]:
     return {entry["model"].lower(): entry for entry in data}
 
 
-def write_source_manifest(entries: dict[str, dict[str, object]]) -> None:
-    ordered = [entries[key] for key in sorted(entries)]
-    SOURCE_MANIFEST.write_text(json.dumps(ordered, indent=2) + "\n", encoding="utf-8", newline="\n")
+def write_source_manifest(
+    entries: dict[str, dict[str, object]],
+    preserved_order: list[str] | None = None,
+) -> None:
+    if preserved_order is None:
+        ordered_keys = sorted(entries)
+    else:
+        ordered_keys = [key for key in preserved_order if key in entries]
+        ordered_keys.extend(sorted(set(entries) - set(ordered_keys)))
+    ordered = [entries[key] for key in ordered_keys]
+    SOURCE_MANIFEST.write_text(
+        json.dumps(ordered, indent=2) + "\n",
+        encoding="utf-8",
+        newline="\n",
+    )
 
 
 def render_2da(entries: dict[str, dict[str, object]]) -> str:
@@ -1415,9 +1435,24 @@ def render_2da(entries: dict[str, dict[str, object]]) -> str:
         [row for row in rows if row[0] not in deferred_models]
         + [row for row in rows if row[0] in deferred_models]
     )
-    for row, (model, material, layer_values) in enumerate(ordered_rows):
+    existing_labels: dict[tuple[str, str], int] = {}
+    next_label = 0
+    if OUTPUT_2DA.exists():
+        for line in OUTPUT_2DA.read_text(encoding="utf-8").splitlines()[3:]:
+            columns = line.split()
+            if len(columns) < 4 or not columns[0].isdigit():
+                continue
+            label = int(columns[0])
+            existing_labels[(columns[1].lower(), columns[2].lower())] = label
+            next_label = max(next_label, label + 1)
+
+    for model, material, layer_values in ordered_rows:
+        label = existing_labels.get((model, material))
+        if label is None:
+            label = next_label
+            next_label += 1
         layers = ",".join(str(value) for value in layer_values)
-        lines.append(f"{row:<4} {model:<17} {material:<17} {layers}")
+        lines.append(f"{label:<4} {model:<17} {material:<17} {layers}")
     return "\n".join(lines) + "\n"
 
 
@@ -1520,6 +1555,207 @@ def generate() -> None:
         f"{orphaned_materials} orphaned materials, and {overridden_materials} "
         f"superseded source materials; isolated materials in {changed_models} models.",
         flush=True,
+    )
+
+
+def synchronize_selected_model_material_aliases(
+    entries: dict[str, dict[str, object]],
+    selected_sources: set[str],
+) -> tuple[int, dict[str, str]]:
+    """Bind only models that consume the selected source materials.
+
+    A full synchronization intentionally rewrites every generated alias MTR.
+    That is appropriate for a corpus rebuild, but not for replacing a small set
+    of source masks in an otherwise audited manifest.
+    """
+    _, pending_bindings, planned_aliases = build_model_material_plan(entries)
+
+    def source_for(material: str) -> str:
+        return planned_aliases.get(material, material)
+
+    selected_bindings = {
+        path: {
+            texture: material
+            for texture, material in bindings.items()
+            if source_for(material) in selected_sources
+        }
+        for path, bindings in pending_bindings.items()
+    }
+    selected_bindings = {
+        path: bindings for path, bindings in selected_bindings.items() if bindings
+    }
+
+    changed_models = 0
+    for path, path_bindings in sorted(selected_bindings.items(), key=lambda value: str(value[0])):
+        try:
+            if synchronize_model_material_bindings(path, path_bindings):
+                changed_models += 1
+        except (UnicodeDecodeError, ValueError) as exc:
+            raise RuntimeError(f"Cannot bind tint materials in {path}: {exc}") from exc
+
+    _, remaining_bindings, active_aliases = build_model_material_plan(entries)
+    remaining_selected = {
+        path: {
+            texture: material
+            for texture, material in bindings.items()
+            if active_aliases.get(material, material) in selected_sources
+        }
+        for path, bindings in remaining_bindings.items()
+    }
+    remaining_selected = {
+        path: bindings for path, bindings in remaining_selected.items() if bindings
+    }
+    if remaining_selected:
+        examples = [str(path) for path in list(remaining_selected)[:10]]
+        raise RuntimeError(f"Selected tint material bindings did not synchronize for: {examples}")
+
+    aliases_by_source: dict[str, list[str]] = {source: [] for source in selected_sources}
+    for alias, source in active_aliases.items():
+        if source in aliases_by_source:
+            aliases_by_source[source].append(alias)
+    for source, aliases in aliases_by_source.items():
+        entry = entries[source]
+        if aliases:
+            entry["aliases"] = sorted(aliases)
+        else:
+            entry.pop("aliases", None)
+
+    if build_alias_source_lookup(entries) != active_aliases:
+        raise RuntimeError(
+            "Preserving selected tint materials would change aliases outside the selected sources"
+        )
+
+    for source in sorted(selected_sources):
+        entry = entries[source]
+        update_mtr(
+            mtr_path(source),
+            source,
+            str(entry.get("texture") or source),
+            int(entry["width"]),
+            int(entry["height"]),
+        )
+    for alias, source in sorted(active_aliases.items()):
+        if source not in selected_sources:
+            continue
+        entry = entries[source]
+        update_mtr(
+            mtr_path(alias),
+            alias,
+            str(entry.get("texture") or source),
+            int(entry["width"]),
+            int(entry["height"]),
+            source_material=source,
+        )
+
+    return changed_models, active_aliases
+
+
+def generate_preserving_manifest() -> None:
+    """Convert active source PLTs without pruning unrelated generated assets."""
+    global _ACTIVE_RENDER_SURFACES
+
+    active, all_paths = find_tint_material_plts()
+    outside_source_plts = find_tint_material_plts_outside_sources()
+    if outside_source_plts:
+        raise RuntimeError(
+            f"3D tint material PLTs exist outside configured source directories: {outside_source_plts[:10]}"
+        )
+    if not active:
+        raise RuntimeError("No 3D tint material PLTs were found to convert")
+
+    manifest_order = [
+        entry["model"].lower()
+        for entry in json.loads(SOURCE_MANIFEST.read_text(encoding="utf-8"))
+    ]
+    entries = load_source_manifest()
+    candidate_entries = dict(entries)
+    for material in active:
+        candidate_entries.setdefault(material, {"aliases": []})
+    used_materials = find_used_tint_materials(candidate_entries)
+    active_materials = {
+        material: source_path
+        for material, source_path in active.items()
+        if material in used_materials
+    }
+    if not active_materials:
+        raise RuntimeError("None of the active source PLTs are referenced by active models")
+
+    previous_outputs = {
+        packed_dds_path(material, entries[material]).resolve()
+        for material in active_materials
+        if material in entries and entries[material].get("output")
+    }
+    signatures = {
+        (
+            str(entry["sourceSha256"]),
+            int(entry["width"]),
+            int(entry["height"]),
+        ): entry
+        for material, entry in entries.items()
+        if material not in active_materials
+    }
+
+    for material, source_path in sorted(active_materials.items()):
+        width, height, shade, layer, source_hash = read_plt(source_path)
+        signature = (source_hash, width, height)
+        matching_entry = signatures.get(signature)
+        if matching_entry is None:
+            texture = tint_texture_resref(source_hash, width, height)
+            dds_path = tint_directory(texture) / f"{texture}.dds"
+            dds_path.parent.mkdir(exist_ok=True)
+            if not is_generated_pair(material, texture, width, height, dds_path):
+                write_packed_dds(dds_path, width, height, shade, layer)
+        else:
+            texture = str(matching_entry["texture"])
+            dds_path = packed_dds_path(str(matching_entry["model"]), matching_entry)
+
+        existing_entry = entries.get(material)
+        entries[material] = {
+            "model": material,
+            "material": material,
+            "aliases": list(existing_entry.get("aliases", [])) if existing_entry else [],
+            "layers": [int(value) for value in np.unique(layer)],
+            "width": width,
+            "height": height,
+            "source": source_path.relative_to(REPOSITORY_ROOT).as_posix(),
+            "sourceSha256": source_hash,
+            "layerSha256": hashlib.sha256(layer.tobytes()).hexdigest(),
+            "output": dds_path.relative_to(REPOSITORY_ROOT).as_posix(),
+            "texture": texture,
+        }
+        signatures.setdefault(signature, entries[material])
+
+    # The model plan must observe runtime resources, after the input PLTs have
+    # gone, otherwise a same-name PLT incorrectly suppresses its replacement MTR.
+    for path in all_paths:
+        resolved = path.resolve()
+        if REPOSITORY_ROOT.resolve() not in resolved.parents or not is_tint_material_plt(resolved):
+            raise RuntimeError(f"Refusing to delete unexpected path: {resolved}")
+        resolved.unlink()
+    _ACTIVE_RENDER_SURFACES = None
+
+    selected_sources = set(active_materials)
+    changed_models, _ = synchronize_selected_model_material_aliases(entries, selected_sources)
+
+    retained_outputs = {
+        packed_dds_path(material, entry).resolve()
+        for material, entry in entries.items()
+    }
+    for old_output in previous_outputs - retained_outputs:
+        if old_output.exists():
+            old_output.unlink()
+
+    for material in selected_sources:
+        for path in source_mtr_paths(material):
+            path.unlink()
+
+    write_source_manifest(entries, manifest_order)
+    write_2da(entries)
+    print(
+        f"Generated {len(active_materials)} selected materials while preserving "
+        f"{len(entries) - len(active_materials)} manifest entries; discarded "
+        f"{len(active) - len(active_materials)} unreferenced masks and isolated "
+        f"materials in {changed_models} models."
     )
 
 
@@ -2166,6 +2402,11 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     action = parser.add_mutually_exclusive_group(required=True)
     action.add_argument("--generate", action="store_true", help="convert and remove 3D material PLTs")
+    action.add_argument(
+        "--generate-preserving",
+        action="store_true",
+        help="convert active 3D material PLTs without pruning unrelated manifest entries",
+    )
     action.add_argument("--relocate", action="store_true", help="split existing maps across tint HAKs")
     action.add_argument("--deduplicate", action="store_true", help="share byte-identical packed maps")
     action.add_argument("--prune", action="store_true", help="remove masks not referenced by active models")
@@ -2175,6 +2416,8 @@ def main() -> None:
     require_repository_root()
     if arguments.generate:
         generate()
+    elif arguments.generate_preserving:
+        generate_preserving_manifest()
     elif arguments.relocate:
         relocate()
     elif arguments.deduplicate:

@@ -1,10 +1,10 @@
 customshaderVS vslit_sm
 customshaderFS fs_plt_tinter
 texture0 plt_white
-texture7 tm_c60358e00c05e
+texture7 tm_fa8f65ea0af4a
 texture10 plt_palette
-parameter float tintMapWidth 128.0
-parameter float tintMapHeight 128.0
+parameter float tintMapWidth 64.0
+parameter float tintMapHeight 64.0
 parameter float rowSkin 0.000244
 parameter float rowHair 0.086182
 parameter float rowMetal1 0.172119
