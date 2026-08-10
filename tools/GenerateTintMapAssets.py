@@ -35,6 +35,7 @@ OUTPUT_MTR_DIRECTORY = REPOSITORY_ROOT / "sw_tint_mtr"
 OUTPUT_2DA = REPOSITORY_ROOT / "sw_2da" / "tintmap.2da"
 HAK_CONFIG = REPOSITORY_ROOT / "hakbuilder.json"
 SOURCE_MANIFEST = Path(__file__).with_name("TintMapSources.json")
+MODULAR_FALLBACKS = Path(__file__).with_name("TintMapFallbacks.json")
 WHITE_TEXTURE = REPOSITORY_ROOT / "sw_item" / "plt_white.tga"
 PALETTE_TEXTURE = REPOSITORY_ROOT / "sw_item" / "plt_palette.tga"
 PALETTE_TXI = REPOSITORY_ROOT / "sw_item" / "plt_palette.txi"
@@ -109,6 +110,11 @@ TEXTURE9_ALPHA_MATERIALS = {
 # the embedded name as authoritative discarded live armor masks such as the
 # pmh0_leg[lr]243 pair (whose meshes say ``spodnie``).
 MODULAR_PART_DIRECTORY_PREFIX = "sw_pt_"
+MODULAR_MESH_NODE_TYPES = {"animmesh", "danglymesh", "skin", "trimesh"}
+MODULAR_MODEL_PATTERN = re.compile(
+    r"^p(?P<gender>[fm])(?P<race>[a-z])(?P<phenotype>[0-9])_(?P<part>[a-z]+[0-9]{3})$",
+    re.IGNORECASE,
+)
 
 FILE_HEADER_SIZE = 12
 NODE_HEADER_SIZE = 112
@@ -398,7 +404,10 @@ def read_model_materials(path: Path) -> list[str]:
     )
 
 
-def read_model_material_bindings(path: Path) -> list[tuple[str, str | None]]:
+def read_model_material_bindings(
+    path: Path,
+    include_implicit_modular_surface: bool = False,
+) -> list[tuple[str, str | None]]:
     data = path.read_bytes()
     is_binary = len(data) >= 4 and struct.unpack_from("<I", data, 0)[0] == 0
     if is_binary:
@@ -410,7 +419,7 @@ def read_model_material_bindings(path: Path) -> list[tuple[str, str | None]]:
     text = data.decode("ascii", errors="strict")
     bindings: list[tuple[str, str | None]] = []
     for node_match in re.finditer(
-        r"(?ims)^\s*node\s+[^\r\n]+\r?\n.*?^\s*endnode\b[^\r\n]*(?:\r?\n|$)",
+        r"(?ims)^\s*node\s+(?P<type>[^\s]+)[^\r\n]*\r?\n.*?^\s*endnode\b[^\r\n]*(?:\r?\n|$)",
         text,
     ):
         node = node_match.group(0)
@@ -419,9 +428,16 @@ def read_model_material_bindings(path: Path) -> list[tuple[str, str | None]]:
             node,
         )
         if texture_match is None:
-            continue
-        texture = texture_match.group(1).lower()
-        logical_texture = texture if texture != "null" else path.stem.lower()
+            if (
+                not include_implicit_modular_surface
+                or not path.parent.name.lower().startswith(MODULAR_PART_DIRECTORY_PREFIX)
+                or node_match.group("type").lower() not in MODULAR_MESH_NODE_TYPES
+            ):
+                continue
+            logical_texture = path.stem.lower()
+        else:
+            texture = texture_match.group(1).lower()
+            logical_texture = texture if texture != "null" else path.stem.lower()
         material_match = re.search(
             r"(?im)^\s*materialname\s+([^\s#]+)",
             node,
@@ -434,10 +450,14 @@ def read_model_material_bindings(path: Path) -> list[tuple[str, str | None]]:
 def pending_model_material_bindings(
     path: Path,
     desired: dict[str, str],
+    include_implicit_modular_surface: bool = False,
 ) -> dict[str, str]:
     pending: dict[str, str] = {}
     try:
-        bindings = read_model_material_bindings(path)
+        bindings = read_model_material_bindings(
+            path,
+            include_implicit_modular_surface,
+        )
     except (UnicodeDecodeError, ValueError):
         # Match the conservative discovery fallback used above. A handful of
         # legacy robe helpers carry malformed or nonstandard compiled headers;
@@ -480,9 +500,20 @@ def synchronize_model_material_bindings(path: Path, bindings: dict[str, str]) ->
                 node,
             )
             if texture_match is None:
-                return node
-            texture = texture_match.group("texture").lower()
-            source = texture if texture != "null" else path.stem.lower()
+                node_type_match = re.match(
+                    r"(?im)^\s*node\s+(?P<type>[^\s]+)[^\r\n]*(?P<newline>\r?\n|$)",
+                    node,
+                )
+                if (
+                    node_type_match is None
+                    or not path.parent.name.lower().startswith(MODULAR_PART_DIRECTORY_PREFIX)
+                    or node_type_match.group("type").lower() not in MODULAR_MESH_NODE_TYPES
+                ):
+                    return node
+                source = path.stem.lower()
+            else:
+                texture = texture_match.group("texture").lower()
+                source = texture if texture != "null" else path.stem.lower()
             target = normalized.get(source)
             if target is None:
                 return node
@@ -501,12 +532,18 @@ def synchronize_model_material_bindings(path: Path, bindings: dict[str, str]) ->
                     + node[material_match.end("material") :]
                 )
 
-            newline = texture_match.group("newline") or "\n"
-            material_line = (
-                f"{texture_match.group('indent')}materialname {target}{newline}"
-            )
+            if texture_match is not None:
+                newline = texture_match.group("newline") or "\n"
+                insertion_point = texture_match.end()
+                indent = texture_match.group("indent")
+            else:
+                assert node_type_match is not None
+                newline = node_type_match.group("newline") or "\n"
+                insertion_point = node_type_match.end()
+                indent = "  "
+            material_line = f"{indent}materialname {target}{newline}"
             changed = True
-            return node[: texture_match.end()] + material_line + node[texture_match.end() :]
+            return node[:insertion_point] + material_line + node[insertion_point:]
 
         updated = re.sub(
             r"(?ims)^\s*node\s+[^\r\n]+\r?\n.*?^\s*endnode\b[^\r\n]*(?:\r?\n|$)",
@@ -647,6 +684,136 @@ def find_generated_materials_shadowing_authored_surfaces(
     return shadowed
 
 
+def load_modular_tint_fallbacks() -> tuple[dict[str, list[str]], set[str]]:
+    if not MODULAR_FALLBACKS.exists():
+        raise RuntimeError(f"Missing modular tint fallback catalog: {MODULAR_FALLBACKS}")
+    raw_fallbacks = json.loads(MODULAR_FALLBACKS.read_text(encoding="utf-8"))
+    if (
+        not isinstance(raw_fallbacks, dict)
+        or not isinstance(raw_fallbacks.get("fallbacks"), dict)
+        or not isinstance(raw_fallbacks.get("appendSourceRows"), list)
+    ):
+        raise RuntimeError(
+            "Modular tint fallback catalog must contain fallback and appendSourceRows collections"
+        )
+
+    fallbacks: dict[str, list[str]] = {}
+    for raw_source, raw_candidates in sorted(raw_fallbacks["fallbacks"].items()):
+        source = str(raw_source).lower()
+        if not isinstance(raw_candidates, list) or not raw_candidates:
+            raise RuntimeError(
+                f"Modular tint fallback source '{source}' must list at least one model"
+            )
+        fallbacks[source] = [str(candidate).lower() for candidate in raw_candidates]
+    append_source_rows = {
+        str(source).lower()
+        for source in raw_fallbacks["appendSourceRows"]
+    }
+    if not append_source_rows.issubset(fallbacks):
+        raise RuntimeError(
+            "Every appended modular tint source row must name a configured fallback source"
+        )
+    return fallbacks, append_source_rows
+
+
+def find_modular_human_material_fallbacks(
+    models: dict[str, Path],
+    entries: dict[str, dict[str, object]],
+    alias_sources: dict[str, str],
+) -> dict[str, str]:
+    """Map untextured racial body variants to their human PLT material.
+
+    Aurora falls back from missing race-specific segmented-body PLTs to the
+    matching human PLT. Once that PLT is converted to an MTR, the implicit
+    fallback no longer exists, so each compatible local model must bind the
+    generated human material explicitly.
+    """
+    configured_fallbacks, _ = load_modular_tint_fallbacks()
+
+    materials = set(entries)
+    render_surfaces = find_active_render_surfaces()
+    fallbacks: dict[str, str] = {}
+
+    for source, candidates in configured_fallbacks.items():
+        source_path = models.get(source)
+        source_match = MODULAR_MODEL_PATTERN.fullmatch(source)
+        if (
+            source not in materials
+            or source_path is None
+            or source_match is None
+            or source_match.group("race").lower() != "h"
+            or not source_path.parent.name.lower().startswith(MODULAR_PART_DIRECTORY_PREFIX)
+        ):
+            raise RuntimeError(
+                f"Modular tint fallback source '{source}' is not an active human part material"
+            )
+        for candidate in candidates:
+            candidate_path = models.get(candidate)
+            candidate_match = MODULAR_MODEL_PATTERN.fullmatch(candidate)
+            if (
+                candidate == source
+                or candidate in materials
+                or candidate in render_surfaces
+                or candidate_path is None
+                or candidate_match is None
+                or candidate_match.group("race").lower() == "h"
+            ):
+                raise RuntimeError(
+                    f"Modular tint fallback target '{candidate}' is not an untextured racial part model"
+                )
+            if (
+                candidate_path.parent.resolve() != source_path.parent.resolve()
+                or candidate_match.group("gender").lower()
+                != source_match.group("gender").lower()
+                or candidate_match.group("phenotype") != source_match.group("phenotype")
+                or candidate_match.group("part").lower() != source_match.group("part").lower()
+            ):
+                raise RuntimeError(
+                    f"Modular tint fallback target '{candidate}' is incompatible with '{source}'"
+                )
+
+            try:
+                bindings = read_model_material_bindings(
+                    candidate_path,
+                    include_implicit_modular_surface=True,
+                )
+            except (UnicodeDecodeError, ValueError) as exc:
+                raise RuntimeError(
+                    f"Cannot inspect modular tint fallback target '{candidate}': {exc}"
+                ) from exc
+            if not bindings:
+                raise RuntimeError(
+                    f"Modular tint fallback target '{candidate}' has no renderable mesh surface"
+                )
+
+            # Only replace the implicit same-name modular surface. Authored
+            # textures and authored/generated material bindings remain
+            # authoritative for the racial variant.
+            if any(texture != candidate for texture, _ in bindings):
+                raise RuntimeError(
+                    f"Modular tint fallback target '{candidate}' has an authored texture"
+                )
+            if any(
+                material is not None
+                and material not in materials
+                and material not in alias_sources
+                for _, material in bindings
+            ):
+                raise RuntimeError(
+                    f"Modular tint fallback target '{candidate}' has an authored material"
+                )
+
+            existing = fallbacks.get(candidate)
+            if existing is not None and existing != source:
+                raise RuntimeError(
+                    f"Modular model '{candidate}' has conflicting human tint fallbacks "
+                    f"'{existing}' and '{source}'"
+                )
+            fallbacks[candidate] = source
+
+    return fallbacks
+
+
 def build_model_material_plan(
     entries: dict[str, dict[str, object]],
 ) -> tuple[
@@ -657,11 +824,28 @@ def build_model_material_plan(
     models = find_active_models()
     materials = set(entries)
     alias_sources = build_alias_source_lookup(entries)
+    human_fallbacks = find_modular_human_material_fallbacks(
+        models,
+        entries,
+        alias_sources,
+    )
+    human_fallback_sources = set(human_fallbacks.values())
     records: dict[tuple[str, str, str], dict[str, object]] = {}
 
     for model, path in sorted(models.items()):
         scope = model_material_scope(model, path)
         references = find_model_tint_material_references(path, materials, alias_sources)
+        if not references:
+            if model in human_fallbacks:
+                references[path.stem.lower()] = human_fallbacks[model]
+            elif model in human_fallback_sources:
+                # Some stock human body parts omit ``bitmap`` entirely while
+                # still selecting their same-name PLT through the modular-part
+                # loader. Only configured fallback sources receive that
+                # interpretation; applying it to every no-bitmap mesh would
+                # rewrite unrelated helper geometry and discard authored
+                # material behavior.
+                references[path.stem.lower()] = model
         for current, source in references.items():
             key = (model, source, scope)
             record = records.setdefault(
@@ -729,7 +913,16 @@ def build_model_material_plan(
     pending_bindings = {
         path: pending
         for path, desired in desired_bindings.items()
-        if (pending := pending_model_material_bindings(path, desired))
+        if (
+            pending := pending_model_material_bindings(
+                path,
+                desired,
+                include_implicit_modular_surface=(
+                    path.stem.lower() in human_fallbacks
+                    or path.stem.lower() in human_fallback_sources
+                ),
+            )
+        )
     }
 
     return (
@@ -762,6 +955,9 @@ def find_used_tint_materials(entries: dict[str, dict[str, object]]) -> set[str]:
     used: set[str] = set()
     for path in models.values():
         used.update(find_model_tint_material_references(path, materials, alias_sources).values())
+    used.update(
+        find_modular_human_material_fallbacks(models, entries, alias_sources).values()
+    )
 
     # Stock resources missing from the HAK source tree conventionally use the
     # same model/material resref; keep their converted source masks available.
@@ -1203,7 +1399,23 @@ def write_source_manifest(entries: dict[str, dict[str, object]]) -> None:
 
 def render_2da(entries: dict[str, dict[str, object]]) -> str:
     lines = ["2DA V2.0", "", "   MODEL             MATERIAL          LAYERS"]
-    for row, (model, material, layer_values) in enumerate(build_model_material_rows(entries)):
+    rows = build_model_material_rows(entries)
+    configured_fallbacks, append_source_rows = load_modular_tint_fallbacks()
+    deferred_models = set(append_source_rows)
+    deferred_models.update(
+        target
+        for targets in configured_fallbacks.values()
+        for target in targets
+    )
+    # Keep the existing catalog's row indices stable. Explicit fallback groups
+    # are additions to a large generated table, so append their source and
+    # target rows instead of renumbering every later model whenever a fallback
+    # is cataloged.
+    ordered_rows = (
+        [row for row in rows if row[0] not in deferred_models]
+        + [row for row in rows if row[0] in deferred_models]
+    )
+    for row, (model, material, layer_values) in enumerate(ordered_rows):
         layers = ",".join(str(value) for value in layer_values)
         lines.append(f"{row:<4} {model:<17} {material:<17} {layers}")
     return "\n".join(lines) + "\n"
