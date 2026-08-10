@@ -2101,6 +2101,8 @@ def audit() -> None:
             "uniform float rowSkin",
             "uniform vec4 tintSkin",
             "float paletteU = (g * 255.0 + 0.5) / 256.0",
+            "vec2(128.5 / 256.0, referenceV)",
+            "clamp(customTint.rgb * shadeScale, 0.0, 1.0)",
             "fEnvMapLevel = customTint.a > 0.5 ? 0.0 : 1.0 - paletteColor.a",
             "float outputAlpha = materialFrontDiffuse.a",
             "SetupStandardShaderInputs();",
