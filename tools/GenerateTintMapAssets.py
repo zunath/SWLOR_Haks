@@ -675,6 +675,7 @@ def find_generated_materials_shadowing_authored_surfaces(
 ) -> list[tuple[str, str, str]]:
     generated_materials = set(entries) | set(build_alias_source_lookup(entries))
     render_surfaces = find_active_render_surfaces()
+    explicit_overrides = load_authored_texture_overrides()
     shadowed: list[tuple[str, str, str]] = []
     for model, path in sorted(find_active_models().items()):
         if not path.parent.name.lower().startswith(MODULAR_PART_DIRECTORY_PREFIX):
@@ -685,6 +686,7 @@ def find_generated_materials_shadowing_authored_surfaces(
                     material in generated_materials
                     and texture in render_surfaces
                     and texture != material
+                    and explicit_overrides.get(model) != material
                 ):
                     shadowed.append((model, texture, material))
         except (UnicodeDecodeError, ValueError):
@@ -722,6 +724,70 @@ def load_modular_tint_fallbacks() -> tuple[dict[str, list[str]], set[str]]:
             "Every appended modular tint source row must name a configured fallback source"
         )
     return fallbacks, append_source_rows
+
+
+def load_authored_texture_overrides() -> dict[str, str]:
+    if not MODULAR_FALLBACKS.exists():
+        raise RuntimeError(f"Missing modular tint fallback catalog: {MODULAR_FALLBACKS}")
+    catalog = json.loads(MODULAR_FALLBACKS.read_text(encoding="utf-8"))
+    raw_overrides = catalog.get("authoredTextureOverrides")
+    if not isinstance(raw_overrides, dict):
+        raise RuntimeError(
+            "Modular tint fallback catalog must contain authoredTextureOverrides"
+        )
+
+    return {
+        str(model).lower(): str(source).lower()
+        for model, source in raw_overrides.items()
+    }
+
+
+def find_authored_texture_overrides(
+    models: dict[str, Path],
+    entries: dict[str, dict[str, object]],
+    alias_sources: dict[str, str],
+) -> dict[str, str]:
+    """Validate the narrow set of authored bitmaps that must use same-name PLTs.
+
+    These segmented hand models embed a stock soldier texture name even though
+    their same-name PLT contains the skin and equipment dye masks used by the
+    original part. Keeping this exception explicit prevents the general model
+    scan from replacing other valid authored textures.
+    """
+    overrides = load_authored_texture_overrides()
+    render_surfaces = find_active_render_surfaces()
+    for model, source in overrides.items():
+        path = models.get(model)
+        if (
+            path is None
+            or not path.parent.name.lower().startswith(MODULAR_PART_DIRECTORY_PREFIX)
+            or source != model
+            or source not in entries
+        ):
+            raise RuntimeError(
+                f"Authored texture override '{model}' must name an active same-name modular PLT"
+            )
+
+        try:
+            bindings = read_model_material_bindings(path)
+        except (UnicodeDecodeError, ValueError) as exc:
+            raise RuntimeError(
+                f"Cannot inspect authored texture override '{model}': {exc}"
+            ) from exc
+        if not bindings or not any(texture in render_surfaces for texture, _ in bindings):
+            raise RuntimeError(
+                f"Authored texture override '{model}' does not replace an active bitmap"
+            )
+        if any(
+            material is not None
+            and alias_sources.get(material, material) != source
+            for _, material in bindings
+        ):
+            raise RuntimeError(
+                f"Authored texture override '{model}' would replace another material"
+            )
+
+    return overrides
 
 
 def find_modular_human_material_fallbacks(
@@ -837,12 +903,22 @@ def build_model_material_plan(
         entries,
         alias_sources,
     )
+    authored_texture_overrides = find_authored_texture_overrides(
+        models,
+        entries,
+        alias_sources,
+    )
     human_fallback_sources = set(human_fallbacks.values())
     records: dict[tuple[str, str, str], dict[str, object]] = {}
 
     for model, path in sorted(models.items()):
         scope = model_material_scope(model, path)
         references = find_model_tint_material_references(path, materials, alias_sources)
+        if model in authored_texture_overrides:
+            references.update({
+                texture: authored_texture_overrides[model]
+                for texture, _ in read_model_material_bindings(path)
+            })
         if not references:
             if model in human_fallbacks:
                 references[path.stem.lower()] = human_fallbacks[model]
