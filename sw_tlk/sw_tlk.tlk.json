@@ -16463,7 +16463,7 @@
     },
     {
       "id": 4115,
-      "text": "Gain +4 Attack Deflection, increased by +1 per 4 MGT to a maximum of +8. Deflecting an attack restores 4 STM. This can trigger once every 6 seconds."
+      "text": "Gain +4 Melee Deflection, increased by +1 per 4 MGT to a maximum of +8. When your Melee Deflection negates a melee weapon auto-attack, restore 4 STM. This can trigger once every 6 seconds."
     },
     {
       "id": 4116,
@@ -18851,7 +18851,7 @@
     },
     {
       "id": 4712,
-      "text": "When you gain Attack Deflection from an ability, restore 2 FP. This can trigger once every 6 seconds."
+      "text": "When you gain Ranged Deflection from an ability, restore 2 FP. This can trigger once every 6 seconds."
     },
     {
       "id": 4713,
@@ -19555,7 +19555,7 @@
     },
     {
       "id": 4888,
-      "text": "While active, grants +15% Evasion and +8 Attack Deflection, but Attack is reduced by 15%."
+      "text": "While active, grants +15% Evasion and +8 Melee Deflection, but Attack is reduced by 15%."
     },
     {
       "id": 4889,
@@ -19579,7 +19579,7 @@
     },
     {
       "id": 4894,
-      "text": "For 45 seconds, you cannot be Knocked down or Dazed, gain +20 Attack Deflection, and generate +30% Enmity."
+      "text": "For 45 seconds, you cannot be Knocked down or Dazed, gain +20 Melee Deflection, and generate +30% Enmity."
     },
     {
       "id": 4895,
@@ -20311,23 +20311,23 @@
     },
     {
       "id": 5077,
-      "text": "Deals weapon DMG + 12 to enemies within 5m and grants +4 Attack Deflection for 30 seconds."
+      "text": "Deals weapon DMG + 12 to enemies within 5m and grants +4 Ranged Deflection for 30 seconds."
     },
     {
       "id": 5078,
-      "text": "While active, area combat abilities gain +10% damage and +5 Attack Deflection for 30 seconds, but single-target damage is reduced by 10%."
+      "text": "While active, area combat abilities gain +10% damage and +5 Ranged Deflection for 30 seconds, but single-target damage is reduced by 10%."
     },
     {
       "id": 5079,
-      "text": "Deals weapon DMG + 24 to enemies within 5m and grants +6 Attack Deflection for 30 seconds."
+      "text": "Deals weapon DMG + 24 to enemies within 5m and grants +6 Ranged Deflection for 30 seconds."
     },
     {
       "id": 5080,
-      "text": "Deals weapon DMG + 36 to enemies within 5m and grants +8 Attack Deflection for 30 seconds."
+      "text": "Deals weapon DMG + 36 to enemies within 5m and grants +8 Ranged Deflection for 30 seconds."
     },
     {
       "id": 5081,
-      "text": "For 45 seconds, area combat abilities restore 4 FP and grant +8 Attack Deflection for 30 seconds."
+      "text": "For 45 seconds, area combat abilities restore 4 FP and grant +8 Ranged Deflection for 30 seconds."
     },
     {
       "id": 5082,
@@ -20627,7 +20627,7 @@
     },
     {
       "id": 5156,
-      "text": "After using an area combat ability, gain +3 Attack Deflection for 30 seconds."
+      "text": "After using an area combat ability, gain +3 Ranged Deflection for 30 seconds."
     },
     {
       "id": 5157,
@@ -20659,11 +20659,11 @@
     },
     {
       "id": 5164,
-      "text": "Staff Sentinel protection abilities grant allies within 5m +8 Attack Deflection for 30 seconds and grant you +20% Enmity for 30 seconds."
+      "text": "Staff Sentinel protection abilities grant allies within 5m +8 Melee Deflection for 30 seconds and grant you +20% Enmity for 30 seconds."
     },
     {
       "id": 5165,
-      "text": "After using a hostile Staff ability, gain +4 Attack Deflection for 30 seconds."
+      "text": "After using a hostile Staff ability, gain +4 Melee Deflection for 30 seconds."
     },
     {
       "id": 5166,
@@ -20747,11 +20747,11 @@
     },
     {
       "id": 5186,
-      "text": "Deals weapon DMG + 16 in a 5m x 5m cone. If you deflected an attack in the last 30 seconds, restore 4 FP."
+      "text": "Deals weapon DMG + 16 in a 5m x 5m cone. If your Ranged Deflection negated a ranged weapon auto-attack in the last 30 seconds, restore 4 FP."
     },
     {
       "id": 5187,
-      "text": "Deals weapon DMG + 30 in a 5m x 5m cone. If you deflected an attack in the last 30 seconds, restore 8 FP."
+      "text": "Deals weapon DMG + 30 in a 5m x 5m cone. If your Ranged Deflection negated a ranged weapon auto-attack in the last 30 seconds, restore 8 FP."
     },
     {
       "id": 5188,
@@ -20807,7 +20807,7 @@
     },
     {
       "id": 5201,
-      "text": "Your hostile area abilities deal +10% damage if you have deflected an attack in the last 30 seconds."
+      "text": "Your hostile area abilities deal +10% damage if your Ranged Deflection has negated a ranged weapon auto-attack in the last 30 seconds."
     },
     {
       "id": 5202,
@@ -21691,7 +21691,7 @@
     },
     {
       "id": 5422,
-      "text": "Control powers that grant temporary HP, absorb damage, or prevent defeat grant affected allies +4 Attack Deflection for 30 seconds."
+      "text": "Control powers that grant temporary HP, absorb damage, or prevent defeat grant affected allies +4 Ranged Deflection for 30 seconds."
     },
     {
       "id": 5423,
@@ -24135,7 +24135,7 @@
     },
     {
       "id": 6033,
-      "text": "When you deflect a directly targeted ranged attack, reflect 8% of the attack's damage back to its source, up to 25% of your normal weapon damage. Triggers at most once every 6 seconds."
+      "text": "Gain +4 Ranged Deflection. When your Ranged Deflection negates a directly targeted ranged weapon auto-attack, reflect 8% of the attack's damage back to its source, up to 25% of your normal weapon damage. Triggers at most once every 6 seconds."
     },
     {
       "id": 6034,
@@ -24607,11 +24607,11 @@
     },
     {
       "id": 6151,
-      "text": "Deals weapon DMG + 16 in a 5m x 5m cone. If you deflected an attack in the last 30 seconds, restore 4 FP."
+      "text": "Deals weapon DMG + 16 in a 5m x 5m cone. If your Ranged Deflection negated a ranged weapon auto-attack in the last 30 seconds, restore 4 FP."
     },
     {
       "id": 6152,
-      "text": "Deals weapon DMG + 30 in a 5m x 5m cone. If you deflected an attack in the last 30 seconds, restore 8 FP."
+      "text": "Deals weapon DMG + 30 in a 5m x 5m cone. If your Ranged Deflection negated a ranged weapon auto-attack in the last 30 seconds, restore 8 FP."
     },
     {
       "id": 6153,
