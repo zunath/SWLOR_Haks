@@ -66,12 +66,10 @@ uniform float rowLeath2 = 0.429932;
 uniform float rowTat1   = 0.515869;
 uniform float rowTat2   = 0.515869;
 
-// Optional direct RGB overrides. A negative row coordinate selects the color
-// picker's RGB value; a positive coordinate retains the original NWN palette
-// row. The mode deliberately lives in the scalar row parameter because some
-// clients do not retain the fourth component of scripted vec4 overrides. A
-// direct RGB tint is fully diffuse so it cannot inherit the hidden preset row's
-// environment mask and turn chrome/grey.
+// Optional direct RGB overrides. The mode uses its own scripted scalar because
+// some clients do not retain a vec4's fourth component or a negative palette
+// coordinate. A direct RGB tint is fully diffuse so it cannot inherit the
+// hidden preset row's environment mask and turn chrome/grey.
 uniform vec4 tintSkin   = vec4(0.0);
 uniform vec4 tintHair   = vec4(0.0);
 uniform vec4 tintMetal1 = vec4(0.0);
@@ -82,6 +80,17 @@ uniform vec4 tintLeath1 = vec4(0.0);
 uniform vec4 tintLeath2 = vec4(0.0);
 uniform vec4 tintTat1   = vec4(0.0);
 uniform vec4 tintTat2   = vec4(0.0);
+
+uniform float useCustomSkin   = 0.0;
+uniform float useCustomHair   = 0.0;
+uniform float useCustomMetal1 = 0.0;
+uniform float useCustomMetal2 = 0.0;
+uniform float useCustomCloth1 = 0.0;
+uniform float useCustomCloth2 = 0.0;
+uniform float useCustomLeath1 = 0.0;
+uniform float useCustomLeath2 = 0.0;
+uniform float useCustomTat1   = 0.0;
+uniform float useCustomTat2   = 0.0;
 
 void main ()
 {
@@ -95,18 +104,18 @@ void main ()
     float v = rowSkin;
     float referenceV = 0.000244;
     vec4 customTint = tintSkin;
-    if      (layer > 8.5) { v = rowTat2;   referenceV = 0.515869; customTint = tintTat2; }
-    else if (layer > 7.5) { v = rowTat1;   referenceV = 0.515869; customTint = tintTat1; }
-    else if (layer > 6.5) { v = rowLeath2; referenceV = 0.429932; customTint = tintLeath2; }
-    else if (layer > 5.5) { v = rowLeath1; referenceV = 0.429932; customTint = tintLeath1; }
-    else if (layer > 4.5) { v = rowCloth2; referenceV = 0.343994; customTint = tintCloth2; }
-    else if (layer > 3.5) { v = rowCloth1; referenceV = 0.343994; customTint = tintCloth1; }
-    else if (layer > 2.5) { v = rowMetal2; referenceV = 0.258057; customTint = tintMetal2; }
-    else if (layer > 1.5) { v = rowMetal1; referenceV = 0.172119; customTint = tintMetal1; }
-    else if (layer > 0.5) { v = rowHair;   referenceV = 0.086182; customTint = tintHair; }
+    float customTintMode = useCustomSkin;
+    if      (layer > 8.5) { v = rowTat2;   referenceV = 0.515869; customTint = tintTat2;   customTintMode = useCustomTat2; }
+    else if (layer > 7.5) { v = rowTat1;   referenceV = 0.515869; customTint = tintTat1;   customTintMode = useCustomTat1; }
+    else if (layer > 6.5) { v = rowLeath2; referenceV = 0.429932; customTint = tintLeath2; customTintMode = useCustomLeath2; }
+    else if (layer > 5.5) { v = rowLeath1; referenceV = 0.429932; customTint = tintLeath1; customTintMode = useCustomLeath1; }
+    else if (layer > 4.5) { v = rowCloth2; referenceV = 0.343994; customTint = tintCloth2; customTintMode = useCustomCloth2; }
+    else if (layer > 3.5) { v = rowCloth1; referenceV = 0.343994; customTint = tintCloth1; customTintMode = useCustomCloth1; }
+    else if (layer > 2.5) { v = rowMetal2; referenceV = 0.258057; customTint = tintMetal2; customTintMode = useCustomMetal2; }
+    else if (layer > 1.5) { v = rowMetal1; referenceV = 0.172119; customTint = tintMetal1; customTintMode = useCustomMetal1; }
+    else if (layer > 0.5) { v = rowHair;   referenceV = 0.086182; customTint = tintHair;   customTintMode = useCustomHair; }
 
-    bool useCustomTint = v < 0.0;
-    v = abs(v);
+    bool useCustomTint = customTintMode > 0.5;
 
     // Bias -10 forces mip level 0. The tintmap-derived UVs have chaotic
     // screen-space derivatives, so without this the GPU picks the smallest

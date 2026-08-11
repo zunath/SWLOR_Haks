@@ -99,6 +99,22 @@ TINT_COLOR_PARAMETER_LINES = tuple(
     f"parameter float {uniform_name} 0.0 0.0 0.0 0.0"
     for uniform_name in TINT_COLOR_PARAMETERS
 )
+TINT_CUSTOM_MODE_PARAMETERS = (
+    "useCustomSkin",
+    "useCustomHair",
+    "useCustomMetal1",
+    "useCustomMetal2",
+    "useCustomCloth1",
+    "useCustomCloth2",
+    "useCustomLeath1",
+    "useCustomLeath2",
+    "useCustomTat1",
+    "useCustomTat2",
+)
+TINT_CUSTOM_MODE_PARAMETER_LINES = tuple(
+    f"parameter float {uniform_name} 0.0"
+    for uniform_name in TINT_CUSTOM_MODE_PARAMETERS
+)
 TEXTURE1_ALPHA_SHADERS = {"fs_plt_hair", "pfh0_neck199", "pmh0_neck199"}
 TEXTURE1_ALPHA_MATERIALS = {"pfh0_neck199", "pmh0_head248", "pmh0_neck199"}
 TEXTURE9_ALPHA_MATERIALS = {
@@ -1391,12 +1407,17 @@ def update_mtr(
     tint_color_parameter_pattern = "|".join(
         re.escape(uniform_name) for uniform_name in TINT_COLOR_PARAMETERS
     )
+    tint_custom_mode_parameter_pattern = "|".join(
+        re.escape(uniform_name) for uniform_name in TINT_CUSTOM_MODE_PARAMETERS
+    )
     replaced = re.compile(
         r"^\s*(?:customshaderFS|texture0|texture7|texture9|texture10|"
         r"parameter\s+float\s+(?:tintMapWidth|tintMapHeight|useTexture1Alpha|useTexture9Alpha|"
         + tint_row_parameter_pattern
         + "|"
         + tint_color_parameter_pattern
+        + "|"
+        + tint_custom_mode_parameter_pattern
         + r"))\b",
         re.IGNORECASE,
     )
@@ -1431,6 +1452,7 @@ def update_mtr(
         )
         + TINT_ROW_PARAMETER_LINES
         + TINT_COLOR_PARAMETER_LINES
+        + TINT_CUSTOM_MODE_PARAMETER_LINES
     )
     if uses_texture1_alpha:
         lines.append("parameter float useTexture1Alpha 1.0")
@@ -1464,7 +1486,9 @@ def is_generated_pair(model: str, texture: str, width: int, height: int, dds_pat
         and f"parameter float tintmapheight {float(height):.1f}" in mtr
         and all(
             line.lower() in mtr
-            for line in TINT_ROW_PARAMETER_LINES + TINT_COLOR_PARAMETER_LINES
+            for line in TINT_ROW_PARAMETER_LINES
+            + TINT_COLOR_PARAMETER_LINES
+            + TINT_CUSTOM_MODE_PARAMETER_LINES
         )
     )
 
@@ -2067,6 +2091,38 @@ def relocate() -> None:
     print("Packed tint maps were split across dedicated tint HAK directories.", flush=True)
 
 
+def refresh_materials() -> None:
+    """Regenerate MTR declarations without rewriting meshes or packed maps."""
+    entries = load_source_manifest()
+    if not entries:
+        raise RuntimeError("No tint source manifest exists to refresh")
+
+    _, _, active_aliases = build_model_material_plan(entries)
+    for source, entry in sorted(entries.items()):
+        update_mtr(
+            mtr_path(source),
+            source,
+            str(entry.get("texture") or source),
+            int(entry["width"]),
+            int(entry["height"]),
+        )
+    for alias, source in sorted(active_aliases.items()):
+        entry = entries[source]
+        update_mtr(
+            mtr_path(alias),
+            alias,
+            str(entry.get("texture") or source),
+            int(entry["width"]),
+            int(entry["height"]),
+            source_material=source,
+        )
+
+    print(
+        f"Refreshed {len(entries)} source and {len(active_aliases)} alias tint materials.",
+        flush=True,
+    )
+
+
 def check_dds(path: Path, width: int, height: int) -> str | None:
     if not path.exists():
         return "missing DDS"
@@ -2146,6 +2202,9 @@ def check_tint_mtr_structure(path: Path) -> list[str]:
     ) + tuple(
         ("parameter", "float", uniform_name.lower())
         for uniform_name in TINT_COLOR_PARAMETERS
+    ) + tuple(
+        ("parameter", "float", uniform_name.lower())
+        for uniform_name in TINT_CUSTOM_MODE_PARAMETERS
     )
     for key in singleton_keys:
         count = len(directives.get(key, []))
@@ -2298,7 +2357,12 @@ def audit() -> None:
                 "texture10 plt_palette",
                 f"parameter float tintmapwidth {float(width):.1f}",
                 f"parameter float tintmapheight {float(height):.1f}",
-            ) + tuple(line.lower() for line in TINT_ROW_PARAMETER_LINES + TINT_COLOR_PARAMETER_LINES)
+            ) + tuple(
+                line.lower()
+                for line in TINT_ROW_PARAMETER_LINES
+                + TINT_COLOR_PARAMETER_LINES
+                + TINT_CUSTOM_MODE_PARAMETER_LINES
+            )
             for line in required:
                 if line not in mtr:
                     errors.append(f"{model}: MTR missing '{line}'")
@@ -2358,7 +2422,12 @@ def audit() -> None:
             "texture10 plt_palette",
             f"parameter float tintmapwidth {float(entry['width']):.1f}",
             f"parameter float tintmapheight {float(entry['height']):.1f}",
-        ) + tuple(line.lower() for line in TINT_ROW_PARAMETER_LINES + TINT_COLOR_PARAMETER_LINES)
+        ) + tuple(
+            line.lower()
+            for line in TINT_ROW_PARAMETER_LINES
+            + TINT_COLOR_PARAMETER_LINES
+            + TINT_CUSTOM_MODE_PARAMETER_LINES
+        )
         for line in required:
             if line not in mtr:
                 errors.append(f"{alias}: scoped MTR missing '{line}'")
@@ -2412,10 +2481,10 @@ def audit() -> None:
             "uniform sampler2D texUnit10",
             "uniform float rowSkin",
             "uniform vec4 tintSkin",
+            "uniform float useCustomSkin",
             "float paletteU = (g * 255.0 + 0.5) / 256.0",
             "vec2(128.5 / 256.0, referenceV)",
-            "bool useCustomTint = v < 0.0",
-            "v = abs(v)",
+            "bool useCustomTint = customTintMode > 0.5",
             "clamp(customTint.rgb * shadeScale, 0.0, 1.0)",
             "fEnvMapLevel = useCustomTint ? 0.0 : 1.0 - paletteColor.a",
             "float outputAlpha = materialFrontDiffuse.a",
@@ -2486,6 +2555,11 @@ def main() -> None:
         help="convert active 3D material PLTs without pruning unrelated manifest entries",
     )
     action.add_argument("--relocate", action="store_true", help="split existing maps across tint HAKs")
+    action.add_argument(
+        "--refresh-materials",
+        action="store_true",
+        help="regenerate MTR declarations without changing packed maps or meshes",
+    )
     action.add_argument("--deduplicate", action="store_true", help="share byte-identical packed maps")
     action.add_argument("--prune", action="store_true", help="remove masks not referenced by active models")
     action.add_argument("--check", action="store_true", help="audit generated assets and PLT coverage")
@@ -2498,6 +2572,8 @@ def main() -> None:
         generate_preserving_manifest()
     elif arguments.relocate:
         relocate()
+    elif arguments.refresh_materials:
+        refresh_materials()
     elif arguments.deduplicate:
         deduplicate()
     elif arguments.prune:
