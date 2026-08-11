@@ -2604,7 +2604,7 @@ def audit() -> None:
             "uniform float useCustomSkin",
             "float paletteU = (g * 255.0 + 0.5) / 256.0",
             "vec2(128.5 / 256.0, referenceV)",
-            "bool useCustomTint = customTintMode > 0.5",
+            "bool useCustomTint = customTintMode > 0.5 || v <= 0.0",
             "clamp(customTint.rgb * shadeScale, 0.0, 1.0)",
             "fEnvMapLevel = useCustomTint ? 0.0 : 1.0 - paletteColor.a",
             "float outputAlpha = materialFrontDiffuse.a",

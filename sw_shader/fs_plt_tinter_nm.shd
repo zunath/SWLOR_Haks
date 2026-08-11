@@ -87,7 +87,9 @@ void main ()
     else if (layer > 1.5) { v = rowMetal1; referenceV = 0.172119; customTint = tintMetal1; customTintMode = useCustomMetal1; }
     else if (layer > 0.5) { v = rowHair;   referenceV = 0.086182; customTint = tintHair;   customTintMode = useCustomHair; }
 
-    bool useCustomTint = customTintMode > 0.5;
+    // Some clients drop scripted scalar overrides. Custom RGB also writes a zero
+    // palette coordinate, which cannot collide with any real (texel-centered) row.
+    bool useCustomTint = customTintMode > 0.5 || v <= 0.0;
 
     float paletteU = (g * 255.0 + 0.5) / 256.0;
     vec4 paletteColor = texture2D(texUnit10, vec2(paletteU, v), -10.0);
