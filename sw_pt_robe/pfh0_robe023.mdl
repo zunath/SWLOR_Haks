@@ -11,6 +11,7 @@ node dummy pfh0_robe023
     parent NULL
 endnode
 node trimesh rootdummy
+  materialname pfh0_robe023
     parent pfh0_robe023
     position 0.0 -0.0325529 1.19227
     orientation 1.0 0.0 0.0 0.0
@@ -51,6 +52,7 @@ node trimesh rootdummy
         4 6 2 1 0 0 0 3
 endnode
 node trimesh torso_g
+  materialname pfh0_robe023
     parent rootdummy
     position 0.0 0.0106929 -0.000540009
     orientation 1.0 0.0 0.0 0.0

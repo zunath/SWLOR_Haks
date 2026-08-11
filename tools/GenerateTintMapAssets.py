@@ -641,12 +641,16 @@ def find_model_tint_material_references(
     alias_sources: dict[str, str],
 ) -> dict[str, str]:
     try:
-        current_bindings = read_model_material_bindings(path)
         same_name_material = path.stem.lower()
-        if (
+        has_same_name_modular_material = (
             path.parent.name.lower().startswith(MODULAR_PART_DIRECTORY_PREFIX)
             and same_name_material in materials
-        ):
+        )
+        current_bindings = read_model_material_bindings(
+            path,
+            include_implicit_modular_surface=has_same_name_modular_material,
+        )
+        if has_same_name_modular_material:
             render_surfaces = find_active_render_surfaces()
             references: dict[str, str] = {}
             for texture, current_material in current_bindings:
@@ -1020,6 +1024,7 @@ def build_model_material_plan(
                 include_implicit_modular_surface=(
                     path.stem.lower() in human_fallbacks
                     or path.stem.lower() in human_fallback_sources
+                    or path.stem.lower() in desired
                 ),
             )
         )
@@ -1432,12 +1437,11 @@ def update_mtr(
             line
             for line in lines
             if not re.match(r"^\s*customshaderVS\s+vslit_sm_nm\s*$", line, re.IGNORECASE)
-            and not re.match(r"^\s*renderhint\s+NormalTangents\s*$", line, re.IGNORECASE)
         ]
 
     if not any(re.match(r"^\s*customshaderVS\b", line, re.IGNORECASE) for line in lines):
         lines.append("customshaderVS vslit_sm_nm" if mapped_shader else "customshaderVS vslit_sm")
-    if mapped_shader and not any(re.match(r"^\s*renderhint\b", line, re.IGNORECASE) for line in lines):
+    if not any(re.match(r"^\s*renderhint\b", line, re.IGNORECASE) for line in lines):
         lines.append("renderhint NormalTangents")
 
     lines.extend(
@@ -1527,15 +1531,16 @@ def render_2da(entries: dict[str, dict[str, object]]) -> str:
         for targets in configured_fallbacks.values()
         for target in targets
     )
-    # Keep the existing catalog's row indices stable. Explicit fallback groups
-    # are additions to a large generated table, so append their source and
-    # target rows instead of renumbering every later model whenever a fallback
-    # is cataloged.
-    ordered_rows = (
+    new_row_order = (
         [row for row in rows if row[0] not in deferred_models]
         + [row for row in rows if row[0] in deferred_models]
     )
-    existing_labels: dict[tuple[str, str], int] = {}
+    rows_by_pair = {
+        (model, material): (model, material, layer_values)
+        for model, material, layer_values in rows
+    }
+    existing_rows: list[tuple[int, str, str, list[int]]] = []
+    existing_pairs: set[tuple[str, str]] = set()
     next_label = 0
     if OUTPUT_2DA.exists():
         for line in OUTPUT_2DA.read_text(encoding="utf-8").splitlines()[3:]:
@@ -1543,16 +1548,35 @@ def render_2da(entries: dict[str, dict[str, object]]) -> str:
             if len(columns) < 4 or not columns[0].isdigit():
                 continue
             label = int(columns[0])
-            existing_labels[(columns[1].lower(), columns[2].lower())] = label
+            model = columns[1].lower()
+            material = columns[2].lower()
+            pair = (model, material)
+            if pair in existing_pairs:
+                raise RuntimeError(
+                    f"tintmap.2da contains duplicate model/material row {model}/{material}"
+                )
+            existing_pairs.add(pair)
+            existing_rows.append(
+                (label, model, material, [int(value) for value in columns[3].split(",")])
+            )
             next_label = max(next_label, label + 1)
 
-    for model, material, layer_values in ordered_rows:
-        label = existing_labels.get((model, material))
-        if label is None:
-            label = next_label
-            next_label += 1
+    # A 2DA row's runtime id is its physical position, not the numeric label in
+    # the first column. Keep every established row in place (including retired
+    # but still valid compatibility mappings), update its layer metadata when
+    # it remains active, and append only genuinely new pairs.
+    for label, model, material, old_layers in existing_rows:
+        current = rows_by_pair.pop((model, material), None)
+        layer_values = current[2] if current is not None else old_layers
         layers = ",".join(str(value) for value in layer_values)
         lines.append(f"{label:<4} {model:<17} {material:<17} {layers}")
+
+    for model, material, layer_values in new_row_order:
+        if (model, material) not in rows_by_pair:
+            continue
+        layers = ",".join(str(value) for value in layer_values)
+        lines.append(f"{next_label:<4} {model:<17} {material:<17} {layers}")
+        next_label += 1
     return "\n".join(lines) + "\n"
 
 
@@ -1612,6 +1636,9 @@ def generate() -> None:
         if source_changed or not is_generated_pair(model, texture, width, height, dds_path):
             write_packed_dds(dds_path, width, height, shade, layer)
             update_mtr(mtr_path(model), model, texture, width, height)
+        shade_hash = hashlib.sha256(
+            decode_dds_shades(dds_path, width, height).tobytes()
+        ).hexdigest()
         entries[model] = {
             "model": model,
             "material": model,
@@ -1621,6 +1648,7 @@ def generate() -> None:
             "height": height,
             "source": relative_source,
             "sourceSha256": source_hash,
+            "shadeSha256": shade_hash,
             "layerSha256": hashlib.sha256(layer.tobytes()).hexdigest(),
             "output": dds_path.relative_to(REPOSITORY_ROOT).as_posix(),
             "texture": texture,
@@ -1810,6 +1838,9 @@ def generate_preserving_manifest() -> None:
             dds_path = packed_dds_path(str(matching_entry["model"]), matching_entry)
 
         existing_entry = entries.get(material)
+        shade_hash = hashlib.sha256(
+            decode_dds_shades(dds_path, width, height).tobytes()
+        ).hexdigest()
         entries[material] = {
             "model": material,
             "material": material,
@@ -1819,6 +1850,7 @@ def generate_preserving_manifest() -> None:
             "height": height,
             "source": source_path.relative_to(REPOSITORY_ROOT).as_posix(),
             "sourceSha256": source_hash,
+            "shadeSha256": shade_hash,
             "layerSha256": hashlib.sha256(layer.tobytes()).hexdigest(),
             "output": dds_path.relative_to(REPOSITORY_ROOT).as_posix(),
             "texture": texture,
@@ -2123,6 +2155,35 @@ def refresh_materials() -> None:
     )
 
 
+def refresh_packed_checksums() -> None:
+    """Record decoded packed-channel checksums without rewriting DDS resources."""
+    entries = load_source_manifest()
+    if not entries:
+        raise RuntimeError("No tint source manifest exists to refresh")
+
+    manifest_order = list(entries)
+    decoded_shade_hashes: dict[tuple[Path, int, int], str] = {}
+    for model, entry in entries.items():
+        width = int(entry["width"])
+        height = int(entry["height"])
+        dds_path = packed_dds_path(model, entry)
+        dds_error = check_dds(dds_path, width, height)
+        if dds_error:
+            raise RuntimeError(f"{model}: {dds_error}")
+        hash_key = (dds_path.resolve(), width, height)
+        if hash_key not in decoded_shade_hashes:
+            decoded_shade_hashes[hash_key] = hashlib.sha256(
+                decode_dds_shades(dds_path, width, height).tobytes()
+            ).hexdigest()
+        entry["shadeSha256"] = decoded_shade_hashes[hash_key]
+
+    write_source_manifest(entries, manifest_order)
+    print(
+        f"Refreshed decoded shade checksums for {len(entries)} tint materials.",
+        flush=True,
+    )
+
+
 def check_dds(path: Path, width: int, height: int) -> str | None:
     if not path.exists():
         return "missing DDS"
@@ -2140,12 +2201,19 @@ def check_dds(path: Path, width: int, height: int) -> str | None:
     return None
 
 
-def decode_dds_layers(path: Path, width: int, height: int) -> np.ndarray:
+def decode_dds_channel(
+    path: Path,
+    width: int,
+    height: int,
+    channel_offset: int,
+) -> np.ndarray:
     raw = path.read_bytes()
     blocks_wide = (width + 3) // 4
     blocks_high = (height + 3) // 4
     block_count = blocks_wide * blocks_high
-    packed = np.frombuffer(raw, dtype=np.uint8, offset=128).reshape(block_count, 16)[:, 8:16]
+    packed = np.frombuffer(raw, dtype=np.uint8, offset=128).reshape(block_count, 16)[
+        :, channel_offset : channel_offset + 8
+    ]
     endpoint0 = packed[:, 0]
     endpoint1 = packed[:, 1]
     palette = bc4_palette(endpoint0, endpoint1)
@@ -2154,9 +2222,16 @@ def decode_dds_layers(path: Path, width: int, height: int) -> np.ndarray:
         bits |= packed[:, byte_index + 2].astype(np.uint64) << (byte_index * 8)
     indices = ((bits[:, None] >> (np.arange(16, dtype=np.uint64) * 3)) & 7).astype(np.int64)
     decoded = np.take_along_axis(palette, indices, axis=1)
-    categories = bc4_layer_categories(decoded)
-    image = categories.reshape(blocks_high, blocks_wide, 4, 4).transpose(0, 2, 1, 3)
+    image = decoded.reshape(blocks_high, blocks_wide, 4, 4).transpose(0, 2, 1, 3)
     return image.reshape(blocks_high * 4, blocks_wide * 4)[:height, :width]
+
+
+def decode_dds_shades(path: Path, width: int, height: int) -> np.ndarray:
+    return decode_dds_channel(path, width, height, 0)
+
+
+def decode_dds_layers(path: Path, width: int, height: int) -> np.ndarray:
+    return bc4_layer_categories(decode_dds_channel(path, width, height, 8))
 
 
 def check_tga_header(
@@ -2211,8 +2286,8 @@ def check_tint_mtr_structure(path: Path) -> list[str]:
         if count != 1:
             errors.append(f"directive {' '.join(key)} occurs {count} times")
 
-    if len(directives.get(("renderhint",), [])) > 1:
-        errors.append("directive renderhint occurs more than once")
+    if len(directives.get(("renderhint",), [])) != 1:
+        errors.append("directive renderhint must occur exactly once")
 
     render_hints = directives.get(("renderhint",), [])
     if render_hints and render_hints[0].lower() not in {
@@ -2291,6 +2366,7 @@ def audit() -> None:
     if duplicate_icon_count:
         errors.append(f"{duplicate_icon_count} lower-priority inventory icon PLT duplicates remain")
 
+    decoded_shade_hashes: dict[tuple[Path, int, int], str] = {}
     decoded_layer_hashes: dict[tuple[Path, int, int], str] = {}
     for model, entry in sorted(entries.items()):
         if model != str(entry.get("model", "")).lower() or str(entry.get("material", "")).lower() != model:
@@ -2324,16 +2400,27 @@ def audit() -> None:
         if dds_error:
             errors.append(f"{model}: {dds_error}")
         else:
+            packed_hash_key = (dds_path.resolve(), width, height)
+            expected_shade_hash = entry.get("shadeSha256")
+            if not expected_shade_hash:
+                errors.append(f"{model}: missing decoded shade checksum")
+            else:
+                if packed_hash_key not in decoded_shade_hashes:
+                    decoded_shade_hashes[packed_hash_key] = hashlib.sha256(
+                        decode_dds_shades(dds_path, width, height).tobytes()
+                    ).hexdigest()
+                if decoded_shade_hashes[packed_hash_key] != expected_shade_hash:
+                    errors.append(f"{model}: packed DDS changes the decoded shade channel")
+
             expected_layer_hash = entry.get("layerSha256")
             if not expected_layer_hash:
                 errors.append(f"{model}: missing decoded layer checksum")
             else:
-                layer_hash_key = (dds_path.resolve(), width, height)
-                if layer_hash_key not in decoded_layer_hashes:
-                    decoded_layer_hashes[layer_hash_key] = hashlib.sha256(
+                if packed_hash_key not in decoded_layer_hashes:
+                    decoded_layer_hashes[packed_hash_key] = hashlib.sha256(
                         decode_dds_layers(dds_path, width, height).tobytes()
                     ).hexdigest()
-                if decoded_layer_hashes[layer_hash_key] != expected_layer_hash:
+                if decoded_layer_hashes[packed_hash_key] != expected_layer_hash:
                     errors.append(f"{model}: packed DDS changes one or more categorical tint layers")
 
         material_path = mtr_path(model)
@@ -2452,8 +2539,41 @@ def audit() -> None:
             errors.append(f"{model}: tint catalog layer list disagrees with material '{material}'")
     if not OUTPUT_2DA.exists():
         errors.append("missing tintmap.2da")
-    elif OUTPUT_2DA.read_text(encoding="utf-8") != render_2da(entries):
-        errors.append("tintmap.2da does not exactly match the source manifest")
+    else:
+        output_2da_text = OUTPUT_2DA.read_text(encoding="utf-8")
+        if output_2da_text != render_2da(entries):
+            errors.append("tintmap.2da does not exactly match the source manifest")
+        seen_output_pairs: set[tuple[str, str]] = set()
+        for physical_index, line in enumerate(output_2da_text.splitlines()[3:]):
+            columns = line.split()
+            if len(columns) < 4 or not columns[0].isdigit():
+                errors.append(f"tintmap.2da row {physical_index} is malformed")
+                continue
+            if int(columns[0]) != physical_index:
+                errors.append(
+                    "tintmap.2da numeric labels must match physical row positions; "
+                    f"row {physical_index} uses label {columns[0]}"
+                )
+            model, material = columns[1:3]
+            pair = (model.lower(), material.lower())
+            if pair in seen_output_pairs:
+                errors.append(f"tintmap.2da contains duplicate model/material row {model}/{material}")
+            seen_output_pairs.add(pair)
+            source = active_aliases.get(material, material)
+            if source not in entries:
+                errors.append(
+                    f"tintmap.2da compatibility row {physical_index} references unknown material '{material}'"
+                )
+                continue
+            try:
+                layers = [int(value) for value in columns[3].split(",")]
+            except ValueError:
+                errors.append(f"tintmap.2da row {physical_index} has an invalid layer list '{columns[3]}'")
+                continue
+            if layers != entries[source]["layers"]:
+                errors.append(
+                    f"tintmap.2da row {physical_index} layer list disagrees with material '{material}'"
+                )
 
     if not WHITE_TEXTURE.exists() or WHITE_TEXTURE.read_bytes() != white_texture_bytes():
         errors.append("plt_white.tga is missing or invalid")
@@ -2560,6 +2680,11 @@ def main() -> None:
         action="store_true",
         help="regenerate MTR declarations without changing packed maps or meshes",
     )
+    action.add_argument(
+        "--refresh-packed-checksums",
+        action="store_true",
+        help="record decoded packed-map checksums without rewriting DDS resources",
+    )
     action.add_argument("--deduplicate", action="store_true", help="share byte-identical packed maps")
     action.add_argument("--prune", action="store_true", help="remove masks not referenced by active models")
     action.add_argument("--check", action="store_true", help="audit generated assets and PLT coverage")
@@ -2574,6 +2699,8 @@ def main() -> None:
         relocate()
     elif arguments.refresh_materials:
         refresh_materials()
+    elif arguments.refresh_packed_checksums:
+        refresh_packed_checksums()
     elif arguments.deduplicate:
         deduplicate()
     elif arguments.prune:
