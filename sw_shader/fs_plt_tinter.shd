@@ -66,8 +66,10 @@ uniform float rowLeath2 = 0.429932;
 uniform float rowTat1   = 0.515869;
 uniform float rowTat2   = 0.515869;
 
-// Optional direct RGB overrides. Alpha 0 retains the original NWN palette row;
-// alpha 1 uses the color picker's RGB value, modulated by the packed shade. A
+// Optional direct RGB overrides. A negative row coordinate selects the color
+// picker's RGB value; a positive coordinate retains the original NWN palette
+// row. The mode deliberately lives in the scalar row parameter because some
+// clients do not retain the fourth component of scripted vec4 overrides. A
 // direct RGB tint is fully diffuse so it cannot inherit the hidden preset row's
 // environment mask and turn chrome/grey.
 uniform vec4 tintSkin   = vec4(0.0);
@@ -103,6 +105,9 @@ void main ()
     else if (layer > 1.5) { v = rowMetal1; referenceV = 0.172119; customTint = tintMetal1; }
     else if (layer > 0.5) { v = rowHair;   referenceV = 0.086182; customTint = tintHair; }
 
+    bool useCustomTint = v < 0.0;
+    v = abs(v);
+
     // Bias -10 forces mip level 0. The tintmap-derived UVs have chaotic
     // screen-space derivatives, so without this the GPU picks the smallest
     // mip (the whole-atlas average: a flat muddy color on every pixel).
@@ -128,7 +133,7 @@ void main ()
         dot(referenceShade, luminanceWeights) /
             max(dot(referenceMidpoint, luminanceWeights), 1.0 / 255.0),
         0.0);
-    vec3 vTint = customTint.a > 0.5
+    vec3 vTint = useCustomTint
         ? clamp(customTint.rgb * shadeScale, 0.0, 1.0)
         : paletteColor.rgb;
 
@@ -144,7 +149,7 @@ void main ()
     // Reapply the same inc_standard path with the atlas alpha after normal-map
     // setup for presets. A custom RGB is independent of the hidden preset row,
     // including its environment mask.
-    fEnvMapLevel = customTint.a > 0.5 ? 0.0 : 1.0 - paletteColor.a;
+    fEnvMapLevel = useCustomTint ? 0.0 : 1.0 - paletteColor.a;
     vec3 surfaceColor = ApplyColorSpace(vTint);
 
     #if FRAGMENT_LIGHTING == 1 && LIGHTING == 1

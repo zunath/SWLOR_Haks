@@ -75,6 +75,9 @@ void main ()
     else if (layer > 1.5) { v = rowMetal1; referenceV = 0.172119; customTint = tintMetal1; }
     else if (layer > 0.5) { v = rowHair;   referenceV = 0.086182; customTint = tintHair; }
 
+    bool useCustomTint = v < 0.0;
+    v = abs(v);
+
     float paletteU = (g * 255.0 + 0.5) / 256.0;
     vec4 paletteColor = texture2D(texUnit10, vec2(paletteU, v), -10.0);
     vec3 referenceShade = texture2D(
@@ -90,7 +93,7 @@ void main ()
         dot(referenceShade, luminanceWeights) /
             max(dot(referenceMidpoint, luminanceWeights), 1.0 / 255.0),
         0.0);
-    vec3 vTint = customTint.a > 0.5
+    vec3 vTint = useCustomTint
         ? clamp(customTint.rgb * shadeScale, 0.0, 1.0)
         : paletteColor.rgb;
 
@@ -103,7 +106,7 @@ void main ()
         vFragmentNormal = normalize(vSurfaceNormal);
     }
 
-    fEnvMapLevel = customTint.a > 0.5 ? 0.0 : 1.0 - paletteColor.a;
+    fEnvMapLevel = useCustomTint ? 0.0 : 1.0 - paletteColor.a;
     vec3 surfaceColor = ApplyColorSpace(vTint);
 
     #if FRAGMENT_LIGHTING == 1 && LIGHTING == 1
