@@ -106,11 +106,10 @@ void main ()
         dot(referenceShade, luminanceWeights) /
             max(dot(referenceMidpoint, luminanceWeights), 1.0 / 255.0),
         0.0);
-    // ApplyStandardShader consumes the PLT palette in complementary color space. Palette
-    // samples already carry that encoding, but direct editor RGB values do not. Convert only
-    // the custom path here so a requested red remains red instead of rendering cyan.
+    // Preserve the editor's RGB hue. ApplyColorSpace below handles the engine color-space
+    // conversion; complementing the value here would turn red into cyan and green into purple.
     vec3 vTint = useCustomTint
-        ? clamp((vec3(1.0) - customTint.rgb) * shadeScale, 0.0, 1.0)
+        ? clamp(customTint.rgb * shadeScale, 0.0, 1.0)
         : paletteColor.rgb;
 
     FragmentColor = vec4(1.0);
