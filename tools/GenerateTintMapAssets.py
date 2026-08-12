@@ -83,7 +83,7 @@ TINT_ROW_PARAMETER_LINES = tuple(
     f"parameter float {uniform_name} {(base_row + 0.5) / PALETTE_TEXTURE_HEIGHT:.6f}"
     for uniform_name, base_row in TINT_ROW_PARAMETERS
 )
-TINT_COLOR_PARAMETERS = (
+TINT_COLOR_PARAMETER_BASES = (
     "tintSkin",
     "tintHair",
     "tintMetal1",
@@ -95,8 +95,14 @@ TINT_COLOR_PARAMETERS = (
     "tintTat1",
     "tintTat2",
 )
+TINT_LEGACY_COLOR_PARAMETERS = TINT_COLOR_PARAMETER_BASES
+TINT_COLOR_PARAMETERS = tuple(
+    f"{uniform_name}{component}"
+    for uniform_name in TINT_COLOR_PARAMETER_BASES
+    for component in ("R", "G", "B")
+)
 TINT_COLOR_PARAMETER_LINES = tuple(
-    f"parameter float {uniform_name} 0.0 0.0 0.0 0.0"
+    f"parameter float {uniform_name} 0.0"
     for uniform_name in TINT_COLOR_PARAMETERS
 )
 TINT_CUSTOM_MODE_PARAMETERS = (
@@ -1411,7 +1417,8 @@ def update_mtr(
         re.escape(uniform_name) for uniform_name, _ in TINT_ROW_PARAMETERS
     )
     tint_color_parameter_pattern = "|".join(
-        re.escape(uniform_name) for uniform_name in TINT_COLOR_PARAMETERS
+        re.escape(uniform_name)
+        for uniform_name in TINT_LEGACY_COLOR_PARAMETERS + TINT_COLOR_PARAMETERS
     )
     tint_custom_mode_parameter_pattern = "|".join(
         re.escape(uniform_name) for uniform_name in TINT_CUSTOM_MODE_PARAMETERS
@@ -2641,12 +2648,14 @@ def audit() -> None:
             "uniform sampler2D texUnit9",
             "uniform sampler2D texUnit10",
             "uniform float rowSkin",
-            "uniform vec4 tintSkin",
+            "uniform float tintSkinR",
+            "uniform float tintSkinG",
+            "uniform float tintSkinB",
             "uniform float useCustomSkin",
             "float paletteU = (g * 255.0 + 0.5) / 256.0",
             "vec2(128.5 / 256.0, referenceV)",
             "bool useCustomTint = customTintMode > 0.5 || v <= 0.0",
-            "clamp(customTint.rgb * shadeScale, 0.0, 1.0)",
+            "clamp(customTint * shadeScale, 0.0, 1.0)",
             "fEnvMapLevel = useCustomTint ? 0.0 : 1.0 - paletteColor.a",
             "float outputAlpha = materialFrontDiffuse.a",
             "SetupStandardShaderInputs();",
