@@ -1068,6 +1068,7 @@ def find_used_tint_materials(entries: dict[str, dict[str, object]]) -> set[str]:
     # same model/material resref; keep their converted source masks available.
     used.update(material for material in materials if material not in models)
     used.update(materials & find_table_referenced_resrefs())
+    used.update(read_preserved_2da_material_sources(entries).values())
     return used
 
 
@@ -1504,6 +1505,32 @@ def load_source_manifest() -> dict[str, dict[str, object]]:
     return {entry["model"].lower(): entry for entry in data}
 
 
+def read_preserved_2da_material_sources(
+    entries: dict[str, dict[str, object]],
+) -> dict[str, str]:
+    """Return every material alias/source retained by the stable 2DA rows."""
+    if not OUTPUT_2DA.exists():
+        return {}
+
+    alias_sources = build_alias_source_lookup(entries)
+    preserved: dict[str, str] = {}
+    for physical_index, line in enumerate(
+        OUTPUT_2DA.read_text(encoding="utf-8").splitlines()[3:]
+    ):
+        columns = line.split()
+        if len(columns) < 4 or not columns[0].isdigit():
+            continue
+        material = columns[2].lower()
+        source = alias_sources.get(material, material)
+        if source not in entries:
+            raise RuntimeError(
+                "tintmap.2da compatibility row "
+                f"{physical_index} references unknown material '{material}'"
+            )
+        preserved[material] = source
+    return preserved
+
+
 def write_source_manifest(
     entries: dict[str, dict[str, object]],
     preserved_order: list[str] | None = None,
@@ -1603,6 +1630,8 @@ def generate() -> None:
         raise RuntimeError(
             f"3D tint material PLTs exist outside configured source directories: {outside_source_plts[:10]}"
         )
+    if not active:
+        raise RuntimeError("No 3D tint material PLTs were found to convert")
 
     manifest = load_source_manifest()
     candidate_entries = dict(manifest)
@@ -1944,6 +1973,7 @@ def deduplicate_assets(entries: dict[str, dict[str, object]]) -> None:
 def synchronize_model_material_aliases(
     entries: dict[str, dict[str, object]],
 ) -> tuple[int, dict[str, str]]:
+    preserved_aliases = read_preserved_2da_material_sources(entries)
     _, pending_bindings, planned_aliases = build_model_material_plan(entries)
     changed_models = 0
     for path, path_bindings in sorted(pending_bindings.items(), key=lambda value: str(value[0])):
@@ -1967,6 +1997,17 @@ def synchronize_model_material_aliases(
     if remaining_bindings:
         examples = [str(path) for path in list(remaining_bindings)[:10]]
         raise RuntimeError(f"Tint material bindings did not synchronize for: {examples}")
+
+    for alias, source in preserved_aliases.items():
+        if alias == source:
+            continue
+        active_source = active_aliases.get(alias)
+        if active_source is not None and active_source != source:
+            raise RuntimeError(
+                f"Preserved tint material alias '{alias}' collides for "
+                f"'{active_source}' and '{source}'"
+            )
+        active_aliases[alias] = source
 
     aliases_by_source = {source: [] for source in entries}
     for alias, source in active_aliases.items():
