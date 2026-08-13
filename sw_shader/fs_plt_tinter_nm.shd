@@ -108,20 +108,23 @@ void main ()
     float layer = floor(clamp(encodedLayer, 0.0, 0.9999) * 10.0);
 
     vec4 tintState = rowSkin;
+    vec4 semanticCustomTint = tintSkin;
+    int semanticCustomMode = useCustomSkin;
     float referenceV = 0.000244;
-    if      (layer > 8.5) { tintState = rowTat2;   referenceV = 0.515869; }
-    else if (layer > 7.5) { tintState = rowTat1;   referenceV = 0.515869; }
-    else if (layer > 6.5) { tintState = rowLeath2; referenceV = 0.429932; }
-    else if (layer > 5.5) { tintState = rowLeath1; referenceV = 0.429932; }
-    else if (layer > 4.5) { tintState = rowCloth2; referenceV = 0.343994; }
-    else if (layer > 3.5) { tintState = rowCloth1; referenceV = 0.343994; }
-    else if (layer > 2.5) { tintState = rowMetal2; referenceV = 0.258057; }
-    else if (layer > 1.5) { tintState = rowMetal1; referenceV = 0.172119; }
-    else if (layer > 0.5) { tintState = rowHair;   referenceV = 0.086182; }
+    if      (layer > 8.5) { tintState = rowTat2;   semanticCustomTint = tintTat2;   semanticCustomMode = useCustomTat2;   referenceV = 0.515869; }
+    else if (layer > 7.5) { tintState = rowTat1;   semanticCustomTint = tintTat1;   semanticCustomMode = useCustomTat1;   referenceV = 0.515869; }
+    else if (layer > 6.5) { tintState = rowLeath2; semanticCustomTint = tintLeath2; semanticCustomMode = useCustomLeath2; referenceV = 0.429932; }
+    else if (layer > 5.5) { tintState = rowLeath1; semanticCustomTint = tintLeath1; semanticCustomMode = useCustomLeath1; referenceV = 0.429932; }
+    else if (layer > 4.5) { tintState = rowCloth2; semanticCustomTint = tintCloth2; semanticCustomMode = useCustomCloth2; referenceV = 0.343994; }
+    else if (layer > 3.5) { tintState = rowCloth1; semanticCustomTint = tintCloth1; semanticCustomMode = useCustomCloth1; referenceV = 0.343994; }
+    else if (layer > 2.5) { tintState = rowMetal2; semanticCustomTint = tintMetal2; semanticCustomMode = useCustomMetal2; referenceV = 0.258057; }
+    else if (layer > 1.5) { tintState = rowMetal1; semanticCustomTint = tintMetal1; semanticCustomMode = useCustomMetal1; referenceV = 0.172119; }
+    else if (layer > 0.5) { tintState = rowHair;   semanticCustomTint = tintHair;   semanticCustomMode = useCustomHair;   referenceV = 0.086182; }
 
-    bool useCustomTint = tintState.x >= 1.0;
+    bool useSemanticCustomTint = semanticCustomMode > 0;
+    bool useCustomTint = useSemanticCustomTint || tintState.x >= 1.0;
     float v = useCustomTint ? referenceV : tintState.x;
-    vec3 customTint = tintState.yzw;
+    vec3 customTint = useSemanticCustomTint ? semanticCustomTint.rgb : tintState.yzw;
 
     float paletteU = (g * 255.0 + 0.5) / 256.0;
     vec4 paletteColor = texture2D(texUnit10, vec2(paletteU, v), -10.0);
