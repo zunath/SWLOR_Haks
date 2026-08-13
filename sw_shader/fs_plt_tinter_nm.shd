@@ -42,6 +42,17 @@ uniform float rowLeath2 = 0.429932;
 uniform float rowTat1   = 0.515869;
 uniform float rowTat2   = 0.515869;
 
+uniform vec4 tintSkin = vec4(0.0);
+uniform vec4 tintHair = vec4(0.0);
+uniform vec4 tintMetal1 = vec4(0.0);
+uniform vec4 tintMetal2 = vec4(0.0);
+uniform vec4 tintCloth1 = vec4(0.0);
+uniform vec4 tintCloth2 = vec4(0.0);
+uniform vec4 tintLeath1 = vec4(0.0);
+uniform vec4 tintLeath2 = vec4(0.0);
+uniform vec4 tintTat1 = vec4(0.0);
+uniform vec4 tintTat2 = vec4(0.0);
+
 uniform float tintSkinR = 0.0;
 uniform float tintSkinG = 0.0;
 uniform float tintSkinB = 0.0;
@@ -95,17 +106,17 @@ void main ()
 
     float v = rowSkin;
     float referenceV = 0.000244;
-    vec3 customTint = vec3(tintSkinR, tintSkinG, tintSkinB);
-    float customTintMode = useCustomSkin;
-    if      (layer > 8.5) { v = rowTat2;   referenceV = 0.515869; customTint = vec3(tintTat2R, tintTat2G, tintTat2B);       customTintMode = useCustomTat2; }
-    else if (layer > 7.5) { v = rowTat1;   referenceV = 0.515869; customTint = vec3(tintTat1R, tintTat1G, tintTat1B);       customTintMode = useCustomTat1; }
-    else if (layer > 6.5) { v = rowLeath2; referenceV = 0.429932; customTint = vec3(tintLeath2R, tintLeath2G, tintLeath2B); customTintMode = useCustomLeath2; }
-    else if (layer > 5.5) { v = rowLeath1; referenceV = 0.429932; customTint = vec3(tintLeath1R, tintLeath1G, tintLeath1B); customTintMode = useCustomLeath1; }
-    else if (layer > 4.5) { v = rowCloth2; referenceV = 0.343994; customTint = vec3(tintCloth2R, tintCloth2G, tintCloth2B); customTintMode = useCustomCloth2; }
-    else if (layer > 3.5) { v = rowCloth1; referenceV = 0.343994; customTint = vec3(tintCloth1R, tintCloth1G, tintCloth1B); customTintMode = useCustomCloth1; }
-    else if (layer > 2.5) { v = rowMetal2; referenceV = 0.258057; customTint = vec3(tintMetal2R, tintMetal2G, tintMetal2B); customTintMode = useCustomMetal2; }
-    else if (layer > 1.5) { v = rowMetal1; referenceV = 0.172119; customTint = vec3(tintMetal1R, tintMetal1G, tintMetal1B); customTintMode = useCustomMetal1; }
-    else if (layer > 0.5) { v = rowHair;   referenceV = 0.086182; customTint = vec3(tintHairR, tintHairG, tintHairB);       customTintMode = useCustomHair; }
+    vec3 customTint = useCustomSkin > 0.5 ? vec3(tintSkinR, tintSkinG, tintSkinB) : tintSkin.rgb;
+    float customTintMode = max(useCustomSkin, tintSkin.a);
+    if      (layer > 8.5) { v = rowTat2;   referenceV = 0.515869; customTint = useCustomTat2 > 0.5 ? vec3(tintTat2R, tintTat2G, tintTat2B) : tintTat2.rgb;       customTintMode = max(useCustomTat2, tintTat2.a); }
+    else if (layer > 7.5) { v = rowTat1;   referenceV = 0.515869; customTint = useCustomTat1 > 0.5 ? vec3(tintTat1R, tintTat1G, tintTat1B) : tintTat1.rgb;       customTintMode = max(useCustomTat1, tintTat1.a); }
+    else if (layer > 6.5) { v = rowLeath2; referenceV = 0.429932; customTint = useCustomLeath2 > 0.5 ? vec3(tintLeath2R, tintLeath2G, tintLeath2B) : tintLeath2.rgb; customTintMode = max(useCustomLeath2, tintLeath2.a); }
+    else if (layer > 5.5) { v = rowLeath1; referenceV = 0.429932; customTint = useCustomLeath1 > 0.5 ? vec3(tintLeath1R, tintLeath1G, tintLeath1B) : tintLeath1.rgb; customTintMode = max(useCustomLeath1, tintLeath1.a); }
+    else if (layer > 4.5) { v = rowCloth2; referenceV = 0.343994; customTint = useCustomCloth2 > 0.5 ? vec3(tintCloth2R, tintCloth2G, tintCloth2B) : tintCloth2.rgb; customTintMode = max(useCustomCloth2, tintCloth2.a); }
+    else if (layer > 3.5) { v = rowCloth1; referenceV = 0.343994; customTint = useCustomCloth1 > 0.5 ? vec3(tintCloth1R, tintCloth1G, tintCloth1B) : tintCloth1.rgb; customTintMode = max(useCustomCloth1, tintCloth1.a); }
+    else if (layer > 2.5) { v = rowMetal2; referenceV = 0.258057; customTint = useCustomMetal2 > 0.5 ? vec3(tintMetal2R, tintMetal2G, tintMetal2B) : tintMetal2.rgb; customTintMode = max(useCustomMetal2, tintMetal2.a); }
+    else if (layer > 1.5) { v = rowMetal1; referenceV = 0.172119; customTint = useCustomMetal1 > 0.5 ? vec3(tintMetal1R, tintMetal1G, tintMetal1B) : tintMetal1.rgb; customTintMode = max(useCustomMetal1, tintMetal1.a); }
+    else if (layer > 0.5) { v = rowHair;   referenceV = 0.086182; customTint = useCustomHair > 0.5 ? vec3(tintHairR, tintHairG, tintHairB) : tintHair.rgb;       customTintMode = max(useCustomHair, tintHair.a); }
 
     // Some clients drop scripted scalar overrides. Custom RGB also writes a zero
     // palette coordinate, which cannot collide with any real (texel-centered) row.

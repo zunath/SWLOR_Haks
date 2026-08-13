@@ -96,6 +96,10 @@ TINT_COLOR_PARAMETER_BASES = (
     "tintTat2",
 )
 TINT_LEGACY_COLOR_PARAMETERS = TINT_COLOR_PARAMETER_BASES
+TINT_LEGACY_COLOR_PARAMETER_LINES = tuple(
+    f"parameter float {uniform_name} 0.0 0.0 0.0 0.0"
+    for uniform_name in TINT_LEGACY_COLOR_PARAMETERS
+)
 TINT_COLOR_PARAMETERS = tuple(
     f"{uniform_name}{component}"
     for uniform_name in TINT_COLOR_PARAMETER_BASES
@@ -1463,6 +1467,7 @@ def update_mtr(
             f"parameter float tintMapHeight {float(height):.1f}",
         )
         + TINT_ROW_PARAMETER_LINES
+        + TINT_LEGACY_COLOR_PARAMETER_LINES
         + TINT_COLOR_PARAMETER_LINES
         + TINT_CUSTOM_MODE_PARAMETER_LINES
     )
@@ -1499,6 +1504,7 @@ def is_generated_pair(model: str, texture: str, width: int, height: int, dds_pat
         and all(
             line.lower() in mtr
             for line in TINT_ROW_PARAMETER_LINES
+            + TINT_LEGACY_COLOR_PARAMETER_LINES
             + TINT_COLOR_PARAMETER_LINES
             + TINT_CUSTOM_MODE_PARAMETER_LINES
         )
@@ -2324,6 +2330,9 @@ def check_tint_mtr_structure(path: Path) -> list[str]:
         for uniform_name, _ in TINT_ROW_PARAMETERS
     ) + tuple(
         ("parameter", "float", uniform_name.lower())
+        for uniform_name in TINT_LEGACY_COLOR_PARAMETERS
+    ) + tuple(
+        ("parameter", "float", uniform_name.lower())
         for uniform_name in TINT_COLOR_PARAMETERS
     ) + tuple(
         ("parameter", "float", uniform_name.lower())
@@ -2495,6 +2504,7 @@ def audit() -> None:
             ) + tuple(
                 line.lower()
                 for line in TINT_ROW_PARAMETER_LINES
+                + TINT_LEGACY_COLOR_PARAMETER_LINES
                 + TINT_COLOR_PARAMETER_LINES
                 + TINT_CUSTOM_MODE_PARAMETER_LINES
             )
@@ -2560,6 +2570,7 @@ def audit() -> None:
         ) + tuple(
             line.lower()
             for line in TINT_ROW_PARAMETER_LINES
+            + TINT_LEGACY_COLOR_PARAMETER_LINES
             + TINT_COLOR_PARAMETER_LINES
             + TINT_CUSTOM_MODE_PARAMETER_LINES
         )
@@ -2648,6 +2659,7 @@ def audit() -> None:
             "uniform sampler2D texUnit9",
             "uniform sampler2D texUnit10",
             "uniform float rowSkin",
+            "uniform vec4 tintSkin",
             "uniform float tintSkinR",
             "uniform float tintSkinG",
             "uniform float tintSkinB",
