@@ -54,8 +54,9 @@ uniform float tintMapHeight;
 uniform float useTexture1Alpha;
 uniform float useTexture9Alpha;
 
-// Packed per-layer tint state. X is the preset palette V coordinate, or zero for
-// custom mode; YZW contain normalized custom RGB in custom mode.
+// X carries all live tint state through the same vec4 material override that
+// preset colors already use. Positive X values are preset palette V coordinates;
+// negative values are an exact 24-bit RGB integer: -(0xRRGGBB + 1).
 uniform vec4 rowSkin   = vec4(0.000244, 0.0, 0.0, 0.0);
 uniform vec4 rowHair   = vec4(0.086182, 0.0, 0.0, 0.0);
 uniform vec4 rowMetal1 = vec4(0.172119, 0.0, 0.0, 0.0);
@@ -143,9 +144,13 @@ void main ()
     else if (layer > 1.5) { tintState = rowMetal1; referenceV = 0.172119; }
     else if (layer > 0.5) { tintState = rowHair;   referenceV = 0.086182; }
 
-    bool useCustomTint = tintState.x <= 0.0;
+    bool useCustomTint = tintState.x < 0.0;
     float v = useCustomTint ? referenceV : tintState.x;
-    vec3 customTint = tintState.yzw;
+    float packedColor = max(-tintState.x - 1.0, 0.0);
+    vec3 customTint = vec3(
+        floor(packedColor / 65536.0),
+        floor(mod(packedColor, 65536.0) / 256.0),
+        mod(packedColor, 256.0)) / 255.0;
 
     // Bias -10 forces mip level 0. The tintmap-derived UVs have chaotic
     // screen-space derivatives, so without this the GPU picks the smallest
