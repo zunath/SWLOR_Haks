@@ -112,16 +112,16 @@ uniform float tintTat2R = 0.0;
 uniform float tintTat2G = 0.0;
 uniform float tintTat2B = 0.0;
 
-uniform float useCustomSkin   = 0.0;
-uniform float useCustomHair   = 0.0;
-uniform float useCustomMetal1 = 0.0;
-uniform float useCustomMetal2 = 0.0;
-uniform float useCustomCloth1 = 0.0;
-uniform float useCustomCloth2 = 0.0;
-uniform float useCustomLeath1 = 0.0;
-uniform float useCustomLeath2 = 0.0;
-uniform float useCustomTat1   = 0.0;
-uniform float useCustomTat2   = 0.0;
+uniform int useCustomSkin   = 0;
+uniform int useCustomHair   = 0;
+uniform int useCustomMetal1 = 0;
+uniform int useCustomMetal2 = 0;
+uniform int useCustomCloth1 = 0;
+uniform int useCustomCloth2 = 0;
+uniform int useCustomLeath1 = 0;
+uniform int useCustomLeath2 = 0;
+uniform int useCustomTat1   = 0;
+uniform int useCustomTat2   = 0;
 
 void main ()
 {
@@ -133,20 +133,21 @@ void main ()
     float layer = floor(clamp(encodedLayer, 0.0, 0.9999) * 10.0);
 
     vec4 tintState = rowSkin;
+    int customTintState = useCustomSkin;
     float referenceV = 0.000244;
-    if      (layer > 8.5) { tintState = rowTat2;   referenceV = 0.515869; }
-    else if (layer > 7.5) { tintState = rowTat1;   referenceV = 0.515869; }
-    else if (layer > 6.5) { tintState = rowLeath2; referenceV = 0.429932; }
-    else if (layer > 5.5) { tintState = rowLeath1; referenceV = 0.429932; }
-    else if (layer > 4.5) { tintState = rowCloth2; referenceV = 0.343994; }
-    else if (layer > 3.5) { tintState = rowCloth1; referenceV = 0.343994; }
-    else if (layer > 2.5) { tintState = rowMetal2; referenceV = 0.258057; }
-    else if (layer > 1.5) { tintState = rowMetal1; referenceV = 0.172119; }
-    else if (layer > 0.5) { tintState = rowHair;   referenceV = 0.086182; }
+    if      (layer > 8.5) { tintState = rowTat2;   customTintState = useCustomTat2;   referenceV = 0.515869; }
+    else if (layer > 7.5) { tintState = rowTat1;   customTintState = useCustomTat1;   referenceV = 0.515869; }
+    else if (layer > 6.5) { tintState = rowLeath2; customTintState = useCustomLeath2; referenceV = 0.429932; }
+    else if (layer > 5.5) { tintState = rowLeath1; customTintState = useCustomLeath1; referenceV = 0.429932; }
+    else if (layer > 4.5) { tintState = rowCloth2; customTintState = useCustomCloth2; referenceV = 0.343994; }
+    else if (layer > 3.5) { tintState = rowCloth1; customTintState = useCustomCloth1; referenceV = 0.343994; }
+    else if (layer > 2.5) { tintState = rowMetal2; customTintState = useCustomMetal2; referenceV = 0.258057; }
+    else if (layer > 1.5) { tintState = rowMetal1; customTintState = useCustomMetal1; referenceV = 0.172119; }
+    else if (layer > 0.5) { tintState = rowHair;   customTintState = useCustomHair;   referenceV = 0.086182; }
 
-    bool useCustomTint = tintState.x < 0.0;
+    bool useCustomTint = customTintState > 0;
     float v = useCustomTint ? referenceV : tintState.x;
-    float packedColor = max(-tintState.x - 1.0, 0.0);
+    float packedColor = float(max(customTintState - 1, 0));
     vec3 customTint = vec3(
         floor(packedColor / 65536.0),
         floor(mod(packedColor, 65536.0) / 256.0),

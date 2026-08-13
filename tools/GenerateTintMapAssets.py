@@ -123,7 +123,7 @@ TINT_CUSTOM_MODE_PARAMETERS = (
     "useCustomTat2",
 )
 TINT_CUSTOM_MODE_PARAMETER_LINES = tuple(
-    f"parameter float {uniform_name} 0.0"
+    f"parameter int {uniform_name} 0"
     for uniform_name in TINT_CUSTOM_MODE_PARAMETERS
 )
 TEXTURE1_ALPHA_SHADERS = {"fs_plt_hair", "pfh0_neck199", "pmh0_neck199"}
@@ -1430,7 +1430,7 @@ def update_mtr(
     )
     replaced = re.compile(
         r"^\s*(?:customshaderFS|texture0|texture7|texture9|texture10|"
-        r"parameter\s+float\s+(?:tintMapWidth|tintMapHeight|useTexture1Alpha|useTexture9Alpha|"
+        r"parameter\s+(?:float|int)\s+(?:tintMapWidth|tintMapHeight|useTexture1Alpha|useTexture9Alpha|"
         + tint_row_parameter_pattern
         + "|"
         + tint_color_parameter_pattern
@@ -2336,7 +2336,7 @@ def check_tint_mtr_structure(path: Path) -> list[str]:
         ("parameter", "float", uniform_name.lower())
         for uniform_name in TINT_COLOR_PARAMETERS
     ) + tuple(
-        ("parameter", "float", uniform_name.lower())
+        ("parameter", "int", uniform_name.lower())
         for uniform_name in TINT_CUSTOM_MODE_PARAMETERS
     )
     for key in singleton_keys:
@@ -2664,11 +2664,11 @@ def audit() -> None:
             "uniform float tintSkinR",
             "uniform float tintSkinG",
             "uniform float tintSkinB",
-            "uniform float useCustomSkin",
+            "uniform int useCustomSkin",
             "float paletteU = (g * 255.0 + 0.5) / 256.0",
             "vec2(128.5 / 256.0, referenceV)",
-            "bool useCustomTint = tintState.x < 0.0",
-            "float packedColor = max(-tintState.x - 1.0, 0.0)",
+            "bool useCustomTint = customTintState > 0",
+            "float packedColor = float(max(customTintState - 1, 0))",
             "clamp(customTint * shadeScale, 0.0, 1.0)",
             "fEnvMapLevel = useCustomTint ? 0.0 : 1.0 - paletteColor.a",
             "float outputAlpha = materialFrontDiffuse.a",
