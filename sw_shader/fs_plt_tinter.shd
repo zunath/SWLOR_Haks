@@ -54,21 +54,21 @@ uniform float tintMapHeight;
 uniform float useTexture1Alpha;
 uniform float useTexture9Alpha;
 
-// Per-layer palette V coordinate (defaults = row 0 of each palette).
-uniform float rowSkin   = 0.000244;
-uniform float rowHair   = 0.086182;
-uniform float rowMetal1 = 0.172119;
-uniform float rowMetal2 = 0.258057;
-uniform float rowCloth1 = 0.343994;
-uniform float rowCloth2 = 0.343994;
-uniform float rowLeath1 = 0.429932;
-uniform float rowLeath2 = 0.429932;
-uniform float rowTat1   = 0.515869;
-uniform float rowTat2   = 0.515869;
+// Packed per-layer tint state. X is the preset palette V coordinate, or zero for
+// custom mode; YZW contain normalized custom RGB in custom mode.
+uniform vec4 rowSkin   = vec4(0.000244, 0.0, 0.0, 0.0);
+uniform vec4 rowHair   = vec4(0.086182, 0.0, 0.0, 0.0);
+uniform vec4 rowMetal1 = vec4(0.172119, 0.0, 0.0, 0.0);
+uniform vec4 rowMetal2 = vec4(0.258057, 0.0, 0.0, 0.0);
+uniform vec4 rowCloth1 = vec4(0.343994, 0.0, 0.0, 0.0);
+uniform vec4 rowCloth2 = vec4(0.343994, 0.0, 0.0, 0.0);
+uniform vec4 rowLeath1 = vec4(0.429932, 0.0, 0.0, 0.0);
+uniform vec4 rowLeath2 = vec4(0.429932, 0.0, 0.0, 0.0);
+uniform vec4 rowTat1   = vec4(0.515869, 0.0, 0.0, 0.0);
+uniform vec4 rowTat2   = vec4(0.515869, 0.0, 0.0, 0.0);
 
-// Retain the original vec4 parameters for clients and servers that still use the
-// first tint-map HAK contract. Current servers also send independent scalars,
-// which take precedence because NWN can retain the first replicated vec4 value.
+// Legacy declarations remain while the server removes stale overrides written by
+// older builds. Rendering below consumes the packed row* state exclusively.
 uniform vec4 tintSkin = vec4(0.0);
 uniform vec4 tintHair = vec4(0.0);
 uniform vec4 tintMetal1 = vec4(0.0);
@@ -131,23 +131,21 @@ void main ()
     float encodedLayer = texture2D(texUnit7, nearestUV, -10.0).g;
     float layer = floor(clamp(encodedLayer, 0.0, 0.9999) * 10.0);
 
-    float v = rowSkin;
+    vec4 tintState = rowSkin;
     float referenceV = 0.000244;
-    vec3 customTint = useCustomSkin > 0.5 ? vec3(tintSkinR, tintSkinG, tintSkinB) : tintSkin.rgb;
-    float customTintMode = max(useCustomSkin, tintSkin.a);
-    if      (layer > 8.5) { v = rowTat2;   referenceV = 0.515869; customTint = useCustomTat2 > 0.5 ? vec3(tintTat2R, tintTat2G, tintTat2B) : tintTat2.rgb;       customTintMode = max(useCustomTat2, tintTat2.a); }
-    else if (layer > 7.5) { v = rowTat1;   referenceV = 0.515869; customTint = useCustomTat1 > 0.5 ? vec3(tintTat1R, tintTat1G, tintTat1B) : tintTat1.rgb;       customTintMode = max(useCustomTat1, tintTat1.a); }
-    else if (layer > 6.5) { v = rowLeath2; referenceV = 0.429932; customTint = useCustomLeath2 > 0.5 ? vec3(tintLeath2R, tintLeath2G, tintLeath2B) : tintLeath2.rgb; customTintMode = max(useCustomLeath2, tintLeath2.a); }
-    else if (layer > 5.5) { v = rowLeath1; referenceV = 0.429932; customTint = useCustomLeath1 > 0.5 ? vec3(tintLeath1R, tintLeath1G, tintLeath1B) : tintLeath1.rgb; customTintMode = max(useCustomLeath1, tintLeath1.a); }
-    else if (layer > 4.5) { v = rowCloth2; referenceV = 0.343994; customTint = useCustomCloth2 > 0.5 ? vec3(tintCloth2R, tintCloth2G, tintCloth2B) : tintCloth2.rgb; customTintMode = max(useCustomCloth2, tintCloth2.a); }
-    else if (layer > 3.5) { v = rowCloth1; referenceV = 0.343994; customTint = useCustomCloth1 > 0.5 ? vec3(tintCloth1R, tintCloth1G, tintCloth1B) : tintCloth1.rgb; customTintMode = max(useCustomCloth1, tintCloth1.a); }
-    else if (layer > 2.5) { v = rowMetal2; referenceV = 0.258057; customTint = useCustomMetal2 > 0.5 ? vec3(tintMetal2R, tintMetal2G, tintMetal2B) : tintMetal2.rgb; customTintMode = max(useCustomMetal2, tintMetal2.a); }
-    else if (layer > 1.5) { v = rowMetal1; referenceV = 0.172119; customTint = useCustomMetal1 > 0.5 ? vec3(tintMetal1R, tintMetal1G, tintMetal1B) : tintMetal1.rgb; customTintMode = max(useCustomMetal1, tintMetal1.a); }
-    else if (layer > 0.5) { v = rowHair;   referenceV = 0.086182; customTint = useCustomHair > 0.5 ? vec3(tintHairR, tintHairG, tintHairB) : tintHair.rgb;       customTintMode = max(useCustomHair, tintHair.a); }
+    if      (layer > 8.5) { tintState = rowTat2;   referenceV = 0.515869; }
+    else if (layer > 7.5) { tintState = rowTat1;   referenceV = 0.515869; }
+    else if (layer > 6.5) { tintState = rowLeath2; referenceV = 0.429932; }
+    else if (layer > 5.5) { tintState = rowLeath1; referenceV = 0.429932; }
+    else if (layer > 4.5) { tintState = rowCloth2; referenceV = 0.343994; }
+    else if (layer > 3.5) { tintState = rowCloth1; referenceV = 0.343994; }
+    else if (layer > 2.5) { tintState = rowMetal2; referenceV = 0.258057; }
+    else if (layer > 1.5) { tintState = rowMetal1; referenceV = 0.172119; }
+    else if (layer > 0.5) { tintState = rowHair;   referenceV = 0.086182; }
 
-    // Some clients drop scripted scalar overrides. Custom RGB also writes a zero
-    // palette coordinate, which cannot collide with any real (texel-centered) row.
-    bool useCustomTint = customTintMode > 0.5 || v <= 0.0;
+    bool useCustomTint = tintState.x <= 0.0;
+    float v = useCustomTint ? referenceV : tintState.x;
+    vec3 customTint = tintState.yzw;
 
     // Bias -10 forces mip level 0. The tintmap-derived UVs have chaotic
     // screen-space derivatives, so without this the GPU picks the smallest

@@ -80,7 +80,8 @@ TINT_ROW_PARAMETERS = (
     ("rowTat2", 1056),
 )
 TINT_ROW_PARAMETER_LINES = tuple(
-    f"parameter float {uniform_name} {(base_row + 0.5) / PALETTE_TEXTURE_HEIGHT:.6f}"
+    f"parameter float {uniform_name} "
+    f"{(base_row + 0.5) / PALETTE_TEXTURE_HEIGHT:.6f} 0.0 0.0 0.0"
     for uniform_name, base_row in TINT_ROW_PARAMETERS
 )
 TINT_COLOR_PARAMETER_BASES = (
@@ -2658,7 +2659,7 @@ def audit() -> None:
             "uniform sampler2D texUnit7",
             "uniform sampler2D texUnit9",
             "uniform sampler2D texUnit10",
-            "uniform float rowSkin",
+            "uniform vec4 rowSkin",
             "uniform vec4 tintSkin",
             "uniform float tintSkinR",
             "uniform float tintSkinG",
@@ -2666,7 +2667,8 @@ def audit() -> None:
             "uniform float useCustomSkin",
             "float paletteU = (g * 255.0 + 0.5) / 256.0",
             "vec2(128.5 / 256.0, referenceV)",
-            "bool useCustomTint = customTintMode > 0.5 || v <= 0.0",
+            "bool useCustomTint = tintState.x <= 0.0",
+            "vec3 customTint = tintState.yzw",
             "clamp(customTint * shadeScale, 0.0, 1.0)",
             "fEnvMapLevel = useCustomTint ? 0.0 : 1.0 - paletteColor.a",
             "float outputAlpha = materialFrontDiffuse.a",
