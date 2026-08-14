@@ -122,10 +122,7 @@ void main ()
     else if (layer > 0.5) { tintState = rowHair;   semanticCustomTint = tintHair;   semanticCustomMode = useCustomHair;   referenceV = 0.086182; }
 
     bool useSemanticCustomTint = semanticCustomMode > 0;
-    // Accept both shipped row contracts. Older HAKs use zero as the custom
-    // sentinel; newer builds used a value at or above one. Native palette
-    // coordinates are strictly between those ranges.
-    bool useCustomTint = useSemanticCustomTint || tintState.x <= 0.0 || tintState.x >= 1.0;
+    bool useCustomTint = useSemanticCustomTint || tintState.x >= 1.0;
     float v = useCustomTint ? referenceV : tintState.x;
     vec3 customTint = useSemanticCustomTint ? semanticCustomTint.rgb : tintState.yzw;
 
