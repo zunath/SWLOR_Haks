@@ -121,7 +121,7 @@ void main ()
     else if (layer > 1.5) { tintState = rowMetal1; semanticCustomTint = tintMetal1; semanticCustomMode = useCustomMetal1; referenceV = 0.172119; }
     else if (layer > 0.5) { tintState = rowHair;   semanticCustomTint = tintHair;   semanticCustomMode = useCustomHair;   referenceV = 0.086182; }
 
-    bool useSemanticCustomTint = semanticCustomMode > 0;
+    bool useSemanticCustomTint = semanticCustomMode > 0 || semanticCustomTint.a > 0.5;
     bool usePackedCustomTint = tintState.x < 0.0;
     float packedRgb = max(-tintState.x - 1.0, 0.0);
     float packedRed = floor(packedRgb / 65536.0);
