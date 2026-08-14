@@ -147,9 +147,16 @@ void main ()
     else if (layer > 0.5) { tintState = rowHair;   semanticCustomTint = tintHair;   semanticCustomMode = useCustomHair;   referenceV = 0.086182; }
 
     bool useSemanticCustomTint = semanticCustomMode > 0;
-    bool useCustomTint = useSemanticCustomTint || tintState.x >= 1.0;
+    bool usePackedCustomTint = tintState.x < 0.0;
+    float packedRgb = max(-tintState.x - 1.0, 0.0);
+    float packedRed = floor(packedRgb / 65536.0);
+    packedRgb -= packedRed * 65536.0;
+    float packedGreen = floor(packedRgb / 256.0);
+    float packedBlue = packedRgb - packedGreen * 256.0;
+    vec3 packedCustomTint = vec3(packedRed, packedGreen, packedBlue) / 255.0;
+    bool useCustomTint = useSemanticCustomTint || usePackedCustomTint;
     float v = useCustomTint ? referenceV : tintState.x;
-    vec3 customTint = useSemanticCustomTint ? semanticCustomTint.rgb : tintState.yzw;
+    vec3 customTint = useSemanticCustomTint ? semanticCustomTint.rgb : packedCustomTint;
 
     // Bias -10 forces mip level 0. The tintmap-derived UVs have chaotic
     // screen-space derivatives, so without this the GPU picks the smallest
