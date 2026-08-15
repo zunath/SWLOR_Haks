@@ -188,13 +188,7 @@ void main ()
     FragmentColor = vec4(surfaceColor, 1.0);
 
     float outputAlpha = materialFrontDiffuse.a;
-    if (useTexture1Alpha > 0.5)
-    {
-        outputAlpha *= texture2D(texUnit1, vTexCoords.xy).a;
-        if (outputAlpha < 0.2)
-            discard;
-    }
-    else if (useTexture9Alpha > 0.5)
+    if (useTexture9Alpha > 0.5)
     {
         outputAlpha = materialFrontDiffuse.a * texture2D(texUnit9, vTexCoords.xy).r;
         if (outputAlpha < 0.3)
