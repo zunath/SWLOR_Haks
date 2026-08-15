@@ -121,17 +121,11 @@ void main ()
     else if (layer > 1.5) { tintState = rowMetal1; semanticCustomTint = tintMetal1; semanticCustomMode = useCustomMetal1; referenceV = 0.172119; }
     else if (layer > 0.5) { tintState = rowHair;   semanticCustomTint = tintHair;   semanticCustomMode = useCustomHair;   referenceV = 0.086182; }
 
+    bool useRowCustomTint = tintState.x < 0.0;
     bool useSemanticCustomTint = semanticCustomMode > 0 || semanticCustomTint.a > 0.5;
-    bool usePackedCustomTint = tintState.x < 0.0;
-    float packedRgb = max(-tintState.x - 1.0, 0.0);
-    float packedRed = floor(packedRgb / 65536.0);
-    packedRgb -= packedRed * 65536.0;
-    float packedGreen = floor(packedRgb / 256.0);
-    float packedBlue = packedRgb - packedGreen * 256.0;
-    vec3 packedCustomTint = vec3(packedRed, packedGreen, packedBlue) / 255.0;
-    bool useCustomTint = useSemanticCustomTint || usePackedCustomTint;
+    bool useCustomTint = useRowCustomTint || useSemanticCustomTint;
     float v = useCustomTint ? referenceV : tintState.x;
-    vec3 customTint = useSemanticCustomTint ? semanticCustomTint.rgb : packedCustomTint;
+    vec3 customTint = useRowCustomTint ? tintState.yzw : semanticCustomTint.rgb;
 
     float paletteU = (g * 255.0 + 0.5) / 256.0;
     vec4 paletteColor = texture2D(texUnit10, vec2(paletteU, v), -10.0);
