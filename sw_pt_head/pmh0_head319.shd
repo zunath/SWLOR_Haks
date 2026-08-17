@@ -1,0 +1,39 @@
+/*=============================================================================
+    pmh0_head319.shd
+    PSD/PLT-derived hair cutout using the external alpha mask in texture6.
+=============================================================================*/
+
+#define SHADER_TYPE 2
+
+#define LIGHTING 1
+#define FOG 1
+#define KEYHOLING 1
+
+#define NORMAL_MAP 1
+#define SPECULAR_MAP 1
+#define ROUGHNESS_MAP 0
+#define HEIGHT_MAP 0
+#define SELF_ILLUMINATION_MAP 0
+#define ENVIRONMENT_MAP 0
+
+#include "inc_standard"
+
+uniform sampler2D texUnit6;
+
+void main ()
+{
+    FragmentColor = vec4(1.0);
+    SetupStandardShaderInputs();
+
+    float fCutout = texture2D(texUnit6, vTexCoords.xy).r;
+
+    // Reject the faint mask fringe while retaining the fine PSD strands.
+    // Keep this cutoff synchronized with pmh0_head319.txi.
+    if (fCutout < 0.30)
+    {
+        discard;
+    }
+
+    ApplyStandardShader();
+    gl_FragColor = vec4(FragmentColor.rgb, 1.0);
+}
