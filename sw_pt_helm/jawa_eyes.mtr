@@ -1,0 +1,11 @@
+// Jawa eye material using the eye artwork embedded in helm_063.plt.
+renderhint NormalAndSpecMapped
+
+customshaderVS vslitc_sm_nm
+customshaderFS jawa_eyeglow
+
+texture1 null
+texture2 null
+texture3 null
+texture4 null
+texture5 helm_063_E
