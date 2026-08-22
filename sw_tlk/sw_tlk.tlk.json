@@ -15131,7 +15131,7 @@
     },
     {
       "id": 3782,
-      "text": "Enemies within a 5m sphere around you receive the Flash effect, reducing physical and Force ability hit chance by 20% for 30 seconds. You generate +650 bonus Enmity toward these enemies."
+      "text": "Enemies within a 5m sphere around you receive Flash, reducing Ability Accuracy by 20% for 30 seconds (physical and Force abilities). Deals no damage. You generate +650 bonus Enmity toward these enemies."
     },
     {
       "id": 3783,
@@ -19799,7 +19799,7 @@
     },
     {
       "id": 4949,
-      "text": "Automatically targets your current Guarded ally if they are within 5 meters. Grants that target temporary HP equal to 15% of maximum HP for 30 seconds and grants you +20 Guard for 30 seconds."
+      "text": "Automatically targets your current Guarded ally if they are within 5 meters. Grants that target temporary HP equal to 15% of your maximum HP for 30 seconds and grants you +20 Guard for 30 seconds."
     },
     {
       "id": 4950,
@@ -20435,7 +20435,7 @@
     },
     {
       "id": 5108,
-      "text": "Deals weapon DMG + 8 and reduces the target's Attack by 10% for 30 seconds."
+      "text": "Deals weapon DMG + 8 and inflicts Disarming Shot for 30 seconds, reducing the target's Attack by 10%."
     },
     {
       "id": 5109,
@@ -20443,15 +20443,15 @@
     },
     {
       "id": 5110,
-      "text": "Deals weapon DMG + 18 and reduces the target's Attack by 12% for 30 seconds."
+      "text": "Deals weapon DMG + 18 and inflicts Disarming Shot for 30 seconds, reducing the target's Attack by 12%."
     },
     {
       "id": 5111,
-      "text": "Deals weapon DMG + 16 to enemies within 5m and grants +10% Evasion for 30 seconds."
+      "text": "Deals weapon DMG + 16 to enemies within 5m and grants Point Blank Burst, providing +10% Evasion for 30 seconds."
     },
     {
       "id": 5112,
-      "text": "Deals weapon DMG + 28 and reduces the target's Attack by 15% for 30 seconds."
+      "text": "Deals weapon DMG + 28 and inflicts Disarming Shot for 30 seconds, reducing the target's Attack by 15%."
     },
     {
       "id": 5113,
@@ -20459,7 +20459,7 @@
     },
     {
       "id": 5114,
-      "text": "Deals weapon DMG + 30 to enemies within 5m and grants +15% Evasion for 30 seconds."
+      "text": "Deals weapon DMG + 30 to enemies within 5m and grants Point Blank Burst, providing +15% Evasion for 30 seconds."
     },
     {
       "id": 5115,
@@ -20467,7 +20467,7 @@
     },
     {
       "id": 5116,
-      "text": "Deals weapon DMG + 38 and reduces the target's Attack by 18% for 30 seconds."
+      "text": "Deals weapon DMG + 38 and inflicts Disarming Shot for 30 seconds, reducing the target's Attack by 18%."
     },
     {
       "id": 5117,
@@ -20675,7 +20675,7 @@
     },
     {
       "id": 5168,
-      "text": "After using a hostile ranged ability, gain +5% Ranged Evasion for 30 seconds."
+      "text": "After using a hostile ranged ability, gain +5 Ranged Deflection for 30 seconds."
     },
     {
       "id": 5169,
@@ -20683,7 +20683,7 @@
     },
     {
       "id": 5170,
-      "text": "Targets within 5m deal -10% damage to you for 30 seconds after you hit them with a ranged ability."
+      "text": "Targets within 5m receive Duelist's Distance for 30 seconds after you hit them with a ranged ability, causing them to deal 10% less damage to all targets."
     },
     {
       "id": 5171,
@@ -20835,7 +20835,7 @@
     },
     {
       "id": 5208,
-      "text": "After a critical hit, your next ranged ability within 30 seconds has its attack delay reduced by 20%."
+      "text": "After a critical hit with a Pistol attack or hostile Pistol ability, gain +20% Haste for your next two attacks. Expires after 30 seconds."
     },
     {
       "id": 5209,
@@ -21419,7 +21419,7 @@
     },
     {
       "id": 5354,
-      "text": "Bolsters one living ally, granting temporary HP equal to 10% of maximum HP for 30 seconds.\nSOC scaling can raise this to 13%. If the target is at or below 35% HP, they also take 10% less damage, scaling up to 12%."
+      "text": "Bolsters one living ally, granting temporary HP equal to 10% of maximum HP for 30 seconds. SOC scaling can raise this to 13%. If the target is at or below 35% HP, they also take 10% less physical and Force damage, scaling up to 12%."
     },
     {
       "id": 5355,
@@ -21431,7 +21431,7 @@
     },
     {
       "id": 5357,
-      "text": "Bolsters one living ally, granting temporary HP equal to 15% of maximum HP for 30 seconds. SOC scaling can raise this to 19%.\nIf the target is at or below 35% HP, they also take 15% less damage, scaling up to 18%."
+      "text": "Bolsters one living ally, granting temporary HP equal to 15% of maximum HP for 30 seconds. SOC scaling can raise this to 19%. If the target is at or below 35% HP, they also take 15% less physical and Force damage, scaling up to 18%."
     },
     {
       "id": 5358,
@@ -21455,7 +21455,7 @@
     },
     {
       "id": 5363,
-      "text": "Bolsters one living ally, granting temporary HP equal to 20% of maximum HP for 30 seconds. SOC scaling can raise this to 25%.\nIf the target is at or below 35% HP, they also take 20% less damage, scaling up to 25%."
+      "text": "Bolsters one living ally, granting temporary HP equal to 20% of maximum HP for 30 seconds. SOC scaling can raise this to 25%. If the target is at or below 35% HP, they also take 20% less physical and Force damage, scaling up to 25%."
     },
     {
       "id": 5364,
@@ -21463,7 +21463,7 @@
     },
     {
       "id": 5365,
-      "text": "Removes one major negative status effect from party members within Leadership range (5m base) and grants 12% damage reduction for 30 seconds. SOC scaling can raise this to 15%."
+      "text": "Removes one major negative status effect from party members within Leadership range (5m base) and grants temporary HP equal to 12% of maximum HP for 30 seconds. SOC scaling can raise temporary HP to 15%."
     },
     {
       "id": 5366,
@@ -21659,11 +21659,11 @@
     },
     {
       "id": 5414,
-      "text": "Bolsters one living ally, granting temporary HP equal to 10% of maximum HP for 30 seconds. SOC scaling can raise this to 13%. If the target is at or below 35% HP, they also take 10% less damage, scaling up to 12%."
+      "text": "Bolsters one living ally, granting temporary HP equal to 10% of maximum HP for 30 seconds. SOC scaling can raise this to 13%. If the target is at or below 35% HP, they also take 10% less physical and Force damage, scaling up to 12%."
     },
     {
       "id": 5415,
-      "text": "Bolsters one living ally, granting temporary HP equal to 15% of maximum HP for 30 seconds. SOC scaling can raise this to 19%. If the target is at or below 35% HP, they also take 15% less damage, scaling up to 18%."
+      "text": "Bolsters one living ally, granting temporary HP equal to 15% of maximum HP for 30 seconds. SOC scaling can raise this to 19%. If the target is at or below 35% HP, they also take 15% less physical and Force damage, scaling up to 18%."
     },
     {
       "id": 5416,
@@ -21671,7 +21671,7 @@
     },
     {
       "id": 5417,
-      "text": "Bolsters one living ally, granting temporary HP equal to 20% of maximum HP for 30 seconds. SOC scaling can raise this to 25%. If the target is at or below 35% HP, they also take 20% less damage, scaling up to 25%."
+      "text": "Bolsters one living ally, granting temporary HP equal to 20% of maximum HP for 30 seconds. SOC scaling can raise this to 25%. If the target is at or below 35% HP, they also take 20% less physical and Force damage, scaling up to 25%."
     },
     {
       "id": 5418,
@@ -88343,7 +88343,7 @@
     },
     {
       "id": 192549,
-      "text": "Vanguard Command offensive commands mark affected enemies for 30 seconds.\nParty members deal +8% damage to marked targets. SOC scaling can raise this to +10%."
+      "text": "When a Vanguard Command offensive command affects an enemy, party members within Leadership range (5m base) gain +8% damage for 30 seconds. SOC scaling can raise this to +10%."
     },
     {
       "id": 192550,
