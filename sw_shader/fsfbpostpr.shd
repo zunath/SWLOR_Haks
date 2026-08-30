@@ -7,8 +7,8 @@ const int TELEGRAPH_SHAPE_LINE = 3;
 
 const int COLOR_HOSTILE = 0;
 const int COLOR_SELF = 1;
-const int COLOR_FRIENDLY = 2;
-const int COLOR_ENEMY_BENEFICIAL = 3;
+const int COLOR_BENEFICIAL = 2;
+const int COLOR_PARTY_MEMBER = 3;
 
 #include "inc_target"
 #include "inc_postpr"
@@ -18,8 +18,8 @@ vec3 GetTelegraphColor(int colorType)
 {
     if (colorType == COLOR_HOSTILE) return vec3(1.0, 0.0, 0.0); // Red
     if (colorType == COLOR_SELF) return vec3(0.0, 0.0, 1.0); // Blue
-    if (colorType == COLOR_FRIENDLY) return vec3(0.0, 1.0, 0.0); // Green
-    if (colorType == COLOR_ENEMY_BENEFICIAL) return vec3(0.66, 0.66, 0.66); // Gray
+    if (colorType == COLOR_BENEFICIAL) return vec3(0.0, 1.0, 0.0); // Green
+    if (colorType == COLOR_PARTY_MEMBER) return vec3(0.66, 0.66, 0.66); // Gray
     return vec3(1.0, 1.0, 1.0); // Default White
 }
 
