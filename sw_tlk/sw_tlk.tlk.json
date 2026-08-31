@@ -21383,7 +21383,7 @@
     },
     {
       "id": 5345,
-      "text": "Enemies within Leadership range (5m base) suffer Flash, reducing physical and Force ability hit chance by 15%, and Weakened, reducing Attack by 12%, for 30 seconds. SOC scaling can raise these penalties to 18% and 15%. This command applies reliably to valid enemies within Leadership range (5m base)."
+      "text": "Enemies within Leadership range (5m base) suffer Flash, reducing Ability Accuracy by 15%, and Weakened, reducing Attack by 12%, for 30 seconds. SOC scaling can raise these penalties to 18% and 15%. This command applies reliably to valid enemies within Leadership range (5m base)."
     },
     {
       "id": 5346,
@@ -21647,7 +21647,7 @@
     },
     {
       "id": 5411,
-      "text": "Enemies within Leadership range (5m base) suffer Flash for 30 seconds, reducing physical and Force ability hit chance by 10%. SOC scaling can raise the penalty to 12%. This command applies reliably to valid enemies within Leadership range (5m base)."
+      "text": "Enemies within Leadership range (5m base) suffer Flash for 30 seconds, reducing Ability Accuracy by 10%. SOC scaling can raise the penalty to 12%. This command applies reliably to valid enemies within Leadership range (5m base)."
     },
     {
       "id": 5412,
@@ -21811,7 +21811,7 @@
     },
     {
       "id": 5452,
-      "text": "Goldmane Sahrak"
+      "text": "Goldpelt Sahrak"
     },
     {
       "id": 5453,
@@ -24696,6 +24696,34 @@
     {
       "id": 6173,
       "text": "Energized Forms: Haste"
+    },
+    {
+      "id": 6174,
+      "text": "Target an enemy or location to deal weapon DMG + 20 to enemies within 8m and apply Kill Box for 45 seconds. While Kill Box remains, any player's ranged attacks against affected enemies add Suppression stacks lasting 30 seconds using the Kill Box caster's Suppressing Shot stack strength; each stack reduces Evasion by an additional 3%."
+    },
+    {
+      "id": 6175,
+      "text": "Queues your next auto-attack to deal weapon DMG + 16. If Headshot is used after 3 seconds without attacking, that attack gains +15% Critical Rate."
+    },
+    {
+      "id": 6176,
+      "text": "Queues your next auto-attack to deal weapon DMG + 30. If Headshot is used after 3 seconds without attacking, that attack gains +25% Critical Rate."
+    },
+    {
+      "id": 6177,
+      "text": "Targets with 3 or more Suppression stacks have -10% Damage Dealt while those stacks remain."
+    },
+    {
+      "id": 6178,
+      "text": "Ranged abilities gain +10% Accuracy and +8% Critical Rate against targets at least 10m away."
+    },
+    {
+      "id": 6179,
+      "text": "After 3 seconds without attacking, if your next attack is a critical hit, it deals +15% damage."
+    },
+    {
+      "id": 6180,
+      "text": "Hostile ranged attack abilities reduce the target's Defense by 10% for 30 seconds."
     },
     {
       "id": 20401,
@@ -60628,6 +60656,38 @@
     {
       "id": 79818,
       "text": "If you're a citizen of a city with a cantina upgrade, you'll receive additional RP XP bonuses based on the cantina's level, encouraging social gathering in player cities."
+    },
+    {
+      "id": 79819,
+      "text": "Use /name <label>, then click another player, to save a private label only your character can see. It does not rename that player for anyone else."
+    },
+    {
+      "id": 79820,
+      "text": "Use /name <description>, then click yourself, to change the gray public description shown to characters who have not named your current identity."
+    },
+    {
+      "id": 79821,
+      "text": "The name you see is what your character believes the presented identity is called. It may be a nickname, alias, or mistake - not proof of the character's real name."
+    },
+    {
+      "id": 79822,
+      "text": "Each disguise has its own biography. Edit it in the Disguises window and describe only what others could observe about that identity."
+    },
+    {
+      "id": 79823,
+      "text": "Disguises change your presented identity, portrait, sound set, and biography, but not your equipped clothing or armor. Change your outfit separately."
+    },
+    {
+      "id": 79824,
+      "text": "Disguises support in-character deception, but they do not hide your underlying character or account from staff and audit logs."
+    },
+    {
+      "id": 79825,
+      "text": "Use /forgetname, then click another player, to erase only your private label for their current identity."
+    },
+    {
+      "id": 79826,
+      "text": "Your private label normally shows the character's gray public description in brackets. Turn off 'Show Others' Public Descriptions' in Settings to hide it."
     },
     {
       "id": 80000,
