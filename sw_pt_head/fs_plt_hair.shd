@@ -1,0 +1,309 @@
+/*=============================================================================
+    fs_plt_hair.shd
+
+    Original: reads normal map alpha as transparency, applies standard shader.
+
+    Modified: anisotropic GGX specularity from fslit_aniso_nm.shd merged in.
+
+    Strategy:
+      - inc_standard runs normally. SetupSpecularity() populates fRoughness and
+        SpecularColor. We zero fSpecularity after that call so ComputeLighting()
+        inside ApplyStandardShader() contributes no isotropic specular term.
+      - After ApplyStandardShader(), we compute an anisotropic GGX specular
+        term using globals already set up by inc_standard / inc_common, then
+        add it to gl_FragColor.
+=============================================================================*/
+
+#define SHADER_TYPE 2
+
+#define LIGHTING          1
+#define FOG               1
+#define KEYHOLING         1
+
+#define NORMAL_MAP            1
+#define SPECULAR_MAP          1
+#define ROUGHNESS_MAP         1
+#define HEIGHT_MAP            0
+#define SELF_ILLUMINATION_MAP 1
+#define ENVIRONMENT_MAP       1
+
+#include "inc_standard"
+
+//-----------------------------------------------------------------------------
+// Anisotropic specularity uniform (from fslit_aniso_nm)
+//
+//   anisotropy > 0 : highlight stretched along tangent (hair strand direction)
+//   anisotropy < 0 : stretched along bitangent
+//   anisotropy = 0 : isotropic
+//
+//   AnisoIntensity  : 0.0 = no aniso specular, 1.0 = full (default when unset)
+//                     Set via MTR: "AnisoIntensity" <value>
+//                     Follows the same > 0.0 convention as Specularity/Roughness;
+//                     omitting it from the MTR leaves the uniform at 0.0 which
+//                     is remapped to the 1.0 default below.
+//-----------------------------------------------------------------------------
+// anisotropy: specular highlight stretch along tangent. 0.0 = isotropic.
+// Positive = along tangent (hair strand direction), negative = along bitangent.
+uniform float anisotropy;
+// AnisoIntensity: overall anisotropic specular intensity. Range 0.0 - 1.0.
+// Set via MTR: "parameter float AnisoIntensity <value>"
+// Defaults to 0.2 when not set in MTR.
+uniform float AnisoIntensity;
+// DitheringIntensity: controls dither pattern density. Higher = finer/less visible.
+// 64.0 = full 8x8 Bayer range (default). Lower values increase dither visibility.
+// Set via MTR: "parameter float DitheringIntensity <value>"
+// Defaults to 64.0 when not set in MTR.
+uniform float DitheringIntensity;
+// AlphaCutoff: hard floor discard threshold. 0.05 (soft) to 0.9 (crisp).
+#define ALPHA_CUTOFF         0.2
+
+uniform float fAlpha;
+
+//-----------------------------------------------------------------------------
+// Anisotropic GGX helpers (from fslit_aniso_nm.shd)
+//-----------------------------------------------------------------------------
+
+#ifndef saturate
+#define saturate(val) clamp((val), 0.0, 1.0)
+#endif
+
+// Normalized anisotropic GGX / Trowbridge-Reitz  [McAuley 2015]
+float aniso_getGGX(in float tDotH, in float bDotH, in float nDotH,
+                   in float alphaT, in float alphaB)
+{
+    float a2 = alphaT * alphaB;
+    vec3  v  = vec3(tDotH / alphaT, bDotH / alphaB, nDotH);
+    float d  = dot(v, v);
+    // Clamp the denominator to prevent division-by-near-zero firefly spikes
+    // when the half-vector nearly aligns with the anisotropic axes.
+    return 1.0 / max(a2 * d * d, 1e-6);
+}
+
+// Height-correlated Smith masking-shadowing for anisotropic GGX
+float aniso_getSmithVisibility(in float tDotE, in float bDotE, in float nDotE,
+                                in float tDotL, in float bDotL, in float nDotL,
+                                in float alphaT, in float alphaB)
+{
+    float smithE = nDotL * sqrt(alphaT * tDotE * tDotE + alphaB * bDotE * bDotE + nDotE * nDotE);
+    float smithL = nDotE * sqrt(alphaT * tDotL * tDotL + alphaB * bDotL * bDotL + nDotL * nDotL);
+    return 0.5 / max(smithE + smithL, 1e-5);
+}
+
+//-----------------------------------------------------------------------------
+// computeAnisoSpecular()
+//
+// Accumulates anisotropic GGX specular over all active lights.
+// Uses globals set by inc_standard / inc_common before main() calls this.
+//
+//   tangent, bitangent  - from the rebuilt TSB (mTSB_aniso[0], [1])
+//
+// Returns accumulated specular RGB (caller multiplies by SpecularColor).
+//-----------------------------------------------------------------------------
+vec3 computeAnisoSpecular(in vec3 tangent, in vec3 bitangent)
+{
+    vec3  normal   = vFragmentNormal;
+    vec3  position = vPosView;
+
+    float roughnessT = fRoughness * (1.0 + anisotropy);
+    float roughnessB = fRoughness * (1.0 - anisotropy);
+    float alphaT     = max(roughnessT * roughnessT, 1e-5);
+    float alphaB     = max(roughnessB * roughnessB, 1e-5);
+
+    // vViewToSurface_n points from eye toward surface; flip for "toEye".
+    vec3  toEye = -vViewToSurface_n;
+    float nDotE = saturate(dot(normal, toEye));
+    float tDotE = dot(tangent,   toEye);
+    float bDotE = dot(bitangent, toEye);
+
+    vec3 specAcc = vec3(0.0);
+
+    // --- Static / baked directional light ---
+    // vStaticLightDirOut is declared in inc_lighting only under
+    // FRAGMENT_LIGHTING == 0 && NORMAL_MAP == 1.
+    // VertexStaticLighting is declared only under FRAGMENT_NORMAL == 1.
+    // Mirror those guards exactly to avoid undefined variable errors.
+#if FRAGMENT_LIGHTING == 0 && NORMAL_MAP == 1
+    if (dot(vStaticLightDirOut, vStaticLightDirOut) > 0.0)
+    {
+        vec3  toLight = normalize(vStaticLightDirOut);
+        float nDotL   = dot(normal, toLight);
+        if (nDotL > 0.0)
+        {
+            vec3  halfVec = normalize(toEye + toLight);
+            float tDotH   = dot(tangent,   halfVec);
+            float bDotH   = dot(bitangent, halfVec);
+            float nDotH   = saturate(dot(normal, halfVec));
+            float tDotL   = dot(tangent,   toLight);
+            float bDotL   = dot(bitangent, toLight);
+
+            float d = aniso_getGGX(tDotH, bDotH, nDotH, alphaT, alphaB);
+            float g = aniso_getSmithVisibility(tDotE, bDotE, nDotE,
+                                               tDotL, bDotL, nDotL,
+                                               alphaT, alphaB);
+#if FRAGMENT_NORMAL == 1
+            specAcc += saturate(nDotL) * (d * g) * VertexStaticLighting.rgb;
+#endif
+        }
+    }
+#endif
+
+    // --- Dynamic lights ---
+    for (int i = 0; i < numLights; i++)
+    {
+        vec3  lightOffset = lightPosition[i].xyz - position;
+        float dist_sq     = dot(lightOffset, lightOffset);
+
+#if GAMMA_CORRECTION == 1
+        float fLightRange = abs(lightColor[i].a);
+        if (fLightRange < dist_sq) continue;
+        // Negative .a flags ambient-only lights in the new path - skip them.
+        if (lightColor[i].a < 0.0) continue;
+        float fLightFalloff2 = dist_sq / fLightRange;
+        float attenuation    = (1.0 - fLightFalloff2) /
+                               (lightMaxIntensityInv + lightFalloffFactor * fLightFalloff2);
+        vec3 lightRGB = lightColor[i].rgb;
+#else
+        // Skip ambient-only lights
+        if (dot(abs(lightAmbient[i].rgb), vec3(1.0)) != 0.0) continue;
+        float attenuation = 1.0 / (1.0 + lightQuadraticAtten[i] * dist_sq);
+        vec3  lightRGB    = lightDiffuse[i].rgb;
+#endif
+
+        vec3  toLight = normalize(lightOffset);
+        float nDotL   = dot(normal, toLight);
+        if (nDotL <= 0.0) continue;
+
+        vec3  halfVec = normalize(toEye + toLight);
+        float tDotH   = dot(tangent,   halfVec);
+        float bDotH   = dot(bitangent, halfVec);
+        float nDotH   = saturate(dot(normal, halfVec));
+        float tDotL   = dot(tangent,   toLight);
+        float bDotL   = dot(bitangent, toLight);
+
+        float d = aniso_getGGX(tDotH, bDotH, nDotH, alphaT, alphaB);
+        float g = aniso_getSmithVisibility(tDotE, bDotE, nDotE,
+                                           tDotL, bDotL, nDotL,
+                                           alphaT, alphaB);
+
+        specAcc += attenuation * saturate(nDotL) * (d * g) * lightRGB;
+    }
+
+    return specAcc;
+}
+
+//-----------------------------------------------------------------------------
+// main
+//-----------------------------------------------------------------------------
+
+
+void main ()
+{
+    FragmentColor = vec4(1.0);
+
+    // Runs SetupTSB(), builds vFragmentNormal, populates fRoughness +
+    // SpecularColor via SetupSpecularity(), loads textures, etc.
+    SetupStandardShaderInputs();
+
+    // Rebuild TSB to pass T and B explicitly to our aniso function.
+    mat3 mTSB_aniso = SetupTSB();
+
+    // Zero fSpecularity so ComputeLighting() inside ApplyStandardShader()
+    // contributes no isotropic specular. fRoughness and SpecularColor stay
+    // intact for the aniso pass below.
+    fSpecularity = 0.0;
+
+    float fAlphaFromTexture = texture2D(texUnit1, vTexCoords.xy).a;
+    float fEffectiveAlpha   = fAlphaFromTexture;
+
+    // -------------------------------------------------------------------------
+    // Ordered-dither stochastic transparency (8x8 Bayer matrix)
+    //
+    // HardFloor: pixels below this are always discarded (hard cutoff).
+    // Raise to clip more wispy edges (crispier). Lower for softer fringe.
+    // Set via MTR: "parameter float AlphaCutoff <value>"  range 0.05 - 0.4
+    // -------------------------------------------------------------------------
+
+    // -------------------------------------------------------------------------
+    // Dithered transparency + analytical edge AA
+    //
+    // Step 1 — Derivative AA:
+    //   Measure how fast alpha changes across this pixel using screen-space
+    //   derivatives (dFdx/dFdy). At a sharp edge the alpha gradient is steep;
+    //   we widen the effective cutoff threshold by half that gradient width so
+    //   the transition spans ~1 pixel rather than being a hard on/off.
+    //   This smooths the alpha cutoff edges without any framebuffer access.
+    //
+    // Step 2 — 8x8 Bayer dither:
+    //   Applied on top so semi-transparent regions still get spatial dithering
+    //   for the overlapping hair card problem.
+    // -------------------------------------------------------------------------
+
+    // Derivative AA: compute per-pixel alpha gradient magnitude
+    float fAlphaDX  = dFdx(fEffectiveAlpha);
+    float fAlphaDY  = dFdy(fEffectiveAlpha);
+    float fGradient = sqrt(fAlphaDX * fAlphaDX + fAlphaDY * fAlphaDY);
+
+    // Widen the threshold at edges so the cutoff softens over ~1 pixel
+    float fBaseFloor = (fAlpha > 0.0) ? fAlpha : ALPHA_CUTOFF;
+    float fAAFloor   = fBaseFloor - fGradient * 0.5;
+
+    if (fEffectiveAlpha < fAAFloor)
+        discard;
+
+    // 8x8 Bayer dither for semi-transparent regions
+    int bx8 = int(mod(gl_FragCoord.x, 8.0));
+    int by8 = int(mod(gl_FragCoord.y, 8.0));
+
+    vec4 bRow0lo = vec4( 0.0, 32.0,  8.0, 40.0);  vec4 bRow0hi = vec4( 2.0, 34.0, 10.0, 42.0);
+    vec4 bRow1lo = vec4(48.0, 16.0, 56.0, 24.0);  vec4 bRow1hi = vec4(50.0, 18.0, 58.0, 26.0);
+    vec4 bRow2lo = vec4(12.0, 44.0,  4.0, 36.0);  vec4 bRow2hi = vec4(14.0, 46.0,  6.0, 38.0);
+    vec4 bRow3lo = vec4(60.0, 28.0, 52.0, 20.0);  vec4 bRow3hi = vec4(62.0, 30.0, 54.0, 22.0);
+    vec4 bRow4lo = vec4( 3.0, 35.0, 11.0, 43.0);  vec4 bRow4hi = vec4( 1.0, 33.0,  9.0, 41.0);
+    vec4 bRow5lo = vec4(51.0, 19.0, 59.0, 27.0);  vec4 bRow5hi = vec4(49.0, 17.0, 57.0, 25.0);
+    vec4 bRow6lo = vec4(15.0, 47.0,  7.0, 39.0);  vec4 bRow6hi = vec4(13.0, 45.0,  5.0, 37.0);
+    vec4 bRow7lo = vec4(63.0, 31.0, 55.0, 23.0);  vec4 bRow7hi = vec4(61.0, 29.0, 53.0, 21.0);
+
+    vec4 bLo, bHi;
+    if      (by8 == 0) { bLo = bRow0lo; bHi = bRow0hi; }
+    else if (by8 == 1) { bLo = bRow1lo; bHi = bRow1hi; }
+    else if (by8 == 2) { bLo = bRow2lo; bHi = bRow2hi; }
+    else if (by8 == 3) { bLo = bRow3lo; bHi = bRow3hi; }
+    else if (by8 == 4) { bLo = bRow4lo; bHi = bRow4hi; }
+    else if (by8 == 5) { bLo = bRow5lo; bHi = bRow5hi; }
+    else if (by8 == 6) { bLo = bRow6lo; bHi = bRow6hi; }
+    else               { bLo = bRow7lo; bHi = bRow7hi; }
+
+    float fBayerValue;
+    if (bx8 < 4)
+    {
+        if      (bx8 == 0) fBayerValue = bLo.x;
+        else if (bx8 == 1) fBayerValue = bLo.y;
+        else if (bx8 == 2) fBayerValue = bLo.z;
+        else               fBayerValue = bLo.w;
+    }
+    else
+    {
+        if      (bx8 == 4) fBayerValue = bHi.x;
+        else if (bx8 == 5) fBayerValue = bHi.y;
+        else if (bx8 == 6) fBayerValue = bHi.z;
+        else               fBayerValue = bHi.w;
+    }
+
+    float fDitherRange = (DitheringIntensity < 0.01) ? 128.0 : DitheringIntensity;
+    if (fEffectiveAlpha < (fBayerValue + 0.5) / fDitherRange)
+        discard;
+
+    // Standard diffuse + ambient + fog + keyholing (isotropic specular zeroed).
+    ApplyStandardShader();
+
+    // Anisotropic GGX specular added on top.
+    // AnisoIntensity follows the MTR > 0.0 convention: 0.0 means "not set",
+    // which we treat as the 1.0 default so omitting it gives full intensity.
+    float fAnisoIntensity = (AnisoIntensity < 0.01) ? 0.2 : AnisoIntensity;
+    vec3 anisoSpec = computeAnisoSpecular(mTSB_aniso[0], mTSB_aniso[1]);
+    // Clamp the specular contribution to guard against any remaining spikes
+    // that could cause bright white flickering pixels.
+    anisoSpec = min(anisoSpec, vec3(1.0));
+    gl_FragColor = vec4(FragmentColor.rgb + SpecularColor * anisoSpec * fAnisoIntensity,
+                        fAlphaFromTexture);
+}
