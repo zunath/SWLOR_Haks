@@ -31,9 +31,8 @@ uniform float tintMapHeight;
 uniform float useTexture1Alpha;
 uniform float useTexture9Alpha;
 
-// These declarations must match the scalar `parameter float` values emitted by
-// the generated MTRs. The live material API uses a one-component vec4 setter call
-// for floats and the int setter for useCustom*.
+// Per-layer palette V coordinates. This is the row-only interface from the
+// known-good issue #2052 shader, adjusted for this branch's 2048-row atlas.
 uniform float rowSkin   = 0.000244;
 uniform float rowHair   = 0.086182;
 uniform float rowMetal1 = 0.172119;
@@ -45,59 +44,6 @@ uniform float rowLeath2 = 0.429932;
 uniform float rowTat1   = 0.515869;
 uniform float rowTat2   = 0.515869;
 
-uniform vec4 tintSkin = vec4(0.0);
-uniform vec4 tintHair = vec4(0.0);
-uniform vec4 tintMetal1 = vec4(0.0);
-uniform vec4 tintMetal2 = vec4(0.0);
-uniform vec4 tintCloth1 = vec4(0.0);
-uniform vec4 tintCloth2 = vec4(0.0);
-uniform vec4 tintLeath1 = vec4(0.0);
-uniform vec4 tintLeath2 = vec4(0.0);
-uniform vec4 tintTat1 = vec4(0.0);
-uniform vec4 tintTat2 = vec4(0.0);
-
-uniform float tintSkinR = 0.0;
-uniform float tintSkinG = 0.0;
-uniform float tintSkinB = 0.0;
-uniform float tintHairR = 0.0;
-uniform float tintHairG = 0.0;
-uniform float tintHairB = 0.0;
-uniform float tintMetal1R = 0.0;
-uniform float tintMetal1G = 0.0;
-uniform float tintMetal1B = 0.0;
-uniform float tintMetal2R = 0.0;
-uniform float tintMetal2G = 0.0;
-uniform float tintMetal2B = 0.0;
-uniform float tintCloth1R = 0.0;
-uniform float tintCloth1G = 0.0;
-uniform float tintCloth1B = 0.0;
-uniform float tintCloth2R = 0.0;
-uniform float tintCloth2G = 0.0;
-uniform float tintCloth2B = 0.0;
-uniform float tintLeath1R = 0.0;
-uniform float tintLeath1G = 0.0;
-uniform float tintLeath1B = 0.0;
-uniform float tintLeath2R = 0.0;
-uniform float tintLeath2G = 0.0;
-uniform float tintLeath2B = 0.0;
-uniform float tintTat1R = 0.0;
-uniform float tintTat1G = 0.0;
-uniform float tintTat1B = 0.0;
-uniform float tintTat2R = 0.0;
-uniform float tintTat2G = 0.0;
-uniform float tintTat2B = 0.0;
-
-uniform int useCustomSkin   = 0;
-uniform int useCustomHair   = 0;
-uniform int useCustomMetal1 = 0;
-uniform int useCustomMetal2 = 0;
-uniform int useCustomCloth1 = 0;
-uniform int useCustomCloth2 = 0;
-uniform int useCustomLeath1 = 0;
-uniform int useCustomLeath2 = 0;
-uniform int useCustomTat1   = 0;
-uniform int useCustomTat2   = 0;
-
 void main ()
 {
     vec2 tintMapSize = max(vec2(tintMapWidth, tintMapHeight), vec2(1.0));
@@ -108,45 +54,19 @@ void main ()
     float layer = floor(clamp(encodedLayer, 0.0, 0.9999) * 10.0);
 
     float v = rowSkin;
-    vec3 customTint = vec3(tintSkinR, tintSkinG, tintSkinB);
-    int customTintMode = useCustomSkin;
-    float referenceV = 0.000244;
-    if      (layer > 8.5) { v = rowTat2;   customTint = vec3(tintTat2R, tintTat2G, tintTat2B);       customTintMode = useCustomTat2;   referenceV = 0.515869; }
-    else if (layer > 7.5) { v = rowTat1;   customTint = vec3(tintTat1R, tintTat1G, tintTat1B);       customTintMode = useCustomTat1;   referenceV = 0.515869; }
-    else if (layer > 6.5) { v = rowLeath2; customTint = vec3(tintLeath2R, tintLeath2G, tintLeath2B); customTintMode = useCustomLeath2; referenceV = 0.429932; }
-    else if (layer > 5.5) { v = rowLeath1; customTint = vec3(tintLeath1R, tintLeath1G, tintLeath1B); customTintMode = useCustomLeath1; referenceV = 0.429932; }
-    else if (layer > 4.5) { v = rowCloth2; customTint = vec3(tintCloth2R, tintCloth2G, tintCloth2B); customTintMode = useCustomCloth2; referenceV = 0.343994; }
-    else if (layer > 3.5) { v = rowCloth1; customTint = vec3(tintCloth1R, tintCloth1G, tintCloth1B); customTintMode = useCustomCloth1; referenceV = 0.343994; }
-    else if (layer > 2.5) { v = rowMetal2; customTint = vec3(tintMetal2R, tintMetal2G, tintMetal2B); customTintMode = useCustomMetal2; referenceV = 0.258057; }
-    else if (layer > 1.5) { v = rowMetal1; customTint = vec3(tintMetal1R, tintMetal1G, tintMetal1B); customTintMode = useCustomMetal1; referenceV = 0.172119; }
-    else if (layer > 0.5) { v = rowHair;   customTint = vec3(tintHairR, tintHairG, tintHairB);       customTintMode = useCustomHair;   referenceV = 0.086182; }
-
-    bool useCustomTint = customTintMode > 0 || v <= 0.0;
-    if (useCustomTint)
-    {
-        v = referenceV;
-    }
+    if      (layer > 8.5) { v = rowTat2;   }
+    else if (layer > 7.5) { v = rowTat1;   }
+    else if (layer > 6.5) { v = rowLeath2; }
+    else if (layer > 5.5) { v = rowLeath1; }
+    else if (layer > 4.5) { v = rowCloth2; }
+    else if (layer > 3.5) { v = rowCloth1; }
+    else if (layer > 2.5) { v = rowMetal2; }
+    else if (layer > 1.5) { v = rowMetal1; }
+    else if (layer > 0.5) { v = rowHair;   }
 
     float paletteU = (g * 255.0 + 0.5) / 256.0;
     vec4 paletteColor = texture2D(texUnit10, vec2(paletteU, v), -10.0);
-    vec3 referenceShade = texture2D(
-        texUnit10,
-        vec2(paletteU, referenceV),
-        -10.0).rgb;
-    vec3 referenceMidpoint = texture2D(
-        texUnit10,
-        vec2(128.5 / 256.0, referenceV),
-        -10.0).rgb;
-    const vec3 luminanceWeights = vec3(0.2126, 0.7152, 0.0722);
-    float shadeScale = max(
-        dot(referenceShade, luminanceWeights) /
-            max(dot(referenceMidpoint, luminanceWeights), 1.0 / 255.0),
-        0.0);
-    // Preserve the editor's RGB hue. ApplyColorSpace below handles the engine color-space
-    // conversion; complementing the value here would turn red into cyan and green into purple.
-    vec3 vTint = useCustomTint
-        ? clamp(customTint * shadeScale, 0.0, 1.0)
-        : paletteColor.rgb;
+    vec3 vTint = paletteColor.rgb;
 
     FragmentColor = vec4(1.0);
     SetupStandardShaderInputs();
@@ -157,7 +77,7 @@ void main ()
         vFragmentNormal = normalize(vSurfaceNormal);
     }
 
-    fEnvMapLevel = useCustomTint ? 0.0 : 1.0 - paletteColor.a;
+    fEnvMapLevel = 1.0 - paletteColor.a;
     vec3 surfaceColor = ApplyColorSpace(vTint);
 
     #if FRAGMENT_LIGHTING == 1 && LIGHTING == 1
