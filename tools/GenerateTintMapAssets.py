@@ -52,6 +52,48 @@ _ACTIVE_RENDER_SURFACES: set[str] | None = None
 _TABLE_REFERENCED_RESREFS: set[str] | None = None
 _HAK_DIRECTORIES: tuple[Path, ...] | None = None
 
+STOCK_MODEL_RESOURCE_TYPE = 2002
+STOCK_KEY_ARCHIVES = (
+    "nwn_base.key",
+    "nwn_base_loc.key",
+    "nwn_retail.key",
+    "nwn_retail_loc.key",
+    "xp1.key",
+    "xp1_loc.key",
+    "xp1patch.key",
+    "xp1patch_loc.key",
+    "xp2.key",
+    "xp2_loc.key",
+    "xp2patch.key",
+    "xp2patch_loc.key",
+    "xp3.key",
+    "xp3_loc.key",
+    "xp3patch.key",
+    "xp3patch_loc.key",
+)
+STOCK_MODEL_PART_DIRECTORIES = {
+    "belt": "sw_pt_belt",
+    "bicepl": "sw_pt_lbicep",
+    "bicepr": "sw_pt_rbicep",
+    "chest": "sw_pt_chest",
+    "footl": "sw_pt_lfoot",
+    "footr": "sw_pt_rfoot",
+    "forel": "sw_pt_lfore",
+    "forer": "sw_pt_rfore",
+    "handl": "sw_pt_lhand",
+    "handr": "sw_pt_rhand",
+    "head": "sw_pt_head",
+    "legl": "sw_pt_lthigh",
+    "legr": "sw_pt_rthigh",
+    "neck": "sw_pt_neck",
+    "pelvis": "sw_pt_pelvis",
+    "robe": "sw_pt_robe",
+    "shinl": "sw_pt_lshin",
+    "shinr": "sw_pt_rshin",
+    "shol": "sw_pt_lshoul",
+    "shor": "sw_pt_rshoul",
+}
+
 PLT_HEADER = b"PLT V1  "
 PLT_DATA_OFFSET = 24
 LAYER_NAMES = (
@@ -186,6 +228,151 @@ def hak_directories() -> tuple[Path, ...]:
 
     _HAK_DIRECTORIES = tuple(directories)
     return _HAK_DIRECTORIES
+
+
+def read_stock_key_models(data_directory: Path) -> dict[str, tuple[Path, int]]:
+    """Index stock MDLs from the game's KEY/BIF layer in engine precedence order."""
+    resources: dict[str, tuple[Path, int]] = {}
+    install_root = data_directory.parent
+
+    for archive_name in STOCK_KEY_ARCHIVES:
+        key_path = data_directory / archive_name
+        if not key_path.is_file():
+            continue
+
+        data = key_path.read_bytes()
+        if len(data) < 64 or data[:4] != b"KEY ":
+            raise RuntimeError(f"Invalid NWN KEY archive: {key_path}")
+
+        bif_count, resource_count, bif_offset, resource_offset = struct.unpack_from(
+            "<IIII", data, 8
+        )
+        if bif_offset + bif_count * 12 > len(data):
+            raise RuntimeError(f"Truncated BIF table in {key_path}")
+        if resource_offset + resource_count * 22 > len(data):
+            raise RuntimeError(f"Truncated resource table in {key_path}")
+
+        bif_paths: list[Path] = []
+        for index in range(bif_count):
+            _, filename_offset, filename_size, _ = struct.unpack_from(
+                "<IIHH", data, bif_offset + index * 12
+            )
+            if filename_offset + filename_size > len(data):
+                raise RuntimeError(f"Truncated BIF filename in {key_path}")
+            filename = data[filename_offset : filename_offset + filename_size]
+            filename = filename.split(b"\0", 1)[0].decode("ascii", errors="strict")
+            normalized = Path(filename.replace("\\", "/"))
+            candidate = install_root.joinpath(*normalized.parts)
+            if not candidate.is_file():
+                candidate = data_directory / normalized.name
+            bif_paths.append(candidate)
+
+        for index in range(resource_count):
+            offset = resource_offset + index * 22
+            resref = data[offset : offset + 16].split(b"\0", 1)[0].decode(
+                "ascii", errors="strict"
+            ).lower()
+            resource_type, resource_id = struct.unpack_from("<HI", data, offset + 16)
+            if resource_type != STOCK_MODEL_RESOURCE_TYPE:
+                continue
+            bif_index = resource_id >> 20
+            variable_index = resource_id & 0x000F_FFFF
+            if bif_index >= len(bif_paths):
+                raise RuntimeError(
+                    f"Stock model '{resref}' references missing BIF {bif_index} in {key_path}"
+                )
+            resources[resref] = (bif_paths[bif_index], variable_index)
+
+    if not resources:
+        raise RuntimeError(
+            f"No stock MDLs were indexed from KEY archives under {data_directory}"
+        )
+    return resources
+
+
+def extract_stock_bif_resource(path: Path, variable_index: int) -> bytes:
+    with path.open("rb") as stream:
+        header = stream.read(20)
+        if len(header) != 20 or header[:4] != b"BIFF":
+            raise RuntimeError(f"Invalid NWN BIF archive: {path}")
+        variable_count, _, variable_offset = struct.unpack_from("<III", header, 8)
+        if variable_index >= variable_count:
+            raise RuntimeError(
+                f"BIF resource index {variable_index} is outside {path}"
+            )
+
+        stream.seek(variable_offset + variable_index * 16)
+        entry = stream.read(16)
+        if len(entry) != 16:
+            raise RuntimeError(f"Truncated BIF resource table in {path}")
+        _, data_offset, data_size, resource_type = struct.unpack("<IIII", entry)
+        if resource_type != STOCK_MODEL_RESOURCE_TYPE:
+            raise RuntimeError(
+                f"BIF resource {variable_index} in {path} is not an MDL"
+            )
+        stream.seek(data_offset)
+        payload = stream.read(data_size)
+        if len(payload) != data_size:
+            raise RuntimeError(f"Truncated BIF model payload in {path}")
+        return payload
+
+
+def stock_model_output_directory(model: str) -> Path:
+    if model.startswith("cloak_"):
+        return REPOSITORY_ROOT / "sw_pt_cloak"
+    if model.startswith("helm_"):
+        return REPOSITORY_ROOT / "sw_pt_helm"
+
+    match = MODULAR_MODEL_PATTERN.fullmatch(model)
+    if match is None:
+        raise RuntimeError(f"No HAK part directory is configured for stock model '{model}'")
+    part = re.sub(r"[0-9]+$", "", match.group("part").lower())
+    directory = STOCK_MODEL_PART_DIRECTORIES.get(part)
+    if directory is None:
+        raise RuntimeError(
+            f"No HAK part directory is configured for stock model '{model}' ({part})"
+        )
+    return REPOSITORY_ROOT / directory
+
+
+def import_stock_models(data_directory: Path) -> None:
+    global _ACTIVE_MODELS
+
+    entries = load_source_manifest()
+    if not entries:
+        raise RuntimeError("No tint source manifest exists to import stock models for")
+    entry_order = list(entries)
+
+    stock_resources = read_stock_key_models(data_directory.resolve())
+    active_models = find_active_models()
+    missing_models = sorted(
+        model
+        for model in entries
+        if model not in active_models and model in stock_resources
+    )
+
+    for model in missing_models:
+        bif_path, variable_index = stock_resources[model]
+        output_directory = stock_model_output_directory(model)
+        output_directory.mkdir(parents=True, exist_ok=True)
+        (output_directory / f"{model}.mdl").write_bytes(
+            extract_stock_bif_resource(bif_path, variable_index)
+        )
+
+    _ACTIVE_MODELS = None
+    # Rebuild the catalog before reading compatibility aliases so a stale row
+    # from an older inferred model mapping cannot block its own cleanup.
+    write_2da(entries)
+    changed_models, material_aliases = synchronize_model_material_aliases(entries)
+    removed_outputs = remove_orphaned_outputs(entries)
+    removed_materials = remove_orphaned_materials(entries, set(material_aliases))
+    write_source_manifest(entries, entry_order)
+    write_2da(entries)
+    print(
+        f"Imported {len(missing_models)} stock MDLs and bound generated tint materials "
+        f"in {changed_models} models; removed {removed_outputs} orphaned packed textures "
+        f"and {removed_materials} orphaned materials."
+    )
 
 
 def is_inventory_icon_plt(path: Path) -> bool:
@@ -919,6 +1106,25 @@ def find_modular_human_material_fallbacks(
     return fallbacks
 
 
+def find_unpadded_model_material_source(
+    model: str,
+    entries: dict[str, dict[str, object]],
+) -> str | None:
+    """Resolve the one legacy convention where an MDL pads a PLT index.
+
+    For example, ``pmo0_footl010.mdl`` selects ``pmo0_footL10.plt``.  The
+    catalog must retain the PLT resref as the material name, while the active
+    model name remains padded for appearance-part lookup.
+    """
+    match = re.fullmatch(r"(.*?)([0-9]+)", model)
+    if match is None:
+        return None
+    candidate = f"{match.group(1)}{int(match.group(2))}"
+    if candidate == model or candidate not in entries:
+        return None
+    return candidate
+
+
 def build_model_material_plan(
     entries: dict[str, dict[str, object]],
 ) -> tuple[
@@ -951,7 +1157,13 @@ def build_model_material_plan(
                 for texture, _ in read_model_material_bindings(path)
             })
         if not references:
-            if model in human_fallbacks:
+            unpadded_source = find_unpadded_model_material_source(model, entries)
+            if unpadded_source is not None:
+                references.update({
+                    texture: unpadded_source
+                    for texture, _ in read_model_material_bindings(path)
+                })
+            elif model in human_fallbacks:
                 references[path.stem.lower()] = human_fallbacks[model]
             elif model in human_fallback_sources:
                 # Some stock human body parts omit ``bitmap`` entirely while
@@ -971,23 +1183,10 @@ def build_model_material_plan(
             assert isinstance(current_materials, set)
             current_materials.add(current)
 
-    # The repository does not carry every stock model (notably many cloaks).
-    # Preserve conventional same-name mappings that cannot be patched locally.
-    table_references = find_table_referenced_resrefs()
-    for source in sorted(entries):
-        if source in models and source not in table_references:
-            continue
-        model = resolve_stock_model_resref(source, models)
-        if any(record["model"] == model and record["source"] == source for record in records.values()):
-            continue
-        scope = f"stock:{source}"
-        records[(model, source, scope)] = {
-            "model": model,
-            "source": source,
-            "scope": scope,
-            "path": None,
-            "current": {source},
-        }
+    # A same-name MTR can still replace an implicit PLT at render time, but the
+    # native material setter cannot address that fallback unless a real MDL has
+    # an explicit materialname. Never advertise inferred model/material pairs in
+    # tintmap.2da: the editor may only offer bindings proven by an active model.
 
     scopes_by_source: dict[str, set[str]] = {}
     for record in records.values():
@@ -1046,15 +1245,6 @@ def build_model_material_plan(
         pending_bindings,
         active_aliases,
     )
-
-
-def resolve_stock_model_resref(material: str, models: dict[str, Path]) -> str:
-    modular_match = re.fullmatch(r"(p[a-z][a-z][0-9]_[a-z]+)([0-9]{1,2})", material)
-    if modular_match is None:
-        return material
-
-    model = f"{modular_match.group(1)}{int(modular_match.group(2)):03d}"
-    return model if model in models else material
 
 
 def build_model_material_rows(
@@ -1537,10 +1727,10 @@ def read_preserved_2da_material_sources(
         material = columns[2].lower()
         source = alias_sources.get(material, material)
         if source not in entries:
-            raise RuntimeError(
-                "tintmap.2da compatibility row "
-                f"{physical_index} references unknown material '{material}'"
-            )
+            # Generation is also the repair path for a stale compatibility row.
+            # The audit still rejects a mismatched 2DA, but an obsolete row must
+            # not prevent regeneration from the authoritative manifest.
+            continue
         preserved[material] = source
     return preserved
 
@@ -1591,6 +1781,10 @@ def render_2da(entries: dict[str, dict[str, object]]) -> str:
             label = int(columns[0])
             model = columns[1].lower()
             material = columns[2].lower()
+            if columns[1:4] == ["****", "****", "****"]:
+                existing_rows.append((label, model, material, []))
+                next_label = max(next_label, label + 1)
+                continue
             pair = (model, material)
             if pair in existing_pairs:
                 raise RuntimeError(
@@ -1603,13 +1797,15 @@ def render_2da(entries: dict[str, dict[str, object]]) -> str:
             next_label = max(next_label, label + 1)
 
     # A 2DA row's runtime id is its physical position, not the numeric label in
-    # the first column. Keep every established row in place (including retired
-    # but still valid compatibility mappings), update its layer metadata when
-    # it remains active, and append only genuinely new pairs.
+    # the first column. Keep established physical positions stable, but blank a
+    # retired mapping instead of exposing an inferred material that no active
+    # MDL can address. New proven bindings are appended.
     for label, model, material, old_layers in existing_rows:
         current = rows_by_pair.pop((model, material), None)
-        layer_values = current[2] if current is not None else old_layers
-        layers = ",".join(str(value) for value in layer_values)
+        if current is None:
+            lines.append(f"{label:<4} {'****':<17} {'****':<17} ****")
+            continue
+        layers = ",".join(str(value) for value in current[2])
         lines.append(f"{label:<4} {model:<17} {material:<17} {layers}")
 
     for model, material, layer_values in new_row_order:
@@ -2390,6 +2586,21 @@ def audit() -> None:
     active_aliases: dict[str, str] = {}
     if entries:
         model_material_rows, pending_model_bindings, active_aliases = build_model_material_plan(entries)
+        active_models = find_active_models()
+        unaddressable_rows = [
+            (model, material)
+            for model, material, _ in model_material_rows
+            if model not in active_models
+        ]
+        if unaddressable_rows:
+            examples = ", ".join(
+                f"{model}/{material}"
+                for model, material in unaddressable_rows[:10]
+            )
+            errors.append(
+                f"{len(unaddressable_rows)} tintmap.2da rows have no explicit HAK model "
+                f"whose material can be addressed at runtime: {examples}"
+            )
         manifest_aliases = build_alias_source_lookup(entries)
         if manifest_aliases != active_aliases:
             errors.append(
@@ -2614,6 +2825,8 @@ def audit() -> None:
                     "tintmap.2da numeric labels must match physical row positions; "
                     f"row {physical_index} uses label {columns[0]}"
                 )
+            if columns[1:4] == ["****", "****", "****"]:
+                continue
             model, material = columns[1:3]
             pair = (model.lower(), material.lower())
             if pair in seen_output_pairs:
@@ -2744,7 +2957,17 @@ def main() -> None:
     )
     action.add_argument("--deduplicate", action="store_true", help="share byte-identical packed maps")
     action.add_argument("--prune", action="store_true", help="remove masks not referenced by active models")
+    action.add_argument(
+        "--import-stock-models",
+        action="store_true",
+        help="import missing stock MDLs and bind their generated tint materials",
+    )
     action.add_argument("--check", action="store_true", help="audit generated assets and PLT coverage")
+    parser.add_argument(
+        "--game-data",
+        type=Path,
+        help="NWN installation data directory containing nwn_base.key",
+    )
     arguments = parser.parse_args()
 
     require_repository_root()
@@ -2762,6 +2985,10 @@ def main() -> None:
         deduplicate()
     elif arguments.prune:
         prune()
+    elif arguments.import_stock_models:
+        if arguments.game_data is None:
+            parser.error("--import-stock-models requires --game-data")
+        import_stock_models(arguments.game_data)
     else:
         audit()
 
