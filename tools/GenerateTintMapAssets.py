@@ -7,8 +7,9 @@ legacy diffuse texture that shares the original PLT resref. The generated
 tintmap.2da is the authoritative
 model/material/layer catalog consumed by the game server and appearance
 editor; material names are read from the binary MDLs rather than inferred
-from model names. Palette-driven inventory icons remain PLTs because the NWN
-UI requires a same-resref PLT and cannot consume model material shaders.
+from model names. Palette-driven inventory icons and cloakmodel.2da's dynamic
+texture choices remain PLTs because neither path exposes an addressable model
+material for the replacement shader.
 """
 
 from __future__ import annotations
@@ -30,6 +31,7 @@ INVENTORY_ICON_PLT_PATTERN = re.compile(
     r"^(?:ip[fm]_|ihelm_|icloak_|idye_)",
     re.IGNORECASE,
 )
+DYNAMIC_CLOAK_PLT_PATTERN = re.compile(r"^cloak_[0-9]{3}$", re.IGNORECASE)
 TINT_DIRECTORIES = tuple(REPOSITORY_ROOT / f"sw_tint{index}" for index in range(3))
 OUTPUT_MTR_DIRECTORY = REPOSITORY_ROOT / "sw_tint_mtr"
 OUTPUT_2DA = REPOSITORY_ROOT / "sw_2da" / "tintmap.2da"
@@ -41,8 +43,11 @@ PALETTE_TEXTURE = REPOSITORY_ROOT / "sw_item" / "plt_palette.tga"
 PALETTE_TXI = REPOSITORY_ROOT / "sw_item" / "plt_palette.txi"
 TINT_SHADER = REPOSITORY_ROOT / "sw_shader" / "fs_plt_tinter.shd"
 TINT_MAPPED_SHADER = REPOSITORY_ROOT / "sw_shader" / "fs_plt_tinter_nm.shd"
+TINT_HAIR_MAPPED_SHADER = REPOSITORY_ROOT / "sw_shader" / "fs_plt_hair_nm.shd"
 TINT_FRAGMENT_SHADER = "fs_plt_tinter"
 TINT_MAPPED_FRAGMENT_SHADER = "fs_plt_tinter_nm"
+TINT_HAIR_MAPPED_FRAGMENT_SHADER = "fs_plt_hair_nm"
+AUTHORED_HAIR_FRAGMENT_SHADERS = {"fslit_aniso_nm"}
 _MTR_PATHS_BY_RESREF: dict[str, Path] | None = None
 _SOURCE_MTR_PATHS_BY_RESREF: dict[str, list[Path]] | None = None
 _BC4_LAYER_CANDIDATES: tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray] | None = None
@@ -174,6 +179,10 @@ TEXTURE9_ALPHA_MATERIALS = {
     "pfh0_head232": "pfh0_head232_a",
     "pmh0_head231": "pmh0_head231_a",
 }
+# Both resources were authored with fslit_aniso_nm. The female declaration was
+# a source MTR removed by the conversion, while the male declaration remains a
+# .shd, so keep the material set explicit after source cleanup.
+AUTHORED_HAIR_MATERIALS = frozenset(TEXTURE9_ALPHA_MATERIALS)
 # Aurora's modular body-part path selects a same-name PLT when one exists even
 # when the compiled mesh carries a stale or placeholder bitmap. Treating only
 # the embedded name as authoritative discarded live armor masks such as the
@@ -382,8 +391,32 @@ def is_inventory_icon_plt(path: Path) -> bool:
     )
 
 
+def is_dynamic_cloak_plt(path: Path) -> bool:
+    """Whether a PLT is selected as a texture by cloakmodel.2da at runtime.
+
+    These resources are not stable model materials. Multiple cloak rows reuse a
+    generic model while changing only the TEXTURE column, so there is no
+    per-texture materialname that NWN's material setter can address. Keep them
+    native until the generic model/texture combinations are replaced by explicit
+    material-bound models.
+    """
+    return (
+        path.suffix.lower() == ".plt"
+        and path.parent.name.lower() == "sw_pt_cloak"
+        and DYNAMIC_CLOAK_PLT_PATTERN.fullmatch(path.stem) is not None
+    )
+
+
+def is_dynamic_cloak_material(material: str) -> bool:
+    return DYNAMIC_CLOAK_PLT_PATTERN.fullmatch(material) is not None
+
+
 def is_tint_material_plt(path: Path) -> bool:
-    return path.suffix.lower() == ".plt" and not is_inventory_icon_plt(path)
+    return (
+        path.suffix.lower() == ".plt"
+        and not is_inventory_icon_plt(path)
+        and not is_dynamic_cloak_plt(path)
+    )
 
 
 def mtr_path(material: str) -> Path:
@@ -418,6 +451,42 @@ def source_mtr_paths(material: str) -> list[Path]:
                 _SOURCE_MTR_PATHS_BY_RESREF.setdefault(path.stem.lower(), []).append(path)
 
     return _SOURCE_MTR_PATHS_BY_RESREF.get(material.lower(), [])
+
+
+def source_shader_config_lines(material: str) -> list[str]:
+    """Read an authored per-material shader declaration stored as a .shd.
+
+    Dafena's mapped hair heads use material-shaped ``.shd`` resources rather
+    than ``.mtr`` files. Their directives still describe the surface behavior
+    that the tint replacement must preserve.
+    """
+    if material.lower() not in AUTHORED_HAIR_MATERIALS:
+        return []
+    path = REPOSITORY_ROOT / "sw_shader" / f"{material.lower()}.shd"
+    if not path.exists():
+        return []
+    return path.read_text(encoding="utf-8-sig").splitlines()
+
+
+def fragment_shaders(lines: list[str]) -> set[str]:
+    return {
+        line.split(maxsplit=1)[1].strip().lower()
+        for line in lines
+        if re.match(r"^\s*customshaderFS\s+\S+", line, re.IGNORECASE)
+    }
+
+
+def tint_fragment_shader(
+    source_material: str,
+    lines: list[str],
+) -> str:
+    authored_lines = source_shader_config_lines(source_material)
+    if (
+        source_material.lower() in AUTHORED_HAIR_MATERIALS
+        or fragment_shaders(authored_lines + lines) & AUTHORED_HAIR_FRAGMENT_SHADERS
+    ):
+        return TINT_HAIR_MAPPED_FRAGMENT_SHADER
+    return TINT_MAPPED_FRAGMENT_SHADER if uses_mapped_shader(lines) else TINT_FRAGMENT_SHADER
 
 
 def find_plts(predicate: Callable[[Path], bool]) -> tuple[dict[str, Path], list[Path]]:
@@ -1270,6 +1339,11 @@ def find_used_tint_materials(entries: dict[str, dict[str, object]]) -> set[str]:
     used.update(material for material in materials if material not in models)
     used.update(materials & find_table_referenced_resrefs())
     used.update(read_preserved_2da_material_sources(entries).values())
+    # cloakmodel.2da chooses these resrefs as textures on shared generic models.
+    # They cannot be addressed as independent materials and must stay PLTs.
+    used.difference_update(
+        material for material in materials if is_dynamic_cloak_material(material)
+    )
     return used
 
 
@@ -1587,10 +1661,14 @@ def update_mtr(
     source_material = source_material or material
     generated_lines = path.read_text(encoding="utf-8-sig").splitlines() if path.exists() else []
     source_paths = source_mtr_paths(source_material)
-    source_lines = (
+    source_mtr_lines = (
         source_paths[-1].read_text(encoding="utf-8-sig").splitlines()
         if source_paths
         else []
+    )
+    source_lines = merge_mtr_lines(
+        source_shader_config_lines(source_material),
+        source_mtr_lines,
     )
     if not source_lines and source_material != material:
         generated_source = mtr_path(source_material)
@@ -1598,11 +1676,8 @@ def update_mtr(
             source_lines = generated_source.read_text(encoding="utf-8-sig").splitlines()
     original_lines = merge_mtr_lines(source_lines, generated_lines)
     mapped_shader = uses_mapped_shader(original_lines)
-    original_fragment_shaders = {
-        line.split(maxsplit=1)[1].strip().lower()
-        for line in original_lines
-        if re.match(r"^\s*customshaderFS\s+\S+", line, re.IGNORECASE)
-    }
+    original_fragment_shaders = fragment_shaders(original_lines)
+    selected_fragment_shader = tint_fragment_shader(source_material, original_lines)
     uses_texture1_alpha = (
         source_material.lower() in TEXTURE1_ALPHA_MATERIALS
         or bool(original_fragment_shaders & TEXTURE1_ALPHA_SHADERS)
@@ -1649,8 +1724,7 @@ def update_mtr(
 
     lines.extend(
         (
-            "customshaderFS "
-            + (TINT_MAPPED_FRAGMENT_SHADER if mapped_shader else TINT_FRAGMENT_SHADER),
+            f"customshaderFS {selected_fragment_shader}",
             "texture0 plt_white",
             f"texture7 {texture}",
             "texture10 plt_palette",
@@ -1688,7 +1762,14 @@ def is_generated_pair(model: str, texture: str, width: int, height: int, dds_pat
 
     mtr = material_path.read_text(encoding="utf-8-sig").lower()
     return (
-        "customshaderfs fs_plt_tinter" in mtr
+        any(
+            f"customshaderfs {shader}" in mtr
+            for shader in (
+                TINT_FRAGMENT_SHADER,
+                TINT_MAPPED_FRAGMENT_SHADER,
+                TINT_HAIR_MAPPED_FRAGMENT_SHADER,
+            )
+        )
         and f"texture7 {texture}" in mtr
         and f"parameter float tintmapwidth {float(width):.1f}" in mtr
         and f"parameter float tintmapheight {float(height):.1f}" in mtr
@@ -1906,7 +1987,7 @@ def generate() -> None:
     write_2da(entries)
 
     # Delete only exact, validated 3D material PLTs under known HAK roots. Dynamic
-    # inventory icon PLTs are an engine requirement and are handled separately.
+    # inventory icons and cloak textures are engine requirements and are excluded.
     for path in all_paths:
         resolved = path.resolve()
         if REPOSITORY_ROOT.resolve() not in resolved.parents or not is_tint_material_plt(resolved):
@@ -2406,6 +2487,98 @@ def refresh_materials() -> None:
     )
 
 
+def refresh_material(material: str) -> None:
+    """Regenerate one source material and its recorded scoped aliases."""
+    source = material.lower()
+    entries = load_source_manifest()
+    entry = entries.get(source)
+    if entry is None:
+        raise RuntimeError(f"Unknown tint source material '{source}'")
+
+    texture = str(entry.get("texture") or source)
+    width = int(entry["width"])
+    height = int(entry["height"])
+    update_mtr(mtr_path(source), source, texture, width, height)
+    aliases = [str(value).lower() for value in entry.get("aliases", [])]
+    for alias in aliases:
+        update_mtr(
+            mtr_path(alias),
+            alias,
+            texture,
+            width,
+            height,
+            source_material=source,
+        )
+    print(f"Refreshed tint material {source} and {len(aliases)} aliases.", flush=True)
+
+
+def retain_dynamic_cloak_plts() -> None:
+    """Remove only invalid generated cloak bindings after restoring native PLTs."""
+    entries = load_source_manifest()
+    manifest_order = list(entries)
+    removed_sources = {
+        source for source in entries if is_dynamic_cloak_material(source)
+    }
+    if not removed_sources:
+        print("No generated dynamic cloak materials remain.", flush=True)
+        return
+
+    for source in removed_sources:
+        source_path = REPOSITORY_ROOT / str(entries[source]["source"])
+        if not source_path.exists() or not is_dynamic_cloak_plt(source_path):
+            raise RuntimeError(
+                f"Refusing to remove generated cloak material without its native PLT: {source}"
+            )
+
+    retained_entries = {
+        source: entry for source, entry in entries.items() if source not in removed_sources
+    }
+    retained_materials = set(retained_entries)
+    retained_outputs = {
+        packed_dds_path(source, entry).resolve()
+        for source, entry in retained_entries.items()
+    }
+    for entry in retained_entries.values():
+        retained_materials.update(str(value).lower() for value in entry.get("aliases", []))
+
+    removed_outputs = 0
+    removed_materials = 0
+    for source in sorted(removed_sources):
+        entry = entries[source]
+        output = packed_dds_path(source, entry).resolve()
+        if output not in retained_outputs and output.exists():
+            if not any(directory.resolve() in output.parents for directory in TINT_DIRECTORIES):
+                raise RuntimeError(f"Refusing to delete non-tint output: {output}")
+            output.unlink()
+            removed_outputs += 1
+
+        generated_materials = {source} | {
+            str(value).lower() for value in entry.get("aliases", [])
+        }
+        for material in generated_materials:
+            if material in retained_materials:
+                raise RuntimeError(
+                    f"Dynamic cloak material '{material}' is still used by a retained entry"
+                )
+            path = mtr_path(material).resolve()
+            if path.exists():
+                if path.parent != OUTPUT_MTR_DIRECTORY.resolve():
+                    raise RuntimeError(f"Refusing to delete non-tint material: {path}")
+                path.unlink()
+                removed_materials += 1
+
+    write_source_manifest(
+        retained_entries,
+        [source for source in manifest_order if source in retained_entries],
+    )
+    write_2da(retained_entries)
+    print(
+        f"Retained {len(removed_sources)} native dynamic cloak PLTs; removed "
+        f"{removed_outputs} unreferenced packed maps and {removed_materials} invalid materials.",
+        flush=True,
+    )
+
+
 def refresh_packed_checksums() -> None:
     """Record decoded packed-channel checksums without rewriting DDS resources."""
     entries = load_source_manifest()
@@ -2560,13 +2733,17 @@ def check_tint_mtr_structure(path: Path) -> list[str]:
     if fragment_shaders and fragment_shaders[0].lower() not in {
         f"customshaderfs {TINT_FRAGMENT_SHADER}",
         f"customshaderfs {TINT_MAPPED_FRAGMENT_SHADER}",
+        f"customshaderfs {TINT_HAIR_MAPPED_FRAGMENT_SHADER}",
     }:
         errors.append(f"unexpected tint fragment shader '{fragment_shaders[0]}'")
 
     mapped_shader = uses_mapped_shader(lines)
     if fragment_shaders:
         fragment_shader = fragment_shaders[0].split(maxsplit=1)[1].lower()
-        if mapped_shader and fragment_shader != TINT_MAPPED_FRAGMENT_SHADER:
+        if mapped_shader and fragment_shader not in {
+            TINT_MAPPED_FRAGMENT_SHADER,
+            TINT_HAIR_MAPPED_FRAGMENT_SHADER,
+        }:
             errors.append("mapped tint material does not use the mapped tint shader")
         elif not mapped_shader and fragment_shader != TINT_FRAGMENT_SHADER:
             errors.append("PLT-only tint material incorrectly uses the mapped tint shader")
@@ -2627,6 +2804,18 @@ def audit() -> None:
     _, remaining_material_plts = find_tint_material_plts()
     if remaining_material_plts:
         errors.append(f"{len(remaining_material_plts)} 3D tint material PLTs remain")
+    active_dynamic_cloak_plts, all_dynamic_cloak_plts = find_plts(is_dynamic_cloak_plt)
+    generated_dynamic_cloaks = [
+        material for material in entries if is_dynamic_cloak_material(material)
+    ]
+    if generated_dynamic_cloaks:
+        errors.append(
+            f"{len(generated_dynamic_cloaks)} runtime-selected cloak PLTs were converted to materials"
+        )
+    if not active_dynamic_cloak_plts:
+        errors.append("no runtime-selected native cloak PLTs remain")
+    if len(all_dynamic_cloak_plts) != len(active_dynamic_cloak_plts):
+        errors.append("lower-priority runtime-selected cloak PLT duplicates remain")
     outside_source_plts = find_tint_material_plts_outside_sources()
     if outside_source_plts:
         errors.append(f"{len(outside_source_plts)} 3D tint material PLTs exist outside configured sources")
@@ -2701,10 +2890,7 @@ def audit() -> None:
                 for error in check_tint_mtr_structure(material_path)
             )
             mtr = material_path.read_text(encoding="utf-8-sig").lower()
-            fragment_shader = (
-                TINT_MAPPED_FRAGMENT_SHADER if uses_mapped_shader(mtr.splitlines())
-                else TINT_FRAGMENT_SHADER
-            )
+            fragment_shader = tint_fragment_shader(model, mtr.splitlines())
             required = (
                 "customshadervs ",
                 f"customshaderfs {fragment_shader}",
@@ -2767,10 +2953,7 @@ def audit() -> None:
         )
         mtr = material_path.read_text(encoding="utf-8-sig").lower()
         texture = str(entry.get("texture") or source)
-        fragment_shader = (
-            TINT_MAPPED_FRAGMENT_SHADER if uses_mapped_shader(mtr.splitlines())
-            else TINT_FRAGMENT_SHADER
-        )
+        fragment_shader = tint_fragment_shader(source, mtr.splitlines())
         required = (
             "customshadervs ",
             f"customshaderfs {fragment_shader}",
@@ -2860,9 +3043,19 @@ def audit() -> None:
         errors.append(f"plt_palette.tga: {palette_error}")
     if not PALETTE_TXI.exists() or "mipmap 0" not in PALETTE_TXI.read_text(encoding="utf-8").lower():
         errors.append("plt_palette.txi must disable mipmaps")
-    for shader_path, mapped_shader in (
-        (TINT_SHADER, False),
-        (TINT_MAPPED_SHADER, True),
+    for shader_path, expected_maps in (
+        (
+            TINT_SHADER,
+            {"NORMAL_MAP": 0, "SPECULAR_MAP": 0, "ROUGHNESS_MAP": 0, "SELF_ILLUMINATION_MAP": 0},
+        ),
+        (
+            TINT_MAPPED_SHADER,
+            {"NORMAL_MAP": 1, "SPECULAR_MAP": 1, "ROUGHNESS_MAP": 1, "SELF_ILLUMINATION_MAP": 1},
+        ),
+        (
+            TINT_HAIR_MAPPED_SHADER,
+            {"NORMAL_MAP": 1, "SPECULAR_MAP": 1, "ROUGHNESS_MAP": 0, "SELF_ILLUMINATION_MAP": 0},
+        ),
     ):
         if not shader_path.exists():
             errors.append(f"missing tint fragment shader {shader_path.name}")
@@ -2883,13 +3076,7 @@ def audit() -> None:
         ):
             if token not in shader:
                 errors.append(f"{shader_path.name} missing '{token}'")
-        expected_map_value = "1" if mapped_shader else "0"
-        for macro in (
-            "NORMAL_MAP",
-            "SPECULAR_MAP",
-            "ROUGHNESS_MAP",
-            "SELF_ILLUMINATION_MAP",
-        ):
+        for macro, expected_map_value in expected_maps.items():
             token = f"#define {macro} {expected_map_value}"
             if token not in shader:
                 errors.append(f"{shader_path.name} missing '{token}'")
@@ -2931,7 +3118,8 @@ def audit() -> None:
 
     print(
         f"Tint map audit passed: {len(entries)} materials, {len(model_material_rows)} model/material rows, "
-        f"no 3D material PLTs, and {len(active_icon_plts)} required dynamic inventory icon PLTs remain."
+        f"no addressable 3D material PLTs, {len(active_dynamic_cloak_plts)} native dynamic cloak PLTs, "
+        f"and {len(active_icon_plts)} required dynamic inventory icon PLTs remain."
     )
 
 
@@ -2949,6 +3137,16 @@ def main() -> None:
         "--refresh-materials",
         action="store_true",
         help="regenerate MTR declarations without changing packed maps or meshes",
+    )
+    action.add_argument(
+        "--refresh-material",
+        metavar="RESREF",
+        help="regenerate one MTR declaration and its recorded scoped aliases",
+    )
+    action.add_argument(
+        "--retain-dynamic-cloaks",
+        action="store_true",
+        help="remove invalid generated cloak bindings after restoring native cloak PLTs",
     )
     action.add_argument(
         "--refresh-packed-checksums",
@@ -2979,6 +3177,10 @@ def main() -> None:
         relocate()
     elif arguments.refresh_materials:
         refresh_materials()
+    elif arguments.refresh_material:
+        refresh_material(arguments.refresh_material)
+    elif arguments.retain_dynamic_cloaks:
+        retain_dynamic_cloak_plts()
     elif arguments.refresh_packed_checksums:
         refresh_packed_checksums()
     elif arguments.deduplicate:
