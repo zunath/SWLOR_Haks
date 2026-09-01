@@ -18,6 +18,7 @@ import argparse
 import hashlib
 import json
 import re
+import shlex
 import struct
 import sys
 from collections.abc import Callable
@@ -32,9 +33,11 @@ INVENTORY_ICON_PLT_PATTERN = re.compile(
     re.IGNORECASE,
 )
 DYNAMIC_CLOAK_PLT_PATTERN = re.compile(r"^cloak_[0-9]{3}$", re.IGNORECASE)
+STOCK_CLOAK_TEXTURE_MAX = 16
 TINT_DIRECTORIES = tuple(REPOSITORY_ROOT / f"sw_tint{index}" for index in range(3))
 OUTPUT_MTR_DIRECTORY = REPOSITORY_ROOT / "sw_tint_mtr"
 OUTPUT_2DA = REPOSITORY_ROOT / "sw_2da" / "tintmap.2da"
+CLOAK_MODEL_2DA = REPOSITORY_ROOT / "sw_2da" / "cloakmodel.2da"
 HAK_CONFIG = REPOSITORY_ROOT / "hakbuilder.json"
 SOURCE_MANIFEST = Path(__file__).with_name("TintMapSources.json")
 MODULAR_FALLBACKS = Path(__file__).with_name("TintMapFallbacks.json")
@@ -178,6 +181,10 @@ TEXTURE1_ALPHA_MATERIALS = {"pfh0_neck199", "pmh0_head248", "pmh0_neck199"}
 TEXTURE9_ALPHA_MATERIALS = {
     "pfh0_head232": "pfh0_head232_a",
     "pmh0_head231": "pmh0_head231_a",
+}
+AUTHORED_HAIR_MAPS = {
+    "pfh0_head232": {1: "pfh0_head232_n", 2: "pfh0_head232_s"},
+    "pmh0_head231": {1: "pmh0_head231_n", 2: "pmh0_head231_s"},
 }
 # Both resources were authored with fslit_aniso_nm. The female declaration was
 # a source MTR removed by the conversion, while the male declaration remains a
@@ -409,6 +416,39 @@ def is_dynamic_cloak_plt(path: Path) -> bool:
 
 def is_dynamic_cloak_material(material: str) -> bool:
     return DYNAMIC_CLOAK_PLT_PATTERN.fullmatch(material) is not None
+
+
+def required_dynamic_cloak_resrefs() -> set[str]:
+    """Return every non-stock cloak texture selected by cloakmodel.2da."""
+    if not CLOAK_MODEL_2DA.exists():
+        raise RuntimeError(f"Missing cloak appearance table: {CLOAK_MODEL_2DA}")
+
+    lines = CLOAK_MODEL_2DA.read_text(encoding="utf-8-sig").splitlines()
+    header_index = next(
+        (
+            index
+            for index, line in enumerate(lines)
+            if {"MODEL", "TEXTURE"}.issubset(set(shlex.split(line)))
+        ),
+        None,
+    )
+    if header_index is None:
+        raise RuntimeError("cloakmodel.2da has no MODEL/TEXTURE header")
+
+    columns = shlex.split(lines[header_index])
+    texture_index = columns.index("TEXTURE") + 1  # Data rows start with their row number.
+    resrefs: set[str] = set()
+    for line in lines[header_index + 1 :]:
+        tokens = shlex.split(line)
+        if len(tokens) <= texture_index:
+            continue
+        texture = tokens[texture_index]
+        if texture.isdigit() and int(texture) > STOCK_CLOAK_TEXTURE_MAX:
+            resrefs.add(f"cloak_{int(texture):03d}")
+
+    if not resrefs:
+        raise RuntimeError("cloakmodel.2da has no non-stock dynamic cloak textures")
+    return resrefs
 
 
 def is_tint_material_plt(path: Path) -> bool:
@@ -2812,8 +2852,19 @@ def audit() -> None:
         errors.append(
             f"{len(generated_dynamic_cloaks)} runtime-selected cloak PLTs were converted to materials"
         )
-    if not active_dynamic_cloak_plts:
-        errors.append("no runtime-selected native cloak PLTs remain")
+    required_dynamic_cloaks = required_dynamic_cloak_resrefs()
+    missing_dynamic_cloaks = required_dynamic_cloaks - set(active_dynamic_cloak_plts)
+    if missing_dynamic_cloaks:
+        errors.append(
+            f"{len(missing_dynamic_cloaks)} runtime-selected native cloak PLTs are missing: "
+            + ", ".join(sorted(missing_dynamic_cloaks)[:10])
+        )
+    unexpected_dynamic_cloaks = set(active_dynamic_cloak_plts) - required_dynamic_cloaks
+    if unexpected_dynamic_cloaks:
+        errors.append(
+            f"{len(unexpected_dynamic_cloaks)} native cloak PLTs are not selected by cloakmodel.2da: "
+            + ", ".join(sorted(unexpected_dynamic_cloaks)[:10])
+        )
     if len(all_dynamic_cloak_plts) != len(active_dynamic_cloak_plts):
         errors.append("lower-priority runtime-selected cloak PLT duplicates remain")
     outside_source_plts = find_tint_material_plts_outside_sources()
@@ -2915,6 +2966,12 @@ def audit() -> None:
                 alpha_texture = TEXTURE9_ALPHA_MATERIALS[model]
                 if f"texture9 {alpha_texture}" not in mtr or "parameter float usetexture9alpha 1.0" not in mtr:
                     errors.append(f"{model}: MTR lost required dedicated alpha-map compatibility")
+            if model in AUTHORED_HAIR_MAPS:
+                for texture_slot, texture_resref in AUTHORED_HAIR_MAPS[model].items():
+                    if f"texture{texture_slot} {texture_resref}" not in mtr:
+                        errors.append(
+                            f"{model}: MTR lost authored texture{texture_slot} binding '{texture_resref}'"
+                        )
 
     for texture, sources in texture_sources.items():
         if len(sources) > 1:
