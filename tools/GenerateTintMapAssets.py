@@ -1614,10 +1614,11 @@ def dds_header(width: int, height: int, data_length: int) -> bytes:
     header = bytearray(128)
     header[:4] = b"DDS "
     struct.pack_into("<I", header, 4, 124)
-    struct.pack_into("<I", header, 8, 0x00081007)  # CAPS, HEIGHT, WIDTH, PIXELFORMAT, LINEARSIZE
+    struct.pack_into("<I", header, 8, 0x000A1007)  # CAPS, HEIGHT, WIDTH, PIXELFORMAT, LINEARSIZE, MIPMAPCOUNT
     struct.pack_into("<I", header, 12, height)
     struct.pack_into("<I", header, 16, width)
     struct.pack_into("<I", header, 20, data_length)
+    struct.pack_into("<I", header, 28, 1)  # Only the base level is stored.
     struct.pack_into("<I", header, 76, 32)
     struct.pack_into("<I", header, 80, 0x00000004)  # DDPF_FOURCC
     header[84:88] = b"ATI2"
@@ -1635,6 +1636,36 @@ def write_packed_dds(path: Path, width: int, height: int, shade: np.ndarray, lay
         payload[index * 16 + 8 : index * 16 + 16] = green[index * 8 : index * 8 + 8]
 
     path.write_bytes(dds_header(width, height, len(payload)) + payload)
+    write_packed_texture_settings(path)
+
+
+def write_packed_texture_settings(path: Path) -> None:
+    # NWN's compressed-texture loader uses TXI mipmap policy when uploading.
+    # Without this, it reads an implied mip chain past our base-level payload.
+    # Layer IDs are categorical, so generating filtered mipmaps is also wrong.
+    path.with_suffix(".txi").write_text("mipmap 0\n", encoding="ascii")
+
+
+def validate_packed_texture_path(path: Path) -> None:
+    resolved = path.resolve()
+    if resolved.suffix.lower() != ".dds" or resolved.parent not in {
+        directory.resolve() for directory in TINT_DIRECTORIES
+    }:
+        raise RuntimeError(f"Refusing to modify non-tint texture: {resolved}")
+
+
+def remove_packed_texture(path: Path) -> None:
+    validate_packed_texture_path(path)
+    path.unlink(missing_ok=True)
+    path.with_suffix(".txi").unlink(missing_ok=True)
+
+
+def move_packed_texture(source: Path, target: Path) -> None:
+    validate_packed_texture_path(source)
+    validate_packed_texture_path(target)
+    source.replace(target)
+    source.with_suffix(".txi").unlink(missing_ok=True)
+    write_packed_texture_settings(target)
 
 
 def mtr_directive_key(line: str) -> tuple[str, ...] | None:
@@ -2235,7 +2266,7 @@ def generate_preserving_manifest() -> None:
     }
     for old_output in previous_outputs - retained_outputs:
         if old_output.exists():
-            old_output.unlink()
+            remove_packed_texture(old_output)
 
     for material in selected_sources:
         for path in source_mtr_paths(material):
@@ -2278,7 +2309,7 @@ def deduplicate_assets(entries: dict[str, dict[str, object]]) -> None:
         if current_path.resolve() != target_path.resolve():
             if not current_path.exists():
                 raise RuntimeError(f"Missing canonical packed DDS: {current_path}")
-            current_path.replace(target_path)
+            move_packed_texture(current_path, target_path)
 
         retained_outputs.add(target_path.resolve())
         relative_output = target_path.relative_to(REPOSITORY_ROOT).as_posix()
@@ -2298,7 +2329,7 @@ def deduplicate_assets(entries: dict[str, dict[str, object]]) -> None:
         if old_output.exists():
             if not any(directory.resolve() in old_output.parents for directory in TINT_DIRECTORIES):
                 raise RuntimeError(f"Refusing to delete non-tint output: {old_output}")
-            old_output.unlink()
+            remove_packed_texture(old_output)
 
 
 def synchronize_model_material_aliases(
@@ -2373,7 +2404,7 @@ def remove_orphaned_outputs(entries: dict[str, dict[str, object]]) -> int:
     for directory in TINT_DIRECTORIES:
         for path in directory.glob("*.dds"):
             if path.resolve() not in expected_outputs:
-                path.unlink()
+                remove_packed_texture(path)
                 removed_outputs += 1
     return removed_outputs
 
@@ -2482,7 +2513,7 @@ def relocate() -> None:
         if target_path.resolve() not in relocated and current_path.resolve() != target_path.resolve():
             if not current_path.exists():
                 raise RuntimeError(f"Missing packed DDS for relocation: {current_path}")
-            current_path.replace(target_path)
+            move_packed_texture(current_path, target_path)
 
         relocated.add(target_path.resolve())
         entry["output"] = target_path.relative_to(REPOSITORY_ROOT).as_posix()
@@ -2589,7 +2620,7 @@ def retain_dynamic_cloak_plts() -> None:
         if output not in retained_outputs and output.exists():
             if not any(directory.resolve() in output.parents for directory in TINT_DIRECTORIES):
                 raise RuntimeError(f"Refusing to delete non-tint output: {output}")
-            output.unlink()
+            remove_packed_texture(output)
             removed_outputs += 1
 
         generated_materials = {source} | {
@@ -2648,9 +2679,41 @@ def refresh_packed_checksums() -> None:
     )
 
 
-def check_dds(path: Path, width: int, height: int) -> str | None:
+def refresh_packed_metadata() -> None:
+    """Repair single-level DDS/TXI metadata without recompressing any pixels."""
+    entries = load_source_manifest()
+    if not entries:
+        raise RuntimeError("No tint source manifest exists to refresh")
+    outputs = {
+        packed_dds_path(model, entry): (int(entry["width"]), int(entry["height"]))
+        for model, entry in entries.items()
+    }
+    # Validate the complete input before changing any resource.
+    for path, (width, height) in outputs.items():
+        validate_packed_texture_path(path)
+        error = check_dds_payload(path, width, height)
+        if error:
+            raise RuntimeError(f"{path.name}: {error}")
+    changed_headers = 0
+    for path, (width, height) in outputs.items():
+        raw = path.read_bytes()
+        header = dds_header(width, height, len(raw) - 128)
+        if raw[:128] != header:
+            path.write_bytes(header + raw[128:])
+            changed_headers += 1
+        write_packed_texture_settings(path)
+    print(
+        f"Refreshed {len(outputs)} single-level DDS/TXI pairs "
+        f"({changed_headers} headers changed); compressed pixels are unchanged.",
+        flush=True,
+    )
+
+
+def check_dds_payload(path: Path, width: int, height: int) -> str | None:
     if not path.exists():
         return "missing DDS"
+    if width <= 0 or height <= 0:
+        return "DDS dimensions must be positive"
     raw = path.read_bytes()
     blocks_wide = (width + 3) // 4
     blocks_high = (height + 3) // 4
@@ -2659,9 +2722,32 @@ def check_dds(path: Path, width: int, height: int) -> str | None:
         return f"DDS length {len(raw)} != {expected}"
     if raw[:4] != b"DDS " or raw[84:88] != b"ATI2":
         return "DDS is not ATI2/BC5"
+    if struct.unpack_from("<I", raw, 4)[0] != 124 or struct.unpack_from("<I", raw, 76)[0] != 32:
+        return "DDS header size is invalid"
+    if struct.unpack_from("<I", raw, 20)[0] != expected - 128:
+        return "DDS linear size disagrees with base-level payload"
     actual_height, actual_width = struct.unpack_from("<II", raw, 12)
     if (actual_width, actual_height) != (width, height):
         return f"DDS dimensions {(actual_width, actual_height)} != {(width, height)}"
+    return None
+
+
+def check_dds(path: Path, width: int, height: int) -> str | None:
+    error = check_dds_payload(path, width, height)
+    if error:
+        return error
+    raw = path.read_bytes()
+    if not struct.unpack_from("<I", raw, 8)[0] & 0x20000 or struct.unpack_from("<I", raw, 28)[0] != 1:
+        return "DDS must explicitly declare one mip level"
+    txi_path = path.with_suffix(".txi")
+    if not txi_path.exists():
+        return "missing TXI mipmap 0; NWN would read past the base-level DDS payload"
+    directives = [
+        line.split("//", 1)[0].strip().lower().split()
+        for line in txi_path.read_text(encoding="utf-8-sig").splitlines()
+    ]
+    if [tokens for tokens in directives if tokens[:1] == ["mipmap"]] != [["mipmap", "0"]]:
+        return "TXI must declare mipmap 0 exactly once for a single-level DDS"
     return None
 
 
@@ -3189,6 +3275,14 @@ def audit() -> None:
     unexpected_outputs = actual_outputs - expected_outputs
     if unexpected_outputs:
         errors.append(f"{len(unexpected_outputs)} orphaned packed DDS resources remain")
+    expected_settings = {path.with_suffix(".txi") for path in expected_outputs}
+    actual_settings = {
+        path.resolve()
+        for directory in TINT_DIRECTORIES
+        for path in directory.glob("*.txi")
+    }
+    if actual_settings - expected_settings:
+        errors.append(f"{len(actual_settings - expected_settings)} orphaned packed TXI resources remain")
 
     expected_materials = {
         mtr_path(material).resolve()
@@ -3243,6 +3337,11 @@ def main() -> None:
         help="remove invalid generated cloak bindings after restoring native cloak PLTs",
     )
     action.add_argument(
+        "--refresh-packed-metadata",
+        action="store_true",
+        help="declare single-level DDS textures and disable implied mip uploads without changing pixels",
+    )
+    action.add_argument(
         "--refresh-packed-checksums",
         action="store_true",
         help="record decoded packed-map checksums without rewriting DDS resources",
@@ -3277,6 +3376,8 @@ def main() -> None:
         retain_dynamic_cloak_plts()
     elif arguments.refresh_packed_checksums:
         refresh_packed_checksums()
+    elif arguments.refresh_packed_metadata:
+        refresh_packed_metadata()
     elif arguments.deduplicate:
         deduplicate()
     elif arguments.prune:

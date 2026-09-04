@@ -20,6 +20,7 @@ import argparse
 import ctypes as ct
 from ctypes import wintypes as wt
 from itertools import product
+import math
 from pathlib import Path
 import re
 import struct
@@ -230,6 +231,189 @@ def compile_engine_pairs(test, engine, pairs):
     return checks
 
 
+def tint_dds_layout(header: bytes, size: int, txi: str):
+    """Reject the ambiguous base-only DDS inputs that NWN uploaded as mip chains.
+
+    The crash dump showed glCompressedTexImage2D reading mip level 1 beyond the
+    allocation. Packed tint maps intentionally contain only level 0: require
+    BOTH an explicit count and the texture policy that disables mip uploading.
+    A valid generic DDS header alone does not establish NWN loader safety.
+    """
+    if len(header) != 128 or header[:4] != b"DDS " or header[84:88] != b"ATI2":
+        raise AssertionError("Tint texture must have a complete ATI2 DDS header")
+    flags, height, width, linear_size, _, count = struct.unpack_from("<6I", header, 8)
+    if not flags & 0x20000 or count != 1:
+        raise AssertionError("Base-only tint DDS requires DDSD_MIPMAPCOUNT and explicit mipmap count 1")
+    if width <= 0 or height <= 0:
+        raise AssertionError("Tint DDS dimensions must be positive")
+    payload_size = ((width + 3) // 4) * ((height + 3) // 4) * 16
+    if linear_size != payload_size or size != 128 + payload_size:
+        raise AssertionError("Tint DDS declared base-level dimensions must exactly cover its BC5 payload")
+    directives = re.findall(r"^\s*mipmap\s+(\d+)\s*$", txi, re.MULTILINE | re.IGNORECASE)
+    if directives != ["0"]:
+        raise AssertionError("Base-only tint DDS requires a sibling TXI with one mipmap 0 directive")
+    return width, height, payload_size
+
+
+def audit_tint_dds(root: Path):
+    paths = sorted(path for directory in ("sw_tint0", "sw_tint1", "sw_tint2")
+        for path in (root / directory).glob("*.dds"))
+    if not paths:
+        raise AssertionError("No packed tint DDS assets found")
+    for path in paths:
+        with path.open("rb") as source:
+            header = source.read(128)
+        txi_path = path.with_suffix(".txi")
+        txi = txi_path.read_text() if txi_path.exists() else ""
+        try:
+            tint_dds_layout(header, path.stat().st_size, txi)
+        except AssertionError as error:
+            raise AssertionError(f"Unsafe NWN tint texture {path}: {error}") from error
+    # Prove the former count-zero/default-mipmap combination cannot get through
+    # this guard, even though uploading its base bytes manually would succeed.
+    zero_count = bytearray(header)
+    struct.pack_into("<I", zero_count, 8, struct.unpack_from("<I", zero_count, 8)[0] & ~0x20000)
+    struct.pack_into("<I", zero_count, 28, 0)
+    for invalid_header, invalid_txi in ((zero_count, txi), (header, ""), (header, "mipmap 1\n")):
+        try:
+            tint_dds_layout(invalid_header, path.stat().st_size, invalid_txi)
+        except AssertionError:
+            continue
+        raise AssertionError("Unsafe DDS mipmap negative control unexpectedly passed")
+    print(f"NWN tint texture input checks passed: {len(paths)} DDS/TXI pairs; ambiguous count, missing TXI, "
+        "and enabled-mipmap negative controls rejected.", flush=True)
+
+
+def draw_engine_materials(test, engine, root: Path):
+    """Draw production shaders with the reported NPCs' compressed DDS bytes.
+
+    This validates native GL uploads and draws, not NWN's separate DDS parser.
+    Exercise both base-level and generated-mipmap sampling without fabricating
+    any bytes beyond the payload declared by each DDS header.
+    """
+    gl = test.gl
+    attribute = gl.function("glGetAttribLocation", ct.c_int, ct.c_uint, ct.c_char_p)
+    attribute_value = gl.function("glVertexAttrib4f", None, ct.c_uint, ct.c_float, ct.c_float, ct.c_float, ct.c_float)
+    attribute_pointer = gl.function("glVertexAttribPointer", None, ct.c_uint, ct.c_int, ct.c_uint, ct.c_ubyte, ct.c_int, ct.c_void_p)
+    enable_attribute = gl.function("glEnableVertexAttribArray", None, ct.c_uint)
+    disable_attribute = gl.function("glDisableVertexAttribArray", None, ct.c_uint)
+    matrix = gl.function("glUniformMatrix4fv", None, ct.c_int, ct.c_int, ct.c_ubyte, ct.c_void_p)
+    compressed_image = gl.function("glCompressedTexImage2D", None, ct.c_uint, ct.c_int, ct.c_uint,
+        ct.c_int, ct.c_int, ct.c_int, ct.c_int, ct.c_void_p)
+    generate_mipmap = gl.function("glGenerateMipmap", None, ct.c_uint)
+    draw = gl.function("glDrawArrays", None, ct.c_uint, ct.c_int, ct.c_int)
+    finish = gl.function("glFinish", None)
+    error = gl.function("glGetError", ct.c_uint)
+    clear_color = gl.function("glClearColor", None, ct.c_float, ct.c_float, ct.c_float, ct.c_float)
+    clear = gl.function("glClear", None, ct.c_uint)
+    gl.function("glPixelStorei", None, ct.c_uint, ct.c_int)(0x0CF5, 1)
+    identity = (ct.c_float * 16)(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)
+    positions = (ct.c_float * 12)(-1, -1, -0.5, 1, 3, -1, -0.5, 1, -1, 3, -0.5, 1)
+    coordinates = (ct.c_float * 6)(0, 0, 2, 0, 0, 2)
+
+    def check(label):
+        value = error()
+        if value:
+            raise AssertionError(f"{label}: OpenGL error {value:#x}")
+
+    def tga(unit, path):
+        data = path.read_bytes()
+        width, height, bits = struct.unpack_from("<HHB", data, 12)
+        start = 18 + data[0]
+        payload = data[start:]
+        if data[2] != 2 or bits not in (24, 32) or len(payload) != width * height * (bits // 8):
+            raise AssertionError(f"Unexpected raw TGA layout: {path}")
+        test.active_texture(0x84C0 + unit)
+        test.bind_texture(0x0DE1, unit + 1)
+        pixels = ct.create_string_buffer(payload)
+        test.texture_image(0x0DE1, 0, 0x8058, width, height, 0,
+            0x80E1 if bits == 32 else 0x80E0, 0x1401, pixels)
+        check(f"TGA upload {path.name}")
+
+    checks = 0
+    for material in ("pme0_head056", "pfh0_head121", "pfh0_robe187"):
+        source = (root / "sw_tint_mtr" / f"{material}.mtr").read_text()
+        vertex = re.search(r"^customshaderVS\s+(\S+)", source, re.MULTILINE)[1]
+        fragment = re.search(r"^customshaderFS\s+(\S+)", source, re.MULTILINE)[1]
+        mask = re.search(r"^texture7\s+(\S+)", source, re.MULTILINE)[1]
+        dds = next(root.glob(f"sw_tint*/{mask}.dds"))
+        data = dds.read_bytes()
+        width, height, _ = tint_dds_layout(data[:128], len(data), dds.with_suffix(".txi").read_text())
+        payload = data[128:]
+        pixels = ct.create_string_buffer(payload)
+        for quality, lighting in product(range(3), range(2)):
+            configuration = quality, lighting, 0, 0, 0
+            program = test.program(engine.source(fragment, True, configuration),
+                engine.source(vertex, False, configuration))
+            attributes = []
+            try:
+                test.use(program)
+                for name in ("m_mv", "m_proj", "m_texture", "m_view_inv", "m_view"):
+                    matrix(test.location(program, name.encode()), 1, 0, identity)
+                for name, size, buffer in (("vPos", 4, positions), ("vTcIn", 2, coordinates)):
+                    index = attribute(program, name.encode())
+                    if index >= 0:
+                        enable_attribute(index)
+                        attribute_pointer(index, size, 0x1406, 0, 0, buffer)
+                        attributes.append(index)
+                for name, value in {"vNormal": (0, 0, 1, 0), "vTangent": (1, 0, 0, 0),
+                        "fHandedness": (1, 0, 0, 0), "vColor": (1, 1, 1, 1)}.items():
+                    index = attribute(program, name.encode())
+                    if index >= 0:
+                        attribute_value(index, *value)
+                for name in ("materialFrontDiffuse", "materialFrontAmbient", "materialFrontEmissive"):
+                    test.vector(test.location(program, name.encode()), 1, 1, 1, 1)
+                test.integer(test.location(program, b"staticLighting"), 1)
+                test.scalar(test.location(program, b"tintMapWidth"), width)
+                test.scalar(test.location(program, b"tintMapHeight"), height)
+                for unit in range(16):
+                    test.active_texture(0x84C0 + unit)
+                    test.bind_texture(0x0DE1, unit + 1)
+                    test.texture_parameter(0x0DE1, 0x2800, 0x2601)
+                    test.texture_parameter(0x0DE1, 0x2801, 0x2601)
+                    test.texture_parameter(0x0DE1, 0x813D, 0)
+                    dummy = (ct.c_float * 4)(0.5, 0.5, 1, 1)
+                    test.texture_image(0x0DE1, 0, 0x8814, 1, 1, 0, 0x1908, 0x1406, dummy)
+                    test.integer(test.location(program, f"texUnit{unit}".encode()), unit)
+                test.integer(test.location(program, b"texUnitEnv"), 14)
+                test.integer(test.location(program, b"texUnitEnvCube"), 15)
+                test.active_texture(0x84C0 + 15)
+                test.bind_texture(0x8513, 200)
+                for face in range(6):
+                    test.texture_image(0x8515 + face, 0, 0x8814, 1, 1, 0, 0x1908, 0x1406, dummy)
+                test.texture_parameter(0x8513, 0x2801, 0x2601)
+                test.texture_parameter(0x8513, 0x813D, 0)
+                tga(0, root / "sw_item" / "plt_white.tga")
+                tga(10, root / "sw_item" / "plt_palette.tga")
+                test.integer(test.location(program, b"texture0Bound"), 1)
+                test.active_texture(0x84C0 + 7)
+                test.bind_texture(0x0DE1, 8)
+                compressed_image(0x0DE1, 0, 0x8DBD, width, height, 0, len(payload), pixels)
+                check(f"BC5 compressed upload {dds.name}")
+                for mip_mode in ("base-level", "default-incomplete", "generated-mips"):
+                    test.texture_parameter(0x0DE1, 0x813D, 0 if mip_mode == "base-level" else 1000)
+                    test.texture_parameter(0x0DE1, 0x2801, 0x2601 if mip_mode == "base-level" else 0x2703)
+                    if mip_mode == "generated-mips":
+                        generate_mipmap(0x0DE1)
+                    check(f"BC5 {mip_mode} setup {dds.name}")
+                    clear_color(0.9, 0.1, 0.9, 0.123)
+                    clear(0x4000)
+                    draw(0x0004, 0, 3)
+                    finish()
+                    check(f"Production draw {material}/{quality}/{lighting}/{mip_mode}")
+                    result = (ct.c_float * 4)()
+                    test.read(4, 4, 1, 1, 0x1908, 0x1406, result)
+                    if not all(math.isfinite(value) for value in result) or abs(result[3] - 1) > 0.001:
+                        raise AssertionError(f"Production draw did not produce a finite opaque fragment: {tuple(result)}")
+                    checks += 1
+            finally:
+                for index in attributes:
+                    disable_attribute(index)
+                test.delete_program(program)
+    print(f"Production draws passed: {checks}; actual NPC BC5 DDS + atlas/white TGA, all quality/lighting modes, "
+        "base/default/generated mip sampling. NWN DDS parsing is not exercised.", flush=True)
+
+
 ADAPTER = """
 #define lowp
 #define highp
@@ -407,6 +591,7 @@ def main():
     client = args.client_exe or args.game_data.parent / "bin" / "win32" / "nwmain.exe"
     engine = EngineShaders(args.game_data, root / "sw_shader", client)
     pairs, materials = production_pairs(root / "sw_tint_mtr")
+    audit_tint_dds(root)
     gl = OpenGL()
     checks = 0
     try:
@@ -414,6 +599,7 @@ def main():
         test = MaterialTest(gl)
         print(f"Validating {len(pairs)} production shader pairs from {materials} generated MTRs on {renderer}.", flush=True)
         compile_engine_pairs(test, engine, pairs)
+        draw_engine_materials(test, engine, root)
         for name in ("fs_plt_tinter", "fs_plt_tinter_nm", "fs_plt_hair_nm"):
             shader = (root / "sw_shader" / f"{name}.shd").read_text()
             fragment = "#version 120\n" + shader.replace('#include "inc_standard"', ADAPTER + material + STANDARD)
