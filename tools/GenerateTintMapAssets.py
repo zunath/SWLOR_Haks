@@ -2800,6 +2800,16 @@ def tint_shader_material_errors(shader: str) -> list[str]:
     of the required fix cannot satisfy the executable ordering check.
     """
     code = re.sub(r"/\*.*?\*/|//[^\n]*", "", shader, flags=re.DOTALL)
+    if (
+        re.search(r"(?m)^\s*#define\s+NORMAL_MAP\s+0\b", code)
+        and re.search(r"\btexture2D\s*\(\s*texUnit1\b", code)
+        and not re.search(
+            r"#if\s+NORMAL_MAP\s*!=\s*1\s*"
+            r"uniform\s+sampler2D\s+texUnit1\s*;\s*#endif",
+            code,
+        )
+    ):
+        return ["must declare the cutout alpha sampler when normal mapping is disabled"]
     statements = (
         r"\bSetupStandardShaderInputs\s*\(\s*\)\s*;",
         r"\bfEnvMapLevel\s*=\s*1\.0\s*-\s*paletteColor\.a\s*;",

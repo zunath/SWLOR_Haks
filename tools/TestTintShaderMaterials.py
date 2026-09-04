@@ -1,10 +1,15 @@
 #!/usr/bin/env python3
-"""Exercise the tint shaders' material setup on Windows OpenGL.
+"""Compile production tint shader pairs and exercise material setup on Windows.
 
-Uses a hidden, temporary WGL context and the installed game's unmodified
-inc_material shader. The small inc_standard adapter reproduces its diffuse
-binding fallback and exposes the resulting material values as framebuffer
-colors. No game process, visible window, or third-party Python module is used.
+First compiles and links the actual VS/FS pairs used by generated MTRs, with
+the complete installed engine includes and GLSL preamble from nwmain.exe.
+There are no replacement uniforms, samplers, or functions in this check.
+All quality modes and lighting/gamma/keyhole/discard configurations are tested.
+
+The SEPARATE numeric regression uses an inc_standard adapter to expose cached
+material values. It is not a substitute for compiling the production shaders.
+Both checks use a hidden, temporary WGL context; no game process, visible
+window, or third-party Python module is used.
 
 Run: python tools/TestTintShaderMaterials.py --game-data ".../Neverwinter Nights/data"
 """
@@ -14,7 +19,9 @@ from __future__ import annotations
 import argparse
 import ctypes as ct
 from ctypes import wintypes as wt
+from itertools import product
 from pathlib import Path
+import re
 import struct
 
 
@@ -99,6 +106,130 @@ def stock_material(game_data: Path) -> str:
     raise ValueError("Installed base_shaders.bif has no SetupSpecularity shader")
 
 
+class EngineShaders:
+    """Resolve exact shader resrefs through the installed KEY/BIF index."""
+
+    def __init__(self, game_data: Path, shader_root: Path, client: Path):
+        self.game_data = game_data
+        self.shader_root = shader_root
+        self.resources = {}
+        self.archives = {}
+        key = (game_data / "nwn_base.key").read_bytes()
+        if key[:8] != b"KEY V1  ":
+            raise ValueError("Unsupported nwn_base.key format")
+        _, count, bif_table, resource_table = struct.unpack_from("<IIII", key, 8)
+        for index in range(count):
+            name, kind, resource_id = struct.unpack_from("<16sHI", key, resource_table + index * 22)
+            if kind != 2069:
+                continue
+            _, name_start, name_size, _ = struct.unpack_from("<IIHH", key, bif_table + (resource_id >> 20) * 12)
+            filename = key[name_start:name_start + name_size].rstrip(b"\0").decode().replace("\\", "/")
+            self.resources[name.rstrip(b"\0").decode().lower()] = (
+                game_data.parent / filename, resource_id & 0xFFFFF)
+        strings = client.read_bytes().split(b"\0")
+        templates = [value.decode("ascii") for value in strings
+            if value.startswith(b"#version 330 core\n") and b"SHADER_QUALITY_MODE" in value]
+        outputs = [value.decode("ascii") for value in strings
+            if value.startswith(b"#define gl_FragColor ") and b"out vec4" in value]
+        if len(templates) != 1 or len(outputs) != 1:
+            raise ValueError("Cannot identify the installed client's GLSL preamble/output declaration")
+        self.preamble_template = templates[0]
+        self.fragment_output = outputs[0]
+
+    def read(self, name: str) -> str:
+        local = self.shader_root / f"{name}.shd"
+        if local.exists():
+            return local.read_text(encoding="utf-8")
+        if name not in self.resources:
+            raise ValueError(f"Unresolved engine shader include: {name}")
+        path, index = self.resources[name]
+        if path not in self.archives:
+            self.archives[path] = path.read_bytes()
+        archive = self.archives[path]
+        if archive[:8] != b"BIFFV1  ":
+            raise ValueError(f"Unsupported BIF format: {path}")
+        count, _, table = struct.unpack_from("<III", archive, 8)
+        if index >= count:
+            raise ValueError(f"Invalid KEY shader index {index} for {path}")
+        _, start, size, kind = struct.unpack_from("<IIII", archive, table + index * 16)
+        if kind != 2069:
+            raise ValueError(f"KEY/BIF shader type mismatch: {name}")
+        return archive[start:start + size].decode("utf-8")
+
+    def expand(self, name: str, override: str | None = None, stack=()) -> str:
+        if name in stack:
+            raise ValueError(f"Circular shader include: {' -> '.join((*stack, name))}")
+        source = self.read(name) if override is None else override
+        return re.sub(r'^\s*#include\s+"([\w]+)(?:\.shd)?"\s*$',
+            lambda match: self.expand(match[1].lower(), stack=(*stack, name)),
+            source, flags=re.MULTILINE)
+
+    def source(self, name: str, fragment: bool, configuration, override=None) -> str:
+        quality, lighting, gamma, keyhole, discard = configuration
+        # The scalar controls and compatibility declarations follow the exact
+        # format embedded in this installation's client. Lights/bones are fixed
+        # array capacities, not shader feature substitutes.
+        preamble = self.preamble_template % (
+            32, 128, gamma, lighting, quality, keyhole, 0, "0", "0", discard, 0,
+            "in" if fragment else "out", self.fragment_output if fragment else "")
+        return preamble + self.expand(name, override)
+
+
+def production_pairs(material_root: Path):
+    pairs = set()
+    count = 0
+    for path in material_root.glob("*.mtr"):
+        source = path.read_text(encoding="utf-8")
+        vertex = re.search(r"^customshaderVS\s+(\S+)", source, re.MULTILINE | re.IGNORECASE)
+        fragment = re.search(r"^customshaderFS\s+(\S+)", source, re.MULTILINE | re.IGNORECASE)
+        if not vertex or not fragment:
+            raise ValueError(f"Generated tint material has no explicit shader pair: {path}")
+        pairs.add((vertex[1].lower(), fragment[1].lower()))
+        count += 1
+    if not pairs:
+        raise ValueError(f"No generated material shader pairs in {material_root}")
+    return sorted(pairs), count
+
+
+def compile_engine_pairs(test, engine, pairs):
+    checks = 0
+    for quality, lighting, gamma, keyhole, discard in product(range(3), range(2), range(2), range(2), range(2)):
+        configuration = quality, lighting, gamma, keyhole, discard
+        for vertex, fragment in pairs:
+            try:
+                program = test.program(engine.source(fragment, True, configuration),
+                    engine.source(vertex, False, configuration))
+            except AssertionError as error:
+                raise AssertionError(f"Production {vertex}/{fragment}, quality={quality}, "
+                    f"fragment-lighting={lighting}, gamma={gamma}, keyhole={keyhole}, "
+                    f"no-discard={discard}:\n{error}") from error
+            test.delete_program(program)
+            checks += 1
+    print(f"Production engine compile/link passed: {checks} pairs across Minimal/Performance/High Quality "
+        "and both fragment-lighting, gamma, keyhole, and no-discard settings.", flush=True)
+    # Removing the base shader's explicit cutout sampler must fail using the
+    # real engine includes, which only declare texUnit1 for NORMAL_MAP == 1.
+    # This is the compile failure the old numeric adapter masked.
+    base = engine.read("fs_plt_tinter")
+    broken, removed = re.subn(r"\buniform\s+sampler2D\s+texUnit1\s*;", "", base)
+    if removed != 1:
+        raise AssertionError("Expected one explicit texUnit1 declaration for the base shader negative control")
+    for quality in range(3):
+        configuration = quality, 0, 0, 1, 0
+        try:
+            program = test.program(engine.source("fs_plt_tinter", True, configuration, broken),
+                engine.source("vslit_sm", False, configuration))
+        except AssertionError as error:
+            message = str(error)
+            if "texUnit1" not in message or not any(word in message for word in ("undefined variable", "undeclared")):
+                raise AssertionError(f"Unexpected negative-control compile error: {error}") from error
+        else:
+            test.delete_program(program)
+            raise AssertionError(f"Missing texUnit1 was not rejected for quality {quality}")
+    print("Production engine negative controls passed: missing texUnit1 fails all three quality modes.", flush=True)
+    return checks
+
+
 ADAPTER = """
 #define lowp
 #define highp
@@ -111,7 +242,9 @@ ADAPTER = """
 const vec4 COLOR_WHITE = vec4(1.0);
 const vec4 COLOR_BLACK = vec4(0.0);
 uniform sampler2D texUnit0;
+#if NORMAL_MAP == 1
 uniform sampler2D texUnit1;
+#endif
 uniform sampler2D texUnit2;
 uniform sampler2D texUnit3;
 uniform int texture0Bound;
@@ -194,11 +327,12 @@ class MaterialTest:
             raise RuntimeError(f"Incomplete OpenGL test framebuffer: {status:#x}")
         gl.function("glViewport", None, ct.c_int, ct.c_int, ct.c_int, ct.c_int)(0, 0, 8, 8)
 
-    def program(self, fragment: str) -> int:
+    def program(self, fragment: str, vertex: str | None = None) -> int:
         shaders = []
         program = self.create_program()
         try:
-            vertex = "#version 120\nvarying vec2 vVertexTexCoords; void main() { gl_Position = gl_Vertex; vVertexTexCoords = vec2(0.5); }"
+            if vertex is None:
+                vertex = "#version 120\nvarying vec2 vVertexTexCoords; void main() { gl_Position = gl_Vertex; vVertexTexCoords = vec2(0.5); }"
             for kind, source in ((0x8B31, vertex), (0x8B30, fragment)):
                 shader = self.create_shader(kind)
                 shaders.append(shader)
@@ -266,14 +400,20 @@ def near(actual, expected, label):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--game-data", type=Path, required=True)
+    parser.add_argument("--client-exe", type=Path, help="defaults to the installed bin/win32/nwmain.exe")
     args = parser.parse_args()
     material = stock_material(args.game_data)
     root = Path(__file__).resolve().parents[1]
+    client = args.client_exe or args.game_data.parent / "bin" / "win32" / "nwmain.exe"
+    engine = EngineShaders(args.game_data, root / "sw_shader", client)
+    pairs, materials = production_pairs(root / "sw_tint_mtr")
     gl = OpenGL()
     checks = 0
     try:
         renderer = gl.function("glGetString", ct.c_char_p, ct.c_uint)(0x1F01).decode()
         test = MaterialTest(gl)
+        print(f"Validating {len(pairs)} production shader pairs from {materials} generated MTRs on {renderer}.", flush=True)
+        compile_engine_pairs(test, engine, pairs)
         for name in ("fs_plt_tinter", "fs_plt_tinter_nm", "fs_plt_hair_nm"):
             shader = (root / "sw_shader" / f"{name}.shd").read_text()
             fragment = "#version 120\n" + shader.replace('#include "inc_standard"', ADAPTER + material + STANDARD)
@@ -304,7 +444,7 @@ def main():
                 test.delete_program(program)
     finally:
         gl.close()
-    print(f"Tint shader GPU material checks passed: {checks} on {renderer}; all three legacy variants reproduced chrome.")
+    print(f"Separate material-state adapter checks passed: {checks}; all three legacy variants reproduced chrome.")
 
 
 if __name__ == "__main__":
