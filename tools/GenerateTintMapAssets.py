@@ -134,6 +134,9 @@ TINT_ROW_PARAMETER_LINES = tuple(
     f"{(base_row + 0.5) / PALETTE_TEXTURE_HEIGHT:.6f} 0.0 0.0 0.0"
     for uniform_name, base_row in TINT_ROW_PARAMETERS
 )
+# Obsolete transports are recognized only so regeneration removes them. The
+# shaders expose palette rows; retaining these declarations causes a failed
+# uniform lookup and log entry for every parameter on every new material.
 TINT_COLOR_PARAMETER_BASES = (
     "tintSkin",
     "tintHair",
@@ -147,18 +150,10 @@ TINT_COLOR_PARAMETER_BASES = (
     "tintTat2",
 )
 TINT_LEGACY_COLOR_PARAMETERS = TINT_COLOR_PARAMETER_BASES
-TINT_LEGACY_COLOR_PARAMETER_LINES = tuple(
-    f"parameter float {uniform_name} 0.0 0.0 0.0 0.0"
-    for uniform_name in TINT_LEGACY_COLOR_PARAMETERS
-)
 TINT_COLOR_PARAMETERS = tuple(
     f"{uniform_name}{component}"
     for uniform_name in TINT_COLOR_PARAMETER_BASES
     for component in ("R", "G", "B")
-)
-TINT_COLOR_PARAMETER_LINES = tuple(
-    f"parameter float {uniform_name} 0.0"
-    for uniform_name in TINT_COLOR_PARAMETERS
 )
 TINT_CUSTOM_MODE_PARAMETERS = (
     "useCustomSkin",
@@ -172,9 +167,9 @@ TINT_CUSTOM_MODE_PARAMETERS = (
     "useCustomTat1",
     "useCustomTat2",
 )
-TINT_CUSTOM_MODE_PARAMETER_LINES = tuple(
-    f"parameter int {uniform_name} 0"
-    for uniform_name in TINT_CUSTOM_MODE_PARAMETERS
+OBSOLETE_TINT_PARAMETERS = frozenset(
+    name.lower()
+    for name in TINT_LEGACY_COLOR_PARAMETERS + TINT_COLOR_PARAMETERS + TINT_CUSTOM_MODE_PARAMETERS
 )
 TEXTURE1_ALPHA_SHADERS = {"fs_plt_hair", "pfh0_neck199", "pmh0_neck199"}
 TEXTURE1_ALPHA_MATERIALS = {"pfh0_neck199", "pmh0_head248", "pmh0_neck199"}
@@ -640,20 +635,29 @@ def read_binary_model_material_fields(
     path: Path,
     data: bytes,
 ) -> list[tuple[int, str, int, str | None]]:
+    if len(data) < FILE_HEADER_SIZE + 76:
+        raise ValueError(f"{path}: expected an NWN1 binary MDL")
+    marker, model_size, raw_size = struct.unpack_from("<III", data)
+    if marker != 0 or model_size < 76:
+        raise ValueError(f"{path}: expected an NWN1 binary MDL")
+    model_end = FILE_HEADER_SIZE + model_size
+    if model_end + raw_size != len(data):
+        raise ValueError(
+            f"{path}: declared model/raw section lengths require {model_end + raw_size} bytes, "
+            f"but the file has {len(data)} bytes"
+        )
+
     def read_uint32(offset: int) -> int:
-        if offset < 0 or offset + 4 > len(data):
+        if offset < FILE_HEADER_SIZE or offset + 4 > model_end:
             raise ValueError(f"{path}: truncated uint32 at 0x{offset:x}")
         return struct.unpack_from("<I", data, offset)[0]
 
     def read_resref(offset: int, length: int) -> str:
-        if offset < 0 or offset + length > len(data):
+        if offset < FILE_HEADER_SIZE or offset + length > model_end:
             raise ValueError(f"{path}: truncated resref at 0x{offset:x}")
         return data[offset : offset + length].split(b"\0", 1)[0].decode(
             "ascii", errors="strict"
         ).lower()
-
-    if len(data) < FILE_HEADER_SIZE + 76:
-        raise ValueError(f"{path}: expected an NWN1 binary MDL")
 
     pending = [read_uint32(FILE_HEADER_SIZE + 72)]
     visited: set[int] = set()
@@ -665,7 +669,7 @@ def read_binary_model_material_fields(
         visited.add(pointer)
 
         node = FILE_HEADER_SIZE + pointer
-        if node < FILE_HEADER_SIZE or node + NODE_HEADER_SIZE > len(data):
+        if node < FILE_HEADER_SIZE or node + NODE_HEADER_SIZE > model_end:
             raise ValueError(f"{path}: invalid node pointer 0x{pointer:x}")
 
         child_array_pointer = read_uint32(node + 72)
@@ -673,7 +677,7 @@ def read_binary_model_material_fields(
         if child_count > 100_000:
             raise ValueError(f"{path}: invalid child count {child_count}")
         child_array = FILE_HEADER_SIZE + child_array_pointer
-        if child_count and child_array + child_count * 4 > len(data):
+        if child_count and child_array + child_count * 4 > model_end:
             raise ValueError(f"{path}: invalid child array")
         pending.extend(read_uint32(child_array + index * 4) for index in range(child_count))
 
@@ -1363,6 +1367,49 @@ def build_model_material_rows(
     return rows
 
 
+def find_uncompiled_tint_models(
+    active_models: dict[str, Path],
+    model_material_rows: list[tuple[str, str, list[int]]],
+) -> list[Path]:
+    """Require compiled resources only for active models owning tint bindings.
+
+    The material plan identifies the resource owners; a separate strict binary
+    audit validates their headers and mesh fields. This format check prevents
+    converted meshes from relying on the client's runtime ASCII compiler,
+    without imposing a new rule on unrelated models or lower-priority resources
+    that the client will not load.
+    """
+    uncompiled: list[Path] = []
+    for model in sorted({model for model, _, _ in model_material_rows}):
+        path = active_models.get(model)
+        if path is None:
+            continue  # The catalog's missing-model audit reports this separately.
+        with path.open("rb") as stream:
+            if stream.read(4) != b"\0\0\0\0":
+                uncompiled.append(path)
+    return uncompiled
+
+
+def find_invalid_binary_tint_models(
+    active_models: dict[str, Path],
+    model_material_rows: list[tuple[str, str, list[int]]],
+) -> dict[Path, str]:
+    """Do not let the reference scanner hide malformed active tint binaries."""
+    invalid: dict[Path, str] = {}
+    for model in sorted({model for model, _, _ in model_material_rows}):
+        path = active_models.get(model)
+        if path is None:
+            continue
+        data = path.read_bytes()
+        if data[:4] != b"\0\0\0\0":
+            continue  # The compilation-format audit reports ASCII separately.
+        try:
+            read_binary_model_material_fields(path, data)
+        except (ValueError, UnicodeDecodeError) as error:
+            invalid[path] = str(error)
+    return invalid
+
+
 def find_used_tint_materials(entries: dict[str, dict[str, object]]) -> set[str]:
     models = find_active_models()
     materials = set(entries)
@@ -1803,9 +1850,6 @@ def update_mtr(
             f"parameter float tintMapHeight {float(height):.1f}",
         )
         + TINT_ROW_PARAMETER_LINES
-        + TINT_LEGACY_COLOR_PARAMETER_LINES
-        + TINT_COLOR_PARAMETER_LINES
-        + TINT_CUSTOM_MODE_PARAMETER_LINES
     )
     if uses_texture1_alpha:
         lines.append("parameter float useTexture1Alpha 1.0")
@@ -1847,9 +1891,10 @@ def is_generated_pair(model: str, texture: str, width: int, height: int, dds_pat
         and all(
             line.lower() in mtr
             for line in TINT_ROW_PARAMETER_LINES
-            + TINT_LEGACY_COLOR_PARAMETER_LINES
-            + TINT_COLOR_PARAMETER_LINES
-            + TINT_CUSTOM_MODE_PARAMETER_LINES
+        )
+        and not any(
+            key is not None and len(key) == 3 and key[0] == "parameter" and key[2] in OBSOLETE_TINT_PARAMETERS
+            for key in (mtr_directive_key(line) for line in mtr.splitlines())
         )
     )
 
@@ -2824,20 +2869,14 @@ def check_tint_mtr_structure(path: Path) -> list[str]:
     ) + tuple(
         ("parameter", "float", uniform_name.lower())
         for uniform_name, _ in TINT_ROW_PARAMETERS
-    ) + tuple(
-        ("parameter", "float", uniform_name.lower())
-        for uniform_name in TINT_LEGACY_COLOR_PARAMETERS
-    ) + tuple(
-        ("parameter", "float", uniform_name.lower())
-        for uniform_name in TINT_COLOR_PARAMETERS
-    ) + tuple(
-        ("parameter", "int", uniform_name.lower())
-        for uniform_name in TINT_CUSTOM_MODE_PARAMETERS
     )
     for key in singleton_keys:
         count = len(directives.get(key, []))
         if count != 1:
             errors.append(f"directive {' '.join(key)} occurs {count} times")
+    for key in directives:
+        if len(key) == 3 and key[0] == "parameter" and key[2] in OBSOLETE_TINT_PARAMETERS:
+            errors.append(f"obsolete tint parameter {key[2]} has no shader uniform")
 
     if len(directives.get(("renderhint",), [])) != 1:
         errors.append("directive renderhint must occur exactly once")
@@ -2921,11 +2960,27 @@ def audit() -> None:
         errors.append("tint source manifest is empty")
 
     model_material_rows: list[tuple[str, str, list[int]]] = []
+    compiled_tint_model_count = 0
     pending_model_bindings: dict[Path, dict[str, str]] = {}
     active_aliases: dict[str, str] = {}
     if entries:
         model_material_rows, pending_model_bindings, active_aliases = build_model_material_plan(entries)
         active_models = find_active_models()
+        uncompiled_tint_models = find_uncompiled_tint_models(active_models, model_material_rows)
+        compiled_tint_model_count = len({model for model, _, _ in model_material_rows}) - len(uncompiled_tint_models)
+        if uncompiled_tint_models:
+            examples = ", ".join(
+                str(path.relative_to(REPOSITORY_ROOT))
+                for path in uncompiled_tint_models[:10]
+            )
+            errors.append(
+                f"{len(uncompiled_tint_models)} active tint-bound models are still ASCII and must be compiled: "
+                f'{examples}. Run python tools/CompileModels.py --tint-bound --game-data "<NWN install>/data" '
+                "--apply from the HAK repository "
+                "and review its validation report before packaging."
+            )
+        for error in find_invalid_binary_tint_models(active_models, model_material_rows).values():
+            errors.append(f"Invalid compiled tint model: {error}")
         unaddressable_rows = [
             (model, material)
             for model, material, _ in model_material_rows
@@ -3075,9 +3130,6 @@ def audit() -> None:
             ) + tuple(
                 line.lower()
                 for line in TINT_ROW_PARAMETER_LINES
-                + TINT_LEGACY_COLOR_PARAMETER_LINES
-                + TINT_COLOR_PARAMETER_LINES
-                + TINT_CUSTOM_MODE_PARAMETER_LINES
             )
             for line in required:
                 if line not in mtr:
@@ -3144,9 +3196,6 @@ def audit() -> None:
         ) + tuple(
             line.lower()
             for line in TINT_ROW_PARAMETER_LINES
-            + TINT_LEGACY_COLOR_PARAMETER_LINES
-            + TINT_COLOR_PARAMETER_LINES
-            + TINT_CUSTOM_MODE_PARAMETER_LINES
         )
         for line in required:
             if line not in mtr:
@@ -3306,6 +3355,7 @@ def audit() -> None:
 
     print(
         f"Tint map audit passed: {len(entries)} materials, {len(model_material_rows)} model/material rows, "
+        f"{compiled_tint_model_count} compiled tint models, "
         f"no addressable 3D material PLTs, {len(active_dynamic_cloak_plts)} native dynamic cloak PLTs, "
         f"and {len(active_icon_plts)} required dynamic inventory icon PLTs remain."
     )

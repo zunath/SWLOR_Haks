@@ -178,6 +178,7 @@ class EngineShaders:
 
 def production_pairs(material_root: Path):
     pairs = set()
+    parameters = {}
     count = 0
     for path in material_root.glob("*.mtr"):
         source = path.read_text(encoding="utf-8")
@@ -185,14 +186,23 @@ def production_pairs(material_root: Path):
         fragment = re.search(r"^customshaderFS\s+(\S+)", source, re.MULTILINE | re.IGNORECASE)
         if not vertex or not fragment:
             raise ValueError(f"Generated tint material has no explicit shader pair: {path}")
-        pairs.add((vertex[1].lower(), fragment[1].lower()))
+        pair = vertex[1].lower(), fragment[1].lower()
+        pairs.add(pair)
+        parameters.setdefault(pair, set()).update(re.findall(
+            r"^parameter\s+(?:float|int)\s+(\S+)", source, re.MULTILINE | re.IGNORECASE))
         count += 1
     if not pairs:
         raise ValueError(f"No generated material shader pairs in {material_root}")
-    return sorted(pairs), count
+    return sorted(pairs), count, parameters
 
 
-def compile_engine_pairs(test, engine, pairs):
+def linked_material_parameters(test, program, names):
+    missing = sorted(name for name in names if test.location(program, name.encode()) < 0)
+    if missing:
+        raise AssertionError(f"MTR parameters do not resolve to active shader uniforms: {', '.join(missing)}")
+
+
+def compile_engine_pairs(test, engine, pairs, parameters):
     checks = 0
     for quality, lighting, gamma, keyhole, discard in product(range(3), range(2), range(2), range(2), range(2)):
         configuration = quality, lighting, gamma, keyhole, discard
@@ -204,10 +214,24 @@ def compile_engine_pairs(test, engine, pairs):
                 raise AssertionError(f"Production {vertex}/{fragment}, quality={quality}, "
                     f"fragment-lighting={lighting}, gamma={gamma}, keyhole={keyhole}, "
                     f"no-discard={discard}:\n{error}") from error
-            test.delete_program(program)
+            try:
+                linked_material_parameters(test, program, parameters[vertex, fragment])
+            finally:
+                test.delete_program(program)
             checks += 1
     print(f"Production engine compile/link passed: {checks} pairs across Minimal/Performance/High Quality "
-        "and both fragment-lighting, gamma, keyhole, and no-discard settings.", flush=True)
+        "and both fragment-lighting, gamma, keyhole, and no-discard settings; all generated MTR parameters resolve.", flush=True)
+    program = test.program(engine.source("fs_plt_tinter", True, (1, 0, 0, 1, 0)),
+        engine.source("vslit_sm", False, (1, 0, 0, 1, 0)))
+    try:
+        try:
+            linked_material_parameters(test, program, {"tintSkin", "tintSkinR", "useCustomSkin"})
+        except AssertionError:
+            pass
+        else:
+            raise AssertionError("Obsolete material parameter negative control unexpectedly resolved")
+    finally:
+        test.delete_program(program)
     # Removing the base shader's explicit cutout sampler must fail using the
     # real engine includes, which only declare texUnit1 for NORMAL_MAP == 1.
     # This is the compile failure the old numeric adapter masked.
@@ -590,7 +614,7 @@ def main():
     root = Path(__file__).resolve().parents[1]
     client = args.client_exe or args.game_data.parent / "bin" / "win32" / "nwmain.exe"
     engine = EngineShaders(args.game_data, root / "sw_shader", client)
-    pairs, materials = production_pairs(root / "sw_tint_mtr")
+    pairs, materials, parameters = production_pairs(root / "sw_tint_mtr")
     audit_tint_dds(root)
     gl = OpenGL()
     checks = 0
@@ -598,7 +622,7 @@ def main():
         renderer = gl.function("glGetString", ct.c_char_p, ct.c_uint)(0x1F01).decode()
         test = MaterialTest(gl)
         print(f"Validating {len(pairs)} production shader pairs from {materials} generated MTRs on {renderer}.", flush=True)
-        compile_engine_pairs(test, engine, pairs)
+        compile_engine_pairs(test, engine, pairs, parameters)
         draw_engine_materials(test, engine, root)
         for name in ("fs_plt_tinter", "fs_plt_tinter_nm", "fs_plt_hair_nm"):
             shader = (root / "sw_shader" / f"{name}.shd").read_text()
