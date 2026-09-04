@@ -106,6 +106,13 @@ void main ()
 
     FragmentColor = vec4(surfaceColor, 1.0);
 
+    // Replace specular state derived from the placeholder or missing-texture
+    // fallback with the final palette coverage and diffuse color. Standard
+    // setup still honors authored specular/roughness maps and material values.
+    #if LIGHTING == 1 && (FRAGMENT_LIGHTING == 1 || NORMAL_MAP == 1) && SPECULAR_LIGHT == 1
+        SetupSpecularity(FragmentColor.rgb * materialFrontDiffuse.rgb);
+    #endif
+
     float outputAlpha = materialFrontDiffuse.a;
     if (useTexture1Alpha > 0.5)
     {

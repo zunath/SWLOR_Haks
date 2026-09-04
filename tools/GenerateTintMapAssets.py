@@ -2791,6 +2791,32 @@ def check_tint_mtr_structure(path: Path) -> list[str]:
     return errors
 
 
+def tint_shader_material_errors(shader: str) -> list[str]:
+    """Require specular setup to consume the final tint, not the placeholder.
+
+    inc_standard caches specularity, metallicness, roughness and specular color
+    during SetupStandardShaderInputs. Restoring palette alpha alone leaves its
+    missing-texture metallic fallback intact. Ignore comments so a description
+    of the required fix cannot satisfy the executable ordering check.
+    """
+    code = re.sub(r"/\*.*?\*/|//[^\n]*", "", shader, flags=re.DOTALL)
+    statements = (
+        r"\bSetupStandardShaderInputs\s*\(\s*\)\s*;",
+        r"\bfEnvMapLevel\s*=\s*1\.0\s*-\s*paletteColor\.a\s*;",
+        r"\bFragmentColor\s*=\s*vec4\s*\(\s*surfaceColor\s*,\s*1\.0\s*\)\s*;",
+        r"#if\s+LIGHTING\s*==\s*1\s*&&\s*\(\s*FRAGMENT_LIGHTING\s*==\s*1\s*\|\|\s*NORMAL_MAP\s*==\s*1\s*\)\s*&&\s*SPECULAR_LIGHT\s*==\s*1\s*"
+        r"SetupSpecularity\s*\(\s*FragmentColor\.rgb\s*\*\s*materialFrontDiffuse\.rgb\s*\)\s*;\s*#endif",
+        r"\bApplyStandardShader\s*\(\s*\)\s*;",
+    )
+    cursor = 0
+    for statement in statements:
+        match = re.search(statement, code[cursor:])
+        if match is None:
+            return ["must rebuild standard specularity from final palette coverage and diffuse color before lighting"]
+        cursor += match.end()
+    return []
+
+
 def audit() -> None:
     entries = load_source_manifest()
     errors: list[str] = []
@@ -3118,6 +3144,7 @@ def audit() -> None:
             errors.append(f"missing tint fragment shader {shader_path.name}")
             continue
         shader = shader_path.read_text(encoding="utf-8")
+        errors.extend(f"{shader_path.name} {error}" for error in tint_shader_material_errors(shader))
         for token in (
             "uniform sampler2D texUnit7",
             "uniform sampler2D texUnit9",
