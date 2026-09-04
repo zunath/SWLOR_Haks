@@ -129,9 +129,11 @@ TINT_ROW_PARAMETERS = (
     ("rowTat1", 1056),
     ("rowTat2", 1056),
 )
+# MTR value count selects the GL upload width. Rows are scalar uniforms even
+# though the runtime override command transports its value in a native Vec4.
 TINT_ROW_PARAMETER_LINES = tuple(
     f"parameter float {uniform_name} "
-    f"{(base_row + 0.5) / PALETTE_TEXTURE_HEIGHT:.6f} 0.0 0.0 0.0"
+    f"{(base_row + 0.5) / PALETTE_TEXTURE_HEIGHT:.6f}"
     for uniform_name, base_row in TINT_ROW_PARAMETERS
 )
 # Obsolete transports are recognized only so regeneration removes them. The
@@ -1876,6 +1878,7 @@ def is_generated_pair(model: str, texture: str, width: int, height: int, dds_pat
         return False
 
     mtr = material_path.read_text(encoding="utf-8-sig").lower()
+    material_lines = {line.strip() for line in mtr.splitlines()}
     return (
         any(
             f"customshaderfs {shader}" in mtr
@@ -1889,7 +1892,7 @@ def is_generated_pair(model: str, texture: str, width: int, height: int, dds_pat
         and f"parameter float tintmapwidth {float(width):.1f}" in mtr
         and f"parameter float tintmapheight {float(height):.1f}" in mtr
         and all(
-            line.lower() in mtr
+            line.lower() in material_lines
             for line in TINT_ROW_PARAMETER_LINES
         )
         and not any(
@@ -2874,6 +2877,13 @@ def check_tint_mtr_structure(path: Path) -> list[str]:
         count = len(directives.get(key, []))
         if count != 1:
             errors.append(f"directive {' '.join(key)} occurs {count} times")
+    for uniform_name, _ in TINT_ROW_PARAMETERS:
+        for line in directives.get(("parameter", "float", uniform_name.lower()), []):
+            if len(line.split()) != 4:
+                errors.append(
+                    f"palette row {uniform_name} must declare exactly one float value; "
+                    "multiple values select a vector upload that cannot update the scalar shader uniform"
+                )
     for key in directives:
         if len(key) == 3 and key[0] == "parameter" and key[2] in OBSOLETE_TINT_PARAMETERS:
             errors.append(f"obsolete tint parameter {key[2]} has no shader uniform")

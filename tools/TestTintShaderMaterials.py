@@ -176,6 +176,20 @@ class EngineShaders:
         return preamble + self.expand(name, override)
 
 
+def material_parameters(source: str):
+    parameters = []
+    for line in source.splitlines():
+        tokens = line.split()
+        if not tokens or tokens[0].lower() != "parameter":
+            continue
+        if len(tokens) < 4 or tokens[1].lower() not in ("float", "int"):
+            raise AssertionError(f"Invalid material parameter: {line}")
+        kind, name = tokens[1].lower(), tokens[2]
+        convert = float if kind == "float" else int
+        parameters.append((kind, name, tuple(convert(value) for value in tokens[3:])))
+    return parameters
+
+
 def production_pairs(material_root: Path):
     pairs = set()
     parameters = {}
@@ -188,18 +202,112 @@ def production_pairs(material_root: Path):
             raise ValueError(f"Generated tint material has no explicit shader pair: {path}")
         pair = vertex[1].lower(), fragment[1].lower()
         pairs.add(pair)
-        parameters.setdefault(pair, set()).update(re.findall(
-            r"^parameter\s+(?:float|int)\s+(\S+)", source, re.MULTILINE | re.IGNORECASE))
+        parameters.setdefault(pair, set()).update(material_parameters(source))
         count += 1
     if not pairs:
         raise ValueError(f"No generated material shader pairs in {material_root}")
     return sorted(pairs), count, parameters
 
 
-def linked_material_parameters(test, program, names):
-    missing = sorted(name for name in names if test.location(program, name.encode()) < 0)
-    if missing:
-        raise AssertionError(f"MTR parameters do not resolve to active shader uniforms: {', '.join(missing)}")
+def linked_material_parameters(test, program, parameters):
+    count, maximum = ct.c_int(), ct.c_int()
+    test.program_value(program, 0x8B86, ct.byref(count))  # GL_ACTIVE_UNIFORMS
+    test.program_value(program, 0x8B87, ct.byref(maximum))
+    uniforms = {}
+    for index in range(count.value):
+        name = ct.create_string_buffer(maximum.value)
+        size, kind = ct.c_int(), ct.c_uint()
+        test.active_uniform(program, index, len(name), None, ct.byref(size), ct.byref(kind), name)
+        uniforms[name.value.decode()] = kind.value, size.value
+    for kind, name, components in sorted({(kind, name, len(values)) for kind, name, values in parameters}):
+        if name not in uniforms or test.location(program, name.encode()) < 0:
+            raise AssertionError(f"MTR parameter does not resolve to an active shader uniform: {name}")
+        # The installed client dispatches one float to glUniform1f and four to
+        # glUniform4fv; scalar GLSL uniforms reject the latter with 0x502.
+        expected = {("float", 1): 0x1406, ("float", 4): 0x8B52, ("int", 1): 0x1404}.get((kind, components))
+        actual, array_size = uniforms[name]
+        if expected is None or actual != expected or array_size != 1:
+            raise AssertionError(f"MTR parameter {name}: {kind} with {components} values does not match "
+                f"GLSL type {actual:#x}, array size {array_size}")
+
+
+def upload_material_parameters(test, program, parameters, native_overrides=None, check_errors=True):
+    """Use MTR component counts, including the client's native Vec4 text path."""
+    test.use(program)
+    native_overrides = native_overrides or {}
+    for kind, name, defaults in parameters:
+        values = defaults
+        if name.lower() in native_overrides:
+            native = native_overrides[name.lower()]
+            # Native float overrides arrive as four %f tokens. A scalar MTR
+            # explicitly keeps only the first token before reparsing its value.
+            values = tuple(float(f"{value:.6f}") for value in native[:len(defaults)])
+        location = test.location(program, name.encode())
+        if kind == "int":
+            test.integer(location, int(values[0]))
+        elif len(values) == 1:
+            test.scalar(location, values[0])
+        else:
+            test.vector_array(location, 1, (ct.c_float * 4)(*values))
+        if check_errors:
+            error = test.error()
+            if error:
+                raise AssertionError(f"MTR upload {name}, {len(values)} components: OpenGL error {error:#x}")
+
+
+def native_npc_rows(npc):
+    colors = {
+        "female": (("rowSkin", 0, 2), ("rowHair", 176, 31), ("rowCloth1", 704, 174),
+            ("rowCloth2", 704, 3), ("rowLeath1", 880, 3), ("rowLeath2", 880, 174),
+            ("rowMetal1", 352, 0), ("rowMetal2", 528, 8), ("rowTat1", 1056, 139), ("rowTat2", 1056, 2)),
+        "rodian": (("rowSkin", 0, 80), ("rowHair", 176, 20), ("rowCloth1", 704, 97),
+            ("rowCloth2", 704, 98), ("rowLeath1", 880, 99), ("rowLeath2", 880, 23)),
+    }
+    return {name.lower(): ((base + color + 0.5) / 2048, 0, 0, 0) for name, base, color in colors[npc]}
+
+
+def check_native_npc_rows(test, engine, pairs, parameters):
+    checks, negatives = 0, 0
+    for quality in range(3):
+        for vertex, fragment in pairs:
+            program = test.program(engine.source(fragment, True, (quality, 0, 0, 1, 0)),
+                engine.source(vertex, False, (quality, 0, 0, 1, 0)))
+            try:
+                rows = sorted(parameter for parameter in parameters[vertex, fragment] if parameter[1].startswith("row"))
+                legacy = [(kind, name, (values[0], 0, 0, 0)) for kind, name, values in rows]
+                try:
+                    linked_material_parameters(test, program, legacy)
+                except AssertionError:
+                    pass
+                else:
+                    raise AssertionError("Four-component MTR/scalar GLSL negative control was accepted")
+                for npc in ("female", "rodian"):
+                    native = native_npc_rows(npc)
+                    upload_material_parameters(test, program, rows)
+                    upload_material_parameters(test, program, legacy, native, check_errors=False)
+                    if test.error() != 0x502:
+                        raise AssertionError("Legacy MTR upload did not reproduce GL_INVALID_OPERATION")
+                    for _, name, defaults in rows:
+                        value = ct.c_float()
+                        test.get_uniform(program, test.location(program, name.encode()), ct.byref(value))
+                        if abs(value.value - defaults[0]) > 1e-7:
+                            raise AssertionError(f"Legacy MTR upload changed initializer for {name}")
+                    negatives += 1
+                    upload_material_parameters(test, program, rows, native)
+                    for _, name, _ in rows:
+                        if name.lower() not in native:
+                            continue
+                        value = ct.c_float()
+                        test.get_uniform(program, test.location(program, name.encode()), ct.byref(value))
+                        expected = float(f"{native[name.lower()][0]:.6f}")
+                        if abs(value.value - expected) > 1e-7:
+                            raise AssertionError(f"NPC {npc} {fragment}/{quality} {name}: GPU received "
+                                f"{value.value}, expected {expected}")
+                        checks += 1
+            finally:
+                test.delete_program(program)
+    print(f"NWN material transport passed: {checks} actual NPC row uploads, {negatives} legacy vector-upload "
+        "negative controls; all production shader variants and quality modes.", flush=True)
 
 
 def compile_engine_pairs(test, engine, pairs, parameters):
@@ -216,16 +324,18 @@ def compile_engine_pairs(test, engine, pairs, parameters):
                     f"no-discard={discard}:\n{error}") from error
             try:
                 linked_material_parameters(test, program, parameters[vertex, fragment])
+                upload_material_parameters(test, program, parameters[vertex, fragment])
             finally:
                 test.delete_program(program)
             checks += 1
     print(f"Production engine compile/link passed: {checks} pairs across Minimal/Performance/High Quality "
-        "and both fragment-lighting, gamma, keyhole, and no-discard settings; all generated MTR parameters resolve.", flush=True)
+        "and both fragment-lighting, gamma, keyhole, and no-discard settings; all generated MTR parameter "
+        "names, GLSL types, component counts and actual uploads validated.", flush=True)
     program = test.program(engine.source("fs_plt_tinter", True, (1, 0, 0, 1, 0)),
         engine.source("vslit_sm", False, (1, 0, 0, 1, 0)))
     try:
         try:
-            linked_material_parameters(test, program, {"tintSkin", "tintSkinR", "useCustomSkin"})
+            linked_material_parameters(test, program, [("float", name, (0,)) for name in ("tintSkin", "tintSkinR", "useCustomSkin")])
         except AssertionError:
             pass
         else:
@@ -357,6 +467,7 @@ def draw_engine_materials(test, engine, root: Path):
     checks = 0
     for material in ("pme0_head056", "pfh0_head121", "pfh0_robe187"):
         source = (root / "sw_tint_mtr" / f"{material}.mtr").read_text()
+        parameters = material_parameters(source)
         vertex = re.search(r"^customshaderVS\s+(\S+)", source, re.MULTILINE)[1]
         fragment = re.search(r"^customshaderFS\s+(\S+)", source, re.MULTILINE)[1]
         mask = re.search(r"^texture7\s+(\S+)", source, re.MULTILINE)[1]
@@ -388,8 +499,8 @@ def draw_engine_materials(test, engine, root: Path):
                 for name in ("materialFrontDiffuse", "materialFrontAmbient", "materialFrontEmissive"):
                     test.vector(test.location(program, name.encode()), 1, 1, 1, 1)
                 test.integer(test.location(program, b"staticLighting"), 1)
-                test.scalar(test.location(program, b"tintMapWidth"), width)
-                test.scalar(test.location(program, b"tintMapHeight"), height)
+                upload_material_parameters(test, program, parameters,
+                    native_npc_rows("rodian" if material == "pme0_head056" else "female"))
                 for unit in range(16):
                     test.active_texture(0x84C0 + unit)
                     test.bind_texture(0x0DE1, unit + 1)
@@ -511,9 +622,14 @@ class MaterialTest:
         self.delete_shader = gl.function("glDeleteShader", None, ct.c_uint)
         self.delete_program = gl.function("glDeleteProgram", None, ct.c_uint)
         self.location = gl.function("glGetUniformLocation", ct.c_int, ct.c_uint, ct.c_char_p)
+        self.active_uniform = gl.function("glGetActiveUniform", None, ct.c_uint, ct.c_uint, ct.c_int,
+            ct.POINTER(ct.c_int), ct.POINTER(ct.c_int), ct.POINTER(ct.c_uint), ct.c_void_p)
+        self.get_uniform = gl.function("glGetUniformfv", None, ct.c_uint, ct.c_int, ct.POINTER(ct.c_float))
+        self.error = gl.function("glGetError", ct.c_uint)
         self.integer = gl.function("glUniform1i", None, ct.c_int, ct.c_int)
         self.scalar = gl.function("glUniform1f", None, ct.c_int, ct.c_float)
         self.vector = gl.function("glUniform4f", None, ct.c_int, ct.c_float, ct.c_float, ct.c_float, ct.c_float)
+        self.vector_array = gl.function("glUniform4fv", None, ct.c_int, ct.c_int, ct.POINTER(ct.c_float))
         self.active_texture = gl.function("glActiveTexture", None, ct.c_uint)
         self.bind_texture = gl.function("glBindTexture", None, ct.c_uint, ct.c_uint)
         self.texture_parameter = gl.function("glTexParameteri", None, ct.c_uint, ct.c_uint, ct.c_int)
@@ -623,6 +739,7 @@ def main():
         test = MaterialTest(gl)
         print(f"Validating {len(pairs)} production shader pairs from {materials} generated MTRs on {renderer}.", flush=True)
         compile_engine_pairs(test, engine, pairs, parameters)
+        check_native_npc_rows(test, engine, pairs, parameters)
         draw_engine_materials(test, engine, root)
         for name in ("fs_plt_tinter", "fs_plt_tinter_nm", "fs_plt_hair_nm"):
             shader = (root / "sw_shader" / f"{name}.shd").read_text()
