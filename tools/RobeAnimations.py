@@ -85,6 +85,56 @@ def resolved_animations(models):
     return result
 
 
+class BodyAnimationInheritance:
+    """Identify ordinary garments without dropping authored animation overlays."""
+
+    def __init__(self, load):
+        self.load = load
+        self.owners = {}
+        self.parents = {}
+
+    def animation_owners(self, name, visiting=None):
+        if name in self.owners:
+            return self.owners[name]
+        visiting = set() if visiting is None else visiting
+        if name in visiting:
+            raise ValueError(f"Cyclic animation inheritance: {name}")
+        visiting.add(name)
+        text = self.load(name)
+        result = None
+        if text is not None:
+            parent = mdl.supermodel(text.encode("latin1"))
+            inherited = self.animation_owners(parent, visiting) if parent else {}
+            if inherited is not None:
+                result = dict(inherited)
+                for clip in ANIMATION.finditer(text):
+                    result[clip[1].lower()] = name
+        visiting.remove(name)
+        self.owners[name] = result
+        return result
+
+    def attachment_parents(self, text):
+        name = model_name(text)
+        if name not in self.parents:
+            parents = {}
+            for node in NODE.finditer(text.split("endmodelgeom", 1)[0]):
+                parent = re.search(r"(?im)^\s*parent\s+(\S+)", node[3])[1].lower()
+                parents[node[2].lower()] = None if parent == name else parent
+            parents.pop(name)
+            self.parents[name] = parents
+        return self.parents[name]
+
+    def can_inherit(self, base_name, robe):
+        expected = self.animation_owners(base_name)
+        if expected is None or self.animation_owners(model_name(robe)) != expected:
+            return False
+        base = self.attachment_parents(self.load(base_name))
+        garment = self.attachment_parents(robe)
+        # Missing joints are filled from the body by body_root. Shared joints
+        # must stay under the same parents so the compiler can match their IDs.
+        return all(garment[node] == base[node] for node in garment.keys() & base.keys())
+
+
 def skeleton(base, overlays, name):
     """Retain body attachment paths and add the overlay's animation helpers."""
     result = {}

@@ -335,6 +335,8 @@ def main():
         raise ValueError("Animation styles must be existing robe catalog entries")
     animation_cache = {}
     animation_names = dict(prior_manifest.get("animation_bridges", {}))
+    body_inheritance = animations.BodyAnimationInheritance(load_text)
+    direct_body_roots = set()
     complete_roots = set()
     sources = {}
     mapping_rows = []
@@ -343,8 +345,13 @@ def main():
         phenotype = id_map[int(robe_id)]
         generated = prefix + str(phenotype)
         base_name = prefix + "0"
+        robe = unique_nodes(load_text(name), dependencies[name])
         animation_parent = name
-        if int(robe_id) in animation_styles:
+        if body_inheritance.can_inherit(base_name, robe):
+            animation_parent = base_name
+            direct_body_roots.add(generated)
+            complete_roots.add(generated)
+        elif int(robe_id) in animation_styles:
             complete_roots.add(generated)
             animation_owner = next((owner for owner, text in animations.chain(name, load_text)
                                     if animations.ANIMATION.search(text)), base_name)
@@ -362,8 +369,7 @@ def main():
                 else:
                     animation_cache[animation_key] = base_name
             animation_parent = animation_cache[animation_key]
-        sources[generated] = body_root(unique_nodes((stage / "original" / f"{name}.mdl").read_text(encoding="latin1"), dependencies[name]),
-                                       (stage / "original" / f"{prefix}0.mdl").read_text(encoding="latin1"), generated, animation_parent)
+        sources[generated] = body_root(robe, load_text(base_name), generated, animation_parent)
         sources[generated + "_robe" + robe_id] = empty_attachment(generated + "_robe" + robe_id)
         mapping_rows.append((name, phenotype, 0))
     for name, data in sources.items():
@@ -405,6 +411,7 @@ def main():
         except ValueError as error:
             failures.append({"model": name, "error": str(error)})
     report = {"models": len(sources), "robe_models": len(selected), "phenotypes": len(id_map),
+              "direct_body_roots": len(direct_body_roots), "validated_animation_roots": len(complete_roots),
               "compiler_sha256": compiler_hash, "missing_supermodels": sorted(missing), "failures": failures}
     (stage / "report.json").write_text(json.dumps(report, indent=2) + "\n")
     if failures:

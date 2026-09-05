@@ -53,6 +53,31 @@ class RobeAnimationTests(unittest.TestCase):
         fixtures["garment"] = model("garment", "body", node("rootdummy", "garment"))
         self.assertIsNone(robe.bridge("body", "garment", fixtures.get, "combined"))
 
+    def test_ordinary_garment_with_missing_hands_uses_body_animations(self):
+        fixtures = self.fixtures()
+        fixtures["body"] = fixtures["body"].replace("endmodelgeom body", node("lhand_g", "rootdummy") + node("rhand_g", "rootdummy") + "endmodelgeom body")
+        fixtures["garment"] = model("garment", "body", node("rootdummy", "garment"))
+        policy = robe.BodyAnimationInheritance(fixtures.get)
+        self.assertTrue(policy.can_inherit("body", fixtures["garment"]))
+
+    def test_custom_animation_overlay_is_not_replaced_with_body_animations(self):
+        fixtures = self.fixtures()
+        policy = robe.BodyAnimationInheritance(fixtures.get)
+        self.assertFalse(policy.can_inherit("body", fixtures["garment"]))
+
+    def test_different_garment_hierarchy_is_not_automatically_retargeted(self):
+        fixtures = self.fixtures()
+        fixtures["garment"] = model("garment", "body", node("helper", "garment") + node("rootdummy", "helper"))
+        policy = robe.BodyAnimationInheritance(fixtures.get)
+        self.assertFalse(policy.can_inherit("body", fixtures["garment"]))
+
+    def test_missing_animation_source_does_not_allow_automatic_retargeting(self):
+        fixtures = self.fixtures()
+        fixtures["body"] = fixtures["body"].replace("setsupermodel body null", "setsupermodel body missing")
+        fixtures["garment"] = model("garment", "body", node("rootdummy", "garment"))
+        policy = robe.BodyAnimationInheritance(fixtures.get)
+        self.assertFalse(policy.can_inherit("body", fixtures["garment"]))
+
     def test_invalid_parent_does_not_silently_retarget_body(self):
         fixtures = self.fixtures()
         fixtures["coat"] = fixtures["coat"].replace("parent coat\n", "parent head_g\n", 1)
