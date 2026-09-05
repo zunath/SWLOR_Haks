@@ -20,6 +20,7 @@ import time
 import CompileModels as mdl
 import GenerateTintMapAssets as tint
 import ImportStockRobeTints as stock_robes
+import RobeAnimations as animations
 
 ROOT = Path(__file__).resolve().parents[1]
 TABLE = ROOT / "sw_2da" / "roberender.2da"
@@ -90,7 +91,8 @@ def body_root(robe: str, base: str, name: str, source_name: str | None = None) -
     base_name = re.search(r"(?im)^\s*newmodel\s+(\S+)", base)[1]
     animation_scale = re.search(r"(?im)^\s*setanimationscale\s+(\S+)", robe)
     animation_scale = animation_scale[1] if animation_scale else "1"
-    # Inherit the robe itself, including any authored animations/supermodel chain.
+    # The caller supplies a complete animation skeleton; a separate robe can
+    # omit body joints and is not a suitable immediate animation parent.
     result = []
     known = set()
     hidden_joints = {}
@@ -225,6 +227,8 @@ def main():
     parser.add_argument("--check", action="store_true", help="Verify the generated catalog and its source/output hashes")
     parser.add_argument("--model", action="append", help="Restrict an experimental build; cannot apply a partial catalog")
     parser.add_argument("--stage", type=Path, help="Reuse a previous decompilation staging directory")
+    parser.add_argument("--complete-animation-style", type=int, action="append", default=[],
+                        help="Validate a robe style against a complete body/garment animation skeleton")
     args = parser.parse_args()
     if args.check:
         errors = check()
@@ -308,30 +312,95 @@ def main():
             mdl.run_compiler(compiler, stage, ["-de", str(stage / f"{name}.mdl"), str(stage / "original") + "/"], "original.log")
         else:
             (stage / "original" / f"{name}.mdl").write_bytes(data)
+    text_cache = {}
+    def load_text(name):
+        if name in text_cache:
+            return text_cache[name]
+        if name not in dependencies:
+            return None
+        path = stage / "original" / f"{name}.mdl"
+        if name not in reusable or not path.is_file():
+            data = dependencies[name]
+            if mdl.binary(data):
+                mdl.run_compiler(compiler, stage, ["-de", str(stage / f"{name}.mdl"), str(stage / "original") + "/"], "original.log")
+            else:
+                path.write_bytes(data)
+            reusable.add(name)
+        text_cache[name] = path.read_text(encoding="latin1")
+        return text_cache[name]
+
+    prior_manifest = json.loads(MANIFEST.read_text()) if MANIFEST.is_file() else {}
+    animation_styles = set(prior_manifest.get("complete_animation_styles", [])) | set(args.complete_animation_style)
+    if not animation_styles.issubset(id_map):
+        raise ValueError("Animation styles must be existing robe catalog entries")
+    animation_cache = {}
+    animation_names = dict(prior_manifest.get("animation_bridges", {}))
+    complete_roots = set()
     sources = {}
     mapping_rows = []
     for name in sorted(selected):
         prefix, robe_id = PATTERN.fullmatch(name).groups()
         phenotype = id_map[int(robe_id)]
         generated = prefix + str(phenotype)
+        base_name = prefix + "0"
+        animation_parent = name
+        if int(robe_id) in animation_styles:
+            complete_roots.add(generated)
+            animation_owner = next((owner for owner, text in animations.chain(name, load_text)
+                                    if animations.ANIMATION.search(text)), base_name)
+            animation_key = base_name + "/" + animation_owner
+            if animation_key not in animation_cache:
+                if animation_key not in animation_names:
+                    used_names = set(animation_names.values())
+                    animation_names[animation_key] = next(f"{prefix}_ra{i:03d}" for i in range(1, 1000)
+                                                           if f"{prefix}_ra{i:03d}" not in used_names)
+                animation_name = animation_names[animation_key]
+                animation_source = animations.bridge(base_name, name, load_text, animation_name)
+                if animation_source:
+                    sources[animation_name] = animation_source
+                    animation_cache[animation_key] = animation_name
+                else:
+                    animation_cache[animation_key] = base_name
+            animation_parent = animation_cache[animation_key]
         sources[generated] = body_root(unique_nodes((stage / "original" / f"{name}.mdl").read_text(encoding="latin1"), dependencies[name]),
-                                       (stage / "original" / f"{prefix}0.mdl").read_text(encoding="latin1"), generated, name)
+                                       (stage / "original" / f"{prefix}0.mdl").read_text(encoding="latin1"), generated, animation_parent)
         sources[generated + "_robe" + robe_id] = empty_attachment(generated + "_robe" + robe_id)
         mapping_rows.append((name, phenotype, 0))
     for name, data in sources.items():
         (stage / "source" / f"{name}.mdl").write_bytes(data)
         (stage / "input" / f"{name}.mdl").write_bytes(mdl.protect_vertex_identity(data))
+    # Compile and expose the complete animation parents before their body roots.
+    for name in sorted(set(animation_cache.values()) - set(dependencies)):
+        mdl.run_compiler(compiler, stage, ["-cne", str(stage / "input" / f"{name}.mdl"), str(stage / "binary") + "/"], "compile.log")
+        shutil.copyfile(stage / "binary" / f"{name}.mdl", stage / f"{name}.mdl")
     print(f"Compiling {len(sources)} generated models. Staging: {stage}", flush=True)
     mdl.run_compiler(compiler, stage, ["-cne", str(stage / "input" / "*.mdl"), str(stage / "binary") + "/"], "compile.log")
     for name, source in sources.items():
         path = stage / "binary" / f"{name}.mdl"
         path.write_bytes(mdl.restore_vertex_attributes(source, path.read_bytes()))
     mdl.run_compiler(compiler, stage, ["-de", str(stage / "binary" / "*.mdl"), str(stage / "decompiled") + "/"], "decompile.log")
+    reference_bodies = {}
+    for base_name in {name[:3] + "0" for name in complete_roots}:
+        data = dependencies[base_name]
+        if not mdl.binary(data):
+            reference_directory = stage / "reference"
+            reference_directory.mkdir(exist_ok=True)
+            mdl.run_compiler(compiler, stage, ["-cne", str(stage / f"{base_name}.mdl"), str(reference_directory) + "/"], "reference.log")
+            data = (reference_directory / f"{base_name}.mdl").read_bytes()
+        reference_bodies[base_name] = data
     failures = []
     for name, source in sources.items():
         try:
-            mdl.validate_round_trip(source, (stage / "binary" / f"{name}.mdl").read_bytes(),
+            compiled = (stage / "binary" / f"{name}.mdl").read_bytes()
+            mdl.validate_round_trip(source, compiled,
                                     (stage / "decompiled" / f"{name}.mdl").read_text(encoding="latin1"))
+            if name in animation_cache.values():
+                animations.validate_animation_parts(compiled)
+            elif name in complete_roots:
+                parent = mdl.supermodel(compiled)
+                parent_path = stage / "binary" / f"{parent}.mdl"
+                parent_data = parent_path.read_bytes() if parent_path.is_file() else dependencies[parent]
+                animations.validate_body_parts(compiled, reference_bodies[name[:3] + "0"], parent_data)
         except ValueError as error:
             failures.append({"model": name, "error": str(error)})
     report = {"models": len(sources), "robe_models": len(selected), "phenotypes": len(id_map),
@@ -353,11 +422,13 @@ def main():
         shutil.copyfile(stage / "roberender.2da", TABLE)
         shutil.copyfile(stage / "phenotype.2da", PHENOTYPES)
         paths = [TABLE, PHENOTYPES]
-        paths.extend(active[name] for name in originals if name in active)
+        paths.extend(active[name] for name in dependencies if name in active)
         paths.extend(ROOT / ("sw_pt_robe" if "_robe" in name else "sw_pt_root") / f"{name}.mdl" for name in sources)
         manifest = {"compiler_sha256": compiler_hash,
                     "stock_body_sha256": {name: hashlib.sha256(dependencies[name]).hexdigest()
                                           for name in sorted(originals) if name not in active},
+                    "animation_bridges": animation_names,
+                    "complete_animation_styles": sorted(animation_styles),
                     "files": {path.relative_to(ROOT).as_posix(): hashlib.sha256(path.read_bytes()).hexdigest()
                               for path in sorted(set(paths))}}
         MANIFEST.write_text(json.dumps(manifest, indent=2) + "\n")
