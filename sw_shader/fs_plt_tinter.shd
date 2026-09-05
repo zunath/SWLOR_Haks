@@ -54,6 +54,8 @@ uniform sampler2D texUnit1;
 uniform sampler2D texUnit7;
 uniform sampler2D texUnit9;
 uniform sampler2D texUnit10;
+uniform float PLTscheme[15];
+uniform float useNativePalette;
 uniform float tintMapWidth;
 uniform float tintMapHeight;
 uniform float useTexture1Alpha;
@@ -95,6 +97,24 @@ void main ()
     // Bias -10 forces mip level 0. The tintmap-derived UVs have chaotic
     // screen-space derivatives, so without this the GPU picks the smallest
     // mip (the whole-atlas average: a flat muddy color on every pixel).
+    // Robe meshes are omitted from the client's custom-uniform replay. Only
+    // materials with a native PLT control resource enable this fallback, since
+    // materials without a scheme can inherit stale renderer scheme values.
+    // Nonnegative script rows, including palette color zero, always take priority.
+    if (v < 0.0 && useNativePalette > 0.5)
+    {
+        // Native schemes store (256-row palette block OR color byte) / 1792.
+        float colorId = mod(floor(PLTscheme[int(layer)] * 1792.0 + 0.5), 256.0);
+        float baseRow = 0.0;
+        if      (layer > 7.5) { baseRow = 1056.0; }
+        else if (layer > 5.5) { baseRow = 880.0;  }
+        else if (layer > 3.5) { baseRow = 704.0;  }
+        else if (layer > 2.5) { baseRow = 528.0;  }
+        else if (layer > 1.5) { baseRow = 352.0;  }
+        else if (layer > 0.5) { baseRow = 176.0;  }
+        v = (baseRow + clamp(colorId, 0.0, 175.0) + 0.5) / 2048.0;
+    }
+
     float paletteU = (g * 255.0 + 0.5) / 256.0;
     vec4 paletteColor = texture2D(texUnit10, vec2(paletteU, v), -10.0);
     vec3 vTint = paletteColor.rgb;

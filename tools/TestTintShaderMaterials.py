@@ -267,6 +267,16 @@ def native_npc_rows(npc):
     return {name.lower(): ((base + color + 0.5) / 2048, 0, 0, 0) for name, base, color in colors[npc]}
 
 
+def native_npc_scheme(npc):
+    values = native_npc_rows(npc)
+    return [(native_base + round(values[name.lower()][0] * 2048 - atlas_base - .5)) / 1792
+        for name, atlas_base, native_base in (
+            ("rowSkin", 0, 0), ("rowHair", 176, 256), ("rowMetal1", 352, 512),
+            ("rowMetal2", 528, 512), ("rowCloth1", 704, 1024), ("rowCloth2", 704, 1024),
+            ("rowLeath1", 880, 1280), ("rowLeath2", 880, 1280),
+            ("rowTat1", 1056, 1536), ("rowTat2", 1056, 1536))]
+
+
 def check_native_npc_rows(test, engine, pairs, parameters):
     checks, negatives = 0, 0
     for quality in range(3):
@@ -274,7 +284,11 @@ def check_native_npc_rows(test, engine, pairs, parameters):
             program = test.program(engine.source(fragment, True, (quality, 0, 0, 1, 0)),
                 engine.source(vertex, False, (quality, 0, 0, 1, 0)))
             try:
-                rows = sorted(parameter for parameter in parameters[vertex, fragment] if parameter[1].startswith("row"))
+                # Robe controls use negative sentinels while other MTRs retain
+                # positive defaults. Test one descriptor per uniform; uploading
+                # two initializers before readback cannot verify both values.
+                rows = list({parameter[1]: parameter for parameter in sorted(parameters[vertex, fragment])
+                    if parameter[1].startswith("row")}.values())
                 legacy = [(kind, name, (values[0], 0, 0, 0)) for kind, name, values in rows]
                 try:
                     linked_material_parameters(test, program, legacy)
@@ -309,6 +323,181 @@ def check_native_npc_rows(test, engine, pairs, parameters):
                 test.delete_program(program)
     print(f"NWN material transport passed: {checks} actual NPC row uploads, {negatives} legacy vector-upload "
         "negative controls; all production shader variants and quality modes.", flush=True)
+
+
+def stock_palette_pixels(game_data: Path):
+    """Independent palette reference from the installed KEY/BIF resources."""
+    # Native body/head/helmet/tail/wing schemes use palette bank2 (armor01)
+    # for BOTH metal layers. Bank3/armor02 is not selected by those schemes.
+    names = ("pal_skin01", "pal_hair01", "pal_armor01", "pal_armor01", "pal_cloth01",
+        "pal_cloth01", "pal_leath01", "pal_leath01", "pal_tattoo01", "pal_tattoo01")
+    found, archives = {}, {}
+    for key_path in sorted(game_data.glob("*.key")):
+        key = key_path.read_bytes()
+        _, count, bif_table, table = struct.unpack_from("<IIII", key, 8)
+        for index in range(count):
+            name, kind, resource = struct.unpack_from("<16sHI", key, table + index * 22)
+            name = name.rstrip(b"\0").decode().lower()
+            if kind != 3 or name not in names or name in found:
+                continue
+            _, start, size, _ = struct.unpack_from("<IIHH", key, bif_table + (resource >> 20) * 12)
+            path = game_data.parent / key[start:start + size].rstrip(b"\0").decode().replace("\\", "/")
+            if path not in archives:
+                archives[path] = path.read_bytes()
+            archive = archives[path]
+            offset = struct.unpack_from("<I", archive, 16)[0] + (resource & 0xFFFFF) * 16
+            _, start, size, _ = struct.unpack_from("<IIII", archive, offset)
+            image = archive[start:start + size]
+            if (struct.unpack_from("<HH", image, 12), image[2], image[16], image[17]) != ((256, 176), 2, 32, 8):
+                raise AssertionError(f"Unexpected installed palette layout: {name}")
+            found[name] = image[18 + image[0]:]
+    if set(found) != set(names):
+        raise AssertionError(f"Missing installed palette references: {set(names) - set(found)}")
+    return [found[name] for name in names]
+
+
+def check_native_palette_fallback(test, engine, pairs, root: Path):
+    """Draw all native color IDs/layers/shades against original palette bytes.
+
+    Native CreateBodyParts ORs the color byte into a 256-row palette block;
+    Material divides that ushort by1792 and the renderer uploads PLTscheme.
+    This reference uses those native integers and installed original palettes,
+    independently of generated defaults, atlas layout, or shader conversion.
+    """
+    bases = (0, 256, 512, 512, 1024, 1024, 1280, 1280, 1536, 1536)
+    rows = ("rowSkin", "rowHair", "rowMetal1", "rowMetal2", "rowCloth1", "rowCloth2",
+        "rowLeath1", "rowLeath2", "rowTat1", "rowTat2")
+    atlas_bases = (0, 176, 352, 528, 704, 704, 880, 880, 1056, 1056)
+    palettes = stock_palette_pixels(engine.game_data)
+    # The original TGAs store rows bottom-first; authored color ID0 is the top
+    # row. Compare every RGBA texel, including authored environment coverage.
+    expected = [tuple(value / 255 for palette in palettes for shade in range(256)
+        for value in (palette[((175 - color) * 256 + shade) * 4 + 2],
+            palette[((175 - color) * 256 + shade) * 4 + 1],
+            palette[((175 - color) * 256 + shade) * 4],
+            palette[((175 - color) * 256 + shade) * 4 + 3])) for color in range(176)]
+    descriptors = material_parameters((root / "sw_tint_mtr/pfh0_robe187.mtr").read_text())
+    defaults = {name: values for _, name, values in descriptors}
+    if defaults.get("useNativePalette") != (1,) or any(defaults.get(name) != (-1,) for name in rows):
+        raise AssertionError("Reported robe MTR must opt into native palette with ten negative row sentinels")
+    gl = test.gl
+    attribute = gl.function("glGetAttribLocation", ct.c_int, ct.c_uint, ct.c_char_p)
+    pointer = gl.function("glVertexAttribPointer", None, ct.c_uint, ct.c_int, ct.c_uint, ct.c_ubyte, ct.c_int, ct.c_void_p)
+    enable = gl.function("glEnableVertexAttribArray", None, ct.c_uint)
+    disable = gl.function("glDisableVertexAttribArray", None, ct.c_uint)
+    matrix = gl.function("glUniformMatrix4fv", None, ct.c_int, ct.c_int, ct.c_ubyte, ct.c_void_p)
+    draw = gl.function("glDrawArrays", None, ct.c_uint, ct.c_int, ct.c_int)
+    viewport = gl.function("glViewport", None, ct.c_int, ct.c_int, ct.c_int, ct.c_int)
+    positions = (ct.c_float * 12)(-1, -1, -.5, 1, 3, -1, -.5, 1, -1, 3, -.5, 1)
+    coordinates = (ct.c_float * 6)(0, 0, 2, 0, 0, 2)
+    identity = (ct.c_float * 16)(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)
+    # All256 shade bytes in X; each Y row is one categorical PLT layer.
+    mask = (ct.c_float * (256 * 10 * 2))(*(value for layer in range(10) for shade in range(256)
+        for value in (shade / 255, (layer + .5) / 10)))
+    atlas = (root / "sw_item/plt_palette.tga").read_bytes()
+    pixels = ct.create_string_buffer(atlas[18:])
+    output = (ct.c_float * (256 * 10 * 4))()
+    checks = 0
+    try:
+        viewport(0, 0, 256, 10)
+        test.active_texture(0x84C0)
+        test.bind_texture(0x0DE1, 100)
+        test.texture_image(0x0DE1, 0, 0x8814, 256, 10, 0, 0x1908, 0x1406, None)
+        for quality, (vertex, fragment) in product(range(3), pairs):
+            # Keep production row, category, shade, and atlas sampling. Only
+            # expose palette RGBA before lighting so byte parity is measurable.
+            source, count = re.subn(r"gl_FragColor\s*=\s*vec4\(FragmentColor\.rgb,\s*outputAlpha\);",
+                "gl_FragColor = paletteColor;", engine.read(fragment))
+            if count != 1:
+                raise AssertionError(f"Cannot inspect production palette for {fragment}")
+            config = quality, 0, 0, 0, 0
+            program = test.program(engine.source(fragment, True, config, source), engine.source(vertex, False, config))
+            attributes = []
+            try:
+                test.use(program)
+                for name in ("m_mv", "m_proj", "m_mvp", "m_texture", "m_view_inv", "m_view"):
+                    matrix(test.location(program, name.encode()), 1, 0, identity)
+                test.vector(test.location(program, b"materialFrontDiffuse"), 1, 1, 1, 1)
+                for name, size, data in (("vPos", 4, positions), ("vTcIn", 2, coordinates)):
+                    index = attribute(program, name.encode())
+                    if index >= 0:
+                        enable(index); pointer(index, size, 0x1406, 0, 0, data); attributes.append(index)
+                upload_material_parameters(test, program, descriptors,
+                    {"tintmapwidth": (256, 0, 0, 0), "tintmapheight": (10, 0, 0, 0)})
+                for unit, width, height, internal, external, kind, data in (
+                        (7, 256, 10, 0x8230, 0x8227, 0x1406, mask),
+                        (10, 256, 2048, 0x8058, 0x80E1, 0x1401, pixels)):
+                    test.active_texture(0x84C0 + unit)
+                    test.bind_texture(0x0DE1, unit + 1)
+                    test.texture_image(0x0DE1, 0, internal, width, height, 0, external, kind, data)
+                    for parameter in (0x2800, 0x2801):
+                        test.texture_parameter(0x0DE1, parameter, 0x2600)
+                    test.texture_parameter(0x0DE1, 0x813D, 0)
+                    test.integer(test.location(program, f"texUnit{unit}".encode()), unit)
+                scheme_locations = [test.location(program, f"PLTscheme[{layer}]".encode()) for layer in range(10)]
+                row_locations = [test.location(program, name.encode()) for name in rows]
+                if min(*scheme_locations, *row_locations) < 0:
+                    raise AssertionError("Production native/custom palette inputs were not active")
+                for color in range(176):
+                    for layer, location in enumerate(scheme_locations):
+                        value = ct.c_float((bases[layer] | color) / 1792).value
+                        if math.floor(value * 1792 + .5) % 256 != color:
+                            raise AssertionError(f"Native float precision lost color {color}, layer {layer}")
+                        test.scalar(location, value)
+                        retained = ct.c_float()
+                        test.get_uniform(program, location, ct.byref(retained))
+                        if retained.value != value:
+                            raise AssertionError("Native scalar scheme upload was not retained")
+                    for custom in (False, True):
+                        # Positive custom rows must win even while the native
+                        # scheme contains a different (possibly stale) color.
+                        selected = 175 - color if custom else color
+                        for location, base in zip(row_locations, atlas_bases):
+                            test.scalar(location, (base + selected + .5) / 2048 if custom else -1)
+                        draw(0x0004, 0, 3)
+                        test.read(0, 0, 256, 10, 0x1908, 0x1406, output)
+                        error = test.error()
+                        difference = max(abs(actual - target) for actual, target in zip(output, expected[selected]))
+                        if error or difference > 2e-6:
+                            first = next((index for index, (actual, target) in enumerate(zip(output, expected[selected]))
+                                if abs(actual - target) > 2e-6), 0)
+                            raise AssertionError(f"Native palette {fragment}/{quality} color{color} custom{custom}: "
+                                f"GLerror{error:#x}, maxRGBAerror{difference}, component{first}, "
+                                f"actual{output[first]}, expected{expected[selected][first]}")
+                        checks += 1
+                # A material without opt-in must ignore renderer scheme state.
+                test.scalar(test.location(program, b"useNativePalette"), 0)
+                for location, base in zip(row_locations, atlas_bases):
+                    test.scalar(location, (base + .5) / 2048)
+                draw(0x0004, 0, 3)
+                test.read(0, 0, 256, 10, 0x1908, 0x1406, output)
+                if max(abs(actual - target) for actual, target in zip(output, expected[0])) > 2e-6:
+                    raise AssertionError("Non-native material consumed stale palette scheme")
+                # Even a malformed negative sentinel without opt-in must not
+                # start reading another material's native renderer state.
+                for location in row_locations:
+                    test.scalar(location, -1)
+                inactive_results = []
+                for color in (0, 175):
+                    for location, base in zip(scheme_locations, bases):
+                        test.scalar(location, (base | color) / 1792)
+                    draw(0x0004, 0, 3)
+                    test.read(0, 0, 256, 10, 0x1908, 0x1406, output)
+                    inactive_results.append(tuple(output))
+                if inactive_results[0] != inactive_results[1]:
+                    raise AssertionError("Native palette fallback ignored the material opt-in")
+            finally:
+                for index in attributes:
+                    disable(index)
+                test.delete_program(program)
+    finally:
+        viewport(0, 0, 8, 8)
+        test.active_texture(0x84C0)
+        test.bind_texture(0x0DE1, 100)
+        test.texture_image(0x0DE1, 0, 0x8814, 8, 8, 0, 0x1908, 0x1406, None)
+    print(f"Native robe palette parity passed: {checks} GPU draws; all176 color IDs, all10 layers, all256 "
+        "shades and RGBA versus original installed palettes; all shader variants/quality modes, "
+        "native scalar readbacks, positive custom-row precedence and stale-scheme isolation.", flush=True)
 
 
 def compile_engine_pairs(test, engine, pairs, parameters):
@@ -436,6 +625,7 @@ def draw_engine_materials(test, engine, root: Path):
     compressed_image = gl.function("glCompressedTexImage2D", None, ct.c_uint, ct.c_int, ct.c_uint,
         ct.c_int, ct.c_int, ct.c_int, ct.c_int, ct.c_void_p)
     generate_mipmap = gl.function("glGenerateMipmap", None, ct.c_uint)
+    delete_textures = gl.function("glDeleteTextures", None, ct.c_int, ct.POINTER(ct.c_uint))
     draw = gl.function("glDrawArrays", None, ct.c_uint, ct.c_int, ct.c_int)
     finish = gl.function("glFinish", None)
     error = gl.function("glGetError", ct.c_uint)
@@ -489,6 +679,7 @@ def draw_engine_materials(test, engine, root: Path):
 
     checks = 0
     palette_checks = {"rowleath2": 0, "rowskin": 0}
+    robe_reference, robe_native_checks = {}, 0
     for material, npc in cases:
         source = (root / "sw_tint_mtr" / f"{material}.mtr").read_text()
         parameters = material_parameters(source)
@@ -504,7 +695,8 @@ def draw_engine_materials(test, engine, root: Path):
         pixels = ct.create_string_buffer(payload)
         inspect_row = ("rowleath2" if material.startswith(("pmh0_shin", "pmh0_foot"))
             else "rowskin" if material in hand_materials else None)
-        outputs = ("surface", "palette") if inspect_row else ("surface",)
+        outputs = (("surface", "palette") if inspect_row else
+            ("surface", "native-surface") if material == "pfh0_robe187" else ("surface",))
         for quality, lighting, output in product(range(3), range(2), outputs):
             configuration = quality, lighting, 0, 0, 0
             override = None
@@ -539,7 +731,14 @@ def draw_engine_materials(test, engine, root: Path):
                     test.vector(test.location(program, name.encode()), 1, 1, 1, 1)
                 test.integer(test.location(program, b"staticLighting"), 1)
                 upload_material_parameters(test, program, parameters,
-                    native_npc_rows(npc))
+                    {} if output == "native-surface" else native_npc_rows(npc))
+                if output == "native-surface":
+                    for layer, value in enumerate(native_npc_scheme(npc)):
+                        test.scalar(test.location(program, f"PLTscheme[{layer}]".encode()), value)
+                # glTexImage2D(level0) retains older lower levels. Start with a
+                # fresh mask so the incomplete-mipmap negative case cannot
+                # silently reuse generated levels from the previous material.
+                delete_textures(1, ct.byref(ct.c_uint(8)))
                 for unit in range(16):
                     test.active_texture(0x84C0 + unit)
                     test.bind_texture(0x0DE1, unit + 1)
@@ -580,6 +779,16 @@ def draw_engine_materials(test, engine, root: Path):
                     test.read(4, 4, 1, 1, 0x1908, 0x1406, result)
                     if not all(math.isfinite(value) for value in result) or abs(result[3] - 1) > 0.001:
                         raise AssertionError(f"Production draw did not produce a finite opaque fragment: {tuple(result)}")
+                    if material == "pfh0_robe187":
+                        key = quality, lighting, mip_mode
+                        if output == "surface":
+                            robe_reference[key] = tuple(result)
+                        elif output == "native-surface":
+                            expected = robe_reference[key]
+                            if any(abs(actual - target) > 2e-6 for actual, target in zip(result, expected)):
+                                raise AssertionError(f"Actual robe BC5/native palette changed rendered RGBA: "
+                                    f"{key}, {tuple(result)}, expected {expected}")
+                            robe_native_checks += 1
                     if output == "palette":
                         expected = (native_npc_rows("rodian")[inspect_row][0],
                             0.7 if inspect_row == "rowleath2" else 0.0, 0.0)
@@ -598,6 +807,8 @@ def draw_engine_materials(test, engine, root: Path):
         "environment coverage using production sampling with diagnostic fragment output.", flush=True)
     print(f"Restored hand palette checks passed: {palette_checks['rowskin']}; authored Skin row 80 and zero "
         "environment coverage using the master-matched hand masks.", flush=True)
+    print(f"Reported robe native-palette draws passed: {robe_native_checks}; real MTR negative defaults and "
+        "authored native schemes produce the same RGBA as received custom rows with actual BC5 textures.", flush=True)
 
 
 ADAPTER = """
@@ -791,6 +1002,7 @@ def main():
         print(f"Validating {len(pairs)} production shader pairs from {materials} generated MTRs on {renderer}.", flush=True)
         compile_engine_pairs(test, engine, pairs, parameters)
         check_native_npc_rows(test, engine, pairs, parameters)
+        check_native_palette_fallback(test, engine, pairs, root)
         draw_engine_materials(test, engine, root)
         for name in ("fs_plt_tinter", "fs_plt_tinter_nm", "fs_plt_hair_nm"):
             shader = (root / "sw_shader" / f"{name}.shd").read_text()
