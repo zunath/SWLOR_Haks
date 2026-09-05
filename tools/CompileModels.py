@@ -337,13 +337,27 @@ def prepare_compiler(staging: Path) -> tuple[Path, str]:
     return compiler, digest(patched)
 
 
-def repair_legacy_input(data: bytes) -> tuple[bytes, list[str]]:
+def repair_legacy_input(data: bytes, dangly_periods: dict[tuple[str, str], str] | None = None) -> tuple[bytes, list[str]]:
     """Fill omitted exporter defaults; retain every supplied coordinate/value."""
     repairs = []
     text = data.decode("latin1").replace("\r\n", "\n")
+    model_match = re.search(r"(?im)^\s*newmodel\s+(\S+)", text)
+    model = model_match[1].lower() if model_match else ""
     def fix_node(match):
         body = match[3]
         lines = body.splitlines(keepends=True)
+        period = (dangly_periods or {}).get((model, match[2].lower()))
+        if period is not None:
+            if match[1].lower() != "danglymesh":
+                raise ValueError(f"{model}/{match[2]}: period repair requires a dangly mesh")
+            field_rows = [i for i, line in enumerate(lines) if [token.lower() for token in line.split("#", 1)[0].split()[:1]] == ["period"]]
+            if len(field_rows) != 1 or len(lines[field_rows[0]].split("#", 1)[0].split()) != 1:
+                raise ValueError(f"{model}/{match[2]}: period repair requires exactly one empty field")
+            # The native parser ignores sscanf failure, leaving this malformed
+            # field uninitialized. The caller must supply an author-verified
+            # value explicitly; it is never inferred as a general default.
+            lines[field_rows[0]] = f"  period {period}\n"
+            repairs.append(f"{match[2]}: filled malformed empty dangly period with explicit value {period}")
         index = 0
         while index < len(lines):
             values = lines[index].split()
@@ -490,8 +504,26 @@ def main() -> None:
     parser.add_argument("--game-data", type=Path, help="Installed EE data directory, used only when a required supermodel is absent from the HAK sources")
     parser.add_argument("--allow-missing-supermodels", action="store_true", help="Compile unresolved legacy roots as NULL, then restore their names, matching native loader behavior")
     parser.add_argument("--repair-legacy-inputs", action="store_true", help="Fill omitted zero UV components/constraints and missing neutral UVs in staging; log every repair")
+    parser.add_argument("--dangly-period", action="append", default=[], metavar="MODEL:NODE:VALUE", help="With --repair-legacy-inputs, fill only this empty dangly period with an author-verified value; never replaces a supplied value")
     parser.add_argument("--apply", action="store_true", help="Replace source models only after the complete batch validates")
     args = parser.parse_args()
+    dangly_periods = {}
+    for repair in args.dangly_period:
+        parts = repair.lower().split(":")
+        if len(parts) != 3 or not all(parts):
+            parser.error("--dangly-period requires MODEL:NODE:VALUE")
+        try:
+            value = float(parts[2])
+        except ValueError:
+            parser.error("--dangly-period value must be a finite positive number")
+        if not math.isfinite(value) or value <= 0:
+            parser.error("--dangly-period value must be a finite positive number")
+        key = tuple(parts[:2])
+        if key in dangly_periods:
+            parser.error(f"Duplicate --dangly-period repair: {key}")
+        dangly_periods[key] = parts[2]
+    if dangly_periods and not args.repair_legacy_inputs:
+        parser.error("--dangly-period requires --repair-legacy-inputs")
     models = tint.find_active_models()
     selected = {name.lower(): models[name.lower()] for name in args.model} if args.model else changed_models(models, args.since)
     if args.tint_bound:
@@ -532,7 +564,7 @@ def main() -> None:
                 data = tint.extract_stock_bif_resource(*stock[name])
         dependencies[name] = data
         if args.repair_legacy_inputs and not binary(data):
-            inputs[name], changes = repair_legacy_input(data)
+            inputs[name], changes = repair_legacy_input(data, dangly_periods)
             if changes:
                 repairs[name] = changes
         else:
@@ -543,6 +575,9 @@ def main() -> None:
         if parent:
             pending.append(parent)
     restored_supermodels = {}
+    for model, node in dangly_periods:
+        if model not in repairs or not any(item.lower().startswith(f"{node}: filled malformed empty dangly period") for item in repairs[model]):
+            raise ValueError(f"Requested dangly period repair did not match a selected input: {model}/{node}")
     for name, data in inputs.items():
         prepared = data
         if not binary(data):

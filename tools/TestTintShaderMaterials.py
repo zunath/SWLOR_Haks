@@ -261,7 +261,8 @@ def native_npc_rows(npc):
             ("rowCloth2", 704, 3), ("rowLeath1", 880, 3), ("rowLeath2", 880, 174),
             ("rowMetal1", 352, 0), ("rowMetal2", 528, 8), ("rowTat1", 1056, 139), ("rowTat2", 1056, 2)),
         "rodian": (("rowSkin", 0, 80), ("rowHair", 176, 20), ("rowCloth1", 704, 97),
-            ("rowCloth2", 704, 98), ("rowLeath1", 880, 99), ("rowLeath2", 880, 23)),
+            ("rowCloth2", 704, 98), ("rowLeath1", 880, 99), ("rowLeath2", 880, 23),
+            ("rowMetal1", 352, 7), ("rowMetal2", 528, 7), ("rowTat1", 1056, 53), ("rowTat2", 1056, 68)),
     }
     return {name.lower(): ((base + color + 0.5) / 2048, 0, 0, 0) for name, base, color in colors[npc]}
 
@@ -464,8 +465,22 @@ def draw_engine_materials(test, engine, root: Path):
             0x80E1 if bits == 32 else 0x80E0, 0x1401, pixels)
         check(f"TGA upload {path.name}")
 
-    checks = 0
-    for material in ("pme0_head056", "pfh0_head121", "pfh0_robe187"):
+    # Resolve the reported body models through the shipped catalog. Drawing
+    # only the canonical human material missed racial meshes with no binding.
+    catalog = {}
+    for line in (root / "sw_2da" / "tintmap.2da").read_text().splitlines():
+        columns = line.split()
+        if len(columns) >= 4 and columns[0].isdigit():
+            catalog.setdefault(columns[1], set()).add(columns[2])
+    cases = [("pme0_head056", "rodian"), ("pfh0_head121", "female"), ("pfh0_robe187", "female")]
+    for part in ("shinl249", "shinr249", "footl247", "footr247"):
+        model, material = f"pme0_{part}", f"pmh0_{part}"
+        if material not in catalog.get(model, set()):
+            raise AssertionError(f"Reported NPC model {model} has no catalog binding for {material}")
+        cases.append((material, "rodian"))
+
+    checks, palette_checks = 0, 0
+    for material, npc in cases:
         source = (root / "sw_tint_mtr" / f"{material}.mtr").read_text()
         parameters = material_parameters(source)
         vertex = re.search(r"^customshaderVS\s+(\S+)", source, re.MULTILINE)[1]
@@ -476,9 +491,21 @@ def draw_engine_materials(test, engine, root: Path):
         width, height, _ = tint_dds_layout(data[:128], len(data), dds.with_suffix(".txi").read_text())
         payload = data[128:]
         pixels = ct.create_string_buffer(payload)
-        for quality, lighting in product(range(3), range(2)):
+        inspect_leather = material.startswith(("pmh0_shin", "pmh0_foot"))
+        outputs = ("surface", "palette") if inspect_leather else ("surface",)
+        for quality, lighting, output in product(range(3), range(2), outputs):
             configuration = quality, lighting, 0, 0, 0
-            program = test.program(engine.source(fragment, True, configuration),
+            override = None
+            if output == "palette":
+                # Keep production sampling and lighting intact, exposing only
+                # the selected palette row/layer/environment coverage at output.
+                override, replacements = re.subn(
+                    r"gl_FragColor\s*=\s*vec4\(FragmentColor\.rgb,\s*outputAlpha\);",
+                    "gl_FragColor = vec4(v, layer / 10.0, fEnvMapLevel, outputAlpha);",
+                    engine.read(fragment))
+                if replacements != 1:
+                    raise AssertionError(f"Cannot inspect production palette output for {fragment}")
+            program = test.program(engine.source(fragment, True, configuration, override),
                 engine.source(vertex, False, configuration))
             attributes = []
             try:
@@ -500,7 +527,7 @@ def draw_engine_materials(test, engine, root: Path):
                     test.vector(test.location(program, name.encode()), 1, 1, 1, 1)
                 test.integer(test.location(program, b"staticLighting"), 1)
                 upload_material_parameters(test, program, parameters,
-                    native_npc_rows("rodian" if material == "pme0_head056" else "female"))
+                    native_npc_rows(npc))
                 for unit in range(16):
                     test.active_texture(0x84C0 + unit)
                     test.bind_texture(0x0DE1, unit + 1)
@@ -525,7 +552,8 @@ def draw_engine_materials(test, engine, root: Path):
                 test.bind_texture(0x0DE1, 8)
                 compressed_image(0x0DE1, 0, 0x8DBD, width, height, 0, len(payload), pixels)
                 check(f"BC5 compressed upload {dds.name}")
-                for mip_mode in ("base-level", "default-incomplete", "generated-mips"):
+                mip_modes = ("base-level",) if output == "palette" else ("base-level", "default-incomplete", "generated-mips")
+                for mip_mode in mip_modes:
                     test.texture_parameter(0x0DE1, 0x813D, 0 if mip_mode == "base-level" else 1000)
                     test.texture_parameter(0x0DE1, 0x2801, 0x2601 if mip_mode == "base-level" else 0x2703)
                     if mip_mode == "generated-mips":
@@ -540,6 +568,12 @@ def draw_engine_materials(test, engine, root: Path):
                     test.read(4, 4, 1, 1, 0x1908, 0x1406, result)
                     if not all(math.isfinite(value) for value in result) or abs(result[3] - 1) > 0.001:
                         raise AssertionError(f"Production draw did not produce a finite opaque fragment: {tuple(result)}")
+                    if output == "palette":
+                        expected = (native_npc_rows("rodian")["rowleath2"][0], 0.7, 0.0)
+                        if any(abs(actual - target) > 1.5 / 255 for actual, target in zip(result, expected)):
+                            raise AssertionError(f"NPC leather part {material} selected wrong row/layer/environment "
+                                f"coverage: {tuple(result)}, expected {expected}")
+                        palette_checks += 1
                     checks += 1
             finally:
                 for index in attributes:
@@ -547,6 +581,8 @@ def draw_engine_materials(test, engine, root: Path):
                 test.delete_program(program)
     print(f"Production draws passed: {checks}; actual NPC BC5 DDS + atlas/white TGA, all quality/lighting modes, "
         "base/default/generated mip sampling. NWN DDS parsing is not exercised.", flush=True)
+    print(f"Reported shin/foot palette checks passed: {palette_checks}; authored Leather2 row 23 and zero "
+        "environment coverage using production sampling with diagnostic fragment output.", flush=True)
 
 
 ADAPTER = """

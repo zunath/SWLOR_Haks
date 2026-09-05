@@ -41,6 +41,8 @@ CLOAK_MODEL_2DA = REPOSITORY_ROOT / "sw_2da" / "cloakmodel.2da"
 HAK_CONFIG = REPOSITORY_ROOT / "hakbuilder.json"
 SOURCE_MANIFEST = Path(__file__).with_name("TintMapSources.json")
 MODULAR_FALLBACKS = Path(__file__).with_name("TintMapFallbacks.json")
+STOCK_PALETTE_RESOURCES = Path(__file__).with_name("TintMapStockPalettes.json")
+MATERIAL_SOURCES = Path(__file__).with_name("TintMapMaterialSources.json")
 WHITE_TEXTURE = REPOSITORY_ROOT / "sw_item" / "plt_white.tga"
 PALETTE_TEXTURE = REPOSITORY_ROOT / "sw_item" / "plt_palette.tga"
 PALETTE_TXI = REPOSITORY_ROOT / "sw_item" / "plt_palette.txi"
@@ -59,6 +61,12 @@ _ACTIVE_MODELS: dict[str, Path] | None = None
 _ACTIVE_RENDER_SURFACES: set[str] | None = None
 _TABLE_REFERENCED_RESREFS: set[str] | None = None
 _HAK_DIRECTORIES: tuple[Path, ...] | None = None
+_NATIVE_MODULAR_PALETTES: set[str] | None = None
+_MATERIAL_SOURCES: dict[str, dict[str, object]] | None = None
+_MATERIAL_BITMAP_ALIASES: dict[str, str] = {}
+_PROFILE_ALIASES: dict[str, tuple[str, list[str]]] = {}
+_PROFILE_SIGNATURES: dict[tuple[str, str], tuple[tuple[tuple[str, ...], str], ...]] = {}
+_PRESERVED_MATERIALS: dict[str, tuple[str, list[str]]] = {}
 
 STOCK_MODEL_RESOURCE_TYPE = 2002
 STOCK_KEY_ARCHIVES = (
@@ -192,9 +200,9 @@ AUTHORED_HAIR_MATERIALS = frozenset(TEXTURE9_ALPHA_MATERIALS)
 # the embedded name as authoritative discarded live armor masks such as the
 # pmh0_leg[lr]243 pair (whose meshes say ``spodnie``).
 MODULAR_PART_DIRECTORY_PREFIX = "sw_pt_"
-MODULAR_MESH_NODE_TYPES = {"animmesh", "danglymesh", "skin", "trimesh"}
+MODULAR_MESH_NODE_TYPES = {"aabb", "animmesh", "danglymesh", "skin", "trimesh"}
 MODULAR_MODEL_PATTERN = re.compile(
-    r"^p(?P<gender>[fm])(?P<race>[a-z])(?P<phenotype>[0-9])_(?P<part>[a-z]+[0-9]{3})$",
+    r"^p(?P<gender>[fm])(?P<race>[a-z])(?P<phenotype>[0-9]+)_(?P<part>[a-z]+[0-9]{3})$",
     re.IGNORECASE,
 )
 
@@ -205,6 +213,51 @@ EMITTER_HEADER_SIZE = 212
 REFERENCE_HEADER_SIZE = 68
 MESH_TEXTURE0_OFFSET = 120
 MESH_MATERIAL_NAME_OFFSET = 312
+
+
+def stock_palette_inventory(data_directory: Path) -> dict[str, object]:
+    """Record stock PLT lookup names so audits preserve native fallback order."""
+    palettes: set[str] = set()
+    keys: list[dict[str, str]] = []
+    for path in sorted(data_directory.glob("*.key")):
+        data = path.read_bytes()
+        if len(data) < 64 or data[:8] != b"KEY V1  ":
+            raise RuntimeError(f"Invalid NWN KEY archive: {path}")
+        _, count, _, table = struct.unpack_from("<IIII", data, 8)
+        if table + count * 22 > len(data):
+            raise RuntimeError(f"Truncated resource table in {path}")
+        keys.append({"name": path.name, "sha256": hashlib.sha256(data).hexdigest()})
+        for index in range(count):
+            offset = table + index * 22
+            if struct.unpack_from("<H", data, offset + 16)[0] == 6:
+                palettes.add(data[offset:offset + 16].split(b"\0", 1)[0].decode("ascii").lower())
+    if not keys or not palettes:
+        raise RuntimeError(f"No stock palette resources indexed under {data_directory}")
+    return {
+        "formatVersion": 1,
+        "description": "Stock NWN PLT resource names from the listed KEY files; resource payloads are not redistributed.",
+        "keys": keys,
+        "palettes": sorted(palettes),
+    }
+
+
+def native_modular_palettes() -> set[str]:
+    global _NATIVE_MODULAR_PALETTES
+    if _NATIVE_MODULAR_PALETTES is None:
+        if not STOCK_PALETTE_RESOURCES.is_file():
+            raise RuntimeError(
+                "Missing stock PLT inventory. Run python tools/GenerateTintMapAssets.py "
+                '--refresh-stock-palettes --game-data "<NWN install>/data".'
+            )
+        data = json.loads(STOCK_PALETTE_RESOURCES.read_text(encoding="utf-8"))
+        names = data.get("palettes", [])
+        if data.get("formatVersion") != 1 or not names or names != sorted(set(names)):
+            raise RuntimeError(f"Invalid stock PLT inventory: {STOCK_PALETTE_RESOURCES}")
+        _NATIVE_MODULAR_PALETTES = set(names)
+        _NATIVE_MODULAR_PALETTES.update(
+            path.stem.lower() for directory in hak_directories() for path in directory.glob("*.plt")
+        )
+    return _NATIVE_MODULAR_PALETTES
 
 
 def require_repository_root() -> None:
@@ -530,13 +583,20 @@ def find_plts(predicate: Callable[[Path], bool]) -> tuple[dict[str, Path], list[
     active: dict[str, Path] = {}
     all_paths: list[Path] = []
 
-    # Later configured HAKs have higher resource priority, so scan in reverse
-    # and retain the first physical resource for each resref.
+    # Builder directory order is not the module's runtime HAK priority. Current
+    # palette resources are unique; reject future conflicting duplicates rather
+    # than silently selecting a different palette from the client.
     for directory in reversed(hak_directories()):
         for path in sorted(directory.glob("*.plt"), key=lambda value: value.name.lower()):
             if not predicate(path):
                 continue
             all_paths.append(path)
+            existing = active.get(path.stem.lower())
+            if existing is not None and existing.read_bytes() != path.read_bytes():
+                raise RuntimeError(
+                    f"Conflicting PLT resref '{path.stem.lower()}' in {existing} and {path}; "
+                    "resolve the duplicate using the module's HAK priority before tint conversion"
+                )
             active.setdefault(path.stem.lower(), path)
 
     return active, all_paths
@@ -636,6 +696,7 @@ def find_table_referenced_resrefs() -> set[str]:
 def read_binary_model_material_fields(
     path: Path,
     data: bytes,
+    subtree_name: str | None = None,
 ) -> list[tuple[int, str, int, str | None]]:
     if len(data) < FILE_HEADER_SIZE + 76:
         raise ValueError(f"{path}: expected an NWN1 binary MDL")
@@ -661,11 +722,11 @@ def read_binary_model_material_fields(
             "ascii", errors="strict"
         ).lower()
 
-    pending = [read_uint32(FILE_HEADER_SIZE + 72)]
+    pending = [(read_uint32(FILE_HEADER_SIZE + 72), subtree_name is None)]
     visited: set[int] = set()
     materials: list[tuple[int, str, int, str | None]] = []
     while pending:
-        pointer = pending.pop()
+        pointer, in_subtree = pending.pop()
         if pointer in visited:
             continue
         visited.add(pointer)
@@ -673,6 +734,7 @@ def read_binary_model_material_fields(
         node = FILE_HEADER_SIZE + pointer
         if node < FILE_HEADER_SIZE or node + NODE_HEADER_SIZE > model_end:
             raise ValueError(f"{path}: invalid node pointer 0x{pointer:x}")
+        in_subtree = in_subtree or read_resref(node + 32, 32) == subtree_name
 
         child_array_pointer = read_uint32(node + 72)
         child_count = read_uint32(node + 76)
@@ -681,10 +743,10 @@ def read_binary_model_material_fields(
         child_array = FILE_HEADER_SIZE + child_array_pointer
         if child_count and child_array + child_count * 4 > model_end:
             raise ValueError(f"{path}: invalid child array")
-        pending.extend(read_uint32(child_array + index * 4) for index in range(child_count))
+        pending.extend((read_uint32(child_array + index * 4), in_subtree) for index in range(child_count))
 
         content = read_uint32(node + 108)
-        if content & 0x20 == 0:
+        if content & 0x20 == 0 or not in_subtree:
             continue
 
         mesh = node + NODE_HEADER_SIZE
@@ -784,6 +846,64 @@ def read_model_material_bindings(
     return bindings
 
 
+def read_model_material_surfaces(
+    path: Path,
+    include_implicit_modular_surface: bool = False,
+    subtree_name: str | None = None,
+) -> list[tuple[str, str, str | None]]:
+    """Return per-mesh selectors so native subtree writes cannot affect siblings."""
+    data = path.read_bytes()
+    if data[:4] == bytes(4):
+        return [
+            (f"@field:{offset}", texture, material)
+            for _, texture, offset, material in read_binary_model_material_fields(path, data, subtree_name)
+        ]
+    text = data.decode("ascii", errors="strict")
+    nodes = list(re.finditer(
+        r"(?ims)^\s*node\s+(?P<type>\S+)\s+(?P<name>[^\s]+)[^\r\n]*\r?\n.*?^\s*endnode\b[^\r\n]*(?:\r?\n|$)",
+        text,
+    ))
+    node_names = [match["name"].lower() for match in nodes]
+    if len(node_names) != len(set(node_names)):
+        raise ValueError(
+            f"{path}: repeated ASCII node names cannot be addressed independently; "
+            "compile this model with tools/CompileModels.py --apply before binding tint materials"
+        )
+    selected = {match["name"].lower() for match in nodes} if subtree_name is None else {
+        match["name"].lower() for match in nodes if match["name"].lower() == subtree_name
+    }
+    if subtree_name is not None:
+        while True:
+            descendants = {
+                match["name"].lower() for match in nodes
+                if (parent := re.search(r"(?im)^\s*parent\s+(\S+)", match[0]))
+                and parent[1].lower() in selected
+            }
+            if descendants.issubset(selected):
+                break
+            selected.update(descendants)
+    surfaces = []
+    for match in nodes:
+        name = match["name"].lower()
+        if name not in selected:
+            continue
+        if subtree_name is not None and match["type"].lower() not in MODULAR_MESH_NODE_TYPES:
+            continue  # Native subtree replacement collects mesh nodes only.
+        texture_match = re.search(r"(?im)^\s*(?:bitmap|texture0)\s+([^\s#]+)", match[0])
+        if texture_match is None:
+            if not include_implicit_modular_surface or match["type"].lower() not in MODULAR_MESH_NODE_TYPES:
+                continue
+            texture = path.stem.lower()
+        else:
+            texture = texture_match[1].lower()
+            if texture == "null":
+                texture = path.stem.lower()
+        material_match = re.search(r"(?im)^\s*materialname\s+([^\s#]+)", match[0])
+        material = material_match[1].lower() if material_match else None
+        surfaces.append((f"@node:{name}", texture, None if material == "null" else material))
+    return surfaces
+
+
 def pending_model_material_bindings(
     path: Path,
     desired: dict[str, str],
@@ -791,7 +911,7 @@ def pending_model_material_bindings(
 ) -> dict[str, str]:
     pending: dict[str, str] = {}
     try:
-        bindings = read_model_material_bindings(
+        bindings = read_model_material_surfaces(
             path,
             include_implicit_modular_surface,
         )
@@ -801,10 +921,11 @@ def pending_model_material_bindings(
         # their raw candidate strings keep source masks alive, but they cannot
         # be rewritten safely without a trustworthy mesh boundary.
         return pending
-    for texture, material in bindings:
-        target = desired.get(texture)
+    for selector, texture, material in bindings:
+        key = selector if selector in desired else texture
+        target = desired.get(key)
         if target is not None and material != target:
-            pending[texture] = target
+            pending[key] = target
     return pending
 
 
@@ -851,7 +972,8 @@ def synchronize_model_material_bindings(path: Path, bindings: dict[str, str]) ->
             else:
                 texture = texture_match.group("texture").lower()
                 source = texture if texture != "null" else path.stem.lower()
-            target = normalized.get(source)
+            node_name = re.match(r"(?im)^\s*node\s+\S+\s+(\S+)", node).group(1).lower()
+            target = normalized.get(f"@node:{node_name}", normalized.get(source))
             if target is None:
                 return node
 
@@ -894,7 +1016,7 @@ def synchronize_model_material_bindings(path: Path, bindings: dict[str, str]) ->
     updated = bytearray(data)
     changed = False
     for _, source, material_offset, material in read_binary_model_material_fields(path, data):
-        target = normalized.get(source)
+        target = normalized.get(f"@field:{material_offset}", normalized.get(source))
         if target is None or material == target:
             continue
         encoded = target.encode("ascii")
@@ -1014,7 +1136,12 @@ def find_generated_materials_shadowing_authored_surfaces(
         if not path.parent.name.lower().startswith(MODULAR_PART_DIRECTORY_PREFIX):
             continue
         try:
-            for texture, material in read_model_material_bindings(path):
+            native_references = find_native_modular_tint_references(path, entries) or {}
+            for selector, texture, material in read_model_material_surfaces(path):
+                if selector in native_references:
+                    # Native PLT replacement supersedes real surfaces only
+                    # inside the named body-part subtree.
+                    continue
                 if (
                     material in generated_materials
                     and texture in render_surfaces
@@ -1225,11 +1352,10 @@ def find_unpadded_model_material_source(
     model: str,
     entries: dict[str, dict[str, object]],
 ) -> str | None:
-    """Resolve the one legacy convention where an MDL pads a PLT index.
+    """Retain historical unpadded catalog sources after native lookup fails.
 
-    For example, ``pmo0_footl010.mdl`` selects ``pmo0_footL10.plt``.  The
-    catalog must retain the PLT resref as the material name, while the active
-    model name remains padded for appearance-part lookup.
+    This compatibility recovery is not the client's body-part PLT algorithm:
+    native lookup formats the index with three digits and takes precedence.
     """
     match = re.fullmatch(r"(.*?)([0-9]+)", model)
     if match is None:
@@ -1238,6 +1364,132 @@ def find_unpadded_model_material_source(
     if candidate == model or candidate not in entries:
         return None
     return candidate
+
+
+def modular_palette_candidates(model: str) -> tuple[str, ...]:
+    """Follow CreateBodyParts' PLT lookup order, including phenotype fallback."""
+    match = MODULAR_MODEL_PATTERN.fullmatch(model)
+    if match is None:
+        return ()
+    gender, race, part = match.group("gender", "race", "part")
+    candidates = [model, f"p{gender}{race}0_{part}", f"p{gender}h0_{part}"]
+    if gender == "f":
+        candidates.append(f"pmh0_{part}")
+    return tuple(dict.fromkeys(candidates))
+
+
+def modular_palette_source(
+    model: str,
+    entries: dict[str, dict[str, object]],
+    native_palettes: set[str],
+) -> str | None:
+    for candidate in modular_palette_candidates(model):
+        if candidate in entries:
+            return candidate
+        if candidate in native_palettes:
+            # A surviving higher-priority PLT stops the native fallback chain;
+            # it must not be replaced by a lower-priority converted palette.
+            return None
+    return None
+
+
+def find_native_modular_tint_references(
+    path: Path,
+    entries: dict[str, dict[str, object]],
+) -> dict[str, str] | None:
+    """Replace the same meshes as the native segmented-body loader.
+
+    CreateBodyParts selects one PLT through the race/phenotype/human fallback
+    chain. ReplaceTextureSubtree passes no old-texture filter, so even a valid
+    embedded bitmap is superseded by this selected part palette. The native
+    operation retains the shared material's other inputs and parameters.
+    Models without a selected converted PLT keep their authored material path.
+    """
+    choices = native_modular_material_choices(path, entries)
+    if choices is None:
+        return None
+    return {selector: source for selector, (source, _, _) in choices.items() if source is not None}
+
+
+def authored_material_sources() -> dict[str, dict[str, object]]:
+    """Original shared-material inputs, captured before PLT conversion.
+
+    The native loader replaces the local diffuse, while an already loaded MTR
+    and its texture slots remain in force. Current generated MTRs cannot serve
+    as that provenance: they already contain our tint shader and placeholder.
+    """
+    global _MATERIAL_SOURCES
+    if _MATERIAL_SOURCES is None:
+        metadata = json.loads(MATERIAL_SOURCES.read_text(encoding="utf-8"))
+        _MATERIAL_SOURCES = metadata["materials"]
+        _MATERIAL_BITMAP_ALIASES.update(metadata.get("bitmapAliases", {}))
+    return _MATERIAL_SOURCES
+
+
+def raw_model_bitmaps(path: Path) -> dict[str, str]:
+    """Read actual bitmap values without inventing a same-name implicit texture."""
+    data = path.read_bytes()
+    if data[:4] == bytes(4):
+        return {
+            f"@field:{material_offset}": data[texture_offset:texture_offset + 64].split(b"\0", 1)[0].decode("ascii").lower()
+            for texture_offset, _, material_offset, _ in read_binary_model_material_fields(path, data)
+        }
+    result = {}
+    for node in re.finditer(r"(?ims)^\s*node\s+\S+\s+(\S+)[^\r\n]*\r?\n(.*?)^\s*endnode\b", data.decode("ascii")):
+        bitmap = re.search(r"(?im)^\s*(?:bitmap|texture0)\s+(\S+)", node[2])
+        result[f"@node:{node[1].lower()}"] = bitmap[1].lower() if bitmap else ""
+    return result
+
+
+def native_modular_material_choices(
+    path: Path,
+    entries: dict[str, dict[str, object]],
+) -> dict[str, tuple[str | None, str, list[str]]] | None:
+    """Choose visible PLT and retained shared material independently per mesh.
+
+    An explicit authored MTR slot zero takes priority over the replaced local
+    PLT, even when its raster resource is missing. Such a surface keeps its
+    original material and is not tint eligible.
+    Other meshes keep the original MTR's maps and parameters while using the
+    native-selected part palette; an absent MTR keeps the base profile.
+    """
+    if not path.parent.name.lower().startswith(MODULAR_PART_DIRECTORY_PREFIX):
+        return None
+    source = modular_palette_source(path.stem.lower(), entries, native_modular_palettes())
+    if source is None:
+        return None
+    surfaces = read_model_material_surfaces(path, True, subtree_name=path.stem.lower())
+    if not surfaces:
+        return None
+    bitmaps = raw_model_bitmaps(path)
+    original_materials = authored_material_sources()
+    choices = {}
+    for selector, _, _ in surfaces:
+        bitmap = _MATERIAL_BITMAP_ALIASES.get(bitmaps[selector], bitmaps[selector])
+        profile = original_materials.get(bitmap, {})
+        lines = list(profile.get("lines", []))
+        texture0 = next((line.split()[1].lower() for line in lines if re.match(r"^\s*texture0\s+\S+", line, re.IGNORECASE)), "")
+        fixed = texture0 not in {"", "null"}
+        original_material = bitmap if profile else ""
+        if fixed and (bitmap in entries or not source_mtr_paths(bitmap)):
+            original_material = scoped_material_alias(bitmap, "authored:original")
+            _PRESERVED_MATERIALS[original_material] = (bitmap, lines)
+        choices[selector] = (None if fixed else source, original_material, lines)
+    return choices
+
+
+def material_profile_signature(source: str, profile: tuple[str, list[str]] | None = None):
+    profile_name = profile[0] if profile is not None else "@canonical"
+    key = (source, profile_name)
+    if key not in _PROFILE_SIGNATURES:
+        text = tint_material_text(mtr_path(source), source, "mask", 1, 1, source, profile)
+        _PROFILE_SIGNATURES[key] = tuple(sorted(
+            (directive, " ".join(line.split()).lower())
+            for line in text.splitlines()
+            if (directive := mtr_directive_key(line)) is not None
+            and not re.match(r"^\s*texture\d+\s+null\s*$", line, re.IGNORECASE)
+        ))
+    return _PROFILE_SIGNATURES[key]
 
 
 def build_model_material_plan(
@@ -1261,17 +1513,37 @@ def build_model_material_plan(
         alias_sources,
     )
     human_fallback_sources = set(human_fallbacks.values())
-    records: dict[tuple[str, str, str], dict[str, object]] = {}
+    records: dict[tuple[str, str, str, str], dict[str, object]] = {}
+    restored_bindings: dict[Path, dict[str, str]] = {}
 
     for model, path in sorted(models.items()):
         scope = model_material_scope(model, path)
         references = find_model_tint_material_references(path, materials, alias_sources)
-        if model in authored_texture_overrides:
+        native_choices = native_modular_material_choices(path, entries)
+        profiles = {}
+        if native_choices is not None:
+            outside_textures = {
+                texture for selector, texture, _ in read_model_material_surfaces(path, True)
+                if selector not in native_choices
+            }
+            references = {
+                texture: source for texture, source in references.items()
+                if texture in outside_textures
+            }
+            for selector, (source, profile_name, profile_lines) in native_choices.items():
+                if source is None:
+                    restored_bindings.setdefault(path, {})[selector] = profile_name
+                    continue
+                references[selector] = source
+                profile = (profile_name, profile_lines)
+                if material_profile_signature(source, profile) != material_profile_signature(source):
+                    profiles[selector] = profile
+        if native_choices is None and model in authored_texture_overrides:
             references.update({
                 texture: authored_texture_overrides[model]
                 for texture, _ in read_model_material_bindings(path)
             })
-        if not references:
+        if not references and native_choices is None:
             unpadded_source = find_unpadded_model_material_source(model, entries)
             if unpadded_source is not None:
                 references.update({
@@ -1289,10 +1561,14 @@ def build_model_material_plan(
                 # material behavior.
                 references[path.stem.lower()] = model
         for current, source in references.items():
-            key = (model, source, scope)
+            profile = profiles.get(current)
+            profile_key = "" if profile is None else hashlib.sha256(
+                repr(material_profile_signature(source, profile)).encode("utf-8")
+            ).hexdigest()[:12]
+            key = (model, source, scope, profile_key)
             record = records.setdefault(
                 key,
-                {"model": model, "source": source, "scope": scope, "path": path, "current": set()},
+                {"model": model, "source": source, "scope": scope, "path": path, "current": set(), "profile": profile, "profile_key": profile_key},
             )
             current_materials = record["current"]
             assert isinstance(current_materials, set)
@@ -1309,7 +1585,7 @@ def build_model_material_plan(
         scopes_by_source.setdefault(source, set()).add(str(record["scope"]))
 
     rows: set[tuple[str, str, tuple[int, ...]]] = set()
-    desired_bindings: dict[Path, dict[str, str]] = {}
+    desired_bindings: dict[Path, dict[str, str]] = restored_bindings
     active_aliases: dict[str, str] = {}
     for record in records.values():
         model = str(record["model"])
@@ -1317,8 +1593,9 @@ def build_model_material_plan(
         scope = str(record["scope"])
         path = record["path"]
         material = source
-        if path is not None and scope.startswith("part:") and len(scopes_by_source[source]) > 1:
-            material = scoped_material_alias(source, scope)
+        if record["profile"] is not None or (path is not None and scope.startswith("part:") and len(scopes_by_source[source]) > 1):
+            alias_scope = scope if record["profile"] is None else f"{scope}:profile:{record['profile_key']}"
+            material = scoped_material_alias(source, alias_scope)
             if material in materials and material != source:
                 raise RuntimeError(
                     f"Generated material alias '{material}' collides with source material '{material}'"
@@ -1329,6 +1606,8 @@ def build_model_material_plan(
                     f"Generated material alias '{material}' collides for '{existing_source}' and '{source}'"
                 )
             active_aliases[material] = source
+            if record["profile"] is not None:
+                _PROFILE_ALIASES[material] = record["profile"]
 
         if path is not None:
             current_materials = record["current"]
@@ -1350,6 +1629,7 @@ def build_model_material_plan(
                     path.stem.lower() in human_fallbacks
                     or path.stem.lower() in human_fallback_sources
                     or path.stem.lower() in desired
+                    or any(key.startswith("@") for key in desired)
                 ),
             )
         )
@@ -1419,6 +1699,9 @@ def find_used_tint_materials(entries: dict[str, dict[str, object]]) -> set[str]:
     used: set[str] = set()
     for path in models.values():
         used.update(find_model_tint_material_references(path, materials, alias_sources).values())
+        native_references = find_native_modular_tint_references(path, entries)
+        if native_references is not None:
+            used.update(native_references.values())
     used.update(
         find_modular_human_material_fallbacks(models, entries, alias_sources).values()
     )
@@ -1778,6 +2061,20 @@ def update_mtr(
     height: int,
     source_material: str | None = None,
 ) -> None:
+    profile = _PROFILE_ALIASES.get(material)
+    text = tint_material_text(path, material, texture, width, height, source_material, profile)
+    path.write_text(text, encoding="utf-8", newline="\n")
+
+
+def tint_material_text(
+    path: Path,
+    material: str,
+    texture: str,
+    width: int,
+    height: int,
+    source_material: str | None = None,
+    profile: tuple[str, list[str]] | None = None,
+) -> str:
     source_material = source_material or material
     generated_lines = path.read_text(encoding="utf-8-sig").splitlines() if path.exists() else []
     source_paths = source_mtr_paths(source_material)
@@ -1795,6 +2092,8 @@ def update_mtr(
         if generated_source.exists():
             source_lines = generated_source.read_text(encoding="utf-8-sig").splitlines()
     original_lines = merge_mtr_lines(source_lines, generated_lines)
+    if profile is not None:
+        source_material, original_lines = profile
     mapped_shader = uses_mapped_shader(original_lines)
     original_fragment_shaders = fragment_shaders(original_lines)
     selected_fragment_shader = tint_fragment_shader(source_material, original_lines)
@@ -1858,8 +2157,7 @@ def update_mtr(
     if texture9_alpha:
         lines.append(f"texture9 {texture9_alpha}")
         lines.append("parameter float useTexture9Alpha 1.0")
-    normalized = "\n".join(line.rstrip() for line in lines).strip() + "\n"
-    path.write_text(normalized, encoding="utf-8", newline="\n")
+    return "\n".join(line.rstrip() for line in lines).strip() + "\n"
 
 
 def write_white_texture() -> None:
@@ -2382,9 +2680,13 @@ def deduplicate_assets(entries: dict[str, dict[str, object]]) -> None:
 
 def synchronize_model_material_aliases(
     entries: dict[str, dict[str, object]],
+    preserve_legacy_aliases: bool = True,
 ) -> tuple[int, dict[str, str]]:
-    preserved_aliases = read_preserved_2da_material_sources(entries)
+    preserved_aliases = read_preserved_2da_material_sources(entries) if preserve_legacy_aliases else {}
     _, pending_bindings, planned_aliases = build_model_material_plan(entries)
+    for alias, (_, lines) in sorted(_PRESERVED_MATERIALS.items()):
+        path = REPOSITORY_ROOT / "sw_item" / f"{alias}.mtr"
+        path.write_text("\n".join(lines).strip() + "\n", encoding="utf-8", newline="\n")
     changed_models = 0
     for path, path_bindings in sorted(pending_bindings.items(), key=lambda value: str(value[0])):
         try:
@@ -2606,10 +2908,25 @@ def refresh_materials() -> None:
     )
 
 
+def refresh_model_bindings() -> None:
+    """Restore native part-palette coverage without rewriting packed pixels."""
+    entries = load_source_manifest()
+    order = list(entries)
+    changed, aliases = synchronize_model_material_aliases(entries, preserve_legacy_aliases=False)
+    retired = remove_orphaned_materials(entries, set(aliases))
+    write_source_manifest(entries, order)
+    write_2da(entries)
+    print(
+        f"Refreshed tint bindings in {changed} models and retired {retired} unused MTR aliases; "
+        "packed maps are unchanged.", flush=True,
+    )
+
+
 def refresh_material(material: str) -> None:
     """Regenerate one source material and its recorded scoped aliases."""
     source = material.lower()
     entries = load_source_manifest()
+    build_model_material_plan(entries)
     entry = entries.get(source)
     if entry is None:
         raise RuntimeError(f"Unknown tint source material '{source}'")
@@ -2962,6 +3279,18 @@ def tint_shader_material_errors(shader: str) -> list[str]:
     return []
 
 
+def preserved_material_errors() -> list[str]:
+    errors = []
+    for alias, (source, lines) in sorted(_PRESERVED_MATERIALS.items()):
+        path = REPOSITORY_ROOT / "sw_item" / f"{alias}.mtr"
+        expected = "\n".join(lines).strip() + "\n"
+        if not path.is_file():
+            errors.append(f"{alias}: missing preserved authored material '{source}'")
+        elif path.read_text(encoding="utf-8-sig") != expected:
+            errors.append(f"{alias}: preserved authored material '{source}' differs from its original shader/texture inputs")
+    return errors
+
+
 def audit() -> None:
     entries = load_source_manifest()
     errors: list[str] = []
@@ -2975,6 +3304,7 @@ def audit() -> None:
     active_aliases: dict[str, str] = {}
     if entries:
         model_material_rows, pending_model_bindings, active_aliases = build_model_material_plan(entries)
+        errors.extend(preserved_material_errors())
         active_models = find_active_models()
         uncompiled_tint_models = find_uncompiled_tint_models(active_models, model_material_rows)
         compiled_tint_model_count = len({model for model, _, _ in model_material_rows}) - len(uncompiled_tint_models)
@@ -3194,7 +3524,9 @@ def audit() -> None:
         )
         mtr = material_path.read_text(encoding="utf-8-sig").lower()
         texture = str(entry.get("texture") or source)
-        fragment_shader = tint_fragment_shader(source, mtr.splitlines())
+        profile = _PROFILE_ALIASES.get(alias)
+        profile_material = profile[0] if profile is not None else source
+        fragment_shader = tint_fragment_shader(profile_material, mtr.splitlines())
         required = (
             "customshadervs ",
             f"customshaderfs {fragment_shader}",
@@ -3210,12 +3542,16 @@ def audit() -> None:
         for line in required:
             if line not in mtr:
                 errors.append(f"{alias}: scoped MTR missing '{line}'")
-        if source in TEXTURE1_ALPHA_MATERIALS and "parameter float usetexture1alpha 1.0" not in mtr:
+        if profile_material in TEXTURE1_ALPHA_MATERIALS and "parameter float usetexture1alpha 1.0" not in mtr:
             errors.append(f"{alias}: scoped MTR lost required texture-alpha compatibility")
-        if source in TEXTURE9_ALPHA_MATERIALS:
-            alpha_texture = TEXTURE9_ALPHA_MATERIALS[source]
+        if profile_material in TEXTURE9_ALPHA_MATERIALS:
+            alpha_texture = TEXTURE9_ALPHA_MATERIALS[profile_material]
             if f"texture9 {alpha_texture}" not in mtr or "parameter float usetexture9alpha 1.0" not in mtr:
                 errors.append(f"{alias}: scoped MTR lost required dedicated alpha-map compatibility")
+        if profile is not None:
+            expected = tint_material_text(material_path, alias, texture, int(entry["width"]), int(entry["height"]), source, profile)
+            if mtr != expected.lower():
+                errors.append(f"{alias}: tint alias does not preserve its authored shared-material inputs")
 
     if not model_material_rows:
         errors.append("model/material catalog is empty")
@@ -3387,6 +3723,16 @@ def main() -> None:
         help="regenerate MTR declarations without changing packed maps or meshes",
     )
     action.add_argument(
+        "--refresh-model-bindings",
+        action="store_true",
+        help="bind every native modular PLT fallback and refresh its catalog without changing packed pixels",
+    )
+    action.add_argument(
+        "--refresh-stock-palettes",
+        action="store_true",
+        help="record stock PLT lookup names and KEY provenance for portable native-fallback audits",
+    )
+    action.add_argument(
         "--refresh-material",
         metavar="RESREF",
         help="regenerate one MTR declaration and its recorded scoped aliases",
@@ -3430,6 +3776,15 @@ def main() -> None:
         relocate()
     elif arguments.refresh_materials:
         refresh_materials()
+    elif arguments.refresh_model_bindings:
+        refresh_model_bindings()
+    elif arguments.refresh_stock_palettes:
+        if arguments.game_data is None:
+            parser.error("--refresh-stock-palettes requires --game-data")
+        STOCK_PALETTE_RESOURCES.write_text(
+            json.dumps(stock_palette_inventory(arguments.game_data), indent=2) + "\n",
+            encoding="utf-8", newline="\n",
+        )
     elif arguments.refresh_material:
         refresh_material(arguments.refresh_material)
     elif arguments.retain_dynamic_cloaks:
@@ -3447,6 +3802,11 @@ def main() -> None:
             parser.error("--import-stock-models requires --game-data")
         import_stock_models(arguments.game_data)
     else:
+        if arguments.game_data is not None:
+            expected = stock_palette_inventory(arguments.game_data)
+            recorded = json.loads(STOCK_PALETTE_RESOURCES.read_text(encoding="utf-8"))
+            if recorded != expected:
+                raise RuntimeError("Stock PLT inventory differs from installed KEY files; refresh with --refresh-stock-palettes")
         audit()
 
 
