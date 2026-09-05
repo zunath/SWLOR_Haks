@@ -734,6 +734,26 @@ def find_active_models() -> dict[str, Path]:
     return _ACTIVE_MODELS
 
 
+def find_tint_source_models() -> dict[str, Path]:
+    # Robe RGB body roots are derived from already-bound robes. Reinterpreting
+    # their moved meshes as new body parts changes material scopes and can
+    # overwrite deliberately preserved authored surfaces. Their own generator
+    # validates both source hashes and generated geometry/bindings separately.
+    derived = set()
+    table = REPOSITORY_ROOT / "sw_2da" / "roberender.2da"
+    if table.is_file():
+        for line in table.read_text().splitlines()[3:]:
+            columns = line.split()
+            if len(columns) != 4:
+                raise ValueError("Invalid roberender.2da row")
+            match = re.fullmatch(r"(p[fm][a-z])0_robe(\d{3})", columns[1])
+            if not match or not 34 <= int(columns[2]) <= 255 or columns[3] != "0":
+                raise ValueError("Invalid robe RGB model mapping")
+            root = match[1] + columns[2]
+            derived.update((root, root + "_robe" + match[2]))
+    return {name: path for name, path in find_active_models().items() if name not in derived}
+
+
 def find_active_render_surfaces() -> set[str]:
     """Return texture/material resrefs that can render without a tint fallback."""
     global _ACTIVE_RENDER_SURFACES
@@ -1220,7 +1240,7 @@ def find_generated_materials_shadowing_authored_surfaces(
     render_surfaces = find_active_render_surfaces()
     explicit_overrides = load_authored_texture_overrides()
     shadowed: list[tuple[str, str, str]] = []
-    for model, path in sorted(find_active_models().items()):
+    for model, path in sorted(find_tint_source_models().items()):
         if not path.parent.name.lower().startswith(MODULAR_PART_DIRECTORY_PREFIX):
             continue
         try:
@@ -1588,7 +1608,7 @@ def build_model_material_plan(
     dict[str, str],
 ]:
     global _NATIVE_ROBE_MATERIALS, _NATIVE_ROBE_SOURCES
-    models = find_active_models()
+    models = find_tint_source_models()
     materials = set(entries)
     alias_sources = build_alias_source_lookup(entries)
     human_fallbacks = find_modular_human_material_fallbacks(
@@ -1803,7 +1823,7 @@ def find_invalid_binary_tint_models(
 
 
 def find_used_tint_materials(entries: dict[str, dict[str, object]]) -> set[str]:
-    models = find_active_models()
+    models = find_tint_source_models()
     materials = set(entries)
     alias_sources = build_alias_source_lookup(entries)
     used: set[str] = set()
@@ -3482,6 +3502,9 @@ def preserved_material_errors() -> list[str]:
 def audit() -> None:
     entries = load_source_manifest()
     errors: list[str] = []
+    if (REPOSITORY_ROOT / "sw_2da" / "roberender.2da").is_file():
+        import GenerateRobeRgbModels
+        errors.extend(GenerateRobeRgbModels.check())
     texture_sources: dict[str, set[tuple[str, int, int]]] = {}
     if not entries:
         errors.append("tint source manifest is empty")
