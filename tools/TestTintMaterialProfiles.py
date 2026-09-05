@@ -105,5 +105,33 @@ class MaterialProfileTests(unittest.TestCase):
             self.assertIn("differs from its original", g.preserved_material_errors()[0])
 
 
+class BaseBodyPaletteTests(unittest.TestCase):
+    def test_restored_master_hand_models_use_their_original_full_size_palettes(self):
+        # The hand meshes/UVs were restored from master; the earlier stock mask
+        # is 64px and lays the hand shading out differently despite sharing Skin.
+        entries = g.load_source_manifest()
+        for name in ("pmh0_handl001", "pmh0_handr001"):
+            with self.subTest(name=name):
+                entry = entries[name]
+                self.assertEqual(entry["sourceSha256"], "2d71bdc7106ac85a2d28d08824e7e7f2193210a3fc5aa5bfde0f8b4e075983c8")
+                self.assertEqual((entry["width"], entry["height"]), (256, 256))
+                self.assertEqual(entry["layers"], [0])
+                path = g.packed_dds_path(name, entry)
+                self.assertIsNone(g.check_dds(path, 256, 256))
+                self.assertEqual(path.with_suffix(".txi").read_text().strip(), "mipmap 0")
+                for material in [name] + entry.get("aliases", []):
+                    lines = g.mtr_path(material).read_text().splitlines()
+                    self.assertIn("parameter float tintMapWidth 256.0", lines)
+                    self.assertIn("parameter float tintMapHeight 256.0", lines)
+                    self.assertIn(f"texture7 {entry['texture']}", lines)
+
+    def test_stock_foot_models_retain_their_matching_stock_palettes(self):
+        entries = g.load_source_manifest()
+        for name in ("pmh0_footl001", "pmh0_footr001"):
+            with self.subTest(name=name):
+                self.assertEqual(entries[name]["sourceSha256"], "c24bb70dcc7e06c20af52193b908f36da048381712e23c1979cfe480de8af1d5")
+                self.assertEqual((entries[name]["width"], entries[name]["height"]), (64, 64))
+
+
 if __name__ == "__main__":
     unittest.main()

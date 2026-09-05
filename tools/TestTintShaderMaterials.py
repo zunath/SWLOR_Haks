@@ -478,8 +478,17 @@ def draw_engine_materials(test, engine, root: Path):
         if material not in catalog.get(model, set()):
             raise AssertionError(f"Reported NPC model {model} has no catalog binding for {material}")
         cases.append((material, "rodian"))
+    hand_materials = set()
+    for model in ("pmh0_handl001", "pmh0_handr001"):
+        bindings = catalog.get(model, set())
+        if len(bindings) != 1:
+            raise AssertionError(f"Restored hand model {model} must resolve one material: {bindings}")
+        material = next(iter(bindings))
+        hand_materials.add(material)
+        cases.append((material, "rodian"))
 
-    checks, palette_checks = 0, 0
+    checks = 0
+    palette_checks = {"rowleath2": 0, "rowskin": 0}
     for material, npc in cases:
         source = (root / "sw_tint_mtr" / f"{material}.mtr").read_text()
         parameters = material_parameters(source)
@@ -489,10 +498,13 @@ def draw_engine_materials(test, engine, root: Path):
         dds = next(root.glob(f"sw_tint*/{mask}.dds"))
         data = dds.read_bytes()
         width, height, _ = tint_dds_layout(data[:128], len(data), dds.with_suffix(".txi").read_text())
+        if material in hand_materials and (width, height) != (256, 256):
+            raise AssertionError(f"Restored hand {material} still uses a mask from the stock mesh: {width}x{height}")
         payload = data[128:]
         pixels = ct.create_string_buffer(payload)
-        inspect_leather = material.startswith(("pmh0_shin", "pmh0_foot"))
-        outputs = ("surface", "palette") if inspect_leather else ("surface",)
+        inspect_row = ("rowleath2" if material.startswith(("pmh0_shin", "pmh0_foot"))
+            else "rowskin" if material in hand_materials else None)
+        outputs = ("surface", "palette") if inspect_row else ("surface",)
         for quality, lighting, output in product(range(3), range(2), outputs):
             configuration = quality, lighting, 0, 0, 0
             override = None
@@ -569,11 +581,12 @@ def draw_engine_materials(test, engine, root: Path):
                     if not all(math.isfinite(value) for value in result) or abs(result[3] - 1) > 0.001:
                         raise AssertionError(f"Production draw did not produce a finite opaque fragment: {tuple(result)}")
                     if output == "palette":
-                        expected = (native_npc_rows("rodian")["rowleath2"][0], 0.7, 0.0)
+                        expected = (native_npc_rows("rodian")[inspect_row][0],
+                            0.7 if inspect_row == "rowleath2" else 0.0, 0.0)
                         if any(abs(actual - target) > 1.5 / 255 for actual, target in zip(result, expected)):
-                            raise AssertionError(f"NPC leather part {material} selected wrong row/layer/environment "
+                            raise AssertionError(f"NPC part {material} selected wrong row/layer/environment "
                                 f"coverage: {tuple(result)}, expected {expected}")
-                        palette_checks += 1
+                        palette_checks[inspect_row] += 1
                     checks += 1
             finally:
                 for index in attributes:
@@ -581,8 +594,10 @@ def draw_engine_materials(test, engine, root: Path):
                 test.delete_program(program)
     print(f"Production draws passed: {checks}; actual NPC BC5 DDS + atlas/white TGA, all quality/lighting modes, "
         "base/default/generated mip sampling. NWN DDS parsing is not exercised.", flush=True)
-    print(f"Reported shin/foot palette checks passed: {palette_checks}; authored Leather2 row 23 and zero "
+    print(f"Reported shin/foot palette checks passed: {palette_checks['rowleath2']}; authored Leather2 row 23 and zero "
         "environment coverage using production sampling with diagnostic fragment output.", flush=True)
+    print(f"Restored hand palette checks passed: {palette_checks['rowskin']}; authored Skin row 80 and zero "
+        "environment coverage using the master-matched hand masks.", flush=True)
 
 
 ADAPTER = """
