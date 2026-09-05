@@ -947,7 +947,7 @@ class MaterialTest:
             for shader in shaders:
                 self.delete_shader(shader)
 
-    def sample(self, program: int, bound: int, alpha: float, *, mapped=False, overrides=False, color=False):
+    def sample(self, program: int, bound: int, alpha: float, *, mapped=False, overrides=False, color=False, rgb=None):
         self.use(program)
         for name, value in {"texture0Bound": bound, "texture2Bound": int(mapped),
                 "texture3Bound": int(mapped), "inspectSpecularColor": int(color)}.items():
@@ -969,6 +969,19 @@ class MaterialTest:
             pixels = (ct.c_float * 4)(*value)
             self.texture_image(0x0DE1, 0, 0x8814, 1, 1, 0, 0x1908, 0x1406, pixels)
             self.integer(self.location(program, f"texUnit{unit}".encode()), unit)
+        if rgb is not None:
+            # Exercise the same scalar upload selected by the shipped one-value MTR.
+            layer, red, green, blue = rgb
+            rows = ("rowSkin", "rowHair", "rowMetal1", "rowMetal2", "rowCloth1", "rowCloth2",
+                    "rowLeath1", "rowLeath2", "rowTat1", "rowTat2")
+            packed = (red << 16) | (green << 8) | blue
+            encoded = (1 + packed / 8388608 if packed < 8388608
+                       else 2 + (packed - 8388608) / 4194304)
+            self.scalar(self.location(program, rows[layer].encode()), encoded)
+            self.active_texture(0x84C0 + 7)
+            self.bind_texture(0x0DE1, 8)
+            pixels = (ct.c_float * 4)(128 / 255, (layer + 0.5) / 10, 0, 1)
+            self.texture_image(0x0DE1, 0, 0x8814, 1, 1, 0, 0x1908, 0x1406, pixels)
         self.begin(0x0007)
         for point in ((-1, -1), (1, -1), (1, 1), (-1, 1)):
             self.vertex(*point)
