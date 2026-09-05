@@ -1,0 +1,19 @@
+customshaderVS vslit_sm
+renderhint NormalTangents
+customshaderFS fs_plt_tinter
+texture0 plt_white
+texture7 tm_29dd0904acb2e
+texture10 plt_palette
+parameter float tintMapWidth 512.0
+parameter float tintMapHeight 512.0
+parameter float rowSkin -1.0
+parameter float rowHair -1.0
+parameter float rowMetal1 -1.0
+parameter float rowMetal2 -1.0
+parameter float rowCloth1 -1.0
+parameter float rowCloth2 -1.0
+parameter float rowLeath1 -1.0
+parameter float rowLeath2 -1.0
+parameter float rowTat1 -1.0
+parameter float rowTat2 -1.0
+parameter float useNativePalette 1.0
