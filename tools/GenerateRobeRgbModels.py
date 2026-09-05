@@ -19,6 +19,7 @@ import time
 
 import CompileModels as mdl
 import GenerateTintMapAssets as tint
+import ImportStockRobeTints as stock_robes
 
 ROOT = Path(__file__).resolve().parents[1]
 TABLE = ROOT / "sw_2da" / "roberender.2da"
@@ -207,6 +208,13 @@ def check() -> list[str]:
     expected = {name for name in tint.find_active_models() if PATTERN.fullmatch(name) and name in registered}
     if set(read_mappings()) != expected:
         errors.append("Robe RGB catalog does not cover exactly the registered normal-body robes")
+    if not stock_robes.MANIFEST.is_file():
+        errors.append("Stock robe inventory is missing; run ImportStockRobeTints.py")
+    else:
+        stock = json.loads(stock_robes.MANIFEST.read_text())
+        for row in stock["models"]:
+            if row["model"] not in expected:
+                errors.append(f"Selectable stock robe {row['model']} is missing its RGB conversion")
     return errors
 
 

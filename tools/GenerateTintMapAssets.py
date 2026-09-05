@@ -301,6 +301,11 @@ def hak_directories() -> tuple[Path, ...]:
 
 def read_stock_key_models(data_directory: Path) -> dict[str, tuple[Path, int]]:
     """Index stock MDLs from the game's KEY/BIF layer in engine precedence order."""
+    return read_stock_key_resources(data_directory, STOCK_MODEL_RESOURCE_TYPE)
+
+
+def read_stock_key_resources(data_directory: Path, expected_type: int) -> dict[str, tuple[Path, int]]:
+    """Index one resource type without changing the engine's archive precedence."""
     resources: dict[str, tuple[Path, int]] = {}
     install_root = data_directory.parent
 
@@ -342,7 +347,7 @@ def read_stock_key_models(data_directory: Path) -> dict[str, tuple[Path, int]]:
                 "ascii", errors="strict"
             ).lower()
             resource_type, resource_id = struct.unpack_from("<HI", data, offset + 16)
-            if resource_type != STOCK_MODEL_RESOURCE_TYPE:
+            if resource_type != expected_type:
                 continue
             bif_index = resource_id >> 20
             variable_index = resource_id & 0x000F_FFFF
@@ -354,12 +359,12 @@ def read_stock_key_models(data_directory: Path) -> dict[str, tuple[Path, int]]:
 
     if not resources:
         raise RuntimeError(
-            f"No stock MDLs were indexed from KEY archives under {data_directory}"
+            f"No stock resources of type {expected_type} were indexed under {data_directory}"
         )
     return resources
 
 
-def extract_stock_bif_resource(path: Path, variable_index: int) -> bytes:
+def extract_stock_bif_resource(path: Path, variable_index: int, expected_type: int = STOCK_MODEL_RESOURCE_TYPE) -> bytes:
     with path.open("rb") as stream:
         header = stream.read(20)
         if len(header) != 20 or header[:4] != b"BIFF":
@@ -375,9 +380,9 @@ def extract_stock_bif_resource(path: Path, variable_index: int) -> bytes:
         if len(entry) != 16:
             raise RuntimeError(f"Truncated BIF resource table in {path}")
         _, data_offset, data_size, resource_type = struct.unpack("<IIII", entry)
-        if resource_type != STOCK_MODEL_RESOURCE_TYPE:
+        if resource_type != expected_type:
             raise RuntimeError(
-                f"BIF resource {variable_index} in {path} is not an MDL"
+                f"BIF resource {variable_index} in {path} is not type {expected_type}"
             )
         stream.seek(data_offset)
         payload = stream.read(data_size)
