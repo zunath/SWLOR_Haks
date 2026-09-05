@@ -399,7 +399,8 @@ def main():
             elif name in complete_roots:
                 parent = mdl.supermodel(compiled)
                 parent_path = stage / "binary" / f"{parent}.mdl"
-                parent_data = parent_path.read_bytes() if parent_path.is_file() else dependencies[parent]
+                parent_data = (reference_bodies[parent] if parent in reference_bodies else
+                               parent_path.read_bytes() if parent_path.is_file() else dependencies[parent])
                 animations.validate_body_parts(compiled, reference_bodies[name[:3] + "0"], parent_data)
         except ValueError as error:
             failures.append({"model": name, "error": str(error)})
