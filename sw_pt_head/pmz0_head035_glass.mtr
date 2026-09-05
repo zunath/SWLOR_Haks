@@ -1,0 +1,12 @@
+// Head 035 animated translucent visor.
+// Explicit texture0 binding, fixed 40% alpha, and hard-coded flow speed.
+renderhint NormalAndSpecMapped
+customshaderVS vslitc_sm_nm
+customshaderFS dz_h35glass_v3
+texture0 pmz0_head035_glass
+texture1 pmz0_head035_n
+texture2 dz_droid_s_norm
+texture3 pmz0_head035_r
+texture4 null
+texture6 flow_south
+transparency 1
