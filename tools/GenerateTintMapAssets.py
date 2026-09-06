@@ -1563,9 +1563,10 @@ def native_modular_material_choices(
 ) -> dict[str, tuple[str | None, str, list[str]]] | None:
     """Choose visible PLT and retained shared material independently per mesh.
 
-    An explicit authored MTR slot zero takes priority over the replaced local
-    PLT, even when its raster resource is missing. Such a surface keeps its
-    original material and is not tint eligible.
+    An authored raster in slot zero takes priority over the local PLT. A slot
+    naming a converted PLT must instead use that palette's packed tint map;
+    retaining it as a raster request leaves the surface without a diffuse map.
+    Unresolved slots without a proven converted palette remain authored inputs.
     Other meshes keep the original MTR's maps and parameters while using the
     native-selected part palette; an absent MTR keeps the base profile.
     """
@@ -1585,12 +1586,14 @@ def native_modular_material_choices(
         profile = original_materials.get(bitmap, {})
         lines = list(profile.get("lines", []))
         texture0 = next((line.split()[1].lower() for line in lines if re.match(r"^\s*texture0\s+\S+", line, re.IGNORECASE)), "")
-        fixed = texture0 not in {"", "null"}
+        converted_diffuse = texture0 in entries and not profile.get("resolvedTexture0")
+        fixed = texture0 not in {"", "null"} and not converted_diffuse
         original_material = bitmap if profile else ""
         if fixed and (bitmap in entries or not source_mtr_paths(bitmap)):
             original_material = scoped_material_alias(bitmap, "authored:original")
             _PRESERVED_MATERIALS[original_material] = (bitmap, lines)
-        choices[selector] = (None if fixed else source, original_material, lines)
+        selected_source = texture0 if converted_diffuse else source
+        choices[selector] = (None if fixed else selected_source, original_material, lines)
     return choices
 
 

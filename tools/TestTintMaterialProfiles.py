@@ -2,6 +2,9 @@
 """Guard native PLT selection independently from retained authored MTR inputs."""
 
 from pathlib import Path
+import hashlib
+import json
+import subprocess
 import tempfile
 import unittest
 from unittest.mock import patch
@@ -74,6 +77,22 @@ class MaterialProfileTests(unittest.TestCase):
         self.profiles["missing"] = {"lines": ["texture0 absent_raster"], "resolvedTexture0": None}
         self.assertIsNone(self.choices(self.model("missing"))["@node:pme0_shinl249"][0])
 
+    def test_converted_explicit_palette_uses_tint_map_and_preserves_auxiliary_maps(self):
+        self.profiles["mapped"] = {"lines": ["texture0 original_plt", "texture1 face_n", "texture2 face_s"], "resolvedTexture0": None}
+        entries = {"pmh0_shinl249": {"layers": [7]}, "original_plt": {"layers": [0, 1]}}
+        choice = g.native_modular_material_choices(self.model("mapped"), entries)["@node:pme0_shinl249"]
+        self.assertEqual(choice, ("original_plt", "mapped", self.profiles["mapped"]["lines"]))
+        text = g.tint_material_text(self.output / "alias.mtr", "alias", "packed", 16, 16, choice[0], choice[1:])
+        self.assertIn("texture0 plt_white\n", text)
+        self.assertIn("texture7 packed\n", text)
+        self.assertIn("texture1 face_n\n", text)
+        self.assertIn("texture2 face_s\n", text)
+        self.assertNotIn("texture0 original_plt\n", text)
+
+    def test_real_authored_raster_wins_even_when_a_converted_palette_shares_its_name(self):
+        self.profiles["mapped"] = {"lines": ["texture0 pmh0_shinl249"], "resolvedTexture0": "sw_pt_lshin/pmh0_shinl249.dds"}
+        self.assertIsNone(self.choices(self.model("mapped"))["@node:pme0_shinl249"][0])
+
     def test_null_diffuse_retains_native_palette_and_authored_other_maps(self):
         self.profiles["mapped"] = {"lines": ["texture0 NULL", "texture1 skin_n"]}
         self.assertEqual(self.choices(self.model("mapped"))["@node:pme0_shinl249"][0], "pmh0_shinl249")
@@ -106,6 +125,91 @@ class MaterialProfileTests(unittest.TestCase):
 
 
 class BaseBodyPaletteTests(unittest.TestCase):
+    def test_imported_stock_body_parts_preserve_geometry_and_have_skin_bindings(self):
+        import ImportStockBodyTintModels as stock
+        records = json.loads(stock.MANIFEST.read_text())
+        self.assertEqual(len(records), 475)
+        self.assertIn("pfe0_pelvis001", records)
+        catalog = {}
+        for line in (g.REPOSITORY_ROOT / "sw_2da/tintmap.2da").read_text().splitlines()[3:]:
+            _, model, material, layers = line.split()
+            catalog.setdefault(model, {})[material] = layers.split(",")
+        for model, record in records.items():
+            with self.subTest(model=model):
+                path = stock.directory(model) / (model + ".mdl")
+                self.assertEqual(stock.geometry_hash(model, path.read_bytes()), record["geometrySha256"])
+                bindings = g.read_model_material_bindings(path)
+                self.assertTrue(bindings)
+                for _, material in bindings:
+                    self.assertIn(material, catalog.get(model, {}))
+                    self.assertIn("0", catalog[model][material], "exposed skin must receive the creature's skin color")
+
+    def test_female_wookiee_harness_keeps_fur_separate_from_equipment(self):
+        import RepairWookieeHarness as repair
+        original = subprocess.check_output(
+            ["git", "show", f"{repair.SOURCE_REVISION}:sw_pt_chest/pfe0_chest209.plt"],
+            cwd=g.REPOSITORY_ROOT)
+        male = subprocess.check_output(
+            ["git", "show", f"{repair.SOURCE_REVISION}:sw_pt_chest/pme0_chest209.plt"],
+            cwd=g.REPOSITORY_ROOT)
+        corrected = repair.repair_palette(original, male)
+        self.assertEqual(corrected[:24], original[:24])
+        self.assertEqual(corrected[24::2], original[24::2], "female shading must remain untouched")
+        # Leather straps in the common UV atlas must never sample the fur color.
+        straps = [i for i in range(25, len(male), 2) if male[i] == 7]
+        self.assertEqual(len(straps), 69364)
+        self.assertTrue(all(corrected[i] == 7 for i in straps))
+        self.assertTrue(all(corrected[i] == original[i] for i in range(25, len(male), 2)
+                            if male[i] == 1 or original[i] != 1))
+        entry = g.load_source_manifest()["pfe0_chest209"]
+        self.assertEqual(entry["sourceSha256"], hashlib.sha256(corrected).hexdigest())
+        expected = g.np.frombuffer(corrected[25::2], dtype=g.np.uint8).reshape(768, 768)
+        decoded = g.decode_dds_layers(g.packed_dds_path("pfe0_chest209", entry), 768, 768)
+        g.np.testing.assert_array_equal(decoded, expected)
+
+    def test_stock_neck_two_exposes_skin_and_cloth_for_both_sexes_and_phenotypes(self):
+        entries = g.load_source_manifest()
+        catalog = {}
+        for line in (g.REPOSITORY_ROOT / "sw_2da/tintmap.2da").read_text().splitlines()[3:]:
+            _, model, material, layers = line.split()
+            catalog.setdefault(model, {})[material] = set() if layers == "****" else {int(layer) for layer in layers.split(",")}
+        for gender in "fm":
+            source = f"p{gender}h0_neck002"
+            self.assertEqual(entries[source]["layers"], [0, 4])
+            for race in "adegho":
+                for phenotype in (0, 2):
+                    name = f"p{gender}{race}{phenotype}_neck002"
+                    with self.subTest(model=name):
+                        path = g.REPOSITORY_ROOT / "sw_pt_neck" / f"{name}.mdl"
+                        self.assertTrue(path.is_file(), "stock neck meshes need explicit tint bindings")
+                        bindings = g.read_model_material_bindings(path)
+                        self.assertTrue(bindings)
+                        for _, material in bindings:
+                            self.assertEqual(catalog[name][material], {0, 4})
+                            text = g.mtr_path(material).read_text()
+                            self.assertIn(f"texture7 {entries[source]['texture']}\n", text)
+                            self.assertIn("customshaderFS fs_plt_tinter\n", text)
+
+    def test_reported_heads_bind_their_existing_tint_maps(self):
+        entries = g.load_source_manifest()
+        for name in ("pfh0_head232", "pmh0_head231"):
+            with self.subTest(name=name):
+                bindings = g.read_model_material_bindings(g.REPOSITORY_ROOT / "sw_pt_head" / f"{name}.mdl")
+                self.assertTrue(bindings)
+                self.assertEqual({material for _, material in bindings}, {name})
+                text = g.mtr_path(name).read_text()
+                self.assertIn("texture0 plt_white\n", text)
+                self.assertIn(f"texture7 {entries[name]['texture']}\n", text)
+                self.assertIn(f"texture1 {name}_n\n", text)
+                self.assertIn(f"texture2 {name}_s\n", text)
+
+    def test_right_thigh_265_retains_its_recovered_original_palette(self):
+        entry = g.load_source_manifest()["pmh0_legr265"]
+        self.assertEqual(entry["sourceSha256"], "940c846cb05ea6859b644c646c779c73df5a6de5b5e1a999c1c58823fe8f4137")
+        self.assertEqual((entry["width"], entry["height"]), (1024, 1024))
+        self.assertEqual(entry["layers"], [2, 4, 5, 6])
+        self.assertIsNone(g.check_dds(g.packed_dds_path("pmh0_legr265", entry), 1024, 1024))
+
     def test_restored_master_hand_models_use_their_original_full_size_palettes(self):
         # The hand meshes/UVs were restored from master; the earlier stock mask
         # is 64px and lays the hand shading out differently despite sharing Skin.
