@@ -45,6 +45,9 @@ STOCK_PALETTE_RESOURCES = Path(__file__).with_name("TintMapStockPalettes.json")
 MATERIAL_SOURCES = Path(__file__).with_name("TintMapMaterialSources.json")
 WHITE_TEXTURE = REPOSITORY_ROOT / "sw_item" / "plt_white.tga"
 PALETTE_TEXTURE = REPOSITORY_ROOT / "sw_item" / "plt_palette.tga"
+# Entire atlas, including its bottom-origin RGBA descriptor and unused rows.
+# Verified against installed pal_*01 resources by TestTintShaderMaterials.py.
+PALETTE_SHA256 = "ee41f2496caac23069152b662261f15a454ec951283bfb36ec576e4ed2512ab5"
 PALETTE_TXI = REPOSITORY_ROOT / "sw_item" / "plt_palette.txi"
 TINT_SHADER = REPOSITORY_ROOT / "sw_shader" / "fs_plt_tinter.shd"
 TINT_MAPPED_SHADER = REPOSITORY_ROOT / "sw_shader" / "fs_plt_tinter_nm.shd"
@@ -3365,6 +3368,14 @@ def native_metal_palette_errors(path: Path) -> list[str]:
     return []
 
 
+def palette_atlas_errors(path: Path) -> list[str]:
+    if not path.is_file():
+        return ["missing palette atlas"]
+    if hashlib.sha256(path.read_bytes()).hexdigest() != PALETTE_SHA256:
+        return ["complete RGBA atlas/header differs from the verified native palette atlas"]
+    return []
+
+
 def check_tint_mtr_structure(path: Path) -> list[str]:
     lines = path.read_text(encoding="utf-8-sig").splitlines()
     directives: dict[tuple[str, ...], list[str]] = {}
@@ -3840,6 +3851,7 @@ def audit() -> None:
         errors.append(f"plt_palette.tga: {palette_error}")
     else:
         errors.extend(f"plt_palette.tga: {error}" for error in native_metal_palette_errors(PALETTE_TEXTURE))
+    errors.extend(f"plt_palette.tga: {error}" for error in palette_atlas_errors(PALETTE_TEXTURE))
     if not PALETTE_TXI.exists() or "mipmap 0" not in PALETTE_TXI.read_text(encoding="utf-8").lower():
         errors.append("plt_palette.txi must disable mipmaps")
     for shader_path, expected_maps in (

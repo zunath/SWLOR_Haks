@@ -29,13 +29,16 @@ PHENOTYPES = ROOT / "sw_2da" / "phenotype.2da"
 MANIFEST = ROOT / "tools" / "RobeRgbModels.json"
 PATTERN = re.compile(r"^(p[fm][a-z])0_robe(\d{3})$")
 NODE = re.compile(r"(?im)^\s*node\s+(\S+)\s+(\S+)\s*$([\s\S]*?)^\s*endnode\b")
+GENERATOR_INPUTS = ("GenerateRobeRgbModels.py", "RobeSkeleton.py", "RobePoseAudit.py",
+                    "RobeAnimations.py", "CompileModels.py")
+BODY_RESOURCE = re.compile(r"^p[fm][a-z](\d+)(?:_robe\d{3})?$", re.IGNORECASE)
 
 
 def file_digest(path):
     data = path.read_bytes()
-    # Git may check Python source out with CRLF on Windows. Source hashes
-    # describe code changes, while compiled resources remain byte-exact.
-    if path.suffix == ".py":
+    # Git may check source and tables out with CRLF on Windows. Their hashes
+    # describe content changes, while compiled resources remain byte-exact.
+    if path.suffix in {".py", ".2da"}:
         data = data.replace(b"\r\n", b"\n")
     return hashlib.sha256(data).hexdigest()
 
@@ -118,6 +121,9 @@ def check() -> list[str]:
         return ["Robe RGB model manifest is missing; regenerate the robe models"]
     manifest = json.loads(MANIFEST.read_text())
     errors = []
+    for name in GENERATOR_INPUTS:
+        if f"tools/{name}" not in manifest["files"]:
+            errors.append(f"Robe RGB manifest does not track {name}; regenerate and validate")
     if not manifest.get("independent_skeletons") or not manifest.get("body_pose_samples"):
         errors.append("Robe models lack independent skeleton and animation pose validation")
     for relative, expected in manifest["files"].items():
@@ -136,6 +142,56 @@ def check() -> list[str]:
             if row["model"] not in expected:
                 errors.append(f"Selectable stock robe {row['model']} is missing its RGB conversion")
     return errors
+
+
+def allocate_phenotypes(ids, prior, native_table, active):
+    id_map = {}
+    for name, phenotype in prior.items():
+        robe_id = int(PATTERN.fullmatch(name)[2])
+        if robe_id in id_map and id_map[robe_id] != phenotype:
+            raise ValueError("Inconsistent persisted robe phenotype assignments")
+        id_map[robe_id] = phenotype
+    used = set(id_map.values())
+    for line in native_table[3:]:
+        cols = line.split()
+        if not cols or not cols[0].isdigit():
+            continue
+        phenotype = int(cols[0])
+        if len(cols) > 1 and cols[1].startswith("RobeRgb_"):
+            robe_id = int(cols[1].split("_")[1])
+            if robe_id in id_map and id_map[robe_id] != phenotype:
+                raise ValueError("Inconsistent persisted robe phenotype assignments")
+            id_map[robe_id] = phenotype
+        used.add(phenotype)
+    # Model resources can occupy an otherwise unused table row. Reserve an ID if
+    # ANY body prefix already has its root or robe attachment, including other HAKs.
+    used.update(int(match[1]) for name in active if (match := BODY_RESOURCE.fullmatch(name)))
+    for robe_id in ids:
+        if robe_id in id_map:
+            continue
+        available = next((i for i in range(34, 256) if i not in used), None)
+        if available is None:
+            raise ValueError("The native phenotype byte has no available slot; cannot truncate IDs")
+        id_map[robe_id] = available
+        used.add(available)
+    return id_map
+
+
+def validate_output_ownership(selected, id_map, prior, active, manifest):
+    for name in selected:
+        prefix, robe_id = PATTERN.fullmatch(name).groups()
+        phenotype = id_map[int(robe_id)]
+        root_name = prefix + str(phenotype)
+        for generated, directory in ((root_name, "sw_pt_root"),
+                                     (root_name + "_robe" + robe_id, "sw_pt_robe")):
+            if generated not in active:
+                continue
+            path = active[generated]
+            expected = ROOT / directory / f"{generated}.mdl"
+            relative = expected.relative_to(ROOT).as_posix()
+            if (prior.get(name) != phenotype or path.resolve() != expected.resolve() or
+                    manifest.get("files", {}).get(relative) != file_digest(path)):
+                raise ValueError(f"Occupied robe output is not a verified prior mapping: {path}")
 
 
 def main():
@@ -161,29 +217,10 @@ def main():
     selected = {name: path for name, path in active.items() if PATTERN.fullmatch(name) and name in registered}
     ids = sorted({int(PATTERN.fullmatch(name)[2]) for name in selected})
     prior = read_mappings()
-    id_map = {}
-    for name, phenotype in prior.items():
-        robe_id = int(PATTERN.fullmatch(name)[2])
-        if robe_id in id_map and id_map[robe_id] != phenotype:
-            raise ValueError("Inconsistent persisted robe phenotype assignments")
-        id_map[robe_id] = phenotype
-    used = set(id_map.values())
     native_table = PHENOTYPES.read_text().splitlines()
-    for line in native_table[3:]:
-        cols = line.split()
-        if len(cols) > 1 and cols[1].startswith("RobeRgb_"):
-            id_map[int(cols[1].split("_")[1])] = int(cols[0])
-            used.add(int(cols[0]))
-        if cols and cols[0].isdigit() and not (len(cols) > 1 and cols[1].startswith("RobeRgb_")):
-            used.add(int(cols[0]))
-    for robe_id in ids:
-        if robe_id in id_map:
-            continue
-        available = next((i for i in range(34, 256) if i not in used), None)
-        if available is None:
-            raise ValueError("The native phenotype byte has no available slot; cannot truncate IDs")
-        id_map[robe_id] = available
-        used.add(available)
+    id_map = allocate_phenotypes(ids, prior, native_table, active)
+    prior_manifest = json.loads(MANIFEST.read_text()) if MANIFEST.is_file() else {}
+    validate_output_ownership(selected, id_map, prior, active, prior_manifest)
     if args.model:
         selected = {name: path for name, path in selected.items() if name in args.model}
         if len(selected) != len(set(args.model)):
@@ -368,8 +405,7 @@ def main():
                 raise ValueError("Obsolete animation resource escaped the model directory")
             obsolete.unlink(missing_ok=True)
         paths = [TABLE, PHENOTYPES]
-        paths.extend(ROOT / "tools" / name for name in (
-            "GenerateRobeRgbModels.py", "RobeSkeleton.py", "RobePoseAudit.py", "RobeAnimations.py"))
+        paths.extend(ROOT / "tools" / name for name in GENERATOR_INPUTS)
         paths.extend(active[name] for name in dependencies if name in active)
         paths.extend(ROOT / ("sw_pt_robe" if "_robe" in name else "sw_pt_root") / f"{name}.mdl" for name in sources)
         manifest = {"compiler_sha256": compiler_hash, "independent_skeletons": True,

@@ -15,16 +15,18 @@ import subprocess
 import GenerateTintMapAssets as tint
 
 
-def capture(baseline: str, module_baseline: str, converted_baseline: str, game_data: Path) -> dict:
+def capture(baseline: str, module_baseline: str, converted_baseline: str, game_data: Path,
+            module_repo: Path | None = None) -> dict:
     root = tint.REPOSITORY_ROOT
+    module_repo = (module_repo if module_repo is not None else root.parent).resolve()
     def git(repo, *args):
         return subprocess.check_output(["git", "-c", f"safe.directory={repo.as_posix()}", "-C", str(repo), *args])
     commit = git(root, "rev-parse", baseline).decode().strip()
-    module_commit = git(root.parent, "rev-parse", module_baseline).decode().strip()
+    module_commit = git(module_repo, "rev-parse", module_baseline).decode().strip()
     converted_commit = git(root, "rev-parse", converted_baseline).decode().strip()
     converted_sources = json.loads(git(root, "show", f"{converted_commit}:tools/TintMapSources.json"))
     bitmap_aliases = {str(alias): row["model"] for row in converted_sources for alias in row.get("aliases", [])}
-    module = json.loads(git(root.parent, "show", f"{module_commit}:Module/ifo/module.ifo.json").decode("latin1"))
+    module = json.loads(git(module_repo, "show", f"{module_commit}:Module/ifo/module.ifo.json").decode("latin1"))
     priority = [row["Mod_Hak"]["value"].lower() for row in module["Mod_HakList"]["value"]]
     order = {name: index for index, name in enumerate(priority)}
     resources = {}
@@ -103,11 +105,14 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--baseline", required=True)
     parser.add_argument("--module-baseline", required=True)
+    parser.add_argument("--module-repo", type=Path,
+                        help="Companion SWLOR_NWN checkout; defaults to the HAK repository's parent")
     parser.add_argument("--converted-baseline", required=True)
     parser.add_argument("--game-data", required=True, type=Path)
     parser.add_argument("--check", action="store_true")
     args = parser.parse_args()
-    result = capture(args.baseline, args.module_baseline, args.converted_baseline, args.game_data)
+    result = capture(args.baseline, args.module_baseline, args.converted_baseline, args.game_data,
+                     args.module_repo)
     text = json.dumps(result, indent=2) + "\n"
     if args.check:
         if tint.MATERIAL_SOURCES.read_text(encoding="utf-8") != text:
