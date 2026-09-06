@@ -1,10 +1,26 @@
-# Portrait orientation and Huge-image removal
+# Portrait orientation and DDS conversion
+
+## Current portrait pack
+
+All 8,109 retained portraits now ship as compressed DDS, including Medium and the three non-power-of-two images. No portrait TGAs or Huge portraits remain. Opaque images use DXT1 (7,960); images with non-opaque alpha use DXT5 (149). Original dimensions, framing, and facing are preserved. Each DDS explicitly declares one mip level and has a sibling TXI containing `mipmap 0`.
+
+| Portrait HAK stage | Bytes | MiB |
+| --- | ---: | ---: |
+| Before Huge removal | 490,690,668 | 467.96 |
+| TGA pack after Huge removal | 233,610,462 | 222.79 |
+| Complete DDS pack, including TXIs | 41,708,861 | 39.78 |
+
+DDS saves another **191,901,601 bytes (183.01 MiB, 82.15%)** after Huge removal. The built HAK contains 8,109 DDS and 8,109 TXI resources, all byte-compared with their sources. These are built HAK sizes, not compressed download estimates.
+
+The conversion uses ImageMagick 7.1.2-22 with portrait-specific DXT1/DXT5 settings and no generated mipmaps. All ten approved sample conversions match the full conversion byte-for-byte. Independent comparison of every output against the TGA sources found no horizontal/vertical orientation mismatches or dimension changes; all opaque sources remain opaque. Average per-image RGB absolute error is 1.215/255. The twelve images with the highest error were visually reviewed. DDS is lossy; the earlier lossless orientation correction is preserved in the converted source provenance.
+
+`portrait_dds_conversions.csv` records every original TGA source hash, corresponding DDS hash, dimensions, format, and byte sizes. Original TGAs are retained in git history at `8f1592587e3ecb8378e5d3ce47f670ef20a603f2`; they are not included in the HAK. Historical orientation and Huge-removal manifests retain their original TGA names/hashes, resolved through this conversion manifest during verification.
 
 ## Runtime behavior and size reduction
 
 NWN:EE 8193.35 introduced fallback to the closest available portrait size when a requested size is missing. With Huge absent and Large present, character creation can display Large. This behavior is documented in [Beamdog's official 8193.35 patch notes](https://nwn.beamdog.net/docs/patchnotes/87.8193.35.md), published with the [May 24, 2023 release](https://www.beamdog.com/news/new-patch-neverwinter-nights-enhanced-edition-arrives-today/). SWLOR's deployment targets 8193.37.15. This relies on the Enhanced Edition fallback and does not claim compatibility with older clients.
 
-Removed all 1,027 Huge TGAs after verifying each has its corresponding Large TGA. No retained portrait pixels were changed by this removal. Character creation now uses the lower-resolution Large composition; when H and L previously used different artwork, the Large artwork is displayed. No in-game rendering check or live deployment was performed.
+Removed all 1,027 Huge TGAs after verifying each had its corresponding Large TGA. No retained portrait pixels were changed by that removal. Character creation uses the lower-resolution Large composition, now supplied as DDS; when H and L previously used different artwork, the Large artwork is displayed. The same official 8193.35 notes remove the Medium-TGA requirement for DDS portraits; 8193.36 adds DDS support to NUI. No in-game rendering check or live deployment was performed.
 
 | Portrait HAK | Bytes | MiB |
 | --- | ---: | ---: |
@@ -12,7 +28,7 @@ Removed all 1,027 Huge TGAs after verifying each has its corresponding Large TGA
 | After Huge removal | 233,610,462 | 222.79 |
 | Saved | 257,080,206 | 245.17 |
 
-This reduces the built HAK by **52.39%**, from 9,136 to 8,109 resources. `portrait_huge_removals.csv` records every removed file, its hash/size, and its retained Large fallback/hash. Git history retains the original Huge artwork without shipping it in the HAK.
+Huge removal reduced the then-TGA HAK by **52.39%**, from 9,136 to 8,109 images. `portrait_huge_removals.csv` records every removed file, its hash/size, and its original Large fallback/hash. Git history retains the original Huge artwork without shipping it in the HAK.
 
 ## Orientation corrections
 
@@ -25,11 +41,11 @@ The final correction batch contains 256 exact horizontal pixel reflections acros
 ## Verification
 
 - All 256 corrections are exact reflections, including alpha and texture padding, with dimensions/headers/image IDs preserved. RLE extension offsets are relocated as needed without changing their metadata contents.
-- The removal deletes exactly the 1,027 recorded Huge files. All 8,109 retained TGAs are byte-identical to their pre-removal versions.
-- All 1,027 Large fallbacks exist and match their recorded hashes; no Huge TGA remains in `sw_portrait`.
-- All 8,109 resources in the rebuilt HAK were byte-compared with their source files.
-- Seventeen Python tests cover the TGA utility, complete-manifest enforcement, replay/idempotence, pending/self-referencing canonicals, tampering, and the complete Huge-to-Large fallback corpus.
-- The focused toolset portrait lookup tests check the retained T/S/M/L resources and intentional absence of H.
+- Huge removal deleted exactly the 1,027 recorded files without altering the remaining TGAs; subsequent DDS conversion records all 8,109 source hashes.
+- All 1,027 Large DDS fallbacks exist and match their conversion hashes and historical source provenance; no Huge or TGA remains in `sw_portrait`.
+- All 16,218 resources in the rebuilt HAK were byte-compared with their source files.
+- Python tests cover the TGA utility, complete-manifest enforcement, replay/idempotence, pending/self-referencing canonicals, tampering, DDS dimensions/format/single-mip/payload/TXI validation, and the complete Huge-to-Large fallback corpus.
+- The focused toolset portrait lookup tests decode T/S/M/L DDS resources and check intentional absence of H and TGAs.
 
 From the parent repository:
 
@@ -38,4 +54,6 @@ python tools/NormalizePortraitOrientations.py
 python -m unittest discover -s tools/tests -p 'test_portrait*.py'
 ```
 
-`python tools/NormalizePortraitOrientations.py --apply` replays only the explicit 256 reviewed flips against their exact original hashes. It never guesses orientation, requires the full batch, preflights every correction before writing, and is idempotent. Future artwork or correction-batch changes require updating the reviewed manifests and corresponding expectations.
+`python tools/NormalizePortraitOrientations.py --apply` replays only the explicit 256 reviewed flips against restored original TGA hashes. It verifies already-converted DDS files through the complete conversion manifest and refuses to perform a new lossless correction on DDS pixels. It never guesses orientation, requires the full batch, preflights every correction before writing, and is idempotent. Future artwork or correction-batch changes require updating the reviewed manifests and corresponding expectations.
+
+To reproduce conversion, restore the TGA source pack from the historical commit into a separate directory, then run `python tools/ConvertPortraitsToDds.py --source <tga-directory> --output <new-staging-directory>` from the parent repository. This requires Pillow and ImageMagick. The tool stages every DDS/TXI and a conversion manifest without modifying the TGA source directory.
