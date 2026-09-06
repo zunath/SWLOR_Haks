@@ -32,7 +32,7 @@ NODE = re.compile(r"(?im)^\s*node\s+(\S+)\s+(\S+)\s*$([\s\S]*?)^\s*endnode\b")
 GENERATOR_INPUTS = ("GenerateRobeRgbModels.py", "RobeSkeleton.py", "RobePoseAudit.py",
                     "RobeAnimations.py", "CompileModels.py", "ImportStockRobeTints.py",
                     "TintMapStockRobes.json", "GenerateTintMapAssets.py")
-CATALOG_INPUTS = ("sw_2da/parts_robe.2da", "sw_2da/tintmap.2da")
+CATALOG_INPUTS = ("sw_2da/parts_robe.2da", "sw_2da/tintmap.2da", "hakbuilder.json")
 BODY_RESOURCE = re.compile(r"^p[fm][a-z](\d+)(?:_robe\d{3})?$", re.IGNORECASE)
 
 
@@ -118,6 +118,26 @@ def read_mappings():
     return rows
 
 
+def fresh_active_models():
+    tint._ACTIVE_MODELS = None
+    tint._HAK_DIRECTORIES = None
+    return tint.find_active_models()
+
+
+def model_path_errors(files, stock_names, active):
+    errors = []
+    for relative in files:
+        path = ROOT / relative
+        if path.suffix.lower() == ".mdl" and (
+                path.stem.lower() not in active or
+                active[path.stem.lower()].resolve() != path.resolve()):
+            errors.append(f"Robe RGB model is no longer the active resource: {relative}")
+    for name in stock_names:
+        if name in active:
+            errors.append(f"Robe RGB stock dependency is now overridden: {name}")
+    return errors
+
+
 def check() -> list[str]:
     if not MANIFEST.is_file():
         return ["Robe RGB model manifest is missing; regenerate the robe models"]
@@ -132,8 +152,12 @@ def check() -> list[str]:
         path = ROOT / relative
         if not path.is_file() or file_digest(path) != expected:
             errors.append(f"Robe RGB input/output changed: {relative}; regenerate and validate")
+    active = fresh_active_models()
+    if "stock_model_sha256" not in manifest:
+        errors.append("Robe RGB manifest lacks complete stock dependency provenance; regenerate")
+    errors.extend(model_path_errors(manifest["files"], manifest.get("stock_model_sha256", {}), active))
     registered = {line.split()[1].lower() for line in tint.OUTPUT_2DA.read_text().splitlines()[3:] if len(line.split()) >= 4}
-    expected = {name for name in tint.find_active_models() if PATTERN.fullmatch(name) and name in registered}
+    expected = {name for name in active if PATTERN.fullmatch(name) and name in registered}
     if set(read_mappings()) != expected:
         errors.append("Robe RGB catalog does not cover exactly the registered normal-body robes")
     if not stock_robes.MANIFEST.is_file():
@@ -198,7 +222,7 @@ def validate_output_ownership(selected, id_map, prior, active, manifest):
                 raise ValueError(f"Occupied robe output is not a verified prior mapping: {path}")
 
 
-def allocate_animation_bridges(groups, active, manifest):
+def allocate_animation_bridges(groups, active, manifest, expected_allocation=None):
     prior = manifest.get("animation_bridges", {})
     if len(set(prior.values())) != len(prior):
         raise ValueError("Animation families share a persisted bridge name")
@@ -228,7 +252,28 @@ def allocate_animation_bridges(groups, active, manifest):
                 raise ValueError(f"No animation bridge resref available for {prefix}")
         reserved.add(name)
         result[key] = name
+    if expected_allocation is not None and result != expected_allocation:
+        raise ValueError("Animation bridge allocation changed during generation; retry with the new active resources")
     return result
+
+
+def version_animation_families(families, manifest, verify_legacy, native_bodies=None):
+    """A bridge's paths, bind transforms and clips are immutable for saved roots."""
+    prior = dict(manifest.get("animation_bridges", {}))
+    versions = {}
+    for key in sorted(families.groups):
+        source = families.bridge(key, "rgb_bridge")
+        # Native parent part IDs are binary metadata, absent from bridge ASCII.
+        # A parent change must also preserve the old bridge for retained roots.
+        parent = (native_bodies or {}).get(families.groups[key]["base"], b"")
+        fingerprint = hashlib.sha256(source).digest() + hashlib.sha256(parent).digest()
+        version = key + "/" + hashlib.sha256(fingerprint).hexdigest()
+        # Upgrade old, unversioned records only after comparing the existing
+        # binary's complete geometry/controllers with this exact source.
+        if version not in prior and key in prior and verify_legacy(key, prior[key]):
+            prior[version] = prior.pop(key)
+        versions[key] = version
+    return versions, {**manifest, "animation_bridges": prior}
 
 
 def validate_stock_inventory(stock_models):
@@ -269,6 +314,15 @@ def validate_input_snapshot(dependencies, active, input_digests):
             raise ValueError(f"Input changed during robe generation: {path}")
 
 
+def snapshot_manifest_inputs(dependencies, active, input_digests):
+    paths = [ROOT / "tools" / name for name in GENERATOR_INPUTS]
+    paths += [ROOT / name for name in CATALOG_INPUTS]
+    files = {path.relative_to(ROOT).as_posix(): input_digests[path] for path in paths}
+    files.update({active[name].relative_to(ROOT).as_posix(): hashlib.sha256(data).hexdigest()
+                  for name, data in dependencies.items() if name in active})
+    return files
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--game-data", type=Path)
@@ -290,7 +344,7 @@ def main():
     input_paths = [ROOT / "tools" / name for name in GENERATOR_INPUTS]
     input_paths += [ROOT / name for name in CATALOG_INPUTS] + [TABLE, PHENOTYPES, MANIFEST]
     input_digests = {path: file_digest(path) for path in input_paths if path.is_file()}
-    active = tint.find_active_models()
+    active = fresh_active_models()
     registered = {line.split()[1].lower() for line in tint.OUTPUT_2DA.read_text().splitlines()[3:] if len(line.split()) >= 4}
     selected = {name: path for name, path in active.items() if PATTERN.fullmatch(name) and name in registered}
     ids = sorted({int(PATTERN.fullmatch(name)[2]) for name in selected})
@@ -387,9 +441,31 @@ def main():
         robe = unique_nodes(load_text(name), dependencies[name])
         families.add(name[:3] + "0", robe, name)
     print(f"Building {len(families.groups)} shared animation families.", flush=True)
-    animation_names = allocate_animation_bridges(families.groups, active, prior_manifest)
+    legacy_directory = stage / "legacy_bridges"
+    legacy_directory.mkdir(exist_ok=True)
+    legacy_bridge_changes = {}
+    def verify_legacy_bridge(key, name):
+        path = active.get(name)
+        if path is None:
+            return False
+        mdl.run_compiler(compiler, stage, ["-de", str(path), str(legacy_directory) + "/"], "legacy_bridges.log")
+        try:
+            compiled = path.read_bytes()
+            mdl.validate_round_trip(families.bridge(key, name), compiled,
+                                    (legacy_directory / f"{name}.mdl").read_text(encoding="latin1"))
+            animations.validate_animation_parts(compiled)
+            base = reference_bodies[families.groups[key]["base"]]
+            animations.validate_body_parts(compiled, base, base)
+            return True
+        except ValueError as error:
+            legacy_bridge_changes[name] = str(error)
+            return False
+    versions, prior_manifest = version_animation_families(
+        families, prior_manifest, verify_legacy_bridge, dependencies)
+    versioned_groups = {versions[key]: group for key, group in families.groups.items()}
+    animation_names = allocate_animation_bridges(versioned_groups, active, prior_manifest)
     for key, group in sorted(families.groups.items()):
-        parent = animation_names[key]
+        parent = animation_names[versions[key]]
         sources[parent] = families.bridge(key, parent)
         animation_cache[key] = parent
     for name in sorted(selected):
@@ -453,6 +529,7 @@ def main():
               "body_pose_samples": checked_poses,
               "independent_skeletons": len(complete_roots), "animation_families": len(animation_cache),
               "missing_animation_fallbacks": families.fallbacks,
+              "versioned_legacy_bridges": legacy_bridge_changes,
               "validated_animation_roots": len(complete_roots),
               "compiler_sha256": compiler_hash, "missing_supermodels": sorted(missing), "failures": failures}
     (stage / "report.json").write_text(json.dumps(report, indent=2) + "\n")
@@ -467,27 +544,32 @@ def main():
     (stage / "phenotype.2da").write_text("\n".join(phenotype_lines).rstrip() + "\n", encoding="ascii")
     if args.apply:
         validate_input_snapshot(dependencies, active, input_digests)
-        validate_output_ownership(selected, id_map, prior, active, prior_manifest)
-        allocate_animation_bridges(families.groups, active, prior_manifest)
-        retained = retained_model_files(prior_manifest, sources, set(id_map.values()), active)
+        input_files = snapshot_manifest_inputs(dependencies, active, input_digests)
+        stock_hashes = {name: hashlib.sha256(data).hexdigest()
+                        for name, data in sorted(dependencies.items()) if name not in active}
+        current_active = fresh_active_models()
+        path_errors = model_path_errors(input_files, stock_hashes, current_active)
+        if path_errors:
+            raise ValueError("\n".join(path_errors))
+        validate_output_ownership(selected, id_map, prior, current_active, prior_manifest)
+        allocate_animation_bridges(versioned_groups, current_active, prior_manifest, animation_names)
+        retained = retained_model_files(prior_manifest, sources, set(id_map.values()), current_active)
+        # Hash validated inputs from their captured bytes and outputs from staging.
+        # Copying thousands of outputs must never re-certify later input edits.
+        output_files = {f"sw_2da/{path.name}": file_digest(stage / path.name) for path in (TABLE, PHENOTYPES)}
+        output_files.update({("sw_pt_robe" if "_robe" in name else "sw_pt_root") + f"/{name}.mdl":
+                             file_digest(stage / "binary" / f"{name}.mdl") for name in sources})
         for name in sources:
             directory = "sw_pt_robe" if "_robe" in name else "sw_pt_root"
             shutil.copyfile(stage / "binary" / f"{name}.mdl", ROOT / directory / f"{name}.mdl")
         shutil.copyfile(stage / "roberender.2da", TABLE)
         shutil.copyfile(stage / "phenotype.2da", PHENOTYPES)
-        paths = [TABLE, PHENOTYPES]
-        paths.extend(ROOT / "tools" / name for name in GENERATOR_INPUTS)
-        paths.extend(ROOT / name for name in CATALOG_INPUTS)
-        paths.extend(active[name] for name in dependencies if name in active)
-        paths.extend(ROOT / ("sw_pt_robe" if "_robe" in name else "sw_pt_root") / f"{name}.mdl" for name in sources)
         manifest = {"compiler_sha256": compiler_hash, "independent_skeletons": True,
                     "body_pose_samples": checked_poses,
                     "missing_animation_fallbacks": families.fallbacks,
-                    "stock_body_sha256": {name: hashlib.sha256(dependencies[name]).hexdigest()
-                                          for name in sorted(originals) if name not in active},
-                    "animation_bridges": {**prior_manifest.get("animation_bridges", {}), **animation_cache},
-                    "files": {**retained, **{path.relative_to(ROOT).as_posix(): file_digest(path)
-                              for path in sorted(set(paths))}}}
+                    "stock_model_sha256": stock_hashes,
+                    "animation_bridges": {**prior_manifest.get("animation_bridges", {}), **animation_names},
+                    "files": dict(sorted({**retained, **input_files, **output_files}.items()))}
         MANIFEST.write_text(json.dumps(manifest, indent=2) + "\n")
     print(json.dumps(report, indent=2), flush=True)
 
