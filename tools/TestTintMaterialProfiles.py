@@ -126,8 +126,8 @@ class MaterialProfileTests(unittest.TestCase):
 
 class BaseBodyPaletteTests(unittest.TestCase):
     def test_imported_stock_body_parts_preserve_geometry_and_have_skin_bindings(self):
-        import ImportStockBodyTintModels as stock
-        records = json.loads(stock.MANIFEST.read_text())
+        records = json.loads(Path(__file__).with_name("StockBodyTintModels.json").read_text())
+        models = g.find_active_models()
         self.assertEqual(len(records), 475)
         self.assertIn("pfe0_pelvis001", records)
         catalog = {}
@@ -136,8 +136,12 @@ class BaseBodyPaletteTests(unittest.TestCase):
             catalog.setdefault(model, {})[material] = layers.split(",")
         for model, record in records.items():
             with self.subTest(model=model):
-                path = stock.directory(model) / (model + ".mdl")
-                self.assertEqual(stock.geometry_hash(model, path.read_bytes()), record["geometrySha256"])
+                path = models[model]
+                geometry = bytearray(path.read_bytes())
+                for bitmap_offset, _, material_offset, _ in g.read_binary_model_material_fields(path, geometry):
+                    geometry[bitmap_offset:bitmap_offset + 64] = bytes(64)
+                    geometry[material_offset:material_offset + 64] = bytes(64)
+                self.assertEqual(hashlib.sha256(geometry).hexdigest(), record["geometrySha256"])
                 bindings = g.read_model_material_bindings(path)
                 self.assertTrue(bindings)
                 for _, material in bindings:
@@ -145,14 +149,16 @@ class BaseBodyPaletteTests(unittest.TestCase):
                     self.assertIn("0", catalog[model][material], "exposed skin must receive the creature's skin color")
 
     def test_female_wookiee_harness_keeps_fur_separate_from_equipment(self):
-        import RepairWookieeHarness as repair
         original = subprocess.check_output(
-            ["git", "show", f"{repair.SOURCE_REVISION}:sw_pt_chest/pfe0_chest209.plt"],
+            ["git", "show", "de1e6b21f00^:sw_pt_chest/pfe0_chest209.plt"],
             cwd=g.REPOSITORY_ROOT)
         male = subprocess.check_output(
-            ["git", "show", f"{repair.SOURCE_REVISION}:sw_pt_chest/pme0_chest209.plt"],
+            ["git", "show", "de1e6b21f00^:sw_pt_chest/pme0_chest209.plt"],
             cwd=g.REPOSITORY_ROOT)
-        corrected = repair.repair_palette(original, male)
+        corrected = bytearray(original)
+        for offset in range(25, len(corrected), 2):
+            if original[offset] == 1 and male[offset] in range(2, 8):
+                corrected[offset] = male[offset]
         self.assertEqual(corrected[:24], original[:24])
         self.assertEqual(corrected[24::2], original[24::2], "female shading must remain untouched")
         # Leather straps in the common UV atlas must never sample the fur color.
