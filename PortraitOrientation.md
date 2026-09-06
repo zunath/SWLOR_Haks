@@ -12,9 +12,9 @@ All 8,109 retained portraits now ship as compressed DDS, including Medium and th
 
 DDS saves another **191,901,601 bytes (183.01 MiB, 82.15%)** after Huge removal. The built HAK contains 8,109 DDS and 8,109 TXI resources, all byte-compared with their sources. These are built HAK sizes, not compressed download estimates.
 
-The conversion uses ImageMagick 7.1.2-22 with portrait-specific DXT1/DXT5 settings and no generated mipmaps. All ten approved sample conversions match the full conversion byte-for-byte. Independent comparison of every output against the TGA sources found no horizontal/vertical orientation mismatches or dimension changes; all opaque sources remain opaque. Average per-image RGB absolute error is 1.215/255. The twelve images with the highest error were visually reviewed. DDS is lossy; the earlier lossless orientation correction is preserved in the converted source provenance.
+The conversion uses ImageMagick 7.1.2-22 with the approved DXT1/DXT5 compression settings and no generated mipmaps. Standard DDS pixels are vertically reversed before encoding to match NWN's storage convention, as documented by the [NWN Crunch portrait converter](https://neverwintervault.org/project/nwnee/other/tool/nwn-crunch-enhanced-edition). Generic DDS viewers display those stored rows upside down; NWN and the SWLOR toolset reverse them when sampling. Independent comparison of every output in this display orientation against the TGA sources found no horizontal/vertical orientation mismatches or dimension changes; all opaque sources remain opaque. Average per-image RGB absolute error is 1.215/255. The twelve images with the highest error and all three irregular dimensions were visually reviewed. DDS is lossy; the earlier lossless orientation correction is preserved in the converted source provenance.
 
-`portrait_dds_conversions.csv` records every original TGA source hash, corresponding DDS hash, dimensions, format, and byte sizes. Original TGAs are retained in git history at `8f1592587e3ecb8378e5d3ce47f670ef20a603f2`; they are not included in the HAK. Historical orientation and Huge-removal manifests retain their original TGA names/hashes, resolved through this conversion manifest during verification.
+`portrait_dds_conversions.csv` records every original TGA source hash, corresponding DDS hash, dimensions, format, byte sizes, and an 8x8 RGB grid signature from the original displayed image. Original TGAs are retained in git history at `8f1592587e3ecb8378e5d3ce47f670ef20a603f2`; they are not included in the HAK. Historical orientation and Huge-removal manifests retain their original TGA names/hashes, resolved through this conversion manifest during verification.
 
 ## Runtime behavior and size reduction
 
@@ -46,6 +46,7 @@ The final correction batch contains 256 exact horizontal pixel reflections acros
 - All 16,218 resources in the rebuilt HAK were byte-compared with their source files.
 - Python tests cover the TGA utility, complete-manifest enforcement, replay/idempotence, pending/self-referencing canonicals, tampering, DDS dimensions/format/single-mip/payload/TXI validation, and the complete Huge-to-Large fallback corpus.
 - The focused toolset portrait lookup tests decode T/S/M/L DDS resources and check intentional absence of H and TGAs.
+- `PortraitDdsCorpusTests` loads every one of the 8,109 DDS portraits through the toolset's resource index and actual decoder, comparing dimensions and displayed RGB grids against the original TGA signatures. The test rejects the earlier top-down DDS encoding, which would have displayed upside down.
 
 From the parent repository:
 
