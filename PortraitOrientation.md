@@ -2,6 +2,21 @@
 
 ## Current portrait pack
 
+The NPC validity repair adds ten DDS/TXI pairs alongside the original conversion
+corpus (8,119 DDS total). `portrait_size_repairs.csv` records their source names,
+dimensions, and output SHA-256 hashes. Four missing Tiny images (Bith, Gran, female
+Duros, male Kel Dor) are resized from their existing Small DDS images to 16x32.
+The missing `abbasilisk_` and `stat_wwolf_` Large images are resized from Medium
+to 128x256. The otherwise missing `parrot_` set uses NWN:EE's stock
+`po_plc_parrot_m.tga` from `data/xp2patch.bif` at Large/Medium/Small/Tiny sizes.
+
+Repairs use ImageMagick's `-resize WIDTHxHEIGHT! -define dds:compression=dxt1
+-define dds:mipmaps=0`. Existing DDS scanline orientation is preserved; the stock
+TGA is flipped vertically before DDS encoding, matching the existing converter.
+Each DDS header explicitly sets DDSD_MIPMAPCOUNT and one mip level, and each TXI
+contains `mipmap 0`. The original conversion/orientation manifests are unchanged.
+Rebuild `sw_portrait.hak` when deploying these additions.
+
 All 8,109 retained portraits now ship as compressed DDS, including Medium and the three non-power-of-two images. No portrait TGAs or Huge portraits remain. Opaque images use DXT1 (7,960); images with non-opaque alpha use DXT5 (149). Original dimensions, framing, and facing are preserved. Each DDS explicitly declares one mip level and has a sibling TXI containing `mipmap 0`.
 
 | Portrait HAK stage | Bytes | MiB |
