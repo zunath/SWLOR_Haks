@@ -102,6 +102,50 @@ class RobeRgbManifestTests(unittest.TestCase):
                 with self.assertRaisesRegex(ValueError, "incomplete"):
                     g.validate_stock_inventory({"pfa0_robe003": None})
 
+    def test_retired_roots_keep_their_bridge_and_attachment_across_generations(self):
+        with tempfile.TemporaryDirectory() as directory, patch.object(g, "ROOT", Path(directory)):
+            root = Path(directory)
+            files = {
+                "sw_pt_root/pmh34.mdl": b"setsupermodel pmh34 pmh_ra001\n",
+                "sw_pt_root/pmh_ra001.mdl": b"setsupermodel pmh_ra001 NULL\n",
+                "sw_pt_robe/pmh34_robe003.mdl": g.empty_attachment("pmh34_robe003"),
+            }
+            for name, data in files.items():
+                path = root / name
+                path.parent.mkdir(exist_ok=True)
+                path.write_bytes(data)
+            active = {(root / name).stem: root / name for name in files}
+            manifest = {"animation_bridges": {"retired-family": "pmh_ra001"},
+                        "files": {name: g.file_digest(root / name) for name in files}}
+            for _ in range(2):
+                g.allocate_animation_bridges({}, active, manifest)
+                retained = g.retained_model_files(manifest, {}, {34}, active)
+                self.assertEqual(set(files), set(retained))
+                parent = g.mdl.supermodel(active["pmh34"].read_bytes())
+                self.assertTrue(active[parent].is_file())
+                manifest = {**manifest, "files": retained}
+            active["pmh_ra001"].unlink()
+            with self.assertRaisesRegex(ValueError, "not a verified prior"):
+                g.retained_model_files(manifest, {}, {34}, active)
+
+    def test_input_snapshot_rejects_dependency_and_generator_changes(self):
+        with tempfile.TemporaryDirectory() as directory:
+            source = Path(directory) / "source.mdl"
+            helper = Path(directory) / "helper.py"
+            source.write_bytes(b"original model")
+            helper.write_bytes(b"original helper\n")
+            dependencies = {"source": source.read_bytes()}
+            active = {"source": source}
+            snapshot = {helper: g.file_digest(helper)}
+            g.validate_input_snapshot(dependencies, active, snapshot)
+            source.write_bytes(b"changed model")
+            with self.assertRaisesRegex(ValueError, "Source changed"):
+                g.validate_input_snapshot(dependencies, active, snapshot)
+            source.write_bytes(dependencies["source"])
+            helper.write_bytes(b"changed helper\n")
+            with self.assertRaisesRegex(ValueError, "Input changed"):
+                g.validate_input_snapshot(dependencies, active, snapshot)
+
     def test_atlas_audit_rejects_nonmetal_texels_and_header_corruption(self):
         original = tint.PALETTE_TEXTURE.read_bytes()
         self.assertEqual([], tint.palette_atlas_errors(tint.PALETTE_TEXTURE))

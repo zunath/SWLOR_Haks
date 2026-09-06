@@ -31,8 +31,8 @@ PATTERN = re.compile(r"^(p[fm][a-z])0_robe(\d{3})$")
 NODE = re.compile(r"(?im)^\s*node\s+(\S+)\s+(\S+)\s*$([\s\S]*?)^\s*endnode\b")
 GENERATOR_INPUTS = ("GenerateRobeRgbModels.py", "RobeSkeleton.py", "RobePoseAudit.py",
                     "RobeAnimations.py", "CompileModels.py", "ImportStockRobeTints.py",
-                    "TintMapStockRobes.json")
-CATALOG_INPUTS = ("sw_2da/parts_robe.2da",)
+                    "TintMapStockRobes.json", "GenerateTintMapAssets.py")
+CATALOG_INPUTS = ("sw_2da/parts_robe.2da", "sw_2da/tintmap.2da")
 BODY_RESOURCE = re.compile(r"^p[fm][a-z](\d+)(?:_robe\d{3})?$", re.IGNORECASE)
 
 
@@ -202,7 +202,7 @@ def allocate_animation_bridges(groups, active, manifest):
     prior = manifest.get("animation_bridges", {})
     if len(set(prior.values())) != len(prior):
         raise ValueError("Animation families share a persisted bridge name")
-    # Validate retired names too: --apply may delete those old generated outputs.
+    # Retired families can still be referenced by saved creatures' body roots.
     for key, name in prior.items():
         if not re.fullmatch(r"p[fm][a-z]_ra\d{3}", name):
             raise ValueError(f"Invalid persisted animation resource: {name}")
@@ -241,6 +241,34 @@ def validate_stock_inventory(stock_models):
         raise ValueError("Stock robe inventory is incomplete; run ImportStockRobeTints.py before generation")
 
 
+def retained_model_files(manifest, generated_names, phenotype_ids, active):
+    """Keep audited roots, attachments and bridges for persisted retired phenotypes."""
+    retained = {}
+    bridges = set(manifest.get("animation_bridges", {}).values())
+    for relative, digest in manifest.get("files", {}).items():
+        path = ROOT / relative
+        name = path.stem
+        match = BODY_RESOURCE.fullmatch(name)
+        if (path.suffix != ".mdl" or name in generated_names or
+                not (name in bridges or match and int(match[1]) in phenotype_ids)):
+            continue
+        expected_directory = "sw_pt_robe" if "_robe" in name else "sw_pt_root"
+        if (relative != f"{expected_directory}/{name}.mdl" or not path.is_file() or
+                active.get(name, path).resolve() != path.resolve() or file_digest(path) != digest):
+            raise ValueError(f"Retained robe output is not a verified prior resource: {relative}")
+        retained[relative] = digest
+    return retained
+
+
+def validate_input_snapshot(dependencies, active, input_digests):
+    for name, data in dependencies.items():
+        if name in active and (not active[name].is_file() or active[name].read_bytes() != data):
+            raise ValueError(f"Source changed during robe generation: {active[name]}")
+    for path, digest in input_digests.items():
+        if not path.is_file() or file_digest(path) != digest:
+            raise ValueError(f"Input changed during robe generation: {path}")
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--game-data", type=Path)
@@ -259,6 +287,9 @@ def main():
         parser.error("--game-data is required when generating models")
     if args.model and args.apply:
         parser.error("--apply requires the complete catalog")
+    input_paths = [ROOT / "tools" / name for name in GENERATOR_INPUTS]
+    input_paths += [ROOT / name for name in CATALOG_INPUTS] + [TABLE, PHENOTYPES, MANIFEST]
+    input_digests = {path: file_digest(path) for path in input_paths if path.is_file()}
     active = tint.find_active_models()
     registered = {line.split()[1].lower() for line in tint.OUTPUT_2DA.read_text().splitlines()[3:] if len(line.split()) >= 4}
     selected = {name: path for name, path in active.items() if PATTERN.fullmatch(name) and name in registered}
@@ -435,18 +466,15 @@ def main():
     (stage / "roberender.2da").write_text(table, encoding="ascii")
     (stage / "phenotype.2da").write_text("\n".join(phenotype_lines).rstrip() + "\n", encoding="ascii")
     if args.apply:
+        validate_input_snapshot(dependencies, active, input_digests)
+        validate_output_ownership(selected, id_map, prior, active, prior_manifest)
+        allocate_animation_bridges(families.groups, active, prior_manifest)
+        retained = retained_model_files(prior_manifest, sources, set(id_map.values()), active)
         for name in sources:
             directory = "sw_pt_robe" if "_robe" in name else "sw_pt_root"
             shutil.copyfile(stage / "binary" / f"{name}.mdl", ROOT / directory / f"{name}.mdl")
         shutil.copyfile(stage / "roberender.2da", TABLE)
         shutil.copyfile(stage / "phenotype.2da", PHENOTYPES)
-        for name in set(prior_manifest.get("animation_bridges", {}).values()) - set(animation_cache.values()):
-            if not re.fullmatch(r"p[fm][a-z]_ra\d{3}", name):
-                raise ValueError(f"Invalid obsolete animation resource: {name}")
-            obsolete = (ROOT / "sw_pt_root" / f"{name}.mdl").resolve()
-            if obsolete.parent != (ROOT / "sw_pt_root").resolve():
-                raise ValueError("Obsolete animation resource escaped the model directory")
-            obsolete.unlink(missing_ok=True)
         paths = [TABLE, PHENOTYPES]
         paths.extend(ROOT / "tools" / name for name in GENERATOR_INPUTS)
         paths.extend(ROOT / name for name in CATALOG_INPUTS)
@@ -457,9 +485,9 @@ def main():
                     "missing_animation_fallbacks": families.fallbacks,
                     "stock_body_sha256": {name: hashlib.sha256(dependencies[name]).hexdigest()
                                           for name in sorted(originals) if name not in active},
-                    "animation_bridges": animation_cache,
-                    "files": {path.relative_to(ROOT).as_posix(): file_digest(path)
-                              for path in sorted(set(paths))}}
+                    "animation_bridges": {**prior_manifest.get("animation_bridges", {}), **animation_cache},
+                    "files": {**retained, **{path.relative_to(ROOT).as_posix(): file_digest(path)
+                              for path in sorted(set(paths))}}}
         MANIFEST.write_text(json.dumps(manifest, indent=2) + "\n")
     print(json.dumps(report, indent=2), flush=True)
 

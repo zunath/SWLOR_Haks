@@ -2771,9 +2771,7 @@ def generate_preserving_manifest() -> None:
         if old_output.exists():
             remove_packed_texture(old_output)
 
-    for material in selected_sources:
-        for path in source_mtr_paths(material):
-            path.unlink()
+    remove_overridden_materials({material: entries[material] for material in selected_sources})
 
     write_source_manifest(entries, manifest_order)
     write_2da(entries)
@@ -2934,14 +2932,20 @@ def remove_orphaned_materials(
 
 
 def remove_overridden_materials(entries: dict[str, dict[str, object]]) -> int:
+    global _SOURCE_MTR_PATHS_BY_RESREF
     removed_materials = 0
-    for material in entries:
-        for path in source_mtr_paths(material):
-            resolved = path.resolve()
-            if REPOSITORY_ROOT.resolve() not in resolved.parents or resolved.suffix.lower() != ".mtr":
-                raise RuntimeError(f"Refusing to delete unexpected material path: {resolved}")
-            resolved.unlink()
-            removed_materials += 1
+    try:
+        for material in entries:
+            for path in source_mtr_paths(material):
+                resolved = path.resolve()
+                if REPOSITORY_ROOT.resolve() not in resolved.parents or resolved.suffix.lower() != ".mtr":
+                    raise RuntimeError(f"Refusing to delete unexpected material path: {resolved}")
+                resolved.unlink()
+                removed_materials += 1
+    finally:
+        # Importers can rebind already-converted variants in this same process.
+        # The next material read must use the generated MTR, not a deleted source.
+        _SOURCE_MTR_PATHS_BY_RESREF = None
     return removed_materials
 
 
