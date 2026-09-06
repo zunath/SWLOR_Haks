@@ -149,7 +149,7 @@ def index_resources(root, game_data):
     haks = config["HakList"]
     module = root.parent / "Module/ifo/module.ifo.json"
     if module.is_file():
-        names = [row["Mod_Hak"]["value"] for row in json.loads(module.read_text())["Mod_HakList"]["value"]]
+        names = [row["Mod_Hak"]["value"] for row in json.loads(module.read_text(encoding="latin-1"))["Mod_HakList"]["value"]]
         by_name = {hak["Name"]: hak for hak in haks}
         haks = [by_name[name] for name in names]
     # Earlier module HAK entries win. Do not let unused source folders satisfy

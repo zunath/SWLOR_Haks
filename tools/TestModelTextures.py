@@ -54,6 +54,19 @@ class ModelTextureTests(unittest.TestCase):
         (packs / "textures.erf").write_bytes(header + struct.pack("<16sIHH", b"stock", 0, 3, 0))
         self.assertEqual(audit.audit(self.root, self.game)[1], [])
 
+    def test_module_hak_order_uses_latin1_json_in_utf8_environments(self):
+        module = self.root.parent / "Module/ifo/module.ifo.json"
+        module.parent.mkdir(parents=True)
+        module.write_bytes(json.dumps({
+            "Mod_Name": {"value": "\u00ff"},
+            "Mod_HakList": {"value": [{"Mod_Hak": {"value": "low"}},
+                                        {"Mod_Hak": {"value": "high"}}]}
+        }, ensure_ascii=False).encode("latin-1"))
+        self.model("bitmap absent")
+        (self.low / "head.mdl").write_text("newmodel head\nnode trimesh face\nbitmap present\nendnode\n")
+        (self.low / "present.tga").write_bytes(b"resource")
+        self.assertEqual(audit.audit(self.root, self.game)[1], [])
+
     def test_chunk_emitter_does_not_require_unused_particle_texture(self):
         data = b"newmodel test\nnode emitter sparks\ntexture nonexistent\nchunkname woodchunk\nendnode\n"
         self.assertEqual(list(audit.model_surfaces(data))[0][-1], "")
