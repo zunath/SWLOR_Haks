@@ -4,7 +4,7 @@
 
 The NPC validity repair adds ten DDS/TXI pairs alongside the original conversion
 corpus (8,119 DDS total). `portrait_size_repairs.csv` records their source names,
-dimensions, and output SHA-256 hashes. Four missing Tiny images (Bith, Gran, female
+dimensions, and source/output SHA-256 hashes. Four missing Tiny images (Bith, Gran, female
 Duros, male Kel Dor) are resized from their existing Small DDS images to 16x32.
 The missing `abbasilisk_` and `stat_wwolf_` Large images are resized from Medium
 to 128x256. The otherwise missing `parrot_` set uses NWN:EE's stock
@@ -16,6 +16,13 @@ TGA is flipped vertically before DDS encoding, matching the existing converter.
 Each DDS header explicitly sets DDSD_MIPMAPCOUNT and one mip level, and each TXI
 contains `mipmap 0`. The original conversion/orientation manifests are unchanged.
 Rebuild `sw_portrait.hak` when deploying these additions.
+
+The source digest pins the bytes used to produce each repaired size. If a source
+is corrected or reconverted, regenerate its dependent repairs and update both
+digests together. `PortraitDdsCorpusTests` checks the current six DDS sources and
+the stock parrot TGA through the toolset resource index. The stock-source and NPC
+reference checks require a local NWN:EE installation (or `NWN_INSTALL_PATH`);
+they report a skip when game data is unavailable. Custom-source checks always run.
 
 All 8,119 portraits now ship as compressed DDS, including Medium and the three non-power-of-two images. No portrait TGAs or Huge portraits remain. Opaque images use DXT1 (7,970); images with non-opaque alpha use DXT5 (149). The original 8,109 conversions preserve their dimensions, framing, and facing; the ten size repairs use the dimensions described above. Each DDS explicitly declares one mip level and has a sibling TXI containing `mipmap 0`.
 
