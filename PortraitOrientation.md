@@ -17,15 +17,16 @@ Each DDS header explicitly sets DDSD_MIPMAPCOUNT and one mip level, and each TXI
 contains `mipmap 0`. The original conversion/orientation manifests are unchanged.
 Rebuild `sw_portrait.hak` when deploying these additions.
 
-All 8,109 retained portraits now ship as compressed DDS, including Medium and the three non-power-of-two images. No portrait TGAs or Huge portraits remain. Opaque images use DXT1 (7,960); images with non-opaque alpha use DXT5 (149). Original dimensions, framing, and facing are preserved. Each DDS explicitly declares one mip level and has a sibling TXI containing `mipmap 0`.
+All 8,119 portraits now ship as compressed DDS, including Medium and the three non-power-of-two images. No portrait TGAs or Huge portraits remain. Opaque images use DXT1 (7,970); images with non-opaque alpha use DXT5 (149). The original 8,109 conversions preserve their dimensions, framing, and facing; the ten size repairs use the dimensions described above. Each DDS explicitly declares one mip level and has a sibling TXI containing `mipmap 0`.
 
 | Portrait HAK stage | Bytes | MiB |
 | --- | ---: | ---: |
 | Before Huge removal | 490,690,668 | 467.96 |
 | TGA pack after Huge removal | 233,610,462 | 222.79 |
-| Complete DDS pack, including TXIs | 41,708,861 | 39.78 |
+| Original DDS conversion pack, including TXIs (before size repairs) | 41,708,861 | 39.78 |
+| Current DDS pack, including TXIs and ten size repairs | 41,766,423 | 39.83 |
 
-DDS saves another **191,901,601 bytes (183.01 MiB, 82.15%)** after Huge removal. The built HAK contains 8,109 DDS and 8,109 TXI resources, all byte-compared with their sources. These are built HAK sizes, not compressed download estimates.
+The current DDS pack saves **191,844,039 bytes (182.96 MiB, 82.12%)** against the TGA pack after Huge removal. The built HAK contains 8,119 DDS and 8,119 TXI resources, all byte-compared with their sources. These are built HAK sizes, not compressed download estimates.
 
 The conversion uses ImageMagick 7.1.2-22 with the approved DXT1/DXT5 compression settings and no generated mipmaps. Standard DDS pixels are vertically reversed before encoding to match NWN's storage convention, as documented by the [NWN Crunch portrait converter](https://neverwintervault.org/project/nwnee/other/tool/nwn-crunch-enhanced-edition). Generic DDS viewers display those stored rows upside down; NWN and the SWLOR toolset reverse them when sampling. Independent comparison of every output in this display orientation against the TGA sources found no horizontal/vertical orientation mismatches or dimension changes; all opaque sources remain opaque. Average per-image RGB absolute error is 1.215/255. The twelve images with the highest error and all three irregular dimensions were visually reviewed. DDS is lossy; the earlier lossless orientation correction is preserved in the converted source provenance.
 
@@ -58,10 +59,10 @@ The final correction batch contains 256 exact horizontal pixel reflections acros
 - All 256 corrections are exact reflections, including alpha and texture padding, with dimensions/headers/image IDs preserved. RLE extension offsets are relocated as needed without changing their metadata contents.
 - Huge removal deleted exactly the 1,027 recorded files without altering the remaining TGAs; subsequent DDS conversion records all 8,109 source hashes.
 - All 1,027 Large DDS fallbacks exist and match their conversion hashes and historical source provenance; no Huge or TGA remains in `sw_portrait`.
-- All 16,218 resources in the rebuilt HAK were byte-compared with their source files.
+- All 16,238 resources in the rebuilt HAK were byte-compared with their source files.
 - Python tests cover the TGA utility, complete-manifest enforcement, replay/idempotence, pending/self-referencing canonicals, tampering, DDS dimensions/format/single-mip/payload/TXI validation, and the complete Huge-to-Large fallback corpus.
 - The focused toolset portrait lookup tests decode T/S/M/L DDS resources and check intentional absence of H and TGAs.
-- `PortraitDdsCorpusTests` loads every one of the 8,109 DDS portraits through the toolset's resource index and actual decoder, comparing dimensions and displayed RGB grids against the original TGA signatures. The test rejects the earlier top-down DDS encoding, which would have displayed upside down.
+- `PortraitDdsCorpusTests` loads the original 8,109 converted DDS portraits through the toolset's resource index and actual decoder, comparing dimensions and displayed RGB grids against the original TGA signatures. The test rejects the earlier top-down DDS encoding, which would have displayed upside down. The ten supplemental size repairs are covered separately by the Python resource tests, including hashes, dimensions, DXT format, payload size, mip flags, and TXIs.
 
 From the parent repository:
 
