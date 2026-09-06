@@ -492,6 +492,7 @@ def main():
     for name, source in sources.items():
         path = stage / "binary" / f"{name}.mdl"
         compiled = mdl.restore_vertex_attributes(source, path.read_bytes())
+        compiled = poses.repair_compiler_skin_bindings(compiled)
         if name in renamed_nodes:
             compiled = poses.preserve_skin_bindings(dependencies[original_robes[name]], compiled, renamed_nodes[name])
         path.write_bytes(compiled)

@@ -208,6 +208,67 @@ def preserve_skin_bindings(source, generated, names):
     return bytes(result)
 
 
+def inverse_transform(position, orientation):
+    rotation = (-orientation[0], -orientation[1], -orientation[2], orientation[3])
+    return rotate(rotation, tuple(-v for v in position)), rotation
+
+
+def compiler_skin_binding_repairs(data):
+    """Recognize the legacy compiler's incorrect inverse-transform composition.
+
+    NmcMesh.cpp adds inverse local translations without rotating them through
+    their parents. Only repair a mesh when every used bind matches that exact
+    calculation. Authored inverse binds that differ from it remain untouched.
+    Native inverse-bind quaternions use WXYZ; controller quaternions use XYZW.
+    """
+    model = Model(data, False)
+    world = model.pose()
+    indices = {node[0]: index for index, node in enumerate(model.nodes)}
+    if len(indices) != len(model.nodes):
+        return []  # Ambiguous source names need a separate bone-reference audit.
+    if any(abs(transform[2] - 1) > 2e-6 for transform in world.values()):
+        return []  # Native inverse binds have no scale field.
+    repairs = []
+    for mesh, bones in model.skin_bindings().items():
+        legacy_position, legacy_rotation = (0, 0, 0), (0, 0, 0, 1)
+        index = indices[mesh]
+        while index is not None:
+            _, index, _, controllers, _ = model.nodes[index]
+            position = sample(controllers[8], 0) if 8 in controllers else (0, 0, 0)
+            rotation = sample(controllers[20], 0, True) if 20 in controllers else (0, 0, 0, 1)
+            position, rotation = inverse_transform(position, rotation)
+            legacy_position = tuple(a+b for a, b in zip(legacy_position, position))
+            legacy_rotation = multiply(legacy_rotation, rotation)
+        pending = []
+        for bone, (qoffset, toffset) in bones.items():
+            bp, bq, _ = world[bone]
+            lp = tuple(a+b for a, b in zip(legacy_position, rotate(legacy_rotation, bp)))
+            lt, lq = inverse_transform(lp, multiply(legacy_rotation, bq))
+            stored = struct.unpack_from("<4f", data, qoffset)
+            aq = (*stored[1:], stored[0])
+            at = struct.unpack_from("<3f", data, toffset)
+            if math.dist(at, lt) > 2e-5 or not mdl.equivalent_quaternion(aq, lq):
+                break
+            mp, mq, _ = world[mesh]
+            _, inverse_bone = inverse_transform(bp, bq)
+            correct_t = rotate(inverse_bone, tuple(a-b for a, b in zip(mp, bp)))
+            correct_q = multiply(inverse_bone, mq)
+            error = math.dist(at, correct_t)
+            if error > 2e-5 or not mdl.equivalent_quaternion(aq, correct_q):
+                pending.append((mesh, bone, qoffset, toffset, correct_q, correct_t, error))
+        else:
+            repairs.extend(pending)
+    return repairs
+
+
+def repair_compiler_skin_bindings(data):
+    result = bytearray(data)
+    for _, _, qoffset, toffset, q, t, _ in compiler_skin_binding_repairs(data):
+        struct.pack_into("<4f", result, qoffset, q[3], *q[:3])
+        struct.pack_into("<3f", result, toffset, *t)
+    return bytes(result)
+
+
 def validate_body_skeleton(generated, base):
     actual, expected = Model(generated, False), Model(base, False)
     if not math.isclose(actual.scale, expected.scale, abs_tol=1e-7):

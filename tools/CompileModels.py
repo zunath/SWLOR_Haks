@@ -497,6 +497,7 @@ def run_compiler(compiler: Path, staging: Path, arguments: list[str], log: str) 
 
 
 def main() -> None:
+    import RobePoseAudit as poses
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--since", help="Compile ASCII models whose content differs from this git ref; default: every active ASCII model")
     parser.add_argument("--model", action="append", help="Compile only this resref (repeatable), plus ASCII supermodels")
@@ -602,7 +603,8 @@ def main() -> None:
         raise RuntimeError(f"Compiler produced no output for {missing[:20]}")
     for name in selected:
         path = staging / "binary" / f"{name}.mdl"
-        compiled = bytearray(restore_vertex_attributes(inputs[name], path.read_bytes()))
+        compiled = bytearray(poses.repair_compiler_skin_bindings(
+            restore_vertex_attributes(inputs[name], path.read_bytes())))
         if name in restored_supermodels:
             compiled[180:244] = restored_supermodels[name].encode("ascii").ljust(64, b"\0")
         path.write_bytes(compiled)
