@@ -12,7 +12,7 @@ import GenerateTintMapAssets as tint
 class RobeRgbManifestTests(unittest.TestCase):
     def test_text_manifest_hashes_are_checkout_independent(self):
         with tempfile.TemporaryDirectory() as directory:
-            for extension in (".py", ".2da"):
+            for extension in (".py", ".2da", ".json"):
                 path = Path(directory) / ("source" + extension)
                 path.write_bytes(b"first\nsecond\n")
                 expected = g.file_digest(path)
@@ -58,6 +58,49 @@ class RobeRgbManifestTests(unittest.TestCase):
         manifest = json.loads(g.MANIFEST.read_text())
         for name in g.GENERATOR_INPUTS:
             self.assertEqual(g.file_digest(g.ROOT / "tools" / name), manifest["files"]["tools/" + name])
+        for name in g.CATALOG_INPUTS:
+            self.assertEqual(g.file_digest(g.ROOT / name), manifest["files"][name])
+
+    def test_new_animation_families_skip_occupied_resources(self):
+        groups = {"new-family": {"base": "pfa0"}}
+        self.assertEqual({"new-family": "pfa_ra003"}, g.allocate_animation_bridges(
+            groups, {"pfa_ra001": None, "pfa_ra002": None}, {}))
+
+    def test_animation_bridge_reuse_and_retirement_require_verified_ownership(self):
+        with tempfile.TemporaryDirectory() as directory, patch.object(g, "ROOT", Path(directory)):
+            root = Path(directory) / "sw_pt_root"
+            root.mkdir()
+            path = root / "pfa_ra001.mdl"
+            path.write_bytes(b"generated animation")
+            groups = {"family": {"base": "pfa0"}}
+            prior = {"animation_bridges": {"family": "pfa_ra001"},
+                     "files": {"sw_pt_root/pfa_ra001.mdl": g.file_digest(path)}}
+            self.assertEqual(prior["animation_bridges"], g.allocate_animation_bridges(
+                groups, {"pfa_ra001": path}, prior))
+            other = Path(directory) / "authored.mdl"
+            other.write_bytes(path.read_bytes())
+            with self.assertRaisesRegex(ValueError, "not a verified prior"):
+                g.allocate_animation_bridges(groups, {"pfa_ra001": other}, prior)
+            path.write_bytes(b"authored replacement")
+            for current_groups in (groups, {}):
+                with self.assertRaisesRegex(ValueError, "not a verified prior"):
+                    g.allocate_animation_bridges(current_groups, {"pfa_ra001": path}, prior)
+
+    def test_stock_inventory_must_cover_authoritative_selectable_models(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "stock.json"
+            complete = {"models": [{"model": "pfa0_robe003"}],
+                        "stockModelSha256": {"pfa0_robe003": "hash"}}
+            path.write_text(json.dumps(complete))
+            with patch.object(g.stock_robes, "MANIFEST", path), \
+                 patch.object(g.stock_robes, "selectable_styles", return_value={3, 7}):
+                g.validate_stock_inventory({"pfa0_robe003": None, "pfa0_head003": None})
+                with self.assertRaisesRegex(ValueError, "incomplete"):
+                    g.validate_stock_inventory({"pfa0_robe003": None, "pmh0_robe007": None})
+                complete["models"] = []
+                path.write_text(json.dumps(complete))
+                with self.assertRaisesRegex(ValueError, "incomplete"):
+                    g.validate_stock_inventory({"pfa0_robe003": None})
 
     def test_atlas_audit_rejects_nonmetal_texels_and_header_corruption(self):
         original = tint.PALETTE_TEXTURE.read_bytes()

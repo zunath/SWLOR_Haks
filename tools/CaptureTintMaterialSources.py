@@ -56,7 +56,9 @@ def capture(baseline: str, module_baseline: str, converted_baseline: str, game_d
             if struct.unpack_from("<H", data, at + 16)[0] in {3, 2033}:
                 fixed.add(data[at:at + 16].split(b"\0", 1)[0].decode("ascii").lower())
     materials = {}
-    process = subprocess.Popen(["git", "-C", str(root), "cat-file", "--batch"], stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+    process = subprocess.Popen(["git", "-c", f"safe.directory={root.as_posix()}",
+                                "-C", str(root), "cat-file", "--batch"],
+                               stdin=subprocess.PIPE, stdout=subprocess.PIPE)
     try:
         for (name, suffix), (_, path, blob) in sorted(resources.items()):
             if suffix != ".mtr":

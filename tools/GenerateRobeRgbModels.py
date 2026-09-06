@@ -30,7 +30,9 @@ MANIFEST = ROOT / "tools" / "RobeRgbModels.json"
 PATTERN = re.compile(r"^(p[fm][a-z])0_robe(\d{3})$")
 NODE = re.compile(r"(?im)^\s*node\s+(\S+)\s+(\S+)\s*$([\s\S]*?)^\s*endnode\b")
 GENERATOR_INPUTS = ("GenerateRobeRgbModels.py", "RobeSkeleton.py", "RobePoseAudit.py",
-                    "RobeAnimations.py", "CompileModels.py")
+                    "RobeAnimations.py", "CompileModels.py", "ImportStockRobeTints.py",
+                    "TintMapStockRobes.json")
+CATALOG_INPUTS = ("sw_2da/parts_robe.2da",)
 BODY_RESOURCE = re.compile(r"^p[fm][a-z](\d+)(?:_robe\d{3})?$", re.IGNORECASE)
 
 
@@ -38,7 +40,7 @@ def file_digest(path):
     data = path.read_bytes()
     # Git may check source and tables out with CRLF on Windows. Their hashes
     # describe content changes, while compiled resources remain byte-exact.
-    if path.suffix in {".py", ".2da"}:
+    if path.suffix in {".py", ".2da", ".json"}:
         data = data.replace(b"\r\n", b"\n")
     return hashlib.sha256(data).hexdigest()
 
@@ -121,9 +123,9 @@ def check() -> list[str]:
         return ["Robe RGB model manifest is missing; regenerate the robe models"]
     manifest = json.loads(MANIFEST.read_text())
     errors = []
-    for name in GENERATOR_INPUTS:
-        if f"tools/{name}" not in manifest["files"]:
-            errors.append(f"Robe RGB manifest does not track {name}; regenerate and validate")
+    for relative in [f"tools/{name}" for name in GENERATOR_INPUTS] + list(CATALOG_INPUTS):
+        if relative not in manifest["files"]:
+            errors.append(f"Robe RGB manifest does not track {relative}; regenerate and validate")
     if not manifest.get("independent_skeletons") or not manifest.get("body_pose_samples"):
         errors.append("Robe models lack independent skeleton and animation pose validation")
     for relative, expected in manifest["files"].items():
@@ -138,6 +140,8 @@ def check() -> list[str]:
         errors.append("Stock robe inventory is missing; run ImportStockRobeTints.py")
     else:
         stock = json.loads(stock_robes.MANIFEST.read_text())
+        if {row["model"] for row in stock["models"]} != set(stock["stockModelSha256"]):
+            errors.append("Stock robe inventory differs from its recorded source models; rerun the importer")
         for row in stock["models"]:
             if row["model"] not in expected:
                 errors.append(f"Selectable stock robe {row['model']} is missing its RGB conversion")
@@ -194,6 +198,49 @@ def validate_output_ownership(selected, id_map, prior, active, manifest):
                 raise ValueError(f"Occupied robe output is not a verified prior mapping: {path}")
 
 
+def allocate_animation_bridges(groups, active, manifest):
+    prior = manifest.get("animation_bridges", {})
+    if len(set(prior.values())) != len(prior):
+        raise ValueError("Animation families share a persisted bridge name")
+    # Validate retired names too: --apply may delete those old generated outputs.
+    for key, name in prior.items():
+        if not re.fullmatch(r"p[fm][a-z]_ra\d{3}", name):
+            raise ValueError(f"Invalid persisted animation resource: {name}")
+        expected = ROOT / "sw_pt_root" / f"{name}.mdl"
+        path = active.get(name, expected)
+        if path.is_file():
+            relative = expected.relative_to(ROOT).as_posix()
+            if (path.resolve() != expected.resolve() or
+                    manifest.get("files", {}).get(relative) != file_digest(path)):
+                raise ValueError(f"Occupied animation bridge is not a verified prior output: {path}")
+    reserved = set(active) | set(prior.values())
+    result = {}
+    for key, group in sorted(groups.items()):
+        prefix = group["base"][:3]
+        if key in prior:
+            name = prior[key]
+            if not name.startswith(prefix + "_ra"):
+                raise ValueError(f"Persisted bridge has the wrong body prefix: {name}")
+        else:
+            name = next((f"{prefix}_ra{i:03d}" for i in range(1, 1000)
+                         if f"{prefix}_ra{i:03d}" not in reserved), None)
+            if name is None:
+                raise ValueError(f"No animation bridge resref available for {prefix}")
+        reserved.add(name)
+        result[key] = name
+    return result
+
+
+def validate_stock_inventory(stock_models):
+    styles = stock_robes.selectable_styles()
+    expected = {name for name in stock_models
+                if (match := stock_robes.PATTERN.fullmatch(name)) and int(match[1]) in styles}
+    stock = json.loads(stock_robes.MANIFEST.read_text())
+    if ({row["model"] for row in stock["models"]} != expected or
+            set(stock["stockModelSha256"]) != expected):
+        raise ValueError("Stock robe inventory is incomplete; run ImportStockRobeTints.py before generation")
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--game-data", type=Path)
@@ -230,6 +277,7 @@ def main():
         (stage / directory).mkdir(parents=True, exist_ok=True)
     compiler, compiler_hash = mdl.prepare_compiler(stage)
     stock = tint.read_stock_key_models(args.game_data)
+    validate_stock_inventory(stock)
     dependencies = {}
     missing = set()
     def load(name):
@@ -297,7 +345,6 @@ def main():
 
     prior_manifest = json.loads(MANIFEST.read_text()) if MANIFEST.is_file() else {}
     animation_cache = {}
-    animation_names = dict(prior_manifest.get("animation_bridges", {}))
     families = skeleton.Families(load_text, original_library.body_track_names)
     complete_roots = set()
     sources = {}
@@ -309,12 +356,8 @@ def main():
         robe = unique_nodes(load_text(name), dependencies[name])
         families.add(name[:3] + "0", robe, name)
     print(f"Building {len(families.groups)} shared animation families.", flush=True)
+    animation_names = allocate_animation_bridges(families.groups, active, prior_manifest)
     for key, group in sorted(families.groups.items()):
-        prefix = group["base"][:3]
-        if key not in animation_names:
-            used_names = set(animation_names.values())
-            animation_names[key] = next(f"{prefix}_ra{i:03d}" for i in range(1, 1000)
-                                       if f"{prefix}_ra{i:03d}" not in used_names)
         parent = animation_names[key]
         sources[parent] = families.bridge(key, parent)
         animation_cache[key] = parent
@@ -406,6 +449,7 @@ def main():
             obsolete.unlink(missing_ok=True)
         paths = [TABLE, PHENOTYPES]
         paths.extend(ROOT / "tools" / name for name in GENERATOR_INPUTS)
+        paths.extend(ROOT / name for name in CATALOG_INPUTS)
         paths.extend(active[name] for name in dependencies if name in active)
         paths.extend(ROOT / ("sw_pt_robe" if "_robe" in name else "sw_pt_root") / f"{name}.mdl" for name in sources)
         manifest = {"compiler_sha256": compiler_hash, "independent_skeletons": True,
