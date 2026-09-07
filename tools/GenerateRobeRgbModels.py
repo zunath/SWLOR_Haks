@@ -415,17 +415,23 @@ def main():
         text_cache[name] = poses.accurate_rotations(path.read_text(encoding="latin1"), dependencies[name])
         return text_cache[name]
 
-    reference_bodies = {}
-    for base_name in {name[:3] + "0" for name in selected}:
-        data = dependencies[base_name]
+    reference_models = {}
+    def load_reference(name):
+        if name in reference_models:
+            return reference_models[name]
+        data = dependencies.get(name)
+        if data is None:
+            return None
         if not mdl.binary(data):
             reference_directory = stage / "reference"
             reference_directory.mkdir(exist_ok=True)
-            mdl.run_compiler(compiler, stage, ["-cne", str(stage / f"{base_name}.mdl"), str(reference_directory) + "/"], "reference.log")
-            data = (reference_directory / f"{base_name}.mdl").read_bytes()
-        reference_bodies[base_name] = data
-    def load_reference(name):
-        return reference_bodies.get(name, dependencies.get(name))
+            mdl.run_compiler(compiler, stage, ["-cne", str(stage / f"{name}.mdl"), str(reference_directory) + "/"], "reference.log")
+            data = (reference_directory / f"{name}.mdl").read_bytes()
+        reference_models[name] = data
+        return data
+    # Authored animation overlays remain ASCII source assets. The pose/part-ID audit
+    # needs compiled references for any owner in the chain, not only body roots.
+    reference_bodies = {name[:3] + "0": load_reference(name[:3] + "0") for name in selected}
     original_library = poses.Library(load_reference)
 
     prior_manifest = json.loads(MANIFEST.read_text()) if MANIFEST.is_file() else {}
@@ -520,7 +526,7 @@ def main():
         if name in reference_bodies:
             return reference_bodies[name]
         path = stage / "binary" / f"{name}.mdl"
-        return path.read_bytes() if name in sources else dependencies.get(name)
+        return path.read_bytes() if name in sources else load_reference(name)
     library = poses.Library(load_binary)
     checked_poses = 0
     if not failures:
