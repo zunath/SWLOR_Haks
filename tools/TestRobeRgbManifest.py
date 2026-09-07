@@ -14,7 +14,7 @@ import TestRobeSkeleton as skeleton_tests
 class RobeRgbManifestTests(unittest.TestCase):
     def test_text_manifest_hashes_are_checkout_independent(self):
         with tempfile.TemporaryDirectory() as directory:
-            for extension in (".py", ".2da", ".json"):
+            for extension in (".py", ".2da", ".json", ".mdl"):
                 path = Path(directory) / ("source" + extension)
                 path.write_bytes(b"first\nsecond\n")
                 expected = g.file_digest(path)
@@ -22,6 +22,19 @@ class RobeRgbManifestTests(unittest.TestCase):
                 self.assertEqual(expected, g.file_digest(path))
                 path.write_bytes(b"first\r\nchanged\r\n")
                 self.assertNotEqual(expected, g.file_digest(path))
+
+    def test_binary_model_hashes_preserve_every_byte(self):
+        path = Path("compiled.mdl")
+        data = b"\0\0\0\0binary\r\npayload"
+        self.assertNotEqual(g.content_digest(path, data), g.content_digest(path, data.replace(b"\r\n", b"\n")))
+
+    def test_manifest_snapshot_normalizes_captured_ascii_model_bytes(self):
+        with tempfile.TemporaryDirectory() as directory, patch.object(g, "ROOT", Path(directory)):
+            path = Path(directory) / "sw_cr_creature" / "overlay.mdl"
+            inputs = {Path(directory) / "tools" / name: "input" for name in g.GENERATOR_INPUTS}
+            inputs.update({Path(directory) / name: "input" for name in g.CATALOG_INPUTS})
+            files = g.snapshot_manifest_inputs({"overlay": b"newmodel overlay\r\n"}, {"overlay": path}, inputs)
+            self.assertEqual(g.content_digest(path, b"newmodel overlay\n"), files["sw_cr_creature/overlay.mdl"])
 
     def test_unused_table_rows_with_existing_root_or_attachment_are_reserved(self):
         active = {"pfa34": None, "pmh35_robe007": None, "pfg036_robe187": None}

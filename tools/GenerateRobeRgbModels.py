@@ -37,10 +37,13 @@ BODY_RESOURCE = re.compile(r"^p[fm][a-z](\d+)(?:_robe\d{3})?$", re.IGNORECASE)
 
 
 def file_digest(path):
-    data = path.read_bytes()
+    return content_digest(path, path.read_bytes())
+
+
+def content_digest(path, data):
     # Git may check source and tables out with CRLF on Windows. Their hashes
     # describe content changes, while compiled resources remain byte-exact.
-    if path.suffix in {".py", ".2da", ".json"}:
+    if path.suffix.lower() in {".py", ".2da", ".json"} or (path.suffix.lower() == ".mdl" and not mdl.binary(data)):
         data = data.replace(b"\r\n", b"\n")
     return hashlib.sha256(data).hexdigest()
 
@@ -318,7 +321,7 @@ def snapshot_manifest_inputs(dependencies, active, input_digests):
     paths = [ROOT / "tools" / name for name in GENERATOR_INPUTS]
     paths += [ROOT / name for name in CATALOG_INPUTS]
     files = {path.relative_to(ROOT).as_posix(): input_digests[path] for path in paths}
-    files.update({active[name].relative_to(ROOT).as_posix(): hashlib.sha256(data).hexdigest()
+    files.update({active[name].relative_to(ROOT).as_posix(): content_digest(active[name], data)
                   for name, data in dependencies.items() if name in active})
     return files
 
