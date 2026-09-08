@@ -475,6 +475,60 @@ class SoundTransactionTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "does not match manifest"):
             sound.verify_manifest(self.root, manifest, "test-ffmpeg", 5)
 
+    def test_verification_rejects_added_wav_not_recorded_in_manifest(self):
+        manifest = self.root / "manifest.json"
+        self.compress(excluded={"first": "engine loop", "second": "engine loop"}, apply=True, manifest_path=manifest)
+        (self.root / "sw_sound" / "added.wav").write_bytes(wav())
+        with self.assertRaisesRegex(ValueError, "Current WAV inventory does not match manifest \\(1 unexpected, 0 missing\\)"):
+            sound.verify_manifest(self.root, manifest, "test-ffmpeg", 5)
+
+    def test_verification_rejects_duplicate_manifest_paths_even_when_membership_matches(self):
+        manifest = self.root / "manifest.json"
+        report = self.compress(excluded={"first": "engine loop", "second": "engine loop"}, apply=True, manifest_path=manifest)
+        report["files"].append(dict(report["files"][0]))
+        manifest.write_text(json.dumps(report))
+        with self.assertRaisesRegex(ValueError, "Manifest contains duplicate WAV paths: sw_sound/first.wav"):
+            sound.verify_manifest(self.root, manifest, "test-ffmpeg", 5)
+
+    def test_verification_reports_missing_wav_as_manifest_inventory_mismatch(self):
+        manifest = self.root / "manifest.json"
+        self.compress(excluded={"first": "engine loop", "second": "engine loop"}, apply=True, manifest_path=manifest)
+        (self.root / "sw_sound" / "first.wav").unlink()
+        with self.assertRaisesRegex(ValueError, "Current WAV inventory does not match manifest \\(0 unexpected, 1 missing\\)"):
+            sound.verify_manifest(self.root, manifest, "test-ffmpeg", 5)
+
+    def test_completed_manifest_rejects_dry_run_and_unknown_statuses(self):
+        manifest = self.root / "manifest.json"
+        report = self.compress(excluded={"first": "engine loop", "second": "engine loop"}, apply=True, manifest_path=manifest)
+        for status in ("would_convert", "convertedd", "", None):
+            with self.subTest(status=status):
+                report["files"][0]["status"] = status
+                manifest.write_text(json.dumps(report))
+                with self.assertRaisesRegex(ValueError, "Invalid status in completed apply manifest: sw_sound/first.wav"):
+                    sound.verify_manifest(self.root, manifest, "test-ffmpeg", 5)
+
+    def test_skipped_manifest_rows_require_unchanged_source_hash_and_size(self):
+        manifest = self.root / "manifest.json"
+        report = self.compress(excluded={"first": "engine loop", "second": "engine loop"}, apply=True, manifest_path=manifest)
+        row = report["files"][0]
+        for field, changed_value in (("source_bytes", row["source_bytes"] + 1), ("source_sha256", "0" * 64)):
+            with self.subTest(field=field):
+                original = row[field]
+                row[field] = changed_value
+                manifest.write_text(json.dumps(report))
+                with self.assertRaisesRegex(ValueError, "Skipped resource must have identical source and output hashes and sizes"):
+                    sound.verify_manifest(self.root, manifest, "test-ffmpeg", 5)
+                row[field] = original
+
+    def test_converted_resource_cannot_bypass_validation_by_changing_status_to_skipped(self):
+        manifest = self.root / "manifest.json"
+        with patch.object(sound, "encode", side_effect=self.fake_encode):
+            report = self.compress(apply=True, manifest_path=manifest)
+        report["files"][0]["status"] = "skipped"
+        manifest.write_text(json.dumps(report))
+        with self.assertRaisesRegex(ValueError, "Skipped resource must have identical source and output hashes and sizes"):
+            sound.verify_manifest(self.root, manifest, "test-ffmpeg", 5)
+
     def test_unsafe_paths_and_missing_manifest_are_rejected(self):
         for path in ("../outside.wav", str(self.root / "sw_sound" / "first.wav")):
             with self.assertRaises(ValueError):

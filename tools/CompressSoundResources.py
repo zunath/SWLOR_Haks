@@ -265,12 +265,20 @@ def wav_paths(sound_directory: Path) -> list[Path]:
                   key=lambda path: path.as_posix().casefold())
 
 
-def validate_inventory(root: Path, rows: list[dict], *, applied: bool = False) -> None:
+def validate_wav_membership(root: Path, rows: list[dict], *,
+                            mismatch_message: str = "WAV inventory changed during compression") -> None:
+    recorded = Counter(row["path"] for row in rows)
+    duplicates = sorted(path for path, count in recorded.items() if count > 1)
+    if duplicates:
+        raise ValueError("Manifest contains duplicate WAV paths: " + ", ".join(duplicates))
     paths = {path.relative_to(root).as_posix() for path in wav_paths(safe_path(root, "sw_sound"))}
-    expected = {row["path"] for row in rows}
+    expected = set(recorded)
     if paths != expected:
-        raise ValueError(f"WAV inventory changed during compression ({len(paths - expected)} added, "
-                         f"{len(expected - paths)} removed)")
+        raise ValueError(f"{mismatch_message} ({len(paths - expected)} unexpected, {len(expected - paths)} missing)")
+
+
+def validate_inventory(root: Path, rows: list[dict], *, applied: bool = False) -> None:
+    validate_wav_membership(root, rows)
     hash_key = "output_sha256" if applied else "source_sha256"
     for row in rows:
         path = safe_path(root, row["path"])
@@ -416,7 +424,13 @@ def verify_manifest(root: Path, manifest_path: Path, ffmpeg: str, timeout: float
     report = json.loads(manifest_path.read_text(encoding="utf-8"))
     if report.get("schema_version") != 1 or report.get("mode") != "apply" or report.get("state") != "complete":
         raise ValueError("Verification requires a completed apply manifest")
+    validate_wav_membership(root, report["files"], mismatch_message="Current WAV inventory does not match manifest")
     for row in report["files"]:
+        if row.get("status") not in ("converted", "skipped"):
+            raise ValueError(f"Invalid status in completed apply manifest: {row['path']} ({row.get('status')!r})")
+        if row["status"] == "skipped" and (row["source_bytes"] != row["output_bytes"]
+                                           or row["source_sha256"] != row["output_sha256"]):
+            raise ValueError(f"Skipped resource must have identical source and output hashes and sizes: {row['path']}")
         data = safe_path(root, row["path"]).read_bytes()
         if len(data) != row["output_bytes"] or digest(data) != row["output_sha256"]:
             raise ValueError(f"Current resource does not match manifest: {row['path']}")
