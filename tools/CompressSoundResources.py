@@ -458,8 +458,8 @@ def main() -> None:
     if not 0 < args.timeout <= 600:
         parser.error("--timeout must be greater than zero and at most 600 seconds")
     if args.apply and not args.exclude_manifest:
-        parser.error("--apply requires --exclude-manifest; generate engine loop exclusions with the parent "
-                     "repository's tools/AuditSoundCompression.py --write-exclusions <path.json>")
+        parser.error("--apply requires --exclude-manifest; from the HAK repository, run "
+                     "python tools/AuditSoundCompression.py --repo-root <SWLOR_NWN> --write-exclusions <path.json>")
     try:
         ffmpeg = shutil.which(args.ffmpeg)
         if not ffmpeg:
