@@ -4,6 +4,3 @@
 
 # DDS texture resources are binary in every HAK.
 *.dds binary
-
-# Keep hash-pinned conversion manifests stable on Windows checkouts.
-/tools/WorldTextureDds*.json text eol=lf
