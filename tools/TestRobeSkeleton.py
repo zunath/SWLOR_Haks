@@ -94,6 +94,17 @@ class IndependentRobeSkeletonTests(unittest.TestCase):
         self.assertIn(b"rm_sleeve", output)
         self.assertIn(b"newanim walk", families.bridge(key, "bridge"))
 
+    def test_single_time_zero_keys_preserve_static_values_and_animated_curves(self):
+        fixtures = self.fixtures()
+        fixtures["body"] = fixtures["body"].replace("position 0 0 -1", "positionkey 1\n0 0 0 -1\nscalekey 1\n0 1.25")
+        families, key, _, names = self.build(fixtures)
+        animation = next(anim.ANIMATION.finditer(families.bridge(key, "bridge").decode()))
+        tracks = {n: p for _, n, p in mdl.parse_nodes(animation[3])}
+        self.assertEqual(tracks["hand_g"]["position"], ["0", "0", "-1"])
+        self.assertEqual(tracks["hand_g"]["scale"], ["1.25"])
+        self.assertNotIn("scalekey", tracks["hand_g"])
+        self.assertEqual(len(tracks["arm_g"]["orientationkey"]), 2)
+
     def test_native_tiny_rotation_survives_decompiler_rounding(self):
         data = bytearray(512)
         struct.pack_into("<III", data, 0, 0, 500, 0)
