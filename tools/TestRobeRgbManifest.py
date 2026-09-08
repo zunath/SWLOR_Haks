@@ -12,6 +12,19 @@ import TestRobeSkeleton as skeleton_tests
 
 
 class RobeRgbManifestTests(unittest.TestCase):
+    def test_native_compiler_calls_are_bounded_to_requested_models(self):
+        with tempfile.TemporaryDirectory() as directory, patch.object(g.mdl, "run_compiler") as run:
+            stage = Path(directory)
+            (stage / "binary").mkdir()
+            (stage / "binary" / "stale.mdl").write_bytes(b"old staged resource")
+            g.compile_model_files(Path("compiler.exe"), stage, ["pmh_ra002", "pfa_ra001"],
+                                  "binary", "decompiled", "-de", "decompile.log")
+            self.assertEqual(2, run.call_count)
+            self.assertEqual([str(stage / "binary" / "pfa_ra001.mdl"),
+                              str(stage / "binary" / "pmh_ra002.mdl")],
+                             [call.args[2][1] for call in run.call_args_list])
+            self.assertTrue(all(call.args[2][0] == "-de" for call in run.call_args_list))
+
     def test_text_manifest_hashes_are_checkout_independent(self):
         with tempfile.TemporaryDirectory() as directory:
             for extension in (".py", ".2da", ".json", ".mdl"):

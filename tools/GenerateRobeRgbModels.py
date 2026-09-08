@@ -326,6 +326,17 @@ def snapshot_manifest_inputs(dependencies, active, input_digests):
     return files
 
 
+def compile_model_files(compiler, stage, names, source_directory, destination_directory, mode, log):
+    """Keep the native compiler timeout per model, not per growing asset library."""
+    names = sorted(names)
+    for index, name in enumerate(names, 1):
+        mdl.run_compiler(compiler, stage,
+                         [mode, str(stage / source_directory / f"{name}.mdl"),
+                          str(stage / destination_directory) + "/"], log)
+        if index % 250 == 0 or index == len(names):
+            print(f"{mode}: {index}/{len(names)} models completed.", flush=True)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--game-data", type=Path)
@@ -492,12 +503,13 @@ def main():
         (stage / "source" / f"{name}.mdl").write_bytes(data)
         (stage / "input" / f"{name}.mdl").write_bytes(mdl.protect_vertex_identity(data))
     # Compile and expose the complete animation parents before their body roots.
-    for name in sorted(set(animation_cache.values()) - set(dependencies)):
+    compiled_parents = set(animation_cache.values()) - set(dependencies)
+    for name in sorted(compiled_parents):
         mdl.run_compiler(compiler, stage, ["-cne", str(stage / "input" / f"{name}.mdl"), str(stage / "binary") + "/"], "compile.log")
         shutil.copyfile(stage / "binary" / f"{name}.mdl", stage / f"{name}.mdl")
     print(f"Compiling {len(sources)} generated models. Staging: {stage}", flush=True)
-    for pattern in ([name + ".mdl" for name in sources] if args.model else ["*.mdl"]):
-        mdl.run_compiler(compiler, stage, ["-cne", str(stage / "input" / pattern), str(stage / "binary") + "/"], "compile.log")
+    compile_model_files(compiler, stage, set(sources) - compiled_parents,
+                        "input", "binary", "-cne", "compile.log")
     for name, source in sources.items():
         path = stage / "binary" / f"{name}.mdl"
         compiled = mdl.restore_vertex_attributes(source, path.read_bytes())
@@ -505,8 +517,7 @@ def main():
         if name in renamed_nodes:
             compiled = poses.preserve_skin_bindings(dependencies[original_robes[name]], compiled, renamed_nodes[name])
         path.write_bytes(compiled)
-    for pattern in ([name + ".mdl" for name in sources] if args.model else ["*.mdl"]):
-        mdl.run_compiler(compiler, stage, ["-de", str(stage / "binary" / pattern), str(stage / "decompiled") + "/"], "decompile.log")
+    compile_model_files(compiler, stage, sources, "binary", "decompiled", "-de", "decompile.log")
     failures = []
     for name, source in sources.items():
         try:
