@@ -52,7 +52,7 @@ def main():
     active = tint.find_active_models()
     entries = tint.load_source_manifest()
     native = {path.stem.lower() for directory in tint.hak_directories() for path in directory.glob("*.plt")
-              if not tint.is_native_robe_control_plt(path)}
+              if not tint.is_native_attachment_control_plt(path)}
     rows = plan(stock_models, stock_palettes, active, entries, native, selectable_styles())
     model_names = {row["model"] for row in rows if row["importModel"]}
     palette_names = {row["palette"] for row in rows if row["importPalette"]}
