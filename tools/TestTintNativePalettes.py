@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Protect native robe metadata without turning control pixels into artwork."""
+"""Protect native attachment metadata without turning control pixels into artwork."""
 from pathlib import Path
 import struct
 import tempfile
@@ -20,7 +20,7 @@ class NativeRobePaletteTests(unittest.TestCase):
         self.parts.mkdir()
         for name, value in (
             ("OUTPUT_MTR_DIRECTORY", self.materials), ("_NATIVE_MODULAR_PALETTES", set()),
-            ("_NATIVE_ROBE_SOURCES", set()), ("_NATIVE_ROBE_MATERIALS", set()),
+            ("_NATIVE_ATTACHMENT_SOURCES", set()), ("_NATIVE_ATTACHMENT_MATERIALS", set()),
             ("_MATERIAL_SOURCES", {}), ("_MATERIAL_BITMAP_ALIASES", {}),
             ("_MTR_PATHS_BY_RESREF", {}), ("_SOURCE_MTR_PATHS_BY_RESREF", {}),
             ("_PROFILE_SIGNATURES", {}), ("_PROFILE_ALIASES", {}), ("_PRESERVED_MATERIALS", {}),
@@ -47,14 +47,14 @@ class NativeRobePaletteTests(unittest.TestCase):
 
     def test_control_is_valid_one_pixel_plt_with_no_artwork_dependencies(self):
         path = self.materials / "pfh0_robe187.plt"
-        path.write_bytes(g.native_robe_control_bytes())
+        path.write_bytes(g.native_attachment_control_bytes())
         width, height, shade, layer, _ = g.read_plt(path)
         self.assertEqual((width, height, len(path.read_bytes())), (1, 1, 26))
         self.assertEqual((int(shade[0, 0]), int(layer[0, 0])), (128, 0))
 
     def test_controls_are_neither_conversion_inputs_nor_authored_surfaces(self):
         path = self.materials / "pfh0_robe187.plt"
-        path.write_bytes(g.native_robe_control_bytes())
+        path.write_bytes(g.native_attachment_control_bytes())
         with patch.object(g, "hak_directories", return_value=(self.materials, self.parts)):
             self.assertFalse(g.is_tint_material_plt(path))
             self.assertEqual(g.find_tint_material_plts(), ({}, []))
@@ -63,45 +63,64 @@ class NativeRobePaletteTests(unittest.TestCase):
     def test_corrupt_control_cannot_be_reconverted_into_authoritative_pixels(self):
         path = self.materials / "pfh0_robe187.plt"
         path.write_bytes(b"damaged control")
-        g._NATIVE_ROBE_SOURCES = {path.stem}
+        g._NATIVE_ATTACHMENT_SOURCES = {path.stem}
         self.assertFalse(g.is_tint_material_plt(path))
-        self.assertTrue(g.native_robe_control_errors())
+        self.assertTrue(g.native_attachment_control_errors())
         with self.assertRaisesRegex(RuntimeError, "unrecognized"):
-            g.synchronize_native_robe_controls()
+            g.synchronize_native_attachment_controls()
         self.assertEqual(path.read_bytes(), b"damaged control")
 
     def test_controls_follow_exact_native_race_phenotype_fallback(self):
         rows, _, _ = self.plan(self.model())
-        self.assertEqual(g._NATIVE_ROBE_SOURCES, {"pfh0_robe187"})
-        self.assertEqual(g._NATIVE_ROBE_MATERIALS, {rows[0][1]})
-        g.synchronize_native_robe_controls()
+        self.assertEqual(g._NATIVE_ATTACHMENT_SOURCES, {"pfh0_robe187"})
+        self.assertEqual(g._NATIVE_ATTACHMENT_MATERIALS, {rows[0][1]})
+        g.synchronize_native_attachment_controls()
         actual = {path.stem for path in self.materials.glob("*.plt")}
         chosen = next(name for name in g.modular_palette_candidates("pfe22_robe187") if name in actual)
         self.assertEqual(chosen, "pfh0_robe187")
-        self.assertEqual(g.native_robe_control_errors(), [])
+        self.assertEqual(g.native_attachment_control_errors(), [])
 
     def test_stock_backed_source_needs_no_control_override(self):
         self.plan(self.model())
         g._NATIVE_MODULAR_PALETTES = {"pfh0_robe187"}
-        g.synchronize_native_robe_controls()
+        g.synchronize_native_attachment_controls()
         self.assertEqual(list(self.materials.glob("*.plt")), [])
-        self.assertEqual(g.native_robe_control_errors(), [])
+        self.assertEqual(g.native_attachment_control_errors(), [])
 
     def test_higher_priority_stock_palette_stops_control_inference(self):
         g._NATIVE_MODULAR_PALETTES = {"pfe0_robe187"}
         self.plan(self.model())
-        self.assertEqual(g._NATIVE_ROBE_SOURCES, set())
-        self.assertEqual(g._NATIVE_ROBE_MATERIALS, set())
+        self.assertEqual(g._NATIVE_ATTACHMENT_SOURCES, set())
+        self.assertEqual(g._NATIVE_ATTACHMENT_MATERIALS, set())
 
     def test_missing_native_named_subtree_never_opts_in(self):
         self.plan(self.model(node="different_root"))
-        self.assertEqual(g._NATIVE_ROBE_SOURCES, set())
-        self.assertEqual(g._NATIVE_ROBE_MATERIALS, set())
+        self.assertEqual(g._NATIVE_ATTACHMENT_SOURCES, set())
+        self.assertEqual(g._NATIVE_ATTACHMENT_MATERIALS, set())
 
     def test_nonrobe_models_never_create_controls(self):
         self.plan(self.model("pfe0_head187"), {"pfh0_head187": {"layers": [0]}})
-        self.assertEqual(g._NATIVE_ROBE_SOURCES, set())
-        self.assertEqual(g._NATIVE_ROBE_MATERIALS, set())
+        self.assertEqual(g._NATIVE_ATTACHMENT_SOURCES, set())
+        self.assertEqual(g._NATIVE_ATTACHMENT_MATERIALS, set())
+
+    def test_helmet_keeps_native_palette_transport_without_a_body_fallback(self):
+        path = self.model("helm_114")
+        path.write_text(path.read_text().replace("bitmap cloth", "bitmap helm_114")
+                        .replace("materialname pfh0_robe187", "materialname helm_114"))
+        rows, _, _ = self.plan(path, {"helm_114": {"layers": [4, 5, 6, 7]}})
+        self.assertEqual(g.modular_palette_candidates("helm_114"), ("helm_114",))
+        self.assertEqual(g._NATIVE_ATTACHMENT_SOURCES, {"helm_114"})
+        self.assertEqual(g._NATIVE_ATTACHMENT_MATERIALS, {"helm_114"})
+        g.synchronize_native_attachment_controls()
+        self.assertEqual((self.materials / "helm_114.plt").read_bytes(), g.native_attachment_control_bytes())
+        self.assertEqual(g.native_attachment_surface_errors({path.stem: path},
+            {"helm_114": {"layers": [4, 5, 6, 7]}}, rows), [])
+        g.synchronize_native_attachment_controls()
+        self.assertFalse(g.is_tint_material_plt(self.materials / "helm_114.plt"))
+
+    def test_helmet_without_native_named_subtree_does_not_get_stale_scheme(self):
+        self.plan(self.model("helm_114", node="unrelated"), {"helm_114": {"layers": [4]}})
+        self.assertEqual(g._NATIVE_ATTACHMENT_MATERIALS, set())
 
     def test_unproven_shared_consumers_get_scripted_alias_without_changing_proven_material(self):
         native = self.model()
@@ -112,14 +131,14 @@ class NativeRobePaletteTests(unittest.TestCase):
         self.assertEqual(by_model[native.stem], "pfh0_robe187")
         self.assertNotEqual(by_model[legacy.stem], "pfh0_robe187")
         self.assertEqual(aliases[by_model[legacy.stem]], "pfh0_robe187")
-        self.assertEqual(g._NATIVE_ROBE_MATERIALS, {"pfh0_robe187"})
+        self.assertEqual(g._NATIVE_ATTACHMENT_MATERIALS, {"pfh0_robe187"})
         self.assertNotIn(native, pending)
         self.assertIn(legacy, pending)
 
     def test_surface_audit_rejects_flagged_material_outside_native_subtree(self):
         path = self.model("pfev_robe187")
-        g._NATIVE_ROBE_MATERIALS = {"pfh0_robe187"}
-        errors = g.native_robe_surface_errors({path.stem: path}, {"pfh0_robe187": {"layers": [0]}},
+        g._NATIVE_ATTACHMENT_MATERIALS = {"pfh0_robe187"}
+        errors = g.native_attachment_surface_errors({path.stem: path}, {"pfh0_robe187": {"layers": [0]}},
                                             [(path.stem, "pfh0_robe187", [0])])
         self.assertTrue(errors)
 
@@ -128,9 +147,9 @@ class NativeRobePaletteTests(unittest.TestCase):
         if (v < 0.0 && useNativePalette > 0.5) {
             float colorId = mod(floor(PLTscheme[int(layer)] * 1792.0 + 0.5), 256.0);
         }"""
-        self.assertEqual(g.native_robe_shader_errors(shader), [])
-        self.assertTrue(g.native_robe_shader_errors(shader.replace("v < 0.0 && ", "")))
-        self.assertTrue(g.native_robe_shader_errors(shader.replace("256.0", "176.0")))
+        self.assertEqual(g.native_attachment_shader_errors(shader), [])
+        self.assertTrue(g.native_attachment_shader_errors(shader.replace("v < 0.0 && ", "")))
+        self.assertTrue(g.native_attachment_shader_errors(shader.replace("256.0", "176.0")))
 
     def test_regeneration_is_idempotent_and_retains_native_icons_and_cloaks(self):
         icon = self.parts / "ipf_robe187.plt"
@@ -140,9 +159,9 @@ class NativeRobePaletteTests(unittest.TestCase):
         icon.write_bytes(b"authored icon")
         cloak.write_bytes(b"authored cloak")
         self.plan(self.model())
-        g.synchronize_native_robe_controls()
+        g.synchronize_native_attachment_controls()
         before = {path.name: path.read_bytes() for path in self.materials.iterdir()}
-        g.synchronize_native_robe_controls()
+        g.synchronize_native_attachment_controls()
         self.assertEqual(before, {path.name: path.read_bytes() for path in self.materials.iterdir()})
         self.assertEqual(icon.read_bytes(), b"authored icon")
         self.assertEqual(cloak.read_bytes(), b"authored cloak")
@@ -151,9 +170,9 @@ class NativeRobePaletteTests(unittest.TestCase):
 
     def test_only_recognized_stale_controls_can_be_removed(self):
         stale = self.materials / "pfh0_robe188.plt"
-        stale.write_bytes(g.native_robe_control_bytes())
-        self.assertTrue(g.native_robe_control_errors())
-        g.synchronize_native_robe_controls()
+        stale.write_bytes(g.native_attachment_control_bytes())
+        self.assertTrue(g.native_attachment_control_errors())
+        g.synchronize_native_attachment_controls()
         self.assertFalse(stale.exists())
 
     def test_robe_rows_use_negative_sentinel_without_changing_visual_inputs(self):

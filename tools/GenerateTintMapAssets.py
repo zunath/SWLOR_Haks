@@ -70,8 +70,8 @@ _MATERIAL_BITMAP_ALIASES: dict[str, str] = {}
 _PROFILE_ALIASES: dict[str, tuple[str, list[str]]] = {}
 _PROFILE_SIGNATURES: dict[tuple[str, str], tuple[tuple[tuple[str, ...], str], ...]] = {}
 _PRESERVED_MATERIALS: dict[str, tuple[str, list[str]]] = {}
-_NATIVE_ROBE_MATERIALS: set[str] = set()
-_NATIVE_ROBE_SOURCES: set[str] = set()
+_NATIVE_ATTACHMENT_MATERIALS: set[str] = set()
+_NATIVE_ATTACHMENT_SOURCES: set[str] = set()
 
 STOCK_MODEL_RESOURCE_TYPE = 2002
 STOCK_KEY_ARCHIVES = (
@@ -261,7 +261,7 @@ def native_modular_palettes() -> set[str]:
         _NATIVE_MODULAR_PALETTES = set(names)
         _NATIVE_MODULAR_PALETTES.update(
             path.stem.lower() for directory in hak_directories() for path in directory.glob("*.plt")
-            if not is_native_robe_control_plt(path)
+            if not is_native_attachment_control_plt(path)
         )
     return _NATIVE_MODULAR_PALETTES
 
@@ -517,11 +517,11 @@ def is_tint_material_plt(path: Path) -> bool:
         path.suffix.lower() == ".plt"
         and not is_inventory_icon_plt(path)
         and not is_dynamic_cloak_plt(path)
-        and not is_native_robe_control_plt(path)
+        and not is_native_attachment_control_plt(path)
     )
 
 
-def is_native_robe_control_plt(path: Path) -> bool:
+def is_native_attachment_control_plt(path: Path) -> bool:
     """Generated controls are runtime metadata, not conversion inputs or artwork.
 
     Classify by their dedicated location even when malformed, so regeneration
@@ -536,42 +536,48 @@ def is_modular_robe(model: str) -> bool:
     return match is not None and match.group("part").startswith("robe")
 
 
-def native_robe_control_bytes() -> bytes:
+def is_native_palette_attachment(model: str) -> bool:
+    # The client omits both separate robes and worn helmets from creature
+    # shader-parameter replay. Their selected PLT carries the native scheme.
+    return is_modular_robe(model) or re.fullmatch(r"helm_[0-9]{3}", model, re.IGNORECASE) is not None
+
+
+def native_attachment_control_bytes() -> bytes:
     # Original PLT V1 header, one legal Skin/shade texel. ReplaceTexturePLT
     # copies the complete appearance scheme independently of the image pixels.
     return PLT_HEADER + struct.pack("<IIII", 8, 0, 1, 1) + bytes((128, 0))
 
 
-def required_native_robe_controls() -> set[str]:
+def required_native_attachment_controls() -> set[str]:
     # Stock and retained authored PLTs already provide this native metadata.
     # Controls are omitted from native_modular_palettes: their names are always
     # represented by the source manifest during virtual native lookup.
-    return _NATIVE_ROBE_SOURCES - native_modular_palettes()
+    return _NATIVE_ATTACHMENT_SOURCES - native_modular_palettes()
 
 
-def native_robe_control_errors() -> list[str]:
-    expected = required_native_robe_controls()
+def native_attachment_control_errors() -> list[str]:
+    expected = required_native_attachment_controls()
     paths = list(OUTPUT_MTR_DIRECTORY.glob("*.plt"))
     actual = {path.stem.lower(): path for path in paths}
     errors = []
     if len(actual) != len(paths):
-        errors.append("duplicate native robe control PLT names")
+        errors.append("duplicate native attachment control PLT names")
     for name in sorted(expected - actual.keys()):
-        errors.append(f"{name}: missing native robe control PLT")
+        errors.append(f"{name}: missing native attachment control PLT")
     for name in sorted(actual.keys() - expected):
-        errors.append(f"{name}: unexpected native robe control PLT")
+        errors.append(f"{name}: unexpected native attachment control PLT")
     for name, path in sorted(actual.items()):
-        if path.read_bytes() != native_robe_control_bytes():
-            errors.append(f"{name}: native robe control PLT must contain the exact generated 1x1 metadata image")
+        if path.read_bytes() != native_attachment_control_bytes():
+            errors.append(f"{name}: native attachment control PLT must contain the exact generated 1x1 metadata image")
     return errors
 
 
-def synchronize_native_robe_controls() -> None:
-    expected = required_native_robe_controls()
-    payload = native_robe_control_bytes()
+def synchronize_native_attachment_controls() -> None:
+    expected = required_native_attachment_controls()
+    payload = native_attachment_control_bytes()
     for path in OUTPUT_MTR_DIRECTORY.glob("*.plt"):
-        if path.read_bytes() != payload or not is_modular_robe(path.stem):
-            raise RuntimeError(f"Refusing to replace an unrecognized native robe control: {path}")
+        if path.read_bytes() != payload or not is_native_palette_attachment(path.stem):
+            raise RuntimeError(f"Refusing to replace an unrecognized native attachment control: {path}")
         if path.stem.lower() not in expected:
             path.unlink()
     for name in sorted(expected):
@@ -580,28 +586,28 @@ def synchronize_native_robe_controls() -> None:
             path.write_bytes(payload)
 
 
-def native_robe_surface_errors(
+def native_attachment_surface_errors(
     models: dict[str, Path],
     entries: dict[str, dict[str, object]],
     rows: list[tuple[str, str, list[int]]],
 ) -> list[str]:
-    """Every flagged material instance must receive a native robe scheme."""
+    """Every flagged material instance must receive a native attachment scheme."""
     materials_by_model: dict[str, set[str]] = {}
     for model, material, _ in rows:
-        if material in _NATIVE_ROBE_MATERIALS:
+        if material in _NATIVE_ATTACHMENT_MATERIALS:
             materials_by_model.setdefault(model, set()).add(material)
     errors = []
     for model, materials in materials_by_model.items():
         path = models.get(model)
         if path is None:
             continue  # The model-presence audit reports this separately.
-        choices = native_modular_material_choices(path, entries) if is_modular_robe(model) else None
+        choices = native_modular_material_choices(path, entries) if is_native_palette_attachment(model) else None
         for selector, _, material in read_model_material_surfaces(path, True):
             if material not in materials:
                 continue
             choice = (choices or {}).get(selector)
             if choice is None or choice[0] is None:
-                errors.append(f"{model}/{material}: native palette fallback has no proven native robe subtree at {selector}")
+                errors.append(f"{model}/{material}: native palette fallback has no proven native attachment subtree at {selector}")
     return errors
 
 
@@ -779,7 +785,7 @@ def find_active_render_surfaces() -> set[str]:
         surfaces.update(
             path.stem.lower()
             for path in directory.glob("*.plt")
-            if not is_tint_material_plt(path) and not is_native_robe_control_plt(path)
+            if not is_tint_material_plt(path) and not is_native_attachment_control_plt(path)
         )
         if directory.resolve() != generated_mtr_directory:
             surfaces.update(path.stem.lower() for path in directory.glob("*.mtr"))
@@ -1484,6 +1490,8 @@ def find_unpadded_model_material_source(
 
 def modular_palette_candidates(model: str) -> tuple[str, ...]:
     """Follow CreateBodyParts' PLT lookup order, including phenotype fallback."""
+    if re.fullmatch(r"helm_[0-9]{3}", model, re.IGNORECASE):
+        return (model.lower(),)
     match = MODULAR_MODEL_PATTERN.fullmatch(model)
     if match is None:
         return ()
@@ -1618,7 +1626,7 @@ def build_model_material_plan(
     dict[Path, dict[str, str]],
     dict[str, str],
 ]:
-    global _NATIVE_ROBE_MATERIALS, _NATIVE_ROBE_SOURCES
+    global _NATIVE_ATTACHMENT_MATERIALS, _NATIVE_ATTACHMENT_SOURCES
     models = find_tint_source_models()
     materials = set(entries)
     alias_sources = build_alias_source_lookup(entries)
@@ -1688,10 +1696,10 @@ def build_model_material_plan(
             key = (model, source, scope, profile_key)
             record = records.setdefault(
                 key,
-                {"model": model, "source": source, "scope": scope, "path": path, "current": set(), "profile": profile, "profile_key": profile_key, "native_robe": False},
+                {"model": model, "source": source, "scope": scope, "path": path, "current": set(), "profile": profile, "profile_key": profile_key, "native_attachment": False},
             )
-            if is_modular_robe(model) and native_choices is not None and current in native_choices:
-                record["native_robe"] = True
+            if is_native_palette_attachment(model) and native_choices is not None and current in native_choices:
+                record["native_attachment"] = True
             current_materials = record["current"]
             assert isinstance(current_materials, set)
             current_materials.add(current)
@@ -1702,9 +1710,9 @@ def build_model_material_plan(
     # tintmap.2da: the editor may only offer bindings proven by an active model.
 
     scopes_by_source: dict[str, set[str]] = {}
-    native_robe_profiles = {
+    native_attachment_profiles = {
         (str(record["source"]), str(record["scope"]), str(record["profile_key"]))
-        for record in records.values() if record["native_robe"]
+        for record in records.values() if record["native_attachment"]
     }
     for record in records.values():
         source = str(record["source"])
@@ -1713,21 +1721,21 @@ def build_model_material_plan(
     rows: set[tuple[str, str, tuple[int, ...]]] = set()
     desired_bindings: dict[Path, dict[str, str]] = restored_bindings
     active_aliases: dict[str, str] = {}
-    native_robe_materials: set[str] = set()
-    native_robe_sources: set[str] = set()
+    native_attachment_materials: set[str] = set()
+    native_attachment_sources: set[str] = set()
     for record in records.values():
         model = str(record["model"])
         source = str(record["source"])
         scope = str(record["scope"])
         path = record["path"]
         material = source
-        isolate_scripted_consumer = not record["native_robe"] and (
+        isolate_scripted_consumer = not record["native_attachment"] and (
             source, scope, str(record["profile_key"])
-        ) in native_robe_profiles
+        ) in native_attachment_profiles
         if record["profile"] is not None or isolate_scripted_consumer or (path is not None and scope.startswith("part:") and len(scopes_by_source[source]) > 1):
             alias_scope = scope if record["profile"] is None else f"{scope}:profile:{record['profile_key']}"
             if isolate_scripted_consumer:
-                # Some legacy resources share a robe material but lack the
+                # Some legacy resources share an attachment material but lack the
                 # native named-subtree route. Preserve their scripted defaults
                 # without changing the material identity of proven consumers.
                 alias_scope += ":scripted"
@@ -1753,9 +1761,9 @@ def build_model_material_plan(
 
         layers = tuple(int(layer) for layer in entries[source]["layers"])
         rows.add((model, material, layers))
-        if record["native_robe"]:
-            native_robe_materials.add(material)
-            native_robe_sources.add(source)
+        if record["native_attachment"]:
+            native_attachment_materials.add(material)
+            native_attachment_sources.add(source)
 
     pending_bindings = {
         path: pending
@@ -1774,8 +1782,8 @@ def build_model_material_plan(
         )
     }
 
-    _NATIVE_ROBE_MATERIALS = native_robe_materials
-    _NATIVE_ROBE_SOURCES = native_robe_sources
+    _NATIVE_ATTACHMENT_MATERIALS = native_attachment_materials
+    _NATIVE_ATTACHMENT_SOURCES = native_attachment_sources
     return (
         [(model, material, list(layers)) for model, material, layers in sorted(rows)],
         pending_bindings,
@@ -2204,7 +2212,7 @@ def update_mtr(
 ) -> None:
     profile = _PROFILE_ALIASES.get(material)
     text = tint_material_text(path, material, texture, width, height, source_material, profile,
-                              native_palette=material in _NATIVE_ROBE_MATERIALS)
+                              native_palette=material in _NATIVE_ATTACHMENT_MATERIALS)
     path.write_text(text, encoding="utf-8", newline="\n")
 
 
@@ -2307,7 +2315,7 @@ def tint_material_text(
 def tint_palette_parameter_lines(native_palette: bool) -> tuple[str, ...]:
     if not native_palette:
         return TINT_ROW_PARAMETER_LINES
-    # Negative means use the robe's native scheme. A received nonnegative row
+    # Negative means use the attachment's native scheme. A received nonnegative row
     # remains an explicit override, including future custom material updates.
     return tuple(f"parameter float {name} -1.0" for name, _ in TINT_ROW_PARAMETERS) + (
         "parameter float useNativePalette 1.0",
@@ -2567,7 +2575,7 @@ def generate() -> None:
         resolved.unlink()
 
     _NATIVE_MODULAR_PALETTES = None
-    refresh_native_robe_assets(entries, material_aliases)
+    refresh_native_attachment_assets(entries, material_aliases)
 
     duplicate_icons = remove_duplicate_inventory_icon_plts()
     print(
@@ -2670,7 +2678,7 @@ def synchronize_selected_model_material_aliases(
             source_material=source,
         )
 
-    refresh_native_robe_assets(entries, active_aliases)
+    refresh_native_attachment_assets(entries, active_aliases)
     return changed_models, active_aliases
 
 
@@ -2900,7 +2908,7 @@ def synchronize_model_material_aliases(
             source_material=source,
         )
 
-    refresh_native_robe_assets(entries, active_aliases)
+    refresh_native_attachment_assets(entries, active_aliases)
     return changed_models, active_aliases
 
 
@@ -3041,12 +3049,12 @@ def relocate() -> None:
     print("Packed tint maps were split across dedicated tint HAK directories.", flush=True)
 
 
-def refresh_native_robe_assets(entries: dict[str, dict[str, object]], aliases: dict[str, str]) -> None:
-    """Keep metadata controls and robe fallback parameters coherent with the plan."""
-    synchronize_native_robe_controls()
+def refresh_native_attachment_assets(entries: dict[str, dict[str, object]], aliases: dict[str, str]) -> None:
+    """Keep metadata controls and attachment fallback parameters coherent with the plan."""
+    synchronize_native_attachment_controls()
     for material in sorted(set(entries) | set(aliases)):
         path = mtr_path(material)
-        native = material in _NATIVE_ROBE_MATERIALS
+        native = material in _NATIVE_ATTACHMENT_MATERIALS
         previous_native = path.exists() and re.search(
             r"(?im)^\s*parameter\s+float\s+useNativePalette\b", path.read_text(encoding="utf-8-sig")
         ) is not None
@@ -3065,7 +3073,7 @@ def refresh_materials() -> None:
         raise RuntimeError("No tint source manifest exists to refresh")
 
     _, _, active_aliases = build_model_material_plan(entries)
-    synchronize_native_robe_controls()
+    synchronize_native_attachment_controls()
     for source, entry in sorted(entries.items()):
         update_mtr(
             mtr_path(source),
@@ -3110,7 +3118,7 @@ def refresh_material(material: str) -> None:
     source = material.lower()
     entries = load_source_manifest()
     _, _, active_aliases = build_model_material_plan(entries)
-    refresh_native_robe_assets(entries, active_aliases)
+    refresh_native_attachment_assets(entries, active_aliases)
     entry = entries.get(source)
     if entry is None:
         raise RuntimeError(f"Unknown tint source material '{source}'")
@@ -3496,8 +3504,8 @@ def tint_shader_material_errors(shader: str) -> list[str]:
     return []
 
 
-def native_robe_shader_errors(shader: str) -> list[str]:
-    """Keep explicit material rows ahead of the native robe fallback."""
+def native_attachment_shader_errors(shader: str) -> list[str]:
+    """Keep explicit material rows ahead of the native attachment fallback."""
     code = re.sub(r"/\*.*?\*/|//[^\n]*", "", shader, flags=re.DOTALL)
     required = (
         r"uniform\s+float\s+PLTscheme\s*\[\s*15\s*\]",
@@ -3506,7 +3514,7 @@ def native_robe_shader_errors(shader: str) -> list[str]:
         r"mod\s*\(\s*floor\s*\(\s*PLTscheme\s*\[\s*int\s*\(\s*layer\s*\)\s*\]\s*\*\s*1792\.0\s*\+\s*0\.5\s*\)\s*,\s*256\.0\s*\)",
     )
     if any(re.search(pattern, code) is None for pattern in required):
-        return ["native robe palette fallback must decode the 256-row native blocks and preserve nonnegative scripted rows"]
+        return ["native attachment palette fallback must decode the 256-row native blocks and preserve nonnegative scripted rows"]
     return []
 
 
@@ -3538,10 +3546,10 @@ def audit() -> None:
     active_aliases: dict[str, str] = {}
     if entries:
         model_material_rows, pending_model_bindings, active_aliases = build_model_material_plan(entries)
-        errors.extend(native_robe_control_errors())
+        errors.extend(native_attachment_control_errors())
         errors.extend(preserved_material_errors())
         active_models = find_active_models()
-        errors.extend(native_robe_surface_errors(active_models, entries, model_material_rows))
+        errors.extend(native_attachment_surface_errors(active_models, entries, model_material_rows))
         uncompiled_tint_models = find_uncompiled_tint_models(active_models, model_material_rows)
         compiled_tint_model_count = len({model for model, _, _ in model_material_rows}) - len(uncompiled_tint_models)
         if uncompiled_tint_models:
@@ -3705,13 +3713,13 @@ def audit() -> None:
                 f"parameter float tintmapheight {float(height):.1f}",
             ) + tuple(
                 line.lower()
-                for line in tint_palette_parameter_lines(model in _NATIVE_ROBE_MATERIALS)
+                for line in tint_palette_parameter_lines(model in _NATIVE_ATTACHMENT_MATERIALS)
             )
             for line in required:
                 if line not in mtr:
                     errors.append(f"{model}: MTR missing '{line}'")
-            if model not in _NATIVE_ROBE_MATERIALS and re.search(r"\bparameter\s+float\s+usenativepalette\b", mtr):
-                errors.append(f"{model}: native palette fallback is limited to native-selected robe consumers")
+            if model not in _NATIVE_ATTACHMENT_MATERIALS and re.search(r"\bparameter\s+float\s+usenativepalette\b", mtr):
+                errors.append(f"{model}: native palette fallback is limited to native-selected attachment consumers")
             if model in TEXTURE1_ALPHA_MATERIALS and "parameter float usetexture1alpha 1.0" not in mtr:
                 errors.append(f"{model}: MTR lost required texture-alpha compatibility")
             if model in TEXTURE9_ALPHA_MATERIALS:
@@ -3775,13 +3783,13 @@ def audit() -> None:
             f"parameter float tintmapheight {float(entry['height']):.1f}",
         ) + tuple(
             line.lower()
-            for line in tint_palette_parameter_lines(alias in _NATIVE_ROBE_MATERIALS)
+            for line in tint_palette_parameter_lines(alias in _NATIVE_ATTACHMENT_MATERIALS)
         )
         for line in required:
             if line not in mtr:
                 errors.append(f"{alias}: scoped MTR missing '{line}'")
-        if alias not in _NATIVE_ROBE_MATERIALS and re.search(r"\bparameter\s+float\s+usenativepalette\b", mtr):
-            errors.append(f"{alias}: native palette fallback is limited to native-selected robe consumers")
+        if alias not in _NATIVE_ATTACHMENT_MATERIALS and re.search(r"\bparameter\s+float\s+usenativepalette\b", mtr):
+            errors.append(f"{alias}: native palette fallback is limited to native-selected attachment consumers")
         if profile_material in TEXTURE1_ALPHA_MATERIALS and "parameter float usetexture1alpha 1.0" not in mtr:
             errors.append(f"{alias}: scoped MTR lost required texture-alpha compatibility")
         if profile_material in TEXTURE9_ALPHA_MATERIALS:
@@ -3790,7 +3798,7 @@ def audit() -> None:
                 errors.append(f"{alias}: scoped MTR lost required dedicated alpha-map compatibility")
         if profile is not None:
             expected = tint_material_text(material_path, alias, texture, int(entry["width"]), int(entry["height"]), source, profile,
-                                          native_palette=alias in _NATIVE_ROBE_MATERIALS)
+                                          native_palette=alias in _NATIVE_ATTACHMENT_MATERIALS)
             if mtr != expected.lower():
                 errors.append(f"{alias}: tint alias does not preserve its authored shared-material inputs")
 
@@ -3880,7 +3888,7 @@ def audit() -> None:
             continue
         shader = shader_path.read_text(encoding="utf-8")
         errors.extend(f"{shader_path.name} {error}" for error in tint_shader_material_errors(shader))
-        errors.extend(f"{shader_path.name} {error}" for error in native_robe_shader_errors(shader))
+        errors.extend(f"{shader_path.name} {error}" for error in native_attachment_shader_errors(shader))
         for token in (
             "uniform sampler2D texUnit7",
             "uniform sampler2D texUnit9",
@@ -3947,7 +3955,7 @@ def audit() -> None:
     print(
         f"Tint map audit passed: {len(entries)} materials, {len(model_material_rows)} model/material rows, "
         f"{compiled_tint_model_count} compiled tint models, "
-        f"{len(required_native_robe_controls())} native robe metadata controls, "
+        f"{len(required_native_attachment_controls())} native attachment metadata controls, "
         f"no convertible 3D material PLTs, {len(active_dynamic_cloak_plts)} native dynamic cloak PLTs, "
         f"and {len(active_icon_plts)} required dynamic inventory icon PLTs remain."
     )
