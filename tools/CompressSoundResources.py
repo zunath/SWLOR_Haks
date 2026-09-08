@@ -13,6 +13,7 @@ from __future__ import annotations
 import argparse
 from collections import Counter
 from contextlib import contextmanager
+from copy import deepcopy
 import hashlib
 import json
 import os
@@ -26,7 +27,13 @@ import uuid
 ROOT = Path(__file__).resolve().parents[1]
 BMU_HEADER = b"BMU V1.0"
 MP3_RATES = (8000, 11025, 12000, 16000, 22050, 24000, 32000, 44100, 48000)
-LOOP_CHUNKS = {"cue ", "smpl", "plst"}
+LOOP_CHUNKS = {"cue ", "smpl", "plst", "acid", "wsmp"}
+ENCODING_POLICY = {
+    "default_bitrate_kbps": 96,
+    "low_sample_rate_bitrate_kbps": 64,
+    "low_sample_rate_threshold_hz": 16000,
+    "low_sample_rate_condition": "output_sample_rate_hz < low_sample_rate_threshold_hz",
+}
 
 
 def digest(data: bytes) -> str:
@@ -144,7 +151,9 @@ def inspect_sound(data: bytes) -> dict:
 
 def target_encoding(source_rate: int) -> tuple[int, int]:
     rate = min(MP3_RATES, key=lambda supported: abs(supported - source_rate))
-    return rate, 64 if rate < 16000 else 96
+    bitrate = (ENCODING_POLICY["low_sample_rate_bitrate_kbps"]
+               if rate < ENCODING_POLICY["low_sample_rate_threshold_hz"] else ENCODING_POLICY["default_bitrate_kbps"])
+    return rate, bitrate
 
 
 def run(command: list[str], *, timeout: float, data: bytes | None = None) -> bytes:
@@ -251,6 +260,43 @@ def require_committed_source(relative: str, data: bytes, blobs: dict[str, str]) 
         raise ValueError(f"Source differs from recorded Git commit; commit it first: {relative}")
 
 
+def wav_paths(sound_directory: Path) -> list[Path]:
+    return sorted((path for path in sound_directory.rglob("*") if path.suffix.lower() == ".wav"),
+                  key=lambda path: path.as_posix().casefold())
+
+
+def validate_inventory(root: Path, rows: list[dict], *, applied: bool = False) -> None:
+    paths = {path.relative_to(root).as_posix() for path in wav_paths(safe_path(root, "sw_sound"))}
+    expected = {row["path"] for row in rows}
+    if paths != expected:
+        raise ValueError(f"WAV inventory changed during compression ({len(paths - expected)} added, "
+                         f"{len(expected - paths)} removed)")
+    hash_key = "output_sha256" if applied else "source_sha256"
+    for row in rows:
+        path = safe_path(root, row["path"])
+        if digest(path.read_bytes()) != row[hash_key]:
+            raise ValueError(f"Resource changed during compression: {row['path']}")
+
+
+def publish_complete_manifest(path: Path, report: dict) -> None:
+    # Keep the durable prepared manifest intact until the complete report has
+    # been written successfully. Use a sibling so replacement is atomic even
+    # when the manifest is on a different volume from the sound repository.
+    pending = path.with_name(f".{path.name}.{uuid.uuid4().hex}.tmp")
+    published = False
+    try:
+        with pending.open("x", encoding="utf-8", newline="\n") as output:
+            json.dump(report, output, indent=2)
+            output.write("\n")
+            output.flush()
+            os.fsync(output.fileno())
+        os.replace(pending, path)
+        published = True
+    finally:
+        if not published:
+            pending.unlink(missing_ok=True)
+
+
 def compress(root: Path, ffmpeg: str, timeout: float, excluded: dict[str, str],
              apply: bool = False, manifest_path: Path | None = None) -> dict:
     root = root.resolve(strict=True)
@@ -270,12 +316,11 @@ def compress(root: Path, ffmpeg: str, timeout: float, excluded: dict[str, str],
     commit, blobs = git_snapshot(root, timeout)
     version = run([ffmpeg, "-version"], timeout=timeout).decode(errors="replace").splitlines()[0]
     report = {"schema_version": 1, "source_git_commit": commit, "encoder_version": version,
-              "mode": "apply" if apply else "dry_run", "state": "complete", "target_bitrate_kbps": 96,
+              "mode": "apply" if apply else "dry_run", "state": "complete", "encoding_policy": deepcopy(ENCODING_POLICY),
               "files": []}
     with staging_directory(root) as stage:
         candidates = []
-        paths = sorted((path for path in sound_directory.rglob("*") if path.suffix.lower() == ".wav"),
-                       key=lambda path: path.as_posix().casefold())
+        paths = wav_paths(sound_directory)
         for index, path in enumerate(paths):
             relative = path.relative_to(root).as_posix()
             path = safe_path(root, relative)
@@ -307,12 +352,9 @@ def compress(root: Path, ffmpeg: str, timeout: float, excluded: dict[str, str],
         report["summary"] = {"total_files": len(paths), "converted_files": len(candidates),
                              "skipped_files": counts["skipped"], "source_bytes": source_bytes,
                              "output_bytes": output_bytes, "saved_bytes": source_bytes - output_bytes}
-        # Recheck every original before replacing any file, so edits made while
-        # encoding cannot accidentally be overwritten by a stale staged result.
-        for path, _, _, row in candidates:
-            safe_path(root, row["path"])
-            if digest(path.read_bytes()) != row["source_sha256"]:
-                raise ValueError(f"Source changed during compression: {row['path']}")
+        # A completed manifest describes the whole WAV collection, including
+        # skipped resources and its membership, not just converted candidates.
+        validate_inventory(root, report["files"])
         manifest = None
         replaced = []
         try:
@@ -325,23 +367,43 @@ def compress(root: Path, ffmpeg: str, timeout: float, excluded: dict[str, str],
                 os.fsync(manifest.fileno())
             if apply:
                 for path, original, encoded, row in candidates:
+                    safe_path(root, row["path"])
+                    if digest(path.read_bytes()) != row["source_sha256"]:
+                        raise ValueError(f"Resource changed during compression: {row['path']}")
                     shutil.copymode(path, encoded)
                     os.replace(encoded, path)
-                    replaced.append((path, original))
+                    replaced.append((path, original, row["output_sha256"]))
+                validate_inventory(root, report["files"], applied=True)
                 report["state"] = "complete"
-                manifest.seek(0)
-                json.dump(report, manifest, indent=2)
-                manifest.write("\n")
-                manifest.truncate()
-                manifest.flush()
-                os.fsync(manifest.fileno())
-        except BaseException:
-            for path, original in reversed(replaced):
-                shutil.copymode(path, original)
-                os.replace(original, path)
-            if manifest:
                 manifest.close()
-                manifest_path.unlink()
+                publish_complete_manifest(manifest_path, report)
+        except BaseException as error:
+            rollback_errors = []
+            for path, original, output_hash in reversed(replaced):
+                try:
+                    # Restore only bytes written by this run. A concurrent
+                    # edit, deletion, or replacement belongs to its author.
+                    if path.is_symlink() or not path.is_file():
+                        continue
+                    safe_path(root, path.relative_to(root).as_posix())
+                    try:
+                        current_hash = digest(path.read_bytes())
+                    except FileNotFoundError:
+                        continue
+                    if current_hash == output_hash:
+                        shutil.copymode(path, original)
+                        os.replace(original, path)
+                except (OSError, ValueError) as rollback_error:
+                    rollback_errors.append(f"{path.name}: {rollback_error}")
+            if rollback_errors:
+                raise RuntimeError(f"Compression failed ({error}); rollback incomplete. Original sources are in "
+                                   f"Git commit {commit}; prepared recovery manifest retained at {manifest_path}. "
+                                   "Restoration errors: " + "; ".join(rollback_errors)) from error
+            if manifest:
+                try:
+                    manifest.close()
+                finally:
+                    manifest_path.unlink(missing_ok=True)
             raise
         finally:
             if manifest and not manifest.closed:

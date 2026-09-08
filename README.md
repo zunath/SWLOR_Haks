@@ -41,8 +41,8 @@ stale generated outputs; the regular tint audit also runs this check.
 
 Selected `sw_sound/*.wav` resources contain MP3 audio with a `BMU V1.0` wrapper.
 Keep their WAV filenames and resource types. The initial conversion saves
-74,396,314 bytes (70.95 MiB), preserving existing compressed audio, music, known
-loops, cue/sampler metadata, and malformed WAV containers.
+70,808,096 bytes (67.53 MiB), preserving existing compressed audio, music, known
+loops, cue/sampler/ACID metadata, and malformed WAV containers.
 
 `tools/SoundCompressionManifest.json` records original Git provenance and deployed
 hashes. Validate all resource hashes and decode converted payloads with:

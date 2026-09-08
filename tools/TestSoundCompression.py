@@ -65,11 +65,18 @@ class SoundClassificationTests(unittest.TestCase):
                 self.assertIn("non-PCM", result["reason"])
 
     def test_loop_cue_and_playlist_metadata_prevent_conversion(self):
-        for name in (b"cue ", b"smpl", b"plst"):
+        for name in (b"cue ", b"smpl", b"plst", b"acid", b"wsmp"):
             with self.subTest(name=name):
                 result = sound.inspect_sound(wav(metadata=[(name, b"\0" * 20)]))
                 self.assertEqual(result["format"], "PCM")
                 self.assertIn(name.decode(), result["reason"])
+
+    def test_wave_sample_loop_metadata_prevents_conversion(self):
+        # A 20-byte wsmp header followed by one 16-byte forward sample loop.
+        sample_loop = struct.pack("<IHhiII", 20, 60, 0, 0, 0, 1) + struct.pack("<IIII", 16, 0, 0, 22050)
+        result = sound.inspect_sound(wav(metadata=[(b"wsmp", sample_loop)]))
+        self.assertEqual(result["format"], "PCM")
+        self.assertEqual(result["reason"], "preserve WAV metadata: wsmp")
 
     def test_truncated_chunk_header_and_overlong_chunk_fail_closed(self):
         for tail in (b"fmt ", b"fmt " + struct.pack("<I", 80) + b"abcd"):
@@ -228,6 +235,10 @@ class SoundTransactionTests(unittest.TestCase):
         self.assertEqual(result["summary"]["converted_files"], 2)
         self.assertGreater(result["summary"]["saved_bytes"], 0)
         self.assertEqual({row["status"] for row in result["files"]}, {"would_convert"})
+        self.assertNotIn("target_bitrate_kbps", result)
+        self.assertEqual(result["encoding_policy"], sound.ENCODING_POLICY)
+        result["encoding_policy"]["default_bitrate_kbps"] = 320
+        self.assertEqual(sound.target_encoding(44100), (44100, 96))
         self.assertFalse(list(self.root.glob(".sound-compression-*")))
 
     def test_apply_records_provenance_and_second_run_preserves_existing_audio(self):
@@ -289,6 +300,158 @@ class SoundTransactionTests(unittest.TestCase):
             self.compress(apply=True, manifest_path=self.root / "manifest.json")
         self.assertEqual(first.read_bytes(), b"a concurrent edit")
         self.assertEqual((self.root / "sw_sound" / "second.wav").read_bytes(), self.originals["second.wav"])
+
+    def test_skipped_resource_edits_during_encoding_prevent_a_completed_manifest(self):
+        first = self.root / "sw_sound" / "first.wav"
+        manifest = self.root / "manifest.json"
+
+        def edit_skipped_resource(*args):
+            first.write_bytes(b"a concurrent edit to an excluded resource")
+            return self.fake_encode(*args)
+
+        with patch.object(sound, "encode", side_effect=edit_skipped_resource):
+            with self.assertRaisesRegex(ValueError, "Resource changed during compression: sw_sound/first.wav"):
+                self.compress(excluded={"first": "engine loop"}, apply=True, manifest_path=manifest)
+        self.assertFalse(manifest.exists())
+        self.assertEqual((self.root / "sw_sound" / "second.wav").read_bytes(), self.originals["second.wav"])
+        self.assertEqual(first.read_bytes(), b"a concurrent edit to an excluded resource")
+
+    def test_added_and_removed_wavs_during_encoding_prevent_a_completed_manifest(self):
+        first = self.root / "sw_sound" / "first.wav"
+        added = self.root / "sw_sound" / "added.wav"
+        manifest = self.root / "manifest.json"
+        for operation in ("add", "remove"):
+            with self.subTest(operation=operation):
+                def change_inventory(*args):
+                    added.write_bytes(wav()) if operation == "add" else first.unlink()
+                    return self.fake_encode(*args)
+
+                with patch.object(sound, "encode", side_effect=change_inventory):
+                    with self.assertRaisesRegex(ValueError, "WAV inventory changed during compression"):
+                        self.compress(excluded={"first": "engine loop"}, apply=True, manifest_path=manifest)
+                self.assertFalse(manifest.exists())
+                self.assertEqual((self.root / "sw_sound" / "second.wav").read_bytes(), self.originals["second.wav"])
+                if added.exists():
+                    added.unlink()
+                first.write_bytes(self.originals["first.wav"])
+
+    def test_skipped_edits_during_replacement_roll_back_without_completing_manifest(self):
+        first = self.root / "sw_sound" / "first.wav"
+        manifest = self.root / "manifest.json"
+        actual_replace = os.replace
+
+        def edit_after_replace(source, target):
+            actual_replace(source, target)
+            if Path(source).suffix == ".bmu":
+                first.write_bytes(b"a concurrent edit during replacement")
+                self.assertEqual(json.loads(manifest.read_text())["state"], "prepared")
+
+        with patch.object(sound, "encode", side_effect=self.fake_encode), patch.object(sound.os, "replace", side_effect=edit_after_replace):
+            with self.assertRaisesRegex(ValueError, "Resource changed during compression: sw_sound/first.wav"):
+                self.compress(excluded={"first": "engine loop"}, apply=True, manifest_path=manifest)
+        self.assertFalse(manifest.exists())
+        self.assertEqual((self.root / "sw_sound" / "second.wav").read_bytes(), self.originals["second.wav"])
+        self.assertEqual(first.read_bytes(), b"a concurrent edit during replacement")
+
+    def assert_concurrent_candidate_change_is_preserved(self, *, delete):
+        second = self.root / "sw_sound" / "second.wav"
+        manifest = self.root / "manifest.json"
+        actual_replace = os.replace
+
+        def change_converted_file(source, target):
+            actual_replace(source, target)
+            if Path(source).suffix == ".bmu" and Path(target) == second:
+                if delete:
+                    second.unlink()
+                else:
+                    second.write_bytes(b"a concurrent edit to a converted file")
+
+        with patch.object(sound, "encode", side_effect=self.fake_encode), patch.object(sound.os, "replace", side_effect=change_converted_file):
+            with self.assertRaisesRegex(ValueError, "changed during compression"):
+                self.compress(apply=True, manifest_path=manifest)
+        self.assertEqual((self.root / "sw_sound" / "first.wav").read_bytes(), self.originals["first.wav"])
+        if delete:
+            self.assertFalse(second.exists())
+        else:
+            self.assertEqual(second.read_bytes(), b"a concurrent edit to a converted file")
+        self.assertFalse(manifest.exists())
+        self.assertFalse(list(self.root.glob(".sound-compression-*")))
+
+    def test_rollback_preserves_concurrent_edits_to_converted_files(self):
+        self.assert_concurrent_candidate_change_is_preserved(delete=False)
+
+    def test_rollback_preserves_concurrent_deletions_and_restores_other_files(self):
+        self.assert_concurrent_candidate_change_is_preserved(delete=True)
+
+    def test_candidate_edit_between_replacements_survives_and_prior_output_rolls_back(self):
+        second = self.root / "sw_sound" / "second.wav"
+        manifest = self.root / "manifest.json"
+        actual_replace = os.replace
+
+        def edit_next_candidate(source, target):
+            actual_replace(source, target)
+            if Path(source).suffix == ".bmu" and Path(target).name == "first.wav":
+                second.write_bytes(b"a concurrent edit before replacement")
+
+        with patch.object(sound, "encode", side_effect=self.fake_encode), patch.object(sound.os, "replace", side_effect=edit_next_candidate):
+            with self.assertRaisesRegex(ValueError, "Resource changed during compression: sw_sound/second.wav"):
+                self.compress(apply=True, manifest_path=manifest)
+        self.assertEqual((self.root / "sw_sound" / "first.wav").read_bytes(), self.originals["first.wav"])
+        self.assertEqual(second.read_bytes(), b"a concurrent edit before replacement")
+        self.assertFalse(manifest.exists())
+        self.assertFalse(list(self.root.glob(".sound-compression-*")))
+
+    def assert_failed_rollback_retains_recovery_provenance(self, *, final_report_failure):
+        manifest = self.root / "manifest.json"
+        commit = self.git("rev-parse", "HEAD").decode().strip()
+        actual_replace, actual_dump = os.replace, json.dump
+
+        def fail_replacement_or_rollback(source, target):
+            if Path(source).suffix == ".wav":
+                raise OSError("simulated rollback failure")
+            if not final_report_failure and Path(target).name == "second.wav":
+                raise OSError("simulated replacement failure")
+            actual_replace(source, target)
+
+        def fail_final_report(report, *args, **kwargs):
+            if final_report_failure and report["state"] == "complete":
+                raise OSError("simulated final report write failure")
+            return actual_dump(report, *args, **kwargs)
+
+        with patch.object(sound, "encode", side_effect=self.fake_encode), patch.object(sound.os, "replace", side_effect=fail_replacement_or_rollback):
+            with patch.object(sound.json, "dump", side_effect=fail_final_report), self.assertRaises(RuntimeError) as error:
+                self.compress(apply=True, manifest_path=manifest)
+        self.assertIn("simulated rollback failure", str(error.exception))
+        self.assertIn(commit, str(error.exception))
+        self.assertIn(str(manifest), str(error.exception))
+        recovery = json.loads(manifest.read_text())
+        self.assertEqual(recovery["state"], "prepared")
+        self.assertEqual(recovery["source_git_commit"], commit)
+        for row in recovery["files"]:
+            original = self.originals[Path(row["path"]).name]
+            self.assertEqual(row["source_sha256"], sound.digest(original))
+            self.assertEqual(self.git("show", f"{commit}:{row['path']}"), original)
+        self.assertTrue((self.root / "sw_sound" / "first.wav").read_bytes().startswith(sound.BMU_HEADER))
+        self.assertFalse(list(self.root.glob(".sound-compression-*")))
+        self.assertFalse(list(self.root.glob(".manifest.json.*.tmp")))
+
+    def test_failed_rollback_retains_prepared_manifest_and_original_git_provenance(self):
+        self.assert_failed_rollback_retains_recovery_provenance(final_report_failure=False)
+
+    def test_final_report_write_and_rollback_failures_retain_valid_prepared_manifest(self):
+        self.assert_failed_rollback_retains_recovery_provenance(final_report_failure=True)
+
+    def test_acid_loop_resource_is_held_byte_for_byte_during_apply(self):
+        first = self.root / "sw_sound" / "first.wav"
+        acid_loop = struct.pack("<IHHfIHHf", 0, 60, 0, 0.0, 4, 4, 4, 120.0)
+        source = wav(metadata=[(b"acid", acid_loop)])
+        first.write_bytes(source)
+        with patch.object(sound, "encode", side_effect=self.fake_encode) as encoder:
+            report = self.compress(apply=True, manifest_path=self.root / "manifest.json")
+        self.assertEqual(encoder.call_count, 1)
+        self.assertEqual(first.read_bytes(), source)
+        self.assertEqual(report["files"][0]["status"], "skipped")
+        self.assertEqual(report["files"][0]["reason"], "preserve WAV metadata: acid")
 
     def test_exclusions_and_no_savings_leave_pcm_unchanged(self):
         def larger_output(source, target, *args):

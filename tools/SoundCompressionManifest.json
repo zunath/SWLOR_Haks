@@ -4,7 +4,12 @@
   "encoder_version": "ffmpeg version 7.1 Copyright (c) 2000-2024 the FFmpeg developers",
   "mode": "apply",
   "state": "complete",
-  "target_bitrate_kbps": 96,
+  "encoding_policy": {
+    "default_bitrate_kbps": 96,
+    "low_sample_rate_bitrate_kbps": 64,
+    "low_sample_rate_threshold_hz": 16000,
+    "low_sample_rate_condition": "output_sample_rate_hz < low_sample_rate_threshold_hz"
+  },
   "files": [
     {
       "format": "PCM",
@@ -1444,16 +1449,16 @@
         "LIST",
         "acid"
       ],
-      "reason": null,
+      "reason": "preserve WAV metadata: acid",
       "duration_seconds": 21.827936507936506,
       "path": "sw_sound/al_pl_bazarwalla.wav",
-      "status": "converted",
+      "status": "skipped",
       "source_bytes": 3850600,
       "source_sha256": "196f17e633e7f03702bd32cc6afaf8952a6a59d919560b4538443548e1f5a3bb",
-      "output_bytes": 262382,
-      "output_sha256": "de6d794ebcbc97c38d7d69162be6a962fd3cf64df41c114342ba7693bab7e21b",
-      "output_rate": 44100,
-      "bitrate_kbps": 96
+      "output_bytes": 3850600,
+      "output_sha256": "196f17e633e7f03702bd32cc6afaf8952a6a59d919560b4538443548e1f5a3bb",
+      "output_rate": null,
+      "bitrate_kbps": null
     },
     {
       "format": "PCM",
@@ -17803,10 +17808,10 @@
   ],
   "summary": {
     "total_files": 1101,
-    "converted_files": 844,
-    "skipped_files": 257,
+    "converted_files": 843,
+    "skipped_files": 258,
     "source_bytes": 129209674,
-    "output_bytes": 54813360,
-    "saved_bytes": 74396314
+    "output_bytes": 58401578,
+    "saved_bytes": 70808096
   }
 }
