@@ -38,6 +38,15 @@ def binary(data: bytes) -> bool:
     return data[:4] == bytes(4)
 
 
+def animation_source(source: bytes, compiled: bytes) -> bytes | None:
+    """Keep editable generated banks outside HAK folders, tied to both exact contents."""
+    content = source.removeprefix(b"\xef\xbb\xbf").replace(b"\r\n", b"\n")
+    if not content.startswith(b"# SWLOR authored animations for "):
+        return None
+    return (f"# SWLOR compiled animation source v1 {digest(compiled)} {digest(content)}\n".encode("ascii")
+            + content)
+
+
 def supermodel(data: bytes) -> str:
     if binary(data):
         result = data[180:244].split(b"\0", 1)[0].decode("ascii").lower()
@@ -283,6 +292,16 @@ def validate_round_trip(source: bytes, compiled: bytes, decompiled: str) -> None
         if expected_rotations is not None:
             if len(expected_rotations) != len(rotation_values) or not all(equivalent(row[0], timestamp) and equivalent_quaternion(quaternion(row[1:]), value) for row, (timestamp, value) in zip(expected_rotations, rotation_values)):
                 raise ValueError(f"{name}: binary orientation controller changed")
+        # The native compiler emits a time-zero constant track as a static
+        # property. Compare that representation without relaxing animated keys.
+        def static_constants(values):
+            result = dict(values)
+            for key in ("positionkey", "scalekey"):
+                rows = result.get(key, [])
+                if len(rows) == 1 and float(rows[0][0]) == 0:
+                    result[key.removesuffix("key")] = result.pop(key)[0][1:]
+            return result
+        properties, output = static_constants(properties), static_constants(output)
         for key in ("parent", "bitmap", "materialname", "renderhint"):
             left, right = properties.get(key, []), output.get(key, [])
             if not equivalent(left, right):
@@ -626,6 +645,12 @@ def main() -> None:
             if path.read_bytes() != dependencies[name]:
                 raise RuntimeError(f"Source changed during compilation: {path}")
         for name, path in selected.items():
+            compiled = (staging / "binary" / f"{name}.mdl").read_bytes()
+            editable = animation_source(dependencies[name], compiled)
+            if editable is not None:
+                source_path = ROOT / "model_sources" / (path.relative_to(ROOT).as_posix() + ".ascii")
+                source_path.parent.mkdir(parents=True, exist_ok=True)
+                source_path.write_bytes(editable)
             shutil.copyfile(staging / "binary" / f"{name}.mdl", path)
     print(f"Validated {len(selected)} models; {'applied' if args.apply else 'source unchanged'}. Report: {staging / 'report.json'}")
 
