@@ -263,6 +263,12 @@ def native_npc_rows(npc):
         "rodian": (("rowSkin", 0, 80), ("rowHair", 176, 20), ("rowCloth1", 704, 97),
             ("rowCloth2", 704, 98), ("rowLeath1", 880, 99), ("rowLeath2", 880, 23),
             ("rowMetal1", 352, 7), ("rowMetal2", 528, 7), ("rowTat1", 1056, 53), ("rowTat2", 1056, 68)),
+        "pilot-helmet": (("rowSkin", 0, 129), ("rowHair", 176, 120), ("rowCloth1", 704, 135),
+            ("rowCloth2", 704, 135), ("rowLeath1", 880, 23), ("rowLeath2", 880, 20),
+            ("rowMetal1", 352, 135), ("rowMetal2", 528, 0), ("rowTat1", 1056, 159), ("rowTat2", 1056, 140)),
+        "pilot-armor": (("rowSkin", 0, 129), ("rowHair", 176, 120), ("rowCloth1", 704, 132),
+            ("rowCloth2", 704, 20), ("rowLeath1", 880, 20), ("rowLeath2", 880, 20),
+            ("rowMetal1", 352, 133), ("rowMetal2", 528, 0), ("rowTat1", 1056, 159), ("rowTat2", 1056, 140)),
     }
     return {name.lower(): ((base + color + 0.5) / 2048, 0, 0, 0) for name, base, color in colors[npc]}
 
@@ -663,6 +669,7 @@ def draw_engine_materials(test, engine, root: Path):
         if len(columns) >= 4 and columns[0].isdigit():
             catalog.setdefault(columns[1], set()).add(columns[2])
     cases = [("pme0_head056", "rodian"), ("pfh0_head121", "female"), ("pfh0_robe187", "female")]
+    cases.extend((("helm_114", "pilot-helmet"), ("pfh0_chest249", "pilot-armor")))
     for part in ("shinl249", "shinr249", "footl247", "footr247"):
         model, material = f"pme0_{part}", f"pmh0_{part}"
         if material not in catalog.get(model, set()):
@@ -680,9 +687,18 @@ def draw_engine_materials(test, engine, root: Path):
     checks = 0
     palette_checks = {"rowleath2": 0, "rowskin": 0}
     robe_reference, robe_native_checks = {}, 0
+    helmet_native_checks, helmet_negative_checks = 0, 0
     for material, npc in cases:
         source = (root / "sw_tint_mtr" / f"{material}.mtr").read_text()
         parameters = material_parameters(source)
+        if material == "helm_114":
+            defaults = {name: values for _, name, values in parameters}
+            if defaults.get("useNativePalette") != (1,) or any(
+                    values != (-1,) for name, values in defaults.items() if name.startswith("row")):
+                raise AssertionError("The Shuttle Pilot helmet must receive native dyes when creature overrides are absent")
+            control = (root / "sw_tint_mtr/helm_114.plt").read_bytes()
+            if control != b"PLT V1  " + struct.pack("<IIII", 8, 0, 1, 1) + bytes((128, 0)):
+                raise AssertionError("The Shuttle Pilot helmet must retain a valid native PLT scheme control")
         vertex = re.search(r"^customshaderVS\s+(\S+)", source, re.MULTILINE)[1]
         fragment = re.search(r"^customshaderFS\s+(\S+)", source, re.MULTILINE)[1]
         mask = re.search(r"^texture7\s+(\S+)", source, re.MULTILINE)[1]
@@ -696,6 +712,7 @@ def draw_engine_materials(test, engine, root: Path):
         inspect_row = ("rowleath2" if material.startswith(("pmh0_shin", "pmh0_foot"))
             else "rowskin" if material in hand_materials else None)
         outputs = (("surface", "palette") if inspect_row else
+            ("surface", "native-surface", "missing-native") if material == "helm_114" else
             ("surface", "native-surface") if material == "pfh0_robe187" else ("surface",))
         for quality, lighting, output in product(range(3), range(2), outputs):
             configuration = quality, lighting, 0, 0, 0
@@ -732,6 +749,13 @@ def draw_engine_materials(test, engine, root: Path):
                 test.integer(test.location(program, b"staticLighting"), 1)
                 upload_material_parameters(test, program, parameters,
                     {} if output == "native-surface" else native_npc_rows(npc))
+                if output == "missing-native":
+                    # Reproduce the shipped helmet: no native input and positive row-zero defaults.
+                    bases = (0, 176, 352, 528, 704, 704, 880, 880, 1056, 1056)
+                    names = ("rowSkin", "rowHair", "rowMetal1", "rowMetal2", "rowCloth1", "rowCloth2",
+                        "rowLeath1", "rowLeath2", "rowTat1", "rowTat2")
+                    for name, base in zip(names, bases):
+                        test.scalar(test.location(program, name.encode()), (base + .5) / 2048)
                 if output == "native-surface":
                     for layer, value in enumerate(native_npc_scheme(npc)):
                         test.scalar(test.location(program, f"PLTscheme[{layer}]".encode()), value)
@@ -779,16 +803,23 @@ def draw_engine_materials(test, engine, root: Path):
                     test.read(4, 4, 1, 1, 0x1908, 0x1406, result)
                     if not all(math.isfinite(value) for value in result) or abs(result[3] - 1) > 0.001:
                         raise AssertionError(f"Production draw did not produce a finite opaque fragment: {tuple(result)}")
-                    if material == "pfh0_robe187":
-                        key = quality, lighting, mip_mode
+                    if material in ("pfh0_robe187", "helm_114"):
+                        key = material, quality, lighting, mip_mode
                         if output == "surface":
                             robe_reference[key] = tuple(result)
                         elif output == "native-surface":
                             expected = robe_reference[key]
                             if any(abs(actual - target) > 2e-6 for actual, target in zip(result, expected)):
-                                raise AssertionError(f"Actual robe BC5/native palette changed rendered RGBA: "
+                                raise AssertionError(f"Actual attachment BC5/native palette changed rendered RGBA: "
                                     f"{key}, {tuple(result)}, expected {expected}")
-                            robe_native_checks += 1
+                            if material == "helm_114":
+                                helmet_native_checks += 1
+                            else:
+                                robe_native_checks += 1
+                        elif output == "missing-native":
+                            if max(abs(a - b) for a, b in zip(result, robe_reference[key])) < .01:
+                                raise AssertionError("Missing-native helmet negative control did not reproduce the wrong dye")
+                            helmet_negative_checks += 1
                     if output == "palette":
                         expected = (native_npc_rows("rodian")[inspect_row][0],
                             0.7 if inspect_row == "rowleath2" else 0.0, 0.0)
@@ -809,6 +840,9 @@ def draw_engine_materials(test, engine, root: Path):
         "environment coverage using the master-matched hand masks.", flush=True)
     print(f"Reported robe native-palette draws passed: {robe_native_checks}; real MTR negative defaults and "
         "authored native schemes produce the same RGBA as received custom rows with actual BC5 textures.", flush=True)
+    print(f"Shuttle Pilot helmet native-palette draws passed: {helmet_native_checks}; "
+        f"missing-native negative controls: {helmet_negative_checks}. Authored dyes match scripted rows, "
+        "while the shipped row-zero defaults reproduce the wrong color.", flush=True)
 
 
 ADAPTER = """
