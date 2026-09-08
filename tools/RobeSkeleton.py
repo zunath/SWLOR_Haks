@@ -91,6 +91,13 @@ class Families:
                 if "positionkey" in values:
                     values["positionkey"] = [[row[0], *[format(float(v)*position_scale, '.9g') for v in row[1:]]]
                                              for row in values["positionkey"]]
+            # The native compiler represents a single time-zero transform as
+            # a static controller. Emit that representation before auditing
+            # the round trip, while retaining every actual animated curve.
+            for key in list(values):
+                rows = values[key]
+                if key.endswith("key") and len(rows) == 1 and float(rows[0][0]) == 0:
+                    values[key.removesuffix("key")] = values.pop(key)[0][1:]
             result[node] = values
         return result
 
