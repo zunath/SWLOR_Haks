@@ -38,6 +38,13 @@ CATALOG_INPUTS = ("sw_2da/parts_robe.2da", "sw_2da/tintmap.2da", "hakbuilder.jso
 BODY_RESOURCE = re.compile(r"^p[fm][a-z](\d+)(?:_robe\d{3})?$", re.IGNORECASE)
 
 
+def model_directory(name):
+    """Route shared robe animations separately from wearable body roots."""
+    if re.fullmatch(r"p[fm][a-z]_ra\d{3}", name):
+        return "sw_anim_f" if name[1] == "f" else "sw_anim_m"
+    return "sw_pt_robe" if "_robe" in name else "sw_pt_root"
+
+
 def file_digest(path):
     return content_digest(path, path.read_bytes())
 
@@ -235,7 +242,7 @@ def allocate_animation_bridges(groups, active, manifest, expected_allocation=Non
     for key, name in prior.items():
         if not re.fullmatch(r"p[fm][a-z]_ra\d{3}", name):
             raise ValueError(f"Invalid persisted animation resource: {name}")
-        expected = ROOT / "sw_pt_root" / f"{name}.mdl"
+        expected = ROOT / model_directory(name) / f"{name}.mdl"
         path = active.get(name, expected)
         if path.is_file():
             relative = expected.relative_to(ROOT).as_posix()
@@ -321,7 +328,7 @@ def retained_model_files(manifest, generated_names, phenotype_ids, active):
         if (path.suffix != ".mdl" or name in generated_names or
                 not (name in bridges or match and int(match[1]) in phenotype_ids)):
             continue
-        expected_directory = "sw_pt_robe" if "_robe" in name else "sw_pt_root"
+        expected_directory = model_directory(name)
         if (relative != f"{expected_directory}/{name}.mdl" or not path.is_file() or
                 active.get(name, path).resolve() != path.resolve() or file_digest(path) != digest):
             raise ValueError(f"Retained robe output is not a verified prior resource: {relative}")
@@ -562,7 +569,7 @@ def main():
         build_keys[name] = key
         previous = active.get(name)
         previous_data = previous.read_bytes() if previous is not None else b""
-        relative = ("sw_pt_robe" if "_robe" in name else "sw_pt_root") + f"/{name}.mdl"
+        relative = f"{model_directory(name)}/{name}.mdl"
         path = stage / "binary" / f"{name}.mdl"
         if build_cache.reusable(prior_manifest.get("model_builds", {}).get(name), key, previous_data,
                                 prior_manifest.get("files", {}).get(relative)):
@@ -651,11 +658,14 @@ def main():
         # Hash validated inputs from their captured bytes and outputs from staging.
         # Copying thousands of outputs must never re-certify later input edits.
         output_files = {f"sw_2da/{path.name}": file_digest(stage / path.name) for path in (TABLE, PHENOTYPES)}
-        output_files.update({("sw_pt_robe" if "_robe" in name else "sw_pt_root") + f"/{name}.mdl":
+        output_files.update({f"{model_directory(name)}/{name}.mdl":
                              file_digest(stage / "binary" / f"{name}.mdl") for name in sources})
         for name in sources:
-            directory = "sw_pt_robe" if "_robe" in name else "sw_pt_root"
-            shutil.copyfile(stage / "binary" / f"{name}.mdl", ROOT / directory / f"{name}.mdl")
+            directory = ROOT / model_directory(name)
+            if directory.resolve().parent != ROOT.resolve():
+                raise ValueError(f"Generated model directory is redirected: {directory}")
+            directory.mkdir(exist_ok=True)
+            shutil.copyfile(stage / "binary" / f"{name}.mdl", directory / f"{name}.mdl")
         shutil.copyfile(stage / "roberender.2da", TABLE)
         shutil.copyfile(stage / "phenotype.2da", PHENOTYPES)
         manifest = {"compiler_sha256": compiler_hash, "independent_skeletons": True,

@@ -13,6 +13,13 @@ import TestRobeSkeleton as skeleton_tests
 
 
 class RobeRgbManifestTests(unittest.TestCase):
+    def test_only_reserved_bridge_names_use_separate_animation_packages(self):
+        for name, expected in (("pmh_ra001", "sw_anim_m"), ("pfa_ra999", "sw_anim_f"),
+                               ("pmh34", "sw_pt_root"), ("pmh34_robe003", "sw_pt_robe"),
+                               ("pmh_random", "sw_pt_root"), ("pmh_ra001_extra", "sw_pt_root")):
+            self.assertEqual(expected, g.model_directory(name), name)
+
+
     def test_versioned_bridge_source_is_generated_once_and_renamed_exactly(self):
         fixtures = skeleton_tests.IndependentRobeSkeletonTests().fixtures()
         families = rig.Families(fixtures.get)
@@ -169,13 +176,13 @@ class RobeRgbManifestTests(unittest.TestCase):
 
     def test_animation_bridge_reuse_and_retirement_require_verified_ownership(self):
         with tempfile.TemporaryDirectory() as directory, patch.object(g, "ROOT", Path(directory)):
-            root = Path(directory) / "sw_pt_root"
+            root = Path(directory) / "sw_anim_f"
             root.mkdir()
             path = root / "pfa_ra001.mdl"
             path.write_bytes(b"generated animation")
             groups = {"family": {"base": "pfa0"}}
             prior = {"animation_bridges": {"family": "pfa_ra001"},
-                     "files": {"sw_pt_root/pfa_ra001.mdl": g.file_digest(path)}}
+                     "files": {"sw_anim_f/pfa_ra001.mdl": g.file_digest(path)}}
             self.assertEqual(prior["animation_bridges"], g.allocate_animation_bridges(
                 groups, {"pfa_ra001": path}, prior))
             other = Path(directory) / "authored.mdl"
@@ -208,7 +215,7 @@ class RobeRgbManifestTests(unittest.TestCase):
             root = Path(directory)
             files = {
                 "sw_pt_root/pmh34.mdl": b"setsupermodel pmh34 pmh_ra001\n",
-                "sw_pt_root/pmh_ra001.mdl": b"setsupermodel pmh_ra001 NULL\n",
+                "sw_anim_m/pmh_ra001.mdl": b"setsupermodel pmh_ra001 NULL\n",
                 "sw_pt_robe/pmh34_robe003.mdl": g.empty_attachment("pmh34_robe003"),
             }
             for name, data in files.items():
@@ -294,12 +301,12 @@ class RobeRgbManifestTests(unittest.TestCase):
         remaining = rig.Families(fixtures.get)
         self.assertEqual(family, remaining.add("pmh0", fixtures["garment"]))
         with tempfile.TemporaryDirectory() as directory, patch.object(g, "ROOT", Path(directory)):
-            old_path = Path(directory) / "sw_pt_root/pmh_ra001.mdl"
+            old_path = Path(directory) / "sw_anim_m/pmh_ra001.mdl"
             old_path.parent.mkdir()
             old_source = both.bridge(family, "pmh_ra001")
             old_path.write_bytes(old_source)
             prior = {"animation_bridges": {family: "pmh_ra001"},
-                     "files": {"sw_pt_root/pmh_ra001.mdl": g.file_digest(old_path)}}
+                     "files": {"sw_anim_m/pmh_ra001.mdl": g.file_digest(old_path)}}
             versions, migrated = g.version_animation_families(both, prior, lambda *_: True)
             self.assertNotIn(family, migrated["animation_bridges"])
             self.assertEqual("pmh_ra001", migrated["animation_bridges"][versions[family]])

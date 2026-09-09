@@ -58,13 +58,14 @@ def plan(root, manifest):
     for name in set(manifest.get("animation_bridges", {}).values()):
         if not re.fullmatch(r"p[fm][a-z]_ra\d{3}", name):
             raise ValueError(f"Invalid reserved bridge resref: {name}")
-        relative = f"sw_pt_root/{name}.mdl"
+        directory = robes.model_directory(name)
+        relative = f"{directory}/{name}.mdl"
         path = root / relative
         if relative not in manifest["files"]:
             if path.exists():
                 raise ValueError(f"Unverified bridge occupies a reserved resref: {relative}")
             continue
-        if path.resolve().parent != (root / "sw_pt_root").resolve() or not path.is_file():
+        if path.resolve().parent != (root / directory).resolve() or not path.is_file():
             raise ValueError(f"Missing or redirected generated bridge: {relative}")
         if robes.file_digest(path) != manifest["files"][relative]:
             raise ValueError(f"Generated bridge changed since validation: {relative}")
