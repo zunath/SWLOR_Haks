@@ -3,6 +3,7 @@ import json
 from pathlib import Path
 import tempfile
 import unittest
+import sys
 from unittest.mock import patch
 
 import GenerateRobeRgbModels as g
@@ -12,6 +13,48 @@ import TestRobeSkeleton as skeleton_tests
 
 
 class RobeRgbManifestTests(unittest.TestCase):
+    def test_versioned_bridge_source_is_generated_once_and_renamed_exactly(self):
+        fixtures = skeleton_tests.IndependentRobeSkeletonTests().fixtures()
+        families = rig.Families(fixtures.get)
+        key = families.add("body", fixtures["garment"])
+        captured = {}
+        with patch.object(families, "bridge", wraps=families.bridge) as build:
+            g.version_animation_families(families, {}, lambda *_: False,
+                                        save_source=lambda key, value: captured.update({key: value}))
+            self.assertEqual(1, build.call_count)
+        self.assertEqual(families.bridge(key, "pmh_ra001"), g.name_bridge(captured[key], "pmh_ra001"))
+        self.assertEqual(b"rg_rgb_bridge pmh_ra001", g.name_bridge(b"rg_rgb_bridge rgb_bridge", "pmh_ra001"))
+
+    def test_current_apply_exits_before_creating_a_build(self):
+        with patch.object(sys, "argv", ["generate", "--apply", "--game-data", "game"]), \
+                patch.object(g, "check", return_value=[]), \
+                patch.object(g, "stock_sources_current", return_value=True), \
+                patch.object(g, "fresh_active_models") as discover, \
+                patch.object(g.mdl, "prepare_compiler") as compiler:
+            g.main()
+            discover.assert_not_called()
+            compiler.assert_not_called()
+
+    def test_force_or_changed_inputs_do_not_take_the_noop_path(self):
+        for extra, errors, stock_current in ((["--force"], [], True), ([], ["changed"], True), ([], [], False)):
+            with self.subTest(extra=extra, errors=errors, stock_current=stock_current), \
+                    patch.object(sys, "argv", ["generate", "--apply", "--game-data", "game", *extra]), \
+                    patch.object(g, "check", return_value=errors), \
+                    patch.object(g, "stock_sources_current", return_value=stock_current), \
+                    patch.object(g, "fresh_active_models", side_effect=RuntimeError("generation requested")):
+                with self.assertRaisesRegex(RuntimeError, "generation requested"):
+                    g.main()
+
+    def test_noop_verifies_real_stock_bytes(self):
+        data = b"native source"
+        manifest = {"stock_model_sha256": {"native": g.hashlib.sha256(data).hexdigest()}}
+        with patch.object(g.tint, "read_stock_key_models", return_value={"native": ("resource",)}), \
+                patch.object(g, "validate_stock_inventory"), \
+                patch.object(g.tint, "extract_stock_bif_resource", return_value=data) as extract:
+            self.assertTrue(g.stock_sources_current(Path("game"), manifest))
+            extract.return_value = b"updated native source"
+            self.assertFalse(g.stock_sources_current(Path("game"), manifest))
+
     def test_native_compiler_calls_are_bounded_to_requested_models(self):
         with tempfile.TemporaryDirectory() as directory, patch.object(g.mdl, "run_compiler") as run:
             stage = Path(directory)
