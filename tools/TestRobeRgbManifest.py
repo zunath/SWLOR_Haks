@@ -30,10 +30,33 @@ class RobeRgbManifestTests(unittest.TestCase):
                 patch.object(g, "check", return_value=[]), \
                 patch.object(g, "stock_sources_current", return_value=True), \
                 patch.object(g, "fresh_active_models") as discover, \
-                patch.object(g.mdl, "prepare_compiler") as compiler:
+                patch.object(g.mdl, "prepare_compiler", return_value=(None,
+                    json.loads(g.MANIFEST.read_text())["compiler_sha256"])) as compiler:
             g.main()
             discover.assert_not_called()
-            compiler.assert_not_called()
+            compiler.assert_called_once()
+            self.assertFalse(compiler.call_args.args[0].exists())
+
+    def test_current_apply_rejects_corrupt_compiler(self):
+        with tempfile.TemporaryDirectory() as directory:
+            (Path(directory) / "nwnmdlcomp.exe").write_bytes(b"corrupt compiler")
+            with patch.object(sys, "argv", ["generate", "--apply", "--game-data", "game"]), \
+                    patch.object(g, "check", return_value=[]), \
+                    patch.object(g, "stock_sources_current", return_value=True), \
+                    patch.object(g.mdl, "ROOT", Path(directory)), \
+                    patch.object(g, "fresh_active_models") as discover:
+                with self.assertRaisesRegex(RuntimeError, "Unsupported nwnmdlcomp.exe"):
+                    g.main()
+                discover.assert_not_called()
+
+    def test_changed_compiler_hash_cannot_reuse_current_catalog(self):
+        with patch.object(sys, "argv", ["generate", "--apply", "--game-data", "game"]), \
+                patch.object(g, "check", return_value=[]), \
+                patch.object(g, "stock_sources_current", return_value=True), \
+                patch.object(g.mdl, "prepare_compiler", return_value=(None, "0" * 64)), \
+                patch.object(g, "fresh_active_models", side_effect=RuntimeError("generation requested")):
+            with self.assertRaisesRegex(RuntimeError, "generation requested"):
+                g.main()
 
     def test_force_or_changed_inputs_do_not_take_the_noop_path(self):
         for extra, errors, stock_current in ((["--force"], [], True), ([], ["changed"], True), ([], [], False)):

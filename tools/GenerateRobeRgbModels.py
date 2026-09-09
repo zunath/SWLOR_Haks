@@ -14,6 +14,7 @@ from pathlib import Path
 import re
 import shutil
 import struct
+import tempfile
 import time
 
 import CompileModels as mdl
@@ -379,8 +380,11 @@ def main():
     if args.apply and not args.force and not check():
         manifest = json.loads(MANIFEST.read_text())
         if stock_sources_current(args.game_data, manifest):
-            print("Robe catalog and all source/output hashes are current; no models need rebuilding.", flush=True)
-            return
+            with tempfile.TemporaryDirectory(prefix="swlor-robe-compiler-") as directory:
+                _, current_compiler_hash = mdl.prepare_compiler(Path(directory))
+            if current_compiler_hash == manifest.get("compiler_sha256"):
+                print("Robe catalog and all source/output hashes are current; no models need rebuilding.", flush=True)
+                return
     input_paths = [ROOT / "tools" / name for name in GENERATOR_INPUTS]
     input_paths += [ROOT / name for name in CATALOG_INPUTS] + [TABLE, PHENOTYPES, MANIFEST]
     input_digests = {path: file_digest(path) for path in input_paths if path.is_file()}
