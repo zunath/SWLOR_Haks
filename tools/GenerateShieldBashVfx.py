@@ -39,7 +39,7 @@ def texture(name, dust):
 def emitter(name, texture_name, dust):
     props = {
         "parent": MODEL, "position": "0 0 0", "orientation": "0 0 1 0",
-        "update": "Fountain", "render": "Normal", "blend": "Normal" if dust else "Lighten",
+        "update": "Explosion", "render": "Normal", "blend": "Normal" if dust else "Lighten",
         "spawntype": 0, "xsize": 8 if dust else 2, "ysize": 8 if dust else 2,
         "inherit": 0, "inherit_local": 0, "inheritvel": 0, "inherit_part": 0,
         "renderorder": 0, "threshold": 0, "combinetime": 0, "deadspace": 0,
@@ -48,7 +48,7 @@ def emitter(name, texture_name, dust):
         "alphaStart": .26 if dust else 1, "alphaEnd": 0,
         "sizeStart": .12 if dust else .045, "sizeEnd": .32 if dust else .008,
         "sizeStart_y": 0, "sizeEnd_y": 0,
-        "birthrate": 0, "lifeExp": .55 if dust else .3, "mass": 0 if dust else 1.2,
+        "birthrate": 8 if dust else 24, "lifeExp": .55 if dust else .4, "mass": 0 if dust else 1.2,
         "spread": 6.283185, "particleRot": .5 if dust else 5,
         "velocity": .45 if dust else 2.4, "randvel": .2 if dust else 1.2,
         "bounce_co": 0, "blurlength": 0, "loop": 0, "bounce": 0,
@@ -67,9 +67,11 @@ def main():
     text = f"# Original SWLOR Shield Bash impact: metallic sparks and dust\nnewmodel {MODEL}\nsetsupermodel {MODEL} null\nclassification EFFECT\nsetanimationscale 1\nbeginmodelgeom {MODEL}\nnode dummy {MODEL}\n parent NULL\nendnode\n"
     text += emitter("sparks", "sw_bash_spark", False)
     text += emitter("dust", "sw_bash_dust", True)
-    text += f"endmodelgeom {MODEL}\nnewanim impact {MODEL}\n length .9\n transtime 0\n animroot {MODEL}\nnode dummy {MODEL}\n parent NULL\nendnode\n"
-    for name, rate, cutoff in (("sparks", 240, .08), ("dust", 65, .12)):
-        text += f"node emitter {name}\n parent {MODEL}\n birthratekey\n  0 {rate}\n  {cutoff} {rate}\n  {cutoff+.01:.2f} 0\n  .9 0\n endlist\nendnode\n"
+    text += f"endmodelgeom {MODEL}\nnewanim impact {MODEL}\n length .9\n transtime 0\n animroot {MODEL}\n event .1 detonate\nnode dummy {MODEL}\n parent NULL\nendnode\n"
+    # Explosion emitters respond to a discrete animation event, rather than
+    # depending on frame-rate integration over a very short fountain window.
+    for name in ("sparks", "dust"):
+        text += f"node emitter {name}\n parent {MODEL}\nendnode\n"
     text += f"doneanim impact {MODEL}\ndonemodel {MODEL}\n"
     source = ROOT / "model_sources" / "vfx" / f"{MODEL}.mdl.ascii"
     source.parent.mkdir(parents=True, exist_ok=True)
@@ -87,6 +89,9 @@ def main():
         compiled = (staging / "binary" / f"{MODEL}.mdl").read_bytes()
         decoded = (staging / "decompiled" / f"{MODEL}.mdl").read_text(encoding="latin1")
         compiler_tools.validate_round_trip(text.encode("ascii"), compiled, decoded)
+        events = [line.split() for line in decoded.splitlines() if line.strip().startswith("event ")]
+        if len(events) != 1 or events[0][2] != "detonate" or abs(float(events[0][1]) - .1) > .00001:
+            raise ValueError("Compiler did not preserve the single particle burst event")
         # The general model audit focuses on geometry. Explicitly protect the
         # particle settings too, especially emission cutoff and transparency.
         before = compiler_tools.parse_nodes(text)

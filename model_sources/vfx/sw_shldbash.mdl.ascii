@@ -11,7 +11,7 @@ node emitter sparks
   parent sw_shldbash
   position 0 0 0
   orientation 0 0 1 0
-  update Fountain
+  update Explosion
   render Normal
   blend Lighten
   spawntype 0
@@ -33,8 +33,8 @@ node emitter sparks
   sizeEnd 0.008
   sizeStart_y 0
   sizeEnd_y 0
-  birthrate 0
-  lifeExp 0.3
+  birthrate 24
+  lifeExp 0.4
   mass 1.2
   spread 6.283185
   particleRot 5
@@ -67,7 +67,7 @@ node emitter dust
   parent sw_shldbash
   position 0 0 0
   orientation 0 0 1 0
-  update Fountain
+  update Explosion
   render Normal
   blend Normal
   spawntype 0
@@ -89,7 +89,7 @@ node emitter dust
   sizeEnd 0.32
   sizeStart_y 0
   sizeEnd_y 0
-  birthrate 0
+  birthrate 8
   lifeExp 0.55
   mass 0
   spread 6.283185
@@ -124,26 +124,15 @@ newanim impact sw_shldbash
  length .9
  transtime 0
  animroot sw_shldbash
+ event .1 detonate
 node dummy sw_shldbash
  parent NULL
 endnode
 node emitter sparks
  parent sw_shldbash
- birthratekey
-  0 240
-  0.08 240
-  0.09 0
-  .9 0
- endlist
 endnode
 node emitter dust
  parent sw_shldbash
- birthratekey
-  0 65
-  0.12 65
-  0.13 0
-  .9 0
- endlist
 endnode
 doneanim impact sw_shldbash
 donemodel sw_shldbash
