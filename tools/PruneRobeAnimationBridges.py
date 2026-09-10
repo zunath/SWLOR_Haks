@@ -55,8 +55,8 @@ def plan(root, manifest):
             if path.parent.resolve() in directories and not path.is_file():
                 raise ValueError(f"Materialize all tracked HAK models before pruning: {relative}")
     candidates = {}
-    for name in set(manifest.get("animation_bridges", {}).values()):
-        if not re.fullmatch(r"p[fm][a-z]_ra\d{3}", name):
+    for name in robes.banks.bank_names(manifest):
+        if not robes.banks.is_bank_name(name):
             raise ValueError(f"Invalid reserved bridge resref: {name}")
         directory = robes.model_directory(name)
         relative = f"{directory}/{name}.mdl"
@@ -76,6 +76,12 @@ def plan(root, manifest):
             # Preserve references even in lower-priority layers and retired body roots.
             parents.setdefault(path.stem.lower(), set()).add(model_parent(path))
     keep = referenced_bridges(parents, set(candidates))
+    for record in manifest.get("animation_bank_sets", {}).values():
+        # Preserve a whole audited family if another model directly references a
+        # child bank; partial removal would invalidate its reconstruction proof.
+        parts = set(record["parts"])
+        if parts & keep:
+            keep.update(parts & candidates.keys())
     return [candidates[name] for name in sorted(candidates.keys() - keep)]
 
 
@@ -91,6 +97,12 @@ def main():
             # plan verifies each absolute path, ownership hash, and complete reference graph.
             path.unlink()
             del manifest["files"][path.relative_to(robes.ROOT).as_posix()]
+        # The head resref remains reserved in animation_bridges. Drop a bank set
+        # only when its entire unreachable chain was removed together.
+        removed = {path.stem for path in paths}
+        for head, record in list(manifest.get("animation_bank_sets", {}).items()):
+            if set(record["parts"]) <= removed:
+                del manifest["animation_bank_sets"][head]
         robes.MANIFEST.write_text(json.dumps(manifest, indent=2) + "\n")
     elif paths:
         raise SystemExit("Run with --apply before packaging the HAKs")

@@ -15,6 +15,7 @@ import TestRobeSkeleton as skeleton_tests
 class RobeRgbManifestTests(unittest.TestCase):
     def test_only_reserved_bridge_names_use_separate_animation_packages(self):
         for name, expected in (("pmh_ra001", "sw_anim_m"), ("pfa_ra999", "sw_anim_f"),
+                               ("pmh_ra001_b01", "sw_anim_m"), ("pfa_ra999_b03", "sw_anim_f"),
                                ("pmh34", "sw_pt_root"), ("pmh34_robe003", "sw_pt_robe"),
                                ("pmh_random", "sw_pt_root"), ("pmh_ra001_extra", "sw_pt_root")):
             self.assertEqual(expected, g.model_directory(name), name)
@@ -117,7 +118,8 @@ class RobeRgbManifestTests(unittest.TestCase):
     def test_manifest_snapshot_normalizes_captured_ascii_model_bytes(self):
         with tempfile.TemporaryDirectory() as directory, patch.object(g, "ROOT", Path(directory)):
             path = Path(directory) / "sw_cr_creature" / "overlay.mdl"
-            inputs = {Path(directory) / "tools" / name: "input" for name in g.GENERATOR_INPUTS}
+            inputs = {Path(directory) / "tools" / name: "input"
+                      for name in g.GENERATOR_INPUTS + g.PACKAGING_INPUTS}
             inputs.update({Path(directory) / name: "input" for name in g.CATALOG_INPUTS})
             files = g.snapshot_manifest_inputs({"overlay": b"newmodel overlay\r\n"}, {"overlay": path}, inputs)
             self.assertEqual(g.content_digest(path, b"newmodel overlay\n"), files["sw_cr_creature/overlay.mdl"])
@@ -157,7 +159,7 @@ class RobeRgbManifestTests(unittest.TestCase):
     def test_compile_helpers_are_required_manifest_inputs(self):
         self.assertIn("CompileModels.py", g.GENERATOR_INPUTS)
         manifest = json.loads(g.MANIFEST.read_text())
-        for name in g.GENERATOR_INPUTS:
+        for name in g.GENERATOR_INPUTS + g.PACKAGING_INPUTS:
             self.assertEqual(g.file_digest(g.ROOT / "tools" / name), manifest["files"]["tools/" + name])
         for name in g.CATALOG_INPUTS:
             self.assertEqual(g.file_digest(g.ROOT / name), manifest["files"][name])
@@ -216,6 +218,7 @@ class RobeRgbManifestTests(unittest.TestCase):
             files = {
                 "sw_pt_root/pmh34.mdl": b"setsupermodel pmh34 pmh_ra001\n",
                 "sw_anim_m/pmh_ra001.mdl": b"setsupermodel pmh_ra001 NULL\n",
+                "sw_anim_m/pmh_ra001_b01.mdl": b"setsupermodel pmh_ra001_b01 NULL\n",
                 "sw_pt_robe/pmh34_robe003.mdl": g.empty_attachment("pmh34_robe003"),
             }
             for name, data in files.items():
@@ -224,6 +227,7 @@ class RobeRgbManifestTests(unittest.TestCase):
                 path.write_bytes(data)
             active = {(root / name).stem: root / name for name in files}
             manifest = {"animation_bridges": {"retired-family": "pmh_ra001"},
+                        "animation_bank_sets": {"pmh_ra001": {"parts": ["pmh_ra001", "pmh_ra001_b01"]}},
                         "files": {name: g.file_digest(root / name) for name in files}}
             for _ in range(2):
                 g.allocate_animation_bridges({}, active, manifest)
@@ -256,7 +260,8 @@ class RobeRgbManifestTests(unittest.TestCase):
 
     def test_manifest_uses_captured_inputs_when_live_files_change_during_copy(self):
         with tempfile.TemporaryDirectory() as directory, patch.object(g, "ROOT", Path(directory)), \
-                patch.object(g, "GENERATOR_INPUTS", ("helper.py",)), patch.object(g, "CATALOG_INPUTS", ()):
+                patch.object(g, "GENERATOR_INPUTS", ("helper.py",)), \
+                patch.object(g, "PACKAGING_INPUTS", ()), patch.object(g, "CATALOG_INPUTS", ()):
             source = Path(directory) / "source.mdl"
             helper = Path(directory) / "tools" / "helper.py"
             helper.parent.mkdir()
@@ -337,6 +342,105 @@ class RobeRgbManifestTests(unittest.TestCase):
                 corrupted[offset] ^= 1
                 path.write_bytes(corrupted)
                 self.assertTrue(tint.palette_atlas_errors(path), f"undetected corruption at {offset}")
+
+
+class RobeAnimationPackagingTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        from TestRobeAnimationBanks import NativeRobeAnimationBankTests
+        NativeRobeAnimationBankTests.setUpClass()
+        cls.addClassCleanup(NativeRobeAnimationBankTests.doClassCleanups)
+        cls.original = NativeRobeAnimationBankTests.original
+        cls.parts = NativeRobeAnimationBankTests.parts
+
+    def install(self, root):
+        active, files = {}, {}
+        for name, data in self.parts.items():
+            path = root / g.model_directory(name) / f"{name}.mdl"
+            path.parent.mkdir(exist_ok=True)
+            path.write_bytes(data)
+            active[name] = path
+            files[path.relative_to(root).as_posix()] = g.file_digest(path)
+        manifest = {"files": files, "animation_bridges": {"current": "pmh_ra001"},
+                    "animation_bank_sets": {"pmh_ra001": {
+                        "parts": list(self.parts), "source_sha256": g.hashlib.sha256(self.original).hexdigest()}}}
+        return manifest, active
+
+    def test_owned_split_output_recovers_the_original_compiler_cache_proof(self):
+        with tempfile.TemporaryDirectory() as folder, patch.object(g, "ROOT", Path(folder)):
+            manifest, active = self.install(Path(folder))
+            restored = g.owned_animation_bytes("pmh_ra001", manifest, active)
+            self.assertEqual(self.original, restored)
+            self.assertEqual([], g.animation_bank_errors(manifest, active))
+            digest = g.hashlib.sha256(self.original).hexdigest()
+            record = g.build_cache.make_record(digest, self.original)
+            self.assertTrue(g.build_cache.reusable(record, digest, restored,
+                manifest["animation_bank_sets"]["pmh_ra001"]["source_sha256"]))
+            self.assertFalse(g.build_cache.reusable(record, digest, active["pmh_ra001"].read_bytes(),
+                manifest["files"]["sw_anim_m/pmh_ra001.mdl"]))
+
+    def test_every_child_requires_ownership_before_join_or_cache_reuse(self):
+        with tempfile.TemporaryDirectory() as folder, patch.object(g, "ROOT", Path(folder)):
+            manifest, active = self.install(Path(folder))
+            child = list(self.parts)[1]
+            active[child].write_bytes(self.parts[child] + b"changed")
+            with patch.object(g.banks, "join") as join:
+                with self.assertRaisesRegex(ValueError, "not a verified prior"):
+                    g.owned_animation_bytes("pmh_ra001", manifest, active)
+                join.assert_not_called()
+            active[child].write_bytes(self.parts[child])
+            other = Path(folder) / "override.mdl"
+            other.write_bytes(self.parts[child])
+            with self.assertRaisesRegex(ValueError, "redirected"):
+                g.owned_animation_bytes("pmh_ra001", manifest, {**active, child: other})
+            manifest["animation_bank_sets"]["pmh_ra001"]["source_sha256"] = "0" * 64
+            with self.assertRaisesRegex(ValueError, "source checksum"):
+                g.owned_animation_bytes("pmh_ra001", manifest, active)
+
+    def test_package_preserves_wearer_bytes_and_records_full_source_checksum(self):
+        with tempfile.TemporaryDirectory() as folder, patch.object(g, "ROOT", Path(folder)):
+            root = Path(folder)
+            stage = root / "stage"
+            (stage / "binary").mkdir(parents=True)
+            (stage / "binary" / "pmh_ra001.mdl").write_bytes(self.original)
+            wearer = b"\0\0\0\0unchanged compiled wearer"
+            (stage / "binary" / "pmh34.mdl").write_bytes(wearer)
+            with patch.object(g.banks, "split", return_value=self.parts):
+                names, sets = g.package_animation_models(stage, {"pmh_ra001"},
+                    {"pmh_ra001", "pmh34"}, {}, {})
+            self.assertEqual(set(self.parts) | {"pmh34"}, names)
+            self.assertEqual(wearer, (stage / "binary" / "pmh34.mdl").read_bytes())
+            self.assertEqual(g.hashlib.sha256(self.original).hexdigest(), sets["pmh_ra001"]["source_sha256"])
+            for name, data in self.parts.items():
+                self.assertEqual(data, (stage / "binary" / f"{name}.mdl").read_bytes())
+
+    def test_new_child_collisions_fail_before_packaged_outputs_replace_the_source(self):
+        with tempfile.TemporaryDirectory() as folder, patch.object(g, "ROOT", Path(folder)):
+            root = Path(folder)
+            stage = root / "stage"
+            (stage / "binary").mkdir(parents=True)
+            source = stage / "binary" / "pmh_ra001.mdl"
+            source.write_bytes(self.original)
+            occupied = root / "unrelated.mdl"
+            occupied.write_bytes(self.parts["pmh_ra001_b01"])
+            with patch.object(g.banks, "split", return_value=self.parts):
+                with self.assertRaisesRegex(ValueError, "not a verified prior"):
+                    g.package_animation_models(stage, {"pmh_ra001"}, {"pmh_ra001"}, {},
+                        {"pmh_ra001_b01": occupied})
+            self.assertEqual(self.original, source.read_bytes())
+            self.assertEqual(self.parts["pmh_ra001_b01"], occupied.read_bytes())
+
+    def test_all_generated_outputs_must_stay_below_the_transfer_limit(self):
+        with tempfile.TemporaryDirectory() as folder:
+            stage = Path(folder)
+            (stage / "binary").mkdir()
+            path = stage / "binary" / "pmh34.mdl"
+            with patch.object(g.banks, "LIMIT_BYTES", 100):
+                path.write_bytes(b"x" * 99)
+                g.package_animation_models(stage, [], {"pmh34"}, {}, {})
+                path.write_bytes(b"x" * 100)
+                with self.assertRaisesRegex(ValueError, "NWSync resource limit"):
+                    g.package_animation_models(stage, [], {"pmh34"}, {}, {})
 
 
 if __name__ == "__main__":

@@ -24,6 +24,7 @@ import RobeAnimations as animations
 import RobeSkeleton as skeleton
 import RobePoseAudit as poses
 import RobeBuildCache as build_cache
+import RobeAnimationBanks as banks
 
 ROOT = Path(__file__).resolve().parents[1]
 TABLE = ROOT / "sw_2da" / "roberender.2da"
@@ -34,13 +35,14 @@ NODE = re.compile(r"(?im)^\s*node\s+(\S+)\s+(\S+)\s*$([\s\S]*?)^\s*endnode\b")
 GENERATOR_INPUTS = ("GenerateRobeRgbModels.py", "RobeSkeleton.py", "RobePoseAudit.py",
                     "RobeAnimations.py", "CompileModels.py", "ImportStockRobeTints.py",
                     "TintMapStockRobes.json", "GenerateTintMapAssets.py", "RobeBuildCache.py")
+PACKAGING_INPUTS = ("RobeAnimationBanks.py", "RepackRobeAnimationBanks.py")
 CATALOG_INPUTS = ("sw_2da/parts_robe.2da", "sw_2da/tintmap.2da", "hakbuilder.json")
 BODY_RESOURCE = re.compile(r"^p[fm][a-z](\d+)(?:_robe\d{3})?$", re.IGNORECASE)
 
 
 def model_directory(name):
     """Route shared robe animations separately from wearable body roots."""
-    if re.fullmatch(r"p[fm][a-z]_ra\d{3}", name):
+    if banks.is_bank_name(name):
         return "sw_anim_f" if name[1] == "f" else "sw_anim_m"
     return "sw_pt_robe" if "_robe" in name else "sw_pt_root"
 
@@ -150,12 +152,123 @@ def model_path_errors(files, stock_names, active):
     return errors
 
 
+def owned_animation_bytes(name, manifest, active):
+    """Recover the audited compiler output only from byte-verified owned banks."""
+    if not re.fullmatch(r"p[fm][a-z]_ra\d{3}", name):
+        raise ValueError(f"Invalid animation bank head: {name}")
+    record = manifest.get("animation_bank_sets", {}).get(name)
+    if record is not None and not isinstance(record, dict):
+        raise ValueError(f"Malformed animation bank record: {name}")
+    names = record.get("parts") if isinstance(record, dict) else [name]
+    if record is not None:
+        if not isinstance(names, list) or not names:
+            raise ValueError(f"Malformed animation bank record: {name}")
+        expected = [name] + [f"{name}_b{i:02d}" for i in range(1, len(names))]
+        if (names != expected or
+                any(not banks.is_bank_name(part) for part in names) or
+                not isinstance(record.get("source_sha256"), str) or
+                not re.fullmatch(r"[0-9a-f]{64}", record["source_sha256"])):
+            raise ValueError(f"Malformed animation bank record: {name}")
+    parts = []
+    for part in names:
+        relative = f"{model_directory(part)}/{part}.mdl"
+        expected_path = ROOT / relative
+        path = active.get(part, expected_path)
+        if (expected_path.parent.resolve().parent != ROOT.resolve() or
+                not path.is_file() or path.resolve() != expected_path.resolve() or
+                path.resolve().parent != (ROOT / model_directory(part)).resolve()):
+            raise ValueError(f"Missing or redirected animation bank: {relative}")
+        data = path.read_bytes()
+        if manifest.get("files", {}).get(relative) != content_digest(path, data):
+            raise ValueError(f"Animation bank is not a verified prior output: {relative}")
+        if record is not None and (not mdl.binary(data) or len(data) >= banks.LIMIT_BYTES):
+            raise ValueError(f"Animation bank exceeds the compiled resource limit: {relative}")
+        parts.append(data)
+    if record is None:
+        return parts[0]
+    original = banks.join(parts)
+    if hashlib.sha256(original).hexdigest() != record["source_sha256"]:
+        raise ValueError(f"Animation bank source checksum differs: {name}")
+    banks.validate_split(original, parts)
+    return original
+
+
+def animation_bank_errors(manifest, active):
+    errors = []
+    seen = set()
+    records = manifest.get("animation_bank_sets", {})
+    if not isinstance(records, dict):
+        return ["Malformed animation bank set catalog"]
+    heads = set(manifest.get("animation_bridges", {}).values())
+    for head, record in records.items():
+        try:
+            if head not in heads:
+                raise ValueError(f"Unreserved animation bank head: {head}")
+            if not isinstance(record, dict) or not isinstance(record.get("parts"), list):
+                raise ValueError(f"Malformed animation bank record: {head}")
+            for name in record["parts"]:
+                if not isinstance(name, str) or name in seen:
+                    raise ValueError(f"Animation bank is shared between families: {name}")
+                seen.add(name)
+            owned_animation_bytes(head, manifest, active)
+        except (ValueError, TypeError) as error:
+            errors.append(str(error))
+    return errors
+
+
+def validate_animation_bank_ownership(names, manifest, active):
+    """A new chunk must not overwrite an unrelated resource, even in another HAK."""
+    owned = banks.bank_names(manifest)
+    for name in names:
+        if not banks.is_bank_name(name):
+            raise ValueError(f"Invalid generated animation bank: {name}")
+        expected = ROOT / model_directory(name) / f"{name}.mdl"
+        path = active.get(name, expected)
+        if expected.parent.resolve().parent != ROOT.resolve():
+            raise ValueError(f"Generated model directory is redirected: {expected.parent}")
+        if path.exists():
+            relative = expected.relative_to(ROOT).as_posix()
+            if (name not in owned or path.resolve() != expected.resolve() or
+                    path.resolve().parent != expected.parent.resolve() or
+                    manifest.get("files", {}).get(relative) != file_digest(path)):
+                raise ValueError(f"Occupied animation bank is not a verified prior output: {path}")
+
+
+def package_animation_models(stage, heads, generated_names, manifest, active):
+    """Package validated compiler output losslessly after all pose and skin audits."""
+    result = set(generated_names)
+    records = dict(manifest.get("animation_bank_sets", {}))
+    for head in sorted(heads):
+        path = stage / "binary" / f"{head}.mdl"
+        original = path.read_bytes()
+        parts = banks.split(original)
+        names = list(parts)
+        if not names or names[0] != head or any(name in result for name in names[1:]):
+            raise ValueError(f"Animation bank names collide with generated resources: {head}")
+        prior = records.get(head)
+        if prior is not None and prior["parts"] != names:
+            raise ValueError(f"Animation bank layout changed for {head}; repack its owned banks first")
+        validate_animation_bank_ownership(names, manifest, active)
+        banks.validate_split(original, list(parts.values()))
+        for name, data in parts.items():
+            if len(data) >= banks.LIMIT_BYTES:
+                raise ValueError(f"Generated model exceeds the NWSync resource limit: {name}")
+            (stage / "binary" / f"{name}.mdl").write_bytes(data)
+        result.update(names)
+        records[head] = {"parts": names, "source_sha256": hashlib.sha256(original).hexdigest()}
+    for name in result:
+        path = stage / "binary" / f"{name}.mdl"
+        if path.stat().st_size >= banks.LIMIT_BYTES:
+            raise ValueError(f"Generated model exceeds the NWSync resource limit: {name}")
+    return result, records
+
+
 def check() -> list[str]:
     if not MANIFEST.is_file():
         return ["Robe RGB model manifest is missing; regenerate the robe models"]
     manifest = json.loads(MANIFEST.read_text())
     errors = []
-    for relative in [f"tools/{name}" for name in GENERATOR_INPUTS] + list(CATALOG_INPUTS):
+    for relative in [f"tools/{name}" for name in GENERATOR_INPUTS + PACKAGING_INPUTS] + list(CATALOG_INPUTS):
         if relative not in manifest["files"]:
             errors.append(f"Robe RGB manifest does not track {relative}; regenerate and validate")
     if not manifest.get("independent_skeletons") or not manifest.get("body_pose_samples"):
@@ -164,7 +277,10 @@ def check() -> list[str]:
         path = ROOT / relative
         if not path.is_file() or file_digest(path) != expected:
             errors.append(f"Robe RGB input/output changed: {relative}; regenerate and validate")
+        if path.is_file() and path.suffix.lower() == ".mdl" and path.stat().st_size >= banks.LIMIT_BYTES:
+            errors.append(f"Model exceeds the NWSync resource limit: {relative}")
     active = fresh_active_models()
+    errors.extend(animation_bank_errors(manifest, active))
     if "stock_model_sha256" not in manifest:
         errors.append("Robe RGB manifest lacks complete stock dependency provenance; regenerate")
     errors.extend(model_path_errors(manifest["files"], manifest.get("stock_model_sha256", {}), active))
@@ -320,7 +436,7 @@ def validate_stock_inventory(stock_models):
 def retained_model_files(manifest, generated_names, phenotype_ids, active):
     """Keep audited roots, attachments and bridges for persisted retired phenotypes."""
     retained = {}
-    bridges = set(manifest.get("animation_bridges", {}).values())
+    bridges = banks.bank_names(manifest)
     for relative, digest in manifest.get("files", {}).items():
         path = ROOT / relative
         name = path.stem
@@ -332,6 +448,8 @@ def retained_model_files(manifest, generated_names, phenotype_ids, active):
         if (relative != f"{expected_directory}/{name}.mdl" or not path.is_file() or
                 active.get(name, path).resolve() != path.resolve() or file_digest(path) != digest):
             raise ValueError(f"Retained robe output is not a verified prior resource: {relative}")
+        if path.stat().st_size >= banks.LIMIT_BYTES:
+            raise ValueError(f"Retained model exceeds the NWSync resource limit; repack it first: {relative}")
         retained[relative] = digest
     return retained
 
@@ -346,7 +464,7 @@ def validate_input_snapshot(dependencies, active, input_digests):
 
 
 def snapshot_manifest_inputs(dependencies, active, input_digests):
-    paths = [ROOT / "tools" / name for name in GENERATOR_INPUTS]
+    paths = [ROOT / "tools" / name for name in GENERATOR_INPUTS + PACKAGING_INPUTS]
     paths += [ROOT / name for name in CATALOG_INPUTS]
     files = {path.relative_to(ROOT).as_posix(): input_digests[path] for path in paths}
     files.update({active[name].relative_to(ROOT).as_posix(): content_digest(active[name], data)
@@ -392,7 +510,7 @@ def main():
             if current_compiler_hash == manifest.get("compiler_sha256"):
                 print("Robe catalog and all source/output hashes are current; no models need rebuilding.", flush=True)
                 return
-    input_paths = [ROOT / "tools" / name for name in GENERATOR_INPUTS]
+    input_paths = [ROOT / "tools" / name for name in GENERATOR_INPUTS + PACKAGING_INPUTS]
     input_paths += [ROOT / name for name in CATALOG_INPUTS] + [TABLE, PHENOTYPES, MANIFEST]
     input_digests = {path: file_digest(path) for path in input_paths if path.is_file()}
     active = fresh_active_models()
@@ -403,6 +521,9 @@ def main():
     native_table = PHENOTYPES.read_text().splitlines()
     id_map = allocate_phenotypes(ids, prior, native_table, active)
     prior_manifest = json.loads(MANIFEST.read_text()) if MANIFEST.is_file() else {}
+    bank_errors = animation_bank_errors(prior_manifest, active)
+    if bank_errors:
+        raise ValueError("\n".join(bank_errors))
     validate_output_ownership(selected, id_map, prior, active, prior_manifest)
     if args.model:
         selected = {name: path for name, path in selected.items() if name in args.model}
@@ -505,9 +626,11 @@ def main():
         path = active.get(name)
         if path is None:
             return False
-        mdl.run_compiler(compiler, stage, ["-de", str(path), str(legacy_directory) + "/"], "legacy_bridges.log")
+        compiled = owned_animation_bytes(name, prior_manifest, active)
+        staged = stage / f"{name}.mdl"
+        staged.write_bytes(compiled)
+        mdl.run_compiler(compiler, stage, ["-de", str(staged), str(legacy_directory) + "/"], "legacy_bridges.log")
         try:
-            compiled = path.read_bytes()
             mdl.validate_round_trip(families.bridge(key, name), compiled,
                                     (legacy_directory / f"{name}.mdl").read_text(encoding="latin1"))
             animations.validate_animation_parts(compiled)
@@ -568,11 +691,15 @@ def main():
         key = build_cache.build_key(source, compiler_hash, parent_digests[parent], validation_key)
         build_keys[name] = key
         previous = active.get(name)
-        previous_data = previous.read_bytes() if previous is not None else b""
+        bank_record = prior_manifest.get("animation_bank_sets", {}).get(name)
+        previous_data = (owned_animation_bytes(name, prior_manifest, active) if bank_record is not None
+                         else previous.read_bytes() if previous is not None else b"")
         relative = f"{model_directory(name)}/{name}.mdl"
         path = stage / "binary" / f"{name}.mdl"
+        ownership_hash = (bank_record["source_sha256"] if bank_record is not None else
+                          prior_manifest.get("files", {}).get(relative))
         if build_cache.reusable(prior_manifest.get("model_builds", {}).get(name), key, previous_data,
-                                prior_manifest.get("files", {}).get(relative)):
+                                ownership_hash):
             path.write_bytes(previous_data)
             reused.add(name)
             return
@@ -636,6 +763,16 @@ def main():
     (stage / "report.json").write_text(json.dumps(report, indent=2) + "\n")
     if failures:
         raise ValueError(f"{len(failures)} round-trip failures: {failures[:10]}")
+    # Cache provenance describes the original validated compiler output. Packaging
+    # changes its file layout only; joining verified banks recovers these exact bytes.
+    model_builds = {name: build_cache.make_record(build_keys[name],
+                    (stage / "binary" / f"{name}.mdl").read_bytes()) for name in sorted(sources)}
+    packaged_names, bank_sets = package_animation_models(
+        stage, animation_cache.values(), sources, prior_manifest, active)
+    report["packaged_models"] = len(packaged_names)
+    report["largest_model_bytes"] = max(
+        ((stage / "binary" / f"{name}.mdl").stat().st_size for name in packaged_names), default=0)
+    (stage / "report.json").write_text(json.dumps(report, indent=2) + "\n")
     table = "2DA V2.0\n\n    MODEL PHENOTYPE BASEPHENOTYPE\n"
     table += "".join(f"{i} {name} {phenotype} {base}\n" for i, (name, phenotype, base) in enumerate(mapping_rows))
     phenotype_lines = [line for line in native_table if "RobeRgb_" not in line]
@@ -654,13 +791,16 @@ def main():
             raise ValueError("\n".join(path_errors))
         validate_output_ownership(selected, id_map, prior, current_active, prior_manifest)
         allocate_animation_bridges(versioned_groups, current_active, prior_manifest, animation_names)
-        retained = retained_model_files(prior_manifest, sources, set(id_map.values()), current_active)
+        validate_animation_bank_ownership(
+            {name for head in animation_cache.values() for name in bank_sets[head]["parts"]},
+            prior_manifest, current_active)
+        retained = retained_model_files(prior_manifest, packaged_names, set(id_map.values()), current_active)
         # Hash validated inputs from their captured bytes and outputs from staging.
         # Copying thousands of outputs must never re-certify later input edits.
         output_files = {f"sw_2da/{path.name}": file_digest(stage / path.name) for path in (TABLE, PHENOTYPES)}
         output_files.update({f"{model_directory(name)}/{name}.mdl":
-                             file_digest(stage / "binary" / f"{name}.mdl") for name in sources})
-        for name in sources:
+                             file_digest(stage / "binary" / f"{name}.mdl") for name in packaged_names})
+        for name in packaged_names:
             directory = ROOT / model_directory(name)
             if directory.resolve().parent != ROOT.resolve():
                 raise ValueError(f"Generated model directory is redirected: {directory}")
@@ -669,12 +809,12 @@ def main():
         shutil.copyfile(stage / "roberender.2da", TABLE)
         shutil.copyfile(stage / "phenotype.2da", PHENOTYPES)
         manifest = {"compiler_sha256": compiler_hash, "independent_skeletons": True,
-                    "model_builds": {name: build_cache.make_record(build_keys[name],
-                                     (stage / "binary" / f"{name}.mdl").read_bytes()) for name in sorted(sources)},
+                    "model_builds": model_builds,
                     "body_pose_samples": checked_poses,
                     "missing_animation_fallbacks": families.fallbacks,
                     "stock_model_sha256": stock_hashes,
                     "animation_bridges": {**prior_manifest.get("animation_bridges", {}), **animation_names},
+                    "animation_bank_sets": dict(sorted(bank_sets.items())),
                     "files": dict(sorted({**retained, **input_files, **output_files}.items()))}
         MANIFEST.write_text(json.dumps(manifest, indent=2) + "\n")
     print(json.dumps(report, indent=2), flush=True)
