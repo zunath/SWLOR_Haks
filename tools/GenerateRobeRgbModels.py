@@ -14,6 +14,7 @@ from pathlib import Path
 import re
 import shutil
 import struct
+import tempfile
 import time
 
 import CompileModels as mdl
@@ -22,6 +23,7 @@ import ImportStockRobeTints as stock_robes
 import RobeAnimations as animations
 import RobeSkeleton as skeleton
 import RobePoseAudit as poses
+import RobeBuildCache as build_cache
 
 ROOT = Path(__file__).resolve().parents[1]
 TABLE = ROOT / "sw_2da" / "roberender.2da"
@@ -31,9 +33,16 @@ PATTERN = re.compile(r"^(p[fm][a-z])0_robe(\d{3})$")
 NODE = re.compile(r"(?im)^\s*node\s+(\S+)\s+(\S+)\s*$([\s\S]*?)^\s*endnode\b")
 GENERATOR_INPUTS = ("GenerateRobeRgbModels.py", "RobeSkeleton.py", "RobePoseAudit.py",
                     "RobeAnimations.py", "CompileModels.py", "ImportStockRobeTints.py",
-                    "TintMapStockRobes.json", "GenerateTintMapAssets.py")
+                    "TintMapStockRobes.json", "GenerateTintMapAssets.py", "RobeBuildCache.py")
 CATALOG_INPUTS = ("sw_2da/parts_robe.2da", "sw_2da/tintmap.2da", "hakbuilder.json")
 BODY_RESOURCE = re.compile(r"^p[fm][a-z](\d+)(?:_robe\d{3})?$", re.IGNORECASE)
+
+
+def model_directory(name):
+    """Route shared robe animations separately from wearable body roots."""
+    if re.fullmatch(r"p[fm][a-z]_ra\d{3}", name):
+        return "sw_anim_f" if name[1] == "f" else "sw_anim_m"
+    return "sw_pt_robe" if "_robe" in name else "sw_pt_root"
 
 
 def file_digest(path):
@@ -233,7 +242,7 @@ def allocate_animation_bridges(groups, active, manifest, expected_allocation=Non
     for key, name in prior.items():
         if not re.fullmatch(r"p[fm][a-z]_ra\d{3}", name):
             raise ValueError(f"Invalid persisted animation resource: {name}")
-        expected = ROOT / "sw_pt_root" / f"{name}.mdl"
+        expected = ROOT / model_directory(name) / f"{name}.mdl"
         path = active.get(name, expected)
         if path.is_file():
             relative = expected.relative_to(ROOT).as_posix()
@@ -260,12 +269,14 @@ def allocate_animation_bridges(groups, active, manifest, expected_allocation=Non
     return result
 
 
-def version_animation_families(families, manifest, verify_legacy, native_bodies=None):
+def version_animation_families(families, manifest, verify_legacy, native_bodies=None, save_source=None):
     """A bridge's paths, bind transforms and clips are immutable for saved roots."""
     prior = dict(manifest.get("animation_bridges", {}))
     versions = {}
     for key in sorted(families.groups):
         source = families.bridge(key, "rgb_bridge")
+        if save_source is not None:
+            save_source(key, source)
         # Native parent part IDs are binary metadata, absent from bridge ASCII.
         # A parent change must also preserve the old bridge for retained roots.
         parent = (native_bodies or {}).get(families.groups[key]["base"], b"")
@@ -277,6 +288,23 @@ def version_animation_families(families, manifest, verify_legacy, native_bodies=
             prior[version] = prior.pop(key)
         versions[key] = version
     return versions, {**manifest, "animation_bridges": prior}
+
+
+def name_bridge(source, name):
+    """Rename the generated root token without regenerating every controller."""
+    if not re.fullmatch(r"p[fm][a-z]_ra\d{3}", name):
+        raise ValueError("Invalid animation bridge name")
+    return re.sub(rb"(?<![A-Za-z0-9_])rgb_bridge(?![A-Za-z0-9_])", name.encode("ascii"), source)
+
+
+def stock_sources_current(game_data, manifest):
+    """A fast no-op must also notice game-data changes outside the repository."""
+    stock = tint.read_stock_key_models(game_data)
+    validate_stock_inventory(stock)
+    expected = manifest.get("stock_model_sha256")
+    return isinstance(expected, dict) and all(
+        name in stock and hashlib.sha256(tint.extract_stock_bif_resource(*stock[name])).hexdigest() == digest
+        for name, digest in expected.items())
 
 
 def validate_stock_inventory(stock_models):
@@ -300,7 +328,7 @@ def retained_model_files(manifest, generated_names, phenotype_ids, active):
         if (path.suffix != ".mdl" or name in generated_names or
                 not (name in bridges or match and int(match[1]) in phenotype_ids)):
             continue
-        expected_directory = "sw_pt_robe" if "_robe" in name else "sw_pt_root"
+        expected_directory = model_directory(name)
         if (relative != f"{expected_directory}/{name}.mdl" or not path.is_file() or
                 active.get(name, path).resolve() != path.resolve() or file_digest(path) != digest):
             raise ValueError(f"Retained robe output is not a verified prior resource: {relative}")
@@ -326,6 +354,17 @@ def snapshot_manifest_inputs(dependencies, active, input_digests):
     return files
 
 
+def compile_model_files(compiler, stage, names, source_directory, destination_directory, mode, log):
+    """Keep the native compiler timeout per model, not per growing asset library."""
+    names = sorted(names)
+    for index, name in enumerate(names, 1):
+        mdl.run_compiler(compiler, stage,
+                         [mode, str(stage / source_directory / f"{name}.mdl"),
+                          str(stage / destination_directory) + "/"], log)
+        if index % 250 == 0 or index == len(names):
+            print(f"{mode}: {index}/{len(names)} models completed.", flush=True)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--game-data", type=Path)
@@ -333,6 +372,7 @@ def main():
     parser.add_argument("--check", action="store_true", help="Verify the generated catalog and its source/output hashes")
     parser.add_argument("--model", action="append", help="Restrict an experimental build; cannot apply a partial catalog")
     parser.add_argument("--stage", type=Path, help="Reuse a previous decompilation staging directory")
+    parser.add_argument("--force", action="store_true", help="Run generation even when the complete installed catalog is current")
     args = parser.parse_args()
     if args.check:
         errors = check()
@@ -344,6 +384,14 @@ def main():
         parser.error("--game-data is required when generating models")
     if args.model and args.apply:
         parser.error("--apply requires the complete catalog")
+    if args.apply and not args.force and not check():
+        manifest = json.loads(MANIFEST.read_text())
+        if stock_sources_current(args.game_data, manifest):
+            with tempfile.TemporaryDirectory(prefix="swlor-robe-compiler-") as directory:
+                _, current_compiler_hash = mdl.prepare_compiler(Path(directory))
+            if current_compiler_hash == manifest.get("compiler_sha256"):
+                print("Robe catalog and all source/output hashes are current; no models need rebuilding.", flush=True)
+                return
     input_paths = [ROOT / "tools" / name for name in GENERATOR_INPUTS]
     input_paths += [ROOT / name for name in CATALOG_INPUTS] + [TABLE, PHENOTYPES, MANIFEST]
     input_digests = {path: file_digest(path) for path in input_paths if path.is_file()}
@@ -469,13 +517,20 @@ def main():
         except ValueError as error:
             legacy_bridge_changes[name] = str(error)
             return False
+    source_directory = stage / "bridge_sources"
+    source_directory.mkdir(exist_ok=True)
+    source_paths = {}
+    def save_bridge_source(key, source):
+        path = source_directory / (hashlib.sha256(key.encode()).hexdigest() + ".mdl")
+        path.write_bytes(source)
+        source_paths[key] = path
     versions, prior_manifest = version_animation_families(
-        families, prior_manifest, verify_legacy_bridge, dependencies)
+        families, prior_manifest, verify_legacy_bridge, dependencies, save_bridge_source)
     versioned_groups = {versions[key]: group for key, group in families.groups.items()}
     animation_names = allocate_animation_bridges(versioned_groups, active, prior_manifest)
     for key, group in sorted(families.groups.items()):
         parent = animation_names[versions[key]]
-        sources[parent] = families.bridge(key, parent)
+        sources[parent] = name_bridge(source_paths[key].read_bytes(), parent)
         animation_cache[key] = parent
     for name in sorted(selected):
         prefix, robe_id = PATTERN.fullmatch(name).groups()
@@ -491,24 +546,59 @@ def main():
     for name, data in sources.items():
         (stage / "source" / f"{name}.mdl").write_bytes(data)
         (stage / "input" / f"{name}.mdl").write_bytes(mdl.protect_vertex_identity(data))
-    # Compile and expose the complete animation parents before their body roots.
-    for name in sorted(set(animation_cache.values()) - set(dependencies)):
-        mdl.run_compiler(compiler, stage, ["-cne", str(stage / "input" / f"{name}.mdl"), str(stage / "binary") + "/"], "compile.log")
-        shutil.copyfile(stage / "binary" / f"{name}.mdl", stage / f"{name}.mdl")
-    print(f"Compiling {len(sources)} generated models. Staging: {stage}", flush=True)
-    for pattern in ([name + ".mdl" for name in sources] if args.model else ["*.mdl"]):
-        mdl.run_compiler(compiler, stage, ["-cne", str(stage / "input" / pattern), str(stage / "binary") + "/"], "compile.log")
-    for name, source in sources.items():
+    # A cache hit requires the exact generated source, compiler, current parent,
+    # validation code, original inverse binds and owned binary to agree.
+    validation_digest = hashlib.sha256(json.dumps(
+        {name: input_digests[ROOT / "tools" / name] for name in GENERATOR_INPUTS},
+        sort_keys=True).encode()).hexdigest()
+    build_keys, reused, parent_digests = {}, set(), {}
+    def compile_one(name):
+        source = sources[name]
+        parent = mdl.supermodel(source)
+        if parent not in parent_digests:
+            parent_data = ((stage / "binary" / f"{parent}.mdl").read_bytes()
+                           if parent in sources else load_reference(parent) if parent else b"")
+            if parent_data is None:
+                raise ValueError(f"{name}: missing compiled parent {parent}")
+            parent_digests[parent] = hashlib.sha256(parent_data).hexdigest()
+        original = dependencies[original_robes[name]] if name in original_robes else b""
+        base = reference_bodies[name[:3] + "0"] if name in complete_roots else b""
+        validation_key = hashlib.sha256(bytes.fromhex(validation_digest) +
+                                       hashlib.sha256(original).digest() + hashlib.sha256(base).digest()).hexdigest()
+        key = build_cache.build_key(source, compiler_hash, parent_digests[parent], validation_key)
+        build_keys[name] = key
+        previous = active.get(name)
+        previous_data = previous.read_bytes() if previous is not None else b""
+        relative = f"{model_directory(name)}/{name}.mdl"
         path = stage / "binary" / f"{name}.mdl"
+        if build_cache.reusable(prior_manifest.get("model_builds", {}).get(name), key, previous_data,
+                                prior_manifest.get("files", {}).get(relative)):
+            path.write_bytes(previous_data)
+            reused.add(name)
+            return
+        mdl.run_compiler(compiler, stage, ["-cne", str(stage / "input" / f"{name}.mdl"),
+                                          str(stage / "binary") + "/"], "compile.log")
         compiled = mdl.restore_vertex_attributes(source, path.read_bytes())
         compiled = poses.repair_compiler_skin_bindings(compiled)
         if name in renamed_nodes:
-            compiled = poses.preserve_skin_bindings(dependencies[original_robes[name]], compiled, renamed_nodes[name])
+            compiled = poses.preserve_skin_bindings(original, compiled, renamed_nodes[name])
         path.write_bytes(compiled)
-    for pattern in ([name + ".mdl" for name in sources] if args.model else ["*.mdl"]):
-        mdl.run_compiler(compiler, stage, ["-de", str(stage / "binary" / pattern), str(stage / "decompiled") + "/"], "decompile.log")
+    # Compile and expose the complete animation parents before their body roots.
+    compiled_parents = set(animation_cache.values()) - set(dependencies)
+    print(f"Building or reusing {len(sources)} generated models. Staging: {stage}", flush=True)
+    for name in sorted(compiled_parents):
+        compile_one(name)
+        shutil.copyfile(stage / "binary" / f"{name}.mdl", stage / f"{name}.mdl")
+    for index, name in enumerate(sorted(set(sources) - compiled_parents), 1):
+        compile_one(name)
+        if index % 250 == 0:
+            print(f"Prepared {index} body/attachment models; {len(reused)} cache hits.", flush=True)
+    changed = set(sources) - reused
+    compile_model_files(compiler, stage, changed, "binary", "decompiled", "-de", "decompile.log")
     failures = []
     for name, source in sources.items():
+        if name in reused:
+            continue
         try:
             compiled = (stage / "binary" / f"{name}.mdl").read_bytes()
             mdl.validate_round_trip(source, compiled,
@@ -535,7 +625,8 @@ def main():
     if not failures:
         for key, parent in animation_cache.items():
             checked_poses += poses.validate_body_poses(parent, families.groups[key]["base"], library)
-    report = {"models": len(sources), "robe_models": len(selected), "phenotypes": len(id_map),
+    report = {"models": len(sources), "compiled_models": len(changed), "reused_models": len(reused),
+              "robe_models": len(selected), "phenotypes": len(id_map),
               "body_pose_samples": checked_poses,
               "independent_skeletons": len(complete_roots), "animation_families": len(animation_cache),
               "missing_animation_fallbacks": families.fallbacks,
@@ -567,14 +658,19 @@ def main():
         # Hash validated inputs from their captured bytes and outputs from staging.
         # Copying thousands of outputs must never re-certify later input edits.
         output_files = {f"sw_2da/{path.name}": file_digest(stage / path.name) for path in (TABLE, PHENOTYPES)}
-        output_files.update({("sw_pt_robe" if "_robe" in name else "sw_pt_root") + f"/{name}.mdl":
+        output_files.update({f"{model_directory(name)}/{name}.mdl":
                              file_digest(stage / "binary" / f"{name}.mdl") for name in sources})
         for name in sources:
-            directory = "sw_pt_robe" if "_robe" in name else "sw_pt_root"
-            shutil.copyfile(stage / "binary" / f"{name}.mdl", ROOT / directory / f"{name}.mdl")
+            directory = ROOT / model_directory(name)
+            if directory.resolve().parent != ROOT.resolve():
+                raise ValueError(f"Generated model directory is redirected: {directory}")
+            directory.mkdir(exist_ok=True)
+            shutil.copyfile(stage / "binary" / f"{name}.mdl", directory / f"{name}.mdl")
         shutil.copyfile(stage / "roberender.2da", TABLE)
         shutil.copyfile(stage / "phenotype.2da", PHENOTYPES)
         manifest = {"compiler_sha256": compiler_hash, "independent_skeletons": True,
+                    "model_builds": {name: build_cache.make_record(build_keys[name],
+                                     (stage / "binary" / f"{name}.mdl").read_bytes()) for name in sorted(sources)},
                     "body_pose_samples": checked_poses,
                     "missing_animation_fallbacks": families.fallbacks,
                     "stock_model_sha256": stock_hashes,

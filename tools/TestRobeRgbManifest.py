@@ -3,6 +3,7 @@ import json
 from pathlib import Path
 import tempfile
 import unittest
+import sys
 from unittest.mock import patch
 
 import GenerateRobeRgbModels as g
@@ -12,6 +13,91 @@ import TestRobeSkeleton as skeleton_tests
 
 
 class RobeRgbManifestTests(unittest.TestCase):
+    def test_only_reserved_bridge_names_use_separate_animation_packages(self):
+        for name, expected in (("pmh_ra001", "sw_anim_m"), ("pfa_ra999", "sw_anim_f"),
+                               ("pmh34", "sw_pt_root"), ("pmh34_robe003", "sw_pt_robe"),
+                               ("pmh_random", "sw_pt_root"), ("pmh_ra001_extra", "sw_pt_root")):
+            self.assertEqual(expected, g.model_directory(name), name)
+
+
+    def test_versioned_bridge_source_is_generated_once_and_renamed_exactly(self):
+        fixtures = skeleton_tests.IndependentRobeSkeletonTests().fixtures()
+        families = rig.Families(fixtures.get)
+        key = families.add("body", fixtures["garment"])
+        captured = {}
+        with patch.object(families, "bridge", wraps=families.bridge) as build:
+            g.version_animation_families(families, {}, lambda *_: False,
+                                        save_source=lambda key, value: captured.update({key: value}))
+            self.assertEqual(1, build.call_count)
+        self.assertEqual(families.bridge(key, "pmh_ra001"), g.name_bridge(captured[key], "pmh_ra001"))
+        self.assertEqual(b"rg_rgb_bridge pmh_ra001", g.name_bridge(b"rg_rgb_bridge rgb_bridge", "pmh_ra001"))
+
+    def test_current_apply_exits_before_creating_a_build(self):
+        with patch.object(sys, "argv", ["generate", "--apply", "--game-data", "game"]), \
+                patch.object(g, "check", return_value=[]), \
+                patch.object(g, "stock_sources_current", return_value=True), \
+                patch.object(g, "fresh_active_models") as discover, \
+                patch.object(g.mdl, "prepare_compiler", return_value=(None,
+                    json.loads(g.MANIFEST.read_text())["compiler_sha256"])) as compiler:
+            g.main()
+            discover.assert_not_called()
+            compiler.assert_called_once()
+            self.assertFalse(compiler.call_args.args[0].exists())
+
+    def test_current_apply_rejects_corrupt_compiler(self):
+        with tempfile.TemporaryDirectory() as directory:
+            (Path(directory) / "nwnmdlcomp.exe").write_bytes(b"corrupt compiler")
+            with patch.object(sys, "argv", ["generate", "--apply", "--game-data", "game"]), \
+                    patch.object(g, "check", return_value=[]), \
+                    patch.object(g, "stock_sources_current", return_value=True), \
+                    patch.object(g.mdl, "ROOT", Path(directory)), \
+                    patch.object(g, "fresh_active_models") as discover:
+                with self.assertRaisesRegex(RuntimeError, "Unsupported nwnmdlcomp.exe"):
+                    g.main()
+                discover.assert_not_called()
+
+    def test_changed_compiler_hash_cannot_reuse_current_catalog(self):
+        with patch.object(sys, "argv", ["generate", "--apply", "--game-data", "game"]), \
+                patch.object(g, "check", return_value=[]), \
+                patch.object(g, "stock_sources_current", return_value=True), \
+                patch.object(g.mdl, "prepare_compiler", return_value=(None, "0" * 64)), \
+                patch.object(g, "fresh_active_models", side_effect=RuntimeError("generation requested")):
+            with self.assertRaisesRegex(RuntimeError, "generation requested"):
+                g.main()
+
+    def test_force_or_changed_inputs_do_not_take_the_noop_path(self):
+        for extra, errors, stock_current in ((["--force"], [], True), ([], ["changed"], True), ([], [], False)):
+            with self.subTest(extra=extra, errors=errors, stock_current=stock_current), \
+                    patch.object(sys, "argv", ["generate", "--apply", "--game-data", "game", *extra]), \
+                    patch.object(g, "check", return_value=errors), \
+                    patch.object(g, "stock_sources_current", return_value=stock_current), \
+                    patch.object(g, "fresh_active_models", side_effect=RuntimeError("generation requested")):
+                with self.assertRaisesRegex(RuntimeError, "generation requested"):
+                    g.main()
+
+    def test_noop_verifies_real_stock_bytes(self):
+        data = b"native source"
+        manifest = {"stock_model_sha256": {"native": g.hashlib.sha256(data).hexdigest()}}
+        with patch.object(g.tint, "read_stock_key_models", return_value={"native": ("resource",)}), \
+                patch.object(g, "validate_stock_inventory"), \
+                patch.object(g.tint, "extract_stock_bif_resource", return_value=data) as extract:
+            self.assertTrue(g.stock_sources_current(Path("game"), manifest))
+            extract.return_value = b"updated native source"
+            self.assertFalse(g.stock_sources_current(Path("game"), manifest))
+
+    def test_native_compiler_calls_are_bounded_to_requested_models(self):
+        with tempfile.TemporaryDirectory() as directory, patch.object(g.mdl, "run_compiler") as run:
+            stage = Path(directory)
+            (stage / "binary").mkdir()
+            (stage / "binary" / "stale.mdl").write_bytes(b"old staged resource")
+            g.compile_model_files(Path("compiler.exe"), stage, ["pmh_ra002", "pfa_ra001"],
+                                  "binary", "decompiled", "-de", "decompile.log")
+            self.assertEqual(2, run.call_count)
+            self.assertEqual([str(stage / "binary" / "pfa_ra001.mdl"),
+                              str(stage / "binary" / "pmh_ra002.mdl")],
+                             [call.args[2][1] for call in run.call_args_list])
+            self.assertTrue(all(call.args[2][0] == "-de" for call in run.call_args_list))
+
     def test_text_manifest_hashes_are_checkout_independent(self):
         with tempfile.TemporaryDirectory() as directory:
             for extension in (".py", ".2da", ".json", ".mdl"):
@@ -90,13 +176,13 @@ class RobeRgbManifestTests(unittest.TestCase):
 
     def test_animation_bridge_reuse_and_retirement_require_verified_ownership(self):
         with tempfile.TemporaryDirectory() as directory, patch.object(g, "ROOT", Path(directory)):
-            root = Path(directory) / "sw_pt_root"
+            root = Path(directory) / "sw_anim_f"
             root.mkdir()
             path = root / "pfa_ra001.mdl"
             path.write_bytes(b"generated animation")
             groups = {"family": {"base": "pfa0"}}
             prior = {"animation_bridges": {"family": "pfa_ra001"},
-                     "files": {"sw_pt_root/pfa_ra001.mdl": g.file_digest(path)}}
+                     "files": {"sw_anim_f/pfa_ra001.mdl": g.file_digest(path)}}
             self.assertEqual(prior["animation_bridges"], g.allocate_animation_bridges(
                 groups, {"pfa_ra001": path}, prior))
             other = Path(directory) / "authored.mdl"
@@ -129,7 +215,7 @@ class RobeRgbManifestTests(unittest.TestCase):
             root = Path(directory)
             files = {
                 "sw_pt_root/pmh34.mdl": b"setsupermodel pmh34 pmh_ra001\n",
-                "sw_pt_root/pmh_ra001.mdl": b"setsupermodel pmh_ra001 NULL\n",
+                "sw_anim_m/pmh_ra001.mdl": b"setsupermodel pmh_ra001 NULL\n",
                 "sw_pt_robe/pmh34_robe003.mdl": g.empty_attachment("pmh34_robe003"),
             }
             for name, data in files.items():
@@ -215,12 +301,12 @@ class RobeRgbManifestTests(unittest.TestCase):
         remaining = rig.Families(fixtures.get)
         self.assertEqual(family, remaining.add("pmh0", fixtures["garment"]))
         with tempfile.TemporaryDirectory() as directory, patch.object(g, "ROOT", Path(directory)):
-            old_path = Path(directory) / "sw_pt_root/pmh_ra001.mdl"
+            old_path = Path(directory) / "sw_anim_m/pmh_ra001.mdl"
             old_path.parent.mkdir()
             old_source = both.bridge(family, "pmh_ra001")
             old_path.write_bytes(old_source)
             prior = {"animation_bridges": {family: "pmh_ra001"},
-                     "files": {"sw_pt_root/pmh_ra001.mdl": g.file_digest(old_path)}}
+                     "files": {"sw_anim_m/pmh_ra001.mdl": g.file_digest(old_path)}}
             versions, migrated = g.version_animation_families(both, prior, lambda *_: True)
             self.assertNotIn(family, migrated["animation_bridges"])
             self.assertEqual("pmh_ra001", migrated["animation_bridges"][versions[family]])
