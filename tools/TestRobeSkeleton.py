@@ -25,6 +25,39 @@ class IndependentRobeSkeletonTests(unittest.TestCase):
         output, names = families.body_root("garment", "result", "bridge")
         return families, key, output.decode(), names
 
+    @staticmethod
+    def carry_overlay_source():
+        return ("newmodel a_ba_casts\nsetsupermodel a_ba_casts NULL\nbeginmodelgeom a_ba_casts\n"
+                "node dummy a_ba_casts\nparent NULL\nendnode\nendmodelgeom a_ba_casts\n"
+                "newanim sw_nohold a_ba_casts\nlength 1\ntranstime 0\nanimroot a_ba_casts\n"
+                "node dummy a_ba_casts\nparent NULL\nendnode\ndoneanim sw_nohold a_ba_casts\ndonemodel a_ba_casts\n")
+
+    def test_inherited_overlay_preserves_exact_family_and_bridge_source(self):
+        helper = self
+        fixtures = helper.fixtures()
+        before, key, body, names = helper.build(fixtures)
+        source = before.bridge(key, "bridge")
+        fixtures["tail"] = self.carry_overlay_source().replace("a_ba_casts", "tail")
+        fixtures["body"] = fixtures["body"].replace("setsupermodel body null", "setsupermodel body tail")
+        after, new_key, new_body, new_names = helper.build(fixtures)
+        self.assertIn("sw_nohold", after.clips("body"))
+        self.assertEqual(new_key, key)
+        self.assertEqual(after.bridge(new_key, "bridge"), source)
+        self.assertEqual((new_body, new_names), (body, names))
+
+    def test_reserved_overlay_cannot_hide_real_controllers_or_events(self):
+        helper = self
+        for field in ("position 0 0 0", "orientationkey 1\n0 0 0 1 0", "scale 1", "alpha 1"):
+            fixtures = helper.fixtures()
+            bad = self.carry_overlay_source().replace("a_ba_casts", "tail").replace("parent NULL\nendnode\ndoneanim", f"parent NULL\n{field}\nendnode\ndoneanim")
+            fixtures["tail"] = bad
+            fixtures["body"] = fixtures["body"].replace("setsupermodel body null", "setsupermodel body tail")
+            with self.subTest(field=field), self.assertRaises(ValueError):
+                helper.build(fixtures)
+        fixtures["tail"] = self.carry_overlay_source().replace("a_ba_casts", "tail").replace("length 1", "length 1\nevent 0.5 hit")
+        with self.assertRaises(ValueError):
+            helper.build(fixtures)
+
     def test_robe_bind_pose_cannot_displace_missing_body_hand(self):
         families, key, output, names = self.build(self.fixtures())
         nodes = {n: p for _, n, p in anim.geometry(output)}

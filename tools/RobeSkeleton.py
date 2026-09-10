@@ -114,6 +114,18 @@ class Families:
         if missing:
             self.fallbacks[name] = missing
         resolved = {**body_clips, **garment_clips}
+        # The carry suppression overlay is deliberately controller-free. It is
+        # inherited from the common tail, so it must not version every garment
+        # family or acquire body/garment tracks during bridge generation.
+        if "sw_nohold" in resolved:
+            owner, overlay = resolved["sw_nohold"]
+            length = re.search(r"(?im)^\s*length\s+(\S+)", overlay[3])
+            nodes = mdl.parse_nodes(overlay[3])
+            if (length is None or float(length[1]) != 1 or not nodes or
+                    re.search(r"(?im)^\s*event\b", overlay[3]) or
+                    any(kind != "dummy" or set(props) - {"parent"} for kind, _, props in nodes)):
+                raise ValueError(f"{owner}/sw_nohold: carry overlay must have no controllers or events")
+            resolved.pop("sw_nohold")
         signature = json.dumps([(c, o) for c, (o, _) in sorted(resolved.items())])
         key = base + "/" + hashlib.sha256(signature.encode()).hexdigest()[:16]
         group = self.groups.setdefault(key, {"base": base, "clips": resolved, "paths": {}, "members": []})
