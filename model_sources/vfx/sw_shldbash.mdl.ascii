@@ -1,0 +1,149 @@
+# Original SWLOR Shield Bash impact: metallic sparks and dust
+newmodel sw_shldbash
+setsupermodel sw_shldbash null
+classification EFFECT
+setanimationscale 1
+beginmodelgeom sw_shldbash
+node dummy sw_shldbash
+ parent NULL
+endnode
+node emitter sparks
+  parent sw_shldbash
+  position 0 0 0
+  orientation 0 0 1 0
+  update Fountain
+  render Normal
+  blend Lighten
+  spawntype 0
+  xsize 2
+  ysize 2
+  inherit 0
+  inherit_local 0
+  inheritvel 0
+  inherit_part 0
+  renderorder 0
+  threshold 0
+  combinetime 0
+  deadspace 0
+  colorStart 1 .86 .55
+  colorEnd .85 .35 .08
+  alphaStart 1
+  alphaEnd 0
+  sizeStart 0.045
+  sizeEnd 0.008
+  sizeStart_y 0
+  sizeEnd_y 0
+  birthrate 0
+  lifeExp 0.3
+  mass 1.2
+  spread 6.283185
+  particleRot 5
+  velocity 2.4
+  randvel 1.2
+  bounce_co 0
+  blurlength 0
+  loop 0
+  bounce 0
+  m_isTinted 0
+  splat 0
+  affectedByWind false
+  texture sw_bash_spark
+  twosidedtex 1
+  xgrid 1
+  ygrid 1
+  fps 1
+  frameStart 0
+  frameEnd 0
+  random 0
+  lightningDelay 0
+  lightningRadius 0
+  lightningSubDiv 0
+  lightningScale 0
+  blastRadius 0
+  blastLength 0
+  p2p 0
+endnode
+node emitter dust
+  parent sw_shldbash
+  position 0 0 0
+  orientation 0 0 1 0
+  update Fountain
+  render Normal
+  blend Normal
+  spawntype 0
+  xsize 8
+  ysize 8
+  inherit 0
+  inherit_local 0
+  inheritvel 0
+  inherit_part 0
+  renderorder 0
+  threshold 0
+  combinetime 0
+  deadspace 0
+  colorStart .52 .43 .32
+  colorEnd .36 .32 .28
+  alphaStart 0.26
+  alphaEnd 0
+  sizeStart 0.12
+  sizeEnd 0.32
+  sizeStart_y 0
+  sizeEnd_y 0
+  birthrate 0
+  lifeExp 0.55
+  mass 0
+  spread 6.283185
+  particleRot 0.5
+  velocity 0.45
+  randvel 0.2
+  bounce_co 0
+  blurlength 0
+  loop 0
+  bounce 0
+  m_isTinted 0
+  splat 0
+  affectedByWind false
+  texture sw_bash_dust
+  twosidedtex 1
+  xgrid 1
+  ygrid 1
+  fps 1
+  frameStart 0
+  frameEnd 0
+  random 0
+  lightningDelay 0
+  lightningRadius 0
+  lightningSubDiv 0
+  lightningScale 0
+  blastRadius 0
+  blastLength 0
+  p2p 0
+endnode
+endmodelgeom sw_shldbash
+newanim impact sw_shldbash
+ length .9
+ transtime 0
+ animroot sw_shldbash
+node dummy sw_shldbash
+ parent NULL
+endnode
+node emitter sparks
+ parent sw_shldbash
+ birthratekey
+  0 240
+  0.08 240
+  0.09 0
+  .9 0
+ endlist
+endnode
+node emitter dust
+ parent sw_shldbash
+ birthratekey
+  0 65
+  0.12 65
+  0.13 0
+  .9 0
+ endlist
+endnode
+doneanim impact sw_shldbash
+donemodel sw_shldbash
