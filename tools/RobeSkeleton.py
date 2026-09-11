@@ -166,9 +166,10 @@ class Families:
             group["aliases"] = aliases
         return group["aliases"]
 
-    def body_root(self, robe_name, generated, parent):
+    def body_root(self, robe_name, generated, parent, aliases=None):
         key, garment, paths = self.members[robe_name]
-        group, aliases = self.groups[key], self.aliases(key)
+        group = self.groups[key]
+        aliases = self.aliases(key) if aliases is None else aliases
         base = group["base"]
         renamed = {node: aliases.get(path, "rm_" + node) for node, path in paths.items()}
         if len(set(renamed.values())) != len(renamed) or any(len(n) > 31 for n in renamed.values()):
@@ -191,6 +192,34 @@ class Families:
                   f"setanimationscale {scale[1] if scale else '1'}\nbeginmodelgeom {generated}\n" +
                   "".join(output) + f"endmodelgeom {generated}\ndonemodel {generated}\n")
         return result.encode("latin1"), renamed
+
+    def clip_tracks(self, key, clip, body_nodes, scale):
+        """Resolve exact body/garment controllers for both ordinary and shared rigs."""
+        group = self.groups[key]
+        base = group["base"]
+        owner, source = group["clips"][clip]
+        body_owner, body_source = self.clips(base).get(clip, (None, None))
+        primary = body_source if body_source is not None else source
+        header = primary[3][:anim.NODE.search(primary[3]).start()]
+        duration = float(re.search(r"(?im)^\s*length\s+(\S+)", header)[1])
+        # Locally authored translations need compensation when inherited by a
+        # scaled wearer. Retain native numeric part-ID remapping for body tracks.
+        body_factor = 1/scale if body_owner == base else 1
+        remap = self.body_track_names(base, body_owner, clip) if self.body_track_names and body_source else None
+        body = self.tracks(body_source, body_owner, body_nodes, duration, body_factor, remap)
+        original_names = {path[-1] for path in group["paths"] if path}
+        garment = self.tracks(body_source, body_owner, original_names, duration, body_factor)
+        garment_factor = 1/scale if owner == base or owner in group["members"] else 1
+        for node, values in self.tracks(source, owner, original_names, duration, garment_factor).items():
+            target = garment.setdefault(node, {})
+            for controller, value in values.items():
+                target.pop(controller.removesuffix("key") if controller.endswith("key") else controller+"key", None)
+                target[controller] = value
+        # Common body clips retain their original duration/events/controllers;
+        # custom-only clips may also supply body motion.
+        if body_source is None:
+            body = self.tracks(source, owner, body_nodes, duration)
+        return header, body, garment
 
     def bridge(self, key, name):
         group, aliases = self.groups[key], self.aliases(key)
@@ -215,33 +244,8 @@ class Families:
         output = (f"newmodel {name}\nsetsupermodel {name} {base}\nclassification CHARACTER\n"
                   f"setanimationscale 1\nbeginmodelgeom {name}\n" +
                   "".join(anim.serialize_node(n, p) for n, p in ordered) + f"endmodelgeom {name}\n")
-        body_clips = self.clips(base)
-        for clip, (owner, source) in sorted(group["clips"].items()):
-            body_owner, body_source = body_clips.get(clip, (None, None))
-            primary = body_source if body_source is not None else source
-            header = primary[3][:anim.NODE.search(primary[3]).start()]
-            duration = float(re.search(r"(?im)^\s*length\s+(\S+)", header)[1])
-            # A locally authored clip is unscaled in its original model. Once
-            # moved into a supermodel, compensate for the wearer's inherited
-            # translation scale (notably dwarf/halfling sitting animations).
-            body_factor = 1/scale if body_owner == base else 1
-            # Inherited native clips address numeric part IDs. Some stock
-            # cloak helpers have different IDs in smaller body roots; copying
-            # their names would activate tracks the original wearer never used.
-            remap = self.body_track_names(base, body_owner, clip) if self.body_track_names and body_source else None
-            body = self.tracks(body_source, body_owner, body_nodes, duration, body_factor, remap)
-            original_names = {path[-1] for path in aliases if path}
-            garment = self.tracks(body_source, body_owner, original_names, duration, body_factor)
-            garment_factor = 1/scale if owner == base or owner in group["members"] else 1
-            for node, values in self.tracks(source, owner, original_names, duration, garment_factor).items():
-                target = garment.setdefault(node, {})
-                for controller, value in values.items():
-                    target.pop(controller.removesuffix("key") if controller.endswith("key") else controller+"key", None)
-                    target[controller] = value
-            # Custom-only clips may animate the wearer too. Common body clips
-            # always retain their original controllers, events, and duration.
-            if body_source is None:
-                body = self.tracks(source, owner, body_nodes, duration)
+        for clip in sorted(group["clips"]):
+            header, body, garment = self.clip_tracks(key, clip, body_nodes, scale)
             values = {node: {"parent": props["parent"], **body.get(node, {})} for node, props in ordered}
             for path, alias in aliases.items():
                 values[alias] = {"parent": nodes[alias]["parent"], **(garment.get(path[-1], {}) if path else {})}

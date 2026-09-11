@@ -13,6 +13,20 @@ import TestRobeSkeleton as skeleton_tests
 
 
 class RobeRgbManifestTests(unittest.TestCase):
+    def test_generated_chain_includes_wearer_and_all_inherited_banks(self):
+        models = {f"node{i}": f"setsupermodel node{i} node{i+1}\n".encode() for i in range(32)}
+        models["node31"] = b"setsupermodel node31 NULL\n"
+        self.assertEqual(32, g.validate_model_chains(["node0", "node4"], models.get))
+        models["node31"] = b"setsupermodel node31 node32\n"
+        models["node32"] = b"setsupermodel node32 NULL\n"
+        self.assertEqual(33, g.validate_model_chains(["node0"], models.get))
+        models["node4"] = b"setsupermodel node4 node0\n"
+        with self.assertRaisesRegex(ValueError, "Cyclic"):
+            g.validate_model_chains(["node0"], models.get)
+        del models["node4"]
+        with self.assertRaisesRegex(ValueError, "Missing model"):
+            g.validate_model_chains(["node0"], models.get)
+
     def test_only_reserved_bridge_names_use_separate_animation_packages(self):
         for name, expected in (("pmh_ra001", "sw_anim_m"), ("pfa_ra999", "sw_anim_f"),
                                ("pmh_ra001_b01", "sw_anim_m"), ("pfa_ra999_b03", "sw_anim_f"),

@@ -21,10 +21,11 @@ import CompileModels as mdl
 import GenerateTintMapAssets as tint
 import ImportStockRobeTints as stock_robes
 import RobeAnimations as animations
-import RobeSkeleton as skeleton
 import RobePoseAudit as poses
 import RobeBuildCache as build_cache
 import RobeAnimationBanks as banks
+import SharedRobeFamilies as shared
+import RobeSharingAudit as sharing
 
 ROOT = Path(__file__).resolve().parents[1]
 TABLE = ROOT / "sw_2da" / "roberender.2da"
@@ -34,7 +35,8 @@ PATTERN = re.compile(r"^(p[fm][a-z])0_robe(\d{3})$")
 NODE = re.compile(r"(?im)^\s*node\s+(\S+)\s+(\S+)\s*$([\s\S]*?)^\s*endnode\b")
 GENERATOR_INPUTS = ("GenerateRobeRgbModels.py", "RobeSkeleton.py", "RobePoseAudit.py",
                     "RobeAnimations.py", "CompileModels.py", "ImportStockRobeTints.py",
-                    "TintMapStockRobes.json", "GenerateTintMapAssets.py", "RobeBuildCache.py")
+                    "TintMapStockRobes.json", "GenerateTintMapAssets.py", "RobeBuildCache.py",
+                    "SharedRobeFamilies.py", "RobeSharingAudit.py")
 PACKAGING_INPUTS = ("RobeAnimationBanks.py", "RepackRobeAnimationBanks.py")
 CATALOG_INPUTS = ("sw_2da/parts_robe.2da", "sw_2da/tintmap.2da", "hakbuilder.json")
 BODY_RESOURCE = re.compile(r"^p[fm][a-z](\d+)(?:_robe\d{3})?$", re.IGNORECASE)
@@ -261,6 +263,26 @@ def package_animation_models(stage, heads, generated_names, manifest, active):
         if path.stat().st_size >= banks.LIMIT_BYTES:
             raise ValueError(f"Generated model exceeds the NWSync resource limit: {name}")
     return result, records
+
+
+def validate_model_chains(names, load):
+    """Verify complete wearer inheritance and report its depth, including native ancestors."""
+    parents = {}
+    longest = 0
+    for name in names:
+        chain = []
+        while name:
+            if name in chain:
+                raise ValueError(f"Cyclic model chain: {' -> '.join(chain + [name])}")
+            chain.append(name)
+            if name not in parents:
+                data = load(name)
+                if data is None:
+                    raise ValueError(f"Missing model in generated chain: {name}")
+                parents[name] = mdl.supermodel(data)
+            name = parents[name]
+        longest = max(longest, len(chain))
+    return longest
 
 
 def check() -> list[str]:
@@ -491,6 +513,8 @@ def main():
     parser.add_argument("--model", action="append", help="Restrict an experimental build; cannot apply a partial catalog")
     parser.add_argument("--stage", type=Path, help="Reuse a previous decompilation staging directory")
     parser.add_argument("--force", action="store_true", help="Run generation even when the complete installed catalog is current")
+    parser.add_argument("--verify-existing-motion", action="store_true",
+                        help="Require every existing wearer and garment animation to retain its motion and bind")
     args = parser.parse_args()
     if args.check:
         errors = check()
@@ -502,7 +526,7 @@ def main():
         parser.error("--game-data is required when generating models")
     if args.model and args.apply:
         parser.error("--apply requires the complete catalog")
-    if args.apply and not args.force and not check():
+    if args.apply and not args.force and not args.verify_existing_motion and not check():
         manifest = json.loads(MANIFEST.read_text())
         if stock_sources_current(args.game_data, manifest):
             with tempfile.TemporaryDirectory(prefix="swlor-robe-compiler-") as directory:
@@ -608,7 +632,7 @@ def main():
 
     prior_manifest = json.loads(MANIFEST.read_text()) if MANIFEST.is_file() else {}
     animation_cache = {}
-    families = skeleton.Families(load_text, original_library.body_track_names)
+    families = shared.Families(load_text, original_library.body_track_names)
     complete_roots = set()
     sources = {}
     renamed_nodes = {}
@@ -618,6 +642,9 @@ def main():
     for name in sorted(selected):
         robe = unique_nodes(load_text(name), dependencies[name])
         families.add(name[:3] + "0", robe, name)
+    sharing_stats = families.stats()
+    (stage / "sharing.json").write_text(json.dumps(sharing_stats, indent=2) + "\n")
+    print(json.dumps(sharing_stats, indent=2), flush=True)
     print(f"Building {len(families.groups)} shared animation families.", flush=True)
     legacy_directory = stage / "legacy_bridges"
     legacy_directory.mkdir(exist_ok=True)
@@ -655,6 +682,7 @@ def main():
         parent = animation_names[versions[key]]
         sources[parent] = name_bridge(source_paths[key].read_bytes(), parent)
         animation_cache[key] = parent
+    motion_records = []
     for name in sorted(selected):
         prefix, robe_id = PATTERN.fullmatch(name).groups()
         phenotype = id_map[int(robe_id)]
@@ -662,6 +690,21 @@ def main():
         base_name = prefix + "0"
         animation_parent = animation_cache[families.members[name][0]]
         sources[generated], renamed_nodes[generated] = families.body_root(name, generated, animation_parent)
+        if args.verify_existing_motion:
+            previous = active.get(generated)
+            if previous is None or prior.get(name) != phenotype:
+                raise ValueError(f"Cannot verify existing motion without its current wearer: {generated}")
+            previous_names = prior_manifest.get("garment_node_names", {}).get(generated)
+            if previous_names is None:
+                previous_names = families.legacy_aliases(name)
+            if (not isinstance(previous_names, dict) or
+                    previous_names.keys() != renamed_nodes[generated].keys() or
+                    any(not isinstance(value, str) for value in previous_names.values())):
+                raise ValueError(f"Cannot verify changed garment joint inventory: {generated}")
+            motion_records.append({"wearer": generated, "before": mdl.supermodel(previous.read_bytes()),
+                                   "after": animation_parent,
+                                   "names": {old: renamed_nodes[generated][original]
+                                             for original, old in previous_names.items()}})
         original_robes[generated] = name
         complete_roots.add(generated)
         sources[generated + "_robe" + robe_id] = empty_attachment(generated + "_robe" + robe_id)
@@ -752,9 +795,26 @@ def main():
     if not failures:
         for key, parent in animation_cache.items():
             checked_poses += poses.validate_body_poses(parent, families.groups[key]["base"], library)
+            # Library caches are method-wide. Source resolution is finished, and
+            # retaining every parsed union rig would multiply peak audit memory.
+            library.clips.cache_clear()
+            library.owners.cache_clear()
+            library.model.cache_clear()
+    checked_garment_clips = 0
+    if not failures and args.verify_existing_motion:
+        for record in motion_records:
+            name = record["wearer"]
+            sharing.validate_wearer(active[name].read_bytes(),
+                                    (stage / "binary" / f"{name}.mdl").read_bytes(), record["names"])
+        checked_garment_clips = sharing.validate_records(
+            motion_records, lambda name: owned_animation_bytes(name, prior_manifest, active),
+            lambda name: (stage / "binary" / f"{name}.mdl").read_bytes())
     report = {"models": len(sources), "compiled_models": len(changed), "reused_models": len(reused),
               "robe_models": len(selected), "phenotypes": len(id_map),
               "body_pose_samples": checked_poses,
+              "shared_rigs": sharing_stats,
+              "preserved_wearer_bindings": len(motion_records),
+              "preserved_garment_clips": checked_garment_clips,
               "independent_skeletons": len(complete_roots), "animation_families": len(animation_cache),
               "missing_animation_fallbacks": families.fallbacks,
               "versioned_legacy_bridges": legacy_bridge_changes,
@@ -769,6 +829,9 @@ def main():
                     (stage / "binary" / f"{name}.mdl").read_bytes()) for name in sorted(sources)}
     packaged_names, bank_sets = package_animation_models(
         stage, animation_cache.values(), sources, prior_manifest, active)
+    report["longest_model_chain"] = validate_model_chains(
+        complete_roots, lambda name: (stage / "binary" / f"{name}.mdl").read_bytes()
+        if name in packaged_names else load_reference(name))
     report["packaged_models"] = len(packaged_names)
     report["largest_model_bytes"] = max(
         ((stage / "binary" / f"{name}.mdl").stat().st_size for name in packaged_names), default=0)
@@ -810,6 +873,7 @@ def main():
         shutil.copyfile(stage / "phenotype.2da", PHENOTYPES)
         manifest = {"compiler_sha256": compiler_hash, "independent_skeletons": True,
                     "model_builds": model_builds,
+                    "garment_node_names": {**prior_manifest.get("garment_node_names", {}), **renamed_nodes},
                     "body_pose_samples": checked_poses,
                     "missing_animation_fallbacks": families.fallbacks,
                     "stock_model_sha256": stock_hashes,

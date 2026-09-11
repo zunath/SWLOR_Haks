@@ -5,10 +5,12 @@ All source/output ownership checks, exact binary reconstruction and native
 decompilation complete in staging before --apply replaces any HAK resource.
 """
 import argparse
+from contextlib import contextmanager
 from concurrent.futures import ProcessPoolExecutor, as_completed
 import copy
 import hashlib
 import json
+import os
 from pathlib import Path
 import shutil
 import time
@@ -21,9 +23,12 @@ import RobePoseAudit as poses
 
 
 def preflight(manifest):
-    # This operation changes packaging only. It may refresh the wrapper and its
-    # packer, but must never re-certify changed authoring/pose/skin inputs.
-    packaging = {"tools/GenerateRobeRgbModels.py", *(f"tools/{name}" for name in robes.PACKAGING_INPUTS)}
+    # Only these packaging modules may change without regenerating wearables.
+    # The generator also authors poses and skins, so its entire fingerprint
+    # must still match even when an edit appears to affect packaging alone.
+    packaging = {"tools/RobeAnimationBanks.py", "tools/RepackRobeAnimationBanks.py"}
+    if "tools/GenerateRobeRgbModels.py" not in manifest["files"]:
+        raise ValueError("Missing validated generator fingerprint; regenerate the robe catalog")
     for relative, expected in manifest["files"].items():
         path = robes.ROOT / relative
         if not path.resolve().is_relative_to(robes.ROOT.resolve()):
@@ -130,6 +135,197 @@ def repack_family(head, stage, input_manifest, validation_sha):
     return report
 
 
+def _install_directory(root):
+    root = root.resolve()
+    output = root / "output"
+    if output.resolve() != output or (output.exists() and not output.is_dir()):
+        raise ValueError("Animation install output directory is redirected")
+    output.mkdir(exist_ok=True)
+    directory = output / "nwsync-bank-install"
+    if directory.resolve() != directory:
+        raise ValueError("Animation install transaction directory is redirected")
+    return directory
+
+
+@contextmanager
+def _install_lock(root):
+    """OS locks are released on termination, unlike a persistent PID lock file."""
+    directory = _install_directory(root)
+    path = directory.with_suffix(".lock")
+    if path.resolve() != path:
+        raise ValueError("Animation install lock is redirected")
+    with path.open("a+b") as stream:
+        stream.seek(0, os.SEEK_END)
+        if not stream.tell():
+            stream.write(b"\0")
+            stream.flush()
+        stream.seek(0)
+        try:
+            if os.name == "nt":
+                import msvcrt
+                msvcrt.locking(stream.fileno(), msvcrt.LK_NBLCK, 1)
+            else:
+                import fcntl
+                fcntl.flock(stream.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except OSError as error:
+            raise RuntimeError("Another animation bank install or recovery is running") from error
+        try:
+            yield directory
+        finally:
+            stream.seek(0)
+            if os.name == "nt":
+                msvcrt.locking(stream.fileno(), msvcrt.LK_UNLCK, 1)
+            else:
+                fcntl.flock(stream.fileno(), fcntl.LOCK_UN)
+
+
+def _install_destination(root, relative):
+    path = root / relative
+    if relative != "tools/RobeRgbModels.json":
+        name = path.stem
+        if (not banks.is_bank_name(name) or
+                relative != f"{robes.model_directory(name)}/{name}.mdl"):
+            raise ValueError(f"Unexpected animation install destination: {relative}")
+    if (path.parent.resolve().parent != root.resolve() or
+            path.resolve() != path or not path.parent.is_dir()):
+        raise ValueError(f"Missing or redirected animation install destination: {relative}")
+    return path
+
+
+def _write_durable(path, data):
+    with path.open("wb") as output:
+        if output.write(data) != len(data):
+            raise OSError(f"Incomplete animation transaction write: {path}")
+        output.flush()
+        os.fsync(output.fileno())
+
+
+def _write_install_journal(directory, journal):
+    pending = directory / "journal.next"
+    _write_durable(pending, (json.dumps(journal, indent=2) + "\n").encode())
+    os.replace(pending, directory / "journal.json")
+
+
+def _sha(path):
+    return hashlib.sha256(path.read_bytes()).hexdigest() if path.is_file() else None
+
+
+def _recover_install(root, directory):
+    """Restore verified backups by rename, without allocating another model copy."""
+    if not directory.exists():
+        return
+    journal_path = directory / "journal.json"
+    if not journal_path.exists():
+        # All preparation completes before this journal exists or live files move.
+        shutil.rmtree(directory)
+        return
+    journal = json.loads(journal_path.read_text())
+    if journal.get("version") != 1 or journal.get("state") not in {"installing", "committed"}:
+        raise ValueError("Unrecognized animation install recovery journal")
+    entries = journal.get("entries")
+    if (not isinstance(entries, list) or not entries or
+            entries[-1].get("path") != "tools/RobeRgbModels.json"):
+        raise ValueError("Incomplete animation install recovery journal")
+    seen = set()
+    for index, entry in enumerate(entries):
+        destination = _install_destination(root, entry["path"])
+        if entry["path"] in seen:
+            raise ValueError("Duplicate animation install destination")
+        seen.add(entry["path"])
+        for value in (entry["before"], entry["after"]):
+            if value is not None and (not isinstance(value, str) or len(value) != 64 or
+                                      any(char not in "0123456789abcdef" for char in value)):
+                raise ValueError("Malformed animation install checksum")
+        if entry["after"] is None:
+            raise ValueError("Missing animation install output checksum")
+        if journal["state"] == "installing":
+            current = _sha(destination)
+            # An earlier rollback may have already consumed this backup. Its
+            # absence is safe only when the live file is the exact original.
+            if (entry["before"] is not None and current != entry["before"] and
+                    _sha(directory / f"old-{index}") != entry["before"]):
+                raise ValueError(f"Animation install backup changed: {entry['path']}")
+            if current not in {None, entry["before"], entry["after"]}:
+                raise ValueError(f"Animation install destination changed externally: {entry['path']}")
+    if journal["state"] == "installing":
+        for index, entry in enumerate(entries):
+            destination = _install_destination(root, entry["path"])
+            if _sha(destination) == entry["before"]:
+                continue
+            if entry["before"] is None:
+                destination.unlink(missing_ok=True)
+            else:
+                os.replace(directory / f"old-{index}", destination)
+        # No new journal write is necessary: checksums identify restored files
+        # if termination interrupts rollback or cleanup, even with a full disk.
+        print("Recovered the previous animation banks and manifest.", flush=True)
+    shutil.rmtree(directory)
+
+
+def recover_bank_install():
+    """Run before reading the manifest or doing provenance checks."""
+    root = robes.ROOT.resolve()
+    with _install_lock(root) as directory:
+        _recover_install(root, directory)
+
+
+def install_banks(sources, updated, initial):
+    """Prepare everything, install each resource atomically, then commit its manifest."""
+    root = robes.ROOT.resolve()
+    prior = json.loads(initial)
+    with _install_lock(root) as directory:
+        _recover_install(root, directory)
+        manifest_path = _install_destination(root, "tools/RobeRgbModels.json")
+        if manifest_path.read_bytes() != initial:
+            raise ValueError("Manifest changed before animation bank installation")
+        directory.mkdir()
+        entries = []
+        try:
+            for name in sorted(sources):
+                relative = f"{robes.model_directory(name)}/{name}.mdl"
+                destination = _install_destination(root, relative)
+                data = sources[name].read_bytes()
+                after = hashlib.sha256(data).hexdigest()
+                if len(data) >= banks.LIMIT_BYTES or after != updated["files"].get(relative):
+                    raise ValueError(f"Staged animation bank changed: {name}")
+                old = destination.read_bytes() if destination.exists() else None
+                before = hashlib.sha256(old).hexdigest() if old is not None else None
+                if before != prior["files"].get(relative):
+                    raise ValueError(f"Animation bank changed before installation: {relative}")
+                if before == after:
+                    continue
+                index = len(entries)
+                _write_durable(directory / f"new-{index}", data)
+                if old is not None:
+                    _write_durable(directory / f"old-{index}", old)
+                entries.append({"path": relative, "before": before, "after": after})
+            index = len(entries)
+            data = (json.dumps(updated, indent=2) + "\n").encode()
+            _write_durable(directory / f"new-{index}", data)
+            _write_durable(directory / f"old-{index}", initial)
+            entries.append({"path": "tools/RobeRgbModels.json", "before": hashlib.sha256(initial).hexdigest(),
+                            "after": hashlib.sha256(data).hexdigest()})
+            journal = {"version": 1, "state": "installing", "entries": entries}
+            _write_install_journal(directory, journal)
+            # The complete journal and backups are durable before the first move.
+            # Check all destinations again before changing any, then commit the
+            # manifest last so it never advertises a partly installed bank set.
+            for index, entry in enumerate(entries):
+                if (_sha(directory / f"new-{index}") != entry["after"] or
+                        entry["before"] is not None and _sha(directory / f"old-{index}") != entry["before"]):
+                    raise ValueError(f"Prepared animation install bytes changed: {entry['path']}")
+                if _sha(_install_destination(root, entry["path"])) != entry["before"]:
+                    raise ValueError(f"Animation install destination changed: {entry['path']}")
+            for index, entry in enumerate(entries):
+                os.replace(directory / f"new-{index}", _install_destination(root, entry["path"]))
+            journal["state"] = "committed"
+            _write_install_journal(directory, journal)
+        except Exception:
+            _recover_install(root, directory)
+            raise
+        shutil.rmtree(directory)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--apply", action="store_true")
@@ -137,6 +333,7 @@ def main():
     parser.add_argument("--jobs", type=int, default=2, choices=range(1, 5),
                         help="Bounded parallel validation workers (default: 2)")
     args = parser.parse_args()
+    recover_bank_install()
     initial = robes.MANIFEST.read_bytes()
     manifest = json.loads(initial)
     packaging = preflight(manifest)
@@ -185,19 +382,7 @@ def main():
         if robes.MANIFEST.read_bytes() != initial or preflight(manifest) != packaging:
             raise ValueError("Inputs changed while validating animation banks")
         robes.validate_animation_bank_ownership(output_names, manifest, robes.fresh_active_models())
-        # Install only verified staged bytes. Repacking never writes wearable
-        # roots, attachments, authoring projects, registration or phenotype tables.
-        for name in sorted(output_names):
-            destination = robes.ROOT / robes.model_directory(name) / f"{name}.mdl"
-            source = sources[name]
-            if robes.file_digest(source) != updated["files"][destination.relative_to(robes.ROOT).as_posix()]:
-                raise ValueError(f"Staged animation bank changed: {name}")
-        for name in sorted(output_names):
-            destination = robes.ROOT / robes.model_directory(name) / f"{name}.mdl"
-            source = sources[name]
-            if not destination.exists() or robes.file_digest(destination) != robes.file_digest(source):
-                shutil.copyfile(source, destination)
-        robes.MANIFEST.write_text(json.dumps(updated, indent=2) + "\n")
+        install_banks(sources, updated, initial)
     print(f"{'Installed' if args.apply else 'Staged'} {len(output_names)} compiled banks. Report: {stage / 'report.json'}")
 
 

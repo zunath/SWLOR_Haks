@@ -152,17 +152,26 @@ class RobeRepackPreflightTests(unittest.TestCase):
     def test_current_active_sources_allow_only_packaging_hashes_to_be_refreshed(self):
         with patch.object(repack.robes, "fresh_active_models", return_value=self.active), \
                 patch.object(repack.robes, "model_path_errors", return_value=[]) as paths:
-            changed = self.root / "tools/GenerateRobeRgbModels.py"
-            changed.write_bytes(b"new lossless packaging integration")
+            changed = self.root / "tools/RobeAnimationBanks.py"
+            changed.write_bytes(b"new lossless packaging implementation")
             result = repack.preflight(self.manifest)
-            expected = {"tools/GenerateRobeRgbModels.py",
-                        *(f"tools/{name}" for name in repack.robes.PACKAGING_INPUTS)}
+            expected = {"tools/RobeAnimationBanks.py", "tools/RepackRobeAnimationBanks.py"}
             self.assertEqual(expected, set(result))
-            self.assertEqual(repack.robes.file_digest(changed), result["tools/GenerateRobeRgbModels.py"])
+            self.assertEqual(repack.robes.file_digest(changed), result["tools/RobeAnimationBanks.py"])
             paths.assert_called_once_with(self.files, self.manifest["stock_model_sha256"], self.active)
             (self.root / "tools/RobePoseAudit.py").write_bytes(b"changed pose validation")
             with self.assertRaisesRegex(ValueError, "Prior validated input/output changed"):
                 repack.preflight(self.manifest)
+
+    def test_generator_changes_require_regeneration_even_with_current_outputs(self):
+        (self.root / "tools/GenerateRobeRgbModels.py").write_bytes(b"changed authoring or skin generation")
+        with self.assertRaisesRegex(ValueError, "Prior validated input/output changed: tools/GenerateRobeRgbModels.py"):
+            repack.preflight(self.manifest)
+
+    def test_missing_generator_fingerprint_cannot_certify_existing_outputs(self):
+        self.manifest["files"].pop("tools/GenerateRobeRgbModels.py")
+        with self.assertRaisesRegex(ValueError, "Missing validated generator fingerprint"):
+            repack.preflight(self.manifest)
 
 
 if __name__ == "__main__":
