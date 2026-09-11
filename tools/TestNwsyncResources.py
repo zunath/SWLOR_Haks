@@ -7,6 +7,19 @@ from CheckNwsyncResources import LIMIT_BYTES, oversized_resources
 
 
 class NwsyncResourceTests(unittest.TestCase):
+    def test_supported_builder_config_syntax_still_checks_resource_sizes(self):
+        for bom, trailing_commas in ((True, False), (False, True), (True, True)):
+            with self.subTest(bom=bom, trailing_commas=trailing_commas), tempfile.TemporaryDirectory() as folder:
+                root = Path(folder)
+                directory = root / "sw_anim_m"
+                directory.mkdir()
+                config = ('{"HakList":[{"Path":"sw_anim_m",},],}' if trailing_commas else
+                          '{"HakList":[{"Path":"sw_anim_m"}]}')
+                (root / "hakbuilder.json").write_text(config, encoding="utf-8-sig" if bom else "utf-8")
+                with (directory / "boundary.mdl").open("wb") as output:
+                    output.truncate(LIMIT_BYTES)
+                self.assertEqual([("sw_anim_m/boundary.mdl", LIMIT_BYTES)], oversized_resources(root))
+
     def test_checks_individual_files_in_every_configured_hak(self):
         with tempfile.TemporaryDirectory() as folder:
             root = Path(folder)

@@ -58,6 +58,16 @@ class RobeBankInstallTests(unittest.TestCase):
     def install(self):
         repack.install_banks(self.sources, self.updated, self.initial)
 
+    def test_sources_in_transaction_directory_are_rejected_before_recovery(self):
+        source = self.transaction / "nested/pmh_ra001.mdl"
+        source.parent.mkdir(parents=True)
+        source.write_bytes(self.new["pmh_ra001"])
+        self.sources["pmh_ra001"] = source
+        with self.assertRaisesRegex(ValueError, "reserved.*install"):
+            self.install()
+        self.assertEqual(self.new["pmh_ra001"], source.read_bytes())
+        self.assert_old()
+
     def assert_old(self):
         self.assertEqual(self.initial, self.manifest.read_bytes())
         for relative, data in self.old.items():
