@@ -25,15 +25,21 @@ import RobePoseAudit as poses
 INSTALL_DIRECTORY = "nwsync-bank-install"
 
 
-def validate_stage(stage):
+def reject_install_stage(stage):
     """Reject reserved paths before recovery can remove any existing staged audit."""
     stage = stage.resolve()
     output = (robes.ROOT / "output").resolve()
-    if not stage.is_relative_to(output):
-        raise ValueError("Use a staging directory inside this repository's output folder")
     transaction = output / INSTALL_DIRECTORY
     if stage.is_relative_to(transaction) or stage.is_relative_to(transaction.with_suffix(".lock")):
         raise ValueError("Staging directory overlaps a reserved animation install path")
+
+
+def validate_stage(stage):
+    """Check general staging constraints only after a pending install is recovered."""
+    stage = stage.resolve()
+    if not stage.is_relative_to((robes.ROOT / "output").resolve()):
+        raise ValueError("Use a staging directory inside this repository's output folder")
+    reject_install_stage(stage)
     return stage
 
 
@@ -350,8 +356,10 @@ def main():
     parser.add_argument("--jobs", type=int, default=2, choices=range(1, 5),
                         help="Bounded parallel validation workers (default: 2)")
     args = parser.parse_args()
-    stage = validate_stage(args.stage or robes.ROOT / "output" / f"nwsync-banks-{time.time_ns()}")
+    stage = (args.stage or robes.ROOT / "output" / f"nwsync-banks-{time.time_ns()}").resolve()
+    reject_install_stage(stage)
     recover_bank_install()
+    stage = validate_stage(stage)
     initial = robes.MANIFEST.read_bytes()
     manifest = json.loads(initial)
     packaging = preflight(manifest)

@@ -68,6 +68,16 @@ class RobeBankInstallTests(unittest.TestCase):
         self.assertEqual(self.new["pmh_ra001"], source.read_bytes())
         self.assert_old()
 
+    def test_invalid_unrelated_stage_does_not_prevent_pending_install_recovery(self):
+        self.interrupt_after(0)
+        with patch("sys.argv", ["repack", "--apply", "--stage", str(self.root / "outside-output")]), \
+                patch.object(repack, "preflight") as preflight:
+            with self.assertRaisesRegex(ValueError, "inside.*output"):
+                repack.main()
+            preflight.assert_not_called()
+        self.assert_old()
+        self.assertFalse(self.transaction.exists())
+
     def assert_old(self):
         self.assertEqual(self.initial, self.manifest.read_bytes())
         for relative, data in self.old.items():
