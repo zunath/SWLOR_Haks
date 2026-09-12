@@ -1,5 +1,6 @@
 """Exercise lossless bank relocation against the native model compiler/reader."""
 from pathlib import Path
+from dataclasses import replace
 import struct
 import tempfile
 import unittest
@@ -91,6 +92,46 @@ class NativeRobeAnimationBankTests(unittest.TestCase):
         self.assertEqual(self.original, banks.join(list(self.parts.values())))
         banks.validate_split(self.original, list(self.parts.values()))
         self.assertEqual({"pmh_ra001": self.original}, banks.split(self.original))
+
+    def test_named_motion_revision_preserves_every_unselected_native_byte(self):
+        clips = list(self.model.clips)
+        data = bytearray(clips[2].data)
+        struct.pack_into("<f", data, len(data) - 4, .8)
+        clips[2] = replace(clips[2], data=bytes(data))
+        changed = self.model.pack(self.model.name, self.model.parent, clips)
+        banks.validate_motion_revision(self.original, changed, ["clip2"])
+        self.assertEqual(changed, banks.revise_motion(self.original, changed, ["clip2"]))
+        # The compiler leaves garbage after the event-name terminator. Keep
+        # the original padding; meaningful event names and times still matter.
+        data = bytearray(clips[1].data)
+        event = uint(data, 184) - clips[1].start
+        data[event + 4 + len("cast") + 1] ^= 0xFF
+        clips[1] = replace(clips[1], data=bytes(data))
+        noisy = self.model.pack(self.model.name, self.model.parent, clips)
+        self.assertEqual(changed, banks.revise_motion(self.original, noisy, ["clip2"]))
+        with self.assertRaisesRegex(ValueError, "unselected animation"):
+            banks.revise_motion(self.original, changed, ["clip1"])
+        for offset in (event, event + 4):
+            data = bytearray(clips[1].data)
+            data[offset] ^= 1
+            modified = list(clips)
+            modified[1] = replace(clips[1], data=bytes(data))
+            with self.assertRaisesRegex(ValueError, "unselected animation"):
+                banks.revise_motion(self.original,
+                    self.model.pack(self.model.name, self.model.parent, modified), ["clip2"])
+        for allowed in ([], ["missing"], ["clip1"]):
+            with self.subTest(allowed=allowed), self.assertRaises(ValueError):
+                banks.validate_motion_revision(self.original, changed, allowed)
+        for changed in (self.model.pack(self.model.name, "different", clips),
+                        self.model.pack(self.model.name, self.model.parent, clips[:-1])):
+            with self.assertRaisesRegex(ValueError, "identity, parent or clip inventory"):
+                banks.validate_motion_revision(self.original, changed, ["clip2"])
+        model = banks.CompiledBridge(self.original)
+        data = bytearray(model.geometry.data)
+        struct.pack_into("<f", data, len(data) - 4, .8)
+        model.geometry = replace(model.geometry, data=bytes(data))
+        with self.assertRaisesRegex(ValueError, "skeleton or an unselected animation"):
+            banks.validate_motion_revision(self.original, model.pack(model.name, model.parent, clips), ["clip2"])
 
     def test_skeleton_only_model_cannot_exceed_the_bank_target(self):
         empty = self.model.pack(self.model.name, self.model.parent, [])

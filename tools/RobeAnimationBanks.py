@@ -177,6 +177,65 @@ class CompiledBridge:
         return struct.pack("<3I", 0, len(result), 0) + result
 
 
+def validate_motion_revision(before, after, allowed_clips):
+    """Permit named motion fixes without cloning an otherwise identical rig.
+
+    Comparing repacked native components preserves every other controller byte,
+    timing/event header, part ID, geometry bind and model property.
+    """
+    old, new = CompiledBridge(before), CompiledBridge(after)
+    allowed = set(allowed_clips)
+    if not allowed or not allowed <= set(old.clip_names):
+        raise ValueError("Motion revision must name existing animation clips")
+    if (old.name, old.parent, old.clip_names) != (new.name, new.parent, new.clip_names):
+        raise ValueError("Motion revision changed model identity, parent or clip inventory")
+    def unchanged(model):
+        return model.pack(model.name, model.parent,
+                          [clip for name, clip in zip(model.clip_names, model.clips) if name not in allowed])
+    if unchanged(old) != unchanged(new):
+        raise ValueError("Motion revision changed the skeleton or an unselected animation")
+
+
+def revise_motion(before, candidate, allowed_clips):
+    """Keep unselected compiled bytes, ignoring unused event-string padding.
+
+    The native compiler leaves bytes after an event name's NUL uninitialized.
+    Every meaningful byte must match. Even unused padding is preserved in the
+    result because unselected components are copied from the original model.
+    """
+    old, new = CompiledBridge(before), CompiledBridge(candidate)
+    allowed = set(allowed_clips)
+    if not allowed or not allowed <= set(old.clip_names):
+        raise ValueError("Motion revision must name existing animation clips")
+    if ((old.name, old.parent, old.clip_names) != (new.name, new.parent, new.clip_names) or
+            old.pack(old.name, old.parent, []) != new.pack(new.name, new.parent, [])):
+        raise ValueError("Motion revision changed the skeleton, model identity or clip inventory")
+
+    def comparable(clip):
+        data = clip.relocated(0, old.name)
+        events, count = struct.unpack_from("<II", data, 184)
+        for index in range(count):
+            start = events + index * 36 + 4
+            _name(data, start, 32)  # Reject unterminated/invalid native names.
+            end = start + 32
+            zero = data.index(0, start, end)
+            data[zero:end] = bytes(end - zero)
+        return data
+
+    clips = []
+    for name, original, proposed in zip(old.clip_names, old.clips, new.clips):
+        if name in allowed:
+            clips.append(proposed)
+            continue
+        if original.relocated(0, old.name) != proposed.relocated(0, old.name):
+            if comparable(original) != comparable(proposed):
+                raise ValueError(f"Motion revision changed unselected animation: {name}")
+        clips.append(original)
+    result = old.pack(old.name, old.parent, clips)
+    validate_motion_revision(before, result, allowed)
+    return bytes(result)
+
+
 def split(data, target_bytes=TARGET_BYTES):
     """Return head -> tail banks; never resample, truncate, or divide a clip."""
     if not 0 < target_bytes < LIMIT_BYTES:
