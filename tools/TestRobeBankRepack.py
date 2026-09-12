@@ -174,5 +174,36 @@ class RobeRepackPreflightTests(unittest.TestCase):
             repack.preflight(self.manifest)
 
 
+class RobeRepackStageTests(unittest.TestCase):
+    def test_reserved_stages_are_rejected_before_recovery_or_auditing(self):
+        for relative in ("nwsync-bank-install", "nwsync-bank-install/nested", "nwsync-bank-install.lock"):
+            with self.subTest(stage=relative), tempfile.TemporaryDirectory() as folder:
+                root = Path(folder).resolve()
+                stage = root / "output" / relative
+                stage.mkdir(parents=True)
+                receipt = stage / "audit.json"
+                receipt.write_bytes(b"completed audit to preserve")
+                with patch.object(repack.robes, "ROOT", root), \
+                        patch("sys.argv", ["repack", "--apply", "--stage", str(stage)]), \
+                        patch.object(repack, "recover_bank_install") as recover, \
+                        patch.object(repack, "preflight") as preflight:
+                    with self.assertRaisesRegex(ValueError, "reserved.*install"):
+                        repack.main()
+                    recover.assert_not_called()
+                    preflight.assert_not_called()
+                self.assertEqual(b"completed audit to preserve", receipt.read_bytes())
+
+    def test_stage_must_stay_inside_repository_output(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder).resolve()
+            with patch.object(repack.robes, "ROOT", root):
+                for stage in (root, root / "sw_anim_m", root / "output/../../outside"):
+                    with self.subTest(stage=stage), self.assertRaisesRegex(ValueError, "inside.*output"):
+                        repack.validate_stage(stage)
+                stage = root / "output/nwsync-bank-install-audit/nested"
+                self.assertEqual(stage, repack.validate_stage(stage))
+                self.assertFalse(stage.exists())
+
+
 if __name__ == "__main__":
     unittest.main()
