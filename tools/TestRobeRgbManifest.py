@@ -47,6 +47,28 @@ class RobeRgbManifestTests(unittest.TestCase):
         self.assertEqual(families.bridge(key, "pmh_ra001"), g.name_bridge(captured[key], "pmh_ra001"))
         self.assertEqual(b"rg_rgb_bridge pmh_ra001", g.name_bridge(b"rg_rgb_bridge rgb_bridge", "pmh_ra001"))
 
+    def test_explicit_motion_revision_reuses_only_an_unambiguous_verified_family(self):
+        fixtures = {key.replace("body", "pmh0"): value.replace("body", "pmh0")
+                    for key, value in skeleton_tests.IndependentRobeSkeletonTests().fixtures().items()}
+        families = rig.Families(fixtures.get)
+        key = families.add("pmh0", fixtures["garment"])
+        prior = {"animation_bridges": {key + "/old": "pmh_ra001"}}
+        verified = []
+        versions, updated = g.version_animation_families(families, prior, lambda *_: False,
+            verify_revision=lambda *args: verified.append(args))
+        self.assertEqual([(key, "pmh_ra001", families.bridge(key, "rgb_bridge"))], verified)
+        self.assertEqual({versions[key]: "pmh_ra001"}, updated["animation_bridges"])
+        self.assertEqual({key + "/old": "pmh_ra001"}, prior["animation_bridges"])
+        for entries in ({}, {key + "/old": "pmh_ra001", key + "/older": "pmh_ra002"}):
+            with self.assertRaisesRegex(ValueError, "one existing version"):
+                g.version_animation_families(families, {"animation_bridges": entries}, lambda *_: False,
+                    verify_revision=lambda *_: self.fail("Ambiguous revisions must not be attempted"))
+        def reject(*_):
+            raise ValueError("unrelated change")
+        with self.assertRaisesRegex(ValueError, "unrelated change"):
+            g.version_animation_families(families, prior, lambda *_: False, verify_revision=reject)
+        self.assertEqual({key + "/old": "pmh_ra001"}, prior["animation_bridges"])
+
     def test_current_apply_exits_before_creating_a_build(self):
         with patch.object(sys, "argv", ["generate", "--apply", "--game-data", "game"]), \
                 patch.object(g, "check", return_value=[]), \

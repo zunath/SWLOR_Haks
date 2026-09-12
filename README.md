@@ -30,6 +30,13 @@ python tools/GenerateRobeRgbModels.py --game-data "<NWN install>/data" --apply
 python tools/GenerateRobeRgbModels.py --check
 ```
 
+When correcting an existing animation without changing the rig, pass
+`--update-animation <internal-name>` to generation; repeat for each intentionally
+changed clip. This reuses the existing shared banks only after proving that the
+compiled skeleton and all unselected animations are byte-identical. Changes to
+the skeleton, other clips, or an ambiguous prior family are rejected. Structural
+changes should use the ordinary versioned generation workflow above.
+
 The generator audits authored geometry, skin bindings, and compiler round trips
 before updating `sw_pt_root`, `sw_pt_robe`, `roberender.2da`, and `phenotype.2da`.
 Build and deploy all three affected HAKs together. Keep `RobeRgb_` phenotype rows
