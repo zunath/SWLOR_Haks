@@ -22,6 +22,27 @@ import RobeAnimations as animations
 import RobePoseAudit as poses
 
 
+INSTALL_DIRECTORY = "nwsync-bank-install"
+
+
+def reject_install_stage(stage):
+    """Reject reserved paths before recovery can remove any existing staged audit."""
+    stage = stage.resolve()
+    output = (robes.ROOT / "output").resolve()
+    transaction = output / INSTALL_DIRECTORY
+    if stage.is_relative_to(transaction) or stage.is_relative_to(transaction.with_suffix(".lock")):
+        raise ValueError("Staging directory overlaps a reserved animation install path")
+
+
+def validate_stage(stage):
+    """Check general staging constraints only after a pending install is recovered."""
+    stage = stage.resolve()
+    if not stage.is_relative_to((robes.ROOT / "output").resolve()):
+        raise ValueError("Use a staging directory inside this repository's output folder")
+    reject_install_stage(stage)
+    return stage
+
+
 def preflight(manifest):
     # Only these packaging modules may change without regenerating wearables.
     # The generator also authors poses and skins, so its entire fingerprint
@@ -141,7 +162,7 @@ def _install_directory(root):
     if output.resolve() != output or (output.exists() and not output.is_dir()):
         raise ValueError("Animation install output directory is redirected")
     output.mkdir(exist_ok=True)
-    directory = output / "nwsync-bank-install"
+    directory = output / INSTALL_DIRECTORY
     if directory.resolve() != directory:
         raise ValueError("Animation install transaction directory is redirected")
     return directory
@@ -274,6 +295,8 @@ def install_banks(sources, updated, initial):
     root = robes.ROOT.resolve()
     prior = json.loads(initial)
     with _install_lock(root) as directory:
+        if any(path.resolve().is_relative_to(directory) for path in sources.values()):
+            raise ValueError("Staged sources overlap the reserved animation install directory")
         _recover_install(root, directory)
         manifest_path = _install_destination(root, "tools/RobeRgbModels.json")
         if manifest_path.read_bytes() != initial:
@@ -333,7 +356,10 @@ def main():
     parser.add_argument("--jobs", type=int, default=2, choices=range(1, 5),
                         help="Bounded parallel validation workers (default: 2)")
     args = parser.parse_args()
+    stage = (args.stage or robes.ROOT / "output" / f"nwsync-banks-{time.time_ns()}").resolve()
+    reject_install_stage(stage)
     recover_bank_install()
+    stage = validate_stage(stage)
     initial = robes.MANIFEST.read_bytes()
     manifest = json.loads(initial)
     packaging = preflight(manifest)
@@ -343,9 +369,6 @@ def main():
         raise ValueError("\n".join(errors))
     heads = [name for name in sorted(set(manifest["animation_bridges"].values()))
              if f"{robes.model_directory(name)}/{name}.mdl" in manifest["files"]]
-    stage = (args.stage or robes.ROOT / "output" / f"nwsync-banks-{time.time_ns()}").resolve()
-    if not stage.is_relative_to((robes.ROOT / "output").resolve()):
-        raise ValueError("Use a staging directory inside this repository's output folder")
     stage.mkdir(parents=True, exist_ok=True)
     input_manifest = stage / "manifest-input.json"
     input_manifest.write_bytes(initial)

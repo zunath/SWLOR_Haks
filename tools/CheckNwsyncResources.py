@@ -2,13 +2,16 @@
 """Reject oversized individual HAK resources before packaging for NWSync."""
 import json
 from pathlib import Path
+import re
 
 from RobeAnimationBanks import LIMIT_BYTES
 
 
 def oversized_resources(root):
     root = Path(root).resolve()
-    configuration = json.loads((root / "hakbuilder.json").read_text())
+    # Match GenerateTintMapAssets.load_hak_config without importing its image dependencies.
+    config_text = (root / "hakbuilder.json").read_text(encoding="utf-8-sig")
+    configuration = json.loads(re.sub(r",\s*([}\]])", r"\1", config_text))
     result = []
     for hak in configuration["HakList"]:
         directory = (root / hak["Path"]).resolve()
