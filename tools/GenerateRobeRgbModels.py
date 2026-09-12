@@ -407,7 +407,8 @@ def allocate_animation_bridges(groups, active, manifest, expected_allocation=Non
     return result
 
 
-def version_animation_families(families, manifest, verify_legacy, native_bodies=None, save_source=None):
+def version_animation_families(families, manifest, verify_legacy, native_bodies=None, save_source=None,
+                               verify_revision=None):
     """A bridge's paths, bind transforms and clips are immutable for saved roots."""
     prior = dict(manifest.get("animation_bridges", {}))
     versions = {}
@@ -424,6 +425,13 @@ def version_animation_families(families, manifest, verify_legacy, native_bodies=
         # binary's complete geometry/controllers with this exact source.
         if version not in prior and key in prior and verify_legacy(key, prior[key]):
             prior[version] = prior.pop(key)
+        if version not in prior and verify_revision is not None:
+            candidates = [old for old in prior if old.startswith(key + "/")]
+            if len(candidates) != 1:
+                raise ValueError(f"Motion revision requires one existing version of {key}")
+            previous = candidates[0]
+            verify_revision(key, prior[previous], source)
+            prior[version] = prior.pop(previous)
         versions[key] = version
     return versions, {**manifest, "animation_bridges": prior}
 
@@ -513,9 +521,15 @@ def main():
     parser.add_argument("--model", action="append", help="Restrict an experimental build; cannot apply a partial catalog")
     parser.add_argument("--stage", type=Path, help="Reuse a previous decompilation staging directory")
     parser.add_argument("--force", action="store_true", help="Run generation even when the complete installed catalog is current")
+    parser.add_argument("--update-animation", action="append", default=[], metavar="CLIP",
+                        help="Revise an existing named clip in place; reject changes to the skeleton or any other clip")
     parser.add_argument("--verify-existing-motion", action="store_true",
                         help="Require every existing wearer and garment animation to retain its motion and bind")
     args = parser.parse_args()
+    if any(not re.fullmatch(r"[a-z][a-z0-9_]{0,15}", name) for name in args.update_animation):
+        parser.error("--update-animation requires an internal animation name of at most 16 characters")
+    if args.update_animation and (args.check or args.model or args.verify_existing_motion):
+        parser.error("--update-animation requires a complete build without --check or --verify-existing-motion")
     if args.check:
         errors = check()
         if errors:
@@ -670,12 +684,26 @@ def main():
     source_directory = stage / "bridge_sources"
     source_directory.mkdir(exist_ok=True)
     source_paths = {}
+    revised_binaries = {}
+    revision_directory = stage / "motion_revisions"
+    for directory in (revision_directory / "input", revision_directory / "binary"):
+        directory.mkdir(parents=True, exist_ok=True)
+    def verify_revision(key, name, source):
+        old = owned_animation_bytes(name, prior_manifest, active)
+        source_path = revision_directory / "input" / f"{name}.mdl"
+        source_path.write_bytes(name_bridge(source, name))
+        path = revision_directory / "binary" / source_path.name
+        mdl.run_compiler(compiler, stage, ["-cne", str(source_path), str(path.parent) + "/"], "motion_revision.log")
+        path.write_bytes(banks.revise_motion(old, path.read_bytes(), args.update_animation))
+        revised_binaries[name] = path
+        print(f"Verified in-place motion revision for {name}.", flush=True)
     def save_bridge_source(key, source):
         path = source_directory / (hashlib.sha256(key.encode()).hexdigest() + ".mdl")
         path.write_bytes(source)
         source_paths[key] = path
     versions, prior_manifest = version_animation_families(
-        families, prior_manifest, verify_legacy_bridge, dependencies, save_bridge_source)
+        families, prior_manifest, verify_legacy_bridge, dependencies, save_bridge_source,
+        verify_revision if args.update_animation else None)
     versioned_groups = {versions[key]: group for key, group in families.groups.items()}
     animation_names = allocate_animation_bridges(versioned_groups, active, prior_manifest)
     for key, group in sorted(families.groups.items()):
@@ -739,6 +767,9 @@ def main():
                          else previous.read_bytes() if previous is not None else b"")
         relative = f"{model_directory(name)}/{name}.mdl"
         path = stage / "binary" / f"{name}.mdl"
+        if name in revised_binaries:
+            path.write_bytes(revised_binaries[name].read_bytes())
+            return
         ownership_hash = (bank_record["source_sha256"] if bank_record is not None else
                           prior_manifest.get("files", {}).get(relative))
         if build_cache.reusable(prior_manifest.get("model_builds", {}).get(name), key, previous_data,
