@@ -1,0 +1,150 @@
+# NeverBlender 5.0.0|Blender 5.0.0|2026-09-04
+filedependancy unknown
+newmodel wswglsbr_t_132
+setsupermodel wswglsbr_t_132 null
+classification CHARACTER
+setanimationscale 1.0
+beginmodelgeom wswglsbr_t_132
+node dummy wswglsbr_t_132
+  parent null
+endnode
+node trimesh g_wswglsbr_t_132
+  parent wswglsbr_t_132
+  position  0.00000  0.00000  0.00000
+  orientation  0.00000  1.00000  0.00000  0.00000
+  wirecolor 1.00 1.00 1.00
+  bitmap null
+  shininess 1
+  ambient 0.22 0.03 0.53
+  diffuse 0.22 0.03 0.53
+  specular 0.00 0.00 0.00
+  selfillumcolor 0.00 0.00 0.00
+  render 0
+  shadow 0
+  tilefade 0
+  verts 8
+    -0.01695  1.18233 -0.01728
+    -0.01695  1.18233  0.01856
+     0.01759  1.18233  0.01856
+     0.01759  1.18233 -0.01728
+    -0.01695  0.09860 -0.01729
+     0.01759  0.09860 -0.01729
+     0.01759  0.09860  0.01856
+    -0.01695  0.09860  0.01856
+  faces 12
+    0 1 2 1  0 0 0 0
+    2 3 0 1  0 0 0 0
+    4 5 6 1  0 0 0 0
+    6 7 4 1  0 0 0 0
+    0 3 5 2  0 0 0 0
+    5 4 0 2  0 0 0 0
+    3 2 6 4  0 0 0 0
+    6 5 3 4  0 0 0 0
+    2 1 7 2  0 0 0 0
+    7 6 2 2  0 0 0 0
+    1 0 4 4  0 0 0 0
+    4 7 1 4  0 0 0 0
+endnode
+node emitter NWNEmitter02
+  parent wswglsbr_t_132
+  position  0.00032  0.41270  0.00064
+  orientation  0.00000  1.00000  0.00000  1.57079
+  xsize 0.00
+  ysize 1.93
+  update Fountain
+  render Billboard_to_Local_Z
+  blend Lighten
+  spawntype 0
+  renderorder 0
+  birthrate 60
+  lifeexp 0.05
+  mass 0.00
+  velocity 0.00
+  randvel 0.00
+  particlerot 0.00
+  spread 0.00
+  splat 0
+  affectedbywind 0
+  colorstart 1.00 1.00 1.00
+  colorend 1.00 1.00 1.00
+  alphastart 1.00
+  alphaend 1.00
+  sizestart 0.13
+  sizeend 0.13
+  sizestart_y 0.68
+  sizeend_y 0.68
+  bounce 0
+  bounce_co 0.00
+  blurlength 8.00
+  deadspace 0.00
+  texture lsbr_012
+  twosidedtex 1
+  m_istinted 0
+  xgrid 0
+  ygrid 0
+  fps 0
+  framestart 0
+  frameend 0
+  random 0
+  p2p 0
+  blastradius 0.00
+  blastlength 0.00
+  inherit 1
+  inheritvel 0
+  inherit_local 0
+  inherit_part 0
+endnode
+node emitter NWNEmitter03
+  parent wswglsbr_t_132
+  position  0.00032  0.40546  0.00064
+  orientation  0.00000  1.00000  0.00000  0.00000
+  xsize 0.00
+  ysize 0.00
+  update Fountain
+  render Billboard_to_Local_Z
+  blend Lighten
+  spawntype 0
+  renderorder 0
+  birthrate 60
+  lifeexp 0.05
+  mass 0.00
+  velocity 0.00
+  randvel 0.00
+  particlerot 0.00
+  spread 0.00
+  splat 0
+  affectedbywind 0
+  colorstart 1.00 1.00 1.00
+  colorend 1.00 1.00 1.00
+  alphastart 1.00
+  alphaend 1.00
+  sizestart 0.13
+  sizeend 0.13
+  sizestart_y 0.68
+  sizeend_y 0.68
+  bounce 0
+  bounce_co 0.00
+  blurlength 8.00
+  deadspace 0.00
+  texture lsbr_012
+  twosidedtex 1
+  m_istinted 0
+  xgrid 0
+  ygrid 0
+  fps 0
+  framestart 0
+  frameend 0
+  random 0
+  p2p 0
+  blastradius 0.00
+  blastlength 0.00
+  inherit 1
+  inheritvel 0
+  inherit_local 0
+  inherit_part 0
+endnode
+
+
+
+endmodelgeom wswglsbr_t_132
+donemodel wswglsbr_t_132
