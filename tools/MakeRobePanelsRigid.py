@@ -3,6 +3,8 @@
 Zero-constraint panels have no authored cloth movement. Keeping them on the
 dangly renderer can detach the panel from its animated parent. Convert only
 those panels; keep every vertex, material, joint, animation and skin binding.
+Only compiled inputs support the binding-preservation audit. ASCII targets are
+reported and left untouched; compiled targets in the same robe still proceed.
 """
 import argparse
 import hashlib
@@ -54,6 +56,17 @@ def targets(robe, manifest):
     return sorted(paths)
 
 
+def compiled_targets(paths):
+    selected = {}
+    for path in paths:
+        data = path.read_bytes()
+        if not mdl.binary(data):
+            print(f"Skipping ASCII model {path.name}: compiled input is required for binding preservation.")
+            continue
+        selected[path] = data
+    return selected
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--robe", type=int, required=True)
@@ -62,6 +75,10 @@ def main():
     args = parser.parse_args()
     manifest_bytes = MANIFEST.read_bytes()
     manifest = json.loads(manifest_bytes)
+    selected = compiled_targets(targets(args.robe, manifest))
+    if not selected:
+        print("No compiled targets to convert; ASCII models were left untouched.")
+        return
     active = tint.find_active_models()
     stock = tint.read_stock_key_models(args.game_data)
     stage = ROOT / "output" / f"rigid-robe-{args.robe}-{time.time_ns()}"
@@ -84,8 +101,7 @@ def main():
         load(mdl.supermodel(data))
         (stage / f"{name}.mdl").write_bytes(data)
     changed = {}
-    for path in targets(args.robe, manifest):
-        data = path.read_bytes()
+    for path, data in selected.items():
         model = poses.Model(data, False)
         if not any(model.uint(node[4] + 108) & 0x100 for node in model.nodes):
             continue
@@ -105,7 +121,7 @@ def main():
         (stage / "input" / path.name).write_bytes(prepared)
         changed[path] = (data, encoded, panels)
     if not changed:
-        print("No fully constrained dangly panels remain.")
+        print("No compiled models require rigid-panel conversion.")
         return
     print(f"Compiling {len(changed)} robe models. Staging: {stage}", flush=True)
     mdl.run_compiler(compiler, stage, ["-cne", str(stage / "input/*.mdl"), str(stage / "binary") + "/"], "compile.log")

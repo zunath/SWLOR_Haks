@@ -1,6 +1,11 @@
 """Keep static robe 236 torso panels off the cloth-physics renderer."""
 import json
+import io
+from contextlib import redirect_stdout
+from pathlib import Path
+import tempfile
 import unittest
+from unittest.mock import patch
 
 import CompileModels as mdl
 import MakeRobePanelsRigid as rigid
@@ -8,6 +13,52 @@ import RobePoseAudit as poses
 
 
 class RigidRobePanelTests(unittest.TestCase):
+    def test_mixed_targets_skip_ascii_and_retain_compiled_models(self):
+        with tempfile.TemporaryDirectory() as directory:
+            ascii_path = Path(directory) / "pmh0_robe020.mdl"
+            binary_path = Path(directory) / "pmh200.mdl"
+            source = self.source().encode("ascii")
+            binary = (rigid.ROOT / "sw_pt_root/pmh200.mdl").read_bytes()
+            ascii_path.write_bytes(source)
+            binary_path.write_bytes(binary)
+            output = io.StringIO()
+            with redirect_stdout(output):
+                selected = rigid.compiled_targets([ascii_path, binary_path])
+            self.assertEqual({binary_path: binary}, selected)
+            self.assertIn("Skipping ASCII model pmh0_robe020.mdl", output.getvalue())
+            self.assertEqual(source, ascii_path.read_bytes())
+
+    def test_ascii_only_apply_exits_without_compiler_or_file_changes(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "pmh0_robe020.mdl"
+            source = self.source().encode("ascii")
+            path.write_bytes(source)
+            output = io.StringIO()
+            with patch("sys.argv", ["rigid", "--robe", "20", "--game-data", "unused", "--apply"]), \
+                    patch.object(rigid, "targets", return_value=[path]), \
+                    patch.object(mdl, "prepare_compiler") as compiler, \
+                    patch.object(poses, "Model") as model, redirect_stdout(output):
+                rigid.main()
+            compiler.assert_not_called()
+            model.assert_not_called()
+            self.assertEqual(source, path.read_bytes())
+            self.assertEqual([path], list(Path(directory).iterdir()))
+            self.assertIn("No compiled targets", output.getvalue())
+
+    def test_existing_ascii_robe_targets_are_reported_and_excluded(self):
+        manifest = json.loads(rigid.MANIFEST.read_text())
+        for robe in (20, 211, 212, 213, 254):
+            with self.subTest(robe=robe):
+                paths = rigid.targets(robe, manifest)
+                ascii_paths = [path for path in paths if not mdl.binary(path.read_bytes())]
+                self.assertTrue(ascii_paths)
+                output = io.StringIO()
+                with redirect_stdout(output):
+                    selected = rigid.compiled_targets(paths)
+                self.assertEqual(set(paths) - set(ascii_paths), set(selected))
+                for path in ascii_paths:
+                    self.assertIn(f"Skipping ASCII model {path.name}", output.getvalue())
+
     def source(self, constraint="0"):
         return f"""node danglymesh coat_top
 parent torso_g
