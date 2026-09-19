@@ -36,6 +36,10 @@ class RobeAnimationTests(unittest.TestCase):
         animation = next(robe.ANIMATION.finditer(result))
         tracks = {n: p for _, n, p in mdl.parse_nodes(animation[3])}
         self.assertIn("orientationkey", tracks["head_g"])
+        # A bridge must not bake body bind offsets into the inherited animation:
+        # wearers can have different head heights and native idle only rotates it.
+        for channel in ("position", "positionkey", "scale", "scalekey"):
+            self.assertNotIn(channel, tracks["head_g"])
         self.assertIn("positionkey", tracks["lthigh_g"])
         self.assertIn("orientationkey", tracks["coat_tail"])
         self.assertEqual(tracks["coat_tail"]["parent"], ["rootdummy"])
