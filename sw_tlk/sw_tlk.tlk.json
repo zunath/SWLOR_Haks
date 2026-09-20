@@ -12039,7 +12039,7 @@
     },
     {
       "id": 3009,
-      "text": "Deal weapon DMG + 35 to all enemies in a 5m x 5m cone. Costs 40% HP which is reduced by 1% per MGT. (Minimum 10%)"
+      "text": "Deal weapon DMG + 35 to all enemies in a 5m x 5m cone. Costs 40% HP which is reduced by 1 percentage point per MGT. (Minimum 10%)"
     },
     {
       "id": 3010,
@@ -12915,7 +12915,7 @@
     },
     {
       "id": 3228,
-      "text": "Grants a single ally temporary HP equal to 6% of the target's maximum HP plus WIL scaling for 30 seconds."
+      "text": "Grants an ally or yourself temporary HP equal to 6% of the target's maximum HP plus WIL scaling for 30 seconds."
     },
     {
       "id": 3229,
@@ -12923,7 +12923,7 @@
     },
     {
       "id": 3230,
-      "text": "Grants a single ally temporary HP equal to 9% of the target's maximum HP plus WIL scaling for 30 seconds."
+      "text": "Grants an ally or yourself temporary HP equal to 9% of the target's maximum HP plus WIL scaling for 30 seconds."
     },
     {
       "id": 3231,
@@ -12931,7 +12931,7 @@
     },
     {
       "id": 3232,
-      "text": "Grants a single ally temporary HP equal to 12% of the target's maximum HP plus WIL scaling for 30 seconds."
+      "text": "Grants an ally or yourself temporary HP equal to 12% of the target's maximum HP plus WIL scaling for 30 seconds."
     },
     {
       "id": 3233,
@@ -12939,7 +12939,7 @@
     },
     {
       "id": 3234,
-      "text": "Grants a single ally temporary HP equal to 15% of the target's maximum HP plus WIL scaling for 30 seconds."
+      "text": "Grants an ally or yourself temporary HP equal to 15% of the target's maximum HP plus WIL scaling for 30 seconds."
     },
     {
       "id": 3235,
@@ -15227,7 +15227,7 @@
     },
     {
       "id": 3806,
-      "text": "While active, gain +25% Attack and +10% critical chance, but each attack you make deals 45% of the damage back to you. Damage reduced by 1% per MGT. (Minimum 20%)"
+      "text": "While active, gain +25% Attack and +10% critical chance, but each attack you make deals 45% of the damage back to you. Damage reduced by 1 percentage point per MGT. (Minimum 20%)"
     },
     {
       "id": 3807,
@@ -15287,7 +15287,7 @@
     },
     {
       "id": 3821,
-      "text": "For 45 seconds, damage that would drop the target below 1 HP is prevented once and the target gains temporary HP equal to 15% of maximum HP plus WIL scaling."
+      "text": "For 45 seconds, damage that would drop an ally or yourself below 1 HP is prevented once and the target gains temporary HP equal to 15% of maximum HP plus WIL scaling."
     },
     {
       "id": 3822,
@@ -16067,7 +16067,7 @@
     },
     {
       "id": 4016,
-      "text": "Control powers that grant temporary HP reflect 8% of force and energy damage taken, plus WIL scaling, back to the attacker while the temporary HP remains."
+      "text": "Control powers that grant temporary HP reflect 8% of force and energy damage taken, plus WIL scaling, back to the attacker while the temporary HP remains. Whoever holds that temporary HP, including you, deals +8% weapon and Force damage for its duration."
     },
     {
       "id": 4017,
@@ -20883,7 +20883,7 @@
     },
     {
       "id": 5220,
-      "text": "Control powers that restore HP cause affected allies to restore 1 STM and 1 FP every 6 seconds for 30 seconds. This benefit does not trigger when you target yourself."
+      "text": "Control powers that restore HP cause affected allies to restore 1 STM and 1 FP every 6 seconds for 30 seconds. Targeting yourself restores 1 FP every 6 seconds instead."
     },
     {
       "id": 5221,
