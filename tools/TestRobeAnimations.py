@@ -24,7 +24,7 @@ class RobeAnimationTests(unittest.TestCase):
         body_nodes = node("rootdummy", "body") + node("head_g", "rootdummy", "position 0 0 2") + node("lthigh_g", "rootdummy")
         body_tracks = node("body", "null") + node("rootdummy", "body") + node("head_g", "rootdummy", "orientationkey 2\n0 1 0 0 0\n1 1 0 0 0.2") + node("lthigh_g", "rootdummy", "positionkey 2\n0 0 0 0\n1 0 1 0")
         overlay_nodes = node("rootdummy", "coat") + node("coat_tail", "rootdummy")
-        overlay_tracks = node("coat", "null") + node("rootdummy", "coat") + node("coat_tail", "rootdummy", "orientationkey 2\n0 0 1 0 0\n2 0 1 0 1")
+        overlay_tracks = node("coat", "null") + node("rootdummy", "coat") + node("coat_tail", "rootdummy", "orientationkey 2\n0 0 1 0 0\n2 0 1 0 1\nposition 0 0 1")
         return {"body": model("body", "null", body_nodes, clip("body", 1, body_tracks)),
                 "coat": model("coat", "body", overlay_nodes, clip("coat", 2, overlay_tracks)),
                 "garment": model("garment", "coat", node("rootdummy", "garment"))}
@@ -37,10 +37,12 @@ class RobeAnimationTests(unittest.TestCase):
         tracks = {n: p for _, n, p in mdl.parse_nodes(animation[3])}
         self.assertIn("orientationkey", tracks["head_g"])
         # A bridge must not bake body bind offsets into the inherited animation:
-        # wearers can have different head heights and native idle only rotates it.
-        for channel in ("position", "positionkey", "scale", "scalekey"):
-            self.assertNotIn(channel, tracks["head_g"])
-        self.assertIn("positionkey", tracks["lthigh_g"])
+        # wearers have different proportions and native idle only rotates bones.
+        for bone in ("head_g", "lthigh_g"):
+            for channel in ("position", "positionkey", "scale", "scalekey"):
+                self.assertNotIn(channel, tracks[bone], bone)
+        # Garment helpers are not wearer bones and keep their authored offsets.
+        self.assertIn("position", tracks["coat_tail"])
         self.assertIn("orientationkey", tracks["coat_tail"])
         self.assertEqual(tracks["coat_tail"]["parent"], ["rootdummy"])
 

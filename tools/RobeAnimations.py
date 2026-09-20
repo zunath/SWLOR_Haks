@@ -9,6 +9,13 @@ import CompileModels as mdl
 ANIMATION = re.compile(r"(?im)^\s*newanim\s+(\S+)\s+(\S+)\s*$([\s\S]*?)^\s*doneanim[^\n]*")
 NODE = re.compile(r"(?im)^\s*node\s+(\S+)\s+(\S+)\s*$([\s\S]*?)^\s*endnode\b")
 TRANSFORMS = {"position", "orientation", "scale"}
+# A bridge is shared by a whole garment family, while each wearer keeps its own
+# bind pose. Copying a bone's offset or scale into the bridge would stamp the
+# source body's proportions onto every other appearance, and the replacement
+# latches because native idle animates rotation only.
+WEARER_BONES = {"torso_g", "pelvis_g", "neck_g", "head_g"} | {
+    f"{side}{bone}_g" for side in "lr"
+    for bone in ("bicep", "forearm", "hand", "thigh", "shin", "foot")}
 
 
 def binary_parts(data, root=None):
@@ -190,13 +197,18 @@ def tracks(animation, owner, names, duration):
     for _, node, props in mdl.parse_nodes(animation[3]):
         if node == owner or node not in names:
             continue
+        bone = node.lower() in WEARER_BONES
         values = {}
         for key, value in props.items():
             if key in TRANSFORMS:
+                if bone and key != "orientation":
+                    continue
                 values[key] = value
             elif key.endswith("key"):
                 if key.removesuffix("key") not in TRANSFORMS:
                     raise ValueError(f"{owner}/{node}: unsupported garment controller {key}")
+                if bone and key != "orientationkey":
+                    continue
                 values[key] = [[format(float(row[0]) * factor, '.9g'), *row[1:]] for row in value]
         result[node] = values
     return result
