@@ -1,4 +1,4 @@
-# SWLOR compiled animation source v1 dafdc4206e857ecff5cde65426db87452ee57a6f6d3d8ae47854842bde96f6d6 ac9f1afdf9f887361dfc0b63dbd201f74ac2bcaa4c368eebea595dc1ccd053d1
+# SWLOR compiled animation source v1 0f49fcf2d625ca109e493d6e7b795fe883550abea4c1c25369f3f02280bbef1d 29e223e110f2baac5d54aef556c08e4b93b8e27e4cae37ad44eb51b850dfc607
 # SWLOR authored animations for a_ba_non_combat
 # Original CUSTOM46 saber throw retained; only rootdummy position tracks
 # in custom46start/lp/end lower the bent-knee stance to floor contact.
@@ -10897,8 +10897,6 @@ newanim custom59end a_ba_non_combat
     specular 0 0 0
     shininess 1
     lightmapped 179
-    scale 1
-    position 0.03062 -0.01647 -0.46094
     orientationkey 2
          0.0000000    0.9944823    0.1020402   -0.0243501   -0.3678700
          0.3330000    0.0000000    0.0000000    0.0000000    0.0000000
@@ -10932,8 +10930,6 @@ newanim custom59end a_ba_non_combat
     specular 0 0 0
     shininess 1
     lightmapped 179
-    scale 1
-    position -0.03062 -0.01647 -0.46094
     orientationkey 2
          0.0000000    0.9582554   -0.2788887    0.0629897   -0.4629800
          0.3330000    0.0000000    0.0000000    0.0000000    0.0000000
@@ -10945,7 +10941,6 @@ newanim custom59end a_ba_non_combat
     specular 0 0 0
     shininess 1
     lightmapped 179
-    position -0.02043 -0.06663 -0.42741
     orientationkey 2
          0.0000000   -0.6897175   -0.7218575    0.0566698   -0.2266700
          0.3330000    0.0000000    0.0000000    0.0000000    0.0000000
@@ -11114,8 +11109,6 @@ newanim custom59lp a_ba_non_combat
     specular 0 0 0
     shininess 1
     lightmapped 179
-    scale 1
-    position 0.03062 -0.01647 -0.46094
     orientation 0.9944823 0.1020402 -0.02435006 -0.36787
   endnode
   node trimesh lfoot_g
@@ -11143,8 +11136,6 @@ newanim custom59lp a_ba_non_combat
     specular 0 0 0
     shininess 1
     lightmapped 179
-    scale 1
-    position -0.03062 -0.01647 -0.46094
     orientation 0.9582554 -0.2788887 0.0629897 -0.46298
   endnode
   node trimesh rfoot_g
@@ -11154,7 +11145,6 @@ newanim custom59lp a_ba_non_combat
     specular 0 0 0
     shininess 1
     lightmapped 179
-    position -0.02043 -0.06663 -0.42741
     orientation -0.6897175 -0.7218575 0.05666981 -0.22667
   endnode
 doneanim custom59lp a_ba_non_combat
@@ -11356,10 +11346,6 @@ newanim custom59start a_ba_non_combat
     specular 0 0 0
     shininess 1
     lightmapped 179
-    scalekey 1
-         0.6330000    1.0000000
-    positionkey 1
-         0.6330000    0.0306200   -0.0164700   -0.4609400
     orientationkey 2
          0.0000000    0.0000000    0.0000000    0.0000000    0.0000000
          0.6330000    0.9944823    0.1020402   -0.0243501   -0.3678700
@@ -11393,10 +11379,6 @@ newanim custom59start a_ba_non_combat
     specular 0 0 0
     shininess 1
     lightmapped 179
-    scalekey 1
-         0.6330000    1.0000000
-    positionkey 1
-         0.6330000   -0.0306200   -0.0164700   -0.4609400
     orientationkey 2
          0.0000000    0.0000000    0.0000000    0.0000000    0.0000000
          0.6330000    0.9582554   -0.2788887    0.0629897   -0.4629800
@@ -11408,8 +11390,6 @@ newanim custom59start a_ba_non_combat
     specular 0 0 0
     shininess 1
     lightmapped 179
-    positionkey 1
-         0.6330000   -0.0204300   -0.0666300   -0.4274100
     orientationkey 2
          0.0000000    0.0000000    0.0000000    0.0000000    0.0000000
          0.6330000   -0.6897175   -0.7218575    0.0566698   -0.2266700
