@@ -47,7 +47,8 @@ class RigidRobePanelTests(unittest.TestCase):
 
     def test_existing_ascii_robe_targets_are_reported_and_excluded(self):
         manifest = json.loads(rigid.MANIFEST.read_text())
-        for robe in (20, 211, 212, 213, 254):
+        # Robes 20 and 254 had ASCII riding copies until those became byte copies of their compiled base robes.
+        for robe in (211, 212, 213):
             with self.subTest(robe=robe):
                 paths = rigid.targets(robe, manifest)
                 ascii_paths = [path for path in paths if not mdl.binary(path.read_bytes())]

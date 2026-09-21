@@ -44,4 +44,33 @@ reserved permanently: saved creatures can refer to these native byte-sized IDs.
 The hash manifest in `tools/RobeRgbModels.json` detects changed source models and
 stale generated outputs; the regular tint audit also runs this check.
 
+## Speeder rider models
+
+A mounted rider uses a riding phenotype: 22 for normal bodies and 24 for large
+bodies. Body parts fall back to the base body through `DefaultPhenoType`, but a
+robe animates through its own supermodel, so every robe needs a riding copy or it
+keeps standing and running while the body sits. `tools/GenerateSpeederRiderModels.py`
+generates the seated animation banks (`sw_cr_creature/*_rd.mdl`), a body root for
+every race and gender (`sw_pt_root/p??22.mdl`, `p??24.mdl`) and the robe copies
+(`sw_pt_robe/p??22_robeNNN.mdl`, `p??24_robeNNN.mdl`). The pose lives in
+`tools/SpeederRiderPose.json` as bone rotations only. The bike is a tail model,
+and the tail attachment cannot be keyed, so each riding root's bind pose cancels
+the seated pelvis tilt to keep the bike level.
+
+Run this after adding or changing any robe, body root, or base animation bank:
+
+```
+python -B tools/GenerateSpeederRiderModels.py --game-data "<NWN>/data" --apply
+python -B tools/GenerateTintMapAssets.py --import-stock-models --game-data "<NWN>/data"
+python -B tools/GenerateRobeRgbModels.py --apply --game-data "<NWN>/data"
+python -B -m unittest discover -s tools -p "TestSpeederRiderModels.py"
+```
+
+The second command adds `tintmap.2da` rows for the new robe names and binds tint
+materials on robes copied from the installed game; the third refreshes the RGB
+robe manifest, which records `tintmap.2da` and `phenotype.2da` as inputs. Rebuild
+`sw_cr_creature`, `sw_pt_root`, `sw_pt_robe` and `sw_2da` together. An exact RGB
+robe override is not rendered while mounted: generated RGB phenotypes exist for
+unmounted bodies only, so the robe shows its palette colors until the rider dismounts.
+
 If you have any questions or issues please contact us on the Discord.
