@@ -31,6 +31,15 @@ class InheritedBoneProportionTests(unittest.TestCase):
             reported += [f"{path.name}/{clip}/{bone}/{kind}" for clip, bone, kind in strip_tool.offenders(data)]
         self.assertEqual([], reported, "Inherited clips must key bone rotations and the root position only")
 
+    def test_robe_banks_keep_the_packed_native_layout(self):
+        unpacked = []
+        for path in strip_tool.chain_models(ROOT):
+            if strip_tool.banks.is_bank_name(path.stem.lower()):
+                data = path.read_bytes()
+                if strip_tool.pack(data) != data:
+                    unpacked.append(path.name)
+        self.assertEqual([], unpacked, "Run StripInheritedBoneTracks.py to close up stripped robe banks")
+
     def test_editable_bank_sources_match_the_installed_banks(self):
         stale = [path.name for path in strip_tool.chain_models(ROOT)
                  if strip_tool.binary(path.read_bytes()) and strip_tool.update_source(ROOT, path, check_only=True)]

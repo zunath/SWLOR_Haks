@@ -12,16 +12,27 @@ clip of the humanoid player chain, leaving rotations, root travel, part
 attachment dummies, geometry and all other controller bytes untouched. The edit
 is made in place at the same byte offsets so unrelated clips cannot be disturbed
 the way a full decompile/recompile round trip would disturb them.
+
+Robe animation banks are then closed up into the packed layout the native
+compiler writes, because RobeAnimationBanks splits, joins and repacks them and
+fails closed on anything else. Closing up deletes only the vacated controller
+slots and their orphaned floats: every surviving byte is copied and only offsets
+move. The robe manifest's digests are refreshed to match.
 """
 from __future__ import annotations
 
 import argparse
+from bisect import bisect_right
 import hashlib
+import json
 from pathlib import Path
 import re
 import struct
 
+import RobeAnimationBanks as banks
+
 ROOT = Path(__file__).resolve().parents[1]
+ROBE_MANIFEST = "tools/RobeRgbModels.json"
 SOURCE_MARKER = "# SWLOR compiled animation source v1 "
 # The skeleton the wearer owns. Part attachment dummies (head, lhand, rhand,
 # lforearm, impact) are not bones and are keyed by native clips as well.
@@ -107,6 +118,110 @@ def strip(data: bytes) -> bytes:
         result[12 + start:12 + start + count * 12] = b"".join(kept).ljust(count * 12, b"\0")
         struct.pack_into("<3I", result, node + 84, start, len(kept), len(kept))
     return bytes(result)
+
+
+def _controllers(data, node: int):
+    """A node's controller keys: (type, rows, time index, value index, columns, padding)."""
+    start, count, _ = struct.unpack_from("<3I", data, node + 84)
+    keys = [struct.unpack_from("<IHHHB3s", data, 12 + start + key * 12) for key in range(count)]
+    if any(columns & 0xF0 for _, _, _, _, columns, _ in keys):
+        raise ValueError("Unexpected native controller encoding")
+    return keys
+
+
+def _tracks(data):
+    """Each animation node's identity and controller values, independent of any offset."""
+    for clip, node in animation_nodes(data):
+        floats = 12 + uint(data, node + 96)
+        yield (clip, bytes(data[node:node + 64]), bytes(data[node + 76:node + 84]),
+               [(kind, rows, columns, padding,
+                 bytes(data[floats + time * 4:floats + (time + rows) * 4]),
+                 bytes(data[floats + values * 4:floats + (values + rows * columns) * 4]))
+                for kind, rows, time, values, columns, padding in _controllers(data, node)])
+
+
+def pack(data: bytes) -> bytes:
+    """Close up a stripped robe bank into the packed layout of the native compiler.
+
+    The compiler writes a node's keys directly before its floats, and each
+    controller's times and values as consecutive blocks in key order. Removing
+    a controller therefore leaves vacated key slots between the two arrays and
+    floats that no key references. Both are deleted and the offsets behind them
+    moved; nothing else is rewritten. A packed bank is returned unchanged.
+    """
+    result = bytearray(data)
+    pointers = [84, 132]  # Geometry root and the animation offset array.
+    roots = [uint(result, 84)]
+    for index in range(uint(result, 136)):
+        entry = 12 + uint(result, 132) + index * 4
+        animation = 12 + uint(result, entry)
+        pointers += [entry, animation + 72, animation + 184]
+        roots.append(uint(result, animation + 72))
+    removed, pending, visited = [], roots, set()
+    while pending:
+        pointer = pending.pop()
+        node = pointer + 12
+        if pointer in visited or node + 112 > len(result):
+            raise ValueError("Repeated or out-of-range native node")
+        visited.add(pointer)
+        children, child_count, _ = struct.unpack_from("<3I", result, node + 72)
+        pointers += [node + 72, node + 84, node + 96]
+        pointers += [12 + children + child * 4 for child in range(child_count)]
+        pending.extend(uint(result, 12 + children + child * 4) for child in range(child_count))
+        start, count, _ = struct.unpack_from("<3I", result, node + 84)
+        floats, float_count, float_allocated = struct.unpack_from("<3I", result, node + 96)
+        if float_count != float_allocated or (float_count and not start):
+            raise ValueError("Unexpected native controller arrays")
+        # Vacated key slots sit between the last remaining key and the floats.
+        slots = 12 + start + count * 12
+        vacated = 12 + floats - slots if float_count else 0
+        if vacated < 0 or vacated % 12 or any(result[slots:slots + vacated]):
+            raise ValueError("Unexpected native controller arrays")
+        if vacated:
+            removed.append((slots, slots + vacated))
+        cursor = orphaned = 0
+        for key, (kind, rows, time, values, columns, padding) in enumerate(_controllers(result, node)):
+            if time < cursor or values != time + rows:
+                raise ValueError("Unexpected native controller float layout")
+            if time > cursor:
+                removed.append((12 + floats + cursor * 4, 12 + floats + time * 4))
+                orphaned += time - cursor
+            struct.pack_into("<IHHHB3s", result, 12 + start + key * 12,
+                             kind, rows, time - orphaned, values - orphaned, columns, padding)
+            cursor = values + rows * columns
+        if cursor > float_count:
+            raise ValueError("Unexpected native controller float layout")
+        if cursor < float_count:
+            removed.append((12 + floats + cursor * 4, 12 + floats + float_count * 4))
+        struct.pack_into("<3I", result, node + 84, start if count else 0, count, count)
+        struct.pack_into("<3I", result, node + 96, floats if cursor else 0, cursor - orphaned, cursor - orphaned)
+    if not removed:
+        banks.CompiledBridge(data)
+        return data
+    removed.sort()
+    ends, totals = [], [0]
+    for begin, end in removed:
+        if ends and begin < ends[-1]:
+            raise ValueError("Overlapping native controller arrays")
+        ends.append(end)
+        totals.append(totals[-1] + end - begin)
+    for field in pointers:
+        target = uint(result, field) + 12
+        if target == 12:
+            continue
+        # Only a float array may begin with a removed block; it then starts where that block did.
+        index = bisect_right(ends, target)
+        if index < len(removed) and removed[index][0] < target:
+            raise ValueError("Native offset refers to removed controller data")
+        struct.pack_into("<I", result, field, target - 12 - totals[index])
+    for begin, end in reversed(removed):
+        del result[begin:end]
+    struct.pack_into("<I", result, 4, len(result) - 12)
+    result = bytes(result)
+    banks.CompiledBridge(result)  # The strict bank parser is the authority on the layout.
+    if list(_tracks(result)) != list(_tracks(data)):
+        raise ValueError("Packing changed animation data")
+    return result
 
 
 def chain_models(root: Path) -> list[Path]:
@@ -206,34 +321,72 @@ def update_source(root: Path, model: Path, check_only: bool) -> int:
     return 1
 
 
+def refresh_robe_manifest(root: Path, changed: list[Path]) -> int:
+    """Keep the robe catalog's ownership proofs on the exact bytes now installed."""
+    path = root / ROBE_MANIFEST
+    if not changed or not path.is_file():
+        return 0
+    raw = path.read_bytes()
+    manifest = json.loads(raw)
+    names = {model.stem.lower() for model in changed}
+    refreshed = 0
+    for model in changed:
+        relative = model.relative_to(root).as_posix()
+        if relative in manifest["files"]:
+            manifest["files"][relative] = hashlib.sha256(model.read_bytes()).hexdigest()
+            refreshed += 1
+    for head, record in manifest.get("animation_bank_sets", {}).items():
+        if names.isdisjoint(record["parts"]):
+            continue
+        directory = root / ("sw_anim_f" if head[1] == "f" else "sw_anim_m")
+        original = banks.join([(directory / f"{part}.mdl").read_bytes() for part in record["parts"]])
+        record["source_sha256"] = hashlib.sha256(original).hexdigest()
+        # A changed output must acquire a fresh proof on regeneration.
+        manifest.get("model_builds", {}).pop(head, None)
+    text = json.dumps(manifest, indent=2) + "\n"
+    path.write_bytes(text.replace("\n", "\r\n" if b"\r\n" in raw else "\n").encode("utf-8"))
+    return refreshed
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--check-only", action="store_true", help="Report offenders without writing.")
     parser.add_argument("--root", type=Path, default=ROOT)
     args = parser.parse_args()
-    failures, sources = 0, 0
+    failures, sources, unpacked, changed = 0, 0, 0, []
     for path in chain_models(args.root):
         data = path.read_bytes()
         if not binary(data):
             continue
+        updated = data
         found = offenders(data)
         if found:
             failures += len(found)
             clips = sorted({clip for clip, _, _ in found})
             print(f"{path.relative_to(args.root).as_posix()}: {len(found)} bone tracks in {clips}")
-            if not args.check_only:
-                updated = strip(data)
-                if offenders(updated):
-                    raise RuntimeError(f"{path}: bone tracks remain after stripping")
-                path.write_bytes(updated)
+            updated = strip(data)
+            if offenders(updated):
+                raise RuntimeError(f"{path}: bone tracks remain after stripping")
+        if banks.is_bank_name(path.stem.lower()):
+            packed = pack(updated)
+            if packed != updated and not found:
+                unpacked += 1
+                print(f"{path.relative_to(args.root).as_posix()}: robe bank is not in the packed native layout")
+            updated = packed
+        if updated != data and not args.check_only:
+            path.write_bytes(updated)
+            changed.append(path)
         stale = update_source(args.root, path, args.check_only)
         if stale:
             sources += stale
             print(f"{source_path_for(args.root, path).relative_to(args.root).as_posix()}: editable source refreshed")
     if args.check_only:
-        print(f"{failures} inherited bone transform tracks found; {sources} editable sources out of date.")
-        return 1 if failures or sources else 0
-    print(f"Removed {failures} inherited bone transform tracks; refreshed {sources} editable sources.")
+        print(f"{failures} inherited bone transform tracks found; {unpacked} robe banks unpacked; "
+              f"{sources} editable sources out of date.")
+        return 1 if failures or unpacked or sources else 0
+    digests = refresh_robe_manifest(args.root, changed)
+    print(f"Removed {failures} inherited bone transform tracks; packed {unpacked} robe banks; "
+          f"refreshed {sources} editable sources and {digests} robe manifest digests.")
     return 0
 
 
