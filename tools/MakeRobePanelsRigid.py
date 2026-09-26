@@ -3,6 +3,8 @@
 Zero-constraint panels have no authored cloth movement. Keeping them on the
 dangly renderer can detach the panel from its animated parent. Convert only
 those panels; keep every vertex, material, joint, animation and skin binding.
+Explicit --panel selections also disable cloth on named torso coverings with
+nonzero constraints; other moving cloth remains untouched.
 Only compiled inputs support the binding-preservation audit. ASCII targets are
 reported and left untouched; compiled targets in the same robe still proceed.
 """
@@ -23,7 +25,8 @@ MANIFEST = ROOT / "tools/RobeRgbModels.json"
 NODE = re.compile(r"(?im)^\s*node\s+\S+\s+\S+\s*$[\s\S]*?^\s*endnode\b[^\r\n]*")
 
 
-def rigid_source(text):
+def rigid_source(text, panels=()):
+    panels = set(panels)
     changed = []
     for kind, name, props in mdl.parse_nodes(text):
         if kind != "danglymesh" or not props.get("verts"):
@@ -31,7 +34,8 @@ def rigid_source(text):
         constraints = props.get("constraints", [])
         if not constraints or len(constraints) != len(props.get("verts", [])):
             raise ValueError(f"{name}: missing or incomplete cloth constraints")
-        if any(len(row) != 1 or float(row[0]) != 0 for row in constraints):
+        authored_name = name.removeprefix("rm_").removeprefix("rg_")
+        if any(len(row) != 1 or float(row[0]) != 0 for row in constraints) and authored_name not in panels:
             continue
         changed.append(name)
     def replace(match):
@@ -70,6 +74,7 @@ def compiled_targets(paths):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--robe", type=int, required=True)
+    parser.add_argument("--panel", action="append", default=[], help="Explicit authored panel name to make rigid even with nonzero cloth constraints (repeatable; includes RGB variants)")
     parser.add_argument("--game-data", type=Path, required=True)
     parser.add_argument("--apply", action="store_true")
     args = parser.parse_args()
@@ -108,7 +113,7 @@ def main():
         load(path.stem)
         mdl.run_compiler(compiler, stage, ["-de", str(path), str(stage / "original") + "/"], "original.log")
         source = poses.accurate_rotations((stage / "original" / path.name).read_text(encoding="latin1"), data)
-        source, panels = rigid_source(source)
+        source, panels = rigid_source(source, args.panel)
         if not panels:
             continue
         encoded = source.encode("latin1")
