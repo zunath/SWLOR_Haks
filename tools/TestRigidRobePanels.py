@@ -1,4 +1,4 @@
-"""Keep static robe 236 torso panels off the cloth-physics renderer."""
+"""Keep repaired robe torso panels off the cloth-physics renderer."""
 import json
 import io
 from contextlib import redirect_stdout
@@ -88,6 +88,40 @@ endnode
     def test_real_cloth_motion_is_preserved(self):
         source = self.source("128")
         self.assertEqual((source, []), rigid.rigid_source(source))
+
+    def test_explicit_panel_selection_includes_native_and_rgb_names(self):
+        for name in ("coat_top", "rm_coat_top", "rg_coat_top"):
+            with self.subTest(name=name):
+                source = self.source("240").replace("coat_top", name)
+                result, names = rigid.rigid_source(source, ["coat_top"])
+                kind, converted_name, props = mdl.parse_nodes(result)[0]
+                self.assertEqual(("trimesh", name, [name]), (kind, converted_name, names))
+                self.assertNotIn("constraints", props)
+                original = mdl.parse_nodes(source)[0][2]
+                for field in ("constraints", "displacement", "period", "tightness"):
+                    original.pop(field)
+                self.assertEqual(original, props)
+
+    def test_explicit_selection_preserves_other_moving_cloth(self):
+        source = self.source("240") + self.source("128").replace("coat_top", "coat_tail")
+        result, names = rigid.rigid_source(source, ["coat_top"])
+        self.assertEqual(["coat_top"], names)
+        self.assertEqual(mdl.parse_nodes(source)[1], mdl.parse_nodes(result)[1])
+
+    def test_robe20_compiled_native_and_rgb_torso_panels_are_rigid(self):
+        manifest = json.loads(rigid.MANIFEST.read_text())
+        paths = rigid.targets(20, manifest)
+        checked = 0
+        for path in paths:
+            data = path.read_bytes()
+            if not mdl.binary(data):
+                continue
+            model = poses.Model(data, False)
+            for name, _, _, _, offset in model.nodes:
+                if name.removeprefix("rm_").removeprefix("rg_") == "coat_top":
+                    self.assertEqual(0x21, model.uint(offset + 108), f"{path.name}/{name}")
+                    checked += 1
+        self.assertEqual(33, checked)
 
     def test_missing_constraints_fail_closed(self):
         with self.assertRaisesRegex(ValueError, "constraints"):
