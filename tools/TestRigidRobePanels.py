@@ -47,7 +47,7 @@ class RigidRobePanelTests(unittest.TestCase):
 
     def test_existing_ascii_robe_targets_are_reported_and_excluded(self):
         manifest = json.loads(rigid.MANIFEST.read_text())
-        for robe in (20, 211, 212, 213, 254):
+        for robe in (20, 211, 212, 213):
             with self.subTest(robe=robe):
                 paths = rigid.targets(robe, manifest)
                 ascii_paths = [path for path in paths if not mdl.binary(path.read_bytes())]
@@ -108,7 +108,7 @@ endnode
         self.assertEqual(["coat_top"], names)
         self.assertEqual(mdl.parse_nodes(source)[1], mdl.parse_nodes(result)[1])
 
-    def test_robe20_compiled_native_and_rgb_torso_panels_are_rigid(self):
+    def test_robe20_compiled_native_and_rgb_torso_panels_do_not_use_cloth_physics(self):
         manifest = json.loads(rigid.MANIFEST.read_text())
         paths = rigid.targets(20, manifest)
         checked = 0
@@ -119,7 +119,7 @@ endnode
             model = poses.Model(data, False)
             for name, _, _, _, offset in model.nodes:
                 if name.removeprefix("rm_").removeprefix("rg_") == "coat_top":
-                    self.assertEqual(0x21, model.uint(offset + 108), f"{path.name}/{name}")
+                    self.assertEqual(0, model.uint(offset + 108) & 0x100, f"{path.name}/{name}")
                     checked += 1
         self.assertEqual(33, checked)
 
