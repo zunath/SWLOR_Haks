@@ -176,6 +176,16 @@ donemodel rig
         self.assertEqual({}, panels)
         self.assertEqual(["chest", "ornament"], animated)
 
+    def test_constant_rest_pose_tracks_are_static_but_different_resets_are_animated(self):
+        parts = bound.AnimationParts(lambda _: None)
+        clip = "newanim reset rig\nnode dummy chest\nparent torso_g\norientationkey 1\n0 0 0 1 0\nendnode\ndoneanim reset rig\n"
+        data = (self.scene() + clip).encode()
+        self.assertEqual(set(), parts.inherited(data))
+        self.assertEqual({"chest": "torso_g", "ornament": "torso_g"},
+                         bound.panel_candidates(data, parts.inherited(data))[0])
+        different_bind = data.replace(b"parent torso_g\nrender", b"parent torso_g\norientation 0 0 1 0.2\nrender")
+        self.assertEqual({"chest"}, parts.inherited(different_bind))
+
     def test_scaled_nested_attachment_keeps_its_compiled_world_shape(self):
         source = self.scene().replace("parent rig\nendnode", "parent rig\nposition 0 0 2\nscale 2\nendnode")
         source = source.replace("parent torso_g\nrender", "parent torso_g\nscale 0.5\nrender")

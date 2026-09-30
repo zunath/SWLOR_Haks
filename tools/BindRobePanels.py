@@ -67,31 +67,64 @@ class AnimationParts:
     def __init__(self, load):
         self.load, self.cache = load, {}
 
-    def inherited(self, data, pending=()):
+    @staticmethod
+    def equivalent(kind, left, right):
+        return mdl.equivalent_quaternion(left, right) if kind == 20 else mdl.equivalent(list(left), list(right))
+
+    def channels(self, data, pending=()):
         parent = mdl.supermodel(data)
-        result = set()
+        result = {}
         if parent:
             if parent in pending:
                 raise ValueError(f"Cyclic animation parent: {parent}")
             if parent not in self.cache:
                 source = self.load(parent)
-                self.cache[parent] = self.inherited(source, (*pending, parent)) if source else set()
+                self.cache[parent] = self.channels(source, (*pending, parent)) if source else {}
             result.update(self.cache[parent])
+
+        def add(part, kind, values):
+            key = (part, kind)
+            if key in result and result[key] is None:
+                return
+            first = result.get(key, values[0])
+            result[key] = first if all(self.equivalent(kind, first, value) for value in values) else None
+
         if mdl.binary(data):
             for _, offset in tracks.animation_nodes(data):
                 part = struct.unpack_from("<i", data, offset + 28)[0]
                 if part < 0:
                     continue
                 keys, count = struct.unpack_from("<II", data, offset + 84)
-                if any(struct.unpack_from("<IH", data, 12 + keys + i * 12)[0] in (8, 20, 36)
-                       and struct.unpack_from("<H", data, 12 + keys + i * 12 + 4)[0] for i in range(count)):
-                    result.add(part)
+                floats = 12 + struct.unpack_from("<I", data, offset + 96)[0]
+                for i in range(count):
+                    kind, rows, _, start, columns = struct.unpack_from("<IHHHB", data, 12 + keys + i * 12)
+                    if not rows or kind not in (8, 20, 36) or result.get((part, kind), 0) is None:
+                        continue
+                    if columns != {8: 3, 20: 4, 36: 1}[kind]:
+                        raise ValueError("Unsupported animated transform columns")
+                    add(part, kind, [struct.unpack_from(f"<{columns}f", data, floats + (start + row * columns) * 4)
+                                     for row in range(rows)])
         else:
             # ASCII animation parents bind by name; keep those attachments animated.
             for _, name, props in mdl.parse_nodes(data.decode("latin1").split("endmodelgeom", 1)[-1]):
-                if set(props) & {"position", "orientation", "scale", "positionkey", "orientationkey", "scalekey"}:
-                    result.add(name)
+                for key, kind in (("position", 8), ("orientation", 20), ("scale", 36)):
+                    values = ([props[key]] if key in props else [row[1:] for row in props.get(key + "key", [])])
+                    if values:
+                        add(name, kind, [tuple(mdl.quaternion(value)) if kind == 20 else tuple(map(float, value)) for value in values])
         return result
+
+    def inherited(self, data):
+        if mdl.binary(data):
+            defaults = {part: controllers for _, _, part, controllers, _ in poses.Model(data, False).nodes if part >= 0}
+        else:
+            defaults = {}
+            for _, name, props in mdl.parse_nodes(data.decode("latin1").split("endmodelgeom", 1)[0]):
+                defaults[name] = {kind: ((0,), [tuple(mdl.quaternion(props[key])) if kind == 20 else tuple(map(float, props[key]))])
+                                  for key, kind in (("position", 8), ("orientation", 20), ("scale", 36)) if key in props}
+        identity = {8: (0, 0, 0), 20: (0, 0, 0, 1), 36: (1,)}
+        return {part for (part, kind), value in self.channels(data).items()
+                if value is None or not self.equivalent(kind, value,
+                    defaults.get(part, {}).get(kind, ((0,), [identity[kind]]))[1][0])}
 
 
 def panel_candidates(data, animated_parts=()):
