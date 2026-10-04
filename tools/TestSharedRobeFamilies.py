@@ -123,8 +123,7 @@ class SharedRobeFamilyTests(unittest.TestCase):
             fixtures[name] = model(name, "body", garment)
         families, key = self.build(fixtures, ["coat_b", "coat_a"])
         previous = legacy.Families(fixtures.get)
-        old_key = previous.add("body", fixtures["coat_a"], "coat_a")
-        previous.add("body", fixtures["coat_b"], "coat_b")
+        old_keys = {robe: previous.add("body", fixtures[robe], robe) for robe in ("coat_a", "coat_b")}
         with tempfile.TemporaryDirectory() as directory:
             stage = Path(directory)
             compiler, _ = mdl.prepare_compiler(stage)
@@ -140,14 +139,18 @@ class SharedRobeFamilyTests(unittest.TestCase):
                 return poses.Model(binary)
 
             compile_source("body", fixtures["body"].encode())
-            before_parent = compile_source("oldbridge", previous.bridge(old_key, "oldbridge"))
+            before_parents = {robe: compile_source("old" + robe, previous.bridge(old_key, "old" + robe))
+                              for robe, old_key in old_keys.items()}
             after_parent = compile_source("newbridge", families.bridge(key, "newbridge"))
             alias_maps, resting_positions = [], []
             for robe in ("coat_a", "coat_b"):
-                old_source, old_names = previous.body_root(robe, "oldwearer", "oldbridge")
+                old_source, old_names = previous.body_root(robe, "oldwearer", "old" + robe)
                 new_source, new_names = families.body_root(robe, "newwearer", "newbridge")
                 before = compile_source("oldwearer", old_source)
                 after = compile_source("newwearer", new_source)
+                library = poses.Library(lambda name: (stage / f"{name}.mdl").read_bytes())
+                self.assertGreater(poses.validate_garment_body_motion(
+                    (stage / "newwearer.mdl").read_bytes(), "body", new_names, library), 0)
                 alias_maps.append(new_names)
                 old_nodes = {item[0]: item for item in before.nodes}
                 new_nodes = {item[0]: item for item in after.nodes}
@@ -158,13 +161,15 @@ class SharedRobeFamilyTests(unittest.TestCase):
                     self.assertEqual(parent_nodes[alias][2], new_nodes[alias][2], (robe, original))
                 for clip_name in ("walk", "rest"):
                     for time in (0, 0.3, 0.6, 1):
-                        old_pose = before.pose(before_parent.clips[clip_name], time)
+                        old_pose = before.pose(before_parents[robe].clips[clip_name], time)
                         new_pose = after.pose(after_parent.clips[clip_name], time)
                         for original, old_alias in old_names.items():
                             self.assertEqual(old_pose[old_alias], new_pose[new_names[original]], (robe, original, clip_name, time))
                 resting_positions.append(after.pose(after_parent.clips["rest"])[new_names["hand_g"]][0])
             for joint in ("rootdummy", "arm_g", "hand_g"):
-                self.assertEqual(alias_maps[0][joint], alias_maps[1][joint])
+                # Different root reset positions require separate root motion,
+                # and descendants cannot share a joint across distinct parents.
+                self.assertNotEqual(alias_maps[0][joint], alias_maps[1][joint])
             self.assertNotEqual(resting_positions[0], resting_positions[1])
             # coat_a sorts first despite being added last, so it deterministically
             # supplies parent defaults without replacing coat_b's own defaults.

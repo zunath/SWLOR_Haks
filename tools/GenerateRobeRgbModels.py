@@ -23,6 +23,8 @@ import ImportStockRobeTints as stock_robes
 import RobeAnimations as animations
 import RobePoseAudit as poses
 import RobeBuildCache as build_cache
+import RobeCompilationCheckpoint as checkpoint
+import RobeBankValidation as bank_validation
 import RobeAnimationBanks as banks
 import SharedRobeFamilies as shared
 import RobeSharingAudit as sharing
@@ -36,7 +38,8 @@ NODE = re.compile(r"(?im)^\s*node\s+(\S+)\s+(\S+)\s*$([\s\S]*?)^\s*endnode\b")
 GENERATOR_INPUTS = ("GenerateRobeRgbModels.py", "RobeSkeleton.py", "RobePoseAudit.py",
                     "RobeAnimations.py", "CompileModels.py", "ImportStockRobeTints.py",
                     "TintMapStockRobes.json", "GenerateTintMapAssets.py", "RobeBuildCache.py",
-                    "SharedRobeFamilies.py", "RobeSharingAudit.py")
+                    "SharedRobeFamilies.py", "RobeSharingAudit.py",
+                    "RobeCompilationCheckpoint.py", "RobeBankValidation.py")
 PACKAGING_INPUTS = ("RobeAnimationBanks.py", "RepackRobeAnimationBanks.py")
 CATALOG_INPUTS = ("sw_2da/parts_robe.2da", "sw_2da/tintmap.2da", "hakbuilder.json")
 BODY_RESOURCE = re.compile(r"^p[fm][a-z](\d+)(?:_robe\d{3})?$", re.IGNORECASE)
@@ -295,6 +298,8 @@ def check() -> list[str]:
             errors.append(f"Robe RGB manifest does not track {relative}; regenerate and validate")
     if not manifest.get("independent_skeletons") or not manifest.get("body_pose_samples"):
         errors.append("Robe models lack independent skeleton and animation pose validation")
+    if not manifest.get("garment_body_motion_checks"):
+        errors.append("Robe models lack garment/body motion and root reset validation")
     for relative, expected in manifest["files"].items():
         path = ROOT / relative
         if not path.is_file() or file_digest(path) != expected:
@@ -746,6 +751,12 @@ def main():
         {name: input_digests[ROOT / "tools" / name] for name in GENERATOR_INPUTS},
         sort_keys=True).encode()).hexdigest()
     build_keys, reused, parent_digests = {}, set(), {}
+    checkpoint_path = stage / "compilations.json"
+    compilation_records = json.loads(checkpoint_path.read_text()) if checkpoint_path.is_file() else {}
+    resumed = set()
+    processors = hashlib.sha256(json.dumps({name: input_digests[ROOT / "tools" / name]
+                                           for name in ("CompileModels.py", "RobePoseAudit.py")},
+                                          sort_keys=True).encode()).hexdigest()
     def compile_one(name):
         source = sources[name]
         parent = mdl.supermodel(source)
@@ -767,6 +778,12 @@ def main():
                          else previous.read_bytes() if previous is not None else b"")
         relative = f"{model_directory(name)}/{name}.mdl"
         path = stage / "binary" / f"{name}.mdl"
+        compile_key = checkpoint.key(source, compiler_hash, parent_digests[parent], original, base, processors)
+        if path.is_file() and checkpoint.matches(compilation_records.get(name), compile_key, path.read_bytes()):
+            # Compilation checkpoints carry no validation proof. Keep these
+            # models in `changed` so every current audit runs before publishing.
+            resumed.add(name)
+            return
         if name in revised_binaries:
             path.write_bytes(revised_binaries[name].read_bytes())
             return
@@ -784,6 +801,8 @@ def main():
         if name in renamed_nodes:
             compiled = poses.preserve_skin_bindings(original, compiled, renamed_nodes[name])
         path.write_bytes(compiled)
+        compilation_records[name] = checkpoint.record(compile_key, compiled)
+        checkpoint_path.write_text(json.dumps(compilation_records, indent=2) + "\n")
     # Compile and expose the complete animation parents before their body roots.
     compiled_parents = set(animation_cache.values()) - set(dependencies)
     print(f"Building or reusing {len(sources)} generated models. Staging: {stage}", flush=True)
@@ -793,9 +812,26 @@ def main():
     for index, name in enumerate(sorted(set(sources) - compiled_parents), 1):
         compile_one(name)
         if index % 250 == 0:
-            print(f"Prepared {index} body/attachment models; {len(reused)} cache hits.", flush=True)
+            print(f"Prepared {index} body/attachment models; {len(reused)} validated cache hits, "
+                  f"{len(resumed)} compilation checkpoints.", flush=True)
     changed = set(sources) - reused
-    compile_model_files(compiler, stage, changed, "binary", "decompiled", "-de", "decompile.log")
+    exports_path = stage / "exports.json"
+    exports = json.loads(exports_path.read_text()) if exports_path.is_file() else {}
+    for index, name in enumerate(sorted(changed), 1):
+        binary_hash = file_digest(stage / "binary" / f"{name}.mdl")
+        output = stage / "decompiled" / f"{name}.mdl"
+        saved = exports.get(name, {})
+        if not (saved.get("binary") == binary_hash and saved.get("compiler") == compiler_hash
+                and output.is_file() and saved.get("ascii") == file_digest(output)):
+            if name in animation_cache.values():
+                bank_validation.decompile(compiler, stage, name)
+            else:
+                mdl.run_compiler(compiler, stage, ["-de", str(stage / "binary" / f"{name}.mdl"),
+                                                  str(stage / "decompiled") + "/"], "decompile.log")
+            exports[name] = {"binary": binary_hash, "compiler": compiler_hash, "ascii": file_digest(output)}
+            exports_path.write_text(json.dumps(exports, indent=2) + "\n")
+        if index % 250 == 0 or index == len(changed):
+            print(f"Decompiled {index}/{len(changed)} models for fresh validation.", flush=True)
     failures = []
     for name, source in sources.items():
         if name in reused:
@@ -823,9 +859,23 @@ def main():
         return path.read_bytes() if name in sources else load_reference(name)
     library = poses.Library(load_binary)
     checked_poses = 0
+    checked_garment_body_motion = 0
+    garment_motion_signatures = set()
     if not failures:
         for key, parent in animation_cache.items():
-            checked_poses += poses.validate_body_poses(parent, families.groups[key]["base"], library)
+            base = families.groups[key]["base"]
+            checked_poses += poses.validate_body_poses(parent, base, library)
+            for name in original_robes:
+                if name[:3] + "0" != base:
+                    continue
+                names = renamed_nodes[name]
+                signature = (parent, tuple(sorted((bone, alias) for bone, alias in names.items()
+                                                 if bone in animations.BODY_MOTION_NODES)))
+                if signature in garment_motion_signatures:
+                    continue
+                checked_garment_body_motion += poses.validate_garment_body_motion(
+                    (stage / "binary" / f"{name}.mdl").read_bytes(), base, names, library)
+                garment_motion_signatures.add(signature)
             # Library caches are method-wide. Source resolution is finished, and
             # retaining every parsed union rig would multiply peak audit memory.
             library.clips.cache_clear()
@@ -840,9 +890,11 @@ def main():
         checked_garment_clips = sharing.validate_records(
             motion_records, lambda name: owned_animation_bytes(name, prior_manifest, active),
             lambda name: (stage / "binary" / f"{name}.mdl").read_bytes())
-    report = {"models": len(sources), "compiled_models": len(changed), "reused_models": len(reused),
+    report = {"models": len(sources), "compiled_models": len(changed) - len(resumed), "reused_models": len(reused),
+              "resumed_compilations": len(resumed),
               "robe_models": len(selected), "phenotypes": len(id_map),
               "body_pose_samples": checked_poses,
+              "garment_body_motion_checks": checked_garment_body_motion,
               "shared_rigs": sharing_stats,
               "preserved_wearer_bindings": len(motion_records),
               "preserved_garment_clips": checked_garment_clips,
@@ -906,6 +958,7 @@ def main():
                     "model_builds": model_builds,
                     "garment_node_names": {**prior_manifest.get("garment_node_names", {}), **renamed_nodes},
                     "body_pose_samples": checked_poses,
+                    "garment_body_motion_checks": checked_garment_body_motion,
                     "missing_animation_fallbacks": families.fallbacks,
                     "stock_model_sha256": stock_hashes,
                     "animation_bridges": {**prior_manifest.get("animation_bridges", {}), **animation_names},

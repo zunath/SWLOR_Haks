@@ -344,6 +344,45 @@ def validate_body_poses(parent, base, library):
     return count
 
 
+def validate_garment_body_motion(wearer, base, names, library):
+    """A garment's body joints must follow the same clip as its wearer.
+
+    Compare actual compiled part IDs and controllers, including missing keys.
+    A garment-only root translation must not replace pointing with a stock jump.
+    Bind defaults and independent cloth joints remain the garment's own data.
+    """
+    from RobeAnimations import BODY_MOTION_NODES
+    from RobeSharingAudit import controllers_equal
+    model = Model(wearer, False)
+    parts = {name: part for name, _, part, _, _ in model.nodes}
+    defaults = {name: controllers for name, _, _, controllers, _ in model.nodes}
+    joints = [(bone, alias) for bone, alias in names.items() if bone in BODY_MOTION_NODES]
+    for bone, alias in joints:
+        if bone not in parts or alias not in parts or min(parts[bone], parts[alias]) < 0:
+            raise ValueError(f"{model.parent}/{bone}/{alias}: missing animated body or garment joint")
+    clips = library.clips(model.parent)
+    count = 0
+    for clip, original in library.clips(base).items():
+        # Controller-free carry overlays deliberately leave both skeletons
+        # alone. They are not a replacement pose and must remain empty.
+        if not any(controllers for _, _, _, controllers, _ in original[1]):
+            continue
+        tracks = {part: controllers for _, _, part, controllers, _ in clips[clip][1] if part >= 0}
+        for bone, alias in joints:
+            expected = dict(tracks.get(parts[bone], {}))
+            if bone == "rootdummy":
+                for kind, fallback in ((8, (0, 0, 0)), (20, (0, 0, 0, 1)), (36, (1,))):
+                    if kind not in expected:
+                        value = sample(defaults[alias][kind], 0, kind == 20) if kind in defaults[alias] else fallback
+                        if kind == 8:
+                            value = tuple(v / model.scale for v in value)
+                        expected[kind] = ((0,), [value])
+            if not controllers_equal(expected, tracks.get(parts[alias], {})):
+                raise ValueError(f"{model.parent}/{clip}/{alias}: garment joint differs from the wearer's {bone}")
+            count += 1
+    return count
+
+
 class Library:
     def __init__(self, load):
         self.load = load

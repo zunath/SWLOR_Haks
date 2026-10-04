@@ -9,6 +9,7 @@ import CompileModels as mdl
 import RobeAnimationBanks as banks
 import RobeAnimations as animations
 import RobePoseAudit as poses
+import RobeBankValidation as validation
 
 
 def node(name, parent, values=""):
@@ -31,6 +32,19 @@ def event_payloads(data):
 
 
 class NativeRobeAnimationBankTests(unittest.TestCase):
+    def test_chunked_native_export_preserves_the_complete_round_trip(self):
+        destination = self.stage / "whole-export"
+        destination.mkdir(exist_ok=True)
+        mdl.run_compiler(self.compiler, self.stage,
+                         ["-de", str(self.stage / "binary" / "pmh_ra001.mdl"), str(destination) + "/"],
+                         "whole-export.log")
+        expected = (destination / "pmh_ra001.mdl").read_text(encoding="latin1")
+        (self.stage / "decompiled").mkdir(exist_ok=True)
+        actual = validation.decompile(self.compiler, self.stage, "pmh_ra001", self.target)
+        self.assertEqual(mdl.parse_nodes(expected), mdl.parse_nodes(actual))
+        source = poses.accurate_rotations(expected, self.original)
+        mdl.validate_round_trip(source.encode("latin1"), self.original, actual)
+
     @classmethod
     def setUpClass(cls):
         cls.temporary = tempfile.TemporaryDirectory()

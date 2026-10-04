@@ -80,10 +80,14 @@ class Families:
             values = {}
             for key, value in props.items():
                 if key in anim.TRANSFORMS:
+                    if node in anim.WEARER_BONES and key != "orientation":
+                        continue
                     values[key] = value
                 elif key.endswith("key"):
                     if key.removesuffix("key") not in anim.TRANSFORMS:
                         raise ValueError(f"{owner}/{node}: unsupported garment controller {key}")
+                    if node in anim.WEARER_BONES and key != "orientationkey":
+                        continue
                     values[key] = [[format(float(row[0])*factor, '.9g'), *row[1:]] for row in value]
             if position_scale != 1:
                 if "position" in values:
@@ -126,10 +130,14 @@ class Families:
                     any(kind != "dummy" or set(props) - {"parent"} for kind, _, props in nodes)):
                 raise ValueError(f"{owner}/sw_nohold: carry overlay must have no controllers or events")
             resolved.pop("sw_nohold")
-        signature = json.dumps([(c, o) for c, (o, _) in sorted(resolved.items())])
-        key = base + "/" + hashlib.sha256(signature.encode()).hexdigest()[:16]
-        group = self.groups.setdefault(key, {"base": base, "clips": resolved, "paths": {}, "members": []})
         nodes, paths = hierarchy(robe)
+        root_props = nodes.get("rootdummy", (None, {}))[1]
+        root_rest = {field: root_props.get(field, default) for field, default in
+                     (("position", ["0", "0", "0"]), ("orientation", ["0", "0", "0", "0"]), ("scale", ["1"]))}
+        signature = json.dumps(([(c, o) for c, (o, _) in sorted(resolved.items())], root_rest))
+        key = base + "/" + hashlib.sha256(signature.encode()).hexdigest()[:16]
+        group = self.groups.setdefault(key, {"base": base, "clips": resolved, "paths": {},
+                                            "members": [], "root_rest": root_rest})
         animated = set()
         for clip, (owner, source) in resolved.items():
             animated.update(self.clip_nodes(owner, source))
@@ -211,6 +219,11 @@ class Families:
         garment = self.tracks(body_source, body_owner, original_names, duration, body_factor)
         garment_factor = 1/scale if owner == base or owner in group["members"] else 1
         for node, values in self.tracks(source, owner, original_names, duration, garment_factor).items():
+            # Custom animation slots can mean different motions in stock coat
+            # parents and the game's body chain. The garment's skeleton must
+            # follow the wearer; its independent cloth helpers keep their curves.
+            if body_source is not None and node in anim.BODY_MOTION_NODES:
+                continue
             target = garment.setdefault(node, {})
             for controller, value in values.items():
                 target.pop(controller.removesuffix("key") if controller.endswith("key") else controller+"key", None)
@@ -219,6 +232,15 @@ class Families:
         # custom-only clips may also supply body motion.
         if body_source is None:
             body = self.tracks(source, owner, body_nodes, duration)
+        if "rootdummy" in original_names:
+            root = garment.setdefault("rootdummy", {})
+            for field, value in group["root_rest"].items():
+                if field not in root and field + "key" not in root:
+                    # Only the body's root is the engine's animroot. The private
+                    # garment root needs explicit resets when a cast is canceled
+                    # or a native clip omits that channel, or its old offset latches.
+                    root[field] = ([format(float(v) / scale, '.9g') for v in value]
+                                   if field == "position" else value)
         return header, body, garment
 
     def bridge(self, key, name):

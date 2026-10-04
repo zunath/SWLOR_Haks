@@ -16,6 +16,7 @@ TRANSFORMS = {"position", "orientation", "scale"}
 WEARER_BONES = {"torso_g", "pelvis_g", "neck_g", "head_g"} | {
     f"{side}{bone}_g" for side in "lr"
     for bone in ("bicep", "forearm", "hand", "thigh", "shin", "foot")}
+BODY_MOTION_NODES = WEARER_BONES | {"rootdummy"}
 
 
 def binary_parts(data, root=None):
@@ -248,6 +249,8 @@ def bridge(base_name, robe_name, load, name):
         # the same phase. Keep every coat controller, filling omitted body tracks.
         combined = tracks(body_animation, body_owner, nodes, duration)
         for node, values in tracks(animation, owner, nodes, duration).items():
+            if body_animation is not None and node in BODY_MOTION_NODES:
+                continue
             target = combined.setdefault(node, {})
             for key, value in values.items():
                 target.pop(key.removesuffix("key") if key.endswith("key") else key + "key", None)
