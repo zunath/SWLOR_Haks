@@ -18211,7 +18211,7 @@
     },
     {
       "id": 4552,
-      "text": "Deals weapon DMG + 35. For 45 seconds, evading an attack refreshes Snap Roll and quickens your next shot."
+      "text": "Deals weapon DMG + 35. For 45 seconds, evading an attack refreshes Snap Roll and quickens your next auto-attack with any weapon."
     },
     {
       "id": 4553,
@@ -18255,7 +18255,7 @@
     },
     {
       "id": 4563,
-      "text": "Deals weapon DMG + 30. If this critically hits, your next three ranged attacks have +20% Critical Rate and no extra attack delay."
+      "text": "Deals weapon DMG + 30. If this critically hits, your next three weapon attacks, regardless of weapon family, have +20% Critical Rate and no extra attack delay."
     },
     {
       "id": 4564,
@@ -18803,7 +18803,7 @@
     },
     {
       "id": 4700,
-      "text": "Attacking a bleeding target restores 1 STM. This can trigger once every 4 seconds."
+      "text": "Auto-attacks with any weapon and hostile Twin Blade abilities against a bleeding target restore 1 STM. This can trigger once every 4 seconds."
     },
     {
       "id": 4701,
@@ -18995,7 +18995,7 @@
     },
     {
       "id": 4748,
-      "text": "Every fourth ranged attack gains +10% Critical Rate."
+      "text": "Every fourth auto-attack with any weapon gains +10% Critical Rate."
     },
     {
       "id": 4749,
@@ -19015,7 +19015,7 @@
     },
     {
       "id": 4753,
-      "text": "Auto-attacks against your current target have a 15% chance to add a Suppression stack lasting 30 seconds using your Suppressing Shot stack strength."
+      "text": "Auto-attacks with any weapon against your current target have a 15% chance to add a Suppression stack lasting 30 seconds using your Suppressing Shot stack strength."
     },
     {
       "id": 4754,
@@ -19035,7 +19035,7 @@
     },
     {
       "id": 4758,
-      "text": "When an enemy with Suppression stacks uses an ability, your next ranged attack against it gains +10% Accuracy."
+      "text": "When an enemy with Suppression stacks uses an ability, your next weapon attack, regardless of weapon family, against it gains +10% Accuracy."
     },
     {
       "id": 4759,
@@ -19043,7 +19043,7 @@
     },
     {
       "id": 4760,
-      "text": "After 3 seconds without attacking, your next ranged attack deals +12 DMG."
+      "text": "After 3 seconds without attacking, your next auto-attack with any weapon deals +12 DMG."
     },
     {
       "id": 4761,
@@ -19071,7 +19071,7 @@
     },
     {
       "id": 4767,
-      "text": "Thrown auto-attacks have a 15% chance to deal 8 Physical DMG to the target and up to four other enemies within 3m of the primary target. This splash cannot trigger other on-hit effects."
+      "text": "Auto-attacks with any weapon have a 15% chance to deal 8 Physical DMG to the target and up to four other enemies within 3m of the primary target. This splash cannot trigger other on-hit effects."
     },
     {
       "id": 4768,
@@ -19343,7 +19343,7 @@
     },
     {
       "id": 4835,
-      "text": "While active, ranged attacks gain +10% Haste and add Suppression stacks lasting 30 seconds using your Suppressing Shot stack strength, but critical damage is reduced by 10%."
+      "text": "While active, weapon attacks of any family gain +10% Haste and add Suppression stacks lasting 30 seconds using your Suppressing Shot stack strength, but critical damage is reduced by 10%."
     },
     {
       "id": 4836,
@@ -20691,11 +20691,11 @@
     },
     {
       "id": 5172,
-      "text": "Each consecutive ranged hit against the same target grants +1 DMG, up to five stacks. Stacks expire after 30 seconds."
+      "text": "Each consecutive weapon hit, regardless of weapon family, against the same target grants +1 DMG, up to five stacks. Stacks expire after 30 seconds."
     },
     {
       "id": 5173,
-      "text": "After maintaining Rifle fire on the same target for 12 seconds, gain Spotter's Rhythm for 9 seconds. Your next hostile weapon ability against that target deals +15 DMG."
+      "text": "After maintaining weapon hits with any weapon on the same target for 12 seconds, gain Spotter's Rhythm for 9 seconds. Your next hostile weapon ability against that target deals +15 DMG."
     },
     {
       "id": 5174,
@@ -20835,7 +20835,7 @@
     },
     {
       "id": 5208,
-      "text": "After a critical hit with a Pistol attack or hostile Pistol ability, gain +20% Haste for your next two attacks. Expires after 30 seconds."
+      "text": "After a critical hit, gain +20% Haste for your next two attacks with any weapon. Expires after 30 seconds."
     },
     {
       "id": 5209,
@@ -22011,7 +22011,7 @@
     },
     {
       "id": 5502,
-      "text": "Each consecutive melee attack against the same target grants Rundown, giving +1 DMG to auto-attack against that target, up to five stacks."
+      "text": "Each consecutive auto-attack with any weapon against the same target grants Rundown, giving +1 DMG to auto-attack against that target, up to five stacks."
     },
     {
       "id": 5503,
@@ -22019,7 +22019,7 @@
     },
     {
       "id": 5504,
-      "text": "Every third melee auto-attack deals an additional +10 Damage."
+      "text": "Every third auto-attack with any weapon deals an additional +10 Damage."
     },
     {
       "id": 5505,
@@ -23871,7 +23871,7 @@
     },
     {
       "id": 5967,
-      "text": "While active, your Vibroknife auto-attacks inflict Hamstring for 18 seconds, but your Defense is reduced by 20%."
+      "text": "While active, your auto-attacks with any weapon inflict Hamstring for 18 seconds, but your Defense is reduced by 20%."
     },
     {
       "id": 5968,
@@ -23923,7 +23923,7 @@
     },
     {
       "id": 5980,
-      "text": "Every third auto-attack on a target affected by your Venom deals an additional +15 Poison DMG."
+      "text": "Every third auto-attack with any weapon on a target affected by your Venom deals an additional +15 Poison DMG."
     },
     {
       "id": 5981,
@@ -24095,7 +24095,7 @@
     },
     {
       "id": 6023,
-      "text": "After landing a critical hit, your next auto-attack within 16 seconds is quickened to your fastest possible swing speed."
+      "text": "After landing a critical hit, your next auto-attack with any weapon within 16 seconds is quickened to your fastest possible swing speed."
     },
     {
       "id": 6024,
@@ -24331,7 +24331,7 @@
     },
     {
       "id": 6082,
-      "text": "Melee weapon attacks from behind a target deal +3% damage."
+      "text": "Attacks with any weapon from behind a target deal +3% damage."
     },
     {
       "id": 6083,
@@ -24475,7 +24475,7 @@
     },
     {
       "id": 6118,
-      "text": "Reduces your enmity by 80%, enters stealth for up to 30 seconds, and causes your next back attack within 30 seconds to critically hit and inflict Exposed, reducing Defense by 20% for 30 seconds."
+      "text": "Reduces your enmity by 80%, enters stealth for up to 30 seconds, and causes your next back attack with any weapon within 30 seconds to critically hit and inflict Exposed, reducing Defense by 20% for 30 seconds."
     },
     {
       "id": 6119,
@@ -24699,7 +24699,7 @@
     },
     {
       "id": 6174,
-      "text": "Target an enemy or location to deal weapon DMG + 20 to enemies within 8m and apply Kill Box for 45 seconds. While Kill Box remains, any player's ranged attacks against affected enemies add Suppression stacks lasting 30 seconds using the Kill Box caster's Suppressing Shot stack strength; each stack reduces Evasion by an additional 3%."
+      "text": "Target an enemy or location to deal weapon DMG + 20 to enemies within 8m and apply Kill Box for 45 seconds. While Kill Box remains, any player's weapon attacks, regardless of weapon family, against affected enemies add Suppression stacks lasting 30 seconds using the Kill Box caster's Suppressing Shot stack strength; each stack reduces Evasion by an additional 3%."
     },
     {
       "id": 6175,
@@ -24719,7 +24719,7 @@
     },
     {
       "id": 6179,
-      "text": "After 3 seconds without attacking, if your next attack is a critical hit, it deals +15% damage."
+      "text": "After 3 seconds without attacking, if your next auto-attack with any weapon or hostile Rifle ability is a critical hit, it deals +15% damage."
     },
     {
       "id": 6180,
