@@ -770,7 +770,7 @@ def find_tint_source_models() -> dict[str, Path]:
     # item dyes.
     active = find_active_models()
     for name in active:
-        match = re.fullmatch(r"p[fm]h0_head1(\d{3})", name)
+        match = re.fullmatch(r"p[fm][a-z]0_head1(\d{3})", name)
         if match and f"helm_{match[1]}" in active:
             derived.add(name)
     return {name: path for name, path in active.items() if name not in derived}

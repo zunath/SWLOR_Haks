@@ -9,16 +9,15 @@ import GenerateTintMapAssets as tint
 
 
 def helmet_heads():
-    """Pairs of (helm_NNN, [pmh0_head1NNN, pfh0_head1NNN]) for every tintable helmet."""
+    """Pairs of (helm_NNN, its p<g><race>0_head1NNN heads) for every tintable helmet."""
     registered = sorted({line.split()[1] for line in tint.OUTPUT_2DA.read_text().splitlines()[3:]
                          if len(line.split()) == 4 and helmets.PATTERN.fullmatch(line.split()[1])})
     for name in registered:
-        head = helmets.HEAD_BASE + int(helmets.PATTERN.fullmatch(name)[1])
-        yield name, [f"p{gender}h0_head{head}" for gender in ("m", "f")]
+        yield name, helmets.head_targets(helmets.HEAD_BASE + int(helmets.PATTERN.fullmatch(name)[1]))
 
 
 class HelmetRgbModelTests(unittest.TestCase):
-    def test_every_registered_helmet_has_both_human_heads(self):
+    def test_every_registered_helmet_has_heads_for_every_body_race_and_gender(self):
         outputs = helmets.plan()
         pairs = list(helmet_heads())
         self.assertIn('helm_114', [name for name, _ in pairs])

@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 """Copy tintable helmets into the head path that receives EE material overrides.
 
-Each tintable helm_NNN is published as head 1000+NNN for both human genders
-(p[mf]h0_head1NNN). Only fixed-size model/root name fields change. Geometry, animation,
-materials, controllers, vertex attributes, skin bindings, and native helmet resources
-remain byte-identical. Missing phenotypes fall back to phenotype 0, but heads never fall
-back across race or gender; the server keeps the native helmet for other races.
+Each tintable helm_NNN is published as head 1000+NNN for both genders of every playable
+body race (p<g><race>0_head1NNN). Only fixed-size model/root name fields change. Geometry,
+animation, materials, controllers, vertex attributes, skin bindings, and native helmet
+resources remain byte-identical. Missing phenotypes fall back to phenotype 0, but heads
+never fall back across race or gender; the server keeps the native helmet for any wearer
+whose head resource is missing.
 """
 from __future__ import annotations
 
@@ -20,6 +21,15 @@ ROOT = Path(__file__).resolve().parents[1]
 DIRECTORY = ROOT / "sw_pt_head"
 PATTERN = re.compile(r"helm_(\d{3})")
 HEAD_BASE = 1000
+# appearance.2da RACE letters of the playable parts-based species. Head models never fall
+# back across race or gender, so every letter needs both genders. SWLOR.Game.Server.Tests'
+# HelmetTintTests fails if a species in RacialAppearanceRegistry uses a letter missing here.
+BODY_RACES = ("h", "e", "o", "d", "z")
+HEAD_TARGET = re.compile(r"p[fm][a-z]0_head1\d{3}")
+
+
+def head_targets(head: int) -> list[str]:
+    return [f"p{gender}{race}0_head{head}" for race in BODY_RACES for gender in ("m", "f")]
 
 
 def rename_model(data: bytes, source: str, target: str) -> bytes:
@@ -58,7 +68,7 @@ def plan() -> dict[Path, bytes]:
     output = {}
     for name in sorted(registered):
         head = HEAD_BASE + int(PATTERN.fullmatch(name)[1])
-        targets = [f"p{gender}h0_head{head}" for gender in ("m", "f")]
+        targets = head_targets(head)
         # Head IDs are reserved across every gender/race/phenotype, not just
         # the two fallback resources we generate.
         for model, path in active.items():
@@ -81,7 +91,7 @@ def check() -> list[str]:
             errors.append(f"Helmet RGB model is missing or differs from its source geometry: {path.name}")
     # A reserved head without a registered tintable helmet would never be selected.
     for path in DIRECTORY.glob("p*_head1*.mdl"):
-        if re.fullmatch(r"p[fm]h0_head1\d{3}", path.stem.lower()) and path not in outputs:
+        if HEAD_TARGET.fullmatch(path.stem.lower()) and path not in outputs:
             errors.append(f"Orphaned helmet RGB head: {path.name}")
     return errors
 
@@ -101,7 +111,7 @@ def main():
     outputs = plan()
     for path, data in outputs.items():
         path.write_bytes(data)
-    print(f"Generated {len(outputs)} compiled head models for {len(outputs) // 2} tintable helmets.")
+    print(f"Generated {len(outputs)} compiled head models for {len(outputs) // (2 * len(BODY_RACES))} tintable helmets.")
 
 
 if __name__ == "__main__":
