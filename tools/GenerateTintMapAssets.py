@@ -765,6 +765,18 @@ def find_tint_source_models() -> dict[str, Path]:
                 raise ValueError("Invalid robe RGB model mapping")
             root = match[1] + columns[2]
             derived.update((root, root + "_robe" + match[2]))
+    # Helmet heads retain their source helmet's materials and are audited by
+    # GenerateHelmetRgbModels. Rebinding them as skin-owned heads loses item dyes.
+    helmet_table = REPOSITORY_ROOT / "sw_2da" / "helmrgb.2da"
+    if helmet_table.is_file():
+        for line in helmet_table.read_text().splitlines()[3:]:
+            columns = line.split()
+            if len(columns) != 5 or not re.fullmatch(r"helm_\d{3}", columns[1]):
+                raise ValueError("Invalid helmet RGB model mapping")
+            head = 1000 + int(columns[1][5:])
+            if columns[2:] != [str(head), f"pmh0_head{head}", f"pfh0_head{head}"]:
+                raise ValueError("Invalid helmet RGB head resources")
+            derived.update(columns[3:])
     return {name: path for name, path in find_active_models().items() if name not in derived}
 
 
@@ -3536,6 +3548,9 @@ def audit() -> None:
     if (REPOSITORY_ROOT / "sw_2da" / "roberender.2da").is_file():
         import GenerateRobeRgbModels
         errors.extend(GenerateRobeRgbModels.check())
+    if (REPOSITORY_ROOT / "sw_2da" / "helmrgb.2da").is_file():
+        import GenerateHelmetRgbModels
+        errors.extend(GenerateHelmetRgbModels.check())
     texture_sources: dict[str, set[tuple[str, int, int]]] = {}
     if not entries:
         errors.append("tint source manifest is empty")
