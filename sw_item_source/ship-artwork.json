@@ -1,0 +1,740 @@
+{
+  "generator": "Built-in ImageGen (GPT Image 2)",
+  "basePrompt": "Use case: stylized-concept. Generate ONE original SWLOR science-fiction RPG equipment icon, square central subject for 32x32 action and 64x64 inventory display. Polished painterly metallic game illustration, three-quarter perspective, one very recognizable coherent device with layered shadows and highlights, large strong silhouette, only a few bold readable features. A uniform nearly black charcoal background. All object edges, glows and accents fully contained within the central 72 percent with generous blank margin all around. No border or frame, no text, letters, numbers, badges, watermark, interface, humanoids, hands, starfield or full spaceship. Completely original mechanical design, no EVE Online imagery or copied game art. The project tools will stamp the semantic frame separately. Subject: ",
+  "assets": [
+    {
+      "key": "combat_laser",
+      "icon": "iit_smcmblaser",
+      "category": "Harmful",
+      "name": "Combat laser",
+      "patterns": "com_laser_",
+      "subject": "Single-target thermal laser cannon; red emitter and broad barrel on a swivel mount.",
+      "source": "combat_laser.png",
+      "promptOverride": "Use case: stylized-concept. Asset type: original SWLOR starship equipment inventory and action icon, square central artwork, readable when reduced to 32x32. Generate one polished hand-painted science-fiction RPG equipment icon depicting a COMBAT LASER: a compact original starship-mounted single thermal laser cannon, angular charcoal and brushed-steel housing, visibly recognizable broad barrel, bright hot-red emitter lens at its muzzle, short contained red energy bolt exiting diagonally toward upper right, copper cooling vents and a substantial swivel mounting bracket. One coherent object, 3/4 perspective, fills central 75 percent of image with clear silhouette and layered painterly metallic highlights. Backdrop uniform very dark charcoal black. Strong local contrast, only a few large readable details; edges clean and entire subject including bolt stays well inside the square. This is a thermal single-target weapon, distinct from an ion cannon, beam cannon, missile launcher, or mining laser. Completely original mechanical design; no EVE Online imagery, no copied existing game icon, no trademarks. No text, letters, numbers, badges, frame, border, watermark, starfield, tiny noise, interface, extra objects, humanoids or hands. Do not render a full spaceship. The project tools will apply the frame separately."
+    },
+    {
+      "key": "ion_cannon",
+      "icon": "iit_smioncann",
+      "category": "Harmful",
+      "name": "Ion cannon",
+      "patterns": "ion_cann_",
+      "subject": "Electromagnetic cannon with a blue circular induction coil and paired horseshoe electrodes.",
+      "source": "ion_cannon.png",
+      "promptOverride": "Use case: stylized-concept. Generate ONE original SWLOR science-fiction RPG equipment icon, square central subject for 32x32 action and 64x64 inventory display. Polished painterly metallic game illustration, three-quarter perspective, one very recognizable coherent device with layered shadows and highlights, large strong silhouette, only a few bold readable features. A uniform nearly black charcoal background. All object edges, glows and accents fully contained within the central 72 percent with generous blank margin all around. No border or frame, no text, letters, numbers, badges, watermark, interface, humanoids, hands, starfield or full spaceship. Completely original mechanical design, no EVE Online imagery or copied game art. The project tools will stamp the semantic frame separately. Subject: An ION CANNON for single-target electromagnetic damage: short armored emitter with a broad cobalt-blue circular induction coil muzzle, two chunky horseshoe electrodes embracing that muzzle, small contained violet electrical arcs across the gap, graphite steel mounting cradle. Clear ion-coil silhouette, not a red laser barrel. No outgoing beam; contained electrical glow only."
+    },
+    {
+      "key": "beam_cannon",
+      "icon": "iit_smbeamcann",
+      "category": "Harmful",
+      "name": "Beam cannon",
+      "patterns": "beamcannon",
+      "subject": "Sustained thermal beam weapon with a long slender split focusing barrel and two orange lens discs.",
+      "source": "beam_cannon.png"
+    },
+    {
+      "key": "quad_laser",
+      "icon": "iit_smquadlaser",
+      "category": "Harmful",
+      "name": "Quad laser cannon",
+      "patterns": "cap_quadlas",
+      "subject": "Four thermal laser barrels in a square cluster on a heavy capital ship turret.",
+      "source": "quad_laser.png"
+    },
+    {
+      "key": "turbolaser",
+      "icon": "iit_smturbolas",
+      "category": "Harmful",
+      "name": "Turbolaser",
+      "patterns": "turbolas",
+      "subject": "Heavy thermal turret with two massive parallel reinforced barrels and red rectangular apertures.",
+      "source": "turbolaser.png"
+    },
+    {
+      "key": "storm_cannon",
+      "icon": "iit_smstormcann",
+      "category": "Harmful",
+      "name": "Storm cannon",
+      "patterns": "storm_cann",
+      "subject": "Long-range electromagnetic cannon with a triangular rail channel between three cyan charged rails.",
+      "source": "storm_cannon.png"
+    },
+    {
+      "key": "concussion_launcher",
+      "icon": "iit_smconclaunch",
+      "category": "Harmful",
+      "name": "Concussion missile launcher",
+      "patterns": "acm_launch_",
+      "subject": "Armored rotary missile launcher with three blunt orange concussion warheads in triangular tubes.",
+      "source": "concussion_launcher.png"
+    },
+    {
+      "key": "missile_launcher",
+      "icon": "iit_smmsllaunch",
+      "category": "Harmful",
+      "name": "Missile launcher",
+      "patterns": "msl_launch_",
+      "subject": "Rectangular twin launch rack with two finned red missiles inside open square tubes.",
+      "source": "missile_launcher.png"
+    },
+    {
+      "key": "bomb_launcher",
+      "icon": "iit_smbomblaunch",
+      "category": "Harmful",
+      "name": "Proton bomb launcher",
+      "patterns": "protbomblnch",
+      "subject": "Heavy gravity bomb release cradle holding one squat spherical purple proton bomb with four fins.",
+      "source": "bomb_launcher.png"
+    },
+    {
+      "key": "laser_battery",
+      "icon": "iit_smlasbattery",
+      "category": "Harmful",
+      "name": "Laser cannon battery",
+      "patterns": "lasbattery,npcautolas",
+      "subject": "Automated area suppression battery: three short red laser turrets spread across one crescent armored mount.",
+      "source": "laser_battery.png"
+    },
+    {
+      "key": "hull_repairer",
+      "icon": "iit_smhullrepair",
+      "category": "Beneficial",
+      "name": "Hull repairer",
+      "patterns": "hull_rep_",
+      "subject": "U-shaped ivory maintenance projector welding a green seam in a broken curved hull plate.",
+      "source": "hull_repairer.png",
+      "promptOverride": "Use case: stylized-concept. Generate ONE original SWLOR science-fiction RPG equipment icon, square central subject for 32x32 action and 64x64 inventory display. Polished painterly metallic game illustration, three-quarter perspective, one very recognizable coherent device with layered shadows and highlights, large strong silhouette, only a few bold readable features. A uniform nearly black charcoal background. All object edges, glows and accents fully contained within the central 72 percent with generous blank margin all around. No border or frame, no text, letters, numbers, badges, watermark, interface, humanoids, hands, starfield or full spaceship. Completely original mechanical design, no EVE Online imagery or copied game art. The project tools will stamp the semantic frame separately. Subject: A HULL REPAIR PROJECTOR that restores damaged allied or own ship armor: compact ivory-and-dark-steel maintenance projector with a distinct U-shaped repair jaw hovering just above a broken curved hull plate; a short luminous green weld seam visibly joins the two halves of the plate. Three-quarter view with plate and jaw forming a clear repair silhouette, no generic medical cross or human hand."
+    },
+    {
+      "key": "shield_repairer",
+      "icon": "iit_smshldrepair",
+      "category": "Beneficial",
+      "name": "Shield repairer",
+      "patterns": "shld_rep_",
+      "subject": "Shield restoration projector: three wide radial silver arms enclosing a partly broken translucent blue shield dome being repaired by green energy.",
+      "source": "shield_repairer.png"
+    },
+    {
+      "key": "repair_field",
+      "icon": "iit_smrepfield",
+      "category": "Beneficial",
+      "name": "Repair field generator",
+      "patterns": "repairfield",
+      "subject": "Area hull repair generator: green luminous hexagonal central tower with three green repair rays landing on three small steel armor plates around its base.",
+      "source": "repair_field.png"
+    },
+    {
+      "key": "bulwark_generator",
+      "icon": "iit_smbulwark",
+      "category": "Beneficial",
+      "name": "Bulwark shield generator",
+      "patterns": "bulwarkgen",
+      "subject": "Broad squat armored shield generator deploying a complete thick cyan shield dome above its square base.",
+      "source": "bulwark_generator.png"
+    },
+    {
+      "key": "mining_laser",
+      "icon": "iit_smminelaser",
+      "category": "Utility",
+      "name": "Mining laser",
+      "patterns": "min_laser_",
+      "subject": "Yellow industrial cutting head with a thick cyan focusing crystal and clamp arms gripping an asteroid chunk.",
+      "source": "mining_laser.png",
+      "promptOverride": "Use case: stylized-concept. Generate ONE original SWLOR science-fiction RPG equipment icon, square central subject for 32x32 action and 64x64 inventory display. Polished painterly metallic game illustration, three-quarter perspective, one very recognizable coherent device with layered shadows and highlights, large strong silhouette, only a few bold readable features. A uniform nearly black charcoal background. All object edges, glows and accents fully contained within the central 72 percent with generous blank margin all around. No border or frame, no text, letters, numbers, badges, watermark, interface, humanoids, hands, starfield or full spaceship. Completely original mechanical design, no EVE Online imagery or copied game art. The project tools will stamp the semantic frame separately. Subject: A MINING LASER that extracts asteroid ore: heavy industrial yellow-brass cutting head with a single thick faceted cyan focusing crystal, a broad squat emitter housing, two substantial clamp arms gripping one small dark mineral chunk beneath the cutting head, a tiny contained amber cutting spark and one large ore shard. Engineering extraction equipment, no weapon muzzle, no outgoing beam extending out of frame."
+    },
+    {
+      "key": "strip_miner",
+      "icon": "iit_smstripminer",
+      "category": "Utility",
+      "name": "Strip miner",
+      "patterns": "cap_minlas",
+      "subject": "Capital ore strip miner: enormous orange excavating scoop with twin cutting heads and a wide intake hopper holding mineral chunks. Recognizable scoop silhouette.",
+      "source": "strip_miner.png"
+    },
+    {
+      "key": "hypermatter_injector",
+      "icon": "iit_smhminject",
+      "category": "Self",
+      "name": "Hypermatter injector",
+      "patterns": "cap_inject",
+      "subject": "Fuel-powered capacitor recharge injector: upright narrow copper pump with a removable glowing cyan capsule and curved pipe feeding a blue energy reservoir.",
+      "source": "hypermatter_injector.png"
+    },
+    {
+      "key": "capacitor_booster",
+      "icon": "iit_smcapboost",
+      "category": "Passive",
+      "name": "Capacitor booster",
+      "patterns": "cap_boost_",
+      "subject": "Compact capacitor bank with three thick upright blue cylindrical energy cells strapped together in a steel tray.",
+      "source": "capacitor_booster.png"
+    },
+    {
+      "key": "hull_booster",
+      "icon": "iit_smhullboost",
+      "category": "Passive",
+      "name": "Hull booster",
+      "patterns": "hull_boost_",
+      "subject": "Hull reinforcement assembly: two curved thick steel ribs riveted across a dark armored panel.",
+      "source": "hull_booster.png"
+    },
+    {
+      "key": "shield_booster",
+      "icon": "iit_smshldboost",
+      "category": "Passive",
+      "name": "Shield booster",
+      "patterns": "shld_boost_",
+      "subject": "Shield capacity booster with a large luminous cyan faceted crystal encased in a triangular steel cage.",
+      "source": "shield_booster.png"
+    },
+    {
+      "key": "evasion_booster",
+      "icon": "iit_smevaboost",
+      "category": "Passive",
+      "name": "Evasion booster",
+      "patterns": "eva_boost_",
+      "subject": "Small maneuvering booster with two offset orange thruster nozzles and compact gyroscopic stabilizer.",
+      "source": "evasion_booster.png"
+    },
+    {
+      "key": "targeting_system",
+      "icon": "iit_smtgtsystem",
+      "category": "Passive",
+      "name": "Targeting system",
+      "patterns": "tgt_sys_",
+      "subject": "Accuracy sensor: swiveling compact dish with a large red glass target lens inside a chunky crosshair shaped steel housing.",
+      "source": "targeting_system.png"
+    },
+    {
+      "key": "em_amplifier",
+      "icon": "iit_smemamp",
+      "category": "Passive",
+      "name": "EM damage amplifier",
+      "patterns": "em_amp_",
+      "subject": "Electromagnetic amplifier: thick horseshoe electromagnet with blue coil winding bridging a glowing charged orb.",
+      "source": "em_amplifier.png"
+    },
+    {
+      "key": "thermal_amplifier",
+      "icon": "iit_smthermamp",
+      "category": "Passive",
+      "name": "Thermal damage amplifier",
+      "patterns": "therm_amp_",
+      "subject": "Thermal amplifier: squat copper heat exchanger with three bold orange hot fins and a red crystalline power core.",
+      "source": "thermal_amplifier.png"
+    },
+    {
+      "key": "explosive_amplifier",
+      "icon": "iit_smexpamp",
+      "category": "Passive",
+      "name": "Explosive damage amplifier",
+      "patterns": "exp_amp_",
+      "subject": "Explosive weapon amplifier: angular firing-control block with a thick orange detonation chamber and paired percussion plungers.",
+      "source": "explosive_amplifier.png"
+    },
+    {
+      "key": "ion_shielding",
+      "icon": "iit_smionarmor",
+      "category": "Passive",
+      "name": "Supplemental ion shielding",
+      "patterns": "ion_armor_",
+      "subject": "Electromagnetic armor panel: copper Faraday lattice enclosing a blue electrical arc, visibly deflecting electricity.",
+      "source": "ion_shielding.png"
+    },
+    {
+      "key": "mirrored_plating",
+      "icon": "iit_smmirrarmor",
+      "category": "Passive",
+      "name": "Mirrored plating",
+      "patterns": "las_armor_",
+      "subject": "Thermal armor: brilliant silver mirror plates overlapping in a fan, reflecting one tiny contained red laser glint.",
+      "source": "mirrored_plating.png"
+    },
+    {
+      "key": "reactive_armor",
+      "icon": "iit_smreactarmor",
+      "category": "Passive",
+      "name": "Reactive armor",
+      "patterns": "exp_armor_",
+      "subject": "Explosive defense armor: chunky layered rectangular reactive tiles on a broad dark hull panel with one contained orange impact spark.",
+      "source": "reactive_armor.png"
+    },
+    {
+      "key": "durasteel_plating",
+      "icon": "iit_smdurarmor",
+      "category": "Passive",
+      "name": "Durasteel plating",
+      "patterns": "hvy_armor_",
+      "subject": "Heavy all-purpose armor: massive dark steel slab with raised thick crossed bracing and beveled riveted corners.",
+      "source": "durasteel_plating.png"
+    },
+    {
+      "key": "advanced_thrusters",
+      "icon": "iit_smadvthrust",
+      "category": "Passive",
+      "name": "Advanced thrusters",
+      "patterns": "cap_thrust",
+      "subject": "Capital maneuvering thrusters: three broad cyan thruster exhaust nozzles on a compact offset triangular mounting plate.",
+      "source": "advanced_thrusters.png"
+    },
+    {
+      "key": "power_diverter",
+      "icon": "iit_smpowdivert",
+      "category": "Passive",
+      "name": "Capital power diverter",
+      "patterns": "cap_pwdiv",
+      "subject": "Shield recharge power router: chunky Y-shaped copper power manifold with two blue branches and one depleted dark capacitor branch.",
+      "source": "power_diverter.png"
+    },
+    {
+      "key": "redundant_shields",
+      "icon": "iit_smredshld",
+      "category": "Passive",
+      "name": "Redundant shield generator",
+      "patterns": "cap_shields",
+      "subject": "Redundant shield capacity array with three tall triangular cyan projector spires in a ring on a silver platform.",
+      "source": "redundant_shields.png"
+    },
+    {
+      "key": "reinforced_plating",
+      "icon": "iit_smreinplate",
+      "category": "Passive",
+      "name": "Reinforced plating",
+      "patterns": "cap_armor",
+      "subject": "Capital armor reinforcement: three very thick overlapping bronze steel plates bolted to a wide backbone.",
+      "source": "reinforced_plating.png"
+    },
+    {
+      "key": "targeting_array",
+      "icon": "iit_smtgtarray",
+      "category": "Passive",
+      "name": "Targeting array",
+      "patterns": "cap_target",
+      "subject": "Long-range accuracy array: three differently tilted radar dishes on one heavy silver mast with a red central sensor.",
+      "source": "targeting_array.png"
+    },
+    {
+      "key": "weapons_computer",
+      "icon": "iit_smwpncomp",
+      "category": "Passive",
+      "name": "Weapons computer",
+      "patterns": "cap_wcomp",
+      "subject": "Weapons damage computer: rugged red-lit rectangular targeting processor with three massive red power sockets and a steel heat sink.",
+      "source": "weapons_computer.png"
+    },
+    {
+      "key": "ewar",
+      "icon": "iit_smewar",
+      "category": "Control",
+      "name": "Capital electronic warfare",
+      "patterns": "cap_ewar",
+      "subject": "Electronic warfare threat beacon: tall violet transmitter mast with two concentric dish rings emitting contained purple interference waves.",
+      "source": "ewar.png"
+    },
+    {
+      "key": "fighter_config",
+      "icon": "iit_smfigconfig",
+      "category": "Utility",
+      "name": "Fighter configuration",
+      "patterns": "config_fig,con_fig",
+      "subject": "Ship role configuration cartridge: rugged rectangular gold circuit cartridge displaying a bold embossed balanced twin-wing fighter silhouette, no text.",
+      "source": "fighter_config.png"
+    },
+    {
+      "key": "interceptor_config",
+      "icon": "iit_smintconfig",
+      "category": "Utility",
+      "name": "Interceptor configuration",
+      "patterns": "config_int,con_int",
+      "subject": "Ship role configuration cartridge: narrow swept silver circuit cartridge with embossed needle-like fast interceptor silhouette and two cyan engine markings, no text.",
+      "source": "interceptor_config.png"
+    },
+    {
+      "key": "bomber_config",
+      "icon": "iit_smbmbconfig",
+      "category": "Utility",
+      "name": "Bomber configuration",
+      "patterns": "config_bmb,con_bmb",
+      "subject": "Ship role configuration cartridge: broad dark red circuit cartridge with embossed chunky bomber silhouette and two circular bomb sockets, no text.",
+      "source": "bomber_config.png"
+    },
+    {
+      "key": "logistics_config",
+      "icon": "iit_smlogconfig",
+      "category": "Utility",
+      "name": "Logistics configuration",
+      "patterns": "config_ind",
+      "subject": "Ship role configuration cartridge: green industrial circuit cartridge with embossed boxy cargo tug silhouette and a prominent clamp attachment, no text.",
+      "source": "logistics_config.png"
+    },
+    {
+      "key": "heavy_config",
+      "icon": "iit_smhvyconfig",
+      "category": "Utility",
+      "name": "Heavy ship configuration",
+      "patterns": "con_hvy",
+      "subject": "Ship role configuration cartridge: thick steel circuit cartridge with embossed heavily armored broad-wing vessel silhouette and bulky reinforced edges, no text.",
+      "source": "heavy_config.png"
+    },
+    {
+      "key": "logistics_nexus",
+      "icon": "iit_smlognexus",
+      "category": "Utility",
+      "name": "Logistics nexus configuration",
+      "patterns": "cap_indus",
+      "subject": "Capital logistics role core: broad green hexagonal processor casing with a central embossed industrial capital ship silhouette and three cargo clamp nodes, no text.",
+      "source": "logistics_nexus.png"
+    },
+    {
+      "key": "skirmisher_config",
+      "icon": "iit_smskirmcfg",
+      "category": "Utility",
+      "name": "Skirmisher configuration",
+      "patterns": "cap_skirm",
+      "subject": "Capital mobile combat role core: asymmetric silver arrowhead processor casing with embossed swift capital ship silhouette and paired cyan engine nodes, no text.",
+      "source": "skirmisher_config.png"
+    },
+    {
+      "key": "warship_config",
+      "icon": "iit_smwarconfig",
+      "category": "Utility",
+      "name": "Warship configuration",
+      "patterns": "cap_warship,npc_cap,con_cap",
+      "subject": "Capital heavy combat role core: large dark red octagonal processor casing with embossed armored broad capital ship silhouette and four weapon nodes, no text.",
+      "source": "warship_config.png"
+    },
+    {
+      "key": "missile_ammo",
+      "icon": "iit_smmslammo",
+      "category": "Utility",
+      "name": "Starship missile ammunition",
+      "patterns": "=ship_missile",
+      "subject": "One finned slim starship missile with white hull, red pointed nose and dark engine, no launcher.",
+      "source": "missile_ammo.png"
+    },
+    {
+      "key": "concussion_ammo",
+      "icon": "iit_smconcammo",
+      "category": "Utility",
+      "name": "Concussion missile ammunition",
+      "patterns": "=acm_ammo",
+      "subject": "One blunt-nosed squat orange concussion missile with four short broad fins and reinforced segmented hull, no launcher.",
+      "source": "concussion_ammo.png"
+    },
+    {
+      "key": "proton_bomb",
+      "icon": "iit_smprotbomb",
+      "category": "Utility",
+      "name": "Proton bomb ammunition",
+      "patterns": "=proton_bomb",
+      "subject": "One squat spherical violet proton bomb with four thick stabilizing fins and tiny glowing purple core, no launcher.",
+      "source": "proton_bomb.png"
+    },
+    {
+      "key": "fuel_capsule",
+      "icon": "iit_smfuelcaps",
+      "category": "Utility",
+      "name": "Hypermatter fuel capsule",
+      "patterns": "=ship_fuelcapsule",
+      "subject": "Sealed portable copper hypermatter capsule with a single luminous cyan central window, two steel locking collars and sturdy short body.",
+      "source": "fuel_capsule.png"
+    },
+    {
+      "key": "starship_fuel",
+      "icon": "iit_smshipfuel",
+      "category": "Utility",
+      "name": "Starship fuel",
+      "patterns": "=starship_fuel",
+      "subject": "Heavy fuel canister: squat blue steel pressure drum with thick dark cap, small amber viewing slit and a single filling valve.",
+      "source": "starship_fuel.png"
+    },
+    {
+      "key": "hyperdrive",
+      "icon": "iit_smhyperdrv",
+      "category": "Utility",
+      "name": "Hyperdrive",
+      "patterns": "=hyperdrive",
+      "subject": "Original hyperdrive assembly: large bronze toroidal acceleration ring encircling a blue-white crystalline core with three heavy mounting spokes.",
+      "source": "hyperdrive.png"
+    },
+    {
+      "key": "hull_hardware",
+      "icon": "iit_smhullplate",
+      "category": "Utility",
+      "name": "Starship hull plating",
+      "patterns": "=hull_plating",
+      "subject": "Curved modular spacecraft hull panel of brushed silver steel with rivet seams and two attachment hooks, no active glow.",
+      "source": "hull_hardware.png"
+    },
+    {
+      "key": "fuel_tank",
+      "icon": "iit_smfueltank",
+      "category": "Utility",
+      "name": "Auxiliary fuel tanks",
+      "patterns": "ssfuel",
+      "subject": "Additional starship fuel storage: two broad steel cylindrical tanks joined by a brass crossover pipe and armored mounting strap.",
+      "source": "fuel_tank.png"
+    },
+    {
+      "key": "aux_blaster",
+      "icon": "iit_smauxblast",
+      "category": "Utility",
+      "name": "Auxiliary starship blaster",
+      "patterns": "=sswpn1,=ship_blaster_1",
+      "subject": "Small single red energy blaster turret with compact stub barrel and silver ball socket mounting; clearly light ship hardware.",
+      "source": "aux_blaster.png"
+    },
+    {
+      "key": "light_cannon",
+      "icon": "iit_smlghtcann",
+      "category": "Utility",
+      "name": "Light starship cannon",
+      "patterns": "=sswpn2",
+      "subject": "Light ship cannon: long single gray barrel with orange muzzle ring, angular breech and a small triangular fixed mounting bracket.",
+      "source": "light_cannon.png"
+    },
+    {
+      "key": "capital_deed",
+      "icon": "iit_smcapdeed",
+      "category": "Utility",
+      "name": "Capital ship construction deed",
+      "patterns": "capdeed_",
+      "subject": "Ship construction authorization: one rugged rectangular metallic datapad bearing a bright cyan wireframe corvette hull hologram, no letters or numbers.",
+      "source": "capital_deed.png"
+    },
+    {
+      "key": "ship_item",
+      "icon": "iit_smshipitem",
+      "category": "Utility",
+      "name": "Starship item",
+      "patterns": "=starship",
+      "subject": "One original small compact gray starship with two swept wings and bright twin cyan engines, three-quarter overhead view, no starfield.",
+      "source": "ship_item.png"
+    },
+    {
+      "key": "enh_accuracy",
+      "icon": "iit_smenhacc",
+      "category": "Utility",
+      "name": "Starship accuracy enhancement",
+      "patterns": "sen_acc",
+      "subject": "Craftable upgrade chip: squared silver circuit wafer with a large red crosshair-shaped sensor lens mounted at center, gold contacts.",
+      "source": "enh_accuracy.png"
+    },
+    {
+      "key": "enh_hull",
+      "icon": "iit_smenhhull",
+      "category": "Utility",
+      "name": "Starship hull enhancement",
+      "patterns": "sen_armor",
+      "subject": "Craftable upgrade chip: thick iron circuit wafer with two raised steel structural ribs across its face, gold contacts.",
+      "source": "enh_hull.png"
+    },
+    {
+      "key": "enh_capacitor",
+      "icon": "iit_smenhcap",
+      "category": "Utility",
+      "name": "Starship capacitor enhancement",
+      "patterns": "sen_cap",
+      "subject": "Craftable upgrade chip: tall narrow circuit wafer carrying three blue barrel capacitors, gold contacts.",
+      "source": "enh_capacitor.png"
+    },
+    {
+      "key": "enh_em_defense",
+      "icon": "iit_smenhemdef",
+      "category": "Utility",
+      "name": "Starship EM defense enhancement",
+      "patterns": "sen_emdef",
+      "subject": "Craftable upgrade chip: copper circuit wafer with a prominent blue horseshoe Faraday cage protecting a central silver core, gold contacts.",
+      "source": "enh_em_defense.png"
+    },
+    {
+      "key": "enh_em_damage",
+      "icon": "iit_smenhemdmg",
+      "category": "Utility",
+      "name": "Starship EM damage enhancement",
+      "patterns": "sen_emdmg",
+      "subject": "Craftable upgrade chip: dark circuit wafer bearing a raised blue induction coil with two open charged electrodes, gold contacts.",
+      "source": "enh_em_damage.png"
+    },
+    {
+      "key": "enh_evasion",
+      "icon": "iit_smenheva",
+      "category": "Utility",
+      "name": "Starship evasion enhancement",
+      "patterns": "sen_eva",
+      "subject": "Craftable upgrade chip: silver arrow-shaped circuit wafer with an orange three-ring gyroscope mounted at center, gold contacts.",
+      "source": "enh_evasion.png"
+    },
+    {
+      "key": "enh_exp_defense",
+      "icon": "iit_smenhexpdef",
+      "category": "Utility",
+      "name": "Starship explosive defense enhancement",
+      "patterns": "sen_expdef",
+      "subject": "Craftable upgrade chip: broad dark circuit wafer bearing three heavy gray reactive armor tiles in a triangle, gold contacts.",
+      "source": "enh_exp_defense.png"
+    },
+    {
+      "key": "enh_exp_damage",
+      "icon": "iit_smenhexpdmg",
+      "category": "Utility",
+      "name": "Starship explosive damage enhancement",
+      "patterns": "sen_expdmg",
+      "subject": "Craftable upgrade chip: angular copper circuit wafer carrying a bright orange spherical detonation chamber between two plungers, gold contacts.",
+      "source": "enh_exp_damage.png"
+    },
+    {
+      "key": "enh_shields",
+      "icon": "iit_smenhshld",
+      "category": "Utility",
+      "name": "Starship shield enhancement",
+      "patterns": "sen_shield",
+      "subject": "Craftable upgrade chip: silver circuit wafer with one large raised cyan faceted shield crystal in a triangular cage, gold contacts.",
+      "source": "enh_shields.png"
+    },
+    {
+      "key": "enh_shield_recharge",
+      "icon": "iit_smenhshrech",
+      "category": "Utility",
+      "name": "Starship shield recharge enhancement",
+      "patterns": "sen_shrech",
+      "subject": "Craftable upgrade chip: green circuit wafer with a raised cyan spiral energy coil and three green feed prongs, gold contacts.",
+      "source": "enh_shield_recharge.png"
+    },
+    {
+      "key": "enh_thermal_defense",
+      "icon": "iit_smenhthdef",
+      "category": "Utility",
+      "name": "Starship thermal defense enhancement",
+      "patterns": "sen_thermdef",
+      "subject": "Craftable upgrade chip: white ceramic circuit wafer with two highly reflective raised silver mirror tiles, gold contacts.",
+      "source": "enh_thermal_defense.png"
+    },
+    {
+      "key": "enh_thermal_damage",
+      "icon": "iit_smenhthdmg",
+      "category": "Utility",
+      "name": "Starship thermal damage enhancement",
+      "patterns": "sen_thermdmg",
+      "subject": "Craftable upgrade chip: black circuit wafer carrying three raised glowing orange heat fins and a red focusing lens, gold contacts.",
+      "source": "enh_thermal_damage.png"
+    },
+    {
+      "key": "module_enhancement",
+      "icon": "iit_smenhmodule",
+      "category": "Utility",
+      "name": "Ship module enhancement",
+      "patterns": "men_mod",
+      "subject": "Craftable ship module upgrade chip: rugged violet circuit wafer with a central steel gear surrounding a luminous magenta processor core, gold contacts.",
+      "source": "module_enhancement.png"
+    },
+    {
+      "key": "corvette_hull",
+      "icon": "iit_smcorhull",
+      "category": "Utility",
+      "name": "Corvette hull construction",
+      "patterns": "=capc_corhull",
+      "subject": "Unfinished original corvette hull section: large curved dark steel skeletal frame with two silver armor plates attached, miniature shipyard component.",
+      "source": "corvette_hull.png"
+    },
+    {
+      "key": "corvette_engines",
+      "icon": "iit_smcoreng",
+      "category": "Utility",
+      "name": "Corvette engines construction",
+      "patterns": "=capc_eng",
+      "subject": "Corvette engine assembly: massive twin orange rocket engine bells attached to one rectangular steel engine block with connecting pipes.",
+      "source": "corvette_engines.png"
+    },
+    {
+      "key": "system_computer",
+      "icon": "iit_smsyscomp",
+      "category": "Utility",
+      "name": "Dedicated system computer",
+      "patterns": "=capc_modcomp",
+      "subject": "Ship construction computer part: compact armored green circuit processor block with chunky heat fins and two gold connector plugs.",
+      "source": "system_computer.png"
+    },
+    {
+      "key": "power_relay",
+      "icon": "iit_smpowrelay",
+      "category": "Utility",
+      "name": "Power relay construction",
+      "patterns": "=capc_power",
+      "subject": "Ship construction power relay: small thick copper bridge contactor with two massive terminal posts and a ceramic insulating base.",
+      "source": "power_relay.png"
+    },
+    {
+      "key": "corvette_power",
+      "icon": "iit_smcorpower",
+      "category": "Utility",
+      "name": "Corvette power system construction",
+      "patterns": "=capc_powsys",
+      "subject": "Corvette power system assembly: broad steel switchboard with three heavy copper bus bars and a central blue energy regulator.",
+      "source": "corvette_power.png"
+    },
+    {
+      "key": "reactor",
+      "icon": "iit_smreactor",
+      "category": "Utility",
+      "name": "Reactor construction",
+      "patterns": "=capc_react",
+      "subject": "Compact spacecraft reactor part: bright violet cylindrical reaction core inside a thick bronze circular containment cage.",
+      "source": "reactor.png"
+    },
+    {
+      "key": "reactor_bay",
+      "icon": "iit_smreactbay",
+      "category": "Utility",
+      "name": "Corvette reactor bay construction",
+      "patterns": "=capc_rebay",
+      "subject": "Empty ship reactor bay: heavy rectangular steel cradle with four thick curved clamps and open dark circular reactor socket, no reactor.",
+      "source": "reactor_bay.png"
+    },
+    {
+      "key": "shield_generator_part",
+      "icon": "iit_smshldpart",
+      "category": "Utility",
+      "name": "Shield generator construction",
+      "patterns": "=capc_shgen",
+      "subject": "Ship construction shield generator part: low circular blue projector dish on a heavy silver block with two chunky connector sockets.",
+      "source": "shield_generator_part.png"
+    },
+    {
+      "key": "structural_parts",
+      "icon": "iit_smstrucpart",
+      "category": "Utility",
+      "name": "Structural components construction",
+      "patterns": "=capc_struc",
+      "subject": "Ship construction structural parts: two heavy silver I-beams and one broad riveted support bracket stacked in a coherent bundle.",
+      "source": "structural_parts.png"
+    },
+    {
+      "key": "tech_components",
+      "icon": "iit_smtechpart",
+      "category": "Utility",
+      "name": "Tech components construction",
+      "patterns": "=capc_techcom",
+      "subject": "Ship construction technology parts: compact open steel supply tray holding one copper cable spool and two chunky green circuit blocks.",
+      "source": "tech_components.png"
+    },
+    {
+      "key": "thruster_part",
+      "icon": "iit_smthrustpart",
+      "category": "Utility",
+      "name": "Thrusters construction",
+      "patterns": "=capc_thrust",
+      "subject": "Ship construction thruster part: single large orange exhaust nozzle with a thick silver mounting collar and two short fuel pipes.",
+      "source": "thruster_part.png"
+    },
+    {
+      "key": "ship_production",
+      "icon": "iit_smshipprod",
+      "category": "Utility",
+      "name": "Starship production unit",
+      "patterns": "=star_prod_unit",
+      "source": "ship_production.png",
+      "subject": "A starship fabrication production unit: one sturdy compact rectangular industrial gantry machine with two large articulated welding arms holding a silver spacecraft hull panel inside its amber-lit assembly bay; thick dark steel frame, a broad green status lamp, three-quarter perspective. Clearly a manufacturing station component, not a gun, reactor, ship or generic computer. No lettering or numbers."
+    }
+  ],
+  "postprocess": "ImageMagick source resize to 256x256; GenerateShipItemIcons.ps1 renders 32x32 action and 64x64 native inventory images, then uses the shared semantic stamper and regular cooldown generator."
+}
