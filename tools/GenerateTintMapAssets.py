@@ -765,7 +765,15 @@ def find_tint_source_models() -> dict[str, Path]:
                 raise ValueError("Invalid robe RGB model mapping")
             root = match[1] + columns[2]
             derived.update((root, root + "_robe" + match[2]))
-    return {name: path for name, path in find_active_models().items() if name not in derived}
+    # Helmet heads (head 1000 + NNN for helm_NNN) retain their source helmet's materials
+    # and are audited by GenerateHelmetRgbModels. Rebinding them as skin-owned heads loses
+    # item dyes.
+    active = find_active_models()
+    for name in active:
+        match = re.fullmatch(r"p[fm][a-z]0_head1(\d{3})", name)
+        if match and f"helm_{match[1]}" in active:
+            derived.add(name)
+    return {name: path for name, path in active.items() if name not in derived}
 
 
 def find_active_render_surfaces() -> set[str]:
@@ -3536,6 +3544,8 @@ def audit() -> None:
     if (REPOSITORY_ROOT / "sw_2da" / "roberender.2da").is_file():
         import GenerateRobeRgbModels
         errors.extend(GenerateRobeRgbModels.check())
+    import GenerateHelmetRgbModels
+    errors.extend(GenerateHelmetRgbModels.check())
     texture_sources: dict[str, set[tuple[str, int, int]]] = {}
     if not entries:
         errors.append("tint source manifest is empty")
