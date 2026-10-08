@@ -24791,7 +24791,31 @@
     },
     {
       "id": 6197,
-      "text": "Adds +10% weapon DMG when wielding one eligible one-handed melee or throwing weapon with an empty off hand. Stacks with the natural +20% Single Weapon bonus, for +30% total."
+      "text": "Adds +10% weapon DMG when wielding one eligible one-handed melee, pistol, or throwing weapon with an empty off hand (no shield). Stacks with the natural +20% Single Weapon bonus, for +30% total."
+    },
+    {
+      "id": 6198,
+      "text": "Dash behind one hostile target within 10m and increase Evasion by 10% for 30 seconds. Does not grant invisibility."
+    },
+    {
+      "id": 6199,
+      "text": "Dash behind one hostile target within 10m, remove negative movement-speed effects, and increase Evasion by 15% for 30 seconds."
+    },
+    {
+      "id": 6200,
+      "text": "Dash behind one hostile target within 10m, inflict Stunned for 2 seconds on arrival, and increase Evasion by 10% for 30 seconds. Does not grant invisibility."
+    },
+    {
+      "id": 6201,
+      "text": "Dash behind one hostile target within 10m, inflict Stunned for 2 seconds on arrival, remove negative movement-speed effects, and increase Evasion by 15% for 30 seconds."
+    },
+    {
+      "id": 6202,
+      "text": "Leap to a hostile target up to 15m away, dealing 10 force DMG plus WIL scaling, interrupting activation, and inflicting Stunned for 2 seconds on arrival."
+    },
+    {
+      "id": 6203,
+      "text": "Leap to a hostile target up to 18m away, dealing 18 force DMG plus WIL scaling, interrupting activation, and inflicting Stunned for 2 seconds on arrival."
     },
     {
       "id": 20401,
@@ -88623,7 +88647,7 @@
     },
     {
       "id": 192585,
-      "text": "Inflicts Shock on enemies within 4.5m of you for 30 seconds. Deals no direct damage."
+      "text": "Deals 32 electrical DMG plus PER scaling to enemies within 4.5m of you. Inflicts Shock for 30 seconds."
     },
     {
       "id": 192586,
@@ -88679,7 +88703,7 @@
     },
     {
       "id": 192599,
-      "text": "Hardens your carapace: +10% Physical Defense, +15% Force Defense, +20 Fire Resistance, and +20 Poison Resistance."
+      "text": "Hardens your carapace: +4% Physical Defense, +8% Force Defense, +10 Fire Resistance, and +10 Poison Resistance."
     },
     {
       "id": 192600,
@@ -88903,7 +88927,7 @@
     },
     {
       "id": 192655,
-      "text": "Hardens your body: +15% Physical Defense, +10% Force Defense, +25 Trauma Resistance, +15 Fire Resistance, and +15 Poison Resistance."
+      "text": "Hardens your body: +8% Physical Defense, +4% Force Defense, +15 Trauma Resistance, +10 Fire Resistance, and +10 Poison Resistance."
     },
     {
       "id": 192656,
@@ -89223,7 +89247,7 @@
     },
     {
       "id": 192735,
-      "text": "While active, you and allies within 10m gain +20% Defense and +20% Force Defense."
+      "text": "While active, you and allies within 10m gain +10% Physical Defense and +10% Force Defense. Multiple Warden Walls do not stack, including your own stance and an allied aura."
     },
     {
       "id": 192736,
