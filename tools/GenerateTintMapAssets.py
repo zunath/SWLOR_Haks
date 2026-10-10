@@ -55,6 +55,8 @@ TINT_HAIR_MAPPED_SHADER = REPOSITORY_ROOT / "sw_shader" / "fs_plt_hair_nm.shd"
 TINT_FRAGMENT_SHADER = "fs_plt_tinter"
 TINT_MAPPED_FRAGMENT_SHADER = "fs_plt_tinter_nm"
 TINT_HAIR_MAPPED_FRAGMENT_SHADER = "fs_plt_hair_nm"
+# Restore native color filtering only for the reported mask edge regression.
+SMOOTH_TINT_MATERIALS = frozenset({"helm_053"})
 AUTHORED_HAIR_FRAGMENT_SHADERS = {"fslit_aniso_nm"}
 _MTR_PATHS_BY_RESREF: dict[str, Path] | None = None
 _SOURCE_MTR_PATHS_BY_RESREF: dict[str, list[Path]] | None = None
@@ -765,7 +767,15 @@ def find_tint_source_models() -> dict[str, Path]:
                 raise ValueError("Invalid robe RGB model mapping")
             root = match[1] + columns[2]
             derived.update((root, root + "_robe" + match[2]))
-    return {name: path for name, path in find_active_models().items() if name not in derived}
+    # Helmet heads (head 1000 + NNN for helm_NNN) retain their source helmet's materials
+    # and are audited by GenerateHelmetRgbModels. Rebinding them as skin-owned heads loses
+    # item dyes.
+    active = find_active_models()
+    for name in active:
+        match = re.fullmatch(r"p[fm][a-z]0_head1(\d{3})", name)
+        if match and f"helm_{match[1]}" in active:
+            derived.add(name)
+    return {name: path for name, path in active.items() if name not in derived}
 
 
 def find_active_render_surfaces() -> set[str]:
@@ -2228,6 +2238,7 @@ def tint_material_text(
     native_palette: bool = False,
 ) -> str:
     source_material = source_material or material
+    smooth_edges = source_material.lower() in SMOOTH_TINT_MATERIALS
     generated_lines = path.read_text(encoding="utf-8-sig").splitlines() if path.exists() else []
     source_paths = source_mtr_paths(source_material)
     source_mtr_lines = (
@@ -2266,7 +2277,7 @@ def tint_material_text(
     )
     replaced = re.compile(
         r"^\s*(?:customshaderFS|texture0|texture7|texture9|texture10|"
-        r"parameter\s+(?:float|int)\s+(?:tintMapWidth|tintMapHeight|useTexture1Alpha|useTexture9Alpha|useNativePalette|"
+        r"parameter\s+(?:float|int)\s+(?:tintMapWidth|tintMapHeight|smoothTintEdges|useTexture1Alpha|useTexture9Alpha|useNativePalette|"
         + tint_row_parameter_pattern
         + "|"
         + tint_color_parameter_pattern
@@ -2304,6 +2315,8 @@ def tint_material_text(
         )
         + tint_palette_parameter_lines(native_palette)
     )
+    if smooth_edges:
+        lines.append("parameter float smoothTintEdges 1.0")
     if uses_texture1_alpha:
         lines.append("parameter float useTexture1Alpha 1.0")
     if texture9_alpha:
@@ -3536,6 +3549,8 @@ def audit() -> None:
     if (REPOSITORY_ROOT / "sw_2da" / "roberender.2da").is_file():
         import GenerateRobeRgbModels
         errors.extend(GenerateRobeRgbModels.check())
+    import GenerateHelmetRgbModels
+    errors.extend(GenerateHelmetRgbModels.check())
     texture_sources: dict[str, set[tuple[str, int, int]]] = {}
     if not entries:
         errors.append("tint source manifest is empty")

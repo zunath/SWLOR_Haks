@@ -382,6 +382,23 @@ def check_native_palette_fallback(test, engine, pairs, root: Path):
             palette[((175 - color) * 256 + shade) * 4 + 1],
             palette[((175 - color) * 256 + shade) * 4],
             palette[((175 - color) * 256 + shade) * 4 + 3])) for color in range(176)]
+    # Exact RGB uses color-zero luminance for shade and the original metal
+    # alpha curve for reflection. Nonmetal layers must remain opaque even at
+    # shade255, where the original palettes can have transparent texels.
+    rgb_expected = {}
+    luminance = (0.2126, 0.7152, 0.0722)
+    for rgb in ((205, 228, 197), (0, 0, 0), (255, 255, 255), (128, 0, 0)):
+        values = []
+        for layer in range(10):
+            offset = layer * 256 * 4
+            midpoint = sum(value * weight for value, weight in
+                zip(expected[0][offset + 128 * 4:offset + 128 * 4 + 3], luminance))
+            for shade in range(256):
+                reference = expected[0][offset + shade * 4:offset + shade * 4 + 4]
+                scale = sum(value * weight for value, weight in zip(reference[:3], luminance)) / max(midpoint, 1 / 255)
+                values.extend(min(value / 255 * scale, 1) for value in rgb)
+                values.append(reference[3] if layer in (2, 3) else 1)
+        rgb_expected[rgb] = tuple(values)
     descriptors = material_parameters((root / "sw_tint_mtr/pfh0_robe187.mtr").read_text())
     defaults = {name: values for _, name, values in descriptors}
     if defaults.get("useNativePalette") != (1,) or any(defaults.get(name) != (-1,) for name in rows):
@@ -404,6 +421,7 @@ def check_native_palette_fallback(test, engine, pairs, root: Path):
     pixels = ct.create_string_buffer(atlas[18:])
     output = (ct.c_float * (256 * 10 * 4))()
     checks = 0
+    rgb_checks = 0
     try:
         viewport(0, 0, 256, 10)
         test.active_texture(0x84C0)
@@ -471,6 +489,20 @@ def check_native_palette_fallback(test, engine, pairs, root: Path):
                                 f"GLerror{error:#x}, maxRGBAerror{difference}, component{first}, "
                                 f"actual{output[first]}, expected{expected[selected][first]}")
                         checks += 1
+                for rgb, targets in rgb_expected.items():
+                    packed = (rgb[0] << 16) | (rgb[1] << 8) | rgb[2]
+                    encoded = (1 + packed / 8388608 if packed < 8388608
+                               else 2 + (packed - 8388608) / 4194304)
+                    for location in row_locations:
+                        test.scalar(location, encoded)
+                    draw(0x0004, 0, 3)
+                    test.read(0, 0, 256, 10, 0x1908, 0x1406, output)
+                    error = test.error()
+                    difference = max(abs(actual - target) for actual, target in zip(output, targets))
+                    if error or difference > 2e-6:
+                        raise AssertionError(f"RGB palette {fragment}/{quality} RGB{rgb}: "
+                            f"GLerror{error:#x}, maxRGBAerror{difference}")
+                    rgb_checks += 1
                 # A material without opt-in must ignore renderer scheme state.
                 test.scalar(test.location(program, b"useNativePalette"), 0)
                 for location, base in zip(row_locations, atlas_bases):
@@ -504,6 +536,8 @@ def check_native_palette_fallback(test, engine, pairs, root: Path):
     print(f"Native robe palette parity passed: {checks} GPU draws; all176 color IDs, all10 layers, all256 "
         "shades and RGBA versus original installed palettes; all shader variants/quality modes, "
         "native scalar readbacks, positive custom-row precedence and stale-scheme isolation.", flush=True)
+    print(f"RGB palette/metal coverage passed: {rgb_checks} production GPU draws; all10 layers, all256 "
+        "shades, four RGB colors, all shader variants/quality modes and original metal alpha curves.", flush=True)
 
 
 def compile_engine_pairs(test, engine, pairs, parameters):
@@ -668,7 +702,8 @@ def draw_engine_materials(test, engine, root: Path):
         columns = line.split()
         if len(columns) >= 4 and columns[0].isdigit():
             catalog.setdefault(columns[1], set()).add(columns[2])
-    cases = [("pme0_head056", "rodian"), ("pfh0_head121", "female"), ("pfh0_robe187", "female")]
+    cases = [("pme0_head056", "rodian"), ("pfh0_head121", "female"), ("pfh0_robe187", "female"),
+             ("pfh0_chest304", "female")]
     cases.extend((("helm_114", "pilot-helmet"), ("pfh0_chest249", "pilot-armor")))
     for part in ("shinl249", "shinr249", "footl247", "footr247"):
         model, material = f"pme0_{part}", f"pmh0_{part}"
@@ -714,8 +749,8 @@ def draw_engine_materials(test, engine, root: Path):
         outputs = (("surface", "palette") if inspect_row else
             ("surface", "native-surface", "missing-native") if material == "helm_114" else
             ("surface", "native-surface") if material == "pfh0_robe187" else ("surface",))
-        for quality, lighting, output in product(range(3), range(2), outputs):
-            configuration = quality, lighting, 0, 0, 0
+        for quality, lighting, gamma, output in product(range(3), range(2), range(2), outputs):
+            configuration = quality, lighting, gamma, 0, 0
             override = None
             if output == "palette":
                 # Keep production sampling and lighting intact, exposing only
@@ -804,7 +839,7 @@ def draw_engine_materials(test, engine, root: Path):
                     if not all(math.isfinite(value) for value in result) or abs(result[3] - 1) > 0.001:
                         raise AssertionError(f"Production draw did not produce a finite opaque fragment: {tuple(result)}")
                     if material in ("pfh0_robe187", "helm_114"):
-                        key = material, quality, lighting, mip_mode
+                        key = material, quality, lighting, gamma, mip_mode
                         if output == "surface":
                             robe_reference[key] = tuple(result)
                         elif output == "native-surface":
@@ -832,7 +867,7 @@ def draw_engine_materials(test, engine, root: Path):
                 for index in attributes:
                     disable_attribute(index)
                 test.delete_program(program)
-    print(f"Production draws passed: {checks}; actual NPC BC5 DDS + atlas/white TGA, all quality/lighting modes, "
+    print(f"Production draws passed: {checks}; actual NPC and female chest304 BC5 DDS + atlas/white TGA, all quality/lighting/gamma modes, "
         "base/default/generated mip sampling. NWN DDS parsing is not exercised.", flush=True)
     print(f"Reported shin/foot palette checks passed: {palette_checks['rowleath2']}; authored Leather2 row 23 and zero "
         "environment coverage using production sampling with diagnostic fragment output.", flush=True)

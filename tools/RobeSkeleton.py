@@ -3,10 +3,13 @@ from __future__ import annotations
 
 import hashlib
 import json
+import math
 import re
+import struct
 
 import CompileModels as mdl
 import RobeAnimations as anim
+import RobePoseAudit as poses
 
 
 def serialize(kind, name, props):
@@ -18,6 +21,73 @@ def serialize(kind, name, props):
         else:
             lines.append(f"  {key} " + " ".join(value))
     return "\n".join([*lines, "endnode\n"])
+
+
+def bind_transforms(nodes):
+    """World bind (position, xyzw quaternion, scale) of ASCII geometry nodes by name."""
+    local = {}
+    for name, props in nodes.items():
+        position = tuple(float(v) for v in props.get("position", ["0", "0", "0"]))
+        rotation = tuple(mdl.quaternion(props["orientation"])) if "orientation" in props else (0, 0, 0, 1)
+        local[name] = (props.get("parent", ["null"])[0].lower(), position, rotation,
+                       float(props.get("scale", ["1"])[0]))
+    world = {}
+    def resolve(name, visiting=()):
+        if name not in world:
+            if name in visiting:
+                raise ValueError(f"Cyclic bind hierarchy: {name}")
+            parent, p, q, s = local[name]
+            if parent in local:
+                pp, pq, ps = resolve(parent, (*visiting, name))
+                p = tuple(a+b for a, b in zip(pp, poses.rotate(pq, tuple(v*ps for v in p))))
+                q, s = poses.multiply(pq, q), ps*s
+            world[name] = (p, q, s)
+        return world[name]
+    for name in local:
+        resolve(name)
+    return world
+
+
+def retargeted_binds(garment, body):
+    """World binds of a garment rig posed by the wearer's bind rotations.
+
+    Garments are often authored in another rest pose (T-pose sleeves, longer
+    legs). The engine animates a robe by replacing its wearer joints' local
+    rotations (and root placement) with the body's, keeping the garment's own
+    bone lengths. Evaluating that at the body's bind gives where each garment
+    joint must sit so its skin deforms exactly as the native robe would.
+    """
+    posed = {}
+    for name, props in garment.items():
+        props = dict(props)
+        if name in anim.BODY_MOTION_NODES and name in body:
+            source = body[name]
+            props["orientation"] = source.get("orientation", ["0", "0", "0", "0"])
+            if name not in anim.WEARER_BONES:
+                props["position"] = source.get("position", ["0", "0", "0"])
+                props["scale"] = source.get("scale", ["1"])
+        posed[name] = props
+    return bind_transforms(posed)
+
+
+def relative_transform(parent, child):
+    """ASCII local transform placing `child`'s world bind beneath `parent`'s world bind."""
+    (pp, pq, ps), (cp, cq, cs) = parent, child
+    if ps <= 0:
+        raise ValueError("Cannot attach a garment joint beneath a zero-scale bone")
+    inverse = (-pq[0], -pq[1], -pq[2], pq[3])
+    position = tuple(v/ps for v in poses.rotate(inverse, tuple(a-b for a, b in zip(cp, pp))))
+    x, y, z, w = poses.multiply(inverse, cq)
+    length = math.sqrt(x*x + y*y + z*z + w*w)
+    x, y, z, w = (v/length for v in (x, y, z, w))
+    if w < 0:
+        x, y, z, w = -x, -y, -z, -w
+    axis = math.sqrt(x*x + y*y + z*z)
+    # Recover tiny angles with atan2; acos(w) loses them to rounding.
+    orientation = (x/axis, y/axis, z/axis, 2*math.atan2(axis, w)) if axis > 1e-12 else (0, 0, 0, 0)
+    single = lambda value: format(struct.unpack("<f", struct.pack("<f", value))[0], ".9g")
+    clean = lambda values: [single(0.0 if abs(v) < 1e-12 else v) for v in values]
+    return {"position": clean(position), "orientation": clean(orientation), "scale": clean((cs/ps,))}
 
 
 def hierarchy(text):
@@ -80,10 +150,14 @@ class Families:
             values = {}
             for key, value in props.items():
                 if key in anim.TRANSFORMS:
+                    if node in anim.WEARER_BONES and key != "orientation":
+                        continue
                     values[key] = value
                 elif key.endswith("key"):
                     if key.removesuffix("key") not in anim.TRANSFORMS:
                         raise ValueError(f"{owner}/{node}: unsupported garment controller {key}")
+                    if node in anim.WEARER_BONES and key != "orientationkey":
+                        continue
                     values[key] = [[format(float(row[0])*factor, '.9g'), *row[1:]] for row in value]
             if position_scale != 1:
                 if "position" in values:
@@ -126,10 +200,10 @@ class Families:
                     any(kind != "dummy" or set(props) - {"parent"} for kind, _, props in nodes)):
                 raise ValueError(f"{owner}/sw_nohold: carry overlay must have no controllers or events")
             resolved.pop("sw_nohold")
+        nodes, paths = hierarchy(robe)
         signature = json.dumps([(c, o) for c, (o, _) in sorted(resolved.items())])
         key = base + "/" + hashlib.sha256(signature.encode()).hexdigest()[:16]
         group = self.groups.setdefault(key, {"base": base, "clips": resolved, "paths": {}, "members": []})
-        nodes, paths = hierarchy(robe)
         animated = set()
         for clip, (owner, source) in resolved.items():
             animated.update(self.clip_nodes(owner, source))
@@ -166,27 +240,56 @@ class Families:
             group["aliases"] = aliases
         return group["aliases"]
 
-    def body_root(self, robe_name, generated, parent, aliases=None):
+    def body_root(self, robe_name, generated, parent, aliases=None, adapters=None):
+        """`adapters` maps garment joints to the wearer bone they are statically bound to."""
         key, garment, paths = self.members[robe_name]
         group = self.groups[key]
         aliases = self.aliases(key) if aliases is None else aliases
+        adapters = adapters or {}
         base = group["base"]
         renamed = {node: aliases.get(path, "rm_" + node) for node, path in paths.items()}
         if len(set(renamed.values())) != len(renamed) or any(len(n) > 31 for n in renamed.values()):
             raise ValueError(f"{robe_name}: ambiguous garment node names")
-        output = []
+        entries = []
         for kind, node, props in anim.geometry(self.load(base)):
             props = dict(props)
             if props.get("parent") == [base]:
                 props["parent"] = [generated]
-            output.append(serialize(kind, generated if node == base else node, props))
+            entries.append((generated if node == base else node, props, serialize(kind, generated if node == base else node, props)))
         for node, (kind, props) in garment.items():
+            if node in adapters:
+                bone, transform = adapters[node]
+                props = {"parent": [bone], **transform,
+                         **{field: value for field, value in props.items()
+                            if field != "parent" and field not in anim.TRANSFORMS}}
+                entries.append((renamed[node], props, serialize(kind, renamed[node], props)))
+                continue
             props = dict(props)
             props["parent"] = [generated if not paths[node] else renamed[props["parent"][0].lower()]]
             if "weights" in props:
                 props["weights"] = [[renamed[value.lower()] if i % 2 == 0 else value
                                       for i, value in enumerate(row)] for row in props["weights"]]
-            output.append(serialize(kind, renamed[node], props))
+            entries.append((renamed[node], props, serialize(kind, renamed[node], props)))
+        # Native compilation stores nodes depth-first, with children in source
+        # order. Bound garment joints are children of body bones, so emit that
+        # traversal explicitly; source/binary node lists must stay aligned.
+        first = {}
+        children = {}
+        for index, (name, props, _) in enumerate(entries):
+            first.setdefault(name, index)
+            children.setdefault(props.get("parent", ["null"])[0].lower(), []).append(index)
+        output, visited = [], set()
+        def visit(index):
+            visited.add(index)
+            output.append(entries[index][2])
+            if first[entries[index][0]] == index:
+                for child in children.get(entries[index][0], []):
+                    visit(child)
+        for index, (_, props, _) in enumerate(entries):
+            if props.get("parent", ["null"])[0].lower() == "null":
+                visit(index)
+        if len(visited) != len(entries):
+            raise ValueError(f"{robe_name}: generated root has orphaned nodes")
         scale = re.search(r"(?im)^\s*setanimationscale\s+(\S+)", self.load(base))
         result = (f"newmodel {generated}\nsetsupermodel {generated} {parent}\nclassification CHARACTER\n"
                   f"setanimationscale {scale[1] if scale else '1'}\nbeginmodelgeom {generated}\n" +
@@ -211,6 +314,11 @@ class Families:
         garment = self.tracks(body_source, body_owner, original_names, duration, body_factor)
         garment_factor = 1/scale if owner == base or owner in group["members"] else 1
         for node, values in self.tracks(source, owner, original_names, duration, garment_factor).items():
+            # Custom animation slots can mean different motions in stock coat
+            # parents and the game's body chain. The garment's skeleton must
+            # follow the wearer; its independent cloth helpers keep their curves.
+            if body_source is not None and node in anim.BODY_MOTION_NODES:
+                continue
             target = garment.setdefault(node, {})
             for controller, value in values.items():
                 target.pop(controller.removesuffix("key") if controller.endswith("key") else controller+"key", None)

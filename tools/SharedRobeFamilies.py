@@ -30,6 +30,8 @@ class Families:
         self.members = {}
         self.fallbacks = self.legacy.fallbacks
         self.member_aliases = {}
+        self.member_adapters = {}
+        self.member_binds = {}
         self.prepared = {}
 
     def add(self, base, robe, resource_name=None):
@@ -85,6 +87,7 @@ class Families:
 
         canonical, joints = {}, {}
         used = set(body_nodes)
+        body_binds = skeleton.bind_transforms(body_nodes)
 
         def allocate(leaf):
             stem = "rg_" + leaf
@@ -101,9 +104,33 @@ class Families:
             old_key, garment, paths = self.legacy.members[robe_name]
             by_path = {path: node for node, path in paths.items()}
             required = self.legacy.groups[old_key]["paths"].keys() & by_path.keys()
-            aliases = {}
+            garment_binds = skeleton.retargeted_binds({node: props for node, (_, props) in garment.items()},
+                                                      body_nodes)
+            self.member_binds[robe_name] = garment_binds
+            aliases, adapters, occurrences = {}, {}, {}
             for path in sorted(required, key=lambda value: (len(value), value)):
                 node = by_path[path]
+                if path and node in anim.BODY_MOTION_NODES and node in body_nodes:
+                    # A garment copy of a wearer bone is a static child of that
+                    # bone. It has no tracks of its own, so the robe follows the
+                    # body through every clip, latched channel, layered overlay
+                    # and runtime animation replacement. It sits where the
+                    # native robe would place it (body rotations on garment
+                    # bone lengths); the authored inverse skin binds then
+                    # deform the mesh exactly as the native robe does.
+                    # Cloth helpers keep their own chains: replaying a body
+                    # helper's curves where the garment authored them is right
+                    # even when its rest length differs from the body's.
+                    transform = skeleton.relative_transform(body_binds[node], garment_binds[node])
+                    occurrence = occurrences[node] = occurrences.get(node, 0) + 1
+                    identity = ("adapter", node, occurrence)
+                    if identity not in canonical:
+                        alias = allocate(node)
+                        canonical[identity] = alias
+                        joints[alias] = {"bind": transform, "parent": node, "source": (old_key, None)}
+                    aliases[path] = canonical[identity]
+                    adapters[node] = (node, transform)
+                    continue
                 bind = {field: value for field, value in garment[node][1].items() if field in anim.TRANSFORMS}
                 parent = aliases[path[:-1]] if path else None
                 motion = motion_signatures[old_key][node] if path else b""
@@ -123,6 +150,7 @@ class Families:
             if len(set(aliases.values())) != len(aliases):
                 raise ValueError(f"{robe_name}: shared rig merged distinct garment nodes")
             self.member_aliases[robe_name] = aliases
+            self.member_adapters[robe_name] = adapters
         result = {"body_nodes": body_nodes, "scale": scale, "clips": clips,
                   "legacy_keys": old_keys, "joints": joints}
         self.prepared[key] = result
@@ -131,7 +159,8 @@ class Families:
     def body_root(self, robe_name, generated, parent):
         key = self.members[robe_name][0]
         self._prepare(key)
-        return self.legacy.body_root(robe_name, generated, parent, aliases=self.member_aliases[robe_name])
+        return self.legacy.body_root(robe_name, generated, parent, aliases=self.member_aliases[robe_name],
+                                     adapters=self.member_adapters[robe_name])
 
     def stats(self):
         """Materialize and summarize union sizes before native compilation."""
