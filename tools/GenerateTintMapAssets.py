@@ -23,6 +23,7 @@ import struct
 import sys
 from collections.abc import Callable
 from pathlib import Path
+from ModelLodAssets import ModelPath, model_paths
 
 import numpy as np
 
@@ -736,7 +737,7 @@ def find_active_models() -> dict[str, Path]:
     # Later HAKs have higher resource priority, so later paths replace earlier ones.
     for directory in hak_directories():
         current_hak: dict[str, Path] = {}
-        for path in directory.glob("*.mdl"):
+        for path in model_paths(directory):
             model = path.stem.lower()
             if model in current_hak:
                 raise RuntimeError(

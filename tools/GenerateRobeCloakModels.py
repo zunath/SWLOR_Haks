@@ -17,6 +17,7 @@ import tempfile
 import CompileModels as mdl
 import GenerateTintMapAssets as tint
 import RobePoseAudit as poses
+from ModelLodAssets import ModelPath
 
 ROOT = Path(__file__).resolve().parents[1]
 MANIFEST = ROOT / "tools/RobeCloakModels.json"
@@ -76,7 +77,7 @@ def check() -> list[str]:
     if manifest["models"] != available:
         errors.append("Robe cloak models do not cover the current robe/cloak tables")
     for name in available:
-        path = ROOT / "sw_pt_cloak" / f"{name}.mdl"
+        path = ModelPath(ROOT / "sw_pt_cloak" / f"{name}.mdl")
         if not path.is_file() or digest(path.read_bytes()) != manifest["files"].get(name):
             errors.append(f"Missing or changed robe cloak model: {name}")
             continue

@@ -28,6 +28,7 @@ import RobeBankValidation as bank_validation
 import RobeAnimationBanks as banks
 import SharedRobeFamilies as shared
 import RobeSharingAudit as sharing
+from ModelLodAssets import ModelPath
 
 ROOT = Path(__file__).resolve().parents[1]
 TABLE = ROOT / "sw_2da" / "roberender.2da"
@@ -39,7 +40,7 @@ GENERATOR_INPUTS = ("GenerateRobeRgbModels.py", "RobeSkeleton.py", "RobePoseAudi
                     "RobeAnimations.py", "CompileModels.py", "ImportStockRobeTints.py",
                     "TintMapStockRobes.json", "GenerateTintMapAssets.py", "RobeBuildCache.py",
                     "SharedRobeFamilies.py", "RobeSharingAudit.py",
-                    "RobeCompilationCheckpoint.py", "RobeBankValidation.py")
+                    "RobeCompilationCheckpoint.py", "RobeBankValidation.py", "ModelLodAssets.py")
 PACKAGING_INPUTS = ("RobeAnimationBanks.py", "RepackRobeAnimationBanks.py")
 CATALOG_INPUTS = ("sw_2da/parts_robe.2da", "sw_2da/tintmap.2da", "hakbuilder.json")
 BODY_RESOURCE = re.compile(r"^p[fm][a-z](\d+)(?:_robe\d{3})?$", re.IGNORECASE)
@@ -53,7 +54,7 @@ def model_directory(name):
 
 
 def file_digest(path):
-    return content_digest(path, path.read_bytes())
+    return content_digest(path, ModelPath(path).read_bytes())
 
 
 def content_digest(path, data):
@@ -301,7 +302,7 @@ def check() -> list[str]:
     if not manifest.get("garment_body_motion_checks"):
         errors.append("Robe models lack validation that garment wearer joints are bound to body bones")
     for relative, expected in manifest["files"].items():
-        path = ROOT / relative
+        path = ModelPath(ROOT / relative)
         if not path.is_file() or file_digest(path) != expected:
             errors.append(f"Robe RGB input/output changed: {relative}; regenerate and validate")
         if path.is_file() and path.suffix.lower() == ".mdl" and path.stat().st_size >= banks.LIMIT_BYTES:

@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import argparse
 from pathlib import Path
+from ModelLodAssets import ModelPath, model_paths
 import re
 import struct
 
@@ -87,10 +88,11 @@ def check() -> list[str]:
     outputs = plan()
     errors = []
     for path, expected in outputs.items():
+        path = ModelPath(path)
         if not path.is_file() or path.read_bytes() != expected:
             errors.append(f"Helmet RGB model is missing or differs from its source geometry: {path.name}")
     # A reserved head without a registered tintable helmet would never be selected.
-    for path in DIRECTORY.glob("p*_head1*.mdl"):
+    for path in model_paths(DIRECTORY):
         if HEAD_TARGET.fullmatch(path.stem.lower()) and path not in outputs:
             errors.append(f"Orphaned helmet RGB head: {path.name}")
     return errors
