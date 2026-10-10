@@ -1,4 +1,4 @@
-"""Keep static robe 236 torso panels off the cloth-physics renderer."""
+"""Keep repaired robe torso panels off the cloth-physics renderer."""
 import json
 import io
 from contextlib import redirect_stdout
@@ -47,7 +47,7 @@ class RigidRobePanelTests(unittest.TestCase):
 
     def test_existing_ascii_robe_targets_are_reported_and_excluded(self):
         manifest = json.loads(rigid.MANIFEST.read_text())
-        for robe in (20, 211, 212, 213, 254):
+        for robe in (20, 211, 212, 213):
             with self.subTest(robe=robe):
                 paths = rigid.targets(robe, manifest)
                 ascii_paths = [path for path in paths if not mdl.binary(path.read_bytes())]
@@ -89,6 +89,40 @@ endnode
         source = self.source("128")
         self.assertEqual((source, []), rigid.rigid_source(source))
 
+    def test_explicit_panel_selection_includes_native_and_rgb_names(self):
+        for name in ("coat_top", "rm_coat_top", "rg_coat_top"):
+            with self.subTest(name=name):
+                source = self.source("240").replace("coat_top", name)
+                result, names = rigid.rigid_source(source, ["coat_top"])
+                kind, converted_name, props = mdl.parse_nodes(result)[0]
+                self.assertEqual(("trimesh", name, [name]), (kind, converted_name, names))
+                self.assertNotIn("constraints", props)
+                original = mdl.parse_nodes(source)[0][2]
+                for field in ("constraints", "displacement", "period", "tightness"):
+                    original.pop(field)
+                self.assertEqual(original, props)
+
+    def test_explicit_selection_preserves_other_moving_cloth(self):
+        source = self.source("240") + self.source("128").replace("coat_top", "coat_tail")
+        result, names = rigid.rigid_source(source, ["coat_top"])
+        self.assertEqual(["coat_top"], names)
+        self.assertEqual(mdl.parse_nodes(source)[1], mdl.parse_nodes(result)[1])
+
+    def test_robe20_compiled_native_and_rgb_torso_panels_do_not_use_cloth_physics(self):
+        manifest = json.loads(rigid.MANIFEST.read_text())
+        paths = rigid.targets(20, manifest)
+        checked = 0
+        for path in paths:
+            data = path.read_bytes()
+            if not mdl.binary(data):
+                continue
+            model = poses.Model(data, False)
+            for name, _, _, _, offset in model.nodes:
+                if name.removeprefix("rm_").removeprefix("rg_") == "coat_top":
+                    self.assertEqual(0, model.uint(offset + 108) & 0x100, f"{path.name}/{name}")
+                    checked += 1
+        self.assertEqual(33, checked)
+
     def test_missing_constraints_fail_closed(self):
         with self.assertRaisesRegex(ValueError, "constraints"):
             rigid.rigid_source(self.source().replace("constraints 1\n0", "constraints 0"))
@@ -110,7 +144,7 @@ endnode
         self.assertEqual(mdl.parse_nodes(source)[1][2]["positionkey"], nodes[1][2]["positionkey"])
         self.assertNotIn("period", nodes[1][2])
 
-    def test_robe236_native_and_rgb_torso_panels_are_rigid(self):
+    def test_robe236_native_and_rgb_torso_panels_do_not_use_cloth_physics(self):
         manifest = json.loads(rigid.MANIFEST.read_text())
         paths = rigid.targets(236, manifest)
         self.assertEqual(32, len(paths))
@@ -119,9 +153,9 @@ endnode
             model = poses.Model(path.read_bytes(), False)
             for name, _, _, _, offset in model.nodes:
                 if name.removeprefix("rm_").removeprefix("rg_") in ("coat_top", "coat_top2"):
-                    self.assertEqual(0x21, model.uint(offset + 108), f"{path.name}/{name}")
+                    self.assertEqual(0, model.uint(offset + 108) & 0x100, f"{path.name}/{name}")
                     checked += 1
-        # Six body families needed conversion; both elf families were already rigid.
+        # Eight body families, each with two native models and an RGB root.
         self.assertEqual(24, checked)
 
 

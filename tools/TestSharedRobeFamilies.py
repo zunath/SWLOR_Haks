@@ -8,6 +8,7 @@ import RobeAnimations as anim
 import RobeSkeleton as legacy
 import RobePoseAudit as poses
 import SharedRobeFamilies as shared
+from RobePoseAudit import sample
 from TestRobeAnimations import model, node, clip
 import TestRobeSkeleton as skeleton_tests
 
@@ -67,6 +68,12 @@ class SharedRobeFamilyTests(unittest.TestCase):
                         if old_alias not in old_geometry:
                             continue
                         alias = names[original_name]
+                        if wearer_geometry[alias]["parent"] == [original_name]:
+                            # Wearer bones and pure copies of body joints are bound
+                            # beneath the body joint with no tracks of their own.
+                            for name, (_, new_tracks) in combined_clips.items():
+                                self.assertEqual({}, transforms(new_tracks.get(alias, {})), (robe, name))
+                            continue
                         self.assertEqual(transforms(old_wearer_geometry[old_alias]),
                                          transforms(wearer_geometry[alias]), (robe, original_name))
                         self.assertEqual(wearer_geometry[alias]["parent"],
@@ -123,8 +130,7 @@ class SharedRobeFamilyTests(unittest.TestCase):
             fixtures[name] = model(name, "body", garment)
         families, key = self.build(fixtures, ["coat_b", "coat_a"])
         previous = legacy.Families(fixtures.get)
-        old_key = previous.add("body", fixtures["coat_a"], "coat_a")
-        previous.add("body", fixtures["coat_b"], "coat_b")
+        old_keys = {robe: previous.add("body", fixtures[robe], robe) for robe in ("coat_a", "coat_b")}
         with tempfile.TemporaryDirectory() as directory:
             stage = Path(directory)
             compiler, _ = mdl.prepare_compiler(stage)
@@ -140,36 +146,114 @@ class SharedRobeFamilyTests(unittest.TestCase):
                 return poses.Model(binary)
 
             compile_source("body", fixtures["body"].encode())
-            before_parent = compile_source("oldbridge", previous.bridge(old_key, "oldbridge"))
+            before_parents = {robe: compile_source("old" + robe, previous.bridge(old_key, "old" + robe))
+                              for robe, old_key in old_keys.items()}
             after_parent = compile_source("newbridge", families.bridge(key, "newbridge"))
             alias_maps, resting_positions = [], []
             for robe in ("coat_a", "coat_b"):
-                old_source, old_names = previous.body_root(robe, "oldwearer", "oldbridge")
+                old_source, old_names = previous.body_root(robe, "oldwearer", "old" + robe)
                 new_source, new_names = families.body_root(robe, "newwearer", "newbridge")
                 before = compile_source("oldwearer", old_source)
                 after = compile_source("newwearer", new_source)
+                library = poses.Library(lambda name: (stage / f"{name}.mdl").read_bytes())
+                self.assertGreater(poses.validate_garment_body_motion(
+                    (stage / "newwearer.mdl").read_bytes(), "body", new_names, library), 0)
                 alias_maps.append(new_names)
                 old_nodes = {item[0]: item for item in before.nodes}
                 new_nodes = {item[0]: item for item in after.nodes}
                 parent_nodes = {item[0]: item for item in after_parent.nodes}
                 for original, old_alias in old_names.items():
                     alias = new_names[original]
-                    self.assertEqual(old_nodes[old_alias][3], new_nodes[alias][3], (robe, original))
+                    bound = after.nodes[new_nodes[alias][1]][0] == original
+                    if not bound:
+                        self.assertEqual(old_nodes[old_alias][3], new_nodes[alias][3], (robe, original))
                     self.assertEqual(parent_nodes[alias][2], new_nodes[alias][2], (robe, original))
                 for clip_name in ("walk", "rest"):
                     for time in (0, 0.3, 0.6, 1):
-                        old_pose = before.pose(before_parent.clips[clip_name], time)
                         new_pose = after.pose(after_parent.clips[clip_name], time)
-                        for original, old_alias in old_names.items():
-                            self.assertEqual(old_pose[old_alias], new_pose[new_names[original]], (robe, original, clip_name, time))
+                        # The bound garment root sits on the wearer's root in every
+                        # pose; its descendants keep their own defaults and curves.
+                        (bp, bq, _), (gp, gq, _) = new_pose["rootdummy"], new_pose[new_names["rootdummy"]]
+                        for left, right in zip(bp, gp):
+                            self.assertAlmostEqual(left, right, places=5, msg=(robe, clip_name, time))
+                        self.assertTrue(mdl.equivalent_quaternion(bq, gq), (robe, clip_name, time))
                 resting_positions.append(after.pose(after_parent.clips["rest"])[new_names["hand_g"]][0])
-            for joint in ("rootdummy", "arm_g", "hand_g"):
-                self.assertEqual(alias_maps[0][joint], alias_maps[1][joint])
+            # Bound roots carry no motion, so the wearers share one root joint;
+            # their descendants keep separate joints for their distinct defaults.
+            self.assertEqual(alias_maps[0]["rootdummy"], alias_maps[1]["rootdummy"])
             self.assertNotEqual(resting_positions[0], resting_positions[1])
-            # coat_a sorts first despite being added last, so it deterministically
-            # supplies parent defaults without replacing coat_b's own defaults.
-            parent_hand = next(item for item in after_parent.nodes if item[0] == alias_maps[0]["hand_g"])
-            self.assertEqual((0.0, 0.0, -1.0), parent_hand[3][8][1][0])
+
+    def test_latched_root_channels_cannot_separate_the_garment_from_the_body(self):
+        """Sitting then pointing: the engine keeps channels a clip omits."""
+        geometry = node("rootdummy", "body", "position 0 0 1.2") + node("torso_g", "rootdummy", "position 0 0 0.1")
+        geometry += node("rbicep_g", "torso_g", "position 0.2 0 0.3")
+        sitting = clip("body", 1, node("body", "null") + node("rootdummy", "body",
+                       "positionkey 2\n0 0 0 1.2\n1 0.3 -0.4 0.5\norientationkey 2\n0 1 0 0 0\n1 1 0 0 0.6"))
+        # Like custom1lp and the talk clips: rootdummy rotates but omits position.
+        pointing = clip("body", 1, node("body", "null") + node("rootdummy", "body", "orientation 0 0 1 0.1") +
+                        node("torso_g", "rootdummy") +
+                        node("rbicep_g", "torso_g", "orientationkey 2\n0 1 0 0 0\n1 1 0 0 1.4"))
+        body = model("body", "null", geometry, sitting.replace("walk", "sitcross") + pointing.replace("walk", "custom1lp"))
+        garment = node("rootdummy", "coat", "position 0 0.02 1.21\norientation 0 0 1 0.05")
+        garment += node("torso_g", "rootdummy", "position 0 0 0.12") + node("rbicep_g", "torso_g", "position 0.21 0 0.3")
+        garment += node("sleeve_g", "rbicep_g", "position 0.1 0 -0.2")
+        fixtures = {"body": body, "coat": model("coat", "body", garment)}
+        families, key = self.build(fixtures, ["coat"])
+        with tempfile.TemporaryDirectory() as directory:
+            stage = Path(directory)
+            compiler, _ = mdl.prepare_compiler(stage)
+            (stage / "binary").mkdir()
+
+            def compile_source(name, data):
+                path = stage / f"{name}.mdl"
+                path.write_bytes(data)
+                mdl.run_compiler(compiler, stage, ["-cne", str(path), str(stage / "binary") + "/"], name + ".log")
+                path.write_bytes((stage / "binary" / path.name).read_bytes())
+                return poses.Model(path.read_bytes())
+
+            compile_source("body", body.encode())
+            bridge = compile_source("bridge", families.bridge(key, "bridge"))
+            source, names = families.body_root("coat", "wearer", "bridge")
+            wearer = compile_source("wearer", source)
+            library = poses.Library(lambda name: (stage / f"{name}.mdl").read_bytes())
+            self.assertEqual(3, poses.validate_garment_body_motion(
+                (stage / "wearer.mdl").read_bytes(), "body", names, library))
+
+            state = [(sample(d[8], 0) if 8 in d else (0, 0, 0), sample(d[20], 0, True) if 20 in d else (0, 0, 0, 1),
+                      sample(d[36], 0)[0] if 36 in d else 1) for _, _, _, d, _ in wearer.nodes]
+            def world():
+                result, named = [], {}
+                for index, (name, parent, _, _, _) in enumerate(wearer.nodes):
+                    p, q, s = state[index]
+                    if parent is not None:
+                        pp, pq, ps = result[parent]
+                        p = tuple(a+b for a, b in zip(pp, poses.rotate(pq, tuple(v*ps for v in p))))
+                        q, s = poses.multiply(pq, q), ps*s
+                    result.append((p, q, s))
+                    named[name] = (p, q, s)
+                return named
+            def play(clip_name, time):
+                tracks = {part: c for _, _, part, c, _ in bridge.clips[clip_name][1] if part >= 0}
+                for index, (_, _, part, _, _) in enumerate(wearer.nodes):
+                    p, q, s = state[index]
+                    c = tracks.get(part, {})
+                    state[index] = (sample(c[8], time) if 8 in c else p, sample(c[20], time, True) if 20 in c else q,
+                                    sample(c[36], time)[0] if 36 in c else s)
+            rest = world()
+            play("sitcross", 1)
+            play("custom1lp", 0.5)
+            posed = world()
+            for bone in ("rootdummy", "torso_g", "rbicep_g"):
+                # The garment joint keeps its authored offset from the body bone.
+                bp, bq, _ = rest[bone]
+                gp, _, _ = rest[names[bone]]
+                inverse = (-bq[0], -bq[1], -bq[2], bq[3])
+                local = poses.rotate(inverse, tuple(a-b for a, b in zip(gp, bp)))
+                pp, pq, _ = posed[bone]
+                expected = tuple(a+b for a, b in zip(pp, poses.rotate(pq, local)))
+                for left, right in zip(expected, posed[names[bone]][0]):
+                    self.assertAlmostEqual(left, right, places=4, msg=bone)
+            self.assertGreater(abs(posed["rootdummy"][0][2] - rest["rootdummy"][0][2]), 0.5)
 
     def test_distinct_named_joints_in_one_wearer_never_merge(self):
         fixtures = skeleton_tests.IndependentRobeSkeletonTests().fixtures()

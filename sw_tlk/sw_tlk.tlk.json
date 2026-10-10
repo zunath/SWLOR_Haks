@@ -6127,7 +6127,7 @@
     },
     {
       "id": 1531,
-      "text": "While active, grants +25% Defense, +20% Force Defense, and +30% Enmity generation, but reduces Attack by 25%."
+      "text": "While active, grants +25% Defense, +20% Force Defense, and +30% Enmity generation, but reduces Attack by 25%. You generate +100% threat from damage dealt, before general Enmity modifiers."
     },
     {
       "id": 1532,
@@ -6763,7 +6763,7 @@
     },
     {
       "id": 1690,
-      "text": "Soul Devourer"
+      "text": "Soul Devourer Stance"
     },
     {
       "id": 1691,
@@ -12039,7 +12039,7 @@
     },
     {
       "id": 3009,
-      "text": "Deal weapon DMG + 35 to all enemies in a 5m x 5m cone. Costs 40% HP which is reduced by 1% per MGT. (Minimum 10%)"
+      "text": "Deal weapon DMG + 35 to all enemies in a 5m x 5m cone. Costs 40% HP which is reduced by 1 percentage point per MGT. (Minimum 10%)"
     },
     {
       "id": 3010,
@@ -12187,7 +12187,7 @@
     },
     {
       "id": 3046,
-      "text": "Goads a single target into attacking the beast."
+      "text": "Goads a single target into attacking the beast. On a valid impact, threat catches up to the highest visible rival plus the VIT-scaled threat bonus. Repeated goads while already ahead do not accumulate threat. No forced target lock."
     },
     {
       "id": 3047,
@@ -12915,7 +12915,7 @@
     },
     {
       "id": 3228,
-      "text": "Grants a single ally temporary HP equal to 6% of the target's maximum HP plus WIL scaling for 30 seconds."
+      "text": "Grants an ally or yourself temporary HP equal to 6% of the target's maximum HP plus WIL scaling for 30 seconds."
     },
     {
       "id": 3229,
@@ -12923,7 +12923,7 @@
     },
     {
       "id": 3230,
-      "text": "Grants a single ally temporary HP equal to 9% of the target's maximum HP plus WIL scaling for 30 seconds."
+      "text": "Grants an ally or yourself temporary HP equal to 9% of the target's maximum HP plus WIL scaling for 30 seconds."
     },
     {
       "id": 3231,
@@ -12931,7 +12931,7 @@
     },
     {
       "id": 3232,
-      "text": "Grants a single ally temporary HP equal to 12% of the target's maximum HP plus WIL scaling for 30 seconds."
+      "text": "Grants an ally or yourself temporary HP equal to 12% of the target's maximum HP plus WIL scaling for 30 seconds."
     },
     {
       "id": 3233,
@@ -12939,7 +12939,7 @@
     },
     {
       "id": 3234,
-      "text": "Grants a single ally temporary HP equal to 15% of the target's maximum HP plus WIL scaling for 30 seconds."
+      "text": "Grants an ally or yourself temporary HP equal to 15% of the target's maximum HP plus WIL scaling for 30 seconds."
     },
     {
       "id": 3235,
@@ -13599,7 +13599,7 @@
     },
     {
       "id": 3399,
-      "text": "Deals 10 sonic DMG to hostile targets within 5m and interrupts activation."
+      "text": "Deals gadget DMG + 10 sonic DMG plus PER scaling to hostile targets within 5m and interrupts activation."
     },
     {
       "id": 3400,
@@ -15227,7 +15227,7 @@
     },
     {
       "id": 3806,
-      "text": "While active, gain +25% Attack and +10% critical chance, but each attack you make deals 45% of the damage back to you. Damage reduced by 1% per MGT. (Minimum 20%)"
+      "text": "While active, gain +25% Attack and +10% critical chance, but each attack you make deals 45% of the damage back to you. Damage reduced by 1 percentage point per MGT. (Minimum 20%)"
     },
     {
       "id": 3807,
@@ -15287,7 +15287,7 @@
     },
     {
       "id": 3821,
-      "text": "For 45 seconds, damage that would drop the target below 1 HP is prevented once and the target gains temporary HP equal to 15% of maximum HP plus WIL scaling."
+      "text": "For 45 seconds, damage that would drop an ally or yourself below 1 HP is prevented once and the target gains temporary HP equal to 15% of maximum HP plus WIL scaling."
     },
     {
       "id": 3822,
@@ -15363,7 +15363,7 @@
     },
     {
       "id": 3840,
-      "text": "Projects a stronger electrical arc up to 15m, dealing 40 electrical DMG plus PER scaling to one target."
+      "text": "Projects a stronger electrical arc up to 15m, dealing gadget DMG + 24 electrical DMG plus PER scaling to one target."
     },
     {
       "id": 3841,
@@ -15371,7 +15371,7 @@
     },
     {
       "id": 3842,
-      "text": "Projects an overcharged electrical arc up to 15m, dealing 60 electrical DMG plus PER scaling to one target."
+      "text": "Projects an overcharged electrical arc up to 15m, dealing gadget DMG + 36 electrical DMG plus PER scaling to one target."
     },
     {
       "id": 3843,
@@ -15411,7 +15411,7 @@
     },
     {
       "id": 3852,
-      "text": "Fires a focused ion beam from a wrist projector in an 8m x 2.5m line, dealing 16 electrical DMG plus PER scaling to hostile targets in the line."
+      "text": "Fires a focused ion beam from a wrist projector in an 8m x 2.5m line, dealing gadget DMG + 10 electrical DMG plus PER scaling to hostile targets in the line."
     },
     {
       "id": 3853,
@@ -15419,7 +15419,7 @@
     },
     {
       "id": 3854,
-      "text": "Fires a focused ion beam from a wrist projector in an 8m x 2.5m line, dealing 30 electrical DMG plus PER scaling to hostile targets in the line."
+      "text": "Fires a focused ion beam from a wrist projector in an 8m x 2.5m line, dealing gadget DMG + 20 electrical DMG plus PER scaling to hostile targets in the line."
     },
     {
       "id": 3855,
@@ -15427,7 +15427,7 @@
     },
     {
       "id": 3856,
-      "text": "Fires a focused ion beam from a wrist projector in an 8m x 2.5m line, dealing 44 electrical DMG plus PER scaling to hostile targets in the line."
+      "text": "Fires a focused ion beam from a wrist projector in an 8m x 2.5m line, dealing gadget DMG + 30 electrical DMG plus PER scaling to hostile targets in the line."
     },
     {
       "id": 3857,
@@ -15511,7 +15511,7 @@
     },
     {
       "id": 3877,
-      "text": "Precognition"
+      "text": "Danger Sense"
     },
     {
       "id": 3878,
@@ -15735,15 +15735,15 @@
     },
     {
       "id": 3933,
-      "text": "Deals 16 fire DMG plus PER scaling to hostile targets in a 6m x 5m cone."
+      "text": "Deals gadget DMG + 6 fire DMG plus PER scaling to hostile targets in a 6m x 5m cone."
     },
     {
       "id": 3934,
-      "text": "Deals 28 fire DMG plus PER scaling to hostile targets in a 6m x 5m cone and attempts to inflict Burn for 12 seconds."
+      "text": "Deals gadget DMG + 12 fire DMG plus PER scaling to hostile targets in a 6m x 5m cone and attempts to inflict Burn for 12 seconds."
     },
     {
       "id": 3935,
-      "text": "Deals 42 fire DMG plus PER scaling to hostile targets in a 6m x 5m cone and attempts to inflict Burn for 12 seconds."
+      "text": "Deals gadget DMG + 18 fire DMG plus PER scaling to hostile targets in a 6m x 5m cone and attempts to inflict Burn for 12 seconds."
     },
     {
       "id": 3936,
@@ -15991,7 +15991,7 @@
     },
     {
       "id": 3997,
-      "text": "Unleashes three attacks at your primary target's location: a 42 fire DMG 5m burst plus Burn for 45 seconds, a 48 fire DMG single-target hit plus 3-second Knockdown, and a 24 sonic DMG 5m burst that interrupts activation and reduces Accuracy by 10% for 45 seconds."
+      "text": "Unleashes three attacks at your primary target's location: a 5m burst for gadget DMG + 22 fire DMG plus Burn for 45 seconds, a single-target hit for gadget DMG + 32 fire DMG plus 3-second Knockdown, and a 5m burst for gadget DMG + 18 sonic DMG that interrupts activation and reduces Accuracy by 10% for 45 seconds."
     },
     {
       "id": 3998,
@@ -16043,11 +16043,11 @@
     },
     {
       "id": 4010,
-      "text": "Fires a dart that deals 18 physical DMG plus PER scaling and attempts to inflict Bleed for 12 seconds."
+      "text": "Fires a dart that deals gadget DMG + 10 physical DMG plus PER scaling and attempts to inflict Bleed for 12 seconds."
     },
     {
       "id": 4011,
-      "text": "Fires a dart that deals 34 physical DMG plus PER scaling and attempts to inflict Bleed for 12 seconds."
+      "text": "Fires a dart that deals gadget DMG + 20 physical DMG plus PER scaling and attempts to inflict Bleed for 12 seconds."
     },
     {
       "id": 4012,
@@ -16067,7 +16067,7 @@
     },
     {
       "id": 4016,
-      "text": "Control powers that grant temporary HP reflect 8% of force and energy damage taken, plus WIL scaling, back to the attacker while the temporary HP remains."
+      "text": "Control powers that grant temporary HP reflect 8% of force and energy damage taken, plus WIL scaling, back to the attacker while the temporary HP remains. Whoever holds that temporary HP, including you, deals +8% weapon and Force damage for its duration."
     },
     {
       "id": 4017,
@@ -16231,7 +16231,7 @@
     },
     {
       "id": 4057,
-      "text": "Deals 20 fire DMG plus PER scaling to one target."
+      "text": "Deals gadget DMG + 10 fire DMG plus PER scaling to one target."
     },
     {
       "id": 4058,
@@ -16271,7 +16271,7 @@
     },
     {
       "id": 4067,
-      "text": "Off-hand attack delay is reduced by 10% when making off-hand attacks."
+      "text": "Off-hand attack delay is reduced by 10% when wielding two weapons or a double weapon."
     },
     {
       "id": 4068,
@@ -16483,7 +16483,7 @@
     },
     {
       "id": 4120,
-      "text": "Gain +20 Mobility Resistance and +20 Mind Resistance. Guarded hits restore 4 STM."
+      "text": "Gain +20 Mobility Resistance and +20 Mind Resistance. Guarded hits restore 4 STM. This can trigger once every 6 seconds."
     },
     {
       "id": 4121,
@@ -18211,7 +18211,7 @@
     },
     {
       "id": 4552,
-      "text": "Deals weapon DMG + 35. For 45 seconds, evading an attack refreshes Snap Roll and quickens your next shot."
+      "text": "Deals weapon DMG + 35. For 45 seconds, evading an attack refreshes Snap Roll and quickens your next auto-attack."
     },
     {
       "id": 4553,
@@ -18227,7 +18227,7 @@
     },
     {
       "id": 4556,
-      "text": "Fires at up to 3 enemies within 5m for weapon DMG + 14. Each hit has +8% Critical Rate."
+      "text": "Fires at up to 3 enemies in a 10m x 10m cone in front of you for weapon DMG + 14. Each hit has +8% Critical Rate."
     },
     {
       "id": 4557,
@@ -18243,7 +18243,7 @@
     },
     {
       "id": 4560,
-      "text": "Fires at up to 3 enemies within 5m for weapon DMG + 26. Each hit has +12% Critical Rate."
+      "text": "Fires at up to 3 enemies in a 10m x 10m cone in front of you for weapon DMG + 26. Each hit has +12% Critical Rate."
     },
     {
       "id": 4561,
@@ -18255,7 +18255,7 @@
     },
     {
       "id": 4563,
-      "text": "Deals weapon DMG + 30. If this critically hits, your next three ranged attacks have +20% Critical Rate and no extra attack delay."
+      "text": "Deals weapon DMG + 30. If this critically hits, your next three weapon attacks have +20% Critical Rate and no extra attack delay."
     },
     {
       "id": 4564,
@@ -18803,7 +18803,7 @@
     },
     {
       "id": 4700,
-      "text": "Attacking a bleeding target restores 1 STM. This can trigger once every 4 seconds."
+      "text": "Auto-attacks and hostile Twin Blade abilities against a bleeding target restore 1 STM. This can trigger once every 4 seconds."
     },
     {
       "id": 4701,
@@ -18995,7 +18995,7 @@
     },
     {
       "id": 4748,
-      "text": "Every fourth ranged attack gains +10% Critical Rate."
+      "text": "Every fourth auto-attack gains +10% Critical Rate."
     },
     {
       "id": 4749,
@@ -19035,7 +19035,7 @@
     },
     {
       "id": 4758,
-      "text": "When an enemy with Suppression stacks uses an ability, your next ranged attack against it gains +10% Accuracy."
+      "text": "When an enemy with Suppression stacks uses an ability, your next weapon attack against it gains +10% Accuracy."
     },
     {
       "id": 4759,
@@ -19043,7 +19043,7 @@
     },
     {
       "id": 4760,
-      "text": "After 3 seconds without attacking, your next ranged attack deals +12 DMG."
+      "text": "After 3 seconds without attacking, your next auto-attack deals +12 DMG."
     },
     {
       "id": 4761,
@@ -19071,7 +19071,7 @@
     },
     {
       "id": 4767,
-      "text": "Thrown auto-attacks have a 15% chance to deal 8 Physical DMG to the target and up to four other enemies within 3m of the primary target. This splash cannot trigger other on-hit effects."
+      "text": "Auto-attacks have a 15% chance to deal 8 Physical DMG to the target and up to four other enemies within 3m of the primary target. This splash cannot trigger other on-hit effects."
     },
     {
       "id": 4768,
@@ -19343,7 +19343,7 @@
     },
     {
       "id": 4835,
-      "text": "While active, ranged attacks gain +10% Haste and add Suppression stacks lasting 30 seconds using your Suppressing Shot stack strength, but critical damage is reduced by 10%."
+      "text": "While active, weapon attacks gain +10% Haste and add Suppression stacks lasting 30 seconds using your Suppressing Shot stack strength, but critical damage is reduced by 10%."
     },
     {
       "id": 4836,
@@ -19555,7 +19555,7 @@
     },
     {
       "id": 4888,
-      "text": "While active, grants +15% Evasion and +8 Melee Deflection, but Attack is reduced by 15%."
+      "text": "While active, grants +15% Evasion and +8 Melee Deflection, but Attack is reduced by 15%. You generate +100% threat from damage dealt, before general Enmity modifiers."
     },
     {
       "id": 4889,
@@ -20691,11 +20691,11 @@
     },
     {
       "id": 5172,
-      "text": "Each consecutive ranged hit against the same target grants +1 DMG, up to five stacks. Stacks expire after 30 seconds."
+      "text": "Each consecutive weapon hit against the same target grants +1 DMG, up to five stacks. Stacks expire after 30 seconds."
     },
     {
       "id": 5173,
-      "text": "After maintaining Rifle fire on the same target for 12 seconds, gain Spotter's Rhythm for 9 seconds. Your next hostile weapon ability against that target deals +15 DMG."
+      "text": "After maintaining weapon hits on the same target for 12 seconds, gain Spotter's Rhythm for 9 seconds. Your next hostile weapon ability against that target deals +15 DMG."
     },
     {
       "id": 5174,
@@ -20835,7 +20835,7 @@
     },
     {
       "id": 5208,
-      "text": "After a critical hit with a Pistol attack or hostile Pistol ability, gain +20% Haste for your next two attacks. Expires after 30 seconds."
+      "text": "After a critical hit, gain +20% Haste for your next two attacks. Expires after 30 seconds."
     },
     {
       "id": 5209,
@@ -20883,7 +20883,7 @@
     },
     {
       "id": 5220,
-      "text": "Control powers that restore HP cause affected allies to restore 1 STM and 1 FP every 6 seconds for 30 seconds. This benefit does not trigger when you target yourself."
+      "text": "Control powers that restore HP cause affected allies to restore 1 STM and 1 FP every 6 seconds for 30 seconds. Targeting yourself restores 1 FP every 6 seconds instead."
     },
     {
       "id": 5221,
@@ -20959,7 +20959,7 @@
     },
     {
       "id": 5239,
-      "text": "When you deflect an attack with a shield, reduce the active cooldown of Shield Bash by 2 seconds."
+      "text": "When you deflect an attack with a shield, reduce the active cooldown of Shield Bash by 2 seconds. This can only trigger once every 6 seconds."
     },
     {
       "id": 5240,
@@ -21039,7 +21039,7 @@
     },
     {
       "id": 5259,
-      "text": "Goads the selected target and all other enemies within 8m of it into attacking you. Enmity generated increases by 1% per VIT."
+      "text": "Goads the selected target and all other enemies within 8m of it into attacking you. Enmity generated increases by 1% per VIT. On a valid impact, threat catches up to the highest visible rival plus the VIT-scaled threat bonus. Repeated goads while already ahead do not accumulate threat. No forced target lock."
     },
     {
       "id": 5260,
@@ -21055,7 +21055,7 @@
     },
     {
       "id": 5263,
-      "text": "While active, your beast gains +20% Defense, +20% Force Defense, takes 15% less damage, and generates +75% enmity. Only one stance may be active at a time."
+      "text": "While active, your beast gains +20% Defense, +20% Force Defense, takes 15% less damage, and generates +50% enmity. Only one stance may be active at a time. Your beast generates +50% threat from damage dealt, before general Enmity modifiers."
     },
     {
       "id": 5264,
@@ -21219,7 +21219,7 @@
     },
     {
       "id": 5304,
-      "text": "The beast goads a single target, gains +8% evasion chance for 30 seconds, and restores 1 STM the next time it evades during the effect."
+      "text": "The beast goads a single target, gains +8% evasion chance for 30 seconds, and restores 1 STM the next time it evades during the effect. On a valid impact, threat catches up to the highest visible rival plus the VIT-scaled threat bonus. Repeated goads while already ahead do not accumulate threat. No forced target lock."
     },
     {
       "id": 5305,
@@ -21231,7 +21231,7 @@
     },
     {
       "id": 5307,
-      "text": "The beast goads the selected target and enemies within 5m, removes movement slow, gains +14% evasion chance for 30 seconds, and restores 1 STM the next time it evades during the effect."
+      "text": "The beast goads the selected target and enemies within 5m, removes movement slow, gains +14% evasion chance for 30 seconds, and restores 1 STM the next time it evades during the effect. On a valid impact, threat catches up to the highest visible rival plus the VIT-scaled threat bonus. Repeated goads while already ahead do not accumulate threat. No forced target lock."
     },
     {
       "id": 5308,
@@ -21495,7 +21495,7 @@
     },
     {
       "id": 5373,
-      "text": "Enemies within 5m are goaded into attacking the beast and the beast takes 6% less physical damage for 30 seconds."
+      "text": "Enemies within 5m are goaded into attacking the beast and the beast takes 6% less physical damage for 30 seconds. On a valid impact, threat catches up to the highest visible rival plus the VIT-scaled threat bonus. Repeated goads while already ahead do not accumulate threat. No forced target lock."
     },
     {
       "id": 5374,
@@ -21515,7 +21515,7 @@
     },
     {
       "id": 5378,
-      "text": "Deals 34 fire DMG plus PER scaling to one target and knocks down for 2 seconds."
+      "text": "Deals gadget DMG + 20 fire DMG plus PER scaling to one target and knocks down for 2 seconds."
     },
     {
       "id": 5379,
@@ -21523,7 +21523,7 @@
     },
     {
       "id": 5380,
-      "text": "Goads a single target into attacking the beast and grants the beast temporary HP equal to 15% of its maximum HP for 30 seconds."
+      "text": "Goads a single target into attacking the beast and grants the beast temporary HP equal to 15% of its maximum HP for 30 seconds. On a valid impact, threat catches up to the highest visible rival plus the VIT-scaled threat bonus. Repeated goads while already ahead do not accumulate threat. No forced target lock."
     },
     {
       "id": 5381,
@@ -21531,15 +21531,15 @@
     },
     {
       "id": 5382,
-      "text": "Deals 14 sonic DMG to hostile targets within 5m, interrupts activation, and reduces Accuracy by 6% for 30 seconds."
+      "text": "Deals gadget DMG + 14 sonic DMG plus PER scaling to hostile targets within 5m, interrupts activation, and reduces Accuracy by 6% for 30 seconds."
     },
     {
       "id": 5383,
-      "text": "Enemies within 5m are goaded into attacking the beast and the beast takes 10% less physical damage for 30 seconds."
+      "text": "Enemies within 5m are goaded into attacking the beast and the beast takes 10% less physical damage for 30 seconds. On a valid impact, threat catches up to the highest visible rival plus the VIT-scaled threat bonus. Repeated goads while already ahead do not accumulate threat. No forced target lock."
     },
     {
       "id": 5384,
-      "text": "Deals 25 ice DMG plus PER scaling to hostile targets in a 6m x 5m cone and slows their movement for 30 seconds."
+      "text": "Deals gadget DMG + 10 ice DMG plus PER scaling to hostile targets in a 6m x 5m cone and slows their movement for 30 seconds."
     },
     {
       "id": 5385,
@@ -21547,7 +21547,7 @@
     },
     {
       "id": 5386,
-      "text": "Deals 48 fire DMG plus PER scaling to one target and knocks down for 3 seconds."
+      "text": "Deals gadget DMG + 32 fire DMG plus PER scaling to one target and knocks down for 3 seconds."
     },
     {
       "id": 5387,
@@ -21559,7 +21559,7 @@
     },
     {
       "id": 5389,
-      "text": "Deals 18 sonic DMG to hostile targets within 5m, interrupts activation, and reduces Accuracy by 10% for 30 seconds."
+      "text": "Deals gadget DMG + 18 sonic DMG plus PER scaling to hostile targets within 5m, interrupts activation, and reduces Accuracy by 10% for 30 seconds."
     },
     {
       "id": 5390,
@@ -21567,7 +21567,7 @@
     },
     {
       "id": 5391,
-      "text": "Enemies within 5m are goaded into attacking the beast and the beast takes 15% less physical damage for 30 seconds."
+      "text": "Enemies within 5m are goaded into attacking the beast and the beast takes 15% less physical damage for 30 seconds. On a valid impact, threat catches up to the highest visible rival plus the VIT-scaled threat bonus. Repeated goads while already ahead do not accumulate threat. No forced target lock."
     },
     {
       "id": 5392,
@@ -21639,7 +21639,7 @@
     },
     {
       "id": 5409,
-      "text": "The beast goads the selected target and enemies within 5m, removes movement slow, gains +14% evasion chance for 30 seconds, and restores 1 STM the next time it evades during the effect."
+      "text": "The beast goads the selected target and enemies within 5m, removes movement slow, gains +14% evasion chance for 30 seconds, and restores 1 STM the next time it evades during the effect. On a valid impact, threat catches up to the highest visible rival plus the VIT-scaled threat bonus. Repeated goads while already ahead do not accumulate threat. No forced target lock."
     },
     {
       "id": 5410,
@@ -22011,7 +22011,7 @@
     },
     {
       "id": 5502,
-      "text": "Each consecutive melee attack against the same target grants Rundown, giving +1 DMG to auto-attack against that target, up to five stacks."
+      "text": "Each consecutive auto-attack against the same target grants Rundown, giving +1 DMG to auto-attack against that target, up to five stacks."
     },
     {
       "id": 5503,
@@ -22019,7 +22019,7 @@
     },
     {
       "id": 5504,
-      "text": "Every third melee auto-attack deals an additional +10 Damage."
+      "text": "Every third auto-attack deals an additional +10 Damage."
     },
     {
       "id": 5505,
@@ -22039,7 +22039,7 @@
     },
     {
       "id": 5509,
-      "text": "While active, grants +30% Enmity generation, +20% Defense and +20% Force Defense, -20% Attack, and -20% Force Attack."
+      "text": "While active, grants +30% Enmity generation, +20% Defense and +20% Force Defense, -20% Attack, and -20% Force Attack. You generate +100% threat from damage dealt, before general Enmity modifiers."
     },
     {
       "id": 5510,
@@ -23871,7 +23871,7 @@
     },
     {
       "id": 5967,
-      "text": "While active, your Vibroknife auto-attacks inflict Hamstring for 18 seconds, but your Defense is reduced by 20%."
+      "text": "While active, your auto-attacks inflict Hamstring for 18 seconds, but your Defense is reduced by 20%."
     },
     {
       "id": 5968,
@@ -23879,31 +23879,31 @@
     },
     {
       "id": 5969,
-      "text": "Deals weapon DMG + 6. Extends your Venom and Infection effects on the target by 4 seconds."
+      "text": "On your next attack, deal weapon DMG + 6 and extend your Venom and Infection effects on the target by 4 seconds."
     },
     {
       "id": 5970,
-      "text": "Deals weapon DMG + 9. Inflicts Venom for 30 seconds."
+      "text": "On your next attack, deal weapon DMG + 9 and inflict Venom for 30 seconds."
     },
     {
       "id": 5971,
-      "text": "Deals weapon DMG + 12. Extends your Venom and Infection effects on the target by 4 seconds."
+      "text": "On your next attack, deal weapon DMG + 12 and extend your Venom and Infection effects on the target by 4 seconds."
     },
     {
       "id": 5972,
-      "text": "Deals weapon DMG + 16. Extends your Venom and Infection effects on the target by 6 seconds."
+      "text": "On your next attack, deal weapon DMG + 16 and extend your Venom and Infection effects on the target by 6 seconds."
     },
     {
       "id": 5973,
-      "text": "Deals weapon DMG + 12. Inflicts Venom for 30 seconds."
+      "text": "On your next attack, deal weapon DMG + 12 and inflict Venom for 30 seconds."
     },
     {
       "id": 5974,
-      "text": "Deals weapon DMG + 16. Inflicts Venom for 30 seconds."
+      "text": "On your next attack, deal weapon DMG + 16 and inflict Venom for 30 seconds."
     },
     {
       "id": 5975,
-      "text": "Deals weapon DMG + 19. Extends your Venom and Infection effects on the target by 6 seconds."
+      "text": "On your next attack, deal weapon DMG + 19 and extend your Venom and Infection effects on the target by 6 seconds."
     },
     {
       "id": 5976,
@@ -24079,7 +24079,7 @@
     },
     {
       "id": 6019,
-      "text": "Fires a dart that deals 48 physical DMG plus PER scaling and attempts to inflict Bleed for 12 seconds."
+      "text": "Fires a dart that deals gadget DMG + 30 physical DMG plus PER scaling and attempts to inflict Bleed for 12 seconds."
     },
     {
       "id": 6020,
@@ -24263,7 +24263,7 @@
     },
     {
       "id": 6065,
-      "text": "While active, generate + 30% Enmity and gain + 8 Mobility Resistance, but your Attack and Force Attack are reduced by 25%."
+      "text": "While active, generate + 30% Enmity and gain + 8 Mobility Resistance, but your Attack and Force Attack are reduced by 25%. You generate +100% threat from damage dealt, before general Enmity modifiers."
     },
     {
       "id": 6066,
@@ -24331,7 +24331,7 @@
     },
     {
       "id": 6082,
-      "text": "Melee weapon attacks from behind a target deal +3% damage."
+      "text": "Weapon attacks from behind a target deal +3% damage."
     },
     {
       "id": 6083,
@@ -24699,7 +24699,7 @@
     },
     {
       "id": 6174,
-      "text": "Target an enemy or location to deal weapon DMG + 20 to enemies within 8m and apply Kill Box for 45 seconds. While Kill Box remains, any player's ranged attacks against affected enemies add Suppression stacks lasting 30 seconds using the Kill Box caster's Suppressing Shot stack strength; each stack reduces Evasion by an additional 3%."
+      "text": "Target an enemy or location to deal weapon DMG + 20 to enemies within 8m and apply Kill Box for 45 seconds. While Kill Box remains, any player's weapon attacks against affected enemies add Suppression stacks lasting 30 seconds using the Kill Box caster's Suppressing Shot stack strength; each stack reduces Evasion by an additional 3%."
     },
     {
       "id": 6175,
@@ -24719,7 +24719,7 @@
     },
     {
       "id": 6179,
-      "text": "After 3 seconds without attacking, if your next attack is a critical hit, it deals +15% damage."
+      "text": "After 3 seconds without attacking, if your next auto-attack or hostile Rifle ability is a critical hit, it deals +15% damage."
     },
     {
       "id": 6180,
@@ -24776,6 +24776,62 @@
     {
       "id": 6193,
       "text": "Crippling Slice"
+    },
+    {
+      "id": 6194,
+      "text": "Accuracy"
+    },
+    {
+      "id": 6195,
+      "text": "Accuracy: "
+    },
+    {
+      "id": 6196,
+      "text": "Accuracy: Increases the chance to hit. On a weapon, it applies only to attacks made with that weapon. On other equipment, it applies to all attacks."
+    },
+    {
+      "id": 6197,
+      "text": "Adds +10% weapon DMG when wielding one eligible one-handed melee, pistol, or throwing weapon with an empty off hand (no shield). Stacks with the natural +20% Single Weapon bonus, for +30% total."
+    },
+    {
+      "id": 6198,
+      "text": "Dash behind one hostile target within 10m and increase Evasion by 10% for 30 seconds. Does not grant invisibility."
+    },
+    {
+      "id": 6199,
+      "text": "Dash behind one hostile target within 10m, remove negative movement-speed effects, and increase Evasion by 15% for 30 seconds."
+    },
+    {
+      "id": 6200,
+      "text": "Dash behind one hostile target within 10m, inflict Stunned for 2 seconds on arrival, and increase Evasion by 10% for 30 seconds. Does not grant invisibility."
+    },
+    {
+      "id": 6201,
+      "text": "Dash behind one hostile target within 10m, inflict Stunned for 2 seconds on arrival, remove negative movement-speed effects, and increase Evasion by 15% for 30 seconds."
+    },
+    {
+      "id": 6202,
+      "text": "Leap to a hostile target up to 15m away, dealing 10 force DMG plus WIL scaling, interrupting activation, and inflicting Stunned for 2 seconds on arrival."
+    },
+    {
+      "id": 6203,
+      "text": "Leap to a hostile target up to 18m away, dealing 18 force DMG plus WIL scaling, interrupting activation, and inflicting Stunned for 2 seconds on arrival."
+    },
+    {
+      "id": 6204,
+      "text": "When your hostile ability from any skill successfully damages or debuffs an enemy, party members within Leadership range (5m base) gain +8% damage for 30 seconds. SOC scaling can raise this to +10%. Triggers once per ability use, at most once every 45 seconds."
+    },
+    {
+      "id": 6205,
+      "text": "For 45 seconds, gain +15% Haste. Successful auto-attacks restore 1 STM, and defeating an enemy restores 8 STM. Works with any weapon."
+    },
+    {
+      "id": 6206,
+      "text": "For 45 seconds, gain +20% Attack and heal for 8% of direct damage dealt. Costs 10% max HP. Works with any weapon."
+    },
+    {
+      "id": 6207,
+      "text": "Soul Ascension Burst"
     },
     {
       "id": 20401,
@@ -60742,6 +60798,14 @@
       "text": "Your private label normally shows the character's gray public description in brackets. Turn off 'Show Others' Public Descriptions' in Settings to hide it."
     },
     {
+      "id": 79827,
+      "text": "Use /introduce <name> to offer a name or alias to visible players within 20m. They choose whether to remember it."
+    },
+    {
+      "id": 79828,
+      "text": "Use /introductions to Remember or Dismiss offered names. Introductions do not save names automatically, and /introduce has a 5-minute cooldown."
+    },
+    {
       "id": 80000,
       "text": "Recommended Level"
     },
@@ -67931,7 +67995,7 @@
     },
     {
       "id": 81798,
-      "text": "While active, grants +20% to Enmity generation, +15% Defense, +15% Force Defense, -20% Attack, and -20% Force Attack."
+      "text": "While active, grants +20% to Enmity generation, +15% Defense, +15% Force Defense, -20% Attack, and -20% Force Attack. You generate +100% threat from damage dealt, before general Enmity modifiers."
     },
     {
       "id": 81799,
@@ -71831,7 +71895,7 @@
     },
     {
       "id": 82773,
-      "text": "Projects a focused electrical arc up to 15m, dealing 22 electrical DMG plus PER scaling to one target."
+      "text": "Projects a focused electrical arc up to 15m, dealing gadget DMG + 12 electrical DMG plus PER scaling to one target."
     },
     {
       "id": 82774,
@@ -72435,7 +72499,7 @@
     },
     {
       "id": 82924,
-      "text": "Goads a single target into attacking you. Enmity generated increases by 1% per VIT."
+      "text": "Goads a single target into attacking you. Enmity generated increases by 1% per VIT. On a valid impact, threat catches up to the highest visible rival plus the VIT-scaled threat bonus. Repeated goads while already ahead do not accumulate threat. No forced target lock."
     },
     {
       "id": 82925,
@@ -72443,7 +72507,7 @@
     },
     {
       "id": 82926,
-      "text": "Goads the selected target and all other enemies within 8m of it into attacking you. Enmity generated increases by 1% per VIT."
+      "text": "Goads the selected target and all other enemies within 8m of it into attacking you. Enmity generated increases by 1% per VIT. On a valid impact, threat catches up to the highest visible rival plus the VIT-scaled threat bonus. Repeated goads while already ahead do not accumulate threat. No forced target lock."
     },
     {
       "id": 82927,
@@ -73519,11 +73583,11 @@
     },
     {
       "id": 83196,
-      "text": "Guarding Bond"
+      "text": "Guarding Bond Stance"
     },
     {
       "id": 83197,
-      "text": "Predatory Bond"
+      "text": "Predatory Bond Stance"
     },
     {
       "id": 83198,
@@ -73563,7 +73627,7 @@
     },
     {
       "id": 83207,
-      "text": "Your beast gains +20% Defense, +20% Force Defense, takes 15% less damage, and generates +75% enmity while this bond is active."
+      "text": "Your beast gains +20% Defense, +20% Force Defense, takes 15% less damage, and generates +50% enmity while this bond is active."
     },
     {
       "id": 83208,
@@ -73647,11 +73711,11 @@
     },
     {
       "id": 83228,
-      "text": "Guarding Bond"
+      "text": "Guarding Bond Stance"
     },
     {
       "id": 83229,
-      "text": "Predatory Bond"
+      "text": "Predatory Bond Stance"
     },
     {
       "id": 83230,
@@ -88587,7 +88651,7 @@
     },
     {
       "id": 192582,
-      "text": "Apex Collapse"
+      "text": "Apex Collapse Stance"
     },
     {
       "id": 192583,
@@ -88599,7 +88663,7 @@
     },
     {
       "id": 192585,
-      "text": "Inflicts Shock on enemies within 4.5m of you for 30 seconds. Deals no direct damage."
+      "text": "Deals 32 electrical DMG plus PER scaling to enemies within 4.5m of you. Inflicts Shock for 30 seconds."
     },
     {
       "id": 192586,
@@ -88655,7 +88719,7 @@
     },
     {
       "id": 192599,
-      "text": "Hardens your carapace: +10% Physical Defense, +15% Force Defense, +20 Fire Resistance, and +20 Poison Resistance."
+      "text": "Hardens your carapace: +4% Physical Defense, +8% Force Defense, +10 Fire Resistance, and +10 Poison Resistance."
     },
     {
       "id": 192600,
@@ -88727,7 +88791,7 @@
     },
     {
       "id": 192617,
-      "text": "Uses Mimicry rank and MGT for its hit check. Deals 40 Force DMG plus MGT scaling in an 8m x 2.5m line, increased by 40% against Weakened targets. Force is the damage type; this remains a Mimicry ability. Inflicts Force Disruption for 30 seconds and restores 5 FP to you per hit."
+      "text": "Uses Mimicry rank and MGT for its hit check. Deals 40 Force DMG plus MGT scaling in an 8m x 2.5m line, increased by 40% against Weakened targets. Force is the damage type; this remains a Mimicry ability. Inflicts Force Disruption for 30 seconds and restores 5 FP to you per hit, up to 15 FP."
     },
     {
       "id": 192618,
@@ -88879,7 +88943,7 @@
     },
     {
       "id": 192655,
-      "text": "Hardens your body: +15% Physical Defense, +10% Force Defense, +25 Trauma Resistance, +15 Fire Resistance, and +15 Poison Resistance."
+      "text": "Hardens your body: +8% Physical Defense, +4% Force Defense, +15 Trauma Resistance, +10 Fire Resistance, and +10 Poison Resistance."
     },
     {
       "id": 192656,
@@ -89115,7 +89179,7 @@
     },
     {
       "id": 192714,
-      "text": "Sustain Burn"
+      "text": "Sustain Burn Stance"
     },
     {
       "id": 192715,
@@ -89183,7 +89247,7 @@
     },
     {
       "id": 192731,
-      "text": "Inflicts Weakened on enemies within 5.5m of you for 30 seconds, restores 4 FP to you per hit, and generates 75 additional Enmity per target. Deals no direct damage."
+      "text": "Inflicts Weakened on enemies within 5.5m of you for 30 seconds, restores 4 FP to you per hit up to 12 FP, and generates 75 additional Enmity per target. Deals no direct damage."
     },
     {
       "id": 192732,
@@ -89195,11 +89259,11 @@
     },
     {
       "id": 192734,
-      "text": "Warden Wall"
+      "text": "Warden Wall Stance"
     },
     {
       "id": 192735,
-      "text": "While active, you and allies within 10m gain +20% Defense and +20% Force Defense."
+      "text": "While active, you and allies within 10m gain +10% Physical Defense and +10% Force Defense. Multiple Warden Walls do not stack, including your own stance and an allied aura. You generate +100% threat from damage dealt, before general Enmity modifiers."
     },
     {
       "id": 192736,
@@ -89207,7 +89271,7 @@
     },
     {
       "id": 192737,
-      "text": "Inflicts Foggy Mind on enemies in a 5m x 5m cone for 30 seconds and restores 4 FP to you per hit. Deals no direct damage."
+      "text": "Inflicts Foggy Mind on enemies in a 5m x 5m cone for 30 seconds and restores 4 FP to you per hit, up to 12 FP. Deals no direct damage."
     },
     {
       "id": 192738,
@@ -89255,7 +89319,7 @@
     },
     {
       "id": 192749,
-      "text": "Warden Wall Aura"
+      "text": "Warden Wall Stance Aura"
     },
     {
       "id": 192750,
@@ -89264,6 +89328,7 @@
     {
       "id": 192751,
       "text": "Bonebreaker Instinct"
-    }
+    },
+    {"id": 6208, "text": "Challenge"}
   ]
 }

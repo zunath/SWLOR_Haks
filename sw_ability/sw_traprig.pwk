@@ -1,0 +1,15 @@
+# Trap emitter: no collision triangles. The use point remains available for disarming kits.
+node trimesh PWK
+  parent sw_traprig_pwk
+  position 0.0 0.0 0.0
+  orientation 1.0 0.0 0.0 0.0
+  bitmap NULL
+  verts 0
+  faces 0
+  tverts 0
+endnode
+node dummy t02_pwk_use01
+  parent sw_traprig_pwk
+  position 0.0 0.567337 0.0
+  orientation 1.0 0.0 0.0 0.0
+endnode

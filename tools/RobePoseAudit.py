@@ -269,15 +269,33 @@ def repair_compiler_skin_bindings(data):
     return bytes(result)
 
 
-def validate_body_skeleton(generated, base):
+def garment_nodes(model):
+    """Generated garment joints/meshes (`rg_`/`rm_`) and everything beneath them."""
+    result = set()
+    for index, (name, parent, _, _, _) in enumerate(model.nodes):
+        if name.startswith(("rg_", "rm_")) or parent in result:
+            result.add(index)
+    return result
+
+
+def validate_body_skeleton(generated, base, ignore_garment=False):
     actual, expected = Model(generated, False), Model(base, False)
     if not math.isclose(actual.scale, expected.scale, abs_tol=1e-7):
         raise ValueError("The wearer's animation scale changed")
-    if len(actual.nodes) < len(expected.nodes):
+    actual_nodes = actual.nodes
+    if ignore_garment:
+        # Garment joints bound to wearer bones are children of those bones, so
+        # they interleave with the body's traversal; compare the body alone.
+        skipped = garment_nodes(actual)
+        kept = [index for index in range(len(actual.nodes)) if index not in skipped]
+        position = {index: filtered for filtered, index in enumerate(kept)}
+        actual_nodes = [(name, None if parent is None else position[parent], part, controllers, offset)
+                        for name, parent, part, controllers, offset in (actual.nodes[i] for i in kept)]
+    if len(actual_nodes) < len(expected.nodes):
         raise ValueError("Ordinary body skeleton was truncated")
     # Some stock bodies have repeated impact helpers. Compare the entire
     # ordered body subtree instead of collapsing those nodes into a name map.
-    for expected_node, actual_node in zip(expected.nodes[1:], actual.nodes[1:]):
+    for expected_node, actual_node in zip(expected.nodes[1:], actual_nodes[1:]):
         name, parent, part, controllers, _ = expected_node
         target_name, target_parent, target_part, target_controllers, _ = actual_node
         if name != target_name or parent != target_parent:
@@ -285,7 +303,7 @@ def validate_body_skeleton(generated, base):
         if target_part != part:
             raise ValueError(f"{name}: ordinary body animation ID changed")
         p = expected.nodes[parent][0] if parent else None
-        tp = actual.nodes[target_parent][0] if target_parent else None
+        tp = actual_nodes[target_parent][0] if target_parent else None
         if p != tp or controllers.keys() != target_controllers.keys():
             raise ValueError(f"{name}: ordinary body hierarchy/controllers changed")
         for key in controllers:
@@ -300,11 +318,12 @@ def validate_body_skeleton(generated, base):
                     raise ValueError(f"{name}: ordinary body bind transform changed")
 
 
-def validate_garment_bindings(source, generated, names):
+def validate_garment_bindings(source, generated, names, expected=None):
+    """`expected` overrides the authored world binds, e.g. with retargeted binds."""
     if not mdl.binary(source):
         raise ValueError("Garment bind audit requires a compiled reference")
     original, target = Model(source, False), Model(generated, False)
-    before, after = original.pose(), target.pose()
+    before, after = {**original.pose(), **(expected or {})}, target.pose()
     for node, renamed in names.items():
         if node not in before:
             raise ValueError(f"{node}: no original garment bind reference")
@@ -342,6 +361,36 @@ def validate_body_poses(parent, base, library):
                     raise ValueError(f"{parent}/{name}/{joint}: body pose changed at {phase}")
             count += 1
     return count
+
+
+def validate_garment_body_motion(wearer, base, names, library):
+    """A garment's copy of a wearer bone must be a static child of that bone.
+
+    The engine latches channels a clip omits, and layered overlays and runtime
+    animation replacements only drive the body's own subtree. A garment joint
+    that mirrors body tracks therefore separates from the body (for example a
+    robe left standing after sitting, then pointing or talking). Binding it
+    beneath the real bone with no tracks makes that separation impossible.
+    Returns the number of bound garment joints checked.
+    """
+    from RobeAnimations import BODY_MOTION_NODES
+    model = Model(wearer, False)
+    body = {name for name, _, _, _, _ in library.model(base).nodes}
+    indices = {}
+    for index, (name, _, _, _, _) in enumerate(model.nodes):
+        indices.setdefault(name, index)
+    joints = [(bone, alias) for bone, alias in names.items() if bone in BODY_MOTION_NODES and bone in body]
+    animated = {part for _, (_, nodes) in library.clips(model.parent).items()
+                for _, _, part, controllers, _ in nodes if part >= 0 and controllers}
+    for bone, alias in joints:
+        if alias not in indices or bone not in indices:
+            raise ValueError(f"{model.parent}/{bone}/{alias}: missing body or garment joint")
+        _, parent, part, _, _ = model.nodes[indices[alias]]
+        if parent is None or model.nodes[parent][0] != bone:
+            raise ValueError(f"{model.parent}/{alias}: garment {bone} is not bound beneath the wearer's {bone}")
+        if part >= 0 and part in animated:
+            raise ValueError(f"{model.parent}/{alias}: garment {bone} must not carry its own animation tracks")
+    return len(joints)
 
 
 class Library:
