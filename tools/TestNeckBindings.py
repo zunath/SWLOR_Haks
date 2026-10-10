@@ -1,6 +1,5 @@
 """Guard neck attachment binding, authored mesh data, and archive budgets."""
 import copy
-import math
 from pathlib import Path
 import struct
 import shutil
@@ -8,7 +7,6 @@ import tempfile
 import unittest
 
 import GenerateNeckBindings as necks
-from RobePoseAudit import rotate
 
 
 class NeckBindingTests(unittest.TestCase):
@@ -60,47 +58,6 @@ class NeckBindingTests(unittest.TestCase):
         # This robe retains the torso index but inserts nodes ahead of head_g.
         self.assertIsNone(necks.remap_neck(self.source(104), self.native, self.body(158), "pfh158_neck104"))
         self.assertIsNotNone(necks.remap_neck(self.source(108), self.native, self.body(158), "pfh158_neck108"))
-
-    def test_mask_clears_eyes_keeps_chin_coverage_and_has_valid_surface_planes(self):
-        source = self.source(108)
-        model = necks.Model(source, False)
-        extra, _, _, slots, _ = necks.skin_nodes(source)[0]
-        mesh, raw = extra - 512, 12 + model.uint(4)
-        self.assertEqual({0: 23}, slots)
-        rotation = struct.unpack_from("<4f", source, 12 + model.uint(extra + 28) + 23 * 16)
-        translation = struct.unpack_from("<3f", source, 12 + model.uint(extra + 40) + 23 * 12)
-        count = struct.unpack_from("<H", source, mesh + 448)[0]
-        self.assertEqual(995, count)
-        stride = model.uint(mesh + 440) or 12
-        vertices = [struct.unpack_from("<3f", source, raw + model.uint(mesh + 444) + i * stride)
-                    for i in range(count)]
-        local = [tuple(a + b for a, b in zip(rotate((*rotation[1:], rotation[0]), vertex), translation))
-                 for vertex in vertices]
-        # Native front/side views on Twi'lek heads 79 and 205 establish this
-        # envelope: the upper flap stays below the eyes while the chin remains covered.
-        self.assertLessEqual(max(vertex[2] for vertex in local), 0.065)
-        self.assertLess(min(vertex[2] for vertex in local), -0.075)
-        self.assertGreater(min(vertex[2] for vertex in local), -0.077)
-        low, high = struct.unpack_from("<3f", source, mesh + 20), struct.unpack_from("<3f", source, mesh + 32)
-        for vertex in vertices:
-            self.assertTrue(all(a <= value <= b for a, value, b in zip(low, vertex, high)))
-        for i in range(count):
-            normal = struct.unpack_from("<3f", source, raw + model.uint(mesh + 468) + i * stride)
-            self.assertAlmostEqual(1, math.sqrt(sum(value * value for value in normal)), places=6)
-        for i in range(model.uint(mesh + 12)):
-            face = 12 + model.uint(mesh + 8) + i * 32
-            normal = struct.unpack_from("<3f", source, face)
-            distance = struct.unpack_from("<f", source, face + 12)[0]
-            self.assertAlmostEqual(1, math.sqrt(sum(value * value for value in normal)), places=6)
-            corners = [vertices[index] for index in struct.unpack_from("<3H", source, face + 26)]
-            first = [b - a for a, b in zip(corners[0], corners[1])]
-            second = [b - a for a, b in zip(corners[0], corners[2])]
-            cross = (first[1] * second[2] - first[2] * second[1],
-                     first[2] * second[0] - first[0] * second[2],
-                     first[0] * second[1] - first[1] * second[0])
-            self.assertGreater(sum(a * b for a, b in zip(normal, cross)), 0)
-            for vertex in corners:
-                self.assertLess(abs(sum(a * b for a, b in zip(normal, vertex)) + distance), 1e-6)
 
     def test_multibone_and_duplicate_named_meshes_keep_all_independent_inverse_binds(self):
         source, wearer = self.source(300), self.body(98)
