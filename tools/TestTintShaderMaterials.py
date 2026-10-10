@@ -702,7 +702,8 @@ def draw_engine_materials(test, engine, root: Path):
         columns = line.split()
         if len(columns) >= 4 and columns[0].isdigit():
             catalog.setdefault(columns[1], set()).add(columns[2])
-    cases = [("pme0_head056", "rodian"), ("pfh0_head121", "female"), ("pfh0_robe187", "female")]
+    cases = [("pme0_head056", "rodian"), ("pfh0_head121", "female"), ("pfh0_robe187", "female"),
+             ("pfh0_chest304", "female")]
     cases.extend((("helm_114", "pilot-helmet"), ("pfh0_chest249", "pilot-armor")))
     for part in ("shinl249", "shinr249", "footl247", "footr247"):
         model, material = f"pme0_{part}", f"pmh0_{part}"
@@ -748,8 +749,8 @@ def draw_engine_materials(test, engine, root: Path):
         outputs = (("surface", "palette") if inspect_row else
             ("surface", "native-surface", "missing-native") if material == "helm_114" else
             ("surface", "native-surface") if material == "pfh0_robe187" else ("surface",))
-        for quality, lighting, output in product(range(3), range(2), outputs):
-            configuration = quality, lighting, 0, 0, 0
+        for quality, lighting, gamma, output in product(range(3), range(2), range(2), outputs):
+            configuration = quality, lighting, gamma, 0, 0
             override = None
             if output == "palette":
                 # Keep production sampling and lighting intact, exposing only
@@ -838,7 +839,7 @@ def draw_engine_materials(test, engine, root: Path):
                     if not all(math.isfinite(value) for value in result) or abs(result[3] - 1) > 0.001:
                         raise AssertionError(f"Production draw did not produce a finite opaque fragment: {tuple(result)}")
                     if material in ("pfh0_robe187", "helm_114"):
-                        key = material, quality, lighting, mip_mode
+                        key = material, quality, lighting, gamma, mip_mode
                         if output == "surface":
                             robe_reference[key] = tuple(result)
                         elif output == "native-surface":
@@ -866,7 +867,7 @@ def draw_engine_materials(test, engine, root: Path):
                 for index in attributes:
                     disable_attribute(index)
                 test.delete_program(program)
-    print(f"Production draws passed: {checks}; actual NPC BC5 DDS + atlas/white TGA, all quality/lighting modes, "
+    print(f"Production draws passed: {checks}; actual NPC and female chest304 BC5 DDS + atlas/white TGA, all quality/lighting/gamma modes, "
         "base/default/generated mip sampling. NWN DDS parsing is not exercised.", flush=True)
     print(f"Reported shin/foot palette checks passed: {palette_checks['rowleath2']}; authored Leather2 row 23 and zero "
         "environment coverage using production sampling with diagnostic fragment output.", flush=True)
