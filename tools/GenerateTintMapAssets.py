@@ -2277,7 +2277,7 @@ def tint_material_text(
     )
     replaced = re.compile(
         r"^\s*(?:customshaderFS|texture0|texture7|texture9|texture10|"
-        r"parameter\s+(?:float|int)\s+(?:tintMapWidth|tintMapHeight|smoothTintEdges|useTexture1Alpha|useTexture9Alpha|useNativePalette|"
+        r"parameter\s+(?:float|int)\s+(?:tintMapWidth|tintMapHeight|smoothTintEdges|refineTintEdges|useTexture1Alpha|useTexture9Alpha|useNativePalette|"
         + tint_row_parameter_pattern
         + "|"
         + tint_color_parameter_pattern
@@ -2317,6 +2317,7 @@ def tint_material_text(
     )
     if smooth_edges:
         lines.append("parameter float smoothTintEdges 1.0")
+        lines.append("parameter float refineTintEdges 1.0")
     if uses_texture1_alpha:
         lines.append("parameter float useTexture1Alpha 1.0")
     if texture9_alpha:

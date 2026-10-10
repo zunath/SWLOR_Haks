@@ -58,6 +58,7 @@ uniform sampler2D texUnit10;
 uniform float PLTscheme[15];
 uniform float useNativePalette;
 uniform float smoothTintEdges;
+uniform float refineTintEdges;
 uniform float tintMapWidth;
 uniform float tintMapHeight;
 uniform float useTexture1Alpha;
@@ -151,6 +152,65 @@ vec4 ResolveTintTexel(vec2 uv)
     return ResolveTintColor(packedTint.r, layer, row);
 }
 
+// Reconstruct smooth dye coverage, independently of the original shade field.
+// A cubic B-spline rounds stair corners; normalized squared coverage keeps
+// contrasting dye regions crisp without inventing intermediate layer IDs.
+vec4 TintCoverageKernel(float f)
+{
+    float inverse = 1.0 - f;
+    float f2 = f * f;
+    float f3 = f2 * f;
+    return vec4(inverse * inverse * inverse,
+        3.0 * f3 - 6.0 * f2 + 4.0,
+        -3.0 * f3 + 3.0 * f2 + 3.0 * f + 1.0, f3) / 6.0;
+}
+
+void AddTintCoverage(vec2 uv, float weight,
+    inout vec4 first, inout vec4 second, inout vec2 last)
+{
+    float encoded = texture2D(texUnit7, uv, -10.0).g;
+    float layer = floor(clamp(encoded, 0.0, 0.9999) * 10.0);
+    first += weight * (vec4(1.0) - step(vec4(0.5), abs(vec4(layer) - vec4(0.0, 1.0, 2.0, 3.0))));
+    second += weight * (vec4(1.0) - step(vec4(0.5), abs(vec4(layer) - vec4(4.0, 5.0, 6.0, 7.0))));
+    last += weight * (vec2(1.0) - step(vec2(0.5), abs(vec2(layer) - vec2(8.0, 9.0))));
+}
+
+vec4 RefineTintContour(vec2 wrappedUV, vec2 size, float shade)
+{
+    vec2 position = wrappedUV * size - vec2(0.5);
+    vec2 baseUV = (floor(position) - vec2(0.5)) / size;
+    vec4 horizontal = TintCoverageKernel(fract(position.x));
+    vec4 vertical = TintCoverageKernel(fract(position.y));
+    vec4 first = vec4(0.0);
+    vec4 second = vec4(0.0);
+    vec2 last = vec2(0.0);
+    for (int y = 0; y < 4; y++)
+    {
+        for (int x = 0; x < 4; x++)
+        {
+            AddTintCoverage(baseUV + vec2(float(x), float(y)) / size,
+                horizontal[x] * vertical[y], first, second, last);
+        }
+    }
+    first *= first;
+    second *= second;
+    last *= last;
+    float total = dot(first, vec4(1.0)) + dot(second, vec4(1.0)) + dot(last, vec2(1.0));
+    vec4 color = vec4(0.0);
+    float row;
+    if (first.x > 0.000001) color += first.x * ResolveTintColor(shade, 0.0, row);
+    if (first.y > 0.000001) color += first.y * ResolveTintColor(shade, 1.0, row);
+    if (first.z > 0.000001) color += first.z * ResolveTintColor(shade, 2.0, row);
+    if (first.w > 0.000001) color += first.w * ResolveTintColor(shade, 3.0, row);
+    if (second.x > 0.000001) color += second.x * ResolveTintColor(shade, 4.0, row);
+    if (second.y > 0.000001) color += second.y * ResolveTintColor(shade, 5.0, row);
+    if (second.z > 0.000001) color += second.z * ResolveTintColor(shade, 6.0, row);
+    if (second.w > 0.000001) color += second.w * ResolveTintColor(shade, 7.0, row);
+    if (last.x > 0.000001) color += last.x * ResolveTintColor(shade, 8.0, row);
+    if (last.y > 0.000001) color += last.y * ResolveTintColor(shade, 9.0, row);
+    return color / max(total, 0.000001);
+}
+
 void main ()
 {
     vec2 tintMapSize = max(vec2(tintMapWidth, tintMapHeight), vec2(1.0));
@@ -161,7 +221,11 @@ void main ()
     float layer = floor(clamp(encodedLayer, 0.0, 0.9999) * 10.0);
     float v;
     vec4 paletteColor = ResolveTintColor(g, layer, v);
-    if (smoothTintEdges > 0.5)
+    if (refineTintEdges > 0.5)
+    {
+        paletteColor = RefineTintContour(wrappedUV, tintMapSize, g);
+    }
+    else if (smoothTintEdges > 0.5)
     {
         // Native PLTs filter the resolved colors, not their categorical layer IDs.
         // Resolve each neighboring texel first so black dye edges blend with the

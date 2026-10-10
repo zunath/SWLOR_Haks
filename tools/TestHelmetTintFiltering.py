@@ -25,6 +25,9 @@ GAME_DATA = None
 
 
 class HelmetTintFilteringTests(unittest.TestCase):
+    def setUp(self):
+        self.scalar("refineTintEdges", 0)
+
     @classmethod
     def setUpClass(cls):
         cls.gl = OpenGL()
@@ -156,6 +159,9 @@ void main() { gl_Position = gl_Vertex; vVertexTexCoords = testUV; }
         enabled = [path.stem for path in (ROOT / "sw_tint_mtr").glob("*.mtr")
                    if re.search(r"parameter\s+float\s+smoothTintEdges\s+1", path.read_text())]
         self.assertEqual(enabled, ["helm_053"])
+        refined = [path.stem for path in (ROOT / "sw_tint_mtr").glob("*.mtr")
+                   if re.search(r"parameter\s+float\s+refineTintEdges\s+1", path.read_text())]
+        self.assertEqual(refined, ["helm_053"])
         for material in ("helm_053", "helm_054"):
             with tempfile.TemporaryDirectory() as scratch:
                 path = Path(scratch) / f"{material}.mtr"
@@ -165,6 +171,8 @@ void main() { gl_Position = gl_Vertex; vVertexTexCoords = testUV; }
                                                native_palette=True)
                     self.assertEqual(text.count("parameter float smoothTintEdges 1.0"),
                                      int(material == "helm_053"))
+                    self.assertEqual(text.count("parameter float refineTintEdges 1.0"),
+                                     int(material == "helm_053"))
                     self.assertIn("parameter float useNativePalette 1.0", text)
                     path.write_text(text)
                 # Authored profiles may carry a different legacy bitmap name.
@@ -173,6 +181,67 @@ void main() { gl_Position = gl_Vertex; vVertexTexCoords = testUV; }
                     profile=("legacy_mask", path.read_text().splitlines()), native_palette=True)
                 self.assertEqual(text.count("parameter float smoothTintEdges 1.0"),
                                  int(material == "helm_053"))
+                self.assertEqual(text.count("parameter float refineTintEdges 1.0"),
+                                 int(material == "helm_053"))
+
+    def upload_mask(self, layers, shades):
+        height, width = layers.shape
+        pixels = np.zeros((height, width, 4), dtype=np.float32)
+        pixels[:, :, 0] = shades
+        pixels[:, :, 1] = (layers + .5) / 10
+        pixels[:, :, 3] = 1
+        self.test.active_texture(0x84C0 + 7)
+        self.test.bind_texture(0x0DE1, 8)
+        self.linear_texture()
+        self.test.texture_image(0x0DE1, 0, 0x8814, width, height, 0, 0x1908, 0x1406,
+                               ct.create_string_buffer(pixels.tobytes()))
+        self.scalar("tintMapWidth", width)
+        self.scalar("tintMapHeight", height)
+
+    def test_refined_diagonal_reduces_the_stair_corner_without_blurring_shading(self):
+        y, x = np.mgrid[:12, :12]
+        layers = np.where(x + y >= 7, 4, 2)
+        self.upload_mask(layers, np.full(layers.shape, .5))
+        self.colors("rgb")
+        self.scalar("rowMetal1", 1)  # Exact black; cloth is opaque white.
+        self.scalar("rowCloth1", 3.999999761581421)
+        samples = []
+        for refined in (0, 1):
+            self.scalar("refineTintEdges", refined)
+            samples.append([self.draw((3 + t + .5) / 12, (3.5 - t + .5) / 12, 1)[0]
+                            for t in np.linspace(0, .5, 17)])
+        old_variation, refined_variation = (np.ptp(values) for values in samples)
+        self.assertGreater(old_variation, .02, "Bilinear filtering must expose the stair corner")
+        self.assertLess(refined_variation, old_variation * .65)
+
+    def test_refined_sole_layer_preserves_fine_shading_and_metal_coverage(self):
+        shades = np.array([[.1, .9, .2, .8], [.8, .2, .9, .1],
+                           [.3, .7, .4, .6], [.6, .4, .7, .3]])
+        for layer in range(10):
+            self.upload_mask(np.full((4, 4), layer), shades)
+            for mode in ("rgb", "preset", "native"):
+                self.colors(mode)
+                for uv in ((.31, .42), (.63, .71), (-.03, 1.02)):
+                    self.scalar("refineTintEdges", 0)
+                    expected = self.draw(*uv, 0)
+                    self.scalar("refineTintEdges", 1)
+                    np.testing.assert_allclose(self.draw(*uv, 1), expected, atol=.004, rtol=0)
+
+    def test_refined_edges_mix_only_present_dyes_and_their_metal_coverage(self):
+        layers = np.array([[2, 2, 4, 4]] * 4)
+        self.upload_mask(layers, np.full(layers.shape, .5))
+        for mode in ("rgb", "preset", "native"):
+            self.colors(mode)
+            self.scalar("refineTintEdges", 0)
+            left, right = self.draw(.125, .5, 0), self.draw(.875, .5, 0)
+            direction = right - left
+            for u in (.3, .4, .5, .6, .7):
+                self.scalar("refineTintEdges", 1)
+                value = self.draw(u, .5, 1)
+                blend = np.dot(value - left, direction) / np.dot(direction, direction)
+                self.assertGreaterEqual(blend, -.004)
+                self.assertLessEqual(blend, 1.004)
+                np.testing.assert_allclose(value, left + blend * direction, atol=.004, rtol=0)
 
 
 if __name__ == "__main__":
