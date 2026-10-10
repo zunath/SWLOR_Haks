@@ -140,7 +140,9 @@ def generate(game_data: Path):
         # Prepare and validate the entire set before installing any resource.
         outputs = {name: rename_model(sources[source], source, name) for name, source in expected.items()}
         for name, data in outputs.items():
-            (ROOT / "sw_pt_cloak" / f"{name}.mdl").write_bytes(data)
+            path = ROOT / "sw_pt_cloak" / f"{name}.mdl"
+            if not path.is_file() or path.read_bytes() != data:
+                path.write_bytes(data)
         manifest = {"models": dict(sorted(expected.items())),
                     "unavailable_sources": unavailable,
                     "sources": {name: digest(rename_model(data, name, name)) for name, data in sources.items()},
@@ -165,4 +167,5 @@ def main():
         generate(args.game_data)
 
 
-if __name__ 
+if __name__ == "__main__":
+    main()
