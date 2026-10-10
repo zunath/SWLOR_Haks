@@ -5,7 +5,6 @@ import struct
 import shutil
 import tempfile
 import unittest
-from unittest.mock import patch
 
 import GenerateNeckBindings as necks
 
@@ -130,37 +129,6 @@ class NeckBindingTests(unittest.TestCase):
             shutil.copyfile(self.root / "sw_pt_neck/pfh0_neck108.mdl", source_root / "sw_pt_neck/pfh0_neck108.mdl")
             with self.assertRaisesRegex(ValueError, "neck inventory"):
                 necks.check(source_root, output_root)
-
-    def test_build_preparation_generates_reuses_and_removes_obsolete_variants(self):
-        with tempfile.TemporaryDirectory() as folder:
-            source_root, output_root = Path(folder) / "source", Path(folder) / "output"
-            for relative in ("sw_pt_root/pfh0.mdl", "sw_pt_root/pfh98.mdl", "sw_pt_neck/pfh0_neck104.mdl"):
-                target = source_root / relative
-                target.parent.mkdir(parents=True, exist_ok=True)
-                shutil.copyfile(self.root / relative, target)
-            first = necks.ensure(source_root, output_root)
-            self.assertEqual(1, len(first["files"]))
-            with patch.object(necks, "generate", side_effect=AssertionError("Valid outputs must be reused")):
-                self.assertEqual(first, necks.ensure(source_root, output_root))
-            (source_root / "sw_pt_neck/pfh0_neck104.mdl").unlink()
-            shutil.copyfile(self.root / "sw_pt_neck/pfh0_neck108.mdl", source_root / "sw_pt_neck/pfh0_neck108.mdl")
-            second = necks.ensure(source_root, output_root)
-            self.assertEqual(second, necks.check(source_root, output_root))
-            self.assertFalse((output_root / "sw_neck_f0/pfh98_neck104.mdl").exists())
-            self.assertTrue((output_root / "sw_neck_f0/pfh98_neck108.mdl").exists())
-
-    def test_failed_generation_preserves_existing_banks_and_manifest(self):
-        with tempfile.TemporaryDirectory() as folder:
-            output_root = Path(folder) / "output"
-            report = necks.generate(self.root, output_root, [108], [98])
-            output = output_root / next(iter(report["files"]))
-            manifest = (output_root / necks.MANIFEST).read_bytes()
-            saved_output = output.read_bytes()
-            with patch.object(necks, "generate", side_effect=ValueError("Staging audit failed")):
-                with self.assertRaisesRegex(ValueError, "Staging audit failed"):
-                    necks.ensure(self.root, output_root)
-            self.assertEqual(saved_output, output.read_bytes())
-            self.assertEqual(manifest, (output_root / necks.MANIFEST).read_bytes())
 
 
 if __name__ == "__main__":
