@@ -1083,6 +1083,8 @@ def main():
         test = MaterialTest(gl)
         print(f"Validating {len(pairs)} production shader pairs from {materials} generated MTRs on {renderer}.", flush=True)
         compile_engine_pairs(test, engine, pairs, parameters)
+        cloak_pairs, _, cloak_parameters = production_pairs(root / "sw_pt_cloak")
+        compile_engine_pairs(test, engine, cloak_pairs, cloak_parameters)
         check_native_npc_rows(test, engine, pairs, parameters)
         check_native_palette_fallback(test, engine, pairs, root)
         draw_engine_materials(test, engine, root)
