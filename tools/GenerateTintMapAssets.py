@@ -55,6 +55,8 @@ TINT_HAIR_MAPPED_SHADER = REPOSITORY_ROOT / "sw_shader" / "fs_plt_hair_nm.shd"
 TINT_FRAGMENT_SHADER = "fs_plt_tinter"
 TINT_MAPPED_FRAGMENT_SHADER = "fs_plt_tinter_nm"
 TINT_HAIR_MAPPED_FRAGMENT_SHADER = "fs_plt_hair_nm"
+# Restore native color filtering only for the reported mask edge regression.
+SMOOTH_TINT_MATERIALS = frozenset({"helm_053"})
 AUTHORED_HAIR_FRAGMENT_SHADERS = {"fslit_aniso_nm"}
 _MTR_PATHS_BY_RESREF: dict[str, Path] | None = None
 _SOURCE_MTR_PATHS_BY_RESREF: dict[str, list[Path]] | None = None
@@ -2236,6 +2238,7 @@ def tint_material_text(
     native_palette: bool = False,
 ) -> str:
     source_material = source_material or material
+    smooth_edges = source_material.lower() in SMOOTH_TINT_MATERIALS
     generated_lines = path.read_text(encoding="utf-8-sig").splitlines() if path.exists() else []
     source_paths = source_mtr_paths(source_material)
     source_mtr_lines = (
@@ -2274,7 +2277,7 @@ def tint_material_text(
     )
     replaced = re.compile(
         r"^\s*(?:customshaderFS|texture0|texture7|texture9|texture10|"
-        r"parameter\s+(?:float|int)\s+(?:tintMapWidth|tintMapHeight|useTexture1Alpha|useTexture9Alpha|useNativePalette|"
+        r"parameter\s+(?:float|int)\s+(?:tintMapWidth|tintMapHeight|smoothTintEdges|useTexture1Alpha|useTexture9Alpha|useNativePalette|"
         + tint_row_parameter_pattern
         + "|"
         + tint_color_parameter_pattern
@@ -2312,6 +2315,8 @@ def tint_material_text(
         )
         + tint_palette_parameter_lines(native_palette)
     )
+    if smooth_edges:
+        lines.append("parameter float smoothTintEdges 1.0")
     if uses_texture1_alpha:
         lines.append("parameter float useTexture1Alpha 1.0")
     if texture9_alpha:

@@ -16,6 +16,7 @@
 // R uses regular filtering so shade gradients remain smooth. G is fetched at
 // a nearest texel center using the MTR-provided dimensions, preventing a
 // filtered seam from selecting the wrong dye layer.
+// smoothTintEdges opts a material into bilinear filtering after color lookup.
 //
 // PALETTE ATLAS (texUnit10, plt_palette.tga, 256x2048 RGBA, mipmap 0):
 //   U = (grey byte + 0.5) / 256, centered within the palette texel
@@ -56,6 +57,7 @@ uniform sampler2D texUnit9;
 uniform sampler2D texUnit10;
 uniform float PLTscheme[15];
 uniform float useNativePalette;
+uniform float smoothTintEdges;
 uniform float tintMapWidth;
 uniform float tintMapHeight;
 uniform float useTexture1Alpha;
@@ -73,15 +75,8 @@ uniform float rowLeath2 = 0.429932;
 uniform float rowTat1   = 0.515869;
 uniform float rowTat2   = 0.515869;
 
-void main ()
+vec4 ResolveTintColor(float g, float layer, out float resolvedRow)
 {
-    vec2 tintMapSize = max(vec2(tintMapWidth, tintMapHeight), vec2(1.0));
-    vec2 wrappedUV = fract(vVertexTexCoords);
-    vec2 nearestUV = (floor(wrappedUV * tintMapSize) + vec2(0.5)) / tintMapSize;
-    float g = texture2D(texUnit7, wrappedUV, -10.0).r;
-    float encodedLayer = texture2D(texUnit7, nearestUV, -10.0).g;
-    float layer = floor(clamp(encodedLayer, 0.0, 0.9999) * 10.0);
-
     float v = rowSkin;
     if      (layer > 8.5) { v = rowTat2;   }
     else if (layer > 7.5) { v = rowTat1;   }
@@ -144,6 +139,43 @@ void main ()
         float environmentAlpha = layer > 1.5 && layer < 3.5 ? referenceShade.a : 1.0;
         paletteColor = vec4(clamp(decodedRgb * shadeScale, 0.0, 1.0), environmentAlpha);
     }
+    resolvedRow = v;
+    return paletteColor;
+}
+
+vec4 ResolveTintTexel(vec2 uv)
+{
+    vec2 packedTint = texture2D(texUnit7, uv, -10.0).rg;
+    float layer = floor(clamp(packedTint.g, 0.0, 0.9999) * 10.0);
+    float row;
+    return ResolveTintColor(packedTint.r, layer, row);
+}
+
+void main ()
+{
+    vec2 tintMapSize = max(vec2(tintMapWidth, tintMapHeight), vec2(1.0));
+    vec2 wrappedUV = fract(vVertexTexCoords);
+    vec2 nearestUV = (floor(wrappedUV * tintMapSize) + vec2(0.5)) / tintMapSize;
+    float g = texture2D(texUnit7, wrappedUV, -10.0).r;
+    float encodedLayer = texture2D(texUnit7, nearestUV, -10.0).g;
+    float layer = floor(clamp(encodedLayer, 0.0, 0.9999) * 10.0);
+    float v;
+    vec4 paletteColor = ResolveTintColor(g, layer, v);
+    if (smoothTintEdges > 0.5)
+    {
+        // Native PLTs filter the resolved colors, not their categorical layer IDs.
+        // Resolve each neighboring texel first so black dye edges blend with the
+        // correct material without inventing a third dye or losing metal coverage.
+        vec2 texelPosition = wrappedUV * tintMapSize - vec2(0.5);
+        vec2 baseUV = (floor(texelPosition) + vec2(0.5)) / tintMapSize;
+        vec2 stepUV = vec2(1.0) / tintMapSize;
+        vec2 blend = fract(texelPosition);
+        vec4 lower = mix(ResolveTintTexel(baseUV),
+            ResolveTintTexel(baseUV + vec2(stepUV.x, 0.0)), blend.x);
+        vec4 upper = mix(ResolveTintTexel(baseUV + vec2(0.0, stepUV.y)),
+            ResolveTintTexel(baseUV + stepUV), blend.x);
+        paletteColor = mix(lower, upper, blend.y);
+    }
     vec3 vTint = paletteColor.rgb;
 
     // Standard setup initializes the engine's texture coordinates and normals.
@@ -156,7 +188,7 @@ void main ()
     // setup cannot discover the PLT palette's environment-map coverage itself.
     // Reapply the same inc_standard path with the atlas alpha after normal-map setup.
     fEnvMapLevel = 1.0 - paletteColor.a;
-    vec3 surfaceColor = ApplyColorSpace(vTint);
+    vec3 surfaceColor = vTint;
 
     #if FRAGMENT_LIGHTING == 1 && LIGHTING == 1
         surfaceColor = mix(
@@ -164,6 +196,10 @@ void main ()
             vec3(0.666667, 0.666667, 0.666667),
             fEnvMapLevel);
     #endif
+
+    // NWN blends legacy reflection in texture space, then linearizes.
+    // Blending into linear RGB brightens dark hair and metal palette colors.
+    surfaceColor = ApplyColorSpace(surfaceColor);
 
     #if ENVIRONMENT_MAP == 1 && SPECULAR_LIGHT != 1
         vec3 environmentColor;
