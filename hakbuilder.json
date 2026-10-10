@@ -1,6 +1,13 @@
 {
   "TlkPath": "./sw_tlk/sw_tlk.tlk",
   "OutputPath": "./output/",
+  "BeforeBuild": [
+    {
+      "Command": "python",
+      "Arguments": ["-B", "./tools/GenerateNeckBindings.py", "--ensure"],
+      "OutputDirectories": ["./sw_neck_f0", "./sw_neck_f1"]
+    }
+  ],
   "HakList": [
     {
       "Name": "sw_2da",

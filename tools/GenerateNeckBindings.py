@@ -15,7 +15,9 @@ import json
 import math
 from pathlib import Path
 import re
+import shutil
 import struct
+import tempfile
 
 import CompileModels as mdl
 from RobePoseAudit import Model
@@ -192,6 +194,8 @@ def generate(source_root, output_root, neck_ids=None, phenotypes=None):
     original_data = (source_root / "sw_pt_root/pfh0.mdl").read_bytes()
     original = Model(original_data, False)
     sources, roots = inventory(source_root, neck_ids, phenotypes)
+    for bank in BANKS:
+        (output_root / bank).mkdir(parents=True, exist_ok=True)
     manifest = {"version": 1, "native_root_sha256": digest(original_data), "sources": {},
                 "selection": {"necks": sorted(neck_ids) if neck_ids is not None else None,
                               "phenotypes": sorted(phenotypes) if phenotypes is not None else None},
@@ -276,18 +280,54 @@ def check(source_root, output_root):
     return report
 
 
+def ensure(source_root, output_root):
+    """Reuse verified generated assets, or replace them after a staged audit."""
+    try:
+        report = check(source_root, output_root)
+        if report["selection"] == {"necks": None, "phenotypes": None}:
+            return report
+    except (OSError, ValueError, KeyError):
+        pass
+    output_root = output_root.resolve()
+    output_root.mkdir(parents=True, exist_ok=True)
+    targets = [output_root / bank for bank in BANKS]
+    manifest_path = output_root / MANIFEST
+    # These directories contain generated models only. Reject redirected paths
+    # before replacing either bank, even if a failed check found a symlink.
+    for target in [*targets, manifest_path]:
+        if target.resolve() != target or not target.is_relative_to(output_root):
+            raise ValueError(f"Redirected generated neck path: {target}")
+    with tempfile.TemporaryDirectory(prefix="neck-bindings-", dir=output_root.parent) as folder:
+        staging = Path(folder)
+        generate(source_root, staging)
+        report = check(source_root, staging)
+        for bank, target in zip(BANKS, targets):
+            if target.exists():
+                shutil.rmtree(target)
+            shutil.move(staging / bank, target)
+        manifest_path.parent.mkdir(parents=True, exist_ok=True)
+        (staging / MANIFEST).replace(manifest_path)
+    return report
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--source-root", type=Path, default=ROOT)
-    parser.add_argument("--output-root", type=Path, required=True)
+    parser.add_argument("--output-root", type=Path, default=ROOT)
     parser.add_argument("--necks", type=int, nargs="+")
     parser.add_argument("--phenotypes", type=int, nargs="+")
-    parser.add_argument("--check", action="store_true")
+    mode = parser.add_mutually_exclusive_group()
+    mode.add_argument("--check", action="store_true")
+    mode.add_argument("--ensure", action="store_true", help="Build missing or stale generated banks; reuse verified outputs")
     args = parser.parse_args()
-    if args.check and (args.necks is not None or args.phenotypes is not None):
-        parser.error("--check uses the selection recorded in the manifest")
-    report = (check(args.source_root, args.output_root) if args.check else
-              generate(args.source_root, args.output_root, args.necks, args.phenotypes))
+    if (args.check or args.ensure) and (args.necks is not None or args.phenotypes is not None):
+        parser.error("--check and --ensure do not accept a neck/phenotype selection")
+    if args.ensure:
+        report = ensure(args.source_root, args.output_root)
+    elif args.check:
+        report = check(args.source_root, args.output_root)
+    else:
+        report = generate(args.source_root, args.output_root, args.necks, args.phenotypes)
     print(json.dumps({"models": len(report["files"]), "neck_models": len(report["sources"]),
                       "archive_bytes": report["archive_bytes"]}))
 
