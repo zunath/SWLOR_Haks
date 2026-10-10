@@ -188,7 +188,7 @@ void main ()
     // setup cannot discover the PLT palette's environment-map coverage itself.
     // Reapply the same inc_standard path with the atlas alpha after normal-map setup.
     fEnvMapLevel = 1.0 - paletteColor.a;
-    vec3 surfaceColor = ApplyColorSpace(vTint);
+    vec3 surfaceColor = vTint;
 
     #if FRAGMENT_LIGHTING == 1 && LIGHTING == 1
         surfaceColor = mix(
@@ -196,6 +196,10 @@ void main ()
             vec3(0.666667, 0.666667, 0.666667),
             fEnvMapLevel);
     #endif
+
+    // NWN blends legacy reflection in texture space, then linearizes.
+    // Blending into linear RGB brightens dark hair and metal palette colors.
+    surfaceColor = ApplyColorSpace(surfaceColor);
 
     #if ENVIRONMENT_MAP == 1 && SPECULAR_LIGHT != 1
         vec3 environmentColor;
