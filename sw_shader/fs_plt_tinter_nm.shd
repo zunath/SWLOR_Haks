@@ -32,6 +32,7 @@ uniform float tintMapWidth;
 uniform float tintMapHeight;
 uniform float useTexture1Alpha;
 uniform float useTexture9Alpha;
+uniform float useAuthoredDiffuse = 0.0;
 
 // Per-layer scalar color: a palette V coordinate below one, or exact RGB in [1, 4).
 uniform float rowSkin   = 0.000244;
@@ -107,12 +108,21 @@ void main ()
         vec3 luminance = vec3(0.2126, 0.7152, 0.0722);
         float shadeScale = max(dot(referenceShade.rgb, luminance) /
             max(dot(referenceMidpoint, luminance), 1.0 / 255.0), 0.0);
+        // Authored raster materials retain their original atlas at full resolution.
+        // Only explicit RGB replaces the hue; the diffuse still supplies all detail.
+        // Let the sampler repeat so UV derivatives stay continuous for mip selection.
+        if (useAuthoredDiffuse > 0.5)
+            shadeScale = dot(texture2D(texUnit0, vVertexTexCoords).rgb, luminance) / 0.5;
         // Metal layers rely on palette alpha for legacy reflection/specularity,
         // even without authored maps. Keep the neutral metal coverage curve;
         // other RGB layers stay opaque and never import a reference row's hue.
         float environmentAlpha = layer > 1.5 && layer < 3.5 ? referenceShade.a : 1.0;
         paletteColor = vec4(clamp(decodedRgb * shadeScale, 0.0, 1.0), environmentAlpha);
     }
+    // These surfaces originally ignored native palette dyes. Preserve that
+    // appearance until an exact RGB override is supplied, including after reset.
+    if (useAuthoredDiffuse > 0.5 && v < 1.0)
+        paletteColor = vec4(texture2D(texUnit0, vVertexTexCoords).rgb, 1.0);
     vec3 vTint = paletteColor.rgb;
 
     FragmentColor = vec4(1.0);
