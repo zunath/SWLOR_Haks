@@ -1,7 +1,7 @@
 {
   "generator": "ChatGPT image generation (GPT Image 2)",
   "basePrompt": "Redraw the attached reference as a single 2D hand-painted inventory icon for a Star Wars RPG. Subject: <SUBJECT>.\n\nMatch the reference's silhouette, proportions, viewing angle and parts exactly; only change the rendering style. Style: clean 2D digital painting like a classic RPG item icon, bold readable silhouette, crisp edges, simple cel-style shading with 3 to 4 tones per region, a soft highlight on the upper left. It must read clearly when shrunk to 64x64 pixels.\n\nColor rule (strict): every region in the reference is a flat key color. Paint each region using only lighter and darker shades of its own key color: red, orange, yellow, green, cyan, blue, violet or magenta. Keep each region's boundaries where they are in the reference. Do not add any other colors. Do not use white, gray, black, metallic sheen, rim lights or glows. Outlines and deepest shadows are the darkest shade of that region's own color, not black.\n\nComposition: one helmet only, centered, filling about 90% of a square canvas, nothing cropped. Plain flat #808080 gray background (or transparent). No frame, border, text, logo, shadow on the ground or watermark. Square 1024x1024 output.",
-  "reference": "Each request attached a render of helm_<ID>.mdl recolored by tint-map layer into the key colors below.",
+  "reference": "Each request attached a render of helm_<ID>.mdl recolored by tint-map layer into the key colors below. The generated source images are not kept in the repository.",
   "keyColors": {
     "red": "Metal 1",
     "orange": "Skin",
@@ -12,247 +12,207 @@
     "violet": "Hair",
     "magenta": "Leather 2"
   },
-  "postprocess": "python tools/ConvertKeyedHelmetIcons.py (run from the SWLOR_NWN root) writes SWLOR_Haks/sw_pt_helm/ihelm_<ID>.plt",
+  "postprocess": "python tools/ConvertKeyedHelmetIcons.py --source <folder of ihelm_<ID>.png images> (run from the SWLOR_NWN root) writes SWLOR_Haks/sw_pt_helm/ihelm_<ID>.plt",
   "assets": [
     {
       "icon": "ihelm_025",
       "model": "helm_025",
-      "subject": "alien skull mask with pointed ears, a horned brow, hollow eye sockets, and long curved tusk tendrils hanging from the jaw",
-      "source": "ihelm_025.png"
+      "subject": "alien skull mask with pointed ears, a horned brow, hollow eye sockets, and long curved tusk tendrils hanging from the jaw"
     },
     {
       "icon": "ihelm_026",
       "model": "helm_026",
-      "subject": "deep cowled hood around a tusked alien face with hanging tendril mandibles",
-      "source": "ihelm_026.png"
+      "subject": "deep cowled hood around a tusked alien face with hanging tendril mandibles"
     },
     {
       "icon": "ihelm_083",
       "model": "helm_083",
-      "subject": "close-fitting full-head cloth hood with one narrow horizontal eye slit showing the eyes",
-      "source": "ihelm_083.png"
+      "subject": "close-fitting full-head cloth hood with one narrow horizontal eye slit showing the eyes"
     },
     {
       "icon": "ihelm_153",
       "model": "helm_153",
-      "subject": "fabric hood with a center seam, the face left open",
-      "source": "ihelm_153.png"
+      "subject": "fabric hood with a center seam, the face left open"
     },
     {
       "icon": "ihelm_154",
       "model": "helm_154",
-      "subject": "smooth rounded full-face helmet with a raised center ridge and a dark face visor",
-      "source": "ihelm_154.png"
+      "subject": "smooth rounded full-face helmet with a raised center ridge and a dark face visor"
     },
     {
       "icon": "ihelm_251",
       "model": "helm_251",
-      "subject": "Weequay head with leathery wrinkled skin and long braided locks hanging down the back",
-      "source": "ihelm_251.png"
+      "subject": "Weequay head with leathery wrinkled skin and long braided locks hanging down the back"
     },
     {
       "icon": "ihelm_252",
       "model": "helm_252",
-      "subject": "Nikto head with small horns and spikes across the scalp and cheeks",
-      "source": "ihelm_252.png"
+      "subject": "Nikto head with small horns and spikes across the scalp and cheeks"
     },
     {
       "icon": "ihelm_253",
       "model": "helm_253",
-      "subject": "Kubaz head with a long trunk-like snout, round goggles and a short spiky crest",
-      "source": "ihelm_253.png"
+      "subject": "Kubaz head with a long trunk-like snout, round goggles and a short spiky crest"
     },
     {
       "icon": "ihelm_254",
       "model": "helm_254",
-      "subject": "Neimoidian head, smooth domed skull, flat nose, down-turned mouth",
-      "source": "ihelm_254.png"
+      "subject": "Neimoidian head, smooth domed skull, flat nose, down-turned mouth"
     },
     {
       "icon": "ihelm_255",
       "model": "helm_255",
-      "subject": "Sullustan head with large round eyes, heavy jowls and rounded ears",
-      "source": "ihelm_255.png"
+      "subject": "Sullustan head with large round eyes, heavy jowls and rounded ears"
     },
     {
       "icon": "ihelm_256",
       "model": "helm_256",
-      "subject": "Advozse head with a single horn on the forehead and a heavy brow",
-      "source": "ihelm_256.png"
+      "subject": "Advozse head with a single horn on the forehead and a heavy brow"
     },
     {
       "icon": "ihelm_257",
       "model": "helm_257",
-      "subject": "Ishi Tib head, wide flat skull with eyes on short stalks and a beak-like mouth",
-      "source": "ihelm_257.png"
+      "subject": "Ishi Tib head, wide flat skull with eyes on short stalks and a beak-like mouth"
     },
     {
       "icon": "ihelm_258",
       "model": "helm_258",
-      "subject": "Aqualish head with a domed skull, small eyes and a heavy tusked lower jaw",
-      "source": "ihelm_258.png"
+      "subject": "Aqualish head with a domed skull, small eyes and a heavy tusked lower jaw"
     },
     {
       "icon": "ihelm_259",
       "model": "helm_259",
-      "subject": "Klatooinian head with a heavy brow, wrinkled muzzle and small tusks",
-      "source": "ihelm_259.png"
+      "subject": "Klatooinian head with a heavy brow, wrinkled muzzle and small tusks"
     },
     {
       "icon": "ihelm_260",
       "model": "helm_260",
-      "subject": "Selonian head with a furry, otter-like face and a thick fur mane",
-      "source": "ihelm_260.png"
+      "subject": "Selonian head with a furry, otter-like face and a thick fur mane"
     },
     {
       "icon": "ihelm_261",
       "model": "helm_261",
-      "subject": "Ortolan head with a long trunk and large floppy ears",
-      "source": "ihelm_261.png"
+      "subject": "Ortolan head with a long trunk and large floppy ears"
     },
     {
       "icon": "ihelm_262",
       "model": "helm_262",
-      "subject": "round space helmet with a large bubble visor and a thick padded rim",
-      "source": "ihelm_262.png"
+      "subject": "round space helmet with a large bubble visor and a thick padded rim"
     },
     {
       "icon": "ihelm_263",
       "model": "helm_263",
-      "subject": "pilot helmet with a padded cap, goggles and a breathing mask",
-      "source": "ihelm_263.png"
+      "subject": "pilot helmet with a padded cap, goggles and a breathing mask"
     },
     {
       "icon": "ihelm_264",
       "model": "helm_264",
-      "subject": "scout cap with goggles on the brow, a side antenna and a cloth scarf over the lower face",
-      "source": "ihelm_264.png"
+      "subject": "scout cap with goggles on the brow, a side antenna and a cloth scarf over the lower face"
     },
     {
       "icon": "ihelm_265",
       "model": "helm_265",
-      "subject": "cylindrical bucket helmet with a flat top, a riveted band, a face slit and side bolts",
-      "source": "ihelm_265.png"
+      "subject": "cylindrical bucket helmet with a flat top, a riveted band, a face slit and side bolts"
     },
     {
       "icon": "ihelm_266",
       "model": "helm_266",
-      "subject": "low armored cap with studded plates and a jagged ring of bone spikes around the lower edge",
-      "source": "ihelm_266.png"
+      "subject": "low armored cap with studded plates and a jagged ring of bone spikes around the lower edge"
     },
     {
       "icon": "ihelm_267",
       "model": "helm_267",
-      "subject": "domed flight helmet with center stripes, a wide visor opening and a chin guard",
-      "source": "ihelm_267.png"
+      "subject": "domed flight helmet with center stripes, a wide visor opening and a chin guard"
     },
     {
       "icon": "ihelm_268",
       "model": "helm_268",
-      "subject": "domed flight helmet with center stripes and a faceplate with a vertical breathing grille",
-      "source": "ihelm_268.png"
+      "subject": "domed flight helmet with center stripes and a faceplate with a vertical breathing grille"
     },
     {
       "icon": "ihelm_269",
       "model": "helm_269",
-      "subject": "bulky droid-like helmet with twin round speaker lenses on the face and tubes and fins on the sides",
-      "source": "ihelm_269.png"
+      "subject": "bulky droid-like helmet with twin round speaker lenses on the face and tubes and fins on the sides"
     },
     {
       "icon": "ihelm_270",
       "model": "helm_270",
-      "subject": "angular armored helmet with goggles mounted on the brow and a rebreather snout",
-      "source": "ihelm_270.png"
+      "subject": "angular armored helmet with goggles mounted on the brow and a rebreather snout"
     },
     {
       "icon": "ihelm_271",
       "model": "helm_271",
-      "subject": "angular full helmet with brow-mounted lenses and a tapered breathing mask",
-      "source": "ihelm_271.png"
+      "subject": "angular full helmet with brow-mounted lenses and a tapered breathing mask"
     },
     {
       "icon": "ihelm_272",
       "model": "helm_272",
-      "subject": "faceted knightly helmet with a swept-back crest fin and a narrow vertical visor slit",
-      "source": "ihelm_272.png"
+      "subject": "faceted knightly helmet with a swept-back crest fin and a narrow vertical visor slit"
     },
     {
       "icon": "ihelm_273",
       "model": "helm_273",
-      "subject": "trooper helmet with a domed crown, center stripe, T-shaped visor, side antenna and cheek plates",
-      "source": "ihelm_273.png"
+      "subject": "trooper helmet with a domed crown, center stripe, T-shaped visor, side antenna and cheek plates"
     },
     {
       "icon": "ihelm_274",
       "model": "helm_274",
-      "subject": "hooded armored mask with round goggle eyes, a breathing mask and a side cable",
-      "source": "ihelm_274.png"
+      "subject": "hooded armored mask with round goggle eyes, a breathing mask and a side cable"
     },
     {
       "icon": "ihelm_275",
       "model": "helm_275",
-      "subject": "cloth cap with round goggles and a bandana covering the lower face",
-      "source": "ihelm_275.png"
+      "subject": "cloth cap with round goggles and a bandana covering the lower face"
     },
     {
       "icon": "ihelm_276",
       "model": "helm_276",
-      "subject": "cloth cap with round goggles, side headphones and a bandana covering the lower face",
-      "source": "ihelm_276.png"
+      "subject": "cloth cap with round goggles, side headphones and a bandana covering the lower face"
     },
     {
       "icon": "ihelm_277",
       "model": "helm_277",
-      "subject": "aviator cap with a brim, goggles, a headset and a bandana covering the lower face",
-      "source": "ihelm_277.png"
+      "subject": "aviator cap with a brim, goggles, a headset and a bandana covering the lower face"
     },
     {
       "icon": "ihelm_278",
       "model": "helm_278",
-      "subject": "wide flat-brimmed tech cap with small antennas, goggles and a breathing mask",
-      "source": "ihelm_278.png"
+      "subject": "wide flat-brimmed tech cap with small antennas, goggles and a breathing mask"
     },
     {
       "icon": "ihelm_279",
       "model": "helm_279",
-      "subject": "insect-like skull mask with a domed head, hollow eye sockets and fanged mandibles",
-      "source": "ihelm_279.png"
+      "subject": "insect-like skull mask with a domed head, hollow eye sockets and fanged mandibles"
     },
     {
       "icon": "ihelm_298",
       "model": "helm_298",
-      "subject": "shaggy fur-covered head with four small eyes and a short snout",
-      "source": "ihelm_298.png"
+      "subject": "shaggy fur-covered head with four small eyes and a short snout"
     },
     {
       "icon": "ihelm_299",
       "model": "helm_299",
-      "subject": "round plated sphere helmet with a single round lens and small side vents",
-      "source": "ihelm_299.png"
+      "subject": "round plated sphere helmet with a single round lens and small side vents"
     },
     {
       "icon": "ihelm_301",
       "model": "helm_301",
-      "subject": "insect-like skull mask with a domed head, hollow eye sockets and fanged mandibles",
-      "source": "ihelm_301.png"
+      "subject": "insect-like skull mask with a domed head, hollow eye sockets and fanged mandibles"
     },
     {
       "icon": "ihelm_302",
       "model": "helm_302",
-      "subject": "domed trooper helmet with a ribbed crown, a visor band with a horizontal slit, an angular faceplate and chin vents",
-      "source": "ihelm_302.png"
+      "subject": "domed trooper helmet with a ribbed crown, a visor band with a horizontal slit, an angular faceplate and chin vents"
     },
     {
       "icon": "ihelm_303",
       "model": "helm_303",
-      "subject": "smooth alien face mask with large oval eye holes and a small mouth",
-      "source": "ihelm_303.png"
+      "subject": "smooth alien face mask with large oval eye holes and a small mouth"
     },
     {
       "icon": "ihelm_309",
       "model": "helm_309",
-      "subject": "domed gas-mask helmet with round eye lenses and a ribbed respirator snout with two breathing hoses",
-      "source": "ihelm_309.png"
+      "subject": "domed gas-mask helmet with round eye lenses and a ribbed respirator snout with two breathing hoses"
     }
   ]
 }
