@@ -1,4 +1,6 @@
-"""Compare helm 53 dye edges with bilinear filtering of resolved PLT colors.
+"""Compare dye edges with bilinear filtering of resolved PLT colors.
+
+Covers helm 53 on fs_plt_tinter and neck 267 on fs_plt_tinter_nm.
 
 Run with --game-data pointing to the installed NWN data directory. Uses the
 shipped BC5 mask and palette on a hidden OpenGL framebuffer. No game is started.
@@ -24,13 +26,15 @@ BASES = (0, 176, 352, 528, 704, 704, 880, 880, 1056, 1056)
 GAME_DATA = None
 
 
-class HelmetTintFilteringTests(unittest.TestCase):
+class TintEdgeFilteringCases:
+    SHADER = MODEL = None
+
     @classmethod
     def setUpClass(cls):
         cls.gl = OpenGL()
         cls.addClassCleanup(cls.gl.close)
         cls.test = MaterialTest(cls.gl)
-        shader = (ROOT / "sw_shader/fs_plt_tinter.shd").read_text()
+        shader = (ROOT / f"sw_shader/{cls.SHADER}.shd").read_text()
         shader, count = re.subn(r"gl_FragColor\s*=\s*vec4\(FragmentColor.rgb, outputAlpha\);",
                                 "gl_FragColor = paletteColor;", shader)
         assert count == 1
@@ -47,7 +51,7 @@ void main() { gl_Position = gl_Vertex; vVertexTexCoords = testUV; }
         cls.test.sample(cls.program, 1, 1)
         cls.test.use(cls.program)
         cls.entry = next(entry for entry in json.loads((ROOT / "tools/TintMapSources.json").read_text())
-                         if entry["model"] == "helm_053")
+                         if entry["model"] == cls.MODEL)
         cls.width, cls.height = cls.entry["width"], cls.entry["height"]
         cls.mask = ROOT / cls.entry["output"]
         cls.layers = g.decode_dds_layers(cls.mask, cls.width, cls.height)
@@ -152,10 +156,16 @@ void main() { gl_Position = gl_Vertex; vVertexTexCoords = testUV; }
         for uv in ((.3, .4), (.6, .7), (0, 0), (-.1, 1.1)):
             self.compare(*uv, 2, 2)
 
-    def test_generation_and_activation_are_limited_to_helm_053(self):
+
+class HelmetTintFilteringTests(TintEdgeFilteringCases, unittest.TestCase):
+    SHADER, MODEL = "fs_plt_tinter", "helm_053"
+
+    def test_generation_and_activation_are_limited_to_reported_materials(self):
         enabled = [path.stem for path in (ROOT / "sw_tint_mtr").glob("*.mtr")
                    if re.search(r"parameter\s+float\s+smoothTintEdges\s+1", path.read_text())]
-        self.assertEqual(enabled, ["helm_053"])
+        # Neck 267 scoped aliases render the same mask on other racial body models.
+        self.assertEqual(sorted(enabled), ["helm_053", "pfh0_n_ne_7905de", "pfh0_neck267",
+                                           "pmh0_n_ne_0b3c67", "pmh0_neck267"])
         for material in ("helm_053", "helm_054"):
             with tempfile.TemporaryDirectory() as scratch:
                 path = Path(scratch) / f"{material}.mtr"
@@ -173,6 +183,22 @@ void main() { gl_Position = gl_Vertex; vVertexTexCoords = testUV; }
                     profile=("legacy_mask", path.read_text().splitlines()), native_palette=True)
                 self.assertEqual(text.count("parameter float smoothTintEdges 1.0"),
                                  int(material == "helm_053"))
+        for source in ("pfh0_neck267", "pmh0_neck267"):
+            with tempfile.TemporaryDirectory() as scratch:
+                path = Path(scratch) / f"{source}.mtr"
+                path.write_text((ROOT / f"sw_tint_mtr/{source}.mtr").read_text())
+                for _ in range(2):
+                    text = g.tint_material_text(path, source, "tm_07111bb2418e7", 512, 512)
+                    self.assertEqual(text.count("parameter float smoothTintEdges 1.0"), 1)
+                    self.assertIn("customshaderFS fs_plt_tinter_nm", text)
+                    path.write_text(text)
+            # Scoped alias resrefs hash this signature; the opt-in must not rename them.
+            self.assertNotIn(("parameter", "float", "smoothtintedges"),
+                             [directive for directive, _ in g.material_profile_signature(source)])
+
+
+class NeckTintFilteringTests(TintEdgeFilteringCases, unittest.TestCase):
+    SHADER, MODEL = "fs_plt_tinter_nm", "pfh0_neck267"
 
 
 if __name__ == "__main__":
