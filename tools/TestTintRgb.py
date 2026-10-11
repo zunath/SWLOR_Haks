@@ -89,7 +89,7 @@ void main() {
     rgb = (70, 105, 220)
     checks = 0
     legacy = fragment.replace("texture2D(texUnit0, vVertexTexCoords)", "texture2D(texUnit0, wrappedUV)")
-    assert legacy.count("texture2D(texUnit0, wrappedUV)") == 2
+    assert legacy.count("texture2D(texUnit0, wrappedUV)") == 1
     for source, expected_diffuse, label in ((fragment, fine, "continuous"), (legacy, coarse, "legacy wrapped")):
         program = test.program(source, vertex)
         try:
