@@ -28,6 +28,21 @@ ATLAS_COUNT = 4
 MATERIAL = "cloaktint"
 
 
+def file_digest(path):
+    """Git may check out TXI and ASCII MDL text with CRLF; other resources stay byte-exact."""
+    data = path.read_bytes()
+    if path.suffix.lower() == ".txi" or (path.suffix.lower() == ".mdl" and data[:4] != bytes(4)):
+        data = data.replace(b"\r\n", b"\n")
+    return hashlib.sha256(data).hexdigest()
+
+
+def replace_once(source, old, new):
+    """A reworded base shader must fail authoring instead of keeping a whole-atlas sample."""
+    if source.count(old) != 1:
+        raise ValueError(f"fs_plt_tinter.shd no longer matches the cloak tint rewrite: {old}")
+    return source.replace(old, new)
+
+
 def geometry_content(path, data):
     """Exclude only mesh material references from the geometry preservation check."""
     if data[:4] == bytes(4):
@@ -47,7 +62,7 @@ def texture_ids():
 
 def shader_text():
     source = (ROOT / "sw_shader/fs_plt_tinter.shd").read_text()
-    source = source.replace("uniform sampler2D texUnit9;", "")
+    source = replace_once(source, "uniform sampler2D texUnit9;", "")
     declarations = """uniform sampler2D texUnit6;
 uniform sampler2D texUnit7;
 uniform sampler2D texUnit8;
@@ -67,9 +82,11 @@ vec4 SampleCloakTint(vec2 uv)
     return texture2D(texUnit9, atlasUV, -10.0);
 }
 """
-    source = source.replace("uniform sampler2D texUnit7;", declarations)
+    source = replace_once(source, "uniform sampler2D texUnit7;", declarations)
     for uv in ("uv", "wrappedUV", "nearestUV"):
-        source = source.replace(f"texture2D(texUnit7, {uv}, -10.0)", f"SampleCloakTint({uv})")
+        source = replace_once(source, f"texture2D(texUnit7, {uv}, -10.0)", f"SampleCloakTint({uv})")
+    if re.search(r"texture2D\s*\(\s*texUnit7\s*,", source.split("vec4 SampleCloakTint", 1)[1].split("}", 1)[1]):
+        raise ValueError("fs_cloaktint.shd would still sample a whole cloak atlas")
     return "// Authored by CloakTintAssets.py from fs_plt_tinter.shd.\n" + source
 
 
@@ -176,12 +193,12 @@ def generate(game_data):
         path.write_bytes(tint.dds_header(COLUMNS * TILE, ROWS * TILE, len(payload)) + payload)
         tint.write_packed_texture_settings(path)
         for output in (path, path.with_suffix(".txi")):
-            files[output.relative_to(ROOT).as_posix()] = hashlib.sha256(output.read_bytes()).hexdigest()
+            files[output.relative_to(ROOT).as_posix()] = file_digest(output)
     (ROOT / "sw_pt_cloak/cloaktint.mtr").write_text(material_text())
     (ROOT / "sw_shader/fs_cloaktint.shd").write_text(shader_text())
     (ROOT / "sw_2da/cloaktint.2da").write_text(table_text(textures))
     changed = bind_models()
-    models = {path.relative_to(ROOT).as_posix(): hashlib.sha256(path.read_bytes()).hexdigest()
+    models = {path.relative_to(ROOT).as_posix(): file_digest(path)
               for path in sorted((ROOT / "sw_pt_cloak").glob("*.mdl"))}
     MANIFEST.write_text(json.dumps({"textures": textures, "files": files, "models": models}, indent=2) + "\n")
     print(f"Authored {len(numbers)} cloak tint tiles; bound {changed} shared models; added no MDLs.")
@@ -196,11 +213,11 @@ def check():
         errors.append("Cloak tint coverage disagrees with cloakmodel.2da")
     for relative, sha in manifest["files"].items():
         path = ROOT / relative
-        if not path.is_file() or hashlib.sha256(path.read_bytes()).hexdigest() != sha:
+        if not path.is_file() or file_digest(path) != sha:
             errors.append(f"Missing or changed cloak atlas: {relative}")
     for relative, sha in manifest["models"].items():
         path = ROOT / relative
-        if not path.is_file() or hashlib.sha256(path.read_bytes()).hexdigest() != sha:
+        if not path.is_file() or file_digest(path) != sha:
             errors.append(f"Missing or changed cloak material binding: {relative}")
     for entry in manifest["textures"].values():
         if not entry["source"].startswith("stock:"):

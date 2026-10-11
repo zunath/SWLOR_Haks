@@ -171,6 +171,26 @@ class ModelLodTests(unittest.TestCase):
             self.assertFalse((root / "parts/pmh212_robe003.lod").exists())
             self.assertEqual([], models.check(root))
 
+    def test_base_game_model_overrides_stay_native_and_existing_redirects_are_restored(self):
+        with tempfile.TemporaryDirectory() as directory, patch.object(models, "ROOT", Path(directory)):
+            root = Path(directory)
+            first, second = self.fixture(root)
+            models.apply(root)
+            self.assertEqual({"parts/second.mdl"}, set(models.catalog(root)))
+            models.apply(root, stock_models={"SECOND"})
+            self.assertEqual({}, models.catalog(root))
+            self.assertEqual(second, (root / "parts/second.mdl").read_bytes())
+            self.assertFalse((root / "parts/second.lod").exists())
+            self.assertEqual([], models.check(root))
+            manifest = json.loads((root / models.MANIFEST).read_text())
+            self.assertEqual(["second"], manifest["native_overrides"])
+            # A redirect reintroduced for a recorded base-game name fails the build check.
+            models.apply(root)
+            manifest = json.loads((root / models.MANIFEST).read_text())
+            manifest["native_overrides"] = ["second"]
+            (root / models.MANIFEST).write_text(json.dumps(manifest))
+            self.assertTrue(any("base-game model" in error for error in models.check(root)))
+
     def test_visible_or_animated_robe_geometry_can_still_be_shared(self):
         for flags, children, animations in ((0x21, 0, 0), (1, 1, 0), (1, 0, 1)):
             data = bytearray(binary("pmh0_robe003"))

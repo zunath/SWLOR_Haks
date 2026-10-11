@@ -14,6 +14,7 @@ from pathlib import Path
 import re
 
 import GenerateTintMapAssets as tint
+from ModelLodAssets import content
 from NeckSkinBindings import body_model, mapping_for, needs_remap, remap, skins
 from RobePoseAudit import Model
 
@@ -31,9 +32,10 @@ def plan(game_data):
     active = tint.find_active_models()
     stock = tint.read_stock_key_models(game_data)
     def load(name):
+        # ASCII sources hash and parse identically under any Git line-ending setting.
         if name in active:
-            return active[name].read_bytes()
-        return tint.extract_stock_bif_resource(*stock[name])
+            return content(active[name].read_bytes())
+        return content(tint.extract_stock_bif_resource(*stock[name]))
     # Include every authored neck, not merely the current editor's choices.
     parts = {}
     inputs = {}
@@ -41,7 +43,7 @@ def plan(game_data):
         match = PART.fullmatch(name)
         if not match:
             continue
-        data = path.read_bytes()
+        data = content(path.read_bytes())
         external = skins(data)
         inputs[name] = digest(data)
         if external:

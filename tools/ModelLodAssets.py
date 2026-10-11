@@ -237,11 +237,14 @@ def check(root=ROOT):
     errors = []
     if actual != aliases.keys():
         errors.append("Model LOD manifest does not cover exactly the checked-in redirects")
+    stock_names = set(json.loads((root / MANIFEST).read_text()).get("native_overrides", []))
     for relative in sorted(aliases):
         try:
             path = safe_path(root, relative)
             if path.is_file():
                 raise ValueError(f"LOD shadows its old MDL: {relative}")
+            if path.stem.lower() in stock_names:
+                raise ValueError(f"Override of a base-game model requires a native MDL: {relative}")
             data = read_alias(path, root)
             if requires_native_attachment(path, data):
                 raise ValueError(f"Empty robe attachment requires a native MDL: {relative}")
@@ -250,8 +253,9 @@ def check(root=ROOT):
     return errors
 
 
-def apply(root=ROOT):
+def apply(root=ROOT, stock_models=frozenset()):
     root = Path(root)
+    stock_models = {name.lower() for name in stock_models}
     all_paths = []
     for directory in directories(root):
         for path in model_paths(directory):
@@ -260,9 +264,13 @@ def apply(root=ROOT):
             all_paths.append(Path(path))
     aliases = {}
     dependents = collections.defaultdict(list)
+    # Some client lookups test for an MDL before resolving a LOD. An override that only
+    # exists as a LOD would then load the base-game MDL of the same name instead.
     native_attachments = {path.relative_to(root).as_posix(): content(ModelPath(path).read_bytes())
                           for path in all_paths
-                          if requires_native_attachment(path, ModelPath(path).read_bytes())}
+                          if path.stem.lower() in stock_models or
+                          requires_native_attachment(path, ModelPath(path).read_bytes())}
+    overrides = sorted({Path(relative).stem.lower() for relative in native_attachments} & stock_models)
     # Validate all comparisons and reconstruction before deleting any source file.
     for mode in ("root", "full"):
         groups = collections.defaultdict(list)
@@ -324,7 +332,7 @@ def apply(root=ROOT):
     for relative, record in aliases.items():
         path = safe_path(root, relative)
         path.with_suffix(".lod").write_bytes((Path(record["canonical"]).stem.lower() + "\n").encode("ascii"))
-    manifest = {"version": 1, "aliases": dict(sorted(aliases.items()))}
+    manifest = {"version": 1, "aliases": dict(sorted(aliases.items())), "native_overrides": overrides}
     (root / MANIFEST).write_text(json.dumps(manifest, indent=2) + "\n")
     for relative in aliases:
         safe_path(root, relative).unlink(missing_ok=True)
@@ -351,9 +359,13 @@ if __name__ == "__main__":
     mode.add_argument("--apply", action="store_true")
     mode.add_argument("--check", action="store_true")
     mode.add_argument("--expand", action="store_true")
+    parser.add_argument("--game-data", type=Path, help="NWN data directory; --apply keeps base-game overrides as MDLs")
     args = parser.parse_args()
     if args.apply:
-        apply()
+        if args.game_data is None:
+            parser.error("--apply requires --game-data")
+        from GenerateTintMapAssets import read_stock_key_models
+        apply(stock_models=read_stock_key_models(args.game_data).keys())
     elif args.expand:
         expand()
     else:

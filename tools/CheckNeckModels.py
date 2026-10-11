@@ -2,7 +2,7 @@
 import hashlib
 import json
 from pathlib import Path
-from ModelLodAssets import model_paths
+from ModelLodAssets import content, model_paths
 
 
 def check(root):
@@ -11,11 +11,11 @@ def check(root):
              for p in model_paths(root / directory)}
     failures = []
     for name, expected in manifest['inputs'].items():
-        if name in paths and hashlib.sha256(paths[name].read_bytes()).hexdigest() != expected:
+        if name in paths and hashlib.sha256(content(paths[name].read_bytes())).hexdigest() != expected:
             failures.append(name)
     for name, entry in manifest['aliases'].items():
         path = paths.get(name)
-        if path is None or hashlib.sha256(path.read_bytes()).hexdigest() != entry['sha256']:
+        if path is None or hashlib.sha256(content(path.read_bytes())).hexdigest() != entry['sha256']:
             failures.append(name)
     for name, expected in manifest['tables'].items():
         if hashlib.sha256((root / 'sw_2da' / name).read_text().encode()).hexdigest() != expected:
