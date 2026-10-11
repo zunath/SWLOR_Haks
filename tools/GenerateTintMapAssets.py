@@ -1604,7 +1604,14 @@ def native_modular_material_choices(
         profile = original_materials.get(bitmap, {})
         lines = list(profile.get("lines", []))
         texture0 = next((line.split()[1].lower() for line in lines if re.match(r"^\s*texture0\s+\S+", line, re.IGNORECASE)), "")
-        converted_diffuse = texture0 in entries and not profile.get("resolvedTexture0")
+        implicit_diffuse = not texture0 and profile.get("implicitTexture0")
+        if implicit_diffuse:
+            texture0 = str(implicit_diffuse)
+            # A preserved material gets a new name, so make the original
+            # bitmap's inherited diffuse explicit on that material.
+            lines = [line.rstrip() for line in lines]
+            lines.append(f"texture0 {texture0}")
+        converted_diffuse = texture0 in entries and not (profile.get("resolvedTexture0") or implicit_diffuse)
         fixed = texture0 not in {"", "null"} and not converted_diffuse
         original_material = bitmap if profile else ""
         if fixed and (bitmap in entries or not source_mtr_paths(bitmap)):
