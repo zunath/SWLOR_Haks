@@ -772,6 +772,10 @@ def find_tint_source_models() -> dict[str, Path]:
     # and are audited by GenerateHelmetRgbModels. Rebinding them as skin-owned heads loses
     # item dyes.
     active = find_active_models()
+    neck_manifest = REPOSITORY_ROOT / "tools" / "NeckModels.json"
+    if neck_manifest.is_file():
+        # These aliases keep their source neck's material scopes and dyes.
+        derived.update(json.loads(neck_manifest.read_text())["aliases"])
     for name in active:
         match = re.fullmatch(r"p[fm][a-z]0_head1(\d{3})", name)
         if match and f"helm_{match[1]}" in active:
