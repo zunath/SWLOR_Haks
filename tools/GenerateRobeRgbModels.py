@@ -432,6 +432,10 @@ def version_animation_families(families, manifest, verify_legacy, native_bodies=
             prior[version] = prior.pop(key)
         if version not in prior and verify_revision is not None:
             candidates = [old for old in prior if old.startswith(key + "/")]
+            # Records of pruned banks stay for saved roots; revise the version still installed.
+            installed = [old for old in candidates if prior[old] in manifest.get("animation_bank_sets", {})]
+            if len(installed) == 1:
+                candidates = installed
             if len(candidates) != 1:
                 raise ValueError(f"Motion revision requires one existing version of {key}")
             previous = candidates[0]
