@@ -55,6 +55,8 @@ TINT_HAIR_MAPPED_SHADER = REPOSITORY_ROOT / "sw_shader" / "fs_plt_hair_nm.shd"
 TINT_FRAGMENT_SHADER = "fs_plt_tinter"
 TINT_MAPPED_FRAGMENT_SHADER = "fs_plt_tinter_nm"
 TINT_HAIR_MAPPED_FRAGMENT_SHADER = "fs_plt_hair_nm"
+# Restore native color filtering only for the reported mask edge regression.
+SMOOTH_TINT_MATERIALS = frozenset({"helm_053"})
 AUTHORED_HAIR_FRAGMENT_SHADERS = {"fslit_aniso_nm"}
 _MTR_PATHS_BY_RESREF: dict[str, Path] | None = None
 _SOURCE_MTR_PATHS_BY_RESREF: dict[str, list[Path]] | None = None
@@ -1602,13 +1604,24 @@ def native_modular_material_choices(
         profile = original_materials.get(bitmap, {})
         lines = list(profile.get("lines", []))
         texture0 = next((line.split()[1].lower() for line in lines if re.match(r"^\s*texture0\s+\S+", line, re.IGNORECASE)), "")
-        converted_diffuse = texture0 in entries and not profile.get("resolvedTexture0")
-        fixed = texture0 not in {"", "null"} and not converted_diffuse
+        implicit_diffuse = not texture0 and profile.get("implicitTexture0")
+        if implicit_diffuse:
+            texture0 = str(implicit_diffuse)
+            # A preserved material gets a new name, so make the original
+            # bitmap's inherited diffuse explicit on that material.
+            lines = [line.rstrip() for line in lines]
+            lines.append(f"texture0 {texture0}")
+        converted_diffuse = texture0 in entries and not (profile.get("resolvedTexture0") or implicit_diffuse)
+        authored_source = AUTHORED_DIFFUSE_SOURCES.get(bitmap, "")
+        authored_tint = entries.get(authored_source, {}).get("authoredDiffuse") == bitmap
+        if authored_tint:
+            lines.append("parameter float useAuthoredDiffuse 1.0")
+        fixed = texture0 not in {"", "null"} and not converted_diffuse and not authored_tint
         original_material = bitmap if profile else ""
         if fixed and (bitmap in entries or not source_mtr_paths(bitmap)):
             original_material = scoped_material_alias(bitmap, "authored:original")
             _PRESERVED_MATERIALS[original_material] = (bitmap, lines)
-        selected_source = texture0 if converted_diffuse else source
+        selected_source = authored_source if authored_tint else texture0 if converted_diffuse else source
         choices[selector] = (None if fixed else selected_source, original_material, lines)
     return choices
 
@@ -2224,6 +2237,23 @@ def update_mtr(
     path.write_text(text, encoding="utf-8", newline="\n")
 
 
+AUTHORED_DIFFUSE_SOURCES = {
+    "helm_101": "ad_helm101",
+    "pfh0_neck012": "ad_fh_neck012",
+    "pmh0_neck012": "ad_mh_neck012",
+    "pfh0_shinl264": "ad_fh_shin264",
+}
+_AUTHORED_DIFFUSE_TEXTURES = None
+
+
+def authored_diffuse_texture(source_material: str) -> str:
+    global _AUTHORED_DIFFUSE_TEXTURES
+    if _AUTHORED_DIFFUSE_TEXTURES is None:
+        _AUTHORED_DIFFUSE_TEXTURES = {name: str(entry["authoredDiffuse"])
+            for name, entry in load_source_manifest().items() if entry.get("authoredDiffuse")}
+    return _AUTHORED_DIFFUSE_TEXTURES.get(source_material.lower(), "plt_white")
+
+
 def tint_material_text(
     path: Path,
     material: str,
@@ -2236,6 +2266,7 @@ def tint_material_text(
     native_palette: bool = False,
 ) -> str:
     source_material = source_material or material
+    smooth_edges = source_material.lower() in SMOOTH_TINT_MATERIALS
     generated_lines = path.read_text(encoding="utf-8-sig").splitlines() if path.exists() else []
     source_paths = source_mtr_paths(source_material)
     source_mtr_lines = (
@@ -2252,8 +2283,16 @@ def tint_material_text(
         if generated_source.exists():
             source_lines = generated_source.read_text(encoding="utf-8-sig").splitlines()
     original_lines = merge_mtr_lines(source_lines, generated_lines)
+    diffuse_texture = authored_diffuse_texture(source_material)
+    if diffuse_texture != "plt_white" and profile is None:
+        original_lines = list(authored_material_sources()[diffuse_texture]["lines"])
+        source_material = diffuse_texture
     if profile is not None:
         source_material, original_lines = profile
+        if "parameter float useAuthoredDiffuse 1.0" in original_lines:
+            diffuse_texture = next(line.split()[1] for line in original_lines if line.lower().startswith("texture0 "))
+        else:
+            diffuse_texture = "plt_white"
     mapped_shader = uses_mapped_shader(original_lines)
     original_fragment_shaders = fragment_shaders(original_lines)
     selected_fragment_shader = tint_fragment_shader(source_material, original_lines)
@@ -2274,7 +2313,7 @@ def tint_material_text(
     )
     replaced = re.compile(
         r"^\s*(?:customshaderFS|texture0|texture7|texture9|texture10|"
-        r"parameter\s+(?:float|int)\s+(?:tintMapWidth|tintMapHeight|useTexture1Alpha|useTexture9Alpha|useNativePalette|"
+        r"parameter\s+(?:float|int)\s+(?:tintMapWidth|tintMapHeight|smoothTintEdges|useTexture1Alpha|useTexture9Alpha|useNativePalette|useAuthoredDiffuse|"
         + tint_row_parameter_pattern
         + "|"
         + tint_color_parameter_pattern
@@ -2304,7 +2343,7 @@ def tint_material_text(
     lines.extend(
         (
             f"customshaderFS {selected_fragment_shader}",
-            "texture0 plt_white",
+            f"texture0 {diffuse_texture}",
             f"texture7 {texture}",
             "texture10 plt_palette",
             f"parameter float tintMapWidth {float(width):.1f}",
@@ -2312,6 +2351,10 @@ def tint_material_text(
         )
         + tint_palette_parameter_lines(native_palette)
     )
+    if diffuse_texture != "plt_white":
+        lines.append("parameter float useAuthoredDiffuse 1.0")
+    if smooth_edges:
+        lines.append("parameter float smoothTintEdges 1.0")
     if uses_texture1_alpha:
         lines.append("parameter float useTexture1Alpha 1.0")
     if texture9_alpha:
@@ -3540,7 +3583,8 @@ def preserved_material_errors() -> list[str]:
 
 def audit() -> None:
     entries = load_source_manifest()
-    errors: list[str] = []
+    import GenerateAuthoredDiffuseTintMaps
+    errors: list[str] = GenerateAuthoredDiffuseTintMaps.validate(entries)
     if (REPOSITORY_ROOT / "sw_2da" / "roberender.2da").is_file():
         import GenerateRobeRgbModels
         errors.extend(GenerateRobeRgbModels.check())
@@ -3716,7 +3760,7 @@ def audit() -> None:
             required = (
                 "customshadervs ",
                 f"customshaderfs {fragment_shader}",
-                "texture0 plt_white",
+                f"texture0 {authored_diffuse_texture(model)}",
                 f"texture7 {texture}",
                 "texture10 plt_palette",
                 f"parameter float tintmapwidth {float(width):.1f}",
@@ -3725,6 +3769,8 @@ def audit() -> None:
                 line.lower()
                 for line in tint_palette_parameter_lines(model in _NATIVE_ATTACHMENT_MATERIALS)
             )
+            if authored_diffuse_texture(model) != "plt_white":
+                required += ("parameter float useauthoreddiffuse 1.0",)
             for line in required:
                 if line not in mtr:
                     errors.append(f"{model}: MTR missing '{line}'")
@@ -3786,7 +3832,7 @@ def audit() -> None:
         required = (
             "customshadervs ",
             f"customshaderfs {fragment_shader}",
-            "texture0 plt_white",
+            f"texture0 {authored_diffuse_texture(source)}",
             f"texture7 {texture}",
             "texture10 plt_palette",
             f"parameter float tintmapwidth {float(entry['width']):.1f}",
@@ -3795,6 +3841,8 @@ def audit() -> None:
             line.lower()
             for line in tint_palette_parameter_lines(alias in _NATIVE_ATTACHMENT_MATERIALS)
         )
+        if authored_diffuse_texture(source) != "plt_white":
+            required += ("parameter float useauthoreddiffuse 1.0",)
         for line in required:
             if line not in mtr:
                 errors.append(f"{alias}: scoped MTR missing '{line}'")
