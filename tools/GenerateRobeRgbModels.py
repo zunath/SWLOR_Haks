@@ -26,6 +26,7 @@ import RobeBuildCache as build_cache
 import RobeCompilationCheckpoint as checkpoint
 import RobeBankValidation as bank_validation
 import RobeAnimationBanks as banks
+import RobeSkeleton as skeleton
 import SharedRobeFamilies as shared
 import RobeSharingAudit as sharing
 from ModelLodAssets import ModelPath
@@ -717,13 +718,27 @@ def main():
         sources[parent] = name_bridge(source_paths[key].read_bytes(), parent)
         animation_cache[key] = parent
     motion_records = []
+    # Neck skins index the wearer's node traversal. Spacers give every wearer of
+    # one base body the same body-node indices, so one neck alias serves them all.
+    unpadded_gaps = {}
+    for name in sorted(selected):
+        prefix, robe_id = PATTERN.fullmatch(name).groups()
+        unpadded, _ = families.body_root(name, prefix + str(id_map[int(robe_id)]),
+                                         animation_cache[families.members[name][0]])
+        unpadded_gaps[name] = skeleton.garment_gaps(unpadded.decode("latin1"))
+    spacers = skeleton.uniform_spacers(unpadded_gaps, lambda robe: robe[:3] + "0")
+    layouts = {}
     for name in sorted(selected):
         prefix, robe_id = PATTERN.fullmatch(name).groups()
         phenotype = id_map[int(robe_id)]
         generated = prefix + str(phenotype)
         base_name = prefix + "0"
         animation_parent = animation_cache[families.members[name][0]]
-        sources[generated], renamed_nodes[generated] = families.body_root(name, generated, animation_parent)
+        sources[generated], renamed_nodes[generated] = families.body_root(
+            name, generated, animation_parent, spacers[name])
+        layout = skeleton.garment_gaps(sources[generated].decode("latin1"))
+        if layouts.setdefault(base_name, layout) != layout:
+            raise ValueError(f"{generated}: body-node layout differs from other {base_name} wearers")
         if args.verify_existing_motion:
             previous = active.get(generated)
             if previous is None or prior.get(name) != phenotype:

@@ -31,6 +31,8 @@ def check(root):
         path = paths.get(name)
         if path is None or hashlib.sha256(content(path.read_bytes())).hexdigest() != entry['sha256']:
             failures.append(name)
+    # Retired aliases render nothing; packaging them only adds size.
+    failures.extend(name for name in manifest.get('retired', []) if name in paths)
     for name, expected in manifest['tables'].items():
         if hashlib.sha256((root / 'sw_2da' / name).read_text().encode()).hexdigest() != expected:
             failures.append(name)

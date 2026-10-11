@@ -23,6 +23,8 @@ ROOT = Path(__file__).resolve().parents[1]
 MANIFEST = ROOT / 'tools/NeckModels.json'
 TABLE = ROOT / 'sw_2da/neckrender.2da'
 PART = re.compile(r'^(p[fm][a-z])(0|2)_neck(\d{3})$')
+# Stock phenotypes no SWLOR creature uses: skinny (1) and the horse riders (3, 5, 6, 8).
+UNUSED_PHENOTYPES = frozenset({1, 3, 5, 6, 8})
 
 
 def digest(data):
@@ -53,7 +55,7 @@ def plan(game_data):
             parts[name] = (data, external)
     bodies = {}
     for name in sorted(set(stock) | set(active)):
-        if not re.fullmatch(r'p[fm][a-z]\d+', name):
+        if not re.fullmatch(r'p[fm][a-z]\d+', name) or int(name[3:]) in UNUSED_PHENOTYPES:
             continue
         # Generated robe roots and the ordinary large/mounted bodies can all
         # fall back to phenotype-0 necks. Unknown reserved phenotypes have no root.
@@ -98,9 +100,11 @@ def plan(game_data):
             groups.setdefault(key, []).append(body_name)
     # Stable allocation survives later additions; aliases are never repurposed.
     previous = json.loads(MANIFEST.read_text()) if MANIFEST.exists() else {'aliases': {}}
-    aliases = dict(previous['aliases'])
-    next_id = max([999, *(int(name.rsplit('neck', 1)[1]) for name in aliases)]) + 1
-    by_signature = {(entry['source'], json.dumps(entry['mapping'])): name for name, entry in aliases.items()}
+    retired = set(previous.get('retired', []))
+    aliases = {}
+    next_id = max([999, *(int(name.rsplit('neck', 1)[1]) for name in [*previous['aliases'], *retired])]) + 1
+    by_signature = {(entry['source'], json.dumps(entry['mapping'])): name
+                    for name, entry in previous['aliases'].items()}
     outputs = {}
     for (source, mapping), roots in sorted(groups.items()):
         key = (source, json.dumps(mapping))
@@ -117,11 +121,14 @@ def plan(game_data):
         aliases[name] = {'source': source, 'mapping': mapping, 'sha256': digest(output)}
         outputs[name] = output
         rows.extend((root, source, name) for root in roots)
-    table = '2DA V2.0\n\n    BODY SOURCE RENDER\n'
+    # Unused aliases are deleted; their IDs stay reserved.
+    retired |= previous['aliases'].keys() - aliases.keys()
+    table ='2DA V2.0\n\n    BODY SOURCE RENDER\n'
     table += ''.join(f'{i} {body} {source} {render}\n' for i, (body, source, render) in enumerate(sorted(rows)))
     # Normalize text line endings so the guard also works after a Git checkout
     # using core.autocrlf. Binary model hashes remain byte-exact.
     manifest = {'aliases': dict(sorted(aliases.items())), 'inputs': dict(sorted(inputs.items())),
+                'retired': sorted(retired),
                 'owned_inputs': dict(sorted(owned.items())),
                 'implementation': {relative: source_digest(ROOT / relative) for relative in IMPLEMENTATION},
                 'tables': {'phenotype.2da': digest((ROOT / 'sw_2da/phenotype.2da').read_text().encode()),
@@ -138,6 +145,12 @@ def main():
     args = parser.parse_args()
     outputs, table, manifest = plan(args.game_data)
     failures = []
+    for name in manifest['retired']:
+        path = ROOT / 'sw_pt_neck' / (name + '.mdl')
+        if args.apply:
+            path.unlink(missing_ok=True)
+        elif path.exists():
+            failures.append(name)
     for name, data in outputs.items():
         path = ROOT / 'sw_pt_neck' / (name + '.mdl')
         if args.apply:
