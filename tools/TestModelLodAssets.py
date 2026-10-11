@@ -223,6 +223,29 @@ class ModelLodTests(unittest.TestCase):
             (root / models.MANIFEST).write_text(json.dumps(manifest))
             self.assertTrue(any("base-game model" in error for error in models.check(root)))
 
+    def test_deleted_base_game_override_fails_closed(self):
+        with tempfile.TemporaryDirectory() as directory, patch.object(models, "ROOT", Path(directory)):
+            root = Path(directory)
+            self.fixture(root)
+            models.apply(root, stock_models={"second"})
+            self.assertEqual([], models.check(root))
+            (root / "parts/second.mdl").unlink()
+            self.assertTrue(any("missing its native MDL: second" in error for error in models.check(root)))
+
+    def test_redirect_resources_defined_by_another_hak_fail_closed(self):
+        for name in ("first", "second"):
+            with self.subTest(name=name), tempfile.TemporaryDirectory() as directory, \
+                    patch.object(models, "ROOT", Path(directory)):
+                root = Path(directory)
+                first, _ = self.fixture(root)
+                (root / "other").mkdir()
+                (root / "hakbuilder.json").write_text(json.dumps({"HakList": [{"Path": "other"}, {"Path": "parts"}]}))
+                models.apply(root)
+                self.assertEqual([], models.check(root))
+                # HAK priority would load this resource instead of the validated one.
+                (root / "other" / f"{name}.mdl").write_bytes(first + b"other")
+                self.assertTrue(any(f"more than one HAK: {name}" in error for error in models.check(root)))
+
     def test_visible_or_animated_robe_geometry_can_still_be_shared(self):
         for flags, children, animations in ((0x21, 0, 0), (1, 1, 0), (1, 0, 1)):
             data = bytearray(binary("pmh0_robe003"))

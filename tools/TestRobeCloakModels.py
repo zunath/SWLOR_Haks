@@ -1,8 +1,13 @@
 """Cloaks must retain native geometry while using a generated body phenotype."""
+import json
+from pathlib import Path
 import struct
+import tempfile
 import unittest
+from unittest.mock import patch
 
 import GenerateRobeCloakModels as cloaks
+import ModelLodAssets as lod
 
 
 class RobeCloakModelTests(unittest.TestCase):
@@ -42,6 +47,39 @@ class RobeCloakModelTests(unittest.TestCase):
 
     def test_packaged_models_cover_the_current_tables_and_match_validated_bytes(self):
         self.assertEqual([], cloaks.check())
+
+    def test_regenerated_models_replace_their_redirects(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            for folder in ("sw_pt_cloak", "tools"):
+                (root / folder).mkdir()
+            (root / "sw_pt_cloak/pfh0_cloak_004.mdl").write_bytes(b"canonical")
+            (root / "sw_pt_cloak/pfh171_cloak_004.lod").write_bytes(b"pfh0_cloak_004\n")
+            aliases = {"sw_pt_cloak/pfh171_cloak_004.mdl": {"canonical": "sw_pt_cloak/pfh0_cloak_004.mdl"},
+                       "sw_pt_cloak/pfh172_cloak_004.mdl": {"canonical": "sw_pt_cloak/pfh0_cloak_004.mdl"}}
+            (root / lod.MANIFEST).write_text(json.dumps({"aliases": aliases, "native_overrides": ["helm_001"]}))
+            replaced = cloaks.install({"pfh171_cloak_004": b"generated", "pfh173_cloak_004": b"new"}, root)
+            self.assertEqual(["sw_pt_cloak/pfh171_cloak_004.mdl"], replaced)
+            self.assertFalse((root / "sw_pt_cloak/pfh171_cloak_004.lod").exists())
+            self.assertEqual(b"generated", (root / "sw_pt_cloak/pfh171_cloak_004.mdl").read_bytes())
+            manifest = json.loads((root / lod.MANIFEST).read_text())
+            self.assertEqual({"sw_pt_cloak/pfh172_cloak_004.mdl"}, set(manifest["aliases"]))
+            self.assertEqual(["helm_001"], manifest["native_overrides"])
+            # No MDL is left shadowed by a same-name LOD.
+            self.assertEqual(3, len(lod.model_paths(root / "sw_pt_cloak")))
+
+    def test_sources_recorded_as_unavailable_are_rechecked(self):
+        with tempfile.TemporaryDirectory() as directory:
+            manifest = Path(directory) / "RobeCloakModels.json"
+            manifest.write_text(json.dumps({"models": {}, "unavailable_sources": ["pfa0_cloak_100"],
+                                            "files": {}, "sources": {}}))
+            required = {"pfa171_cloak_100": "pfa0_cloak_100"}
+            with patch.object(cloaks, "MANIFEST", manifest), patch.object(cloaks, "requirements", lambda: required):
+                with patch.object(cloaks.tint, "find_active_models", lambda: {}):
+                    self.assertEqual([], cloaks.check())
+                added = {"pfa0_cloak_100": Path(directory) / "pfa0_cloak_100.mdl"}
+                with patch.object(cloaks.tint, "find_active_models", lambda: added):
+                    self.assertTrue(any("now exist" in error and "pfa0_cloak_100" in error for error in cloaks.check()))
 
 
 if __name__ == "__main__":

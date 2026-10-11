@@ -13,6 +13,7 @@ import json
 from pathlib import Path
 import re
 
+from CheckNeckModels import IMPLEMENTATION, source_digest
 import GenerateTintMapAssets as tint
 from ModelLodAssets import content
 from NeckSkinBindings import body_model, mapping_for, needs_remap, remap, skins
@@ -39,6 +40,7 @@ def plan(game_data):
     # Include every authored neck, not merely the current editor's choices.
     parts = {}
     inputs = {}
+    owned = {}
     for name, path in sorted(active.items()):
         match = PART.fullmatch(name)
         if not match:
@@ -46,6 +48,7 @@ def plan(game_data):
         data = content(path.read_bytes())
         external = skins(data)
         inputs[name] = digest(data)
+        owned[name] = path.relative_to(ROOT).as_posix()
         if external:
             parts[name] = (data, external)
     bodies = {}
@@ -57,6 +60,8 @@ def plan(game_data):
         data = load(name)
         bodies[name] = body_model(data)
         inputs[name] = digest(data)
+        if name in active:
+            owned[name] = active[name].relative_to(ROOT).as_posix()
     defaults = {}
     for line in (ROOT / 'sw_2da/phenotype.2da').read_text().splitlines()[3:]:
         fields = line.split()
@@ -117,6 +122,8 @@ def plan(game_data):
     # Normalize text line endings so the guard also works after a Git checkout
     # using core.autocrlf. Binary model hashes remain byte-exact.
     manifest = {'aliases': dict(sorted(aliases.items())), 'inputs': dict(sorted(inputs.items())),
+                'owned_inputs': dict(sorted(owned.items())),
+                'implementation': {relative: source_digest(ROOT / relative) for relative in IMPLEMENTATION},
                 'tables': {'phenotype.2da': digest((ROOT / 'sw_2da/phenotype.2da').read_text().encode()),
                            'neckrender.2da': digest(table.encode())}}
     return outputs, table, manifest

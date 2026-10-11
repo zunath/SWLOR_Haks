@@ -251,12 +251,24 @@ def directories(root):
 def check(root=ROOT):
     root = Path(root)
     aliases = catalog(root)
+    hak_directories = directories(root)
     actual = {p.with_suffix(".mdl").relative_to(root).as_posix()
-              for directory in directories(root) for p in directory.glob("*.lod")}
+              for directory in hak_directories for p in directory.glob("*.lod")}
     errors = []
     if actual != aliases.keys():
         errors.append("Model LOD manifest does not cover exactly the checked-in redirects")
-    stock_names = set(json.loads((root / MANIFEST).read_text()).get("native_overrides", []))
+    manifest = root / MANIFEST
+    stock_names = {name.lower() for name in
+                   (json.loads(manifest.read_text()) if manifest.is_file() else {}).get("native_overrides", [])}
+    # HAK priority decides which same-named resource the client loads; a name defined
+    # once cannot be overridden by a resource other than the one validated here.
+    resources = collections.defaultdict(list)
+    for directory in hak_directories:
+        for path in (*directory.glob("*.mdl"), *directory.glob("*.lod")):
+            resources[path.stem.lower()].append(path)
+    for name in sorted(stock_names):
+        if not any(path.suffix.lower() == ".mdl" for path in resources.get(name, [])):
+            errors.append(f"Override of a base-game model is missing its native MDL: {name}")
     for relative in sorted(aliases):
         try:
             path = safe_path(root, relative)
@@ -266,6 +278,10 @@ def check(root=ROOT):
                 raise ValueError(f"Override of a base-game model requires a native MDL: {relative}")
             if not lod_supported(path, root):
                 raise ValueError(f"The client does not follow redirects for this model type; keep its MDL: {relative}")
+            target = Path(aliases[relative]["canonical"]).stem.lower()
+            for name in (path.stem.lower(), target):
+                if len(resources.get(name, [])) > 1:
+                    raise ValueError(f"Redirect resource is defined by more than one HAK: {name}")
             data = read_alias(path, root)
             if requires_native_attachment(path, data):
                 raise ValueError(f"Empty robe attachment requires a native MDL: {relative}")

@@ -22,9 +22,17 @@ class CheckNeckModelsTests(unittest.TestCase):
         # Production keeps necks as MDLs; the guard must still audit any redirected input.
         with patch.object(models, "lod_supported", lambda path, root: True):
             models.apply(root)
+        body = b"newmodel pfg5\nnode dummy pfg5\n parent NULL\nendnode\ndonemodel pfg5\n"
+        (root / "sw_pt_root/pfg5.mdl").write_bytes(body)
         digest = hashlib.sha256(second).hexdigest()
-        manifest = {"inputs": {"pfg0_neck124": digest},
-                    "aliases": {"pfg0_neck124": {"sha256": digest}}, "tables": {}}
+        implementation = {}
+        for relative in necks.IMPLEMENTATION:
+            (root / relative).write_bytes(f"# {relative}\r\n".encode())
+            implementation[relative] = necks.source_digest(root / relative)
+        manifest = {"inputs": {"pfg5": hashlib.sha256(body).hexdigest(), "pfg0_neck124": digest},
+                    "owned_inputs": {"pfg5": "sw_pt_root/pfg5.mdl"},
+                    "aliases": {"pfg0_neck124": {"sha256": digest}}, "tables": {},
+                    "implementation": implementation}
         (root / "tools/NeckModels.json").write_text(json.dumps(manifest))
         return manifest
 
@@ -43,6 +51,34 @@ class CheckNeckModelsTests(unittest.TestCase):
             manifest["aliases"]["pfg0_neck124"]["sha256"] = "0" * 64
             (root / "tools/NeckModels.json").write_text(json.dumps(manifest))
             with self.assertRaisesRegex(ValueError, "Stale neck assets.*pfg0_neck124"):
+                necks.check(root)
+
+    def test_deleted_repository_input_fails_packaging(self):
+        with tempfile.TemporaryDirectory() as directory, patch.object(models, "ROOT", Path(directory)):
+            root = Path(directory)
+            self.fixture(root)
+            (root / "sw_pt_root/pfg5.mdl").unlink()
+            with self.assertRaisesRegex(ValueError, "Stale neck assets.*pfg5"):
+                necks.check(root)
+
+    def test_generator_changes_fail_packaging(self):
+        for relative in necks.IMPLEMENTATION:
+            with self.subTest(relative=relative), tempfile.TemporaryDirectory() as directory, \
+                    patch.object(models, "ROOT", Path(directory)):
+                root = Path(directory)
+                self.fixture(root)
+                necks.check(root)
+                (root / relative).write_text("# changed mapping\n")
+                with self.assertRaisesRegex(ValueError, "Stale neck assets"):
+                    necks.check(root)
+
+    def test_manifests_without_implementation_fingerprints_fail_packaging(self):
+        with tempfile.TemporaryDirectory() as directory, patch.object(models, "ROOT", Path(directory)):
+            root = Path(directory)
+            manifest = self.fixture(root)
+            del manifest["implementation"]
+            (root / "tools/NeckModels.json").write_text(json.dumps(manifest))
+            with self.assertRaisesRegex(ValueError, "Stale neck assets.*implementation"):
                 necks.check(root)
 
 

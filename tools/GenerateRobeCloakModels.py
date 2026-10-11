@@ -17,6 +17,7 @@ import tempfile
 import CompileModels as mdl
 import GenerateTintMapAssets as tint
 import RobePoseAudit as poses
+import ModelLodAssets as lod
 from ModelLodAssets import ModelPath
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -72,8 +73,12 @@ def check() -> list[str]:
     manifest = json.loads(MANIFEST.read_text())
     errors = []
     expected = requirements()
-    available = {name: source for name, source in expected.items()
-                 if source not in manifest.get("unavailable_sources", [])}
+    unavailable = set(manifest.get("unavailable_sources", []))
+    # A source added to a HAK since generation needs robe variants now.
+    added = sorted(unavailable & tint.find_active_models().keys())
+    if added:
+        errors.append(f"Cloak sources recorded as unavailable now exist; regenerate robe cloaks: {added[:20]}")
+    available = {name: source for name, source in expected.items() if source not in unavailable}
     if manifest["models"] != available:
         errors.append("Robe cloak models do not cover the current robe/cloak tables")
     for name in available:
@@ -86,6 +91,26 @@ def check() -> list[str]:
         if digest(canonical) != manifest["sources"].get(source):
             errors.append(f"Cloak geometry or bindings differ from the validated source: {name}")
     return errors
+
+
+def install(outputs: dict[str, bytes], root: Path = ROOT) -> list[str]:
+    """Write generated MDLs, replacing same-name redirects and their manifest records."""
+    replaced = []
+    for name, data in outputs.items():
+        path = root / "sw_pt_cloak" / f"{name}.mdl"
+        if not path.is_file() or path.read_bytes() != data:
+            path.write_bytes(data)
+        redirect = path.with_suffix(".lod")
+        if redirect.is_file():
+            redirect.unlink()
+            replaced.append(path.relative_to(root).as_posix())
+    manifest_path = root / lod.MANIFEST
+    if replaced and manifest_path.is_file():
+        manifest = json.loads(manifest_path.read_text())
+        for relative in replaced:
+            manifest["aliases"].pop(relative, None)
+        manifest_path.write_text(json.dumps(manifest, indent=2) + "\n")
+    return replaced
 
 
 def generate(game_data: Path):
@@ -140,16 +165,15 @@ def generate(game_data: Path):
         sources = {name: load(name) for name in sorted(set(expected.values()))}
         # Prepare and validate the entire set before installing any resource.
         outputs = {name: rename_model(sources[source], source, name) for name, source in expected.items()}
-        for name, data in outputs.items():
-            path = ROOT / "sw_pt_cloak" / f"{name}.mdl"
-            if not path.is_file() or path.read_bytes() != data:
-                path.write_bytes(data)
+        replaced = install(outputs)
         manifest = {"models": dict(sorted(expected.items())),
                     "unavailable_sources": unavailable,
                     "sources": {name: digest(rename_model(data, name, name)) for name, data in sources.items()},
                     "files": {name: digest(data) for name, data in sorted(outputs.items())}}
         MANIFEST.write_text(json.dumps(manifest, indent=2) + "\n")
     print(f"Published {len(expected)} cloak models for generated robe phenotypes.")
+    if replaced:
+        print(f"Replaced {len(replaced)} redirects with MDLs; run ModelLodAssets.py --apply to share them again.")
 
 
 def main():

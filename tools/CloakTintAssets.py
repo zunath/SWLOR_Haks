@@ -26,6 +26,7 @@ TILE = 512
 COLUMNS, ROWS = 4, 8
 ATLAS_COUNT = 4
 MATERIAL = "cloaktint"
+TGA_TYPE, DDS_TYPE, MTR_TYPE = 3, 2033, 2072
 
 
 def file_digest(path):
@@ -112,6 +113,33 @@ def table_text(textures):
     return "\n".join(lines) + "\n"
 
 
+def fixed_surfaces(path, data, textures, materials):
+    """Mesh surfaces naming a real texture or material, which cloaktint would replace.
+
+    The client draws cloak meshes with the cloakmodel.TEXTURE PLT even when a bitmap
+    names the model, another PLT, or no resource (model 007's cala_cloak skin).
+    """
+    if data[:4] == bytes(4):
+        fields = [(texture, material) for _, texture, _, material in
+                  tint.read_binary_model_material_fields(path, data)]
+    else:
+        fields = [(name.decode().lower(), None) for name in
+                  re.findall(rb"(?im)^\s*(?:bitmap|texture0)\s+(\S+)", data)]
+        fields += [(None, name.decode().lower()) for name in
+                   re.findall(rb"(?im)^\s*materialname\s+(\S+)", data)]
+    return sorted({texture for texture, _ in fields if texture in textures} |
+                  {material for _, material in fields if material not in (None, MATERIAL) and material in materials})
+
+
+def fixed_resources(game_data):
+    textures = {name for restype in (TGA_TYPE, DDS_TYPE) for name in tint.read_stock_key_resources(game_data, restype)}
+    materials = set(tint.read_stock_key_resources(game_data, MTR_TYPE))
+    for directory in tint.hak_directories():
+        textures.update(path.stem.lower() for pattern in ("*.tga", "*.dds") for path in directory.glob(pattern))
+        materials.update(path.stem.lower() for path in directory.glob("*.mtr"))
+    return textures, materials
+
+
 def bind_models():
     """Change material references only, retaining every model and LOD identity."""
     previous = {}
@@ -155,6 +183,10 @@ def bind_models():
 
 
 def generate(game_data):
+    textures, materials = fixed_resources(game_data)
+    for path in sorted((ROOT / "sw_pt_cloak").glob("*.mdl")):
+        if fixed := fixed_surfaces(path, path.read_bytes(), textures, materials):
+            raise ValueError(f"{path.name} has fixed surfaces {fixed}; cloaktint would replace them")
     numbers = texture_ids()
     if len(numbers) > ATLAS_COUNT * COLUMNS * ROWS:
         raise ValueError("Cloak tint atlases have no free tiles")
@@ -215,6 +247,9 @@ def check():
         path = ROOT / relative
         if not path.is_file() or file_digest(path) != sha:
             errors.append(f"Missing or changed cloak atlas: {relative}")
+    physical = {path.relative_to(ROOT).as_posix() for path in (ROOT / "sw_pt_cloak").glob("*.mdl")}
+    if set(manifest["models"]) != physical:
+        errors.append("Cloak tint bindings do not cover exactly the cloak MDLs; rerun with --game-data")
     for relative, sha in manifest["models"].items():
         path = ROOT / relative
         if not path.is_file() or file_digest(path) != sha:
