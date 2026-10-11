@@ -8,6 +8,8 @@ from unittest.mock import patch
 
 import ModelLodAssets as models
 
+ORIGINAL_LOD_SUPPORTED = models.lod_supported
+
 
 def binary(name):
     data = bytearray(640)
@@ -29,6 +31,36 @@ def animated(name):
 
 
 class ModelLodTests(unittest.TestCase):
+    def setUp(self):
+        # Fixtures publish redirects freely; production allows only generated robe cloaks.
+        supported = patch.object(models, "lod_supported", lambda path, root: True)
+        supported.start()
+        self.addCleanup(supported.stop)
+
+    def test_only_generated_robe_cloaks_may_redirect(self):
+        with patch.object(models, "lod_supported", ORIGINAL_LOD_SUPPORTED), tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "tools").mkdir()
+            (root / "tools/RobeCloakModels.json").write_text(json.dumps({"models": {"pfh171_cloak_004": "pfh0_cloak_004"}}))
+            self.assertTrue(models.lod_supported(root / "sw_pt_cloak/pfh171_cloak_004.mdl", root))
+            self.assertFalse(models.lod_supported(root / "sw_pt_cloak/pfb3_cloak_002.mdl", root))
+            self.assertFalse(models.lod_supported(root / "sw_pt_head/pfe0_head1001.mdl", root))
+            self.assertFalse(models.lod_supported(root / "sw_t_cepmine/zdm02_a08_11.mdl", root))
+
+    def test_unsupported_model_types_keep_native_mdls_and_existing_redirects_are_restored(self):
+        with tempfile.TemporaryDirectory() as directory, patch.object(models, "ROOT", Path(directory)):
+            root = Path(directory)
+            first, second = self.fixture(root)
+            models.apply(root)
+            self.assertEqual({"parts/second.mdl"}, set(models.catalog(root)))
+            with patch.object(models, "lod_supported", lambda path, root: False):
+                self.assertTrue(any("keep its MDL" in error for error in models.check(root)))
+                models.apply(root)
+                self.assertEqual({}, models.catalog(root))
+                self.assertEqual(second, (root / "parts/second.mdl").read_bytes())
+                self.assertFalse((root / "parts/second.lod").exists())
+                self.assertEqual([], models.check(root))
+
     def test_root_only_clones_keep_their_original_animation_root(self):
         first = animated("first")
         second = models.rename_identity(first, "second", "root")

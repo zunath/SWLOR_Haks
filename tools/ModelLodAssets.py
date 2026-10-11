@@ -99,6 +99,25 @@ def identity(data, mode="full"):
     return rename_identity(data, "@shared", mode) if model_name(data) else data
 
 
+# Client checks against master's MDLs: area tiles, placeables, a tower shield and a
+# cross-race torso drew nothing or the wrong model through a redirect, and with
+# graphics.lod.enabled off the client ignores every redirect (helmet heads vanished).
+# Only generated robe-phenotype cloaks, which have no MDL to replace, may redirect.
+ROBE_CLOAK_MANIFEST = "tools/RobeCloakModels.json"
+
+
+@functools.lru_cache(maxsize=4)
+def _robe_cloaks(path, modified):
+    return frozenset(name.lower() for name in json.loads(Path(path).read_text())["models"])
+
+
+def lod_supported(path, root):
+    manifest = Path(root) / ROBE_CLOAK_MANIFEST
+    path = Path(path)
+    return (manifest.is_file() and path.parent.name.lower() == "sw_pt_cloak" and
+            path.stem.lower() in _robe_cloaks(str(manifest), manifest.stat().st_mtime_ns))
+
+
 def requires_native_attachment(path, data):
     """Empty robe MDLs stop the native client falling back to a visible base robe.
 
@@ -245,6 +264,8 @@ def check(root=ROOT):
                 raise ValueError(f"LOD shadows its old MDL: {relative}")
             if path.stem.lower() in stock_names:
                 raise ValueError(f"Override of a base-game model requires a native MDL: {relative}")
+            if not lod_supported(path, root):
+                raise ValueError(f"The client does not follow redirects for this model type; keep its MDL: {relative}")
             data = read_alias(path, root)
             if requires_native_attachment(path, data):
                 raise ValueError(f"Empty robe attachment requires a native MDL: {relative}")
@@ -296,7 +317,7 @@ def apply(root=ROOT, stock_models=frozenset()):
             canonical_data = content(ModelPath(canonical).read_bytes())
             canonical_relative = canonical.relative_to(root).as_posix()
             for path in paths:
-                if path.stem.lower() == canonical.stem.lower():
+                if path.stem.lower() == canonical.stem.lower() or not lod_supported(path, root):
                     continue
                 original = content(ModelPath(path).read_bytes())
                 name = model_name(original)
@@ -322,9 +343,11 @@ def apply(root=ROOT, stock_models=frozenset()):
                 dependents[canonical_relative].append(aliases[relative])
         print(f"Compared {mode} identities; {len(aliases)} redirects validated.", flush=True)
     old = catalog(root)
-    if set(old) - aliases.keys() - native_attachments.keys():
+    unsupported = {relative: content(read_alias(safe_path(root, relative), root))
+                   for relative in old if not lod_supported(safe_path(root, relative), root)}
+    if set(old) - aliases.keys() - native_attachments.keys() - unsupported.keys():
         raise ValueError("Existing redirects would be orphaned; explicitly expand before changing canonical sources")
-    for relative, data in native_attachments.items():
+    for relative, data in {**native_attachments, **unsupported}.items():
         path = safe_path(root, relative)
         if relative in old:
             path.write_bytes(data)

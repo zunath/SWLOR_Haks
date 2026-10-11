@@ -19,7 +19,9 @@ class CheckNeckModelsTests(unittest.TestCase):
         second = models.rename_identity(first, "pfg0_neck124")
         (root / "sw_pt_neck/pfg0_neck123.mdl").write_bytes(first)
         (root / "sw_pt_neck/pfg0_neck124.mdl").write_bytes(second)
-        models.apply(root)
+        # Production keeps necks as MDLs; the guard must still audit any redirected input.
+        with patch.object(models, "lod_supported", lambda path, root: True):
+            models.apply(root)
         digest = hashlib.sha256(second).hexdigest()
         manifest = {"inputs": {"pfg0_neck124": digest},
                     "aliases": {"pfg0_neck124": {"sha256": digest}}, "tables": {}}
