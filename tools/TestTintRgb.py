@@ -1,5 +1,6 @@
 """Verify actual custom RGB through every shipped tint shader on the GPU."""
 import argparse
+import ctypes as ct
 import random
 import re
 from pathlib import Path
@@ -68,6 +69,64 @@ def check_authored_diffuse(test, root, material):
     return checks
 
 
+def check_authored_diffuse_mips(test, root, material):
+    shader = (root / "sw_shader/fs_plt_tinter_nm.shd").read_text()
+    shader = shader.replace("gl_FragColor = vec4(FragmentColor.rgb, outputAlpha);", "gl_FragColor = paletteColor;")
+    fragment = "#version 120\n" + shader.replace('#include "inc_standard"', ADAPTER + material + STANDARD)
+    # Cross an integer UV between pixels 4 and 5, inside one derivative quad.
+    # The unwrapped footprint is subpixel, but fract() makes it nearly 512 texels.
+    vertex = """#version 120
+uniform float seamAxis;
+uniform float seamBoundary;
+varying vec2 vVertexTexCoords;
+void main() {
+    gl_Position = gl_Vertex;
+    float uv = seamBoundary + (mix(gl_Vertex.x, gl_Vertex.y, seamAxis) - 0.25) * 0.002;
+    vVertexTexCoords = mix(vec2(uv, 0.5), vec2(0.5, uv), seamAxis);
+}
+"""
+    fine, coarse = (.2, .3, .7, 1), (.9, .8, .1, 1)
+    rgb = (70, 105, 220)
+    checks = 0
+    legacy = fragment.replace("texture2D(texUnit0, vVertexTexCoords)", "texture2D(texUnit0, wrappedUV)")
+    assert legacy.count("texture2D(texUnit0, wrappedUV)") == 2
+    for source, expected_diffuse, label in ((fragment, fine, "continuous"), (legacy, coarse, "legacy wrapped")):
+        program = test.program(source, vertex)
+        try:
+            for exact_rgb in (False, True):
+                test.sample(program, 1, 1, authored_diffuse=fine, rgb=(4, *rgb) if exact_rgb else None)
+                test.active_texture(0x84C0)
+                test.bind_texture(0x0DE1, 1)
+                test.texture_parameter(0x0DE1, 0x2801, 0x2700)  # NEAREST_MIPMAP_NEAREST
+                for parameter in (0x2802, 0x2803):
+                    test.texture_parameter(0x0DE1, parameter, 0x2901)  # REPEAT
+                for level in range(10):
+                    size = 512 >> level
+                    pixels = (ct.c_float * (size * size * 4))(*((fine if level == 0 else coarse) * (size * size)))
+                    test.texture_image(0x0DE1, level, 0x8814, size, size, 0, 0x1908, 0x1406, pixels)
+                scale = sum(a * b for a, b in zip(expected_diffuse, (.2126, .7152, .0722))) / .5
+                expected = tuple(min(c / 255 * scale, 1) for c in rgb) if exact_rgb else expected_diffuse[:3]
+                for axis in (0, 1):
+                    test.scalar(test.location(program, b"seamAxis"), axis)
+                    for boundary in (0, 1):
+                        test.scalar(test.location(program, b"seamBoundary"), boundary)
+                        test.begin(0x0007)
+                        for point in ((-1, -1), (1, -1), (1, 1), (-1, 1)):
+                            test.vertex(*point)
+                        test.end()
+                        for pixel in (4, 5):
+                            result = (ct.c_float * 4)()
+                            x, y = (pixel, 4) if axis == 0 else (4, pixel)
+                            test.read(x, y, 1, 1, 0x1908, 0x1406, result)
+                            assert test.error() == 0
+                            near(result[:3], expected,
+                                 f"authored diffuse {label} mip axis={axis} boundary={boundary} RGB={exact_rgb}")
+                            checks += int(source == fragment)
+        finally:
+            test.delete_program(program)
+    return checks
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--game-data", type=Path, required=True)
@@ -84,6 +143,8 @@ def main():
         test = MaterialTest(gl)
         material = stock_material(args.game_data)
         print(f"Authored diffuse RGB/preset/reset GPU checks passed: {check_authored_diffuse(test, root, material)}", flush=True)
+        print(f"Authored diffuse mip seam GPU checks passed: {check_authored_diffuse_mips(test, root, material)}; "
+              "matching legacy controls selected the coarse mip as expected.", flush=True)
         for name in ("fs_plt_tinter", "fs_plt_tinter_nm", "fs_plt_hair_nm"):
             shader = (root / "sw_shader" / (name + ".shd")).read_text()
             material_checks += check_rgb_materials(test, shader, material, name)
