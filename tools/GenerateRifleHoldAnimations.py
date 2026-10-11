@@ -19,7 +19,7 @@ The weapon hook keeps its inherited tracks. Robe bridges share one garment `rhan
 joint only while every robe family sees the same hook motion; keying it splits that
 joint and changes every robe root's skeleton.
 
-Banks are emitted as authored ASCII into `sw_cr_creature`; compile them with
+Banks are emitted as ASCII into `sw_cr_creature`; compile them with
 `CompileModels.py --model <bank> --game-data <data> --apply`, then rerun this tool
 with `--finalize` to restore the exact inherited part IDs and floats in every copied track. Compiled
 body roots are re-pointed at their bank in place. ASCII roots (the stock large
@@ -27,7 +27,8 @@ phenotypes, `pmd0`, SWLOR's `pfd2`) are written against their original supermode
 compiled in the same CompileModels.py run, then re-pointed by `--finalize`, so every
 native part ID matches the original compile. Robe bridges carry their own copies of
 these clips: refresh them with `GenerateRobeRgbModels.py --update-animation xbowr
---update-animation xbowrdy --update-animation xbowshot` afterwards.
+--update-animation xbowrdy --update-animation xbowshot` afterwards. Banks are
+regenerated from the compiled models, so no editable source is kept.
 """
 from __future__ import annotations
 
@@ -538,7 +539,8 @@ def clip_lines(result: dict, bank: str) -> list[str]:
 def bank_source(library: Library, body: str, results: list[dict]) -> str:
     bank = bank_name(body)
     parent = library.inherited_parent(body)
-    lines = [f"# SWLOR authored animations for {bank}", f"newmodel {bank}", f"setsupermodel {bank} {parent}",
+    # Not the authored-animation header: CompileModels.py would keep an ASCII copy in model_sources.
+    lines = [f"# SWLOR rifle hold bank {bank}", f"newmodel {bank}", f"setsupermodel {bank} {parent}",
              "classification character", "setanimationscale 1", f"beginmodelgeom {bank}"]
     lines += geometry_lines(bank_geometry(library.model(parent, False), results), bank)
     lines.append(f"endmodelgeom {bank}")
@@ -625,14 +627,12 @@ def restore_inherited_tracks(library: Library, body: str) -> bytes:
 
 
 def finalize(library: Library) -> None:
-    import StripInheritedBoneTracks as sources
     for body in BODIES:
         path = ROOT / BANK_DIRECTORY / f"{bank_name(body)}.mdl"
         if not mdl.binary(path.read_bytes()):
             raise RuntimeError(f"Compile {path.name} with CompileModels.py --apply before finalizing")
         path.write_bytes(restore_inherited_tracks(library, body))
         library.cache.pop(bank_name(body), None)
-        sources.update_source(ROOT, path, check_only=False)
         root = ROOT / ROOT_DIRECTORY / f"{body}.mdl"
         if not mdl.binary(root.read_bytes()):
             raise RuntimeError(f"Compile {root.name} with CompileModels.py --apply before finalizing")
