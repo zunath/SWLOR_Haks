@@ -149,27 +149,42 @@ class MaterialProfileTests(unittest.TestCase):
 
 
 class BaseBodyPaletteTests(unittest.TestCase):
-    def test_original_inherited_diffuses_keep_their_artwork_and_auxiliary_maps(self):
+    def test_original_inherited_diffuses_keep_artwork_and_receive_rgb(self):
+        from GenerateAuthoredDiffuseTintMaps import SOURCES
         entries = g.load_source_manifest()
         models = g.find_active_models()
-        profiles = g.authored_material_sources()
-        affected = {name for name in entries if profiles.get(name, {}).get("implicitTexture0")}
-        self.assertEqual(affected, {"helm_101", "pfh0_neck012", "pmh0_neck012", "pfh0_shinl264"})
-        for name in sorted(affected):
+        for name, (relative, layer) in SOURCES.items():
             with self.subTest(name=name):
+                entry = entries[g.AUTHORED_DIFFUSE_SOURCES[name]]
+                self.assertEqual(entry["authoredDiffuse"], name)
+                self.assertEqual(entry["layers"], [layer])
+                self.assertEqual(entry["diffuseSha256"], hashlib.sha256((g.REPOSITORY_ROOT / relative).read_bytes()).hexdigest())
                 choices = g.native_modular_material_choices(models[name], entries)
-                fixed = [(selector, material, lines) for selector, (source, material, lines) in choices.items()
-                         if source is None]
-                self.assertEqual(len(fixed), 1)
-                selector, material, lines = fixed[0]
-                self.assertEqual(lines, [line.rstrip() for line in profiles[name]["lines"]] + [f"texture0 {name}"])
-                self.assertEqual(g.raw_model_bitmaps(models[name])[selector], name)
-                self.assertIn(material, {binding for _, binding in g.read_model_material_bindings(models[name])})
-                preserved = g.REPOSITORY_ROOT / "sw_item" / f"{material}.mtr"
-                self.assertEqual(preserved.read_text(), "\n".join(lines).strip() + "\n")
-        # Fixed artwork uses the native attachment; the legacy dye mask is unrelated.
+                self.assertIn(g.AUTHORED_DIFFUSE_SOURCES[name], [source for source, _, _ in choices.values()])
+                text = g.mtr_path(g.AUTHORED_DIFFUSE_SOURCES[name]).read_text()
+                self.assertIn(f"texture0 {name}\n", text)
+                self.assertIn("parameter float useAuthoredDiffuse 1.0\n", text)
+                self.assertIn(f"texture1 {name}_n\n", text.lower())
+                self.assertIn(f"texture2 {name}_s\n", text.lower())
+                decoded = g.decode_dds_layers(g.packed_dds_path(name, entry), 4, 4)
+                self.assertTrue((decoded == layer).all())
         catalog = {line.split()[1] for line in g.OUTPUT_2DA.read_text().splitlines()[3:] if len(line.split()) == 4}
-        self.assertNotIn("helm_101", catalog)
+        self.assertIn("helm_101", catalog)
+
+    def test_authored_controls_do_not_replace_shared_legacy_palette_sources(self):
+        from GenerateAuthoredDiffuseTintMaps import SOURCES, validate
+        entries = g.load_source_manifest()
+        original = {e["model"]: e for e in json.loads(subprocess.check_output(
+            ["git", "show", "295c9b215ff7539d45f0db8723cbc510e3d4ec35:tools/TintMapSources.json"], cwd=g.REPOSITORY_ROOT))}
+        self.assertEqual(validate(entries), [])
+        for name in SOURCES:
+            for key in ("sourceSha256", "layers", "width", "height", "texture", "shadeSha256", "layerSha256"):
+                self.assertEqual(entries[name][key], original[name][key], f"{name}/{key}")
+        models = g.find_active_models()
+        for name in ("pfd0_shinl264", "pfe0_shinl264", "pfo0_shinl264"):
+            choices = g.native_modular_material_choices(models[name], entries)
+            self.assertTrue(choices)
+            self.assertTrue(all(source == "pfh0_shinl264" for source, _, _ in choices.values()))
 
     def test_imported_stock_body_parts_preserve_geometry_and_have_skin_bindings(self):
         records = json.loads(Path(__file__).with_name("StockBodyTintModels.json").read_text())

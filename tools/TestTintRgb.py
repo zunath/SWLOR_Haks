@@ -44,6 +44,30 @@ def check_rgb_materials(test, shader, material, name):
     return checks
 
 
+def check_authored_diffuse(test, root, material):
+    shader = (root / "sw_shader/fs_plt_tinter_nm.shd").read_text()
+    shader = shader.replace("gl_FragColor = vec4(FragmentColor.rgb, outputAlpha);", "gl_FragColor = paletteColor;")
+    program = test.program("#version 120\n" + shader.replace('#include "inc_standard"', ADAPTER + material + STANDARD))
+    checks = 0
+    try:
+        for diffuse in ((.2, .3, .7, 1), (.05, .07, .1, 1), (.8, .8, .9, 1)):
+            # Native palette transport and default row state both retain the
+            # authored color; unrelated palette pixels must not change the art.
+            near(test.sample(program, 1, 1, authored_diffuse=diffuse), diffuse[:3], "authored diffuse preset")
+            scale = sum(a * b for a, b in zip(diffuse, (.2126, .7152, .0722))) / .5
+            for color in ((210, 55, 45), (40, 190, 90), (70, 105, 220), (0, 0, 0), (255, 255, 255)):
+                near(test.sample(program, 1, 1, rgb=(4, *color), authored_diffuse=diffuse),
+                     tuple(min(c / 255 * scale, 1) for c in color), "authored diffuse RGB")
+                checks += 1
+            # The same material receives a preset again, exercising RGB reset.
+            test.scalar(test.location(program, b"rowCloth1"), .343994140625)
+            near(test.sample(program, 1, 1, authored_diffuse=diffuse), diffuse[:3], "authored diffuse reset")
+            checks += 2
+    finally:
+        test.delete_program(program)
+    return checks
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--game-data", type=Path, required=True)
@@ -59,6 +83,7 @@ def main():
     try:
         test = MaterialTest(gl)
         material = stock_material(args.game_data)
+        print(f"Authored diffuse RGB/preset/reset GPU checks passed: {check_authored_diffuse(test, root, material)}", flush=True)
         for name in ("fs_plt_tinter", "fs_plt_tinter_nm", "fs_plt_hair_nm"):
             shader = (root / "sw_shader" / (name + ".shd")).read_text()
             material_checks += check_rgb_materials(test, shader, material, name)
@@ -78,8 +103,7 @@ def main():
             finally:
                 test.delete_program(program)
             # The previous palette-only renderer must fail the reported green fixture.
-            legacy = re.sub(r"    // Values below one remain.*?    vec3 vTint",
-                            "    vec3 vTint", fragment, flags=re.S)
+            legacy = fragment.replace("if (v >= 1.0)", "if (v >= 4.0)")
             program = test.program(legacy)
             try:
                 actual = test.sample(program, 1, 0, rgb=(7, 205, 228, 197))
