@@ -55,8 +55,8 @@ TINT_HAIR_MAPPED_SHADER = REPOSITORY_ROOT / "sw_shader" / "fs_plt_hair_nm.shd"
 TINT_FRAGMENT_SHADER = "fs_plt_tinter"
 TINT_MAPPED_FRAGMENT_SHADER = "fs_plt_tinter_nm"
 TINT_HAIR_MAPPED_FRAGMENT_SHADER = "fs_plt_hair_nm"
-# Restore native color filtering only for the reported mask edge regression.
-SMOOTH_TINT_MATERIALS = frozenset({"helm_053"})
+# Restore native color filtering only for reported dye edge regressions.
+SMOOTH_TINT_MATERIALS = frozenset({"helm_053", "pfh0_neck267", "pmh0_neck267"})
 AUTHORED_HAIR_FRAGMENT_SHADERS = {"fslit_aniso_nm"}
 _MTR_PATHS_BY_RESREF: dict[str, Path] | None = None
 _SOURCE_MTR_PATHS_BY_RESREF: dict[str, list[Path]] | None = None
@@ -544,6 +544,15 @@ def is_native_palette_attachment(model: str) -> bool:
     return is_modular_robe(model) or re.fullmatch(r"helm_[0-9]{3}", model, re.IGNORECASE) is not None
 
 
+def is_native_attachment_control_name(name: str) -> bool:
+    # An authored-diffuse source replaces an attachment's bitmap and inherits its control.
+    name = name.lower()
+    return is_native_palette_attachment(name) or any(
+        source == name and is_native_palette_attachment(bitmap)
+        for bitmap, source in AUTHORED_DIFFUSE_SOURCES.items()
+    )
+
+
 def native_attachment_control_bytes() -> bytes:
     # Original PLT V1 header, one legal Skin/shade texel. ReplaceTexturePLT
     # copies the complete appearance scheme independently of the image pixels.
@@ -578,7 +587,7 @@ def synchronize_native_attachment_controls() -> None:
     expected = required_native_attachment_controls()
     payload = native_attachment_control_bytes()
     for path in OUTPUT_MTR_DIRECTORY.glob("*.plt"):
-        if path.read_bytes() != payload or not is_native_palette_attachment(path.stem):
+        if path.read_bytes() != payload or not is_native_attachment_control_name(path.stem):
             raise RuntimeError(f"Refusing to replace an unrecognized native attachment control: {path}")
         if path.stem.lower() not in expected:
             path.unlink()
@@ -1631,10 +1640,12 @@ def material_profile_signature(source: str, profile: tuple[str, list[str]] | Non
     key = (source, profile_name)
     if key not in _PROFILE_SIGNATURES:
         text = tint_material_text(mtr_path(source), source, "mask", 1, 1, source, profile)
+        # Edge filtering is a per-source opt-in; it must not rename scoped aliases.
         _PROFILE_SIGNATURES[key] = tuple(sorted(
             (directive, " ".join(line.split()).lower())
             for line in text.splitlines()
             if (directive := mtr_directive_key(line)) is not None
+            and directive != ("parameter", "float", "smoothtintedges")
             and not re.match(r"^\s*texture\d+\s+null\s*$", line, re.IGNORECASE)
         ))
     return _PROFILE_SIGNATURES[key]
