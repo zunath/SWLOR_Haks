@@ -28,6 +28,7 @@ uniform sampler2D texUnit9;
 uniform sampler2D texUnit10;
 uniform float PLTscheme[15];
 uniform float useNativePalette;
+uniform float smoothTintEdges;
 uniform float tintMapWidth;
 uniform float tintMapHeight;
 uniform float useTexture1Alpha;
@@ -46,15 +47,8 @@ uniform float rowLeath2 = 0.429932;
 uniform float rowTat1   = 0.515869;
 uniform float rowTat2   = 0.515869;
 
-void main ()
+vec4 ResolveTintColor(float g, float layer, vec3 authoredDiffuse)
 {
-    vec2 tintMapSize = max(vec2(tintMapWidth, tintMapHeight), vec2(1.0));
-    vec2 wrappedUV = fract(vVertexTexCoords);
-    vec2 nearestUV = (floor(wrappedUV * tintMapSize) + vec2(0.5)) / tintMapSize;
-    float g = texture2D(texUnit7, wrappedUV, -10.0).r;
-    float encodedLayer = texture2D(texUnit7, nearestUV, -10.0).g;
-    float layer = floor(clamp(encodedLayer, 0.0, 0.9999) * 10.0);
-
     float v = rowSkin;
     if      (layer > 8.5) { v = rowTat2;   }
     else if (layer > 7.5) { v = rowTat1;   }
@@ -108,11 +102,9 @@ void main ()
         vec3 luminance = vec3(0.2126, 0.7152, 0.0722);
         float shadeScale = max(dot(referenceShade.rgb, luminance) /
             max(dot(referenceMidpoint, luminance), 1.0 / 255.0), 0.0);
-        // Authored raster materials retain their original atlas at full resolution.
         // Only explicit RGB replaces the hue; the diffuse still supplies all detail.
-        // Let the sampler repeat so UV derivatives stay continuous for mip selection.
         if (useAuthoredDiffuse > 0.5)
-            shadeScale = dot(texture2D(texUnit0, vVertexTexCoords).rgb, luminance) / 0.5;
+            shadeScale = dot(authoredDiffuse, luminance) / 0.5;
         // Metal layers rely on palette alpha for legacy reflection/specularity,
         // even without authored maps. Keep the neutral metal coverage curve;
         // other RGB layers stay opaque and never import a reference row's hue.
@@ -122,7 +114,46 @@ void main ()
     // These surfaces originally ignored native palette dyes. Preserve that
     // appearance until an exact RGB override is supplied, including after reset.
     if (useAuthoredDiffuse > 0.5 && v < 1.0)
-        paletteColor = vec4(texture2D(texUnit0, vVertexTexCoords).rgb, 1.0);
+        paletteColor = vec4(authoredDiffuse, 1.0);
+    return paletteColor;
+}
+
+vec4 ResolveTintTexel(vec2 uv, vec3 authoredDiffuse)
+{
+    vec2 packedTint = texture2D(texUnit7, uv, -10.0).rg;
+    float layer = floor(clamp(packedTint.g, 0.0, 0.9999) * 10.0);
+    return ResolveTintColor(packedTint.r, layer, authoredDiffuse);
+}
+
+void main ()
+{
+    vec2 tintMapSize = max(vec2(tintMapWidth, tintMapHeight), vec2(1.0));
+    vec2 wrappedUV = fract(vVertexTexCoords);
+    vec2 nearestUV = (floor(wrappedUV * tintMapSize) + vec2(0.5)) / tintMapSize;
+    float g = texture2D(texUnit7, wrappedUV, -10.0).r;
+    float encodedLayer = texture2D(texUnit7, nearestUV, -10.0).g;
+    float layer = floor(clamp(encodedLayer, 0.0, 0.9999) * 10.0);
+    // Authored raster materials retain their original atlas at full resolution.
+    // Let the sampler repeat so UV derivatives stay continuous for mip selection.
+    vec3 authoredDiffuse = vec3(1.0);
+    if (useAuthoredDiffuse > 0.5)
+        authoredDiffuse = texture2D(texUnit0, vVertexTexCoords).rgb;
+    vec4 paletteColor = ResolveTintColor(g, layer, authoredDiffuse);
+    if (smoothTintEdges > 0.5)
+    {
+        // Native PLTs filter the resolved colors, not their categorical layer IDs.
+        // Resolve each neighboring texel first so dye edges blend with the
+        // correct material without inventing a third dye or losing metal coverage.
+        vec2 texelPosition = wrappedUV * tintMapSize - vec2(0.5);
+        vec2 baseUV = (floor(texelPosition) + vec2(0.5)) / tintMapSize;
+        vec2 stepUV = vec2(1.0) / tintMapSize;
+        vec2 blend = fract(texelPosition);
+        vec4 lower = mix(ResolveTintTexel(baseUV, authoredDiffuse),
+            ResolveTintTexel(baseUV + vec2(stepUV.x, 0.0), authoredDiffuse), blend.x);
+        vec4 upper = mix(ResolveTintTexel(baseUV + vec2(0.0, stepUV.y), authoredDiffuse),
+            ResolveTintTexel(baseUV + stepUV, authoredDiffuse), blend.x);
+        paletteColor = mix(lower, upper, blend.y);
+    }
     vec3 vTint = paletteColor.rgb;
 
     FragmentColor = vec4(1.0);
