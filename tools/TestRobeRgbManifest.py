@@ -63,6 +63,13 @@ class RobeRgbManifestTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "one existing version"):
                 g.version_animation_families(families, {"animation_bridges": entries}, lambda *_: False,
                     verify_revision=lambda *_: self.fail("Ambiguous revisions must not be attempted"))
+        history = {"animation_bridges": {key + "/old": "pmh_ra001", key + "/older": "pmh_ra002"},
+                   "animation_bank_sets": {"pmh_ra002": {"parts": ["pmh_ra002"]}}}
+        verified.clear()
+        versions, updated = g.version_animation_families(families, history, lambda *_: False,
+            verify_revision=lambda *args: verified.append(args))
+        self.assertEqual([(key, "pmh_ra002", families.bridge(key, "rgb_bridge"))], verified)
+        self.assertEqual({key + "/old": "pmh_ra001", versions[key]: "pmh_ra002"}, updated["animation_bridges"])
         def reject(*_):
             raise ValueError("unrelated change")
         with self.assertRaisesRegex(ValueError, "unrelated change"):
