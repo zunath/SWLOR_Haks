@@ -139,6 +139,46 @@ class ModelLodTests(unittest.TestCase):
             self.assertTrue((root / "parts/first.mdl").is_file())
             self.assertTrue((root / "parts/second.mdl").is_file())
 
+    def test_empty_robe_attachments_keep_native_mdls_while_other_empty_models_share(self):
+        with tempfile.TemporaryDirectory() as directory, patch.object(models, "ROOT", Path(directory)):
+            root = Path(directory)
+            self.fixture(root)
+            empty = bytearray(binary("first"))
+            struct.pack_into("<I", empty, 364, 1)  # A single dummy root, no meshes or animations.
+            for name in ("first", "second", "pmh212_robe003", "pfh213_robe004"):
+                (root / "parts" / (name + ".mdl")).write_bytes(models.rename_identity(bytes(empty), name))
+            models.apply(root)
+            self.assertEqual({"parts/second.mdl"}, set(models.catalog(root)))
+            for name in ("pmh212_robe003", "pfh213_robe004"):
+                self.assertTrue((root / "parts" / (name + ".mdl")).is_file())
+                self.assertFalse((root / "parts" / (name + ".lod")).exists())
+            self.assertEqual([], models.check(root))
+
+    def test_existing_empty_robe_redirect_is_rejected_and_restored_byte_exactly(self):
+        with tempfile.TemporaryDirectory() as directory, patch.object(models, "ROOT", Path(directory)):
+            root = Path(directory)
+            self.fixture(root)
+            empty = bytearray(binary("first"))
+            struct.pack_into("<I", empty, 364, 1)
+            original = models.rename_identity(bytes(empty), "pmh212_robe003")
+            (root / "parts/first.mdl").write_bytes(empty)
+            (root / "parts/pmh212_robe003.mdl").write_bytes(original)
+            with patch.object(models, "requires_native_attachment", return_value=False):
+                models.apply(root)
+            self.assertTrue(any("requires a native MDL" in error for error in models.check(root)))
+            models.apply(root)
+            self.assertEqual(original, (root / "parts/pmh212_robe003.mdl").read_bytes())
+            self.assertFalse((root / "parts/pmh212_robe003.lod").exists())
+            self.assertEqual([], models.check(root))
+
+    def test_visible_or_animated_robe_geometry_can_still_be_shared(self):
+        for flags, children, animations in ((0x21, 0, 0), (1, 1, 0), (1, 0, 1)):
+            data = bytearray(binary("pmh0_robe003"))
+            struct.pack_into("<I", data, 364, flags)
+            struct.pack_into("<I", data, 332, children)
+            struct.pack_into("<I", data, 136, animations)
+            self.assertFalse(models.requires_native_attachment(Path("pmh0_robe003.mdl"), data))
+
     def test_path_traversal_cannot_load_an_external_canonical(self):
         with tempfile.TemporaryDirectory() as directory:
             with self.assertRaises(ValueError):

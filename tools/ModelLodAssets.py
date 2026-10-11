@@ -99,6 +99,30 @@ def identity(data, mode="full"):
     return rename_identity(data, "@shared", mode) if model_name(data) else data
 
 
+def requires_native_attachment(path, data):
+    """Empty robe MDLs stop the native client falling back to a visible base robe.
+
+    The robe attachment lookup checks for an MDL before resolving LOD redirects.
+    A redirect alone therefore loads the base-phenotype robe over the RGB body.
+    Keep these tiny sentinels; their geometry already lives in the body root.
+    """
+    if not re.fullmatch(r"p[fm][a-z]\d+_robe\d{3}", Path(path).stem.lower()):
+        return False
+    if data[:4] != bytes(4):
+        return (len(re.findall(rb"(?im)^\s*node\s+", data)) == 1 and
+                re.search(rb"(?im)^\s*node\s+dummy\s+", data) is not None and
+                re.search(rb"(?im)^\s*newanim\s+", data) is None)
+    if len(data) < 244:
+        raise ValueError("Short compiled robe attachment")
+    root = 12 + struct.unpack_from("<I", data, 84)[0]
+    if root + 112 > len(data):
+        raise ValueError("Invalid compiled robe attachment root")
+    children = struct.unpack_from("<I", data, root + 76)[0]
+    flags = struct.unpack_from("<I", data, root + 108)[0]
+    animations = struct.unpack_from("<I", data, 136)[0]
+    return flags == 1 and children == 0 and animations == 0
+
+
 @functools.lru_cache(maxsize=4)
 def _catalog(path, modified):
     return json.loads(Path(path).read_text())["aliases"]
@@ -218,7 +242,9 @@ def check(root=ROOT):
             path = safe_path(root, relative)
             if path.is_file():
                 raise ValueError(f"LOD shadows its old MDL: {relative}")
-            read_alias(path, root)
+            data = read_alias(path, root)
+            if requires_native_attachment(path, data):
+                raise ValueError(f"Empty robe attachment requires a native MDL: {relative}")
         except (ValueError, OSError, KeyError) as error:
             errors.append(str(error))
     return errors
@@ -234,12 +260,16 @@ def apply(root=ROOT):
             all_paths.append(Path(path))
     aliases = {}
     dependents = collections.defaultdict(list)
+    native_attachments = {path.relative_to(root).as_posix(): content(ModelPath(path).read_bytes())
+                          for path in all_paths
+                          if requires_native_attachment(path, ModelPath(path).read_bytes())}
     # Validate all comparisons and reconstruction before deleting any source file.
     for mode in ("root", "full"):
         groups = collections.defaultdict(list)
         names = collections.defaultdict(set)
         for path in all_paths:
-            if path.relative_to(root).as_posix() in aliases:
+            relative = path.relative_to(root).as_posix()
+            if relative in aliases or relative in native_attachments:
                 continue
             key = hashlib.sha256(identity(ModelPath(path).read_bytes(), mode)).hexdigest()
             groups[key].append(path)
@@ -284,8 +314,13 @@ def apply(root=ROOT):
                 dependents[canonical_relative].append(aliases[relative])
         print(f"Compared {mode} identities; {len(aliases)} redirects validated.", flush=True)
     old = catalog(root)
-    if set(old) - aliases.keys():
+    if set(old) - aliases.keys() - native_attachments.keys():
         raise ValueError("Existing redirects would be orphaned; explicitly expand before changing canonical sources")
+    for relative, data in native_attachments.items():
+        path = safe_path(root, relative)
+        if relative in old:
+            path.write_bytes(data)
+            path.with_suffix(".lod").unlink()
     for relative, record in aliases.items():
         path = safe_path(root, relative)
         path.with_suffix(".lod").write_bytes((Path(record["canonical"]).stem.lower() + "\n").encode("ascii"))
