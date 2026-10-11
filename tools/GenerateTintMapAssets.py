@@ -544,6 +544,15 @@ def is_native_palette_attachment(model: str) -> bool:
     return is_modular_robe(model) or re.fullmatch(r"helm_[0-9]{3}", model, re.IGNORECASE) is not None
 
 
+def is_native_attachment_control_name(name: str) -> bool:
+    # An authored-diffuse source replaces an attachment's bitmap and inherits its control.
+    name = name.lower()
+    return is_native_palette_attachment(name) or any(
+        source == name and is_native_palette_attachment(bitmap)
+        for bitmap, source in AUTHORED_DIFFUSE_SOURCES.items()
+    )
+
+
 def native_attachment_control_bytes() -> bytes:
     # Original PLT V1 header, one legal Skin/shade texel. ReplaceTexturePLT
     # copies the complete appearance scheme independently of the image pixels.
@@ -578,7 +587,7 @@ def synchronize_native_attachment_controls() -> None:
     expected = required_native_attachment_controls()
     payload = native_attachment_control_bytes()
     for path in OUTPUT_MTR_DIRECTORY.glob("*.plt"):
-        if path.read_bytes() != payload or not is_native_palette_attachment(path.stem):
+        if path.read_bytes() != payload or not is_native_attachment_control_name(path.stem):
             raise RuntimeError(f"Refusing to replace an unrecognized native attachment control: {path}")
         if path.stem.lower() not in expected:
             path.unlink()
