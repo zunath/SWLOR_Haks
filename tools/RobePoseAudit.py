@@ -270,10 +270,10 @@ def repair_compiler_skin_bindings(data):
 
 
 def garment_nodes(model):
-    """Generated garment joints/meshes (`rg_`/`rm_`) and everything beneath them."""
+    """Generated garment joints/meshes (`rg_`/`rm_`), layout spacers (`rp_`) and everything beneath them."""
     result = set()
     for index, (name, parent, _, _, _) in enumerate(model.nodes):
-        if name.startswith(("rg_", "rm_")) or parent in result:
+        if name.startswith(("rg_", "rm_", "rp_")) or parent in result:
             result.add(index)
     return result
 
