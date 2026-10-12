@@ -12,6 +12,45 @@ import RobeAnimations as anim
 import RobePoseAudit as poses
 
 
+SPACER_PREFIX = "rp_"
+
+
+def garment_gaps(text):
+    """Generated nodes visited just before each ordinary body node, in emitted order.
+
+    Neck skins index the wearer's depth-first node traversal. Garment joints must
+    stay beneath their body bones, so they shift every later body node instead.
+    """
+    nodes = [(name.lower(), props.get("parent", ["null"])[0].lower()) for _, name, props in anim.geometry(text)]
+    generated = set()
+    gaps, run, seen = {}, 0, {}
+    for index, (name, parent) in enumerate(nodes):
+        if name.startswith(("rg_", "rm_", SPACER_PREFIX)) or parent in generated:
+            generated.add(name)
+            run += 1
+        else:
+            # Stock bodies can repeat helper names (pfh0 has two `impact` nodes).
+            key = (name if index else "@root", seen.get(name, 0))
+            seen[name] = key[1] + 1
+            gaps[key] = run
+            run = 0
+    return gaps
+
+
+def uniform_spacers(gaps_by_wearer, base_of):
+    """Dummies that give every wearer of one base body the same body-node indices."""
+    target = {}
+    for wearer, gaps in gaps_by_wearer.items():
+        layout = target.setdefault(base_of(wearer), {})
+        if layout and layout.keys() != gaps.keys():
+            raise ValueError(f"{wearer}: ordinary body nodes differ from its base body")
+        for node, gap in gaps.items():
+            layout[node] = max(layout.get(node, 0), gap)
+    return {wearer: {node: target[base_of(wearer)][node] - gap
+                     for node, gap in gaps.items() if target[base_of(wearer)][node] > gap}
+            for wearer, gaps in gaps_by_wearer.items()}
+
+
 def serialize(kind, name, props):
     lines = [f"node {kind} {name}"]
     for key, value in props.items():
@@ -240,8 +279,11 @@ class Families:
             group["aliases"] = aliases
         return group["aliases"]
 
-    def body_root(self, robe_name, generated, parent, aliases=None, adapters=None):
-        """`adapters` maps garment joints to the wearer bone they are statically bound to."""
+    def body_root(self, robe_name, generated, parent, aliases=None, adapters=None, spacers=None):
+        """`adapters` maps garment joints to the wearer bone they are statically bound to.
+
+        `spacers` maps a body node to the number of empty dummies placed just before it.
+        """
         key, garment, paths = self.members[robe_name]
         group = self.groups[key]
         aliases = self.aliases(key) if aliases is None else aliases
@@ -251,10 +293,19 @@ class Families:
         if len(set(renamed.values())) != len(renamed) or any(len(n) > 31 for n in renamed.values()):
             raise ValueError(f"{robe_name}: ambiguous garment node names")
         entries = []
+        occurrences = {}
         for kind, node, props in anim.geometry(self.load(base)):
             props = dict(props)
             if props.get("parent") == [base]:
                 props["parent"] = [generated]
+            occurrence = occurrences.get(node.lower(), 0)
+            occurrences[node.lower()] = occurrence + 1
+            for index in range((spacers or {}).get((node.lower(), occurrence), 0)):
+                spacer = f"{SPACER_PREFIX}{node.lower()}_{occurrence}_{index}"
+                if len(spacer) > 31:
+                    raise ValueError(f"Spacer name exceeds engine limit: {spacer}")
+                entries.append((spacer, {"parent": props["parent"]},
+                                serialize("dummy", spacer, {"parent": props["parent"]})))
             entries.append((generated if node == base else node, props, serialize(kind, generated if node == base else node, props)))
         for node, (kind, props) in garment.items():
             if node in adapters:
