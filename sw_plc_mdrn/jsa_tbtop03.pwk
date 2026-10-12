@@ -14,18 +14,6 @@ node dummy p03_pwk_use02
   orientation 1.0 0.0 0.0 0.0
   wirecolor 0.878431 0.341176 0.560784 
 endnode
-node dummy p03_pwk_use03
-  parent jsa_tbtop03_pwk
-  position -2.03852 -0.00133916 0.0
-  orientation 1.0 0.0 0.0 0.0
-  wirecolor 0.878431 0.341176 0.560784 
-endnode
-node dummy p03_pwk_use04
-  parent jsa_tbtop03_pwk
-  position 0.00560602 2.0195 0.0
-  orientation 1.0 0.0 0.0 0.0
-  wirecolor 0.878431 0.341176 0.560784 
-endnode
 node trimesh PWK
   parent jsa_tbtop03_pwk
   position 0.0 0.0 0.0
