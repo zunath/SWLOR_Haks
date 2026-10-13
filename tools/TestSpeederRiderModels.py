@@ -96,6 +96,25 @@ class SpeederRiderModels(unittest.TestCase):
             self.assertEqual(tail[1], 0, name)
             self.assertEqual(geometry_rotations(data)["tail"], (0.0, 0.0, 0.0, 1.0), name)
 
+    def test_rear_coat_panels_drape_down_behind_the_seat(self):
+        from RobePoseAudit import Model
+        checked = 0
+        for name in rider.BANKS.values():
+            model = Model(self.read(name))
+            if not any(node[0] == "coat_bl1" for node in model.nodes):
+                continue
+            for clip in ("pause1", "walk", "run"):
+                posed = model.pose(model.clips[clip])
+                for side in ("l", "r"):
+                    upper = posed[f"coat_b{side}1"][0]
+                    lower = posed[f"coat_b{side}2"][0]
+                    # The rear hem must fall behind and below its upper joint;
+                    # a horizontal or rising panel becomes a rigid fin in the client.
+                    self.assertLess(lower[1], upper[1] - 0.01, f"{name}/{clip}/{side}: coat points forward")
+                    self.assertLess(lower[2], upper[2] - 0.01, f"{name}/{clip}/{side}: coat rises above its upper joint")
+                    checked += 1
+        self.assertGreater(checked, 0, "No mounted coat skeleton was checked")
+
     def test_every_robe_has_a_riding_copy_bound_to_the_riding_chain(self):
         robes = [name for name in self.active if rider.ROBE.match(name)]
         self.assertGreater(len(robes), 1000)
