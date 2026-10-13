@@ -47,7 +47,7 @@ class RigidRobePanelTests(unittest.TestCase):
 
     def test_existing_ascii_robe_targets_are_reported_and_excluded(self):
         manifest = json.loads(rigid.MANIFEST.read_text())
-        for robe in (20, 211, 212, 213):
+        for robe in (211, 212, 213):
             with self.subTest(robe=robe):
                 paths = rigid.targets(robe, manifest)
                 ascii_paths = [path for path in paths if not mdl.binary(path.read_bytes())]
@@ -121,7 +121,8 @@ endnode
                 if name.removeprefix("rm_").removeprefix("rg_") == "coat_top":
                     self.assertEqual(0, model.uint(offset + 108) & 0x100, f"{path.name}/{name}")
                     checked += 1
-        self.assertEqual(33, checked)
+        # Includes the compiled mounted robe and newly supplied stock rider variants.
+        self.assertEqual(38, checked)
 
     def test_missing_constraints_fail_closed(self):
         with self.assertRaisesRegex(ValueError, "constraints"):
