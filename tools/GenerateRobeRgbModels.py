@@ -26,8 +26,10 @@ import RobeBuildCache as build_cache
 import RobeCompilationCheckpoint as checkpoint
 import RobeBankValidation as bank_validation
 import RobeAnimationBanks as banks
+import RobeSkeleton as skeleton
 import SharedRobeFamilies as shared
 import RobeSharingAudit as sharing
+from ModelLodAssets import ModelPath
 
 ROOT = Path(__file__).resolve().parents[1]
 TABLE = ROOT / "sw_2da" / "roberender.2da"
@@ -39,7 +41,7 @@ GENERATOR_INPUTS = ("GenerateRobeRgbModels.py", "RobeSkeleton.py", "RobePoseAudi
                     "RobeAnimations.py", "CompileModels.py", "ImportStockRobeTints.py",
                     "TintMapStockRobes.json", "GenerateTintMapAssets.py", "RobeBuildCache.py",
                     "SharedRobeFamilies.py", "RobeSharingAudit.py",
-                    "RobeCompilationCheckpoint.py", "RobeBankValidation.py")
+                    "RobeCompilationCheckpoint.py", "RobeBankValidation.py", "ModelLodAssets.py")
 PACKAGING_INPUTS = ("RobeAnimationBanks.py", "RepackRobeAnimationBanks.py")
 CATALOG_INPUTS = ("sw_2da/parts_robe.2da", "sw_2da/tintmap.2da", "hakbuilder.json")
 BODY_RESOURCE = re.compile(r"^p[fm][a-z](\d+)(?:_robe\d{3})?$", re.IGNORECASE)
@@ -53,7 +55,7 @@ def model_directory(name):
 
 
 def file_digest(path):
-    return content_digest(path, path.read_bytes())
+    return content_digest(path, ModelPath(path).read_bytes())
 
 
 def content_digest(path, data):
@@ -301,7 +303,7 @@ def check() -> list[str]:
     if not manifest.get("garment_body_motion_checks"):
         errors.append("Robe models lack validation that garment wearer joints are bound to body bones")
     for relative, expected in manifest["files"].items():
-        path = ROOT / relative
+        path = ModelPath(ROOT / relative)
         if not path.is_file() or file_digest(path) != expected:
             errors.append(f"Robe RGB input/output changed: {relative}; regenerate and validate")
         if path.is_file() and path.suffix.lower() == ".mdl" and path.stat().st_size >= banks.LIMIT_BYTES:
@@ -720,13 +722,27 @@ def main():
         sources[parent] = name_bridge(source_paths[key].read_bytes(), parent)
         animation_cache[key] = parent
     motion_records = []
+    # Neck skins index the wearer's node traversal. Spacers give every wearer of
+    # one base body the same body-node indices, so one neck alias serves them all.
+    unpadded_gaps = {}
+    for name in sorted(selected):
+        prefix, robe_id = PATTERN.fullmatch(name).groups()
+        unpadded, _ = families.body_root(name, prefix + str(id_map[int(robe_id)]),
+                                         animation_cache[families.members[name][0]])
+        unpadded_gaps[name] = skeleton.garment_gaps(unpadded.decode("latin1"))
+    spacers = skeleton.uniform_spacers(unpadded_gaps, lambda robe: robe[:3] + "0")
+    layouts = {}
     for name in sorted(selected):
         prefix, robe_id = PATTERN.fullmatch(name).groups()
         phenotype = id_map[int(robe_id)]
         generated = prefix + str(phenotype)
         base_name = prefix + "0"
         animation_parent = animation_cache[families.members[name][0]]
-        sources[generated], renamed_nodes[generated] = families.body_root(name, generated, animation_parent)
+        sources[generated], renamed_nodes[generated] = families.body_root(
+            name, generated, animation_parent, spacers[name])
+        layout = skeleton.garment_gaps(sources[generated].decode("latin1"))
+        if layouts.setdefault(base_name, layout) != layout:
+            raise ValueError(f"{generated}: body-node layout differs from other {base_name} wearers")
         if args.verify_existing_motion:
             previous = active.get(generated)
             if previous is None or prior.get(name) != phenotype:

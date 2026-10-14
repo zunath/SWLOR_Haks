@@ -3307,7 +3307,6 @@
     "model": "helm_223",
     "material": "helm_223",
     "layers": [
-      2,
       3,
       4,
       6
@@ -3315,11 +3314,11 @@
     "width": 512,
     "height": 512,
     "source": "sw_pt_helm/helm_223.plt",
-    "sourceSha256": "1632820bdb3dd66f74ea09256d796c1dfa1f842852c66024f5d9a2f5aca796de",
-    "layerSha256": "45fa2cdbadea7b9303daf31671c6121038cb40bc3b20f4fd3c5391399592106b",
-    "output": "sw_tint1/tm_849e7619d190d.dds",
-    "texture": "tm_849e7619d190d",
-    "shadeSha256": "1e0b4109b6528d7f75231c06d5d107ca1f6d3e9943e78c75b84cf13007e006c9"
+    "sourceSha256": "526a73a4e2a099712649db6644aa0eefcfa6df60560f85bcbcd16210b7290189",
+    "shadeSha256": "1e352124b2ecea6f581d96e0271230fdf325e414a16d3b43369ff0fcfe94bc3e",
+    "layerSha256": "cc108a080cb196299b116d4440f1fba18de981f983deeed1d459efebb0e12ed8",
+    "output": "sw_tint0/tm_850df0e59b77a.dds",
+    "texture": "tm_850df0e59b77a"
   },
   {
     "model": "helm_250",
@@ -38026,16 +38025,18 @@
     "material": "pfh0_neck022",
     "layers": [
       0,
-      3
+      2,
+      3,
+      6
     ],
-    "width": 512,
-    "height": 512,
+    "width": 1024,
+    "height": 1024,
     "source": "sw_pt_neck/pfh0_neck022.plt",
-    "sourceSha256": "1066f7d5ced921b7ebb94be8f0a5fbfa6431ce3821a7b8fa3bf28ffec6c2c572",
-    "layerSha256": "be0eb0c8ed6b212094f3e2dee4b44e41dc77130a646cc22672da9d85e6b1d956",
-    "output": "sw_tint0/tm_fe1c160f1c372.dds",
-    "texture": "tm_fe1c160f1c372",
-    "shadeSha256": "f47044ed72e3610d4cb9c47e560204754c0a1aeef4b1fb1e537755817564b81c"
+    "sourceSha256": "39b363b9de6ea6e59f25a50d544b6a2080ed4ceb4171e4b0a2e23686fdbaca7e",
+    "shadeSha256": "750a23c7738ec340effa94abf643e23ea2fa0b17ede7b597072b2a0684b64a02",
+    "layerSha256": "0ace44a257008b5611f1aecaa53205d861e3a98b2161101f7f5a4fc4463b5dc4",
+    "output": "sw_tint1/tm_1f6bedb5a9cad.dds",
+    "texture": "tm_1f6bedb5a9cad"
   },
   {
     "model": "pfh0_neck026",
@@ -86618,19 +86619,19 @@
     "material": "pmh0_head099",
     "layers": [
       0,
-      1,
+      2,
       4,
       5,
       9
     ],
-    "width": 256,
-    "height": 256,
+    "width": 1024,
+    "height": 512,
     "source": "sw_pt_head/pmh0_head099.plt",
-    "sourceSha256": "a140a300363e115050e56e6656e0cfdd5ed00789eebdb5bc2057495225968923",
-    "layerSha256": "8a81daa4ee4fab626de422fdf72bb701cbfd2fcf985c2b63149caaa42f758481",
-    "output": "sw_tint1/tm_f35f8911cd8b9.dds",
-    "texture": "tm_f35f8911cd8b9",
-    "shadeSha256": "34caf8eb5c5695710ca2cb335f3a51cc64df3478781ff719a3bc534e70c80862"
+    "sourceSha256": "424cf488e7a683e401b8328b2070604d6aa880671cc66ff0173c6d920d6fda61",
+    "shadeSha256": "f31dd238d66655521ac8ed48a06cb30221d1792c3b444f3765f98a38979ca929",
+    "layerSha256": "e6a7e6c2bd50add5ef328d6afea308f2234cdcfb0ab539a9ee95567a65f7a22e",
+    "output": "sw_tint2/tm_bcf1eb2de8aee.dds",
+    "texture": "tm_bcf1eb2de8aee"
   },
   {
     "model": "pmh0_head100",
@@ -94304,16 +94305,18 @@
     "material": "pmh0_neck022",
     "layers": [
       0,
-      3
+      2,
+      3,
+      6
     ],
-    "width": 512,
-    "height": 512,
+    "width": 1024,
+    "height": 1024,
     "source": "sw_pt_neck/pmh0_neck022.plt",
-    "sourceSha256": "1066f7d5ced921b7ebb94be8f0a5fbfa6431ce3821a7b8fa3bf28ffec6c2c572",
-    "layerSha256": "be0eb0c8ed6b212094f3e2dee4b44e41dc77130a646cc22672da9d85e6b1d956",
-    "output": "sw_tint0/tm_fe1c160f1c372.dds",
-    "texture": "tm_fe1c160f1c372",
-    "shadeSha256": "f47044ed72e3610d4cb9c47e560204754c0a1aeef4b1fb1e537755817564b81c"
+    "sourceSha256": "39b363b9de6ea6e59f25a50d544b6a2080ed4ceb4171e4b0a2e23686fdbaca7e",
+    "shadeSha256": "750a23c7738ec340effa94abf643e23ea2fa0b17ede7b597072b2a0684b64a02",
+    "layerSha256": "0ace44a257008b5611f1aecaa53205d861e3a98b2161101f7f5a4fc4463b5dc4",
+    "output": "sw_tint1/tm_1f6bedb5a9cad.dds",
+    "texture": "tm_1f6bedb5a9cad"
   },
   {
     "model": "pmh0_neck026",
@@ -120163,5 +120166,293 @@
     "layerSha256": "374708fff7719dd5979ec875d56cd2286f6d3cf7ec317a3b25632aab28ec37bb",
     "texture": "tm_5bac8ef7c8457",
     "output": "sw_tint1/tm_5bac8ef7c8457.dds"
+  },
+  {
+    "model": "pfd0_neck299",
+    "material": "pfd0_neck299",
+    "layers": [
+      0,
+      2,
+      3,
+      4
+    ],
+    "width": 512,
+    "height": 512,
+    "source": "sw_pt_neck/pfd0_neck299.plt",
+    "sourceSha256": "04f652be6d8d53e35954a151a25c827bb6b71536884029876ab098de8c647e48",
+    "shadeSha256": "4cf16de5d8f2833ac6e0a1fe805e30a032c7530b62cdff876e5bcb3e877e8ed2",
+    "layerSha256": "13889c311ea4401be5d4935da9953dfd03b0a22ca7b6352181c5d6681b9f23af",
+    "output": "sw_tint2/tm_83288b9cbc903.dds",
+    "texture": "tm_83288b9cbc903"
+  },
+  {
+    "model": "pfd0_neck300",
+    "material": "pfd0_neck300",
+    "layers": [
+      0,
+      2,
+      3,
+      4
+    ],
+    "width": 512,
+    "height": 512,
+    "source": "sw_pt_neck/pfd0_neck300.plt",
+    "sourceSha256": "920c5d7b2780fbc73210aa990d5ac85b15b7e5a7379516458199842ef2470e55",
+    "shadeSha256": "33f2e447ff7f9465cde874b7ee6869159a8cc0e2f27c932af2739d4a592a1731",
+    "layerSha256": "2c55f1c2642a5c8977120796a1afd912cb501409d456a0cbeab91391e96d139f",
+    "output": "sw_tint0/tm_f8812d3eef9de.dds",
+    "texture": "tm_f8812d3eef9de"
+  },
+  {
+    "model": "pfe0_neck299",
+    "material": "pfe0_neck299",
+    "layers": [
+      0,
+      2,
+      3,
+      4
+    ],
+    "width": 512,
+    "height": 512,
+    "source": "sw_pt_neck/pfe0_neck299.plt",
+    "sourceSha256": "04f652be6d8d53e35954a151a25c827bb6b71536884029876ab098de8c647e48",
+    "shadeSha256": "4cf16de5d8f2833ac6e0a1fe805e30a032c7530b62cdff876e5bcb3e877e8ed2",
+    "layerSha256": "13889c311ea4401be5d4935da9953dfd03b0a22ca7b6352181c5d6681b9f23af",
+    "output": "sw_tint2/tm_83288b9cbc903.dds",
+    "texture": "tm_83288b9cbc903"
+  },
+  {
+    "model": "pfe0_neck300",
+    "material": "pfe0_neck300",
+    "layers": [
+      0,
+      2,
+      3,
+      4
+    ],
+    "width": 512,
+    "height": 512,
+    "source": "sw_pt_neck/pfe0_neck300.plt",
+    "sourceSha256": "398dde194cb2c4c8f4444d6c94e5199e25bce51c2dcbeef0baa69178b3284d3e",
+    "shadeSha256": "0c54c86e28dadf5014a8798aa8b1ff74abb7819fc4bcb0c4fb505959805a6b3a",
+    "layerSha256": "2c55f1c2642a5c8977120796a1afd912cb501409d456a0cbeab91391e96d139f",
+    "output": "sw_tint1/tm_7bc53a6991772.dds",
+    "texture": "tm_7bc53a6991772"
+  },
+  {
+    "model": "pfh0_neck299",
+    "material": "pfh0_neck299",
+    "layers": [
+      0,
+      2,
+      3,
+      4
+    ],
+    "width": 512,
+    "height": 512,
+    "source": "sw_pt_neck/pfh0_neck299.plt",
+    "sourceSha256": "04f652be6d8d53e35954a151a25c827bb6b71536884029876ab098de8c647e48",
+    "shadeSha256": "4cf16de5d8f2833ac6e0a1fe805e30a032c7530b62cdff876e5bcb3e877e8ed2",
+    "layerSha256": "13889c311ea4401be5d4935da9953dfd03b0a22ca7b6352181c5d6681b9f23af",
+    "output": "sw_tint2/tm_83288b9cbc903.dds",
+    "texture": "tm_83288b9cbc903"
+  },
+  {
+    "model": "pfh0_neck300",
+    "material": "pfh0_neck300",
+    "layers": [
+      0,
+      2,
+      3,
+      4
+    ],
+    "width": 512,
+    "height": 512,
+    "source": "sw_pt_neck/pfh0_neck300.plt",
+    "sourceSha256": "398dde194cb2c4c8f4444d6c94e5199e25bce51c2dcbeef0baa69178b3284d3e",
+    "shadeSha256": "0c54c86e28dadf5014a8798aa8b1ff74abb7819fc4bcb0c4fb505959805a6b3a",
+    "layerSha256": "2c55f1c2642a5c8977120796a1afd912cb501409d456a0cbeab91391e96d139f",
+    "output": "sw_tint1/tm_7bc53a6991772.dds",
+    "texture": "tm_7bc53a6991772"
+  },
+  {
+    "model": "pfo0_neck299",
+    "material": "pfo0_neck299",
+    "layers": [
+      0,
+      2,
+      3,
+      4
+    ],
+    "width": 512,
+    "height": 512,
+    "source": "sw_pt_neck/pfo0_neck299.plt",
+    "sourceSha256": "b2802c4f55db58f305ab9d04ad078c0fe480cc8734d27e3527b930f028289771",
+    "shadeSha256": "d1ea510f164bad58a6104a7b4023e900253b0fa68507313d7af5fa97848e6996",
+    "layerSha256": "13889c311ea4401be5d4935da9953dfd03b0a22ca7b6352181c5d6681b9f23af",
+    "output": "sw_tint1/tm_d9920e20ef31c.dds",
+    "texture": "tm_d9920e20ef31c"
+  },
+  {
+    "model": "pfo0_neck300",
+    "material": "pfo0_neck300",
+    "layers": [
+      0,
+      2,
+      3,
+      4
+    ],
+    "width": 512,
+    "height": 512,
+    "source": "sw_pt_neck/pfo0_neck300.plt",
+    "sourceSha256": "01e3548be14e404c16542b098d515b0303d15a76507565db597a47e4d32f019e",
+    "shadeSha256": "9a9e77dd296fd6201790432d7b273f82eb3eda24c996356afc5f3d62981c4ca7",
+    "layerSha256": "2c55f1c2642a5c8977120796a1afd912cb501409d456a0cbeab91391e96d139f",
+    "output": "sw_tint1/tm_39d64d32b5365.dds",
+    "texture": "tm_39d64d32b5365"
+  },
+  {
+    "model": "pmd0_neck299",
+    "material": "pmd0_neck299",
+    "layers": [
+      0,
+      2,
+      3,
+      4
+    ],
+    "width": 512,
+    "height": 512,
+    "source": "sw_pt_neck/pmd0_neck299.plt",
+    "sourceSha256": "66641dc1d3ea209d0e62963f64308a2c1ef53239f4261068645ee090459a80a8",
+    "shadeSha256": "30def3b0907f1bc5bdbb125e13dfed93550a9f51347ee0ebc2cfd2590ec4f68d",
+    "layerSha256": "92956574a2d09cd6ced06ce24096f662178aa9144c5d51c6ff9570eea7c59e2a",
+    "output": "sw_tint2/tm_86a9742e99410.dds",
+    "texture": "tm_86a9742e99410"
+  },
+  {
+    "model": "pmd0_neck300",
+    "material": "pmd0_neck300",
+    "layers": [
+      0,
+      2,
+      3,
+      4
+    ],
+    "width": 512,
+    "height": 512,
+    "source": "sw_pt_neck/pmd0_neck300.plt",
+    "sourceSha256": "635ed6a39daaa0a2ffe4d3e008f986555c960d24cc10e4ba5d02b3383d631a40",
+    "shadeSha256": "5dd1750ba550275b8c8a59068e65d8f7bee86707e06b1a877ba2fe797735aaa5",
+    "layerSha256": "5ad6984f55d4599e7d5e9ce546391aa89a1931c79537e51dc8d0cb66fd5a4f8f",
+    "output": "sw_tint1/tm_9e6c8f61f02b9.dds",
+    "texture": "tm_9e6c8f61f02b9"
+  },
+  {
+    "model": "pme0_neck299",
+    "material": "pme0_neck299",
+    "layers": [
+      0,
+      2,
+      3,
+      4
+    ],
+    "width": 512,
+    "height": 512,
+    "source": "sw_pt_neck/pme0_neck299.plt",
+    "sourceSha256": "2763f7f2f9581a4eb279587edeca24900f660547d94162c0b05393bcbf7a1b9e",
+    "shadeSha256": "70746e6935a037e1618ae4f19f642fd8a2017247cba3ff6f8c553e87f308db3f",
+    "layerSha256": "92956574a2d09cd6ced06ce24096f662178aa9144c5d51c6ff9570eea7c59e2a",
+    "output": "sw_tint0/tm_b6213bf5aa669.dds",
+    "texture": "tm_b6213bf5aa669"
+  },
+  {
+    "model": "pme0_neck300",
+    "material": "pme0_neck300",
+    "layers": [
+      0,
+      2,
+      3,
+      4
+    ],
+    "width": 512,
+    "height": 512,
+    "source": "sw_pt_neck/pme0_neck300.plt",
+    "sourceSha256": "635ed6a39daaa0a2ffe4d3e008f986555c960d24cc10e4ba5d02b3383d631a40",
+    "shadeSha256": "5dd1750ba550275b8c8a59068e65d8f7bee86707e06b1a877ba2fe797735aaa5",
+    "layerSha256": "5ad6984f55d4599e7d5e9ce546391aa89a1931c79537e51dc8d0cb66fd5a4f8f",
+    "output": "sw_tint1/tm_9e6c8f61f02b9.dds",
+    "texture": "tm_9e6c8f61f02b9"
+  },
+  {
+    "model": "pmh0_neck299",
+    "material": "pmh0_neck299",
+    "layers": [
+      0,
+      2,
+      3,
+      4
+    ],
+    "width": 512,
+    "height": 512,
+    "source": "sw_pt_neck/pmh0_neck299.plt",
+    "sourceSha256": "2763f7f2f9581a4eb279587edeca24900f660547d94162c0b05393bcbf7a1b9e",
+    "shadeSha256": "70746e6935a037e1618ae4f19f642fd8a2017247cba3ff6f8c553e87f308db3f",
+    "layerSha256": "92956574a2d09cd6ced06ce24096f662178aa9144c5d51c6ff9570eea7c59e2a",
+    "output": "sw_tint0/tm_b6213bf5aa669.dds",
+    "texture": "tm_b6213bf5aa669"
+  },
+  {
+    "model": "pmh0_neck300",
+    "material": "pmh0_neck300",
+    "layers": [
+      0,
+      2,
+      3,
+      4
+    ],
+    "width": 512,
+    "height": 512,
+    "source": "sw_pt_neck/pmh0_neck300.plt",
+    "sourceSha256": "635ed6a39daaa0a2ffe4d3e008f986555c960d24cc10e4ba5d02b3383d631a40",
+    "shadeSha256": "5dd1750ba550275b8c8a59068e65d8f7bee86707e06b1a877ba2fe797735aaa5",
+    "layerSha256": "5ad6984f55d4599e7d5e9ce546391aa89a1931c79537e51dc8d0cb66fd5a4f8f",
+    "output": "sw_tint1/tm_9e6c8f61f02b9.dds",
+    "texture": "tm_9e6c8f61f02b9"
+  },
+  {
+    "model": "pmo0_neck299",
+    "material": "pmo0_neck299",
+    "layers": [
+      0,
+      2,
+      3,
+      4
+    ],
+    "width": 512,
+    "height": 512,
+    "source": "sw_pt_neck/pmo0_neck299.plt",
+    "sourceSha256": "2763f7f2f9581a4eb279587edeca24900f660547d94162c0b05393bcbf7a1b9e",
+    "shadeSha256": "70746e6935a037e1618ae4f19f642fd8a2017247cba3ff6f8c553e87f308db3f",
+    "layerSha256": "92956574a2d09cd6ced06ce24096f662178aa9144c5d51c6ff9570eea7c59e2a",
+    "output": "sw_tint0/tm_b6213bf5aa669.dds",
+    "texture": "tm_b6213bf5aa669"
+  },
+  {
+    "model": "pmo0_neck300",
+    "material": "pmo0_neck300",
+    "layers": [
+      0,
+      2,
+      3,
+      4
+    ],
+    "width": 512,
+    "height": 512,
+    "source": "sw_pt_neck/pmo0_neck300.plt",
+    "sourceSha256": "635ed6a39daaa0a2ffe4d3e008f986555c960d24cc10e4ba5d02b3383d631a40",
+    "shadeSha256": "5dd1750ba550275b8c8a59068e65d8f7bee86707e06b1a877ba2fe797735aaa5",
+    "layerSha256": "5ad6984f55d4599e7d5e9ce546391aa89a1931c79537e51dc8d0cb66fd5a4f8f",
+    "output": "sw_tint1/tm_9e6c8f61f02b9.dds",
+    "texture": "tm_9e6c8f61f02b9"
   }
 ]
