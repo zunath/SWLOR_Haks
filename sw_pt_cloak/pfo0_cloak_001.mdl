@@ -35,6 +35,7 @@ node trimesh rootdummy
   shininess 34
   center 0.0 5.06639e-006 0.0 
   bitmap pfo0_cloak_001
+  materialname cloaktint
   verts 8
     -0.0226925 0.0194507 -0.0194507
     -0.0226925 0.0194507 0.0194507
@@ -79,6 +80,7 @@ node trimesh torso_g
   shininess 1
   center -0.000101089 -0.2135 24.7154 
   bitmap pfo0_cloak_001
+  materialname cloaktint
   verts 47
     0.0 0.127656 0.236603
     -0.11243 0.0980401 0.0083674
@@ -298,6 +300,7 @@ node trimesh Cloak_g
   shininess 3
   center 0.0 7.88845 -5.35478 
   bitmap pfo0_cloak_001
+  materialname cloaktint
   verts 15
     0.0 0.273465 -0.168413
     0.132571 0.106367 0.0338438
@@ -352,6 +355,7 @@ node trimesh CR1_fg
   shininess 3
   center 3.17688 10.3838 -26.6454 
   bitmap pfo0_cloak_001
+  materialname cloaktint
   verts 6
     0.104959 0.0117666 -0.121718
     0.000444882 0.0119828 -0.0199097
@@ -386,6 +390,7 @@ node trimesh CR1_g
   shininess 3
   center 1.26604 -5.42912 -23.5843 
   bitmap pfo0_cloak_001
+  materialname cloaktint
   verts 5
     -0.0796383 -0.106708 -0.0618952
     0.00044488 0.0108935 0.000310443
@@ -418,6 +423,7 @@ node trimesh CR2_g
   shininess 3
   center 0.71633 5.88845 -16.2417 
   bitmap pfo0_cloak_001
+  materialname cloaktint
   verts 4
     -0.0724317 -0.00208781 -0.00483774
     0.0768816 0.127865 0.0236879
@@ -448,6 +454,7 @@ node trimesh CR3_g
   shininess 3
   center 1.58506 7.35802 -24.0313 
   bitmap pfo0_cloak_001
+  materialname cloaktint
   verts 4
     0.1008 0.168714 -0.472712
     0.0675325 0.140412 0.00394506
@@ -478,6 +485,7 @@ node trimesh CR4_g
   shininess 3
   center 1.45596 9.75077 -11.5813 
   bitmap pfo0_cloak_001
+  materialname cloaktint
   verts 4
     0.0849832 0.204994 -0.233345
     -0.0310023 -0.00997862 -0.242347
@@ -508,6 +516,7 @@ node trimesh cloak_shR
   shininess 3
   center 6.12638 1.9215 -4.6689 
   bitmap pfo0_cloak_001
+  materialname cloaktint
   verts 6
     -0.0423774 -0.0260357 0.00949394
     0.0848218 -0.0910958 -0.102872
@@ -542,6 +551,7 @@ node trimesh cloak_shL
   shininess 3
   center -6.12638 1.9215 -4.66927 
   bitmap pfo0_cloak_001
+  materialname cloaktint
   verts 6
     -0.164905 0.013906 -0.0337591
     0.0423774 -0.0260357 0.00949052
@@ -576,6 +586,7 @@ node trimesh CM1_g
   shininess 3
   center -0.00025177 11.3545 -20.1975 
   bitmap pfo0_cloak_001
+  materialname cloaktint
   verts 22
     0.291402 0.245129 -0.031124
     0.0 0.108973 0.0560009
@@ -656,6 +667,7 @@ node trimesh CM2_g
   shininess 3
   center 0.0 4.82076 -16.1716 
   bitmap pfo0_cloak_001
+  materialname cloaktint
   verts 32
     0.395028 0.122342 0.00952259
     0.0 0.0240063 0.00894801
@@ -748,6 +760,7 @@ node trimesh CM3_g
   shininess 3
   center 4.76837e-005 6.98329 -23.8768 
   bitmap pfo0_cloak_001
+  materialname cloaktint
   verts 32
     0.316743 0.0129604 -0.479786
     0.271386 0.0317239 0.000889029
@@ -840,6 +853,7 @@ node trimesh CM4_g
   shininess 3
   center 0.0 10.3229 -9.13018 
   bitmap pfo0_cloak_001
+  materialname cloaktint
   verts 21
     0.0 -0.0147912 -0.242506
     0.341605 0.0319843 -0.238144
@@ -911,6 +925,7 @@ node trimesh CL1_fg
   shininess 3
   center -3.17688 10.3838 -26.6454 
   bitmap pfo0_cloak_001
+  materialname cloaktint
   verts 6
     -0.104959 0.0117666 -0.121718
     0.0414215 0.168345 -0.0726522
@@ -945,6 +960,7 @@ node trimesh CL1_g
   shininess 3
   center -1.26604 -5.42912 -23.5843 
   bitmap pfo0_cloak_001
+  materialname cloaktint
   verts 5
     -0.104959 0.0106969 -0.0913164
     -0.102579 0.0104764 -0.443471
@@ -977,6 +993,7 @@ node trimesh CL2_g
   shininess 3
   center -0.716335 5.88845 -16.2417 
   bitmap pfo0_cloak_001
+  materialname cloaktint
   verts 4
     0.0724317 -0.00208781 -0.00483769
     -0.0768816 0.127865 0.0236879
@@ -1007,6 +1024,7 @@ node trimesh CL3_g
   shininess 3
   center -1.58506 7.35804 -24.0312 
   bitmap pfo0_cloak_001
+  materialname cloaktint
   verts 4
     -0.1008 0.168714 -0.472712
     0.0237466 -0.0215532 -0.48457
@@ -1037,6 +1055,7 @@ node trimesh CL4_g
   shininess 3
   center -1.45597 9.75077 -11.5813 
   bitmap pfo0_cloak_001
+  materialname cloaktint
   verts 4
     -0.0686831 0.190845 0.01072
     0.055864 0.000577513 -0.00113915
@@ -1057,6 +1076,7 @@ node skin Cloak_Skin
   specular 0.0 0.0 0.0 
   shininess 0.0
   bitmap pfo0_cloak_001
+  materialname cloaktint
   verts 225
     0.0115928 0.105319 0.404327
     0.00590529 -0.186844 0.512438
