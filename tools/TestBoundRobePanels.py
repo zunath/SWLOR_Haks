@@ -73,7 +73,7 @@ endnode
                 self.assertTrue(all(row == [bone, 1.0] for row in geometry[name]["weights"]),
                                 f"{path.name}/{name}")
                 checked += 1
-        self.assertEqual(48, checked, "Three coverings in every retained native and RGB body variant")
+        self.assertEqual(72, checked, "Three coverings in every native and RGB body variant")
 
     def test_compiled_coverings_keep_their_position_through_movement_skills_and_idle(self):
         manifest = json.loads(rigid.MANIFEST.read_text())
@@ -212,12 +212,22 @@ donemodel rig
 
 
 class CatalogBoundRobePanelTests(unittest.TestCase):
+    def test_legacy_ascii_hat_is_compiled_and_bound_without_changing_its_scale(self):
+        data = (bound.ROOT / "sw_pt_robe/pmh22_robe254.mdl").read_bytes()
+        self.assertTrue(mdl.binary(data))
+        model = poses.Model(data, False)
+        self.assertEqual({"head_g"}, set(model.skin_bindings()["hat"]))
+        # Its exported local scale survives; the vertex scale is baked into
+        # the skin so the rendered world shape is unchanged.
+        hat = next(node for node in model.nodes if node[0] == "hat")
+        self.assertAlmostEqual(.925926, hat[3][36][1][0][0], delta=1e-6)
+
     def test_every_catalog_model_has_no_unbound_static_attachments(self):
         manifest = json.loads(bound.MANIFEST.read_text())
         active = tint.find_active_models()
         parts = bound.AnimationParts(lambda name: active[name].read_bytes() if name in active else None)
         paths = bound.catalog_targets(manifest)
-        self.assertGreater(len(paths), 5759, "Audit retained native robes and all RGB roots")
+        self.assertGreater(len(paths), 7000, "Audit both native robes and all RGB roots")
         failures = []
         for path in paths:
             data = path.read_bytes()
@@ -258,8 +268,8 @@ class CatalogBoundRobePanelTests(unittest.TestCase):
                 bound.validate_panel_poses(data, data, bindings, [clip])
             checked_models += 1
             checked_panels += len(bindings)
-        self.assertGreaterEqual(checked_models, 446)
-        self.assertGreaterEqual(checked_panels, 822)
+        self.assertGreaterEqual(checked_models, 664)
+        self.assertGreaterEqual(checked_panels, 1200)
 
 
 if __name__ == "__main__":
