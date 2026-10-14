@@ -24834,8 +24834,388 @@
       "text": "Soul Ascension Burst"
     },
     {
+      "id": 6208,
+      "text": "Challenge"
+    },
+    {
+      "id": 6209,
+      "text": "Chain Lightning"
+    },
+    {
+      "id": 6210,
+      "text": "Hurls lightning at a target that arcs to up to two nearby enemies, dealing Electrical damage and inflicting Shock."
+    },
+    {
+      "id": 6211,
+      "text": "Blood Siphon"
+    },
+    {
+      "id": 6212,
+      "text": "Drains a target's vitality, dealing Physical damage, inflicting Weakened, and healing the user for half the damage dealt."
+    },
+    {
       "id": 6213,
       "text": "While active, your hostile auto-attacks deal Force damage instead of their normal damage type, including elemental damage, and cost 2 FP each."
+    },
+    {
+      "id": 6214,
+      "text": "Shadowflow"
+    },
+    {
+      "id": 6215,
+      "text": "Power Glove"
+    },
+    {
+      "id": 6216,
+      "text": "An equipped hand-to-hand weapon used with the Unarmed skill. Power Gloves, vibroknucklers, blastknuckles and shock boxing gloves share the same weapon rules. Appearance choices, including an invisible bare-fist appearance, are cosmetic. Armor-slot gloves remain separate equipment."
+    },
+    {
+      "id": 6217,
+      "text": "Jab I"
+    },
+    {
+      "id": 6218,
+      "text": "Deals weapon DMG + 8. On hit, grants Opening against this enemy for 4 seconds. Opening gives +3 ordinary Unarmed ACC and sets up either follow-up attack."
+    },
+    {
+      "id": 6219,
+      "text": "Jab II"
+    },
+    {
+      "id": 6220,
+      "text": "Deals weapon DMG + 18. On hit, grants Opening against this enemy for 4 seconds. Opening gives +3 ordinary Unarmed ACC and sets up either follow-up attack."
+    },
+    {
+      "id": 6221,
+      "text": "Jab III"
+    },
+    {
+      "id": 6222,
+      "text": "Deals weapon DMG + 28. On hit, grants Opening against this enemy for 4 seconds. Opening gives +3 ordinary Unarmed ACC and sets up either follow-up attack."
+    },
+    {
+      "id": 6223,
+      "text": "Jab IV"
+    },
+    {
+      "id": 6224,
+      "text": "Deals weapon DMG + 38. On hit, grants Opening against this enemy for 4 seconds. Opening gives +3 ordinary Unarmed ACC and sets up either follow-up attack."
+    },
+    {
+      "id": 6225,
+      "text": "Flowing Form"
+    },
+    {
+      "id": 6226,
+      "text": "Extends Opening and Finish from 4 to 6 seconds. During Opening, your first ordinary Unarmed attempt against that enemy gains +4/8/12/16 power by Jab rank. One bonus per opener, consumed even on a miss."
+    },
+    {
+      "id": 6227,
+      "text": "Palm Strike I"
+    },
+    {
+      "id": 6228,
+      "text": "Deals weapon DMG + 12. Spends Opening at activation. If the sequenced strike lands, grants Finish for 4 seconds; Finish gives +3 ordinary Unarmed ACC."
+    },
+    {
+      "id": 6229,
+      "text": "Palm Strike II"
+    },
+    {
+      "id": 6230,
+      "text": "Deals weapon DMG + 24. Spends Opening at activation. If the sequenced strike lands, grants Finish for 4 seconds; Finish gives +3 ordinary Unarmed ACC."
+    },
+    {
+      "id": 6231,
+      "text": "Palm Strike III"
+    },
+    {
+      "id": 6232,
+      "text": "Deals weapon DMG + 36. Spends Opening at activation. If the sequenced strike lands, grants Finish for 4 seconds; Finish gives +3 ordinary Unarmed ACC."
+    },
+    {
+      "id": 6233,
+      "text": "Practiced Form"
+    },
+    {
+      "id": 6234,
+      "text": "Adds +4 total power to Palm Strike spending Opening, or a finisher spending Opening/Finish. Applied once per cast; split evenly between Finishing Combination's two impacts."
+    },
+    {
+      "id": 6235,
+      "text": "Measured Technique"
+    },
+    {
+      "id": 6236,
+      "text": "Gain +5 ACC when Palm Strike spends Opening, Finishing Combination spends Opening/Finish, or Perfect Form spends Finish."
+    },
+    {
+      "id": 6237,
+      "text": "Finishing Combination I"
+    },
+    {
+      "id": 6238,
+      "text": "Two strikes at one enemy, each floor(0.50 x weapon DMG) + 8. Spend Opening for +3 power per strike, or Finish for +6 per strike."
+    },
+    {
+      "id": 6239,
+      "text": "Finishing Combination II"
+    },
+    {
+      "id": 6240,
+      "text": "Two strikes at one enemy, each floor(0.50 x weapon DMG) + 14. Spend Opening for +4 power per strike, or Finish for +8 per strike."
+    },
+    {
+      "id": 6241,
+      "text": "Flow Stance"
+    },
+    {
+      "id": 6242,
+      "text": "While active, gain +10% Haste and +8% Evasion, but ordinary Unarmed damage is reduced by 20%. Activated damage is unchanged."
+    },
+    {
+      "id": 6243,
+      "text": "Controlled Breathing"
+    },
+    {
+      "id": 6244,
+      "text": "Finishing Combination spending Opening/Finish, or Perfect Form spending Finish, restores 2 STM if any hit lands. Once per cast, no more than STM paid; shares a 12-second refund cooldown with Catch Your Breath."
+    },
+    {
+      "id": 6245,
+      "text": "Rooted Technique"
+    },
+    {
+      "id": 6246,
+      "text": "Gain +15 Mobility Resistance while using the valid Combat Knuckles grip."
+    },
+    {
+      "id": 6247,
+      "text": "Perfect Form"
+    },
+    {
+      "id": 6248,
+      "text": "Deals weapon DMG + 45 to one enemy. Spending Finish adds +15 power. Practiced Form and Measured Technique apply only with Finish."
+    },
+    {
+      "id": 6249,
+      "text": "Dirty Jab I"
+    },
+    {
+      "id": 6250,
+      "text": "Deals weapon DMG + 8. On hit, applies your Rattled for 6 seconds, reducing this enemy's ordinary weapon ACC by 10."
+    },
+    {
+      "id": 6251,
+      "text": "Dirty Jab II"
+    },
+    {
+      "id": 6252,
+      "text": "Deals weapon DMG + 18. On hit, applies your Rattled for 6 seconds, reducing this enemy's ordinary weapon ACC by 10."
+    },
+    {
+      "id": 6253,
+      "text": "Dirty Jab III"
+    },
+    {
+      "id": 6254,
+      "text": "Deals weapon DMG + 28. On hit, applies your Rattled for 6 seconds, reducing this enemy's ordinary weapon ACC by 10."
+    },
+    {
+      "id": 6255,
+      "text": "Dirty Jab IV"
+    },
+    {
+      "id": 6256,
+      "text": "Deals weapon DMG + 38. On hit, applies your Rattled for 6 seconds, reducing this enemy's ordinary weapon ACC by 10."
+    },
+    {
+      "id": 6257,
+      "text": "Dirty Fighting"
+    },
+    {
+      "id": 6258,
+      "text": "Extends your Rattled from 6 to 8 seconds. Gain +3 ordinary Unarmed ACC against the enemy affected by your Rattled."
+    },
+    {
+      "id": 6259,
+      "text": "Uppercut I"
+    },
+    {
+      "id": 6260,
+      "text": "One committed strike, weapon DMG + 12. Spending your Rattled against its enemy adds +8 power."
+    },
+    {
+      "id": 6261,
+      "text": "Uppercut II"
+    },
+    {
+      "id": 6262,
+      "text": "One committed strike, weapon DMG + 24. Spending your Rattled against its enemy adds +12 power."
+    },
+    {
+      "id": 6263,
+      "text": "Uppercut III"
+    },
+    {
+      "id": 6264,
+      "text": "One committed strike, weapon DMG + 36. Spending your Rattled against its enemy adds +16 power."
+    },
+    {
+      "id": 6265,
+      "text": "Heavy Blows"
+    },
+    {
+      "id": 6266,
+      "text": "Uppercut or Haymaker spending your Rattled gains +4 total power for that activation."
+    },
+    {
+      "id": 6267,
+      "text": "Hard Knocks"
+    },
+    {
+      "id": 6268,
+      "text": "Gain +15 Trauma Resistance while using the valid Combat Knuckles grip."
+    },
+    {
+      "id": 6269,
+      "text": "Low Kick I"
+    },
+    {
+      "id": 6270,
+      "text": "Deals weapon DMG + 16. On hit, this enemy deals 10% less ordinary physical damage for 6 seconds."
+    },
+    {
+      "id": 6271,
+      "text": "Low Kick II"
+    },
+    {
+      "id": 6272,
+      "text": "Deals weapon DMG + 30. On hit, this enemy deals 10% less ordinary physical damage for 8 seconds."
+    },
+    {
+      "id": 6273,
+      "text": "Bruiser Stance"
+    },
+    {
+      "id": 6274,
+      "text": "While active, gain +10% Physical Defense, but ordinary Unarmed damage is reduced by 5%. Activated damage is unchanged."
+    },
+    {
+      "id": 6275,
+      "text": "Catch Your Breath"
+    },
+    {
+      "id": 6276,
+      "text": "A Rattled spender landing its hit restores 2 STM once per cast, no more than STM paid. Shares a 12-second refund cooldown with Controlled Breathing."
+    },
+    {
+      "id": 6277,
+      "text": "Payback"
+    },
+    {
+      "id": 6278,
+      "text": "Positive direct hostile HP damage makes your next positive-cost Brawler activation cost 2 less STM. One charge, lasts 8 seconds, triggers at most once per 18 seconds."
+    },
+    {
+      "id": 6279,
+      "text": "Haymaker"
+    },
+    {
+      "id": 6280,
+      "text": "Deals weapon DMG + 40 to one enemy. Spending your Rattled against its enemy adds +20 power; Heavy Blows also applies."
+    },
+    {
+      "id": 6281,
+      "text": "Unarmed"
+    },
+    {
+      "id": 6282,
+      "text": "Rattled"
+    },
+    {
+      "id": 6283,
+      "text": "Low Kick"
+    },
+    {
+      "id": 6284,
+      "text": "Flow Stance"
+    },
+    {
+      "id": 6285,
+      "text": "Bruiser Stance"
+    },
+    {
+      "id": 6286,
+      "text": "Opening"
+    },
+    {
+      "id": 6287,
+      "text": "Finish"
+    },
+    {
+      "id": 6288,
+      "text": "Payback"
+    },
+    {
+      "id": 6289,
+      "text": "Slip Away"
+    },
+    {
+      "id": 6290,
+      "text": "Press Forward"
+    },
+    {
+      "id": 6291,
+      "text": "Retaliation"
+    },
+    {
+      "id": 6292,
+      "text": "While active, a landed Finishing Combination spending Opening grants Slip Away: +20% Evasion and +15% movement speed for 6 seconds. A landed Finishing Combination or Perfect Form spending Finish instead grants Press Forward: +15% Haste for 6 seconds. These windows are mutually exclusive and share a 12-second trigger cooldown. Stance, equipment, combat or enemy changes clear the window. No ordinary damage penalty."
+    },
+    {
+      "id": 6293,
+      "text": "Increases Physical Defense by 10%. A landed Dirty Jab braces you against its enemy for 4 seconds. The first direct hostile hit from that enemy that damages real HP arms Retaliation: +8 total power on the next Uppercut or Haymaker spending your own Rattled before it expires. One grant per opener, with an 18-second grant cooldown. The bonus is spent on paid activation, including a miss. Stance, equipment, combat or enemy changes clear the bonus. No ordinary damage penalty."
+    },
+    {
+      "id": 6294,
+      "text": "Gain +15 Mobility Resistance while using the valid Power Gloves grip."
+    },
+    {
+      "id": 6295,
+      "text": "Gain +15 Trauma Resistance while using the valid Power Gloves grip."
+    },
+    {
+      "id": 6296,
+      "text": "Practiced Form II"
+    },
+    {
+      "id": 6297,
+      "text": "Adds +8 total power to Palm Strike spending Opening, or a finisher spending Opening/Finish. Applied once per cast; split evenly between Finishing Combination's two impacts."
+    },
+    {
+      "id": 6298,
+      "text": "Practiced Form III"
+    },
+    {
+      "id": 6299,
+      "text": "Adds +12 total power to Palm Strike spending Opening, or a finisher spending Opening/Finish. Applied once per cast; split evenly between Finishing Combination's two impacts."
+    },
+    {
+      "id": 6300,
+      "text": "Heavy Blows II"
+    },
+    {
+      "id": 6301,
+      "text": "Uppercut or Haymaker spending your Rattled gains +8 total power for that activation."
+    },
+    {
+      "id": 6302,
+      "text": "Heavy Blows III"
+    },
+    {
+      "id": 6303,
+      "text": "Uppercut or Haymaker spending your Rattled gains +12 total power for that activation."
     },
     {
       "id": 20401,
@@ -89332,27 +89712,6 @@
     {
       "id": 192751,
       "text": "Bonebreaker Instinct"
-    },
-    {"id": 6208, "text": "Challenge"},
-    {
-      "id": 6209,
-      "text": "Chain Lightning"
-    },
-    {
-      "id": 6210,
-      "text": "Hurls lightning at a target that arcs to up to two nearby enemies, dealing Electrical damage and inflicting Shock."
-    },
-    {
-      "id": 6211,
-      "text": "Blood Siphon"
-    },
-    {
-      "id": 6212,
-      "text": "Drains a target's vitality, dealing Physical damage, inflicting Weakened, and healing the user for half the damage dealt."
-    },
-    {
-      "id": 6214,
-      "text": "Shadowflow"
     }
   ]
 }
