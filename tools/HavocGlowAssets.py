@@ -13,7 +13,7 @@ def model_rows(models, read_bindings):
     """Advertise Leather 2 only for real, explicit Havoc overlay bindings."""
     rows = []
     for model, path in sorted(models.items()):
-        if not re.fullmatch(r'p[mf][ahdego]0_fore[lr]282', model):
+        if not re.fullmatch(r'p[mf][hdeo]0_fore[lr]282', model):
             continue
         for bitmap, material in read_bindings(path):
             if material in EMISSIVE_TINT_LAYERS:

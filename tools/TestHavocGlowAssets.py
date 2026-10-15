@@ -27,7 +27,7 @@ class HavocGlowTests(unittest.TestCase):
             self.assertEqual(tint.tint_fragment_shader(name,['texture1 normal']),tint.TINT_MAPPED_FRAGMENT_SHADER)
 
     def test_overlay_catalog_requires_explicit_binding_and_havoc_slot(self):
-        models={name:Path(name) for name in ('pmh0_forer282','pfh0_forel282','pmo0_forer281','pmh0_chest316')}
+        models={name:Path(name) for name in ('pmh0_forer282','pfh0_forel282','pmo0_forer281','pmh0_chest316','pma0_forer282','pfg0_forel282')}
         def bindings(path):
             return [('troopbracer',None)] if path.name=='pfh0_forel282' else [('troopbracer','troopbracer')]*2
         self.assertEqual(glow.model_rows(models,bindings),[('pmh0_forer282','troopbracer',(7,))])
