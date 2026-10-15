@@ -26,6 +26,7 @@ from pathlib import Path
 from ModelLodAssets import ModelPath, model_paths
 
 import numpy as np
+import HavocGlowAssets
 
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
@@ -684,6 +685,8 @@ def tint_fragment_shader(
     source_material: str,
     lines: list[str],
 ) -> str:
+    if source_material.lower() in HavocGlowAssets.MAPPED_GLOW_MATERIALS:
+        return HavocGlowAssets.MAPPED_GLOW_SHADER
     authored_lines = source_shader_config_lines(source_material)
     if (
         source_material.lower() in AUTHORED_HAIR_MATERIALS
@@ -1819,6 +1822,7 @@ def build_model_material_plan(
         )
     }
 
+    rows.update(HavocGlowAssets.model_rows(models, read_model_material_bindings))
     _NATIVE_ATTACHMENT_MATERIALS = native_attachment_materials
     _NATIVE_ATTACHMENT_SOURCES = native_attachment_sources
     return (
@@ -2339,6 +2343,9 @@ def tint_material_text(
         re.IGNORECASE,
     )
     lines = [line for line in original_lines if not replaced.match(line)]
+    if source_material.lower() in HavocGlowAssets.MAPPED_GLOW_MATERIALS:
+        lines = [line for line in lines if not re.match(r'^\s*parameter\s+float\s+glowLayer\b', line, re.IGNORECASE)]
+        lines.append('parameter float glowLayer 7.0')
     if texture9_alpha:
         lines = [line for line in lines if not re.match(r"^\s*texture3\b", line, re.IGNORECASE)]
 
@@ -2413,6 +2420,7 @@ def is_generated_pair(model: str, texture: str, width: int, height: int, dds_pat
                 TINT_FRAGMENT_SHADER,
                 TINT_MAPPED_FRAGMENT_SHADER,
                 TINT_HAIR_MAPPED_FRAGMENT_SHADER,
+                HavocGlowAssets.MAPPED_GLOW_SHADER,
             )
         )
         and f"texture7 {texture}" in mtr
@@ -3518,6 +3526,7 @@ def check_tint_mtr_structure(path: Path) -> list[str]:
         f"customshaderfs {TINT_FRAGMENT_SHADER}",
         f"customshaderfs {TINT_MAPPED_FRAGMENT_SHADER}",
         f"customshaderfs {TINT_HAIR_MAPPED_FRAGMENT_SHADER}",
+        f"customshaderfs {HavocGlowAssets.MAPPED_GLOW_SHADER}",
     }:
         errors.append(f"unexpected tint fragment shader '{fragment_shaders[0]}'")
 
@@ -3527,6 +3536,7 @@ def check_tint_mtr_structure(path: Path) -> list[str]:
         if mapped_shader and fragment_shader not in {
             TINT_MAPPED_FRAGMENT_SHADER,
             TINT_HAIR_MAPPED_FRAGMENT_SHADER,
+            HavocGlowAssets.MAPPED_GLOW_SHADER,
         }:
             errors.append("mapped tint material does not use the mapped tint shader")
         elif not mapped_shader and fragment_shader != TINT_FRAGMENT_SHADER:
@@ -3601,6 +3611,7 @@ def audit() -> None:
     entries = load_source_manifest()
     import GenerateAuthoredDiffuseTintMaps
     errors: list[str] = GenerateAuthoredDiffuseTintMaps.validate(entries)
+    errors.extend(HavocGlowAssets.validate(REPOSITORY_ROOT))
     if (REPOSITORY_ROOT / "sw_2da" / "roberender.2da").is_file():
         import GenerateRobeRgbModels
         errors.extend(GenerateRobeRgbModels.check())
@@ -3884,7 +3895,10 @@ def audit() -> None:
         if len(material) > 16 or not material.isascii():
             errors.append(f"{model}: invalid material resref '{material}' in tint catalog")
         source = active_aliases.get(material, material)
-        if source not in entries:
+        if material in HavocGlowAssets.EMISSIVE_TINT_LAYERS:
+            if layers != HavocGlowAssets.EMISSIVE_TINT_LAYERS[material]:
+                errors.append(f'{model}: incorrect emissive tint layers for {material}')
+        elif source not in entries:
             errors.append(f"{model}: tint catalog references unknown material '{material}'")
         elif layers != entries[source]["layers"]:
             errors.append(f"{model}: tint catalog layer list disagrees with material '{material}'")
@@ -3913,6 +3927,10 @@ def audit() -> None:
                 errors.append(f"tintmap.2da contains duplicate model/material row {model}/{material}")
             seen_output_pairs.add(pair)
             source = active_aliases.get(material, material)
+            if material in HavocGlowAssets.EMISSIVE_TINT_LAYERS:
+                if columns[3] != ','.join(map(str, HavocGlowAssets.EMISSIVE_TINT_LAYERS[material])):
+                    errors.append(f'tintmap.2da row {physical_index}: incorrect emissive tint layers')
+                continue
             if source not in entries:
                 errors.append(
                     f"tintmap.2da compatibility row {physical_index} references unknown material '{material}'"

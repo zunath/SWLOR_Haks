@@ -6,7 +6,7 @@ texture3 null
 texture4 null
 texture5 pmh0_foreR282_I
 customshaderVS vslit_sm_nm
-customshaderFS fs_plt_tinter_nm
+customshaderFS fs_hav_emit
 texture0 plt_white
 texture7 tm_1187c61b1b2ef
 texture10 plt_palette
@@ -22,3 +22,5 @@ parameter float rowLeath1 0.429932
 parameter float rowLeath2 0.429932
 parameter float rowTat1 0.515869
 parameter float rowTat2 0.515869
+
+parameter float glowLayer 7.0

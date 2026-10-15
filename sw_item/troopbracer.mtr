@@ -1,9 +1,17 @@
-
-renderhint NormalAndSpecMapped
-
-// Textures
-texture1 null
-texture2 null
-texture3 null
-texture4 null
-texture5 troopbracer
+customshaderVS vslit
+customshaderFS fs_hav_dev
+texture0 troopbracer
+texture6 havbrac_glow
+texture10 plt_palette
+parameter float glowLayer 7.0
+parameter float glowOverlay 1.0
+parameter float rowSkin 0.000244
+parameter float rowHair 0.086182
+parameter float rowMetal1 0.172119
+parameter float rowMetal2 0.258057
+parameter float rowCloth1 0.343994
+parameter float rowCloth2 0.343994
+parameter float rowLeath1 0.429932
+parameter float rowLeath2 0.429932
+parameter float rowTat1 0.515869
+parameter float rowTat2 0.515869
