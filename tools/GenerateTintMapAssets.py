@@ -23,6 +23,7 @@ import struct
 import sys
 from collections.abc import Callable
 from pathlib import Path
+from ModelLodAssets import ModelPath, model_paths
 
 import numpy as np
 
@@ -745,7 +746,7 @@ def find_active_models() -> dict[str, Path]:
     # Later HAKs have higher resource priority, so later paths replace earlier ones.
     for directory in hak_directories():
         current_hak: dict[str, Path] = {}
-        for path in directory.glob("*.mdl"):
+        for path in model_paths(directory):
             model = path.stem.lower()
             if model in current_hak:
                 raise RuntimeError(
@@ -780,6 +781,10 @@ def find_tint_source_models() -> dict[str, Path]:
     # and are audited by GenerateHelmetRgbModels. Rebinding them as skin-owned heads loses
     # item dyes.
     active = find_active_models()
+    neck_manifest = REPOSITORY_ROOT / "tools" / "NeckModels.json"
+    if neck_manifest.is_file():
+        # These aliases keep their source neck's material scopes and dyes.
+        derived.update(json.loads(neck_manifest.read_text())["aliases"])
     for name in active:
         match = re.fullmatch(r"p[fm][a-z]0_head1(\d{3})", name)
         if match and f"helm_{match[1]}" in active:
