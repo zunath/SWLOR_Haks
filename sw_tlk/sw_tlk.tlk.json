@@ -13519,11 +13519,11 @@
     },
     {
       "id": 3379,
-      "text": "Revives an unconscious target with 1 HP. Consumes medical supplies."
+      "text": "Revives an unconscious target with 1 HP. Consumes medical supplies. Taking damage interrupts the cast. Fails while a hostile player is within 20m, or, after a player kill, until your party near the target has gone 15 seconds without taking damage. A player can be revived mid-fight at most once every 5 minutes."
     },
     {
       "id": 3380,
-      "text": "Revives an unconscious target with 20% HP plus WIL scaling. Consumes medical supplies."
+      "text": "Revives an unconscious target with 20% HP plus WIL scaling. Consumes medical supplies. Taking damage interrupts the cast. Fails while a hostile player is within 20m, or, after a player kill, until your party near the target has gone 15 seconds without taking damage. A player can be revived mid-fight at most once every 5 minutes."
     },
     {
       "id": 3381,
@@ -15563,7 +15563,7 @@
     },
     {
       "id": 3890,
-      "text": "After you spend HP on a Heavy Vibroblade Offense ability, restore 15% of maximum STM, increased by 1 percentage point per MGT to a maximum of 35%. This can trigger once every 30 seconds."
+      "text": "After you spend HP on a Heavy Vibroblade Offense ability, restore 15% of maximum STM, increased by 1 percentage point per MGT to a maximum of 35%, reduced in proportion when less than the full HP cost could be paid. This can trigger once every 30 seconds."
     },
     {
       "id": 3891,
@@ -16039,7 +16039,7 @@
     },
     {
       "id": 4009,
-      "text": "Releases a 5m wave of focused light, dealing 22 force DMG plus WIL scaling to enemies and removing one minor negative effect (Bleed, Poison, or Hobble) from allies within 5m."
+      "text": "Releases a 5m wave of focused light, dealing 22 force DMG plus WIL scaling to enemies. Allies within 5m heal for 8% of maximum HP plus WIL scaling and lose one minor negative effect (Bleed, Poison, or Hobble)."
     },
     {
       "id": 4010,
@@ -16435,7 +16435,7 @@
     },
     {
       "id": 4108,
-      "text": "HP restoration used on you is 20% more effective. 10% chance to restore 8 STM when healed. Chance increases by 1% per MGT. (Maximum 40%)"
+      "text": "HP restoration used on you is 20% more effective. Instant ability heals on you have a 10% chance to restore 8 STM, increased by 1% per MGT (Maximum 40%). This can trigger once every 6 seconds."
     },
     {
       "id": 4109,
@@ -19311,7 +19311,7 @@
     },
     {
       "id": 4827,
-      "text": "While active, Saberstaff abilities restore FP equal to 25% of STM spent and Force abilities restore STM equal to 25% of FP spent, but Attack and Force Attack are reduced by 10%."
+      "text": "While active, Saberstaff abilities restore FP equal to 40% of STM spent and Force abilities restore STM equal to 40% of FP spent, but Attack and Force Attack are reduced by 10%."
     },
     {
       "id": 4828,
@@ -19367,7 +19367,7 @@
     },
     {
       "id": 4841,
-      "text": "Saberstaff abilities that spend STM restore FP equal to 35% of the STM cost. Force abilities that spend FP restore STM equal to 35% of the FP cost."
+      "text": "Saberstaff abilities that spend STM restore FP equal to 20% of the STM cost. Force abilities that spend FP restore STM equal to 20% of the FP cost."
     },
     {
       "id": 4842,
@@ -20899,7 +20899,7 @@
     },
     {
       "id": 5224,
-      "text": "After spending FP on a Force power, restore 20% of your maximum FP over 10 seconds and gain +5% Force ability Accuracy for 30 seconds. This can trigger once every 45 seconds."
+      "text": "After spending FP on a Force power, restore 40% of your maximum FP over 20 seconds and gain +5% Force ability Accuracy for 30 seconds. This can trigger once every 45 seconds."
     },
     {
       "id": 5225,
@@ -21067,15 +21067,15 @@
     },
     {
       "id": 5266,
-      "text": "Revives your pet with 1 HP."
+      "text": "Revives your pet with 1 HP. Taking damage interrupts the cast. Fails while a hostile player is within 20m, or, after your pet is killed by a player, until your party nearby has gone 15 seconds without taking damage."
     },
     {
       "id": 5267,
-      "text": "Revives your pet with (10 + SOC)% HP."
+      "text": "Revives your pet with (10 + SOC)% HP. Taking damage interrupts the cast. Fails while a hostile player is within 20m, or, after your pet is killed by a player, until your party nearby has gone 15 seconds without taking damage."
     },
     {
       "id": 5268,
-      "text": "Revives your pet with (45 + SOC)% HP."
+      "text": "Revives your pet with (45 + SOC)% HP. Taking damage interrupts the cast. Fails while a hostile player is within 20m, or, after your pet is killed by a player, until your party nearby has gone 15 seconds without taking damage."
     },
     {
       "id": 5269,
@@ -89353,6 +89353,30 @@
     {
       "id": 6214,
       "text": "Shadowflow"
+    },
+    {
+      "id": 6215,
+      "text": "PvP Combat"
+    },
+    {
+      "id": 6216,
+      "text": "PvP Healing Reduction I"
+    },
+    {
+      "id": 6217,
+      "text": "PvP Healing Reduction II"
+    },
+    {
+      "id": 6218,
+      "text": "PvP Healing Reduction III"
+    },
+    {
+      "id": 6219,
+      "text": "PvP Healing Reduction IV"
+    },
+    {
+      "id": 6220,
+      "text": "PvP Healing Reduction V"
     }
   ]
 }
