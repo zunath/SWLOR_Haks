@@ -156,11 +156,11 @@ class Families:
         self.prepared[key] = result
         return result
 
-    def body_root(self, robe_name, generated, parent):
+    def body_root(self, robe_name, generated, parent, spacers=None):
         key = self.members[robe_name][0]
         self._prepare(key)
         return self.legacy.body_root(robe_name, generated, parent, aliases=self.member_aliases[robe_name],
-                                     adapters=self.member_adapters[robe_name])
+                                     adapters=self.member_adapters[robe_name], spacers=spacers)
 
     def stats(self):
         """Materialize and summarize union sizes before native compilation."""

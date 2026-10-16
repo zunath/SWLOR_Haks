@@ -1,6 +1,6 @@
 {
   "formatVersion": 1,
-  "description": "Authored shared-material declarations before PLT conversion. Earlier module HAK entries win. Any explicit non-NULL texture0 suppresses the native local PLT, including missing rasters; resolvedTexture0 separately records verified DDS/TGA resource existence.",
+  "description": "Authored shared-material declarations before PLT conversion. Earlier module HAK entries win. Any explicit non-NULL texture0 suppresses the native local PLT, including missing rasters; resolvedTexture0 separately records verified DDS/TGA resource existence. implicitTexture0 records a verified same-name DDS/TGA inherited by an authored MTR with no texture0 directive.",
   "hakCommit": "c38161d5414902591ce6393da5b21ad90a072e83",
   "moduleCommit": "ce4f91749c2ec9df57883538e4e380ddb3bbb690",
   "convertedCommit": "3c616020b1ee46c7ecc31081fe1ace20f3bfe6e0",
@@ -6283,7 +6283,8 @@
       "lines": [
         "twosided 1"
       ],
-      "resolvedTexture0": null
+      "resolvedTexture0": null,
+      "implicitTexture0": "d_whitetransp"
     },
     "daf_planet001": {
       "path": "swlor2_mtr/daf_planet001.mtr",
@@ -8534,7 +8535,8 @@
         "texture2 daf_sw101_s",
         "texture5 daf_sw101_i"
       ],
-      "resolvedTexture0": null
+      "resolvedTexture0": null,
+      "implicitTexture0": "daf_sw101"
     },
     "daf_sw101_1": {
       "path": "swlor2_mtr/daf_sw101_1.mtr",
@@ -12556,7 +12558,8 @@
         "texture4 null",
         "texture5 null"
       ],
-      "resolvedTexture0": null
+      "resolvedTexture0": null,
+      "implicitTexture0": "helm_101"
     },
     "helm_102": {
       "path": "swlor2_mtr/helm_102.mtr",
@@ -13389,7 +13392,8 @@
         "texture4 null",
         "texture5 helm_281_i"
       ],
-      "resolvedTexture0": null
+      "resolvedTexture0": null,
+      "implicitTexture0": "helm_281"
     },
     "helm_298": {
       "path": "swlor2_mtr/helm_298.mtr",
@@ -21983,7 +21987,8 @@
         "texture4 null",
         "texture5 null"
       ],
-      "resolvedTexture0": null
+      "resolvedTexture0": null,
+      "implicitTexture0": "pfh0_neck012"
     },
     "pfh0_neck013": {
       "path": "swlor2_mtr/pfh0_neck013.mtr",
@@ -22615,7 +22620,8 @@
         "texture4 null",
         "texture5 null"
       ],
-      "resolvedTexture0": null
+      "resolvedTexture0": null,
+      "implicitTexture0": "pfh0_shinl264"
     },
     "pfh0_shinl265": {
       "path": "swlor2_mtr/pfh0_shinL265.mtr",
@@ -34977,7 +34983,8 @@
         "texture4 null",
         "texture5 null"
       ],
-      "resolvedTexture0": null
+      "resolvedTexture0": null,
+      "implicitTexture0": "pmh0_neck012"
     },
     "pmh0_neck013": {
       "path": "swlor2_mtr/pmh0_neck013.mtr",

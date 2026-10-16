@@ -57,6 +57,37 @@ class IndependentRobeSkeletonTests(unittest.TestCase):
                             channels = {k for k in tracks.get(aliases[bone], {}) if k != "parent"}
                             self.assertEqual(set(), channels, (clip_name, bone))
 
+    def test_spacers_give_every_wearer_the_same_body_node_indices(self):
+        body = (node("rootdummy", "body") + node("lthigh_g", "rootdummy", "position 0.1 0 -0.1") +
+                node("torso_g", "rootdummy", "position 0 0 0.2") + node("neck_g", "torso_g", "position 0 0 0.3"))
+        motion = clip("body", 1, node("body", "null") + node("rootdummy", "body") +
+                      node("lthigh_g", "rootdummy", "orientationkey 2\n0 0 1 0 0\n1 0 1 0 1") +
+                      node("torso_g", "rootdummy", "orientationkey 2\n0 1 0 0 0\n1 1 0 0 1"))
+        fixtures = {"body": model("body", "null", body, motion)}
+        for name, panels in (("short", 1), ("long", 3)):
+            garment = node("rootdummy", name) + node("lthigh_g", "rootdummy", "position 0.1 0 -0.1")
+            garment += "".join(node(f"panel{index}", "lthigh_g", "position 0 0 -0.2") for index in range(panels))
+            fixtures[name] = model(name, "body", garment)
+        families = shared.Families(fixtures.get)
+        for name in ("short", "long"):
+            families.add("body", fixtures[name])
+        unpadded = {name: rig.garment_gaps(families.body_root(name, name + "_w", "bridge")[0].decode())
+                    for name in ("short", "long")}
+        self.assertNotEqual(unpadded["short"], unpadded["long"])
+        spacers = rig.uniform_spacers(unpadded, lambda wearer: "body")
+        self.assertEqual({}, spacers["long"])
+        indices = {}
+        for name in ("short", "long"):
+            output = families.body_root(name, "wearer", "bridge", spacers[name])[0].decode()
+            geometry = [(n, p) for _, n, p in anim.geometry(output)]
+            indices[name] = {n: i for i, (n, _) in enumerate(geometry) if n in ("lthigh_g", "torso_g", "neck_g")}
+            for spacer, props in geometry:
+                if spacer.startswith(rig.SPACER_PREFIX):
+                    self.assertEqual(["rootdummy"], props["parent"])
+                    self.assertEqual(set(), set(props) - {"parent"})
+            self.assertEqual(rig.garment_gaps(output), {**unpadded["long"]})
+        self.assertEqual(indices["short"], indices["long"])
+
     def test_body_motion_controls_garment_skeleton_in_every_emote_phase(self):
         geometry = node("rootdummy", "body", "position 0 0 1.2")
         geometry += node("torso_g", "rootdummy", "position 0 0 0.1")

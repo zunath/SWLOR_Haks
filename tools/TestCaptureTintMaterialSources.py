@@ -21,6 +21,10 @@ class CaptureTintMaterialSourcesTests(unittest.TestCase):
             (haks / "tools/TintMapSources.json").write_text("[]")
             (haks / "module_only_hak").mkdir()
             (haks / "module_only_hak/authored.mtr").write_text("texture0 fixed_diffuse\n")
+            (haks / "module_only_hak/inherited.mtr").write_text("texture1 authored_n\n")
+            (haks / "module_only_hak/inherited.dds").write_bytes(b"original diffuse")
+            (haks / "module_only_hak/explicit_null.mtr").write_text("texture0 NULL\n")
+            (haks / "module_only_hak/explicit_null.dds").write_bytes(b"unused diffuse")
             (module / "Module/ifo").mkdir(parents=True)
             (module / "Module/ifo/module.ifo.json").write_text(json.dumps({
                 "Mod_HakList": {"value": [{"Mod_Hak": {"value": "module_only_hak"}}]}
@@ -42,6 +46,10 @@ class CaptureTintMaterialSourcesTests(unittest.TestCase):
             self.assertEqual(expected_module_commit, result["moduleCommit"])
             self.assertEqual(["module_only_hak"], result["hakPriorityFirstWins"])
             self.assertEqual(["texture0 fixed_diffuse"], result["materials"]["authored"]["lines"])
+            self.assertEqual("inherited", result["materials"]["inherited"]["implicitTexture0"])
+            self.assertEqual(["texture1 authored_n"], result["materials"]["inherited"]["lines"])
+            self.assertNotIn("implicitTexture0", result["materials"]["explicit_null"])
+            self.assertNotIn("implicitTexture0", result["materials"]["authored"])
 
 
 if __name__ == "__main__":
