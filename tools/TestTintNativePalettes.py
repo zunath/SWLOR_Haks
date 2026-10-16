@@ -70,6 +70,28 @@ class NativeRobePaletteTests(unittest.TestCase):
             g.synchronize_native_attachment_controls()
         self.assertEqual(path.read_bytes(), b"damaged control")
 
+    def test_authored_diffuse_attachment_control_is_kept_then_retired(self):
+        # helm_101 renders through its authored-diffuse source, so its control is ad_helm101.
+        path = self.materials / "ad_helm101.plt"
+        path.write_bytes(g.native_attachment_control_bytes())
+        g._NATIVE_ATTACHMENT_SOURCES = {"ad_helm101"}
+        g.synchronize_native_attachment_controls()
+        self.assertEqual(path.read_bytes(), g.native_attachment_control_bytes())
+        self.assertEqual(g.native_attachment_control_errors(), [])
+        g._NATIVE_ATTACHMENT_SOURCES = set()
+        g.synchronize_native_attachment_controls()
+        self.assertFalse(path.exists())
+
+    def test_unrelated_control_shaped_plt_is_never_removed(self):
+        # Authored-diffuse sources for body parts are not native attachments.
+        for name in ("ad_fh_neck012", "pfh0_neck012"):
+            path = self.materials / f"{name}.plt"
+            path.write_bytes(g.native_attachment_control_bytes())
+            with self.assertRaisesRegex(RuntimeError, "unrecognized"):
+                g.synchronize_native_attachment_controls()
+            self.assertTrue(path.exists())
+            path.unlink()
+
     def test_controls_follow_exact_native_race_phenotype_fallback(self):
         rows, _, _ = self.plan(self.model())
         self.assertEqual(g._NATIVE_ATTACHMENT_SOURCES, {"pfh0_robe187"})

@@ -1016,8 +1016,9 @@ class MaterialTest:
             for shader in shaders:
                 self.delete_shader(shader)
 
-    def sample(self, program: int, bound: int, alpha: float, *, mapped=False, overrides=False, color=False, rgb=None):
+    def sample(self, program: int, bound: int, alpha: float, *, mapped=False, overrides=False, color=False, rgb=None, authored_diffuse=None):
         self.use(program)
+        self.scalar(self.location(program, b"useAuthoredDiffuse"), float(authored_diffuse is not None))
         for name, value in {"texture0Bound": bound, "texture2Bound": int(mapped),
                 "texture3Bound": int(mapped), "inspectSpecularColor": int(color)}.items():
             self.integer(self.location(program, name.encode()), value)
@@ -1027,7 +1028,7 @@ class MaterialTest:
                 "Metallicness": 0.7 if overrides else 0}.items():
             self.scalar(self.location(program, name.encode()), value)
         self.vector(self.location(program, b"materialFrontDiffuse"), 1, 1, 1, 1)
-        for unit, value in {0: (1, 1, 1, 1), 1: (0.5, 0.5, 1, 1),
+        for unit, value in {0: authored_diffuse or (1, 1, 1, 1), 1: (0.5, 0.5, 1, 1),
                 2: (0.12, 0, 0, 1), 3: (0.45, 0, 0, 1),
                 7: (0.5, 0.05, 0, 1), 9: (1, 1, 1, 1),
                 10: (0.2, 0.4, 0.6, alpha)}.items():
@@ -1083,6 +1084,8 @@ def main():
         test = MaterialTest(gl)
         print(f"Validating {len(pairs)} production shader pairs from {materials} generated MTRs on {renderer}.", flush=True)
         compile_engine_pairs(test, engine, pairs, parameters)
+        cloak_pairs, _, cloak_parameters = production_pairs(root / "sw_pt_cloak")
+        compile_engine_pairs(test, engine, cloak_pairs, cloak_parameters)
         check_native_npc_rows(test, engine, pairs, parameters)
         check_native_palette_fallback(test, engine, pairs, root)
         draw_engine_materials(test, engine, root)

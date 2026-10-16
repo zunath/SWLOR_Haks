@@ -74,6 +74,11 @@ def capture(baseline: str, module_baseline: str, converted_baseline: str, game_d
                 "path": path, "gitBlob": blob, "sha256": hashlib.sha256(data).hexdigest(),
                 "lines": lines, "resolvedTexture0": texture0 if texture0 in fixed else None,
             }
+            if not texture0 and name in fixed:
+                # An authored MTR can inherit its bitmap's diffuse without an
+                # explicit texture0 directive. Preserve that input before the
+                # generated same-name MTR substitutes a white diffuse.
+                materials[name]["implicitTexture0"] = name
     finally:
         process.stdin.close()
         process.stdout.close()
@@ -96,7 +101,7 @@ def capture(baseline: str, module_baseline: str, converted_baseline: str, game_d
                     raise ValueError(f"Ambiguous original bitmap alias: {alias}")
     return {
         "formatVersion": 1,
-        "description": "Authored shared-material declarations before PLT conversion. Earlier module HAK entries win. Any explicit non-NULL texture0 suppresses the native local PLT, including missing rasters; resolvedTexture0 separately records verified DDS/TGA resource existence.",
+        "description": "Authored shared-material declarations before PLT conversion. Earlier module HAK entries win. Any explicit non-NULL texture0 suppresses the native local PLT, including missing rasters; resolvedTexture0 separately records verified DDS/TGA resource existence. implicitTexture0 records a verified same-name DDS/TGA inherited by an authored MTR with no texture0 directive.",
         "hakCommit": commit, "moduleCommit": module_commit,
         "convertedCommit": converted_commit, "bitmapAliases": dict(sorted(bitmap_aliases.items())),
         "hakPriorityFirstWins": priority, "stockKeys": stock_keys, "materials": materials,

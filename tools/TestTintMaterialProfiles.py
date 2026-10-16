@@ -93,6 +93,30 @@ class MaterialProfileTests(unittest.TestCase):
         self.profiles["mapped"] = {"lines": ["texture0 pmh0_shinl249"], "resolvedTexture0": "sw_pt_lshin/pmh0_shinl249.dds"}
         self.assertIsNone(self.choices(self.model("mapped"))["@node:pme0_shinl249"][0])
 
+    def test_inherited_authored_diffuse_is_preserved_with_its_maps_outside_tint_catalog(self):
+        self.profiles["pmh0_shinl249"] = {
+            "lines": ["texture1 authored_n", "texture2 authored_s"],
+            "implicitTexture0": "pmh0_shinl249",
+        }
+        path = self.model("pmh0_shinl249")
+        with (
+            patch.object(g, "find_active_models", return_value={path.stem: path}),
+            patch.object(g, "find_modular_human_material_fallbacks", return_value={}),
+            patch.object(g, "find_authored_texture_overrides", return_value={}),
+            patch.object(g, "find_active_render_surfaces", return_value={"pmh0_shinl249"}),
+        ):
+            rows, pending, aliases = g.build_model_material_plan({"pmh0_shinl249": {"layers": [7]}})
+        self.assertEqual(rows, [])
+        self.assertEqual(aliases, {})
+        target = pending[path]["@node:pme0_shinl249"]
+        self.assertEqual(g._PRESERVED_MATERIALS[target], ("pmh0_shinl249", [
+            "texture1 authored_n", "texture2 authored_s", "texture0 pmh0_shinl249",
+        ]))
+
+    def test_explicit_null_diffuse_does_not_inherit_a_same_name_raster(self):
+        self.profiles["mapped"] = {"lines": ["texture0 NULL"], "implicitTexture0": "mapped"}
+        self.assertEqual(self.choices(self.model("mapped"))["@node:pme0_shinl249"][0], "pmh0_shinl249")
+
     def test_null_diffuse_retains_native_palette_and_authored_other_maps(self):
         self.profiles["mapped"] = {"lines": ["texture0 NULL", "texture1 skin_n"]}
         self.assertEqual(self.choices(self.model("mapped"))["@node:pme0_shinl249"][0], "pmh0_shinl249")
@@ -125,6 +149,43 @@ class MaterialProfileTests(unittest.TestCase):
 
 
 class BaseBodyPaletteTests(unittest.TestCase):
+    def test_original_inherited_diffuses_keep_artwork_and_receive_rgb(self):
+        from GenerateAuthoredDiffuseTintMaps import SOURCES
+        entries = g.load_source_manifest()
+        models = g.find_active_models()
+        for name, (relative, layer) in SOURCES.items():
+            with self.subTest(name=name):
+                entry = entries[g.AUTHORED_DIFFUSE_SOURCES[name]]
+                self.assertEqual(entry["authoredDiffuse"], name)
+                self.assertEqual(entry["layers"], [layer])
+                self.assertEqual(entry["diffuseSha256"], hashlib.sha256((g.REPOSITORY_ROOT / relative).read_bytes()).hexdigest())
+                choices = g.native_modular_material_choices(models[name], entries)
+                self.assertIn(g.AUTHORED_DIFFUSE_SOURCES[name], [source for source, _, _ in choices.values()])
+                text = g.mtr_path(g.AUTHORED_DIFFUSE_SOURCES[name]).read_text()
+                self.assertIn(f"texture0 {name}\n", text)
+                self.assertIn("parameter float useAuthoredDiffuse 1.0\n", text)
+                self.assertIn(f"texture1 {name}_n\n", text.lower())
+                self.assertIn(f"texture2 {name}_s\n", text.lower())
+                decoded = g.decode_dds_layers(g.packed_dds_path(name, entry), 4, 4)
+                self.assertTrue((decoded == layer).all())
+        catalog = {line.split()[1] for line in g.OUTPUT_2DA.read_text().splitlines()[3:] if len(line.split()) == 4}
+        self.assertIn("helm_101", catalog)
+
+    def test_authored_controls_do_not_replace_shared_legacy_palette_sources(self):
+        from GenerateAuthoredDiffuseTintMaps import SOURCES, validate
+        entries = g.load_source_manifest()
+        original = {e["model"]: e for e in json.loads(subprocess.check_output(
+            ["git", "show", "295c9b215ff7539d45f0db8723cbc510e3d4ec35:tools/TintMapSources.json"], cwd=g.REPOSITORY_ROOT))}
+        self.assertEqual(validate(entries), [])
+        for name in SOURCES:
+            for key in ("sourceSha256", "layers", "width", "height", "texture", "shadeSha256", "layerSha256"):
+                self.assertEqual(entries[name][key], original[name][key], f"{name}/{key}")
+        models = g.find_active_models()
+        for name in ("pfd0_shinl264", "pfe0_shinl264", "pfo0_shinl264"):
+            choices = g.native_modular_material_choices(models[name], entries)
+            self.assertTrue(choices)
+            self.assertTrue(all(source == "pfh0_shinl264" for source, _, _ in choices.values()))
+
     def test_imported_stock_body_parts_preserve_geometry_and_have_skin_bindings(self):
         records = json.loads(Path(__file__).with_name("StockBodyTintModels.json").read_text())
         models = g.find_active_models()

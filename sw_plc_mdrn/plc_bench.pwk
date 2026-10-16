@@ -42,5 +42,10 @@ node trimesh Box01
     2 0 4  64  0 0 0  3
     4 6 2  64  0 0 0  3
 endnode
+node dummy nch_pwk_use01
+  parent PLC_bencha
+  position 0.01 0.45 0.0
+  orientation 1.0 0.0 0.0 0.0
+endnode
 endmodelgeom PLC_bencha
 donemodel PLC_bencha

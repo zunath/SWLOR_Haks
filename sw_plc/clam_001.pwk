@@ -14,18 +14,6 @@ node dummy 001_pwk_use02
   orientation 1.0 0.0 0.0 0.0
   wirecolor 0.894118 0.839216 0.6 
 endnode
-node dummy 001_pwk_use03
-  parent clam_001_pwk
-  position -0.0122423 0.561913 0.0
-  orientation 1.0 0.0 0.0 0.0
-  wirecolor 0.54902 0.345098 0.882353 
-endnode
-node dummy 001_pwk_use04
-  parent clam_001_pwk
-  position 0.855019 0.0809113 0.0
-  orientation 1.0 0.0 0.0 0.0
-  wirecolor 0.721569 0.894118 0.6 
-endnode
 node trimesh PWK
   parent clam_001_pwk
   position 0.0 0.0 0.0
