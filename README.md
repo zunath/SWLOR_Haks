@@ -79,5 +79,4 @@ rig, compare hierarchy/controller/event values, then copy only selected clips;
 original headers, geometry, and unselected native components remain intact.
 Resumed compiles refresh staged materials from the active HAK resources.
 New build manifests and cache/checkpoint keys record material contents and absent
-material lookups, so material-only edits or newly added MTRs invalidate reuse. The old
-`nwnmdlcomp.exe` file is retained for historical reference only.
+material lookups, so material-only edits or newly added MTRs invalidate reuse.
