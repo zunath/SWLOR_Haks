@@ -70,5 +70,12 @@ Existing binary assets are not rebuilt by installing the tool. Their manifests
 keep original build-tool fingerprints and compiler hashes; separate
 `validation_tool_files` / `validation_implementation` entries record the current
 Python audit tools. These entries cannot override model or texture hashes, and
-new generation still invalidates caches using the actual compiler/tool hashes. The old
+new generation still invalidates caches using the actual compiler/tool hashes.
+`validation_compiler_sha256` records the CLI used to audit and repack historical
+banks without replacing their original build compiler hash. Repack preflight
+uses the restricted current-tool overlay and keeps asset hashes authoritative.
+Cross-compiler motion revisions map candidate part IDs to the unchanged original
+rig, compare hierarchy/controller/event values, then copy only selected clips;
+original headers, geometry, and unselected native components remain intact.
+Resumed compiles refresh staged materials from the active HAK resources. The old
 `nwnmdlcomp.exe` file is retained for historical reference only.

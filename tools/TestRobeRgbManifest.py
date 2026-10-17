@@ -205,9 +205,11 @@ class RobeRgbManifestTests(unittest.TestCase):
                     "validation_tool_files": {"tools/CompileModels.py": "new"}}
         self.assertEqual(g.audited_files(manifest)["tools/CompileModels.py"], "new")
         self.assertEqual(manifest["files"]["tools/CompileModels.py"], "old")
-        manifest["validation_tool_files"]["sw_pt_root/body.mdl"] = "changed"
-        with self.assertRaisesRegex(ValueError, "generator Python sources"):
-            g.audited_files(manifest)
+        for relative in ("sw_pt_root/body.mdl", "tools/TintMapStockRobes.json"):
+            with self.subTest(relative=relative):
+                manifest["validation_tool_files"] = {relative: "changed"}
+                with self.assertRaisesRegex(ValueError, "generator Python sources"):
+                    g.audited_files(manifest)
 
     def test_compile_helpers_are_required_manifest_inputs(self):
         self.assertIn("CompileModels.py", g.GENERATOR_INPUTS)

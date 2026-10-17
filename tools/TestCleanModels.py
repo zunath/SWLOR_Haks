@@ -14,6 +14,12 @@ import CompileModels as mdl
 
 
 class CleanModelsTests(unittest.TestCase):
+    def test_external_parts_follow_capart_and_exclude_heads_and_robes(self):
+        for model, expected in (("pmh0_neck005", "pmh0"), ("pfa103_shor1000", "pfa103"),
+                                ("pmh0_head001", None), ("pmh0_robe001", None), ("skinfit", None)):
+            with self.subTest(model=model):
+                self.assertEqual(mdl.external_skeleton_name(f"newmodel {model}\n".encode()), expected)
+
     def test_only_omitted_geometry_rotations_receive_identity_defaults(self):
         geometry = b"node dummy a\n parent NULL\nendnode\nnode dummy b\n orientation 1 0 0 .5\nendnode\n"
         animation = b"ENDMODELGEOM sample\nnode dummy a\n parent NULL\nendnode\n"
@@ -65,6 +71,28 @@ class CleanModelsTests(unittest.TestCase):
             self.assertTrue(selection.is_dir())
             self.assertEqual({path.name for path in selection.glob("*.mdl")}, {path.name for path in sources})
 
+    def test_resumed_compile_refreshes_active_material_contents(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            stage = root / "stage"
+            stage.mkdir()
+            source = stage / "sample.mdl"
+            source.write_text("newmodel sample\nmaterialname normalmat\n")
+            active = root / "normalmat.mtr"
+            active.write_text("first material version")
+            (stage / active.name).write_text("stale prior run")
+            seen = []
+            def compile_batch(executable, staging, command, inputs, output, log, resources, game_dir):
+                seen.append((stage / active.name).read_text())
+                (output / source.name).write_bytes(struct.pack("<III", 0, 232, 0) + bytes(232))
+            with patch.object(mdl, "material_resources", return_value={"normalmat": active}), \
+                 patch.object(cli, "run", side_effect=compile_batch):
+                args = ["-cne", str(source), str(stage / "binary")]
+                mdl.run_compiler(Path("compiler.exe"), stage, args, "compile.log")
+                active.write_text("changed active material")
+                mdl.run_compiler(Path("compiler.exe"), stage, args, "compile.log")
+            self.assertEqual(seen, ["first material version", "changed active material"])
+
     def test_unrecognized_compiler_is_rejected(self):
         with tempfile.TemporaryDirectory() as directory:
             executable = Path(directory) / "cleanmodels.exe"
@@ -75,6 +103,31 @@ class CleanModelsTests(unittest.TestCase):
 
 @unittest.skipUnless(os.environ.get("CLEANMODELS"), "Set CLEANMODELS for real compiler coverage")
 class CleanModelsBinaryTests(unittest.TestCase):
+    def test_external_neck_weights_use_the_wearer_skeleton(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            folders = [root / name for name in ("source", "binary", "decompiled")]
+            for folder in folders:
+                folder.mkdir()
+            source, binary, decompiled = folders
+            model = mdl.ROOT / "sw_pt_neck/pmh0_neck005.mdl"
+            compiler = cli.find_compiler()
+            resources = [mdl.ROOT / "sw_pt_root", mdl.ROOT / "sw_2da"]
+            cli.run(compiler, root, "decompile", [model], source, "source.log", resources)
+            cli.run(compiler, root, "compile", [source / model.name], binary, "compile.log", resources)
+            cli.run(compiler, root, "decompile", [binary / model.name], decompiled, "decompile.log", resources)
+            compiled = (binary / model.name).read_bytes()
+            mdl.validate_round_trip((source / model.name).read_bytes(), compiled,
+                                    (decompiled / model.name).read_text())
+            mesh = next(values for _, _, values in mdl.binary_nodes(compiled) if values and "weights" in values)
+            self.assertEqual({row[index] for row in mesh["weights"] for index in range(0, len(row), 2)},
+                             {"head_g", "neck_g"})
+            # A stock donor absent from the HAK index can be supplied explicitly.
+            donor = (mdl.ROOT / "sw_pt_root/pmh0.mdl").read_bytes()
+            expected = mdl.binary_nodes(compiled)
+            with patch.object(mdl.tint, "find_active_models", side_effect=AssertionError("unexpected HAK lookup")):
+                self.assertEqual(expected, mdl.binary_nodes(compiled, donor))
+
     def test_batch_preserves_material_normals_colors_and_local_head_robe_bones(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

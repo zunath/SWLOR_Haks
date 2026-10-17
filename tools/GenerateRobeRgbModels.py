@@ -294,7 +294,7 @@ def validate_model_chains(names, load):
 def audited_files(manifest):
     """Retain build provenance while recording updated Python audit tools."""
     validation_tools = manifest.get("validation_tool_files", {})
-    allowed_tools = {f"tools/{name}" for name in GENERATOR_INPUTS + PACKAGING_INPUTS}
+    allowed_tools = {f"tools/{name}" for name in GENERATOR_INPUTS + PACKAGING_INPUTS if name.endswith(".py")}
     if not set(validation_tools) <= allowed_tools:
         raise ValueError("Robe validation-tool fingerprints may only cover generator Python sources")
     return {**manifest["files"], **validation_tools}

@@ -157,7 +157,27 @@ def equivalent_quaternion(a, b) -> bool:
     return any(all(math.isclose(x, sign * y, abs_tol=2e-6) for x, y in zip(a, b)) for sign in (1, -1))
 
 
-def binary_nodes(data: bytes) -> list[tuple[str, list, dict | None]]:
+@lru_cache(maxsize=1)
+def external_part_types() -> set[str]:
+    table = ROOT / "sw_2da" / "capart.2da"
+    # Rows contain: row index, NAME, MDLNAME, NODENAME.
+    return {row.split()[2].lower() for row in table.read_text().splitlines()[3:]
+            if len(row.split()) >= 4 and row.split()[2].lower() != "robe"}
+
+
+def external_skeleton_name(data: bytes) -> str | None:
+    if binary(data):
+        name = data[20:84].split(b"\0", 1)[0].decode("ascii").lower()
+    else:
+        match = re.search(rb"(?im)^\s*newmodel\s+(\S+)", data)
+        name = match[1].decode("ascii").lower() if match else ""
+    match = re.fullmatch(r"(p[fm][a-z]\d+)_([a-z]+)\d+", name)
+    if match and match[2] not in {"head", "robe"} and match[2] in external_part_types():
+        return match[1]
+    return None
+
+
+def binary_nodes(data: bytes, skin_skeleton: bytes | None = None) -> list[tuple[str, list, dict | None]]:
     uint = lambda offset: struct.unpack_from("<I", data, offset)[0]
     raw = 12 + uint(4)
     result = []
@@ -214,14 +234,30 @@ def binary_nodes(data: bytes) -> list[tuple[str, list, dict | None]]:
                 weights = vector_array(uint(extra + 12), 4)
                 indices = vector_array(uint(extra + 16), 4, "h")
                 bone_nodes = struct.unpack_from("<17h", data, extra + 64)
+                skeleton_name = external_skeleton_name(data)
+                if skeleton_name is not None:
+                    from NeckSkinBindings import body_model
+                    donor = skin_skeleton
+                    if donor is None:
+                        path = tint.find_active_models().get(skeleton_name)
+                        if path is None:
+                            raise ValueError(f"External skin requires its wearer skeleton: {skeleton_name}")
+                        donor = path.read_bytes()
+                    bone_names = [item[0] for item in body_model(donor).nodes]
+                    if uint(extra + 24) != len(bone_names):
+                        raise ValueError(f"{name}: external bone table does not match {skeleton_name}")
+                else:
+                    bone_names = [data[pointer + 32:pointer + 64].split(b"\0", 1)[0].decode("ascii").lower()
+                                  for pointer in offsets]
                 rows = []
                 for values, bones in zip(weights, indices):
                     row = []
                     for value, bone in zip(values, bones):
-                        if value == 0 or bone < 0:
+                        if value == 0:
                             continue
-                        bone_node = offsets[bone_nodes[bone]]
-                        bone_name = data[bone_node + 32:bone_node + 64].split(b"\0", 1)[0].decode("ascii").lower()
+                        if not 0 <= bone < len(bone_nodes) or not 0 <= bone_nodes[bone] < len(bone_names):
+                            raise ValueError(f"{name}: skin weight references an invalid skeleton bone")
+                        bone_name = bone_names[bone_nodes[bone]]
                         row.extend([bone_name, value])
                     rows.append(row)
                 mesh_values["weights"] = rows
@@ -266,7 +302,7 @@ def validate_geometry(name: str, before: dict, after: dict) -> None:
             raise ValueError(f"{name}: face {index} geometry/UV/skin weights changed")
 
 
-def validate_round_trip(source: bytes, compiled: bytes, decompiled: str) -> None:
+def validate_round_trip(source: bytes, compiled: bytes, decompiled: str, skin_skeleton: bytes | None = None) -> None:
     if len(compiled) < 244 or not binary(compiled):
         raise ValueError("Compiler did not produce an NWN binary model")
     model_size, raw_size = struct.unpack_from("<II", compiled, 4)
@@ -274,7 +310,7 @@ def validate_round_trip(source: bytes, compiled: bytes, decompiled: str) -> None
         raise ValueError("Binary model section sizes do not match its payload")
     source_text = source.decode("latin1")
     before, after = parse_nodes(source_text), parse_nodes(decompiled)
-    rotations = binary_nodes(compiled)
+    rotations = binary_nodes(compiled, skin_skeleton)
     if len(before) != len(after):
         raise ValueError(f"Node count changed: {len(before)} -> {len(after)}")
     if len(before) != len(rotations):
@@ -429,7 +465,7 @@ def run_compiler(compiler: Path, staging: Path, arguments: list[str], log: str,
             for value in names:
                 name = value.decode("ascii").lower()
                 target = staging / (name + ".mtr")
-                if not target.exists() and name in material_resources():
+                if name in material_resources():
                     shutil.copyfile(material_resources()[name], target)
     resources = [path for path in (ROOT / "sw_pt_root", ROOT / "sw_2da") if path.is_dir()]
     output = Path(arguments[2])
@@ -518,6 +554,9 @@ def main() -> None:
         parent = supermodel(data)
         if parent:
             pending.append(parent)
+        skeleton = external_skeleton_name(data)
+        if skeleton:
+            pending.append(skeleton)
     restored_supermodels = {}
     for model, node in dangly_periods:
         if model not in repairs or not any(item.lower().startswith(f"{node}: filled malformed empty dangly period") for item in repairs[model]):
@@ -555,7 +594,8 @@ def main() -> None:
     for name, path in sorted(selected.items()):
         compiled = (staging / "binary" / f"{name}.mdl").read_bytes()
         try:
-            validate_round_trip(inputs[name], compiled, (staging / "decompiled" / f"{name}.mdl").read_text(encoding="latin1"))
+            validate_round_trip(inputs[name], compiled, (staging / "decompiled" / f"{name}.mdl").read_text(encoding="latin1"),
+                                inputs.get(external_skeleton_name(compiled)))
         except ValueError as error:
             report["failures"].append({"model": name, "error": str(error)})
         report["models"].append({"path": str(path.relative_to(ROOT)).replace("\\", "/"), "source_sha256": digest(dependencies[name]), "compiled_sha256": digest(compiled), "bytes": len(compiled)})
