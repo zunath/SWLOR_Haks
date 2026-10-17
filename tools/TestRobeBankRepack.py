@@ -1,6 +1,7 @@
 """Packaging may reuse audited bytes only with intact cache and source provenance."""
 import copy
 import hashlib
+import json
 from pathlib import Path
 import struct
 import tempfile
@@ -47,6 +48,23 @@ class RobeRepackCacheTests(unittest.TestCase):
         return repack.cached_audit_matches(
             self.receipt if receipt is None else receipt,
             self.head, self.source_sha, self.validation_sha, self.stage)
+
+    def test_historical_build_hash_uses_the_separate_validation_compiler(self):
+        manifest = {"compiler_sha256": "historical-build-compiler",
+                    "validation_compiler_sha256": repack.mdl.COMPILER_SHA256}
+        path = self.stage / "manifest.json"
+        path.write_text(json.dumps(manifest))
+        with patch.object(repack.robes, "owned_animation_bytes", return_value=self.original):
+            report = repack.repack_family(self.head, self.stage / "new-audit", path, self.validation_sha)
+        self.assertEqual(report["validation_compiler_sha256"], repack.mdl.COMPILER_SHA256)
+        self.assertEqual(json.loads(path.read_text())["compiler_sha256"], "historical-build-compiler")
+        manifest["validation_compiler_sha256"] = "unvalidated-compiler"
+        path.write_text(json.dumps(manifest))
+        with patch.object(repack.robes, "owned_animation_bytes", return_value=self.original), \
+             patch.object(repack, "independent_audit") as audit, \
+             self.assertRaisesRegex(ValueError, "Validation compiler differs"):
+            repack.repack_family(self.head, self.stage / "wrong-audit", path, self.validation_sha)
+        audit.assert_not_called()
 
     def test_valid_native_bank_chain_can_reuse_its_receipt(self):
         self.assertTrue(self.matches())
@@ -161,6 +179,19 @@ class RobeRepackPreflightTests(unittest.TestCase):
             paths.assert_called_once_with(self.files, self.manifest["stock_model_sha256"], self.active)
             (self.root / "tools/RobePoseAudit.py").write_bytes(b"changed pose validation")
             with self.assertRaisesRegex(ValueError, "Prior validated input/output changed"):
+                repack.preflight(self.manifest)
+
+    def test_recorded_validation_tools_supersede_build_hashes_without_waiving_assets(self):
+        generator = self.root / "tools/GenerateRobeRgbModels.py"
+        build_hash = self.manifest["files"]["tools/GenerateRobeRgbModels.py"]
+        generator.write_bytes(b"current validated compiler adapter")
+        self.manifest["validation_tool_files"] = {"tools/GenerateRobeRgbModels.py": repack.robes.file_digest(generator)}
+        with patch.object(repack.robes, "fresh_active_models", return_value=self.active), \
+             patch.object(repack.robes, "model_path_errors", return_value=[]):
+            repack.preflight(self.manifest)
+            self.assertEqual(self.manifest["files"]["tools/GenerateRobeRgbModels.py"], build_hash)
+            (self.root / "sw_cr_creature/a_ba.mdl").write_bytes(b"changed animation asset")
+            with self.assertRaisesRegex(ValueError, "Prior validated input/output changed: sw_cr_creature"):
                 repack.preflight(self.manifest)
 
     def test_generator_changes_require_regeneration_even_with_current_outputs(self):

@@ -165,7 +165,7 @@ def pack(data: bytes) -> bytes:
             raise ValueError("Repeated or out-of-range native node")
         visited.add(pointer)
         children, child_count, _ = struct.unpack_from("<3I", result, node + 72)
-        pointers += [node + 72, node + 84, node + 96]
+        pointers += [node + 68, node + 72, node + 84, node + 96]
         pointers += [12 + children + child * 4 for child in range(child_count)]
         pending.extend(uint(result, 12 + children + child * 4) for child in range(child_count))
         start, count, _ = struct.unpack_from("<3I", result, node + 84)

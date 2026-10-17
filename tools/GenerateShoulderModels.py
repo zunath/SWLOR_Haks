@@ -19,7 +19,7 @@ from RobePoseAudit import Model
 ROOT = Path(__file__).resolve().parents[1]
 MANIFEST = ROOT / 'tools/ShoulderModels.json'
 IMPLEMENTATION = ('tools/GenerateShoulderModels.py', 'tools/NeckSkinBindings.py',
-                  'tools/RobePoseAudit.py', 'tools/CompileModels.py',
+                  'tools/RobePoseAudit.py', 'tools/CompileModels.py', 'tools/CleanModels.py',
                   'tools/GenerateTintMapAssets.py', 'tools/ModelLodAssets.py')
 
 
@@ -142,7 +142,11 @@ def check(root=ROOT):
         failures.append('active shoulder sources')
     if 'hakbuilder.json' not in manifest['inputs']:
         failures.append('hakbuilder.json')
-    for relative, expected in {**manifest['inputs'], **manifest['implementation']}.items():
+    implementation = {**manifest['implementation'], **manifest.get('validation_implementation', {})}
+    if not set(manifest.get('validation_implementation', {})) <= set(IMPLEMENTATION):
+        failures.append('validation implementation')
+        implementation = manifest['implementation']
+    for relative, expected in {**manifest['inputs'], **implementation}.items():
         path = ModelPath(root / relative)
         if path.suffix == '.mdl' and active.get(path.stem.lower()) != path:
             failures.append(f'active model {relative}')
@@ -157,7 +161,7 @@ def check(root=ROOT):
     table = root / 'sw_2da/shoulderrender.2da'
     if not table.is_file() or digest(table.read_bytes()) != manifest['table_sha256']:
         failures.append('shoulderrender.2da')
-    if set(manifest['implementation']) != set(IMPLEMENTATION):
+    if set(implementation) != set(IMPLEMENTATION):
         failures.append('implementation')
     if failures:
         raise ValueError(f'Stale shoulder assets: {failures[:20]}; run GenerateShoulderModels.py --apply')
