@@ -486,6 +486,8 @@ def run_compiler(compiler: Path, staging: Path, arguments: list[str], log: str,
                 target = staging / (name + ".mtr")
                 if name in material_resources():
                     shutil.copyfile(material_resources()[name], target)
+                else:
+                    target.unlink(missing_ok=True)
     resources = [path for path in (ROOT / "sw_pt_root", ROOT / "sw_2da") if path.is_dir()]
     output = Path(arguments[2])
     output.mkdir(parents=True, exist_ok=True)

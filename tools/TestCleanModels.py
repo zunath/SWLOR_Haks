@@ -71,7 +71,7 @@ class CleanModelsTests(unittest.TestCase):
             self.assertTrue(selection.is_dir())
             self.assertEqual({path.name for path in selection.glob("*.mdl")}, {path.name for path in sources})
 
-    def test_resumed_compile_refreshes_active_material_contents(self):
+    def test_resumed_compile_refreshes_changed_and_removed_materials(self):
         with tempfile.TemporaryDirectory() as folder:
             root = Path(folder)
             stage = root / "stage"
@@ -83,15 +83,20 @@ class CleanModelsTests(unittest.TestCase):
             (stage / active.name).write_text("stale prior run")
             seen = []
             def compile_batch(executable, staging, command, inputs, output, log, resources, game_dir):
-                seen.append((stage / active.name).read_text())
+                staged = stage / active.name
+                seen.append(staged.read_text() if staged.exists() else None)
                 (output / source.name).write_bytes(struct.pack("<III", 0, 232, 0) + bytes(232))
-            with patch.object(mdl, "material_resources", return_value={"normalmat": active}), \
+            materials = {"normalmat": active}
+            with patch.object(mdl, "material_resources", return_value=materials), \
                  patch.object(cli, "run", side_effect=compile_batch):
                 args = ["-cne", str(source), str(stage / "binary")]
                 mdl.run_compiler(Path("compiler.exe"), stage, args, "compile.log")
                 active.write_text("changed active material")
                 mdl.run_compiler(Path("compiler.exe"), stage, args, "compile.log")
-            self.assertEqual(seen, ["first material version", "changed active material"])
+                active.unlink()
+                materials.clear()
+                mdl.run_compiler(Path("compiler.exe"), stage, args, "compile.log")
+            self.assertEqual(seen, ["first material version", "changed active material", None])
 
     def test_material_only_changes_and_new_materials_invalidate_proofs(self):
         import GenerateRobeRgbModels as robes
