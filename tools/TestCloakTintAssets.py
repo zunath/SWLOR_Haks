@@ -48,6 +48,13 @@ class CloakTintTests(unittest.TestCase):
 
     @unittest.skipUnless(sys.platform == "win32", "Requires the hidden Windows OpenGL fixture")
     def test_palette_alpha_is_cutout_only_without_an_environment_map(self):
+        self.check_palette_coverage((None,))
+
+    @unittest.skipUnless(sys.platform == "win32", "Requires the hidden Windows OpenGL fixture")
+    def test_exact_rgb_keeps_reference_cutouts_for_every_palette_layer(self):
+        self.check_palette_coverage(range(10))
+
+    def check_palette_coverage(self, rgb_layers):
         from TestTintShaderMaterials import OpenGL, MaterialTest
 
         # Keep the shipped sampling, palette resolution and output-alpha code;
@@ -91,26 +98,42 @@ void ApplyStandardShader() {}
                 program = test.program(f"#version 120\n#define NO_DISCARD {no_discard}\n" + shader)
                 try:
                     test.use(program)
-                    # Reuse the fixture's uploaded texture for each opacity atlas.
-                    for sampler in (6, 8):
-                        test.integer(test.location(program, f"texUnit{sampler}".encode()), 7)
                     test.scalar(test.location(program, b"cloakTexture"), float(tile))
                     # Check actual compositing over a contrasting background, both
                     # in the opaque pass and with source-alpha blending enabled.
-                    for blending in (False, True):
-                        (enable if blending else disable)(0x0BE2)
-                        for alpha in (0.0, 0.25, 0.49, 0.5, 0.51, 0.75, 1.0):
-                            with self.subTest(tile=tile, environment=environment, no_discard=no_discard,
-                                              blending=blending, alpha=alpha):
-                                clear_color(*sentinel)
-                                clear(0x4000)
-                                test.sample(program, 1, alpha)
-                                result = (ct.c_float * 4)()
-                                test.read(4, 4, 1, 1, 0x1908, 0x1406, result)
-                                expected = ((1.0 - alpha, 0.25, 0.75, 1.0) if environment else
-                                            (sentinel if alpha < 0.5 else (0.0, 0.25, 0.75, 1.0)))
-                                for actual, value in zip(result, expected):
-                                    self.assertAlmostEqual(value, actual, places=5)
+                    rows = ("rowSkin", "rowHair", "rowMetal1", "rowMetal2", "rowCloth1", "rowCloth2",
+                            "rowLeath1", "rowLeath2", "rowTat1", "rowTat2")
+                    for rgb_layer in rgb_layers:
+                        for blending in (False, True):
+                            (enable if blending else disable)(0x0BE2)
+                            for alpha in (0.0, 0.25, 0.49, 0.5, 0.51, 0.75, 1.0):
+                                with self.subTest(tile=tile, environment=environment, no_discard=no_discard,
+                                                  blending=blending, alpha=alpha, rgb_layer=rgb_layer):
+                                    # Each case starts in native palette mode. The fixture
+                                    # then publishes an exact-RGB scalar only when requested.
+                                    for row in rows:
+                                        test.scalar(test.location(program, row.encode()), 0.0)
+                                    rgb = None if rgb_layer is None else (rgb_layer, 180, 75, 40)
+                                    test.sample(program, 1, alpha, rgb=rgb)
+                                    # sample() uploads the packed layer on texture unit 7.
+                                    # Bind every atlas to that unit, including atlas 3,
+                                    # then redraw after clearing the fixture's setup draw.
+                                    for sampler in (6, 8, 9):
+                                        test.integer(test.location(program, f"texUnit{sampler}".encode()), 7)
+                                    clear_color(*sentinel)
+                                    clear(0x4000)
+                                    test.begin(0x0007)
+                                    for point in ((-1, -1), (1, -1), (1, 1), (-1, 1)):
+                                        test.vertex(*point)
+                                    test.end()
+                                    result = (ct.c_float * 4)()
+                                    test.read(4, 4, 1, 1, 0x1908, 0x1406, result)
+                                    resolved_alpha = (1.0 if environment and rgb_layer is not None
+                                                      and rgb_layer not in (2, 3) else alpha)
+                                    expected = ((1.0 - resolved_alpha, 0.25, 0.75, 1.0) if environment else
+                                                (sentinel if resolved_alpha < 0.5 else (0.0, 0.25, 0.75, 1.0)))
+                                    for actual, value in zip(result, expected):
+                                        self.assertAlmostEqual(value, actual, places=5)
                 finally:
                     test.delete_program(program)
         finally:

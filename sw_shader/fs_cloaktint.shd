@@ -162,7 +162,8 @@ vec4 ResolveTintColor(float g, float layer, out float resolvedRow)
         // Metal layers rely on palette alpha for legacy reflection/specularity,
         // even without authored maps. Keep the neutral metal coverage curve;
         // other RGB layers stay opaque and never import a reference row's hue.
-        float environmentAlpha = layer > 1.5 && layer < 3.5 ? referenceShade.a : 1.0;
+        float environmentAlpha = CloakUsesPaletteAlpha() || (layer > 1.5 && layer < 3.5)
+            ? referenceShade.a : 1.0;
         paletteColor = vec4(clamp(decodedRgb * shadeScale, 0.0, 1.0), environmentAlpha);
     }
     resolvedRow = v;

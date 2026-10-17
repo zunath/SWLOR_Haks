@@ -119,6 +119,12 @@ vec4 SampleCloakTint(vec2 uv)
         source = replace_once(source, f"texture2D(texUnit7, {uv}, -10.0)", f"SampleCloakTint({uv})")
     if re.search(r"texture2D\s*\(\s*texUnit7\s*,", source.split("vec4 SampleCloakTint", 1)[1].split("}", 1)[1]):
         raise ValueError("fs_cloaktint.shd would still sample a whole cloak atlas")
+    # Exact RGB changes hue, not the neutral palette's cutout coverage. Keep
+    # nonmetal RGB opaque on reflective cloaks, matching the base shader.
+    source = replace_once(source,
+                          "float environmentAlpha = layer > 1.5 && layer < 3.5 ? referenceShade.a : 1.0;",
+                          "float environmentAlpha = CloakUsesPaletteAlpha() || (layer > 1.5 && layer < 3.5)\n"
+                          "            ? referenceShade.a : 1.0;")
     # The base shader enables environment mapping for every PLT material. Cloaks
     # additionally need the per-texture native ENVMAP choice from cloakmodel.2da.
     source = replace_once(source, "    fEnvMapLevel = 1.0 - paletteColor.a;",
