@@ -1,5 +1,8 @@
 """Restore large-body robe animation inheritance from its normal-body variant.
 
+Large bodies use engine phenotype 2; the second 2 in p??22_robe names is
+a robe lookup marker, not riding phenotype 22.
+
 Only the supermodel name and native animation part IDs change. Geometry, skin
 weights, inverse binds, transforms and local animation controllers stay intact.
 """

@@ -1,4 +1,4 @@
-"""Large robe 236 variants inherit actual coat motion with matching native IDs."""
+"""Phenotype-2 robe 236 variants inherit coat motion with matching native IDs."""
 from functools import lru_cache
 import struct
 import unittest
@@ -36,6 +36,35 @@ class RobeClothParentTests(unittest.TestCase):
                 self.assertEqual(after, repair.restore_parent(after, reference.read_bytes(), reference.stem))
                 self.assertEqual(mdl.binary_nodes(bytes(before)), mdl.binary_nodes(after))
                 self.assertEqual(model.clips.keys(), poses.Model(after).clips.keys())
+
+    def test_robe_236_hides_separately_equipped_shoulders(self):
+        lines = (repair.ROOT / 'sw_2da/parts_robe.2da').read_text().splitlines()
+        columns = lines[2].split()
+        row = next(line.split()[1:] for line in lines[3:]
+                   if line.split() and line.split()[0] == '236')
+        fields = dict(zip(columns, row))
+        self.assertEqual('1', fields['HIDESHOL'])
+        self.assertEqual('1', fields['HIDESHOR'])
+
+    def test_robe_body_ids_match_the_shared_body_that_owns_shoulders(self):
+        # Rigid shoulders attach below these canonical body bones. The stock
+        # large-body parent a_ba2 inherits a_ba; changing robe part IDs must not
+        # introduce a second, incompatible set of body animation IDs.
+        canonical = parent_model('a_ba')
+        bones = {name: part for name, _, part, _, _ in canonical.nodes}
+        for side in ('l', 'r'):
+            shoulder = next(node for node in canonical.nodes if node[0] == side + 'shoulder_g')
+            self.assertEqual(side + 'bicep_g', canonical.nodes[shoulder[1]][0])
+        checked = 0
+        for path in sorted((repair.ROOT / 'sw_pt_robe').glob('p??22_robe236.mdl')):
+            robe = poses.Model(path.read_bytes(), False)
+            ids = {name: part for name, _, part, _, _ in robe.nodes}
+            with self.subTest(model=path.stem):
+                for name in ('rootdummy', 'torso_g', 'lbicep_g', 'rbicep_g',
+                             'lforearm_g', 'rforearm_g'):
+                    self.assertEqual(bones[name], ids[name], name)
+            checked += 1
+        self.assertEqual(8, checked)
 
     def test_every_large_variant_resolves_coat_tracks_for_idle_walk_run_and_sitting(self):
         checked = 0
