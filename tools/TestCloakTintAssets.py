@@ -1,5 +1,7 @@
 """Cloak atlas coverage, palette layer preservation, and geometry sharing regressions."""
+import ctypes as ct
 import json
+import sys
 from pathlib import Path
 import tempfile
 import unittest
@@ -32,6 +34,73 @@ class CloakTintTests(unittest.TestCase):
             x, y = index % 4 * 512, index % 32 // 4 * 512
             actual = atlases[index // 32][y:y + 512, x:x + 512]
             self.assertTrue(np.array_equal(original, actual), entry['source'])
+
+    def test_shared_textures_cannot_disagree_about_opacity(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "sw_2da").mkdir()
+            (root / "sw_2da/cloakmodel.2da").write_text(
+                '2DA V2.0\n\nLABEL MODEL TEXTURE ENVMAP\n'
+                '0 Mantle 2 102 ****\n1 Reflective 2 102 default\n')
+            with patch.object(cloaks, "ROOT", root):
+                with self.assertRaisesRegex(ValueError, "102 has conflicting ENVMAP modes"):
+                    cloaks.opacity_texture_indices()
+
+    @unittest.skipUnless(sys.platform == "win32", "Requires the hidden Windows OpenGL fixture")
+    def test_palette_alpha_is_opacity_only_without_an_environment_map(self):
+        from TestTintShaderMaterials import OpenGL, MaterialTest
+
+        # Keep the shipped sampling, palette resolution and output-alpha code;
+        # remove lighting only so reflection coverage and opacity are observable.
+        adapter = """
+#undef LIGHTING
+#define LIGHTING 0
+#define SPECULAR_LIGHT 1
+uniform vec4 materialFrontDiffuse;
+varying vec2 vVertexTexCoords;
+vec2 vTexCoords;
+vec4 FragmentColor;
+float fEnvMapLevel;
+vec3 ApplyColorSpace(vec3 color) { return color; }
+void SetupStandardShaderInputs() { vTexCoords = vVertexTexCoords; fEnvMapLevel = 1.0; }
+void ApplyStandardShader() {}
+"""
+        shader = (cloaks.ROOT / "sw_shader/fs_cloaktint.shd").read_text()
+        shader = shader.replace('#include "inc_standard"', adapter).replace(
+            "gl_FragColor = vec4(FragmentColor.rgb, outputAlpha);",
+            "gl_FragColor = vec4(fEnvMapLevel, 0.0, 0.0, outputAlpha);")
+        gl = OpenGL()
+        try:
+            test = MaterialTest(gl)
+            clear_color = gl.function("glClearColor", None, ct.c_float, ct.c_float, ct.c_float, ct.c_float)
+            clear = gl.function("glClear", None, ct.c_uint)
+            sentinel = (0.125, 0.25, 0.375, 0.5)
+            mantle = json.loads(cloaks.MANIFEST.read_text())["textures"]["102"]["index"]
+            self.assertIn(mantle, cloaks.opacity_texture_indices())
+            self.assertNotIn(32, cloaks.opacity_texture_indices())
+            for tile, environment in [(tile, 0) for tile in cloaks.opacity_texture_indices()] + [(32, 1)]:
+                program = test.program("#version 120\n" + shader)
+                try:
+                    test.use(program)
+                    # Reuse the fixture's uploaded texture for each opacity atlas.
+                    for sampler in (6, 8):
+                        test.integer(test.location(program, f"texUnit{sampler}".encode()), 7)
+                    test.scalar(test.location(program, b"cloakTexture"), float(tile))
+                    for alpha in (0.0, 0.25, 0.75, 1.0):
+                        with self.subTest(tile=tile, environment=environment, alpha=alpha):
+                            clear_color(*sentinel)
+                            clear(0x4000)
+                            test.sample(program, 1, alpha)
+                            result = (ct.c_float * 4)()
+                            test.read(4, 4, 1, 1, 0x1908, 0x1406, result)
+                            expected = ((1.0 - alpha, 0.0, 0.0, 1.0) if environment else
+                                        (sentinel if alpha == 0.0 else (0.0, 0.0, 0.0, alpha)))
+                            for actual, value in zip(result, expected):
+                                self.assertAlmostEqual(value, actual, places=5)
+                finally:
+                    test.delete_program(program)
+        finally:
+            gl.close()
 
     def test_every_cloak_mdl_must_have_a_recorded_binding(self):
         manifest = json.loads(cloaks.MANIFEST.read_text())

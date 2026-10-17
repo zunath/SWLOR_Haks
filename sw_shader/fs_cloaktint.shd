@@ -59,6 +59,12 @@ uniform sampler2D texUnit8;
 uniform sampler2D texUnit9;
 uniform float cloakTexture;
 
+bool CloakUsesPaletteAlpha()
+{
+    float index = floor(cloakTexture + 0.5);
+    return index == 17.0 || index == 18.0 || index == 23.0 || index == 40.0 || index == 71.0 || index == 91.0 || index == 94.0 || index == 97.0 || index == 101.0 || index == 105.0 || index == 106.0 || index == 107.0;
+}
+
 vec4 SampleCloakTint(vec2 uv)
 {
     float tile = mod(floor(cloakTexture + 0.5), 32.0);
@@ -206,7 +212,7 @@ void main ()
     // texture0 is deliberately the opaque white placeholder, so the standard
     // setup cannot discover the PLT palette's environment-map coverage itself.
     // Reapply the same inc_standard path with the atlas alpha after normal-map setup.
-    fEnvMapLevel = 1.0 - paletteColor.a;
+    fEnvMapLevel = CloakUsesPaletteAlpha() ? 0.0 : 1.0 - paletteColor.a;
     vec3 surfaceColor = vTint;
 
     #if FRAGMENT_LIGHTING == 1 && LIGHTING == 1
@@ -252,6 +258,13 @@ void main ()
     // A small number of legacy hair/fur materials encoded cutout opacity in
     // their normal-map alpha channel. Preserve it only when the MTR opts in.
     float outputAlpha = materialFrontDiffuse.a;
+    if (CloakUsesPaletteAlpha())
+    {
+        // Mantles hide their lower section with a transparent cloth palette row.
+        outputAlpha *= paletteColor.a;
+        if (outputAlpha <= 0.0)
+            discard;
+    }
     if (useTexture1Alpha > 0.5)
     {
         outputAlpha *= texture2D(texUnit1, vTexCoords.xy).a;

@@ -61,14 +61,41 @@ def texture_ids():
                    and int(row[2]) > 0 and row[3].isdigit() and int(row[3]) > 0})
 
 
+def opacity_texture_indices():
+    """Preserve native opacity for cloak textures whose 2DA disables ENVMAP."""
+    lines = (ROOT / "sw_2da/cloakmodel.2da").read_text().splitlines()
+    columns = shlex.split(lines[2])
+    model, texture, environment = (columns.index(name) + 1 for name in ("MODEL", "TEXTURE", "ENVMAP"))
+    modes = {}
+    for line in lines[3:]:
+        row = shlex.split(line)
+        if len(row) <= environment or not row[model].isdigit() or int(row[model]) <= 0:
+            continue
+        if not row[texture].isdigit() or int(row[texture]) <= 0:
+            continue
+        number = int(row[texture])
+        opacity = row[environment] == "****"
+        if number in modes and modes[number] != opacity:
+            raise ValueError(f"Cloak texture {number} has conflicting ENVMAP modes")
+        modes[number] = opacity
+    return [index for index, number in enumerate(texture_ids()) if modes[number]]
+
+
 def shader_text():
     source = (ROOT / "sw_shader/fs_plt_tinter.shd").read_text()
     source = replace_once(source, "uniform sampler2D texUnit9;", "")
+    opacity = " || ".join(f"index == {index}.0" for index in opacity_texture_indices()) or "false"
     declarations = """uniform sampler2D texUnit6;
 uniform sampler2D texUnit7;
 uniform sampler2D texUnit8;
 uniform sampler2D texUnit9;
 uniform float cloakTexture;
+
+bool CloakUsesPaletteAlpha()
+{
+    float index = floor(cloakTexture + 0.5);
+    return OPACITY_INDICES;
+}
 
 vec4 SampleCloakTint(vec2 uv)
 {
@@ -83,11 +110,23 @@ vec4 SampleCloakTint(vec2 uv)
     return texture2D(texUnit9, atlasUV, -10.0);
 }
 """
-    source = replace_once(source, "uniform sampler2D texUnit7;", declarations)
+    source = replace_once(source, "uniform sampler2D texUnit7;", declarations.replace("OPACITY_INDICES", opacity))
     for uv in ("uv", "wrappedUV", "nearestUV"):
         source = replace_once(source, f"texture2D(texUnit7, {uv}, -10.0)", f"SampleCloakTint({uv})")
     if re.search(r"texture2D\s*\(\s*texUnit7\s*,", source.split("vec4 SampleCloakTint", 1)[1].split("}", 1)[1]):
         raise ValueError("fs_cloaktint.shd would still sample a whole cloak atlas")
+    # The base shader enables environment mapping for every PLT material. Cloaks
+    # additionally need the per-texture native ENVMAP choice from cloakmodel.2da.
+    source = replace_once(source, "    fEnvMapLevel = 1.0 - paletteColor.a;",
+                          "    fEnvMapLevel = CloakUsesPaletteAlpha() ? 0.0 : 1.0 - paletteColor.a;")
+    source = replace_once(source, "    float outputAlpha = materialFrontDiffuse.a;", """    float outputAlpha = materialFrontDiffuse.a;
+    if (CloakUsesPaletteAlpha())
+    {
+        // Mantles hide their lower section with a transparent cloth palette row.
+        outputAlpha *= paletteColor.a;
+        if (outputAlpha <= 0.0)
+            discard;
+    }""")
     return "// Authored by CloakTintAssets.py from fs_plt_tinter.shd.\n" + source
 
 
