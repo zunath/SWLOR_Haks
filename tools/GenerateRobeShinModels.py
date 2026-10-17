@@ -14,7 +14,7 @@ def outputs(root=ROOT):
     donor = body_model(ModelPath(root / 'sw_pt_root/pmh0.mdl').read_bytes())
     wearer = body_model(ModelPath(root / 'sw_pt_root/pmh200.mdl').read_bytes())
     for side in ('l', 'r'):
-        source = ModelPath(root / f'sw_pt_{side}shin/pmh0_shin{side}161.mdl').read_bytes()
+        source = ModelPath(root / f'sw_pt_{side}shin/pmh0_shin{side.upper()}161.mdl').read_bytes()
         name = f'pmh200_shin{side}161'
         yield root / f'sw_pt_{side}shin/{name}.mdl', remap(
             source, name, mapping_for(source, donor, wearer), bone_count=len(wearer.nodes))

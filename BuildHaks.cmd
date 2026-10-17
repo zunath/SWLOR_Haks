@@ -9,6 +9,8 @@ python -B tools/CheckNeckModels.py
 if errorlevel 1 exit /b %errorlevel%
 python -B tools/GenerateShoulderModels.py --check
 if errorlevel 1 exit /b %errorlevel%
+python -B tools/GenerateRobeShinModels.py --check
+if errorlevel 1 exit /b %errorlevel%
 python -B tools/CheckNwsyncResources.py
 if errorlevel 1 exit /b %errorlevel%
 set "PACKER=%~dp0..\tools\SWLOR.CLI\RunCLI.cmd"

@@ -9,6 +9,22 @@ from RobePoseAudit import Model
 
 
 class RobeShinModelsTests(unittest.TestCase):
+    def test_source_filename_case_is_portable(self):
+        for side in ('l', 'r'):
+            directory = shins.ROOT / f'sw_pt_{side}shin'
+            self.assertIn(f'pmh0_shin{side.upper()}161.mdl',
+                          {path.name for path in directory.iterdir()})
+
+    def test_native_variants_retain_the_source_tint_layers(self):
+        rows = {}
+        for line in (shins.ROOT / 'sw_2da/tintmap.2da').read_text().splitlines()[3:]:
+            fields = line.split()
+            if len(fields) == 4:
+                rows[(fields[1], fields[2])] = fields[3]
+        for side, material in (('l', 'pmh0_s_ls_777b08'), ('r', 'pmh0_s_rs_547efe')):
+            self.assertEqual(rows[(f'pmh0_shin{side}161', material)],
+                             rows[(f'pmh200_shin{side}161', material)])
+
     def test_checked_in_models_match_current_body_and_sources(self):
         for path, expected in shins.outputs():
             with self.subTest(model=path.name):
@@ -18,7 +34,7 @@ class RobeShinModelsTests(unittest.TestCase):
         for path, data in shins.outputs():
             with self.subTest(model=path.name):
                 side = path.parent.name.removeprefix('sw_pt_')[0]
-                original = ModelPath(path.parent / f'pmh0_shin{side}161.mdl').read_bytes()
+                original = ModelPath(path.parent / f'pmh0_shin{side.upper()}161.mdl').read_bytes()
                 old_raw = 12 + struct.unpack_from('<I', original, 4)[0]
                 new_raw = 12 + struct.unpack_from('<I', data, 4)[0]
                 self.assertEqual(original[old_raw:], data[new_raw:])
@@ -36,12 +52,14 @@ class RobeShinModelsTests(unittest.TestCase):
         wearer = body_model(ModelPath(shins.ROOT / 'sw_pt_root/pmh200.mdl').read_bytes())
         for path, data in shins.outputs():
             side = path.parent.name.removeprefix('sw_pt_')[0]
-            original = ModelPath(path.parent / f'pmh0_shin{side}161.mdl').read_bytes()
+            original = ModelPath(path.parent / f'pmh0_shin{side.upper()}161.mdl').read_bytes()
             with self.subTest(model=path.name):
                 old_skins, new_skins = skins(original), skins(data)
+                self.assertTrue(old_skins)
                 self.assertEqual(len(old_skins), len(new_skins))
                 moved = False
                 for (old_offset, old_slots), (new_offset, new_slots) in zip(old_skins, new_skins):
+                    self.assertEqual(len(old_slots), len(new_slots))
                     for (old_slot, old_bone), (slot, bone) in zip(old_slots, new_slots):
                         self.assertEqual(old_slot, slot)
                         self.assertEqual(donor.nodes[old_bone][0], wearer.nodes[bone][0])
