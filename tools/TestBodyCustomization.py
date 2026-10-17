@@ -83,6 +83,7 @@ class DefaultMaleBodyTests(unittest.TestCase):
                         data[offset:offset + 64] = bytes(64)
                 self.assertEqual(current, original)
                 palette = entries[name]["modelPalette"]
+                self.assertEqual({material for model, material in catalog if model == name}, {palette})
                 entry = entries[palette]
                 raw_palette = self.original(relative[:-4] + ".plt")
                 self.assertEqual(entry["sourceSha256"], hashlib.sha256(raw_palette).hexdigest())
