@@ -2,6 +2,7 @@
 from pathlib import Path
 from dataclasses import replace
 import struct
+import json
 import tempfile
 import unittest
 
@@ -147,6 +148,60 @@ class NativeRobeAnimationBankTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "skeleton or an unselected animation"):
             banks.validate_motion_revision(self.original, model.pack(model.name, model.parent, clips), ["clip2"])
 
+    def test_historical_bank_motion_can_be_revised_with_cleanmodels(self):
+        import GenerateRobeRgbModels as robes
+        manifest = json.loads(robes.MANIFEST.read_text())
+        active = robes.fresh_active_models()
+        historical = next((name for name in sorted(set(manifest["animation_bridges"].values()) & set(active))
+                           if not banks.CompiledBridge(active[name].read_bytes()).geometry_first), None)
+        if historical is None:
+            self.skipTest("The catalog no longer contains historical compiler banks")
+        model = banks.CompiledBridge(robes.owned_animation_bytes(historical, manifest, active))
+        original = model.pack(model.name, model.parent, model.clips[:2])
+        with tempfile.TemporaryDirectory() as folder:
+            stage = Path(folder)
+            for name in ("source", "binary"):
+                (stage / name).mkdir()
+            pending, seen = [model.parent], set()
+            while pending:
+                parent = pending.pop()
+                if parent in seen or parent.lower() == "null":
+                    continue
+                seen.add(parent)
+                if parent in active:
+                    data = active[parent].read_bytes()
+                    (stage / (parent + ".mdl")).write_bytes(data)
+                    ancestor = mdl.supermodel(data)
+                    if ancestor:
+                        pending.append(ancestor)
+            path = stage / (model.name + ".mdl")
+            path.write_bytes(original)
+            compiler, _ = mdl.prepare_compiler(stage)
+            mdl.run_compiler(compiler, stage, ["-de", str(path), str(stage / "source")], "decompile.log")
+            source = stage / "source" / path.name
+            source.write_text(poses.accurate_rotations(source.read_text(), original))
+            mdl.run_compiler(compiler, stage, ["-cne", str(source), str(stage / "binary")], "compile.log")
+            candidate = banks.CompiledBridge((stage / "binary" / path.name).read_bytes())
+            clips = list(candidate.clips)
+            changed = bytearray(clips[0].data)
+            duration = struct.unpack_from("<f", changed, 112)[0] + .25
+            struct.pack_into("<f", changed, 112, duration)
+            clips[0] = replace(clips[0], data=bytes(changed))
+            candidate_bytes = candidate.pack(candidate.name, candidate.parent, clips)
+            revised = banks.revise_motion(original, candidate_bytes, [candidate.clip_names[0]])
+            banks.validate_motion_revision(original, revised, [candidate.clip_names[0]])
+            before, after = banks.CompiledBridge(original), banks.CompiledBridge(revised)
+            self.assertEqual(before.pack(before.name, before.parent, []), after.pack(after.name, after.parent, []))
+            self.assertEqual(before.clips[1].relocated(0, before.name), after.clips[1].relocated(0, after.name))
+            self.assertEqual(struct.unpack_from("<f", after.clips[0].data, 112)[0], duration)
+            animations.validate_animation_parts(revised)
+            # A change to an unselected event/duration is still rejected.
+            changed = bytearray(clips[1].data)
+            struct.pack_into("<f", changed, 112, struct.unpack_from("<f", changed, 112)[0] + .25)
+            clips[1] = replace(clips[1], data=bytes(changed))
+            with self.assertRaisesRegex(ValueError, "unselected animation"):
+                banks.revise_motion(original, candidate.pack(candidate.name, candidate.parent, clips), [candidate.clip_names[0]])
+
     def test_skeleton_only_model_cannot_exceed_the_bank_target(self):
         empty = self.model.pack(self.model.name, self.model.parent, [])
         with self.assertRaisesRegex(ValueError, "skeleton alone exceeds"):
@@ -160,8 +215,8 @@ class NativeRobeAnimationBankTests(unittest.TestCase):
         for name in self.parts:
             with self.subTest(name=name):
                 mdl.run_compiler(self.compiler, self.stage,
-                                 ["-d", str(self.stage / f"{name}.mdl"), str(output) + "/"], f"{name}.decompile.log")
-                text = (output / f"{name}.mdl.ascii").read_text()
+                                 ["-de", str(self.stage / f"{name}.mdl"), str(output) + "/"], f"{name}.decompile.log")
+                text = (output / f"{name}.mdl").read_text()
                 self.assertEqual(name, animations.model_name(text))
                 self.assertEqual(banks.CompiledBridge(self.parts[name]).clip_names,
                                  [match[1] for match in animations.ANIMATION.finditer(text)])
