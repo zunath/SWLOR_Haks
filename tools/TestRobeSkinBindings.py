@@ -61,8 +61,7 @@ donemodel skinfit
 
     def test_rotated_mesh_with_translated_parent_returns_to_its_authored_place(self):
         repairs = poses.compiler_skin_binding_repairs(self.original)
-        self.assertEqual({row[:2] for row in repairs}, {("cloth", "joint")})
-        self.assertGreater(repairs[0][-1], 2)
+        self.assertEqual(repairs, [], "CleanModels must emit correct skin bindings without a legacy repair")
         corrected = poses.repair_compiler_skin_bindings(self.original)
         model = poses.Model(corrected, False)
         qoffset, toffset = model.skin_bindings()["cloth"]["joint"]
