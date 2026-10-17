@@ -6,7 +6,7 @@ from ModelLodAssets import ModelPath, content, model_paths
 
 # Generator, skin remapping, and model parser code that decides every alias's bytes.
 IMPLEMENTATION = ('tools/GenerateNeckModels.py', 'tools/NeckSkinBindings.py',
-                  'tools/RobePoseAudit.py', 'tools/CompileModels.py')
+                  'tools/RobePoseAudit.py', 'tools/CompileModels.py', 'tools/CleanModels.py')
 
 
 def source_digest(path):
@@ -36,7 +36,7 @@ def check(root):
     for name, expected in manifest['tables'].items():
         if hashlib.sha256((root / 'sw_2da' / name).read_text().encode()).hexdigest() != expected:
             failures.append(name)
-    implementation = manifest.get('implementation', {})
+    implementation = {**manifest.get('implementation', {}), **manifest.get('validation_implementation', {})}
     if set(implementation) != set(IMPLEMENTATION):
         failures.append('implementation')
     for relative, expected in implementation.items():
