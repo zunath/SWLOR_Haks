@@ -150,9 +150,9 @@ def generate(game_data: Path):
                 source = stage / "source"
                 source.mkdir(exist_ok=True)
                 source_path = source / path.name
-                source_path.write_bytes(mdl.protect_vertex_identity(data))
+                source_path.write_bytes(data)
                 mdl.run_compiler(compiler, stage, ["-cne", str(source_path), str(stage) + "/"], "compile.log")
-                data = poses.repair_compiler_skin_bindings(mdl.restore_vertex_attributes(data, path.read_bytes()))
+                data = path.read_bytes()
                 path.write_bytes(data)
                 exported = stage / "exported"
                 exported.mkdir(exist_ok=True)
