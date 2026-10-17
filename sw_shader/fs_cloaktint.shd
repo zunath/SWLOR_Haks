@@ -259,13 +259,10 @@ void main ()
     // A small number of legacy hair/fur materials encoded cutout opacity in
     // their normal-map alpha channel. Preserve it only when the MTR opts in.
     float outputAlpha = materialFrontDiffuse.a;
-    if (CloakUsesPaletteAlpha())
-    {
-        // Mantles hide their lower section with a transparent cloth palette row.
-        outputAlpha *= paletteColor.a;
-        if (outputAlpha <= 0.0)
-            discard;
-    }
+    // The shared cloak material is opaque: palette alpha is binary coverage,
+    // not fractional blending. Keep the wearer's material fade independent.
+    if (CloakUsesPaletteAlpha() && paletteColor.a < 0.5)
+        discard;
     if (useTexture1Alpha > 0.5)
     {
         outputAlpha *= texture2D(texUnit1, vTexCoords.xy).a;

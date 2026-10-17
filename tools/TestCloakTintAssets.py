@@ -47,7 +47,7 @@ class CloakTintTests(unittest.TestCase):
                     cloaks.opacity_texture_indices()
 
     @unittest.skipUnless(sys.platform == "win32", "Requires the hidden Windows OpenGL fixture")
-    def test_palette_alpha_is_opacity_only_without_an_environment_map(self):
+    def test_palette_alpha_is_cutout_only_without_an_environment_map(self):
         from TestTintShaderMaterials import OpenGL, MaterialTest
 
         # Keep the shipped sampling, palette resolution and output-alpha code;
@@ -72,12 +72,16 @@ void ApplyStandardShader() {}
         shader = (cloaks.ROOT / "sw_shader/fs_cloaktint.shd").read_text()
         shader = shader.replace('#include "inc_standard"', adapter).replace(
             "gl_FragColor = vec4(FragmentColor.rgb, outputAlpha);",
-            "gl_FragColor = vec4(fEnvMapLevel, 0.0, 0.0, outputAlpha);")
+            "gl_FragColor = vec4(fEnvMapLevel, 0.25, 0.75, outputAlpha);")
         gl = OpenGL()
         try:
             test = MaterialTest(gl)
             clear_color = gl.function("glClearColor", None, ct.c_float, ct.c_float, ct.c_float, ct.c_float)
             clear = gl.function("glClear", None, ct.c_uint)
+            enable = gl.function("glEnable", None, ct.c_uint)
+            disable = gl.function("glDisable", None, ct.c_uint)
+            blend = gl.function("glBlendFuncSeparate", None, ct.c_uint, ct.c_uint, ct.c_uint, ct.c_uint)
+            blend(0x0302, 0x0303, 1, 0x0303)  # Source-alpha RGB; source-over alpha.
             sentinel = (0.125, 0.25, 0.375, 0.5)
             mantle = json.loads(cloaks.MANIFEST.read_text())["textures"]["102"]["index"]
             self.assertIn(mantle, cloaks.opacity_texture_indices())
@@ -91,17 +95,22 @@ void ApplyStandardShader() {}
                     for sampler in (6, 8):
                         test.integer(test.location(program, f"texUnit{sampler}".encode()), 7)
                     test.scalar(test.location(program, b"cloakTexture"), float(tile))
-                    for alpha in (0.0, 0.25, 0.75, 1.0):
-                        with self.subTest(tile=tile, environment=environment, no_discard=no_discard, alpha=alpha):
-                            clear_color(*sentinel)
-                            clear(0x4000)
-                            test.sample(program, 1, alpha)
-                            result = (ct.c_float * 4)()
-                            test.read(4, 4, 1, 1, 0x1908, 0x1406, result)
-                            expected = ((1.0 - alpha, 0.0, 0.0, 1.0) if environment else
-                                        (sentinel if alpha == 0.0 else (0.0, 0.0, 0.0, alpha)))
-                            for actual, value in zip(result, expected):
-                                self.assertAlmostEqual(value, actual, places=5)
+                    # Check actual compositing over a contrasting background, both
+                    # in the opaque pass and with source-alpha blending enabled.
+                    for blending in (False, True):
+                        (enable if blending else disable)(0x0BE2)
+                        for alpha in (0.0, 0.25, 0.49, 0.5, 0.51, 0.75, 1.0):
+                            with self.subTest(tile=tile, environment=environment, no_discard=no_discard,
+                                              blending=blending, alpha=alpha):
+                                clear_color(*sentinel)
+                                clear(0x4000)
+                                test.sample(program, 1, alpha)
+                                result = (ct.c_float * 4)()
+                                test.read(4, 4, 1, 1, 0x1908, 0x1406, result)
+                                expected = ((1.0 - alpha, 0.25, 0.75, 1.0) if environment else
+                                            (sentinel if alpha < 0.5 else (0.0, 0.25, 0.75, 1.0)))
+                                for actual, value in zip(result, expected):
+                                    self.assertAlmostEqual(value, actual, places=5)
                 finally:
                     test.delete_program(program)
         finally:

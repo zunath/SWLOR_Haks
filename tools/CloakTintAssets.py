@@ -124,13 +124,10 @@ vec4 SampleCloakTint(vec2 uv)
     source = replace_once(source, "    fEnvMapLevel = 1.0 - paletteColor.a;",
                           "    fEnvMapLevel = CloakUsesPaletteAlpha() ? 0.0 : 1.0 - paletteColor.a;")
     source = replace_once(source, "    float outputAlpha = materialFrontDiffuse.a;", """    float outputAlpha = materialFrontDiffuse.a;
-    if (CloakUsesPaletteAlpha())
-    {
-        // Mantles hide their lower section with a transparent cloth palette row.
-        outputAlpha *= paletteColor.a;
-        if (outputAlpha <= 0.0)
-            discard;
-    }""")
+    // The shared cloak material is opaque: palette alpha is binary coverage,
+    // not fractional blending. Keep the wearer's material fade independent.
+    if (CloakUsesPaletteAlpha() && paletteColor.a < 0.5)
+        discard;""")
     return "// Authored by CloakTintAssets.py from fs_plt_tinter.shd.\n" + source
 
 
