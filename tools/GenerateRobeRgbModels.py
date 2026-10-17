@@ -300,11 +300,20 @@ def audited_files(manifest):
     return {**manifest["files"], **validation_tools}
 
 
+def material_input_errors(manifest):
+    recorded = manifest.get("compiler_materials")
+    if recorded is None:
+        return (["Robe compiler material provenance is missing; regenerate and validate"]
+                if manifest.get("compiler_sha256") == mdl.COMPILER_SHA256 else [])
+    return ([] if mdl.compiler_material_state(recorded, refresh=True) == recorded else
+            ["Active compiler material dependencies changed; regenerate and validate"])
+
+
 def check() -> list[str]:
     if not MANIFEST.is_file():
         return ["Robe RGB model manifest is missing; regenerate the robe models"]
     manifest = json.loads(MANIFEST.read_text())
-    errors = []
+    errors = material_input_errors(manifest)
     try:
         current_files = audited_files(manifest)
     except ValueError as error:
@@ -510,7 +519,9 @@ def retained_model_files(manifest, generated_names, phenotype_ids, active):
     return retained
 
 
-def validate_input_snapshot(dependencies, active, input_digests):
+def validate_input_snapshot(dependencies, active, input_digests, compiler_materials=None):
+    if compiler_materials is not None and mdl.compiler_material_state(compiler_materials, refresh=True) != compiler_materials:
+        raise ValueError("Active material dependencies changed during robe generation")
     for name, data in dependencies.items():
         if name in active and (not active[name].is_file() or active[name].read_bytes() != data):
             raise ValueError(f"Source changed during robe generation: {active[name]}")
@@ -523,6 +534,7 @@ def snapshot_manifest_inputs(dependencies, active, input_digests):
     paths = [ROOT / "tools" / name for name in GENERATOR_INPUTS + PACKAGING_INPUTS]
     paths += [ROOT / name for name in CATALOG_INPUTS]
     files = {path.relative_to(ROOT).as_posix(): input_digests[path] for path in paths}
+    files.update({path.relative_to(ROOT).as_posix(): digest for path, digest in input_digests.items() if path.suffix.lower() == ".mtr"})
     files.update({active[name].relative_to(ROOT).as_posix(): content_digest(active[name], data)
                   for name, data in dependencies.items() if name in active})
     return files
@@ -780,6 +792,8 @@ def main():
     for name, data in sources.items():
         (stage / "source" / f"{name}.mdl").write_bytes(data)
         (stage / "input" / f"{name}.mdl").write_bytes(data)
+    compiler_materials = mdl.compiler_material_state(set().union(*(mdl.material_references(source) for source in sources.values())), refresh=True)
+    input_digests.update({ROOT / entry["path"]: entry["sha256"] for entry in compiler_materials.values() if entry is not None})
     # A cache hit requires the exact generated source, compiler, current parent,
     # validation code, original inverse binds and owned binary to agree.
     validation_digest = hashlib.sha256(json.dumps(
@@ -803,7 +817,8 @@ def main():
             parent_digests[parent] = hashlib.sha256(parent_data).hexdigest()
         original = dependencies[original_robes[name]] if name in original_robes else b""
         base = reference_bodies[name[:3] + "0"] if name in complete_roots else b""
-        validation_key = hashlib.sha256(bytes.fromhex(validation_digest) +
+        material_digest = mdl.compiler_material_digest(source, compiler_materials)
+        validation_key = hashlib.sha256(bytes.fromhex(validation_digest) + bytes.fromhex(material_digest) +
                                        hashlib.sha256(original).digest() + hashlib.sha256(base).digest()).hexdigest()
         key = build_cache.build_key(source, compiler_hash, parent_digests[parent], validation_key)
         build_keys[name] = key
@@ -813,7 +828,8 @@ def main():
                          else previous.read_bytes() if previous is not None else b"")
         relative = f"{model_directory(name)}/{name}.mdl"
         path = stage / "binary" / f"{name}.mdl"
-        compile_key = checkpoint.key(source, compiler_hash, parent_digests[parent], original, base, processors)
+        compile_processors = hashlib.sha256(bytes.fromhex(processors) + bytes.fromhex(material_digest)).hexdigest()
+        compile_key = checkpoint.key(source, compiler_hash, parent_digests[parent], original, base, compile_processors)
         if path.is_file() and checkpoint.matches(compilation_records.get(name), compile_key, path.read_bytes()):
             # Compilation checkpoints carry no validation proof. Keep these
             # models in `changed` so every current audit runs before publishing.
@@ -978,7 +994,7 @@ def main():
     (stage / "roberender.2da").write_text(table, encoding="ascii")
     (stage / "phenotype.2da").write_text("\n".join(phenotype_lines).rstrip() + "\n", encoding="ascii")
     if args.apply:
-        validate_input_snapshot(dependencies, active, input_digests)
+        validate_input_snapshot(dependencies, active, input_digests, compiler_materials)
         input_files = snapshot_manifest_inputs(dependencies, active, input_digests)
         stock_hashes = {name: hashlib.sha256(data).hexdigest()
                         for name, data in sorted(dependencies.items()) if name not in active}
@@ -1005,7 +1021,7 @@ def main():
             shutil.copyfile(stage / "binary" / f"{name}.mdl", directory / f"{name}.mdl")
         shutil.copyfile(stage / "roberender.2da", TABLE)
         shutil.copyfile(stage / "phenotype.2da", PHENOTYPES)
-        manifest = {"compiler_sha256": compiler_hash, "independent_skeletons": True,
+        manifest = {"compiler_sha256": compiler_hash, "compiler_materials": compiler_materials, "independent_skeletons": True,
                     "model_builds": model_builds,
                     "garment_node_names": {**prior_manifest.get("garment_node_names", {}), **renamed_nodes},
                     "body_pose_samples": checked_poses,

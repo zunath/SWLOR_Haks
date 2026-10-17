@@ -93,6 +93,36 @@ class CleanModelsTests(unittest.TestCase):
                 mdl.run_compiler(Path("compiler.exe"), stage, args, "compile.log")
             self.assertEqual(seen, ["first material version", "changed active material"])
 
+    def test_material_only_changes_and_new_materials_invalidate_proofs(self):
+        import GenerateRobeRgbModels as robes
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            source = b"newmodel sample\nmaterialname normalmat\nbitmap later\n"
+            material = root / "normalmat.mtr"
+            material.write_text("first material contents")
+            with patch.object(mdl, "ROOT", root), patch.object(mdl.tint, "hak_directories", return_value=(root,)):
+                try:
+                    state = mdl.compiler_material_state(mdl.material_references(source), refresh=True)
+                    original = mdl.compiler_material_digest(source, state)
+                    manifest = {"compiler_sha256": mdl.COMPILER_SHA256, "compiler_materials": state}
+                    self.assertEqual(robes.material_input_errors(manifest), [])
+                    material.write_text("changed normal-map settings")
+                    changed = mdl.compiler_material_state(state, refresh=True)
+                    self.assertNotEqual(original, mdl.compiler_material_digest(source, changed))
+                    self.assertTrue(robes.material_input_errors(manifest))
+                    with self.assertRaisesRegex(ValueError, "material dependencies changed"):
+                        robes.validate_input_snapshot({}, {}, {}, state)
+                    manifest["compiler_materials"] = changed
+                    self.assertEqual(robes.material_input_errors(manifest), [])
+                    (root / "later.mtr").write_text("newly resolved material")
+                    added = mdl.compiler_material_state(changed, refresh=True)
+                    self.assertNotEqual(mdl.compiler_material_digest(source, changed), mdl.compiler_material_digest(source, added))
+                    self.assertTrue(robes.material_input_errors(manifest))
+                    self.assertEqual(robes.material_input_errors({"compiler_sha256": "historical"}), [])
+                    self.assertTrue(robes.material_input_errors({"compiler_sha256": mdl.COMPILER_SHA256}))
+                finally:
+                    mdl.material_resources.cache_clear()
+
     def test_unrecognized_compiler_is_rejected(self):
         with tempfile.TemporaryDirectory() as directory:
             executable = Path(directory) / "cleanmodels.exe"

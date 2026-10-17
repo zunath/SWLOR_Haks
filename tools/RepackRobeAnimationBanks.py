@@ -46,6 +46,9 @@ def validate_stage(stage):
 def preflight(manifest):
     # Audit current tooling separately from original build fingerprints.
     # Only the packaging modules may change without a new validated fingerprint.
+    errors = robes.material_input_errors(manifest)
+    if errors:
+        raise ValueError("\n".join(errors))
     packaging = {"tools/RobeAnimationBanks.py", "tools/RepackRobeAnimationBanks.py"}
     if "tools/GenerateRobeRgbModels.py" not in manifest["files"]:
         raise ValueError("Missing validated generator fingerprint; regenerate the robe catalog")

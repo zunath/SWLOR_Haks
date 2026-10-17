@@ -448,6 +448,27 @@ def material_resources() -> dict[str, Path]:
             for path in directory.glob("*.mtr")}
 
 
+def material_references(source: bytes) -> set[str]:
+    return {value.decode("ascii").lower() for value in
+            re.findall(rb"(?im)^\s*(?:materialname|bitmap)\s+(\S+)", source)
+            if value.lower() not in {b"null", b"****"}}
+
+
+def compiler_material_state(names, refresh=False):
+    """Record selected MTR contents and absent lookups that could gain an MTR."""
+    if refresh:
+        material_resources.cache_clear()
+    active = material_resources()
+    return {name: ({"path": active[name].relative_to(ROOT).as_posix(),
+                    "sha256": digest(active[name].read_bytes())} if name in active else None)
+            for name in sorted(names)}
+
+
+def compiler_material_digest(source, state):
+    selected = {name: state[name] for name in sorted(material_references(source))}
+    return digest(json.dumps(selected, sort_keys=True).encode())
+
+
 def run_compiler(compiler: Path, staging: Path, arguments: list[str], log: str,
                  game_dir: Path | None = None) -> None:
     # Keep the shared generator call interface; translate it to CleanModels once.
@@ -461,9 +482,7 @@ def run_compiler(compiler: Path, staging: Path, arguments: list[str], log: str,
     for path in inputs:
         data = path.read_bytes()
         if not binary(data):
-            names = re.findall(rb"(?im)^\s*(?:materialname|bitmap)\s+(\S+)", data)
-            for value in names:
-                name = value.decode("ascii").lower()
+            for name in material_references(data):
                 target = staging / (name + ".mtr")
                 if name in material_resources():
                     shutil.copyfile(material_resources()[name], target)
