@@ -374,7 +374,7 @@ def main():
     input_manifest.write_bytes(initial)
     validation_sha = hashlib.sha256(json.dumps({**packaging, "compiler": manifest["compiler_sha256"],
         **{f"tools/{name}": robes.file_digest(robes.ROOT / "tools" / name)
-           for name in ("CompileModels.py", "RobePoseAudit.py", "RobeAnimations.py")}}, sort_keys=True).encode()).hexdigest()
+           for name in ("CompileModels.py", "CleanModels.py", "RobePoseAudit.py", "RobeAnimations.py")}}, sort_keys=True).encode()).hexdigest()
     updated = copy.deepcopy(manifest)
     records = updated.setdefault("animation_bank_sets", {})
     output_names, report = set(), []

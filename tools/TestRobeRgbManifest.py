@@ -4,6 +4,7 @@ from pathlib import Path
 import tempfile
 import unittest
 import sys
+import os
 from unittest.mock import patch
 
 import GenerateRobeRgbModels as g
@@ -90,13 +91,13 @@ class RobeRgbManifestTests(unittest.TestCase):
 
     def test_current_apply_rejects_corrupt_compiler(self):
         with tempfile.TemporaryDirectory() as directory:
-            (Path(directory) / "nwnmdlcomp.exe").write_bytes(b"corrupt compiler")
+            (Path(directory) / "cleanmodels.exe").write_bytes(b"corrupt compiler")
             with patch.object(sys, "argv", ["generate", "--apply", "--game-data", "game"]), \
                     patch.object(g, "check", return_value=[]), \
                     patch.object(g, "stock_sources_current", return_value=True), \
-                    patch.object(g.mdl, "ROOT", Path(directory)), \
+                    patch.dict(os.environ, {"CLEANMODELS": str(Path(directory) / "cleanmodels.exe")}), \
                     patch.object(g, "fresh_active_models") as discover:
-                with self.assertRaisesRegex(RuntimeError, "Unsupported nwnmdlcomp.exe"):
+                with self.assertRaisesRegex(RuntimeError, "Unsupported CleanModels executable"):
                     g.main()
                 discover.assert_not_called()
 
@@ -199,11 +200,21 @@ class RobeRgbManifestTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "not a verified prior"):
                 g.validate_output_ownership(selected, {3: 34}, prior, active, manifest)
 
+    def test_validation_tools_cannot_override_asset_hashes_or_erase_build_provenance(self):
+        manifest = {"files": {"tools/CompileModels.py": "old", "sw_pt_root/body.mdl": "authored"},
+                    "validation_tool_files": {"tools/CompileModels.py": "new"}}
+        self.assertEqual(g.audited_files(manifest)["tools/CompileModels.py"], "new")
+        self.assertEqual(manifest["files"]["tools/CompileModels.py"], "old")
+        manifest["validation_tool_files"]["sw_pt_root/body.mdl"] = "changed"
+        with self.assertRaisesRegex(ValueError, "generator Python sources"):
+            g.audited_files(manifest)
+
     def test_compile_helpers_are_required_manifest_inputs(self):
         self.assertIn("CompileModels.py", g.GENERATOR_INPUTS)
         manifest = json.loads(g.MANIFEST.read_text())
+        audited = g.audited_files(manifest)
         for name in g.GENERATOR_INPUTS + g.PACKAGING_INPUTS:
-            self.assertEqual(g.file_digest(g.ROOT / "tools" / name), manifest["files"]["tools/" + name])
+            self.assertEqual(g.file_digest(g.ROOT / "tools" / name), audited["tools/" + name])
         for name in g.CATALOG_INPUTS:
             self.assertEqual(g.file_digest(g.ROOT / name), manifest["files"][name])
 

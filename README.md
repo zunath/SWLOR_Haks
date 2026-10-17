@@ -45,3 +45,30 @@ The hash manifest in `tools/RobeRgbModels.json` detects changed source models an
 stale generated outputs; the regular tint audit also runs this check.
 
 If you have any questions or issues please contact us on the Discord.
+
+## Model compiler
+
+Use CleanModels CLI v4.4.2 bundled with [cleanmodels-qt v1.1.7](https://github.com/plenarius/cleanmodels-qt/releases/tag/v1.1.7).
+Install the pinned Windows release (archive and executable hashes are checked):
+
+```powershell
+powershell -ExecutionPolicy Bypass -File tools/SetupModelCompiler.ps1
+python tools/CompileModels.py --model <resref> --game-data "<NWN install>/data"
+```
+
+The default install is `%LOCALAPPDATA%/SWLOR/tools/cleanmodels-qt/1.1.7/cleanmodels-qt/cleanmodels.exe`.
+Set `CLEANMODELS` for another install of the same CLI. The shared generator
+adapter runs CleanModels directly, supplies staged dependencies/materials and
+custom body skeletons, and validates binary and round-trip data before `--apply`.
+It does not invoke the old compiler or the game executable. Compiler hashes are
+part of generation caches, so changing compilers requires revalidation.
+The adapter spells out omitted static identity rotations in temporary inputs
+to avoid non-unit default quaternions from v4.4.2. Authored rotations and source
+files remain intact. Animation banks accept both compiler layouts and relocate
+stored parent offsets during split/join and controller stripping.
+Existing binary assets are not rebuilt by installing the tool. Their manifests
+keep original build-tool fingerprints and compiler hashes; separate
+`validation_tool_files` / `validation_implementation` entries record the current
+Python audit tools. These entries cannot override model or texture hashes, and
+new generation still invalidates caches using the actual compiler/tool hashes. The old
+`nwnmdlcomp.exe` file is retained for historical reference only.

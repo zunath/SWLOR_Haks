@@ -117,7 +117,7 @@ def main():
         if not panels:
             continue
         encoded = source.encode("latin1")
-        prepared = mdl.protect_vertex_identity(encoded)
+        prepared = encoded
         if model.parent in missing:
             # Legacy phenotype 22 parents are absent from both the HAKs and
             # stock data. Match the compiler's existing missing-parent workflow;
@@ -132,7 +132,7 @@ def main():
     mdl.run_compiler(compiler, stage, ["-cne", str(stage / "input/*.mdl"), str(stage / "binary") + "/"], "compile.log")
     for path, (before, source, panels) in changed.items():
         output = stage / "binary" / path.name
-        data = mdl.restore_vertex_attributes(source, output.read_bytes())
+        data = output.read_bytes()
         if mdl.supermodel(before) in missing:
             patched = bytearray(data)
             patched[180:244] = mdl.supermodel(before).encode("ascii").ljust(64, b"\0")

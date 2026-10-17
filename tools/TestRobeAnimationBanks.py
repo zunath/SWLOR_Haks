@@ -160,8 +160,8 @@ class NativeRobeAnimationBankTests(unittest.TestCase):
         for name in self.parts:
             with self.subTest(name=name):
                 mdl.run_compiler(self.compiler, self.stage,
-                                 ["-d", str(self.stage / f"{name}.mdl"), str(output) + "/"], f"{name}.decompile.log")
-                text = (output / f"{name}.mdl.ascii").read_text()
+                                 ["-de", str(self.stage / f"{name}.mdl"), str(output) + "/"], f"{name}.decompile.log")
+                text = (output / f"{name}.mdl").read_text()
                 self.assertEqual(name, animations.model_name(text))
                 self.assertEqual(banks.CompiledBridge(self.parts[name]).clip_names,
                                  [match[1] for match in animations.ANIMATION.finditer(text)])

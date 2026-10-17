@@ -1,16 +1,14 @@
 #!/usr/bin/env python3
 """Compile source MDLs without changing the installed game or its registry.
 
-The bundled EE-aware nwnmdlcomp understands materialname and renderhint, but
-its loader predates EE's KEY layout. A temporary copy changes only the fallback
-directory string to './'. An empty KEY and the real supermodel closure in that
-directory satisfy its loader; the compilation code is unchanged. Source files
-are replaced only after every output passes a geometry/material/skin audit.
+Uses CleanModels v4.4.2 bundled with cleanmodels-qt v1.1.7. Source files are
+replaced only after every output passes a geometry/material/skin audit.
 """
 
 from __future__ import annotations
 
 import argparse
+from functools import lru_cache
 from collections import defaultdict
 import hashlib
 import json
@@ -22,11 +20,11 @@ import struct
 import subprocess
 import time
 
+import CleanModels
 import GenerateTintMapAssets as tint
 
 ROOT = Path(__file__).resolve().parents[1]
-COMPILER_SHA256 = "0e32070c3e00a07a5f9e93b7e4a63a40dd5486b974900bbb8a0d2f4424c612bb"
-FALLBACK_DIRECTORY = b"C:/NeverwinterNights/Nwn/"
+COMPILER_SHA256 = CleanModels.COMPILER_SHA256
 ARRAY_PROPERTIES = {"verts", "tverts", "tverts1", "tverts2", "tverts3", "faces", "weights", "constraints", "normals", "colors"}
 
 
@@ -344,16 +342,10 @@ def validate_round_trip(source: bytes, compiled: bytes, decompiled: str) -> None
 
 
 def prepare_compiler(staging: Path) -> tuple[Path, str]:
-    data = (ROOT / "nwnmdlcomp.exe").read_bytes()
-    if digest(data) != COMPILER_SHA256 or data.count(FALLBACK_DIRECTORY) != 1:
-        raise RuntimeError("Unsupported nwnmdlcomp.exe; review its material support and loader before updating the expected hash")
-    replacement = b"./" + bytes(len(FALLBACK_DIRECTORY) - 2)
-    patched = data.replace(FALLBACK_DIRECTORY, replacement)
-    compiler = staging / "nwnmdlcomp.exe"
-    compiler.write_bytes(patched)
-    # Valid, empty legacy KEY. Dependencies are staged as real loose MDLs.
-    (staging / "chitin.key").write_bytes(struct.pack("<4s4s6I32x", b"KEY ", b"V1  ", 0, 0, 64, 64, 0, 0))
-    return compiler, digest(patched)
+    source = CleanModels.find_compiler()
+    compiler = staging / "cleanmodels.exe"
+    shutil.copyfile(source, compiler)
+    return compiler, digest(compiler.read_bytes())
 
 
 def repair_legacy_input(data: bytes, dangly_periods: dict[tuple[str, str], str] | None = None) -> tuple[bytes, list[str]]:
@@ -413,110 +405,42 @@ def repair_legacy_input(data: bytes, dangly_periods: dict[tuple[str, str], str] 
     return text.encode("latin1"), repairs
 
 
-def protect_vertex_identity(data: bytes) -> bytes:
-    """Use discarded UV W values to prevent the legacy compiler losing attributes.
-
-    NmcCompareBuiltVertices compares UVW but omits skin weights. Normals/colors
-    also need source identity because the legacy compiler discards some kinds.
-    NmcGenerateBumpmapData uses only serialized CVector2 UVs; mirror flags come
-    from the explicit mirror list. Neither uses W.
-    """
-    text = data.decode("latin1")
-    def protect(match):
-        body = match[3]
-        props = parse_nodes(match[0])[0][2]
-        if not props.get("faces") or not (props.get("weights") or props.get("normals") or props.get("colors")):
-            return match[0]
-        faces = []
-        rows = []
-        identities = {}
-        old_uv = props.get("tverts", [])
-        for face in props["faces"]:
-            face = list(face)
-            for corner in range(3):
-                vertex, uv = int(face[corner]), int(face[4 + corner])
-                pair = (vertex, uv)
-                if pair not in identities:
-                    identities[pair] = len(rows)
-                    value = old_uv[uv][:2] if old_uv else ["0", "0"]
-                    rows.append([*value, str(vertex + 1)])
-                face[4 + corner] = str(identities[pair])
-            faces.append(face)
-        def replace_array(key, values, original_count):
-            nonlocal body
-            replacement = f"  {key} {len(values)}\n" + "".join("    " + " ".join(row) + "\n" for row in values)
-            pattern = rf"(?im)^\s*{key}\s+\d+[^\n]*\n(?:[^\n]*\n){{{original_count}}}"
-            if re.search(pattern, body):
-                body = re.sub(pattern, lambda _: replacement, body, count=1)
-            else:
-                body += replacement
-        replace_array("tverts", rows, len(old_uv))
-        replace_array("faces", faces, len(props["faces"]))
-        # Additional UV channels share face indices in this ASCII format.
-        for key in ("tverts1", "tverts2", "tverts3"):
-            old = props.get(key, [])
-            if old:
-                replace_array(key, [[*old[uv][:2], str(vertex + 1)] for vertex, uv in identities], len(old))
-        return f"node {match[1]} {match[2]}\n{body}endnode"
-    return re.sub(r"(?im)^\s*node\s+(\S+)\s+(\S+)\s*$([\s\S]*?)^\s*endnode\b", protect, text).encode("latin1")
+@lru_cache(maxsize=1)
+def material_resources() -> dict[str, Path]:
+    # Match the active HAK precedence without rescanning all folders per compile.
+    return {path.stem.lower(): path for directory in tint.hak_directories()
+            for path in directory.glob("*.mtr")}
 
 
-def restore_vertex_attributes(source: bytes, compiled: bytes) -> bytes:
-    """Preserve authored normals and colors the old compiler omits/recomputes."""
-    result = bytearray(compiled)
-    raw = 12 + struct.unpack_from("<I", result, 4)[0]
-    before = parse_nodes(source.decode("latin1"))
-    after = binary_nodes(compiled)
-    for (_, name, props), (other, _, mesh) in zip(before, after):
-        if name != other:
-            raise ValueError("Source/binary hierarchy differs before attribute restoration")
-        if mesh is None or not props.get("faces"):
-            continue
-        for key, pointer_offset in (("normals", 468), ("colors", 472)):
-            original = props.get(key, [])
-            if not original:
-                continue
-            if struct.unpack_from("<I", result, mesh["_mesh_offset"] + 440)[0] != 0:
-                raise ValueError(f"{name}: expected deinterleaved compiler vertex arrays")
-            values = [None] * len(mesh["verts"])
-            for old_face, new_face in zip(props["faces"], mesh["faces"]):
-                for corner in range(3):
-                    source_index, output_index = int(old_face[corner]), int(new_face[corner])
-                    if not equivalent(props["verts"][source_index], mesh["verts"][output_index]):
-                        raise ValueError(f"{name}: compiler changed vertex order before {key} restoration")
-                    value = original[source_index]
-                    if values[output_index] is not None and not equivalent(values[output_index], value):
-                        raise ValueError(f"{name}: compiler merged distinct source {key}")
-                    values[output_index] = value
-            if any(value is None for value in values):
-                raise ValueError(f"{name}: unmapped compiled vertex while restoring {key}")
-            while (len(result) - raw) % 4:
-                result.append(0)
-            pointer = len(result) - raw
-            if key == "normals":
-                if any(pointer != 0xFFFFFFFF for pointer in struct.unpack_from("<6I", result, mesh["_mesh_offset"] + 476)):
-                    raise ValueError(f"{name}: cannot replace normals while precomputed bump arrays exist")
-                result.extend(b"".join(struct.pack("<3f", *map(float, value)) for value in values))
-            else:
-                for value in values:
-                    channels = [color_byte(channel) for channel in value]
-                    result.extend(bytes([*channels, 255]))
-            struct.pack_into("<I", result, mesh["_mesh_offset"] + pointer_offset, pointer)
-    struct.pack_into("<I", result, 8, len(result) - raw)
-    return bytes(result)
-
-
-def run_compiler(compiler: Path, staging: Path, arguments: list[str], log: str) -> None:
-    with (staging / log).open("w", encoding="utf8") as stream:
-        result = subprocess.run([str(compiler), *arguments], cwd=staging, stdout=stream, stderr=subprocess.STDOUT, timeout=600)
-    text = (staging / log).read_text(encoding="utf8", errors="replace")
-    if result.returncode or re.search(r"(?i)(?:error:|aborted|unable to locate|unable to open)", text):
-        errors = [line for line in text.splitlines() if re.search(r"(?i)(?:error:|aborted|unable)", line)]
-        raise RuntimeError(f"Model compiler failed ({log}): " + "\n".join(errors[:30]))
+def run_compiler(compiler: Path, staging: Path, arguments: list[str], log: str,
+                 game_dir: Path | None = None) -> None:
+    # Keep the shared generator call interface; translate it to CleanModels once.
+    modes = {"-cne": "compile", "-de": "decompile"}
+    if len(arguments) != 3 or arguments[0] not in modes:
+        raise ValueError(f"Unsupported model compiler arguments: {arguments}")
+    source = Path(arguments[1])
+    inputs = sorted(source.parent.glob(source.name))
+    if not inputs:
+        raise ValueError(f"No model compiler inputs: {source}")
+    for path in inputs:
+        data = path.read_bytes()
+        if not binary(data):
+            names = re.findall(rb"(?im)^\s*(?:materialname|bitmap)\s+(\S+)", data)
+            for value in names:
+                name = value.decode("ascii").lower()
+                target = staging / (name + ".mtr")
+                if not target.exists() and name in material_resources():
+                    shutil.copyfile(material_resources()[name], target)
+    resources = [path for path in (ROOT / "sw_pt_root", ROOT / "sw_2da") if path.is_dir()]
+    output = Path(arguments[2])
+    output.mkdir(parents=True, exist_ok=True)
+    CleanModels.run(compiler, staging, modes[arguments[0]], inputs, output, log, resources, game_dir)
+    if modes[arguments[0]] == "compile":
+        for path in inputs:
+            CleanModels.validate_binary(output / path.name)
 
 
 def main() -> None:
-    import RobePoseAudit as poses
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--since", help="Compile ASCII models whose content differs from this git ref; default: every active ASCII model")
     parser.add_argument("--model", action="append", help="Compile only this resref (repeatable), plus ASCII supermodels")
@@ -599,9 +523,8 @@ def main() -> None:
         if model not in repairs or not any(item.lower().startswith(f"{node}: filled malformed empty dangly period") for item in repairs[model]):
             raise ValueError(f"Requested dangly period repair did not match a selected input: {model}/{node}")
     for name, data in inputs.items():
-        prepared = data
+        prepared = data if binary(data) else CleanModels.explicit_orientations(data)
         if not binary(data):
-            prepared = protect_vertex_identity(data)
             parent = supermodel(data)
             if parent in missing_supermodels:
                 local = parse_nodes(data.decode("latin1").split("endmodelgeom", 1)[0])
@@ -616,19 +539,18 @@ def main() -> None:
         if name in selected:
             (staging / "input" / f"{name}.mdl").write_bytes(prepared)
     print(f"Compiling {len(selected)} ASCII models; {len(dependencies)} models in the supermodel closure. Staging: {staging}", flush=True)
-    run_compiler(compiler, staging, ["-cne", str(staging / "input" / "*.mdl"), str(staging / "binary") + "/"], "compile.log")
+    run_compiler(compiler, staging, ["-cne", str(staging / "input" / "*.mdl"), str(staging / "binary") + "/"], "compile.log", args.game_data.parent if args.game_data else None)
     missing = [name for name in selected if not (staging / "binary" / f"{name}.mdl").is_file()]
     if missing:
         raise RuntimeError(f"Compiler produced no output for {missing[:20]}")
     for name in selected:
         path = staging / "binary" / f"{name}.mdl"
-        compiled = bytearray(poses.repair_compiler_skin_bindings(
-            restore_vertex_attributes(inputs[name], path.read_bytes())))
+        compiled = bytearray(path.read_bytes())
         if name in restored_supermodels:
             compiled[180:244] = restored_supermodels[name].encode("ascii").ljust(64, b"\0")
         path.write_bytes(compiled)
     print("Compilation complete; decompiling every output for validation.", flush=True)
-    run_compiler(compiler, staging, ["-de", str(staging / "binary" / "*.mdl"), str(staging / "decompiled") + "/"], "decompile.log")
+    run_compiler(compiler, staging, ["-de", str(staging / "binary" / "*.mdl"), str(staging / "decompiled") + "/"], "decompile.log", args.game_data.parent if args.game_data else None)
     report = {"compiler_sha256": COMPILER_SHA256, "staged_compiler_sha256": compiler_hash, "missing_supermodels": sorted(missing_supermodels), "input_repairs": repairs, "models": [], "failures": []}
     for name, path in sorted(selected.items()):
         compiled = (staging / "binary" / f"{name}.mdl").read_bytes()

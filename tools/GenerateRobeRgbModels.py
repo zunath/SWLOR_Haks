@@ -39,7 +39,7 @@ MANIFEST = ROOT / "tools" / "RobeRgbModels.json"
 PATTERN = re.compile(r"^(p[fm][a-z])0_robe(\d{3})$")
 NODE = re.compile(r"(?im)^\s*node\s+(\S+)\s+(\S+)\s*$([\s\S]*?)^\s*endnode\b")
 GENERATOR_INPUTS = ("GenerateRobeRgbModels.py", "RobeSkeleton.py", "RobePoseAudit.py",
-                    "RobeAnimations.py", "RobeSkirtBindings.py", "CompileModels.py", "ImportStockRobeTints.py",
+                    "RobeAnimations.py", "RobeSkirtBindings.py", "CompileModels.py", "CleanModels.py", "ImportStockRobeTints.py",
                     "TintMapStockRobes.json", "GenerateTintMapAssets.py", "RobeBuildCache.py",
                     "SharedRobeFamilies.py", "RobeSharingAudit.py",
                     "RobeCompilationCheckpoint.py", "RobeBankValidation.py", "ModelLodAssets.py")
@@ -291,19 +291,33 @@ def validate_model_chains(names, load):
     return longest
 
 
+def audited_files(manifest):
+    """Retain build provenance while recording updated Python audit tools."""
+    validation_tools = manifest.get("validation_tool_files", {})
+    allowed_tools = {f"tools/{name}" for name in GENERATOR_INPUTS + PACKAGING_INPUTS}
+    if not set(validation_tools) <= allowed_tools:
+        raise ValueError("Robe validation-tool fingerprints may only cover generator Python sources")
+    return {**manifest["files"], **validation_tools}
+
+
 def check() -> list[str]:
     if not MANIFEST.is_file():
         return ["Robe RGB model manifest is missing; regenerate the robe models"]
     manifest = json.loads(MANIFEST.read_text())
     errors = []
+    try:
+        current_files = audited_files(manifest)
+    except ValueError as error:
+        errors.append(str(error))
+        current_files = manifest["files"]
     for relative in [f"tools/{name}" for name in GENERATOR_INPUTS + PACKAGING_INPUTS] + list(CATALOG_INPUTS):
-        if relative not in manifest["files"]:
+        if relative not in current_files:
             errors.append(f"Robe RGB manifest does not track {relative}; regenerate and validate")
     if not manifest.get("independent_skeletons") or not manifest.get("body_pose_samples"):
         errors.append("Robe models lack independent skeleton and animation pose validation")
     if not manifest.get("garment_body_motion_checks"):
         errors.append("Robe models lack validation that garment wearer joints are bound to body bones")
-    for relative, expected in manifest["files"].items():
+    for relative, expected in current_files.items():
         path = ModelPath(ROOT / relative)
         if not path.is_file() or file_digest(path) != expected:
             errors.append(f"Robe RGB input/output changed: {relative}; regenerate and validate")
@@ -765,7 +779,7 @@ def main():
         mapping_rows.append((name, phenotype, 0))
     for name, data in sources.items():
         (stage / "source" / f"{name}.mdl").write_bytes(data)
-        (stage / "input" / f"{name}.mdl").write_bytes(mdl.protect_vertex_identity(data))
+        (stage / "input" / f"{name}.mdl").write_bytes(data)
     # A cache hit requires the exact generated source, compiler, current parent,
     # validation code, original inverse binds and owned binary to agree.
     validation_digest = hashlib.sha256(json.dumps(
@@ -776,7 +790,7 @@ def main():
     compilation_records = json.loads(checkpoint_path.read_text()) if checkpoint_path.is_file() else {}
     resumed = set()
     processors = hashlib.sha256(json.dumps({name: input_digests[ROOT / "tools" / name]
-                                           for name in ("CompileModels.py", "RobePoseAudit.py")},
+                                           for name in ("CompileModels.py", "CleanModels.py", "RobePoseAudit.py")},
                                           sort_keys=True).encode()).hexdigest()
     def compile_one(name):
         source = sources[name]
@@ -817,8 +831,7 @@ def main():
             return
         mdl.run_compiler(compiler, stage, ["-cne", str(stage / "input" / f"{name}.mdl"),
                                           str(stage / "binary") + "/"], "compile.log")
-        compiled = mdl.restore_vertex_attributes(source, path.read_bytes())
-        compiled = poses.repair_compiler_skin_bindings(compiled)
+        compiled = path.read_bytes()
         if name in renamed_nodes:
             compiled = poses.preserve_skin_bindings(original, compiled, renamed_nodes[name])
         path.write_bytes(compiled)

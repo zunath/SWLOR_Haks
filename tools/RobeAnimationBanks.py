@@ -1,7 +1,8 @@
 """Losslessly partition compiled, dummy-only robe bridges for NWSync.
 
-This reads the native nwnmdlcomp layout (232-byte model, 196-byte animation,
-112-byte dummy node). Only resource names and relative offsets are rewritten;
+This reads native MDL layouts from CleanModels and the historical compiler
+(232-byte model, 196-byte animation, 112-byte dummy node). Only resource names
+and relative offsets are rewritten;
 controller descriptors, float bytes, events and native part IDs are copied.
 Unexpected layouts fail closed. Joining a partition must reproduce its original
 compiled file byte for byte before any output can be installed.
@@ -88,6 +89,11 @@ class CompiledBridge:
         pointers = []
         cursor = self._array(120, 4, 232, pointers)
         offsets = [_uint(self.data, 232 + i * 4) for i in range(_uint(self.data, 124))]
+        self.geometry_first = _uint(self.data, 72) == cursor
+        if self.geometry_first:
+            start, pointers, rename = cursor, [], []
+            cursor = self._tree(cursor, pointers, rename)
+            self.geometry = self._component(start, cursor, pointers, rename)
         self.clips = []
         names = []
         for offset in offsets:
@@ -108,11 +114,12 @@ class CompiledBridge:
         if len(set(names)) != len(names) or names != sorted(names):
             raise ValueError("Animation names must be unique and sorted for native lookup")
         self.clip_names = names
-        if _uint(self.data, 72) != cursor:
-            raise ValueError("Unexpected model geometry offset")
-        start, pointers, rename = cursor, [], []
-        cursor = self._tree(cursor, pointers, rename)
-        self.geometry = self._component(start, cursor, pointers, rename)
+        if not self.geometry_first:
+            if _uint(self.data, 72) != cursor:
+                raise ValueError("Unexpected model geometry offset")
+            start, pointers, rename = cursor, [], []
+            cursor = self._tree(cursor, pointers, rename)
+            self.geometry = self._component(start, cursor, pointers, rename)
         if cursor != len(self.data):
             raise ValueError("Unrecognized trailing native model data")
 
@@ -135,26 +142,42 @@ class CompiledBridge:
             pointers.append(offset)
         return cursor + count * stride
 
-    def _tree(self, start, pointers, names, depth=0):
+    def _tree(self, start, pointers, names, depth=0, parent=0):
         if depth > 256:
             raise ValueError("Excessive dummy-node hierarchy depth")
         self._require(start, 112)
         if _uint(self.data, start + 108) != 1:
             raise ValueError("Only dummy-node animation bridges can be partitioned")
-        if any(self.data[start + 64:start + 72]):
-            raise ValueError("Unexpected runtime node pointers")
+        if _uint(self.data, start + 64):
+            raise ValueError("Unexpected runtime geometry pointer")
+        parent_pointer = _uint(self.data, start + 68)
+        if parent_pointer:
+            if parent_pointer != parent:
+                raise ValueError("Unexpected native parent node pointer")
+            pointers.append(start + 68)
         if _name(self.data, start + 32, 32) == self.name:
             names.append((start + 32, 32))
         count = _uint(self.data, start + 76)
-        cursor = self._array(start + 72, 4, start + 112, pointers)
+        # CleanModels writes controllers before the child array/subtrees. The
+        # historical compiler writes them after. Relocate either without
+        # changing any controller, event or native part-ID bytes.
+        controllers_first = _uint(self.data, start + 88) and _uint(self.data, start + 84) == start + 112
+        cursor = start + 112
+        if controllers_first:
+            cursor = self._array(start + 84, 12, cursor, pointers)
+            cursor = self._array(start + 96, 4, cursor, pointers)
+        children = cursor
+        cursor = self._array(start + 72, 4, cursor, pointers)
         for index in range(count):
-            offset = start + 112 + index * 4
+            offset = children + index * 4
             if _uint(self.data, offset) != cursor:
                 raise ValueError("Child nodes are not contiguous native compiler output")
             pointers.append(offset)
-            cursor = self._tree(cursor, pointers, names, depth + 1)
-        cursor = self._array(start + 84, 12, cursor, pointers)
-        return self._array(start + 96, 4, cursor, pointers)
+            cursor = self._tree(cursor, pointers, names, depth + 1, start)
+        if not controllers_first:
+            cursor = self._array(start + 84, 12, cursor, pointers)
+            cursor = self._array(start + 96, 4, cursor, pointers)
+        return cursor
 
     def _component(self, start, end, pointers, names):
         return Component(start, bytes(self.data[start:end]),
@@ -169,11 +192,15 @@ class CompiledBridge:
         _set_name(result, 168, 64, parent)
         struct.pack_into("<3I", result, 120, 232 if clips else 0, len(clips), len(clips))
         result.extend(bytes(4 * len(clips)))
+        if self.geometry_first:
+            _set_uint(result, 72, len(result))
+            result.extend(self.geometry.relocated(len(result), name))
         for index, clip in enumerate(clips):
             _set_uint(result, 232 + index * 4, len(result))
             result.extend(clip.relocated(len(result), name))
-        _set_uint(result, 72, len(result))
-        result.extend(self.geometry.relocated(len(result), name))
+        if not self.geometry_first:
+            _set_uint(result, 72, len(result))
+            result.extend(self.geometry.relocated(len(result), name))
         return struct.pack("<3I", 0, len(result), 0) + result
 
 
