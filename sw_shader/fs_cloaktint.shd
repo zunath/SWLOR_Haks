@@ -46,6 +46,7 @@
 #define SELF_ILLUMINATION_MAP 0
 #define ENVIRONMENT_MAP 1
 
+#define FORCE_ALLOW_DISCARD 1
 #include "inc_standard"
 
 // inc_common declares this sampler only for normal-mapped shaders. Legacy
@@ -58,6 +59,12 @@ uniform sampler2D texUnit7;
 uniform sampler2D texUnit8;
 uniform sampler2D texUnit9;
 uniform float cloakTexture;
+
+bool CloakUsesPaletteAlpha()
+{
+    float index = floor(cloakTexture + 0.5);
+    return index == 17.0 || index == 18.0 || index == 23.0 || index == 40.0 || index == 71.0 || index == 91.0 || index == 94.0 || index == 97.0 || index == 101.0 || index == 105.0 || index == 106.0 || index == 107.0;
+}
 
 vec4 SampleCloakTint(vec2 uv)
 {
@@ -155,7 +162,8 @@ vec4 ResolveTintColor(float g, float layer, out float resolvedRow)
         // Metal layers rely on palette alpha for legacy reflection/specularity,
         // even without authored maps. Keep the neutral metal coverage curve;
         // other RGB layers stay opaque and never import a reference row's hue.
-        float environmentAlpha = layer > 1.5 && layer < 3.5 ? referenceShade.a : 1.0;
+        float environmentAlpha = CloakUsesPaletteAlpha() || (layer > 1.5 && layer < 3.5)
+            ? referenceShade.a : 1.0;
         paletteColor = vec4(clamp(decodedRgb * shadeScale, 0.0, 1.0), environmentAlpha);
     }
     resolvedRow = v;
@@ -206,7 +214,7 @@ void main ()
     // texture0 is deliberately the opaque white placeholder, so the standard
     // setup cannot discover the PLT palette's environment-map coverage itself.
     // Reapply the same inc_standard path with the atlas alpha after normal-map setup.
-    fEnvMapLevel = 1.0 - paletteColor.a;
+    fEnvMapLevel = CloakUsesPaletteAlpha() ? 0.0 : 1.0 - paletteColor.a;
     vec3 surfaceColor = vTint;
 
     #if FRAGMENT_LIGHTING == 1 && LIGHTING == 1
@@ -252,6 +260,10 @@ void main ()
     // A small number of legacy hair/fur materials encoded cutout opacity in
     // their normal-map alpha channel. Preserve it only when the MTR opts in.
     float outputAlpha = materialFrontDiffuse.a;
+    // The shared cloak material is opaque: palette alpha is binary coverage,
+    // not fractional blending. Keep the wearer's material fade independent.
+    if (CloakUsesPaletteAlpha() && paletteColor.a < 0.5)
+        discard;
     if (useTexture1Alpha > 0.5)
     {
         outputAlpha *= texture2D(texUnit1, vTexCoords.xy).a;
