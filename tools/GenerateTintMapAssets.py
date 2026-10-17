@@ -788,6 +788,10 @@ def find_tint_source_models() -> dict[str, Path]:
     if neck_manifest.is_file():
         # These aliases keep their source neck's material scopes and dyes.
         derived.update(json.loads(neck_manifest.read_text())["aliases"])
+    shoulder_manifest = REPOSITORY_ROOT / "tools" / "ShoulderModels.json"
+    if shoulder_manifest.is_file():
+        # Phenotype-specific skins retain the authored shoulder materials.
+        derived.update(json.loads(shoulder_manifest.read_text())["models"])
     for name in active:
         match = re.fullmatch(r"p[fm][a-z]0_head1(\d{3})", name)
         if match and f"helm_{match[1]}" in active:
