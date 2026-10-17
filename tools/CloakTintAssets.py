@@ -83,6 +83,10 @@ def opacity_texture_indices():
 
 def shader_text():
     source = (ROOT / "sw_shader/fs_plt_tinter.shd").read_text()
+    # The opaque texture0 placeholder makes NWN select NO_DISCARD. Keep palette
+    # cutouts active even when inc_common would otherwise erase discard calls.
+    source = replace_once(source, '#include "inc_standard"',
+                          '#define FORCE_ALLOW_DISCARD 1\n#include "inc_standard"')
     source = replace_once(source, "uniform sampler2D texUnit9;", "")
     opacity = " || ".join(f"index == {index}.0" for index in opacity_texture_indices()) or "false"
     declarations = """uniform sampler2D texUnit6;

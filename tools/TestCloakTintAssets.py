@@ -56,6 +56,10 @@ class CloakTintTests(unittest.TestCase):
 #undef LIGHTING
 #define LIGHTING 0
 #define SPECULAR_LIGHT 1
+// Match inc_common's suppression of discard for an opaque placeholder texture.
+#if NO_DISCARD == 1 && FORCE_ALLOW_DISCARD != 1
+#define discard
+#endif
 uniform vec4 materialFrontDiffuse;
 varying vec2 vVertexTexCoords;
 vec2 vTexCoords;
@@ -78,8 +82,9 @@ void ApplyStandardShader() {}
             mantle = json.loads(cloaks.MANIFEST.read_text())["textures"]["102"]["index"]
             self.assertIn(mantle, cloaks.opacity_texture_indices())
             self.assertNotIn(32, cloaks.opacity_texture_indices())
-            for tile, environment in [(tile, 0) for tile in cloaks.opacity_texture_indices()] + [(32, 1)]:
-                program = test.program("#version 120\n" + shader)
+            cases = [(tile, 0) for tile in cloaks.opacity_texture_indices()] + [(32, 1)]
+            for tile, environment, no_discard in [(t, e, n) for t, e in cases for n in (0, 1)]:
+                program = test.program(f"#version 120\n#define NO_DISCARD {no_discard}\n" + shader)
                 try:
                     test.use(program)
                     # Reuse the fixture's uploaded texture for each opacity atlas.
@@ -87,7 +92,7 @@ void ApplyStandardShader() {}
                         test.integer(test.location(program, f"texUnit{sampler}".encode()), 7)
                     test.scalar(test.location(program, b"cloakTexture"), float(tile))
                     for alpha in (0.0, 0.25, 0.75, 1.0):
-                        with self.subTest(tile=tile, environment=environment, alpha=alpha):
+                        with self.subTest(tile=tile, environment=environment, no_discard=no_discard, alpha=alpha):
                             clear_color(*sentinel)
                             clear(0x4000)
                             test.sample(program, 1, alpha)

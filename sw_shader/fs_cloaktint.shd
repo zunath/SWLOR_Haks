@@ -46,6 +46,7 @@
 #define SELF_ILLUMINATION_MAP 0
 #define ENVIRONMENT_MAP 1
 
+#define FORCE_ALLOW_DISCARD 1
 #include "inc_standard"
 
 // inc_common declares this sampler only for normal-mapped shaders. Legacy
