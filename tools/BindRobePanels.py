@@ -344,12 +344,12 @@ def main():
         reference = stage / "reference" / path.name
         if not mdl.binary(data):
             reference_source = data
-            prepared = mdl.protect_vertex_identity(data)
+            prepared = data
             if mdl.supermodel(data) in missing:
                 prepared = re.sub(rb"(?im)^(\s*setsupermodel\s+\S+\s+)\S+", rb"\1NULL", prepared)
             reference.write_bytes(prepared)
             mdl.run_compiler(compiler, stage, ["-cne", str(reference), str(stage / "reference_binary") + "/"], "reference-compile.log")
-            data = mdl.restore_vertex_attributes(reference_source, (stage / "reference_binary" / path.name).read_bytes())
+            data = (stage / "reference_binary" / path.name).read_bytes()
             if mdl.supermodel(reference_source) in missing:
                 patched = bytearray(data)
                 patched[180:244] = mdl.supermodel(reference_source).encode("ascii").ljust(64, b"\0")
@@ -366,7 +366,7 @@ def main():
         if not bindings:
             continue
         encoded = source.encode("latin1")
-        prepared = mdl.protect_vertex_identity(encoded)
+        prepared = encoded
         if mdl.supermodel(data) in missing:
             prepared = re.sub(rb"(?im)^(\s*setsupermodel\s+\S+\s+)\S+", rb"\1NULL", prepared)
         (stage / "input" / path.name).write_bytes(prepared)
@@ -380,7 +380,7 @@ def main():
     mdl.run_compiler(compiler, stage, ["-cne", str(stage / "input/*.mdl"), str(stage / "binary") + "/"], "compile.log")
     for index, (path, (_, before, source, bindings)) in enumerate(changed.items(), 1):
         output = stage / "binary" / path.name
-        data = mdl.restore_vertex_attributes(source, output.read_bytes())
+        data = output.read_bytes()
         if mdl.supermodel(before) in missing:
             patched = bytearray(data)
             patched[180:244] = mdl.supermodel(before).encode("ascii").ljust(64, b"\0")
