@@ -355,13 +355,89 @@
         ]
       ],
       "sha256": "d9ecdbf4263bb61bd60621c8e3f9eef0f3d288e97faed27bf6e4c0a39edb3d5d"
+    },
+    "pmh0_shol1012": {
+      "source": "pmh0_shol006",
+      "path": "sw_pt_lshoul/pmh0_shol1012.mdl",
+      "mapping": [
+        [
+          [
+            0,
+            2,
+            2
+          ],
+          [
+            1,
+            13,
+            21
+          ]
+        ]
+      ],
+      "sha256": "055d02eacae3e8680a1ce9c287d3f81a4d2b795cefe0c0cdc8c866689884c981"
+    },
+    "pmh0_shol1013": {
+      "source": "pmh0_shol258",
+      "path": "sw_pt_lshoul/pmh0_shol1013.mdl",
+      "mapping": [
+        [
+          [
+            0,
+            36,
+            54
+          ],
+          [
+            1,
+            0,
+            0
+          ]
+        ]
+      ],
+      "sha256": "b55915fca8eca4185a2b1a211db3a2bc20f805b04ea39ea7f1948b35ef71fd83"
+    },
+    "pmh0_shor1014": {
+      "source": "pmh0_shor006",
+      "path": "sw_pt_rshoul/pmh0_shor1014.mdl",
+      "mapping": [
+        [
+          [
+            0,
+            2,
+            2
+          ],
+          [
+            1,
+            13,
+            21
+          ]
+        ]
+      ],
+      "sha256": "25422e8c7bd67694bae7b6531d5a69d9d0bc9fb4d8e1b2f377d3bedd3b3dcebd"
+    },
+    "pmh0_shor1015": {
+      "source": "pmh0_shor258",
+      "path": "sw_pt_rshoul/pmh0_shor1015.mdl",
+      "mapping": [
+        [
+          [
+            0,
+            36,
+            54
+          ]
+        ]
+      ],
+      "sha256": "92c31cefccf18830ca101c0fe8488a1fa16a352dbca327619a27b7aba1a83368"
     }
   },
   "inputs": {
+    "hakbuilder.json": "e3984e5b976fd0d72cb39b244e93d2f7636817ad3620eb68aa802d5a81dc20af",
     "sw_2da/roberender.2da": "2d1ec72f88fb7cc46d7e9420fbe64b0f78e64a17df731f7dde42c8fcbeec09c7",
+    "sw_pt_lshoul/pmh0_shoL006.mdl": "4da8dc450cda716b3265c4026676df09b03cdc71147f5e1655fda635d2a5e4ab",
     "sw_pt_lshoul/pmh0_shoL013.mdl": "eb8717eafe8e2e0554a243058b7a0d58ac481e395941c9838f4f02ea0d9ed670",
+    "sw_pt_lshoul/pmh0_shoL058.mdl": "b018d1cde338f7b4424dfcadab4892c926b99f25e8db333f965ac126fd3cd927",
+    "sw_pt_lshoul/pmh0_shoL100.mdl": "7a47c0788c460d28452afd965b71f72c8dee32bbd5522602450806bf9adf8243",
     "sw_pt_lshoul/pmh0_shoL185.mdl": "5d018d25aba32755838f2c628d57f72d754a57dfd4db68ff405c7d50c5a17709",
     "sw_pt_lshoul/pmh0_shoL256.mdl": "f02200bcf0c2573b673b9e30c5b660d76d78c04578e8a029308a4bf2894b32da",
+    "sw_pt_lshoul/pmh0_shoL258.mdl": "a794669aaea5330c60d265bc8a36dca8db4e0ab1a34df87a82f3e9ede96f2fa4",
     "sw_pt_lshoul/pmh0_shoL260.mdl": "393eccb593b4ac651204d2af4ae34c46cd1484cfd3d661da71af18fb60eff3ca",
     "sw_pt_lshoul/pmh0_shol140.mdl": "45bd431e314bf79b4029d603f8f2b5c44b5ecf4388f1249c83244568adf97bf5",
     "sw_pt_lshoul/pmh0_shol141.mdl": "e8e95736ef501ab579eeaeca2c404310ae0e545a37ee1875718de0db79f625e0",
@@ -537,18 +613,46 @@
     "sw_pt_root/pmh97.mdl": "e654c64f2282275a0e2bba7cac7d26f58bedd9fed5e5185cdbedbd4c4c9a1ead",
     "sw_pt_root/pmh98.mdl": "4117153455f966abae482a17c7a6fbae7e3edf092e78e6b8fd30646c2e0388e6",
     "sw_pt_root/pmh99.mdl": "db4bd329954a4ec12456c119526698a95c788e92f9c3c157721fc226a8b37e37",
+    "sw_pt_rshoul/pmh0_shoR006.mdl": "3e1e5ffb5a6e7003bec7335b02b9add134d70ffb9732ea178d0586b8cea1c22d",
     "sw_pt_rshoul/pmh0_shoR013.mdl": "91b070871300692823e268c7cf7af08fb7f6872f1f8049565e4af83615c7738f",
+    "sw_pt_rshoul/pmh0_shoR058.mdl": "f83355aaa3f66e1bd65abf9ba9abd69e1fc865033a2c5fa232cedc9912652d36",
+    "sw_pt_rshoul/pmh0_shoR100.mdl": "0609f973394d0d2b80e504134e5234ad72f6540a04b93e9b92dead0ba5b30982",
     "sw_pt_rshoul/pmh0_shoR185.mdl": "47623fd881ca714681062e6d179d0339d5f96ba74ffb5a0811e9e9540523d567",
     "sw_pt_rshoul/pmh0_shoR256.mdl": "9c74358eba98f10876b17c80a7d8e3d735d91249282d0a8707c29249bfdfb22a",
+    "sw_pt_rshoul/pmh0_shoR258.mdl": "0a5484bd283cca83a580f6665a03f0ae2998ad5e83723035a3273a8307db35e8",
     "sw_pt_rshoul/pmh0_shoR260.mdl": "298a7e78419ecb4966816bbf1554fb0de279426a516165bab9ce50d490f13ac4",
     "sw_pt_rshoul/pmh0_shor140.mdl": "dd01cc9a8ad879bb53512377cd1398e2746dcdabb2af9b7bdadb529acd7ade21",
     "sw_pt_rshoul/pmh0_shor141.mdl": "303688ff7de80f0bd841eab3a9d832980972d75da8370acd8e3cdfe4accfd2db"
   },
+  "sources": [
+    "pmh0_shol006",
+    "pmh0_shol013",
+    "pmh0_shol058",
+    "pmh0_shol100",
+    "pmh0_shol140",
+    "pmh0_shol141",
+    "pmh0_shol185",
+    "pmh0_shol256",
+    "pmh0_shol258",
+    "pmh0_shol260",
+    "pmh0_shor006",
+    "pmh0_shor013",
+    "pmh0_shor058",
+    "pmh0_shor100",
+    "pmh0_shor140",
+    "pmh0_shor141",
+    "pmh0_shor185",
+    "pmh0_shor256",
+    "pmh0_shor258",
+    "pmh0_shor260"
+  ],
   "implementation": {
-    "tools/GenerateShoulderModels.py": "1bf402c0b35aae66c37d9ee68b52fbfbfea2cf54bf2dacdb99f5d84b463a5715",
+    "tools/GenerateShoulderModels.py": "f678f499af606889684a304f70484897581d07f06f183c174260eaa082dc44e1",
     "tools/NeckSkinBindings.py": "a774745d7c685b6e65a60677c5f66caa8bd26e24053b5b189e651a92c41bddf9",
     "tools/RobePoseAudit.py": "e59dbbd960b60fc97253bf8b461af5934bdccff2c790a77b2b7e58ea6dfb4b7b",
-    "tools/CompileModels.py": "b30419810e5e2570d407e070d2c4cdb98053af0a915da2a66e57632c95297d88"
+    "tools/CompileModels.py": "b30419810e5e2570d407e070d2c4cdb98053af0a915da2a66e57632c95297d88",
+    "tools/GenerateTintMapAssets.py": "e55cc703df1bb0e801a3075c1ae3d83dfb76d9d81d72d7ab18ca256fbe3494e8",
+    "tools/ModelLodAssets.py": "0a9b495c8dc1b1038424dd8b7a28ef2f46a2e44a74e42a46866a0e7e4cb2d014"
   },
-  "table_sha256": "a0a473511094f4f3ef5109adf5f6ff6439725c663ab0701f75c56a3c7e1bb91c"
+  "table_sha256": "f60a7bb228f8a898f35b00eb53fe646d603bc861e884dcdef77d1d0cba9c10ce"
 }
