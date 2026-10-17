@@ -44,13 +44,15 @@ def validate_stage(stage):
 
 
 def preflight(manifest):
-    # Only these packaging modules may change without regenerating wearables.
-    # The generator also authors poses and skins, so its entire fingerprint
-    # must still match even when an edit appears to affect packaging alone.
+    # Audit current tooling separately from original build fingerprints.
+    # Only the packaging modules may change without a new validated fingerprint.
+    errors = robes.material_input_errors(manifest)
+    if errors:
+        raise ValueError("\n".join(errors))
     packaging = {"tools/RobeAnimationBanks.py", "tools/RepackRobeAnimationBanks.py"}
     if "tools/GenerateRobeRgbModels.py" not in manifest["files"]:
         raise ValueError("Missing validated generator fingerprint; regenerate the robe catalog")
-    for relative, expected in manifest["files"].items():
+    for relative, expected in robes.audited_files(manifest).items():
         path = robes.ROOT / relative
         if not path.resolve().is_relative_to(robes.ROOT.resolve()):
             raise ValueError(f"Manifest path escapes repository: {relative}")
@@ -142,14 +144,15 @@ def repack_family(head, stage, input_manifest, validation_sha):
         if cached_audit_matches(cached, head, source_sha, validation_sha, stage):
             return cached
     compiler, compiler_hash = mdl.prepare_compiler(stage)
-    if compiler_hash != manifest["compiler_sha256"]:
-        raise ValueError("Native compiler changed since the robe catalog was validated")
+    if compiler_hash != manifest.get("validation_compiler_sha256", manifest["compiler_sha256"]):
+        raise ValueError("Validation compiler differs from the recorded bank audit compiler")
     parts = banks.split(original)
     for name, data in parts.items():
         (stage / "binary" / f"{name}.mdl").write_bytes(data)
     clips = independent_audit(original, parts, stage, compiler)
     report = {"head": head, "original_bytes": len(original), "clips": clips,
               "source_sha256": source_sha, "validation_sha256": validation_sha,
+              "validation_compiler_sha256": compiler_hash,
               "banks": {name: len(data) for name, data in parts.items()},
               "bank_sha256": {name: hashlib.sha256(data).hexdigest() for name, data in parts.items()}}
     receipt.write_text(json.dumps(report, indent=2) + "\n")
@@ -372,9 +375,9 @@ def main():
     stage.mkdir(parents=True, exist_ok=True)
     input_manifest = stage / "manifest-input.json"
     input_manifest.write_bytes(initial)
-    validation_sha = hashlib.sha256(json.dumps({**packaging, "compiler": manifest["compiler_sha256"],
+    validation_sha = hashlib.sha256(json.dumps({**packaging, "compiler": manifest.get("validation_compiler_sha256", manifest["compiler_sha256"]),
         **{f"tools/{name}": robes.file_digest(robes.ROOT / "tools" / name)
-           for name in ("CompileModels.py", "RobePoseAudit.py", "RobeAnimations.py")}}, sort_keys=True).encode()).hexdigest()
+           for name in ("CompileModels.py", "CleanModels.py", "RobePoseAudit.py", "RobeAnimations.py")}}, sort_keys=True).encode()).hexdigest()
     updated = copy.deepcopy(manifest)
     records = updated.setdefault("animation_bank_sets", {})
     output_names, report = set(), []
@@ -397,7 +400,7 @@ def main():
                   f"largest {max(entry['banks'].values()):,} bytes.", flush=True)
     report.sort(key=lambda entry: entry["head"])
     updated["animation_bank_sets"] = dict(sorted(records.items()))
-    updated["files"].update(packaging)
+    updated.setdefault("validation_tool_files", {}).update(packaging)
     updated["files"] = dict(sorted(updated["files"].items()))
     (stage / "report.json").write_text(json.dumps(report, indent=2) + "\n")
     (stage / "RobeRgbModels.json").write_text(json.dumps(updated, indent=2) + "\n")
