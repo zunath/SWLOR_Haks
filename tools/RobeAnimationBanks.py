@@ -1,12 +1,14 @@
 """Losslessly partition compiled, dummy-only robe bridges for NWSync.
 
-This reads the native nwnmdlcomp layout (232-byte model, 196-byte animation,
-112-byte dummy node). Only resource names and relative offsets are rewritten;
+This reads native MDL layouts from CleanModels and the historical compiler
+(232-byte model, 196-byte animation, 112-byte dummy node). Only resource names
+and relative offsets are rewritten;
 controller descriptors, float bytes, events and native part IDs are copied.
 Unexpected layouts fail closed. Joining a partition must reproduce its original
 compiled file byte for byte before any output can be installed.
 """
 from dataclasses import dataclass
+import math
 import re
 import struct
 
@@ -88,6 +90,11 @@ class CompiledBridge:
         pointers = []
         cursor = self._array(120, 4, 232, pointers)
         offsets = [_uint(self.data, 232 + i * 4) for i in range(_uint(self.data, 124))]
+        self.geometry_first = _uint(self.data, 72) == cursor
+        if self.geometry_first:
+            start, pointers, rename = cursor, [], []
+            cursor = self._tree(cursor, pointers, rename)
+            self.geometry = self._component(start, cursor, pointers, rename)
         self.clips = []
         names = []
         for offset in offsets:
@@ -108,11 +115,12 @@ class CompiledBridge:
         if len(set(names)) != len(names) or names != sorted(names):
             raise ValueError("Animation names must be unique and sorted for native lookup")
         self.clip_names = names
-        if _uint(self.data, 72) != cursor:
-            raise ValueError("Unexpected model geometry offset")
-        start, pointers, rename = cursor, [], []
-        cursor = self._tree(cursor, pointers, rename)
-        self.geometry = self._component(start, cursor, pointers, rename)
+        if not self.geometry_first:
+            if _uint(self.data, 72) != cursor:
+                raise ValueError("Unexpected model geometry offset")
+            start, pointers, rename = cursor, [], []
+            cursor = self._tree(cursor, pointers, rename)
+            self.geometry = self._component(start, cursor, pointers, rename)
         if cursor != len(self.data):
             raise ValueError("Unrecognized trailing native model data")
 
@@ -135,26 +143,42 @@ class CompiledBridge:
             pointers.append(offset)
         return cursor + count * stride
 
-    def _tree(self, start, pointers, names, depth=0):
+    def _tree(self, start, pointers, names, depth=0, parent=0):
         if depth > 256:
             raise ValueError("Excessive dummy-node hierarchy depth")
         self._require(start, 112)
         if _uint(self.data, start + 108) != 1:
             raise ValueError("Only dummy-node animation bridges can be partitioned")
-        if any(self.data[start + 64:start + 72]):
-            raise ValueError("Unexpected runtime node pointers")
+        if _uint(self.data, start + 64):
+            raise ValueError("Unexpected runtime geometry pointer")
+        parent_pointer = _uint(self.data, start + 68)
+        if parent_pointer:
+            if parent_pointer != parent:
+                raise ValueError("Unexpected native parent node pointer")
+            pointers.append(start + 68)
         if _name(self.data, start + 32, 32) == self.name:
             names.append((start + 32, 32))
         count = _uint(self.data, start + 76)
-        cursor = self._array(start + 72, 4, start + 112, pointers)
+        # CleanModels writes controllers before the child array/subtrees. The
+        # historical compiler writes them after. Relocate either without
+        # changing any controller, event or native part-ID bytes.
+        controllers_first = _uint(self.data, start + 88) and _uint(self.data, start + 84) == start + 112
+        cursor = start + 112
+        if controllers_first:
+            cursor = self._array(start + 84, 12, cursor, pointers)
+            cursor = self._array(start + 96, 4, cursor, pointers)
+        children = cursor
+        cursor = self._array(start + 72, 4, cursor, pointers)
         for index in range(count):
-            offset = start + 112 + index * 4
+            offset = children + index * 4
             if _uint(self.data, offset) != cursor:
                 raise ValueError("Child nodes are not contiguous native compiler output")
             pointers.append(offset)
-            cursor = self._tree(cursor, pointers, names, depth + 1)
-        cursor = self._array(start + 84, 12, cursor, pointers)
-        return self._array(start + 96, 4, cursor, pointers)
+            cursor = self._tree(cursor, pointers, names, depth + 1, start)
+        if not controllers_first:
+            cursor = self._array(start + 84, 12, cursor, pointers)
+            cursor = self._array(start + 96, 4, cursor, pointers)
+        return cursor
 
     def _component(self, start, end, pointers, names):
         return Component(start, bytes(self.data[start:end]),
@@ -169,11 +193,15 @@ class CompiledBridge:
         _set_name(result, 168, 64, parent)
         struct.pack_into("<3I", result, 120, 232 if clips else 0, len(clips), len(clips))
         result.extend(bytes(4 * len(clips)))
+        if self.geometry_first:
+            _set_uint(result, 72, len(result))
+            result.extend(self.geometry.relocated(len(result), name))
         for index, clip in enumerate(clips):
             _set_uint(result, 232 + index * 4, len(result))
             result.extend(clip.relocated(len(result), name))
-        _set_uint(result, 72, len(result))
-        result.extend(self.geometry.relocated(len(result), name))
+        if not self.geometry_first:
+            _set_uint(result, 72, len(result))
+            result.extend(self.geometry.relocated(len(result), name))
         return struct.pack("<3I", 0, len(result), 0) + result
 
 
@@ -196,19 +224,109 @@ def validate_motion_revision(before, after, allowed_clips):
         raise ValueError("Motion revision changed the skeleton or an unselected animation")
 
 
+def _equivalent(left, right):
+    if isinstance(left, float) or isinstance(right, float):
+        return math.isclose(left, right, rel_tol=2e-6, abs_tol=1.1e-7)
+    if isinstance(left, dict) and isinstance(right, dict):
+        return left.keys() == right.keys() and all(_equivalent(left[key], right[key]) for key in left)
+    if isinstance(left, (tuple, list)) and isinstance(right, (tuple, list)):
+        return len(left) == len(right) and all(_equivalent(a, b) for a, b in zip(left, right))
+    return left == right
+
+
+def _component_values(component, model_name, animation=False):
+    """Read meaningful dummy-node data independently of compiler serialization."""
+    data = component.relocated(0, model_name)
+    def tree(node):
+        controls = {}
+        keys, count, values = _uint(data, node + 84), _uint(data, node + 88), _uint(data, node + 96)
+        for index in range(count):
+            kind, rows, times, start, columns = struct.unpack_from("<IHHHB", data, keys + index * 12)
+            if columns & 0xF0 or kind in controls:
+                raise ValueError("Unsupported or duplicate bank controller")
+            timestamps = struct.unpack_from(f"<{rows}f", data, values + times * 4)
+            frames = [struct.unpack_from(f"<{columns}f", data, values + (start + row * columns) * 4)
+                      for row in range(rows)]
+            if kind == 20:
+                normalized = []
+                for frame in frames:
+                    length = math.sqrt(sum(value * value for value in frame))
+                    if not math.isclose(length, 1, abs_tol=2e-6):
+                        raise ValueError("Bank orientation is not a unit quaternion")
+                    frame = tuple(value / length for value in frame)
+                    pivot = frame[3] if abs(frame[3]) > 1e-6 else next((value for value in frame[:3] if abs(value) > 1e-6), 1)
+                    normalized.append(tuple(-value for value in frame) if pivot < 0 else frame)
+                frames = normalized
+            controls[kind] = (columns, timestamps, frames)
+        if not animation:
+            # CleanModels emits these static defaults even when omitted in ASCII.
+            for kind, default in ((8, (0., 0., 0.)), (20, (0., 0., 0., 1.)), (36, (1.,))):
+                if kind in controls and _equivalent(controls[kind], (len(default), (0.,), [default])):
+                    del controls[kind]
+        children = _uint(data, node + 72)
+        return (_name(data, node + 32, 32), _uint(data, node + 24), _uint(data, node + 28),
+                _uint(data, node + 108), controls,
+                [tree(_uint(data, children + index * 4)) for index in range(_uint(data, node + 76))])
+    if not animation:
+        return tree(0)
+    events, count = _uint(data, 184), _uint(data, 188)
+    return (_name(data, 8, 64), _name(data, 120, 64), struct.unpack_from("<2f", data, 112),
+            [(struct.unpack_from("<f", data, events + index * 36)[0], _name(data, events + index * 36 + 4, 32))
+             for index in range(count)], tree(_uint(data, 72)))
+
+
+def _same_skeleton(old, new):
+    # Runtime function pointers and array placement differ between compilers;
+    # classification/fog, scale and the complete ordered rig must agree. Bounds
+    # are compiler-derived; the output always retains the original header.
+    metadata = lambda model: (model.header[104:120], struct.unpack_from("<f", model.header, 164))
+    return (_equivalent(metadata(old), metadata(new)) and
+            _equivalent(_component_values(old.geometry, old.name), _component_values(new.geometry, old.name)))
+
+
+def _align_revision_parts(before, candidate):
+    """Address candidate tracks with the original rig's native part IDs."""
+    from RobeAnimations import binary_parts, validate_animation_parts
+    validate_animation_parts(before)
+    validate_animation_parts(candidate)
+    expected = binary_parts(before)
+    if expected.keys() != binary_parts(candidate).keys():
+        raise ValueError("Motion revision changed the skeleton attachment paths")
+    result = bytearray(candidate)
+    def walk(pointer, path):
+        node = 12 + pointer
+        struct.pack_into("<i", result, node + 28, expected[path])
+        children = _uint(result, node + 72)
+        for index in range(_uint(result, node + 76)):
+            child = _uint(result, 12 + children + index * 4)
+            name = _name(result, 12 + child + 32, 32).lower()
+            walk(child, (*path, name))
+    walk(_uint(result, 84), ())
+    for index in range(_uint(result, 136)):
+        animation = 12 + _uint(result, 12 + _uint(result, 132) + index * 4)
+        walk(_uint(result, animation + 72), ())
+    validate_animation_parts(result)
+    return bytes(result)
+
+
 def revise_motion(before, candidate, allowed_clips):
     """Keep unselected compiled bytes, ignoring unused event-string padding.
 
     The native compiler leaves bytes after an event name's NUL uninitialized.
-    Every meaningful byte must match. Even unused padding is preserved in the
-    result because unselected components are copied from the original model.
+    Candidate checks compare controller values and hierarchy across compiler
+    layouts. Unselected native components and all original geometry/header bytes
+    are copied from the original model, including their unused padding.
     """
     old, new = CompiledBridge(before), CompiledBridge(candidate)
     allowed = set(allowed_clips)
     if not allowed or not allowed <= set(old.clip_names):
         raise ValueError("Motion revision must name existing animation clips")
+    cross_layout = old.geometry_first != new.geometry_first
+    if cross_layout:
+        new = CompiledBridge(_align_revision_parts(before, candidate))
+    identical_skeleton = old.pack(old.name, old.parent, []) == new.pack(new.name, new.parent, [])
     if ((old.name, old.parent, old.clip_names) != (new.name, new.parent, new.clip_names) or
-            old.pack(old.name, old.parent, []) != new.pack(new.name, new.parent, [])):
+            not identical_skeleton and (not cross_layout or not _same_skeleton(old, new))):
         raise ValueError("Motion revision changed the skeleton, model identity or clip inventory")
 
     def comparable(clip):
@@ -216,7 +334,7 @@ def revise_motion(before, candidate, allowed_clips):
         events, count = struct.unpack_from("<II", data, 184)
         for index in range(count):
             start = events + index * 36 + 4
-            _name(data, start, 32)  # Reject unterminated/invalid native names.
+            _name(data, start, 32)
             end = start + 32
             zero = data.index(0, start, end)
             data[zero:end] = bytes(end - zero)
@@ -228,7 +346,8 @@ def revise_motion(before, candidate, allowed_clips):
             clips.append(proposed)
             continue
         if original.relocated(0, old.name) != proposed.relocated(0, old.name):
-            if comparable(original) != comparable(proposed):
+            if comparable(original) != comparable(proposed) and (not cross_layout or not _equivalent(
+                    _component_values(original, old.name, True), _component_values(proposed, old.name, True))):
                 raise ValueError(f"Motion revision changed unselected animation: {name}")
         clips.append(original)
     result = old.pack(old.name, old.parent, clips)
