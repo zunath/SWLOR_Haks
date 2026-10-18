@@ -203,6 +203,15 @@ class CheckPartSkinModelsTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             self.fixture(root)
+            # A newly allocated alias never overwrites an unowned model or sits beside a redirect.
+            (root / 'sw_pt_pelvis/pfh0_pelvis1000.mdl').write_bytes(b'unowned')
+            with self.assertRaisesRegex(ValueError, 'Unowned part skin resource'):
+                parts.run(root, apply=True)
+            (root / 'sw_pt_pelvis/pfh0_pelvis1000.mdl').unlink()
+            (root / 'sw_pt_pelvis/pfh0_pelvis1000.lod').write_text('pfh0_pelvis010')
+            with self.assertRaisesRegex(ValueError, 'shadowed or redirected'):
+                parts.run(root, apply=True)
+            (root / 'sw_pt_pelvis/pfh0_pelvis1000.lod').unlink()
             parts.run(root, apply=True)
             manifest = json.loads((root / parts.MANIFEST).read_text())
             self.assertEqual(['pfh0_pelvis010'], [r['source'] for r in manifest['models'].values()])

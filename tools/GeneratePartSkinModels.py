@@ -189,6 +189,7 @@ def plan(root=ROOT):
     # Stable allocation survives later additions; IDs are never repurposed.
     used = [int(re.search(r'(\d+)$', name)[1]) for name in [*previous['models'], *retired]]
     next_id = max([999, *used]) + 1
+    owned = {record['path'] for record in previous['models'].values()}
     outputs, models, renders = {}, {}, {}
     for (source, mapping), roots in sorted(groups.items()):
         match = PART.fullmatch(source)
@@ -204,9 +205,12 @@ def plan(root=ROOT):
         # Cover the full traversal of every root sharing the alias, including unused bones.
         output = remap(data, name, mapping, external, max(node_counts[robe] for robe in roots))
         relative = f'{DIRECTORIES[match[3]]}/{name}.mdl'
+        # ModelPath maps a .lod redirect to its .mdl path, so check the files themselves.
         selected = active.get(name)
-        if selected is not None and selected.relative_to(root).as_posix() != relative:
+        if selected is not None and selected.relative_to(root).as_posix() != relative or                 (root / relative).with_suffix('.lod').exists():
             raise ValueError(f'Part skin alias is shadowed or redirected: {relative}')
+        if relative not in owned and (root / relative).exists():
+            raise ValueError(f'Unowned part skin resource already exists: {relative}')
         outputs[relative] = output
         models[name] = {'source': source, 'path': relative, 'mapping': mapping, 'sha256': digest(output)}
         for robe in roots:
