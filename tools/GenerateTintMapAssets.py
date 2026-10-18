@@ -1538,6 +1538,11 @@ def modular_palette_source(
     entries: dict[str, dict[str, object]],
     native_palettes: set[str],
 ) -> str | None:
+    override = entries.get(model, {}).get("modelPalette")
+    if override is not None:
+        if override not in entries or override == model:
+            raise ValueError(f"Invalid model palette override for {model}: {override}")
+        return str(override)
     for candidate in modular_palette_candidates(model):
         if candidate in entries:
             return candidate
@@ -2631,6 +2636,8 @@ def generate() -> None:
             "layerSha256": hashlib.sha256(layer.tobytes()).hexdigest(),
             "output": dds_path.relative_to(REPOSITORY_ROOT).as_posix(),
             "texture": texture,
+            **({"modelPalette": existing_entry["modelPalette"]}
+               if existing_entry and "modelPalette" in existing_entry else {}),
         }
 
         if number == 1 or number % 100 == 0 or number == total:
@@ -2837,6 +2844,8 @@ def generate_preserving_manifest() -> None:
             "layerSha256": hashlib.sha256(layer.tobytes()).hexdigest(),
             "output": dds_path.relative_to(REPOSITORY_ROOT).as_posix(),
             "texture": texture,
+            **({"modelPalette": existing_entry["modelPalette"]}
+               if existing_entry and "modelPalette" in existing_entry else {}),
         }
         signatures.setdefault(signature, entries[material])
 

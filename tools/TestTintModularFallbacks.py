@@ -61,6 +61,17 @@ class ModularTintFallbackTests(unittest.TestCase):
     def test_male_never_falls_back_to_female_palette(self):
         self.assertIsNone(generator.modular_palette_source("pme0_shinl249", {"pfh0_shinl249": {}}, set()))
 
+    def test_model_palette_override_does_not_change_racial_or_female_fallbacks(self):
+        entries = {"pmh0_chest001": {"modelPalette": "pmh0_base_ch"}, "pmh0_base_ch": {}}
+        self.assertEqual(generator.modular_palette_source("pmh0_chest001", entries, set()), "pmh0_base_ch")
+        for model in ("pme0_chest001", "pfh0_chest001", "pmh2_chest001"):
+            self.assertEqual(generator.modular_palette_source(model, entries, set()), "pmh0_chest001")
+
+    def test_invalid_model_palette_overrides_fail_instead_of_using_a_missing_mask(self):
+        for target in ("missing", "pmh0_chest001"):
+            with self.assertRaises(ValueError):
+                generator.modular_palette_source("pmh0_chest001", {"pmh0_chest001": {"modelPalette": target}}, set())
+
     def test_existing_stock_palette_stops_lower_priority_converted_fallback(self):
         self.assertIsNone(generator.modular_palette_source("pfe22_shinl249", {"pfh0_shinl249": {}}, {"pfe0_shinl249"}))
 
