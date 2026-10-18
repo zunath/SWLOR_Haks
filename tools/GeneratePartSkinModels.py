@@ -133,12 +133,15 @@ def plan(root=ROOT):
         inputs[active[name].relative_to(root).as_posix()] = digest(data)
         return data
 
-    bodies = {}
+    # Keep only donor bodies and external skins: holding every robe body and
+    # scanned part at once costs gigabytes during the HAK build check.
+    donors = {}
+    node_counts = {}
 
-    def body(name):
-        if name not in bodies:
-            bodies[name] = body_model(load(name))
-        return bodies[name]
+    def donor(name):
+        if name not in donors:
+            donors[name] = body_model(load(name))
+        return donors[name]
 
     parts = {}
     for name in sorted(active):
@@ -149,7 +152,7 @@ def plan(root=ROOT):
     groups = {}
     for robe in robes:
         prefix, phenotype = robe[:3], int(robe[3:])
-        target = body(robe)
+        target = None
         for (family, kind, style), variants in parts.items():
             if family != prefix:
                 continue
@@ -167,13 +170,17 @@ def plan(root=ROOT):
                 data = load(source)
                 # ASCII parts compile locally in the engine; none are external skins.
                 try:
-                    skins[source] = (data, part_skins(data) if mdl.binary(data) else [])
+                    external = part_skins(data) if mdl.binary(data) else []
                 except ValueError as error:
                     raise ValueError(f'{source}: {error}') from error
+                skins[source] = (data, external) if external else (None, [])
             data, external = skins[source]
             if not external:
                 continue
-            mapping = mapping_for(data, body(source.split('_', 1)[0]), target, external)
+            if target is None:
+                target = body_model(load(robe))
+                node_counts[robe] = len(target.nodes)
+            mapping = mapping_for(data, donor(source.split('_', 1)[0]), target, external)
             if needs_remap(mapping):
                 groups.setdefault((source, mapping), []).append(robe)
     retired = set(previous.get('retired', []))
@@ -195,7 +202,7 @@ def plan(root=ROOT):
             raise ValueError(f'Part skin alias resref is too long: {name}')
         data, external = skins[source]
         # Cover the full traversal of every root sharing the alias, including unused bones.
-        output = remap(data, name, mapping, external, max(len(bodies[robe].nodes) for robe in roots))
+        output = remap(data, name, mapping, external, max(node_counts[robe] for robe in roots))
         relative = f'{DIRECTORIES[match[3]]}/{name}.mdl'
         selected = active.get(name)
         if selected is not None and selected.relative_to(root).as_posix() != relative:

@@ -27,25 +27,34 @@ class PartSkinModelTests(unittest.TestCase):
         cls.renders = {}
         for layout, source, render in parts.read_table(cls.root, parts.RENDERS):
             cls.renders.setdefault(int(layout), {})[source] = render
-        cls.bodies = {}
-        cls.poses = {}
-        cls.sources = {}
 
-    def body(self, name):
-        if name not in self.bodies:
-            self.bodies[name] = body_model(self.active[name].read_bytes())
-        return self.bodies[name]
+    def setUp(self):
+        # Per-test caches: retaining every robe body, pose and scanned part across
+        # the whole module exhausts memory-limited workers.
+        self.donors = {}
+        self.sources = {}
 
-    def pose(self, name):
-        if name not in self.poses:
-            self.poses[name] = self.body(name).pose()
-        return self.poses[name]
+    def tearDown(self):
+        # unittest keeps finished test instances until the module's suite ends.
+        self.donors.clear()
+        self.sources.clear()
+
+    def load_body(self, name):
+        return body_model(self.active[name].read_bytes())
+
+    def donor(self, name):
+        """Base bodies are few; robe bodies are loaded one at a time and dropped."""
+        if name not in self.donors:
+            body = self.load_body(name)
+            self.donors[name] = (body, body.pose())
+        return self.donors[name]
 
     def source(self, name):
+        """Keep bytes and skins of external skins only; other parts need no second look."""
         if name not in self.sources:
             data = self.active[name].read_bytes()
-            binary = mdl.binary(data)
-            self.sources[name] = (data, Model(data, False) if binary else None, skins(data) if binary else [])
+            external = skins(data) if mdl.binary(data) else []
+            self.sources[name] = (data, external) if external else (None, [])
         return self.sources[name]
 
     def render(self, body, source):
@@ -80,6 +89,7 @@ class PartSkinModelTests(unittest.TestCase):
         expected = set()
         kinds = set()
         for robe in sorted(robes):
+            target = None
             for (family, kind, _), by_phenotype in variants.items():
                 if family != robe[:3]:
                     continue
@@ -89,8 +99,11 @@ class PartSkinModelTests(unittest.TestCase):
                 source = by_phenotype.get(phenotype)
                 if source is None:
                     continue
-                data, _, external = self.source(source)
-                if external and needs_remap(mapping_for(data, self.body(source.split('_')[0]), self.body(robe), external)):
+                data, external = self.source(source)
+                if not external:
+                    continue
+                target = target or self.load_body(robe)
+                if needs_remap(mapping_for(data, self.donor(source.split('_')[0])[0], target, external)):
                     expected.add((robe, source))
                     kinds.add(kind)
         actual = {(body, source) for body, layout in self.layouts.items() for source in self.renders[layout]}
@@ -102,7 +115,8 @@ class PartSkinModelTests(unittest.TestCase):
     def test_all_outputs_preserve_raw_meshes_materials_controllers_and_inverse_binds(self):
         for name, record in self.manifest['models'].items():
             with self.subTest(model=name):
-                original, old, old_skins = self.source(record['source'])
+                original, old_skins = self.source(record['source'])
+                old = Model(original, False)
                 data = (self.root / record['path']).read_bytes()
                 new = Model(data, False)
                 self.assertEqual(original[12 + old.uint(4):], data[12 + new.uint(4):])
@@ -126,20 +140,22 @@ class PartSkinModelTests(unittest.TestCase):
                 self.assertEqual(expected, actual)
 
     def test_bindings_follow_the_same_body_joints_instead_of_shifted_traversal_indices(self):
+        extents = {}
         for body_name, layout in sorted(self.layouts.items()):
+            body = self.load_body(body_name)
+            target_pose = body.pose()
             for source, render in self.renders[layout].items():
                 with self.subTest(body=body_name, model=render):
                     record = self.manifest['models'][render]
-                    original, data_model, external = self.source(source)
-                    donor_name = source.split('_')[0]
-                    donor, body = self.body(donor_name), self.body(body_name)
+                    original, external = self.source(source)
+                    donor, donor_pose = self.donor(source.split('_')[0])
                     actual = mapping_for(original, donor, body, external)
                     self.assertEqual(json.loads(json.dumps(actual)), record['mapping'])
                     self.assertTrue(any(before != after for mesh in actual for _, before, after in mesh))
-                    output = Model((self.root / record['path']).read_bytes(), False)
-                    for skin, _ in external:
-                        self.assertGreaterEqual(output.uint(skin + 24), len(body.nodes))
-                    donor_pose, target_pose = self.pose(donor_name), self.pose(body_name)
+                    if render not in extents:
+                        output = Model((self.root / record['path']).read_bytes(), False)
+                        extents[render] = min(output.uint(skin + 24) for skin, _ in external)
+                    self.assertGreaterEqual(extents[render], len(body.nodes))
                     for mesh in actual:
                         for _, before, after in mesh:
                             if before == 0:
