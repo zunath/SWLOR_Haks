@@ -22,7 +22,6 @@ import GenerateTintMapAssets as tint
 import ImportStockRobeTints as stock_robes
 import RobeAnimations as animations
 import RobePoseAudit as poses
-import RobeSkirtBindings as skirt_bindings
 import RobeBuildCache as build_cache
 import RobeCompilationCheckpoint as checkpoint
 import RobeBankValidation as bank_validation
@@ -39,7 +38,7 @@ MANIFEST = ROOT / "tools" / "RobeRgbModels.json"
 PATTERN = re.compile(r"^(p[fm][a-z])0_robe(\d{3})$")
 NODE = re.compile(r"(?im)^\s*node\s+(\S+)\s+(\S+)\s*$([\s\S]*?)^\s*endnode\b")
 GENERATOR_INPUTS = ("GenerateRobeRgbModels.py", "RobeSkeleton.py", "RobePoseAudit.py",
-                    "RobeAnimations.py", "RobeSkirtBindings.py", "CompileModels.py", "CleanModels.py", "ImportStockRobeTints.py",
+                    "RobeAnimations.py", "CompileModels.py", "CleanModels.py", "ImportStockRobeTints.py",
                     "TintMapStockRobes.json", "GenerateTintMapAssets.py", "RobeBuildCache.py",
                     "SharedRobeFamilies.py", "RobeSharingAudit.py",
                     "RobeCompilationCheckpoint.py", "RobeBankValidation.py", "ModelLodAssets.py")
@@ -937,21 +936,6 @@ def main():
             library.clips.cache_clear()
             library.owners.cache_clear()
             library.model.cache_clear()
-    # The legacy coat helpers have no tracks in body-only ability animations.
-    # Retarget robe 236 after the native conversion audit, preserving its exact
-    # skinned rest shape and skeleton layout. The deterministic repair is also
-    # applied to cache hits, so future regeneration cannot restore the defect.
-    bound_skirts = 0
-    if not failures:
-        for name, original in original_robes.items():
-            if original not in skirt_bindings.SOURCES:
-                continue
-            path = stage / "binary" / f"{name}.mdl"
-            before = path.read_bytes()
-            after = skirt_bindings.bind_skirts(before, renamed_nodes[name])
-            skirt_bindings.validate_rest_pose(before, after, renamed_nodes[name])
-            path.write_bytes(after)
-            bound_skirts += len(skirt_bindings.PANELS)
     checked_garment_clips = 0
     if not failures and args.verify_existing_motion:
         for record in motion_records:
@@ -966,7 +950,6 @@ def main():
               "robe_models": len(selected), "phenotypes": len(id_map),
               "body_pose_samples": checked_poses,
               "garment_body_motion_checks": checked_garment_body_motion,
-              "body_bound_skirts": bound_skirts,
               "shared_rigs": sharing_stats,
               "preserved_wearer_bindings": len(motion_records),
               "preserved_garment_clips": checked_garment_clips,
