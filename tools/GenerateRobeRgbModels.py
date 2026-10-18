@@ -804,7 +804,8 @@ def main():
     compilation_records = json.loads(checkpoint_path.read_text()) if checkpoint_path.is_file() else {}
     resumed = set()
     processors = hashlib.sha256(json.dumps({name: input_digests[ROOT / "tools" / name]
-                                           for name in ("CompileModels.py", "CleanModels.py", "RobePoseAudit.py")},
+                                           for name in ("CompileModels.py", "CleanModels.py", "RobePoseAudit.py",
+                                                        "RobeAnimations.py")},
                                           sort_keys=True).encode()).hexdigest()
     def compile_one(name):
         source = sources[name]
@@ -836,7 +837,7 @@ def main():
             resumed.add(name)
             return
         if name in revised_binaries:
-            path.write_bytes(revised_binaries[name].read_bytes())
+            path.write_bytes(animations.number_static_garment_ancestors(revised_binaries[name].read_bytes()))
             return
         ownership_hash = (bank_record["source_sha256"] if bank_record is not None else
                           prior_manifest.get("files", {}).get(relative))
@@ -850,6 +851,9 @@ def main():
         compiled = path.read_bytes()
         if name in renamed_nodes:
             compiled = poses.preserve_skin_bindings(original, compiled, renamed_nodes[name])
+        if name in animation_cache.values():
+            # Roots compiled next inherit these part IDs from this parent by name.
+            compiled = animations.number_static_garment_ancestors(compiled)
         path.write_bytes(compiled)
         compilation_records[name] = checkpoint.record(compile_key, compiled)
         checkpoint_path.write_text(json.dumps(compilation_records, indent=2) + "\n")
@@ -892,6 +896,7 @@ def main():
                                     (stage / "decompiled" / f"{name}.mdl").read_text(encoding="latin1"))
             if name in animation_cache.values():
                 animations.validate_animation_parts(compiled)
+                animations.validate_static_garment_parts(compiled)
             elif name in complete_roots:
                 parent = mdl.supermodel(compiled)
                 parent_path = stage / "binary" / f"{parent}.mdl"
