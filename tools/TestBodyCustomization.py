@@ -4,7 +4,9 @@
 import hashlib
 import json
 from pathlib import Path
+import subprocess
 import unittest
+from unittest.mock import patch
 
 import CompileModels as models
 import GenerateTintMapAssets as tint
@@ -55,6 +57,49 @@ class BodyCustomizationTests(unittest.TestCase):
                 path = tint.REPOSITORY_ROOT / f"sw_pt_{side}bicep/{name}.mdl"
                 for _, material in tint.read_model_material_bindings(path):
                     self.assertEqual(material, name)
+
+
+class DefaultMaleBodyTests(unittest.TestCase):
+    PARTS = ("chest", "neck", "pelvis", "bicepl", "bicepr", "forel", "forer",
+             "legl", "legr", "shinl", "shinr", "footl", "footr")
+    SOURCE = "de1e6b21f003eee340db78053fd163951cb163ed^"
+
+    def original(self, path):
+        return subprocess.check_output(["git", "show", f"{self.SOURCE}:{path}"], cwd=tint.REPOSITORY_ROOT)
+
+    def test_default_male_parts_keep_original_geometry_and_matching_rgb_palettes(self):
+        entries = tint.load_source_manifest()
+        catalog = {tuple(line.split()[1:3]): line.split()[3]
+                   for line in tint.OUTPUT_2DA.read_text().splitlines()[3:] if len(line.split()) == 4}
+        for part in self.PARTS:
+            name = f"pmh0_{part}001"
+            path = tint.stock_model_output_directory(name) / (name + ".mdl")
+            relative = path.relative_to(tint.REPOSITORY_ROOT).as_posix()
+            with self.subTest(model=name):
+                original = bytearray(self.original(relative))
+                current = bytearray(path.read_bytes())
+                for data in (original, current):
+                    for _, _, offset, _ in tint.read_binary_model_material_fields(path, data):
+                        data[offset:offset + 64] = bytes(64)
+                self.assertEqual(current, original)
+                palette = entries[name]["modelPalette"]
+                self.assertEqual({material for model, material in catalog if model == name}, {palette})
+                entry = entries[palette]
+                raw_palette = self.original(relative[:-4] + ".plt")
+                self.assertEqual(entry["sourceSha256"], hashlib.sha256(raw_palette).hexdigest())
+                self.assertEqual(entry["layers"], sorted(set(raw_palette[25::2])))
+                packed = tint.packed_dds_path(palette, entry)
+                layers = tint.decode_dds_layers(packed, entry["width"], entry["height"])
+                self.assertEqual(layers.tobytes(), raw_palette[25::2])
+                self.assertEqual(hashlib.sha256(layers.tobytes()).hexdigest(), entry["layerSha256"])
+                self.assertIn(f"texture7 {entry['texture']}\n", tint.mtr_path(palette).read_text())
+                with patch.object(tint, "_NATIVE_MODULAR_PALETTES", set()):
+                    choices = tint.native_modular_material_choices(path, entries)
+                self.assertTrue(choices)
+                self.assertTrue(all(source == palette for source, _, _ in choices.values()))
+                for _, material in tint.read_model_material_bindings(path):
+                    self.assertEqual(material, palette)
+                    self.assertEqual(catalog[(name, material)], ",".join(map(str, entry["layers"])))
 
 
 if __name__ == "__main__":
