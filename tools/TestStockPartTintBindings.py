@@ -78,6 +78,30 @@ def main():
 
     scratch_directory.cleanup()
 
+    # Imported stock parts must bind only the palette their native lookup selects.
+    imported = 0
+    for model, path in sorted(active.items()):
+        match = tint.MODULAR_MODEL_PATTERN.fullmatch(model)
+        if not match or model not in stock_models or not path.parent.name.lower().startswith("sw_pt_"):
+            continue
+        if re.sub(r"[0-9]+$", "", match.group("part").lower()) not in ARMOR_PARTS:
+            continue
+        palette = tint.modular_palette_source(model, entries, natives)
+        # Without a subtree named after the model the native loader replaces nothing either.
+        if palette is None or tint.find_native_modular_tint_references(path, entries) is None:
+            continue
+        imported += 1
+        data = path.read_bytes()
+        if data[:4] != bytes(4):
+            failures.append(f"{model}: imported model is not compiled")
+            continue
+        bound = {aliases.get(material, material) for _, _, _, material in
+                 tint.read_binary_model_material_fields(path, data) if material}
+        wrong = sorted(source for source in bound if source in entries
+                       and entries[source]["sourceSha256"] != entries[palette]["sourceSha256"])
+        if wrong:
+            failures.append(f"{model}: native palette {palette}, but binds {wrong}")
+
     # Negative controls: the reported female human parts are imported and bound to their own palettes.
     for model in REPORTED:
         assert model in active, f"{model} is not imported"
@@ -92,7 +116,7 @@ def main():
     if failures:
         raise SystemExit("Stock parts draw another part's tint map:\n" + "\n".join(failures[:40]) +
                          f"\n({len(failures)} total)")
-    print("No stock body part borrows another part's tint map; reported parts are bound to their own palettes.")
+    print(f"No stock body part borrows another part's tint map; {imported} imported stock parts bind their own palettes.")
 
 
 if __name__ == "__main__":
