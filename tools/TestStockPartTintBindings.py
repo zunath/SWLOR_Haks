@@ -21,8 +21,6 @@ ARMOR_PARTS = {
     "belt", "bicepl", "bicepr", "chest", "footl", "footr", "forel", "forer", "handl", "handr",
     "legl", "legr", "neck", "pelvis", "robe", "shinl", "shinr", "shol", "shor",
 }
-# Robe models feed the generated robe bodies; this import belongs with the robe regeneration.
-DEFERRED = {"pmo2_robe021"}
 REPORTED = (
     "pfh0_chest004", "pfh0_chest008", "pfh0_bicepl006", "pfh0_bicepr006", "pfh0_forel008",
     "pfh0_shinl005", "pfh0_shinr005", "pfh0_belt005", "pfh0_pelvis030", "pfh0_pelvis033",
@@ -62,7 +60,7 @@ def main():
     scratch = Path(scratch_directory.name)
     for model in sorted(stock_models):
         match = tint.MODULAR_MODEL_PATTERN.fullmatch(model)
-        if not match or model in active or model in DEFERRED:
+        if not match or model in active:
             continue
         if match.group("phenotype") not in ("0", "2") or re.sub(r"[0-9]+$", "", match.group("part").lower()) not in ARMOR_PARTS:
             continue
