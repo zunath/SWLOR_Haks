@@ -21,10 +21,18 @@ ARMOR_PARTS = {
     "belt", "bicepl", "bicepr", "chest", "footl", "footr", "forel", "forer", "handl", "handr",
     "legl", "legr", "neck", "pelvis", "robe", "shinl", "shinr", "shol", "shor",
 }
+# Playable species render only these model families, on the normal phenotype
+# (SWLOR.Game.Server/Readmes/ContentStandards.md, Characters).
+PLAYABLE_FAMILIES = {"h", "e", "o", "d", "z"}
 REPORTED = (
     "pfh0_chest004", "pfh0_chest008", "pfh0_bicepl006", "pfh0_bicepr006", "pfh0_forel008",
     "pfh0_shinl005", "pfh0_shinr005", "pfh0_belt005", "pfh0_pelvis030", "pfh0_pelvis033",
 )
+
+
+def supported(match) -> bool:
+    return (match.group("race").lower() in PLAYABLE_FAMILIES and match.group("phenotype") == "0"
+            and re.sub(r"[0-9]+$", "", match.group("part").lower()) in ARMOR_PARTS)
 
 
 def tint_materials() -> set[str]:
@@ -62,7 +70,7 @@ def main():
         match = tint.MODULAR_MODEL_PATTERN.fullmatch(model)
         if not match or model in active:
             continue
-        if match.group("phenotype") not in ("0", "2") or re.sub(r"[0-9]+$", "", match.group("part").lower()) not in ARMOR_PARTS:
+        if not supported(match):
             continue
         palette = next((c for c in tint.modular_palette_candidates(model) if c in entries or c in natives), None)
         if palette is None or (palette not in entries and palette not in stock_palettes):
@@ -84,7 +92,7 @@ def main():
         match = tint.MODULAR_MODEL_PATTERN.fullmatch(model)
         if not match or model not in stock_models or not path.parent.name.lower().startswith("sw_pt_"):
             continue
-        if re.sub(r"[0-9]+$", "", match.group("part").lower()) not in ARMOR_PARTS:
+        if not supported(match):
             continue
         palette = tint.modular_palette_source(model, entries, natives)
         # Without a subtree named after the model the native loader replaces nothing either.
