@@ -37,6 +37,15 @@ compiled skeleton and all unselected animations are byte-identical. Changes to
 the skeleton, other clips, or an ambiguous prior family are rejected. Structural
 changes should use the ordinary versioned generation workflow above.
 
+When unchanged native wearers contain geometry that the compiler cannot retain
+exactly, select each explicitly with `--preserve-native-wearer <root>` during a
+complete generation. The generator requires prior ownership and unchanged garment
+hashes, preserves native mesh/normal/skin bytes, and rebinds only parent/header/part
+IDs. Their captured native source still passes all strict geometry and motion
+audits. The manifest records the selection and source hashes. Reusing `--stage`
+resumes other compilations only when their actual compiler/input fingerprints match;
+it never substitutes for current validation.
+
 The generator audits authored geometry, skin bindings, and compiler round trips
 before updating `sw_pt_root`, `sw_pt_robe`, `roberender.2da`, and `phenotype.2da`.
 Build and deploy all three affected HAKs together. Keep `RobeRgb_` phenotype rows
