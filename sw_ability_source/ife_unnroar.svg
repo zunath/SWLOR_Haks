@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg" cx="45%" cy="50%" r="65%">
+      <stop offset="0" stop-color="#3b1a0c"/>
+      <stop offset="0.6" stop-color="#160704"/>
+      <stop offset="1" stop-color="#030100"/>
+    </radialGradient>
+    <linearGradient id="scale" x1="0" y1="0" x2="0.6" y2="1">
+      <stop offset="0" stop-color="#9fbf5a"/>
+      <stop offset="0.45" stop-color="#4f7a2c"/>
+      <stop offset="1" stop-color="#1c2f12"/>
+    </linearGradient>
+    <linearGradient id="jaw" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#5f8a33"/>
+      <stop offset="1" stop-color="#1a2a10"/>
+    </linearGradient>
+    <linearGradient id="horn" x1="1" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#f3e3c0"/>
+      <stop offset="1" stop-color="#7a6040"/>
+    </linearGradient>
+    <radialGradient id="maw" cx="40%" cy="50%" r="70%">
+      <stop offset="0" stop-color="#ff7a3a"/>
+      <stop offset="0.5" stop-color="#8a1a0c"/>
+      <stop offset="1" stop-color="#2a0503"/>
+    </radialGradient>
+    <radialGradient id="eye" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#fff6b0"/>
+      <stop offset="0.5" stop-color="#ffb21e"/>
+      <stop offset="1" stop-color="#b85a00"/>
+    </radialGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="16"/>
+    </filter>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6"/>
+    </filter>
+  </defs>
+  <rect width="1024" height="1024" fill="url(#bg)"/>
+
+  <!-- sound waves -->
+  <g fill="none" stroke-linecap="round">
+    <g stroke="#ffd36b" opacity="0.6" filter="url(#glow)">
+      <path d="M760 400 A190 190 0 0 1 760 660" stroke-width="40"/>
+      <path d="M840 330 A290 290 0 0 1 840 730" stroke-width="34"/>
+    </g>
+    <path d="M760 400 A190 190 0 0 1 760 660" stroke="#fff3c4" stroke-width="22"/>
+    <path d="M840 330 A290 290 0 0 1 840 730" stroke="#ffe08a" stroke-width="18" opacity="0.85"/>
+    <path d="M915 270 A380 380 0 0 1 915 790" stroke="#ffc94a" stroke-width="13" opacity="0.6"/>
+  </g>
+
+  <!-- horns -->
+  <path d="M330 330 C260 250 200 200 110 175 C190 230 240 290 275 360 Z" fill="url(#horn)" stroke="#2a1d10" stroke-width="10" stroke-linejoin="round"/>
+  <path d="M300 395 C230 360 170 345 95 350 C160 380 210 415 250 455 Z" fill="url(#horn)" stroke="#2a1d10" stroke-width="10" stroke-linejoin="round"/>
+
+  <!-- neck and lower jaw -->
+  <path d="M185 860 C200 720 250 620 330 575 L470 600 C560 640 640 690 700 700 C640 735 540 735 450 715 C380 700 330 740 300 860 Z"
+        fill="url(#jaw)" stroke="#0f1a09" stroke-width="12" stroke-linejoin="round"/>
+  <!-- open maw -->
+  <path d="M340 545 C430 560 560 560 690 520 C650 600 640 640 690 690 C600 690 480 660 400 615 Z" fill="url(#maw)"/>
+  <!-- lower teeth -->
+  <g fill="#f7f1e2" stroke="#3a2a1a" stroke-width="5" stroke-linejoin="round">
+    <path d="M640 685 L655 645 L670 690 Z"/>
+    <path d="M580 672 L595 630 L612 676 Z"/>
+    <path d="M520 655 L534 618 L550 660 Z"/>
+    <path d="M465 637 L478 605 L492 642 Z"/>
+  </g>
+
+  <!-- upper head and snout -->
+  <path d="M215 520 C220 420 290 330 400 315 C470 305 540 340 600 395 C650 440 700 470 735 500 C700 525 640 535 560 540 C480 545 400 550 340 548 C290 560 250 580 215 600 Z"
+        fill="url(#scale)" stroke="#0f1a09" stroke-width="12" stroke-linejoin="round"/>
+  <!-- upper teeth -->
+  <g fill="#f7f1e2" stroke="#3a2a1a" stroke-width="5" stroke-linejoin="round">
+    <path d="M690 518 L705 560 L718 512 Z"/>
+    <path d="M630 530 L645 575 L660 526 Z"/>
+    <path d="M570 538 L584 580 L598 536 Z"/>
+    <path d="M510 543 L523 580 L537 542 Z"/>
+    <path d="M455 546 L467 578 L480 546 Z"/>
+  </g>
+  <!-- brow ridge, scale highlights, nostril -->
+  <path d="M330 385 C380 350 440 345 500 370" fill="none" stroke="#1a2a10" stroke-width="16" stroke-linecap="round"/>
+  <path d="M300 470 C360 430 440 425 520 455 M420 500 C480 480 560 480 640 495" fill="none" stroke="#c8e08a" stroke-width="8" stroke-linecap="round" opacity="0.45"/>
+  <ellipse cx="690" cy="478" rx="16" ry="9" fill="#0d1407" transform="rotate(25 690 478)"/>
+  <!-- eye -->
+  <ellipse cx="420" cy="410" rx="44" ry="26" fill="#ffb21e" opacity="0.7" filter="url(#glow)"/>
+  <ellipse cx="420" cy="410" rx="38" ry="22" fill="url(#eye)" stroke="#2a1405" stroke-width="7"/>
+  <ellipse cx="424" cy="410" rx="7" ry="19" fill="#1a0a02"/>
+  <!-- sheen -->
+  <path d="M300 360 C380 320 470 320 540 360" fill="none" stroke="#ffffff" stroke-width="10" opacity="0.25" filter="url(#soft)"/>
+</svg>

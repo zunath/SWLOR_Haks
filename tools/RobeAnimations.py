@@ -47,6 +47,40 @@ def validate_body_parts(generated, base, animation_parent):
                 raise ValueError(f"{'/'.join(path)}: animation part {actual[path]} must be {part}")
 
 
+def preserve_static_body_parts(data, base):
+    """Keep unanimated native body leaves at -1 after a fresh compiler pass.
+
+    CleanModels can allocate an otherwise unused ID to an ordinary dummy leaf
+    even when its inherited native body ID is -1. Do not change animated nodes
+    or ancestors: the engine needs their IDs to reach descendant tracks.
+    """
+    actual, expected = binary_parts(data), binary_parts(base)
+    targets = {path: actual[path] for path, part in expected.items()
+               if path and part == -1 and actual.get(path, -1) >= 0}
+    if not targets:
+        return data
+    for path in targets:
+        if any(other[:len(path)] == path and len(other) > len(path) for other in actual):
+            raise ValueError(f"{'/'.join(path)}: cannot restore a static body ID above descendants")
+    uint = lambda offset: struct.unpack_from("<I", data, offset)[0]
+    roots = [uint(84)] + [uint(12 + uint(12 + uint(132) + index * 4) + 72)
+                           for index in range(uint(136))]
+    trees = [_node_offsets(data, root) for root in roots]
+    for tree in trees[1:]:
+        for path, offset in tree:
+            part = struct.unpack_from("<i", data, offset + 28)[0]
+            if uint(offset + 88) and (path in targets or part in targets.values()):
+                raise ValueError(f"{'/'.join(path)}: cannot restore an animated body ID")
+    result = bytearray(data)
+    for tree in trees:
+        for path, offset in tree:
+            if path in targets:
+                struct.pack_into("<i", result, offset + 28, -1)
+    result = bytes(result)
+    validate_animation_parts(result)
+    return result
+
+
 def validate_animation_parts(data):
     geometry_parts = binary_parts(data)
     used = {}
@@ -61,6 +95,79 @@ def validate_animation_parts(data):
         for path, part in binary_parts(data, uint(animation + 72)).items():
             if path not in geometry_parts or part != geometry_parts[path]:
                 raise ValueError(f"{'/'.join(path)}: clip uses an invalid animation part {part}")
+
+
+def _node_offsets(data, root):
+    uint = lambda offset: struct.unpack_from("<I", data, offset)[0]
+    result = []
+    def visit(pointer, path):
+        offset = pointer + 12
+        node = data[offset + 32:offset + 64].split(b"\0", 1)[0].decode("ascii").lower()
+        current = (*path, node) if path is not None else ()
+        result.append((current, offset))
+        for index in range(uint(offset + 76)):
+            visit(uint(12 + uint(offset + 72) + index * 4), current)
+    visit(root, None)
+    return result
+
+
+def static_garment_ancestors(data):
+    """Geometry paths of an animation parent's unnumbered garment joints above a tracked node.
+
+    The compiler numbers only nodes with tracks, so a garment's static copy of a
+    wearer bone has part -1. The engine animates nothing beneath a -1 node: cloth
+    helpers under it (coat tails, skirt bones) stay at their bind shape.
+    """
+    uint = lambda offset: struct.unpack_from("<I", data, offset)[0]
+    parts = binary_parts(data)
+    tracked = set()
+    for index in range(uint(136)):
+        root = uint(12 + uint(12 + uint(132) + index * 4) + 72)
+        tracked.update(path for path, offset in _node_offsets(data, root) if uint(offset + 88))
+    return sorted(path for path, part in parts.items()
+                  if path and part < 0 and path[-1].startswith("rg_") and
+                  any(other[:len(path)] == path and len(other) > len(path) for other in tracked))
+
+
+def number_static_garment_ancestors(data):
+    """Give those joints unused part IDs in geometry and every clip, adding no tracks.
+
+    Without controllers the engine still leaves each joint at its wearer's own bind,
+    so latched channels and per-wearer adapter transforms are unchanged; the IDs
+    only let the engine reach the animated helpers below. Wearer roots compiled
+    against this parent inherit the IDs by name.
+    """
+    targets = static_garment_ancestors(data)
+    uint = lambda offset: struct.unpack_from("<I", data, offset)[0]
+    roots = [uint(84)] + [uint(12 + uint(12 + uint(132) + index * 4) + 72) for index in range(uint(136))]
+    trees = [_node_offsets(data, root) for root in roots]
+    used = [struct.unpack_from("<i", data, offset + 28)[0] for tree in trees for _, offset in tree]
+    assigned = {path: max(used) + 1 + index for index, path in enumerate(targets)}
+    # An in-place motion revision can arrive with already-numbered joints but
+    # an older undersized header, so normalize the high-water mark in that case too.
+    part_count = max(uint(88), max([*used, *assigned.values()]) + 1)
+    if not targets and part_count == uint(88):
+        return data
+    result = bytearray(data)
+    for index, tree in enumerate(trees):
+        for path, offset in tree:
+            if path in assigned:
+                # Geometry keeps each joint's bind transform; clips must add nothing.
+                if index and uint(offset + 88):
+                    raise ValueError(f"{'/'.join(path)}: a static garment joint must not carry tracks")
+                struct.pack_into("<i", result, offset + 28, assigned[path])
+    # Children allocate their own mesh IDs after this inherited ID space. The
+    # manually numbered joints must reserve it just like compiler-owned IDs.
+    struct.pack_into("<I", result, 88, part_count)
+    result = bytes(result)
+    validate_animation_parts(result)
+    return result
+
+
+def validate_static_garment_parts(data):
+    if static_garment_ancestors(data):
+        raise ValueError("Animated garment joints sit beneath unnumbered joints: " +
+                         ", ".join("/".join(path) for path in static_garment_ancestors(data)))
 
 
 def model_name(text):
