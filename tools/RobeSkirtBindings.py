@@ -1,8 +1,12 @@
-"""Keep robe 236's skirt attached during body-only ability animations.
+"""Give robe 236's generated skirts back their native coat-helper weights.
 
-Its legacy coat helpers have no tracks in authored ability clips. Bind the same
-skin weights to pelvis/thigh/shin bones instead. Meshes, body layout, animation
-IDs, materials and every other skin remain byte-identical.
+The skirts were once weighted to pelvis/thigh/shin so they followed the legs in
+ability clips without coat tracks. With the coat helpers animated (see
+NumberRobeGarmentParts.py), that binding only made the coat hug the hips and let
+long pelvis parts poke through. The native robe's own skin tables are copied
+back onto the unchanged RGB rig; geometry, the skeleton and every other skin
+stay byte-identical. Like native robes, the skirt then holds its previous pose
+in ability clips that omit the coat tracks.
 """
 from __future__ import annotations
 
@@ -13,18 +17,11 @@ import math
 from pathlib import Path
 import struct
 
-import CompileModels as mdl
 import RobePoseAudit as poses
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCES = frozenset(f'p{gender}{race}0_robe236' for gender in 'fm' for race in 'deho')
 PANELS = ('skirt_b', 'skirt_fl', 'skirt_fr')
-TARGETS = {
-    f'coat_{corner}{suffix}': ('pelvis_g' if suffix == '1' else
-                             f'{side}thigh_g' if suffix == '1a' else f'{side}shin_g')
-    for corner, side in (('bl', 'l'), ('br', 'r'), ('fl', 'l'), ('fr', 'r'))
-    for suffix in ('1', '1a', '2')
-}
 
 
 def skin_layout(model, offset):
@@ -71,91 +68,36 @@ def vertices(model, offset, clip=None, time=0):
         yield tuple(position)
 
 
-def bind_skirts(data, names):
-    """Retarget only three skin palettes; the body and garment skeletons stay intact."""
-    model = poses.Model(data, False)
-    indices = {}
-    for index, node in enumerate(model.nodes):
-        indices.setdefault(node[0], []).append(index)
-    required = set(TARGETS.values()) | {names[panel] for panel in PANELS}
-    if any(len(indices.get(name, [])) != 1 for name in required):
-        raise ValueError('Missing or ambiguous body bone/skirt mesh')
-    remap = {names[bone]: target for bone, target in TARGETS.items()}
-    allowed_bones = set(TARGETS.values()) | {names['torso_g']}
-    world = model.pose()
-    result = bytearray(data)
+def restore_native_skirts(source, wearer, names):
+    """Copy the native skirt palettes, bone maps, inverse binds and weights onto the RGB rig."""
+    native, target = poses.Model(source, False), poses.Model(wearer, False)
+    native_indices = {name: i for i, (name, *_) in enumerate(native.nodes)}
+    target_indices = {name: i for i, (name, *_) in enumerate(target.nodes)}
+    result = bytearray(wearer)
     for panel in PANELS:
-        mesh_name = names[panel]
-        offset = model.nodes[indices[mesh_name][0]][4]
-        skin, count, weights, vertex_indices, stride = skin_layout(model, offset)
-        palette = struct.unpack_from('<17h', data, skin + 64)
-        old_slots, rows = set(), []
+        old_offset = native.nodes[native_indices[panel]][4]
+        new_offset = target.nodes[target_indices[names[panel]]][4]
+        oskin, count, ow, oi, ostride = skin_layout(native, old_offset)
+        skin, new_count, nw, ni, stride = skin_layout(target, new_offset)
+        if count != new_count:
+            raise ValueError(f'{panel}: native and converted skirt topology differ')
+        palette = struct.unpack_from('<17h', source, oskin + 64)
+        mapped = [target_indices[names[native.nodes[index][0]]] if index >= 0 else -1 for index in palette]
+        struct.pack_into('<17h', result, skin + 64, *mapped)
+        mapping, length = 12 + target.uint(skin + 20), target.uint(skin + 24)
+        result[mapping:mapping + length * 2] = bytes([0xff, 0xff]) * length
+        for slot, index in enumerate(mapped):
+            if index < 0:
+                continue
+            struct.pack_into('<h', result, mapping + index * 2, slot)
+            for field, size in ((28, 16), (40, 12)):
+                start = 12 + native.uint(oskin + field) + palette[slot] * size
+                end = 12 + target.uint(skin + field) + index * size
+                result[end:end + size] = source[start:start + size]
         for vertex in range(count):
-            ws = struct.unpack_from('<4f', data, weights + vertex * (stride or 16))
-            slots = struct.unpack_from('<4h', data, vertex_indices + vertex * (stride or 8))
-            if any(not math.isfinite(w) or w < 0 for w in ws) or abs(sum(ws)-1) > .0021:
-                raise ValueError(f'{mesh_name}: invalid weights')
-            old_slots.update(slot for weight, slot in zip(ws, slots) if weight)
-            rows.append((ws, slots))
-        targets, slot_map, new_binds, rest = {}, {}, set(), {}
-        for slot in sorted(old_slots):
-            if not 0 <= slot < 17 or not 0 <= palette[slot] < len(model.nodes):
-                raise ValueError(f'{mesh_name}: invalid skin palette')
-            bone = model.nodes[palette[slot]][0]
-            target = remap.get(bone, bone)
-            if target not in allowed_bones or len(indices.get(target, [])) != 1:
-                raise ValueError(f'{mesh_name}: unexpected weighted bone {bone}')
-            targets.setdefault(target, len(targets))
-            slot_map[slot] = targets[target]
-            if target != bone:
-                new_binds.add(target)
-                old_index = palette[slot]
-                qptr = 12 + model.uint(skin + 28)
-                tptr = 12 + model.uint(skin + 40)
-                stored = struct.unpack_from('<4f', data, qptr + old_index*16)
-                old_translation = struct.unpack_from('<3f', data, tptr + old_index*12)
-                bp, bq, bs = world[bone]
-                if abs(bs-1) > 2e-6:
-                    raise ValueError('Skirt binding requires unit bind scales')
-                # Preserve the authored skinned rest shape. Some female models'
-                # inverse binds intentionally differ from their mesh transform.
-                composite = (tuple(a+b for a,b in zip(bp, poses.rotate(bq, old_translation))),
-                             poses.multiply(bq, (*stored[1:], stored[0])))
-                previous = rest.setdefault(target, composite)
-                if math.dist(previous[0], composite[0]) > 2e-5 or not mdl.equivalent_quaternion(previous[1], composite[1]):
-                    raise ValueError('Merged skirt bones have different authored rest shapes')
-        mapping, length = 12 + model.uint(skin + 20), model.uint(skin + 24)
-        qptr, qcount = 12 + model.uint(skin + 28), model.uint(skin + 32)
-        tptr, tcount = 12 + model.uint(skin + 40), model.uint(skin + 44)
-        if min(length, qcount, tcount) < len(model.nodes):
-            raise ValueError(f'{mesh_name}: incomplete bind tables')
-        result[mapping:mapping+length*2] = b'\xff\xff' * length
-        struct.pack_into('<17h', result, skin + 64, *([-1]*17))
-        for bone, slot in targets.items():
-            index = indices[bone][0]
-            struct.pack_into('<h', result, skin + 64 + slot*2, index)
-            struct.pack_into('<h', result, mapping + index*2, slot)
-            if bone in new_binds:
-                bp, bq, bs = world[bone]
-                mp, mq = rest[bone]
-                if abs(bs-1) > 2e-6:
-                    raise ValueError('Skirt binding requires unit bind scales')
-                inverse = (-bq[0], -bq[1], -bq[2], bq[3])
-                translation = poses.rotate(inverse, tuple(a-b for a,b in zip(mp,bp)))
-                rotation = poses.multiply(inverse, mq)
-                struct.pack_into('<4f', result, qptr + index*16, rotation[3], *rotation[:3])
-                struct.pack_into('<3f', result, tptr + index*12, *translation)
-        for vertex, (ws, slots) in enumerate(rows):
-            combined = {}
-            for weight, slot in zip(ws, slots):
-                if weight:
-                    new_slot = slot_map[slot]
-                    combined[new_slot] = combined.get(new_slot, 0.) + weight
-            pairs = sorted(combined.items())
-            struct.pack_into('<4f', result, weights + vertex*(stride or 16),
-                             *([weight for _,weight in pairs] + [0.]*(4-len(pairs))))
-            struct.pack_into('<4h', result, vertex_indices + vertex*(stride or 8),
-                             *([slot for slot,_ in pairs] + [-1]*(4-len(pairs))))
+            for old, new, size in ((ow + vertex * (ostride or 16), nw + vertex * (stride or 16), 16),
+                                   (oi + vertex * (ostride or 8), ni + vertex * (stride or 8), 8)):
+                result[new:new + size] = source[old:old + size]
     return bytes(result)
 
 
@@ -194,7 +136,7 @@ def main():
         path = ROOT/'sw_pt_root'/f'{name}.mdl'
         before = path.read_bytes()
         names = manifest['garment_node_names'][name]
-        after = bind_skirts(before, names)
+        after = restore_native_skirts((ROOT/'sw_pt_robe'/f'{row[1]}.mdl').read_bytes(), before, names)
         error = validate_rest_pose(before, after, names)
         if before != after:
             outputs[path] = (before, after)
@@ -202,7 +144,7 @@ def main():
     if processed != SOURCES:
         raise ValueError('Robe rendering catalog does not contain all eight normal-body variants')
     if args.check and outputs:
-        raise ValueError('Robe 236 still references independent coat helpers')
+        raise ValueError('Robe 236 skirts no longer match their native coat-helper bindings')
     if args.apply:
         if manifest_path.read_bytes() != manifest_bytes or any(path.read_bytes() != before for path,(before,_) in outputs.items()):
             raise ValueError('Robe assets changed during validation')
@@ -212,7 +154,10 @@ def main():
             manifest['model_builds'].pop(path.stem, None)
         for name in ('RobeSkirtBindings.py', 'GenerateRobeRgbModels.py'):
             path = ROOT/'tools'/name
-            manifest['files'][path.relative_to(ROOT).as_posix()] = file_digest(path)
+            relative = path.relative_to(ROOT).as_posix()
+            manifest['files'][relative] = file_digest(path)
+            if relative in manifest.get('validation_tool_files', {}):
+                manifest['validation_tool_files'][relative] = manifest['files'][relative]
         manifest_path.write_text(json.dumps(manifest, indent=2)+'\n')
     print(f"{'Applied' if args.apply else 'Validated'} {len(outputs)} robe roots")
 

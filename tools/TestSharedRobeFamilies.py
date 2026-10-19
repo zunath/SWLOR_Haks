@@ -255,6 +255,55 @@ class SharedRobeFamilyTests(unittest.TestCase):
                     self.assertAlmostEqual(left, right, places=4, msg=bone)
             self.assertGreater(abs(posed["rootdummy"][0][2] - rest["rootdummy"][0][2]), 0.5)
 
+    def test_cloth_helpers_beneath_static_wearer_joints_receive_engine_part_ids(self):
+        """The engine animates nothing beneath a -1 node; robe 20's coat tails hugged the hips."""
+        geometry = node("rootdummy", "body", "position 0 0 1.2") + node("pelvis_g", "rootdummy")
+        walk = clip("body", 1, node("body", "null") + node("rootdummy", "body", "orientationkey 2\n0 0 0 1 0\n1 0 0 1 0.3"))
+        body = model("body", "null", geometry, walk)
+        tails = clip("coatanim", 1, node("coatanim", "null") + node("rootdummy", "coatanim") +
+                     node("coat_root", "rootdummy") +
+                     node("coat_bl1", "coat_root", "orientationkey 2\n0 1 0 0 0\n1 1 0 0 0.4"))
+        helpers = node("rootdummy", "{}", "position 0 {} 1.2") + node("coat_root", "rootdummy") + node("coat_bl1", "coat_root", "position -0.1 -0.1 0")
+        fixtures = {"body": body, "coatanim": model("coatanim", "body", helpers.format("coatanim", 0), tails)}
+        for name, offset in (("coat", 0), ("longcoat", 0.03)):
+            fixtures[name] = model(name, "coatanim", helpers.format(name, offset))
+        families, key = self.build(fixtures, ["coat", "longcoat"])
+        with tempfile.TemporaryDirectory() as directory:
+            stage = Path(directory)
+            compiler, _ = mdl.prepare_compiler(stage)
+            (stage / "binary").mkdir()
+
+            def compile_source(name, data):
+                path = stage / f"{name}.mdl"
+                path.write_bytes(data)
+                mdl.run_compiler(compiler, stage, ["-cne", str(path), str(stage / "binary") + "/"], name + ".log")
+                return (stage / "binary" / path.name).read_bytes()
+
+            (stage / "body.mdl").write_bytes(compile_source("body", body.encode()))
+            compiled = compile_source("bridge", families.bridge(key, "bridge"))
+            self.assertIn(("rootdummy", "rg_rootdummy"), anim.static_garment_ancestors(compiled))
+            numbered = anim.number_static_garment_ancestors(compiled)
+            anim.validate_static_garment_parts(numbered)
+            self.assertEqual(len(compiled), len(numbered))
+            self.assertEqual(numbered, anim.number_static_garment_ancestors(numbered))
+            (stage / "bridge.mdl").write_bytes(numbered)
+            bridge_parts = anim.binary_parts(numbered)
+            library = poses.Library(lambda name: (stage / f"{name}.mdl").read_bytes())
+            for wearer in ("coat", "longcoat"):
+                source, names = families.body_root(wearer, wearer + "_root", "bridge")
+                compiled_wearer = compile_source(wearer + "_root", source)
+                anim.validate_body_parts(compiled_wearer, (stage / "body.mdl").read_bytes(), numbered)
+                path = ("rootdummy", names["rootdummy"])
+                self.assertEqual(bridge_parts[path], anim.binary_parts(compiled_wearer)[path])
+                # Still a static child: no tracks, and each wearer keeps its own adapter offset.
+                self.assertEqual(1, poses.validate_garment_body_motion(compiled_wearer, "body", names, library))
+                adapter = next(n for n in poses.Model(compiled_wearer, False).nodes if n[0] == names["rootdummy"])
+                authored = next(props for _, name, props in anim.geometry(source.decode())
+                                if name == names["rootdummy"])
+                position = adapter[3][8][1][0] if 8 in adapter[3] else (0, 0, 0)
+                for left, right in zip(position, map(float, authored.get("position", ["0", "0", "0"]))):
+                    self.assertAlmostEqual(left, right, places=5, msg=wearer)
+
     def test_distinct_named_joints_in_one_wearer_never_merge(self):
         fixtures = skeleton_tests.IndependentRobeSkeletonTests().fixtures()
         for name in ("left", "right"):
