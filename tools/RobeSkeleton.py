@@ -318,7 +318,8 @@ class Families:
             props = dict(props)
             props["parent"] = [generated if not paths[node] else renamed[props["parent"][0].lower()]]
             if "weights" in props:
-                props["weights"] = [[renamed[value.lower()] if i % 2 == 0 else value
+                # CleanModels writes an unweighted vertex as "_ 0".
+                props["weights"] = [[renamed[value.lower()] if i % 2 == 0 and value != "_" else value
                                       for i, value in enumerate(row)] for row in props["weights"]]
             entries.append((renamed[node], props, serialize(kind, renamed[node], props)))
         # Native compilation stores nodes depth-first, with children in source
