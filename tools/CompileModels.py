@@ -323,6 +323,12 @@ def validate_round_trip(source: bytes, compiled: bytes, decompiled: str, skin_sk
         expected_rotations = properties.get("orientationkey")
         if expected_rotations is None and "orientation" in properties:
             expected_rotations = [["0", *properties["orientation"]]]
+        # CleanModels v4.4.2 omits a static identity rotation on the model root, which
+        # the engine reads as identity; any other root rotation must still round-trip.
+        if (properties.get("parent", [""])[0].lower() == "null" and not rotation_values and expected_rotations is not None
+                and len(expected_rotations) == 1 and equivalent(expected_rotations[0][0], 0)
+                and equivalent_quaternion(quaternion(expected_rotations[0][1:]), (0.0, 0.0, 0.0, 1.0))):
+            expected_rotations = None
         if expected_rotations is not None:
             if len(expected_rotations) != len(rotation_values) or not all(equivalent(row[0], timestamp) and equivalent_quaternion(quaternion(row[1:]), value) for row, (timestamp, value) in zip(expected_rotations, rotation_values)):
                 raise ValueError(f"{name}: binary orientation controller changed")
