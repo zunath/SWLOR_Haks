@@ -63,6 +63,73 @@ def validate_animation_parts(data):
                 raise ValueError(f"{'/'.join(path)}: clip uses an invalid animation part {part}")
 
 
+def _node_offsets(data, root):
+    uint = lambda offset: struct.unpack_from("<I", data, offset)[0]
+    result = []
+    def visit(pointer, path):
+        offset = pointer + 12
+        node = data[offset + 32:offset + 64].split(b"\0", 1)[0].decode("ascii").lower()
+        current = (*path, node) if path is not None else ()
+        result.append((current, offset))
+        for index in range(uint(offset + 76)):
+            visit(uint(12 + uint(offset + 72) + index * 4), current)
+    visit(root, None)
+    return result
+
+
+def static_garment_ancestors(data):
+    """Geometry paths of an animation parent's unnumbered garment joints above a tracked node.
+
+    The compiler numbers only nodes with tracks, so a garment's static copy of a
+    wearer bone has part -1. The engine animates nothing beneath a -1 node: cloth
+    helpers under it (coat tails, skirt bones) stay at their bind shape.
+    """
+    uint = lambda offset: struct.unpack_from("<I", data, offset)[0]
+    parts = binary_parts(data)
+    tracked = set()
+    for index in range(uint(136)):
+        root = uint(12 + uint(12 + uint(132) + index * 4) + 72)
+        tracked.update(path for path, offset in _node_offsets(data, root) if uint(offset + 88))
+    return sorted(path for path, part in parts.items()
+                  if path and part < 0 and path[-1].startswith("rg_") and
+                  any(other[:len(path)] == path and len(other) > len(path) for other in tracked))
+
+
+def number_static_garment_ancestors(data):
+    """Give those joints unused part IDs in geometry and every clip, adding no tracks.
+
+    Without controllers the engine still leaves each joint at its wearer's own bind,
+    so latched channels and per-wearer adapter transforms are unchanged; the IDs
+    only let the engine reach the animated helpers below. Wearer roots compiled
+    against this parent inherit the IDs by name.
+    """
+    targets = static_garment_ancestors(data)
+    if not targets:
+        return data
+    uint = lambda offset: struct.unpack_from("<I", data, offset)[0]
+    roots = [uint(84)] + [uint(12 + uint(12 + uint(132) + index * 4) + 72) for index in range(uint(136))]
+    trees = [_node_offsets(data, root) for root in roots]
+    used = [struct.unpack_from("<i", data, offset + 28)[0] for tree in trees for _, offset in tree]
+    assigned = {path: max(used) + 1 + index for index, path in enumerate(targets)}
+    result = bytearray(data)
+    for index, tree in enumerate(trees):
+        for path, offset in tree:
+            if path in assigned:
+                # Geometry keeps each joint's bind transform; clips must add nothing.
+                if index and uint(offset + 88):
+                    raise ValueError(f"{'/'.join(path)}: a static garment joint must not carry tracks")
+                struct.pack_into("<i", result, offset + 28, assigned[path])
+    result = bytes(result)
+    validate_animation_parts(result)
+    return result
+
+
+def validate_static_garment_parts(data):
+    if static_garment_ancestors(data):
+        raise ValueError("Animated garment joints sit beneath unnumbered joints: " +
+                         ", ".join("/".join(path) for path in static_garment_ancestors(data)))
+
+
 def model_name(text):
     return re.search(r"(?im)^\s*newmodel\s+(\S+)", text)[1].lower()
 
