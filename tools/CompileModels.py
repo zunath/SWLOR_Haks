@@ -380,7 +380,8 @@ def validate_round_trip(source: bytes, compiled: bytes, decompiled: str, skin_sk
 def prepare_compiler(staging: Path) -> tuple[Path, str]:
     source = CleanModels.find_compiler()
     compiler = staging / "cleanmodels.exe"
-    shutil.copyfile(source, compiler)
+    # copy keeps the mode bits; Linux (Wine through binfmt) needs the executable bit to run it.
+    shutil.copy(source, compiler)
     return compiler, digest(compiler.read_bytes())
 
 
