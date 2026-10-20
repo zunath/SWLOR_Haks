@@ -51,6 +51,7 @@ class CloakTintTests(unittest.TestCase):
         self.check_palette_coverage((None,))
 
     @unittest.skipUnless(sys.platform == "win32", "Requires the hidden Windows OpenGL fixture")
+    @unittest.skipUnless(sys.platform == "win32", "Renders through Win32 OpenGL (WGL)")
     def test_exact_rgb_keeps_reference_cutouts_for_every_palette_layer(self):
         self.check_palette_coverage(range(10))
 

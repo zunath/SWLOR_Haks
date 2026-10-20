@@ -380,7 +380,8 @@ def validate_round_trip(source: bytes, compiled: bytes, decompiled: str, skin_sk
 def prepare_compiler(staging: Path) -> tuple[Path, str]:
     source = CleanModels.find_compiler()
     compiler = staging / "cleanmodels.exe"
-    shutil.copyfile(source, compiler)
+    # copy keeps the mode bits; Linux (Wine through binfmt) needs the executable bit to run it.
+    shutil.copy(source, compiler)
     return compiler, digest(compiler.read_bytes())
 
 
@@ -459,8 +460,9 @@ def compiler_material_state(names, refresh=False):
     if refresh:
         material_resources.cache_clear()
     active = material_resources()
+    # MTRs are text that Git may check out with CRLF on Windows; hash their content.
     return {name: ({"path": active[name].relative_to(ROOT).as_posix(),
-                    "sha256": digest(active[name].read_bytes())} if name in active else None)
+                    "sha256": digest(active[name].read_bytes().replace(b"\r\n", b"\n"))} if name in active else None)
             for name in sorted(names)}
 
 

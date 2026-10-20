@@ -1,0 +1,38 @@
+{
+  "generator": "Built-in GPT Image 2",
+  "frame": {
+    "source": "key_items/archive-frame.png",
+    "reference": "sw_item/iki_0001.tga",
+    "mask": "White 64x64 canvas with black inner octagon at 3,10 10,3 53,3 60,10 60,53 53,60 10,60 3,53",
+    "composition": "Reuse the approved violet-magenta Quest Item archive frame; replace its entire central artwork."
+  },
+  "export": {
+    "width": 64,
+    "height": 64,
+    "type": "Uncompressed true-color TGA",
+    "pipeline": "ImageMagick: source -filter Lanczos -resize 64x64! archive-frame.png -compose Over -composite -alpha off -type TrueColor -depth 8 -compress None -flip -orient BottomLeft",
+    "nativeVerification": "Verified upright in native NUI at 40px and 128px; private desktop, zero-capability AppContainer, all four audio channels zero; owned process stopped and temporary profile removed."
+  },
+  "assets": [
+    {
+      "key": "TwinSunsCanyonFiringTrace",
+      "name": "Twin Suns Canyon Firing Trace",
+      "icon": "iki_3644",
+      "category": "QuestItems",
+      "source": "key_items/twin_suns_firing_trace.png",
+      "prompt": "Use case: stylized-concept. Asset type: Neverwinter Nights Enhanced Edition Key Item icon, final 64x64 TGA shown at 40x40. Create an original polished hand-painted science-fantasy galactic archive icon for Twin Suns Canyon Firing Trace: a compact thick armored hexagonal recording cartridge with two parallel glowing firing traces rising from its inset glass face, visibly paired cyan and amber pulses aligned on the same distant holographic target point. This is a physical combat recording, not a gun or character. Three-quarter view, centered recognizable cartridge silhouette, detailed bevels and luminous circuitry, bold contrast and legibility at tiny size, restrained violet-magenta quest-item accents and cyan rim lighting. Dark navy-black opaque background. Generous padding. No frame; the archive frame is composited by tooling. No readable text, letters, numbers, logos, watermark, portraits, hands, tiny peripheral clutter. The object and its glow must fit comfortably inside the central 75 percent of the square. One final square artwork.",
+      "sourceSHA256": "B548336EB69044D2F3964C6A8221296D90D29D96E9F8D0204DA88CB6F31863FD",
+      "importedSHA256": "075DA345132CD965B9DD81ECD43FF318DB5B8E0E2B3D5F503F67F8954E795E4A"
+    },
+    {
+      "key": "FinalSalvoCanyonRouteTrace",
+      "name": "Final Salvo Canyon Route Trace",
+      "icon": "iki_3645",
+      "category": "QuestItems",
+      "source": "key_items/final_salvo_route_trace.png",
+      "prompt": "Use case: stylized-concept. Asset type: Neverwinter Nights Enhanced Edition Key Item UI icon, final 64x64 TGA shown at 40x40. Create an original polished hand-painted science-fantasy galactic archive icon for Final Salvo Canyon Route Trace: a sturdy circular black-and-bronze route recorder medallion, three-quarter top view, projecting a clear violet-magenta zigzag movement path with exactly two broad turning bends and a bright gold destination flare over its inset glass disc. A few faceted sandstone-colored contour ridges inside the disc suggest the canyon range. It is a physical recording of successful combat repositioning and a powered follow-up. Distinct circular silhouette and construction; no gun, no cartridge, no characters. Bold clean readable subject at tiny size; refined bevel shading, restrained cyan rim light and luminous route. Dark navy-black fully opaque square background, generous padding. No frame; archive frame is composited by tooling. No readable text, letters, numbers, logos, watermark, portraits, hands, tiny peripheral clutter. All artwork and glow comfortably inside the central 75 percent of the square. One final square artwork.",
+      "sourceSHA256": "B23AB48AA1C0678D8418323C7B2BE8B6D59FF55B173838B9B1055382247FDCB1",
+      "importedSHA256": "C7F2CD0E24BF8D4FD6A2DA9421272614B94D5EF79935D833157553F9D8E9F971"
+    }
+  ]
+}

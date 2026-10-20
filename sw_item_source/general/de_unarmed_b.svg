@@ -1,0 +1,180 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="256" height="256" viewBox="0 0 256 256">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="46%" r="70%">
+      <stop offset="0" stop-color="#121418"/>
+      <stop offset="1" stop-color="#050607"/>
+    </radialGradient>
+    <!-- cylindrical metal, lit from upper left -->
+    <linearGradient id="cyl" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#22262b"/>
+      <stop offset="0.18" stop-color="#6d757f"/>
+      <stop offset="0.36" stop-color="#c3cad2"/>
+      <stop offset="0.55" stop-color="#5d646d"/>
+      <stop offset="0.85" stop-color="#2a2e34"/>
+      <stop offset="1" stop-color="#15181b"/>
+    </linearGradient>
+    <linearGradient id="cylDark" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#15181b"/>
+      <stop offset="0.35" stop-color="#4a5159"/>
+      <stop offset="0.6" stop-color="#262a2f"/>
+      <stop offset="1" stop-color="#0d0f11"/>
+    </linearGradient>
+    <linearGradient id="plate" x1="0" y1="0" x2="0.35" y2="1">
+      <stop offset="0" stop-color="#e4e9ee"/>
+      <stop offset="0.28" stop-color="#9aa2ac"/>
+      <stop offset="0.7" stop-color="#424850"/>
+      <stop offset="1" stop-color="#1b1e22"/>
+    </linearGradient>
+    <linearGradient id="finger" x1="0" y1="0" x2="0.25" y2="1">
+      <stop offset="0" stop-color="#9ea6b0"/>
+      <stop offset="0.35" stop-color="#5a616a"/>
+      <stop offset="1" stop-color="#1b1e22"/>
+    </linearGradient>
+    <linearGradient id="thumb" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f4f7fa"/>
+      <stop offset="0.45" stop-color="#b3bbc4"/>
+      <stop offset="1" stop-color="#5a616a"/>
+    </linearGradient>
+    <linearGradient id="plateDark" x1="0" y1="0" x2="0.3" y2="1">
+      <stop offset="0" stop-color="#9aa2ac"/>
+      <stop offset="0.45" stop-color="#555c65"/>
+      <stop offset="1" stop-color="#1c1f23"/>
+    </linearGradient>
+    <linearGradient id="knuckle" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#eef2f6"/>
+      <stop offset="0.35" stop-color="#a3abb5"/>
+      <stop offset="1" stop-color="#3b4148"/>
+    </linearGradient>
+    <linearGradient id="brass" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#5a4318"/>
+      <stop offset="0.4" stop-color="#e2b964"/>
+      <stop offset="1" stop-color="#6b4f1c"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="0.35" stop-color="#a9e4ff"/>
+      <stop offset="0.7" stop-color="#3aa6ff" stop-opacity="0.75"/>
+      <stop offset="1" stop-color="#1a5cff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="core" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#1b4fa8"/>
+      <stop offset="0.4" stop-color="#bff0ff"/>
+      <stop offset="0.6" stop-color="#58c2ff"/>
+      <stop offset="1" stop-color="#123a80"/>
+    </linearGradient>
+    <filter id="blur3" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3"/>
+    </filter>
+    <filter id="blur6" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="6"/>
+    </filter>
+  </defs>
+
+  <rect width="256" height="256" fill="url(#bg)"/>
+  <g id="fit" transform="translate(128 128) scale(0.9064) translate(-112.00 -119.50)">
+
+  <g transform="translate(134 136) rotate(-28) scale(0.9) translate(-130 -142)">
+    <!-- impact shock arcs in front of the knuckles -->
+    <g fill="none" stroke-linecap="round">
+      <path d="M 70 30 Q 124 4 182 30" stroke="#3aa6ff" stroke-width="13" opacity="0.35" filter="url(#blur3)"/>
+      <path d="M 70 30 Q 124 4 182 30" stroke="#bfeaff" stroke-width="5.5"/>
+      <path d="M 98 14 Q 126 2 154 14" stroke="#7fd0ff" stroke-width="4.5" opacity="0.9"/>
+    </g>
+    <circle cx="58" cy="40" r="3" fill="#cdeeff"/>
+    <circle cx="196" cy="38" r="2.6" fill="#cdeeff"/>
+    
+
+    <!-- droid insert module (wrist) -->
+    <g>
+      <!-- connector pins -->
+      <rect x="102" y="218" width="8" height="18" rx="2" fill="url(#brass)" stroke="#060708" stroke-width="2"/>
+      <rect x="117" y="218" width="8" height="21" rx="2" fill="url(#brass)" stroke="#060708" stroke-width="2"/>
+      <rect x="132" y="218" width="8" height="21" rx="2" fill="url(#brass)" stroke="#060708" stroke-width="2"/>
+      <rect x="147" y="218" width="8" height="18" rx="2" fill="url(#brass)" stroke="#060708" stroke-width="2"/>
+      <rect x="94" y="208" width="70" height="14" rx="4" fill="url(#cylDark)" stroke="#060708" stroke-width="3"/>
+      <!-- cylinder body -->
+      <rect x="86" y="164" width="86" height="50" rx="8" fill="url(#cyl)" stroke="#060708" stroke-width="3.5"/>
+      <rect x="86" y="172" width="86" height="7" fill="url(#cylDark)"/>
+      <rect x="86" y="200" width="86" height="7" fill="url(#cylDark)"/>
+      <!-- energy core window -->
+      <rect x="96" y="182" width="66" height="14" rx="4" fill="#06080c" stroke="#060708" stroke-width="2"/>
+      <rect x="99" y="185" width="60" height="8" rx="3" fill="url(#core)"/>
+      <rect x="92" y="178" width="74" height="22" rx="8" fill="#3aa6ff" opacity="0.25" filter="url(#blur3)"/>
+      <!-- bolts -->
+      <circle cx="96" cy="208" r="2.4" fill="#c9d0d8"/>
+      <circle cx="162" cy="208" r="2.4" fill="#5d646d"/>
+      <!-- rim light -->
+      <path d="M 90 170 L 90 208" stroke="#e8eef5" stroke-width="2" opacity="0.55" stroke-linecap="round"/>
+    </g>
+
+    <!-- wrist cuff -->
+    <path d="M 70 140 L 186 140 L 178 170 L 80 170 Z" fill="url(#plateDark)" stroke="#060708" stroke-width="3.5" stroke-linejoin="round"/>
+    <path d="M 76 146 L 180 146" stroke="#c4ccd5" stroke-width="2" opacity="0.6"/>
+    <circle cx="88" cy="158" r="3" fill="#b9c1ca" stroke="#060708" stroke-width="1"/>
+    <circle cx="168" cy="158" r="3" fill="#6d757f" stroke="#060708" stroke-width="1"/>
+
+    <!-- back of the armored fist / palm heel -->
+    <path d="M 70 64 Q 66 52 80 50 L 176 50 Q 190 52 188 66 L 190 132 Q 188 148 172 148 L 84 148 Q 68 148 68 132 Z"
+          fill="url(#plateDark)" stroke="#060708" stroke-width="4" stroke-linejoin="round"/>
+
+    <!-- curled finger plates: pinky (left) to index (right) -->
+    <g stroke="#060708" stroke-width="4.5" stroke-linejoin="round">
+      <path d="M 70 82 Q 70 76 77 76 L 92 76 Q 98 76 98 82 L 98 122 Q 98 132 86 132 L 80 132 Q 70 132 70 122 Z" fill="url(#finger)"/>
+      <path d="M 99 80 Q 99 74 106 74 L 122 74 Q 128 74 128 80 L 128 128 Q 128 138 116 138 L 110 138 Q 99 138 99 128 Z" fill="url(#finger)"/>
+      <path d="M 129 80 Q 129 74 136 74 L 153 74 Q 159 74 159 80 L 159 128 Q 159 138 147 138 L 141 138 Q 129 138 129 128 Z" fill="url(#finger)"/>
+      <path d="M 160 82 Q 160 76 167 76 L 182 76 Q 188 76 188 82 L 188 124 Q 188 134 176 134 L 172 134 Q 160 134 160 124 Z" fill="url(#finger)"/>
+    </g>
+    <!-- finger joint seams -->
+    <g stroke="#14171a" stroke-width="2" opacity="0.9">
+      <path d="M 73 106 L 95 106"/>
+      <path d="M 102 106 L 125 106"/>
+      <path d="M 132 106 L 156 106"/>
+      <path d="M 163 106 L 185 106"/>
+    </g>
+    <g stroke="#e9eef4" stroke-width="1.6" opacity="0.55">
+      <path d="M 74 108 L 94 108"/>
+      <path d="M 103 108 L 124 108"/>
+      <path d="M 133 108 L 155 108"/>
+    </g>
+
+    <!-- knuckle caps with impact emitters -->
+    <g stroke="#060708" stroke-width="4.5" stroke-linejoin="round">
+      <path d="M 68 64 Q 68 52 80 52 L 88 52 Q 99 52 99 64 L 99 78 L 68 78 Z" fill="url(#knuckle)"/>
+      <path d="M 98 58 Q 98 46 110 46 L 118 46 Q 130 46 130 58 L 130 76 L 98 76 Z" fill="url(#knuckle)"/>
+      <path d="M 129 58 Q 129 46 141 46 L 149 46 Q 161 46 161 58 L 161 76 L 129 76 Z" fill="url(#knuckle)"/>
+      <path d="M 160 62 Q 160 50 172 50 L 178 50 Q 190 50 190 62 L 190 78 L 160 78 Z" fill="url(#knuckle)"/>
+    </g>
+    <g>
+      <ellipse cx="129" cy="62" rx="66" ry="14" fill="#3aa6ff" opacity="0.45" filter="url(#blur6)"/>
+      <rect x="75" y="64" width="18" height="8" rx="3" fill="#dff4ff" stroke="#1a5cff" stroke-width="1.2"/>
+      <rect x="105" y="62" width="18" height="8" rx="3" fill="#ffffff" stroke="#1a5cff" stroke-width="1.2"/>
+      <rect x="136" y="62" width="18" height="8" rx="3" fill="#ffffff" stroke="#1a5cff" stroke-width="1.2"/>
+      <rect x="166" y="64" width="18" height="8" rx="3" fill="#dff4ff" stroke="#1a5cff" stroke-width="1.2"/>
+    </g>
+
+    <g fill="#ffffff" opacity="0.75">
+      <ellipse cx="80" cy="57" rx="5" ry="2.2"/>
+      <ellipse cx="111" cy="50" rx="6" ry="2.4"/>
+      <ellipse cx="142" cy="50" rx="6" ry="2.4"/>
+    </g>
+    <g fill="#ffffff" opacity="0.35">
+      <path d="M 74 84 Q 74 80 79 80 L 84 80 L 76 102 Z"/>
+      <path d="M 103 82 Q 103 78 108 78 L 113 78 L 105 102 Z"/>
+      <path d="M 133 82 Q 133 78 138 78 L 143 78 L 135 102 Z"/>
+      <path d="M 164 84 Q 164 80 169 80 L 174 80 L 166 102 Z"/>
+    </g>
+
+    <!-- thumb: base pad on the right side, wrapping across index and middle fingers -->
+    <path d="M 186 92 Q 204 96 204 118 Q 204 140 186 146 L 170 146 Q 182 128 180 110 Z"
+          fill="url(#plateDark)" stroke="#060708" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M 198 114 Q 198 132 170 134 L 126 134 Q 114 134 114 124 Q 114 114 126 114 L 172 114 Q 188 112 198 114 Z"
+          fill="url(#thumb)" stroke="#060708" stroke-width="3.5" stroke-linejoin="round"/>
+    <path d="M 152 115 L 152 133" stroke="#14171a" stroke-width="2"/>
+    <path d="M 124 117 Q 118 118 118 124" stroke="#f2f6fa" stroke-width="2" fill="none" opacity="0.7" stroke-linecap="round"/>
+    <path d="M 128 117 L 148 117" stroke="#f2f6fa" stroke-width="2" opacity="0.6" stroke-linecap="round"/>
+
+    <!-- rim light along the leading edge of the fist -->
+    <path d="M 71 122 L 71 66 Q 72 54 82 53" stroke="#eef3f8" stroke-width="2.2" fill="none" opacity="0.7" stroke-linecap="round"/>
+  </g>
+  </g>
+</svg>
