@@ -1,0 +1,204 @@
+//=============================================================================
+//
+// fs_plt_tinter_nm.shd
+//
+// Normal/specular-mapped variant of fs_plt_tinter. The base shader deliberately
+// follows NWN's legacy PLT-only lighting path; this variant is selected only
+// when an authored material actually supplies mapped inputs.
+//
+//=============================================================================
+
+#define SHADER_TYPE 2
+
+#define LIGHTING 1
+#define FOG 1
+#define KEYHOLING 1
+
+#define NORMAL_MAP 0
+#define SPECULAR_MAP 0
+#define ROUGHNESS_MAP 0
+#define HEIGHT_MAP 0
+#define SELF_ILLUMINATION_MAP 0
+#define ENVIRONMENT_MAP 0
+
+#include "inc_standard"
+
+uniform sampler2D texUnit7;
+uniform sampler2D texUnit9;
+uniform sampler2D texUnit10;
+uniform float PLTscheme[15];
+uniform float useNativePalette;
+uniform float smoothTintEdges;
+uniform float tintMapWidth;
+uniform float tintMapHeight;
+uniform float useTexture1Alpha;
+uniform float useTexture9Alpha;
+uniform float useAuthoredDiffuse = 0.0;
+
+// Per-layer scalar color: a palette V coordinate below one, or exact RGB in [1, 4).
+uniform float rowSkin   = 0.000244;
+uniform float rowHair   = 0.086182;
+uniform float rowMetal1 = 0.172119;
+uniform float rowMetal2 = 0.258057;
+uniform float rowCloth1 = 0.343994;
+uniform float rowCloth2 = 0.343994;
+uniform float rowLeath1 = 0.429932;
+uniform float rowLeath2 = 0.429932;
+uniform float rowTat1   = 0.515869;
+uniform float rowTat2   = 0.515869;
+
+vec4 ResolveTintColor(float g, float layer, vec3 authoredDiffuse)
+{
+    float v = rowSkin;
+    if      (layer > 8.5) { v = rowTat2;   }
+    else if (layer > 7.5) { v = rowTat1;   }
+    else if (layer > 6.5) { v = rowLeath2; }
+    else if (layer > 5.5) { v = rowLeath1; }
+    else if (layer > 4.5) { v = rowCloth2; }
+    else if (layer > 3.5) { v = rowCloth1; }
+    else if (layer > 2.5) { v = rowMetal2; }
+    else if (layer > 1.5) { v = rowMetal1; }
+    else if (layer > 0.5) { v = rowHair;   }
+
+    // Robe meshes are omitted from the client's custom-uniform replay. Only
+    // materials with a native PLT control resource enable this fallback, since
+    // materials without a scheme can inherit stale renderer scheme values.
+    // Nonnegative script rows, including palette color zero, always take priority.
+    if (v < 0.0 && useNativePalette > 0.5)
+    {
+        // Native schemes store (256-row palette block OR color byte) / 1792.
+        float colorId = mod(floor(PLTscheme[int(layer)] * 1792.0 + 0.5), 256.0);
+        float baseRow = 0.0;
+        if      (layer > 7.5) { baseRow = 1056.0; }
+        else if (layer > 5.5) { baseRow = 880.0;  }
+        else if (layer > 3.5) { baseRow = 704.0;  }
+        else if (layer > 2.5) { baseRow = 528.0;  }
+        else if (layer > 1.5) { baseRow = 352.0;  }
+        else if (layer > 0.5) { baseRow = 176.0;  }
+        v = (baseRow + clamp(colorId, 0.0, 175.0) + 0.5) / 2048.0;
+    }
+
+    float paletteU = (g * 255.0 + 0.5) / 256.0;
+    vec4 paletteColor = texture2D(texUnit10, vec2(paletteU, v), -10.0);
+    // Values below one remain untouched palette coordinates. Custom RGB uses the
+    // two adjacent IEEE float intervals [1, 2) and [2, 4), carrying all 24 bits.
+    // This is the inverse of TintMapShaderColor.Encode on the server.
+    if (v >= 1.0)
+    {
+        float rgbBits = v < 2.0
+            ? (v - 1.0) * 8388608.0
+            : (v - 2.0) * 4194304.0 + 8388608.0;
+        vec3 decodedRgb = vec3(floor(rgbBits / 65536.0),
+            mod(floor(rgbBits / 256.0), 256.0), mod(rgbBits, 256.0)) / 255.0;
+        float referenceRow = 0.000244140625;
+        if      (layer > 7.5) { referenceRow = 0.515869140625; }
+        else if (layer > 5.5) { referenceRow = 0.429931640625; }
+        else if (layer > 3.5) { referenceRow = 0.343994140625; }
+        else if (layer > 2.5) { referenceRow = 0.258056640625; }
+        else if (layer > 1.5) { referenceRow = 0.172119140625; }
+        else if (layer > 0.5) { referenceRow = 0.086181640625; }
+        vec4 referenceShade = texture2D(texUnit10, vec2(paletteU, referenceRow), -10.0);
+        vec3 referenceMidpoint = texture2D(texUnit10, vec2(128.5 / 256.0, referenceRow), -10.0).rgb;
+        vec3 luminance = vec3(0.2126, 0.7152, 0.0722);
+        float shadeScale = max(dot(referenceShade.rgb, luminance) /
+            max(dot(referenceMidpoint, luminance), 1.0 / 255.0), 0.0);
+        // Only explicit RGB replaces the hue; the diffuse still supplies all detail.
+        if (useAuthoredDiffuse > 0.5)
+            shadeScale = dot(authoredDiffuse, luminance) / 0.5;
+        // Metal layers rely on palette alpha for legacy reflection/specularity,
+        // even without authored maps. Keep the neutral metal coverage curve;
+        // other RGB layers stay opaque and never import a reference row's hue.
+        float environmentAlpha = layer > 1.5 && layer < 3.5 ? referenceShade.a : 1.0;
+        paletteColor = vec4(clamp(decodedRgb * shadeScale, 0.0, 1.0), environmentAlpha);
+    }
+    // These surfaces originally ignored native palette dyes. Preserve that
+    // appearance until an exact RGB override is supplied, including after reset.
+    if (useAuthoredDiffuse > 0.5 && v < 1.0)
+        paletteColor = vec4(authoredDiffuse, 1.0);
+    return paletteColor;
+}
+
+vec4 ResolveTintTexel(vec2 uv, vec3 authoredDiffuse)
+{
+    vec2 packedTint = texture2D(texUnit7, uv, -10.0).rg;
+    float layer = floor(clamp(packedTint.g, 0.0, 0.9999) * 10.0);
+    return ResolveTintColor(packedTint.r, layer, authoredDiffuse);
+}
+
+
+uniform sampler2D texUnit5;
+uniform sampler2D texUnit6;
+uniform float glowLayer = 7.0;
+uniform float glowOverlay = 0.0;
+
+void ApplyHavocShader(vec3 emission)
+{
+	#if LIGHTING == 1
+
+		#if FRAGMENT_LIGHTING == 1 || FRAGMENT_NORMAL == 1
+
+			ComputeLighting(FragmentColor, vFragmentNormal);
+		#else
+
+			#if SELF_ILLUMINATION_MAP == 1
+				#if MATERIAL_READ_SELF_ILLUMINATION_FROM_SPECULAR_MAP == 1
+					if(texture2Bound != 0)
+					{
+						FragmentColor.rgb *= FragmentColor.rgb * (VertexColor.rgb + texture2D(texUnit2, vTexCoords).b);
+						FragmentColor.a *= VertexColor.a;
+					}
+				#else
+					if(texture5Bound != 0)
+					{
+						FragmentColor.rgb *= FragmentColor.rgb * (VertexColor.rgb + texture2D(texUnit5, vTexCoords).r);
+						FragmentColor.a *= VertexColor.a;
+					}
+				#endif
+				else
+			#endif
+			{
+				FragmentColor *= VertexColor;
+			}
+
+		#endif
+
+	#endif
+
+    FragmentColor.rgb += ApplyColorSpace(emission);
+
+	#if KEYHOLING == 1
+		ApplyKeyhole(FragmentColor);
+	#endif
+
+	FragmentColor.rgb = RevertColorSpace(FragmentColor.rgb);
+
+	#if FOG == 1
+		ApplyFog(FragmentColor);
+	#endif
+
+	#if GAMMA_CORRECTION == 1
+		#if COLOR_CORRECTION_TYPE == 1
+		FragmentColor = ColorClamp(FragmentColor);
+		#elif COLOR_CORRECTION_TYPE == 2
+		FragmentColor.rgb = ACESFilm(FragmentColor.rgb);
+		#endif
+	#endif
+
+	// DEBUG
+	ApplyDebugModeOutput(FragmentColor);
+
+}
+
+void main ()
+{
+    FragmentColor = vec4(1.0);
+    SetupStandardShaderInputs();
+    vec3 sourceColor = texture2D(texUnit0, vTexCoords.xy).rgb;
+    float mask = texture2D(texUnit6, vTexCoords.xy).r;
+    if (glowOverlay > 0.5 && mask < 0.01) discard;
+    vec3 glowColor = ResolveTintColor(128.0 / 255.0, glowLayer, vec3(1.0)).rgb;
+    float coverage = clamp(mask * 8.0, 0.0, 1.0);
+    FragmentColor = vec4(ApplyColorSpace(mix(sourceColor, glowColor * mask, coverage)), materialFrontDiffuse.a);
+    ApplyHavocShader(glowColor * mask);
+    gl_FragColor = FragmentColor;
+}
