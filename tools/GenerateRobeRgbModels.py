@@ -22,7 +22,6 @@ import GenerateTintMapAssets as tint
 import ImportStockRobeTints as stock_robes
 import RobeAnimations as animations
 import RobePoseAudit as poses
-import RobeSkirtBindings as skirt_bindings
 import RobeBuildCache as build_cache
 import RobeCompilationCheckpoint as checkpoint
 import RobeBankValidation as bank_validation
@@ -39,7 +38,7 @@ MANIFEST = ROOT / "tools" / "RobeRgbModels.json"
 PATTERN = re.compile(r"^(p[fm][a-z])0_robe(\d{3})$")
 NODE = re.compile(r"(?im)^\s*node\s+(\S+)\s+(\S+)\s*$([\s\S]*?)^\s*endnode\b")
 GENERATOR_INPUTS = ("GenerateRobeRgbModels.py", "RobeSkeleton.py", "RobePoseAudit.py",
-                    "RobeAnimations.py", "RobeSkirtBindings.py", "CompileModels.py", "CleanModels.py", "ImportStockRobeTints.py",
+                    "RobeAnimations.py", "CompileModels.py", "CleanModels.py", "ImportStockRobeTints.py",
                     "TintMapStockRobes.json", "GenerateTintMapAssets.py", "RobeBuildCache.py",
                     "SharedRobeFamilies.py", "RobeSharingAudit.py",
                     "RobeCompilationCheckpoint.py", "RobeBankValidation.py", "ModelLodAssets.py")
@@ -804,7 +803,8 @@ def main():
     compilation_records = json.loads(checkpoint_path.read_text()) if checkpoint_path.is_file() else {}
     resumed = set()
     processors = hashlib.sha256(json.dumps({name: input_digests[ROOT / "tools" / name]
-                                           for name in ("CompileModels.py", "CleanModels.py", "RobePoseAudit.py")},
+                                           for name in ("CompileModels.py", "CleanModels.py", "RobePoseAudit.py",
+                                                        "RobeAnimations.py")},
                                           sort_keys=True).encode()).hexdigest()
     def compile_one(name):
         source = sources[name]
@@ -836,7 +836,7 @@ def main():
             resumed.add(name)
             return
         if name in revised_binaries:
-            path.write_bytes(revised_binaries[name].read_bytes())
+            path.write_bytes(animations.number_static_garment_ancestors(revised_binaries[name].read_bytes()))
             return
         ownership_hash = (bank_record["source_sha256"] if bank_record is not None else
                           prior_manifest.get("files", {}).get(relative))
@@ -850,6 +850,9 @@ def main():
         compiled = path.read_bytes()
         if name in renamed_nodes:
             compiled = poses.preserve_skin_bindings(original, compiled, renamed_nodes[name])
+        if name in animation_cache.values():
+            # Roots compiled next inherit these part IDs from this parent by name.
+            compiled = animations.number_static_garment_ancestors(compiled)
         path.write_bytes(compiled)
         compilation_records[name] = checkpoint.record(compile_key, compiled)
         checkpoint_path.write_text(json.dumps(compilation_records, indent=2) + "\n")
@@ -892,6 +895,7 @@ def main():
                                     (stage / "decompiled" / f"{name}.mdl").read_text(encoding="latin1"))
             if name in animation_cache.values():
                 animations.validate_animation_parts(compiled)
+                animations.validate_static_garment_parts(compiled)
             elif name in complete_roots:
                 parent = mdl.supermodel(compiled)
                 parent_path = stage / "binary" / f"{parent}.mdl"
@@ -932,21 +936,6 @@ def main():
             library.clips.cache_clear()
             library.owners.cache_clear()
             library.model.cache_clear()
-    # The legacy coat helpers have no tracks in body-only ability animations.
-    # Retarget robe 236 after the native conversion audit, preserving its exact
-    # skinned rest shape and skeleton layout. The deterministic repair is also
-    # applied to cache hits, so future regeneration cannot restore the defect.
-    bound_skirts = 0
-    if not failures:
-        for name, original in original_robes.items():
-            if original not in skirt_bindings.SOURCES:
-                continue
-            path = stage / "binary" / f"{name}.mdl"
-            before = path.read_bytes()
-            after = skirt_bindings.bind_skirts(before, renamed_nodes[name])
-            skirt_bindings.validate_rest_pose(before, after, renamed_nodes[name])
-            path.write_bytes(after)
-            bound_skirts += len(skirt_bindings.PANELS)
     checked_garment_clips = 0
     if not failures and args.verify_existing_motion:
         for record in motion_records:
@@ -961,7 +950,6 @@ def main():
               "robe_models": len(selected), "phenotypes": len(id_map),
               "body_pose_samples": checked_poses,
               "garment_body_motion_checks": checked_garment_body_motion,
-              "body_bound_skirts": bound_skirts,
               "shared_rigs": sharing_stats,
               "preserved_wearer_bindings": len(motion_records),
               "preserved_garment_clips": checked_garment_clips,
