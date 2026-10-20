@@ -46,12 +46,12 @@ node trimesh sides
     11 8 12 1 0 0 0 0
     11 12 15 1 0 0 0 0
 endnode
-node dummy sw_openarc_use01
+node dummy soa_pwk_use01
   parent sw_openarc_pwk
   position 0 -2.85 0
   orientation 0 1 0 0
 endnode
-node dummy sw_openarc_use02
+node dummy soa_pwk_use02
   parent sw_openarc_pwk
   position 0 0.56 0
   orientation 0 1 0 0
