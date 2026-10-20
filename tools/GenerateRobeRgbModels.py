@@ -292,6 +292,21 @@ def validate_model_chains(names, load):
     return longest
 
 
+def native_wearer_selection(requested, prior_manifest, update_animation):
+    """An animation update rebuilds every dependent wearer, so an omitted native wearer would
+    take the altering compile and drop out of the provenance map. Carry the recorded set
+    forward there, and reject a list that differs from it."""
+    if not update_animation:
+        return list(requested)
+    recorded = set(prior_manifest.get("native_wearer_sources", {}))
+    if not requested:
+        return sorted(recorded)
+    if set(requested) != recorded:
+        raise ValueError("--update-animation must preserve exactly the recorded native wearers; missing "
+                         f"{sorted(recorded - set(requested))}, unrecorded {sorted(set(requested) - recorded)}")
+    return list(requested)
+
+
 def audited_files(manifest):
     """Retain build provenance while recording updated Python audit tools."""
     validation_tools = manifest.get("validation_tool_files", {})
@@ -620,6 +635,8 @@ def main():
     native_table = PHENOTYPES.read_text().splitlines()
     id_map = allocate_phenotypes(ids, prior, native_table, active)
     prior_manifest = json.loads(MANIFEST.read_text()) if MANIFEST.is_file() else {}
+    args.preserve_native_wearer = native_wearer_selection(
+        args.preserve_native_wearer, prior_manifest, bool(args.update_animation))
     bank_errors = animation_bank_errors(prior_manifest, active)
     if bank_errors:
         raise ValueError("\n".join(bank_errors))
