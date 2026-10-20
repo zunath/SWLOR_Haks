@@ -39,7 +39,9 @@ changes should use the ordinary versioned generation workflow above.
 
 When unchanged native wearers contain geometry that the compiler cannot retain
 exactly, select each explicitly with `--preserve-native-wearer <root>` during a
-complete generation. The generator requires prior ownership and unchanged garment
+complete generation, including `--update-animation` runs (an animation update
+rebuilds every dependent wearer). Pass every root listed in the manifest's
+`native_wearer_sources`. The generator requires prior ownership and unchanged garment
 hashes, preserves native mesh/normal/skin bytes, and rebinds only parent/header/part
 IDs. Their captured native source still passes all strict geometry and motion
 audits. The manifest records the selection and source hashes. Reusing `--stage`

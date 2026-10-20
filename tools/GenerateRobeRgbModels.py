@@ -585,8 +585,10 @@ def main():
         parser.error("--update-animation requires an internal animation name of at most 16 characters")
     if args.update_animation and (args.check or args.model or args.verify_existing_motion):
         parser.error("--update-animation requires a complete build without --check or --verify-existing-motion")
-    if args.preserve_native_wearer and (args.check or args.update_animation):
-        parser.error("--preserve-native-wearer is only available during ordinary generation")
+    # An animation update invalidates every dependent wearer, so the preserved selection
+    # must be passable there too or those wearers fall back to an altering compile.
+    if args.preserve_native_wearer and args.check:
+        parser.error("--preserve-native-wearer is only available during generation")
     if len(set(args.preserve_native_wearer)) != len(args.preserve_native_wearer):
         parser.error("--preserve-native-wearer cannot repeat a root")
     if args.check:
