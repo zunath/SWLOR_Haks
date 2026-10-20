@@ -1,10 +1,13 @@
-"""Authored body and robe animations must retain each wearer's proportions."""
+"""Authored animations must cover robe rigs and retain each wearer's proportions."""
 import json
 import math
 from pathlib import Path
 import re
+import shlex
 import unittest
 
+import CompileModels as mdl
+import RobeAnimationBanks as banks
 from RobePoseAudit import Model
 
 
@@ -39,6 +42,49 @@ class AuthoredAnimationBindChannelTests(unittest.TestCase):
         paths = [ROOT / ("sw_anim_f" if head[1] == "f" else "sw_anim_m") / f"{part}.mdl"
                  for head, bank in manifest["animation_bank_sets"].items() for part in bank["parts"]]
         self.assert_wearer_bind_channels(paths)
+
+    def test_unarmed_phases_resolve_in_every_playable_robe_chain(self):
+        # Body fallback can play the gesture while bypassing the robe's garment
+        # joints. Require all phases before leaving the generated bank chain.
+        names = {name + phase for name in (
+            "sw_bruisst", "sw_dirtyjab", "sw_fincombo", "sw_flowst", "sw_haymaker",
+            "sw_jab", "sw_lowkick", "sw_palmstr", "sw_perfform", "sw_uppercut")
+            for phase in ("", "_in", "_out")}
+
+        def table(name):
+            lines = (ROOT / "sw_2da" / f"{name}.2da").read_text().splitlines()
+            columns = lines[2].split()
+            return {values[0]: dict(zip(columns, values[1:]))
+                    for line in lines[3:] if (values := shlex.split(line)) and values[0].isdigit()}
+
+        appearances = table("appearance")
+        families = {appearances[row["Appearance"]]["RACE"].lower()
+                    for row in table("racialtypes").values() if row["PlayerRace"] == "1"}
+        roots = {row["MODEL"][:3] + row["PHENOTYPE"] for row in table("roberender").values()
+                 if row["MODEL"][2] in families}
+        # Droids have no RGB robes; both sexes of the other playable rigs do.
+        self.assertEqual({f"p{sex}{family}" for sex in "mf" for family in families - {"z"}},
+                         {name[:3] for name in roots})
+        self.assertTrue(roots, "The playable RGB robe catalog must be present")
+        manifest = json.loads((ROOT / "tools/RobeRgbModels.json").read_text())
+        paths = {Path(path).stem: ROOT / path for path in manifest["files"]
+                 if path.startswith(("sw_anim_m/", "sw_anim_f/")) and path.endswith(".mdl")}
+        cached = {}
+        for root in sorted(roots):
+            parent = mdl.supermodel((ROOT / "sw_pt_root" / f"{root}.mdl").read_bytes())
+            self.assertIn(parent, paths, f"{root}: missing generated robe animation parent {parent}")
+            if parent not in cached:
+                current, seen, clips = parent, set(), set()
+                while banks.is_bank_name(current):
+                    self.assertNotIn(current, seen, f"{root}: cyclic robe animation chain")
+                    self.assertIn(current, paths, f"{root}: missing robe bank {current}")
+                    seen.add(current)
+                    bank = banks.CompiledBridge(paths[current].read_bytes())
+                    clips.update(bank.clip_names)
+                    current = bank.parent
+                cached[parent] = clips
+            self.assertFalse(names - cached[parent],
+                             f"{root}: Unarmed phases fall through to the body: {sorted(names - cached[parent])}")
 
     def assert_skeleton_proportions(self, wearer, clips, label):
         # Measure the actual compiled skeleton after animation inheritance. Rotating

@@ -1,0 +1,122 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="256" height="256" viewBox="0 0 256 256">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="46%" r="70%">
+      <stop offset="0" stop-color="#121418"/>
+      <stop offset="1" stop-color="#050607"/>
+    </radialGradient>
+    <linearGradient id="steel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e3e8ee"/>
+      <stop offset="0.25" stop-color="#9aa2ac"/>
+      <stop offset="0.6" stop-color="#4c535b"/>
+      <stop offset="1" stop-color="#1e2226"/>
+    </linearGradient>
+    <linearGradient id="barrel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3a4047"/>
+      <stop offset="0.3" stop-color="#d8dee5"/>
+      <stop offset="0.55" stop-color="#6b737c"/>
+      <stop offset="1" stop-color="#1a1d21"/>
+    </linearGradient>
+    <linearGradient id="grip" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#2a221c"/>
+      <stop offset="0.45" stop-color="#6a5240"/>
+      <stop offset="1" stop-color="#1f1914"/>
+    </linearGradient>
+    <linearGradient id="brass" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#5a4318"/>
+      <stop offset="0.4" stop-color="#e2b964"/>
+      <stop offset="1" stop-color="#6b4f1c"/>
+    </linearGradient>
+    <linearGradient id="chip" x1="0" y1="0" x2="0.4" y2="1">
+      <stop offset="0" stop-color="#b9c1ca"/>
+      <stop offset="0.35" stop-color="#5d646d"/>
+      <stop offset="1" stop-color="#1a1d21"/>
+    </linearGradient>
+    <radialGradient id="redglow" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="0.3" stop-color="#ffb199"/>
+      <stop offset="0.65" stop-color="#ff3b26" stop-opacity="0.8"/>
+      <stop offset="1" stop-color="#ff1a00" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="cell" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#7a1408"/>
+      <stop offset="0.5" stop-color="#ff7a52"/>
+      <stop offset="1" stop-color="#7a1408"/>
+    </linearGradient>
+    <linearGradient id="amber" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#8a4a08"/>
+      <stop offset="0.5" stop-color="#ffe2a0"/>
+      <stop offset="1" stop-color="#8a4a08"/>
+    </linearGradient>
+    <filter id="shade" x="-10%" y="-10%" width="120%" height="120%">
+      <feColorMatrix type="matrix" values="0.68 0 0 0 0  0 0.68 0 0 0  0 0 0.7 0 0  0 0 0 1 0"/>
+    </filter>
+    <filter id="blur3" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3"/>
+    </filter>
+
+    <!-- one blaster pistol, muzzle to the right, grip hanging down at the back -->
+    <g id="pistol" stroke-linejoin="round" transform="translate(0 52) scale(1.06 1.22) translate(0 -52)">
+      <!-- grip -->
+      <path d="M 18 66 L 56 66 L 48 126 Q 46 136 36 136 L 16 134 Q 6 132 8 122 Z" fill="url(#grip)" stroke="#060708" stroke-width="3.5"/>
+      <g stroke="#120e0b" stroke-width="2" opacity="0.9">
+        <path d="M 18 82 L 46 84"/><path d="M 16 94 L 45 96"/><path d="M 14 106 L 43 108"/><path d="M 13 118 L 41 120"/>
+      </g>
+      <path d="M 22 70 L 14 124" stroke="#b08a6a" stroke-width="2" opacity="0.6" stroke-linecap="round"/>
+      <!-- trigger guard and trigger -->
+      <path d="M 54 68 Q 54 92 76 90 L 82 70" fill="none" stroke="#2b3036" stroke-width="5"/>
+      <path d="M 54 68 Q 54 92 76 90 L 82 70" fill="none" stroke="#8d959f" stroke-width="2"/>
+      <path d="M 66 70 Q 64 80 70 84" fill="none" stroke="#c9d0d8" stroke-width="3" stroke-linecap="round"/>
+      <!-- receiver -->
+      <path d="M 12 36 L 104 36 L 114 46 L 114 70 L 12 70 Q 4 70 4 62 L 4 44 Q 4 36 12 36 Z" fill="url(#steel)" stroke="#060708" stroke-width="3.5"/>
+      <rect x="0" y="32" width="12" height="16" rx="3" fill="#3a4047" stroke="#060708" stroke-width="2.5"/>
+      <!-- power cell slit -->
+      <rect x="24" y="53" width="60" height="7" rx="3" fill="#160605" stroke="#060708" stroke-width="1.5"/>
+      <rect x="26" y="55" width="56" height="3.5" rx="1.5" fill="url(#cell)"/>
+      <!-- barrel with cooling rings -->
+      <rect x="110" y="42" width="86" height="20" rx="5" fill="url(#barrel)" stroke="#060708" stroke-width="3.5"/>
+      <g fill="#1a1d21">
+        <rect x="124" y="42" width="4" height="20"/><rect x="138" y="42" width="4" height="20"/><rect x="152" y="42" width="4" height="20"/><rect x="166" y="42" width="4" height="20"/><rect x="180" y="42" width="4" height="20"/>
+      </g>
+      <!-- muzzle -->
+      <rect x="192" y="38" width="20" height="28" rx="4" fill="url(#steel)" stroke="#060708" stroke-width="3.5"/>
+      <rect x="198" y="44" width="3" height="16" fill="#1a1d21"/>
+      <ellipse cx="214" cy="52" rx="8" ry="12" fill="url(#redglow)"/>
+      <!-- scope -->
+      
+      
+      <rect x="40" y="22" width="44" height="12" rx="5" fill="url(#barrel)" stroke="#060708" stroke-width="2.5"/>
+      <ellipse cx="85" cy="28" rx="3" ry="5" fill="#ff6a4a" stroke="#060708" stroke-width="1.2"/>
+      <!-- top highlight -->
+      <path d="M 12 40 L 102 40" stroke="#f4f7fa" stroke-width="2" opacity="0.7" stroke-linecap="round"/>
+      <path d="M 114 47 L 190 47" stroke="#ffffff" stroke-width="1.6" opacity="0.6" stroke-linecap="round"/>
+    </g>
+  </defs>
+
+  <rect width="256" height="256" fill="url(#bg)"/>
+  <g id="fit" transform="translate(128 128) scale(0.9340) translate(-128.00 -122.50)">
+
+  <!-- back pistol: muzzle to the upper left -->
+  <g transform="translate(128 90) rotate(42) scale(-0.84 0.84) translate(-128 -52)">
+    <use xlink:href="#pistol" filter="url(#shade)"/>
+  </g>
+  <!-- front pistol: muzzle to the upper right -->
+  <g transform="translate(128 90) rotate(-42) scale(0.84) translate(-128 -52)">
+    <use xlink:href="#pistol"/>
+  </g>
+
+  <g transform="translate(0 -6)">
+  <!-- droid enhancement insert binding the pair -->
+  <g stroke-linejoin="round">
+    <rect x="109" y="208" width="7" height="18" rx="2" fill="url(#brass)" stroke="#060708" stroke-width="2"/>
+    <rect x="121" y="208" width="7" height="20" rx="2" fill="url(#brass)" stroke="#060708" stroke-width="2"/>
+    <rect x="133" y="208" width="7" height="20" rx="2" fill="url(#brass)" stroke="#060708" stroke-width="2"/>
+    <rect x="145" y="208" width="7" height="18" rx="2" fill="url(#brass)" stroke="#060708" stroke-width="2"/>
+    <path d="M 104 176 L 156 176 L 164 184 L 164 204 L 156 212 L 104 212 L 96 204 L 96 184 Z" fill="url(#chip)" stroke="#060708" stroke-width="3.5"/>
+    <rect x="104" y="189" width="52" height="10" rx="4" fill="#160605" stroke="#060708" stroke-width="2"/>
+    <rect x="107" y="191.5" width="46" height="5" rx="2.5" fill="url(#amber)"/>
+    <rect x="100" y="186" width="60" height="16" rx="8" fill="#ffaa33" opacity="0.35" filter="url(#blur3)"/>
+    <path d="M 106 180 L 154 180" stroke="#e8eef5" stroke-width="2" opacity="0.6" stroke-linecap="round"/>
+  </g>
+  </g>
+  </g>
+</svg>

@@ -1,0 +1,6 @@
+# No walkmesh faces: cosmetic projectile anchors never block movement.
+node dummy tpmzpwk_use01
+  parent tp_muzzle_pwk
+  position 0 0 0
+  orientation 0 0 1 0
+endnode

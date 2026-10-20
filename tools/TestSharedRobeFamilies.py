@@ -1,5 +1,6 @@
 """Shared body animation sources must retain every wearer's independent garment motion."""
 from pathlib import Path
+import struct
 import tempfile
 import unittest
 
@@ -286,12 +287,28 @@ class SharedRobeFamilyTests(unittest.TestCase):
             anim.validate_static_garment_parts(numbered)
             self.assertEqual(len(compiled), len(numbered))
             self.assertEqual(numbered, anim.number_static_garment_ancestors(numbered))
+            # Legacy banks may already have IDs but retain the old undersized
+            # header. Motion-only updates must repair that path as well.
+            stale = bytearray(numbered)
+            struct.pack_into("<I", stale, 88, struct.unpack_from("<I", compiled, 88)[0])
+            self.assertFalse(anim.static_garment_ancestors(stale))
+            repaired = anim.number_static_garment_ancestors(bytes(stale))
+            self.assertEqual(numbered, repaired)
             (stage / "bridge.mdl").write_bytes(numbered)
             bridge_parts = anim.binary_parts(numbered)
+            self.assertGreater(struct.unpack_from("<I", numbered, 88)[0], max(bridge_parts.values()))
             library = poses.Library(lambda name: (stage / f"{name}.mdl").read_bytes())
             for wearer in ("coat", "longcoat"):
                 source, names = families.body_root(wearer, wearer + "_root", "bridge")
+                # A fresh wearer mesh must allocate after manually numbered
+                # inherited garment ancestors, never reuse their part IDs.
+                mesh = ("node trimesh local_mesh\nparent rootdummy\nbitmap NULL\n"
+                        "verts 3\n0 0 0\n1 0 0\n0 1 0\ntverts 3\n0 0 0\n1 0 0\n0 1 0\n"
+                        "faces 1\n0 1 2 1 0 1 2 0\nendnode\n")
+                source = source.replace(f"endmodelgeom {wearer}_root".encode(),
+                                        (mesh + f"endmodelgeom {wearer}_root").encode())
                 compiled_wearer = compile_source(wearer + "_root", source)
+                anim.validate_animation_parts(compiled_wearer)
                 anim.validate_body_parts(compiled_wearer, (stage / "body.mdl").read_bytes(), numbered)
                 path = ("rootdummy", names["rootdummy"])
                 self.assertEqual(bridge_parts[path], anim.binary_parts(compiled_wearer)[path])

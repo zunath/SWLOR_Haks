@@ -1,8 +1,12 @@
 """Regression checks for garment animation overlays and body attachment tracks."""
 import unittest
+from pathlib import Path
+import struct
+import tempfile
 
 import CompileModels as mdl
 import RobeAnimations as robe
+import RobePoseAudit as poses
 
 
 def model(name, parent, nodes, clips=""):
@@ -89,6 +93,67 @@ class RobeAnimationTests(unittest.TestCase):
         fixtures["coat"] = fixtures["coat"].replace("parent coat\n", "parent head_g\n", 1)
         with self.assertRaisesRegex(ValueError, "incompatible animation parent"):
             robe.bridge("body", "garment", fixtures.get, "combined")
+
+
+class StaticBodyPartPreservationTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        temporary = tempfile.TemporaryDirectory()
+        cls.addClassCleanup(temporary.cleanup)
+        stage = Path(temporary.name)
+        compiler, _ = mdl.prepare_compiler(stage)
+        (stage / "binary").mkdir()
+        geometry = (node("rootdummy", "body") + node("belt_g", "rootdummy", "position 0 0 1") +
+                    node("arm_g", "rootdummy") + node("static_parent", "rootdummy") +
+                    node("cloth", "static_parent"))
+        tracks = (node("body", "null") + node("rootdummy", "body") +
+                  node("arm_g", "rootdummy", "orientationkey 2\n0 0 0 1 0\n1 0 0 1 0.5") +
+                  node("static_parent", "rootdummy") +
+                  node("cloth", "static_parent", "positionkey 2\n0 0 0 0\n1 0 1 0"))
+        source = stage / "body.mdl"
+        source.write_text(model("body", "null", geometry, clip("body", 1, tracks)))
+        mdl.run_compiler(compiler, stage, ["-cne", str(source), str(stage / "binary") + "/"], "compile.log")
+        cls.compiled = (stage / "binary/body.mdl").read_bytes()
+
+    def with_geometry_id(self, data, name, part):
+        changed = bytearray(data)
+        offset = next(offset for node, _, _, _, offset in poses.Model(data, False).nodes if node == name)
+        struct.pack_into("<i", changed, offset + 28, part)
+        return bytes(changed), offset + 28
+
+    def test_untracked_leaf_restores_exact_native_id_and_preserves_every_other_byte(self):
+        base, offset = self.with_geometry_id(self.compiled, "belt_g", -1)
+        generated, _ = self.with_geometry_id(base, "belt_g", 900)
+        restored = robe.preserve_static_body_parts(generated, base)
+        self.assertEqual(base, restored)
+        self.assertEqual(generated[:offset], restored[:offset])
+        self.assertEqual(generated[offset + 4:], restored[offset + 4:])
+        self.assertEqual(restored, robe.preserve_static_body_parts(restored, base))
+        robe.validate_animation_parts(restored)
+        poses.validate_body_skeleton(restored, base)
+        actual, expected = poses.Model(restored), poses.Model(base)
+        self.assertEqual(actual.pose(), expected.pose())
+        for name, animation in actual.clips.items():
+            for fraction in (0, .25, .5, 1):
+                self.assertEqual(actual.pose(animation, animation[0] * fraction),
+                                 expected.pose(expected.clips[name], animation[0] * fraction))
+
+    def test_positive_native_ids_are_not_changed(self):
+        generated, _ = self.with_geometry_id(self.compiled, "arm_g", 900)
+        self.assertEqual(generated, robe.preserve_static_body_parts(generated, self.compiled))
+        with self.assertRaisesRegex(ValueError, "animation part"):
+            robe.validate_body_parts(generated, self.compiled, self.compiled)
+
+    def test_animated_formerly_static_leaf_is_rejected(self):
+        base, _ = self.with_geometry_id(self.compiled, "arm_g", -1)
+        with self.assertRaisesRegex(ValueError, "animated body ID"):
+            robe.preserve_static_body_parts(self.compiled, base)
+
+    def test_static_ancestor_above_cloth_is_rejected(self):
+        base, _ = self.with_geometry_id(self.compiled, "static_parent", -1)
+        generated, _ = self.with_geometry_id(base, "static_parent", 900)
+        with self.assertRaisesRegex(ValueError, "above descendants"):
+            robe.preserve_static_body_parts(generated, base)
 
 
 if __name__ == "__main__":
