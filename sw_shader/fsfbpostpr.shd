@@ -1,5 +1,10 @@
 #define SHADER_TYPE 2
 
+// Mobile clients compile shaders as GLSL ES 1.00, which has no integer bitwise
+// operators. The telegraph data below is unpacked with them, so on mobile this
+// whole pass failed to compile and the 3D view drew as a blank screen. Mobile
+// clients use the stock post-processing pass and do not draw telegraphs.
+#ifndef MOBILE
 const int TELEGRAPH_SHAPE_NONE = 0;
 const int TELEGRAPH_SHAPE_SPHERE = 1;
 const int TELEGRAPH_SHAPE_CONE = 2;
@@ -9,11 +14,13 @@ const int COLOR_HOSTILE = 0;
 const int COLOR_SELF = 1;
 const int COLOR_BENEFICIAL = 2;
 const int COLOR_PARTY_MEMBER = 3;
+#endif
 
 #include "inc_target"
 #include "inc_postpr"
 #include "inc_scriptable"
 
+#ifndef MOBILE
 vec3 GetTelegraphColor(int colorType)
 {
     if (colorType == COLOR_HOSTILE) return vec3(1.0, 0.0, 0.0); // Red
@@ -173,9 +180,13 @@ vec4 CalculateTelegraphStrengthTotal(vec3 pixelPos)
 
     return finalColor;
 }
+#endif
 
 void main()
 {
+#ifdef MOBILE
+    gl_FragColor = FS_PostProcess();
+#else
     vec3 pixelPos = (m_view_inv * vec4(GetViewPositionFromDepth(vVertexTexCoords, GetDepth(vVertexTexCoords)), 1.0)).xyz;
     vec4 telegraphEffect = CalculateTelegraphStrengthTotal(pixelPos);
 
@@ -184,4 +195,5 @@ void main()
     // Apply telegraph color blending
     gl_FragColor.rgb = mix(gl_FragColor.rgb, telegraphEffect.rgb, telegraphEffect.a);
     gl_FragColor.a = 1.0;
+#endif
 }
