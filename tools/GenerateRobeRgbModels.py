@@ -29,6 +29,7 @@ import RobeAnimationBanks as banks
 import RobeSkeleton as skeleton
 import SharedRobeFamilies as shared
 import RobeSharingAudit as sharing
+import RobeNativeWearers as native_wearers
 from ModelLodAssets import ModelPath
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -41,7 +42,8 @@ GENERATOR_INPUTS = ("GenerateRobeRgbModels.py", "RobeSkeleton.py", "RobePoseAudi
                     "RobeAnimations.py", "CompileModels.py", "CleanModels.py", "ImportStockRobeTints.py",
                     "TintMapStockRobes.json", "GenerateTintMapAssets.py", "RobeBuildCache.py",
                     "SharedRobeFamilies.py", "RobeSharingAudit.py",
-                    "RobeCompilationCheckpoint.py", "RobeBankValidation.py", "ModelLodAssets.py")
+                    "RobeCompilationCheckpoint.py", "RobeBankValidation.py", "ModelLodAssets.py",
+                    "RobeNativeWearers.py", "AlignRobeAnimations.py")
 PACKAGING_INPUTS = ("RobeAnimationBanks.py", "RepackRobeAnimationBanks.py")
 CATALOG_INPUTS = ("sw_2da/parts_robe.2da", "sw_2da/tintmap.2da", "hakbuilder.json")
 BODY_RESOURCE = re.compile(r"^p[fm][a-z](\d+)(?:_robe\d{3})?$", re.IGNORECASE)
@@ -61,7 +63,7 @@ def file_digest(path):
 def content_digest(path, data):
     # Git may check source and tables out with CRLF on Windows. Their hashes
     # describe content changes, while compiled resources remain byte-exact.
-    if path.suffix.lower() in {".py", ".2da", ".json"} or (path.suffix.lower() == ".mdl" and not mdl.binary(data)):
+    if path.suffix.lower() in {".py", ".2da", ".json", ".mtr"} or (path.suffix.lower() == ".mdl" and not mdl.binary(data)):
         data = data.replace(b"\r\n", b"\n")
     return hashlib.sha256(data).hexdigest()
 
@@ -290,6 +292,21 @@ def validate_model_chains(names, load):
     return longest
 
 
+def native_wearer_selection(requested, prior_manifest, update_animation):
+    """An animation update rebuilds every dependent wearer, so an omitted native wearer would
+    take the altering compile and drop out of the provenance map. Carry the recorded set
+    forward there, and reject a list that differs from it."""
+    if not update_animation:
+        return list(requested)
+    recorded = set(prior_manifest.get("native_wearer_sources", {}))
+    if not requested:
+        return sorted(recorded)
+    if set(requested) != recorded:
+        raise ValueError("--update-animation must preserve exactly the recorded native wearers; missing "
+                         f"{sorted(recorded - set(requested))}, unrecorded {sorted(set(requested) - recorded)}")
+    return list(requested)
+
+
 def audited_files(manifest):
     """Retain build provenance while recording updated Python audit tools."""
     validation_tools = manifest.get("validation_tool_files", {})
@@ -313,6 +330,20 @@ def check() -> list[str]:
         return ["Robe RGB model manifest is missing; regenerate the robe models"]
     manifest = json.loads(MANIFEST.read_text())
     errors = material_input_errors(manifest)
+    native_sources = manifest.get("native_wearer_sources", {})
+    if not isinstance(native_sources, dict):
+        errors.append("Native wearer provenance must be a mapping")
+    elif "native_wearer_sources" in manifest:
+        selection_hash = hashlib.sha256(json.dumps(sorted(native_sources)).encode()).hexdigest()
+        if manifest.get("native_wearer_selection_sha256") != selection_hash:
+            errors.append("Native wearer selection differs from its recorded fingerprint")
+        for name, record in native_sources.items():
+            if (not re.fullmatch(r"p[fm][a-z]\d+", name) or not isinstance(record, dict) or
+                    any(not re.fullmatch(r"[0-9a-f]{64}", str(record.get(field, "")))
+                        for field in ("source_sha256", "garment_sha256", "canonical_source_sha256"))):
+                errors.append(f"Invalid native wearer provenance: {name}")
+            elif f"sw_pt_root/{name}.mdl" not in manifest.get("files", {}):
+                errors.append(f"Native wearer output is not recorded: {name}")
     try:
         current_files = audited_files(manifest)
     except ValueError as error:
@@ -562,11 +593,19 @@ def main():
                         help="Revise an existing named clip in place; reject changes to the skeleton or any other clip")
     parser.add_argument("--verify-existing-motion", action="store_true",
                         help="Require every existing wearer and garment animation to retain its motion and bind")
+    parser.add_argument("--preserve-native-wearer", action="append", default=[], metavar="ROOT",
+                        help="Losslessly rebind an explicitly selected, unchanged prior native wearer; repeat per root")
     args = parser.parse_args()
     if any(not re.fullmatch(r"[a-z][a-z0-9_]{0,15}", name) for name in args.update_animation):
         parser.error("--update-animation requires an internal animation name of at most 16 characters")
     if args.update_animation and (args.check or args.model or args.verify_existing_motion):
         parser.error("--update-animation requires a complete build without --check or --verify-existing-motion")
+    # An animation update invalidates every dependent wearer, so the preserved selection
+    # must be passable there too or those wearers fall back to an altering compile.
+    if args.preserve_native_wearer and args.check:
+        parser.error("--preserve-native-wearer is only available during generation")
+    if len(set(args.preserve_native_wearer)) != len(args.preserve_native_wearer):
+        parser.error("--preserve-native-wearer cannot repeat a root")
     if args.check:
         errors = check()
         if errors:
@@ -577,7 +616,7 @@ def main():
         parser.error("--game-data is required when generating models")
     if args.model and args.apply:
         parser.error("--apply requires the complete catalog")
-    if args.apply and not args.force and not args.verify_existing_motion and not check():
+    if args.apply and not args.force and not args.verify_existing_motion and not args.preserve_native_wearer and not check():
         manifest = json.loads(MANIFEST.read_text())
         if stock_sources_current(args.game_data, manifest):
             with tempfile.TemporaryDirectory(prefix="swlor-robe-compiler-") as directory:
@@ -596,6 +635,8 @@ def main():
     native_table = PHENOTYPES.read_text().splitlines()
     id_map = allocate_phenotypes(ids, prior, native_table, active)
     prior_manifest = json.loads(MANIFEST.read_text()) if MANIFEST.is_file() else {}
+    args.preserve_native_wearer = native_wearer_selection(
+        args.preserve_native_wearer, prior_manifest, bool(args.update_animation))
     bank_errors = animation_bank_errors(prior_manifest, active)
     if bank_errors:
         raise ValueError("\n".join(bank_errors))
@@ -788,6 +829,47 @@ def main():
         complete_roots.add(generated)
         sources[generated + "_robe" + robe_id] = empty_attachment(generated + "_robe" + robe_id)
         mapping_rows.append((name, phenotype, 0))
+    native_captures, native_originals, native_parents = {}, {}, {}
+    unknown_native = set(args.preserve_native_wearer) - complete_roots
+    if unknown_native:
+        raise ValueError(f"Unknown native wearer selection: {sorted(unknown_native)}")
+    native_directory = stage / "native_wearers"
+    for name in sorted(args.preserve_native_wearer):
+        path = active.get(name)
+        if path is None:
+            raise ValueError(f"{name}: native wearer is missing")
+        before = path.read_bytes()
+        original_name = original_robes[name]
+        if original_name in active:
+            original_path = active[original_name]
+            original_hash = content_digest(original_path, dependencies[original_name])
+            expected_original = prior_manifest.get("files", {}).get(original_path.relative_to(ROOT).as_posix())
+        else:
+            original_hash = hashlib.sha256(dependencies[original_name]).hexdigest()
+            expected_original = prior_manifest.get("stock_model_sha256", {}).get(original_name)
+        record = native_wearers.capture(name, before,
+                    prior_manifest.get("files", {}).get(path.relative_to(ROOT).as_posix()),
+                    original_name, original_hash, expected_original)
+        input_digests[path] = file_digest(path)
+        native_originals[name] = before
+        old_parent = record["old_parent"]
+        native_parents[name] = owned_animation_bytes(old_parent, prior_manifest, active)
+        for part in prior_manifest.get("animation_bank_sets", {}).get(old_parent, {}).get("parts", [old_parent]):
+            input_digests[active[part]] = file_digest(active[part])
+        for directory in (native_directory / "master", native_directory / "source"):
+            directory.mkdir(parents=True, exist_ok=True)
+        original_path = native_directory / "master" / f"{name}.mdl"
+        original_path.write_bytes(before)
+        mdl.run_compiler(compiler, stage, ["-de", str(original_path), str(native_directory / "source") + "/"],
+                         "native-wearer-decompile.log")
+        parent = mdl.supermodel(sources[name])
+        canonical = native_wearers.canonical_source(
+            (native_directory / "source" / f"{name}.mdl").read_text(encoding="latin1"), before, parent)
+        native_wearers.validate_desired_source(sources[name], canonical, before, parent)
+        record.update({"new_parent": parent, "canonical_source_sha256": hashlib.sha256(canonical).hexdigest()})
+        native_captures[name] = record
+        sources[name] = canonical
+    native_selection_hash = hashlib.sha256(json.dumps(sorted(native_captures)).encode()).hexdigest()
     for name, data in sources.items():
         (stage / "source" / f"{name}.mdl").write_bytes(data)
         (stage / "input" / f"{name}.mdl").write_bytes(data)
@@ -796,12 +878,14 @@ def main():
     # A cache hit requires the exact generated source, compiler, current parent,
     # validation code, original inverse binds and owned binary to agree.
     validation_digest = hashlib.sha256(json.dumps(
-        {name: input_digests[ROOT / "tools" / name] for name in GENERATOR_INPUTS},
+        {**{name: input_digests[ROOT / "tools" / name] for name in GENERATOR_INPUTS},
+         "native_wearer_selection": native_selection_hash},
         sort_keys=True).encode()).hexdigest()
     build_keys, reused, parent_digests = {}, set(), {}
     checkpoint_path = stage / "compilations.json"
     compilation_records = json.loads(checkpoint_path.read_text()) if checkpoint_path.is_file() else {}
     resumed = set()
+    native_rebound = set()
     processors = hashlib.sha256(json.dumps({name: input_digests[ROOT / "tools" / name]
                                            for name in ("CompileModels.py", "CleanModels.py", "RobePoseAudit.py",
                                                         "RobeAnimations.py")},
@@ -816,6 +900,8 @@ def main():
                 raise ValueError(f"{name}: missing compiled parent {parent}")
             parent_digests[parent] = hashlib.sha256(parent_data).hexdigest()
         original = dependencies[original_robes[name]] if name in original_robes else b""
+        if name in native_originals:
+            original += native_originals[name]
         base = reference_bodies[name[:3] + "0"] if name in complete_roots else b""
         material_digest = mdl.compiler_material_digest(source, compiler_materials)
         validation_key = hashlib.sha256(bytes.fromhex(validation_digest) + bytes.fromhex(material_digest) +
@@ -829,7 +915,22 @@ def main():
         relative = f"{model_directory(name)}/{name}.mdl"
         path = stage / "binary" / f"{name}.mdl"
         compile_processors = hashlib.sha256(bytes.fromhex(processors) + bytes.fromhex(material_digest)).hexdigest()
+        if name in native_captures:
+            compile_processors = hashlib.sha256(bytes.fromhex(compile_processors) +
+                bytes.fromhex(native_selection_hash) +
+                bytes.fromhex(input_digests[ROOT / "tools/RobeNativeWearers.py"]) +
+                bytes.fromhex(input_digests[ROOT / "tools/AlignRobeAnimations.py"])).hexdigest()
         compile_key = checkpoint.key(source, compiler_hash, parent_digests[parent], original, base, compile_processors)
+        if name in native_captures:
+            parent_data = (stage / "binary" / f"{parent}.mdl").read_bytes()
+            compiled = native_wearers.rebind(native_originals[name], native_parents[name], parent_data, parent, base)
+            native_captures[name].update({"changed_byte_count": sum(left != right for left, right in
+                zip(native_originals[name], compiled)), "geometry_payload_bytes_preserved": True})
+            path.write_bytes(compiled)
+            compilation_records[name] = checkpoint.record(compile_key, compiled)
+            checkpoint_path.write_text(json.dumps(compilation_records, indent=2) + "\n")
+            native_rebound.add(name)
+            return
         if path.is_file() and checkpoint.matches(compilation_records.get(name), compile_key, path.read_bytes()):
             # Compilation checkpoints carry no validation proof. Keep these
             # models in `changed` so every current audit runs before publishing.
@@ -853,6 +954,8 @@ def main():
         if name in animation_cache.values():
             # Roots compiled next inherit these part IDs from this parent by name.
             compiled = animations.number_static_garment_ancestors(compiled)
+        if name in animation_cache.values() or name in complete_roots:
+            compiled = animations.preserve_static_body_parts(compiled, reference_bodies[name[:3] + "0"])
         path.write_bytes(compiled)
         compilation_records[name] = checkpoint.record(compile_key, compiled)
         checkpoint_path.write_text(json.dumps(compilation_records, indent=2) + "\n")
@@ -945,8 +1048,9 @@ def main():
         checked_garment_clips = sharing.validate_records(
             motion_records, lambda name: owned_animation_bytes(name, prior_manifest, active),
             lambda name: (stage / "binary" / f"{name}.mdl").read_bytes())
-    report = {"models": len(sources), "compiled_models": len(changed) - len(resumed), "reused_models": len(reused),
+    report = {"models": len(sources), "compiled_models": len(changed) - len(resumed) - len(native_rebound), "reused_models": len(reused),
               "resumed_compilations": len(resumed),
+              "native_rebound_models": len(native_rebound), "native_wearer_sources": native_captures,
               "robe_models": len(selected), "phenotypes": len(id_map),
               "body_pose_samples": checked_poses,
               "garment_body_motion_checks": checked_garment_body_motion,
@@ -1018,6 +1122,8 @@ def main():
                     "stock_model_sha256": stock_hashes,
                     "animation_bridges": {**prior_manifest.get("animation_bridges", {}), **animation_names},
                     "animation_bank_sets": dict(sorted(bank_sets.items())),
+                    "native_wearer_selection_sha256": native_selection_hash,
+                    "native_wearer_sources": native_captures,
                     "files": dict(sorted({**retained, **input_files, **output_files}.items()))}
         MANIFEST.write_text(json.dumps(manifest, indent=2) + "\n")
     print(json.dumps(report, indent=2), flush=True)
