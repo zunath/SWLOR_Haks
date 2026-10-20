@@ -77,6 +77,17 @@ class RobeRgbManifestTests(unittest.TestCase):
             g.version_animation_families(families, prior, lambda *_: False, verify_revision=reject)
         self.assertEqual({key + "/old": "pmh_ra001"}, prior["animation_bridges"])
 
+    def test_animation_update_preserves_exactly_the_recorded_native_wearers(self):
+        prior = {"native_wearer_sources": {"pmh200": {}, "pfa200": {}}}
+        self.assertEqual(["pfa200", "pmh200"], g.native_wearer_selection([], prior, True))
+        self.assertEqual(["pmh200", "pfa200"], g.native_wearer_selection(["pmh200", "pfa200"], prior, True))
+        with self.assertRaisesRegex(ValueError, r"missing \['pfa200'\], unrecorded \[\]"):
+            g.native_wearer_selection(["pmh200"], prior, True)
+        with self.assertRaisesRegex(ValueError, r"unrecorded \['pmh201'\]"):
+            g.native_wearer_selection(["pmh200", "pfa200", "pmh201"], prior, True)
+        self.assertEqual(["pmh200"], g.native_wearer_selection(["pmh200"], prior, False))
+        self.assertEqual([], g.native_wearer_selection([], prior, False))
+
     def test_current_apply_exits_before_creating_a_build(self):
         with patch.object(sys, "argv", ["generate", "--apply", "--game-data", "game"]), \
                 patch.object(g, "check", return_value=[]), \
