@@ -13,7 +13,6 @@ SOURCES = {
     "helm_101": ("sw_pt_helm/helm_101.dds", 4),
     "pfh0_neck012": ("sw_pt_neck/pfh0_neck012.dds", 0),
     "pmh0_neck012": ("sw_pt_neck/pmh0_neck012.dds", 0),
-    "pfh0_shinl264": ("sw_pt_lshin/pfh0_shinL264.dds", 4),
 }
 
 
@@ -50,7 +49,7 @@ def generate():
     for source_name in g.AUTHORED_DIFFUSE_SOURCES.values():
         entry = entries[source_name]
         g.update_mtr(g.mtr_path(source_name), source_name, entry["texture"], 4, 4)
-    print("Registered four authored diffuse RGB controls; original artwork is unchanged.")
+    print("Registered three authored diffuse RGB controls; original artwork is unchanged.")
 
 
 def validate(entries):
