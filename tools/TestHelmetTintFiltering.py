@@ -10,6 +10,7 @@ import ctypes as ct
 import json
 from pathlib import Path
 import re
+import sys
 import tempfile
 import unittest
 
@@ -31,6 +32,8 @@ class TintEdgeFilteringCases:
 
     @classmethod
     def setUpClass(cls):
+        if sys.platform != "win32":
+            raise unittest.SkipTest("Renders through Win32 OpenGL (WGL)")
         cls.gl = OpenGL()
         cls.addClassCleanup(cls.gl.close)
         cls.test = MaterialTest(cls.gl)
