@@ -459,8 +459,9 @@ def compiler_material_state(names, refresh=False):
     if refresh:
         material_resources.cache_clear()
     active = material_resources()
+    # MTRs are text that Git may check out with CRLF on Windows; hash their content.
     return {name: ({"path": active[name].relative_to(ROOT).as_posix(),
-                    "sha256": digest(active[name].read_bytes())} if name in active else None)
+                    "sha256": digest(active[name].read_bytes().replace(b"\r\n", b"\n"))} if name in active else None)
             for name in sorted(names)}
 
 

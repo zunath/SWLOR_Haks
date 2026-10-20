@@ -63,7 +63,7 @@ def file_digest(path):
 def content_digest(path, data):
     # Git may check source and tables out with CRLF on Windows. Their hashes
     # describe content changes, while compiled resources remain byte-exact.
-    if path.suffix.lower() in {".py", ".2da", ".json"} or (path.suffix.lower() == ".mdl" and not mdl.binary(data)):
+    if path.suffix.lower() in {".py", ".2da", ".json", ".mtr"} or (path.suffix.lower() == ".mdl" and not mdl.binary(data)):
         data = data.replace(b"\r\n", b"\n")
     return hashlib.sha256(data).hexdigest()
 
