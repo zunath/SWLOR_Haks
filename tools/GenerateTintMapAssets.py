@@ -58,7 +58,7 @@ TINT_FRAGMENT_SHADER = "fs_plt_tinter"
 TINT_MAPPED_FRAGMENT_SHADER = "fs_plt_tinter_nm"
 TINT_HAIR_MAPPED_FRAGMENT_SHADER = "fs_plt_hair_nm"
 # Restore native color filtering only for reported dye edge regressions.
-SMOOTH_TINT_MATERIALS = frozenset({"helm_053", "pfh0_neck267", "pmh0_neck267"})
+SMOOTH_TINT_MATERIALS = frozenset({"helm_053", "helm_287", "pfh0_neck267", "pmh0_neck267"})
 AUTHORED_HAIR_FRAGMENT_SHADERS = {"fslit_aniso_nm"}
 _MTR_PATHS_BY_RESREF: dict[str, Path] | None = None
 _SOURCE_MTR_PATHS_BY_RESREF: dict[str, list[Path]] | None = None
