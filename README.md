@@ -10,7 +10,7 @@ These files can be packed into hakpaks by running the "CompileSWLOR.exe" program
 
 ## Tint-map asset generator
 
-Install the generator's pinned Python dependency before running it:
+Install the generators' pinned Python dependencies before running them:
 
 ```powershell
 python -m pip install -r requirements.txt
@@ -47,7 +47,10 @@ hashes, preserves native mesh/normal/skin bytes, and rebinds only parent/header/
 IDs. Their captured native source still passes all strict geometry and motion
 audits. The manifest records the selection and source hashes. Reusing `--stage`
 resumes other compilations only when their actual compiler/input fingerprints match;
-it never substitutes for current validation.
+it never substitutes for current validation. Round-trip validation ignores only the
+faces CleanModels drops because their corners coincide after it welds identical
+vertices; such faces cover no area. A wearer whose shared family gains garment
+spacers can no longer be preserved and compiles fresh under that rule.
 
 The generator audits authored geometry, skin bindings, and compiler round trips
 before updating `sw_pt_root`, `sw_pt_robe`, `roberender.2da`, and `phenotype.2da`.
