@@ -1,17 +1,20 @@
 #!/usr/bin/env python3
-"""Retarget the rifle hold clips so every playable body supports rifles like the male human.
+"""Retarget the rifle hold clips so every playable body supports rifles under the barrel.
 
 A rifle hangs from the firing hand's weapon hook (`rhand`), so one rigid model can
 sit correctly only for the hands it was fitted to. Every body plays the same
 `xbowr` (idle), `xbowrdy` (ready) and `xbowshot` (attack) clips, and each body's own
 arm lengths and hand meshes put its support hand somewhere else on the weapon: the
 female human's lands about 4 cm low, the male half-orc's about 11 cm up the barrel.
-Rifles are fitted to the male human (`pmh0`).
+Rifles are fitted to the male human (`pmh0`). His stock clips leave the open support
+palm about 6 cm beside the barrel, touching it only with the fingertips, so the target
+is his palm moved by `SUPPORT_OFFSETS` in weapon space until it sits centred under the
+barrel. The male human gets a bank like every other body.
 
-For each other body this writes a small animation bank, spliced between the body
+For each body this writes a small animation bank, spliced between the body
 root and the supermodel it inherited from, holding only those three clips: every
 node and track of the clip the body resolved before, copied from the compiled data, with the
-support arm re-solved by two-bone IK so the support palm reaches the male human's
+support arm re-solved by two-bone IK so the support palm reaches the target
 contact on the weapon, keeping this body's own palm orientation. Bones are only
 rotated; bone lengths stay the wearer's own.
 
@@ -46,9 +49,20 @@ from RobePoseAudit import Model
 
 ROOT = Path(__file__).resolve().parents[1]
 REFERENCE = "pmh0"
+# Weapon-space move (metres) of the reference support palm from its stock place to centred
+# under the barrel axis (x = -0.5 cm), seated about 7 mm into the median fitted fore-end
+# underside so the fingers wrap it. The stock idle leaves the open palm 4.5 cm left of the
+# axis, touching only with the fingertips; idle also slides 4 cm back towards the stock so
+# every body's arm reaches. The stock ready and attack poses hold the heel of the palm
+# 8 cm right of the axis. See RifleModelImport.md.
+SUPPORT_OFFSETS = {
+    "xbowr": np.array([0.0454, -0.007, 0.04]),
+    "xbowrdy": np.array([-0.0787, -0.0136, 0.0]),
+    "xbowshot": np.array([-0.0787, -0.0136, 0.0]),
+}
 CLIPS = ("xbowr", "xbowrdy", "xbowshot")
 # Playable appearance families (racialtypes.2da PlayerRace rows), normal and large phenotype.
-BODIES = ("pfh0", "pfh2", "pfe0", "pfe2", "pfd0", "pfd2", "pfo0", "pfo2", "pfz0",
+BODIES = ("pmh0", "pfh0", "pfh2", "pfe0", "pfe2", "pfd0", "pfd2", "pfo0", "pfo2", "pfz0",
           "pme0", "pme2", "pmd0", "pmd2", "pmo0", "pmo2", "pmz0")
 BANK_PREFIX = "a_rfl_"
 BANK_DIRECTORY = "sw_cr_creature"
@@ -371,11 +385,17 @@ def placed(frame, points):
     return (frame[:3, :3] @ points.T).T + frame[:3, 3]
 
 
+def reference_rig(library: Library, clip: str) -> tuple[Rig, Model]:
+    """The male human posed by the stock clip he inherited before his own bank."""
+    _, owner = library.clip(REFERENCE, clip, library.inherited_parent(REFERENCE))
+    data = library.data(REFERENCE)
+    return Rig(skeleton_nodes(data), owner.clips[clip], animation_scale(data)), owner
+
+
 def solve(library: Library, body: str, clip: str) -> dict:
-    reference = body_rig(library, REFERENCE, clip)
+    reference, reference_owner = reference_rig(library, clip)
     owner, source = library.clip(body, clip, library.inherited_parent(body))
     rig = Rig(skeleton_nodes(library.data(body)), source.clips[clip], animation_scale(library.data(body)))
-    reference_owner = library.clip(REFERENCE, clip)[1]
     HR0, LR0 = reference.hand_frames(0.0)
     HB0, LB0 = rig.hand_frames(0.0)
     reference_fist = placed(HR0, hand_points(library, REFERENCE, "r"))
@@ -394,7 +414,7 @@ def solve(library: Library, body: str, clip: str) -> dict:
         cache = {}
         weapon = rig.world(HOOK, time, override, cache)
         want = LB.copy()
-        want[:3, 3] = LR[:3, 3] + LB0[:3, 3] + palm_shift - LR0[:3, 3]
+        want[:3, 3] = LR[:3, 3] + SUPPORT_OFFSETS[clip] + LB0[:3, 3] + palm_shift - LR0[:3, 3]
         target = weapon @ want
         W1, W2, W3 = (rig.world(name, time, override, cache) for name in ARM)
         torso = rig.world(rig.nodes[rig.nodes[rig.index[ARM[0]]][1]][0], time, override, cache)
@@ -431,13 +451,14 @@ def body_rig(library: Library, body: str, clip: str) -> Rig:
 
 
 def placement_error(library: Library, body: str, clip: str) -> tuple[np.ndarray, np.ndarray]:
-    """Remaining (firing fist, support palm) weapon-space offsets from the reference at clip start."""
-    reference = body_rig(library, REFERENCE, clip)
+    """Remaining (firing fist, support palm) weapon-space offsets from the target at clip start."""
+    reference, _ = reference_rig(library, clip)
     rig = body_rig(library, body, clip)
     HR, LR = reference.hand_frames(0.0)
     HB, LB = rig.hand_frames(0.0)
     reference_palm = placed(LR, hand_points(library, REFERENCE, "l"))
-    palm = placed(LB, hand_points(library, hand_shape(body), "l"))
+    # Compare in the reference's stock frame, as solve() does, so the top-surface grid matches.
+    palm = placed(LB, hand_points(library, hand_shape(body), "l")) - SUPPORT_OFFSETS[clip]
     palm_shift = translate_fit(palm, reference_palm)
     palm_shift[1] = top_offset(reference_palm, palm)
     fist_shift = translate_fit(placed(HB, hand_points(library, hand_shape(body), "r")),
