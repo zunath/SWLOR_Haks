@@ -1,0 +1,29 @@
+customshaderVS vslit_sm_nm
+customshaderFS hlp_e4b060fc7612
+renderhint NormalAndSpecMapped
+texture0 plt_white
+texture1 h324skinn
+texture2 h324brows
+texture3 null
+texture4 null
+texture5 null
+texture7 tm_c9bee44d557e5
+texture10 plt_palette
+parameter float tintMapWidth 992.0
+parameter float tintMapHeight 992.0
+parameter float rowSkin 0.000244
+parameter float rowHair 0.086182
+parameter float rowMetal1 0.172119
+parameter float rowMetal2 0.258057
+parameter float rowCloth1 0.343994
+parameter float rowCloth2 0.343994
+parameter float rowLeath1 0.429932
+parameter float rowLeath2 0.429932
+parameter float rowTat1 0.515869
+parameter float rowTat2 0.515869
+
+texture8 lm_f87b868b55bd5
+parameter float lipU0 0.407226562500
+parameter float lipV0 0.397460937500
+parameter float lipUSpan 0.185546875000
+parameter float lipVSpan 0.071289062500

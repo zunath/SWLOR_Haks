@@ -1,0 +1,32 @@
+customshaderVS vslit_sm_nm
+customshaderFS nt337_lip
+renderhint NormalAndSpecMapped
+texture0 cx17p01d
+texture1 cx17p01n
+texture2 cx00p00s
+texture3 null
+texture4 null
+texture5 null
+texture6 cx00p03a
+texture7 cx17p01t
+texture8 cx00p00e
+texture10 cu_pal1024
+parameter float tintMapWidth 1024.0
+parameter float tintMapHeight 1024.0
+parameter float rowSkin 0.000244
+parameter float rowHair 0.086182
+parameter float rowMetal1 0.172119
+parameter float rowMetal2 0.258057
+parameter float rowCloth1 0.343994
+parameter float rowCloth2 0.343994
+parameter float rowLeath1 0.429932
+parameter float rowLeath2 0.429932
+parameter float rowTat1 0.515869
+parameter float rowTat2 0.515869
+
+texture9 nt337lip
+parameter float lipU0 0.197265625000
+parameter float lipV0 0.205078125000
+parameter float lipUSpan 0.062500000000
+parameter float lipVSpan 0.046875000000
+parameter float useTexture9Alpha 0.0
