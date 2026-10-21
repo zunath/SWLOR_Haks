@@ -288,6 +288,14 @@ def validate_geometry(name: str, before: dict, after: dict) -> None:
         after.pop("colors", None)
     old_faces, new_faces = before.get("faces", []), after.get("faces", [])
     if len(old_faces) != len(new_faces):
+        # CleanModels v4.4.2 welds identical vertices and drops faces whose corners
+        # then coincide (a repeated index or a duplicate vertex); they cover no area.
+        # Binaries from earlier compilers keep them, so both counts are valid.
+        def collapsed(face):
+            corners = triangle_corners(before, face)
+            return any(equivalent(corners[a], corners[b]) for a, b in ((0, 1), (1, 2), (0, 2)))
+        old_faces = [face for face in old_faces if not collapsed(face)]
+    if len(old_faces) != len(new_faces):
         raise ValueError(f"{name}: face count changed")
     if not old_faces:
         for key in ARRAY_PROPERTIES:
