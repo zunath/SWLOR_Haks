@@ -1,4 +1,4 @@
-"""Every playable body grips rifles where the male human does."""
+"""Every playable body supports rifles under the barrel, where the male human's target is."""
 from pathlib import Path
 import unittest
 
@@ -9,9 +9,10 @@ import GenerateRifleHoldAnimations as rifle
 from RobePoseAudit import Model
 
 ROOT = Path(__file__).resolve().parents[1]
-# The female dwarf arm is about 17 mm short of the reference support grip at the
-# start of the ready clip; its IK stops at full reach.
-REACH_LIMITED = {("pfd0", "xbowrdy"), ("pfd2", "xbowrdy")}
+# Fitted rifles' barrel axis at the support hand (weapon-space x), and how far the
+# centre of the open palm may sit from it. The stock poses left it 4.5 cm (idle) to 8 cm (ready) off it.
+BARREL_AXIS_X = -0.005
+PALM_CENTRE_TOLERANCE = 0.01
 
 
 class RifleHoldAnimationTests(unittest.TestCase):
@@ -28,9 +29,15 @@ class RifleHoldAnimationTests(unittest.TestCase):
                 self.assertEqual(set(rifle.CLIPS), set(bank.clips))
                 self.assertNotIn(bank.parent, ("", rifle.bank_name(body)))
 
-    def test_the_reference_body_keeps_its_inherited_hold(self):
-        root = (ROOT / rifle.ROOT_DIRECTORY / f"{rifle.REFERENCE}.mdl").read_bytes()
-        self.assertFalse(mdl.supermodel(root).startswith(rifle.BANK_PREFIX))
+    def test_the_reference_support_palm_sits_under_the_barrel(self):
+        palm_points = rifle.hand_points(self.library, rifle.REFERENCE, "l")
+        for clip in ("xbowr", "xbowrdy"):
+            with self.subTest(clip=clip):
+                _, palm_frame = rifle.body_rig(self.library, rifle.REFERENCE, clip).hand_frames(0.0)
+                palm = rifle.placed(palm_frame, palm_points)
+                # The lower half is the palm itself; the upper half is the raised thumb side.
+                body = palm[palm[:, 1] < np.median(palm[:, 1])]
+                self.assertLess(abs(body[:, 0].mean() - BARREL_AXIS_X), PALM_CENTRE_TOLERANCE)
 
     def test_banks_only_rotate_bones(self):
         for body in rifle.BODIES:
@@ -65,8 +72,7 @@ class RifleHoldAnimationTests(unittest.TestCase):
             for clip in ("xbowr", "xbowrdy"):
                 with self.subTest(body=body, clip=clip):
                     _, palm = rifle.placement_error(self.library, body, clip)
-                    limit = 0.02 if (body, clip) in REACH_LIMITED else 0.003
-                    self.assertLess(np.linalg.norm(palm), limit)
+                    self.assertLess(np.linalg.norm(palm), 0.003)
 
 
 if __name__ == "__main__":
