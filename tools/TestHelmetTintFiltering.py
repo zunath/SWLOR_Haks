@@ -1,6 +1,6 @@
 """Compare dye edges with bilinear filtering of resolved PLT colors.
 
-Covers helm 53 on fs_plt_tinter and neck 267 on fs_plt_tinter_nm.
+Covers helms 53 and 287 on fs_plt_tinter and neck 267 on fs_plt_tinter_nm.
 
 Run with --game-data pointing to the installed NWN data directory. Uses the
 shipped BC5 mask and palette on a hidden OpenGL framebuffer. No game is started.
@@ -25,6 +25,7 @@ ROWS = ("rowSkin", "rowHair", "rowMetal1", "rowMetal2", "rowCloth1", "rowCloth2"
         "rowLeath1", "rowLeath2", "rowTat1", "rowTat2")
 BASES = (0, 176, 352, 528, 704, 704, 880, 880, 1056, 1056)
 GAME_DATA = None
+SMOOTH_HELMETS = ("helm_053", "helm_287")
 
 
 class TintEdgeFilteringCases:
@@ -167,9 +168,9 @@ class HelmetTintFilteringTests(TintEdgeFilteringCases, unittest.TestCase):
         enabled = [path.stem for path in (ROOT / "sw_tint_mtr").glob("*.mtr")
                    if re.search(r"parameter\s+float\s+smoothTintEdges\s+1", path.read_text())]
         # Neck 267 scoped aliases render the same mask on other racial body models.
-        self.assertEqual(sorted(enabled), ["helm_053", "pfh0_n_ne_7905de", "pfh0_neck267",
-                                           "pmh0_n_ne_0b3c67", "pmh0_neck267"])
-        for material in ("helm_053", "helm_054"):
+        self.assertEqual(sorted(enabled), ["helm_053", "helm_287", "pfh0_n_ne_7905de",
+                                           "pfh0_neck267", "pmh0_n_ne_0b3c67", "pmh0_neck267"])
+        for material in ("helm_053", "helm_054", "helm_287"):
             with tempfile.TemporaryDirectory() as scratch:
                 path = Path(scratch) / f"{material}.mtr"
                 path.write_text((ROOT / f"sw_tint_mtr/{material}.mtr").read_text())
@@ -177,7 +178,7 @@ class HelmetTintFilteringTests(TintEdgeFilteringCases, unittest.TestCase):
                     text = g.tint_material_text(path, material, self.entry["texture"], 512, 512,
                                                native_palette=True)
                     self.assertEqual(text.count("parameter float smoothTintEdges 1.0"),
-                                     int(material == "helm_053"))
+                                     int(material in SMOOTH_HELMETS))
                     self.assertIn("parameter float useNativePalette 1.0", text)
                     path.write_text(text)
                 # Authored profiles may carry a different legacy bitmap name.
@@ -185,7 +186,7 @@ class HelmetTintFilteringTests(TintEdgeFilteringCases, unittest.TestCase):
                 text = g.tint_material_text(path, material, self.entry["texture"], 512, 512,
                     profile=("legacy_mask", path.read_text().splitlines()), native_palette=True)
                 self.assertEqual(text.count("parameter float smoothTintEdges 1.0"),
-                                 int(material == "helm_053"))
+                                 int(material in SMOOTH_HELMETS))
         for source in ("pfh0_neck267", "pmh0_neck267"):
             with tempfile.TemporaryDirectory() as scratch:
                 path = Path(scratch) / f"{source}.mtr"
@@ -198,6 +199,10 @@ class HelmetTintFilteringTests(TintEdgeFilteringCases, unittest.TestCase):
             # Scoped alias resrefs hash this signature; the opt-in must not rename them.
             self.assertNotIn(("parameter", "float", "smoothtintedges"),
                              [directive for directive, _ in g.material_profile_signature(source)])
+
+
+class Helmet287TintFilteringTests(TintEdgeFilteringCases, unittest.TestCase):
+    SHADER, MODEL = "fs_plt_tinter", "helm_287"
 
 
 class NeckTintFilteringTests(TintEdgeFilteringCases, unittest.TestCase):
