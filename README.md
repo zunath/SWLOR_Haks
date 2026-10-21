@@ -10,7 +10,7 @@ These files can be packed into hakpaks by running the "CompileSWLOR.exe" program
 
 ## Tint-map asset generator
 
-Install the generator's pinned Python dependency before running it:
+Install the generators' pinned Python dependencies before running them:
 
 ```powershell
 python -m pip install -r requirements.txt
