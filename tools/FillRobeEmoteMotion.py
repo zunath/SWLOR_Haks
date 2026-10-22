@@ -411,6 +411,10 @@ def main():
                 outputs[path] = (path.read_bytes(), part)
         records[head] = {**record, "source_sha256": hashlib.sha256(patched).hexdigest()}
         print(f"{head}: cloth helper tracks for {len(changed)} emote clips", flush=True)
+    stale = [head for head, record in manifest["animation_bank_sets"].items() if PLAYABLE.fullmatch(head) and
+             manifest.get("model_builds", {}).get(head, {}).get("binarySha256") not in (None, record["source_sha256"])]
+    if args.check and stale:
+        raise ValueError(f"Build-cache records do not match the installed bridges: {', '.join(sorted(stale))}")
     if args.check and pending:
         raise ValueError(f"{pending} robe emote clips leave cloth helpers latched; run FillRobeEmoteMotion.py --apply")
     if args.apply:
@@ -421,6 +425,12 @@ def main():
             path.write_bytes(after)
             manifest["files"][path.relative_to(root).as_posix()] = hashlib.sha256(after).hexdigest()
         manifest["animation_bank_sets"].update(records)
+        for head in stale:
+            records.setdefault(head, manifest["animation_bank_sets"][head])
+        for head, record in records.items():
+            # Keep the generator's build cache valid for the filled bridge.
+            if head in manifest.get("model_builds", {}):
+                manifest["model_builds"][head]["binarySha256"] = record["source_sha256"]
         for name in ("FillRobeEmoteMotion.py", "GenerateRobeRgbModels.py"):
             relative = f"tools/{name}"
             manifest["files"][relative] = generator.file_digest(root / relative)

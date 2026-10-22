@@ -15,6 +15,7 @@ class FillRobeEmoteMotionTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         manifest = json.loads((generator.ROOT / "tools" / "RobeRgbModels.json").read_text())
+        cls.manifest = manifest
         active = generator.fresh_active_models()
         cls.bridges = {head: generator.owned_animation_bytes(head, manifest, active)
                        for head in sorted(manifest["animation_bank_sets"]) if emote.PLAYABLE.fullmatch(head)}
@@ -22,6 +23,13 @@ class FillRobeEmoteMotionTests(unittest.TestCase):
     def test_every_playable_body_family_has_a_bridge(self):
         self.assertEqual({head[:3] for head in self.bridges},
                          {f"p{gender}{family}" for gender in "fm" for family in "heod"})
+
+    def test_build_cache_records_describe_the_filled_bridges(self):
+        """A regeneration must still reuse the installed bridges instead of recompiling them."""
+        for head in self.bridges:
+            with self.subTest(bridge=head):
+                self.assertEqual(self.manifest["model_builds"][head]["binarySha256"],
+                                 self.manifest["animation_bank_sets"][head]["source_sha256"])
 
     def test_every_emote_clip_animates_every_cloth_helper(self):
         for head, data in self.bridges.items():

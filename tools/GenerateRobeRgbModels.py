@@ -1069,12 +1069,13 @@ def main():
     (stage / "report.json").write_text(json.dumps(report, indent=2) + "\n")
     if failures:
         raise ValueError(f"{len(failures)} round-trip failures: {failures[:10]}")
-    # Cache provenance describes the original validated compiler output. Packaging
-    # changes its file layout only; joining verified banks recovers these exact bytes.
-    model_builds = {name: build_cache.make_record(build_keys[name],
-                    (stage / "binary" / f"{name}.mdl").read_bytes()) for name in sorted(sources)}
     packaged_names, bank_sets = package_animation_models(
         stage, animation_cache.values(), sources, prior_manifest, active)
+    # Cache provenance describes the validated output as installed: compiler bytes,
+    # plus emote drape tracks on bridges. Packaging changes only the file layout;
+    # joining verified banks recovers these exact bytes.
+    model_builds = {name: build_cache.make_record(build_keys[name],
+                    (stage / "binary" / f"{name}.mdl").read_bytes()) for name in sorted(sources)}
     report["longest_model_chain"] = validate_model_chains(
         complete_roots, lambda name: (stage / "binary" / f"{name}.mdl").read_bytes()
         if name in packaged_names else load_reference(name))
