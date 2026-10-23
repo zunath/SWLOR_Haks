@@ -1,0 +1,22 @@
+customshaderVS vslit_sm_nm
+customshaderFS cx_tint
+renderhint NormalAndSpecMapped
+texture0 ol_asara_hd
+texture1 ol_asara_hn
+texture2 ol_asara_es
+texture6 ol_asara_ha
+texture7 ol_asara_ht
+texture8 ol_asara_he
+texture10 cu_pal1024
+parameter float tintMapWidth 992.0
+parameter float tintMapHeight 992.0
+parameter float rowSkin 0.000244
+parameter float rowHair 0.086182
+parameter float rowMetal1 0.172119
+parameter float rowMetal2 0.258057
+parameter float rowCloth1 0.343994
+parameter float rowCloth2 0.343994
+parameter float rowLeath1 0.429932
+parameter float rowLeath2 0.429932
+parameter float rowTat1 0.515869
+parameter float rowTat2 0.515869

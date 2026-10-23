@@ -1,0 +1,25 @@
+customshaderVS vslit_sm_nm
+customshaderFS cx_tint
+renderhint NormalAndSpecMapped
+texture0 cx07p03d
+texture1 cuh_flat_n
+texture2 cx00p00s
+texture3 null
+texture4 null
+texture5 null
+texture6 cx00p04a
+texture7 cx07p03t
+texture8 cx00p04e
+texture10 cu_pal1024
+parameter float tintMapWidth 512.0
+parameter float tintMapHeight 512.0
+parameter float rowSkin 0.000244
+parameter float rowHair 0.086182
+parameter float rowMetal1 0.172119
+parameter float rowMetal2 0.258057
+parameter float rowCloth1 0.343994
+parameter float rowCloth2 0.343994
+parameter float rowLeath1 0.429932
+parameter float rowLeath2 0.429932
+parameter float rowTat1 0.515869
+parameter float rowTat2 0.515869

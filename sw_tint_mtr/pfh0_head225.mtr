@@ -1,15 +1,15 @@
 renderhint NormalAndSpecMapped
 
 // Textures
-texture1 pfh0_head225_N
-texture2 pfh0_head225_S
+texture1 pfh0_head224_n
+texture2 pfh0_head224_s
 texture3 null
 texture4 null
 texture5 null
 customshaderVS vslit_sm_nm
-customshaderFS fs_plt_tinter_nm
+customshaderFS fs_cuh_t1glowm
 texture0 plt_white
-texture7 tm_a4aaa4e41da0a
+texture7 tm_5941aa7c5c8af
 texture10 plt_palette
 parameter float tintMapWidth 1024.0
 parameter float tintMapHeight 512.0

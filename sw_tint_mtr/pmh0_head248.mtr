@@ -1,15 +1,18 @@
 // Shaders
 customshaderVS vslit_sm_nm
+ // Shaders
 renderhint NormalTangents
 
 // Textures
 texture1 pmh0_head248_n
 texture2 pmh0_head248_s
+
 transparency 1
 twosided 1
-customshaderFS fs_plt_tinter_nm
+
+customshaderFS fs_h248_hair
 texture0 plt_white
-texture7 tm_5f069b0f16b26
+texture7 tm_1c7d0c8d978f0
 texture10 plt_palette
 parameter float tintMapWidth 1024.0
 parameter float tintMapHeight 512.0
@@ -23,4 +26,7 @@ parameter float rowLeath1 0.429932
 parameter float rowLeath2 0.429932
 parameter float rowTat1 0.515869
 parameter float rowTat2 0.515869
-parameter float useTexture1Alpha 1.0
+parameter float useTexture1Alpha 0.0
+
+texture9 pmh0_h248_a
+parameter float useTexture9Alpha 1.0

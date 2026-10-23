@@ -1,0 +1,24 @@
+customshaderVS vslit_sm
+renderhint NormalTangents
+customshaderFS hlp_6f9f3500874b
+texture0 plt_white
+texture7 tm_9d81aa6e1db1a
+texture10 plt_palette
+parameter float tintMapWidth 992.0
+parameter float tintMapHeight 992.0
+parameter float rowSkin 0.000244
+parameter float rowHair 0.086182
+parameter float rowMetal1 0.172119
+parameter float rowMetal2 0.258057
+parameter float rowCloth1 0.343994
+parameter float rowCloth2 0.343994
+parameter float rowLeath1 0.429932
+parameter float rowLeath2 0.429932
+parameter float rowTat1 0.515869
+parameter float rowTat2 0.515869
+
+texture8 lm_bdd15d609936a
+parameter float lipU0 0.524414062500
+parameter float lipV0 0.700195312500
+parameter float lipUSpan 0.091796875000
+parameter float lipVSpan 0.033203125000
