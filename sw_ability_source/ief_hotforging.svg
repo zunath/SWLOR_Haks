@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="56%" r="55%">
+      <stop offset="0%" stop-color="#ffb347" stop-opacity="0.85"/>
+      <stop offset="55%" stop-color="#ff6a1e" stop-opacity="0.32"/>
+      <stop offset="100%" stop-color="#ff3b1e" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="steel" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#eef2fa"/>
+      <stop offset="30%" stop-color="#a3adc2"/>
+      <stop offset="100%" stop-color="#363d4e"/>
+    </linearGradient>
+    <linearGradient id="steelSide" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#7d889f"/>
+      <stop offset="100%" stop-color="#2a303f"/>
+    </linearGradient>
+    <linearGradient id="hot" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#fffbe6"/>
+      <stop offset="35%" stop-color="#ffd25a"/>
+      <stop offset="75%" stop-color="#ff7a1c"/>
+      <stop offset="100%" stop-color="#d63a0a"/>
+    </linearGradient>
+    <linearGradient id="handle" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#c58a54"/>
+      <stop offset="100%" stop-color="#5b3820"/>
+    </linearGradient>
+    <filter id="soft" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="7"/>
+    </filter>
+    <filter id="spark" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="2"/>
+    </filter>
+  </defs>
+  <circle cx="128" cy="140" r="122" fill="url(#glow)"/>
+  <!-- the glowing bar on the anvil, with its bloom -->
+  <rect x="62" y="104" width="132" height="36" rx="10" fill="#ff7a1c" opacity="0.8" filter="url(#soft)"/>
+  <rect x="64" y="108" width="128" height="32" rx="9" fill="url(#hot)" stroke="#7a2a05" stroke-width="3"/>
+  <path d="M74 116 H180" stroke="#ffffff" stroke-opacity="0.75" stroke-width="4" stroke-linecap="round"/>
+  <!-- anvil -->
+  <path d="M40 138 H214 L226 152 C214 154 204 160 198 170 H176 L186 196 H196 V214 H60 V196 H70 L80 170 H66 C56 168 46 160 40 138 Z" fill="url(#steel)" stroke="#1a1f2b" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M40 138 H214" stroke="#ffffff" stroke-opacity="0.65" stroke-width="4" stroke-linecap="round"/>
+  <path d="M82 172 L72 196 H86 L94 172 Z M168 172 L178 196 H190 L182 172 Z" fill="url(#steelSide)" opacity="0.55"/>
+  <rect x="60" y="196" width="136" height="18" rx="3" fill="url(#steelSide)" stroke="#1a1f2b" stroke-width="4"/>
+  <!-- the hammer coming down -->
+  <g transform="rotate(-32 168 70)">
+    <rect x="160" y="40" width="14" height="92" rx="5" fill="url(#handle)" stroke="#2b1708" stroke-width="3"/>
+    <path d="M122 22 H212 V56 H122 Z" fill="url(#steel)" stroke="#1a1f2b" stroke-width="5" stroke-linejoin="round"/>
+    <path d="M128 28 H206" stroke="#ffffff" stroke-opacity="0.7" stroke-width="4" stroke-linecap="round"/>
+    <path d="M122 22 H138 V56 H122 Z" fill="#ffffff" opacity="0.18"/>
+  </g>
+  <!-- sparks -->
+  <g fill="#fff1a8" filter="url(#spark)" opacity="0.9">
+    <circle cx="46" cy="98" r="7"/>
+    <circle cx="214" cy="104" r="6"/>
+    <circle cx="232" cy="126" r="5"/>
+    <circle cx="30" cy="124" r="5"/>
+  </g>
+  <g fill="#ffe27a" stroke="#d65a0a" stroke-width="2">
+    <path d="M52 78 l7 12 -7 12 -7 -12 Z"/>
+    <path d="M210 72 l6 10 -6 10 -6 -10 Z"/>
+    <path d="M222 100 l5 8 -5 8 -5 -8 Z"/>
+    <path d="M32 106 l5 8 -5 8 -5 -8 Z"/>
+  </g>
+</svg>
