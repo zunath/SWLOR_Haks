@@ -18,6 +18,7 @@ import tempfile
 import time
 
 import CompileModels as mdl
+import FillRobeEmoteMotion as emote_motion
 import GenerateTintMapAssets as tint
 import ImportStockRobeTints as stock_robes
 import RobeAnimations as animations
@@ -43,7 +44,7 @@ GENERATOR_INPUTS = ("GenerateRobeRgbModels.py", "RobeSkeleton.py", "RobePoseAudi
                     "TintMapStockRobes.json", "GenerateTintMapAssets.py", "RobeBuildCache.py",
                     "SharedRobeFamilies.py", "RobeSharingAudit.py",
                     "RobeCompilationCheckpoint.py", "RobeBankValidation.py", "ModelLodAssets.py",
-                    "RobeNativeWearers.py", "AlignRobeAnimations.py")
+                    "RobeNativeWearers.py", "AlignRobeAnimations.py", "FillRobeEmoteMotion.py")
 PACKAGING_INPUTS = ("RobeAnimationBanks.py", "RepackRobeAnimationBanks.py")
 CATALOG_INPUTS = ("sw_2da/parts_robe.2da", "sw_2da/tintmap.2da", "hakbuilder.json")
 BODY_RESOURCE = re.compile(r"^p[fm][a-z](\d+)(?:_robe\d{3})?$", re.IGNORECASE)
@@ -249,7 +250,9 @@ def package_animation_models(stage, heads, generated_names, manifest, active):
     records = dict(manifest.get("animation_bank_sets", {}))
     for head in sorted(heads):
         path = stage / "binary" / f"{head}.mdl"
-        original = path.read_bytes()
+        # Emote clips without cloth tracks get the derived drape after every audit.
+        original, _ = emote_motion.fill(path.read_bytes())
+        path.write_bytes(original)
         parts = banks.split(original)
         names = list(parts)
         if not names or names[0] != head or any(name in result for name in names[1:]):
@@ -772,7 +775,8 @@ def main():
         source_path.write_bytes(name_bridge(source, name))
         path = revision_directory / "binary" / source_path.name
         mdl.run_compiler(compiler, stage, ["-cne", str(source_path), str(path.parent) + "/"], "motion_revision.log")
-        path.write_bytes(banks.revise_motion(old, path.read_bytes(), args.update_animation))
+        candidate, _ = emote_motion.fill(path.read_bytes())
+        path.write_bytes(banks.revise_motion(old, candidate, args.update_animation))
         revised_binaries[name] = path
         print(f"Verified in-place motion revision for {name}.", flush=True)
     def save_bridge_source(key, source):
@@ -1065,12 +1069,13 @@ def main():
     (stage / "report.json").write_text(json.dumps(report, indent=2) + "\n")
     if failures:
         raise ValueError(f"{len(failures)} round-trip failures: {failures[:10]}")
-    # Cache provenance describes the original validated compiler output. Packaging
-    # changes its file layout only; joining verified banks recovers these exact bytes.
-    model_builds = {name: build_cache.make_record(build_keys[name],
-                    (stage / "binary" / f"{name}.mdl").read_bytes()) for name in sorted(sources)}
     packaged_names, bank_sets = package_animation_models(
         stage, animation_cache.values(), sources, prior_manifest, active)
+    # Cache provenance describes the validated output as installed: compiler bytes,
+    # plus emote drape tracks on bridges. Packaging changes only the file layout;
+    # joining verified banks recovers these exact bytes.
+    model_builds = {name: build_cache.make_record(build_keys[name],
+                    (stage / "binary" / f"{name}.mdl").read_bytes()) for name in sorted(sources)}
     report["longest_model_chain"] = validate_model_chains(
         complete_roots, lambda name: (stage / "binary" / f"{name}.mdl").read_bytes()
         if name in packaged_names else load_reference(name))

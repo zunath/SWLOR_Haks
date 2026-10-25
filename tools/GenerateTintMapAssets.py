@@ -58,7 +58,7 @@ TINT_FRAGMENT_SHADER = "fs_plt_tinter"
 TINT_MAPPED_FRAGMENT_SHADER = "fs_plt_tinter_nm"
 TINT_HAIR_MAPPED_FRAGMENT_SHADER = "fs_plt_hair_nm"
 # Restore native color filtering only for reported dye edge regressions.
-SMOOTH_TINT_MATERIALS = frozenset({"helm_053", "pfh0_neck267", "pmh0_neck267"})
+SMOOTH_TINT_MATERIALS = frozenset({"helm_053", "helm_287", "pfh0_neck267", "pmh0_neck267"})
 AUTHORED_HAIR_FRAGMENT_SHADERS = {"fslit_aniso_nm"}
 _MTR_PATHS_BY_RESREF: dict[str, Path] | None = None
 _SOURCE_MTR_PATHS_BY_RESREF: dict[str, list[Path]] | None = None
@@ -1631,6 +1631,7 @@ def native_modular_material_choices(
     choices = {}
     for selector, _, _ in surfaces:
         bitmap = _MATERIAL_BITMAP_ALIASES.get(bitmaps[selector], bitmaps[selector])
+        bitmap = MIRRORED_MATERIAL_PROFILES.get(bitmap, bitmap)
         profile = original_materials.get(bitmap, {})
         lines = list(profile.get("lines", []))
         texture0 = next((line.split()[1].lower() for line in lines if re.match(r"^\s*texture0\s+\S+", line, re.IGNORECASE)), "")
@@ -2270,11 +2271,18 @@ def update_mtr(
     path.write_text(text, encoding="utf-8", newline="\n")
 
 
+# A mirrored part whose one side carries a leftover same-name raster takes its twin's
+# profile. Female left shin 264's DDS repeats the art of the shared shin 264 palette
+# (identical UVs), but natively it overrode the palette, so the left shin ignored dyes
+# while the right one took them. Both sides now render the same dyeable palette.
+MIRRORED_MATERIAL_PROFILES = {
+    "pfh0_shinl264": "pfh0_shinr264",
+}
+
 AUTHORED_DIFFUSE_SOURCES = {
     "helm_101": "ad_helm101",
     "pfh0_neck012": "ad_fh_neck012",
     "pmh0_neck012": "ad_mh_neck012",
-    "pfh0_shinl264": "ad_fh_shin264",
 }
 _AUTHORED_DIFFUSE_TEXTURES = None
 

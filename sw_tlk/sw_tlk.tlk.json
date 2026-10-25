@@ -15563,7 +15563,7 @@
     },
     {
       "id": 3890,
-      "text": "After you spend HP on a Heavy Vibroblade Offense ability, restore 15% of maximum STM, increased by 1 percentage point per MGT to a maximum of 35%, reduced in proportion when less than the full HP cost could be paid. This can trigger once every 30 seconds."
+      "text": "After you spend HP on a Heavy Vibroblade Offense ability, restore 15% of maximum STM, increased by 1 percentage point per MGT to a maximum of 35%, reduced in proportion when less than the full HP cost could be paid. HP absorbed by temporary HP does not count as paid. This can trigger once every 30 seconds."
     },
     {
       "id": 3891,
@@ -25219,7 +25219,7 @@
     },
     {
       "id": 6304,
-      "text": "Retreat 4m directly away from the selected enemy, then attack with each equipped attack weapon for weapon DMG + 4 per impact. Works with any weapon."
+      "text": "Retreat up to 4m away from the selected enemy, turning aside when the way straight back is blocked, then attack with each equipped attack weapon for weapon DMG + 4 per impact. Works with any weapon."
     },
     {
       "id": 6305,
@@ -25307,15 +25307,15 @@
     },
     {
       "id": 6326,
-      "text": "Retreat 4m directly away from the selected enemy, then attack with each equipped attack weapon for weapon DMG + 8 per impact. Works with any weapon."
+      "text": "Retreat up to 4m away from the selected enemy, turning aside when the way straight back is blocked, then attack with each equipped attack weapon for weapon DMG + 8 per impact. Works with any weapon."
     },
     {
       "id": 6327,
-      "text": "Retreat 4m directly away from the selected enemy, then attack with each equipped attack weapon for weapon DMG + 12 per impact. Works with any weapon."
+      "text": "Retreat up to 4m away from the selected enemy, turning aside when the way straight back is blocked, then attack with each equipped attack weapon for weapon DMG + 12 per impact. Works with any weapon."
     },
     {
       "id": 6328,
-      "text": "Retreat 4m directly away from the selected enemy, then attack with each equipped attack weapon for weapon DMG + 16 per impact. Works with any weapon."
+      "text": "Retreat up to 4m away from the selected enemy, turning aside when the way straight back is blocked, then attack with each equipped attack weapon for weapon DMG + 16 per impact. Works with any weapon."
     },
     {
       "id": 6329,
@@ -26035,7 +26035,7 @@
     },
     {
       "id": 6508,
-      "text": "After moving at least 2m, landing a hostile weapon attack grants 1 Flow, max 3. Lasts 12 seconds. Each charge gives +2 Accuracy to weapon auto-attacks. Your next hostile weapon ability that costs STM spends all Flow for +2 DMG per charge, applied once per weapon across the whole ability."
+      "text": "After moving at least 2m, landing a hostile weapon attack grants 1 Flow, max 3. Lasts 12 seconds. Each charge gives +2 Accuracy to weapon auto-attacks. Your next Grapple Shot, Final Salvo, or other skill's hostile weapon ability that costs STM spends all Flow for +2 DMG per charge, applied once per weapon across the whole ability. Other Twin Pistol abilities keep Flow."
     },
     {
       "id": 6509,
@@ -26183,7 +26183,7 @@
     },
     {
       "id": 6561,
-      "text": "Deals weapon DMG + 30 to one enemy. Spending Finish adds +15 DMG. Practiced Form applies only with Finish."
+      "text": "Spends your Finish against one enemy to deal weapon DMG + 75. Cannot be used without Finish, and Finish cannot expire during the cast. Practiced Form applies."
     },
     {
       "id": 6562,
