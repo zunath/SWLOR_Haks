@@ -13,12 +13,15 @@ Every leg-weighted vertex first moves its leg weight onto the pelvis. Then a sha
 the whole vertex moves onto the flap chain, picked by the flap joints' bind heights.
 The share depends only on the vertex's bind position, so neighbouring vertices move
 together and the coat cannot tear: it is zero above the top flap joint, full from the
-middle joint down, and largest at the back, easing toward the front (FALLOFF). The
+middle joint down, and largest at the back, easing toward the front (FALLOFF), then
+scaled per style (FLAP_STRENGTH). The
 other bones, the geometry, the inverse binds and the bone tables stay unchanged, so the
 bind shape is identical. Over the walk and run clips the coat now covers the legs from
 behind, stretches far less than the original leg weights and drapes over seats.
 Clips that carry no flap tracks (a few stock emotes and turns) hold the flap's
-previous pose, as stock tabards do.
+previous pose, as stock tabards do. The dwarf and half-orc roots number their flap
+joints apart from a_ba, so the engine never swings their flap; those bodies keep the
+pelvis-only binding (flaps_animated).
 
 The originals come from the Git blobs recorded in ChestSkirtBindings.json, so --apply
 is repeatable. Replacing one of these models means recording its new source blob.
@@ -30,6 +33,7 @@ import argparse
 import hashlib
 import json
 import math
+import re
 from pathlib import Path
 import struct
 import subprocess
@@ -43,9 +47,14 @@ MANIFEST = ROOT / 'tools' / 'ChestSkirtBindings.json'
 LEG_BONES = frozenset({'lthigh_g', 'rthigh_g', 'lshin_g', 'rshin_g', 'lfoot_g', 'rfoot_g'})
 # The body's back belt flap, top to bottom.
 FLAP_CHAIN = ('fb1_g01', 'fb2_g01', 'fb4_g01')
+# The clips that swing the flap. The engine pairs their tracks with the wearer's joints by part ID.
+FLAP_ANIMATIONS = ROOT / 'sw_cr_creature' / 'a_ba.mdl'
 # Degrees from the back at which the flap share would reach zero. The share eases
 # from full at the back to about two thirds at the sides and a sixth at the front.
 FALLOFF = 240.
+# How strongly each style follows the flap. Chest 269's tail is one flat panel; at full
+# strength it trailed almost level behind runners, so it takes 60% (client-reviewed).
+FLAP_STRENGTH = {'154': 1., '269': .6}
 
 
 def skeleton(data: bytes) -> tuple[list[str], object]:
@@ -107,6 +116,10 @@ def smoothstep(value: float) -> float:
     return value * value * (3 - 2 * value)
 
 
+def flap_strength(path: str) -> float:
+    return FLAP_STRENGTH[re.search(r'_chest(\d{3})\.mdl$', path)[1]]
+
+
 def flap_share(position: tuple[float, float, float], pose: dict) -> float:
     """The share of a skirt vertex carried by the flap chain, from its bind position."""
     pelvis = pose['pelvis_g'][0]
@@ -127,11 +140,25 @@ def flap_bones(height: float, pose: dict) -> dict[str, float]:
     return {FLAP_CHAIN[-1]: 1.}
 
 
-def flap_weights(current: dict[str, float], position: tuple[float, float, float], pose: dict) -> dict[str, float]:
-    """Hang a leg-weighted vertex from the pelvis and the back belt flap."""
+def flaps_animated(body) -> bool:
+    """Whether the walk and run clips reach the wearer's flap joints.
+
+    The dwarf and half-orc roots number their flap joints apart from a_ba, so the
+    engine never moves their flaps; a coat hung from them would stay rigid anyway.
+    """
+    parts = lambda model: {node[0]: node[2] for node in model.nodes if node[0] in FLAP_CHAIN}
+    expected = parts(body_model(FLAP_ANIMATIONS.read_bytes()))
+    return len(expected) == len(FLAP_CHAIN) and parts(body) == expected and -1 not in expected.values()
+
+
+def flap_weights(current: dict[str, float], position: tuple[float, float, float], pose: dict,
+                 animated: bool = True, strength: float = 1.) -> dict[str, float]:
+    """Hang a leg-weighted vertex from the pelvis and, where the flap moves, the back belt flap."""
     if not LEG_BONES & set(current):
         return current
-    share = flap_share(position, pose)
+    if not animated:
+        return hip_weights(current)
+    share = flap_share(position, pose) * strength
     result = {bone: weight * (1 - share) for bone, weight in hip_weights(current).items()}
     for bone, weight in flap_bones(position[2], pose).items():
         result[bone] = result.get(bone, 0.) + share * weight
@@ -141,9 +168,10 @@ def flap_weights(current: dict[str, float], position: tuple[float, float, float]
     return {bone: weight * scale for bone, weight in kept}
 
 
-def rebind(data: bytes) -> tuple[bytes, int]:
+def rebind(data: bytes, strength: float = 1.) -> tuple[bytes, int]:
     bones, body = skeleton(data)
     pose = body.pose()
+    animated = flaps_animated(body)
     rest = iter(rest_positions(data))
     result = bytearray(data)
     changed = 0
@@ -153,7 +181,7 @@ def rebind(data: bytes) -> tuple[bytes, int]:
         free = [slot for slot in range(17) if slot not in bone_map]
         for vertex in range(skin['count']):
             current = influences(data, skin, vertex)
-            target = flap_weights(current, next(rest), pose)
+            target = flap_weights(current, next(rest), pose, animated, strength)
             if target is current:
                 continue
             for bone in target:
@@ -205,7 +233,7 @@ def source(blob: str) -> bytes:
 
 def build(entry: dict) -> bytes:
     original = source(entry['sourceBlob'])
-    rebound, changed = rebind(original)
+    rebound, changed = rebind(original, flap_strength(entry['path']))
     if not changed:
         raise ValueError(f"{entry['path']}: the source has no leg-weighted skirt")
     error = max(math.dist(a, b) for a, b in zip(rest_positions(original), rest_positions(rebound), strict=True))

@@ -38,7 +38,8 @@ class ChestSkirtBindingTests(unittest.TestCase):
         for name in self.models:
             with self.subTest(model=name):
                 rest = skirts.rest_positions(self.sources[name])
-                pose = skirts.skeleton(self.sources[name])[1].pose()
+                body = skirts.skeleton(self.sources[name])[1]
+                pose, animated = body.pose(), skirts.flaps_animated(body)
                 rebound = flapped = 0
                 for before, after, position in zip(self.weights(self.sources[name]), self.weights(self.current[name]), rest, strict=True):
                     self.assertFalse(skirts.LEG_BONES & set(after))
@@ -49,13 +50,21 @@ class ChestSkirtBindingTests(unittest.TestCase):
                     rebound += 1
                     flapped += bool(set(skirts.FLAP_CHAIN) & set(after))
                     self.assertLessEqual(set(after), set(before) | {'pelvis_g', *skirts.FLAP_CHAIN})
-                    expected = skirts.flap_weights(before, position, pose)
+                    expected = skirts.flap_weights(before, position, pose, animated, skirts.flap_strength(self.models[name]['path']))
                     self.assertEqual(set(expected), set(after))
                     for bone, weight in expected.items():
                         self.assertAlmostEqual(weight, after[bone], delta=2e-6)
                 self.assertGreater(rebound, 500)
-                # Waist-high vertices above the top flap joint stay on the pelvis.
-                self.assertGreater(flapped, rebound * .45)
+                if animated:
+                    # Waist-high vertices above the top flap joint stay on the pelvis.
+                    self.assertGreater(flapped, rebound * .45)
+                else:
+                    self.assertEqual(0, flapped)
+
+    def test_flaps_count_as_animated_only_where_the_clips_reach_them(self):
+        animated = {name for name in self.models if skirts.flaps_animated(skirts.skeleton(self.sources[name])[1])}
+        # Dwarf and half-orc roots number their flap joints apart from a_ba (client-verified: their flaps stay still).
+        self.assertEqual({name for name in self.models if name[2] in 'he'}, animated)
 
     def test_bind_shape_and_every_other_byte_are_unchanged(self):
         for name in self.models:
@@ -106,11 +115,14 @@ class ChestSkirtBindingTests(unittest.TestCase):
 
     def test_skirts_swing_over_the_legs_in_walk_and_run(self):
         """The coat must follow the stride (not freeze), keep the legs covered from behind and not tear."""
-        for name in self.models:
+        animated = [name for name in self.models if skirts.flaps_animated(skirts.skeleton(self.sources[name])[1])]
+        self.assertEqual(6, len(animated))
+        for name in animated:
             for clip in ('walk', 'run'):
                 with self.subTest(model=name, clip=clip):
                     swing, exposed, stretch = stride_metrics(self.sources[name], self.current[name], clip)
-                    self.assertGreater(swing, .05)
+                    # Hip-bound, the hem moves at most 2.5 cm against the pelvis.
+                    self.assertGreater(swing, .04)
                     self.assertLess(exposed, .05)
                     self.assertLess(stretch, 2.)
 
@@ -120,28 +132,11 @@ def animation_clip(root: str, clip: str):
     models = tint.find_active_models()
     name = mdl.supermodel(models[root].read_bytes())
     while name:
-        if name not in models:
-            # Stock-only bridges (a_dfa for female dwarves) inherit walk and run from a_ba.
-            name = 'a_ba'
         model = Model(models[name].read_bytes())
         if clip in model.clips:
             return model.clips[clip]
         name = model.parent
     raise ValueError(f'{root} has no {clip} clip')
-
-
-def named_pose(body: Model, clip, time: float) -> dict:
-    """Pose the wearer with the clip's tracks matched by node name.
-
-    The dwarf and half-orc roots number their belt flap joints apart from a_ba, yet the
-    client swings those flaps in a_ba's walk and run, so part IDs cannot pair the tracks.
-    """
-    index = {node[0]: position for position, node in enumerate(body.nodes)}
-    renumbered = Model.__new__(Model)
-    renumbered.nodes = [(name, parent, position, controllers, offset)
-                        for position, (name, parent, _, controllers, offset) in enumerate(body.nodes)]
-    tracks = [(name, parent, index[name], controllers, offset) for name, parent, _, controllers, offset in clip[1] if name in index]
-    return renumbered.pose((clip[0], tracks), time)
 
 
 def stride_metrics(source: bytes, current: bytes, clip_name: str, phases: int = 8):
@@ -166,7 +161,7 @@ def stride_metrics(source: bytes, current: bytes, clip_name: str, phases: int = 
     hem = lowest[:max(1, len(lowest) // 10)]
     stretches, samples, hidden, hem_back = [], 0, 0, []
     for phase in range(phases):
-        pose = named_pose(body, clip, clip[0] * phase / phases)
+        pose = body.pose(clip, clip[0] * phase / phases)
         posed = skirts.rest_positions(current, pose)
         stretches += [math.dist(posed[a], posed[b]) / length for a, b in edges if (length := math.dist(rest[a], rest[b])) > 1e-4]
         origin, turn, _ = pose['pelvis_g']
