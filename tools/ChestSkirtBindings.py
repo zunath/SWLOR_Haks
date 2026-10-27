@@ -1,37 +1,38 @@
-"""Hang the coat skirts of chest parts 154 and 269 from the thighs and the back belt flap.
+"""Hang long skirts of chest, belt and pelvis parts (STYLES) from the legs and the belt flaps.
 
-Both chest parts carry an ankle-length coat skirt. Each half of the skirt was weighted
-to its own thigh and shin (chest 269: a third torso, two thirds legs), so walking and
-running pulled the halves apart: the back of the coat tore open and the legs showed
-through it. Moving those weights onto the pelvis (October 2026) stopped the tearing
-but left the coat frozen while the legs strode through it. Hanging most of the coat
-from the body's stock back belt flap (fb1_g01, fb2_g01, fb4_g01), which the walk, run,
-sit, kneel, knockdown and ability clips swing like coat tails, made it swing again. But
-the standing idles sway the hips to one side and lean the flap back, so the coat hung
-off-centre, tucked behind one leg and angled back instead of falling beside the legs.
-A chest part only reaches the normal body's bones, so robe 236's coat helpers are out
-of reach.
+These parts carry coat skirts, skirt belts, tabards or skirts in the part mesh. Each half
+of a skirt was weighted to its own thigh and shin, so walking and running pulled the
+halves apart: the back tore open and the legs showed through it. Moving those weights
+onto the pelvis (October 2026, chest 154 and 269) stopped the tearing but left the coat
+frozen while the legs strode through it. Hanging most of it from the body's stock back
+belt flap (fb1_g01, fb2_g01, fb4_g01), which the walk, run, sit, kneel, knockdown and
+ability clips swing like coat tails, made it swing again. But the standing idles sway the
+hips to one side and lean the flap back, so the coat hung off-centre, tucked behind one
+leg and angled back instead of falling beside the legs. A body part only reaches the
+normal body's bones, so robe 236's coat helpers are out of reach.
 
 Each leg-weighted vertex is now weighted by its bind height:
 - Above the hip joints it keeps the pelvis binding (leg weight moved onto the pelvis),
   so the waist cannot tear.
-- From the hip joints down to the middle flap joint it eases onto the leg on its own
-  side of the body: the thigh, and below the knee the shin (KNEE_BAND), so a side panel
-  lies along the lower leg when the knee bends. Near the back seam both thighs share a
-  vertex (SEAM), so the halves move together where they meet. The legs stay under the
-  body in every idle, so the coat falls beside them as the original did.
-- Below the middle flap joint the back of the coat also hangs from the two lower flap
-  joints: fully at the back, easing to nothing at the front (FALLOFF), scaled per style
-  (FLAP_STRENGTH). That share swings the coat out behind striding legs; the front panels
-  stay on the legs, so they drape over the knees instead of stretching back to the flap
-  when the wearer sits.
+- From the hip joints down to the middle back flap joint it eases onto the leg on its
+  own side of the body: the thigh, and below the knee the shin (KNEE_BAND), so a side
+  panel lies along the lower leg when the knee bends. Near a seam both thighs share a
+  vertex (SEAM), so the halves move together where they meet: at the back, and for
+  skirts closed in front ("closed") at the front too. The legs stay under the body in
+  every idle, so the skirt falls beside them as the original did.
+- Lower down, the back also hangs from the two lower back flap joints, fully at the back
+  and easing to nothing at the sides (FALLOFF), and a closed front from the two lower
+  front tabard flap joints (FRONT_CHAIN, FRONT_FALLOFF), each scaled per style. The
+  flaps swing the skirt out of the way of striding legs; the side and front panels of an
+  open coat stay on the legs, so they drape over the knees when the wearer sits.
 Below the hips the weights depend only on the bind position, so neighbouring vertices
-move together even where the source weights were uneven. Every vertex keeps at most four bones and its source weight sum; the geometry, inverse
-binds and bone tables stay unchanged, so the bind shape is identical. Clips that carry
-no flap tracks (a few stock emotes and turns) hold the flap's previous pose, as stock
-tabards do. The dwarf and half-orc roots number their flap joints apart from a_ba, so
-the engine never swings their flap; on those bodies the coat below the hips hangs two
-thirds from the thighs and a third from the pelvis (flaps_animated, STILL_THIGHS).
+move together even where the source weights were uneven. Every vertex keeps at most four
+bones and its source weight sum; the geometry, inverse binds and bone tables stay
+unchanged, so the bind shape is identical. Clips that carry no flap tracks (a few stock
+emotes and turns) hold the flaps' previous pose, as stock tabards do. The dwarf and
+half-orc roots number their flap joints apart from a_ba, so the engine never swings
+their flaps; on those bodies the legs carry the share the source gave them on average
+below the hips and the pelvis the rest (flaps_animated, still_share).
 
 The originals come from the Git blobs recorded in ChestSkirtBindings.json, so --apply
 is repeatable. Replacing one of these models means recording its new source blob.
@@ -55,25 +56,55 @@ from RobePoseAudit import rotate
 ROOT = Path(__file__).resolve().parents[1]
 MANIFEST = ROOT / 'tools' / 'ChestSkirtBindings.json'
 LEG_BONES = frozenset({'lthigh_g', 'rthigh_g', 'lshin_g', 'rshin_g', 'lfoot_g', 'rfoot_g'})
-# The body's back belt flap, top to bottom. The coat hangs from the lower two joints.
+# The body's back belt flap, top to bottom. A coat hangs from the lower two joints.
 FLAP_CHAIN = ('fb1_g01', 'fb2_g01', 'fb4_g01')
-# The clips that swing the flap. The engine pairs their tracks with the wearer's joints by part ID.
+# The body's front tabard flap, top to bottom. A closed skirt's front hangs from the lower two.
+FRONT_CHAIN = ('tf1_g', 'tf2_g', 'tf3_g01')
+# The clips that swing the flaps. The engine pairs their tracks with the wearer's joints by part ID.
 FLAP_ANIMATIONS = ROOT / 'sw_cr_creature' / 'a_ba.mdl'
-# Degrees from the back at which the flap share reaches zero. Wider, the front panels
+# Degrees from the back at which the back flap share reaches zero. Wider, the front panels
 # took a little flap and stretched back to it in seated poses (client-reviewed).
 FALLOFF = 120.
-# How strongly each style follows the flap. Chest 269's tail is one flat panel; at full
-# strength it trailed almost level behind runners, so it takes 60% (client-reviewed).
-FLAP_STRENGTH = {'154': 1., '269': .6}
-# Degrees either side of the back seam over which a vertex passes from one leg to the
-# other: wide enough that the halves move together where they meet. The coat is open
-# at the front below the hips, so the front needs no seam.
+# Degrees from the front at which the front flap share reaches zero; with FALLOFF it keeps
+# the two flaps apart, so no vertex needs both.
+FRONT_FALLOFF = 60.
+# Each style's share of the back flap ("back") and the front flap ("front") at full, and
+# whether the skirt meets in front ("closed"), which gives the front a seam too. Narrow
+# panels on the midline take a wider seam ("seam", and "still_seam" where the flaps never
+# move, degrees) so the two legs share them evenly, and a wider front fade
+# ("front_falloff", degrees) so they hang from the front flap as one piece;
+# "narrow" marks strips that leave the legs bare by design (tests skip their coverage).
+# Chest 269's tail is one flat panel; at full strength it trailed almost level behind
+# runners, so it takes 60% (client-reviewed).
+STYLES = {
+    'chest154': {'back': 1.},
+    'chest269': {'back': .6},
+    'chest028': {'back': 1.},
+    'chest059': {'back': 1.},
+    'chest310': {'back': 1.},
+    'belt019': {'back': 1.},
+    'belt110': {'back': 1.},
+    # Long, wide skirts that flew out almost level behind runners at full strength (client-reviewed).
+    'belt112': {'back': .6},
+    'belt114': {'back': .6},
+    # A front panel only, like a stock tabard.
+    'belt226': {'back': 0., 'front': 1., 'closed': True, 'seam': 90., 'front_falloff': 120.},
+    # A skirt closed all round; without flaps its front seam needs more width than an open coat's.
+    'pelvis035': {'back': 1., 'front': 1., 'closed': True, 'still_seam': 35.},
+    # Narrow front and back strips (long on the male bodies).
+    'pelvis198': {'back': 1., 'front': 1., 'closed': True, 'seam': 90., 'still_seam': 90., 'narrow': True},
+}
+# Degrees either side of a seam over which a vertex passes from one leg to the other:
+# wide enough that the halves move together where they meet. Open coats have only the
+# back seam. Where the flaps never move, nothing swings the back out of the way, so the
+# seam is narrower and each half follows its own leg sooner (STILL_SEAM).
 SEAM = 45.
+STILL_SEAM = 25.
 # Metres below the knee joint over which a side panel passes from the thigh to the shin.
 KNEE_BAND = .15
-# Below the hips, the share of a vertex the thighs carry on bodies whose flap never moves;
-# the pelvis carries the rest. Where the flap swings, the thighs and the flap carry it all.
-STILL_THIGHS = .67
+# Where the flaps never move, the legs carry below the hips the share the source gave
+# them on average there (still_share) and the pelvis the rest; where the flaps swing,
+# the legs and the flaps carry it all.
 
 
 def skeleton(data: bytes) -> tuple[list[str], object]:
@@ -135,13 +166,21 @@ def smoothstep(value: float) -> float:
     return value * value * (3 - 2 * value)
 
 
-def flap_strength(path: str) -> float:
-    return FLAP_STRENGTH[re.search(r'_chest(\d{3})\.mdl$', path)[1]]
+def style_key(path: str) -> str:
+    match = re.search(r'_(chest|belt|pelvis)(\d{3})\.mdl$', path)
+    if not match:
+        raise ValueError(f'{path}: not a chest, belt or pelvis part')
+    return match[1] + match[2]
 
 
-def heights(pose: dict) -> tuple[float, float, float]:
-    """The hip joints, where the coat starts to follow the thighs, and the two lower flap joints."""
-    hip, top, bottom = pose['lthigh_g'][0][2], pose[FLAP_CHAIN[1]][0][2], pose[FLAP_CHAIN[2]][0][2]
+def style(path: str) -> dict:
+    """The flap shares and front shape of a part, from its file name."""
+    return {'back': 1., 'front': 0., 'closed': False, **STYLES[style_key(path)]}
+
+
+def heights(pose: dict, chain: tuple[str, str, str] = FLAP_CHAIN) -> tuple[float, float, float]:
+    """The hip joints, where the coat starts to follow the thighs, and a flap's two lower joints."""
+    hip, top, bottom = pose['lthigh_g'][0][2], pose[chain[1]][0][2], pose[chain[2]][0][2]
     if not hip > top > bottom:
         raise ValueError('Expected the hip joints above the lower flap joints')
     return hip, top, bottom
@@ -153,47 +192,60 @@ def bearing(position: tuple[float, float, float], pose: dict) -> float:
     return math.degrees(math.atan2(position[0] - pelvis[0], pelvis[1] - position[1]))
 
 
-def left_share(position: tuple[float, float, float], pose: dict) -> float:
-    """How much of a vertex follows the left leg: all on the left, none on the right, half on the back seam."""
-    return 1 - smoothstep((bearing(position, pose) + SEAM) / (2 * SEAM))
+def left_share(position: tuple[float, float, float], pose: dict, closed: bool = False, seam: float = SEAM) -> float:
+    """How much of a vertex follows the left leg: all on the left, none on the right, half on a seam."""
+    angle = bearing(position, pose)
+    if closed and abs(angle) > 90:
+        angle = math.copysign(180 - abs(angle), angle)
+    return 1 - smoothstep((angle + seam) / (2 * seam))
 
 
-def shin_share(position: tuple[float, float, float], pose: dict) -> float:
-    """How much of a side panel's leg share follows the shin: none above the knee or near the back seam."""
-    away = smoothstep((abs(bearing(position, pose)) - SEAM) / SEAM)
-    return away * smoothstep((pose['lshin_g'][0][2] - position[2]) / KNEE_BAND)
+def shin_share(position: tuple[float, float, float], pose: dict, closed: bool = False, seam: float = SEAM) -> float:
+    """How much of a side panel's leg share follows the shin: none above the knee or near a seam."""
+    angle = abs(bearing(position, pose))
+    away = min(angle, 180 - angle) if closed else angle
+    return smoothstep((away - seam) / seam) * smoothstep((pose['lshin_g'][0][2] - position[2]) / KNEE_BAND)
 
 
 def flap_share(position: tuple[float, float, float], pose: dict) -> float:
-    """The share of a skirt vertex carried by the flap, from its bind position."""
+    """The share of a skirt vertex carried by the back flap, from its bind position."""
     _, top, bottom = heights(pose)
     behind = abs(bearing(position, pose))
     return (1 - smoothstep(behind / FALLOFF)) * smoothstep((top - position[2]) / (top - bottom))
 
 
-def flap_bones(height: float, pose: dict) -> dict[str, float]:
-    """Split a flap share between the two lower flap joints by the vertex height."""
-    _, top, bottom = heights(pose)
+def front_share(position: tuple[float, float, float], pose: dict, falloff: float = FRONT_FALLOFF) -> float:
+    """The share of a skirt vertex carried by the front flap, from its bind position."""
+    _, top, bottom = heights(pose, FRONT_CHAIN)
+    ahead = 180 - abs(bearing(position, pose))
+    return (1 - smoothstep(ahead / falloff)) * smoothstep((top - position[2]) / (top - bottom))
+
+
+def flap_bones(height: float, pose: dict, chain: tuple[str, str, str] = FLAP_CHAIN) -> dict[str, float]:
+    """Split a flap share between a flap's two lower joints by the vertex height."""
+    _, top, bottom = heights(pose, chain)
     lower = min(1., max(0., (top - height) / (top - bottom)))
-    return {bone: weight for bone, weight in ((FLAP_CHAIN[1], 1 - lower), (FLAP_CHAIN[2], lower)) if weight}
+    return {bone: weight for bone, weight in ((chain[1], 1 - lower), (chain[2], lower)) if weight}
 
 
 def flaps_animated(body) -> bool:
-    """Whether the walk and run clips reach the wearer's flap joints.
+    """Whether the walk and run clips reach the wearer's back and front flap joints.
 
     The dwarf and half-orc roots number their flap joints apart from a_ba, so the
     engine never moves their flaps; a coat hung from them would stay rigid anyway.
     """
-    parts = lambda model: {node[0]: node[2] for node in model.nodes if node[0] in FLAP_CHAIN}
+    chains = {*FLAP_CHAIN, *FRONT_CHAIN}
+    parts = lambda model: {node[0]: node[2] for node in model.nodes if node[0] in chains}
     expected = parts(body_model(FLAP_ANIMATIONS.read_bytes()))
-    return len(expected) == len(FLAP_CHAIN) and parts(body) == expected and -1 not in expected.values()
+    return len(expected) == len(chains) and parts(body) == expected and -1 not in expected.values()
 
 
 def skirt_weights(current: dict[str, float], position: tuple[float, float, float], pose: dict,
-                  animated: bool = True, strength: float = 1.) -> dict[str, float]:
-    """Hang a leg-weighted vertex from the pelvis at the waist, its own thigh below the hips and, at the back, the flap."""
+                  animated: bool = True, shape: dict | None = None) -> dict[str, float]:
+    """Hang a leg-weighted vertex from the pelvis at the waist, its own leg below the hips and the flaps."""
     if not LEG_BONES & set(current):
         return current
+    shape = {'back': 1., 'front': 0., 'closed': False, 'still': 1., **(shape or {})}
     # Keep the source's weight sum: some exports are a little off one, and the bind shape scales with it.
     total = sum(current.values())
     hip, top, _ = heights(pose)
@@ -203,28 +255,35 @@ def skirt_weights(current: dict[str, float], position: tuple[float, float, float
         # The root and the pelvis share a pivot; folding one into the other keeps the hip band within four bones.
         upper = {bone: weight for bone, weight in upper.items() if bone != 'rootdummy'}
         upper['pelvis_g'] = upper.get('pelvis_g', 0.) + current['rootdummy']
-    left = left_share(position, pose)
+    seam = shape.get('seam', SEAM) if animated else shape.get('still_seam', STILL_SEAM)
+    left = left_share(position, pose, shape['closed'], seam)
     # Below the hips the source weights give way to a blend that depends only on the bind position.
-    moved = thighs * total * (1. if animated else STILL_THIGHS)
+    moved = thighs * total * (1. if animated else shape['still'])
     result = {bone: weight * (1 - thighs) for bone, weight in upper.items()}
     if not animated:
-        result['pelvis_g'] = result.get('pelvis_g', 0.) + thighs * total * (1 - STILL_THIGHS)
+        result['pelvis_g'] = result.get('pelvis_g', 0.) + thighs * total * (1 - shape['still'])
     # Below the knee the side panels follow the shin, so they lie along the lower leg when it bends.
-    shin = shin_share(position, pose)
+    shin = shin_share(position, pose, shape['closed'], seam)
     for side, share in (('l', left), ('r', 1 - left)):
         for bone, weight in ((f'{side}thigh_g', 1 - shin), (f'{side}shin_g', shin)):
             result[bone] = result.get(bone, 0.) + moved * share * weight
-    share = flap_share(position, pose) * strength if animated else 0.
-    result = {bone: weight * (1 - share) for bone, weight in result.items()}
-    for bone, weight in flap_bones(position[2], pose).items():
-        result[bone] = result.get(bone, 0.) + share * total * weight
+    flaps = []
+    if animated:
+        flaps = [(flap_share(position, pose) * shape['back'], FLAP_CHAIN),
+                 (front_share(position, pose, shape.get('front_falloff', FRONT_FALLOFF)) * shape['front'], FRONT_CHAIN)]
+    for share, chain in flaps:
+        if not share:
+            continue
+        result = {bone: weight * (1 - share) for bone, weight in result.items()}
+        for bone, weight in flap_bones(position[2], pose, chain).items():
+            result[bone] = result.get(bone, 0.) + share * total * weight
     result = {bone: weight for bone, weight in result.items() if weight > 1e-7}
     if len(result) > 4:
         raise ValueError(f'Skirt vertex at {position} needs {len(result)} bones: {sorted(result)}')
     return dict(sorted(result.items(), key=lambda item: (-item[1], item[0])))
 
 
-def rebind(data: bytes, strength: float = 1.) -> tuple[bytes, int]:
+def rebind(data: bytes, shape: dict | None = None) -> tuple[bytes, int]:
     bones, body = skeleton(data)
     pose = body.pose()
     animated = flaps_animated(body)
@@ -237,7 +296,7 @@ def rebind(data: bytes, strength: float = 1.) -> tuple[bytes, int]:
         free = [slot for slot in range(17) if slot not in bone_map]
         for vertex in range(skin['count']):
             current = influences(data, skin, vertex)
-            target = skirt_weights(current, next(rest), pose, animated, strength)
+            target = skirt_weights(current, next(rest), pose, animated, shape)
             if target is current:
                 continue
             for bone in target:
@@ -287,9 +346,26 @@ def source(blob: str) -> bytes:
     return subprocess.run(['git', '-C', str(ROOT), 'cat-file', 'blob', blob], check=True, capture_output=True).stdout
 
 
+def still_share(data: bytes) -> float:
+    """The average share of the source's skirt weight on the legs below the middle back flap joint, to two places."""
+    bones, body = skeleton(data)
+    top = heights(body.pose())[1]
+    shares = []
+    weights = [influences(data, skin, vertex) for skin in skins(data, bones) for vertex in range(skin['count'])]
+    for current, position in zip(weights, rest_positions(data), strict=True):
+        if LEG_BONES & set(current) and position[2] < top:
+            shares.append(sum(weight for bone, weight in current.items() if bone in LEG_BONES) / sum(current.values()))
+    return round(sum(shares) / len(shares), 2) if shares else 1.
+
+
+def shape(path: str, data: bytes) -> dict:
+    """A part's style plus the leg share its source gave the skirt, for bodies whose flaps never move."""
+    return {**style(path), 'still': still_share(data)}
+
+
 def build(entry: dict) -> bytes:
     original = source(entry['sourceBlob'])
-    rebound, changed = rebind(original, flap_strength(entry['path']))
+    rebound, changed = rebind(original, shape(entry['path'], original))
     if not changed:
         raise ValueError(f"{entry['path']}: the source has no leg-weighted skirt")
     error = max(math.dist(a, b) for a, b in zip(rest_positions(original), rest_positions(rebound), strict=True))
@@ -316,10 +392,10 @@ def main() -> None:
                 path.write_bytes(data)
                 entry['sha256'] = digest
     if args.check and stale:
-        raise ValueError(f'Chest skirt bindings are stale: {stale}; run ChestSkirtBindings.py --apply')
+        raise ValueError(f'Skirt bindings are stale: {stale}; run ChestSkirtBindings.py --apply')
     if args.apply and stale:
         MANIFEST.write_text(json.dumps(manifest, indent=2) + '\n')
-    print(f"{'Rebound' if args.apply else 'Validated'} {len(manifest['models'])} chest skirt models"
+    print(f"{'Rebound' if args.apply else 'Validated'} {len(manifest['models'])} skirt models"
           f"{f' ({len(stale)} updated)' if args.apply else ''}.")
 
 
