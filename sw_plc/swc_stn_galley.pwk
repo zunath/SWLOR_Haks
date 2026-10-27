@@ -18,3 +18,9 @@ node trimesh PWK
   tverts 1
     0.0 0.0 0
 endnode
+node dummy stn_pwk_use01
+  parent swc_stn_galley_pwk
+  position 0.000000 -0.750000 0.0
+  orientation 1.0 0.0 0.0 0.0
+  wirecolor 0.345098 0.694118 0.101961
+endnode
