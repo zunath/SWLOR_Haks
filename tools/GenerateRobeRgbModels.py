@@ -21,6 +21,7 @@ import CompileModels as mdl
 import FillRobeEmoteMotion as emote_motion
 import GenerateTintMapAssets as tint
 import ImportStockRobeTints as stock_robes
+import RestoreRobeBodyTracks as body_tracks
 import RobeAnimations as animations
 import RobePoseAudit as poses
 import RobeBuildCache as build_cache
@@ -44,7 +45,8 @@ GENERATOR_INPUTS = ("GenerateRobeRgbModels.py", "RobeSkeleton.py", "RobePoseAudi
                     "TintMapStockRobes.json", "GenerateTintMapAssets.py", "RobeBuildCache.py",
                     "SharedRobeFamilies.py", "RobeSharingAudit.py",
                     "RobeCompilationCheckpoint.py", "RobeBankValidation.py", "ModelLodAssets.py",
-                    "RobeNativeWearers.py", "AlignRobeAnimations.py", "FillRobeEmoteMotion.py")
+                    "RobeNativeWearers.py", "AlignRobeAnimations.py", "FillRobeEmoteMotion.py",
+                    "RestoreRobeBodyTracks.py")
 PACKAGING_INPUTS = ("RobeAnimationBanks.py", "RepackRobeAnimationBanks.py")
 CATALOG_INPUTS = ("sw_2da/parts_robe.2da", "sw_2da/tintmap.2da", "hakbuilder.json")
 BODY_RESOURCE = re.compile(r"^p[fm][a-z](\d+)(?:_robe\d{3})?$", re.IGNORECASE)
@@ -244,14 +246,21 @@ def validate_animation_bank_ownership(names, manifest, active):
                 raise ValueError(f"Occupied animation bank is not a verified prior output: {path}")
 
 
-def package_animation_models(stage, heads, generated_names, manifest, active):
-    """Package validated compiler output losslessly after all pose and skin audits."""
+def package_animation_models(stage, heads, generated_names, manifest, active, body_library=None):
+    """Package validated compiler output losslessly after all pose and skin audits.
+
+    `body_library` resolves each bridge's body chain for the restored attachment tracks.
+    """
+    if heads and body_library is None:
+        raise ValueError("Packaging animation bridges requires their body animation library")
     result = set(generated_names)
     records = dict(manifest.get("animation_bank_sets", {}))
     for head in sorted(heads):
         path = stage / "binary" / f"{head}.mdl"
         # Emote clips without cloth tracks get the derived drape after every audit.
         original, _ = emote_motion.fill(path.read_bytes())
+        # So do the body attachment tracks that part-ID mapping drops (belt sway).
+        original, _ = body_tracks.restore(original, body_library)
         path.write_bytes(original)
         parts = banks.split(original)
         names = list(parts)
@@ -776,6 +785,7 @@ def main():
         path = revision_directory / "binary" / source_path.name
         mdl.run_compiler(compiler, stage, ["-cne", str(source_path), str(path.parent) + "/"], "motion_revision.log")
         candidate, _ = emote_motion.fill(path.read_bytes())
+        candidate, _ = body_tracks.restore(candidate, original_library)
         path.write_bytes(banks.revise_motion(old, candidate, args.update_animation))
         revised_binaries[name] = path
         print(f"Verified in-place motion revision for {name}.", flush=True)
@@ -1070,9 +1080,9 @@ def main():
     if failures:
         raise ValueError(f"{len(failures)} round-trip failures: {failures[:10]}")
     packaged_names, bank_sets = package_animation_models(
-        stage, animation_cache.values(), sources, prior_manifest, active)
+        stage, animation_cache.values(), sources, prior_manifest, active, original_library)
     # Cache provenance describes the validated output as installed: compiler bytes,
-    # plus emote drape tracks on bridges. Packaging changes only the file layout;
+    # plus emote drape tracks and restored body attachment tracks on bridges. Packaging changes only the file layout;
     # joining verified banks recovers these exact bytes.
     model_builds = {name: build_cache.make_record(build_keys[name],
                     (stage / "binary" / f"{name}.mdl").read_bytes()) for name in sorted(sources)}
