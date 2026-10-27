@@ -4201,6 +4201,17 @@
       "prompt": "Original SWLOR science-fiction inventory icon artwork, polished detailed painted 3D game asset, sharp sculpted silhouette readable at 32px and 64px. One isolated object centered in a square, three-quarter view, filling 80 percent of the canvas, dark nearly black plain background, strong rim lighting, muted metal with restrained colored functional accents. No border, no text, no letters, no numbers, no badge, no logo, no existing game artwork, no EVE Online imagery. This is physical item artwork, not a UI symbol or flat vector. Ship gas harvesting module: a wide white ceramic intake funnel drawing a glowing pale-gold gas spiral into a finned compressor block flanked by two tanks with gold sight windows.",
       "source": "gas_harvester.png",
       "generator": "Claude illustrated SVG (source .svg beside the .png), rasterized with ImageMagick"
+    },
+    {
+      "name": "Smuggling Compartment",
+      "items": [],
+      "key": "smuggling_compartment",
+      "icon": "iit_smsmuggle",
+      "category": "Utility",
+      "subject": "Ship smuggling compartment module: a hinged section of grey tread-plate deck lifted open on a gas strut, revealing a hidden floor cache lined with glowing cyan scanner-dampening hex mesh (the hatch underside is lined with it too) and a strapped amber cargo crate stashed inside.",
+      "prompt": "Original SWLOR science-fiction inventory icon artwork, polished detailed painted 3D game asset, sharp sculpted silhouette readable at 32px and 64px. One isolated object centered in a square, three-quarter view, filling 80 percent of the canvas, dark nearly black plain background, strong rim lighting, muted metal with restrained colored functional accents. No border, no text, no letters, no numbers, no badge, no logo, no existing game artwork, no EVE Online imagery. This is physical item artwork, not a UI symbol or flat vector. Ship smuggling compartment module: a hinged section of grey tread-plate deck lifted open on a gas strut, revealing a hidden floor cache lined with glowing cyan scanner-dampening hex mesh (the hatch underside is lined with it too) and a strapped amber cargo crate stashed inside.",
+      "source": "smuggling_compartment.png",
+      "generator": "Claude illustrated SVG (source .svg beside the .png), rasterized with ImageMagick"
     }
   ],
   "postprocess": "ImageMagick resizes selected source PNGs to 256x256; ImportItemIconArtwork.ps1 creates opaque bottom-left 32px and 64px TGAs and invokes the shared semantic border stamper."
