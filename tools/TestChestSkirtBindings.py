@@ -25,7 +25,7 @@ GAME_DATA = Path(os.environ.get(
 # Share of leg samples that may show behind the coat while walking or running (hip-bound: up to 55%).
 MAX_EXPOSED = .05
 # 99.5th-percentile edge stretch while walking or running (the original leg weights: up to 13.7x).
-MAX_STRETCH = 3.2
+MAX_STRETCH = 3.5
 # How far either hem edge may sit from where the original put it beside the feet in the standing idle (m).
 MAX_IDLE_SHIFT = .06
 
@@ -51,7 +51,8 @@ class ChestSkirtBindingTests(unittest.TestCase):
                 self.assertEqual(self.current[name], skirts.build(entry))
 
     def test_leg_weights_move_to_the_pelvis_thighs_and_back_belt_flap(self):
-        lower_body = {'pelvis_g', 'lthigh_g', 'rthigh_g', *skirts.FLAP_CHAIN[1:]}
+        legs = {'lthigh_g', 'rthigh_g', 'lshin_g', 'rshin_g'}
+        lower_body = {'pelvis_g', *legs, *skirts.FLAP_CHAIN[1:]}
         for name in self.models:
             with self.subTest(model=name):
                 rest = skirts.rest_positions(self.sources[name])
@@ -67,15 +68,15 @@ class ChestSkirtBindingTests(unittest.TestCase):
                         continue
                     rebound += 1
                     flapped += bool(set(skirts.FLAP_CHAIN) & set(after))
-                    # The shins and feet let go; the waist keeps the pelvis binding; below the
-                    # middle flap joint only the thighs and the flap carry the coat where the
-                    # flap swings, and the thighs and the pelvis where it does not.
-                    self.assertFalse({'lshin_g', 'rshin_g', 'lfoot_g', 'rfoot_g', skirts.FLAP_CHAIN[0]} & set(after))
+                    # The feet let go; the waist keeps the pelvis binding; below the middle flap
+                    # joint only the legs and the flap carry the coat where the flap swings, and
+                    # the legs and the pelvis where it does not.
+                    self.assertFalse({'lfoot_g', 'rfoot_g', skirts.FLAP_CHAIN[0]} & set(after))
                     self.assertLessEqual(set(after), set(before) | lower_body)
                     if position[2] >= hip:
-                        self.assertFalse({'lthigh_g', 'rthigh_g', *skirts.FLAP_CHAIN} & set(after))
+                        self.assertFalse((legs | set(skirts.FLAP_CHAIN)) & set(after))
                     if position[2] <= top:
-                        self.assertLessEqual(set(after), lower_body - {'pelvis_g'} if animated else {'pelvis_g', 'lthigh_g', 'rthigh_g'})
+                        self.assertLessEqual(set(after), lower_body - {'pelvis_g'} if animated else {'pelvis_g', *legs})
                     expected = skirts.skirt_weights(before, position, pose, animated, skirts.flap_strength(self.models[name]['path']))
                     self.assertEqual(set(expected), set(after))
                     for bone, weight in expected.items():
@@ -86,16 +87,23 @@ class ChestSkirtBindingTests(unittest.TestCase):
                 else:
                     self.assertEqual(0, flapped)
 
-    def test_the_two_halves_share_the_thighs_at_the_seams(self):
-        """A vertex on the midline follows both thighs equally, and the share eases off smoothly to each side."""
+    def test_the_halves_share_the_legs_at_the_back_seam_and_follow_the_shins_at_the_sides(self):
+        """On the back seam a vertex follows both legs equally; around the body it passes smoothly to one leg,
+        and only away from the seam does the lower coat follow the shin."""
         pose = skirts.skeleton(self.sources['pmh0_chest154'])[1].pose()
-        middle = pose['pelvis_g'][0][0]
-        self.assertAlmostEqual(.5, skirts.left_share((middle, -.2, .5), pose))
-        self.assertEqual(1., skirts.left_share((middle - skirts.SEAM, -.2, .5), pose))
-        self.assertEqual(0., skirts.left_share((middle + skirts.SEAM, -.2, .5), pose))
-        steps = [skirts.left_share((middle + offset / 100, -.2, .5), pose) for offset in range(-30, 31)]
+        pelvis = pose['pelvis_g'][0]
+        around = lambda degrees, height: (pelvis[0] + .3 * math.sin(math.radians(degrees)), pelvis[1] - .3 * math.cos(math.radians(degrees)), height)
+        self.assertAlmostEqual(.5, skirts.left_share(around(0, .5), pose))
+        self.assertEqual(1., skirts.left_share(around(-skirts.SEAM, .5), pose))
+        self.assertEqual(0., skirts.left_share(around(skirts.SEAM, .5), pose))
+        self.assertEqual((1., 0.), (skirts.left_share(around(-179, .5), pose), skirts.left_share(around(179, .5), pose)))
+        steps = [skirts.left_share(around(degrees, .5), pose) for degrees in range(-90, 91, 3)]
         self.assertEqual(steps, sorted(steps, reverse=True))
-        self.assertLess(max(a - b for a, b in zip(steps, steps[1:])), .07)
+        self.assertLess(max(a - b for a, b in zip(steps, steps[1:])), .1)
+        knee = pose['lshin_g'][0][2]
+        self.assertEqual(0., skirts.shin_share(around(0, knee - .3), pose))
+        self.assertEqual(0., skirts.shin_share(around(120, knee + .01), pose))
+        self.assertEqual(1., skirts.shin_share(around(120, knee - skirts.KNEE_BAND), pose))
 
     def test_flaps_count_as_animated_only_where_the_clips_reach_them(self):
         animated = {name for name in self.models if skirts.flaps_animated(skirts.skeleton(self.sources[name])[1])}

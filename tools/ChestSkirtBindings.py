@@ -15,13 +15,16 @@ of reach.
 Each leg-weighted vertex is now weighted by its bind height:
 - Above the hip joints it keeps the pelvis binding (leg weight moved onto the pelvis),
   so the waist cannot tear.
-- From the hip joints down to the middle flap joint it eases onto the thigh on its own
-  side of the body. Near the midline the two thighs share a vertex (SEAM), so the
-  halves move together where they meet. The legs stay under the body in every idle,
-  so the coat falls beside them as the original did.
+- From the hip joints down to the middle flap joint it eases onto the leg on its own
+  side of the body: the thigh, and below the knee the shin (KNEE_BAND), so a side panel
+  lies along the lower leg when the knee bends. Near the back seam both thighs share a
+  vertex (SEAM), so the halves move together where they meet. The legs stay under the
+  body in every idle, so the coat falls beside them as the original did.
 - Below the middle flap joint the back of the coat also hangs from the two lower flap
-  joints: fully at the back, easing toward the sides and front (FALLOFF), scaled per
-  style (FLAP_STRENGTH). That share swings the coat out behind striding legs.
+  joints: fully at the back, easing to nothing at the front (FALLOFF), scaled per style
+  (FLAP_STRENGTH). That share swings the coat out behind striding legs; the front panels
+  stay on the legs, so they drape over the knees instead of stretching back to the flap
+  when the wearer sits.
 Below the hips the weights depend only on the bind position, so neighbouring vertices
 move together even where the source weights were uneven. Every vertex keeps at most four bones and its source weight sum; the geometry, inverse
 binds and bone tables stay unchanged, so the bind shape is identical. Clips that carry
@@ -56,14 +59,18 @@ LEG_BONES = frozenset({'lthigh_g', 'rthigh_g', 'lshin_g', 'rshin_g', 'lfoot_g', 
 FLAP_CHAIN = ('fb1_g01', 'fb2_g01', 'fb4_g01')
 # The clips that swing the flap. The engine pairs their tracks with the wearer's joints by part ID.
 FLAP_ANIMATIONS = ROOT / 'sw_cr_creature' / 'a_ba.mdl'
-# Degrees from the back at which the flap share would reach zero.
-FALLOFF = 150.
+# Degrees from the back at which the flap share reaches zero. Wider, the front panels
+# took a little flap and stretched back to it in seated poses (client-reviewed).
+FALLOFF = 120.
 # How strongly each style follows the flap. Chest 269's tail is one flat panel; at full
 # strength it trailed almost level behind runners, so it takes 60% (client-reviewed).
 FLAP_STRENGTH = {'154': 1., '269': .6}
-# Metres either side of the body's midline over which a vertex passes from one thigh to
-# the other: wide enough that the halves move together where they meet.
-SEAM = .25
+# Degrees either side of the back seam over which a vertex passes from one leg to the
+# other: wide enough that the halves move together where they meet. The coat is open
+# at the front below the hips, so the front needs no seam.
+SEAM = 45.
+# Metres below the knee joint over which a side panel passes from the thigh to the shin.
+KNEE_BAND = .15
 # Below the hips, the share of a vertex the thighs carry on bodies whose flap never moves;
 # the pelvis carries the rest. Where the flap swings, the thighs and the flap carry it all.
 STILL_THIGHS = .67
@@ -140,16 +147,27 @@ def heights(pose: dict) -> tuple[float, float, float]:
     return hip, top, bottom
 
 
+def bearing(position: tuple[float, float, float], pose: dict) -> float:
+    """Degrees around the body from the back: positive toward the right side, +-180 at the front."""
+    pelvis = pose['pelvis_g'][0]
+    return math.degrees(math.atan2(position[0] - pelvis[0], pelvis[1] - position[1]))
+
+
 def left_share(position: tuple[float, float, float], pose: dict) -> float:
-    """How much of a vertex follows the left thigh: all on the left, none on the right, half on the midline."""
-    return 1 - smoothstep((position[0] - pose['pelvis_g'][0][0] + SEAM) / (2 * SEAM))
+    """How much of a vertex follows the left leg: all on the left, none on the right, half on the back seam."""
+    return 1 - smoothstep((bearing(position, pose) + SEAM) / (2 * SEAM))
+
+
+def shin_share(position: tuple[float, float, float], pose: dict) -> float:
+    """How much of a side panel's leg share follows the shin: none above the knee or near the back seam."""
+    away = smoothstep((abs(bearing(position, pose)) - SEAM) / SEAM)
+    return away * smoothstep((pose['lshin_g'][0][2] - position[2]) / KNEE_BAND)
 
 
 def flap_share(position: tuple[float, float, float], pose: dict) -> float:
     """The share of a skirt vertex carried by the flap, from its bind position."""
-    pelvis = pose['pelvis_g'][0]
     _, top, bottom = heights(pose)
-    behind = math.degrees(math.atan2(abs(position[0] - pelvis[0]), pelvis[1] - position[1]))
+    behind = abs(bearing(position, pose))
     return (1 - smoothstep(behind / FALLOFF)) * smoothstep((top - position[2]) / (top - bottom))
 
 
@@ -191,8 +209,11 @@ def skirt_weights(current: dict[str, float], position: tuple[float, float, float
     result = {bone: weight * (1 - thighs) for bone, weight in upper.items()}
     if not animated:
         result['pelvis_g'] = result.get('pelvis_g', 0.) + thighs * total * (1 - STILL_THIGHS)
-    result['lthigh_g'] = result.get('lthigh_g', 0.) + moved * left
-    result['rthigh_g'] = result.get('rthigh_g', 0.) + moved * (1 - left)
+    # Below the knee the side panels follow the shin, so they lie along the lower leg when it bends.
+    shin = shin_share(position, pose)
+    for side, share in (('l', left), ('r', 1 - left)):
+        for bone, weight in ((f'{side}thigh_g', 1 - shin), (f'{side}shin_g', shin)):
+            result[bone] = result.get(bone, 0.) + moved * share * weight
     share = flap_share(position, pose) * strength if animated else 0.
     result = {bone: weight * (1 - share) for bone, weight in result.items()}
     for bone, weight in flap_bones(position[2], pose).items():
