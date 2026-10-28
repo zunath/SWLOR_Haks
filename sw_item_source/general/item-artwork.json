@@ -4376,6 +4376,28 @@
       "prompt": "Original SWLOR science-fiction inventory icon artwork, polished detailed painted 3D game asset, sharp sculpted silhouette readable at 32px and 64px. One isolated object centered in a square, three-quarter view, filling 80 percent of the canvas, dark nearly black plain background, strong rim lighting, muted metal with restrained colored functional accents. No border, no text, no letters, no numbers, no badge, no logo, no existing game artwork, no EVE Online imagery. This is physical item artwork, not a UI symbol or flat vector. Ship smuggling compartment module: a hinged section of grey tread-plate deck lifted open on a gas strut, revealing a hidden floor cache lined with glowing cyan scanner-dampening hex mesh (the hatch underside is lined with it too) and a strapped amber cargo crate stashed inside.",
       "source": "smuggling_compartment.png",
       "generator": "Claude illustrated SVG (source .svg beside the .png), rasterized with ImageMagick"
+    },
+    {
+      "name": "Probe Launcher",
+      "items": [
+        "sm_probe_00",
+        "sm_probe_05",
+        "sm_probe_10",
+        "sm_probe_15",
+        "sm_probe_20",
+        "sm_probe_25",
+        "sm_probe_30",
+        "sm_probe_35",
+        "sm_probe_40",
+        "sm_probe_45"
+      ],
+      "key": "probe_launcher",
+      "icon": "iit_smprobe",
+      "category": "Utility",
+      "subject": "Ship probe launcher module: a compact armored gunmetal launcher housing with a turret drum and an angled launch tube, a sleek white sensor probe with swept antenna fins and a glowing cyan sensor eye half-ejected from the tube's glowing bore, a whip antenna trailing back, and a small sensor dish on a mast at the rear corner.",
+      "prompt": "Original SWLOR science-fiction inventory icon artwork, polished detailed painted 3D game asset, sharp sculpted silhouette readable at 32px and 64px. One isolated object centered in a square, three-quarter view, filling 80 percent of the canvas, dark nearly black plain background, strong rim lighting, muted metal with restrained colored functional accents. No border, no text, no letters, no numbers, no badge, no logo, no existing game artwork, no EVE Online imagery. This is physical item artwork, not a UI symbol or flat vector. Ship probe launcher module: a compact armored gunmetal launcher housing with a turret drum and an angled launch tube, a sleek white sensor probe with swept antenna fins and a glowing cyan sensor eye half-ejected from the tube's glowing bore, a whip antenna trailing back, and a small sensor dish on a mast at the rear corner.",
+      "source": "probe_launcher.png",
+      "generator": "Claude illustrated SVG (source .svg beside the .png), rasterized with ImageMagick"
     }
   ],
   "postprocess": "ImageMagick resizes selected source PNGs to 256x256; ImportItemIconArtwork.ps1 creates opaque bottom-left 32px and 64px TGAs and invokes the shared semantic border stamper."
