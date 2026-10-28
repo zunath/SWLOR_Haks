@@ -1,16 +1,14 @@
 customshaderVS vslit_sm_nm
 renderhint NormalAndSpecMapped
-
 texture1 pmh0_head323_N
 texture2 pmh0_head323_S
 texture3 null
 texture4 null
 texture5 null
 texture6 pmh0_head323_A
-
 transparency 1
 twosided 1
-customshaderFS hlp_518f1a04108a
+customshaderFS fs_head_mapped
 texture0 plt_white
 texture7 tm_ccf82b4731d6c
 texture10 plt_palette
@@ -26,9 +24,45 @@ parameter float rowLeath1 0.429932
 parameter float rowLeath2 0.429932
 parameter float rowTat1 0.515869
 parameter float rowTat2 0.515869
-
 texture8 lm_49051c9b3b2a4
-parameter float lipU0 0.208007812500
-parameter float lipV0 0.464843750000
-parameter float lipUSpan 0.083984375000
-parameter float lipVSpan 0.091796875000
+parameter float alphaCutoff 0.3
+parameter float clampEyeLayer -1
+parameter float clampEyeLayer2 -1
+parameter float detailDiffuse 0
+parameter float detailGlowChannel 0
+parameter float detailGlowGain 1
+parameter float eyeContour 0
+parameter float forceOpaque 1
+parameter float glowCompression 0.32
+parameter float glowGain 1.75
+parameter float glowHueGain 0.16
+parameter float glowLayerFromMask 0
+parameter float glowMaxLayer -1
+parameter float glowMinLayer -1
+parameter float glowWholeSurface 0
+parameter float hairFilter 0
+parameter float hairGain 1.3
+parameter float hairMatte 0
+parameter float hairReflectivity 0
+parameter float hairSaturation 0.85
+parameter float hairShadePower 1
+parameter float lipMode 1
+parameter float lipU0 0.2080078125
+parameter float lipUSpan 0.083984375
+parameter float lipV0 0.46484375
+parameter float lipVSpan 0.091796875
+parameter float maskMode 1
+parameter float maskSoftWidth 0.08
+parameter float maskWrapUV 0
+parameter float paletteFolded 0
+parameter float scalpEndV 0.52
+parameter float scalpMaxU 0.49
+parameter float scalpShadeBase 0.070588235294
+parameter float scalpShadeScale 1
+parameter float scalpStartV 0.45
+parameter float skinGain 1
+parameter float skinNeutralShade 0
+parameter float texture9Cutoff 0.3
+parameter float useNativePalette 0
+parameter float useTexture1Alpha 0
+parameter float useTexture9Alpha 0
