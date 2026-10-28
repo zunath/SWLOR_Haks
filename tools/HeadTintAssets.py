@@ -132,7 +132,8 @@ def catalog(root: Path = ROOT) -> dict:
     """Allow the general tint generator to preserve the separately authored heads."""
     path = root / 'tools' / 'HeadTintAssets.json'
     return json.loads(path.read_text(encoding='utf-8')) if path.is_file() else {
-        'models': [], 'materials': {}, 'catalogRows': [], 'textures': {}, 'auxiliary': {}}
+        'models': [], 'materials': {}, 'catalogRows': [], 'textures': {}, 'auxiliary': {},
+        'compatibility': {'models': {}, 'rows': []}}
 
 
 def owned_paths(root: Path = ROOT) -> set[Path]:
@@ -141,8 +142,53 @@ def owned_paths(root: Path = ROOT) -> set[Path]:
 
 
 def model_rows(root: Path = ROOT) -> list[tuple[str, str, list[int]]]:
+    manifest = catalog(root)
     return [(model, material, [int(v) for v in layers.split(',')])
-            for model, material, layers in catalog(root)['catalogRows']]
+            for model, material, layers in manifest['catalogRows'] + manifest.get('compatibility', {}).get('rows', [])]
+
+
+def refresh_catalog_context() -> None:
+    """Revalidate unchanged robe outputs after this head-only catalog integration.
+
+    Never accept a changed robe output, material, pose, animation, selection or
+    compiler dependency. Only the three expected catalog/tool fingerprints may
+    differ before the existing complete robe validator is run again.
+    """
+    import GenerateRobeRgbModels as robes
+    # This operation only revalidates the catalog already submitted with these
+    # heads. It cannot bless unrelated HAK configuration or catalog edits.
+    revision = load_manifest()['sourceCommit']
+    for relative in ('hakbuilder.json', 'sw_2da/tintmap.2da'):
+        source = subprocess.check_output(['git', '-C', str(ROOT), 'show', f'{revision}:{relative}'])
+        current = (ROOT / relative).read_bytes()
+        same = ([line.split() for line in source.splitlines()] == [line.split() for line in current.splitlines()]
+                if relative.endswith('.2da') else source.replace(b'\r\n', b'\n') == current.replace(b'\r\n', b'\n'))
+        if not same:
+            raise ValueError(f'Cannot refresh context for an unrelated change: {relative}')
+    allowed = {'hakbuilder.json', 'sw_2da/tintmap.2da', 'tools/GenerateTintMapAssets.py'}
+    errors = robes.check()
+    if not errors:
+        return
+    expected = {f'Robe RGB input/output changed: {relative}; regenerate and validate' for relative in allowed}
+    if not set(errors) <= expected:
+        raise ValueError('Cannot refresh robe catalog context: ' + '; '.join(errors))
+    original = robes.MANIFEST.read_bytes()
+    manifest = json.loads(original)
+    for relative in allowed:
+        digest = robes.file_digest(ROOT / relative)
+        if relative.endswith('.py'):
+            manifest.setdefault('validation_tool_files', {})[relative] = digest
+        else:
+            manifest['files'][relative] = digest
+    try:
+        robes.MANIFEST.write_text(json.dumps(manifest, indent=2) + '\n', encoding='utf-8', newline='\n')
+        remaining = robes.check()
+        if remaining:
+            raise ValueError('Robe revalidation failed: ' + '; '.join(remaining))
+    except BaseException:
+        robes.MANIFEST.write_bytes(original)
+        raise
+    print('Robe outputs, poses, compiler inputs and selections revalidated; refreshed only head catalog context.')
 
 
 def validate() -> list[str]:
@@ -193,6 +239,12 @@ def validate() -> list[str]:
             rows.append(fields[1:])
     if rows != manifest['catalogRows']:
         errors.append('Head model/material/channel catalog differs from tintmap.2da')
+    compatibility = manifest.get('compatibility', {'models': {}, 'rows': []})
+    current_compatibility = [line.split()[1:] for line in
+        (ROOT / 'sw_2da/tintmap.2da').read_text().splitlines()[3:]
+        if len(line.split()) == 4 and line.split()[1] in compatibility['models']]
+    if current_compatibility != compatibility['rows']:
+        errors.append('Existing phenotype-2 compatibility rows changed')
     for model in manifest['models']:
         model_path = ROOT / 'sw_pt_head' / (model + '.mdl')
         if not model_path.is_file():
@@ -200,6 +252,15 @@ def validate() -> list[str]:
         elif hashlib.sha256(model_path.read_bytes()).hexdigest() != manifest['modelHashes'][model]:
             errors.append(f'{model}: compiled head geometry differs from the approved catalog')
     import GenerateTintMapAssets as tint
+    from ModelLodAssets import ModelPath
+    for model, digest in compatibility['models'].items():
+        path = ModelPath(ROOT / 'sw_pt_head' / (model + '.mdl'))
+        if not re.fullmatch(r'p[fm][a-z]2_head\d{3}', model) or not path.is_file() or hashlib.sha256(path.read_bytes()).hexdigest() != digest:
+            errors.append(f'{model}: existing compatibility model differs')
+    for model, material, _ in compatibility['rows']:
+        path = ModelPath(ROOT / 'sw_pt_head' / (model + '.mdl'))
+        if material not in manifest['materials'] or material not in {name for _, name in tint.read_model_material_bindings(path)}:
+            errors.append(f'{model}: existing explicit compatibility binding differs for {material}')
     bindings = {model: {material or texture for texture, material in
                        tint.read_model_material_bindings(ROOT / 'sw_pt_head' / (model + '.mdl'))}
                 for model in manifest['models'] if (ROOT / 'sw_pt_head' / (model + '.mdl')).is_file()}
@@ -241,16 +302,20 @@ def main() -> None:
     action.add_argument('--check', action='store_true')
     parser.add_argument('--textures', action='store_true',
                         help='with --apply, reproduce authored textures from the recorded Git source commit')
+    parser.add_argument('--refresh-catalog-context', action='store_true',
+                        help='with --apply, fully revalidate unchanged robes and refresh only head catalog context fingerprints')
     args = parser.parse_args()
     if args.apply:
         generate(args.textures)
-    elif args.textures:
-        parser.error('--textures requires --apply')
+    elif args.textures or args.refresh_catalog_context:
+        parser.error('--textures and --refresh-catalog-context require --apply')
     errors = validate()
     for error in errors:
         print(error)
     if errors:
         raise SystemExit(1)
+    if args.refresh_catalog_context:
+        refresh_catalog_context()
     manifest = load_manifest()
     print(f"Head assets verified: {len(PROFILES)} lighting profiles, {len(manifest['materials'])} material profiles.")
 

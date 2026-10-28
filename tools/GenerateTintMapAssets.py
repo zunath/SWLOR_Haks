@@ -1700,7 +1700,8 @@ def build_model_material_plan(
     restored_bindings: dict[Path, dict[str, str]] = {}
 
     for model, path in sorted(models.items()):
-        if model in HeadTintAssets.catalog(REPOSITORY_ROOT)['models']:
+        head_catalog = HeadTintAssets.catalog(REPOSITORY_ROOT)
+        if model in head_catalog['models'] or model in head_catalog.get('compatibility', {}).get('models', {}):
             # These compiled heads have an explicit, checksum-validated authoring
             # catalog; inferring PLT aliases here would replace their masks.
             continue
