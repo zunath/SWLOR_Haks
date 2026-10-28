@@ -4588,7 +4588,7 @@
       "subject": "Ship ion web projector module: an armored gunmetal emitter barrel on an angled mount firing crackling cyan ion lightning into a glowing hexagonal energy net that spreads across the upper frame.",
       "prompt": "Original SWLOR science-fiction inventory icon artwork, polished detailed painted 3D game asset, sharp sculpted silhouette readable at 32px and 64px. One isolated object centered in a square, three-quarter view, filling 80 percent of the canvas, dark nearly black plain background, strong rim lighting, muted metal with restrained colored functional accents. No border, no text, no letters, no numbers, no badge, no logo, no existing game artwork, no EVE Online imagery. This is physical item artwork, not a UI symbol or flat vector. Ship ion web projector module: an armored gunmetal emitter barrel on an angled mount firing crackling cyan ion lightning into a glowing hexagonal energy net that spreads across the upper frame.",
       "source": "ion_web.png",
-      "generator": "Claude illustrated SVG (source .svg beside the .png), rasterized with ImageMagick"
+      "generator": "Claude illustrated SVG (source .svg beside the .png), rasterized with ImageMagick; the 64x64 inventory icon renders the same SVG without its background square, cropped and centered in the transparent 52x52 interior"
     },
     {
       "name": "Interdictor",
@@ -4610,7 +4610,7 @@
       "subject": "Ship interdiction field generator: a heavy armored gunmetal ring with four steel clamp prongs biting inward around a black singularity core rimmed in glowing magenta, wrapped in dashed violet disruption rings.",
       "prompt": "Original SWLOR science-fiction inventory icon artwork, polished detailed painted 3D game asset, sharp sculpted silhouette readable at 32px and 64px. One isolated object centered in a square, three-quarter view, filling 80 percent of the canvas, dark nearly black plain background, strong rim lighting, muted metal with restrained colored functional accents. No border, no text, no letters, no numbers, no badge, no logo, no existing game artwork, no EVE Online imagery. This is physical item artwork, not a UI symbol or flat vector. Ship interdiction field generator: a heavy armored gunmetal ring with four steel clamp prongs biting inward around a black singularity core rimmed in glowing magenta, wrapped in dashed violet disruption rings.",
       "source": "interdictor.png",
-      "generator": "Claude illustrated SVG (source .svg beside the .png), rasterized with ImageMagick"
+      "generator": "Claude illustrated SVG (source .svg beside the .png), rasterized with ImageMagick; the 64x64 inventory icon renders the same SVG without its background square, cropped and centered in the transparent 52x52 interior"
     },
     {
       "name": "Jammer",
@@ -4632,7 +4632,7 @@
       "subject": "Ship signal jammer module: a squat armored transmitter housing with two angled antenna masts whose glowing amber tips spray jagged orange and violet static bursts.",
       "prompt": "Original SWLOR science-fiction inventory icon artwork, polished detailed painted 3D game asset, sharp sculpted silhouette readable at 32px and 64px. One isolated object centered in a square, three-quarter view, filling 80 percent of the canvas, dark nearly black plain background, strong rim lighting, muted metal with restrained colored functional accents. No border, no text, no letters, no numbers, no badge, no logo, no existing game artwork, no EVE Online imagery. This is physical item artwork, not a UI symbol or flat vector. Ship signal jammer module: a squat armored transmitter housing with two angled antenna masts whose glowing amber tips spray jagged orange and violet static bursts.",
       "source": "jammer.png",
-      "generator": "Claude illustrated SVG (source .svg beside the .png), rasterized with ImageMagick"
+      "generator": "Claude illustrated SVG (source .svg beside the .png), rasterized with ImageMagick; the 64x64 inventory icon renders the same SVG without its background square, cropped and centered in the transparent 52x52 interior"
     },
     {
       "name": "Target Painter",
@@ -4654,7 +4654,7 @@
       "subject": "Ship target painter module: a squat armored designator turret with a red lens projecting a bright red beam onto a glowing red targeting reticle.",
       "prompt": "Original SWLOR science-fiction inventory icon artwork, polished detailed painted 3D game asset, sharp sculpted silhouette readable at 32px and 64px. One isolated object centered in a square, three-quarter view, filling 80 percent of the canvas, dark nearly black plain background, strong rim lighting, muted metal with restrained colored functional accents. No border, no text, no letters, no numbers, no badge, no logo, no existing game artwork, no EVE Online imagery. This is physical item artwork, not a UI symbol or flat vector. Ship target painter module: a squat armored designator turret with a red lens projecting a bright red beam onto a glowing red targeting reticle.",
       "source": "target_painter.png",
-      "generator": "Claude illustrated SVG (source .svg beside the .png), rasterized with ImageMagick"
+      "generator": "Claude illustrated SVG (source .svg beside the .png), rasterized with ImageMagick; the 64x64 inventory icon renders the same SVG without its background square, cropped and centered in the transparent 52x52 interior"
     },
     {
       "name": "Afterburner",
@@ -4676,7 +4676,7 @@
       "subject": "Ship afterburner module: a ribbed armored engine housing with a polished nozzle bell blasting a long white-hot blue flame plume with shock diamonds.",
       "prompt": "Original SWLOR science-fiction inventory icon artwork, polished detailed painted 3D game asset, sharp sculpted silhouette readable at 32px and 64px. One isolated object centered in a square, three-quarter view, filling 80 percent of the canvas, dark nearly black plain background, strong rim lighting, muted metal with restrained colored functional accents. No border, no text, no letters, no numbers, no badge, no logo, no existing game artwork, no EVE Online imagery. This is physical item artwork, not a UI symbol or flat vector. Ship afterburner module: a ribbed armored engine housing with a polished nozzle bell blasting a long white-hot blue flame plume with shock diamonds.",
       "source": "afterburner.png",
-      "generator": "Claude illustrated SVG (source .svg beside the .png), rasterized with ImageMagick"
+      "generator": "Claude illustrated SVG (source .svg beside the .png), rasterized with ImageMagick; the 64x64 inventory icon renders the same SVG without its background square, cropped and centered in the transparent 52x52 interior"
     }
   ],
   "postprocess": "ImageMagick resizes selected source PNGs to 256x256; ImportItemIconArtwork.ps1 creates opaque bottom-left 32px and 64px TGAs and invokes the shared semantic border stamper."
