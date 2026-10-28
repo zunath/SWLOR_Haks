@@ -7,7 +7,7 @@ dark background (the project icon tool stamps the semantic frame there) and
 writes out_png/<resref>.png, out_tga/<resref>.tga (32-bit, bottom-left origin,
 descriptor 8), contact_center.png and 512 px previews.
 
-Run:  python -I build_ace_icons.py
+Run:  python -I build_ordnance_icons.py
 """
 import math
 import os
