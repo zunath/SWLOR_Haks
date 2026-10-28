@@ -4398,6 +4398,36 @@
       "prompt": "Original SWLOR science-fiction inventory icon artwork, polished detailed painted 3D game asset, sharp sculpted silhouette readable at 32px and 64px. One isolated object centered in a square, three-quarter view, filling 80 percent of the canvas, dark nearly black plain background, strong rim lighting, muted metal with restrained colored functional accents. No border, no text, no letters, no numbers, no badge, no logo, no existing game artwork, no EVE Online imagery. This is physical item artwork, not a UI symbol or flat vector. Ship probe launcher module: a compact armored gunmetal launcher housing with a turret drum and an angled launch tube, a sleek white sensor probe with swept antenna fins and a glowing cyan sensor eye half-ejected from the tube's glowing bore, a whip antenna trailing back, and a small sensor dish on a mast at the rear corner.",
       "source": "probe_launcher.png",
       "generator": "Claude illustrated SVG (source .svg beside the .png), rasterized with ImageMagick"
+    },
+    {
+      "name": "Data Analyzer",
+      "items": [
+        "sm_dataan_00"
+      ],
+      "key": "data_analyzer",
+      "icon": "iit_smdatanlz",
+      "category": "Utility",
+      "subject": "Ship data analyzer module: a compact armored gunmetal console with a sloped control panel showing a green data readout, a telescoping scomp-style interface spike with a knurled head and a glowing green data tip extended from its front, ribbed cable conduits, and a small holographic emitter projecting a floating green circuit-trace display above it.",
+      "prompt": "Original SWLOR science-fiction inventory icon artwork, polished detailed painted 3D game asset, sharp sculpted silhouette readable at 32px and 64px. One isolated object centered in a square, three-quarter view, filling 80 percent of the canvas, dark nearly black plain background, strong rim lighting, muted metal with restrained colored functional accents. No border, no text, no letters, no numbers, no badge, no logo, no existing game artwork, no EVE Online imagery. This is physical item artwork, not a UI symbol or flat vector. Ship data analyzer module: a compact armored gunmetal console with a sloped control panel showing a green data readout, a telescoping scomp-style interface spike with a knurled head and a glowing green data tip extended from its front, ribbed cable conduits, and a small holographic emitter projecting a floating green circuit-trace display above it.",
+      "source": "data_analyzer.png",
+      "generator": "Claude illustrated SVG (source .svg beside the .png), rasterized with ImageMagick"
+    },
+    {
+      "name": "Sealed Ship Lockbox",
+      "items": [
+        "spc_lockbox_t1",
+        "spc_lockbox_t2",
+        "spc_lockbox_t3",
+        "spc_lockbox_t4",
+        "spc_lockbox_t5"
+      ],
+      "key": "ship_lockbox",
+      "icon": "iit_spclockbox",
+      "category": "Utility",
+      "subject": "Sealed ship lockbox: a rugged starship-grade armored gunmetal strongbox with glowing red-orange magnetic docking clamps on every corner, a red-glowing lid seal line, a recessed carry grip, scorch marks and embers from a destroyed ship, and a glowing amber security data-lock panel with a padlock screen, keypad and red status light on the front.",
+      "prompt": "Original SWLOR science-fiction inventory icon artwork, polished detailed painted 3D game asset, sharp sculpted silhouette readable at 32px and 64px. One isolated object centered in a square, three-quarter view, filling 80 percent of the canvas, dark nearly black plain background, strong rim lighting, muted metal with restrained colored functional accents. No border, no text, no letters, no numbers, no badge, no logo, no existing game artwork, no EVE Online imagery. This is physical item artwork, not a UI symbol or flat vector. Sealed ship lockbox: a rugged starship-grade armored gunmetal strongbox with glowing red-orange magnetic docking clamps on every corner, a red-glowing lid seal line, a recessed carry grip, scorch marks and embers from a destroyed ship, and a glowing amber security data-lock panel with a padlock screen, keypad and red status light on the front.",
+      "source": "ship_lockbox.png",
+      "generator": "Claude illustrated SVG (source .svg beside the .png), rasterized with ImageMagick"
     }
   ],
   "postprocess": "ImageMagick resizes selected source PNGs to 256x256; ImportItemIconArtwork.ps1 creates opaque bottom-left 32px and 64px TGAs and invokes the shared semantic border stamper."
