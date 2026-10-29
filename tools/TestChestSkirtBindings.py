@@ -50,10 +50,10 @@ MAX_BACK_LEAN = 20.
 # the pelvis alone, the coats narrowed by up to 19 cm and shifted by up to 24 cm.
 MAX_IDLE_NARROWING = .17
 MAX_IDLE_SHIFT = .2
-# The same in /paraderest, whose clip carries no flap tracks, so the flaps hold their idle lean
-# (flap and pelvis alone: 25 and 26 cm).
-MAX_PARADE_NARROWING = .25
-MAX_PARADE_SHIFT = .25
+# The same in /paraderest, whose clip now holds the flaps at rest (FillEmoteFlapTracks.py). Holding
+# the idle's flap lean instead, the flap-hung skirts sat up to 22 cm off-centre there.
+MAX_PARADE_NARROWING = .12
+MAX_PARADE_SHIFT = .05
 # Where the flaps never move, how far either hem edge may sit from where the original put it (m).
 MAX_STILL_SHIFT = .08
 MAX_STILL_PARADE_SHIFT = .12

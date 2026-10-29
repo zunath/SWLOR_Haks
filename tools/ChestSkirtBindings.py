@@ -41,12 +41,14 @@ the vertex's height between the bracketing joints and sideways between the brack
 columns; above the second row they ease back onto the source's torso binding.
 
 Every vertex keeps at most four bones and its source weight sum; the geometry, inverse
-binds and bone tables stay unchanged, so the bind shape is identical. Clips that carry
-no flap tracks (a few stock emotes and turns) hold the flaps' previous pose, as stock
-tabards do. The dwarf and half-orc roots number their flap and cloak joints apart from
-a_ba, so the engine never moves them; on those bodies the legs carry the share the
-source gave a skirt on average below the hips and the pelvis the rest (flaps_animated,
-still_share), and capes are not listed.
+binds and bone tables stay unchanged, so the bind shape is identical. The custom emotes
+(/paraderest among them) hold the flaps at rest (FillEmoteFlapTracks.py) but carry no
+cloak tracks, so a cape keeps the previous pose there, as stock cloaks do; the few stock
+clips without flap tracks (some turns and injured walks) hold the flaps' previous pose too.
+The dwarf and half-orc roots number their flap and cloak joints apart from a_ba, so the
+engine never moves them; on those bodies the legs carry the share the source gave a skirt
+on average below the hips and the pelvis the rest (flaps_animated, still_share), and capes
+are not listed.
 
 Belt 226 and pelvis 198 stay as originally rigged at the test server's request; the
 manifest's "restored" list holds their original blobs, and --check keeps them so.
