@@ -16199,7 +16199,7 @@
     },
     {
       "id": 4049,
-      "text": "Deals 60 fire DMG plus PER scaling in a 5m blast and inflicts Burn for 45 seconds. Consumes explosives."
+      "text": "Deals gadget DMG + 60 fire DMG plus PER scaling in a 5m blast and inflicts Burn for 45 seconds. Enemies already Bleeding or Burning take +40 DMG. Consumes explosives."
     },
     {
       "id": 4050,
@@ -16887,7 +16887,7 @@
     },
     {
       "id": 4221,
-      "text": "Grenade abilities, Remote Charge, and Overload Barrage gain +1m blast radius."
+      "text": "Grenade abilities, Remote Charge, and Overload Barrage gain +1m blast radius and +4% blast damage."
     },
     {
       "id": 4222,
@@ -24167,7 +24167,7 @@
     },
     {
       "id": 6041,
-      "text": "Deals weapon DMG + 18 and inflicts Sunder, reducing Defense and Force Defense by 10% for 30 seconds."
+      "text": "Deals weapon DMG + 18 and inflicts Sunder, reducing Defense and Force Defense by 12% for 30 seconds."
     },
     {
       "id": 6042,
@@ -24191,7 +24191,7 @@
     },
     {
       "id": 6047,
-      "text": "While active, your hostile auto-attacks deal Force damage instead of physical and cost 2 FP each."
+      "text": "While active, your hostile auto-attacks deal Force damage instead of their normal damage type, including elemental damage. Each one that lands costs 2 FP. You also gain +10% Force Attack, which applies to Force abilities as well. Converted attacks use your Force Attack bonuses instead of Attack bonuses, but still use your weapon skill and the weapon's damage attribute. Targets defend against them with Force Defense and Willpower."
     },
     {
       "id": 6048,
@@ -24199,7 +24199,7 @@
     },
     {
       "id": 6049,
-      "text": "Deals weapon DMG + 28 and inflicts Sunder, reducing Defense and Force Defense by 12% for 30 seconds."
+      "text": "Deals weapon DMG + 28 and inflicts Sunder, reducing Defense and Force Defense by 15% for 30 seconds."
     },
     {
       "id": 6050,
@@ -24207,7 +24207,7 @@
     },
     {
       "id": 6051,
-      "text": "Deals weapon DMG + 12 to enemies within 3m of you. If at least one struck enemy already has Sunder, spreads Sunder from that enemy to one other enemy in melee range for 30 seconds."
+      "text": "Deals weapon DMG + 12 to enemies within 3m of you. If at least one struck enemy already has Sunder, spreads Sunder from that enemy to up to two other enemies in melee range for 30 seconds."
     },
     {
       "id": 6052,
@@ -24223,7 +24223,7 @@
     },
     {
       "id": 6055,
-      "text": "Deals weapon DMG + 16 to enemies within 3m of you. If at least one struck enemy already has Sunder, spreads Sunder from that enemy to one other enemy in melee range for 30 seconds."
+      "text": "Deals weapon DMG + 16 to enemies within 3m of you. If at least one struck enemy already has Sunder, spreads Sunder from that enemy to up to three other enemies in melee range for 30 seconds."
     },
     {
       "id": 6056,
@@ -24263,7 +24263,7 @@
     },
     {
       "id": 6065,
-      "text": "While active, generate + 30% Enmity and gain + 8 Mobility Resistance, but your Attack and Force Attack are reduced by 25%. You generate +100% threat from damage dealt, before general Enmity modifiers."
+      "text": "While active, generate + 30% Enmity and gain + 20 Mobility Resistance, but your Attack and Force Attack are reduced by 15%. You generate +100% threat from damage dealt, before general Enmity modifiers."
     },
     {
       "id": 6066,
@@ -24855,7 +24855,7 @@
     },
     {
       "id": 6213,
-      "text": "While active, your hostile auto-attacks deal Force damage instead of their normal damage type, including elemental damage, and cost 2 FP each."
+      "text": "While active, your hostile auto-attacks deal Force damage instead of their normal damage type, including elemental damage. Each one that lands costs 2 FP. You also gain +10% Force Attack, which applies to Force abilities as well. Converted attacks use your Force Attack bonuses instead of Attack bonuses, but still use your weapon skill and the weapon's damage attribute. Targets defend against them with Force Defense and Willpower."
     },
     {
       "id": 6214,
@@ -25219,7 +25219,7 @@
     },
     {
       "id": 6304,
-      "text": "Retreat up to 4m away from the selected enemy, turning aside when the way straight back is blocked, then attack with each equipped attack weapon for weapon DMG + 4 per impact. Works with any weapon."
+      "text": "Deals weapon DMG + 4. Grants 1 Cadence."
     },
     {
       "id": 6305,
@@ -25307,15 +25307,15 @@
     },
     {
       "id": 6326,
-      "text": "Retreat up to 4m away from the selected enemy, turning aside when the way straight back is blocked, then attack with each equipped attack weapon for weapon DMG + 8 per impact. Works with any weapon."
+      "text": "Deals weapon DMG + 8. Grants 1 Cadence."
     },
     {
       "id": 6327,
-      "text": "Retreat up to 4m away from the selected enemy, turning aside when the way straight back is blocked, then attack with each equipped attack weapon for weapon DMG + 12 per impact. Works with any weapon."
+      "text": "Deals weapon DMG + 12. Grants 1 Cadence."
     },
     {
       "id": 6328,
-      "text": "Retreat up to 4m away from the selected enemy, turning aside when the way straight back is blocked, then attack with each equipped attack weapon for weapon DMG + 16 per impact. Works with any weapon."
+      "text": "Deals weapon DMG + 16. Grants 1 Cadence."
     },
     {
       "id": 6329,
@@ -25379,7 +25379,7 @@
     },
     {
       "id": 6344,
-      "text": "Flow"
+      "text": "Cadence"
     },
     {
       "id": 6345,
@@ -25391,19 +25391,19 @@
     },
     {
       "id": 6347,
-      "text": "A direct hostile attack missing its accuracy-versus-evasion roll grants 1 Flow, at most once every 10 seconds."
+      "text": "After you evade an attack, gain 1 Cadence. Triggers once every 10 seconds."
     },
     {
       "id": 6348,
-      "text": "Flow 1"
+      "text": "Cadence 1"
     },
     {
       "id": 6349,
-      "text": "Flow 2"
+      "text": "Cadence 2"
     },
     {
       "id": 6350,
-      "text": "Flow 3"
+      "text": "Cadence 3"
     },
     {
       "id": 6351,
@@ -25507,7 +25507,7 @@
     },
     {
       "id": 6376,
-      "text": "Blaster Slide I"
+      "text": "Lead Shot I"
     },
     {
       "id": 6377,
@@ -25515,7 +25515,7 @@
     },
     {
       "id": 6378,
-      "text": "Blaster Slide II"
+      "text": "Lead Shot II"
     },
     {
       "id": 6379,
@@ -25523,7 +25523,7 @@
     },
     {
       "id": 6380,
-      "text": "Blaster Slide III"
+      "text": "Lead Shot III"
     },
     {
       "id": 6381,
@@ -25531,7 +25531,7 @@
     },
     {
       "id": 6382,
-      "text": "Blaster Slide IV"
+      "text": "Lead Shot IV"
     },
     {
       "id": 6383,
@@ -25539,7 +25539,7 @@
     },
     {
       "id": 6384,
-      "text": "Grapple Shot I"
+      "text": "Closing Shot I"
     },
     {
       "id": 6385,
@@ -25547,7 +25547,7 @@
     },
     {
       "id": 6386,
-      "text": "Grapple Shot II"
+      "text": "Closing Shot II"
     },
     {
       "id": 6387,
@@ -25555,7 +25555,7 @@
     },
     {
       "id": 6388,
-      "text": "Grapple Shot III"
+      "text": "Closing Shot III"
     },
     {
       "id": 6389,
@@ -25563,7 +25563,7 @@
     },
     {
       "id": 6390,
-      "text": "Pistol Rush I"
+      "text": "Tempo Shot I"
     },
     {
       "id": 6391,
@@ -25571,7 +25571,7 @@
     },
     {
       "id": 6392,
-      "text": "Pistol Rush II"
+      "text": "Tempo Shot II"
     },
     {
       "id": 6393,
@@ -25639,7 +25639,7 @@
     },
     {
       "id": 6409,
-      "text": "Paired Handling"
+      "text": "Steady Cadence"
     },
     {
       "id": 6410,
@@ -26015,7 +26015,7 @@
     },
     {
       "id": 6503,
-      "text": "A Flow-spending ability landing any hit restores 1 STM per charge spent, up to 3 STM. Cannot reduce the ability's net STM cost below 1. At most once per activation and once every 12 seconds."
+      "text": "Spending Cadence on a hit restores 1 STM per charge, up to 3 STM. Triggers once every 12 seconds."
     },
     {
       "id": 6504,
@@ -26031,11 +26031,11 @@
     },
     {
       "id": 6507,
-      "text": "After moving at least 2m and landing a hostile weapon attack, your next hostile weapon ability gains +5 Accuracy. One charge, lasts 8 seconds; triggers at most once every 10 seconds."
+      "text": "Gaining Cadence gives your next weapon ability +5 Accuracy for 8 seconds. Triggers once every 10 seconds."
     },
     {
       "id": 6508,
-      "text": "After moving at least 2m, landing a hostile weapon attack grants 1 Flow, max 3. Lasts 12 seconds. Each charge gives +2 Accuracy to weapon auto-attacks. Your next Grapple Shot, Final Salvo, or other skill's hostile weapon ability that costs STM spends all Flow for +2 DMG per charge, applied once per weapon across the whole ability. Other Twin Pistol abilities keep Flow."
+      "text": "Landing a weapon ability within 6 seconds of a different one grants 1 Cadence, up to 3, for 12 seconds. Each Cadence grants +2 Accuracy to auto-attacks. Closing Shot, Final Salvo and other skills' weapon abilities spend all Cadence for +2 DMG per charge."
     },
     {
       "id": 6509,
@@ -26047,23 +26047,23 @@
     },
     {
       "id": 6511,
-      "text": "Close up to 6m toward an enemy, then attack with each equipped attack weapon for weapon DMG + 10 per impact. Works with any weapon."
+      "text": "Deals weapon DMG + 10. Spends all Cadence for +2 DMG per charge."
     },
     {
       "id": 6512,
-      "text": "Close up to 6m toward an enemy, then attack with each equipped attack weapon for weapon DMG + 14 per impact. Works with any weapon."
+      "text": "Deals weapon DMG + 14. Spends all Cadence for +2 DMG per charge."
     },
     {
       "id": 6513,
-      "text": "Close up to 6m toward an enemy, then attack with each equipped attack weapon for weapon DMG + 6 per impact. Works with any weapon."
+      "text": "Deals weapon DMG + 6. Spends all Cadence for +2 DMG per charge."
     },
     {
       "id": 6514,
-      "text": "Dash to a freely selected ground point 2-6m away. Attack up to three enemies in the 4m-wide travel line with each equipped attack weapon for 60% of weapon DMG + 12 per impact. Works with any weapon."
+      "text": "Deals 60% weapon DMG + 12. Grants 2 Cadence."
     },
     {
       "id": 6515,
-      "text": "Dash to a freely selected ground point 2-6m away. Attack up to three enemies in the 4m-wide travel line with each equipped attack weapon for 60% of weapon DMG + 6 per impact. Works with any weapon."
+      "text": "Deals 60% weapon DMG + 6. Grants 2 Cadence."
     },
     {
       "id": 6516,
@@ -26071,7 +26071,7 @@
     },
     {
       "id": 6517,
-      "text": "While wielding two weapons, grants +3% Haste. Cannot be purchased with Paired Handling."
+      "text": "While wielding two weapons, grants +3% Haste."
     },
     {
       "id": 6518,
@@ -26079,11 +26079,11 @@
     },
     {
       "id": 6519,
-      "text": "While wielding two weapons, weapon auto-attacks deal +5% damage. Cannot be purchased with Matched Rhythm."
+      "text": "Spending Cadence deals +1 DMG per charge."
     },
     {
       "id": 6520,
-      "text": "With any weapon: +10% Haste, +10% Movement Speed and 18-second Flow. All weapon auto-attacks deal 20% less damage. Activated ability damage is unchanged."
+      "text": "While active, grants +10% Haste and +10% Movement Speed and Cadence lasts 18 seconds, but auto-attacks deal 20% less damage."
     },
     {
       "id": 6521,
@@ -26091,7 +26091,7 @@
     },
     {
       "id": 6522,
-      "text": "Without moving, attack one enemy with each equipped attack weapon for weapon DMG + 20 per impact. Spend all Flow for +4 DMG per charge on each impact (max +12). Works with any weapon."
+      "text": "Deals weapon DMG + 20. Spends all Cadence for +4 DMG per charge."
     },
     {
       "id": 6523,
@@ -26127,15 +26127,15 @@
     },
     {
       "id": 6531,
-      "text": "Blaster Slide"
+      "text": "Lead Shot"
     },
     {
       "id": 6532,
-      "text": "Grapple Shot"
+      "text": "Closing Shot"
     },
     {
       "id": 6533,
-      "text": "Pistol Rush"
+      "text": "Tempo Shot"
     },
     {
       "id": 6534,
