@@ -8,6 +8,7 @@ import struct
 import tempfile
 import unittest
 
+import ChestSkirtBindings as skirts
 import CompileModels as mdl
 import GeneratePartSkinModels as parts
 import GenerateTintMapAssets as tint
@@ -15,6 +16,11 @@ from NeckSkinBindings import body_model, mapping_for, needs_remap
 from RobePoseAudit import Model
 
 skins = parts.part_skins
+
+
+# Parts rebound to hang from the cloak bones.
+CAPES = {name for name, entry in json.loads(skirts.MANIFEST.read_text())['models'].items()
+         if skirts.style(entry['path'])['cape']}
 
 
 class PartSkinModelTests(unittest.TestCase):
@@ -163,7 +169,11 @@ class PartSkinModelTests(unittest.TestCase):
                                 continue
                             joint = donor.nodes[before][0]
                             self.assertEqual(joint, body.nodes[after][0])
-                            self.assertFalse(re.match(r'(rg|rp|cl)', joint), joint)
+                            self.assertFalse(re.match(r'(rg|rp)', joint), joint)
+                            # Only capes hang from the cloak bones (ChestSkirtBindings); elsewhere a cloak
+                            # bone means the traversal index shifted onto the wrong joint.
+                            if joint in skirts.CLOAK_BONES:
+                                self.assertIn(source, CAPES, joint)
                             self.assertLess(math.dist(donor_pose[joint][0], target_pose[joint][0]), 2e-5)
 
     def test_robe_bodies_of_one_family_share_aliases(self):
