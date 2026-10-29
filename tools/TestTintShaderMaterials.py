@@ -386,7 +386,7 @@ def stock_palette_pixels(game_data: Path):
     return [found[name] for name in names]
 
 
-def check_native_palette_fallback(test, engine, pairs, root: Path):
+def check_native_palette_fallback(test, engine, pairs, root: Path, folded_palette: Path | None = None):
     """Draw all native color IDs/layers/shades against original palette bytes.
 
     Native CreateBodyParts ORs the color byte into a 256-row palette block;
@@ -424,6 +424,8 @@ def check_native_palette_fallback(test, engine, pairs, root: Path):
                 values.append(reference[3] if layer in (2, 3) else 1)
         rgb_expected[rgb] = tuple(values)
     descriptors = material_parameters((root / "sw_tint_mtr/pfh0_robe187.mtr").read_text())
+    if folded_palette is not None:
+        descriptors.append(('float', 'paletteFolded', (1,)))
     defaults = {name: values for _, name, values in descriptors}
     if defaults.get("useNativePalette") != (1,) or any(defaults.get(name) != (-1,) for name in rows):
         raise AssertionError("Reported robe MTR must opt into native palette with ten negative row sentinels")
@@ -443,6 +445,14 @@ def check_native_palette_fallback(test, engine, pairs, root: Path):
         for value in (shade / 255, (layer + .5) / 10)))
     atlas = (root / "sw_item/plt_palette.tga").read_bytes()
     pixels = ct.create_string_buffer(atlas[18:])
+    palette_width, palette_height = 256, 2048
+    if folded_palette is not None:
+        from PIL import Image
+        image = Image.open(folded_palette).convert('RGBA')
+        palette_width, palette_height = image.size
+        if folded_palette.suffix.lower() == '.tga':
+            image = image.transpose(Image.Transpose.FLIP_TOP_BOTTOM)
+        pixels = ct.create_string_buffer(image.tobytes('raw', 'BGRA'))
     output = (ct.c_float * (256 * 10 * 4))()
     checks = 0
     rgb_checks = 0
@@ -454,8 +464,11 @@ def check_native_palette_fallback(test, engine, pairs, root: Path):
         for quality, (vertex, fragment) in product(range(3), pairs):
             # Keep production row, category, shade, and atlas sampling. Only
             # expose palette RGBA before lighting so byte parity is measurable.
+            source = engine.read(fragment)
+            if fragment.startswith('fs_head_'):
+                source = source.replace('#include "inc_hd_tint"', engine.read('inc_hd_tint'))
             source, count = re.subn(r"gl_FragColor\s*=\s*vec4\(FragmentColor\.rgb,\s*outputAlpha\);",
-                "gl_FragColor = paletteColor;", engine.read(fragment))
+                "gl_FragColor = paletteColor;", source)
             if count != 1:
                 raise AssertionError(f"Cannot inspect production palette for {fragment}")
             config = quality, 0, 0, 0, 0
@@ -474,7 +487,7 @@ def check_native_palette_fallback(test, engine, pairs, root: Path):
                     {"tintmapwidth": (256, 0, 0, 0), "tintmapheight": (10, 0, 0, 0)})
                 for unit, width, height, internal, external, kind, data in (
                         (7, 256, 10, 0x8230, 0x8227, 0x1406, mask),
-                        (10, 256, 2048, 0x8058, 0x80E1, 0x1401, pixels)):
+                        (10, palette_width, palette_height, 0x8058, 0x80E1, 0x1401, pixels)):
                     test.active_texture(0x84C0 + unit)
                     test.bind_texture(0x0DE1, unit + 1)
                     test.texture_image(0x0DE1, 0, internal, width, height, 0, external, kind, data)
@@ -653,7 +666,7 @@ def audit_tint_dds(root: Path):
         raise AssertionError("No packed tint DDS assets found")
     for path in paths:
         head_entry = head_textures.get(path.relative_to(root).as_posix(), {})
-        if head_entry.get('codec') in ('COPY', 'COPY_BASE'):
+        if head_entry.get('role') not in (None, 'tint', 'categoryMask'):
             errors = HeadTintAssets.dds_layout_errors(path)
             if errors:
                 raise AssertionError('; '.join(errors))
@@ -662,7 +675,7 @@ def audit_tint_dds(root: Path):
             header = source.read(128)
         txi_path = path.with_suffix(".txi")
         txi = txi_path.read_text() if txi_path.exists() else ""
-        fourcc = b'DXT5' if head_textures.get(path.relative_to(root).as_posix(), {}).get('codec') == 'DXT5' else b'ATI2'
+        fourcc = b'ATI2'
         try:
             tint_dds_layout(header, path.stat().st_size, txi, fourcc)
         except AssertionError as error:
@@ -1124,11 +1137,7 @@ def main():
         cloak_pairs, _, cloak_parameters = production_pairs(root / "sw_pt_cloak")
         compile_engine_pairs(test, engine, cloak_pairs, cloak_parameters)
         check_native_npc_rows(test, engine, pairs, parameters)
-        # Equipment follows master's exact native palette contract. Authored
-        # head profiles preserve their approved appearance and are compared to
-        # their source shaders by TestHeadTintMaterials.py instead.
-        equipment_pairs = [pair for pair in pairs if not pair[1].startswith('fs_head_')]
-        check_native_palette_fallback(test, engine, equipment_pairs, root)
+        check_native_palette_fallback(test, engine, pairs, root)
         draw_engine_materials(test, engine, root)
         for name in ("fs_plt_tinter", "fs_plt_tinter_nm", "fs_plt_hair_nm"):
             shader = (root / "sw_shader" / f"{name}.shd").read_text()

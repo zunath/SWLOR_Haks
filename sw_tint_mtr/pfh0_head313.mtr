@@ -3,12 +3,12 @@ transparency 1
 twosided 1
 customshaderVS vslit_sm
 renderhint NormalTangents
-customshaderFS fs_head_unlit
+customshaderFS fs_head_plain
 texture0 plt_white
 texture7 tm_b72cf9884561d
 texture10 plt_palette
-parameter float tintMapWidth 768.0
-parameter float tintMapHeight 768.0
+parameter float tintMapWidth 1024.0
+parameter float tintMapHeight 1024.0
 parameter float rowSkin 0.000244
 parameter float rowHair 0.086182
 parameter float rowMetal1 0.172119
@@ -45,7 +45,7 @@ parameter float lipU0 0
 parameter float lipUSpan 1
 parameter float lipV0 0
 parameter float lipVSpan 1
-parameter float maskMode 2
+parameter float maskMode 1
 parameter float maskSoftWidth 0.08
 parameter float maskWrapUV 0
 parameter float paletteFolded 0

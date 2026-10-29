@@ -140,11 +140,12 @@ vec4 HeadTint(float layer, float g, vec2 uv, vec2 size)
         else if (layer > 2.5) referenceRow = 0.258056640625;
         else if (layer > 1.5) referenceRow = 0.172119140625;
         else if (layer > 0.5) referenceRow = 0.086181640625;
-        vec3 reference = HeadPalette(vec2(paletteU,referenceRow)).rgb;
+        vec4 reference = HeadPalette(vec2(paletteU,referenceRow));
         vec3 midpoint = HeadPalette(vec2(128.5/256.0,referenceRow)).rgb;
         vec3 luminance = vec3(0.2126,0.7152,0.0722);
-        float shade = max(dot(reference,luminance)/max(dot(midpoint,luminance),1.0/255.0),0.0);
-        color = vec4(clamp(selected*shade,0.0,1.0),1.0);
+        float shade = max(dot(reference.rgb,luminance)/max(dot(midpoint,luminance),1.0/255.0),0.0);
+        color = vec4(clamp(selected*shade,0.0,1.0),
+                     (layer>1.5 && layer<3.5) ? reference.a : 1.0);
     }
     if (layer < 0.5) color.rgb *= skinGain;
     if (layer > 0.5 && layer < 1.5)

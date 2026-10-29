@@ -4,11 +4,9 @@ from __future__ import annotations
 
 import argparse
 import hashlib
-import io
 import json
 from pathlib import Path
 import re
-import subprocess
 import functools
 import struct
 
@@ -18,7 +16,7 @@ ROOT = Path(__file__).resolve().parents[1]
 MANIFEST = Path(__file__).with_suffix('.json')
 PROFILES = {
     'fs_head_legacy': (0, 0, 0, 0, 1),
-    'fs_head_unlit': (0, 0, 0, 0, 0),
+    'fs_head_plain': (0, 0, 0, 0, 0),
     'fs_head_mapped': (1, 1, 0, 0, 0),
     'fs_head_hair': (1, 1, 0, 0, 1),
     'fs_head_full': (1, 1, 1, 1, 1),
@@ -60,45 +58,8 @@ def feature_defaults() -> dict[str, float]:
             if not name.startswith('row')}
 
 
-def encode_texture(source: bytes, codec: str) -> bytes:
-    if codec in ('TGA', 'COPY'):
-        return source
-    if codec == 'COPY_BASE':
-        encoded = bytearray(source)
-        struct.pack_into('<I', encoded, 8, 0x000A1007)
-        struct.pack_into('<I', encoded, 20, len(encoded) - 128)
-        struct.pack_into('<I', encoded, 28, 1)
-        return bytes(encoded)
-    if codec != 'DXT5':
-        raise ValueError(f'Unsupported head texture codec: {codec}')
-    with Image.open(io.BytesIO(source)) as image:
-        output = io.BytesIO()
-        image.convert('RGBA').save(output, format='DDS', pixel_format='DXT5')
-    # The NWN loader requires both an explicit base-only header and mipmap 0
-    # in the TXI; Pillow otherwise leaves the mip count ambiguous.
-    encoded = bytearray(output.getvalue())
-    struct.pack_into('<I', encoded, 8, 0x000A1007)
-    struct.pack_into('<I', encoded, 20, len(encoded) - 128)
-    struct.pack_into('<I', encoded, 28, 1)
-    return bytes(encoded)
 
 
-def source_texture(manifest: dict, entry: dict, batch=None) -> bytes:
-    revision = manifest['sourceCommit']
-    if batch is None:
-        source = subprocess.check_output(['git', '-C', str(ROOT), 'show',
-                                          f"{revision}:{entry['source']}"])
-    else:
-        batch.stdin.write(f"{revision}:{entry['source']}\n".encode())
-        batch.stdin.flush()
-        info = batch.stdout.readline().split()
-        if len(info) != 3 or info[1] != b'blob':
-            raise ValueError(f"Original head source Git blob is unavailable: {entry['source']}")
-        source = batch.stdout.read(int(info[2]))
-        batch.stdout.read(1)
-    if hashlib.sha256(source).hexdigest() != entry['sourceSha256']:
-        raise ValueError(f"Original head texture checksum differs: {entry['source']}")
-    return source
 
 
 def dds_layout_errors(path: Path) -> list[str]:
@@ -147,48 +108,6 @@ def model_rows(root: Path = ROOT) -> list[tuple[str, str, list[int]]]:
             for model, material, layers in manifest['catalogRows'] + manifest.get('compatibility', {}).get('rows', [])]
 
 
-def refresh_catalog_context() -> None:
-    """Revalidate unchanged robe outputs after this head-only catalog integration.
-
-    Never accept a changed robe output, material, pose, animation, selection or
-    compiler dependency. Only the three expected catalog/tool fingerprints may
-    differ before the existing complete robe validator is run again.
-    """
-    import GenerateRobeRgbModels as robes
-    # This operation only revalidates the catalog already submitted with these
-    # heads. It cannot bless unrelated HAK configuration or catalog edits.
-    revision = load_manifest()['sourceCommit']
-    for relative in ('hakbuilder.json', 'sw_2da/tintmap.2da'):
-        source = subprocess.check_output(['git', '-C', str(ROOT), 'show', f'{revision}:{relative}'])
-        current = (ROOT / relative).read_bytes()
-        same = ([line.split() for line in source.splitlines()] == [line.split() for line in current.splitlines()]
-                if relative.endswith('.2da') else source.replace(b'\r\n', b'\n') == current.replace(b'\r\n', b'\n'))
-        if not same:
-            raise ValueError(f'Cannot refresh context for an unrelated change: {relative}')
-    allowed = {'hakbuilder.json', 'sw_2da/tintmap.2da', 'tools/GenerateTintMapAssets.py'}
-    errors = robes.check()
-    if not errors:
-        return
-    expected = {f'Robe RGB input/output changed: {relative}; regenerate and validate' for relative in allowed}
-    if not set(errors) <= expected:
-        raise ValueError('Cannot refresh robe catalog context: ' + '; '.join(errors))
-    original = robes.MANIFEST.read_bytes()
-    manifest = json.loads(original)
-    for relative in allowed:
-        digest = robes.file_digest(ROOT / relative)
-        if relative.endswith('.py'):
-            manifest.setdefault('validation_tool_files', {})[relative] = digest
-        else:
-            manifest['files'][relative] = digest
-    try:
-        robes.MANIFEST.write_text(json.dumps(manifest, indent=2) + '\n', encoding='utf-8', newline='\n')
-        remaining = robes.check()
-        if remaining:
-            raise ValueError('Robe revalidation failed: ' + '; '.join(remaining))
-    except BaseException:
-        robes.MANIFEST.write_bytes(original)
-        raise
-    print('Robe outputs, poses, compiler inputs and selections revalidated; refreshed only head catalog context.')
 
 
 def validate() -> list[str]:
@@ -218,12 +137,33 @@ def validate() -> list[str]:
             with Image.open(path) as image:
                 if list(image.size) != entry['size']:
                     errors.append(f'{relative}: authored texture dimensions differ')
+                if any(side < 1 or side & (side - 1) for side in image.size):
+                    errors.append(f'{relative}: texture dimensions must be powers of two')
+                if entry.get('codec') == 'BC3' and image.convert('RGBA').getchannel('A').getextrema()[0] == image.convert('RGBA').getchannel('A').getextrema()[1]:
+                    errors.append(f'{relative}: DXT5 wastes alpha on an opaque or constant-alpha map')
+            role = entry.get('role')
+            allowed = {'normal': {'BC5'}, 'specular': {'BC1', 'BC4'},
+                       'roughness': {'BC4'}, 'mask': {'BC4', 'BC5'},
+                       'tint': {'BC5'}, 'categoryMask': {'BC5'},
+                       'color': {'BC1', 'BC3'}, 'palette': {'TGA'}}
+            if role not in allowed or entry.get('codec') not in allowed[role]:
+                errors.append(f'{relative}: texture codec does not match its shader role')
+            if role == 'normal' and max(entry['size']) > 512:
+                errors.append(f'{relative}: head normal map exceeds 512 pixels')
             if path.stat().st_size > 1572864:
                 errors.append(f'{relative}: exceeds the 1.5 MiB head texture budget')
             if path.suffix == '.tga' and not entry.get('exception'):
                 errors.append(f'{relative}: lossless TGA requires a documented exception')
             if path.suffix == '.dds':
                 errors.extend(dds_layout_errors(path))
+                data = path.read_bytes()
+                codecs = {'BC1': b'DXT1', 'BC3': b'DXT5', 'BC4': b'ATI1', 'BC5': b'ATI2'}
+                if data[84:88] != codecs.get(entry.get('codec')):
+                    errors.append(f'{relative}: DDS FourCC differs from its recorded codec')
+                levels = struct.unpack_from('<I', data, 28)[0]
+                expected_levels = 1 if role in ('tint', 'categoryMask') else max(entry['size']).bit_length()
+                if levels != expected_levels or levels != entry.get('mipLevels'):
+                    errors.append(f'{relative}: mip chain does not match its shader role')
     for relative, digest in manifest.get('auxiliary', {}).items():
         path = ROOT / relative
         if not path.is_file() or hashlib.sha256(path.read_bytes()).hexdigest() != digest:
@@ -253,6 +193,14 @@ def validate() -> list[str]:
             errors.append(f'{model}: compiled head geometry differs from the approved catalog')
     import GenerateTintMapAssets as tint
     from ModelLodAssets import ModelPath
+    for model, limit in manifest.get('modelBudgets', {}).items():
+        path = ROOT / 'sw_pt_head' / (model + '.mdl')
+        data = path.read_bytes()
+        fields = tint.read_binary_model_material_fields(path, data)
+        triangles = sum(struct.unpack_from('<I', data, texture_offset - tint.MESH_TEXTURE0_OFFSET + 12)[0]
+                        for texture_offset, _, _, _ in fields)
+        if not re.fullmatch(r'p[fm][heodz]0_head\d{3}', model) or triangles > limit or limit > 10000:
+            errors.append(f'{model}: {triangles} triangles exceeds the playable head budget of {limit}')
     for model, digest in compatibility['models'].items():
         path = ModelPath(ROOT / 'sw_pt_head' / (model + '.mdl'))
         if not re.fullmatch(r'p[fm][a-z]2_head\d{3}', model) or not path.is_file() or hashlib.sha256(path.read_bytes()).hexdigest() != digest:
@@ -277,22 +225,14 @@ def validate() -> list[str]:
     return errors
 
 
-def generate(textures: bool = False) -> None:
+def generate() -> None:
     for profile in PROFILES:
         (ROOT / 'sw_shader' / (profile + '.shd')).write_text(shader_source(profile), encoding='ascii', newline='\n')
-    for name, entry in load_manifest()['materials'].items():
+    manifest = load_manifest()
+    for name, entry in manifest['materials'].items():
         (ROOT / 'sw_tint_mtr' / (name + '.mtr')).write_text(material_source(entry), encoding='ascii', newline='\n')
-    if textures:
-        manifest = load_manifest()
-        with subprocess.Popen(['git', '-C', str(ROOT), 'cat-file', '--batch'],
-                              stdin=subprocess.PIPE, stdout=subprocess.PIPE) as batch:
-            for relative, entry in manifest['textures'].items():
-                output = encode_texture(source_texture(manifest, entry, batch), entry['codec'])
-                if hashlib.sha256(output).hexdigest() != entry['sha256']:
-                    raise ValueError(f'{relative}: texture encoder differs from the recorded output')
-                (ROOT / relative).write_bytes(output)
-        for relative, text in manifest.get('auxiliaryText', {}).items():
-            (ROOT / relative).write_text(text, encoding='ascii', newline='\n')
+    for relative, text in manifest.get('auxiliaryText', {}).items():
+        (ROOT / relative).write_text(text, encoding='ascii', newline='\n')
 
 
 def main() -> None:
@@ -300,22 +240,14 @@ def main() -> None:
     action = parser.add_mutually_exclusive_group(required=True)
     action.add_argument('--apply', action='store_true')
     action.add_argument('--check', action='store_true')
-    parser.add_argument('--textures', action='store_true',
-                        help='with --apply, reproduce authored textures from the recorded Git source commit')
-    parser.add_argument('--refresh-catalog-context', action='store_true',
-                        help='with --apply, fully revalidate unchanged robes and refresh only head catalog context fingerprints')
     args = parser.parse_args()
     if args.apply:
-        generate(args.textures)
-    elif args.textures or args.refresh_catalog_context:
-        parser.error('--textures and --refresh-catalog-context require --apply')
+        generate()
     errors = validate()
     for error in errors:
         print(error)
     if errors:
         raise SystemExit(1)
-    if args.refresh_catalog_context:
-        refresh_catalog_context()
     manifest = load_manifest()
     print(f"Head assets verified: {len(PROFILES)} lighting profiles, {len(manifest['materials'])} material profiles.")
 
