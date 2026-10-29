@@ -5,4 +5,10 @@
 
 # DDS texture resources are binary in every HAK.
 *.dds binary
+*.tga binary
+/sw_shader/*.shd text eol=lf
+/sw_tint_mtr/*.mtr text eol=lf
+/sw_tint2/*.txi text eol=lf
+/sw_pt_head/f317teeth.mtr text eol=lf
+/sw_pt_head/hc_bb5392ba5b559.mtr text eol=lf
 *.lod text eol=lf

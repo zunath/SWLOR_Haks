@@ -27,6 +27,7 @@ from ModelLodAssets import ModelPath, model_paths
 
 import numpy as np
 import HavocGlowAssets
+import HeadTintAssets
 
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
@@ -1699,6 +1700,11 @@ def build_model_material_plan(
     restored_bindings: dict[Path, dict[str, str]] = {}
 
     for model, path in sorted(models.items()):
+        head_catalog = HeadTintAssets.catalog(REPOSITORY_ROOT)
+        if model in head_catalog['models'] or model in head_catalog.get('compatibility', {}).get('models', {}):
+            # These compiled heads have an explicit, checksum-validated authoring
+            # catalog; inferring PLT aliases here would replace their masks.
+            continue
         scope = model_material_scope(model, path)
         references = find_model_tint_material_references(path, materials, alias_sources)
         native_choices = native_modular_material_choices(path, entries)
@@ -1837,6 +1843,8 @@ def build_model_material_plan(
     }
 
     rows.update(HavocGlowAssets.model_rows(models, read_model_material_bindings))
+    rows.update((model, material, tuple(layers))
+                for model, material, layers in HeadTintAssets.model_rows(REPOSITORY_ROOT))
     _NATIVE_ATTACHMENT_MATERIALS = native_attachment_materials
     _NATIVE_ATTACHMENT_SOURCES = native_attachment_sources
     return (
@@ -2265,6 +2273,10 @@ def update_mtr(
     height: int,
     source_material: str | None = None,
 ) -> None:
+    authored = HeadTintAssets.catalog(REPOSITORY_ROOT)['materials'].get(material)
+    if authored is not None:
+        path.write_text(HeadTintAssets.material_source(authored), encoding='utf-8', newline='\n')
+        return
     profile = _PROFILE_ALIASES.get(material)
     text = tint_material_text(path, material, texture, width, height, source_material, profile,
                               native_palette=material in _NATIVE_ATTACHMENT_MATERIALS)
@@ -2481,6 +2493,8 @@ def read_preserved_2da_material_sources(
         if len(columns) < 4 or not columns[0].isdigit():
             continue
         material = columns[2].lower()
+        if material in HeadTintAssets.catalog(REPOSITORY_ROOT)['materials']:
+            continue
         source = alias_sources.get(material, material)
         if source not in entries:
             # Generation is also the repair path for a stale compatibility row.
@@ -3017,6 +3031,8 @@ def remove_orphaned_outputs(entries: dict[str, dict[str, object]]) -> int:
         packed_dds_path(material, entry).resolve()
         for material, entry in entries.items()
     }
+    expected_outputs.update(p.resolve() for p in HeadTintAssets.owned_paths(REPOSITORY_ROOT)
+                            if p.suffix == '.dds')
     removed_outputs = 0
     for directory in TINT_DIRECTORIES:
         for path in directory.glob("*.dds"):
@@ -3034,6 +3050,8 @@ def remove_orphaned_materials(
         mtr_path(material).resolve()
         for material in set(entries) | (aliases or set())
     }
+    expected_materials.update(mtr_path(name).resolve()
+                              for name in HeadTintAssets.catalog(REPOSITORY_ROOT)['materials'])
     removed_materials = 0
     for path in OUTPUT_MTR_DIRECTORY.glob("*.mtr"):
         if path.resolve() not in expected_materials:
@@ -3636,6 +3654,10 @@ def audit() -> None:
     entries = load_source_manifest()
     import GenerateAuthoredDiffuseTintMaps
     errors: list[str] = GenerateAuthoredDiffuseTintMaps.validate(entries)
+    errors.extend(HeadTintAssets.validate())
+    head_materials = HeadTintAssets.catalog(REPOSITORY_ROOT)['materials']
+    head_rows = {(model, material): layers
+                 for model, material, layers in HeadTintAssets.model_rows(REPOSITORY_ROOT)}
     errors.extend(HavocGlowAssets.validate(REPOSITORY_ROOT))
     if (REPOSITORY_ROOT / "sw_2da" / "roberender.2da").is_file():
         import GenerateRobeRgbModels
@@ -3799,6 +3821,10 @@ def audit() -> None:
                 if decoded_layer_hashes[packed_hash_key] != expected_layer_hash:
                     errors.append(f"{model}: packed DDS changes one or more categorical tint layers")
 
+        if model in head_materials:
+            # The head validator checks the exact MTR, control-map bytes and
+            # addressable compiled model binding rather than the old PLT recipe.
+            continue
         material_path = mtr_path(model)
         if not material_path.exists():
             errors.append(f"{model}: missing MTR")
@@ -3920,7 +3946,10 @@ def audit() -> None:
         if len(material) > 16 or not material.isascii():
             errors.append(f"{model}: invalid material resref '{material}' in tint catalog")
         source = active_aliases.get(material, material)
-        if material in HavocGlowAssets.EMISSIVE_TINT_LAYERS:
+        if (model, material) in head_rows:
+            if layers != head_rows[(model, material)]:
+                errors.append(f'{model}: authored head channel list differs for {material}')
+        elif material in HavocGlowAssets.EMISSIVE_TINT_LAYERS:
             if layers != HavocGlowAssets.EMISSIVE_TINT_LAYERS[material]:
                 errors.append(f'{model}: incorrect emissive tint layers for {material}')
         elif source not in entries:
@@ -3952,6 +3981,10 @@ def audit() -> None:
                 errors.append(f"tintmap.2da contains duplicate model/material row {model}/{material}")
             seen_output_pairs.add(pair)
             source = active_aliases.get(material, material)
+            if (model, material) in head_rows:
+                if columns[3] != ','.join(map(str, head_rows[(model, material)])):
+                    errors.append(f'tintmap.2da row {physical_index}: authored head channels differ')
+                continue
             if material in HavocGlowAssets.EMISSIVE_TINT_LAYERS:
                 if columns[3] != ','.join(map(str, HavocGlowAssets.EMISSIVE_TINT_LAYERS[material])):
                     errors.append(f'tintmap.2da row {physical_index}: incorrect emissive tint layers')
@@ -4032,6 +4065,8 @@ def audit() -> None:
                 )
 
     expected_outputs = {packed_dds_path(model, entry).resolve() for model, entry in entries.items()}
+    head_resources = HeadTintAssets.owned_paths(REPOSITORY_ROOT)
+    expected_outputs.update(p.resolve() for p in head_resources if p.suffix == '.dds')
     actual_outputs = {
         path.resolve()
         for directory in TINT_DIRECTORIES
@@ -4041,6 +4076,7 @@ def audit() -> None:
     if unexpected_outputs:
         errors.append(f"{len(unexpected_outputs)} orphaned packed DDS resources remain")
     expected_settings = {path.with_suffix(".txi") for path in expected_outputs}
+    expected_settings.update(p.resolve() for p in head_resources if p.suffix == '.txi')
     actual_settings = {
         path.resolve()
         for directory in TINT_DIRECTORIES
@@ -4053,6 +4089,7 @@ def audit() -> None:
         mtr_path(material).resolve()
         for material in set(entries) | set(active_aliases)
     }
+    expected_materials.update(mtr_path(name).resolve() for name in head_materials)
     actual_materials = {path.resolve() for path in OUTPUT_MTR_DIRECTORY.glob("*.mtr")}
     unexpected_materials = actual_materials - expected_materials
     if unexpected_materials:

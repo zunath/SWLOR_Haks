@@ -1,8 +1,8 @@
 customshaderVS vslit_sm
 renderhint NormalTangents
-customshaderFS fs_plt_tinter
+customshaderFS fs_head_legacy
 texture0 plt_white
-texture7 tm_828cb87db047c
+texture7 tm_878387900f751
 texture10 plt_palette
 parameter float tintMapWidth 1024.0
 parameter float tintMapHeight 512.0
@@ -16,3 +16,44 @@ parameter float rowLeath1 0.429932
 parameter float rowLeath2 0.429932
 parameter float rowTat1 0.515869
 parameter float rowTat2 0.515869
+parameter float alphaCutoff 0.3
+parameter float clampEyeLayer -1
+parameter float clampEyeLayer2 -1
+parameter float detailDiffuse 0
+parameter float detailGlowChannel 0
+parameter float detailGlowGain 1
+parameter float eyeContour 0
+parameter float forceOpaque 0
+parameter float glowCompression 0.32
+parameter float glowGain 1.75
+parameter float glowHueGain 0.16
+parameter float glowLayerFromMask 0
+parameter float glowMaxLayer -1
+parameter float glowMinLayer -1
+parameter float glowWholeSurface 0
+parameter float hairFilter 0
+parameter float hairGain 1
+parameter float hairMatte 0
+parameter float hairReflectivity 0
+parameter float hairSaturation 1
+parameter float hairShadePower 1
+parameter float lipMode 0
+parameter float lipU0 0
+parameter float lipUSpan 1
+parameter float lipV0 0
+parameter float lipVSpan 1
+parameter float maskMode 0
+parameter float maskSoftWidth 0.08
+parameter float maskWrapUV 0
+parameter float paletteFolded 0
+parameter float scalpEndV 0.52
+parameter float scalpMaxU 0.49
+parameter float scalpShadeBase 0.070588235294
+parameter float scalpShadeScale 1
+parameter float scalpStartV 0.45
+parameter float skinGain 1
+parameter float skinNeutralShade 0
+parameter float texture9Cutoff 0.3
+parameter float useNativePalette 0
+parameter float useTexture1Alpha 0
+parameter float useTexture9Alpha 0

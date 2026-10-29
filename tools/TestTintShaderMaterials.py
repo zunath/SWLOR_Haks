@@ -209,7 +209,7 @@ def production_pairs(material_root: Path):
     return sorted(pairs), count, parameters
 
 
-def linked_material_parameters(test, program, parameters):
+def linked_material_parameters(test, program, parameters, source=None):
     count, maximum = ct.c_int(), ct.c_int()
     test.program_value(program, 0x8B86, ct.byref(count))  # GL_ACTIVE_UNIFORMS
     test.program_value(program, 0x8B87, ct.byref(maximum))
@@ -220,11 +220,18 @@ def linked_material_parameters(test, program, parameters):
         test.active_uniform(program, index, len(name), None, ct.byref(size), ct.byref(kind), name)
         uniforms[name.value.decode()] = kind.value, size.value
     for kind, name, components in sorted({(kind, name, len(values)) for kind, name, values in parameters}):
+        expected = {("float", 1): 0x1406, ("float", 4): 0x8B52, ("int", 1): 0x1404}.get((kind, components))
         if name not in uniforms or test.location(program, name.encode()) < 0:
+            # Lighting-quality macros can optimize out a declared shared-profile
+            # option. Still reject unknown names and scalar/vector mismatches.
+            if source is not None:
+                declaration = re.search(r"\buniform\s+(float|int|vec4)\s+" + re.escape(name) + r"\s*(?=[;=])", source)
+                declared = {"float": 0x1406, "vec4": 0x8B52, "int": 0x1404}.get(declaration[1]) if declaration else None
+                if expected is not None and declared == expected:
+                    continue
             raise AssertionError(f"MTR parameter does not resolve to an active shader uniform: {name}")
         # The installed client dispatches one float to glUniform1f and four to
         # glUniform4fv; scalar GLSL uniforms reject the latter with 0x502.
-        expected = {("float", 1): 0x1406, ("float", 4): 0x8B52, ("int", 1): 0x1404}.get((kind, components))
         actual, array_size = uniforms[name]
         if expected is None or actual != expected or array_size != 1:
             raise AssertionError(f"MTR parameter {name}: {kind} with {components} values does not match "
@@ -253,6 +260,23 @@ def upload_material_parameters(test, program, parameters, native_overrides=None,
             error = test.error()
             if error:
                 raise AssertionError(f"MTR upload {name}, {len(values)} components: OpenGL error {error:#x}")
+
+
+def check_optimized_parameter_controls(test):
+    source = '#version 120\nuniform float dormantOption; void main(){gl_FragColor=vec4(1.0);}'
+    program = test.program(source)
+    try:
+        linked_material_parameters(test, program, [('float', 'dormantOption', (0.0,))], source)
+        for parameter in [('float', 'dormantOption', (0.0, 0.0, 0.0, 0.0)),
+                          ('float', 'misspelledOption', (0.0,))]:
+            try:
+                linked_material_parameters(test, program, [parameter], source)
+            except AssertionError:
+                continue
+            raise AssertionError(f'Inactive parameter negative control unexpectedly passed: {parameter}')
+    finally:
+        test.delete_program(program)
+    print('Optimized parameter controls passed: declared scalar accepted; wrong arity and unknown name rejected.', flush=True)
 
 
 def native_npc_rows(npc):
@@ -553,7 +577,8 @@ def compile_engine_pairs(test, engine, pairs, parameters):
                     f"fragment-lighting={lighting}, gamma={gamma}, keyhole={keyhole}, "
                     f"no-discard={discard}:\n{error}") from error
             try:
-                linked_material_parameters(test, program, parameters[vertex, fragment])
+                linked_material_parameters(test, program, parameters[vertex, fragment],
+                    engine.expand(fragment) + engine.expand(vertex))
                 upload_material_parameters(test, program, parameters[vertex, fragment])
             finally:
                 test.delete_program(program)
@@ -595,7 +620,7 @@ def compile_engine_pairs(test, engine, pairs, parameters):
     return checks
 
 
-def tint_dds_layout(header: bytes, size: int, txi: str):
+def tint_dds_layout(header: bytes, size: int, txi: str, fourcc: bytes = b'ATI2'):
     """Reject the ambiguous base-only DDS inputs that NWN uploaded as mip chains.
 
     The crash dump showed glCompressedTexImage2D reading mip level 1 beyond the
@@ -603,8 +628,8 @@ def tint_dds_layout(header: bytes, size: int, txi: str):
     BOTH an explicit count and the texture policy that disables mip uploading.
     A valid generic DDS header alone does not establish NWN loader safety.
     """
-    if len(header) != 128 or header[:4] != b"DDS " or header[84:88] != b"ATI2":
-        raise AssertionError("Tint texture must have a complete ATI2 DDS header")
+    if fourcc not in (b'ATI2', b'DXT5') or len(header) != 128 or header[:4] != b"DDS " or header[84:88] != fourcc:
+        raise AssertionError(f"Texture must have a complete {fourcc.decode()} DDS header")
     flags, height, width, linear_size, _, count = struct.unpack_from("<6I", header, 8)
     if not flags & 0x20000 or count != 1:
         raise AssertionError("Base-only tint DDS requires DDSD_MIPMAPCOUNT and explicit mipmap count 1")
@@ -612,7 +637,7 @@ def tint_dds_layout(header: bytes, size: int, txi: str):
         raise AssertionError("Tint DDS dimensions must be positive")
     payload_size = ((width + 3) // 4) * ((height + 3) // 4) * 16
     if linear_size != payload_size or size != 128 + payload_size:
-        raise AssertionError("Tint DDS declared base-level dimensions must exactly cover its BC5 payload")
+        raise AssertionError("DDS declared base-level dimensions must exactly cover its block payload")
     directives = re.findall(r"^\s*mipmap\s+(\d+)\s*$", txi, re.MULTILINE | re.IGNORECASE)
     if directives != ["0"]:
         raise AssertionError("Base-only tint DDS requires a sibling TXI with one mipmap 0 directive")
@@ -620,17 +645,26 @@ def tint_dds_layout(header: bytes, size: int, txi: str):
 
 
 def audit_tint_dds(root: Path):
+    import HeadTintAssets
+    head_textures = HeadTintAssets.catalog(root)['textures']
     paths = sorted(path for directory in ("sw_tint0", "sw_tint1", "sw_tint2")
         for path in (root / directory).glob("*.dds"))
     if not paths:
         raise AssertionError("No packed tint DDS assets found")
     for path in paths:
+        head_entry = head_textures.get(path.relative_to(root).as_posix(), {})
+        if head_entry.get('codec') in ('COPY', 'COPY_BASE'):
+            errors = HeadTintAssets.dds_layout_errors(path)
+            if errors:
+                raise AssertionError('; '.join(errors))
+            continue
         with path.open("rb") as source:
             header = source.read(128)
         txi_path = path.with_suffix(".txi")
         txi = txi_path.read_text() if txi_path.exists() else ""
+        fourcc = b'DXT5' if head_textures.get(path.relative_to(root).as_posix(), {}).get('codec') == 'DXT5' else b'ATI2'
         try:
-            tint_dds_layout(header, path.stat().st_size, txi)
+            tint_dds_layout(header, path.stat().st_size, txi, fourcc)
         except AssertionError as error:
             raise AssertionError(f"Unsafe NWN tint texture {path}: {error}") from error
     # Prove the former count-zero/default-mipmap combination cannot get through
@@ -640,7 +674,7 @@ def audit_tint_dds(root: Path):
     struct.pack_into("<I", zero_count, 28, 0)
     for invalid_header, invalid_txi in ((zero_count, txi), (header, ""), (header, "mipmap 1\n")):
         try:
-            tint_dds_layout(invalid_header, path.stat().st_size, invalid_txi)
+            tint_dds_layout(invalid_header, path.stat().st_size, invalid_txi, fourcc)
         except AssertionError:
             continue
         raise AssertionError("Unsafe DDS mipmap negative control unexpectedly passed")
@@ -1016,7 +1050,7 @@ class MaterialTest:
             for shader in shaders:
                 self.delete_shader(shader)
 
-    def sample(self, program: int, bound: int, alpha: float, *, mapped=False, overrides=False, color=False, rgb=None, authored_diffuse=None):
+    def sample(self, program: int, bound: int, alpha: float, *, mapped=False, overrides=False, color=False, rgb=None, authored_diffuse=None, palette_layer=None):
         self.use(program)
         self.scalar(self.location(program, b"useAuthoredDiffuse"), float(authored_diffuse is not None))
         for name, value in {"texture0Bound": bound, "texture2Bound": int(mapped),
@@ -1048,6 +1082,8 @@ class MaterialTest:
             encoded = (1 + packed / 8388608 if packed < 8388608
                        else 2 + (packed - 8388608) / 4194304)
             self.scalar(self.location(program, rows[layer].encode()), encoded)
+        if rgb is not None or palette_layer is not None:
+            layer = rgb[0] if rgb is not None else palette_layer
             self.active_texture(0x84C0 + 7)
             self.bind_texture(0x0DE1, 8)
             pixels = (ct.c_float * 4)(128 / 255, (layer + 0.5) / 10, 0, 1)
@@ -1082,12 +1118,17 @@ def main():
     try:
         renderer = gl.function("glGetString", ct.c_char_p, ct.c_uint)(0x1F01).decode()
         test = MaterialTest(gl)
+        check_optimized_parameter_controls(test)
         print(f"Validating {len(pairs)} production shader pairs from {materials} generated MTRs on {renderer}.", flush=True)
         compile_engine_pairs(test, engine, pairs, parameters)
         cloak_pairs, _, cloak_parameters = production_pairs(root / "sw_pt_cloak")
         compile_engine_pairs(test, engine, cloak_pairs, cloak_parameters)
         check_native_npc_rows(test, engine, pairs, parameters)
-        check_native_palette_fallback(test, engine, pairs, root)
+        # Equipment follows master's exact native palette contract. Authored
+        # head profiles preserve their approved appearance and are compared to
+        # their source shaders by TestHeadTintMaterials.py instead.
+        equipment_pairs = [pair for pair in pairs if not pair[1].startswith('fs_head_')]
+        check_native_palette_fallback(test, engine, equipment_pairs, root)
         draw_engine_materials(test, engine, root)
         for name in ("fs_plt_tinter", "fs_plt_tinter_nm", "fs_plt_hair_nm"):
             shader = (root / "sw_shader" / f"{name}.shd").read_text()
