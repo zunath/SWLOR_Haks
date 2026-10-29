@@ -67,6 +67,37 @@ class EmoteFlapTrackTests(unittest.TestCase):
                     # The dwarf and half-orc roots number their flaps apart, so the new tracks reach nothing there.
                     self.assertEqual({}, numbered)
 
+    def test_only_the_rebound_skirts_hang_from_the_flaps(self):
+        """The rest keys change only parts skinned to the flaps: the skirts ChestSkirtBindings rebinds.
+
+        Belt 226 and pelvis 198, restored to their original leg weights, no longer use them.
+        """
+        rebound = set(json.loads(skirts.MANIFEST.read_text())['models'])
+        users = set()
+        for name, path in tint.find_active_models().items():
+            if not (name[:2] in ('pm', 'pf') and name[2] in 'he' and name[3] == '0' and name[4:5] == '_'):
+                continue
+            data = path.read_bytes()
+            if not mdl.binary(data) or not mdl.external_skeleton_name(data):
+                continue
+            try:
+                bones, _ = skirts.skeleton(data)
+                skin_list = list(skirts.skins(data, bones))
+            except ValueError:
+                continue  # A bone table that does not match its skeleton (Bothan female chest 310) binds nothing reliably.
+            for skin in skin_list:
+                # Read the bones straight from the palette: some exports' weights do not sum to one.
+                weighted = {skin['bones'][slot]
+                            for vertex in range(skin['count'])
+                            for weight, slot in zip(struct.unpack_from('<4f', data, skin['weights'] + vertex * (skin['stride'] or 16)),
+                                                    struct.unpack_from('<4h', data, skin['indices'] + vertex * (skin['stride'] or 8)))
+                            if weight and 0 <= slot < 17}
+                if weighted & set(self.parts):
+                    users.add(name)
+        self.assertTrue(users)
+        self.assertLessEqual(users, rebound)
+        self.assertFalse({name for name in users if name.endswith(('_belt226', '_pelvis198'))})
+
     def test_parade_rest_hangs_the_flaps_straight_under_the_hips(self):
         """In /paraderest the body stands straight; the flaps must hang from it, not lean as in the idle before it."""
         for root in ('pmh0', 'pfh0'):
