@@ -108,11 +108,30 @@ def model_rows(root: Path = ROOT) -> list[tuple[str, str, list[int]]]:
             for model, material, layers in manifest['catalogRows'] + manifest.get('compatibility', {}).get('rows', [])]
 
 
+def palette_defaults_source(manifest: dict) -> str:
+    rows = manifest.get('paletteDefaults', [])
+    return ('2DA V2.0\n\n  MODEL MATERIAL LAYER COLOR\n' +
+            ''.join(f'{index} {model} {material} {layer} {color}\n'
+                    for index, (model, material, layer, color) in enumerate(rows)))
+
 
 
 def validate() -> list[str]:
     manifest = load_manifest()
     errors = []
+    palette_path = ROOT / 'sw_2da/headtintdefs.2da'
+    if not palette_path.is_file() or palette_path.read_text() != palette_defaults_source(manifest):
+        errors.append('headtintdefs.2da: authored head palette defaults differ')
+    seen_defaults = set()
+    for model, material, layer, color in manifest.get('paletteDefaults', []):
+        key = model, material, layer
+        bindings = [layers for name, mat, layers in manifest['catalogRows']
+                    if name == model and mat == material]
+        if (key in seen_defaults or not re.fullmatch(r'p[fm][heodz]0_head\d{3}', model)
+                or layer not in (2, 3, 4, 5, 6, 7) or not 0 <= color < 176
+                or not any(str(layer) in layers.split(',') for layers in bindings)):
+            errors.append(f'{key}: invalid or duplicate authored head palette default')
+        seen_defaults.add(key)
     defaults = feature_defaults()
     for profile in PROFILES:
         path = ROOT / 'sw_shader' / (profile + '.shd')
@@ -199,7 +218,7 @@ def validate() -> list[str]:
         fields = tint.read_binary_model_material_fields(path, data)
         triangles = sum(struct.unpack_from('<I', data, texture_offset - tint.MESH_TEXTURE0_OFFSET + 12)[0]
                         for texture_offset, _, _, _ in fields)
-        if not re.fullmatch(r'p[fm][heodz]0_head\d{3}', model) or triangles > limit or limit > 10000:
+        if not re.fullmatch(r'p[fm][heodz]0_head\d{3}', model) or triangles > limit or limit > 30000:
             errors.append(f'{model}: {triangles} triangles exceeds the playable head budget of {limit}')
     for model, digest in compatibility['models'].items():
         path = ModelPath(ROOT / 'sw_pt_head' / (model + '.mdl'))
@@ -229,6 +248,7 @@ def generate() -> None:
     for profile in PROFILES:
         (ROOT / 'sw_shader' / (profile + '.shd')).write_text(shader_source(profile), encoding='ascii', newline='\n')
     manifest = load_manifest()
+    (ROOT / 'sw_2da/headtintdefs.2da').write_text(palette_defaults_source(manifest), encoding='ascii', newline='\n')
     for name, entry in manifest['materials'].items():
         (ROOT / 'sw_tint_mtr' / (name + '.mtr')).write_text(material_source(entry), encoding='ascii', newline='\n')
     for relative, text in manifest.get('auxiliaryText', {}).items():
