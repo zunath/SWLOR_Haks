@@ -13,6 +13,8 @@ python -B tools/GeneratePartSkinModels.py --check
 if errorlevel 1 exit /b %errorlevel%
 python -B tools/GenerateRobeShinModels.py --check
 if errorlevel 1 exit /b %errorlevel%
+python -B tools/SkinPickBounds.py --check
+if errorlevel 1 exit /b %errorlevel%
 python -B tools/CheckNwsyncResources.py
 if errorlevel 1 exit /b %errorlevel%
 set "PACKER=%~dp0..\tools\SWLOR.CLI\RunCLI.cmd"
