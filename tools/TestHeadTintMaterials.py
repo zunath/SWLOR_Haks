@@ -34,8 +34,6 @@ def main():
         # Expected RGBA comes from installed original palettes and native scheme
         # integers. This remains runnable after a squash or shallow clone.
         tint.check_native_palette_fallback(test, engine, sorted(pairs), head.ROOT)
-        tint.check_native_palette_fallback(test, engine, sorted(pairs), head.ROOT,
-                                          head.ROOT / 'sw_tint2/cu_pal1024.tga')
         checked = 0
         for name, entry in manifest['materials'].items():
             vertex, fragment = material_pairs[name]

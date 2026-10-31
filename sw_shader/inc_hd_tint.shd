@@ -22,7 +22,6 @@ uniform float rowLeath1 = 0.429932;
 uniform float rowLeath2 = 0.429932;
 uniform float rowTat1 = 0.515869;
 uniform float rowTat2 = 0.515869;
-uniform float paletteFolded = 0.0;
 uniform float skinGain = 1.0;
 uniform float skinNeutralShade = 0.0;
 uniform float hairGain = 1.0;
@@ -63,8 +62,6 @@ uniform float glowCompression = 0.32;
 
 vec4 HeadPalette(vec2 uv)
 {
-    if (paletteFolded > 0.5)
-        uv = vec2((uv.x + floor(uv.y * 2.0)) * 0.5, fract(uv.y * 2.0));
     return texture2D(texUnit10, uv, -10.0);
 }
 

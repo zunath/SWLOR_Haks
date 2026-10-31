@@ -20,7 +20,7 @@ texture5 null
 texture6 ha_7c84564d8b06
 texture7 ha_7c84564d8b07
 texture8 ha_7c84564d8b08
-texture10 cu_pal1024
+texture10 plt_palette
 parameter float tintMapWidth 1024.0
 parameter float tintMapHeight 1024.0
 parameter float alphaCutoff 0.3
@@ -52,7 +52,6 @@ parameter float lipVSpan 1
 parameter float maskMode 0
 parameter float maskSoftWidth 0.08
 parameter float maskWrapUV 0
-parameter float paletteFolded 1
 parameter float scalpEndV 0.52
 parameter float scalpMaxU 0.49
 parameter float scalpShadeBase 0.070588235294

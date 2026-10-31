@@ -109,7 +109,7 @@ def model_rows(root: Path = ROOT) -> list[tuple[str, str, list[int]]]:
 
 
 def palette_defaults_source(manifest: dict) -> str:
-    rows = manifest.get('paletteDefaults', [])
+    rows = manifest.get('colorDefaults', [])
     return ('2DA V2.0\n\n  MODEL MATERIAL LAYER COLOR\n' +
             ''.join(f'{index} {model} {material} {layer} {color}\n'
                     for index, (model, material, layer, color) in enumerate(rows)))
@@ -123,12 +123,13 @@ def validate() -> list[str]:
     if not palette_path.is_file() or palette_path.read_text() != palette_defaults_source(manifest):
         errors.append('headtintdefs.2da: authored head palette defaults differ')
     seen_defaults = set()
-    for model, material, layer, color in manifest.get('paletteDefaults', []):
+    for model, material, layer, color in manifest.get('colorDefaults', []):
         key = model, material, layer
         bindings = [layers for name, mat, layers in manifest['catalogRows']
                     if name == model and mat == material]
         if (key in seen_defaults or not re.fullmatch(r'p[fm][heodz]0_head\d{3}', model)
-                or layer not in (2, 3, 4, 5, 6, 7) or not 0 <= color < 176
+                or layer not in (2, 3, 4, 5, 6, 7)
+                or not (0 <= color < 176 or color & ~0xFFFFFF == 0x1000000)
                 or not any(str(layer) in layers.split(',') for layers in bindings)):
             errors.append(f'{key}: invalid or duplicate authored head palette default')
         seen_defaults.add(key)
@@ -143,6 +144,8 @@ def validate() -> list[str]:
             errors.append(f'{name}: unknown head parameters {sorted(unknown)}')
         if entry['shader'] not in PROFILES:
             errors.append(f'{name}: unknown head lighting profile')
+        if 'texture10 plt_palette' not in entry['declarations']:
+            errors.append(f'{name}: head materials must reuse the shared native palette')
         path = ROOT / 'sw_tint_mtr' / (name + '.mtr')
         if not path.is_file() or path.read_text() != material_source(entry):
             errors.append(f'{name}: stale head material profile')
@@ -164,15 +167,15 @@ def validate() -> list[str]:
             allowed = {'normal': {'BC5'}, 'specular': {'BC1', 'BC4'},
                        'roughness': {'BC4'}, 'mask': {'BC4', 'BC5'},
                        'tint': {'BC5'}, 'categoryMask': {'BC5'},
-                       'color': {'BC1', 'BC3'}, 'palette': {'TGA'}}
+                       'color': {'BC1', 'BC3'}}
             if role not in allowed or entry.get('codec') not in allowed[role]:
                 errors.append(f'{relative}: texture codec does not match its shader role')
             if role == 'normal' and max(entry['size']) > 512:
                 errors.append(f'{relative}: head normal map exceeds 512 pixels')
             if path.stat().st_size > 1572864:
                 errors.append(f'{relative}: exceeds the 1.5 MiB head texture budget')
-            if path.suffix == '.tga' and not entry.get('exception'):
-                errors.append(f'{relative}: lossless TGA requires a documented exception')
+            if path.suffix != '.dds':
+                errors.append(f'{relative}: authored head textures must use DDS')
             if path.suffix == '.dds':
                 errors.extend(dds_layout_errors(path))
                 data = path.read_bytes()
