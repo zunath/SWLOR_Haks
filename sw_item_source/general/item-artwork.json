@@ -4101,6 +4101,582 @@
       "subject": "Yellow Crystal Cluster material sample: one distinctive rugged crystalline mineral cluster, rich faceted highlights, visible natural fracture planes, not a machine. Yellow crystal.",
       "prompt": "Original SWLOR science-fiction inventory icon artwork, polished detailed painted 3D game asset, sharp sculpted silhouette readable at 32px and 64px. One isolated object centered in a square, three-quarter view, filling 80 percent of the canvas, dark nearly black plain background, strong rim lighting, muted metal with restrained colored functional accents. No border, no text, no letters, no numbers, no badge, no logo, no existing game artwork, no EVE Online imagery. This is physical item artwork, not a UI symbol or flat vector. Yellow Crystal Cluster material sample: one distinctive rugged crystalline mineral cluster, rich faceted highlights, visible natural fracture planes, not a machine. Yellow crystal.",
       "source": "c_cluster_yellow.png"
+    },
+    {
+      "name": "Durelium Ore",
+      "items": [
+        "ore_durelium"
+      ],
+      "key": "ore_durelium",
+      "icon": "iit_ore_durelium",
+      "category": "Utility",
+      "subject": "Durelium Ore material sample: a copper and bronze-red crystal cluster on dark warm rock, the asteroid ore family's crystal form in a colorway no other ore uses.",
+      "prompt": "Original SWLOR science-fiction inventory icon artwork, polished detailed painted 3D game asset, sharp sculpted silhouette readable at 32px and 64px. One isolated object centered in a square, three-quarter view, filling 80 percent of the canvas, dark nearly black plain background, strong rim lighting, muted metal with restrained colored functional accents. No border, no text, no letters, no numbers, no badge, no logo, no existing game artwork, no EVE Online imagery. This is physical item artwork, not a UI symbol or flat vector. Durelium Ore material sample: a copper and bronze-red crystal cluster on dark warm rock, the asteroid ore family's crystal form in a colorway no other ore uses.",
+      "source": "ore_durelium.png",
+      "generator": "Tint of ore_tilarium.png: mirrored, bright crystal areas mapped onto a copper ramp, rock warmed, scaled to 86% inside the frame"
+    },
+    {
+      "name": "Tibanna Gas",
+      "items": [
+        "gas_tibanna"
+      ],
+      "key": "gas_tibanna",
+      "icon": "iit_gas_tibanna",
+      "category": "Utility",
+      "subject": "Tibanna Gas: a tall steel pressurized gas cylinder with a domed shoulder and steel bands, a sight glass of swirling glowing pale-gold vapor, a red handwheel valve, a brass outlet and a pressure gauge. Not an enzyme flask or a fuel capsule.",
+      "prompt": "Original SWLOR science-fiction inventory icon artwork, polished detailed painted 3D game asset, sharp sculpted silhouette readable at 32px and 64px. One isolated object centered in a square, three-quarter view, filling 80 percent of the canvas, dark nearly black plain background, strong rim lighting, muted metal with restrained colored functional accents. No border, no text, no letters, no numbers, no badge, no logo, no existing game artwork, no EVE Online imagery. This is physical item artwork, not a UI symbol or flat vector. Tibanna Gas: a tall steel pressurized gas cylinder with a domed shoulder and steel bands, a sight glass of swirling glowing pale-gold vapor, a red handwheel valve, a brass outlet and a pressure gauge. Not an enzyme flask or a fuel capsule.",
+      "source": "gas_tibanna.png",
+      "generator": "Claude illustrated SVG (source .svg beside the .png), rasterized with ImageMagick"
+    },
+    {
+      "name": "Aurodium",
+      "items": [
+        "aurodium"
+      ],
+      "key": "aurodium",
+      "icon": "iit_aurodium",
+      "category": "Utility",
+      "subject": "Aurodium: a weathered ingot of ancient golden alloy salvaged from a wreck, engraved with a geometric seal, tarnished, with scorched and sooty edges.",
+      "prompt": "Original SWLOR science-fiction inventory icon artwork, polished detailed painted 3D game asset, sharp sculpted silhouette readable at 32px and 64px. One isolated object centered in a square, three-quarter view, filling 80 percent of the canvas, dark nearly black plain background, strong rim lighting, muted metal with restrained colored functional accents. No border, no text, no letters, no numbers, no badge, no logo, no existing game artwork, no EVE Online imagery. This is physical item artwork, not a UI symbol or flat vector. Aurodium: a weathered ingot of ancient golden alloy salvaged from a wreck, engraved with a geometric seal, tarnished, with scorched and sooty edges.",
+      "source": "aurodium.png",
+      "generator": "Claude illustrated SVG (source .svg beside the .png), rasterized with ImageMagick"
+    },
+    {
+      "name": "Ship Scrap",
+      "items": [
+        "ship_scrap_1",
+        "ship_scrap_2",
+        "ship_scrap_3",
+        "ship_scrap_4",
+        "ship_scrap_5"
+      ],
+      "key": "ship_scrap",
+      "icon": "iit_ship_scrap",
+      "category": "Utility",
+      "subject": "Ship Scrap: a heap of salvaged starship parts: a torn riveted grey hull plate, a broken green circuit board, a bent copper pipe and frayed wires with a spark.",
+      "prompt": "Original SWLOR science-fiction inventory icon artwork, polished detailed painted 3D game asset, sharp sculpted silhouette readable at 32px and 64px. One isolated object centered in a square, three-quarter view, filling 80 percent of the canvas, dark nearly black plain background, strong rim lighting, muted metal with restrained colored functional accents. No border, no text, no letters, no numbers, no badge, no logo, no existing game artwork, no EVE Online imagery. This is physical item artwork, not a UI symbol or flat vector. Ship Scrap: a heap of salvaged starship parts: a torn riveted grey hull plate, a broken green circuit board, a bent copper pipe and frayed wires with a spark.",
+      "source": "ship_scrap.png",
+      "generator": "Claude illustrated SVG (source .svg beside the .png), rasterized with ImageMagick"
+    },
+    {
+      "name": "Salvager",
+      "items": [
+        "sm_salv_00",
+        "sm_salv_05",
+        "sm_salv_10",
+        "sm_salv_15",
+        "sm_salv_20",
+        "sm_salv_25",
+        "sm_salv_30",
+        "sm_salv_35",
+        "sm_salv_40",
+        "sm_salv_45"
+      ],
+      "key": "salvager",
+      "icon": "iit_smsalvager",
+      "category": "Utility",
+      "subject": "Ship salvage module: a crimson industrial housing with a hazard band and two piston arms whose claws grip a riveted hull plate while a central torch cuts it. Clearly not the mining laser or strip miner.",
+      "prompt": "Original SWLOR science-fiction inventory icon artwork, polished detailed painted 3D game asset, sharp sculpted silhouette readable at 32px and 64px. One isolated object centered in a square, three-quarter view, filling 80 percent of the canvas, dark nearly black plain background, strong rim lighting, muted metal with restrained colored functional accents. No border, no text, no letters, no numbers, no badge, no logo, no existing game artwork, no EVE Online imagery. This is physical item artwork, not a UI symbol or flat vector. Ship salvage module: a crimson industrial housing with a hazard band and two piston arms whose claws grip a riveted hull plate while a central torch cuts it. Clearly not the mining laser or strip miner.",
+      "source": "salvager.png",
+      "generator": "Claude illustrated SVG (source .svg beside the .png), rasterized with ImageMagick"
+    },
+    {
+      "name": "Gas Harvester",
+      "items": [
+        "sm_gas_00",
+        "sm_gas_05",
+        "sm_gas_10",
+        "sm_gas_15",
+        "sm_gas_20",
+        "sm_gas_25",
+        "sm_gas_30",
+        "sm_gas_35",
+        "sm_gas_40",
+        "sm_gas_45"
+      ],
+      "key": "gas_harvester",
+      "icon": "iit_smgasharvest",
+      "category": "Utility",
+      "subject": "Ship gas harvesting module: a wide white ceramic intake funnel drawing a glowing pale-gold gas spiral into a finned compressor block flanked by two tanks with gold sight windows.",
+      "prompt": "Original SWLOR science-fiction inventory icon artwork, polished detailed painted 3D game asset, sharp sculpted silhouette readable at 32px and 64px. One isolated object centered in a square, three-quarter view, filling 80 percent of the canvas, dark nearly black plain background, strong rim lighting, muted metal with restrained colored functional accents. No border, no text, no letters, no numbers, no badge, no logo, no existing game artwork, no EVE Online imagery. This is physical item artwork, not a UI symbol or flat vector. Ship gas harvesting module: a wide white ceramic intake funnel drawing a glowing pale-gold gas spiral into a finned compressor block flanked by two tanks with gold sight windows.",
+      "source": "gas_harvester.png",
+      "generator": "Claude illustrated SVG (source .svg beside the .png), rasterized with ImageMagick"
+    },
+    {
+      "name": "Hull Frame",
+      "items": [
+        "sc_hframe_1",
+        "sc_hframe_2",
+        "sc_hframe_3",
+        "sc_hframe_4",
+        "sc_hframe_5"
+      ],
+      "key": "hull_frame",
+      "icon": "iit_sc_hframe",
+      "category": "Utility",
+      "subject": "Hull Frame: a section of riveted grey durasteel ship skeleton: curved ribs joined by a spine beam, bolt heads and a glowing copper-red weld seam.",
+      "prompt": "Original SWLOR science-fiction inventory icon artwork, polished detailed painted 3D game asset, sharp sculpted silhouette readable at 32px and 64px. One isolated object centered in a square, three-quarter view, filling 80 percent of the canvas, dark nearly black plain background, strong rim lighting, muted metal with restrained colored functional accents. No border, no text, no letters, no numbers, no badge, no logo, no existing game artwork, no EVE Online imagery. This is physical item artwork, not a UI symbol or flat vector. Hull Frame: a section of riveted grey durasteel ship skeleton: curved ribs joined by a spine beam, bolt heads and a glowing copper-red weld seam.",
+      "source": "hull_frame.png",
+      "generator": "Claude illustrated SVG (source .svg beside the .png), rasterized with ImageMagick"
+    },
+    {
+      "name": "Ship Reactor",
+      "items": [
+        "sc_reactor_1",
+        "sc_reactor_2",
+        "sc_reactor_3",
+        "sc_reactor_4",
+        "sc_reactor_5"
+      ],
+      "key": "ship_reactor",
+      "icon": "iit_sc_reactor",
+      "category": "Utility",
+      "subject": "Ship Reactor: a compact cylindrical starship reactor core with a glowing blue-white containment window, cooling fins and heavy power couplings.",
+      "prompt": "Original SWLOR science-fiction inventory icon artwork, polished detailed painted 3D game asset, sharp sculpted silhouette readable at 32px and 64px. One isolated object centered in a square, three-quarter view, filling 80 percent of the canvas, dark nearly black plain background, strong rim lighting, muted metal with restrained colored functional accents. No border, no text, no letters, no numbers, no badge, no logo, no existing game artwork, no EVE Online imagery. This is physical item artwork, not a UI symbol or flat vector. Ship Reactor: a compact cylindrical starship reactor core with a glowing blue-white containment window, cooling fins and heavy power couplings.",
+      "source": "ship_reactor.png",
+      "generator": "Claude illustrated SVG (source .svg beside the .png), rasterized with ImageMagick"
+    },
+    {
+      "name": "Thruster Assembly",
+      "items": [
+        "sc_thruster_1",
+        "sc_thruster_2",
+        "sc_thruster_3",
+        "sc_thruster_4",
+        "sc_thruster_5"
+      ],
+      "key": "thruster_assembly",
+      "icon": "iit_sc_thruster",
+      "category": "Utility",
+      "subject": "Thruster Assembly: a starship engine nozzle bell with a heat-blued rim and orange glow inside, on a gimbal mounting bracket with copper fuel lines.",
+      "prompt": "Original SWLOR science-fiction inventory icon artwork, polished detailed painted 3D game asset, sharp sculpted silhouette readable at 32px and 64px. One isolated object centered in a square, three-quarter view, filling 80 percent of the canvas, dark nearly black plain background, strong rim lighting, muted metal with restrained colored functional accents. No border, no text, no letters, no numbers, no badge, no logo, no existing game artwork, no EVE Online imagery. This is physical item artwork, not a UI symbol or flat vector. Thruster Assembly: a starship engine nozzle bell with a heat-blued rim and orange glow inside, on a gimbal mounting bracket with copper fuel lines.",
+      "source": "thruster_assembly.png",
+      "generator": "Claude illustrated SVG (source .svg beside the .png), rasterized with ImageMagick"
+    },
+    {
+      "name": "Energy Emitter",
+      "items": [
+        "sc_emitter_1",
+        "sc_emitter_2",
+        "sc_emitter_3",
+        "sc_emitter_4",
+        "sc_emitter_5"
+      ],
+      "key": "energy_emitter",
+      "icon": "iit_sc_emitter",
+      "category": "Utility",
+      "subject": "Energy Emitter: a weapon focusing assembly: a ringed barrel collar around a glowing red focusing crystal, flanked by copper-wrapped capacitor coils.",
+      "prompt": "Original SWLOR science-fiction inventory icon artwork, polished detailed painted 3D game asset, sharp sculpted silhouette readable at 32px and 64px. One isolated object centered in a square, three-quarter view, filling 80 percent of the canvas, dark nearly black plain background, strong rim lighting, muted metal with restrained colored functional accents. No border, no text, no letters, no numbers, no badge, no logo, no existing game artwork, no EVE Online imagery. This is physical item artwork, not a UI symbol or flat vector. Energy Emitter: a weapon focusing assembly: a ringed barrel collar around a glowing red focusing crystal, flanked by copper-wrapped capacitor coils.",
+      "source": "energy_emitter.png",
+      "generator": "Claude illustrated SVG (source .svg beside the .png), rasterized with ImageMagick"
+    },
+    {
+      "name": "Ordnance Assembly",
+      "items": [
+        "sc_ordnance_1",
+        "sc_ordnance_2",
+        "sc_ordnance_3",
+        "sc_ordnance_4",
+        "sc_ordnance_5"
+      ],
+      "key": "ordnance_assembly",
+      "icon": "iit_sc_ordnance",
+      "category": "Utility",
+      "subject": "Ordnance Assembly: a launcher breech block with twin loading rails, a sprocket feed mechanism, a round breech hatch and yellow-black hazard striping; no missile.",
+      "prompt": "Original SWLOR science-fiction inventory icon artwork, polished detailed painted 3D game asset, sharp sculpted silhouette readable at 32px and 64px. One isolated object centered in a square, three-quarter view, filling 80 percent of the canvas, dark nearly black plain background, strong rim lighting, muted metal with restrained colored functional accents. No border, no text, no letters, no numbers, no badge, no logo, no existing game artwork, no EVE Online imagery. This is physical item artwork, not a UI symbol or flat vector. Ordnance Assembly: a launcher breech block with twin loading rails, a sprocket feed mechanism, a round breech hatch and yellow-black hazard striping; no missile.",
+      "source": "ordnance_assembly.png",
+      "generator": "Claude illustrated SVG (source .svg beside the .png), rasterized with ImageMagick"
+    },
+    {
+      "name": "Shield Projector",
+      "items": [
+        "sc_shieldprj_1",
+        "sc_shieldprj_2",
+        "sc_shieldprj_3",
+        "sc_shieldprj_4",
+        "sc_shieldprj_5"
+      ],
+      "key": "shield_projector",
+      "icon": "iit_sc_shieldprj",
+      "category": "Utility",
+      "subject": "Shield Projector: a shallow projector dish emitter on a steel pedestal with a shimmering cyan hexagonal energy grid dome above it.",
+      "prompt": "Original SWLOR science-fiction inventory icon artwork, polished detailed painted 3D game asset, sharp sculpted silhouette readable at 32px and 64px. One isolated object centered in a square, three-quarter view, filling 80 percent of the canvas, dark nearly black plain background, strong rim lighting, muted metal with restrained colored functional accents. No border, no text, no letters, no numbers, no badge, no logo, no existing game artwork, no EVE Online imagery. This is physical item artwork, not a UI symbol or flat vector. Shield Projector: a shallow projector dish emitter on a steel pedestal with a shimmering cyan hexagonal energy grid dome above it.",
+      "source": "shield_projector.png",
+      "generator": "Claude illustrated SVG (source .svg beside the .png), rasterized with ImageMagick"
+    },
+    {
+      "name": "Sensor Suite",
+      "items": [
+        "sc_sensor_1",
+        "sc_sensor_2",
+        "sc_sensor_3",
+        "sc_sensor_4",
+        "sc_sensor_5"
+      ],
+      "key": "sensor_suite",
+      "icon": "iit_sc_sensor",
+      "category": "Utility",
+      "subject": "Sensor Suite: a sensor pod: a small radar dish and an antenna cluster on an armored box with a green scan display.",
+      "prompt": "Original SWLOR science-fiction inventory icon artwork, polished detailed painted 3D game asset, sharp sculpted silhouette readable at 32px and 64px. One isolated object centered in a square, three-quarter view, filling 80 percent of the canvas, dark nearly black plain background, strong rim lighting, muted metal with restrained colored functional accents. No border, no text, no letters, no numbers, no badge, no logo, no existing game artwork, no EVE Online imagery. This is physical item artwork, not a UI symbol or flat vector. Sensor Suite: a sensor pod: a small radar dish and an antenna cluster on an armored box with a green scan display.",
+      "source": "sensor_suite.png",
+      "generator": "Claude illustrated SVG (source .svg beside the .png), rasterized with ImageMagick"
+    },
+    {
+      "name": "Extraction Head",
+      "items": [
+        "sc_extract_1",
+        "sc_extract_2",
+        "sc_extract_3",
+        "sc_extract_4",
+        "sc_extract_5"
+      ],
+      "key": "extraction_head",
+      "icon": "iit_sc_extract",
+      "category": "Utility",
+      "subject": "Extraction Head: a mining extraction head: a ring of diamond-tipped cutting teeth around a glowing laser focus lens in a heavy bolted metal collar.",
+      "prompt": "Original SWLOR science-fiction inventory icon artwork, polished detailed painted 3D game asset, sharp sculpted silhouette readable at 32px and 64px. One isolated object centered in a square, three-quarter view, filling 80 percent of the canvas, dark nearly black plain background, strong rim lighting, muted metal with restrained colored functional accents. No border, no text, no letters, no numbers, no badge, no logo, no existing game artwork, no EVE Online imagery. This is physical item artwork, not a UI symbol or flat vector. Extraction Head: a mining extraction head: a ring of diamond-tipped cutting teeth around a glowing laser focus lens in a heavy bolted metal collar.",
+      "source": "extraction_head.png",
+      "generator": "Claude illustrated SVG (source .svg beside the .png), rasterized with ImageMagick"
+    },
+    {
+      "name": "Life Support System",
+      "items": [
+        "sc_lifesup_1",
+        "sc_lifesup_2",
+        "sc_lifesup_3",
+        "sc_lifesup_4",
+        "sc_lifesup_5"
+      ],
+      "key": "life_support",
+      "icon": "iit_sc_lifesup",
+      "category": "Utility",
+      "subject": "Life Support System: a hydroponic life-support canister: an upright glass cylinder of green leafy plants with air filters, pipes and a steel base.",
+      "prompt": "Original SWLOR science-fiction inventory icon artwork, polished detailed painted 3D game asset, sharp sculpted silhouette readable at 32px and 64px. One isolated object centered in a square, three-quarter view, filling 80 percent of the canvas, dark nearly black plain background, strong rim lighting, muted metal with restrained colored functional accents. No border, no text, no letters, no numbers, no badge, no logo, no existing game artwork, no EVE Online imagery. This is physical item artwork, not a UI symbol or flat vector. Life Support System: a hydroponic life-support canister: an upright glass cylinder of green leafy plants with air filters, pipes and a steel base.",
+      "source": "life_support.png",
+      "generator": "Claude illustrated SVG (source .svg beside the .png), rasterized with ImageMagick"
+    },
+    {
+      "name": "Smuggling Compartment",
+      "items": [
+        "sm_smug_00",
+        "sm_smug_05",
+        "sm_smug_10",
+        "sm_smug_15",
+        "sm_smug_20",
+        "sm_smug_25",
+        "sm_smug_30",
+        "sm_smug_35",
+        "sm_smug_40",
+        "sm_smug_45"
+      ],
+      "key": "smuggling_compartment",
+      "icon": "iit_smsmuggle",
+      "category": "Utility",
+      "subject": "Ship smuggling compartment module: a hinged section of grey tread-plate deck lifted open on a gas strut, revealing a hidden floor cache lined with glowing cyan scanner-dampening hex mesh (the hatch underside is lined with it too) and a strapped amber cargo crate stashed inside.",
+      "prompt": "Original SWLOR science-fiction inventory icon artwork, polished detailed painted 3D game asset, sharp sculpted silhouette readable at 32px and 64px. One isolated object centered in a square, three-quarter view, filling 80 percent of the canvas, dark nearly black plain background, strong rim lighting, muted metal with restrained colored functional accents. No border, no text, no letters, no numbers, no badge, no logo, no existing game artwork, no EVE Online imagery. This is physical item artwork, not a UI symbol or flat vector. Ship smuggling compartment module: a hinged section of grey tread-plate deck lifted open on a gas strut, revealing a hidden floor cache lined with glowing cyan scanner-dampening hex mesh (the hatch underside is lined with it too) and a strapped amber cargo crate stashed inside.",
+      "source": "smuggling_compartment.png",
+      "generator": "Claude illustrated SVG (source .svg beside the .png), rasterized with ImageMagick"
+    },
+    {
+      "name": "Probe Launcher",
+      "items": [
+        "sm_probe_00",
+        "sm_probe_05",
+        "sm_probe_10",
+        "sm_probe_15",
+        "sm_probe_20",
+        "sm_probe_25",
+        "sm_probe_30",
+        "sm_probe_35",
+        "sm_probe_40",
+        "sm_probe_45"
+      ],
+      "key": "probe_launcher",
+      "icon": "iit_smprobe",
+      "category": "Utility",
+      "subject": "Ship probe launcher module: a compact armored gunmetal launcher housing with a turret drum and an angled launch tube, a sleek white sensor probe with swept antenna fins and a glowing cyan sensor eye half-ejected from the tube's glowing bore, a whip antenna trailing back, and a small sensor dish on a mast at the rear corner.",
+      "prompt": "Original SWLOR science-fiction inventory icon artwork, polished detailed painted 3D game asset, sharp sculpted silhouette readable at 32px and 64px. One isolated object centered in a square, three-quarter view, filling 80 percent of the canvas, dark nearly black plain background, strong rim lighting, muted metal with restrained colored functional accents. No border, no text, no letters, no numbers, no badge, no logo, no existing game artwork, no EVE Online imagery. This is physical item artwork, not a UI symbol or flat vector. Ship probe launcher module: a compact armored gunmetal launcher housing with a turret drum and an angled launch tube, a sleek white sensor probe with swept antenna fins and a glowing cyan sensor eye half-ejected from the tube's glowing bore, a whip antenna trailing back, and a small sensor dish on a mast at the rear corner.",
+      "source": "probe_launcher.png",
+      "generator": "Claude illustrated SVG (source .svg beside the .png), rasterized with ImageMagick"
+    },
+    {
+      "name": "Data Analyzer",
+      "items": [
+        "sm_dataan_00"
+      ],
+      "key": "data_analyzer",
+      "icon": "iit_smdatanlz",
+      "category": "Utility",
+      "subject": "Ship data analyzer module: a compact armored gunmetal console with a sloped control panel showing a green data readout, a telescoping scomp-style interface spike with a knurled head and a glowing green data tip extended from its front, ribbed cable conduits, and a small holographic emitter projecting a floating green circuit-trace display above it.",
+      "prompt": "Original SWLOR science-fiction inventory icon artwork, polished detailed painted 3D game asset, sharp sculpted silhouette readable at 32px and 64px. One isolated object centered in a square, three-quarter view, filling 80 percent of the canvas, dark nearly black plain background, strong rim lighting, muted metal with restrained colored functional accents. No border, no text, no letters, no numbers, no badge, no logo, no existing game artwork, no EVE Online imagery. This is physical item artwork, not a UI symbol or flat vector. Ship data analyzer module: a compact armored gunmetal console with a sloped control panel showing a green data readout, a telescoping scomp-style interface spike with a knurled head and a glowing green data tip extended from its front, ribbed cable conduits, and a small holographic emitter projecting a floating green circuit-trace display above it.",
+      "source": "data_analyzer.png",
+      "generator": "Claude illustrated SVG (source .svg beside the .png), rasterized with ImageMagick"
+    },
+    {
+      "name": "Sealed Ship Lockbox",
+      "items": [
+        "spc_lockbox_t1",
+        "spc_lockbox_t2",
+        "spc_lockbox_t3",
+        "spc_lockbox_t4",
+        "spc_lockbox_t5"
+      ],
+      "key": "ship_lockbox",
+      "icon": "iit_spclockbox",
+      "category": "Utility",
+      "subject": "Sealed ship lockbox: a rugged starship-grade armored gunmetal strongbox with glowing red-orange magnetic docking clamps on every corner, a red-glowing lid seal line, a recessed carry grip, scorch marks and embers from a destroyed ship, and a glowing amber security data-lock panel with a padlock screen, keypad and red status light on the front.",
+      "prompt": "Original SWLOR science-fiction inventory icon artwork, polished detailed painted 3D game asset, sharp sculpted silhouette readable at 32px and 64px. One isolated object centered in a square, three-quarter view, filling 80 percent of the canvas, dark nearly black plain background, strong rim lighting, muted metal with restrained colored functional accents. No border, no text, no letters, no numbers, no badge, no logo, no existing game artwork, no EVE Online imagery. This is physical item artwork, not a UI symbol or flat vector. Sealed ship lockbox: a rugged starship-grade armored gunmetal strongbox with glowing red-orange magnetic docking clamps on every corner, a red-glowing lid seal line, a recessed carry grip, scorch marks and embers from a destroyed ship, and a glowing amber security data-lock panel with a padlock screen, keypad and red status light on the front.",
+      "source": "ship_lockbox.png",
+      "generator": "Claude illustrated SVG (source .svg beside the .png), rasterized with ImageMagick"
+    },
+    {
+      "name": "Thorilide Core",
+      "items": [
+        "sc_thorcore"
+      ],
+      "key": "thorilide_core",
+      "icon": "iit_sc_thorcore",
+      "category": "Utility",
+      "subject": "Thorilide Core: Squat dark-steel reactor cradle with gold bands holding a glowing violet-and-teal Thorilide crystal cluster in a strut cage.",
+      "prompt": "Original SWLOR science-fiction inventory icon artwork, polished detailed painted 3D game asset, sharp sculpted silhouette readable at 32px and 64px. One isolated object centered in a square, three-quarter view, filling 80 percent of the canvas, dark nearly black plain background, strong rim lighting, muted metal with restrained colored functional accents. No border, no text, no letters, no numbers, no badge, no logo, no existing game artwork, no EVE Online imagery. This is physical item artwork, not a UI symbol or flat vector. Thorilide Core: Squat dark-steel reactor cradle with gold bands holding a glowing violet-and-teal Thorilide crystal cluster in a strut cage.",
+      "source": "thorilide_core.png",
+      "generator": "Claude illustrated SVG (source .svg beside the .png), rasterized with ImageMagick"
+    },
+    {
+      "name": "Aurodium Plating",
+      "items": [
+        "sc_aurplate"
+      ],
+      "key": "aurodium_plating",
+      "icon": "iit_sc_aurplate",
+      "category": "Utility",
+      "subject": "Aurodium Plating: Three overlapping curved gold armor plates with rivet rows, engraved geometric patterns and worn edges.",
+      "prompt": "Original SWLOR science-fiction inventory icon artwork, polished detailed painted 3D game asset, sharp sculpted silhouette readable at 32px and 64px. One isolated object centered in a square, three-quarter view, filling 80 percent of the canvas, dark nearly black plain background, strong rim lighting, muted metal with restrained colored functional accents. No border, no text, no letters, no numbers, no badge, no logo, no existing game artwork, no EVE Online imagery. This is physical item artwork, not a UI symbol or flat vector. Aurodium Plating: Three overlapping curved gold armor plates with rivet rows, engraved geometric patterns and worn edges.",
+      "source": "aurodium_plating.png",
+      "generator": "Claude illustrated SVG (source .svg beside the .png), rasterized with ImageMagick"
+    },
+    {
+      "name": "Prototype Core",
+      "items": [
+        "sc_protocore"
+      ],
+      "key": "prototype_core",
+      "icon": "iit_sc_protocore",
+      "category": "Utility",
+      "subject": "Prototype Core: Graphite hexagonal module with an open top showing a glowing green circuit lattice under a floating green lens orb.",
+      "prompt": "Original SWLOR science-fiction inventory icon artwork, polished detailed painted 3D game asset, sharp sculpted silhouette readable at 32px and 64px. One isolated object centered in a square, three-quarter view, filling 80 percent of the canvas, dark nearly black plain background, strong rim lighting, muted metal with restrained colored functional accents. No border, no text, no letters, no numbers, no badge, no logo, no existing game artwork, no EVE Online imagery. This is physical item artwork, not a UI symbol or flat vector. Prototype Core: Graphite hexagonal module with an open top showing a glowing green circuit lattice under a floating green lens orb.",
+      "source": "prototype_core.png",
+      "generator": "Claude illustrated SVG (source .svg beside the .png), rasterized with ImageMagick"
+    },
+    {
+      "name": "Prototype Tech",
+      "items": [
+        "proto_tech"
+      ],
+      "key": "prototype_tech",
+      "icon": "iit_proto_tech",
+      "category": "Utility",
+      "subject": "Prototype Tech: Cracked dark-grey device case pried open around a glowing blue-white crystal coil, loose wires and hazard tape.",
+      "prompt": "Original SWLOR science-fiction inventory icon artwork, polished detailed painted 3D game asset, sharp sculpted silhouette readable at 32px and 64px. One isolated object centered in a square, three-quarter view, filling 80 percent of the canvas, dark nearly black plain background, strong rim lighting, muted metal with restrained colored functional accents. No border, no text, no letters, no numbers, no badge, no logo, no existing game artwork, no EVE Online imagery. This is physical item artwork, not a UI symbol or flat vector. Prototype Tech: Cracked dark-grey device case pried open around a glowing blue-white crystal coil, loose wires and hazard tape.",
+      "source": "prototype_tech.png",
+      "generator": "Claude illustrated SVG (source .svg beside the .png), rasterized with ImageMagick"
+    },
+    {
+      "name": "Ion Missile",
+      "items": [
+        "ship_missile_ion"
+      ],
+      "key": "ion_missile",
+      "icon": "iit_msl_ion",
+      "category": "Utility",
+      "subject": "Ion Missile: Slim dark gunmetal missile with a glowing cyan ion-coil warhead, small electric arcs and cyan fins.",
+      "prompt": "Original SWLOR science-fiction inventory icon artwork, polished detailed painted 3D game asset, sharp sculpted silhouette readable at 32px and 64px. One isolated object centered in a square, three-quarter view, filling 80 percent of the canvas, dark nearly black plain background, strong rim lighting, muted metal with restrained colored functional accents. No border, no text, no letters, no numbers, no badge, no logo, no existing game artwork, no EVE Online imagery. This is physical item artwork, not a UI symbol or flat vector. Ion Missile: Slim dark gunmetal missile with a glowing cyan ion-coil warhead, small electric arcs and cyan fins.",
+      "source": "ion_missile.png",
+      "generator": "Claude illustrated SVG (source .svg beside the .png), rasterized with ImageMagick"
+    },
+    {
+      "name": "Incendiary Missile",
+      "items": [
+        "ship_missile_inc"
+      ],
+      "key": "incendiary_missile",
+      "icon": "iit_msl_incend",
+      "category": "Utility",
+      "subject": "Incendiary Missile: Olive steel missile with a yellow-black hazard band and a glowing orange-red heated warhead with flame licks.",
+      "prompt": "Original SWLOR science-fiction inventory icon artwork, polished detailed painted 3D game asset, sharp sculpted silhouette readable at 32px and 64px. One isolated object centered in a square, three-quarter view, filling 80 percent of the canvas, dark nearly black plain background, strong rim lighting, muted metal with restrained colored functional accents. No border, no text, no letters, no numbers, no badge, no logo, no existing game artwork, no EVE Online imagery. This is physical item artwork, not a UI symbol or flat vector. Incendiary Missile: Olive steel missile with a yellow-black hazard band and a glowing orange-red heated warhead with flame licks.",
+      "source": "incendiary_missile.png",
+      "generator": "Claude illustrated SVG (source .svg beside the .png), rasterized with ImageMagick"
+    },
+    {
+      "name": "Seeker Missile",
+      "items": [
+        "ship_missile_skr"
+      ],
+      "key": "seeker_missile",
+      "icon": "iit_msl_seeker",
+      "category": "Utility",
+      "subject": "Seeker Missile: Light grey missile with a green glass sensor dome nose, forward canards and a green targeting stripe.",
+      "prompt": "Original SWLOR science-fiction inventory icon artwork, polished detailed painted 3D game asset, sharp sculpted silhouette readable at 32px and 64px. One isolated object centered in a square, three-quarter view, filling 80 percent of the canvas, dark nearly black plain background, strong rim lighting, muted metal with restrained colored functional accents. No border, no text, no letters, no numbers, no badge, no logo, no existing game artwork, no EVE Online imagery. This is physical item artwork, not a UI symbol or flat vector. Seeker Missile: Light grey missile with a green glass sensor dome nose, forward canards and a green targeting stripe.",
+      "source": "seeker_missile.png",
+      "generator": "Claude illustrated SVG (source .svg beside the .png), rasterized with ImageMagick"
+    },
+    {
+      "name": "Ion Torpedo",
+      "items": [
+        "proton_bomb_ion"
+      ],
+      "key": "ion_torpedo",
+      "icon": "iit_torp_ion",
+      "category": "Utility",
+      "subject": "Ion Torpedo: Stout dark-steel torpedo with two glowing cyan ion rings, a blunt cyan nose and stubby fins.",
+      "prompt": "Original SWLOR science-fiction inventory icon artwork, polished detailed painted 3D game asset, sharp sculpted silhouette readable at 32px and 64px. One isolated object centered in a square, three-quarter view, filling 80 percent of the canvas, dark nearly black plain background, strong rim lighting, muted metal with restrained colored functional accents. No border, no text, no letters, no numbers, no badge, no logo, no existing game artwork, no EVE Online imagery. This is physical item artwork, not a UI symbol or flat vector. Ion Torpedo: Stout dark-steel torpedo with two glowing cyan ion rings, a blunt cyan nose and stubby fins.",
+      "source": "ion_torpedo.png",
+      "generator": "Claude illustrated SVG (source .svg beside the .png), rasterized with ImageMagick"
+    },
+    {
+      "name": "Plasma Torpedo",
+      "items": [
+        "proton_bomb_pls"
+      ],
+      "key": "plasma_torpedo",
+      "icon": "iit_torp_plasma",
+      "category": "Utility",
+      "subject": "Plasma Torpedo: Stout bronze-and-charcoal torpedo with a glass window over a swirling magenta-orange plasma core and a hot orange nose.",
+      "prompt": "Original SWLOR science-fiction inventory icon artwork, polished detailed painted 3D game asset, sharp sculpted silhouette readable at 32px and 64px. One isolated object centered in a square, three-quarter view, filling 80 percent of the canvas, dark nearly black plain background, strong rim lighting, muted metal with restrained colored functional accents. No border, no text, no letters, no numbers, no badge, no logo, no existing game artwork, no EVE Online imagery. This is physical item artwork, not a UI symbol or flat vector. Plasma Torpedo: Stout bronze-and-charcoal torpedo with a glass window over a swirling magenta-orange plasma core and a hot orange nose.",
+      "source": "plasma_torpedo.png",
+      "generator": "Claude illustrated SVG (source .svg beside the .png), rasterized with ImageMagick"
+    },
+    {
+      "name": "Cloaking Device",
+      "items": [
+        "sm_cloak_00",
+        "sm_cloak_05",
+        "sm_cloak_10",
+        "sm_cloak_15",
+        "sm_cloak_20",
+        "sm_cloak_25",
+        "sm_cloak_30",
+        "sm_cloak_35",
+        "sm_cloak_40",
+        "sm_cloak_45"
+      ],
+      "key": "cloaking_device",
+      "icon": "iit_smcloak",
+      "category": "Utility",
+      "subject": "Ship cloaking device module: a compact armored gunmetal emitter drum on a square base plate, ribbed with glowing violet bands and topped by a glowing violet prism dome ringed by shimmering field arcs, with a ghosted ship silhouette dissolving into the shimmer above it.",
+      "prompt": "Original SWLOR science-fiction inventory icon artwork, polished detailed painted 3D game asset, sharp sculpted silhouette readable at 32px and 64px. One isolated object centered in a square, three-quarter view, filling 80 percent of the canvas, dark nearly black plain background, strong rim lighting, muted metal with restrained colored functional accents. No border, no text, no letters, no numbers, no badge, no logo, no existing game artwork, no EVE Online imagery. This is physical item artwork, not a UI symbol or flat vector. Ship cloaking device module: a compact armored gunmetal emitter drum on a square base plate, ribbed with glowing violet bands and topped by a glowing violet prism dome ringed by shimmering field arcs, with a ghosted ship silhouette dissolving into the shimmer above it.",
+      "source": "cloaking_device.png",
+      "generator": "Claude illustrated SVG (source .svg beside the .png), rasterized with ImageMagick"
+    },
+    {
+      "name": "Ion Web",
+      "items": [
+        "sm_web_00",
+        "sm_web_05",
+        "sm_web_10",
+        "sm_web_15",
+        "sm_web_20",
+        "sm_web_25",
+        "sm_web_30",
+        "sm_web_35",
+        "sm_web_40",
+        "sm_web_45"
+      ],
+      "key": "ion_web",
+      "icon": "iit_smionweb",
+      "category": "Control",
+      "subject": "Ship ion web projector module: an armored gunmetal emitter barrel on an angled mount firing crackling cyan ion lightning into a glowing hexagonal energy net that spreads across the upper frame.",
+      "prompt": "Original SWLOR science-fiction inventory icon artwork, polished detailed painted 3D game asset, sharp sculpted silhouette readable at 32px and 64px. One isolated object centered in a square, three-quarter view, filling 80 percent of the canvas, dark nearly black plain background, strong rim lighting, muted metal with restrained colored functional accents. No border, no text, no letters, no numbers, no badge, no logo, no existing game artwork, no EVE Online imagery. This is physical item artwork, not a UI symbol or flat vector. Ship ion web projector module: an armored gunmetal emitter barrel on an angled mount firing crackling cyan ion lightning into a glowing hexagonal energy net that spreads across the upper frame.",
+      "source": "ion_web.png",
+      "generator": "Claude illustrated SVG (source .svg beside the .png), rasterized with ImageMagick; the 64x64 inventory icon renders the same SVG without its background square, cropped and centered in the transparent 52x52 interior"
+    },
+    {
+      "name": "Interdictor",
+      "items": [
+        "sm_intd_00",
+        "sm_intd_05",
+        "sm_intd_10",
+        "sm_intd_15",
+        "sm_intd_20",
+        "sm_intd_25",
+        "sm_intd_30",
+        "sm_intd_35",
+        "sm_intd_40",
+        "sm_intd_45"
+      ],
+      "key": "interdictor",
+      "icon": "iit_sminterdict",
+      "category": "Control",
+      "subject": "Ship interdiction field generator: a heavy armored gunmetal ring with four steel clamp prongs biting inward around a black singularity core rimmed in glowing magenta, wrapped in dashed violet disruption rings.",
+      "prompt": "Original SWLOR science-fiction inventory icon artwork, polished detailed painted 3D game asset, sharp sculpted silhouette readable at 32px and 64px. One isolated object centered in a square, three-quarter view, filling 80 percent of the canvas, dark nearly black plain background, strong rim lighting, muted metal with restrained colored functional accents. No border, no text, no letters, no numbers, no badge, no logo, no existing game artwork, no EVE Online imagery. This is physical item artwork, not a UI symbol or flat vector. Ship interdiction field generator: a heavy armored gunmetal ring with four steel clamp prongs biting inward around a black singularity core rimmed in glowing magenta, wrapped in dashed violet disruption rings.",
+      "source": "interdictor.png",
+      "generator": "Claude illustrated SVG (source .svg beside the .png), rasterized with ImageMagick; the 64x64 inventory icon renders the same SVG without its background square, cropped and centered in the transparent 52x52 interior"
+    },
+    {
+      "name": "Jammer",
+      "items": [
+        "sm_jam_00",
+        "sm_jam_05",
+        "sm_jam_10",
+        "sm_jam_15",
+        "sm_jam_20",
+        "sm_jam_25",
+        "sm_jam_30",
+        "sm_jam_35",
+        "sm_jam_40",
+        "sm_jam_45"
+      ],
+      "key": "jammer",
+      "icon": "iit_smjammer",
+      "category": "Control",
+      "subject": "Ship signal jammer module: a squat armored transmitter housing with two angled antenna masts whose glowing amber tips spray jagged orange and violet static bursts.",
+      "prompt": "Original SWLOR science-fiction inventory icon artwork, polished detailed painted 3D game asset, sharp sculpted silhouette readable at 32px and 64px. One isolated object centered in a square, three-quarter view, filling 80 percent of the canvas, dark nearly black plain background, strong rim lighting, muted metal with restrained colored functional accents. No border, no text, no letters, no numbers, no badge, no logo, no existing game artwork, no EVE Online imagery. This is physical item artwork, not a UI symbol or flat vector. Ship signal jammer module: a squat armored transmitter housing with two angled antenna masts whose glowing amber tips spray jagged orange and violet static bursts.",
+      "source": "jammer.png",
+      "generator": "Claude illustrated SVG (source .svg beside the .png), rasterized with ImageMagick; the 64x64 inventory icon renders the same SVG without its background square, cropped and centered in the transparent 52x52 interior"
+    },
+    {
+      "name": "Target Painter",
+      "items": [
+        "sm_paint_00",
+        "sm_paint_05",
+        "sm_paint_10",
+        "sm_paint_15",
+        "sm_paint_20",
+        "sm_paint_25",
+        "sm_paint_30",
+        "sm_paint_35",
+        "sm_paint_40",
+        "sm_paint_45"
+      ],
+      "key": "target_painter",
+      "icon": "iit_smtgtpaint",
+      "category": "Harmful",
+      "subject": "Ship target painter module: a squat armored designator turret with a red lens projecting a bright red beam onto a glowing red targeting reticle.",
+      "prompt": "Original SWLOR science-fiction inventory icon artwork, polished detailed painted 3D game asset, sharp sculpted silhouette readable at 32px and 64px. One isolated object centered in a square, three-quarter view, filling 80 percent of the canvas, dark nearly black plain background, strong rim lighting, muted metal with restrained colored functional accents. No border, no text, no letters, no numbers, no badge, no logo, no existing game artwork, no EVE Online imagery. This is physical item artwork, not a UI symbol or flat vector. Ship target painter module: a squat armored designator turret with a red lens projecting a bright red beam onto a glowing red targeting reticle.",
+      "source": "target_painter.png",
+      "generator": "Claude illustrated SVG (source .svg beside the .png), rasterized with ImageMagick; the 64x64 inventory icon renders the same SVG without its background square, cropped and centered in the transparent 52x52 interior"
+    },
+    {
+      "name": "Afterburner",
+      "items": [
+        "sm_aburn_00",
+        "sm_aburn_05",
+        "sm_aburn_10",
+        "sm_aburn_15",
+        "sm_aburn_20",
+        "sm_aburn_25",
+        "sm_aburn_30",
+        "sm_aburn_35",
+        "sm_aburn_40",
+        "sm_aburn_45"
+      ],
+      "key": "afterburner",
+      "icon": "iit_smafterburn",
+      "category": "Self",
+      "subject": "Ship afterburner module: a ribbed armored engine housing with a polished nozzle bell blasting a long white-hot blue flame plume with shock diamonds.",
+      "prompt": "Original SWLOR science-fiction inventory icon artwork, polished detailed painted 3D game asset, sharp sculpted silhouette readable at 32px and 64px. One isolated object centered in a square, three-quarter view, filling 80 percent of the canvas, dark nearly black plain background, strong rim lighting, muted metal with restrained colored functional accents. No border, no text, no letters, no numbers, no badge, no logo, no existing game artwork, no EVE Online imagery. This is physical item artwork, not a UI symbol or flat vector. Ship afterburner module: a ribbed armored engine housing with a polished nozzle bell blasting a long white-hot blue flame plume with shock diamonds.",
+      "source": "afterburner.png",
+      "generator": "Claude illustrated SVG (source .svg beside the .png), rasterized with ImageMagick; the 64x64 inventory icon renders the same SVG without its background square, cropped and centered in the transparent 52x52 interior"
     }
   ],
   "postprocess": "ImageMagick resizes selected source PNGs to 256x256; ImportItemIconArtwork.ps1 creates opaque bottom-left 32px and 64px TGAs and invokes the shared semantic border stamper."

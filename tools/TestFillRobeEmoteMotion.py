@@ -20,6 +20,10 @@ class FillRobeEmoteMotionTests(unittest.TestCase):
         cls.bridges = {head: generator.owned_animation_bytes(head, manifest, active)
                        for head in sorted(manifest["animation_bank_sets"]) if emote.PLAYABLE.fullmatch(head)}
 
+    def bridge(self, family):
+        """The head of a family's bridge; regenerating the bridges allocates new version numbers."""
+        return next(head for head in sorted(self.bridges) if head.startswith(family + "_"))
+
     def test_every_playable_body_family_has_a_bridge(self):
         self.assertEqual({head[:3] for head in self.bridges},
                          {f"p{gender}{family}" for gender in "fm" for family in "heod"})
@@ -47,7 +51,7 @@ class FillRobeEmoteMotionTests(unittest.TestCase):
                 self.assertEqual((data, []), emote.fill(data))
 
     def test_low_emotes_drape_cloth_above_the_floor_and_beside_the_legs(self):
-        for head in ("pmh_ra093", "pfh_ra110"):
+        for head in (self.bridge("pmh"), self.bridge("pfh")):
             rig = emote.Rig(self.bridges[head])
             for clip in LOW_EMOTES:
                 length = rig.model.clips[clip][0]
@@ -66,13 +70,13 @@ class FillRobeEmoteMotionTests(unittest.TestCase):
                                 self.assertLess(position[2], hips[2])
 
     def test_unchanged_clips_encode_byte_for_byte(self):
-        model = banks.CompiledBridge(self.bridges["pmh_ra093"])
+        model = banks.CompiledBridge(self.bridges[self.bridge("pmh")])
         for name, component in zip(model.clip_names, model.clips):
             rebuilt = emote.write_clip(*emote.read_clip(component), model.name)
             self.assertEqual(component.relocated(0, model.name), rebuilt.relocated(0, model.name), name)
 
     def test_drape_turns_cloth_toward_the_raised_knee_only_on_its_side(self):
-        rig = emote.Rig(self.bridges["pmh_ra093"])
+        rig = emote.Rig(self.bridges[self.bridge("pmh")])
         length = rig.model.clips["custom11lp"][0]
         pose = rig.model.pose(rig.model.clips["custom11lp"], length / 2)
         raised = max("lr", key=lambda side: pose[f"{side}shin_g"][0][2])

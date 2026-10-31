@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="70%">
+      <stop offset="0" stop-color="#16171a"/>
+      <stop offset="1" stop-color="#050607"/>
+    </radialGradient>
+    <linearGradient id="top" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff0b4"/>
+      <stop offset="0.3" stop-color="#f4cd62"/>
+      <stop offset="0.65" stop-color="#d49b2c"/>
+      <stop offset="1" stop-color="#9a6514"/>
+    </linearGradient>
+    <linearGradient id="front" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#c88a22"/>
+      <stop offset="0.45" stop-color="#8a5410"/>
+      <stop offset="1" stop-color="#2e1804"/>
+    </linearGradient>
+    <linearGradient id="side" x1="1" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8c5a14"/>
+      <stop offset="1" stop-color="#241303"/>
+    </linearGradient>
+    <radialGradient id="scorch" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#0c0603" stop-opacity="1"/>
+      <stop offset="0.55" stop-color="#22110a" stop-opacity="0.75"/>
+      <stop offset="1" stop-color="#2a1406" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="heat" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#ff8a3a" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#ff5a1a" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="blur2" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2"/></filter>
+    <filter id="blur4" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="4"/></filter>
+    <filter id="tarnish" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.045" numOctaves="3" seed="7" result="n"/>
+      <feColorMatrix in="n" type="matrix" values="0 0 0 0 0.10  0 0 0 0 0.05  0 0 0 0 0.01  0 0 0 -2.6 1.45"/>
+    </filter>
+    <clipPath id="ingot">
+      <path d="M30 128 L140 70 L224 112 L236 166 L120 232 L20 186 Z"/>
+    </clipPath>
+    <clipPath id="topclip"><path d="M44 124 L140 76 L212 112 L116 162 Z"/></clipPath>
+  </defs>
+  <rect width="256" height="256" fill="url(#bg)"/>
+  <g transform="translate(128 132) scale(0.96) translate(-132.5 -152)">
+  <ellipse cx="128" cy="222" rx="108" ry="18" fill="#000" opacity="0.85" filter="url(#blur4)"/>
+
+  <!-- left end face -->
+  <path d="M44 124 L116 162 L120 230 L22 184 Z" fill="url(#side)"/>
+  <!-- front long face (with a torn, broken right end) -->
+  <path d="M116 162 L212 112 L222 130 L215 142 L229 154 L234 166 L120 230 Z" fill="url(#front)"/>
+  <!-- broken end: exposed bright crystalline fracture -->
+  <path d="M212 112 L222 130 L215 142 L229 154 L234 166 L228 122 Z" fill="#e8b448"/>
+  <path d="M212 112 L222 130 L215 142 L229 154 L234 166" stroke="#fff1b8" stroke-width="2" fill="none"/>
+  <path d="M222 130 L229 134 M215 142 L226 144 M229 154 L233 150" stroke="#7a4a0e" stroke-width="1.5"/>
+  <!-- top face -->
+  <path d="M44 124 L140 76 L212 112 L116 162 Z" fill="url(#top)"/>
+
+  <!-- engraved geometric sigil on the top face (drawn in face space) -->
+  <g clip-path="url(#topclip)">
+    <g transform="matrix(0.96 -0.48 0.72 0.38 44 124)">
+      <!-- grooves: dark cut with a lit lower lip -->
+      <g fill="none" stroke-linejoin="round">
+        <g stroke="#fff4c8" stroke-width="3" opacity="0.8" transform="translate(1.2 1.2)">
+          <rect x="12" y="12" width="76" height="76"/>
+          <path d="M50 20 L80 50 L50 80 L20 50 Z"/>
+          <circle cx="50" cy="50" r="13"/>
+          <path d="M12 50 L20 50 M80 50 L88 50 M50 12 L50 20 M50 80 L50 88"/>
+          <path d="M12 12 L30 30 M88 12 L70 30 M12 88 L30 70 M88 88 L70 70"/>
+        </g>
+        <g stroke="#6a3e08" stroke-width="3.4">
+          <rect x="12" y="12" width="76" height="76"/>
+          <path d="M50 20 L80 50 L50 80 L20 50 Z"/>
+          <circle cx="50" cy="50" r="13"/>
+          <path d="M12 50 L20 50 M80 50 L88 50 M50 12 L50 20 M50 80 L50 88"/>
+          <path d="M12 12 L30 30 M88 12 L70 30 M12 88 L30 70 M88 88 L70 70"/>
+        </g>
+      </g>
+      <circle cx="50" cy="50" r="5" fill="#6a3e08"/>
+      <circle cx="49" cy="49" r="2.6" fill="#fff4c8"/>
+    </g>
+    <!-- weathering scratches -->
+    <path d="M70 120 L98 112 M150 96 L176 102 M124 140 L150 132" stroke="#fff6d4" stroke-width="1.2" opacity="0.55"/>
+  </g>
+
+  <!-- bevel highlights on the top edges -->
+  <path d="M44 124 L140 76 L212 112" stroke="#fff6cc" stroke-width="2.6" fill="none" stroke-linejoin="round"/>
+  <path d="M44 124 L116 162 L212 112" stroke="#ffe08a" stroke-width="2" fill="none" stroke-linejoin="round" opacity="0.85"/>
+  <path d="M116 162 L120 230" stroke="#d99d34" stroke-width="1.6" opacity="0.7"/>
+
+  <!-- scorched, blackened edges and soot -->
+  <g clip-path="url(#ingot)">
+    <rect x="0" y="0" width="256" height="256" filter="url(#tarnish)" opacity="0.55"/>
+    <ellipse cx="28" cy="178" rx="40" ry="34" fill="url(#scorch)"/>
+    <ellipse cx="228" cy="156" rx="30" ry="30" fill="url(#scorch)"/>
+    <ellipse cx="160" cy="214" rx="60" ry="24" fill="url(#scorch)"/>
+    <ellipse cx="142" cy="78" rx="26" ry="10" fill="url(#scorch)" opacity="0.7"/>
+    <ellipse cx="64" cy="212" rx="44" ry="20" fill="url(#scorch)" opacity="0.8"/>
+    <!-- soot streaks running down the front face -->
+    <path d="M146 160 L152 214 M174 146 L182 200 M198 134 L206 184" stroke="#120803" stroke-width="7" opacity="0.6" filter="url(#blur2)"/>
+    <!-- faint residual heat in the burn -->
+    <ellipse cx="224" cy="150" rx="10" ry="8" fill="url(#heat)" opacity="0.6"/>
+  </g>
+  <!-- nicks and dents along the front edge -->
+  <path d="M136 152 L140 157 L145 150" stroke="#4a2a06" stroke-width="2" fill="none"/>
+  <path d="M168 135 L171 140 L175 133" stroke="#4a2a06" stroke-width="2" fill="none"/>
+  <path d="M60 132 L64 137 L69 131" stroke="#5a3408" stroke-width="2" fill="none"/>
+  <!-- specular glints -->
+  <path d="M120 86 L126 86 M123 83 L123 89" stroke="#ffffff" stroke-width="1.6" stroke-linecap="round"/>
+  <circle cx="123" cy="86" r="3" fill="#fff" opacity="0.5" filter="url(#blur2)"/>
+  </g>
+</svg>

@@ -1,0 +1,135 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="70%">
+      <stop offset="0" stop-color="#16171a"/>
+      <stop offset="1" stop-color="#050607"/>
+    </radialGradient>
+    <linearGradient id="plate" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#d5dce3"/>
+      <stop offset="0.35" stop-color="#8d969f"/>
+      <stop offset="0.7" stop-color="#555d66"/>
+      <stop offset="1" stop-color="#262a2f"/>
+    </linearGradient>
+    <linearGradient id="plate2" x1="1" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#a9b2bb"/>
+      <stop offset="0.5" stop-color="#5d666f"/>
+      <stop offset="1" stop-color="#1f2327"/>
+    </linearGradient>
+    <linearGradient id="plateEdge" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3a4047"/>
+      <stop offset="1" stop-color="#14171a"/>
+    </linearGradient>
+    <linearGradient id="pcb" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#3fae5a"/>
+      <stop offset="0.6" stop-color="#1d6e34"/>
+      <stop offset="1" stop-color="#0c3a1a"/>
+    </linearGradient>
+    <linearGradient id="pipe" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#5a3216"/>
+      <stop offset="0.3" stop-color="#e09a5a"/>
+      <stop offset="0.55" stop-color="#a8622c"/>
+      <stop offset="1" stop-color="#3a1e0a"/>
+    </linearGradient>
+    <linearGradient id="chip" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3a3d42"/>
+      <stop offset="1" stop-color="#101113"/>
+    </linearGradient>
+    <filter id="blur2" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2"/></filter>
+    <filter id="blur4" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="4"/></filter>
+    <filter id="grime" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.06" numOctaves="3" seed="3" result="n"/>
+      <feColorMatrix in="n" type="matrix" values="0 0 0 0 0.08  0 0 0 0 0.06  0 0 0 0 0.04  0 0 0 -2.4 1.3"/>
+    </filter>
+    <clipPath id="plateA"><path d="M30 150 C44 112 70 84 112 66 L150 60 C142 84 146 108 160 128 L120 168 C92 160 62 160 30 150 Z"/></clipPath>
+  </defs>
+  <rect width="256" height="256" fill="url(#bg)"/>
+  <g transform="translate(128 128) scale(0.96) translate(-131 -140)">
+  <ellipse cx="128" cy="218" rx="110" ry="18" fill="#000" opacity="0.9" filter="url(#blur4)"/>
+
+  <!-- dark rubble base of small fragments -->
+  <path d="M26 206 L44 186 L70 192 L92 178 L124 186 L150 176 L182 184 L208 176 L232 196 L226 214 L128 222 L34 216 Z" fill="#23272c"/>
+  <path d="M44 186 L70 192 L92 178 L124 186 L150 176 L182 184 L208 176 L232 196" stroke="#5c646d" stroke-width="2" fill="none" stroke-linejoin="round"/>
+  <path d="M60 204 L76 196 L90 206 Z M168 204 L188 194 L196 208 Z M112 210 L126 200 L138 212 Z" fill="#3e454d"/>
+
+  <!-- back: large twisted hull plate, curled and torn -->
+  <path d="M30 150 C44 112 70 84 112 66 L150 60 C142 84 146 108 160 128 L120 168 C92 160 62 160 30 150 Z" fill="url(#plate)"/>
+  <g clip-path="url(#plateA)">
+    <rect x="0" y="0" width="256" height="256" filter="url(#grime)" opacity="0.6"/>
+    <!-- panel seams and rivet rows following the curl -->
+    <path d="M52 138 C64 108 86 90 122 76" stroke="#2a2f35" stroke-width="2.5" fill="none"/>
+    <path d="M53 140 C65 110 87 92 123 78" stroke="#e7ecf1" stroke-width="1" fill="none" opacity="0.6"/>
+    <path d="M86 158 C94 126 112 104 146 92" stroke="#2a2f35" stroke-width="2.5" fill="none"/>
+    <g fill="#e2e8ee">
+      <circle cx="62" cy="122" r="2"/><circle cx="74" cy="106" r="2"/><circle cx="90" cy="94" r="2"/><circle cx="106" cy="86" r="2"/>
+      <circle cx="96" cy="140" r="2"/><circle cx="108" cy="122" r="2"/><circle cx="124" cy="110" r="2"/>
+    </g>
+    <!-- scorch mark -->
+    <ellipse cx="128" cy="140" rx="30" ry="22" fill="#0c0d0f" opacity="0.7" filter="url(#blur4)"/>
+  </g>
+  <!-- torn jagged edge of the plate -->
+  <path d="M150 60 L146 70 L152 78 L145 88 L151 100 L148 110 L160 128" stroke="#1a1d20" stroke-width="3" fill="none" stroke-linejoin="round"/>
+  <path d="M150 60 L146 70 L152 78 L145 88 L151 100 L148 110 L160 128" stroke="#f0f4f8" stroke-width="1.2" fill="none" stroke-linejoin="round"/>
+  <path d="M30 150 C44 112 70 84 112 66 L150 60" stroke="#f4f7fa" stroke-width="2" fill="none" opacity="0.8"/>
+  <!-- plate thickness on the curl -->
+  <path d="M30 150 C62 160 92 160 120 168 L118 176 C90 168 60 168 28 158 Z" fill="url(#plateEdge)"/>
+
+  <!-- bent pipe crossing the pile -->
+  <path d="M112 186 L150 150 C162 138 176 128 200 128 L232 128" stroke="#1a0e05" stroke-width="20" fill="none" stroke-linecap="butt"/>
+  <path d="M112 186 L150 150 C162 138 176 128 200 128 L232 128" stroke="#9a5a28" stroke-width="16" fill="none"/>
+  <path d="M110 182 L148 146 C160 134 176 124 200 124 L232 124" stroke="#f0b47a" stroke-width="4" fill="none" opacity="0.85"/>
+  <path d="M116 192 L154 156 C164 146 178 134 200 134 L232 134" stroke="#3a1e0a" stroke-width="4" fill="none" opacity="0.8"/>
+  <!-- crush dent at the bend -->
+  <path d="M160 136 C166 142 170 140 172 132" stroke="#3a1e0a" stroke-width="3" fill="none"/>
+  <!-- flange at the pipe end -->
+  <rect x="226" y="112" width="10" height="32" rx="2" fill="url(#pipe)"/>
+  <path d="M227 114 L227 142" stroke="#ffd2a4" stroke-width="1.5" opacity="0.8"/>
+  <circle cx="231" cy="117" r="1.6" fill="#2a1406"/><circle cx="231" cy="139" r="1.6" fill="#2a1406"/>
+
+  <!-- second smaller bent plate on the right -->
+  <path d="M168 196 L176 160 L214 146 L230 168 L222 200 Z" fill="url(#plate2)"/>
+  <path d="M176 160 L214 146 L230 168" stroke="#e6ebf0" stroke-width="1.6" fill="none" opacity="0.8"/>
+  <path d="M184 172 L216 162 M182 184 L218 174" stroke="#262a2f" stroke-width="2"/>
+  <g fill="#d9dfe5"><circle cx="190" cy="168" r="1.8"/><circle cx="208" cy="162" r="1.8"/><circle cx="188" cy="180" r="1.8"/><circle cx="210" cy="174" r="1.8"/></g>
+
+  <!-- broken circuit board, tilted in front -->
+  <g transform="rotate(-14 92 176)">
+    <path d="M44 150 L132 150 L132 162 L124 168 L130 178 L120 186 L126 198 L44 198 Z" fill="#071a0d"/>
+    <path d="M46 152 L130 152 L130 162 L122 168 L128 178 L118 186 L124 196 L46 196 Z" fill="url(#pcb)"/>
+    <!-- copper traces -->
+    <g stroke="#e8c060" stroke-width="2" fill="none" stroke-linecap="round">
+      <path d="M52 160 L70 160 L78 168 L100 168"/>
+      <path d="M52 186 L66 186 L74 178 L112 178"/>
+      <path d="M90 158 L90 164 L118 164"/>
+      <path d="M56 172 L64 172"/>
+    </g>
+    <g fill="#f2d070"><circle cx="100" cy="168" r="2.2"/><circle cx="112" cy="178" r="2.2"/><circle cx="64" cy="172" r="2"/><circle cx="118" cy="164" r="2"/></g>
+    <!-- chips -->
+    <rect x="82" y="182" width="22" height="12" rx="1.5" fill="url(#chip)"/>
+    <path d="M84 182 L84 179 M88 182 L88 179 M92 182 L92 179 M96 182 L96 179 M100 182 L100 179" stroke="#c9ccd0" stroke-width="1.2"/>
+    <rect x="96" y="154" width="14" height="9" rx="1" fill="url(#chip)"/>
+    <rect x="58" y="164" width="10" height="5" rx="1" fill="#b8892c"/>
+    <path d="M83 183 L103 183" stroke="#6b7078" stroke-width="1"/>
+    <!-- cracked broken edge highlight -->
+    <path d="M130 152 L130 162 L122 168 L128 178 L118 186 L124 196" stroke="#a6e8b4" stroke-width="1.4" fill="none"/>
+    <path d="M46 152 L130 152" stroke="#9ce0aa" stroke-width="1.4"/>
+  </g>
+
+  <!-- frayed wires spilling out -->
+  <g fill="none" stroke-linecap="round">
+    <path d="M120 196 C140 204 150 186 166 196 C176 202 178 212 190 210" stroke="#3a0a08" stroke-width="7"/>
+    <path d="M120 196 C140 204 150 186 166 196 C176 202 178 212 190 210" stroke="#d83a2a" stroke-width="4.5"/>
+    <path d="M120 194 C140 202 150 184 166 194" stroke="#ff9a88" stroke-width="1.4" opacity="0.8"/>
+    <path d="M116 200 C126 220 150 214 156 226" stroke="#3a2c04" stroke-width="7"/>
+    <path d="M116 200 C126 220 150 214 156 226" stroke="#e8c228" stroke-width="4.5"/>
+    <path d="M118 190 C132 176 138 196 150 182 C156 174 160 168 170 170" stroke="#071a3a" stroke-width="7"/>
+    <path d="M118 190 C132 176 138 196 150 182 C156 174 160 168 170 170" stroke="#2f7ae0" stroke-width="4.5"/>
+    <!-- exposed copper strands -->
+    <path d="M190 210 L198 206 M190 210 L199 211 M190 210 L196 216" stroke="#f0a050" stroke-width="1.6"/>
+    <path d="M156 226 L160 234 M156 226 L164 229 M156 226 L152 234" stroke="#f0a050" stroke-width="1.6"/>
+    <path d="M170 170 L178 166 M170 170 L178 172 M170 170 L175 163" stroke="#f0a050" stroke-width="1.6"/>
+  </g>
+  <!-- sparks from the live wire -->
+  <circle cx="200" cy="208" r="5" fill="#ffd27a" opacity="0.6" filter="url(#blur2)"/>
+  <path d="M200 208 L206 200 M200 208 L208 210" stroke="#fff4c8" stroke-width="1.4" stroke-linecap="round"/>
+  </g>
+</svg>
