@@ -59,6 +59,13 @@ TINT_MAPPED_FRAGMENT_SHADER = "fs_plt_tinter_nm"
 TINT_HAIR_MAPPED_FRAGMENT_SHADER = "fs_plt_hair_nm"
 # Restore native color filtering only for reported dye edge regressions.
 SMOOTH_TINT_MATERIALS = frozenset({"helm_053", "helm_287", "pfh0_neck267", "pmh0_neck267"})
+# Republic Trooper body-part specular/roughness maps replace the palette's metal
+# reflectance, so dyed metal renders as a pale, nonmetallic sheen. Unbind them and
+# keep the normal maps; the palette then drives metal like every other dyed part.
+PALETTE_SPECULAR_MAPS = frozenset({
+    "rep_chest_s", "rep_chest_r", "rep_composite_s", "rep_composite_r", "rep_foot_s",
+    "rep_foot_r", "rep_hand_s", "rep_hand_r", "rep_leg_s", "rep_leg_r",
+})
 AUTHORED_HAIR_FRAGMENT_SHADERS = {"fslit_aniso_nm"}
 _MTR_PATHS_BY_RESREF: dict[str, Path] | None = None
 _SOURCE_MTR_PATHS_BY_RESREF: dict[str, list[Path]] | None = None
@@ -1661,7 +1668,9 @@ def material_profile_signature(source: str, profile: tuple[str, list[str]] | Non
     profile_name = profile[0] if profile is not None else "@canonical"
     key = (source, profile_name)
     if key not in _PROFILE_SIGNATURES:
-        text = tint_material_text(mtr_path(source), source, "mask", 1, 1, source, profile)
+        # Unbinding palette specular maps must not rename scoped aliases either.
+        text = tint_material_text(mtr_path(source), source, "mask", 1, 1, source, profile,
+                                  keep_palette_specular_maps=True)
         # Edge filtering is a per-source opt-in; it must not rename scoped aliases.
         _PROFILE_SIGNATURES[key] = tuple(sorted(
             (directive, " ".join(line.split()).lower())
@@ -2305,6 +2314,7 @@ def tint_material_text(
     profile: tuple[str, list[str]] | None = None,
     *,
     native_palette: bool = False,
+    keep_palette_specular_maps: bool = False,
 ) -> str:
     source_material = source_material or material
     smooth_edges = source_material.lower() in SMOOTH_TINT_MATERIALS
@@ -2364,6 +2374,14 @@ def tint_material_text(
         re.IGNORECASE,
     )
     lines = [line for line in original_lines if not replaced.match(line)]
+    if not keep_palette_specular_maps:
+        lines = [
+            f"{match.group(1)} null"
+            if (match := re.match(r"^\s*(texture[23])\s+(\S+)\s*$", line, re.IGNORECASE))
+            and match.group(2).lower() in PALETTE_SPECULAR_MAPS
+            else line
+            for line in lines
+        ]
     if source_material.lower() in HavocGlowAssets.MAPPED_GLOW_MATERIALS:
         lines = [line for line in lines if not re.match(r'^\s*parameter\s+float\s+glowLayer\b', line, re.IGNORECASE)]
         lines.append('parameter float glowLayer 7.0')
