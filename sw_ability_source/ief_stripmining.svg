@@ -1,0 +1,173 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <defs>
+    <radialGradient id="heat" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffb347" stop-opacity="0.85"/>
+      <stop offset="55%" stop-color="#ff6a1e" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#ff3b1e" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="housing" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ffcf7a"/>
+      <stop offset="22%" stop-color="#ff9d2e"/>
+      <stop offset="70%" stop-color="#d9590c"/>
+      <stop offset="100%" stop-color="#7a2f06"/>
+    </linearGradient>
+    <linearGradient id="housingTop" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.55"/>
+      <stop offset="40%" stop-color="#ffffff" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#3a1500" stop-opacity="0.45"/>
+    </linearGradient>
+    <linearGradient id="collar" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#8793aa"/>
+      <stop offset="35%" stop-color="#d4deec"/>
+      <stop offset="100%" stop-color="#394356"/>
+    </linearGradient>
+    <linearGradient id="steel" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#7f8ca3"/>
+      <stop offset="28%" stop-color="#f5f9ff"/>
+      <stop offset="55%" stop-color="#a9b8cd"/>
+      <stop offset="100%" stop-color="#2b3344"/>
+    </linearGradient>
+    <linearGradient id="crust" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#e6d4b4"/>
+      <stop offset="100%" stop-color="#8f7a60"/>
+    </linearGradient>
+    <linearGradient id="rust" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#c47a47"/>
+      <stop offset="100%" stop-color="#6a3a22"/>
+    </linearGradient>
+    <linearGradient id="slate" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#6b7194"/>
+      <stop offset="100%" stop-color="#2a2d4c"/>
+    </linearGradient>
+    <linearGradient id="pit" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#2a1608"/>
+      <stop offset="70%" stop-color="#4a1f08"/>
+      <stop offset="100%" stop-color="#b8420c"/>
+    </linearGradient>
+    <linearGradient id="ore" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#d8ffff"/>
+      <stop offset="45%" stop-color="#3fd9f2"/>
+      <stop offset="100%" stop-color="#0a6f93"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fff2a8"/>
+      <stop offset="50%" stop-color="#f2b724"/>
+      <stop offset="100%" stop-color="#9c5d08"/>
+    </linearGradient>
+    <clipPath id="coneClip">
+      <path d="M 52 104 L 204 104 L 128 228 Z"/>
+    </clipPath>
+    <filter id="dust" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="5"/>
+    </filter>
+    <filter id="soft" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="2.5"/>
+    </filter>
+    <radialGradient id="halo" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffd9a0" stop-opacity="0.7"/>
+      <stop offset="60%" stop-color="#ff9a3c" stop-opacity="0.28"/>
+      <stop offset="100%" stop-color="#ff7a1e" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <ellipse cx="128" cy="118" rx="124" ry="112" fill="url(#halo)"/>
+  <!-- heat glow where the bit bites -->
+  <ellipse cx="128" cy="196" rx="124" ry="84" fill="url(#heat)"/>
+
+  <!-- layered rock, cut away -->
+  <path d="M -6 176 L 20 166 L 46 173 L 70 165 L 88 171 L 168 171 L 190 164 L 214 172 L 238 165 L 262 174 L 262 198 L -6 198 Z" fill="url(#crust)"/>
+  <path d="M -6 196 L 40 203 L 96 195 L 166 200 L 222 193 L 262 199 L 262 228 L -6 228 Z" fill="url(#rust)"/>
+  <path d="M -6 226 L 50 232 L 120 225 L 196 231 L 262 225 L 262 264 L -6 264 Z" fill="url(#slate)"/>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M -6 176 L 20 166 L 46 173 L 70 165 L 88 171" stroke="#fff6e2" stroke-width="4" stroke-opacity="0.9"/>
+    <path d="M 168 171 L 190 164 L 214 172 L 238 165 L 262 174" stroke="#fff6e2" stroke-width="4" stroke-opacity="0.9"/>
+    <path d="M -6 196 L 40 203 L 96 195" stroke="#f0b886" stroke-width="3" stroke-opacity="0.8"/>
+    <path d="M 166 200 L 222 193 L 262 199" stroke="#f0b886" stroke-width="3" stroke-opacity="0.8"/>
+    <path d="M -6 226 L 50 232 L 100 226" stroke="#b9bfe6" stroke-width="3" stroke-opacity="0.75"/>
+    <path d="M 196 231 L 262 225" stroke="#b9bfe6" stroke-width="3" stroke-opacity="0.75"/>
+    <path d="M 30 176 L 40 194 L 28 212" stroke="#24150c" stroke-width="3.5" stroke-opacity="0.7"/>
+    <path d="M 224 176 L 214 194 L 226 214" stroke="#24150c" stroke-width="3.5" stroke-opacity="0.7"/>
+    <path d="M 60 204 L 52 222" stroke="#20110a" stroke-width="3.5" stroke-opacity="0.65"/>
+  </g>
+  <g stroke="#06394d" stroke-width="2.5" stroke-linejoin="round">
+    <path d="M 24 242 L 36 224 L 52 236 L 46 252 L 28 254 Z" fill="url(#ore)"/>
+    <path d="M 210 244 L 222 226 L 240 238 L 234 254 L 214 254 Z" fill="url(#ore)"/>
+    <path d="M 196 208 L 204 198 L 216 205 L 210 215 Z" fill="url(#gold)" stroke="#5c3604"/>
+    <path d="M 40 210 L 48 200 L 60 207 L 54 217 Z" fill="url(#gold)" stroke="#5c3604"/>
+  </g>
+
+  <!-- the pit the bit has chewed -->
+  <path d="M 76 168 L 180 168 L 158 214 L 144 244 L 112 244 L 98 214 Z" fill="url(#pit)"/>
+  <path d="M 76 168 L 98 214 L 112 244" fill="none" stroke="#120804" stroke-width="3.5" stroke-opacity="0.85" stroke-linejoin="round"/>
+  <path d="M 180 168 L 158 214 L 144 244" fill="none" stroke="#120804" stroke-width="3.5" stroke-opacity="0.85" stroke-linejoin="round"/>
+  <ellipse cx="128" cy="236" rx="30" ry="15" fill="#ff8a28" opacity="0.8" filter="url(#soft)"/>
+
+  <!-- the drill: motor housing -->
+  <rect x="84" y="8" width="88" height="60" rx="14" fill="url(#housing)" stroke="#4a1a03" stroke-width="4"/>
+  <rect x="84" y="8" width="88" height="60" rx="14" fill="url(#housingTop)"/>
+  <rect x="98" y="20" width="60" height="7" rx="3.5" fill="#3b1402" opacity="0.85"/>
+  <rect x="98" y="33" width="60" height="7" rx="3.5" fill="#3b1402" opacity="0.85"/>
+  <rect x="98" y="46" width="60" height="7" rx="3.5" fill="#3b1402" opacity="0.85"/>
+  <rect x="98" y="26" width="60" height="2.5" rx="1.2" fill="#ffd08a" opacity="0.7"/>
+  <rect x="98" y="39" width="60" height="2.5" rx="1.2" fill="#ffd08a" opacity="0.7"/>
+  <rect x="98" y="52" width="60" height="2.5" rx="1.2" fill="#ffd08a" opacity="0.7"/>
+  <path d="M 92 18 Q 92 13 98 13 L 118 13" fill="none" stroke="#fff0cf" stroke-width="3.5" stroke-linecap="round" stroke-opacity="0.85"/>
+  <!-- shoulder collar and chuck -->
+  <path d="M 96 66 L 160 66 L 172 90 L 84 90 Z" fill="url(#collar)" stroke="#141a26" stroke-width="3.5" stroke-linejoin="round"/>
+  <rect x="72" y="88" width="112" height="18" rx="7" fill="url(#collar)" stroke="#141a26" stroke-width="3.5"/>
+  <circle cx="92" cy="97" r="3.5" fill="#141a26"/>
+  <circle cx="128" cy="97" r="3.5" fill="#141a26"/>
+  <circle cx="164" cy="97" r="3.5" fill="#141a26"/>
+  <!-- the bit -->
+  <path d="M 52 104 L 204 104 L 128 228 Z" fill="url(#steel)"/>
+  <g clip-path="url(#coneClip)">
+    <g stroke="#0c1119" stroke-width="16" stroke-opacity="0.8" stroke-linecap="butt">
+      <line x1="40" y1="134" x2="220" y2="108"/>
+      <line x1="40" y1="162" x2="220" y2="136"/>
+      <line x1="40" y1="190" x2="220" y2="164"/>
+      <line x1="40" y1="218" x2="220" y2="192"/>
+    </g>
+    <g stroke="#ffffff" stroke-width="4" stroke-opacity="0.8" stroke-linecap="butt">
+      <line x1="40" y1="123" x2="220" y2="97"/>
+      <line x1="40" y1="151" x2="220" y2="125"/>
+      <line x1="40" y1="179" x2="220" y2="153"/>
+      <line x1="40" y1="207" x2="220" y2="181"/>
+    </g>
+    <ellipse cx="128" cy="230" rx="28" ry="22" fill="#ff7a1a" opacity="0.85" filter="url(#soft)"/>
+  </g>
+  <path d="M 52 104 L 204 104 L 128 228 Z" fill="none" stroke="#0d121b" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M 64 112 L 124 212" fill="none" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round" stroke-opacity="0.55"/>
+
+  <!-- dust billowing from the rim -->
+  <g fill="#f0dfc2" filter="url(#dust)" opacity="0.85">
+    <ellipse cx="62" cy="166" rx="24" ry="11"/>
+    <ellipse cx="196" cy="164" rx="24" ry="11"/>
+  </g>
+  <!-- front rim lips -->
+  <path d="M 70 166 L 96 172 L 108 192 L 92 200 L 76 186 Z" fill="url(#crust)" stroke="#43321f" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M 186 166 L 160 172 L 148 192 L 164 200 L 180 186 Z" fill="url(#crust)" stroke="#43321f" stroke-width="3" stroke-linejoin="round"/>
+
+  <!-- flying debris: rock chunks, ore and gold -->
+  <g stroke-linejoin="round">
+    <!-- left -->
+    <path d="M 14 118 L 40 102 L 58 122 L 48 148 L 22 150 Z" fill="url(#rust)" stroke="#24120a" stroke-width="3.5"/>
+    <path d="M 14 118 L 40 102 L 58 122 L 32 126 Z" fill="#f0c196" opacity="0.85"/>
+    <path d="M 8 160 L 22 148 L 38 158 L 32 174 L 14 176 Z" fill="url(#gold)" stroke="#5c3604" stroke-width="3"/>
+    <path d="M 22 148 L 38 158 L 32 174 L 26 160 Z" fill="#ffffff" opacity="0.35"/>
+    <path d="M 40 66 L 50 52 L 62 64 L 52 84 Z" fill="url(#ore)" stroke="#06394d" stroke-width="3"/>
+    <path d="M 50 52 L 62 64 L 52 84 L 52 66 Z" fill="#ffffff" opacity="0.4"/>
+    <path d="M 22 92 L 34 84 L 42 96 L 30 104 Z" fill="url(#crust)" stroke="#3b2a1a" stroke-width="2.5"/>
+    <!-- right -->
+    <path d="M 198 100 L 226 92 L 246 112 L 238 140 L 208 142 Z" fill="url(#rust)" stroke="#24120a" stroke-width="3.5"/>
+    <path d="M 198 100 L 226 92 L 246 112 L 214 114 Z" fill="#f0c196" opacity="0.85"/>
+    <path d="M 214 152 L 228 138 L 246 150 L 238 172 L 220 168 Z" fill="url(#ore)" stroke="#06394d" stroke-width="3"/>
+    <path d="M 228 138 L 246 150 L 238 172 L 232 152 Z" fill="#ffffff" opacity="0.4"/>
+    <path d="M 206 62 L 216 50 L 228 60 L 220 76 Z" fill="url(#gold)" stroke="#5c3604" stroke-width="3"/>
+    <path d="M 226 84 L 238 78 L 244 90 L 232 96 Z" fill="url(#crust)" stroke="#3b2a1a" stroke-width="2.5"/>
+  </g>
+  <!-- sparks -->
+  <g fill="#fff6c8" stroke="#ff9a2a" stroke-width="1.5" stroke-linejoin="round">
+    <path d="M 92 156 L 97 142 L 102 156 L 116 161 L 102 166 L 97 180 L 92 166 L 78 161 Z"/>
+    <path d="M 162 154 L 166 143 L 170 154 L 181 158 L 170 162 L 166 173 L 162 162 L 151 158 Z"/>
+  </g>
+</svg>
