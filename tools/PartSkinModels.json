@@ -194,7 +194,7 @@
     "pfh0_pelvis1575": {"source": "pfh0_pelvis042", "path": "sw_pt_pelvis/pfh0_pelvis1575.mdl", "mapping": [[[0, 3, 3], [1, 2, 2], [2, 6, 12], [3, 7, 13]]], "sha256": "d162467f3849351f67854d8e08d9e0f587d38ce861644b71d681626402b05b20"},
     "pfh0_pelvis1576": {"source": "pfh0_pelvis258", "path": "sw_pt_pelvis/pfh0_pelvis1576.mdl", "mapping": [[[0, 2, 2], [1, 10, 33], [2, 3, 3], [3, 6, 12]]], "sha256": "2a4cfb1277e359ee896f76794d8497dd24be7ae7646f2d0b263880cff5bc80c0"},
     "pfh0_pelvis2078": {"source": "pfh0_pelvis198", "path": "sw_pt_pelvis/pfh0_pelvis2078.mdl", "mapping": [[[0, 2, 2], [1, 3, 3], [2, 6, 12], [3, 1, 1], [4, 10, 33]]], "sha256": "2f9e59f7d921078597e4472f45ad62d558d1b0fd3e8c1126f784d8a8f49fe51e"},
-    "pfh0_pelvis2092": {"source": "pfh0_pelvis035", "path": "sw_pt_pelvis/pfh0_pelvis2092.mdl", "mapping": [[[0, 6, 12], [1, 3, 3], [2, 2, 2], [3, 48, 90], [4, 49, 91], [5, 52, 94], [6, 51, 93]]], "sha256": "8eca18836f2870462cbd78622972ce268b580f9608bc985c6053ebb8091d315e"},
+    "pfh0_pelvis2093": {"source": "pfh0_pelvis035", "path": "sw_pt_pelvis/pfh0_pelvis2093.mdl", "mapping": [[[0, 6, 12], [1, 3, 3], [2, 2, 2]]], "sha256": "c11c2bf2f4ee4c5c23a5244ff1c640d1f51ec2bee6961ac27c4fbd90e15b9b5d"},
     "pfh0_shinl1183": {"source": "pfh0_shinl161", "path": "sw_pt_lshin/pfh0_shinl1183.mdl", "mapping": [[[0, 8, 14], [1, 7, 13]]], "sha256": "dec5fb18ef0d24c951dcf0a69cbf5dcb5422288fac6d9b7cfaa426853f600079"},
     "pfh0_shol1184": {"source": "pfh0_shol006", "path": "sw_pt_lshoul/pfh0_shol1184.mdl", "mapping": [[[0, 10, 33], [1, 11, 34]]], "sha256": "ee38b99a4cea134586c1e253f636cd05c3ff1ba21aeaf0822526bff8316f278d"},
     "pfh0_shol1185": {"source": "pfh0_shol013", "path": "sw_pt_lshoul/pfh0_shol1185.mdl", "mapping": [[[0, 16, 44], [1, 10, 33]], [[0, 10, 33], [1, 11, 34]]], "sha256": "1e68e8e41a964f8412a2640caf78c86a74c73b0086824c8704bc53cde51c7c36"},
@@ -772,6 +772,7 @@
     "pfh0_pelvis1177",
     "pfh0_pelvis2017",
     "pfh0_pelvis2018",
+    "pfh0_pelvis2092",
     "pfh0_shol1193",
     "pfh0_shor1202",
     "pfo0_belt1203",
@@ -1098,7 +1099,7 @@
   ],
   "inputs": {
     "count": 18824,
-    "sha256": "f6449d7432e4f4c8bf5584465e7d42bf768ee0d028ad581debaf7c3ad599f638"
+    "sha256": "14e55d39e2bf9d67dae114f2c9775b2235a4db903677a7a56e38d51f44a39cb8"
   },
   "implementation": {
     "tools/GeneratePartSkinModels.py": "15fb75654e3b8d2410fd8457cd665f94d4b7585dfcedc0859abb47df67e45cec",
@@ -1110,6 +1111,6 @@
   },
   "tables": {
     "sw_2da/partlayout.2da": "002b204ffc70cfce3d4751b13a2e5362ea1cd0646ae848aca47dfbb58116a3e2",
-    "sw_2da/partrender.2da": "54507db8df4ba7878303a01626aa179bd16889ea744f4f0471a99194b0bd6094"
+    "sw_2da/partrender.2da": "e718161fcd55cb92a4b44c19920f48071c754fb721c67fe3fda087f701a1ff23"
   }
 }

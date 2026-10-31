@@ -81,7 +81,7 @@ class ChestSkirtBindingTests(unittest.TestCase):
                     | every('chest310') - {'pfe0_chest310'}
                     | every('belt019') | every('belt110') | every('belt112') | every('belt114')
                     # Only the human and half-orc bodies carry pelvis 035.
-                    | {f'p{gender}{race}0_pelvis035' for gender in 'fm' for race in 'ho'}
+                    | {f'p{gender}{race}0_pelvis035' for gender in 'fm' for race in 'ho'} - {'pfh0_pelvis035'}
                     # Capes only where the cloak bones animate.
                     | cloaked('neck291') | cloaked('shol260') | cloaked('shor260'))
         self.assertEqual(expected, set(self.models))
@@ -95,11 +95,10 @@ class ChestSkirtBindingTests(unittest.TestCase):
                 self.assertEqual(entry['sha256'], hashlib.sha256(self.current[name]).hexdigest())
                 self.assertEqual(self.current[name], skirts.build(entry))
 
-    def test_belt_226_and_pelvis_198_keep_their_original_rigging(self):
-        """The test server asked for these two to stay as originally rigged."""
+    def test_restored_parts_keep_their_original_rigging(self):
         restored = self.manifest['restored']
         self.assertEqual({f'sw_pt_{kind}/p{gender}{race}0_{kind}{number}.mdl' for kind, number in (('belt', 226), ('pelvis', 198))
-                          for gender in 'fm' for race in 'deho'}, set(restored))
+                          for gender in 'fm' for race in 'deho'} | {'sw_pt_pelvis/pfh0_pelvis035.mdl'}, set(restored))
         for relative, blob in restored.items():
             with self.subTest(model=relative):
                 self.assertEqual(skirts.source(blob), (ROOT / relative).read_bytes())
@@ -255,6 +254,7 @@ class ChestSkirtBindingTests(unittest.TestCase):
                                 self.assertEqual(slot, skin['bone_map'][skin['palette'][slot]])
 
     def test_robe_body_aliases_carry_the_same_weights(self):
+        sources = {**self.current, 'pfh0_pelvis035': (ROOT / 'sw_pt_pelvis/pfh0_pelvis035.mdl').read_bytes()}
         # Shoulder aliases stay listed after their bone mapping changes; only those the render table names are live.
         shoulders = {row.split()[3] for row in (ROOT / 'sw_2da/shoulderrender.2da').read_text().splitlines()[3:] if len(row.split()) == 4}
         aliases = {**json.loads((ROOT / 'tools/PartSkinModels.json').read_text())['models'],
@@ -263,14 +263,14 @@ class ChestSkirtBindingTests(unittest.TestCase):
         necks = json.loads((ROOT / 'tools/NeckModels.json').read_text())['aliases']
         found = set()
         for alias, entry in [*aliases.items(), *((alias, {**entry, 'path': f'sw_pt_neck/{alias}.mdl'}) for alias, entry in necks.items())]:
-            if entry['source'] not in self.models:
+            if entry['source'] not in sources:
                 continue
             found.add(entry['source'])
             with self.subTest(alias=alias):
                 data = (ROOT / entry['path']).read_bytes()
-                self.assertEqual(skin_weight_rows(self.current[entry['source']]), skin_weight_rows(data))
+                self.assertEqual(skin_weight_rows(sources[entry['source']]), skin_weight_rows(data))
         # Robe phenotypes cover every rebound skirt; only the human male shoulders and the neck capes have aliases.
-        self.assertLessEqual({name for name in self.models if not self.shape(name)['cape']}, found)
+        self.assertLessEqual({name for name in self.models if not self.shape(name)['cape']} | {'pfh0_pelvis035'}, found)
 
     def test_skirts_swing_like_cloth_in_walk_and_run(self):
         """A skirt must follow the stride (not freeze), keep the legs covered where the original did, keep a
