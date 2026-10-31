@@ -506,8 +506,8 @@
     "pmh0_pelvis1479": {"source": "pmh0_pelvis265", "path": "sw_pt_pelvis/pmh0_pelvis1479.mdl", "mapping": [[[0, 41, 65], [1, 36, 54], [2, 38, 56], [3, 2, 2]]], "sha256": "b69e845ff8b3fd2401af82bd7d69e1779be71496e5346afc9c5ad5d58719b2f5"},
     "pmh0_pelvis1480": {"source": "pmh0_pelvis268", "path": "sw_pt_pelvis/pmh0_pelvis1480.mdl", "mapping": [[[0, 41, 65], [1, 36, 54], [2, 38, 56]]], "sha256": "c205dc5d19b296177971fe00d41bf9129b6549ee5de0c8e056e43d6f6dfd116b"},
     "pmh0_pelvis1481": {"source": "pmh0_pelvis269", "path": "sw_pt_pelvis/pmh0_pelvis1481.mdl", "mapping": [[[0, 36, 54], [1, 38, 56], [2, 41, 65], [3, 1, 1], [4, 42, 66], [5, 39, 57]]], "sha256": "18cfc151405f754d2667a64b58d849f80708dc20f147f903437068703789156c"},
-    "pmh0_pelvis2089": {"source": "pmh0_pelvis035", "path": "sw_pt_pelvis/pmh0_pelvis2089.mdl", "mapping": [[[0, 38, 56], [1, 41, 65], [2, 36, 54], [5, 47, 78], [6, 48, 79], [7, 51, 82], [8, 52, 83]]], "sha256": "4f9d30c33ec2d142ffa33c70781804320212ae4f4e2110892046536ac3a0a46e"},
     "pmh0_pelvis2090": {"source": "pmh0_pelvis198", "path": "sw_pt_pelvis/pmh0_pelvis2090.mdl", "mapping": [[[0, 41, 65], [1, 36, 54], [2, 38, 56], [3, 1, 1], [4, 2, 2]]], "sha256": "1d9c8d5613a046822447a476e4bb3624e869dbec6c544f53d619e387d9c8f023"},
+    "pmh0_pelvis2094": {"source": "pmh0_pelvis035", "path": "sw_pt_pelvis/pmh0_pelvis2094.mdl", "mapping": [[[0, 38, 56], [1, 41, 65], [2, 36, 54], [3, 42, 66], [4, 39, 57]]], "sha256": "04c6ebe8ee73f7c06284d53f2420523ce0c038f7cda11959a4482861ca0e7f2a"},
     "pmh0_shinl1482": {"source": "pmh0_shinl161", "path": "sw_pt_lshin/pmh0_shinl1482.mdl", "mapping": [[[0, 40, 58], [1, 39, 57]]], "sha256": "1186ea12f160016d82b97ac0970b0869e4c54ea694bbb5b67bda3fa4296bd829"},
     "pmh0_shinr1483": {"source": "pmh0_shinr161", "path": "sw_pt_rshin/pmh0_shinr1483.mdl", "mapping": [[[0, 43, 67], [1, 42, 66]]], "sha256": "883a31f4099e1c8a450db51e26f95e981fe81e4fbe8b4e22e0041c3b52092fd2"},
     "pmo0_belt1908": {"source": "pmo0_belt030", "path": "sw_pt_belt/pmo0_belt1908.mdl", "mapping": [[[0, 2, 2], [1, 36, 55], [2, 37, 56], [3, 40, 65]]], "sha256": "81ed0c231f387d7605a3514e661ab969021c066012641a35fd1432fbbefb6afa"},
@@ -1018,6 +1018,7 @@
     "pmh0_pelvis1474",
     "pmh0_pelvis2047",
     "pmh0_pelvis2048",
+    "pmh0_pelvis2089",
     "pmo0_belt1484",
     "pmo0_belt1485",
     "pmo0_belt1486",
@@ -1099,7 +1100,7 @@
   ],
   "inputs": {
     "count": 18824,
-    "sha256": "14e55d39e2bf9d67dae114f2c9775b2235a4db903677a7a56e38d51f44a39cb8"
+    "sha256": "5709536fb1fe13a998edb2a66e0a9a2206a12e5e864ee4ec8652b13f291d0eaa"
   },
   "implementation": {
     "tools/GeneratePartSkinModels.py": "15fb75654e3b8d2410fd8457cd665f94d4b7585dfcedc0859abb47df67e45cec",
@@ -1111,6 +1112,6 @@
   },
   "tables": {
     "sw_2da/partlayout.2da": "002b204ffc70cfce3d4751b13a2e5362ea1cd0646ae848aca47dfbb58116a3e2",
-    "sw_2da/partrender.2da": "e718161fcd55cb92a4b44c19920f48071c754fb721c67fe3fda087f701a1ff23"
+    "sw_2da/partrender.2da": "65232a2647001a7e75a3ba3526f3a0975a86ef1e8c51c4b34ea2404826039e5e"
   }
 }

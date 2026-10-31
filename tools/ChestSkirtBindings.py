@@ -50,7 +50,7 @@ engine never moves them; on those bodies the legs carry the share the source gav
 on average below the hips and the pelvis the rest (flaps_animated, still_share), and capes
 are not listed.
 
-Belt 226, pelvis 198 and female human pelvis 035 keep their original rigging; the
+Belt 226, pelvis 198 and human pelvis 035 keep their original rigging; the
 manifest's "restored" list holds their original blobs, and --check keeps them so.
 
 The originals come from the Git blobs recorded in ChestSkirtBindings.json, so --apply

@@ -80,8 +80,8 @@ class ChestSkirtBindingTests(unittest.TestCase):
                     # Bothan female chest 310's bone table does not match its skeleton, so it cannot be rebound.
                     | every('chest310') - {'pfe0_chest310'}
                     | every('belt019') | every('belt110') | every('belt112') | every('belt114')
-                    # Only the human and half-orc bodies carry pelvis 035.
-                    | {f'p{gender}{race}0_pelvis035' for gender in 'fm' for race in 'ho'} - {'pfh0_pelvis035'}
+                    # Human pelvis 035 keeps its authored rigging; only the half-orc variants are rebound.
+                    | {f'p{gender}o0_pelvis035' for gender in 'fm'}
                     # Capes only where the cloak bones animate.
                     | cloaked('neck291') | cloaked('shol260') | cloaked('shor260'))
         self.assertEqual(expected, set(self.models))
@@ -98,7 +98,7 @@ class ChestSkirtBindingTests(unittest.TestCase):
     def test_restored_parts_keep_their_original_rigging(self):
         restored = self.manifest['restored']
         self.assertEqual({f'sw_pt_{kind}/p{gender}{race}0_{kind}{number}.mdl' for kind, number in (('belt', 226), ('pelvis', 198))
-                          for gender in 'fm' for race in 'deho'} | {'sw_pt_pelvis/pfh0_pelvis035.mdl'}, set(restored))
+                          for gender in 'fm' for race in 'deho'} | {f'sw_pt_pelvis/p{gender}h0_pelvis035.mdl' for gender in 'fm'}, set(restored))
         for relative, blob in restored.items():
             with self.subTest(model=relative):
                 self.assertEqual(skirts.source(blob), (ROOT / relative).read_bytes())
@@ -254,7 +254,8 @@ class ChestSkirtBindingTests(unittest.TestCase):
                                 self.assertEqual(slot, skin['bone_map'][skin['palette'][slot]])
 
     def test_robe_body_aliases_carry_the_same_weights(self):
-        sources = {**self.current, 'pfh0_pelvis035': (ROOT / 'sw_pt_pelvis/pfh0_pelvis035.mdl').read_bytes()}
+        human_pelves = {f'p{gender}h0_pelvis035' for gender in 'fm'}
+        sources = {**self.current, **{name: (ROOT / f'sw_pt_pelvis/{name}.mdl').read_bytes() for name in human_pelves}}
         # Shoulder aliases stay listed after their bone mapping changes; only those the render table names are live.
         shoulders = {row.split()[3] for row in (ROOT / 'sw_2da/shoulderrender.2da').read_text().splitlines()[3:] if len(row.split()) == 4}
         aliases = {**json.loads((ROOT / 'tools/PartSkinModels.json').read_text())['models'],
@@ -270,7 +271,7 @@ class ChestSkirtBindingTests(unittest.TestCase):
                 data = (ROOT / entry['path']).read_bytes()
                 self.assertEqual(skin_weight_rows(sources[entry['source']]), skin_weight_rows(data))
         # Robe phenotypes cover every rebound skirt; only the human male shoulders and the neck capes have aliases.
-        self.assertLessEqual({name for name in self.models if not self.shape(name)['cape']} | {'pfh0_pelvis035'}, found)
+        self.assertLessEqual({name for name in self.models if not self.shape(name)['cape']} | human_pelves, found)
 
     def test_skirts_swing_like_cloth_in_walk_and_run(self):
         """A skirt must follow the stride (not freeze), keep the legs covered where the original did, keep a
