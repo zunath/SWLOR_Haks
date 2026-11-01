@@ -1,4 +1,4 @@
-"""Guard release 035 skinning, canonical 034 identity and local front/left clearance."""
+"""Guard release 035 skinning, canonical 034 identity and local front/side clearance."""
 from pathlib import Path
 import hashlib
 import json
@@ -109,6 +109,22 @@ class PelvisSkirtBindingTests(unittest.TestCase):
                         invalid = {**self.entries[name]['parameters'], field: value}
                         with self.assertRaises(ValueError, msg=f'{field}={value}'):
                             garment.displacement(invalid)
+
+    def test_clearance_does_not_collapse_or_invert_authored_faces(self):
+        for name, source in self.sources.items():
+            with self.subTest(model=name):
+                before = next(mesh for _, _, mesh in mdl.binary_nodes(source) if mesh and 'weights' in mesh)
+                after = next(mesh for _, _, mesh in mdl.binary_nodes(self.outputs[name]) if mesh and 'weights' in mesh)
+                faces = np.array([face[:3] for face in before['faces']])
+                original = np.array(before['verts'])[faces]
+                fitted = np.array(after['verts'])[faces]
+                original_normals = np.cross(original[:, 1] - original[:, 0], original[:, 2] - original[:, 0])
+                fitted_normals = np.cross(fitted[:, 1] - fitted[:, 0], fitted[:, 2] - fitted[:, 0])
+                valid = np.linalg.norm(original_normals, axis=1) > 1e-12
+                self.assertTrue(np.all(np.linalg.norm(fitted_normals[valid], axis=1) > 1e-12),
+                                'Clearance collapsed an authored face')
+                self.assertTrue(np.all(np.einsum('ij,ij->i', original_normals[valid], fitted_normals[valid]) > 0),
+                                'Clearance inverted an authored face')
 
     def test_bounds_normals_and_face_planes_match_the_new_positions(self):
         for name, data in self.outputs.items():
