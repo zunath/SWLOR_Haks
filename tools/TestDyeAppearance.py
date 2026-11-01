@@ -30,10 +30,12 @@ class DyeAppearanceTests(unittest.TestCase):
         temporary = tempfile.TemporaryDirectory()
         self.addCleanup(temporary.cleanup)
         self.root = Path(temporary.name)
-        for folder in ("sw_tint_mtr", "sw_item", "sw_shader", "tools"):
+        for folder in ("sw_tint_mtr", "sw_item", "sw_shader", "sw_2da", "tools"):
             (self.root / folder).mkdir()
         for path in c.SHARED_INPUTS:
             (self.root / path).write_bytes(b"shared " + path.encode())
+        self.catalog("tintmap", ["0 pmh0_legl121 plate 2,4", "1 pmh0_legl121 legacy 2", "2 **** **** ****"])
+        self.catalog("cloaktint", ["0 cloak_001 cloaktint 3,5 0"], "MODEL MATERIAL LAYERS INDEX")
         sources = [{"texture": "tm_metal", "layers": [2, 4]}, {"texture": "tm_cloth", "layers": [4, 6]}]
         (self.root / "tools/TintMapSources.json").write_text(json.dumps(sources))
         self.material("legacy", "legacy_s", "tm_metal")
@@ -49,11 +51,15 @@ class DyeAppearanceTests(unittest.TestCase):
             mock = patch.object(c, name, value)
             mock.start()
             self.addCleanup(mock.stop)
-        shared, materials, metal = c.current_state()
-        self.baseline = {"shared": shared, "materials": materials, "legacyMetalSpecular": sorted(metal)}
+        shared, materials, metal, catalogs = c.current_state()
+        self.baseline = {"shared": shared, "materials": materials, "legacyMetalSpecular": sorted(metal),
+                         "catalogs": catalogs}
 
     def git(self, *arguments):
         subprocess.run(["git", "-C", str(self.root), *arguments], check=True, capture_output=True)
+
+    def catalog(self, name, rows, header="MODEL MATERIAL LAYERS"):
+        (self.root / f"sw_2da/{name}.2da").write_text("2DA V2.0\n\n   " + header + "\n" + "\n".join(rows) + "\n")
 
     def material(self, name, spec, mask):
         (self.root / f"sw_tint_mtr/{name}.mtr").write_text(MTR.format(name=name, spec=spec, mask=mask))
@@ -100,6 +106,24 @@ class DyeAppearanceTests(unittest.TestCase):
         (self.root / "sw_item/tm_metal.dds").unlink()
         self.git("rm", "-q", "--cached", "sw_item/tm_metal.dds")
         self.assertEqual(self.errors(), changed)
+
+    def test_rebinding_an_existing_model_fails_and_new_rows_are_allowed(self):
+        self.catalog("tintmap", ["0 pmh0_legl121 plate 2,4", "1 pmh0_legl121 legacy 2", "2 pmh0_legl122 plate 2"])
+        self.assertEqual(self.errors(), [])
+        self.catalog("tintmap", ["0 pmh0_legl121 plate 2,4,6", "1 pmh0_legl121 legacy 2", "2 **** **** ****"])
+        self.assertEqual(self.errors(), ["tintmap.2da pmh0_legl121: material or dye layers changed (approved "
+                                         "'legacy 2; plate 2,4', now 'legacy 2; plate 2,4,6')"])
+        self.catalog("tintmap", ["0 **** **** ****", "1 **** **** ****", "2 **** **** ****"])
+        self.catalog("cloaktint", ["0 cloak_001 cloaktint 3,5 1"], "MODEL MATERIAL LAYERS INDEX")
+        errors = "\n".join(self.errors())
+        self.assertIn("tintmap.2da pmh0_legl121: material or dye layers changed", errors)
+        self.assertIn("now 'removed'", errors)
+        self.assertIn("cloaktint.2da cloak_001: material or dye layers changed", errors)
+
+    def test_palette_sampling_change_fails(self):
+        (self.root / "sw_item/plt_palette.txi").write_text("mipmap 1\n")
+        self.assertEqual(self.errors(), ["sw_item/plt_palette.txi: shared tint input changed; "
+                                         "every dyed part may change color"])
 
     def test_shared_shader_change_and_material_removal_fail(self):
         (self.root / "sw_shader/fs_plt_tinter_nm.shd").write_text("// lighting tweak")

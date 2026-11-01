@@ -2,8 +2,9 @@
 """Keep existing dye colors stable and dyed metal on the palette.
 
 Every tint material (sw_tint_mtr) is fingerprinted from its directives and the
-exact content of every texture (and TXI) it binds, tint masks included. The shared tint shaders and
-palette atlas are fingerprinted as well. DyeAppearanceBaseline.json records the
+exact content of every texture (and TXI) it binds, tint masks included. The shared tint shaders,
+palette atlas, and each model's rows in tintmap.2da and cloaktint.2da (which
+material and dye layers it uses) are recorded as well. DyeAppearanceBaseline.json records the
 approved state, so any change to how an existing part takes dyes fails until the
 baseline is updated on purpose, with before/after client captures in the pull
 request (SWLOR.Game.Server/Readmes/TintMapRendering.md).
@@ -37,8 +38,11 @@ SHARED_INPUTS = (
     "sw_shader/fs_plt_hair_nm.shd",
     "sw_shader/fs_cloaktint.shd",
     "sw_item/plt_palette.tga",
+    "sw_item/plt_palette.txi",
     "sw_item/plt_white.tga",
 )
+# Each model's material and dye-layer rows; changing one recolors that model.
+CATALOGS = ("sw_2da/tintmap.2da", "sw_2da/cloaktint.2da")
 # A texture's TXI changes how it is sampled (tint masks rely on "mipmap 0").
 TEXTURE_EXTENSIONS = (".dds", ".tga", ".txi")
 # The shared placeholder and palette are covered by SHARED_INPUTS. Tint masks
@@ -95,7 +99,23 @@ def mask_layers() -> dict[str, set[int]]:
     return layers
 
 
-def current_state() -> tuple[dict[str, str], dict[str, str], set[str]]:
+def catalog_rows() -> dict[str, dict[str, str]]:
+    catalogs = {}
+    for relative in CATALOGS:
+        lines = (ROOT / relative).read_text(encoding="utf-8", errors="replace").splitlines()
+        header = lines[2].split()
+        rows: dict[str, list[str]] = {}
+        for line in lines[3:]:
+            values = dict(zip(header, line.split()[1:]))
+            model = values.get("MODEL", "****").lower()
+            if model != "****":
+                rows.setdefault(model, []).append(" ".join(
+                    values.get(column, "****").lower() for column in header if column != "MODEL"))
+        catalogs[Path(relative).stem] = {model: "; ".join(sorted(entries)) for model, entries in rows.items()}
+    return catalogs
+
+
+def current_state() -> tuple[dict[str, str], dict[str, str], set[str], dict[str, dict[str, str]]]:
     blobs = file_blobs()
     textures = texture_blobs(blobs)
     layers = mask_layers()
@@ -117,10 +137,11 @@ def current_state() -> tuple[dict[str, str], dict[str, str], set[str]]:
         if (layers.get(bound.get("texture7", ""), set()) & METAL_LAYERS
                 and any(bound.get(unit, "null") != "null" for unit in ("texture2", "texture3"))):
             metal_specular.add(name)
-    return shared, materials, metal_specular
+    return shared, materials, metal_specular, catalog_rows()
 
 
-def check(baseline: dict, shared: dict[str, str], materials: dict[str, str], metal_specular: set[str]) -> list[str]:
+def check(baseline: dict, shared: dict[str, str], materials: dict[str, str], metal_specular: set[str],
+          catalogs: dict[str, dict[str, str]]) -> list[str]:
     errors = []
     for path, blob in shared.items():
         if baseline["shared"].get(path) != blob:
@@ -130,6 +151,12 @@ def check(baseline: dict, shared: dict[str, str], materials: dict[str, str], met
             errors.append(f"{name}: approved tint material was removed")
         elif materials[name] != digest:
             errors.append(f"{name}: dye appearance inputs changed (MTR directives or a bound texture)")
+    for catalog, approved in sorted(baseline.get("catalogs", {}).items()):
+        rows = catalogs.get(catalog, {})
+        for model, value in sorted(approved.items()):
+            if rows.get(model) != value:
+                errors.append(f"{catalog}.2da {model}: material or dye layers changed "
+                              f"(approved '{value}', now '{rows.get(model, 'removed')}')")
     legacy = set(baseline["legacyMetalSpecular"])
     for name in sorted(metal_specular - legacy):
         errors.append(f"{name}: binds a specular/roughness map over dyed metal; set texture2/texture3 null "
@@ -142,10 +169,10 @@ def main() -> int:
     parser.add_argument("--update", action="store_true",
                         help="approve the current dye inputs (requires before/after client captures)")
     arguments = parser.parse_args()
-    shared, materials, metal_specular = current_state()
+    shared, materials, metal_specular, catalogs = current_state()
     baseline = json.loads(BASELINE.read_text(encoding="utf-8"))
     if arguments.update:
-        violations = [error for error in check(baseline, shared, materials, metal_specular)
+        violations = [error for error in check(baseline, shared, materials, metal_specular, catalogs)
                       if "over dyed metal" in error]
         if violations:
             print("\n".join(violations))
@@ -153,11 +180,12 @@ def main() -> int:
             return 1
         baseline["shared"] = shared
         baseline["materials"] = materials
+        baseline["catalogs"] = catalogs
         baseline["legacyMetalSpecular"] = sorted(set(baseline["legacyMetalSpecular"]) & metal_specular)
         BASELINE.write_text(json.dumps(baseline, indent=1, sort_keys=True) + "\n", encoding="utf-8")
         print(f"Approved dye inputs for {len(materials)} tint materials.")
         return 0
-    errors = check(baseline, shared, materials, metal_specular)
+    errors = check(baseline, shared, materials, metal_specular, catalogs)
     if errors:
         print("\n".join(errors))
         print(f"{len(errors)} dye appearance change(s). Existing dye colors must not change silently: "
