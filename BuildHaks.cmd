@@ -5,6 +5,8 @@ python -B tools/GenerateRobeCloakModels.py --check
 if errorlevel 1 exit /b %errorlevel%
 python -B tools/CloakTintAssets.py --check
 if errorlevel 1 exit /b %errorlevel%
+python -B tools/CheckDyeAppearance.py
+if errorlevel 1 exit /b %errorlevel%
 python -B tools/CheckNeckModels.py
 if errorlevel 1 exit /b %errorlevel%
 python -B tools/GenerateShoulderModels.py --check
