@@ -1,189 +1,169 @@
-"""Reproduce the normal human pelvis 034 skirt's fitted rig and local clearance.
+"""Give the released pelvis 035 skirt local clearance as canonical style 034.
 
-Only this knee-length skirt is handled here. The first four indexed components
-are outer/inner skirt and tabard surfaces; the internal pelvis and waistband
-remain byte-identical. The manifest pins original Git blobs so --apply never compounds a previous fit.
+The 2026-10-31 release is pinned by Git blob and SHA-256. Its original skin
+weights, indices, bone tables, inverse binds, UVs and topology are immutable.
+Only front cloth positions and a small right side contact patch move; the rear panels,
+waist, lower hem and overall width stay unchanged. Native normals, face planes and
+bounds follow the changed geometry. The 034 identity retains the existing 034
+material/dye mapping used by the existing 035-to-034 migration.
 
---output DIR builds fixture resources without touching tracked assets.
---apply installs the selected recipes; --check verifies exact reproducibility.
-Rerun dependent part-skin aliases after applying. Native captures remain required.
+--output DIR creates fixtures; --apply installs; --check verifies reproduction.
+Regenerate dependent part-skin aliases after applying. Client evidence is required.
 """
 from __future__ import annotations
+
 import argparse
 import hashlib
 import json
 from pathlib import Path
 import struct
+
 import numpy as np
+
 import ChestSkirtBindings as skirts
 import CompileModels as mdl
 from GenerateRacialPartVariants import matrix, update_model_bounds
+
 ROOT = Path(__file__).resolve().parents[1]
 MANIFEST = Path(__file__).with_suffix('.json')
-BONES = ['pelvis_g', 'lthigh_g', 'rthigh_g', 'tf2_g', 'fb2_g01']
 SKIRT_VERTICES = 471
+
 
 def smooth(value):
     value = np.clip(value, 0, 1)
     return value * value * (3 - 2 * value)
 
+
 def transform(pose):
     position, rotation, scale = pose
     return np.column_stack((matrix(rotation) * scale, position))
 
-class Garment:
 
-    def __init__(self, data: bytes, extra_clearance: dict[str, float] | None=None):
+class Garment:
+    def __init__(self, data: bytes):
         self.data = data
         self.names, self.body = skirts.skeleton(data)
         self.bind = self.body.pose()
-        self.pos = np.array(skirts.rest_positions(data))
         self.skins = list(skirts.skins(data, self.names))
         if len(self.skins) != 1 or self.skins[0]['count'] not in (688, 690):
-            raise ValueError('Unexpected pelvis 034 topology')
-        self.raw = np.concatenate([np.array([struct.unpack_from('<3f', data, skin['positions'] + vertex * (skin['stride'] or 12)) for vertex in range(skin['count'])]) for skin in self.skins])
-        self.origw = np.zeros((len(self.pos), len(BONES)))
-        rows = [skirts.influences(data, skin, vertex) for skin in self.skins for vertex in range(skin['count'])]
-        for vertex, row in enumerate(rows):
-            for bone, weight in row.items():
-                target = bone if bone in BONES else 'lthigh_g' if bone == 'lshin_g' else 'rthigh_g' if bone == 'rshin_g' else 'pelvis_g'
-                self.origw[vertex, BONES.index(target)] += weight
-        self.sums = self.origw.sum(1)
-        self.origw /= self.sums[:, None]
-        skin = self.skins[0]
-        bind_transforms = []
-        for bone in BONES:
-            index = self.names.index(bone)
-            rotation = struct.unpack_from('<4f', data, skin['inverse_rotations'] + index * 16)
-            translation = struct.unpack_from('<3f', data, skin['inverse_translations'] + index * 12)
+            raise ValueError('Unexpected released pelvis 035 topology')
+        self.skin = self.skins[0]
+        self.mesh = next(mesh for _, _, mesh in mdl.binary_nodes(data) if mesh and 'weights' in mesh)
+        self.raw = np.array(self.mesh['verts'])
+        self.pos = np.array(skirts.rest_positions(data))
+
+    def bind_matrices(self):
+        skin = self.skin
+        matrices = []
+        for index, name in enumerate(self.names):
+            rotation = struct.unpack_from('<4f', self.data, skin['inverse_rotations'] + index * 16)
+            translation = struct.unpack_from('<3f', self.data, skin['inverse_translations'] + index * 12)
             inverse = np.column_stack((matrix((*rotation[1:], rotation[0])), translation))
-            world = transform(self.bind[bone])
-            bind_transforms.append(np.column_stack((world[:, :3] @ inverse[:, :3], world[:, :3] @ inverse[:, 3] + world[:, 3])))
-        self.bindt = np.array(bind_transforms)
-        self.extra = np.zeros(len(self.pos))
-        for vertex, clearance in (extra_clearance or {}).items():
-            if not 0 <= int(vertex) < SKIRT_VERTICES or not 0 <= clearance <= 0.04:
-                raise ValueError('Clearance outside the fitted skirt envelope')
-            self.extra[int(vertex)] = clearance
+            world = transform(self.bind[name])
+            matrices.append(world[:, :3] @ inverse[:, :3])
+        weights = np.array([struct.unpack_from('<4f', self.data, skin['weights'] + vertex * (skin['stride'] or 16))
+                            for vertex in range(skin['count'])])
+        indices = np.array([struct.unpack_from('<4h', self.data, skin['indices'] + vertex * (skin['stride'] or 8))
+                            for vertex in range(skin['count'])])
+        bones = np.array(skin['palette'])[indices]
+        return np.einsum('vb,vbij->vij', weights, np.array(matrices)[bones])
 
-    def weights_and_raw(self, x):
-        side, seam, span, frontflap, backflap, frontgap, backgap, sidegap = x
-        p = self.pos
-        origin = np.array(self.bind['pelvis_g'][0])
-        hip = self.bind['lthigh_g'][0][2]
-        delta = p - origin
-        r = np.linalg.norm(delta[:, :2], axis=1)
-        across = np.divide(delta[:, 0], r, out=np.zeros(len(p)), where=r > 1e-05)
-        lateral = smooth(abs(across) / span)
-        own = smooth((across / span + 1) / 2)
-        lower = smooth((hip + 0.08 - p[:, 2]) / 0.23)
-        lower[471:] = 0.0
-        legs = seam + (side - seam) * lateral
-        target = np.zeros_like(self.origw)
-        target[:, 0] = 1 - legs
-        target[:, 1] = legs * (1 - own)
-        target[:, 2] = legs * own
-        ff = (1 - lateral) ** 2 * np.where(delta[:, 1] >= 0, frontflap, backflap)
-        target[:, :3] *= 1 - ff[:, None]
-        target[:, 3] = np.where(delta[:, 1] >= 0, ff, 0)
-        target[:, 4] = np.where(delta[:, 1] < 0, ff, 0)
-        w = self.origw * (1 - lower[:, None]) + target * lower[:, None]
-        gap = (np.where(delta[:, 1] >= 0, frontgap, backgap) * (1 - lateral) + sidegap * lateral) * lower
-        moved = p.copy()
-        moved[:, :2] += np.divide(delta[:, :2], r[:, None], out=np.zeros_like(delta[:, :2]), where=r[:, None] > 1e-05) * gap[:, None]
-        if np.any(self.extra):
-            direction = np.zeros_like(moved)
-            delta = moved[:SKIRT_VERTICES, :2] - origin[:2]
-            direction[:SKIRT_VERTICES, :2] = delta / np.linalg.norm(delta, axis=1)[:, None]
-            panel = np.r_[np.arange(187, 267), np.arange(419, 471)]
-            direction[panel] = [0, 1, 0]
-            direction *= lower[:, None]
-            moved += direction * self.extra[:, None]
-        # Compensate authored inverse binds when changing the weight field.
-        bt = np.einsum('vb,bij->vij', w, self.bindt)
-        raw = np.linalg.solve(bt[:, :, :3], (moved - bt[:, :, 3])[:, :, None])[:, :, 0]
-        raw[471:] = self.raw[471:]
-        return (w, raw, moved)
+    def displacement(self, parameters):
+        front = parameters['frontClearance']
+        left_front = parameters['leftFrontClearance']
+        left_side = parameters['leftSideClearance']
+        right_front = parameters['rightFrontClearance']
+        right_side = parameters['rightSideClearance']
+        values = (front, left_front, left_side, right_front, right_side)
+        if (any(not np.isfinite(value) or value < 0 for value in values)
+                or front + max(left_front, right_front) > .060000001
+                or max(left_side, right_side) > .025 or right_front > .015):
+            raise ValueError('Clearance exceeds the reviewed local 60 mm front / 25 mm side envelope')
+        x, y, z = self.pos.T
+        moved = np.zeros_like(self.pos)
+        # Front cloth clears the thighs; smooth falloffs protect the waist and lower hem.
+        band = smooth((y - .0312) / .08) * smooth((1.12 - z) / .14) * smooth((z - .60) / .10)
+        moved[:, 1] = band * (front + left_front * smooth((-x - .02) / .12))
+        # Native running exposed a separate, smaller contact on the right front panel.
+        moved[:, 1] += band * right_front * smooth((x - .02) / .12) * smooth((z - .68) / .12)
+        moved[:, 0] = (-left_side * smooth((-x - .10) / .06) * smooth((y - .0312) / .04)
+                       * smooth((1.12 - z) / .12) * smooth((z - .65) / .13))
+        # Asymmetric native thigh fixtures identify the remaining Tired contact as
+        # anatomical RIGHT (+X). Only that seam extends slightly behind the front plane.
+        right = (smooth((x - .10) / .06) * smooth((y + .02) / .045)
+                 * smooth((1.12 - z) / .12) * smooth((z - .65) / .13))
+        moved[:, 0] += right_side * right
+        moved[SKIRT_VERTICES:] = 0
+        # Neither local seam correction may widen the released silhouette.
+        moved[:, 0] = np.maximum(moved[:, 0], x.min() - x)
+        moved[:, 0] = np.minimum(moved[:, 0], x.max() - x)
+        return moved
 
-    def generate(self, x):
-        w, raw, rest = self.weights_and_raw(x)
+    def generate(self, parameters, target):
+        displacement = self.displacement(parameters)
+        changed = np.any(displacement != 0, axis=1)
+        raw = self.raw.copy()
+        raw[changed] += np.linalg.solve(self.bind_matrices()[changed], displacement[changed, :, None])[:, :, 0]
         result = bytearray(self.data)
-        offset = 0
-        for skin in self.skins:
-            mapping = skin['bone_map']
-            slots = {bone: i for i, bone in enumerate(skin['bones']) if bone and mapping[self.names.index(bone)] == i}
-            free = [s for s in range(17) if s not in mapping]
-            for bone in BONES:
-                if bone not in slots:
-                    slot = free.pop(0)
-                    slots[bone] = slot
-                    index = self.names.index(bone)
-                    struct.pack_into('<h', result, skin['palette_offset'] + slot * 2, index)
-                    struct.pack_into('<h', result, skin['bone_map_offset'] + index * 2, slot)
-            for v in range(skin['count']):
-                if offset + v >= 471:
-                    continue
-                row = [(BONES[b], float(value * self.sums[offset + v])) for b, value in enumerate(w[offset + v]) if value > 1e-07]
-                assert len(row) <= 4, row
-                row = sorted(row, key=lambda kv: -kv[1]) + [(None, 0.0)] * (4 - len(row))
-                struct.pack_into('<4f', result, skin['weights'] + v * (skin['stride'] or 16), *[z[1] for z in row])
-                struct.pack_into('<4h', result, skin['indices'] + v * (skin['stride'] or 8), *[slots[z[0]] if z[0] else 0 for z in row])
-                struct.pack_into('<3f', result, skin['positions'] + v * (skin['stride'] or 12), *raw[offset + v])
-            offset += skin['count']
-        for _, _, mesh in mdl.binary_nodes(self.data):
-            if not mesh or 'weights' not in mesh:
-                continue
-            count = len(mesh['verts'])
-            faces = np.array([f[:3] for f in mesh['faces']])
-            tri = raw[faces]
-            norm = np.cross(tri[:, 1] - tri[:, 0], tri[:, 2] - tri[:, 0])
-            vn = np.zeros((count, 3))
-            for i in range(3):
-                np.add.at(vn, faces[:, i], norm)
-            oldn = np.array(mesh['normals'])
-            groups = {}
-            for i, (pt, n) in enumerate(zip(np.array(mesh['verts']), oldn)):
-                groups.setdefault(tuple(np.round(np.r_[pt, n], 5)), []).append(i)
-            for group in groups.values():
-                vn[group] = vn[group].sum(axis=0)
-            lengths = np.linalg.norm(vn, axis=1)
-            vn = np.divide(vn, lengths[:, None], out=oldn.copy(), where=lengths[:, None] > 1e-10)
-            base = 12 + struct.unpack_from('<I', self.data, 4)[0] + struct.unpack_from('<I', self.data, mesh['_mesh_offset'] + 468)[0]
-            stride = struct.unpack_from('<I', self.data, mesh['_mesh_offset'] + 440)[0]
-            for i, n in enumerate(vn[:471]):
-                struct.pack_into('<3f', result, base + i * (stride or 12), *n)
-        for _, _, mesh in mdl.binary_nodes(self.data):
-            if not mesh or 'weights' not in mesh:
-                continue
-            mo = mesh['_mesh_offset']
-            low = raw.min(0)
-            high = raw.max(0)
-            center = raw.mean(0)
-            struct.pack_into('<3f', result, mo + 20, *low)
-            struct.pack_into('<3f', result, mo + 32, *high)
-            struct.pack_into('<f', result, mo + 44, float(np.linalg.norm(raw - center, axis=1).max()))
-            struct.pack_into('<3f', result, mo + 48, *center)
-            faceptr = 12 + struct.unpack_from('<I', self.data, mo + 8)[0]
-            for i, face in enumerate(mesh['faces']):
-                if min(face[:3]) >= 471:
-                    continue
-                a, b, c = raw[face[:3]]
-                normal = np.cross(b - a, c - a)
-                length = np.linalg.norm(normal)
-                if length > 1e-12:
-                    normal /= length
-                # Native face planes use n dot p + distance = 0.
-                struct.pack_into('<4f', result, faceptr + i * 32, *normal, -float(normal @ a))
-        return update_model_bounds(bytes(result))
+        for vertex in np.flatnonzero(changed):
+            struct.pack_into('<3f', result, self.skin['positions'] + vertex * (self.skin['stride'] or 12), *raw[vertex])
+        # Use stored float positions for native metadata, not higher-precision intermediates.
+        raw = np.array([struct.unpack_from('<3f', result, self.skin['positions'] + vertex * (self.skin['stride'] or 12))
+                        for vertex in range(self.skin['count'])])
+        faces = np.array([face[:3] for face in self.mesh['faces']])
+        touched = np.any(changed[faces], axis=1)
+        triangles = raw[faces]
+        face_normals = np.cross(triangles[:, 1] - triangles[:, 0], triangles[:, 2] - triangles[:, 0])
+        normals = np.zeros_like(raw)
+        for corner in range(3):
+            np.add.at(normals, faces[:, corner], face_normals)
+        old_normals = np.array(self.mesh['normals'])
+        groups = {}
+        for vertex, (point, normal) in enumerate(zip(self.raw, old_normals)):
+            groups.setdefault(tuple(np.round(np.r_[point, normal], 5)), []).append(vertex)
+        affected = np.zeros(len(raw), dtype=bool)
+        affected[faces[touched].ravel()] = True
+        for group in groups.values():
+            normals[group] = normals[group].sum(axis=0)
+            if np.any(affected[group]):
+                affected[group] = True
+        # Protect rear-panel normals and internal pelvis/waist vertices; include the
+        # small right-side contact extension as well as the front cloth.
+        contact_region = ((self.pos[:, 1] > .0312)
+                          | ((self.pos[:, 0] > .10) & (self.pos[:, 1] > -.02)))
+        affected &= contact_region & (np.arange(len(raw)) < SKIRT_VERTICES)
+        lengths = np.linalg.norm(normals, axis=1)
+        normals = np.divide(normals, lengths[:, None], out=old_normals.copy(), where=lengths[:, None] > 1e-10)
+        mesh_offset = self.mesh['_mesh_offset']
+        stride = struct.unpack_from('<I', self.data, mesh_offset + 440)[0]
+        normal_base = 12 + struct.unpack_from('<I', self.data, 4)[0] + struct.unpack_from('<I', self.data, mesh_offset + 468)[0]
+        for vertex in np.flatnonzero(affected):
+            struct.pack_into('<3f', result, normal_base + vertex * (stride or 12), *normals[vertex])
+        face_base = 12 + struct.unpack_from('<I', self.data, mesh_offset + 8)[0]
+        for index in np.flatnonzero(touched):
+            normal = face_normals[index]
+            length = np.linalg.norm(normal)
+            if length > 1e-12:
+                normal = normal / length
+            struct.pack_into('<4f', result, face_base + index * 32, *normal, -float(normal @ triangles[index, 0]))
+        center = raw.mean(0)
+        struct.pack_into('<3f', result, mesh_offset + 20, *raw.min(0))
+        struct.pack_into('<3f', result, mesh_offset + 32, *raw.max(0))
+        struct.pack_into('<f', result, mesh_offset + 44, float(np.linalg.norm(raw - center, axis=1).max()))
+        struct.pack_into('<3f', result, mesh_offset + 48, *center)
+        result = update_model_bounds(bytes(result))
+        original = target[:-3] + '035'
+        if not target.endswith('034') or result.count(original.encode('ascii')) != 3:
+            raise ValueError('Unexpected model/root/material identity fields')
+        return result.replace(original.encode('ascii'), target.encode('ascii'))
+
 
 def generate(entry: dict) -> bytes:
     source = skirts.source(entry['sourceBlob'])
     if hashlib.sha256(source).hexdigest() != entry['sourceSha256']:
-        raise ValueError('Pinned pelvis source hash mismatch')
-    params = entry['parameters']
-    order = ('sideThigh', 'seamThigh', 'seamSpan', 'frontFlap', 'backFlap', 'frontClearance', 'backClearance', 'sideClearance')
-    values = [params[key] for key in order]
-    return Garment(source, entry.get('extraClearance')).generate(values)
+        raise ValueError('Pinned released pelvis 035 source hash mismatch')
+    return Garment(source).generate(entry['parameters'], Path(entry['path']).stem)
+
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
@@ -206,5 +186,7 @@ def main():
     if failures:
         raise SystemExit('Pelvis skirt recipes differ: ' + ', '.join(failures))
     print(f"Verified {len(manifest['models'])} pelvis skirt recipes" if args.check else f"Generated {len(manifest['models'])} pelvis skirt recipes")
+
+
 if __name__ == '__main__':
     main()
