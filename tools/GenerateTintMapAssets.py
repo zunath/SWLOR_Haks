@@ -59,12 +59,13 @@ TINT_MAPPED_FRAGMENT_SHADER = "fs_plt_tinter_nm"
 TINT_HAIR_MAPPED_FRAGMENT_SHADER = "fs_plt_hair_nm"
 # Restore native color filtering only for reported dye edge regressions.
 SMOOTH_TINT_MATERIALS = frozenset({"helm_053", "helm_287", "pfh0_neck267", "pmh0_neck267"})
-# Republic Trooper body-part specular/roughness maps replace the palette's metal
-# reflectance, so dyed metal renders as a pale, nonmetallic sheen. Unbind them and
-# keep the normal maps; the palette then drives metal like every other dyed part.
+# Republic Trooper specular/roughness maps replace the palette's metal reflectance,
+# so dyed metal renders as a pale, nonmetallic sheen. Unbind them and keep the
+# normal maps; the palette then drives metal like every other dyed part.
 PALETTE_SPECULAR_MAPS = frozenset({
     "rep_chest_s", "rep_chest_r", "rep_composite_s", "rep_composite_r", "rep_foot_s",
-    "rep_foot_r", "rep_hand_s", "rep_hand_r", "rep_leg_s", "rep_leg_r",
+    "rep_foot_r", "rep_hand_s", "rep_hand_r", "rep_helmm_s", "rep_helmm_r",
+    "rep_leg_s", "rep_leg_r",
 })
 AUTHORED_HAIR_FRAGMENT_SHADERS = {"fslit_aniso_nm"}
 _MTR_PATHS_BY_RESREF: dict[str, Path] | None = None
