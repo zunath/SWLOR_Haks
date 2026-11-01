@@ -45,6 +45,7 @@ SOURCE_MANIFEST = Path(__file__).with_name("TintMapSources.json")
 MODULAR_FALLBACKS = Path(__file__).with_name("TintMapFallbacks.json")
 STOCK_PALETTE_RESOURCES = Path(__file__).with_name("TintMapStockPalettes.json")
 MATERIAL_SOURCES = Path(__file__).with_name("TintMapMaterialSources.json")
+PALETTE_METAL_MATERIALS = Path(__file__).with_name("PaletteMetalMaterials.json")
 WHITE_TEXTURE = REPOSITORY_ROOT / "sw_item" / "plt_white.tga"
 PALETTE_TEXTURE = REPOSITORY_ROOT / "sw_item" / "plt_palette.tga"
 # Entire atlas, including its bottom-origin RGBA descriptor and unused rows.
@@ -88,6 +89,7 @@ _TABLE_REFERENCED_RESREFS: set[str] | None = None
 _HAK_DIRECTORIES: tuple[Path, ...] | None = None
 _NATIVE_MODULAR_PALETTES: set[str] | None = None
 _MATERIAL_SOURCES: dict[str, dict[str, object]] | None = None
+_PALETTE_METAL_MATERIALS: dict[str, dict[str, object]] | None = None
 _MATERIAL_BITMAP_ALIASES: dict[str, str] = {}
 _PROFILE_ALIASES: dict[str, tuple[str, list[str]]] = {}
 _PROFILE_SIGNATURES: dict[tuple[str, str], tuple[tuple[tuple[str, ...], str], ...]] = {}
@@ -2315,6 +2317,13 @@ def authored_diffuse_texture(source_material: str) -> str:
     return _AUTHORED_DIFFUSE_TEXTURES.get(source_material.lower(), "plt_white")
 
 
+def palette_metal_materials() -> dict[str, dict[str, object]]:
+    global _PALETTE_METAL_MATERIALS
+    if _PALETTE_METAL_MATERIALS is None:
+        _PALETTE_METAL_MATERIALS = json.loads(PALETTE_METAL_MATERIALS.read_text(encoding="utf-8"))
+    return _PALETTE_METAL_MATERIALS
+
+
 def tint_material_text(
     path: Path,
     material: str,
@@ -2355,6 +2364,18 @@ def tint_material_text(
             diffuse_texture = next(line.split()[1] for line in original_lines if line.lower().startswith("texture0 "))
         else:
             diffuse_texture = "plt_white"
+    elif keep_palette_specular_maps:
+        # Canonical signatures must retain the authored maps after generated MTRs unbind them.
+        record = palette_metal_materials().get(source_material.lower(), {})
+        generated_mask = next((match.group(1).lower() for line in generated_lines
+                               if (match := re.match(r"^\s*texture7\s+(\S+)\s*$", line, re.IGNORECASE))), None)
+        authored_maps = record.get("maps", {}) if record.get("mask") == generated_mask else {}
+        original_lines = [
+            f"{match.group(1)} {authored_maps[match.group(1).lower()]}"
+            if (match := re.match(r"^\s*(texture[23])\s+null\s*$", line, re.IGNORECASE))
+            and match.group(1).lower() in authored_maps else line
+            for line in original_lines
+        ]
     mapped_shader = uses_mapped_shader(original_lines)
     original_fragment_shaders = fragment_shaders(original_lines)
     selected_fragment_shader = tint_fragment_shader(source_material, original_lines)
@@ -2386,10 +2407,11 @@ def tint_material_text(
     )
     lines = [line for line in original_lines if not replaced.match(line)]
     if not keep_palette_specular_maps:
+        palette_metal = palette_metal_materials().get(material.lower(), {}).get("mask") == texture.lower()
         lines = [
             f"{match.group(1)} null"
             if (match := re.match(r"^\s*(texture[23])\s+(\S+)\s*$", line, re.IGNORECASE))
-            and (match.group(2).lower() in PALETTE_SPECULAR_MAPS
+            and (palette_metal or match.group(2).lower() in PALETTE_SPECULAR_MAPS
                  or match.group(2).lower() in PALETTE_SPECULAR_MASK_MAPS.get(texture.lower(), ()))
             else line
             for line in lines
@@ -3866,6 +3888,8 @@ def audit() -> None:
                     errors.append(f"{model}: MTR lost required dedicated alpha-map compatibility")
             if model in AUTHORED_HAIR_MAPS:
                 for texture_slot, texture_resref in AUTHORED_HAIR_MAPS[model].items():
+                    if texture_slot in (2, 3) and palette_metal_materials().get(model, {}).get("mask") == entry["texture"]:
+                        texture_resref = "null"
                     if f"texture{texture_slot} {texture_resref}" not in mtr:
                         errors.append(
                             f"{model}: MTR lost authored texture{texture_slot} binding '{texture_resref}'"
