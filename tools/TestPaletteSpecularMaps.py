@@ -36,10 +36,10 @@ class PaletteSpecularMapTests(unittest.TestCase):
             mock.start()
             self.addCleanup(mock.stop)
 
-    def generate(self, lines, **options):
+    def generate(self, lines, texture="mask", **options):
         path = self.output / "pmh0_legl121.mtr"
         path.write_text("\n".join(lines) + "\n")
-        return g.tint_material_text(path, "pmh0_legl121", "mask", 512, 512, **options)
+        return g.tint_material_text(path, "pmh0_legl121", texture, 512, 512, **options)
 
     def test_generation_unbinds_specular_maps_and_keeps_normal_map(self):
         text = self.generate(AUTHORED)
@@ -65,12 +65,29 @@ class PaletteSpecularMapTests(unittest.TestCase):
                               "texture1 pme0_chest211_N", "texture2 pme0_chest211_S"])
         self.assertEqual(bindings(text)["texture2"], "pme0_chest211_s")
 
+    def test_forearm_30_maps_are_unbound_only_on_its_metal_mask(self):
+        for name in g.PALETTE_SPECULAR_MASK_MAPS["tm_2c6676909ab21"]:
+            with self.subTest(name=name):
+                normal = name[:-1] + "n"
+                authored = ["customshaderVS vslit_sm_nm", "texture1 " + normal, "texture2 " + name]
+                metal = self.generate(authored, texture="tm_2c6676909ab21")
+                self.assertEqual(bindings(metal)["texture2"], "null")
+                self.assertEqual(bindings(metal)["texture1"], normal)
+                cloth = self.generate(authored, texture="tm_29999d953bf13")
+                self.assertEqual(bindings(cloth)["texture2"], name)
+                signature = self.generate(authored, texture="tm_2c6676909ab21",
+                                          keep_palette_specular_maps=True)
+                self.assertEqual(bindings(signature)["texture2"], name)
+
     def test_checked_in_materials_do_not_bind_palette_specular_maps(self):
         republic = []
         for path in sorted((ROOT / "sw_tint_mtr").glob("*.mtr")):
             bound = bindings(path.read_text())
             for unit in ("texture2", "texture3"):
                 self.assertNotIn(bound.get(unit), g.PALETTE_SPECULAR_MAPS, f"{path.stem} {unit}")
+                self.assertNotIn(bound.get(unit),
+                                 g.PALETTE_SPECULAR_MASK_MAPS.get(bound.get("texture7"), ()),
+                                 f"{path.stem} {unit}")
             if REPUBLIC_TROOPER_PARTS.match(path.stem.lower()):
                 republic.append(path.stem)
                 self.assertRegex(bound.get("texture1", ""), r"^rep_\w+_n$", path.stem)

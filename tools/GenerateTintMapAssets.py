@@ -71,6 +71,12 @@ PALETTE_SPECULAR_MAPS = frozenset({
     "pmh0_forer282_s", "pmh0_handr267_s", "pmh0_legr269_s", "pmh0_pelvis270_s",
     "pmh0_shinr272_s", "pmh0_shor261_s",
 })
+# Forearm 30 shares these maps with cloth-only forearm 103; only its metal mask opts in.
+PALETTE_SPECULAR_MASK_MAPS = {
+    "tm_2c6676909ab21": frozenset({
+        "pfh0_forel030_s", "pfh0_forer030_s", "pmh0_forel030_s", "pmh0_forer030_s",
+    }),
+}
 AUTHORED_HAIR_FRAGMENT_SHADERS = {"fslit_aniso_nm"}
 _MTR_PATHS_BY_RESREF: dict[str, Path] | None = None
 _SOURCE_MTR_PATHS_BY_RESREF: dict[str, list[Path]] | None = None
@@ -2383,7 +2389,8 @@ def tint_material_text(
         lines = [
             f"{match.group(1)} null"
             if (match := re.match(r"^\s*(texture[23])\s+(\S+)\s*$", line, re.IGNORECASE))
-            and match.group(2).lower() in PALETTE_SPECULAR_MAPS
+            and (match.group(2).lower() in PALETTE_SPECULAR_MAPS
+                 or match.group(2).lower() in PALETTE_SPECULAR_MASK_MAPS.get(texture.lower(), ()))
             else line
             for line in lines
         ]
