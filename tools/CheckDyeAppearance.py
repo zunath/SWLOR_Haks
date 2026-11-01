@@ -2,7 +2,7 @@
 """Keep existing dye colors stable and dyed metal on the palette.
 
 Every tint material (sw_tint_mtr) is fingerprinted from its directives and the
-exact content of every authored texture it binds. The shared tint shaders and
+exact content of every texture (and TXI) it binds, tint masks included. The shared tint shaders and
 palette atlas are fingerprinted as well. DyeAppearanceBaseline.json records the
 approved state, so any change to how an existing part takes dyes fails until the
 baseline is updated on purpose, with before/after client captures in the pull
@@ -39,10 +39,11 @@ SHARED_INPUTS = (
     "sw_item/plt_palette.tga",
     "sw_item/plt_white.tga",
 )
-TEXTURE_EXTENSIONS = (".dds", ".tga")
-# Content-addressed masks (tm_*) and the shared placeholder/palette are covered
-# by their resref and SHARED_INPUTS respectively.
-UNHASHED_TEXTURES = re.compile(r"^(null|tm_[0-9a-f]+|plt_white|plt_palette)$")
+# A texture's TXI changes how it is sampled (tint masks rely on "mipmap 0").
+TEXTURE_EXTENSIONS = (".dds", ".tga", ".txi")
+# The shared placeholder and palette are covered by SHARED_INPUTS. Tint masks
+# (tm_*) are hashed like any other texture: their names do not guarantee content.
+UNHASHED_TEXTURES = re.compile(r"^(null|plt_white|plt_palette)$")
 METAL_LAYERS = {2, 3}
 
 

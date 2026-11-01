@@ -39,8 +39,9 @@ class DyeAppearanceTests(unittest.TestCase):
         self.material("legacy", "legacy_s", "tm_metal")
         self.material("plate", "null", "tm_metal")
         self.material("robe", "robe_s", "tm_cloth")
-        for name in ("legacy_s", "legacy_n", "plate_n", "robe_s", "robe_n"):
+        for name in ("legacy_s", "legacy_n", "plate_n", "robe_s", "robe_n", "tm_metal", "tm_cloth"):
             (self.root / f"sw_item/{name}.dds").write_bytes(name.encode())
+        (self.root / "sw_item/tm_metal.txi").write_text("mipmap 0\n")
         self.git("init", "-q")
         self.git("add", "-A")
         for name, value in (("ROOT", self.root), ("BASELINE", self.root / "tools/DyeAppearanceBaseline.json"),
@@ -85,6 +86,20 @@ class DyeAppearanceTests(unittest.TestCase):
         self.assertEqual(self.errors(), ["legacy: dye appearance inputs changed (MTR directives or a bound texture)"])
         self.material("robe", "robe_s", "tm_metal")
         self.assertIn("robe: dye appearance inputs changed (MTR directives or a bound texture)", self.errors())
+
+    def test_editing_or_deleting_a_tint_mask_under_the_same_name_fails(self):
+        changed = ["legacy: dye appearance inputs changed (MTR directives or a bound texture)",
+                   "plate: dye appearance inputs changed (MTR directives or a bound texture)"]
+        (self.root / "sw_item/tm_metal.dds").write_bytes(b"repacked mask")
+        self.assertEqual(self.errors(), changed)
+        (self.root / "sw_item/tm_metal.dds").write_bytes(b"tm_metal")
+        (self.root / "sw_item/tm_metal.txi").write_text("mipmap 1\n")
+        self.assertEqual(self.errors(), changed)
+        (self.root / "sw_item/tm_metal.txi").write_text("mipmap 0\n")
+        self.assertEqual(self.errors(), [])
+        (self.root / "sw_item/tm_metal.dds").unlink()
+        self.git("rm", "-q", "--cached", "sw_item/tm_metal.dds")
+        self.assertEqual(self.errors(), changed)
 
     def test_shared_shader_change_and_material_removal_fail(self):
         (self.root / "sw_shader/fs_plt_tinter_nm.shd").write_text("// lighting tweak")
