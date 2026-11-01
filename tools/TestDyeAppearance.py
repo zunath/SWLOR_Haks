@@ -138,6 +138,15 @@ class DyeAppearanceTests(unittest.TestCase):
         self.assertIn("sw_item/glow: dye appearance inputs changed", errors)
         self.assertIn("sw_item/glow: binds a specular/roughness map over dyed metal", errors)
 
+    def test_deleting_a_guarded_shader_fails_and_new_shaders_are_additions(self):
+        (self.root / "sw_shader/fs_glow2.shd").write_text("// new glow")
+        (self.root / "sw_item/glow2.mtr").write_text(
+            MTR.format(name="plate", spec="null", mask="tm_metal").replace("fs_plt_tinter_nm", "fs_glow2"))
+        self.assertEqual(self.errors(), [])
+        (self.root / "sw_shader/fs_glow.shd").unlink()
+        self.assertEqual(self.errors(), ["sw_shader/fs_glow.shd: shared tint input changed; "
+                                         "every dyed part may change color"])
+
     def test_sparse_checkout_without_material_folders_reads_them_from_git(self):
         for path in (self.root / "sw_tint_mtr").glob("*.mtr"):
             self.git("update-index", "--skip-worktree", f"sw_tint_mtr/{path.name}")

@@ -171,8 +171,10 @@ def current_state() -> tuple[dict[str, str], dict[str, str], set[str], dict[str,
 def check(baseline: dict, shared: dict[str, str], materials: dict[str, str], metal_specular: set[str],
           catalogs: dict[str, dict[str, str]]) -> list[str]:
     errors = []
-    for path, blob in shared.items():
-        if baseline["shared"].get(path) != blob:
+    # Every approved shared input must still exist unchanged; a shader only new
+    # materials use is an addition.
+    for path, approved in sorted(baseline["shared"].items()):
+        if shared.get(path, "missing") != approved:
             errors.append(f"{path}: shared tint input changed; every dyed part may change color")
     for name, digest in sorted(baseline["materials"].items()):
         if name not in materials:
