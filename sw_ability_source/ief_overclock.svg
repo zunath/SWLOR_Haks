@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ff9a2e" stop-opacity="0.75"/>
+      <stop offset="60%" stop-color="#ff5a1e" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#ff3b1e" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="ring" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f2f5fa"/>
+      <stop offset="45%" stop-color="#8f9bb0"/>
+      <stop offset="100%" stop-color="#3a4254"/>
+    </linearGradient>
+    <radialGradient id="face" cx="42%" cy="38%" r="75%">
+      <stop offset="0%" stop-color="#2b3347"/>
+      <stop offset="70%" stop-color="#121623"/>
+      <stop offset="100%" stop-color="#07080e"/>
+    </radialGradient>
+    <linearGradient id="needle" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#ffb23a"/>
+    </linearGradient>
+    <linearGradient id="bolt" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#fff7b0"/>
+      <stop offset="100%" stop-color="#ffb81f"/>
+    </linearGradient>
+    <filter id="soft" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="4"/>
+    </filter>
+  </defs>
+  <circle cx="128" cy="128" r="124" fill="url(#glow)"/>
+  <circle cx="128" cy="128" r="104" fill="url(#ring)"/>
+  <circle cx="128" cy="128" r="92" fill="url(#face)"/>
+  <circle cx="128" cy="128" r="92" fill="none" stroke="#05060a" stroke-width="3" stroke-opacity="0.8"/>
+  <!-- ticks along the lower-left to right sweep -->
+  <g stroke="#c9d2e4" stroke-width="5" stroke-linecap="round">
+    <line x1="128" y1="52" x2="128" y2="64" transform="rotate(-130 128 128)"/>
+    <line x1="128" y1="52" x2="128" y2="64" transform="rotate(-100 128 128)"/>
+    <line x1="128" y1="52" x2="128" y2="64" transform="rotate(-70 128 128)"/>
+    <line x1="128" y1="52" x2="128" y2="64" transform="rotate(-40 128 128)"/>
+    <line x1="128" y1="52" x2="128" y2="64" transform="rotate(-10 128 128)"/>
+  </g>
+  <!-- the red zone -->
+  <path d="M 128 46 A 82 82 0 0 1 196 90" fill="none" stroke="#ff3b2f" stroke-width="16" stroke-opacity="0.55" filter="url(#soft)" transform="rotate(10 128 128)"/>
+  <path d="M 128 46 A 82 82 0 0 1 196 90" fill="none" stroke="#ff4a36" stroke-width="12" stroke-linecap="round" transform="rotate(10 128 128)"/>
+  <path d="M 128 46 A 82 82 0 0 1 196 90" fill="none" stroke="#ffd0b8" stroke-width="3" stroke-linecap="round" transform="rotate(10 128 128)"/>
+  <!-- lightning bolt -->
+  <path d="M 140 70 L 106 130 L 128 130 L 114 186 L 158 114 L 134 114 Z" fill="url(#bolt)" stroke="#8a4a00" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M 138 82 L 118 120 L 132 120" fill="none" stroke="#ffffff" stroke-width="3" stroke-opacity="0.8" stroke-linecap="round"/>
+  <!-- needle pointing into the red zone -->
+  <g transform="rotate(38 128 128)">
+    <polygon points="122,128 128,44 134,128" fill="url(#needle)" stroke="#6a2a00" stroke-width="3" stroke-linejoin="round"/>
+  </g>
+  <circle cx="128" cy="128" r="15" fill="url(#ring)" stroke="#1b2030" stroke-width="4"/>
+  <circle cx="128" cy="128" r="6" fill="#ff5a1e"/>
+  <!-- sparks -->
+  <g fill="#ffd36b">
+    <circle cx="208" cy="56" r="6"/>
+    <circle cx="222" cy="88" r="4"/>
+    <circle cx="190" cy="34" r="4"/>
+  </g>
+</svg>

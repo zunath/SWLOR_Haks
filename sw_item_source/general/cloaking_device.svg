@@ -1,0 +1,140 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="46%" r="70%">
+      <stop offset="0" stop-color="#1b1726"/>
+      <stop offset="1" stop-color="#050507"/>
+    </radialGradient>
+    <linearGradient id="deck" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#b3bec9"/>
+      <stop offset="0.5" stop-color="#66717c"/>
+      <stop offset="1" stop-color="#3b434c"/>
+    </linearGradient>
+    <linearGradient id="sideL" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#4b545e"/>
+      <stop offset="1" stop-color="#262c33"/>
+    </linearGradient>
+    <linearGradient id="sideR" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#2a3037"/>
+      <stop offset="1" stop-color="#14181c"/>
+    </linearGradient>
+    <linearGradient id="drum" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#1a1e23"/>
+      <stop offset="0.2" stop-color="#8e99a5"/>
+      <stop offset="0.38" stop-color="#d4dce4"/>
+      <stop offset="0.6" stop-color="#55606b"/>
+      <stop offset="1" stop-color="#0f1215"/>
+    </linearGradient>
+    <linearGradient id="drumtop" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#5a6570"/>
+      <stop offset="1" stop-color="#1b2025"/>
+    </linearGradient>
+    <radialGradient id="dome" cx="40%" cy="30%" r="75%">
+      <stop offset="0" stop-color="#f4eaff"/>
+      <stop offset="0.3" stop-color="#b98cff"/>
+      <stop offset="0.7" stop-color="#5b2fc4"/>
+      <stop offset="1" stop-color="#1c0d4a"/>
+    </radialGradient>
+    <radialGradient id="core" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="0.45" stop-color="#e3ccff"/>
+      <stop offset="1" stop-color="#9a5dff" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="aura" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#a577ff" stop-opacity="0.55"/>
+      <stop offset="0.6" stop-color="#6a3cd8" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#4a24b0" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="ring" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#5b2fc4"/>
+      <stop offset="0.5" stop-color="#d2b4ff"/>
+      <stop offset="1" stop-color="#5b2fc4"/>
+    </linearGradient>
+    <linearGradient id="ghost" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#d9c6ff" stop-opacity="0.95"/>
+      <stop offset="0.55" stop-color="#9c78f0" stop-opacity="0.5"/>
+      <stop offset="1" stop-color="#6a3cd8" stop-opacity="0.08"/>
+    </linearGradient>
+    <linearGradient id="field" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#7fe8ff" stop-opacity="0"/>
+      <stop offset="0.5" stop-color="#bda0ff" stop-opacity="0.95"/>
+      <stop offset="1" stop-color="#7fe8ff" stop-opacity="0"/>
+    </linearGradient>
+    <clipPath id="shipclip">
+      <path id="shippath" d="M128 22 L137 44 L149 52 L176 66 L180 76 L150 70 L142 84 L128 80 L114 84 L106 70 L76 76 L80 66 L107 52 L119 44 Z"/>
+    </clipPath>
+    <filter id="blur3" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="3"/></filter>
+    <filter id="blur6" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6"/></filter>
+    <filter id="blur1" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="1.2"/></filter>
+  </defs>
+
+  <rect width="256" height="256" fill="url(#bg)"/>
+
+  <!-- violet aura around the emitter -->
+  <ellipse cx="128" cy="118" rx="104" ry="86" fill="url(#aura)"/>
+
+  <!-- floor shadow -->
+  <ellipse cx="128" cy="214" rx="86" ry="13" fill="#000" opacity="0.6" filter="url(#blur3)"/>
+
+  <!-- armored base plate -->
+  <polygon points="44,188 128,160 212,188 128,218" fill="url(#deck)"/>
+  <polygon points="44,188 128,218 128,232 44,202" fill="url(#sideL)"/>
+  <polygon points="128,218 212,188 212,202 128,232" fill="url(#sideR)"/>
+  <polyline points="44,188 128,218 212,188" fill="none" stroke="#dfe7ef" stroke-opacity="0.65" stroke-width="1.4"/>
+  <polygon points="62,189 128,167 194,189 128,211" fill="none" stroke="#2c333a" stroke-width="2"/>
+  <circle cx="64" cy="190" r="2.4" fill="#222a30"/><circle cx="192" cy="190" r="2.4" fill="#222a30"/>
+  <circle cx="128" cy="212" r="2.4" fill="#222a30"/>
+  <!-- status lights on the plate -->
+  <circle cx="96" cy="206" r="2.6" fill="#b98cff"/><circle cx="160" cy="206" r="2.6" fill="#7fe8ff"/>
+
+  <!-- emitter drum -->
+  <path d="M96 118 L96 176 A32 11 0 0 0 160 176 L160 118 Z" fill="url(#drum)"/>
+  <ellipse cx="128" cy="118" rx="32" ry="11" fill="url(#drumtop)"/>
+  <ellipse cx="128" cy="118" rx="32" ry="11" fill="none" stroke="#e5ecf3" stroke-opacity="0.7" stroke-width="1.3"/>
+  <!-- ribs -->
+  <path d="M96 138 A32 11 0 0 0 160 138" fill="none" stroke="#0d1013" stroke-width="3.2"/>
+  <path d="M96 158 A32 11 0 0 0 160 158" fill="none" stroke="#0d1013" stroke-width="3.2"/>
+  <path d="M96 140 A32 11 0 0 0 160 140" fill="none" stroke="#ffffff" stroke-opacity="0.28" stroke-width="1"/>
+  <path d="M96 160 A32 11 0 0 0 160 160" fill="none" stroke="#ffffff" stroke-opacity="0.28" stroke-width="1"/>
+  <!-- glowing violet bands -->
+  <path d="M96 148 A32 11 0 0 0 160 148" fill="none" stroke="url(#ring)" stroke-width="4" filter="url(#blur1)"/>
+  <path d="M96 148 A32 11 0 0 0 160 148" fill="none" stroke="#f1e6ff" stroke-width="1.4"/>
+  <path d="M96 168 A32 11 0 0 0 160 168" fill="none" stroke="url(#ring)" stroke-width="3.4" filter="url(#blur1)"/>
+  <path d="M96 168 A32 11 0 0 0 160 168" fill="none" stroke="#f1e6ff" stroke-width="1.1"/>
+  <!-- vents -->
+  <rect x="106" y="126" width="6" height="8" rx="1" fill="#0b0d10"/><rect x="146" y="126" width="6" height="8" rx="1" fill="#0b0d10"/>
+
+  <!-- prism dome -->
+  <path d="M104 116 C104 86 116 72 128 72 C140 72 152 86 152 116 C146 124 110 124 104 116 Z" fill="url(#dome)"/>
+  <path d="M104 116 C104 86 116 72 128 72 C140 72 152 86 152 116" fill="none" stroke="#eadcff" stroke-opacity="0.7" stroke-width="1.4"/>
+  <ellipse cx="119" cy="92" rx="5" ry="13" fill="#ffffff" opacity="0.45" transform="rotate(-14 119 92)"/>
+  <circle cx="128" cy="100" r="15" fill="url(#core)" filter="url(#blur1)"/>
+  <circle cx="128" cy="100" r="6" fill="#ffffff"/>
+
+  <!-- shimmer field rings -->
+  <ellipse cx="128" cy="100" rx="52" ry="30" fill="none" stroke="url(#field)" stroke-width="2.2" stroke-dasharray="9 5"/>
+  <ellipse cx="128" cy="100" rx="72" ry="42" fill="none" stroke="url(#field)" stroke-width="1.8" stroke-dasharray="5 7" opacity="0.8"/>
+  <ellipse cx="128" cy="100" rx="92" ry="54" fill="none" stroke="url(#field)" stroke-width="1.4" stroke-dasharray="3 9" opacity="0.55"/>
+
+  <!-- ship dissolving into the shimmer -->
+  <g transform="translate(128 50) scale(1.22) translate(-128 -50)">
+    <path d="M128 22 L137 44 L149 52 L176 66 L180 76 L150 70 L142 84 L128 80 L114 84 L106 70 L76 76 L80 66 L107 52 L119 44 Z" fill="url(#ghost)"/>
+    <g clip-path="url(#shipclip)">
+      <rect x="60" y="58" width="136" height="1.6" fill="#0a0810" opacity="0.7"/>
+      <rect x="60" y="63" width="136" height="2" fill="#0a0810" opacity="0.75"/>
+      <rect x="60" y="68" width="136" height="2.6" fill="#0a0810" opacity="0.8"/>
+      <rect x="60" y="73" width="136" height="3.2" fill="#0a0810" opacity="0.85"/>
+      <rect x="60" y="78" width="136" height="3.6" fill="#0a0810" opacity="0.9"/>
+    </g>
+    <path d="M128 22 L137 44 L149 52 L176 66 L180 76 L150 70 L142 84 L128 80 L114 84 L106 70 L76 76 L80 66 L107 52 L119 44 Z" fill="none" stroke="#eadcff" stroke-opacity="0.9" stroke-width="1.3" stroke-dasharray="6 3"/>
+    <path d="M128 28 L128 62" stroke="#eadcff" stroke-opacity="0.55" stroke-width="1"/>
+    <circle cx="128" cy="48" r="2.6" fill="#ffffff" opacity="0.95"/>
+  </g>
+  <!-- sparkles -->
+  <g fill="#f4eaff">
+    <circle cx="52" cy="82" r="1.8"/><circle cx="204" cy="76" r="2"/><circle cx="68" cy="128" r="1.4"/>
+    <circle cx="190" cy="124" r="1.6"/><circle cx="92" cy="50" r="1.4" opacity="0.8"/><circle cx="168" cy="40" r="1.3" opacity="0.8"/>
+  </g>
+  <g stroke="#cdb6ff" stroke-width="1.2" stroke-linecap="round" opacity="0.85">
+    <path d="M52 76 L52 88 M46 82 L58 82"/><path d="M204 69 L204 83 M197 76 L211 76"/>
+  </g>
+</svg>

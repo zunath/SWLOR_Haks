@@ -1,0 +1,195 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="70%">
+      <stop offset="0" stop-color="#16171a"/>
+      <stop offset="1" stop-color="#050607"/>
+    </radialGradient>
+    <!-- armored launcher housing -->
+    <linearGradient id="boxtop" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#b9c3cd"/>
+      <stop offset="0.5" stop-color="#7b8692"/>
+      <stop offset="1" stop-color="#4a535d"/>
+    </linearGradient>
+    <linearGradient id="boxfront" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#85909c"/>
+      <stop offset="0.6" stop-color="#555e68"/>
+      <stop offset="1" stop-color="#2c323a"/>
+    </linearGradient>
+    <linearGradient id="boxside" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#5e6872"/>
+      <stop offset="1" stop-color="#2c3239"/>
+    </linearGradient>
+    <linearGradient id="plate" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#939ea9"/>
+      <stop offset="1" stop-color="#414952"/>
+    </linearGradient>
+    <!-- launch tube (local frame: x along the bore, y across it) -->
+    <linearGradient id="tube" x1="0" y1="-24" x2="0" y2="24" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#1c2127"/>
+      <stop offset="0.2" stop-color="#aab5c0"/>
+      <stop offset="0.42" stop-color="#616c77"/>
+      <stop offset="0.8" stop-color="#232930"/>
+      <stop offset="1" stop-color="#101317"/>
+    </linearGradient>
+    <linearGradient id="collar" x1="0" y1="-28" x2="0" y2="28" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#1d2228"/>
+      <stop offset="0.2" stop-color="#e3e9ef"/>
+      <stop offset="0.5" stop-color="#8a96a2"/>
+      <stop offset="1" stop-color="#15191d"/>
+    </linearGradient>
+    <radialGradient id="bore" cx="50%" cy="50%" r="55%">
+      <stop offset="0" stop-color="#bffcff"/>
+      <stop offset="0.45" stop-color="#2fc8e0"/>
+      <stop offset="1" stop-color="#062a34"/>
+    </radialGradient>
+    <!-- the probe -->
+    <linearGradient id="probe" x1="0" y1="-15" x2="0" y2="15" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#5a6570"/>
+      <stop offset="0.18" stop-color="#ffffff"/>
+      <stop offset="0.42" stop-color="#d3dbe3"/>
+      <stop offset="0.78" stop-color="#6d7984"/>
+      <stop offset="1" stop-color="#262c33"/>
+    </linearGradient>
+    <linearGradient id="band" x1="0" y1="-15" x2="0" y2="15" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#1b2026"/>
+      <stop offset="0.25" stop-color="#5c6772"/>
+      <stop offset="1" stop-color="#0e1115"/>
+    </linearGradient>
+    <linearGradient id="fin" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#4b5560"/>
+      <stop offset="0.6" stop-color="#c9d2db"/>
+      <stop offset="1" stop-color="#7d8894"/>
+    </linearGradient>
+    <radialGradient id="eye" cx="42%" cy="38%" r="65%">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="0.3" stop-color="#b8fcff"/>
+      <stop offset="0.65" stop-color="#22d2ec"/>
+      <stop offset="1" stop-color="#05495a"/>
+    </radialGradient>
+    <radialGradient id="joint" cx="38%" cy="35%" r="70%">
+      <stop offset="0" stop-color="#e3e9ef"/>
+      <stop offset="0.45" stop-color="#6c7886"/>
+      <stop offset="1" stop-color="#14181d"/>
+    </radialGradient>
+    <radialGradient id="dish" cx="35%" cy="30%" r="80%">
+      <stop offset="0" stop-color="#f2f6f9"/>
+      <stop offset="0.5" stop-color="#97a3ae"/>
+      <stop offset="1" stop-color="#2b3239"/>
+    </radialGradient>
+    <radialGradient id="amber" cx="40%" cy="35%" r="70%">
+      <stop offset="0" stop-color="#fff4d0"/>
+      <stop offset="0.4" stop-color="#ffb84a"/>
+      <stop offset="1" stop-color="#8a4a08"/>
+    </radialGradient>
+    <filter id="blur2" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2"/></filter>
+    <filter id="blur4" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="4"/></filter>
+    <filter id="blur8" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="8"/></filter>
+  </defs>
+  <rect width="256" height="256" fill="url(#bg)"/>
+  <g transform="translate(118 130) scale(0.98) translate(-126 -126)">
+  <ellipse cx="124" cy="216" rx="90" ry="8" fill="#000" opacity="0.85" filter="url(#blur2)"/>
+
+  <!-- ===== armored launcher housing ===== -->
+  <!-- right side face -->
+  <path d="M146 168 L206 142 L206 186 L146 214 Z" fill="url(#boxside)" stroke="#0b0d10" stroke-width="1.6" stroke-linejoin="round"/>
+  <g stroke="#0b0d10" stroke-width="1.4" opacity="0.9">
+    <path d="M158 175 L196 158 M158 187 L196 170 M158 199 L196 182"/>
+  </g>
+  <g stroke="#5a646e" stroke-width="0.9" opacity="0.7">
+    <path d="M158 176.4 L196 159.4 M158 188.4 L196 171.4 M158 200.4 L196 183.4"/>
+  </g>
+  <!-- front face -->
+  <path d="M40 150 L146 168 L146 214 L40 196 Z" fill="url(#boxfront)" stroke="#0b0d10" stroke-width="1.6" stroke-linejoin="round"/>
+  <!-- bolted armor plate on the front -->
+  <path d="M50 160 L136 175 L136 205 L50 190 Z" fill="url(#plate)" stroke="#0b0d10" stroke-width="1.3"/>
+  <path d="M50.5 160.6 L135.5 175.6" stroke="#b6c0ca" stroke-width="1" opacity="0.7"/>
+  <path d="M93 167.5 L93 197.5" stroke="#1a1f24" stroke-width="1.4"/>
+  <path d="M94.4 168 L94.4 198" stroke="#7d8894" stroke-width="0.8" opacity="0.6"/>
+  <g fill="#d8dee4">
+    <circle cx="56" cy="164" r="1.9"/><circle cx="130" cy="177" r="1.9"/>
+    <circle cx="56" cy="186" r="1.9"/><circle cx="130" cy="199" r="1.9"/>
+  </g>
+  <!-- amber status lights -->
+  <circle cx="108" cy="187" r="6" fill="#ffb84a" opacity="0.45" filter="url(#blur2)"/>
+  <circle cx="108" cy="187" r="3.2" fill="url(#amber)"/>
+  <circle cx="119" cy="189" r="2.2" fill="#3bd8ee"/>
+  <circle cx="119" cy="189" r="4.5" fill="#3bd8ee" opacity="0.4" filter="url(#blur2)"/>
+  <!-- top face -->
+  <path d="M40 150 L104 124 L206 142 L146 168 Z" fill="url(#boxtop)" stroke="#0b0d10" stroke-width="1.6" stroke-linejoin="round"/>
+  <path d="M40 150 L146 168 L206 142" fill="none" stroke="#eef3f7" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/>
+  <path d="M40 150 L104 124" stroke="#d4dce4" stroke-width="1.2" opacity="0.8"/>
+  <!-- top deck seam -->
+  <path d="M66 151 L118 132" stroke="#2a3138" stroke-width="1.3" opacity="0.8"/>
+
+  <!-- ===== small sensor dish on a mast (rear-left of the housing) ===== -->
+  <path d="M64 140 L64 108" stroke="#14181c" stroke-width="5.4" stroke-linecap="round"/>
+  <path d="M64 140 L64 108" stroke="#8a96a2" stroke-width="2.6" stroke-linecap="round"/>
+  <circle cx="64" cy="141" r="5" fill="url(#joint)" stroke="#0b0d10" stroke-width="1.2"/>
+  <g transform="translate(62 100) rotate(-28) scale(1.15)">
+    <ellipse cx="0" cy="0" rx="22" ry="9" fill="url(#dish)" stroke="#0b0d10" stroke-width="1.6"/>
+    <ellipse cx="0" cy="-1.5" rx="17" ry="6" fill="#242a31" opacity="0.55"/>
+    <path d="M-20 -1 A21 8 0 0 1 20 -1" fill="none" stroke="#ffffff" stroke-width="1.2" opacity="0.8"/>
+    <path d="M0 -1 L0 -15" stroke="#c9d2db" stroke-width="1.6" stroke-linecap="round"/>
+    <circle cx="0" cy="-16" r="2.8" fill="#bffcff"/>
+    <circle cx="0" cy="-16" r="6" fill="#5ff6ff" opacity="0.45" filter="url(#blur2)"/>
+  </g>
+
+  <!-- ===== turret drum the tube pivots on ===== -->
+  <ellipse cx="124" cy="160" rx="38" ry="14" fill="url(#boxside)" stroke="#0b0d10" stroke-width="1.6"/>
+  <path d="M86 150 L86 160 A38 14 0 0 0 162 160 L162 150 Z" fill="url(#boxfront)" stroke="#0b0d10" stroke-width="1.4"/>
+  <ellipse cx="124" cy="150" rx="38" ry="14" fill="url(#boxtop)" stroke="#0b0d10" stroke-width="1.6"/>
+  <ellipse cx="124" cy="150" rx="27" ry="9.5" fill="#1b2026" stroke="#0b0d10" stroke-width="1.2"/>
+  <path d="M88 147 A38 14 0 0 1 160 147" fill="none" stroke="#eef3f7" stroke-width="1.3" opacity="0.8"/>
+
+  <!-- ===== launch tube and the half-ejected probe (local frame along the bore) ===== -->
+  <g transform="translate(122 150) rotate(-47) scale(1.04 1.3)">
+    <!-- ejection glow behind the probe -->
+    <ellipse cx="64" cy="0" rx="26" ry="36" fill="#2fe0f0" opacity="0.55" filter="url(#blur8)"/>
+    <!-- tube barrel, dark armored gunmetal -->
+    <path d="M-6 -23 L58 -23 L58 23 L-6 23 Z" fill="url(#tube)" stroke="#0b0d10" stroke-width="1.8" stroke-linejoin="round"/>
+    <path d="M-4 -17 L56 -17" stroke="#dfe6ec" stroke-width="1.3" opacity="0.7"/>
+    <path d="M14 -22 L14 22 M34 -22 L34 22" stroke="#0b0d10" stroke-width="1.4"/>
+    <path d="M15.4 -21 L15.4 -8 M35.4 -21 L35.4 -8" stroke="#aab5c0" stroke-width="1" opacity="0.7"/>
+    <!-- trunnion hub -->
+    <circle cx="4" cy="0" r="9" fill="url(#joint)" stroke="#0b0d10" stroke-width="1.4"/>
+    <circle cx="4" cy="0" r="3" fill="#14181c"/>
+    <!-- muzzle collar -->
+    <path d="M52 -28 L64 -28 L64 28 L52 28 Z" fill="url(#collar)" stroke="#0b0d10" stroke-width="1.6" stroke-linejoin="round"/>
+    <!-- bore mouth, glowing from the launch charge -->
+    <ellipse cx="64" cy="0" rx="8.5" ry="26" fill="#0b0f13" stroke="#0b0d10" stroke-width="1.4"/>
+    <ellipse cx="64" cy="0" rx="6.8" ry="22" fill="url(#bore)"/>
+
+    <!-- probe leaving the tube: swept rear fins -->
+    <path d="M80 -13 L70 -40 L78 -42 L104 -13 Z" fill="url(#fin)" stroke="#0b0d10" stroke-width="1.5" stroke-linejoin="round"/>
+    <path d="M80 13 L70 40 L78 42 L104 13 Z" fill="url(#fin)" stroke="#0b0d10" stroke-width="1.5" stroke-linejoin="round"/>
+    <path d="M73.5 -40 L93 -14" stroke="#f2f6f9" stroke-width="1.1" opacity="0.85"/>
+    <circle cx="73" cy="-41" r="3" fill="#7ff8ff"/>
+    <circle cx="73" cy="41" r="3" fill="#7ff8ff"/>
+    <circle cx="73" cy="-41" r="6" fill="#3fe8ff" opacity="0.5" filter="url(#blur2)"/>
+    <circle cx="73" cy="41" r="6" fill="#3fe8ff" opacity="0.5" filter="url(#blur2)"/>
+    <!-- hull -->
+    <path d="M58 -15 L118 -15 Q136 -15 147 0 Q136 15 118 15 L58 15 Z" fill="url(#probe)" stroke="#0b0d10" stroke-width="1.8" stroke-linejoin="round"/>
+    <!-- dark instrument band -->
+    <path d="M96 -15 L106 -15 L106 15 L96 15 Z" fill="url(#band)"/>
+    <path d="M96.5 -14.5 L96.5 14.5" stroke="#0b0d10" stroke-width="0.9"/>
+    <circle cx="101" cy="-6.5" r="1.8" fill="#5ff6ff"/>
+    <!-- specular highlight along the hull -->
+    <path d="M68 -10 L94 -10 M108 -10 L126 -10" stroke="#ffffff" stroke-width="1.7" stroke-linecap="round" opacity="0.9"/>
+    <!-- whip antenna -->
+    <path d="M112 -14 L90 -46" stroke="#0b0d10" stroke-width="3" stroke-linecap="round"/>
+    <path d="M112 -14 L90 -46" stroke="#c9d2db" stroke-width="1.5" stroke-linecap="round"/>
+    <circle cx="89" cy="-47" r="2.4" fill="#ff6a50"/>
+    <!-- glowing cyan sensor eye in the nose -->
+    <circle cx="136" cy="0" r="18" fill="#3fe8ff" opacity="0.55" filter="url(#blur4)"/>
+    <ellipse cx="137" cy="0" rx="8" ry="11.5" fill="#0a1216" stroke="#0b0d10" stroke-width="1.2"/>
+    <ellipse cx="137.5" cy="0" rx="6.5" ry="9.8" fill="url(#eye)"/>
+    <ellipse cx="135.6" cy="-3.6" rx="1.8" ry="2.8" fill="#ffffff" opacity="0.95"/>
+  </g>
+
+  <!-- launch vapor puffs at the muzzle -->
+  <g fill="#bffcff">
+    <circle cx="186" cy="132" r="1.8" opacity="0.85"/><circle cx="198" cy="112" r="1.4" opacity="0.7"/>
+    <circle cx="140" cy="84" r="1.3" opacity="0.6"/>
+  </g>
+  </g>
+</svg>

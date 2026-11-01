@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <defs>
+    <radialGradient id="bg" cx="40%" cy="60%" r="75%">
+      <stop offset="0" stop-color="#0f2236"/>
+      <stop offset="1" stop-color="#030508"/>
+    </radialGradient>
+    <linearGradient id="bell" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e3e9ef"/>
+      <stop offset="0.35" stop-color="#8d98a4"/>
+      <stop offset="0.7" stop-color="#3c444d"/>
+      <stop offset="1" stop-color="#14181c"/>
+    </linearGradient>
+    <linearGradient id="housing" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#b9c3cd"/>
+      <stop offset="0.5" stop-color="#5d6772"/>
+      <stop offset="1" stop-color="#1d2228"/>
+    </linearGradient>
+    <linearGradient id="flame" x1="1" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="0.25" stop-color="#bff2ff"/>
+      <stop offset="0.6" stop-color="#3fa8ff"/>
+      <stop offset="1" stop-color="#1a3cff" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="core" x1="1" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="0.5" stop-color="#e6fbff"/>
+      <stop offset="1" stop-color="#7fd6ff" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="mouth" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="0.5" stop-color="#9fe8ff"/>
+      <stop offset="1" stop-color="#2a7cff"/>
+    </radialGradient>
+  </defs>
+  <rect width="256" height="256" fill="url(#bg)"/>
+  <!-- the plume streaming down and left -->
+  <path d="M120 120 L10 250 L-10 230 L96 104 Z" fill="url(#flame)" opacity="0.6"/>
+  <path d="M128 112 L22 236 L4 218 L104 96 Z" fill="url(#flame)"/>
+  <path d="M120 110 L40 210 L32 202 L108 102 Z" fill="url(#core)"/>
+  <!-- shock diamonds -->
+  <g fill="#ffffff" opacity="0.85">
+    <path d="M84 150 L92 140 L100 150 L92 160 Z"/>
+    <path d="M60 180 L67 171 L74 180 L67 189 Z"/>
+  </g>
+  <!-- the engine: housing upper right, the nozzle bell opening down-left -->
+  <g transform="rotate(-40 160 96)">
+    <rect x="150" y="62" width="96" height="68" rx="14" fill="url(#housing)"/>
+    <rect x="166" y="70" width="10" height="52" rx="3" fill="#2c333b"/>
+    <rect x="184" y="70" width="10" height="52" rx="3" fill="#2c333b"/>
+    <rect x="202" y="70" width="10" height="52" rx="3" fill="#2c333b"/>
+    <path d="M150 70 L96 52 L96 140 L150 122 Z" fill="url(#bell)"/>
+    <ellipse cx="96" cy="96" rx="14" ry="44" fill="url(#mouth)"/>
+    <ellipse cx="96" cy="96" rx="6" ry="30" fill="#ffffff"/>
+    <rect x="226" y="80" width="14" height="32" rx="4" fill="#3fa8ff"/>
+  </g>
+</svg>
