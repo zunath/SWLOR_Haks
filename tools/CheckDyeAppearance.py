@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
 """Keep existing dye colors stable and dyed metal on the palette.
 
-Every tint material (sw_tint_mtr) is fingerprinted from its directives and the
-exact content of every texture (and TXI) it binds, tint masks included. The shared tint shaders,
-palette atlas, and each model's rows in tintmap.2da and cloaktint.2da (which
-material and dye layers it uses) are recorded as well. DyeAppearanceBaseline.json records the
-approved state, so any change to how an existing part takes dyes fails until the
-baseline is updated on purpose, with before/after client captures in the pull
-request (SWLOR.Game.Server/Readmes/TintMapRendering.md).
+Every tint material (each sw_tint_mtr material and any other MTR that samples
+the dye palette) is fingerprinted from its directives and the exact content of
+every texture (and TXI) it binds, tint masks included. Every custom shader those
+materials use, the palette atlas, and each model's rows in tintmap.2da and
+cloaktint.2da (which material and dye layers it uses) are recorded as well.
+DyeAppearanceBaseline.json records the approved state, so any change to how an
+existing part takes dyes fails until the baseline is updated on purpose, with
+before/after client captures in the pull request (SWLOR.Game.Server/Readmes/TintMapRendering.md).
 
 Dyed metal takes its reflectance from the palette. A bound specular (texture2) or
 roughness (texture3) map replaces it and turns dyed metal into a pale,
@@ -32,6 +33,7 @@ ROOT = Path(__file__).resolve().parents[1]
 BASELINE = Path(__file__).with_name("DyeAppearanceBaseline.json")
 SOURCES = Path(__file__).with_name("TintMapSources.json")
 TINT_SHADERS = frozenset({"fs_plt_tinter", "fs_plt_tinter_nm", "fs_plt_hair_nm", "fs_cloaktint"})
+# Every custom shader a tint material uses is a shared input as well (see current_state).
 SHARED_INPUTS = (
     "sw_shader/fs_plt_tinter.shd",
     "sw_shader/fs_plt_tinter_nm.shd",
@@ -92,6 +94,25 @@ def bindings(lines: list[str]) -> dict[str, str]:
             if len(parts) == 2 and re.fullmatch(r"texture\d+", parts[0])}
 
 
+def mtr_texts(blobs: dict[str, str]) -> dict[str, str]:
+    """Every MTR in the haks, from the working tree or, for folders a sparse checkout omits, from git."""
+    texts, unread = {}, []
+    for path in sorted(path for path in blobs if path.lower().endswith(".mtr")):
+        if (ROOT / path).is_file():
+            texts[path] = (ROOT / path).read_bytes()
+        else:
+            unread.append(path)
+    if unread:
+        output = git("cat-file", "--batch", data="".join(f"{blobs[path]}\n" for path in unread).encode())
+        offset = 0
+        for path in unread:
+            header_end = output.index(b"\n", offset)
+            size = int(output[offset:header_end].split()[2])
+            texts[path] = output[header_end + 1:header_end + 1 + size]
+            offset = header_end + 1 + size + 1
+    return {path: data.decode("utf-8-sig", errors="replace") for path, data in texts.items()}
+
+
 def mask_layers() -> dict[str, set[int]]:
     layers: dict[str, set[int]] = {}
     for entry in json.loads(SOURCES.read_text(encoding="utf-8")):
@@ -120,14 +141,21 @@ def current_state() -> tuple[dict[str, str], dict[str, str], set[str], dict[str,
     textures = texture_blobs(blobs)
     layers = mask_layers()
     shared = {path: blobs.get(path, "missing") for path in SHARED_INPUTS}
+    shader_files = {Path(path).stem.lower(): path for path in blobs
+                    if path.startswith("sw_shader/") and path.lower().endswith(".shd")}
     materials, metal_specular = {}, set()
-    for path in sorted((ROOT / "sw_tint_mtr").glob("*.mtr")):
-        lines = directives(path.read_text(encoding="utf-8-sig", errors="replace"))
+    for relative, text in mtr_texts(blobs).items():
+        lines = directives(text)
         bound = bindings(lines)
-        shaders = {line.split()[1] for line in lines if line.startswith("customshaderfs ")}
-        if not shaders & TINT_SHADERS:
+        shaders = {line.split()[1] for line in lines if line.startswith(("customshaderfs ", "customshadervs "))}
+        # A tint material samples the dye palette; most also use a tint shader.
+        if "plt_palette" not in bound.values() and not shaders & TINT_SHADERS:
             continue
-        name = path.stem.lower()
+        for shader in sorted(shaders & set(shader_files)):
+            shared[shader_files[shader]] = blobs[shader_files[shader]]
+        folder, name = Path(relative).parent.as_posix().lower(), Path(relative).stem.lower()
+        if folder != "sw_tint_mtr":
+            name = f"{folder}/{name}"
         record = {
             "directives": lines,
             "textures": {texture: textures.get(texture, ["missing"])
