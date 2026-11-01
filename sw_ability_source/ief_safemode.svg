@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#46e0ff" stop-opacity="0.65"/>
+      <stop offset="60%" stop-color="#1f8fd6" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#1f8fd6" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="rim" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#eaf6ff"/>
+      <stop offset="50%" stop-color="#86a9c8"/>
+      <stop offset="100%" stop-color="#2f4560"/>
+    </linearGradient>
+    <linearGradient id="plate" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2f6f9e"/>
+      <stop offset="55%" stop-color="#163d63"/>
+      <stop offset="100%" stop-color="#0b1c33"/>
+    </linearGradient>
+    <linearGradient id="check" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#f4fff2"/>
+      <stop offset="100%" stop-color="#6fe88a"/>
+    </linearGradient>
+    <filter id="soft" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="3.5"/>
+    </filter>
+  </defs>
+  <circle cx="128" cy="128" r="124" fill="url(#glow)"/>
+  <!-- shield rim and plate -->
+  <path d="M 128 20 L 208 48 L 208 120 C 208 176 172 214 128 238 C 84 214 48 176 48 120 L 48 48 Z" fill="url(#rim)"/>
+  <path d="M 128 36 L 194 59 L 194 119 C 194 166 164 199 128 220 C 92 199 62 166 62 119 L 62 59 Z" fill="url(#plate)"/>
+  <path d="M 128 36 L 194 59 L 194 119 C 194 166 164 199 128 220 C 92 199 62 166 62 119 L 62 59 Z" fill="none" stroke="#06101e" stroke-width="3" stroke-opacity="0.8"/>
+  <!-- circuit traces -->
+  <g fill="none" stroke="#5fd8ff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="0.9">
+    <path d="M 128 52 L 128 74"/>
+    <path d="M 76 82 L 100 82 L 100 100"/>
+    <path d="M 180 82 L 156 82 L 156 100"/>
+    <path d="M 78 150 L 96 150 L 108 162"/>
+    <path d="M 178 150 L 160 150 L 148 162"/>
+  </g>
+  <g fill="#bff0ff">
+    <circle cx="128" cy="50" r="6"/>
+    <circle cx="76" cy="82" r="6"/>
+    <circle cx="180" cy="82" r="6"/>
+    <circle cx="78" cy="150" r="6"/>
+    <circle cx="178" cy="150" r="6"/>
+  </g>
+  <!-- the check mark -->
+  <path d="M 92 126 L 118 154 L 168 94" fill="none" stroke="#10331c" stroke-width="22" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="0.55" filter="url(#soft)"/>
+  <path d="M 92 126 L 118 154 L 168 94" fill="none" stroke="#2fc766" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 92 126 L 118 154 L 168 94" fill="none" stroke="url(#check)" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
