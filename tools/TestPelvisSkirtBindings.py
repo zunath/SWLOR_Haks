@@ -1,4 +1,4 @@
-"""Guard the fitted pelvis skirt's protected geometry, native metadata and skin seams."""
+"""Guard release 035 skinning, canonical 034 identity and local front/left clearance."""
 from pathlib import Path
 import hashlib
 import json
@@ -30,49 +30,85 @@ class PelvisSkirtBindingTests(unittest.TestCase):
                 self.assertEqual(entry['sha256'], hashlib.sha256(self.outputs[name]).hexdigest())
                 self.assertEqual(self.outputs[name], pelvis.generate(entry))
 
-    def test_only_skirt_buffers_and_required_native_metadata_change(self):
+    def test_release_provenance_is_pinned(self):
+        self.assertEqual('f4bb7e0c7b9d174c945afedf637ea2389047dfa9', self.entries['pfh0_pelvis034']['sourceBlob'])
+        self.assertEqual('072dcdb02372a18044a20a29db4530b45d818427', self.entries['pmh0_pelvis034']['sourceBlob'])
+
+    def test_only_local_geometry_metadata_and_canonical_identity_change(self):
         for name, source in self.sources.items():
             with self.subTest(model=name):
                 current = self.outputs[name]
                 self.assertEqual(len(source), len(current))
+                garment = pelvis.Garment(source)
+                displacement = garment.displacement(self.entries[name]['parameters'])
+                changed = np.any(displacement != 0, axis=1)
                 allowed = np.zeros(len(source), dtype=bool)
 
                 def allow(start, size):
                     allowed[start:start + size] = True
 
+                original = (name[:-3] + '035').encode('ascii')
+                self.assertEqual(3, source.count(original))
+                cursor = 0
+                for _ in range(3):
+                    cursor = source.index(original, cursor)
+                    allow(cursor, len(original))
+                    self.assertEqual(name.encode('ascii'), current[cursor:cursor + len(original)])
+                    cursor += len(original)
                 allow(148, 28)
-                bones, _ = skirts.skeleton(source)
-                for skin in skirts.skins(source, bones):
-                    mesh_offset = skin['palette_offset'] - 64 - 512
-                    allow(mesh_offset + 20, 40)
-                    allow(skin['palette_offset'], 34)
-                    allow(skin['bone_map_offset'], len(bones) * 2)
-                    for vertex in range(pelvis.SKIRT_VERTICES):
-                        for pointer, size in (('positions', 12), ('weights', 16), ('indices', 8)):
-                            allow(skin[pointer] + vertex * (skin['stride'] or size), size)
-                for _, _, mesh in mdl.binary_nodes(source):
-                    if not mesh or 'weights' not in mesh:
-                        continue
-                    offset = mesh['_mesh_offset']
-                    stride = struct.unpack_from('<I', source, offset + 440)[0]
-                    normals = 12 + struct.unpack_from('<I', source, 4)[0] + struct.unpack_from('<I', source, offset + 468)[0]
-                    faces = 12 + struct.unpack_from('<I', source, offset + 8)[0]
-                    for vertex in range(pelvis.SKIRT_VERTICES):
+                skin = garment.skin
+                offset = garment.mesh['_mesh_offset']
+                allow(offset + 20, 40)
+                for vertex in np.flatnonzero(changed):
+                    allow(skin['positions'] + vertex * (skin['stride'] or 12), 12)
+                stride = struct.unpack_from('<I', source, offset + 440)[0]
+                normals = 12 + struct.unpack_from('<I', source, 4)[0] + struct.unpack_from('<I', source, offset + 468)[0]
+                faces = 12 + struct.unpack_from('<I', source, offset + 8)[0]
+                for vertex in range(pelvis.SKIRT_VERTICES):
+                    if (garment.pos[vertex, 1] > .0312
+                            or (garment.pos[vertex, 0] > .10 and garment.pos[vertex, 1] > -.02)):
                         allow(normals + vertex * (stride or 12), 12)
-                    for index, face in enumerate(mesh['faces']):
-                        if min(face[:3]) < pelvis.SKIRT_VERTICES:
-                            allow(faces + index * 32, 16)
+                for index, face in enumerate(garment.mesh['faces']):
+                    if np.any(changed[face[:3]]):
+                        allow(faces + index * 32, 16)
                 differences = np.frombuffer(source, dtype=np.uint8) != np.frombuffer(current, dtype=np.uint8)
-                self.assertFalse(np.any(differences & ~allowed), 'Unrelated geometry, UVs, material or binds changed')
-                before = next(mesh for _, _, mesh in mdl.binary_nodes(source) if mesh and 'weights' in mesh)
+                self.assertFalse(np.any(differences & ~allowed),
+                                 'Rig, UVs, protected geometry or unrelated binary data changed')
                 after = next(mesh for _, _, mesh in mdl.binary_nodes(current) if mesh and 'weights' in mesh)
-                for field in ('faces', 'tverts', 'tverts1', 'tverts2', 'tverts3', 'colors'):
-                    self.assertEqual(before.get(field), after.get(field), field)
-                for field in ('verts', 'weights', 'normals'):
-                    self.assertEqual(before[field][pelvis.SKIRT_VERTICES:], after[field][pelvis.SKIRT_VERTICES:], field)
-                for skin in skirts.skins(current, bones):
-                    for vertex in range(skin['count']):
-                        self.assertLessEqual(len(skirts.influences(current, skin, vertex)), 4)
+                for field in ('faces', 'tverts', 'tverts1', 'tverts2', 'tverts3', 'colors', 'weights'):
+                    self.assertEqual(garment.mesh.get(field), after.get(field), field)
+                # Explicitly guard every slot, including zero-weight indices, all bone tables and inverse binds.
+                for pointer, size, count in (('weights', 16, skin['count']), ('indices', 8, skin['count']),
+                                            ('palette_offset', 34, 1), ('bone_map_offset', 2 * len(garment.names), 1),
+                                            ('inverse_rotations', 16 * len(garment.names), 1),
+                                            ('inverse_translations', 12 * len(garment.names), 1)):
+                    for vertex in range(count):
+                        start = skin[pointer] + vertex * (skin['stride'] or size)
+                        self.assertEqual(source[start:start + size], current[start:start + size], pointer)
+
+    def test_clearance_is_local_and_keeps_rear_waist_hem_and_width(self):
+        for name, source in self.sources.items():
+            with self.subTest(model=name):
+                garment = pelvis.Garment(source)
+                expected = garment.displacement(self.entries[name]['parameters'])
+                before = garment.pos
+                after = np.array(skirts.rest_positions(self.outputs[name]))
+                np.testing.assert_allclose(after - before, expected, atol=2e-7)
+                np.testing.assert_allclose(after[:, 0].min(), before[:, 0].min(), atol=1e-8)
+                np.testing.assert_allclose(after[:, 0].max(), before[:, 0].max(), atol=1e-8)
+                protected = ~np.any(expected != 0, axis=1)
+                np.testing.assert_array_equal(after[protected], before[protected])
+                self.assertLessEqual(np.max(expected[:, 1]), .060000001)
+                self.assertGreaterEqual(np.min(expected[:, 0]), -.025)
+                self.assertLessEqual(np.max(expected[:, 0]), .025)
+                rear = (before[:, 1] <= -.02) | ((before[:, 1] <= .0312) & (before[:, 0] <= .10))
+                self.assertTrue(np.all(expected[rear] == 0))
+                self.assertTrue(np.all(expected[(before[:, 2] <= .60) | (before[:, 2] >= 1.12)] == 0))
+                for field in ('frontClearance', 'leftFrontClearance', 'leftSideClearance', 'rightFrontClearance', 'rightSideClearance'):
+                    for value in (-.01, .2, float('nan'), float('inf')):
+                        invalid = {**self.entries[name]['parameters'], field: value}
+                        with self.assertRaises(ValueError, msg=f'{field}={value}'):
+                            garment.displacement(invalid)
 
     def test_bounds_normals_and_face_planes_match_the_new_positions(self):
         for name, data in self.outputs.items():
@@ -87,8 +123,10 @@ class PelvisSkirtBindingTests(unittest.TestCase):
                 self.assertAlmostEqual(radius, np.linalg.norm(points - points.mean(0), axis=1).max(), places=6)
                 np.testing.assert_allclose(np.linalg.norm(np.array(mesh['normals'])[:pelvis.SKIRT_VERTICES], axis=1), 1, atol=2e-6)
                 faces = 12 + struct.unpack_from('<I', data, offset + 8)[0]
+                garment = pelvis.Garment(self.sources[name])
+                changed = np.any(garment.displacement(self.entries[name]['parameters']) != 0, axis=1)
                 for index, face in enumerate(mesh['faces']):
-                    if min(face[:3]) >= pelvis.SKIRT_VERTICES:
+                    if not np.any(changed[face[:3]]):
                         continue
                     triangle = points[face[:3]]
                     normal = np.cross(triangle[1] - triangle[0], triangle[2] - triangle[0])
@@ -99,7 +137,7 @@ class PelvisSkirtBindingTests(unittest.TestCase):
                     self.assertGreater(np.dot(plane[:3], normal / length), .999)
                     self.assertLess(np.max(abs(triangle @ plane[:3] + plane[3])), 2e-6)
 
-    def test_uv_seams_stay_closed_during_idle_walk_and_run(self):
+    def test_uv_seams_and_rear_motion_are_preserved_across_poses(self):
         game_data = Path(os.environ.get('NWN_GAME_DATA', r'C:\Program Files (x86)\Steam\steamapps\common\Neverwinter Nights\data'))
         self.assertTrue((game_data / 'nwn_base.key').is_file(), 'Set NWN_GAME_DATA to run pelvis pose checks')
         active = tint.find_active_models()
@@ -113,7 +151,10 @@ class PelvisSkirtBindingTests(unittest.TestCase):
             for group in range(groups.max() + 1):
                 vertices = np.where(groups == group)[0]
                 pairs.extend((vertices[0], vertex) for vertex in vertices[1:])
-            for clip_name in ('pause1', 'pause2', 'walk', 'run'):
+            # Actual rear panels stay fixed; only the documented outer-right seam
+            # may extend behind the original front plane.
+            rear = (source_points[:, 1] <= -.02) | ((source_points[:, 1] <= .0312) & (source_points[:, 0] <= .10))
+            for clip_name in ('pause1', 'pause2', 'pausebrd', 'pausetrd', 'custom4lp', 'custom52lp', 'walk', 'run'):
                 owner = mdl.supermodel(active[bones[0]].read_bytes())
                 while owner:
                     model = library.model(owner)
@@ -125,9 +166,11 @@ class PelvisSkirtBindingTests(unittest.TestCase):
                     self.fail(f'{name} lacks {clip_name}')
                 for phase in (0, .25, .5, .75):
                     posed = skirts.rest_positions(current, body.pose(clip, clip[0] * phase))
+                    original = np.array(skirts.rest_positions(self.sources[name], body.pose(clip, clip[0] * phase)))
                     with self.subTest(model=name, clip=clip_name, phase=phase):
+                        np.testing.assert_array_equal(np.array(posed)[:pelvis.SKIRT_VERTICES][rear], original[:pelvis.SKIRT_VERTICES][rear])
                         for left, right in pairs:
-                            np.testing.assert_allclose(posed[left], posed[right], atol=2e-6)
+                            np.testing.assert_allclose(np.array(posed[left]) - posed[right], original[left] - original[right], atol=2e-6)
 
     def test_skirt_intersections_with_actual_thigh_hulls_are_reduced(self):
         hulls = json.loads(Path(__file__).with_name('PelvisSkirtThighHulls.json').read_text())
@@ -135,7 +178,8 @@ class PelvisSkirtBindingTests(unittest.TestCase):
         self.assertTrue((game_data / 'nwn_base.key').is_file(), 'Set NWN_GAME_DATA to run pelvis pose checks')
         active = tint.find_active_models()
         library = body_tracks.library_for(active, game_data)
-        phases = {'pause1': (0,), 'pause2': (0,), 'walk': (0, .25, .5, .75),
+        phases = {'pause1': (0, .5), 'pause2': (0, .5), 'pausebrd': (0, .5), 'pausetrd': (0, .5),
+                  'custom4lp': (0, .5), 'custom52lp': (0, .5), 'walk': (0, .25, .5, .75),
                   'run': (0, .125, .3125, .375, .5, .625, .8125, .875)}
         for name, current in self.outputs.items():
             root = name.split('_')[0]
@@ -166,6 +210,12 @@ class PelvisSkirtBindingTests(unittest.TestCase):
             faces = next(mesh['faces'] for _, _, mesh in mdl.binary_nodes(current) if mesh and 'weights' in mesh)
             faces = np.array([face[:3] for face in faces if max(face[:3]) < pelvis.SKIRT_VERTICES])
             areas = {'source': [], 'fitted': []}
+            left_contacts = {'source': [], 'fitted': []}
+            parade_contacts = {'source': [], 'fitted': []}
+            tired_contacts = {'source': [], 'fitted': []}
+            right_tired_contacts = {'source': [], 'fitted': []}
+            front = np.mean(np.array(skirts.rest_positions(self.sources[name]))[faces, 1], axis=1) > .0312
+            movement_front = {'source': [], 'fitted': []}
             for clip_name, times in phases.items():
                 owner = mdl.supermodel(active[root].read_bytes())
                 while owner:
@@ -176,6 +226,11 @@ class PelvisSkirtBindingTests(unittest.TestCase):
                     owner = model.parent
                 else:
                     self.fail(f'{name} lacks {clip_name}')
+                reference_phases = times
+                # The native right-side screenshot is captured nine seconds after
+                # starting Tired. Include nearby capture/queue timing as well.
+                if clip_name == 'pausetrd':
+                    times = (*times, *((seconds % clip[0]) / clip[0] for seconds in (8.85, 9., 9.15, 9.3)))
                 for phase in times:
                     pose = body.pose(clip, clip[0] * phase)
                     world_hulls = []
@@ -183,22 +238,42 @@ class PelvisSkirtBindingTests(unittest.TestCase):
                         transform = pelvis.transform(pose[bone])
                         world_normals = normals @ np.linalg.inv(transform[:, :3])
                         world_offsets = offsets - world_normals @ transform[:, 3]
-                        world_hulls.append(np.column_stack((world_normals, world_offsets)))
+                        world_hulls.append((bone, np.column_stack((world_normals, world_offsets))))
                     for kind, data in (('source', self.sources[name]), ('fitted', current)):
                         triangles = np.array(skirts.rest_positions(data, pose))[faces]
                         area = 0.
-                        for planes in world_hulls:
+                        for bone, planes in world_hulls:
                             distances = np.einsum('tvi,pi->tvp', triangles, planes[:, :3]) + planes[None, None, :, 3]
                             intersecting = ~np.any(np.all(distances > 0, axis=1), axis=1)
-                            area += sum(self._inside_hull_area(triangle, planes) for triangle in triangles[intersecting])
+                            inside = sum(self._inside_hull_area(triangle, planes) for triangle in triangles[intersecting])
+                            area += inside
+                            if bone == 'lthigh_g' and clip_name == 'pause2':
+                                left_contacts[kind].append(inside)
+                            # Retain the original left reference poses. The added
+                            # capture-time samples specifically exercise the right side.
+                            if bone == 'lthigh_g' and clip_name == 'pausetrd' and phase in reference_phases:
+                                tired_contacts[kind].append(inside)
+                            if bone == 'rthigh_g' and clip_name == 'pausetrd':
+                                right_tired_contacts[kind].append(inside)
+                            if bone == 'lthigh_g' and clip_name == 'custom52lp':
+                                parade_contacts[kind].append(inside)
+                            if clip_name in ('walk', 'run'):
+                                movement_front[kind].append(sum(self._inside_hull_area(triangle, planes) for triangle in triangles[intersecting & front]))
                         areas[kind].append(area)
             with self.subTest(model=name):
-                baseline = np.mean(areas['source'])
-                self.assertGreater(baseline, .005, 'The sample must exercise the original clipping defect')
-                self.assertLess(np.mean(areas['fitted']), baseline * .15,
-                                'The fitted skirt must remove at least 85% of intersecting thigh area')
-                self.assertLess(max(areas['fitted']), max(areas['source']) * .5,
-                                'A large isolated breakthrough must not hide behind the mean')
+                self.assertGreater(np.mean(left_contacts['source']), .004, 'Exercise the reported left contact')
+                self.assertLess(np.mean(left_contacts['fitted']), np.mean(left_contacts['source']) * .30,
+                                'Remove at least 70% of the left-thigh Pause2 contact without reweighting')
+                self.assertLess(np.mean(parade_contacts['fitted']), np.mean(parade_contacts['source']) * .60,
+                                'Remove at least 40% of the left-thigh parade-rest contact')
+                self.assertLess(np.mean(tired_contacts['fitted']), np.mean(tired_contacts['source']) * .05,
+                                'Retain at least 95% left-thigh Tired improvement at the reference poses')
+                self.assertLess(np.mean(right_tired_contacts['fitted']), np.mean(right_tired_contacts['source']) * .10,
+                                'Remove at least 90% of the native-observed right-side Tired contact')
+                self.assertLess(np.mean(movement_front['fitted']), np.mean(movement_front['source']) * .85,
+                                'Moving front cloth must gain measurable clearance')
+                self.assertTrue(np.all(np.array(areas['fitted']) <= np.array(areas['source']) + 1e-6),
+                                'No sampled pose may gain thigh intersection area')
 
     @staticmethod
     def _inside_hull_area(triangle, planes):
