@@ -16423,7 +16423,7 @@
     },
     {
       "id": 4105,
-      "text": "Increases the chance to find rare items by 10."
+      "text": "Rare items are more likely to be chosen when loot is rolled, and rare loot tables gain up to +10% drop chance."
     },
     {
       "id": 4106,
@@ -26303,370 +26303,414 @@
     },
     {
       "id": 6575,
-      "text": "Dance I"
+      "text": "Force Decoy I"
     },
     {
       "id": 6576,
-      "text": "Enters dance mode: your hotbar is replaced with your dance steps until you stop. Your audience's Inspired grants +6% skill XP, and each minute they watch clears 1% of their XP debt. SOC scaling can raise the XP bonus to +8%. Unlocks the Cantina Shuffle routine."
+      "text": "Reduces your enmity by 35%. Organic enemies targeting you suffer Decoy for 30 seconds, reducing their Accuracy against you by 8%. Breaks stealth."
     },
     {
       "id": 6577,
-      "text": "Light Feet I"
+      "text": "Force Decoy II"
     },
     {
       "id": 6578,
-      "text": "Unlocks the Light Feet routine. Inspired from your dances also grants +10% movement speed while out of combat."
+      "text": "Reduces your enmity by 60% and removes negative movement-speed effects. Organic enemies targeting you suffer Decoy for 30 seconds, reducing their Accuracy against you by 12%. Breaks stealth."
     },
     {
       "id": 6579,
-      "text": "Crowd Pleaser I"
+      "text": "Cloud Mind I"
     },
     {
       "id": 6580,
-      "text": "Your audience banks Inspired 10% faster."
+      "text": "For 30 seconds, one organic enemy within 15m can't spot anyone in stealth, including you and your allies. It still sees anyone who isn't in stealth. Caster Willpower increases the duration, and Mind Resistance reduces it. Doesn't break stealth; ends early if the target takes damage. Clouded enemies give no stealth bypass XP to anyone. A clouded player can still spot stealthers on a natural 20."
     },
     {
       "id": 6581,
-      "text": "Dance II"
+      "text": "Cloud Mind II"
     },
     {
       "id": 6582,
-      "text": "Your audience's Inspired grants +12% skill XP, and each minute they watch clears 2% of their XP debt. SOC scaling can raise the XP bonus to +15%."
+      "text": "Clouds the selected organic enemy and one other organic enemy within 5m of it, so neither can spot anyone in stealth for 30 seconds. Otherwise the same as Cloud Mind I."
     },
     {
       "id": 6583,
-      "text": "Power Step"
+      "text": "Shared Presence"
     },
     {
       "id": 6584,
-      "text": "Unlocks the Power Step routine. Inspired from your dances also grants +1 MGT."
+      "text": "Out of combat only. You and party members within 5m when you use it enter stealth for up to 30 seconds, then can move freely; nobody has to stay together. Members don't need the Stealth perk. Each member uses their own Stealth plus your Stealth perk bonus, pays no upkeep, and is revealed by their own hostile action or by being spotted. Members earn no stealth bypass XP from it."
     },
     {
       "id": 6585,
-      "text": "Encore I"
+      "text": "Clouded Mind"
     },
     {
       "id": 6586,
-      "text": "Your audience can bank up to 20 more minutes of Inspired."
+      "text": "Dance I"
     },
     {
       "id": 6587,
-      "text": "Quickstep"
+      "text": "Enters dance mode: your hotbar is replaced with your dance steps until you stop. Your audience's Inspired grants +6% skill XP, and each minute they watch clears 1% of their XP debt. SOC scaling can raise the XP bonus to +8%. Unlocks the Cantina Shuffle routine."
     },
     {
       "id": 6588,
-      "text": "Unlocks the Quickstep routine. Inspired from your dances also grants +1 AGI."
+      "text": "Light Feet I"
     },
     {
       "id": 6589,
-      "text": "Vigor Reel"
+      "text": "Unlocks the Light Feet routine. Inspired from your dances also grants +10% movement speed while out of combat."
     },
     {
       "id": 6590,
-      "text": "Unlocks the Vigor Reel routine. Inspired from your dances also grants +1 VIT."
+      "text": "Crowd Pleaser I"
     },
     {
       "id": 6591,
-      "text": "Dance III"
+      "text": "Your audience banks Inspired 10% faster."
     },
     {
       "id": 6592,
-      "text": "Your audience's Inspired grants +18% skill XP, and each minute they watch clears 3% of their XP debt. SOC scaling can raise the XP bonus to +22%."
+      "text": "Dance II"
     },
     {
       "id": 6593,
-      "text": "Encore II"
-    },
-    {
-      "id": 6594,
-      "text": "Your audience can bank up to 40 more minutes of Inspired."
-    },
-    {
-      "id": 6595,
-      "text": "Partner Dance"
-    },
-    {
-      "id": 6596,
-      "text": "While another dancer performs within your Performance range, watchers following either of you also receive the other dancer's routine bonus. Watchers receive at most two routine bonuses."
-    },
-    {
-      "id": 6597,
-      "text": "Standing Ovation"
-    },
-    {
-      "id": 6598,
-      "text": "Inspired from your dances also carries Standing Ovation: the first time each 10 minutes the holder drops below 25% HP, they restore 10% of their maximum HP."
-    },
-    {
-      "id": 6599,
-      "text": "Crowd Pleaser II"
-    },
-    {
-      "id": 6600,
-      "text": "Your audience banks Inspired 20% faster."
-    },
-    {
-      "id": 6601,
-      "text": "Light Feet II"
-    },
-    {
-      "id": 6602,
-      "text": "The Light Feet routine grants +15% movement speed while out of combat."
-    },
-    {
-      "id": 6603,
-      "text": "Peak Form"
-    },
-    {
-      "id": 6604,
-      "text": "Power Step, Quickstep, and Vigor Reel grant +2 to their attribute instead of +1."
-    },
-    {
-      "id": 6605,
-      "text": "Dance IV"
-    },
-    {
-      "id": 6606,
-      "text": "Your audience's Inspired grants +24% skill XP, and each minute they watch clears 4% of their XP debt. SOC scaling can raise the XP bonus to +30%."
-    },
-    {
-      "id": 6607,
-      "text": "Encore III"
-    },
-    {
-      "id": 6608,
-      "text": "Your audience can bank up to 60 more minutes of Inspired."
-    },
-    {
-      "id": 6609,
-      "text": "Showstopper"
-    },
-    {
-      "id": 6610,
-      "text": "You can blend two unlocked routines into one dance; your audience receives both routine bonuses. Your Flourishes bank 5 minutes of Inspired instead of 2."
-    },
-    {
-      "id": 6611,
-      "text": "Play Instrument I"
-    },
-    {
-      "id": 6612,
-      "text": "Enters instrument mode with your equipped instrument: your hotbar is replaced with your notes until you stop. Your audience hears your band's song; their Inspired grants +6% skill XP, and each minute they watch clears 1% of their XP debt. SOC scaling can raise the XP bonus to +8%. Unlocks the Cantina Standards set."
-    },
-    {
-      "id": 6613,
-      "text": "Steady Hands I"
-    },
-    {
-      "id": 6614,
-      "text": "Unlocks the Steady Hands set. Inspired from your music also grants +2 Control and +2 Craftsmanship for all crafting skills."
-    },
-    {
-      "id": 6615,
-      "text": "Harmony I"
-    },
-    {
-      "id": 6616,
-      "text": "While a dancer performs within your Performance range, your audience banks Inspired 10% faster."
-    },
-    {
-      "id": 6617,
-      "text": "Play Instrument II"
-    },
-    {
-      "id": 6618,
       "text": "Your audience's Inspired grants +12% skill XP, and each minute they watch clears 2% of their XP debt. SOC scaling can raise the XP bonus to +15%."
     },
     {
-      "id": 6619,
-      "text": "Keen Ear"
+      "id": 6594,
+      "text": "Power Step"
     },
     {
-      "id": 6620,
-      "text": "Unlocks the Keen Ear set. Inspired from your music also grants +1 PER."
+      "id": 6595,
+      "text": "Unlocks the Power Step routine. Inspired from your dances also grants +1 MGT."
     },
     {
-      "id": 6621,
-      "text": "Resonance I"
+      "id": 6596,
+      "text": "Encore I"
     },
     {
-      "id": 6622,
-      "text": "Your Performance range is increased by 3m."
+      "id": 6597,
+      "text": "Your audience can bank up to 20 more minutes of Inspired."
     },
     {
-      "id": 6623,
-      "text": "Angler's Lullaby"
+      "id": 6598,
+      "text": "Quickstep"
     },
     {
-      "id": 6624,
-      "text": "Unlocks the Angler's Lullaby set. Inspired from your music also grants +10% fishing catch chance."
+      "id": 6599,
+      "text": "Unlocks the Quickstep routine. Inspired from your dances also grants +1 AGI."
     },
     {
-      "id": 6625,
-      "text": "Still Waters"
+      "id": 6600,
+      "text": "Vigor Reel"
     },
     {
-      "id": 6626,
-      "text": "Unlocks the Still Waters set. Inspired from your music also grants +1 WIL."
+      "id": 6601,
+      "text": "Unlocks the Vigor Reel routine. Inspired from your dances also grants +1 VIT."
     },
     {
-      "id": 6627,
-      "text": "Play Instrument III"
+      "id": 6602,
+      "text": "Dance III"
     },
     {
-      "id": 6628,
+      "id": 6603,
       "text": "Your audience's Inspired grants +18% skill XP, and each minute they watch clears 3% of their XP debt. SOC scaling can raise the XP bonus to +22%."
     },
     {
-      "id": 6629,
-      "text": "Harmony II"
+      "id": 6604,
+      "text": "Encore II"
     },
     {
-      "id": 6630,
-      "text": "While a dancer performs within your Performance range, your audience banks Inspired 20% faster."
+      "id": 6605,
+      "text": "Your audience can bank up to 40 more minutes of Inspired."
     },
     {
-      "id": 6631,
-      "text": "Duet"
+      "id": 6606,
+      "text": "Partner Dance"
     },
     {
-      "id": 6632,
-      "text": "While another musician plays in your band, watchers following either of you also receive the other musician's set bonus. Watchers receive at most two set bonuses."
+      "id": 6607,
+      "text": "While another dancer performs within your Performance range, watchers following either of you also receive the other dancer's routine bonus. Watchers receive at most two routine bonuses."
     },
     {
-      "id": 6633,
-      "text": "Requiem"
+      "id": 6608,
+      "text": "Standing Ovation"
     },
     {
-      "id": 6634,
-      "text": "Inspired from your music also carries Requiem: the holder's next death while Inspired adds no XP debt. Requiem is then used up until the holder banks Inspired again."
+      "id": 6609,
+      "text": "Inspired from your dances also carries Standing Ovation: the first time each 10 minutes the holder drops below 25% HP, they restore 10% of their maximum HP."
     },
     {
-      "id": 6635,
-      "text": "Resonance II"
+      "id": 6610,
+      "text": "Crowd Pleaser II"
     },
     {
-      "id": 6636,
-      "text": "Your Performance range is increased by 6m."
+      "id": 6611,
+      "text": "Your audience banks Inspired 20% faster."
     },
     {
-      "id": 6637,
-      "text": "Silver Tongue"
+      "id": 6612,
+      "text": "Light Feet II"
     },
     {
-      "id": 6638,
-      "text": "Unlocks the Silver Tongue set. Inspired from your music also grants +1 SOC."
+      "id": 6613,
+      "text": "The Light Feet routine grants +15% movement speed while out of combat."
     },
     {
-      "id": 6639,
-      "text": "Perfect Pitch"
+      "id": 6614,
+      "text": "Peak Form"
     },
     {
-      "id": 6640,
-      "text": "Keen Ear, Still Waters, and Silver Tongue grant +2 to their attribute instead of +1."
+      "id": 6615,
+      "text": "Power Step, Quickstep, and Vigor Reel grant +2 to their attribute instead of +1."
     },
     {
-      "id": 6641,
-      "text": "Play Instrument IV"
+      "id": 6616,
+      "text": "Dance IV"
     },
     {
-      "id": 6642,
+      "id": 6617,
       "text": "Your audience's Inspired grants +24% skill XP, and each minute they watch clears 4% of their XP debt. SOC scaling can raise the XP bonus to +30%."
     },
     {
+      "id": 6618,
+      "text": "Encore III"
+    },
+    {
+      "id": 6619,
+      "text": "Your audience can bank up to 60 more minutes of Inspired."
+    },
+    {
+      "id": 6620,
+      "text": "Showstopper"
+    },
+    {
+      "id": 6621,
+      "text": "You can blend two unlocked routines into one dance; your audience receives both routine bonuses. Your Flourishes bank 5 minutes of Inspired instead of 2."
+    },
+    {
+      "id": 6622,
+      "text": "Play Instrument I"
+    },
+    {
+      "id": 6623,
+      "text": "Enters instrument mode with your equipped instrument: your hotbar is replaced with your notes until you stop. Your audience hears your band's song; their Inspired grants +6% skill XP, and each minute they watch clears 1% of their XP debt. SOC scaling can raise the XP bonus to +8%. Unlocks the Cantina Standards set."
+    },
+    {
+      "id": 6624,
+      "text": "Steady Hands I"
+    },
+    {
+      "id": 6625,
+      "text": "Unlocks the Steady Hands set. Inspired from your music also grants +2 Control and +2 Craftsmanship for all crafting skills."
+    },
+    {
+      "id": 6626,
+      "text": "Harmony I"
+    },
+    {
+      "id": 6627,
+      "text": "While a dancer performs within your Performance range, your audience banks Inspired 10% faster."
+    },
+    {
+      "id": 6628,
+      "text": "Play Instrument II"
+    },
+    {
+      "id": 6629,
+      "text": "Your audience's Inspired grants +12% skill XP, and each minute they watch clears 2% of their XP debt. SOC scaling can raise the XP bonus to +15%."
+    },
+    {
+      "id": 6630,
+      "text": "Keen Ear"
+    },
+    {
+      "id": 6631,
+      "text": "Unlocks the Keen Ear set. Inspired from your music also grants +1 PER."
+    },
+    {
+      "id": 6632,
+      "text": "Resonance I"
+    },
+    {
+      "id": 6633,
+      "text": "Your Performance range is increased by 3m."
+    },
+    {
+      "id": 6634,
+      "text": "Angler's Lullaby"
+    },
+    {
+      "id": 6635,
+      "text": "Unlocks the Angler's Lullaby set. Inspired from your music also grants +10% fishing catch chance."
+    },
+    {
+      "id": 6636,
+      "text": "Still Waters"
+    },
+    {
+      "id": 6637,
+      "text": "Unlocks the Still Waters set. Inspired from your music also grants +1 WIL."
+    },
+    {
+      "id": 6638,
+      "text": "Play Instrument III"
+    },
+    {
+      "id": 6639,
+      "text": "Your audience's Inspired grants +18% skill XP, and each minute they watch clears 3% of their XP debt. SOC scaling can raise the XP bonus to +22%."
+    },
+    {
+      "id": 6640,
+      "text": "Harmony II"
+    },
+    {
+      "id": 6641,
+      "text": "While a dancer performs within your Performance range, your audience banks Inspired 20% faster."
+    },
+    {
+      "id": 6642,
+      "text": "Duet"
+    },
+    {
       "id": 6643,
-      "text": "Steady Hands II"
+      "text": "While another musician plays in your band, watchers following either of you also receive the other musician's set bonus. Watchers receive at most two set bonuses."
     },
     {
       "id": 6644,
-      "text": "The Steady Hands set grants +4 Control and +4 Craftsmanship for all crafting skills."
+      "text": "Requiem"
     },
     {
       "id": 6645,
-      "text": "Virtuoso"
+      "text": "Inspired from your music also carries Requiem: the holder's next death while Inspired adds no XP debt. Requiem is then used up until the holder banks Inspired again."
     },
     {
       "id": 6646,
-      "text": "You can weave two unlocked sets into one performance; your audience receives both set bonuses. Your Flourishes bank 5 minutes of Inspired instead of 2."
+      "text": "Resonance II"
     },
     {
       "id": 6647,
-      "text": "Performance"
+      "text": "Your Performance range is increased by 6m."
     },
     {
       "id": 6648,
-      "text": "Step Left"
+      "text": "Silver Tongue"
     },
     {
       "id": 6649,
-      "text": "Dance step: press when the NOW cue shows a left arrow."
+      "text": "Unlocks the Silver Tongue set. Inspired from your music also grants +1 SOC."
     },
     {
       "id": 6650,
-      "text": "Step Up"
+      "text": "Perfect Pitch"
     },
     {
       "id": 6651,
-      "text": "Dance step: press when the NOW cue shows an up arrow."
+      "text": "Keen Ear, Still Waters, and Silver Tongue grant +2 to their attribute instead of +1."
     },
     {
       "id": 6652,
-      "text": "Step Down"
+      "text": "Play Instrument IV"
     },
     {
       "id": 6653,
-      "text": "Dance step: press when the NOW cue shows a down arrow."
+      "text": "Your audience's Inspired grants +24% skill XP, and each minute they watch clears 4% of their XP debt. SOC scaling can raise the XP bonus to +30%."
     },
     {
       "id": 6654,
-      "text": "Step Right"
+      "text": "Steady Hands II"
     },
     {
       "id": 6655,
-      "text": "Dance step: press when the NOW cue shows a right arrow."
+      "text": "The Steady Hands set grants +4 Control and +4 Craftsmanship for all crafting skills."
     },
     {
       "id": 6656,
-      "text": "Low Note"
+      "text": "Virtuoso"
     },
     {
       "id": 6657,
-      "text": "Plays the low lane when its note reaches the strike row."
+      "text": "You can weave two unlocked sets into one performance; your audience receives both set bonuses. Your Flourishes bank 5 minutes of Inspired instead of 2."
     },
     {
       "id": 6658,
-      "text": "Mid Note"
+      "text": "Performance"
     },
     {
       "id": 6659,
-      "text": "Plays the mid lane when its note reaches the strike row."
+      "text": "Step Left"
     },
     {
       "id": 6660,
-      "text": "High Note"
+      "text": "Dance step: press when the NOW cue shows a left arrow."
     },
     {
       "id": 6661,
-      "text": "Plays the high lane when its note reaches the strike row."
+      "text": "Step Up"
     },
     {
       "id": 6662,
-      "text": "Flourish"
+      "text": "Dance step: press when the NOW cue shows an up arrow."
     },
     {
       "id": 6663,
-      "text": "When your Flourish meter is full, perform a flourish that rewards everyone watching."
+      "text": "Step Down"
     },
     {
       "id": 6664,
-      "text": "Performance Options"
+      "text": "Dance step: press when the NOW cue shows a down arrow."
     },
     {
       "id": 6665,
-      "text": "Change your routine, set, song or tempo."
+      "text": "Step Right"
     },
     {
       "id": 6666,
+      "text": "Dance step: press when the NOW cue shows a right arrow."
+    },
+    {
+      "id": 6667,
+      "text": "Low Note"
+    },
+    {
+      "id": 6668,
+      "text": "Plays the low lane when its note reaches the strike row."
+    },
+    {
+      "id": 6669,
+      "text": "Mid Note"
+    },
+    {
+      "id": 6670,
+      "text": "Plays the mid lane when its note reaches the strike row."
+    },
+    {
+      "id": 6671,
+      "text": "High Note"
+    },
+    {
+      "id": 6672,
+      "text": "Plays the high lane when its note reaches the strike row."
+    },
+    {
+      "id": 6673,
+      "text": "Flourish"
+    },
+    {
+      "id": 6674,
+      "text": "When your Flourish meter is full, perform a flourish that rewards everyone watching."
+    },
+    {
+      "id": 6675,
+      "text": "Performance Options"
+    },
+    {
+      "id": 6676,
+      "text": "Change your routine, set, song or tempo."
+    },
+    {
+      "id": 6677,
       "text": "Inspired"
     },
     {
@@ -91204,6 +91248,30 @@
     {
       "id": 192761,
       "text": "A concussive battle cry that deals Sonic damage to nearby enemies and leaves them Dazed."
+    },
+    {
+      "id": 192762,
+      "text": "Overclock"
+    },
+    {
+      "id": 192763,
+      "text": "Safe Mode"
+    },
+    {
+      "id": 192764,
+      "text": "Hot Forging"
+    },
+    {
+      "id": 192765,
+      "text": "Cold Working"
+    },
+    {
+      "id": 192770,
+      "text": "Strip Mining"
+    },
+    {
+      "id": 192771,
+      "text": "Careful Hands"
     },
     {
       "id": 192913,
