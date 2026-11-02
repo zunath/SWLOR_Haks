@@ -42,7 +42,7 @@ PATTERN = re.compile(r"^(p[fm][a-z])0_robe(\d{3})$")
 NODE = re.compile(r"(?im)^\s*node\s+(\S+)\s+(\S+)\s*$([\s\S]*?)^\s*endnode\b")
 GENERATOR_INPUTS = ("GenerateRobeRgbModels.py", "RobeSkeleton.py", "RobePoseAudit.py",
                     "RobeAnimations.py", "CompileModels.py", "CleanModels.py", "ImportStockRobeTints.py",
-                    "TintMapStockRobes.json", "GenerateTintMapAssets.py", "RobeBuildCache.py",
+                    "TintMapStockRobes.json", "GenerateTintMapAssets.py", "PaletteMetalMaterials.json", "RobeBuildCache.py",
                     "SharedRobeFamilies.py", "RobeSharingAudit.py",
                     "RobeCompilationCheckpoint.py", "RobeBankValidation.py", "ModelLodAssets.py",
                     "RobeNativeWearers.py", "AlignRobeAnimations.py", "FillRobeEmoteMotion.py",
