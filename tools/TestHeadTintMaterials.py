@@ -10,6 +10,67 @@ import HeadTintAssets as head
 import TestTintShaderMaterials as tint
 
 
+def check_reflectance_state(test, game_data):
+    """Expose installed material state; retain production head tint/blend code.
+
+    The numeric adapter uses a nonlinear color transform to distinguish blend
+    order. Production engine includes are compiled separately below.
+    """
+    root = head.ROOT / 'sw_shader'
+    material = tint.stock_material(game_data)
+    include = (root / 'inc_hd_tint.shd').read_text()
+    checks = 0
+    for gamma in (False, True):
+        adapter = tint.ADAPTER
+        if gamma:
+            adapter = adapter.replace('vec3 ApplyColorSpace(vec3 value) { return value; }',
+                                      'vec3 ApplyColorSpace(vec3 value) { return value*value; }')
+
+        def program(name, head_include=include):
+            source = (root / (name + '.shd')).read_text()
+            source = source.replace('#include "inc_standard"', adapter + material + tint.STANDARD)
+            source = source.replace('#include "inc_hd_tint"', head_include)
+            return test.program('#version 120\n' + source)
+
+        reference = program('fs_plt_tinter_nm')
+        mapped = program('fs_head_mapped')
+        full = program('fs_head_full')
+        # Isolate each reported bug while keeping the rest of the repaired code.
+        stale_coverage = include.replace(
+            'fEnvMapLevel = (hairMatte>0.5 && layer>0.5 && layer<1.5) ? 0.0 : 1.0-paletteColor.a;',
+            'fEnvMapLevel = 0.0;')
+        wrong_order = include.replace('vec3 surfaceColor = vTint;',
+                                      'vec3 surfaceColor = ApplyColorSpace(vTint);').replace(
+                                          'surfaceColor = ApplyColorSpace(surfaceColor);', '')
+        stale = program('fs_head_full', stale_coverage)
+        early_gamma = program('fs_head_full', wrong_order)
+        try:
+            for alpha in (1.0, 0.8, 0.4):
+                tint.near(test.sample(mapped, 1, alpha, mapped=True, palette_layer=2),
+                          (0.12,0.0,0.125+0.475*0.88**2),
+                          f'authored head specular map gamma={gamma} alpha={alpha}')
+                for color in (False, True):
+                    expected = test.sample(reference, 1, alpha, color=color, palette_layer=2)
+                    tint.near(test.sample(full, 1, alpha, color=color, palette_layer=2), expected,
+                              f'head legacy blend gamma={gamma} alpha={alpha} color={color}')
+                    checks += 1
+                checks += 1
+            expected = test.sample(reference, 1, 0.8, palette_layer=2)
+            actual = test.sample(stale, 1, 0.8, palette_layer=2)
+            if max(abs(a-b) for a,b in zip(actual, expected)) < 0.006:
+                raise AssertionError('Missing mapped-head palette coverage negative control did not fail')
+            if gamma:
+                expected = test.sample(reference, 1, 0.8, color=True, palette_layer=2)
+                actual = test.sample(early_gamma, 1, 0.8, color=True, palette_layer=2)
+                if max(abs(a-b) for a,b in zip(actual, expected)) < 0.006:
+                    raise AssertionError('Early-linearization negative control did not fail')
+        finally:
+            for item in (reference, mapped, full, stale, early_gamma):
+                test.delete_program(item)
+    print(f'Head reflectance state passed: {checks} GPU comparisons, with stale-coverage and '
+          'early-linearization negative controls.')
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--game-data', type=Path, required=True)
@@ -30,6 +91,7 @@ def main():
     programs = {}
     try:
         test = tint.MaterialTest(gl)
+        check_reflectance_state(test, args.game_data)
         tint.compile_engine_pairs(test, engine, sorted(pairs), pairs)
         # Expected RGBA comes from installed original palettes and native scheme
         # integers. This remains runnable after a squash or shallow clone.

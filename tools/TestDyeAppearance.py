@@ -166,6 +166,15 @@ class DyeAppearanceTests(unittest.TestCase):
                       errors)
         self.assertIn("robe: approved tint material was removed", errors)
 
+    def test_shared_head_include_edit_and_removal_fail(self):
+        include = "sw_shader/inc_hd_tint.shd"
+        self.assertIn(include, self.baseline["shared"])
+        (self.root / include).write_text("// changed head lighting")
+        expected = [include + ": shared tint input changed; every dyed part may change color"]
+        self.assertEqual(self.errors(), expected)
+        (self.root / include).unlink()
+        self.assertEqual(self.errors(), expected)
+
     def test_whitespace_comments_and_line_order_do_not_count_as_changes(self):
         path = self.root / "sw_tint_mtr/plate.mtr"
         path.write_text("// note\r\n" + "\r\n".join(reversed(path.read_text().splitlines())) + "\r\n")

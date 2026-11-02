@@ -58,6 +58,15 @@ def feature_defaults() -> dict[str, float]:
             if not name.startswith('row')}
 
 
+def authored_digest(path: Path) -> str:
+    data = path.read_bytes()
+    if path.suffix.lower() in ('.txi', '.mtr'):
+        # Git checks these text resources out as CRLF on Windows. Their
+        # canonical LF fingerprints must survive a fresh checkout.
+        data = data.replace(b'\r\n', b'\n')
+    return hashlib.sha256(data).hexdigest()
+
+
 
 
 
@@ -144,6 +153,10 @@ def validate() -> list[str]:
             errors.append(f'{name}: unknown head parameters {sorted(unknown)}')
         if entry['shader'] not in PROFILES:
             errors.append(f'{name}: unknown head lighting profile')
+        declared = [line.split()[1] for line in entry['declarations']
+                    if line.split()[0].lower() == 'customshaderfs']
+        if declared != [entry['shader']]:
+            errors.append(f'{name}: declared fragment shader does not match its head lighting profile')
         if 'texture10 plt_palette' not in entry['declarations']:
             errors.append(f'{name}: head materials must reuse the shared native palette')
         has_metal = any(material == name and {2, 3} & {int(layer) for layer in layers.split(',')}
@@ -151,6 +164,8 @@ def validate() -> list[str]:
         if has_metal and any(line.startswith(('texture2 ', 'texture3 ')) and line.split()[1] != 'null'
                              for line in entry['declarations']):
             errors.append(f'{name}: dyed metal must retain palette specular and roughness')
+        if has_metal and entry['shader'] in PROFILES and '#define ENVIRONMENT_MAP 1' not in shader_source(entry['shader']):
+            errors.append(f'{name}: dyed metal needs a palette-reflectance lighting profile')
         path = ROOT / 'sw_tint_mtr' / (name + '.mtr')
         if not path.is_file() or path.read_text() != material_source(entry):
             errors.append(f'{name}: stale head material profile')
@@ -193,11 +208,11 @@ def validate() -> list[str]:
                     errors.append(f'{relative}: mip chain does not match its shader role')
     for relative, digest in manifest.get('auxiliary', {}).items():
         path = ROOT / relative
-        if not path.is_file() or hashlib.sha256(path.read_bytes()).hexdigest() != digest:
+        if not path.is_file() or authored_digest(path) != digest:
             errors.append(f'{relative}: authored head resource checksum differs')
     for relative, digest in manifest.get('staticMaterials', {}).items():
         path = ROOT / relative
-        if not path.is_file() or hashlib.sha256(path.read_bytes()).hexdigest() != digest:
+        if not path.is_file() or authored_digest(path) != digest:
             errors.append(f'{relative}: authored static material checksum differs')
     rows = []
     for line in (ROOT / 'sw_2da' / 'tintmap.2da').read_text().splitlines()[3:]:

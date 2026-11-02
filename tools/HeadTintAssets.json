@@ -4198,10 +4198,10 @@
       }
     },
     "f317met": {
-      "shader": "fs_head_mapped",
+      "shader": "fs_head_full",
       "declarations": [
         "customshaderVS vslit_sm_nm",
-        "customshaderFS fs_head_mapped",
+        "customshaderFS fs_head_full",
         "renderhint NormalAndSpecMapped",
         "texture0 plt_white",
         "texture1 f316metn",
@@ -4580,10 +4580,10 @@
       }
     },
     "h325detail": {
-      "shader": "fs_head_mapped",
+      "shader": "fs_head_full",
       "declarations": [
         "customshaderVS vslit_sm_nm",
-        "customshaderFS fs_head_mapped",
+        "customshaderFS fs_head_full",
         "renderhint NormalAndSpecMapped",
         "texture0 plt_white",
         "texture1 h325detailn",
@@ -4653,10 +4653,10 @@
       }
     },
     "h325metal": {
-      "shader": "fs_head_mapped",
+      "shader": "fs_head_full",
       "declarations": [
         "customshaderVS vslit_sm_nm",
-        "customshaderFS fs_head_mapped",
+        "customshaderFS fs_head_full",
         "renderhint NormalAndSpecMapped",
         "texture0 plt_white",
         "texture1 h325metaln",
@@ -7448,7 +7448,7 @@
       }
     },
     "pfo0_head020": {
-      "shader": "fs_head_mapped",
+      "shader": "fs_head_full",
       "declarations": [
         "customshaderVS vslit_sm_nm",
         "renderhint NormalAndSpecMapped",
@@ -7460,7 +7460,7 @@
         "texture6 pfo0_head020_A",
         "transparency 1",
         "twosided 1",
-        "customshaderFS fs_head_mapped",
+        "customshaderFS fs_head_full",
         "texture0 plt_white",
         "texture7 tm_b3d3dba63e1bf",
         "texture10 plt_palette",
@@ -10156,7 +10156,7 @@
       }
     },
     "pmh0_head323": {
-      "shader": "fs_head_mapped",
+      "shader": "fs_head_full",
       "declarations": [
         "customshaderVS vslit_sm_nm",
         "renderhint NormalAndSpecMapped",
@@ -10168,7 +10168,7 @@
         "texture6 pmh0_head323_A",
         "transparency 1",
         "twosided 1",
-        "customshaderFS fs_head_mapped",
+        "customshaderFS fs_head_full",
         "texture0 plt_white",
         "texture7 tm_ccf82b4731d6c",
         "texture10 plt_palette",
@@ -10369,7 +10369,7 @@
       }
     },
     "ha_6ae5c5d46180": {
-      "shader": "fs_head_mapped",
+      "shader": "fs_head_full",
       "parameters": {
         "forceOpaque": 1.0,
         "detailGlowChannel": 1,
@@ -10377,7 +10377,7 @@
       },
       "declarations": [
         "customshaderVS vslit_sm_nm",
-        "customshaderFS fs_head_mapped",
+        "customshaderFS fs_head_full",
         "renderhint NormalAndSpecMapped",
         "parameter float rowSkin 0.000244",
         "parameter float rowHair 0.086182",
@@ -10403,7 +10403,7 @@
       ]
     },
     "ha_cef733460934": {
-      "shader": "fs_head_mapped",
+      "shader": "fs_head_full",
       "parameters": {
         "maskMode": 1,
         "alphaCutoff": 0.1,
@@ -10413,7 +10413,7 @@
       },
       "declarations": [
         "customshaderVS vslit_sm_nm",
-        "customshaderFS fs_head_mapped",
+        "customshaderFS fs_head_full",
         "renderhint NormalAndSpecMapped",
         "parameter float rowSkin 0.000244",
         "parameter float rowHair 0.086182",
@@ -10442,7 +10442,7 @@
       ]
     },
     "ha_ba4c1d2ff0b3": {
-      "shader": "fs_head_mapped",
+      "shader": "fs_head_full",
       "parameters": {
         "forceOpaque": 1.0,
         "detailGlowChannel": 1,
@@ -10450,7 +10450,7 @@
       },
       "declarations": [
         "customshaderVS vslit_sm_nm",
-        "customshaderFS fs_head_mapped",
+        "customshaderFS fs_head_full",
         "renderhint NormalAndSpecMapped",
         "parameter float rowSkin 0.000244",
         "parameter float rowHair 0.086182",
@@ -10476,7 +10476,7 @@
       ]
     },
     "ha_17b155249a20": {
-      "shader": "fs_head_mapped",
+      "shader": "fs_head_full",
       "parameters": {
         "maskMode": 1,
         "alphaCutoff": 0.1,
@@ -10486,7 +10486,7 @@
       },
       "declarations": [
         "customshaderVS vslit_sm_nm",
-        "customshaderFS fs_head_mapped",
+        "customshaderFS fs_head_full",
         "renderhint NormalAndSpecMapped",
         "parameter float rowSkin 0.000244",
         "parameter float rowHair 0.086182",
@@ -10515,7 +10515,7 @@
       ]
     },
     "ha_7c84564d8b79": {
-      "shader": "fs_head_mapped",
+      "shader": "fs_head_full",
       "parameters": {
         "forceOpaque": 1.0,
         "detailDiffuse": 1.0,
@@ -10524,7 +10524,7 @@
       },
       "declarations": [
         "customshaderVS vslit_sm_nm",
-        "customshaderFS fs_head_mapped",
+        "customshaderFS fs_head_full",
         "renderhint NormalAndSpecMapped",
         "parameter float rowSkin 0.000244",
         "parameter float rowHair 0.086182",
@@ -12967,7 +12967,7 @@
       "sourceHasAlpha": false
     },
     "sw_tint2/f317hairt.dds": {
-      "sha256": "6338ea603cdd34693f8541cad7faddad4f32a62925527bb9479a1c6cec06ce6b",
+      "sha256": "fbefab68db95b21327dfceaff674689b1c1d6eff829f48dcb392d4672e1325b1",
       "codec": "BC5",
       "size": [
         1024,
@@ -13649,7 +13649,7 @@
       "sourceHasAlpha": false
     },
     "sw_tint2/m231beard_tm.dds": {
-      "sha256": "6b3d54d96010caedbc279ded0eef06583a4e602056f68b4fe60f619e217b7fad",
+      "sha256": "765274a944ae859cb0ee82cc9853b1d21454a539c11c5cad4eb99e7d36ea2c6a",
       "codec": "BC5",
       "size": [
         512,
@@ -13825,7 +13825,7 @@
       "sourceHasAlpha": false
     },
     "sw_tint2/ol_asara_ht.dds": {
-      "sha256": "03715d4a6d9676f7e0d6600b977a625adf5b34c4c2fe0a80a5cf265f7bdc49f5",
+      "sha256": "e9a903481eab9ff87c56aba2fc16dc3978e4a9c8514f819118ef187fb98f827a",
       "codec": "BC5",
       "size": [
         1024,
@@ -13946,7 +13946,7 @@
       "sourceHasAlpha": false
     },
     "sw_tint2/ol_asara_lkt.dds": {
-      "sha256": "d5c790dd4b7f9e6a1d55633645b6805623bd4d2699e1f1f9dc62bd2bc0236a12",
+      "sha256": "d3197a9fcfa4c370dcd9eaeb21756e5d8717638a70d871de922b114b56ac53b9",
       "codec": "BC5",
       "size": [
         1024,
@@ -14738,7 +14738,7 @@
       "sourceHasAlpha": false
     },
     "sw_tint2/tm_08c906f4cc32e.dds": {
-      "sha256": "631cc148802df07a5460bf448e40b5f6edbb58d29f3b232ebd06c9bb8156b362",
+      "sha256": "de1fea8cfbfb2fa67f4551e48bacb0172f746ce9e04a8a440784cf7263bdbf9e",
       "codec": "BC5",
       "size": [
         1024,
@@ -14760,7 +14760,7 @@
       "sourceHasAlpha": false
     },
     "sw_tint2/tm_0c034d4414863.dds": {
-      "sha256": "5f1ab577e4fa67fa13c773f48c01b0af7a108a5732d855ddbdb101bff1f61aae",
+      "sha256": "e6d4377188f9fe77298e7e698c8b0b7232038277adcccbe6f18aed4e21761a51",
       "codec": "BC5",
       "size": [
         1024,
@@ -14771,7 +14771,7 @@
       "sourceHasAlpha": false
     },
     "sw_tint2/tm_0c86b08c97867.dds": {
-      "sha256": "9ab3b3f1387af63b9e4b9bc71656feb113188a1a748c2da235a166874cddd35d",
+      "sha256": "036f73da29b316eb26b983e4962cffa92cc9a12610aed110efcf61ad4f1ed97c",
       "codec": "BC5",
       "size": [
         1024,
@@ -14826,7 +14826,7 @@
       "sourceHasAlpha": false
     },
     "sw_tint2/tm_172c1ab39f91a.dds": {
-      "sha256": "b7fe49cac9956614bd4c1b257a399004f74a3a7c185bf4015a4c75a7c1cf5251",
+      "sha256": "10097d7deac99da663d47c3a34ebe526d6801450d779721c2643d60bf86b3845",
       "codec": "BC5",
       "size": [
         512,
@@ -14837,7 +14837,7 @@
       "sourceHasAlpha": false
     },
     "sw_tint2/tm_188afe27fc7fe.dds": {
-      "sha256": "c13c7bc596f70bc0bf2d4a3c5e62581093ca83bd8eb95f7ed01481a940111be9",
+      "sha256": "fab27ac0b9df939df85c12050e43d96c1d461d0c3e52b4fbb7cea1c493ba14f3",
       "codec": "BC5",
       "size": [
         1024,
@@ -14991,7 +14991,7 @@
       "sourceHasAlpha": false
     },
     "sw_tint2/tm_2a6191cb02554.dds": {
-      "sha256": "8d430fa637ca878b3d55a9905091af086f379d340a27c01e75291e38e8318e82",
+      "sha256": "3a4b547ffac7acad7036997bd0782b30457c2c394a6bc2509c9d0972c7952dd5",
       "codec": "BC5",
       "size": [
         1024,
@@ -15013,7 +15013,7 @@
       "sourceHasAlpha": false
     },
     "sw_tint2/tm_2fc89b8f73f8b.dds": {
-      "sha256": "bc38d05dfc14aca93546329b0ee5abf19549c1aa28c82537bf35786d30709746",
+      "sha256": "103d189968e6a062b40ea514fa723b1cbd8941ca39c84a5fb1339daea587cbca",
       "codec": "BC5",
       "size": [
         512,
@@ -15068,7 +15068,7 @@
       "sourceHasAlpha": false
     },
     "sw_tint2/tm_36a05784cabb1.dds": {
-      "sha256": "25967bbad16de3507998b28c3a6caaf8f885e81eb125c11641e92f65f809205f",
+      "sha256": "08040233a71c597fba1cc947fabea02e18b2e8c16919cc8fb671aa38531dfcdc",
       "codec": "BC5",
       "size": [
         1024,
@@ -15079,7 +15079,7 @@
       "sourceHasAlpha": false
     },
     "sw_tint2/tm_38b9757ddd5bc.dds": {
-      "sha256": "b1116635f3615ab270f66465e007301eabc10c0556a6745b84b91666d1e98408",
+      "sha256": "4e23bfaf9bc8a95ad9d130e177a9a2922651c4b0949d99246fdeaa72088ae731",
       "codec": "BC5",
       "size": [
         512,
@@ -15090,7 +15090,7 @@
       "sourceHasAlpha": false
     },
     "sw_tint2/tm_3a54ac9919f5d.dds": {
-      "sha256": "74cb2aec4160e2542a756100f35fe53b96e1c7b1e643d44b7d069eeb36be464a",
+      "sha256": "3d4eaa3117c5abba711fae3a1fcfc7cfd1d2e00ab97d858ef02e07678eeb914f",
       "codec": "BC5",
       "size": [
         512,
@@ -15112,7 +15112,7 @@
       "sourceHasAlpha": false
     },
     "sw_tint2/tm_3bc994da472a9.dds": {
-      "sha256": "9cacb1c9dda8db874c9d04133fcd464ff0528bd0a747740991a3ef3a5b00d80b",
+      "sha256": "fa61c4af2ff8e92a5a704895e241dcee21a072989728d31fe80b49c631890740",
       "codec": "BC5",
       "size": [
         1024,
@@ -15134,7 +15134,7 @@
       "sourceHasAlpha": false
     },
     "sw_tint2/tm_3c384f123da44.dds": {
-      "sha256": "8ee7786cb12e2cba8bbef97dc78eae2a44441ab48e242f65c0f027ab6a3fa5b0",
+      "sha256": "2c2aaeb0a2725194896124758154c2dabceacb586d4e8ece2861914541a217ea",
       "codec": "BC5",
       "size": [
         1024,
@@ -15189,7 +15189,7 @@
       "sourceHasAlpha": false
     },
     "sw_tint2/tm_4902d8a3b243e.dds": {
-      "sha256": "081d15ce44b22ae17a2e316ee01c68d2fd84a4697c5c718400b6fda82bd30392",
+      "sha256": "a79da3a58e79bb2d10862f68b304187d1f5cd4417acc7ecb3424905845cb0789",
       "codec": "BC5",
       "size": [
         512,
@@ -15321,7 +15321,7 @@
       "sourceHasAlpha": false
     },
     "sw_tint2/tm_5a61832e42a78.dds": {
-      "sha256": "fa482a7c67ca57a393667c0475f30d232b7cfe55b28255a98d1a72d5c2229542",
+      "sha256": "515b1e4e143dbbabae24ce2e21c640d5e1bb54d2f34864b2b94658191213d4f5",
       "codec": "BC5",
       "size": [
         1024,
@@ -15431,7 +15431,7 @@
       "sourceHasAlpha": false
     },
     "sw_tint2/tm_67497ec028161.dds": {
-      "sha256": "d44bd97ea593f1c6d6f1f2f500221a8b07eca93ff18aca47cc91bd6652450d30",
+      "sha256": "442cf32b788faf42cc850389a189494c03d999691ce76cb9bd8daf7cae90017c",
       "codec": "BC5",
       "size": [
         1024,
@@ -15442,7 +15442,7 @@
       "sourceHasAlpha": false
     },
     "sw_tint2/tm_681b15185f4bd.dds": {
-      "sha256": "0fbee15c26ee0a97bb02d332e12b4ffd080e65c274b44ad9125989510367d15d",
+      "sha256": "b9ff8d2a4ffe30ecdcd66cb7d9528ce96f7e865d30317667d4ff9350b487b517",
       "codec": "BC5",
       "size": [
         512,
@@ -15453,7 +15453,7 @@
       "sourceHasAlpha": false
     },
     "sw_tint2/tm_6cecd995df784.dds": {
-      "sha256": "29551110a78bc247bbda9a080404566a1da78e57c3446494b803670b7a4d3125",
+      "sha256": "d0666a677a69675a3250b10b3699d97a4c841377d0ca16081fc184da4e8e7cb1",
       "codec": "BC5",
       "size": [
         512,
@@ -15519,7 +15519,7 @@
       "sourceHasAlpha": false
     },
     "sw_tint2/tm_739c2bb66c125.dds": {
-      "sha256": "bbcce6738aa89fc144e579e6de12d6bc281cf8cf430f5208a6d01174551636c6",
+      "sha256": "3e8fbacbc92f9b95e78e88c3499b1d28f324c84e9d60bf9ea03f406fb85900fa",
       "codec": "BC5",
       "size": [
         1024,
@@ -15563,7 +15563,7 @@
       "sourceHasAlpha": false
     },
     "sw_tint2/tm_7814e7dbbb992.dds": {
-      "sha256": "69501b6da3304171ac4416e199bcfb75ad5a30631ef1f2b522db4f4d612264f3",
+      "sha256": "d220ca57d3f653aae618d34bba1d9c4e59e9da8c5b4d4b1e47537b637d6097b4",
       "codec": "BC5",
       "size": [
         512,
@@ -15607,7 +15607,7 @@
       "sourceHasAlpha": false
     },
     "sw_tint2/tm_847eea4303440.dds": {
-      "sha256": "fc4b8b1ba0bd07457cc4d34acce8b90fa0ffbde827800a6b02fbcea5ec6ee00c",
+      "sha256": "00b769d3ca559435e9c3001ab6fa82dc4cb8f94b501d5946b59b6b9d8d772994",
       "codec": "BC5",
       "size": [
         512,
@@ -15673,7 +15673,7 @@
       "sourceHasAlpha": false
     },
     "sw_tint2/tm_8661a9eefc8d7.dds": {
-      "sha256": "ae260c2599e84f32b60ed0244806034a5e0346c3d708747a88f275917e678b1c",
+      "sha256": "234d08508764544141dcc3cfe469e6391f9aaf86c65796f6425c00c46eb42296",
       "codec": "BC5",
       "size": [
         512,
@@ -15739,7 +15739,7 @@
       "sourceHasAlpha": false
     },
     "sw_tint2/tm_8b0a9c9e7475b.dds": {
-      "sha256": "31c542592338178a93562b319276a0f711c4f089fd4d0fa3d2ef652daeeb3fed",
+      "sha256": "b1fbc2bc12e5f40d52ff58280a16938579af8d2824e1dbb360406f64c9a5d83d",
       "codec": "BC5",
       "size": [
         1024,
@@ -15805,7 +15805,7 @@
       "sourceHasAlpha": false
     },
     "sw_tint2/tm_9d81aa6e1db1a.dds": {
-      "sha256": "ea1aa1b045006bcaefad66fff06f75a370b9990782f932f9f80a4ce3664b4b7e",
+      "sha256": "5ce537e8a67041e8fed30498bc545de2b65776fe3e96b64db1a3b0cfd3c5ac4f",
       "codec": "BC5",
       "size": [
         1024,
@@ -15827,7 +15827,7 @@
       "sourceHasAlpha": false
     },
     "sw_tint2/tm_a1480a890e05f.dds": {
-      "sha256": "135de1239b6f2165903cc2296d3cff0e1203117532f68476be4729515a545cbc",
+      "sha256": "190eee409578666b2923aa1411c49034570cfd689a58da5a9a9db075876026c8",
       "codec": "BC5",
       "size": [
         512,
@@ -15893,7 +15893,7 @@
       "sourceHasAlpha": false
     },
     "sw_tint2/tm_aeeee09939f83.dds": {
-      "sha256": "8b2e137e4cbf6634bd82389c43362ac22aa91081b4fbbf9f44e83907e05e82c1",
+      "sha256": "c2d42541adb18b3f96926c8cf405422eff30e53a30f2302232e3a9d66c121935",
       "codec": "BC5",
       "size": [
         1024,
@@ -15915,7 +15915,7 @@
       "sourceHasAlpha": false
     },
     "sw_tint2/tm_b1efc8ffd6ce7.dds": {
-      "sha256": "f6c2d62864e97b7de0df3361ac87bb58f668ca6eed9f0b17434fc2188b608971",
+      "sha256": "a3b4e3f797a1c9331bc8e24a878222bb89008cdfd97c8fa1c80ef4cbf61910de",
       "codec": "BC5",
       "size": [
         512,
@@ -15959,7 +15959,7 @@
       "sourceHasAlpha": false
     },
     "sw_tint2/tm_b72cf9884561d.dds": {
-      "sha256": "270cb3df6f04623794aa56839a976de2da2632ac891de0f29701d6c11526be5c",
+      "sha256": "0a9f2b470ca612f289ee8e5e12faa23bcf439c5ddaadb855a646e9d0daec9a01",
       "codec": "BC5",
       "size": [
         1024,
@@ -16036,7 +16036,7 @@
       "sourceHasAlpha": false
     },
     "sw_tint2/tm_c259f09688a19.dds": {
-      "sha256": "4be0ae3fe0b8eebb6d9ed018a703f202ad5890464e647e2a8ee64581b416fd0a",
+      "sha256": "637cb8e0ebffd8a3827ed37bc86e9329f5d678e09bb5f1a56dbe94ec81e9d587",
       "codec": "BC5",
       "size": [
         1024,
@@ -16058,7 +16058,7 @@
       "sourceHasAlpha": false
     },
     "sw_tint2/tm_c3c9285282fb3.dds": {
-      "sha256": "ee69522a4c113298067a9d7d81f8d016e974dba466d7425a25442e9569e452e3",
+      "sha256": "186e0728846132920f5f482d4f44db46abef4778388e10336364b0dfe4769a72",
       "codec": "BC5",
       "size": [
         1024,
@@ -16234,7 +16234,7 @@
       "sourceHasAlpha": false
     },
     "sw_tint2/tm_d65b6f3947e80.dds": {
-      "sha256": "00bc073f075f6cf05164c5c31553a00241df2fc8e9eeb67fc80409529de36826",
+      "sha256": "e5981163ad0481af6c5483f21e81b9cb5d50061e0203c4c3f702d26ffbb41055",
       "codec": "BC5",
       "size": [
         512,
@@ -16267,7 +16267,7 @@
       "sourceHasAlpha": false
     },
     "sw_tint2/tm_d82d7253ad82a.dds": {
-      "sha256": "5e9ce01ce557a836994ac3a1d72ffea808d4f36fe2171af787a56dca2dff5d43",
+      "sha256": "4608fcbddee7ac75645e7c726d9d7f97a841795ae7302da4b253f263542698ca",
       "codec": "BC5",
       "size": [
         1024,
@@ -16355,7 +16355,7 @@
       "sourceHasAlpha": false
     },
     "sw_tint2/tm_dfff97fe52424.dds": {
-      "sha256": "8c88ea7aa9f5403106a5631856faf5f547f5d87ed7c9b72b1b46ed2a19f4b6ba",
+      "sha256": "c67f77827eb11791ced1acc4cb595346dde52e985e0232d7915d0ff18eb2aa5b",
       "codec": "BC5",
       "size": [
         1024,
@@ -16399,7 +16399,7 @@
       "sourceHasAlpha": false
     },
     "sw_tint2/tm_ed81f4052fdc8.dds": {
-      "sha256": "be97cd2ff9f62f7cf32cd6c8b0dc5bced236efb0af8c84fdef10192a6fd30e00",
+      "sha256": "dc9779e69b17b01607f8e4f055cca9ecbefeab063c51a246c6bb70efd1a8af12",
       "codec": "BC5",
       "size": [
         256,
@@ -16421,7 +16421,7 @@
       "sourceHasAlpha": false
     },
     "sw_tint2/tm_efca6ecb8ca2a.dds": {
-      "sha256": "25ec764913d30cf71ab447bf7bc0e5b2164fd05b38df04c4e674b399bb0109f6",
+      "sha256": "3c80742ae1505fa94306531bfc1348fcb341ad042187b55c0f2d1d81770deecc",
       "codec": "BC5",
       "size": [
         1024,
@@ -16751,7 +16751,7 @@
       "sourceHasAlpha": false
     },
     "sw_tint2/zrrunat.dds": {
-      "sha256": "248c4585463e100211659de83a1b1103d0c5b5d8611c5ffa740634337060f250",
+      "sha256": "58fd21abe9e7a1ce8e62f1210afce8b9b61a17972eb26cce7ef857ed753d954a",
       "codec": "BC5",
       "size": [
         1024,
@@ -16784,7 +16784,7 @@
       "sourceHasAlpha": false
     },
     "sw_tint2/ha_6ae5c5d46107.dds": {
-      "sha256": "cb86e149641dd0246b8288b8d476a6444cf8b6a83dc6fdfff0617d8741185476",
+      "sha256": "fd15f6d79ce70391bc36d30f6f9e9da6726c3372df641218e2afe28b50f7d121",
       "codec": "BC5",
       "size": [
         1024,
@@ -16839,7 +16839,7 @@
       "sourceHasAlpha": false
     },
     "sw_tint2/ha_cef733460907.dds": {
-      "sha256": "1bf41b559fc7748c039dedc4c2efe9ce3d663d137ccb31f5db714b16465c6f2f",
+      "sha256": "b0eabb7057d7f80c11210c14a1a705fe3830341a14a64055e0f64f263ab4082b",
       "codec": "BC5",
       "size": [
         1024,
@@ -16872,7 +16872,7 @@
       "sourceHasAlpha": false
     },
     "sw_tint2/ha_ba4c1d2ff007.dds": {
-      "sha256": "5a2e4704ccb8b1391b4ffce4034cb626d47c989b4a682c7f2ef78dfb5701d5ea",
+      "sha256": "8fe64f509884532ff7c9b9ac3f5df24da21635e70719ab7f0071540d6fadea83",
       "codec": "BC5",
       "size": [
         1024,
@@ -16927,7 +16927,7 @@
       "sourceHasAlpha": false
     },
     "sw_tint2/ha_17b155249a07.dds": {
-      "sha256": "b44eeff94df2501d65a2e8c198a6a37266f1ce97774a19480f84625c621ffebe",
+      "sha256": "76814130ad724fa002f39f4f0f732d111f8b1d7450467fb1dc8439430f23e836",
       "codec": "BC5",
       "size": [
         1024,
@@ -16971,7 +16971,7 @@
       "sourceHasAlpha": false
     },
     "sw_tint2/ha_7c84564d8b07.dds": {
-      "sha256": "188cfa9de3fa82189a5035b2f681c46a8853e40d0bf184ee9dc1b4e283cd9c8e",
+      "sha256": "425028768f0bad68337c71dd2ac2db9da4904b2da95db8385e816e09487d09d4",
       "codec": "BC5",
       "size": [
         1024,
@@ -17050,7 +17050,7 @@
   },
   "staticMaterials": {
     "sw_pt_head/f317teeth.mtr": "2b85fa30630eec4c3d62041eb3e6727b770ea07c9bd3fadfe849be2039ada7a7",
-    "sw_pt_head/hc_bb5392ba5b559.mtr": "305b0e7b6b755410b5a27da748c95ec28f4c9e5d0f67f96e79086b0cdfeac41d"
+    "sw_pt_head/hc_bb5392ba5b559.mtr": "600353b4a0f5c67f08016ac3d994839cc8ef871e8b37ce3149cecb8af84ae26a"
   },
   "auxiliary": {
     "sw_tint2/cx00p00d.txi": "93f2ee8298588ca48cf90f1e3b2c15affd58b9f6ce7421b2cf061a578b9287b0",

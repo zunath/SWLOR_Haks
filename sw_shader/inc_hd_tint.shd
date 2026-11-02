@@ -200,28 +200,35 @@ void main()
     SetupStandardShaderInputs();
     if (dot(vFragmentNormal,vFragmentNormal)<0.25 || !(vFragmentNormal.x==vFragmentNormal.x))
         vFragmentNormal = normalize(vSurfaceNormal);
-    vec3 surfaceColor = ApplyColorSpace(vTint);
+    // Palette-reflectance profiles replace the placeholder-derived coverage.
+    // Authored-map-only profiles retain the engine's non-reflective path.
     #if ENVIRONMENT_MAP == 1
         fEnvMapLevel = (hairMatte>0.5 && layer>0.5 && layer<1.5) ? 0.0 : 1.0-paletteColor.a;
+    #endif
+    vec3 surfaceColor = vTint;
+    #if ENVIRONMENT_MAP == 1
         #if FRAGMENT_LIGHTING == 1 && LIGHTING == 1
             surfaceColor = mix(surfaceColor,vec3(0.666667),fEnvMapLevel);
-        #endif
-        #if SPECULAR_LIGHT != 1
-            vec3 environmentColor;
-            #if FRAGMENT_NORMAL != 1
-                if (envMapCube==1) environmentColor = SampleEnvironmentMapCube(vVertexTexCoordsEnvironmentCube,0.0);
-                else environmentColor = SampleEnvironmentMap(vVertexTexCoordsEnvironment,0.0);
-            #else
-                if (envMapCube==1) environmentColor = SampleEnvironmentMapCube(CalculateEnvironmentTexCoordsCube(vFragmentNormal),0.0);
-                else environmentColor = SampleEnvironmentMap(CalculateEnvironmentTexCoords(vFragmentNormal),0.0);
-            #endif
-            surfaceColor = mix(surfaceColor,environmentColor,fEnvMapLevel);
         #endif
     #else
         #if FRAGMENT_LIGHTING == 1 && LIGHTING == 1
             if (hairReflectivity>0.5 && layer>0.5 && layer<1.5)
                 surfaceColor = mix(surfaceColor,vec3(0.666667),1.0-paletteColor.a);
         #endif
+    #endif
+    // Match the native tint shaders: blend legacy reflectance in texture
+    // space, then linearize the result before lighting.
+    surfaceColor = ApplyColorSpace(surfaceColor);
+    #if ENVIRONMENT_MAP == 1 && SPECULAR_LIGHT != 1
+        vec3 environmentColor;
+        #if FRAGMENT_NORMAL != 1
+            if (envMapCube==1) environmentColor = SampleEnvironmentMapCube(vVertexTexCoordsEnvironmentCube,0.0);
+            else environmentColor = SampleEnvironmentMap(vVertexTexCoordsEnvironment,0.0);
+        #else
+            if (envMapCube==1) environmentColor = SampleEnvironmentMapCube(CalculateEnvironmentTexCoordsCube(vFragmentNormal),0.0);
+            else environmentColor = SampleEnvironmentMap(CalculateEnvironmentTexCoords(vFragmentNormal),0.0);
+        #endif
+        surfaceColor = mix(surfaceColor,environmentColor,fEnvMapLevel);
     #endif
     FragmentColor = vec4(surfaceColor,1.0);
     #if LIGHTING == 1 && (FRAGMENT_LIGHTING == 1 || NORMAL_MAP == 1) && SPECULAR_LIGHT == 1
