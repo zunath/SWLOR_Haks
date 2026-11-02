@@ -268,7 +268,8 @@ class BaseBodyPaletteTests(unittest.TestCase):
                 self.assertIn("texture0 plt_white\n", text)
                 self.assertIn(f"texture7 {entries[name]['texture']}\n", text)
                 self.assertIn(f"texture1 {name}_n\n", text)
-                self.assertIn(f"texture2 {name}_s\n", text)
+                self.assertIn("texture2 null\n", text)
+                self.assertIn(f"texture9 {name}_a\n", text)
 
     def test_right_thigh_265_retains_its_recovered_original_palette(self):
         entry = g.load_source_manifest()["pmh0_legr265"]

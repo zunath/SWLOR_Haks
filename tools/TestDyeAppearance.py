@@ -44,6 +44,10 @@ class DyeAppearanceTests(unittest.TestCase):
         for name in ("legacy_s", "legacy_n", "plate_n", "robe_s", "robe_n", "tm_metal", "tm_cloth"):
             (self.root / f"sw_item/{name}.dds").write_bytes(name.encode())
         (self.root / "sw_item/tm_metal.txi").write_text("mipmap 0\n")
+        # A palette-sampling material outside sw_tint_mtr with its own shader (like the Havoc glow).
+        (self.root / "sw_shader/fs_glow.shd").write_text("// glow")
+        (self.root / "sw_item/glow.mtr").write_text(
+            MTR.format(name="plate", spec="null", mask="tm_metal").replace("fs_plt_tinter_nm", "fs_glow"))
         self.git("init", "-q")
         self.git("add", "-A")
         for name, value in (("ROOT", self.root), ("BASELINE", self.root / "tools/DyeAppearanceBaseline.json"),
@@ -95,7 +99,8 @@ class DyeAppearanceTests(unittest.TestCase):
 
     def test_editing_or_deleting_a_tint_mask_under_the_same_name_fails(self):
         changed = ["legacy: dye appearance inputs changed (MTR directives or a bound texture)",
-                   "plate: dye appearance inputs changed (MTR directives or a bound texture)"]
+                   "plate: dye appearance inputs changed (MTR directives or a bound texture)",
+                   "sw_item/glow: dye appearance inputs changed (MTR directives or a bound texture)"]
         (self.root / "sw_item/tm_metal.dds").write_bytes(b"repacked mask")
         self.assertEqual(self.errors(), changed)
         (self.root / "sw_item/tm_metal.dds").write_bytes(b"tm_metal")
@@ -119,6 +124,34 @@ class DyeAppearanceTests(unittest.TestCase):
         self.assertIn("tintmap.2da pmh0_legl121: material or dye layers changed", errors)
         self.assertIn("now 'removed'", errors)
         self.assertIn("cloaktint.2da cloak_001: material or dye layers changed", errors)
+
+    def test_palette_materials_outside_sw_tint_mtr_and_their_shaders_are_guarded(self):
+        self.assertIn("sw_item/glow", self.baseline["materials"])
+        self.assertIn("sw_shader/fs_glow.shd", self.baseline["shared"])
+        (self.root / "sw_shader/fs_glow.shd").write_text("// brighter glow")
+        self.assertEqual(self.errors(), ["sw_shader/fs_glow.shd: shared tint input changed; "
+                                         "every dyed part may change color"])
+        (self.root / "sw_shader/fs_glow.shd").write_text("// glow")
+        (self.root / "sw_item/glow.mtr").write_text(
+            MTR.format(name="plate", spec="plate_s", mask="tm_metal").replace("fs_plt_tinter_nm", "fs_glow"))
+        errors = "\n".join(self.errors())
+        self.assertIn("sw_item/glow: dye appearance inputs changed", errors)
+        self.assertIn("sw_item/glow: binds a specular/roughness map over dyed metal", errors)
+
+    def test_deleting_a_guarded_shader_fails_and_new_shaders_are_additions(self):
+        (self.root / "sw_shader/fs_glow2.shd").write_text("// new glow")
+        (self.root / "sw_item/glow2.mtr").write_text(
+            MTR.format(name="plate", spec="null", mask="tm_metal").replace("fs_plt_tinter_nm", "fs_glow2"))
+        self.assertEqual(self.errors(), [])
+        (self.root / "sw_shader/fs_glow.shd").unlink()
+        self.assertEqual(self.errors(), ["sw_shader/fs_glow.shd: shared tint input changed; "
+                                         "every dyed part may change color"])
+
+    def test_sparse_checkout_without_material_folders_reads_them_from_git(self):
+        for path in (self.root / "sw_tint_mtr").glob("*.mtr"):
+            self.git("update-index", "--skip-worktree", f"sw_tint_mtr/{path.name}")
+            path.unlink()
+        self.assertEqual(self.errors(), [])
 
     def test_palette_sampling_change_fails(self):
         (self.root / "sw_item/plt_palette.txi").write_text("mipmap 1\n")
