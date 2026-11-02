@@ -6,7 +6,6 @@ import tempfile
 
 import BindRobePanels as bound
 import CompileModels as mdl
-import MakeRobePanelsRigid as rigid
 import RobePoseAudit as poses
 import GenerateTintMapAssets as tint
 
@@ -55,45 +54,6 @@ endnode
             with self.subTest(source=source):
                 with self.assertRaises(ValueError):
                     bound.bind_source(source, PANELS)
-
-    def test_all_native_and_rgb_coverings_are_skinned_to_their_torso(self):
-        manifest = json.loads(rigid.MANIFEST.read_text())
-        checked = 0
-        for path in rigid.targets(236, manifest):
-            data = path.read_bytes()
-            model = poses.Model(data, False)
-            geometry = {name: props for name, _, props in mdl.binary_nodes(data) if props}
-            bindings = model.skin_bindings()
-            for name, parent, _, _, offset in model.nodes:
-                if name.removeprefix("rm_").removeprefix("rg_") not in PANELS:
-                    continue
-                bone = model.nodes[parent][0]
-                self.assertEqual(0x61, model.uint(offset + 108), f"{path.name}/{name}")
-                self.assertEqual({bone}, set(bindings[name]), f"{path.name}/{name}")
-                self.assertTrue(all(row == [bone, 1.0] for row in geometry[name]["weights"]),
-                                f"{path.name}/{name}")
-                checked += 1
-        self.assertEqual(72, checked, "Three coverings in every native and RGB body variant")
-
-    def test_compiled_coverings_keep_their_position_through_movement_skills_and_idle(self):
-        manifest = json.loads(rigid.MANIFEST.read_text())
-        prefixes = ("pfd", "pfe", "pfh", "pfo", "pmd", "pme", "pmh", "pmo")
-        sequence = ("pause1", "walk", "run", "pause2", "sw_quickdraw", "pause1",
-                    "sw_forcepush", "pause1", "sw_forceleap", "pause1", "sw_furystn", "pause1",
-                    "conjure1", "castout", "pause1")
-        for prefix in prefixes:
-            path = bound.ROOT / "sw_pt_root" / f"{prefix}200.mdl"
-            data = path.read_bytes()
-            model = poses.Model(data, False)
-            clips = {}
-            directory = "sw_anim_f" if prefix[1] == "f" else "sw_anim_m"
-            for part in manifest["animation_bank_sets"][model.parent]["parts"]:
-                clips.update(poses.Model((bound.ROOT / directory / f"{part}.mdl").read_bytes()).clips)
-            self.assertTrue(set(sequence).issubset(clips), prefix)
-            bindings = {name: model.nodes[parent][0] for name, parent, _, _, _ in model.nodes
-                        if name.removeprefix("rm_").removeprefix("rg_") in PANELS}
-            with self.subTest(prefix=prefix):
-                bound.validate_panel_poses(data, data, bindings, [clips[name] for name in sequence])
 
 
 class CatalogPanelPolicyTests(unittest.TestCase):

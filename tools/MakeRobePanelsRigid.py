@@ -49,7 +49,23 @@ def rigid_source(text, panels=()):
     return result, changed
 
 
+# Robes pinned to their released models by an owning recipe (RestoreRobe236Release.py).
+# Panel repairs would undo that restoration, so they never select these robes.
+RELEASE_RESTORED_ROBES = frozenset({236})
+
+
 def targets(robe, manifest):
+    if robe in RELEASE_RESTORED_ROBES:
+        raise ValueError(f"Robe {robe} keeps its released models; see RestoreRobe{robe}Release.py")
+    return robe_targets(robe, manifest)
+
+
+def restored_targets(manifest):
+    """Native models and RGB roots of every release-restored robe."""
+    return sorted(path for robe in RELEASE_RESTORED_ROBES for path in robe_targets(robe, manifest))
+
+
+def robe_targets(robe, manifest):
     suffix = f"_robe{robe:03d}"
     paths = set((ROOT / "sw_pt_robe").glob(f"*{suffix}.mdl"))
     for root, names in manifest["garment_node_names"].items():
