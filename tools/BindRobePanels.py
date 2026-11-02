@@ -29,8 +29,10 @@ BODY_BONE = re.compile(r"(?:rg_)?(?:rootdummy|(?:torso|pelvis|neck|head|[lr](?:b
 
 
 def catalog_targets(manifest):
-    return sorted(set((ROOT / "sw_pt_robe").glob("*.mdl")) |
-                  {ROOT / "sw_pt_root" / f"{name}.mdl" for name in manifest["garment_node_names"]})
+    # Release-restored robes keep their released coverings unbound.
+    return sorted((set((ROOT / "sw_pt_robe").glob("*.mdl")) |
+                   {ROOT / "sw_pt_root" / f"{name}.mdl" for name in manifest["garment_node_names"]})
+                  - set(rigid.restored_targets(manifest)))
 
 
 def unique_leaf_names(data, animated_parts=(), selected_names=None):
