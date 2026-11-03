@@ -1673,6 +1673,26 @@
       "pfh0_head327",
       "ha_b84f5fd67685",
       "1"
+    ],
+    [
+      "pfh0_head316",
+      "h316met_hi",
+      "2"
+    ],
+    [
+      "pfh0_head316",
+      "h316jaw_hi",
+      "3"
+    ],
+    [
+      "pfh0_head318",
+      "h318met_hi",
+      "2"
+    ],
+    [
+      "pfh0_head318",
+      "h318jaw_hi",
+      "3"
     ]
   ],
   "materials": {
@@ -4228,7 +4248,8 @@
       "parameters": {
         "forceOpaque": 1.0,
         "detailGlowChannel": 1,
-        "detailGlowGain": 1.5
+        "detailGlowGain": 1.5,
+        "metalReflectanceScale": 0.04
       }
     },
     "f317skin": {
@@ -10373,7 +10394,8 @@
       "parameters": {
         "forceOpaque": 1.0,
         "detailGlowChannel": 1,
-        "detailGlowGain": 1.5
+        "detailGlowGain": 1.5,
+        "metalReflectanceScale": 0.04
       },
       "declarations": [
         "customshaderVS vslit_sm_nm",
@@ -10409,7 +10431,8 @@
         "alphaCutoff": 0.1,
         "forceOpaque": 1.0,
         "detailGlowChannel": 1,
-        "detailGlowGain": 1.5
+        "detailGlowGain": 1.5,
+        "metalReflectanceScale": 0.04
       },
       "declarations": [
         "customshaderVS vslit_sm_nm",
@@ -10451,7 +10474,8 @@
         "lipU0": 0.85302734375,
         "lipV0": 0.141845703125,
         "lipUSpan": 0.045654296875,
-        "lipVSpan": 0.017333984375
+        "lipVSpan": 0.017333984375,
+        "metalReflectanceScale": 0.04
       },
       "declarations": [
         "customshaderVS vslit_sm_nm",
@@ -10488,7 +10512,8 @@
         "alphaCutoff": 0.1,
         "forceOpaque": 1.0,
         "detailGlowChannel": 1,
-        "detailGlowGain": 1.5
+        "detailGlowGain": 1.5,
+        "metalReflectanceScale": 0.04
       },
       "declarations": [
         "customshaderVS vslit_sm_nm",
@@ -10593,6 +10618,146 @@
         "parameter float tintMapWidth 1024.0",
         "parameter float tintMapHeight 1024.0"
       ]
+    },
+    "h316met_hi": {
+      "shader": "fs_head_full",
+      "declarations": [
+        "customshaderVS vslit_sm_nm",
+        "customshaderFS fs_head_full",
+        "renderhint NormalAndSpecMapped",
+        "texture0 plt_white",
+        "texture1 f316metn",
+        "texture2 null",
+        "texture3 null",
+        "texture4 null",
+        "texture5 null",
+        "texture7 f316mett",
+        "texture8 zrreyee",
+        "texture10 plt_palette",
+        "parameter float tintMapWidth 1024.0",
+        "parameter float tintMapHeight 1024.0",
+        "parameter float rowSkin 0.000244",
+        "parameter float rowHair 0.086182",
+        "parameter float rowMetal1 0.172119",
+        "parameter float rowMetal2 0.258057",
+        "parameter float rowCloth1 0.343994",
+        "parameter float rowCloth2 0.343994",
+        "parameter float rowLeath1 0.429932",
+        "parameter float rowLeath2 0.429932",
+        "parameter float rowTat1 0.515869",
+        "parameter float rowTat2 0.515869"
+      ],
+      "parameters": {
+        "forceOpaque": 1.0,
+        "detailGlowChannel": 1,
+        "detailGlowGain": 1.5,
+        "metalReflectanceScale": 0.04
+      }
+    },
+    "h316jaw_hi": {
+      "shader": "fs_head_full",
+      "declarations": [
+        "customshaderVS vslit_sm_nm",
+        "customshaderFS fs_head_full",
+        "renderhint NormalAndSpecMapped",
+        "texture0 plt_white",
+        "texture1 f316buckn",
+        "texture2 null",
+        "texture3 null",
+        "texture4 null",
+        "texture5 null",
+        "texture7 f316maskt",
+        "texture8 zrreyee",
+        "texture10 plt_palette",
+        "parameter float tintMapWidth 1024.0",
+        "parameter float tintMapHeight 1024.0",
+        "parameter float rowSkin 0.000244",
+        "parameter float rowHair 0.086182",
+        "parameter float rowMetal1 0.172119",
+        "parameter float rowMetal2 0.258057",
+        "parameter float rowCloth1 0.343994",
+        "parameter float rowCloth2 0.343994",
+        "parameter float rowLeath1 0.429932",
+        "parameter float rowLeath2 0.429932",
+        "parameter float rowTat1 0.515869",
+        "parameter float rowTat2 0.515869"
+      ],
+      "parameters": {
+        "forceOpaque": 1.0,
+        "detailGlowChannel": 1,
+        "detailGlowGain": 1.5,
+        "metalReflectanceScale": 0.04
+      }
+    },
+    "h318met_hi": {
+      "shader": "fs_head_full",
+      "declarations": [
+        "customshaderVS vslit_sm_nm",
+        "customshaderFS fs_head_full",
+        "renderhint NormalAndSpecMapped",
+        "texture0 plt_white",
+        "texture1 f318metn",
+        "texture2 null",
+        "texture3 null",
+        "texture4 null",
+        "texture5 null",
+        "texture7 f318mett",
+        "texture8 zrreyee",
+        "texture10 plt_palette",
+        "parameter float tintMapWidth 1024.0",
+        "parameter float tintMapHeight 1024.0",
+        "parameter float rowSkin 0.000244",
+        "parameter float rowHair 0.086182",
+        "parameter float rowMetal1 0.172119",
+        "parameter float rowMetal2 0.258057",
+        "parameter float rowCloth1 0.343994",
+        "parameter float rowCloth2 0.343994",
+        "parameter float rowLeath1 0.429932",
+        "parameter float rowLeath2 0.429932",
+        "parameter float rowTat1 0.515869",
+        "parameter float rowTat2 0.515869"
+      ],
+      "parameters": {
+        "forceOpaque": 1.0,
+        "detailGlowChannel": 1,
+        "detailGlowGain": 1.5,
+        "metalReflectanceScale": 0.04
+      }
+    },
+    "h318jaw_hi": {
+      "shader": "fs_head_full",
+      "declarations": [
+        "customshaderVS vslit_sm_nm",
+        "customshaderFS fs_head_full",
+        "renderhint NormalAndSpecMapped",
+        "texture0 plt_white",
+        "texture1 f318jawn",
+        "texture2 null",
+        "texture3 null",
+        "texture4 null",
+        "texture5 null",
+        "texture7 f318jawt",
+        "texture8 zrreyee",
+        "texture10 plt_palette",
+        "parameter float tintMapWidth 1024.0",
+        "parameter float tintMapHeight 1024.0",
+        "parameter float rowSkin 0.000244",
+        "parameter float rowHair 0.086182",
+        "parameter float rowMetal1 0.172119",
+        "parameter float rowMetal2 0.258057",
+        "parameter float rowCloth1 0.343994",
+        "parameter float rowCloth2 0.343994",
+        "parameter float rowLeath1 0.429932",
+        "parameter float rowLeath2 0.429932",
+        "parameter float rowTat1 0.515869",
+        "parameter float rowTat2 0.515869"
+      ],
+      "parameters": {
+        "forceOpaque": 1.0,
+        "detailGlowChannel": 1,
+        "detailGlowGain": 1.5,
+        "metalReflectanceScale": 0.04
+      }
     }
   },
   "textures": {
@@ -17054,7 +17219,7 @@
       "sourceHasAlpha": false
     },
     "sw_tint2/fh318_lipsoft.dds": {
-      "sha256": "6680a9397981404be2f14f007bbce82b61c09a85d95474e9775467fa341dbc45",
+      "sha256": "d327a3fd39bf4efc6f44b072ff4d7393721385aa274ddef2f3e268b5359591b4",
       "codec": "BC5",
       "size": [
         512,
@@ -17062,6 +17227,72 @@
       ],
       "role": "mask",
       "mipLevels": 10,
+      "sourceHasAlpha": false
+    },
+    "sw_tint2/f316buckn.dds": {
+      "sha256": "191f7c9e83840b01afd3821a4e58dc794c63b6f0c3d0da8bbfb469b903e998cd",
+      "codec": "BC5",
+      "size": [
+        512,
+        512
+      ],
+      "role": "normal",
+      "mipLevels": 10,
+      "sourceHasAlpha": false
+    },
+    "sw_tint2/f316maskt.dds": {
+      "sha256": "2da5eb864480ea3f05ae58c5e1f51523f6363328727714dcdce12df9f46b7f0d",
+      "codec": "BC5",
+      "size": [
+        1024,
+        1024
+      ],
+      "role": "tint",
+      "mipLevels": 1,
+      "sourceHasAlpha": false
+    },
+    "sw_tint2/f318metn.dds": {
+      "sha256": "8e03761131dcbd71bfc780a85f8b3bc03bffd101c67029cf8337e5d69f977b92",
+      "codec": "BC5",
+      "size": [
+        512,
+        512
+      ],
+      "role": "normal",
+      "mipLevels": 10,
+      "sourceHasAlpha": false
+    },
+    "sw_tint2/f318mett.dds": {
+      "sha256": "f5d4a0017095cc6e3a55d2e6fbddbc5adeca8c665da49e4019b852b20bd0a73f",
+      "codec": "BC5",
+      "size": [
+        1024,
+        1024
+      ],
+      "role": "tint",
+      "mipLevels": 1,
+      "sourceHasAlpha": false
+    },
+    "sw_tint2/f318jawn.dds": {
+      "sha256": "a11caf087c1fd91acc74a05d23aaee7d22e04cdbb044e01fe6116fbbe7952216",
+      "codec": "BC5",
+      "size": [
+        512,
+        512
+      ],
+      "role": "normal",
+      "mipLevels": 10,
+      "sourceHasAlpha": false
+    },
+    "sw_tint2/f318jawt.dds": {
+      "sha256": "3190410e781610b7aa3bb2e3b0d4e281db9e8cff30c439bf4d6db397c1045d94",
+      "codec": "BC5",
+      "size": [
+        1024,
+        1024
+      ],
+      "role": "tint",
+      "mipLevels": 1,
       "sourceHasAlpha": false
     }
   },
@@ -17657,7 +17888,13 @@
     "sw_tint2/ha_b84f5fd67606.txi": "93f2ee8298588ca48cf90f1e3b2c15affd58b9f6ce7421b2cf061a578b9287b0",
     "sw_tint2/ha_b84f5fd67607.txi": "980a4d359b56df419d9249e19b6c8fcdb689c3185e20a5c442dae0c153279ef0",
     "sw_tint2/ha_b84f5fd67608.txi": "93f2ee8298588ca48cf90f1e3b2c15affd58b9f6ce7421b2cf061a578b9287b0",
-    "sw_tint2/fh318_lipsoft.txi": "93f2ee8298588ca48cf90f1e3b2c15affd58b9f6ce7421b2cf061a578b9287b0"
+    "sw_tint2/fh318_lipsoft.txi": "93f2ee8298588ca48cf90f1e3b2c15affd58b9f6ce7421b2cf061a578b9287b0",
+    "sw_tint2/f316buckn.txi": "93f2ee8298588ca48cf90f1e3b2c15affd58b9f6ce7421b2cf061a578b9287b0",
+    "sw_tint2/f316maskt.txi": "980a4d359b56df419d9249e19b6c8fcdb689c3185e20a5c442dae0c153279ef0",
+    "sw_tint2/f318metn.txi": "93f2ee8298588ca48cf90f1e3b2c15affd58b9f6ce7421b2cf061a578b9287b0",
+    "sw_tint2/f318mett.txi": "980a4d359b56df419d9249e19b6c8fcdb689c3185e20a5c442dae0c153279ef0",
+    "sw_tint2/f318jawn.txi": "93f2ee8298588ca48cf90f1e3b2c15affd58b9f6ce7421b2cf061a578b9287b0",
+    "sw_tint2/f318jawt.txi": "980a4d359b56df419d9249e19b6c8fcdb689c3185e20a5c442dae0c153279ef0"
   },
   "auxiliaryText": {
     "sw_tint2/cx00p00d.txi": "mipmap 1\n",
@@ -18247,7 +18484,13 @@
     "sw_tint2/ha_b84f5fd67606.txi": "mipmap 1\n",
     "sw_tint2/ha_b84f5fd67607.txi": "mipmap 0\n",
     "sw_tint2/ha_b84f5fd67608.txi": "mipmap 1\n",
-    "sw_tint2/fh318_lipsoft.txi": "mipmap 1\n"
+    "sw_tint2/fh318_lipsoft.txi": "mipmap 1\n",
+    "sw_tint2/f316buckn.txi": "mipmap 1\n",
+    "sw_tint2/f316maskt.txi": "mipmap 0\n",
+    "sw_tint2/f318metn.txi": "mipmap 1\n",
+    "sw_tint2/f318mett.txi": "mipmap 0\n",
+    "sw_tint2/f318jawn.txi": "mipmap 1\n",
+    "sw_tint2/f318jawt.txi": "mipmap 0\n"
   },
   "modelHashes": {
     "pfh0_head052": "186fea02e676f3126103af6e9a45d28929bc80ea4d5bd7384f42d03d44eb753a",
@@ -18319,9 +18562,9 @@
     "pfh0_head312": "2c7be12381c7a4e34eb6c854c7f82273a41251e9dcb81aa8735fa9c463658d37",
     "pfh0_head313": "62166dfc2571f2cfd11f3efaf3ee653ac39dd67bfc55379c2df002f5e0decdaa",
     "pfh0_head315": "2ebab9b15d69b67df142c7cec3106c65be9fe19eef2a77d1793748f564472daf",
-    "pfh0_head316": "ebe26bb8ade1fa8355925d93c415ec03fc9e7f5195861f6cc62ea8db476a2a76",
+    "pfh0_head316": "e53720cc2f4938e199deaf01ae7b5e0d570ca9c02bbc3ff03fa1c2bc07335d31",
     "pfh0_head317": "0b872397004d0c7006e06ae9b7e9e3c5fcf87d80cd9f94f6737590c4341c79ee",
-    "pfh0_head318": "def7b9823f94fc18338836363cd71eb4a38b39208da3f58d4424f61d1ab39b27",
+    "pfh0_head318": "338b2bb57ab9305c9799cabb1ac3147041b480f82d9c4f200e132c73c5094b21",
     "pfh0_head319": "6f02eaca767b46a12e03fa9cf0992b25efcaaa1c8a078554c5dbfb1ae1d4c04b",
     "pfh0_head320": "06560fddf41ba99bfc57ffd24cf34092bd65f4a4aac79ca7c6189dee7a7ea258",
     "pfh0_head321": "1da347533694036e4790bc922b78e1adad3d7a65bbb7803882b7e21444d03500",

@@ -35,6 +35,7 @@ uniform float scalpStartV = 0.45;
 uniform float scalpEndV = 0.52;
 uniform float hairMatte = 0.0;
 uniform float hairReflectivity = 0.0;
+uniform float metalReflectanceScale = 1.0;
 uniform float clampEyeLayer = -1.0;
 uniform float clampEyeLayer2 = -1.0;
 uniform float eyeContour = 0.0;
@@ -204,6 +205,7 @@ void main()
     // Authored-map-only profiles retain the engine's non-reflective path.
     #if ENVIRONMENT_MAP == 1
         fEnvMapLevel = (hairMatte>0.5 && layer>0.5 && layer<1.5) ? 0.0 : 1.0-paletteColor.a;
+        if (layer>1.5 && layer<3.5) fEnvMapLevel *= clamp(metalReflectanceScale,0.0,1.0);
     #endif
     vec3 surfaceColor = vTint;
     #if ENVIRONMENT_MAP == 1

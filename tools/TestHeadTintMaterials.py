@@ -71,6 +71,42 @@ def check_reflectance_state(test, game_data):
           'early-linearization negative controls.')
 
 
+def check_metal_finish(test,game_data,shader_root):
+    material=tint.stock_material(game_data)
+    include=(shader_root/'inc_hd_tint.shd').read_text()
+    wrapper=(shader_root/'fs_head_full.shd').read_text()
+    line='if (layer>1.5 && layer<3.5) fEnvMapLevel *= clamp(metalReflectanceScale,0.0,1.0);'
+    assert line in include
+    checks=0
+    for gamma in (False,True):
+        adapter=tint.ADAPTER
+        if gamma:adapter=adapter.replace('vec3 ApplyColorSpace(vec3 value) { return value; }','vec3 ApplyColorSpace(vec3 value) { return value*value; }')
+        def program(text):
+            return test.program('#version 120\n'+wrapper.replace('#include "inc_standard"',adapter+material+tint.STANDARD).replace('#include "inc_hd_tint"',text))
+        full=program(include);negative=program(include.replace(line,''))
+        try:
+            for layer in range(10):
+                for alpha in (1.0,.8,.4):
+                    for rgb in (None,(layer,90,145,190)):
+                        test.use(full);test.scalar(test.location(full,b'metalReflectanceScale'),1)
+                        baseline=test.sample(full,1,alpha,palette_layer=layer,rgb=rgb)
+                        test.scalar(test.location(full,b'metalReflectanceScale'),.04)
+                        actual=test.sample(full,1,alpha,palette_layer=layer,rgb=rgb)
+                        if layer in (2,3):
+                            env=(1-alpha)*.04
+                            spec=.04+.94*min(env*8,1)
+                            expected=(spec,max(0,min(1,3*spec-.6)),.6+(.125-.6)*min(env*3,1))
+                        else:expected=baseline
+                        tint.near(actual,expected,f'scoped finish gamma={gamma} layer={layer} alpha={alpha} rgb={rgb}')
+                        checks+=1
+            actual=test.sample(negative,1,.4,palette_layer=2)
+            env=.6*.04;expected=(.04+.94*env*8,max(0,3*(.04+.94*env*8)-.6),.6+(.125-.6)*env*3)
+            assert max(abs(a-b) for a,b in zip(actual,expected))>.05,'Missing finish control negative test failed'
+        finally:
+            test.delete_program(full);test.delete_program(negative)
+    print(f'Scoped finish: {checks} GPU state checks passed; all 8 nonmetal layers unchanged, palette/RGB coverage retained, missing-control negatives failed as expected.')
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--game-data', type=Path, required=True)
@@ -92,6 +128,7 @@ def main():
     try:
         test = tint.MaterialTest(gl)
         check_reflectance_state(test, args.game_data)
+        check_metal_finish(test, args.game_data, head.ROOT / 'sw_shader')
         tint.compile_engine_pairs(test, engine, sorted(pairs), pairs)
         # Expected RGBA comes from installed original palettes and native scheme
         # integers. This remains runnable after a squash or shallow clone.
@@ -105,9 +142,9 @@ def main():
                                                          engine.source(vertex, False, config))
             program = programs[vertex, fragment]
             test.use(program)
-            flags = ('useNativePalette', 'useTexture1Alpha', 'useTexture9Alpha')
+            flags = ('useNativePalette', 'useTexture1Alpha', 'useTexture9Alpha', 'metalReflectanceScale')
             for flag in flags:
-                test.scalar(test.location(program, flag.encode()), 1)
+                test.scalar(test.location(program, flag.encode()), 0 if flag == 'metalReflectanceScale' else 1)
             tint.upload_material_parameters(test, program,
                                              tint.material_parameters(head.material_source(entry)))
             expected = head.feature_defaults() | entry['parameters']
@@ -117,7 +154,7 @@ def main():
                     continue
                 actual = ct.c_float()
                 test.get_uniform(program, location, ct.byref(actual))
-                if actual.value != expected[flag]:
+                if abs(actual.value - expected[flag]) > 0.000001:
                     raise AssertionError(f'{name}: stale {flag}={actual.value}, expected {expected[flag]}')
                 checked += 1
         print(f'Head material-state resets passed: {checked} active optional inputs across '
