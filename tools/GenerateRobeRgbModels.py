@@ -250,11 +250,14 @@ def package_animation_models(stage, heads, generated_names, manifest, active, bo
     """Package validated compiler output losslessly after all pose and skin audits.
 
     `body_library` resolves each bridge's body chain for the restored attachment tracks.
+    A reused head may gain or lose tail banks; the parts it no longer uses are returned
+    as stale so installation removes them.
     """
     if heads and body_library is None:
         raise ValueError("Packaging animation bridges requires their body animation library")
     result = set(generated_names)
     records = dict(manifest.get("animation_bank_sets", {}))
+    stale = set()
     for head in sorted(heads):
         path = stage / "binary" / f"{head}.mdl"
         # Emote clips without cloth tracks get the derived drape after every audit.
@@ -267,8 +270,8 @@ def package_animation_models(stage, heads, generated_names, manifest, active, bo
         if not names or names[0] != head or any(name in result for name in names[1:]):
             raise ValueError(f"Animation bank names collide with generated resources: {head}")
         prior = records.get(head)
-        if prior is not None and prior["parts"] != names:
-            raise ValueError(f"Animation bank layout changed for {head}; repack its owned banks first")
+        if prior is not None:
+            stale.update(set(prior["parts"]) - set(names))
         validate_animation_bank_ownership(names, manifest, active)
         banks.validate_split(original, list(parts.values()))
         for name, data in parts.items():
@@ -281,7 +284,23 @@ def package_animation_models(stage, heads, generated_names, manifest, active, bo
         path = stage / "binary" / f"{name}.mdl"
         if path.stat().st_size >= banks.LIMIT_BYTES:
             raise ValueError(f"Generated model exceeds the NWSync resource limit: {name}")
-    return result, records
+    return result, records, stale - result
+
+
+def remove_stale_banks(names, manifest, active):
+    """Delete tail banks a reused head no longer chains to, after proving ownership."""
+    owned = banks.bank_names(manifest)
+    paths = []
+    for name in sorted(names):
+        relative = f"{model_directory(name)}/{name}.mdl"
+        expected = ROOT / relative
+        path = active.get(name, expected)
+        if (name not in owned or path.resolve() != expected.resolve() or not path.is_file() or
+                manifest.get("files", {}).get(relative) != file_digest(path)):
+            raise ValueError(f"Stale animation bank is not a verified prior output: {relative}")
+        paths.append(path)
+    for path in paths:
+        path.unlink()
 
 
 def validate_model_chains(names, load):
@@ -480,9 +499,47 @@ def allocate_animation_bridges(groups, active, manifest, expected_allocation=Non
     return result
 
 
+def model_parent(path):
+    """Read only the supermodel name from a compiled or ASCII model."""
+    with path.open("rb") as stream:
+        header = stream.read(244)
+        if mdl.binary(header):
+            if len(header) < 244:
+                raise ValueError(f"Truncated model header: {path}")
+            return mdl.supermodel(header)
+        stream.seek(0)
+        for line in stream:
+            if re.match(rb"\s*setsupermodel\s", line, re.IGNORECASE):
+                return mdl.supermodel(line)
+    return ""
+
+
+def outside_bank_references(manifest, active, rebuilt):
+    """Installed bank head -> models that inherit from any of its parts but are not rebuilt.
+
+    Bank parts chain to one another, so only references from other models count.
+    """
+    heads = {part: head for head, record in manifest.get("animation_bank_sets", {}).items()
+             for part in record["parts"]}
+    references = {}
+    for name, path in active.items():
+        if name in rebuilt or name in heads or path.suffix.lower() != ".mdl":
+            continue
+        parent = model_parent(path).lower()
+        if parent in heads:
+            references.setdefault(heads[parent], []).append(name)
+    return references
+
+
 def version_animation_families(families, manifest, verify_legacy, native_bodies=None, save_source=None,
-                               verify_revision=None):
-    """A bridge's paths, bind transforms and clips are immutable for saved roots."""
+                               verify_revision=None, reuse_installed=None):
+    """Give each family's current bridge content one resref.
+
+    A changed family keeps its installed resref when `reuse_installed(key, name)` confirms
+    that every model inheriting from it is rebuilt against the new content in this run, so
+    an animation change rewrites only the banks. Otherwise it receives a new resref, and
+    the old bridge stays immutable for the roots that still use it.
+    """
     prior = dict(manifest.get("animation_bridges", {}))
     versions = {}
     for key in sorted(families.groups):
@@ -509,6 +566,11 @@ def version_animation_families(families, manifest, verify_legacy, native_bodies=
             previous = candidates[0]
             verify_revision(key, prior[previous], source)
             prior[version] = prior.pop(previous)
+        if version not in prior and reuse_installed is not None:
+            installed = [old for old in prior if old.startswith(key + "/") and
+                         prior[old] in manifest.get("animation_bank_sets", {})]
+            if len(installed) == 1 and reuse_installed(key, prior[installed[0]]):
+                prior[version] = prior.pop(installed[0])
         versions[key] = version
     return versions, {**manifest, "animation_bridges": prior}
 
@@ -793,9 +855,30 @@ def main():
         path = source_directory / (hashlib.sha256(key.encode()).hexdigest() + ".mdl")
         path.write_bytes(source)
         source_paths[key] = path
+    # Every root and attachment this run writes is compiled against the new bank. Any
+    # other model inheriting from a bank pins its content, so that family gets a new name.
+    rebuilt = set()
+    for name in selected:
+        prefix, robe_id = PATTERN.fullmatch(name).groups()
+        root_name = prefix + str(id_map[int(robe_id)])
+        rebuilt.update((root_name, root_name + "_robe" + robe_id))
+    outside_references = {}
+    revised_in_place = []
+    def reuse_installed(key, name):
+        # Reading every active model header takes minutes; only a changed bank needs it.
+        if "scan" not in outside_references:
+            outside_references["scan"] = outside_bank_references(prior_manifest, active, rebuilt)
+        users = outside_references["scan"].get(name)
+        if users:
+            print(f"{key}: {name} stays unchanged for {len(users)} models outside this build "
+                  f"(e.g. {', '.join(sorted(users)[:3])}); allocating a new bank name.", flush=True)
+            return False
+        print(f"{key}: revising {name} in place.", flush=True)
+        revised_in_place.append(name)
+        return True
     versions, prior_manifest = version_animation_families(
         families, prior_manifest, verify_legacy_bridge, dependencies, save_bridge_source,
-        verify_revision if args.update_animation else None)
+        verify_revision if args.update_animation else None, reuse_installed)
     versioned_groups = {versions[key]: group for key, group in families.groups.items()}
     animation_names = allocate_animation_bridges(versioned_groups, active, prior_manifest)
     for key, group in sorted(families.groups.items()):
@@ -1074,12 +1157,13 @@ def main():
               "independent_skeletons": len(complete_roots), "animation_families": len(animation_cache),
               "missing_animation_fallbacks": families.fallbacks,
               "versioned_legacy_bridges": legacy_bridge_changes,
+              "banks_revised_in_place": sorted(revised_in_place),
               "validated_animation_roots": len(complete_roots),
               "compiler_sha256": compiler_hash, "missing_supermodels": sorted(missing), "failures": failures}
     (stage / "report.json").write_text(json.dumps(report, indent=2) + "\n")
     if failures:
         raise ValueError(f"{len(failures)} round-trip failures: {failures[:10]}")
-    packaged_names, bank_sets = package_animation_models(
+    packaged_names, bank_sets, stale_banks = package_animation_models(
         stage, animation_cache.values(), sources, prior_manifest, active, original_library)
     # Cache provenance describes the validated output as installed: compiler bytes,
     # plus emote drape tracks and restored body attachment tracks on bridges. Packaging changes only the file layout;
@@ -1090,6 +1174,7 @@ def main():
         complete_roots, lambda name: (stage / "binary" / f"{name}.mdl").read_bytes()
         if name in packaged_names else load_reference(name))
     report["packaged_models"] = len(packaged_names)
+    report["stale_banks"] = sorted(stale_banks)
     report["largest_model_bytes"] = max(
         ((stage / "binary" / f"{name}.mdl").stat().st_size for name in packaged_names), default=0)
     (stage / "report.json").write_text(json.dumps(report, indent=2) + "\n")
@@ -1114,12 +1199,14 @@ def main():
         validate_animation_bank_ownership(
             {name for head in animation_cache.values() for name in bank_sets[head]["parts"]},
             prior_manifest, current_active)
-        retained = retained_model_files(prior_manifest, packaged_names, set(id_map.values()), current_active)
+        retained = retained_model_files(prior_manifest, packaged_names | stale_banks,
+                                        set(id_map.values()), current_active)
         # Hash validated inputs from their captured bytes and outputs from staging.
         # Copying thousands of outputs must never re-certify later input edits.
         output_files = {f"sw_2da/{path.name}": file_digest(stage / path.name) for path in (TABLE, PHENOTYPES)}
         output_files.update({f"{model_directory(name)}/{name}.mdl":
                              file_digest(stage / "binary" / f"{name}.mdl") for name in packaged_names})
+        remove_stale_banks(stale_banks, prior_manifest, current_active)
         for name in packaged_names:
             directory = ROOT / model_directory(name)
             if directory.resolve().parent != ROOT.resolve():
