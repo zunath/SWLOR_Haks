@@ -67,12 +67,13 @@ class EmoteFlapTrackTests(unittest.TestCase):
                     # The dwarf and half-orc roots number their flaps apart, so the new tracks reach nothing there.
                     self.assertEqual({}, numbered)
 
-    def test_only_the_rebound_skirts_hang_from_the_flaps(self):
-        """The rest keys change only parts skinned to the flaps: the skirts ChestSkirtBindings rebinds.
+    def test_only_registered_skirts_hang_from_the_flaps(self):
+        """Shared rest keys affect both generic and specialized garment recipes.
 
         Belt 226 and pelvis 198, restored to their original leg weights, no longer use them.
         """
-        rebound = set(json.loads(skirts.MANIFEST.read_text())['models'])
+        registered = set(json.loads(skirts.MANIFEST.read_text())['models'])
+        registered.update(json.loads(skirts.MANIFEST.with_name('PelvisSkirtBindings.json').read_text())['models'])
         users = set()
         for name, path in tint.find_active_models().items():
             if not (name[:2] in ('pm', 'pf') and name[2] in 'he' and name[3] == '0' and name[4:5] == '_'):
@@ -95,7 +96,9 @@ class EmoteFlapTrackTests(unittest.TestCase):
                 if weighted & set(self.parts):
                     users.add(name)
         self.assertTrue(users)
-        self.assertLessEqual(users, rebound)
+        self.assertLessEqual({'pfh0_pelvis034', 'pmh0_pelvis034'}, users,
+                             'Canonical pelvis skirts must retain their accepted flap bindings')
+        self.assertLessEqual(users, registered, f'Unregistered flap consumers: {sorted(users - registered)}')
         self.assertFalse({name for name in users if name.endswith(('_belt226', '_pelvis198'))})
 
     def test_parade_rest_hangs_the_flaps_straight_under_the_hips(self):
