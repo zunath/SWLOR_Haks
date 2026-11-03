@@ -122,6 +122,23 @@ class RobeRgbManifestTests(unittest.TestCase):
                 active[name].write_bytes(data)
             self.assertEqual({}, g.outside_bank_references(manifest, active, {"pmh34", "pmh35"}))
             self.assertEqual({"pmh_ra001": ["pmh35"]}, g.outside_bank_references(manifest, active, {"pmh34"}))
+            # Indirect consumers count at any depth, including through base-game models,
+            # but a chain that reaches a rebuilt model is compiled against the new bank.
+            indirect = {"pmh40": b"setsupermodel pmh40 pmh_mid\n",
+                        "pmh_mid": b"setsupermodel pmh_mid pmh_ra001\n",
+                        "pmh41": b"setsupermodel pmh41 stock_mid\n",
+                        "pmh42": b"setsupermodel pmh42 pmh34\n",
+                        "pmh43": b"setsupermodel pmh43 pmh43_loop\n",
+                        "pmh43_loop": b"setsupermodel pmh43_loop pmh43\n"}
+            for name, data in indirect.items():
+                active[name] = Path(directory) / f"{name}.mdl"
+                active[name].write_bytes(data)
+            stock = {"stock_mid": "pmh_ra001_b01", "a_ba": ""}
+            found = g.outside_bank_references(manifest, active, {"pmh34", "pmh35"}, stock.get)
+            self.assertEqual({"pmh_ra001": ["pmh40", "pmh41", "pmh_mid"]},
+                             {head: sorted(users) for head, users in found.items()})
+            found = g.outside_bank_references(manifest, active, {"pmh34", "pmh35", "pmh_mid"})
+            self.assertEqual({}, found)
 
     def test_stale_tail_banks_are_removed_only_when_owned(self):
         with tempfile.TemporaryDirectory() as directory, patch.object(g, "ROOT", Path(directory)):

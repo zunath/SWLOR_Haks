@@ -527,20 +527,37 @@ def model_parent(path):
     return ""
 
 
-def outside_bank_references(manifest, active, rebuilt):
+def outside_bank_references(manifest, active, rebuilt, stock_parent=None):
     """Installed bank head -> models that inherit from any of its parts but are not rebuilt.
 
-    Bank parts chain to one another, so only references from other models count.
+    Follows each model's whole supermodel chain, through base-game ancestors when
+    `stock_parent(name)` is given. A chain stops at a model this run rebuilds, since
+    that model is compiled against the new bank. Bank parts chain to one another,
+    so only references from other models count.
     """
     heads = {part: head for head, record in manifest.get("animation_bank_sets", {}).items()
              for part in record["parts"]}
+    parents = {}
+    def parent_of(name):
+        if name not in parents:
+            path = active.get(name)
+            if path is not None:
+                parents[name] = model_parent(path).lower() if path.suffix.lower() == ".mdl" else ""
+            else:
+                parents[name] = (stock_parent(name) or "").lower() if stock_parent else ""
+        return parents[name]
     references = {}
     for name, path in active.items():
         if name in rebuilt or name in heads or path.suffix.lower() != ".mdl":
             continue
-        parent = model_parent(path).lower()
-        if parent in heads:
-            references.setdefault(heads[parent], []).append(name)
+        seen = {name}
+        current = parent_of(name)
+        while current and current not in seen and current not in rebuilt:
+            if current in heads:
+                references.setdefault(heads[current], []).append(name)
+                break
+            seen.add(current)
+            current = parent_of(current)
     return references
 
 
@@ -880,7 +897,9 @@ def main():
     def reuse_installed(key, name):
         # Reading every active model header takes minutes; only a changed bank needs it.
         if "scan" not in outside_references:
-            outside_references["scan"] = outside_bank_references(prior_manifest, active, rebuilt)
+            outside_references["scan"] = outside_bank_references(
+                prior_manifest, active, rebuilt,
+                lambda parent: mdl.supermodel(tint.extract_stock_bif_resource(*stock[parent])) if parent in stock else "")
         users = outside_references["scan"].get(name)
         if users:
             print(f"{key}: {name} stays unchanged for {len(users)} models outside this build "
