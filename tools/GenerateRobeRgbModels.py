@@ -632,7 +632,40 @@ def validate_stock_inventory(stock_models):
         raise ValueError("Stock robe inventory is incomplete; run ImportStockRobeTints.py before generation")
 
 
-def retained_model_files(manifest, generated_names, phenotype_ids, active):
+def removed_body_outputs(manifest, body_exists):
+    """Generated roots, attachments and banks of bodies whose base root no longer exists.
+
+    A retired robe keeps its outputs so saved creatures still render, but a body
+    with no base root (`p<gender><race>0`) cannot be worn by any creature.
+    """
+    bodies = {name[:3] for name in manifest.get("model_builds", {})}
+    bodies.update(head[:3] for head in manifest.get("animation_bank_sets", {}))
+    removed = {body for body in bodies if not body_exists(body + "0")}
+    names = {name for name in manifest.get("model_builds", {}) if name[:3] in removed}
+    for head, record in manifest.get("animation_bank_sets", {}).items():
+        if head[:3] in removed:
+            names.update(record["parts"])
+    return removed, names
+
+
+def remove_body_outputs(names, manifest, active):
+    """Delete the owned outputs of removed bodies after proving every one first."""
+    paths = []
+    for name in sorted(names):
+        relative = f"{model_directory(name)}/{name}.mdl"
+        expected = ROOT / relative
+        path = active.get(name, expected)
+        if not path.is_file():
+            continue
+        if (path.resolve() != expected.resolve() or
+                manifest.get("files", {}).get(relative) != file_digest(path)):
+            raise ValueError(f"Removed body output is not a verified prior output: {relative}")
+        paths.append(path)
+    for path in paths:
+        path.unlink()
+
+
+def retained_model_files(manifest, generated_names, phenotype_ids, active, removed_bodies=frozenset()):
     """Keep audited roots, attachments and bridges for persisted retired phenotypes."""
     retained = {}
     bridges = banks.bank_names(manifest)
@@ -640,7 +673,7 @@ def retained_model_files(manifest, generated_names, phenotype_ids, active):
         path = ROOT / relative
         name = path.stem
         match = BODY_RESOURCE.fullmatch(name)
-        if (path.suffix != ".mdl" or name in generated_names or
+        if (path.suffix != ".mdl" or name in generated_names or name[:3] in removed_bodies or
                 not (name in bridges or match and int(match[1]) in phenotype_ids)):
             continue
         expected_directory = model_directory(name)
@@ -755,6 +788,11 @@ def main():
     compiler, compiler_hash = mdl.prepare_compiler(stage)
     stock = tint.read_stock_key_models(args.game_data)
     validate_stock_inventory(stock)
+    removed_bodies, removed_outputs = removed_body_outputs(
+        prior_manifest, lambda base: base in active or base in stock)
+    if removed_bodies:
+        print(f"Removing {len(removed_outputs)} generated outputs of bodies without a base root: "
+              f"{', '.join(sorted(removed_bodies))}.", flush=True)
     dependencies = {}
     missing = set()
     def load(name):
@@ -1192,6 +1230,8 @@ def main():
               "independent_skeletons": len(complete_roots), "animation_families": len(animation_cache),
               "missing_animation_fallbacks": families.fallbacks,
               "versioned_legacy_bridges": legacy_bridge_changes,
+              "removed_bodies": sorted(removed_bodies),
+              "removed_body_outputs": len(removed_outputs),
               "banks_revised_in_place": sorted(revised_in_place),
               "validated_animation_roots": len(complete_roots),
               "compiler_sha256": compiler_hash, "missing_supermodels": sorted(missing), "failures": failures}
@@ -1235,13 +1275,14 @@ def main():
             {name for head in animation_cache.values() for name in bank_sets[head]["parts"]},
             prior_manifest, current_active)
         retained = retained_model_files(prior_manifest, packaged_names | stale_banks,
-                                        set(id_map.values()), current_active)
+                                        set(id_map.values()), current_active, removed_bodies)
         # Hash validated inputs from their captured bytes and outputs from staging.
         # Copying thousands of outputs must never re-certify later input edits.
         output_files = {f"sw_2da/{path.name}": file_digest(stage / path.name) for path in (TABLE, PHENOTYPES)}
         output_files.update({f"{model_directory(name)}/{name}.mdl":
                              file_digest(stage / "binary" / f"{name}.mdl") for name in packaged_names})
         remove_stale_banks(stale_banks, prior_manifest, current_active)
+        remove_body_outputs(removed_outputs - packaged_names, prior_manifest, current_active)
         for name in packaged_names:
             directory = ROOT / model_directory(name)
             if directory.resolve().parent != ROOT.resolve():
@@ -1252,13 +1293,16 @@ def main():
         shutil.copyfile(stage / "phenotype.2da", PHENOTYPES)
         manifest = {"compiler_sha256": compiler_hash, "compiler_materials": compiler_materials, "independent_skeletons": True,
                     "model_builds": model_builds,
-                    "garment_node_names": {**prior_manifest.get("garment_node_names", {}), **renamed_nodes},
+                    "garment_node_names": {name: nodes for name, nodes in {
+                        **prior_manifest.get("garment_node_names", {}), **renamed_nodes}.items()
+                        if name[:3] not in removed_bodies},
                     "body_pose_samples": checked_poses,
                     "garment_body_motion_checks": checked_garment_body_motion,
                     "missing_animation_fallbacks": families.fallbacks,
                     "stock_model_sha256": stock_hashes,
                     "animation_bridges": {**prior_manifest.get("animation_bridges", {}), **animation_names},
-                    "animation_bank_sets": dict(sorted(bank_sets.items())),
+                    "animation_bank_sets": dict(sorted((head, record) for head, record in bank_sets.items()
+                                                       if head[:3] not in removed_bodies)),
                     "native_wearer_selection_sha256": native_selection_hash,
                     "native_wearer_sources": native_captures,
                     "files": dict(sorted({**retained, **input_files, **output_files}.items()))}

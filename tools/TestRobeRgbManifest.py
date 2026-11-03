@@ -140,6 +140,44 @@ class RobeRgbManifestTests(unittest.TestCase):
             found = g.outside_bank_references(manifest, active, {"pmh34", "pmh35", "pmh_mid"})
             self.assertEqual({}, found)
 
+    def test_bodies_without_a_base_root_lose_their_generated_outputs(self):
+        builds = {"pfb166": {}, "pfb166_robe182": {}, "pfh166": {}, "pfb_ra062": {}, "pfh_ra112": {}}
+        bank_sets = {"pfb_ra062": {"parts": ["pfb_ra062", "pfb_ra062_b01"]}, "pfh_ra112": {"parts": ["pfh_ra112"]}}
+        manifest = {"model_builds": builds, "animation_bank_sets": bank_sets,
+                    "animation_bridges": {"pfb0/shared/v": "pfb_ra062", "pfh0/shared/v": "pfh_ra112"}}
+        removed, names = g.removed_body_outputs(manifest, {"pfh0"}.__contains__)
+        self.assertEqual({"pfb"}, removed)
+        self.assertEqual({"pfb166", "pfb166_robe182", "pfb_ra062", "pfb_ra062_b01"}, names)
+        self.assertEqual((set(), set()), g.removed_body_outputs(manifest, lambda base: True))
+        with tempfile.TemporaryDirectory() as directory, patch.object(g, "ROOT", Path(directory)):
+            root = Path(directory)
+            files, active = {}, {}
+            for name, data in (("pfb166", b"setsupermodel pfb166 pfb_ra062\n"),
+                               ("pfb166_robe182", g.empty_attachment("pfb166_robe182")),
+                               ("pfb_ra062", b"setsupermodel pfb_ra062 pfb_ra062_b01\n"),
+                               ("pfb_ra062_b01", b"setsupermodel pfb_ra062_b01 pfb0\n"),
+                               ("pfh166", b"setsupermodel pfh166 pfh_ra112\n"),
+                               ("pfh_ra112", b"setsupermodel pfh_ra112 pfh0\n")):
+                path = root / g.model_directory(name) / f"{name}.mdl"
+                path.parent.mkdir(exist_ok=True)
+                path.write_bytes(data)
+                active[name] = path
+                files[path.relative_to(root).as_posix()] = g.file_digest(path)
+            recorded = {**manifest, "files": files}
+            kept = g.retained_model_files(recorded, set(), {166}, active)
+            self.assertEqual(set(files), set(kept))
+            kept = g.retained_model_files(recorded, set(), {166}, active, removed)
+            self.assertEqual({"sw_pt_root/pfh166.mdl", "sw_anim_f/pfh_ra112.mdl"}, set(kept))
+            active["pfb166"].write_bytes(b"edited root")
+            with self.assertRaisesRegex(ValueError, "not a verified prior output"):
+                g.remove_body_outputs(names, recorded, active)
+            self.assertTrue(all(active[name].is_file() for name in names))
+            active["pfb166"].write_bytes(b"setsupermodel pfb166 pfb_ra062\n")
+            active["pfb166_robe182"].unlink()  # already gone: nothing to prove or delete
+            g.remove_body_outputs(names, recorded, active)
+            self.assertFalse(any(active[name].exists() for name in names))
+            self.assertTrue(active["pfh166"].is_file() and active["pfh_ra112"].is_file())
+
     def test_stale_tail_banks_are_removed_only_when_owned(self):
         with tempfile.TemporaryDirectory() as directory, patch.object(g, "ROOT", Path(directory)):
             path = Path(directory) / "sw_anim_m" / "pmh_ra001_b02.mdl"
