@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="52%" r="55%">
+      <stop offset="0%" stop-color="#8fe3ff" stop-opacity="0.8"/>
+      <stop offset="55%" stop-color="#3b9be0" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#2a6fe0" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="cold" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#f4fdff"/>
+      <stop offset="40%" stop-color="#8fd2f4"/>
+      <stop offset="100%" stop-color="#2b63a0"/>
+    </linearGradient>
+    <linearGradient id="steel" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#f1f4fb"/>
+      <stop offset="35%" stop-color="#a6b0c5"/>
+      <stop offset="100%" stop-color="#394155"/>
+    </linearGradient>
+    <linearGradient id="grip" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#2f7fd0"/>
+      <stop offset="100%" stop-color="#143a72"/>
+    </linearGradient>
+    <linearGradient id="ice" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#9fdcff"/>
+    </linearGradient>
+    <filter id="soft" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="7"/>
+    </filter>
+  </defs>
+  <circle cx="128" cy="132" r="122" fill="url(#glow)"/>
+  <!-- the cooled bar with its frost bloom -->
+  <rect x="40" y="140" width="176" height="64" rx="12" fill="#6fd0ff" opacity="0.6" filter="url(#soft)"/>
+  <rect x="44" y="146" width="168" height="54" rx="11" fill="url(#cold)" stroke="#173a66" stroke-width="5"/>
+  <path d="M58 160 H196" stroke="#ffffff" stroke-opacity="0.9" stroke-width="6" stroke-linecap="round"/>
+  <path d="M58 182 H128 M140 182 H168" stroke="#2b63a0" stroke-opacity="0.55" stroke-width="4" stroke-linecap="round"/>
+  <!-- the hone: a graver resting on the bar -->
+  <g transform="translate(2 12) rotate(36 128 84) translate(-128 -30) scale(1.0) translate(128 30)">
+    <rect x="112" y="30" width="32" height="70" rx="10" fill="url(#grip)" stroke="#0c2347" stroke-width="4"/>
+    <path d="M116 42 H140 M116 56 H140 M116 70 H140" stroke="#7fc0ff" stroke-opacity="0.6" stroke-width="3"/>
+    <path d="M116 98 H140 L128 150 Z" fill="url(#steel)" stroke="#1a1f2b" stroke-width="4" stroke-linejoin="round"/>
+    <path d="M122 102 L128 140" stroke="#ffffff" stroke-opacity="0.7" stroke-width="3" stroke-linecap="round"/>
+  </g>
+  <!-- the ice crystal -->
+  <g transform="translate(190 66) scale(1.25)" stroke="url(#ice)" stroke-width="6" stroke-linecap="round" fill="none">
+    <path d="M0 -30 V30 M-26 -15 L26 15 M-26 15 L26 -15"/>
+    <path d="M-8 -26 L0 -18 L8 -26 M-8 26 L0 18 L8 26 M-28 -5 L-18 -8 L-22 -18 M28 5 L18 8 L22 18 M-28 5 L-18 8 L-22 18 M28 -5 L18 -8 L22 -18" stroke-width="4"/>
+  </g>
+  <g transform="translate(190 66)" fill="#ffffff" opacity="0.95"><circle r="8"/></g>
+  <!-- frost flakes and shavings -->
+  <g fill="#e8fbff" stroke="#3b9be0" stroke-width="2">
+    <path d="M50 118 l6 10 -6 10 -6 -10 Z"/>
+    <path d="M34 150 l5 8 -5 8 -5 -8 Z"/>
+    <path d="M226 142 l5 8 -5 8 -5 -8 Z"/>
+    <path d="M70 92 l4 7 -4 7 -4 -7 Z"/>
+  </g>
+</svg>
