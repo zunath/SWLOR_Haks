@@ -72,7 +72,8 @@ class RobeCloakModelTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             manifest = Path(directory) / "RobeCloakModels.json"
             manifest.write_text(json.dumps({"models": {}, "unavailable_sources": ["pfa0_cloak_100"],
-                                            "files": {}, "sources": {}}))
+                                            "files": {}, "sources": {}, "compiler_sha256": cloaks.mdl.COMPILER_SHA256,
+                                            "compiled_sources": [], "source_inputs": {}}))
             required = {"pfa171_cloak_100": "pfa0_cloak_100"}
             with patch.object(cloaks, "MANIFEST", manifest), patch.object(cloaks, "requirements", lambda: required):
                 with patch.object(cloaks.tint, "find_active_models", lambda: {}):
@@ -80,6 +81,36 @@ class RobeCloakModelTests(unittest.TestCase):
                 added = {"pfa0_cloak_100": Path(directory) / "pfa0_cloak_100.mdl"}
                 with patch.object(cloaks.tint, "find_active_models", lambda: added):
                     self.assertTrue(any("now exist" in error and "pfa0_cloak_100" in error for error in cloaks.check()))
+
+    def test_changed_sources_and_compiler_make_outputs_stale(self):
+        with tempfile.TemporaryDirectory() as directory:
+            folder = Path(directory)
+            ascii_source = folder / "pfo0_cloak_001.mdl"
+            ascii_source.write_bytes(b"# NWmax export\r\nnewmodel pfo0_cloak_001\r\n")
+            binary_source = folder / "pfh0_cloak_001.mdl"
+            binary_source.write_bytes(b"\0\0\0\0compiled cloak")
+            active = {"pfo0_cloak_001": ascii_source, "pfh0_cloak_001": binary_source}
+            available = {"pfo34_cloak_001": "pfo0_cloak_001", "pfh34_cloak_001": "pfh0_cloak_001"}
+            manifest = {"compiler_sha256": cloaks.mdl.COMPILER_SHA256, "compiled_sources": ["pfo0_cloak_001"],
+                        "source_inputs": {name: cloaks.input_digest(path.read_bytes()) for name, path in active.items()}}
+            self.assertEqual([], cloaks.source_errors(manifest, available, active))
+            # An LF checkout of the same ASCII source is the same input.
+            ascii_source.write_bytes(ascii_source.read_bytes().replace(b"\r\n", b"\n"))
+            self.assertEqual([], cloaks.source_errors(manifest, available, active))
+            # Only ASCII sources depend on the compiler.
+            older = {**manifest, "compiler_sha256": "0" * 64}
+            self.assertTrue(any("different CleanModels" in error for error in cloaks.source_errors(older, available, active)))
+            self.assertEqual([], cloaks.source_errors({**older, "compiled_sources": []}, available, active))
+            binary_source.write_bytes(b"\0\0\0\0edited cloak")
+            self.assertEqual(["Cloak source changed since generation; regenerate robe cloaks: pfh0_cloak_001"],
+                             cloaks.source_errors(manifest, available, active))
+            binary_source.write_bytes(b"\0\0\0\0compiled cloak")
+            stock_now_in_hak = {**available, "pfe34_cloak_001": "pfe0_cloak_001"}
+            added = {**active, "pfe0_cloak_001": binary_source}
+            self.assertTrue(any("not recorded" in error and "pfe0_cloak_001" in error
+                                for error in cloaks.source_errors(manifest, stock_now_in_hak, added)))
+            self.assertEqual(["Robe cloak source provenance is missing; regenerate robe cloaks"],
+                             cloaks.source_errors({"files": {}}, available, active))
 
 
 if __name__ == "__main__":
