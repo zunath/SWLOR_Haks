@@ -287,6 +287,19 @@ def package_animation_models(stage, heads, generated_names, manifest, active, bo
     return result, records, stale - result
 
 
+def inherited_parent_digest(data):
+    """Hash what a wearer root takes from its compiled bank: the skeleton and part IDs.
+
+    The compiler matches a root's part IDs against its parent's nodes; it copies no
+    clips. Excluding the clips keeps the roots' build keys, and so their compiled
+    bytes, unchanged when an animation is added or revised. A skeleton or part-ID
+    change still invalidates every root of that bank.
+    """
+    bridge = banks.CompiledBridge(data)
+    skeleton = bridge.pack(bridge.name, bridge.parent, [])
+    return hashlib.sha256(b"swlor-robe-bank-skeleton-v1\0" + skeleton).hexdigest()
+
+
 def remove_stale_banks(names, manifest, active):
     """Delete tail banks a reused head no longer chains to, after proving ownership."""
     owned = banks.bank_names(manifest)
@@ -995,7 +1008,10 @@ def main():
                            if parent in sources else load_reference(parent) if parent else b"")
             if parent_data is None:
                 raise ValueError(f"{name}: missing compiled parent {parent}")
-            parent_digests[parent] = hashlib.sha256(parent_data).hexdigest()
+            # Wearers inherit only a bank's skeleton; its clips are audited by the
+            # whole-chain pose checks, which run for reused roots too.
+            parent_digests[parent] = (inherited_parent_digest(parent_data) if parent in animation_cache.values()
+                                      else hashlib.sha256(parent_data).hexdigest())
         original = dependencies[original_robes[name]] if name in original_robes else b""
         if name in native_originals:
             original += native_originals[name]

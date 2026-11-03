@@ -550,6 +550,24 @@ class RobeAnimationPackagingTests(unittest.TestCase):
             for name, data in self.parts.items():
                 self.assertEqual(data, (stage / "binary" / f"{name}.mdl").read_bytes())
 
+    def test_wearer_cache_input_ignores_bank_clips_but_not_its_skeleton(self):
+        bridge = g.banks.CompiledBridge(self.original)
+        self.assertGreater(len(bridge.clips), 1)
+        expected = g.inherited_parent_digest(self.original)
+        fewer = bytes(bridge.pack(bridge.name, bridge.parent, bridge.clips[:-1]))
+        self.assertNotEqual(g.hashlib.sha256(self.original).digest(), g.hashlib.sha256(fewer).digest())
+        self.assertEqual(expected, g.inherited_parent_digest(fewer))
+        renamed = bytes(bridge.pack("pmh_ra998", bridge.parent, bridge.clips))
+        reparented = bytes(bridge.pack(bridge.name, "pmh_other", bridge.clips))
+        for other in (renamed, reparented):
+            self.assertNotEqual(expected, g.inherited_parent_digest(other))
+        # A part-ID change in the skeleton must invalidate the wearers' cache keys.
+        moved = bytearray(self.original)
+        root = 12 + g.struct.unpack_from("<I", moved, 12 + 72)[0]
+        part = g.struct.unpack_from("<i", moved, root + 28)[0]
+        g.struct.pack_into("<i", moved, root + 28, part + 1)
+        self.assertNotEqual(expected, g.inherited_parent_digest(bytes(moved)))
+
     def test_reused_head_may_change_layout_and_reports_tails_it_dropped(self):
         with tempfile.TemporaryDirectory() as folder, patch.object(g, "ROOT", Path(folder)):
             root = Path(folder)
