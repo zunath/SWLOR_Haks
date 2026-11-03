@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="46%" r="62%">
+      <stop offset="0" stop-color="#16243a"/>
+      <stop offset="0.55" stop-color="#0b1424"/>
+      <stop offset="1" stop-color="#04070e"/>
+    </radialGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#ff5a2a" stop-opacity="0.45"/>
+      <stop offset="0.6" stop-color="#b8260f" stop-opacity="0.12"/>
+      <stop offset="1" stop-color="#b8260f" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="frameOuter" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#3a4a5e"/>
+      <stop offset="0.5" stop-color="#1a2433"/>
+      <stop offset="1" stop-color="#2c3848"/>
+    </linearGradient>
+    <linearGradient id="trim" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ff8a4c"/>
+      <stop offset="0.5" stop-color="#d4381a"/>
+      <stop offset="1" stop-color="#7a1608"/>
+    </linearGradient>
+    <linearGradient id="body" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#6f7884"/>
+      <stop offset="0.35" stop-color="#3d4550"/>
+      <stop offset="0.7" stop-color="#262c35"/>
+      <stop offset="1" stop-color="#14181e"/>
+    </linearGradient>
+    <linearGradient id="bodyEdge" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#9aa4b0"/>
+      <stop offset="1" stop-color="#2a3038"/>
+    </linearGradient>
+    <linearGradient id="plate" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ff7a3c"/>
+      <stop offset="0.45" stop-color="#c92f14"/>
+      <stop offset="1" stop-color="#5e1006"/>
+    </linearGradient>
+    <radialGradient id="screen" cx="45%" cy="40%" r="70%">
+      <stop offset="0" stop-color="#1d2c44"/>
+      <stop offset="1" stop-color="#070b14"/>
+    </radialGradient>
+    <linearGradient id="lane" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#ffb070"/>
+      <stop offset="0.5" stop-color="#ffe2b8"/>
+      <stop offset="1" stop-color="#ffb070"/>
+    </linearGradient>
+    <radialGradient id="beacon" cx="40%" cy="35%" r="65%">
+      <stop offset="0" stop-color="#fff4dc"/>
+      <stop offset="0.35" stop-color="#ffb35a"/>
+      <stop offset="1" stop-color="#c2310f"/>
+    </radialGradient>
+    <filter id="soft" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="6"/>
+    </filter>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="6" dy="10" stdDeviation="9" flood-color="#000000" flood-opacity="0.75"/>
+    </filter>
+  </defs>
+
+  <!-- Archive background and octagonal frame -->
+  <rect width="512" height="512" fill="#03050a"/>
+  <polygon points="96,10 416,10 502,96 502,416 416,502 96,502 10,416 10,96" fill="url(#frameOuter)"/>
+  <polygon points="104,30 408,30 482,104 482,408 408,482 104,482 30,408 30,104" fill="url(#bg)"/>
+  <polygon points="104,30 408,30 482,104 482,408 408,482 104,482 30,408 30,104" fill="none" stroke="#0a0f18" stroke-width="6"/>
+  <polygon points="108,40 404,40 472,108 472,404 404,472 108,472 40,404 40,108" fill="none" stroke="#c4381a" stroke-opacity="0.55" stroke-width="3"/>
+  <path d="M96,10 L10,96" stroke="url(#trim)" stroke-width="10" stroke-linecap="round"/>
+  <path d="M416,502 L502,416" stroke="url(#trim)" stroke-width="10" stroke-linecap="round"/>
+  <path d="M416,10 L502,96" stroke="#5a6a80" stroke-width="6" stroke-linecap="round"/>
+  <path d="M96,502 L10,416" stroke="#5a6a80" stroke-width="6" stroke-linecap="round"/>
+
+  <!-- Warm glow behind the subject -->
+  <circle cx="256" cy="262" r="190" fill="url(#glow)"/>
+
+  <!-- Transponder fob, tilted -->
+  <g transform="translate(256 268) scale(1.17) translate(-256 -262) rotate(-24 256 262)" filter="url(#shadow)">
+    <!-- Lanyard loop -->
+    <path d="M232,96 C232,60 280,60 280,96" fill="none" stroke="#3a424c" stroke-width="20" stroke-linecap="round"/>
+    <path d="M232,96 C232,66 280,66 280,96" fill="none" stroke="#8a94a0" stroke-width="6" stroke-linecap="round"/>
+    <!-- Body -->
+    <path d="M176,104 L336,104 L370,138 L370,388 L336,422 L176,422 L142,388 L142,138 Z" fill="url(#bodyEdge)"/>
+    <path d="M182,114 L330,114 L360,144 L360,382 L330,412 L182,412 L152,382 L152,144 Z" fill="url(#body)"/>
+    <!-- Red-orange side plates -->
+    <path d="M152,170 L176,150 L176,376 L152,356 Z" fill="url(#plate)"/>
+    <path d="M360,170 L336,150 L336,376 L360,356 Z" fill="url(#plate)"/>
+    <path d="M154,172 L172,157 L172,180 L154,195 Z" fill="#ffb07a" fill-opacity="0.7"/>
+    <!-- Display window -->
+    <path d="M198,150 L314,150 L330,166 L330,320 L314,336 L198,336 L182,320 L182,166 Z" fill="#0a0e15"/>
+    <path d="M202,156 L310,156 L324,170 L324,316 L310,330 L202,330 L188,316 L188,170 Z" fill="url(#screen)"/>
+    <!-- Starlane: two beacons joined by an arcing lane -->
+    <path d="M214,300 C222,214 280,184 302,186" fill="none" stroke="#ff6a2a" stroke-opacity="0.55" stroke-width="22" stroke-linecap="round" filter="url(#soft)"/>
+    <path d="M214,300 C222,214 280,184 302,186" fill="none" stroke="url(#lane)" stroke-width="9" stroke-linecap="round"/>
+    <path d="M214,300 C222,214 280,184 302,186" fill="none" stroke="#ffffff" stroke-opacity="0.75" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="214" cy="300" r="22" fill="#ff5a1e" fill-opacity="0.5" filter="url(#soft)"/>
+    <circle cx="214" cy="300" r="15" fill="url(#beacon)" stroke="#5a1406" stroke-width="3"/>
+    <circle cx="302" cy="186" r="22" fill="#ff5a1e" fill-opacity="0.5" filter="url(#soft)"/>
+    <circle cx="302" cy="186" r="15" fill="url(#beacon)" stroke="#5a1406" stroke-width="3"/>
+    <circle cx="209" cy="295" r="4" fill="#ffffff"/>
+    <circle cx="297" cy="181" r="4" fill="#ffffff"/>
+    <!-- Faint stars on the display -->
+    <circle cx="276" cy="282" r="3" fill="#cfe4ff" fill-opacity="0.8"/>
+    <circle cx="300" cy="250" r="2.5" fill="#cfe4ff" fill-opacity="0.6"/>
+    <circle cx="236" cy="190" r="2.5" fill="#cfe4ff" fill-opacity="0.6"/>
+    <circle cx="258" cy="306" r="2" fill="#cfe4ff" fill-opacity="0.5"/>
+    <!-- Glass sheen -->
+    <path d="M202,156 L310,156 L324,170 L324,196 C276,186 232,200 188,236 L188,170 Z" fill="#ffffff" fill-opacity="0.07"/>
+    <!-- Lower contact strip and status light -->
+    <rect x="196" y="352" width="120" height="16" rx="5" fill="#141920" stroke="#58616c" stroke-width="2"/>
+    <rect x="204" y="356" width="18" height="8" rx="2" fill="#c9a24a"/>
+    <rect x="228" y="356" width="18" height="8" rx="2" fill="#c9a24a"/>
+    <rect x="252" y="356" width="18" height="8" rx="2" fill="#c9a24a"/>
+    <rect x="276" y="356" width="18" height="8" rx="2" fill="#c9a24a"/>
+    <circle cx="256" cy="392" r="12" fill="#ff4a1a" fill-opacity="0.55" filter="url(#soft)"/>
+    <circle cx="256" cy="392" r="7" fill="url(#beacon)"/>
+    <!-- Bevel highlights -->
+    <path d="M182,114 L330,114 L360,144" fill="none" stroke="#c8d0da" stroke-opacity="0.65" stroke-width="3"/>
+    <path d="M152,144 L182,114" fill="none" stroke="#c8d0da" stroke-opacity="0.45" stroke-width="3"/>
+    <path d="M360,382 L330,412 L182,412" fill="none" stroke="#05070a" stroke-opacity="0.8" stroke-width="3"/>
+  </g>
+</svg>
