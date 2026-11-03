@@ -1,8 +1,11 @@
-"""Writes the illustrated SVG source for every Pazaak side card inventory icon.
+"""Writes the illustrated SVG source for every Pazaak card image.
 
-Each SVG is rasterized and exported as a 32x32 transparent inventory TGA,
-sw_item/iit_card_<model>.tga, for base item 401 (card). The model number of
+Side cards: each SVG is rasterized and exported as a 32x32 transparent inventory
+TGA, sw_item/iit_card_<model>.tga, for base item 401 (card). The model number of
 each card is listed in CARDS and matches the item blueprints.
+
+Main deck cards and the empty table slot are only drawn in the Pazaak window:
+they are exported the same way to sw_ui/<name>.tga, as listed in BOARD_CARDS.
 """
 import os
 
@@ -14,6 +17,7 @@ RED = ("#ffb0a8", "#ff3b3b", "#6b0b0b")
 GOLD = ("#fff1a8", "#f2b632", "#6b4307")
 VIOLET = ("#e3c2ff", "#a65cff", "#3a0d73")
 TEAL = ("#b5fff1", "#22d3b5", "#064f45")
+GREEN = ("#c8ffbf", "#34c25a", "#0a4a1c")
 
 # (model, file stem, kind, value, theme)
 CARDS = [
@@ -24,6 +28,12 @@ CARDS = [
     (117, "flip36", "flip", (3, 6), TEAL),
     (118, "double", "double", None, GOLD),
     (119, "tiebreaker", "tiebreaker", 1, GOLD),
+]
+
+# (output name, kind, value, theme): window-only art in sw_ui.
+BOARD_CARDS = [
+    *[(f"pzk_main{v}", "main", v, GREEN) for v in range(1, 11)],
+    ("pzk_slot", "slot", None, None),
 ]
 
 BOTTOM_CHEVRON = ('<path d="M112 222 l16 -12 l16 12" fill="none" stroke="#ffffff" stroke-opacity="0.8" '
@@ -96,14 +106,32 @@ def glyph(text, y, size, stroke="#05070c"):
             f'letter-spacing="-4">{text}</text>')
 
 
+def slot_svg():
+    # An empty table slot: a faint card outline that keeps the row's shape.
+    return """<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <rect x="40" y="12" width="176" height="232" rx="26" fill="#0c1018" fill-opacity="0.55"/>
+  <rect x="44" y="16" width="168" height="224" rx="22" fill="none" stroke="#7d8ba3" stroke-opacity="0.55"
+        stroke-width="6" stroke-dasharray="22 14"/>
+  <path d="M112 34 l16 12 l16 -12" fill="none" stroke="#7d8ba3" stroke-opacity="0.35" stroke-width="5"
+        stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M112 222 l16 -12 l16 12" fill="none" stroke="#7d8ba3" stroke-opacity="0.35" stroke-width="5"
+        stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+"""
+
+
 def svg(kind, value, theme):
+    if kind == "slot":
+        return slot_svg()
     if kind == "plusminus":
         theme_a, theme_b = BLUE, RED
     else:
         theme_a = theme_b = theme
 
     body = card_body(bottom_chevron=kind != "tiebreaker")
-    if kind == "plus":
+    if kind == "main":
+        art = glyph(str(value), 166, 112 if value < 10 else 104)
+    elif kind == "plus":
         art = glyph(f"+{value}", 166, 112)
     elif kind == "minus":
         art = glyph(f"−{value}", 166, 112)
@@ -135,7 +163,11 @@ def main():
         path = os.path.join(HERE, f"iit_card_{model:03d}_{stem}.svg")
         with open(path, "w", encoding="utf-8", newline="\n") as handle:
             handle.write(svg(kind, value, theme))
-    print(f"Wrote {len(CARDS)} SVG sources to {HERE}")
+    for name, kind, value, theme in BOARD_CARDS:
+        path = os.path.join(HERE, f"{name}.svg")
+        with open(path, "w", encoding="utf-8", newline="\n") as handle:
+            handle.write(svg(kind, value, theme))
+    print(f"Wrote {len(CARDS) + len(BOARD_CARDS)} SVG sources to {HERE}")
 
 
 if __name__ == "__main__":
