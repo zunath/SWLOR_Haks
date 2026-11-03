@@ -705,6 +705,8 @@ def tint_fragment_shader(
     source_material: str,
     lines: list[str],
 ) -> str:
+    if re.fullmatch(r"p[fm]h0_chest15[4-7]", source_material.lower()):
+        return "c154_noenv"
     if source_material.lower() in HavocGlowAssets.MAPPED_GLOW_MATERIALS:
         return HavocGlowAssets.MAPPED_GLOW_SHADER
     authored_lines = source_shader_config_lines(source_material)
@@ -3599,6 +3601,8 @@ def check_tint_mtr_structure(path: Path) -> list[str]:
             errors.append(f"invalid custom vertex shader directive '{vertex_shaders[0]}'")
 
     fragment_shaders = directives.get(("customshaderfs",), [])
+    if re.fullmatch(r"p[fm]h0_chest15[4-7]", path.stem.lower()) and [line.lower() for line in fragment_shaders] == ["customshaderfs c154_noenv"]:
+        fragment_shaders = [f"customshaderfs {TINT_FRAGMENT_SHADER}"]
     if fragment_shaders and fragment_shaders[0].lower() not in {
         f"customshaderfs {TINT_FRAGMENT_SHADER}",
         f"customshaderfs {TINT_MAPPED_FRAGMENT_SHADER}",
