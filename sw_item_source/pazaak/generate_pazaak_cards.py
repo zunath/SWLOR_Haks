@@ -34,6 +34,9 @@ CARDS = [
 BOARD_CARDS = [
     *[(f"pzk_main{v}", "main", v, GREEN) for v in range(1, 11)],
     ("pzk_slot", "slot", None, None),
+    ("pzk_back", "back", None, None),
+    ("pzk_light_on", "light", True, None),
+    ("pzk_light_off", "light", False, None),
 ]
 
 BOTTOM_CHEVRON = ('<path d="M112 222 l16 -12 l16 12" fill="none" stroke="#ffffff" stroke-opacity="0.8" '
@@ -120,9 +123,73 @@ def slot_svg():
 """
 
 
+def back_svg():
+    # A face-down card: steel rim, dark face, and a ringed diamond crest.
+    return """<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <defs>
+    <linearGradient id="rim" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#e6ebf2"/>
+      <stop offset="0.5" stop-color="#8a95a6"/>
+      <stop offset="1" stop-color="#3b4350"/>
+    </linearGradient>
+    <linearGradient id="face" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3a4252"/>
+      <stop offset="1" stop-color="#151a24"/>
+    </linearGradient>
+    <radialGradient id="crest" cx="0.5" cy="0.45" r="0.6">
+      <stop offset="0" stop-color="#cfd8e6"/>
+      <stop offset="1" stop-color="#5d687a"/>
+    </radialGradient>
+  </defs>
+  <rect x="46" y="18" width="176" height="232" rx="26" fill="#000000" opacity="0.45"/>
+  <rect x="40" y="12" width="176" height="232" rx="26" fill="url(#rim)"/>
+  <rect x="54" y="26" width="148" height="204" rx="16" fill="url(#face)"/>
+  <rect x="64" y="36" width="128" height="184" rx="10" fill="none" stroke="#8a95a6" stroke-opacity="0.45" stroke-width="3"/>
+  <circle cx="128" cy="128" r="50" fill="none" stroke="url(#crest)" stroke-width="10"/>
+  <path d="M128 92 L160 128 L128 164 L96 128 Z" fill="url(#crest)" stroke="#1b2029" stroke-width="4"/>
+  <circle cx="128" cy="128" r="9" fill="#1b2029"/>
+  <path d="M60 30 h50 l-40 196 h-14 a10 10 0 0 1 -6 -6 z" fill="#ffffff" opacity="0.08"/>
+</svg>
+"""
+
+
+def light_svg(lit):
+    # A round indicator lamp in a steel bezel: red and glowing when lit, dark when not.
+    core = ("#ffd2c8", "#ff2a1a", "#7a0700") if lit else ("#6d7480", "#2c3038", "#121418")
+    glow = '<circle cx="128" cy="128" r="104" fill="url(#halo)"/>' if lit else ""
+    return f"""<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <defs>
+    <radialGradient id="halo" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0.55" stop-color="#ff2a1a" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#ff2a1a" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="bezel" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#eef1f5"/>
+      <stop offset="0.5" stop-color="#7c8594"/>
+      <stop offset="1" stop-color="#2b3039"/>
+    </linearGradient>
+    <radialGradient id="core" cx="0.38" cy="0.35" r="0.7">
+      <stop offset="0" stop-color="{core[0]}"/>
+      <stop offset="0.45" stop-color="{core[1]}"/>
+      <stop offset="1" stop-color="{core[2]}"/>
+    </radialGradient>
+  </defs>
+  {glow}
+  <circle cx="128" cy="128" r="74" fill="url(#bezel)"/>
+  <circle cx="128" cy="128" r="60" fill="#0b0d11"/>
+  <circle cx="128" cy="128" r="54" fill="url(#core)"/>
+  <ellipse cx="110" cy="104" rx="20" ry="12" fill="#ffffff" opacity="0.45"/>
+</svg>
+"""
+
+
 def svg(kind, value, theme):
     if kind == "slot":
         return slot_svg()
+    if kind == "back":
+        return back_svg()
+    if kind == "light":
+        return light_svg(value)
     if kind == "plusminus":
         theme_a, theme_b = BLUE, RED
     else:
