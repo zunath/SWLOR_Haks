@@ -10446,7 +10446,12 @@
       "parameters": {
         "forceOpaque": 1.0,
         "detailGlowChannel": 1,
-        "detailGlowGain": 1.5
+        "detailGlowGain": 1.5,
+        "lipMode": 3,
+        "lipU0": 0.85302734375,
+        "lipV0": 0.141845703125,
+        "lipUSpan": 0.045654296875,
+        "lipVSpan": 0.017333984375
       },
       "declarations": [
         "customshaderVS vslit_sm_nm",
@@ -10472,7 +10477,8 @@
         "texture8 ha_ba4c1d2ff008",
         "texture10 plt_palette",
         "parameter float tintMapWidth 1024.0",
-        "parameter float tintMapHeight 1024.0"
+        "parameter float tintMapHeight 1024.0",
+        "texture9 fh318_lipsoft"
       ]
     },
     "ha_17b155249a20": {
@@ -16872,7 +16878,7 @@
       "sourceHasAlpha": false
     },
     "sw_tint2/ha_ba4c1d2ff007.dds": {
-      "sha256": "8fe64f509884532ff7c9b9ac3f5df24da21635e70719ab7f0071540d6fadea83",
+      "sha256": "0cf02816cc2e2391831fcb2802871064a814643c93a49da1ece51da12d710720",
       "codec": "BC5",
       "size": [
         1024,
@@ -17045,6 +17051,17 @@
       ],
       "role": "mask",
       "mipLevels": 11,
+      "sourceHasAlpha": false
+    },
+    "sw_tint2/fh318_lipsoft.dds": {
+      "sha256": "6680a9397981404be2f14f007bbce82b61c09a85d95474e9775467fa341dbc45",
+      "codec": "BC5",
+      "size": [
+        512,
+        256
+      ],
+      "role": "mask",
+      "mipLevels": 10,
       "sourceHasAlpha": false
     }
   },
@@ -17639,7 +17656,8 @@
     "sw_tint2/ha_b84f5fd67601.txi": "93f2ee8298588ca48cf90f1e3b2c15affd58b9f6ce7421b2cf061a578b9287b0",
     "sw_tint2/ha_b84f5fd67606.txi": "93f2ee8298588ca48cf90f1e3b2c15affd58b9f6ce7421b2cf061a578b9287b0",
     "sw_tint2/ha_b84f5fd67607.txi": "980a4d359b56df419d9249e19b6c8fcdb689c3185e20a5c442dae0c153279ef0",
-    "sw_tint2/ha_b84f5fd67608.txi": "93f2ee8298588ca48cf90f1e3b2c15affd58b9f6ce7421b2cf061a578b9287b0"
+    "sw_tint2/ha_b84f5fd67608.txi": "93f2ee8298588ca48cf90f1e3b2c15affd58b9f6ce7421b2cf061a578b9287b0",
+    "sw_tint2/fh318_lipsoft.txi": "93f2ee8298588ca48cf90f1e3b2c15affd58b9f6ce7421b2cf061a578b9287b0"
   },
   "auxiliaryText": {
     "sw_tint2/cx00p00d.txi": "mipmap 1\n",
@@ -18228,7 +18246,8 @@
     "sw_tint2/ha_b84f5fd67601.txi": "mipmap 1\n",
     "sw_tint2/ha_b84f5fd67606.txi": "mipmap 1\n",
     "sw_tint2/ha_b84f5fd67607.txi": "mipmap 0\n",
-    "sw_tint2/ha_b84f5fd67608.txi": "mipmap 1\n"
+    "sw_tint2/ha_b84f5fd67608.txi": "mipmap 1\n",
+    "sw_tint2/fh318_lipsoft.txi": "mipmap 1\n"
   },
   "modelHashes": {
     "pfh0_head052": "186fea02e676f3126103af6e9a45d28929bc80ea4d5bd7384f42d03d44eb753a",
