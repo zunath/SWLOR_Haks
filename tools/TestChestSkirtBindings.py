@@ -82,8 +82,8 @@ class ChestSkirtBindingTests(unittest.TestCase):
                     | every('belt019') | every('belt110') | every('belt112') | every('belt114')
                     # Human pelvis 035 keeps its authored rigging; only the half-orc variants are rebound.
                     | {f'p{gender}o0_pelvis035' for gender in 'fm'}
-                    # Capes only where the cloak bones animate.
-                    | cloaked('neck291') | cloaked('shol260') | cloaked('shor260'))
+                    # Capes only where the flaps animate; elsewhere they keep their authored rigging.
+                    | cloaked('neck289') | cloaked('neck291') | cloaked('shol260') | cloaked('shor260'))
         self.assertEqual(expected, set(self.models))
         self.assertEqual(set(skirts.STYLES), {skirts.style_key(entry['path']) for entry in self.models.values()})
         folders = {'chest': 'sw_pt_chest', 'belt': 'sw_pt_belt', 'pelvis': 'sw_pt_pelvis', 'neck': 'sw_pt_neck',
@@ -151,27 +151,43 @@ class ChestSkirtBindingTests(unittest.TestCase):
                 else:
                     self.assertEqual(0, flapped)
 
-    def test_cape_weights_hang_from_the_cloak_bones(self):
+    def test_cape_weights_hang_like_the_coats(self):
+        """Below the shoulder blades a cape lets go of the arms and, from the hips down, hangs from the pelvis,
+        the back flap and a share of its own leg; it never uses the stock cloak bones, which held it off the back
+        as one straight board. Above the shoulder blades the authored binding stays."""
+        legs = {'lthigh_g', 'rthigh_g', 'lshin_g', 'rshin_g'}
         for name in self.models:
-            if not self.shape(name)['cape']:
+            shape = self.shape(name)
+            if not shape['cape']:
                 continue
             with self.subTest(model=name):
                 rest = skirts.rest_positions(self.sources[name])
                 pose = skirts.skeleton(self.sources[name])[1].pose()
-                second = min(pose[column[1]][0][2] for column in skirts.CLOAK_COLUMNS)
+                waist = pose['torso_g'][0][2]
+                top = waist + skirts.CAPE_ARMS * (pose['lbicep_g'][0][2] - waist)
+                hip = pose['lthigh_g'][0][2]
                 rebound = 0
                 for before, after, position in zip(self.weights(self.sources[name]), self.weights(self.current[name]), rest, strict=True):
                     self.assertLessEqual(len(after), 4)
+                    self.assertLessEqual(max(after.values()), 1.)
                     self.assertAlmostEqual(sum(before.values()), sum(after.values()), delta=2e-6)
-                    if not skirts.LEG_BONES & set(before):
+                    self.assertFalse(skirts.CLOAK_BONES & set(after))
+                    if position[2] >= top and not skirts.LEG_BONES & set(before):
                         self.assertEqual(before, after)
                         continue
                     rebound += 1
-                    self.assertFalse(skirts.LEG_BONES & set(after))
-                    # Below the cloak's second row only the cloak bones carry the cape.
-                    if position[2] < second:
-                        self.assertLessEqual(set(after), skirts.CLOAK_BONES)
-                    self.assertLessEqual(set(after), set(before) | skirts.CLOAK_BONES | {'torso_g'})
+                    if position[2] <= waist:
+                        self.assertFalse(skirts.ARM_BONES & set(after))
+                    if position[2] >= hip:
+                        self.assertFalse(legs & set(after))
+                    else:
+                        far = 'r' if skirts.bearing(position, pose) < 0 else 'l'
+                        self.assertFalse({f'{far}thigh_g', f'{far}shin_g'} & set(after))
+                        self.assertLessEqual(sum(after.get(bone, 0.) for bone in legs), skirts.LEGS * sum(after.values()) + 2e-6)
+                    expected = skirts.skirt_weights(before, position, pose, True, shape)
+                    self.assertEqual(set(expected), set(after))
+                    for bone, weight in expected.items():
+                        self.assertAlmostEqual(weight, after[bone], delta=2e-6)
                 self.assertGreater(rebound, 50)
 
     def test_shares_depend_only_on_the_bind_position(self):
@@ -221,10 +237,27 @@ class ChestSkirtBindingTests(unittest.TestCase):
         for name in self.models:
             with self.subTest(model=name):
                 before, after = self.sources[name], self.current[name]
-                error = max(math.dist(a, b) for a, b in zip(skirts.rest_positions(before), skirts.rest_positions(after), strict=True))
+                expected = skirts.rest_positions(before)
+                if skirts.tapered(self.models[name]['path']):
+                    expected = [tuple(a + b for a, b in zip(point, offset)) for point, offset in zip(expected, skirts.taper_offsets(before), strict=True)]
+                error = max(math.dist(a, b) for a, b in zip(expected, skirts.rest_positions(after), strict=True))
                 self.assertLess(error, 2e-5)
                 bones, _ = skirts.skeleton(before)
                 tables = bytearray(len(before))
+                if skirts.tapered(self.models[name]['path']):
+                    # The taper moves positions; normals, face planes and mesh and model bounds follow them.
+                    tables[148:176] = b'\1' * 28
+                    uint = lambda offset: struct.unpack_from('<I', before, offset)[0]
+                    raw = 12 + uint(4)
+                    for skin, (_, _, mesh) in zip(skirts.skins(before, bones), [node for node in mdl.binary_nodes(before) if node[2] and 'weights' in node[2]], strict=True):
+                        offset, stride = mesh['_mesh_offset'], uint(mesh['_mesh_offset'] + 440)
+                        tables[offset + 20:offset + 60] = b'\1' * 40
+                        for vertex in range(skin['count']):
+                            for base in (skin['positions'], raw + uint(offset + 468)):
+                                tables[base + vertex * (stride or 12):base + vertex * (stride or 12) + 12] = b'\1' * 12
+                        faces = 12 + uint(offset + 8)
+                        for face in range(uint(offset + 12)):
+                            tables[faces + face * 32:faces + face * 32 + 16] = b'\1' * 16
                 for skin in skirts.skins(before, bones):
                     for vertex in range(skin['count']):
                         weights = skin['weights'] + vertex * (skin['stride'] or 16)
@@ -300,40 +333,73 @@ class ChestSkirtBindingTests(unittest.TestCase):
                         self.assertLess(front_clipping(source, current, clip), MAX_FRONT)
 
     def test_capes_swing_behind_the_legs(self):
-        """A cape on the cloak bones must keep the legs covered from behind and not tear where the original split."""
+        """A cape must swing with the stride, keep the legs covered from behind, not tear and not stand out level."""
         for name in self.models:
             if not self.shape(name)['cape']:
                 continue
             source, current = self.sources[name], self.current[name]
             for clip in ('walk', 'run'):
                 with self.subTest(model=name, clip=clip):
-                    swing, exposed, stretch = stride_metrics(source, current, clip)
+                    swing, exposed, stretch = stride_metrics(source, current, clip, cape=True)
                     self.assertGreater(swing, MIN_SWING)
                     self.assertLess(exposed, MAX_EXPOSED)
                     self.assertLess(stretch, MAX_STRETCH)
+                    self.assertLess(back_lean(source, current, clip, cape=True), MAX_RUN_BACK)
+
+    def test_taper_pulls_the_flared_hem_towards_the_legs(self):
+        """Belt 19's male mesh flared out behind; the taper pulls only its lower half straight towards the body's
+        axis, never inside the thigh floor, and leaves the female mesh, which hangs straight, alone."""
+        tapered = {name for name, entry in self.models.items() if skirts.tapered(entry['path'])}
+        self.assertEqual({f'pm{race}0_belt019' for race in 'deho'}, tapered)
+        for name in tapered:
+            with self.subTest(model=name):
+                source = self.sources[name]
+                pose = skirts.skeleton(source)[1].pose()
+                pelvis = pose['pelvis_g'][0]
+                floor = max(abs(pose[f'{side}thigh_g'][0][0] - pelvis[0]) for side in 'lr') + skirts.TAPER_FLOOR
+                reach = lambda point: math.hypot(point[0] - pelvis[0], point[1] - pelvis[1])
+                moved = 0
+                for before, after in zip(skirts.rest_positions(source), skirts.rest_positions(self.current[name]), strict=True):
+                    if math.dist(before, after) < 1e-6:
+                        continue
+                    moved += 1
+                    self.assertLess(before[2], pose['lthigh_g'][0][2] + skirts.TAPER_TOP)
+                    self.assertAlmostEqual(before[2], after[2], delta=2e-5)
+                    self.assertLess(reach(after), reach(before))
+                    self.assertGreater(reach(after), floor - 2e-5)
+                    # Straight in: the bearing round the body does not change.
+                    self.assertAlmostEqual(0., math.remainder(skirts.bearing(after, pose) - skirts.bearing(before, pose), 360), delta=.01)
+                self.assertGreater(moved, 100)
+                # The back hem now hangs much nearer the legs (male human: 47 cm behind the hips before, 33 after).
+                back = lambda data: max(reach(point) for point in skirts.rest_positions(data)
+                                        if abs(skirts.bearing(point, pose)) < 30 and point[2] < pose['lshin_g'][0][2] + .2)
+                self.assertLess(back(self.current[name]), back(source) - .1)
 
     def test_skirt_hangs_beside_the_legs_when_standing(self):
         """In the standing idles the hips sway to one side and the left leg stands forward; the skirt must stay
-        beside the legs, nearly as wide and centred as the original, and its back must not lean out like a shell."""
+        beside the legs, nearly as wide and centred as the original, and its back must not lean out like a shell.
+        A tapered skirt is measured against the tapered shape on its original rigging: the taper narrows it on
+        purpose, the binding must not narrow it further."""
         for name in self.models:
             if self.shape(name)['cape']:
                 continue
             source, current = self.sources[name], self.current[name]
+            original = skirts.taper(source) if skirts.tapered(self.models[name]['path']) else source
             if not skirts.flaps_animated(skirts.skeleton(source)[1]):
                 # Where the flaps never move the legs carry the skirt, so it stays close to the original.
                 for clip, limit in (('pause1', MAX_STILL_SHIFT), ('custom52lp', MAX_STILL_PARADE_SHIFT)):
                     with self.subTest(model=name, clip=clip):
-                        for before, after in zip(idle_gaps(source, source, clip), idle_gaps(source, current, clip), strict=True):
+                        for before, after in zip(idle_gaps(source, original, clip), idle_gaps(source, current, clip), strict=True):
                             self.assertLess(abs(after - before), limit)
                 continue
             for clip, narrowing, shift in (('pause1', MAX_IDLE_NARROWING, MAX_IDLE_SHIFT), ('pause2', MAX_IDLE_NARROWING, MAX_IDLE_SHIFT),
                                            ('custom52lp', MAX_PARADE_NARROWING, MAX_PARADE_SHIFT)):
                 with self.subTest(model=name, clip=clip):
-                    (left, right), (left0, right0) = idle_gaps(source, current, clip), idle_gaps(source, source, clip)
+                    (left, right), (left0, right0) = idle_gaps(source, current, clip), idle_gaps(source, original, clip)
                     self.assertLess(left0 - left, narrowing)
                     self.assertLess(right0 - right, narrowing)
                     self.assertLess(abs((left - right) - (left0 - right0)), shift)
-                    self.assertLess(back_lean(source, current, clip) - back_lean(source, source, clip), MAX_BACK_LEAN)
+                    self.assertLess(back_lean(source, current, clip) - back_lean(source, original, clip), MAX_BACK_LEAN)
 
 
 @lru_cache(None)
@@ -412,13 +478,13 @@ def front_clipping(source: bytes, current: bytes, clip_name: str, phases: int = 
     return shown / max(samples, 1)
 
 
-def stride_metrics(source: bytes, current: bytes, clip_name: str, phases: int = 8):
+def stride_metrics(source: bytes, current: bytes, clip_name: str, phases: int = 8, cape: bool = False):
     """Hem swing against the pelvis (m), share of leg samples showing behind the coat, and 99.5th-percentile edge stretch."""
     bones, _ = skirts.skeleton(source)
     body = Model(tint.find_active_models()[bones[0]].read_bytes(), False)
     clip = animation_clip(bones[0], clip_name)
-    skirt = [bool(skirts.LEG_BONES & set(weights)) for weights in
-             (skirts.influences(source, skin, vertex) for skin in skirts.skins(source, bones) for vertex in range(skin['count']))]
+    garment = set(skirt_vertices(source, cape))
+    skirt = [index in garment for index in range(len(skirts.rest_positions(source)))]
     rest = skirts.rest_positions(current)
     edges = set()
     offset = 0
@@ -480,13 +546,19 @@ def skin_weight_rows(data):
     return rows
 
 
-def skirt_vertices(source: bytes) -> list[int]:
-    bones, _ = skirts.skeleton(source)
+def skirt_vertices(source: bytes, cape: bool = False) -> list[int]:
+    """A skirt's leg-weighted vertices, or a cape's below the shoulder blades (cape_weights rebinds those)."""
+    bones, body = skirts.skeleton(source)
+    if cape:
+        pose = body.pose()
+        waist = pose['torso_g'][0][2]
+        top = waist + skirts.CAPE_ARMS * (pose['lbicep_g'][0][2] - waist)
+        return [index for index, point in enumerate(skirts.rest_positions(source)) if point[2] < top]
     weights = (skirts.influences(source, skin, vertex) for skin in skirts.skins(source, bones) for vertex in range(skin['count']))
     return [index for index, current in enumerate(weights) if skirts.LEG_BONES & set(current)]
 
 
-def back_lean(source: bytes, current: bytes, clip_name: str) -> float:
+def back_lean(source: bytes, current: bytes, clip_name: str, cape: bool = False) -> float:
     """Mean angle from upright of the back panel, from just below the hips to the hem, in degrees (outward positive).
 
     Standing clips are sampled at their start, as the engine holds them; others over eight phases."""
@@ -494,7 +566,7 @@ def back_lean(source: bytes, current: bytes, clip_name: str) -> float:
     body = Model(tint.find_active_models()[bones[0]].read_bytes(), False)
     pose = bind.pose()
     rest = skirts.rest_positions(source)
-    skirt = skirt_vertices(source)
+    skirt = skirt_vertices(source, cape)
     hip = pose['lthigh_g'][0][2]
     floor = min(rest[index][2] for index in skirt)
     back = [index for index in skirt if abs(skirts.bearing(rest[index], pose)) < 25]
