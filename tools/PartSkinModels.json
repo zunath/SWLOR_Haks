@@ -268,6 +268,7 @@
     "pfo0_pelvis1775": {"source": "pfo0_pelvis268", "path": "sw_pt_pelvis/pfo0_pelvis1775.mdl", "mapping": [[[0, 37, 56], [1, 36, 55], [2, 40, 65]]], "sha256": "075f4ff711c1317109500d7e2258ddd18357ab62efe899a3bfe75e214e8ca346"},
     "pfo0_pelvis1776": {"source": "pfo0_pelvis269", "path": "sw_pt_pelvis/pfo0_pelvis1776.mdl", "mapping": [[[0, 36, 55], [1, 40, 65], [2, 37, 56], [3, 1, 1], [4, 38, 57], [5, 41, 66]]], "sha256": "f7c37b2e3817339cd8ebc9d1c13614d39665137e14668a5327373521e7c0e855"},
     "pfo0_pelvis2062": {"source": "pfo0_pelvis035", "path": "sw_pt_pelvis/pfo0_pelvis2062.mdl", "mapping": [[[0, 40, 65], [1, 37, 56], [2, 36, 55]]], "sha256": "c4723f6ae62525ad9fd07ab8b22e13f7e311eac0ce6b8121d8145481c28c4ad8"},
+    "pfo0_pelvis2099": {"source": "pfo0_pelvis014", "path": "sw_pt_pelvis/pfo0_pelvis2099.mdl", "mapping": [[[0, 36, 55], [1, 37, 56], [2, 2, 2], [3, 40, 65]]], "sha256": "fdc33eb93ca5f63cc9b9ff28d02767092740664a71ca5be70524f6f1928660a0"},
     "pfo0_shinl1777": {"source": "pfo0_shinl161", "path": "sw_pt_lshin/pfo0_shinl1777.mdl", "mapping": [[[0, 42, 67], [1, 41, 66]]], "sha256": "4af6e474e2c06c563a6de90a58e7847bb63c6317926a087b48f1575ffc910bd7"},
     "pfo0_shinr1778": {"source": "pfo0_shinr161", "path": "sw_pt_rshin/pfo0_shinr1778.mdl", "mapping": [[[0, 39, 58], [1, 38, 57]]], "sha256": "8437b5618d7fc93478e113bb34afc659a26da043c50b8e29ef8439a2467b9c08"},
     "pfo0_shol1779": {"source": "pfo0_shol013", "path": "sw_pt_lshoul/pfo0_shol1779.mdl", "mapping": [[[0, 8, 13], [1, 2, 2]], [[0, 2, 2], [1, 3, 3]]], "sha256": "f1a4b6afb7fd0bd7417529f03292e60cec6cb25f3402b0ba73fc00c59bcfd36f"},
@@ -1104,7 +1105,7 @@
   ],
   "inputs": {
     "count": 18824,
-    "sha256": "c2af782b16f4d326a7bdd58b3919ba0e8af64ac2c751b03ede30a4b380f27b33"
+    "sha256": "d512019ffd84f18cd7991e9306f0153f0c2f0a283ef941b675f0ab77ed180507"
   },
   "implementation": {
     "tools/GeneratePartSkinModels.py": "15fb75654e3b8d2410fd8457cd665f94d4b7585dfcedc0859abb47df67e45cec",
@@ -1116,6 +1117,6 @@
   },
   "tables": {
     "sw_2da/partlayout.2da": "002b204ffc70cfce3d4751b13a2e5362ea1cd0646ae848aca47dfbb58116a3e2",
-    "sw_2da/partrender.2da": "fea373e859f77b9f94d9e8c232025aca91999423b406a2f0664cf7d53f77077d"
+    "sw_2da/partrender.2da": "ada67022e6ec7d0e993284086ab63bef9aab18f334442f79720f11cd22f349d9"
   }
 }
