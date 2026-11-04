@@ -202,12 +202,14 @@
     "pfo0_chest203",
     "pfo0_footl203",
     "pfo0_footr203",
+    "pfo0_forel006",
     "pfo0_forel143",
     "pfo0_forel144",
     "pfo0_forel168",
     "pfo0_forel169",
     "pfo0_forel200",
     "pfo0_forel203",
+    "pfo0_forer006",
     "pfo0_forer143",
     "pfo0_forer144",
     "pfo0_forer168",
@@ -224,6 +226,7 @@
     "pfo0_legr031",
     "pfo0_legr202",
     "pfo0_legr203",
+    "pfo0_neck004",
     "pfo0_neck015",
     "pfo0_neck016",
     "pfo0_neck017",
@@ -233,6 +236,7 @@
     "pfo0_neck258",
     "pfo0_neck259",
     "pfo0_neck260",
+    "pfo0_pelvis014",
     "pfo0_pelvis040",
     "pfo0_pelvis042",
     "pfo0_pelvis202",
@@ -2965,6 +2969,26 @@
       "donor": "pmh0_chest173",
       "path": "sw_pt_chest/pme0_chest173.mdl",
       "sha256": "846f7b55869b8710a5511c9844ca8cc24c81af93b38f31edcc904ad373626c35"
+    },
+    "pfo0_forel006": {
+      "donor": "pfh0_forel006",
+      "path": "sw_pt_lfore/pfo0_forel006.mdl",
+      "sha256": "bb23ee8bca58309f77c9f61f31067a292b49233abf070bb56f3fc78187b9ea05"
+    },
+    "pfo0_forer006": {
+      "donor": "pfh0_forer006",
+      "path": "sw_pt_rfore/pfo0_forer006.mdl",
+      "sha256": "43b3b5a5101cb91edb548c2f995833de0631123b8b28ef4f179026eff71195b3"
+    },
+    "pfo0_neck004": {
+      "donor": "pfh0_neck004",
+      "path": "sw_pt_neck/pfo0_neck004.mdl",
+      "sha256": "2287cab012a570b1560b8855df64d4b80afe05a95a7105092170b3465106b5b3"
+    },
+    "pfo0_pelvis014": {
+      "donor": "pfh0_pelvis014",
+      "path": "sw_pt_pelvis/pfo0_pelvis014.mdl",
+      "sha256": "9c182f15269b394552d4cad9172d1e6fc4e9e519c363bf4851e4a79808ee51a6"
     }
   },
   "implementationSha256": "c651e6ee18bf4e370fa8747e999d92bfdfbdd8a1a342f46c8b1dce3f5497abee"
