@@ -1,0 +1,162 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <defs>
+    <radialGradient id="halo" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ff9ad0" stop-opacity="0.75"/>
+      <stop offset="55%" stop-color="#ff4fa0" stop-opacity="0.28"/>
+      <stop offset="100%" stop-color="#ff2f90" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="haloTop" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#cfe6ff" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#7fb4ff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="plate" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f4f8ff"/>
+      <stop offset="38%" stop-color="#b3c2d9"/>
+      <stop offset="78%" stop-color="#67779a"/>
+      <stop offset="100%" stop-color="#36425f"/>
+    </linearGradient>
+    <linearGradient id="plateDark" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#cfdaec"/>
+      <stop offset="50%" stop-color="#7e8eaf"/>
+      <stop offset="100%" stop-color="#2e3a56"/>
+    </linearGradient>
+    <linearGradient id="goldTrim" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#fff0a8"/>
+      <stop offset="45%" stop-color="#f1b626"/>
+      <stop offset="100%" stop-color="#8d5509"/>
+    </linearGradient>
+    <linearGradient id="chisel" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#8795ad"/>
+      <stop offset="30%" stop-color="#ffffff"/>
+      <stop offset="60%" stop-color="#bac8dc"/>
+      <stop offset="100%" stop-color="#3a455c"/>
+    </linearGradient>
+    <linearGradient id="gemTop" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fff0f8"/>
+      <stop offset="50%" stop-color="#ff8cc6"/>
+      <stop offset="100%" stop-color="#e02d86"/>
+    </linearGradient>
+    <linearGradient id="gemL" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff9fd1"/>
+      <stop offset="100%" stop-color="#d61e7c"/>
+    </linearGradient>
+    <linearGradient id="gemR" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e83a93"/>
+      <stop offset="100%" stop-color="#8f0b4c"/>
+    </linearGradient>
+    <linearGradient id="gemP" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#c91a73"/>
+      <stop offset="100%" stop-color="#5e0733"/>
+    </linearGradient>
+    <linearGradient id="rockTop" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#b9ab98"/>
+      <stop offset="100%" stop-color="#6b5e50"/>
+    </linearGradient>
+    <linearGradient id="rockBody" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#6c6155"/>
+      <stop offset="100%" stop-color="#2b2622"/>
+    </linearGradient>
+    <filter id="soft" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="3"/>
+    </filter>
+    <filter id="shade" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2"/>
+    </filter>
+  </defs>
+
+  <!-- glows -->
+  <ellipse cx="128" cy="76" rx="118" ry="86" fill="url(#haloTop)"/>
+  <ellipse cx="128" cy="204" rx="132" ry="90" fill="url(#halo)"/>
+
+  <!-- rock bed -->
+  <path d="M -6 220 L 18 206 L 44 212 L 60 196 L 84 204 L 172 204 L 196 196 L 212 212 L 238 206 L 262 220 L 262 264 L -6 264 Z" fill="url(#rockBody)"/>
+  <path d="M -6 220 L 18 206 L 44 212 L 60 196 L 84 204 L 172 204 L 196 196 L 212 212 L 238 206 L 262 220 L 262 232 L 220 230 L 170 236 L 90 236 L 40 230 L -6 234 Z" fill="url(#rockTop)"/>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M -6 220 L 18 206 L 44 212 L 60 196 L 84 204" stroke="#f3e8d6" stroke-width="4" stroke-opacity="0.9"/>
+    <path d="M 172 204 L 196 196 L 212 212 L 238 206 L 262 220" stroke="#f3e8d6" stroke-width="4" stroke-opacity="0.9"/>
+    <path d="M 30 216 L 38 236 L 26 254" stroke="#14100c" stroke-width="4" stroke-opacity="0.75"/>
+    <path d="M 230 214 L 222 236 L 234 254" stroke="#14100c" stroke-width="4" stroke-opacity="0.75"/>
+    <path d="M 60 242 L 76 252" stroke="#14100c" stroke-width="3.5" stroke-opacity="0.6"/>
+    <path d="M 198 244 L 182 254" stroke="#14100c" stroke-width="3.5" stroke-opacity="0.6"/>
+  </g>
+
+  <!-- the gem set in the rock -->
+  <ellipse cx="128" cy="206" rx="86" ry="44" fill="#ff5ca8" opacity="0.55" filter="url(#soft)"/>
+  <g stroke-linejoin="round" stroke="#3b0620" stroke-width="3.5">
+    <path d="M 90 168 L 166 168 L 194 196 L 62 196 Z" fill="url(#gemTop)"/>
+    <path d="M 62 196 L 194 196 L 128 252 Z" fill="url(#gemP)"/>
+  </g>
+  <!-- crown facets -->
+  <g stroke-linejoin="round" stroke="#3b0620" stroke-width="2.5" stroke-opacity="0.9">
+    <path d="M 90 168 L 62 196 L 98 196 Z" fill="url(#gemL)"/>
+    <path d="M 90 168 L 128 196 L 98 196 Z" fill="#ffc2e2"/>
+    <path d="M 90 168 L 166 168 L 128 196 Z" fill="#fff1f8"/>
+    <path d="M 166 168 L 128 196 L 158 196 Z" fill="#ff7fbd"/>
+    <path d="M 166 168 L 194 196 L 158 196 Z" fill="url(#gemR)"/>
+  </g>
+  <!-- pavilion facets -->
+  <g stroke-linejoin="round" stroke="#3b0620" stroke-width="2.5" stroke-opacity="0.8">
+    <path d="M 62 196 L 98 196 L 128 252 Z" fill="#e0287f"/>
+    <path d="M 98 196 L 128 196 L 128 252 Z" fill="#b8176a"/>
+    <path d="M 128 196 L 158 196 L 128 252 Z" fill="#8f0f50"/>
+  </g>
+  <path d="M 72 190 L 98 172" fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-opacity="0.85"/>
+
+  <!-- rock lips closing over the gem -->
+  <path d="M 52 204 L 90 210 L 108 232 L 126 256 L 92 262 L 46 252 L 38 224 Z" fill="url(#rockTop)" stroke="#2b221a" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M 204 204 L 166 210 L 148 232 L 130 256 L 164 262 L 210 252 L 218 224 Z" fill="url(#rockTop)" stroke="#2b221a" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M 52 204 L 90 210 L 104 226" fill="none" stroke="#f6ecda" stroke-width="3.5" stroke-linecap="round" stroke-opacity="0.85"/>
+  <path d="M 204 204 L 166 210 L 152 226" fill="none" stroke="#f6ecda" stroke-width="3.5" stroke-linecap="round" stroke-opacity="0.85"/>
+
+  <!-- chips flying off the cut -->
+  <g stroke="#2b221a" stroke-width="2.5" stroke-linejoin="round">
+    <path d="M 74 154 L 86 146 L 92 158 L 80 164 Z" fill="#e9dfcd"/>
+    <path d="M 168 150 L 182 142 L 188 154 L 174 160 Z" fill="#e9dfcd"/>
+    <path d="M 196 130 L 206 124 L 210 134 L 200 138 Z" fill="#cdbfa8"/>
+  </g>
+
+  <!-- the armored glove and chisel, tilted toward the cut -->
+  <g transform="translate(2,-8) rotate(-12 128 178)">
+    <!-- the fine chisel -->
+    <path d="M 112 96 L 144 96 L 140 146 L 128 178 L 116 146 Z" fill="url(#chisel)" stroke="#0e131c" stroke-width="4.5" stroke-linejoin="round"/>
+    <path d="M 120 110 L 121 150" fill="none" stroke="#ffffff" stroke-width="4.5" stroke-linecap="round" stroke-opacity="0.95"/>
+    <path d="M 115 130 L 141 130" fill="none" stroke="#2a3348" stroke-width="4" stroke-opacity="0.85"/>
+    <path d="M 117 143 L 139 143" fill="none" stroke="#2a3348" stroke-width="3.5" stroke-opacity="0.8"/>
+
+    <g transform="translate(0,-14)">
+      <!-- bracer at the wrist -->
+      <path d="M 84 -30 L 172 -30 L 164 38 L 92 38 Z" fill="url(#plateDark)" stroke="#0e131c" stroke-width="4" stroke-linejoin="round"/>
+      <path d="M 88 4 L 168 4 L 165 18 L 91 18 Z" fill="url(#goldTrim)" stroke="#4a2c04" stroke-width="3" stroke-linejoin="round"/>
+      <path d="M 96 -20 L 92 -2" fill="none" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round" stroke-opacity="0.65"/>
+      <!-- heel of the hand -->
+      <path d="M 78 36 L 178 36 Q 190 40 192 54 L 64 54 Q 66 40 78 36 Z" fill="url(#plateDark)" stroke="#0e131c" stroke-width="4" stroke-linejoin="round"/>
+      <!-- four armored finger plates wrapped around the grip -->
+      <g stroke="#0a0e16" stroke-width="4.5" stroke-linejoin="round">
+        <rect x="62" y="50" width="134" height="24" rx="12" fill="url(#plate)"/>
+        <rect x="58" y="72" width="140" height="24" rx="12" fill="url(#plate)"/>
+        <rect x="58" y="94" width="140" height="24" rx="12" fill="url(#plate)"/>
+        <rect x="68" y="116" width="120" height="22" rx="11" fill="url(#plate)"/>
+      </g>
+      <g fill="none" stroke="#ffffff" stroke-width="4.5" stroke-linecap="round" stroke-opacity="0.9">
+        <path d="M 76 58 L 150 58"/><path d="M 72 80 L 150 80"/><path d="M 72 102 L 150 102"/><path d="M 82 123 L 140 123"/>
+      </g>
+      <g fill="none" stroke="#18213a" stroke-width="4" stroke-linecap="round" stroke-opacity="0.5">
+        <path d="M 150 68 L 186 68"/><path d="M 150 90 L 190 90"/><path d="M 150 112 L 190 112"/><path d="M 144 132 L 178 132"/>
+      </g>
+      <!-- gold side studs -->
+      <g fill="url(#goldTrim)" stroke="#4a2c04" stroke-width="2.5">
+        <circle cx="182" cy="62" r="5"/><circle cx="184" cy="84" r="5"/><circle cx="184" cy="106" r="5"/>
+      </g>
+      <!-- thumb guard along the side -->
+      <path d="M 40 70 Q 40 52 58 52 Q 76 52 78 70 L 82 112 Q 84 128 66 130 Q 48 130 46 112 Z" fill="url(#plate)" stroke="#0a0e16" stroke-width="4.5" stroke-linejoin="round"/>
+      <path d="M 52 66 Q 56 58 64 58" fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-opacity="0.9"/>
+      <path d="M 46 110 Q 48 124 66 124 Q 78 124 80 112" fill="url(#goldTrim)" stroke="#4a2c04" stroke-width="3" stroke-linejoin="round"/>
+    </g>
+  </g>
+
+  <!-- glints -->
+  <g fill="#ffffff" stroke="#ff8cc6" stroke-width="1.5" stroke-linejoin="round">
+    <path d="M 172 168 L 177 150 L 182 168 L 200 173 L 182 178 L 177 196 L 172 178 L 154 173 Z"/>
+    <path d="M 78 188 L 81 178 L 84 188 L 94 191 L 84 194 L 81 204 L 78 194 L 68 191 Z"/>
+  </g>
+</svg>
