@@ -588,6 +588,148 @@
         ]
       ],
       "sha256": "ad588955d456ec1ad5c5bc8be77637a564c0628e96a15b5c4bac0bd6f2c3d119"
+    },
+    "pmh0_shol1018": {
+      "source": "pmh0_shol260",
+      "path": "sw_pt_lshoul/pmh0_shol1018.mdl",
+      "mapping": [
+        [
+          [
+            0,
+            2,
+            2
+          ],
+          [
+            1,
+            7,
+            10
+          ]
+        ],
+        [
+          [
+            0,
+            38,
+            56
+          ],
+          [
+            1,
+            41,
+            65
+          ],
+          [
+            2,
+            2,
+            2
+          ],
+          [
+            3,
+            7,
+            10
+          ],
+          [
+            4,
+            13,
+            21
+          ],
+          [
+            5,
+            48,
+            79
+          ],
+          [
+            6,
+            36,
+            54
+          ],
+          [
+            7,
+            39,
+            57
+          ],
+          [
+            8,
+            47,
+            78
+          ],
+          [
+            9,
+            42,
+            66
+          ]
+        ]
+      ],
+      "sha256": "c40b307b2f976dcdc66f1648dfd01c67bcb100b1782ae7ff1a4c7bcfe81fe3f2"
+    },
+    "pmh0_shor1019": {
+      "source": "pmh0_shor260",
+      "path": "sw_pt_rshoul/pmh0_shor1019.mdl",
+      "mapping": [
+        [
+          [
+            0,
+            41,
+            65
+          ],
+          [
+            1,
+            38,
+            56
+          ],
+          [
+            2,
+            2,
+            2
+          ],
+          [
+            3,
+            13,
+            21
+          ],
+          [
+            4,
+            7,
+            10
+          ],
+          [
+            5,
+            48,
+            79
+          ],
+          [
+            6,
+            36,
+            54
+          ],
+          [
+            7,
+            42,
+            66
+          ],
+          [
+            8,
+            47,
+            78
+          ],
+          [
+            9,
+            39,
+            57
+          ]
+        ],
+        [
+          [
+            0,
+            2,
+            2
+          ],
+          [
+            1,
+            7,
+            10
+          ]
+        ]
+      ],
+      "sha256": "ad232f562dd1a509593385885b683f44dc0c97b07de3c9a3f36a48cd08d574b8"
     }
   },
   "inputs": {
@@ -600,7 +742,7 @@
     "sw_pt_lshoul/pmh0_shoL185.mdl": "5d018d25aba32755838f2c628d57f72d754a57dfd4db68ff405c7d50c5a17709",
     "sw_pt_lshoul/pmh0_shoL256.mdl": "f02200bcf0c2573b673b9e30c5b660d76d78c04578e8a029308a4bf2894b32da",
     "sw_pt_lshoul/pmh0_shoL258.mdl": "ece54e5f2c64a427b456ee177b443fcbc7b1db54f7b9f760da7db4b2d5940314",
-    "sw_pt_lshoul/pmh0_shoL260.mdl": "a63670393e9e12569c3cf42baa0294499e34460b03655bb331928e503210bc12",
+    "sw_pt_lshoul/pmh0_shoL260.mdl": "55417dfb024d8fe8551532fc0b30d60508908ab004b078325851269a1a3074a8",
     "sw_pt_lshoul/pmh0_shol140.mdl": "45bd431e314bf79b4029d603f8f2b5c44b5ecf4388f1249c83244568adf97bf5",
     "sw_pt_lshoul/pmh0_shol141.mdl": "e8e95736ef501ab579eeaeca2c404310ae0e545a37ee1875718de0db79f625e0",
     "sw_pt_root/pmh0.mdl": "7d2090678656762393de04db94b104e0c2ad01965d3ad5e811323f3cf0cbca24",
@@ -786,7 +928,7 @@
     "sw_pt_rshoul/pmh0_shoR185.mdl": "47623fd881ca714681062e6d179d0339d5f96ba74ffb5a0811e9e9540523d567",
     "sw_pt_rshoul/pmh0_shoR256.mdl": "9c74358eba98f10876b17c80a7d8e3d735d91249282d0a8707c29249bfdfb22a",
     "sw_pt_rshoul/pmh0_shoR258.mdl": "7d03a9598217a2aeaa9e8e83a25415ea5572cbaa2a1e28ea5353f8a305216487",
-    "sw_pt_rshoul/pmh0_shoR260.mdl": "b1b1fba091077585e942128c73bfe98b79fbc782f8f8b84853ed42b719116b36",
+    "sw_pt_rshoul/pmh0_shoR260.mdl": "e87f2139a47d7d09d4b740bd5da4cf2f9305d9c7792a55891a66b5c59e3ca9b1",
     "sw_pt_rshoul/pmh0_shor140.mdl": "dd01cc9a8ad879bb53512377cd1398e2746dcdabb2af9b7bdadb529acd7ade21",
     "sw_pt_rshoul/pmh0_shor141.mdl": "303688ff7de80f0bd841eab3a9d832980972d75da8370acd8e3cdfe4accfd2db"
   },
@@ -821,5 +963,5 @@
     "tools/GenerateTintMapAssets.py": "9b31c361873e8f7b3107f0fdee37382899b624bffe4899ea55e903bf77432ee2",
     "tools/ModelLodAssets.py": "0a9b495c8dc1b1038424dd8b7a28ef2f46a2e44a74e42a46866a0e7e4cb2d014"
   },
-  "table_sha256": "3bd53d99232842fb0cbf5cff23ce3e127a090e86acedff7ae88cdd96ef2052bc"
+  "table_sha256": "f66cce8eb9707acf7e0ea02902dda2f2ca3c46c343a1c5f813a16eb1ee6d9da8"
 }
