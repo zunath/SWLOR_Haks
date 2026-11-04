@@ -12239,15 +12239,15 @@
     },
     {
       "id": 3059,
-      "text": "Restores 6 HP plus 1.5% of the target's maximum HP plus WIL scaling to a single target. Healing gains +25% when targeting someone other than yourself."
+      "text": "Restores 6 HP plus 1.5% of the target's maximum HP to a single target. WIL multiplies healing: x0.625 at 10 WIL or less, rising evenly to x1.25 at 26 WIL. Healing gains +25% when targeting someone other than yourself."
     },
     {
       "id": 3060,
-      "text": "Restores 26 HP plus 2.5% of the target's maximum HP plus WIL scaling to a single target. Healing gains +25% when targeting someone other than yourself."
+      "text": "Restores 26 HP plus 2.5% of the target's maximum HP to a single target. WIL multiplies healing: x0.625 at 10 WIL or less, rising evenly to x1.25 at 26 WIL. Healing gains +25% when targeting someone other than yourself."
     },
     {
       "id": 3061,
-      "text": "Restores 63 HP plus 3.5% of the target's maximum HP plus WIL scaling to a single target. Healing gains +25% when targeting someone other than yourself."
+      "text": "Restores 63 HP plus 3.5% of the target's maximum HP to a single target. WIL multiplies healing: x0.625 at 10 WIL or less, rising evenly to x1.25 at 26 WIL. Healing gains +25% when targeting someone other than yourself."
     },
     {
       "id": 3062,
@@ -12607,7 +12607,7 @@
     },
     {
       "id": 3151,
-      "text": "Restores 81 HP plus 4.5% of the target's maximum HP plus WIL scaling instantly. Can target allies up to 15m away. Healing is doubled if the target is below 35% HP. Consumes extra medical supplies."
+      "text": "Restores 81 HP plus 4.5% of the target's maximum HP instantly. WIL multiplies healing: x0.625 at 10 WIL or less, rising evenly to x1.25 at 26 WIL. Can target allies up to 15m away. Healing is doubled if the target is below 35% HP. Consumes extra medical supplies."
     },
     {
       "id": 3152,
@@ -12915,7 +12915,7 @@
     },
     {
       "id": 3228,
-      "text": "Grants an ally or yourself 6 temporary HP plus 1.5% of the target's maximum HP plus WIL scaling for 30 seconds."
+      "text": "Grants an ally or yourself 6 temporary HP plus 1.5% of the target's maximum HP for 30 seconds. WIL multiplies temporary HP: x0.625 at 10 WIL or less, rising evenly to x1.25 at 26 WIL."
     },
     {
       "id": 3229,
@@ -12923,7 +12923,7 @@
     },
     {
       "id": 3230,
-      "text": "Grants an ally or yourself 22 temporary HP plus 2.25% of the target's maximum HP plus WIL scaling for 30 seconds."
+      "text": "Grants an ally or yourself 22 temporary HP plus 2.25% of the target's maximum HP for 30 seconds. WIL multiplies temporary HP: x0.625 at 10 WIL or less, rising evenly to x1.25 at 26 WIL."
     },
     {
       "id": 3231,
@@ -12931,7 +12931,7 @@
     },
     {
       "id": 3232,
-      "text": "Grants an ally or yourself 44 temporary HP plus 3% of the target's maximum HP plus WIL scaling for 30 seconds."
+      "text": "Grants an ally or yourself 44 temporary HP plus 3% of the target's maximum HP for 30 seconds. WIL multiplies temporary HP: x0.625 at 10 WIL or less, rising evenly to x1.25 at 26 WIL."
     },
     {
       "id": 3233,
@@ -12939,7 +12939,7 @@
     },
     {
       "id": 3234,
-      "text": "Grants an ally or yourself 68 temporary HP plus 3.75% of the target's maximum HP plus WIL scaling for 30 seconds."
+      "text": "Grants an ally or yourself 68 temporary HP plus 3.75% of the target's maximum HP for 30 seconds. WIL multiplies temporary HP: x0.625 at 10 WIL or less, rising evenly to x1.25 at 26 WIL."
     },
     {
       "id": 3235,
@@ -13175,19 +13175,19 @@
     },
     {
       "id": 3293,
-      "text": "Restores 11 HP plus 2% of the target's maximum HP plus WIL scaling to a single target. Consumes medical supplies."
+      "text": "Restores 11 HP plus 2% of the target's maximum HP to a single target. WIL multiplies healing: x0.625 at 10 WIL or less, rising evenly to x1.25 at 26 WIL. Consumes medical supplies."
     },
     {
       "id": 3294,
-      "text": "Restores 42 HP plus 3.5% of the target's maximum HP plus WIL scaling to a single target. Consumes medical supplies."
+      "text": "Restores 42 HP plus 3.5% of the target's maximum HP to a single target. WIL multiplies healing: x0.625 at 10 WIL or less, rising evenly to x1.25 at 26 WIL. Consumes medical supplies."
     },
     {
       "id": 3295,
-      "text": "Restores 80 HP plus 5% of the target's maximum HP plus WIL scaling to a single target. Consumes medical supplies."
+      "text": "Restores 80 HP plus 5% of the target's maximum HP to a single target. WIL multiplies healing: x0.625 at 10 WIL or less, rising evenly to x1.25 at 26 WIL. Consumes medical supplies."
     },
     {
       "id": 3296,
-      "text": "Restores 108 HP plus 6% of the target's maximum HP plus WIL scaling to a single target. Consumes medical supplies."
+      "text": "Restores 108 HP plus 6% of the target's maximum HP to a single target. WIL multiplies healing: x0.625 at 10 WIL or less, rising evenly to x1.25 at 26 WIL. Consumes medical supplies."
     },
     {
       "id": 3297,
@@ -13523,7 +13523,7 @@
     },
     {
       "id": 3380,
-      "text": "Revives an unconscious target with 20% HP plus WIL scaling. Consumes medical supplies. Taking damage interrupts the cast. Fails while a hostile player is within 20m, or, after a player kill, until your party near the target has gone 15 seconds without taking damage. A player can be revived mid-fight at most once every 5 minutes."
+      "text": "Revives an unconscious target with 20% HP. WIL multiplies healing: x0.625 at 10 WIL or less, rising evenly to x1.25 at 26 WIL. Consumes medical supplies. Taking damage interrupts the cast. Fails while a hostile player is within 20m, or, after a player kill, until your party near the target has gone 15 seconds without taking damage. A player can be revived mid-fight at most once every 5 minutes."
     },
     {
       "id": 3381,
@@ -15287,7 +15287,7 @@
     },
     {
       "id": 3821,
-      "text": "For 45 seconds, damage that would drop an ally or yourself below 1 HP is prevented once and the target gains 68 temporary HP plus 3.75% of maximum HP plus WIL scaling."
+      "text": "For 45 seconds, damage that would drop an ally or yourself below 1 HP is prevented once and the target gains 68 temporary HP plus 3.75% of maximum HP. WIL multiplies temporary HP: x0.625 at 10 WIL or less, rising evenly to x1.25 at 26 WIL."
     },
     {
       "id": 3822,
@@ -15707,7 +15707,7 @@
     },
     {
       "id": 3926,
-      "text": "Restores 25% of maximum STM, removes one Poison or Toxin effect, then for 45 seconds restores 1 STM every 3 seconds, grants 54 temporary HP plus 3% of maximum HP plus WIL scaling, reduces damage taken by 12%, and grants 50% Poison Resistance."
+      "text": "Restores 25% of maximum STM, removes one Poison or Toxin effect, then for 45 seconds restores 1 STM every 3 seconds, grants 54 temporary HP plus 3% of maximum HP, reduces damage taken by 12%, and grants 50% Poison Resistance. WIL multiplies temporary HP: x0.625 at 10 WIL or less, rising evenly to x1.25 at 26 WIL."
     },
     {
       "id": 3927,
@@ -15815,7 +15815,7 @@
     },
     {
       "id": 3953,
-      "text": "Control powers that restore HP can remove one standard negative effect from the target and restore 27 HP plus 1.5% of maximum HP plus WIL scaling. This can trigger once every 24 seconds per target."
+      "text": "Control powers that restore HP can remove one standard negative effect from the target and restore 27 HP plus 1.5% of maximum HP. WIL multiplies healing: x0.625 at 10 WIL or less, rising evenly to x1.25 at 26 WIL. This can trigger once every 24 seconds per target."
     },
     {
       "id": 3954,
@@ -16039,7 +16039,7 @@
     },
     {
       "id": 4009,
-      "text": "Releases a 5m wave of focused light, dealing 22 force DMG plus WIL scaling to enemies. Allies within 5m heal for 36 HP plus 2% of maximum HP plus WIL scaling and lose one minor negative effect (Bleed, Poison, or Hobble)."
+      "text": "Releases a 5m wave of focused light, dealing 22 force DMG plus WIL scaling to enemies. Allies within 5m heal for 36 HP plus 2% of maximum HP and lose one minor negative effect (Bleed, Poison, or Hobble). WIL multiplies healing: x0.625 at 10 WIL or less, rising evenly to x1.25 at 26 WIL."
     },
     {
       "id": 4010,
@@ -16403,7 +16403,7 @@
     },
     {
       "id": 4100,
-      "text": "Control powers that restore HP can remove one standard negative effect from the target and restore 27 HP plus 1.5% of maximum HP plus WIL scaling. This can trigger once every 24 seconds per target."
+      "text": "Control powers that restore HP can remove one standard negative effect from the target and restore 27 HP plus 1.5% of maximum HP. WIL multiplies healing: x0.625 at 10 WIL or less, rising evenly to x1.25 at 26 WIL. This can trigger once every 24 seconds per target."
     },
     {
       "id": 4101,
@@ -20867,7 +20867,7 @@
     },
     {
       "id": 5216,
-      "text": "Trauma Medic healing and treatment abilities also stop one Bleed or Burn effect. If an effect is removed this way, the target restores 5 HP plus 0.25% of maximum HP plus WIL scaling every 3 seconds for 30 seconds."
+      "text": "Trauma Medic healing and treatment abilities also stop one Bleed or Burn effect. If an effect is removed this way, the target restores 5 HP plus 0.25% of maximum HP every 3 seconds for 30 seconds. WIL multiplies healing: x0.625 at 10 WIL or less, rising evenly to x1.25 at 26 WIL."
     },
     {
       "id": 5217,
@@ -20887,7 +20887,7 @@
     },
     {
       "id": 5221,
-      "text": "When you restore HP to an ally below 50% HP with a Control power, up to two allies within 5m recover 27 HP plus 1.5% of maximum HP plus WIL scaling and gain +10 Trauma Resistance rating for 30 seconds. This can trigger once every 20 seconds."
+      "text": "When you restore HP to an ally below 50% HP with a Control power, up to two allies within 5m recover 27 HP plus 1.5% of maximum HP and gain +10 Trauma Resistance rating for 30 seconds. WIL multiplies healing: x0.625 at 10 WIL or less, rising evenly to x1.25 at 26 WIL. This can trigger once every 20 seconds."
     },
     {
       "id": 5222,
@@ -21203,7 +21203,7 @@
     },
     {
       "id": 5300,
-      "text": "Deploys a 30-second healing mist cloud at a target location up to 15m away. Allies within 8m heal for 2 HP plus 0.25% of maximum HP plus WIL scaling every 3 seconds. Consumes medical supplies."
+      "text": "Deploys a 30-second healing mist cloud at a target location up to 15m away. Allies within 8m heal for 2 HP plus 0.25% of maximum HP every 3 seconds. WIL multiplies healing: x0.625 at 10 WIL or less, rising evenly to x1.25 at 26 WIL. Consumes medical supplies."
     },
     {
       "id": 5301,
@@ -21279,7 +21279,7 @@
     },
     {
       "id": 5319,
-      "text": "Grants a single target regeneration, healing 7 HP plus 0.5% of maximum HP plus WIL scaling every 3 seconds for 30 seconds. Consumes medical supplies."
+      "text": "Grants a single target regeneration, healing 7 HP plus 0.5% of maximum HP every 3 seconds for 30 seconds. WIL multiplies healing: x0.625 at 10 WIL or less, rising evenly to x1.25 at 26 WIL. Consumes medical supplies."
     },
     {
       "id": 5320,
@@ -21287,7 +21287,7 @@
     },
     {
       "id": 5321,
-      "text": "Deploys a 30-second healing mist cloud at a target location up to 15m away. Allies within 8m heal for 9 HP plus 0.5% of maximum HP plus WIL scaling every 3 seconds. Consumes medical supplies."
+      "text": "Deploys a 30-second healing mist cloud at a target location up to 15m away. Allies within 8m heal for 9 HP plus 0.5% of maximum HP every 3 seconds. WIL multiplies healing: x0.625 at 10 WIL or less, rising evenly to x1.25 at 26 WIL. Consumes medical supplies."
     },
     {
       "id": 5322,
@@ -21303,7 +21303,7 @@
     },
     {
       "id": 5325,
-      "text": "Grants a single target regeneration, healing 14 HP plus 0.75% of maximum HP plus WIL scaling every 3 seconds for 30 seconds. Consumes medical supplies."
+      "text": "Grants a single target regeneration, healing 14 HP plus 0.75% of maximum HP every 3 seconds for 30 seconds. WIL multiplies healing: x0.625 at 10 WIL or less, rising evenly to x1.25 at 26 WIL. Consumes medical supplies."
     },
     {
       "id": 5326,
@@ -21327,7 +21327,7 @@
     },
     {
       "id": 5331,
-      "text": "Applies regeneration to a single ally, restoring 1 HP plus 0.25% of maximum HP plus WIL scaling every 3 seconds for 30 seconds."
+      "text": "Applies regeneration to a single ally, restoring 1 HP plus 0.25% of maximum HP every 3 seconds for 30 seconds. WIL multiplies healing: x0.625 at 10 WIL or less, rising evenly to x1.25 at 26 WIL."
     },
     {
       "id": 5332,
@@ -21347,7 +21347,7 @@
     },
     {
       "id": 5336,
-      "text": "Grants 24 temporary HP plus 2.5% of the target's maximum HP plus WIL scaling and 10% damage reduction for 30 seconds. Consumes a stim pack."
+      "text": "Grants 24 temporary HP plus 2.5% of the target's maximum HP and 10% damage reduction for 30 seconds. WIL multiplies temporary HP: x0.625 at 10 WIL or less, rising evenly to x1.25 at 26 WIL. Consumes a stim pack."
     },
     {
       "id": 5337,
@@ -21355,7 +21355,7 @@
     },
     {
       "id": 5338,
-      "text": "Applies regeneration to a single ally, restoring 6 HP plus 0.5% of maximum HP plus WIL scaling every 3 seconds for 30 seconds."
+      "text": "Applies regeneration to a single ally, restoring 6 HP plus 0.5% of maximum HP every 3 seconds for 30 seconds. WIL multiplies healing: x0.625 at 10 WIL or less, rising evenly to x1.25 at 26 WIL."
     },
     {
       "id": 5339,
@@ -21387,7 +21387,7 @@
     },
     {
       "id": 5346,
-      "text": "Grants 68 temporary HP plus 3.75% of the target's maximum HP plus WIL scaling and 15% damage reduction for 30 seconds. Consumes a stim pack."
+      "text": "Grants 68 temporary HP plus 3.75% of the target's maximum HP and 15% damage reduction for 30 seconds. WIL multiplies temporary HP: x0.625 at 10 WIL or less, rising evenly to x1.25 at 26 WIL. Consumes a stim pack."
     },
     {
       "id": 5347,
@@ -21395,7 +21395,7 @@
     },
     {
       "id": 5348,
-      "text": "Creates a 4m sanctuary for 30 seconds. Allies inside gain regeneration of 9 HP plus 0.5% of maximum HP plus WIL scaling every 3 seconds and take 5% less force damage."
+      "text": "Creates a 4m sanctuary for 30 seconds. Allies inside gain regeneration of 9 HP plus 0.5% of maximum HP every 3 seconds and take 5% less force damage. WIL multiplies healing: x0.625 at 10 WIL or less, rising evenly to x1.25 at 26 WIL."
     },
     {
       "id": 5349,
@@ -21411,11 +21411,11 @@
     },
     {
       "id": 5352,
-      "text": "Applies regeneration to a single ally, restoring 14 HP plus 0.75% of maximum HP plus WIL scaling every 3 seconds for 30 seconds."
+      "text": "Applies regeneration to a single ally, restoring 14 HP plus 0.75% of maximum HP every 3 seconds for 30 seconds. WIL multiplies healing: x0.625 at 10 WIL or less, rising evenly to x1.25 at 26 WIL."
     },
     {
       "id": 5353,
-      "text": "Restores 25% of maximum STM, removes one Poison or Toxin effect, then for 45 seconds restores 1 STM every 3 seconds, grants 54 temporary HP plus 3% of maximum HP plus WIL scaling, reduces damage taken by 12%, and grants 50% Poison Resistance."
+      "text": "Restores 25% of maximum STM, removes one Poison or Toxin effect, then for 45 seconds restores 1 STM every 3 seconds, grants 54 temporary HP plus 3% of maximum HP, reduces damage taken by 12%, and grants 50% Poison Resistance. WIL multiplies temporary HP: x0.625 at 10 WIL or less, rising evenly to x1.25 at 26 WIL."
     },
     {
       "id": 5354,
@@ -21631,7 +21631,7 @@
     },
     {
       "id": 5407,
-      "text": "When you restore HP to an ally below 50% HP with a Control power, up to two allies within 5m recover 27 HP plus 1.5% of maximum HP plus WIL scaling and gain +10 Trauma Resistance rating for 30 seconds. This can trigger once every 20 seconds."
+      "text": "When you restore HP to an ally below 50% HP with a Control power, up to two allies within 5m recover 27 HP plus 1.5% of maximum HP and gain +10 Trauma Resistance rating for 30 seconds. WIL multiplies healing: x0.625 at 10 WIL or less, rising evenly to x1.25 at 26 WIL. This can trigger once every 20 seconds."
     },
     {
       "id": 5408,
