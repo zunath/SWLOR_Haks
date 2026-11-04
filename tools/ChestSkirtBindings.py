@@ -1,10 +1,10 @@
-"""Hang long skirts and capes of body parts (STYLES) from the pelvis, the belt flaps and the cloak bones.
+"""Hang long skirts and capes of body parts (STYLES) from the pelvis and the belt flaps.
 
 Chest, belt and pelvis parts carry coat skirts, skirt belts or skirts in the part mesh,
-and neck 291 and shoulders 260 a full-length cape. Each half of a skirt or cape was
-weighted to its own thigh and shin, so walking and running pulled the halves apart: the
-back tore open and the legs showed through it. A body part only reaches the normal
-body's bones, so robe 236's coat helpers are out of reach.
+and necks 289 and 291 and shoulders 260 a long cape. Each half of a skirt or of the
+291/260 capes was weighted to its own thigh and shin, so walking and running pulled the
+halves apart: the back tore open and the legs showed through it. A body part only reaches
+the normal body's bones, so robe 236's coat helpers are out of reach.
 
 Skirts (October 2026, four test-server rounds):
 - Pelvis only (chest 154, 269): no tear, but a frozen shell the legs strode through.
@@ -35,20 +35,27 @@ the coat behind runners. Each leg-weighted vertex is weighted by its bind positi
 Below the hips the weights depend only on the bind position, so neighbouring vertices
 move together even where the source weights were uneven.
 
-Capes hang below the shoulders from the stock cloak bones (CLOAK_COLUMNS: three columns
-of four joints that the walk, run and idle clips swing like a stock cloak), split by
-the vertex's height between the bracketing joints and sideways between the bracketing
-columns; above the second row they ease back onto the source's torso binding.
+Capes hang like the long coats (cape_weights). Below the shoulder blades (CAPE_ARMS) the
+arms let go onto the torso, so a cape no longer swings out with an arm, and from the hips
+down the coat binding above takes over. Hung from the stock cloak bones (October 2026),
+the 291/260 capes stood off the back as one straight board in the idles, walk and run,
+and neck 289's tail, weighted to the left upper arm since its import, swung out with that
+arm like a board; testers reported both as stiff, unskinned meshes. cloak_weights stays
+for NeckCloakSkins.py (neck 32).
 
-Every vertex keeps at most four bones and its source weight sum; the geometry, inverse
-binds and bone tables stay unchanged, so the bind shape is identical. The custom emotes
+Belt 19's male mesh flares out behind (on the human body its back hem stood 47 cm behind
+the hips; the female mesh hangs straight). taper pulls its lower half towards the legs,
+moving only bind positions; normals, face planes and bounds follow.
+
+Every vertex keeps at most four bones and its source weight sum; apart from the taper the
+geometry, inverse binds and bone tables stay unchanged, so the bind shape is identical. The custom emotes
 (/paraderest among them) hold the flaps at rest (FillEmoteFlapTracks.py) but carry no
 cloak tracks, so a cape keeps the previous pose there, as stock cloaks do; the few stock
 clips without flap tracks (some turns and injured walks) hold the flaps' previous pose too.
 The dwarf and half-orc roots number their flap and cloak joints apart from a_ba, so the
 engine never moves them; on those bodies the legs carry the share the source gave a skirt
 on average below the hips and the pelvis the rest (flaps_animated, still_share), and capes
-are not listed.
+are not listed: there they keep their authored rigging (neck 289's arm-bound tail too).
 
 Belt 226, pelvis 198 and human pelvis 035 keep their original rigging; the
 manifest's "restored" list holds their original blobs, and --check keeps them so.
@@ -69,7 +76,10 @@ from pathlib import Path
 import struct
 import subprocess
 
+import numpy as np
+
 import CompileModels as mdl
+from GenerateRacialPartVariants import matrix, update_model_bounds
 from NeckSkinBindings import body_model
 from RobePoseAudit import rotate
 
@@ -99,14 +109,16 @@ FRONT_FALLOFF = 60.
 # never move (degrees).
 # Chest 269's tail is one flat panel, and belts 019, 112 and 114 are long skirts flared at the
 # back; at full strength they stood out almost level behind runners, so they take 60% (client-reviewed).
-# "cape" marks capes, which hang from the cloak bones instead.
+# "cape" marks capes, which also let go of the arms below the shoulder blades (cape_weights) and are
+# rebound wherever they hang below them, not only where the source weighted them to the legs.
+# "taper" names the genders whose mesh of the style flares out and is pulled towards the legs (taper).
 STYLES = {
     'chest154': {'back': 1.},
     'chest269': {'back': .6},
     'chest028': {'back': 1.},
     'chest059': {'back': 1.},
     'chest310': {'back': 1.},
-    'belt019': {'back': .6},
+    'belt019': {'back': .6, 'taper': 'm'},
     'belt110': {'back': 1.},
     'belt112': {'back': .6},
     'belt114': {'back': .6},
@@ -114,9 +126,11 @@ STYLES = {
     # legs stay behind it, and its back flap fades out before that; without flaps its front seam
     # needs more width than an open coat's.
     'pelvis035': {'back': 1., 'front': 1., 'closed': True, 'falloff': 100., 'front_falloff': 80., 'still_seam': 35.},
-    'neck291': {'cape': True},
-    'shol260': {'cape': True},
-    'shor260': {'cape': True},
+    # Capes trail behind runners like belts 019, 112 and 114; at full strength they would stand out level.
+    'neck289': {'cape': True, 'back': .6},
+    'neck291': {'cape': True, 'back': .6},
+    'shol260': {'cape': True, 'back': .6},
+    'shor260': {'cape': True, 'back': .6},
 }
 # Where the flaps swing: degrees round from a seam (the back, and the front of a closed skirt)
 # within which the lower skirt stays on the pelvis and the flaps, and beyond which a LEGS share
@@ -134,6 +148,19 @@ AXIS = .1
 STILL_SEAM = 25.
 # Metres below the knee joint over which a side panel passes from the thigh to the shin.
 KNEE_BAND = .15
+# Where a cape lets go of the arms: none of the arm weight at this share of the way from the waist
+# (torso_g) up to the shoulder joints and above, all of it at the waist.
+CAPE_ARMS = .55
+ARM_BONES = frozenset({'lbicep_g', 'rbicep_g'})
+# The taper: the share of a lower skirt vertex's reach beyond the floor that moves towards the body's
+# axis; none from TAPER_TOP (m) above the hip joints up, all from TAPER_KNEE (m) above the knee joints
+# down. The floor is the outside of the thigh at the hip joint plus TAPER_FLOOR (m), so the skirt never
+# closes on the legs. At half its reach belt 19's back hem hangs 33 cm behind the hips instead of 47
+# (male human).
+TAPER = .5
+TAPER_TOP = .075
+TAPER_KNEE = .04
+TAPER_FLOOR = .09
 # Where the flaps never move, the legs carry below the hips the share the source gave
 # them on average there (still_share) and the pelvis the rest.
 
@@ -394,32 +421,50 @@ def cloak_weights(position: tuple[float, float, float], pose: dict) -> dict[str 
     return result
 
 
-def cape_weights(current: dict[str, float], position: tuple[float, float, float], pose: dict) -> dict[str, float]:
-    """Hang a leg-weighted cape vertex from the cloak bones, easing back onto the source's torso binding at the top."""
-    total = sum(current.values())
-    torso = {bone: weight for bone, weight in current.items() if bone not in LEG_BONES}
-    torso['torso_g'] = torso.get('torso_g', 0.) + sum(weight for bone, weight in current.items() if bone in LEG_BONES)
-    cloak = cloak_weights(position, pose)
-    kept = cloak.pop(None, 0.)
-    result = {bone: weight * kept for bone, weight in torso.items()}
-    for bone, weight in cloak.items():
-        result[bone] = result.get(bone, 0.) + weight * total
-    result = {bone: weight for bone, weight in result.items() if weight > 1e-7}
+def cape_weights(current: dict[str, float], position: tuple[float, float, float], pose: dict, shape: dict) -> dict[str, float]:
+    """Hang a cape vertex like a long coat: below the shoulder blades its arm weight eases onto the torso
+    and any leg weight joins the torso (the coat binding replaces it), then the hips and flaps take over."""
+    waist = pose['torso_g'][0][2]
+    top = waist + CAPE_ARMS * (pose['lbicep_g'][0][2] - waist)
+    if position[2] >= top and not LEG_BONES & set(current):
+        return current
+    release = smoothstep((top - position[2]) / (top - waist))
+    upper = {}
+    for bone, weight in current.items():
+        if bone in LEG_BONES or bone in ARM_BONES:
+            share = 1. if bone in LEG_BONES else release
+            upper['torso_g'] = upper.get('torso_g', 0.) + weight * share
+            weight *= 1 - share
+        if weight:
+            upper[bone] = upper.get(bone, 0.) + weight
+    result = {bone: weight for bone, weight in swing_weights(upper, position, pose, shape).items() if weight > 1e-7}
     while len(result) > 4:
-        # Near the shoulders an arm weight can push a vertex past four bones; the smallest one goes to the torso.
-        extra = min((bone for bone in result if bone != 'torso_g' and bone not in CLOAK_BONES), key=result.get)
-        result['torso_g'] += result.pop(extra)
+        # Near the hips a fading arm or head weight can push a vertex past four bones; the smallest goes to the torso.
+        extra = min((bone for bone in result if bone in ARM_BONES or bone == 'head_g'), key=result.get, default=None)
+        if extra is None:
+            raise ValueError(f'Cape vertex at {position} needs {len(result)} bones: {sorted(result)}')
+        result['torso_g'] = result.get('torso_g', 0.) + result.pop(extra)
+    # Legacy exports round each weight to three decimals, so a source sum can reach 1.001. Gathered onto
+    # one bone that exceeds 1, which the neck and shoulder alias importers reject; the excess goes to a
+    # second bone instead (every bone agrees in the bind pose, so the bind shape keeps the source sum).
+    for bone, weight in list(result.items()):
+        if weight > 1.:
+            other = next((name for name in result if name != bone), 'torso_g' if bone == 'pelvis_g' else 'pelvis_g')
+            result[bone], result[other] = 1., result.get(other, 0.) + weight - 1.
     return result
 
 
 def skirt_weights(current: dict[str, float], position: tuple[float, float, float], pose: dict,
                   animated: bool = True, shape: dict | None = None) -> dict[str, float]:
-    """Rebind a leg-weighted vertex by its bind position: a cape from the cloak bones, a skirt from the pelvis, flaps and legs."""
-    if not LEG_BONES & set(current):
-        return current
+    """Rebind a leg-weighted vertex, or a cape vertex below the shoulder blades, by its bind position:
+    a skirt from the pelvis, flaps and legs; a cape the same way once it lets go of the arms."""
     shape = {'back': 1., 'front': 0., 'closed': False, 'falloff': FALLOFF, 'cape': False, 'still': 1., **(shape or {})}
     if shape['cape']:
-        result = cape_weights(current, position, pose) if animated else current
+        result = cape_weights(current, position, pose, shape) if animated else current
+        if result is current:
+            return current
+    elif not LEG_BONES & set(current):
+        return current
     elif animated:
         result = swing_weights(current, position, pose, shape)
     else:
@@ -433,7 +478,7 @@ def skirt_weights(current: dict[str, float], position: tuple[float, float, float
 def rebind(data: bytes, shape: dict | None = None) -> tuple[bytes, int]:
     bones, body = skeleton(data)
     pose = body.pose()
-    animated = cloak_animated(body) if (shape or {}).get('cape') else flaps_animated(body)
+    animated = flaps_animated(body)
     rest = iter(rest_positions(data))
     result = bytearray(data)
     changed = 0
@@ -489,6 +534,103 @@ def rest_positions(data: bytes, pose: dict | None = None) -> list[tuple[float, f
     return result
 
 
+def taper_offsets(data: bytes) -> list[tuple[float, float, float]]:
+    """Each vertex's bind-pose displacement towards the body's axis: none above the hips, TAPER of its
+    reach beyond the thigh floor from just above the knees down. Vertices within the floor stay put."""
+    _, body = skeleton(data)
+    pose = body.pose()
+    pelvis = pose['pelvis_g'][0]
+    top = pose['lthigh_g'][0][2] + TAPER_TOP
+    full = pose['lshin_g'][0][2] + TAPER_KNEE
+    floor = max(abs(pose[f'{side}thigh_g'][0][0] - pelvis[0]) for side in 'lr') + TAPER_FLOOR
+    result = []
+    for x, y, z in rest_positions(data):
+        dx, dy = x - pelvis[0], y - pelvis[1]
+        reach = math.hypot(dx, dy)
+        pull = TAPER * smoothstep((top - z) / (top - full)) * max(0., reach - floor)
+        result.append((-dx / reach * pull, -dy / reach * pull, 0.) if pull else (0., 0., 0.))
+    return result
+
+
+def taper(data: bytes) -> bytes:
+    """Move a flared skirt's bind positions by taper_offsets; weights, inverse binds and UVs stay.
+
+    Each moved vertex's stored position is solved through its own weighted bind transform. Its
+    normal, the planes of the faces it touches and the mesh and model bounds follow the stored
+    positions; coincident vertices (UV seams) share one recomputed normal.
+    """
+    bones, body = skeleton(data)
+    bind = body.pose()
+    offsets = np.array(taper_offsets(data))
+    meshes = [mesh for _, _, mesh in mdl.binary_nodes(data) if mesh and 'weights' in mesh]
+    result = bytearray(data)
+    start = 0
+    for skin, mesh in zip(skins(data, bones), meshes, strict=True):
+        count = skin['count']
+        moved = offsets[start:start + count]
+        start += count
+        changed = np.linalg.norm(moved, axis=1) > 0
+        if not changed.any():
+            continue
+        linear = []
+        for index, name in enumerate(bones):
+            stored = struct.unpack_from('<4f', data, skin['inverse_rotations'] + index * 16)
+            _, rotation, scale = bind[name]
+            linear.append(matrix(rotation) * scale @ matrix((*stored[1:], stored[0])))
+        weights = np.array([struct.unpack_from('<4f', data, skin['weights'] + vertex * (skin['stride'] or 16)) for vertex in range(count)])
+        slots = np.array([struct.unpack_from('<4h', data, skin['indices'] + vertex * (skin['stride'] or 8)) for vertex in range(count)])
+        blended = np.einsum('vb,vbij->vij', weights, np.array(linear)[np.array(skin['palette'])[slots]])
+        original = np.array(mesh['verts'])
+        raw = original.copy()
+        raw[changed] += np.linalg.solve(blended[changed], moved[changed][:, :, None])[:, :, 0]
+        for vertex in np.flatnonzero(changed):
+            struct.pack_into('<3f', result, skin['positions'] + vertex * (skin['stride'] or 12), *raw[vertex])
+        # Native metadata follows the stored floats, not the higher-precision solve.
+        raw = np.array([struct.unpack_from('<3f', result, skin['positions'] + vertex * (skin['stride'] or 12)) for vertex in range(count)])
+        faces = np.array([face[:3] for face in mesh['faces']])
+        touched = np.any(changed[faces], axis=1)
+        corners = raw[faces]
+        face_normals = np.cross(corners[:, 1] - corners[:, 0], corners[:, 2] - corners[:, 0])
+        normals = np.zeros_like(raw)
+        for corner in range(3):
+            np.add.at(normals, faces[:, corner], face_normals)
+        old_normals = np.array(mesh['normals'])
+        affected = np.zeros(count, dtype=bool)
+        affected[faces[touched].ravel()] = True
+        groups = {}
+        for vertex, (point, normal) in enumerate(zip(original, old_normals)):
+            groups.setdefault(tuple(np.round(np.r_[point, normal], 5)), []).append(vertex)
+        for group in groups.values():
+            normals[group] = normals[group].sum(axis=0)
+            if affected[group].any():
+                affected[group] = True
+        lengths = np.linalg.norm(normals, axis=1)
+        normals = np.divide(normals, lengths[:, None], out=old_normals.copy(), where=lengths[:, None] > 1e-10)
+        offset = mesh['_mesh_offset']
+        stride = struct.unpack_from('<I', data, offset + 440)[0]
+        normal_base = 12 + struct.unpack_from('<I', data, 4)[0] + struct.unpack_from('<I', data, offset + 468)[0]
+        for vertex in np.flatnonzero(affected):
+            struct.pack_into('<3f', result, normal_base + vertex * (stride or 12), *normals[vertex])
+        face_base = 12 + struct.unpack_from('<I', data, offset + 8)[0]
+        for index in np.flatnonzero(touched):
+            normal = face_normals[index]
+            length = np.linalg.norm(normal)
+            if length > 1e-12:
+                normal = normal / length
+            struct.pack_into('<4f', result, face_base + index * 32, *normal, -float(normal @ corners[index, 0]))
+        center = raw.mean(axis=0)
+        struct.pack_into('<3f', result, offset + 20, *raw.min(axis=0))
+        struct.pack_into('<3f', result, offset + 32, *raw.max(axis=0))
+        struct.pack_into('<f', result, offset + 44, float(np.linalg.norm(raw - center, axis=1).max()))
+        struct.pack_into('<3f', result, offset + 48, *center)
+    return update_model_bounds(bytes(result))
+
+
+def tapered(path: str) -> bool:
+    """Whether this body's mesh of the style is one STYLES tapers ("taper" lists genders)."""
+    return Path(path).name[1].lower() in style(path).get('taper', '')
+
+
 def source(blob: str) -> bytes:
     return subprocess.run(['git', '-C', str(ROOT), 'cat-file', 'blob', blob], check=True, capture_output=True).stdout
 
@@ -515,7 +657,11 @@ def build(entry: dict) -> bytes:
     rebound, changed = rebind(original, shape(entry['path'], original))
     if not changed:
         raise ValueError(f"{entry['path']}: the source has no leg-weighted skirt")
-    error = max(math.dist(a, b) for a, b in zip(rest_positions(original), rest_positions(rebound), strict=True))
+    expected = rest_positions(original)
+    if tapered(entry['path']):
+        expected = [tuple(a + b for a, b in zip(point, offset)) for point, offset in zip(expected, taper_offsets(rebound), strict=True)]
+        rebound = taper(rebound)
+    error = max(math.dist(a, b) for a, b in zip(expected, rest_positions(rebound), strict=True))
     if error > 2e-5:
         raise ValueError(f"{entry['path']}: bind shape moved by {error:.9g} m")
     return rebound
