@@ -48,9 +48,10 @@ MATERIAL_SOURCES = Path(__file__).with_name("TintMapMaterialSources.json")
 PALETTE_METAL_MATERIALS = Path(__file__).with_name("PaletteMetalMaterials.json")
 WHITE_TEXTURE = REPOSITORY_ROOT / "sw_item" / "plt_white.tga"
 PALETTE_TEXTURE = REPOSITORY_ROOT / "sw_item" / "plt_palette.tga"
-# Entire atlas, including its bottom-origin RGBA descriptor and unused rows.
-# Verified against installed pal_*01 resources by TestTintShaderMaterials.py.
-PALETTE_SHA256 = "ee41f2496caac23069152b662261f15a454ec951283bfb36ec576e4ed2512ab5"
+# Entire atlas, including its bottom-origin RGBA descriptor, unused rows and the
+# RGB swatch lookup rows (palette_swatch_lookup). Native palette rows are
+# verified against installed pal_*01 resources by TestTintShaderMaterials.py.
+PALETTE_SHA256 = "eb544a052e8f3136fc0dd1f26f548a822963df1cc668cc5bad559828c0d099b8"
 PALETTE_TXI = REPOSITORY_ROOT / "sw_item" / "plt_palette.txi"
 TINT_SHADER = REPOSITORY_ROOT / "sw_shader" / "fs_plt_tinter.shd"
 TINT_MAPPED_SHADER = REPOSITORY_ROOT / "sw_shader" / "fs_plt_tinter_nm.shd"
@@ -154,6 +155,20 @@ LAYER_NAMES = (
     "Tattoo2",
 )
 PALETTE_TEXTURE_HEIGHT = 2048
+# Rows 0-1231 hold the seven native 176-row palette blocks. Rows 1536-2047 map
+# exact RGB dyes to their nearest swatch (palette_swatch_lookup); the tint
+# shaders hard-code these rows. Each group lists its palette block and the
+# blocks that repeat it and share its lookup.
+PALETTE_NATIVE_ROWS = 1232
+PALETTE_LOOKUP_BASE_ROW = 1536
+PALETTE_LOOKUP_LEVELS = 32
+PALETTE_LOOKUP_ROWS_PER_GROUP = PALETTE_LOOKUP_LEVELS ** 3 // 256
+PALETTE_LOOKUP_GROUPS = (
+    (0, ()),            # skin
+    (176, ()),          # hair
+    (352, (528,)),      # metal 1, metal 2
+    (704, (880, 1056)),  # cloth, leather, tattoo
+)
 TINT_ROW_PARAMETERS = (
     ("rowSkin", 0),
     ("rowHair", 176),
@@ -3543,6 +3558,94 @@ def palette_atlas_errors(path: Path) -> list[str]:
     return []
 
 
+def palette_atlas_pixels(raw: bytes) -> np.ndarray:
+    """Atlas texels as stored, BGRA, indexed [atlas row (texture V), shade]."""
+    start = 18 + raw[0]
+    return np.frombuffer(raw, np.uint8, count=256 * PALETTE_TEXTURE_HEIGHT * 4, offset=start).reshape(
+        PALETTE_TEXTURE_HEIGHT, 256, 4)
+
+
+def palette_swatch_lookup(pixels: np.ndarray) -> np.ndarray:
+    """Nearest-swatch candidates for exact RGB dyes (atlas rows 1536-2047, BGRA).
+
+    The shaders shade a custom RGB color with the row of its nearest palette
+    swatch (the shade-128 midtone the editor shows), so a color equal to a
+    swatch renders exactly like that palette color. Each lookup group spends
+    128 rows on a 32-level RGB cube: cell r * 1024 + g * 32 + b is texel
+    (cell % 256) of row group base + cell // 256. A texel stores up to three
+    candidate color IDs in red, green and blue, in palette order: every swatch
+    whose midtone rounds into the cell (at most two), then the swatches nearest
+    the cell centre until three are listed. The shader keeps the candidate
+    nearest the exact color, the earlier one on a tie. An exact swatch always
+    finds itself; about 0.2% of other colors find a swatch a few levels farther
+    than the true nearest. Equal midtones keep only their lowest color ID, matching the
+    editor's closest-swatch lookup, so the duplicate black row 61 with full
+    reflection is never selected.
+    """
+    levels = PALETTE_LOOKUP_LEVELS
+    steps = np.arange(levels, dtype=np.float64)
+    centres = np.stack(np.meshgrid(steps, steps, steps, indexing="ij"), -1).reshape(-1, 3) * 255.0 / (levels - 1)
+    lookup = np.zeros((len(PALETTE_LOOKUP_GROUPS) * PALETTE_LOOKUP_ROWS_PER_GROUP, 256, 4), np.uint8)
+    for group, (palette_row, _) in enumerate(PALETTE_LOOKUP_GROUPS):
+        swatches = pixels[palette_row:palette_row + 176, 128, 2::-1].astype(np.float64)
+        unique: list[int] = []
+        seen: set[tuple[float, ...]] = set()
+        for color in range(176):
+            key = tuple(swatches[color])
+            if key not in seen:
+                seen.add(key)
+                unique.append(color)
+        candidates_by_cell: dict[int, set[int]] = {}
+        for color in unique:
+            r, g, b = np.floor(swatches[color] * (levels - 1) / 255.0 + 0.5).astype(int)
+            candidates_by_cell.setdefault(int(r * levels * levels + g * levels + b), set()).add(color)
+        unique_array = np.array(unique)
+        distances = ((centres[:, None, :] - swatches[unique_array][None, :, :]) ** 2).sum(-1)
+        nearest = unique_array[np.argsort(distances, axis=1, kind="stable")[:, :3]]
+        cells = np.zeros((levels ** 3, 4), np.uint8)
+        for cell in range(levels ** 3):
+            inside = candidates_by_cell.get(cell, set())
+            if len(inside) > 2:
+                raise ValueError(f"palette lookup cell {cell} of group {group} holds {len(inside)} swatches")
+            candidates = set(inside)
+            for color in nearest[cell]:
+                if len(candidates) == 3:
+                    break
+                candidates.add(int(color))
+            candidates = sorted(candidates)
+            cells[cell] = (candidates[2], candidates[1], candidates[0], 255)  # stored BGRA
+        first = group * PALETTE_LOOKUP_ROWS_PER_GROUP
+        lookup[first:first + PALETTE_LOOKUP_ROWS_PER_GROUP] = cells.reshape(PALETTE_LOOKUP_ROWS_PER_GROUP, 256, 4)
+    return lookup
+
+
+def palette_lookup_errors(path: Path) -> list[str]:
+    if not path.is_file():
+        return ["missing palette atlas"]
+    pixels = palette_atlas_pixels(path.read_bytes())
+    errors = []
+    for palette_row, shared_rows in PALETTE_LOOKUP_GROUPS:
+        for shared_row in shared_rows:
+            if not np.array_equal(pixels[palette_row:palette_row + 176], pixels[shared_row:shared_row + 176]):
+                errors.append(f"palette rows {shared_row}-{shared_row + 175} must repeat rows "
+                              f"{palette_row}-{palette_row + 175}: they share one RGB swatch lookup")
+    if pixels[PALETTE_NATIVE_ROWS:PALETTE_LOOKUP_BASE_ROW].any():
+        errors.append(f"atlas rows {PALETTE_NATIVE_ROWS}-{PALETTE_LOOKUP_BASE_ROW - 1} must stay empty")
+    if not np.array_equal(pixels[PALETTE_LOOKUP_BASE_ROW:], palette_swatch_lookup(pixels)):
+        errors.append("RGB swatch lookup rows are stale; run --refresh-palette-lookup")
+    return errors
+
+
+def refresh_palette_lookup() -> None:
+    raw = bytearray(PALETTE_TEXTURE.read_bytes())
+    pixels = palette_atlas_pixels(bytes(raw)).copy()
+    pixels[PALETTE_LOOKUP_BASE_ROW:] = palette_swatch_lookup(pixels)
+    start = 18 + raw[0]
+    raw[start:start + pixels.nbytes] = pixels.tobytes()
+    PALETTE_TEXTURE.write_bytes(raw)
+    print(f"Wrote RGB swatch lookup rows; atlas SHA-256 {hashlib.sha256(raw).hexdigest()}")
+
+
 def check_tint_mtr_structure(path: Path) -> list[str]:
     lines = path.read_text(encoding="utf-8-sig").splitlines()
     directives: dict[tuple[str, ...], list[str]] = {}
@@ -4038,6 +4141,7 @@ def audit() -> None:
     else:
         errors.extend(f"plt_palette.tga: {error}" for error in native_metal_palette_errors(PALETTE_TEXTURE))
     errors.extend(f"plt_palette.tga: {error}" for error in palette_atlas_errors(PALETTE_TEXTURE))
+    errors.extend(f"plt_palette.tga: {error}" for error in palette_lookup_errors(PALETTE_TEXTURE))
     if not PALETTE_TXI.exists() or "mipmap 0" not in PALETTE_TXI.read_text(encoding="utf-8").lower():
         errors.append("plt_palette.txi must disable mipmaps")
     for shader_path, expected_maps in (
@@ -4177,6 +4281,11 @@ def main() -> None:
         action="store_true",
         help="record decoded packed-map checksums without rewriting DDS resources",
     )
+    action.add_argument(
+        "--refresh-palette-lookup",
+        action="store_true",
+        help="rewrite the atlas rows that map exact RGB dyes to their nearest palette swatch",
+    )
     action.add_argument("--deduplicate", action="store_true", help="share byte-identical packed maps")
     action.add_argument("--prune", action="store_true", help="remove masks not referenced by active models")
     action.add_argument(
@@ -4218,6 +4327,8 @@ def main() -> None:
         refresh_packed_checksums()
     elif arguments.refresh_packed_metadata:
         refresh_packed_metadata()
+    elif arguments.refresh_palette_lookup:
+        refresh_palette_lookup()
     elif arguments.deduplicate:
         deduplicate()
     elif arguments.prune:

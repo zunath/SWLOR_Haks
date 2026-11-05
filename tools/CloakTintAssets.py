@@ -119,12 +119,17 @@ vec4 SampleCloakTint(vec2 uv)
         source = replace_once(source, f"texture2D(texUnit7, {uv}, -10.0)", f"SampleCloakTint({uv})")
     if re.search(r"texture2D\s*\(\s*texUnit7\s*,", source.split("vec4 SampleCloakTint", 1)[1].split("}", 1)[1]):
         raise ValueError("fs_cloaktint.shd would still sample a whole cloak atlas")
-    # Exact RGB changes hue, not the neutral palette's cutout coverage. Keep
-    # nonmetal RGB opaque on reflective cloaks, matching the base shader.
-    source = replace_once(source,
-                          "float environmentAlpha = layer > 1.5 && layer < 3.5 ? referenceShade.a : 1.0;",
-                          "float environmentAlpha = CloakUsesPaletteAlpha() || (layer > 1.5 && layer < 3.5)\n"
-                          "            ? referenceShade.a : 1.0;")
+    # Exact RGB takes its swatch row's shading but not its coverage on cloaks:
+    # cutout cloaks keep the layer's first palette row as coverage on every layer,
+    # and reflective cloaks use it only for metal, keeping nonmetal RGB opaque.
+    source = replace_once(source, "        float environmentAlpha = swatchShade.a;\n",
+                          "        // Cutout cloaks keep the layer's first palette row as their coverage, and\n"
+                          "        // reflective cloaks use it only for metal, so a custom color can neither\n"
+                          "        // cut a cloak away nor make cloth reflective.\n"
+                          "        float referenceAlpha = texture2D(texUnit10,\n"
+                          "            vec2(paletteU, (paletteBase + 0.5) / 2048.0), -10.0).a;\n"
+                          "        float environmentAlpha = CloakUsesPaletteAlpha() || (layer > 1.5 && layer < 3.5)\n"
+                          "            ? referenceAlpha : 1.0;\n")
     # The base shader enables environment mapping for every PLT material. Cloaks
     # additionally need the per-texture native ENVMAP choice from cloakmodel.2da.
     source = replace_once(source, "    fEnvMapLevel = 1.0 - paletteColor.a;",
