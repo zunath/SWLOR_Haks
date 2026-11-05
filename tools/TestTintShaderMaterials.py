@@ -643,26 +643,31 @@ def compile_engine_pairs(test, engine, pairs, parameters):
 
 
 def tint_dds_layout(header: bytes, size: int, txi: str):
-    """Reject the ambiguous base-only DDS inputs that NWN uploaded as mip chains.
+    """Reject ambiguous DDS inputs that NWN could upload past their payload.
 
-    The crash dump showed glCompressedTexImage2D reading mip level 1 beyond the
-    allocation. Packed tint maps intentionally contain only level 0: require
-    BOTH an explicit count and the texture policy that disables mip uploading.
-    A valid generic DDS header alone does not establish NWN loader safety.
+    A crash dump once showed glCompressedTexImage2D reading a mip level beyond
+    the allocation of a base-only map with no declared count. Packed tint maps
+    now store their full mip chain down to 1x1, so a far pixel averages shades
+    instead of glittering: require an explicit count of every level, a file
+    that holds exactly those levels, and a TXI that keeps mipmaps on.
     """
     if len(header) != 128 or header[:4] != b"DDS " or header[84:88] != b"ATI2":
         raise AssertionError("Tint texture must have a complete ATI2 DDS header")
     flags, height, width, linear_size, _, count = struct.unpack_from("<6I", header, 8)
-    if not flags & 0x20000 or count != 1:
-        raise AssertionError("Base-only tint DDS requires DDSD_MIPMAPCOUNT and explicit mipmap count 1")
     if width <= 0 or height <= 0:
         raise AssertionError("Tint DDS dimensions must be positive")
+    levels = [(width, height)]
+    while levels[-1] != (1, 1):
+        levels.append((max(levels[-1][0] // 2, 1), max(levels[-1][1] // 2, 1)))
+    if not flags & 0x20000 or count != len(levels):
+        raise AssertionError(f"Tint DDS requires DDSD_MIPMAPCOUNT and its full chain of {len(levels)} levels")
     payload_size = ((width + 3) // 4) * ((height + 3) // 4) * 16
-    if linear_size != payload_size or size != 128 + payload_size:
-        raise AssertionError("Tint DDS declared base-level dimensions must exactly cover its BC5 payload")
+    chain_size = sum(((w + 3) // 4) * ((h + 3) // 4) * 16 for w, h in levels)
+    if linear_size != payload_size or size != 128 + chain_size:
+        raise AssertionError("Tint DDS must hold exactly its declared BC5 mip chain")
     directives = re.findall(r"^\s*mipmap\s+(\d+)\s*$", txi, re.MULTILINE | re.IGNORECASE)
-    if directives != ["0"]:
-        raise AssertionError("Base-only tint DDS requires a sibling TXI with one mipmap 0 directive")
+    if directives != ["1"]:
+        raise AssertionError("Tint DDS requires a sibling TXI with one mipmap 1 directive")
     return width, height, payload_size
 
 
@@ -685,14 +690,22 @@ def audit_tint_dds(root: Path):
     zero_count = bytearray(header)
     struct.pack_into("<I", zero_count, 8, struct.unpack_from("<I", zero_count, 8)[0] & ~0x20000)
     struct.pack_into("<I", zero_count, 28, 0)
-    for invalid_header, invalid_txi in ((zero_count, txi), (header, ""), (header, "mipmap 1\n")):
+    base_only = bytearray(header)
+    struct.pack_into("<I", base_only, 28, 1)
+    for invalid_header, invalid_size, invalid_txi in (
+        (zero_count, path.stat().st_size, txi),
+        (base_only, path.stat().st_size, txi),
+        (header, path.stat().st_size - 16, txi),
+        (header, path.stat().st_size, ""),
+        (header, path.stat().st_size, "mipmap 0\n"),
+    ):
         try:
-            tint_dds_layout(invalid_header, path.stat().st_size, invalid_txi)
+            tint_dds_layout(invalid_header, invalid_size, invalid_txi)
         except AssertionError:
             continue
         raise AssertionError("Unsafe DDS mipmap negative control unexpectedly passed")
     print(f"NWN tint texture input checks passed: {len(paths)} DDS/TXI pairs; ambiguous count, missing TXI, "
-        "and enabled-mipmap negative controls rejected.", flush=True)
+        "truncated chain, missing TXI and disabled-mipmap negative controls rejected.", flush=True)
 
 
 def draw_engine_materials(test, engine, root: Path):
