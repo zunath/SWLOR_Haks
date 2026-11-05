@@ -408,10 +408,14 @@ def check_native_palette_fallback(test, engine, pairs, root: Path):
                     best, best_distance = color, distance
             row = expected[best]
             midpoint = row[offset + 128 * 4:offset + 128 * 4 + 3]
-            midpoint_luminance = max(sum(a * w for a, w in zip(midpoint, luminance)), 1 / 255)
+            # An all-black swatch lends no shading; the layer's first row shades the offset.
+            ramp = row if sum(a * w for a, w in zip(midpoint, luminance)) >= .5 / 255 else expected[0]
+            ramp_midpoint = ramp[offset + 128 * 4:offset + 128 * 4 + 3]
+            midpoint_luminance = max(sum(a * w for a, w in zip(ramp_midpoint, luminance)), 1 / 255)
             for shade in range(256):
                 swatch = row[offset + shade * 4:offset + shade * 4 + 4]
-                scale = max(sum(a * w for a, w in zip(swatch[:3], luminance)) / midpoint_luminance, 0)
+                ramp_shade = ramp[offset + shade * 4:offset + shade * 4 + 3]
+                scale = max(sum(a * w for a, w in zip(ramp_shade, luminance)) / midpoint_luminance, 0)
                 values.extend(min(max(s + (t - m) * scale, 0), 1) for s, t, m in zip(swatch, target, midpoint))
                 values.append(swatch[3])
         return tuple(values)
@@ -421,8 +425,14 @@ def check_native_palette_fallback(test, engine, pairs, root: Path):
         return tuple(round(value * 255) for value in expected[color][offset:offset + 3])
 
     rgb_expected = {}
-    for rgb in ((205, 228, 197), (0, 0, 0), (255, 255, 255), (128, 0, 0), (100, 60, 30), (150, 150, 170)):
+    for rgb in ((205, 228, 197), (0, 0, 0), (255, 255, 255), (128, 0, 0), (100, 60, 30), (150, 150, 170),
+                (15, 0, 0), (10, 10, 10)):
         rgb_expected[f"RGB{rgb}"] = ([rgb] * 10, rgb_reference([rgb] * 10))
+    # Near-black colors whose nearest swatch is the all-black row must not collapse to black.
+    for rgb in ((15, 0, 0), (10, 10, 10)):
+        hair = rgb_expected[f"RGB{rgb}"][1][256 * 4:2 * 256 * 4]
+        if not any(value > 0 for index, value in enumerate(hair) if index % 4 != 3):
+            raise AssertionError(f"Hair RGB{rgb} renders as pure black")
     # Every swatch as exact RGB must draw its own palette row, all shades and RGBA.
     for color in range(176):
         colors = [swatch_rgb(layer, color) for layer in range(10)]
@@ -573,7 +583,7 @@ def check_native_palette_fallback(test, engine, pairs, root: Path):
         "shades and RGBA versus original installed palettes; all shader variants/quality modes, "
         "native scalar readbacks, positive custom-row precedence and stale-scheme isolation.", flush=True)
     print(f"RGB nearest-swatch shading passed: {rgb_checks} production GPU draws; all10 layers, all256 "
-        "shades, every swatch as exact RGB equal to its palette row (RGBA), six off-palette colors, "
+        "shades, every swatch as exact RGB equal to its palette row (RGBA), eight off-palette colors (two near-black), "
         "all shader variants/quality modes.", flush=True)
 
 
