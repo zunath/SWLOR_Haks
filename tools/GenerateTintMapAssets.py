@@ -3487,11 +3487,8 @@ def check_dds_payload(path: Path, width: int, height: int) -> str | None:
     if width <= 0 or height <= 0:
         return "DDS dimensions must be positive"
     raw = path.read_bytes()
-    blocks_wide = (width + 3) // 4
-    blocks_high = (height + 3) // 4
-    expected = 128 + blocks_wide * blocks_high * 16
-    if len(raw) >= 32 and struct.unpack_from("<I", raw, 28)[0] > 1:
-        expected = 128 + sum(bc5_level_length(w, h) for w, h in mip_sizes(width, height))
+    levels = mip_sizes(width, height) if len(raw) >= 32 and struct.unpack_from("<I", raw, 28)[0] > 1 else [(width, height)]
+    expected = 128 + sum(bc5_level_length(w, h) for w, h in levels)
     if len(raw) != expected:
         return f"DDS length {len(raw)} != {expected}"
     if raw[:4] != b"DDS " or raw[84:88] != b"ATI2":

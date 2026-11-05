@@ -656,6 +656,8 @@ def tint_dds_layout(header: bytes, size: int, txi: str):
     flags, height, width, linear_size, _, count = struct.unpack_from("<6I", header, 8)
     if width <= 0 or height <= 0:
         raise AssertionError("Tint DDS dimensions must be positive")
+    # Sizes are worked out here, not imported from the generator, so this
+    # guard stays an independent check on the files the generator writes.
     levels = [(width, height)]
     while levels[-1] != (1, 1):
         levels.append((max(levels[-1][0] // 2, 1), max(levels[-1][1] // 2, 1)))
