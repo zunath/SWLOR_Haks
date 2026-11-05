@@ -382,23 +382,57 @@ def check_native_palette_fallback(test, engine, pairs, root: Path):
             palette[((175 - color) * 256 + shade) * 4 + 1],
             palette[((175 - color) * 256 + shade) * 4],
             palette[((175 - color) * 256 + shade) * 4 + 3])) for color in range(176)]
-    # Exact RGB uses color-zero luminance for shade and the original metal
-    # alpha curve for reflection. Nonmetal layers must remain opaque even at
-    # shade255, where the original palettes can have transparent texels.
-    rgb_expected = {}
+    # Exact RGB is shaded with the row of its nearest palette swatch (shade-128
+    # midtone): swatch row + (rgb - midtone) * row luminance / midtone luminance,
+    # with that row's environment coverage. The swatch is the nearest of the
+    # three candidates the atlas lists for the color's 32-level RGB cell. A
+    # color equal to a swatch must render exactly like its palette row (checked
+    # against the installed palettes below); equal midtones resolve to the
+    # lowest color ID.
     luminance = (0.2126, 0.7152, 0.0722)
-    for rgb in ((205, 228, 197), (0, 0, 0), (255, 255, 255), (128, 0, 0)):
+    lookup_atlas = (root / "sw_item/plt_palette.tga").read_bytes()
+    lookup_bases = (1536, 1664, 1792, 1792, 1920, 1920, 1920, 1920, 1920, 1920)
+
+    def rgb_reference(colors):
         values = []
+        for layer, rgb in enumerate(colors):
+            offset = layer * 256 * 4
+            target = [channel / 255 for channel in rgb]
+            cell = sum(math.floor(channel / 255 * 31 + .5) * weight for channel, weight in zip(rgb, (1024, 32, 1)))
+            texel = 18 + lookup_atlas[0] + ((lookup_bases[layer] + cell // 256) * 256 + cell % 256) * 4
+            best, best_distance = 0, None
+            for color in (lookup_atlas[texel + 2], lookup_atlas[texel + 1], lookup_atlas[texel]):
+                midpoint = expected[color][offset + 128 * 4:offset + 128 * 4 + 3]
+                distance = sum((a - b) ** 2 for a, b in zip(midpoint, target))
+                if best_distance is None or distance < best_distance:
+                    best, best_distance = color, distance
+            row = expected[best]
+            midpoint = row[offset + 128 * 4:offset + 128 * 4 + 3]
+            midpoint_luminance = max(sum(a * w for a, w in zip(midpoint, luminance)), 1 / 255)
+            for shade in range(256):
+                swatch = row[offset + shade * 4:offset + shade * 4 + 4]
+                scale = max(sum(a * w for a, w in zip(swatch[:3], luminance)) / midpoint_luminance, 0)
+                values.extend(min(max(s + (t - m) * scale, 0), 1) for s, t, m in zip(swatch, target, midpoint))
+                values.append(swatch[3])
+        return tuple(values)
+
+    def swatch_rgb(layer, color):
+        offset = layer * 256 * 4 + 128 * 4
+        return tuple(round(value * 255) for value in expected[color][offset:offset + 3])
+
+    rgb_expected = {}
+    for rgb in ((205, 228, 197), (0, 0, 0), (255, 255, 255), (128, 0, 0), (100, 60, 30), (150, 150, 170)):
+        rgb_expected[f"RGB{rgb}"] = ([rgb] * 10, rgb_reference([rgb] * 10))
+    # Every swatch as exact RGB must draw its own palette row, all shades and RGBA.
+    for color in range(176):
+        colors = [swatch_rgb(layer, color) for layer in range(10)]
+        targets = rgb_reference(colors)
         for layer in range(10):
             offset = layer * 256 * 4
-            midpoint = sum(value * weight for value, weight in
-                zip(expected[0][offset + 128 * 4:offset + 128 * 4 + 3], luminance))
-            for shade in range(256):
-                reference = expected[0][offset + shade * 4:offset + shade * 4 + 4]
-                scale = sum(value * weight for value, weight in zip(reference[:3], luminance)) / max(midpoint, 1 / 255)
-                values.extend(min(value / 255 * scale, 1) for value in rgb)
-                values.append(reference[3] if layer in (2, 3) else 1)
-        rgb_expected[rgb] = tuple(values)
+            first = next(index for index in range(176) if swatch_rgb(layer, index) == colors[layer])
+            if targets[offset:offset + 1024] != expected[first][offset:offset + 1024]:
+                raise AssertionError(f"Swatch {color} layer {layer} as RGB differs from palette row {first}")
+        rgb_expected[f"swatch{color}"] = (colors, targets)
     descriptors = material_parameters((root / "sw_tint_mtr/pfh0_robe187.mtr").read_text())
     defaults = {name: values for _, name, values in descriptors}
     if defaults.get("useNativePalette") != (1,) or any(defaults.get(name) != (-1,) for name in rows):
@@ -489,19 +523,21 @@ def check_native_palette_fallback(test, engine, pairs, root: Path):
                                 f"GLerror{error:#x}, maxRGBAerror{difference}, component{first}, "
                                 f"actual{output[first]}, expected{expected[selected][first]}")
                         checks += 1
-                for rgb, targets in rgb_expected.items():
-                    packed = (rgb[0] << 16) | (rgb[1] << 8) | rgb[2]
-                    encoded = (1 + packed / 8388608 if packed < 8388608
-                               else 2 + (packed - 8388608) / 4194304)
-                    for location in row_locations:
-                        test.scalar(location, encoded)
+                for label, (colors, targets) in rgb_expected.items():
+                    for location, rgb in zip(row_locations, colors):
+                        packed = (rgb[0] << 16) | (rgb[1] << 8) | rgb[2]
+                        test.scalar(location, 1 + packed / 8388608 if packed < 8388608
+                                    else 2 + (packed - 8388608) / 4194304)
                     draw(0x0004, 0, 3)
                     test.read(0, 0, 256, 10, 0x1908, 0x1406, output)
                     error = test.error()
                     difference = max(abs(actual - target) for actual, target in zip(output, targets))
                     if error or difference > 2e-6:
-                        raise AssertionError(f"RGB palette {fragment}/{quality} RGB{rgb}: "
-                            f"GLerror{error:#x}, maxRGBAerror{difference}")
+                        first = next((index for index, (actual, target) in enumerate(zip(output, targets))
+                            if abs(actual - target) > 2e-6), 0)
+                        raise AssertionError(f"RGB palette {fragment}/{quality} {label}: "
+                            f"GLerror{error:#x}, maxRGBAerror{difference}, component{first}, "
+                            f"actual{output[first]}, expected{targets[first]}")
                     rgb_checks += 1
                 # A material without opt-in must ignore renderer scheme state.
                 test.scalar(test.location(program, b"useNativePalette"), 0)
@@ -536,8 +572,9 @@ def check_native_palette_fallback(test, engine, pairs, root: Path):
     print(f"Native robe palette parity passed: {checks} GPU draws; all176 color IDs, all10 layers, all256 "
         "shades and RGBA versus original installed palettes; all shader variants/quality modes, "
         "native scalar readbacks, positive custom-row precedence and stale-scheme isolation.", flush=True)
-    print(f"RGB palette/metal coverage passed: {rgb_checks} production GPU draws; all10 layers, all256 "
-        "shades, four RGB colors, all shader variants/quality modes and original metal alpha curves.", flush=True)
+    print(f"RGB nearest-swatch shading passed: {rgb_checks} production GPU draws; all10 layers, all256 "
+        "shades, every swatch as exact RGB equal to its palette row (RGBA), six off-palette colors, "
+        "all shader variants/quality modes.", flush=True)
 
 
 def compile_engine_pairs(test, engine, pairs, parameters):
