@@ -202,6 +202,55 @@ class ModularTintFallbackTests(unittest.TestCase):
             self.assertTrue(generator.synchronize_model_material_bindings(racial, pending[racial]))
             self.assertEqual(generator.build_model_material_plan(entries)[1], {})
 
+    def split_neck(self, name):
+        # Neck 152: frames, lenses and the neck each bind their own converted palette.
+        self.parts = self.root / "sw_pt_neck"
+        self.parts.mkdir(exist_ok=True)
+        path = self.parts / (name + ".mdl")
+        path.write_text(
+            f"newmodel {name}\nnode dummy {name}\n parent NULL\nendnode\n"
+            + "".join(
+                f"node trimesh {mesh}\n parent {name}\n bitmap NULL\n materialname pmh0_n152{suffix}\nendnode\n"
+                for mesh, suffix in (("frames", "fr"), ("lens", "ln"), ("neck", "nk"))
+            ),
+            encoding="ascii",
+        )
+        return path
+
+    def split_entries(self, explicit=True):
+        entries = {"pmh0_neck152": {"layers": [0, 3]}}
+        for suffix, layer in (("fr", 2), ("ln", 6), ("nk", 4)):
+            entries["pmh0_n152" + suffix] = {"layers": [layer], **({"explicitMeshMaterial": True} if explicit else {})}
+        return entries
+
+    def test_explicit_mesh_materials_keep_their_own_palettes(self):
+        path = self.split_neck("pme0_neck152")
+        self.assertEqual(self.references(path, self.split_entries()), {
+            "@node:frames": "pmh0_n152fr", "@node:lens": "pmh0_n152ln", "@node:neck": "pmh0_n152nk",
+        })
+
+    def test_unflagged_mesh_materials_still_take_the_native_part_palette(self):
+        path = self.split_neck("pme0_neck152")
+        self.assertEqual(set(self.references(path, self.split_entries(explicit=False)).values()), {"pmh0_neck152"})
+
+    def test_explicit_mesh_materials_plan_one_row_per_material_without_aliases(self):
+        human = self.split_neck("pmh0_neck152")
+        racial = self.split_neck("pmo0_neck152")
+        entries = self.split_entries()
+        with (
+            patch.object(generator, "find_active_models", return_value={human.stem: human, racial.stem: racial}),
+            patch.object(generator, "native_modular_palettes", return_value=set()),
+            patch.object(generator, "find_active_render_surfaces", return_value=set()),
+            patch.object(generator, "find_modular_human_material_fallbacks", return_value={}),
+            patch.object(generator, "find_authored_texture_overrides", return_value={}),
+        ):
+            rows, pending, aliases = generator.build_model_material_plan(entries)
+        expected = {(model, "pmh0_n152" + suffix, (layer,)) for model in (human.stem, racial.stem)
+                    for suffix, layer in (("fr", 2), ("ln", 6), ("nk", 4))}
+        self.assertEqual({(model, material, tuple(layers)) for model, material, layers in rows}, expected)
+        self.assertEqual(pending, {})
+        self.assertEqual(aliases, {})
+
     def test_stock_inventory_is_deterministic_and_records_only_palette_names(self):
         data = bytearray(64 + 3 * 22)
         data[:8] = b"KEY V1  "
