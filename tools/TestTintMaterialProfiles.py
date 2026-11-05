@@ -290,7 +290,7 @@ class BaseBodyPaletteTests(unittest.TestCase):
                 self.assertEqual(entry["layers"], [0])
                 path = g.packed_dds_path(name, entry)
                 self.assertIsNone(g.check_dds(path, 256, 256))
-                self.assertEqual(path.with_suffix(".txi").read_text().strip(), "mipmap 0")
+                self.assertEqual(path.with_suffix(".txi").read_text().strip(), "mipmap 1")
                 for material in [name] + entry.get("aliases", []):
                     lines = g.mtr_path(material).read_text().splitlines()
                     self.assertIn("parameter float tintMapWidth 256.0", lines)
