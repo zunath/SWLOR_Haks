@@ -14,25 +14,29 @@ def check_rgb_materials(test, shader, material, name):
     try:
         for bound in (0, 1):
             for layer in range(10):
-                metal = layer in (2, 3)
                 rgb = (layer, 205, 228, 197)
-                expected = (0.98, 1, 0.315) if metal else (0.04, 0, 0.6)
-                near(test.sample(program, bound, 0.8, rgb=rgb), expected,
-                     f"{name} RGB layer{layer} material bound={bound}")
+                # Exact RGB takes its swatch row's environment coverage on every
+                # layer, as the palette does: a reflective swatch (coverage 0.8)
+                # keeps its reflection and an opaque one (1.0) stays nonmetal.
+                for alpha, reflective in ((0.8, True), (1.0, False)):
+                    expected = (0.98, 1, 0.315) if reflective else (0.04, 0, 0.6)
+                    near(test.sample(program, bound, alpha, rgb=rgb), expected,
+                         f"{name} RGB layer{layer} coverage{alpha} material bound={bound}")
+                    checks += 1
+                    if name != "fs_plt_tinter":
+                        roughness = 0.45 if name == "fs_plt_tinter_nm" else (
+                            0.315 if reflective else 0.125 + 0.475 * 0.88**2)
+                        near(test.sample(program, bound, alpha, rgb=rgb, mapped=True), (0.12, 0, roughness),
+                             f"{name} RGB layer{layer} coverage{alpha} authored maps bound={bound}")
+                        checks += 1
                 near(test.sample(program, bound, 0.8, rgb=rgb, overrides=True), (0.35, 0.7, 0.4),
                      f"{name} RGB layer{layer} authored parameters bound={bound}")
-                checks += 2
-                if name != "fs_plt_tinter":
-                    roughness = 0.45 if name == "fs_plt_tinter_nm" else (
-                        0.315 if metal else 0.125 + 0.475 * 0.88**2)
-                    near(test.sample(program, bound, 0.8, rgb=rgb, mapped=True), (0.12, 0, roughness),
-                         f"{name} RGB layer{layer} authored maps bound={bound}")
-                    checks += 1
+                checks += 1
     finally:
         test.delete_program(program)
     # Force only RGB coverage back to opaque, reproducing the reported loss of
     # metal reflection while leaving normal/specular maps and RGB decoding intact.
-    legacy, count = re.subn(r"(paletteColor = vec4\(clamp\(decodedRgb \* shadeScale, 0\.0, 1\.0\),)\s*\w+\);",
+    legacy, count = re.subn(r"(paletteColor = vec4\(clamp\(shadedRgb, 0\.0, 1\.0\),)\s*\w+\);",
                            r"\1 1.0);", fragment)
     assert count == 1
     program = test.program(legacy)
@@ -175,8 +179,8 @@ def main():
         gl.close()
     print(f"Exact RGB GPU checks passed: {checks}; all10 layers, three shaders, black/white, byte boundaries,"
           " reported pale green and128 deterministic colors. Three legacy negative controls failed as expected.")
-    print(f"RGB material GPU checks passed: {material_checks}; both metal layers retain reflection, other layers "
-          "stay opaque, and authored maps/parameters survive. Six legacy reflection-loss controls reproduced.")
+    print(f"RGB material GPU checks passed: {material_checks}; every layer takes its swatch's coverage "
+          "(reflective or opaque), and authored maps/parameters survive. Six legacy reflection-loss controls reproduced.")
 
 
 if __name__ == "__main__":
