@@ -2222,13 +2222,27 @@ def packed_level(shade: np.ndarray, layer: np.ndarray) -> bytes:
     return bytes(payload)
 
 
+def area_reduced(values: np.ndarray, size: int, axis: int) -> np.ndarray:
+    """Shrink an axis to size, weighting each source texel by the area it covers."""
+    values = np.moveaxis(values, axis, 0).astype(np.float64)
+    source = values.shape[0]
+    totals = np.concatenate((np.zeros((1, *values.shape[1:])), np.cumsum(values, axis=0)))
+    edges = np.arange(size + 1) * source / size
+    lower = np.minimum(edges.astype(np.int64), source - 1)
+    fraction = (edges - lower).reshape(-1, *([1] * (values.ndim - 1)))
+    totals_at_edges = totals[lower] + values[lower] * fraction
+    return np.moveaxis(np.diff(totals_at_edges, axis=0) * size / source, 0, axis)
+
+
 def packed_mip_levels(shade: np.ndarray, layer: np.ndarray) -> list[tuple[np.ndarray, np.ndarray]]:
     """Base level first, then each half-size level down to 1x1.
 
     Shade levels are box-filtered: a far pixel then reads the average of the
     shades it covers instead of one texel's, so cloth does not glitter at a
-    distance. The shaders read layer ids from the base level only, so lower
-    layer levels just keep one id per block.
+    distance. An odd dimension has no 2x2 blocks to average, so it is filtered
+    by area and the last row or column still counts. The shaders read layer
+    ids from the base level only, so lower layer levels just keep one id per
+    block.
     """
     height, width = shade.shape
     levels = [(shade, layer)]
@@ -2236,18 +2250,36 @@ def packed_mip_levels(shade: np.ndarray, layer: np.ndarray) -> list[tuple[np.nda
     for next_width, next_height in mip_sizes(width, height)[1:]:
         h, w = current.shape
         step_y, step_x = (2 if h > 1 else 1), (2 if w > 1 else 1)
-        current = current[: next_height * step_y, : next_width * step_x].reshape(
-            next_height, step_y, next_width, step_x).mean(axis=(1, 3))
+        if h == next_height * step_y and w == next_width * step_x:
+            current = current.reshape(next_height, step_y, next_width, step_x).mean(axis=(1, 3))
+        else:
+            current = area_reduced(area_reduced(current, next_height, 0), next_width, 1).astype(np.float32)
         layer = layer[::step_y, ::step_x][:next_height, :next_width]
         levels.append((np.clip(np.rint(current), 0, 255).astype(np.uint8), layer))
     return levels
+
+
+def packed_lower_level(shade: np.ndarray, layer: np.ndarray) -> bytes:
+    """Compress a level below the base, whose layer ids are never read.
+
+    Subsampling can gather layer ids into one block that BC4 cannot encode,
+    even when the base level is fine. Those ids are placeholders, so give
+    each block one id rather than refuse the mask.
+    """
+    try:
+        return packed_level(shade, layer)
+    except ValueError:
+        height, width = layer.shape
+        return packed_level(shade, layer[np.ix_(np.arange(height) // 4 * 4, np.arange(width) // 4 * 4)])
 
 
 def write_packed_dds(
     path: Path, width: int, height: int, shade: np.ndarray, layer: np.ndarray, *, mipmaps: bool = True
 ) -> None:
     levels = packed_mip_levels(shade, layer) if mipmaps else [(shade, layer)]
-    payload = b"".join(packed_level(level_shade, level_layer) for level_shade, level_layer in levels)
+    payload = packed_level(*levels[0]) + b"".join(
+        packed_lower_level(level_shade, level_layer) for level_shade, level_layer in levels[1:]
+    )
     path.write_bytes(dds_header(width, height, bc5_level_length(width, height), len(levels)) + payload)
     write_packed_texture_settings(path, mipmaps=mipmaps)
 
@@ -3469,7 +3501,7 @@ def refresh_packed_metadata() -> None:
         raw = path.read_bytes()
         base = raw[128 : 128 + bc5_level_length(width, height)]
         levels = packed_mip_levels(decode_dds_shades(path, width, height), decode_dds_layers(path, width, height))
-        chain = b"".join(packed_level(shade, layer) for shade, layer in levels[1:])
+        chain = b"".join(packed_lower_level(shade, layer) for shade, layer in levels[1:])
         rebuilt = dds_header(width, height, len(base), len(levels)) + base + chain
         if raw != rebuilt:
             path.write_bytes(rebuilt)
