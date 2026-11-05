@@ -261,7 +261,7 @@ def generate(game_data):
             shade = np.repeat(np.repeat(shade, scale, axis=0), scale, axis=1)
             layer = np.repeat(np.repeat(layer, scale, axis=0), scale, axis=1)
             packed = stage / f"{name}.dds"
-            tint.write_packed_dds(packed, TILE, TILE, shade, layer)
+            tint.write_packed_dds(packed, TILE, TILE, shade, layer, mipmaps=False)
             tile = np.frombuffer(packed.read_bytes(), dtype=np.uint8, offset=128).reshape(TILE // 4, TILE // 4, 16)
             slot = index % (COLUMNS * ROWS)
             x, y = slot % COLUMNS * TILE // 4, slot // COLUMNS * TILE // 4
@@ -274,7 +274,7 @@ def generate(game_data):
         path = ROOT / f"sw_pt_cloak/cloak_tints{index}.dds"
         payload = atlas.tobytes()
         path.write_bytes(tint.dds_header(COLUMNS * TILE, ROWS * TILE, len(payload)) + payload)
-        tint.write_packed_texture_settings(path)
+        tint.write_packed_texture_settings(path, mipmaps=False)
         for output in (path, path.with_suffix(".txi")):
             files[output.relative_to(ROOT).as_posix()] = file_digest(output)
     (ROOT / "sw_pt_cloak/cloaktint.mtr").write_text(material_text())
