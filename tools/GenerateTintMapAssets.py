@@ -2183,7 +2183,18 @@ def compress_bc4_layers(layer: np.ndarray, batch_size: int = 16_384) -> bytes:
     return bytes(output)
 
 
-def dds_header(width: int, height: int, data_length: int) -> bytes:
+def mip_sizes(width: int, height: int) -> list[tuple[int, int]]:
+    sizes = [(width, height)]
+    while sizes[-1] != (1, 1):
+        sizes.append((max(sizes[-1][0] // 2, 1), max(sizes[-1][1] // 2, 1)))
+    return sizes
+
+
+def bc5_level_length(width: int, height: int) -> int:
+    return ((width + 3) // 4) * ((height + 3) // 4) * 16
+
+
+def dds_header(width: int, height: int, data_length: int, mip_count: int = 1) -> bytes:
     header = bytearray(128)
     header[:4] = b"DDS "
     struct.pack_into("<I", header, 4, 124)
@@ -2191,15 +2202,16 @@ def dds_header(width: int, height: int, data_length: int) -> bytes:
     struct.pack_into("<I", header, 12, height)
     struct.pack_into("<I", header, 16, width)
     struct.pack_into("<I", header, 20, data_length)
-    struct.pack_into("<I", header, 28, 1)  # Only the base level is stored.
+    struct.pack_into("<I", header, 28, mip_count)
     struct.pack_into("<I", header, 76, 32)
     struct.pack_into("<I", header, 80, 0x00000004)  # DDPF_FOURCC
     header[84:88] = b"ATI2"
-    struct.pack_into("<I", header, 108, 0x00001000)  # DDSCAPS_TEXTURE
+    # DDSCAPS_TEXTURE, plus MIPMAP and COMPLEX when a chain follows.
+    struct.pack_into("<I", header, 108, 0x00401008 if mip_count > 1 else 0x00001000)
     return bytes(header)
 
 
-def write_packed_dds(path: Path, width: int, height: int, shade: np.ndarray, layer: np.ndarray) -> None:
+def packed_level(shade: np.ndarray, layer: np.ndarray) -> bytes:
     red = compress_bc4(shade)
     green = compress_bc4_layers(layer)
     block_count = len(red) // 8
@@ -2207,16 +2219,78 @@ def write_packed_dds(path: Path, width: int, height: int, shade: np.ndarray, lay
     for index in range(block_count):
         payload[index * 16 : index * 16 + 8] = red[index * 8 : index * 8 + 8]
         payload[index * 16 + 8 : index * 16 + 16] = green[index * 8 : index * 8 + 8]
-
-    path.write_bytes(dds_header(width, height, len(payload)) + payload)
-    write_packed_texture_settings(path)
+    return bytes(payload)
 
 
-def write_packed_texture_settings(path: Path) -> None:
+def area_reduced(values: np.ndarray, size: int, axis: int) -> np.ndarray:
+    """Shrink an axis to size, weighting each source texel by the area it covers."""
+    values = np.moveaxis(values, axis, 0).astype(np.float64)
+    source = values.shape[0]
+    totals = np.concatenate((np.zeros((1, *values.shape[1:])), np.cumsum(values, axis=0)))
+    edges = np.arange(size + 1) * source / size
+    lower = np.minimum(edges.astype(np.int64), source - 1)
+    fraction = (edges - lower).reshape(-1, *([1] * (values.ndim - 1)))
+    totals_at_edges = totals[lower] + values[lower] * fraction
+    return np.moveaxis(np.diff(totals_at_edges, axis=0) * size / source, 0, axis)
+
+
+def packed_mip_levels(shade: np.ndarray, layer: np.ndarray) -> list[tuple[np.ndarray, np.ndarray]]:
+    """Base level first, then each half-size level down to 1x1.
+
+    Shade levels are box-filtered: a far pixel then reads the average of the
+    shades it covers instead of one texel's, so cloth does not glitter at a
+    distance. An odd dimension has no 2x2 blocks to average, so it is filtered
+    by area and the last row or column still counts. The shaders read layer
+    ids from the base level only, so lower layer levels just keep one id per
+    block.
+    """
+    height, width = shade.shape
+    levels = [(shade, layer)]
+    current = shade.astype(np.float32)
+    for next_width, next_height in mip_sizes(width, height)[1:]:
+        h, w = current.shape
+        step_y, step_x = (2 if h > 1 else 1), (2 if w > 1 else 1)
+        if h == next_height * step_y and w == next_width * step_x:
+            current = current.reshape(next_height, step_y, next_width, step_x).mean(axis=(1, 3))
+        else:
+            current = area_reduced(area_reduced(current, next_height, 0), next_width, 1).astype(np.float32)
+        layer = layer[::step_y, ::step_x][:next_height, :next_width]
+        levels.append((np.clip(np.rint(current), 0, 255).astype(np.uint8), layer))
+    return levels
+
+
+def packed_lower_level(shade: np.ndarray, layer: np.ndarray) -> bytes:
+    """Compress a level below the base, whose layer ids are never read.
+
+    Subsampling can gather layer ids into one block that BC4 cannot encode,
+    even when the base level is fine. Those ids are placeholders, so give
+    each block one id rather than refuse the mask.
+    """
+    try:
+        return packed_level(shade, layer)
+    except ValueError:
+        height, width = layer.shape
+        return packed_level(shade, layer[np.ix_(np.arange(height) // 4 * 4, np.arange(width) // 4 * 4)])
+
+
+def write_packed_dds(
+    path: Path, width: int, height: int, shade: np.ndarray, layer: np.ndarray, *, mipmaps: bool = True
+) -> None:
+    levels = packed_mip_levels(shade, layer) if mipmaps else [(shade, layer)]
+    payload = packed_level(*levels[0]) + b"".join(
+        packed_lower_level(level_shade, level_layer) for level_shade, level_layer in levels[1:]
+    )
+    path.write_bytes(dds_header(width, height, bc5_level_length(width, height), len(levels)) + payload)
+    write_packed_texture_settings(path, mipmaps=mipmaps)
+
+
+def write_packed_texture_settings(path: Path, *, mipmaps: bool = True) -> None:
     # NWN's compressed-texture loader uses TXI mipmap policy when uploading.
-    # Without this, it reads an implied mip chain past our base-level payload.
-    # Layer IDs are categorical, so generating filtered mipmaps is also wrong.
-    path.with_suffix(".txi").write_text("mipmap 0\n", encoding="ascii")
+    # A tint mask stores its full mip chain: the shaders fetch layer ids
+    # from the base level only, and read shades through the mipmaps at a
+    # distance. A single-level DDS (the cloak atlas) declares mipmap 0, or
+    # NWN reads an implied chain past its payload.
+    path.with_suffix(".txi").write_text("mipmap 1\n" if mipmaps else "mipmap 0\n", encoding="ascii")
 
 
 def validate_packed_texture_path(path: Path) -> None:
@@ -3404,7 +3478,11 @@ def refresh_packed_checksums() -> None:
 
 
 def refresh_packed_metadata() -> None:
-    """Repair single-level DDS/TXI metadata without recompressing any pixels."""
+    """Rebuild each packed map's mip chain from its base level.
+
+    The base level's compressed blocks are kept byte for byte; only the
+    header, the levels below it and the TXI change.
+    """
     entries = load_source_manifest()
     if not entries:
         raise RuntimeError("No tint source manifest exists to refresh")
@@ -3418,17 +3496,19 @@ def refresh_packed_metadata() -> None:
         error = check_dds_payload(path, width, height)
         if error:
             raise RuntimeError(f"{path.name}: {error}")
-    changed_headers = 0
+    changed = 0
     for path, (width, height) in outputs.items():
         raw = path.read_bytes()
-        header = dds_header(width, height, len(raw) - 128)
-        if raw[:128] != header:
-            path.write_bytes(header + raw[128:])
-            changed_headers += 1
+        base = raw[128 : 128 + bc5_level_length(width, height)]
+        levels = packed_mip_levels(decode_dds_shades(path, width, height), decode_dds_layers(path, width, height))
+        chain = b"".join(packed_lower_level(shade, layer) for shade, layer in levels[1:])
+        rebuilt = dds_header(width, height, len(base), len(levels)) + base + chain
+        if raw != rebuilt:
+            path.write_bytes(rebuilt)
+            changed += 1
         write_packed_texture_settings(path)
     print(
-        f"Refreshed {len(outputs)} single-level DDS/TXI pairs "
-        f"({changed_headers} headers changed); compressed pixels are unchanged.",
+        f"Refreshed {len(outputs)} DDS/TXI pairs ({changed} rewritten); base levels are unchanged.",
         flush=True,
     )
 
@@ -3439,16 +3519,15 @@ def check_dds_payload(path: Path, width: int, height: int) -> str | None:
     if width <= 0 or height <= 0:
         return "DDS dimensions must be positive"
     raw = path.read_bytes()
-    blocks_wide = (width + 3) // 4
-    blocks_high = (height + 3) // 4
-    expected = 128 + blocks_wide * blocks_high * 16
+    levels = mip_sizes(width, height) if len(raw) >= 32 and struct.unpack_from("<I", raw, 28)[0] > 1 else [(width, height)]
+    expected = 128 + sum(bc5_level_length(w, h) for w, h in levels)
     if len(raw) != expected:
         return f"DDS length {len(raw)} != {expected}"
     if raw[:4] != b"DDS " or raw[84:88] != b"ATI2":
         return "DDS is not ATI2/BC5"
     if struct.unpack_from("<I", raw, 4)[0] != 124 or struct.unpack_from("<I", raw, 76)[0] != 32:
         return "DDS header size is invalid"
-    if struct.unpack_from("<I", raw, 20)[0] != expected - 128:
+    if struct.unpack_from("<I", raw, 20)[0] != bc5_level_length(width, height):
         return "DDS linear size disagrees with base-level payload"
     actual_height, actual_width = struct.unpack_from("<II", raw, 12)
     if (actual_width, actual_height) != (width, height):
@@ -3461,17 +3540,19 @@ def check_dds(path: Path, width: int, height: int) -> str | None:
     if error:
         return error
     raw = path.read_bytes()
-    if not struct.unpack_from("<I", raw, 8)[0] & 0x20000 or struct.unpack_from("<I", raw, 28)[0] != 1:
-        return "DDS must explicitly declare one mip level"
+    if not struct.unpack_from("<I", raw, 8)[0] & 0x20000 or struct.unpack_from("<I", raw, 28)[0] != len(
+        mip_sizes(width, height)
+    ):
+        return "DDS must declare its full mip chain; far pixels glitter without it"
     txi_path = path.with_suffix(".txi")
     if not txi_path.exists():
-        return "missing TXI mipmap 0; NWN would read past the base-level DDS payload"
+        return "missing TXI mipmap 1"
     directives = [
         line.split("//", 1)[0].strip().lower().split()
         for line in txi_path.read_text(encoding="utf-8-sig").splitlines()
     ]
-    if [tokens for tokens in directives if tokens[:1] == ["mipmap"]] != [["mipmap", "0"]]:
-        return "TXI must declare mipmap 0 exactly once for a single-level DDS"
+    if [tokens for tokens in directives if tokens[:1] == ["mipmap"]] != [["mipmap", "1"]]:
+        return "TXI must declare mipmap 1 exactly once for a mipmapped DDS"
     return None
 
 
@@ -3485,7 +3566,7 @@ def decode_dds_channel(
     blocks_wide = (width + 3) // 4
     blocks_high = (height + 3) // 4
     block_count = blocks_wide * blocks_high
-    packed = np.frombuffer(raw, dtype=np.uint8, offset=128).reshape(block_count, 16)[
+    packed = np.frombuffer(raw, dtype=np.uint8, offset=128, count=block_count * 16).reshape(block_count, 16)[
         :, channel_offset : channel_offset + 8
     ]
     endpoint0 = packed[:, 0]
@@ -4274,7 +4355,7 @@ def main() -> None:
     action.add_argument(
         "--refresh-packed-metadata",
         action="store_true",
-        help="declare single-level DDS textures and disable implied mip uploads without changing pixels",
+        help="rebuild each packed map's mip chain from its unchanged base level",
     )
     action.add_argument(
         "--refresh-packed-checksums",
