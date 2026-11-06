@@ -1640,6 +1640,15 @@ def raw_model_bitmaps(path: Path) -> dict[str, str]:
     return result
 
 
+def is_explicit_mesh_material(material: str | None, entries: dict[str, dict[str, object]]) -> bool:
+    """A converted palette that a modular part's mesh binds by name (``explicitMeshMaterial``).
+
+    Such a part splits its surfaces across separate dye masks (neck 152's frames,
+    lenses and neck). The native loader's single part palette must not replace them.
+    """
+    return bool(material) and bool(entries.get(material.lower(), {}).get("explicitMeshMaterial"))
+
+
 def native_modular_material_choices(
     path: Path,
     entries: dict[str, dict[str, object]],
@@ -1664,7 +1673,12 @@ def native_modular_material_choices(
     bitmaps = raw_model_bitmaps(path)
     original_materials = authored_material_sources()
     choices = {}
-    for selector, _, _ in surfaces:
+    for selector, _, current_material in surfaces:
+        if is_explicit_mesh_material(current_material, entries):
+            # A split part's mesh names its own converted palette; the part's
+            # native palette would recolor it with another mesh's layers.
+            choices[selector] = (current_material.lower(), "", [])
+            continue
         bitmap = _MATERIAL_BITMAP_ALIASES.get(bitmaps[selector], bitmaps[selector])
         bitmap = MIRRORED_MATERIAL_PROFILES.get(bitmap, bitmap)
         profile = original_materials.get(bitmap, {})
@@ -1754,6 +1768,8 @@ def build_model_material_plan(
                     restored_bindings.setdefault(path, {})[selector] = profile_name
                     continue
                 references[selector] = source
+                if is_explicit_mesh_material(source, entries):
+                    continue
                 profile = (profile_name, profile_lines)
                 if material_profile_signature(source, profile) != material_profile_signature(source):
                     profiles[selector] = profile
@@ -2791,6 +2807,8 @@ def generate() -> None:
             "texture": texture,
             **({"modelPalette": existing_entry["modelPalette"]}
                if existing_entry and "modelPalette" in existing_entry else {}),
+            **({"explicitMeshMaterial": True}
+               if existing_entry and existing_entry.get("explicitMeshMaterial") else {}),
         }
 
         if number == 1 or number % 100 == 0 or number == total:
@@ -2999,6 +3017,8 @@ def generate_preserving_manifest() -> None:
             "texture": texture,
             **({"modelPalette": existing_entry["modelPalette"]}
                if existing_entry and "modelPalette" in existing_entry else {}),
+            **({"explicitMeshMaterial": True}
+               if existing_entry and existing_entry.get("explicitMeshMaterial") else {}),
         }
         signatures.setdefault(signature, entries[material])
 
