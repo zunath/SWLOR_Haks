@@ -714,8 +714,8 @@ def draw_engine_materials(test, engine, root: Path):
     """Draw production shaders with the reported NPCs' compressed DDS bytes.
 
     This validates native GL uploads and draws, not NWN's separate DDS parser.
-    Exercise both base-level and generated-mipmap sampling without fabricating
-    any bytes beyond the payload declared by each DDS header.
+    Exercise both base-level and stored-mipmap sampling, uploading each stored
+    level on its own and no bytes beyond the payload each DDS header declares.
     """
     gl = test.gl
     attribute = gl.function("glGetAttribLocation", ct.c_int, ct.c_uint, ct.c_char_p)
@@ -726,7 +726,6 @@ def draw_engine_materials(test, engine, root: Path):
     matrix = gl.function("glUniformMatrix4fv", None, ct.c_int, ct.c_int, ct.c_ubyte, ct.c_void_p)
     compressed_image = gl.function("glCompressedTexImage2D", None, ct.c_uint, ct.c_int, ct.c_uint,
         ct.c_int, ct.c_int, ct.c_int, ct.c_int, ct.c_void_p)
-    generate_mipmap = gl.function("glGenerateMipmap", None, ct.c_uint)
     delete_textures = gl.function("glDeleteTextures", None, ct.c_int, ct.POINTER(ct.c_uint))
     draw = gl.function("glDrawArrays", None, ct.c_uint, ct.c_int, ct.c_int)
     finish = gl.function("glFinish", None)
@@ -801,12 +800,18 @@ def draw_engine_materials(test, engine, root: Path):
         mask = re.search(r"^texture7\s+(\S+)", source, re.MULTILINE)[1]
         dds = next(root.glob(f"sw_tint*/{mask}.dds"))
         data = dds.read_bytes()
-        width, height, base_size = tint_dds_layout(data[:128], len(data), dds.with_suffix(".txi").read_text())
+        width, height, _ = tint_dds_layout(data[:128], len(data), dds.with_suffix(".txi").read_text())
         if material in hand_materials and (width, height) != (256, 256):
             raise AssertionError(f"Restored hand {material} still uses a mask from the stock mesh: {width}x{height}")
-        # Level 0 only: glCompressedTexImage2D rejects a size that includes the lower levels.
-        payload = data[128:128 + base_size]
-        pixels = ct.create_string_buffer(payload)
+        mip_levels = []
+        offset, level_width, level_height = 128, width, height
+        while True:
+            level_size = ((level_width + 3) // 4) * ((level_height + 3) // 4) * 16
+            mip_levels.append((level_width, level_height, level_size, ct.create_string_buffer(data[offset:offset + level_size])))
+            offset += level_size
+            if (level_width, level_height) == (1, 1):
+                break
+            level_width, level_height = max(level_width // 2, 1), max(level_height // 2, 1)
         inspect_row = ("rowleath2" if material.startswith(("pmh0_shin", "pmh0_foot"))
             else "rowskin" if material in hand_materials else None)
         outputs = (("surface", "palette") if inspect_row else
@@ -883,14 +888,13 @@ def draw_engine_materials(test, engine, root: Path):
                 test.integer(test.location(program, b"texture0Bound"), 1)
                 test.active_texture(0x84C0 + 7)
                 test.bind_texture(0x0DE1, 8)
-                compressed_image(0x0DE1, 0, 0x8DBD, width, height, 0, len(payload), pixels)
+                for level, (level_width, level_height, level_size, pixels) in enumerate(mip_levels):
+                    compressed_image(0x0DE1, level, 0x8DBD, level_width, level_height, 0, level_size, pixels)
                 check(f"BC5 compressed upload {dds.name}")
-                mip_modes = ("base-level",) if output == "palette" else ("base-level", "default-incomplete", "generated-mips")
+                mip_modes = ("base-level",) if output == "palette" else ("base-level", "stored-mips")
                 for mip_mode in mip_modes:
                     test.texture_parameter(0x0DE1, 0x813D, 0 if mip_mode == "base-level" else 1000)
                     test.texture_parameter(0x0DE1, 0x2801, 0x2601 if mip_mode == "base-level" else 0x2703)
-                    if mip_mode == "generated-mips":
-                        generate_mipmap(0x0DE1)
                     check(f"BC5 {mip_mode} setup {dds.name}")
                     clear_color(0.9, 0.1, 0.9, 0.123)
                     clear(0x4000)

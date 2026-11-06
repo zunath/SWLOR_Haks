@@ -81,7 +81,10 @@ def opacity_texture_indices():
     return [index for index, number in enumerate(texture_ids()) if modes[number]]
 
 
-MASK_READS_WITHOUT_MIPMAPS = (
+# The atlas has one level, and fs_cloaktint must keep reading it as before: a far
+# shade would read a level the atlas does not store, and texelFetch would take a
+# tile texel instead of the selected cloak's. Restore the plain reads first.
+BASE_LEVEL_READS = (
     ("""    // uv is a texel centre. Fetch that texel exactly: anisotropic filtering
     // on the mipmapped mask would blend its layer id with a neighbour's.
 #if __VERSION__ >= 130
@@ -118,10 +121,8 @@ MASK_READS_WITHOUT_MIPMAPS = (
 
 def shader_text():
     source = (ROOT / "sw_shader/fs_plt_tinter.shd").read_text()
-    # Cloak atlases stay single-level, and SampleCloakTint must address their tiles, so
-    # cloaks keep the biased level-0 reads instead of the tinter's mipmap and texelFetch paths.
-    for mipmap_path, level_zero_read in MASK_READS_WITHOUT_MIPMAPS:
-        source = replace_once(source, mipmap_path, level_zero_read)
+    for old, new in BASE_LEVEL_READS:
+        source = replace_once(source, old, new)
     # The opaque texture0 placeholder makes NWN select NO_DISCARD. Keep palette
     # cutouts active even when inc_common would otherwise erase discard calls.
     source = replace_once(source, '#include "inc_standard"',

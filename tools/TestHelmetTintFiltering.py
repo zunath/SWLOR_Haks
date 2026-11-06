@@ -122,7 +122,7 @@ void main() { gl_Position = gl_Vertex; vVertexTexCoords = testUV; }
             self.scalar(row, value)
 
     def test_shipped_mask_edges_match_resolved_color_filtering(self):
-        # Level 0 only: glCompressedTexImage2D rejects a size that includes the lower levels.
+        # The test filters linearly, so it reads only the mask's base level.
         base_size = ((self.width + 3) // 4) * ((self.height + 3) // 4) * 16
         raw = self.mask.read_bytes()[128:128 + base_size]
         self.test.active_texture(0x84C0 + 7)
