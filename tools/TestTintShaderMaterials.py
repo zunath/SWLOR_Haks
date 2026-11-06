@@ -382,23 +382,67 @@ def check_native_palette_fallback(test, engine, pairs, root: Path):
             palette[((175 - color) * 256 + shade) * 4 + 1],
             palette[((175 - color) * 256 + shade) * 4],
             palette[((175 - color) * 256 + shade) * 4 + 3])) for color in range(176)]
-    # Exact RGB uses color-zero luminance for shade and the original metal
-    # alpha curve for reflection. Nonmetal layers must remain opaque even at
-    # shade255, where the original palettes can have transparent texels.
-    rgb_expected = {}
+    # Exact RGB is shaded with the row of its nearest palette swatch (shade-128
+    # midtone): swatch row + (rgb - midtone) * row luminance / midtone luminance,
+    # with that row's environment coverage. The swatch is the nearest of the
+    # three candidates the atlas lists for the color's 32-level RGB cell. A
+    # color equal to a swatch must render exactly like its palette row (checked
+    # against the installed palettes below); equal midtones resolve to the
+    # lowest color ID.
     luminance = (0.2126, 0.7152, 0.0722)
-    for rgb in ((205, 228, 197), (0, 0, 0), (255, 255, 255), (128, 0, 0)):
+    lookup_atlas = (root / "sw_item/plt_palette.tga").read_bytes()
+    lookup_bases = (1536, 1664, 1792, 1792, 1920, 1920, 1920, 1920, 1920, 1920)
+
+    def rgb_reference(colors):
         values = []
+        for layer, rgb in enumerate(colors):
+            offset = layer * 256 * 4
+            target = [channel / 255 for channel in rgb]
+            cell = sum(math.floor(channel / 255 * 31 + .5) * weight for channel, weight in zip(rgb, (1024, 32, 1)))
+            texel = 18 + lookup_atlas[0] + ((lookup_bases[layer] + cell // 256) * 256 + cell % 256) * 4
+            best, best_distance = 0, None
+            for color in (lookup_atlas[texel + 2], lookup_atlas[texel + 1], lookup_atlas[texel]):
+                midpoint = expected[color][offset + 128 * 4:offset + 128 * 4 + 3]
+                distance = sum((a - b) ** 2 for a, b in zip(midpoint, target))
+                if best_distance is None or distance < best_distance:
+                    best, best_distance = color, distance
+            row = expected[best]
+            midpoint = row[offset + 128 * 4:offset + 128 * 4 + 3]
+            # An all-black swatch lends no shading; the layer's first row shades the offset.
+            ramp = row if sum(a * w for a, w in zip(midpoint, luminance)) >= .5 / 255 else expected[0]
+            ramp_midpoint = ramp[offset + 128 * 4:offset + 128 * 4 + 3]
+            midpoint_luminance = max(sum(a * w for a, w in zip(ramp_midpoint, luminance)), 1 / 255)
+            for shade in range(256):
+                swatch = row[offset + shade * 4:offset + shade * 4 + 4]
+                ramp_shade = ramp[offset + shade * 4:offset + shade * 4 + 3]
+                scale = max(sum(a * w for a, w in zip(ramp_shade, luminance)) / midpoint_luminance, 0)
+                values.extend(min(max(s + (t - m) * scale, 0), 1) for s, t, m in zip(swatch, target, midpoint))
+                values.append(swatch[3])
+        return tuple(values)
+
+    def swatch_rgb(layer, color):
+        offset = layer * 256 * 4 + 128 * 4
+        return tuple(round(value * 255) for value in expected[color][offset:offset + 3])
+
+    rgb_expected = {}
+    for rgb in ((205, 228, 197), (0, 0, 0), (255, 255, 255), (128, 0, 0), (100, 60, 30), (150, 150, 170),
+                (15, 0, 0), (10, 10, 10)):
+        rgb_expected[f"RGB{rgb}"] = ([rgb] * 10, rgb_reference([rgb] * 10))
+    # Near-black colors whose nearest swatch is the all-black row must not collapse to black.
+    for rgb in ((15, 0, 0), (10, 10, 10)):
+        hair = rgb_expected[f"RGB{rgb}"][1][256 * 4:2 * 256 * 4]
+        if not any(value > 0 for index, value in enumerate(hair) if index % 4 != 3):
+            raise AssertionError(f"Hair RGB{rgb} renders as pure black")
+    # Every swatch as exact RGB must draw its own palette row, all shades and RGBA.
+    for color in range(176):
+        colors = [swatch_rgb(layer, color) for layer in range(10)]
+        targets = rgb_reference(colors)
         for layer in range(10):
             offset = layer * 256 * 4
-            midpoint = sum(value * weight for value, weight in
-                zip(expected[0][offset + 128 * 4:offset + 128 * 4 + 3], luminance))
-            for shade in range(256):
-                reference = expected[0][offset + shade * 4:offset + shade * 4 + 4]
-                scale = sum(value * weight for value, weight in zip(reference[:3], luminance)) / max(midpoint, 1 / 255)
-                values.extend(min(value / 255 * scale, 1) for value in rgb)
-                values.append(reference[3] if layer in (2, 3) else 1)
-        rgb_expected[rgb] = tuple(values)
+            first = next(index for index in range(176) if swatch_rgb(layer, index) == colors[layer])
+            if targets[offset:offset + 1024] != expected[first][offset:offset + 1024]:
+                raise AssertionError(f"Swatch {color} layer {layer} as RGB differs from palette row {first}")
+        rgb_expected[f"swatch{color}"] = (colors, targets)
     descriptors = material_parameters((root / "sw_tint_mtr/pfh0_robe187.mtr").read_text())
     defaults = {name: values for _, name, values in descriptors}
     if defaults.get("useNativePalette") != (1,) or any(defaults.get(name) != (-1,) for name in rows):
@@ -489,19 +533,21 @@ def check_native_palette_fallback(test, engine, pairs, root: Path):
                                 f"GLerror{error:#x}, maxRGBAerror{difference}, component{first}, "
                                 f"actual{output[first]}, expected{expected[selected][first]}")
                         checks += 1
-                for rgb, targets in rgb_expected.items():
-                    packed = (rgb[0] << 16) | (rgb[1] << 8) | rgb[2]
-                    encoded = (1 + packed / 8388608 if packed < 8388608
-                               else 2 + (packed - 8388608) / 4194304)
-                    for location in row_locations:
-                        test.scalar(location, encoded)
+                for label, (colors, targets) in rgb_expected.items():
+                    for location, rgb in zip(row_locations, colors):
+                        packed = (rgb[0] << 16) | (rgb[1] << 8) | rgb[2]
+                        test.scalar(location, 1 + packed / 8388608 if packed < 8388608
+                                    else 2 + (packed - 8388608) / 4194304)
                     draw(0x0004, 0, 3)
                     test.read(0, 0, 256, 10, 0x1908, 0x1406, output)
                     error = test.error()
                     difference = max(abs(actual - target) for actual, target in zip(output, targets))
                     if error or difference > 2e-6:
-                        raise AssertionError(f"RGB palette {fragment}/{quality} RGB{rgb}: "
-                            f"GLerror{error:#x}, maxRGBAerror{difference}")
+                        first = next((index for index, (actual, target) in enumerate(zip(output, targets))
+                            if abs(actual - target) > 2e-6), 0)
+                        raise AssertionError(f"RGB palette {fragment}/{quality} {label}: "
+                            f"GLerror{error:#x}, maxRGBAerror{difference}, component{first}, "
+                            f"actual{output[first]}, expected{targets[first]}")
                     rgb_checks += 1
                 # A material without opt-in must ignore renderer scheme state.
                 test.scalar(test.location(program, b"useNativePalette"), 0)
@@ -536,8 +582,9 @@ def check_native_palette_fallback(test, engine, pairs, root: Path):
     print(f"Native robe palette parity passed: {checks} GPU draws; all176 color IDs, all10 layers, all256 "
         "shades and RGBA versus original installed palettes; all shader variants/quality modes, "
         "native scalar readbacks, positive custom-row precedence and stale-scheme isolation.", flush=True)
-    print(f"RGB palette/metal coverage passed: {rgb_checks} production GPU draws; all10 layers, all256 "
-        "shades, four RGB colors, all shader variants/quality modes and original metal alpha curves.", flush=True)
+    print(f"RGB nearest-swatch shading passed: {rgb_checks} production GPU draws; all10 layers, all256 "
+        "shades, every swatch as exact RGB equal to its palette row (RGBA), eight off-palette colors (two near-black), "
+        "all shader variants/quality modes.", flush=True)
 
 
 def compile_engine_pairs(test, engine, pairs, parameters):
@@ -596,26 +643,33 @@ def compile_engine_pairs(test, engine, pairs, parameters):
 
 
 def tint_dds_layout(header: bytes, size: int, txi: str):
-    """Reject the ambiguous base-only DDS inputs that NWN uploaded as mip chains.
+    """Reject ambiguous DDS inputs that NWN could upload past their payload.
 
-    The crash dump showed glCompressedTexImage2D reading mip level 1 beyond the
-    allocation. Packed tint maps intentionally contain only level 0: require
-    BOTH an explicit count and the texture policy that disables mip uploading.
-    A valid generic DDS header alone does not establish NWN loader safety.
+    A crash dump once showed glCompressedTexImage2D reading a mip level beyond
+    the allocation of a base-only map with no declared count. Packed tint maps
+    now store their full mip chain down to 1x1, so a far pixel averages shades
+    instead of glittering: require an explicit count of every level, a file
+    that holds exactly those levels, and a TXI that keeps mipmaps on.
     """
     if len(header) != 128 or header[:4] != b"DDS " or header[84:88] != b"ATI2":
         raise AssertionError("Tint texture must have a complete ATI2 DDS header")
     flags, height, width, linear_size, _, count = struct.unpack_from("<6I", header, 8)
-    if not flags & 0x20000 or count != 1:
-        raise AssertionError("Base-only tint DDS requires DDSD_MIPMAPCOUNT and explicit mipmap count 1")
     if width <= 0 or height <= 0:
         raise AssertionError("Tint DDS dimensions must be positive")
+    # Sizes are worked out here, not imported from the generator, so this
+    # guard stays an independent check on the files the generator writes.
+    levels = [(width, height)]
+    while levels[-1] != (1, 1):
+        levels.append((max(levels[-1][0] // 2, 1), max(levels[-1][1] // 2, 1)))
+    if not flags & 0x20000 or count != len(levels):
+        raise AssertionError(f"Tint DDS requires DDSD_MIPMAPCOUNT and its full chain of {len(levels)} levels")
     payload_size = ((width + 3) // 4) * ((height + 3) // 4) * 16
-    if linear_size != payload_size or size != 128 + payload_size:
-        raise AssertionError("Tint DDS declared base-level dimensions must exactly cover its BC5 payload")
+    chain_size = sum(((w + 3) // 4) * ((h + 3) // 4) * 16 for w, h in levels)
+    if linear_size != payload_size or size != 128 + chain_size:
+        raise AssertionError("Tint DDS must hold exactly its declared BC5 mip chain")
     directives = re.findall(r"^\s*mipmap\s+(\d+)\s*$", txi, re.MULTILINE | re.IGNORECASE)
-    if directives != ["0"]:
-        raise AssertionError("Base-only tint DDS requires a sibling TXI with one mipmap 0 directive")
+    if directives != ["1"]:
+        raise AssertionError("Tint DDS requires a sibling TXI with one mipmap 1 directive")
     return width, height, payload_size
 
 
@@ -638,22 +692,30 @@ def audit_tint_dds(root: Path):
     zero_count = bytearray(header)
     struct.pack_into("<I", zero_count, 8, struct.unpack_from("<I", zero_count, 8)[0] & ~0x20000)
     struct.pack_into("<I", zero_count, 28, 0)
-    for invalid_header, invalid_txi in ((zero_count, txi), (header, ""), (header, "mipmap 1\n")):
+    base_only = bytearray(header)
+    struct.pack_into("<I", base_only, 28, 1)
+    for invalid_header, invalid_size, invalid_txi in (
+        (zero_count, path.stat().st_size, txi),
+        (base_only, path.stat().st_size, txi),
+        (header, path.stat().st_size - 16, txi),
+        (header, path.stat().st_size, ""),
+        (header, path.stat().st_size, "mipmap 0\n"),
+    ):
         try:
-            tint_dds_layout(invalid_header, path.stat().st_size, invalid_txi)
+            tint_dds_layout(invalid_header, invalid_size, invalid_txi)
         except AssertionError:
             continue
         raise AssertionError("Unsafe DDS mipmap negative control unexpectedly passed")
     print(f"NWN tint texture input checks passed: {len(paths)} DDS/TXI pairs; ambiguous count, missing TXI, "
-        "and enabled-mipmap negative controls rejected.", flush=True)
+        "truncated chain, missing TXI and disabled-mipmap negative controls rejected.", flush=True)
 
 
 def draw_engine_materials(test, engine, root: Path):
     """Draw production shaders with the reported NPCs' compressed DDS bytes.
 
     This validates native GL uploads and draws, not NWN's separate DDS parser.
-    Exercise both base-level and generated-mipmap sampling without fabricating
-    any bytes beyond the payload declared by each DDS header.
+    Exercise both base-level and stored-mipmap sampling, uploading each stored
+    level on its own and no bytes beyond the payload each DDS header declares.
     """
     gl = test.gl
     attribute = gl.function("glGetAttribLocation", ct.c_int, ct.c_uint, ct.c_char_p)
@@ -664,7 +726,6 @@ def draw_engine_materials(test, engine, root: Path):
     matrix = gl.function("glUniformMatrix4fv", None, ct.c_int, ct.c_int, ct.c_ubyte, ct.c_void_p)
     compressed_image = gl.function("glCompressedTexImage2D", None, ct.c_uint, ct.c_int, ct.c_uint,
         ct.c_int, ct.c_int, ct.c_int, ct.c_int, ct.c_void_p)
-    generate_mipmap = gl.function("glGenerateMipmap", None, ct.c_uint)
     delete_textures = gl.function("glDeleteTextures", None, ct.c_int, ct.POINTER(ct.c_uint))
     draw = gl.function("glDrawArrays", None, ct.c_uint, ct.c_int, ct.c_int)
     finish = gl.function("glFinish", None)
@@ -742,8 +803,15 @@ def draw_engine_materials(test, engine, root: Path):
         width, height, _ = tint_dds_layout(data[:128], len(data), dds.with_suffix(".txi").read_text())
         if material in hand_materials and (width, height) != (256, 256):
             raise AssertionError(f"Restored hand {material} still uses a mask from the stock mesh: {width}x{height}")
-        payload = data[128:]
-        pixels = ct.create_string_buffer(payload)
+        mip_levels = []
+        offset, level_width, level_height = 128, width, height
+        while True:
+            level_size = ((level_width + 3) // 4) * ((level_height + 3) // 4) * 16
+            mip_levels.append((level_width, level_height, level_size, ct.create_string_buffer(data[offset:offset + level_size])))
+            offset += level_size
+            if (level_width, level_height) == (1, 1):
+                break
+            level_width, level_height = max(level_width // 2, 1), max(level_height // 2, 1)
         inspect_row = ("rowleath2" if material.startswith(("pmh0_shin", "pmh0_foot"))
             else "rowskin" if material in hand_materials else None)
         outputs = (("surface", "palette") if inspect_row else
@@ -820,14 +888,13 @@ def draw_engine_materials(test, engine, root: Path):
                 test.integer(test.location(program, b"texture0Bound"), 1)
                 test.active_texture(0x84C0 + 7)
                 test.bind_texture(0x0DE1, 8)
-                compressed_image(0x0DE1, 0, 0x8DBD, width, height, 0, len(payload), pixels)
+                for level, (level_width, level_height, level_size, pixels) in enumerate(mip_levels):
+                    compressed_image(0x0DE1, level, 0x8DBD, level_width, level_height, 0, level_size, pixels)
                 check(f"BC5 compressed upload {dds.name}")
-                mip_modes = ("base-level",) if output == "palette" else ("base-level", "default-incomplete", "generated-mips")
+                mip_modes = ("base-level",) if output == "palette" else ("base-level", "stored-mips")
                 for mip_mode in mip_modes:
                     test.texture_parameter(0x0DE1, 0x813D, 0 if mip_mode == "base-level" else 1000)
                     test.texture_parameter(0x0DE1, 0x2801, 0x2601 if mip_mode == "base-level" else 0x2703)
-                    if mip_mode == "generated-mips":
-                        generate_mipmap(0x0DE1)
                     check(f"BC5 {mip_mode} setup {dds.name}")
                     clear_color(0.9, 0.1, 0.9, 0.123)
                     clear(0x4000)

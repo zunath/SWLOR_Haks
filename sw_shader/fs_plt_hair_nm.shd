@@ -50,8 +50,23 @@ void main ()
     vec2 tintMapSize = max(vec2(tintMapWidth, tintMapHeight), vec2(1.0));
     vec2 wrappedUV = fract(vVertexTexCoords);
     vec2 nearestUV = (floor(wrappedUV * tintMapSize) + vec2(0.5)) / tintMapSize;
-    float g = texture2D(texUnit7, wrappedUV, -10.0).r;
+    // Up close each texel keeps its own exact shade (bias -10 is level 0).
+    // Once a texel shrinks below a pixel, blend to the mask's mipmaps, which
+    // average the shades a far pixel covers, so cloth does not glitter.
+    // A mipmapped shade up close would mix shades across a dye border.
+    vec2 texels = vVertexTexCoords * tintMapSize;
+    float far = clamp(max(length(dFdx(texels)), length(dFdy(texels))) - 1.0, 0.0, 1.0);
+    float g = mix(texture2D(texUnit7, wrappedUV, -10.0).r,
+        texture2D(texUnit7, vVertexTexCoords).r, far);
+    // The layer id is a category: fetch the one texel, never filtered.
+    // Once the mask has mipmaps, anisotropic filtering samples several
+    // texels even at level 0 and blends two layer ids into a wrong one.
+#if __VERSION__ >= 130
+    ivec2 tintTexel = clamp(ivec2(wrappedUV * tintMapSize), ivec2(0), ivec2(tintMapSize) - 1);
+    float encodedLayer = texelFetch(texUnit7, tintTexel, 0).g;
+#else
     float encodedLayer = texture2D(texUnit7, nearestUV, -10.0).g;
+#endif
     float layer = floor(clamp(encodedLayer, 0.0, 0.9999) * 10.0);
 
     float v = rowSkin;
@@ -95,23 +110,68 @@ void main ()
             : (v - 2.0) * 4194304.0 + 8388608.0;
         vec3 decodedRgb = vec3(floor(rgbBits / 65536.0),
             mod(floor(rgbBits / 256.0), 256.0), mod(rgbBits, 256.0)) / 255.0;
-        float referenceRow = 0.000244140625;
-        if      (layer > 7.5) { referenceRow = 0.515869140625; }
-        else if (layer > 5.5) { referenceRow = 0.429931640625; }
-        else if (layer > 3.5) { referenceRow = 0.343994140625; }
-        else if (layer > 2.5) { referenceRow = 0.258056640625; }
-        else if (layer > 1.5) { referenceRow = 0.172119140625; }
-        else if (layer > 0.5) { referenceRow = 0.086181640625; }
-        vec4 referenceShade = texture2D(texUnit10, vec2(paletteU, referenceRow), -10.0);
-        vec3 referenceMidpoint = texture2D(texUnit10, vec2(128.5 / 256.0, referenceRow), -10.0).rgb;
+        // Shade exact RGB with the row of its nearest palette swatch (the shade-128
+        // midtone the editor shows). Atlas rows 1536-2047 map each 32-level RGB cell
+        // to up to three candidate swatches in palette order (palette_swatch_lookup
+        // in GenerateTintMapAssets.py). The nearest candidate wins, the earlier one
+        // on a tie, like the editor's closest-swatch lookup. A color equal to a
+        // swatch renders exactly like that palette color, reflection included;
+        // other colors offset the swatch row by their difference, scaled by the
+        // row's shading, so darker and more saturated colors keep the palette's
+        // contrast instead of a single light reference curve.
+        float paletteBase = 0.0;
+        float lookupBase = 1536.0;
+        if      (layer > 7.5) { paletteBase = 1056.0; lookupBase = 1920.0; }
+        else if (layer > 5.5) { paletteBase = 880.0;  lookupBase = 1920.0; }
+        else if (layer > 3.5) { paletteBase = 704.0;  lookupBase = 1920.0; }
+        else if (layer > 2.5) { paletteBase = 528.0;  lookupBase = 1792.0; }
+        else if (layer > 1.5) { paletteBase = 352.0;  lookupBase = 1792.0; }
+        else if (layer > 0.5) { paletteBase = 176.0;  lookupBase = 1664.0; }
+        vec3 lookupCell = floor(decodedRgb * 31.0 + 0.5);
+        float cellIndex = lookupCell.r * 1024.0 + lookupCell.g * 32.0 + lookupCell.b;
+        float lookupRow = lookupBase + floor(cellIndex / 256.0);
+        float lookupColumn = cellIndex - floor(cellIndex / 256.0) * 256.0;
+        vec3 candidates = floor(texture2D(texUnit10, vec2((lookupColumn + 0.5) / 256.0,
+            (lookupRow + 0.5) / 2048.0), -10.0).rgb * 255.0 + 0.5);
+        float swatchIndex = candidates.r;
+        vec3 swatchMidpoint = texture2D(texUnit10,
+            vec2(128.5 / 256.0, (paletteBase + candidates.r + 0.5) / 2048.0), -10.0).rgb;
+        vec3 candidateMidpoint = texture2D(texUnit10,
+            vec2(128.5 / 256.0, (paletteBase + candidates.g + 0.5) / 2048.0), -10.0).rgb;
+        if (dot(candidateMidpoint - decodedRgb, candidateMidpoint - decodedRgb) <
+            dot(swatchMidpoint - decodedRgb, swatchMidpoint - decodedRgb))
+        {
+            swatchIndex = candidates.g;
+            swatchMidpoint = candidateMidpoint;
+        }
+        candidateMidpoint = texture2D(texUnit10,
+            vec2(128.5 / 256.0, (paletteBase + candidates.b + 0.5) / 2048.0), -10.0).rgb;
+        if (dot(candidateMidpoint - decodedRgb, candidateMidpoint - decodedRgb) <
+            dot(swatchMidpoint - decodedRgb, swatchMidpoint - decodedRgb))
+        {
+            swatchIndex = candidates.b;
+            swatchMidpoint = candidateMidpoint;
+        }
+        vec4 swatchShade = texture2D(texUnit10,
+            vec2(paletteU, (paletteBase + swatchIndex + 0.5) / 2048.0), -10.0);
         vec3 luminance = vec3(0.2126, 0.7152, 0.0722);
-        float shadeScale = max(dot(referenceShade.rgb, luminance) /
-            max(dot(referenceMidpoint, luminance), 1.0 / 255.0), 0.0);
-        // Metal layers rely on palette alpha for legacy reflection/specularity,
-        // even without authored maps. Keep the neutral metal coverage curve;
-        // other RGB layers stay opaque and never import a reference row's hue.
-        float environmentAlpha = layer > 1.5 && layer < 3.5 ? referenceShade.a : 1.0;
-        paletteColor = vec4(clamp(decodedRgb * shadeScale, 0.0, 1.0), environmentAlpha);
+        // An all-black swatch row (such as hair row 57) has no shading to lend:
+        // shade the offset with the layer's first palette row instead, so a
+        // near-black custom color keeps its hue. Exact black still stays black.
+        vec3 rampShade = swatchShade.rgb;
+        vec3 rampMidpoint = swatchMidpoint;
+        if (dot(swatchMidpoint, luminance) < 0.5 / 255.0)
+        {
+            rampShade = texture2D(texUnit10,
+                vec2(paletteU, (paletteBase + 0.5) / 2048.0), -10.0).rgb;
+            rampMidpoint = texture2D(texUnit10,
+                vec2(128.5 / 256.0, (paletteBase + 0.5) / 2048.0), -10.0).rgb;
+        }
+        float shadeScale = max(dot(rampShade, luminance) /
+            max(dot(rampMidpoint, luminance), 1.0 / 255.0), 0.0);
+        vec3 shadedRgb = swatchShade.rgb + (decodedRgb - swatchMidpoint) * shadeScale;
+        float environmentAlpha = swatchShade.a;
+        paletteColor = vec4(clamp(shadedRgb, 0.0, 1.0), environmentAlpha);
     }
     vec3 vTint = paletteColor.rgb;
 
