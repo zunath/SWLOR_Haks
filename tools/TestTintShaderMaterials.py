@@ -801,10 +801,11 @@ def draw_engine_materials(test, engine, root: Path):
         mask = re.search(r"^texture7\s+(\S+)", source, re.MULTILINE)[1]
         dds = next(root.glob(f"sw_tint*/{mask}.dds"))
         data = dds.read_bytes()
-        width, height, _ = tint_dds_layout(data[:128], len(data), dds.with_suffix(".txi").read_text())
+        width, height, base_size = tint_dds_layout(data[:128], len(data), dds.with_suffix(".txi").read_text())
         if material in hand_materials and (width, height) != (256, 256):
             raise AssertionError(f"Restored hand {material} still uses a mask from the stock mesh: {width}x{height}")
-        payload = data[128:]
+        # Level 0 only: glCompressedTexImage2D rejects a size that includes the lower levels.
+        payload = data[128:128 + base_size]
         pixels = ct.create_string_buffer(payload)
         inspect_row = ("rowleath2" if material.startswith(("pmh0_shin", "pmh0_foot"))
             else "rowskin" if material in hand_materials else None)

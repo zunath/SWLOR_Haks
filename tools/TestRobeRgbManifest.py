@@ -140,6 +140,11 @@ class RobeRgbManifestTests(unittest.TestCase):
             found = g.outside_bank_references(manifest, active, {"pmh34", "pmh35", "pmh_mid"})
             self.assertEqual({}, found)
 
+    def test_registered_robes_of_a_removed_body_are_not_built(self):
+        selected = {"pfb0_robe182": "pfb", "pfh0_robe182": "pfh"}
+        self.assertEqual({"pfh0_robe182": "pfh"}, g.wearable_robes(selected, {"pfb"}))
+        self.assertEqual(selected, g.wearable_robes(selected, set()))
+
     def test_bodies_without_a_base_root_lose_their_generated_outputs(self):
         builds = {"pfb166": {}, "pfb166_robe182": {}, "pfh166": {}, "pfb_ra062": {}, "pfh_ra112": {}}
         bank_sets = {"pfb_ra062": {"parts": ["pfb_ra062", "pfb_ra062_b01"]}, "pfh_ra112": {"parts": ["pfh_ra112"]}}

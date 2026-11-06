@@ -648,6 +648,12 @@ def removed_body_outputs(manifest, body_exists):
     return removed, names
 
 
+def wearable_robes(selected, removed_bodies):
+    """Registered robes to build: a removed body has no root for its robes to inherit from."""
+    return {name: path for name, path in selected.items()
+            if PATTERN.fullmatch(name)[1] not in removed_bodies}
+
+
 def remove_body_outputs(names, manifest, active):
     """Delete the owned outputs of removed bodies after proving every one first."""
     paths = []
@@ -793,6 +799,7 @@ def main():
     if removed_bodies:
         print(f"Removing {len(removed_outputs)} generated outputs of bodies without a base root: "
               f"{', '.join(sorted(removed_bodies))}.", flush=True)
+    selected = wearable_robes(selected, removed_bodies)
     dependencies = {}
     missing = set()
     def load(name):
