@@ -9,6 +9,8 @@ import tempfile
 import unittest
 from unittest.mock import patch
 
+import numpy as np
+
 import GenerateTintMapAssets as g
 
 
@@ -171,6 +173,60 @@ class BaseBodyPaletteTests(unittest.TestCase):
         catalog = {line.split()[1] for line in g.OUTPUT_2DA.read_text().splitlines()[3:] if len(line.split()) == 4}
         self.assertIn("helm_101", catalog)
 
+    @staticmethod
+    def mesh_materials(path, data):
+        """Yield (node, texture offset, bitmap, material, skinned) for each binary mesh."""
+        import struct
+        header = g.FILE_HEADER_SIZE
+        pending, seen = [struct.unpack_from("<I", data, header + 72)[0]], set()
+        while pending:
+            pointer = pending.pop()
+            if pointer in seen:
+                continue
+            seen.add(pointer)
+            node = header + pointer
+            children, count = struct.unpack_from("<II", data, node + 72)
+            content = struct.unpack_from("<I", data, node + 108)[0]
+            pending.extend(struct.unpack_from("<I", data, header + children + 4 * i)[0] for i in range(count))
+            if not content & 0x20:
+                continue
+            mesh = node + g.NODE_HEADER_SIZE
+            mesh += g.LIGHT_HEADER_SIZE if content & 0x02 else 0
+            mesh += g.EMITTER_HEADER_SIZE if content & 0x04 else 0
+            mesh += g.REFERENCE_HEADER_SIZE if content & 0x10 else 0
+            def read(offset, length=64):
+                return data[offset:offset + length].split(b"\0", 1)[0].decode("ascii").lower()
+            yield (read(node + 32, 32), mesh + g.MESH_TEXTURE0_OFFSET, read(mesh + g.MESH_TEXTURE0_OFFSET),
+                   read(mesh + g.MESH_MATERIAL_NAME_OFFSET), bool(content & 0x40))
+
+    def test_neck012_artwork_mesh_shows_authored_respirator_on_every_playable_body(self):
+        # Every neck 012 model shares one skinned respirator mesh whose UVs fit the
+        # authored p?h0_neck012 art; the legacy PLT atlas is an unrelated torso skin.
+        # The male human mesh was exported with bitmap "pmh0_neck012.001" and the
+        # elf, dwarf and half-orc copies had none or their own name, so they drew
+        # the atlas instead of the art (the authored control landed on the throat).
+        models = g.find_active_models()
+        catalog = set()
+        for line in g.OUTPUT_2DA.read_text().splitlines()[3:]:
+            fields = line.split()
+            if len(fields) == 4:
+                catalog.add((fields[1].lower(), fields[2].lower(), fields[3]))
+        for gender in "mf":
+            for family in "hedo":
+                model = f"p{gender}{family}0_neck012"
+                with self.subTest(model=model):
+                    path = models[model]
+                    data = path.read_bytes()
+                    skins = [
+                        material for _, _, _, material, skinned in self.mesh_materials(path, data)
+                        if skinned
+                    ]
+                    self.assertEqual(len(skins), 1)
+                    text = g.mtr_path(skins[0]).read_text().lower()
+                    self.assertIn(f"texture0 p{gender}h0_neck012\n", text)
+                    self.assertIn("parameter float useauthoreddiffuse 1.0\n", text)
+                    self.assertIn((model, skins[0], "0"), catalog)
+
     def test_authored_controls_do_not_replace_shared_legacy_palette_sources(self):
         from GenerateAuthoredDiffuseTintMaps import SOURCES, validate
         entries = g.load_source_manifest()
@@ -290,12 +346,35 @@ class BaseBodyPaletteTests(unittest.TestCase):
                 self.assertEqual(entry["layers"], [0])
                 path = g.packed_dds_path(name, entry)
                 self.assertIsNone(g.check_dds(path, 256, 256))
-                self.assertEqual(path.with_suffix(".txi").read_text().strip(), "mipmap 0")
+                self.assertEqual(path.with_suffix(".txi").read_text().strip(), "mipmap 1")
                 for material in [name] + entry.get("aliases", []):
                     lines = g.mtr_path(material).read_text().splitlines()
                     self.assertIn("parameter float tintMapWidth 256.0", lines)
                     self.assertIn("parameter float tintMapHeight 256.0", lines)
                     self.assertIn(f"texture7 {entry['texture']}", lines)
+
+    def test_mip_block_with_more_layers_than_bc4_can_encode_still_writes(self):
+        layer = np.kron(np.arange(16, dtype=np.uint8).reshape(4, 4) % 9, np.ones((4, 4), dtype=np.uint8))
+        shade = np.zeros((16, 16), dtype=np.uint8)
+        with self.assertRaises(ValueError):
+            g.packed_level(*g.packed_mip_levels(shade, layer)[2])
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "tm_nine_layers.dds"
+            g.write_packed_dds(path, 16, 16, shade, layer)
+            self.assertIsNone(g.check_dds_payload(path, 16, 16))
+            np.testing.assert_array_equal(g.decode_dds_layers(path, 16, 16), layer)
+
+    def test_odd_sized_mip_levels_average_the_whole_image(self):
+        shade = np.full((5, 7), 10, dtype=np.uint8)
+        shade[-1, :] = 200
+        shade[:, -1] = 200
+        levels = g.packed_mip_levels(shade, np.zeros((5, 7), dtype=np.uint8))
+        self.assertEqual(int(levels[-1][0][0, 0]), round(float(shade.mean())))
+
+    def test_even_sized_mip_levels_average_each_two_by_two_block(self):
+        shade = np.array([[0, 2, 10, 10], [2, 4, 10, 10]], dtype=np.uint8)
+        level = g.packed_mip_levels(shade, np.zeros((2, 4), dtype=np.uint8))[1][0]
+        np.testing.assert_array_equal(level, [[2, 10]])
 
     def test_stock_foot_models_retain_their_matching_stock_palettes(self):
         entries = g.load_source_manifest()
