@@ -9,6 +9,8 @@ import tempfile
 import unittest
 from unittest.mock import patch
 
+import numpy as np
+
 import GenerateTintMapAssets as g
 
 
@@ -344,12 +346,35 @@ class BaseBodyPaletteTests(unittest.TestCase):
                 self.assertEqual(entry["layers"], [0])
                 path = g.packed_dds_path(name, entry)
                 self.assertIsNone(g.check_dds(path, 256, 256))
-                self.assertEqual(path.with_suffix(".txi").read_text().strip(), "mipmap 0")
+                self.assertEqual(path.with_suffix(".txi").read_text().strip(), "mipmap 1")
                 for material in [name] + entry.get("aliases", []):
                     lines = g.mtr_path(material).read_text().splitlines()
                     self.assertIn("parameter float tintMapWidth 256.0", lines)
                     self.assertIn("parameter float tintMapHeight 256.0", lines)
                     self.assertIn(f"texture7 {entry['texture']}", lines)
+
+    def test_mip_block_with_more_layers_than_bc4_can_encode_still_writes(self):
+        layer = np.kron(np.arange(16, dtype=np.uint8).reshape(4, 4) % 9, np.ones((4, 4), dtype=np.uint8))
+        shade = np.zeros((16, 16), dtype=np.uint8)
+        with self.assertRaises(ValueError):
+            g.packed_level(*g.packed_mip_levels(shade, layer)[2])
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "tm_nine_layers.dds"
+            g.write_packed_dds(path, 16, 16, shade, layer)
+            self.assertIsNone(g.check_dds_payload(path, 16, 16))
+            np.testing.assert_array_equal(g.decode_dds_layers(path, 16, 16), layer)
+
+    def test_odd_sized_mip_levels_average_the_whole_image(self):
+        shade = np.full((5, 7), 10, dtype=np.uint8)
+        shade[-1, :] = 200
+        shade[:, -1] = 200
+        levels = g.packed_mip_levels(shade, np.zeros((5, 7), dtype=np.uint8))
+        self.assertEqual(int(levels[-1][0][0, 0]), round(float(shade.mean())))
+
+    def test_even_sized_mip_levels_average_each_two_by_two_block(self):
+        shade = np.array([[0, 2, 10, 10], [2, 4, 10, 10]], dtype=np.uint8)
+        level = g.packed_mip_levels(shade, np.zeros((2, 4), dtype=np.uint8))[1][0]
+        np.testing.assert_array_equal(level, [[2, 10]])
 
     def test_stock_foot_models_retain_their_matching_stock_palettes(self):
         entries = g.load_source_manifest()
