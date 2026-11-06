@@ -170,7 +170,15 @@ vec4 ResolveTintColor(float g, float layer, vec3 authoredDiffuse)
 
 vec4 ResolveTintTexel(vec2 uv, vec3 authoredDiffuse)
 {
+    // uv is a texel centre. Fetch that texel exactly: anisotropic filtering
+    // on the mipmapped mask would blend its layer id with a neighbour's.
+#if __VERSION__ >= 130
+    vec2 tintSize = max(vec2(tintMapWidth, tintMapHeight), vec2(1.0));
+    ivec2 tintTexel = ivec2(mod(floor(uv * tintSize), tintSize));
+    vec2 packedTint = texelFetch(texUnit7, tintTexel, 0).rg;
+#else
     vec2 packedTint = texture2D(texUnit7, uv, -10.0).rg;
+#endif
     float layer = floor(clamp(packedTint.g, 0.0, 0.9999) * 10.0);
     return ResolveTintColor(packedTint.r, layer, authoredDiffuse);
 }
