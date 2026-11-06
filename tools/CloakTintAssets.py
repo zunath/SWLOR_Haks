@@ -81,8 +81,48 @@ def opacity_texture_indices():
     return [index for index, number in enumerate(texture_ids()) if modes[number]]
 
 
+# The atlas has one level, and fs_cloaktint must keep reading it as before: a far
+# shade would read a level the atlas does not store, and texelFetch would take a
+# tile texel instead of the selected cloak's. Restore the plain reads first.
+BASE_LEVEL_READS = (
+    ("""    // uv is a texel centre. Fetch that texel exactly: anisotropic filtering
+    // on the mipmapped mask would blend its layer id with a neighbour's.
+#if __VERSION__ >= 130
+    vec2 tintSize = max(vec2(tintMapWidth, tintMapHeight), vec2(1.0));
+    ivec2 tintTexel = ivec2(mod(floor(uv * tintSize), tintSize));
+    vec2 packedTint = texelFetch(texUnit7, tintTexel, 0).rg;
+#else
+    vec2 packedTint = texture2D(texUnit7, uv, -10.0).rg;
+#endif
+""", """    vec2 packedTint = texture2D(texUnit7, uv, -10.0).rg;
+"""),
+    ("""    // Up close each texel keeps its own exact shade (bias -10 is level 0).
+    // Once a texel shrinks below a pixel, blend to the mask's mipmaps, which
+    // average the shades a far pixel covers, so cloth does not glitter.
+    // A mipmapped shade up close would mix shades across a dye border.
+    vec2 texels = vVertexTexCoords * tintMapSize;
+    float far = clamp(max(length(dFdx(texels)), length(dFdy(texels))) - 1.0, 0.0, 1.0);
+    float g = mix(texture2D(texUnit7, wrappedUV, -10.0).r,
+        texture2D(texUnit7, vVertexTexCoords).r, far);
+    // The layer id is a category: fetch the one texel, never filtered.
+    // Once the mask has mipmaps, anisotropic filtering samples several
+    // texels even at level 0 and blends two layer ids into a wrong one.
+#if __VERSION__ >= 130
+    ivec2 tintTexel = clamp(ivec2(wrappedUV * tintMapSize), ivec2(0), ivec2(tintMapSize) - 1);
+    float encodedLayer = texelFetch(texUnit7, tintTexel, 0).g;
+#else
+    float encodedLayer = texture2D(texUnit7, nearestUV, -10.0).g;
+#endif
+""", """    float g = texture2D(texUnit7, wrappedUV, -10.0).r;
+    float encodedLayer = texture2D(texUnit7, nearestUV, -10.0).g;
+"""),
+)
+
+
 def shader_text():
     source = (ROOT / "sw_shader/fs_plt_tinter.shd").read_text()
+    for old, new in BASE_LEVEL_READS:
+        source = replace_once(source, old, new)
     # The opaque texture0 placeholder makes NWN select NO_DISCARD. Keep palette
     # cutouts active even when inc_common would otherwise erase discard calls.
     source = replace_once(source, '#include "inc_standard"',
