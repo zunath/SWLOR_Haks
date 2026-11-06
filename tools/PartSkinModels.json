@@ -476,7 +476,7 @@
     "pmh0_chest1450": {"source": "pmh0_chest291", "path": "sw_pt_chest/pmh0_chest1450.mdl", "mapping": [[[0, 2, 2], [1, 36, 54], [2, 13, 21], [3, 41, 65], [4, 7, 10], [5, 38, 56]]], "sha256": "359e05d66ec5cad8f43f57c520841055023221e27abfbd51b8dc60a9dfca635b"},
     "pmh0_chest1451": {"source": "pmh0_chest299", "path": "sw_pt_chest/pmh0_chest1451.mdl", "mapping": [[[0, 41, 65], [1, 36, 54], [2, 1, 1], [3, 38, 56], [4, 2, 2]]], "sha256": "c1a18e9fa734e46a94b13e2986821cd21f925cc83f734cb4a2b6ed38411aca76"},
     "pmh0_chest1452": {"source": "pmh0_chest300", "path": "sw_pt_chest/pmh0_chest1452.mdl", "mapping": [[[0, 2, 2], [1, 36, 54], [2, 38, 56], [3, 41, 65], [4, 13, 21], [5, 7, 10]]], "sha256": "f62bba0234719268fbf03997d62e75b348c638222442c555c94215cc6790c1ac"},
-    "pmh0_chest1994": {"source": "pmh0_chest154", "path": "sw_pt_chest/pmh0_chest1994.mdl", "mapping": [[[0, 39, 57], [1, 42, 66], [3, 38, 56], [5, 41, 65], [6, 36, 54], [7, 2, 2], [8, 48, 79], [9, 47, 78]], [[0, 7, 10], [1, 2, 2], [2, 36, 54], [3, 13, 21]], [[0, 13, 21], [1, 2, 2], [2, 36, 54], [3, 7, 10]]], "sha256": "625063686992ce71f24d721d2076ab410ab40793a38a7c097deec08ffa4b6d80"},
+    "pmh0_chest1994": {"source": "pmh0_chest154", "path": "sw_pt_chest/pmh0_chest1994.mdl", "mapping": [[[0, 39, 57], [1, 42, 66], [3, 38, 56], [5, 41, 65], [6, 36, 54], [7, 2, 2], [8, 48, 79], [9, 47, 78]], [[0, 7, 10], [1, 2, 2], [2, 36, 54], [3, 13, 21]], [[0, 13, 21], [1, 2, 2], [2, 36, 54], [3, 7, 10]]], "sha256": "e6bbcb21eb8c2577ba8f9b7fb43162cb0f37e806f19d38625c2eaace1fb40a80"},
     "pmh0_chest1995": {"source": "pmh0_chest269", "path": "sw_pt_chest/pmh0_chest1995.mdl", "mapping": [[[0, 2, 2], [1, 1, 1], [2, 38, 56], [3, 41, 65], [4, 36, 54], [5, 39, 57], [6, 42, 66], [7, 48, 79], [8, 47, 78]]], "sha256": "3d80601870d89ed29078c236de0ae13bf2e0c857dc92d671b48f1d8356c97742"},
     "pmh0_chest2044": {"source": "pmh0_chest028", "path": "sw_pt_chest/pmh0_chest2044.mdl", "mapping": [[[0, 2, 2], [1, 36, 54], [2, 41, 65], [3, 13, 21], [4, 4, 4], [5, 7, 10], [6, 38, 56], [7, 39, 57], [8, 42, 66], [9, 48, 79], [10, 47, 78]]], "sha256": "7423a4e0a9fef23c194a3cd7fba2d57d883a5dc6557382c948fcccc65437d3bf"},
     "pmh0_chest2045": {"source": "pmh0_chest059", "path": "sw_pt_chest/pmh0_chest2045.mdl", "mapping": [[[0, 2, 2], [1, 13, 21], [2, 36, 54], [3, 7, 10], [4, 4, 4], [5, 38, 56], [6, 41, 65], [7, 39, 57], [8, 42, 66], [9, 1, 1], [10, 47, 78], [11, 48, 79]]], "sha256": "4f82b3766d489101b9db1744ec94472d75519800b79f0c3f24e4ea11c045d0b4"},
@@ -1114,7 +1114,7 @@
     "sha256": "1520a318bc6b24df5802b3de7986f23c5950ba2cb5b76a4f36b647022682fed8"
   },
   "implementation": {
-    "tools/GeneratePartSkinModels.py": "15fb75654e3b8d2410fd8457cd665f94d4b7585dfcedc0859abb47df67e45cec",
+    "tools/GeneratePartSkinModels.py": "53c6522c8c9ceffe3b6c33ef345f782ee6c61c35b4e9010f98dd593b59d86c56",
     "tools/NeckSkinBindings.py": "a774745d7c685b6e65a60677c5f66caa8bd26e24053b5b189e651a92c41bddf9",
     "tools/RobePoseAudit.py": "e59dbbd960b60fc97253bf8b461af5934bdccff2c790a77b2b7e58ea6dfb4b7b",
     "tools/CompileModels.py": "ba86ec21dcb70eabbcb107502aee3fbe7ded7694ffe7dc3be6729ff88c754fa6",

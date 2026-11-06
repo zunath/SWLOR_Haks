@@ -127,7 +127,7 @@ class PartSkinModelTests(unittest.TestCase):
                 new = Model(data, False)
                 self.assertEqual(original[12 + old.uint(4):], data[12 + new.uint(4):])
                 self.assertEqual(len(old.nodes), len(new.nodes))
-                expected = bytearray(original[:12 + old.uint(4)])
+                expected = bytearray(parts.alias_selfillum(original, record['source'])[:12 + old.uint(4)])
                 actual = bytearray(data[:len(expected)])
                 for start, size in [(4, 4), (20, 64), (old.nodes[0][4] + 32, 32)]:
                     actual[start:start + size] = expected[start:start + size]
@@ -247,6 +247,41 @@ class CheckPartSkinModelsTests(unittest.TestCase):
             (root / record['path']).write_bytes(b'old')
             with self.assertRaisesRegex(ValueError, 'retired'):
                 parts.run(root)
+
+
+class AliasSelfIllumTests(unittest.TestCase):
+    def test_chest154_alias_regeneration_keeps_source_but_removes_alias_glow(self):
+        root = parts.ROOT
+        source = (root / 'sw_pt_chest/pmh0_chest154.mdl').read_bytes()
+        manifest = json.loads((root / parts.MANIFEST).read_text())
+        record = manifest['models']['pmh0_chest1994']
+        target = (root / record['path']).read_bytes()
+        external = parts.part_skins(source)
+        target_model = Model(target, False)
+        extent = max(target_model.uint(skin + 24) for skin, _ in external)
+        regenerated = parts.remap(source, 'pmh0_chest1994', record['mapping'], external, extent)
+        self.assertNotEqual(regenerated, target)
+        self.assertEqual(parts.alias_selfillum(regenerated, record['source']), target)
+        # The source remains authored at 0.5; the alias has zero in every mesh controller.
+        for data, expected in ((source, (0.5, 0.5, 0.5)), (target, (0.0, 0.0, 0.0))):
+            model = Model(data, False)
+            found = 0
+            for _, _, _, _, node in model.nodes:
+                if not model.uint(node + 108) & 32:
+                    continue
+                for index in range(model.uint(node + 88)):
+                    key = 12 + model.uint(node + 84) + index * 12
+                    if model.uint(key) == 100:
+                        offset = struct.unpack_from('<H', data, key + 8)[0]
+                        rgb = struct.unpack_from('<3f', data, 12 + model.uint(node + 96) + offset * 4)
+                        self.assertEqual(rgb, expected)
+                        found += 1
+            self.assertEqual(found, 3)
+        self.assertEqual(source, (root / 'sw_pt_chest/pmh0_chest154.mdl').read_bytes())
+
+    def test_other_sources_keep_their_authored_controllers(self):
+        data = (parts.ROOT / 'sw_pt_chest/pmh0_chest154.mdl').read_bytes()
+        self.assertIs(parts.alias_selfillum(data, 'another_source'), data)
 
 
 if __name__ == '__main__':
