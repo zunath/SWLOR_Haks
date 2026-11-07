@@ -1,0 +1,210 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="256" height="256" viewBox="0 0 256 256">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="70%">
+      <stop offset="0" stop-color="#16171a"/>
+      <stop offset="1" stop-color="#050607"/>
+    </radialGradient>
+    <linearGradient id="deck" x1="0" y1="0" x2="0.35" y2="1">
+      <stop offset="0" stop-color="#aab4be"/>
+      <stop offset="0.45" stop-color="#6c7782"/>
+      <stop offset="1" stop-color="#363d45"/>
+    </linearGradient>
+    <linearGradient id="deckfront" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4a525b"/>
+      <stop offset="1" stop-color="#15191d"/>
+    </linearGradient>
+    <linearGradient id="lid" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#6a7783"/>
+      <stop offset="0.5" stop-color="#3c4650"/>
+      <stop offset="1" stop-color="#262d34"/>
+    </linearGradient>
+    <linearGradient id="lidedge" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#9aa6b2"/>
+      <stop offset="1" stop-color="#3a424a"/>
+    </linearGradient>
+    <linearGradient id="mesh" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#3ff2ff"/>
+      <stop offset="0.6" stop-color="#0e8aa2"/>
+      <stop offset="1" stop-color="#08303e"/>
+    </linearGradient>
+    <linearGradient id="backwall" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0d5d70"/>
+      <stop offset="1" stop-color="#36e6f6"/>
+    </linearGradient>
+    <linearGradient id="sidewall" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#083846"/>
+      <stop offset="1" stop-color="#1aa6bc"/>
+    </linearGradient>
+    <linearGradient id="pitfloor" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#5ff6ff"/>
+      <stop offset="1" stop-color="#138aa0"/>
+    </linearGradient>
+    <linearGradient id="cratetop" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffd27a"/>
+      <stop offset="0.5" stop-color="#e08f2c"/>
+      <stop offset="1" stop-color="#a95c14"/>
+    </linearGradient>
+    <linearGradient id="cratefront" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#b8681a"/>
+      <stop offset="1" stop-color="#5a2c08"/>
+    </linearGradient>
+    <linearGradient id="chrome" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#40464d"/>
+      <stop offset="0.4" stop-color="#f4f7fa"/>
+      <stop offset="1" stop-color="#5a6168"/>
+    </linearGradient>
+    <linearGradient id="chromev" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f4f7fa"/>
+      <stop offset="0.5" stop-color="#8a939c"/>
+      <stop offset="1" stop-color="#2a3036"/>
+    </linearGradient>
+    <radialGradient id="emitter" cx="40%" cy="35%" r="70%">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="0.35" stop-color="#8ff8ff"/>
+      <stop offset="1" stop-color="#0a6b80"/>
+    </radialGradient>
+    <radialGradient id="joint" cx="38%" cy="35%" r="70%">
+      <stop offset="0" stop-color="#e3e9ef"/>
+      <stop offset="0.45" stop-color="#6c7886"/>
+      <stop offset="1" stop-color="#14181d"/>
+    </radialGradient>
+    <pattern id="tread" width="14" height="10" patternUnits="userSpaceOnUse" patternTransform="skewX(-12)">
+      <path d="M2 3 L8 1 L9 2 L3 4 Z" fill="#dfe5ea" opacity="0.55"/>
+      <path d="M3 4 L9 2 L9.5 3 L3.5 5 Z" fill="#1d2227" opacity="0.6"/>
+      <path d="M9 8 L13 5 L14 6 L10 9 Z" fill="#dfe5ea" opacity="0.45"/>
+      <path d="M10 9 L14 6 L14.5 7 L10.5 10 Z" fill="#1d2227" opacity="0.55"/>
+    </pattern>
+    <pattern id="hex" width="12" height="10.4" patternUnits="userSpaceOnUse">
+      <path d="M3 0 L9 0 L12 5.2 L9 10.4 L3 10.4 L0 5.2 Z" fill="none" stroke="#bffcff" stroke-width="1.1" opacity="0.75"/>
+    </pattern>
+    <filter id="blur2" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2"/></filter>
+    <filter id="blur5" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5"/></filter>
+    <filter id="blur9" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="9"/></filter>
+    <clipPath id="deckclip"><path d="M60 110 L196 110 L220 196 L36 196 Z"/></clipPath>
+    <clipPath id="pitclip"><path d="M88 120 L168 120 L186 186 L70 186 Z"/></clipPath>
+    <clipPath id="meshclip"><path d="M109 40 L147 40 L154 106 L102 106 Z"/></clipPath>
+    <linearGradient id="edgetread" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#c3ccd4"/>
+      <stop offset="1" stop-color="#59636d"/>
+    </linearGradient>
+  </defs>
+  <rect width="256" height="256" fill="url(#bg)"/>
+  <g transform="translate(128 128) scale(0.97) translate(-128 -122)">
+  <ellipse cx="128" cy="216" rx="98" ry="9" fill="#000" opacity="0.85" filter="url(#blur2)"/>
+
+  <!-- ===== deck plate section ===== -->
+  <path d="M36 196 L220 196 L220 213 L36 213 Z" fill="url(#deckfront)" stroke="#0b0d10" stroke-width="1.5"/>
+  <path d="M37 197.2 L219 197.2" stroke="#9aa5b0" stroke-width="1.2" opacity="0.7"/>
+  <g fill="#0f1215" opacity="0.85">
+    <rect x="52" y="202" width="24" height="5" rx="2"/><rect x="180" y="202" width="24" height="5" rx="2"/>
+  </g>
+  <path d="M60 110 L196 110 L220 196 L36 196 Z" fill="url(#deck)"/>
+  <g clip-path="url(#deckclip)">
+    <rect x="20" y="100" width="220" height="100" fill="url(#tread)"/>
+    <!-- light spill from the open compartment -->
+    <ellipse cx="128" cy="152" rx="78" ry="40" fill="#2fe0f0" opacity="0.3" filter="url(#blur9)"/>
+    <!-- seam of the hatch frame -->
+    <path d="M80 115 L176 115 L194 191 L62 191 Z" fill="none" stroke="#1b2126" stroke-width="2.2"/>
+    <path d="M62 192.6 L194 192.6" stroke="#dde3e9" stroke-width="1" opacity="0.6"/>
+  </g>
+  <path d="M60 110 L196 110" stroke="#eef2f6" stroke-width="1.8" stroke-linecap="round"/>
+  <path d="M60 110 L36 196 M196 110 L220 196" stroke="#1a1f24" stroke-width="1.5"/>
+  <g fill="#e6ebf0">
+    <circle cx="70" cy="119" r="2.2"/><circle cx="186" cy="119" r="2.2"/>
+    <circle cx="50" cy="187" r="2.5"/><circle cx="206" cy="187" r="2.5"/>
+  </g>
+  <g fill="#1a1f24">
+    <circle cx="70" cy="120.2" r="1"/><circle cx="186" cy="120.2" r="1"/>
+    <circle cx="50" cy="188.3" r="1.1"/><circle cx="206" cy="188.3" r="1.1"/>
+  </g>
+
+  <!-- ===== the concealed compartment, lined with glowing scanner-dampening mesh ===== -->
+  <path d="M88 120 L168 120 L186 186 L70 186 Z" fill="#06262e"/>
+  <g clip-path="url(#pitclip)">
+    <path d="M96 142 L160 142 L180 190 L76 190 Z" fill="url(#pitfloor)"/>
+    <path d="M88 120 L96 142 L76 190 L66 190 Z" fill="url(#sidewall)"/>
+    <path d="M168 120 L190 190 L180 190 L160 142 Z" fill="url(#sidewall)"/>
+    <path d="M88 120 L168 120 L160 142 L96 142 Z" fill="url(#backwall)"/>
+    <rect x="60" y="114" width="136" height="80" fill="url(#hex)" opacity="0.55"/>
+    <path d="M96 142 L160 142" stroke="#c8fdff" stroke-width="1.2" opacity="0.8"/>
+
+    <!-- stashed cargo crate -->
+    <ellipse cx="128" cy="186" rx="38" ry="6" fill="#03262e" opacity="0.8" filter="url(#blur2)"/>
+    <path d="M95 150 L161 150 L161 192 L95 192 Z" fill="url(#cratefront)" stroke="#2a1404" stroke-width="1.4"/>
+    <path d="M100 133 L156 133 L161 150 L95 150 Z" fill="url(#cratetop)" stroke="#2a1404" stroke-width="1.4"/>
+    <!-- steel straps over the top and down the front -->
+    <path d="M111 133 L118 133 L115 150 L107 150 Z" fill="#3a4148"/>
+    <path d="M138 133 L145 133 L149 150 L141 150 Z" fill="#3a4148"/>
+    <path d="M107 150 L115 150 L115 192 L107 192 Z" fill="#262c32"/>
+    <path d="M141 150 L149 150 L149 192 L141 192 Z" fill="#262c32"/>
+    <path d="M112 133.8 L117 133.8 M139 133.8 L144 133.8" stroke="#c9d1d8" stroke-width="1"/>
+    <path d="M108 151 L114 151 M142 151 L148 151" stroke="#8a949e" stroke-width="0.9"/>
+    <!-- recessed grip on the lid of the crate -->
+    <path d="M122 139 L134 139 L135 143 L121 143 Z" fill="#6a3a0e" stroke="#2a1404" stroke-width="0.8"/>
+    <!-- lock plate -->
+    <rect x="122" y="156" width="12" height="9" rx="1.6" fill="#1c2126" stroke="#8a949e" stroke-width="0.9"/>
+    <circle cx="128" cy="160.5" r="2" fill="#7affc0"/>
+    <circle cx="128" cy="160.5" r="4" fill="#7affc0" opacity="0.35" filter="url(#blur2)"/>
+    <path d="M100 133.8 L156 133.8" stroke="#fff1c8" stroke-width="1.3" opacity="0.9"/>
+    <path d="M95.5 150.5 L160.5 150.5" stroke="#ffe0a0" stroke-width="1.1" opacity="0.65"/>
+    <path d="M95.5 150 L95.5 192" stroke="#e0a050" stroke-width="1" opacity="0.5"/>
+  </g>
+  <!-- rim of the opening -->
+  <path d="M70 186 L186 186" stroke="#eef3f7" stroke-width="2.4" stroke-linecap="round"/>
+  <path d="M70 188 L186 188" stroke="#14181c" stroke-width="1.5"/>
+  <path d="M88 120 L70 186 M168 120 L186 186" stroke="#e1e7ec" stroke-width="1.4"/>
+  <!-- glow rising out of the compartment -->
+  <ellipse cx="128" cy="128" rx="44" ry="10" fill="#6ff8ff" opacity="0.35" filter="url(#blur5)"/>
+
+  <!-- ===== the lifted deck hatch, underside lined with the same mesh ===== -->
+  <!-- hatch thickness: top and right edges, cut from the same tread plate -->
+  <path d="M98 24 L158 24 L165 19 L105 19 Z" fill="url(#edgetread)" stroke="#0b0d10" stroke-width="1"/>
+  <path d="M158 24 L165 19 L176 116 L168 120 Z" fill="url(#edgetread)" stroke="#0b0d10" stroke-width="1"/>
+  <g stroke="#2a3138" stroke-width="1" opacity="0.8">
+    <path d="M161 40 L167 36 M162 56 L168 52 M164 72 L170 68 M165 88 L171 84 M167 104 L173 100"/>
+  </g>
+  <!-- underside -->
+  <path d="M98 24 L158 24 L168 120 L88 120 Z" fill="url(#lid)" stroke="#0b0d10" stroke-width="2" stroke-linejoin="round"/>
+  <path d="M100 96 L158 96 L166 120 L90 120 Z" fill="#2fe0f0" opacity="0.4" filter="url(#blur5)"/>
+  <path d="M109 40 L147 40 L154 106 L102 106 Z" fill="url(#mesh)" stroke="#0b0d10" stroke-width="1.6"/>
+  <g clip-path="url(#meshclip)">
+    <rect x="90" y="30" width="76" height="90" fill="url(#hex)"/>
+    <path d="M109 40 L128 40 L103 96 L102 70 Z" fill="#ffffff" opacity="0.12"/>
+  </g>
+  <path d="M109 40 L147 40" stroke="#d8feff" stroke-width="1" opacity="0.6"/>
+  <!-- reinforcing rib across the hatch -->
+  <path d="M104 73 L151 73 L151.7 79 L103.4 79 Z" fill="#2a3239" stroke="#0b0d10" stroke-width="1.2"/>
+  <path d="M104.5 74 L150.5 74" stroke="#9aa6b2" stroke-width="0.9"/>
+  <!-- dampener nodes -->
+  <g>
+    <circle cx="110" cy="76" r="5" fill="#5ff6ff" opacity="0.6" filter="url(#blur2)"/>
+    <circle cx="146" cy="76" r="5" fill="#5ff6ff" opacity="0.6" filter="url(#blur2)"/>
+    <circle cx="110" cy="76" r="2.6" fill="url(#emitter)"/>
+    <circle cx="146" cy="76" r="2.6" fill="url(#emitter)"/>
+  </g>
+  <g fill="#c9d1d8">
+    <circle cx="104" cy="31" r="2"/><circle cx="152" cy="31" r="2"/>
+    <circle cx="96" cy="110" r="2"/><circle cx="160" cy="110" r="2"/>
+  </g>
+  <path d="M98 24 L158 24" stroke="#e8eef3" stroke-width="1.6" stroke-linecap="round"/>
+  <path d="M98 24 L88 120" stroke="#6f7c88" stroke-width="1.2"/>
+
+  <!-- hinge knuckles along the back edge -->
+  <rect x="94" y="115" width="18" height="10" rx="5" fill="url(#chromev)" stroke="#0b0d10" stroke-width="1.2"/>
+  <rect x="144" y="115" width="18" height="10" rx="5" fill="url(#chromev)" stroke="#0b0d10" stroke-width="1.2"/>
+  <path d="M98 117.6 L108 117.6 M148 117.6 L158 117.6" stroke="#ffffff" stroke-width="1" opacity="0.85"/>
+
+  <!-- gas strut holding the hatch open -->
+  <path d="M199 152 L171 74" stroke="#14181c" stroke-width="6.4" stroke-linecap="round"/>
+  <path d="M199 152 L185 113" stroke="#30373e" stroke-width="4.6" stroke-linecap="round"/>
+  <path d="M185 113 L171 74" stroke="url(#chrome)" stroke-width="2.8" stroke-linecap="round"/>
+  <circle cx="199" cy="152" r="4.8" fill="url(#joint)" stroke="#0b0d10" stroke-width="1.2"/>
+  <circle cx="171" cy="74" r="4" fill="url(#joint)" stroke="#0b0d10" stroke-width="1.2"/>
+
+  <!-- dampening shimmer -->
+  <g fill="#bffcff">
+    <circle cx="78" cy="140" r="1.7" opacity="0.9"/><circle cx="70" cy="128" r="1.3" opacity="0.7"/>
+    <circle cx="82" cy="104" r="1.2" opacity="0.6"/><circle cx="184" cy="132" r="1.3" opacity="0.75"/>
+  </g>
+  </g>
+</svg>

@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <defs>
+    <radialGradient id="bg" cx="55%" cy="40%" r="75%">
+      <stop offset="0" stop-color="#14203a"/>
+      <stop offset="1" stop-color="#040508"/>
+    </radialGradient>
+    <linearGradient id="body" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#c3ccd6"/>
+      <stop offset="0.45" stop-color="#6c7682"/>
+      <stop offset="1" stop-color="#262c33"/>
+    </linearGradient>
+    <linearGradient id="barrel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e2e8ee"/>
+      <stop offset="0.35" stop-color="#8b96a2"/>
+      <stop offset="1" stop-color="#1c2127"/>
+    </linearGradient>
+    <radialGradient id="muzzle" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="0.4" stop-color="#9ff3ff"/>
+      <stop offset="1" stop-color="#1fa6ff" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="netglow" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#6fe6ff" stop-opacity="0.55"/>
+      <stop offset="0.7" stop-color="#2a7cff" stop-opacity="0.15"/>
+      <stop offset="1" stop-color="#1a3cff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="strand" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#e9fdff"/>
+      <stop offset="1" stop-color="#4fc8ff"/>
+    </linearGradient>
+  </defs>
+  <rect width="256" height="256" fill="url(#bg)"/>
+  <!-- the web: a glowing hexagonal ion net spreading toward the upper right -->
+  <circle cx="160" cy="96" r="88" fill="url(#netglow)"/>
+  <g fill="none" stroke="url(#strand)" stroke-linecap="round" stroke-linejoin="round">
+    <polygon points="160,30 217,63 217,129 160,162 103,129 103,63" stroke-width="7"/>
+    <polygon points="160,62 189,79 189,113 160,130 131,113 131,79" stroke-width="5.5"/>
+    <path d="M160 30 L160 162 M103 63 L217 129 M217 63 L103 129" stroke-width="5"/>
+  </g>
+  <g fill="#ffffff">
+    <circle cx="160" cy="30" r="6"/><circle cx="217" cy="63" r="6"/><circle cx="217" cy="129" r="6"/>
+    <circle cx="160" cy="162" r="6"/><circle cx="103" cy="129" r="6"/><circle cx="103" cy="63" r="6"/>
+    <circle cx="160" cy="96" r="9"/>
+  </g>
+  <!-- arcs of ion lightning feeding the web -->
+  <path d="M84 168 L104 150 L98 140 L118 128" fill="none" stroke="#bff6ff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M92 182 L120 172 L116 160 L140 152" fill="none" stroke="#7fdcff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- the projector: an armored emitter barrel on a mount, lower left -->
+  <g>
+    <path d="M22 236 L66 196 L104 214 L64 252 Z" fill="#1c2127"/>
+    <path d="M22 236 L66 196 L80 202 L38 244 Z" fill="url(#body)"/>
+    <g transform="rotate(-38 70 190)">
+      <rect x="22" y="170" width="98" height="40" rx="10" fill="url(#barrel)"/>
+      <rect x="34" y="174" width="12" height="32" rx="3" fill="#39424c"/>
+      <rect x="54" y="174" width="12" height="32" rx="3" fill="#39424c"/>
+      <rect x="112" y="164" width="22" height="52" rx="8" fill="url(#body)"/>
+      <rect x="128" y="172" width="8" height="36" rx="3" fill="#0d1014"/>
+      <rect x="78" y="176" width="26" height="6" rx="3" fill="#7fe8ff"/>
+    </g>
+  </g>
+  <circle cx="132" cy="146" r="26" fill="url(#muzzle)"/>
+</svg>
