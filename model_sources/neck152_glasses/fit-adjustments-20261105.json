@@ -1,0 +1,118 @@
+{
+  "reference": "Unmodified lens vertical size in the handed-off 2026-11-04 MDLs",
+  "forwardAxis": "+Y",
+  "upAxis": "+Z",
+  "models": {
+    "pmd0_neck152": {
+      "lensHeight": 0.025384776294231415,
+      "deltaXYZ": [
+        0.0,
+        0.0,
+        -0.025384776294231415
+      ],
+      "baselineSha256": "006c23a37592040fa8122feaa8fae944f294fc2efc04a308a1f81f2c8b1f414f",
+      "sha256": "fccd40ad56bec200df54149212eb8be2903b19a2716a9c190b969ddd67c43587"
+    },
+    "pfd0_neck152": {
+      "lensHeight": 0.022167816758155823,
+      "deltaXYZ": [
+        0.0,
+        0.0,
+        -0.022167816758155823
+      ],
+      "baselineSha256": "b3f188f73c711a326ce2180dcba939681dfae56af5b860507bc1d1d94f2b69e2",
+      "sha256": "52cf6c73ad567aca3f7c84e4cc8433c16f93bfbd720301e8da2ed932e47a9a77"
+    },
+    "pmo0_neck152": {
+      "lensHeight": 0.0374080091714859,
+      "deltaXYZ": [
+        0.0,
+        0.047481602020561696,
+        0.028056006878614426
+      ],
+      "baselineSha256": "8ba6358e10a6a3771db719b2163ff673e07e83caba20c4918fffecf9f69b6cf8",
+      "sha256": "b77f345fab6354929eefdd158a077c78d485a7d65875012b02f0a491bb8cc14d",
+      "additionalDepthAdjustment20261106": 0.04
+    },
+    "pfo0_neck152": {
+      "lensHeight": 0.03121684491634369,
+      "deltaXYZ": [
+        0.0,
+        0.046243369076400996,
+        -0.015608422458171844
+      ],
+      "baselineSha256": "ae5c4ec7b61c9df95f6121f7741d2596367f6026754ad95f42de343f1f064296",
+      "sha256": "2da84242d2cc07eb8c67a5041e712a4e229cb347904a17cf2da4502bd7605cdd",
+      "additionalDepthAdjustment20261106": 0.04
+    },
+    "pme0_neck152": {
+      "deltaXYZ": [
+        0,
+        0.025,
+        0
+      ],
+      "baselineSha256": "cef01d1b1525987c33ff782512788dc6f13629d924b742c572fed807195e073f",
+      "sha256": "8aa41c87d9e9a0520815b2a13f57543d4bf355877e7b51f2061e36223c477273",
+      "reference": "Installed male elf-family model before the 2026-11-06 Rodian forward correction"
+    }
+  },
+  "note": "User-requested translations only; regenerate neck aliases using the current deployment skeletons.",
+  "depthReview": {
+    "date": "2026-11-06",
+    "femaleHead": 19,
+    "deltaXYZ": [
+      0,
+      0.04,
+      0
+    ],
+    "lensWhiteFillOnHead019Unresolved": true
+  },
+  "femaleVerticalReview20261106": {
+    "referenceLensHeight": 0.03121684491634369,
+    "additionalDeltaXYZ": [
+      0,
+      0,
+      -0.015608422458171844
+    ],
+    "heads": [
+      19,
+      1
+    ],
+    "forwardPositionPreserved": true
+  },
+  "maleRodianForwardReview20261106": {
+    "deltaXYZ": [
+      0,
+      0.025,
+      0
+    ],
+    "maleHeads": [
+      39,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61,
+      62
+    ],
+    "femaleHeads": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      182
+    ],
+    "sharedWithMaleBothan": true,
+    "verticalFitVariesByHead": true
+  }
+}

@@ -15,6 +15,20 @@ authored normal map (sw_pt_neck/neck152_vfx_n.tga) and bind no specular map, so
 dyed Metal 1 takes its reflectance from the palette. The lens materials cull back
 faces (twosided 0) so the closed lens shell does not blend twice.
 
+The lens materials also set "transparency 1" and "sample_framebuffer 1". That
+draws the lenses after the head, so heads with alpha-cutout surfaces (hair, fur)
+no longer show a white or opaque fill through the lenses. Keep the lenses a
+separate mesh with their node alpha; the generator keeps both directives.
+
+Fit (Xisifer, 2026-11-05/06): the glasses meshes of five bodies are moved as a
+whole, everything else unchanged. fit-adjustments-20261105.json records each
+offset and the model hashes before and after:
+  pmd0 / pfd0  down by about one lens height (Ugnaught/Ewok bodies)
+  pmo0 / pfo0  forward about 0.047, male up / female down (Cathar bodies)
+  pme0         forward 0.025 (male Rodian, Bothan and Wookiee share it)
+Human and female elf-family glasses are unchanged. One shared model per body
+cannot fit every head: some Rodian and Wookiee heads still sit high or low.
+
 Conversion inputs (GenerateTintMapAssets.py --generate-preserving, copied into
 sw_pt_neck under the material names above):
   frames.plt          -> p?h0_n152fr  (1024x512)
