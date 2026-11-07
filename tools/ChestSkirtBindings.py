@@ -57,11 +57,14 @@ engine never moves them; on those bodies the legs carry the share the source gav
 on average below the hips and the pelvis the rest (flaps_animated, still_share), and capes
 are not listed: there they keep their authored rigging (neck 289's arm-bound tail too).
 
-Belt 226, pelvis 198 and human pelvis 035 keep their original rigging; the
-manifest's "restored" list holds their original blobs, and --check keeps them so.
+Belt 226, pelvis 198 and human pelvis 035 keep their original rigging. Human
+chest154 keeps its corrected development geometry and authored skinning too:
+rebinding it would change those weights again and invalidate its robe aliases.
+The manifest's "restored" list holds these source blobs, and --check keeps them so.
 
 The originals come from the Git blobs recorded in ChestSkirtBindings.json, so --apply
 is repeatable. Replacing one of these models means recording its new source blob.
+Models whose authored skinning must be preserved belong in "restored", not "models".
 Re-run GeneratePartSkinModels.py, GenerateShoulderModels.py and GenerateNeckModels.py
 with --apply afterwards: robe-body aliases copy these weights.
 """
