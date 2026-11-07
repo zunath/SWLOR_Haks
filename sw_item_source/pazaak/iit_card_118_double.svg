@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <defs>
+    <linearGradient id="rim" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff1a8"/>
+      <stop offset="0.5" stop-color="#f2b632"/>
+      <stop offset="0.5" stop-color="#f2b632"/>
+      <stop offset="1" stop-color="#6b4307"/>
+    </linearGradient>
+    <linearGradient id="face" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3a4658"/>
+      <stop offset="0.5" stop-color="#1b2230"/>
+      <stop offset="1" stop-color="#0c1018"/>
+    </linearGradient>
+    <linearGradient id="bandA" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff1a8"/>
+      <stop offset="1" stop-color="#6b4307"/>
+    </linearGradient>
+    <linearGradient id="bandB" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#fff1a8"/>
+      <stop offset="1" stop-color="#6b4307"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#f2b632" stop-opacity="0.75"/>
+      <stop offset="0.6" stop-color="#f2b632" stop-opacity="0.25"/>
+      <stop offset="1" stop-color="#f2b632" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="shine" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0"/>
+      <stop offset="0.5" stop-color="#ffffff" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="glyph" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#d6e2f0"/>
+    </linearGradient>
+  </defs>
+  <rect x="46" y="18" width="176" height="232" rx="26" fill="#000000" opacity="0.45"/>
+  <rect x="40" y="12" width="176" height="232" rx="26" fill="url(#rim)"/>
+  <rect x="44" y="16" width="168" height="224" rx="22" fill="none" stroke="#ffffff" stroke-opacity="0.35" stroke-width="3"/>
+  <rect x="54" y="26" width="148" height="204" rx="16" fill="url(#face)"/>
+  <path d="M54 42 a16 16 0 0 1 16 -16 h116 a16 16 0 0 1 16 16 v16 h-148 z" fill="url(#bandA)"/>
+  <path d="M54 198 h148 v16 a16 16 0 0 1 -16 16 h-116 a16 16 0 0 1 -16 -16 z" fill="url(#bandB)"/>
+  <path d="M112 34 l16 12 l16 -12" fill="none" stroke="#ffffff" stroke-opacity="0.8" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M112 222 l16 -12 l16 12" fill="none" stroke="#ffffff" stroke-opacity="0.8" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="68" cy="128" r="4" fill="#ffffff" opacity="0.25"/>
+  <circle cx="188" cy="128" r="4" fill="#ffffff" opacity="0.25"/>
+  <ellipse cx="128" cy="128" rx="70" ry="64" fill="url(#glow)"/>
+  <path d="M60 30 h50 l-40 196 h-14 a10 10 0 0 1 -6 -6 z" fill="url(#shine)"/>
+  <text x="128" y="166" text-anchor="middle" font-family="Arial Black, Arial" font-weight="900" font-size="112" fill="url(#glyph)" stroke="#05070c" stroke-width="7" paint-order="stroke" letter-spacing="-4">×2</text>
+</svg>
