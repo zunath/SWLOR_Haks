@@ -45,6 +45,23 @@ def animation_source(source: bytes, compiled: bytes) -> bytes | None:
             + content)
 
 
+def validate_authored_animation_order(source: bytes, compiled: bytes) -> None:
+    """Native animation lookup requires a unique, lowercase-ASCII sorted table."""
+    content = source.removeprefix(b"\xef\xbb\xbf")
+    if not content.startswith(b"# SWLOR authored animations for "):
+        return
+    names = [name.lower() for name in re.findall(rb"(?im)^newanim\s+(\S+)", content)]
+    if names != sorted(set(names)):
+        raise ValueError("Authored animation names must be unique and sorted for native lookup")
+    pointer, count = struct.unpack_from("<II", compiled, 132)
+    installed = []
+    for index in range(count):
+        animation = 12 + struct.unpack_from("<I", compiled, 12 + pointer + index * 4)[0]
+        installed.append(compiled[animation + 8:animation + 72].split(b"\0", 1)[0].lower())
+    if installed != names:
+        raise ValueError("Compiled animation table differs from the sorted authored animation names")
+
+
 def supermodel(data: bytes) -> str:
     if binary(data):
         result = data[180:244].split(b"\0", 1)[0].decode("ascii").lower()
@@ -316,6 +333,7 @@ def validate_round_trip(source: bytes, compiled: bytes, decompiled: str, skin_sk
     model_size, raw_size = struct.unpack_from("<II", compiled, 4)
     if 12 + model_size + raw_size != len(compiled):
         raise ValueError("Binary model section sizes do not match its payload")
+    validate_authored_animation_order(source, compiled)
     source_text = source.decode("latin1")
     before, after = parse_nodes(source_text), parse_nodes(decompiled)
     rotations = binary_nodes(compiled, skin_skeleton)
