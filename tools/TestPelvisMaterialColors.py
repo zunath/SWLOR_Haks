@@ -6,6 +6,10 @@ area's ambient light by its ambient color. Pelvis 10 and 11 shipped with both at
 thighs beside it, and the gap changed with each area's lighting. Highlighting
 the wearer (Tab) hid it. Every playable body's model and every part skin alias
 generated from it must draw its visible meshes at full ambient and diffuse.
+
+The female models also carried a hidden shadow-only copy of the skin mesh under
+the same node name, which the male models never had. It is unlinked so every
+body draws and shadows the pelvis from its one skin mesh.
 """
 import json
 from pathlib import Path
@@ -17,8 +21,8 @@ BODIES = [f"p{gender}{race}0" for race in "heod" for gender in "mf"]
 SOURCES = [f"{body}_pelvis{style}" for body in BODIES for style in ("010", "011")]
 
 
-def visible_mesh_colors(data):
-    """(name, diffuse, ambient) for every rendered mesh node of a compiled MDL."""
+def mesh_nodes(data):
+    """(name, rendered, diffuse, ambient) for every mesh node linked into a compiled MDL."""
     uint = lambda offset: struct.unpack_from("<I", data, offset)[0]
     if len(data) < 244 or uint(0) != 0:
         raise ValueError("expected a compiled MDL")
@@ -29,9 +33,9 @@ def visible_mesh_colors(data):
             continue
         seen.add(pointer)
         node = 12 + pointer
-        if uint(node + 108) & 0x20 and uint(node + 112 + 108):
+        if uint(node + 108) & 0x20:
             mesh = node + 112
-            result.append((data[node + 32:node + 64].split(b"\0", 1)[0].decode(),
+            result.append((data[node + 32:node + 64].split(b"\0", 1)[0].decode(), bool(uint(mesh + 108)),
                            struct.unpack_from("<3f", data, mesh + 60), struct.unpack_from("<3f", data, mesh + 72)))
         pending.extend(uint(12 + uint(node + 72) + index * 4) for index in range(uint(node + 76)))
     return result
@@ -56,11 +60,17 @@ class PelvisMaterialColorTests(unittest.TestCase):
     def test_visible_meshes_draw_at_full_ambient_and_diffuse(self):
         for name, path in sorted(models().items()):
             with self.subTest(model=name):
-                meshes = visible_mesh_colors((ROOT / path).read_bytes())
+                meshes = [mesh for mesh in mesh_nodes((ROOT / path).read_bytes()) if mesh[1]]
                 self.assertTrue(meshes, "no visible mesh")
-                for node, diffuse, ambient in meshes:
+                for node, _, diffuse, ambient in meshes:
                     self.assertEqual((1.0, 1.0, 1.0), diffuse, node)
                     self.assertEqual((1.0, 1.0, 1.0), ambient, node)
+
+    def test_no_hidden_shadow_copy_of_the_skin_mesh(self):
+        for name, path in sorted(models().items()):
+            with self.subTest(model=name):
+                meshes = mesh_nodes((ROOT / path).read_bytes())
+                self.assertEqual([True], [rendered for _, rendered, _, _ in meshes])
 
 
 if __name__ == "__main__":
