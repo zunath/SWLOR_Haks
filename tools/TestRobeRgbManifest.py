@@ -77,6 +77,131 @@ class RobeRgbManifestTests(unittest.TestCase):
             g.version_animation_families(families, prior, lambda *_: False, verify_revision=reject)
         self.assertEqual({key + "/old": "pmh_ra001"}, prior["animation_bridges"])
 
+    def test_changed_family_keeps_its_installed_name_only_when_nothing_else_inherits_from_it(self):
+        fixtures = {key.replace("body", "pmh0"): value.replace("body", "pmh0")
+                    for key, value in skeleton_tests.IndependentRobeSkeletonTests().fixtures().items()}
+        families = rig.Families(fixtures.get)
+        key = families.add("pmh0", fixtures["garment"])
+        installed = {"animation_bridges": {key + "/old": "pmh_ra001", key + "/older": "pmh_ra002"},
+                     "animation_bank_sets": {"pmh_ra001": {"parts": ["pmh_ra001", "pmh_ra001_b01"]}}}
+        with tempfile.TemporaryDirectory() as directory, patch.object(g, "ROOT", Path(directory)):
+            asked = []
+            versions, reused = g.version_animation_families(families, installed, lambda *_: False,
+                reuse_installed=lambda *args: asked.append(args) or True)
+            self.assertEqual([(key, "pmh_ra001")], asked)
+            self.assertEqual({key + "/older": "pmh_ra002", versions[key]: "pmh_ra001"}, reused["animation_bridges"])
+            self.assertEqual({versions[key]: "pmh_ra001"}, g.allocate_animation_bridges(
+                {versions[key]: families.groups[key]}, {}, reused))
+            self.assertEqual("pmh_ra001", installed["animation_bridges"][key + "/old"])
+            # The installed version is now current, so later runs do not ask again.
+            same, _ = g.version_animation_families(families, reused, lambda *_: False,
+                reuse_installed=lambda *_: self.fail("An unchanged family must keep its recorded name"))
+            self.assertEqual(versions, same)
+            # A model outside the build still inherits from the bank: the family gets a new name.
+            versions, pinned = g.version_animation_families(families, installed, lambda *_: False,
+                reuse_installed=lambda *_: False)
+            self.assertEqual("pmh_ra001", pinned["animation_bridges"][key + "/old"])
+            self.assertEqual({versions[key]: "pmh_ra003"}, g.allocate_animation_bridges(
+                {versions[key]: families.groups[key]}, {}, pinned))
+            # Only a family's installed bank can be revised in place, never a retired name.
+            g.version_animation_families(families, {"animation_bridges": {key + "/old": "pmh_ra001"}},
+                lambda *_: False, reuse_installed=lambda *_: self.fail("Retired names stay reserved"))
+
+    def test_only_models_outside_the_build_pin_an_installed_bank(self):
+        models = {"pmh34": b"setsupermodel pmh34 pmh_ra001\n",
+                  "pmh35": b"setsupermodel pmh35 PMH_RA001_B01\n",
+                  "pmh36": b"setsupermodel pmh36 pmh_ra002\n",
+                  "pmh_ra001": b"setsupermodel pmh_ra001 pmh_ra001_b01\n",
+                  "pmh_ra001_b01": b"setsupermodel pmh_ra001_b01 pmh0\n",
+                  "pmh0": b"setsupermodel pmh0 a_ba\n"}
+        manifest = {"animation_bank_sets": {"pmh_ra001": {"parts": ["pmh_ra001", "pmh_ra001_b01"]}}}
+        with tempfile.TemporaryDirectory() as directory:
+            active = {}
+            for name, data in models.items():
+                active[name] = Path(directory) / f"{name}.mdl"
+                active[name].write_bytes(data)
+            self.assertEqual({}, g.outside_bank_references(manifest, active, {"pmh34", "pmh35"}))
+            self.assertEqual({"pmh_ra001": ["pmh35"]}, g.outside_bank_references(manifest, active, {"pmh34"}))
+            # Indirect consumers count at any depth, including through base-game models,
+            # but a chain that reaches a rebuilt model is compiled against the new bank.
+            indirect = {"pmh40": b"setsupermodel pmh40 pmh_mid\n",
+                        "pmh_mid": b"setsupermodel pmh_mid pmh_ra001\n",
+                        "pmh41": b"setsupermodel pmh41 stock_mid\n",
+                        "pmh42": b"setsupermodel pmh42 pmh34\n",
+                        "pmh43": b"setsupermodel pmh43 pmh43_loop\n",
+                        "pmh43_loop": b"setsupermodel pmh43_loop pmh43\n"}
+            for name, data in indirect.items():
+                active[name] = Path(directory) / f"{name}.mdl"
+                active[name].write_bytes(data)
+            stock = {"stock_mid": "pmh_ra001_b01", "a_ba": ""}
+            found = g.outside_bank_references(manifest, active, {"pmh34", "pmh35"}, stock.get)
+            self.assertEqual({"pmh_ra001": ["pmh40", "pmh41", "pmh_mid"]},
+                             {head: sorted(users) for head, users in found.items()})
+            found = g.outside_bank_references(manifest, active, {"pmh34", "pmh35", "pmh_mid"})
+            self.assertEqual({}, found)
+
+    def test_registered_robes_of_a_removed_body_are_not_built(self):
+        selected = {"pfb0_robe182": "pfb", "pfh0_robe182": "pfh"}
+        self.assertEqual({"pfh0_robe182": "pfh"}, g.wearable_robes(selected, {"pfb"}))
+        self.assertEqual(selected, g.wearable_robes(selected, set()))
+
+    def test_bodies_without_a_base_root_lose_their_generated_outputs(self):
+        builds = {"pfb166": {}, "pfb166_robe182": {}, "pfh166": {}, "pfb_ra062": {}, "pfh_ra112": {}}
+        bank_sets = {"pfb_ra062": {"parts": ["pfb_ra062", "pfb_ra062_b01"]}, "pfh_ra112": {"parts": ["pfh_ra112"]}}
+        manifest = {"model_builds": builds, "animation_bank_sets": bank_sets,
+                    "animation_bridges": {"pfb0/shared/v": "pfb_ra062", "pfh0/shared/v": "pfh_ra112"}}
+        removed, names = g.removed_body_outputs(manifest, {"pfh0"}.__contains__)
+        self.assertEqual({"pfb"}, removed)
+        self.assertEqual({"pfb166", "pfb166_robe182", "pfb_ra062", "pfb_ra062_b01"}, names)
+        self.assertEqual((set(), set()), g.removed_body_outputs(manifest, lambda base: True))
+        with tempfile.TemporaryDirectory() as directory, patch.object(g, "ROOT", Path(directory)):
+            root = Path(directory)
+            files, active = {}, {}
+            for name, data in (("pfb166", b"setsupermodel pfb166 pfb_ra062\n"),
+                               ("pfb166_robe182", g.empty_attachment("pfb166_robe182")),
+                               ("pfb_ra062", b"setsupermodel pfb_ra062 pfb_ra062_b01\n"),
+                               ("pfb_ra062_b01", b"setsupermodel pfb_ra062_b01 pfb0\n"),
+                               ("pfh166", b"setsupermodel pfh166 pfh_ra112\n"),
+                               ("pfh_ra112", b"setsupermodel pfh_ra112 pfh0\n")):
+                path = root / g.model_directory(name) / f"{name}.mdl"
+                path.parent.mkdir(exist_ok=True)
+                path.write_bytes(data)
+                active[name] = path
+                files[path.relative_to(root).as_posix()] = g.file_digest(path)
+            recorded = {**manifest, "files": files}
+            kept = g.retained_model_files(recorded, set(), {166}, active)
+            self.assertEqual(set(files), set(kept))
+            kept = g.retained_model_files(recorded, set(), {166}, active, removed)
+            self.assertEqual({"sw_pt_root/pfh166.mdl", "sw_anim_f/pfh_ra112.mdl"}, set(kept))
+            active["pfb166"].write_bytes(b"edited root")
+            with self.assertRaisesRegex(ValueError, "not a verified prior output"):
+                g.remove_body_outputs(names, recorded, active)
+            self.assertTrue(all(active[name].is_file() for name in names))
+            active["pfb166"].write_bytes(b"setsupermodel pfb166 pfb_ra062\n")
+            active["pfb166_robe182"].unlink()  # already gone: nothing to prove or delete
+            g.remove_body_outputs(names, recorded, active)
+            self.assertFalse(any(active[name].exists() for name in names))
+            self.assertTrue(active["pfh166"].is_file() and active["pfh_ra112"].is_file())
+
+    def test_stale_tail_banks_are_removed_only_when_owned(self):
+        with tempfile.TemporaryDirectory() as directory, patch.object(g, "ROOT", Path(directory)):
+            path = Path(directory) / "sw_anim_m" / "pmh_ra001_b02.mdl"
+            path.parent.mkdir()
+            path.write_bytes(b"\0\0\0\0old tail")
+            manifest = {"animation_bridges": {"family": "pmh_ra001"},
+                        "animation_bank_sets": {"pmh_ra001": {"parts": ["pmh_ra001", "pmh_ra001_b01",
+                                                                         "pmh_ra001_b02"]}},
+                        "files": {"sw_anim_m/pmh_ra001_b02.mdl": g.file_digest(path)}}
+            path.write_bytes(b"\0\0\0\0edited tail")
+            with self.assertRaisesRegex(ValueError, "not a verified prior"):
+                g.remove_stale_banks({"pmh_ra001_b02"}, manifest, {"pmh_ra001_b02": path})
+            self.assertTrue(path.is_file())
+            path.write_bytes(b"\0\0\0\0old tail")
+            with self.assertRaisesRegex(ValueError, "not a verified prior"):
+                g.remove_stale_banks({"pmh_ra009_b01"}, manifest, {})
+            g.remove_stale_banks({"pmh_ra001_b02"}, manifest, {"pmh_ra001_b02": path})
+            self.assertFalse(path.exists())
+
     def test_animation_update_preserves_exactly_the_recorded_native_wearers(self):
         prior = {"native_wearer_sources": {"pmh200": {}, "pfa200": {}}}
         self.assertEqual(["pfa200", "pmh200"], g.native_wearer_selection([], prior, True))
@@ -476,13 +601,50 @@ class RobeAnimationPackagingTests(unittest.TestCase):
             wearer = b"\0\0\0\0unchanged compiled wearer"
             (stage / "binary" / "pmh34.mdl").write_bytes(wearer)
             with patch.object(g.banks, "split", return_value=self.parts):
-                names, sets = g.package_animation_models(stage, {"pmh_ra001"},
+                names, sets, stale = g.package_animation_models(stage, {"pmh_ra001"},
                     {"pmh_ra001", "pmh34"}, {}, {}, self.library)
             self.assertEqual(set(self.parts) | {"pmh34"}, names)
+            self.assertEqual(set(), stale)
             self.assertEqual(wearer, (stage / "binary" / "pmh34.mdl").read_bytes())
             self.assertEqual(g.hashlib.sha256(self.original).hexdigest(), sets["pmh_ra001"]["source_sha256"])
             for name, data in self.parts.items():
                 self.assertEqual(data, (stage / "binary" / f"{name}.mdl").read_bytes())
+
+    def test_wearer_cache_input_ignores_bank_clips_but_not_its_skeleton(self):
+        bridge = g.banks.CompiledBridge(self.original)
+        self.assertGreater(len(bridge.clips), 1)
+        expected = g.inherited_parent_digest(self.original)
+        fewer = bytes(bridge.pack(bridge.name, bridge.parent, bridge.clips[:-1]))
+        self.assertNotEqual(g.hashlib.sha256(self.original).digest(), g.hashlib.sha256(fewer).digest())
+        self.assertEqual(expected, g.inherited_parent_digest(fewer))
+        renamed = bytes(bridge.pack("pmh_ra998", bridge.parent, bridge.clips))
+        reparented = bytes(bridge.pack(bridge.name, "pmh_other", bridge.clips))
+        for other in (renamed, reparented):
+            self.assertNotEqual(expected, g.inherited_parent_digest(other))
+        # A part-ID change in the skeleton must invalidate the wearers' cache keys.
+        moved = bytearray(self.original)
+        root = 12 + g.struct.unpack_from("<I", moved, 12 + 72)[0]
+        part = g.struct.unpack_from("<i", moved, root + 28)[0]
+        g.struct.pack_into("<i", moved, root + 28, part + 1)
+        self.assertNotEqual(expected, g.inherited_parent_digest(bytes(moved)))
+
+    def test_reused_head_may_change_layout_and_reports_tails_it_dropped(self):
+        with tempfile.TemporaryDirectory() as folder, patch.object(g, "ROOT", Path(folder)):
+            root = Path(folder)
+            manifest, active = self.install(root)
+            stage = root / "stage"
+            (stage / "binary").mkdir(parents=True)
+            head = list(self.parts)[0]
+            grown = {**self.parts, f"{head}_b{len(self.parts):02d}": b"\0\0\0\0new tail"}
+            for layout, expected in (({head: self.parts[head]}, set(self.parts) - {head}), (grown, set())):
+                (stage / "binary" / f"{head}.mdl").write_bytes(self.original)
+                with self.subTest(parts=list(layout)), patch.object(g.banks, "split", return_value=layout), \
+                        patch.object(g.banks, "validate_split"):
+                    names, sets, stale = g.package_animation_models(stage, {head}, {head}, manifest,
+                                                                    active, self.library)
+                    self.assertEqual(set(layout), names)
+                    self.assertEqual(list(layout), sets[head]["parts"])
+                    self.assertEqual(expected, stale)
 
     def test_new_child_collisions_fail_before_packaged_outputs_replace_the_source(self):
         with tempfile.TemporaryDirectory() as folder, patch.object(g, "ROOT", Path(folder)):

@@ -250,11 +250,14 @@ def package_animation_models(stage, heads, generated_names, manifest, active, bo
     """Package validated compiler output losslessly after all pose and skin audits.
 
     `body_library` resolves each bridge's body chain for the restored attachment tracks.
+    A reused head may gain or lose tail banks; the parts it no longer uses are returned
+    as stale so installation removes them.
     """
     if heads and body_library is None:
         raise ValueError("Packaging animation bridges requires their body animation library")
     result = set(generated_names)
     records = dict(manifest.get("animation_bank_sets", {}))
+    stale = set()
     for head in sorted(heads):
         path = stage / "binary" / f"{head}.mdl"
         # Emote clips without cloth tracks get the derived drape after every audit.
@@ -267,8 +270,8 @@ def package_animation_models(stage, heads, generated_names, manifest, active, bo
         if not names or names[0] != head or any(name in result for name in names[1:]):
             raise ValueError(f"Animation bank names collide with generated resources: {head}")
         prior = records.get(head)
-        if prior is not None and prior["parts"] != names:
-            raise ValueError(f"Animation bank layout changed for {head}; repack its owned banks first")
+        if prior is not None:
+            stale.update(set(prior["parts"]) - set(names))
         validate_animation_bank_ownership(names, manifest, active)
         banks.validate_split(original, list(parts.values()))
         for name, data in parts.items():
@@ -281,7 +284,36 @@ def package_animation_models(stage, heads, generated_names, manifest, active, bo
         path = stage / "binary" / f"{name}.mdl"
         if path.stat().st_size >= banks.LIMIT_BYTES:
             raise ValueError(f"Generated model exceeds the NWSync resource limit: {name}")
-    return result, records
+    return result, records, stale - result
+
+
+def inherited_parent_digest(data):
+    """Hash what a wearer root takes from its compiled bank: the skeleton and part IDs.
+
+    The compiler matches a root's part IDs against its parent's nodes; it copies no
+    clips. Excluding the clips keeps the roots' build keys, and so their compiled
+    bytes, unchanged when an animation is added or revised. A skeleton or part-ID
+    change still invalidates every root of that bank.
+    """
+    bridge = banks.CompiledBridge(data)
+    skeleton = bridge.pack(bridge.name, bridge.parent, [])
+    return hashlib.sha256(b"swlor-robe-bank-skeleton-v1\0" + skeleton).hexdigest()
+
+
+def remove_stale_banks(names, manifest, active):
+    """Delete tail banks a reused head no longer chains to, after proving ownership."""
+    owned = banks.bank_names(manifest)
+    paths = []
+    for name in sorted(names):
+        relative = f"{model_directory(name)}/{name}.mdl"
+        expected = ROOT / relative
+        path = active.get(name, expected)
+        if (name not in owned or path.resolve() != expected.resolve() or not path.is_file() or
+                manifest.get("files", {}).get(relative) != file_digest(path)):
+            raise ValueError(f"Stale animation bank is not a verified prior output: {relative}")
+        paths.append(path)
+    for path in paths:
+        path.unlink()
 
 
 def validate_model_chains(names, load):
@@ -480,9 +512,64 @@ def allocate_animation_bridges(groups, active, manifest, expected_allocation=Non
     return result
 
 
+def model_parent(path):
+    """Read only the supermodel name from a compiled or ASCII model."""
+    with path.open("rb") as stream:
+        header = stream.read(244)
+        if mdl.binary(header):
+            if len(header) < 244:
+                raise ValueError(f"Truncated model header: {path}")
+            return mdl.supermodel(header)
+        stream.seek(0)
+        for line in stream:
+            if re.match(rb"\s*setsupermodel\s", line, re.IGNORECASE):
+                return mdl.supermodel(line)
+    return ""
+
+
+def outside_bank_references(manifest, active, rebuilt, stock_parent=None):
+    """Installed bank head -> models that inherit from any of its parts but are not rebuilt.
+
+    Follows each model's whole supermodel chain, through base-game ancestors when
+    `stock_parent(name)` is given. A chain stops at a model this run rebuilds, since
+    that model is compiled against the new bank. Bank parts chain to one another,
+    so only references from other models count.
+    """
+    heads = {part: head for head, record in manifest.get("animation_bank_sets", {}).items()
+             for part in record["parts"]}
+    parents = {}
+    def parent_of(name):
+        if name not in parents:
+            path = active.get(name)
+            if path is not None:
+                parents[name] = model_parent(path).lower() if path.suffix.lower() == ".mdl" else ""
+            else:
+                parents[name] = (stock_parent(name) or "").lower() if stock_parent else ""
+        return parents[name]
+    references = {}
+    for name, path in active.items():
+        if name in rebuilt or name in heads or path.suffix.lower() != ".mdl":
+            continue
+        seen = {name}
+        current = parent_of(name)
+        while current and current not in seen and current not in rebuilt:
+            if current in heads:
+                references.setdefault(heads[current], []).append(name)
+                break
+            seen.add(current)
+            current = parent_of(current)
+    return references
+
+
 def version_animation_families(families, manifest, verify_legacy, native_bodies=None, save_source=None,
-                               verify_revision=None):
-    """A bridge's paths, bind transforms and clips are immutable for saved roots."""
+                               verify_revision=None, reuse_installed=None):
+    """Give each family's current bridge content one resref.
+
+    A changed family keeps its installed resref when `reuse_installed(key, name)` confirms
+    that every model inheriting from it is rebuilt against the new content in this run, so
+    an animation change rewrites only the banks. Otherwise it receives a new resref, and
+    the old bridge stays immutable for the roots that still use it.
+    """
     prior = dict(manifest.get("animation_bridges", {}))
     versions = {}
     for key in sorted(families.groups):
@@ -509,6 +596,11 @@ def version_animation_families(families, manifest, verify_legacy, native_bodies=
             previous = candidates[0]
             verify_revision(key, prior[previous], source)
             prior[version] = prior.pop(previous)
+        if version not in prior and reuse_installed is not None:
+            installed = [old for old in prior if old.startswith(key + "/") and
+                         prior[old] in manifest.get("animation_bank_sets", {})]
+            if len(installed) == 1 and reuse_installed(key, prior[installed[0]]):
+                prior[version] = prior.pop(installed[0])
         versions[key] = version
     return versions, {**manifest, "animation_bridges": prior}
 
@@ -540,7 +632,46 @@ def validate_stock_inventory(stock_models):
         raise ValueError("Stock robe inventory is incomplete; run ImportStockRobeTints.py before generation")
 
 
-def retained_model_files(manifest, generated_names, phenotype_ids, active):
+def removed_body_outputs(manifest, body_exists):
+    """Generated roots, attachments and banks of bodies whose base root no longer exists.
+
+    A retired robe keeps its outputs so saved creatures still render, but a body
+    with no base root (`p<gender><race>0`) cannot be worn by any creature.
+    """
+    bodies = {name[:3] for name in manifest.get("model_builds", {})}
+    bodies.update(head[:3] for head in manifest.get("animation_bank_sets", {}))
+    removed = {body for body in bodies if not body_exists(body + "0")}
+    names = {name for name in manifest.get("model_builds", {}) if name[:3] in removed}
+    for head, record in manifest.get("animation_bank_sets", {}).items():
+        if head[:3] in removed:
+            names.update(record["parts"])
+    return removed, names
+
+
+def wearable_robes(selected, removed_bodies):
+    """Registered robes to build: a removed body has no root for its robes to inherit from."""
+    return {name: path for name, path in selected.items()
+            if PATTERN.fullmatch(name)[1] not in removed_bodies}
+
+
+def remove_body_outputs(names, manifest, active):
+    """Delete the owned outputs of removed bodies after proving every one first."""
+    paths = []
+    for name in sorted(names):
+        relative = f"{model_directory(name)}/{name}.mdl"
+        expected = ROOT / relative
+        path = active.get(name, expected)
+        if not path.is_file():
+            continue
+        if (path.resolve() != expected.resolve() or
+                manifest.get("files", {}).get(relative) != file_digest(path)):
+            raise ValueError(f"Removed body output is not a verified prior output: {relative}")
+        paths.append(path)
+    for path in paths:
+        path.unlink()
+
+
+def retained_model_files(manifest, generated_names, phenotype_ids, active, removed_bodies=frozenset()):
     """Keep audited roots, attachments and bridges for persisted retired phenotypes."""
     retained = {}
     bridges = banks.bank_names(manifest)
@@ -548,7 +679,7 @@ def retained_model_files(manifest, generated_names, phenotype_ids, active):
         path = ROOT / relative
         name = path.stem
         match = BODY_RESOURCE.fullmatch(name)
-        if (path.suffix != ".mdl" or name in generated_names or
+        if (path.suffix != ".mdl" or name in generated_names or name[:3] in removed_bodies or
                 not (name in bridges or match and int(match[1]) in phenotype_ids)):
             continue
         expected_directory = model_directory(name)
@@ -663,6 +794,12 @@ def main():
     compiler, compiler_hash = mdl.prepare_compiler(stage)
     stock = tint.read_stock_key_models(args.game_data)
     validate_stock_inventory(stock)
+    removed_bodies, removed_outputs = removed_body_outputs(
+        prior_manifest, lambda base: base in active or base in stock)
+    if removed_bodies:
+        print(f"Removing {len(removed_outputs)} generated outputs of bodies without a base root: "
+              f"{', '.join(sorted(removed_bodies))}.", flush=True)
+    selected = wearable_robes(selected, removed_bodies)
     dependencies = {}
     missing = set()
     def load(name):
@@ -793,9 +930,32 @@ def main():
         path = source_directory / (hashlib.sha256(key.encode()).hexdigest() + ".mdl")
         path.write_bytes(source)
         source_paths[key] = path
+    # Every root and attachment this run writes is compiled against the new bank. Any
+    # other model inheriting from a bank pins its content, so that family gets a new name.
+    rebuilt = set()
+    for name in selected:
+        prefix, robe_id = PATTERN.fullmatch(name).groups()
+        root_name = prefix + str(id_map[int(robe_id)])
+        rebuilt.update((root_name, root_name + "_robe" + robe_id))
+    outside_references = {}
+    revised_in_place = []
+    def reuse_installed(key, name):
+        # Reading every active model header takes minutes; only a changed bank needs it.
+        if "scan" not in outside_references:
+            outside_references["scan"] = outside_bank_references(
+                prior_manifest, active, rebuilt,
+                lambda parent: mdl.supermodel(tint.extract_stock_bif_resource(*stock[parent])) if parent in stock else "")
+        users = outside_references["scan"].get(name)
+        if users:
+            print(f"{key}: {name} stays unchanged for {len(users)} models outside this build "
+                  f"(e.g. {', '.join(sorted(users)[:3])}); allocating a new bank name.", flush=True)
+            return False
+        print(f"{key}: revising {name} in place.", flush=True)
+        revised_in_place.append(name)
+        return True
     versions, prior_manifest = version_animation_families(
         families, prior_manifest, verify_legacy_bridge, dependencies, save_bridge_source,
-        verify_revision if args.update_animation else None)
+        verify_revision if args.update_animation else None, reuse_installed)
     versioned_groups = {versions[key]: group for key, group in families.groups.items()}
     animation_names = allocate_animation_bridges(versioned_groups, active, prior_manifest)
     for key, group in sorted(families.groups.items()):
@@ -912,7 +1072,10 @@ def main():
                            if parent in sources else load_reference(parent) if parent else b"")
             if parent_data is None:
                 raise ValueError(f"{name}: missing compiled parent {parent}")
-            parent_digests[parent] = hashlib.sha256(parent_data).hexdigest()
+            # Wearers inherit only a bank's skeleton; its clips are audited by the
+            # whole-chain pose checks, which run for reused roots too.
+            parent_digests[parent] = (inherited_parent_digest(parent_data) if parent in animation_cache.values()
+                                      else hashlib.sha256(parent_data).hexdigest())
         original = dependencies[original_robes[name]] if name in original_robes else b""
         if name in native_originals:
             original += native_originals[name]
@@ -1074,12 +1237,15 @@ def main():
               "independent_skeletons": len(complete_roots), "animation_families": len(animation_cache),
               "missing_animation_fallbacks": families.fallbacks,
               "versioned_legacy_bridges": legacy_bridge_changes,
+              "removed_bodies": sorted(removed_bodies),
+              "removed_body_outputs": len(removed_outputs),
+              "banks_revised_in_place": sorted(revised_in_place),
               "validated_animation_roots": len(complete_roots),
               "compiler_sha256": compiler_hash, "missing_supermodels": sorted(missing), "failures": failures}
     (stage / "report.json").write_text(json.dumps(report, indent=2) + "\n")
     if failures:
         raise ValueError(f"{len(failures)} round-trip failures: {failures[:10]}")
-    packaged_names, bank_sets = package_animation_models(
+    packaged_names, bank_sets, stale_banks = package_animation_models(
         stage, animation_cache.values(), sources, prior_manifest, active, original_library)
     # Cache provenance describes the validated output as installed: compiler bytes,
     # plus emote drape tracks and restored body attachment tracks on bridges. Packaging changes only the file layout;
@@ -1090,6 +1256,7 @@ def main():
         complete_roots, lambda name: (stage / "binary" / f"{name}.mdl").read_bytes()
         if name in packaged_names else load_reference(name))
     report["packaged_models"] = len(packaged_names)
+    report["stale_banks"] = sorted(stale_banks)
     report["largest_model_bytes"] = max(
         ((stage / "binary" / f"{name}.mdl").stat().st_size for name in packaged_names), default=0)
     (stage / "report.json").write_text(json.dumps(report, indent=2) + "\n")
@@ -1114,12 +1281,15 @@ def main():
         validate_animation_bank_ownership(
             {name for head in animation_cache.values() for name in bank_sets[head]["parts"]},
             prior_manifest, current_active)
-        retained = retained_model_files(prior_manifest, packaged_names, set(id_map.values()), current_active)
+        retained = retained_model_files(prior_manifest, packaged_names | stale_banks,
+                                        set(id_map.values()), current_active, removed_bodies)
         # Hash validated inputs from their captured bytes and outputs from staging.
         # Copying thousands of outputs must never re-certify later input edits.
         output_files = {f"sw_2da/{path.name}": file_digest(stage / path.name) for path in (TABLE, PHENOTYPES)}
         output_files.update({f"{model_directory(name)}/{name}.mdl":
                              file_digest(stage / "binary" / f"{name}.mdl") for name in packaged_names})
+        remove_stale_banks(stale_banks, prior_manifest, current_active)
+        remove_body_outputs(removed_outputs - packaged_names, prior_manifest, current_active)
         for name in packaged_names:
             directory = ROOT / model_directory(name)
             if directory.resolve().parent != ROOT.resolve():
@@ -1130,13 +1300,16 @@ def main():
         shutil.copyfile(stage / "phenotype.2da", PHENOTYPES)
         manifest = {"compiler_sha256": compiler_hash, "compiler_materials": compiler_materials, "independent_skeletons": True,
                     "model_builds": model_builds,
-                    "garment_node_names": {**prior_manifest.get("garment_node_names", {}), **renamed_nodes},
+                    "garment_node_names": {name: nodes for name, nodes in {
+                        **prior_manifest.get("garment_node_names", {}), **renamed_nodes}.items()
+                        if name[:3] not in removed_bodies},
                     "body_pose_samples": checked_poses,
                     "garment_body_motion_checks": checked_garment_body_motion,
                     "missing_animation_fallbacks": families.fallbacks,
                     "stock_model_sha256": stock_hashes,
                     "animation_bridges": {**prior_manifest.get("animation_bridges", {}), **animation_names},
-                    "animation_bank_sets": dict(sorted(bank_sets.items())),
+                    "animation_bank_sets": dict(sorted((head, record) for head, record in bank_sets.items()
+                                                       if head[:3] not in removed_bodies)),
                     "native_wearer_selection_sha256": native_selection_hash,
                     "native_wearer_sources": native_captures,
                     "files": dict(sorted({**retained, **input_files, **output_files}.items()))}

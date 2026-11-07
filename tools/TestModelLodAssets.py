@@ -232,6 +232,24 @@ class ModelLodTests(unittest.TestCase):
             (root / "parts/second.mdl").unlink()
             self.assertTrue(any("missing its native MDL: second" in error for error in models.check(root)))
 
+    def test_check_with_base_game_names_requires_a_complete_override_list(self):
+        with tempfile.TemporaryDirectory() as directory, patch.object(models, "ROOT", Path(directory)):
+            root = Path(directory)
+            self.fixture(root)
+            models.apply(root, stock_models={"second"})
+            self.assertEqual([], models.check(root, stock_models={"SECOND"}))
+            # A HAK model added later under a base-game name must be recorded too.
+            (root / "parts/third.mdl").write_bytes(binary("third"))
+            stale = models.check(root, stock_models={"second", "third"})
+            self.assertTrue(any("out of date (1 missing" in error and "third" in error for error in stale))
+            # The build check has no base-game names and cannot tell.
+            self.assertFalse(any("out of date" in error for error in models.check(root)))
+            # A recorded name the base game no longer has is stale as well.
+            self.assertTrue(any("1 no longer override" in error for error in models.check(root, stock_models=set())))
+            models.apply(root, stock_models={"second", "third"})
+            self.assertEqual([], models.check(root, stock_models={"second", "third"}))
+            self.assertEqual(["second", "third"], json.loads((root / models.MANIFEST).read_text())["native_overrides"])
+
     def test_redirect_resources_defined_by_another_hak_fail_closed(self):
         for name in ("first", "second"):
             with self.subTest(name=name), tempfile.TemporaryDirectory() as directory, \
