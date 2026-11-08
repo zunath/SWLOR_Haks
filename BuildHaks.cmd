@@ -22,6 +22,8 @@ python -B tools/TestPelvisSkirtBindings.py ^
   PelvisSkirtBindingTests.test_clearance_does_not_collapse_or_invert_authored_faces ^
   PelvisSkirtBindingTests.test_bounds_normals_and_face_planes_match_the_new_positions
 if errorlevel 1 exit /b %errorlevel%
+python -B tools/TestPelvisMaterialColors.py
+if errorlevel 1 exit /b %errorlevel%
 python -B tools/TestFillEmoteFlapTracks.py ^
   EmoteFlapTrackTests.test_libraries_rebuild_and_every_custom_emote_holds_the_flaps ^
   EmoteFlapTrackTests.test_only_registered_skirts_hang_from_the_flaps ^
