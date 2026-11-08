@@ -10,6 +10,7 @@ import hashlib
 import json
 from pathlib import Path
 import subprocess
+import struct
 from types import SimpleNamespace
 
 import GenerateRobeRgbModels as robes
@@ -110,6 +111,153 @@ def verify_body_additions(before, after, names):
     return len(old.clips)
 
 
+def rotation_changes(before, after, allowed):
+    """Recognize quaternion-only corrections with identical nodes, keys and headers."""
+    old, new = poses.Model(before), poses.Model(after)
+    if old.clips.keys() != new.clips.keys() or sharing.clip_headers(before) != sharing.clip_headers(after):
+        raise ValueError("A rotation revision cannot change clip inventory, timing or events")
+    if len(old.nodes) != len(new.nodes) or any(a[:3] != b[:3] or not sharing.controllers_equal(a[3], b[3])
+                                                for a, b in zip(old.nodes, new.nodes)):
+        raise ValueError("A rotation revision cannot change the body rig")
+    changes = {}
+    for clip, (_, nodes) in old.clips.items():
+        proposed = new.clips[clip][1]
+        if len(nodes) != len(proposed): raise ValueError("Rotation revision changed animation nodes")
+        for left, right in zip(nodes, proposed):
+            if left[:3] != right[:3] or left[3].keys() != right[3].keys():
+                raise ValueError("Rotation revision changed native nodes or channels")
+            for kind, value in left[3].items():
+                target = right[3][kind]
+                if sharing.controllers_equal({kind: value}, {kind: target}): continue
+                if clip not in allowed or kind != 20 or value[0] != target[0] or len(value[1]) != len(target[1]):
+                    raise ValueError(f"Unselected or structural body change: {clip}/{left[0]}")
+                changes.setdefault(clip, {})[left[0]] = (value, target)
+    if not changes: raise ValueError("No selected rotation changes")
+    return changes
+
+
+def revise_rotations(before, changes):
+    """Copy measured body quaternion values into compatible, owned layer channels."""
+    model = poses.Model(before)
+    result = bytearray(before)
+    count = 0
+    for clip, nodes in changes.items():
+        if clip not in model.clips: raise ValueError(f"Layer lacks revised clip: {clip}")
+        actual = {node[0]: node for node in model.clips[clip][1]}
+        for name, (old, new) in nodes.items():
+            node = actual.get(name)
+            if node is None or 20 not in node[3] or not sharing.controllers_equal({20: old}, {20: node[3][20]}):
+                raise ValueError(f"Layer does not match the prior body rotation: {clip}/{name}")
+            offset = node[4]
+            for index in range(model.uint(offset + 88)):
+                kind, rows, _, start, columns = struct.unpack_from("<IHHHB", before, 12 + model.uint(offset + 84) + index * 12)
+                if kind != 20: continue
+                if rows != len(new[1]) or columns != 4: raise ValueError("Quaternion layout changed")
+                values = 12 + model.uint(offset + 96)
+                for row, value in enumerate(new[1]): struct.pack_into("<4f", result, values + 4 * (start + row * 4), *value)
+                count += 1
+    if not count: raise ValueError("No layer quaternion channels revised")
+    banks.validate_motion_revision(before, bytes(result), set(changes))
+    animations.validate_animation_parts(result)
+    return bytes(result), count
+
+
+def clip_owners(name, load, wanted):
+    result, seen = {}, set()
+    while name:
+        if name in seen: raise ValueError("Cyclic body animation inheritance")
+        seen.add(name)
+        data = load(name)
+        if data is None: raise ValueError(f"Missing animation ancestor: {name}")
+        for clip in sharing.clip_headers(data):
+            if clip in wanted and clip not in result: result[clip] = name
+        name = robes.mdl.supermodel(data)
+    if result.keys() != set(wanted): raise ValueError("Body lacks selected animation owners")
+    return result
+
+
+def apply_rotation_revision(args):
+    manifest = json.loads(robes.MANIFEST.read_text())
+    original = robes.MANIFEST.read_bytes()
+    record = manifest["animation_extensions"][-1]
+    wanted = {clip + phase for clip in args.clip for phase in ("", "_in", "_out")}
+    if not wanted <= set(record["clips"]): raise ValueError("Only owned extension clips may be revised")
+    body_paths = list(record["preserved_body_clips"])
+    allowed_errors = {f"Robe RGB input/output changed: {path}; regenerate and validate" for path in body_paths}
+    allowed_errors.add("Robe RGB input/output changed: tools/ExtendRobeAnimations.py; regenerate and validate")
+    errors = set(robes.check()) - allowed_errors
+    if errors: raise ValueError("Catalog is not current: " + "; ".join(sorted(errors)))
+    baseline = GitBlobs(args.baseline)
+    try:
+        if baseline.read("tools/RobeRgbModels.json").replace(b"\r\n", b"\n") != original.replace(b"\r\n", b"\n"):
+            raise ValueError("Revision baseline must match the current manifest")
+        changes, body_hashes = {}, {}
+        for path in body_paths:
+            old, new = baseline.read(path), (robes.ROOT / path).read_bytes()
+            if digest(old) != manifest["files"][path]: raise ValueError("Body baseline ownership mismatch")
+            changes[Path(path).stem] = rotation_changes(old, new, wanted)
+            body_hashes[path] = digest(new)
+        active = robes.fresh_active_models()
+        stock = robes.tint.read_stock_key_models(args.game_data)
+        def load_source(name):
+            if name in active: return active[name].read_bytes()
+            if name in stock: return robes.tint.extract_stock_bif_resource(*stock[name])
+            return None
+        outputs, bank_records, snapshot, revised_channels = {}, {}, {}, 0
+        for name in record["parents"].values():
+            before = robes.owned_animation_bytes(name, manifest, active)
+            snapshot[name] = digest(before)
+            owners = clip_owners(name[:3] + "0", load_source, wanted)
+            selected = {}
+            for clip, owner in owners.items():
+                if owner not in changes: raise ValueError(f"Unexpected revised body source: {owner}")
+                if clip in changes[owner]: selected[clip] = changes[owner][clip]
+            after, count = revise_rotations(before, selected)
+            revised_channels += count
+            parts = banks.split(after)
+            if list(parts) != manifest["animation_bank_sets"][name]["parts"]:
+                raise ValueError("Rotation revision changed the bank layout")
+            for part, data in parts.items(): outputs[f"{robes.model_directory(part)}/{part}.mdl"] = data
+            bank_records[name] = {"parts": list(parts), "source_sha256": digest(after)}
+        def load(name):
+            path = f"{robes.model_directory(name)}/{name}.mdl"
+            if path in outputs: return outputs[path]
+            if name in active: return active[name].read_bytes()
+            if name in stock: return robes.tint.extract_stock_bif_resource(*stock[name])
+            return None
+        samples = 0
+        for name in record["parents"].values():
+            library = poses.Library(load)
+            scoped = SimpleNamespace(model=library.model, owners=library.owners,
+                clips=lambda model: {n: c for n, c in library.clips(model).items() if n in record["clips"]})
+            samples += poses.validate_body_poses(name, name[:3] + "0", scoped)
+            library.model.cache_clear(); library.clips.cache_clear(); library.owners.cache_clear()
+            del library, scoped; gc.collect()
+        if samples != record["body_pose_samples"]: raise ValueError("Rotation revision pose coverage changed")
+        report = {"baseline": baseline.ref, "clips": sorted(wanted), "quaternion_channels": revised_channels,
+                  "body_pose_samples": samples, "preservation": "Only selected quaternion values changed; rig, keys, events and other clips retained."}
+        args.output.mkdir(parents=True, exist_ok=False)
+        for path, data in outputs.items():
+            target = args.output / path; target.parent.mkdir(parents=True, exist_ok=True); target.write_bytes(data)
+        (args.output / "report.json").write_text(json.dumps(report, indent=2) + "\n")
+        if args.apply:
+            if robes.MANIFEST.read_bytes() != original: raise ValueError("Manifest changed during revision")
+            for path, expected in body_hashes.items():
+                if digest((robes.ROOT / path).read_bytes()) != expected: raise ValueError("Body changed during revision")
+            for name, expected in snapshot.items():
+                if digest(robes.owned_animation_bytes(name, manifest, active)) != expected: raise ValueError("Layer changed during revision")
+            for path, data in outputs.items():
+                (robes.ROOT / path).write_bytes(data); manifest["files"][path] = digest(data)
+            for path, value in body_hashes.items(): manifest["files"][path] = value
+            manifest["files"]["tools/ExtendRobeAnimations.py"] = robes.file_digest(Path(__file__))
+            manifest["animation_bank_sets"].update(bank_records)
+            record.setdefault("rotation_revisions", []).append(report)
+            robes.MANIFEST.write_text(json.dumps(manifest, indent=2) + "\n")
+        print(json.dumps(report, indent=2), flush=True)
+    finally:
+        baseline.close()
+
+
 def check_installed(manifest, game_data):
     records = manifest.get("animation_extensions", [])
     if not records:
@@ -175,7 +323,13 @@ def main():
     parser.add_argument("--output", type=Path)
     parser.add_argument("--apply", action="store_true")
     parser.add_argument("--check", action="store_true", help="Revalidate installed layers and exact baseline preservation")
+    parser.add_argument("--revise-rotations", action="store_true", help="Revise only selected existing quaternion channels, without changing rig or keys")
     args = parser.parse_args()
+    if args.revise_rotations:
+        if args.check or not args.baseline or not args.clip or not args.output:
+            parser.error("Rotation revision requires --baseline, --clip and --output; cannot combine with --check")
+        apply_rotation_revision(args)
+        return
     if args.check:
         manifest = json.loads(robes.MANIFEST.read_text())
         original = robes.MANIFEST.read_bytes()

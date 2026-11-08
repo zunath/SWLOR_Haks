@@ -1,6 +1,8 @@
 """Guard new animation layers against changes to installed rigs or old clips."""
 import unittest
 import tempfile
+import math
+import struct
 from pathlib import Path
 
 import RobeAnimationBanks as banks
@@ -56,6 +58,38 @@ class ExtensionTests(unittest.TestCase):
             for name, data in banks.split(self.candidate, target).items():
                 (stage / "binary" / f"{name}.mdl").write_bytes(data)
             self.assertEqual(self.candidate, extend.read_candidate(stage, "pmh_ra002"))
+
+    def changed_rotation(self):
+        model = extend.poses.Model(self.candidate)
+        node = next(n for n in model.clips['clip3'][1] if n[0] == 'arm')
+        data = bytearray(self.candidate)
+        for index in range(model.uint(node[4] + 88)):
+            kind, _, _, start, _ = struct.unpack_from('<IHHHB', data, 12 + model.uint(node[4] + 84) + index * 12)
+            if kind == 20:
+                q = extend.poses.multiply((0, 0, math.sin(.1), math.cos(.1)), node[3][20][1][0])
+                struct.pack_into('<4f', data, 12 + model.uint(node[4] + 96) + start * 4, *q)
+        return bytes(data)
+
+    def test_rotation_revision_changes_only_selected_existing_quaternion_values(self):
+        changes = extend.rotation_changes(self.candidate, self.changed_rotation(), {'clip3'})
+        layer = self.source.pack('pmh_ra003', 'pmh_ra001', self.source.clips[2:])
+        revised, count = extend.revise_rotations(layer, changes)
+        self.assertEqual(1, count)
+        banks.validate_motion_revision(layer, revised, {'clip3'})
+        self.assertEqual(len(layer), len(revised))
+        with self.assertRaises(ValueError):
+            extend.revise_rotations(revised, changes)  # A prior correction cannot compound.
+
+    def test_rotation_revision_rejects_unselected_body_changes(self):
+        with self.assertRaises(ValueError):
+            extend.rotation_changes(self.candidate, self.changed_rotation(), {'clip2'})
+
+    def test_actual_inherited_clip_owner_is_selected_independently_of_body_prefix(self):
+        child = self.source.pack('pfd_ra003', 'pmh_ra001', [])
+        resources = {'pfd_ra003': child, 'pmh_ra001': self.old,
+                     'basebody': self.source.pack('pmh_ra004', 'null', [])}
+        owners = extend.clip_owners('pfd_ra003', resources.get, {'clip0', 'clip1'})
+        self.assertEqual({'clip0': 'pmh_ra001', 'clip1': 'pmh_ra001'}, owners)
 
 
 if __name__ == "__main__":
