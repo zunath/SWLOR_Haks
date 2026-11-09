@@ -84,6 +84,30 @@ class ExtensionTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             extend.rotation_changes(self.candidate, self.changed_rotation(), {'clip2'})
 
+    def test_static_rotation_can_gain_motion_without_changing_other_native_data(self):
+        layer = self.source.pack('pmh_ra003', 'pmh_ra001', self.source.clips[2:])
+        original = extend.poses.Model(layer)
+        length, nodes = original.clips['clip3']
+        arm = next(node for node in nodes if node[0] == 'arm')
+        prior = arm[3][20]
+        q = prior[1][0]
+        moved = extend.poses.multiply((0, 0, math.sin(.2), math.cos(.2)), q)
+        track = ([0., length/2, length], [q, moved, q])
+        revised, count = extend.revise_rotations(layer, {'clip3': {'arm': (prior, track)}})
+        self.assertEqual(1, count)
+        self.assertGreater(len(revised), len(layer))
+        banks.validate_motion_revision(layer, revised, {'clip3'})
+        actual = extend.poses.Model(revised)
+        for before_node, after_node in zip(nodes, actual.clips['clip3'][1]):
+            self.assertEqual(before_node[:3], after_node[:3])
+            untouched = {kind: values for kind, values in before_node[3].items() if kind != 20}
+            self.assertTrue(extend.sharing.controllers_equal(untouched,
+                {kind: values for kind, values in after_node[3].items() if kind != 20}))
+        after_arm = next(node for node in actual.clips['clip3'][1] if node[0] == 'arm')
+        self.assertTrue(extend.sharing.controllers_equal({20: track}, {20: after_arm[3][20]}))
+        with self.assertRaises(ValueError):
+            extend.revise_rotations(revised, {'clip3': {'arm': (prior, track)}})
+
     def test_actual_inherited_clip_owner_is_selected_independently_of_body_prefix(self):
         child = self.source.pack('pfd_ra003', 'pmh_ra001', [])
         resources = {'pfd_ra003': child, 'pmh_ra001': self.old,

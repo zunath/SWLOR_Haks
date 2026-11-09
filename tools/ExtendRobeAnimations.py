@@ -112,7 +112,7 @@ def verify_body_additions(before, after, names):
 
 
 def rotation_changes(before, after, allowed):
-    """Recognize quaternion-only corrections with identical nodes, keys and headers."""
+    """Recognize quaternion-only corrections with identical nodes and clip headers."""
     old, new = poses.Model(before), poses.Model(after)
     if old.clips.keys() != new.clips.keys() or sharing.clip_headers(before) != sharing.clip_headers(after):
         raise ValueError("A rotation revision cannot change clip inventory, timing or events")
@@ -129,8 +129,12 @@ def rotation_changes(before, after, allowed):
             for kind, value in left[3].items():
                 target = right[3][kind]
                 if sharing.controllers_equal({kind: value}, {kind: target}): continue
-                if clip not in allowed or kind != 20 or value[0] != target[0] or len(value[1]) != len(target[1]):
+                if clip not in allowed or kind != 20:
                     raise ValueError(f"Unselected or structural body change: {clip}/{left[0]}")
+                times, frames = target
+                if (not times or len(times) != len(frames) or times[0] < 0 or times[-1] > old.clips[clip][0] + 2e-6 or
+                        any(b <= a for a, b in zip(times, times[1:]))):
+                    raise ValueError("Invalid revised quaternion sample times")
                 changes.setdefault(clip, {})[left[0]] = (value, target)
     if not changes: raise ValueError("No selected rotation changes")
     return changes
@@ -139,27 +143,67 @@ def rotation_changes(before, after, allowed):
 def revise_rotations(before, changes):
     """Copy measured body quaternion values into compatible, owned layer channels."""
     model = poses.Model(before)
-    result = bytearray(before)
+    bridge = banks.CompiledBridge(before)
+    clips = []
     count = 0
-    for clip, nodes in changes.items():
-        if clip not in model.clips: raise ValueError(f"Layer lacks revised clip: {clip}")
+    if not set(changes) <= set(model.clips): raise ValueError("Layer lacks revised clip")
+    for clip, component in zip(bridge.clip_names, bridge.clips):
+        nodes = changes.get(clip)
+        if nodes is None:
+            clips.append(component)
+            continue
         actual = {node[0]: node for node in model.clips[clip][1]}
+        data = bytearray(component.relocated(0, bridge.name))
+        pointers, names = list(component.pointers), list(component.names)
         for name, (old, new) in nodes.items():
             node = actual.get(name)
             if node is None or 20 not in node[3] or not sharing.controllers_equal({20: old}, {20: node[3][20]}):
                 raise ValueError(f"Layer does not match the prior body rotation: {clip}/{name}")
-            offset = node[4]
-            for index in range(model.uint(offset + 88)):
-                kind, rows, _, start, columns = struct.unpack_from("<IHHHB", before, 12 + model.uint(offset + 84) + index * 12)
+            # Locate again after any earlier controller-array growth relocated this subtree.
+            def find(offset):
+                if banks._name(data, offset + 32, 32).lower() == name: return offset
+                children = banks._uint(data, offset + 72)
+                for index in range(banks._uint(data, offset + 76)):
+                    found = find(banks._uint(data, children + index*4))
+                    if found is not None: return found
+                return None
+            offset = find(banks._uint(data, 72))
+            if offset is None: raise ValueError("Revised node disappeared")
+            for index in range(banks._uint(data, offset + 88)):
+                descriptor = banks._uint(data, offset + 84) + index*12
+                kind, rows, times, start, columns = struct.unpack_from("<IHHHB", data, descriptor)
                 if kind != 20: continue
-                if rows != len(new[1]) or columns != 4: raise ValueError("Quaternion layout changed")
-                values = 12 + model.uint(offset + 96)
-                for row, value in enumerate(new[1]): struct.pack_into("<4f", result, values + 4 * (start + row * 4), *value)
+                if columns != 4: raise ValueError("Unsupported quaternion layout")
+                values = banks._uint(data, offset + 96)
+                proposed_times, rotations = new
+                if rows >= len(rotations) and old[0][:len(proposed_times)] == proposed_times:
+                    # Reuse the existing array when a moving wrist becomes a neutral grip.
+                    struct.pack_into("<H", data, descriptor + 4, len(rotations))
+                    for row, value in enumerate(rotations): struct.pack_into("<4f", data, values + 4*(start + row*4), *value)
+                else:
+                    # A formerly static accent needs more samples. Keep every old float intact
+                    # and append only the new orientation track to this node's float array.
+                    old_count = banks._uint(data, offset + 100)
+                    if old_count + 5*len(rotations) > 65535: raise ValueError("Revised controller exceeds native index space")
+                    extra = struct.pack(f"<{len(proposed_times)}f", *proposed_times) + b"".join(struct.pack("<4f", *q) for q in rotations)
+                    end = values + old_count*4
+                    size = len(extra)
+                    original = bytes(data)
+                    data[end:end] = extra
+                    for pointer in pointers:
+                        value = banks._uint(original, pointer)
+                        struct.pack_into("<I", data, pointer + (size if pointer >= end else 0), value + (size if value >= end else 0))
+                    pointers = [p + (size if p >= end else 0) for p in pointers]
+                    names = [(p + (size if p >= end else 0), length) for p, length in names]
+                    struct.pack_into("<IHHHB", data, descriptor, 20, len(rotations), old_count, old_count + len(rotations), 4)
+                    struct.pack_into("<II", data, offset + 100, old_count + 5*len(rotations), old_count + 5*len(rotations))
                 count += 1
+        clips.append(banks.Component(0, bytes(data), tuple(pointers), tuple(names)))
     if not count: raise ValueError("No layer quaternion channels revised")
-    banks.validate_motion_revision(before, bytes(result), set(changes))
+    result = bridge.pack(bridge.name, bridge.parent, clips)
+    banks.validate_motion_revision(before, result, set(changes))
     animations.validate_animation_parts(result)
-    return bytes(result), count
+    return result, count
 
 
 def clip_owners(name, load, wanted):
@@ -235,7 +279,7 @@ def apply_rotation_revision(args):
             del library, scoped; gc.collect()
         if samples != record["body_pose_samples"]: raise ValueError("Rotation revision pose coverage changed")
         report = {"baseline": baseline.ref, "clips": sorted(wanted), "quaternion_channels": revised_channels,
-                  "body_pose_samples": samples, "preservation": "Only selected quaternion values changed; rig, keys, events and other clips retained."}
+                  "body_pose_samples": samples, "preservation": "Only selected quaternion tracks changed; rig, clip timing, events, non-rotation channels and other clips retained."}
         args.output.mkdir(parents=True, exist_ok=False)
         for path, data in outputs.items():
             target = args.output / path; target.parent.mkdir(parents=True, exist_ok=True); target.write_bytes(data)
