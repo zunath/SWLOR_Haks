@@ -500,6 +500,7 @@ def check_native_palette_fallback(test, engine, pairs, root: Path, folded_palett
     output = (ct.c_float * (256 * 10 * 4))()
     checks = 0
     rgb_checks = 0
+    neutral_skin_checks = 0
     try:
         viewport(0, 0, 256, 10)
         test.active_texture(0x84C0)
@@ -586,6 +587,24 @@ def check_native_palette_fallback(test, engine, pairs, root: Path, folded_palett
                             f"GLerror{error:#x}, maxRGBAerror{difference}, component{first}, "
                             f"actual{output[first]}, expected{targets[first]}")
                     rgb_checks += 1
+                if fragment.startswith('fs_head_'):
+                    neutral_skin = test.location(program, b"skinNeutralShade")
+                    test.scalar(neutral_skin, 1)
+                    for color in (0, 80, 175):
+                        test.scalar(row_locations[0], (color + .5) / 2048)
+                        draw(0x0004, 0, 3)
+                        test.read(0, 0, 256, 1, 0x1908, 0x1406, output)
+                        palette_skin = output[:1024]
+                        red, green, blue = swatch_rgb(0, color)
+                        packed = (red << 16) | (green << 8) | blue
+                        test.scalar(row_locations[0], 1 + packed / 8388608 if packed < 8388608
+                                    else 2 + (packed - 8388608) / 4194304)
+                        draw(0x0004, 0, 3)
+                        test.read(0, 0, 256, 1, 0x1908, 0x1406, output)
+                        if test.error() or max(abs(a - b) for a, b in zip(palette_skin, output)) > 2e-6:
+                            raise AssertionError(f"Neutral skin {fragment}/{quality} swatch {color} differs from RGB")
+                        neutral_skin_checks += 1
+                    test.scalar(neutral_skin, 0)
                 # A material without opt-in must ignore renderer scheme state.
                 test.scalar(test.location(program, b"useNativePalette"), 0)
                 for location, base in zip(row_locations, atlas_bases):
@@ -622,6 +641,8 @@ def check_native_palette_fallback(test, engine, pairs, root: Path, folded_palett
     print(f"RGB nearest-swatch shading passed: {rgb_checks} production GPU draws; all10 layers, all256 "
         "shades, every swatch as exact RGB equal to its palette row (RGBA), eight off-palette colors (two near-black), "
         "all shader variants/quality modes.", flush=True)
+    if neutral_skin_checks:
+        print(f"Neutral skin palette/RGB parity passed: {neutral_skin_checks} comparisons over all 256 shades.", flush=True)
 
 
 def compile_engine_pairs(test, engine, pairs, parameters):

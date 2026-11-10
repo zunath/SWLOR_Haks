@@ -27,6 +27,7 @@ from ModelLodAssets import ModelPath, model_paths
 
 import numpy as np
 import HavocGlowAssets
+import HeadLodAssets
 import HeadTintAssets
 
 
@@ -1750,11 +1751,14 @@ def build_model_material_plan(
     records: dict[tuple[str, str, str, str], dict[str, object]] = {}
     restored_bindings: dict[Path, dict[str, str]] = {}
 
+    head_catalog = HeadTintAssets.catalog(REPOSITORY_ROOT)
+    authored_heads = set(head_catalog['models'])
+    authored_heads.update(head_catalog.get('compatibility', {}).get('models', {}))
+    authored_heads.update(level['model'] for head in HeadLodAssets.catalog(REPOSITORY_ROOT).values()
+                          for level in head['levels'])
     for model, path in sorted(models.items()):
-        head_catalog = HeadTintAssets.catalog(REPOSITORY_ROOT)
-        if model in head_catalog['models'] or model in head_catalog.get('compatibility', {}).get('models', {}):
-            # These compiled heads have an explicit, checksum-validated authoring
-            # catalog; inferring PLT aliases here would replace their masks.
+        if model in authored_heads:
+            # Authored head LODs reuse the close model's material bindings and dye rows.
             continue
         scope = model_material_scope(model, path)
         references = find_model_tint_material_references(path, materials, alias_sources)
