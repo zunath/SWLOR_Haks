@@ -57,6 +57,53 @@ class IndependentRobeSkeletonTests(unittest.TestCase):
                             channels = {k for k in tracks.get(aliases[bone], {}) if k != "parent"}
                             self.assertEqual(set(), channels, (clip_name, bone))
 
+    def test_rifle_profiles_keep_corrected_body_and_original_garment_curves(self):
+        geometry = node("rootdummy", "body") + node("torso_g", "rootdummy")
+        geometry += node("lbicep_g", "torso_g")
+        body_clips, garment_clips = "", ""
+        for index, (suffix, original) in enumerate((("i", "xbowr"), ("r", "xbowrdy"), ("s", "xbowshot"))):
+            ordinary = node("body", "null") + node("rootdummy", "body")
+            ordinary += node("torso_g", "rootdummy")
+            ordinary += node("lbicep_g", "torso_g", f"orientation 1 0 0 {0.1 + index}")
+            body_clips += clip("body", 1, ordinary).replace("walk", original)
+            corrected = ordinary.replace(f"orientation 1 0 0 {0.1 + index}",
+                                         f"orientation 1 0 0 {0.4 + index}")
+            body_clips += clip("body", 1, corrected).replace("walk", f"rf267_101_{suffix}")
+            cloth = node("coat", "null") + node("rootdummy", "coat")
+            cloth += node("torso_g", "rootdummy") + node("lbicep_g", "torso_g", "orientation 0 1 0 2")
+            cloth += node("tail", "torso_g", f"orientationkey 2\n0 0 0 1 0\n2 0 0 1 {0.7 + index}")
+            garment_clips += clip("coat", 2, cloth).replace("walk", original)
+        # These names come from a different body's native bank. Neither an
+        # unowned RF name nor a colliding name may replace this wearer's motion.
+        shadow = node("coat", "null") + node("rootdummy", "coat")
+        shadow += node("torso_g", "rootdummy") + node("lbicep_g", "torso_g", "orientation 0 1 0 2.9")
+        garment_clips += clip("coat", 2, shadow).replace("walk", "rf999_999_i")
+        garment_clips += clip("coat", 2, shadow).replace("walk", "rf267_101_i")
+        coat_geometry = geometry.replace("parent body", "parent coat") + node("tail", "torso_g")
+        fixtures = {"body": model("body", "null", geometry, body_clips),
+                    "coat": model("coat", "body", coat_geometry, garment_clips),
+                    "garment": model("garment", "coat", coat_geometry.replace("parent coat", "parent garment"))}
+        for family_type in (rig.Families, shared.Families):
+            with self.subTest(family=family_type.__module__):
+                families = family_type(fixtures.get)
+                key = families.add("body", fixtures["garment"])
+                if family_type is shared.Families:
+                    sibling = fixtures["garment"].replace("garment", "sibling").replace(
+                        "setsupermodel sibling coat", "setsupermodel sibling body")
+                    fixtures["sibling"] = sibling
+                    self.assertEqual(key, families.add("body", sibling))
+                _, names = families.body_root("garment", "wearer", "bridge")
+                motions = {m[1]: m for m in anim.ANIMATION.finditer(families.bridge(key, "bridge").decode())}
+                self.assertNotIn("rf999_999_i", motions)
+                for index, suffix in enumerate("irs"):
+                    motion = motions[f"rf267_101_{suffix}"]
+                    tracks = {n: p for _, n, p in mdl.parse_nodes(motion[3])}
+                    self.assertEqual(["1", "0", "0", str(0.4 + index)], tracks["lbicep_g"]["orientation"])
+                    curve = tracks[names["tail"]]["orientationkey"]
+                    self.assertEqual("1", curve[-1][0])
+                    self.assertAlmostEqual(0.7 + index, float(curve[-1][-1]))
+                    self.assertIn("length 1", motion[3])
+
     def test_spacers_give_every_wearer_the_same_body_node_indices(self):
         body = (node("rootdummy", "body") + node("lthigh_g", "rootdummy", "position 0.1 0 -0.1") +
                 node("torso_g", "rootdummy", "position 0 0 0.2") + node("neck_g", "torso_g", "position 0 0 0.3"))
