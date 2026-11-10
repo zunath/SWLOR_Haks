@@ -20,19 +20,6 @@ draws the lenses after the head, so heads with alpha-cutout surfaces (hair, fur)
 no longer show a white or opaque fill through the lenses. Keep the lenses a
 separate mesh with their node alpha; the generator keeps both directives.
 
-Fit (Xisifer, 2026-11-05, revised 2026-11-09): the glasses meshes of five
-bodies are moved as a whole, everything else unchanged.
-fit-adjustments-20261105.json records each body's total offset from the
-pre-fit model and its final hash (the file name is historical):
-  pmd0 / pfd0  down by about one lens height (Ugnaught/Ewok bodies)
-  pmo0         forward 0.020, up 0.028 (Cathar male)
-  pfo0         forward 0.006 (Cathar female)
-  pme0         forward 0.025 (male Rodian, Bothan and Wookiee share it)
-Human and female elf-family glasses are unchanged. One shared model per body
-cannot fit every head: some Rodian and Wookiee heads still sit high or low, and
-Cathar female head 18 (whose face sits higher than the other Cathar female
-heads) shows the lenses below the eyes.
-
 Conversion inputs (GenerateTintMapAssets.py --generate-preserving, copied into
 sw_pt_neck under the material names above):
   frames.plt          -> p?h0_n152fr  (1024x512)
