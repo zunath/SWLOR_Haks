@@ -116,7 +116,7 @@ class OwnSourceOrganicGripTests(unittest.TestCase):
                 cls.cases.append((recipe, entry, original, selected))
 
     def test_recipes_reproduce_the_client_reviewed_assets_from_pinned_sources(self):
-        self.assertEqual(len(self.cases), 239)
+        self.assertEqual(len(self.cases), 240)
         for recipe, entry, original, selected in self.cases:
             with self.subTest(hand=entry['output']):
                 self.assertEqual((grip.ROOT / entry['source']).read_bytes(), original)
@@ -145,6 +145,58 @@ class OwnSourceOrganicGripTests(unittest.TestCase):
                 self.assertGreater(moved_count, 0)
 
     def test_surface_health_and_unique_nodes_survive_native_serialization(self):
+        for _, entry, original, selected in self.cases:
+            with self.subTest(hand=entry['output']):
+                model, after = grip.organic_geometry(selected)
+                _, before = grip.organic_geometry(original)
+                names = [n[0] for n in model.nodes]
+                self.assertEqual(len(names), len(set(names)))
+                for (source, _, vertices, _, _), (now, _, _, _, _) in zip(before, after):
+                    posed = np.array(now['verts'])
+                    self.assertTrue(np.isfinite(posed).all())
+                    faces = np.array(source['faces'])[:, :3]
+                    old_area = np.linalg.norm(np.cross(vertices[faces[:, 1]] - vertices[faces[:, 0]], vertices[faces[:, 2]] - vertices[faces[:, 0]]), axis=1)
+                    new_area = np.linalg.norm(np.cross(posed[faces[:, 1]] - posed[faces[:, 0]], posed[faces[:, 2]] - posed[faces[:, 0]]), axis=1)
+                    self.assertGreater(float((new_area[old_area > 1e-12] / old_area[old_area > 1e-12]).min()), .03)
+
+
+class OwnSourceWristGripTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.cases = [(recipe, entry, grip.source(entry['sourceBlob']), (grip.ROOT / entry['output']).read_bytes())
+                     for recipe in json.loads(grip.MANIFEST.read_text())['recipes']
+                     if recipe.get('kind') == 'ownSourceWrist' for entry in recipe['models']]
+
+    def test_wrist_recipes_reproduce_all_pinned_native_payloads(self):
+        self.assertEqual(3, len(self.cases))
+        for recipe, entry, original, selected in self.cases:
+            with self.subTest(hand=entry['output']):
+                self.assertEqual((grip.ROOT / entry['source']).read_bytes(), original)
+                rebuilt, proof = grip.build(recipe, entry)
+                self.assertEqual(selected, rebuilt)
+                self.assertGreaterEqual(proof['protectedCuffVertices'], 4)
+                self.assertGreater(proof['movedVertices'], 0)
+
+    def test_authored_cuffs_uvs_materials_topology_and_native_bindings_stay_exact(self):
+        for _, entry, original, selected in self.cases:
+            with self.subTest(hand=entry['output']):
+                before_model, before = grip.organic_geometry(original)
+                after_model, after = grip.organic_geometry(selected)
+                self.assertEqual([n[1:4] for n in before_model.nodes], [n[1:4] for n in after_model.nodes])
+                self.assertEqual(len(before), len(after))
+                affine = np.array(entry['sourceToCanonicalAffine'])
+                protected_count = 0
+                for (source, _, vertices, root, rendered), (now, _, _, _, _) in zip(before, after):
+                    for key in source.keys() - {'verts', 'normals', '_mesh_offset'}:
+                        self.assertEqual(source[key], now[key], key)
+                    local = (root - affine[3]) @ np.linalg.inv(affine[:3])
+                    cuff = local[:, 2] >= entry['wristCutCanonicalZ'] if rendered else np.ones(len(vertices), bool)
+                    for key in ('verts', 'normals'):
+                        np.testing.assert_array_equal(np.array(source[key])[cuff], np.array(now[key])[cuff])
+                    protected_count += int(cuff.sum())
+                self.assertGreaterEqual(protected_count, 4)
+
+    def test_serialized_wrist_surfaces_remain_finite_and_keep_unique_node_names(self):
         for _, entry, original, selected in self.cases:
             with self.subTest(hand=entry['output']):
                 model, after = grip.organic_geometry(selected)
@@ -267,16 +319,16 @@ class ImportedMechanicalGripTests(unittest.TestCase):
     def test_each_generated_hand_has_exactly_one_owner(self):
         outputs = [entry['output'] for recipe in json.loads(grip.MANIFEST.read_text())['recipes']
                    for entry in recipe['models']]
-        self.assertEqual(506, len(outputs))
+        self.assertEqual(510, len(outputs))
         self.assertEqual(len(outputs), len(set(outputs)))
         import subprocess
         tracked = set(subprocess.check_output(['git', '-C', str(grip.ROOT), 'ls-files'], text=True).splitlines())
         for recipe in json.loads(grip.MANIFEST.read_text())['recipes']:
             for entry in recipe['models']:
-                self.assertIn(entry['source'], tracked, 'Pinned paths must preserve Git filename case')
-                self.assertIn(entry['output'], tracked)
+                self.assertTrue(entry['source'] in tracked, 'Pinned path must preserve Git filename case: ' + entry['source'])
+                self.assertTrue(entry['output'] in tracked, 'Generated hand is not tracked: ' + entry['output'])
                 if entry.get('skeleton'):
-                    self.assertIn(entry['skeleton'], tracked)
+                    self.assertTrue(entry['skeleton'] in tracked, 'Pinned skeleton is not tracked: ' + entry['skeleton'])
 
 
 class AuthoredHandGripTests(unittest.TestCase):

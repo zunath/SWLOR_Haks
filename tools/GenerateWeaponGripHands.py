@@ -581,6 +581,59 @@ def mechanical_surface_gap(first, second):
     return minimum
 
 
+def build_wrist_pose(recipe, entry):
+    """Bend an own-source grasp at its wrist while retaining the authored cuff."""
+    from scipy.spatial.transform import Rotation
+    if recipe['underPose'].get('kind') != 'ownSourceOrganic':
+        raise ValueError('Wrist articulation requires an owned organic grasp')
+    if entry['sourceBlob'] != entry['underPose']['sourceBlob']:
+        raise ValueError('Wrist articulation must use the same authored source')
+    output, _ = build_organic(recipe['underPose'], entry['underPose'])
+    _, parts = organic_geometry(output)
+    affine = np.array(entry['sourceToCanonicalAffine'])
+    inverse = np.linalg.inv(affine[:3])
+    pivot = np.array(entry['wristPivot'])
+    vector = np.array(entry['wristFullRotationVector'])
+    fraction = entry['wristFraction']
+    cut, blend = entry['wristCutCanonicalZ'], entry['wristBlendCanonicalMetres']
+    if not np.isfinite(np.r_[affine.ravel(), pivot, vector, fraction, cut, blend]).all() or blend <= 0:
+        raise ValueError('Invalid wrist articulation frame')
+
+    def field(root):
+        local = (root - affine[3]) @ inverse
+        weight = np.clip((cut - local[:, 2]) / blend, 0, 1)
+        weight = weight * weight * (3 - 2 * weight)
+        return pivot + Rotation.from_rotvec(weight[:, None] * vector * fraction).apply(root - pivot)
+
+    alias = Path(entry['output']).stem
+    protected_count, moved_count = 0, 0
+    for index, (mesh, matrix, vertices, root, rendered) in enumerate(parts):
+        if not rendered:
+            continue
+        local = (root - affine[3]) @ inverse
+        fixed = local[:, 2] >= cut
+        posed = field(root)
+        faces = np.array(mesh['faces'])[:, :3]
+        probes, epsilon = root[faces].mean(1), 1e-6
+        jacobian = np.stack([(field(probes + np.eye(3)[axis] * epsilon) -
+                              field(probes - np.eye(3)[axis] * epsilon)) / (2 * epsilon)
+                             for axis in range(3)], axis=2)
+        old_area = np.linalg.norm(np.cross(root[faces[:, 1]] - root[faces[:, 0]], root[faces[:, 2]] - root[faces[:, 0]]), axis=1)
+        new_area = np.linalg.norm(np.cross(posed[faces[:, 1]] - posed[faces[:, 0]], posed[faces[:, 2]] - posed[faces[:, 0]]), axis=1)
+        if np.linalg.det(jacobian).min() <= .02 or (new_area[old_area > 1e-12] / old_area[old_area > 1e-12]).min() <= .03:
+            raise ValueError('Wrist articulation folds or collapses its source surface')
+        bound = (np.column_stack([posed, np.ones(len(vertices))]) @ np.linalg.inv(matrix).T)[:, :3]
+        bound[fixed] = vertices[fixed]
+        changed = np.linalg.norm(bound - vertices, axis=1) > 1e-10
+        output = patch(output, bound, changed, fixed, alias, index)
+        protected_count += int(fixed.sum())
+        moved_count += int(changed.sum())
+    sha256 = hashlib.sha256(output).hexdigest()
+    if sha256 != entry['outputSha256']:
+        raise ValueError('Wrist articulation differs from its pinned native payload: ' + alias)
+    return output, {'sha256': sha256, 'protectedCuffVertices': protected_count, 'movedVertices': moved_count}
+
+
 def build_droid_correction(recipe, entry):
     from scipy.spatial.transform import Rotation
     original = source(entry['sourceBlob'])
@@ -856,6 +909,8 @@ def build_skin_pose(recipe, entry):
 
 
 def build(recipe, entry):
+    if recipe.get('kind') == 'ownSourceWrist':
+        return build_wrist_pose(recipe, entry)
     if recipe.get('kind') == 'ownSourceSkin':
         return build_skin_pose(recipe, entry)
     if recipe.get('kind') == 'ownSourceAuthored':
