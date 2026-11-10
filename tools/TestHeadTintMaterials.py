@@ -107,6 +107,47 @@ def check_metal_finish(test,game_data,shader_root):
     print(f'Scoped finish: {checks} GPU state checks passed; all 8 nonmetal layers unchanged, palette/RGB coverage retained, missing-control negatives failed as expected.')
 
 
+def check_skin_detail_gain(test, game_data):
+    """The Trandoshan gain covers both palette skin and fixed diffuse details."""
+    root = head.ROOT / 'sw_shader'
+    material = tint.stock_material(game_data)
+    standard = tint.STANDARD[:tint.STANDARD.index('void ApplyStandardShader()')] + 'void ApplyStandardShader() {}\n'
+    wrapper = (root / 'fs_head_mapped.shd').read_text()
+    include = (root / 'inc_hd_tint.shd').read_text()
+    program = test.program('#version 120\n' + wrapper.replace('#include "inc_standard"',
+        tint.ADAPTER + material + standard).replace('#include "inc_hd_tint"', include))
+    checks = 0
+    try:
+        test.use(program)
+        test.scalar(test.location(program, b'detailDiffuse'), 1)
+        for coverage in (0, 0.5, 1):
+            test.active_texture(0x84C0 + 8)
+            test.bind_texture(0x0DE1, 9)
+            pixels = (ct.c_float * 4)(coverage, 0, 0, 1)
+            test.texture_image(0x0DE1, 0, 0x8814, 1, 1, 0, 0x1908, 0x1406, pixels)
+            test.integer(test.location(program, b'texUnit8'), 8)
+            for layer in range(10):
+                for gain in (1, 1.4, 1.47, 1.82):
+                    test.scalar(test.location(program, b'skinGain'), gain)
+                    test.scalar(test.location(program, b'detailSkinGain'), gain)
+                    actual = test.sample(program, 1, 1, palette_layer=layer,
+                                         authored_diffuse=(0.3, 0.4, 0.2, 1))
+                    if gain == 1:
+                        baseline = actual
+                    else:
+                        expected = tuple(v * (gain if layer == 0 else 1) for v in baseline)
+                        tint.near(actual, expected, f'skin detail coverage={coverage} layer={layer}')
+                        checks += 1
+        # A different material's older skin-only gain must not brighten its fixed detail.
+        test.scalar(test.location(program, b'skinGain'), 0.8)
+        test.scalar(test.location(program, b'detailSkinGain'), 1)
+        tint.near(test.sample(program, 1, 1, palette_layer=0, authored_diffuse=(0.3, 0.4, 0.2, 1)),
+                  (0.3, 0.4, 0.2), 'fixed detail keeps its previous gain by default')
+    finally:
+        test.delete_program(program)
+    print(f'Skin brightness: {checks} GPU comparisons passed; dyed and fixed detail gain together, non-skin unchanged.')
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--game-data', type=Path, required=True)
@@ -129,6 +170,7 @@ def main():
         test = tint.MaterialTest(gl)
         check_reflectance_state(test, args.game_data)
         check_metal_finish(test, args.game_data, head.ROOT / 'sw_shader')
+        check_skin_detail_gain(test, args.game_data)
         tint.compile_engine_pairs(test, engine, sorted(pairs), pairs)
         # Expected RGBA comes from installed original palettes and native scheme
         # integers. This remains runnable after a squash or shallow clone.
@@ -142,7 +184,7 @@ def main():
                                                          engine.source(vertex, False, config))
             program = programs[vertex, fragment]
             test.use(program)
-            flags = ('useNativePalette', 'useTexture1Alpha', 'useTexture9Alpha', 'metalReflectanceScale')
+            flags = ('useNativePalette', 'useTexture1Alpha', 'useTexture9Alpha', 'metalReflectanceScale', 'detailSkinGain')
             for flag in flags:
                 test.scalar(test.location(program, flag.encode()), 0 if flag == 'metalReflectanceScale' else 1)
             tint.upload_material_parameters(test, program,

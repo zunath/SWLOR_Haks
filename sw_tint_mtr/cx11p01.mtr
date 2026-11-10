@@ -29,6 +29,7 @@ parameter float clampEyeLayer2 -1
 parameter float detailDiffuse 1
 parameter float detailGlowChannel 2
 parameter float detailGlowGain 1.25
+parameter float detailSkinGain 1.47
 parameter float eyeContour 0
 parameter float forceOpaque 1
 parameter float glowCompression 0.32
@@ -58,7 +59,7 @@ parameter float scalpMaxU 0.49
 parameter float scalpShadeBase 0.070588235294
 parameter float scalpShadeScale 1
 parameter float scalpStartV 0.45
-parameter float skinGain 1
+parameter float skinGain 1.47
 parameter float skinNeutralShade 0
 parameter float texture9Cutoff 0.3
 parameter float useNativePalette 0
