@@ -1555,14 +1555,14 @@
       6,
       7
     ],
-    "width": 512,
-    "height": 512,
+    "width": 1024,
+    "height": 1024,
     "source": "sw_pt_helm/helm_053.plt",
-    "sourceSha256": "0548748a74acf12a815febcedd239a1fd8d5481ace07ec4ed6c0b51a37ac10c3",
-    "layerSha256": "b7587651f238c1f69e5ebbf80edba2db933c7f7d30f78da2120d453b91a05ea9",
-    "output": "sw_tint0/tm_e65f3d5396b8f.dds",
-    "texture": "tm_e65f3d5396b8f",
-    "shadeSha256": "10612339948192e1aa2b0a2035750eea23cc0497b377dd1d3012cd913659287a"
+    "sourceSha256": "a0b890bfbce538b2cfef3d6a50ea7a1587de464e55329a16c8a3369d1c16c26c",
+    "shadeSha256": "b96ee4a2ff52338ff49e99d4f17027f2c2c6295e6fb10aa1ca9fd031d09b7c96",
+    "layerSha256": "8ea99745468554fd9d1dea61c0619418f8a74b04ac5d07d7c88ed3bcd4846ccb",
+    "output": "sw_tint0/tm_8e974d4ef5f49.dds",
+    "texture": "tm_8e974d4ef5f49"
   },
   {
     "model": "helm_054",
@@ -16505,11 +16505,11 @@
     "width": 512,
     "height": 512,
     "source": "sw_pt_chest/pfh0_chest078.plt",
-    "sourceSha256": "5c7a5ca2d96c86b6f6cd0a4f607885300f1b05fde5ca07539fa230e3200e805a",
-    "layerSha256": "d35811c4d2782985bd1967fa198aca770daaae77398b64f0608dafb7cf19f44e",
-    "output": "sw_tint2/tm_45bb8bc8bc873.dds",
-    "texture": "tm_45bb8bc8bc873",
-    "shadeSha256": "4412a226a2b98fedaef1f18a2d72febc0ecbce01261a962000c606510bade538"
+    "sourceSha256": "facbc696753a5bb7d5f72a8fcf324b5daa98d423c0e457d63338394fefd31ee7",
+    "shadeSha256": "8ae19eccb85f9e9ac452458e88c3a043c7bcd24c9e5fc8a973b4646fd6433213",
+    "layerSha256": "d4c047969046ca1b75fda2796770407cc31fe77653b27f837b44361d2d0695b0",
+    "output": "sw_tint2/tm_a88e5fa6f159a.dds",
+    "texture": "tm_a88e5fa6f159a"
   },
   {
     "model": "pfh0_chest079",
@@ -120482,12 +120482,6 @@
   {
     "model": "pfh0_bicepl278",
     "material": "pfh0_bicepl278",
-    "width": 388,
-    "height": 388,
-    "source": "armor-source/havoc-squad/pfh0_bicepl278.plt",
-    "sourceSha256": "7842a11d885e581b82e64795bf2b7f06244f642e58cce89e2d53fb58a08aee0d",
-    "layerSha256": "d0c52b42ade3fe79af4cb68da22042e9b6deb623b754694ec073f85fc1d0197b",
-    "shadeSha256": "acc87bef795f5af24aeb441117fb81d4217198a1f05c636410ab9dd7d4b11dec",
     "layers": [
       2,
       4,
@@ -120495,18 +120489,18 @@
       6,
       7
     ],
-    "texture": "tm_ed638051d4c78",
-    "output": "sw_tint2/tm_ed638051d4c78.dds"
+    "width": 388,
+    "height": 388,
+    "source": "sw_pt_lbicep/pfh0_bicepl278.plt",
+    "sourceSha256": "93fdf385512e0558a606d284555981b33289e199e4645e4c9dde5cc1ee8cba72",
+    "shadeSha256": "969b30ae06d61b9a4301e1400539fc14f526195fdc7fe3474ef8c9dafac711a4",
+    "layerSha256": "d0c52b42ade3fe79af4cb68da22042e9b6deb623b754694ec073f85fc1d0197b",
+    "output": "sw_tint2/tm_35e9fd56ecbeb.dds",
+    "texture": "tm_35e9fd56ecbeb"
   },
   {
     "model": "pfh0_bicepr278",
     "material": "pfh0_bicepr278",
-    "width": 388,
-    "height": 388,
-    "source": "armor-source/havoc-squad/pfh0_bicepl278.plt",
-    "sourceSha256": "7842a11d885e581b82e64795bf2b7f06244f642e58cce89e2d53fb58a08aee0d",
-    "layerSha256": "d0c52b42ade3fe79af4cb68da22042e9b6deb623b754694ec073f85fc1d0197b",
-    "shadeSha256": "acc87bef795f5af24aeb441117fb81d4217198a1f05c636410ab9dd7d4b11dec",
     "layers": [
       2,
       4,
@@ -120514,18 +120508,18 @@
       6,
       7
     ],
-    "texture": "tm_ed638051d4c78",
-    "output": "sw_tint2/tm_ed638051d4c78.dds"
+    "width": 388,
+    "height": 388,
+    "source": "sw_pt_rbicep/pfh0_bicepr278.plt",
+    "sourceSha256": "93fdf385512e0558a606d284555981b33289e199e4645e4c9dde5cc1ee8cba72",
+    "shadeSha256": "969b30ae06d61b9a4301e1400539fc14f526195fdc7fe3474ef8c9dafac711a4",
+    "layerSha256": "d0c52b42ade3fe79af4cb68da22042e9b6deb623b754694ec073f85fc1d0197b",
+    "output": "sw_tint2/tm_35e9fd56ecbeb.dds",
+    "texture": "tm_35e9fd56ecbeb"
   },
   {
     "model": "pfh0_chest316",
     "material": "pfh0_chest316",
-    "width": 1024,
-    "height": 1024,
-    "source": "armor-source/havoc-squad/pfh0_chest316.plt",
-    "sourceSha256": "6093b25a4140a9a34f8e4c6a73dec09f6b72c0a6cf97f88ceb4599928b962827",
-    "layerSha256": "2cafa75f3b2efae4ba2581409fd31079c1d9d83059c4b893f80ad1a57faec1b2",
-    "shadeSha256": "458e54b6cda31bcbd2dcf04009a1a9eb6ef09e69a3d78cfdc30e3a80c8b9a05a",
     "layers": [
       2,
       3,
@@ -120534,18 +120528,18 @@
       6,
       7
     ],
-    "texture": "tm_f9a1d418b5f4a",
-    "output": "sw_tint2/tm_f9a1d418b5f4a.dds"
+    "width": 1024,
+    "height": 1024,
+    "source": "sw_pt_chest/pfh0_chest316.plt",
+    "sourceSha256": "5e2afeb06b9143f25205807826d9a8660e41752b775b702e61183dd628bce142",
+    "shadeSha256": "52caec4f5dfd4d8970db1ff82c5fee6ad5d75cf08a6a86ee99b6cfa7d55c64f6",
+    "layerSha256": "2cafa75f3b2efae4ba2581409fd31079c1d9d83059c4b893f80ad1a57faec1b2",
+    "output": "sw_tint0/tm_3aad9a358c868.dds",
+    "texture": "tm_3aad9a358c868"
   },
   {
     "model": "pfh0_chest317",
     "material": "pfh0_chest317",
-    "width": 1024,
-    "height": 1024,
-    "source": "armor-source/havoc-squad/pfh0_chest316.plt",
-    "sourceSha256": "6093b25a4140a9a34f8e4c6a73dec09f6b72c0a6cf97f88ceb4599928b962827",
-    "layerSha256": "2cafa75f3b2efae4ba2581409fd31079c1d9d83059c4b893f80ad1a57faec1b2",
-    "shadeSha256": "458e54b6cda31bcbd2dcf04009a1a9eb6ef09e69a3d78cfdc30e3a80c8b9a05a",
     "layers": [
       2,
       3,
@@ -120554,54 +120548,54 @@
       6,
       7
     ],
-    "texture": "tm_f9a1d418b5f4a",
-    "output": "sw_tint2/tm_f9a1d418b5f4a.dds"
+    "width": 1024,
+    "height": 1024,
+    "source": "sw_pt_chest/pfh0_chest317.plt",
+    "sourceSha256": "5e2afeb06b9143f25205807826d9a8660e41752b775b702e61183dd628bce142",
+    "shadeSha256": "52caec4f5dfd4d8970db1ff82c5fee6ad5d75cf08a6a86ee99b6cfa7d55c64f6",
+    "layerSha256": "2cafa75f3b2efae4ba2581409fd31079c1d9d83059c4b893f80ad1a57faec1b2",
+    "output": "sw_tint0/tm_3aad9a358c868.dds",
+    "texture": "tm_3aad9a358c868"
   },
   {
     "model": "pfh0_footl272",
     "material": "pfh0_footl272",
-    "width": 512,
-    "height": 512,
-    "source": "armor-source/havoc-squad/pfh0_footl272.plt",
-    "sourceSha256": "03cfb8eb8fe7be9c6a29a210a17582fb00187af828b77f5e39d9bf62c96f9ac1",
-    "layerSha256": "d574194ceae8ef7e5ab48261c7301725a04f2f37f553f2e872509c80705e7665",
-    "shadeSha256": "defcfdabff143bb09cfcc626fa4a5f3aca383fec1671c18686e2e517c334944a",
     "layers": [
       2,
       3,
       4,
       7
     ],
-    "texture": "tm_27ddddc11171c",
-    "output": "sw_tint2/tm_27ddddc11171c.dds"
+    "width": 512,
+    "height": 512,
+    "source": "sw_pt_lfoot/pfh0_footl272.plt",
+    "sourceSha256": "dec0311c64f2853c87bd4a18f914ea9e0112e3e58bef50f66e08249f8883c286",
+    "shadeSha256": "70f8d2967c659c0eec26ee154f7af1961eabf42d9878434015e9d8c34cc3c4ca",
+    "layerSha256": "d574194ceae8ef7e5ab48261c7301725a04f2f37f553f2e872509c80705e7665",
+    "output": "sw_tint0/tm_2472458c105d7.dds",
+    "texture": "tm_2472458c105d7"
   },
   {
     "model": "pfh0_footr272",
     "material": "pfh0_footr272",
-    "width": 512,
-    "height": 512,
-    "source": "armor-source/havoc-squad/pfh0_footl272.plt",
-    "sourceSha256": "03cfb8eb8fe7be9c6a29a210a17582fb00187af828b77f5e39d9bf62c96f9ac1",
-    "layerSha256": "d574194ceae8ef7e5ab48261c7301725a04f2f37f553f2e872509c80705e7665",
-    "shadeSha256": "defcfdabff143bb09cfcc626fa4a5f3aca383fec1671c18686e2e517c334944a",
     "layers": [
       2,
       3,
       4,
       7
     ],
-    "texture": "tm_27ddddc11171c",
-    "output": "sw_tint2/tm_27ddddc11171c.dds"
+    "width": 512,
+    "height": 512,
+    "source": "sw_pt_rfoot/pfh0_footr272.plt",
+    "sourceSha256": "dec0311c64f2853c87bd4a18f914ea9e0112e3e58bef50f66e08249f8883c286",
+    "shadeSha256": "70f8d2967c659c0eec26ee154f7af1961eabf42d9878434015e9d8c34cc3c4ca",
+    "layerSha256": "d574194ceae8ef7e5ab48261c7301725a04f2f37f553f2e872509c80705e7665",
+    "output": "sw_tint0/tm_2472458c105d7.dds",
+    "texture": "tm_2472458c105d7"
   },
   {
     "model": "pfh0_forel282",
     "material": "pfh0_forel282",
-    "width": 746,
-    "height": 746,
-    "source": "armor-source/havoc-squad/pfh0_forel282.plt",
-    "sourceSha256": "f8a624bf8a44cf498c4874d8a87d4ce630ddd8cf9c9e3b953bf644c80638890e",
-    "layerSha256": "e448d9aa19ec01c615909a198b3c361277d5ddce47728c7fd21f541f496fd8a3",
-    "shadeSha256": "f6bd92eb177c260411210ceca7dffa695918d2218c30e14583556cb67c1074b7",
     "layers": [
       2,
       3,
@@ -120610,18 +120604,18 @@
       6,
       7
     ],
-    "texture": "tm_1187c61b1b2ef",
-    "output": "sw_tint2/tm_1187c61b1b2ef.dds"
+    "width": 746,
+    "height": 746,
+    "source": "sw_pt_lfore/pfh0_forel282.plt",
+    "sourceSha256": "f86e2a8db84a27bb389278936198a69a78c00e6640c8125120b057a73bed22fb",
+    "shadeSha256": "93c64029defe80dd6c04547ac5cf64855bc129ddc20472fdf28f7ca6c9868077",
+    "layerSha256": "e448d9aa19ec01c615909a198b3c361277d5ddce47728c7fd21f541f496fd8a3",
+    "output": "sw_tint0/tm_b40162d30a320.dds",
+    "texture": "tm_b40162d30a320"
   },
   {
     "model": "pfh0_forer282",
     "material": "pfh0_forer282",
-    "width": 746,
-    "height": 746,
-    "source": "armor-source/havoc-squad/pfh0_forel282.plt",
-    "sourceSha256": "f8a624bf8a44cf498c4874d8a87d4ce630ddd8cf9c9e3b953bf644c80638890e",
-    "layerSha256": "e448d9aa19ec01c615909a198b3c361277d5ddce47728c7fd21f541f496fd8a3",
-    "shadeSha256": "f6bd92eb177c260411210ceca7dffa695918d2218c30e14583556cb67c1074b7",
     "layers": [
       2,
       3,
@@ -120630,106 +120624,106 @@
       6,
       7
     ],
-    "texture": "tm_1187c61b1b2ef",
-    "output": "sw_tint2/tm_1187c61b1b2ef.dds"
+    "width": 746,
+    "height": 746,
+    "source": "sw_pt_rfore/pfh0_forer282.plt",
+    "sourceSha256": "f86e2a8db84a27bb389278936198a69a78c00e6640c8125120b057a73bed22fb",
+    "shadeSha256": "93c64029defe80dd6c04547ac5cf64855bc129ddc20472fdf28f7ca6c9868077",
+    "layerSha256": "e448d9aa19ec01c615909a198b3c361277d5ddce47728c7fd21f541f496fd8a3",
+    "output": "sw_tint0/tm_b40162d30a320.dds",
+    "texture": "tm_b40162d30a320"
   },
   {
     "model": "pfh0_handl267",
     "material": "pfh0_handl267",
-    "width": 512,
-    "height": 512,
-    "source": "armor-source/havoc-squad/pfh0_handl267.plt",
-    "sourceSha256": "2ab9fecf535c344fdebeb2ddd0402535bff0155eb973ae05d4ac99ce20f3227b",
-    "layerSha256": "9bb2d31bddf11adeb3ef8f80ed1b326d536b19644b7b1fd73557be262c473771",
-    "shadeSha256": "a863d9eda94a44cb527f331fe53cf2556aa6f53ccd43edfe6d63f1c51124e8bc",
     "layers": [
       2,
       3,
       4
     ],
-    "texture": "tm_6b4bdff561966",
-    "output": "sw_tint2/tm_6b4bdff561966.dds"
+    "width": 512,
+    "height": 512,
+    "source": "sw_pt_lhand/pfh0_handl267.plt",
+    "sourceSha256": "30df776d6d0631c669728e81bd760c85cefa4d1cbb5958d71f1a024702bb4d1c",
+    "shadeSha256": "740ca51c8a876a580c49ef2dca166b7042769beaa77d8c5c4727d38ace749112",
+    "layerSha256": "9bb2d31bddf11adeb3ef8f80ed1b326d536b19644b7b1fd73557be262c473771",
+    "output": "sw_tint1/tm_27731dcc1a2cc.dds",
+    "texture": "tm_27731dcc1a2cc"
   },
   {
     "model": "pfh0_handr267",
     "material": "pfh0_handr267",
-    "width": 512,
-    "height": 512,
-    "source": "armor-source/havoc-squad/pfh0_handl267.plt",
-    "sourceSha256": "2ab9fecf535c344fdebeb2ddd0402535bff0155eb973ae05d4ac99ce20f3227b",
-    "layerSha256": "9bb2d31bddf11adeb3ef8f80ed1b326d536b19644b7b1fd73557be262c473771",
-    "shadeSha256": "a863d9eda94a44cb527f331fe53cf2556aa6f53ccd43edfe6d63f1c51124e8bc",
     "layers": [
       2,
       3,
       4
     ],
-    "texture": "tm_6b4bdff561966",
-    "output": "sw_tint2/tm_6b4bdff561966.dds"
+    "width": 512,
+    "height": 512,
+    "source": "sw_pt_rhand/pfh0_handr267.plt",
+    "sourceSha256": "30df776d6d0631c669728e81bd760c85cefa4d1cbb5958d71f1a024702bb4d1c",
+    "shadeSha256": "740ca51c8a876a580c49ef2dca166b7042769beaa77d8c5c4727d38ace749112",
+    "layerSha256": "9bb2d31bddf11adeb3ef8f80ed1b326d536b19644b7b1fd73557be262c473771",
+    "output": "sw_tint1/tm_27731dcc1a2cc.dds",
+    "texture": "tm_27731dcc1a2cc"
   },
   {
     "model": "pfh0_legl269",
     "material": "pfh0_legl269",
-    "width": 1024,
-    "height": 1024,
-    "source": "armor-source/havoc-squad/pfh0_legl269.plt",
-    "sourceSha256": "6e1a9cba7995e0ed29f2773701235f7567a448f12cf4cd6041b38b62e3129fd0",
-    "layerSha256": "fd011c7f36fc0191695bedcbaed203c6a2478bc878a2238bb6ed855a1e593388",
-    "shadeSha256": "51d2dadaf7197d90833253129412de51f4f642e42f7d9f3a37529fc3665f9765",
     "layers": [
       2,
       3,
       4,
       7
     ],
-    "texture": "tm_5e7c930c73eb8",
-    "output": "sw_tint2/tm_5e7c930c73eb8.dds"
+    "width": 1024,
+    "height": 1024,
+    "source": "sw_pt_lthigh/pfh0_legl269.plt",
+    "sourceSha256": "1ac0059889d0c55d26e52ead55badcaac9c863e4757296daedb64dbd6df2ff80",
+    "shadeSha256": "7a57b5341d915fe1469a8bed8fa0fe721eb32cab4daf4e03395bc50e2f04809c",
+    "layerSha256": "fd011c7f36fc0191695bedcbaed203c6a2478bc878a2238bb6ed855a1e593388",
+    "output": "sw_tint2/tm_1548c39d8ef76.dds",
+    "texture": "tm_1548c39d8ef76"
   },
   {
     "model": "pfh0_legr269",
     "material": "pfh0_legr269",
-    "width": 1024,
-    "height": 1024,
-    "source": "armor-source/havoc-squad/pfh0_legl269.plt",
-    "sourceSha256": "6e1a9cba7995e0ed29f2773701235f7567a448f12cf4cd6041b38b62e3129fd0",
-    "layerSha256": "fd011c7f36fc0191695bedcbaed203c6a2478bc878a2238bb6ed855a1e593388",
-    "shadeSha256": "51d2dadaf7197d90833253129412de51f4f642e42f7d9f3a37529fc3665f9765",
     "layers": [
       2,
       3,
       4,
       7
     ],
-    "texture": "tm_5e7c930c73eb8",
-    "output": "sw_tint2/tm_5e7c930c73eb8.dds"
+    "width": 1024,
+    "height": 1024,
+    "source": "sw_pt_rthigh/pfh0_legr269.plt",
+    "sourceSha256": "1ac0059889d0c55d26e52ead55badcaac9c863e4757296daedb64dbd6df2ff80",
+    "shadeSha256": "7a57b5341d915fe1469a8bed8fa0fe721eb32cab4daf4e03395bc50e2f04809c",
+    "layerSha256": "fd011c7f36fc0191695bedcbaed203c6a2478bc878a2238bb6ed855a1e593388",
+    "output": "sw_tint2/tm_1548c39d8ef76.dds",
+    "texture": "tm_1548c39d8ef76"
   },
   {
     "model": "pfh0_pelvis270",
     "material": "pfh0_pelvis270",
-    "width": 1024,
-    "height": 1024,
-    "source": "armor-source/havoc-squad/pfh0_legl269.plt",
-    "sourceSha256": "6e1a9cba7995e0ed29f2773701235f7567a448f12cf4cd6041b38b62e3129fd0",
-    "layerSha256": "fd011c7f36fc0191695bedcbaed203c6a2478bc878a2238bb6ed855a1e593388",
-    "shadeSha256": "51d2dadaf7197d90833253129412de51f4f642e42f7d9f3a37529fc3665f9765",
     "layers": [
       2,
       3,
       4,
       7
     ],
-    "texture": "tm_5e7c930c73eb8",
-    "output": "sw_tint2/tm_5e7c930c73eb8.dds"
+    "width": 1024,
+    "height": 1024,
+    "source": "sw_pt_pelvis/pfh0_pelvis270.plt",
+    "sourceSha256": "1ac0059889d0c55d26e52ead55badcaac9c863e4757296daedb64dbd6df2ff80",
+    "shadeSha256": "7a57b5341d915fe1469a8bed8fa0fe721eb32cab4daf4e03395bc50e2f04809c",
+    "layerSha256": "fd011c7f36fc0191695bedcbaed203c6a2478bc878a2238bb6ed855a1e593388",
+    "output": "sw_tint2/tm_1548c39d8ef76.dds",
+    "texture": "tm_1548c39d8ef76"
   },
   {
     "model": "pfh0_shinl272",
     "material": "pfh0_shinl272",
-    "width": 600,
-    "height": 600,
-    "source": "armor-source/havoc-squad/pfh0_shinl272.plt",
-    "sourceSha256": "bc3a1537ba0c038b732b8adab42e125ec8cc15ff6eab2e29e455e1266c16c097",
-    "layerSha256": "d67d3496d194318582f838b4d9bfa7bcd03e0f2b29c403a92f2826dcc135244f",
-    "shadeSha256": "9ce3b1887cf6b40756765c88b980bb35368f4d73177c2950ca6ef9758c2a150c",
     "layers": [
       2,
       3,
@@ -120737,18 +120731,18 @@
       6,
       7
     ],
-    "texture": "tm_1714cbddfc324",
-    "output": "sw_tint2/tm_1714cbddfc324.dds"
+    "width": 600,
+    "height": 600,
+    "source": "sw_pt_lshin/pfh0_shinl272.plt",
+    "sourceSha256": "d02aeefc23430bd51251b460fd9dcc1b05caa5e45711d1a85fb05f38a2f410b2",
+    "shadeSha256": "b90be2ec040f0aa56b60d37fb5c405f5f56fb3ffd13af52ec5a4679f435dff1f",
+    "layerSha256": "d67d3496d194318582f838b4d9bfa7bcd03e0f2b29c403a92f2826dcc135244f",
+    "output": "sw_tint2/tm_ccbf112c5726d.dds",
+    "texture": "tm_ccbf112c5726d"
   },
   {
     "model": "pfh0_shinr272",
     "material": "pfh0_shinr272",
-    "width": 600,
-    "height": 600,
-    "source": "armor-source/havoc-squad/pfh0_shinl272.plt",
-    "sourceSha256": "bc3a1537ba0c038b732b8adab42e125ec8cc15ff6eab2e29e455e1266c16c097",
-    "layerSha256": "d67d3496d194318582f838b4d9bfa7bcd03e0f2b29c403a92f2826dcc135244f",
-    "shadeSha256": "9ce3b1887cf6b40756765c88b980bb35368f4d73177c2950ca6ef9758c2a150c",
     "layers": [
       2,
       3,
@@ -120756,18 +120750,18 @@
       6,
       7
     ],
-    "texture": "tm_1714cbddfc324",
-    "output": "sw_tint2/tm_1714cbddfc324.dds"
+    "width": 600,
+    "height": 600,
+    "source": "sw_pt_rshin/pfh0_shinr272.plt",
+    "sourceSha256": "d02aeefc23430bd51251b460fd9dcc1b05caa5e45711d1a85fb05f38a2f410b2",
+    "shadeSha256": "b90be2ec040f0aa56b60d37fb5c405f5f56fb3ffd13af52ec5a4679f435dff1f",
+    "layerSha256": "d67d3496d194318582f838b4d9bfa7bcd03e0f2b29c403a92f2826dcc135244f",
+    "output": "sw_tint2/tm_ccbf112c5726d.dds",
+    "texture": "tm_ccbf112c5726d"
   },
   {
     "model": "pfh0_shol261",
     "material": "pfh0_shol261",
-    "width": 341,
-    "height": 341,
-    "source": "armor-source/havoc-squad/pfh0_shol261.plt",
-    "sourceSha256": "e65d17e5f91ed09b60b8da3f7fa65954cd2f55c7ee5ca22211e0bacc1fe15e7b",
-    "layerSha256": "6049bb855ce2e756c9ecb74467eb5804a4283d0d58fddbdd7ae1b337e4dba960",
-    "shadeSha256": "b769e20093ffafe6c2759d236e79db714c9c191970963056629a132141f1b25e",
     "layers": [
       2,
       3,
@@ -120775,18 +120769,18 @@
       6,
       7
     ],
-    "texture": "tm_d75b56e80da99",
-    "output": "sw_tint2/tm_d75b56e80da99.dds"
+    "width": 341,
+    "height": 341,
+    "source": "sw_pt_lshoul/pfh0_shol261.plt",
+    "sourceSha256": "75b1045c56b2e749a1ad15a65fd20af7b12bc844d897aaedeafc3c556e01eb12",
+    "shadeSha256": "62a90b47c14d52067108b91e0026bcd2160491f8062cf8fa1f11e58a6c48bcea",
+    "layerSha256": "6049bb855ce2e756c9ecb74467eb5804a4283d0d58fddbdd7ae1b337e4dba960",
+    "output": "sw_tint1/tm_0805c63b27830.dds",
+    "texture": "tm_0805c63b27830"
   },
   {
     "model": "pfh0_shor261",
     "material": "pfh0_shor261",
-    "width": 341,
-    "height": 341,
-    "source": "armor-source/havoc-squad/pfh0_shol261.plt",
-    "sourceSha256": "e65d17e5f91ed09b60b8da3f7fa65954cd2f55c7ee5ca22211e0bacc1fe15e7b",
-    "layerSha256": "6049bb855ce2e756c9ecb74467eb5804a4283d0d58fddbdd7ae1b337e4dba960",
-    "shadeSha256": "b769e20093ffafe6c2759d236e79db714c9c191970963056629a132141f1b25e",
     "layers": [
       2,
       3,
@@ -120794,18 +120788,18 @@
       6,
       7
     ],
-    "texture": "tm_d75b56e80da99",
-    "output": "sw_tint2/tm_d75b56e80da99.dds"
+    "width": 341,
+    "height": 341,
+    "source": "sw_pt_rshoul/pfh0_shor261.plt",
+    "sourceSha256": "75b1045c56b2e749a1ad15a65fd20af7b12bc844d897aaedeafc3c556e01eb12",
+    "shadeSha256": "62a90b47c14d52067108b91e0026bcd2160491f8062cf8fa1f11e58a6c48bcea",
+    "layerSha256": "6049bb855ce2e756c9ecb74467eb5804a4283d0d58fddbdd7ae1b337e4dba960",
+    "output": "sw_tint1/tm_0805c63b27830.dds",
+    "texture": "tm_0805c63b27830"
   },
   {
     "model": "pmh0_bicepl278",
     "material": "pmh0_bicepl278",
-    "width": 388,
-    "height": 388,
-    "source": "armor-source/havoc-squad/pfh0_bicepl278.plt",
-    "sourceSha256": "7842a11d885e581b82e64795bf2b7f06244f642e58cce89e2d53fb58a08aee0d",
-    "layerSha256": "d0c52b42ade3fe79af4cb68da22042e9b6deb623b754694ec073f85fc1d0197b",
-    "shadeSha256": "acc87bef795f5af24aeb441117fb81d4217198a1f05c636410ab9dd7d4b11dec",
     "layers": [
       2,
       4,
@@ -120813,18 +120807,18 @@
       6,
       7
     ],
-    "texture": "tm_ed638051d4c78",
-    "output": "sw_tint2/tm_ed638051d4c78.dds"
+    "width": 388,
+    "height": 388,
+    "source": "sw_pt_lbicep/pmh0_bicepl278.plt",
+    "sourceSha256": "93fdf385512e0558a606d284555981b33289e199e4645e4c9dde5cc1ee8cba72",
+    "shadeSha256": "969b30ae06d61b9a4301e1400539fc14f526195fdc7fe3474ef8c9dafac711a4",
+    "layerSha256": "d0c52b42ade3fe79af4cb68da22042e9b6deb623b754694ec073f85fc1d0197b",
+    "output": "sw_tint2/tm_35e9fd56ecbeb.dds",
+    "texture": "tm_35e9fd56ecbeb"
   },
   {
     "model": "pmh0_bicepr278",
     "material": "pmh0_bicepr278",
-    "width": 388,
-    "height": 388,
-    "source": "armor-source/havoc-squad/pfh0_bicepl278.plt",
-    "sourceSha256": "7842a11d885e581b82e64795bf2b7f06244f642e58cce89e2d53fb58a08aee0d",
-    "layerSha256": "d0c52b42ade3fe79af4cb68da22042e9b6deb623b754694ec073f85fc1d0197b",
-    "shadeSha256": "acc87bef795f5af24aeb441117fb81d4217198a1f05c636410ab9dd7d4b11dec",
     "layers": [
       2,
       4,
@@ -120832,18 +120826,18 @@
       6,
       7
     ],
-    "texture": "tm_ed638051d4c78",
-    "output": "sw_tint2/tm_ed638051d4c78.dds"
+    "width": 388,
+    "height": 388,
+    "source": "sw_pt_rbicep/pmh0_bicepr278.plt",
+    "sourceSha256": "93fdf385512e0558a606d284555981b33289e199e4645e4c9dde5cc1ee8cba72",
+    "shadeSha256": "969b30ae06d61b9a4301e1400539fc14f526195fdc7fe3474ef8c9dafac711a4",
+    "layerSha256": "d0c52b42ade3fe79af4cb68da22042e9b6deb623b754694ec073f85fc1d0197b",
+    "output": "sw_tint2/tm_35e9fd56ecbeb.dds",
+    "texture": "tm_35e9fd56ecbeb"
   },
   {
     "model": "pmh0_chest316",
     "material": "pmh0_chest316",
-    "width": 1024,
-    "height": 1024,
-    "source": "armor-source/havoc-squad/pfh0_chest316.plt",
-    "sourceSha256": "6093b25a4140a9a34f8e4c6a73dec09f6b72c0a6cf97f88ceb4599928b962827",
-    "layerSha256": "2cafa75f3b2efae4ba2581409fd31079c1d9d83059c4b893f80ad1a57faec1b2",
-    "shadeSha256": "458e54b6cda31bcbd2dcf04009a1a9eb6ef09e69a3d78cfdc30e3a80c8b9a05a",
     "layers": [
       2,
       3,
@@ -120852,18 +120846,18 @@
       6,
       7
     ],
-    "texture": "tm_f9a1d418b5f4a",
-    "output": "sw_tint2/tm_f9a1d418b5f4a.dds"
+    "width": 1024,
+    "height": 1024,
+    "source": "sw_pt_chest/pmh0_chest316.plt",
+    "sourceSha256": "5e2afeb06b9143f25205807826d9a8660e41752b775b702e61183dd628bce142",
+    "shadeSha256": "52caec4f5dfd4d8970db1ff82c5fee6ad5d75cf08a6a86ee99b6cfa7d55c64f6",
+    "layerSha256": "2cafa75f3b2efae4ba2581409fd31079c1d9d83059c4b893f80ad1a57faec1b2",
+    "output": "sw_tint0/tm_3aad9a358c868.dds",
+    "texture": "tm_3aad9a358c868"
   },
   {
     "model": "pmh0_chest317",
     "material": "pmh0_chest317",
-    "width": 1024,
-    "height": 1024,
-    "source": "armor-source/havoc-squad/pfh0_chest316.plt",
-    "sourceSha256": "6093b25a4140a9a34f8e4c6a73dec09f6b72c0a6cf97f88ceb4599928b962827",
-    "layerSha256": "2cafa75f3b2efae4ba2581409fd31079c1d9d83059c4b893f80ad1a57faec1b2",
-    "shadeSha256": "458e54b6cda31bcbd2dcf04009a1a9eb6ef09e69a3d78cfdc30e3a80c8b9a05a",
     "layers": [
       2,
       3,
@@ -120872,54 +120866,54 @@
       6,
       7
     ],
-    "texture": "tm_f9a1d418b5f4a",
-    "output": "sw_tint2/tm_f9a1d418b5f4a.dds"
+    "width": 1024,
+    "height": 1024,
+    "source": "sw_pt_chest/pmh0_chest317.plt",
+    "sourceSha256": "5e2afeb06b9143f25205807826d9a8660e41752b775b702e61183dd628bce142",
+    "shadeSha256": "52caec4f5dfd4d8970db1ff82c5fee6ad5d75cf08a6a86ee99b6cfa7d55c64f6",
+    "layerSha256": "2cafa75f3b2efae4ba2581409fd31079c1d9d83059c4b893f80ad1a57faec1b2",
+    "output": "sw_tint0/tm_3aad9a358c868.dds",
+    "texture": "tm_3aad9a358c868"
   },
   {
     "model": "pmh0_footl272",
     "material": "pmh0_footl272",
-    "width": 512,
-    "height": 512,
-    "source": "armor-source/havoc-squad/pfh0_footl272.plt",
-    "sourceSha256": "03cfb8eb8fe7be9c6a29a210a17582fb00187af828b77f5e39d9bf62c96f9ac1",
-    "layerSha256": "d574194ceae8ef7e5ab48261c7301725a04f2f37f553f2e872509c80705e7665",
-    "shadeSha256": "defcfdabff143bb09cfcc626fa4a5f3aca383fec1671c18686e2e517c334944a",
     "layers": [
       2,
       3,
       4,
       7
     ],
-    "texture": "tm_27ddddc11171c",
-    "output": "sw_tint2/tm_27ddddc11171c.dds"
+    "width": 512,
+    "height": 512,
+    "source": "sw_pt_lfoot/pmh0_footl272.plt",
+    "sourceSha256": "dec0311c64f2853c87bd4a18f914ea9e0112e3e58bef50f66e08249f8883c286",
+    "shadeSha256": "70f8d2967c659c0eec26ee154f7af1961eabf42d9878434015e9d8c34cc3c4ca",
+    "layerSha256": "d574194ceae8ef7e5ab48261c7301725a04f2f37f553f2e872509c80705e7665",
+    "output": "sw_tint0/tm_2472458c105d7.dds",
+    "texture": "tm_2472458c105d7"
   },
   {
     "model": "pmh0_footr272",
     "material": "pmh0_footr272",
-    "width": 512,
-    "height": 512,
-    "source": "armor-source/havoc-squad/pfh0_footl272.plt",
-    "sourceSha256": "03cfb8eb8fe7be9c6a29a210a17582fb00187af828b77f5e39d9bf62c96f9ac1",
-    "layerSha256": "d574194ceae8ef7e5ab48261c7301725a04f2f37f553f2e872509c80705e7665",
-    "shadeSha256": "defcfdabff143bb09cfcc626fa4a5f3aca383fec1671c18686e2e517c334944a",
     "layers": [
       2,
       3,
       4,
       7
     ],
-    "texture": "tm_27ddddc11171c",
-    "output": "sw_tint2/tm_27ddddc11171c.dds"
+    "width": 512,
+    "height": 512,
+    "source": "sw_pt_rfoot/pmh0_footr272.plt",
+    "sourceSha256": "dec0311c64f2853c87bd4a18f914ea9e0112e3e58bef50f66e08249f8883c286",
+    "shadeSha256": "70f8d2967c659c0eec26ee154f7af1961eabf42d9878434015e9d8c34cc3c4ca",
+    "layerSha256": "d574194ceae8ef7e5ab48261c7301725a04f2f37f553f2e872509c80705e7665",
+    "output": "sw_tint0/tm_2472458c105d7.dds",
+    "texture": "tm_2472458c105d7"
   },
   {
     "model": "pmh0_forel282",
     "material": "pmh0_forel282",
-    "width": 746,
-    "height": 746,
-    "source": "armor-source/havoc-squad/pfh0_forel282.plt",
-    "sourceSha256": "f8a624bf8a44cf498c4874d8a87d4ce630ddd8cf9c9e3b953bf644c80638890e",
-    "layerSha256": "e448d9aa19ec01c615909a198b3c361277d5ddce47728c7fd21f541f496fd8a3",
-    "shadeSha256": "f6bd92eb177c260411210ceca7dffa695918d2218c30e14583556cb67c1074b7",
     "layers": [
       2,
       3,
@@ -120928,18 +120922,18 @@
       6,
       7
     ],
-    "texture": "tm_1187c61b1b2ef",
-    "output": "sw_tint2/tm_1187c61b1b2ef.dds"
+    "width": 746,
+    "height": 746,
+    "source": "sw_pt_lfore/pmh0_forel282.plt",
+    "sourceSha256": "f86e2a8db84a27bb389278936198a69a78c00e6640c8125120b057a73bed22fb",
+    "shadeSha256": "93c64029defe80dd6c04547ac5cf64855bc129ddc20472fdf28f7ca6c9868077",
+    "layerSha256": "e448d9aa19ec01c615909a198b3c361277d5ddce47728c7fd21f541f496fd8a3",
+    "output": "sw_tint0/tm_b40162d30a320.dds",
+    "texture": "tm_b40162d30a320"
   },
   {
     "model": "pmh0_forer282",
     "material": "pmh0_forer282",
-    "width": 746,
-    "height": 746,
-    "source": "armor-source/havoc-squad/pfh0_forel282.plt",
-    "sourceSha256": "f8a624bf8a44cf498c4874d8a87d4ce630ddd8cf9c9e3b953bf644c80638890e",
-    "layerSha256": "e448d9aa19ec01c615909a198b3c361277d5ddce47728c7fd21f541f496fd8a3",
-    "shadeSha256": "f6bd92eb177c260411210ceca7dffa695918d2218c30e14583556cb67c1074b7",
     "layers": [
       2,
       3,
@@ -120948,106 +120942,106 @@
       6,
       7
     ],
-    "texture": "tm_1187c61b1b2ef",
-    "output": "sw_tint2/tm_1187c61b1b2ef.dds"
+    "width": 746,
+    "height": 746,
+    "source": "sw_pt_rfore/pmh0_forer282.plt",
+    "sourceSha256": "f86e2a8db84a27bb389278936198a69a78c00e6640c8125120b057a73bed22fb",
+    "shadeSha256": "93c64029defe80dd6c04547ac5cf64855bc129ddc20472fdf28f7ca6c9868077",
+    "layerSha256": "e448d9aa19ec01c615909a198b3c361277d5ddce47728c7fd21f541f496fd8a3",
+    "output": "sw_tint0/tm_b40162d30a320.dds",
+    "texture": "tm_b40162d30a320"
   },
   {
     "model": "pmh0_handl267",
     "material": "pmh0_handl267",
-    "width": 512,
-    "height": 512,
-    "source": "armor-source/havoc-squad/pfh0_handl267.plt",
-    "sourceSha256": "2ab9fecf535c344fdebeb2ddd0402535bff0155eb973ae05d4ac99ce20f3227b",
-    "layerSha256": "9bb2d31bddf11adeb3ef8f80ed1b326d536b19644b7b1fd73557be262c473771",
-    "shadeSha256": "a863d9eda94a44cb527f331fe53cf2556aa6f53ccd43edfe6d63f1c51124e8bc",
     "layers": [
       2,
       3,
       4
     ],
-    "texture": "tm_6b4bdff561966",
-    "output": "sw_tint2/tm_6b4bdff561966.dds"
+    "width": 512,
+    "height": 512,
+    "source": "sw_pt_lhand/pmh0_handl267.plt",
+    "sourceSha256": "30df776d6d0631c669728e81bd760c85cefa4d1cbb5958d71f1a024702bb4d1c",
+    "shadeSha256": "740ca51c8a876a580c49ef2dca166b7042769beaa77d8c5c4727d38ace749112",
+    "layerSha256": "9bb2d31bddf11adeb3ef8f80ed1b326d536b19644b7b1fd73557be262c473771",
+    "output": "sw_tint1/tm_27731dcc1a2cc.dds",
+    "texture": "tm_27731dcc1a2cc"
   },
   {
     "model": "pmh0_handr267",
     "material": "pmh0_handr267",
-    "width": 512,
-    "height": 512,
-    "source": "armor-source/havoc-squad/pfh0_handl267.plt",
-    "sourceSha256": "2ab9fecf535c344fdebeb2ddd0402535bff0155eb973ae05d4ac99ce20f3227b",
-    "layerSha256": "9bb2d31bddf11adeb3ef8f80ed1b326d536b19644b7b1fd73557be262c473771",
-    "shadeSha256": "a863d9eda94a44cb527f331fe53cf2556aa6f53ccd43edfe6d63f1c51124e8bc",
     "layers": [
       2,
       3,
       4
     ],
-    "texture": "tm_6b4bdff561966",
-    "output": "sw_tint2/tm_6b4bdff561966.dds"
+    "width": 512,
+    "height": 512,
+    "source": "sw_pt_rhand/pmh0_handr267.plt",
+    "sourceSha256": "30df776d6d0631c669728e81bd760c85cefa4d1cbb5958d71f1a024702bb4d1c",
+    "shadeSha256": "740ca51c8a876a580c49ef2dca166b7042769beaa77d8c5c4727d38ace749112",
+    "layerSha256": "9bb2d31bddf11adeb3ef8f80ed1b326d536b19644b7b1fd73557be262c473771",
+    "output": "sw_tint1/tm_27731dcc1a2cc.dds",
+    "texture": "tm_27731dcc1a2cc"
   },
   {
     "model": "pmh0_legl269",
     "material": "pmh0_legl269",
-    "width": 1024,
-    "height": 1024,
-    "source": "armor-source/havoc-squad/pfh0_legl269.plt",
-    "sourceSha256": "6e1a9cba7995e0ed29f2773701235f7567a448f12cf4cd6041b38b62e3129fd0",
-    "layerSha256": "fd011c7f36fc0191695bedcbaed203c6a2478bc878a2238bb6ed855a1e593388",
-    "shadeSha256": "51d2dadaf7197d90833253129412de51f4f642e42f7d9f3a37529fc3665f9765",
     "layers": [
       2,
       3,
       4,
       7
     ],
-    "texture": "tm_5e7c930c73eb8",
-    "output": "sw_tint2/tm_5e7c930c73eb8.dds"
+    "width": 1024,
+    "height": 1024,
+    "source": "sw_pt_lthigh/pmh0_legl269.plt",
+    "sourceSha256": "1ac0059889d0c55d26e52ead55badcaac9c863e4757296daedb64dbd6df2ff80",
+    "shadeSha256": "7a57b5341d915fe1469a8bed8fa0fe721eb32cab4daf4e03395bc50e2f04809c",
+    "layerSha256": "fd011c7f36fc0191695bedcbaed203c6a2478bc878a2238bb6ed855a1e593388",
+    "output": "sw_tint2/tm_1548c39d8ef76.dds",
+    "texture": "tm_1548c39d8ef76"
   },
   {
     "model": "pmh0_legr269",
     "material": "pmh0_legr269",
-    "width": 1024,
-    "height": 1024,
-    "source": "armor-source/havoc-squad/pfh0_legl269.plt",
-    "sourceSha256": "6e1a9cba7995e0ed29f2773701235f7567a448f12cf4cd6041b38b62e3129fd0",
-    "layerSha256": "fd011c7f36fc0191695bedcbaed203c6a2478bc878a2238bb6ed855a1e593388",
-    "shadeSha256": "51d2dadaf7197d90833253129412de51f4f642e42f7d9f3a37529fc3665f9765",
     "layers": [
       2,
       3,
       4,
       7
     ],
-    "texture": "tm_5e7c930c73eb8",
-    "output": "sw_tint2/tm_5e7c930c73eb8.dds"
+    "width": 1024,
+    "height": 1024,
+    "source": "sw_pt_rthigh/pmh0_legr269.plt",
+    "sourceSha256": "1ac0059889d0c55d26e52ead55badcaac9c863e4757296daedb64dbd6df2ff80",
+    "shadeSha256": "7a57b5341d915fe1469a8bed8fa0fe721eb32cab4daf4e03395bc50e2f04809c",
+    "layerSha256": "fd011c7f36fc0191695bedcbaed203c6a2478bc878a2238bb6ed855a1e593388",
+    "output": "sw_tint2/tm_1548c39d8ef76.dds",
+    "texture": "tm_1548c39d8ef76"
   },
   {
     "model": "pmh0_pelvis270",
     "material": "pmh0_pelvis270",
-    "width": 1024,
-    "height": 1024,
-    "source": "armor-source/havoc-squad/pfh0_legl269.plt",
-    "sourceSha256": "6e1a9cba7995e0ed29f2773701235f7567a448f12cf4cd6041b38b62e3129fd0",
-    "layerSha256": "fd011c7f36fc0191695bedcbaed203c6a2478bc878a2238bb6ed855a1e593388",
-    "shadeSha256": "51d2dadaf7197d90833253129412de51f4f642e42f7d9f3a37529fc3665f9765",
     "layers": [
       2,
       3,
       4,
       7
     ],
-    "texture": "tm_5e7c930c73eb8",
-    "output": "sw_tint2/tm_5e7c930c73eb8.dds"
+    "width": 1024,
+    "height": 1024,
+    "source": "sw_pt_pelvis/pmh0_pelvis270.plt",
+    "sourceSha256": "1ac0059889d0c55d26e52ead55badcaac9c863e4757296daedb64dbd6df2ff80",
+    "shadeSha256": "7a57b5341d915fe1469a8bed8fa0fe721eb32cab4daf4e03395bc50e2f04809c",
+    "layerSha256": "fd011c7f36fc0191695bedcbaed203c6a2478bc878a2238bb6ed855a1e593388",
+    "output": "sw_tint2/tm_1548c39d8ef76.dds",
+    "texture": "tm_1548c39d8ef76"
   },
   {
     "model": "pmh0_shinl272",
     "material": "pmh0_shinl272",
-    "width": 600,
-    "height": 600,
-    "source": "armor-source/havoc-squad/pfh0_shinl272.plt",
-    "sourceSha256": "bc3a1537ba0c038b732b8adab42e125ec8cc15ff6eab2e29e455e1266c16c097",
-    "layerSha256": "d67d3496d194318582f838b4d9bfa7bcd03e0f2b29c403a92f2826dcc135244f",
-    "shadeSha256": "9ce3b1887cf6b40756765c88b980bb35368f4d73177c2950ca6ef9758c2a150c",
     "layers": [
       2,
       3,
@@ -121055,18 +121049,18 @@
       6,
       7
     ],
-    "texture": "tm_1714cbddfc324",
-    "output": "sw_tint2/tm_1714cbddfc324.dds"
+    "width": 600,
+    "height": 600,
+    "source": "sw_pt_lshin/pmh0_shinl272.plt",
+    "sourceSha256": "d02aeefc23430bd51251b460fd9dcc1b05caa5e45711d1a85fb05f38a2f410b2",
+    "shadeSha256": "b90be2ec040f0aa56b60d37fb5c405f5f56fb3ffd13af52ec5a4679f435dff1f",
+    "layerSha256": "d67d3496d194318582f838b4d9bfa7bcd03e0f2b29c403a92f2826dcc135244f",
+    "output": "sw_tint2/tm_ccbf112c5726d.dds",
+    "texture": "tm_ccbf112c5726d"
   },
   {
     "model": "pmh0_shinr272",
     "material": "pmh0_shinr272",
-    "width": 600,
-    "height": 600,
-    "source": "armor-source/havoc-squad/pfh0_shinl272.plt",
-    "sourceSha256": "bc3a1537ba0c038b732b8adab42e125ec8cc15ff6eab2e29e455e1266c16c097",
-    "layerSha256": "d67d3496d194318582f838b4d9bfa7bcd03e0f2b29c403a92f2826dcc135244f",
-    "shadeSha256": "9ce3b1887cf6b40756765c88b980bb35368f4d73177c2950ca6ef9758c2a150c",
     "layers": [
       2,
       3,
@@ -121074,18 +121068,18 @@
       6,
       7
     ],
-    "texture": "tm_1714cbddfc324",
-    "output": "sw_tint2/tm_1714cbddfc324.dds"
+    "width": 600,
+    "height": 600,
+    "source": "sw_pt_rshin/pmh0_shinr272.plt",
+    "sourceSha256": "d02aeefc23430bd51251b460fd9dcc1b05caa5e45711d1a85fb05f38a2f410b2",
+    "shadeSha256": "b90be2ec040f0aa56b60d37fb5c405f5f56fb3ffd13af52ec5a4679f435dff1f",
+    "layerSha256": "d67d3496d194318582f838b4d9bfa7bcd03e0f2b29c403a92f2826dcc135244f",
+    "output": "sw_tint2/tm_ccbf112c5726d.dds",
+    "texture": "tm_ccbf112c5726d"
   },
   {
     "model": "pmh0_shol261",
     "material": "pmh0_shol261",
-    "width": 341,
-    "height": 341,
-    "source": "armor-source/havoc-squad/pfh0_shol261.plt",
-    "sourceSha256": "e65d17e5f91ed09b60b8da3f7fa65954cd2f55c7ee5ca22211e0bacc1fe15e7b",
-    "layerSha256": "6049bb855ce2e756c9ecb74467eb5804a4283d0d58fddbdd7ae1b337e4dba960",
-    "shadeSha256": "b769e20093ffafe6c2759d236e79db714c9c191970963056629a132141f1b25e",
     "layers": [
       2,
       3,
@@ -121093,18 +121087,18 @@
       6,
       7
     ],
-    "texture": "tm_d75b56e80da99",
-    "output": "sw_tint2/tm_d75b56e80da99.dds"
+    "width": 341,
+    "height": 341,
+    "source": "sw_pt_lshoul/pmh0_shol261.plt",
+    "sourceSha256": "75b1045c56b2e749a1ad15a65fd20af7b12bc844d897aaedeafc3c556e01eb12",
+    "shadeSha256": "62a90b47c14d52067108b91e0026bcd2160491f8062cf8fa1f11e58a6c48bcea",
+    "layerSha256": "6049bb855ce2e756c9ecb74467eb5804a4283d0d58fddbdd7ae1b337e4dba960",
+    "output": "sw_tint1/tm_0805c63b27830.dds",
+    "texture": "tm_0805c63b27830"
   },
   {
     "model": "pmh0_shor261",
     "material": "pmh0_shor261",
-    "width": 341,
-    "height": 341,
-    "source": "armor-source/havoc-squad/pfh0_shol261.plt",
-    "sourceSha256": "e65d17e5f91ed09b60b8da3f7fa65954cd2f55c7ee5ca22211e0bacc1fe15e7b",
-    "layerSha256": "6049bb855ce2e756c9ecb74467eb5804a4283d0d58fddbdd7ae1b337e4dba960",
-    "shadeSha256": "b769e20093ffafe6c2759d236e79db714c9c191970963056629a132141f1b25e",
     "layers": [
       2,
       3,
@@ -121112,8 +121106,14 @@
       6,
       7
     ],
-    "texture": "tm_d75b56e80da99",
-    "output": "sw_tint2/tm_d75b56e80da99.dds"
+    "width": 341,
+    "height": 341,
+    "source": "sw_pt_rshoul/pmh0_shor261.plt",
+    "sourceSha256": "75b1045c56b2e749a1ad15a65fd20af7b12bc844d897aaedeafc3c556e01eb12",
+    "shadeSha256": "62a90b47c14d52067108b91e0026bcd2160491f8062cf8fa1f11e58a6c48bcea",
+    "layerSha256": "6049bb855ce2e756c9ecb74467eb5804a4283d0d58fddbdd7ae1b337e4dba960",
+    "output": "sw_tint1/tm_0805c63b27830.dds",
+    "texture": "tm_0805c63b27830"
   },
   {
     "model": "pfh0_legl016",
@@ -124927,5 +124927,101 @@
     "output": "sw_tint0/tm_3bfd1607ae93c.dds",
     "texture": "tm_3bfd1607ae93c",
     "shadeSha256": "8e98375921df6a5931d0746617fea1fd8c908ac18c9362d94cf5bf8965a1794c"
+  },
+  {
+    "model": "pfh0_n152fr",
+    "material": "pfh0_n152fr",
+    "layers": [
+      2
+    ],
+    "width": 1024,
+    "height": 512,
+    "source": "sw_pt_neck/pfh0_n152fr.plt",
+    "sourceSha256": "fd0d196de444c4058d047d3e5639dcc4de35d8364645da9fe2891c7388347918",
+    "shadeSha256": "01e151329f5058ed4be08a37b61990164dadfb9d25f119622e8894224e564ab1",
+    "layerSha256": "228c5bf3f9b0ddb7b231178d7e067aff966a191b1fcd3ed0e2e371eca33fcdfc",
+    "output": "sw_tint2/tm_6d9a75d154e63.dds",
+    "texture": "tm_6d9a75d154e63",
+    "explicitMeshMaterial": true
+  },
+  {
+    "model": "pfh0_n152ln",
+    "material": "pfh0_n152ln",
+    "layers": [
+      6
+    ],
+    "width": 1024,
+    "height": 512,
+    "source": "sw_pt_neck/pfh0_n152ln.plt",
+    "sourceSha256": "a5dcb4cfd971e02f1ed683fedd1bae8b642c5b714a3e7e6569e7b01c0c428e23",
+    "shadeSha256": "01e151329f5058ed4be08a37b61990164dadfb9d25f119622e8894224e564ab1",
+    "layerSha256": "1fc15a7fa5716499f176527299306aedc7f7ee9c523932efb6da89e71886726d",
+    "output": "sw_tint2/tm_6809f2408b0ee.dds",
+    "texture": "tm_6809f2408b0ee",
+    "explicitMeshMaterial": true
+  },
+  {
+    "model": "pfh0_n152nk",
+    "material": "pfh0_n152nk",
+    "layers": [
+      4
+    ],
+    "width": 128,
+    "height": 128,
+    "source": "sw_pt_neck/pfh0_n152nk.plt",
+    "sourceSha256": "94580345c2331c1f626b18d760c6f464795cd24a757068b0f8763c566ba3923b",
+    "shadeSha256": "ecf5386451d4732148e390ec6138f78ee30da63b34d7d8b48456063a6cbf9241",
+    "layerSha256": "398d5a4e10fcb5e60748ec07237105bde4a1a2a1560fa4e1410e680b97f45247",
+    "output": "sw_tint0/tm_e012cea3b5864.dds",
+    "texture": "tm_e012cea3b5864",
+    "explicitMeshMaterial": true
+  },
+  {
+    "model": "pmh0_n152fr",
+    "material": "pmh0_n152fr",
+    "layers": [
+      2
+    ],
+    "width": 1024,
+    "height": 512,
+    "source": "sw_pt_neck/pmh0_n152fr.plt",
+    "sourceSha256": "fd0d196de444c4058d047d3e5639dcc4de35d8364645da9fe2891c7388347918",
+    "shadeSha256": "01e151329f5058ed4be08a37b61990164dadfb9d25f119622e8894224e564ab1",
+    "layerSha256": "228c5bf3f9b0ddb7b231178d7e067aff966a191b1fcd3ed0e2e371eca33fcdfc",
+    "output": "sw_tint2/tm_6d9a75d154e63.dds",
+    "texture": "tm_6d9a75d154e63",
+    "explicitMeshMaterial": true
+  },
+  {
+    "model": "pmh0_n152ln",
+    "material": "pmh0_n152ln",
+    "layers": [
+      6
+    ],
+    "width": 1024,
+    "height": 512,
+    "source": "sw_pt_neck/pmh0_n152ln.plt",
+    "sourceSha256": "a5dcb4cfd971e02f1ed683fedd1bae8b642c5b714a3e7e6569e7b01c0c428e23",
+    "shadeSha256": "01e151329f5058ed4be08a37b61990164dadfb9d25f119622e8894224e564ab1",
+    "layerSha256": "1fc15a7fa5716499f176527299306aedc7f7ee9c523932efb6da89e71886726d",
+    "output": "sw_tint2/tm_6809f2408b0ee.dds",
+    "texture": "tm_6809f2408b0ee",
+    "explicitMeshMaterial": true
+  },
+  {
+    "model": "pmh0_n152nk",
+    "material": "pmh0_n152nk",
+    "layers": [
+      4
+    ],
+    "width": 64,
+    "height": 64,
+    "source": "sw_pt_neck/pmh0_n152nk.plt",
+    "sourceSha256": "a87a9d8301edc2e2fb0de846ee24192cb8abe552262358fa1a35865e35baece0",
+    "shadeSha256": "e565fd1026a251adc62773cb892589de9de80d889f7a38c5f15a76ede528a718",
+    "layerSha256": "39c080da1146fced48615c5577196a128f716fdb0ff952a615c0707989574eb3",
+    "output": "sw_tint0/tm_f90fd1298f72f.dds",
+    "texture": "tm_f90fd1298f72f",
+    "explicitMeshMaterial": true
   }
 ]

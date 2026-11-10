@@ -22,7 +22,7 @@ class HeadTintResamplingTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as folder:
             path = Path(folder)/'mask.dds'
             layers = np.tile(np.array([0, 1, 8, 9], np.uint8), (16, 4))
-            tint.write_packed_dds(path, 16, 16, unsafe, layers)
+            tint.write_packed_dds(path, 16, 16, unsafe, layers, mipmaps=False)
             original = path.read_bytes()
             bad = np.asarray(Image.open(path).convert('RGB'))[:, :, 0]
             self.assertGreater(int(((bad > 200) & (safe < 100)).sum()), 0)
@@ -40,7 +40,7 @@ class HeadTintResamplingTests(unittest.TestCase):
             resize_shades(np.array([[float('nan')]]), (4, 4))
         with tempfile.TemporaryDirectory() as folder:
             path = Path(folder)/'mask.dds'
-            tint.write_packed_dds(path, 4, 4, np.zeros((4, 4), np.uint8), np.zeros((4, 4), np.uint8))
+            tint.write_packed_dds(path, 4, 4, np.zeros((4, 4), np.uint8), np.zeros((4, 4), np.uint8), mipmaps=False)
             with self.assertRaisesRegex(ValueError, 'uint8'):
                 replace_shades(path.read_bytes(), np.zeros((4, 4), np.float32))
 

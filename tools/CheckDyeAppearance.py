@@ -46,7 +46,7 @@ SHARED_INPUTS = (
 )
 # Each model's material and dye-layer rows; changing one recolors that model.
 CATALOGS = ("sw_2da/tintmap.2da", "sw_2da/cloaktint.2da")
-# A texture's TXI changes how it is sampled (tint masks rely on "mipmap 0").
+# A texture's TXI changes how it is sampled (tint masks rely on "mipmap 1").
 TEXTURE_EXTENSIONS = (".dds", ".tga", ".txi")
 # The shared placeholder and palette are covered by SHARED_INPUTS. Tint masks
 # (tm_*) are hashed like any other texture: their names do not guarantee content.

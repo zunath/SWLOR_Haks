@@ -49,9 +49,10 @@ MATERIAL_SOURCES = Path(__file__).with_name("TintMapMaterialSources.json")
 PALETTE_METAL_MATERIALS = Path(__file__).with_name("PaletteMetalMaterials.json")
 WHITE_TEXTURE = REPOSITORY_ROOT / "sw_item" / "plt_white.tga"
 PALETTE_TEXTURE = REPOSITORY_ROOT / "sw_item" / "plt_palette.tga"
-# Entire atlas, including its bottom-origin RGBA descriptor and unused rows.
-# Verified against installed pal_*01 resources by TestTintShaderMaterials.py.
-PALETTE_SHA256 = "ee41f2496caac23069152b662261f15a454ec951283bfb36ec576e4ed2512ab5"
+# Entire atlas, including its bottom-origin RGBA descriptor, unused rows and the
+# RGB swatch lookup rows (palette_swatch_lookup). Native palette rows are
+# verified against installed pal_*01 resources by TestTintShaderMaterials.py.
+PALETTE_SHA256 = "eb544a052e8f3136fc0dd1f26f548a822963df1cc668cc5bad559828c0d099b8"
 PALETTE_TXI = REPOSITORY_ROOT / "sw_item" / "plt_palette.txi"
 TINT_SHADER = REPOSITORY_ROOT / "sw_shader" / "fs_plt_tinter.shd"
 TINT_MAPPED_SHADER = REPOSITORY_ROOT / "sw_shader" / "fs_plt_tinter_nm.shd"
@@ -155,6 +156,20 @@ LAYER_NAMES = (
     "Tattoo2",
 )
 PALETTE_TEXTURE_HEIGHT = 2048
+# Rows 0-1231 hold the seven native 176-row palette blocks. Rows 1536-2047 map
+# exact RGB dyes to their nearest swatch (palette_swatch_lookup); the tint
+# shaders hard-code these rows. Each group lists its palette block and the
+# blocks that repeat it and share its lookup.
+PALETTE_NATIVE_ROWS = 1232
+PALETTE_LOOKUP_BASE_ROW = 1536
+PALETTE_LOOKUP_LEVELS = 32
+PALETTE_LOOKUP_ROWS_PER_GROUP = PALETTE_LOOKUP_LEVELS ** 3 // 256
+PALETTE_LOOKUP_GROUPS = (
+    (0, ()),            # skin
+    (176, ()),          # hair
+    (352, (528,)),      # metal 1, metal 2
+    (704, (880, 1056)),  # cloth, leather, tattoo
+)
 TINT_ROW_PARAMETERS = (
     ("rowSkin", 0),
     ("rowHair", 176),
@@ -1626,6 +1641,15 @@ def raw_model_bitmaps(path: Path) -> dict[str, str]:
     return result
 
 
+def is_explicit_mesh_material(material: str | None, entries: dict[str, dict[str, object]]) -> bool:
+    """A converted palette that a modular part's mesh binds by name (``explicitMeshMaterial``).
+
+    Such a part splits its surfaces across separate dye masks (neck 152's frames,
+    lenses and neck). The native loader's single part palette must not replace them.
+    """
+    return bool(material) and bool(entries.get(material.lower(), {}).get("explicitMeshMaterial"))
+
+
 def native_modular_material_choices(
     path: Path,
     entries: dict[str, dict[str, object]],
@@ -1650,7 +1674,12 @@ def native_modular_material_choices(
     bitmaps = raw_model_bitmaps(path)
     original_materials = authored_material_sources()
     choices = {}
-    for selector, _, _ in surfaces:
+    for selector, _, current_material in surfaces:
+        if is_explicit_mesh_material(current_material, entries):
+            # A split part's mesh names its own converted palette; the part's
+            # native palette would recolor it with another mesh's layers.
+            choices[selector] = (current_material.lower(), "", [])
+            continue
         bitmap = _MATERIAL_BITMAP_ALIASES.get(bitmaps[selector], bitmaps[selector])
         bitmap = MIRRORED_MATERIAL_PROFILES.get(bitmap, bitmap)
         profile = original_materials.get(bitmap, {})
@@ -1745,6 +1774,8 @@ def build_model_material_plan(
                     restored_bindings.setdefault(path, {})[selector] = profile_name
                     continue
                 references[selector] = source
+                if is_explicit_mesh_material(source, entries):
+                    continue
                 profile = (profile_name, profile_lines)
                 if material_profile_signature(source, profile) != material_profile_signature(source):
                     profiles[selector] = profile
@@ -2176,7 +2207,18 @@ def compress_bc4_layers(layer: np.ndarray, batch_size: int = 16_384) -> bytes:
     return bytes(output)
 
 
-def dds_header(width: int, height: int, data_length: int) -> bytes:
+def mip_sizes(width: int, height: int) -> list[tuple[int, int]]:
+    sizes = [(width, height)]
+    while sizes[-1] != (1, 1):
+        sizes.append((max(sizes[-1][0] // 2, 1), max(sizes[-1][1] // 2, 1)))
+    return sizes
+
+
+def bc5_level_length(width: int, height: int) -> int:
+    return ((width + 3) // 4) * ((height + 3) // 4) * 16
+
+
+def dds_header(width: int, height: int, data_length: int, mip_count: int = 1) -> bytes:
     header = bytearray(128)
     header[:4] = b"DDS "
     struct.pack_into("<I", header, 4, 124)
@@ -2184,15 +2226,16 @@ def dds_header(width: int, height: int, data_length: int) -> bytes:
     struct.pack_into("<I", header, 12, height)
     struct.pack_into("<I", header, 16, width)
     struct.pack_into("<I", header, 20, data_length)
-    struct.pack_into("<I", header, 28, 1)  # Only the base level is stored.
+    struct.pack_into("<I", header, 28, mip_count)
     struct.pack_into("<I", header, 76, 32)
     struct.pack_into("<I", header, 80, 0x00000004)  # DDPF_FOURCC
     header[84:88] = b"ATI2"
-    struct.pack_into("<I", header, 108, 0x00001000)  # DDSCAPS_TEXTURE
+    # DDSCAPS_TEXTURE, plus MIPMAP and COMPLEX when a chain follows.
+    struct.pack_into("<I", header, 108, 0x00401008 if mip_count > 1 else 0x00001000)
     return bytes(header)
 
 
-def write_packed_dds(path: Path, width: int, height: int, shade: np.ndarray, layer: np.ndarray) -> None:
+def packed_level(shade: np.ndarray, layer: np.ndarray) -> bytes:
     red = compress_bc4(shade)
     green = compress_bc4_layers(layer)
     block_count = len(red) // 8
@@ -2200,16 +2243,78 @@ def write_packed_dds(path: Path, width: int, height: int, shade: np.ndarray, lay
     for index in range(block_count):
         payload[index * 16 : index * 16 + 8] = red[index * 8 : index * 8 + 8]
         payload[index * 16 + 8 : index * 16 + 16] = green[index * 8 : index * 8 + 8]
-
-    path.write_bytes(dds_header(width, height, len(payload)) + payload)
-    write_packed_texture_settings(path)
+    return bytes(payload)
 
 
-def write_packed_texture_settings(path: Path) -> None:
+def area_reduced(values: np.ndarray, size: int, axis: int) -> np.ndarray:
+    """Shrink an axis to size, weighting each source texel by the area it covers."""
+    values = np.moveaxis(values, axis, 0).astype(np.float64)
+    source = values.shape[0]
+    totals = np.concatenate((np.zeros((1, *values.shape[1:])), np.cumsum(values, axis=0)))
+    edges = np.arange(size + 1) * source / size
+    lower = np.minimum(edges.astype(np.int64), source - 1)
+    fraction = (edges - lower).reshape(-1, *([1] * (values.ndim - 1)))
+    totals_at_edges = totals[lower] + values[lower] * fraction
+    return np.moveaxis(np.diff(totals_at_edges, axis=0) * size / source, 0, axis)
+
+
+def packed_mip_levels(shade: np.ndarray, layer: np.ndarray) -> list[tuple[np.ndarray, np.ndarray]]:
+    """Base level first, then each half-size level down to 1x1.
+
+    Shade levels are box-filtered: a far pixel then reads the average of the
+    shades it covers instead of one texel's, so cloth does not glitter at a
+    distance. An odd dimension has no 2x2 blocks to average, so it is filtered
+    by area and the last row or column still counts. The shaders read layer
+    ids from the base level only, so lower layer levels just keep one id per
+    block.
+    """
+    height, width = shade.shape
+    levels = [(shade, layer)]
+    current = shade.astype(np.float32)
+    for next_width, next_height in mip_sizes(width, height)[1:]:
+        h, w = current.shape
+        step_y, step_x = (2 if h > 1 else 1), (2 if w > 1 else 1)
+        if h == next_height * step_y and w == next_width * step_x:
+            current = current.reshape(next_height, step_y, next_width, step_x).mean(axis=(1, 3))
+        else:
+            current = area_reduced(area_reduced(current, next_height, 0), next_width, 1).astype(np.float32)
+        layer = layer[::step_y, ::step_x][:next_height, :next_width]
+        levels.append((np.clip(np.rint(current), 0, 255).astype(np.uint8), layer))
+    return levels
+
+
+def packed_lower_level(shade: np.ndarray, layer: np.ndarray) -> bytes:
+    """Compress a level below the base, whose layer ids are never read.
+
+    Subsampling can gather layer ids into one block that BC4 cannot encode,
+    even when the base level is fine. Those ids are placeholders, so give
+    each block one id rather than refuse the mask.
+    """
+    try:
+        return packed_level(shade, layer)
+    except ValueError:
+        height, width = layer.shape
+        return packed_level(shade, layer[np.ix_(np.arange(height) // 4 * 4, np.arange(width) // 4 * 4)])
+
+
+def write_packed_dds(
+    path: Path, width: int, height: int, shade: np.ndarray, layer: np.ndarray, *, mipmaps: bool = True
+) -> None:
+    levels = packed_mip_levels(shade, layer) if mipmaps else [(shade, layer)]
+    payload = packed_level(*levels[0]) + b"".join(
+        packed_lower_level(level_shade, level_layer) for level_shade, level_layer in levels[1:]
+    )
+    path.write_bytes(dds_header(width, height, bc5_level_length(width, height), len(levels)) + payload)
+    write_packed_texture_settings(path, mipmaps=mipmaps)
+
+
+def write_packed_texture_settings(path: Path, *, mipmaps: bool = True) -> None:
     # NWN's compressed-texture loader uses TXI mipmap policy when uploading.
-    # Without this, it reads an implied mip chain past our base-level payload.
-    # Layer IDs are categorical, so generating filtered mipmaps is also wrong.
-    path.with_suffix(".txi").write_text("mipmap 0\n", encoding="ascii")
+    # A tint mask stores its full mip chain: the shaders fetch layer ids
+    # from the base level only, and read shades through the mipmaps at a
+    # distance. A single-level DDS (the cloak atlas) declares mipmap 0, or
+    # NWN reads an implied chain past its payload.
+    path.with_suffix(".txi").write_text("mipmap 1\n" if mipmaps else "mipmap 0\n", encoding="ascii")
 
 
 def validate_packed_texture_path(path: Path) -> None:
@@ -2716,6 +2821,8 @@ def generate() -> None:
             "texture": texture,
             **({"modelPalette": existing_entry["modelPalette"]}
                if existing_entry and "modelPalette" in existing_entry else {}),
+            **({"explicitMeshMaterial": True}
+               if existing_entry and existing_entry.get("explicitMeshMaterial") else {}),
         }
 
         if number == 1 or number % 100 == 0 or number == total:
@@ -2924,6 +3031,8 @@ def generate_preserving_manifest() -> None:
             "texture": texture,
             **({"modelPalette": existing_entry["modelPalette"]}
                if existing_entry and "modelPalette" in existing_entry else {}),
+            **({"explicitMeshMaterial": True}
+               if existing_entry and existing_entry.get("explicitMeshMaterial") else {}),
         }
         signatures.setdefault(signature, entries[material])
 
@@ -3407,7 +3516,11 @@ def refresh_packed_checksums() -> None:
 
 
 def refresh_packed_metadata() -> None:
-    """Repair single-level DDS/TXI metadata without recompressing any pixels."""
+    """Rebuild each packed map's mip chain from its base level.
+
+    The base level's compressed blocks are kept byte for byte; only the
+    header, the levels below it and the TXI change.
+    """
     entries = load_source_manifest()
     if not entries:
         raise RuntimeError("No tint source manifest exists to refresh")
@@ -3421,17 +3534,19 @@ def refresh_packed_metadata() -> None:
         error = check_dds_payload(path, width, height)
         if error:
             raise RuntimeError(f"{path.name}: {error}")
-    changed_headers = 0
+    changed = 0
     for path, (width, height) in outputs.items():
         raw = path.read_bytes()
-        header = dds_header(width, height, len(raw) - 128)
-        if raw[:128] != header:
-            path.write_bytes(header + raw[128:])
-            changed_headers += 1
+        base = raw[128 : 128 + bc5_level_length(width, height)]
+        levels = packed_mip_levels(decode_dds_shades(path, width, height), decode_dds_layers(path, width, height))
+        chain = b"".join(packed_lower_level(shade, layer) for shade, layer in levels[1:])
+        rebuilt = dds_header(width, height, len(base), len(levels)) + base + chain
+        if raw != rebuilt:
+            path.write_bytes(rebuilt)
+            changed += 1
         write_packed_texture_settings(path)
     print(
-        f"Refreshed {len(outputs)} single-level DDS/TXI pairs "
-        f"({changed_headers} headers changed); compressed pixels are unchanged.",
+        f"Refreshed {len(outputs)} DDS/TXI pairs ({changed} rewritten); base levels are unchanged.",
         flush=True,
     )
 
@@ -3442,16 +3557,15 @@ def check_dds_payload(path: Path, width: int, height: int) -> str | None:
     if width <= 0 or height <= 0:
         return "DDS dimensions must be positive"
     raw = path.read_bytes()
-    blocks_wide = (width + 3) // 4
-    blocks_high = (height + 3) // 4
-    expected = 128 + blocks_wide * blocks_high * 16
+    levels = mip_sizes(width, height) if len(raw) >= 32 and struct.unpack_from("<I", raw, 28)[0] > 1 else [(width, height)]
+    expected = 128 + sum(bc5_level_length(w, h) for w, h in levels)
     if len(raw) != expected:
         return f"DDS length {len(raw)} != {expected}"
     if raw[:4] != b"DDS " or raw[84:88] != b"ATI2":
         return "DDS is not ATI2/BC5"
     if struct.unpack_from("<I", raw, 4)[0] != 124 or struct.unpack_from("<I", raw, 76)[0] != 32:
         return "DDS header size is invalid"
-    if struct.unpack_from("<I", raw, 20)[0] != expected - 128:
+    if struct.unpack_from("<I", raw, 20)[0] != bc5_level_length(width, height):
         return "DDS linear size disagrees with base-level payload"
     actual_height, actual_width = struct.unpack_from("<II", raw, 12)
     if (actual_width, actual_height) != (width, height):
@@ -3464,17 +3578,19 @@ def check_dds(path: Path, width: int, height: int) -> str | None:
     if error:
         return error
     raw = path.read_bytes()
-    if not struct.unpack_from("<I", raw, 8)[0] & 0x20000 or struct.unpack_from("<I", raw, 28)[0] != 1:
-        return "DDS must explicitly declare one mip level"
+    if not struct.unpack_from("<I", raw, 8)[0] & 0x20000 or struct.unpack_from("<I", raw, 28)[0] != len(
+        mip_sizes(width, height)
+    ):
+        return "DDS must declare its full mip chain; far pixels glitter without it"
     txi_path = path.with_suffix(".txi")
     if not txi_path.exists():
-        return "missing TXI mipmap 0; NWN would read past the base-level DDS payload"
+        return "missing TXI mipmap 1"
     directives = [
         line.split("//", 1)[0].strip().lower().split()
         for line in txi_path.read_text(encoding="utf-8-sig").splitlines()
     ]
-    if [tokens for tokens in directives if tokens[:1] == ["mipmap"]] != [["mipmap", "0"]]:
-        return "TXI must declare mipmap 0 exactly once for a single-level DDS"
+    if [tokens for tokens in directives if tokens[:1] == ["mipmap"]] != [["mipmap", "1"]]:
+        return "TXI must declare mipmap 1 exactly once for a mipmapped DDS"
     return None
 
 
@@ -3488,7 +3604,7 @@ def decode_dds_channel(
     blocks_wide = (width + 3) // 4
     blocks_high = (height + 3) // 4
     block_count = blocks_wide * blocks_high
-    packed = np.frombuffer(raw, dtype=np.uint8, offset=128).reshape(block_count, 16)[
+    packed = np.frombuffer(raw, dtype=np.uint8, offset=128, count=block_count * 16).reshape(block_count, 16)[
         :, channel_offset : channel_offset + 8
     ]
     endpoint0 = packed[:, 0]
@@ -3559,6 +3675,94 @@ def palette_atlas_errors(path: Path) -> list[str]:
     if hashlib.sha256(path.read_bytes()).hexdigest() != PALETTE_SHA256:
         return ["complete RGBA atlas/header differs from the verified native palette atlas"]
     return []
+
+
+def palette_atlas_pixels(raw: bytes) -> np.ndarray:
+    """Atlas texels as stored, BGRA, indexed [atlas row (texture V), shade]."""
+    start = 18 + raw[0]
+    return np.frombuffer(raw, np.uint8, count=256 * PALETTE_TEXTURE_HEIGHT * 4, offset=start).reshape(
+        PALETTE_TEXTURE_HEIGHT, 256, 4)
+
+
+def palette_swatch_lookup(pixels: np.ndarray) -> np.ndarray:
+    """Nearest-swatch candidates for exact RGB dyes (atlas rows 1536-2047, BGRA).
+
+    The shaders shade a custom RGB color with the row of its nearest palette
+    swatch (the shade-128 midtone the editor shows), so a color equal to a
+    swatch renders exactly like that palette color. Each lookup group spends
+    128 rows on a 32-level RGB cube: cell r * 1024 + g * 32 + b is texel
+    (cell % 256) of row group base + cell // 256. A texel stores up to three
+    candidate color IDs in red, green and blue, in palette order: every swatch
+    whose midtone rounds into the cell (at most two), then the swatches nearest
+    the cell centre until three are listed. The shader keeps the candidate
+    nearest the exact color, the earlier one on a tie. An exact swatch always
+    finds itself; about 0.2% of other colors find a swatch a few levels farther
+    than the true nearest. Equal midtones keep only their lowest color ID, matching the
+    editor's closest-swatch lookup, so the duplicate black row 61 with full
+    reflection is never selected.
+    """
+    levels = PALETTE_LOOKUP_LEVELS
+    steps = np.arange(levels, dtype=np.float64)
+    centres = np.stack(np.meshgrid(steps, steps, steps, indexing="ij"), -1).reshape(-1, 3) * 255.0 / (levels - 1)
+    lookup = np.zeros((len(PALETTE_LOOKUP_GROUPS) * PALETTE_LOOKUP_ROWS_PER_GROUP, 256, 4), np.uint8)
+    for group, (palette_row, _) in enumerate(PALETTE_LOOKUP_GROUPS):
+        swatches = pixels[palette_row:palette_row + 176, 128, 2::-1].astype(np.float64)
+        unique: list[int] = []
+        seen: set[tuple[float, ...]] = set()
+        for color in range(176):
+            key = tuple(swatches[color])
+            if key not in seen:
+                seen.add(key)
+                unique.append(color)
+        candidates_by_cell: dict[int, set[int]] = {}
+        for color in unique:
+            r, g, b = np.floor(swatches[color] * (levels - 1) / 255.0 + 0.5).astype(int)
+            candidates_by_cell.setdefault(int(r * levels * levels + g * levels + b), set()).add(color)
+        unique_array = np.array(unique)
+        distances = ((centres[:, None, :] - swatches[unique_array][None, :, :]) ** 2).sum(-1)
+        nearest = unique_array[np.argsort(distances, axis=1, kind="stable")[:, :3]]
+        cells = np.zeros((levels ** 3, 4), np.uint8)
+        for cell in range(levels ** 3):
+            inside = candidates_by_cell.get(cell, set())
+            if len(inside) > 2:
+                raise ValueError(f"palette lookup cell {cell} of group {group} holds {len(inside)} swatches")
+            candidates = set(inside)
+            for color in nearest[cell]:
+                if len(candidates) == 3:
+                    break
+                candidates.add(int(color))
+            candidates = sorted(candidates)
+            cells[cell] = (candidates[2], candidates[1], candidates[0], 255)  # stored BGRA
+        first = group * PALETTE_LOOKUP_ROWS_PER_GROUP
+        lookup[first:first + PALETTE_LOOKUP_ROWS_PER_GROUP] = cells.reshape(PALETTE_LOOKUP_ROWS_PER_GROUP, 256, 4)
+    return lookup
+
+
+def palette_lookup_errors(path: Path) -> list[str]:
+    if not path.is_file():
+        return ["missing palette atlas"]
+    pixels = palette_atlas_pixels(path.read_bytes())
+    errors = []
+    for palette_row, shared_rows in PALETTE_LOOKUP_GROUPS:
+        for shared_row in shared_rows:
+            if not np.array_equal(pixels[palette_row:palette_row + 176], pixels[shared_row:shared_row + 176]):
+                errors.append(f"palette rows {shared_row}-{shared_row + 175} must repeat rows "
+                              f"{palette_row}-{palette_row + 175}: they share one RGB swatch lookup")
+    if pixels[PALETTE_NATIVE_ROWS:PALETTE_LOOKUP_BASE_ROW].any():
+        errors.append(f"atlas rows {PALETTE_NATIVE_ROWS}-{PALETTE_LOOKUP_BASE_ROW - 1} must stay empty")
+    if not np.array_equal(pixels[PALETTE_LOOKUP_BASE_ROW:], palette_swatch_lookup(pixels)):
+        errors.append("RGB swatch lookup rows are stale; run --refresh-palette-lookup")
+    return errors
+
+
+def refresh_palette_lookup() -> None:
+    raw = bytearray(PALETTE_TEXTURE.read_bytes())
+    pixels = palette_atlas_pixels(bytes(raw)).copy()
+    pixels[PALETTE_LOOKUP_BASE_ROW:] = palette_swatch_lookup(pixels)
+    start = 18 + raw[0]
+    raw[start:start + pixels.nbytes] = pixels.tobytes()
+    PALETTE_TEXTURE.write_bytes(raw)
+    print(f"Wrote RGB swatch lookup rows; atlas SHA-256 {hashlib.sha256(raw).hexdigest()}")
 
 
 def check_tint_mtr_structure(path: Path) -> list[str]:
@@ -4071,6 +4275,7 @@ def audit() -> None:
     else:
         errors.extend(f"plt_palette.tga: {error}" for error in native_metal_palette_errors(PALETTE_TEXTURE))
     errors.extend(f"plt_palette.tga: {error}" for error in palette_atlas_errors(PALETTE_TEXTURE))
+    errors.extend(f"plt_palette.tga: {error}" for error in palette_lookup_errors(PALETTE_TEXTURE))
     if not PALETTE_TXI.exists() or "mipmap 0" not in PALETTE_TXI.read_text(encoding="utf-8").lower():
         errors.append("plt_palette.txi must disable mipmaps")
     for shader_path, expected_maps in (
@@ -4207,12 +4412,17 @@ def main() -> None:
     action.add_argument(
         "--refresh-packed-metadata",
         action="store_true",
-        help="declare single-level DDS textures and disable implied mip uploads without changing pixels",
+        help="rebuild each packed map's mip chain from its unchanged base level",
     )
     action.add_argument(
         "--refresh-packed-checksums",
         action="store_true",
         help="record decoded packed-map checksums without rewriting DDS resources",
+    )
+    action.add_argument(
+        "--refresh-palette-lookup",
+        action="store_true",
+        help="rewrite the atlas rows that map exact RGB dyes to their nearest palette swatch",
     )
     action.add_argument("--deduplicate", action="store_true", help="share byte-identical packed maps")
     action.add_argument("--prune", action="store_true", help="remove masks not referenced by active models")
@@ -4255,6 +4465,8 @@ def main() -> None:
         refresh_packed_checksums()
     elif arguments.refresh_packed_metadata:
         refresh_packed_metadata()
+    elif arguments.refresh_palette_lookup:
+        refresh_palette_lookup()
     elif arguments.deduplicate:
         deduplicate()
     elif arguments.prune:

@@ -53,7 +53,7 @@ def main():
         declaration = (root / 'sw_tint_mtr' / (material + '.mtr')).read_text()
         assert f'texture7 {entry["texture"]}' in declaration, material
         assert 'parameter float tintMapWidth 128.0' in declaration, material
-        assert texture.with_suffix('.txi').read_text() == 'mipmap 0\n', material
+        assert texture.with_suffix('.txi').read_text() == 'mipmap 1\n', material
         masks.add(entry['output'])
     assert len(masks) == 1, 'Identical left/right native palettes should share their mask'
     print(f'PASS: {len(names)} female thigh models preserve native geometry; both palettes and every catalog row match.')

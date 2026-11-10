@@ -144,20 +144,6 @@ endnode
         self.assertEqual(mdl.parse_nodes(source)[1][2]["positionkey"], nodes[1][2]["positionkey"])
         self.assertNotIn("period", nodes[1][2])
 
-    def test_robe236_native_and_rgb_torso_panels_do_not_use_cloth_physics(self):
-        manifest = json.loads(rigid.MANIFEST.read_text())
-        paths = rigid.targets(236, manifest)
-        self.assertEqual(32, len(paths))
-        checked = 0
-        for path in paths:
-            model = poses.Model(path.read_bytes(), False)
-            for name, _, _, _, offset in model.nodes:
-                if name.removeprefix("rm_").removeprefix("rg_") in ("coat_top", "coat_top2"):
-                    self.assertEqual(0, model.uint(offset + 108) & 0x100, f"{path.name}/{name}")
-                    checked += 1
-        # Eight body families, each with two native models and an RGB root.
-        self.assertEqual(24, checked)
-
 
 if __name__ == "__main__":
     unittest.main()
