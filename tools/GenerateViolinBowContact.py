@@ -348,6 +348,8 @@ def update_robes(library, output, apply):
     for body in BODIES:
         path = 'sw_cr_creature/a_rfl_' + body + '.mdl'
         data = library.data('a_rfl_' + body)
+        if rifle.mdl.supermodel(data) != bank_name(body):
+            raise ValueError('Finalize the compiled violin bank before updating robes: ' + body)
         before = bytearray(data)
         before[180:244] = original_parent(library, body).encode('ascii').ljust(64, b'\0')
         expected = manifest['files'].get(path, UNTRACKED_RIFLE_HASHES.get(body))
@@ -419,7 +421,7 @@ def update_robes(library, output, apply):
         for path, data in outputs.items():
             (ROOT / path).write_bytes(data)
             hashes[path] = digest(data)
-        hashes['tools/GenerateViolinBowContact.py'] = digest(Path(__file__).read_bytes())
+        hashes['tools/GenerateViolinBowContact.py'] = robes.file_digest(Path(__file__))
         manifest['files'].update(hashes)
         manifest['animation_bank_sets'].update(records)
         manifest['animation_extensions'][-1].setdefault('family_contact_revisions', []).append(report)

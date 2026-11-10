@@ -43987,7 +43987,7 @@
     "sw_cr_creature/a_vio_pfe0.mdl": "fcf0ed7923c768ea5758cc2970729de52d6bbefcc431f68b44ceaeee2f76c23e",
     "sw_cr_creature/a_vio_pfd0.mdl": "4c1e14cbb1e1adf886080afd2a734798ca40056e00fe2851677d93d778d23784",
     "sw_cr_creature/a_vio_pfo0.mdl": "5f4a0a55d9592cb07f40e92c10a1ef706654ad924a351ac7e43fb2af6badabbb",
-    "tools/GenerateViolinBowContact.py": "500f5874f31b814cb507f3aa8588aa5b3390ddf25ee3ae3dbdd727172f004267",
+    "tools/GenerateViolinBowContact.py": "070b685765268444fcb4b9cb246b1d5df0f7a7f93c689bf438b078ff73003454",
     "sw_cr_creature/a_vio_pfh0.mdl": "477cc757f4267666046a92fb74c9a953a35589bd924b01ebfc52c4324d03667e",
     "sw_cr_creature/a_rfl_pfz0.mdl": "70c24608b4d9d87a117900b90a8bad6d4ac8922bdabc6ccf15a251164f4498b0",
     "sw_cr_creature/a_vio_pfz0.mdl": "6b08d746ce5b8f4f48d353a29fcf7b83803314cc310074debaa20929bbd3e03a"
@@ -45771,6 +45771,22 @@
             "pfz0"
           ],
           "quaternion_channels": 30,
+          "body_pose_samples": 525,
+          "preservation": "Only three right-arm rotation tracks changed in existing robe clips; rifle banks changed only their parent; body roots and shared weapon hooks are unchanged."
+        },
+        {
+          "input_manifest_sha256": "56766ad5bab5a5c3c4126a0e1409c4982fb924a8abe2b1dd563eaaf520d04122",
+          "bodies": [
+            "pme0",
+            "pmd0",
+            "pmo0",
+            "pfe0",
+            "pfd0",
+            "pfo0",
+            "pfh0",
+            "pfz0"
+          ],
+          "quaternion_channels": 0,
           "body_pose_samples": 525,
           "preservation": "Only three right-arm rotation tracks changed in existing robe clips; rifle banks changed only their parent; body roots and shared weapon hooks are unchanged."
         }
