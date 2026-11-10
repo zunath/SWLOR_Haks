@@ -28,13 +28,13 @@ def source(blob):
     return subprocess.check_output(['git', '-C', str(ROOT), 'cat-file', 'blob', blob])
 
 
-def geometry(data, index=None):
-    nodes = [(name, mesh) for name, _, mesh in mdl.binary_nodes(data) if mesh]
+def geometry(data, index=None, skin_skeleton=None):
+    nodes = [(name, mesh) for name, _, mesh in mdl.binary_nodes(data, skin_skeleton=skin_skeleton) if mesh]
     if index is None and len(nodes) != 1:
         raise ValueError('A multi-mesh hand needs an explicit finger mesh index')
     mesh = nodes[index or 0][1]
-    if 'weights' in mesh:
-        raise ValueError('Expected a rigid finger mesh')
+    if 'weights' in mesh and skin_skeleton is None:
+        raise ValueError('A skin hand needs its explicit donor skeleton')
     offset = mesh['_mesh_offset']
     # Reject legacy bump-animation streams; EE tangent/sign streams are updated below.
     if any(struct.unpack_from('<I', data, offset + relative)[0] != 0xffffffff
@@ -184,8 +184,8 @@ def correspondence(canonical, target, tolerance):
     return affine, float(error)
 
 
-def patch(data, posed, changed, cuff, alias, mesh_index=None):
-    mesh = geometry(data, mesh_index)
+def patch(data, posed, changed, cuff, alias, mesh_index=None, skin_skeleton=None):
+    mesh = geometry(data, mesh_index) if skin_skeleton is None else geometry(data, mesh_index, skin_skeleton)
     vertices, normals = (np.array(mesh[key]) for key in ('verts', 'normals'))
     faces = np.array([face[:3] for face in mesh['faces']])
     output = bytearray(data)
@@ -258,15 +258,15 @@ def patch(data, posed, changed, cuff, alias, mesh_index=None):
     root = 12 + struct.unpack_from('<I', data, 84)[0]
     output[root + 32:root + 64] = alias.encode('ascii').ljust(32, b'\0')
     output = update_model_bounds(bytes(output))
-    after = geometry(output, mesh_index)
+    after = geometry(output, mesh_index) if skin_skeleton is None else geometry(output, mesh_index, skin_skeleton)
     for key in mesh.keys() - {'verts', 'normals', '_mesh_offset'}:
         if mesh[key] != after[key]:
             raise ValueError(f'Authored hand field changed: {key}')
     for key in ('verts', 'normals'):
         if not np.array_equal(np.array(mesh[key])[cuff], np.array(after[key])[cuff]):
             raise ValueError(f'Protected cuff {key} changed')
-    originals = [values for _, _, values in mdl.binary_nodes(data) if values]
-    selected = [values for _, _, values in mdl.binary_nodes(output) if values]
+    originals = [values for _, _, values in mdl.binary_nodes(data, skin_skeleton=skin_skeleton) if values]
+    selected = [values for _, _, values in mdl.binary_nodes(output, skin_skeleton=skin_skeleton) if values]
     if len(originals) != len(selected):
         raise ValueError('Hand mesh inventory changed')
     for index, (before, now) in enumerate(zip(originals, selected)):
@@ -373,10 +373,11 @@ def build_organic(recipe, entry):
         protected_count += int(fixed.sum())
         moved_count += int(changed.sum())
     renamed = bytearray(output)
-    for index, (_, parent, _, _, node) in enumerate(model.nodes):
-        if parent is not None:
-            name = 'grip_' + alias[9] + '_' + str(entry['style']) + '_' + str(index)
-            renamed[node + 32:node + 64] = name.encode('ascii').ljust(32, b'\0')
+    if recipe.get('renamePartNodes', True):
+        for index, (_, parent, _, _, node) in enumerate(model.nodes):
+            if parent is not None:
+                name = 'grip_' + alias[9] + '_' + str(entry['style']) + '_' + str(index)
+                renamed[node + 32:node + 64] = name.encode('ascii').ljust(32, b'\0')
     output = update_model_bounds(bytes(renamed))
     sha256 = hashlib.sha256(output).hexdigest()
     if sha256 != entry['outputSha256']:
@@ -384,7 +385,489 @@ def build_organic(recipe, entry):
     return output, {'movedVertices': moved_count, 'protectedCuffVertices': protected_count, 'sha256': sha256}
 
 
+def droid_field(vertices, recipe):
+    """Evaluate the pinned joint field in the hand's own reflected source frame."""
+    if recipe['fieldKind'] == 'rigidClaw':
+        return vertices.copy()
+    if recipe['fieldKind'] == 'organic':
+        return droid_thumb_blend(vertices, organic_bend(vertices, recipe['bend']), recipe)
+    bend_recipe = recipe['bend']
+    anchors = np.array(bend_recipe['joints'])
+    root_x, root_z, degrees = (np.interp(vertices[:, 1], anchors[:, 0], anchors[:, column])
+                               for column in (1, 2, 3))
+    weight = np.clip((root_z - vertices[:, 2]) / bend_recipe['blendMetres'], 0, 1)
+    weight = weight * weight * (3 - 2 * weight)
+    weight[vertices[:, 2] >= bend_recipe['cuffStartsZ']] = 0
+    weight[(vertices[:, 0] < .005) & (vertices[:, 1] > .02) &
+           (vertices[:, 2] > bend_recipe['thumbBaseMinZ'])] = 0
+    posed = vertices.copy()
+    if proximal := bend_recipe.get('proximal'):
+        proximal_recipe = {**recipe, 'bend': proximal, 'thumbBlendDegrees': 0}
+        posed = droid_field(vertices, proximal_recipe)
+        roots = droid_field(np.column_stack([root_x, vertices[:, 1], root_z]), proximal_recipe)
+        root_x, root_z = roots[:, 0], roots[:, 2]
+    angle = np.deg2rad(degrees) * weight
+    dx, dz = posed[:, 0] - root_x, posed[:, 2] - root_z
+    selected = weight > 0
+    posed[selected, 0] = root_x[selected] + np.cos(angle[selected]) * dx[selected] + np.sin(angle[selected]) * dz[selected]
+    posed[selected, 2] = root_z[selected] - np.sin(angle[selected]) * dx[selected] + np.cos(angle[selected]) * dz[selected]
+    return droid_thumb_blend(vertices, posed, recipe)
+
+
+def droid_thumb_blend(vertices, posed, recipe):
+    from scipy.spatial.transform import Rotation
+    def smooth(value):
+        value = np.clip(value, 0, 1)
+        return value * value * (3 - 2 * value)
+    if across := recipe.get('thumbAcrossPalm'):
+        pivot = np.array(across['pivot'])
+        yw, xw, zw = across['blendWidths']
+        blend = smooth((vertices[:, 1] - .015) / yw) * smooth((.018 - vertices[:, 0]) / xw) * smooth((-.045 - vertices[:, 2]) / zw)
+        posed = pivot + Rotation.from_rotvec(blend[:, None] * np.array([0, np.deg2rad(across['yDegrees']), 0])).apply(posed - pivot)
+        return pivot + Rotation.from_rotvec(blend[:, None] * np.array([np.deg2rad(across['xDegrees']), 0, 0])).apply(posed - pivot)
+    if thumb := recipe.get('thumbBlendDegrees', 0):
+        pivot = np.array([-.005, .035, -.065])
+        blend = smooth((vertices[:, 1] - .015) / .06) * smooth((.018 - vertices[:, 0]) / .04) * smooth((-.045 - vertices[:, 2]) / .04)
+        return pivot + Rotation.from_rotvec(blend[:, None] * np.array([np.deg2rad(thumb), 0, 0])).apply(posed - pivot)
+    return posed
+
+
+def droid_pose(vertices, mesh, recipe):
+    """Keep separate mechanical fingers rigid and preserve the authored cuff."""
+    from scipy.spatial.transform import Rotation
+    labels = component_labels(mesh)[2]
+    if recipe['fieldKind'] == 'rigidClaw':
+        palm = max(np.unique(labels), key=lambda part: vertices[labels == part, 2].max())
+        palm_x = vertices[labels == palm, 0].mean()
+        posed = vertices.copy()
+        rigid = []
+        for part in np.unique(labels):
+            if part == palm:
+                continue
+            selected = labels == part
+            points = vertices[selected]
+            pivot = points[points[:, 2] > points[:, 2].max() - recipe['hingeBand']].mean(0)
+            degrees = recipe['jointDegrees'] * (1 if points[:, 0].mean() > palm_x else -1)
+            posed[selected] = (points - pivot) @ Rotation.from_euler('y', degrees, degrees=True).as_matrix().T + pivot
+            rigid.append(int(part))
+        return posed, labels == palm, rigid, np.zeros(len(vertices), bool)
+    posed = droid_field(vertices, recipe)
+    rigid = []
+    if recipe.get('preserveRigidFingers'):
+        for part in np.unique(labels):
+            selected = labels == part
+            points = vertices[selected]
+            if points[:, 2].max() < -.055 and np.ptp(points[:, 2]) < .09 and len(points) >= 3:
+                if not recipe.get('projectOnlyMoved', True) or np.max(np.linalg.norm(posed[selected] - points, axis=1)) > 1e-8:
+                    center = points[:, [0, 2]].mean(0)
+                    goal = posed[selected][:, [0, 2]].mean(0)
+                    left, _, right = np.linalg.svd((points[:, [0, 2]] - center).T @ (posed[selected][:, [0, 2]] - goal))
+                    fix = np.eye(2)
+                    fix[-1, -1] = np.linalg.det(left @ right)
+                    turn = left @ fix @ right
+                    target = points.copy()
+                    target[:, [0, 2]] = (points[:, [0, 2]] - center) @ turn + goal
+                    posed[selected] = target
+                rigid.append(int(part))
+    thumb = np.zeros(len(vertices), bool)
+    if opposition := recipe.get('componentThumbRotation'):
+        for part in np.unique(labels):
+            center = vertices[labels == part].mean(0)
+            selected = (center[1] > .07 or (center[1] > .025 and center[2] > -.085)) if opposition['extendedRule'] else (center[1] > .035 and center[2] > -.12)
+            if selected:
+                thumb[labels == part] = True
+        pivot = np.array(opposition['rootPivot'])
+        posed[thumb] = (posed[thumb] - pivot) @ Rotation.from_euler('x', opposition['degrees'], degrees=True).as_matrix().T + pivot
+    protected = (vertices[:, 2] >= recipe['cuffStartsZ']) & ~thumb
+    return posed, protected, rigid, thumb
+
+
+def build_droid(recipe, entry):
+    original = source(entry['sourceBlob'])
+    _, parts = organic_geometry(original)
+    basis = np.array(entry['jointReferenceToOwn'])
+    axes, origin = basis[:3], basis[3]
+    if not np.allclose(axes @ axes.T, np.eye(3), atol=1e-7):
+        raise ValueError('Mechanical hand reference changes scale or shear')
+    alias = Path(entry['output']).stem
+    output, moved_count, protected_count = original, 0, 0
+    minimum_jacobian = minimum_area = 1.
+    for index, (mesh, matrix, vertices, root, rendered) in enumerate(parts):
+        if not rendered:
+            continue
+        local = (root - origin) @ axes.T
+        posed, protected, rigid, thumb = droid_pose(local, mesh, recipe)
+        labels = component_labels(mesh)[2]
+        faces = np.array(mesh['faces'])[:, :3]
+        probes = local[faces[~np.isin(labels[faces[:, 0]], rigid) & ~thumb[faces[:, 0]]]].mean(1)
+        if len(probes):
+            epsilon = 1e-6
+            jacobian = np.stack([(droid_field(probes + np.eye(3)[axis] * epsilon, recipe) -
+                                  droid_field(probes - np.eye(3)[axis] * epsilon, recipe)) / (2 * epsilon)
+                                 for axis in range(3)], axis=2)
+            minimum_jacobian = min(minimum_jacobian, float(np.linalg.det(jacobian).min()))
+        before = np.cross(local[faces[:, 1]] - local[faces[:, 0]], local[faces[:, 2]] - local[faces[:, 0]])
+        after = np.cross(posed[faces[:, 1]] - posed[faces[:, 0]], posed[faces[:, 2]] - posed[faces[:, 0]])
+        valid = np.linalg.norm(before, axis=1) > 1e-12
+        minimum_area = min(minimum_area, float((np.linalg.norm(after, axis=1)[valid] / np.linalg.norm(before, axis=1)[valid]).min()))
+        flat = np.ptp(local[faces][:, :, 1], axis=1) < 1e-6
+        if np.any(valid & flat & (before[:, 1] * after[:, 1] < -1e-15) & ~thumb[faces[:, 0]]):
+            raise ValueError('Mechanical finger pose inverts a source face')
+        target = posed @ axes + origin
+        bound = (np.column_stack([target, np.ones(len(target))]) @ np.linalg.inv(matrix).T)[:, :3]
+        bound[protected] = vertices[protected]
+        changed = np.linalg.norm(bound - vertices, axis=1) > 1e-10
+        output = patch(output, bound, changed, protected, alias, index)
+        actual = np.array(geometry(output, index)['verts'])
+        for part in rigid:
+            selected = labels == part
+            a, b = vertices[selected], actual[selected]
+            error = np.max(np.abs(np.linalg.norm(a[:, None] - a[None, :], axis=2) - np.linalg.norm(b[:, None] - b[None, :], axis=2)))
+            if error > 2e-7:
+                raise ValueError('Mechanical finger component changed shape')
+        protected_count += int(protected.sum())
+        moved_count += int(changed.sum())
+    if minimum_jacobian <= .02 or minimum_area <= .03 or protected_count != entry['protectedCuffVertices']:
+        raise ValueError('Mechanical hand source pose failed its cuff or surface guard')
+    sha256 = hashlib.sha256(output).hexdigest()
+    if sha256 != entry['outputSha256']:
+        raise ValueError('Mechanical recipe differs from the client-reviewed hand: ' + alias)
+    return output, {'movedVertices': moved_count, 'protectedCuffVertices': protected_count, 'sha256': sha256}
+
+
+def mechanical_surface_gap(first, second):
+    """Conservative triangle contact guard for adjoining mechanical thumb parts."""
+    for edges, triangles in ((first, second), (second, first)):
+        e1, e2 = triangles[:, 1] - triangles[:, 0], triangles[:, 2] - triangles[:, 0]
+        for face in edges:
+            for i, j in ((0, 1), (1, 2), (2, 0)):
+                origin, direction = face[i], face[j] - face[i]
+                h = np.cross(direction, e2)
+                determinant = np.einsum('ij,ij->i', e1, h)
+                valid = np.abs(determinant) > 1e-12
+                inverse = np.zeros(len(determinant))
+                inverse[valid] = 1 / determinant[valid]
+                delta = origin - triangles[:, 0]
+                u = np.einsum('ij,ij->i', delta, h) * inverse
+                q = np.cross(delta, e1)
+                v = q @ direction * inverse
+                t = np.einsum('ij,ij->i', e2, q) * inverse
+                if (valid & (u >= -1e-7) & (v >= -1e-7) & (u + v <= 1 + 1e-7) & (t >= -1e-7) & (t <= 1 + 1e-7)).any():
+                    return 0.
+    minimum = float('inf')
+    for points, triangles in ((first.reshape(-1, 3), second), (second.reshape(-1, 3), first)):
+        a, b, c = triangles[:, 0], triangles[:, 1], triangles[:, 2]
+        e0, e1 = b - a, c - a
+        normal = np.cross(e0, e1)
+        norm2 = (normal * normal).sum(1)
+        aa, ab, bb = (e0 * e0).sum(1), (e0 * e1).sum(1), (e1 * e1).sum(1)
+        denominator = aa * bb - ab * ab
+        valid = denominator > 1e-24
+        for point in points:
+            delta = point - a
+            da, db = (delta * e0).sum(1), (delta * e1).sum(1)
+            u, v = np.zeros(len(a)), np.zeros(len(a))
+            u[valid] = (bb[valid] * da[valid] - ab[valid] * db[valid]) / denominator[valid]
+            v[valid] = (aa[valid] * db[valid] - ab[valid] * da[valid]) / denominator[valid]
+            inside = valid & (u >= 0) & (v >= 0) & (u + v <= 1)
+            if inside.any():
+                minimum = min(minimum, float(np.sqrt(((delta[inside] * normal[inside]).sum(1) ** 2 / norm2[inside]).min())))
+            for start, end in ((a, b), (b, c), (c, a)):
+                edge = end - start
+                length2 = (edge * edge).sum(1)
+                weight = np.divide(((point - start) * edge).sum(1), length2, out=np.zeros(len(a)), where=length2 > 0)
+                distance = np.linalg.norm(point - start - np.clip(weight, 0, 1)[:, None] * edge, axis=1)
+                minimum = min(minimum, float(distance.min()))
+    return minimum
+
+
+def build_droid_correction(recipe, entry):
+    from scipy.spatial.transform import Rotation
+    original = source(entry['sourceBlob'])
+    output, _ = build_droid(recipe['underPose'], entry['underPose'])
+    _, parts = organic_geometry(original)
+    _, posed_parts = organic_geometry(output)
+    basis = np.array(entry['jointReferenceToOwn'])
+    axes, origin = basis[:3], basis[3]
+    alias = Path(entry['output']).stem
+    for index, ((mesh, matrix, vertices, root, rendered), (prior, _, prior_vertices, prior_root, _)) in enumerate(zip(parts, posed_parts)):
+        if not rendered:
+            continue
+        local = (root - origin) @ axes.T
+        faces = np.array(mesh['faces'])[:, :3]
+        if recipe['correction'] == 'thumbField':
+            posed = droid_field(local, recipe)
+            protected = local[:, 2] >= -.045
+            probes = local[faces].mean(1)
+            epsilon = 1e-6
+            jacobian = np.stack([(droid_field(probes + np.eye(3)[axis] * epsilon, recipe) -
+                                  droid_field(probes - np.eye(3)[axis] * epsilon, recipe)) / (2 * epsilon)
+                                 for axis in range(3)], axis=2)
+            before = np.linalg.norm(np.cross(local[faces[:, 1]] - local[faces[:, 0]], local[faces[:, 2]] - local[faces[:, 0]]), axis=1)
+            after = np.linalg.norm(np.cross(posed[faces[:, 1]] - posed[faces[:, 0]], posed[faces[:, 2]] - posed[faces[:, 0]]), axis=1)
+            if np.linalg.det(jacobian).min() <= .02 or (after[before > 1e-12] / before[before > 1e-12]).min() <= .03:
+                raise ValueError('Thumb articulation folds or collapses the source surface')
+            target = posed @ axes + origin
+            bound = (np.column_stack([target, np.ones(len(target))]) @ np.linalg.inv(matrix).T)[:, :3]
+            bound[protected] = vertices[protected]
+            output = patch(output, bound, np.linalg.norm(bound - vertices, axis=1) > 1e-10, protected, alias, index)
+        elif local[:, 1].mean() > .06 and local[:, 2].mean() > -.08:
+            labels = component_labels(mesh)[2]
+            fixed_part = min(np.unique(labels), key=lambda part: local[labels == part, 1].mean())
+            moving = labels != fixed_part
+            fixed = ~moving
+            points = local[fixed]
+            pivot = points[points[:, 1] > points[:, 1].max() - .003].mean(0)
+            posed = (prior_root - origin) @ axes.T
+            posed[moving] = (posed[moving] - pivot) @ Rotation.from_euler('x', recipe['jointDegrees'], degrees=True).as_matrix().T + pivot
+            if mechanical_surface_gap(posed[faces[fixed[faces].all(1)]], posed[faces[moving[faces].all(1)]]) >= .0025:
+                raise ValueError('Mechanical thumb articulation opens its joint')
+            target = posed @ axes + origin
+            bound = (np.column_stack([target, np.ones(len(target))]) @ np.linalg.inv(matrix).T)[:, :3]
+            bound[fixed] = prior_vertices[fixed]
+            output = patch(output, bound, moving, fixed, alias, index)
+    sha256 = hashlib.sha256(output).hexdigest()
+    if sha256 != entry['outputSha256']:
+        raise ValueError('Thumb correction differs from the client-reviewed hand: ' + alias)
+    return output, {'sha256': sha256}
+
+
+def build_joint_pose(recipe, entry):
+    original = source(entry['sourceBlob'])
+    _, parts = organic_geometry(original)
+    index = entry['meshIndex']
+    mesh, matrix, vertices, root, _ = parts[index]
+    basis = np.array(entry['poseReferenceToOwn'])
+    axes, origin = basis[:3], basis[3]
+    if not np.allclose(axes @ axes.T, np.eye(3), atol=1e-7):
+        raise ValueError('Joint reference changes the source hand proportions')
+    roles = np.array(entry['componentRoles'])
+    if len(roles) != len(vertices):
+        raise ValueError('Mechanical component role inventory changed')
+    posed = root.copy()
+    for joint in recipe['joints']:
+        selected = roles == joint['component']
+        pivot = np.array(joint['pivot']) @ axes + origin
+        direction = np.array(joint['axis']) @ axes * np.linalg.det(axes)
+        posed[selected] = rotate(root[selected], pivot, direction, np.deg2rad(joint['degrees']))
+    bound = (np.column_stack([posed, np.ones(len(posed))]) @ np.linalg.inv(matrix).T)[:, :3]
+    protected = np.linalg.norm(posed - root, axis=1) < 1e-7
+    bound[protected] = vertices[protected]
+    # The original operation keeps sub-micron hinge points fixed. Preserve those
+    # source bits rather than accumulating a new pose from the previous output.
+    output = patch(original, bound, ~protected, protected, Path(entry['output']).stem, index)
+    actual = np.array(geometry(output, index)['verts'])
+    for role in np.unique(roles):
+        a, b = vertices[roles == role], actual[roles == role]
+        if np.max(np.abs(np.linalg.norm(a[:, None] - a[None, :], axis=2) - np.linalg.norm(b[:, None] - b[None, :], axis=2))) > 2e-7:
+            raise ValueError('Mechanical joint changed its original rigid segment')
+    sha256 = hashlib.sha256(output).hexdigest()
+    if sha256 != entry['outputSha256']:
+        raise ValueError('Joint recipe differs from its client-reviewed hand')
+    return output, {'sha256': sha256, 'protectedCuffVertices': int(protected.sum())}
+
+
+def build_rigid_pose(recipe, entry):
+    original = source(entry['sourceBlob'])
+    model, meshes = organic_geometry(original)
+    output = original
+    for part in entry['parts']:
+        index = part['meshIndex']
+        mesh, matrix, vertices, _, _ = meshes[index]
+        labels = np.array(part.get('componentRoles', component_labels(mesh)[2]))
+        posed = vertices.copy()
+        for movement in part['movements']:
+            rotation = np.array(movement['rotation'])
+            world = matrix[:3, :3] @ rotation @ np.linalg.inv(matrix[:3, :3])
+            if not np.allclose(world @ world.T, np.eye(3), atol=1e-7) or np.linalg.det(world) < 0:
+                raise ValueError('Imported mechanical part changes shape or reflection')
+            selected = labels == movement['component']
+            posed[selected] = vertices[selected] @ rotation.T + np.array(movement['translation'])
+        fixed = np.array(part.get('fixedVertices', []), dtype=int)
+        posed[fixed] = vertices[fixed]
+        protected = np.zeros(len(vertices), bool)
+        protected[part['protectedVertices']] = True
+        if not protected[part['cuffVertices']].all():
+            raise ValueError('Mechanical pose changes its authored cuff rim')
+        posed[protected] = vertices[protected]
+        output = patch(output, posed, np.linalg.norm(posed - vertices, axis=1) > 1e-10, protected,
+                       Path(entry['output']).stem, index)
+        actual = np.array(geometry(output, index)['verts'])
+        for label in np.unique(labels):
+            a, b = vertices[labels == label], actual[labels == label]
+            if np.max(np.abs(np.linalg.norm(a[:, None] - a[None, :], axis=2) - np.linalg.norm(b[:, None] - b[None, :], axis=2))) > 2e-7:
+                raise ValueError('Imported mechanical segment changed shape')
+    renamed = bytearray(output)
+    for index, name in entry.get('nodeNames', {}).items():
+        node = model.nodes[int(index)]
+        if node[1] is None or not name.isascii() or len(name) > 31:
+            raise ValueError('Invalid hand-local mesh node name')
+        renamed[node[4] + 32:node[4] + 64] = name.encode('ascii').ljust(32, b'\0')
+    output = bytes(renamed)
+    sha256 = hashlib.sha256(output).hexdigest()
+    if sha256 != entry['outputSha256']:
+        raise ValueError('Rigid articulation differs from its client-reviewed hand')
+    return output, {'sha256': sha256}
+
+
+def build_authored_pose(recipe, entry):
+    """Apply a pinned own-source sculpt, regenerating native normals and bounds."""
+    original = source(entry['sourceBlob'])
+    _, meshes = organic_geometry(original)
+    output = original
+    for part in entry['parts']:
+        index = part['meshIndex']
+        mesh, _, vertices, _, _ = meshes[index]
+        posed = vertices.copy()
+        seen = set()
+        for vertex, x, y, z in part['positions']:
+            if not isinstance(vertex, int) or vertex < 0 or vertex >= len(vertices) or vertex in seen:
+                raise ValueError('Invalid authored hand vertex edit')
+            seen.add(vertex)
+            posed[vertex] = [x, y, z]
+        if not np.isfinite(posed).all():
+            raise ValueError('Authored hand pose contains non-finite coordinates')
+        protected = np.zeros(len(vertices), bool)
+        protected[part['protectedVertices']] = True
+        changed = np.any(posed != vertices, axis=1)
+        if changed[protected].any() or not protected[part['cuffVertices']].all():
+            raise ValueError('Authored hand pose moves its protected cuff')
+        faces = np.array(mesh['faces'])[:, :3]
+        before = np.linalg.norm(np.cross(vertices[faces[:, 1]] - vertices[faces[:, 0]], vertices[faces[:, 2]] - vertices[faces[:, 0]]), axis=1)
+        after = np.linalg.norm(np.cross(posed[faces[:, 1]] - posed[faces[:, 0]], posed[faces[:, 2]] - posed[faces[:, 0]]), axis=1)
+        if (after[before > 1e-12] / before[before > 1e-12]).min() <= .03:
+            raise ValueError('Authored hand pose collapses an original face')
+        output = patch(output, posed, changed, protected, Path(entry['output']).stem, index)
+    sha256 = hashlib.sha256(output).hexdigest()
+    if sha256 != entry['outputSha256']:
+        raise ValueError('Authored source pose differs from its client-reviewed hand')
+    return output, {'sha256': sha256}
+
+
+def skin_buffers(data, mesh):
+    """Read raw four-slot streams without dropping zero-weight bone slots."""
+    offset = mesh['_mesh_offset']
+    skin = offset + 512
+    uint = lambda at: struct.unpack_from('<I', data, at)[0]
+    raw = 12 + uint(4)
+    stride = uint(offset + 440)
+    count = len(mesh['verts'])
+    weights_at = raw + uint(skin + 12)
+    weights = np.array([struct.unpack_from('<4f', data, weights_at + i * (stride or 16))
+                        for i in range(count)])
+    slots = np.array([struct.unpack_from('<4h', data, raw + uint(skin + 16) + i * (stride or 8))
+                      for i in range(count)])
+    return skin, weights_at, stride or 16, weights, slots
+
+
+def build_skin_pose(recipe, entry):
+    """Build an authored finger skin with its original donor, slots and binds."""
+    from NeckSkinBindings import body_model, skins
+    from scipy.spatial.transform import Rotation
+    original = source(entry['sourceBlob'])
+    if hashlib.sha256(original).hexdigest() != entry['sourceSha256']:
+        raise ValueError('Skin hand source fingerprint differs')
+    skeleton = source(entry['skeletonBlob'])
+    skeleton_path = ROOT / entry['skeleton']
+    current = skeleton_path.read_bytes() if skeleton_path.is_file() else subprocess.check_output(
+        ['git', '-C', str(ROOT), 'show', 'HEAD:' + entry['skeleton']])
+    # Supermodel/animation-bank changes are allowed; native bone order, paths and
+    # default bind controllers must still match the pinned donor.
+    donor = body_model(skeleton)
+    if [n[:4] for n in donor.nodes] != [n[:4] for n in body_model(current).nodes]:
+        raise ValueError('Skin hand donor bone order or bind transforms changed')
+    index = entry['meshIndex']
+    mesh = geometry(original, index, skeleton)
+    if 'weights' not in mesh:
+        raise ValueError('Authored finger skin recipe requires a skin mesh')
+    vertices = np.array(mesh['verts'])
+    posed = vertices.copy()
+    protected = np.zeros(len(vertices), bool)
+    protected[entry['protectedVertices']] = True
+    names = [n[0] for n in donor.nodes]
+    skin, weight_at, stride, weights, slots = skin_buffers(original, mesh)
+    wanted = weights.copy()
+    for field, target, width in [('positions', posed, 3), ('weights', wanted, 4)]:
+        seen = set()
+        for edit in entry[field]:
+            vertex, *values = edit
+            if (not isinstance(vertex, int) or not 0 <= vertex < len(vertices)
+                    or vertex in seen or len(values) != width):
+                raise ValueError('Invalid authored skin vertex edit')
+            seen.add(vertex)
+            target[vertex] = values
+    if not np.isfinite(posed).all() or not np.isfinite(wanted).all():
+        raise ValueError('Authored skin contains non-finite values')
+    if (wanted < 0).any() or (wanted > 1.00001).any():
+        raise ValueError('Authored skin contains invalid weights')
+    sums, old_sums = wanted.sum(1), weights.sum(1)
+    if (sums < np.minimum(old_sums, 1) - 2e-7).any() or (sums > np.maximum(old_sums, 1) + 2e-7).any():
+        raise ValueError('Skin finger weights drift outside their original normalization range')
+    changed = np.any(posed != vertices, axis=1)
+    changed_weights = np.any(wanted != weights, axis=1)
+    if changed[protected].any() or changed_weights[protected].any():
+        raise ValueError('Authored skin changes its protected cuff')
+    # Independently derive the top 5 mm cuff rim from the original hand bind.
+    bone = names.index(Path(entry['source']).stem[9].lower() + 'hand_g')
+    uint = lambda at: struct.unpack_from('<I', original, at)[0]
+    w, x, y, z = struct.unpack_from('<4f', original, 12 + uint(skin + 28) + bone * 16)
+    inverse = np.eye(4)
+    inverse[:3, :3] = Rotation.from_quat([x, y, z, w]).as_matrix()
+    inverse[:3, 3] = struct.unpack_from('<3f', original, 12 + uint(skin + 40) + bone * 12)
+    local = (np.c_[vertices, np.ones(len(vertices))] @ inverse.T)[:, :3]
+    cuff = local[:, 2] >= local[:, 2].max() - .005
+    if not protected[cuff].all() or not protected[entry['cuffVertices']].all():
+        raise ValueError('Authored skin recipe does not protect the source cuff rim')
+    output = bytearray(patch(original, posed, changed, protected, Path(entry['output']).stem, index, skeleton))
+    for vertex in np.flatnonzero(changed_weights):
+        struct.pack_into('<4f', output, weight_at + int(vertex) * stride, *wanted[vertex])
+    # A sub-float32 bind solve can refresh a face even when its stored vertices
+    # stay identical. Recompute only its plane from the final stored geometry.
+    faces = np.array(mesh['faces'])[:, :3]
+    stored = np.array(geometry(bytes(output), index, skeleton)['verts'])
+    face_at = 12 + uint(mesh['_mesh_offset'] + 8)
+    seen = set()
+    for face in entry['refreshedFaces']:
+        if not isinstance(face, int) or not 0 <= face < len(faces) or face in seen:
+            raise ValueError('Invalid authored skin face refresh')
+        seen.add(face)
+        triangle = stored[faces[face]]
+        normal = np.cross(triangle[1] - triangle[0], triangle[2] - triangle[0])
+        length = np.linalg.norm(normal)
+        if length < 1e-10:
+            raise ValueError('Authored skin refresh has a collapsed face')
+        normal /= length
+        struct.pack_into('<4f', output, face_at + face * 32, *normal, -float(normal @ triangle[0]))
+    # Validate native external-bone consistency after changing the weight stream.
+    skins(bytes(output))
+    now = geometry(bytes(output), index, skeleton)
+    for key in mesh.keys() - {'verts', 'normals', 'weights', '_mesh_offset'}:
+        if mesh[key] != now[key]:
+            raise ValueError(f'Authored skin field changed: {key}')
+    for key in ('verts', 'normals'):
+        if not np.array_equal(np.array(mesh[key])[protected], np.array(now[key])[protected]):
+            raise ValueError(f'Protected skin cuff {key} changed')
+    if not np.array_equal(skin_buffers(output, now)[4], slots):
+        raise ValueError('Authored skin changes its bone slots')
+    sha256 = hashlib.sha256(output).hexdigest()
+    if sha256 != entry['outputSha256']:
+        raise ValueError('Authored skin differs from its client-reviewed native payload')
+    return bytes(output), {'sha256': sha256}
+
+
 def build(recipe, entry):
+    if recipe.get('kind') == 'ownSourceSkin':
+        return build_skin_pose(recipe, entry)
+    if recipe.get('kind') == 'ownSourceAuthored':
+        return build_authored_pose(recipe, entry)
+    if recipe.get('kind') == 'ownSourceJointPose':
+        return build_joint_pose(recipe, entry)
+    if recipe.get('kind') == 'ownSourceRigid':
+        return build_rigid_pose(recipe, entry)
+    if recipe.get('kind') == 'ownSourceDroidCorrection':
+        return build_droid_correction(recipe, entry)
+    if recipe.get('kind') == 'ownSourceDroid':
+        return build_droid(recipe, entry)
     if recipe.get('kind') == 'ownSourceOrganic':
         return build_organic(recipe, entry)
     canonical = geometry(source(recipe['canonicalBlob']), recipe.get('meshIndex'))
@@ -403,6 +886,8 @@ def build(recipe, entry):
         posed = vertices + (moved - local) @ affine[:3]
     changed = np.linalg.norm(posed - vertices, axis=1) > 1e-10
     result = patch(original, posed, changed, cuff, Path(entry['output']).stem, mesh_index)
+    if entry.get('outputSha256') and hashlib.sha256(result).hexdigest() != entry['outputSha256']:
+        raise ValueError('Hand recipe differs from its client-reviewed payload')
     return result, {'movedVertices': int(changed.sum()), 'protectedCuffVertices': int(cuff.sum()),
                     'affineErrorMetres': error, 'sha256': hashlib.sha256(result).hexdigest()}
 

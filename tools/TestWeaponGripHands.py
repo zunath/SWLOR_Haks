@@ -13,7 +13,7 @@ class WeaponGripHandsTests(unittest.TestCase):
     def setUpClass(cls):
         cls.cases = []
         for recipe in json.loads(grip.MANIFEST.read_text())['recipes']:
-            if recipe.get('kind') == 'ownSourceOrganic':
+            if recipe.get('kind', '').startswith('ownSource'):
                 continue
             canonical = grip.geometry(grip.source(recipe['canonicalBlob']), recipe.get('meshIndex'))
             for entry in recipe['models']:
@@ -116,7 +116,7 @@ class OwnSourceOrganicGripTests(unittest.TestCase):
                 cls.cases.append((recipe, entry, original, selected))
 
     def test_recipes_reproduce_the_client_reviewed_assets_from_pinned_sources(self):
-        self.assertEqual(len(self.cases), 227)
+        self.assertEqual(len(self.cases), 239)
         for recipe, entry, original, selected in self.cases:
             with self.subTest(hand=entry['output']):
                 self.assertEqual((grip.ROOT / entry['source']).read_bytes(), original)
@@ -158,6 +158,212 @@ class OwnSourceOrganicGripTests(unittest.TestCase):
                     old_area = np.linalg.norm(np.cross(vertices[faces[:, 1]] - vertices[faces[:, 0]], vertices[faces[:, 2]] - vertices[faces[:, 0]]), axis=1)
                     new_area = np.linalg.norm(np.cross(posed[faces[:, 1]] - posed[faces[:, 0]], posed[faces[:, 2]] - posed[faces[:, 0]]), axis=1)
                     self.assertGreater(float((new_area[old_area > 1e-12] / old_area[old_area > 1e-12]).min()), .03)
+
+
+class OwnSourceDroidGripTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.cases = []
+        for recipe in json.loads(grip.MANIFEST.read_text())['recipes']:
+            if recipe.get('kind') != 'ownSourceDroid':
+                continue
+            for entry in recipe['models']:
+                cls.cases.append((recipe, entry, grip.source(entry['sourceBlob']),
+                                  (grip.ROOT / entry['output']).read_bytes()))
+
+    def test_native_payloads_reproduce_from_pinned_own_source_geometry(self):
+        self.assertEqual(84, len(self.cases))
+        for recipe, entry, original, selected in self.cases:
+            with self.subTest(hand=entry['output']):
+                self.assertEqual(original, (grip.ROOT / entry['source']).read_bytes())
+                self.assertEqual(selected, grip.build(recipe, entry)[0])
+
+    def test_authored_cuffs_buffers_and_rigid_mechanical_parts_survive(self):
+        for recipe, entry, original, selected in self.cases:
+            with self.subTest(hand=entry['output']):
+                old_model, before = grip.organic_geometry(original)
+                model, after = grip.organic_geometry(selected)
+                self.assertEqual([(n[1], n[2], n[3]) for n in old_model.nodes],
+                                 [(n[1], n[2], n[3]) for n in model.nodes])
+                self.assertEqual(len(before), len(after))
+                basis = np.array(entry['jointReferenceToOwn'])
+                protected_count = 0
+                for (source, _, vertices, root, rendered), (now, _, posed, _, _) in zip(before, after):
+                    for key in source.keys() - {'verts', 'normals', '_mesh_offset'}:
+                        self.assertEqual(source[key], now[key], key)
+                    if not rendered:
+                        np.testing.assert_array_equal(vertices, posed)
+                        continue
+                    local = (root - basis[3]) @ basis[:3].T
+                    _, protected, rigid, _ = grip.droid_pose(local, source, recipe)
+                    for key in ('verts', 'normals'):
+                        np.testing.assert_array_equal(np.array(source[key])[protected], np.array(now[key])[protected])
+                    protected_count += int(protected.sum())
+                    labels = grip.component_labels(source)[2]
+                    for part in rigid:
+                        a, b = vertices[labels == part], posed[labels == part]
+                        np.testing.assert_allclose(np.linalg.norm(a[:, None] - a[None, :], axis=2),
+                                                   np.linalg.norm(b[:, None] - b[None, :], axis=2), atol=2e-7)
+                    faces = np.array(source['faces'])[:, :3]
+                    a = np.linalg.norm(np.cross(vertices[faces[:, 1]] - vertices[faces[:, 0]], vertices[faces[:, 2]] - vertices[faces[:, 0]]), axis=1)
+                    b = np.linalg.norm(np.cross(posed[faces[:, 1]] - posed[faces[:, 0]], posed[faces[:, 2]] - posed[faces[:, 0]]), axis=1)
+                    self.assertGreater(float((b[a > 1e-12] / a[a > 1e-12]).min()), .03)
+                    self.assertTrue(np.isfinite(posed).all())
+                self.assertEqual(entry['protectedCuffVertices'], protected_count)
+
+
+class ImportedMechanicalGripTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.cases = []
+        for recipe in json.loads(grip.MANIFEST.read_text())['recipes']:
+            if recipe.get('kind') not in ('ownSourceDroidCorrection', 'ownSourceJointPose', 'ownSourceRigid'):
+                continue
+            for entry in recipe['models']:
+                cls.cases.append((recipe, entry, grip.source(entry['sourceBlob']),
+                                  (grip.ROOT / entry['output']).read_bytes()))
+
+    def test_every_selected_mechanical_payload_rebuilds_from_its_original_source(self):
+        counts = {kind: sum(recipe['kind'] == kind for recipe, _, _, _ in self.cases)
+                  for kind in ('ownSourceDroidCorrection', 'ownSourceJointPose', 'ownSourceRigid')}
+        self.assertEqual({'ownSourceDroidCorrection': 12, 'ownSourceJointPose': 12, 'ownSourceRigid': 8}, counts)
+        for recipe, entry, original, selected in self.cases:
+            with self.subTest(hand=entry['output']):
+                self.assertEqual(original, (grip.ROOT / entry['source']).read_bytes())
+                self.assertEqual(selected, grip.build(recipe, entry)[0])
+
+    def test_cuff_rims_topology_materials_uvs_and_native_joint_controllers_stay_authored(self):
+        for recipe, entry, original, selected in self.cases:
+            with self.subTest(hand=entry['output']):
+                before_model, before = grip.organic_geometry(original)
+                after_model, after = grip.organic_geometry(selected)
+                self.assertEqual([(n[1], n[2], n[3]) for n in before_model.nodes],
+                                 [(n[1], n[2], n[3]) for n in after_model.nodes])
+                self.assertEqual(len(before), len(after))
+                highest = max(root[:, 2].max() for _, _, _, root, rendered in before if rendered)
+                cuff_count = moved_count = 0
+                for (source, _, vertices, root, rendered), (now, _, posed, _, _) in zip(before, after):
+                    for key in source.keys() - {'verts', 'normals', '_mesh_offset'}:
+                        self.assertEqual(source[key], now[key], key)
+                    cuff = root[:, 2] >= highest - .005 if rendered else np.ones(len(vertices), bool)
+                    for key in ('verts', 'normals'):
+                        np.testing.assert_array_equal(np.array(source[key])[cuff], np.array(now[key])[cuff])
+                    cuff_count += int(cuff.sum())
+                    moved_count += int((np.linalg.norm(posed - vertices, axis=1) > 1e-7).sum())
+                    self.assertTrue(np.isfinite(posed).all())
+                    faces = np.array(source['faces'])[:, :3]
+                    old_area = np.linalg.norm(np.cross(vertices[faces[:, 1]] - vertices[faces[:, 0]], vertices[faces[:, 2]] - vertices[faces[:, 0]]), axis=1)
+                    new_area = np.linalg.norm(np.cross(posed[faces[:, 1]] - posed[faces[:, 0]], posed[faces[:, 2]] - posed[faces[:, 0]]), axis=1)
+                    self.assertGreater(float((new_area[old_area > 1e-12] / old_area[old_area > 1e-12]).min()), .03)
+                self.assertGreater(cuff_count, 0)
+                self.assertGreater(moved_count, 0)
+                if entry.get('nodeNames'):
+                    names = [node[0] for node in after_model.nodes]
+                    self.assertEqual(len(names), len(set(names)))
+                    for index, (old, new) in enumerate(zip(before_model.nodes, after_model.nodes)):
+                        if old[1] is not None and str(index) not in entry['nodeNames']:
+                            self.assertEqual(old[0], new[0])
+
+    def test_each_generated_hand_has_exactly_one_owner(self):
+        outputs = [entry['output'] for recipe in json.loads(grip.MANIFEST.read_text())['recipes']
+                   for entry in recipe['models']]
+        self.assertEqual(506, len(outputs))
+        self.assertEqual(len(outputs), len(set(outputs)))
+        import subprocess
+        tracked = set(subprocess.check_output(['git', '-C', str(grip.ROOT), 'ls-files'], text=True).splitlines())
+        for recipe in json.loads(grip.MANIFEST.read_text())['recipes']:
+            for entry in recipe['models']:
+                self.assertIn(entry['source'], tracked, 'Pinned paths must preserve Git filename case')
+                self.assertIn(entry['output'], tracked)
+                if entry.get('skeleton'):
+                    self.assertIn(entry['skeleton'], tracked)
+
+
+class AuthoredHandGripTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.cases = [(q, e, grip.source(e['sourceBlob']), (grip.ROOT / e['output']).read_bytes())
+                     for q in json.loads(grip.MANIFEST.read_text())['recipes']
+                     if q.get('kind') == 'ownSourceAuthored' for e in q['models']]
+
+    def test_own_source_sculpts_reproduce_reviewed_hands_and_preserve_authored_buffers(self):
+        self.assertEqual(4, len(self.cases))
+        for recipe, entry, original, output in self.cases:
+            with self.subTest(hand=entry['output']):
+                self.assertEqual(original, (grip.ROOT / entry['source']).read_bytes())
+                self.assertEqual(output, grip.build(recipe, entry)[0])
+                before, after = grip.organic_geometry(original)[1], grip.organic_geometry(output)[1]
+                for index, ((mesh, _, vertices, _, _), (now, _, _, _, _)) in enumerate(zip(before, after)):
+                    for key in mesh.keys() - {'verts', 'normals', '_mesh_offset'}:
+                        self.assertEqual(mesh[key], now[key], key)
+                    part = next((p for p in entry['parts'] if p['meshIndex'] == index), None)
+                    if part is None:
+                        self.assertEqual(mesh, now)
+                        continue
+                    for key in ('verts', 'normals'):
+                        np.testing.assert_array_equal(np.array(mesh[key])[part['protectedVertices']],
+                                                      np.array(now[key])[part['protectedVertices']])
+
+
+class SkinHandGripTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.cases = [(q, e, grip.source(e['sourceBlob']), (grip.ROOT / e['output']).read_bytes())
+                     for q in json.loads(grip.MANIFEST.read_text())['recipes']
+                     if q.get('kind') == 'ownSourceSkin' for e in q['models']]
+
+    def test_native_skin_payloads_reproduce_from_pinned_own_sources(self):
+        self.assertEqual(32, len(self.cases))
+        for recipe, entry, original, output in self.cases:
+            with self.subTest(hand=entry['output']):
+                self.assertEqual(original, (grip.ROOT / entry['source']).read_bytes())
+                self.assertEqual(output, grip.build(recipe, entry)[0])
+
+    def test_cuff_weights_palette_bone_slots_inverse_binds_and_authored_buffers_survive(self):
+        import struct
+        from RobePoseAudit import Model
+        for recipe, entry, original, output in self.cases:
+            with self.subTest(hand=entry['output']):
+                donor = grip.source(entry['skeletonBlob'])
+                before = grip.geometry(original, entry['meshIndex'], donor)
+                after = grip.geometry(output, entry['meshIndex'], donor)
+                skin, _, _, weights, slots = grip.skin_buffers(original, before)
+                _, _, _, wanted, new_slots = grip.skin_buffers(output, after)
+                self.assertEqual(original[skin:skin + 100], output[skin:skin + 100])
+                uint = lambda at: struct.unpack_from('<I', original, at)[0]
+                for pointer, count, size in [(20, 24, 2), (28, 32, 16), (40, 44, 12)]:
+                    start = 12 + uint(skin + pointer)
+                    end = start + uint(skin + count) * size
+                    self.assertEqual(original[start:end], output[start:end])
+                np.testing.assert_array_equal(slots, new_slots)
+                for key in before.keys() - {'verts', 'normals', 'weights', '_mesh_offset'}:
+                    self.assertEqual(before[key], after[key], key)
+                protected = entry['protectedVertices']
+                self.assertGreater(len(protected), 0)
+                np.testing.assert_array_equal(weights[protected], wanted[protected])
+                for key in ('verts', 'normals'):
+                    np.testing.assert_array_equal(np.array(before[key])[protected], np.array(after[key])[protected])
+                self.assertEqual([n[1:4] for n in Model(original, False).nodes],
+                                 [n[1:4] for n in Model(output, False).nodes])
+                self.assertTrue(np.isfinite(np.array(after['verts'])).all())
+                self.assertTrue(np.isfinite(np.array(after['normals'])).all())
+                self.assertTrue(np.isfinite(wanted).all())
+                self.assertTrue((wanted >= 0).all())
+                if '30700' in entry['output']:
+                    self.assertEqual([], entry['positions'])
+                    np.testing.assert_array_equal(before['verts'], after['verts'])
+
+    def test_editing_a_protected_cuff_is_rejected(self):
+        import copy
+        recipe, entry, original, _ = self.cases[0]
+        entry = copy.deepcopy(entry)
+        donor = grip.source(entry['skeletonBlob'])
+        mesh = grip.geometry(original, entry['meshIndex'], donor)
+        vertex = entry['protectedVertices'][0]
+        position = np.array(mesh['verts'][vertex]) + [0.01, 0, 0]
+        entry['positions'].append([vertex, *position.tolist()])
+        with self.assertRaisesRegex(ValueError, 'protected cuff'):
+            grip.build(recipe, entry)
 
 
 if __name__ == '__main__':
