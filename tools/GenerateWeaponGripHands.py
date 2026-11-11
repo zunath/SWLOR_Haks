@@ -9,6 +9,7 @@ the alternate only for a gun's grip hand.
 from __future__ import annotations
 
 import argparse
+from collections import Counter
 import hashlib
 import json
 from pathlib import Path
@@ -947,6 +948,44 @@ def build(recipe, entry):
                     'affineErrorMetres': error, 'sha256': hashlib.sha256(result).hexdigest()}
 
 
+def synchronize_dye_bindings(path, rows, *, apply=False):
+    """Append missing alias bindings without moving any existing 2DA row."""
+    original = path.read_bytes()
+    lines = original.decode('ascii').splitlines()
+    existing = [line.split()[1:] for line in lines[3:] if line.strip()]
+    aliases = {render.lower() for _, render in rows}
+    authored = [row for row in existing if row[0].lower() not in aliases]
+    expected = []
+    for source_name, render in sorted(rows):
+        bindings = [row for row in authored if row[0].lower() == source_name.lower()]
+        if not bindings:
+            raise ValueError(f'No source dye bindings for {source_name}')
+        expected.extend([(render.lower(), *row[1:]) for row in bindings])
+    actual = Counter((row[0].lower(), *row[1:]) for row in existing
+                     if row[0].lower() in aliases)
+    wanted = Counter(expected)
+    unexpected = actual - wanted
+    if unexpected:
+        raise ValueError(f'Unexpected gun-grasp dye bindings: {sum(unexpected.values())}')
+    missing = wanted - actual
+    if missing and not apply:
+        raise ValueError(f'Stale gun-grasp dye bindings: {sum(missing.values())} missing')
+    if not missing:
+        return
+    # Preserve original bytes, row labels and physical positions. Matching is
+    # independent of row order because aliases can be appended over many builds.
+    next_label = max((int(line.split()[0]) for line in lines[3:] if line.strip()), default=-1) + 1
+    newline = b'\r\n' if b'\r\n' in original else b'\n'
+    appended = []
+    for row in expected:
+        if missing[row]:
+            appended.append(f'{next_label} ' + ' '.join(row))
+            missing[row] -= 1
+            next_label += 1
+    separator = b'' if original.endswith((b'\r', b'\n')) else newline
+    path.write_bytes(original + separator + newline.join(row.encode('ascii') for row in appended) + newline)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     mode = parser.add_mutually_exclusive_group(required=True)
@@ -981,25 +1020,7 @@ def main():
         path.write_text(table, encoding='ascii', newline='\n')
     elif path.read_text() != table:
         raise ValueError('Stale griprender.2da')
-    # Alias meshes retain the source material identity and dye-layer assignments.
-    tint_path = ROOT / 'sw_2da/tintmap.2da'
-    lines = tint_path.read_text().splitlines()
-    existing = [line.split()[1:] for line in lines[3:] if line.strip()]
-    aliases = {render for _, render in rows}
-    authored = [row for row in existing if row[0].lower() not in aliases]
-    expected = []
-    for source_name, render in sorted(rows):
-        bindings = [row for row in authored if row[0].lower() == source_name]
-        if not bindings:
-            raise ValueError(f'No source dye bindings for {source_name}')
-        expected.extend([[render, *row[1:]] for row in bindings])
-    actual = [row for row in existing if row[0].lower() in aliases]
-    if args.apply:
-        tint_path.write_text('\n'.join(lines[:3]) + '\n' + ''.join(
-            f'{i} ' + ' '.join(row) + '\n' for i, row in enumerate([*authored, *expected])),
-            encoding='ascii', newline='\n')
-    elif actual != expected:
-        raise ValueError('Stale gun-grasp dye bindings')
+    synchronize_dye_bindings(ROOT / 'sw_2da/tintmap.2da', rows, apply=args.apply)
     print(f'Gun-grasp hands: {len(rows)} variants pass; authored hands and cuffs unchanged.')
 
 
