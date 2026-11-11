@@ -49,10 +49,11 @@ def validate_motions(record, original):
     if record.get('profileHookBasis') != 'idle':
         raise ValueError('Rifle profiles require the pinned idle hook basis')
     idle_hook_quaternion(original)
+    base_idle(record)
     seen, groups = set(), {}
     for motion in record['motions']:
         name, source_clip = motion['name'], motion['sourceClip']
-        if not re.fullmatch(r'rf[a-z0-9_]{1,12}_[irs]', name) or len(name) > 16 or name in seen:
+        if not re.fullmatch(r'rf[a-z0-9_]{1,12}_[irs]', name) or len(name) > 12 or name in seen:
             raise ValueError('Invalid or duplicate native rifle profile name')
         if source_clip != ROLES[name[-1]]:
             raise ValueError('Rifle profile role differs from its source clip')
@@ -140,12 +141,153 @@ def profile_model(original, motion):
     return Model(bytes(output))
 
 
+
+EQUIPPED_IDLE_JOINTS = frozenset(('rbicep_g', 'rforearm_g', 'rhand_g', *hold.ARM))
+
+
+def base_idle(record):
+    source = record['baseIdle']
+    expected = 'a_fa' if record['body'][1] == 'f' else 'a_ba'
+    if source['model'] != expected:
+        raise ValueError('Equipped rifle idle requires the matching native body base')
+    raw = pinned_source(source['blob'])
+    if hashlib.sha256(raw).hexdigest() != source['sha256']:
+        raise ValueError('Pinned equipped rifle idle baseline changed')
+    model = Model(raw)
+    if 'pause1' not in model.clips or model.clips['pause1'][0] <= 0:
+        raise ValueError('Equipped rifle idle requires the complete stock pause1 clip')
+    return model
+
+
+def patch_clip_rotations(model, clip, rotations, root_name):
+    """Replace only explicit quaternion controllers; retain the native raw block."""
+    raw = model.data
+    end = 12 + struct.unpack_from('<I', raw, 4)[0]
+    if len(raw) != end + struct.unpack_from('<I', raw, 8)[0]:
+        raise ValueError('Invalid rifle motion source model size')
+    output, found = bytearray(raw[:end]), set()
+    def append(data):
+        output.extend(bytes((-len(output)) % 4))
+        pointer = len(output) - 12
+        output.extend(data)
+        return pointer
+    for joint, _, _, _, offset in model.clips[clip][1]:
+        if joint not in rotations:
+            continue
+        old_keys = 12 + struct.unpack_from('<I', raw, offset + 84)[0]
+        keys, data = [], bytearray()
+        for index, (kind, rows, times, values, columns, _) in enumerate(hold.raw_controllers(raw, offset)):
+            if kind == 20:
+                if columns != 4:
+                    raise ValueError('Rifle motion orientation must be a quaternion')
+                curve_times, curve_values = rotations[joint]
+                rows = len(curve_times)
+                time_bytes = np.asarray(curve_times, dtype='<f4').tobytes()
+                value_bytes = np.asarray(curve_values, dtype='<f4').tobytes()
+                found.add(joint)
+            else:
+                time_bytes = raw[times:times + rows * 4]
+                value_bytes = raw[values:values + rows * columns * 4]
+            time_index = len(data) // 4
+            data.extend(time_bytes)
+            value_index = len(data) // 4
+            data.extend(value_bytes)
+            if max(rows, time_index, value_index) >= 65536:
+                raise ValueError('Rifle motion exceeds native controller index capacity')
+            key = bytearray(raw[old_keys + index * 12:old_keys + (index + 1) * 12])
+            struct.pack_into('<HHH', key, 4, rows, time_index, value_index)
+            keys.append(key)
+        data_pointer, key_pointer = append(data), append(b''.join(keys))
+        struct.pack_into('<III', output, offset + 84, key_pointer, len(keys), len(keys))
+        struct.pack_into('<III', output, offset + 96, data_pointer, len(data) // 4, len(data) // 4)
+    if found != set(rotations):
+        raise ValueError('Rifle motion requires existing native quaternion controllers')
+    root = model.clips[clip][1][0][4]
+    output[root + 32:root + 64] = root_name.encode('ascii').ljust(32, b'\0')
+    struct.pack_into('<I', output, 4, len(output) - 12)
+    return Model(bytes(output) + raw[end:])
+
+
+def equipped_idle_model(record, original, fitted):
+    """Keep the complete stock base idle, replacing only six fitted arm rotations."""
+    base = base_idle(record)
+    duration, nodes = fitted.clips['xbowr']
+    rotations = {n: ([float(np.float32(t * base.clips['pause1'][0] / duration)) for t in controllers[20][0]],
+                     controllers[20][1]) for n, _, _, controllers, _ in nodes if n in EQUIPPED_IDLE_JOINTS}
+    if set(rotations) != EQUIPPED_IDLE_JOINTS:
+        raise ValueError('Equipped rifle idle requires all six fitted arm controllers')
+    native_parts = {n: part for n, _, part, _, _ in original.nodes}
+    for joint, _, part, _, _ in base.clips['pause1'][1]:
+        if joint != record['baseIdle']['model'] and native_parts.get(joint) != part:
+            raise ValueError('Stock equipped idle native binding differs: ' + joint)
+    return patch_clip_rotations(base, 'pause1', rotations, original.nodes[0][0])
+
+
+def ability_source(record):
+    source = record['abilitySource']
+    expected = 'ab_a_' + ('fa' if record['body'][1] == 'f' else 'ba') + '_002'
+    if source['model'] != expected:
+        raise ValueError('Rifle ability requires the matching authored body source')
+    raw = pinned_source(source['blob'])
+    if hashlib.sha256(raw).hexdigest() != source['sha256']:
+        raise ValueError('Pinned rifle ability source changed')
+    model = Model(raw)
+    if not {'sw_aimedshot', 'sw_aimedshot_in', 'sw_aimedshot_out'} <= model.clips.keys():
+        raise ValueError('Rifle ability requires all native playback phases')
+    return model
+
+
+def validate_abilities(record):
+    source = ability_source(record)
+    expected = {m['name'][:-1] + 'a' for m in record['motions'] if m['sourceClip'] == 'xbowr'}
+    seen = set()
+    allowed = EQUIPPED_IDLE_JOINTS | {'rhand'}
+    nodes = {n: c for n, _, _, c, _ in source.clips['sw_aimedshot'][1]}
+    for motion in record['abilities']:
+        name = motion['name']
+        if name not in expected or name in seen or len(name) > 12 or motion['sourceClip'] != 'sw_aimedshot':
+            raise ValueError('Every fitted rifle requires one qualified Aimed Shot clip')
+        seen.add(name)
+        if set(motion['rotations']) != allowed:
+            raise ValueError('Rifle abilities may author only six arm rotations and the weapon hook')
+        for joint, curve in motion['rotations'].items():
+            times, values = np.asarray(curve['times'], float), np.asarray(curve['values'], float)
+            if joint not in nodes or 20 not in nodes[joint] or times.ndim != 1 or not len(times) or values.shape != (len(times), 4):
+                raise ValueError('Rifle ability quaternion keys have an invalid shape or native binding')
+            if not np.isfinite(times).all() or not np.isfinite(values).all():
+                raise ValueError('Rifle ability quaternion keys must be finite')
+            if (np.diff(times) <= 0).any() or times[0] < 0 or times[-1] > source.clips['sw_aimedshot'][0] + 1e-6:
+                raise ValueError('Rifle ability quaternion times must increase within the clip')
+            if np.max(np.abs(np.linalg.norm(values, axis=1) - 1)) > 1e-5:
+                raise ValueError('Rifle ability rotation keys must be unit quaternions')
+        hook = np.asarray(motion['rotations']['rhand']['values'], float)
+        basis = np.frombuffer(idle_hook_quaternion(baseline(record)), dtype='<f4')
+        differences = np.minimum(np.linalg.norm(hook - basis, axis=1), np.linalg.norm(hook + basis, axis=1))
+        if np.max(differences) > 1e-6:
+            raise ValueError('Rifle ability hook must retain the pinned idle basis')
+    if seen != expected:
+        raise ValueError('Every fitted rifle requires one qualified Aimed Shot clip')
+
+
 def sources(record):
     original = baseline(record)
     validate_motions(record, original)
     clips = [(name, original, name) for name in hold.CLIPS]
-    clips += [(motion['name'], profile_model(original, motion), motion['sourceClip'])
-              for motion in record['motions']]
+    for motion in record['motions']:
+        fitted = profile_model(original, motion)
+        clips.append((motion['name'], fitted, motion['sourceClip']))
+        if motion['sourceClip'] == 'xbowr':
+            clips.append((motion['name'][:-1] + 'b', equipped_idle_model(record, original, fitted), 'pause1'))
+    validate_abilities(record)
+    source = ability_source(record)
+    for motion in record['abilities']:
+        rotations = {n: (c['times'], c['values']) for n, c in motion['rotations'].items()}
+        clips.append((motion['name'], patch_clip_rotations(source, 'sw_aimedshot', rotations, original.nodes[0][0]),
+                      'sw_aimedshot'))
+        for suffix in ('_in', '_out'):
+            source_clip = 'sw_aimedshot' + suffix
+            clips.append((motion['name'] + suffix, patch_clip_rotations(source, source_clip, {}, original.nodes[0][0]),
+                          source_clip))
     return original, sorted(clips, key=lambda item: item[0])
 
 
@@ -167,6 +309,16 @@ def ascii_source(record, original, clips):
     lines.append(f'endmodelgeom {name}')
     for clip_name, model, source_clip in clips:
         emitted = hold.clip_lines({'source': model, 'clip': source_clip, 'tracks': {}, 'owner': name}, name)
+        root_controllers = model.clips[source_clip][1][0][3]
+        if set(root_controllers) - {8, 20}:
+            raise ValueError('Unexpected rifle animation root controller')
+        root_tracks = []
+        for kind, label in ((8, 'position'), (20, 'orientation')):
+            if kind in root_controllers:
+                times, values = root_controllers[kind]
+                root_tracks += hold.key_lines(label, [(t, *(hold.axis_angle(v) if kind == 20 else v))
+                                                     for t, v in zip(times, values)])
+        emitted[emitted.index('  endnode'):emitted.index('  endnode')] = root_tracks
         emitted[0], emitted[-1] = f'newanim {clip_name} {name}', f'doneanim {clip_name} {name}'
         lines += emitted
     lines.append(f'donemodel {name}')
@@ -250,6 +402,7 @@ def main():
         for record in manifest['models']:
             original = baseline(record)
             validate_motions(record, original)
+            validate_abilities(record)
             target = ROOT / record['output']
             if not target.is_file() or hashlib.sha256(target.read_bytes()).hexdigest() != record['outputSha256']:
                 raise ValueError('Owned rifle profile bank is missing or stale: ' + record['output'])

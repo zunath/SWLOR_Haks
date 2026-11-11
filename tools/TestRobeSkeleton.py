@@ -61,7 +61,9 @@ class IndependentRobeSkeletonTests(unittest.TestCase):
         geometry = node("rootdummy", "body") + node("torso_g", "rootdummy")
         geometry += node("lbicep_g", "torso_g")
         body_clips, garment_clips = "", ""
-        for index, (suffix, original) in enumerate((("i", "xbowr"), ("r", "xbowrdy"), ("s", "xbowshot"))):
+        for index, (suffix, original) in enumerate((("i", "xbowr"), ("r", "xbowrdy"), ("s", "xbowshot"), ("b", "pause1"),
+                                                   ("a", "sw_aimedshot"), ("a_in", "sw_aimedshot_in"),
+                                                   ("a_out", "sw_aimedshot_out"))):
             ordinary = node("body", "null") + node("rootdummy", "body")
             ordinary += node("torso_g", "rootdummy")
             ordinary += node("lbicep_g", "torso_g", f"orientation 1 0 0 {0.1 + index}")
@@ -95,7 +97,7 @@ class IndependentRobeSkeletonTests(unittest.TestCase):
                 _, names = families.body_root("garment", "wearer", "bridge")
                 motions = {m[1]: m for m in anim.ANIMATION.finditer(families.bridge(key, "bridge").decode())}
                 self.assertNotIn("rf999_999_i", motions)
-                for index, suffix in enumerate("irs"):
+                for index, suffix in enumerate(("i", "r", "s", "b", "a", "a_in", "a_out")):
                     motion = motions[f"rf267_101_{suffix}"]
                     tracks = {n: p for _, n, p in mdl.parse_nodes(motion[3])}
                     self.assertEqual(["1", "0", "0", str(0.4 + index)], tracks["lbicep_g"]["orientation"])

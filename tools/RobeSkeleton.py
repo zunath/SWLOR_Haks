@@ -230,7 +230,7 @@ class Families:
         # to the target wearer; their cloth is copied from the corresponding
         # stock rifle role in clip_tracks, never from a foreign body's RF clip.
         garment_clips = {clip: source for clip, source in garment_clips.items()
-                         if not re.fullmatch(r"rf[a-z0-9_]{1,12}_[irs]", clip)}
+                         if not re.fullmatch(r"rf[a-z0-9_]{1,12}_(?:[irsb]|a(?:_in|_out)?)", clip)}
         resolved = {**body_clips, **garment_clips}
         # The carry suppression overlay is deliberately controller-free. It is
         # inherited from the common tail, so it must not version every garment
@@ -362,9 +362,10 @@ class Families:
         # Qualified rifle profiles change the wearer's support arm and right wrist. A coat
         # inherits those names from the body bank, but still needs its own
         # original idle/ready/shot cloth curves on the matching garment rig.
-        profile = re.fullmatch(r"rf[a-z0-9_]{1,12}_([irs])", clip)
+        profile = re.fullmatch(r"rf[a-z0-9_]{1,12}_([irsb]|a(?:_in|_out)?)", clip)
         if profile and body_source is not None and owner == body_owner:
-            original = {"i": "xbowr", "r": "xbowrdy", "s": "xbowshot"}[profile[1]]
+            original = {"i": "xbowr", "r": "xbowrdy", "s": "xbowshot", "b": "pause1",
+                        "a": "sw_aimedshot", "a_in": "sw_aimedshot_in", "a_out": "sw_aimedshot_out"}[profile[1]]
             if original not in group["clips"]:
                 raise ValueError(f"{base}/{clip}: missing original rifle garment clip {original}")
             owner, source = group["clips"][original]
