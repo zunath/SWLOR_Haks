@@ -46,6 +46,9 @@ def baseline(record):
 
 
 def validate_motions(record, original):
+    if record.get('profileHookBasis') != 'idle':
+        raise ValueError('Rifle profiles require the pinned idle hook basis')
+    idle_hook_quaternion(original)
     seen, groups = set(), {}
     for motion in record['motions']:
         name, source_clip = motion['name'], motion['sourceClip']
@@ -75,8 +78,24 @@ def validate_motions(record, original):
         raise ValueError('Every rifle profile requires idle, ready and shot motion')
 
 
+def idle_hook_quaternion(original):
+    """Use the pinned idle attachment basis, without permitting authored hook keys."""
+    defaults = next(n[3] for n in original.nodes if n[0] == 'rhand')
+    idle = next(n[3] for n in original.clips['xbowr'][1] if n[0] == 'rhand')
+    curve = idle.get(20, defaults.get(20))
+    if curve is None:
+        raise ValueError('Pinned idle hook requires an orientation')
+    values = np.asarray(curve[1], dtype='<f4')
+    if (values.ndim != 2 or values.shape[1] != 4 or not len(values)
+            or not np.isfinite(values).all()
+            or not np.array_equal(values, np.tile(values[0], (len(values), 1)))
+            or abs(np.linalg.norm(values[0]) - 1) > 1e-5):
+        raise ValueError('Pinned idle hook orientation must be constant and unit')
+    return values[0].tobytes()
+
+
 def profile_model(original, motion):
-    """Copy one source clip, replacing only its explicitly owned rotation curves."""
+    """Copy owned rotations and normalize the custom ready/shot attachment basis."""
     raw = original.data
     output = bytearray(raw)
     def append(data):
@@ -84,14 +103,21 @@ def profile_model(original, motion):
         pointer = len(output) - 12
         output.extend(data)
         return pointer
+    hook_value = idle_hook_quaternion(original)
     for joint, _, _, _, offset in original.clips[motion['sourceClip']][1]:
-        if joint not in motion['rotations']:
+        normalize_hook = joint == 'rhand' and motion['sourceClip'] != 'xbowr'
+        if joint not in motion['rotations'] and not normalize_hook:
             continue
-        curve = motion['rotations'][joint]
+        curve = motion['rotations'].get(joint)
         key_pointer = 12 + struct.unpack_from('<I', raw, offset + 84)[0]
         keys, data = [], bytearray()
         for index, (kind, rows, times, values, columns, _) in enumerate(hold.raw_controllers(raw, offset)):
-            if kind == 20:
+            if kind == 20 and normalize_hook:
+                if columns != 4:
+                    raise ValueError('Rifle hook orientation must be a quaternion')
+                time_bytes = raw[times:times + rows * 4]
+                value_bytes = hook_value * rows
+            elif kind == 20:
                 rows = len(curve['times'])
                 time_bytes = np.asarray(curve['times'], dtype='<f4').tobytes()
                 value_bytes = np.asarray(curve['values'], dtype='<f4').tobytes()

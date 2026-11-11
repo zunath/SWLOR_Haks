@@ -11,7 +11,7 @@ class RifleGripProfileTests(unittest.TestCase):
     def setUpClass(cls):
         cls.manifest = json.loads(profiles.MANIFEST.read_text())
 
-    def test_owned_profiles_preserve_defaults_stock_motion_and_every_hook_track(self):
+    def test_owned_profiles_preserve_defaults_stock_and_unowned_tracks(self):
         self.assertEqual(3, len(self.manifest['models']))
         profile_count = 0
         for record in self.manifest['models']:
@@ -29,12 +29,32 @@ class RifleGripProfileTests(unittest.TestCase):
                         after = model.clips[clip][1]
                         self.assertEqual([(n, p, i) for n, p, i, _, _ in before], [(n, p, i) for n, p, i, _, _ in after])
                         for (joint, _, _, old, _), (_, _, _, new, _) in zip(before, after):
-                            exclude_rotation = clip == source_clip and joint in profiles.ALLOWED_JOINTS
+                            normalize_hook = clip == source_clip and clip != 'xbowr' and joint == 'rhand'
+                            exclude_rotation = clip == source_clip and (joint in profiles.ALLOWED_JOINTS or normalize_hook)
                             self.assertEqual({k: v for k, v in old.items() if not exclude_rotation or k != 20},
                                              {k: v for k, v in new.items() if not exclude_rotation or k != 20})
-                            if joint in ('rhand', 'lhand'):
+                            if joint == 'lhand' or (joint == 'rhand' and not normalize_hook):
                                 self.assertEqual(old, new)
+                            if normalize_hook:
+                                self.assertEqual(old[20][0], new[20][0])
+                                expected = profiles.np.frombuffer(profiles.idle_hook_quaternion(original), dtype='<f4')
+                                self.assertTrue(profiles.np.array_equal(new[20][1], profiles.np.tile(expected, (len(old[20][1]), 1))))
         self.assertEqual(18, profile_count)
+
+    def test_only_the_pinned_idle_hook_basis_is_supported(self):
+        for value in (None, 'ready', [0., 0., 0., 1.]):
+            record = copy.deepcopy(self.manifest['models'][0])
+            record['profileHookBasis'] = value
+            with self.subTest(value=value), self.assertRaisesRegex(ValueError, 'pinned idle hook basis'):
+                profiles.validate_motions(record, profiles.baseline(record))
+
+    def test_varying_idle_hook_cannot_be_normalized_implicitly(self):
+        record = self.manifest['models'][0]
+        original = copy.deepcopy(profiles.baseline(record))
+        idle = next(n[3] for n in original.clips['xbowr'][1] if n[0] == 'rhand')
+        idle[20] = ((0., 1.), [(0., 0., 0., 1.), (0., 0., 1., 0.)])
+        with self.assertRaisesRegex(ValueError, 'constant and unit'):
+            profiles.idle_hook_quaternion(original)
 
     def test_weapon_hooks_cannot_be_authored_as_profile_rotations(self):
         record = copy.deepcopy(self.manifest['models'][0])
