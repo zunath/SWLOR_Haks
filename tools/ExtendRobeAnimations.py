@@ -8,6 +8,7 @@ import argparse
 import gc
 import hashlib
 import json
+import re
 from pathlib import Path
 import subprocess
 import struct
@@ -313,6 +314,25 @@ def check_installed(manifest, game_data):
     baseline = GitBlobs(record["baseline"])
     try:
         prior = json.loads(baseline.read("tools/RobeRgbModels.json"))
+        rifle_program = record.get("owner") == "RobeRifleProfiles"
+        if rifle_program:
+            import RobeRifleProfiles
+            recipe = json.loads((robes.ROOT / "tools/RobeRifleProfiles.json").read_text())
+            expected_heads = {head for head in prior["animation_bank_sets"]
+                              if re.fullmatch(r"p[fm][hedo]_ra[0-9]{3}", head)}
+            expected_parents = {item["sourceHead"]: item["head"] for item in recipe["models"]}
+            if (set(record["parents"]) != expected_heads or expected_parents != record["parents"] or
+                    len(recipe["models"]) != len(expected_heads) or
+                    {item["head"] for item in recipe["sources"]} != expected_heads):
+                raise ValueError("Rifle extension must preserve every current and retained playable robe head")
+            rebuilt = set()
+            for item, outputs, _ in RobeRifleProfiles.rebuild(recipe, robes.ROOT):
+                for path, data in outputs.items():
+                    if (robes.ROOT / path).read_bytes() != data:
+                        raise ValueError("Installed rifle layer differs from its pinned body and own-cloth program")
+                rebuilt.add(item["sourceHead"])
+            if rebuilt != expected_heads:
+                raise ValueError("Rifle extension omitted an owned robe program")
         for path in record["preserved_body_clips"]:
             verify_body_additions(baseline.read(path), (robes.ROOT / path).read_bytes(), wanted)
         def load(name):
@@ -326,7 +346,17 @@ def check_installed(manifest, game_data):
             if before != robes.owned_animation_bytes(old, manifest, active):
                 raise ValueError(f"Existing animation bank changed: {old}")
             installed = robes.owned_animation_bytes(new, manifest, active)
-            if installed != make_layer(before, installed, wanted, new):
+            if rifle_program:
+                # Exact public reproduction above proves the intentional RF
+                # overrides, including own-cloth provenance and native body IDs.
+                old_bank, layer = banks.CompiledBridge(before), banks.CompiledBridge(installed)
+                if set(layer.clip_names) != wanted:
+                    raise ValueError("Rifle extension differs from its complete profile inventory")
+                expected = old_bank.pack(new, old, layer.clips)
+                animations.validate_animation_parts(installed)
+            else:
+                expected = make_layer(before, installed, wanted, new)
+            if installed != expected:
                 raise ValueError(f"Installed extension has unexpected metadata: {new}")
             library = poses.Library(load)
             scoped = SimpleNamespace(model=library.model, owners=library.owners,

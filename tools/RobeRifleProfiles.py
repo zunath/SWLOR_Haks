@@ -160,7 +160,7 @@ def robe_templates(before, load=None):
     return result
 
 def build_layer(before, fitted_body, name, load=None, *, native_body=None):
-    """Build a new layer inheriting the unchanged prior head and every old clip."""
+    """Supply current RF clips above the unchanged prior head and ordinary clips."""
     old, body = banks.CompiledBridge(before), banks.CompiledBridge(fitted_body)
     if not re.fullmatch(r"p[fm][hedo]_ra[0-9]{3}", name) or name == old.name:
         raise ValueError("A robe rifle layer requires a fresh playable bank name")
@@ -171,7 +171,7 @@ def build_layer(before, fitted_body, name, load=None, *, native_body=None):
     geometry = poses.Model(before, False)
     native_geometry = poses.Model(native_body, False)
     templates = robe_templates(before, load)
-    output, inherited, ignored = {}, [], set()
+    output, overridden, ignored = {}, [], set()
     for clip_name, component in zip(body.clip_names, body.clips):
         match = PROFILE.fullmatch(clip_name)
         if match is None:
@@ -179,16 +179,17 @@ def build_layer(before, fitted_body, name, load=None, *, native_body=None):
                 raise ValueError("Invalid rifle profile clip: " + clip_name)
             continue
         if clip_name in templates:
-            inherited.append(clip_name)
-            continue
-        template_name = TEMPLATES[match[1]]
+            overridden.append(clip_name)
+        # Existing RF clips can predate normalized hook tracks. Supply the
+        # complete current body program above them, keeping their own cloth.
+        template_name = clip_name if clip_name in templates else TEMPLATES[match[1]]
         if template_name not in templates:
             raise ValueError(old.name + " lacks the own-cloth template " + template_name)
         output[clip_name], omitted = fitted_clip(
             templates[template_name], component, geometry, native_geometry, old.name)
         ignored.update(omitted)
     if not output:
-        raise ValueError("The fitted rifle body adds no new robe clips")
+        raise ValueError("The fitted rifle body supplies no rifle profile clips")
     layer = old.pack(name, old.name, [output[key] for key in sorted(output)])
     actual = banks.CompiledBridge(layer)
     if (actual.parent != old.name or
@@ -199,7 +200,7 @@ def build_layer(before, fitted_body, name, load=None, *, native_body=None):
     import RobeAnimations
     RobeAnimations.validate_animation_parts(layer)
     return layer, {"sourceHead": old.name, "layer": name, "addedClips": len(output),
-                   "inheritedRifleClips": sorted(inherited),
+                   "overriddenRifleClips": sorted(overridden),
                    "ignoredUnboundBodyHelpers": sorted(ignored)}
 
 def rebuild(manifest, root):

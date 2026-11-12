@@ -79,6 +79,33 @@ class RobeRifleProfileTests(unittest.TestCase):
         self.assertEqual(expected_header[112:120], actual_header[112:120])
         self.assertEqual(expected_events, actual_events)
 
+    def test_stale_rifle_clip_is_overridden_and_keeps_its_own_cloth(self):
+        prior = banks.CompiledBridge(self.before)
+        header, events, root = native.read_clip(prior.clips[0])
+        changed = bytearray(header)
+        changed[8:72] = b"rf1_101_i".ljust(64, b"\0")
+        stale_nodes = owner.nodes(root)
+        stale_nodes["arm"].keys = self.arm_keys
+        stale_nodes["arm"].values = struct.pack("<10f", 0, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+        cloth = stale_nodes["rg_tail"]
+        last = struct.unpack_from("<f", cloth.values, len(cloth.values) - 4)[0]
+        cloth.values = cloth.values[:-4] + struct.pack("<f", last + 1e-6)
+        stale = native.write_clip(bytes(changed), events, root, prior.name)
+        before = prior.pack(prior.name, prior.parent, [stale, prior.clips[0]])
+        immutable = bytes(before)
+        layer, proof = owner.build_layer(before, self.body, "pmh_ra002", native_body=self.native_body)
+        actual = banks.CompiledBridge(layer)
+        self.assertEqual(["rf1_101_i"], actual.clip_names)
+        self.assertEqual(["rf1_101_i"], proof["overriddenRifleClips"])
+        _, _, result = native.read_clip(actual.clips[0])
+        nodes = owner.nodes(result)
+        self.assertEqual(self.arm_keys, nodes["arm"].keys)
+        self.assertEqual(self.arm_values, nodes["arm"].values)
+        self.assertEqual(cloth.keys, nodes["rg_tail"].keys)
+        self.assertEqual(cloth.values, nodes["rg_tail"].values)
+        self.assertEqual(immutable, before)
+        self.assertEqual(["rf1_101_i", "xbowr"], banks.CompiledBridge(before).clip_names)
+
     def test_retained_layer_resolves_own_template_from_unchanged_robe_ancestor(self):
         original = banks.CompiledBridge(self.before)
         intermediate = original.pack("pmh_ra002", original.name, [])
