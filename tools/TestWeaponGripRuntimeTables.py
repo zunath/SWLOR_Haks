@@ -1,9 +1,12 @@
 """Runtime selection coverage and native resource guards for qualified gun grips."""
 import math
+import json
+import struct
 from pathlib import Path
 import re
 import unittest
 from RobePoseAudit import Model
+from RifleProfileArchives import part_records
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -61,19 +64,37 @@ class WeaponGripRuntimeTablesTests(unittest.TestCase):
         self.assertTrue(all(math.isfinite(v) for fit in self.fits.values() for v in fit))
 
     def test_selected_rifle_profiles_have_every_motion_and_both_owned_placements(self):
-        for row in table('riflegrips'):
+        clips_by_body = {}
+        manifest = json.loads((ROOT / 'tools/RifleGripProfileMotions.json').read_text())
+        for record in manifest['models']:
+            clips = {}
+            parts = part_records(record)
+            for index, part in enumerate(parts):
+                data = (ROOT / part['output']).read_bytes()
+                bank = Model(data, read_clips=False)
+                if index + 1 < len(parts):
+                    self.assertEqual(Path(parts[index + 1]['output']).stem, bank.parent)
+                for clip_index in range(bank.uint(136)):
+                    offset = 12 + bank.uint(12 + bank.uint(132) + clip_index * 4)
+                    name = data[offset + 8:offset + 72].split(b'\0', 1)[0].decode().lower()
+                    self.assertNotIn(name, clips, record['body'])
+                    clips[name] = struct.unpack_from('<f', data, offset + 112)[0]
+            clips_by_body[record['body']] = clips
+        rows = table('riflegrips')
+        self.assertEqual(6480, len(rows))
+        for row in rows:
             right, left, model = row['RIGHT'].lower(), row['LEFT'].lower(), int(row['MODEL'])
             self.assertEqual(right[:4], left[:4])
-            bank = Model((ROOT / 'sw_cr_creature' / ('a_rfl_' + right[:4] + '.mdl')).read_bytes())
+            clips = clips_by_body[right[:4]]
             idle = row['IDLE']
             prefix = idle[:-1]
             for role, column in (('i', 'IDLE'), ('r', 'READY'), ('s', 'SHOT')):
                 self.assertEqual(prefix + role, row[column])
             for suffix in ('i', 'r', 's', 'b', 'a', 'a_in', 'a_out'):
-                self.assertIn(prefix + suffix, bank.clips)
+                self.assertIn(prefix + suffix, clips)
             for hold in ('RifleIdle', 'RifleReady'):
                 self.assertIn((right, model, hold), self.fits)
-            self.assertAlmostEqual(1.79999995, bank.clips[prefix + 'a'][0], places=6)
+            self.assertAlmostEqual(1.79999995, clips[prefix + 'a'], places=6)
 
 
 if __name__ == '__main__':

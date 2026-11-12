@@ -9,6 +9,7 @@ import unittest
 from unittest.mock import patch
 import GenerateRifleGripProfiles as owner
 import RifleProfileArchives as archives
+import RobeAnimationBanks as banks
 
 class RifleProfileArchiveTests(unittest.TestCase):
     def setUp(self):
@@ -61,6 +62,15 @@ class RifleProfileArchiveTests(unittest.TestCase):
     def verify_native_reproduction(self, all_profiles):
         manifest = json.loads(owner.MANIFEST.read_text())
         record = copy.deepcopy(next(row for row in manifest['models'] if row['body'] == 'pfe0'))
+        # Reproduce the original inline programs from either a flat or partitioned
+        # installed bank. New production archives stay outside this small fixture.
+        installed_parts = [(owner.ROOT / part['output']).read_bytes() for part in archives.part_records(record)]
+        installed = banks.CompiledBridge(banks.join(installed_parts))
+        selected = set(owner.hold.CLIPS) | archives.profile_names(record)
+        expected = bytes(installed.pack(installed.name, installed.parent,
+            [component for name, component in zip(installed.clip_names, installed.clips) if name in selected]))
+        record['outputSha256'] = hashlib.sha256(expected).hexdigest()
+        record.pop('bankParts', None)
         first = next(motion['name'][:-1] for motion in record['motions'] if motion['sourceClip'] == 'xbowr')
         self.payload = {'body': 'pfe0',
                         'motions': [motion for motion in record['motions'] if all_profiles or motion['name'].startswith(first)],
@@ -72,7 +82,7 @@ class RifleProfileArchiveTests(unittest.TestCase):
         read_archive = archives.archive_record
         with patch.object(archives, 'archive_record', side_effect=lambda row, archive, root: read_archive(row, archive, self.root)):
             generated = owner.build(manifest, self.root / 'build', Path(r'C:/Program Files (x86)/Steam/steamapps/common/Neverwinter Nights'))
-        self.assertEqual(generated[record['output']], (owner.ROOT / record['output']).read_bytes())
+        self.assertEqual(generated[record['output']], expected)
 
 if __name__ == '__main__':
     unittest.main()

@@ -4,12 +4,34 @@ import json
 import unittest
 from unittest.mock import Mock, patch
 import GenerateRifleGripProfiles as profiles
+import RifleProfileArchives as archives
 
 
 class RifleGripProfileTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.manifest = json.loads(profiles.MANIFEST.read_text())
+        cls.full_manifest = json.loads(profiles.MANIFEST.read_text())
+        # Preserve the six original inline programs as native invariant fixtures.
+        # The complete ten-body inventory is guarded independently below.
+        cls.manifest = {**cls.full_manifest, 'models': [record for record in cls.full_manifest['models']
+                                                     if record['motions']]}
+
+    def test_complete_archive_inventory_covers_every_playable_body_and_profile(self):
+        expected_bodies = {'p' + gender + species + '0' for gender in 'fm' for species in 'hedoz'}
+        self.assertEqual(expected_bodies, {record['body'] for record in self.full_manifest['models']})
+        self.assertEqual(10, len(self.full_manifest['models']))
+        total = 0
+        for record in self.full_manifest['models']:
+            names = set()
+            for group in archives.records(record, profiles.ROOT):
+                added = archives.profile_names(group)
+                self.assertFalse(names & added, record['body'])
+                names.update(added)
+            expected = 1512 if record['body'][2] == 'z' else 432
+            self.assertEqual(expected * 7, len(names), record['body'])
+            self.assertEqual(expected, sum(name.endswith('_i') for name in names), record['body'])
+            total += expected
+        self.assertEqual(6480, total)
 
     def test_owned_profiles_preserve_defaults_stock_and_unowned_tracks(self):
         self.assertEqual(3, len(self.manifest['models']))
