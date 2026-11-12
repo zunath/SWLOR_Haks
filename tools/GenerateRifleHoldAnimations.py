@@ -207,7 +207,12 @@ class Library:
     def inherited_parent(self, root: str) -> str:
         """The supermodel a root inherited before its rifle bank was spliced in."""
         parent = mdl.supermodel(self.data(root))
-        if parent == bank_name(root):
+        head = bank_name(root)
+        seen = set()
+        while parent == head or re.fullmatch(re.escape(head) + r"_b\d{2,4}", parent or ""):
+            if parent in seen:
+                raise ValueError("Cyclic owned rifle animation bank chain")
+            seen.add(parent)
             parent = mdl.supermodel(self.data(parent))
         return parent
 

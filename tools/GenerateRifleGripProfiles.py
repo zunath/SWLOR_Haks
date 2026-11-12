@@ -12,6 +12,8 @@ from pathlib import Path
 import re
 import struct
 import subprocess
+import sys
+import RifleProfileArchives as archives
 import tempfile
 import numpy as np
 import CleanModels
@@ -424,6 +426,24 @@ def restore_native(binary, original, clips):
     return bytes(output)
 
 
+
+def compile_record(record, stage, game_dir, source_pair=None):
+    """Compile one bounded authored group and restore every source float and part ID."""
+    stage.mkdir(parents=True, exist_ok=True)
+    original, clips = source_pair if source_pair is not None else sources(record)
+    path = stage / Path(record['output']).name
+    path.write_text(ascii_source(record, original, clips), encoding='ascii')
+    binary = stage / 'binary'
+    binary.mkdir(exist_ok=True)
+    CleanModels.run(CleanModels.find_compiler(), stage, 'compile', [path], binary,
+                    'compile-' + record['body'] + '.log', game_dir=game_dir)
+    target = binary / path.name
+    raw = restore_native(target.read_bytes(), original, clips)
+    target.write_bytes(raw)
+    CleanModels.validate_binary(target)
+    return raw
+
+
 def build(manifest, stage, game_dir):
     if manifest['compilerSha256'] != CleanModels.COMPILER_SHA256:
         raise ValueError('Rifle profiles require the pinned native compiler')
@@ -439,6 +459,10 @@ def build(manifest, stage, game_dir):
     output.mkdir(exist_ok=True)
     compiler = CleanModels.find_compiler()
     for record in manifest['models']:
+        if record.get('profileArchives'):
+            generated.update(archives.build_record(record, stage / record['body'], game_dir, sys.modules[__name__],
+                                                   [stage / item['name'] for item in manifest['dependencies']]))
+            continue
         original, clips = sources(record)
         path = stage / Path(record['output']).name
         path.write_text(ascii_source(record, original, clips), encoding='ascii')
@@ -463,6 +487,9 @@ def main():
     manifest = json.loads(MANIFEST.read_text())
     if args.check:
         for record in manifest['models']:
+            if record.get('profileArchives'):
+                archives.verify_installed(record, sys.modules[__name__])
+                continue
             original = baseline(record)
             validate_motions(record, original)
             validate_abilities(record)

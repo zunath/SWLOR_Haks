@@ -246,22 +246,35 @@ def validate_animation_bank_ownership(names, manifest, active):
                 raise ValueError(f"Occupied animation bank is not a verified prior output: {path}")
 
 
-def package_animation_models(stage, heads, generated_names, manifest, active, body_library=None):
+def prepare_animation_models(stage, heads, body_library):
+    """Restore final cloth/body tracks before auditing the motion that will be installed."""
+    if heads and body_library is None:
+        raise ValueError("Preparing animation bridges requires their body animation library")
+    changed = {}
+    for head in sorted(heads):
+        path = stage / "binary" / f"{head}.mdl"
+        data, cloth = emote_motion.fill(path.read_bytes())
+        data, attachments = body_tracks.restore(data, body_library)
+        path.write_bytes(data)
+        changed[head] = {"emote_clips": len(cloth), "body_attachment_clips": len(attachments)}
+    return changed
+
+
+def package_animation_models(stage, heads, generated_names, manifest, active, body_library=None, *, prepared=False):
     """Package validated compiler output losslessly after all pose and skin audits.
 
     `body_library` resolves each bridge's body chain for the restored attachment tracks.
     """
     if heads and body_library is None:
         raise ValueError("Packaging animation bridges requires their body animation library")
+    if not prepared:
+        prepare_animation_models(stage, heads, body_library)
     result = set(generated_names)
     records = dict(manifest.get("animation_bank_sets", {}))
     for head in sorted(heads):
         path = stage / "binary" / f"{head}.mdl"
-        # Emote clips without cloth tracks get the derived drape after every audit.
-        original, _ = emote_motion.fill(path.read_bytes())
-        # So do the body attachment tracks that part-ID mapping drops (belt sway).
-        original, _ = body_tracks.restore(original, body_library)
-        path.write_bytes(original)
+        # The audited flat program is the exact program that gets partitioned.
+        original = path.read_bytes()
         parts = banks.split(original)
         names = list(parts)
         if not names or names[0] != head or any(name in result for name in names[1:]):
@@ -1024,6 +1037,8 @@ def main():
                                                 families.member_binds[original_robes[name]])
         except ValueError as error:
             failures.append({"model": name, "error": str(error)})
+    if not failures:
+        prepare_animation_models(stage, animation_cache.values(), original_library)
     def load_binary(name):
         if name in reference_bodies:
             return reference_bodies[name]
@@ -1080,7 +1095,7 @@ def main():
     if failures:
         raise ValueError(f"{len(failures)} round-trip failures: {failures[:10]}")
     packaged_names, bank_sets = package_animation_models(
-        stage, animation_cache.values(), sources, prior_manifest, active, original_library)
+        stage, animation_cache.values(), sources, prior_manifest, active, original_library, prepared=True)
     # Cache provenance describes the validated output as installed: compiler bytes,
     # plus emote drape tracks and restored body attachment tracks on bridges. Packaging changes only the file layout;
     # joining verified banks recovers these exact bytes.
