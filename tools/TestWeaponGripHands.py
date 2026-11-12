@@ -224,7 +224,7 @@ class OwnSourceDroidGripTests(unittest.TestCase):
                                   (grip.ROOT / entry['output']).read_bytes()))
 
     def test_native_payloads_reproduce_from_pinned_own_source_geometry(self):
-        self.assertEqual(84, len(self.cases))
+        self.assertEqual(164, len(self.cases))
         for recipe, entry, original, selected in self.cases:
             with self.subTest(hand=entry['output']):
                 self.assertEqual(original, (grip.ROOT / entry['source']).read_bytes())
@@ -278,7 +278,7 @@ class ImportedMechanicalGripTests(unittest.TestCase):
     def test_every_selected_mechanical_payload_rebuilds_from_its_original_source(self):
         counts = {kind: sum(recipe['kind'] == kind for recipe, _, _, _ in self.cases)
                   for kind in ('ownSourceDroidCorrection', 'ownSourceJointPose', 'ownSourceRigid')}
-        self.assertEqual({'ownSourceDroidCorrection': 12, 'ownSourceJointPose': 12, 'ownSourceRigid': 8}, counts)
+        self.assertEqual({'ownSourceDroidCorrection': 14, 'ownSourceJointPose': 18, 'ownSourceRigid': 10}, counts)
         for recipe, entry, original, selected in self.cases:
             with self.subTest(hand=entry['output']):
                 self.assertEqual(original, (grip.ROOT / entry['source']).read_bytes())
@@ -319,7 +319,7 @@ class ImportedMechanicalGripTests(unittest.TestCase):
     def test_each_generated_hand_has_exactly_one_owner(self):
         outputs = [entry['output'] for recipe in json.loads(grip.MANIFEST.read_text())['recipes']
                    for entry in recipe['models']]
-        self.assertEqual(510, len(outputs))
+        self.assertEqual(1663, len(outputs))
         self.assertEqual(len(outputs), len(set(outputs)))
         import subprocess
         tracked = set(subprocess.check_output(['git', '-C', str(grip.ROOT), 'ls-files'], text=True).splitlines())
@@ -339,7 +339,7 @@ class AuthoredHandGripTests(unittest.TestCase):
                      if q.get('kind') == 'ownSourceAuthored' for e in q['models']]
 
     def test_own_source_sculpts_reproduce_reviewed_hands_and_preserve_authored_buffers(self):
-        self.assertEqual(4, len(self.cases))
+        self.assertEqual(1067, len(self.cases))
         for recipe, entry, original, output in self.cases:
             with self.subTest(hand=entry['output']):
                 self.assertEqual(original, (grip.ROOT / entry['source']).read_bytes())
