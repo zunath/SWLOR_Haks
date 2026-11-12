@@ -140,7 +140,7 @@ class RifleGripProfileTests(unittest.TestCase):
         record = copy.deepcopy(self.manifest['models'][0])
         curve = next(iter(record['motions'][0]['rotations'].values()))
         record['motions'][0]['rotations']['rhand'] = curve
-        with self.assertRaisesRegex(ValueError, 'only the support arm and right wrist'):
+        with self.assertRaisesRegex(ValueError, 'only six arm joints'):
             profiles.validate_motions(record, profiles.baseline(record))
 
     def test_every_profile_requires_the_three_correct_native_roles(self):

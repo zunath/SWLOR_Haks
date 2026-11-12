@@ -17,11 +17,10 @@ import numpy as np
 import CleanModels
 import GenerateRifleHoldAnimations as hold
 from RobePoseAudit import Model
-from RobeAnimations import validate_animation_parts
 
 ROOT = Path(__file__).resolve().parents[1]
 MANIFEST = ROOT / 'tools' / 'RifleGripProfileMotions.json'
-ALLOWED_JOINTS = frozenset((*hold.ARM, 'rhand_g'))
+ALLOWED_JOINTS = frozenset((*hold.ARM, 'rbicep_g', 'rforearm_g', 'rhand_g'))
 ROLES = {'i': 'xbowr', 'r': 'xbowrdy', 's': 'xbowshot'}
 
 @lru_cache(None)
@@ -61,7 +60,7 @@ def validate_motions(record, original):
         groups.setdefault(name[:-2], set()).add(name[-1])
         rotations = motion['rotations']
         if not set(hold.ARM) <= set(rotations) or set(rotations) - ALLOWED_JOINTS:
-            raise ValueError('Rifle profiles may rotate only the support arm and right wrist')
+            raise ValueError('Rifle profiles may rotate only six arm joints')
         source_nodes = {n: controllers for n, _, _, controllers, _ in original.clips[source_clip][1]}
         for joint, curve in rotations.items():
             times, values = np.asarray(curve['times'], float), np.asarray(curve['values'], float)
@@ -93,6 +92,71 @@ def idle_hook_quaternion(original):
             or abs(np.linalg.norm(values[0]) - 1) > 1e-5):
         raise ValueError('Pinned idle hook orientation must be constant and unit')
     return values[0].tobytes()
+
+
+def node_part_paths(nodes):
+    paths, result = [], {}
+    for index, (name, parent, part, _, _) in enumerate(nodes):
+        path = () if parent is None else paths[parent] + (name,)
+        if path in result:
+            raise ValueError('Duplicate native rifle joint path')
+        paths.append(path)
+        result[path] = (part, index)
+    return paths, result
+
+
+def bind_clip_parts(model, clip, reference_nodes):
+    _, reference = node_part_paths(reference_nodes)
+    clip_nodes = model.clips[clip][1]
+    clip_paths, _ = node_part_paths(clip_nodes)
+    missing = {i for i, path in enumerate(clip_paths) if path not in reference}
+    if missing:
+        required = {'rootdummy', 'torso_g', 'pelvis_g', 'neck_g', 'head_g',
+                    'rbicep_g', 'rforearm_g', 'rhand_g', 'lbicep_g', 'lforearm_g', 'lhand_g',
+                    'rthigh_g', 'rshin_g', 'rfoot_g', 'lthigh_g', 'lshin_g', 'lfoot_g', 'rhand', 'lhand'}
+        if not required <= {node[0] for node in reference_nodes}:
+            raise ValueError('Fitted rifle wearer is missing a required native body joint')
+        reference_names = {node[0] for node in reference_nodes}
+        for index in missing:
+            if clip_nodes[index][0] in reference_names and clip_nodes[index][0] not in required:
+                raise ValueError('Fitted rifle joint hierarchy differs from wearer')
+            if clip_nodes[index][0] in required:
+                raise ValueError('Required animated body joint has no wearer binding')
+            if any(other[:len(clip_paths[index])] == clip_paths[index] and j not in missing
+                   for j, other in enumerate(clip_paths)):
+                raise ValueError('Cannot prune a missing ancestor of a wearer joint')
+        output = bytearray(model.data)
+        removed = {clip_nodes[i][4] - 12 for i in missing}
+        for _, _, _, _, at in clip_nodes:
+            pointer, count = model.uint(at + 72), model.uint(at + 76)
+            children = [model.uint(12 + pointer + i * 4) for i in range(count)]
+            kept = [child for child in children if child not in removed]
+            if len(kept) != count:
+                for i, child in enumerate(kept):
+                    struct.pack_into('<I', output, 12 + pointer + i * 4, child)
+                struct.pack_into('<II', output, at + 76, len(kept), len(kept))
+        model = Model(bytes(output))
+        clip_paths, _ = node_part_paths(model.clips[clip][1])
+    output = bytearray(model.data)
+    for path, (_, _, part, _, at) in zip(clip_paths, model.clips[clip][1]):
+        if path not in reference:
+            raise ValueError('Fitted rifle clip has no wearer joint: ' + '/'.join(path))
+        struct.pack_into('<i', output, at + 28, reference[path][0])
+    return Model(bytes(output))
+
+
+def validate_profile_parts(data, original):
+    model = Model(data)
+    _, reference = node_part_paths(model.nodes)
+    for name, (_, nodes) in model.clips.items():
+        if name in hold.CLIPS:
+            if [(n, p, i, c) for n, p, i, c, _ in nodes] != [(n, p, i, c) for n, p, i, c, _ in original.clips[name][1]]:
+                raise ValueError('Pinned native rifle clip changed: ' + name)
+            continue
+        paths, _ = node_part_paths(nodes)
+        for path, (_, _, part, _, _) in zip(paths, nodes):
+            if path not in reference or part != reference[path][0]:
+                raise ValueError('Fitted rifle clip uses the wrong wearer joint: ' + name + '/' + '/'.join(path))
 
 
 def profile_model(original, motion):
@@ -138,7 +202,7 @@ def profile_model(original, motion):
         struct.pack_into('<III', output, offset + 84, new_keys, len(keys), len(keys))
         struct.pack_into('<III', output, offset + 96, data_pointer, len(data) // 4, len(data) // 4)
     struct.pack_into('<I', output, 4, len(output) - 12)
-    return Model(bytes(output))
+    return bind_clip_parts(Model(bytes(output)), motion['sourceClip'], original.nodes)
 
 
 
@@ -216,11 +280,8 @@ def equipped_idle_model(record, original, fitted):
                      controllers[20][1]) for n, _, _, controllers, _ in nodes if n in EQUIPPED_IDLE_JOINTS}
     if set(rotations) != EQUIPPED_IDLE_JOINTS:
         raise ValueError('Equipped rifle idle requires all six fitted arm controllers')
-    native_parts = {n: part for n, _, part, _, _ in original.nodes}
-    for joint, _, part, _, _ in base.clips['pause1'][1]:
-        if joint != record['baseIdle']['model'] and native_parts.get(joint) != part:
-            raise ValueError('Stock equipped idle native binding differs: ' + joint)
-    return patch_clip_rotations(base, 'pause1', rotations, original.nodes[0][0])
+    return bind_clip_parts(patch_clip_rotations(base, 'pause1', rotations, original.nodes[0][0]),
+                           'pause1', original.nodes)
 
 
 def ability_source(record):
@@ -282,12 +343,14 @@ def sources(record):
     source = ability_source(record)
     for motion in record['abilities']:
         rotations = {n: (c['times'], c['values']) for n, c in motion['rotations'].items()}
-        clips.append((motion['name'], patch_clip_rotations(source, 'sw_aimedshot', rotations, original.nodes[0][0]),
-                      'sw_aimedshot'))
+        clips.append((motion['name'], bind_clip_parts(
+            patch_clip_rotations(source, 'sw_aimedshot', rotations, original.nodes[0][0]),
+            'sw_aimedshot', original.nodes), 'sw_aimedshot'))
         for suffix in ('_in', '_out'):
             source_clip = 'sw_aimedshot' + suffix
-            clips.append((motion['name'] + suffix, patch_clip_rotations(source, source_clip, {}, original.nodes[0][0]),
-                          source_clip))
+            clips.append((motion['name'] + suffix, bind_clip_parts(
+                patch_clip_rotations(source, source_clip, {}, original.nodes[0][0]),
+                source_clip, original.nodes), source_clip))
     return original, sorted(clips, key=lambda item: item[0])
 
 
@@ -357,7 +420,7 @@ def restore_native(binary, original, clips):
         if hold.animation_header(bytes(output), name) != hold.animation_header(model.data, source_clip):
             raise ValueError('Rifle clip timing, root or events changed')
     struct.pack_into('<I', output, 88, max(struct.unpack_from('<I', output, 88)[0], max(n[2] for n in restored.nodes) + 1))
-    validate_animation_parts(output)
+    validate_profile_parts(output, original)
     return bytes(output)
 
 
