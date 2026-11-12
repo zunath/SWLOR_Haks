@@ -53,6 +53,17 @@ class RifleProfileArchiveTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'bank partition'):
             archives.part_records(record)
 
+    def test_overflow_bank_paths_preserve_the_owned_body_and_partition_sequence(self):
+        for body in ['pfz0', 'pmz0', 'pmo0']:
+            head = 'sw_cr_creature1/a_rfl_' + body
+            record = {'body': body, 'output': head + '.mdl', 'outputSha256': '0' * 64,
+                      'bankParts': [{'output': head + '.mdl', 'sha256': '0' * 64},
+                                    {'output': head + '_b01.mdl', 'sha256': '0' * 64}]}
+            self.assertEqual(2, len(archives.part_records(record)))
+            record['bankParts'][1]['output'] = 'sw_cr_creature/a_rfl_' + body + '_b01.mdl'
+            with self.assertRaisesRegex(ValueError, 'bank partition'):
+                archives.part_records(record)
+
     def test_archived_group_reproduces_existing_native_bank_byte_for_byte(self):
         self.verify_native_reproduction(False)
 

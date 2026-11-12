@@ -5,10 +5,30 @@ import struct
 import FillRobeEmoteMotion as native
 import RobeAnimationBanks as banks
 import RobePoseAudit as poses
+import RifleProfileArchives as rifle_archives
 
 PROFILE = re.compile(r"rf[0-9]+_[0-9]+_(i|r|s|b|a(?:_in|_out)?)\Z")
 TEMPLATES = {"i": "xbowr", "r": "xbowrdy", "s": "xbowshot", "b": "pause1",
              "a": "sw_aimedshot", "a_in": "sw_aimedshot_in", "a_out": "sw_aimedshot_out"}
+
+
+def output_directories(manifest):
+    """Explicit owned output locations; old source banks keep their original folders."""
+    result = {}
+    for record in manifest["models"]:
+        body = record["body"]
+        if not re.fullmatch(r"p[fm][hedo]0", body):
+            raise ValueError("Invalid owned robe output body")
+        canonical = "sw_anim_" + body[1]
+        directory = record.get("directory", canonical)
+        if directory not in {canonical, canonical + "1"}:
+            raise ValueError("Invalid owned robe output directory")
+        for part in record["parts"]:
+            name = part["name"]
+            if not banks.is_bank_name(name) or name[:3] != body[:3] or name in result:
+                raise ValueError("Invalid or duplicate owned robe output partition")
+            result[name] = directory
+    return result
 
 
 def nodes(root):
@@ -218,10 +238,13 @@ def rebuild(manifest, root):
     if len(sources) != len(manifest["sources"]):
         raise ValueError("Duplicate owned robe source")
 
+    directories = output_directories(manifest)
+
     def path_for(name):
         if not banks.is_bank_name(name):
             raise ValueError("Invalid owned robe bank resource")
-        return ("sw_anim_f" if name[1] == "f" else "sw_anim_m") + "/" + name + ".mdl"
+        directory = directories.get(name, "sw_anim_f" if name[1] == "f" else "sw_anim_m")
+        return directory + "/" + name + ".mdl"
 
     @functools.lru_cache(maxsize=4)
     def load_source(head):
@@ -248,7 +271,7 @@ def rebuild(manifest, root):
         record = manifest["bodies"][body]
         raw_parts = []
         for index, part in enumerate(record["parts"]):
-            expected = "sw_cr_creature/a_rfl_" + body + (f"_b{index:02d}" if index else "") + ".mdl"
+            expected = rifle_archives.bank_directory(body) + "/a_rfl_" + body + (f"_b{index:02d}" if index else "") + ".mdl"
             if part["file"] != expected:
                 raise ValueError("Invalid fitted body partition")
             raw = (root / expected).read_bytes()

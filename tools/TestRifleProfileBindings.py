@@ -13,7 +13,8 @@ class RifleProfileBindingTests(unittest.TestCase):
     def test_legacy_cloak_ids_are_rebound_only_in_the_fitted_clip(self):
         for body in ('pmd0', 'pmo0'):
             with self.subTest(body=body):
-                original = profiles.Model((profiles.ROOT / 'sw_cr_creature' / ('a_rfl_' + body + '.mdl')).read_bytes())
+                record = next(r for r in self.manifest['models'] if r['body'] == body)
+                original = profiles.baseline(record)
                 _, reference = profiles.node_part_paths(original.nodes)
                 paths, _ = profiles.node_part_paths(original.clips['xbowrdy'][1])
                 self.assertTrue(any(reference[path][0] != node[2]
@@ -67,7 +68,7 @@ class RifleProfileBindingTests(unittest.TestCase):
             profiles.bind_clip_parts(source, 'sw_aimedshot', reference)
 
     def test_six_arm_rotations_are_allowed_but_body_and_attachment_tracks_are_rejected(self):
-        record = copy.deepcopy(self.manifest['models'][0])
+        record = copy.deepcopy(next(r for r in self.manifest['models'] if r['motions']))
         original = profiles.baseline(record)
         for motion in record['motions']:
             for joint, _, _, controllers, _ in original.clips[motion['sourceClip']][1]:

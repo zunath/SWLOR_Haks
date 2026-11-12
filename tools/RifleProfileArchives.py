@@ -62,9 +62,14 @@ def validate_sources(record, owner):
     return original, names
 
 
+def bank_directory(body):
+    # Keep the three largest normal-body inventories in the numbered overflow HAK.
+    return 'sw_cr_creature1' if body in {'pfz0', 'pmz0', 'pmo0'} else 'sw_cr_creature'
+
+
 def part_records(record):
     parts = record.get('bankParts') or [{'output': record['output'], 'sha256': record['outputSha256']}]
-    head = 'sw_cr_creature/a_rfl_' + record['body']
+    head = bank_directory(record['body']) + '/a_rfl_' + record['body']
     for index, part in enumerate(parts):
         expected = head + (f'_b{index:02d}' if index else '') + '.mdl'
         if part['output'] != expected or not re.fullmatch('[0-9a-f]{64}', part['sha256']):
@@ -124,7 +129,7 @@ def build_record(record, stage, game_dir, owner, dependencies=()):
         raise ValueError('Rifle archive output differs from its pinned complete payload')
     partitioned = banks.split(flat)
     expected_parts = part_records(record)
-    actual = {'sw_cr_creature/' + name + '.mdl': bytes(data) for name, data in partitioned.items()}
+    actual = {bank_directory(record['body']) + '/' + name + '.mdl': bytes(data) for name, data in partitioned.items()}
     if set(actual) != {p['output'] for p in expected_parts}:
         raise ValueError('Rifle archive partition inventory differs from its pinned output')
     for part in expected_parts:

@@ -34,7 +34,7 @@ def pinned_source(blob):
 
 def baseline(record):
     body = record['body']
-    expected = 'sw_cr_creature/a_rfl_' + body + '.mdl'
+    expected = archives.bank_directory(body) + '/a_rfl_' + body + '.mdl'
     if not re.fullmatch(r'p[fm][hedoz]0', body) or record['output'] != expected:
         raise ValueError('Rifle profiles require a normal playable body bank')
     raw = pinned_source(record['sourceBlob'])

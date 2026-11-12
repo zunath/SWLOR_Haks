@@ -11,6 +11,7 @@ import argparse
 import gc
 import hashlib
 import json
+import RifleProfileArchives as rifle_archives
 import math
 from pathlib import Path
 import struct
@@ -336,7 +337,7 @@ def update_robes(library, output, apply):
 
     original = robes.MANIFEST.read_bytes()
     manifest = json.loads(original)
-    allowed = {f'Robe RGB input/output changed: sw_cr_creature/a_rfl_{body}.mdl; regenerate and validate'
+    allowed = {f'Robe RGB input/output changed: {rifle_archives.bank_directory(body)}/a_rfl_{body}.mdl; regenerate and validate'
                for body in BODIES}
     allowed.add('Robe RGB input/output changed: tools/GenerateViolinBowContact.py; regenerate and validate')
     errors = set(robes.check()) - allowed
@@ -346,7 +347,7 @@ def update_robes(library, output, apply):
     count = 0
     active = robes.fresh_active_models()
     for body in BODIES:
-        path = 'sw_cr_creature/a_rfl_' + body + '.mdl'
+        path = rifle_archives.bank_directory(body) + '/a_rfl_' + body + '.mdl'
         data = library.data('a_rfl_' + body)
         if rifle.mdl.supermodel(data) != bank_name(body):
             raise ValueError('Finalize the compiled violin bank before updating robes: ' + body)
@@ -458,7 +459,7 @@ def main():
             path.write_bytes(restore_tracks(library, body))
             library.invalidate(bank_name(body))
             rotation_changes(library, body)
-            rifle_path = ROOT / 'sw_cr_creature' / ('a_rfl_' + body + '.mdl')
+            rifle_path = ROOT / rifle_archives.bank_directory(body) / ('a_rfl_' + body + '.mdl')
             data = bytearray(rifle_path.read_bytes())
             data[180:244] = bank_name(body).encode('ascii').ljust(64, b'\0')
             rifle_path.write_bytes(data)

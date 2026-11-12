@@ -8,6 +8,7 @@ available. Output is staged and round-trip audited before --apply writes it.
 from __future__ import annotations
 
 import argparse
+from functools import lru_cache
 import hashlib
 import json
 from pathlib import Path
@@ -46,15 +47,28 @@ GENERATOR_INPUTS = ("GenerateRobeRgbModels.py", "RobeSkeleton.py", "RobePoseAudi
                     "SharedRobeFamilies.py", "RobeSharingAudit.py",
                     "RobeCompilationCheckpoint.py", "RobeBankValidation.py", "ModelLodAssets.py",
                     "RobeNativeWearers.py", "AlignRobeAnimations.py", "FillRobeEmoteMotion.py",
+                    "RobeRifleProfiles.py",
                     "RestoreRobeBodyTracks.py")
 PACKAGING_INPUTS = ("RobeAnimationBanks.py", "RepackRobeAnimationBanks.py")
-CATALOG_INPUTS = ("sw_2da/parts_robe.2da", "sw_2da/tintmap.2da", "hakbuilder.json")
+CATALOG_INPUTS = ("sw_2da/parts_robe.2da", "sw_2da/tintmap.2da", "hakbuilder.json",
+                  "tools/RobeRifleProfiles.json")
 BODY_RESOURCE = re.compile(r"^p[fm][a-z](\d+)(?:_robe\d{3})?$", re.IGNORECASE)
+
+
+@lru_cache(maxsize=1)
+def rifle_output_directories(recipe, modified_ns):
+    import RobeRifleProfiles as rifle
+    return rifle.output_directories(json.loads(recipe.read_text()))
 
 
 def model_directory(name):
     """Route shared robe animations separately from wearable body roots."""
     if banks.is_bank_name(name):
+        recipe = ROOT / "tools/RobeRifleProfiles.json"
+        if recipe.is_file():
+            owned = rifle_output_directories(recipe, recipe.stat().st_mtime_ns)
+            if name.lower() in owned:
+                return owned[name.lower()]
         return "sw_anim_f" if name[1] == "f" else "sw_anim_m"
     return "sw_pt_robe" if "_robe" in name else "sw_pt_root"
 

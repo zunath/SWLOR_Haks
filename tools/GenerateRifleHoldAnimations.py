@@ -51,6 +51,7 @@ import struct
 import numpy as np
 
 import CompileModels as mdl
+import RifleProfileArchives as profile_archives
 import GenerateTintMapAssets as tint
 from RobePoseAudit import Model
 
@@ -609,7 +610,7 @@ def profile_owned_bodies() -> frozenset[str]:
     bodies = [record["body"] for record in records]
     if len(set(bodies)) != len(bodies) or any(
             not re.fullmatch(r"p[fm][hedoz]0", record["body"]) or
-            record["output"] != f"{BANK_DIRECTORY}/{bank_name(record['body'])}.mdl"
+            record["output"] != f"{profile_archives.bank_directory(record['body'])}/{bank_name(record['body'])}.mdl"
             for record in records):
         raise ValueError("Invalid specialized rifle bank ownership")
     return frozenset(bodies)

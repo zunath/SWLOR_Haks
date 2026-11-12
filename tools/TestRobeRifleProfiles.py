@@ -12,6 +12,16 @@ from TestRobeAnimationBanks import NativeRobeAnimationBankTests
 
 
 class RobeRifleProfileTests(unittest.TestCase):
+    def test_owned_output_directories_cannot_cross_gender_or_escape_the_hak(self):
+        record = {'body': 'pfh0', 'parts': [{'name': 'pfh_ra121'}]}
+        self.assertEqual({'pfh_ra121': 'sw_anim_f'}, owner.output_directories({'models': [record]}))
+        record['directory'] = 'sw_anim_f1'
+        self.assertEqual({'pfh_ra121': 'sw_anim_f1'}, owner.output_directories({'models': [record]}))
+        for directory in ['sw_anim_m1', '../sw_anim_f1', 'C:/Temp']:
+            record['directory'] = directory
+            with self.assertRaisesRegex(ValueError, 'output directory'):
+                owner.output_directories({'models': [record]})
+
     @classmethod
     def setUpClass(cls):
         NativeRobeAnimationBankTests.setUpClass.__func__(cls)
