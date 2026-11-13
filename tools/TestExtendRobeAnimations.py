@@ -160,6 +160,44 @@ class ExtensionTests(unittest.TestCase):
             if node[0] != 'hand':
                 self.assertTrue(extend.sharing.controllers_equal(node[3], after[node[0]][3]))
 
+    def variant_track(self, layer):
+        """The fixture arm's rotation in clip3, and the same samples turned a little."""
+        length, nodes = extend.poses.Model(layer).clips['clip3']
+        prior = next(node for node in nodes if node[0] == 'arm')[3][extend.ROTATION]
+        turn = (0, 0, math.sin(.15), math.cos(.15))
+        return prior, (list(prior[0]), [extend.poses.multiply(turn, q) for q in prior[1]])
+
+    def test_a_variant_copies_an_owned_clip_and_changes_only_its_body_motion(self):
+        layer = self.source.pack('pmh_ra003', 'pmh_ra001', self.source.clips[2:])
+        prior, track = self.variant_track(layer)
+        result, count = extend.add_variant_clips(layer, {'clip3': 'clip3v'}, {'clip3v': {'arm': (prior, track)}})
+        self.assertEqual(1, count)
+        bridge = banks.CompiledBridge(result)
+        self.assertEqual(['clip2', 'clip3', 'clip3v', 'clip4'], bridge.clip_names)
+        self.assertEqual(layer, bridge.pack('pmh_ra003', 'pmh_ra001',
+                                            [clip for name, clip in zip(bridge.clip_names, bridge.clips) if name != 'clip3v']))
+        clips = extend.poses.Model(result).clips
+        self.assertEqual(extend.sharing.clip_headers(result)['clip3'], extend.sharing.clip_headers(result)['clip3v'])
+        for original, copy in zip(clips['clip3'][1], clips['clip3v'][1]):
+            self.assertEqual(original[:3], copy[:3])
+            expected = {**original[3], extend.ROTATION: track} if original[0] == 'arm' else original[3]
+            self.assertTrue(extend.sharing.controllers_equal(expected, copy[3]), original[0])
+        # The body that carries both clips reports exactly that difference.
+        changes = extend.variant_changes(result, 'clip3', 'clip3v')
+        self.assertEqual({'arm'}, set(changes))
+        self.assertTrue(extend.sharing.controllers_equal({extend.ROTATION: track}, {extend.ROTATION: changes['arm'][1]}))
+
+    def test_variants_reject_existing_names_missing_clips_and_other_differences(self):
+        layer = self.source.pack('pmh_ra003', 'pmh_ra001', self.source.clips[2:])
+        prior, track = self.variant_track(layer)
+        for variants in ({'clip3': 'clip4'}, {'missing': 'clip3v'}):
+            with self.subTest(variants=variants), self.assertRaises(ValueError):
+                extend.add_variant_clips(layer, variants, {name: {'arm': (prior, track)} for name in variants.values()})
+        with self.assertRaises(ValueError):
+            extend.variant_changes(layer, 'clip3', 'clip4')  # another clip, with its own timing
+        with self.assertRaises(ValueError):
+            extend.variant_changes(layer, 'clip3', 'clip3')  # no difference at all
+
     def test_actual_inherited_clip_owner_is_selected_independently_of_body_prefix(self):
         child = self.source.pack('pfd_ra003', 'pmh_ra001', [])
         resources = {'pfd_ra003': child, 'pmh_ra001': self.old,

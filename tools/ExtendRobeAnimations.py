@@ -215,6 +215,53 @@ def revise_rotations(before, changes):
     return result, count
 
 
+def variant_changes(body, base, variant):
+    """Recognize a body clip that copies another except for rotations and root translation."""
+    model = poses.Model(body)
+    headers = sharing.clip_headers(body)
+    if base not in model.clips or variant not in model.clips:
+        raise ValueError("The body lacks the variant or the clip it copies")
+    if headers[base] != headers[variant]:
+        raise ValueError(f"A variant keeps its clip's timing and events: {variant}")
+    nodes, copied = model.clips[base][1], model.clips[variant][1]
+    if len(nodes) != len(copied): raise ValueError("A variant keeps its clip's nodes")
+    changes = {}
+    for left, right in zip(nodes, copied):
+        if left[:3] != right[:3] or left[3].keys() != right[3].keys():
+            raise ValueError("A variant keeps its clip's nodes and channels")
+        for kind, value in left[3].items():
+            target = right[3][kind]
+            if sharing.controllers_equal({kind: value}, {kind: target}): continue
+            if not (kind == ROTATION or kind == POSITION and left[0] == ROOT):
+                raise ValueError(f"A variant may differ only in rotations and root translation: {variant}/{left[0]}")
+            changes[left[0] if kind == ROTATION else (left[0], kind)] = (value, target)
+    if not changes: raise ValueError(f"The variant does not differ from its clip: {variant}")
+    return changes
+
+
+def add_variant_clips(before, variants, changes):
+    """Copy owned layer clips under new names, then give each copy its variant's body motion.
+
+    A copy keeps every garment track, event and part ID of the clip it came from, so no robe is regenerated.
+    """
+    bridge = banks.CompiledBridge(before)
+    clips = dict(zip(bridge.clip_names, bridge.clips))
+    for base, variant in variants.items():
+        if base not in clips or variant in clips:
+            raise ValueError("A variant copies an owned clip under a new name")
+        component = clips[base]
+        data = bytearray(component.data)
+        banks._set_name(data, 8, 64, variant)
+        clips[variant] = banks.Component(component.start, bytes(data), component.pointers, component.names)
+    copied = bridge.pack(bridge.name, bridge.parent, [clips[name] for name in sorted(clips)])
+    result, count = revise_rotations(copied, {variant: changes[variant] for variant in variants.values()})
+    after = banks.CompiledBridge(result)
+    kept = [clip for name, clip in zip(after.clip_names, after.clips) if name in bridge.clip_names]
+    if after.pack(bridge.name, bridge.parent, kept) != before:
+        raise ValueError("Adding variants changed an existing clip or the rig")
+    return result, count
+
+
 def clip_owners(name, load, wanted):
     result, seen = {}, set()
     while name:
@@ -314,7 +361,102 @@ def apply_rotation_revision(args):
         baseline.close()
 
 
-def check_installed(manifest, game_data):
+def apply_variants(args):
+    manifest = json.loads(robes.MANIFEST.read_text())
+    original = robes.MANIFEST.read_bytes()
+    record = manifest["animation_extensions"][-1]
+    pairs = dict(item.split("=", 1) for item in args.variant)
+    variants = {base + phase: new + phase for base, new in pairs.items() for phase in ("", "_in", "_out")}
+    added = set(variants.values())
+    if any(not name or len(name) > 16 or not name.replace("_", "").isalnum() for name in added):
+        raise ValueError("Invalid animation name")
+    if not set(variants) <= set(record["clips"]) or added & set(record["clips"]):
+        raise ValueError("A variant copies an owned extension clip under a new name")
+    body_paths = list(record["preserved_body_clips"])
+    allowed_errors = {f"Robe RGB input/output changed: {path}; regenerate and validate" for path in body_paths}
+    allowed_errors.add("Robe RGB input/output changed: tools/ExtendRobeAnimations.py; regenerate and validate")
+    errors = set(robes.check()) - allowed_errors
+    if errors: raise ValueError("Catalog is not current: " + "; ".join(sorted(errors)))
+    baseline = GitBlobs(args.baseline)
+    try:
+        if baseline.read("tools/RobeRgbModels.json").replace(b"\r\n", b"\n") != original.replace(b"\r\n", b"\n"):
+            raise ValueError("Variant baseline must match the current manifest")
+        changes, body_hashes = {}, {}
+        for path in body_paths:
+            old, new = baseline.read(path), (robes.ROOT / path).read_bytes()
+            if digest(old) != manifest["files"][path]: raise ValueError("Body baseline ownership mismatch")
+            verify_body_additions(old, new, added)
+            changes[Path(path).stem] = {variant: variant_changes(new, base, variant) for base, variant in variants.items()}
+            body_hashes[path] = digest(new)
+        active = robes.fresh_active_models()
+        stock = robes.tint.read_stock_key_models(args.game_data)
+        def load_source(name):
+            if name in active: return active[name].read_bytes()
+            if name in stock: return robes.tint.extract_stock_bif_resource(*stock[name])
+            return None
+        outputs, bank_records, snapshot, channels = {}, {}, {}, 0
+        for name in record["parents"].values():
+            before = robes.owned_animation_bytes(name, manifest, active)
+            snapshot[name] = digest(before)
+            selected = {}
+            for clip, owner in clip_owners(name[:3] + "0", load_source, added).items():
+                if owner not in changes: raise ValueError(f"Unexpected variant body source: {owner}")
+                selected[clip] = changes[owner][clip]
+            after, count = add_variant_clips(before, variants, selected)
+            channels += count
+            parts = banks.split(after)
+            if list(parts) != manifest["animation_bank_sets"][name]["parts"]:
+                raise ValueError("Adding variants changed the bank layout")
+            for part, data in parts.items(): outputs[f"{robes.model_directory(part)}/{part}.mdl"] = data
+            bank_records[name] = {"parts": list(parts), "source_sha256": digest(after)}
+        def load(name):
+            path = f"{robes.model_directory(name)}/{name}.mdl"
+            if path in outputs: return outputs[path]
+            if name in active: return active[name].read_bytes()
+            if name in stock: return robes.tint.extract_stock_bif_resource(*stock[name])
+            return None
+        clips = sorted(set(record["clips"]) | added)
+        samples = 0
+        for name in record["parents"].values():
+            library = poses.Library(load)
+            scoped = SimpleNamespace(model=library.model, owners=library.owners,
+                clips=lambda model: {n: c for n, c in library.clips(model).items() if n in clips})
+            samples += poses.validate_body_poses(name, name[:3] + "0", scoped)
+            library.model.cache_clear(); library.clips.cache_clear(); library.owners.cache_clear()
+            del library, scoped; gc.collect()
+        report = {"baseline": baseline.ref, "variants": dict(sorted(pairs.items())), "clips": sorted(added),
+                  "changed_channels": channels, "body_pose_samples": samples,
+                  "preservation": "Each variant copies an owned clip's garment tracks, events and part IDs; only body rotations and root translation differ. Existing clips, the rig and every wearer are unchanged."}
+        args.output.mkdir(parents=True, exist_ok=False)
+        for path, data in outputs.items():
+            target = args.output / path; target.parent.mkdir(parents=True, exist_ok=True); target.write_bytes(data)
+        (args.output / "report.json").write_text(json.dumps(report, indent=2) + "\n")
+        if args.apply:
+            if robes.MANIFEST.read_bytes() != original: raise ValueError("Manifest changed while adding variants")
+            for path, expected in body_hashes.items():
+                if digest((robes.ROOT / path).read_bytes()) != expected: raise ValueError("Body changed while adding variants")
+            for name, expected in snapshot.items():
+                if digest(robes.owned_animation_bytes(name, manifest, active)) != expected: raise ValueError("Layer changed while adding variants")
+            for path, data in outputs.items():
+                (robes.ROOT / path).write_bytes(data); manifest["files"][path] = digest(data)
+            for path, value in body_hashes.items(): manifest["files"][path] = value
+            manifest["files"]["tools/ExtendRobeAnimations.py"] = robes.file_digest(Path(__file__))
+            manifest["animation_bank_sets"].update(bank_records)
+            record["clips"] = clips
+            record.setdefault("variants", []).append(report)
+            # The coverage counts grow with the clip list; measure them on what was just installed.
+            counts = check_installed(manifest, args.game_data, enforce=False)
+            if counts["layers"] != record["layers"] or counts["wearers"] != record["wearers"] or counts["body_pose_samples"] != samples:
+                raise ValueError("Installed variants do not cover every layer and wearer")
+            record["body_pose_samples"] = counts["body_pose_samples"]
+            record["garment_body_motion_checks"] = counts["garment_body_motion_checks"]
+            robes.MANIFEST.write_text(json.dumps(manifest, indent=2) + "\n")
+        print(json.dumps(report, indent=2), flush=True)
+    finally:
+        baseline.close()
+
+
+def check_installed(manifest, game_data, enforce=True):
     records = manifest.get("animation_extensions", [])
     if not records:
         raise ValueError("No installed animation extension to check")
@@ -362,7 +504,8 @@ def check_installed(manifest, game_data):
             library.model.cache_clear(); library.clips.cache_clear(); library.owners.cache_clear()
             del library, scoped; gc.collect()
             print(f"Verified installed extension {new} and unchanged parent {old}.", flush=True)
-        if count != record["wearers"] or samples != record["body_pose_samples"] or garment_checks != record["garment_body_motion_checks"]:
+        if enforce and (count != record["wearers"] or samples != record["body_pose_samples"] or
+                        garment_checks != record["garment_body_motion_checks"]):
             raise ValueError("Installed extension validation coverage changed")
         return {"layers": len(record["parents"]), "wearers": count, "body_pose_samples": samples,
                 "garment_body_motion_checks": garment_checks}
@@ -380,7 +523,14 @@ def main():
     parser.add_argument("--apply", action="store_true")
     parser.add_argument("--check", action="store_true", help="Revalidate installed layers and exact baseline preservation")
     parser.add_argument("--revise-rotations", action="store_true", help="Revise only selected existing rotation channels and root translation, without changing the rig")
+    parser.add_argument("--variant", action="append", metavar="CLIP=NEW",
+                        help="Add NEW as a copy of owned CLIP that differs only in body rotations and root translation; includes _in/_out")
     args = parser.parse_args()
+    if args.variant:
+        if args.check or args.revise_rotations or not args.baseline or not args.output:
+            parser.error("Variants require --baseline and --output; cannot combine with --check or --revise-rotations")
+        apply_variants(args)
+        return
     if args.revise_rotations:
         if args.check or not args.baseline or not args.clip or not args.output:
             parser.error("Rotation revision requires --baseline, --clip and --output; cannot combine with --check")
