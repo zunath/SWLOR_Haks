@@ -39,6 +39,7 @@ SHARED_INPUTS = (
     "sw_shader/fs_plt_tinter_nm.shd",
     "sw_shader/fs_plt_hair_nm.shd",
     "sw_shader/fs_cloaktint.shd",
+    "sw_shader/inc_hd_tint.shd",
     "sw_item/plt_palette.tga",
     "sw_item/plt_palette.txi",
     "sw_item/plt_white.tga",

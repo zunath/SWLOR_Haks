@@ -38359,7 +38359,7 @@
     "sw_2da/parts_robe.2da": "92746c1a3a960d3aa2bef32206732ef664062f626af0cf5449187a61b65bf814",
     "sw_2da/phenotype.2da": "2864c6d2ccf4d1a1484f1be5c488ccc7b14625481bafbbc038ed2035cc82c287",
     "sw_2da/roberender.2da": "25b6b5358e4d68247752003cd8ea194324053ddb714d8289a9b33af463fbf201",
-    "sw_2da/tintmap.2da": "0b9e771e86ff089eda90ad364fc60ed6b73f9db4e8a01e3d1d12b9d7c26e3c84",
+    "sw_2da/tintmap.2da": "8e92be78b5a69b9d82e857cf15c87fba9475dda8b5cf563f1b94310f58898344",
     "sw_anim_f/pfa_ra094.mdl": "abf02d71ba0333e9b3fca656dece61904b48ff4af469edbc5ffbf9042092c27d",
     "sw_anim_f/pfa_ra094_b01.mdl": "7c504eb4ed9a806bd1caf84f7ece4c2b227a5dc1131f4230cd2aea8eef6f588c",
     "sw_anim_f/pfa_ra094_b02.mdl": "fc163d8c58341a9dc30e16c7e7c95e1485b860caa99fa9b193457c7ead060638",
@@ -45792,5 +45792,10 @@
         }
       ]
     }
-  ]
+  ],
+  "validation_tool_files": {
+    "tools/GenerateTintMapAssets.py": "e0763ea0ef2ca9f2d4f2a9d49b80840af327c8aa9303061ad35959c21d240dcc",
+    "tools/GenerateRobeRgbModels.py": "51d169b772589584638887b7d6e6df0c6e01056a402402caed78609e84f048d0",
+    "tools/ModelLodAssets.py": "018f2637162d79d57be3798dd3e04781e7e25a112e92875efd7e8f6f65b67375"
+  }
 }
