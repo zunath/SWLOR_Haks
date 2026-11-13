@@ -1,5 +1,6 @@
 """Guard new animation layers against changes to installed rigs or old clips."""
 import unittest
+from unittest import mock
 import tempfile
 import math
 import struct
@@ -107,6 +108,57 @@ class ExtensionTests(unittest.TestCase):
         self.assertTrue(extend.sharing.controllers_equal({20: track}, {20: after_arm[3][20]}))
         with self.assertRaises(ValueError):
             extend.revise_rotations(revised, {'clip3': {'arm': (prior, track)}})
+
+    def moved(self, node_name, kind, columns):
+        """The candidate with one controller's first sample nudged."""
+        model = extend.poses.Model(self.candidate)
+        node = next(n for n in model.clips['clip3'][1] if n[0] == node_name)
+        data = bytearray(self.candidate)
+        for index in range(model.uint(node[4] + 88)):
+            found, _, _, start, _ = struct.unpack_from('<IHHHB', data, 12 + model.uint(node[4] + 84) + index * 12)
+            if found == kind:
+                value = [v + .01 for v in node[3][kind][1][0]]
+                struct.pack_into(f'<{columns}f', data, 12 + model.uint(node[4] + 96) + start * 4, *value)
+        return bytes(data)
+
+    def test_root_translation_is_revised_but_a_bone_translation_is_rejected(self):
+        # The fixture's only translating node is its hand: a bone here, and the root once named as one.
+        changed = self.moved('hand', extend.POSITION, 3)
+        with self.assertRaises(ValueError):
+            extend.rotation_changes(self.candidate, changed, {'clip3'})
+        with mock.patch.object(extend, 'ROOT', 'hand'):
+            changes = extend.rotation_changes(self.candidate, changed, {'clip3'})
+            self.assertEqual({('hand', extend.POSITION)}, set(changes['clip3']))
+            with self.assertRaises(ValueError):
+                extend.rotation_changes(self.candidate, changed, {'clip2'})
+        layer = self.source.pack('pmh_ra003', 'pmh_ra001', self.source.clips[2:])
+        revised, count = extend.revise_rotations(layer, changes)
+        self.assertEqual(1, count)
+        self.assertEqual(len(layer), len(revised))
+        banks.validate_motion_revision(layer, revised, {'clip3'})
+        nodes = {n[0]: n for n in extend.poses.Model(revised).clips['clip3'][1]}
+        self.assertTrue(extend.sharing.controllers_equal(
+            {extend.POSITION: changes['clip3'][('hand', extend.POSITION)][1]}, {extend.POSITION: nodes['hand'][3][extend.POSITION]}))
+        before = {n[0]: n for n in extend.poses.Model(layer).clips['clip3'][1]}
+        self.assertTrue(extend.sharing.controllers_equal(before['arm'][3], nodes['arm'][3]))
+        with self.assertRaises(ValueError):
+            extend.revise_rotations(revised, changes)  # A prior correction cannot compound.
+
+    def test_translation_can_gain_samples_without_changing_other_native_data(self):
+        layer = self.source.pack('pmh_ra003', 'pmh_ra001', self.source.clips[2:])
+        length, nodes = extend.poses.Model(layer).clips['clip3']
+        hand = next(node for node in nodes if node[0] == 'hand')
+        prior = hand[3][extend.POSITION]
+        track = ([0., length/3, length], [prior[1][0], (0., .45, .1), prior[1][-1]])
+        revised, count = extend.revise_rotations(layer, {'clip3': {('hand', extend.POSITION): (prior, track)}})
+        self.assertEqual(1, count)
+        self.assertGreater(len(revised), len(layer))
+        banks.validate_motion_revision(layer, revised, {'clip3'})
+        after = {n[0]: n for n in extend.poses.Model(revised).clips['clip3'][1]}
+        self.assertTrue(extend.sharing.controllers_equal({extend.POSITION: track}, {extend.POSITION: after['hand'][3][extend.POSITION]}))
+        for node in nodes:
+            if node[0] != 'hand':
+                self.assertTrue(extend.sharing.controllers_equal(node[3], after[node[0]][3]))
 
     def test_actual_inherited_clip_owner_is_selected_independently_of_body_prefix(self):
         child = self.source.pack('pfd_ra003', 'pmh_ra001', [])

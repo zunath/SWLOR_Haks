@@ -21,6 +21,9 @@ import RobeSharingAudit as sharing
 
 
 PLAYABLE_PREFIXES = {f"p{gender}{body}" for gender in "fm" for body in "deho"}
+# Inherited clips animate bone rotation only; the root dummy is not a bone and may also carry translation.
+ROOT, POSITION, ROTATION = "rootdummy", 8, 20
+COLUMNS = {POSITION: 3, ROTATION: 4}
 
 
 def digest(data):
@@ -112,7 +115,10 @@ def verify_body_additions(before, after, names):
 
 
 def rotation_changes(before, after, allowed):
-    """Recognize quaternion-only corrections with identical nodes and clip headers."""
+    """Recognize rotation corrections, and root translation, with identical nodes and clip headers.
+
+    A rotation is keyed by its node name; the root's translation by (ROOT, POSITION).
+    """
     old, new = poses.Model(before), poses.Model(after)
     if old.clips.keys() != new.clips.keys() or sharing.clip_headers(before) != sharing.clip_headers(after):
         raise ValueError("A rotation revision cannot change clip inventory, timing or events")
@@ -129,19 +135,19 @@ def rotation_changes(before, after, allowed):
             for kind, value in left[3].items():
                 target = right[3][kind]
                 if sharing.controllers_equal({kind: value}, {kind: target}): continue
-                if clip not in allowed or kind != 20:
+                if clip not in allowed or not (kind == ROTATION or kind == POSITION and left[0] == ROOT):
                     raise ValueError(f"Unselected or structural body change: {clip}/{left[0]}")
                 times, frames = target
                 if (not times or len(times) != len(frames) or times[0] < 0 or times[-1] > old.clips[clip][0] + 2e-6 or
                         any(b <= a for a, b in zip(times, times[1:]))):
-                    raise ValueError("Invalid revised quaternion sample times")
-                changes.setdefault(clip, {})[left[0]] = (value, target)
+                    raise ValueError("Invalid revised sample times")
+                changes.setdefault(clip, {})[left[0] if kind == ROTATION else (left[0], kind)] = (value, target)
     if not changes: raise ValueError("No selected rotation changes")
     return changes
 
 
 def revise_rotations(before, changes):
-    """Copy measured body quaternion values into compatible, owned layer channels."""
+    """Copy measured body rotations, and root translation, into compatible, owned layer channels."""
     model = poses.Model(before)
     bridge = banks.CompiledBridge(before)
     clips = []
@@ -156,9 +162,11 @@ def revise_rotations(before, changes):
         data = bytearray(component.relocated(0, bridge.name))
         pointers, names = list(component.pointers), list(component.names)
         for name, (old, new) in nodes.items():
+            name, wanted = name if isinstance(name, tuple) else (name, ROTATION)
+            columns = COLUMNS[wanted]
             node = actual.get(name)
-            if node is None or 20 not in node[3] or not sharing.controllers_equal({20: old}, {20: node[3][20]}):
-                raise ValueError(f"Layer does not match the prior body rotation: {clip}/{name}")
+            if node is None or wanted not in node[3] or not sharing.controllers_equal({wanted: old}, {wanted: node[3][wanted]}):
+                raise ValueError(f"Layer does not match the prior body motion: {clip}/{name}")
             # Locate again after any earlier controller-array growth relocated this subtree.
             def find(offset):
                 if banks._name(data, offset + 32, 32).lower() == name: return offset
@@ -171,21 +179,22 @@ def revise_rotations(before, changes):
             if offset is None: raise ValueError("Revised node disappeared")
             for index in range(banks._uint(data, offset + 88)):
                 descriptor = banks._uint(data, offset + 84) + index*12
-                kind, rows, times, start, columns = struct.unpack_from("<IHHHB", data, descriptor)
-                if kind != 20: continue
-                if columns != 4: raise ValueError("Unsupported quaternion layout")
+                kind, rows, times, start, layout = struct.unpack_from("<IHHHB", data, descriptor)
+                if kind != wanted: continue
+                if layout != columns: raise ValueError("Unsupported controller layout")
                 values = banks._uint(data, offset + 96)
                 proposed_times, rotations = new
                 if rows >= len(rotations) and old[0][:len(proposed_times)] == proposed_times:
                     # Reuse the existing array when a moving wrist becomes a neutral grip.
                     struct.pack_into("<H", data, descriptor + 4, len(rotations))
-                    for row, value in enumerate(rotations): struct.pack_into("<4f", data, values + 4*(start + row*4), *value)
+                    for row, value in enumerate(rotations):
+                        struct.pack_into(f"<{columns}f", data, values + 4*(start + row*columns), *value)
                 else:
                     # A formerly static accent needs more samples. Keep every old float intact
-                    # and append only the new orientation track to this node's float array.
+                    # and append only the new track to this node's float array.
                     old_count = banks._uint(data, offset + 100)
-                    if old_count + 5*len(rotations) > 65535: raise ValueError("Revised controller exceeds native index space")
-                    extra = struct.pack(f"<{len(proposed_times)}f", *proposed_times) + b"".join(struct.pack("<4f", *q) for q in rotations)
+                    if old_count + (1+columns)*len(rotations) > 65535: raise ValueError("Revised controller exceeds native index space")
+                    extra = struct.pack(f"<{len(proposed_times)}f", *proposed_times) + b"".join(struct.pack(f"<{columns}f", *q) for q in rotations)
                     end = values + old_count*4
                     size = len(extra)
                     original = bytes(data)
@@ -195,11 +204,11 @@ def revise_rotations(before, changes):
                         struct.pack_into("<I", data, pointer + (size if pointer >= end else 0), value + (size if value >= end else 0))
                     pointers = [p + (size if p >= end else 0) for p in pointers]
                     names = [(p + (size if p >= end else 0), length) for p, length in names]
-                    struct.pack_into("<IHHHB", data, descriptor, 20, len(rotations), old_count, old_count + len(rotations), 4)
-                    struct.pack_into("<II", data, offset + 100, old_count + 5*len(rotations), old_count + 5*len(rotations))
+                    struct.pack_into("<IHHHB", data, descriptor, wanted, len(rotations), old_count, old_count + len(rotations), columns)
+                    struct.pack_into("<II", data, offset + 100, old_count + (1+columns)*len(rotations), old_count + (1+columns)*len(rotations))
                 count += 1
         clips.append(banks.Component(0, bytes(data), tuple(pointers), tuple(names)))
-    if not count: raise ValueError("No layer quaternion channels revised")
+    if not count: raise ValueError("No layer channels revised")
     result = bridge.pack(bridge.name, bridge.parent, clips)
     banks.validate_motion_revision(before, result, set(changes))
     animations.validate_animation_parts(result)
@@ -247,7 +256,7 @@ def apply_rotation_revision(args):
             if name in active: return active[name].read_bytes()
             if name in stock: return robes.tint.extract_stock_bif_resource(*stock[name])
             return None
-        outputs, bank_records, snapshot, revised_channels = {}, {}, {}, 0
+        outputs, bank_records, snapshot, revised_channels, root_translations = {}, {}, {}, 0, 0
         for name in record["parents"].values():
             before = robes.owned_animation_bytes(name, manifest, active)
             snapshot[name] = digest(before)
@@ -257,7 +266,9 @@ def apply_rotation_revision(args):
                 if owner not in changes: raise ValueError(f"Unexpected revised body source: {owner}")
                 if clip in changes[owner]: selected[clip] = changes[owner][clip]
             after, count = revise_rotations(before, selected)
-            revised_channels += count
+            moved = sum(isinstance(key, tuple) for nodes in selected.values() for key in nodes)
+            revised_channels += count - moved
+            root_translations += moved
             parts = banks.split(after)
             if list(parts) != manifest["animation_bank_sets"][name]["parts"]:
                 raise ValueError("Rotation revision changed the bank layout")
@@ -279,7 +290,8 @@ def apply_rotation_revision(args):
             del library, scoped; gc.collect()
         if samples != record["body_pose_samples"]: raise ValueError("Rotation revision pose coverage changed")
         report = {"baseline": baseline.ref, "clips": sorted(wanted), "quaternion_channels": revised_channels,
-                  "body_pose_samples": samples, "preservation": "Only selected quaternion tracks changed; rig, clip timing, events, non-rotation channels and other clips retained."}
+                  "root_translation_channels": root_translations,
+                  "body_pose_samples": samples, "preservation": "Only selected rotation tracks and root translation changed; rig, clip timing, events, other channels and other clips retained."}
         args.output.mkdir(parents=True, exist_ok=False)
         for path, data in outputs.items():
             target = args.output / path; target.parent.mkdir(parents=True, exist_ok=True); target.write_bytes(data)
@@ -367,7 +379,7 @@ def main():
     parser.add_argument("--output", type=Path)
     parser.add_argument("--apply", action="store_true")
     parser.add_argument("--check", action="store_true", help="Revalidate installed layers and exact baseline preservation")
-    parser.add_argument("--revise-rotations", action="store_true", help="Revise only selected existing quaternion channels, without changing rig or keys")
+    parser.add_argument("--revise-rotations", action="store_true", help="Revise only selected existing rotation channels and root translation, without changing the rig")
     args = parser.parse_args()
     if args.revise_rotations:
         if args.check or not args.baseline or not args.clip or not args.output:
