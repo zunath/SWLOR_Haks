@@ -638,10 +638,18 @@ def removed_body_outputs(manifest, body_exists):
     A retired robe keeps its outputs so saved creatures still render, but a body
     with no base root (`p<gender><race>0`) cannot be worn by any creature.
     """
-    bodies = {name[:3] for name in manifest.get("model_builds", {})}
+    outputs = set(manifest.get("model_builds", {}))
+    for relative in manifest.get("files", {}):
+        name = Path(relative).stem
+        match = BODY_RESOURCE.fullmatch(name)
+        # Native body sources are inputs; robe phenotypes are allocated from 34 onward.
+        if ((match and int(match[1]) >= 34 or banks.is_bank_name(name)) and
+                relative == f"{model_directory(name)}/{name}.mdl"):
+            outputs.add(name)
+    bodies = {name[:3] for name in outputs}
     bodies.update(head[:3] for head in manifest.get("animation_bank_sets", {}))
     removed = {body for body in bodies if not body_exists(body + "0")}
-    names = {name for name in manifest.get("model_builds", {}) if name[:3] in removed}
+    names = {name for name in outputs if name[:3] in removed}
     for head, record in manifest.get("animation_bank_sets", {}).items():
         if head[:3] in removed:
             names.update(record["parts"])

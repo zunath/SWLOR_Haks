@@ -183,6 +183,34 @@ class RobeRgbManifestTests(unittest.TestCase):
             self.assertFalse(any(active[name].exists() for name in names))
             self.assertTrue(active["pfh166"].is_file() and active["pfh_ra112"].is_file())
 
+    def test_removed_body_cleanup_includes_retired_outputs_without_build_cache_records(self):
+        with tempfile.TemporaryDirectory() as directory, patch.object(g, "ROOT", Path(directory)):
+            root = Path(directory)
+            active, files = {}, {}
+            for name, folder in (("pfb166", "sw_pt_root"), ("pfb166_robe182", "sw_pt_robe"),
+                                 ("pfb_ra062", "sw_anim_f"), ("pfb_ra062_b01", "sw_anim_f"),
+                                 ("pfh166", "sw_pt_root"), ("pfb1", "sw_pt_root"),
+                                 ("pfb167", "sw_weapon")):
+                path = root / folder / f"{name}.mdl"
+                path.parent.mkdir(exist_ok=True)
+                path.write_bytes(f"newmodel {name}\n".encode())
+                active[name] = path
+                files[path.relative_to(root).as_posix()] = g.file_digest(path)
+            manifest = {"files": files, "model_builds": {}, "animation_bank_sets": {}}
+            removed, names = g.removed_body_outputs(manifest, {"pfh0"}.__contains__)
+            self.assertEqual({"pfb"}, removed)
+            self.assertEqual({"pfb166", "pfb166_robe182", "pfb_ra062", "pfb_ra062_b01"}, names)
+
+            original = active["pfb166"].read_bytes()
+            active["pfb166"].write_bytes(b"edited retired root")
+            with self.assertRaisesRegex(ValueError, "not a verified prior output"):
+                g.remove_body_outputs(names, manifest, active)
+            self.assertTrue(all(path.is_file() for path in active.values()))
+            active["pfb166"].write_bytes(original)
+            g.remove_body_outputs(names, manifest, active)
+            self.assertFalse(any(active[name].exists() for name in names))
+            self.assertTrue(all(active[name].is_file() for name in ("pfh166", "pfb1", "pfb167")))
+
     def test_stale_tail_banks_are_removed_only_when_owned(self):
         with tempfile.TemporaryDirectory() as directory, patch.object(g, "ROOT", Path(directory)):
             path = Path(directory) / "sw_anim_m" / "pmh_ra001_b02.mdl"
