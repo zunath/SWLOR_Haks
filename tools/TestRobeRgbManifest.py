@@ -87,8 +87,8 @@ class RobeRgbManifestTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory, patch.object(g, "ROOT", Path(directory)):
             asked = []
             versions, reused = g.version_animation_families(families, installed, lambda *_: False,
-                reuse_installed=lambda *args: asked.append(args) or True)
-            self.assertEqual([(key, "pmh_ra001")], asked)
+                reuse_installed=lambda *args: asked.append(args) or "pmh_ra001")
+            self.assertEqual([(key, ["pmh_ra001"])], asked)
             self.assertEqual({key + "/older": "pmh_ra002", versions[key]: "pmh_ra001"}, reused["animation_bridges"])
             self.assertEqual({versions[key]: "pmh_ra001"}, g.allocate_animation_bridges(
                 {versions[key]: families.groups[key]}, {}, reused))
@@ -99,13 +99,44 @@ class RobeRgbManifestTests(unittest.TestCase):
             self.assertEqual(versions, same)
             # A model outside the build still inherits from the bank: the family gets a new name.
             versions, pinned = g.version_animation_families(families, installed, lambda *_: False,
-                reuse_installed=lambda *_: False)
+                reuse_installed=lambda *_: None)
             self.assertEqual("pmh_ra001", pinned["animation_bridges"][key + "/old"])
             self.assertEqual({versions[key]: "pmh_ra003"}, g.allocate_animation_bridges(
                 {versions[key]: families.groups[key]}, {}, pinned))
             # Only a family's installed bank can be revised in place, never a retired name.
             g.version_animation_families(families, {"animation_bridges": {key + "/old": "pmh_ra001"}},
                 lambda *_: False, reuse_installed=lambda *_: self.fail("Retired names stay reserved"))
+
+    def test_family_with_a_pinned_older_bank_still_revises_its_free_bank(self):
+        fixtures = {key.replace("body", "pmh0"): value.replace("body", "pmh0")
+                    for key, value in skeleton_tests.IndependentRobeSkeletonTests().fixtures().items()}
+        families = rig.Families(fixtures.get)
+        key = families.add("pmh0", fixtures["garment"])
+        installed = {"animation_bridges": {key + "/old": "pmh_ra001", key + "/new": "pmh_ra004",
+                                           key + "/pruned": "pmh_ra002"},
+                     "animation_bank_sets": {"pmh_ra001": {"parts": ["pmh_ra001"]},
+                                             "pmh_ra004": {"parts": ["pmh_ra004", "pmh_ra004_b01"]}}}
+        # A retired root still inherits from the older bank; only the newer one is free.
+        references = {"pmh_ra001": ["pmh40"]}
+        self.assertEqual("pmh_ra004", g.reusable_bank(["pmh_ra001", "pmh_ra004"], references))
+        self.assertIsNone(g.reusable_bank(["pmh_ra001", "pmh_ra004"], {}))
+        self.assertIsNone(g.reusable_bank(["pmh_ra001"], references))
+        with tempfile.TemporaryDirectory() as directory, patch.object(g, "ROOT", Path(directory)):
+            asked = []
+            versions, reused = g.version_animation_families(families, installed, lambda *_: False,
+                reuse_installed=lambda key, names: asked.append(names) or g.reusable_bank(names, references))
+            self.assertEqual([["pmh_ra001", "pmh_ra004"]], asked)
+            self.assertEqual({key + "/old": "pmh_ra001", key + "/pruned": "pmh_ra002", versions[key]: "pmh_ra004"},
+                             reused["animation_bridges"])
+            # Two free banks are ambiguous, so the family gets a new name and both stay as they were.
+            versions, kept = g.version_animation_families(families, installed, lambda *_: False,
+                reuse_installed=lambda key, names: g.reusable_bank(names, {}))
+            self.assertEqual(installed["animation_bridges"], kept["animation_bridges"])
+            self.assertEqual({versions[key]: "pmh_ra003"}, g.allocate_animation_bridges(
+                {versions[key]: families.groups[key]}, {}, kept))
+            with self.assertRaisesRegex(ValueError, "not an installed bank of this family"):
+                g.version_animation_families(families, installed, lambda *_: False,
+                                             reuse_installed=lambda *_: "pmh_ra002")
 
     def test_only_models_outside_the_build_pin_an_installed_bank(self):
         models = {"pmh34": b"setsupermodel pmh34 pmh_ra001\n",
@@ -144,6 +175,13 @@ class RobeRgbManifestTests(unittest.TestCase):
         selected = {"pfb0_robe182": "pfb", "pfh0_robe182": "pfh"}
         self.assertEqual({"pfh0_robe182": "pfh"}, g.wearable_robes(selected, {"pfb"}))
         self.assertEqual(selected, g.wearable_robes(selected, set()))
+
+    def test_robe_registered_only_on_a_removed_body_takes_no_phenotype(self):
+        selected = {"pfb0_robe300": "pfb", "pfb0_robe182": "pfb", "pfh0_robe182": "pfh"}
+        self.assertEqual([182, 300], g.robe_ids(selected))
+        ids = g.robe_ids(g.wearable_robes(selected, {"pfb"}))
+        self.assertEqual([182], ids)
+        self.assertEqual({182: 34}, g.allocate_phenotypes(ids, {}, ["2DA V2.0", "", "   Label Name"], {}))
 
     def test_bodies_without_a_base_root_lose_their_generated_outputs(self):
         builds = {"pfb166": {}, "pfb166_robe182": {}, "pfh166": {}, "pfb_ra062": {}, "pfh_ra112": {}}
@@ -229,6 +267,27 @@ class RobeRgbManifestTests(unittest.TestCase):
                 g.remove_stale_banks({"pmh_ra009_b01"}, manifest, {})
             g.remove_stale_banks({"pmh_ra001_b02"}, manifest, {"pmh_ra001_b02": path})
             self.assertFalse(path.exists())
+
+    def test_obsolete_outputs_are_all_proven_before_any_is_deleted(self):
+        with tempfile.TemporaryDirectory() as directory, patch.object(g, "ROOT", Path(directory)):
+            root = Path(directory)
+            active, files = {}, {}
+            for name in ("pmh_ra001_b02", "pfb166"):
+                path = root / g.model_directory(name) / f"{name}.mdl"
+                path.parent.mkdir()
+                path.write_bytes(f"newmodel {name}\n".encode())
+                active[name] = path
+                files[path.relative_to(root).as_posix()] = g.file_digest(path)
+            manifest = {"animation_bridges": {"family": "pmh_ra001"}, "files": files,
+                        "animation_bank_sets": {"pmh_ra001": {"parts": ["pmh_ra001", "pmh_ra001_b01",
+                                                                         "pmh_ra001_b02"]}}}
+            active["pfb166"].write_bytes(b"edited root")
+            with self.assertRaisesRegex(ValueError, "Removed body output is not a verified prior output"):
+                g.remove_obsolete_outputs({"pmh_ra001_b02"}, {"pfb166"}, manifest, active)
+            self.assertTrue(active["pmh_ra001_b02"].is_file() and active["pfb166"].is_file())
+            active["pfb166"].write_bytes(b"newmodel pfb166\n")
+            g.remove_obsolete_outputs({"pmh_ra001_b02"}, {"pfb166"}, manifest, active)
+            self.assertFalse(active["pmh_ra001_b02"].exists() or active["pfb166"].exists())
 
     def test_animation_update_preserves_exactly_the_recorded_native_wearers(self):
         prior = {"native_wearer_sources": {"pmh200": {}, "pfa200": {}}}

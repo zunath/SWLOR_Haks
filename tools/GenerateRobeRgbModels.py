@@ -300,8 +300,8 @@ def inherited_parent_digest(data):
     return hashlib.sha256(b"swlor-robe-bank-skeleton-v1\0" + skeleton).hexdigest()
 
 
-def remove_stale_banks(names, manifest, active):
-    """Delete tail banks a reused head no longer chains to, after proving ownership."""
+def stale_bank_paths(names, manifest, active):
+    """Tail banks a reused head no longer chains to, each proven to be an owned prior output."""
     owned = banks.bank_names(manifest)
     paths = []
     for name in sorted(names):
@@ -312,7 +312,12 @@ def remove_stale_banks(names, manifest, active):
                 manifest.get("files", {}).get(relative) != file_digest(path)):
             raise ValueError(f"Stale animation bank is not a verified prior output: {relative}")
         paths.append(path)
-    for path in paths:
+    return paths
+
+
+def remove_stale_banks(names, manifest, active):
+    """Delete tail banks a reused head no longer chains to, after proving ownership."""
+    for path in stale_bank_paths(names, manifest, active):
         path.unlink()
 
 
@@ -561,14 +566,26 @@ def outside_bank_references(manifest, active, rebuilt, stock_parent=None):
     return references
 
 
+def reusable_bank(names, references):
+    """The one installed bank of a family that no model outside the build inherits from.
+
+    A retired wearer can pin an older bank while the current wearers use a newer one,
+    so a family may have several installed. More than one free bank is ambiguous until
+    PruneRobeAnimationBridges.py removes the unused ones.
+    """
+    free = [name for name in names if not references.get(name)]
+    return free[0] if len(free) == 1 else None
+
+
 def version_animation_families(families, manifest, verify_legacy, native_bodies=None, save_source=None,
                                verify_revision=None, reuse_installed=None):
     """Give each family's current bridge content one resref.
 
-    A changed family keeps its installed resref when `reuse_installed(key, name)` confirms
-    that every model inheriting from it is rebuilt against the new content in this run, so
-    an animation change rewrites only the banks. Otherwise it receives a new resref, and
-    the old bridge stays immutable for the roots that still use it.
+    A changed family keeps an installed resref when `reuse_installed(key, names)` returns
+    the one of its installed banks whose every inheriting model is rebuilt against the new
+    content in this run, so an animation change rewrites only the banks. When it returns
+    None the family receives a new resref, and the old bridges stay immutable for the
+    roots that still use them.
     """
     prior = dict(manifest.get("animation_bridges", {}))
     versions = {}
@@ -597,10 +614,13 @@ def version_animation_families(families, manifest, verify_legacy, native_bodies=
             verify_revision(key, prior[previous], source)
             prior[version] = prior.pop(previous)
         if version not in prior and reuse_installed is not None:
-            installed = [old for old in prior if old.startswith(key + "/") and
-                         prior[old] in manifest.get("animation_bank_sets", {})]
-            if len(installed) == 1 and reuse_installed(key, prior[installed[0]]):
-                prior[version] = prior.pop(installed[0])
+            installed = {prior[old]: old for old in prior if old.startswith(key + "/") and
+                         prior[old] in manifest.get("animation_bank_sets", {})}
+            chosen = reuse_installed(key, sorted(installed)) if installed else None
+            if chosen is not None:
+                if chosen not in installed:
+                    raise ValueError(f"{key}: {chosen} is not an installed bank of this family")
+                prior[version] = prior.pop(installed[chosen])
         versions[key] = version
     return versions, {**manifest, "animation_bridges": prior}
 
@@ -662,8 +682,13 @@ def wearable_robes(selected, removed_bodies):
             if PATTERN.fullmatch(name)[1] not in removed_bodies}
 
 
-def remove_body_outputs(names, manifest, active):
-    """Delete the owned outputs of removed bodies after proving every one first."""
+def robe_ids(selected):
+    """Robe IDs that need a phenotype: only those of robes this run can build."""
+    return sorted({int(PATTERN.fullmatch(name)[2]) for name in selected})
+
+
+def removed_body_output_paths(names, manifest, active):
+    """The removed bodies' outputs still on disk, each proven to be a prior output."""
     paths = []
     for name in sorted(names):
         relative = f"{model_directory(name)}/{name}.mdl"
@@ -675,7 +700,23 @@ def remove_body_outputs(names, manifest, active):
                 manifest.get("files", {}).get(relative) != file_digest(path)):
             raise ValueError(f"Removed body output is not a verified prior output: {relative}")
         paths.append(path)
-    for path in paths:
+    return paths
+
+
+def remove_body_outputs(names, manifest, active):
+    """Delete the owned outputs of removed bodies after proving every one first."""
+    for path in removed_body_output_paths(names, manifest, active):
+        path.unlink()
+
+
+def remove_obsolete_outputs(stale_banks, removed_outputs, manifest, active):
+    """Delete dropped tail banks and removed bodies' outputs.
+
+    Every file of both kinds is proven first, so a failed proof deletes nothing.
+    """
+    paths = stale_bank_paths(stale_banks, manifest, active)
+    paths += removed_body_output_paths(removed_outputs, manifest, active)
+    for path in dict.fromkeys(paths):
         path.unlink()
 
 
@@ -781,11 +822,21 @@ def main():
     active = fresh_active_models()
     registered = {line.split()[1].lower() for line in tint.OUTPUT_2DA.read_text().splitlines()[3:] if len(line.split()) >= 4}
     selected = {name: path for name, path in active.items() if PATTERN.fullmatch(name) and name in registered}
-    ids = sorted({int(PATTERN.fullmatch(name)[2]) for name in selected})
+    prior_manifest = json.loads(MANIFEST.read_text()) if MANIFEST.is_file() else {}
+    stock = tint.read_stock_key_models(args.game_data)
+    validate_stock_inventory(stock)
+    removed_bodies, removed_outputs = removed_body_outputs(
+        prior_manifest, lambda base: base in active or base in stock)
+    if removed_bodies:
+        print(f"Removing {len(removed_outputs)} generated outputs of bodies without a base root: "
+              f"{', '.join(sorted(removed_bodies))}.", flush=True)
+    # Filter before allocation: a robe registered only on a removed body must not take
+    # one of the scarce phenotype slots, and its outputs are proven by the removal instead.
+    selected = wearable_robes(selected, removed_bodies)
+    ids = robe_ids(selected)
     prior = read_mappings()
     native_table = PHENOTYPES.read_text().splitlines()
     id_map = allocate_phenotypes(ids, prior, native_table, active)
-    prior_manifest = json.loads(MANIFEST.read_text()) if MANIFEST.is_file() else {}
     args.preserve_native_wearer = native_wearer_selection(
         args.preserve_native_wearer, prior_manifest, bool(args.update_animation))
     bank_errors = animation_bank_errors(prior_manifest, active)
@@ -800,14 +851,6 @@ def main():
     for directory in ("original", "source", "input", "binary", "decompiled"):
         (stage / directory).mkdir(parents=True, exist_ok=True)
     compiler, compiler_hash = mdl.prepare_compiler(stage)
-    stock = tint.read_stock_key_models(args.game_data)
-    validate_stock_inventory(stock)
-    removed_bodies, removed_outputs = removed_body_outputs(
-        prior_manifest, lambda base: base in active or base in stock)
-    if removed_bodies:
-        print(f"Removing {len(removed_outputs)} generated outputs of bodies without a base root: "
-              f"{', '.join(sorted(removed_bodies))}.", flush=True)
-    selected = wearable_robes(selected, removed_bodies)
     dependencies = {}
     missing = set()
     def load(name):
@@ -947,20 +990,25 @@ def main():
         rebuilt.update((root_name, root_name + "_robe" + robe_id))
     outside_references = {}
     revised_in_place = []
-    def reuse_installed(key, name):
+    def reuse_installed(key, names):
         # Reading every active model header takes minutes; only a changed bank needs it.
         if "scan" not in outside_references:
             outside_references["scan"] = outside_bank_references(
                 prior_manifest, active, rebuilt,
                 lambda parent: mdl.supermodel(tint.extract_stock_bif_resource(*stock[parent])) if parent in stock else "")
-        users = outside_references["scan"].get(name)
-        if users:
-            print(f"{key}: {name} stays unchanged for {len(users)} models outside this build "
-                  f"(e.g. {', '.join(sorted(users)[:3])}); allocating a new bank name.", flush=True)
-            return False
+        for name in names:
+            users = outside_references["scan"].get(name)
+            if users:
+                print(f"{key}: {name} stays unchanged for {len(users)} models outside this build "
+                      f"(e.g. {', '.join(sorted(users)[:3])}).", flush=True)
+        name = reusable_bank(names, outside_references["scan"])
+        if name is None:
+            print(f"{key}: no single installed bank is free of outside models; allocating a new bank name.",
+                  flush=True)
+            return None
         print(f"{key}: revising {name} in place.", flush=True)
         revised_in_place.append(name)
-        return True
+        return name
     versions, prior_manifest = version_animation_families(
         families, prior_manifest, verify_legacy_bridge, dependencies, save_bridge_source,
         verify_revision if args.update_animation else None, reuse_installed)
@@ -1296,8 +1344,7 @@ def main():
         output_files = {f"sw_2da/{path.name}": file_digest(stage / path.name) for path in (TABLE, PHENOTYPES)}
         output_files.update({f"{model_directory(name)}/{name}.mdl":
                              file_digest(stage / "binary" / f"{name}.mdl") for name in packaged_names})
-        remove_stale_banks(stale_banks, prior_manifest, current_active)
-        remove_body_outputs(removed_outputs - packaged_names, prior_manifest, current_active)
+        remove_obsolete_outputs(stale_banks, removed_outputs - packaged_names, prior_manifest, current_active)
         for name in packaged_names:
             directory = ROOT / model_directory(name)
             if directory.resolve().parent != ROOT.resolve():
