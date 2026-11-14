@@ -5,15 +5,47 @@ import tempfile
 import unittest
 import sys
 import os
+import struct
 from unittest.mock import patch
 
 import GenerateRobeRgbModels as g
 import GenerateTintMapAssets as tint
 import RobeSkeleton as rig
 import TestRobeSkeleton as skeleton_tests
+from RobePoseAudit import Model
 
 
 class RobeRgbManifestTests(unittest.TestCase):
+    def test_robe254_wearer_meshes_have_no_self_illumination(self):
+        root = g.ROOT
+        manifest = json.loads((root / "tools/RobeRgbModels.json").read_text())
+        garment_nodes = manifest["garment_node_names"]["pmh207"]
+        names = ("armor276", "mesh_0357", "mesh_0357.001", "mesh_0491", "mesh_0491.001")
+        for relative, targets in (
+            ("sw_pt_robe/pmh0_robe254.mdl", set(names)),
+            ("sw_pt_root/pmh207.mdl", {garment_nodes[name] for name in names}),
+        ):
+            with self.subTest(model=relative):
+                data = (root / relative).read_bytes()
+                model = Model(data, read_clips=False)
+                colors = {}
+                for name, _, _, _, node in model.nodes:
+                    if name not in targets or not model.uint(node + 108) & 32:
+                        continue
+                    keys = 12 + model.uint(node + 84)
+                    values = 12 + model.uint(node + 96)
+                    for index in range(model.uint(node + 88)):
+                        kind, rows, _, start, columns = struct.unpack_from(
+                            "<IHHHB", data, keys + index * 12
+                        )
+                        if kind != 100:  # Mesh selfillumcolor.
+                            continue
+                        self.assertEqual((rows, columns), (1, 3), name)
+                        self.assertNotIn(name, colors)
+                        colors[name] = struct.unpack_from("<3f", data, values + start * 4)
+                self.assertEqual({name: (0.0, 0.0, 0.0) for name in targets}, colors)
+                self.assertEqual(manifest["files"][relative], g.content_digest(root / relative, data))
+
     def test_generated_chain_includes_wearer_and_all_inherited_banks(self):
         models = {f"node{i}": f"setsupermodel node{i} node{i+1}\n".encode() for i in range(32)}
         models["node31"] = b"setsupermodel node31 NULL\n"
