@@ -507,6 +507,33 @@ def apply_variants(args):
         baseline.close()
 
 
+def base_bank_preserved(before, installed, record):
+    """Whether a base bank is still the baseline's, apart from rotations a recorded in-place revision rewrote.
+
+    `GenerateRifleHoldAnimations.py --update-robe-banks` rewrites the support arm's rotation values in the rifle
+    clips and records the clips and joints here. Putting the baseline's values back must give the baseline bank
+    byte for byte, so nothing else can have changed.
+    """
+    if before == installed:
+        return True
+    revisions = record.get("base_rotation_revisions", [])
+    if not revisions:
+        return False
+    import GenerateRifleHoldAnimations as rifle
+    restored = bytearray(installed)
+    for revision in revisions:
+        if tuple(revision["joints"]) != rifle.ARM:
+            raise ValueError("Only the rifle support arm may be revised in a base bank")
+        for clip in revision["clips"]:
+            ours, old = rifle.arm_rotations(restored, clip), rifle.arm_rotations(before, clip)
+            for joint in revision["joints"]:
+                (rows, _, values, columns), (old_rows, _, old_values, old_columns) = ours[joint], old[joint]
+                if (rows, columns) != (old_rows, old_columns):
+                    return False
+                restored[values:values + rows * columns * 4] = before[old_values:old_values + rows * columns * 4]
+    return bytes(restored) == before
+
+
 def check_installed(manifest, game_data, enforce=True):
     records = manifest.get("animation_extensions", [])
     if not records:
@@ -530,7 +557,7 @@ def check_installed(manifest, game_data, enforce=True):
         for old, new in record["parents"].items():
             old_parts = prior["animation_bank_sets"][old]["parts"]
             before = banks.join([baseline.read(f"{robes.model_directory(part)}/{part}.mdl") for part in old_parts])
-            if before != robes.owned_animation_bytes(old, manifest, active):
+            if not base_bank_preserved(before, robes.owned_animation_bytes(old, manifest, active), record):
                 raise ValueError(f"Existing animation bank changed: {old}")
             installed = robes.owned_animation_bytes(new, manifest, active)
             if installed != make_layer(before, installed, wanted, new):
