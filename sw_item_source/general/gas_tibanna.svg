@@ -1,0 +1,142 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="48%" r="70%">
+      <stop offset="0" stop-color="#15171a"/>
+      <stop offset="1" stop-color="#050607"/>
+    </radialGradient>
+    <linearGradient id="body" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#15181c"/>
+      <stop offset="0.16" stop-color="#3b434c"/>
+      <stop offset="0.34" stop-color="#a7b2bd"/>
+      <stop offset="0.44" stop-color="#6d7781"/>
+      <stop offset="0.78" stop-color="#363d45"/>
+      <stop offset="1" stop-color="#121417"/>
+    </linearGradient>
+    <linearGradient id="band" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#1c1f23"/>
+      <stop offset="0.3" stop-color="#e4e9ef"/>
+      <stop offset="0.45" stop-color="#8f99a3"/>
+      <stop offset="0.8" stop-color="#3f464e"/>
+      <stop offset="1" stop-color="#16191c"/>
+    </linearGradient>
+    <linearGradient id="shoulder" x1="0" y1="0" x2="1" y2="0.4">
+      <stop offset="0" stop-color="#1b1e22"/>
+      <stop offset="0.3" stop-color="#b9c3cd"/>
+      <stop offset="0.5" stop-color="#6b747e"/>
+      <stop offset="1" stop-color="#15181b"/>
+    </linearGradient>
+    <linearGradient id="brass" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#3d2a0c"/>
+      <stop offset="0.35" stop-color="#e6bf62"/>
+      <stop offset="0.55" stop-color="#a77a2a"/>
+      <stop offset="1" stop-color="#3a280b"/>
+    </linearGradient>
+    <linearGradient id="wheel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ff7a5c"/>
+      <stop offset="0.45" stop-color="#c8301f"/>
+      <stop offset="1" stop-color="#5a120b"/>
+    </linearGradient>
+    <radialGradient id="gas" cx="45%" cy="45%" r="62%">
+      <stop offset="0" stop-color="#fffcec"/>
+      <stop offset="0.35" stop-color="#ffeaa8"/>
+      <stop offset="0.75" stop-color="#ecbd5c"/>
+      <stop offset="1" stop-color="#8e5a14"/>
+    </radialGradient>
+    <linearGradient id="bezel" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#c9d1d9"/>
+      <stop offset="0.5" stop-color="#4a525b"/>
+      <stop offset="1" stop-color="#0f1113"/>
+    </linearGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0"/>
+      <stop offset="0.18" stop-color="#ffffff" stop-opacity="0.55"/>
+      <stop offset="0.3" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="blur6" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6"/></filter>
+    <filter id="blur2" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2"/></filter>
+    <filter id="blur1" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="1"/></filter>
+    <clipPath id="win"><rect x="109" y="101" width="38" height="94" rx="14"/></clipPath>
+  </defs>
+  <rect width="256" height="256" fill="url(#bg)"/>
+  <g transform="translate(128 128) scale(0.87) translate(-128 -120)">
+  <!-- floor shadow -->
+  <ellipse cx="128" cy="236" rx="62" ry="9" fill="#000" opacity="0.8" filter="url(#blur2)"/>
+
+  <!-- cylinder body -->
+  <path d="M74 84 Q74 62 128 58 Q182 62 182 84 L182 222 Q182 234 128 236 Q74 234 74 222 Z" fill="url(#body)"/>
+  <!-- shoulder dome -->
+  <path d="M74 88 Q76 52 128 46 Q180 52 182 88 Q160 80 128 79 Q96 80 74 88 Z" fill="url(#shoulder)"/>
+  <path d="M86 70 Q100 54 126 51" stroke="#eef3f8" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.7"/>
+
+  <!-- upper band -->
+  <path d="M72 86 Q128 74 184 86 L184 98 Q128 88 72 98 Z" fill="url(#band)"/>
+  <path d="M72 98 Q128 88 184 98" stroke="#0b0c0e" stroke-width="2" fill="none"/>
+  <!-- lower band -->
+  <path d="M72 200 Q128 192 184 200 L184 214 Q128 206 72 214 Z" fill="url(#band)"/>
+  <path d="M72 214 Q128 206 184 214" stroke="#0b0c0e" stroke-width="2" fill="none"/>
+  <!-- base foot ring -->
+  <path d="M76 222 Q128 214 180 222 L180 230 Q128 240 76 230 Z" fill="#23272c"/>
+  <path d="M76 222 Q128 214 180 222" stroke="#7d8790" stroke-width="2" fill="none"/>
+  <!-- band rivets -->
+  <g fill="#dfe5eb">
+    <circle cx="86" cy="93" r="2.2"/><circle cx="170" cy="93" r="2.2"/>
+    <circle cx="86" cy="208" r="2.2"/><circle cx="170" cy="208" r="2.2"/>
+  </g>
+
+  <!-- side highlight streak on body -->
+  <path d="M84 104 L84 192" stroke="#c9d2db" stroke-width="3" opacity="0.35" stroke-linecap="round"/>
+
+  <!-- body hoop reflections -->
+  <path d="M76 120 Q128 112 180 120" stroke="#000" stroke-width="2" fill="none" opacity="0.35"/>
+  <path d="M76 176 Q128 168 180 176" stroke="#000" stroke-width="2" fill="none" opacity="0.35"/>
+  <!-- warm glow spilling around the sight glass -->
+  <rect x="100" y="92" width="56" height="112" rx="20" fill="#ffd56e" opacity="0.8" filter="url(#blur6)"/>
+  <!-- sight glass bezel -->
+  <rect x="104" y="96" width="48" height="104" rx="18" fill="url(#bezel)"/>
+  <rect x="107" y="99" width="42" height="98" rx="16" fill="#14161a"/>
+  <!-- swirling tibanna vapor -->
+  <g clip-path="url(#win)">
+    <rect x="109" y="101" width="38" height="94" fill="url(#gas)"/>
+    <path d="M104 184 C116 168 146 178 150 156 C154 136 124 134 120 148 C116 160 136 164 140 150" stroke="#fffdf0" stroke-width="6" fill="none" stroke-linecap="round" opacity="0.95" filter="url(#blur1)"/>
+    <path d="M106 130 C116 116 140 126 150 110" stroke="#fff6d2" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.9" filter="url(#blur1)"/>
+    <path d="M106 150 C112 140 124 138 134 128" stroke="#c88a2a" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.75" filter="url(#blur1)"/>
+    <path d="M110 198 C124 186 136 196 152 186" stroke="#b57a22" stroke-width="6" fill="none" stroke-linecap="round" opacity="0.8" filter="url(#blur1)"/>
+    <path d="M108 104 C120 112 136 104 150 100" stroke="#c48a30" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.7" filter="url(#blur1)"/>
+    <circle cx="126" cy="170" r="2" fill="#fff"/><circle cx="140" cy="120" r="1.6" fill="#fff"/><circle cx="116" cy="140" r="1.4" fill="#fff"/>
+    <rect x="109" y="101" width="38" height="94" fill="url(#glass)"/>
+    <path d="M141 108 L141 132" stroke="#fff" stroke-width="2.5" opacity="0.55" stroke-linecap="round"/>
+  </g>
+  <rect x="109" y="101" width="38" height="94" rx="14" fill="none" stroke="#000" stroke-width="3" opacity="0.5"/>
+
+  <!-- neck collar -->
+  <path d="M108 50 L108 38 Q128 34 148 38 L148 50 Q128 54 108 50 Z" fill="url(#band)"/>
+  <ellipse cx="128" cy="38" rx="20" ry="4" fill="#9aa4ae"/>
+  <!-- brass valve body -->
+  <rect x="117" y="18" width="22" height="22" rx="3" fill="url(#brass)"/>
+  <rect x="117" y="18" width="22" height="3" fill="#f4dc95" opacity="0.7"/>
+  <!-- outlet nozzle -->
+  <path d="M139 24 L156 24 L156 33 L139 33 Z" fill="url(#brass)"/>
+  <rect x="154" y="22" width="5" height="13" rx="1" fill="#6b4c18"/>
+  <!-- red hand wheel -->
+  <ellipse cx="128" cy="15" rx="22" ry="6.5" fill="none" stroke="#3a0b07" stroke-width="7"/>
+  <ellipse cx="128" cy="15" rx="22" ry="6.5" fill="none" stroke="url(#wheel)" stroke-width="4.5"/>
+  <path d="M108 15 L148 15 M128 9 L128 21" stroke="#9e2416" stroke-width="3"/>
+  <circle cx="128" cy="15" r="4" fill="#d9dfe5" stroke="#2a2d31" stroke-width="1"/>
+  <path d="M112 11 Q120 8.6 128 8.6" stroke="#ffb3a0" stroke-width="1.6" fill="none" opacity="0.9"/>
+
+  <!-- pressure gauge on the shoulder -->
+  <circle cx="92" cy="66" r="12" fill="#1a1d20"/>
+  <circle cx="92" cy="66" r="10.5" fill="url(#brass)"/>
+  <circle cx="92" cy="66" r="8" fill="#f1ecd8"/>
+  <path d="M86 70 A7 7 0 0 1 98 70" stroke="#c8301f" stroke-width="1.8" fill="none"/>
+  <path d="M92 66 L96.5 60.5" stroke="#1b1b1b" stroke-width="1.8" stroke-linecap="round"/>
+  <circle cx="92" cy="66" r="1.5" fill="#1b1b1b"/>
+  <path d="M86 60 Q89 57.5 93 57.5" stroke="#fff" stroke-width="1.5" fill="none" opacity="0.9"/>
+  <!-- gauge pipe to the valve -->
+  <path d="M100 58 Q108 46 116 34" stroke="#2a2416" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <path d="M100 58 Q108 46 116 34" stroke="url(#brass)" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+  <!-- rim light on the right edge -->
+  <path d="M180 96 L180 200" stroke="#f3cf7a" stroke-width="2" opacity="0.35"/>
+  </g>
+</svg>

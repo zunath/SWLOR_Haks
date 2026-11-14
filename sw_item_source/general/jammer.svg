@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="45%" r="72%">
+      <stop offset="0" stop-color="#22142e"/>
+      <stop offset="1" stop-color="#050307"/>
+    </radialGradient>
+    <linearGradient id="box" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#c7d0d9"/>
+      <stop offset="0.5" stop-color="#6b7581"/>
+      <stop offset="1" stop-color="#22282f"/>
+    </linearGradient>
+    <linearGradient id="side" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#3a424b"/>
+      <stop offset="1" stop-color="#14181c"/>
+    </linearGradient>
+    <linearGradient id="mast" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#2a3037"/>
+      <stop offset="0.45" stop-color="#d0d8e0"/>
+      <stop offset="1" stop-color="#2a3037"/>
+    </linearGradient>
+    <radialGradient id="tip" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="0.4" stop-color="#ffd28a"/>
+      <stop offset="1" stop-color="#ff7a1a" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="256" height="256" fill="url(#bg)"/>
+  <!-- jagged static bursts: the scrambled signal -->
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M30 60 L52 44 L62 66 L82 46 L92 70" stroke="#ff9a3c" stroke-width="7"/>
+    <path d="M164 70 L174 46 L194 66 L204 44 L226 60" stroke="#ff9a3c" stroke-width="7"/>
+    <path d="M20 100 L44 82 L54 106 L76 86" stroke="#b77cff" stroke-width="6"/>
+    <path d="M180 86 L202 106 L212 82 L236 100" stroke="#b77cff" stroke-width="6"/>
+    <path d="M102 26 L118 40 L128 18 L138 40 L154 26" stroke="#ffd28a" stroke-width="6"/>
+  </g>
+  <!-- two angled antennas -->
+  <rect x="92" y="60" width="12" height="96" rx="5" fill="url(#mast)" transform="rotate(-18 98 156)"/>
+  <rect x="152" y="60" width="12" height="96" rx="5" fill="url(#mast)" transform="rotate(18 158 156)"/>
+  <circle cx="68" cy="66" r="22" fill="url(#tip)"/>
+  <circle cx="188" cy="66" r="22" fill="url(#tip)"/>
+  <circle cx="68" cy="66" r="7" fill="#fff4dc"/>
+  <circle cx="188" cy="66" r="7" fill="#fff4dc"/>
+  <!-- the armored transmitter housing -->
+  <path d="M44 166 L128 136 L212 166 L128 196 Z" fill="url(#box)"/>
+  <path d="M44 166 L128 196 L128 238 L44 206 Z" fill="url(#side)"/>
+  <path d="M212 166 L128 196 L128 238 L212 206 Z" fill="#191d22"/>
+  <g fill="#0c0f12">
+    <path d="M58 180 L114 200 L114 208 L58 188 Z"/>
+    <path d="M58 194 L114 214 L114 222 L58 202 Z"/>
+  </g>
+  <path d="M142 204 L198 184 L198 194 L142 214 Z" fill="#ff7a1a"/>
+  <path d="M142 218 L180 204 L180 212 L142 226 Z" fill="#b77cff"/>
+  <ellipse cx="128" cy="166" rx="26" ry="9" fill="#2a3037" stroke="#9aa5b1" stroke-width="3"/>
+</svg>

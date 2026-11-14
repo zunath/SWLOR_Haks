@@ -1,0 +1,221 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256"><defs>
+<radialGradient id="bg" cx="50%" cy="50%" r="70%"><stop offset="0" stop-color="#16171a"/><stop offset="1" stop-color="#050607"/></radialGradient>
+<linearGradient id="dsH" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#07090c"/><stop offset="0.2" stop-color="#27303b"/><stop offset="0.42" stop-color="#65747f"/><stop offset="0.64" stop-color="#222a33"/><stop offset="0.88" stop-color="#2e3945"/><stop offset="1" stop-color="#07090c"/></linearGradient>
+<linearGradient id="goldH" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#3f2809"/><stop offset="0.22" stop-color="#c89a38"/><stop offset="0.42" stop-color="#fff0b4"/><stop offset="0.7" stop-color="#a77a24"/><stop offset="1" stop-color="#352106"/></linearGradient>
+<radialGradient id="boltG" cx="35%" cy="32%" r="75%"><stop offset="0" stop-color="#fff3c4"/><stop offset="0.5" stop-color="#b98a34"/><stop offset="1" stop-color="#2a1a06"/></radialGradient>
+<radialGradient id="topG" cx="45%" cy="30%" r="80%"><stop offset="0" stop-color="#4a5663"/><stop offset="0.6" stop-color="#232b34"/><stop offset="1" stop-color="#0f1318"/></radialGradient>
+<radialGradient id="recG" cx="50%" cy="60%" r="60%"><stop offset="0" stop-color="#1b3a42"/><stop offset="1" stop-color="#050709"/></radialGradient>
+<radialGradient id="glowV" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#b57bff" stop-opacity="0.85"/><stop offset="0.5" stop-color="#6a3bd8" stop-opacity="0.45"/><stop offset="1" stop-color="#2b1580" stop-opacity="0"/></radialGradient>
+<radialGradient id="glowT" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#7ffff0" stop-opacity="0.9"/><stop offset="0.5" stop-color="#1fc7c0" stop-opacity="0.45"/><stop offset="1" stop-color="#0a6a78" stop-opacity="0"/></radialGradient>
+<linearGradient id="vL" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7c46d8"/><stop offset="1" stop-color="#2a0f68"/></linearGradient>
+<linearGradient id="vM" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d9b8ff"/><stop offset="0.5" stop-color="#9560ec"/><stop offset="1" stop-color="#4a1fa8"/></linearGradient>
+<linearGradient id="vR" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4a229c"/><stop offset="1" stop-color="#190650"/></linearGradient>
+<linearGradient id="tL" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2fd0c6"/><stop offset="1" stop-color="#0a5262"/></linearGradient>
+<linearGradient id="tM" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b8fff4"/><stop offset="0.5" stop-color="#46e0d2"/><stop offset="1" stop-color="#127c88"/></linearGradient>
+<linearGradient id="tR" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#128c92"/><stop offset="1" stop-color="#05303c"/></linearGradient>
+<filter id="b1" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="1"/></filter>
+<filter id="b2" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2"/></filter>
+<filter id="b4" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="4"/></filter>
+<filter id="b8" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="8"/></filter>
+</defs>
+<rect id="background" width="256" height="256" fill="url(#bg)"/>
+<ellipse cx="128" cy="219" rx="80" ry="5" fill="#000" opacity="0.85" filter="url(#b2)"/>
+<path d="M40,198 L40,208 A88,20 0 0 0 216,208 L216,198 A88,20 0 0 1 40,198 Z" fill="url(#dsH)" stroke="#0b0d10" stroke-width="1.2"/>
+<ellipse cx="128" cy="198" rx="88" ry="20" fill="url(#topG)" stroke="#0b0d10" stroke-width="1.2"/>
+<ellipse cx="128" cy="198" rx="86" ry="19" fill="none" stroke="url(#goldH)" stroke-width="2"/>
+<circle cx="204.3" cy="202.5" r="1.8" fill="url(#boltG)" stroke="#0b0d10" stroke-width="0.7"/>
+<circle cx="183.9" cy="210.4" r="1.8" fill="url(#boltG)" stroke="#0b0d10" stroke-width="0.7"/>
+<circle cx="148.4" cy="214.9" r="1.8" fill="url(#boltG)" stroke="#0b0d10" stroke-width="0.7"/>
+<circle cx="107.6" cy="214.9" r="1.8" fill="url(#boltG)" stroke="#0b0d10" stroke-width="0.7"/>
+<circle cx="72.1" cy="210.4" r="1.8" fill="url(#boltG)" stroke="#0b0d10" stroke-width="0.7"/>
+<circle cx="51.7" cy="202.5" r="1.8" fill="url(#boltG)" stroke="#0b0d10" stroke-width="0.7"/>
+<path d="M54,162 L54,194 A74,18 0 0 0 202,194 L202,162 A74,18 0 0 1 54,162 Z" fill="url(#dsH)" stroke="#0b0d10" stroke-width="1.2"/>
+<path d="M54,166 L54,171 A74,18 0 0 0 202,171 L202,166 A74,18 0 0 1 54,166 Z" fill="url(#goldH)" stroke="#0b0d10" stroke-width="0.8"/>
+<path d="M54,187 L54,191 A74,18 0 0 0 202,191 L202,187 A74,18 0 0 1 54,187 Z" fill="url(#goldH)" stroke="#0b0d10" stroke-width="0.8"/>
+<rect x="89.5" y="189.7" width="5" height="12" rx="2" fill="#0a0612" stroke="#0b0d10" stroke-width="0.6"/>
+<rect x="90.5" y="191.2" width="3" height="9" rx="1.5" fill="#b78cff" filter="url(#b1)"/>
+<rect x="91" y="191.7" width="2" height="7" rx="1" fill="#f0e2ff"/>
+<rect x="109.5" y="191.6" width="5" height="12" rx="2" fill="#0a0612" stroke="#0b0d10" stroke-width="0.6"/>
+<rect x="110.5" y="193.1" width="3" height="9" rx="1.5" fill="#b78cff" filter="url(#b1)"/>
+<rect x="111" y="193.6" width="2" height="7" rx="1" fill="#f0e2ff"/>
+<rect x="141.5" y="191.6" width="5" height="12" rx="2" fill="#0a0612" stroke="#0b0d10" stroke-width="0.6"/>
+<rect x="142.5" y="193.1" width="3" height="9" rx="1.5" fill="#b78cff" filter="url(#b1)"/>
+<rect x="143" y="193.6" width="2" height="7" rx="1" fill="#f0e2ff"/>
+<rect x="161.5" y="189.7" width="5" height="12" rx="2" fill="#0a0612" stroke="#0b0d10" stroke-width="0.6"/>
+<rect x="162.5" y="191.2" width="3" height="9" rx="1.5" fill="#b78cff" filter="url(#b1)"/>
+<rect x="163" y="191.7" width="2" height="7" rx="1" fill="#f0e2ff"/>
+<ellipse cx="128" cy="162" rx="74" ry="18" fill="url(#topG)" stroke="#0b0d10" stroke-width="1.2"/>
+<ellipse cx="128" cy="162" rx="72" ry="17" fill="none" stroke="url(#goldH)" stroke-width="2.4"/>
+<ellipse cx="128" cy="162" rx="58" ry="14" fill="url(#recG)" stroke="#0b0d10" stroke-width="1.4"/>
+<ellipse cx="128" cy="163" rx="48" ry="10" fill="#27d6cc" opacity="0.55" filter="url(#b4)"/>
+<ellipse cx="128" cy="163" rx="56" ry="13" fill="none" stroke="#1fe0d6" stroke-width="1" opacity="0.7"/>
+<circle cx="194.0" cy="162.0" r="1.6" fill="url(#boltG)" stroke="#0b0d10" stroke-width="0.7"/>
+<circle cx="161.0" cy="175.9" r="1.6" fill="url(#boltG)" stroke="#0b0d10" stroke-width="0.7"/>
+<circle cx="95.0" cy="175.9" r="1.6" fill="url(#boltG)" stroke="#0b0d10" stroke-width="0.7"/>
+<circle cx="62.0" cy="162.0" r="1.6" fill="url(#boltG)" stroke="#0b0d10" stroke-width="0.7"/>
+<circle cx="95.0" cy="148.1" r="1.6" fill="url(#boltG)" stroke="#0b0d10" stroke-width="0.7"/>
+<circle cx="161.0" cy="148.1" r="1.6" fill="url(#boltG)" stroke="#0b0d10" stroke-width="0.7"/>
+<polygon points="96.4,50.7 103.6,50.7 99.6,148.1 90.4,148.1" fill="url(#dsH)" stroke="#0b0d10" stroke-width="1" stroke-linejoin="round"/>
+<line x1="98.9" y1="52.7" x2="93.6" y2="146.1" stroke="#d7e4f0" stroke-width="0.9" opacity="0.3"/>
+<rect x="92.7" y="81.8" width="11.1" height="6" rx="1.5" fill="url(#goldH)" stroke="#0b0d10" stroke-width="0.8"/>
+<rect x="90.1" y="123.7" width="12.0" height="6" rx="1.5" fill="url(#goldH)" stroke="#0b0d10" stroke-width="0.8"/>
+<rect x="88.0" y="144.1" width="14" height="8" rx="2" fill="url(#goldH)" stroke="#0b0d10" stroke-width="0.9"/>
+<circle cx="95.0" cy="148.1" r="1.5" fill="url(#boltG)" stroke="#0b0d10" stroke-width="0.7"/>
+<rect x="94.0" y="45.7" width="12" height="10" rx="2.5" fill="url(#goldH)" stroke="#0b0d10" stroke-width="0.9"/>
+<polygon points="152.4,50.7 159.6,50.7 165.6,148.1 156.4,148.1" fill="url(#dsH)" stroke="#0b0d10" stroke-width="1" stroke-linejoin="round"/>
+<line x1="154.9" y1="52.7" x2="159.6" y2="146.1" stroke="#d7e4f0" stroke-width="0.9" opacity="0.3"/>
+<rect x="152.2" y="81.8" width="11.1" height="6" rx="1.5" fill="url(#goldH)" stroke="#0b0d10" stroke-width="0.8"/>
+<rect x="153.9" y="123.7" width="12.0" height="6" rx="1.5" fill="url(#goldH)" stroke="#0b0d10" stroke-width="0.8"/>
+<rect x="154.0" y="144.1" width="14" height="8" rx="2" fill="url(#goldH)" stroke="#0b0d10" stroke-width="0.9"/>
+<circle cx="161.0" cy="148.1" r="1.5" fill="url(#boltG)" stroke="#0b0d10" stroke-width="0.7"/>
+<rect x="150.0" y="45.7" width="12" height="10" rx="2.5" fill="url(#goldH)" stroke="#0b0d10" stroke-width="0.9"/>
+<path d="M72,62 A56,13 0 0 1 184,62" fill="none" stroke="#06080b" stroke-width="9" stroke-linecap="round"/>
+<path d="M72,62 A56,13 0 0 1 184,62" fill="none" stroke="#8a6320" stroke-width="6" stroke-linecap="round"/>
+<path d="M72,61 A56,13 0 0 1 184,61" fill="none" stroke="#d7a73f" stroke-width="2" opacity="0.8" transform="translate(0,-1)"/>
+<ellipse cx="128" cy="116" rx="62" ry="64" fill="url(#glowV)" filter="url(#b8)" opacity="0.8"/>
+<ellipse cx="94" cy="130" rx="30" ry="42" fill="url(#glowT)" filter="url(#b8)" opacity="0.7"/>
+<ellipse cx="164" cy="130" rx="28" ry="40" fill="url(#glowT)" filter="url(#b8)" opacity="0.6"/>
+<ellipse cx="98.0" cy="114.0" rx="30.6" ry="55.0" fill="url(#glowT)" filter="url(#b4)" opacity="0.75"/>
+<polygon points="86.0,64.0 79.0,107.0 90.0,102.0" fill="url(#tL)" stroke="#08040f" stroke-width="0.9" stroke-linejoin="round"/>
+<polygon points="86.0,64.0 79.0,107.0 90.0,102.0" fill="#ffffff" opacity="0.1"/>
+<polygon points="86.0,64.0 90.0,102.0 104.0,102.0" fill="url(#tM)" stroke="#08040f" stroke-width="0.9" stroke-linejoin="round"/>
+<polygon points="86.0,64.0 90.0,102.0 104.0,102.0" fill="#ffffff" opacity="0.28"/>
+<polygon points="86.0,64.0 104.0,102.0 112.0,107.0" fill="url(#tR)" stroke="#08040f" stroke-width="0.9" stroke-linejoin="round"/>
+<polygon points="86.0,64.0 104.0,102.0 112.0,107.0" fill="#ffffff" opacity="0.04"/>
+<polygon points="79.0,107.0 90.0,102.0 92.0,164.0 80.0,159.0" fill="url(#tL)" stroke="#08040f" stroke-width="0.9" stroke-linejoin="round"/>
+<polygon points="90.0,102.0 104.0,102.0 106.0,164.0 92.0,164.0" fill="url(#tM)" stroke="#08040f" stroke-width="0.9" stroke-linejoin="round"/>
+<polygon points="104.0,102.0 112.0,107.0 114.0,159.0 106.0,164.0" fill="url(#tR)" stroke="#08040f" stroke-width="0.9" stroke-linejoin="round"/>
+<polygon points="97.0,109.4 101.0,123.7 103.0,156.0 95.0,156.0 93.0,123.7" fill="#ffffff" opacity="0.5" filter="url(#b2)"/>
+<line x1="97.0" y1="108.0" x2="97.0" y2="152.0" stroke="#ffffff" stroke-width="2" stroke-linecap="round" opacity="0.8" filter="url(#b1)"/>
+<polyline points="90.0,102.0 97.0,139.0 106.0,164.0" fill="none" stroke="#ffffff" stroke-width="0.8" opacity="0.28"/>
+<polyline points="86.0,64.0 90.0,102.0 92.0,164.0" fill="none" stroke="#ffffff" stroke-width="1.1" stroke-linejoin="round" opacity="0.675"/>
+<polyline points="86.0,64.0 104.0,102.0 106.0,164.0" fill="none" stroke="#ffffff" stroke-width="1.1" stroke-linejoin="round" opacity="0.375"/>
+<polyline points="86.0,64.0 79.0,107.0 80.0,159.0" fill="none" stroke="#ffffff" stroke-width="0.8" opacity="0.4"/>
+<circle cx="86.0" cy="67.0" r="2.2" fill="#ffffff" opacity="0.9" filter="url(#b1)"/>
+<ellipse cx="164.8" cy="119.0" rx="29.7" ry="49.5" fill="url(#glowV)" filter="url(#b4)" opacity="0.75"/>
+<polygon points="174.0,74.0 148.0,113.0 158.0,108.0" fill="url(#vL)" stroke="#08040f" stroke-width="0.9" stroke-linejoin="round"/>
+<polygon points="174.0,74.0 148.0,113.0 158.0,108.0" fill="#ffffff" opacity="0.1"/>
+<polygon points="174.0,74.0 158.0,108.0 172.0,108.0" fill="url(#vM)" stroke="#08040f" stroke-width="0.9" stroke-linejoin="round"/>
+<polygon points="174.0,74.0 158.0,108.0 172.0,108.0" fill="#ffffff" opacity="0.28"/>
+<polygon points="174.0,74.0 172.0,108.0 181.0,113.0" fill="url(#vR)" stroke="#08040f" stroke-width="0.9" stroke-linejoin="round"/>
+<polygon points="174.0,74.0 172.0,108.0 181.0,113.0" fill="#ffffff" opacity="0.04"/>
+<polygon points="148.0,113.0 158.0,108.0 158.0,164.0 148.0,159.0" fill="url(#vL)" stroke="#08040f" stroke-width="0.9" stroke-linejoin="round"/>
+<polygon points="158.0,108.0 172.0,108.0 172.0,164.0 158.0,164.0" fill="url(#vM)" stroke="#08040f" stroke-width="0.9" stroke-linejoin="round"/>
+<polygon points="172.0,108.0 181.0,113.0 181.0,159.0 172.0,164.0" fill="url(#vR)" stroke="#08040f" stroke-width="0.9" stroke-linejoin="round"/>
+<polygon points="165.0,114.7 169.0,127.6 169.0,156.0 161.0,156.0 161.0,127.6" fill="#ffffff" opacity="0.5" filter="url(#b2)"/>
+<line x1="165.0" y1="114.0" x2="165.0" y2="152.0" stroke="#ffffff" stroke-width="2" stroke-linecap="round" opacity="0.8" filter="url(#b1)"/>
+<polyline points="158.0,108.0 165.0,142.0 172.0,164.0" fill="none" stroke="#ffffff" stroke-width="0.8" opacity="0.28"/>
+<polyline points="174.0,74.0 158.0,108.0 158.0,164.0" fill="none" stroke="#ffffff" stroke-width="1.1" stroke-linejoin="round" opacity="0.675"/>
+<polyline points="174.0,74.0 172.0,108.0 172.0,164.0" fill="none" stroke="#ffffff" stroke-width="1.1" stroke-linejoin="round" opacity="0.375"/>
+<polyline points="174.0,74.0 148.0,113.0 148.0,159.0" fill="none" stroke="#ffffff" stroke-width="0.8" opacity="0.4"/>
+<circle cx="174.0" cy="77.0" r="2.2" fill="#ffffff" opacity="0.9" filter="url(#b1)"/>
+<ellipse cx="132.5" cy="98.0" rx="48.6" ry="77.0" fill="url(#glowV)" filter="url(#b4)" opacity="0.75"/>
+<polygon points="130.0,28.0 104.0,81.0 122.0,76.0" fill="url(#vL)" stroke="#08040f" stroke-width="0.9" stroke-linejoin="round"/>
+<polygon points="130.0,28.0 104.0,81.0 122.0,76.0" fill="#ffffff" opacity="0.1"/>
+<polygon points="130.0,28.0 122.0,76.0 146.0,76.0" fill="url(#vM)" stroke="#08040f" stroke-width="0.9" stroke-linejoin="round"/>
+<polygon points="130.0,28.0 122.0,76.0 146.0,76.0" fill="#ffffff" opacity="0.28"/>
+<polygon points="130.0,28.0 146.0,76.0 158.0,81.0" fill="url(#vR)" stroke="#08040f" stroke-width="0.9" stroke-linejoin="round"/>
+<polygon points="130.0,28.0 146.0,76.0 158.0,81.0" fill="#ffffff" opacity="0.04"/>
+<polygon points="104.0,81.0 122.0,76.0 122.0,168.0 104.0,163.0" fill="url(#vL)" stroke="#08040f" stroke-width="0.9" stroke-linejoin="round"/>
+<polygon points="122.0,76.0 146.0,76.0 146.0,168.0 122.0,168.0" fill="url(#vM)" stroke="#08040f" stroke-width="0.9" stroke-linejoin="round"/>
+<polygon points="146.0,76.0 158.0,81.0 158.0,163.0 146.0,168.0" fill="url(#vR)" stroke="#08040f" stroke-width="0.9" stroke-linejoin="round"/>
+<polygon points="134.0,87.0 143.0,108.2 143.0,160.0 125.0,160.0 125.0,108.2" fill="#ffffff" opacity="0.5" filter="url(#b2)"/>
+<line x1="134.0" y1="82.0" x2="134.0" y2="156.0" stroke="#ffffff" stroke-width="2" stroke-linecap="round" opacity="0.8" filter="url(#b1)"/>
+<polyline points="122.0,76.0 134.0,128.0 146.0,168.0" fill="none" stroke="#ffffff" stroke-width="0.8" opacity="0.28"/>
+<polyline points="130.0,28.0 122.0,76.0 122.0,168.0" fill="none" stroke="#ffffff" stroke-width="1.1" stroke-linejoin="round" opacity="0.675"/>
+<polyline points="130.0,28.0 146.0,76.0 146.0,168.0" fill="none" stroke="#ffffff" stroke-width="1.1" stroke-linejoin="round" opacity="0.375"/>
+<polyline points="130.0,28.0 104.0,81.0 104.0,163.0" fill="none" stroke="#ffffff" stroke-width="0.8" opacity="0.4"/>
+<circle cx="130.0" cy="31.0" r="2.2" fill="#ffffff" opacity="0.9" filter="url(#b1)"/>
+<ellipse cx="112.5" cy="138.0" rx="32.4" ry="41.8" fill="url(#glowV)" filter="url(#b4)" opacity="0.75"/>
+<polygon points="108.0,100.0 96.0,133.0 106.0,128.0" fill="url(#vL)" stroke="#08040f" stroke-width="0.9" stroke-linejoin="round"/>
+<polygon points="108.0,100.0 96.0,133.0 106.0,128.0" fill="#ffffff" opacity="0.1"/>
+<polygon points="108.0,100.0 106.0,128.0 120.0,128.0" fill="url(#vM)" stroke="#08040f" stroke-width="0.9" stroke-linejoin="round"/>
+<polygon points="108.0,100.0 106.0,128.0 120.0,128.0" fill="#ffffff" opacity="0.28"/>
+<polygon points="108.0,100.0 120.0,128.0 128.0,133.0" fill="url(#vR)" stroke="#08040f" stroke-width="0.9" stroke-linejoin="round"/>
+<polygon points="108.0,100.0 120.0,128.0 128.0,133.0" fill="#ffffff" opacity="0.04"/>
+<polygon points="96.0,133.0 106.0,128.0 104.0,176.0 94.0,171.0" fill="url(#vL)" stroke="#08040f" stroke-width="0.9" stroke-linejoin="round"/>
+<polygon points="106.0,128.0 120.0,128.0 122.0,176.0 104.0,176.0" fill="url(#vM)" stroke="#08040f" stroke-width="0.9" stroke-linejoin="round"/>
+<polygon points="120.0,128.0 128.0,133.0 130.0,171.0 122.0,176.0" fill="url(#vR)" stroke="#08040f" stroke-width="0.9" stroke-linejoin="round"/>
+<polygon points="113.0,133.8 117.0,144.8 119.0,168.0 107.0,168.0 109.0,144.8" fill="#ffffff" opacity="0.5" filter="url(#b2)"/>
+<line x1="113.0" y1="134.0" x2="113.0" y2="164.0" stroke="#ffffff" stroke-width="2" stroke-linecap="round" opacity="0.8" filter="url(#b1)"/>
+<polyline points="106.0,128.0 113.0,158.0 122.0,176.0" fill="none" stroke="#ffffff" stroke-width="0.8" opacity="0.28"/>
+<polyline points="108.0,100.0 106.0,128.0 104.0,176.0" fill="none" stroke="#ffffff" stroke-width="1.1" stroke-linejoin="round" opacity="0.675"/>
+<polyline points="108.0,100.0 120.0,128.0 122.0,176.0" fill="none" stroke="#ffffff" stroke-width="1.1" stroke-linejoin="round" opacity="0.375"/>
+<polyline points="108.0,100.0 96.0,133.0 94.0,171.0" fill="none" stroke="#ffffff" stroke-width="0.8" opacity="0.4"/>
+<circle cx="108.0" cy="103.0" r="2.2" fill="#ffffff" opacity="0.9" filter="url(#b1)"/>
+<ellipse cx="154.5" cy="145.0" rx="28.8" ry="34.1" fill="url(#glowT)" filter="url(#b4)" opacity="0.75"/>
+<polygon points="152.0,114.0 140.0,145.0 148.0,140.0" fill="url(#tL)" stroke="#08040f" stroke-width="0.9" stroke-linejoin="round"/>
+<polygon points="152.0,114.0 140.0,145.0 148.0,140.0" fill="#ffffff" opacity="0.1"/>
+<polygon points="152.0,114.0 148.0,140.0 160.0,140.0" fill="url(#tM)" stroke="#08040f" stroke-width="0.9" stroke-linejoin="round"/>
+<polygon points="152.0,114.0 148.0,140.0 160.0,140.0" fill="#ffffff" opacity="0.28"/>
+<polygon points="152.0,114.0 160.0,140.0 168.0,145.0" fill="url(#tR)" stroke="#08040f" stroke-width="0.9" stroke-linejoin="round"/>
+<polygon points="152.0,114.0 160.0,140.0 168.0,145.0" fill="#ffffff" opacity="0.04"/>
+<polygon points="140.0,145.0 148.0,140.0 148.0,176.0 138.0,171.0" fill="url(#tL)" stroke="#08040f" stroke-width="0.9" stroke-linejoin="round"/>
+<polygon points="148.0,140.0 160.0,140.0 162.0,176.0 148.0,176.0" fill="url(#tM)" stroke="#08040f" stroke-width="0.9" stroke-linejoin="round"/>
+<polygon points="160.0,140.0 168.0,145.0 170.0,171.0 162.0,176.0" fill="url(#tR)" stroke="#08040f" stroke-width="0.9" stroke-linejoin="round"/>
+<polygon points="154.0,144.3 157.0,152.6 159.0,168.0 151.0,168.0 151.0,152.6" fill="#ffffff" opacity="0.5" filter="url(#b2)"/>
+<line x1="154.0" y1="146.0" x2="154.0" y2="164.0" stroke="#ffffff" stroke-width="2" stroke-linecap="round" opacity="0.8" filter="url(#b1)"/>
+<polyline points="148.0,140.0 154.0,164.0 162.0,176.0" fill="none" stroke="#ffffff" stroke-width="0.8" opacity="0.28"/>
+<polyline points="152.0,114.0 148.0,140.0 148.0,176.0" fill="none" stroke="#ffffff" stroke-width="1.1" stroke-linejoin="round" opacity="0.675"/>
+<polyline points="152.0,114.0 160.0,140.0 162.0,176.0" fill="none" stroke="#ffffff" stroke-width="1.1" stroke-linejoin="round" opacity="0.375"/>
+<polyline points="152.0,114.0 140.0,145.0 138.0,171.0" fill="none" stroke="#ffffff" stroke-width="0.8" opacity="0.4"/>
+<circle cx="152.0" cy="117.0" r="2.2" fill="#ffffff" opacity="0.9" filter="url(#b1)"/>
+<ellipse cx="130.8" cy="158.5" rx="20.7" ry="22.6" fill="url(#glowT)" filter="url(#b4)" opacity="0.75"/>
+<polygon points="130.0,138.0 120.0,163.0 127.0,158.0" fill="url(#tL)" stroke="#08040f" stroke-width="0.9" stroke-linejoin="round"/>
+<polygon points="130.0,138.0 120.0,163.0 127.0,158.0" fill="#ffffff" opacity="0.1"/>
+<polygon points="130.0,138.0 127.0,158.0 135.0,158.0" fill="url(#tM)" stroke="#08040f" stroke-width="0.9" stroke-linejoin="round"/>
+<polygon points="130.0,138.0 127.0,158.0 135.0,158.0" fill="#ffffff" opacity="0.28"/>
+<polygon points="130.0,138.0 135.0,158.0 141.0,163.0" fill="url(#tR)" stroke="#08040f" stroke-width="0.9" stroke-linejoin="round"/>
+<polygon points="130.0,138.0 135.0,158.0 141.0,163.0" fill="#ffffff" opacity="0.04"/>
+<polygon points="120.0,163.0 127.0,158.0 126.0,179.0 119.0,174.0" fill="url(#tL)" stroke="#08040f" stroke-width="0.9" stroke-linejoin="round"/>
+<polygon points="127.0,158.0 135.0,158.0 136.0,179.0 126.0,179.0" fill="url(#tM)" stroke="#08040f" stroke-width="0.9" stroke-linejoin="round"/>
+<polygon points="135.0,158.0 141.0,163.0 142.0,174.0 136.0,179.0" fill="url(#tR)" stroke="#08040f" stroke-width="0.9" stroke-linejoin="round"/>
+<polygon points="131.0,160.5 132.0,165.3 133.0,171.0 129.0,171.0 130.0,165.3" fill="#ffffff" opacity="0.5" filter="url(#b2)"/>
+<line x1="131.0" y1="164.0" x2="131.0" y2="167.0" stroke="#ffffff" stroke-width="2" stroke-linecap="round" opacity="0.8" filter="url(#b1)"/>
+<polyline points="127.0,158.0 131.0,174.5 136.0,179.0" fill="none" stroke="#ffffff" stroke-width="0.8" opacity="0.28"/>
+<polyline points="130.0,138.0 127.0,158.0 126.0,179.0" fill="none" stroke="#ffffff" stroke-width="1.1" stroke-linejoin="round" opacity="0.675"/>
+<polyline points="130.0,138.0 135.0,158.0 136.0,179.0" fill="none" stroke="#ffffff" stroke-width="1.1" stroke-linejoin="round" opacity="0.375"/>
+<polyline points="130.0,138.0 120.0,163.0 119.0,174.0" fill="none" stroke="#ffffff" stroke-width="0.8" opacity="0.4"/>
+<circle cx="130.0" cy="141.0" r="2.2" fill="#ffffff" opacity="0.9" filter="url(#b1)"/>
+<path d="M72,62 A56,13 0 0 0 184,62" fill="none" stroke="#06080b" stroke-width="9.5" stroke-linecap="round"/>
+<path d="M72,62 A56,13 0 0 0 184,62" fill="none" stroke="url(#goldH)" stroke-width="6.5" stroke-linecap="round"/>
+<path d="M74,63 A54,12 0 0 0 182,63" fill="none" stroke="#fffbe0" stroke-width="1.1" opacity="0.7" transform="translate(0,-2)"/>
+<circle cx="176.5" cy="68.5" r="1.5" fill="url(#boltG)" stroke="#0b0d10" stroke-width="0.7"/>
+<circle cx="147.2" cy="74.2" r="1.5" fill="url(#boltG)" stroke="#0b0d10" stroke-width="0.7"/>
+<circle cx="108.8" cy="74.2" r="1.5" fill="url(#boltG)" stroke="#0b0d10" stroke-width="0.7"/>
+<circle cx="79.5" cy="68.5" r="1.5" fill="url(#boltG)" stroke="#0b0d10" stroke-width="0.7"/>
+<polygon points="152.4,73.3 159.6,73.3 165.6,175.9 156.4,175.9" fill="url(#dsH)" stroke="#0b0d10" stroke-width="1" stroke-linejoin="round"/>
+<line x1="154.9" y1="75.3" x2="159.6" y2="173.9" stroke="#d7e4f0" stroke-width="0.9" opacity="0.6"/>
+<rect x="152.2" y="106.2" width="11.1" height="6" rx="1.5" fill="url(#goldH)" stroke="#0b0d10" stroke-width="0.8"/>
+<rect x="153.9" y="150.3" width="12.0" height="6" rx="1.5" fill="url(#goldH)" stroke="#0b0d10" stroke-width="0.8"/>
+<rect x="154.0" y="171.9" width="14" height="8" rx="2" fill="url(#goldH)" stroke="#0b0d10" stroke-width="0.9"/>
+<circle cx="161.0" cy="175.9" r="1.5" fill="url(#boltG)" stroke="#0b0d10" stroke-width="0.7"/>
+<rect x="150.0" y="68.3" width="12" height="10" rx="2.5" fill="url(#goldH)" stroke="#0b0d10" stroke-width="0.9"/>
+<polygon points="96.4,73.3 103.6,73.3 99.6,175.9 90.4,175.9" fill="url(#dsH)" stroke="#0b0d10" stroke-width="1" stroke-linejoin="round"/>
+<line x1="98.9" y1="75.3" x2="93.6" y2="173.9" stroke="#d7e4f0" stroke-width="0.9" opacity="0.6"/>
+<rect x="92.7" y="106.2" width="11.1" height="6" rx="1.5" fill="url(#goldH)" stroke="#0b0d10" stroke-width="0.8"/>
+<rect x="90.1" y="150.3" width="12.0" height="6" rx="1.5" fill="url(#goldH)" stroke="#0b0d10" stroke-width="0.8"/>
+<rect x="88.0" y="171.9" width="14" height="8" rx="2" fill="url(#goldH)" stroke="#0b0d10" stroke-width="0.9"/>
+<circle cx="95.0" cy="175.9" r="1.5" fill="url(#boltG)" stroke="#0b0d10" stroke-width="0.7"/>
+<rect x="94.0" y="68.3" width="12" height="10" rx="2.5" fill="url(#goldH)" stroke="#0b0d10" stroke-width="0.9"/>
+<polygon points="180.4,62.0 187.6,62.0 198.6,162.0 189.4,162.0" fill="url(#dsH)" stroke="#0b0d10" stroke-width="1" stroke-linejoin="round"/>
+<line x1="182.9" y1="64.0" x2="192.6" y2="160.0" stroke="#d7e4f0" stroke-width="0.9" opacity="0.6"/>
+<rect x="181.9" y="94.0" width="11.1" height="6" rx="1.5" fill="url(#goldH)" stroke="#0b0d10" stroke-width="0.8"/>
+<rect x="185.8" y="137.0" width="12.0" height="6" rx="1.5" fill="url(#goldH)" stroke="#0b0d10" stroke-width="0.8"/>
+<rect x="187.0" y="158.0" width="14" height="8" rx="2" fill="url(#goldH)" stroke="#0b0d10" stroke-width="0.9"/>
+<circle cx="194.0" cy="162.0" r="1.5" fill="url(#boltG)" stroke="#0b0d10" stroke-width="0.7"/>
+<rect x="178.0" y="57.0" width="12" height="10" rx="2.5" fill="url(#goldH)" stroke="#0b0d10" stroke-width="0.9"/>
+<polygon points="68.4,62.0 75.6,62.0 66.6,162.0 57.4,162.0" fill="url(#dsH)" stroke="#0b0d10" stroke-width="1" stroke-linejoin="round"/>
+<line x1="70.9" y1="64.0" x2="60.6" y2="160.0" stroke="#d7e4f0" stroke-width="0.9" opacity="0.6"/>
+<rect x="63.0" y="94.0" width="11.1" height="6" rx="1.5" fill="url(#goldH)" stroke="#0b0d10" stroke-width="0.8"/>
+<rect x="58.2" y="137.0" width="12.0" height="6" rx="1.5" fill="url(#goldH)" stroke="#0b0d10" stroke-width="0.8"/>
+<rect x="55.0" y="158.0" width="14" height="8" rx="2" fill="url(#goldH)" stroke="#0b0d10" stroke-width="0.9"/>
+<circle cx="62.0" cy="162.0" r="1.5" fill="url(#boltG)" stroke="#0b0d10" stroke-width="0.7"/>
+<rect x="66.0" y="57.0" width="12" height="10" rx="2.5" fill="url(#goldH)" stroke="#0b0d10" stroke-width="0.9"/>
+<polygon points="132.0,34.0 133.5,38.5 138.0,40.0 133.5,41.5 132.0,46.0 130.5,41.5 126.0,40.0 130.5,38.5" fill="#ffffff" opacity="0.95"/>
+<polygon points="98.0,88.0 99.0,91.0 102.0,92.0 99.0,93.0 98.0,96.0 97.0,93.0 94.0,92.0 97.0,91.0" fill="#ffffff" opacity="0.95"/>
+<polygon points="165.0,94.0 166.0,97.0 169.0,98.0 166.0,99.0 165.0,102.0 164.0,99.0 161.0,98.0 164.0,97.0" fill="#ffffff" opacity="0.8"/>
+<polygon points="120.0,147.0 120.8,149.2 123.0,150.0 120.8,150.8 120.0,153.0 119.2,150.8 117.0,150.0 119.2,149.2" fill="#ffffff" opacity="0.8"/>
+<circle cx="76" cy="120" r="2" fill="#bff" opacity="0.8" filter="url(#b1)"/>
+<circle cx="182" cy="118" r="2" fill="#dcbfff" opacity="0.8" filter="url(#b1)"/>
+</svg>

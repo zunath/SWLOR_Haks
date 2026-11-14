@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <defs>
+    <radialGradient id="bg" cx="62%" cy="38%" r="75%">
+      <stop offset="0" stop-color="#2e1010"/>
+      <stop offset="1" stop-color="#060304"/>
+    </radialGradient>
+    <linearGradient id="body" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#d0d8e0"/>
+      <stop offset="0.5" stop-color="#707b87"/>
+      <stop offset="1" stop-color="#21272e"/>
+    </linearGradient>
+    <linearGradient id="lens" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffd0c4"/>
+      <stop offset="0.5" stop-color="#ff3b2e"/>
+      <stop offset="1" stop-color="#5a0705"/>
+    </linearGradient>
+    <linearGradient id="beam" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#ff3b2e" stop-opacity="0.95"/>
+      <stop offset="1" stop-color="#ff9c80" stop-opacity="0.9"/>
+    </linearGradient>
+    <radialGradient id="spot" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="0.3" stop-color="#ff8a70"/>
+      <stop offset="1" stop-color="#ff2a1a" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="256" height="256" fill="url(#bg)"/>
+  <!-- the reticle painted on the target -->
+  <circle cx="172" cy="80" r="60" fill="url(#spot)" opacity="0.55"/>
+  <g fill="none" stroke="#ff4a3a" stroke-linecap="round">
+    <circle cx="172" cy="80" r="44" stroke-width="7"/>
+    <circle cx="172" cy="80" r="22" stroke-width="5"/>
+    <path d="M172 22 L172 48 M172 112 L172 138 M114 80 L140 80 M204 80 L230 80" stroke-width="7"/>
+  </g>
+  <circle cx="172" cy="80" r="9" fill="#fff2ee"/>
+  <!-- the designator beam -->
+  <path d="M88 168 L166 86 L178 94 L100 178 Z" fill="url(#beam)"/>
+  <path d="M92 170 L170 88" stroke="#fff0ea" stroke-width="3" stroke-linecap="round"/>
+  <!-- the designator turret: a squat armored housing with a lens -->
+  <path d="M26 230 L70 204 L132 222 L88 250 Z" fill="#1a1f25"/>
+  <path d="M26 230 L70 204 L84 208 L40 236 Z" fill="url(#body)"/>
+  <g transform="rotate(-45 92 176)">
+    <rect x="44" y="152" width="96" height="48" rx="12" fill="url(#body)"/>
+    <rect x="56" y="158" width="10" height="36" rx="3" fill="#353d46"/>
+    <rect x="72" y="158" width="10" height="36" rx="3" fill="#353d46"/>
+    <rect x="128" y="150" width="20" height="52" rx="6" fill="#2a3037"/>
+    <ellipse cx="146" cy="176" rx="8" ry="20" fill="url(#lens)"/>
+  </g>
+</svg>
