@@ -312,12 +312,21 @@ def clip_owners(name, load, wanted):
     return result
 
 
+def extension_for_clips(manifest, clips):
+    """Choose the unique owner of every requested clip, independent of layer order."""
+    wanted = set(clips)
+    matches = [record for record in manifest.get("animation_extensions", [])
+               if wanted <= set(record.get("clips", []))]
+    if not wanted or len(matches) != 1:
+        raise ValueError("Expected one owned extension for the selected clips")
+    return matches[0]
+
+
 def apply_rotation_revision(args):
     manifest = json.loads(robes.MANIFEST.read_text())
     original = robes.MANIFEST.read_bytes()
-    record = manifest["animation_extensions"][-1]
     wanted = {clip + phase for clip in args.clip for phase in ("", "_in", "_out")}
-    if not wanted <= set(record["clips"]): raise ValueError("Only owned extension clips may be revised")
+    record = extension_for_clips(manifest, wanted)
     body_paths = list(record["preserved_body_clips"])
     allowed_errors = {f"Robe RGB input/output changed: {path}; regenerate and validate" for path in body_paths}
     allowed_errors.add("Robe RGB input/output changed: tools/ExtendRobeAnimations.py; regenerate and validate")
@@ -401,9 +410,9 @@ def apply_rotation_revision(args):
 def apply_variants(args):
     manifest = json.loads(robes.MANIFEST.read_text())
     original = robes.MANIFEST.read_bytes()
-    record = manifest["animation_extensions"][-1]
     pairs = dict(item.split("=", 1) for item in args.variant)
     variants = {base + phase: new + phase for base, new in pairs.items() for phase in ("", "_in", "_out")}
+    record = extension_for_clips(manifest, variants)
     added = set(variants.values())
     if any(not name or len(name) > 16 or not name.replace("_", "").isalnum() for name in added):
         raise ValueError("Invalid animation name")
