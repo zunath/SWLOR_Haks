@@ -248,7 +248,20 @@ def directories(root):
     return result
 
 
-def check(root=ROOT):
+def hak_model_paths(root):
+    """Every HAK model a client could load, in the resref form the engine uses."""
+    return [Path(path) for directory in directories(root) for path in model_paths(directory)
+            if RESREF.fullmatch(Path(path).stem.lower())]
+
+
+def base_game_overrides(paths, stock_models):
+    """HAK model names that replace a base-game model of the same name."""
+    return sorted({Path(path).stem.lower() for path in paths} & {name.lower() for name in stock_models})
+
+
+def check(root=ROOT, stock_models=None):
+    """Validate checked-in redirects; with the base game's model names, also require a
+    complete native_overrides list, since --apply only refreshes it when it runs."""
     root = Path(root)
     aliases = catalog(root)
     hak_directories = directories(root)
@@ -269,6 +282,12 @@ def check(root=ROOT):
     for name in sorted(stock_names):
         if not any(path.suffix.lower() == ".mdl" for path in resources.get(name, [])):
             errors.append(f"Override of a base-game model is missing its native MDL: {name}")
+    if stock_models is not None:
+        expected = set(base_game_overrides(hak_model_paths(root), stock_models))
+        missing, extra = sorted(expected - stock_names), sorted(stock_names - expected)
+        if missing or extra:
+            errors.append(f"native_overrides is out of date ({len(missing)} missing, e.g. {missing[:3]}; "
+                          f"{len(extra)} no longer override, e.g. {extra[:3]}); run --apply --game-data")
     for relative in sorted(aliases):
         try:
             path = safe_path(root, relative)
@@ -293,12 +312,7 @@ def check(root=ROOT):
 def apply(root=ROOT, stock_models=frozenset()):
     root = Path(root)
     stock_models = {name.lower() for name in stock_models}
-    all_paths = []
-    for directory in directories(root):
-        for path in model_paths(directory):
-            if not RESREF.fullmatch(path.stem.lower()):
-                continue
-            all_paths.append(Path(path))
+    all_paths = hak_model_paths(root)
     aliases = {}
     dependents = collections.defaultdict(list)
     # Some client lookups test for an MDL before resolving a LOD. An override that only
@@ -307,7 +321,7 @@ def apply(root=ROOT, stock_models=frozenset()):
                           for path in all_paths
                           if path.stem.lower() in stock_models or
                           requires_native_attachment(path, ModelPath(path).read_bytes())}
-    overrides = sorted({Path(relative).stem.lower() for relative in native_attachments} & stock_models)
+    overrides = base_game_overrides(all_paths, stock_models)
     # Validate all comparisons and reconstruction before deleting any source file.
     for mode in ("root", "full"):
         groups = collections.defaultdict(list)
@@ -398,7 +412,9 @@ if __name__ == "__main__":
     mode.add_argument("--apply", action="store_true")
     mode.add_argument("--check", action="store_true")
     mode.add_argument("--expand", action="store_true")
-    parser.add_argument("--game-data", type=Path, help="NWN data directory; --apply keeps base-game overrides as MDLs")
+    parser.add_argument("--game-data", type=Path,
+                        help="NWN data directory; --apply keeps base-game overrides as MDLs, "
+                             "and --check also requires a complete native_overrides list")
     args = parser.parse_args()
     if args.apply:
         if args.game_data is None:
@@ -408,7 +424,11 @@ if __name__ == "__main__":
     elif args.expand:
         expand()
     else:
-        errors = check()
+        stock = None
+        if args.game_data is not None:
+            from GenerateTintMapAssets import read_stock_key_models
+            stock = read_stock_key_models(args.game_data).keys()
+        errors = check(stock_models=stock)
         if errors:
             raise SystemExit("\n".join(errors[:20]))
         print("All checked-in model redirects preserve their exact original geometry and bindings.")
