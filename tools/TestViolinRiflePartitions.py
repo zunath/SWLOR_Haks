@@ -1,6 +1,7 @@
 """Violin regeneration must retain the complete native rifle partition chain."""
 from pathlib import Path
 import struct
+import json
 import tempfile
 import unittest
 from unittest.mock import patch
@@ -88,6 +89,38 @@ class ViolinRiflePartitionTests(unittest.TestCase):
         self.write(self.head + '_b02', self.head + '_b03')
         with self.assertRaisesRegex(ValueError, 'compiled rifle bank partition'):
             violin.original_parent(self.library, self.body)
+
+
+class ViolinRobeExtensionTests(unittest.TestCase):
+    def test_selects_its_owner_in_either_extension_order(self):
+        performance = {'clips': list(violin.CLIPS), 'parents': {'pme_ra088': 'pme_ra089'}}
+        rifle = {'owner': 'RobeRifleProfiles', 'clips': ['rf267_420_i'],
+                 'parents': {'pme_ra088': 'pme_ra091', 'pme_ra089': 'pme_ra092'}}
+        for records in ([performance, rifle], [rifle, performance]):
+            self.assertIs(violin.violin_robe_extension({'animation_extensions': records}), performance)
+
+    def test_contact_history_stays_on_the_selected_performance_record(self):
+        performance = {'clips': list(violin.CLIPS), 'parents': {}}
+        rifle = {'owner': 'RobeRifleProfiles', 'clips': ['rf267_420_i'], 'parents': {}}
+        manifest = {'animation_extensions': [performance, rifle]}
+        selected = violin.violin_robe_extension(manifest)
+        selected.setdefault('family_contact_revisions', []).append({'quaternion_channels': 3})
+        self.assertEqual(performance['family_contact_revisions'], [{'quaternion_channels': 3}])
+        self.assertNotIn('family_contact_revisions', rifle)
+
+    def test_missing_or_ambiguous_owner_is_rejected(self):
+        for records in ([], [{'clips': ['rf267_420_i']}],
+                        [{'clips': list(violin.CLIPS)}, {'clips': list(violin.CLIPS)}]):
+            with self.assertRaisesRegex(ValueError, 'one owned violin robe extension'):
+                violin.violin_robe_extension({'animation_extensions': records})
+
+    def test_checked_in_manifest_has_one_target_per_violin_robe_body(self):
+        manifest = json.loads((violin.ROOT / 'tools/RobeRgbModels.json').read_text())
+        extension = violin.violin_robe_extension(manifest)
+        self.assertNotEqual(extension.get('owner'), 'RobeRifleProfiles')
+        for body in violin.BODIES:
+            targets = [name for name in extension['parents'].values() if name[:3] == body[:3]]
+            self.assertEqual(len(targets), 0 if body == 'pfz0' else 1, body)
 
 
 if __name__ == '__main__':

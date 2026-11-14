@@ -366,6 +366,15 @@ def rotation_changes(library, body):
     return changes
 
 
+def violin_robe_extension(manifest):
+    """Select the Performance layer that owns every native violin clip."""
+    matches = [record for record in manifest.get('animation_extensions', [])
+               if set(CLIPS) <= set(record.get('clips', []))]
+    if len(matches) != 1:
+        raise ValueError('Expected one owned violin robe extension')
+    return matches[0]
+
+
 def update_robes(library, output, apply):
     """Copy verified arm quaternions to seven owned robe layers without rebuilding rigs."""
     import ExtendRobeAnimations as extension
@@ -375,6 +384,7 @@ def update_robes(library, output, apply):
 
     original = robes.MANIFEST.read_bytes()
     manifest = json.loads(original)
+    violin_extension = violin_robe_extension(manifest)
     allowed = {f'Robe RGB input/output changed: {rifle_archives.bank_directory(body)}/{rifle_tail(library, body)[0]}.mdl; regenerate and validate'
                for body in BODIES}
     allowed.add('Robe RGB input/output changed: tools/GenerateViolinBowContact.py; regenerate and validate')
@@ -402,7 +412,7 @@ def update_robes(library, output, apply):
         hashes[path] = digest(data)
         bank_path = 'sw_cr_creature/' + bank_name(body) + '.mdl'
         hashes[bank_path] = digest(library.data(bank_name(body)))
-        targets = [name for name in manifest['animation_extensions'][-1]['parents'].values()
+        targets = [name for name in violin_extension['parents'].values()
                    if name[:3] == body[:3]]
         if body == 'pfz0' and not targets:
             rotation_changes(library, body)
@@ -468,7 +478,7 @@ def update_robes(library, output, apply):
         hashes['tools/GenerateViolinBowContact.py'] = robes.file_digest(Path(__file__))
         manifest['files'].update(hashes)
         manifest['animation_bank_sets'].update(records)
-        manifest['animation_extensions'][-1].setdefault('family_contact_revisions', []).append(report)
+        violin_extension.setdefault('family_contact_revisions', []).append(report)
         robes.MANIFEST.write_text(json.dumps(manifest, indent=2) + '\n')
     print(json.dumps(report, indent=2), flush=True)
 
