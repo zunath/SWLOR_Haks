@@ -46,9 +46,10 @@ class RobeFinalMotionOrderTests(unittest.TestCase):
             self.assertEqual(changed[head]['emote_clips'], 1)
             self.assertEqual(sharing.validate_joints(poses.Model(original), poses.Model(final), names), 2)
             with patch.object(owner, 'ROOT', stage / 'owned-root'), patch.object(owner.emote_motion, 'fill', side_effect=AssertionError('Reprocessing audited motion')):
-                packaged, records = owner.package_animation_models(stage, [head], {head}, {}, {}, object(), prepared=True)
+                packaged, records, stale = owner.package_animation_models(stage, [head], {head}, {}, {}, object(), prepared=True)
             self.assertEqual(path.read_bytes(), final)
             self.assertEqual(packaged, {head})
+            self.assertEqual(stale, set())
 
 if __name__ == '__main__':
     unittest.main()

@@ -13,6 +13,7 @@ import hashlib
 import json
 import RifleProfileArchives as rifle_archives
 import math
+import re
 from pathlib import Path
 import struct
 from types import SimpleNamespace
@@ -85,15 +86,52 @@ def bank_name(body):
     return 'a_vio_' + body
 
 
-def original_parent(library, body):
-    """Skip our own layer when regenerating; never compound a prior fit."""
-    data = library.data('a_rfl_' + body)
-    if not rifle.mdl.binary(data) or set(rifle.Model(data).clips) & set(CLIPS):
-        raise ValueError('Expected an unchanged compiled rifle bank: ' + body)
-    parent = rifle.mdl.supermodel(data)
+def rifle_tail(library, body):
+    """Find the final owned rifle partition without bypassing any fitted clips."""
+    head = 'a_rfl_' + body
+    name, seen = head, set()
+    while name == head or re.fullmatch(re.escape(head) + r'_b\d{2,4}', name or ''):
+        if name in seen:
+            raise ValueError('Cyclic owned rifle animation bank chain: ' + body)
+        seen.add(name)
+        data = library.data(name)
+        if data is None or len(data) < 244 or not rifle.mdl.binary(data):
+            raise ValueError('Expected a compiled rifle bank partition: ' + name)
+        if name == head and set(rifle.Model(data).clips) & set(CLIPS):
+            raise ValueError('Expected an unchanged compiled rifle bank: ' + body)
+        tail, payload = name, data
+        name = rifle.mdl.supermodel(data)
+    return tail, payload, name
+
+
+def base_parent(library, body, parent):
+    """Skip our existing violin layer and reject a link back into the rifle chain."""
     if parent == bank_name(body):
-        parent = rifle.mdl.supermodel(library.data(parent))
+        data = library.data(parent)
+        if data is None or len(data) < 244 or not rifle.mdl.binary(data):
+            raise ValueError('Expected a compiled violin bank: ' + body)
+        parent = rifle.mdl.supermodel(data)
+    head = 'a_rfl_' + body
+    if parent in (head, bank_name(body)) or re.fullmatch(re.escape(head) + r'_b\d{2,4}', parent or ''):
+        raise ValueError('Cyclic violin/rifle animation bank chain: ' + body)
     return parent
+
+
+def original_parent(library, body):
+    """Resolve beyond all rifle partitions and our own layer before regenerating."""
+    return base_parent(library, body, rifle_tail(library, body)[2])
+
+
+def splice_violin(library, body):
+    """Insert the violin layer below the final partition, preserving the head link."""
+    name, before, parent = rifle_tail(library, body)
+    base_parent(library, body, parent)
+    data = bytearray(before)
+    data[180:244] = bank_name(body).encode('ascii').ljust(64, b'\0')
+    path = ROOT / rifle_archives.bank_directory(body) / (name + '.mdl')
+    path.write_bytes(data)
+    library.invalidate(name)
+    return name
 
 
 def carry_rotations(library, body, parent):
@@ -337,7 +375,7 @@ def update_robes(library, output, apply):
 
     original = robes.MANIFEST.read_bytes()
     manifest = json.loads(original)
-    allowed = {f'Robe RGB input/output changed: {rifle_archives.bank_directory(body)}/a_rfl_{body}.mdl; regenerate and validate'
+    allowed = {f'Robe RGB input/output changed: {rifle_archives.bank_directory(body)}/{rifle_tail(library, body)[0]}.mdl; regenerate and validate'
                for body in BODIES}
     allowed.add('Robe RGB input/output changed: tools/GenerateViolinBowContact.py; regenerate and validate')
     errors = set(robes.check()) - allowed
@@ -347,13 +385,18 @@ def update_robes(library, output, apply):
     count = 0
     active = robes.fresh_active_models()
     for body in BODIES:
-        path = rifle_archives.bank_directory(body) + '/a_rfl_' + body + '.mdl'
-        data = library.data('a_rfl_' + body)
-        if rifle.mdl.supermodel(data) != bank_name(body):
+        tail, data, parent = rifle_tail(library, body)
+        path = rifle_archives.bank_directory(body) + '/' + tail + '.mdl'
+        if parent != bank_name(body):
             raise ValueError('Finalize the compiled violin bank before updating robes: ' + body)
         before = bytearray(data)
-        before[180:244] = original_parent(library, body).encode('ascii').ljust(64, b'\0')
-        expected = manifest['files'].get(path, UNTRACKED_RIFLE_HASHES.get(body))
+        before[180:244] = base_parent(library, body, parent).encode('ascii').ljust(64, b'\0')
+        expected = manifest['files'].get(path)
+        if expected is None:
+            profiles = json.loads((ROOT / 'tools/RifleGripProfileMotions.json').read_text())
+            record = next((row for row in profiles['models'] if row['body'] == body), None)
+            expected = next((part['sha256'] for part in rifle_archives.part_records(record)
+                             if part['output'] == path), None) if record else UNTRACKED_RIFLE_HASHES.get(body)
         if expected is None or digest(data) != expected and digest(before) != expected:
             raise ValueError('The rifle bank changed beyond its parent: ' + body)
         hashes[path] = digest(data)
@@ -459,10 +502,7 @@ def main():
             path.write_bytes(restore_tracks(library, body))
             library.invalidate(bank_name(body))
             rotation_changes(library, body)
-            rifle_path = ROOT / rifle_archives.bank_directory(body) / ('a_rfl_' + body + '.mdl')
-            data = bytearray(rifle_path.read_bytes())
-            data[180:244] = bank_name(body).encode('ascii').ljust(64, b'\0')
-            rifle_path.write_bytes(data)
+            splice_violin(library, body)
             print('finalized', body, flush=True)
         else:
             data, report = generate(library, body)
