@@ -45,7 +45,7 @@ class ViolinBowContactTests(unittest.TestCase):
                 self.assertTrue(set(violin.MAIN) <= set(changes) <= set(violin.CLIPS))
                 self.assertTrue(all(set(nodes) == set(violin.ARM) for nodes in changes.values()))
                 self.assertEqual('a_rfl_' + body, self.poses.model(body).parent)
-                self.assertEqual(violin.bank_name(body), self.poses.model('a_rfl_' + body).parent)
+                self.assertEqual(violin.bank_name(body), violin.rifle_tail(self.library, body)[2])
 
     def test_hair_stays_on_strings_through_both_stroke_directions(self):
         # Test the installed clips on the wearer's actual part IDs, including the

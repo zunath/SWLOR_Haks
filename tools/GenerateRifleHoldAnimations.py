@@ -31,11 +31,18 @@ compiled in the same CompileModels.py run, then re-pointed by `--finalize`, so e
 native part ID matches the original compile. Robe bridges carry their own copies of
 these clips: refresh them with `GenerateRobeRgbModels.py --update-animation xbowr
 --update-animation xbowrdy --update-animation xbowshot` afterwards. Banks are
-regenerated from the compiled models, so no editable source is kept.
+regenerated from the compiled models, so no editable source is kept for these generic banks.
+
+Banks registered in RifleGripProfileMotions.json have a specialized owner and are
+excluded from both generation and finalization here. Rebuild those banks with
+GenerateRifleGripProfiles.py --game-dir <installed EE directory> --apply, then
+refresh robe bridges for their rf... clips as well as the three stock clips.
+The profile owner preserves its pinned stock clips and local rhand hook tracks.
 """
 from __future__ import annotations
 
 import argparse
+import json
 import math
 from pathlib import Path
 import re
@@ -44,6 +51,7 @@ import struct
 import numpy as np
 
 import CompileModels as mdl
+import RifleProfileArchives as profile_archives
 import GenerateTintMapAssets as tint
 from RobePoseAudit import Model
 
@@ -200,7 +208,12 @@ class Library:
     def inherited_parent(self, root: str) -> str:
         """The supermodel a root inherited before its rifle bank was spliced in."""
         parent = mdl.supermodel(self.data(root))
-        if parent == bank_name(root):
+        head = bank_name(root)
+        seen = set()
+        while parent == head or re.fullmatch(re.escape(head) + r"_b\d{2,4}", parent or ""):
+            if parent in seen:
+                raise ValueError("Cyclic owned rifle animation bank chain")
+            seen.add(parent)
             parent = mdl.supermodel(self.data(parent))
         return parent
 
@@ -591,9 +604,25 @@ def spliced_root(library: Library, body: str) -> bytes:
     return text.encode("latin1")
 
 
+def profile_owned_bodies() -> frozenset[str]:
+    """Specialized profile banks are rebuilt by GenerateRifleGripProfiles.py."""
+    records = json.loads((ROOT / "tools" / "RifleGripProfileMotions.json").read_text())["models"]
+    bodies = [record["body"] for record in records]
+    if len(set(bodies)) != len(bodies) or any(
+            not re.fullmatch(r"p[fm][hedoz]0", record["body"]) or
+            record["output"] != f"{profile_archives.bank_directory(record['body'])}/{bank_name(record['body'])}.mdl"
+            for record in records):
+        raise ValueError("Invalid specialized rifle bank ownership")
+    return frozenset(bodies)
+
+
 def generate(library: Library) -> dict[Path, bytes]:
     outputs = {}
+    protected = profile_owned_bodies()
     for body in BODIES:
+        if body in protected:
+            print("preserved specialized profile bank", bank_name(body))
+            continue
         results = [solve(library, body, clip) for clip in CLIPS]
         for result in results:
             worst = max(result["report"], key=lambda r: r["short_mm"])
@@ -648,7 +677,11 @@ def restore_inherited_tracks(library: Library, body: str) -> bytes:
 
 
 def finalize(library: Library) -> None:
+    protected = profile_owned_bodies()
     for body in BODIES:
+        if body in protected:
+            print("preserved specialized profile bank", bank_name(body))
+            continue
         path = ROOT / BANK_DIRECTORY / f"{bank_name(body)}.mdl"
         if not mdl.binary(path.read_bytes()):
             raise RuntimeError(f"Compile {path.name} with CompileModels.py --apply before finalizing")

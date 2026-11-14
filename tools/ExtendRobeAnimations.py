@@ -8,6 +8,7 @@ import argparse
 import gc
 import hashlib
 import json
+import re
 from pathlib import Path
 import subprocess
 import struct
@@ -311,12 +312,21 @@ def clip_owners(name, load, wanted):
     return result
 
 
+def extension_for_clips(manifest, clips):
+    """Choose the unique owner of every requested clip, independent of layer order."""
+    wanted = set(clips)
+    matches = [record for record in manifest.get("animation_extensions", [])
+               if wanted <= set(record.get("clips", []))]
+    if not wanted or len(matches) != 1:
+        raise ValueError("Expected one owned extension for the selected clips")
+    return matches[0]
+
+
 def apply_rotation_revision(args):
     manifest = json.loads(robes.MANIFEST.read_text())
     original = robes.MANIFEST.read_bytes()
-    record = manifest["animation_extensions"][-1]
     wanted = {clip + phase for clip in args.clip for phase in ("", "_in", "_out")}
-    if not wanted <= set(record["clips"]): raise ValueError("Only owned extension clips may be revised")
+    record = extension_for_clips(manifest, wanted)
     body_paths = list(record["preserved_body_clips"])
     allowed_errors = {f"Robe RGB input/output changed: {path}; regenerate and validate" for path in body_paths}
     allowed_errors.add("Robe RGB input/output changed: tools/ExtendRobeAnimations.py; regenerate and validate")
@@ -400,9 +410,9 @@ def apply_rotation_revision(args):
 def apply_variants(args):
     manifest = json.loads(robes.MANIFEST.read_text())
     original = robes.MANIFEST.read_bytes()
-    record = manifest["animation_extensions"][-1]
     pairs = dict(item.split("=", 1) for item in args.variant)
     variants = {base + phase: new + phase for base, new in pairs.items() for phase in ("", "_in", "_out")}
+    record = extension_for_clips(manifest, variants)
     added = set(variants.values())
     if any(not name or len(name) > 16 or not name.replace("_", "").isalnum() for name in added):
         raise ValueError("Invalid animation name")
@@ -518,6 +528,25 @@ def check_installed(manifest, game_data, enforce=True):
     baseline = GitBlobs(record["baseline"])
     try:
         prior = json.loads(baseline.read("tools/RobeRgbModels.json"))
+        rifle_program = record.get("owner") == "RobeRifleProfiles"
+        if rifle_program:
+            import RobeRifleProfiles
+            recipe = json.loads((robes.ROOT / "tools/RobeRifleProfiles.json").read_text())
+            expected_heads = {head for head in prior["animation_bank_sets"]
+                              if re.fullmatch(r"p[fm][hedo]_ra[0-9]{3}", head)}
+            expected_parents = {item["sourceHead"]: item["head"] for item in recipe["models"]}
+            if (set(record["parents"]) != expected_heads or expected_parents != record["parents"] or
+                    len(recipe["models"]) != len(expected_heads) or
+                    {item["head"] for item in recipe["sources"]} != expected_heads):
+                raise ValueError("Rifle extension must preserve every current and retained playable robe head")
+            rebuilt = set()
+            for item, outputs, _ in RobeRifleProfiles.rebuild(recipe, robes.ROOT):
+                for path, data in outputs.items():
+                    if (robes.ROOT / path).read_bytes() != data:
+                        raise ValueError("Installed rifle layer differs from its pinned body and own-cloth program")
+                rebuilt.add(item["sourceHead"])
+            if rebuilt != expected_heads:
+                raise ValueError("Rifle extension omitted an owned robe program")
         additions = {path: set() for path in record["preserved_body_clips"]}
         for path in record["preserved_body_clips"]:
             verify_body_additions(baseline.read(path), (robes.ROOT / path).read_bytes(), wanted, additions[path])
@@ -528,12 +557,27 @@ def check_installed(manifest, game_data, enforce=True):
             return None
         count, samples, garment_checks = 0, 0, 0
         for old, new in record["parents"].items():
-            old_parts = prior["animation_bank_sets"][old]["parts"]
-            before = banks.join([baseline.read(f"{robes.model_directory(part)}/{part}.mdl") for part in old_parts])
-            if before != robes.owned_animation_bytes(old, manifest, active):
-                raise ValueError(f"Existing animation bank changed: {old}")
+            if rifle_program:
+                # The rifle recipe above verifies each current source against its pinned Git
+                # blobs. Its inherited Performance bank can be revised by that owner later.
+                before = robes.owned_animation_bytes(old, manifest, active)
+            else:
+                old_parts = prior["animation_bank_sets"][old]["parts"]
+                before = banks.join([baseline.read(f"{robes.model_directory(part)}/{part}.mdl") for part in old_parts])
+                if before != robes.owned_animation_bytes(old, manifest, active):
+                    raise ValueError(f"Existing animation bank changed: {old}")
             installed = robes.owned_animation_bytes(new, manifest, active)
-            if installed != make_layer(before, installed, wanted, new):
+            if rifle_program:
+                # Exact public reproduction above proves the intentional RF
+                # overrides, including own-cloth provenance and native body IDs.
+                old_bank, layer = banks.CompiledBridge(before), banks.CompiledBridge(installed)
+                if set(layer.clip_names) != wanted:
+                    raise ValueError("Rifle extension differs from its complete profile inventory")
+                expected = old_bank.pack(new, old, layer.clips)
+                animations.validate_animation_parts(installed)
+            else:
+                expected = make_layer(before, installed, wanted, new)
+            if installed != expected:
                 raise ValueError(f"Installed extension has unexpected metadata: {new}")
             library = poses.Library(load)
             scoped = SimpleNamespace(model=library.model, owners=library.owners,

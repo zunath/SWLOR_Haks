@@ -1,4 +1,4 @@
-"""Losslessly partition compiled, dummy-only robe bridges for NWSync.
+"""Losslessly partition compiled, dummy-only robe and rifle banks for NWSync.
 
 This reads native MDL layouts from CleanModels and the historical compiler
 (232-byte model, 196-byte animation, 112-byte dummy node). Only resource names
@@ -16,10 +16,17 @@ LIMIT_BYTES = 15 * 1024 * 1024
 TARGET_BYTES = 14 * 1024 * 1024
 _NAME = re.compile(r"p[fm][a-z]_ra\d{3}(?:_b\d{2,5})?\Z")
 _HEAD = re.compile(r"p[fm][a-z]_ra\d{3}\Z")
+_RIFLE = re.compile(r"a_rfl_p[fm][hedoz]0(?:_b\d{2,4})?\Z")
+_ANIMATION_HEAD = re.compile(r"(?:p[fm][a-z]_ra\d{3}|a_rfl_p[fm][hedoz]0)\Z")
 
 
 def is_bank_name(name):
     return isinstance(name, str) and bool(_NAME.fullmatch(name)) and len(name) <= 16
+
+
+def is_animation_bank_name(name):
+    """Owned robe and normal-playable-body rifle animation resources."""
+    return is_bank_name(name) or (isinstance(name, str) and len(name) <= 16 and bool(_RIFLE.fullmatch(name)))
 
 
 def bank_names(manifest):
@@ -79,7 +86,7 @@ class CompiledBridge:
         self.header = bytes(self.data[:232])
         self.name = _name(self.data, 8, 64)
         self.parent = _name(self.data, 168, 64)
-        if not is_bank_name(self.name):
+        if not is_animation_bank_name(self.name):
             raise ValueError(f"Not a generated robe animation bank: {self.name}")
         # Every added ancestor must be neutral for inherited translation scaling.
         if self.data[164:168] != struct.pack("<f", 1):
@@ -186,7 +193,7 @@ class CompiledBridge:
                          tuple((offset - start, length) for offset, length in names))
 
     def pack(self, name, parent, clips):
-        if not is_bank_name(name):
+        if not is_animation_bank_name(name):
             raise ValueError(f"Invalid robe bank name: {name}")
         result = bytearray(self.header)
         _set_name(result, 8, 64, name)
@@ -360,7 +367,7 @@ def split(data, target_bytes=TARGET_BYTES):
     if not 0 < target_bytes < LIMIT_BYTES:
         raise ValueError("Bank target must be below the NWSync file size limit")
     model = CompiledBridge(data)
-    if not _HEAD.fullmatch(model.name):
+    if not _ANIMATION_HEAD.fullmatch(model.name):
         raise ValueError("Partition the complete bridge, not one of its child banks")
     overhead = 244 + len(model.geometry.data)
     if overhead >= target_bytes:
@@ -389,7 +396,7 @@ def join(parts):
         raise ValueError("Missing robe animation banks")
     models = [CompiledBridge(data) for data in parts]
     first = models[0]
-    if not _HEAD.fullmatch(first.name):
+    if not _ANIMATION_HEAD.fullmatch(first.name):
         raise ValueError("The first bank must be the original bridge head")
     clips = []
     for index, model in enumerate(models):

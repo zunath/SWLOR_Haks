@@ -1,5 +1,6 @@
 """Every playable body supports rifles under the barrel, where the male human's target is."""
 from pathlib import Path
+import json
 import unittest
 
 import numpy as np
@@ -26,7 +27,10 @@ class RifleHoldAnimationTests(unittest.TestCase):
                 root = (ROOT / rifle.ROOT_DIRECTORY / f"{body}.mdl").read_bytes()
                 self.assertEqual(rifle.bank_name(body), mdl.supermodel(root))
                 bank = Model((ROOT / rifle.BANK_DIRECTORY / f"{rifle.bank_name(body)}.mdl").read_bytes())
-                self.assertEqual(set(rifle.CLIPS), set(bank.clips))
+                profiles = json.loads((ROOT / "tools" / "RifleGripProfileMotions.json").read_text())["models"]
+                owned = {motion["name"] for record in profiles if record["body"] == body
+                         for motion in record["motions"]}
+                self.assertEqual(set(rifle.CLIPS) | owned, set(bank.clips))
                 self.assertNotIn(bank.parent, ("", rifle.bank_name(body)))
 
     def test_the_reference_support_palm_sits_under_the_barrel(self):

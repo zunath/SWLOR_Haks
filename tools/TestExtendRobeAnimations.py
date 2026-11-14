@@ -4,11 +4,30 @@ from unittest import mock
 import tempfile
 import math
 import struct
+import json
 from pathlib import Path
 
 import RobeAnimationBanks as banks
 import ExtendRobeAnimations as extend
 from TestRobeAnimationBanks import NativeRobeAnimationBankTests
+
+
+class ExtensionOwnerSelectionTests(unittest.TestCase):
+    def test_current_performance_and_rifle_clips_choose_their_own_record_in_either_order(self):
+        manifest = json.loads(extend.robes.MANIFEST.read_text())
+        performance = next(row for row in manifest["animation_extensions"] if "sw_vio_loop" in row["clips"])
+        rifle = next(row for row in manifest["animation_extensions"] if row.get("owner") == "RobeRifleProfiles")
+        for records in ([performance, rifle], [rifle, performance]):
+            current = {"animation_extensions": records}
+            self.assertIs(extend.extension_for_clips(current, ["sw_vio_loop", "sw_vio_loop_in", "sw_vio_loop_out"]), performance)
+            self.assertIs(extend.extension_for_clips(current, [rifle["clips"][0]]), rifle)
+
+    def test_missing_mixed_and_ambiguous_ownership_is_rejected(self):
+        first, second = {"clips": ["first"]}, {"clips": ["second"]}
+        for records, clips in (([first, second], []), ([first, second], ["missing"]),
+                               ([first, second], ["first", "second"]), ([first, first.copy()], ["first"])):
+            with self.assertRaisesRegex(ValueError, "one owned extension"):
+                extend.extension_for_clips({"animation_extensions": records}, clips)
 
 
 class ExtensionTests(unittest.TestCase):
