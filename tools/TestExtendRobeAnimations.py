@@ -198,6 +198,59 @@ class ExtensionTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             extend.variant_changes(layer, 'clip3', 'clip3')  # no difference at all
 
+    def test_a_variant_is_recognized_when_a_full_bank_spilled_it_into_another_bank(self):
+        layer = self.source.pack('pmh_ra003', 'pmh_ra001', self.source.clips[2:])
+        prior, track = self.variant_track(layer)
+        result, _ = extend.add_variant_clips(layer, {'clip3': 'clip3v'}, {'clip3v': {'arm': (prior, track)}})
+        bridge = banks.CompiledBridge(result)
+        spill = bridge.pack('pmh_ra005', 'pmh_ra003',
+                            [clip for name, clip in zip(bridge.clip_names, bridge.clips) if name == 'clip3v'])
+        changes = extend.variant_changes(spill, 'clip3', 'clip3v', layer)
+        self.assertEqual({'arm'}, set(changes))
+        self.assertTrue(extend.sharing.controllers_equal({extend.ROTATION: track}, {extend.ROTATION: changes['arm'][1]}))
+        with self.assertRaises(ValueError):
+            extend.variant_changes(spill, 'clip3', 'clip3v')  # the copied clip is not in the spill bank
+        with self.assertRaises(ValueError):
+            extend.variant_changes(spill, 'clip4', 'clip3v', layer)  # another clip, with its own timing
+
+    def test_the_banks_of_a_rig_add_the_selected_clips_together(self):
+        layer = self.source.pack('pmh_ra003', 'pmh_ra001', self.source.clips[2:])
+        prior, track = self.variant_track(layer)
+        result, _ = extend.add_variant_clips(layer, {'clip3': 'clip3v'}, {'clip3v': {'arm': (prior, track)}})
+        extend.verify_body_additions(layer, result, {'clip3v'})
+        with self.assertRaises(ValueError):
+            extend.verify_body_additions(layer, result, {'clip3v', 'clip5v'})  # one bank alone must add them all
+        gained, untouched = set(), set()
+        extend.verify_body_additions(layer, result, {'clip3v', 'clip5v'}, gained)
+        extend.verify_body_additions(layer, layer, {'clip3v', 'clip5v'}, untouched)
+        self.assertEqual(({'clip3v'}, set()), (gained, untouched))
+        with self.assertRaises(ValueError):
+            extend.verify_body_additions(layer, result, {'clip5v'}, set())  # an unselected clip appeared
+        main, spill, other = 'sw_cr_creature/an_a_ba.mdl', 'sw_cr_creature/ab_a_ba_005.mdl', 'sw_cr_creature/an_a_fa.mdl'
+        self.assertEqual(extend.body_rig(main), extend.body_rig(spill))
+        self.assertNotEqual(extend.body_rig(main), extend.body_rig(other))
+        extend.verify_rig_additions({main: {'clip3v'}, spill: {'clip5v'}}, {'clip3v', 'clip5v'})
+        with self.assertRaises(ValueError):
+            extend.verify_rig_additions({main: {'clip3v'}, spill: set()}, {'clip3v', 'clip5v'})
+        with self.assertRaises(ValueError):  # the other rig must add them too
+            extend.verify_rig_additions({main: {'clip3v'}, other: set()}, {'clip3v'})
+
+    def test_a_recompiled_bank_root_without_its_identity_transform_is_the_same_skeleton(self):
+        still, scale = ((0.,), [(0., 0., 0.)]), ((0.,), [(1.,)])
+        unturned = ((0.,), [(0., 0., 0., 1.)])
+        old_root = ('ab_a_ba_005', None, -1, {extend.POSITION: still, extend.ROTATION: unturned, 36: scale}, 0)
+        new_root = ('ab_a_ba_005', None, -1, {36: scale}, 0)
+        self.assertEqual(extend.bind_controllers(new_root), extend.bind_controllers(old_root))
+        # A root that is moved, turned or animated keeps its controllers, and so does every other node.
+        moved = ((0.,), [(0., .1, 0.)])
+        turned = ((0.,), [(0., 0., math.sin(.1), math.cos(.1))])
+        swaying = ((0., 1.), [(0., 0., 0., 1.), (0., 0., 0., 1.)])
+        for controllers in ({extend.POSITION: moved}, {extend.ROTATION: turned}, {extend.ROTATION: swaying}):
+            with self.subTest(controllers=controllers):
+                self.assertEqual(controllers, extend.bind_controllers(('root', None, -1, controllers, 0)))
+        child = ('rootdummy', 0, -1, {extend.POSITION: still, extend.ROTATION: unturned}, 0)
+        self.assertEqual(child[3], extend.bind_controllers(child))
+
     def test_actual_inherited_clip_owner_is_selected_independently_of_body_prefix(self):
         child = self.source.pack('pfd_ra003', 'pmh_ra001', [])
         resources = {'pfd_ra003': child, 'pmh_ra001': self.old,

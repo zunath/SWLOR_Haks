@@ -94,14 +94,45 @@ class GitBlobs:
         self.process.stdin.close(); self.process.stdout.close(); self.process.wait()
 
 
-def verify_body_additions(before, after, names):
+def body_rig(path):
+    """The rig a body bank serves: an_a_ba and its overflow banks ab_a_ba_NNN are all a_ba."""
+    return Path(path).stem.split("_", 1)[1][:4]
+
+
+def verify_rig_additions(additions, names):
+    """A full body bank spills new clips into the next bank of its rig, so each rig's banks add the clips together."""
+    rigs = {}
+    for path, added in additions.items(): rigs.setdefault(body_rig(path), set()).update(added)
+    if any(added != set(names) for added in rigs.values()):
+        raise ValueError("The body banks of each rig must add exactly the selected clips")
+
+
+def bind_controllers(node):
+    """A node's bind transform, without an unmoved, unrotated root's zero translation and identity rotation.
+
+    Older compilers wrote those two controllers on a bank's root and the current one leaves them out; the pose is
+    the same, so recompiling an older bank does not change its skeleton.
+    """
+    controllers = dict(node[3])
+    if node[1] is None:
+        for kind, identity in ((POSITION, (0, 0, 0)), (ROTATION, (0, 0, 0, 1))):
+            track = controllers.get(kind)
+            if track and len(track[1]) == 1 and all(abs(a - b) < 1e-6 for a, b in zip(track[1][0], identity)):
+                del controllers[kind]
+    return controllers
+
+
+def verify_body_additions(before, after, names, added=None):
+    """Check that a body bank only gained selected clips. Pass a set as added to collect them for a rig-wide check."""
     old, new = poses.Model(before), poses.Model(after)
-    if set(new.clips) - set(old.clips) != set(names) or set(old.clips) - set(new.clips):
+    gained = set(new.clips) - set(old.clips)
+    if (gained != set(names) if added is None else not gained <= set(names)) or set(old.clips) - set(new.clips):
         raise ValueError("The body bank must add exactly the selected clips")
+    if added is not None: added.update(gained)
     if len(old.nodes) != len(new.nodes):
         raise ValueError("The body bank geometry changed")
     for left, right in zip(old.nodes, new.nodes):
-        if left[:3] != right[:3] or not sharing.controllers_equal(left[3], right[3]):
+        if left[:3] != right[:3] or not sharing.controllers_equal(bind_controllers(left), bind_controllers(right)):
             raise ValueError("The body bank skeleton or bind changed")
     headers_before, headers_after = sharing.clip_headers(before), sharing.clip_headers(after)
     for name, clip in old.clips.items():
@@ -215,19 +246,23 @@ def revise_rotations(before, changes):
     return result, count
 
 
-def variant_changes(body, base, variant):
-    """Recognize a body clip that copies another except for rotations and root translation."""
-    model = poses.Model(body)
-    headers = sharing.clip_headers(body)
-    if base not in model.clips or variant not in model.clips:
+def variant_changes(body, base, variant, source=None):
+    """Recognize a body clip that copies another except for rotations and root translation.
+
+    The copied clip is read from source when a full bank spilled the variant into another bank of its rig.
+    """
+    source = body if source is None else source
+    model, original = poses.Model(body), poses.Model(source)
+    if base not in original.clips or variant not in model.clips:
         raise ValueError("The body lacks the variant or the clip it copies")
-    if headers[base] != headers[variant]:
+    if sharing.clip_headers(source)[base] != sharing.clip_headers(body)[variant]:
         raise ValueError(f"A variant keeps its clip's timing and events: {variant}")
-    nodes, copied = model.clips[base][1], model.clips[variant][1]
+    nodes, copied = original.clips[base][1], model.clips[variant][1]
     if len(nodes) != len(copied): raise ValueError("A variant keeps its clip's nodes")
     changes = {}
     for left, right in zip(nodes, copied):
-        if left[:3] != right[:3] or left[3].keys() != right[3].keys():
+        # Each bank names its root after itself; every other node keeps its name.
+        if left[1:3] != right[1:3] or left[0] != right[0] and left[1] is not None or left[3].keys() != right[3].keys():
             raise ValueError("A variant keeps its clip's nodes and channels")
         for kind, value in left[3].items():
             target = right[3][kind]
@@ -295,8 +330,9 @@ def apply_rotation_revision(args):
         for path in body_paths:
             old, new = baseline.read(path), (robes.ROOT / path).read_bytes()
             if digest(old) != manifest["files"][path]: raise ValueError("Body baseline ownership mismatch")
-            changes[Path(path).stem] = rotation_changes(old, new, wanted)
+            changes[Path(path).stem] = {} if old == new else rotation_changes(old, new, wanted)
             body_hashes[path] = digest(new)
+        if not any(changes.values()): raise ValueError("No selected rotation changes")
         active = robes.fresh_active_models()
         stock = robes.tint.read_stock_key_models(args.game_data)
         def load_source(name):
@@ -372,7 +408,11 @@ def apply_variants(args):
         raise ValueError("Invalid animation name")
     if not set(variants) <= set(record["clips"]) or added & set(record["clips"]):
         raise ValueError("A variant copies an owned extension clip under a new name")
-    body_paths = list(record["preserved_body_clips"])
+    spill_paths = [path for path in args.body_bank or [] if path not in record["preserved_body_clips"]]
+    if any(path not in manifest["files"] or body_rig(path) not in {body_rig(known) for known in record["preserved_body_clips"]}
+           for path in spill_paths):
+        raise ValueError("A spill bank is a catalogued body bank of a rig the extension already preserves")
+    body_paths = list(record["preserved_body_clips"]) + spill_paths
     allowed_errors = {f"Robe RGB input/output changed: {path}; regenerate and validate" for path in body_paths}
     allowed_errors.add("Robe RGB input/output changed: tools/ExtendRobeAnimations.py; regenerate and validate")
     errors = set(robes.check()) - allowed_errors
@@ -381,13 +421,23 @@ def apply_variants(args):
     try:
         if baseline.read("tools/RobeRgbModels.json").replace(b"\r\n", b"\n") != original.replace(b"\r\n", b"\n"):
             raise ValueError("Variant baseline must match the current manifest")
-        changes, body_hashes = {}, {}
+        changes, body_hashes, additions, bodies, preserved = {}, {}, {}, {}, {}
         for path in body_paths:
             old, new = baseline.read(path), (robes.ROOT / path).read_bytes()
             if digest(old) != manifest["files"][path]: raise ValueError("Body baseline ownership mismatch")
-            verify_body_additions(old, new, added)
-            changes[Path(path).stem] = {variant: variant_changes(new, base, variant) for base, variant in variants.items()}
-            body_hashes[path] = digest(new)
+            additions[path] = set()
+            preserved[path] = verify_body_additions(old, new, added, additions[path])
+            bodies[path], body_hashes[path] = new, digest(new)
+        verify_rig_additions(additions, added)
+        for path in body_paths:
+            # The clip a variant copies may sit in another bank of the same rig.
+            holders = {clip: other for other in body_paths if body_rig(other) == body_rig(path)
+                       for clip in sharing.clip_headers(bodies[other])}
+            changes[Path(path).stem] = {
+                variant: variant_changes(bodies[path], base, variant, bodies[holders[base]])
+                for base, variant in variants.items() if variant in additions[path] and base in holders}
+        if sum(len(found) for found in changes.values()) != len(variants) * len({body_rig(path) for path in body_paths}):
+            raise ValueError("The body lacks the variant or the clip it copies")
         active = robes.fresh_active_models()
         stock = robes.tint.read_stock_key_models(args.game_data)
         def load_source(name):
@@ -440,6 +490,7 @@ def apply_variants(args):
             for path, data in outputs.items():
                 (robes.ROOT / path).write_bytes(data); manifest["files"][path] = digest(data)
             for path, value in body_hashes.items(): manifest["files"][path] = value
+            for path in spill_paths: record["preserved_body_clips"][path] = preserved[path]
             manifest["files"]["tools/ExtendRobeAnimations.py"] = robes.file_digest(Path(__file__))
             manifest["animation_bank_sets"].update(bank_records)
             record["clips"] = clips
@@ -467,8 +518,10 @@ def check_installed(manifest, game_data, enforce=True):
     baseline = GitBlobs(record["baseline"])
     try:
         prior = json.loads(baseline.read("tools/RobeRgbModels.json"))
+        additions = {path: set() for path in record["preserved_body_clips"]}
         for path in record["preserved_body_clips"]:
-            verify_body_additions(baseline.read(path), (robes.ROOT / path).read_bytes(), wanted)
+            verify_body_additions(baseline.read(path), (robes.ROOT / path).read_bytes(), wanted, additions[path])
+        verify_rig_additions(additions, wanted)
         def load(name):
             if name in active: return active[name].read_bytes()
             if name in stock: return robes.tint.extract_stock_bif_resource(*stock[name])
@@ -523,6 +576,8 @@ def main():
     parser.add_argument("--apply", action="store_true")
     parser.add_argument("--check", action="store_true", help="Revalidate installed layers and exact baseline preservation")
     parser.add_argument("--revise-rotations", action="store_true", help="Revise only selected existing rotation channels and root translation, without changing the rig")
+    parser.add_argument("--body-bank", action="append", metavar="PATH",
+                        help="With --variant: another catalogued body bank of the same rig that a full bank spilled the new clips into")
     parser.add_argument("--variant", action="append", metavar="CLIP=NEW",
                         help="Add NEW as a copy of owned CLIP that differs only in body rotations and root translation; includes _in/_out")
     args = parser.parse_args()
