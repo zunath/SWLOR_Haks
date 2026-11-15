@@ -12,7 +12,7 @@ node dummy wbwxh_m_012
 endnode
 node dummy rootdummy
   parent wbwxh_m_012
-  position 0 0 0
+  position 0 0 -0.024
   orientation 0 0 0 0
 endnode
 node trimesh w_minigun_body
@@ -876,12 +876,12 @@ node trimesh b_minigun_barrel
 endnode
 node dummy handconjure
   parent wbwxh_m_012
-  position 0 0 0
+  position 0 0 -0.024
   orientation 0 0 0 0
 endnode
 node dummy headconjure
   parent wbwxh_m_012
-  position 0 0 0
+  position 0 0 -0.024
   orientation 0 0 0 0
 endnode
 endmodelgeom wbwxh_m_012
