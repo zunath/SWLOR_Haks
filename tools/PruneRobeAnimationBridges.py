@@ -1,16 +1,16 @@
 #!/usr/bin/env python3
 """Remove verified, unreachable generated bridges before packaging animation updates.
 
-Version-to-resref assignments remain reserved so an old name is never reassigned
-to different motion. Roots for retired phenotypes count as references too.
+The generator revises a family's installed bank in place when it rebuilds every
+model that inherits from it, so this mostly finds banks left behind by families
+that received a new name. Retired names stay reserved and are never reassigned.
+Roots for retired phenotypes count as references too.
 """
 import argparse
 import json
 from pathlib import Path
-import re
 import subprocess
 
-import CompileModels as mdl
 import GenerateRobeRgbModels as robes
 
 
@@ -27,18 +27,7 @@ def referenced_bridges(parents, candidates):
     return candidates & reachable
 
 
-def model_parent(path):
-    with path.open("rb") as stream:
-        header = stream.read(244)
-        if mdl.binary(header):
-            if len(header) < 244:
-                raise ValueError(f"Truncated model header: {path}")
-            return mdl.supermodel(header)
-        stream.seek(0)
-        for line in stream:
-            if re.match(rb"\s*setsupermodel\s", line, re.IGNORECASE):
-                return mdl.supermodel(line)
-    return ""
+model_parent = robes.model_parent
 
 
 def plan(root, manifest):
