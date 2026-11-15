@@ -43,7 +43,7 @@
 #define ROUGHNESS_MAP 0
 #define HEIGHT_MAP 0
 #define SELF_ILLUMINATION_MAP 0
-#define ENVIRONMENT_MAP 0
+#define ENVIRONMENT_MAP 1
 
 #include "inc_standard"
 
@@ -255,7 +255,7 @@ void main ()
     // texture0 is deliberately the opaque white placeholder, so the standard
     // setup cannot discover the PLT palette's environment-map coverage itself.
     // Reapply the same inc_standard path with the atlas alpha after normal-map setup.
-    fEnvMapLevel = 0.0;
+    fEnvMapLevel = 1.0 - paletteColor.a;
     vec3 surfaceColor = vTint;
 
     #if FRAGMENT_LIGHTING == 1 && LIGHTING == 1
