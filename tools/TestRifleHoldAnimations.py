@@ -74,6 +74,57 @@ class RifleHoldAnimationTests(unittest.TestCase):
                     _, palm = rifle.placement_error(self.library, body, clip)
                     self.assertLess(np.linalg.norm(palm), 0.003)
 
+    def test_support_hand_follows_the_rifle_move_of_each_body(self):
+        self.assertEqual(set(rifle.WEAPON_MOVES) - set(rifle.BODIES), set())
+        self.assertNotIn(rifle.REFERENCE, rifle.WEAPON_MOVES)
+        for body in rifle.BODIES:
+            if body.endswith("2"):
+                self.assertNotIn(body, rifle.WEAPON_MOVES, "large phenotypes get no rifle move from the server")
+            self.assertLess(np.linalg.norm(rifle.weapon_move(body)), 0.04)
+
+    def robe_bank_sets(self):
+        """(head, body, joined bank bytes) of every robe animation bank set built for a rifle body."""
+        import json
+        import GenerateRobeRgbModels as generator
+        manifest = json.loads((ROOT / "tools" / "RobeRgbModels.json").read_bytes())
+        active = generator.fresh_active_models()
+        bases = {}
+        for key, head in manifest["animation_bridges"].items():
+            bases.setdefault(head, set()).add(key.split("/")[0])
+        for head in sorted(manifest["animation_bank_sets"]):
+            body = next(iter(bases.get(head, ())), None)
+            if len(bases.get(head, ())) == 1 and body in rifle.BODIES:
+                yield head, body, generator.owned_animation_bytes(head, manifest, active)
+
+    def test_robe_banks_carry_each_bodys_support_arm(self):
+        checked = 0
+        for head, body, bridge in self.robe_bank_sets():
+            bank = self.library.data(rifle.bank_name(body))
+            for clip in rifle.CLIPS:
+                ours, theirs = rifle.arm_rotations(bridge, clip), rifle.arm_rotations(bank, clip)
+                for joint in rifle.ARM:
+                    with self.subTest(head=head, clip=clip, joint=joint):
+                        (rows, _, values, _), (bank_rows, _, bank_values, _) = ours[joint], theirs[joint]
+                        self.assertEqual(bank_rows, rows)
+                        a = np.frombuffer(bridge[values:values + rows * 16], "<f4")
+                        b = np.frombuffer(bank[bank_values:bank_values + rows * 16], "<f4")
+                        self.assertLess(np.abs(a - b).max(), 1e-6)
+                        checked += 1
+        self.assertGreater(checked, 0)
+
+    def test_a_base_robe_bank_is_preserved_only_up_to_recorded_arm_rotations(self):
+        import ExtendRobeAnimations as extend
+        _, _, bridge = next(self.robe_bank_sets())
+        record = {"base_rotation_revisions": [{"clips": list(rifle.CLIPS), "joints": list(rifle.ARM)}]}
+        self.assertTrue(extend.base_bank_preserved(bridge, bridge, {}))
+        _, _, values, _ = rifle.arm_rotations(bridge, "xbowr")["lhand_g"]
+        turned = bytearray(bridge)
+        turned[values] ^= 1
+        self.assertFalse(extend.base_bank_preserved(bridge, bytes(turned), {}))
+        self.assertTrue(extend.base_bank_preserved(bridge, bytes(turned), record))
+        turned[200] ^= 1
+        self.assertFalse(extend.base_bank_preserved(bridge, bytes(turned), record))
+
 
 if __name__ == "__main__":
     unittest.main()
