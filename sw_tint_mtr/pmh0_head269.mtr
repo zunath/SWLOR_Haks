@@ -29,8 +29,8 @@ parameter float glowCompression 0.32
 parameter float glowGain 1.75
 parameter float glowHueGain 0.16
 parameter float glowLayerFromMask 0
-parameter float glowMaxLayer -1
-parameter float glowMinLayer -1
+parameter float glowMaxLayer 4
+parameter float glowMinLayer 4
 parameter float glowWholeSurface 0
 parameter float hairFilter 0
 parameter float hairGain 1

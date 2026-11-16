@@ -372,7 +372,7 @@
     [
       "pfh0_head262",
       "pfh0_head262",
-      "0,1,2,7,8,9"
+      "0,1,2,4,7,8,9"
     ],
     [
       "pfh0_head263",
@@ -392,7 +392,7 @@
     [
       "pfh0_head266",
       "pfh0_head266",
-      "0,1,2,7,8,9"
+      "0,1,2,4,7,8,9"
     ],
     [
       "pfh0_head267",
@@ -402,7 +402,7 @@
     [
       "pfh0_head268",
       "pfh0_head268",
-      "0,1,2,7,8,9"
+      "0,1,2,4,7,8,9"
     ],
     [
       "pfh0_head269",
@@ -712,7 +712,7 @@
     [
       "pmh0_head267",
       "pmh0_head267",
-      "0,1,2,6,8,9"
+      "0,1,2,4,6,8,9"
     ],
     [
       "pmh0_head268",
@@ -722,7 +722,7 @@
     [
       "pmh0_head269",
       "pmh0_head269",
-      "0,1,2,6,8,9"
+      "0,1,2,4,6,8,9"
     ],
     [
       "pmh0_head270",
@@ -732,7 +732,7 @@
     [
       "pmh0_head271",
       "pmh0_head271",
-      "0,1,2,6,8,9"
+      "0,1,2,4,6,8,9"
     ],
     [
       "pmh0_head272",
@@ -742,7 +742,7 @@
     [
       "pmh0_head273",
       "pmh0_head273",
-      "0,1,2,3,6,8,9"
+      "0,1,2,3,4,6,8,9"
     ],
     [
       "pmh0_head274",
@@ -1042,7 +1042,7 @@
     [
       "pfh0_head319",
       "cx04p02",
-      "1"
+      "0"
     ],
     [
       "pfh0_head319",
@@ -1077,7 +1077,7 @@
     [
       "pfh0_head320",
       "cx05p05",
-      "1"
+      "0"
     ],
     [
       "pfh0_head321",
@@ -1092,7 +1092,7 @@
     [
       "pfh0_head321",
       "cx06p02",
-      "1"
+      "0"
     ],
     [
       "pfh0_head321",
@@ -1117,7 +1117,7 @@
     [
       "pfh0_head322",
       "cx07p02",
-      "1"
+      "0"
     ],
     [
       "pfh0_head322",
@@ -1142,7 +1142,7 @@
     [
       "pfh0_head323",
       "cx08p02",
-      "1"
+      "0"
     ],
     [
       "pfh0_head323",
@@ -1352,7 +1352,7 @@
     [
       "pmh0_head324",
       "h324lash",
-      "1"
+      "0"
     ],
     [
       "pmh0_head324",
@@ -1432,7 +1432,7 @@
     [
       "pmh0_head327",
       "cx00p02",
-      "1"
+      "0"
     ],
     [
       "pmh0_head327",
@@ -1467,7 +1467,7 @@
     [
       "pmh0_head328",
       "cx01p05",
-      "1"
+      "0"
     ],
     [
       "pmh0_head329",
@@ -1487,7 +1487,7 @@
     [
       "pmh0_head329",
       "cx02p03",
-      "1"
+      "0"
     ],
     [
       "pmh0_head329",
@@ -1507,7 +1507,7 @@
     [
       "pmh0_head330",
       "cx03p02",
-      "1"
+      "0"
     ],
     [
       "pmh0_head330",
@@ -1809,10 +1809,12 @@
         "twosided 1"
       ],
       "parameters": {
-        "maskMode": 3,
         "detailDiffuse": 1.0,
-        "detailGlowChannel": 2,
-        "detailGlowGain": 1.25
+        "detailGlowChannel": 2.0,
+        "detailGlowGain": 1.25,
+        "detailSkinGain": 0.5,
+        "maskMode": 3.0,
+        "skinGain": 0.5
       }
     },
     "cx00p03": {
@@ -2065,10 +2067,12 @@
         "twosided 1"
       ],
       "parameters": {
-        "maskMode": 3,
         "detailDiffuse": 1.0,
-        "detailGlowChannel": 2,
-        "detailGlowGain": 1.25
+        "detailGlowChannel": 2.0,
+        "detailGlowGain": 1.25,
+        "detailSkinGain": 0.5,
+        "maskMode": 3.0,
+        "skinGain": 0.5
       }
     },
     "cx02p00": {
@@ -2215,10 +2219,12 @@
         "twosided 1"
       ],
       "parameters": {
-        "maskMode": 3,
         "detailDiffuse": 1.0,
-        "detailGlowChannel": 2,
-        "detailGlowGain": 1.25
+        "detailGlowChannel": 2.0,
+        "detailGlowGain": 1.25,
+        "detailSkinGain": 0.5,
+        "maskMode": 3.0,
+        "skinGain": 0.5
       }
     },
     "cx02p04": {
@@ -2365,10 +2371,12 @@
         "twosided 1"
       ],
       "parameters": {
-        "maskMode": 3,
         "detailDiffuse": 1.0,
-        "detailGlowChannel": 2,
-        "detailGlowGain": 1.25
+        "detailGlowChannel": 2.0,
+        "detailGlowGain": 1.25,
+        "detailSkinGain": 0.5,
+        "maskMode": 3.0,
+        "skinGain": 0.5
       }
     },
     "cx03p04": {
@@ -2551,10 +2559,12 @@
         "twosided 1"
       ],
       "parameters": {
-        "maskMode": 3,
         "detailDiffuse": 1.0,
-        "detailGlowChannel": 2,
-        "detailGlowGain": 1.25
+        "detailGlowChannel": 2.0,
+        "detailGlowGain": 1.25,
+        "detailSkinGain": 0.5,
+        "maskMode": 3.0,
+        "skinGain": 0.5
       }
     },
     "cx04p03": {
@@ -2809,10 +2819,12 @@
         "twosided 1"
       ],
       "parameters": {
-        "maskMode": 3,
         "detailDiffuse": 1.0,
-        "detailGlowChannel": 2,
-        "detailGlowGain": 1.25
+        "detailGlowChannel": 2.0,
+        "detailGlowGain": 1.25,
+        "detailSkinGain": 0.5,
+        "maskMode": 3.0,
+        "skinGain": 0.5
       }
     },
     "cx06p00": {
@@ -2923,10 +2935,12 @@
         "twosided 1"
       ],
       "parameters": {
-        "maskMode": 3,
         "detailDiffuse": 1.0,
-        "detailGlowChannel": 2,
-        "detailGlowGain": 1.25
+        "detailGlowChannel": 2.0,
+        "detailGlowGain": 1.25,
+        "detailSkinGain": 0.5,
+        "maskMode": 3.0,
+        "skinGain": 0.5
       }
     },
     "cx06p04": {
@@ -3109,10 +3123,12 @@
         "twosided 1"
       ],
       "parameters": {
-        "maskMode": 3,
         "detailDiffuse": 1.0,
-        "detailGlowChannel": 2,
-        "detailGlowGain": 1.25
+        "detailGlowChannel": 2.0,
+        "detailGlowGain": 1.25,
+        "detailSkinGain": 0.5,
+        "maskMode": 3.0,
+        "skinGain": 0.5
       }
     },
     "cx07p03": {
@@ -3295,10 +3311,12 @@
         "twosided 1"
       ],
       "parameters": {
-        "maskMode": 3,
         "detailDiffuse": 1.0,
-        "detailGlowChannel": 2,
-        "detailGlowGain": 1.25
+        "detailGlowChannel": 2.0,
+        "detailGlowGain": 1.25,
+        "detailSkinGain": 0.5,
+        "maskMode": 3.0,
+        "skinGain": 0.5
       }
     },
     "cx08p03": {
@@ -5723,7 +5741,7 @@
         "texture7 tm_88aa0ea596cc6",
         "texture10 plt_palette",
         "parameter float tintMapWidth 256.0",
-        "parameter float tintMapHeight 256.0",
+        "parameter float tintMapHeight 1024.0",
         "parameter float rowSkin 0.000244",
         "parameter float rowHair 0.086182",
         "parameter float rowMetal1 0.172119",
@@ -6502,9 +6520,9 @@
         "texture9 tm_c4455b9ee2d4f"
       ],
       "parameters": {
-        "glowMinLayer": 4,
-        "glowMaxLayer": 4,
-        "glowLayerFromMask": 1
+        "glowLayerFromMask": 0.0,
+        "glowMaxLayer": 4.0,
+        "glowMinLayer": 4.0
       }
     },
     "pfh0_head263": {
@@ -6608,9 +6626,9 @@
         "texture9 tm_4e62fcaf8ac0b"
       ],
       "parameters": {
-        "glowMinLayer": 4,
-        "glowMaxLayer": 4,
-        "glowLayerFromMask": 1
+        "glowLayerFromMask": 0.0,
+        "glowMaxLayer": 4.0,
+        "glowMinLayer": 4.0
       }
     },
     "pfh0_head267": {
@@ -6661,9 +6679,9 @@
         "texture9 tm_56be9252b9daf"
       ],
       "parameters": {
-        "glowMinLayer": 4,
-        "glowMaxLayer": 4,
-        "glowLayerFromMask": 1
+        "glowLayerFromMask": 0.0,
+        "glowMaxLayer": 4.0,
+        "glowMinLayer": 4.0
       }
     },
     "pfh0_head269": {
@@ -9049,7 +9067,10 @@
         "parameter float rowTat1 0.515869",
         "parameter float rowTat2 0.515869"
       ],
-      "parameters": {}
+      "parameters": {
+        "glowMaxLayer": 4.0,
+        "glowMinLayer": 4.0
+      }
     },
     "pmh0_head268": {
       "shader": "fs_head_legacy",
@@ -9097,7 +9118,10 @@
         "parameter float rowTat1 0.515869",
         "parameter float rowTat2 0.515869"
       ],
-      "parameters": {}
+      "parameters": {
+        "glowMaxLayer": 4.0,
+        "glowMinLayer": 4.0
+      }
     },
     "pmh0_head270": {
       "shader": "fs_head_legacy",
@@ -9145,7 +9169,10 @@
         "parameter float rowTat1 0.515869",
         "parameter float rowTat2 0.515869"
       ],
-      "parameters": {}
+      "parameters": {
+        "glowMaxLayer": 4.0,
+        "glowMinLayer": 4.0
+      }
     },
     "pmh0_head272": {
       "shader": "fs_head_legacy",
@@ -9193,7 +9220,10 @@
         "parameter float rowTat1 0.515869",
         "parameter float rowTat2 0.515869"
       ],
-      "parameters": {}
+      "parameters": {
+        "glowMaxLayer": 4.0,
+        "glowMinLayer": 4.0
+      }
     },
     "pmh0_head274": {
       "shader": "fs_head_legacy",
@@ -11351,7 +11381,7 @@
       "sourceHasAlpha": false
     },
     "sw_tint2/cx00p02t.dds": {
-      "sha256": "00e61fda44e78a2de8d4afbd9e7d57b96ef5951107a8ead734a08683cbdb1d34",
+      "sha256": "e985933905ffeb3c7497897d3f0ec3c051545d875632e17d6fad5f0d5ad961b5",
       "codec": "BC5",
       "size": [
         256,
@@ -11582,7 +11612,7 @@
       "sourceHasAlpha": false
     },
     "sw_tint2/cx01p05t.dds": {
-      "sha256": "abafefd8c2e3489fb4f34ea0a3c50dff6e985c13bc7f4197e0569a76b5eced8f",
+      "sha256": "5cf0055871c129fa761f51cc25471cb6e444c2923fc725472805baaf1df0de88",
       "codec": "BC5",
       "size": [
         256,
@@ -11703,7 +11733,7 @@
       "sourceHasAlpha": false
     },
     "sw_tint2/cx02p04t.dds": {
-      "sha256": "70def10ae0672556d6d2640f209914adeac027cbcbea99e610f758c3cb3148a5",
+      "sha256": "12f9b118f2dbe0b80c71137094ea249cf4f2089cdc99017852ee01781bc80b78",
       "codec": "BC5",
       "size": [
         1024,
@@ -12616,7 +12646,7 @@
       "sourceHasAlpha": false
     },
     "sw_tint2/cx13p00t.dds": {
-      "sha256": "32b72b930dab7df26cb2b6c630bb4d514238fd12e2be055c5edc67d704257620",
+      "sha256": "0ddfcd38b29412b010d98aed166fb7bb13d95a2532dcb7553ba6add6ef4073b6",
       "codec": "BC5",
       "size": [
         1024,
@@ -13441,7 +13471,7 @@
       "sourceHasAlpha": false
     },
     "sw_tint2/h324lasht.dds": {
-      "sha256": "e111d57483ac4da1ce9d633ad1e3d72174d48fbc7567aa36787a8113002f7cc7",
+      "sha256": "9e6581dd10ff80504604f7ecfdf07186d5db31b1a738a493932b60792219f56d",
       "codec": "BC5",
       "size": [
         1024,
@@ -14794,7 +14824,7 @@
       "sourceHasAlpha": false
     },
     "sw_tint2/pmh0_head318_n.dds": {
-      "sha256": "00b652c2195b81578a3b2ccf0c8a4c55ba4fec3febf3945b34ec37c5b9259853",
+      "sha256": "0af77a4a41d6e00e11b6aa9f9fe70593e7b12a360ed1b19a45821e7cd0ef9a6f",
       "codec": "BC5",
       "size": [
         512,
@@ -14805,7 +14835,7 @@
       "sourceHasAlpha": false
     },
     "sw_tint2/pmh0_head318_s.dds": {
-      "sha256": "d113e5ec7f5571c4cc326967bca323f36766c8a82f100418bb705b0a33c22978",
+      "sha256": "affb682907c657f350524989f6c20b251afa346fba5eb7844130e9f444c693bb",
       "codec": "BC4",
       "size": [
         512,
@@ -15465,7 +15495,7 @@
       "sourceHasAlpha": false
     },
     "sw_tint2/tm_51b3d555495f1.dds": {
-      "sha256": "51b3d555495f152632102a977cd4b68bd08d2f228963dbabd6cc501f7fd1d4a9",
+      "sha256": "c4455b9ee2d4fe5db8dc10977c709ad4a0b6c76b12df468f0fcd1f7e35e20142",
       "codec": "BC5",
       "size": [
         1024,
@@ -15784,7 +15814,7 @@
       "sourceHasAlpha": false
     },
     "sw_tint2/tm_7814f41737bc0.dds": {
-      "sha256": "7814f41737bc0d50e6d07a1539139563db139449378cbd200f3f8849131c7c18",
+      "sha256": "4e62fcaf8ac0b2bc176ffd34c846f978df4a14be43162796a87f99de1e4b567c",
       "codec": "BC5",
       "size": [
         1024,
@@ -15806,7 +15836,7 @@
       "sourceHasAlpha": false
     },
     "sw_tint2/tm_835c162398359.dds": {
-      "sha256": "d8e955dd35e609263259c2819bdadcf0ea59284fb86b2e968ac46730bb498097",
+      "sha256": "3e5a35809b219d87fc61e07211203f0f763d88b8f59a5b6cb5cd0c1fcb8d7ff4",
       "codec": "BC5",
       "size": [
         1024,
@@ -15916,11 +15946,11 @@
       "sourceHasAlpha": false
     },
     "sw_tint2/tm_88aa0ea596cc6.dds": {
-      "sha256": "88aa0ea596cc6b30ea40ec5b697fbfe2428219f5f8580ffbf10bcc07bde15b24",
+      "sha256": "2e06720387277d074d7941186cdf23adb3fdc072c184bc52c89264bbb4b37e26",
       "codec": "BC5",
       "size": [
         256,
-        256
+        1024
       ],
       "role": "tint",
       "mipLevels": 1,
@@ -16081,7 +16111,7 @@
       "sourceHasAlpha": false
     },
     "sw_tint2/tm_abca01f265845.dds": {
-      "sha256": "f52f53428205c05a9a63d685efa6f4e47562a1c92a7c6626f107f5bfcefd6645",
+      "sha256": "f0dacd1ae90851b1863d4e4b37b8a44924fdc3c6b1dc6e44890afbf493e4d26c",
       "codec": "BC5",
       "size": [
         1024,
@@ -16092,7 +16122,7 @@
       "sourceHasAlpha": false
     },
     "sw_tint2/tm_ae17f43a04942.dds": {
-      "sha256": "bc23bc61936350b475db784228390bb903fb38d9c80cd3e8beb464bd5f75ef75",
+      "sha256": "5c4d8e3c5351cd26db5c67bc799e26ae5eee31f99f559a685b62284b46b7c2bb",
       "codec": "BC5",
       "size": [
         1024,
@@ -16103,7 +16133,7 @@
       "sourceHasAlpha": false
     },
     "sw_tint2/tm_aeeee09939f83.dds": {
-      "sha256": "c2d42541adb18b3f96926c8cf405422eff30e53a30f2302232e3a9d66c121935",
+      "sha256": "5bfe8ad47ab4f484576768e8a6a7d184212f5e23ff5e865d91f27b4e067b272e",
       "codec": "BC5",
       "size": [
         1024,
@@ -16213,7 +16243,7 @@
       "sourceHasAlpha": false
     },
     "sw_tint2/tm_bec593c13b64f.dds": {
-      "sha256": "bec593c13b64f7d5696ab1855e6aeb1119f3e651670f05f06ca1232ac457196e",
+      "sha256": "56be9252b9daf8f5e52380270b613a77917a9a345750b577e079a24074412c7a",
       "codec": "BC5",
       "size": [
         1024,
@@ -16587,7 +16617,7 @@
       "sourceHasAlpha": false
     },
     "sw_tint2/tm_e7516cee60bf5.dds": {
-      "sha256": "e7516cee60bf5c7a0c9c745baddac645776ce75f11ad1b734eec3a7351bd5200",
+      "sha256": "0f13dd92d56f29bad5ca4183bb6fa75e731600899f5af9e10bc7a5c8ed92b324",
       "codec": "BC5",
       "size": [
         1024,
@@ -16730,7 +16760,7 @@
       "sourceHasAlpha": false
     },
     "sw_tint2/tm_fb81b64a6bb52.dds": {
-      "sha256": "1dc02cb9455499660cafa9e1c2b9d3bf7c42d715bf3c34c18990d9d921cd97d3",
+      "sha256": "87963e4f9103df8414ab3dfdcce4672fe164c69e7010a9d343393744d4e6432c",
       "codec": "BC5",
       "size": [
         1024,
@@ -18549,7 +18579,7 @@
     "pfh0_head056": "aa8e532d3f849d4469e37dc3650d0a0dd599dd4d611501df93993c2f7b8b35f6",
     "pfh0_head057": "13ce37a898f946cba0d686a477276e3a7180d7ab758e337259e956f6609bd341",
     "pfh0_head058": "df0e46927b69afdef751117dfa31ef6b559807f18c78b044c15ceaa0642894d9",
-    "pfh0_head101": "d71a44d40a63548eae1ae443b8c2557a5ab6efae9e68d0a76a86f0fcb5454cc4",
+    "pfh0_head101": "11522215beb998919add6dc38190e5a91e37351140936e57353cfbea60faa07a",
     "pfh0_head112": "5a97d9d31c4f6e5e926575073a57fa0d9f0926573e2531941abf1eb104b14956",
     "pfh0_head113": "ba4fab35adaaeb7368cef46b83bc9ab3702261aa04a2eba8b67f01ce54727c79",
     "pfh0_head121": "ee671b713a8678cfc65119d370480c87c4e8dea1452bf604ab3827179ad4b835",
@@ -18601,7 +18631,7 @@
     "pfh0_head283": "72f01ae5fc1241342e87e8e264d4997de41a6818b81bca52805437e8bba4eef5",
     "pfh0_head284": "94108d6f1b872b8562bb1c6e2261a10393742a99b14d2472e45a383e060cf8ff",
     "pfh0_head285": "81912871f5f289e43c86ecb030cbde846cf4f6b0f9969341c2eb1297887799fa",
-    "pfh0_head286": "27fa6927393807f78a7302ed11cedd5426b154ff6fdab0240ff1eb26ec02dd44",
+    "pfh0_head286": "11105a2ba307328921b67815507366bc2504f584fdfab968d965a92f9b5dc8f6",
     "pfh0_head287": "50ed3e059664776ded3fca999393dfc331705156934773b6626ec6bf3ea4e449",
     "pfh0_head288": "7e470245b42c5d36e2c09c139b30b8a0a0bf4e11872af079fbd93f4dac2314f7",
     "pfh0_head289": "f91c22a3ad0a1f6dfe3ff8e8cb6a74d69faa2ab1a52fc0b55b22a950ca518e20",
@@ -18716,8 +18746,8 @@
     "pmh0_head314": "129ea7451de2ac6cf90f5ddc8cd2af261dedb6e077512e606513f6646ff704c7",
     "pmh0_head315": "1bbbaef211f1fc8906de58b91bd8dd6f6d92b8057a43176245b5141817e56e28",
     "pmh0_head316": "8725d988ff70f8eafcb59b19fa86ce628df908862ae14a03b7014014c1130e2f",
-    "pmh0_head317": "39daba009b53db96eb66cfdc3243ac1452016bf608c6e374e8fd2093cff95ab8",
-    "pmh0_head318": "a42a8dae929114113ddde142cbab6c5fa0116723dba4a4828454988f847cf7cb",
+    "pmh0_head317": "51a0794d7fa63ba4314468a33f70574940cd139f7441537b8bf63b58a8789579",
+    "pmh0_head318": "453d17a260d18321bbf1f69c849381fe2b4fecc73cbe4abc5285d5d9081dfc44",
     "pmh0_head319": "5dd1e63d7312d35160449e2e0b0dffef6c7d3fe4bf4ae35293daaa939043c27f",
     "pmh0_head320": "7767d75b1c59b9b3366472d5ef24e9c01ef95586ff059e41f68f4162aa4ac4e1",
     "pmh0_head321": "4bf28a0c9bc6bcbfb3e1f5315f641e8fe41af3c60d10c7e1665396bf7295e2a1",
