@@ -214,6 +214,21 @@ def triangles(mesh: Mesh):
             yield corners, mesh.uvs[list(face)], normal / length
 
 
+def same_texels(corners, uvs, normal, other, other_uvs, tolerance=1e-3) -> bool:
+    """True when both triangles map every point of their shared plane to the same texture coordinate.
+
+    Solves the first face's affine position-to-UV mapping (constant along the normal) and checks it
+    reproduces the other face's UV at each of its corners, so permuted or mirrored UVs count as different.
+    """
+    system = np.vstack([np.column_stack([corners, np.ones(3)]), np.append(normal, 0.0)])
+    try:
+        mapping = np.linalg.solve(system, np.vstack([uvs, np.zeros(2)]))
+    except np.linalg.LinAlgError:
+        return False
+    predicted = np.column_stack([other, np.ones(3)]) @ mapping
+    return bool(np.allclose(predicted, other_uvs, atol=tolerance))
+
+
 def conflicts(meshes: list[Mesh]) -> list[tuple[str, str, float]]:
     """Node pairs with coplanar, overlapping faces that draw different texels; area in square metres."""
     found = {}
@@ -231,8 +246,7 @@ def conflicts(meshes: list[Mesh]) -> list[tuple[str, str, float]]:
                         continue
                     if np.max(np.abs((other - corners[0]) @ normal)) > PLANE_TOLERANCE:
                         continue
-                    if first.bitmap == second.bitmap and np.allclose(sorted(map(tuple, np.round(uvs, 4))),
-                                                                     sorted(map(tuple, np.round(other_uvs, 4)))):
+                    if first.bitmap == second.bitmap and same_texels(corners, uvs, normal, other, other_uvs):
                         continue
                     area = overlap_area(corners, other, normal)
                     if area > AREA_TOLERANCE:

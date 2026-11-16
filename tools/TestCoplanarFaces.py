@@ -74,6 +74,28 @@ class CoplanarFaceTests(unittest.TestCase):
         # The Blacksite station's duplicate panel sat 1.69 m up, with vertices moved 1.69 m down.
         self.assertEqual(1, len(self.conflicts(model(second_position="0 0 1.68974", second_z=-1.68974))))
 
+    def test_coincident_face_with_mirrored_texels_is_reported(self):
+        # Same corner UVs as the screen, assigned upside down: the set matches but the image does not.
+        mirrored = model().replace("""    0.5 0.5 0
+    1.0 0.5 0
+    1.0 1.0 0
+    0.5 1.0 0""", """    0 0.5 0
+    0.5 0.5 0
+    0.5 0 0
+    0 0 0""")
+        self.assertEqual(1, len(self.conflicts(mirrored)))
+
+    def test_matching_texels_on_a_partly_overlapping_face_pass(self):
+        # The second face covers half the first and continues the same mapping.
+        half = model(second_position="0.5 0 0").replace("""    0.5 0.5 0
+    1.0 0.5 0
+    1.0 1.0 0
+    0.5 1.0 0""", """    0.25 0 0
+    0.75 0 0
+    0.75 0.5 0
+    0.25 0.5 0""")
+        self.assertEqual([], self.conflicts(half))
+
     def test_identical_copy_and_separated_faces_pass(self):
         self.assertEqual([], self.conflicts(model(second_uv=(0.0, 0.5))))
         self.assertEqual([], self.conflicts(model(second_position="0 -0.01 0")))
