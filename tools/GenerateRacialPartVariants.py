@@ -62,8 +62,9 @@ ATTACHMENT["belt"] = "pelvis_g"
 SCALE_LIMITS = (0.55, 1.8)
 COAT_BANKS = {"a_ba_coat", "a_da_coat", "a_fa_coat", "a_dfa_coat"}
 # The mask sits ahead of the neck on these bodies. Their stock neck bounds do
-# not account for the wider Ugnaught/Ewok face or the projecting Cathar muzzle.
-RESPIRATOR_FACE_FIT = {"d": (1.16, 1.22), "o": (1.12, 1.58)}
+# not account for the wider Ugnaught/Ewok face or the projecting Rodian,
+# Wookiee and Cathar faces.
+RESPIRATOR_FACE_FIT = {"d": (1.20, 1.40), "e": (1.22, 1.35), "o": (1.12, 1.58)}
 
 
 def coat_bank(gender: str, race: str) -> str:
