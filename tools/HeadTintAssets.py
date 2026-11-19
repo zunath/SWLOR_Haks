@@ -125,9 +125,21 @@ def palette_defaults_source(manifest: dict) -> str:
 
 
 
+def texture_resref_errors(manifest: dict) -> list[str]:
+    """A case-insensitive texture name must resolve to one authored payload."""
+    resources = {}
+    errors = []
+    for relative, entry in manifest.get('textures', {}).items():
+        name = Path(relative).stem.lower()
+        previous = resources.setdefault(name, (relative, entry['sha256']))
+        if previous[1] != entry['sha256']:
+            errors.append(f'{name}: conflicting authored texture payloads in {previous[0]} and {relative}')
+    return errors
+
+
 def validate() -> list[str]:
     manifest = load_manifest()
-    errors = []
+    errors = texture_resref_errors(manifest)
     palette_path = ROOT / 'sw_2da/headtintdefs.2da'
     if not palette_path.is_file() or palette_path.read_text() != palette_defaults_source(manifest):
         errors.append('headtintdefs.2da: authored head palette defaults differ')
