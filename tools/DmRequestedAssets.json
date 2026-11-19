@@ -1,0 +1,44 @@
+{
+  "authoringFile": "xis-new-DM-content.blend",
+  "purpose": "DM-requested appearances retained independently of production usage counts. These are not additions to the player appearance picker.",
+  "restoredFromCommit": "a821b421fe821cd2cd069258c157b0335570b379",
+  "helmets": [
+    281,
+    282,
+    283,
+    286,
+    287,
+    288,
+    297
+  ],
+  "armorParts": {
+    "Torso": [
+      300
+    ],
+    "Neck": [
+      299,
+      300
+    ]
+  },
+  "textureRepairs": {
+    "helm_281": {
+      "source": "bms_malgus_a01_v01_d.dds",
+      "sourceSha256": "460034dd2ad1d121710bdeca0fb182dfa646879f5451a9c471515e59342143f2",
+      "modelSha256": "ef06b7688a90c69a4de7ea9fff96afbe8d367dabf6126d9800751f53104406fd",
+      "diffuse": {
+        "path": "sw_pt_helm/helm_281.dds",
+        "sha256": "a918ec20d64340b1a52d88c9d990c0ac824c297991203ff3ed250229ed75ac74",
+        "size": [
+          1024,
+          512
+        ],
+        "encoding": "BC3 with full mip chain; opaque alpha; vertically flipped for NWN DDS coordinates"
+      },
+      "illumination": {
+        "path": "sw_pt_helm/helm_281_i.tga",
+        "sha256": "484f59b5586d6060715f1f45a0c15002526e5b168e2f02c8c478d8394d516757",
+        "encoding": "RGB red-emitter mask from the source diffuse; native TGA orientation"
+      }
+    }
+  }
+}
