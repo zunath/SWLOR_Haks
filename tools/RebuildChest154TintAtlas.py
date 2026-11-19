@@ -109,6 +109,11 @@ def validate_catalog(recipe: dict) -> None:
             raise ValueError(f"Unexpected atlas provenance for {entry.get('material')}")
 
 
+def has_expected_txi(path: Path) -> bool:
+    """Accept Git's LF or Windows CRLF checkout of the same mipmap policy."""
+    return path.is_file() and path.read_bytes().replace(b"\r\n", b"\n") == b"mipmap 1\n"
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     group = parser.add_mutually_exclusive_group(required=True)
@@ -126,7 +131,7 @@ def main() -> None:
     else:
         if not target.is_file() or target.read_bytes() != rebuilt:
             raise SystemExit("FAIL: committed DDS differs from reproducible approved shade sources")
-        if not txi.is_file() or txi.read_bytes() != b"mipmap 1\n":
+        if not has_expected_txi(txi):
             raise SystemExit("FAIL: chest atlas TXI must be 'mipmap 1'")
         print("PASS: approved chest154-157 512px BC5 DDS reproduced byte-for-byte (10 mips)")
 
