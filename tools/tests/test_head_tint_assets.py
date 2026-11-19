@@ -71,5 +71,21 @@ class ArtificialEyeChannelTests(unittest.TestCase):
 
 
 
+
+class CompatibilityChannelTests(unittest.TestCase):
+    def test_surviving_compatibility_channels_match_their_replacement_materials(self):
+        manifest = heads.load_manifest()
+        self.assertEqual([], heads.compatibility_channel_errors(manifest))
+        row = next(row for row in manifest['compatibility']['rows'] if row[0] == 'pfh2_head056')
+        self.assertTrue({'4', '7'} <= set(row[2].split(',')))
+
+    def test_stale_compatibility_channels_are_rejected(self):
+        manifest = heads.load_manifest()
+        row = next(row for row in manifest['compatibility']['rows'] if row[0] == 'pfh2_head056')
+        row[2] = '0,1,8,9'
+        self.assertIn('pfh2_head056: compatibility channels differ from replacement material pfh0_head056',
+                      heads.compatibility_channel_errors(manifest))
+
+
 if __name__ == '__main__':
     unittest.main()

@@ -144,6 +144,15 @@ def texture_resref_errors(manifest: dict, resource_blobs: dict | None = None) ->
     return errors
 
 
+def compatibility_channel_errors(manifest: dict) -> list[str]:
+    material_layers: dict[str, set[str]] = {}
+    for _, material, layers in manifest['catalogRows']:
+        material_layers.setdefault(material, set()).add(layers)
+    return [f'{model}: compatibility channels differ from replacement material {material}'
+            for model, material, layers in manifest.get('compatibility', {}).get('rows', [])
+            if layers not in material_layers.get(material, set())]
+
+
 def validate() -> list[str]:
     from CheckDyeAppearance import file_blobs
     from ModelLodAssets import directories
@@ -152,6 +161,7 @@ def validate() -> list[str]:
     resources = {path: blob for path, blob in file_blobs().items()
                  if Path(path).parent.as_posix() in folders}
     errors = texture_resref_errors(manifest, resources)
+    errors.extend(compatibility_channel_errors(manifest))
     palette_path = ROOT / 'sw_2da/headtintdefs.2da'
     if not palette_path.is_file() or palette_path.read_text() != palette_defaults_source(manifest):
         errors.append('headtintdefs.2da: authored head palette defaults differ')
