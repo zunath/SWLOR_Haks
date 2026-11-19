@@ -125,21 +125,33 @@ def palette_defaults_source(manifest: dict) -> str:
 
 
 
-def texture_resref_errors(manifest: dict) -> list[str]:
-    """A case-insensitive texture name must resolve to one authored payload."""
+def texture_resref_errors(manifest: dict, resource_blobs: dict | None = None) -> list[str]:
+    """A texture name must have one payload across all configured HAKs."""
+    names = {Path(path).stem.lower() for path in manifest.get('textures', {})}
+    entries = (resource_blobs if resource_blobs is not None else
+               {path: entry['sha256'] for path, entry in manifest.get('textures', {}).items()})
     resources = {}
     errors = []
-    for relative, entry in manifest.get('textures', {}).items():
-        name = Path(relative).stem.lower()
-        previous = resources.setdefault(name, (relative, entry['sha256']))
-        if previous[1] != entry['sha256']:
+    for relative, digest in entries.items():
+        path = Path(relative)
+        name = path.stem.lower()
+        if name not in names or path.suffix.lower() not in ('.dds', '.txi'):
+            continue
+        key = name, path.suffix.lower()
+        previous = resources.setdefault(key, (relative, digest))
+        if previous[1] != digest:
             errors.append(f'{name}: conflicting authored texture payloads in {previous[0]} and {relative}')
     return errors
 
 
 def validate() -> list[str]:
+    from CheckDyeAppearance import file_blobs
+    from ModelLodAssets import directories
     manifest = load_manifest()
-    errors = texture_resref_errors(manifest)
+    folders = {path.relative_to(ROOT).as_posix() for path in directories(ROOT)}
+    resources = {path: blob for path, blob in file_blobs().items()
+                 if Path(path).parent.as_posix() in folders}
+    errors = texture_resref_errors(manifest, resources)
     palette_path = ROOT / 'sw_2da/headtintdefs.2da'
     if not palette_path.is_file() or palette_path.read_text() != palette_defaults_source(manifest):
         errors.append('headtintdefs.2da: authored head palette defaults differ')

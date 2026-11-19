@@ -17,6 +17,13 @@ class HeadTextureResrefTests(unittest.TestCase):
         self.assertEqual(1, len(errors))
         self.assertIn('pfh0_head258_s', errors[0])
 
+    def test_existing_hak_texture_outside_the_authored_manifest_is_checked(self):
+        manifest = {'textures': {'sw_tint2/zab-horns-imp.dds': {'sha256': 'new'}}}
+        blobs = {'sw_pt_head/zab-horns-imp.dds': 'old', 'sw_tint2/ZAB-HORNS-IMP.dds': 'new'}
+        errors = heads.texture_resref_errors(manifest, blobs)
+        self.assertEqual(1, len(errors))
+        self.assertIn('sw_pt_head/zab-horns-imp.dds', errors[0])
+
     def test_identical_shared_payloads_remain_valid(self):
         manifest = {'textures': {
             'sw_pt_head/shared.dds': {'sha256': 'same'},
@@ -51,6 +58,17 @@ class ArtificialEyeChannelTests(unittest.TestCase):
                 self.assertNotIn(6, actual)
                 self.assertIn(4, advertised)
                 self.assertNotIn(6, advertised)
+    def test_female_bob_does_not_advertise_cloth1(self):
+        import GenerateTintMapAssets as tint
+        manifest = json.loads(heads.MANIFEST.read_text())
+        row = next(row for row in manifest['catalogRows'] if row[0] == 'pfh0_head286')
+        entry = manifest['materials'][row[1]]
+        texture = next(line.split()[1] for line in entry['declarations'] if line.startswith('texture7 '))
+        relative, record = next((p, r) for p, r in manifest['textures'].items() if Path(p).stem == texture)
+        actual = set(tint.decode_dds_layers(heads.ROOT / relative, *record['size']).ravel())
+        self.assertNotIn(4, actual)
+        self.assertNotIn('4', row[2].split(','))
+
 
 
 if __name__ == '__main__':
