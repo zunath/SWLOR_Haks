@@ -12,7 +12,7 @@ node dummy wbwln_m_031
 endnode
 node dummy rootdummy
   parent wbwln_m_031
-  position 0 0 0
+  position 0.011 0 -0.037
   orientation 0 0 0 0
 endnode
 node trimesh p_g36c
@@ -653,12 +653,12 @@ node dummy impact
 endnode
 node dummy handconjure
   parent wbwln_m_031
-  position 0 0 0
+  position 0.011 0 -0.037
   orientation 0 0 0 0
 endnode
 node dummy headconjure
   parent wbwln_m_031
-  position 0 0 0
+  position 0.011 0 -0.037
   orientation 0 0 0 0
 endnode
 endmodelgeom wbwln_m_031

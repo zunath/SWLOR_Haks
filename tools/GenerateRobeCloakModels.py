@@ -62,6 +62,35 @@ def digest(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
 
 
+def input_digest(data: bytes) -> str:
+    """Hash a source as authored; Git may check ASCII models out with CRLF."""
+    return digest(data if mdl.binary(data) else data.replace(b"\r\n", b"\n"))
+
+
+def source_errors(manifest, available, active) -> list[str]:
+    """Outputs are only current while their HAK sources and, for ASCII sources, the compiler are.
+
+    Checked-in outputs alone cannot show that a source changed or that an ASCII
+    source would now compile differently, so both are recorded at generation.
+    """
+    recorded = manifest.get("source_inputs")
+    if recorded is None or "compiler_sha256" not in manifest:
+        return ["Robe cloak source provenance is missing; regenerate robe cloaks"]
+    errors = []
+    compiled = manifest.get("compiled_sources", [])
+    if compiled and manifest["compiler_sha256"] != mdl.COMPILER_SHA256:
+        errors.append(f"Robe cloaks compiled from ASCII sources with a different CleanModels; "
+                      f"regenerate robe cloaks: {compiled[:7]}")
+    for source in sorted(set(available.values())):
+        if source in active and source not in recorded:
+            errors.append(f"Cloak source now comes from a HAK but was not recorded; regenerate robe cloaks: {source}")
+    for source, expected in sorted(recorded.items()):
+        path = active.get(source)
+        if path is None or input_digest(path.read_bytes()) != expected:
+            errors.append(f"Cloak source changed since generation; regenerate robe cloaks: {source}")
+    return errors
+
+
 def requirements():
     return required_models((ROOT / "sw_2da/roberender.2da").read_text(),
                            (ROOT / "sw_2da/cloakmodel.2da").read_text())
@@ -81,6 +110,7 @@ def check() -> list[str]:
     available = {name: source for name, source in expected.items() if source not in unavailable}
     if manifest["models"] != available:
         errors.append("Robe cloak models do not cover the current robe/cloak tables")
+    errors.extend(source_errors(manifest, available, tint.find_active_models()))
     for name in available:
         path = ModelPath(ROOT / "sw_pt_cloak" / f"{name}.mdl")
         if not path.is_file() or digest(path.read_bytes()) != manifest["files"].get(name):
@@ -128,7 +158,7 @@ def generate(game_data: Path):
             raise ValueError(f"Refusing to replace an unowned cloak model: {name}")
     with tempfile.TemporaryDirectory(prefix="swlor-robe-cloaks-") as directory:
         stage = Path(directory)
-        compiler, _ = mdl.prepare_compiler(stage)
+        compiler, compiler_hash = mdl.prepare_compiler(stage)
         loaded = {}
 
         def load(name):
@@ -163,12 +193,16 @@ def generate(game_data: Path):
             return data
 
         sources = {name: load(name) for name in sorted(set(expected.values()))}
+        hak_sources = {name: active[name].read_bytes() for name in sources if name in active}
         # Prepare and validate the entire set before installing any resource.
         outputs = {name: rename_model(sources[source], source, name) for name, source in expected.items()}
         replaced = install(outputs)
         manifest = {"models": dict(sorted(expected.items())),
                     "unavailable_sources": unavailable,
                     "sources": {name: digest(rename_model(data, name, name)) for name, data in sources.items()},
+                    "compiler_sha256": compiler_hash,
+                    "compiled_sources": sorted(name for name, data in hak_sources.items() if not mdl.binary(data)),
+                    "source_inputs": {name: input_digest(data) for name, data in sorted(hak_sources.items())},
                     "files": {name: digest(data) for name, data in sorted(outputs.items())}}
         MANIFEST.write_text(json.dumps(manifest, indent=2) + "\n")
     print(f"Published {len(expected)} cloak models for generated robe phenotypes.")

@@ -138,10 +138,8 @@
     "pmh0_head261",
     "pmh0_head262",
     "pmh0_head263",
-    "pmh0_head264",
     "pmh0_head265",
     "pmh0_head267",
-    "pmh0_head268",
     "pmh0_head269",
     "pmh0_head270",
     "pmh0_head271",
@@ -158,7 +156,6 @@
     "pmh0_head282",
     "pmh0_head283",
     "pmh0_head284",
-    "pmh0_head285",
     "pmh0_head286",
     "pmh0_head287",
     "pmh0_head288",
@@ -700,11 +697,6 @@
       "0,1,8,9"
     ],
     [
-      "pmh0_head264",
-      "pmh0_head264",
-      "0,1,8,9"
-    ],
-    [
       "pmh0_head265",
       "pmh0_head265",
       "0,1,8,9"
@@ -713,11 +705,6 @@
       "pmh0_head267",
       "pmh0_head267",
       "0,1,2,4,6,8,9"
-    ],
-    [
-      "pmh0_head268",
-      "pmh0_head268",
-      "0,1,2,8,9"
     ],
     [
       "pmh0_head269",
@@ -787,11 +774,6 @@
     [
       "pmh0_head284",
       "pmh0_head284",
-      "0,1,8,9"
-    ],
-    [
-      "pmh0_head285",
-      "pmh0_head285",
       "0,1,8,9"
     ],
     [
@@ -8997,30 +8979,6 @@
       ],
       "parameters": {}
     },
-    "pmh0_head264": {
-      "shader": "fs_head_legacy",
-      "declarations": [
-        "customshaderVS vslit_sm",
-        "renderhint NormalTangents",
-        "customshaderFS fs_head_legacy",
-        "texture0 plt_white",
-        "texture7 tm_8507d324e19b5",
-        "texture10 plt_palette",
-        "parameter float tintMapWidth 1024.0",
-        "parameter float tintMapHeight 512.0",
-        "parameter float rowSkin 0.000244",
-        "parameter float rowHair 0.086182",
-        "parameter float rowMetal1 0.172119",
-        "parameter float rowMetal2 0.258057",
-        "parameter float rowCloth1 0.343994",
-        "parameter float rowCloth2 0.343994",
-        "parameter float rowLeath1 0.429932",
-        "parameter float rowLeath2 0.429932",
-        "parameter float rowTat1 0.515869",
-        "parameter float rowTat2 0.515869"
-      ],
-      "parameters": {}
-    },
     "pmh0_head265": {
       "shader": "fs_head_legacy",
       "declarations": [
@@ -9071,30 +9029,6 @@
         "glowMaxLayer": 4.0,
         "glowMinLayer": 4.0
       }
-    },
-    "pmh0_head268": {
-      "shader": "fs_head_legacy",
-      "declarations": [
-        "customshaderVS vslit_sm",
-        "renderhint NormalTangents",
-        "customshaderFS fs_head_legacy",
-        "texture0 plt_white",
-        "texture7 tm_a35c20347f794",
-        "texture10 plt_palette",
-        "parameter float tintMapWidth 1024.0",
-        "parameter float tintMapHeight 512.0",
-        "parameter float rowSkin 0.000244",
-        "parameter float rowHair 0.086182",
-        "parameter float rowMetal1 0.172119",
-        "parameter float rowMetal2 0.258057",
-        "parameter float rowCloth1 0.343994",
-        "parameter float rowCloth2 0.343994",
-        "parameter float rowLeath1 0.429932",
-        "parameter float rowLeath2 0.429932",
-        "parameter float rowTat1 0.515869",
-        "parameter float rowTat2 0.515869"
-      ],
-      "parameters": {}
     },
     "pmh0_head269": {
       "shader": "fs_head_legacy",
@@ -9516,43 +9450,13 @@
       ],
       "parameters": {}
     },
-    "pmh0_head285": {
-      "shader": "fs_head_full",
-      "declarations": [
-        "renderhint NormalAndSpecMapped",
-        "// Textures",
-        "texture1 pmh0_head285_N",
-        "texture2 pmh0_head285_S",
-        "texture3 null",
-        "texture4 null",
-        "texture5 null",
-        "customshaderVS vslit_sm_nm",
-        "customshaderFS fs_head_full",
-        "texture0 plt_white",
-        "texture7 tm_4902d8a3b243e",
-        "texture10 plt_palette",
-        "parameter float tintMapWidth 512.0",
-        "parameter float tintMapHeight 512.0",
-        "parameter float rowSkin 0.000244",
-        "parameter float rowHair 0.086182",
-        "parameter float rowMetal1 0.172119",
-        "parameter float rowMetal2 0.258057",
-        "parameter float rowCloth1 0.343994",
-        "parameter float rowCloth2 0.343994",
-        "parameter float rowLeath1 0.429932",
-        "parameter float rowLeath2 0.429932",
-        "parameter float rowTat1 0.515869",
-        "parameter float rowTat2 0.515869"
-      ],
-      "parameters": {}
-    },
     "pmh0_head286": {
       "shader": "fs_head_full",
       "declarations": [
         "renderhint NormalAndSpecMapped",
         "// Textures",
-        "texture1 pmh0_head285_N",
-        "texture2 pmh0_head285_S",
+        "texture1 cu286normal",
+        "texture2 cu286spec",
         "texture3 null",
         "texture4 null",
         "texture5 null",
@@ -11206,28 +11110,6 @@
     },
     "sw_pt_head/pmh0_head277_S.dds": {
       "sha256": "6d4c14c76db3e2143fb94d13266945e64440631ae387af27d4be0533aa3237e9",
-      "codec": "BC4",
-      "size": [
-        512,
-        512
-      ],
-      "role": "specular",
-      "mipLevels": 10,
-      "sourceHasAlpha": false
-    },
-    "sw_pt_head/pmh0_head285_N.dds": {
-      "sha256": "56702dc9bdc483fcb45dc1d07c235553ea202c5196b62eeb8ee406d5eea8580b",
-      "codec": "BC5",
-      "size": [
-        512,
-        512
-      ],
-      "role": "normal",
-      "mipLevels": 10,
-      "sourceHasAlpha": false
-    },
-    "sw_pt_head/pmh0_head285_S.dds": {
-      "sha256": "106c40df3a7b45cc966c52dfa39d4458d2b87fcfe4a38f15366ddf927f96a5ab",
       "codec": "BC4",
       "size": [
         512,
@@ -16077,17 +15959,6 @@
       "mipLevels": 1,
       "sourceHasAlpha": false
     },
-    "sw_tint2/tm_a35c20347f794.dds": {
-      "sha256": "e12d957c1a687a02dde88eca982a2c92da21a1211b65b568de9d66fc8b982d7a",
-      "codec": "BC5",
-      "size": [
-        1024,
-        512
-      ],
-      "role": "tint",
-      "mipLevels": 1,
-      "sourceHasAlpha": false
-    },
     "sw_tint2/tm_a9b8ad20f3210.dds": {
       "sha256": "a9b8ad20f32109bf90e7ffd648ccd010b134be14a719bd75f6cdcbe25b00136c",
       "codec": "BC5",
@@ -17373,6 +17244,28 @@
       "role": "tint",
       "codec": "BC5",
       "mipLevels": 1
+    },
+    "sw_tint2/cu286normal.dds": {
+      "sha256": "56702dc9bdc483fcb45dc1d07c235553ea202c5196b62eeb8ee406d5eea8580b",
+      "codec": "BC5",
+      "size": [
+        512,
+        512
+      ],
+      "role": "normal",
+      "mipLevels": 10,
+      "sourceHasAlpha": false
+    },
+    "sw_tint2/cu286spec.dds": {
+      "sha256": "106c40df3a7b45cc966c52dfa39d4458d2b87fcfe4a38f15366ddf927f96a5ab",
+      "codec": "BC4",
+      "size": [
+        512,
+        512
+      ],
+      "role": "specular",
+      "mipLevels": 10,
+      "sourceHasAlpha": false
     }
   },
   "staticMaterials": {
@@ -17656,7 +17549,6 @@
     "sw_tint2/tm_9d81aa6e1db1a.txi": "980a4d359b56df419d9249e19b6c8fcdb689c3185e20a5c442dae0c153279ef0",
     "sw_tint2/tm_9ef8ea97fe80b.txi": "980a4d359b56df419d9249e19b6c8fcdb689c3185e20a5c442dae0c153279ef0",
     "sw_tint2/tm_a1480a890e05f.txi": "980a4d359b56df419d9249e19b6c8fcdb689c3185e20a5c442dae0c153279ef0",
-    "sw_tint2/tm_a35c20347f794.txi": "980a4d359b56df419d9249e19b6c8fcdb689c3185e20a5c442dae0c153279ef0",
     "sw_tint2/tm_a9b8ad20f3210.txi": "980a4d359b56df419d9249e19b6c8fcdb689c3185e20a5c442dae0c153279ef0",
     "sw_tint2/tm_aa86281de6782.txi": "980a4d359b56df419d9249e19b6c8fcdb689c3185e20a5c442dae0c153279ef0",
     "sw_tint2/tm_abca01f265845.txi": "980a4d359b56df419d9249e19b6c8fcdb689c3185e20a5c442dae0c153279ef0",
@@ -17760,8 +17652,6 @@
     "sw_pt_head/pmh0_head263_s.txi": "93f2ee8298588ca48cf90f1e3b2c15affd58b9f6ce7421b2cf061a578b9287b0",
     "sw_pt_head/pmh0_head277_N.txi": "93f2ee8298588ca48cf90f1e3b2c15affd58b9f6ce7421b2cf061a578b9287b0",
     "sw_pt_head/pmh0_head277_S.txi": "93f2ee8298588ca48cf90f1e3b2c15affd58b9f6ce7421b2cf061a578b9287b0",
-    "sw_pt_head/pmh0_head285_N.txi": "93f2ee8298588ca48cf90f1e3b2c15affd58b9f6ce7421b2cf061a578b9287b0",
-    "sw_pt_head/pmh0_head285_S.txi": "93f2ee8298588ca48cf90f1e3b2c15affd58b9f6ce7421b2cf061a578b9287b0",
     "sw_tint2/cuh_flat_n.txi": "93f2ee8298588ca48cf90f1e3b2c15affd58b9f6ce7421b2cf061a578b9287b0",
     "sw_tint2/cuh_matte_s.txi": "93f2ee8298588ca48cf90f1e3b2c15affd58b9f6ce7421b2cf061a578b9287b0",
     "sw_tint2/cx00p00a.txi": "93f2ee8298588ca48cf90f1e3b2c15affd58b9f6ce7421b2cf061a578b9287b0",
@@ -17974,7 +17864,9 @@
     "sw_tint2/f318mett.txi": "980a4d359b56df419d9249e19b6c8fcdb689c3185e20a5c442dae0c153279ef0",
     "sw_tint2/f318jawn.txi": "93f2ee8298588ca48cf90f1e3b2c15affd58b9f6ce7421b2cf061a578b9287b0",
     "sw_tint2/f318jawt.txi": "980a4d359b56df419d9249e19b6c8fcdb689c3185e20a5c442dae0c153279ef0",
-    "sw_tint2/f282hairt.txi": "980a4d359b56df419d9249e19b6c8fcdb689c3185e20a5c442dae0c153279ef0"
+    "sw_tint2/f282hairt.txi": "980a4d359b56df419d9249e19b6c8fcdb689c3185e20a5c442dae0c153279ef0",
+    "sw_tint2/cu286normal.txi": "93f2ee8298588ca48cf90f1e3b2c15affd58b9f6ce7421b2cf061a578b9287b0",
+    "sw_tint2/cu286spec.txi": "93f2ee8298588ca48cf90f1e3b2c15affd58b9f6ce7421b2cf061a578b9287b0"
   },
   "auxiliaryText": {
     "sw_tint2/cx00p00d.txi": "mipmap 1\n",
@@ -18253,7 +18145,6 @@
     "sw_tint2/tm_9d81aa6e1db1a.txi": "mipmap 0\n",
     "sw_tint2/tm_9ef8ea97fe80b.txi": "mipmap 0\n",
     "sw_tint2/tm_a1480a890e05f.txi": "mipmap 0\n",
-    "sw_tint2/tm_a35c20347f794.txi": "mipmap 0\n",
     "sw_tint2/tm_a9b8ad20f3210.txi": "mipmap 0\n",
     "sw_tint2/tm_aa86281de6782.txi": "mipmap 0\n",
     "sw_tint2/tm_abca01f265845.txi": "mipmap 0\n",
@@ -18357,8 +18248,6 @@
     "sw_pt_head/pmh0_head263_s.txi": "mipmap 1\n",
     "sw_pt_head/pmh0_head277_N.txi": "mipmap 1\n",
     "sw_pt_head/pmh0_head277_S.txi": "mipmap 1\n",
-    "sw_pt_head/pmh0_head285_N.txi": "mipmap 1\n",
-    "sw_pt_head/pmh0_head285_S.txi": "mipmap 1\n",
     "sw_tint2/cuh_flat_n.txi": "mipmap 1\n",
     "sw_tint2/cuh_matte_s.txi": "mipmap 1\n",
     "sw_tint2/cx00p00a.txi": "mipmap 1\n",
@@ -18570,7 +18459,9 @@
     "sw_tint2/f318metn.txi": "mipmap 1\n",
     "sw_tint2/f318mett.txi": "mipmap 0\n",
     "sw_tint2/f318jawn.txi": "mipmap 1\n",
-    "sw_tint2/f318jawt.txi": "mipmap 0\n"
+    "sw_tint2/f318jawt.txi": "mipmap 0\n",
+    "sw_tint2/cu286normal.txi": "mipmap 1\n",
+    "sw_tint2/cu286spec.txi": "mipmap 1\n"
   },
   "modelHashes": {
     "pfh0_head052": "186fea02e676f3126103af6e9a45d28929bc80ea4d5bd7384f42d03d44eb753a",
@@ -18710,10 +18601,8 @@
     "pmh0_head261": "edcfdfe27fa5a47e4c567c2f640483a2d970cb4dfb5bab01c56ec22bb0996226",
     "pmh0_head262": "439fc6220794f164bcae0c7ee4bf038af67005c827c0b9a8958bfe28c5d9d588",
     "pmh0_head263": "fbe7cbd538ace89e48de42ac2404d7a2ab440a381abde1a381d64c029137d052",
-    "pmh0_head264": "72b903f3e06070da95efa02fa522c58072a34b2f8ede7a516933bedf5b733aec",
     "pmh0_head265": "6101285cb45e4abf00674f525da8ec11219d66713af397c3ad4c04237b840ee4",
     "pmh0_head267": "a4b838d4854ccd4dc5515ac2ca2db31e7f8aef9ff8a9128b1003f0b13c9d3227",
-    "pmh0_head268": "cb292ce593b599d3a5f833a366941d5148e8e0ed5056339bf4d6b1ee156461ae",
     "pmh0_head269": "758fa85e990559abfaa10fa52e5b125fe36766028b3ab4bd8ac9d98e3e72e907",
     "pmh0_head270": "cea83ea4d60d1c97daba18c04309fb81940f7d755d81ef0138711c8ecf336b25",
     "pmh0_head271": "b7e985cf51d37e73fb7a8aa79cdbbaf95b61ebb2954d4644c2d33b6e6c3d24f4",
@@ -18730,7 +18619,6 @@
     "pmh0_head282": "09847f1fd96b3817a7de0852534a92bdebe42f5314263af97bcc1d1cf03331ab",
     "pmh0_head283": "6e7658fcabde7114e1197a41ddf912b07e5a572448c9b6bcb569860922deefd7",
     "pmh0_head284": "0d5700bf1e31930d2f41c4cd9bc7ac8bc245739f62f97163500d94e027fe6a0e",
-    "pmh0_head285": "1f1095fb3c7c6865f86e61d59fe050a44d8172672b906f74dad081965300dcd9",
     "pmh0_head286": "4f46c1c2eaedb67a87db1d16214ecbc298d225dafb02efb10db707b7663b7867",
     "pmh0_head287": "7c795b126a4a37e0b6f1d7100b110ae0c8a849d5b2c0ca04f90b9364b6631983",
     "pmh0_head288": "be8eed561c465809b2b8cad4e96a8e8d06e8e6eefe63c172df37c51a45eb5c9d",
@@ -18776,9 +18664,6 @@
       "pfh2_head056": "082ced008b820d547a9eaf839ff838e944afa424ee1b3be1e1ee2f9158d07f35",
       "pfh2_head057": "45a9e768011aa1231a153ba56441ceb88071a0905c4cfa79848a4cc53dffc96d",
       "pfh2_head112": "fa91fc2c3d0371cfb148495720ed65f023f5e25f5cbf3e2999cd3f9e71d2c86b",
-      "pfo2_head021": "c956d374a336870e4b05a1beebfcc757456f6ee06554fbb367a673815a03c76e",
-      "pfo2_head022": "b39e6e555641decf8ffcf494118cb93c3d6a0855430fe06a9cbadd6aa3bbb461",
-      "pfo2_head023": "ac895f45459b5ae40ea70b3b535a8516b509a7b51e77b1e9d5b022b203c3f60a",
       "pmh2_head052": "3fc75315eb098827de84d693eb0efb92937f87694559dc5c21f6041a30af8a70",
       "pmh2_head053": "5508fd3f0183f607a5fd5d72d613b462a094e8749dbf7780961c03ef91d3bc55",
       "pmh2_head063": "9a64a06ffb18d23a589c26fad6b99c981c1aea8c5bb7a7e5237c69e22cacd75c",
@@ -18813,21 +18698,6 @@
         "pfh2_head112",
         "pfh0_head112",
         "0,1,2,3,8,9"
-      ],
-      [
-        "pfo2_head021",
-        "pfo0_head021",
-        "0,1,3,8"
-      ],
-      [
-        "pfo2_head022",
-        "pfo0_head022",
-        "0,1,3,8"
-      ],
-      [
-        "pfo2_head023",
-        "pfo0_head023",
-        "0,1,3,8"
       ],
       [
         "pmh2_head052",
@@ -18968,10 +18838,8 @@
     "pmh0_head261": 10000,
     "pmh0_head262": 10000,
     "pmh0_head263": 10000,
-    "pmh0_head264": 10000,
     "pmh0_head265": 10000,
     "pmh0_head267": 10000,
-    "pmh0_head268": 10000,
     "pmh0_head269": 10000,
     "pmh0_head270": 10000,
     "pmh0_head271": 10000,

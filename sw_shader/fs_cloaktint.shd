@@ -63,7 +63,7 @@ uniform float cloakTexture;
 bool CloakUsesPaletteAlpha()
 {
     float index = floor(cloakTexture + 0.5);
-    return index == 17.0 || index == 18.0 || index == 23.0 || index == 40.0 || index == 71.0 || index == 91.0 || index == 94.0 || index == 97.0 || index == 101.0 || index == 105.0 || index == 106.0 || index == 107.0;
+    return index == 17.0 || index == 18.0 || index == 23.0 || index == 35.0 || index == 61.0 || index == 76.0 || index == 78.0 || index == 81.0 || index == 84.0 || index == 88.0 || index == 89.0 || index == 90.0;
 }
 
 vec4 SampleCloakTint(vec2 uv)
