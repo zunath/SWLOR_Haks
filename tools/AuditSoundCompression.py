@@ -33,7 +33,13 @@ LOOP_COLUMNS = {
 
 
 def read_json(path):
-    return json.loads(path.read_text(encoding="utf-8-sig"))
+    # Module JSON holds accented letters as single Windows-1252 bytes (Readmes/CodingStandards.md), which is not
+    # valid UTF-8; every other file here is UTF-8.
+    data = path.read_bytes()
+    try:
+        return json.loads(data.decode("utf-8-sig"))
+    except UnicodeDecodeError:
+        return json.loads(data.decode("cp1252"))
 
 
 def sound_object_loops(document, evidence_path):
