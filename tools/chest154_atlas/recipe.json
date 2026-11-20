@@ -1,0 +1,28 @@
+{
+  "formatVersion": 1,
+  "description": "Reproducible 512x512 chest154-157 tint atlas; edited shade samples captured from approved 512px ATI2/BC5 DDS, while categorical dye layers come from the archived original 512px PLT.",
+  "basePLT": {
+    "path": "tools/chest154_atlas/original_chest154.plt",
+    "originalRepositoryPath": "sw_pt_chest/pfh0_chest154.plt",
+    "originalCommit": "cddf857282a4992878e642f223a5c2e16f142688",
+    "sha256": "f068c66904848faa6b04d91754be24370787b3f637ded383f7f79bdf71f8ffe2"
+  },
+  "shadeEdit": {
+    "base": "tools/chest154_atlas/approved_shades_512.pgm",
+    "mips": "tools/chest154_atlas/approved_mip_shades.u8",
+    "explanation": "A quantized, recoverable shade source extracted from the approved BC5 output; this is not the original painter's layered editing file. All per-mip samples are stored to allow an exact rebuild without importing or depending on the committed DDS.",
+    "pixelFormat": "8-bit grayscale top-to-bottom, base P5 512x512; lower mip samples concatenated 256x256 through 1x1",
+    "samples": "The edited shade source is paired with the original PLT category/layer plane without recoloring dye boundaries."
+  },
+  "outputDDS": {
+    "path": "sw_tint2/tm_a0694cacd9d05.dds",
+    "texture": "tm_a0694cacd9d05",
+    "gitBlobSha1": "0d0ab48ae5e6e98424c5f076d6d6ab1041a1e890",
+    "width": 512,
+    "height": 512,
+    "format": "ATI2/BC5",
+    "mips": 10
+  },
+  "reproduction": "python3 -B tools/RebuildChest154TintAtlas.py --check",
+  "rebuild": "python3 -B tools/RebuildChest154TintAtlas.py --apply"
+}
