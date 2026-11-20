@@ -112464,12 +112464,12 @@
     ],
     "width": 512,
     "height": 512,
-    "source": "sw_pt_neck/pfd0_neck299.plt",
-    "sourceSha256": "04f652be6d8d53e35954a151a25c827bb6b71536884029876ab098de8c647e48",
-    "shadeSha256": "4cf16de5d8f2833ac6e0a1fe805e30a032c7530b62cdff876e5bcb3e877e8ed2",
-    "layerSha256": "13889c311ea4401be5d4935da9953dfd03b0a22ca7b6352181c5d6681b9f23af",
-    "output": "sw_tint2/tm_83288b9cbc903.dds",
-    "texture": "tm_83288b9cbc903"
+    "source": "sw_pt_neck/pfd0_neck300.plt",
+    "sourceSha256": "920c5d7b2780fbc73210aa990d5ac85b15b7e5a7379516458199842ef2470e55",
+    "shadeSha256": "33f2e447ff7f9465cde874b7ee6869159a8cc0e2f27c932af2739d4a592a1731",
+    "layerSha256": "2c55f1c2642a5c8977120796a1afd912cb501409d456a0cbeab91391e96d139f",
+    "output": "sw_tint0/tm_f8812d3eef9de.dds",
+    "texture": "tm_f8812d3eef9de"
   },
   {
     "model": "pfd0_neck300",
@@ -112482,25 +112482,7 @@
     ],
     "width": 512,
     "height": 512,
-    "source": "sw_pt_neck/pfd0_neck300.plt",
-    "sourceSha256": "920c5d7b2780fbc73210aa990d5ac85b15b7e5a7379516458199842ef2470e55",
-    "shadeSha256": "33f2e447ff7f9465cde874b7ee6869159a8cc0e2f27c932af2739d4a592a1731",
-    "layerSha256": "2c55f1c2642a5c8977120796a1afd912cb501409d456a0cbeab91391e96d139f",
-    "output": "sw_tint0/tm_f8812d3eef9de.dds",
-    "texture": "tm_f8812d3eef9de"
-  },
-  {
-    "model": "pfe0_neck299",
-    "material": "pfe0_neck299",
-    "layers": [
-      0,
-      2,
-      3,
-      4
-    ],
-    "width": 512,
-    "height": 512,
-    "source": "sw_pt_neck/pfe0_neck299.plt",
+    "source": "sw_pt_neck/pfd0_neck299.plt",
     "sourceSha256": "04f652be6d8d53e35954a151a25c827bb6b71536884029876ab098de8c647e48",
     "shadeSha256": "4cf16de5d8f2833ac6e0a1fe805e30a032c7530b62cdff876e5bcb3e877e8ed2",
     "layerSha256": "13889c311ea4401be5d4935da9953dfd03b0a22ca7b6352181c5d6681b9f23af",
@@ -112508,8 +112490,8 @@
     "texture": "tm_83288b9cbc903"
   },
   {
-    "model": "pfe0_neck300",
-    "material": "pfe0_neck300",
+    "model": "pfe0_neck299",
+    "material": "pfe0_neck299",
     "layers": [
       0,
       2,
@@ -112526,8 +112508,8 @@
     "texture": "tm_7bc53a6991772"
   },
   {
-    "model": "pfh0_neck299",
-    "material": "pfh0_neck299",
+    "model": "pfe0_neck300",
+    "material": "pfe0_neck300",
     "layers": [
       0,
       2,
@@ -112536,7 +112518,7 @@
     ],
     "width": 512,
     "height": 512,
-    "source": "sw_pt_neck/pfh0_neck299.plt",
+    "source": "sw_pt_neck/pfe0_neck299.plt",
     "sourceSha256": "04f652be6d8d53e35954a151a25c827bb6b71536884029876ab098de8c647e48",
     "shadeSha256": "4cf16de5d8f2833ac6e0a1fe805e30a032c7530b62cdff876e5bcb3e877e8ed2",
     "layerSha256": "13889c311ea4401be5d4935da9953dfd03b0a22ca7b6352181c5d6681b9f23af",
@@ -112544,8 +112526,8 @@
     "texture": "tm_83288b9cbc903"
   },
   {
-    "model": "pfh0_neck300",
-    "material": "pfh0_neck300",
+    "model": "pfh0_neck299",
+    "material": "pfh0_neck299",
     "layers": [
       0,
       2,
@@ -112562,8 +112544,8 @@
     "texture": "tm_7bc53a6991772"
   },
   {
-    "model": "pfo0_neck299",
-    "material": "pfo0_neck299",
+    "model": "pfh0_neck300",
+    "material": "pfh0_neck300",
     "layers": [
       0,
       2,
@@ -112572,16 +112554,16 @@
     ],
     "width": 512,
     "height": 512,
-    "source": "sw_pt_neck/pfo0_neck299.plt",
-    "sourceSha256": "b2802c4f55db58f305ab9d04ad078c0fe480cc8734d27e3527b930f028289771",
-    "shadeSha256": "d1ea510f164bad58a6104a7b4023e900253b0fa68507313d7af5fa97848e6996",
+    "source": "sw_pt_neck/pfh0_neck299.plt",
+    "sourceSha256": "04f652be6d8d53e35954a151a25c827bb6b71536884029876ab098de8c647e48",
+    "shadeSha256": "4cf16de5d8f2833ac6e0a1fe805e30a032c7530b62cdff876e5bcb3e877e8ed2",
     "layerSha256": "13889c311ea4401be5d4935da9953dfd03b0a22ca7b6352181c5d6681b9f23af",
-    "output": "sw_tint1/tm_d9920e20ef31c.dds",
-    "texture": "tm_d9920e20ef31c"
+    "output": "sw_tint2/tm_83288b9cbc903.dds",
+    "texture": "tm_83288b9cbc903"
   },
   {
-    "model": "pfo0_neck300",
-    "material": "pfo0_neck300",
+    "model": "pfo0_neck299",
+    "material": "pfo0_neck299",
     "layers": [
       0,
       2,
@@ -112596,6 +112578,24 @@
     "layerSha256": "2c55f1c2642a5c8977120796a1afd912cb501409d456a0cbeab91391e96d139f",
     "output": "sw_tint1/tm_39d64d32b5365.dds",
     "texture": "tm_39d64d32b5365"
+  },
+  {
+    "model": "pfo0_neck300",
+    "material": "pfo0_neck300",
+    "layers": [
+      0,
+      2,
+      3,
+      4
+    ],
+    "width": 512,
+    "height": 512,
+    "source": "sw_pt_neck/pfo0_neck299.plt",
+    "sourceSha256": "b2802c4f55db58f305ab9d04ad078c0fe480cc8734d27e3527b930f028289771",
+    "shadeSha256": "d1ea510f164bad58a6104a7b4023e900253b0fa68507313d7af5fa97848e6996",
+    "layerSha256": "13889c311ea4401be5d4935da9953dfd03b0a22ca7b6352181c5d6681b9f23af",
+    "output": "sw_tint1/tm_d9920e20ef31c.dds",
+    "texture": "tm_d9920e20ef31c"
   },
   {
     "model": "pmd0_neck299",

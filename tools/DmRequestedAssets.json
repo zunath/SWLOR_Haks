@@ -24,7 +24,7 @@
     "helm_281": {
       "source": "bms_malgus_a01_v01_d.dds",
       "sourceSha256": "460034dd2ad1d121710bdeca0fb182dfa646879f5451a9c471515e59342143f2",
-      "modelSha256": "ef06b7688a90c69a4de7ea9fff96afbe8d367dabf6126d9800751f53104406fd",
+      "modelSha256": "19b2fe1e516a969e2dd02a88a84b5689d61920b7abe304aeb49fb2d6ab4cf6f9",
       "diffuse": {
         "path": "sw_pt_helm/helm_281.dds",
         "sha256": "a918ec20d64340b1a52d88c9d990c0ac824c297991203ff3ed250229ed75ac74",
@@ -38,7 +38,21 @@
         "path": "sw_pt_helm/helm_281_i.tga",
         "sha256": "484f59b5586d6060715f1f45a0c15002526e5b168e2f02c8c478d8394d516757",
         "encoding": "RGB red-emitter mask from the source diffuse; native TGA orientation"
+      },
+      "eyes": {
+        "sourceTexture": "eye_malgus_non_a01_c01_d.dds",
+        "sourceTextureSha256": "86bfe9eaf9db72bdbf6d522be69f10d66ee153199c42794930e9678b397030cf",
+        "material": "dm_malgus_eye",
+        "diffuse": "sw_pt_helm/dm_malgus_eye.dds",
+        "illumination": "sw_pt_helm/dm_malgus_eyi.tga",
+        "geometry": "Original 272 eye triangles separated from the head mesh; original SWTOR eye UVs restored. Head, mask and eye positions/normals are unchanged.",
+        "glow": "Only the amber irises emit; pupils and sclera stay dark."
       }
     }
+  },
+  "neckVariants": {
+    "299": "caped for both genders",
+    "300": "capeless for both genders",
+    "correction": "Female authored and fitted models exchange the two original variants; canonical model/material IDs and matching original masks are preserved."
   }
 }
