@@ -36,6 +36,8 @@ class DyeAppearanceTests(unittest.TestCase):
             (self.root / path).write_bytes(b"shared " + path.encode())
         self.catalog("tintmap", ["0 pmh0_legl121 plate 2,4", "1 pmh0_legl121 legacy 2", "2 **** **** ****"])
         self.catalog("cloaktint", ["0 cloak_001 cloaktint 3,5 0"], "MODEL MATERIAL LAYERS INDEX")
+        self.catalog("headtintdefs", ["0 pfh0_head056 pfh0_head056 7 26100040"],
+                     "MODEL MATERIAL LAYER COLOR")
         sources = [{"texture": "tm_metal", "layers": [2, 4]}, {"texture": "tm_cloth", "layers": [4, 6]}]
         (self.root / "tools/TintMapSources.json").write_text(json.dumps(sources))
         self.material("legacy", "legacy_s", "tm_metal")
@@ -125,6 +127,20 @@ class DyeAppearanceTests(unittest.TestCase):
         self.assertIn("now 'removed'", errors)
         self.assertIn("cloaktint.2da cloak_001: material or dye layers changed", errors)
 
+    def test_editing_an_authored_default_head_color_fails(self):
+        self.catalog("headtintdefs", ["0 pfh0_head056 pfh0_head056 7 26100041"],
+                     "MODEL MATERIAL LAYER COLOR")
+        errors = "\n".join(self.errors())
+        self.assertIn("headtintdefs.2da pfh0_head056: material or dye layers changed", errors)
+        self.assertIn("sw_2da/headtintdefs.2da: shared tint input changed", errors)
+
+    def test_default_head_color_blob_changes_cannot_bypass_the_guard(self):
+        blobs = c.file_blobs()
+        blobs["sw_2da/headtintdefs.2da"] = "changed-default-color-blob"
+        with patch.object(c, "file_blobs", return_value=blobs):
+            self.assertIn("sw_2da/headtintdefs.2da: shared tint input changed; every dyed part may change color",
+                          self.errors())
+
     def test_palette_materials_outside_sw_tint_mtr_and_their_shaders_are_guarded(self):
         self.assertIn("sw_item/glow", self.baseline["materials"])
         self.assertIn("sw_shader/fs_glow.shd", self.baseline["shared"])
@@ -165,6 +181,15 @@ class DyeAppearanceTests(unittest.TestCase):
         self.assertIn("sw_shader/fs_plt_tinter_nm.shd: shared tint input changed; every dyed part may change color",
                       errors)
         self.assertIn("robe: approved tint material was removed", errors)
+
+    def test_shared_head_include_edit_and_removal_fail(self):
+        include = "sw_shader/inc_hd_tint.shd"
+        self.assertIn(include, self.baseline["shared"])
+        (self.root / include).write_text("// changed head lighting")
+        expected = [include + ": shared tint input changed; every dyed part may change color"]
+        self.assertEqual(self.errors(), expected)
+        (self.root / include).unlink()
+        self.assertEqual(self.errors(), expected)
 
     def test_whitespace_comments_and_line_order_do_not_count_as_changes(self):
         path = self.root / "sw_tint_mtr/plate.mtr"

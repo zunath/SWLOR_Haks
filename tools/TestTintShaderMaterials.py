@@ -209,7 +209,7 @@ def production_pairs(material_root: Path):
     return sorted(pairs), count, parameters
 
 
-def linked_material_parameters(test, program, parameters):
+def linked_material_parameters(test, program, parameters, source=None):
     count, maximum = ct.c_int(), ct.c_int()
     test.program_value(program, 0x8B86, ct.byref(count))  # GL_ACTIVE_UNIFORMS
     test.program_value(program, 0x8B87, ct.byref(maximum))
@@ -220,11 +220,18 @@ def linked_material_parameters(test, program, parameters):
         test.active_uniform(program, index, len(name), None, ct.byref(size), ct.byref(kind), name)
         uniforms[name.value.decode()] = kind.value, size.value
     for kind, name, components in sorted({(kind, name, len(values)) for kind, name, values in parameters}):
+        expected = {("float", 1): 0x1406, ("float", 4): 0x8B52, ("int", 1): 0x1404}.get((kind, components))
         if name not in uniforms or test.location(program, name.encode()) < 0:
+            # Lighting-quality macros can optimize out a declared shared-profile
+            # option. Still reject unknown names and scalar/vector mismatches.
+            if source is not None:
+                declaration = re.search(r"\buniform\s+(float|int|vec4)\s+" + re.escape(name) + r"\s*(?=[;=])", source)
+                declared = {"float": 0x1406, "vec4": 0x8B52, "int": 0x1404}.get(declaration[1]) if declaration else None
+                if expected is not None and declared == expected:
+                    continue
             raise AssertionError(f"MTR parameter does not resolve to an active shader uniform: {name}")
         # The installed client dispatches one float to glUniform1f and four to
         # glUniform4fv; scalar GLSL uniforms reject the latter with 0x502.
-        expected = {("float", 1): 0x1406, ("float", 4): 0x8B52, ("int", 1): 0x1404}.get((kind, components))
         actual, array_size = uniforms[name]
         if expected is None or actual != expected or array_size != 1:
             raise AssertionError(f"MTR parameter {name}: {kind} with {components} values does not match "
@@ -253,6 +260,23 @@ def upload_material_parameters(test, program, parameters, native_overrides=None,
             error = test.error()
             if error:
                 raise AssertionError(f"MTR upload {name}, {len(values)} components: OpenGL error {error:#x}")
+
+
+def check_optimized_parameter_controls(test):
+    source = '#version 120\nuniform float dormantOption; void main(){gl_FragColor=vec4(1.0);}'
+    program = test.program(source)
+    try:
+        linked_material_parameters(test, program, [('float', 'dormantOption', (0.0,))], source)
+        for parameter in [('float', 'dormantOption', (0.0, 0.0, 0.0, 0.0)),
+                          ('float', 'misspelledOption', (0.0,))]:
+            try:
+                linked_material_parameters(test, program, [parameter], source)
+            except AssertionError:
+                continue
+            raise AssertionError(f'Inactive parameter negative control unexpectedly passed: {parameter}')
+    finally:
+        test.delete_program(program)
+    print('Optimized parameter controls passed: declared scalar accepted; wrong arity and unknown name rejected.', flush=True)
 
 
 def native_npc_rows(npc):
@@ -362,7 +386,7 @@ def stock_palette_pixels(game_data: Path):
     return [found[name] for name in names]
 
 
-def check_native_palette_fallback(test, engine, pairs, root: Path):
+def check_native_palette_fallback(test, engine, pairs, root: Path, folded_palette: Path | None = None):
     """Draw all native color IDs/layers/shades against original palette bytes.
 
     Native CreateBodyParts ORs the color byte into a 256-row palette block;
@@ -444,6 +468,8 @@ def check_native_palette_fallback(test, engine, pairs, root: Path):
                 raise AssertionError(f"Swatch {color} layer {layer} as RGB differs from palette row {first}")
         rgb_expected[f"swatch{color}"] = (colors, targets)
     descriptors = material_parameters((root / "sw_tint_mtr/pfh0_robe187.mtr").read_text())
+    if folded_palette is not None:
+        descriptors.append(('float', 'paletteFolded', (1,)))
     defaults = {name: values for _, name, values in descriptors}
     if defaults.get("useNativePalette") != (1,) or any(defaults.get(name) != (-1,) for name in rows):
         raise AssertionError("Reported robe MTR must opt into native palette with ten negative row sentinels")
@@ -463,9 +489,18 @@ def check_native_palette_fallback(test, engine, pairs, root: Path):
         for value in (shade / 255, (layer + .5) / 10)))
     atlas = (root / "sw_item/plt_palette.tga").read_bytes()
     pixels = ct.create_string_buffer(atlas[18:])
+    palette_width, palette_height = 256, 2048
+    if folded_palette is not None:
+        from PIL import Image
+        image = Image.open(folded_palette).convert('RGBA')
+        palette_width, palette_height = image.size
+        if folded_palette.suffix.lower() == '.tga':
+            image = image.transpose(Image.Transpose.FLIP_TOP_BOTTOM)
+        pixels = ct.create_string_buffer(image.tobytes('raw', 'BGRA'))
     output = (ct.c_float * (256 * 10 * 4))()
     checks = 0
     rgb_checks = 0
+    neutral_skin_checks = 0
     try:
         viewport(0, 0, 256, 10)
         test.active_texture(0x84C0)
@@ -474,8 +509,11 @@ def check_native_palette_fallback(test, engine, pairs, root: Path):
         for quality, (vertex, fragment) in product(range(3), pairs):
             # Keep production row, category, shade, and atlas sampling. Only
             # expose palette RGBA before lighting so byte parity is measurable.
+            source = engine.read(fragment)
+            if fragment.startswith('fs_head_'):
+                source = source.replace('#include "inc_hd_tint"', engine.read('inc_hd_tint'))
             source, count = re.subn(r"gl_FragColor\s*=\s*vec4\(FragmentColor\.rgb,\s*outputAlpha\);",
-                "gl_FragColor = paletteColor;", engine.read(fragment))
+                "gl_FragColor = paletteColor;", source)
             if count != 1:
                 raise AssertionError(f"Cannot inspect production palette for {fragment}")
             config = quality, 0, 0, 0, 0
@@ -494,7 +532,7 @@ def check_native_palette_fallback(test, engine, pairs, root: Path):
                     {"tintmapwidth": (256, 0, 0, 0), "tintmapheight": (10, 0, 0, 0)})
                 for unit, width, height, internal, external, kind, data in (
                         (7, 256, 10, 0x8230, 0x8227, 0x1406, mask),
-                        (10, 256, 2048, 0x8058, 0x80E1, 0x1401, pixels)):
+                        (10, palette_width, palette_height, 0x8058, 0x80E1, 0x1401, pixels)):
                     test.active_texture(0x84C0 + unit)
                     test.bind_texture(0x0DE1, unit + 1)
                     test.texture_image(0x0DE1, 0, internal, width, height, 0, external, kind, data)
@@ -549,6 +587,24 @@ def check_native_palette_fallback(test, engine, pairs, root: Path):
                             f"GLerror{error:#x}, maxRGBAerror{difference}, component{first}, "
                             f"actual{output[first]}, expected{targets[first]}")
                     rgb_checks += 1
+                if fragment.startswith('fs_head_'):
+                    neutral_skin = test.location(program, b"skinNeutralShade")
+                    test.scalar(neutral_skin, 1)
+                    for color in (0, 80, 175):
+                        test.scalar(row_locations[0], (color + .5) / 2048)
+                        draw(0x0004, 0, 3)
+                        test.read(0, 0, 256, 1, 0x1908, 0x1406, output)
+                        palette_skin = output[:1024]
+                        red, green, blue = swatch_rgb(0, color)
+                        packed = (red << 16) | (green << 8) | blue
+                        test.scalar(row_locations[0], 1 + packed / 8388608 if packed < 8388608
+                                    else 2 + (packed - 8388608) / 4194304)
+                        draw(0x0004, 0, 3)
+                        test.read(0, 0, 256, 1, 0x1908, 0x1406, output)
+                        if test.error() or max(abs(a - b) for a, b in zip(palette_skin, output)) > 2e-6:
+                            raise AssertionError(f"Neutral skin {fragment}/{quality} swatch {color} differs from RGB")
+                        neutral_skin_checks += 1
+                    test.scalar(neutral_skin, 0)
                 # A material without opt-in must ignore renderer scheme state.
                 test.scalar(test.location(program, b"useNativePalette"), 0)
                 for location, base in zip(row_locations, atlas_bases):
@@ -585,6 +641,8 @@ def check_native_palette_fallback(test, engine, pairs, root: Path):
     print(f"RGB nearest-swatch shading passed: {rgb_checks} production GPU draws; all10 layers, all256 "
         "shades, every swatch as exact RGB equal to its palette row (RGBA), eight off-palette colors (two near-black), "
         "all shader variants/quality modes.", flush=True)
+    if neutral_skin_checks:
+        print(f"Neutral skin palette/RGB parity passed: {neutral_skin_checks} comparisons over all 256 shades.", flush=True)
 
 
 def compile_engine_pairs(test, engine, pairs, parameters):
@@ -600,7 +658,8 @@ def compile_engine_pairs(test, engine, pairs, parameters):
                     f"fragment-lighting={lighting}, gamma={gamma}, keyhole={keyhole}, "
                     f"no-discard={discard}:\n{error}") from error
             try:
-                linked_material_parameters(test, program, parameters[vertex, fragment])
+                linked_material_parameters(test, program, parameters[vertex, fragment],
+                    engine.expand(fragment) + engine.expand(vertex))
                 upload_material_parameters(test, program, parameters[vertex, fragment])
             finally:
                 test.delete_program(program)
@@ -642,7 +701,7 @@ def compile_engine_pairs(test, engine, pairs, parameters):
     return checks
 
 
-def tint_dds_layout(header: bytes, size: int, txi: str):
+def tint_dds_layout(header: bytes, size: int, txi: str, fourcc: bytes = b'ATI2'):
     """Reject ambiguous DDS inputs that NWN could upload past their payload.
 
     A crash dump once showed glCompressedTexImage2D reading a mip level beyond
@@ -651,8 +710,8 @@ def tint_dds_layout(header: bytes, size: int, txi: str):
     instead of glittering: require an explicit count of every level, a file
     that holds exactly those levels, and a TXI that keeps mipmaps on.
     """
-    if len(header) != 128 or header[:4] != b"DDS " or header[84:88] != b"ATI2":
-        raise AssertionError("Tint texture must have a complete ATI2 DDS header")
+    if fourcc not in (b'ATI2', b'DXT5') or len(header) != 128 or header[:4] != b"DDS " or header[84:88] != fourcc:
+        raise AssertionError(f"Texture must have a complete {fourcc.decode()} DDS header")
     flags, height, width, linear_size, _, count = struct.unpack_from("<6I", header, 8)
     if width <= 0 or height <= 0:
         raise AssertionError("Tint DDS dimensions must be positive")
@@ -674,17 +733,26 @@ def tint_dds_layout(header: bytes, size: int, txi: str):
 
 
 def audit_tint_dds(root: Path):
+    import HeadTintAssets
+    head_textures = HeadTintAssets.catalog(root)['textures']
     paths = sorted(path for directory in ("sw_tint0", "sw_tint1", "sw_tint2")
         for path in (root / directory).glob("*.dds"))
     if not paths:
         raise AssertionError("No packed tint DDS assets found")
     for path in paths:
+        head_entry = head_textures.get(path.relative_to(root).as_posix(), {})
+        if head_entry:
+            errors = HeadTintAssets.dds_layout_errors(path)
+            if errors:
+                raise AssertionError('; '.join(errors))
+            continue
         with path.open("rb") as source:
             header = source.read(128)
         txi_path = path.with_suffix(".txi")
         txi = txi_path.read_text() if txi_path.exists() else ""
+        fourcc = b'ATI2'
         try:
-            tint_dds_layout(header, path.stat().st_size, txi)
+            tint_dds_layout(header, path.stat().st_size, txi, fourcc)
         except AssertionError as error:
             raise AssertionError(f"Unsafe NWN tint texture {path}: {error}") from error
     # Prove the former count-zero/default-mipmap combination cannot get through
@@ -702,7 +770,7 @@ def audit_tint_dds(root: Path):
         (header, path.stat().st_size, "mipmap 0\n"),
     ):
         try:
-            tint_dds_layout(invalid_header, invalid_size, invalid_txi)
+            tint_dds_layout(invalid_header, invalid_size, invalid_txi, fourcc)
         except AssertionError:
             continue
         raise AssertionError("Unsafe DDS mipmap negative control unexpectedly passed")
@@ -1083,7 +1151,7 @@ class MaterialTest:
             for shader in shaders:
                 self.delete_shader(shader)
 
-    def sample(self, program: int, bound: int, alpha: float, *, mapped=False, overrides=False, color=False, rgb=None, authored_diffuse=None):
+    def sample(self, program: int, bound: int, alpha: float, *, mapped=False, overrides=False, color=False, rgb=None, authored_diffuse=None, palette_layer=None):
         self.use(program)
         self.scalar(self.location(program, b"useAuthoredDiffuse"), float(authored_diffuse is not None))
         for name, value in {"texture0Bound": bound, "texture2Bound": int(mapped),
@@ -1115,6 +1183,8 @@ class MaterialTest:
             encoded = (1 + packed / 8388608 if packed < 8388608
                        else 2 + (packed - 8388608) / 4194304)
             self.scalar(self.location(program, rows[layer].encode()), encoded)
+        if rgb is not None or palette_layer is not None:
+            layer = rgb[0] if rgb is not None else palette_layer
             self.active_texture(0x84C0 + 7)
             self.bind_texture(0x0DE1, 8)
             pixels = (ct.c_float * 4)(128 / 255, (layer + 0.5) / 10, 0, 1)
@@ -1149,6 +1219,7 @@ def main():
     try:
         renderer = gl.function("glGetString", ct.c_char_p, ct.c_uint)(0x1F01).decode()
         test = MaterialTest(gl)
+        check_optimized_parameter_controls(test)
         print(f"Validating {len(pairs)} production shader pairs from {materials} generated MTRs on {renderer}.", flush=True)
         compile_engine_pairs(test, engine, pairs, parameters)
         cloak_pairs, _, cloak_parameters = production_pairs(root / "sw_pt_cloak")
