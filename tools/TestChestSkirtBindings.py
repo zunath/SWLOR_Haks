@@ -76,7 +76,7 @@ class ChestSkirtBindingTests(unittest.TestCase):
     def test_catalog_covers_every_skinned_body_of_every_style(self):
         every = lambda part: {f'p{gender}{race}0_{part}' for gender in 'fm' for race in 'deho'}
         cloaked = lambda part: {f'p{gender}{race}0_{part}' for gender in 'fm' for race in 'he'}
-        expected = ({f'p{gender}h0_chest154' for gender in 'fm'} | every('chest269') | every('chest028') | every('chest059')
+        expected = (every('chest269') | every('chest028') | every('chest059')
                     # Bothan female chest 310's bone table does not match its skeleton, so it cannot be rebound.
                     | every('chest310') - {'pfe0_chest310'}
                     | every('belt019') | every('belt110') | every('belt112') | every('belt114')
@@ -85,7 +85,7 @@ class ChestSkirtBindingTests(unittest.TestCase):
                     # Capes only where the flaps animate; elsewhere they keep their authored rigging.
                     | cloaked('neck289') | cloaked('neck291') | cloaked('shol260') | cloaked('shor260'))
         self.assertEqual(expected, set(self.models))
-        self.assertEqual(set(skirts.STYLES), {skirts.style_key(entry['path']) for entry in self.models.values()})
+        self.assertEqual(set(skirts.STYLES) - {'chest154'}, {skirts.style_key(entry['path']) for entry in self.models.values()})
         folders = {'chest': 'sw_pt_chest', 'belt': 'sw_pt_belt', 'pelvis': 'sw_pt_pelvis', 'neck': 'sw_pt_neck',
                    'shol': 'sw_pt_lshoul', 'shor': 'sw_pt_rshoul'}
         for name, entry in self.models.items():
@@ -98,7 +98,8 @@ class ChestSkirtBindingTests(unittest.TestCase):
     def test_restored_parts_keep_their_original_rigging(self):
         restored = self.manifest['restored']
         self.assertEqual({f'sw_pt_{kind}/p{gender}{race}0_{kind}{number}.mdl' for kind, number in (('belt', 226), ('pelvis', 198))
-                          for gender in 'fm' for race in 'deho'} | {f'sw_pt_pelvis/p{gender}h0_pelvis035.mdl' for gender in 'fm'}, set(restored))
+                          for gender in 'fm' for race in 'deho'} | {f'sw_pt_pelvis/p{gender}h0_pelvis035.mdl' for gender in 'fm'}
+                          | {f'sw_pt_chest/p{gender}h0_chest154.mdl' for gender in 'fm'}, set(restored))
         for relative, blob in restored.items():
             with self.subTest(model=relative):
                 self.assertEqual(skirts.source(blob), (ROOT / relative).read_bytes())
@@ -193,7 +194,7 @@ class ChestSkirtBindingTests(unittest.TestCase):
     def test_shares_depend_only_on_the_bind_position(self):
         """Away from a seam a lower skirt vertex follows its own leg, near one it stays on the pelvis and the
         flap; the back flap fades round to the front; capes split between neighbouring cloak bones."""
-        pose = skirts.skeleton(self.sources['pmh0_chest154'])[1].pose()
+        pose = skirts.skeleton(skirts.source(self.manifest['restored']['sw_pt_chest/pmh0_chest154.mdl']))[1].pose()
         pelvis = pose['pelvis_g'][0]
         around = lambda degrees, height, radius=.3: (pelvis[0] + radius * math.sin(math.radians(degrees)), pelvis[1] - radius * math.cos(math.radians(degrees)), height)
         self.assertEqual(0., skirts.leg_share(around(skirts.SEAM, .5), pose))
