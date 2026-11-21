@@ -26,6 +26,33 @@
 uniform sampler2D texUnit7;
 uniform sampler2D texUnit9;
 uniform sampler2D texUnit10;
+
+// ProgFX coatings (stoneskin, barkskin, Shadow Shield and the like) swap a legacy
+// mesh's diffuse texture for the effect's vdu_tex_* texture. The client never
+// swaps this material's textures, so the server sets progFxCoat to the coat's
+// cell in the progfx_coat atlas plus one while such an effect is active.
+uniform sampler2D texUnit8;
+uniform float progFxCoat;
+
+vec4 SampleProgFxCoat(vec2 uv)
+{
+    // Four by two cells of 256 texels; each cell repeats like its source texture.
+    float cell = floor(progFxCoat + 0.5) - 1.0;
+    vec2 cellOrigin = vec2(mod(cell, 4.0), floor(cell / 4.0));
+    vec2 cellUV = clamp(fract(uv), vec2(2.0 / 256.0), vec2(254.0 / 256.0));
+    vec2 atlasUV = (cellOrigin + cellUV) / vec2(4.0, 2.0);
+#if __VERSION__ >= 130
+    // Gradients of the unwrapped coordinates keep one mip level across the
+    // repeat seam. Capping them at mip 2 keeps neighbouring cells out.
+    vec2 gradX = dFdx(uv) / vec2(4.0, 2.0);
+    vec2 gradY = dFdy(uv) / vec2(4.0, 2.0);
+    gradX *= min(1.0, (4.0 / 1024.0) / max(length(gradX), 1e-8));
+    gradY *= min(1.0, (4.0 / 1024.0) / max(length(gradY), 1e-8));
+    return textureGrad(texUnit8, atlasUV, gradX, gradY);
+#else
+    return texture2D(texUnit8, atlasUV);
+#endif
+}
 uniform float PLTscheme[15];
 uniform float useNativePalette;
 uniform float smoothTintEdges;
@@ -240,6 +267,15 @@ void main ()
 
     fEnvMapLevel = 1.0 - paletteColor.a;
     vec3 surfaceColor = vTint;
+    bool progFxCoated = progFxCoat > 0.5;
+    if (progFxCoated)
+    {
+        // As on the client's legacy path, the coat replaces the diffuse color
+        // and its alpha sets the environment-map coverage.
+        vec4 coat = SampleProgFxCoat(vTexCoords.xy);
+        surfaceColor = coat.rgb;
+        fEnvMapLevel = 1.0 - coat.a;
+    }
 
     #if FRAGMENT_LIGHTING == 1 && LIGHTING == 1
         surfaceColor = mix(
@@ -267,6 +303,16 @@ void main ()
                 environmentColor = SampleEnvironmentMap(
                     CalculateEnvironmentTexCoords(vFragmentNormal), 0.0);
         #endif
+        if (progFxCoated)
+        {
+            // The client also binds the coat texture as the environment map.
+            #if FRAGMENT_NORMAL != 1
+                environmentColor = ApplyColorSpace(SampleProgFxCoat(vVertexTexCoordsEnvironment).rgb);
+            #else
+                environmentColor = ApplyColorSpace(SampleProgFxCoat(
+                    CalculateEnvironmentTexCoords(vFragmentNormal)).rgb);
+            #endif
+        }
         surfaceColor = mix(surfaceColor, environmentColor, fEnvMapLevel);
     #endif
 
