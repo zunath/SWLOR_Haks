@@ -20,7 +20,9 @@ rotated; bone lengths stay the wearer's own.
 
 The weapon hook keeps its inherited tracks. Robe bridges share one garment `rhand`
 joint only while every robe family sees the same hook motion; keying it splits that
-joint and changes every robe root's skeleton.
+joint and changes every robe root's skeleton. The server seats the rifle in each
+body's firing hand instead, by moving the held item (`WeaponHandFit` in SWLOR_NWN),
+and the support palm follows the rifle by the same amount: `WEAPON_MOVES`.
 
 Banks are emitted as ASCII into `sw_cr_creature`; compile them with
 `CompileModels.py --model <bank> --game-data <data> --apply`, then rerun this tool
@@ -28,10 +30,13 @@ with `--finalize` to restore the exact inherited part IDs and floats in every co
 body roots are re-pointed at their bank in place. ASCII roots (the stock large
 phenotypes, `pmd0`, SWLOR's `pfd2`) are written against their original supermodel,
 compiled in the same CompileModels.py run, then re-pointed by `--finalize`, so every
-native part ID matches the original compile. Robe bridges carry their own copies of
-these clips: refresh them with `GenerateRobeRgbModels.py --update-animation xbowr
---update-animation xbowrdy --update-animation xbowshot` afterwards. Banks are
-regenerated from the compiled models, so no editable source is kept.
+native part ID matches the original compile. Robe animation banks carry their own
+copies of these clips: after `--finalize`, rerun this tool with `--update-robe-banks
+--baseline <git revision of the banks the robes were last built against>` and then with
+`--apply` added. It rewrites only the support arm's rotation values in those copies and
+the hashes in `RobeRgbModels.json`; `GenerateRobeRgbModels.py --update-animation`
+rebuilds whole bridges and no longer fits the split robe banks. Banks are regenerated
+from the compiled models, so no editable source is kept.
 """
 from __future__ import annotations
 
@@ -60,6 +65,22 @@ SUPPORT_OFFSETS = {
     "xbowrdy": np.array([-0.0787, -0.0136, 0.0]),
     "xbowshot": np.array([-0.0787, -0.0136, 0.0]),
 }
+# Weapon-space move (metres) the server gives a rifle held by each body so its handle sits
+# in that body's firing hand: `WeaponHandFit.RifleMove` of the body's right-hand entry in
+# SWLOR_NWN's `WeaponHandFitCatalog.Bodies`. The support target moves with the rifle. Bodies
+# that are not listed (the male human and the large phenotypes) get no move. In SWLOR_NWN,
+# `python tools/WeaponGripFit.py check` fails when this table and the catalog disagree.
+WEAPON_MOVES = {
+    "pfh0": (0.0059, -0.0043, 0.0069),
+    "pme0": (-0.0052, 0.0016, -0.0018),
+    "pfe0": (-0.0022, 0.0050, -0.0089),
+    "pmd0": (0.0034, -0.0060, -0.0058),
+    "pfd0": (0.0150, -0.0083, 0.0080),
+    "pmo0": (0.0050, -0.0097, -0.0114),
+    "pfo0": (0.0178, -0.0089, 0.0127),
+    "pmz0": (0.0224, -0.0070, -0.0109),
+    "pfz0": (0.0224, -0.0070, -0.0109),
+}
 CLIPS = ("xbowr", "xbowrdy", "xbowshot")
 # Playable appearance families (racialtypes.2da PlayerRace rows), normal and large phenotype.
 BODIES = ("pmh0", "pfh0", "pfh2", "pfe0", "pfe2", "pfd0", "pfd2", "pfo0", "pfo2", "pfz0",
@@ -75,6 +96,10 @@ CELL = 0.006
 
 def bank_name(body: str) -> str:
     return BANK_PREFIX + body
+
+
+def weapon_move(body: str) -> np.ndarray:
+    return np.array(WEAPON_MOVES.get(body, (0.0, 0.0, 0.0)))
 
 
 def hand_shape(body: str) -> str:
@@ -414,7 +439,7 @@ def solve(library: Library, body: str, clip: str) -> dict:
         cache = {}
         weapon = rig.world(HOOK, time, override, cache)
         want = LB.copy()
-        want[:3, 3] = LR[:3, 3] + SUPPORT_OFFSETS[clip] + LB0[:3, 3] + palm_shift - LR0[:3, 3]
+        want[:3, 3] = LR[:3, 3] + SUPPORT_OFFSETS[clip] + LB0[:3, 3] + palm_shift - LR0[:3, 3] + weapon_move(body)
         target = weapon @ want
         W1, W2, W3 = (rig.world(name, time, override, cache) for name in ARM)
         torso = rig.world(rig.nodes[rig.nodes[rig.index[ARM[0]]][1]][0], time, override, cache)
@@ -458,7 +483,7 @@ def placement_error(library: Library, body: str, clip: str) -> tuple[np.ndarray,
     HB, LB = rig.hand_frames(0.0)
     reference_palm = placed(LR, hand_points(library, REFERENCE, "l"))
     # Compare in the reference's stock frame, as solve() does, so the top-surface grid matches.
-    palm = placed(LB, hand_points(library, hand_shape(body), "l")) - SUPPORT_OFFSETS[clip]
+    palm = placed(LB, hand_points(library, hand_shape(body), "l")) - SUPPORT_OFFSETS[clip] - weapon_move(body)
     palm_shift = translate_fit(palm, reference_palm)
     palm_shift[1] = top_offset(reference_palm, palm)
     fist_shift = translate_fit(placed(HB, hand_points(library, hand_shape(body), "r")),
@@ -662,16 +687,137 @@ def finalize(library: Library) -> None:
         print("finalized", path.name, root.name)
 
 
+def arm_rotations(data: bytes, clip: str) -> dict[str, tuple[int, int, int, int]]:
+    """(rows, time offset, value offset, columns) of each support arm joint's rotation track in a clip."""
+    tracks = {}
+    for name, _, _, _, offset in Model(bytes(data)).clips[clip][1]:
+        if name not in ARM:
+            continue
+        for kind, rows, times, values, columns, _ in raw_controllers(data, offset):
+            if kind == 20:
+                tracks[name] = (rows, times, values, columns)
+    if set(tracks) != set(ARM):
+        raise ValueError(f"{clip}: expected one rotation track for each of {ARM}")
+    return tracks
+
+
+def copy_arm_rotations(bridge: bytearray, before: bytes, after: bytes, where: str) -> int:
+    """Replace a robe bank's copy of the support arm in every rifle clip; returns the clips that changed.
+
+    The copy must still be the bank the robes were built against (`before`), so nothing else is overwritten.
+    Compiling a bridge moves copied quaternions by a float ULP, hence the tolerance.
+    """
+    changed = 0
+    for clip in CLIPS:
+        ours, old, new = arm_rotations(bridge, clip), arm_rotations(before, clip), arm_rotations(after, clip)
+        differs = False
+        for name in ARM:
+            (rows, times, values, columns), (old_rows, old_times, old_values, _) = ours[name], old[name]
+            new_rows, new_times, new_values, new_columns = new[name]
+            if (rows, columns) != (old_rows, 4) or (new_rows, new_columns) != (rows, 4):
+                raise ValueError(f"{where}/{clip}/{name}: the robe copy and the rifle banks key this joint differently")
+            key_times = bytes(bridge[times:times + rows * 4])
+            if key_times != before[old_times:old_times + rows * 4] or key_times != after[new_times:new_times + rows * 4]:
+                raise ValueError(f"{where}/{clip}/{name}: key times differ")
+            size = rows * 16
+            current = np.frombuffer(bytes(bridge[values:values + size]), "<f4")
+            replacement = after[new_values:new_values + size]
+            if np.abs(current - np.frombuffer(replacement, "<f4")).max() <= 1e-6:
+                continue  # already carried over
+            if np.abs(current - np.frombuffer(before[old_values:old_values + size], "<f4")).max() > 1e-6:
+                raise ValueError(f"{where}/{clip}/{name}: the robe copy is not the baseline rifle bank's; "
+                                 "pass the revision the robes were last built against as --baseline")
+            differs = True
+            bridge[values:values + size] = replacement
+        changed += differs
+    return changed
+
+
+def update_robe_banks(library: Library, baseline: str, apply: bool) -> None:
+    """Carry regenerated support arms into the robe animation banks, in place, and record their new hashes."""
+    import hashlib
+    import json
+    import subprocess
+
+    import GenerateRobeRgbModels as generator
+    import RobeAnimationBanks as banks
+
+    manifest_path = ROOT / "tools" / "RobeRgbModels.json"
+    manifest_bytes = manifest_path.read_bytes()
+    manifest = json.loads(manifest_bytes)
+    active = generator.fresh_active_models()
+    bases = {}
+    for key, head in manifest["animation_bridges"].items():
+        bases.setdefault(head, set()).add(key.split("/")[0])
+    outputs, records = {}, {}
+    for head, record in sorted(manifest["animation_bank_sets"].items()):
+        body = next(iter(bases.get(head, ())), None)
+        if len(bases.get(head, ())) != 1 or body not in BODIES:
+            continue
+        relative = f"{BANK_DIRECTORY}/{bank_name(body)}.mdl"
+        before = subprocess.run(["git", "show", f"{baseline}:{relative}"], cwd=ROOT, capture_output=True, check=True).stdout
+        after = library.data(bank_name(body))
+        if before == after:
+            continue
+        bridge = bytearray(generator.owned_animation_bytes(head, manifest, active))
+        clips = copy_arm_rotations(bridge, before, after, head)
+        if not clips:
+            continue
+        parts = banks.split(bytes(bridge))
+        if list(parts) != record["parts"]:
+            raise ValueError(f"{head}: the update changed the bank layout")
+        for name, part in parts.items():
+            path = ROOT / generator.model_directory(name) / f"{name}.mdl"
+            if path.read_bytes() != part:
+                outputs[path] = (path.read_bytes(), part)
+        records[head] = {**record, "source_sha256": hashlib.sha256(bytes(bridge)).hexdigest()}
+        print(f"{head}: {clips} rifle clips follow {bank_name(body)}", flush=True)
+    if apply:
+        if manifest_path.read_bytes() != manifest_bytes or any(
+                path.read_bytes() != old for path, (old, _) in outputs.items()):
+            raise ValueError("Robe assets changed during validation")
+        for path, (_, new) in outputs.items():
+            path.write_bytes(new)
+            manifest["files"][path.relative_to(ROOT).as_posix()] = hashlib.sha256(new).hexdigest()
+        manifest["animation_bank_sets"].update(records)
+        for head, record in records.items():
+            # Keep the robe generator's build cache valid for the updated bridge.
+            if head in manifest.get("model_builds", {}):
+                manifest["model_builds"][head]["binarySha256"] = record["source_sha256"]
+        # The robe catalog also records the rifle banks themselves, robe wearers or not, and the tools it trusts.
+        for relative in [f"{BANK_DIRECTORY}/{bank_name(body)}.mdl" for body in BODIES] + ["tools/ExtendRobeAnimations.py"]:
+            if relative in manifest["files"]:
+                manifest["files"][relative] = generator.file_digest(ROOT / relative)
+                if relative in manifest.get("validation_tool_files", {}):
+                    manifest["validation_tool_files"][relative] = manifest["files"][relative]
+        # Extension layers pin the base banks to a baseline revision; tell that check which tracks moved since.
+        revision = {"clips": list(CLIPS), "joints": list(ARM), "tool": "GenerateRifleHoldAnimations.py --update-robe-banks"}
+        for extension in manifest.get("animation_extensions", [])[-1:]:
+            if revision not in extension.setdefault("base_rotation_revisions", []):
+                extension["base_rotation_revisions"].append(revision)
+        manifest_path.write_text(json.dumps(manifest, indent=2) + "\n")
+    print(f"{'Applied' if apply else 'Validated'} {len(outputs)} robe bank files in {len(records)} bank sets")
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--game-data", type=Path, required=True, help="Installed EE data directory for stock roots and banks")
     parser.add_argument("--output", type=Path, help="Write into this staging directory instead of the HAK folders")
     parser.add_argument("--finalize", action="store_true",
                         help="After CompileModels.py --apply: restore exact inherited part IDs and tracks in the compiled banks")
+    parser.add_argument("--update-robe-banks", action="store_true",
+                        help="After --finalize: copy the regenerated support arms into the robe animation banks")
+    parser.add_argument("--baseline", help="With --update-robe-banks: git revision of the rifle banks the robes hold now")
+    parser.add_argument("--apply", action="store_true", help="With --update-robe-banks: write the banks and the robe manifest")
     args = parser.parse_args()
     library = Library(args.game_data)
     if args.finalize:
         finalize(library)
+        return
+    if args.update_robe_banks:
+        if not args.baseline:
+            parser.error("--update-robe-banks needs --baseline")
+        update_robe_banks(library, args.baseline, args.apply)
         return
     outputs = generate(library)
     for path, data in outputs.items():
