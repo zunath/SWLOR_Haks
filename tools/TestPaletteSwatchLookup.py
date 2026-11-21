@@ -14,6 +14,7 @@ import unittest
 import numpy as np
 
 import GenerateTintMapAssets as tint
+import TintRgbShading as shading
 
 SHADERS = ("fs_plt_tinter", "fs_plt_tinter_nm", "fs_plt_hair_nm", "fs_cloaktint",
            "fs_hav_dev", "fs_hav_emit", "fs_hav_static")
@@ -32,6 +33,37 @@ def pick(pixels, group, rgb):
         if best_distance is None or distance < best_distance:
             best, best_distance = int(color), distance
     return best
+
+
+def row_shades(pixels, row):
+    """One palette row as the shaders sample it: 256 RGBA shades in 0-1."""
+    return [tuple(float(value) / 255 for value in pixels[row, shade, [2, 1, 0, 3]]) for shade in range(256)]
+
+
+def shade_rgb(pixels, group, rgb):
+    """Mirror the shaders: the color's swatch, then the shared exact-RGB shading."""
+    palette_row, _ = tint.PALETTE_LOOKUP_GROUPS[group]
+    color = pick(pixels, group, rgb)
+    return color, shading.custom_rgb_shades(rgb, row_shades(pixels, palette_row + color),
+                                            row_shades(pixels, palette_row))
+
+
+def shade_rgb_2026_11_17(pixels, group, rgb):
+    """The 2026-11-17 shading: swatch row + (rgb - midtone) * row luminance ratio, swatch coverage."""
+    palette_row, _ = tint.PALETTE_LOOKUP_GROUPS[group]
+    color = pick(pixels, group, rgb)
+    row, first = row_shades(pixels, palette_row + color), row_shades(pixels, palette_row)
+    luminance = np.array(shading.RGB_LUMINANCE)
+    midpoint = np.array(row[128][:3])
+    ramp = first if midpoint @ luminance < .5 / 255 else row
+    ramp_midpoint = max(np.array(ramp[128][:3]) @ luminance, 1 / 255)
+    target = np.array(rgb) / 255
+    return color, [tuple(np.clip(np.array(row[shade][:3]) + (target - midpoint)
+                          * max(np.array(ramp[shade][:3]) @ luminance / ramp_midpoint, 0), 0, 1)) + (row[shade][3],)
+            for shade in range(256)]
+
+
+CLOTH = 3  # cloth, leather and tattoo layers share the cloth palette's lookup group
 
 
 class PaletteSwatchLookupTests(unittest.TestCase):
@@ -69,6 +101,115 @@ class PaletteSwatchLookupTests(unittest.TestCase):
                 self.assertLessEqual(chosen - distances.min(), 8.0, f"group {group} RGB {tuple(rgb)}")
                 exact += chosen == distances.min()
             self.assertGreater(exact / len(colors), 0.99, f"group {group}")
+
+    def test_every_swatch_as_rgb_shades_like_its_row(self):
+        for group, (palette_row, _) in enumerate(tint.PALETTE_LOOKUP_GROUPS):
+            first = row_shades(self.pixels, palette_row)
+            for color in range(176):
+                row = row_shades(self.pixels, palette_row + color)
+                midtone = tuple(int(v) for v in self.pixels[palette_row + color, 128, 2::-1])
+                if np.dot(midtone, shading.RGB_LUMINANCE) / 255 < shading.RGB_DARK_SWATCH:
+                    continue  # black rows and skin row 31: see test_black_dyes_take_the_first_rows_matte_coverage
+                with self.subTest(group=group, color=color):
+                    shades = shading.custom_rgb_shades(midtone, row, first)
+                    self.assertLess(np.abs(np.array(shades) - np.array(row)).max(), 1e-6)
+
+    def test_black_dyes_take_the_first_rows_matte_coverage(self):
+        # Bug report 2026-11-20: black and near-black cloth chose the half-reflective
+        # black row 57 (lowest ID among the black rows) and its reflection turned a
+        # hood flat grey. The black rows differ only in reflection. Skin row 31
+        # (midtone 1,1,1 rising to white) turned near-black skin white.
+        for group, (palette_row, _) in enumerate(tint.PALETTE_LOOKUP_GROUPS):
+            first = np.array(row_shades(self.pixels, palette_row))
+            for rgb in ((0, 0, 0), (2, 2, 2), (5, 4, 6)):
+                with self.subTest(group=group, rgb=rgb):
+                    _, shades = shade_rgb(self.pixels, group, rgb)
+                    shades = np.array(shades)
+                    np.testing.assert_array_equal(first[:, 3], shades[:, 3])
+                    self.assertLessEqual(shades[:, :3].max() * 255, max(rgb) * 1.6 + .5)
+        _, before = shade_rgb_2026_11_17(self.pixels, CLOTH, (2, 2, 2))
+        self.assertLess(before[128][3], .5, "control: the 11/17 shading took row 57's reflection")
+
+    def test_reported_dark_neutral_dyes_stay_dark_and_neutral(self):
+        # Bug report 2026-11-20: hood dyed 44,44,48 and 2,2,2, tunic "graphite" 20,20,24.
+        # 20,20,24's nearest cloth swatch is olive row 167, whose shades turn green
+        # in shadow and blue-white in highlights; a neutral dye must not follow that hue.
+        for rgb in ((2, 2, 2), (20, 20, 24), (44, 44, 48)):
+            spread = max(rgb) - min(rgb)
+            with self.subTest(rgb=rgb):
+                    _, shades = shade_rgb(self.pixels, CLOTH, rgb)
+                    for shade in range(255):
+                        color = np.array(shades[shade][:3]) * 255
+                        self.assertLessEqual(color.max() - color.min(), spread * 1.5 + 3, f"shade {shade}")
+                        if shade <= 128:
+                            self.assertLessEqual(color.max(), max(rgb) + 1, f"shade {shade}")
+        _, before = shade_rgb_2026_11_17(self.pixels, CLOTH, (20, 20, 24))
+        green_shadow = np.array(before[40][:3]) * 255
+        self.assertGreater(green_shadow[1] - green_shadow[0], 3, "control: the 11/17 shading tinted graphite green")
+        purple_highlight = np.array(before[224][:3]) * 255
+        self.assertGreater(purple_highlight[2] - purple_highlight[1], 30, "control: and blue-purple in highlights")
+
+    def test_neutral_greys_away_from_a_swatch_stay_neutral(self):
+        for group, (palette_row, _) in enumerate(tint.PALETTE_LOOKUP_GROUPS):
+            for level in range(256):
+                rgb = (level, level, level)
+                color, shades = shade_rgb(self.pixels, group, rgb)
+                midtone = self.pixels[palette_row + color, 128, 2::-1].astype(float)
+                if np.sqrt(((midtone - level) ** 2).sum()) < shading.RGB_SWATCH_REACH:
+                    continue  # close to its swatch: renders like that palette color
+                with self.subTest(group=group, level=level):
+                    values = np.array(shades)[:255, :3] * 255
+                    self.assertLess((values.max(1) - values.min(1)).max(), 1.0)
+
+    def test_hue_matched_dyes_keep_the_palette_shading(self):
+        # Ordinary colors keep the 11/17 palette-like shading: a dye of its swatch's
+        # hue still darkens and desaturates like that palette row.
+        for rgb in ((200, 30, 30), (90, 60, 30), (35, 109, 150)):
+            with self.subTest(rgb=rgb):
+                _, shades = shade_rgb(self.pixels, CLOTH, rgb)
+                _, before = shade_rgb_2026_11_17(self.pixels, CLOTH, rgb)
+                difference = np.abs(np.array(shades)[32:225, :3] - np.array(before)[32:225, :3]).mean() * 255
+                self.assertLess(difference, 6.0)
+
+    def test_dark_dyes_change_reflection_smoothly(self):
+        # Bug report 2026-11-20 follow-up: dark custom colors jumped between very
+        # dark and grey/silver. Their nearest metal swatch alternates between the
+        # shiny rows (coverage 0.5) and the painted rows (0.8), and cloth black
+        # took the half-reflective row 57. Sweep dark neutral and tinted colors
+        # two levels at a time: reflection coverage changes gradually.
+        def coverage_steps(shade, group, tint_offset):
+            coverage = [np.mean([s[3] for s in shade(self.pixels, group, tuple(level + o for o in tint_offset))[1][64:193]])
+                        for level in range(0, 81, 2)]
+            return np.abs(np.diff(coverage)).max()
+        offsets = ((0, 0, 0), (0, 0, 6), (6, 3, 0), (0, 5, 0), (8, 0, 0))
+        for group in (2, CLOTH):  # metal; cloth, leather and tattoo
+            for offset in offsets:
+                with self.subTest(group=group, offset=offset):
+                    self.assertLessEqual(coverage_steps(shade_rgb, group, offset), 0.16)
+        self.assertGreater(coverage_steps(shade_rgb_2026_11_17, 2, (0, 0, 0)), 0.3,
+                           "control: the 11/17 shading flipped dark metal between shiny and painted rows")
+        self.assertGreater(coverage_steps(shade_rgb_2026_11_17, CLOTH, (0, 0, 0)), 0.45,
+                           "control: and cloth black between row 57 and matte rows")
+
+    def test_shaders_use_the_reference_constants(self):
+        root = tint.REPOSITORY_ROOT / "sw_shader"
+        constants = (
+            "vec3 luminance = vec3({}, {}, {});".format(*shading.RGB_LUMINANCE),
+            "vec3 chromaU = vec3({}, {}, {});".format(*("%.9f" % value for value in shading.RGB_CHROMA_U)),
+            "vec3 chromaV = vec3({}, {}, {});".format(*("%.9f" % value for value in shading.RGB_CHROMA_V)),
+            "1.0 / (midpointChromaSquared + {});".format(shading.RGB_CHROMA_CONFIDENCE),
+            "* 255.0 / {:.1f}, 0.0, 1.0);".format(shading.RGB_SWATCH_REACH),
+        )
+        for name in SHADERS:
+            source = (root / f"{name}.shd").read_text()
+            for constant in constants:
+                with self.subTest(name, constant=constant):
+                    self.assertIn(constant, source)
+            self.assertNotIn("swatchShade.rgb + (decodedRgb - swatchMidpoint)", source)
+            if name != "fs_cloaktint":  # cloaks keep the first row's coverage outright
+                with self.subTest(name, constant="coverage reach"):
+                    self.assertIn("(({0:.1f} - distance(decodedRgb, swatchMidpoint) * 255.0) / {1:.1f}, 0.0, 1.0);".format(
+                        shading.RGB_COVERAGE_REACH, shading.RGB_COVERAGE_REACH - .5), source)
 
     def test_audit_rejects_stale_or_inconsistent_rows(self):
         with tempfile.TemporaryDirectory() as directory:
