@@ -27,6 +27,9 @@ COLUMNS, ROWS = 4, 8
 ATLAS_COUNT = 4
 MATERIAL = "cloaktint"
 TGA_TYPE, DDS_TYPE, MTR_TYPE = 3, 2033, 2072
+PROGFX_COAT_UNIT = 8
+# fs_cloaktint has no height map, so texture4 is free for the ProgFX coat atlas.
+CLOAK_PROGFX_COAT_UNIT = 4
 
 
 def file_digest(path):
@@ -128,7 +131,14 @@ def shader_text():
     source = replace_once(source, '#include "inc_standard"',
                           '#define FORCE_ALLOW_DISCARD 1\n#include "inc_standard"')
     source = replace_once(source, "uniform sampler2D texUnit9;", "")
-    opacity = " || ".join(f"index == {index}.0" for index in opacity_texture_indices()) or "false"
+    # The cloak atlases occupy texture6-9, so the ProgFX coat atlas moves to texture4.
+    source = replace_once(source, f"uniform sampler2D texUnit{PROGFX_COAT_UNIT};",
+                          f"uniform sampler2D texUnit{CLOAK_PROGFX_COAT_UNIT};")
+    source = replace_once(source, f"textureGrad(texUnit{PROGFX_COAT_UNIT}, atlasUV",
+                          f"textureGrad(texUnit{CLOAK_PROGFX_COAT_UNIT}, atlasUV")
+    source = replace_once(source, f"texture2D(texUnit{PROGFX_COAT_UNIT}, atlasUV)",
+                          f"texture2D(texUnit{CLOAK_PROGFX_COAT_UNIT}, atlasUV)")
+    opacity =" || ".join(f"index == {index}.0" for index in opacity_texture_indices()) or "false"
     declarations = """uniform sampler2D texUnit6;
 uniform sampler2D texUnit7;
 uniform sampler2D texUnit8;
@@ -197,6 +207,8 @@ def material_text():
                                     "cloak_tints1", TILE, TILE, profile=(MATERIAL, []),
                                     native_palette=True)
     source = source.replace("fs_plt_tinter", "fs_cloaktint")
+    source = replace_once(source, f"texture{PROGFX_COAT_UNIT} {tint.PROGFX_COAT_TEXTURE}",
+                          f"texture{CLOAK_PROGFX_COAT_UNIT} {tint.PROGFX_COAT_TEXTURE}")
     source = source.replace("texture7 cloak_tints1", "\n".join(
         f"texture{6 + index} cloak_tints{index}" for index in range(ATLAS_COUNT)))
     return source + "parameter float cloakTexture 0.0\n"
