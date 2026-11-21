@@ -170,7 +170,7 @@ class ExtensionTests(unittest.TestCase):
     def test_a_variant_copies_an_owned_clip_and_changes_only_its_body_motion(self):
         layer = self.source.pack('pmh_ra003', 'pmh_ra001', self.source.clips[2:])
         prior, track = self.variant_track(layer)
-        result, count = extend.add_variant_clips(layer, {'clip3': 'clip3v'}, {'clip3v': {'arm': (prior, track)}})
+        result, count = extend.add_variant_clips(layer, {'clip3v': 'clip3'}, {'clip3v': {'arm': (prior, track)}})
         self.assertEqual(1, count)
         bridge = banks.CompiledBridge(result)
         self.assertEqual(['clip2', 'clip3', 'clip3v', 'clip4'], bridge.clip_names)
@@ -190,18 +190,48 @@ class ExtensionTests(unittest.TestCase):
     def test_variants_reject_existing_names_missing_clips_and_other_differences(self):
         layer = self.source.pack('pmh_ra003', 'pmh_ra001', self.source.clips[2:])
         prior, track = self.variant_track(layer)
-        for variants in ({'clip3': 'clip4'}, {'missing': 'clip3v'}):
+        # Variants are keyed by the new clip: an existing name and a missing source are both rejected.
+        for variants in ({'clip4': 'clip3'}, {'clip3v': 'missing'}):
             with self.subTest(variants=variants), self.assertRaises(ValueError):
-                extend.add_variant_clips(layer, variants, {name: {'arm': (prior, track)} for name in variants.values()})
+                extend.add_variant_clips(layer, variants, {name: {'arm': (prior, track)} for name in variants})
         with self.assertRaises(ValueError):
             extend.variant_changes(layer, 'clip3', 'clip4')  # another clip, with its own timing
         with self.assertRaises(ValueError):
             extend.variant_changes(layer, 'clip3', 'clip3')  # no difference at all
 
+    def test_a_variant_copies_a_clip_the_layer_does_not_own_from_the_bridge_it_extends(self):
+        parent = self.source.pack('pmh_ra003', 'pmh_ra001', self.source.clips[2:])
+        layer = self.source.pack('pmh_ra004', 'pmh_ra003',
+                                 [clip for name, clip in zip(self.source.clip_names, self.source.clips) if name == 'clip4'])
+        prior, track = self.variant_track(parent)
+        turn = (0, 0, math.sin(-.1), math.cos(-.1))
+        other = (list(prior[0]), [extend.poses.multiply(turn, q) for q in prior[1]])
+        changes = {'clip3v': {'arm': (prior, track)}, 'clip3w': {'arm': (prior, other)}}
+        result, count = extend.add_variant_clips(layer, {'clip3v': 'clip3', 'clip3w': 'clip3'}, changes, parent)
+        self.assertEqual(2, count)
+        bridge = banks.CompiledBridge(result)
+        self.assertEqual(['clip3v', 'clip3w', 'clip4'], bridge.clip_names)  # the source stays in the parent bridge
+        self.assertEqual(layer, bridge.pack('pmh_ra004', 'pmh_ra003',
+                                            [clip for name, clip in zip(bridge.clip_names, bridge.clips) if name == 'clip4']))
+        self.assertEqual(extend.sharing.clip_headers(parent)['clip3'], extend.sharing.clip_headers(result)['clip3v'])
+        clips, source = extend.poses.Model(result).clips, extend.poses.Model(parent).clips
+        for name, expected_track in (('clip3v', track), ('clip3w', other)):
+            for original, copy in zip(source['clip3'][1], clips[name][1]):
+                # Each bank names its root after itself; every other node keeps its name.
+                self.assertEqual(original[1:3] if original[1] is None else original[:3],
+                                 copy[1:3] if copy[1] is None else copy[:3])
+                expected = {**original[3], extend.ROTATION: expected_track} if original[0] == 'arm' else original[3]
+                self.assertTrue(extend.sharing.controllers_equal(expected, copy[3]), (name, original[0]))
+        with self.assertRaises(ValueError):  # without the bridge it extends, the layer has no clip3
+            extend.add_variant_clips(layer, {'clip3v': 'clip3'}, changes)
+        stranger = self.source.pack('pmh_ra005', 'pmh_ra001', self.source.clips[2:])
+        with self.assertRaises(ValueError):  # only the bridge the layer extends may give it a clip
+            extend.add_variant_clips(layer, {'clip3v': 'clip3'}, changes, stranger)
+
     def test_a_variant_is_recognized_when_a_full_bank_spilled_it_into_another_bank(self):
         layer = self.source.pack('pmh_ra003', 'pmh_ra001', self.source.clips[2:])
         prior, track = self.variant_track(layer)
-        result, _ = extend.add_variant_clips(layer, {'clip3': 'clip3v'}, {'clip3v': {'arm': (prior, track)}})
+        result, _ = extend.add_variant_clips(layer, {'clip3v': 'clip3'}, {'clip3v': {'arm': (prior, track)}})
         bridge = banks.CompiledBridge(result)
         spill = bridge.pack('pmh_ra005', 'pmh_ra003',
                             [clip for name, clip in zip(bridge.clip_names, bridge.clips) if name == 'clip3v'])
@@ -216,7 +246,7 @@ class ExtensionTests(unittest.TestCase):
     def test_the_banks_of_a_rig_add_the_selected_clips_together(self):
         layer = self.source.pack('pmh_ra003', 'pmh_ra001', self.source.clips[2:])
         prior, track = self.variant_track(layer)
-        result, _ = extend.add_variant_clips(layer, {'clip3': 'clip3v'}, {'clip3v': {'arm': (prior, track)}})
+        result, _ = extend.add_variant_clips(layer, {'clip3v': 'clip3'}, {'clip3v': {'arm': (prior, track)}})
         extend.verify_body_additions(layer, result, {'clip3v'})
         with self.assertRaises(ValueError):
             extend.verify_body_additions(layer, result, {'clip3v', 'clip5v'})  # one bank alone must add them all
