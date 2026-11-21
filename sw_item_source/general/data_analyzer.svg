@@ -1,0 +1,235 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="70%">
+      <stop offset="0" stop-color="#16171a"/>
+      <stop offset="1" stop-color="#050607"/>
+    </radialGradient>
+    <!-- armored console body, dark gunmetal -->
+    <linearGradient id="deck" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#b3bec9"/>
+      <stop offset="0.5" stop-color="#66717c"/>
+      <stop offset="1" stop-color="#3b434c"/>
+    </linearGradient>
+    <linearGradient id="slope" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7d8995"/>
+      <stop offset="1" stop-color="#4a535d"/>
+    </linearGradient>
+    <linearGradient id="front" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#808b97"/>
+      <stop offset="0.6" stop-color="#47505a"/>
+      <stop offset="1" stop-color="#252b32"/>
+    </linearGradient>
+    <linearGradient id="side" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#505a64"/>
+      <stop offset="1" stop-color="#23292f"/>
+    </linearGradient>
+    <linearGradient id="plate" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8a95a1"/>
+      <stop offset="1" stop-color="#3c444d"/>
+    </linearGradient>
+    <linearGradient id="screen" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0a3b2a"/>
+      <stop offset="1" stop-color="#03140e"/>
+    </linearGradient>
+    <!-- interface spike (local frame: x along the spike, +y is the lit upper side) -->
+    <linearGradient id="arm" x1="0" y1="15" x2="0" y2="-15" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#1c2127"/>
+      <stop offset="0.18" stop-color="#c3ccd5"/>
+      <stop offset="0.42" stop-color="#6c7782"/>
+      <stop offset="0.8" stop-color="#262c33"/>
+      <stop offset="1" stop-color="#101317"/>
+    </linearGradient>
+    <linearGradient id="armdark" x1="0" y1="15" x2="0" y2="-15" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#14181c"/>
+      <stop offset="0.2" stop-color="#7d8994"/>
+      <stop offset="0.5" stop-color="#3a424b"/>
+      <stop offset="1" stop-color="#0c0f12"/>
+    </linearGradient>
+    <linearGradient id="needle" x1="0" y1="5" x2="0" y2="-5" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#5a6570"/>
+      <stop offset="0.3" stop-color="#ffffff"/>
+      <stop offset="0.6" stop-color="#b9c4ce"/>
+      <stop offset="1" stop-color="#2a3138"/>
+    </linearGradient>
+    <radialGradient id="joint" cx="38%" cy="35%" r="70%">
+      <stop offset="0" stop-color="#e3e9ef"/>
+      <stop offset="0.45" stop-color="#6c7886"/>
+      <stop offset="1" stop-color="#14181d"/>
+    </radialGradient>
+    <!-- holographic display -->
+    <linearGradient id="holo" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#6dffa0" stop-opacity="0.34"/>
+      <stop offset="1" stop-color="#2fe0c8" stop-opacity="0.14"/>
+    </linearGradient>
+    <linearGradient id="cone" x1="0" y1="126" x2="0" y2="74" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#8affb0" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#3ff0b0" stop-opacity="0.06"/>
+    </linearGradient>
+    <radialGradient id="emit" cx="42%" cy="35%" r="70%">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="0.35" stop-color="#a8ffc8"/>
+      <stop offset="0.75" stop-color="#2fd88a"/>
+      <stop offset="1" stop-color="#064a2c"/>
+    </radialGradient>
+    <radialGradient id="amber" cx="40%" cy="35%" r="70%">
+      <stop offset="0" stop-color="#fff4d0"/>
+      <stop offset="0.4" stop-color="#ffb84a"/>
+      <stop offset="1" stop-color="#8a4a08"/>
+    </radialGradient>
+    <!-- ribbed conduit -->
+    <linearGradient id="hose" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#9aa5b0"/>
+      <stop offset="1" stop-color="#3d454e"/>
+    </linearGradient>
+    <filter id="blur1" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="1.2"/></filter>
+    <filter id="blur2" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2"/></filter>
+    <filter id="blur4" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="4"/></filter>
+    <filter id="blur8" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="8"/></filter>
+  </defs>
+  <rect width="256" height="256" fill="url(#bg)"/>
+  <g transform="translate(133 128) scale(0.9) translate(-122 -124)">
+  <ellipse cx="132" cy="210" rx="98" ry="9" fill="#000" opacity="0.85" filter="url(#blur2)"/>
+
+  <!-- ===== armored console ===== -->
+  <!-- right side face (profile follows the sloped front panel) -->
+  <path d="M160 178 L186 147 L226 128 L226 176 L160 208 Z" fill="url(#side)" stroke="#0b0d10" stroke-width="1.6" stroke-linejoin="round"/>
+  <g transform="matrix(1 -0.4848 0 1 160 178)">
+    <rect x="30" y="-11" width="30" height="35" rx="2" fill="url(#plate)" stroke="#0b0d10" stroke-width="1.3"/>
+    <path d="M30.5 -10.4 L59.5 -10.4" stroke="#b6c0ca" stroke-width="1" opacity="0.7"/>
+    <g fill="#c9d1d9"><circle cx="34" cy="-7" r="1.6"/><circle cx="56" cy="-7" r="1.6"/><circle cx="34" cy="20" r="1.6"/><circle cx="56" cy="20" r="1.6"/></g>
+    <!-- conduit ports -->
+    <ellipse cx="38" cy="-2" rx="4.6" ry="4.6" fill="#14181c" stroke="#0b0d10" stroke-width="1"/>
+    <ellipse cx="54" cy="12" rx="4.6" ry="4.6" fill="#14181c" stroke="#0b0d10" stroke-width="1"/>
+    <path d="M6 6 L6 26 M12 3 L12 26 M18 0 L18 26" stroke="#11151a" stroke-width="2.2"/>
+    <path d="M7.2 6 L7.2 26 M13.2 3 L13.2 26 M19.2 0 L19.2 26" stroke="#68727d" stroke-width="0.8" opacity="0.7"/>
+  </g>
+
+  <!-- front face -->
+  <path d="M70 152 L160 178 L160 208 L70 182 Z" fill="url(#front)" stroke="#0b0d10" stroke-width="1.6" stroke-linejoin="round"/>
+  <g transform="matrix(1 0.2889 0 1 70 152)">
+    <!-- socket plate for the interface spike -->
+    <rect x="12" y="3" width="34" height="24" rx="3" fill="url(#plate)" stroke="#0b0d10" stroke-width="1.3"/>
+    <path d="M13 3.8 L45 3.8" stroke="#c3ccd5" stroke-width="1" opacity="0.7"/>
+    <g fill="#d8dee4"><circle cx="16" cy="7" r="1.5"/><circle cx="42" cy="7" r="1.5"/><circle cx="16" cy="23" r="1.5"/><circle cx="42" cy="23" r="1.5"/></g>
+    <!-- vent grille -->
+    <rect x="54" y="6" width="31" height="18" rx="1.5" fill="#15191e" stroke="#0b0d10" stroke-width="1"/>
+    <path d="M56 9.5 L83 9.5 M56 13.5 L83 13.5 M56 17.5 L83 17.5 M56 21.5 L83 21.5" stroke="#5d6772" stroke-width="1.5"/>
+    <path d="M56 10.6 L83 10.6 M56 14.6 L83 14.6 M56 18.6 L83 18.6 M56 22.6 L83 22.6" stroke="#0b0d10" stroke-width="0.8"/>
+    <circle cx="50" cy="26" r="1.7" fill="#54f67a"/>
+  </g>
+  <circle cx="120" cy="178" r="4" fill="#54f67a" opacity="0.4" filter="url(#blur1)"/>
+
+  <!-- sloped control panel with a data readout screen -->
+  <path d="M70 152 L160 178 L186 147 L96 121 Z" fill="url(#slope)" stroke="#0b0d10" stroke-width="1.6" stroke-linejoin="round"/>
+  <g transform="matrix(1 0.2889 0.8667 -1.0333 70 152)">
+    <rect x="10" y="5" width="58" height="20" rx="2" fill="url(#screen)" stroke="#0b0d10" stroke-width="1.3"/>
+    <rect x="10" y="5" width="58" height="20" rx="2" fill="#54f67a" opacity="0.12"/>
+    <g fill="#7dffa8">
+      <rect x="14" y="19" width="26" height="2.2"/>
+      <rect x="44" y="19" width="16" height="2.2" fill="#7ff8ff"/>
+      <rect x="14" y="14.5" width="12" height="2.2"/>
+      <rect x="29" y="14.5" width="30" height="2.2"/>
+      <rect x="14" y="10" width="36" height="2.2"/>
+      <rect x="53" y="10" width="9" height="2.2" fill="#7ff8ff"/>
+    </g>
+    <circle cx="77" cy="18" r="3" fill="url(#amber)"/>
+    <circle cx="84" cy="11" r="2.4" fill="#f05454"/>
+    <circle cx="77" cy="9" r="2.4" fill="#2a3138" stroke="#0b0d10" stroke-width="0.8"/>
+  </g>
+  <!-- screen glow -->
+  <path d="M84 147 L142 164 L158 143 L100 126 Z" fill="#54f67a" opacity="0.22" filter="url(#blur4)"/>
+
+  <!-- top deck -->
+  <path d="M96 121 L186 147 L226 128 L136 102 Z" fill="url(#deck)" stroke="#0b0d10" stroke-width="1.6" stroke-linejoin="round"/>
+  <path d="M70 152 L160 178 L186 147 L226 128" fill="none" stroke="#e6ecf1" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round" opacity="0.85"/>
+  <path d="M96 121 L186 147" stroke="#d4dce4" stroke-width="1.2" opacity="0.75"/>
+  <path d="M70 152 L96 121 L136 102" fill="none" stroke="#c3ccd5" stroke-width="1.1" opacity="0.6"/>
+  <g transform="matrix(1 0.2889 1 -0.475 96 121)">
+    <path d="M6 6 L84 6" stroke="#2a3138" stroke-width="1.3" opacity="0.8"/>
+    <path d="M6 34 L84 34" stroke="#2a3138" stroke-width="1.3" opacity="0.8"/>
+  </g>
+
+  <!-- ===== hologram emitter and light cone ===== -->
+  <polygon points="161,126 110,74 204,101 171,126" fill="url(#cone)"/>
+  <ellipse cx="166" cy="127" rx="11" ry="5" fill="#1b2026" stroke="#0b0d10" stroke-width="1.3"/>
+  <ellipse cx="166" cy="124.5" rx="7" ry="5" fill="url(#emit)" stroke="#0b0d10" stroke-width="1"/>
+  <circle cx="166" cy="123" r="10" fill="#54f67a" opacity="0.5" filter="url(#blur4)"/>
+
+  <!-- ===== floating holographic circuit-trace display ===== -->
+  <g transform="matrix(0.961 0.276 0 1 110 30)">
+    <rect x="0" y="0" width="98" height="44" rx="2" fill="none" stroke="#54f67a" stroke-width="5" opacity="0.45" filter="url(#blur2)"/>
+    <rect x="0" y="0" width="98" height="44" rx="2" fill="url(#holo)" stroke="#9dffc0" stroke-width="1.4"/>
+    <path d="M3 6 H95 M3 12 H95 M3 18 H95 M3 24 H95 M3 30 H95 M3 36 H95" stroke="#c8ffdc" stroke-width="0.6" opacity="0.18"/>
+    <!-- bright corner brackets -->
+    <path d="M0 8 V0 H8 M90 0 H98 V8 M98 36 V44 H90 M8 44 H0 V36" fill="none" stroke="#eafff1" stroke-width="2" stroke-linecap="round"/>
+    <!-- circuit traces -->
+    <g fill="none" stroke="#54f67a" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" opacity="0.5" filter="url(#blur1)">
+      <path d="M8 10 H26 V19 H40 M8 34 H20 V27 H40 M90 9 H72 V17 H58 M90 35 H78 V28 H58 M49 5 V12 M49 32 V39"/>
+    </g>
+    <g fill="none" stroke="#c4ffd8" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M8 10 H26 V19 H40 M8 34 H20 V27 H40 M90 9 H72 V17 H58 M90 35 H78 V28 H58 M49 5 V12 M49 32 V39"/>
+    </g>
+    <!-- central chip -->
+    <rect x="40" y="12" width="18" height="20" rx="1.5" fill="#0b3a2a" fill-opacity="0.6" stroke="#d6ffe4" stroke-width="1.4"/>
+    <rect x="45" y="17" width="8" height="10" fill="#7ff8ff" opacity="0.9"/>
+    <rect x="44" y="16" width="10" height="12" fill="#7ff8ff" opacity="0.5" filter="url(#blur1)"/>
+    <g fill="#f2fff6">
+      <circle cx="8" cy="10" r="2.3"/><circle cx="8" cy="34" r="2.3"/>
+      <circle cx="90" cy="9" r="2.3"/><circle cx="90" cy="35" r="2.3"/>
+      <circle cx="49" cy="5" r="2.1"/><circle cx="49" cy="39" r="2.1"/>
+    </g>
+  </g>
+  <!-- data motes rising -->
+  <g fill="#b8ffd0">
+    <circle cx="140" cy="108" r="1.4" opacity="0.8"/><circle cx="182" cy="112" r="1.2" opacity="0.7"/>
+    <circle cx="158" cy="96" r="1.1" opacity="0.6"/>
+  </g>
+
+  <!-- ===== ribbed conduit loop on the side ===== -->
+  <path d="M198 156 C 230 148, 238 182, 214 170" fill="none" stroke="#0b0d10" stroke-width="10" stroke-linecap="round"/>
+  <path d="M198 156 C 230 148, 238 182, 214 170" fill="none" stroke="url(#hose)" stroke-width="7" stroke-linecap="round"/>
+  <path d="M198 156 C 230 148, 238 182, 214 170" fill="none" stroke="#14181c" stroke-width="7.4" stroke-dasharray="1.4 2.6"/>
+  <path d="M200 154 C 226 147, 234 164, 230 172" fill="none" stroke="#e3e9ef" stroke-width="1.1" opacity="0.6"/>
+
+  <!-- ===== ribbed conduit feeding the interface spike ===== -->
+  <path d="M96 132 C 70 126, 58 148, 82 166" fill="none" stroke="#0b0d10" stroke-width="10" stroke-linecap="round"/>
+  <path d="M96 132 C 70 126, 58 148, 82 166" fill="none" stroke="url(#hose)" stroke-width="7" stroke-linecap="round"/>
+  <path d="M96 132 C 70 126, 58 148, 82 166" fill="none" stroke="#14181c" stroke-width="7.4" stroke-dasharray="1.4 2.6"/>
+  <path d="M92 130 C 72 127, 63 140, 66 150" fill="none" stroke="#e3e9ef" stroke-width="1.1" opacity="0.6"/>
+  <ellipse cx="95" cy="132" rx="4" ry="5" fill="url(#joint)" stroke="#0b0d10" stroke-width="1"/>
+
+  <!-- ===== extended interface spike (local frame along the spike) ===== -->
+  <g transform="translate(100 174) rotate(158) scale(0.86)">
+    <!-- base housing -->
+    <path d="M-4 -14 L24 -14 L24 14 L-4 14 Z" fill="url(#arm)" stroke="#0b0d10" stroke-width="1.7" stroke-linejoin="round"/>
+    <path d="M7 -13.5 L7 13.5 M15 -13.5 L15 13.5" stroke="#0b0d10" stroke-width="1.4"/>
+    <path d="M8.4 4 L8.4 13 M16.4 4 L16.4 13" stroke="#c3ccd5" stroke-width="0.9" opacity="0.7"/>
+    <ellipse cx="24" cy="0" rx="3" ry="14" fill="#2b3239" stroke="#0b0d10" stroke-width="1.3"/>
+    <!-- telescoping section 2 -->
+    <path d="M24 -9.5 L48 -9.5 L48 9.5 L24 9.5 Z" fill="url(#arm)" stroke="#0b0d10" stroke-width="1.5" stroke-linejoin="round"/>
+    <path d="M36 -9 L36 9" stroke="#0b0d10" stroke-width="1.2"/>
+    <ellipse cx="48" cy="0" rx="2.2" ry="9.5" fill="#2b3239" stroke="#0b0d10" stroke-width="1.2"/>
+    <!-- telescoping section 3 -->
+    <path d="M48 -6.5 L64 -6.5 L64 6.5 L48 6.5 Z" fill="url(#arm)" stroke="#0b0d10" stroke-width="1.4" stroke-linejoin="round"/>
+    <!-- highlight along the arm -->
+    <path d="M0 10 L22 10 M26 6.6 L46 6.6 M50 4.3 L62 4.3" stroke="#ffffff" stroke-width="1.4" stroke-linecap="round" opacity="0.8"/>
+    <!-- knurled rotating interface head -->
+    <path d="M64 -11 L77 -11 L77 11 L64 11 Z" fill="url(#armdark)" stroke="#0b0d10" stroke-width="1.5" stroke-linejoin="round"/>
+    <path d="M67.5 -10.5 L67.5 10.5 M71 -10.5 L71 10.5 M74.5 -10.5 L74.5 10.5" stroke="#0b0d10" stroke-width="1"/>
+    <path d="M65 8.6 L76 8.6" stroke="#dfe6ec" stroke-width="1.1" opacity="0.8"/>
+    <!-- side prongs -->
+    <path d="M77 8 L86 6.5 M77 -8 L86 -6.5" stroke="#0b0d10" stroke-width="3.4" stroke-linecap="round"/>
+    <path d="M77 8 L86 6.5 M77 -8 L86 -6.5" stroke="#aab5c0" stroke-width="1.6" stroke-linecap="round"/>
+    <!-- data spike -->
+    <circle cx="99" cy="0" r="12" fill="#54f67a" opacity="0.55" filter="url(#blur4)"/>
+    <path d="M77 -4.2 L93 -1.6 L101 0 L93 1.6 L77 4.2 Z" fill="url(#needle)" stroke="#0b0d10" stroke-width="1.3" stroke-linejoin="round"/>
+    <path d="M80 0 L99 0" stroke="#7dffa8" stroke-width="1.2" opacity="0.9"/>
+    <circle cx="100" cy="0" r="3.2" fill="#d8ffe4"/>
+    <circle cx="100" cy="0" r="6" fill="#7dffa8" opacity="0.6" filter="url(#blur2)"/>
+  </g>
+  <!-- data sparks at the spike tip -->
+  <g fill="#c8ffda">
+    <circle cx="16" cy="196" r="1.5" opacity="0.85"/><circle cx="28" cy="216" r="1.3" opacity="0.7"/>
+  </g>
+  </g>
+</svg>

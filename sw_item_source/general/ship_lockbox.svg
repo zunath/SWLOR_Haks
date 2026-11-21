@@ -1,0 +1,172 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="256" height="256" viewBox="0 0 256 256">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="70%">
+      <stop offset="0" stop-color="#16171a"/>
+      <stop offset="1" stop-color="#050607"/>
+    </radialGradient>
+    <!-- starship-grade armored strongbox -->
+    <linearGradient id="top" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#aab4be"/>
+      <stop offset="0.55" stop-color="#6b7581"/>
+      <stop offset="1" stop-color="#3e4650"/>
+    </linearGradient>
+    <linearGradient id="front" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#78838f"/>
+      <stop offset="0.55" stop-color="#4b545e"/>
+      <stop offset="1" stop-color="#262c33"/>
+    </linearGradient>
+    <linearGradient id="side" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#4f5963"/>
+      <stop offset="1" stop-color="#22282e"/>
+    </linearGradient>
+    <linearGradient id="lip" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#c9d2db"/>
+      <stop offset="0.5" stop-color="#5d6772"/>
+      <stop offset="1" stop-color="#1a1f24"/>
+    </linearGradient>
+    <linearGradient id="clamp" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#8e99a4"/>
+      <stop offset="0.5" stop-color="#3d454e"/>
+      <stop offset="1" stop-color="#1a1e23"/>
+    </linearGradient>
+    <linearGradient id="magnet" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffd6b0"/>
+      <stop offset="0.45" stop-color="#ff6a3a"/>
+      <stop offset="1" stop-color="#8a1a0c"/>
+    </linearGradient>
+    <linearGradient id="screen" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff0c0"/>
+      <stop offset="0.35" stop-color="#ffb84a"/>
+      <stop offset="1" stop-color="#b85a0a"/>
+    </linearGradient>
+    <linearGradient id="bezel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#14181c"/>
+      <stop offset="1" stop-color="#2c333a"/>
+    </linearGradient>
+    <!-- scorch: soot core with a heat-blued halo -->
+    <radialGradient id="scorch" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#0a0604" stop-opacity="0.95"/>
+      <stop offset="0.5" stop-color="#1a0f08" stop-opacity="0.8"/>
+      <stop offset="0.72" stop-color="#3b2a4a" stop-opacity="0.45"/>
+      <stop offset="0.88" stop-color="#7a5a2a" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#7a5a2a" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="blur1" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="1.2"/></filter>
+    <filter id="blur2" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2"/></filter>
+    <filter id="blur4" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="4"/></filter>
+    <!-- irregular burn mark (unit size, scaled per use) -->
+    <path id="burn" d="M-0.95 -0.1 Q-0.8 -0.75 -0.2 -0.7 Q0.3 -1.05 0.7 -0.55 Q1.1 -0.1 0.85 0.35 Q0.6 0.95 0 0.8 Q-0.45 1.0 -0.8 0.5 Q-1.1 0.2 -0.95 -0.1 Z" fill="url(#scorch)"/>
+    <path id="burncore" d="M-0.5 -0.15 Q-0.35 -0.5 0 -0.4 Q0.4 -0.45 0.45 -0.05 Q0.5 0.35 0.1 0.38 Q-0.35 0.5 -0.5 -0.15 Z" fill="#070403" opacity="0.55"/>
+    <!-- magnetic docking clamp: an L bracket with a glowing magnet pad (drawn in face space) -->
+    <g id="clampL">
+      <path d="M0 0 H20 V8 H8 V20 H0 Z" fill="url(#clamp)" stroke="#0b0d10" stroke-width="1.3" stroke-linejoin="round"/>
+      <path d="M1 1 H19" stroke="#dfe6ec" stroke-width="0.9" opacity="0.7"/>
+      <rect x="2.2" y="2.2" width="3.6" height="15" rx="1" fill="url(#magnet)"/>
+      <rect x="2.2" y="2.2" width="15" height="3.6" rx="1" fill="url(#magnet)"/>
+      <circle cx="14" cy="5.5" r="1" fill="#0b0d10"/>
+      <circle cx="5.5" cy="14" r="1" fill="#0b0d10"/>
+    </g>
+  </defs>
+  <rect width="256" height="256" fill="url(#bg)"/>
+  <g transform="translate(128 133) scale(1.15) translate(-130 -147)">
+  <ellipse cx="128" cy="204" rx="92" ry="9" fill="#000" opacity="0.85" filter="url(#blur2)"/>
+
+  <!-- ===== right side face ===== -->
+  <path d="M160 142 L214 108 L214 180 L160 214 Z" fill="url(#side)" stroke="#0b0d10" stroke-width="1.6" stroke-linejoin="round"/>
+  <g transform="matrix(1 -0.6296 0 1 160 142)">
+    <!-- reinforcement ribs -->
+    <path d="M17 28 L17 66 M27 28 L27 66 M37 28 L37 66" stroke="#11151a" stroke-width="3"/>
+    <path d="M18.6 28 L18.6 66 M28.6 28 L28.6 66 M38.6 28 L38.6 66" stroke="#6b7580" stroke-width="1" opacity="0.7"/>
+    <!-- scorch on the side -->
+    <g transform="translate(30 46) rotate(20) scale(20 17)"><use xlink:href="#burn"/><use xlink:href="#burncore"/></g>
+    <!-- lid lip -->
+    <path d="M0 20 L54 20 L54 25 L0 25 Z" fill="url(#lip)" stroke="#0b0d10" stroke-width="1"/>
+    <path d="M10 22.5 L44 22.5" stroke="#ff5a3a" stroke-width="1.4"/>
+    <path d="M10 22.5 L44 22.5" stroke="#ff5a3a" stroke-width="4" opacity="0.5" filter="url(#blur1)"/>
+    <!-- clamps on the back edge and front edge of the side -->
+    <use xlink:href="#clampL" transform="translate(54 0) scale(-1 1)"/>
+    <use xlink:href="#clampL" transform="translate(54 72) scale(-1 -1)"/>
+  </g>
+
+  <!-- ===== front face ===== -->
+  <path d="M46 114 L160 142 L160 214 L46 186 Z" fill="url(#front)" stroke="#0b0d10" stroke-width="1.6" stroke-linejoin="round"/>
+  <g transform="matrix(1 0.2456 0 1 46 114)">
+    <!-- scorch on the front, lower right -->
+    <g transform="translate(96 54) rotate(-15) scale(22 16)"><use xlink:href="#burn"/><use xlink:href="#burncore"/></g>
+    <g transform="translate(14 36) rotate(40) scale(12 9)" opacity="0.7"><use xlink:href="#burn"/><use xlink:href="#burncore"/></g>
+    <!-- lid lip and the glowing seal line -->
+    <path d="M0 20 L114 20 L114 25 L0 25 Z" fill="url(#lip)" stroke="#0b0d10" stroke-width="1"/>
+    <path d="M22 22.5 L92 22.5" stroke="#ff5a3a" stroke-width="1.4"/>
+    <path d="M22 22.5 L92 22.5" stroke="#ff5a3a" stroke-width="4" opacity="0.5" filter="url(#blur1)"/>
+    <!-- lower body armor seam and bolts -->
+    <path d="M22 66 L92 66" stroke="#151a1f" stroke-width="1.2" opacity="0.8"/>
+    <g fill="#c9d1d9"><circle cx="26" cy="31" r="1.3"/><circle cx="88" cy="31" r="1.3"/><circle cx="26" cy="62" r="1.3"/><circle cx="88" cy="62" r="1.3"/></g>
+    <!-- scratches -->
+    <path d="M24 60 L38 56 M82 8 L98 12" stroke="#a7b1bb" stroke-width="0.9" opacity="0.55"/>
+    <path d="M24 61 L38 57 M82 9 L98 13" stroke="#0b0d10" stroke-width="0.8" opacity="0.6"/>
+    <!-- security data-lock panel -->
+    <rect x="34" y="29" width="46" height="37" rx="3" fill="url(#bezel)" stroke="#0b0d10" stroke-width="1.5"/>
+    <path d="M35 65 L79 65" stroke="#8a96a2" stroke-width="1" opacity="0.6"/>
+    <rect x="31" y="27" width="52" height="41" rx="5" fill="#ffb84a" opacity="0.28" filter="url(#blur4)"/>
+    <rect x="38" y="32" width="38" height="15" rx="1.5" fill="url(#screen)" stroke="#5a2a04" stroke-width="1"/>
+    <!-- padlock glyph on the screen -->
+    <path d="M53 39 V36.5 A4 4 0 0 1 61 36.5 V39" fill="none" stroke="#4a1a02" stroke-width="1.8"/>
+    <rect x="51" y="38.5" width="12" height="7" rx="1" fill="#4a1a02"/>
+    <rect x="56.2" y="40.5" width="1.6" height="3" fill="#ffcf7a"/>
+    <path d="M39 33.5 L75 33.5" stroke="#fff6dc" stroke-width="0.8" opacity="0.8"/>
+    <!-- keypad -->
+    <g fill="#ffb84a">
+      <rect x="40" y="50" width="6" height="4" rx="0.8"/><rect x="49" y="50" width="6" height="4" rx="0.8"/><rect x="58" y="50" width="6" height="4" rx="0.8" fill="#8a4a08"/>
+      <rect x="40" y="57" width="6" height="4" rx="0.8" fill="#8a4a08"/><rect x="49" y="57" width="6" height="4" rx="0.8"/><rect x="58" y="57" width="6" height="4" rx="0.8"/>
+    </g>
+    <!-- red security status light -->
+    <circle cx="71" cy="55" r="3.4" fill="#f05454"/>
+    <circle cx="70" cy="54" r="1.2" fill="#ffd0d0"/>
+    <circle cx="71" cy="55" r="7" fill="#f05454" opacity="0.5" filter="url(#blur2)"/>
+    <!-- corner clamps on the front -->
+    <use xlink:href="#clampL"/>
+    <use xlink:href="#clampL" transform="translate(114 0) scale(-1 1)"/>
+    <use xlink:href="#clampL" transform="translate(0 72) scale(1 -1)"/>
+    <use xlink:href="#clampL" transform="translate(114 72) scale(-1 -1)"/>
+  </g>
+  <!-- magnet glow at the front clamps -->
+  <g fill="#ff5a3a" opacity="0.45" filter="url(#blur2)">
+    <circle cx="50" cy="119" r="5"/><circle cx="156" cy="146" r="5"/>
+    <circle cx="50" cy="181" r="5"/><circle cx="156" cy="208" r="5"/>
+  </g>
+
+  <!-- ===== top face (lid) ===== -->
+  <path d="M46 114 L160 142 L214 108 L100 80 Z" fill="url(#top)" stroke="#0b0d10" stroke-width="1.6" stroke-linejoin="round"/>
+  <g transform="matrix(1 0.2456 1 -0.6296 46 114)">
+    <!-- raised armor plate -->
+    <path d="M14 10 L100 10 L100 44 L14 44 Z" fill="none" stroke="#2a3138" stroke-width="1.3" opacity="0.85"/>
+    <path d="M14 11.5 L100 11.5" stroke="#d4dce4" stroke-width="0.9" opacity="0.6"/>
+    <!-- scorch on the lid -->
+    <g transform="translate(28 34) rotate(10) scale(24 18)"><use xlink:href="#burn"/><use xlink:href="#burncore"/></g>
+    <g fill="#0b0705" opacity="0.7"><circle cx="54" cy="40" r="1.2"/><circle cx="50" cy="46" r="0.9"/><circle cx="8" cy="20" r="1"/></g>
+    <g transform="translate(90 18) rotate(-30) scale(12 10)" opacity="0.6"><use xlink:href="#burn"/><use xlink:href="#burncore"/></g>
+    <!-- recessed carry grip -->
+    <rect x="44" y="22" width="34" height="11" rx="3" fill="#14181c" stroke="#0b0d10" stroke-width="1.2"/>
+    <rect x="47" y="25" width="28" height="5" rx="2" fill="url(#clamp)"/>
+    <path d="M48 29 L74 29" stroke="#e3e9ef" stroke-width="0.9" opacity="0.7"/>
+    <!-- lid clamps -->
+    <use xlink:href="#clampL"/>
+    <use xlink:href="#clampL" transform="translate(114 0) scale(-1 1)"/>
+    <use xlink:href="#clampL" transform="translate(114 54) scale(-1 -1)"/>
+    <use xlink:href="#clampL" transform="translate(0 54) scale(1 -1)"/>
+  </g>
+  <!-- rim light along the top edges -->
+  <path d="M46 114 L160 142 L214 108" fill="none" stroke="#eef3f7" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" opacity="0.85"/>
+  <path d="M46 114 L100 80 L214 108" fill="none" stroke="#c9d2db" stroke-width="1.1" opacity="0.6"/>
+  <path d="M160 142 L160 214" stroke="#9aa5b0" stroke-width="1" opacity="0.6"/>
+
+  <!-- smouldering embers near the burns -->
+  <g fill="#ffb060">
+    <circle cx="84" cy="104" r="1.5" opacity="0.9"/><circle cx="92" cy="96" r="1.1" opacity="0.75"/>
+    <circle cx="190" cy="166" r="1.3" opacity="0.8"/>
+  </g>
+  <g fill="#ff7a3a" opacity="0.5" filter="url(#blur1)">
+    <circle cx="84" cy="104" r="3"/><circle cx="190" cy="166" r="3"/>
+  </g>
+  </g>
+</svg>
