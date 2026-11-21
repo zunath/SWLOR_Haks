@@ -123,9 +123,9 @@ vec4 ResolveTintColor(float g, float layer, vec3 authoredDiffuse)
         // in GenerateTintMapAssets.py). The nearest candidate wins, the earlier one
         // on a tie, like the editor's closest-swatch lookup. A color equal to a
         // swatch renders exactly like that palette color, reflection included;
-        // other colors offset the swatch row by their difference, scaled by the
-        // row's shading, so darker and more saturated colors keep the palette's
-        // contrast instead of a single light reference curve.
+        // other colors take the row's contrast and its shade-by-shade change of
+        // hue and saturation, applied to their own chroma, instead of a single
+        // light reference curve.
         float paletteBase = 0.0;
         float lookupBase = 1536.0;
         if      (layer > 7.5) { paletteBase = 1056.0; lookupBase = 1920.0; }
@@ -162,21 +162,52 @@ vec4 ResolveTintColor(float g, float layer, vec3 authoredDiffuse)
         vec4 swatchShade = texture2D(texUnit10,
             vec2(paletteU, (paletteBase + swatchIndex + 0.5) / 2048.0), -10.0);
         vec3 luminance = vec3(0.2126, 0.7152, 0.0722);
-        // An all-black swatch row (such as hair row 57) has no shading to lend:
-        // shade the offset with the layer's first palette row instead, so a
-        // near-black custom color keeps its hue. Exact black still stays black.
-        vec3 rampShade = swatchShade.rgb;
-        vec3 rampMidpoint = swatchMidpoint;
-        if (dot(swatchMidpoint, luminance) < 0.5 / 255.0)
+        // A swatch darker than two levels lends no usable shading: the black rows
+        // have none, and skin row 31 rises from a 1-level midtone to white, a
+        // ratio that would turn a near-black dye white. The duplicate black rows
+        // also differ only in reflection (cloth row 57 is half-reflective), which
+        // a custom color cannot choose. Shade the color with the layer's first
+        // palette row and take that row's coverage, so black and near-black dyes
+        // stay a matte black instead of a grey reflection.
+        if (dot(swatchMidpoint, luminance) < 2.0 / 255.0)
         {
-            rampShade = texture2D(texUnit10,
-                vec2(paletteU, (paletteBase + 0.5) / 2048.0), -10.0).rgb;
-            rampMidpoint = texture2D(texUnit10,
+            swatchShade = texture2D(texUnit10,
+                vec2(paletteU, (paletteBase + 0.5) / 2048.0), -10.0);
+            swatchMidpoint = texture2D(texUnit10,
                 vec2(128.5 / 256.0, (paletteBase + 0.5) / 2048.0), -10.0).rgb;
         }
-        float shadeScale = max(dot(rampShade, luminance) /
-            max(dot(rampMidpoint, luminance), 1.0 / 255.0), 0.0);
-        vec3 shadedRgb = swatchShade.rgb + (decodedRgb - swatchMidpoint) * shadeScale;
+        float shadeScale = max(dot(swatchShade.rgb, luminance) /
+            max(dot(swatchMidpoint, luminance), 1.0 / 255.0), 0.0);
+        // The swatch's contrast scales the color's own luminance. Its change of hue
+        // and saturation across the shades is applied relative to the color's own
+        // chroma (the color minus its luminance grey, as a complex number in the
+        // plane orthogonal to the luminance weights): the row's chroma at this
+        // shade over its midtone chroma, times the color's chroma. A neutral color
+        // therefore stays neutral on a colored swatch's row. A nearly neutral
+        // swatch has no reliable hue, so its ratio fades to plain scaling below
+        // about 8 levels of chroma, and the rest of its row is added back only for
+        // colors within 16 levels of it. A color equal to a swatch still renders
+        // exactly like that palette row.
+        vec3 chromaU = vec3(0.675495915, -0.127481049, -0.726260181);
+        vec3 chromaV = vec3(-0.680638933, 0.271037427, -0.680638933);
+        vec3 colorGrey = decodedRgb - vec3(dot(decodedRgb, luminance));
+        vec3 midpointGrey = swatchMidpoint - vec3(dot(swatchMidpoint, luminance));
+        vec3 shadeGrey = swatchShade.rgb - vec3(dot(swatchShade.rgb, luminance));
+        vec2 colorChroma = vec2(dot(colorGrey, chromaU), dot(colorGrey, chromaV));
+        vec2 midpointChroma = vec2(dot(midpointGrey, chromaU), dot(midpointGrey, chromaV));
+        vec2 shadeChroma = vec2(dot(shadeGrey, chromaU), dot(shadeGrey, chromaV));
+        float midpointChromaSquared = dot(midpointChroma, midpointChroma);
+        float chromaWeight = 1.0 / (midpointChromaSquared + 0.000984237);
+        float confidence = midpointChromaSquared * chromaWeight;
+        vec2 relativeChroma = vec2(dot(colorChroma, midpointChroma),
+            colorChroma.y * midpointChroma.x - colorChroma.x * midpointChroma.y) * chromaWeight;
+        vec2 shadedChroma = colorChroma * (shadeScale * (1.0 - confidence)) +
+            vec2(shadeChroma.x * relativeChroma.x - shadeChroma.y * relativeChroma.y,
+                shadeChroma.x * relativeChroma.y + shadeChroma.y * relativeChroma.x);
+        float nearSwatch = clamp(1.0 - distance(decodedRgb, swatchMidpoint) * 255.0 / 16.0, 0.0, 1.0);
+        shadedChroma += (shadeChroma - midpointChroma * shadeScale) * ((1.0 - confidence) * nearSwatch);
+        vec3 shadedRgb = vec3(dot(decodedRgb, luminance) * shadeScale) +
+            chromaU * shadedChroma.x + chromaV * shadedChroma.y;
         float environmentAlpha = swatchShade.a;
         // Only explicit RGB replaces the hue; the diffuse still supplies all detail.
         // Metal keeps the layer's first palette row's reflection coverage.
