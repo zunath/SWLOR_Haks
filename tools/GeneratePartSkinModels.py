@@ -4,7 +4,8 @@
 External skins index the wearer's bones by depth-first traversal. Robe body
 roots add garment joints and rp_ spacers, so a part compiled against the base
 body binds to the wrong joints there. Compiled aliases keep each source part's
-vertices, weights, inverse binds and materials and relocate only the external
+vertices, weights, inverse binds and materials (except the documented chest154
+alias selfillumcolor override) and relocate the external
 bone tables. The server projects them in appearance packets; saved style IDs
 stay authored.
 
@@ -114,6 +115,29 @@ def read_table(root, relative):
     return [line.split()[1:] for line in (root / relative).read_text().splitlines()[3:] if line.strip()]
 
 
+def alias_selfillum(data, source):
+    """Keep chest154's authored light separate from its generated armor aliases."""
+    if source != 'pmh0_chest154':
+        return data
+    model = Model(data, False)
+    result = bytearray(data)
+    for _, _, _, _, node in model.nodes:
+        if not model.uint(node + 108) & 32:
+            continue
+        keys, count = 12 + model.uint(node + 84), model.uint(node + 88)
+        values = 12 + model.uint(node + 96)
+        for index in range(count):
+            key = keys + index * 12
+            if model.uint(key) != 100:  # Mesh selfillumcolor controller.
+                continue
+            rows, _, offset, columns = struct.unpack_from('<HHHB', data, key + 4)
+            if rows == 65535 or columns != 3:
+                raise ValueError(f'{source}: unsupported selfillumcolor controller')
+            for row in range(rows):
+                struct.pack_into('<3f', result, values + (offset + row * columns) * 4, 0, 0, 0)
+    return bytes(result)
+
+
 def plan(root=ROOT):
     root = Path(root)
     active = active_models(root)
@@ -204,6 +228,7 @@ def plan(root=ROOT):
         data, external = skins[source]
         # Cover the full traversal of every root sharing the alias, including unused bones.
         output = remap(data, name, mapping, external, max(node_counts[robe] for robe in roots))
+        output = alias_selfillum(output, source)
         relative = f'{DIRECTORIES[match[3]]}/{name}.mdl'
         # ModelPath maps a .lod redirect to its .mdl path, so check the files themselves.
         selected = active.get(name)
