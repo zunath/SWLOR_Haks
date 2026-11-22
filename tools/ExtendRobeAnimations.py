@@ -318,6 +318,11 @@ def clip_owners(name, load, wanted):
     return result
 
 
+def revise_layer(before, selected):
+    """Revise one layer's selected clips; a layer that owns none of them (a variant limited to other layers) stays as it is."""
+    return revise_rotations(before, selected) if selected else (before, 0)
+
+
 def apply_rotation_revision(args):
     manifest = json.loads(robes.MANIFEST.read_text())
     original = robes.MANIFEST.read_bytes()
@@ -355,7 +360,7 @@ def apply_rotation_revision(args):
             for clip, owner in owners.items():
                 if owner not in changes: raise ValueError(f"Unexpected revised body source: {owner}")
                 if clip in changes[owner] and clip in layer_clips(record, name): selected[clip] = changes[owner][clip]
-            after, count = revise_rotations(before, selected)
+            after, count = revise_layer(before, selected)
             moved = sum(isinstance(key, tuple) for nodes in selected.values() for key in nodes)
             revised_channels += count - moved
             root_translations += moved
@@ -364,6 +369,7 @@ def apply_rotation_revision(args):
                 raise ValueError("Rotation revision changed the bank layout")
             for part, data in parts.items(): outputs[f"{robes.model_directory(part)}/{part}.mdl"] = data
             bank_records[name] = {"parts": list(parts), "source_sha256": digest(after)}
+        if not revised_channels and not root_translations: raise ValueError("No layer channels revised")
         def load(name):
             path = f"{robes.model_directory(name)}/{name}.mdl"
             if path in outputs: return outputs[path]
