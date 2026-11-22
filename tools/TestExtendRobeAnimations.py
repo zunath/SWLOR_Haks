@@ -228,6 +228,23 @@ class ExtensionTests(unittest.TestCase):
         with self.assertRaises(ValueError):  # only the bridge the layer extends may give it a clip
             extend.add_variant_clips(layer, {'clip3v': 'clip3'}, changes, stranger)
 
+    def test_a_variant_limited_to_some_layers_is_owned_only_by_them(self):
+        layers = ['pmh_ra096', 'pfh_ra113', 'pme_ra081']
+        pairs, variants, limits = extend.parse_variants(['hrn=jsf@pfh', 'hrn=jse@pme,pmh', 'hrn=jsn'], layers)
+        self.assertEqual({'jsf': 'hrn', 'jse': 'hrn', 'jsn': 'hrn'}, pairs)
+        self.assertEqual('hrn_out', variants['jsf_out'])
+        self.assertEqual({'jsf': ['pfh'], 'jsf_in': ['pfh'], 'jsf_out': ['pfh'],
+                          'jse': ['pme', 'pmh'], 'jse_in': ['pme', 'pmh'], 'jse_out': ['pme', 'pmh']}, limits)
+        record = {'clips': sorted(['old', *variants]), 'variant_layers': limits}
+        self.assertEqual({'old', 'jsn', 'jsn_in', 'jsn_out', 'jsf', 'jsf_in', 'jsf_out'}, extend.layer_clips(record, 'pfh_ra113'))
+        self.assertEqual({'old', 'jsn', 'jsn_in', 'jsn_out', 'jse', 'jse_in', 'jse_out'}, extend.layer_clips(record, 'pmh_ra096'))
+        self.assertEqual(set(record['clips']) - {'jsf', 'jsf_in', 'jsf_out', 'jse', 'jse_in', 'jse_out'},
+                         extend.layer_clips({'clips': record['clips'], 'variant_layers': limits}, 'pfd_ra129'))
+        self.assertEqual(set(record['clips']), extend.layer_clips({'clips': record['clips']}, 'pfh_ra113'))
+        for items in (['hrn=jsf@pfd'], ['hrn=jsf', 'hrn=jsf@pfh']):
+            with self.subTest(items=items), self.assertRaises(ValueError):  # an unknown layer, a name given twice
+                extend.parse_variants(items, layers)
+
     def test_a_variant_is_recognized_when_a_full_bank_spilled_it_into_another_bank(self):
         layer = self.source.pack('pmh_ra003', 'pmh_ra001', self.source.clips[2:])
         prior, track = self.variant_track(layer)
