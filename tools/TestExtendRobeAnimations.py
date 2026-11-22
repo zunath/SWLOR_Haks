@@ -244,6 +244,9 @@ class ExtensionTests(unittest.TestCase):
         for items in (['hrn=jsf@pfd'], ['hrn=jsf', 'hrn=jsf@pfh']):
             with self.subTest(items=items), self.assertRaises(ValueError):  # an unknown layer, a name given twice
                 extend.parse_variants(items, layers)
+        # A rotation revision leaves a layer that owns none of the revised clips as it is.
+        layer = self.source.pack('pmh_ra003', 'pmh_ra001', self.source.clips[2:])
+        self.assertEqual((layer, 0), extend.revise_layer(layer, {}))
 
     def test_a_variant_is_recognized_when_a_full_bank_spilled_it_into_another_bank(self):
         layer = self.source.pack('pmh_ra003', 'pmh_ra001', self.source.clips[2:])
