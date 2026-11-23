@@ -200,7 +200,7 @@ def check_head_coatings(test, game_data):
 
 
 def check_head_glow_fog(test, engine):
-    """Compare all head emission paths with the installed fog/color finalizer."""
+    """Keep masked eye/lens emission visible through fog; fog ordinary surfaces."""
     root = head.ROOT / 'sw_shader'
     include = (root / 'inc_hd_tint.shd').read_text()
     prefix = include[:include.index('void main()')]
@@ -218,9 +218,17 @@ void main() {
 '''
     reference_main = '''
 uniform vec4 referenceColor;
+uniform float referenceMode;
 void main() {
     FragmentColor = referenceColor;
     ApplyFog(FragmentColor);
+    if (referenceMode < 2.5 && referenceMode > 0.5)
+        FragmentColor.rgb = mix(FragmentColor.rgb, ApplyColorSpace(vec3(0.8, 0.35, 0.1)),
+                               referenceMode < 1.5 ? 0.4 : 0.8);
+    if (referenceMode > 2.5 && referenceMode < 3.5) {
+        vec3 emission = vec3(0.8, 0.35, 0.1)*1.75 + vec3(1.0, 0.4375, 0.125)*0.16;
+        FragmentColor.rgb = emission/(vec3(1.0) + emission*0.32);
+    }
     #if GAMMA_CORRECTION == 1
         #if COLOR_CORRECTION_TYPE == 1
             FragmentColor = ColorClamp(FragmentColor);
@@ -231,10 +239,10 @@ void main() {
     gl_FragColor = FragmentColor;
 }
 '''
-    # Moving fog ahead of the emission recreates the reported through-fog eyes.
+    # Attenuating the masked emission recreates the owner-rejected dim eyes.
     negative = prefix.replace('ApplyFog(FragmentColor);', '').replace(
-        'FragmentColor.rgb = RevertColorSpace(FragmentColor.rgb);',
-        'FragmentColor.rgb = RevertColorSpace(FragmentColor.rgb); ApplyFog(FragmentColor);')
+        '\t#if GAMMA_CORRECTION == 1',
+        'ApplyFog(FragmentColor);\n\t#if GAMMA_CORRECTION == 1')
     modes = ('none', 'detail-r', 'detail-g', 'layer', 'whole')
     fog_color = (0.12, 0.19, 0.27)
     checks = 0
@@ -270,7 +278,7 @@ void main() {
             broken = program(negative + actual_main, gamma, 0)
             try:
                 for mode in modes:
-                    configure(base, mode, 0)
+                    configure(base, 'whole' if mode == 'whole' else 'none', 0)
                     unfogged = test.sample(base, 1, 1)
                     for correction in (0, 1, 2):
                         actual = program(prefix + actual_main, gamma, correction)
@@ -281,6 +289,7 @@ void main() {
                                 observed = test.sample(actual, 1, 1)
                                 configure(reference, 'none', fog)
                                 test.vector(test.location(reference, b'referenceColor'), *unfogged, 1)
+                                test.scalar(test.location(reference, b'referenceMode'), modes.index(mode))
                                 expected = test.sample(reference, 1, 1)
                                 tint.near(observed, expected,
                                           f'{name}: {mode} gamma={gamma} correction={correction} fog={fog}')
@@ -288,15 +297,15 @@ void main() {
                         finally:
                             test.delete_program(actual)
                             test.delete_program(reference)
-                    if mode != 'none':
+                    if mode in ('detail-r', 'detail-g', 'layer'):
                         configure(broken, mode, 1)
-                        if max(abs(a-b) for a, b in zip(test.sample(broken, 1, 1), fog_color)) < 0.006:
-                            raise AssertionError('Unfogged-emission negative control did not fail')
+                        if max(abs(a-b) for a, b in zip(test.sample(broken, 1, 1), fog_color)) > 0.006:
+                            raise AssertionError('Fog-attenuated eye-emission negative control did not fail')
             finally:
                 test.delete_program(base)
                 test.delete_program(broken)
     print(f'Head emission finalization: {checks} native GPU comparisons passed across all profiles, '
-          'glow paths, fog amounts and color-correction modes; through-fog negative controls failed.')
+          'glow paths, fog amounts and color-correction modes; dim-eye negative controls failed.')
 
 
 def main():
