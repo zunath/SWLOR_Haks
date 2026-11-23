@@ -172,7 +172,17 @@ vec4 SampleCloakTint(vec2 uv)
     # Exact RGB takes its swatch row's shading but not its coverage on cloaks:
     # cutout cloaks keep the layer's first palette row as coverage on every layer,
     # and reflective cloaks use it only for metal, keeping nonmetal RGB opaque.
-    source = replace_once(source, "        float environmentAlpha = swatchShade.a;\n",
+    source = replace_once(source,
+                          "        // Reflection coverage fades from the swatch row's (within half a level of\n"
+                          "        // the swatch) to the layer's first palette row's (8 levels away). A color\n"
+                          "        // equal to a swatch keeps that palette color's reflection, and neighbouring\n"
+                          "        // colors whose nearest swatch changes no longer flip between the metal\n"
+                          "        // palette's shiny (0.5) and painted (0.8) rows, which turned dark metal\n"
+                          "        // grey or silver.\n"
+                          "        float firstAlpha = texture2D(texUnit10,\n"
+                          "            vec2(paletteU, (paletteBase + 0.5) / 2048.0), -10.0).a;\n"
+                          "        float environmentAlpha = firstAlpha + (swatchShade.a - firstAlpha) *\n"
+                          "            clamp((8.0 - distance(decodedRgb, swatchMidpoint) * 255.0) / 7.5, 0.0, 1.0);\n",
                           "        // Cutout cloaks keep the layer's first palette row as their coverage, and\n"
                           "        // reflective cloaks use it only for metal, so a custom color can neither\n"
                           "        // cut a cloak away nor make cloth reflective.\n"
