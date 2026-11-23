@@ -1,8 +1,10 @@
 # Placeable collision for swc_blg_corhis02.
 # Preserve the original footprint and recesses.
 # The main body runs from a buried foundation to the 19.66m roof.
-# The two front corner pads are low pedestals: they stop at the visible top, local Z 0.88,
-# so a building sunk below the street does not leave invisible walls over its buried pads.
+# The two front corner pads are low pedestals whose visible top is local Z 0.88.
+# Their collision stops 0.2 m lower, at local Z 0.68: the engine still blocks
+# collision ending less than about 0.1 m under the walking plane, so a pad
+# buried flush with the street would otherwise leave an invisible wall.
 # Full height also blocks the elevated streets in Veles.
 #NWmax PWKMESH ASCII
 node trimesh pwk
@@ -120,19 +122,19 @@ node trimesh pwk
     8.69472 9.53086 -0.5
     8.69472 9.53086 19.66
     -8.322 -11.5219 -0.5
-    -5.06583 -8.63711 0.88
-    -8.322 -11.5219 0.88
-    -5.06583 -11.5219 0.88
+    -5.06583 -8.63711 0.68
+    -8.322 -11.5219 0.68
+    -5.06583 -11.5219 0.68
     -8.322 -8.63711 -0.5
-    -5.97745 -8.63711 0.88
-    -8.322 -8.63711 0.88
+    -5.97745 -8.63711 0.68
+    -8.322 -8.63711 0.68
     -8.322 8.63711 -0.5
     -8.322 11.5219 -0.5
-    -5.97745 8.63711 0.88
-    -8.322 11.5219 0.88
-    -8.322 8.63711 0.88
-    -5.06583 8.63711 0.88
-    -5.06583 11.5219 0.88
+    -5.97745 8.63711 0.68
+    -8.322 11.5219 0.68
+    -8.322 8.63711 0.68
+    -5.06583 8.63711 0.68
+    -5.06583 11.5219 0.68
   faces 240
     0 1 2  4  0 0 0  7
     3 4 5  4  0 0 0  7
