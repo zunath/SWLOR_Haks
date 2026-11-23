@@ -10,6 +10,15 @@ import HeadTintAssets as head
 import TestTintShaderMaterials as tint
 
 
+ADAPTER = tint.ADAPTER + """
+vec3 RevertColorSpace(vec3 value) { return value; }
+void ComputeLighting(inout vec4 value, vec3 normal) {}
+void ApplyKeyhole(inout vec4 value) {}
+void ApplyFog(inout vec4 value) {}
+void ApplyDebugModeOutput(inout vec4 value) {}
+"""
+
+
 def check_reflectance_state(test, game_data):
     """Expose installed material state; retain production head tint/blend code.
 
@@ -21,7 +30,7 @@ def check_reflectance_state(test, game_data):
     include = (root / 'inc_hd_tint.shd').read_text()
     checks = 0
     for gamma in (False, True):
-        adapter = tint.ADAPTER
+        adapter = ADAPTER
         if gamma:
             adapter = adapter.replace('vec3 ApplyColorSpace(vec3 value) { return value; }',
                                       'vec3 ApplyColorSpace(vec3 value) { return value*value; }')
@@ -79,7 +88,7 @@ def check_metal_finish(test,game_data,shader_root):
     assert line in include
     checks=0
     for gamma in (False,True):
-        adapter=tint.ADAPTER
+        adapter=ADAPTER
         if gamma:adapter=adapter.replace('vec3 ApplyColorSpace(vec3 value) { return value; }','vec3 ApplyColorSpace(vec3 value) { return value*value; }')
         def program(text):
             return test.program('#version 120\n'+wrapper.replace('#include "inc_standard"',adapter+material+tint.STANDARD).replace('#include "inc_hd_tint"',text))
@@ -115,7 +124,7 @@ def check_skin_detail_gain(test, game_data):
     wrapper = (root / 'fs_head_mapped.shd').read_text()
     include = (root / 'inc_hd_tint.shd').read_text()
     program = test.program('#version 120\n' + wrapper.replace('#include "inc_standard"',
-        tint.ADAPTER + material + standard).replace('#include "inc_hd_tint"', include))
+        ADAPTER + material + standard).replace('#include "inc_hd_tint"', include))
     checks = 0
     try:
         test.use(program)
@@ -156,7 +165,7 @@ def check_head_coatings(test, game_data):
     standard = tint.STANDARD[:tint.STANDARD.index('void ApplyStandardShader()')] + 'void ApplyStandardShader() {}\n'
     checks = 0
     for gamma in (False, True):
-        adapter = tint.ADAPTER
+        adapter = ADAPTER
         if gamma:
             adapter = adapter.replace('vec3 ApplyColorSpace(vec3 value) { return value; }',
                                       'vec3 ApplyColorSpace(vec3 value) { return value*value; }')
@@ -190,6 +199,106 @@ def check_head_coatings(test, game_data):
     print(f'Head coatings: {checks} GPU comparisons passed; authored slot 8 retained and refresh phases keep the same coat.')
 
 
+def check_head_glow_fog(test, engine):
+    """Compare all head emission paths with the installed fog/color finalizer."""
+    root = head.ROOT / 'sw_shader'
+    include = (root / 'inc_hd_tint.shd').read_text()
+    prefix = include[:include.index('void main()')]
+    vertex = '''#version 120
+varying float fFogFragCoord;
+uniform float probeFog;
+void main() { gl_Position = gl_Vertex; fFogFragCoord = probeFog; }
+'''
+    actual_main = '''
+void main() {
+    FragmentColor = vec4(0.2, 0.3, 0.4, 1.0);
+    ApplyHeadShader(vec3(0.8, 0.35, 0.1), vec2(0.4, 0.8), 8.0);
+    gl_FragColor = FragmentColor;
+}
+'''
+    reference_main = '''
+uniform vec4 referenceColor;
+void main() {
+    FragmentColor = referenceColor;
+    ApplyFog(FragmentColor);
+    #if GAMMA_CORRECTION == 1
+        #if COLOR_CORRECTION_TYPE == 1
+            FragmentColor = ColorClamp(FragmentColor);
+        #elif COLOR_CORRECTION_TYPE == 2
+            FragmentColor.rgb = ACESFilm(FragmentColor.rgb);
+        #endif
+    #endif
+    gl_FragColor = FragmentColor;
+}
+'''
+    # Moving fog ahead of the emission recreates the reported through-fog eyes.
+    negative = prefix.replace('ApplyFog(FragmentColor);', '').replace(
+        'FragmentColor.rgb = RevertColorSpace(FragmentColor.rgb);',
+        'FragmentColor.rgb = RevertColorSpace(FragmentColor.rgb); ApplyFog(FragmentColor);')
+    modes = ('none', 'detail-r', 'detail-g', 'layer', 'whole')
+    fog_color = (0.12, 0.19, 0.27)
+    checks = 0
+    for name in head.PROFILES:
+        wrapper = (root / (name + '.shd')).read_text().replace(
+            '#define LIGHTING 1', '#define LIGHTING 0').replace('#define KEYHOLING 1', '#define KEYHOLING 0')
+
+        def program(text, gamma, correction):
+            source = engine.source(name, True, (1, 0, gamma, 0, 0), override=wrapper.replace(
+                '#include "inc_hd_tint"', text))
+            source, count = re.subn(r'(#define COLOR_CORRECTION_TYPE\s+)\S+',
+                                    lambda match: match[1] + str(correction), source, count=1)
+            if count != 1:
+                raise AssertionError('Installed color-correction control was not found')
+            return test.program(source, vertex)
+
+        def configure(item, mode, fog):
+            test.use(item)
+            for flag, value in (('probeFog', fog), ('detailGlowChannel', 0),
+                                ('glowMinLayer', -1), ('glowMaxLayer', -1), ('glowWholeSurface', 0)):
+                test.scalar(test.location(item, flag.encode()), value)
+            test.vector(test.location(item, b'fogColor'), *fog_color, 1)
+            if mode.startswith('detail'):
+                test.scalar(test.location(item, b'detailGlowChannel'), 1 if mode.endswith('r') else 2)
+            elif mode == 'layer':
+                test.scalar(test.location(item, b'glowMinLayer'), 8)
+                test.scalar(test.location(item, b'glowMaxLayer'), 8)
+            elif mode == 'whole':
+                test.scalar(test.location(item, b'glowWholeSurface'), 1)
+
+        for gamma in (0, 1):
+            base = program(prefix + actual_main, gamma, 0)
+            broken = program(negative + actual_main, gamma, 0)
+            try:
+                for mode in modes:
+                    configure(base, mode, 0)
+                    unfogged = test.sample(base, 1, 1)
+                    for correction in (0, 1, 2):
+                        actual = program(prefix + actual_main, gamma, correction)
+                        reference = program(prefix + reference_main, gamma, correction)
+                        try:
+                            for fog in (0, 0.5, 1):
+                                configure(actual, mode, fog)
+                                observed = test.sample(actual, 1, 1)
+                                configure(reference, 'none', fog)
+                                test.vector(test.location(reference, b'referenceColor'), *unfogged, 1)
+                                expected = test.sample(reference, 1, 1)
+                                tint.near(observed, expected,
+                                          f'{name}: {mode} gamma={gamma} correction={correction} fog={fog}')
+                                checks += 1
+                        finally:
+                            test.delete_program(actual)
+                            test.delete_program(reference)
+                    if mode != 'none':
+                        configure(broken, mode, 1)
+                        if max(abs(a-b) for a, b in zip(test.sample(broken, 1, 1), fog_color)) < 0.006:
+                            raise AssertionError('Unfogged-emission negative control did not fail')
+            finally:
+                test.delete_program(base)
+                test.delete_program(broken)
+    print(f'Head emission finalization: {checks} native GPU comparisons passed across all profiles, '
+          'glow paths, fog amounts and color-correction modes; through-fog negative controls failed.')
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--game-data', type=Path, required=True)
@@ -214,6 +323,7 @@ def main():
         check_metal_finish(test, args.game_data, head.ROOT / 'sw_shader')
         check_skin_detail_gain(test, args.game_data)
         check_head_coatings(test, args.game_data)
+        check_head_glow_fog(test, engine)
         tint.compile_engine_pairs(test, engine, sorted(pairs), pairs)
         # Expected RGBA comes from installed original palettes and native scheme
         # integers. This remains runnable after a squash or shallow clone.

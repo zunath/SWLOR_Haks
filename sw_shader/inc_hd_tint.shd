@@ -283,6 +283,73 @@ vec3 HeadGlow(vec3 color)
     return emission/(vec3(1.0)+emission*glowCompression);
 }
 
+// Native inc_standard finalizer with head emission inserted before fog and color correction.
+void ApplyHeadShader(vec3 vTint, vec2 detail, float glowLayer)
+{
+	#if LIGHTING == 1
+
+		#if FRAGMENT_LIGHTING == 1 || FRAGMENT_NORMAL == 1
+
+			ComputeLighting(FragmentColor, vFragmentNormal);
+		#else
+
+			#if SELF_ILLUMINATION_MAP == 1
+				#if MATERIAL_READ_SELF_ILLUMINATION_FROM_SPECULAR_MAP == 1
+					if(texture2Bound != 0)
+					{
+						FragmentColor.rgb *= FragmentColor.rgb * (VertexColor.rgb + texture2D(texUnit2, vTexCoords).b);
+						FragmentColor.a *= VertexColor.a;
+					}
+				#else
+					if(texture5Bound != 0)
+					{
+						FragmentColor.rgb *= FragmentColor.rgb * (VertexColor.rgb + texture2D(texUnit5, vTexCoords).r);
+						FragmentColor.a *= VertexColor.a;
+					}
+				#endif
+				else
+			#endif
+			{
+				FragmentColor *= VertexColor;
+			}
+
+		#endif
+
+	#endif
+
+	#if KEYHOLING == 1
+		ApplyKeyhole(FragmentColor);
+	#endif
+
+	FragmentColor.rgb = RevertColorSpace(FragmentColor.rgb);
+
+    // Preserve the authored texture-space glow curve, then fog and finalize it once.
+    if (detailGlowChannel>0.5)
+        FragmentColor.rgb = mix(FragmentColor.rgb,ApplyColorSpace(vTint)*detailGlowGain,
+                               detailGlowChannel>1.5 ? detail.g : detail.r);
+    if (glowMinLayer>=0.0 && glowLayer>=glowMinLayer && glowLayer<=glowMaxLayer)
+        FragmentColor.rgb = HeadGlow(vTint);
+    if (glowWholeSurface>0.5)
+        FragmentColor.rgb = HeadGlow(FragmentColor.rgb);
+
+
+	#if FOG == 1
+		ApplyFog(FragmentColor);
+	#endif
+
+	#if GAMMA_CORRECTION == 1
+		#if COLOR_CORRECTION_TYPE == 1
+		FragmentColor = ColorClamp(FragmentColor);
+		#elif COLOR_CORRECTION_TYPE == 2
+		FragmentColor.rgb = ACESFilm(FragmentColor.rgb);
+		#endif
+	#endif
+
+	// DEBUG
+	ApplyDebugModeOutput(FragmentColor);
+
+}
+
 void main()
 {
     vec2 size = max(vec2(tintMapWidth,tintMapHeight),vec2(1.0));
@@ -415,16 +482,13 @@ void main()
         else if (coverage<alphaCutoff) discard;
     }
     if (forceOpaque>0.5) outputAlpha = 1.0;
-    ApplyStandardShader();
-    if (!progFxCoated && detailGlowChannel>0.5)
-        FragmentColor.rgb = mix(FragmentColor.rgb,ApplyColorSpace(vTint)*detailGlowGain,
-                               detailGlowChannel>1.5 ? detail.g : detail.r);
     float glowLayer = layer;
     if (glowLayerFromMask>0.5)
         glowLayer = floor(clamp(texture2D(texUnit9,nearestUV,-10.0).g,0.0,0.9999)*10.0);
-    if (!progFxCoated && glowMinLayer>=0.0 && glowLayer>=glowMinLayer && glowLayer<=glowMaxLayer)
-        FragmentColor.rgb = HeadGlow(vTint);
-    if (!progFxCoated && glowWholeSurface>0.5)
-        FragmentColor.rgb = HeadGlow(FragmentColor.rgb);
+    bool layerGlow = glowMinLayer>=0.0 && glowLayer>=glowMinLayer && glowLayer<=glowMaxLayer;
+    if (!progFxCoated && (detailGlowChannel>0.5 || layerGlow || glowWholeSurface>0.5))
+        ApplyHeadShader(vTint,detail,glowLayer);
+    else
+        ApplyStandardShader();
     gl_FragColor = vec4(FragmentColor.rgb,outputAlpha);
 }
