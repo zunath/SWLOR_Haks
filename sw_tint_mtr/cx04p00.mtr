@@ -5,7 +5,6 @@ texture0 cx04p00d
 texture1 cuh_flat_n
 texture2 cx00p00s
 texture3 null
-texture4 null
 texture5 null
 texture6 cx04p00a
 texture7 cx04p00t
@@ -25,6 +24,7 @@ parameter float rowTat1 0.515869
 parameter float rowTat2 0.515869
 transparency 1
 twosided 1
+texture4 progfx_coat
 parameter float alphaCutoff 0.3
 parameter float clampEyeLayer -1
 parameter float clampEyeLayer2 -1
@@ -56,6 +56,7 @@ parameter float maskMode 3
 parameter float maskSoftWidth 0.08
 parameter float maskWrapUV 0
 parameter float metalReflectanceScale 1
+parameter float progFxCoat 0
 parameter float scalpEndV 0.52
 parameter float scalpMaxU 0.49
 parameter float scalpShadeBase 0.070588235294

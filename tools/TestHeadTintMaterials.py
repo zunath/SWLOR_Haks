@@ -148,6 +148,48 @@ def check_skin_detail_gain(test, game_data):
     print(f'Skin brightness: {checks} GPU comparisons passed; dyed and fixed detail gain together, non-skin unchanged.')
 
 
+
+def check_head_coatings(test, game_data):
+    root = head.ROOT / 'sw_shader'
+    material = tint.stock_material(game_data)
+    include = (root / 'inc_hd_tint.shd').read_text()
+    standard = tint.STANDARD[:tint.STANDARD.index('void ApplyStandardShader()')] + 'void ApplyStandardShader() {}\n'
+    checks = 0
+    for gamma in (False, True):
+        adapter = tint.ADAPTER
+        if gamma:
+            adapter = adapter.replace('vec3 ApplyColorSpace(vec3 value) { return value; }',
+                                      'vec3 ApplyColorSpace(vec3 value) { return value*value; }')
+        for name, features in head.PROFILES.items():
+            wrapper = (root / (name + '.shd')).read_text()
+            program = test.program('#version 120\n' + wrapper.replace('#include "inc_standard"',
+                adapter + material + standard).replace('#include "inc_hd_tint"', include))
+            try:
+                test.use(program)
+                for flag in ('hairMatte', 'hairReflectivity', 'detailDiffuse', 'detailGlowChannel', 'glowWholeSurface'):
+                    test.scalar(test.location(program, flag.encode()), 1)
+                for alpha in (1.0, 0.8):
+                    coat = (0.1, 0.3, 0.7, alpha)
+                    bindings = {4: coat, 8: (1.0, 0.0, 0.0, 1.0)}
+                    test.scalar(test.location(program, b'progFxCoat'), 0)
+                    ordinary = test.sample(program, 1, .8, palette_layer=1, extra_textures=bindings)
+                    unrelated_coat = test.sample(program, 1, .8, palette_layer=1,
+                        extra_textures={4: (.9, .1, .2, .4), 8: bindings[8]})
+                    tint.near(unrelated_coat, ordinary, f'{name}: disabled coating must not replace authored detail')
+                    for sequence in (1.0, 1.0001):
+                        test.scalar(test.location(program, b'progFxCoat'), sequence)
+                        actual = test.sample(program, 1, .8, palette_layer=1, extra_textures=bindings)
+                        env = 1-alpha if features[-1] else 0
+                        expected = tuple(c*(1-env)+.666667*env for c in coat[:3])
+                        if gamma:
+                            expected = tuple(c*c for c in expected)
+                        tint.near(actual, expected, f'{name}: coating slot 4, matte/glow suppression, phase={sequence}')
+                        checks += 1
+            finally:
+                test.delete_program(program)
+    print(f'Head coatings: {checks} GPU comparisons passed; authored slot 8 retained and refresh phases keep the same coat.')
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--game-data', type=Path, required=True)
@@ -171,6 +213,7 @@ def main():
         check_reflectance_state(test, args.game_data)
         check_metal_finish(test, args.game_data, head.ROOT / 'sw_shader')
         check_skin_detail_gain(test, args.game_data)
+        check_head_coatings(test, args.game_data)
         tint.compile_engine_pairs(test, engine, sorted(pairs), pairs)
         # Expected RGBA comes from installed original palettes and native scheme
         # integers. This remains runnable after a squash or shallow clone.
@@ -184,7 +227,7 @@ def main():
                                                          engine.source(vertex, False, config))
             program = programs[vertex, fragment]
             test.use(program)
-            flags = ('useNativePalette', 'useTexture1Alpha', 'useTexture9Alpha', 'metalReflectanceScale', 'detailSkinGain')
+            flags = ('useNativePalette', 'useTexture1Alpha', 'useTexture9Alpha', 'metalReflectanceScale', 'detailSkinGain', 'progFxCoat')
             for flag in flags:
                 test.scalar(test.location(program, flag.encode()), 0 if flag == 'metalReflectanceScale' else 1)
             tint.upload_material_parameters(test, program,

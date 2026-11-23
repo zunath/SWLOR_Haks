@@ -87,5 +87,18 @@ class CompatibilityChannelTests(unittest.TestCase):
                       heads.compatibility_channel_errors(manifest))
 
 
+
+class HeadCoatingBindingTests(unittest.TestCase):
+    def test_coatings_do_not_replace_authored_lip_and_detail_maps(self):
+        manifest = heads.load_manifest()
+        for name, entry in manifest['materials'].items():
+            with self.subTest(material=name):
+                source = heads.material_source(entry).splitlines()
+                self.assertEqual(['texture4 progfx_coat'], [line for line in source if line.startswith('texture4 ')])
+                self.assertIn('parameter float progFxCoat 0', source)
+                authored = [line for line in entry['declarations'] if line.startswith('texture8 ')]
+                self.assertEqual(authored, [line for line in source if line.startswith('texture8 ')])
+
+
 if __name__ == '__main__':
     unittest.main()

@@ -27,6 +27,9 @@ COLUMNS, ROWS = 4, 8
 ATLAS_COUNT = 4
 MATERIAL = "cloaktint"
 TGA_TYPE, DDS_TYPE, MTR_TYPE = 3, 2033, 2072
+PROGFX_COAT_UNIT = 8
+# fs_cloaktint has no height map, so texture4 is free for the ProgFX coat atlas.
+CLOAK_PROGFX_COAT_UNIT = 4
 
 
 def file_digest(path):
@@ -128,7 +131,14 @@ def shader_text():
     source = replace_once(source, '#include "inc_standard"',
                           '#define FORCE_ALLOW_DISCARD 1\n#include "inc_standard"')
     source = replace_once(source, "uniform sampler2D texUnit9;", "")
-    opacity = " || ".join(f"index == {index}.0" for index in opacity_texture_indices()) or "false"
+    # The cloak atlases occupy texture6-9, so the ProgFX coat atlas moves to texture4.
+    source = replace_once(source, f"uniform sampler2D texUnit{PROGFX_COAT_UNIT};",
+                          f"uniform sampler2D texUnit{CLOAK_PROGFX_COAT_UNIT};")
+    source = replace_once(source, f"textureGrad(texUnit{PROGFX_COAT_UNIT}, atlasUV",
+                          f"textureGrad(texUnit{CLOAK_PROGFX_COAT_UNIT}, atlasUV")
+    source = replace_once(source, f"texture2D(texUnit{PROGFX_COAT_UNIT}, atlasUV)",
+                          f"texture2D(texUnit{CLOAK_PROGFX_COAT_UNIT}, atlasUV)")
+    opacity =" || ".join(f"index == {index}.0" for index in opacity_texture_indices()) or "false"
     declarations = """uniform sampler2D texUnit6;
 uniform sampler2D texUnit7;
 uniform sampler2D texUnit8;
@@ -162,7 +172,17 @@ vec4 SampleCloakTint(vec2 uv)
     # Exact RGB takes its swatch row's shading but not its coverage on cloaks:
     # cutout cloaks keep the layer's first palette row as coverage on every layer,
     # and reflective cloaks use it only for metal, keeping nonmetal RGB opaque.
-    source = replace_once(source, "        float environmentAlpha = swatchShade.a;\n",
+    source = replace_once(source,
+                          "        // Reflection coverage fades from the swatch row's (within half a level of\n"
+                          "        // the swatch) to the layer's first palette row's (8 levels away). A color\n"
+                          "        // equal to a swatch keeps that palette color's reflection, and neighbouring\n"
+                          "        // colors whose nearest swatch changes no longer flip between the metal\n"
+                          "        // palette's shiny (0.5) and painted (0.8) rows, which turned dark metal\n"
+                          "        // grey or silver.\n"
+                          "        float firstAlpha = texture2D(texUnit10,\n"
+                          "            vec2(paletteU, (paletteBase + 0.5) / 2048.0), -10.0).a;\n"
+                          "        float environmentAlpha = firstAlpha + (swatchShade.a - firstAlpha) *\n"
+                          "            clamp((8.0 - distance(decodedRgb, swatchMidpoint) * 255.0) / 7.5, 0.0, 1.0);\n",
                           "        // Cutout cloaks keep the layer's first palette row as their coverage, and\n"
                           "        // reflective cloaks use it only for metal, so a custom color can neither\n"
                           "        // cut a cloak away nor make cloth reflective.\n"
@@ -187,6 +207,8 @@ def material_text():
                                     "cloak_tints1", TILE, TILE, profile=(MATERIAL, []),
                                     native_palette=True)
     source = source.replace("fs_plt_tinter", "fs_cloaktint")
+    source = replace_once(source, f"texture{PROGFX_COAT_UNIT} {tint.PROGFX_COAT_TEXTURE}",
+                          f"texture{CLOAK_PROGFX_COAT_UNIT} {tint.PROGFX_COAT_TEXTURE}")
     source = source.replace("texture7 cloak_tints1", "\n".join(
         f"texture{6 + index} cloak_tints{index}" for index in range(ATLAS_COUNT)))
     return source + "parameter float cloakTexture 0.0\n"

@@ -45,7 +45,15 @@ def material_source(entry: dict) -> str:
     # Explicit defaults prevent a parameter from leaking from the previous MTR
     # when the client reuses a linked shader program.
     parameters = feature_defaults() | entry['parameters']
-    lines = entry['declarations'] + [
+    # Slot 8 holds authored lip and detail maps. All head wrappers disable height maps.
+    declarations = []
+    for line in entry['declarations']:
+        if line.startswith('texture4 '):
+            if line.split()[1] != 'null':
+                raise ValueError('Head coating slot 4 already has an authored texture')
+            continue
+        declarations.append(line)
+    lines = declarations + ['texture4 progfx_coat'] + [
         f'parameter float {name} {value:.12g}' for name, value in sorted(parameters.items())
     ]
     return '\n'.join(lines) + '\n'
@@ -291,9 +299,8 @@ def validate() -> list[str]:
     for model, material, _ in model_rows():
         if model in bindings and material not in bindings[model]:
             errors.append(f'{model}: model cannot address head material {material}')
-    resources = {'null'}
-    resources.update(p.stem.lower() for folder in ROOT.glob('sw_*') if folder.is_dir()
-                     for p in folder.iterdir() if p.suffix.lower() in ('.dds', '.tga'))
+    resources = {'null'} | {Path(path).stem.lower() for path in resources
+                            if Path(path).suffix.lower() in ('.dds', '.tga')}
     for name, entry in manifest['materials'].items():
         for texture in re.findall(r'^texture\d+\s+(\S+)', material_source(entry), re.M):
             if texture.lower() not in resources:
