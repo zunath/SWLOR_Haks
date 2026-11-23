@@ -208,7 +208,16 @@ vec4 ResolveTintColor(float g, float layer, vec3 authoredDiffuse)
         shadedChroma += (shadeChroma - midpointChroma * shadeScale) * ((1.0 - confidence) * nearSwatch);
         vec3 shadedRgb = vec3(dot(decodedRgb, luminance) * shadeScale) +
             chromaU * shadedChroma.x + chromaV * shadedChroma.y;
-        float environmentAlpha = swatchShade.a;
+        // Reflection coverage fades from the swatch row's (within half a level of
+        // the swatch) to the layer's first palette row's (8 levels away). A color
+        // equal to a swatch keeps that palette color's reflection, and neighbouring
+        // colors whose nearest swatch changes no longer flip between the metal
+        // palette's shiny (0.5) and painted (0.8) rows, which turned dark metal
+        // grey or silver.
+        float firstAlpha = texture2D(texUnit10,
+            vec2(paletteU, (paletteBase + 0.5) / 2048.0), -10.0).a;
+        float environmentAlpha = firstAlpha + (swatchShade.a - firstAlpha) *
+            clamp((8.0 - distance(decodedRgb, swatchMidpoint) * 255.0) / 7.5, 0.0, 1.0);
         // Only explicit RGB replaces the hue; the diffuse still supplies all detail.
         // Metal keeps the layer's first palette row's reflection coverage.
         if (useAuthoredDiffuse > 0.5)

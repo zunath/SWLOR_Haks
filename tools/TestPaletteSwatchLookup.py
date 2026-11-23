@@ -171,6 +171,26 @@ class PaletteSwatchLookupTests(unittest.TestCase):
                 difference = np.abs(np.array(shades)[32:225, :3] - np.array(before)[32:225, :3]).mean() * 255
                 self.assertLess(difference, 6.0)
 
+    def test_dark_dyes_change_reflection_smoothly(self):
+        # Bug report 2026-11-20 follow-up: dark custom colors jumped between very
+        # dark and grey/silver. Their nearest metal swatch alternates between the
+        # shiny rows (coverage 0.5) and the painted rows (0.8), and cloth black
+        # took the half-reflective row 57. Sweep dark neutral and tinted colors
+        # two levels at a time: reflection coverage changes gradually.
+        def coverage_steps(shade, group, tint_offset):
+            coverage = [np.mean([s[3] for s in shade(self.pixels, group, tuple(level + o for o in tint_offset))[1][64:193]])
+                        for level in range(0, 81, 2)]
+            return np.abs(np.diff(coverage)).max()
+        offsets = ((0, 0, 0), (0, 0, 6), (6, 3, 0), (0, 5, 0), (8, 0, 0))
+        for group in (2, CLOTH):  # metal; cloth, leather and tattoo
+            for offset in offsets:
+                with self.subTest(group=group, offset=offset):
+                    self.assertLessEqual(coverage_steps(shade_rgb, group, offset), 0.16)
+        self.assertGreater(coverage_steps(shade_rgb_2026_11_17, 2, (0, 0, 0)), 0.3,
+                           "control: the 11/17 shading flipped dark metal between shiny and painted rows")
+        self.assertGreater(coverage_steps(shade_rgb_2026_11_17, CLOTH, (0, 0, 0)), 0.45,
+                           "control: and cloth black between row 57 and matte rows")
+
     def test_shaders_use_the_reference_constants(self):
         root = tint.REPOSITORY_ROOT / "sw_shader"
         constants = (
@@ -186,6 +206,10 @@ class PaletteSwatchLookupTests(unittest.TestCase):
                 with self.subTest(name, constant=constant):
                     self.assertIn(constant, source)
             self.assertNotIn("swatchShade.rgb + (decodedRgb - swatchMidpoint)", source)
+            if name != "fs_cloaktint":  # cloaks keep the first row's coverage outright
+                with self.subTest(name, constant="coverage reach"):
+                    self.assertIn("(({0:.1f} - distance(decodedRgb, swatchMidpoint) * 255.0) / {1:.1f}, 0.0, 1.0);".format(
+                        shading.RGB_COVERAGE_REACH, shading.RGB_COVERAGE_REACH - .5), source)
 
     def test_audit_rejects_stale_or_inconsistent_rows(self):
         with tempfile.TemporaryDirectory() as directory:
