@@ -251,6 +251,44 @@ class ModularTintFallbackTests(unittest.TestCase):
         self.assertEqual(pending, {})
         self.assertEqual(aliases, {})
 
+    def test_an_explicit_palette_bound_from_two_part_folders_stays_itself_behind_its_aliases(self):
+        # One astromech chassis material paints a dome and a barrel: each part folder gets its own alias, and the
+        # alias must not fall back to the human palette of the same part number.
+        models = {}
+        for folder, name in (("sw_pt_head", "pmr0_head001"), ("sw_pt_chest", "pmr0_chest001")):
+            (self.root / folder).mkdir(exist_ok=True)
+            path = self.root / folder / (name + ".mdl")
+            path.write_text(
+                f"newmodel {name}\nnode dummy {name}\n parent NULL\nendnode\n"
+                f"node trimesh shell\n parent {name}\n bitmap c_astro_01\n materialname c_astro_01\nendnode\n",
+                encoding="ascii",
+            )
+            models[name] = path
+        entries = {
+            "c_astro_01": {"layers": [3, 4, 5], "explicitMeshMaterial": True},
+            "pmh0_head001": {"layers": [0, 1]},
+            "pmh0_chest001": {"layers": [0]},
+        }
+        with (
+            patch.object(generator, "find_active_models", return_value=models),
+            patch.object(generator, "native_modular_palettes", return_value=set()),
+            patch.object(generator, "find_active_render_surfaces", return_value=set()),
+            patch.object(generator, "find_modular_human_material_fallbacks", return_value={}),
+            patch.object(generator, "find_authored_texture_overrides", return_value={}),
+        ):
+            rows, pending, aliases = generator.build_model_material_plan(entries)
+            self.assertEqual(set(aliases.values()), {"c_astro_01"})
+            self.assertEqual(len(aliases), 2)
+            for path, bindings in pending.items():
+                self.assertTrue(generator.synchronize_model_material_bindings(path, bindings))
+            entries["c_astro_01"]["aliases"] = sorted(aliases)
+            rows, pending, aliases_again = generator.build_model_material_plan(entries)
+        self.assertEqual(pending, {})
+        self.assertEqual(aliases_again, aliases)
+        self.assertEqual({(model, tuple(layers)) for model, _, layers in rows},
+                         {("pmr0_head001", (3, 4, 5)), ("pmr0_chest001", (3, 4, 5))})
+        self.assertEqual({material for _, material, _ in rows}, set(aliases))
+
     def test_stock_inventory_is_deterministic_and_records_only_palette_names(self):
         data = bytearray(64 + 3 * 22)
         data[:8] = b"KEY V1  "

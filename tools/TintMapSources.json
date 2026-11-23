@@ -10765,7 +10765,6 @@
   {
     "model": "pfh0_bicepr099",
     "material": "pfh0_bicepr099",
-    "aliases": [],
     "layers": [
       0,
       4,
@@ -28849,7 +28848,6 @@
   {
     "model": "pfh0_legl099",
     "material": "pfh0_legl099",
-    "aliases": [],
     "layers": [
       0,
       4,
@@ -30625,7 +30623,6 @@
   {
     "model": "pfh0_legr099",
     "material": "pfh0_legr099",
-    "aliases": [],
     "layers": [
       0,
       4
@@ -38459,7 +38456,6 @@
   {
     "model": "pfh0_shinl099",
     "material": "pfh0_shinl099",
-    "aliases": [],
     "layers": [
       0,
       4
@@ -40449,7 +40445,6 @@
   {
     "model": "pfh0_shinr099",
     "material": "pfh0_shinr099",
-    "aliases": [],
     "layers": [
       0,
       4
@@ -111371,6 +111366,198 @@
     "output": "sw_tint0/tm_f90fd1298f72f.dds",
     "texture": "tm_f90fd1298f72f",
     "explicitMeshMaterial": true
+  },
+  {
+    "model": "c_astro_01",
+    "material": "c_astro_01",
+    "layers": [
+      3,
+      4,
+      5
+    ],
+    "width": 1024,
+    "height": 1024,
+    "source": "sw_cr_creature/c_astro_01.plt",
+    "sourceSha256": "87c998a5c2cb048b867b1d1082e64665e4c89123e49a1bf736787337ee0ba6a8",
+    "shadeSha256": "1ce75df35c26fc4dab8ed51f6425a2e89421fe2c84f81a3bf4f026601589ae60",
+    "layerSha256": "d1e302c583f4620be4504b97ac3e127feaba02ae919343183c79c2205448c835",
+    "output": "sw_tint2/tm_1b661dc793160.dds",
+    "texture": "tm_1b661dc793160",
+    "explicitMeshMaterial": true,
+    "aliases": [
+      "c_astr_ch_59db4b",
+      "c_astr_he_675d74",
+      "c_astr_lt_9d01c7",
+      "c_astr_rt_046a3b"
+    ]
+  },
+  {
+    "model": "c_astro_02",
+    "material": "c_astro_02",
+    "layers": [
+      3,
+      4,
+      5
+    ],
+    "width": 1024,
+    "height": 1024,
+    "source": "sw_cr_creature/c_astro_02.plt",
+    "sourceSha256": "2bf474d88197aefe5bcc964ebfd84fe44600097685fb8657298a82a51559228a",
+    "shadeSha256": "284905ed47129ed35ae337a1de1ca19d0b5a09a312077fb87d5f6bf9b5b538b8",
+    "layerSha256": "80324b54134dfd89716c7669a348cb5389edb765822bd8a509f55c384fad1945",
+    "output": "sw_tint0/tm_8caac4dedcff1.dds",
+    "texture": "tm_8caac4dedcff1",
+    "explicitMeshMaterial": true,
+    "aliases": [
+      "c_astr_ch_98a1ad",
+      "c_astr_he_c0a8c8",
+      "c_astr_lt_675f9d",
+      "c_astr_rt_8ebfa1"
+    ]
+  },
+  {
+    "model": "c_astro_03",
+    "material": "c_astro_03",
+    "layers": [
+      3,
+      4,
+      5
+    ],
+    "width": 1024,
+    "height": 1024,
+    "source": "sw_cr_creature/c_astro_03.plt",
+    "sourceSha256": "db7441050270342685274db26344842601445a133b4e118ebabd3adabea714fd",
+    "shadeSha256": "9de0687c4cac565350db785e6990f5f68a5989f5c63067286253c30e6128a099",
+    "layerSha256": "9029197ffc511fa3cea470e9a3195240f156df7483005b832bf0bfaee96cc405",
+    "output": "sw_tint0/tm_6575120b4b4b7.dds",
+    "texture": "tm_6575120b4b4b7",
+    "explicitMeshMaterial": true,
+    "aliases": [
+      "c_astr_ch_4103ac",
+      "c_astr_he_a590cb",
+      "c_astr_lt_cf8e48",
+      "c_astr_rt_dfbdf8"
+    ]
+  },
+  {
+    "model": "c_astro_04",
+    "material": "c_astro_04",
+    "layers": [
+      3,
+      4,
+      5
+    ],
+    "width": 1024,
+    "height": 1024,
+    "source": "sw_cr_creature/c_astro_04.plt",
+    "sourceSha256": "8b3c4a0685115374b362ea83a5d7137f9bf7ffd18f129e02cbefadc272c93188",
+    "shadeSha256": "045ec9b604389786f334957a19f91648bddfbc9042113426051d926c71f1a63b",
+    "layerSha256": "64c3c1851a974c933386754aab6eba8ce78a7f646eb763407c9ba471c5df4ce4",
+    "output": "sw_tint2/tm_bd332dbe6d75a.dds",
+    "texture": "tm_bd332dbe6d75a",
+    "explicitMeshMaterial": true,
+    "aliases": [
+      "c_astr_ch_3a4b32",
+      "c_astr_he_27163f",
+      "c_astr_lt_cc043d",
+      "c_astr_rt_12b0cb"
+    ]
+  },
+  {
+    "model": "c_astro_05",
+    "material": "c_astro_05",
+    "layers": [
+      3,
+      4,
+      5
+    ],
+    "width": 1024,
+    "height": 1024,
+    "source": "sw_cr_creature/c_astro_05.plt",
+    "sourceSha256": "20aeb2f6e4f697574f5c154b8c5910dbfb2dd8ff6398c96ec2ebbcc9158e686f",
+    "shadeSha256": "373d959ae9b6435bd0d3b3420f0908b0ee73ce8ac4359f0452f33e8e1e9bc437",
+    "layerSha256": "5bd629c14ee7ca97b60743dceb95a3514ac3fb4167434144bd014c744f06c90f",
+    "output": "sw_tint1/tm_98f29b5686eb5.dds",
+    "texture": "tm_98f29b5686eb5",
+    "explicitMeshMaterial": true,
+    "aliases": [
+      "c_astr_ch_8be467",
+      "c_astr_he_f3b365",
+      "c_astr_lt_6b3d92",
+      "c_astr_rt_2a2d9d"
+    ]
+  },
+  {
+    "model": "c_astro_06",
+    "material": "c_astro_06",
+    "layers": [
+      3,
+      4,
+      5
+    ],
+    "width": 1024,
+    "height": 1024,
+    "source": "sw_cr_creature/c_astro_06.plt",
+    "sourceSha256": "4d850497171b71d54a9475951208de70e5fee47e3d7c406bb553c92509a37722",
+    "shadeSha256": "fb019d1093c3f98c95ce41a0de9d671ef043f84ae6122d593790ce6402edf33d",
+    "layerSha256": "cd4d6c17d0249fa50c851674f80f8e5c81905565661f734cbca8099491922e29",
+    "output": "sw_tint0/tm_acb98c08605db.dds",
+    "texture": "tm_acb98c08605db",
+    "explicitMeshMaterial": true,
+    "aliases": [
+      "c_astr_ch_755c9f",
+      "c_astr_he_c1182e",
+      "c_astr_lt_485870",
+      "c_astr_rt_f1ff6f"
+    ]
+  },
+  {
+    "model": "c_astro_07",
+    "material": "c_astro_07",
+    "layers": [
+      3,
+      4,
+      5
+    ],
+    "width": 1024,
+    "height": 1024,
+    "source": "sw_cr_creature/c_astro_07.plt",
+    "sourceSha256": "00741a43a039910a45307ac4200d1b5a0337c0af5706bcb6f92659133d8802aa",
+    "shadeSha256": "d337564e5cc8e6581e8442348694c7fd9ec53fa7c3b661e8537a89e64eccffe3",
+    "layerSha256": "dd987f7509c23a470ead53c2529a41176ac2244e324f92c5f0dd0d9bf84076ff",
+    "output": "sw_tint2/tm_e5b95deb7e7ea.dds",
+    "texture": "tm_e5b95deb7e7ea",
+    "explicitMeshMaterial": true,
+    "aliases": [
+      "c_astr_ch_42de0e",
+      "c_astr_he_6e0991",
+      "c_astr_lt_899a59",
+      "c_astr_rt_181bd9"
+    ]
+  },
+  {
+    "model": "c_astro_08",
+    "material": "c_astro_08",
+    "layers": [
+      3,
+      4,
+      5
+    ],
+    "width": 1024,
+    "height": 1024,
+    "source": "sw_cr_creature/c_astro_08.plt",
+    "sourceSha256": "7cfa9e6d6ff1a2ab7d3bd63f2fa0670024d7e4ee4b7cb5d5f24d90cab5c99194",
+    "shadeSha256": "359f9e83467c6f30eab8280ce32b07ee6fa944cdeac04a2c1e2e085359d3dc5c",
+    "layerSha256": "02ba23e69756bb231719ab4635e8303258e924d0638627cf6d0b6a44f4cedf5b",
+    "output": "sw_tint1/tm_beb617aeb6257.dds",
+    "texture": "tm_beb617aeb6257",
+    "explicitMeshMaterial": true,
+    "aliases": [
+      "c_astr_ch_bc2fcd",
+      "c_astr_he_3e25ba",
+      "c_astr_lt_09d9fc",
+      "c_astr_rt_eb33c4"
+    ]
   },
   {
     "model": "pfe0_head186",

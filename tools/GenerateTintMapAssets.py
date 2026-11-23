@@ -1680,12 +1680,16 @@ def native_modular_material_choices(
         return None
     bitmaps = raw_model_bitmaps(path)
     original_materials = authored_material_sources()
+    alias_sources = build_alias_source_lookup(entries)
     choices = {}
     for selector, _, current_material in surfaces:
-        if is_explicit_mesh_material(current_material, entries):
+        # A palette bound from several part folders reaches the mesh under a
+        # scoped alias; it is still that explicit palette.
+        explicit_material = alias_sources.get((current_material or "").lower(), current_material)
+        if is_explicit_mesh_material(explicit_material, entries):
             # A split part's mesh names its own converted palette; the part's
             # native palette would recolor it with another mesh's layers.
-            choices[selector] = (current_material.lower(), "", [])
+            choices[selector] = (explicit_material.lower(), "", [])
             continue
         bitmap = _MATERIAL_BITMAP_ALIASES.get(bitmaps[selector], bitmaps[selector])
         bitmap = MIRRORED_MATERIAL_PROFILES.get(bitmap, bitmap)
