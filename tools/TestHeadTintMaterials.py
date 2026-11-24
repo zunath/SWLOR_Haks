@@ -317,8 +317,9 @@ def check_head_layer_filtering(test, engine):
     probe = '''
 void main() {
     gl_FragColor = vec4(HeadTintLayer(texUnit7,vVertexTexCoords,vec2(64.0))/10.0,
-                       texture2D(texUnit7,fract(vVertexTexCoords),-10.0).r,
-                       HeadTintLayer(texUnit9,vVertexTexCoords,vec2(64.0))/10.0,1.0);
+                       HeadTintShade(vVertexTexCoords,vec2(64.0)),
+                       HeadTintLayer(texUnit9,vVertexTexCoords,vec2(64.0))/10.0,
+                       texture2D(texUnit7,vVertexTexCoords).r);
 }
 '''
     vertex = '''#version 120
@@ -331,10 +332,14 @@ void main() {
 '''
     filtered = prefix.replace('texelFetch(mask,texel,0).g',
                               'texture2D(mask,(floor(fract(uv)*size)+vec2(0.5))/size,-10.0).g')
+    biased_shades = prefix.replace(
+        'return mix(texture2D(texUnit7,fract(uv),-10.0).r,texture2D(texUnit7,uv).r,far);',
+        'return texture2D(texUnit7,fract(uv),-10.0).r;')
     parameter_f = test.gl.function('glTexParameterf', None, ct.c_uint, ct.c_uint, ct.c_float)
     delete = test.gl.function('glDeleteTextures', None, ct.c_int, ct.POINTER(ct.c_uint))
     textures = (ct.c_uint * 2)(300, 301)
     checks = 0
+    shade_checks = 0
     try:
         for unit, texture in ((7, 300), (9, 301)):
             test.active_texture(0x84C0 + unit)
@@ -345,7 +350,7 @@ void main() {
                 for y in range(size):
                     for x in range(size):
                         parity = (x+y) % 2
-                        data.extend((parity if level == 0 else 0.5,
+                        data.extend((0.25 if level == 0 else 0.75,
                                      (0.05+0.8*parity) if level == 0 else 0.45, 0, 1))
                 test.texture_image(0x0DE1, level, 0x8814, size, size, 0,
                                    0x1908, 0x1406, (ct.c_float * len(data))(*data))
@@ -358,10 +363,13 @@ void main() {
             wrapper = (root / (name+'.shd')).read_text()
             programs = []
             try:
-                for source in (prefix, filtered):
+                for source in (prefix, filtered, biased_shades):
                     programs.append(test.program(engine.source(name, True, (1, 0, 0, 0, 0),
                         override=wrapper.replace('#include "inc_hd_tint"', source+probe)), vertex))
-                for scale_x, scale_y in ((3.1, 0.07), (0.07, 3.1), (1.3, 0.1)):
+                for scale_x, scale_y in ((3.1, 0.07), (0.07, 3.1), (1.3, 0.1),
+                                         (0.02, 0.02), (0.09375, 0.09375)):
+                    oblique_minified = scale_x > 1 or scale_y > 1
+                    shade_blend = min(max(max(scale_x, scale_y)*16-1, 0), 1)
                     results = []
                     for program in programs:
                         test.use(program)
@@ -376,6 +384,7 @@ void main() {
                         test.read(0, 0, 8, 8, 0x1908, 0x1406, pixels)
                         results.append(pixels)
                     negative_failed = False
+                    shade_negative_failed = False
                     for y in range(8):
                         for x in range(8):
                             u = ((x+0.5)/4-1)*scale_x+0.5313
@@ -388,18 +397,24 @@ void main() {
                                     raise AssertionError(f'{name}: filtered category at {x},{y}: '
                                                          f'{results[0][index+channel]} != {expected}; uv={u},{v}')
                                 checks += 1
-                            if not 0.01 < results[0][index+1] < 0.99:
-                                raise AssertionError('Shade filtering was unexpectedly disabled')
+                            expected_shade = 0.25+(results[0][index+3]-0.25)*shade_blend
+                            if abs(results[0][index+1]-expected_shade) > 0.0001:
+                                raise AssertionError('Native near/far shade filtering was not preserved')
+                            shade_checks += 1
                             negative_failed |= abs(results[1][index]-expected) > 0.1
-                    if not negative_failed:
+                            shade_negative_failed |= abs(results[2][index+1]-expected_shade) > 0.1
+                    if oblique_minified and not negative_failed:
                         raise AssertionError('Filtered-category negative control did not fail')
+                    if shade_blend > 0 and not shade_negative_failed:
+                        raise AssertionError('Base-level-only shade negative control did not fail')
             finally:
                 for program in programs:
                     test.delete_program(program)
     finally:
         delete(2, textures)
-    print(f'Head categorical masks: {checks} anisotropic/mipmapped GPU checks passed; '
-          'shade filtering retained and filtered-category negative controls failed.')
+    print(f'Head categorical masks: {checks} anisotropic/mipmapped category checks and '
+          f'{shade_checks} native near/far shade GPU checks passed; '
+          'filtered-category and base-level-only shade negative controls failed.')
 
 
 def main():

@@ -353,6 +353,14 @@ void ApplyHeadShader(vec3 vTint, vec2 detail, float glowLayer)
 
 }
 
+float HeadTintShade(vec2 uv, vec2 size)
+{
+    // Preserve native close shading, then use prefiltered mips as texels minify.
+    vec2 texels = uv*size;
+    float far = clamp(max(length(dFdx(texels)),length(dFdy(texels)))-1.0,0.0,1.0);
+    return mix(texture2D(texUnit7,fract(uv),-10.0).r,texture2D(texUnit7,uv).r,far);
+}
+
 float HeadTintLayer(sampler2D mask, vec2 uv, vec2 size)
 {
     // Layer IDs are categories. Mipmaps/anisotropy may filter shades, never IDs.
@@ -370,7 +378,7 @@ void main()
 {
     vec2 size = max(vec2(tintMapWidth,tintMapHeight),vec2(1.0));
     vec2 uv = fract(vVertexTexCoords);
-    float g = texture2D(texUnit7,uv,-10.0).r;
+    float g = HeadTintShade(vVertexTexCoords,size);
     float layer = HeadTintLayer(texUnit7,uv,size);
     vec4 paletteColor = HeadTint(layer,g,uv,size);
     if (eyeContour>0.5 && (layer<0.5 || layer>8.5))
