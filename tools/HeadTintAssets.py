@@ -19,8 +19,8 @@ PROFILES = {
     'fs_head_plain': (0, 0, 0, 0, 0),
     'fs_head_mapped': (1, 1, 0, 0, 0),
     'fs_head_hair': (1, 1, 0, 0, 1),
-    'fs_head_full': (1, 1, 1, 1, 1),
 }
+NATIVE_PROFILES = {'fs_plt_tinter'}
 
 
 def shader_source(profile: str) -> str:
@@ -45,6 +45,21 @@ def material_source(entry: dict) -> str:
     # Explicit defaults prevent a parameter from leaking from the previous MTR
     # when the client reuses a linked shader program.
     parameters = feature_defaults() | entry['parameters']
+    if entry['shader'] in NATIVE_PROFILES:
+        if any(feature_defaults().get(name) != value for name, value in entry['parameters'].items()):
+            raise ValueError('Native head materials cannot discard authored head effects')
+        declarations = []
+        for line in entry['declarations']:
+            if line.startswith(('texture4 ', 'texture8 ')):
+                if line.split()[1] != 'null':
+                    raise ValueError('Native head coating slot already has an authored texture')
+                continue
+            declarations.append(line)
+        # These native programs are shared with equipment. Reset every optional
+        # material control instead of inheriting another material's uniforms.
+        return '\n'.join(declarations + ['texture8 progfx_coat'] + [
+            f'parameter float {name} 0' for name in
+            ('progFxCoat', 'smoothTintEdges', 'useNativePalette', 'useTexture1Alpha', 'useTexture9Alpha')]) + '\n'
     # Slot 8 holds authored lip and detail maps. All head wrappers disable height maps.
     declarations = []
     for line in entry['declarations']:
@@ -193,7 +208,7 @@ def validate() -> list[str]:
         unknown = set(entry['parameters']) - set(defaults)
         if unknown:
             errors.append(f'{name}: unknown head parameters {sorted(unknown)}')
-        if entry['shader'] not in PROFILES:
+        if entry['shader'] not in PROFILES and entry['shader'] not in NATIVE_PROFILES:
             errors.append(f'{name}: unknown head lighting profile')
         declared = [line.split()[1] for line in entry['declarations']
                     if line.split()[0].lower() == 'customshaderfs']
@@ -208,6 +223,8 @@ def validate() -> list[str]:
             errors.append(f'{name}: dyed metal must retain palette specular and roughness')
         if has_metal and entry['shader'] in PROFILES and '#define ENVIRONMENT_MAP 1' not in shader_source(entry['shader']):
             errors.append(f'{name}: dyed metal needs a palette-reflectance lighting profile')
+        if entry['shader'] in NATIVE_PROFILES and any(defaults.get(key) != value for key, value in entry['parameters'].items()):
+            errors.append(f'{name}: native profile cannot discard authored head effects')
         path = ROOT / 'sw_tint_mtr' / (name + '.mtr')
         if not path.is_file() or path.read_text() != material_source(entry):
             errors.append(f'{name}: stale head material profile')

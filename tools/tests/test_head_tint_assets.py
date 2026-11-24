@@ -94,10 +94,35 @@ class HeadCoatingBindingTests(unittest.TestCase):
         for name, entry in manifest['materials'].items():
             with self.subTest(material=name):
                 source = heads.material_source(entry).splitlines()
+                if entry['shader'] in heads.NATIVE_PROFILES:
+                    self.assertIn('texture8 progfx_coat', source)
+                    self.assertFalse(any(line.startswith('texture4 ') for line in source))
+                    for flag in ('progFxCoat', 'smoothTintEdges', 'useNativePalette', 'useTexture1Alpha', 'useTexture9Alpha'):
+                        self.assertIn(f'parameter float {flag} 0', source)
+                    continue
                 self.assertEqual(['texture4 progfx_coat'], [line for line in source if line.startswith('texture4 ')])
                 self.assertIn('parameter float progFxCoat 0', source)
                 authored = [line for line in entry['declarations'] if line.startswith('texture8 ')]
                 self.assertEqual(authored, [line for line in source if line.startswith('texture8 ')])
+
+    def test_native_profile_cannot_discard_authored_effects_or_textures(self):
+        entry = {'shader': 'fs_plt_tinter', 'parameters': {'hairMatte': 1}, 'declarations': []}
+        with self.assertRaises(ValueError):
+            heads.material_source(entry)
+        entry['parameters'] = {}
+        for slot in (4, 8):
+            entry['declarations'] = [f'texture{slot} authored_detail']
+            with self.subTest(slot=slot), self.assertRaises(ValueError):
+                heads.material_source(entry)
+
+    def test_hair_profile_has_no_bound_roughness_or_self_illumination_maps(self):
+        for name, entry in heads.load_manifest()['materials'].items():
+            if entry['shader'] != 'fs_head_hair':
+                continue
+            with self.subTest(material=name):
+                for line in entry['declarations']:
+                    if line.startswith(('texture3 ', 'texture5 ')):
+                        self.assertEqual('null', line.split()[1])
 
 
 if __name__ == '__main__':

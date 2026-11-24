@@ -44,7 +44,7 @@ def check_reflectance_state(test, game_data):
 
         reference = program('fs_plt_tinter_nm')
         mapped = program('fs_head_mapped')
-        full = program('fs_head_full')
+        full = program('fs_head_hair')
         # Isolate each reported bug while keeping the rest of the repaired code.
         stale_coverage = include.replace(
             'fEnvMapLevel = (hairMatte>0.5 && layer>0.5 && layer<1.5) ? 0.0 : 1.0-paletteColor.a;',
@@ -52,8 +52,8 @@ def check_reflectance_state(test, game_data):
         wrong_order = include.replace('vec3 surfaceColor = vTint;',
                                       'vec3 surfaceColor = ApplyColorSpace(vTint);').replace(
                                           'surfaceColor = ApplyColorSpace(surfaceColor);', '')
-        stale = program('fs_head_full', stale_coverage)
-        early_gamma = program('fs_head_full', wrong_order)
+        stale = program('fs_head_hair', stale_coverage)
+        early_gamma = program('fs_head_hair', wrong_order)
         try:
             for alpha in (1.0, 0.8, 0.4):
                 tint.near(test.sample(mapped, 1, alpha, mapped=True, palette_layer=2),
@@ -84,7 +84,7 @@ def check_reflectance_state(test, game_data):
 def check_metal_finish(test,game_data,shader_root):
     material=tint.stock_material(game_data)
     include=(shader_root/'inc_hd_tint.shd').read_text()
-    wrapper=(shader_root/'fs_head_full.shd').read_text()
+    wrapper=(shader_root/'fs_head_hair.shd').read_text()
     line='if (layer>1.5 && layer<3.5) fEnvMapLevel *= clamp(metalReflectanceScale,0.0,1.0);'
     assert line in include
     checks=0
@@ -198,6 +198,57 @@ def check_head_coatings(test, game_data):
             finally:
                 test.delete_program(program)
     print(f'Head coatings: {checks} GPU comparisons passed; authored slot 8 retained and refresh phases keep the same coat.')
+
+
+def check_native_head_reuse(test, game_data):
+    """Compare default head output before/after reuse, including native coat slot 8."""
+    root = head.ROOT / 'sw_shader'
+    material = tint.stock_material(game_data)
+    standard = tint.STANDARD[:tint.STANDARD.index('void ApplyStandardShader()')] + 'void ApplyStandardShader() {}\n'
+    checks = 0
+    rows = ('rowSkin', 'rowHair', 'rowMetal1', 'rowMetal2', 'rowCloth1',
+            'rowCloth2', 'rowLeath1', 'rowLeath2', 'rowTat1', 'rowTat2')
+    for gamma in (False, True):
+        adapter = ADAPTER
+        if gamma:
+            adapter = adapter.replace('vec3 ApplyColorSpace(vec3 value) { return value; }',
+                                      'vec3 ApplyColorSpace(vec3 value) { return value*value; }')
+        programs = []
+        try:
+            for name in ('fs_head_legacy', 'fs_plt_tinter'):
+                source = (root / (name + '.shd')).read_text().replace(
+                    '#include "inc_standard"', adapter + material + standard)
+                source = source.replace('#include "inc_hd_tint"', (root / 'inc_hd_tint.shd').read_text())
+                programs.append(test.program('#version 120\n' + source))
+            for layer in range(10):
+                for rgb in (None, (layer, 90, 145, 190)):
+                    for alpha in (1.0, .8, .4):
+                        for phase in (0, 1, 1.0001, 4, 4.0001, 5):
+                            results = []
+                            for program, coat_slot in zip(programs, (4, 8)):
+                                test.use(program)
+                                for key, value in head.feature_defaults().items():
+                                    test.scalar(test.location(program, key.encode()), value)
+                                for row in rows:
+                                    test.scalar(test.location(program, row.encode()), 0)
+                                test.scalar(test.location(program, b'progFxCoat'), phase)
+                                results.append(test.sample(program, 1, alpha, palette_layer=layer, rgb=rgb,
+                                    extra_textures={coat_slot: (.1, .3, .7, alpha)}))
+                            tint.near(results[1], results[0],
+                                f'native head reuse gamma={gamma} layer={layer} rgb={rgb} alpha={alpha} coat={phase}')
+                            checks += 1
+            # A wrong coating slot must produce a visibly different result.
+            test.use(programs[1])
+            test.scalar(test.location(programs[1], b'progFxCoat'), 1)
+            correct = test.sample(programs[1], 1, .8, extra_textures={8: (.1, .3, .7, 1)})
+            wrong = test.sample(programs[1], 1, .8, extra_textures={8: (.9, .1, .2, 1)})
+            if max(abs(a-b) for a, b in zip(correct, wrong)) < .05:
+                raise AssertionError('Native coating binding negative control did not fail')
+        finally:
+            for program in programs:
+                test.delete_program(program)
+    print(f'Native default-head reuse passed: {checks} palette/RGB GPU comparisons over all10 layers, '
+          'gamma modes, coated/uncoated and refresh phases; wrong-coating negatives failed.')
 
 
 def check_head_glow_fog(test, engine):
@@ -441,6 +492,7 @@ def main():
         check_metal_finish(test, args.game_data, head.ROOT / 'sw_shader')
         check_skin_detail_gain(test, args.game_data)
         check_head_coatings(test, args.game_data)
+        check_native_head_reuse(test, args.game_data)
         check_head_glow_fog(test, engine)
         check_head_layer_filtering(test, engine)
         tint.compile_engine_pairs(test, engine, sorted(pairs), pairs)
