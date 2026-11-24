@@ -353,13 +353,25 @@ void ApplyHeadShader(vec3 vTint, vec2 detail, float glowLayer)
 
 }
 
+float HeadTintLayer(sampler2D mask, vec2 uv, vec2 size)
+{
+    // Layer IDs are categories. Mipmaps/anisotropy may filter shades, never IDs.
+#if __VERSION__ >= 130
+    ivec2 texel = clamp(ivec2(fract(uv)*size),ivec2(0),ivec2(size)-1);
+    float encodedLayer = texelFetch(mask,texel,0).g;
+#else
+    vec2 nearestUV = (floor(fract(uv)*size)+vec2(0.5))/size;
+    float encodedLayer = texture2D(mask,nearestUV,-10.0).g;
+#endif
+    return floor(clamp(encodedLayer,0.0,0.9999)*10.0);
+}
+
 void main()
 {
     vec2 size = max(vec2(tintMapWidth,tintMapHeight),vec2(1.0));
     vec2 uv = fract(vVertexTexCoords);
-    vec2 nearestUV = (floor(uv*size)+vec2(0.5))/size;
     float g = texture2D(texUnit7,uv,-10.0).r;
-    float layer = floor(clamp(texture2D(texUnit7,nearestUV,-10.0).g,0.0,0.9999)*10.0);
+    float layer = HeadTintLayer(texUnit7,uv,size);
     vec4 paletteColor = HeadTint(layer,g,uv,size);
     if (eyeContour>0.5 && (layer<0.5 || layer>8.5))
         paletteColor = mix(HeadTint(0.0,g,uv,size),HeadTint(9.0,g,uv,size),
@@ -487,7 +499,7 @@ void main()
     if (forceOpaque>0.5) outputAlpha = 1.0;
     float glowLayer = layer;
     if (glowLayerFromMask>0.5)
-        glowLayer = floor(clamp(texture2D(texUnit9,nearestUV,-10.0).g,0.0,0.9999)*10.0);
+        glowLayer = HeadTintLayer(texUnit9,uv,size);
     bool layerGlow = glowMinLayer>=0.0 && glowLayer>=glowMinLayer && glowLayer<=glowMaxLayer;
     if (!progFxCoated && (detailGlowChannel>0.5 || layerGlow || glowWholeSurface>0.5))
         ApplyHeadShader(vTint,detail,glowLayer);

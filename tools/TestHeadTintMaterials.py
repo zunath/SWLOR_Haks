@@ -4,6 +4,7 @@ from pathlib import Path
 import argparse
 import collections
 import ctypes as ct
+import math
 import re
 
 import HeadTintAssets as head
@@ -308,6 +309,99 @@ void main() {
           'glow paths, fog amounts and color-correction modes; dim-eye negative controls failed.')
 
 
+def check_head_layer_filtering(test, engine):
+    """Minified/oblique mipmapped masks must retain their base-level categories."""
+    root = head.ROOT / 'sw_shader'
+    include = (root / 'inc_hd_tint.shd').read_text()
+    prefix = include[:include.index('void main()')]
+    probe = '''
+void main() {
+    gl_FragColor = vec4(HeadTintLayer(texUnit7,vVertexTexCoords,vec2(64.0))/10.0,
+                       texture2D(texUnit7,fract(vVertexTexCoords),-10.0).r,
+                       HeadTintLayer(texUnit9,vVertexTexCoords,vec2(64.0))/10.0,1.0);
+}
+'''
+    vertex = '''#version 120
+varying vec2 vVertexTexCoords;
+uniform vec4 probeTransform;
+void main() {
+    gl_Position = gl_Vertex;
+    vVertexTexCoords = gl_Vertex.xy*probeTransform.xy+probeTransform.zw;
+}
+'''
+    filtered = prefix.replace('texelFetch(mask,texel,0).g',
+                              'texture2D(mask,(floor(fract(uv)*size)+vec2(0.5))/size,-10.0).g')
+    parameter_f = test.gl.function('glTexParameterf', None, ct.c_uint, ct.c_uint, ct.c_float)
+    delete = test.gl.function('glDeleteTextures', None, ct.c_int, ct.POINTER(ct.c_uint))
+    textures = (ct.c_uint * 2)(300, 301)
+    checks = 0
+    try:
+        for unit, texture in ((7, 300), (9, 301)):
+            test.active_texture(0x84C0 + unit)
+            test.bind_texture(0x0DE1, texture)
+            for level in range(7):
+                size = 64 >> level
+                data = []
+                for y in range(size):
+                    for x in range(size):
+                        parity = (x+y) % 2
+                        data.extend((parity if level == 0 else 0.5,
+                                     (0.05+0.8*parity) if level == 0 else 0.45, 0, 1))
+                test.texture_image(0x0DE1, level, 0x8814, size, size, 0,
+                                   0x1908, 0x1406, (ct.c_float * len(data))(*data))
+            for flag, value in ((0x2800, 0x2601), (0x2801, 0x2703), (0x813D, 6)):
+                test.texture_parameter(0x0DE1, flag, value)
+            parameter_f(0x0DE1, 0x84FE, 16)
+        if test.error():
+            raise AssertionError('Anisotropic mipmapped mask setup failed')
+        for name in head.PROFILES:
+            wrapper = (root / (name+'.shd')).read_text()
+            programs = []
+            try:
+                for source in (prefix, filtered):
+                    programs.append(test.program(engine.source(name, True, (1, 0, 0, 0, 0),
+                        override=wrapper.replace('#include "inc_hd_tint"', source+probe)), vertex))
+                for scale_x, scale_y in ((3.1, 0.07), (0.07, 3.1), (1.3, 0.1)):
+                    results = []
+                    for program in programs:
+                        test.use(program)
+                        test.integer(test.location(program, b'texUnit7'), 7)
+                        test.integer(test.location(program, b'texUnit9'), 9)
+                        test.vector(test.location(program, b'probeTransform'), scale_x, scale_y, 0.5313, 0.4737)
+                        test.begin(0x0007)
+                        for point in ((-1,-1),(1,-1),(1,1),(-1,1)):
+                            test.vertex(*point)
+                        test.end()
+                        pixels = (ct.c_float * 256)()
+                        test.read(0, 0, 8, 8, 0x1908, 0x1406, pixels)
+                        results.append(pixels)
+                    negative_failed = False
+                    for y in range(8):
+                        for x in range(8):
+                            u = ((x+0.5)/4-1)*scale_x+0.5313
+                            v = ((y+0.5)/4-1)*scale_y+0.4737
+                            parity = (math.floor((u % 1)*64)+math.floor((v % 1)*64)) % 2
+                            expected = parity*0.8
+                            index = 4*(y*8+x)
+                            for channel in (0, 2):
+                                if abs(results[0][index+channel]-expected) > 0.0001:
+                                    raise AssertionError(f'{name}: filtered category at {x},{y}: '
+                                                         f'{results[0][index+channel]} != {expected}; uv={u},{v}')
+                                checks += 1
+                            if not 0.01 < results[0][index+1] < 0.99:
+                                raise AssertionError('Shade filtering was unexpectedly disabled')
+                            negative_failed |= abs(results[1][index]-expected) > 0.1
+                    if not negative_failed:
+                        raise AssertionError('Filtered-category negative control did not fail')
+            finally:
+                for program in programs:
+                    test.delete_program(program)
+    finally:
+        delete(2, textures)
+    print(f'Head categorical masks: {checks} anisotropic/mipmapped GPU checks passed; '
+          'shade filtering retained and filtered-category negative controls failed.')
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--game-data', type=Path, required=True)
@@ -333,6 +427,7 @@ def main():
         check_skin_detail_gain(test, args.game_data)
         check_head_coatings(test, args.game_data)
         check_head_glow_fog(test, engine)
+        check_head_layer_filtering(test, engine)
         tint.compile_engine_pairs(test, engine, sorted(pairs), pairs)
         # Expected RGBA comes from installed original palettes and native scheme
         # integers. This remains runnable after a squash or shallow clone.
