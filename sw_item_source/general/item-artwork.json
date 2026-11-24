@@ -4677,6 +4677,23 @@
       "prompt": "Original SWLOR science-fiction inventory icon artwork, polished detailed painted 3D game asset, sharp sculpted silhouette readable at 32px and 64px. One isolated object centered in a square, three-quarter view, filling 80 percent of the canvas, dark nearly black plain background, strong rim lighting, muted metal with restrained colored functional accents. No border, no text, no letters, no numbers, no badge, no logo, no existing game artwork, no EVE Online imagery. This is physical item artwork, not a UI symbol or flat vector. Ship afterburner module: a ribbed armored engine housing with a polished nozzle bell blasting a long white-hot blue flame plume with shock diamonds.",
       "source": "afterburner.png",
       "generator": "Claude illustrated SVG (source .svg beside the .png), rasterized with ImageMagick; the 64x64 inventory icon renders the same SVG without its background square, cropped and centered in the transparent 52x52 interior"
+    },
+    {
+      "name": "Starship Enhancement - Cargo",
+      "items": [
+        "sen_cargo1",
+        "sen_cargo2",
+        "sen_cargo3",
+        "sen_cargo4",
+        "sen_cargo5"
+      ],
+      "key": "enh_cargo",
+      "icon": "iit_smenhcargo",
+      "category": "Utility",
+      "subject": "Craftable upgrade chip: dark navy circuit wafer with gold traces carrying a docked stack of two corrugated cargo containers (amber below, teal above) with door lock rods and corner castings, glowing cyan outward hold-expansion chevrons on the wafer corners, gold contacts.",
+      "prompt": "Original SWLOR science-fiction inventory icon artwork, polished detailed painted 3D game asset, sharp sculpted silhouette readable at 32px and 64px. One isolated object centered in a square, three-quarter view, filling 80 percent of the canvas, dark nearly black plain background, strong rim lighting, muted metal with restrained colored functional accents. No border, no text, no letters, no numbers, no badge, no logo, no existing game artwork, no EVE Online imagery. This is physical item artwork, not a UI symbol or flat vector. Craftable upgrade chip: dark navy circuit wafer with gold traces carrying a docked stack of two corrugated cargo containers (amber below, teal above) with door lock rods and corner castings, glowing cyan outward hold-expansion chevrons on the wafer corners, gold contacts.",
+      "source": "enh_cargo.png",
+      "generator": "Claude illustrated SVG (source .svg beside the .png), rasterized with ImageMagick"
     }
   ],
   "postprocess": "ImageMagick resizes selected source PNGs to 256x256; ImportItemIconArtwork.ps1 creates opaque bottom-left 32px and 64px TGAs and invokes the shared semantic border stamper."
