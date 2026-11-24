@@ -40,4 +40,19 @@ class HavocGlowTests(unittest.TestCase):
         self.assertEqual(glow.validate(root),[])
 
 
+    def test_coat_only_materials_are_bound_by_their_models(self):
+        root=Path(__file__).resolve().parents[1]
+        for material,models in glow.COAT_ONLY_MATERIALS.items():
+            for model in models:
+                bindings=tint.read_model_material_bindings(root/'sw_pt_chest'/f'{model}.mdl')
+                self.assertIn(material,{bound for _,bound in bindings},model)
+
+    def test_static_chest_shader_takes_the_coat_and_keeps_the_lamp(self):
+        root=Path(__file__).resolve().parents[1]
+        shader=(root/'sw_shader/fs_hav_static.shd').read_text()
+        self.assertIn('uniform float progFxCoat;',shader)
+        main=shader.split('void main ()',1)[1]
+        self.assertLess(main.index('SampleProgFxCoat'),main.index('ApplyHavocShader(emission)'))
+
+
 if __name__=='__main__': unittest.main()
