@@ -191,11 +191,12 @@ def material_parameters(source: str):
     return parameters
 
 
-def production_pairs(material_root: Path):
+def production_pairs(material_root: Path, names=None):
     pairs = set()
     parameters = {}
     count = 0
-    for path in material_root.glob("*.mtr"):
+    paths = [material_root / f"{name}.mtr" for name in names] if names else material_root.glob("*.mtr")
+    for path in paths:
         source = path.read_text(encoding="utf-8")
         vertex = re.search(r"^customshaderVS\s+(\S+)", source, re.MULTILINE | re.IGNORECASE)
         fragment = re.search(r"^customshaderFS\s+(\S+)", source, re.MULTILINE | re.IGNORECASE)
@@ -1224,6 +1225,9 @@ def main():
         compile_engine_pairs(test, engine, pairs, parameters)
         cloak_pairs, _, cloak_parameters = production_pairs(root / "sw_pt_cloak")
         compile_engine_pairs(test, engine, cloak_pairs, cloak_parameters)
+        # The undyed Havoc lamp box takes ProgFX coats outside the tint folders.
+        havoc_pairs, _, havoc_parameters = production_pairs(root / "sw_item", ("havoc_box",))
+        compile_engine_pairs(test, engine, havoc_pairs, havoc_parameters)
         check_native_npc_rows(test, engine, pairs, parameters)
         check_native_palette_fallback(test, engine, pairs, root)
         draw_engine_materials(test, engine, root)
