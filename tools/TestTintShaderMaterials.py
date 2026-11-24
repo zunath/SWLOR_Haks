@@ -24,6 +24,7 @@ import math
 from pathlib import Path
 import re
 import struct
+from TintRgbShading import custom_rgb_shades
 
 
 class PixelFormat(ct.Structure):
@@ -190,11 +191,12 @@ def material_parameters(source: str):
     return parameters
 
 
-def production_pairs(material_root: Path):
+def production_pairs(material_root: Path, names=None):
     pairs = set()
     parameters = {}
     count = 0
-    for path in material_root.glob("*.mtr"):
+    paths = [material_root / f"{name}.mtr" for name in names] if names else material_root.glob("*.mtr")
+    for path in paths:
         source = path.read_text(encoding="utf-8")
         vertex = re.search(r"^customshaderVS\s+(\S+)", source, re.MULTILINE | re.IGNORECASE)
         fragment = re.search(r"^customshaderFS\s+(\S+)", source, re.MULTILINE | re.IGNORECASE)
@@ -383,12 +385,14 @@ def check_native_palette_fallback(test, engine, pairs, root: Path):
             palette[((175 - color) * 256 + shade) * 4],
             palette[((175 - color) * 256 + shade) * 4 + 3])) for color in range(176)]
     # Exact RGB is shaded with the row of its nearest palette swatch (shade-128
-    # midtone): swatch row + (rgb - midtone) * row luminance / midtone luminance,
-    # with that row's environment coverage. The swatch is the nearest of the
+    # midtone): the row's contrast and its hue and saturation change relative
+    # to the color's own chroma, with that row's environment coverage
+    # (TintRgbShading.custom_rgb_shades). The swatch is the nearest of the
     # three candidates the atlas lists for the color's 32-level RGB cell. A
     # color equal to a swatch must render exactly like its palette row (checked
     # against the installed palettes below); equal midtones resolve to the
-    # lowest color ID.
+    # lowest color ID. An all-black swatch takes the layer's first row's
+    # shading and coverage, so black custom colors stay matte.
     luminance = (0.2126, 0.7152, 0.0722)
     lookup_atlas = (root / "sw_item/plt_palette.tga").read_bytes()
     lookup_bases = (1536, 1664, 1792, 1792, 1920, 1920, 1920, 1920, 1920, 1920)
@@ -406,18 +410,10 @@ def check_native_palette_fallback(test, engine, pairs, root: Path):
                 distance = sum((a - b) ** 2 for a, b in zip(midpoint, target))
                 if best_distance is None or distance < best_distance:
                     best, best_distance = color, distance
-            row = expected[best]
-            midpoint = row[offset + 128 * 4:offset + 128 * 4 + 3]
-            # An all-black swatch lends no shading; the layer's first row shades the offset.
-            ramp = row if sum(a * w for a, w in zip(midpoint, luminance)) >= .5 / 255 else expected[0]
-            ramp_midpoint = ramp[offset + 128 * 4:offset + 128 * 4 + 3]
-            midpoint_luminance = max(sum(a * w for a, w in zip(ramp_midpoint, luminance)), 1 / 255)
-            for shade in range(256):
-                swatch = row[offset + shade * 4:offset + shade * 4 + 4]
-                ramp_shade = ramp[offset + shade * 4:offset + shade * 4 + 3]
-                scale = max(sum(a * w for a, w in zip(ramp_shade, luminance)) / midpoint_luminance, 0)
-                values.extend(min(max(s + (t - m) * scale, 0), 1) for s, t, m in zip(swatch, target, midpoint))
-                values.append(swatch[3])
+            def shades(palette_row):
+                return [palette_row[offset + shade * 4:offset + shade * 4 + 4] for shade in range(256)]
+            for shade in custom_rgb_shades(rgb, shades(expected[best]), shades(expected[0])):
+                values.extend(shade)
         return tuple(values)
 
     def swatch_rgb(layer, color):
@@ -426,7 +422,7 @@ def check_native_palette_fallback(test, engine, pairs, root: Path):
 
     rgb_expected = {}
     for rgb in ((205, 228, 197), (0, 0, 0), (255, 255, 255), (128, 0, 0), (100, 60, 30), (150, 150, 170),
-                (15, 0, 0), (10, 10, 10)):
+                (15, 0, 0), (10, 10, 10), (2, 2, 2), (20, 20, 24), (44, 44, 48)):
         rgb_expected[f"RGB{rgb}"] = ([rgb] * 10, rgb_reference([rgb] * 10))
     # Near-black colors whose nearest swatch is the all-black row must not collapse to black.
     for rgb in ((15, 0, 0), (10, 10, 10)):
@@ -440,7 +436,10 @@ def check_native_palette_fallback(test, engine, pairs, root: Path):
         for layer in range(10):
             offset = layer * 256 * 4
             first = next(index for index in range(176) if swatch_rgb(layer, index) == colors[layer])
-            if targets[offset:offset + 1024] != expected[first][offset:offset + 1024]:
+            if sum(a * w for a, w in zip(colors[layer], luminance)) / 255 < 2 / 255:
+                continue  # black rows and skin row 31 take the first row (TestPaletteSwatchLookup)
+            reference = expected[first][offset:offset + 1024]
+            if any(abs(a - b) > 1e-6 for a, b in zip(targets[offset:offset + 1024], reference)):
                 raise AssertionError(f"Swatch {color} layer {layer} as RGB differs from palette row {first}")
         rgb_expected[f"swatch{color}"] = (colors, targets)
     descriptors = material_parameters((root / "sw_tint_mtr/pfh0_robe187.mtr").read_text())
@@ -583,7 +582,7 @@ def check_native_palette_fallback(test, engine, pairs, root: Path):
         "shades and RGBA versus original installed palettes; all shader variants/quality modes, "
         "native scalar readbacks, positive custom-row precedence and stale-scheme isolation.", flush=True)
     print(f"RGB nearest-swatch shading passed: {rgb_checks} production GPU draws; all10 layers, all256 "
-        "shades, every swatch as exact RGB equal to its palette row (RGBA), eight off-palette colors (two near-black), "
+        "shades, every swatch as exact RGB equal to its palette row (RGBA), eleven off-palette colors (five near-black or near-neutral dark), "
         "all shader variants/quality modes.", flush=True)
 
 
@@ -1153,6 +1152,9 @@ def main():
         compile_engine_pairs(test, engine, pairs, parameters)
         cloak_pairs, _, cloak_parameters = production_pairs(root / "sw_pt_cloak")
         compile_engine_pairs(test, engine, cloak_pairs, cloak_parameters)
+        # The undyed Havoc lamp box takes ProgFX coats outside the tint folders.
+        havoc_pairs, _, havoc_parameters = production_pairs(root / "sw_item", ("havoc_box",))
+        compile_engine_pairs(test, engine, havoc_pairs, havoc_parameters)
         check_native_npc_rows(test, engine, pairs, parameters)
         check_native_palette_fallback(test, engine, pairs, root)
         draw_engine_materials(test, engine, root)
