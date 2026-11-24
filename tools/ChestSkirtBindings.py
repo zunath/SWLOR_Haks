@@ -117,7 +117,7 @@ STYLES = {
     'chest269': {'back': .6},
     'chest028': {'back': 1.},
     'chest059': {'back': 1.},
-    'chest310': {'back': 1.},
+    'chest310': {'back': 1., 'limit_weights': True},
     'belt019': {'back': .6, 'taper': 'm'},
     'belt110': {'back': 1.},
     'belt112': {'back': .6},
@@ -444,14 +444,18 @@ def cape_weights(current: dict[str, float], position: tuple[float, float, float]
         if extra is None:
             raise ValueError(f'Cape vertex at {position} needs {len(result)} bones: {sorted(result)}')
         result['torso_g'] = result.get('torso_g', 0.) + result.pop(extra)
+    return result
+
+
+def limit_weights(result: dict[str, float]) -> None:
     # Legacy exports round each weight to three decimals, so a source sum can reach 1.001. Gathered onto
     # one bone that exceeds 1, which the neck and shoulder alias importers reject; the excess goes to a
     # second bone instead (every bone agrees in the bind pose, so the bind shape keeps the source sum).
     for bone, weight in list(result.items()):
         if weight > 1.:
-            other = next((name for name in result if name != bone), 'torso_g' if bone == 'pelvis_g' else 'pelvis_g')
+            other = next((name for name in result if name != bone and result[name] > 1e-7),
+                         'torso_g' if bone == 'pelvis_g' else 'pelvis_g')
             result[bone], result[other] = 1., result.get(other, 0.) + weight - 1.
-    return result
 
 
 def skirt_weights(current: dict[str, float], position: tuple[float, float, float], pose: dict,
@@ -469,6 +473,8 @@ def skirt_weights(current: dict[str, float], position: tuple[float, float, float
         result = swing_weights(current, position, pose, shape)
     else:
         result = still_weights(current, position, pose, shape)
+    if shape['cape'] or shape.get('limit_weights'):
+        limit_weights(result)
     result = {bone: weight for bone, weight in result.items() if weight > 1e-7}
     if len(result) > 4:
         raise ValueError(f'Skirt vertex at {position} needs {len(result)} bones: {sorted(result)}')
