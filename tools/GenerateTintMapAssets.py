@@ -57,6 +57,14 @@ TINT_SHADER = REPOSITORY_ROOT / "sw_shader" / "fs_plt_tinter.shd"
 TINT_MAPPED_SHADER = REPOSITORY_ROOT / "sw_shader" / "fs_plt_tinter_nm.shd"
 TINT_HAIR_MAPPED_SHADER = REPOSITORY_ROOT / "sw_shader" / "fs_plt_hair_nm.shd"
 TINT_FRAGMENT_SHADER = "fs_plt_tinter"
+# ProgFX coatings (stoneskin, barkskin, Shadow Shield...) never reach MTR textures,
+# so every tint material binds the coat atlas and the server selects its cell.
+PROGFX_COAT_TEXTURE = "progfx_coat"
+PROGFX_COAT_LINES = (
+    f"texture8 {PROGFX_COAT_TEXTURE}",
+    "parameter float progFxCoat 0.0",
+)
+PROGFX_COAT_DIRECTIVES = frozenset({("texture8",), ("parameter", "float", "progfxcoat")})
 TINT_MAPPED_FRAGMENT_SHADER = "fs_plt_tinter_nm"
 TINT_HAIR_MAPPED_FRAGMENT_SHADER = "fs_plt_hair_nm"
 # Restore native color filtering only for reported dye edge regressions.
@@ -1714,11 +1722,13 @@ def material_profile_signature(source: str, profile: tuple[str, list[str]] | Non
         text = tint_material_text(mtr_path(source), source, "mask", 1, 1, source, profile,
                                   keep_palette_specular_maps=True)
         # Edge filtering is a per-source opt-in; it must not rename scoped aliases.
+        # Neither may the ProgFX coat binding that every material shares.
         _PROFILE_SIGNATURES[key] = tuple(sorted(
             (directive, " ".join(line.split()).lower())
             for line in text.splitlines()
             if (directive := mtr_directive_key(line)) is not None
             and directive != ("parameter", "float", "smoothtintedges")
+            and directive not in PROGFX_COAT_DIRECTIVES
             and not re.match(r"^\s*texture\d+\s+null\s*$", line, re.IGNORECASE)
         ))
     return _PROFILE_SIGNATURES[key]
@@ -2500,8 +2510,8 @@ def tint_material_text(
         re.escape(uniform_name) for uniform_name in TINT_CUSTOM_MODE_PARAMETERS
     )
     replaced = re.compile(
-        r"^\s*(?:customshaderFS|texture0|texture7|texture9|texture10|"
-        r"parameter\s+(?:float|int)\s+(?:tintMapWidth|tintMapHeight|smoothTintEdges|useTexture1Alpha|useTexture9Alpha|useNativePalette|useAuthoredDiffuse|"
+        r"^\s*(?:customshaderFS|texture0|texture7|texture8|texture9|texture10|"
+        r"parameter\s+(?:float|int)\s+(?:tintMapWidth|tintMapHeight|smoothTintEdges|useTexture1Alpha|useTexture9Alpha|useNativePalette|useAuthoredDiffuse|progFxCoat|"
         + tint_row_parameter_pattern
         + "|"
         + tint_color_parameter_pattern
@@ -2561,6 +2571,7 @@ def tint_material_text(
     if texture9_alpha:
         lines.append(f"texture9 {texture9_alpha}")
         lines.append("parameter float useTexture9Alpha 1.0")
+    lines.extend(PROGFX_COAT_LINES)
     return "\n".join(line.rstrip() for line in lines).strip() + "\n"
 
 
@@ -3761,8 +3772,10 @@ def check_tint_mtr_structure(path: Path) -> list[str]:
         ("customshaderfs",),
         ("texture0",),
         ("texture7",),
+        ("texture8",),
         ("texture10",),
         ("parameter", "float", "tintmapwidth"),
+        ("parameter", "float", "progfxcoat"),
         ("parameter", "float", "tintmapheight"),
     ) + tuple(
         ("parameter", "float", uniform_name.lower())
@@ -4076,7 +4089,7 @@ def audit() -> None:
             ) + tuple(
                 line.lower()
                 for line in tint_palette_parameter_lines(model in _NATIVE_ATTACHMENT_MATERIALS)
-            )
+            ) + tuple(line.lower() for line in PROGFX_COAT_LINES)
             if authored_diffuse_texture(model) != "plt_white":
                 required += ("parameter float useauthoreddiffuse 1.0",)
             for line in required:
@@ -4150,7 +4163,7 @@ def audit() -> None:
         ) + tuple(
             line.lower()
             for line in tint_palette_parameter_lines(alias in _NATIVE_ATTACHMENT_MATERIALS)
-        )
+        ) + tuple(line.lower() for line in PROGFX_COAT_LINES)
         if authored_diffuse_texture(source) != "plt_white":
             required += ("parameter float useauthoreddiffuse 1.0",)
         for line in required:
