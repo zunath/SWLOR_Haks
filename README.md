@@ -133,7 +133,7 @@ Each build reads the current files, so a new portrait appears on the next build.
 
 ### Download a build
 
-The `Portrait companion` workflow builds the companion on every push to any branch or tag. A push of several commits builds only the last one.
+The `Portrait companion` workflow builds the companion when a push to a branch changes its inputs: `sw_portrait`, `portraits.2da`, `racialtypes.2da`, `requirements.txt`, `portrait-viewer`, or its own tool, test or workflow file. Other pushes and tags build nothing. A push of several commits builds only the last one. A newer push to the same branch cancels a build still running. To build any branch by hand, use Run workflow on the workflow's page.
 
 1. Open the Actions tab, then the `Portrait companion` workflow.
 2. Open a green run and download `portrait-companion-<commit>` from its Artifacts list.
@@ -149,4 +149,4 @@ Publishing is off. A maintainer turns it on once:
 2. In Settings → Secrets and variables → Actions → Variables, add `PORTRAIT_PAGES` with the value `true`.
 3. Run the `Portrait companion` workflow on `master` from the Actions tab.
 
-From then on, each push to `master` publishes the companion to `https://<owner>.github.io/SWLOR_Haks/`. Other branches still build artifacts only. A Pages site is public, even for a private repository, unless the account is on GitHub Enterprise Cloud. To stop publishing, delete the variable.
+From then on, each `master` build publishes the companion to `https://<owner>.github.io/SWLOR_Haks/`. Other branches still build artifacts only. A Pages site is public, even for a private repository, unless the account is on GitHub Enterprise Cloud. To stop publishing, delete the variable.

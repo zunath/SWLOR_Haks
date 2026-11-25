@@ -2,6 +2,17 @@ name: Portrait companion
 
 on:
   push:
+    # Branches only: GitHub skips path filters on tag pushes.
+    branches: ['**']
+    paths:
+      - sw_portrait/**
+      - sw_2da/portraits.2da
+      - sw_2da/racialtypes.2da
+      - tools/GeneratePortraitViewer.py
+      - tools/TestGeneratePortraitViewer.py
+      - portrait-viewer/**
+      - requirements.txt
+      - .github/workflows/portrait-companion.yml
   workflow_dispatch:
 
 permissions:
@@ -11,6 +22,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     timeout-minutes: 5
+    concurrency:
+      group: portrait-build-${{ github.ref }}
+      cancel-in-progress: true
     steps:
       - uses: actions/checkout@v7
         with:
