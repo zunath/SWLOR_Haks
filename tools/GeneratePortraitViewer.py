@@ -29,11 +29,11 @@ def preview(source):
     return image.crop((0, 0, image.width, round(image.height * 100 / 128)))
 
 
-# The game's size letters, largest first.
-SIZES = 'hlmst'
+# The game's size letters. A preview uses _h, else _m, and another size only when neither exists.
+SIZES = 'hmlst'
 
 
-def largest(sizes):
+def best(sizes):
     return next(sizes[size] for size in SIZES if size in sizes)
 
 
@@ -59,7 +59,7 @@ def refresh_stock(game_data, wanted, stock):
     kept = set()
     for base in sorted(wanted & found.keys()):
         sizes = found[base]
-        with preview(largest(sizes)) as image:
+        with preview(best(sizes)) as image:
             image.save(stock / f'{base}.webp', quality=55, method=6)
         kept.add(base)
     for old in stock.glob('*.webp'):
@@ -82,7 +82,7 @@ def main(root=ROOT, output=OUTPUT, game_data=None):
     images = portrait_files(sorted(source_dir.glob('*.dds')))
     (output / 'images').mkdir(parents=True, exist_ok=True)
     for base, sizes in images.items():
-        with preview(largest(sizes)) as image:
+        with preview(best(sizes)) as image:
             image.save(output / 'images' / f'{base}.webp', quality=85)
     entries = [row for row in table(root / 'sw_2da/portraits.2da') if row['BaseResRef'] != UNRECORDED]
     if game_data is not None:

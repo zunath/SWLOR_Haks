@@ -136,8 +136,8 @@ class BaseGamePortraitTest(unittest.TestCase):
                 self.assertGreater(red, 200)
                 self.assertLess(blue, 60)
             with Image.open(output / 'stock/small_.webp') as image:
-                # With no huge size, the large one wins over the medium one.
-                self.assertEqual(image.size, (128, 200))
+                # With no _h size, _m wins over _l.
+                self.assertEqual(image.size, (64, 100))
             self.assertEqual([r['art'] for r in load(output)], ['stock', 'stock', 'hak'])
 
 

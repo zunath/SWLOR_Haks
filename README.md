@@ -116,6 +116,8 @@ After you change the generator, run its test:
 python -m unittest discover -s tools -p TestGeneratePortraitViewer.py
 ```
 
+Each portrait gets one preview, from its `_h` file, else its `_m` file. A portrait with neither uses the size it has.
+
 The build writes `portrait-viewer/catalogue.js` and the `.webp` files in `portrait-viewer/images/`. Git ignores both. Don't edit them. The build deletes any `.webp` there that it didn't make, so keep other images out of that folder.
 
 ### ResRefs
@@ -145,7 +147,7 @@ The base-game previews are committed in `portrait-viewer/stock/`. No hak build r
 python tools/GeneratePortraitViewer.py --stock <extracted game resources>
 ```
 
-The refresh keeps one image for each `portraits.2da` row that has no HAK portrait. It uses the `_h` size, else `_m`. It deletes every other `.webp` in that folder.
+The refresh keeps one image for each `portraits.2da` row that has no HAK portrait. It deletes every other `.webp` in that folder.
 
 ### Download a build
 
