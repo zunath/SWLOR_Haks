@@ -157,6 +157,17 @@ def equivalent_quaternion(a, b) -> bool:
     return any(all(math.isclose(x, sign * y, abs_tol=2e-6) for x, y in zip(a, b)) for sign in (1, -1))
 
 
+def compiled_rotation_matches(values, stored) -> bool:
+    """Whether a stored quaternion is the compiler's encoding of a source axis-angle row.
+
+    The compiler multiplies the source axis into the quaternion without normalizing it,
+    so an exported axis a few millionths away from unit length is stored as written."""
+    x, y, z, angle = map(float, values)
+    half = math.sin(angle / 2)
+    written = [x * half, y * half, z * half, math.cos(angle / 2)]
+    return equivalent_quaternion(quaternion(values), stored) or equivalent_quaternion(written, stored)
+
+
 @lru_cache(maxsize=1)
 def external_part_types() -> set[str]:
     table = ROOT / "sw_2da" / "capart.2da"
@@ -332,7 +343,7 @@ def validate_round_trip(source: bytes, compiled: bytes, decompiled: str, skin_sk
         if expected_rotations is None and "orientation" in properties:
             expected_rotations = [["0", *properties["orientation"]]]
         if expected_rotations is not None:
-            if len(expected_rotations) != len(rotation_values) or not all(equivalent(row[0], timestamp) and equivalent_quaternion(quaternion(row[1:]), value) for row, (timestamp, value) in zip(expected_rotations, rotation_values)):
+            if len(expected_rotations) != len(rotation_values) or not all(equivalent(row[0], timestamp) and compiled_rotation_matches(row[1:], value) for row, (timestamp, value) in zip(expected_rotations, rotation_values)):
                 raise ValueError(f"{name}: binary orientation controller changed")
         # The native compiler emits a time-zero constant track as a static
         # property. Compare that representation without relaxing animated keys.
