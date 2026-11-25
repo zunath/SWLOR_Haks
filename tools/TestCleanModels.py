@@ -29,6 +29,17 @@ class CleanModelsTests(unittest.TestCase):
         self.assertTrue(prepared.endswith(animation))
         self.assertEqual(prepared, cli.explicit_orientations(prepared))
 
+    def test_rotation_check_accepts_the_written_axis_but_not_a_different_rotation(self):
+        # C_Ronto's leglf03 key: the exported axis is 1.00006 long and the compiler keeps it.
+        row = ["0.86178", "0.15513", "-0.48307", "0.11349"]
+        half = math.sin(0.11349 / 2)
+        written = (0.86178 * half, 0.15513 * half, -0.48307 * half, math.cos(0.11349 / 2))
+        self.assertTrue(mdl.compiled_rotation_matches(row, written))
+        self.assertTrue(mdl.compiled_rotation_matches(row, tuple(-value for value in written)))
+        self.assertTrue(mdl.compiled_rotation_matches(row, mdl.quaternion(row)))
+        turned = (0.86178 * half, 0.15513 * half, -0.48307 * half + 1e-4, math.cos(0.11349 / 2))
+        self.assertFalse(mdl.compiled_rotation_matches(row, turned))
+
     def test_json_failures_and_incomplete_reports_fail_even_with_exit_zero(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
