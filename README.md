@@ -98,42 +98,50 @@ material lookups, so material-only edits or newly added MTRs invalidate reuse.
 
 ## Portrait companion
 
-The portrait companion is a searchable page of every portrait in `sw_portrait` and `portraits.2da`. It opens in any browser, with no server.
+The portrait companion is a searchable gallery page that shows every portrait in `sw_portrait` and `portraits.2da`. It opens in any browser and requires no server running.
 
 ### Build it locally
 
-Install `requirements.txt` as in the tint-map section. Then build the companion:
+Install `requirements.txt` as in the tint-map section, then run:
 
 ```powershell
 python tools/GeneratePortraitViewer.py
 ```
 
-Open `portrait-viewer/index.html` in a browser. On NixOS, build it with `nix-shell -p 'python3.withPackages (p: [ p.pillow ])' --run 'python tools/GeneratePortraitViewer.py'`.
+Open `portrait-viewer/index.html` in a browser. On NixOS, run the build with `nix-shell -p 'python3.withPackages (p: [ p.pillow ])' --run 'python tools/GeneratePortraitViewer.py'`.
 
-Run the test after you change the generator:
+After you change the generator, run its test:
 
 ```powershell
 python -m unittest discover -s tools -p TestGeneratePortraitViewer.py
 ```
 
-The generator owns `portrait-viewer/catalogue.js` and every `.webp` in `portrait-viewer/images/`. Git ignores both. Never edit them or store other images there.
+The build writes `portrait-viewer/catalogue.js` and the `.webp` files in `portrait-viewer/images/`. Git ignores both. Don't edit them. The build deletes any `.webp` there that it didn't make, so keep other images out of that folder.
 
 ### What the filters mean
 
-- Race labels come from `racialtypes.2da`.
-- Sex shows the raw value from `portraits.2da`.
-- "Unspecified" means the table records no value. Nothing is guessed from file names or artwork.
+- Race comes from `racialtypes.2da`.
+- Sex is the raw value from `portraits.2da`.
+- "Unspecified" means the table has no value. The page never guesses from file names or artwork.
 - "Missing artwork" lists table rows with no image in `sw_portrait`. Many of them are base-game portraits.
 - An image with no table row shows "Not listed in portraits.2da".
-- A resource name the table lists twice shows twice, each card with its table ID.
+- A resource name the table lists twice gets two cards, each with its table ID.
 
 ### Add or remove a portrait
 
-Each build reads the current files, so a new portrait appears on the next build. To remove a portrait completely, delete its `po_*.dds` files and its `portraits.2da` row. Deleting only the images moves the row to "Missing artwork". Deleting only the row keeps the images, unlisted.
+Each build reads the current files, so a new portrait shows up on the next build. To remove a portrait, delete its `po_*.dds` files and its `portraits.2da` row. If you delete only the images, the row moves to "Missing artwork". If you delete only the row, the images stay as unlisted.
 
 ### Download a build
 
-The `Portrait companion` workflow builds the companion when a push to a branch changes its inputs: `sw_portrait`, `portraits.2da`, `racialtypes.2da`, `requirements.txt`, `portrait-viewer`, or its own tool, test or workflow file. Other pushes and tags build nothing. A push of several commits builds only the last one. A newer push to the same branch cancels a build still running. To build any branch by hand, use Run workflow on the workflow's page.
+GitHub builds the companion when a push to a branch changes any of these:
+
+- `sw_portrait`
+- `portraits.2da` or `racialtypes.2da`
+- `portrait-viewer`
+- `requirements.txt`
+- the generator, its test or the `Portrait companion` workflow
+
+Other pushes and tags build nothing. To build a branch anyway, open the workflow in the Actions tab and press Run workflow.
 
 1. Open the Actions tab, then the `Portrait companion` workflow.
 2. Open a green run and download `portrait-companion-<commit>` from its Artifacts list.
@@ -143,10 +151,10 @@ A downloaded copy never updates. Artifacts expire after 14 days. Anyone signed i
 
 ### Publish it on GitHub Pages
 
-Publishing is off. A maintainer turns it on once:
+Publishing is off until a maintainer turns it on:
 
 1. In Settings → Pages, set Source to "GitHub Actions".
 2. In Settings → Secrets and variables → Actions → Variables, add `PORTRAIT_PAGES` with the value `true`.
-3. Run the `Portrait companion` workflow on `master` from the Actions tab.
+3. In the Actions tab, run the `Portrait companion` workflow on `master`.
 
-From then on, each `master` build publishes the companion to `https://<owner>.github.io/SWLOR_Haks/`. Other branches still build artifacts only. A Pages site is public, even for a private repository, unless the account is on GitHub Enterprise Cloud. To stop publishing, delete the variable.
+After that, each `master` build publishes the companion to `https://<owner>.github.io/SWLOR_Haks/`. Other branches still build artifacts only. Anyone can open the published site. To stop publishing, delete the variable.

@@ -35,7 +35,7 @@ function more() {
       card.append(image);
     } else {
       const placeholder = document.createElement('span');
-      placeholder.className = 'placeholder'; placeholder.textContent = 'Artwork not in repository'; card.append(placeholder);
+      placeholder.className = 'placeholder'; placeholder.textContent = 'Missing artwork'; card.append(placeholder);
     }
     const caption = document.createElement('span'); caption.className = 'caption';
     const name = document.createElement('strong'); name.textContent = p.name;
