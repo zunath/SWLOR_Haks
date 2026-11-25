@@ -118,6 +118,10 @@ python -m unittest discover -s tools -p TestGeneratePortraitViewer.py
 
 The build writes `portrait-viewer/catalogue.js` and the `.webp` files in `portrait-viewer/images/`. Git ignores both. Don't edit them. The build deletes any `.webp` there that it didn't make, so keep other images out of that folder.
 
+### ResRefs
+
+The page shows each portrait's ResRef, such as `po_dw_f_01_`. That is the form `SetPortraitResRef` takes. `portraits.2da` stores the same name without the `po_` prefix, and the details show that value too.
+
 ### What the filters mean
 
 - Race comes from `racialtypes.2da`.
