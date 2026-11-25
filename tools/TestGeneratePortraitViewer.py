@@ -41,7 +41,8 @@ class PortraitSynchronizationTest(unittest.TestCase):
             table.write_text(HEADER)
             main(root, output)
             self.assertEqual({p.name for p in (output / 'images').iterdir()}, {'second_.webp'})
-            self.assertEqual([(r['name'], r['race']) for r in load(output)], [('second_', 'Unspecified')])
+            self.assertEqual([(r['name'], r['race'], r['sex'], r['id'], r['art'], r['image']) for r in load(output)],
+                             [('second_', 'Unspecified', 'Unspecified', None, 'hak', 'images/second_.webp')])
 
             # Metadata is rebuilt too, including references to absent base-game art.
             table.write_text(HEADER + '2 second_ 1 6\n3 stock_ 0 6\n')
@@ -60,7 +61,7 @@ class PortraitSynchronizationTest(unittest.TestCase):
     def test_reads_files_the_way_the_game_does(self):
         with tempfile.TemporaryDirectory() as temporary:
             portraits, table, output = source_tree(Path(temporary))
-            table.write_text('2DA V2.0\n// a comment line\nBaseResRef Sex Race\n1 Mixed_ 0 6\n2 norace_ **** ****\n3 odd_ 7 6\n')
+            table.write_text('2DA V2.0\n// a comment line\nBaseResRef Sex Race\n1 Mixed_ 0 6\n2 norace_ **** ****\n3 odd_ 7 6\n4 alien_ 0 9\n5 **** 0 6\n')
             # DDS rows run bottom-up, so the last source rows are the top of the portrait.
             largest = Image.new('RGB', (64, 128), 'blue')
             largest.paste('red', (0, 120, 64, 128))
@@ -73,12 +74,18 @@ class PortraitSynchronizationTest(unittest.TestCase):
             self.assertEqual([(r['name'], r['resref'], r['race'], r['sex'], r['image']) for r in rows],
                              [('Mixed_', 'po_Mixed_', 'Human', 'Male (0)', 'images/mixed_.webp'),
                               ('norace_', 'po_norace_', 'Unspecified', 'Unspecified', None),
-                              ('odd_', 'po_odd_', 'Human', 'Value 7', None)])
+                              ('odd_', 'po_odd_', 'Human', 'Value 7', None),
+                              ('alien_', 'po_alien_', 'Race 9', 'Male (0)', None)])
             with Image.open(output / 'images/mixed_.webp') as preview:
                 self.assertEqual(preview.size, (64, 100))
                 red, _, blue = preview.convert('RGB').getpixel((32, 2))
                 self.assertGreater(red, 200)
                 self.assertLess(blue, 60)
+
+            # A table with no Sex column still builds.
+            table.write_text('2DA V2.0\n\nBaseResRef Race\n1 Mixed_ 6\n')
+            main(Path(temporary), output)
+            self.assertEqual(load(output)[0]['sex'], 'Unspecified')
 
     def test_rejects_unknown_portrait_files(self):
         with tempfile.TemporaryDirectory() as temporary:
@@ -93,7 +100,7 @@ class BaseGamePortraitTest(unittest.TestCase):
     def test_stock_art_fills_rows_without_hak_art(self):
         with tempfile.TemporaryDirectory() as temporary:
             portraits, table, output = source_tree(Path(temporary))
-            table.write_text(HEADER + '1 both_ 0 6\n2 stock_ 0 6\n3 none_ 0 6\n')
+            table.write_text(HEADER + '1 both_ 0 6\n2 Stock_ 0 6\n3 none_ 0 6\n')
             Image.new('RGB', (32, 64), 'red').save(portraits / 'po_both_m.dds')
             (output / 'stock').mkdir(parents=True)
             for base in ('both_', 'stock_', 'unused_'):
@@ -101,7 +108,7 @@ class BaseGamePortraitTest(unittest.TestCase):
             main(Path(temporary), output)
 
             self.assertEqual([(r['name'], r['art'], r['image']) for r in load(output)],
-                             [('both_', 'hak', 'images/both_.webp'), ('stock_', 'stock', 'stock/stock_.webp'),
+                             [('both_', 'hak', 'images/both_.webp'), ('Stock_', 'stock', 'stock/stock_.webp'),
                               ('none_', None, None)])
             # A normal build never prunes the committed stock folder.
             self.assertEqual({p.name for p in (output / 'stock').iterdir()},
