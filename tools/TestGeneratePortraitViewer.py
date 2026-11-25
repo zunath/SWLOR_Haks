@@ -66,6 +66,7 @@ class PortraitSynchronizationTest(unittest.TestCase):
             largest.paste('red', (0, 120, 64, 128))
             largest.save(portraits / 'PO_MIXED_H.dds')
             Image.new('RGB', (8, 16), 'green').save(portraits / 'po_mixed_t.dds')
+            Image.new('RGB', (32, 64), 'green').save(portraits / 'po_mixed_m.dds')
             main(Path(temporary), output)
 
             rows = load(output)
@@ -110,7 +111,7 @@ class BaseGamePortraitTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
             portraits, table, output = source_tree(root)
-            table.write_text(HEADER + '1 Large_ 0 6\n2 small_ 0 6\n3 hak_ 0 6\n')
+            table.write_text(HEADER + '1 Large_ 0 6\n2 small_ 0 6\n3 hak_ 0 6\n4 tiny_ 0 6\n5 wee_ 0 6\n6 gone_ 0 6\n')
             Image.new('RGB', (32, 64), 'red').save(portraits / 'po_hak_m.dds')
             Image.new('RGB', (64, 128), 'red').save(portraits / 'po_hak_l.dds')
             game = root / 'game' / 'portraits.bif'
@@ -122,15 +123,21 @@ class BaseGamePortraitTest(unittest.TestCase):
             Image.new('RGB', (128, 256), 'green').save(game / 'po_large_l.tga')
             Image.new('RGB', (64, 128), 'green').save(game / 'po_small_m.tga')
             Image.new('RGB', (128, 256), 'blue').save(game / 'po_small_l.tga')
+            for size, width in (('l', 128), ('s', 32), ('t', 16)):
+                Image.new('RGB', (width, width * 2)).save(game / f'po_tiny_{size}.tga')
+            Image.new('RGB', (32, 64)).save(game / 'po_wee_s.tga')
+            Image.new('RGB', (16, 32)).save(game / 'po_wee_t.tga')
             Image.new('RGB', (64, 128)).save(game / 'po_hak_m.tga')
             Image.new('RGB', (64, 128)).save(game / 'po_unlisted_m.tga')
             # The game ships a few odd names; the refresh skips them.
             Image.new('RGB', (64, 128)).save(game / 'po_odd_m .tga')
             (output / 'stock').mkdir(parents=True)
             Image.new('RGB', (8, 10)).save(output / 'stock' / 'stale_.webp')
+            # gone_ is still wanted, but the game no longer ships it.
+            Image.new('RGB', (8, 10)).save(output / 'stock' / 'gone_.webp')
             main(root, output, game_data=root / 'game')
 
-            self.assertEqual({p.name for p in (output / 'stock').iterdir()}, {'large_.webp', 'small_.webp'})
+            self.assertEqual({p.name for p in (output / 'stock').iterdir()}, {'large_.webp', 'small_.webp', 'tiny_.webp', 'wee_.webp'})
             with Image.open(output / 'stock/large_.webp') as image:
                 self.assertEqual(image.size, (256, 400))
                 red, _, blue = image.convert('RGB').getpixel((128, 2))
@@ -139,7 +146,11 @@ class BaseGamePortraitTest(unittest.TestCase):
             with Image.open(output / 'stock/small_.webp') as image:
                 # With no _h size, _m wins over _l.
                 self.assertEqual(image.size, (64, 100))
-            self.assertEqual([r['art'] for r in load(output)], ['stock', 'stock', 'hak'])
+            with Image.open(output / 'stock/tiny_.webp') as image:
+                self.assertEqual(image.size, (128, 200))
+            with Image.open(output / 'stock/wee_.webp') as image:
+                self.assertEqual(image.size, (32, 50))
+            self.assertEqual([r['art'] for r in load(output)], ['stock', 'stock', 'hak', 'stock', 'stock', None])
             with Image.open(output / 'images/hak_.webp') as image:
                 # HAK art follows the same rule: with no _h size, _m wins over _l.
                 self.assertEqual(image.size, (32, 50))
