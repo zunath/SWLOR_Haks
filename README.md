@@ -123,7 +123,7 @@ The build writes `portrait-viewer/catalogue.js` and the `.webp` files in `portra
 - Race comes from `racialtypes.2da`.
 - Sex is the raw value from `portraits.2da`.
 - "Unspecified" means the table has no value. The page never guesses from file names or artwork.
-- "Local artwork" lists portraits from `sw_portrait`.
+- "SWLOR artwork" lists portraits from `sw_portrait`.
 - "Base game" lists table rows that use a portrait from the unmodded game. A HAK portrait with the same ResRef replaces it.
 - "Missing artwork" lists table rows with no image in either place.
 - An image with no table row shows "Not listed in portraits.2da".
