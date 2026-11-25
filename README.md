@@ -121,7 +121,7 @@ The build writes `portrait-viewer/catalogue.js` and the `.webp` files in `portra
 ### What the filters mean
 
 - Race comes from `racialtypes.2da`.
-- Sex is the raw value from `portraits.2da`.
+- Sex shows the `gender.2da` name with its `portraits.2da` value, such as "Male (0)". A value with no `gender.2da` row shows as "Value 5".
 - "Unspecified" means the table has no value. The page never guesses from file names or artwork.
 - "SWLOR artwork" lists portraits from `sw_portrait`.
 - "Base game" lists table rows that use a portrait from the unmodded game. A HAK portrait with the same ResRef replaces it.
@@ -148,7 +148,7 @@ The refresh keeps one image for each `portraits.2da` row that has no HAK portrai
 GitHub builds the companion when a push to a branch changes any of these:
 
 - `sw_portrait`
-- `portraits.2da` or `racialtypes.2da`
+- `portraits.2da`, `racialtypes.2da` or `gender.2da`
 - `portrait-viewer`
 - `requirements.txt`
 - the generator, its test or the `Portrait companion` workflow

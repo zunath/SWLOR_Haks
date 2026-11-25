@@ -1,14 +1,12 @@
 'use strict';
 const catalogue = window.PORTRAITS ?? [];
 const $ = id => document.getElementById(id);
-const UNRECORDED = '****';
-const label = value => value === UNRECORDED ? 'Unspecified' : value;
 if (!window.PORTRAITS) $('empty').textContent = 'No catalogue was generated. Run python tools/GeneratePortraitViewer.py, then reload this page.';
 const compare = (a, b) => a.localeCompare(b, undefined, {numeric: true});
 let matches = [], shown = 0;
 for (const field of ['race', 'sex']) {
   for (const value of [...new Set(catalogue.map(p => p[field]))].sort(compare)) {
-    $(field).add(new Option(label(value), value));
+    $(field).add(new Option(value, value));
   }
 }
 function details(p) {
@@ -17,7 +15,7 @@ function details(p) {
   else $('large').removeAttribute('src');
   $('large').alt = p.name;
   $('name').textContent = p.name;
-  $('metadata').textContent = `${p.race} · Sex: ${label(p.sex)} · ${p.id === null ? 'Not listed in portraits.2da' : `Table ID: ${p.id}`}${p.art === 'stock' ? ' · Base game art' : ''}`;
+  $('metadata').textContent = `${p.race} · Sex: ${p.sex} · ${p.id === null ? 'Not listed in portraits.2da' : `Table ID: ${p.id}`}${p.art === 'stock' ? ' · Base game art' : ''}`;
   $('resource').value = p.name;
   $('detail').showModal();
 }

@@ -64,6 +64,13 @@ def refresh_stock(game_data, wanted, stock):
 
 def main(root=ROOT, output=OUTPUT, game_data=None):
     races = {r['id']: r['Label'] for r in table(root / 'sw_2da/racialtypes.2da')}
+    # gender.2da names each Sex value by its constant, such as GENDER_MALE.
+    genders = {r['id']: r['CONSTANT'].removeprefix('GENDER_').capitalize() for r in table(root / 'sw_2da/gender.2da')}
+
+    def sex(value):
+        if value == UNRECORDED:
+            return 'Unspecified'
+        return f'{genders[value]} ({value})' if value in genders else f'Value {value}'
     source_dir = root / 'sw_portrait'
     if not source_dir.is_dir():
         raise FileNotFoundError(source_dir)
@@ -89,9 +96,9 @@ def main(root=ROOT, output=OUTPUT, game_data=None):
         art = 'hak' if key in images else 'stock' if key in stock else None
         image = {'hak': f'images/{key}.webp', 'stock': f'stock/{key}.webp', None: None}[art]
         rows.append(dict(name=base, id=row['id'], race=races.get(race, f'Race {race}') if race != UNRECORDED else 'Unspecified',
-                         sex=row.get('Sex', UNRECORDED), art=art, image=image))
+                         sex=sex(row.get('Sex', UNRECORDED)), art=art, image=image))
     for base in sorted(images.keys() - listed):
-        rows.append(dict(name=base, id=None, race='Unspecified', sex=UNRECORDED, art='hak', image=f'images/{base}.webp'))
+        rows.append(dict(name=base, id=None, race='Unspecified', sex='Unspecified', art='hak', image=f'images/{base}.webp'))
     (output / 'catalogue.js').write_text('window.PORTRAITS = ' + json.dumps(rows, ensure_ascii=True) + ';\n')
     # This directory owns generated previews only; prune after a successful build.
     for old in (output / 'images').glob('*.webp'):

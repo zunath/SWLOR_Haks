@@ -21,6 +21,7 @@ def source_tree(root):
     portraits.mkdir()
     tables.mkdir()
     (tables / 'racialtypes.2da').write_text('2DA V2.0\n\nLabel\n6 Human\n')
+    (tables / 'gender.2da').write_text('2DA V2.0\n\nNAME GENDER CONSTANT\n0 156 M GENDER_MALE\n1 157 F GENDER_FEMALE\n')
     return portraits, tables / 'portraits.2da', root / 'portrait-viewer'
 
 
@@ -47,7 +48,7 @@ class PortraitSynchronizationTest(unittest.TestCase):
             main(root, output)
             rows = load(output)
             self.assertEqual(rows[0]['race'], 'Human')
-            self.assertEqual(rows[0]['sex'], '1')
+            self.assertEqual(rows[0]['sex'], 'Female (1)')
             self.assertIsNone(rows[1]['image'])
 
             (portraits / 'po_second_m.dds').unlink()
@@ -59,7 +60,7 @@ class PortraitSynchronizationTest(unittest.TestCase):
     def test_reads_files_the_way_the_game_does(self):
         with tempfile.TemporaryDirectory() as temporary:
             portraits, table, output = source_tree(Path(temporary))
-            table.write_text('2DA V2.0\n// a comment line\nBaseResRef Sex Race\n1 Mixed_ 0 6\n2 norace_ 1 ****\n')
+            table.write_text('2DA V2.0\n// a comment line\nBaseResRef Sex Race\n1 Mixed_ 0 6\n2 norace_ **** ****\n3 odd_ 7 6\n')
             # DDS rows run bottom-up, so the last source rows are the top of the portrait.
             largest = Image.new('RGB', (64, 128), 'blue')
             largest.paste('red', (0, 120, 64, 128))
@@ -68,8 +69,9 @@ class PortraitSynchronizationTest(unittest.TestCase):
             main(Path(temporary), output)
 
             rows = load(output)
-            self.assertEqual([(r['name'], r['race'], r['image']) for r in rows],
-                             [('Mixed_', 'Human', 'images/mixed_.webp'), ('norace_', 'Unspecified', None)])
+            self.assertEqual([(r['name'], r['race'], r['sex'], r['image']) for r in rows],
+                             [('Mixed_', 'Human', 'Male (0)', 'images/mixed_.webp'),
+                              ('norace_', 'Unspecified', 'Unspecified', None), ('odd_', 'Human', 'Value 7', None)])
             with Image.open(output / 'images/mixed_.webp') as preview:
                 self.assertEqual(preview.size, (64, 100))
                 red, _, blue = preview.convert('RGB').getpixel((32, 2))
