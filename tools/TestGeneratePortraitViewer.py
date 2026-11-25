@@ -112,6 +112,7 @@ class BaseGamePortraitTest(unittest.TestCase):
             portraits, table, output = source_tree(root)
             table.write_text(HEADER + '1 Large_ 0 6\n2 small_ 0 6\n3 hak_ 0 6\n')
             Image.new('RGB', (32, 64), 'red').save(portraits / 'po_hak_m.dds')
+            Image.new('RGB', (64, 128), 'red').save(portraits / 'po_hak_l.dds')
             game = root / 'game' / 'portraits.bif'
             game.mkdir(parents=True)
             # TGA rows keep their stored order, so a red top band stays on top.
@@ -139,6 +140,9 @@ class BaseGamePortraitTest(unittest.TestCase):
                 # With no _h size, _m wins over _l.
                 self.assertEqual(image.size, (64, 100))
             self.assertEqual([r['art'] for r in load(output)], ['stock', 'stock', 'hak'])
+            with Image.open(output / 'images/hak_.webp') as image:
+                # HAK art follows the same rule: with no _h size, _m wins over _l.
+                self.assertEqual(image.size, (32, 50))
 
 
 if __name__ == '__main__':
