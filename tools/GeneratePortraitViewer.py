@@ -29,12 +29,20 @@ def preview(source):
     return image.crop((0, 0, image.width, round(image.height * 100 / 128)))
 
 
+# The game's size letters, largest first.
+SIZES = 'hlmst'
+
+
+def largest(sizes):
+    return next(sizes[size] for size in SIZES if size in sizes)
+
+
 def portrait_files(paths, strict=True):
     """Group po_<base>_<size> files by lowercase base; reject or skip other names."""
     found = {}
     for path in paths:
         stem = path.stem.lower()
-        if not stem.startswith('po_') or stem[-1] not in 'hlmst':
+        if not stem.startswith('po_') or stem[-1] not in SIZES:
             if not strict:
                 continue
             raise ValueError(f'Unrecognized portrait filename: {path.name}')
@@ -51,15 +59,12 @@ def refresh_stock(game_data, wanted, stock):
     kept = set()
     for base in sorted(wanted & found.keys()):
         sizes = found[base]
-        # The large size reads best; the many placeables without one have a medium size.
-        source = next(sizes[size] for size in 'hmlst' if size in sizes)
-        with preview(source) as image:
+        with preview(largest(sizes)) as image:
             image.save(stock / f'{base}.webp', quality=55, method=6)
         kept.add(base)
     for old in stock.glob('*.webp'):
         if old.stem not in kept:
             old.unlink()
-    return kept
 
 
 def main(root=ROOT, output=OUTPUT, game_data=None):
@@ -77,8 +82,7 @@ def main(root=ROOT, output=OUTPUT, game_data=None):
     images = portrait_files(sorted(source_dir.glob('*.dds')))
     (output / 'images').mkdir(parents=True, exist_ok=True)
     for base, sizes in images.items():
-        source = next(sizes[size] for size in 'hlmst' if size in sizes)
-        with preview(source) as image:
+        with preview(largest(sizes)) as image:
             image.save(output / 'images' / f'{base}.webp', quality=85)
     entries = [row for row in table(root / 'sw_2da/portraits.2da') if row['BaseResRef'] != UNRECORDED]
     if game_data is not None:
@@ -95,10 +99,11 @@ def main(root=ROOT, output=OUTPUT, game_data=None):
         # A HAK portrait overrides the base game's portrait of the same name.
         art = 'hak' if key in images else 'stock' if key in stock else None
         image = {'hak': f'images/{key}.webp', 'stock': f'stock/{key}.webp', None: None}[art]
-        rows.append(dict(name=base, id=row['id'], race=races.get(race, f'Race {race}') if race != UNRECORDED else 'Unspecified',
+        # Scripts name a portrait by po_ and its BaseResRef, such as po_el_f_09_.
+        rows.append(dict(name=base, resref=f'po_{base}', id=row['id'], race=races.get(race, f'Race {race}') if race != UNRECORDED else 'Unspecified',
                          sex=sex(row.get('Sex', UNRECORDED)), art=art, image=image))
     for base in sorted(images.keys() - listed):
-        rows.append(dict(name=base, id=None, race='Unspecified', sex='Unspecified', art='hak', image=f'images/{base}.webp'))
+        rows.append(dict(name=base, resref=f'po_{base}', id=None, race='Unspecified', sex='Unspecified', art='hak', image=f'images/{base}.webp'))
     (output / 'catalogue.js').write_text('window.PORTRAITS = ' + json.dumps(rows, ensure_ascii=True) + ';\n')
     # This directory owns generated previews only; prune after a successful build.
     for old in (output / 'images').glob('*.webp'):

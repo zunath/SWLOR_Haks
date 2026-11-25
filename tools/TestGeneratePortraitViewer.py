@@ -69,9 +69,10 @@ class PortraitSynchronizationTest(unittest.TestCase):
             main(Path(temporary), output)
 
             rows = load(output)
-            self.assertEqual([(r['name'], r['race'], r['sex'], r['image']) for r in rows],
-                             [('Mixed_', 'Human', 'Male (0)', 'images/mixed_.webp'),
-                              ('norace_', 'Unspecified', 'Unspecified', None), ('odd_', 'Human', 'Value 7', None)])
+            self.assertEqual([(r['name'], r['resref'], r['race'], r['sex'], r['image']) for r in rows],
+                             [('Mixed_', 'po_Mixed_', 'Human', 'Male (0)', 'images/mixed_.webp'),
+                              ('norace_', 'po_norace_', 'Unspecified', 'Unspecified', None),
+                              ('odd_', 'po_odd_', 'Human', 'Value 7', None)])
             with Image.open(output / 'images/mixed_.webp') as preview:
                 self.assertEqual(preview.size, (64, 100))
                 red, _, blue = preview.convert('RGB').getpixel((32, 2))
@@ -135,8 +136,8 @@ class BaseGamePortraitTest(unittest.TestCase):
                 self.assertGreater(red, 200)
                 self.assertLess(blue, 60)
             with Image.open(output / 'stock/small_.webp') as image:
-                # The medium size wins over the low one when there is no large one.
-                self.assertEqual(image.size, (64, 100))
+                # With no huge size, the large one wins over the medium one.
+                self.assertEqual(image.size, (128, 200))
             self.assertEqual([r['art'] for r in load(output)], ['stock', 'stock', 'hak'])
 
 

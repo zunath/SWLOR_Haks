@@ -2,8 +2,6 @@
 const catalogue = window.PORTRAITS ?? [];
 const $ = id => document.getElementById(id);
 if (!window.PORTRAITS) $('empty').textContent = 'No catalogue was generated. Run python tools/GeneratePortraitViewer.py, then reload this page.';
-// portraits.2da stores BaseResRef; the game's ResRef adds the po_ prefix, as SetPortraitResRef takes it.
-const resref = p => `po_${p.name}`;
 const compare = (a, b) => a.localeCompare(b, undefined, {numeric: true});
 let matches = [], shown = 0;
 for (const field of ['race', 'sex']) {
@@ -15,10 +13,10 @@ function details(p) {
   $('large').hidden = !p.image;
   if (p.image) $('large').src = p.image;
   else $('large').removeAttribute('src');
-  $('large').alt = resref(p);
-  $('name').textContent = resref(p);
+  $('large').alt = p.resref;
+  $('name').textContent = p.resref;
   $('metadata').textContent = `${p.race} · Sex: ${p.sex} · ${p.id === null ? 'Not listed in portraits.2da' : `Table ID: ${p.id}`}${p.art === 'stock' ? ' · Base game art' : ''}`;
-  $('resource').value = resref(p);
+  $('resource').value = p.resref;
   $('base').hidden = p.id === null;
   $('base').textContent = `BaseResRef in portraits.2da: ${p.name}`;
   $('detail').showModal();
@@ -30,7 +28,7 @@ function more() {
   for (const p of batch) {
     const card = document.createElement('button');
     card.type = 'button'; card.className = 'card';
-    card.setAttribute('aria-label', `Open ${resref(p)}, ${p.race}`);
+    card.setAttribute('aria-label', `Open ${p.resref}, ${p.race}`);
     if (p.image) {
       const image = document.createElement('img');
       image.src = p.image; image.alt = ''; image.loading = 'lazy'; image.width = 128; image.height = 200;
@@ -40,7 +38,7 @@ function more() {
       placeholder.className = 'placeholder'; placeholder.textContent = 'Missing artwork'; card.append(placeholder);
     }
     const caption = document.createElement('span'); caption.className = 'caption';
-    const name = document.createElement('strong'); name.textContent = resref(p);
+    const name = document.createElement('strong'); name.textContent = p.resref;
     const meta = document.createElement('small'); meta.textContent = p.id === null ? p.race : `${p.race} · #${p.id}`;
     caption.append(name, meta); card.append(caption);
     card.addEventListener('click', () => details(p)); fragment.append(card);
@@ -54,7 +52,7 @@ function render() {
   matches = catalogue.filter(p => (!$('race').value || p.race === $('race').value)
     && (!$('sex').value || p.sex === $('sex').value)
     && ($('art').value === 'all' || p.art === {local: 'hak', stock: 'stock', missing: null}[$('art').value])
-    && terms.every(term => `${resref(p)} ${p.race} ${p.id ?? ''}`.toLowerCase().includes(term)));
+    && terms.every(term => `${p.resref} ${p.race} ${p.id ?? ''}`.toLowerCase().includes(term)));
   matches.sort((a, b) => {
     if ($('sort').value === 'id') return (a.id === null ? Infinity : Number(a.id)) - (b.id === null ? Infinity : Number(b.id)) || compare(a.name, b.name);
     if ($('sort').value === 'race') return compare(a.race, b.race) || compare(a.name, b.name);
