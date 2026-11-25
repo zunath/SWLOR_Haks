@@ -1,0 +1,48 @@
+/* Theme prototypes. Each one overrides the base colours, then adds its own dressing. */
+header{position:relative}
+.theme-pick{position:absolute;top:1rem;right:clamp(1rem,4vw,4rem);flex-direction:row;align-items:center;gap:.5rem;font-size:.8rem}
+.theme-pick select{min-height:36px;padding:.3rem .6rem;font-size:.85rem}
+[data-theme]{color-scheme:dark;--stars:radial-gradient(1px 1px at 25px 35px,#fff,transparent),radial-gradient(1px 1px at 140px 90px,#fffb,transparent),radial-gradient(1.6px 1.6px at 210px 160px,#fff,transparent),radial-gradient(1px 1px at 70px 200px,#fff8,transparent),radial-gradient(1px 1px at 180px 15px,#fffa,transparent),radial-gradient(1.3px 1.3px at 300px 260px,#fffc,transparent),radial-gradient(1px 1px at 330px 60px,#fff7,transparent),radial-gradient(1px 1px at 110px 320px,#fff9,transparent)}
+[data-theme] body{background:var(--stars);background-size:240px 240px,240px 240px,240px 240px,240px 240px,240px 240px,370px 370px,370px 370px,370px 370px;background-attachment:fixed}
+[data-theme] .card{position:relative}
+[data-theme] .card::after{content:'';position:absolute;inset:0;pointer-events:none}
+
+/* Holocron: a Jedi archive projection, all cyan light and scan lines. */
+[data-theme=holocron]{--text:#d8f6ff;--bg:#020812;--surface:#061a2bd9;--line:#1d5874;--edge:#3aa6cf;--well:#020b14;--shade:#000c;--muted:#8fc3d6;--accent:#6fe3ff;background:radial-gradient(ellipse at 70% 0%,#0f3a5c 0%,transparent 55%),radial-gradient(ellipse at 0% 100%,#0a2a44 0%,transparent 50%),#020812}
+[data-theme=holocron] h1{color:#c4f4ff;text-transform:uppercase;letter-spacing:.1em;font-weight:200;text-shadow:0 0 6px #6fe3ff,0 0 22px #1fa8ff99,0 0 48px #1fa8ff55}
+[data-theme=holocron] .eyebrow,[data-theme=holocron] #count{text-shadow:0 0 6px #6fe3ffaa}
+[data-theme=holocron] #controls,[data-theme=holocron] .card,[data-theme=holocron] dialog{box-shadow:inset 0 0 22px #1fa8ff26,0 0 0 1px #6fe3ff1a}
+[data-theme=holocron] .card::after{background:repeating-linear-gradient(0deg,#6fe3ff14 0 1px,transparent 1px 3px)}
+[data-theme=holocron] .card:hover,[data-theme=holocron] .card:focus-visible{border-color:#6fe3ff;box-shadow:0 0 18px #6fe3ffaa,inset 0 0 22px #1fa8ff44}
+[data-theme=holocron] label,[data-theme=holocron] .caption small,[data-theme=holocron] #count,[data-theme=holocron] .results p,[data-theme=holocron] button{font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;text-transform:uppercase;letter-spacing:.08em;font-size:.75rem}
+
+/* Sith: black and crimson, cut corners, a red blade along every panel. */
+[data-theme=sith]{--text:#f6e8e8;--bg:#060102;--surface:#16070acc;--line:#4d121a;--edge:#9b1f2b;--well:#040001;--shade:#000d;--muted:#cfa3a7;--accent:#ff3b47;background:radial-gradient(ellipse at 50% -20%,#6b0d16 0%,transparent 60%),#060102}
+[data-theme=sith] h1{text-transform:uppercase;letter-spacing:.16em;font-weight:800;color:#fff3f3;text-shadow:0 0 2px #fff,0 0 12px #ff2d3d,0 0 36px #ff2d3daa}
+[data-theme=sith] .eyebrow{letter-spacing:.3em}
+[data-theme=sith] #controls,[data-theme=sith] .card,[data-theme=sith] dialog,[data-theme=sith] input,[data-theme=sith] select,[data-theme=sith] button{border-radius:0;clip-path:polygon(12px 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%,0 12px)}
+[data-theme=sith] #controls,[data-theme=sith] .card,[data-theme=sith] dialog{box-shadow:inset 0 2px 0 #ff3b47,inset 0 3px 10px #ff2d3d66}
+[data-theme=sith] .card:hover,[data-theme=sith] .card:focus-visible{border-color:#ff3b47;background:#2b0910;box-shadow:inset 0 0 0 1px #ff3b47,inset 0 0 26px #ff2d3d77}
+[data-theme=sith] label,[data-theme=sith] .caption small{text-transform:uppercase;letter-spacing:.1em;font-size:.72rem}
+
+/* Opening crawl: black space, blue first line, a hollow yellow title. */
+[data-theme=crawl]{--text:#fff6c8;--bg:#000;--surface:#070707d9;--line:#3b3418;--edge:#9a8826;--well:#000;--shade:#000e;--muted:#d9cc8c;--accent:#ffe81f;background:#000}
+[data-theme=crawl] header{text-align:center;perspective:420px;padding-top:4.5rem}
+[data-theme=crawl] .eyebrow{color:#4bd5ee;letter-spacing:.32em;font-size:.9rem}
+[data-theme=crawl] h1{font-family:Impact,'Arial Black',sans-serif;font-weight:900;color:transparent;-webkit-text-stroke:2px #ffe81f;text-transform:uppercase;letter-spacing:.08em;font-size:clamp(2.8rem,9vw,6.5rem);line-height:1}
+[data-theme=crawl] .intro{margin:1rem auto 0;color:#ffe81f;font-weight:700;font-size:1.2rem;letter-spacing:.05em;transform:rotateX(28deg)}
+[data-theme=crawl] .card:hover,[data-theme=crawl] .card:focus-visible{border-color:#ffe81f;box-shadow:0 0 0 1px #ffe81f,0 0 20px #ffe81f44}
+[data-theme=crawl] .caption strong{color:#ffe81f}
+
+/* Old Republic: a ship's console, amber readouts and corner brackets. */
+[data-theme=republic]{--text:#ece4cf;--bg:#0b1015;--surface:#121b22eb;--line:#2b3943;--edge:#5d6f78;--well:#071017;--shade:#000c;--muted:#a8b8b0;--accent:#ffae3b;background:linear-gradient(180deg,#132029 0%,#0b1015 45%),#0b1015}
+[data-theme=republic] h1{text-transform:uppercase;font-weight:300;letter-spacing:.24em;color:#ffcf7a;font-size:clamp(1.8rem,4.6vw,3.4rem);text-shadow:0 0 14px #ffae3b55}
+[data-theme=republic] .eyebrow{color:#7fd6c2;letter-spacing:.35em}
+[data-theme=republic] #controls,[data-theme=republic] dialog{position:relative}
+[data-theme=republic] #controls,[data-theme=republic] .card,[data-theme=republic] dialog,[data-theme=republic] input,[data-theme=republic] select,[data-theme=republic] button{border-radius:0}
+[data-theme=republic] #controls::after,[data-theme=republic] dialog::after,[data-theme=republic] .card::after{content:'';position:absolute;inset:-1px;pointer-events:none;background:linear-gradient(#ffae3b,#ffae3b) top left/16px 2px no-repeat,linear-gradient(#ffae3b,#ffae3b) top left/2px 16px no-repeat,linear-gradient(#ffae3b,#ffae3b) top right/16px 2px no-repeat,linear-gradient(#ffae3b,#ffae3b) top right/2px 16px no-repeat,linear-gradient(#ffae3b,#ffae3b) bottom left/16px 2px no-repeat,linear-gradient(#ffae3b,#ffae3b) bottom left/2px 16px no-repeat,linear-gradient(#ffae3b,#ffae3b) bottom right/16px 2px no-repeat,linear-gradient(#ffae3b,#ffae3b) bottom right/2px 16px no-repeat}
+[data-theme=republic] .card:hover,[data-theme=republic] .card:focus-visible{border-color:#ffae3b;box-shadow:0 0 14px #ffae3b55}
+[data-theme=republic] label,[data-theme=republic] .caption small,[data-theme=republic] #count,[data-theme=republic] button{font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;text-transform:uppercase;letter-spacing:.1em;font-size:.74rem}
+/* ResRefs keep their exact case in every theme. */
+[data-theme] .caption strong,[data-theme] #name{text-transform:none}
+@media(max-width:600px){.theme-pick{position:static;margin-bottom:1rem}}

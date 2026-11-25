@@ -65,4 +65,11 @@ $('controls').addEventListener('input', render);
 // The form clears its fields after the reset event, so filter on the next tick.
 $('controls').addEventListener('reset', () => setTimeout(render, 0));
 $('more').addEventListener('click', more);
+$('theme').value = document.documentElement.dataset.theme ?? '';
+$('theme').addEventListener('change', () => {
+  const theme = $('theme').value;
+  if (theme) document.documentElement.dataset.theme = theme;
+  else delete document.documentElement.dataset.theme;
+  try { theme ? localStorage.setItem('theme', theme) : localStorage.removeItem('theme'); } catch {}
+});
 render();
