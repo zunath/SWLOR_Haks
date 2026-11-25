@@ -17,7 +17,7 @@ function details(p) {
   else $('large').removeAttribute('src');
   $('large').alt = p.name;
   $('name').textContent = p.name;
-  $('metadata').textContent = `${p.race} · Sex: ${label(p.sex)} · ${p.id === null ? 'Not listed in portraits.2da' : `Table ID: ${p.id}`}`;
+  $('metadata').textContent = `${p.race} · Sex: ${label(p.sex)} · ${p.id === null ? 'Not listed in portraits.2da' : `Table ID: ${p.id}`}${p.art === 'stock' ? ' · Base game art' : ''}`;
   $('resource').value = p.name;
   $('detail').showModal();
 }
@@ -51,7 +51,7 @@ function render() {
   const terms = $('query').value.toLowerCase().trim().split(/\s+/).filter(Boolean);
   matches = catalogue.filter(p => (!$('race').value || p.race === $('race').value)
     && (!$('sex').value || p.sex === $('sex').value)
-    && ($('art').value === 'all' || Boolean(p.image) === ($('art').value === 'local'))
+    && ($('art').value === 'all' || p.art === {local: 'hak', stock: 'stock', missing: null}[$('art').value])
     && terms.every(term => `${p.name} ${p.race} ${p.id ?? ''}`.toLowerCase().includes(term)));
   matches.sort((a, b) => {
     if ($('sort').value === 'id') return (a.id === null ? Infinity : Number(a.id)) - (b.id === null ? Infinity : Number(b.id)) || compare(a.name, b.name);

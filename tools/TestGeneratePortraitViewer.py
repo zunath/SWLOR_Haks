@@ -85,5 +85,58 @@ class PortraitSynchronizationTest(unittest.TestCase):
                 main(Path(temporary), output)
 
 
+class BaseGamePortraitTest(unittest.TestCase):
+    def test_stock_art_fills_rows_without_hak_art(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            portraits, table, output = source_tree(Path(temporary))
+            table.write_text(HEADER + '1 both_ 0 6\n2 stock_ 0 6\n3 none_ 0 6\n')
+            Image.new('RGB', (32, 64), 'red').save(portraits / 'po_both_m.dds')
+            (output / 'stock').mkdir(parents=True)
+            for base in ('both_', 'stock_', 'unused_'):
+                Image.new('RGB', (8, 10)).save(output / 'stock' / f'{base}.webp')
+            main(Path(temporary), output)
+
+            self.assertEqual([(r['name'], r['art'], r['image']) for r in load(output)],
+                             [('both_', 'hak', 'images/both_.webp'), ('stock_', 'stock', 'stock/stock_.webp'),
+                              ('none_', None, None)])
+            # A normal build never prunes the committed stock folder.
+            self.assertEqual({p.name for p in (output / 'stock').iterdir()},
+                             {'both_.webp', 'stock_.webp', 'unused_.webp'})
+
+    def test_refresh_reads_extracted_game_data(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            portraits, table, output = source_tree(root)
+            table.write_text(HEADER + '1 Large_ 0 6\n2 small_ 0 6\n3 hak_ 0 6\n')
+            Image.new('RGB', (32, 64), 'red').save(portraits / 'po_hak_m.dds')
+            game = root / 'game' / 'portraits.bif'
+            game.mkdir(parents=True)
+            # TGA rows keep their stored order, so a red top band stays on top.
+            large = Image.new('RGB', (256, 512), 'blue')
+            large.paste('red', (0, 0, 256, 8))
+            large.save(game / 'po_large_h.tga')
+            Image.new('RGB', (128, 256), 'green').save(game / 'po_large_l.tga')
+            Image.new('RGB', (64, 128), 'green').save(game / 'po_small_m.tga')
+            Image.new('RGB', (128, 256), 'blue').save(game / 'po_small_l.tga')
+            Image.new('RGB', (64, 128)).save(game / 'po_hak_m.tga')
+            Image.new('RGB', (64, 128)).save(game / 'po_unlisted_m.tga')
+            # The game ships a few odd names; the refresh skips them.
+            Image.new('RGB', (64, 128)).save(game / 'po_odd_m .tga')
+            (output / 'stock').mkdir(parents=True)
+            Image.new('RGB', (8, 10)).save(output / 'stock' / 'stale_.webp')
+            main(root, output, game_data=root / 'game')
+
+            self.assertEqual({p.name for p in (output / 'stock').iterdir()}, {'large_.webp', 'small_.webp'})
+            with Image.open(output / 'stock/large_.webp') as image:
+                self.assertEqual(image.size, (256, 400))
+                red, _, blue = image.convert('RGB').getpixel((128, 2))
+                self.assertGreater(red, 200)
+                self.assertLess(blue, 60)
+            with Image.open(output / 'stock/small_.webp') as image:
+                # The medium size wins over the low one when there is no large one.
+                self.assertEqual(image.size, (64, 100))
+            self.assertEqual([r['art'] for r in load(output)], ['stock', 'stock', 'hak'])
+
+
 if __name__ == '__main__':
     unittest.main()

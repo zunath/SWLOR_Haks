@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Generate browser portraits and the catalogue; source HAK assets stay untouched."""
+import argparse
 import json
 import shlex
 from pathlib import Path
@@ -18,46 +19,90 @@ def table(path):
     return [dict(zip(['id', *header], shlex.split(line))) for line in lines[2:]]
 
 
-def main(root=ROOT, output=OUTPUT):
+def preview(source):
+    """Open a portrait texture as the top 100/128 the game shows."""
+    with Image.open(source) as image:
+        if source.suffix.lower() == '.dds':
+            # NWN DDS rows run bottom-up; TGA files carry their own row order.
+            image = image.transpose(Image.Transpose.FLIP_TOP_BOTTOM)
+        image = image.convert('RGB')
+    return image.crop((0, 0, image.width, round(image.height * 100 / 128)))
+
+
+def portrait_files(paths, strict=True):
+    """Group po_<base>_<size> files by lowercase base; reject or skip other names."""
+    found = {}
+    for path in paths:
+        stem = path.stem.lower()
+        if not stem.startswith('po_') or stem[-1] not in 'hlmst':
+            if not strict:
+                continue
+            raise ValueError(f'Unrecognized portrait filename: {path.name}')
+        found.setdefault(stem[3:-1], {})[stem[-1]] = path
+    return found
+
+
+def refresh_stock(game_data, wanted, stock):
+    """Rebuild the committed base-game previews for the bases in wanted."""
+    found = portrait_files((path for path in Path(game_data).rglob('*')
+                           if path.is_file() and path.name.lower().startswith('po_')
+                           and path.suffix.lower() in ('.tga', '.dds')), strict=False)
+    stock.mkdir(parents=True, exist_ok=True)
+    kept = set()
+    for base in sorted(wanted & found.keys()):
+        sizes = found[base]
+        # The large size reads best; the many placeables without one have a medium size.
+        source = next(sizes[size] for size in 'hmlst' if size in sizes)
+        with preview(source) as image:
+            image.save(stock / f'{base}.webp', quality=55, method=6)
+        kept.add(base)
+    for old in stock.glob('*.webp'):
+        if old.stem not in kept:
+            old.unlink()
+    return kept
+
+
+def main(root=ROOT, output=OUTPUT, game_data=None):
     races = {r['id']: r['Label'] for r in table(root / 'sw_2da/racialtypes.2da')}
-    images = {}
     source_dir = root / 'sw_portrait'
     if not source_dir.is_dir():
         raise FileNotFoundError(source_dir)
-    for path in sorted(source_dir.glob('*.dds')):
-        stem = path.stem.lower()
-        if not stem.startswith('po_') or stem[-1] not in 'hlmst':
-            raise ValueError(f'Unrecognized portrait filename: {path.name}')
-        images.setdefault(stem[3:-1], {})[stem[-1]] = path
+    images = portrait_files(sorted(source_dir.glob('*.dds')))
     (output / 'images').mkdir(parents=True, exist_ok=True)
     for base, sizes in images.items():
         source = next(sizes[size] for size in 'hlmst' if size in sizes)
-        with Image.open(source) as image:
-            # NWN DDS rows run bottom-up; the game uses the top 100/128 of the texture.
-            image = image.transpose(Image.Transpose.FLIP_TOP_BOTTOM).convert('RGB')
-            image = image.crop((0, 0, image.width, round(image.height * 100 / 128)))
+        with preview(source) as image:
             image.save(output / 'images' / f'{base}.webp', quality=85)
+    entries = [row for row in table(root / 'sw_2da/portraits.2da') if row['BaseResRef'] != UNRECORDED]
+    if game_data is not None:
+        refresh_stock(game_data, {row['BaseResRef'].lower() for row in entries} - images.keys(), output / 'stock')
+    # The stock folder is committed; a normal build only reads it.
+    stock = {path.stem for path in (output / 'stock').glob('*.webp')}
     rows = []
     listed = set()
-    for row in table(root / 'sw_2da/portraits.2da'):
+    for row in entries:
         base = row['BaseResRef']
-        if base == UNRECORDED:
-            continue
         key = base.lower()
         listed.add(key)
         race = row.get('Race', UNRECORDED)
+        # A HAK portrait overrides the base game's portrait of the same name.
+        art = 'hak' if key in images else 'stock' if key in stock else None
+        image = {'hak': f'images/{key}.webp', 'stock': f'stock/{key}.webp', None: None}[art]
         rows.append(dict(name=base, id=row['id'], race=races.get(race, f'Race {race}') if race != UNRECORDED else 'Unspecified',
-                         sex=row.get('Sex', UNRECORDED), image=f'images/{key}.webp' if key in images else None))
+                         sex=row.get('Sex', UNRECORDED), art=art, image=image))
     for base in sorted(images.keys() - listed):
-        rows.append(dict(name=base, id=None, race='Unspecified', sex=UNRECORDED, image=f'images/{base}.webp'))
+        rows.append(dict(name=base, id=None, race='Unspecified', sex=UNRECORDED, art='hak', image=f'images/{base}.webp'))
     (output / 'catalogue.js').write_text('window.PORTRAITS = ' + json.dumps(rows, ensure_ascii=True) + ';\n')
     # This directory owns generated previews only; prune after a successful build.
-    for preview in (output / 'images').glob('*.webp'):
-        if preview.stem not in images:
-            preview.unlink()
-    print(f'{len(images)} portrait images; {len(rows)} catalogue entries; '
-          f'{sum(row["image"] is None for row in rows)} entries without local artwork.')
+    for old in (output / 'images').glob('*.webp'):
+        if old.stem not in images:
+            old.unlink()
+    print(f'{len(images)} HAK images; {sum(row["art"] == "stock" for row in rows)} base-game images; '
+          f'{len(rows)} catalogue entries; {sum(row["art"] is None for row in rows)} entries without artwork.')
 
 
 if __name__ == '__main__':
-    main()
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--stock', metavar='GAME_DATA',
+                        help='rebuild portrait-viewer/stock from a folder of extracted base-game resources')
+    main(game_data=parser.parse_args().stock)

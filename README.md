@@ -123,13 +123,25 @@ The build writes `portrait-viewer/catalogue.js` and the `.webp` files in `portra
 - Race comes from `racialtypes.2da`.
 - Sex is the raw value from `portraits.2da`.
 - "Unspecified" means the table has no value. The page never guesses from file names or artwork.
-- "Missing artwork" lists table rows with no image in `sw_portrait`. Many of them are base-game portraits.
+- "Local artwork" lists portraits from `sw_portrait`.
+- "Base game" lists table rows that use a portrait from the unmodded game. A HAK portrait with the same ResRef replaces it.
+- "Missing artwork" lists table rows with no image in either place.
 - An image with no table row shows "Not listed in portraits.2da".
 - A ResRef the table lists twice gets two cards, each with its table ID.
 
 ### Add or remove a portrait
 
-Each build reads the current files, so a new portrait shows up on the next build. To remove a portrait, delete its `po_*.dds` files and its `portraits.2da` row. If you delete only the images, the row moves to "Missing artwork". If you delete only the row, the images stay as unlisted.
+Each build reads the current files, so a new portrait shows up on the next build. To remove a portrait, delete its `po_*.dds` files and its `portraits.2da` row. If you delete only the images, the row moves to "Missing artwork" until the next base-game refresh. If you delete only the row, the images stay as unlisted.
+
+### Refresh the base-game portraits
+
+The base-game previews are committed in `portrait-viewer/stock/`. No hak build reads that folder. A normal build only reads it, so refresh it only after a game update adds portraits. Point `--stock` at a folder of game resources extracted from the game's archives:
+
+```powershell
+python tools/GeneratePortraitViewer.py --stock <extracted game resources>
+```
+
+The refresh keeps one image for each `portraits.2da` row that has no HAK portrait. It uses the `_h` size, else `_m`. It deletes every other `.webp` in that folder.
 
 ### Download a build
 

@@ -16,7 +16,7 @@
   <label class="search">Search portraits<input id="query" type="search" placeholder="ResRef, race or table ID…"></label>
   <label>Race<select id="race"><option value="">All races</option></select></label>
   <label>Sex (table value)<select id="sex"><option value="">All values</option></select></label>
-  <label>Artwork<select id="art"><option value="local">Local artwork</option><option value="all">All entries</option><option value="missing">Missing artwork</option></select></label>
+  <label>Artwork<select id="art"><option value="local">Local artwork</option><option value="stock">Base game</option><option value="all">All entries</option><option value="missing">Missing artwork</option></select></label>
   <label>Sort<select id="sort"><option value="name">ResRef A–Z</option><option value="reverse">ResRef Z–A</option><option value="race">Race, then ResRef</option><option value="id">Table ID</option></select></label>
   <button type="reset">Reset</button>
 </form>
@@ -26,7 +26,7 @@
 <button id="more" type="button" hidden>Show more portraits</button>
 <noscript>Turn on JavaScript to search portraits.</noscript>
 </main>
-<footer>Race metadata comes from racialtypes.2da, and sex metadata from portraits.2da. Unspecified means the table has no value. A missing image may be a base-game portrait.</footer>
+<footer>Race metadata comes from racialtypes.2da, and sex metadata from portraits.2da. Unspecified means the table has no value. Base game art comes from the unmodded game.</footer>
 <dialog id="detail">
   <form method="dialog"><button autofocus aria-label="Close portrait">Close</button></form>
   <img id="large" alt="">
