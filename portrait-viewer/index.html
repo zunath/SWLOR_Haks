@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>SWLOR · Portrait companion</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="style.css">
+<header>
+  <p class="eyebrow">STAR WARS · LEGENDS OF THE OLD REPUBLIC <span>LOCAL PROTOTYPE</span></p>
+  <h1>Find your next face.</h1>
+  <p class="intro">The portrait companion. Browse the collection, narrow the field, and open a portrait for its resource name.</p>
+</header>
+<main>
+<form id="controls" role="search">
+  <label class="search">Search portraits<input id="query" type="search" placeholder="Resource name, race, or portrait ID…"></label>
+  <label>Race<select id="race"><option value="">All races</option></select></label>
+  <label>Sex (table value)<select id="sex"><option value="">All values</option></select></label>
+  <label>Artwork<select id="art"><option value="local">Local artwork</option><option value="all">All entries</option><option value="missing">Missing artwork</option></select></label>
+  <label>Sort<select id="sort"><option value="name">Resource A–Z</option><option value="reverse">Resource Z–A</option><option value="race">Race, then resource</option><option value="id">Portrait ID</option></select></label>
+  <button type="reset">Reset</button>
+</form>
+<div class="results"><p id="count" role="status" aria-live="polite"></p><p>Categories from the game tables. No inferred tags.</p></div>
+<div id="grid" class="grid"></div>
+<p id="empty" hidden>No portraits match. Try a shorter search or reset the filters.</p>
+<button id="more" type="button" hidden>Show more portraits</button>
+<noscript>Enable JavaScript to browse and filter the portrait catalogue.</noscript>
+</main>
+<footer>SWLOR portrait archive · Race labels from racialtypes.2da; sex values preserved from portraits.2da. Unspecified means no recorded category. Missing images may belong to the base game.</footer>
+<dialog id="detail">
+  <form method="dialog"><button autofocus aria-label="Close portrait">Close</button></form>
+  <img id="large" alt="">
+  <h2 id="name"></h2><p id="metadata"></p>
+  <label>Resource name<input id="resource" readonly></label>
+  <p>Select the name to copy it.</p>
+</dialog>
+<script src="catalogue.js"></script><script src="viewer.js"></script>
+</html>

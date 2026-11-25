@@ -95,3 +95,57 @@ original headers, geometry, and unselected native components remain intact.
 Resumed compiles refresh staged materials from the active HAK resources.
 New build manifests and cache/checkpoint keys record material contents and absent
 material lookups, so material-only edits or newly added MTRs invalidate reuse.
+
+## Portrait companion
+
+The portrait companion is a searchable page of every portrait in `sw_portrait` and `portraits.2da`. It opens in any browser, with no server.
+
+### Build it locally
+
+Install `requirements.txt` as in the tint-map section. Then build the companion:
+
+```powershell
+python tools/GeneratePortraitViewer.py
+```
+
+Open `portrait-viewer/index.html` in a browser. On NixOS, build it with `nix-shell -p 'python3.withPackages (p: [ p.pillow ])' --run 'python tools/GeneratePortraitViewer.py'`.
+
+Run the test after you change the generator:
+
+```powershell
+python -m unittest discover -s tools -p TestGeneratePortraitViewer.py
+```
+
+The generator owns `portrait-viewer/catalogue.js` and every `.webp` in `portrait-viewer/images/`. Git ignores both. Never edit them or store other images there.
+
+### What the filters mean
+
+- Race labels come from `racialtypes.2da`.
+- Sex shows the raw value from `portraits.2da`.
+- "Unspecified" means the table records no value. Nothing is guessed from file names or artwork.
+- "Missing artwork" lists table rows with no image in `sw_portrait`. Many of them are base-game portraits.
+- An image with no table row shows "Not listed in portraits.2da".
+
+### Add or remove a portrait
+
+Each build reads the current files, so a new portrait appears on the next build. To remove a portrait completely, delete its `po_*.dds` files and its `portraits.2da` row. Deleting only the images moves the row to "Missing artwork". Deleting only the row keeps the images, unlisted.
+
+### Download a build
+
+The `Portrait companion` workflow builds the companion on every push to any branch or tag. A push of several commits builds only the last one.
+
+1. Open the Actions tab, then the `Portrait companion` workflow.
+2. Open a green run and download `portrait-companion-<commit>` from its Artifacts list.
+3. Extract the zip and open `index.html`.
+
+A downloaded copy never updates. Artifacts expire after 14 days. Anyone signed in to GitHub who can read the repository can download them.
+
+### Publish it on GitHub Pages
+
+Publishing is off. A maintainer turns it on once:
+
+1. In Settings → Pages, set Source to "GitHub Actions".
+2. In Settings → Secrets and variables → Actions → Variables, add `PORTRAIT_PAGES` with the value `true`.
+3. Run the `Portrait companion` workflow on `master` from the Actions tab.
+
+From then on, each push to `master` publishes the companion to `https://<owner>.github.io/SWLOR_Haks/`. Other branches still build artifacts only. A Pages site is public, even for a private repository, unless the account is on GitHub Enterprise Cloud. To stop publishing, delete the variable.
