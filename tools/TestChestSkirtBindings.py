@@ -17,6 +17,7 @@ import unittest
 import ChestSkirtBindings as skirts
 import CompileModels as mdl
 import GenerateTintMapAssets as tint
+import NeckSkinBindings
 import RestoreRobeBodyTracks as body_tracks
 from RobePoseAudit import Model, rotate
 
@@ -77,7 +78,7 @@ class ChestSkirtBindingTests(unittest.TestCase):
         every = lambda part: {f'p{gender}{race}0_{part}' for gender in 'fm' for race in 'deho'}
         cloaked = lambda part: {f'p{gender}{race}0_{part}' for gender in 'fm' for race in 'he'}
         expected = ({f'p{gender}h0_chest154' for gender in 'fm'} | every('chest269') | every('chest028') | every('chest059')
-                    # Bothan female chest 310's bone table does not match its skeleton, so it cannot be rebound.
+                    # GenerateRacialPartVariants refits female Bothan chest 310 from the female Human donor.
                     | every('chest310') - {'pfe0_chest310'}
                     | every('belt019') | every('belt110') | every('belt112') | every('belt114')
                     # Human pelvis 035 keeps its authored rigging; only the half-orc variants are rebound.
@@ -94,6 +95,12 @@ class ChestSkirtBindingTests(unittest.TestCase):
                 self.assertEqual(f'{folders[kind]}/{name}.mdl', entry['path'].lower())
                 self.assertEqual(entry['sha256'], hashlib.sha256(self.current[name]).hexdigest())
                 self.assertEqual(self.current[name], skirts.build(entry))
+
+    def test_chest310_skins_are_valid_racial_refit_inputs(self):
+        for name, data in self.current.items():
+            if name.endswith('_chest310'):
+                with self.subTest(model=name):
+                    self.assertTrue(NeckSkinBindings.skins(data))
 
     def test_restored_parts_keep_their_original_rigging(self):
         restored = self.manifest['restored']
