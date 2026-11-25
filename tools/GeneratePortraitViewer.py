@@ -56,12 +56,10 @@ def refresh_stock(game_data, wanted, stock):
                            if path.is_file() and path.name.lower().startswith('po_')
                            and path.suffix.lower() in ('.tga', '.dds')), strict=False)
     stock.mkdir(parents=True, exist_ok=True)
-    kept = set()
-    for base in sorted(wanted & found.keys()):
-        sizes = found[base]
-        with preview(best(sizes)) as image:
+    kept = wanted & found.keys()
+    for base in sorted(kept):
+        with preview(best(found[base])) as image:
             image.save(stock / f'{base}.webp', quality=55, method=6)
-        kept.add(base)
     for old in stock.glob('*.webp'):
         if old.stem not in kept:
             old.unlink()
