@@ -36,10 +36,6 @@ jobs:
           if-no-files-found: error
           retention-days: 14
           compression-level: 0
-      - if: vars.PORTRAIT_PAGES == 'true' && github.ref_name == github.event.repository.default_branch
-        uses: actions/upload-pages-artifact@v5
-        with:
-          path: portrait-viewer/
 
   # Publishing stays off until a maintainer sets the PORTRAIT_PAGES variable.
   pages:
@@ -57,5 +53,12 @@ jobs:
       group: portrait-pages
       cancel-in-progress: false
     steps:
+      - uses: actions/download-artifact@v8
+        with:
+          name: portrait-companion-${{ github.sha }}
+          path: site
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: site/
       - id: deploy
         uses: actions/deploy-pages@v5

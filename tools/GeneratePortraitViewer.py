@@ -8,6 +8,7 @@ from PIL import Image
 
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / 'portrait-viewer'
+UNRECORDED = '****'  # How a 2DA marks an empty cell.
 
 
 def table(path):
@@ -40,17 +41,15 @@ def main(root=ROOT, output=OUTPUT):
     listed = set()
     for row in table(root / 'sw_2da/portraits.2da'):
         base = row['BaseResRef']
-        if base == '****':
+        if base == UNRECORDED:
             continue
         key = base.lower()
         listed.add(key)
-        race = row.get('Race', '****')
-        rows.append(dict(name=base, id=row['id'], race=races.get(race, f'Race {race}') if race != '****' else 'Unspecified',
-                         sex=row.get('Sex', '****'), image=f'images/{key}.webp' if key in images else None))
+        race = row.get('Race', UNRECORDED)
+        rows.append(dict(name=base, id=row['id'], race=races.get(race, f'Race {race}') if race != UNRECORDED else 'Unspecified',
+                         sex=row.get('Sex', UNRECORDED), image=f'images/{key}.webp' if key in images else None))
     for base in sorted(images.keys() - listed):
-        rows.append(dict(name=base, id=None, race='Unspecified', sex='****', image=f'images/{base}.webp'))
-    assert set(images) <= {row['name'].lower() for row in rows}
-    assert all((output / row['image']).is_file() for row in rows if row['image'])
+        rows.append(dict(name=base, id=None, race='Unspecified', sex=UNRECORDED, image=f'images/{base}.webp'))
     (output / 'catalogue.js').write_text('window.PORTRAITS = ' + json.dumps(rows, ensure_ascii=True) + ';\n')
     # This directory owns generated previews only; prune after a successful build.
     for preview in (output / 'images').glob('*.webp'):

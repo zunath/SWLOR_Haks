@@ -125,6 +125,7 @@ The generator owns `portrait-viewer/catalogue.js` and every `.webp` in `portrait
 - "Unspecified" means the table records no value. Nothing is guessed from file names or artwork.
 - "Missing artwork" lists table rows with no image in `sw_portrait`. Many of them are base-game portraits.
 - An image with no table row shows "Not listed in portraits.2da".
+- A resource name the table lists twice shows twice, each card with its table ID.
 
 ### Add or remove a portrait
 
