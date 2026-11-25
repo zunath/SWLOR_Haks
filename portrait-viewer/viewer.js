@@ -3,7 +3,7 @@ const catalogue = window.PORTRAITS ?? [];
 const $ = id => document.getElementById(id);
 const UNRECORDED = '****';
 const label = value => value === UNRECORDED ? 'Unspecified' : value;
-if (!window.PORTRAITS) $('empty').textContent = 'No catalogue yet. Run python tools/GeneratePortraitViewer.py, then reload this page.';
+if (!window.PORTRAITS) $('empty').textContent = 'No catalogue was generated. Run python tools/GeneratePortraitViewer.py, then reload this page.';
 const compare = (a, b) => a.localeCompare(b, undefined, {numeric: true});
 let matches = [], shown = 0;
 for (const field of ['race', 'sex']) {
@@ -28,7 +28,7 @@ function more() {
   for (const p of batch) {
     const card = document.createElement('button');
     card.type = 'button'; card.className = 'card';
-    card.setAttribute('aria-label', `View ${p.name}, ${p.race}`);
+    card.setAttribute('aria-label', `Open ${p.name}, ${p.race}`);
     if (p.image) {
       const image = document.createElement('img');
       image.src = p.image; image.alt = ''; image.loading = 'lazy'; image.width = 128; image.height = 200;
