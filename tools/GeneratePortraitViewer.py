@@ -102,7 +102,7 @@ def main(root=ROOT, output=OUTPUT, game_data=None):
                          sex=sex(row.get('Sex', UNRECORDED)), art=art, image=image))
     for base in sorted(images.keys() - listed):
         rows.append(dict(name=base, resref=f'po_{base}', id=None, race='Unspecified', sex='Unspecified', art='hak', image=f'images/{base}.webp'))
-    (output / 'catalogue.js').write_text('window.PORTRAITS = ' + json.dumps(rows, ensure_ascii=True) + ';\n')
+    (output / 'catalogue.js').write_text('window.PORTRAITS = ' + json.dumps(rows) + ';\n')
     # This directory owns generated previews only; prune after a successful build.
     for old in (output / 'images').glob('*.webp'):
         if old.stem not in images:
