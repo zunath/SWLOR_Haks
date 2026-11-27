@@ -8,6 +8,7 @@ import json
 import unittest
 
 import GenerateRacialPartVariants as variants
+from NeckSkinBindings import skins
 import RacialPartCoverage as coverage
 
 
@@ -42,6 +43,11 @@ class StaleVariantTests(unittest.TestCase):
         self.assertEqual(checker.compare('pfo0_pelvis013'), 'stock')
         # Pelvis 13 keeps its stock design on the human body too, so no body is stale.
         self.assertNotIn('pfo0_pelvis013', gaps())
+
+    def test_female_pelvis034_refits_keep_valid_external_skin_weights(self):
+        for model in ('pfd0_pelvis034', 'pfe0_pelvis034'):
+            with self.subTest(model=model):
+                self.assertTrue(skins(resources().load(model)))
 
 
 if __name__ == '__main__':
