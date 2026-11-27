@@ -14,6 +14,13 @@ const int COLOR_HOSTILE = 0;
 const int COLOR_SELF = 1;
 const int COLOR_BENEFICIAL = 2;
 const int COLOR_PARTY_MEMBER = 3;
+
+// Fill timing comes from the server, because each client's own world timer runs minutes away
+// from it. scriptableFloat1 holds the server's fill clock (milliseconds, wrapping at the period).
+// Each slot's vec w packs its fill start on that clock plus its fill length in 250 ms units
+// times the period; zero means the shape does not fill.
+const float FILL_CLOCK_PERIOD_MS = 131072.0;
+const float FILL_DURATION_UNIT_MS = 250.0;
 #endif
 
 #include "inc_target"
@@ -81,6 +88,27 @@ float GetThrobStrength(float base, float speed)
     return base + (1.0 + sin(float(worldtimerTimeOfDay) / speed)) * 0.5 * (1.0 - base);
 }
 
+// Returns how far the shape has filled (0 to 1), or -1 for a shape that does not fill.
+float GetFillFraction(float packedFill)
+{
+    float units = floor(packedFill / FILL_CLOCK_PERIOD_MS);
+    if (units < 1.0)
+    {
+        return -1.0;
+    }
+
+    float startMs = packedFill - units * FILL_CLOCK_PERIOD_MS;
+    float elapsed = mod(scriptableFloat1 - startMs + FILL_CLOCK_PERIOD_MS, FILL_CLOCK_PERIOD_MS);
+
+    // A clock value sent before the fill started wraps to just under a full period.
+    if (elapsed > FILL_CLOCK_PERIOD_MS * 0.5)
+    {
+        return 0.0;
+    }
+
+    return clamp(elapsed / (units * FILL_DURATION_UNIT_MS), 0.0, 1.0);
+}
+
 float CalculateTelegraphColour(vec3 pixelPos, ShapeColorData data, vec4 positionData)
 {
     if (data.shapeType == TELEGRAPH_SHAPE_NONE)
@@ -98,6 +126,7 @@ float CalculateTelegraphColour(vec3 pixelPos, ShapeColorData data, vec4 position
     float rotation = data.rotation;
     float sizeX = data.sizeX;
     float sizeY = data.sizeY;
+    float fill = GetFillFraction(positionData.w);
 
     vec3 originToPixel = pixelPos - origin;
     float originToPixelDist = length(originToPixel);
@@ -109,7 +138,8 @@ float CalculateTelegraphColour(vec3 pixelPos, ShapeColorData data, vec4 position
         float distToSphere = originToPixelDist;
         float outerStrength = distToSphere > sizeX ? 0.0 : strengthEmpty;
         float outerBorderStrength = distToSphere > sizeX || distToSphere < sizeX - borderWidth ? 0.0 : strengthThrob;
-        strength = max(outerStrength, outerBorderStrength);
+        float innerStrength = fill >= 0.0 && distToSphere <= sizeX * fill ? strengthFull : 0.0;
+        strength = max(outerStrength, max(outerBorderStrength, innerStrength));
     }
     else if (data.shapeType == TELEGRAPH_SHAPE_CONE)
     {
@@ -120,7 +150,8 @@ float CalculateTelegraphColour(vec3 pixelPos, ShapeColorData data, vec4 position
         float halfWidth = sizeY * 0.5 * coneFraction;
         float withinLength = (distAlongCone >= 0.0 && distAlongCone <= sizeX) ? 1.0 : 0.0;
         float withinWidth = (distFromCenter <= halfWidth) ? 1.0 : 0.0;
-        float borderEffect = (distFromCenter > halfWidth - borderWidth || distAlongCone > sizeX - borderWidth) ? strengthThrob : strengthEmpty;
+        float interiorStrength = fill >= 0.0 && distAlongCone <= sizeX * fill ? strengthFull : strengthEmpty;
+        float borderEffect = (distFromCenter > halfWidth - borderWidth || distAlongCone > sizeX - borderWidth) ? strengthThrob : interiorStrength;
 
         strength = withinLength * withinWidth * borderEffect;
     }
@@ -140,7 +171,8 @@ float CalculateTelegraphColour(vec3 pixelPos, ShapeColorData data, vec4 position
 
 		float withinLength = (distAlongLine >= 0.0 && distAlongLine <= sizeX) ? 1.0 : 0.0;
 		float withinWidth = (distFromCenter <= sizeY * 0.5) ? 1.0 : 0.0;
-		float borderEffect = (distFromCenter > sizeY * 0.5 - borderWidth) ? strengthThrob : strengthFull;
+		float interiorStrength = fill < 0.0 || distAlongLine <= sizeX * fill ? strengthFull : strengthEmpty;
+		float borderEffect = (distFromCenter > sizeY * 0.5 - borderWidth) ? strengthThrob : interiorStrength;
 
 		strength = withinLength * withinWidth * borderEffect;
 	}
