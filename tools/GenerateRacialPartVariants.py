@@ -61,6 +61,10 @@ ATTACHMENT = {part: bone for bone, part in REFERENCE_PARTS.items()}
 ATTACHMENT["belt"] = "pelvis_g"
 SCALE_LIMITS = (0.55, 1.8)
 COAT_BANKS = {"a_ba_coat", "a_da_coat", "a_fa_coat", "a_dfa_coat"}
+# The mask sits ahead of the neck on these bodies. Their stock neck bounds do
+# not account for the wider Ugnaught/Ewok face or the projecting Rodian,
+# Wookiee and Cathar faces.
+RESPIRATOR_FACE_FIT = {"d": (1.20, 1.40), "e": (1.22, 1.35), "o": (1.12, 1.58)}
 
 
 def coat_bank(gender: str, race: str) -> str:
@@ -263,7 +267,7 @@ def refit(resources: Resources, donor: str, target: str) -> bytes:
     if not cm.binary(data):
         raise ValueError(f"{donor}: donor must be compiled")
     d_gender, d_race, part, _ = PATTERN.fullmatch(donor).groups()
-    t_gender, t_race, _, _ = PATTERN.fullmatch(target).groups()
+    t_gender, t_race, _, number = PATTERN.fullmatch(target).groups()
     d_body_name, t_body_name = f"p{d_gender}{d_race}0", f"p{t_gender}{t_race}0"
     d_body, d_world, d_names = body_worlds(resources.load(d_body_name))
     t_body, t_world, t_names = body_worlds(resources.load(t_body_name))
@@ -334,7 +338,15 @@ def refit(resources: Resources, donor: str, target: str) -> bytes:
                     new_normals.append(n / (np.linalg.norm(n) or 1))
         else:
             skin = mesh.skin
-            weights = mesh.read(data, model.uint(skin + 12), 4)
+            weight_pointer = model.uint(skin + 12)
+            weights = mesh.read(data, weight_pointer, 4)
+            for vertex, values in enumerate(weights):
+                # Legacy exports can round a single full influence just above 1.
+                # Normalize it in the refit while preserving the authored donor.
+                if sum(value != 0 for value in values) == 1 and 1 < max(values) <= 1.0021:
+                    normalized = tuple(1.0 if value else 0.0 for value in values)
+                    weights[vertex] = normalized
+                    write_vector(buffer, mesh.address(weight_pointer, vertex, 16), normalized)
             slots = mesh.read(data, model.uint(skin + 16), 4, "h")
             bone_nodes = struct.unpack_from("<17h", data, skin + 64)
             bone_count = model.uint(skin + 24)
@@ -387,6 +399,18 @@ def refit(resources: Resources, donor: str, target: str) -> bytes:
                 write_vector(buffer, qptr + bone * 16, (q[3], q[0], q[1], q[2]))
             if not internal:
                 external.append(mesh)
+        if part == "neck" and number in ("005", "006") and t_race in RESPIRATOR_FACE_FIT and mesh.name.startswith("mesh_0022.rip."):
+            width, depth = RESPIRATOR_FACE_FIT[t_race]
+            for index, (x, y, z) in enumerate(new_positions):
+                if y <= 0:
+                    continue
+                scale_x = 1 + (width - 1) * min(y / 0.1, 1)
+                new_positions[index] = (x * scale_x, y * depth, z)
+                if new_normals:
+                    nx, ny, nz = new_normals[index]
+                    scale_slope = (width - 1) / 0.1 if y < 0.1 else 0
+                    normal = np.array((nx / scale_x, (ny - x * scale_slope * nx / scale_x) / depth, nz))
+                    new_normals[index] = normal / (np.linalg.norm(normal) or 1)
         for i, v in enumerate(new_positions):
             write_vector(buffer, mesh.address(mesh.verts, i, 12), v)
         for i, n in enumerate(new_normals):
