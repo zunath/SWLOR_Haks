@@ -95,6 +95,38 @@ class SkinPickBoundsTests(unittest.TestCase):
         self.assertEqual((low, high), ((0, 0, -2.5), (2, 1, -2)))
         self.assertAlmostEqual(radius, (4 + 1 + 6.25) ** 0.5, places=5)
 
+    def test_constrained_fit_keeps_original_box_and_vertex_radius(self):
+        before = binary_model()
+        vertices = {"body": [(-1, 0, 0), (0, 2, 0), (1, 0, 0), (0, 0, 1)]}
+        posed = {"body": ([-3, 0.5, -2], [0.5, 6, 4])}
+        fitted = bounds.patch(before, posed, limit_to_vertices=vertices)
+        self.assertEqual(bounds.skin_boxes(fitted)["body"], ((-1, 0.5, 0), (0.5, 2, 1), 2))
+        self.assertEqual(bounds.patch(fitted, posed, limit_to_vertices=vertices), fitted)
+        with self.assertRaisesRegex(ValueError, "disjoint"):
+            bounds.patch(before, {"body": ([3, 4, 5], [4, 5, 6])}, limit_to_vertices=vertices)
+
+    def test_idle_is_resolved_before_a_missing_ancestor(self):
+        child = ASCII.split("newanim")[0].replace("setsupermodel beast null", "setsupermodel beast parent")
+        parent = ASCII.replace("setsupermodel beast null", "setsupermodel beast absent")
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            source = root / "parent-source.mdl"
+            for animation in ("cpause1", "pause1"):
+                source.write_text(parent.replace("cpause1", animation))
+                lines = bounds.decompiled_chain("beast", child.encode(), None, {"parent": source}, {}, root, None)
+                self.assertEqual(len(lines), 2)
+                self.assertEqual(bounds.pose_boxes(lines[0], lines[1:]), bounds.pose_boxes(ASCII.splitlines(), []))
+
+    def test_static_geometry_requires_the_named_missing_parent(self):
+        geometry = ASCII.split("newanim")[0].replace("setsupermodel beast null", "setsupermodel beast absent")
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            with self.assertRaisesRegex(FileNotFoundError, "absent"):
+                bounds.decompiled_chain("beast", geometry.encode(), None, {}, {}, root, None, "other")
+            lines = bounds.decompiled_chain("beast", geometry.encode(), None, {}, {}, root, None, "absent")
+            self.assertEqual(bounds.pose_boxes(lines[0], [], allow_static=True)["body"],
+                             ([0, -2, 0], [0, 2, 0]))
+
     def test_rigid_meshes_keep_their_box(self):
         before = binary_model(flags=bounds.MESH_FLAG)
         self.assertEqual(bounds.patch(before, {"body": ([0, 0, 0], [1, 1, 1])}), before)
