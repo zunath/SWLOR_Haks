@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="72%">
+      <stop offset="0" stop-color="#2a1030"/>
+      <stop offset="1" stop-color="#050307"/>
+    </radialGradient>
+    <radialGradient id="well" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#000000"/>
+      <stop offset="0.45" stop-color="#2b0636"/>
+      <stop offset="0.75" stop-color="#b93cff"/>
+      <stop offset="0.9" stop-color="#ff7ae0"/>
+      <stop offset="1" stop-color="#ff7ae0" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="clamp" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#d5dde5"/>
+      <stop offset="0.5" stop-color="#77828e"/>
+      <stop offset="1" stop-color="#22282f"/>
+    </linearGradient>
+    <linearGradient id="ring" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#9aa5b1"/>
+      <stop offset="0.5" stop-color="#3d454e"/>
+      <stop offset="1" stop-color="#14181c"/>
+    </linearGradient>
+    <radialGradient id="aura" cx="50%" cy="50%" r="50%">
+      <stop offset="0.5" stop-color="#d14bff" stop-opacity="0.45"/>
+      <stop offset="1" stop-color="#6a14a8" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="256" height="256" fill="url(#bg)"/>
+  <circle cx="128" cy="128" r="122" fill="url(#aura)"/>
+  <!-- concentric disruption rings pulling inward -->
+  <g fill="none" stroke-linecap="round">
+    <circle cx="128" cy="128" r="104" stroke="#e48bff" stroke-width="5" stroke-dasharray="40 16" opacity="0.75"/>
+    <circle cx="128" cy="128" r="84" stroke="#ff9cf0" stroke-width="5" stroke-dasharray="30 12" opacity="0.9"/>
+  </g>
+  <!-- the armored generator ring -->
+  <circle cx="128" cy="128" r="66" fill="none" stroke="url(#ring)" stroke-width="22"/>
+  <circle cx="128" cy="128" r="66" fill="none" stroke="#c9d2db" stroke-width="3" stroke-dasharray="14 10"/>
+  <!-- the singularity core holding its target -->
+  <circle cx="128" cy="128" r="54" fill="url(#well)"/>
+  <circle cx="128" cy="128" r="18" fill="#05010a" stroke="#ffd2f6" stroke-width="4"/>
+  <!-- four clamp prongs biting inward -->
+  <g fill="url(#clamp)" stroke="#0c0f12" stroke-width="3" stroke-linejoin="round">
+    <path d="M128 14 L150 34 L140 74 L128 86 L116 74 L106 34 Z"/>
+    <path d="M128 242 L150 222 L140 182 L128 170 L116 182 L106 222 Z"/>
+    <path d="M14 128 L34 106 L74 116 L86 128 L74 140 L34 150 Z"/>
+    <path d="M242 128 L222 106 L182 116 L170 128 L182 140 L222 150 Z"/>
+  </g>
+  <g fill="#ff8fe8">
+    <circle cx="128" cy="78" r="5"/><circle cx="128" cy="178" r="5"/>
+    <circle cx="78" cy="128" r="5"/><circle cx="178" cy="128" r="5"/>
+  </g>
+</svg>

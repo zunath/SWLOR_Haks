@@ -1,0 +1,274 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="256" height="256" viewBox="0 0 256 256">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="70%">
+      <stop offset="0" stop-color="#16171a"/>
+      <stop offset="1" stop-color="#050607"/>
+    </radialGradient>
+    <linearGradient id="waferTop" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2f4766"/>
+      <stop offset="0.5" stop-color="#1c2c44"/>
+      <stop offset="1" stop-color="#0e1726"/>
+    </linearGradient>
+    <linearGradient id="waferRim" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#d7dee6"/>
+      <stop offset="0.45" stop-color="#7d8996"/>
+      <stop offset="1" stop-color="#3a434d"/>
+    </linearGradient>
+    <linearGradient id="sideL" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#5d6874"/>
+      <stop offset="1" stop-color="#232a32"/>
+    </linearGradient>
+    <linearGradient id="sideR" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3c454f"/>
+      <stop offset="1" stop-color="#14191e"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff1a8"/>
+      <stop offset="0.45" stop-color="#e2b23c"/>
+      <stop offset="1" stop-color="#8a5f12"/>
+    </linearGradient>
+    <linearGradient id="amberSide" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f2b136"/>
+      <stop offset="0.6" stop-color="#c97d16"/>
+      <stop offset="1" stop-color="#8c4f0b"/>
+    </linearGradient>
+    <linearGradient id="amberEnd" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#b86d12"/>
+      <stop offset="1" stop-color="#5e3407"/>
+    </linearGradient>
+    <linearGradient id="amberTop" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffe08a"/>
+      <stop offset="1" stop-color="#f0b03c"/>
+    </linearGradient>
+    <linearGradient id="tealSide" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4fc4b0"/>
+      <stop offset="0.6" stop-color="#22897a"/>
+      <stop offset="1" stop-color="#0f4d45"/>
+    </linearGradient>
+    <linearGradient id="tealEnd" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1c6f63"/>
+      <stop offset="1" stop-color="#0a332d"/>
+    </linearGradient>
+    <linearGradient id="tealTop" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#b9fff0"/>
+      <stop offset="1" stop-color="#52c9b3"/>
+    </linearGradient>
+    <linearGradient id="steel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#eef3f7"/>
+      <stop offset="1" stop-color="#7a8591"/>
+    </linearGradient>
+    <filter id="b1" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="1"/></filter>
+    <filter id="b2" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2"/></filter>
+    <filter id="b4" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="4"/></filter>
+  </defs>
+  <!-- Starship Enhancement - Cargo: circuit wafer carrying a docked stack of two cargo containers with outward hold-expansion chevrons, gold contacts -->
+  <rect width="256" height="256" fill="url(#bg)"/>
+  <polygon points="128.0,100.0 225.2,164.8 128.0,229.6 30.8,164.8" fill="#000" opacity="0.7" filter="url(#b4)"/>
+  <polygon points="30.8,143.0 128.0,207.8 128.0,218.8 30.8,154.0" fill="url(#sideL)" stroke="#0b0d10" stroke-width="1.4" stroke-linejoin="round"/>
+  <polygon points="128.0,207.8 225.2,143.0 225.2,154.0 128.0,218.8" fill="url(#sideR)" stroke="#0b0d10" stroke-width="1.4" stroke-linejoin="round"/>
+  <polygon points="36.0,148.7 41.8,152.5 41.8,160.1 36.0,156.3" fill="url(#gold)" stroke="#4a3208" stroke-width="0.8" stroke-linejoin="round"/>
+  <line x1="36.0" y1="149.5" x2="41.8" y2="153.3" stroke="#fff7cf" stroke-width="0.9" opacity="0.9"/>
+  <polygon points="46.1,155.4 51.9,159.3 51.9,166.9 46.1,163.0" fill="url(#gold)" stroke="#4a3208" stroke-width="0.8" stroke-linejoin="round"/>
+  <line x1="46.1" y1="156.2" x2="51.9" y2="160.1" stroke="#fff7cf" stroke-width="0.9" opacity="0.9"/>
+  <polygon points="56.3,162.2 62.0,166.0 62.0,173.6 56.3,169.8" fill="url(#gold)" stroke="#4a3208" stroke-width="0.8" stroke-linejoin="round"/>
+  <line x1="56.3" y1="163.0" x2="62.0" y2="166.8" stroke="#fff7cf" stroke-width="0.9" opacity="0.9"/>
+  <polygon points="66.4,168.9 72.2,172.8 72.2,180.4 66.4,176.5" fill="url(#gold)" stroke="#4a3208" stroke-width="0.8" stroke-linejoin="round"/>
+  <line x1="66.4" y1="169.7" x2="72.2" y2="173.6" stroke="#fff7cf" stroke-width="0.9" opacity="0.9"/>
+  <polygon points="76.5,175.7 82.3,179.5 82.3,187.1 76.5,183.3" fill="url(#gold)" stroke="#4a3208" stroke-width="0.8" stroke-linejoin="round"/>
+  <line x1="76.5" y1="176.5" x2="82.3" y2="180.3" stroke="#fff7cf" stroke-width="0.9" opacity="0.9"/>
+  <polygon points="86.6,182.4 92.4,186.3 92.4,193.9 86.6,190.0" fill="url(#gold)" stroke="#4a3208" stroke-width="0.8" stroke-linejoin="round"/>
+  <line x1="86.6" y1="183.2" x2="92.4" y2="187.1" stroke="#fff7cf" stroke-width="0.9" opacity="0.9"/>
+  <polygon points="96.8,189.2 102.5,193.0 102.5,200.6 96.8,196.8" fill="url(#gold)" stroke="#4a3208" stroke-width="0.8" stroke-linejoin="round"/>
+  <line x1="96.8" y1="190.0" x2="102.5" y2="193.8" stroke="#fff7cf" stroke-width="0.9" opacity="0.9"/>
+  <polygon points="106.9,195.9 112.7,199.8 112.7,207.4 106.9,203.5" fill="url(#gold)" stroke="#4a3208" stroke-width="0.8" stroke-linejoin="round"/>
+  <line x1="106.9" y1="196.7" x2="112.7" y2="200.6" stroke="#fff7cf" stroke-width="0.9" opacity="0.9"/>
+  <polygon points="117.0,202.7 122.8,206.5 122.8,214.1 117.0,210.3" fill="url(#gold)" stroke="#4a3208" stroke-width="0.8" stroke-linejoin="round"/>
+  <line x1="117.0" y1="203.5" x2="122.8" y2="207.3" stroke="#fff7cf" stroke-width="0.9" opacity="0.9"/>
+  <polygon points="220.0,148.7 214.2,152.5 214.2,160.1 220.0,156.3" fill="url(#gold)" stroke="#4a3208" stroke-width="0.8" stroke-linejoin="round"/>
+  <line x1="220.0" y1="149.5" x2="214.2" y2="153.3" stroke="#fff7cf" stroke-width="0.9" opacity="0.9"/>
+  <polygon points="209.9,155.4 204.1,159.3 204.1,166.9 209.9,163.0" fill="url(#gold)" stroke="#4a3208" stroke-width="0.8" stroke-linejoin="round"/>
+  <line x1="209.9" y1="156.2" x2="204.1" y2="160.1" stroke="#fff7cf" stroke-width="0.9" opacity="0.9"/>
+  <polygon points="199.7,162.2 194.0,166.0 194.0,173.6 199.7,169.8" fill="url(#gold)" stroke="#4a3208" stroke-width="0.8" stroke-linejoin="round"/>
+  <line x1="199.7" y1="163.0" x2="194.0" y2="166.8" stroke="#fff7cf" stroke-width="0.9" opacity="0.9"/>
+  <polygon points="189.6,168.9 183.8,172.8 183.8,180.4 189.6,176.5" fill="url(#gold)" stroke="#4a3208" stroke-width="0.8" stroke-linejoin="round"/>
+  <line x1="189.6" y1="169.7" x2="183.8" y2="173.6" stroke="#fff7cf" stroke-width="0.9" opacity="0.9"/>
+  <polygon points="179.5,175.7 173.7,179.5 173.7,187.1 179.5,183.3" fill="url(#gold)" stroke="#4a3208" stroke-width="0.8" stroke-linejoin="round"/>
+  <line x1="179.5" y1="176.5" x2="173.7" y2="180.3" stroke="#fff7cf" stroke-width="0.9" opacity="0.9"/>
+  <polygon points="169.4,182.4 163.6,186.3 163.6,193.9 169.4,190.0" fill="url(#gold)" stroke="#4a3208" stroke-width="0.8" stroke-linejoin="round"/>
+  <line x1="169.4" y1="183.2" x2="163.6" y2="187.1" stroke="#fff7cf" stroke-width="0.9" opacity="0.9"/>
+  <polygon points="159.2,189.2 153.5,193.0 153.5,200.6 159.2,196.8" fill="url(#gold)" stroke="#4a3208" stroke-width="0.8" stroke-linejoin="round"/>
+  <line x1="159.2" y1="190.0" x2="153.5" y2="193.8" stroke="#fff7cf" stroke-width="0.9" opacity="0.9"/>
+  <polygon points="149.1,195.9 143.3,199.8 143.3,207.4 149.1,203.5" fill="url(#gold)" stroke="#4a3208" stroke-width="0.8" stroke-linejoin="round"/>
+  <line x1="149.1" y1="196.7" x2="143.3" y2="200.6" stroke="#fff7cf" stroke-width="0.9" opacity="0.9"/>
+  <polygon points="139.0,202.7 133.2,206.5 133.2,214.1 139.0,210.3" fill="url(#gold)" stroke="#4a3208" stroke-width="0.8" stroke-linejoin="round"/>
+  <line x1="139.0" y1="203.5" x2="133.2" y2="207.3" stroke="#fff7cf" stroke-width="0.9" opacity="0.9"/>
+  <polygon points="128.0,78.2 225.2,143.0 128.0,207.8 30.8,143.0" fill="url(#waferRim)" stroke="#0b0d10" stroke-width="1.6" stroke-linejoin="round"/>
+  <polygon points="128.0,85.4 214.4,143.0 128.0,200.6 41.6,143.0" fill="url(#waferTop)" stroke="#0a1220" stroke-width="1.2" stroke-linejoin="round"/>
+  <polyline points="30.8,143.0 128.0,78.2 225.2,143.0" fill="none" stroke="#ffffff" stroke-width="1.3" opacity="0.75" stroke-linejoin="round"/>
+  <polyline points="32.2,143.2 128.0,207.1 223.8,143.2" fill="none" stroke="#c6d0da" stroke-width="1" opacity="0.6"/>
+  <polyline points="61.4,134.6 74.0,143.0 84.8,143.0 88.4,140.6" fill="none" stroke="#3b2a06" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.8"/>
+  <polyline points="61.4,134.6 74.0,143.0 84.8,143.0 88.4,140.6" fill="none" stroke="#e3b443" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <ellipse cx="61.4" cy="134.6" rx="3.2" ry="1.8" fill="url(#gold)" stroke="#3b2a06" stroke-width="0.6"/>
+  <ellipse cx="88.4" cy="140.6" rx="3.2" ry="1.8" fill="url(#gold)" stroke="#3b2a06" stroke-width="0.6"/>
+  <polyline points="52.4,140.6 74.0,155.0 84.8,155.0 92.0,159.8" fill="none" stroke="#3b2a06" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.8"/>
+  <polyline points="52.4,140.6 74.0,155.0 84.8,155.0 92.0,159.8" fill="none" stroke="#e3b443" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <ellipse cx="52.4" cy="140.6" rx="3.2" ry="1.8" fill="url(#gold)" stroke="#3b2a06" stroke-width="0.6"/>
+  <ellipse cx="92.0" cy="159.8" rx="3.2" ry="1.8" fill="url(#gold)" stroke="#3b2a06" stroke-width="0.6"/>
+  <polyline points="194.6,134.6 182.0,143.0 171.2,143.0 167.6,140.6" fill="none" stroke="#3b2a06" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.8"/>
+  <polyline points="194.6,134.6 182.0,143.0 171.2,143.0 167.6,140.6" fill="none" stroke="#e3b443" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <ellipse cx="194.6" cy="134.6" rx="3.2" ry="1.8" fill="url(#gold)" stroke="#3b2a06" stroke-width="0.6"/>
+  <ellipse cx="167.6" cy="140.6" rx="3.2" ry="1.8" fill="url(#gold)" stroke="#3b2a06" stroke-width="0.6"/>
+  <polyline points="203.6,140.6 183.8,153.8 173.0,153.8 167.6,157.4" fill="none" stroke="#3b2a06" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.8"/>
+  <polyline points="203.6,140.6 183.8,153.8 173.0,153.8 167.6,157.4" fill="none" stroke="#e3b443" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <ellipse cx="203.6" cy="140.6" rx="3.2" ry="1.8" fill="url(#gold)" stroke="#3b2a06" stroke-width="0.6"/>
+  <ellipse cx="167.6" cy="157.4" rx="3.2" ry="1.8" fill="url(#gold)" stroke="#3b2a06" stroke-width="0.6"/>
+  <polyline points="115.4,170.6 104.6,177.8 117.2,186.2" fill="none" stroke="#3b2a06" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.8"/>
+  <polyline points="115.4,170.6 104.6,177.8 117.2,186.2" fill="none" stroke="#e3b443" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <ellipse cx="115.4" cy="170.6" rx="3.2" ry="1.8" fill="url(#gold)" stroke="#3b2a06" stroke-width="0.6"/>
+  <ellipse cx="117.2" cy="186.2" rx="3.2" ry="1.8" fill="url(#gold)" stroke="#3b2a06" stroke-width="0.6"/>
+  <polyline points="115.4,108.2 131.6,97.4 146.0,107.0" fill="none" stroke="#3b2a06" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.8"/>
+  <polyline points="115.4,108.2 131.6,97.4 146.0,107.0" fill="none" stroke="#e3b443" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <ellipse cx="115.4" cy="108.2" rx="3.2" ry="1.8" fill="url(#gold)" stroke="#3b2a06" stroke-width="0.6"/>
+  <ellipse cx="146.0" cy="107.0" rx="3.2" ry="1.8" fill="url(#gold)" stroke="#3b2a06" stroke-width="0.6"/>
+  <polyline points="133.4,173.0 146.0,181.4 156.8,174.2" fill="none" stroke="#3b2a06" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.8"/>
+  <polyline points="133.4,173.0 146.0,181.4 156.8,174.2" fill="none" stroke="#e3b443" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <ellipse cx="133.4" cy="173.0" rx="3.2" ry="1.8" fill="url(#gold)" stroke="#3b2a06" stroke-width="0.6"/>
+  <ellipse cx="156.8" cy="174.2" rx="3.2" ry="1.8" fill="url(#gold)" stroke="#3b2a06" stroke-width="0.6"/>
+  <ellipse cx="128.0" cy="91.4" rx="4" ry="2.3" fill="url(#steel)" stroke="#0b0d10" stroke-width="0.8"/>
+  <line x1="125.6" y1="91.4" x2="130.4" y2="91.4" stroke="#2a3038" stroke-width="0.9"/>
+  <ellipse cx="205.4" cy="143.0" rx="4" ry="2.3" fill="url(#steel)" stroke="#0b0d10" stroke-width="0.8"/>
+  <line x1="203.0" y1="143.0" x2="207.8" y2="143.0" stroke="#2a3038" stroke-width="0.9"/>
+  <ellipse cx="128.0" cy="194.6" rx="4" ry="2.3" fill="url(#steel)" stroke="#0b0d10" stroke-width="0.8"/>
+  <line x1="125.6" y1="194.6" x2="130.4" y2="194.6" stroke="#2a3038" stroke-width="0.9"/>
+  <ellipse cx="50.6" cy="143.0" rx="4" ry="2.3" fill="url(#steel)" stroke="#0b0d10" stroke-width="0.8"/>
+  <line x1="48.2" y1="143.0" x2="53.0" y2="143.0" stroke="#2a3038" stroke-width="0.9"/>
+  <polyline points="83.5,134.9 71.4,143.0 83.5,151.1" fill="none" stroke="#3ee6ff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" opacity="0.55" filter="url(#b2)"/>
+  <polyline points="83.5,134.9 71.4,143.0 83.5,151.1" fill="none" stroke="#063341" stroke-width="4.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <polyline points="83.5,134.9 71.4,143.0 83.5,151.1" fill="none" stroke="#7ff3ff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <polyline points="83.5,134.9 71.4,143.0 83.5,151.1" fill="none" stroke="#ffffff" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round" opacity="0.85"/>
+  <polyline points="69.5,134.9 57.4,143.0 69.5,151.1" fill="none" stroke="#3ee6ff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" opacity="0.55" filter="url(#b2)"/>
+  <polyline points="69.5,134.9 57.4,143.0 69.5,151.1" fill="none" stroke="#063341" stroke-width="4.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <polyline points="69.5,134.9 57.4,143.0 69.5,151.1" fill="none" stroke="#7ff3ff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <polyline points="69.5,134.9 57.4,143.0 69.5,151.1" fill="none" stroke="#ffffff" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round" opacity="0.85"/>
+  <polyline points="172.5,151.1 184.6,143.0 172.5,134.9" fill="none" stroke="#3ee6ff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" opacity="0.55" filter="url(#b2)"/>
+  <polyline points="172.5,151.1 184.6,143.0 172.5,134.9" fill="none" stroke="#063341" stroke-width="4.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <polyline points="172.5,151.1 184.6,143.0 172.5,134.9" fill="none" stroke="#7ff3ff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <polyline points="172.5,151.1 184.6,143.0 172.5,134.9" fill="none" stroke="#ffffff" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round" opacity="0.85"/>
+  <polyline points="186.5,151.1 198.6,143.0 186.5,134.9" fill="none" stroke="#3ee6ff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" opacity="0.55" filter="url(#b2)"/>
+  <polyline points="186.5,151.1 198.6,143.0 186.5,134.9" fill="none" stroke="#063341" stroke-width="4.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <polyline points="186.5,151.1 198.6,143.0 186.5,134.9" fill="none" stroke="#7ff3ff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <polyline points="186.5,151.1 198.6,143.0 186.5,134.9" fill="none" stroke="#ffffff" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round" opacity="0.85"/>
+  <polyline points="115.9,174.4 128.0,182.5 140.1,174.4" fill="none" stroke="#3ee6ff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" opacity="0.55" filter="url(#b2)"/>
+  <polyline points="115.9,174.4 128.0,182.5 140.1,174.4" fill="none" stroke="#063341" stroke-width="4.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <polyline points="115.9,174.4 128.0,182.5 140.1,174.4" fill="none" stroke="#7ff3ff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <polyline points="115.9,174.4 128.0,182.5 140.1,174.4" fill="none" stroke="#ffffff" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round" opacity="0.85"/>
+  <polyline points="115.9,183.7 128.0,191.8 140.1,183.7" fill="none" stroke="#3ee6ff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" opacity="0.55" filter="url(#b2)"/>
+  <polyline points="115.9,183.7 128.0,191.8 140.1,183.7" fill="none" stroke="#063341" stroke-width="4.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <polyline points="115.9,183.7 128.0,191.8 140.1,183.7" fill="none" stroke="#7ff3ff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <polyline points="115.9,183.7 128.0,191.8 140.1,183.7" fill="none" stroke="#ffffff" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round" opacity="0.85"/>
+  <polygon points="68.6,131.0 146.0,182.6 146.0,178.6 68.6,127.0" fill="url(#sideL)" stroke="#0b0d10" stroke-width="1.2"/>
+  <polygon points="146.0,182.6 187.4,155.0 187.4,151.0 146.0,178.6" fill="url(#sideR)" stroke="#0b0d10" stroke-width="1.2"/>
+  <polygon points="110.0,99.4 187.4,151.0 146.0,178.6 68.6,127.0" fill="#56616c" stroke="#0b0d10" stroke-width="1.2"/>
+  <polygon points="106.4,104.2 182.9,155.2 145.1,180.4 68.6,129.4" fill="#000" opacity="0.55" filter="url(#b2)"/>
+  <polygon points="74.0,127.0 146.0,175.0 146.0,133.0 74.0,85.0" fill="url(#amberSide)" stroke="#0b0d10" stroke-width="1.5" stroke-linejoin="round"/>
+  <line x1="80.0" y1="127.5" x2="80.0" y2="92.5" stroke="#6e3d06" stroke-width="1.6" opacity="0.85"/>
+  <line x1="81.2" y1="128.3" x2="81.2" y2="93.3" stroke="#ffd27a" stroke-width="0.9" opacity="0.8"/>
+  <line x1="86.0" y1="131.5" x2="86.0" y2="96.5" stroke="#6e3d06" stroke-width="1.6" opacity="0.85"/>
+  <line x1="87.2" y1="132.3" x2="87.2" y2="97.3" stroke="#ffd27a" stroke-width="0.9" opacity="0.8"/>
+  <line x1="92.0" y1="135.5" x2="92.0" y2="100.5" stroke="#6e3d06" stroke-width="1.6" opacity="0.85"/>
+  <line x1="93.2" y1="136.3" x2="93.2" y2="101.3" stroke="#ffd27a" stroke-width="0.9" opacity="0.8"/>
+  <line x1="98.0" y1="139.5" x2="98.0" y2="104.5" stroke="#6e3d06" stroke-width="1.6" opacity="0.85"/>
+  <line x1="99.2" y1="140.3" x2="99.2" y2="105.3" stroke="#ffd27a" stroke-width="0.9" opacity="0.8"/>
+  <line x1="104.0" y1="143.5" x2="104.0" y2="108.5" stroke="#6e3d06" stroke-width="1.6" opacity="0.85"/>
+  <line x1="105.2" y1="144.3" x2="105.2" y2="109.3" stroke="#ffd27a" stroke-width="0.9" opacity="0.8"/>
+  <line x1="110.0" y1="147.5" x2="110.0" y2="112.5" stroke="#6e3d06" stroke-width="1.6" opacity="0.85"/>
+  <line x1="111.2" y1="148.3" x2="111.2" y2="113.3" stroke="#ffd27a" stroke-width="0.9" opacity="0.8"/>
+  <line x1="116.0" y1="151.5" x2="116.0" y2="116.5" stroke="#6e3d06" stroke-width="1.6" opacity="0.85"/>
+  <line x1="117.2" y1="152.3" x2="117.2" y2="117.3" stroke="#ffd27a" stroke-width="0.9" opacity="0.8"/>
+  <line x1="122.0" y1="155.5" x2="122.0" y2="120.5" stroke="#6e3d06" stroke-width="1.6" opacity="0.85"/>
+  <line x1="123.2" y1="156.3" x2="123.2" y2="121.3" stroke="#ffd27a" stroke-width="0.9" opacity="0.8"/>
+  <line x1="128.0" y1="159.5" x2="128.0" y2="124.5" stroke="#6e3d06" stroke-width="1.6" opacity="0.85"/>
+  <line x1="129.2" y1="160.3" x2="129.2" y2="125.3" stroke="#ffd27a" stroke-width="0.9" opacity="0.8"/>
+  <line x1="134.0" y1="163.5" x2="134.0" y2="128.5" stroke="#6e3d06" stroke-width="1.6" opacity="0.85"/>
+  <line x1="135.2" y1="164.3" x2="135.2" y2="129.3" stroke="#ffd27a" stroke-width="0.9" opacity="0.8"/>
+  <line x1="140.0" y1="167.5" x2="140.0" y2="132.5" stroke="#6e3d06" stroke-width="1.6" opacity="0.85"/>
+  <line x1="141.2" y1="168.3" x2="141.2" y2="133.3" stroke="#ffd27a" stroke-width="0.9" opacity="0.8"/>
+  <line x1="74.0" y1="125.4" x2="146.0" y2="173.4" stroke="#2a1a06" stroke-width="2.6" opacity="0.55"/>
+  <line x1="74.0" y1="86.6" x2="146.0" y2="134.6" stroke="#2a1a06" stroke-width="2.6" opacity="0.55"/>
+  <polygon points="146.0,175.0 182.0,151.0 182.0,109.0 146.0,133.0" fill="url(#amberEnd)" stroke="#0b0d10" stroke-width="1.5" stroke-linejoin="round"/>
+  <line x1="164.0" y1="161.0" x2="164.0" y2="123.0" stroke="#0b0d10" stroke-width="1.3"/>
+  <line x1="174.3" y1="153.6" x2="174.3" y2="117.6" stroke="url(#steel)" stroke-width="1.7" stroke-linecap="round"/>
+  <ellipse cx="174.3" cy="135.6" rx="1.6" ry="1.3" fill="#f4f7fa" stroke="#0b0d10" stroke-width="0.5"/>
+  <line x1="154.5" y1="166.8" x2="154.5" y2="130.8" stroke="url(#steel)" stroke-width="1.7" stroke-linecap="round"/>
+  <ellipse cx="154.5" cy="148.8" rx="1.6" ry="1.3" fill="#f4f7fa" stroke="#0b0d10" stroke-width="0.5"/>
+  <polygon points="110.0,61.0 182.0,109.0 146.0,133.0 74.0,85.0" fill="url(#amberTop)" stroke="#0b0d10" stroke-width="1.5" stroke-linejoin="round"/>
+  <line x1="114.2" y1="66.2" x2="81.8" y2="87.8" stroke="#000" stroke-width="0.8" opacity="0.18"/>
+  <line x1="120.2" y1="70.2" x2="87.8" y2="91.8" stroke="#000" stroke-width="0.8" opacity="0.18"/>
+  <line x1="126.2" y1="74.2" x2="93.8" y2="95.8" stroke="#000" stroke-width="0.8" opacity="0.18"/>
+  <line x1="132.2" y1="78.2" x2="99.8" y2="99.8" stroke="#000" stroke-width="0.8" opacity="0.18"/>
+  <line x1="138.2" y1="82.2" x2="105.8" y2="103.8" stroke="#000" stroke-width="0.8" opacity="0.18"/>
+  <line x1="144.2" y1="86.2" x2="111.8" y2="107.8" stroke="#000" stroke-width="0.8" opacity="0.18"/>
+  <line x1="150.2" y1="90.2" x2="117.8" y2="111.8" stroke="#000" stroke-width="0.8" opacity="0.18"/>
+  <line x1="156.2" y1="94.2" x2="123.8" y2="115.8" stroke="#000" stroke-width="0.8" opacity="0.18"/>
+  <line x1="162.2" y1="98.2" x2="129.8" y2="119.8" stroke="#000" stroke-width="0.8" opacity="0.18"/>
+  <line x1="168.2" y1="102.2" x2="135.8" y2="123.8" stroke="#000" stroke-width="0.8" opacity="0.18"/>
+  <line x1="174.2" y1="106.2" x2="141.8" y2="127.8" stroke="#000" stroke-width="0.8" opacity="0.18"/>
+  <rect x="71.4" y="122.6" width="5.2" height="4.4" rx="0.8" fill="#3a3f46" stroke="#0b0d10" stroke-width="0.6"/>
+  <rect x="71.4" y="85.0" width="5.2" height="4.4" rx="0.8" fill="#3a3f46" stroke="#0b0d10" stroke-width="0.6"/>
+  <rect x="143.4" y="170.6" width="5.2" height="4.4" rx="0.8" fill="#3a3f46" stroke="#0b0d10" stroke-width="0.6"/>
+  <rect x="143.4" y="133.0" width="5.2" height="4.4" rx="0.8" fill="#3a3f46" stroke="#0b0d10" stroke-width="0.6"/>
+  <rect x="179.4" y="146.6" width="5.2" height="4.4" rx="0.8" fill="#3a3f46" stroke="#0b0d10" stroke-width="0.6"/>
+  <rect x="179.4" y="109.0" width="5.2" height="4.4" rx="0.8" fill="#3a3f46" stroke="#0b0d10" stroke-width="0.6"/>
+  <polyline points="74.0,85.0 110.0,61.0 182.0,109.0" fill="none" stroke="#ffffff" stroke-width="1.2" opacity="0.55" stroke-linejoin="round"/>
+  <polyline points="74.0,85.0 146.0,133.0 182.0,109.0" fill="none" stroke="#fff6d8" stroke-width="1.4" opacity="0.8" stroke-linejoin="round"/>
+  <line x1="146.0" y1="133.0" x2="146.0" y2="175.0" stroke="#ffffff" stroke-width="1.1" opacity="0.5"/>
+  <polygon points="110.0,68.2 173.9,110.8 141.5,132.4 77.6,89.8" fill="#000" opacity="0.55" filter="url(#b2)"/>
+  <polygon points="83.0,87.4 142.4,127.0 142.4,93.0 83.0,53.4" fill="url(#tealSide)" stroke="#0b0d10" stroke-width="1.5" stroke-linejoin="round"/>
+  <line x1="88.9" y1="87.9" x2="88.9" y2="60.9" stroke="#0b3d36" stroke-width="1.6" opacity="0.85"/>
+  <line x1="90.1" y1="88.6" x2="90.1" y2="61.6" stroke="#a8fff0" stroke-width="0.9" opacity="0.8"/>
+  <line x1="94.9" y1="91.8" x2="94.9" y2="64.8" stroke="#0b3d36" stroke-width="1.6" opacity="0.85"/>
+  <line x1="96.0" y1="92.6" x2="96.0" y2="65.6" stroke="#a8fff0" stroke-width="0.9" opacity="0.8"/>
+  <line x1="100.8" y1="95.8" x2="100.8" y2="68.8" stroke="#0b3d36" stroke-width="1.6" opacity="0.85"/>
+  <line x1="102.0" y1="96.6" x2="102.0" y2="69.6" stroke="#a8fff0" stroke-width="0.9" opacity="0.8"/>
+  <line x1="106.8" y1="99.7" x2="106.8" y2="72.7" stroke="#0b3d36" stroke-width="1.6" opacity="0.85"/>
+  <line x1="107.9" y1="100.5" x2="107.9" y2="73.5" stroke="#a8fff0" stroke-width="0.9" opacity="0.8"/>
+  <line x1="112.7" y1="103.7" x2="112.7" y2="76.7" stroke="#0b3d36" stroke-width="1.6" opacity="0.85"/>
+  <line x1="113.9" y1="104.5" x2="113.9" y2="77.5" stroke="#a8fff0" stroke-width="0.9" opacity="0.8"/>
+  <line x1="118.6" y1="107.7" x2="118.6" y2="80.7" stroke="#0b3d36" stroke-width="1.6" opacity="0.85"/>
+  <line x1="119.8" y1="108.4" x2="119.8" y2="81.4" stroke="#a8fff0" stroke-width="0.9" opacity="0.8"/>
+  <line x1="124.6" y1="111.6" x2="124.6" y2="84.6" stroke="#0b3d36" stroke-width="1.6" opacity="0.85"/>
+  <line x1="125.8" y1="112.4" x2="125.8" y2="85.4" stroke="#a8fff0" stroke-width="0.9" opacity="0.8"/>
+  <line x1="130.5" y1="115.6" x2="130.5" y2="88.6" stroke="#0b3d36" stroke-width="1.6" opacity="0.85"/>
+  <line x1="131.7" y1="116.4" x2="131.7" y2="89.4" stroke="#a8fff0" stroke-width="0.9" opacity="0.8"/>
+  <line x1="136.5" y1="119.5" x2="136.5" y2="92.5" stroke="#0b3d36" stroke-width="1.6" opacity="0.85"/>
+  <line x1="137.6" y1="120.3" x2="137.6" y2="93.3" stroke="#a8fff0" stroke-width="0.9" opacity="0.8"/>
+  <line x1="83.0" y1="85.8" x2="142.4" y2="125.4" stroke="#2a1a06" stroke-width="2.6" opacity="0.55"/>
+  <line x1="83.0" y1="55.0" x2="142.4" y2="94.6" stroke="#2a1a06" stroke-width="2.6" opacity="0.55"/>
+  <polygon points="142.4,127.0 173.0,106.6 173.0,72.6 142.4,93.0" fill="url(#tealEnd)" stroke="#0b0d10" stroke-width="1.5" stroke-linejoin="round"/>
+  <line x1="157.7" y1="114.8" x2="157.7" y2="84.8" stroke="#0b0d10" stroke-width="1.3"/>
+  <line x1="166.5" y1="108.4" x2="166.5" y2="80.4" stroke="url(#steel)" stroke-width="1.7" stroke-linecap="round"/>
+  <ellipse cx="166.5" cy="94.4" rx="1.6" ry="1.3" fill="#f4f7fa" stroke="#0b0d10" stroke-width="0.5"/>
+  <line x1="149.6" y1="119.7" x2="149.6" y2="91.7" stroke="url(#steel)" stroke-width="1.7" stroke-linecap="round"/>
+  <ellipse cx="149.6" cy="105.7" rx="1.6" ry="1.3" fill="#f4f7fa" stroke="#0b0d10" stroke-width="0.5"/>
+  <polygon points="113.6,33.0 173.0,72.6 142.4,93.0 83.0,53.4" fill="url(#tealTop)" stroke="#0b0d10" stroke-width="1.5" stroke-linejoin="round"/>
+  <line x1="117.7" y1="38.2" x2="90.7" y2="56.2" stroke="#000" stroke-width="0.8" opacity="0.18"/>
+  <line x1="123.7" y1="42.1" x2="96.7" y2="60.1" stroke="#000" stroke-width="0.8" opacity="0.18"/>
+  <line x1="129.6" y1="46.1" x2="102.6" y2="64.1" stroke="#000" stroke-width="0.8" opacity="0.18"/>
+  <line x1="135.6" y1="50.0" x2="108.6" y2="68.0" stroke="#000" stroke-width="0.8" opacity="0.18"/>
+  <line x1="141.5" y1="54.0" x2="114.5" y2="72.0" stroke="#000" stroke-width="0.8" opacity="0.18"/>
+  <line x1="147.4" y1="58.0" x2="120.4" y2="76.0" stroke="#000" stroke-width="0.8" opacity="0.18"/>
+  <line x1="153.4" y1="61.9" x2="126.4" y2="79.9" stroke="#000" stroke-width="0.8" opacity="0.18"/>
+  <line x1="159.3" y1="65.9" x2="132.3" y2="83.9" stroke="#000" stroke-width="0.8" opacity="0.18"/>
+  <line x1="165.3" y1="69.8" x2="138.3" y2="87.8" stroke="#000" stroke-width="0.8" opacity="0.18"/>
+  <rect x="80.4" y="83.0" width="5.2" height="4.4" rx="0.8" fill="#3a3f46" stroke="#0b0d10" stroke-width="0.6"/>
+  <rect x="80.4" y="53.4" width="5.2" height="4.4" rx="0.8" fill="#3a3f46" stroke="#0b0d10" stroke-width="0.6"/>
+  <rect x="139.8" y="122.6" width="5.2" height="4.4" rx="0.8" fill="#3a3f46" stroke="#0b0d10" stroke-width="0.6"/>
+  <rect x="139.8" y="93.0" width="5.2" height="4.4" rx="0.8" fill="#3a3f46" stroke="#0b0d10" stroke-width="0.6"/>
+  <rect x="170.4" y="102.2" width="5.2" height="4.4" rx="0.8" fill="#3a3f46" stroke="#0b0d10" stroke-width="0.6"/>
+  <rect x="170.4" y="72.6" width="5.2" height="4.4" rx="0.8" fill="#3a3f46" stroke="#0b0d10" stroke-width="0.6"/>
+  <polyline points="83.0,53.4 113.6,33.0 173.0,72.6" fill="none" stroke="#ffffff" stroke-width="1.2" opacity="0.55" stroke-linejoin="round"/>
+  <polyline points="83.0,53.4 142.4,93.0 173.0,72.6" fill="none" stroke="#fff6d8" stroke-width="1.4" opacity="0.8" stroke-linejoin="round"/>
+  <line x1="142.4" y1="93.0" x2="142.4" y2="127.0" stroke="#ffffff" stroke-width="1.1" opacity="0.5"/>
+  <ellipse cx="137.0" cy="189.8" rx="4.5" ry="2.8" fill="#46ff9a" opacity="0.7" filter="url(#b1)"/>
+  <ellipse cx="137.0" cy="189.8" rx="2" ry="1.2" fill="#eafff2"/>
+</svg>

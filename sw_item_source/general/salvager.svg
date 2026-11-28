@@ -1,0 +1,158 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="256" height="256" viewBox="0 0 256 256">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="70%">
+      <stop offset="0" stop-color="#16171a"/>
+      <stop offset="1" stop-color="#050607"/>
+    </radialGradient>
+    <linearGradient id="hull" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f08a70"/>
+      <stop offset="0.25" stop-color="#b8321f"/>
+      <stop offset="0.7" stop-color="#6e170c"/>
+      <stop offset="1" stop-color="#2a0905"/>
+    </linearGradient>
+    <linearGradient id="arm" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#1b2028"/>
+      <stop offset="0.35" stop-color="#8a98a8"/>
+      <stop offset="0.55" stop-color="#55626f"/>
+      <stop offset="1" stop-color="#1b2028"/>
+    </linearGradient>
+    <linearGradient id="red" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ff6a4e"/>
+      <stop offset="0.5" stop-color="#c42a1a"/>
+      <stop offset="1" stop-color="#5e0f08"/>
+    </linearGradient>
+    <linearGradient id="chrome" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#40464d"/>
+      <stop offset="0.4" stop-color="#f4f7fa"/>
+      <stop offset="1" stop-color="#5a6168"/>
+    </linearGradient>
+    <linearGradient id="plate" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#c7ced5"/>
+      <stop offset="0.4" stop-color="#858e97"/>
+      <stop offset="1" stop-color="#30363c"/>
+    </linearGradient>
+    <linearGradient id="brass" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#4a3410"/>
+      <stop offset="0.4" stop-color="#e8c070"/>
+      <stop offset="1" stop-color="#5a3e12"/>
+    </linearGradient>
+    <radialGradient id="joint" cx="38%" cy="35%" r="70%">
+      <stop offset="0" stop-color="#e3e9ef"/>
+      <stop offset="0.45" stop-color="#6c7886"/>
+      <stop offset="1" stop-color="#14181d"/>
+    </radialGradient>
+    <linearGradient id="flame" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4fa8ff" stop-opacity="0.4"/>
+      <stop offset="0.45" stop-color="#9fd6ff"/>
+      <stop offset="1" stop-color="#ffffff"/>
+    </linearGradient>
+    <filter id="blur2" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2"/></filter>
+    <filter id="blur5" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5"/></filter>
+    <clipPath id="plateclip"><path d="M74 160 L120 156 L128 166 L136 155 L182 152 L190 212 L150 216 L144 224 L134 217 L80 222 Z"/></clipPath>
+  </defs>
+  <rect width="256" height="256" fill="url(#bg)"/>
+  <g transform="translate(128 126) scale(0.97) translate(-127.5 -122)">
+  <ellipse cx="128" cy="232" rx="90" ry="10" fill="#000" opacity="0.85" filter="url(#blur2)"/>
+
+  <!-- ===== salvaged hull plate held in the claws ===== -->
+  <path d="M74 160 L120 156 L128 166 L136 155 L182 152 L190 212 L150 216 L144 224 L134 217 L80 222 Z" fill="url(#plate)"/>
+  <g clip-path="url(#plateclip)">
+    <path d="M78 190 L188 182" stroke="#2c3238" stroke-width="2.5"/>
+    <path d="M78 192 L188 184" stroke="#e8edf2" stroke-width="1" opacity="0.5"/>
+    <path d="M130 158 L136 222" stroke="#2c3238" stroke-width="2.5"/>
+    <g fill="#e6ebf0">
+      <circle cx="90" cy="176" r="2.2"/><circle cx="110" cy="174" r="2.2"/><circle cx="152" cy="171" r="2.2"/><circle cx="172" cy="169" r="2.2"/>
+      <circle cx="92" cy="206" r="2.2"/><circle cx="112" cy="204" r="2.2"/><circle cx="154" cy="201" r="2.2"/><circle cx="174" cy="199" r="2.2"/>
+    </g>
+    <!-- glowing cut line where the torch is slicing -->
+    <path d="M128 166 L130 186" stroke="#ff7a1a" stroke-width="5" filter="url(#blur2)"/>
+    <path d="M128 166 L130 186" stroke="#fff0b0" stroke-width="2"/>
+    <ellipse cx="129" cy="176" rx="18" ry="16" fill="#1a1006" opacity="0.5" filter="url(#blur5)"/>
+  </g>
+  <path d="M74 160 L120 156 L128 166 L136 155 L182 152" stroke="#f4f7fa" stroke-width="1.8" fill="none" stroke-linejoin="round"/>
+  <path d="M190 212 L150 216 L144 224 L134 217 L80 222" stroke="#121518" stroke-width="2" fill="none"/>
+
+  <!-- ===== articulated arms ===== -->
+  <!-- left upper arm -->
+  <path d="M74 64 L90 76 L52 134 L36 122 Z" fill="url(#arm)"/>
+  <path d="M74 64 L36 122" stroke="#c9d3dd" stroke-width="1.5" opacity="0.7"/>
+  <!-- left hydraulic piston -->
+  <path d="M96 92 L60 140" stroke="#1a1e23" stroke-width="7" stroke-linecap="round"/>
+  <path d="M96 92 L76 119" stroke="url(#chrome)" stroke-width="4" stroke-linecap="round"/>
+  <path d="M76 119 L60 140" stroke="#a52818" stroke-width="5" stroke-linecap="round"/>
+  <!-- left forearm -->
+  <path d="M34 130 L50 122 L70 182 L54 190 Z" fill="url(#arm)"/>
+  <path d="M42 124 L62 186" stroke="#d1301e" stroke-width="3"/>
+  <!-- left elbow -->
+  <circle cx="44" cy="128" r="12" fill="url(#joint)" stroke="#0e1114" stroke-width="2"/>
+  <circle cx="44" cy="128" r="4" fill="#1a1e23"/>
+  <!-- left claw: base block and two hooked jaws over the plate edge -->
+  <path d="M48 176 L70 172 L76 198 L54 204 Z" fill="url(#hull)" stroke="#0e1114" stroke-width="1.5"/>
+  <path d="M66 176 C76 162 88 160 96 166 L92 172 C86 168 80 170 74 180 Z" fill="url(#arm)" stroke="#0e1114" stroke-width="1.5"/>
+  <path d="M70 198 C80 212 92 214 100 208 L96 202 C90 206 84 204 78 194 Z" fill="url(#arm)" stroke="#0e1114" stroke-width="1.5"/>
+  <path d="M68 175 C78 163 88 162 95 166" stroke="#e6edf4" stroke-width="1.2" fill="none"/>
+  <path d="M72 197 C80 209 90 211 98 207" stroke="#aab6c2" stroke-width="1.2" fill="none"/>
+
+  <!-- right upper arm -->
+  <path d="M182 64 L166 76 L204 134 L220 122 Z" fill="url(#arm)"/>
+  <path d="M182 64 L220 122" stroke="#c9d3dd" stroke-width="1.5" opacity="0.7"/>
+  <!-- right hydraulic piston -->
+  <path d="M160 92 L196 140" stroke="#1a1e23" stroke-width="7" stroke-linecap="round"/>
+  <path d="M160 92 L180 119" stroke="url(#chrome)" stroke-width="4" stroke-linecap="round"/>
+  <path d="M180 119 L196 140" stroke="#a52818" stroke-width="5" stroke-linecap="round"/>
+  <!-- right forearm -->
+  <path d="M222 130 L206 122 L186 182 L202 190 Z" fill="url(#arm)"/>
+  <path d="M214 124 L194 186" stroke="#d1301e" stroke-width="3"/>
+  <!-- right elbow -->
+  <circle cx="212" cy="128" r="12" fill="url(#joint)" stroke="#0e1114" stroke-width="2"/>
+  <circle cx="212" cy="128" r="4" fill="#1a1e23"/>
+  <!-- right claw -->
+  <path d="M208 176 L186 172 L180 198 L202 204 Z" fill="url(#hull)" stroke="#0e1114" stroke-width="1.5"/>
+  <path d="M190 176 C180 160 168 158 160 164 L164 170 C170 166 176 168 182 180 Z" fill="url(#arm)" stroke="#0e1114" stroke-width="1.5"/>
+  <path d="M186 198 C176 212 164 214 156 208 L160 202 C166 206 172 204 178 194 Z" fill="url(#arm)" stroke="#0e1114" stroke-width="1.5"/>
+  <path d="M188 175 C178 161 168 160 161 164" stroke="#e6edf4" stroke-width="1.2" fill="none"/>
+
+  <!-- ===== module housing ===== -->
+  <rect x="80" y="20" width="96" height="70" rx="16" fill="#0d1014"/>
+  <rect x="82" y="22" width="92" height="66" rx="15" fill="url(#hull)"/>
+  <path d="M92 26 L164 26" stroke="#ffd0c4" stroke-width="2.4" stroke-linecap="round" opacity="0.85"/>
+  <!-- red/white hazard band -->
+  <rect x="82" y="46" width="92" height="12" fill="#22262c"/>
+  <g fill="#e9edf1">
+    <path d="M90 46 L98 46 L92 58 L84 58 Z"/><path d="M110 46 L118 46 L112 58 L104 58 Z"/>
+    <path d="M138 46 L146 46 L140 58 L132 58 Z"/><path d="M158 46 L166 46 L160 58 L152 58 Z"/>
+  </g>
+  <path d="M82 46 L174 46 M82 58 L174 58" stroke="#0d1014" stroke-width="1.5"/>
+  <!-- vents -->
+  <g stroke="#11151a" stroke-width="2.4" stroke-linecap="round">
+    <path d="M92 66 L104 66 M92 72 L104 72 M92 78 L104 78"/>
+    <path d="M152 66 L164 66 M152 72 L164 72 M152 78 L164 78"/>
+  </g>
+  <!-- shoulder joints -->
+  <circle cx="82" cy="70" r="12" fill="url(#joint)" stroke="#0e1114" stroke-width="2"/>
+  <circle cx="174" cy="70" r="12" fill="url(#joint)" stroke="#0e1114" stroke-width="2"/>
+  <circle cx="82" cy="70" r="4" fill="#1a1e23"/><circle cx="174" cy="70" r="4" fill="#1a1e23"/>
+  <!-- status lights -->
+  <circle cx="98" cy="35" r="3.2" fill="#7affc0"/><circle cx="98" cy="35" r="6" fill="#7affc0" opacity="0.4" filter="url(#blur2)"/>
+  <circle cx="158" cy="35" r="3.2" fill="#ffb84d"/>
+
+  <!-- ===== cutting torch ===== -->
+  <rect x="118" y="60" width="20" height="30" rx="3" fill="url(#chrome)"/>
+  <rect x="114" y="62" width="28" height="8" rx="2" fill="#262c33"/>
+  <path d="M120 90 L136 90 L132 132 L124 132 Z" fill="url(#arm)"/>
+  <rect x="119" y="100" width="18" height="5" rx="1.5" fill="#262c33"/>
+  <rect x="120" y="114" width="16" height="5" rx="1.5" fill="#262c33"/>
+  <path d="M123 132 L133 132 L131 142 L125 142 Z" fill="url(#brass)"/>
+  <!-- flame -->
+  <path d="M128 140 C120 150 124 160 128 168 C132 160 136 150 128 140 Z" fill="#3a8cff" opacity="0.6" filter="url(#blur2)"/>
+  <path d="M128 141 C123 150 125 158 128 166 C131 158 133 150 128 141 Z" fill="url(#flame)"/>
+  <!-- glare and sparks at the cut -->
+  <circle cx="128" cy="166" r="11" fill="#ffd27a" opacity="0.7" filter="url(#blur5)"/>
+  <circle cx="128" cy="166" r="3.4" fill="#ffffff"/>
+  <g stroke-linecap="round" stroke-width="2">
+    <path d="M128 166 L108 150" stroke="#ffcf6a"/><path d="M128 166 L148 148" stroke="#ffcf6a"/>
+    <path d="M128 166 L104 166" stroke="#ff9a3a"/><path d="M128 166 L154 162" stroke="#ff9a3a"/>
+    <path d="M128 166 L114 140" stroke="#fff0b8" stroke-width="1.4"/><path d="M128 166 L142 138" stroke="#fff0b8" stroke-width="1.4"/>
+  </g>
+  </g>
+</svg>
