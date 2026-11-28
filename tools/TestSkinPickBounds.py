@@ -113,10 +113,35 @@ class SkinPickBoundsTests(unittest.TestCase):
             manifest = {"models": {"beast": {"path": "models/beast.mdl",
                                              "sha256": hashlib.sha256(model.read_bytes()).hexdigest()}}}
             (root / bounds.MANIFEST).write_text(json.dumps(manifest))
-            bounds.check(root)
+            (root / "sw_2da").mkdir()
+            (root / bounds.APPEARANCE).write_text("2DA V2.0\n\n   LABEL   RACE   MODELTYPE\n0   Beast   beast   S\n")
+            active = {"beast": model}
+            bounds.check(root, active)
             model.write_bytes(binary_model(name=b"other"))
             with self.assertRaises(ValueError):
-                bounds.check(root)
+                bounds.check(root, active)
+
+    def test_check_flags_ascii_skinned_appearance_models(self):
+        table = ("2DA V2.0\n\n   LABEL   RACE   MODELTYPE\n"
+                 "0   Beast   beast   S\n1   \"Some Body\"   pmh0   P\n2   Statue   statue   F\n")
+        statue = ASCII.split("node skin")[0] + "endmodelgeom beast\ndonemodel beast\n"
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "tools").mkdir()
+            (root / "sw_2da").mkdir()
+            (root / bounds.APPEARANCE).write_text(table)
+            (root / bounds.MANIFEST).write_text(json.dumps({"models": {}}))
+            for name, text in (("beast", ASCII), ("pmh0", ASCII), ("statue", statue)):
+                (root / f"{name}.mdl").write_text(text)
+            active = {name: root / f"{name}.mdl" for name in ("beast", "pmh0", "statue")}
+            # Only the creature row with an ASCII skin fails; part rows and skinless models pass.
+            with self.assertRaisesRegex(ValueError, r"\['beast'\]"):
+                bounds.check(root, active)
+            (root / "beast.mdl").write_bytes(binary_model())
+            bounds.check(root, active)
+            (root / "beast.mdl").write_text(ASCII)
+            (root / bounds.MANIFEST).write_text(json.dumps({"models": {}, "ascii_exempt": {"beast": "reason"}}))
+            bounds.check(root, active)
 
 
 if __name__ == "__main__":

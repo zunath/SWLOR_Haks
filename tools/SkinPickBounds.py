@@ -1,7 +1,11 @@
 """Fit skin-mesh bounding boxes to the creature's standing poses.
 
 The client picks a creature under the cursor with each skin mesh's stored
-bounding box, which the compiler takes from the bind pose. Some creature rigs
+bounding box, which the compiler takes from the bind pose. A creature model
+shipped as ASCII has no stored boxes, and the client's own load gives it a pick
+area far past the body (the Bantha and the Piket/Ronto showed it), so `--check`
+also fails on any appearance.2da creature model that is still an ASCII source
+with skin meshes. Some creature rigs
 are bound far from how they stand (a Behir is bound as a straight body floating
 3 m up, then curled onto the ground by its animations), so the clickable area
 floats above or around the visible model. This tool replaces each skin node's
@@ -31,6 +35,7 @@ import GenerateTintMapAssets as tint
 
 ROOT = Path(__file__).resolve().parents[1]
 MANIFEST = "tools/SkinPickBounds.json"
+APPEARANCE = "sw_2da/appearance.2da"
 # Idle animations, in the order the engine prefers them for creatures.
 IDLE = ("cpause1", "pause1")
 SKIN_FLAG = 0x40
@@ -285,13 +290,43 @@ def load_manifest(root):
     return json.loads((root / MANIFEST).read_text())
 
 
-def check(root=ROOT):
+def appearance_models(root):
+    """Creature model resrefs that appearance.2da loads; part-based (P) rows name body parts instead."""
+    lines = (root / APPEARANCE).read_text(encoding="latin-1").splitlines()
+    header = lines[2].split()
+    race, kind = header.index("RACE"), header.index("MODELTYPE")
+    names = set()
+    for line in lines[3:]:
+        fields = re.findall(r'"[^"]*"|\S+', line)[1:]
+        if len(fields) > max(race, kind) and fields[race] != "****" and fields[kind].upper() != "P":
+            names.add(fields[race].lower())
+    return names
+
+
+def ascii_skinned(data: bytes) -> bool:
+    """True for an ASCII model whose geometry has a skin mesh."""
+    if data[:4] == bytes(4):
+        return False
+    geometry = re.split(rb"(?im)^\s*newanim\b", data, maxsplit=1)[0]
+    return re.search(rb"(?im)^\s*node\s+skin\s", geometry) is not None
+
+
+def check(root=ROOT, active=None):
     manifest = load_manifest(root)
     stale = [name for name, entry in manifest["models"].items()
              if not (root / entry["path"]).is_file() or digest((root / entry["path"]).read_bytes()) != entry["sha256"]]
     if stale:
         raise ValueError(f"Skin pick bounds are stale for {stale}. Run SkinPickBounds.py --apply --game-data <NWN/data>.")
-    print(f"Skin pick bounds: {len(manifest['models'])} creature models fit their standing poses.")
+    active = tint.find_active_models() if active is None else active
+    exempt = manifest.get("ascii_exempt", {})
+    uncompiled = sorted(name for name in appearance_models(root)
+                        if name in active and name not in exempt and ascii_skinned(active[name].read_bytes()))
+    if uncompiled:
+        raise ValueError(f"ASCII skinned creature models {uncompiled} have no stored pick boxes, so the client "
+                         "selects them far past the body. Compile them with CompileModels.py --model <resref> --apply, "
+                         "then add them to SkinPickBounds.json and run SkinPickBounds.py --apply --game-data <NWN/data>.")
+    print(f"Skin pick bounds: {len(manifest['models'])} creature models fit their standing poses; "
+          f"no other appearance model is an ASCII skin source ({len(exempt)} exempt).")
 
 
 def apply(root, game_data, compiler):
