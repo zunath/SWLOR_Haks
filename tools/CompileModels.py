@@ -334,8 +334,15 @@ def validate_round_trip(source: bytes, compiled: bytes, decompiled: str, skin_sk
         raise ValueError(f"Node count changed: {len(before)} -> {len(after)}")
     if len(before) != len(rotations):
         raise ValueError(f"Binary node count changed: {len(before)} -> {len(rotations)}")
-    for (kind, name, properties), (other_kind, other_name, output), (rotation_name, rotation_values, mesh_values) in zip(before, after, rotations):
-        if (kind, name) != (other_kind, other_name):
+    # Animation node headers only name the geometry node they drive. The
+    # compiler writes the geometry node's type there, so a legacy source that
+    # declares an animated trimesh bone as "dummy" round-trips as "trimesh".
+    animation_start = re.search(r"(?im)^\s*newanim\b", source_text)
+    geometry_count = len(parse_nodes(source_text[:animation_start.start()])) if animation_start else len(before)
+    geometry_kinds = {name: kind for kind, name, _ in before[:geometry_count]}
+    for index, ((kind, name, properties), (other_kind, other_name, output), (rotation_name, rotation_values, mesh_values)) in enumerate(zip(before, after, rotations)):
+        animation_kind = index >= geometry_count and kind == "dummy" and other_kind == geometry_kinds.get(name)
+        if name != other_name or (kind != other_kind and not animation_kind):
             raise ValueError(f"Node hierarchy changed: {name} -> {other_name}")
         if rotation_name != name:
             raise ValueError(f"Binary node hierarchy differs at {name}")

@@ -1,13 +1,22 @@
 """Fit skin-mesh bounding boxes to the creature's standing poses.
 
 The client picks a creature under the cursor with each skin mesh's stored
-bounding box, which the compiler takes from the bind pose. Some creature rigs
+bounding box, which the compiler takes from the bind pose. A creature model
+shipped as ASCII has no stored boxes, and the client's own load gives it a pick
+area far past the body (the Bantha and the Piket/Ronto showed it), so `--check`
+also fails on any appearance.2da creature model that is still an ASCII source
+with skin meshes. Some creature rigs
 are bound far from how they stand (a Behir is bound as a straight body floating
 3 m up, then curled onto the ground by its animations), so the clickable area
 floats above or around the visible model. This tool replaces each skin node's
 box with the box of its skinned vertices in the first frame of its idle
 animation. A box smaller than a rearing or walking pose is harmless, because
-rigid head and limb meshes stay clickable; a larger one blocks clicks. Only the box and radius change; geometry,
+rigid head and limb meshes stay clickable; a larger one blocks clicks.
+For models where a full idle fit expanded a previously usable click area,
+limit_to_mesh intersects the idle box with the geometry box and caps its radius
+at the original vertex radius. For an idle fit that still selects empty ground,
+use_authored_bounds takes the box and radius from the original mesh vertices.
+A model with no animation and a known unavailable supermodel stands in its authored pose. Only the box and radius change; geometry,
 weights, inverse binds and animations stay byte-identical, so the model looks
 and moves the same.
 
@@ -31,6 +40,7 @@ import GenerateTintMapAssets as tint
 
 ROOT = Path(__file__).resolve().parents[1]
 MANIFEST = "tools/SkinPickBounds.json"
+APPEARANCE = "sw_2da/appearance.2da"
 # Idle animations, in the order the engine prefers them for creatures.
 IDLE = ("cpause1", "pause1")
 SKIN_FLAG = 0x40
@@ -60,15 +70,26 @@ def skin_boxes(data: bytes) -> dict[str, tuple[tuple[float, ...], tuple[float, .
             for name, flags, node in mesh_nodes(data) if flags & MESH_FLAG and flags & SKIN_FLAG}
 
 
-def patch(data: bytes, boxes: dict[str, tuple[list[float], list[float]]]) -> bytes:
-    """Write each skin node's box and a radius that keeps every corner inside its sphere."""
+def patch(data: bytes, boxes: dict[str, tuple[list[float], list[float]]], *, limit_to_vertices=None) -> bytes:
+    """Apply the standing boxes, optionally constrained by the mesh's original pick volume."""
     out = bytearray(data)
     for name, flags, node in mesh_nodes(data):
         if not (flags & MESH_FLAG and flags & SKIN_FLAG) or name not in boxes:
             continue
         low, high = boxes[name]
         centre = struct.unpack_from("<3f", data, node + 160)
+        if limit_to_vertices is not None:
+            # Compilers use the component extrema and farthest vertex about the stored centre.
+            # Read geometry so a second run cannot shrink bounds already fitted by a first run.
+            vertices = limit_to_vertices[name]
+            low = [max(value, min(v[i] for v in vertices)) for i, value in enumerate(low)]
+            high = [min(value, max(v[i] for v in vertices)) for i, value in enumerate(high)]
+            if any(lo > hi + 1e-6 for lo, hi in zip(low, high)):
+                raise ValueError(f"Standing and original pick boxes are disjoint for {name}")
+            high = [max(lo, hi) for lo, hi in zip(low, high)]
         radius = max(math.dist(centre, corner) for corner in itertools.product(*zip(low, high)))
+        if limit_to_vertices is not None:
+            radius = min(radius, max(math.dist(centre, v) for v in vertices))
         struct.pack_into("<7f", out, node + 132, *low, *high, radius)
     return bytes(out)
 
@@ -191,16 +212,21 @@ def world(nodes, local):
     return resolve
 
 
-def pose_boxes(model_lines, chain):
+def pose_boxes(model_lines, chain, *, allow_static=False, authored=False):
     """Skin-node-local box of every skin mesh in the first frame of the idle animation.
 
     `chain` is the decompiled supermodel chain; the model's own animations win.
-    Animation positions are scaled by the model's animation scale, as in game."""
+    Animation positions are scaled by the model's animation scale, as in game.
+    An authored fit uses the original mesh vertices regardless of the idle animation."""
     nodes, _, scale = parse_geometry(model_lines)
-    frame = next((f for animation in IDLE for lines in [model_lines, *chain]
-                  if (f := first_frame(lines, animation))), None)
+    frame = None if authored else next((f for animation in IDLE for lines in [model_lines, *chain]
+                                       if (f := first_frame(lines, animation))), None)
     if frame is None:
-        raise ValueError("no idle animation found")
+        if not (allow_static or authored):
+            raise ValueError("no idle animation found")
+        return {name: ([min(p[i] for p in node["verts"]) for i in range(3)],
+                       [max(p[i] for p in node["verts"]) for i in range(3)])
+                for name, node in nodes.items() if node["type"] == "skin" and node["verts"]}
 
     def posed_local(name, node):
         keys = frame.get(name, {})
@@ -239,7 +265,7 @@ def model_source(name, game_data, active, stock):
     raise FileNotFoundError(f"Model {name} is in neither the HAK sources nor the game data")
 
 
-def decompiled_chain(name, data, game_data, active, stock, staging, compiler):
+def decompiled_chain(name, data, game_data, active, stock, staging, compiler, static_parent=None, *, geometry_only=False):
     """ASCII lines of the model and of its supermodel chain."""
     chain, seen = [], set()
     current = data
@@ -255,10 +281,15 @@ def decompiled_chain(name, data, game_data, active, stock, staging, compiler):
             text = current.decode("latin-1")
         lines = text.splitlines()
         chain.append(lines)
+        if geometry_only:
+            return chain
         seen.add(name)
         _, name, _ = parse_geometry(lines)
-        if not name or name == "null" or name in seen:
+        if not name or name == "null" or name in seen or first_frame(lines, IDLE[0]):
             return chain
+        if name not in active and name not in stock:
+            if name == static_parent or any(first_frame(source, idle) for source in chain for idle in IDLE):
+                return chain
         current = model_source(name, game_data, active, stock)
 
 
@@ -271,13 +302,25 @@ def fit(root, entries, game_data, compiler):
     stock = tint.read_stock_key_models(game_data) if game_data is not None else {}
     results = {}
     with tempfile.TemporaryDirectory(prefix="skin-pick-") as directory:
-        for name, relative in entries.items():
-            path = root / relative
+        for name, entry in entries.items():
+            path = root / entry["path"]
             data = path.read_bytes() if path.is_file() else model_source(name, game_data, {}, stock)
             staging = Path(directory) / name
             staging.mkdir()
-            model, *chain = decompiled_chain(name, data, game_data, active, stock, staging, compiler)
-            results[name] = (path, data, patch(data, pose_boxes(model, chain)))
+            static_parent = entry.get("static_if_missing_parent")
+            authored = entry.get("use_authored_bounds", False)
+            model, *chain = decompiled_chain(name, data, game_data, active, stock, staging, compiler,
+                                            static_parent, geometry_only=authored)
+            allow_static = (static_parent is not None and static_parent not in active and static_parent not in stock
+                            and parse_geometry((chain or [model])[-1])[1] == static_parent
+                            and not any(line.lstrip().lower().startswith("newanim ")
+                                        for source in [model, *chain] for line in source))
+            boxes = pose_boxes(model, chain, allow_static=allow_static, authored=authored)
+            vertices = None
+            if entry.get("limit_to_mesh") or authored or allow_static:
+                nodes, _, _ = parse_geometry(model)
+                vertices = {key: nodes[key]["verts"] for key in boxes}
+            results[name] = (path, data, patch(data, boxes, limit_to_vertices=vertices))
     return results
 
 
@@ -285,19 +328,48 @@ def load_manifest(root):
     return json.loads((root / MANIFEST).read_text())
 
 
-def check(root=ROOT):
+def appearance_models(root):
+    """Creature model resrefs that appearance.2da loads; part-based (P) rows name body parts instead."""
+    lines = (root / APPEARANCE).read_text(encoding="latin-1").splitlines()
+    header = lines[2].split()
+    race, kind = header.index("RACE"), header.index("MODELTYPE")
+    names = set()
+    for line in lines[3:]:
+        fields = re.findall(r'"[^"]*"|\S+', line)[1:]
+        if len(fields) > max(race, kind) and fields[race] != "****" and fields[kind].upper() != "P":
+            names.add(fields[race].lower())
+    return names
+
+
+def ascii_skinned(data: bytes) -> bool:
+    """True for an ASCII model whose geometry has a skin mesh."""
+    if data[:4] == bytes(4):
+        return False
+    geometry = re.split(rb"(?im)^\s*newanim\b", data, maxsplit=1)[0]
+    return re.search(rb"(?im)^\s*node\s+skin\s", geometry) is not None
+
+
+def check(root=ROOT, active=None):
     manifest = load_manifest(root)
     stale = [name for name, entry in manifest["models"].items()
              if not (root / entry["path"]).is_file() or digest((root / entry["path"]).read_bytes()) != entry["sha256"]]
     if stale:
         raise ValueError(f"Skin pick bounds are stale for {stale}. Run SkinPickBounds.py --apply --game-data <NWN/data>.")
-    print(f"Skin pick bounds: {len(manifest['models'])} creature models fit their standing poses.")
+    active = tint.find_active_models() if active is None else active
+    exempt = manifest.get("ascii_exempt", {})
+    uncompiled = sorted(name for name in appearance_models(root)
+                        if name in active and name not in exempt and ascii_skinned(active[name].read_bytes()))
+    if uncompiled:
+        raise ValueError(f"ASCII skinned creature models {uncompiled} have no stored pick boxes, so the client "
+                         "selects them far past the body. Compile them with CompileModels.py --model <resref> --apply, "
+                         "then add them to SkinPickBounds.json and run SkinPickBounds.py --apply --game-data <NWN/data>.")
+    print(f"Skin pick bounds: {len(manifest['models'])} creature models have verified pick bounds; "
+          f"no other appearance model is an ASCII skin source ({len(exempt)} exempt).")
 
 
 def apply(root, game_data, compiler):
     manifest = load_manifest(root)
-    entries = {name: entry["path"] for name, entry in manifest["models"].items()}
-    for name, (path, before, after) in fit(root, entries, game_data, compiler).items():
+    for name, (path, before, after) in fit(root, manifest["models"], game_data, compiler).items():
         if skin_boxes(before).keys() != skin_boxes(after).keys():
             raise ValueError(f"{name}: skin node set changed while fitting")
         path.write_bytes(after)

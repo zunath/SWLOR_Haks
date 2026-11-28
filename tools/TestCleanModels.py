@@ -272,6 +272,64 @@ donemodel {name}
                     for _, quaternion in rotations:
                         self.assertAlmostEqual(math.sqrt(sum(value * value for value in quaternion)), 1, places=6)
 
+    def test_animation_may_declare_an_animated_trimesh_bone_as_dummy(self):
+        # c_bantha's animations list its hidden trimesh bones as "dummy"; the compiler
+        # writes "trimesh" there. Any other node type change still fails.
+        source = """newmodel beast
+setsupermodel beast NULL
+classification CHARACTER
+beginmodelgeom beast
+node dummy beast
+ parent NULL
+endnode
+node trimesh bone
+ parent beast
+ render 0
+ bitmap NULL
+ verts 3
+  0 0 0
+  1 0 0
+  0 1 0
+ tverts 1
+  0 0 0
+ faces 1
+  0 1 2 1 0 0 0 0
+endnode
+endmodelgeom beast
+newanim cpause1 beast
+ length 1
+ transtime 0.25
+ animroot beast
+ node dummy beast
+  parent NULL
+ endnode
+ node dummy bone
+  parent beast
+  orientationkey 2
+   0 0 0 1 0
+   1 0 0 1 0.5
+ endnode
+doneanim cpause1 beast
+donemodel beast
+"""
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            folders = [root / name for name in ("source", "binary", "decompiled")]
+            for folder in folders:
+                folder.mkdir()
+            sources, binary, decompiled = folders
+            (sources / "beast.mdl").write_text(source)
+            compiler = cli.find_compiler()
+            cli.run(compiler, root, "compile", [sources / "beast.mdl"], binary, "compile.log")
+            cli.run(compiler, root, "decompile", [binary / "beast.mdl"], decompiled, "decompile.log")
+            compiled = (binary / "beast.mdl").read_bytes()
+            text = (decompiled / "beast.mdl").read_text(encoding="latin-1")
+            mdl.validate_round_trip(source.encode(), compiled, text)
+            for changed in (source.replace("node trimesh bone", "node dummy bone"),
+                            source.replace(" node dummy bone", " node skin bone")):
+                with self.subTest(changed=changed.count("dummy bone")), self.assertRaises(ValueError):
+                    mdl.validate_round_trip(changed.encode(), compiled, text)
+
 
 if __name__ == "__main__":
     unittest.main()
