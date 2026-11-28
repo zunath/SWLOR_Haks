@@ -5,7 +5,8 @@ Every tint material (each sw_tint_mtr material and any other MTR that samples
 the dye palette) is fingerprinted from its directives and the exact content of
 every texture (and TXI) it binds, tint masks included. Every custom shader those
 materials use, the palette atlas, and each model's rows in tintmap.2da and
-cloaktint.2da (which material and dye layers it uses) are recorded as well.
+cloaktint.2da (which material and dye layers it uses), plus authored default
+head colors in headtintdefs.2da, are recorded as well.
 DyeAppearanceBaseline.json records the approved state, so any change to how an
 existing part takes dyes fails until the baseline is updated on purpose, with
 before/after client captures in the pull request (SWLOR.Game.Server/Readmes/TintMapRendering.md).
@@ -39,12 +40,14 @@ SHARED_INPUTS = (
     "sw_shader/fs_plt_tinter_nm.shd",
     "sw_shader/fs_plt_hair_nm.shd",
     "sw_shader/fs_cloaktint.shd",
+    "sw_shader/inc_hd_tint.shd",
     "sw_item/plt_palette.tga",
     "sw_item/plt_palette.txi",
     "sw_item/plt_white.tga",
+    "sw_2da/headtintdefs.2da",
 )
 # Each model's material and dye-layer rows; changing one recolors that model.
-CATALOGS = ("sw_2da/tintmap.2da", "sw_2da/cloaktint.2da")
+CATALOGS = ("sw_2da/tintmap.2da", "sw_2da/cloaktint.2da", "sw_2da/headtintdefs.2da")
 # A texture's TXI changes how it is sampled (tint masks rely on "mipmap 1").
 TEXTURE_EXTENSIONS = (".dds", ".tga", ".txi")
 # The shared placeholder and palette are covered by SHARED_INPUTS. Tint masks

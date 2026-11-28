@@ -2,7 +2,7 @@ customshaderVS vslit_sm
 renderhint NormalTangents
 customshaderFS fs_plt_tinter
 texture0 plt_white
-texture7 tm_ec188d2ec213b
+texture7 tm_8507d324e19b5
 texture10 plt_palette
 parameter float tintMapWidth 1024.0
 parameter float tintMapHeight 512.0
@@ -17,4 +17,8 @@ parameter float rowLeath2 0.429932
 parameter float rowTat1 0.515869
 parameter float rowTat2 0.515869
 texture8 progfx_coat
-parameter float progFxCoat 0.0
+parameter float progFxCoat 0
+parameter float smoothTintEdges 0
+parameter float useNativePalette 0
+parameter float useTexture1Alpha 0
+parameter float useTexture9Alpha 0

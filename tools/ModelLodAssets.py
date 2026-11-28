@@ -1,4 +1,4 @@
-"""Author checked-in LOD redirects for otherwise identical model resources.
+"""Author shared redirects and validate separately authored player-head LODs.
 
 Only self-identity fields are ignored when comparing models. Materials, bones,
 inverse binds, supermodels, animations and every geometry byte must match.
@@ -224,6 +224,8 @@ class ModelPath(type(Path())):
 
 
 def model_paths(directory):
+    from HeadLodAssets import production_paths
+    authored_heads = production_paths(Path(directory).parent)
     paths = {}
     for path in Path(directory).glob("*.mdl"):
         if path.stem.lower() in paths:
@@ -231,6 +233,8 @@ def model_paths(directory):
         paths[path.stem.lower()] = ModelPath(path)
     for path in Path(directory).glob("*.lod"):
         if path.stem.lower() in paths:
+            if path.with_suffix('.mdl') in authored_heads:
+                continue
             raise ValueError(f"LOD shadows an MDL with the same name: {path}")
         paths[path.stem.lower()] = ModelPath(path.with_suffix(".mdl"))
     return list(paths.values())
@@ -262,12 +266,15 @@ def base_game_overrides(paths, stock_models):
 def check(root=ROOT, stock_models=None):
     """Validate checked-in redirects; with the base game's model names, also require a
     complete native_overrides list, since --apply only refreshes it when it runs."""
+    import HeadLodAssets
     root = Path(root)
     aliases = catalog(root)
     hak_directories = directories(root)
+    authored_heads = HeadLodAssets.production_paths(root)
     actual = {p.with_suffix(".mdl").relative_to(root).as_posix()
-              for directory in hak_directories for p in directory.glob("*.lod")}
-    errors = []
+              for directory in hak_directories for p in directory.glob("*.lod")
+              if p.with_suffix('.mdl') not in authored_heads}
+    errors = HeadLodAssets.check(root)
     if actual != aliases.keys():
         errors.append("Model LOD manifest does not cover exactly the checked-in redirects")
     manifest = root / MANIFEST
@@ -431,4 +438,4 @@ if __name__ == "__main__":
         errors = check(stock_models=stock)
         if errors:
             raise SystemExit("\n".join(errors[:20]))
-        print("All checked-in model redirects preserve their exact original geometry and bindings.")
+        print("Shared redirects preserve exact geometry; authored head LODs meet their caps and bindings.")
