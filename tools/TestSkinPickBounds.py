@@ -81,6 +81,23 @@ class SkinPickBoundsTests(unittest.TestCase):
         self.assertAlmostEqual(low[2], -2.75, places=4)
         self.assertAlmostEqual(high[2], -2.75, places=4)
 
+    def test_authored_bounds_use_original_vertices_even_when_an_idle_animation_exists(self):
+        boxes = bounds.pose_boxes(ASCII.splitlines(), [], authored=True)
+        self.assertEqual(boxes["body"], ([0, -2, 0], [0, 2, 0]))
+        model = binary_model()
+        vertices = {"body": [(0, -2, 0), (0, 2, 0)]}
+        fitted = bounds.patch(model, boxes, limit_to_vertices=vertices)
+        self.assertEqual(bounds.skin_boxes(fitted)["body"], ((0, -2, 0), (0, 2, 0), 2))
+        self.assertEqual(bounds.patch(fitted, boxes, limit_to_vertices=vertices), fitted)
+
+    def test_authored_bounds_do_not_require_the_animation_parent(self):
+        geometry = ASCII.split("newanim")[0].replace("setsupermodel beast null", "setsupermodel beast missing")
+        with tempfile.TemporaryDirectory() as directory:
+            model, *chain = bounds.decompiled_chain("beast", geometry.encode(), None, {}, {}, Path(directory),
+                                                    None, geometry_only=True)
+            self.assertEqual(chain, [])
+            self.assertEqual(bounds.pose_boxes(model, chain, authored=True)["body"], ([0, -2, 0], [0, 2, 0]))
+
     def test_missing_standing_animation_is_an_error(self):
         with self.assertRaises(ValueError):
             bounds.pose_boxes(ASCII.split("newanim")[0].splitlines(), [])

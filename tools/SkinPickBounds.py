@@ -14,8 +14,9 @@ animation. A box smaller than a rearing or walking pose is harmless, because
 rigid head and limb meshes stay clickable; a larger one blocks clicks.
 For models where a full idle fit expanded a previously usable click area,
 limit_to_mesh intersects the idle box with the geometry box and caps its radius
-at the original vertex radius. A model with no animation and a known unavailable
-supermodel stands in its authored pose. Only the box and radius change; geometry,
+at the original vertex radius. For an idle fit that still selects empty ground,
+use_authored_bounds takes the box and radius from the original mesh vertices.
+A model with no animation and a known unavailable supermodel stands in its authored pose. Only the box and radius change; geometry,
 weights, inverse binds and animations stay byte-identical, so the model looks
 and moves the same.
 
@@ -211,16 +212,17 @@ def world(nodes, local):
     return resolve
 
 
-def pose_boxes(model_lines, chain, *, allow_static=False):
+def pose_boxes(model_lines, chain, *, allow_static=False, authored=False):
     """Skin-node-local box of every skin mesh in the first frame of the idle animation.
 
     `chain` is the decompiled supermodel chain; the model's own animations win.
-    Animation positions are scaled by the model's animation scale, as in game."""
+    Animation positions are scaled by the model's animation scale, as in game.
+    An authored fit uses the original mesh vertices regardless of the idle animation."""
     nodes, _, scale = parse_geometry(model_lines)
-    frame = next((f for animation in IDLE for lines in [model_lines, *chain]
-                  if (f := first_frame(lines, animation))), None)
+    frame = None if authored else next((f for animation in IDLE for lines in [model_lines, *chain]
+                                       if (f := first_frame(lines, animation))), None)
     if frame is None:
-        if not allow_static:
+        if not (allow_static or authored):
             raise ValueError("no idle animation found")
         return {name: ([min(p[i] for p in node["verts"]) for i in range(3)],
                        [max(p[i] for p in node["verts"]) for i in range(3)])
@@ -263,7 +265,7 @@ def model_source(name, game_data, active, stock):
     raise FileNotFoundError(f"Model {name} is in neither the HAK sources nor the game data")
 
 
-def decompiled_chain(name, data, game_data, active, stock, staging, compiler, static_parent=None):
+def decompiled_chain(name, data, game_data, active, stock, staging, compiler, static_parent=None, *, geometry_only=False):
     """ASCII lines of the model and of its supermodel chain."""
     chain, seen = [], set()
     current = data
@@ -279,6 +281,8 @@ def decompiled_chain(name, data, game_data, active, stock, staging, compiler, st
             text = current.decode("latin-1")
         lines = text.splitlines()
         chain.append(lines)
+        if geometry_only:
+            return chain
         seen.add(name)
         _, name, _ = parse_geometry(lines)
         if not name or name == "null" or name in seen or first_frame(lines, IDLE[0]):
@@ -304,14 +308,16 @@ def fit(root, entries, game_data, compiler):
             staging = Path(directory) / name
             staging.mkdir()
             static_parent = entry.get("static_if_missing_parent")
-            model, *chain = decompiled_chain(name, data, game_data, active, stock, staging, compiler, static_parent)
+            authored = entry.get("use_authored_bounds", False)
+            model, *chain = decompiled_chain(name, data, game_data, active, stock, staging, compiler,
+                                            static_parent, geometry_only=authored)
             allow_static = (static_parent is not None and static_parent not in active and static_parent not in stock
                             and parse_geometry((chain or [model])[-1])[1] == static_parent
                             and not any(line.lstrip().lower().startswith("newanim ")
                                         for source in [model, *chain] for line in source))
-            boxes = pose_boxes(model, chain, allow_static=allow_static)
+            boxes = pose_boxes(model, chain, allow_static=allow_static, authored=authored)
             vertices = None
-            if entry.get("limit_to_mesh") or allow_static:
+            if entry.get("limit_to_mesh") or authored or allow_static:
                 nodes, _, _ = parse_geometry(model)
                 vertices = {key: nodes[key]["verts"] for key in boxes}
             results[name] = (path, data, patch(data, boxes, limit_to_vertices=vertices))

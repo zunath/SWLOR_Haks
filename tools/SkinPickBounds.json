@@ -38,16 +38,18 @@
       "sha256": "f19a0530bad353d23f418bb1c7b72e5f6e1335cce99374e361c85182bef33527"
     },
     "c_amnbrute": {
+      "limit_to_mesh": true,
       "path": "sw_cr_creature/c_amnbrute.mdl",
-      "sha256": "b40cc6f1522e5d9b9e6016e578b66db84364d730b9f66f9939d40e9d9247d44b"
+      "sha256": "e09dcd1ca22def927c71196b14ad5a7eb5ccc362ca6970c3743dcbcdeb779ffc"
     },
     "c_amngrunt": {
       "path": "sw_cr_creature/c_amngrunt.mdl",
       "sha256": "693f88fe257e3418d57f642679b624d5041b875a7212157526e1eb393622fb05"
     },
     "c_amnshdfnd": {
+      "limit_to_mesh": true,
       "path": "sw_cr_creature/c_amnshdfnd.mdl",
-      "sha256": "f0c1429036b1a62ab062c54e1bb0d6890328e014c1e50cef31036188830717e9"
+      "sha256": "a96293ab59f58ec1b28a4b34ef2c0de1f4c309f1620796020f4115f955eb680e"
     },
     "c_anurog": {
       "path": "sw_cr_creature/c_anurog.mdl",
@@ -74,12 +76,14 @@
       "sha256": "4f92ff277d7b002a6ba828352c53bd7ea45045de08c91e03b103b7a85d7eed10"
     },
     "c_codcrawlz": {
+      "limit_to_mesh": true,
       "path": "sw_cr_creature/c_codcrawlz.mdl",
-      "sha256": "40b604a2660fd6be953f37659286c718aea8d0928030996f414c40c32e1d0d06"
+      "sha256": "a4bb8fd5c03e96bdefc9857c68dc45307d31915f1def4d3bc367bd3bbb0dcaea"
     },
     "c_codzombie2": {
       "path": "sw_cr_creature/c_codzombie2.mdl",
-      "sha256": "deea66030350fcc9bcb3bdb4557942560f2a5a15ef930331e2e3fe00085dd391"
+      "sha256": "41d0e35a84412e90457346f2080d5d3342d020cc235b1585fbc262382de51f15",
+      "use_authored_bounds": true
     },
     "c_condrdboss": {
       "path": "sw_cr_creature/C_CONDRDBoss.mdl",
@@ -226,7 +230,8 @@
     },
     "c_kraytdragon": {
       "path": "sw_cr_creature/c_kraytdragon.mdl",
-      "sha256": "dc267e7b5fb0cf74ead98fcb40e8edb9123003b3fab634abd2e1564772b9f21b"
+      "sha256": "ce4422a190cb5617de90ce65414b3621d3e9e634bffd7fa656e3bce9d18a9c2e",
+      "use_authored_bounds": true
     },
     "c_lizard03": {
       "path": "sw_cr_creature/c_lizard03.mdl",
@@ -249,8 +254,9 @@
       "sha256": "94882190e296387712d9e70d49b25d7cf2014f78d0fe322a6445feba3d6f9a9e"
     },
     "c_martian1953": {
+      "limit_to_mesh": true,
       "path": "sw_cr_creature/c_martian1953.mdl",
-      "sha256": "3b38d9db4de9c3f251298c2e2f5c40fe95829341e3f2f8bb90e4d2d7ce080b08"
+      "sha256": "4aad8118f42fb1ebb0e0cd3358cb46ab55bf5a08bcc2d9c10ffd4a0cffc85c0e"
     },
     "c_mykal": {
       "path": "sw_cr_creature/c_mykal.mdl",
@@ -322,8 +328,9 @@
       "sha256": "a94dbaee26ceb22627aad72b46019c8e044d010c39d456a5121fb2ed0e4a9ee1"
     },
     "c_selkath": {
+      "limit_to_mesh": true,
       "path": "sw_cr_creature/c_selkath.mdl",
-      "sha256": "ec8414b666d9699f637a23f39c35bffe9b37fe2f9e4af2a61573f7dd56edd427"
+      "sha256": "7cf0f3858c83b0a69b310d86569e368d0a6d7e48c56104436cb9f146587af031"
     },
     "c_spinosaurus": {
       "path": "sw_cr_creature/c_spinosaurus.mdl",
@@ -391,12 +398,14 @@
       "sha256": "f5a0a4b3e3eccfa45bd09e02bca15c16bc1a4bffc34b6ccc8553f9cc6833df50"
     },
     "c_zombi_f_04": {
+      "limit_to_mesh": true,
       "path": "sw_cr_creature/c_zombi_f_04.mdl",
-      "sha256": "b2bf48e68bf9cc603819c5e1506d34cbafc30d4cc80668550eaf0889f2d03fcc"
+      "sha256": "4e68b90b3c2f98b31e617151a8758c372dea161053abf42387c04b73da76bf8d"
     },
     "c_zombi_f_05": {
+      "limit_to_mesh": true,
       "path": "sw_cr_creature/c_zombi_f_05.mdl",
-      "sha256": "af535f31d0f13e1fe580736a514be1bcbb3376648f79076f0346cdec5fa89788"
+      "sha256": "415a13c4f03d26abf97f57af19b50a0e1f9ebf0b0375c179402f0b7670794820"
     },
     "c_zombi_f_06": {
       "path": "sw_cr_creature/c_zombi_f_06.mdl",
