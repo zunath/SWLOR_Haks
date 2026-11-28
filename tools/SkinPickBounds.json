@@ -1,12 +1,116 @@
 {
+  "ascii_exempt": {
+    "c_amnshdwrth": "CompileModels: danglymesh displacement on imp_lbicep does not round-trip",
+    "c_amnsuitor": "CompileModels: danglymesh displacement on dick001 does not round-trip",
+    "c_jawa": "Skin node LHand and dummy lhand share a name; the compiler binds the animation to the skin",
+    "c_mutdog": "CompileModels: a skin weight names a bone the skeleton does not have",
+    "c_porg": "CompileModels: the compiler keeps 8 of 141 nodes",
+    "c_vampiress": "CompileModels: lhand_g ambient colour does not round-trip"
+  },
   "models": {
+    "ad_pigeon_w": {
+      "path": "sw_cr_creature/ad_pigeon_w.mdl",
+      "sha256": "97127092aab28f142fddbfc21e6d54c3c31fd5a0f86bf58b6a83d28e4a92e581"
+    },
+    "ad_top_hors_1": {
+      "path": "sw_cr_creature/ad_top_hors_1.mdl",
+      "sha256": "3f77473b95fae5366fba07b487d2d27fcabe959ee8a8eaf912755b62f26ef9c1"
+    },
+    "ad_top_womn_1": {
+      "path": "sw_cr_creature/ad_top_womn_1.mdl",
+      "sha256": "622e980ccddda0e065fa03ce6fa5e830897f11ac218340a8f6920e4877adf1f0"
+    },
+    "c_a_deer": {
+      "path": "sw_cr_creature/c_a_deer.mdl",
+      "sha256": "b467d8766756b1c1ee7f348101c311f91774c774b765d220cf191d06fed72d30"
+    },
+    "c_aboleth_b1": {
+      "path": "sw_cr_creature/c_aboleth_b1.mdl",
+      "sha256": "dcbdd130429162d839bf2c87b7fe5e8ef7a606d58cc7c3842e31dc4b6c4d8aec"
+    },
+    "c_aboleth_b2": {
+      "path": "sw_cr_creature/c_aboleth_b2.mdl",
+      "sha256": "46d078759ab8bb796a1e681021d37010142b668479605db9b2314d5c1750a119"
+    },
     "c_allosaurus": {
       "path": "sw_cr_creature/c_allosaurus.mdl",
       "sha256": "f19a0530bad353d23f418bb1c7b72e5f6e1335cce99374e361c85182bef33527"
     },
+    "c_amnbrute": {
+      "path": "sw_cr_creature/c_amnbrute.mdl",
+      "sha256": "b40cc6f1522e5d9b9e6016e578b66db84364d730b9f66f9939d40e9d9247d44b"
+    },
+    "c_amngrunt": {
+      "path": "sw_cr_creature/c_amngrunt.mdl",
+      "sha256": "693f88fe257e3418d57f642679b624d5041b875a7212157526e1eb393622fb05"
+    },
+    "c_amnshdfnd": {
+      "path": "sw_cr_creature/c_amnshdfnd.mdl",
+      "sha256": "f0c1429036b1a62ab062c54e1bb0d6890328e014c1e50cef31036188830717e9"
+    },
+    "c_anurog": {
+      "path": "sw_cr_creature/c_anurog.mdl",
+      "sha256": "0a02c4c3dfdc1f0c441f1104cb445e20329b1a6dfd52794dd7816945ca0d93ad"
+    },
     "c_bantha": {
       "path": "sw_cr_creature/c_bantha.mdl",
       "sha256": "af2c732f163d04e55d27e524beb99815ce6a157354653d3821777fe1c50a41c4"
+    },
+    "c_barlgura": {
+      "path": "sw_cr_creature/c_barlgura.mdl",
+      "sha256": "809a1415b439a26e1de44bde2f9cd72d60cace6b6231083172e5383b9c09c88e"
+    },
+    "c_bomabeast": {
+      "path": "sw_cr_creature/C_Bomabeast.mdl",
+      "sha256": "453495ef3cab76068080a452ba4aadba0e1e60b75b0239b578753a56471dd507"
+    },
+    "c_bomabeastv": {
+      "path": "sw_cr_creature/C_BomabeastV.mdl",
+      "sha256": "bc5a502fc334746e92af9065e0657785d1f5bb4bd8eeaf75f3f3d90f7a0800f5"
+    },
+    "c_cannok": {
+      "path": "sw_cr_creature/C_Cannok.mdl",
+      "sha256": "4f92ff277d7b002a6ba828352c53bd7ea45045de08c91e03b103b7a85d7eed10"
+    },
+    "c_codcrawlz": {
+      "path": "sw_cr_creature/c_codcrawlz.mdl",
+      "sha256": "40b604a2660fd6be953f37659286c718aea8d0928030996f414c40c32e1d0d06"
+    },
+    "c_codzombie2": {
+      "path": "sw_cr_creature/c_codzombie2.mdl",
+      "sha256": "deea66030350fcc9bcb3bdb4557942560f2a5a15ef930331e2e3fe00085dd391"
+    },
+    "c_condrdboss": {
+      "path": "sw_cr_creature/C_CONDRDBoss.mdl",
+      "sha256": "7f4e659286c66e3bf807cc023ef0cc58b1eead12cfd9a2f12a8fd9adf26e8c96"
+    },
+    "c_condrdl": {
+      "path": "sw_cr_creature/C_ConDrdL.mdl",
+      "sha256": "798d7c3536946510e9760bbdafa3f342a9ba27d28cb51bc3bbb0355ade07f839"
+    },
+    "c_condrdm": {
+      "path": "sw_cr_creature/C_CondrdM.mdl",
+      "sha256": "36a64937f254e1b0df911950d9a1a8e26ddfdd3c589b1687c2aa9a424926bf19"
+    },
+    "c_crodlu2_mt": {
+      "path": "sw_cr_creature/c_crodlu2_mt.mdl",
+      "sha256": "b32e721340c36a1ba285cbdcc5ee3eb576e0e3bcf6a2dd9ca228ab1579468c51"
+    },
+    "c_crodlu_mt": {
+      "path": "sw_cr_creature/c_crodlu_mt.mdl",
+      "sha256": "fe75f2b2aa82d786426035b3f29b2d6955f2eca3624b0c7bc5c10440225e234f"
+    },
+    "c_cthnon": {
+      "path": "sw_cr_creature/c_cthnon.mdl",
+      "sha256": "4f8aeba51cfdb1c00677a6edeac43de17cd5a578814051e996bec57d8f71927e"
+    },
+    "c_cthspovld": {
+      "path": "sw_cr_creature/c_cthspovld.mdl",
+      "sha256": "d62c6e78dfd779e05a3be8dbbaf6ebe2e28e344f95673f7532e1065831332409"
+    },
+    "c_dewback": {
+      "path": "sw_cr_creature/C_Dewback.mdl",
+      "sha256": "bd9f5c6203e5635df750ea408ddd0ce5ea9759fa63f0624185ed6012e458635f"
     },
     "c_drexl": {
       "path": "sw_cr_creature/C_Drexl.mdl",
@@ -24,17 +128,109 @@
       "path": "sw_cr_creature/c_drgred01.mdl",
       "sha256": "3c8b44e839947c3685596b8fa058818f09d99ab74696b5f4b10ceecccf61bcbc"
     },
+    "c_ettercap01": {
+      "path": "sw_cr_creature/c_ettercap01.mdl",
+      "sha256": "3acf2afacae5b216dbef6a29093b1adccd72afb41dec81030980f93053a421fd"
+    },
     "c_ettercap02": {
       "path": "sw_cr_creature/c_ettercap02.mdl",
       "sha256": "14cef7c2e3ef85450cdcea8b2a56592a45ba3295b90ef48ef3592babf2b1fe59"
+    },
+    "c_gammoreanp": {
+      "path": "sw_cr_creature/c_gammoreanp.mdl",
+      "sha256": "f6f694fa0c01ab55471d9db783a2f1be5bff58adbee165e35a53df9c11d6f698"
+    },
+    "c_gorilla03": {
+      "path": "sw_cr_creature/c_gorilla03.mdl",
+      "sha256": "a515c0f147ffa35f1ee7c5b078dcd36187c3f50ee6ad596b4fc32e4bba5548eb"
+    },
+    "c_gorilla05": {
+      "path": "sw_cr_creature/c_gorilla05.mdl",
+      "sha256": "a628cbb5d891e59a82d64ff85988fa349a3d25f84cfb5d0f593e7786792436d7"
+    },
+    "c_hk47": {
+      "path": "sw_cr_creature/c_hk47.mdl",
+      "sha256": "d6f796db1b55907399e5a8a3c727bd7c1def3c85fe6b92c238849210d39bf895"
+    },
+    "c_hk50": {
+      "path": "sw_cr_creature/c_hk50.mdl",
+      "sha256": "1a93a07f6947a956f14914654c7428c5cdb36018e783032e8288aeea6fe85e71"
+    },
+    "c_hk51": {
+      "path": "sw_cr_creature/c_hk51.mdl",
+      "sha256": "71ddbda357d7e201932fa8af2ad542d1d5ae68bf6ff8c402df11d39ff5f0c67e"
+    },
+    "c_hssiss": {
+      "path": "sw_cr_creature/c_hssiss.mdl",
+      "sha256": "4f55e10d66f79ae6a1280bb918fe63d0c3e35425abdfce34356ade3ac911f05f"
+    },
+    "c_humvee1": {
+      "path": "sw_cr_vehicle/c_humvee1.mdl",
+      "sha256": "6f9b4641a19a992c89cd77058a2ff28d72c5519605b0863dea14c516c07b3007"
+    },
+    "c_humvee2": {
+      "path": "sw_cr_vehicle/c_humvee2.mdl",
+      "sha256": "201d42f8f1013769ad38a30e4d5c52d4da1c0a49a606abed8fa21e2fed982027"
+    },
+    "c_hutt": {
+      "path": "sw_cr_creature/c_hutt.mdl",
+      "sha256": "76b13acfa61b019469ce0c820eec589185fc63f201399cb84b9e02bb92eb0c72"
+    },
+    "c_infensa01": {
+      "path": "sw_cr_creature/c_infensa01.mdl",
+      "sha256": "0e9b042d77379de1fb409efe84454ec9ebe37d67d4540efe18712511bc45cc88"
+    },
+    "c_infensa02": {
+      "path": "sw_cr_creature/c_infensa02.mdl",
+      "sha256": "37cb21bf5ce81a5c83bfa2d8cfc1daeb7c14adf0295c8a9c74179373a041e21c"
+    },
+    "c_ithorian": {
+      "path": "sw_cr_creature/c_ithorian.mdl",
+      "sha256": "2331ff54254f4717dce435ef03866bddb0cc73171562c79b25d509b3e2c3fed3"
+    },
+    "c_kataarn": {
+      "path": "sw_cr_creature/C_Kataarn.mdl",
+      "sha256": "f31244df4baf10b6e08701bfa584863fa228f6352c31a1d0e7eaebe10b183da2"
+    },
+    "c_kenku": {
+      "path": "sw_cr_creature/c_kenku.mdl",
+      "sha256": "e072e67442d9ada1205989dd084a7f51b8b84dc96656ed7dbaefbf325eda0b86"
+    },
+    "c_kenku_c": {
+      "path": "sw_cr_creature/c_kenku_c.mdl",
+      "sha256": "06be9ef75efc2b2494158aca1c1ad5d30c95b41eb6030cda6732d2bbf51b7df7"
+    },
+    "c_kenkufem": {
+      "path": "sw_cr_creature/c_kenkufem.mdl",
+      "sha256": "060d5358f7b189612266159ec30916e6da00934a932856f4b77177d1849596c3"
+    },
+    "c_khounda": {
+      "path": "sw_cr_creature/c_khounda.mdl",
+      "sha256": "ad34e2c3ca5ff7869a54cb4857cb53f99ee55d2eacb6b3b91259b5cffa8e1e6b"
+    },
+    "c_khoundb": {
+      "path": "sw_cr_creature/c_khoundB.mdl",
+      "sha256": "a5fe834756c59b1b5ad67b937f4be3b8d84f3ef700ddb49755f032529ae207a1"
     },
     "c_kinrath": {
       "path": "sw_cr_creature/c_kinrath.mdl",
       "sha256": "41c2366a3fed38067fa9e6e3b4f2fa4317a0bd6d0355e6414470cb311949cb84"
     },
+    "c_kraytdragon": {
+      "path": "sw_cr_creature/c_kraytdragon.mdl",
+      "sha256": "dc267e7b5fb0cf74ead98fcb40e8edb9123003b3fab634abd2e1564772b9f21b"
+    },
+    "c_lizard03": {
+      "path": "sw_cr_creature/c_lizard03.mdl",
+      "sha256": "416b61ae01bd2b145fbaef28608eee4adf09152df18a0883e7a3b5cc40b23a51"
+    },
     "c_lizard_b1": {
       "path": "sw_cr_creature/c_lizard_b1.mdl",
       "sha256": "5a5b40972d83ab3fac0683d8da9f6406b27941200c202ec77f6ef5673d838201"
+    },
+    "c_lizard_b2": {
+      "path": "sw_cr_creature/c_lizard_b2.mdl",
+      "sha256": "16310d6bb0accc585e7b22559390089a2e9f6c585e2d4aae0a28c5529bbf512b"
     },
     "c_lizard_b3": {
       "path": "sw_cr_creature/c_lizard_b3.mdl",
@@ -44,9 +240,17 @@
       "path": "sw_cr_creature/C_Malbeast.mdl",
       "sha256": "94882190e296387712d9e70d49b25d7cf2014f78d0fe322a6445feba3d6f9a9e"
     },
+    "c_martian1953": {
+      "path": "sw_cr_creature/c_martian1953.mdl",
+      "sha256": "3b38d9db4de9c3f251298c2e2f5c40fe95829341e3f2f8bb90e4d2d7ce080b08"
+    },
     "c_mykal": {
       "path": "sw_cr_creature/c_mykal.mdl",
       "sha256": "90d7ee30d4d0b79090f491404d08d51353d51f1cf39556becff5163b30dcd6a7"
+    },
+    "c_og2tzom": {
+      "path": "sw_cr_creature/c_og2tzom.mdl",
+      "sha256": "d509b54a2a155dc962bb8bb285238d2fdaca1f7cd3cffc3be32eac4a837ca752"
     },
     "c_ooze_a01": {
       "path": "sw_cr_creature/c_ooze_a01.mdl",
@@ -60,17 +264,73 @@
       "path": "sw_cr_creature/c_phod_alien.mdl",
       "sha256": "04dd739ca55b6bab295f4992576cd31af24c5b1ebce971186a1ecb95803047b8"
     },
+    "c_phod_gelcgre": {
+      "path": "sw_cr_creature/c_phod_gelcgre.mdl",
+      "sha256": "025e4a308be21ce1fb26820bf3c7c4a22ad3060de92fa5c85f42e5a0e350bbee"
+    },
+    "c_phod_gelcpin": {
+      "path": "sw_cr_creature/c_phod_gelcpin.mdl",
+      "sha256": "4c8e6f197cfeb94bac1dc77bfd25af12720d62e36ef65270dfca0c9b20074f3b"
+    },
+    "c_phod_gelcred": {
+      "path": "sw_cr_creature/c_phod_gelcred.mdl",
+      "sha256": "a5193a640e70a55b084856d0467bc139897f90ecba4a1ba1a107b26a113a77e3"
+    },
+    "c_phod_gelcwhi": {
+      "path": "sw_cr_creature/c_phod_gelcwhi.mdl",
+      "sha256": "7bd2a592efd1a718acce67e8abcf910db4c5c453c363e049261a72a243109ce5"
+    },
+    "c_phod_gelcyel": {
+      "path": "sw_cr_creature/c_phod_gelcyel.mdl",
+      "sha256": "7ae808deae2017cbed0501cafaf4073c4909591cd18f95ae1f5c084fdfa9620d"
+    },
+    "c_raiderf01": {
+      "path": "sw_cr_creature/c_raiderf01.mdl",
+      "sha256": "39d63418786cd5e2621e18c31e0d4c07455fc2717d32a877e5cef1f803c07466"
+    },
+    "c_rakghoul": {
+      "path": "sw_cr_creature/C_Rakghoul.mdl",
+      "sha256": "a1fc112a8cc74d063420fafee88af2cc8976628868c184ab6f9d167d1feab254"
+    },
     "c_rancor_bull": {
       "path": "sw_cr_creature/c_rancor_bull.mdl",
       "sha256": "9bbeccd1354200bf370bfe832fa1e93d44d64229f2c56b255af023d293e6836f"
+    },
+    "c_reaver_cotbl": {
+      "path": "sw_cr_creature/c_reaver_cotbl.mdl",
+      "sha256": "5a7406c29e8238b3f85bea267fa2140847af173cd2f68c3dc281d9940f3ac447"
     },
     "c_ronto": {
       "path": "sw_cr_creature/C_Ronto.mdl",
       "sha256": "9dc1e52711f08d3e52ec0c1b3ebb7c8c46d6f3cd9ff4b1e4118e8a80b7134ff3"
     },
+    "c_sb_werebat_b": {
+      "path": "sw_cr_creature/c_sb_werebat_b.mdl",
+      "sha256": "6af14f849ad4b0630a4b1caede86f41d642df178f99dae47c95a96e8fdac72f8"
+    },
+    "c_sb_werebat_s": {
+      "path": "sw_cr_creature/c_sb_werebat_s.mdl",
+      "sha256": "a94dbaee26ceb22627aad72b46019c8e044d010c39d456a5121fb2ed0e4a9ee1"
+    },
+    "c_selkath": {
+      "path": "sw_cr_creature/c_selkath.mdl",
+      "sha256": "ec8414b666d9699f637a23f39c35bffe9b37fe2f9e4af2a61573f7dd56edd427"
+    },
     "c_spinosaurus": {
       "path": "sw_cr_creature/c_spinosaurus.mdl",
       "sha256": "afbf87236d3de6c9426f7ed67e388165f705d8fd49aa58c6c1c6411aa22106bb"
+    },
+    "c_tach": {
+      "path": "sw_cr_creature/c_tach.mdl",
+      "sha256": "3a0a7352ed68dbb3142087343e055fc215fa8fb0c660eb43b71ee9eece6994ff"
+    },
+    "c_terantanak": {
+      "path": "sw_cr_creature/c_terantanak.mdl",
+      "sha256": "2fc7cfedb560f5442a124ca3209061292ee62c106f34c829d531b0443d655330"
+    },
+    "c_torosaurus": {
+      "path": "sw_cr_creature/c_torosaurus.mdl",
+      "sha256": "8285303581bded67164cf479ecdc45d03b7a93826369124bca638bc95c33eff3"
     },
     "c_triceratops": {
       "path": "sw_cr_creature/c_triceratops.mdl",
@@ -80,6 +340,10 @@
       "path": "sw_cr_creature/c_tyrannosaurus.mdl",
       "sha256": "07e483156da27b1d18a7e86a966f3d16a29a455f24df3019012670e4cd101677"
     },
+    "c_werebat": {
+      "path": "sw_cr_creature/c_werebat.mdl",
+      "sha256": "675d0a2e0ecea6af8e76e2d3833528bdf46a17c0d38b7d6867cd3d56c39880fd"
+    },
     "c_wereboar": {
       "path": "sw_cr_creature/c_wereboar.mdl",
       "sha256": "6bc137402e31d9731b563d10ea80d1450836843ea28eb8fa2861cf8ef3d762db"
@@ -87,6 +351,50 @@
     "c_wyvern_a": {
       "path": "sw_cr_creature/c_wyvern_a.mdl",
       "sha256": "2ddaac99f9dd34be407ecc91682160bc92d7fcc070526a60e8e3533ec2588de4"
+    },
+    "c_yithcrwl": {
+      "path": "sw_cr_creature/c_yithcrwl.mdl",
+      "sha256": "3a8924986ec2c30133cc12f6abe5e816074efc7ef42d6a630e38f95ec398b222"
+    },
+    "c_yithwlk1": {
+      "path": "sw_cr_creature/c_yithwlk1.mdl",
+      "sha256": "39cd029bc18b64e15568a04a06cec6e79eca485d81697c53d92a56b0f6ea0020"
+    },
+    "c_yithwlk2": {
+      "path": "sw_cr_creature/c_yithwlk2.mdl",
+      "sha256": "855ff97b1d31936a9bc342733d0c5671ab6338f461b1824f454676dd8637d23d"
+    },
+    "c_ynpc_h_f07": {
+      "path": "sw_cr_creature/c_yNPC_h_f07.mdl",
+      "sha256": "db5ff511b2cc3b4ca1862fd245ba9e0776bb4d7da6d8e9a2e92e509f3bcde066"
+    },
+    "c_zomb_rot4": {
+      "path": "sw_cr_creature/c_zomb_rot4.mdl",
+      "sha256": "083d59083328eacb316c27d85935320d9970a82c3f762c692d8657a9210a5c84"
+    },
+    "c_zombi_f_03": {
+      "path": "sw_cr_creature/c_zombi_f_03.mdl",
+      "sha256": "f5a0a4b3e3eccfa45bd09e02bca15c16bc1a4bffc34b6ccc8553f9cc6833df50"
+    },
+    "c_zombi_f_04": {
+      "path": "sw_cr_creature/c_zombi_f_04.mdl",
+      "sha256": "b2bf48e68bf9cc603819c5e1506d34cbafc30d4cc80668550eaf0889f2d03fcc"
+    },
+    "c_zombi_f_05": {
+      "path": "sw_cr_creature/c_zombi_f_05.mdl",
+      "sha256": "af535f31d0f13e1fe580736a514be1bcbb3376648f79076f0346cdec5fa89788"
+    },
+    "c_zombi_f_06": {
+      "path": "sw_cr_creature/c_zombi_f_06.mdl",
+      "sha256": "059e68ce82e3c6d0f2b7c567327c1a3ab356e9988735d7d281eaa96304e25a7c"
+    },
+    "c_zombi_f_10": {
+      "path": "sw_cr_creature/c_zombi_f_10.mdl",
+      "sha256": "9ecc95285b65c9a4ac68e005319aa7040862cc36eba717d1ddd2cfb09bf304b1"
+    },
+    "c_zombie_b1": {
+      "path": "sw_cr_creature/c_zombie_b1.mdl",
+      "sha256": "5bef322e73afbd32b597a977bf8fe51577973c6fdc404bd81a0658acb90f8065"
     },
     "hp_drgblack01": {
       "path": "sw_cr_creature/hp_drgblack01.mdl",
@@ -99,6 +407,10 @@
     "hp_drggemsp01": {
       "path": "sw_cr_creature/hp_drggemsp01.mdl",
       "sha256": "b793de11bb757350e75e7ce3c98f5157f808a6c5bfcadab1c679a7640adac435"
+    },
+    "n_yoda": {
+      "path": "sw_cr_creature/n_yoda.mdl",
+      "sha256": "a3c32e79250a10cfdd841c191929bcb832cde72a9b871cf37ead79e0d048ab95"
     },
     "qc_cheetah": {
       "path": "sw_cr_creature/qc_cheetah.mdl",
